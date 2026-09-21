@@ -41,3 +41,22 @@ OpenAI Codex and the BMAD Product Brief workflow were used to facilitate structu
 - `brief.md` and `product-brief.md` were verified as identical.
 - No code, PRD or architecture was created.
 - Local paths and private operational identifiers were removed before publication.
+
+## 2026-09-21 – Product Requirements Document
+
+### Work completed
+
+- Completed the guided BMAD Create PRD workflow for the bus-driver assistant.
+- Defined and approved 25 functional requirements and four non-functional requirement groups.
+- Clarified the course MVP, deferred capabilities and downstream technical validation.
+- Reconciled the PRD with the Product Brief, source research and recorded decisions.
+- Completed consistency, editorial and privacy reviews.
+- Approved the PRD as final.
+
+### AI use
+
+OpenAI Codex with GPT-6 Astra and the BMAD PRD workflow facilitated requirements discovery, source research, drafting, adversarial review, reconciliation and privacy checks. Product decisions were reviewed and approved by the student.
+
+### Time spent
+
+Approximately 4.5 hours on guided PRD development and finalization.

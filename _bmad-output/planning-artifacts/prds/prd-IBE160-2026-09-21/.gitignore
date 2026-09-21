@@ -1,0 +1,3 @@
+# Private canonical audit history and originals; public decisions are reconciled separately.
+.memlog.md
+.private-history/
