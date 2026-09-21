@@ -22,3 +22,22 @@ OpenAI Codex was used to inspect Appendix B, run the BMAD installer, and verify 
 - Local branch was synchronized with `origin/main`.
 - Working tree was clean after push.
 - Setup commit: `23d620d`.
+
+## 2026-09-21 – Product Brief
+
+### Work completed
+
+- Completed the BMAD Product Brief workflow for the bus-driver assistant.
+- Defined the problem, users, MVP scope, success criteria, risks and broader vision.
+- Separated the concise Product Brief from supporting evidence in an addendum.
+- Sanitized supporting documentation before publication in the public repository.
+
+### AI use
+
+OpenAI Codex and the BMAD Product Brief workflow were used to facilitate structured discovery, inspect supplied course material and shift-report samples, draft the documents and perform editorial and privacy checks. Product decisions and scope priorities were approved by the student.
+
+### Verification
+
+- `brief.md` and `product-brief.md` were verified as identical.
+- No code, PRD or architecture was created.
+- Local paths and private operational identifiers were removed before publication.
