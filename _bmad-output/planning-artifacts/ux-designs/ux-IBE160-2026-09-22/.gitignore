@@ -1,0 +1,21 @@
+# Local browser profiles, caches and screenshot previews.
+/.working/browser-preview/
+/.working/preview-*/
+/.working/*.png
+
+# One-off mutation scripts and duplicate working copies; accepted HTML is in mockups/.
+/.working/finalize-documents.cjs
+/.working/finish-refinements.cjs
+/.working/polish-spines.cjs
+/.working/driving-vertical-2.html
+/.working/remaining-screens.html
+/.working/summary-recovery.html
+/.working/editorial-input.md
+
+# Historical proposals and sketch generator retained locally by user decision.
+/.working/color-themes-1.html
+/.working/driving-horizontal-1.html
+/.working/driving-layout-1.html
+/.working/preparation-1.html
+/.working/preparation-2.html
+/.working/render-remaining.cjs

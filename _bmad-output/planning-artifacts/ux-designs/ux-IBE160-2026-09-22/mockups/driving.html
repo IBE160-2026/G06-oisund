@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="nb">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kjørevisning – korrigert loddrett stoppoversikt</title>
+<style>
+.warning{display:inline-block;width:.8em;height:.8em;min-width:24px;min-height:24px;margin-left:.2em;vertical-align:baseline}.stop.previous .name{font-size:25px;color:var(--secondary)}
+*{box-sizing:border-box}body{margin:0;background:#e5e5e5;color:#171717;font-family:system-ui,-apple-system,"Segoe UI",sans-serif}main{max-width:1220px;margin:auto;padding:36px 28px 70px}h1{font-size:32px;margin:0 0 12px}p{line-height:1.55;max-width:950px}section{margin-top:42px}h2{font-size:23px;margin:0 0 10px}.note{font-size:17px;margin:10px 0 18px}.tablet{background:var(--base);color:var(--ink);border:3px solid var(--secondary);width:100%;min-width:840px;aspect-ratio:16/10;display:flex;flex-direction:column;padding:22px 30px;--base:#fff;--ink:#171717;--secondary:#525252;--info:#1755A1;--attention:#805000}.night{--base:#101010;--ink:#EAEAEA;--secondary:#BBBBBB;--info:#95BDEC;--attention:#EFC66C}.scroll{overflow-x:auto}.simulation{font-size:18px;font-weight:750;letter-spacing:.08em;color:var(--info);border-bottom:1px solid var(--secondary);padding-bottom:10px;display:flex;justify-content:space-between;gap:24px}.simulation span:last-child{letter-spacing:0;font-weight:500}.orientation{display:flex;gap:22px;align-items:center;padding:20px 0 14px}.line{font-size:42px;font-weight:750;border:2px solid var(--ink);padding:0 14px;line-height:1.3}.destination{font-size:32px;font-weight:650}.trip{font-size:18px;color:var(--secondary);margin-left:auto;text-align:right;line-height:1.5}.sequence{flex:1;display:flex;flex-direction:column;justify-content:center;padding:2px 0 12px}.stop{border-left:3px solid var(--secondary);padding:10px 0 10px 25px;margin-left:10px;display:flex;flex-direction:column;gap:2px}.role{font-size:18px;color:var(--secondary);font-weight:650;letter-spacing:.04em;text-transform:uppercase}.name{font-size:32px;font-weight:550;line-height:1.15}.stop.focus{border-left:7px solid var(--info);padding-left:21px;padding-top:14px;padding-bottom:18px}.focus .role{color:var(--info)}.focus .name{font-size:64px;font-weight:750;letter-spacing:-.025em}.footer{border-top:1px solid var(--secondary);padding-top:13px;color:var(--secondary);font-size:18px;display:flex;align-items:center;justify-content:space-between;gap:20px}.controls{display:flex;gap:14px}.controls button{font:650 20px system-ui;min-height:58px;padding:10px 24px;background:var(--base);color:var(--ink);border:2px solid var(--ink);border-radius:8px}.event{flex:1;display:flex;flex-direction:column;justify-content:center;border-left:7px solid var(--attention);padding-left:26px;margin:16px 0 22px}.event .role{color:var(--attention)}.event h3{font-size:54px;line-height:1.12;letter-spacing:-.02em;max-width:750px;margin:12px 0 18px}.event p{font-size:25px;margin:0;color:var(--secondary)}.context{display:flex;align-items:baseline;gap:18px;margin-top:30px}.context .name{font-size:38px;font-weight:700}.decision{border-left:5px solid #1755A1;padding:4px 22px;margin-top:34px;background:#fff}.decision h2{padding-top:16px}.decision p{padding-bottom:18px}.footer strong{color:var(--ink)}@media(max-width:650px){main{padding:24px 14px}.note{font-size:16px}}
+.controls button:disabled{border-style:dashed;cursor:not-allowed}</style>
+<style>
+.disruption-layout{flex:1;display:grid;grid-template-columns:1.25fr 1fr;gap:30px;align-items:center}.disruption-layout .event{min-height:300px;margin:12px 0}.disruption-layout .event h3{font-size:45px}.disruption-layout .event p{font-size:23px}.disruption-layout .sequence{padding:0}.disruption-layout .name{font-size:25px}.disruption-layout .focus .name{font-size:36px}.disruption-layout .role{font-size:16px}
+.controls button:disabled{border-style:dashed;cursor:not-allowed}</style>
+<style>
+.theme-menu{display:inline-flex;align-items:center;gap:14px}.theme-toggle{width:58px;min-width:58px;height:58px;min-height:58px;display:inline-flex;align-items:center;justify-content:center;padding:10px!important;border:2px solid #171717!important;border-radius:8px;background:#FFFFFF!important;color:#171717}.night .theme-toggle{background:#101010!important;border-color:#BBBBBB!important;color:#BBBBBB}.theme-toggle svg{width:32px;height:32px;display:block}.theme-toggle:focus-visible{outline:3px solid currentColor;outline-offset:4px}
+</style>
+<style>
+.theme-control{display:inline-flex;align-items:center;min-height:58px;border:2px solid #171717;border-radius:8px;background:#FFFFFF;color:#525252;overflow:visible}.night .theme-control{background:#101010;border-color:#BBBBBB;color:#BBBBBB}.theme-control .theme-toggle{border:0!important;border-radius:6px 0 0 6px;background:transparent!important}.theme-control .auto-toggle{border:0!important;border-left:1px solid #525252!important;border-radius:0 6px 6px 0;min-height:58px;min-width:76px;padding:10px 12px!important;background:transparent!important;color:#525252;font:650 20px system-ui;display:inline-flex;align-items:center;justify-content:center}.night .theme-control .auto-toggle{border-left-color:#BBBBBB!important;color:#BBBBBB}.theme-control .auto-toggle[aria-pressed="true"]{color:#17613E}.night .theme-control .auto-toggle[aria-pressed="true"]{color:#8BCDAB}.auto-toggle:focus-visible{outline:3px solid currentColor;outline-offset:4px}
+</style>
+<style>
+.theme-menu{align-items:stretch;gap:14px;vertical-align:middle}.theme-control{box-sizing:border-box;width:152px;min-width:152px;height:62px;min-height:62px;flex:none}.theme-control .theme-toggle{box-sizing:border-box;width:58px;min-width:58px;height:58px;min-height:58px;flex:none}.theme-control .auto-toggle{box-sizing:border-box;flex:1;min-width:76px;height:58px;min-height:58px}.theme-menu>button{box-sizing:border-box;width:152px;min-width:152px;height:62px;min-height:62px;padding:10px 12px!important;white-space:nowrap;display:inline-flex;align-items:center;justify-content:center;flex:none}.acute .disruption-layout{grid-template-columns:1fr 1.25fr}.acute .sequence{grid-column:1;grid-row:1}.acute .event{grid-column:2;grid-row:1}.acute .event h3{font-size:40px}.acute .event .source-meta{font-size:18px;line-height:1.45}
+</style>
+<style>.clock{font-size:30px;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap;flex-shrink:0;color:var(--ink);margin-left:8px}.orientation .trip{margin-left:auto}.top .clock{margin-left:auto}</style><style>.auto-toggle[aria-pressed="true"]{text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:2px}</style><main><p><strong>Dag/natt kan alltid byttes med ett trykk, også i fart.</strong> Kontrollen til venstre for Meny har to trykkflater: sol/måne velger manuelt, Auto aktiverer automatikk. Symbolet viser alltid gjeldende dag/natt. Auto er grå i manuell modus og grønn med liten understrek når automatikk er valgt. Meny kan være låst samtidig. Dagbildene viser manuell modus; nattbildene viser Auto som eksempel – begge moduser støtter begge tilstander. Knappene i denne skissen er statiske.</p>
+<h1>Kjørevisning med stoppene over hverandre</h1><p><strong>Gjeldende variant: loddrett.</strong> Manuelt valgt Dag eller Natt lagres mellom skift og omstarter til du selv velger Auto igjen.</p>
+<p>Godkjent komposisjonsreferanse: sju illustrasjoner av samme kjøreflate i Dag A og Natt C. Eksisterende systemskrift, størrelser og avstander er hentet inn som referanseverdier i DESIGN.md. Lesbarhet og betjening må fortsatt vurderes på det monterte nettbrettet. Dette er en statisk skisse, ikke en fungerende app.</p>
+<p>Alle holdeplassnavn, turer og hendelser nedenfor er oppdiktet. Smale nettleservinduer kan rulles sideveis for å se hele nettbrettskissen; dette er ikke foreslått betjening av kjørevisningen.</p>
+
+<section>
+<h2>1 · Mellom stopp – Dag A</h2>
+<p class="note">Stoppet etter neste ligger øverst, neste stopp i midten og passert stopp nederst. Neste stopp dominerer. Eksempelbakken to stopp fram har en gul trekant rett etter navnet; ingen avviksmelding vises ennå.</p>
+<div class="scroll"><article class="tablet" aria-label="Simulert kjørevisning mellom stopp, dag">
+<div class="simulation">SIMULERT SKISSE <span>Oppdiktede data · Dag</span></div>
+<header class="orientation"><b class="line">20</b><span class="destination">Eksempelterminal</span><div class="trip">Eksempeltur 1<br>Passasjertur</div><time class="clock" datetime="2026-09-22T15:04:00" aria-label="Klokke, simulert 15:04">15:04</time></header>
+<div class="sequence">
+<div class="stop"><span class="role">Deretter</span><span class="name">Eksempelbakken<svg class="warning" viewBox="0 0 32 32" role="img" aria-label="Avvik ved dette stoppet" focusable="false"><path d="M16 2 31 29H1Z" fill="#F5C842" stroke="#171717" stroke-width="2" stroke-linejoin="round"/><path d="M16 10v10" stroke="#171717" stroke-width="3" stroke-linecap="round"/><circle cx="16" cy="25" r="1.7" fill="#171717"/></svg></span></div>
+<div class="stop focus"><span class="role">Neste stopp</span><span class="name">Eksempelhagen</span></div>
+<div class="stop"><span class="role">Passert</span><span class="name">Eksempelplassen</span></div>
+</div>
+<footer class="footer"><span><strong>Mellom stopp</strong></span><div class="controls"><span class="theme-menu"><span class="theme-control" role="group" aria-label="Dag/natt og automatikk"><button class="theme-toggle" type="button" aria-label="Dagmodus. Bytt til nattmodus" title="Dagmodus – bytt til natt"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2v4m0 20v4M2 16h4m20 0h4M6 6l3 3m14 14 3 3M6 26l3-3M23 9l3-3" fill="none" stroke="#171717" stroke-width="5" stroke-linecap="round"/><path d="M16 2v4m0 20v4M2 16h4m20 0h4M6 6l3 3m14 14 3 3M6 26l3-3M23 9l3-3" fill="none" stroke="#F5C842" stroke-width="3" stroke-linecap="round"/><circle cx="16" cy="16" r="7" fill="#F5C842" stroke="#171717" stroke-width="1.5"/></svg></button><button class="auto-toggle" type="button" aria-pressed="false" aria-label="Aktiver automatisk dag/natt" title="Manuell modus – aktiver Auto">Auto</button></span><button type="button" disabled aria-label="Meny, låst mens bussen er i bevegelse">Meny · låst</button></span></div></footer>
+</article></div>
+</section>
+
+<section>
+<h2>2 · Mellom stopp – Natt C</h2>
+<p class="note">Samme innhold og plassering i nattvisningen. Ingen ekstra lyse flater eller animasjon.</p>
+<div class="scroll"><article class="tablet night" aria-label="Simulert kjørevisning mellom stopp, natt">
+<div class="simulation">SIMULERT SKISSE <span>Oppdiktede data · Natt</span></div>
+<header class="orientation"><b class="line">20</b><span class="destination">Eksempelterminal</span><div class="trip">Eksempeltur 1<br>Passasjertur</div><time class="clock" datetime="2026-09-22T15:04:00" aria-label="Klokke, simulert 15:04">15:04</time></header>
+<div class="sequence">
+<div class="stop"><span class="role">Deretter</span><span class="name">Eksempelbakken<svg class="warning" viewBox="0 0 32 32" role="img" aria-label="Avvik ved dette stoppet" focusable="false"><path d="M16 2 31 29H1Z" fill="#F5C842" stroke="#171717" stroke-width="2" stroke-linejoin="round"/><path d="M16 10v10" stroke="#171717" stroke-width="3" stroke-linecap="round"/><circle cx="16" cy="25" r="1.7" fill="#171717"/></svg></span></div>
+<div class="stop focus"><span class="role">Neste stopp</span><span class="name">Eksempelhagen</span></div>
+<div class="stop"><span class="role">Passert</span><span class="name">Eksempelplassen</span></div>
+</div>
+<footer class="footer"><span><strong>Mellom stopp</strong></span><div class="controls"><span class="theme-menu"><span class="theme-control" role="group" aria-label="Dag/natt og automatikk"><button class="theme-toggle" type="button" aria-label="Nattmodus. Bytt til dagmodus" title="Nattmodus – bytt til dag"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M22 3a13 13 0 1 0 7 20A12 12 0 0 1 22 3Z" fill="#BBBBBB"/></svg></button><button class="auto-toggle" type="button" aria-pressed="true" aria-label="Auto aktivert" title="Automatisk dag/natt er aktivert">Auto</button></span><button type="button" disabled aria-label="Meny, låst mens bussen er i bevegelse">Meny · låst</button></span></div></footer>
+</article></div>
+</section>
+
+<section>
+<h2>3 · På stopp – Dag A</h2>
+<p class="note">Bussen står på Eksempelhagen. Nesteneste ligger øverst, neste i midten og nåværende uthevet nederst. Forrige stopp er utelatt her. Eksempelbakken er neste stopp og har fortsatt bare trekant; avviksmeldingen venter til bussen har forlatt Eksempelhagen.</p>
+<div class="scroll"><article class="tablet" aria-label="Simulert kjørevisning på stopp, dag">
+<div class="simulation">SIMULERT SKISSE <span>Oppdiktede data · Dag</span></div>
+<header class="orientation"><b class="line">20</b><span class="destination">Eksempelterminal</span><div class="trip">Eksempeltur 1<br>Passasjertur</div><time class="clock" datetime="2026-09-22T15:04:00" aria-label="Klokke, simulert 15:04">15:04</time></header>
+<div class="sequence">
+<div class="stop"><span class="role">Deretter</span><span class="name">Eksempelterminal</span></div>
+<div class="stop"><span class="role">Neste stopp</span><span class="name">Eksempelbakken<svg class="warning" viewBox="0 0 32 32" role="img" aria-label="Avvik ved dette stoppet" focusable="false"><path d="M16 2 31 29H1Z" fill="#F5C842" stroke="#171717" stroke-width="2" stroke-linejoin="round"/><path d="M16 10v10" stroke="#171717" stroke-width="3" stroke-linecap="round"/><circle cx="16" cy="25" r="1.7" fill="#171717"/></svg></span></div>
+<div class="stop focus"><span class="role">Her nå</span><span class="name">Eksempelhagen</span></div>
+</div>
+<footer class="footer"><span><strong>Står stille · På stopp</strong></span><div class="controls"><span class="theme-menu"><span class="theme-control" role="group" aria-label="Dag/natt og automatikk"><button class="theme-toggle" type="button" aria-label="Dagmodus. Bytt til nattmodus" title="Dagmodus – bytt til natt"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2v4m0 20v4M2 16h4m20 0h4M6 6l3 3m14 14 3 3M6 26l3-3M23 9l3-3" fill="none" stroke="#171717" stroke-width="5" stroke-linecap="round"/><path d="M16 2v4m0 20v4M2 16h4m20 0h4M6 6l3 3m14 14 3 3M6 26l3-3M23 9l3-3" fill="none" stroke="#F5C842" stroke-width="3" stroke-linecap="round"/><circle cx="16" cy="16" r="7" fill="#F5C842" stroke="#171717" stroke-width="1.5"/></svg></button><button class="auto-toggle" type="button" aria-pressed="false" aria-label="Aktiver automatisk dag/natt" title="Manuell modus – aktiver Auto">Auto</button></span><button type="button">Meny</button></span></div></footer>
+</article></div>
+<p class="note">Menyknappen er alltid synlig. Den er tilgjengelig i denne stillstandsvisningen, men har ingen funksjon i den statiske skissen. Berøringsmål og lesbarhet må prøves på nettbrettet. Mellom-stopp-eksemplene forutsetter pålitelig posisjon og normal kjøring. GPS-feil og særreglene for betjening er ikke illustrert her.</p>
+</section>
+
+<section>
+<h2>4 · Viktig avvik nærmer seg – Natt C</h2>
+<p class="note">Bussen har forlatt Eksempelhagen og kjører mot Eksempelbakken. Først nå vises avviksmeldingen, uten popup eller krav om bekreftelse. Linje og destinasjon blir stående; neste stopp utheves i den loddrette oversikten ved siden av. Meldingen blir stående ved ankomst og under oppholdet på det berørte stoppet. Uten manuell kvittering ved stillstand forsvinner den først når bussen har kjørt videre derfra, eller passert uten å stoppe. Ingen avstandsterskel er fastsatt.</p>
+<div class="scroll"><article class="tablet night" aria-label="Simulert kjørevisning med viktig avvik, natt">
+<div class="simulation">SIMULERT SKISSE <span>Oppdiktede data · Natt</span></div>
+<header class="orientation"><b class="line">20</b><span class="destination">Eksempelterminal</span><div class="trip">Eksempeltur 1<br>Passasjertur</div><time class="clock" datetime="2026-09-22T15:04:00" aria-label="Klokke, simulert 15:04">15:04</time></header>
+<div class="disruption-layout">
+<div class="event"><span class="role">! Oppdiktet avvik</span><h3>Eksempelbakken: redusert holdeplassareal</h3></div>
+<div class="sequence">
+<div class="stop"><span class="role">Deretter</span><span class="name">Eksempelterminal</span></div>
+<div class="stop focus"><span class="role">Neste stopp</span><span class="name">Eksempelbakken<svg class="warning" viewBox="0 0 32 32" role="img" aria-label="Avvik ved dette stoppet" focusable="false"><path d="M16 2 31 29H1Z" fill="#F5C842" stroke="#171717" stroke-width="2" stroke-linejoin="round"/><path d="M16 10v10" stroke="#171717" stroke-width="3" stroke-linecap="round"/><circle cx="16" cy="25" r="1.7" fill="#171717"/></svg></span></div>
+<div class="stop"><span class="role">Passert</span><span class="name">Eksempelhagen</span></div>
+</div>
+</div>
+<footer class="footer"><span>Kun illustrasjon · Ingen virkelig kilde</span><div class="controls"><span class="theme-menu"><span class="theme-control" role="group" aria-label="Dag/natt og automatikk"><button class="theme-toggle" type="button" aria-label="Nattmodus. Bytt til dagmodus" title="Nattmodus – bytt til dag"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M22 3a13 13 0 1 0 7 20A12 12 0 0 1 22 3Z" fill="#BBBBBB"/></svg></button><button class="auto-toggle" type="button" aria-pressed="true" aria-label="Auto aktivert" title="Automatisk dag/natt er aktivert">Auto</button></span><button type="button" disabled aria-label="Meny, låst mens bussen er i bevegelse">Meny · låst</button></span></div></footer>
+</article></div>
+</section>
+
+<section>
+<h2>5 · Meny åpen mens bussen står stille</h2>
+<p class="note">Turvalg ligger direkte i menyen: åpne Meny, velg ønsket tur. Andre handlinger ligger ved siden av. Skiftdetaljer åpner skiftoversikten med aktuelle avvik; skiftet oppdateres derfra. Dette er et statisk eksempel, ikke fungerende knapper.</p>
+<div class="scroll"><article class="tablet" aria-label="Simulert meny i stillstand">
+<div class="simulation">SIMULERT SKISSE <span>Oppdiktede data · Dag</span></div>
+<header class="orientation"><b class="line">20</b><span class="destination">Eksempelterminal</span><div class="trip">Eksempeltur 1<br>Står stille</div><time class="clock" datetime="2026-09-22T15:04:00" aria-label="Klokke, simulert 15:04">15:04</time></header>
+<div style="flex:1;display:grid;grid-template-columns:1.3fr 1fr;gap:30px;padding:20px 0">
+<section style="margin:0"><h3 style="font-size:26px;margin:0 0 18px">Velg riktig tur</h3><div class="controls" style="flex-direction:column;align-items:stretch">
+<button type="button" aria-pressed="true">20 · 14:40 · Eksempelterminal — valgt</button>
+<button type="button">24 · 15:30 · Eksempelplassen</button>
+<button type="button">20 · 16:20 · Eksempelterminal</button>
+</div></section>
+<section style="margin:0"><h3 style="font-size:26px;margin:0 0 18px">Handlinger</h3><div class="controls" style="flex-direction:column;align-items:stretch">
+<button type="button">Neste tur</button><button type="button">Avbryt tur</button><button type="button">Bussbytte</button><button type="button">Skiftdetaljer</button><button type="button" style="color:#AD1717;border-color:#AD1717">Avslutt skift</button>
+</div></section></div>
+<footer class="footer"><span>Turvalg følges til turen er ferdig.</span><div class="controls"><span class="theme-menu"><span class="theme-control" role="group" aria-label="Dag/natt og automatikk"><button class="theme-toggle" type="button" aria-label="Dagmodus. Bytt til nattmodus" title="Dagmodus – bytt til natt"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2v4m0 20v4M2 16h4m20 0h4M6 6l3 3m14 14 3 3M6 26l3-3M23 9l3-3" fill="none" stroke="#171717" stroke-width="5" stroke-linecap="round"/><path d="M16 2v4m0 20v4M2 16h4m20 0h4M6 6l3 3m14 14 3 3M6 26l3-3M23 9l3-3" fill="none" stroke="#F5C842" stroke-width="3" stroke-linecap="round"/><circle cx="16" cy="16" r="7" fill="#F5C842" stroke="#171717" stroke-width="1.5"/></svg></button><button class="auto-toggle" type="button" aria-pressed="false" aria-label="Aktiver automatisk dag/natt" title="Manuell modus – aktiver Auto">Auto</button></span><button type="button" aria-expanded="true">Meny · åpen</button></span></div></footer>
+</article></div>
+</section>
+
+<section><h2>6 · Nytt akutt avvik til høyre</h2><p class="note">En ny mottatt melding som gjelder den aktive turen vises umiddelbart til høyre. Stoppene beholdes til venstre. Ingen popup, automatisk kildeåpning eller betjening er nødvendig. Eksemplet dokumenterer ikke at en virkelig kilde leverer akutte avvik.</p><div class="scroll"><article class="tablet night acute" aria-label="Simulert nytt akutt avvik til høyre, natt">
+<div class="simulation">SIMULERT SKISSE <span>Oppdiktede data · Natt</span></div>
+<header class="orientation"><b class="line">20</b><span class="destination">Eksempelterminal</span><div class="trip">Eksempeltur 1<br>Passasjertur</div><time class="clock" datetime="2026-09-22T15:04:00" aria-label="Klokke, simulert 15:04">15:04</time></header>
+<div class="disruption-layout">
+<div class="event" role="status"><span class="role">Nytt akutt avvik · simulert</span><h3>Veien er stengt ved Eksempelbrua</h3></div>
+<div class="sequence">
+<div class="stop"><span class="role">Deretter</span><span class="name">Eksempelterminal</span></div>
+<div class="stop focus"><span class="role">Neste stopp</span><span class="name">Eksempelbakken<svg class="warning" viewBox="0 0 32 32" role="img" aria-label="Avvik ved dette stoppet" focusable="false"><path d="M16 2 31 29H1Z" fill="#F5C842" stroke="#171717" stroke-width="2" stroke-linejoin="round"/><path d="M16 10v10" stroke="#171717" stroke-width="3" stroke-linecap="round"/><circle cx="16" cy="25" r="1.7" fill="#171717"/></svg></span></div>
+<div class="stop"><span class="role">Passert</span><span class="name">Eksempelhagen</span></div>
+</div>
+</div>
+<footer class="footer"><span>Kun illustrasjon · Ingen virkelig kilde</span><div class="controls"><span class="theme-menu"><span class="theme-control" role="group" aria-label="Dag/natt og automatikk"><button class="theme-toggle" type="button" aria-label="Nattmodus. Bytt til dagmodus" title="Nattmodus – bytt til dag"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M22 3a13 13 0 1 0 7 20A12 12 0 0 1 22 3Z" fill="#BBBBBB"/></svg></button><button class="auto-toggle" type="button" aria-pressed="true" aria-label="Auto aktivert" title="Automatisk dag/natt er aktivert">Auto</button></span><button type="button" disabled aria-label="Meny, låst mens bussen er i bevegelse">Meny · låst</button></span></div></footer>
+</article></div></section>
+<section><h2>7 · Avviksdetaljer ved stillstand</h2><p class="note">Når bussen står stille, kan du åpne detaljer og originalkilde. Sveip meldingen bort eller trykk Registrert. Avviket beholdes under Skiftdetaljer. I fart vises bare overskriften; detaljer og kvittering er låst. Statisk skisse: knappene og sveip er ikke implementert.</p><div class="scroll"><article class="tablet night acute stationary" aria-label="Simulert avviksdetalj åpnet ved stillstand, natt">
+<div class="simulation">SIMULERT SKISSE <span>Oppdiktede data · Natt</span></div>
+<header class="orientation"><b class="line">20</b><span class="destination">Eksempelterminal</span><div class="trip">Eksempeltur 1<br>Passasjertur</div><time class="clock" datetime="2026-09-22T15:04:00" aria-label="Klokke, simulert 15:04">15:04</time></header>
+<div class="disruption-layout">
+<div class="event" role="status"><span class="role">Detaljer åpnet · står stille</span><h3>Veien er stengt ved Eksempelbrua</h3><p>Berører linje 20 i gjeldende retning.</p><p class="source-meta">Gyldig fra 15:03 · slutt ukjent<br>Oppdiktet kilde D · oppdatert 15:03<br>Mottatt i eksemplet 15:04</p><div class="controls" style="margin-top:18px"><button type="button">Registrert</button><button type="button">Originalkilde</button></div></div>
+<div class="sequence">
+<div class="stop"><span class="role">Deretter</span><span class="name">Eksempelterminal</span></div>
+<div class="stop focus"><span class="role">Neste stopp</span><span class="name">Eksempelbakken<svg class="warning" viewBox="0 0 32 32" role="img" aria-label="Avvik ved dette stoppet" focusable="false"><path d="M16 2 31 29H1Z" fill="#F5C842" stroke="#171717" stroke-width="2" stroke-linejoin="round"/><path d="M16 10v10" stroke="#171717" stroke-width="3" stroke-linecap="round"/><circle cx="16" cy="25" r="1.7" fill="#171717"/></svg></span></div>
+<div class="stop"><span class="role">Passert</span><span class="name">Eksempelhagen</span></div>
+</div>
+</div>
+<footer class="footer"><span><strong>Står stille · Detaljer åpnet manuelt</strong></span><div class="controls"><span class="theme-menu"><span class="theme-control" role="group" aria-label="Dag/natt og automatikk"><button class="theme-toggle" type="button" aria-label="Nattmodus. Bytt til dagmodus" title="Nattmodus – bytt til dag"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M22 3a13 13 0 1 0 7 20A12 12 0 0 1 22 3Z" fill="#BBBBBB"/></svg></button><button class="auto-toggle" type="button" aria-pressed="true" aria-label="Auto aktivert" title="Automatisk dag/natt er aktivert">Auto</button></span><button type="button">Meny</button></span></div></footer>
+</article></div></section><aside class="decision">
+<h2>Avklart fokus og avvikstidspunkt</h2>
+<p>Kommende stopp ligger øverst. På stopp vises nesteneste, neste og uthevet nåværende, uten forrige. Mellom stopp vises nesteneste, uthevet neste og forrige. Fire stopp med forrige nederst er et mulig alternativ, ikke valgt her. Ved planlagte stoppavvik gir trekanten tidlig oversikt, mens den automatiske meldingen venter til det berørte stoppet er neste og bussen er på vei dit. Meldingen blir stående til bussen har kjørt videre fra det berørte stoppet. Nye mottatte akutte avvik som gjelder aktiv tur vises straks til høyre, som i eksempel 6. Gul trekant med mørk kontur og utropstegn er hentet inn i DESIGN.md. Komposisjonen er godkjent, men faktisk lesbarhet og betjening skal fortsatt vurderes på nettbrettet; dokumentene har forrang. Skissen demonstrerer ingen implementert automatikk.</p>
+</aside>
+</main>
+</html>

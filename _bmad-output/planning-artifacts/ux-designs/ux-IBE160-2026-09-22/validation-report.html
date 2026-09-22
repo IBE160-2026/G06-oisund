@@ -1,0 +1,177 @@
+<!DOCTYPE html><html lang="nb"><head><meta charset="utf-8"><title>UX-validering — IBE160</title><style>
+  :root {
+    --bg: #fafaf9;
+    --surface: #ffffff;
+    --border: #e7e5e4;
+    --text: #1c1917;
+    --muted: #78716c;
+
+    --verdict-strong: #16a34a;
+    --verdict-adequate: #65a30d;
+    --verdict-thin: #d97706;
+    --verdict-broken: #dc2626;
+
+    --sev-low: #64748b;
+    --sev-medium: #ca8a04;
+    --sev-high: #ea580c;
+    --sev-critical: #dc2626;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    font-size: 15px;
+  }
+  .container { max-width: 960px; margin: 0 auto; padding: 32px 24px 64px; }
+
+  header.report-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 24px;
+  }
+  .title h1 { margin: 0; font-size: 22px; font-weight: 600; letter-spacing: -0.01em; }
+  .title .subtitle { color: var(--muted); font-size: 13px; margin-top: 4px; font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+
+  .synthesis {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--muted);
+    border-radius: 8px;
+    padding: 18px 22px;
+    margin-bottom: 24px;
+    font-size: 15.5px;
+  }
+  .synthesis p { margin: 0 0 10px; }
+  .synthesis p:last-child { margin-bottom: 0; }
+
+  .dimension-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .dim-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 14px;
+  }
+  .dim-card .dim-name { font-size: 13px; color: var(--muted); margin-bottom: 6px; }
+  .dim-card .dim-verdict { font-size: 14px; font-weight: 600; }
+
+  section.dimension, section.reviewer-section { margin-bottom: 14px; }
+  section.dimension details, section.reviewer-section details {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  section summary {
+    padding: 14px 20px;
+    cursor: pointer;
+    user-select: none;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  section summary::-webkit-details-marker { display: none; }
+  section summary::before {
+    content: "▸";
+    display: inline-block;
+    color: var(--muted);
+    transition: transform 0.15s ease;
+  }
+  section details[open] summary::before { transform: rotate(90deg); }
+  section summary h2 {
+    display: inline;
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+    flex: 1;
+  }
+  .verdict-pill {
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: white;
+  }
+  .verdict-strong { background: var(--verdict-strong); }
+  .verdict-adequate { background: var(--verdict-adequate); }
+  .verdict-thin { background: var(--verdict-thin); }
+  .verdict-broken { background: var(--verdict-broken); }
+
+  .dim-body { padding: 4px 20px 18px; }
+  .dim-judgment { color: var(--text); font-size: 14.5px; }
+  .dim-judgment p { margin: 0 0 10px; }
+
+  .findings-list { padding: 0 20px 4px; }
+  article.finding {
+    padding: 14px 0;
+    border-top: 1px solid var(--border);
+  }
+  article.finding:first-child { border-top: none; }
+  article.finding header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 6px;
+  }
+  .badge {
+    font-size: 10.5px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    line-height: 1.4;
+  }
+  .badge-sev-low { background: rgba(100, 116, 139, 0.12); color: var(--sev-low); }
+  .badge-sev-medium { background: rgba(202, 138, 4, 0.14); color: var(--sev-medium); }
+  .badge-sev-high { background: rgba(234, 88, 12, 0.14); color: var(--sev-high); }
+  .badge-sev-critical { background: rgba(220, 38, 38, 0.14); color: var(--sev-critical); }
+  .finding-title { margin: 0; font-size: 15px; font-weight: 500; flex: 1; min-width: 200px; }
+  .finding-location { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 12.5px; color: var(--muted); }
+  .finding-note, .finding-fix { margin-top: 6px; font-size: 14px; }
+  .finding-fix strong { color: var(--muted); font-weight: 500; }
+
+  .reviewer-source {
+    font-size: 12px;
+    color: var(--muted);
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  }
+
+  .mechanical {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-top: 24px;
+    font-size: 14px;
+  }
+  .mechanical h3 { margin: 0 0 10px; font-size: 14px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
+  .mechanical ul { margin: 0; padding-left: 20px; }
+  .mechanical li { margin-bottom: 4px; color: var(--text); }
+
+  footer.report-footer {
+    margin-top: 40px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--muted);
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  }
+  footer .meta { display: flex; gap: 24px; flex-wrap: wrap; }
+</style></head><body><div class="container"><header class="report-header"><div class="title"><h1>IBE160 — UX-valideringsrapport</h1><div class="subtitle"><a href="DESIGN.md">DESIGN.md</a> + <a href="EXPERIENCE.md">EXPERIENCE.md</a></div></div></header><div class="synthesis"><p>Dokumentene bevarer den etablerte førerflyten og de siste rettingene av veilederrollene. Kildereiser, konkrete tokens og alle fem godkjente visuelle referanser er tilgjengelige for videre arbeid. Den opprinnelige gjennomgangen fant ett uavklart livsløpsvalg og noen interne katalog-/tilstandskonflikter som måtte ryddes før endelig overlevering.</p><p>De tre valgte linsene ga 13 rå observasjoner: 4 høye, 6 middels og 3 lave. R1/O4 og R5/A1 er overlapp. Etter sammenslåing: 11 ulike funn, fordelt på 3 høye, 5 middels og 3 lave; ingen kritiske. Alle 11 er håndtert i dokumenter eller referanser, inkludert brukerens presisering om sletting etter vellykket import. Mekanisk sluttkontroll er gjennomført: tokenreferanser, lokale lenker, kilder, komponentnavn og skissenes navigasjon er kontrollert. Klokkeplassering og aktiv Auto-understrek er også visuelt kontrollert i nettleseren. Implementasjonsverifikasjon gjenstår. De opprinnelige kategorivurderingene er bevart og er ikke automatisk oppgradert etter retting.</p><p>Dette er en statisk dokument- og referansevalidering, ikke endelig godkjenning, produktsertifisering, sanntidskontroll eller testing på montert nettbrett. Lesbarhet ved sideblikk, sollys/natt, hansker/vibrasjoner, lange navn/to samtidige meldinger og faktisk nettleser-/sensorstøtte må fortsatt verifiseres på enheten.</p></div><div class="dimension-summary"><div class="dim-card"><div class="dim-name">Flytdekning</div><div class="dim-verdict" style="color:var(--verdict-adequate)">Tilstrekkelig · opprinnelig</div></div><div class="dim-card"><div class="dim-name">Tokenfullstendighet</div><div class="dim-verdict" style="color:var(--verdict-adequate)">Tilstrekkelig · opprinnelig</div></div><div class="dim-card"><div class="dim-name">Komponentdekning</div><div class="dim-verdict" style="color:var(--verdict-adequate)">Tilstrekkelig · opprinnelig</div></div><div class="dim-card"><div class="dim-name">Tilstandsdekning</div><div class="dim-verdict" style="color:var(--verdict-adequate)">Tilstrekkelig · opprinnelig</div></div><div class="dim-card"><div class="dim-name">Visuell referansedekning</div><div class="dim-verdict" style="color:var(--verdict-adequate)">Tilstrekkelig · opprinnelig</div></div><div class="dim-card"><div class="dim-name">Omfang og overpresisering</div><div class="dim-verdict" style="color:var(--verdict-adequate)">Tilstrekkelig · opprinnelig</div></div><div class="dim-card"><div class="dim-name">Arv og begrepsbruk</div><div class="dim-verdict" style="color:var(--verdict-adequate)">Tilstrekkelig · opprinnelig</div></div><div class="dim-card"><div class="dim-name">Dokumentform</div><div class="dim-verdict" style="color:var(--verdict-strong)">Sterk · opprinnelig</div></div></div><section class="dimension"><details><summary><h2>Flytdekning</h2><span class="verdict-pill verdict-adequate">Tilstrekkelig</span></summary><div class="dim-body"><div class="dim-judgment"><p>Kildehistoriene UJ-1/UJ-2 har hovedperson, trinn, vendepunkt og feilbaner. Delte skift og UJ-3/UJ-4 dekker de siste rolleendringene. Det opprinnelige livsløpshullet er samlet under R1/O4.</p></div></div><div class="findings-list"><article class="finding" id="R1-O4"><header><span class="badge badge-sev-high">Høy</span><h3 class="finding-title">R1 / O4 · Livsløp og eksport for importerte personplaner</h3><span class="finding-location">EXPERIENCE · personvern/bevaring; UJ-3/UJ-4; koblede planer</span></header><div class="finding-note">Den opprinnelige sjudagersregelen avklarte ikke hvilken arbeidsdag som styrte sletting av en annen persons importerte plan, eller om hele personens dag kunne havne i veilederens PDF. Dette var et produktvalg, ikke noe lagringsarkitekturen kunne avgjøre.</div><div class="finding-fix"><strong>Tiltak:</strong> Brukeren har presisert: Den opplastede kildekopien slettes straks etter vellykket import. Nødvendige tolkede opplysninger holdes separat innen veilederens egen arbeidsdag. Oppsummering/PDF omfatter bare faktisk fulgte deler med observerte/usikre utfall; egne aktiviteter og overtakelser holdes adskilt. Ufulgte deler av hele personplanen beholdes ikke etter dagen og eksporteres ikke. Bevarte opplysninger følger egen arbeidsdags eksisterende sjudagersfrist. Dette er private importer, ikke tilgang på tvers av kontoer. Den siste beslutningen overstyrer den eldre kildefilbevaringen for denne importen.</div><div class="finding-fix"><strong>Status:</strong> Avklart av brukeren og innarbeidet i dokumentkontrakten; må fortsatt verifiseres i implementasjonen.</div></article></div></details></section><section class="dimension"><details><summary><h2>Tokenfullstendighet</h2><span class="verdict-pill verdict-adequate">Tilstrekkelig</span></summary><div class="dim-body"><div class="dim-judgment"><p>Inspiserte tokenreferanser kunne løses; farger hadde konkrete verdier og dag-/nattpar. Kontrastkrav trengte en målbar akseptansegrense.</p></div></div><div class="findings-list"><article class="finding" id="R2"><header><span class="badge badge-sev-medium">Middels</span><h3 class="finding-title">R2 · Kontrastmålinger manglet et forpliktende minstekrav</h3><span class="finding-location">DESIGN · farger; EXPERIENCE · tilgjengelighet</span></header><div class="finding-note">Eksempelkontraster og ønsket om høy kontrast ga ingen målbar terskel for nye tekstkombinasjoner, fokusmarkeringer eller kontrollgrenser i begge temaer.</div><div class="finding-fix"><strong>Tiltak:</strong> Numeriske akseptansekrav for tekst og ikke-tekst er lagt til. Dette gjør kravet testbart, men dokumenterer ikke at alle skjermtilstander eller montert bruk er testet.</div><div class="finding-fix"><strong>Status:</strong> Rettet i dokumentkontrakten.</div></article></div></details></section><section class="dimension"><details><summary><h2>Komponentdekning</h2><span class="verdict-pill verdict-adequate">Tilstrekkelig</span></summary><div class="dim-body"><div class="dim-judgment"><p>Begge kataloger dekket de sentrale komponentene med reelle regler. Ett komponentnavn var ulikt.</p></div></div><div class="findings-list"><article class="finding" id="R3"><header><span class="badge badge-sev-low">Lav</span><h3 class="finding-title">R3 · Samme stoppkontroll hadde to komponentnavn</h3><span class="finding-location">DESIGN · Components; EXPERIENCE · Component Patterns</span></header><div class="finding-note">«Stop Menu controls» og «Stop correction controls» beskrev samme komponent. Navneforskjellen brøt dokumentenes avtalte paring.</div><div class="finding-fix"><strong>Tiltak:</strong> Komponentnavnet er samordnet som «Stop correction controls».</div><div class="finding-fix"><strong>Status:</strong> Rettet i dokumentkontrakten.</div></article></div></details></section><section class="dimension"><details><summary><h2>Tilstandsdekning</h2><span class="verdict-pill verdict-adequate">Tilstrekkelig</span></summary><div class="dim-body"><div class="dim-judgment"><p>Frakobling, GPS-feil, usikkerhet, overtakelse og demonstrasjon var skilt. Første oppsummeringsgjennomgang og senere lesetilgang måtte skilles tydeligere.</p></div></div><div class="findings-list"><article class="finding" id="R4"><header><span class="badge badge-sev-medium">Middels</span><h3 class="finding-title">R4 · Avsluttet oppsummering hadde motstridende redigeringsregler</h3><span class="finding-location">EXPERIENCE · avsluttet dag; oppsummering; usikker gjennomføring</span></header><div class="finding-note">«Kun lesing/eksport» gjaldt tilsynelatende også den første oppsummeringen der usikre aktiviteter skulle kunne bekreftes manuelt. En implementering kunne enten blokkere påkrevd bekreftelse eller tillate den uten tidsavgrensning.</div><div class="finding-fix"><strong>Tiltak:</strong> Første gjennomgang etter avslutning skiller seg nå fra senere gjenåpning. Manuell bekreftelse bevarer sin opprinnelse; skiftet forblir avsluttet og slettefristen endres ikke.</div><div class="finding-fix"><strong>Status:</strong> Rettet i dokumentkontrakten.</div></article></div></details></section><section class="dimension"><details><summary><h2>Visuell referansedekning</h2><span class="verdict-pill verdict-adequate">Tilstrekkelig</span></summary><div class="dim-body"><div class="dim-judgment"><p>Alle fem godkjente referanser var lenket uten foreldreløse filer. De opprinnelige kjøreskissene manglet den senere godkjente klokken.</p></div></div><div class="findings-list"><article class="finding" id="R5-A1"><header><span class="badge badge-sev-medium">Middels</span><h3 class="finding-title">R5 / A1 · Klokken manglet i de viktigste kjøre- og feildataskissene</h3><span class="finding-location">mockups/driving.html; mockups/summary-recovery.html</span></header><div class="finding-note">Den samlede gallerivisningen hadde klokke, mens de opprinnelige godkjente kjøre- og GPS/nettavbruddsreferansene manglet den. Et implementasjonsteam kunne derfor overse et eksplisitt godkjent krav.</div><div class="finding-fix"><strong>Tiltak:</strong> Den samme synlige klokken er føyd til de opprinnelige referansene, med tabelltall og tydelig simulert tid. Rute-/stoppinformasjon og nedtelling er fortsatt separate.</div><div class="finding-fix"><strong>Status:</strong> Rettet i referansene.</div></article></div></details></section><section class="dimension"><details><summary><h2>Omfang og overpresisering</h2><span class="verdict-pill verdict-adequate">Tilstrekkelig</span></summary><div class="dim-body"><div class="dim-judgment"><p>Tokenverdier kom fra godkjente skisser og var skilt fra responsive produktkrav. Noen gjentakelser burde ryddes i språkvasken; ingen egen vesentlig feil ble registrert.</p></div></div><div class="findings-list"></div></details></section><section class="dimension"><details><summary><h2>Arv og begrepsbruk</h2><span class="verdict-pill verdict-adequate">Tilstrekkelig</span></summary><div class="dim-body"><div class="dim-judgment"><p>De fem kildebanene og tokenreferansene lot seg løse. Siste brukerbeslutninger var fulgt, men noen gamle åpne markører motsa dem. R3 gjelder også begrepsbruken.</p></div></div><div class="findings-list"><article class="finding" id="R6"><header><span class="badge badge-sev-medium">Middels</span><h3 class="finding-title">R6 · Gamle åpne punkter motsa senere avklaringer</h3><span class="finding-location">DESIGN · sekvensgrenser; EXPERIENCE · tilstander og fullføringsstandarder</span></header><div class="finding-note">Dokumentene kalte fortsatt tomme stoppfelt, reguleringstid, beholdt oppsummering og manglende Auto-støtte uavklart, selv om senere standarder eller godkjente skisser hadde avklart dem.</div><div class="finding-fix"><strong>Tiltak:</strong> De foreldede markørene peker nå på gjeldende beslutninger. Reelle spørsmål om sensorer, automatisk temautløser og enhetsstøtte står fortsatt åpne.</div><div class="finding-fix"><strong>Status:</strong> Rettet i dokumentkontrakten.</div></article></div></details></section><section class="dimension"><details><summary><h2>Dokumentform</h2><span class="verdict-pill verdict-strong">Sterk</span></summary><div class="dim-body"><div class="dim-judgment"><p>DESIGN fulgte kanonisk rekkefølge. EXPERIENCE hadde de påkrevde delene og relevante tilleggsdeler for plattform, tillit, bevaring og operative roller.</p></div></div><div class="findings-list"></div></details></section><section class="reviewer-section"><details><summary><h2>Tilgjengelighet og førerplass</h2><span class="reviewer-source"><a href="review-accessibility.md">review-accessibility.md</a></span></summary><div class="dim-body"><div class="dim-judgment"><p>Gjennomgangen fant en konkret klokkemangel og to tilgjengelighetsdetaljer. Godkjent vertikal stoppvisning, GPS-unntak, åpen veilederbetjening og Registrert-alternativ til sveip beholdes. Statisk aksept er ikke dokumentert lesbarhet i trafikk.</p></div></div><div class="findings-list"><article class="finding"><header><span class="badge badge-sev-medium">Middels</span><h3 class="finding-title">R5 / A1 · Klokken manglet i de viktigste kjøre- og feildataskissene</h3><span class="finding-location">mockups/driving.html; mockups/summary-recovery.html</span></header><div class="finding-note">Den samlede gallerivisningen hadde klokke, mens de opprinnelige godkjente kjøre- og GPS/nettavbruddsreferansene manglet den. Et implementasjonsteam kunne derfor overse et eksplisitt godkjent krav.</div><div class="finding-fix"><strong>Tiltak:</strong> Den samme synlige klokken er føyd til de opprinnelige referansene, med tabelltall og tydelig simulert tid. Rute-/stoppinformasjon og nedtelling er fortsatt separate.</div><div class="finding-fix"><strong>Status:</strong> Rettet i referansene.</div></article><article class="finding"><header><span class="badge badge-sev-low">Lav</span><h3 class="finding-title">A2 · Auto-valget kunne bare skilles visuelt med farge</h3><span class="finding-location">Temakontroll i driving.html og summary-recovery.html; DESIGN</span></header><div class="finding-note">Grå/grønn Auto og aria-pressed fungerte for enkelte brukere og hjelpemidler, men synlige tilstander var ellers identiske. Det brøt kravet om at tilstand ikke bare skal uttrykkes med farge.</div><div class="finding-fix"><strong>Tiltak:</strong> Brukeren valgte en liten understreking når Auto er aktiv. Den er lagt til sammen med de godkjente fargene, ikonene og treffområdene.</div><div class="finding-fix"><strong>Status:</strong> Rettet etter eksplisitt brukervalg.</div></article><article class="finding"><header><span class="badge badge-sev-low">Lav</span><h3 class="finding-title">A3 · Nattvisningens tastaturfokus brukte dagfargen</h3><span class="finding-location">mockups/remaining-screens.html · focus-visible</span></header><div class="finding-note">Vanlige knapper hadde en hardkodet mørk dagblå fokusramme på nattflaten, mens stoppinngangen brukte riktig nattfarge. Dermed var fokus synlig med ulik tydelighet i samme skjerm.</div><div class="finding-fix"><strong>Tiltak:</strong> Fokus innen produktflatene følger temaets informasjonsfarge, med egnet reservefarge for den lyse gallerinavigasjonen. Tykkelse og avstand beholdes.</div><div class="finding-fix"><strong>Status:</strong> Rettet i referansen.</div></article></div></details></section><section class="reviewer-section"><details><summary><h2>Operative grensetilfeller</h2><span class="reviewer-source"><a href="review-operational.md">review-operational.md</a></span></summary><div class="dim-body"><div class="dim-judgment"><p>De operative observasjonene utfordret planrevisjon på tvers av eiere, rollebevaring ved omstart, avgrenset medkjøring mot manuelt turvalg og livsløp/eksport. Det er ikke foreslått nye fartslåser eller omkamp om godkjente unntak.</p></div></div><div class="findings-list"><article class="finding"><header><span class="badge badge-sev-high">Høy</span><h3 class="finding-title">O1 · Planrevisjon manglet eksplisitt eier</h3><span class="finding-location">EXPERIENCE · delte skift/revisjoner; separate egne og koblede planer</span></header><div class="finding-note">Med eget skift og flere personplaner kunne samme dato, linje, retning og avgang matche feil plan. En delvis revisjon kunne også bryte koblingen til en senere medkjøringsdel uten at det ble synlig.</div><div class="finding-fix"><strong>Tiltak:</strong> Revisjonsmålet navngis før filomfang og matching. Matching begrenses til målplanen; berørte koblinger vises, og uavklarte koblinger beholdes for eksplisitt retting. Andre planer og aktiv/manuell dokumentasjon bevares.</div><div class="finding-fix"><strong>Status:</strong> Rettet i dokumentkontrakten.</div></article><article class="finding"><header><span class="badge badge-sev-high">Høy</span><h3 class="finding-title">O2 · Gjenoppretting manglet aktiv rolle og overtakelseskontekst</h3><span class="finding-location">EXPERIENCE · aktivt skift/gjenoppretting; GPS-timer; akutt overtakelse</span></header><div class="finding-note">Et omstartet nettbrett kunne tolke oppdragets FADDER-etikett som aktiv veilederrolle selv etter «Jeg kjører». Bevaring av tur og GPS-timer alene hindret ikke at åpne veilederkontroller kom tilbake.</div><div class="finding-fix"><strong>Tiltak:</strong> Gjenoppretting bevarer faktisk fører-/veilederrolle, oppdragsrolle, plan/del, aktivt turvalg og overtakelses-/returhendelser samlet. Akutt overtatt kjøring forblir FØRER til eksplisitt tillatt retur. Et etablert GPS-bortfall blir ikke et nytt oppstartsunntak.</div><div class="finding-fix"><strong>Status:</strong> Rettet i dokumentkontrakten.</div></article><article class="finding"><header><span class="badge badge-sev-medium">Middels</span><h3 class="finding-title">O3 · Manuelt valgt tur ved slutt på en delvis medkjøring</h3><span class="finding-location">EXPERIENCE · manuelt turvalg; medkjøringsdeler og personbytte</span></header><div class="finding-note">Turvalget skulle vare til turen var ferdig, samtidig som instruktøren kunne avslutte medkjøring midt i turen og senere returnere til samme person. Uten prioriteringsregel kunne gammel turbinding følge med eller gi falsk fullføring.</div><div class="finding-fix"><strong>Tiltak:</strong> Bindingen gjelder den aktive sporingskonteksten. Eksplisitt bekreftet bytte av del/person/aktivitet avslutter den konteksten uten å fullføre eller avbryte den andres tur. En senere del etablerer aktuell tur på nytt, også hos samme person.</div><div class="finding-fix"><strong>Status:</strong> Rettet i dokumentkontrakten.</div></article><article class="finding"><header><span class="badge badge-sev-high">Høy</span><h3 class="finding-title">R1 / O4 · Livsløp og eksport for importerte personplaner</h3><span class="finding-location">EXPERIENCE · personvern/bevaring; UJ-3/UJ-4; koblede planer</span></header><div class="finding-note">Den opprinnelige sjudagersregelen avklarte ikke hvilken arbeidsdag som styrte sletting av en annen persons importerte plan, eller om hele personens dag kunne havne i veilederens PDF. Dette var et produktvalg, ikke noe lagringsarkitekturen kunne avgjøre.</div><div class="finding-fix"><strong>Tiltak:</strong> Brukeren har presisert: Den opplastede kildekopien slettes straks etter vellykket import. Nødvendige tolkede opplysninger holdes separat innen veilederens egen arbeidsdag. Oppsummering/PDF omfatter bare faktisk fulgte deler med observerte/usikre utfall; egne aktiviteter og overtakelser holdes adskilt. Ufulgte deler av hele personplanen beholdes ikke etter dagen og eksporteres ikke. Bevarte opplysninger følger egen arbeidsdags eksisterende sjudagersfrist. Dette er private importer, ikke tilgang på tvers av kontoer. Den siste beslutningen overstyrer den eldre kildefilbevaringen for denne importen.</div><div class="finding-fix"><strong>Status:</strong> Avklart av brukeren og innarbeidet i dokumentkontrakten; må fortsatt verifiseres i implementasjonen.</div></article></div></details></section><div class="mechanical"><h3>Mekaniske merknader og kilder</h3><ul><li>Ingen uløste inspiserte tokenreferanser eller brutte kildebaner. Alle fem godkjente mockups var lenket. Ingen Mermaid-syntaks i dokumentparet.</li><li>Rå funn er bevart i <a href="review-rubric.md">review-rubric.md</a>, <a href="review-accessibility.md">review-accessibility.md</a> og <a href="review-operational.md">review-operational.md</a>. Opprinnelige linjenumre gjelder utgaven som ble vurdert.</li><li>Funn som vises både i en kategori og en ekstra linse telles bare én gang i totalsummen. Se <a href="validation-report.md">Markdown-rapporten</a> for sortering etter alvorlighet.</li></ul></div><footer class="report-footer"><div class="meta"><span>Dokumenter: <a href="DESIGN.md">DESIGN.md</a> · <a href="EXPERIENCE.md">EXPERIENCE.md</a></span><span>Rubrikk: <a href="review-rubric.md">review-rubric.md</a></span><span>Opprettet: 2026-09-22T19:06:26Z</span></div></footer></div></body></html>

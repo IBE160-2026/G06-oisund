@@ -1,0 +1,58 @@
+{
+  "findings": [
+    {
+      "id": "R1",
+      "category": "Flow coverage",
+      "severity": "high",
+      "title": "Operational linked-plan lifecycle remains unspecified",
+      "location": "EXPERIENCE.md:266,268,359,380",
+      "decisionNeeded": "Product decision for linked-copy/shared-record ownership and lifecycle/export scope; technical mechanisms downstream",
+      "fix": "Commit minimal linked-plan access, independent retention/end boundaries and summary/export contract."
+    },
+    {
+      "id": "R2",
+      "category": "Token completeness",
+      "severity": "medium",
+      "title": "Contrast measurements lack acceptance floor",
+      "location": "DESIGN.md:278-284; EXPERIENCE Accessibility Floor",
+      "decisionNeeded": false,
+      "fix": "State contrast targets for text/non-text and load-bearing state/theme combinations."
+    },
+    {
+      "id": "R3",
+      "category": "Component coverage",
+      "severity": "low",
+      "title": "Stop-control component names differ",
+      "location": "DESIGN.md:343; EXPERIENCE.md:95",
+      "decisionNeeded": false,
+      "fix": "Use Stop correction controls consistently."
+    },
+    {
+      "id": "R4",
+      "category": "State coverage",
+      "severity": "medium",
+      "title": "Ended-summary read-only rule conflicts with manual confirmation",
+      "location": "EXPERIENCE.md:52,165,190,296,298",
+      "decisionNeeded": false,
+      "fix": "Distinguish initial post-end manual-evidence review from reopened read/export-only summary, preserving ended state and retention."
+    },
+    {
+      "id": "R5",
+      "category": "Visual reference coverage",
+      "severity": "medium",
+      "title": "Driving/recovery mocks omit persistent clock",
+      "location": "mockups/driving.html:32,47,112; mockups/summary-recovery.html active-driving frames; DESIGN.md:328",
+      "decisionNeeded": false,
+      "fix": "Apply accepted top-right clock to older driving/degraded-data frames and check fit."
+    },
+    {
+      "id": "R6",
+      "category": "Inheritance discipline",
+      "severity": "medium",
+      "title": "Stale open-state markers conflict with settled defaults",
+      "location": "DESIGN.md:304; EXPERIENCE.md:124,125,127 and final defaults",
+      "decisionNeeded": false,
+      "fix": "Replace obsolete open statements with current boundary-slot, layover, retained-summary and Auto fallback decisions."
+    }
+  ]
+}
