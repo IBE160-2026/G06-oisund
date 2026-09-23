@@ -107,3 +107,42 @@ OpenAI Codex and the BMAD Architecture workflow supported interactive decisions,
 ### Next step
 
 **Step 5: Epics & Stories**, based on the approved Product Brief, PRD, UX and Architecture Spine. Step 4 is complete. Neither BMAD Spec nor Epics & Stories is started in this session.
+
+## 2026-09-23 – Step 5: Requirements checkpoint started
+
+### Work completed
+
+- Started the interactive BMAD Create Epics and Stories workflow using the approved planning documents and this development log. The student provisionally retained the proposed eight epics.
+- Created [epics.md](../_bmad-output/planning-artifacts/epics.md) as a requirements-checkpoint draft: complete PRD functional/quality extraction, individual coverage for 25 FRs and four NFR groups, AD-1–AD-14 ownership, and 44 in-scope UX entries plus one deferred-scope marker.
+- Recorded settled supersessions, ownership overlaps and previously implicit integration work. Proposed smaller testable slices for E2, E3 and E6 without writing detailed stories or removing V1 requirements.
+- Separated demonstrable course delivery, pre-pilot qualification and subsequent three-working-day evaluation inside E8. Identified early source, OCR and target-device qualification work and unresolved capacity/course facts.
+
+### AI use and verification
+
+OpenAI Codex and the BMAD workflow supported source tracing, decomposition and documentation. Static checks verified exact PRD section extraction, requirement identifier coverage and local document links. No source feeds, OCR tooling, device behavior or application capability were tested; no application implementation, provisioning or deployment was performed.
+
+### Current checkpoint
+
+Awaiting the student's review of requirements, allocation and proposed evidence checkpoints. Step 1 is not marked complete, the epic structure remains provisional, and detailed stories have not been written. Full V1 fit within the reported 40–160-hour range remains unproven; realistic remaining capacity is needed before a delivery commitment. No BMAD Spec was started and no adopted architecture decision changed.
+
+## 2026-09-23 – Step 5: Requirements approved; formal epic checkpoint
+
+- The student explicitly approved the requirements, responsibility boundaries and eight epics as the basis for the next workflow step. Marked `step-01-validate-prerequisites` complete in [epics.md](../_bmad-output/planning-artifacts/epics.md).
+- Preserved the approved E8-D demonstration, E8-P pre-pilot qualification and E8-E field-evaluation checkpoints inside E8, without changing V1 scope.
+- Recorded the student's capacity correction: high priority and guaranteed more than 40 hours, but no reliable remaining budget. Capacity and delivery time are unresolved; neither 40 nor 160 hours is an assumed available budget. Requirements may only be deferred by a separate explicit decision.
+- Opened step 2 and documented all eight formal epic outcomes, FR coverage, dependencies and shared-component boundaries. Earlier epics must deliver their own necessary access, persistence and privacy behavior; later integration/verification ownership is not a reason to leave earlier functionality incomplete.
+- Awaiting the formal epic checkpoint response before story creation. Step 2 remains open; step 3 has not been opened. No detailed stories, implementation, provisioning, deployment or new architecture decisions were created. The saved checkpoint can be resumed on the next day.
+
+OpenAI Codex and the BMAD workflow supported this documentation update. Static checks verify workflow state, eight epic entries and retained requirement mappings; these are not application or pilot test results.
+
+## 2026-09-23 – Step 5: Formal epics approved; stopped before stories
+
+- The student explicitly approved all eight formal epic boundaries and each epic's responsibility for access, persistence, error handling and privacy for its own functions.
+- Marked workflow steps 1 and 2 complete in [epics.md](../_bmad-output/planning-artifacts/epics.md). Retained early source/OCR/tablet qualification and E8-D/P/E without changing approved V1 scope or architecture.
+- Saved the next step as `step-03-create-stories`, unstarted. At the student's explicit request, stopped before opening that step or writing detailed stories; continuation is planned for tomorrow.
+- Capacity and delivery time remain unresolved: more than 40 hours is confirmed, but neither 40 nor 160 hours is an assumed budget. Requirements cannot be deferred without a separate decision.
+- No application implementation, provisioning or deployment was performed. OpenAI Codex recorded the approval and resume point; this is workflow status, not implementation or pilot evidence.
+
+### Session close
+
+The student requested saving today's Epics and Stories work and publishing the planning document and development log to the project's GitHub repository. Today's completed scope is requirements extraction/traceability and approval of the eight formal epics. Detailed stories remain unstarted; resume at `step-03-create-stories` when the student returns. This closes today's planning session without starting implementation.
