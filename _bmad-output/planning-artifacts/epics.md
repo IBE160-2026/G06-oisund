@@ -1,20 +1,27 @@
 ---
-stepsCompleted: [step-01-validate-prerequisites, step-02-design-epics]
-currentStep: step-03-create-stories
-status: paused-by-owner-before-e4
-currentEpic: E4
-completedEpicPlanning: [E1, E2, E3]
+stepsCompleted: [step-01-validate-prerequisites, step-02-design-epics, step-03-create-stories, step-04-final-validation]
+currentStep: complete
+status: planning-complete
+currentEpic: null
+completedEpicPlanning: [E1, E2, E3, E4, E5, E6, E7, E8]
 currentStory: null
-approvedStories: ['1.1', '1.2', '1.3', '1.4', '2.1', '2.2', '2.3', '2.4', '2.5', '2.6', '2.7', '2.8', '2.9', '2.10', '2.11', '2.12', '3.1', '3.2', '3.3', '3.4', '3.5', '3.6', '3.7', '3.8', '3.9', '3.10', '3.11', '3.12', '3.13', '3.14', '3.15']
+currentCheckpoint: none
+nextPlannedWork: readiness-control
+workflowFinalValidation: complete-document-check-only
+finalValidationReport: epics-final-validation.md
+resumeIn: new-chat-project-step-6
+nextWorkflow: bmad-sprint-planning
+readinessStatus: not-started
+approvedStories: ['1.1', '1.2', '1.3', '1.4', '2.1', '2.2', '2.3', '2.4', '2.5', '2.6', '2.7', '2.8', '2.9', '2.10', '2.11', '2.12', '3.1', '3.2', '3.3', '3.4', '3.5', '3.6', '3.7', '3.8', '3.9', '3.10', '3.11', '3.12', '3.13', '3.14', '3.15', '4.1', '4.2', '4.3', '4.4', '4.5', '4.6', '4.7', '4.8', '5.1', '5.2', '5.3', '5.4', '5.5', '5.6', '5.7', '5.8', '5.9', '5.10', '5.11', '5.12', '5.13', '6.1', '6.2', '6.3', '6.4', '6.5', '6.6', '6.7', '6.8', '6.9', '6.10', '7.1', '7.2', '7.3', '7.4', '7.5', '7.6', '8.1', '8.2', '8.3', '8.4', '8.5', '8.6', '8.7', '8.8', '8.9', '8.10', '8.11', '8.12']
 storyDraft: null
 created: 2026-09-23
-updated: 2026-09-25
+updated: 2026-09-27
 epicStructure: eight-formal-epics-approved
 epicsApproved: true
 requirementsApproved: true
 capacity: unresolved-more-than-40-hours-no-fixed-total
 deliveryDate: unresolved
-storiesWritten: partial
+storiesWritten: complete
 inputDocuments:
   - briefs/brief-IBE160-2026-09-21/product-brief.md
   - briefs/brief-IBE160-2026-09-21/addendum.md
@@ -30,7 +37,7 @@ inputDocuments:
 
 ## Overview
 
-Steps 1 and 2 were explicitly approved with C on 2026-09-23: requirements, responsibility boundaries and all eight formal epic boundaries. Each epic must provide access, persistence, error handling and privacy for its own functions. Early source/OCR/device qualification and E8-D, E8-P and E8-E remain approved, without changing V1 scope. The user resumed on 2026-09-25. Step 3 is open: E1 Stories 1.1–1.4 and E2 Stories 2.1–2.12 are approved; E3 Stories 3.1–3.15, its coverage summary and the incorporated accessibility-test clarifications are approved. E3 planning is complete. The owner paused work before E4, the next continuation point; E4 has not started. No implementation, readiness check, provisioning, deployment or BMAD Spec is authorized in this step.
+Steps 1 and 2 were explicitly approved with C on 2026-09-23: requirements, responsibility boundaries and all eight formal epic boundaries. Each epic must provide access, persistence, error handling and privacy for its own functions. Early source/OCR/device qualification and E8-D, E8-P and E8-E remain approved, without changing V1 scope. The user resumed on 2026-09-25. Step 3 story planning is now approved: E1 Stories 1.1–1.4 and E2 Stories 2.1–2.12 are approved; E3 Stories 3.1–3.15, its coverage summary and the incorporated accessibility-test clarifications are approved. E3 planning is complete. The owner resumed on 2026-09-26. E4 Stories 4.1–4.8 and the epic coverage/continuation checkpoint are approved; E4 planning is complete. E5 Stories 5.1–5.13 and the epic coverage/continuation checkpoint are approved; E5 planning is complete. Stories 6.1–6.10 and the E6 coverage/continuation checkpoint are approved; E6 planning is complete. Stories 7.1–7.6 and the E7 coverage/continuation checkpoint are approved; E7 planning is complete. On 2026-09-27 the owner approved the E8 coverage summary with twelve stories and closed E8 at planning level. All eight epics and 80 stories are approved as plans. Story creation and the internal epics/stories final document validation are complete. Project step 6/readiness has not started and is reserved for a separate chat. The 5.4/7.1 timing-evidence solution decisions remain open; actual pilot use still requires the E8 checkpoints. Initial review closes only by explicit confirmation after showing remaining uncertain activities; navigation or interruption alone preserves continuation within existing limits. Unverifiable offline ending time cannot extend access/retention beyond the earliest applicable limit. Unknown-role recovery remains an explicit test and permitted-resolution obligation. The 5.4 timing-evidence risk remains open for a separate solution decision. No implementation, readiness check, provisioning, deployment or BMAD Spec is authorized in this step.
 
 The approved PRD contains 25 functional requirements and four quality groups. Explicit later UX decisions supersede affected PRD wording; adopted AD-1–AD-14 bind implementation. Older discovery questions do not reopen adopted decisions. Requirement allocation and the formal delivery boundaries below are approved. Candidate smaller slices remain planning material, not formal stories.
 
@@ -215,8 +222,8 @@ Derived IDs below provide traceability for the approved UX contract; they do not
 | UX-DR30 | Revised linked plan leaves affected accompaniment links visibly unresolved for explicit repair; matching never crosses target plan. | X Revision ownership and linked contexts | E6 / E2 revision engine |
 | UX-DR31 | Recover role, assignment, person/plan/block, pin, takeover and outage history atomically. Incomplete recovery never infers unrestricted guidance or genuine-startup exemption. | X Role and context recovery | E6 / E5 storage/recovery |
 | UX-DR32 | End-shift confirmation red action and cancel-preserving dialog; normal fallback in menu, final own-day only; end/abort terminal and intermediate depot/gap/block never ends day. | X End-shift confirmation | E7 / E3 transitions |
-| UX-DR33 | Summary/export distinguishes completed/skipped/aborted/uncertain, displayed notices, corrections and source issues. Initial completion review can manually confirm uncertainty; later retained entry is read/export with date/expiry. | X Initial and retained summary permissions | E7 |
-| UX-DR34 | Closing message Takk for i dag plus eligible varied factual affirmation; avoid previous day's variant where possible, neutral fallback, no invented success/scoring/AI or permanent history; demo rotation isolated. | X Latest navigation and closing decisions | E7 |
+| UX-DR33 | Summary/export distinguishes completed/skipped/aborted/uncertain, displayed notices, corrections and source issues. Initial completion review can manually confirm uncertainty and closes only by explicit confirmation showing remaining uncertain activities; interruption/navigation alone preserves continuation. After confirmed review completion, retained entry is read/export with date/expiry. | X Initial and retained summary permissions | E7 |
+| UX-DR34 | Closing message Takk for i dag plus eligible factual composition from preapproved formulations, including multiple neutral variants; meaningful variation across similar-day series beyond avoiding yesterday, stable same-day choice, no invented success/scoring/AI or permanent history; demo rotation isolated. Owner clarification 2026-09-26 in 7.6 applies. | X Latest navigation and closing decisions | E7 |
 | UX-DR35 | PDF document is user-initiated local export, portrait A4 with outcomes/provenance/page numbering and demo marking on every demo page, not a tablet screenshot or two-page limit. Export failure preserves ended summary and retry without extending expiry. | X PDF document; Recoverable defaults; D tokens | E7 / E8 demo |
 | UX-DR36 | Mentor summary/PDF retains only actually accompanied evidence, separates own planned activities and actual takeovers, never completes another person's remainder. Show file-deletion explanation at import and own-day expiry; discard unaccompanied context at own-day end. | X Accompanied-person imports and summary scope; AD-6/12 | E6 evidence / E7 output and trimming |
 | UX-DR37 | Instructor simulation controls: separate no-login origin, fictional shifts/speed/progression, repeatable restart/new-notice/network/GPS scenarios and explicit simulated exports; load failure cannot fall back to private records. | X UJ-2, Instructor simulation controls | E8 |
@@ -456,7 +463,7 @@ These are bounded qualification tasks within the relevant epic, not extra produc
 
 Steps 1 and 2 are complete. Requirements, responsibilities, eight formal epic boundaries, early source/OCR/device qualification and E8-D/P/E are approved and are not being reopened. Capacity and delivery time remain unresolved by explicit owner direction; no fixed 40- or 160-hour budget and no automatic requirement deferral.
 
-On 2026-09-25 the owner approved the E3 coverage summary and the UX-DR39/40 test clarifications, now incorporated into Stories 3.2 and 3.5 and their canonical copies. All 15 E3 stories and the epic-completion checkpoint are approved; E3 planning is complete. Work is paused at the owner's request. Resume with the E4 overview and first individual story under the current step-03-create-stories workflow when the owner resumes; no E4 story has been drafted and no E4 work is authorized tonight. Step 3 remains open. No implementation, readiness check or final workflow validation has started. The owner authorized committing and pushing the planning documents and development log before this pause.
+On 2026-09-27 the owner approved all eight epics and 80 stories at planning level and authorized finishing remaining project-step-5 formalities, document checks and commit/push to the current branch. The internal epics/stories step-04 final document validation is complete; see [validation record](epics-final-validation.md). This is not project step 6 or implementation readiness, which must begin in a separate new chat and has not been started or passed. Exact continuation: invoke bmad-sprint-planning for readiness control from this approved plan, the validation record, PRD/UX/Architecture Spine and shortened development log; do not implement. The 5.4/7.1 timing basis remains OPEN for a separate solution decision and required evidence before positive E8-P. No E8-D acceptance or pilot permission is given; actual shifts require the later positive dated E8-P owner decision with mandatory gates passed and blockers resolved. Capacity/delivery and actual source/device/provider/host qualification remain unresolved. The user requested ending the session after Git publication; no further workflow runs tonight.
 
 ### Preliminary Story Counts — 2026-09-25
 
@@ -467,11 +474,220 @@ Requested by the owner, this is a provisional decomposition forecast, not approv
 | E1 Private access and draft | 4 approved | Current completed story breakdown. |
 | E2 Preparation and revision | 12 approved | Current completed story breakdown, including two qualification stories. |
 | E3 Actual trip and safe progression | 15 individually approved | Epic planning and coverage approved; two approved test clarifications incorporated, no additional story needed. |
-| E4 Source-backed notices | 7–9 | Source qualification, ingestion/relevance, lifecycle, overview/driving presentation, acknowledgement/sound and failures. |
-| E5 Offline continuity and recovery | 8–11 | Day authority, coherent assets, restart, synchronization, planned/emergency transfer, conflicts and compatibility. |
-| E6 FADDER/INSTRUKTØR | 8–11 | Seven original candidates with separate linked-plan revision/repair and context/recovery slices where needed. |
-| E7 Closing, summary and PDF | 6–8 | End/abort, uncertain outcomes, combined summary, offline PDF, retained access and all-copy cleanup/settlement. |
-| E8 Demonstration and qualification | 6–9 | Fictional isolated demo/scenarios plus separate E8-D evidence, E8-P qualification and E8-E evaluation; gates are not collapsed into one acceptance. |
+| E4 Source-backed notices | 8 individually approved | One source qualification and seven implementation slices; epic planning/coverage approved, no ninth story needed. |
+| E5 Offline continuity and recovery | 13 individually approved | Updated 2026-09-26: authority, assets, restart/offline start, Access, reconnect, conflicts, planned/emergency transfer and evidence intake, backend/client compatibility and terminal settlement. Epic planning/coverage approved 2026-09-26; no fourteenth story needed. The 5.4 timing-evidence risk remains open. |
+| E6 FADDER/INSTRUKTØR | 10 individually approved | Updated 2026-09-26: ten approved slices and epic coverage/continuation approved; E6 planning complete. No eleventh story currently identified. |
+| E7 Closing, summary and PDF | 6 individually approved | Updated 2026-09-26: terminal action, explicit outcome review, combined summary, local PDF, retained navigation and factual varied greeting. Epic coverage/continuation approved 2026-09-26; cleanup/settlement integrated through 5.13 and all six stories, no seventh slice currently needed. |
+| E8 Demonstration and qualification | 12 individually approved | 8.1–8.12 and the E8 coverage summary approved as plans on 2026-09-27. E8-D/P/E are separate, unexecuted checkpoints. |
+
+Story count updated on 2026-09-27 after approval of 8.12: E1–E8 contain 4 + 12 + 15 + 8 + 13 + 10 + 6 + 12 = 80 individually approved story plans. The owner approved the E8 coverage checkpoint on 2026-09-27; no additional E8 story is currently identified. These are approved planning counts, not implementation, qualification results or a time estimate. Later evidence may require explicit planning changes without silently removing V1 requirements. Actual shifts still need the later positive dated E8-P decision, including resolved 5.4/7.1 timing evidence. Capacity and delivery remain unresolved.
+
+### E8 Story Coverage Summary — Approved 2026-09-27
+
+E8 has twelve individually approved story plans. This is the step-3 epic coverage checkpoint against the formal E8 boundary, FR-25, integrated FR-1–24 evidence, NFR-1–4, relevant approved UX requirements and AD-1–AD-14. It is not workflow step 4, implementation readiness, executed qualification or pilot permission. The canonical stories and approved source documents govern.
+
+| Story | Approved bounded result |
+|---|---|
+| 8.1 | Isolated no-login ordinary-PC fictional demo using the shared engine, labelled PDF and reset with no old-run effects or private access. |
+| 8.2 | Repeatable new-notice, network and independent position/speed scenarios, combined recovery and honest simulated-versus-actual outcomes. |
+| 8.3 | Actual private React/FastAPI/PostgreSQL lifecycle evidence, own/mentor paths, UI/local/API/database correlation and bounded fault/expiry checks. |
+| 8.4 | Adopted five-service portable runtime, controlled restart, preserved working data, measured Windows sign-in startup interruption and runbook. |
+| 8.5 | Protected external private/demo routes, verified Access behavior and provider upload/cache/logging handling before real files. |
+| 8.6 | Versioned assessable delivery, requirement/evidence matrix, repeatable instructions, grounded AI-use/reflection and explicit E8-D record. |
+| 8.7 | Integrated representative import, dated-trip matching and automatic source qualification, reusing early investigations and exposing missing/negative evidence. |
+| 8.8 | Actual mounted Lenovo/Brave sensing/progression, movement/role policy, usability, Auto, wake and sound qualification. |
+| 8.9 | Full-duration offline continuity, access/logout, receipts/conflicts/transfer, end/review/PDF, terminal settlement and all-copy expiry. |
+| 8.10 | Actual host/network recovery, measured resources/noise and one concrete old/new release transition preserving active days and pending work. |
+| 8.11 | Versioned five-gate E8-P evidence packet and later explicit dated owner permission/no-permission decision. |
+| 8.12 | Agreed protocol and three actual assigned days after positive E8-P, honest usefulness/counter-metric analysis and separate E8-E outcome. |
+
+| Required allocation | Coverage and preserved boundary |
+|---|---|
+| FR-25 / SM-5; UX-DR37/UJ-2 | 8.1/8.2 implement a separate fictional ordinary-PC demo, shared rules, physical-GPS independence and repeatable reset/failure scenarios. 8.5 hosts it separately; 8.6 covers actual external access, walkthrough and agreed assessment availability. Exact dates/browser remain execution clarifications. |
+| Fullstack/database; FR-1–24 integrated evidence | 8.3 requires the real client/backend/PostgreSQL 18 chain, including actual interpreter/OCR and own/mentor lifecycle. 8.6 maps every requirement and implementation/verification status; 8.9/8.10 qualify target-environment continuity. Static demo/SQLite/mocked receipts never replace database evidence. Feature implementation remains in E1–E7. |
+| Import/confirmation and dated matching; FR-2–5, UX-DR4–8/42/43 | 8.3 demonstrates bounded fictional import; 8.7 qualifies representative PDF/scanned pages/multiple images, corrections, reviewed revision, unknowns, cleanup, actual dated source identities and whole-day coverage. Friday 25:30 versus Saturday 01:30 and ambiguous candidates retain service date/order. Early 2.1/2.2 remain prerequisites, not work deferred until pilot. |
+| Active trip/progression/interaction; FR-6–11/16, UX-DR10–18/24/25 | 8.1/8.2 demonstrate shared behavior; 8.8 qualifies actual sensing, independent 100-m evidence, repeated-stop occurrence, manual provenance, gap visibility, final-arrival/return-start distinction and adopted movement exceptions. 8.9 preserves these through interruption. Theme/wake/audio fallback is not evidence of required automatic support. |
+| Source notices; FR-12–15/18/19, UX-DR9/19–23 | 8.7 qualifies real source coverage, identity/lifecycle, relevance, metadata and failures against originals. 8.8 checks actual presentation/audio and multi-notice usability. 8.9/8.10 preserve source facts versus network/receipt/freshness state through recovery. No-notice samples, successful fetch or fixtures do not prove complete/fresh coverage. |
+| Whole-day operation, access and writer recovery; FR-1/17/18/20 | 8.5 checks the actual external gate; 8.9 verifies actual full-duration Lenovo/Brave use, logout locks, fixed app expiry, concrete-day continuation, two-client authority, unknown role and conflict/receipt distinctions. Accelerated boundaries remain separate from elapsed endurance. 8.10 adds host and version-change interruption. |
+| End/review/summary/PDF/retention; FR-21–24, UX-DR32–36 | 8.3/8.9 integrate E7 and 5.13 with real mentor trimming, interrupted first review, permitted retained entry, local PDF and all-copy expiry. Closure fencing prevents old tabs/requests/fresh IDs resurrecting deleted work. 8.10 preserves terminal and pending-work meanings across upgrades. 8.12 uses optional user-held exports without an app archive or extra retention. |
+| Mentor UX UJ-3/4 and UX-DR26–31/36 | 8.3 includes an actual private mentor lifecycle; 8.8 qualifies role/context restrictions and 8.9/8.10 recovery/transfer/migration. Unknown actual role retains driver restrictions even if old server state says guiding. A limited own-day public demo does not remove required private mentor evidence. |
+| NFR-1/4 and UX-DR38–41/44 | 8.1/8.2/8.6 check PC repeatability and clear failure states; 8.8 covers actual mounted glance/lighting/touch/gloves, fit, keyboard/focus and meaningful announcements. 8.9/8.10 cover actual platform recovery. Static accepted mockups, API success and frame sizes do not establish real usability or native/background support. |
+| NFR-2/3 and AD-6/10/12/13 | All E8 evidence separates actual/manual/unknown/simulated status; 8.1/8.5 enforce demo/privacy boundaries, 8.7 transient originals and provider conditions, 8.9 all-copy deadlines, 8.10 non-destructive compatible operations and no private backups. 8.6/8.11/8.12 retain sanitized documentation without hidden private archives. |
+| AD-13/14 host and releases | 8.4 supplies the runtime; 8.5 qualifies ingress; 8.10 measures reboot-to-readiness downtime, home-network recovery, resources/noise with declared method and owner acceptability, actual old-client/new-backend behavior, coherent active-day boot and preserved migration/rollback. Failed required contracts block rollout; no deployment-age shortcut replaces actual data expiry. |
+| E8-D / E8-P / E8-E | 8.6 records demonstrability with actual private fullstack evidence and limitations. 8.11 requires recorded mandatory gate passes and a later dated owner decision before actual shifts. 8.12 executes the separately agreed three-day protocol only afterward. Plan approvals and completed reports cannot collapse these outcomes into one pass. |
+| SM-1–4 and SM-C1/C2 | 8.12 records all checking effort versus the recalled baseline, actual notice/progression/core outcomes, distraction and trust costs; independent references and unobserved states remain explicit. Negative/interrupted days remain in the evaluation. Three days do not establish causal improvement, universal coverage or full V1 acceptance. |
+
+**Dependency and overlap check:** All twelve files contain acceptance criteria, traceability, dependencies and scope/qualification boundaries. Declared dependency identifiers exist and point backward; no E8 story depends on a future E8 story. 8.1/8.2 run locally before hosting; 8.3 supplies independent private fullstack evidence; 8.4/8.5 package/protect it; 8.6 can record demonstrability with operational blockers. Early E2/E3/E4 investigations feed 8.7/8.8; 8.9 uses the current release, 8.10 checks the release transition, 8.11 consolidates pre-pilot evidence and 8.12 requires the actual positive E8-P decision. Textual references to later qualification are responsibility boundaries, not hidden implementation prerequisites.
+
+Repeated requirements have distinct evidence purposes: 8.3 controlled fullstack versus 8.7/8.8 actual sources/device versus 8.9/8.10 integrated operations. 8.4 implements the runtime; 8.10 qualifies its actual host/resource/release behavior. 8.6 and 8.11 record different decisions. Existing valid reports/harnesses are reused; no duplicate engine, importer, synchronizer, source adapter or broad new test platform is assigned.
+
+**Coverage finding:** No unallocated requirement is identified within E8's approved responsibility, and no thirteenth story is currently needed. This is a planning-coverage conclusion, not proof of complete implementation or passed tests. Feature behavior remains owned by E1–E7; E8 cannot fill missing production functionality with fixtures. Dense 8.7–8.10 qualification may take several observation sessions or scoped execution tasks, and 8.12 inherently takes three actual days; the story count is not a one-session or hours estimate. Splitting execution cannot remove criteria.
+
+**Open decisions and delivery risks:** The 5.4/7.1 timing basis is still unresolved and explicitly blocks an affirmative E8-P outcome until its separate solution decision and required implementation/evidence. Actual source/OCR coverage, mounted sensing/100-m/readability/Auto/wake/audio, full-duration offline recovery, provider handling, host downtime/noise and old/new compatibility all remain unexecuted qualification obligations. Unknown-role recovery remains a required test with driver restrictions until permitted clarification. Exact assessment period/browser, later deployment prerequisites, field protocol/scheduling, capacity and delivery date are unresolved; neither 40 nor 160 hours is assumed. Adopted limitations such as Windows sign-in startup and no historical private backup do not waive their required evidence.
+
+**Outside V1:** No CSV requirement, automatic publication, permanent pilot-quality archive, cross-account collaboration, native/background guarantee, AI notices/greetings, driver scoring, weather/speed/meeting-bus widgets or speculative host migration is added. Approved manual fallbacks preserve usability without certifying failed automatic capabilities.
+
+**Checkpoint:** Approved by the owner on 2026-09-27 with twelve stories, closing E8 on the planning level. All eight epics and 80 stories are now approved as plans. This is explicitly not E8-D approval or permission for pilot use. The 5.4/7.1 timing basis remains OPEN for a separate solution decision and evidence; a positive dated E8-P owner decision still requires all mandatory gates and resolved blockers. Readiness control is the next substantive step in a separate chat. The internal step-5 document validation is now recorded in epics-final-validation.md; project-step-6 readiness is not started or passed. No implementation, actual tests, provisioning or deployment is implied. The development log was condensed with detailed approval/decision traceability retained here and in the story files.
+
+### E7 Story Coverage Summary — Approved 2026-09-26
+
+E7 has six individually approved stories. This is the step-3 epic coverage checkpoint against the approved E7 boundary, FR-21–24, relevant shared requirements and UX-DR32–36. It is not workflow step 4, implementation readiness, executed test evidence or permission for actual shifts. Canonical stories below, approved PRD/UX and AD-1–AD-14 govern; the owner's explicit 7.2 and 7.6 clarifications supersede narrower earlier wording.
+
+| Story | Approved bounded result |
+|---|---|
+| 7.1 | Explicit normal end/abort of one combined own day; truthful terminal result and actual E3/E4/E6 integration with 5.13 settlement, trimming and deadline guards. |
+| 7.2 | Individual manual confirmation of eligible uncertain outcomes; explicit review-completion confirmation showing remaining uncertainty, with resumable interruption and no operational resumption. |
+| 7.3 | One coherent daily summary separating planned, observed, manual and unknown evidence, own/accompanied/takeover work and actual recorded notice presentation. |
+| 7.4 | User-initiated local offline A4 PDF of one summary revision, faithful provenance/receipt status, accurate file-handoff feedback and user-held-copy cleanup exception. |
+| 7.5 | Retained-summary list/read/export entry, stable day identities, day-scoped metadata/content, preserved open review and expiry even while displayed. |
+| 7.6 | Factual closing greeting assembled/selected from preapproved formulations, meaningful similar-day variation including neutral days, stable same-day choice and safe menu/summary navigation. |
+
+| Approved requirement/allocation | Story coverage and responsibility |
+|---|---|
+| FR-21; UX-DR32: explicit final ending/abort | 7.1 supplies final-depot action and normal Menu fallback including absent GPS/no-depot instructor day, explicit abort, confirmation/cancel and actual-role/writer/revision guards. Intermediate split parts, linked-person ends and scheduled times do not end the combined day. 7.2–7.6 preserve terminal state through all navigation/recovery. |
+| FR-22; UX-DR33: honest outcomes and initial review | 7.2 permits eligible individual manual attestations without inventing final stops, actual times or performed unobserved work. Only explicit finish confirmation closes editing after showing remaining uncertainty. Back, menu, tab closure and crash preserve continuation when still authorized. 7.3 composes the actual evidence; 7.5/7.6 preserve the review phase. Completed, skipped, aborted, uncertain and manual status remain distinct. |
+| FR-22; E3/E4 evidence and NFR-2 | 7.1 preserves actual trip/activity/bus/revision evidence. 7.3 includes only recorded actual notice presentations tied to exact version/context, distinguishing heading/detail and preview/actual contexts. Corrections, source errors, unknown metadata, observation gaps and local/server states remain honest. 7.4 preserves the same meaning in the PDF. Rendering never supplies new source/GPS/physical proof, seen state or audio replay. |
+| FR-22 closing; UX-DR34 | 7.6 covers Takk for i dag, explicit factual predicates, multiple preapproved neutral alternatives and series-based variation. Controlled six-day equivalent and neutral-only series must use at least three meaningfully distinct eligible texts, not cosmetic changes or a two-text alternation. Same-day reopening preserves the choice unless its factual basis is invalidated. Choices/display records are bounded, demo-isolated and cannot extend retention or change review/receipt status. |
+| FR-23; UX-DR35 | 7.4 implements optional-use but required-function local offline PDF, portrait A4 pagination beyond two pages, exact revision and source/manual/uncertain provenance, no automatic upload/publication, accurate generated/handoff/saved states and retry without losing the ended result. Every demo page is labelled; actual identifiers are allowed only in the private export, not assessment material. 7.5 reuses export from retained results. CSV remains optional, not a missing required slice. |
+| UX-DR36; FR-22/24 mentor boundaries | 7.1 integrates E6 actual accompanied portions, A–B–A gaps, own tasks/driving and takeover evidence, including active-old/new-linked revision distinctions; prohibited linked remainder is trimmed through 5.13. 7.2–7.4 cannot attest to, display or export unaccompanied work. 7.5 lists the mentor's combined own day once, not a day per linked person; all share the own-day clock. |
+| FR-24; AD-12 complete lifecycle | 7.1 handles actual-ended/aborted versus never-ended clocks, earlier limits and real-data closure/checkpoint integration. 7.2 includes review phase/manual events; 7.3 includes summary copies; 7.4 includes temporary PDF buffers; 7.5 includes list metadata/open views; 7.6 includes choice/display records. Each uses existing all-copy expiry/guards with E1/E2/E5/E6. Retries, old tabs, callbacks and fresh IDs cannot revive deleted work. Browser-closed cleanup occurs on return before use; backend denies expired access independently of purge timing. User-held PDFs remain outside app cleanup. No extra raw tracking or private backups/history. |
+| FR-17/20 and bounded FR-1; UX-DR23/31/38/44 | 7.1 offline ending remains terminal while settlement is pending; 7.2 allows bounded review; 7.3/7.4 support offline summary/export; 7.5 exposes actual local availability; 7.6 uses the local text bank. All preserve logout/revocation, authorized recovery, current scope and original deadlines. A single-day grant cannot list other days' metadata. Retention is not unconditional access, and fresh login cannot renew expired data. |
+| Fullstack/database and NFR-3 | 7.1/7.2 integrate actual IndexedDB transactions and authenticated FastAPI/PostgreSQL projection/event/review contracts. 7.3/7.5 use coherent authorized result/list queries; 7.4 consumes these locally without a server PDF archive; 7.6 adds only necessary bounded presentation state. Matching receipts alone establish server acceptance. All introduce only needed fields/entities and preserve privacy, authority and failure semantics; a static screen or empty mock queue is insufficient. |
+| NFR-1/4; UX-DR14/17/38/39/41/44 where applicable | Each story includes readable textual states, keyboard/focus and relevant layout/failure cases. E3 movement and E6 unknown-role restrictions remain controlling, even after day ending or while inspecting an older day with another day active. Actual Lenovo/Brave foreground, offline restart, file handling and mounted readability remain qualification obligations, not claims from accepting a mockup. |
+| AD-1–AD-14 and remaining E8 boundary | Existing modular/fullstack/database choices, single operational engine, source/import contracts, compatible assets, session/day/writer authority and immutable settlement remain fixed. E7 consumes E2/E3/E4/E6 evidence and E5 protocol; it does not replace those engines or introduce a new time-proof model. E8 owns integrated demonstration and actual source/device/delivery/evaluation evidence, not deferred implementation of E7 features. |
+
+All six stories have testable criteria, bounded results, scope/dependency and qualification sections. Same-epic dependencies point backward. Repeated authority/receipt/retention criteria are necessary integration invariants: 5.13 owns the protocol; 7.1 applies it to real terminal E6 data; 7.2 adds allowed post-end correction; 7.3–7.6 expose and protect the resulting views/output/presentation state. There is no identified requirement gap within the E7 allocation and no current need for a seventh story solely to repeat the cleanup protocol. Dense closure/review/PDF integration may be decomposed into implementation tasks without removing criteria or changing scope.
+
+The combined verification path must cover normal/aborted own and mentor days through end, interrupted/resumed review, explicit review completion, summary, offline PDF, retained reopening and all-copy expiry. Compose the existing 7.1–7.6/5.13 acceptance cases, including pending/lost receipts, concurrent tabs, source callbacks, active R1/new R2, revocation, pending logout, unknown role and an earlier deadline discovered on reconnect. Verify storage and user-visible state together. This is an integration obligation already allocated across the stories; no such test has been executed in this planning checkpoint.
+
+Remaining delivery risks are implementation/qualification obligations, not removed V1 requirements: atomic closing/trimming versus old writes; post-end review ordering and unresolved commits; actual offline file generation/handoff and readable pagination; scope enforcement for metadata; reliable cross-tab lock/expiry; meaningful text variation using only bounded permitted state. Same-day greeting stability does not require keeping the day beyond expiry, and loss of legitimate prior state cannot justify recreating a history.
+
+**Open decisions:** 5.4 still lacks an established verifiable basis for server acceptance of delayed offline activation after ordinary expiry. 7.1 keeps unverifiable reported end time separate and enforces the earliest applicable limit until evidenced resolution; coverage approval cannot invent proof or extend access/retention. Unknown recovered role continues to require driver restrictions until a permitted explicit clarification, with actual-device evidence still needed. Capacity and delivery date remain unresolved: more than forty hours is guaranteed, but neither forty nor 160 is an available fixed budget. No requirements are deferred by this check.
+
+**E8-D:** controlled fictional/anonymized browser/IndexedDB/FastAPI/real-PostgreSQL lifecycle and PDF evidence can demonstrate the implemented delivery. **E8-P:** actual source/OCR/device/access/provider qualification and integrated lifecycle, permission, offline recovery, PDF and cleanup checks must pass before real shifts; negative findings require a separate solution decision. **E8-E:** the later three-workday field evaluation remains separate. Planning approval supplies none of this execution evidence.
+
+Outside required V1 remain CSV, AI greetings, performance scoring, permanent private shift/person/rotation archives, automatic publication and cross-account collaboration. Demo-export/component fixtures do not implement or qualify the full public demonstration. These boundaries preserve all adopted V1 requirements.
+
+**Checkpoint:** Approved by the owner on 2026-09-26 with six stories and explicit continuation to E8. E7 is complete at planning level only. The 5.4/7.1 timing basis remains open for a separate solution decision; actual pilot use still requires the E8 checkpoints. Step 3 remains open. No implementation, executed qualification, readiness/final validation, provisioning or deployment is implied.
+
+### E6 Story Coverage Summary — Approved 2026-09-26
+
+E6 has ten individually approved stories. This check maps the formal E6 boundary, UX UJ-3/4 and UX-DR26–31/36 to the saved acceptance criteria, including the owner's individual clarifications. It is the step-3 epic coverage checkpoint, not workflow step 4, implementation readiness, executed tests or pilot qualification. The canonical approved story bodies below govern; primary input remains the approved PRD, EXPERIENCE/DESIGN and AD-1–AD-14.
+
+| Story | Approved result |
+|---|---|
+| 6.1 | Review and confirm own mentor assignment/activities, with honest pending links and no automatic guiding role. |
+| 6.2 | Separately review/confirm a private person-plan copy; the mentor is the reviewer, not the accompanied person. |
+| 6.3 | Explicit person/plan/revision/scope links: same-person whole-shift FADDER and bounded INSTRUKTØR portions. |
+| 6.4 | One actual accompaniment period, shared operational view, explicit entry/end and current-role checks at commitment. |
+| 6.5 | Atomic actual person/block changes including A–B–A, preserving history without transferring pins or filling gaps. |
+| 6.6 | Own classroom/office activity context, valid no-accompaniment instructor day and honest uncertain outcomes. |
+| 6.7 | Immediate driver restrictions followed by own-plan-only trip selection; storage failure/restart cannot restore old guiding permission. |
+| 6.8 | Acute FADDER takeover/explicit permitted return retaining the linked tracking context, with separate manual role evidence. |
+| 6.9 | Targeted linked-plan revisions and explicit link repair; active R1 stays R1 despite confirmed R2 and unresolved linking. |
+| 6.10 | Complete mentor recovery across restart/authorized device transfer, uncertain-role restriction, exact revisions and bounded retained evidence. |
+
+| Approved requirement/allocation | Story coverage and responsibility |
+|---|---|
+| UX-DR26; FR-2/4/5 under UJ-3/4: separate own and imported plans, private ownership and visible role/context | 6.1 own assignment first; 6.2 reviewed private copies and transient originals; 6.3 explicit links; 6.4 operational role label. Own confirmation, mentor review of a copy, planned link and actual accompaniment are different facts. No person account confirmation or cross-account access is inferred. |
+| UX-DR27: same-person whole-shift FADDER, separate own driving, no classroom/office fadder activity | 6.1/6.3 validate assignment and whole-shift scope; 6.4 supports actual guidance; 6.5 rejects person-switch misuse; 6.7 own trips only; 6.8 implements the separate current-trip takeover exception. A partial/missing shift cannot quietly satisfy whole-shift preparation, and planned scope never proves whole-shift observation. |
+| UX-DR28: bounded INSTRUKTØR periods, several people and return, own tasks/no-accompaniment day | 6.3 explicit portions and stable blocks; 6.4 actual entry/end; 6.5 A–B–A; 6.6 classroom/office before/between/after guidance and without any linked plan. Unknown outcomes and observations remain separated; no timetable-only handover or inherited pin. |
+| UX-DR29 and FR-16: guiding exception, immediate driver restriction, planned own trip and acute takeover | 6.4 opens controls only for actual guiding and rechecks role at mutation; 6.7 restricts before own-trip selection and remains restricted on cancellation/storage uncertainty/restart; 6.8 same-context FADDER takeover/return. Return requires an explicit permitted action. An old view/response cannot perform a newly locked action; legitimate earlier committed history is not replayed. |
+| FR-6–11 and shared E3 operational semantics: trip/stop identity, progress, corrections, activity boundaries | 6.4 reuses the E3 engine within the selected linked context; 6.5 changes contexts without false trip completion; 6.6 separates own tasks; 6.7/6.8 retain own/takeover distinctions. Existing E3 qualification, missing-stop fallback, stop-occurrence identity, same-route return, interruption/skip and physical-bus provenance rules remain shared obligations, not duplicate E6 engines. 6.10 preserves their retained state. |
+| UX-DR30; FR-2/3/4/5 revisions with FR-6/9 preservation | 6.9 reuses 2.11/2.12 target/scope comparison and atomic application, invalidates affected links and repairs explicitly. Affected ongoing context retains its exact old revision with visible unresolved linking; repair cannot rebind it silently. 6.10 restores this distinction. Other plans and historical observations cannot be reassigned by similarity. |
+| UX-DR31; FR-17/18/20 continuity, shared FR-1 | Each feature carries its local recovery; 6.10 integrates complete E6 payloads with E5 restart, transfer, conflicts and compatible builds. Planned transfer checks recipient prerequisites before authority retirement and verifies post-transfer revision before control. Emergency transfer without current former-device state means actual role unknown even if server says guiding and no Jeg kjører is recorded; driver restrictions remain until explicit permitted clarification. Old-device work is preserved for review without old writer authority. |
+| Shared E4 FR-12–15/19 and UX-DR19–23 | 6.4–6.10 reuse source/notice identity and qualified relevance, exact-version seen/acknowledgement, source uncertainty and prior audio-attempt state. Person/role/plan changes and recovery are not new notice receipts and do not replay old sound. New-notice sound still requires the existing actual-trip conditions; classroom/office is not an active passenger trip. |
+| UX-DR36 and E6 portions of FR-22/24: privacy, accompanied evidence and trimming | 6.2 deletes transient originals and explains retained interpreted data. 6.4–6.8 record separate own/observed/manual/unknown outcomes and takeover segments; 6.5 retains observation gaps between visits. 6.9/6.10 preserve revision/provenance without retroactive reassignment. Each integrates AD-12/5.13 all-copy expiry/closure: retain only permitted own facts and actual accompanied evidence, remove the other person's unaccompanied remainder and block resurrection. No linked-person/block clock or permanent archive. |
+| Shared UX-DR7/12/38/39/41/44 and NFR-1/2: usable/accessible presentation and information integrity | E2/E3 layouts/controls remain shared. 6.1–6.3 own/linked review, 6.4–6.8 clear role/context/unknown state and current permission checks, 6.6 current/next activity and clock, 6.9 comparison/repair, 6.10 readable recovery failures. Retain keyboard/focus/disabled labels, long text and tablet layout checks; no required interaction while driving. Actual sunlight/tunnel/touch performance remains E8-P evidence. |
+| NFR-3 privacy/access and fullstack/database; all features' storage/errors/retention | Every story specifies owned IndexedDB plus authenticated FastAPI/PostgreSQL behavior, local failure versus matching server receipt, immutable retries, authority/revision validation, private/demo separation and fixed all-copy expiry. This is implementation scope, not satisfaction by a static mock, empty queue or badge. Only needed fields/entities are introduced by each slice. |
+| NFR-4 target-environment reliability | 6.4–6.8 retain E3 qualified sensor/movement and E4 sound behavior, while 6.10 extends E5 foreground/offline/tethering/recovery behavior to mentor context. Every slice distinguishes controlled fixtures from actual Lenovo/Brave qualification in E8-P. Missing device capability is a reported delivery blocker, never scheduled/simulated replacement progress. |
+| AD-1–AD-14 | Runtime/adapter/database choices stay fixed. E6 mainly extends AD-6/9/12 and reuses AD-2–5 storage/runtime, AD-7/8 source semantics, AD-10/11 authority and AD-13/14 access/build contracts. No new architecture, sharing, synchronization or backup model is authorized. |
+
+All ten stories have bounded results, testable acceptance criteria, explicit dependency/scope and pilot-qualification sections. Declared same-epic dependencies point backward; the earlier stories demonstrate their own slices without depending on later E6 screens. Repeated role, receipt and retention criteria are deliberate integration invariants: E2 owns the shared importer/revision engine, E3 the operational engine, E4 source/notice behavior and E5 recovery/authority/settlement. E6 adapts those engines to mentor identity, scope and evidence; it does not build replacements.
+
+No unallocated requirement within the approved E6 boundary was identified. No eleventh story is currently needed for that allocation. This does not claim all V1 complete: E7 still owns explicit final end/abort integration, initial uncertain-outcome review, combined summary, retained read/export, PDF and closing experience. E6 supplies the real evidence/identity partitions and participates in cleanup now; E7 must consume them correctly and run the full lifecycle through 5.13. Public fictional assessment/demo scenarios remain E8 and cannot use private imported records. These are explicit downstream requirements, not deferred E6 features.
+
+Remaining delivery risks are evidence/implementation questions, not unassigned scope: demonstrating restrictive recovery when even the guard write fails; keeping permissions safe with missing former-device role events; atomic person/role/revision transitions and delayed callbacks; preserving an active old revision without violating terminal deletion; provider/temporary-original cleanup; actual Lenovo/Brave position/storage/permissions/readability; compatible retained clients and complete recipient files. Stories 6.9/6.10 are dense integrations of existing contracts and may need implementation-task decomposition without reducing acceptance criteria. E2/4 source/OCR qualification and E3 device evidence remain prerequisites for claims about real operation.
+
+The 5.4 timing-evidence risk remains open for a separate owner solution decision: this coverage checkpoint supplies no proof for accepting an offline start after ordinary expiry. Capacity and delivery time remain unresolved; more than forty hours is guaranteed, but neither forty nor 160 is an available fixed budget and no requirement is postponed here.
+
+**E8-D:** controlled fictional/anonymized browser/IndexedDB/FastAPI/real-PostgreSQL mentor scenarios, faults, revisions and transfers can demonstrate implemented behavior. **E8-P:** actual source/OCR/device/access/provider and integrated role/recovery/closure qualification must pass before real shifts, including emergency unknown-role behavior. **E8-E:** the separate later three-workday field evaluation remains. No tests or qualification were executed in this planning check.
+
+Outside V1 remain cross-account editing/sharing, a permanent person/performance directory or private historical archive, teaching/attendance/payroll administration and automatic proof of physical handover or performed work. The adopted acute takeover is specifically FADDER; this checkpoint does not broaden it to other roles. These boundaries do not remove any approved requirement.
+
+**Checkpoint:** Approved by the owner on 2026-09-26 with ten stories and explicit continuation to E7. E6 is complete at planning level only. The owner explicitly carries unknown-role recovery forward as a test/permitted-resolution obligation and 5.4 timing evidence as an open separate solution decision. Step 3 remains open; no implementation, readiness/final validation or pilot approval is implied.
+
+### E5 Story Coverage Summary — Approved 2026-09-26
+
+E5 has thirteen individually approved stories. This checkpoint checks planning allocation against E5's approved boundary; it is not implementation readiness, BMAD step 4, executed tests or pilot permission. No fourteenth E5 story is presently needed for the allocated requirements. E6/E7 still supply their feature-specific integrations.
+
+| Story | Approved bounded result |
+|---|---|
+| 5.1 | Bounded continuation of the already active concrete day after fixed ordinary sign-in expiry. |
+| 5.2 | Complete verified compatible nonpersonal app assets and required-build offline entry. |
+| 5.3 | Same-client active-day recovery preserving choices, observation gaps and the available whole day. |
+| 5.4 | Prepared-day offline activation during valid ordinary access; post-expiry server acceptance requires verifiable timing evidence. |
+| 5.5 | Actual verified Access lifetime coverage and deliberate renewal without changing app/day authority; locked pending-logout recovery. |
+| 5.6 | Automatic reconnect/source refresh and normal immutable submission, with independent reachability/source/receipt status. |
+| 5.7 | Explicit conflict review against a valid basis; new corrections under current authority, no silent merge or false provenance. |
+| 5.8 | Planned transfer with destination access/assets checked first, atomic writer/grant transfer and post-transfer revision verification. |
+| 5.9 | Explicit emergency takeover with possible missing-work warning; no claim that an offline former device has stopped. |
+| 5.10 | Bounded former-device evidence intake and exact disposition, distinct from operational acceptance. |
+| 5.11 | New-backend compatibility for actual retained clients through the affected data's real expiry. |
+| 5.12 | Owner-accepted between-day app activation/local migration, coherent recovery and storage-compatible rollback only. |
+| 5.13 | Minimal trimmed closure checkpoint, original-outcome lookup, atomic server fences/cleanup and durable local anti-resurrection guards. |
+
+| Approved E5 requirement | Story coverage and responsibility |
+|---|---|
+| FR-1 active-day access, explicit logout and bounded authority | 5.1 defines fixed ordinary expiry versus concrete active-day scope; 5.3/5.4 distinguish recovery from new activation; 5.5 separates Access renewal; 5.8/5.9 transfer grants without extending them; 5.11–5.13 preserve locking, pending revocation and deadlines. All inherit E1 access checks. |
+| FR-17 whole loaded day without internet | 5.2 complete app assets, 5.3 retained E1–E4 day/late-trip operation after restart and 5.4 valid offline start; 5.5 gate failure does not erase allowed local operation; 5.6 retains source uncertainty. Partial data stays partial. E6 linked roles and E7 summary/local PDF remain mandatory later integrations, not claimed delivered here. |
+| FR-18 automatic recovery and partial failures | 5.6 automatically refreshes using E4's central source path and retains missing-update warnings until the applicable validated result is committed/applied; source success never substitutes for an operational receipt. 5.7–5.10 resolve conflicts and transfer/recover work explicitly; 5.11/5.12 handle compatible update failures. |
+| FR-20 active-day recovery | 5.3 restores actual/manual context without reimport/bus reentry; 5.2/5.11/5.12 preserve coherent code/storage; 5.8/5.9 require post-transfer verification and expose lost-observation/missing-work limits. Ended work cannot resume. E6 extends atomic role/plan/person/block/takeover recovery. |
+| E5 FR-24 protocol: outboxes, conflicts, receipts, grants and all-copy expiry | 5.1–5.12 retain original private-copy deadlines; 5.13 handles closure trimming without replay, payload-free receipt reconciliation, new immutable checkpoint IDs and atomic server retirement fences/cleanup. Durable local closure state blocks old tabs/snapshots/late responses from restoring deleted content. E7 still completes actual end-to-end lifecycle/cleanup integration. |
+| Shared FR-6–16/19 and UX-DR14–24 | 5.3 and 5.7–5.10 preserve active/manual trip, exact stop occurrence, bus-change provenance, notice versions/seen/registered/hidden/audio and movement/outage history. Restart, transfer, import or update creates neither fresh GPS/source evidence nor a first-start exception. 5.6 reuses actual E4 source lifecycle/audio semantics. |
+| UX-DR3/23/38/39/44 | Guarded private recovery; visible missing/stale/unknown and source-specific failures; distinct local/received/accepted states; readable text/symbols, permitted actions and focus behavior throughout. Tests target failure recovery as well as successful paths. |
+| UX-DR31–36 downstream seams | E5 supplies recovery, retained-contract and terminal-settlement infrastructure; E6 supplies actual role/accompaniment context and E7 the end confirmation, summary, affirmations, PDF and retained read/export experience. 5.13 fixtures test the protocol without satisfying those later features. |
+| NFR-1–4 and fullstack/database | Every slice carries its access/persistence/errors/privacy scope. Browser/IndexedDB behavior is distinguished from authenticated FastAPI/PostgreSQL transactions and actual device evidence. An empty queue, cached shell, status label or fictional demo cannot establish fullstack durability, source freshness or pilot readiness. |
+| Architecture AD-1–AD-14 | Existing modular adapter/runtime/database choices stay fixed. E5 chiefly realizes AD-2/5 and AD-10–14; it preserves AD-6/7 import/source boundaries and AD-8/9 notice/operational semantics rather than redesigning them. No architecture choice is reopened by this checkpoint. |
+
+All declared same-epic prerequisites point to earlier approved stories. E5 uses E1–E4 implemented feature contracts when implemented; no later E6/E7 screen is a prerequisite for its own bounded test cases. Final V1 acceptance still requires those later feature integrations, including genuine accompaniment-derived trimming and offline summary/PDF. E8 supplies evidence gates, not missing production functionality.
+
+No unallocated requirement within the approved E5 boundary was identified. The distinction is planning coverage versus unresolved delivery evidence: 5.4's verifiable timing basis for delayed offline-start acceptance is not established by writing or approving the story. Without it, preserve locally registered/unresolved server status and request a separate solution decision; never accept a client timestamp alone or remove the V1 requirement. Other material risks include Lenovo/Brave storage/worker/migration and signal timing, actual Access lifetime/renewal, private review-intake authorization without old-writer authority, concurrent transfer/receipt/revision races, and 5.13 all-copy trimming/anti-resurrection races. Dense integration slices may still require implementation-task decomposition while preserving their approved acceptance boundaries. No executed test or operational guarantee is inferred.
+
+The original 8–11 E5 forecast became thirteen through explicit bounded access, recovery, transfer and update/protocol slices, not expanded V1 scope. Capacity and delivery remain unresolved: more than forty hours is guaranteed, but no fixed total, completion date or automatic deferral is authorized.
+
+**E8-D:** controlled labelled browser/client/FastAPI/PostgreSQL scenarios can demonstrate mechanisms, fault handling and durable outcomes. **E8-P:** actual intended devices, sources, private gate/host, restart/update behavior, access/expiry and integrated E6/E7 retention/recovery must pass before real shifts. **E8-E:** the separate later three-workday field evaluation remains required. Neither simulated compatibility nor a planned qualification case counts as passed pilot evidence.
+
+**Checkpoint:** Approved by the owner on 2026-09-26 with thirteen stories and explicit continuation to E6. E5 is complete at the planning level only. The owner explicitly kept the 5.4 verifiable-timing risk open for a separate solution decision; planning approval does not establish the evidence or resolve that risk. Step 3 remains open; no implementation, readiness/final validation or pilot approval is implied.
+
+### E4 Story Coverage Summary — Approved 2026-09-26
+
+E4 has eight individually approved stories in dependency order: 4.1 source qualification; 4.2 central automatic ingestion and honest retrieval status; 4.3 canonical source identity/version/lifecycle; 4.4 qualified day/actual-trip/next-preview relevance; 4.5 overview/detail and exact-version seen/closure state; 4.6 driving presentation and actual display evidence; 4.7 Registrert versus manual uncertain-overview hiding; 4.8 discreet new-receipt audio and actual-device qualification. No ninth E4 story is presently needed for the approved boundary. This is planning coverage, not implemented or passed capability.
+
+| Approved E4 requirement | Story coverage and precise responsibility |
+|---|---|
+| FR-12 automatic retrieval and day/current/next relevance | 4.1 verifies actual source scope/limits; 4.2 implements central polling around two minutes subject to those limits; 4.4 maps combined-day/current/next-preview scope; 4.5/4.6 present it. Next-trip preview at registered final arrival does not start a return or wait for the ten-second ordinary transition. |
+| FR-13 provenance, freshness and unknowns | 4.1 establishes field meaning; 4.2/4.3 keep source update/fetch/receipt, coverage and lifecycle separate; 4.4 keeps match certainty separate; 4.5/4.6 display original source, validity and explicit missing/stale/uncertain states. No all-clear or precise deadhead-road coverage is invented. |
+| FR-14 identity, versions, seen and lifecycle | 4.3 canonical source identity/order/closure; 4.5 actual-authorized-content seen state, client first-closure registration and ten-minute overview retention; 4.7 exact-version registration/manual hiding and updated-version return. Unchanged polls/restarts do not manufacture newness. Source closure, validity expiry, uncertain disappearance and local removal stay distinct. |
+| FR-15 sound | 4.8 permits one discreet attempt for a genuinely new relevant receipt during the actual ongoing trip; updates, old notices newly relevant, replay and uncertain old attempts remain silent. Sound neither opens detail nor proves audibility/comprehension. |
+| FR-16 shared movement rules | 4.2 and 4.5–4.7 guard overview/detail/source/actions with E3's single permission policy; startup/outage exceptions remain labelled unknown speed. 4.6 automatic headings and 4.8 audio create no permission bypass or required moving interaction. |
+| FR-18 source-refresh contribution | 4.2 distinguishes network reachability, completed source retrieval and failure, automatically retries/restarts and preserves prior information; 4.3 distinguishes normalization status; 4.5/4.6 show local source failures. E5 retains the approved ownership of reconnect orchestration, cross-feature synchronization-pending warning and clearing only when the necessary source retrieval succeeds, independently of outbox acknowledgement. |
+| FR-19 failed initial notice retrieval | 4.2/4.5/4.6 explicitly show unavailable notice information and governed original-source access; no-data, failed/partial data and a qualified scoped empty result are distinct. |
+| Shared FR-17/20/22/24 | 4.4–4.8 preserve locally available notice/version/interaction evidence, guarded reopen, exact display/manual provenance and existing expiry. E5 completes whole-day boot/authority/conflicts; E7 consumes origin-time notice evidence and implements terminal summary/PDF/cleanup, without reconstructing displays from fetch records. |
+
+UX coverage: UX-DR9 uses 4.4/4.5 for distinct/shared incidents and trip/time associations; UX-DR19 uses 4.3/4.5/4.7 for version metadata/lifecycle; UX-DR20/21 use 4.4/4.6 for staged planned-stop versus immediate acute presentation; UX-DR22 uses 4.7. E4's UX-DR23 source-status portion uses 4.2–4.6, with E5 retaining the global connectivity/recovery boundary. The sound portion of UX-DR25 uses 4.8. UX-DR10–14 driving hierarchy/clock/Menu/movement and shared UX-DR1/38–41/44 accessibility/unknown-capability rules are integrated into the relevant 4.2/4.5–4.8 criteria. E6 still owns mentor-specific context and open-guidance interaction; E8 holds final mounted/PC demonstration evidence.
+
+The owner's review clarifications are preserved in the canonical stories: selecting a repeated stop occurrence requires distinguishing source evidence (4.4); seen requires actual display of exact content with valid access, never a rejected press or premature closure (4.5); immediate acute presentation starts at app receipt/relevance assessment and additional simultaneous important notices remain visibly indicated (4.6); registration/hiding never changes source facts or proves comprehension (4.7); new-receipt audio excludes updates/context replay and uncertain attempts are not replayed (4.8).
+
+NFR-1–4 and fullstack/database obligations are allocated throughout: actual backend adapter/central polling and PostgreSQL source transactions in 4.2/4.3; local committed operational context/relevance in 4.4; private React surfaces, atomic IndexedDB state/outbox and authenticated FastAPI/PostgreSQL evidence/receipts in 4.5–4.8. Each feature owns its access, failure, persistence and privacy behavior. Public source-cache lifecycle is separate from private day evidence/AD-12 expiry; neither timestamps nor callbacks renew authority or retention. AD-1–AD-14 remain binding, especially AD-7/8 source/interaction separation and AD-9 reuse of the operational engine. No alternate provider, native service or new architecture is adopted.
+
+Dependencies are ordered without later-E4 prerequisites: 4.1 is an independent qualification task; 4.2 requires actual evidence plus existing E1/E2/E3 foundations; 4.3–4.8 extend the preceding contracts. E2 supplies dated identities/revisions, E3 supplies actual trip/progression/permissions. E5/E6/E7 integration remains required but does not become a hidden dependency for demonstrating E4's bounded outcomes. All declared same-epic dependencies point backwards.
+
+No unallocated E4 functional requirement was identified in this checkpoint. Source qualification and integrated acceptance remain unresolved evidence, not silently deferred scope. Main delivery risks are actual Svipper coverage/IDs/order/closure/pagination and polling limits (4.1–4.3); applicability at repeated stops/overnight and delayed trips (4.4); timer/version/persistence races (4.5/4.7); mounted readability including three-plus warnings (4.6); actual audio activation/audibility and duplicate/crash behavior (4.8). Detailed source semantics may affect implementation effort, especially 4.2/4.3, and integrated UI/persistence affects 4.5. Capacity and delivery time remain unresolved, with more than 40 hours guaranteed but no fixed total or permission to drop V1 requirements. Material negative qualification findings require a separate solution decision.
+
+E8-D can demonstrate repeatable labelled scenarios plus real fullstack/PostgreSQL behavior; fixtures cannot establish live automatic retrieval, source coverage or audible tablet behavior. E8-P requires actual source/device and integrated offline/access/recovery passes before real-shift pilot use. E8-E remains the separate later three-workday field evaluation, including unnecessary-chime/distraction/trust observations. Required automatic retrieval cannot be replaced by manual/demo notices, and a visual fallback cannot certify unsupported sound. No actual tests or implementation have occurred here.
+
+**Checkpoint:** Approved by the owner on 2026-09-26 with eight stories and explicit authorization to continue to E5. E4 is complete at the planning level; actual source coverage, readability and sound still require the agreed E8 checkpoints. Workflow step 3 remains open; no implementation or final validation/readiness is implied.
 
 ### E3 Story Coverage Summary — Approved 2026-09-25
 
@@ -2966,3 +3182,4103 @@ So that I do not need to repeatedly wake the display to read the assistant.
 **Pilot qualification:** Repeatable lifecycle tests contribute to E8-D. E8-P requires actual device behavior and honest gap reporting; support remains conditional rather than assumed. E8-E remains subsequent real-shift evaluation.
 
 **Approval:** Approved by the owner on 2026-09-25 with support status grounded in actual Lenovo/Brave screen behavior, without promises of background execution or other unqualified support. Planning approval only; this approved copy is canonical. E3's coverage/continuation checkpoint remains separate; no implementation or readiness workflow has started.
+
+## Epic 4: Understand Relevant Notices and Their Sources
+
+The driver can inspect automatically retrieved day/trip-relevant notices with source, freshness, version lifecycle and the approved heading/detail/acknowledgement/sound behavior. Initial and partial source failures remain explicit. E4 covers FR-12–15/19, source-refresh FR-18 and shared FR-16; the first story qualifies source evidence rather than delivering the complete epic.
+### Story 4.1: Qualify Automatic Svipper Notice Coverage and Source Semantics
+
+As the pilot owner,
+I want documented evidence of the notices and metadata the candidate source actually supplies for the pilot lines,
+So that automatic retrieval can be built on verified source behavior without promising unsupported coverage or freshness.
+
+**Acceptance Criteria:**
+
+**Given** the adopted Entur SIRI SX/TRO candidate and pilot lines 20, 24, 28 and 42,
+**When** the qualification investigation examines current official documentation and actual responses,
+**Then** identify the exact tested endpoint/dataset, provider namespace, access conditions, request scope, timestamps and reproducible query method,
+**And** verify provider identification and line/stop references rather than assuming the TRO label or a successful response proves Svipper coverage,
+**And** distinguish documented provider guarantees, actual observations, inferences and unresolved assumptions; do not introduce a new source architecture independently.
+
+**Given** representative Svipper originals for planned works, closures, diversions or moved stops,
+**When** actual candidate responses are compared with the original source over a stated observation period,
+**Then** record a reference matrix with original link/identifier, affected line(s), direction/stops/area and validity where supplied, candidate match or absence, and the evidence supporting that comparison,
+**And** report results separately for the four pilot lines and tested notice categories, including overlapping 20/24 and multi-line incidents where examples are available,
+**And** an empty observation period or absence of a suitable example means untested coverage, not proof of complete coverage; explicitly identify unavailable cases,
+**And** label fixtures, historical examples and induced failures separately from observed live notices; a matching headline alone is not proof of incident identity.
+
+**Given** source notice identity, references, timestamps and validity fields,
+**When** their meaning and mapping are examined,
+**Then** document stable source-namespaced incident IDs, version/order evidence, original-source access, source update time, retrieval time and all supplied validity periods as separate facts,
+**And** document calendar dates/timezones and overnight validity rather than treating display time as trip service-date identity; cross-reference qualified E2 identity mapping when available,
+**And** missing source update time remains unknown, with the required Kildens oppdateringstid er ukjent behavior alongside last successful retrieval; fetching cannot manufacture update time,
+**And** document how source references support route/direction/stop/area applicability and where they do not; roadworks text alone cannot establish road-trajectory precision or a replacement stop sequence.
+
+**Given** documented and observed full/delta responses, pagination and source cursor/baseline behavior,
+**When** retrieval is repeated and interruption/restart scenarios are investigated,
+**Then** distinguish empty changes, complete confirmed absence of active notices, partial results and failed retrieval,
+**And** identify how to establish/resume the baseline and finish pagination before claiming completeness, with examples or explicitly untested cases,
+**And** document timeout, access failure, throttling and malformed/partial response handling needed by the adapter; none establishes all-clear conditions or erases retained notices,
+**And** verify limits relevant to central source/area polling around two minutes, including feasible retry/backoff behavior; do not multiply requests per driver or exceed provider limits to test a target.
+
+**Given** notice updates, endings, expired validity, disappearance and repeated or out-of-order records,
+**When** actual source evidence and labelled controlled examples are examined,
+**Then** report which fields establish identity, meaningful change, ordering and explicit closure, including sparse closure messages and multiple validity periods,
+**And** distinguish confirmed closure, expired validity and uncertain disappearance; absence from an incomplete response is never closure,
+**And** neither a new fetch timestamp nor a content fingerprint proves source version ordering; document the handling/decision needed when ordering cannot be established,
+**And** preserve the AD-8 responsibility split: backend source facts versus client day/version-specific seen, registered and hidden state. This report does not implement that lifecycle.
+
+**Given** time-correlated observations of the original and candidate source,
+**When** polling and freshness feasibility are assessed,
+**Then** distinguish requested polling interval, observed successful fetch interval, provider update cadence and any measurable original-to-candidate delay,
+**And** report tested duration, missed observations, uncertainty and limits rather than claiming a two-minute end-to-end freshness guarantee from a two-minute poll,
+**And** planned-notice coverage does not imply complete acute-event, congestion, cancellation or road-by-road deadhead coverage; unsupported acute delivery remains unknown even though the approved UX can present such a notice if supplied.
+
+**Given** the investigation finishes with positive, negative or incomplete evidence,
+**When** its report is reviewed,
+**Then** conclude what automatic retrieval and metadata mapping demonstrably support, what requires original-source checking or explicitly uncertain presentation, and what currently fails or remains untested,
+**And** list blocking gaps and the next concrete evidence/solution decision; negative findings cannot silently remove V1 requirements or replace automatic retrieval with manual/demo notices,
+**And** distinguish a completed investigation from passed source qualification; do not certify E8-P from the report alone or choose a replacement provider independently.
+
+**Given** queries, examples and evidence are retained for reproducibility,
+**When** artifacts are written,
+**Then** use public source notices and anonymized reference cases without private shifts, account credentials, tokens or raw GPS traces,
+**And** retain only the minimum dated source excerpts/metadata needed to substantiate findings, with origin and observation time; no permanent private pilot archive or unrelated application database is introduced,
+**And** any temporary probe is limited to this qualification task, with no service provisioning, production scheduler or operational app flow required.
+
+**Traceability:** Qualification prerequisites for FR-12/13/14/18/19 and FR-15 source identity/newness; NFR-2/3/4; UX-DR9/19/20/21/23/44; PRD B-1 and the approved Early Qualification Queue. AD-7 source coverage/relevance/central polling and AD-8 identity/version/closure are primary; AD-1 adapter boundaries, AD-5 identity separation and AD-12 evidence privacy remain applicable. All AD-1–AD-14 remain unchanged.
+
+**Dependencies:** Source documentation/access and suitable Svipper reference examples, not a future E4 implementation. Reuse 2.2 transit-identity findings if available; missing mappings are explicit evidence gaps, not guessed identifiers. A minimal diagnostic query/probe may be used when this story is executed, without the finished application. Lack of live updates/closures during the observation period leaves those cases unqualified; use labelled supporting cases and record the remaining live check.
+
+**Evidence boundary:** A dated source-qualification report, comparison matrix and minimal reproducible requests/examples. Report exact cases actually tested and separate documented semantics from observed behavior and fixtures. No source research or tests are executed during this story-drafting step.
+
+**Size boundary:** One focused source qualification investigation only. No production adapter, persistent polling service, notice database/lifecycle implementation, relevance engine, UI, audio, source replacement or new external service. Later implementation slices own those outcomes and their fullstack persistence/access/failure/privacy behavior.
+
+**Pilot qualification:** Labelled source fixtures can support later E8-D behavior demonstrations but do not prove live coverage. Actual source evidence contributes to E8-P together with the implemented adapter and integrated target-environment behavior. E8-E remains the subsequent three-workday field evaluation. Investigation completion is not pilot permission.
+
+**Approval:** Approved by the owner on 2026-09-26 with the stated scope and explicit distinction between documented coverage, missing metadata, retrieval failure and actual absence of notices. Negative findings require a separate solution decision. Planning approval only; this approved copy is canonical.
+
+### Story 4.2: Retrieve Notice Source Data Automatically and Show Honest Retrieval Status
+
+As the driver preparing a confirmed working day,
+I want the application to retrieve the qualified notice source automatically and show whether retrieval is complete, partial, failed or never successful,
+So that I can distinguish available source information from missing updates without manually supplying notices.
+
+**Acceptance Criteria:**
+
+**Given** actual 4.1 evidence supports an adopted source configuration and its retrieval semantics,
+**When** the backend starts or resumes eligible pilot-area retrieval,
+**Then** fetch through the disruption-data adapter in the existing FastAPI application and centrally schedule checks per source/pilot area, normally around two minutes during active work subject to qualified provider limits,
+**And** preparation initiates or joins the shared retrieval without requiring a manually entered notice; multiple views/clients cannot multiply provider polling or create overlapping fetches for the same source scope,
+**And** document when polling starts, stops and resumes based on current preparation/active-work demand, keeping that demand separate from operational authority or day completion,
+**And** secrets remain server-side; neither browser polling nor an unauthenticated/demo caller can directly trigger uncontrolled provider requests,
+**And** missing/negative 4.1 evidence is a blocking qualification/solution decision, not permission to claim live support from fixtures.
+
+**Given** a qualified response contains source notice observations,
+**When** the adapter validates and stores them,
+**Then** retain the minimum necessary source-namespaced identity, supplied version/order evidence, content, relevance references, validity periods, original-source access and nullable source update time without inventing missing values,
+**And** record source observation/fetch metadata separately from operational revisions and client receipt time; no poll changes the confirmed plan, active trip, manual corrections or movement history,
+**And** retain sparse closure/expiry evidence without treating this ingestion slice as the completed canonical lifecycle reducer or an operational active-notice list,
+**And** do not replace a stored observation solely because a later request returned it later; preserve source ordering evidence for the later lifecycle story, with repeated delivery handled without duplicate ingestion records and no fingerprint-as-order assumption.
+
+**Given** initial baseline loading, delta retrieval or a paginated response,
+**When** pages/changes are fetched,
+**Then** distinguish collecting/incomplete data from a completely validated retrieval unit according to 4.1's verified source protocol,
+**And** atomically commit the accepted observations and corresponding resumable cursor/baseline state in PostgreSQL; never advance the committed resume point past data that was not saved,
+**And** an empty delta means no changes in that response, not an empty set of active notices; a full empty source result establishes absence only for its verified source scope/time and coverage, never a general all-clear,
+**And** missing/failed pages or invalid records leave the affected result visibly incomplete/failed and cannot clear prior observations or establish closure,
+**And** complete-source retrieval does not mean a complete prepared working day or complete real-world disruption coverage.
+
+**Given** a crash, database failure, lost response or backend restart during retrieval,
+**When** retrieval resumes,
+**Then** continue from the last committed protocol state or perform the qualified baseline rebuild, retaining previously accepted observations and deduplicating safe replay,
+**And** persist source state in the actual PostgreSQL database using repeatable migrations limited to this slice's source observations and retrieval state,
+**And** reject stale concurrent completion/cursor writes; overlapping startup or retry paths cannot regress a newer committed source generation,
+**And** database commit failure cannot advance the successful-retrieval timestamp or be presented as saved source data,
+**And** bounded incomplete staging cannot become an indefinite raw response archive.
+
+**Given** timeout, throttling, denied source access, invalid content or a failed refresh after prior success,
+**When** automatic retrieval handles the failure,
+**Then** record a source-specific failure/partial status, retain the last successful retrieval time and useful prior source facts, and schedule bounded retry/backoff consistent with the qualified provider rules,
+**And** report the attempt as failed or delayed rather than indefinitely in progress; a redirect/login document or arbitrary HTTP success with invalid payload is not a successful source refresh,
+**And** recovery automatically retries/resumes; network reachability alone or completion of only some pages cannot clear the missing-update warning,
+**And** a later completely validated and committed retrieval may update last-success status without claiming that the provider itself is current or comprehensive.
+
+**Given** an authorized owner opens the existing confirmed-shift overview,
+**When** source status is requested through the private FastAPI API,
+**Then** React displays a concise status for never loaded, retrieval pending, partial/failed, or successful retrieval, with the last successful source retrieval time when known and visible coverage limitations,
+**And** before any usable successful retrieval, show Avviksinformasjon utilgjengelig – sjekk originalkilden with a verified source link where available; do not render an empty notice area as no disruptions,
+**And** missing source update time cannot be replaced with the retrieval time; successful fetching alone does not create a Senest oppdatert claim for source content,
+**And** this slice labels notice relevance/presentation as not yet available and does not publish raw unprocessed observations as operational warnings or imply that a successful fetch makes the whole day ready,
+**And** show ordinary Norwegian text/symbols rather than technical cursors, database terms or source exceptions.
+
+**Given** retained source status and a failed client-to-backend refresh, including an access-gate HTML response,
+**When** the source-status surface refreshes or reopens,
+**Then** keep last known status visibly retained/possibly stale and distinguish its source retrieval time from the client's last successful receipt; an unreachable backend cannot establish current provider health,
+**And** a response returning after logout, owner/day change or a newer status cannot expose private context or overwrite the newer view,
+**And** reuse IndexedDB for the minimal private day-associated status snapshot if retained; commit before claiming local saving and report storage failure without destroying prior permitted data,
+**And** source-status reads do not create operational outbox events or renew authentication, day grants or retention. Full offline shell/day recovery remains E5.
+
+**Given** the status surface, source link or an already-open overview is used in driver context,
+**When** shared movement permission changes or a user invokes a restricted action,
+**Then** reuse 3.2's permission and approved unknown-speed exceptions; movement closes restricted detail and source access cannot bypass the lock,
+**And** automatic status changes never open detail/external pages, steal focus, sound a notice chime or request acknowledgement while driving,
+**And** provide labelled status/failure/retry feedback without color alone or repeated announcements for unchanged polling results; preserve the existing focus restoration rules,
+**And** this overview status does not implement later active-driving notice placement, staged stop warnings or mentoring exceptions.
+
+**Given** source persistence, private status access and cleanup,
+**When** access and lifecycle checks run,
+**Then** reuse authenticated server-derived owner/day authority for private views/API responses and reject unauthenticated/demo access; arbitrary request source URLs/configurations cannot become a provider-fetch proxy,
+**And** public source cache has a documented bounded refresh/pruning lifecycle separate from AD-12 private-day retention; keep private day associations out of that public cache,
+**And** every introduced private snapshot/association follows existing logout locks and the applicable original expiry, without a new clock or permanent history,
+**And** retain only source facts needed for this slice/future lifecycle consumption, no private shift payloads or credentials in logs/fixtures; do not delete evidence already required by an unexpired private day through public-cache pruning.
+
+**Traceability:** Automatic retrieval portion of FR-12; source/fetch separation FR-13; source-refresh FR-18 and first-fetch failure FR-19; shared FR-16 for overview/source access. NFR-2/3/4 and relevant NFR-1 status readability; UX-DR14/23/38/39/44. AD-1/3 adapter/backend, AD-4 PostgreSQL, AD-5 source versus operational revisions, AD-7 central qualified polling, AD-8 preserved identity/order evidence, AD-10/12 access/retention and AD-13/14 restart/compatible response boundaries. Full notice lifecycle, relevance and FR-15 audio remain separate required slices.
+
+**Dependencies:** Executed 4.1 with sufficient actual source evidence for the chosen path; approval of its report story is not that evidence. Implemented E1 access/PostgreSQL foundation through 1.4, E2 confirmed overview through 2.7, and 3.2 shared movement/focus rules. No later E4 lifecycle, relevance, audio or E5 full offline story is needed to demonstrate source ingestion and honest overview status. No new provider/host/service is provisioned by this planning step.
+
+**Implementation evidence:** Qualified live-source retrieval separately from labelled fixtures; full/empty/delta/paged/partial/malformed responses, nullable metadata, sparse closure evidence and duplicate/out-of-order delivery; crash before/after cursor commit, failed PostgreSQL write, competing callbacks and restart; throttling/backoff, first failure then recovery, success followed by failure; source versus client outage, late response/logout and storage/expiry faults. Verify central request counts with multiple clients, actual PostgreSQL transactions, private API isolation and accessible movement-governed overview status. Tests are planned, not run.
+
+**Size boundary:** One adapter retrieval path, central scheduling/resume, minimal source observation/status persistence and the existing overview's source-status surface. No lifecycle reduction, material-change/seen/hidden state, per-trip relevance, operational notice list, audio, general synchronization engine or full offline capability. If the qualified source protocol makes this too large for one implementation session, split retrieval/status from cursor/restart work before implementation while preserving the atomic-cursor acceptance boundary; no V1 requirement is removed.
+
+**Pilot qualification:** Repeatable fullstack/PostgreSQL behavior with labelled source fixtures contributes to E8-D. Actual successful retrieval is required evidence in its own right; synthetic/manual data cannot meet that acceptance criterion. E8-P additionally needs qualified coverage and integrated lifecycle/relevance/device/offline/host behavior. E8-E remains later field evaluation. A successful poll or this story's completion is not pilot permission.
+
+**Approval:** Approved by the owner on 2026-09-26 with successful retrieval, complete coverage and actual freshness kept distinct. Partial responses or failures cannot erase previously accepted information. Planning approval only; this approved copy is canonical.
+
+### Story 4.3: Preserve Notice Identity and Source Lifecycle Without False Updates or Closure
+
+As the driver,
+I want the application to distinguish genuine source changes and confirmed endings from repeated, old or missing source records,
+So that notices do not falsely become new, disappear as resolved or return as active after closure.
+
+**Acceptance Criteria:**
+
+**Given** validated observations committed by 4.2 and identity/version rules supported by actual 4.1 evidence,
+**When** the backend normalizes them,
+**Then** represent each supported source incident with stable source-namespaced identity and distinguish its material versions from individual fetch observations,
+**And** repeated delivery and backend restart preserve that identity; separate incidents are not merged merely because title, line, stop or validity looks similar,
+**And** a shared incident with several affected lines remains one incident with its supported references, not one invented incident per line,
+**And** missing/ambiguous identity or apparent identifier reuse follows documented qualified handling and retains explicit uncertainty; never silently merge unrelated incidents by guessing.
+
+**Given** an existing incident and a later source record with qualified ordering evidence,
+**When** content, supplied applicability references, validity or lifecycle facts materially change,
+**Then** produce a stable identifiable material version with the supporting source evidence and retain the previous version as needed by unexpired consumer evidence,
+**And** specify/test material-change rules from the qualified provider semantics; a new provider revision with unchanged material facts does not itself force a new unread content version,
+**And** identical content re-fetches, fetch-time changes, serialization/formatting-only differences and local trip/context switches do not manufacture a new material version,
+**And** keep any internal database revision distinct from source ordering and client operational revisions. A newer local sequence number does not prove the provider record is newer.
+
+**Given** duplicate, older, out-of-order or conflicting records,
+**When** they are compared with the accepted incident state,
+**Then** use only qualified source ordering evidence to replace current facts; arrival time, client clock, content hash or numerically-looking opaque IDs cannot substitute for source ordering,
+**And** an older record cannot replace a newer version or resurrect a confirmed closed incident,
+**And** if ordering cannot be established, preserve the last supported facts with explicit unresolved source-state uncertainty, rather than claiming the incoming content is newest, unchanged or confirmed active,
+**And** retain only the evidence necessary to diagnose that uncertainty and raise an unresolved provider limitation through the established solution-decision path.
+
+**Given** an explicit source-confirmed closure, including a sparse closure record,
+**When** its incident identity and ordering are supported,
+**Then** persist confirmed closure and stable closure-transition identity without requiring a repeated full title/body,
+**And** retain prior descriptive facts with their provenance; a sparse message does not invent a new source update time or erase the previous description,
+**And** expose that the incident is no longer an active warning to consumers in the same committed result; duplicate closure observations keep the same transition identity,
+**And** a genuinely newer source-supported reopening/correction may change status only with that evidence; otherwise retain closure or explicit uncertainty, never reopen from stale replay,
+**And** source closure time where supplied, backend registration time and future client registration time remain separate.
+
+**Given** one or more source validity periods, missing bounds or a gap between periods,
+**When** validity is evaluated using explicit timezone/calendar dates,
+**Then** distinguish future, currently applicable, between-period and elapsed validity as supported by the source, without labelling elapsed validity alone a source-confirmed ending,
+**And** retain later known periods rather than declaring the whole incident ended at the first interval's end,
+**And** missing or ambiguous times stay unknown; local trip service date and a similarly displayed time do not replace a source validity instant,
+**And** test before/at/after qualified interval boundaries, overnight intervals and gaps; use the source's evidenced boundary semantics rather than assuming them.
+
+**Given** a previously retrieved incident is absent from a later response,
+**When** response completeness and full-versus-delta semantics are evaluated,
+**Then** omission from an empty delta, partial page set or failed fetch supplies no incident-ending evidence,
+**And** disappearance from a complete comparable source snapshot without explicit confirmed ending retains the incident with Status usikker – sjekk originalkilden and original-source access where supplied,
+**And** preserve earlier closure/validity evidence rather than downgrading a known closure to active/uncertain merely because it is absent,
+**And** source-wide fetch failure remains a retrieval-status fact; it does not fabricate individual updates, confirmed disappearances or closures,
+**And** the driver's later manual removal from an overview cannot mutate this source status or erase source/display history.
+
+**Given** a canonical incident/version is returned through the authenticated private read API,
+**When** an authorized caller requests it,
+**Then** return stable identity, material version, lifecycle/uncertainty, supported references, all applicable validity periods and original-source link/identifier with the required metadata,
+**And** keep nullable source update time, source retrieval time and backend registration time distinct; missing source update time remains suitable for Kildens oppdateringstid er ukjent, never filled with fetch time,
+**And** response completeness/coverage and source health remain separate from each incident's lifecycle; successful fetching does not certify fresh real-world conditions,
+**And** this is source-scoped data, not a claim that every returned incident applies to the current trip or should be shown as an operational warning; later relevance and UI stories consume the contract,
+**And** polling/reading cannot mark a version seen, registered or hidden or emit a user-facing new-notice sound.
+
+**Given** multiple processing attempts, a stale worker result or a PostgreSQL failure,
+**When** the normalized state is committed or retried,
+**Then** atomically store the accepted material version, incident lifecycle/ordering evidence and processed-observation position, with no partially applied closure/update,
+**And** repeated processing of the same accepted observation produces the same result without duplicate versions/transitions; stale work cannot regress the current committed state,
+**And** failure preserves the preceding committed state and a retryable processing status; 4.2 source retrieval success remains distinguishable from incomplete/failed normalization,
+**And** extend the existing source-status surface with a concise processing-unavailable/pending state if needed, without raw technical errors or an all-clear implication,
+**And** apply repeatable migrations only for this slice's canonical source-version/lifecycle data, using real PostgreSQL rather than a substituted database.
+
+**Given** restart, source-cache pruning or a later re-fetch of older content,
+**When** retained source data is recovered or pruned,
+**Then** keep the qualified minimum ordering/closure evidence needed to prevent stale resurrection, and document the bounded retention/rebaseline rule supported by 4.1's source protocol,
+**And** pruning cannot turn an unverified old replay into a confidently new active incident; if safe ordering cannot be recovered, expose uncertainty and require qualification/solution resolution,
+**And** source-cache cleanup cannot erase exact notice versions already required by an unexpired private day's evidence; day-associated copies retain their original AD-12 expiry,
+**And** keep public source cache and private day associations separate; introduce no permanent private archive or unlimited raw provider history.
+
+**Given** client interaction and overview lifecycle will be implemented in subsequent stories,
+**When** this source contract exposes a confirmed closure or new material version,
+**Then** provide stable identities so those stories can persist exact-version seen/registered/hidden state and the first client registration of closure,
+**And** do not start the client's ten-minute struck-through display timer at source publication, backend receipt or API read; repeated polls/restarts cannot manufacture a new closure transition,
+**And** do not encode the driver's acknowledgement, manual hiding or later trip relevance as source closure or source version changes,
+**And** those client behaviors remain required and unimplemented by this story; fixture/API tests can verify this contract without a future notice screen.
+
+**Given** normalization inputs, API requests and retained evidence,
+**When** authorization/privacy checks run,
+**Then** only the trusted backend ingestion path may establish source facts; client-submitted versions, status or owner fields cannot forge them,
+**And** reuse existing private authentication/access/expiry and demo isolation; source reads cannot renew a session/day grant or change operational state,
+**And** validate provider content as data, not executable markup, and reject unsafe original-source URL schemes while preserving an unavailable-link explanation and source identifier,
+**And** protect private day references and keep credentials/private shifts/raw GPS out of logs, fixtures and source cache; use sanitized evidence for implementation tests.
+
+**Traceability:** Source identity/change/closure portions of FR-14; metadata FR-13; prerequisites for relevance FR-12 and new-versus-updated FR-15; source failures FR-18/19. NFR-2/3/4; source-fact prerequisites for UX-DR9/19/20/21/22/23/44. AD-1/3 source-domain boundary, AD-4/5 PostgreSQL and distinct identities/revisions, AD-7 qualified source evidence, AD-8 version/lifecycle responsibility, AD-10/12 access/retention and AD-14 compatible recovery. The approved UX movement policy remains inherited for the existing status surface.
+
+**Dependencies:** Implemented 4.2 ingestion/status/API/persistence and its E1/E2/3.2 foundations, plus actual 4.1 identity/order/closure evidence. No future relevance, notice list, acknowledgement, audio, summary UI or general offline engine is needed to verify the bounded canonical source contract. If actual provider evidence cannot support reliable ordering/identity, retain the qualification gap and request the established explicit solution decision rather than guessing it away.
+
+**Implementation evidence:** Stable identity across repeated fetch/restart, distinct similar incidents and one multi-line incident; material versus nonmaterial updates; delayed older versions, ambiguous order and explicit supported reopening; sparse/duplicate closure; multiple/overnight validity intervals; empty delta versus missing complete snapshot versus partial/failure; processing transaction failure/retry/race; pruning/rebaseline stale replay; private API and input/URL validation. Verify real PostgreSQL persistence and source/status contract independently from later UI with labelled reference sequences derived from qualified source examples. Tests are specified, not executed here.
+
+**Size boundary:** Canonical source identity, material versions and source lifecycle with a private read contract and minimal existing-status feedback. No client seen/registered/hidden state, ten-minute display implementation, per-trip relevance, stop-marker rendering, notice detail, sound, general synchronization or report generation. This source normalization boundary is one testable prerequisite; it does not claim full FR-14 completion.
+
+**Pilot qualification:** Deterministic/reference-source sequences and PostgreSQL integration contribute to E8-D. E8-P still requires actual provider semantics, integrated client lifecycle/relevance and target-device/offline behavior; source or ordering uncertainty remains a real qualification gap. E8-E remains subsequent field evaluation.
+
+**Approval:** Approved by the owner on 2026-09-26 with the stated scope: source evidence is required for changes, closure or reopening, and uncertain order/status remains explicit when source responses cannot establish it. Planning approval only; this approved copy is canonical.
+
+### Story 4.4: Match Notices to the Confirmed Day and Actual Trip with Explicit Uncertainty
+
+As the driver,
+I want notice relevance to follow my confirmed work and actual trip using supported source references,
+So that a shared line number or scheduled change does not confidently attach a notice to the wrong trip or hide uncertainty.
+
+**Acceptance Criteria:**
+
+**Given** canonical source versions from 4.3 and a confirmed own working-day revision,
+**When** relevance is evaluated,
+**Then** use qualified source-namespaced route/trip/direction/stop/area references and validity evidence, with the E2 service-date and transit-identity mapping,
+**And** return supported associations, potentially applicable but uncertain associations, and evidence-backed exclusions distinctly, recording what evidence or missing fact supports each decision,
+**And** separate relationship certainty, source lifecycle, coverage and freshness; a precise match to stale source data is not fresh verification,
+**And** equal display line numbers, nearby stops or roadworks text alone cannot establish exact trip/direction/trajectory applicability,
+**And** distinguish an explicitly source-defined route-wide/all-direction scope from an absent direction field; do not require a stop restriction when the source explicitly applies to the whole route,
+**And** unsupported mappings remain unknown rather than guessed or silently excluded as irrelevant.
+
+**Given** several trips, split work parts and multiple notices across lines 20, 24, 28 and 42,
+**When** the preparation/whole-day relevance result is assembled,
+**Then** include distinct applicable incidents across the combined confirmed day with all supported activity/trip/time associations,
+**And** one source incident affecting 20 and 24 appears once with both associations; a separate moved-stop incident remains distinct even with a similar title,
+**And** associate only the time/direction/stop portions actually supported rather than implying an all-day line tag affects every trip,
+**And** an unconfirmed draft or removed future activity cannot supply confirmed relevance; performed/history evidence is not erased by recomputing remaining-plan associations,
+**And** notices with no defensible day connection do not all become driving warnings; retain the relevant coverage/mapping gap without presenting an unfiltered regional feed as applicable.
+
+**Given** explicit source validity intervals and dated trips spanning midnight,
+**When** planned-day or active-trip relevance is assessed,
+**Then** preserve the shift service date and order while comparing appropriate calendar instants with the source's qualified timezone/boundary semantics,
+**And** test Friday 25:30 as Saturday 01:30, including multiple trips displayed as Saturday 01:30 with different identities/service dates; display time alone cannot merge or select them,
+**And** preparation uses known planned intervals with their planned provenance, whereas an actually delayed active trip is reassessed against actual current context/time without being replaced by the next scheduled trip,
+**And** unknown actual passage time cannot establish that a narrow validity interval definitely included or excluded an unobserved passage,
+**And** handle multiple validity periods and gaps through 4.3's lifecycle/validity facts, not by declaring the incident closed or changing source versions.
+
+**Given** a selected actual trip, retained manual pin or uncertain progress,
+**When** the active relevance result is evaluated,
+**Then** use the committed E3 trip/context rather than selecting another trip from schedule, proximity or a notice's line number,
+**And** trip-level relevance can remain supported while current stop/approach is unknown; missing GPS does not itself remove a route-wide applicable notice,
+**And** stop references map to the correct supported occurrence(s) within the selected trip; repeated visits to the same stop cannot be reduced to the first occurrence by name/proximity alone,
+**And** choosing a particular occurrence requires a documented applicable time or other source evidence that distinguishes it; without that evidence retain an uncertain association and never select one occurrence by guessing,
+**And** where source evidence explicitly supports all visits, preserve that scope rather than arbitrarily narrowing it; otherwise repeated-stop ambiguity remains visible,
+**And** test two visits to the same physical stop with (a) source evidence selecting one occurrence and (b) no distinguishing evidence: only (a) yields that specific occurrence, while (b) stays uncertain through save/reopen and recomputation,
+**And** this contract supplies supported scope/occurrence evidence but does not itself fire the later approach/departure presentation triggers.
+
+**Given** E3 registers final-stop arrival, including a manual arrival with its provenance,
+**When** next-trip notice eligibility is evaluated,
+**Then** make the confirmed next-trip relevance result available as a separately labelled preview scope immediately, without waiting for the ordinary ten-second display transition,
+**And** do not change active trip, release its pin, complete the workday or start the return trip merely to make notices available,
+**And** same-route return waiting still requires 3.9's independent start evidence or separate qualified-loss Next action; schedule, sustained position and timer expiry cannot activate it,
+**And** preserve any intervening non-passenger activity and distinguish current-activity notices from later passenger-trip preview; do not pretend the passenger trip is underway,
+**And** missing/ambiguous next-trip context remains unknown, and a corrected final-arrival/context invalidates an obsolete preview rather than showing stale results,
+**And** exposing an already retrieved notice in this preview creates neither a new source version nor new-notice eligibility for sound.
+
+**Given** deadhead, meal/layover, bus change, pilot-car transfer or depot activity,
+**When** current-activity relevance is assessed,
+**Then** include only associations supported by the known activity location/time and qualified source scope, with uncertainty where those facts are insufficient,
+**And** a warning for the next passenger starting stop may be associated with that stop/next trip without asserting that it lies on the actual deadhead road path,
+**And** no source notice or empty result proves a clear road, completed physical action or precise road-by-road coverage,
+**And** do not calculate a deadhead route, infer an unprovided trajectory or add other road-event providers; those remain outside adopted V1 integration.
+
+**Given** a source update, confirmed scoped plan revision, manual trip correction or context change,
+**When** relevance is recomputed or a pending calculation returns,
+**Then** bind the result to the owner/day, confirmed plan revision, source material version and active/preview context used to compute it,
+**And** reject a stale result that would replace associations for newer committed inputs; plan/source changes cannot overwrite driver corrections, actual trip or prior evidence,
+**And** local context or plan changes can change relevance but cannot manufacture a source version, reset future seen/registered/hidden state for unchanged versions or reclassify an old receipt as a new notice,
+**And** a confirmed source closure removes active-warning eligibility immediately when accepted; retained overview/history eligibility remains distinct for later client lifecycle handling,
+**And** source disappearance/ordering uncertainty retains its explicit status and applicable uncertainty rather than being silently treated as no warning.
+
+**Given** source data was downloaded and relevance can be computed locally,
+**When** connectivity is lost or a compatible view reopens,
+**Then** reuse the shared React-independent TypeScript domain boundaries and committed E2/E3 context to evaluate available data without a backend round trip,
+**And** persist the minimum source snapshot and revision/context references in the existing private IndexedDB day store before claiming local availability; derived associations may be recomputed from those exact inputs,
+**And** retain explicit missing data, source/client receipt freshness and uncertain restored position; reconnect or reopen does not make facts fresh or restart movement exceptions,
+**And** failed reads/writes produce an unavailable/stale-result state, not an empty successful match set or a falsely saved result,
+**And** authenticated FastAPI/PostgreSQL source retrieval remains 4.2/4.3's responsibility; derived relevance alone does not create operational outbox events, a duplicate backend operational engine or an unrelated database table,
+**And** full offline boot, authority and cross-client reconciliation remain E5; this bounded local evaluation does not claim that entire capability.
+
+**Given** relevance outputs are consumed by later overview/driving surfaces or test fixtures,
+**When** the contract is inspected,
+**Then** expose stable incident/version identity, association scope, user-understandable applicability/uncertainty reasons and original-source metadata sufficient for honest presentation,
+**And** keep active warning eligibility, upcoming preview and retained overview/history distinct; no consumer should need to infer source closure or trip activation from an empty list,
+**And** make no client seen/acknowledgement, popup, sound, focus or operational state change merely by computing/recomputing relevance,
+**And** verify results with labelled reference cases before the later UI stories, without routing simulated source or movement data into the operational app.
+
+**Given** private plan-to-notice associations or stored input snapshots,
+**When** access, cleanup or recovery runs,
+**Then** use existing owner/day access and pending-logout locks before reading or exposing private associations; a public source cache does not receive private plans or day links,
+**And** apply the existing AD-12 deadline to private copies without extending it on recomputation, download or reopen; source-cache pruning cannot silently remove facts already retained for an unexpired day,
+**And** retain no permanent notice-to-driver profile, raw GPS archive or private identifiers in public test artifacts,
+**And** ordinary source polling/read success cannot renew day authority or bypass E5's remaining continuation controls.
+
+**Traceability:** FR-12 day/current/next-trip relevance; FR-13 honest source metadata/coverage; FR-14/15 no false newness on context changes; bounded FR-17/20 local-data use. NFR-2/3/4; UX-DR9/19/20/21/23/44 and EXPERIENCE split-day/last-stop notice rules. AD-1/2/3 local domain and available data, AD-5 revision/identity separation, AD-7 qualified references, AD-8 source versus local state, AD-9 actual-trip authority, AD-10/12 access/retention and AD-14 compatible recovery. Movement-restricted presentation remains the later UI's required reuse of 3.2.
+
+**Dependencies:** Implemented 4.3 canonical source contract and actual 4.1 evidence; E2 confirmed dated plans and scoped revisions through 2.12; E3 committed selection/terminal/non-passenger context through 3.9/3.10. The bounded own-day relevance contract is independently testable before future E4 lists/detail/driving/audio. E6 later extends explicit linked-person/block context without treating a linked plan as an own trip or changing source facts.
+
+**Implementation evidence:** Reference matrix with positive/negative/uncertain source matches across pilot lines, explicit broad scope versus missing metadata, overlapping directions, one multi-line incident versus separate incidents; split work and midnight collisions; multiple validity periods, delayed trip and unknown passage; repeated stop occurrences; final-arrival preview before ten seconds and return wait; non-passenger/limited deadhead scope; source/plan/context races, closure and uncertain disappearance; local available/missing/stale data, storage failure, logout and expiry. Expected associations must have source/reference ground truth; report unsupported cases. Tests are planned, not run.
+
+**Size boundary:** Own-day/active/preview relevance rules and minimal persisted inputs, exposed as a tested domain contract. No full notice list, detail/seen/registered/hidden state, ten-minute display timer, staged/immediate driving rendering, audio, mentor UI, new source integration, routing or general offline engine. The following stories deliver the user-facing notice presentation; no future story is a prerequisite to test this contract.
+
+**Pilot qualification:** Labelled deterministic relevance fixtures contribute to E8-D. E8-P requires actual source mappings and integrated target-device notice presentation/recovery; correct synthetic matches do not prove live coverage or freshness. E8-E remains later field evaluation. No V1 requirement or qualification gate is waived.
+
+**Approval:** Approved by the owner on 2026-09-26 with an explicit repeated-stop constraint: a particular occurrence requires documented time or other distinguishing source evidence. Without it the association remains uncertain; no occurrence is selected by guessing. Planning approval only; this approved copy is canonical.
+
+### Story 4.5: Review Whole-Day Notices with Source Metadata and Persistent Version State
+
+As the driver,
+I want to review the distinct notices for my confirmed working day, open their details when permitted and retain which versions I have opened,
+So that source facts, changes and confirmed endings remain understandable through repeated retrieval and reopening.
+
+**Acceptance Criteria:**
+
+**Given** an authorized confirmed combined working day and 4.4's relevance results,
+**When** its shift overview/Skiftdetaljer is opened under the shared movement policy,
+**Then** show a readable heading for each distinct applicable or explicitly uncertain day-related incident, including several separate notices on one line,
+**And** show one shared incident once with all supported line/trip/time associations across work parts; preserve separate incidents even when titles are similar,
+**And** retain uncertainty about date, direction, repeated stop occurrence or coverage beside the relevant association; do not promote it to a verified match through presentation,
+**And** use the adopted overview composition, persistent clock, Day/Night tokens and text/symbol status rather than hiding source/relevance limits behind color alone,
+**And** no unconfirmed plan or raw unfiltered regional source list is presented as confirmed-day notices.
+
+**Given** a new, unchanged or materially updated version of an incident,
+**When** the list renders from committed day-specific version state,
+**Then** new and changed versions are bold until that exact version has had its content actually displayed with valid access and its seen state successfully recorded; changed versions also use the adopted semantic color treatment and an explicit changed cue,
+**And** after the actual authorized content display is successfully recorded for that exact version, remove its unseen bold emphasis without declaring understanding, source confirmation or acknowledgement,
+**And** identical polls, changed retrieval time, plan/context switches and restarting the app do not turn an unchanged previously seen version into unseen/new,
+**And** a genuinely changed version is separately unseen even when an earlier version was seen; preparing the same day and later starting it do not reset its notice state,
+**And** repeated presentation is not a new source receipt or a sound trigger.
+
+**Given** a heading whose detail is opened,
+**When** the exact displayed version and its applicability are presented,
+**Then** show the source body safely as data, original source/link or identifier, validity periods, nullable source update time and last successful retrieval with distinct labels,
+**And** show Kildens oppdateringstid er ukjent when absent, and leave other missing facts visibly unknown; never replace source time with fetch time,
+**And** distinguish source lifecycle, match uncertainty, stale retained content and retrieval/processing failure; neither opening nor refreshing detail certifies current real-world conditions,
+**And** source-link actions use validated URLs and existing movement permission; a missing or unreachable original stays unavailable rather than silently linking to an unrelated notice,
+**And** opening detail does not register, hide or dismiss a warning and does not modify the source incident.
+
+**Given** a detail action for version A while version B arrives, a plan/context changes or movement begins,
+**When** the action renders or its seen-state write commits,
+**Then** recheck permission and owner/day/version context so only the exact version whose content was actually displayed with valid access can be marked seen,
+**And** do not silently replace the opened content and mark an unseen newer version seen; indicate that an update is available while preserving which version was reviewed,
+**And** a newer version remains unseen until separately opened, and a delayed action cannot mark every version of the incident seen,
+**And** motion closes restricted content immediately, cancels uncommitted actions and returns focus to an appropriate visible control without undoing already committed seen evidence,
+**And** source refresh cannot reopen collapsed detail, steal focus or require a response while moving.
+
+**Given** a request to open a notice version is rejected, loses access, fails to load/render its content or is closed before the content is displayed,
+**When** the action or a delayed display callback is processed,
+**Then** do not mark that version seen; a click, loading shell or heading alone is not actual content display,
+**And** test a movement-rejected click, access rejection, closure before content appears and version A replaced by B before display: record seen only for an exact version actually displayed with valid access,
+**And** a late callback from hidden/closed or unauthorized content cannot manufacture seen evidence; preserve the existing unsaved-status behavior if a valid display occurs but its persistence fails.
+
+**Given** the client first accepts a source-confirmed closure for an incident retained in the day,
+**When** that closure transition is durably registered,
+**Then** atomically preserve its stable source transition identity and first client registration time, immediately remove active-warning eligibility, and show the overview entry struck through with an explicit ended label,
+**And** keep it in the overview for ten minutes from that first persisted client registration, then remove it from the overview while retaining required day evidence for the later summary,
+**And** source closure time, backend receipt, opening the overview or repeat polling do not replace that first registration time,
+**And** duplicate closure delivery and reload do not restart the interval; test just before/at/after ten minutes, suspended/reopened views and repeated closure messages,
+**And** use trustworthy elapsed-time handling across restart/clock changes; if timing cannot be established, show the uncertainty rather than inventing an expiry or starting another ten-minute period,
+**And** valid newer source reopening uses 4.3's supported new state; an old timer cannot remove a reopened or otherwise superseding version.
+
+**Given** expired validity, uncertain disappearance or failed/partial source retrieval without confirmed closure,
+**When** the overview updates,
+**Then** do not apply confirmed-ended strike-through/removal merely because validity elapsed or the incident was absent from a fetch,
+**And** retain unexplained disappearance with Status usikker – sjekk originalkilden and permitted source access; missing data/failure cannot erase earlier information,
+**And** before any usable source data show Avviksinformasjon utilgjengelig – sjekk originalkilden rather than an empty all-clear list,
+**And** a complete valid query with no matching notices may report that scoped result with coverage/time limits, never a clear-road or complete real-world-coverage claim,
+**And** a failed source/processing area cannot erase unaffected notices or remain indefinitely marked as loading; future manual removal remains a separate explicit action, not implemented here.
+
+**Given** receipt, overview display, detail opening or closure registration changes private day evidence,
+**When** the client saves that change,
+**Then** persist the necessary exact notice version/snapshot, first receipt, actual display/opening evidence and closure registration with stable identities, separately from source facts,
+**And** distinguish received data from actually displayed/opened data; downloading a notice cannot fabricate that the driver saw it or that it was shown during a trip,
+**And** commit the local state and required outbox event atomically before claiming the associated status saved; no per-poll/per-render event spam or duplicate first-receipt/closure events,
+**And** local failure shows unsaved status and retry without falsely clearing durable unseen state or claiming retained evidence is safe,
+**And** use inherited authenticated FastAPI/PostgreSQL owner/day/revision checks and immutable retries; only a valid receipt matching the sent batch marks server confirmation,
+**And** server/network failure does not discard a successful local commit, and source polling cannot overwrite local exact-version interaction state.
+
+**Given** the list/detail is reopened from locally retained data during a network outage or after compatible restart,
+**When** existing authority permits access,
+**Then** restore the same day-specific seen state, retained notice versions and original closure deadline without making old data fresh,
+**And** distinguish known retained content, unavailable detail and stale source status; never require a new fetch merely to read already retained permitted content,
+**And** if a required private state read fails, report the failure rather than resetting the notice to new/unseen or inventing a saved closure time,
+**And** logout, known revocation and existing expiry/storage locks prevent private rendering; full offline application boot and active-day authority qualification remain E5,
+**And** reusing the cache cannot reset the movement startup/outage history or silently start a completed day.
+
+**Given** all list/detail/source actions and dynamic status changes,
+**When** tested with touch, keyboard, enlarged text and assistive technology,
+**Then** keep long titles, multiple associations and source/status labels readable in the adopted tablet layout without shrinking essential text to fit,
+**And** follow 3.2's reliable-standstill and separately labelled startup/outage exceptions; source access has no bypass and this story does not implement mentor exceptions,
+**And** focus enters detail, returns on closure/cancellation and never remains in hidden content after motion; labels expose expanded, seen/unseen, changed, ended and uncertain states without color alone,
+**And** announce meaningful changes without every poll/countdown repetition, automatic scrolling, modal intrusion, focus theft or audio,
+**And** keep the whole-day overview distinct from the later headings-only active-driving presentation.
+
+**Given** retained source snapshots, interaction evidence or a source-cache prune,
+**When** cleanup/access checks occur,
+**Then** protect all private day associations and evidence with the existing ownership and AD-12 expiry, including local and PostgreSQL copies and pending payloads,
+**And** neither reading, new retrieval nor ten-minute overview removal extends the private-day retention clock; overview removal is not summary-evidence deletion,
+**And** preserve exact versions already needed by the unexpired day even when public source cache changes, without a permanent in-app notice/driver archive,
+**And** retain the minimum evidence needed for E7 to describe what was displayed/opened and its source/provenance; no proof of reading comprehension or raw movement trace is inferred,
+**And** no private payload, credential or operational identifier leaks to the fictional demo, public assets or published test evidence.
+
+**Traceability:** FR-12 preparation/whole-day overview; FR-13 source metadata; FR-14 heading/detail, exact-version seen and confirmed-ended overview lifecycle; FR-16 movement restrictions; bounded FR-17/18/19/20 retained/failure behavior and FR-22 origin-time evidence. NFR-1–4; UX-DR1/9/12/14/19/23/38/39/40/41/44; adopted DESIGN notice/overview treatments. AD-2/4/5 local atomic state, PostgreSQL and matching receipts; AD-7/8 source versus client state; AD-9 shared permission/context; AD-10/12 access/retention; AD-14 compatible recovery. Registrert/manual hiding and audio remain separate requirements.
+
+**Dependencies:** Implemented 4.4 with its qualified 4.1–4.3 data/identity/lifecycle foundations and E2 overview, plus 3.2 movement/focus policy and inherited E1 persistence/access. No future driving-warning, acknowledgement/audio or E7 report screen is needed to demonstrate this overview and persisted evidence; E7 consumes it later.
+
+**Implementation evidence:** Multi-line shared notice plus distinct same-line incidents, uncertainty including repeated stop occurrence, new/seen/updated versions, immutable A-open/B-arrives race, safe source display/link failures, standstill/moving/startup/outage interactions and focus; closure ten-minute boundaries/reload/clock uncertainty/reopening versus stale timer; validity expiry versus uncertain disappearance versus confirmed closure; first-fetch failure and partial recovery; atomic local/outbox failure, lost/mismatched receipt, duplicate deliveries, offline view reopen, private access and expiry. Use real PostgreSQL integration and labelled source cases; actual mounted readability remains qualification. Tests are planned, not run.
+
+**Size boundary:** The existing combined-day overview's notice list/detail, exact-version seen state, confirmed-ended ten-minute retention and their required evidence/persistence. No prominent active-driving warning layout/approach triggers, Registrert/swipe acknowledgement, manual hiding of uncertain notices, sound, mentor interface, full offline shell or summary/PDF UI. Those remain subsequent required slices rather than controls falsely shown as implemented.
+
+**Pilot qualification:** Repeatable overview/persistence/failure behavior supports E8-D. E8-P additionally requires actual source/device readability, source access under movement rules and integration with full offline/authority and driving notice behavior. E8-E remains subsequent real-shift evaluation. Planning approval does not establish tested usability or source coverage.
+
+**Approval:** Approved by the owner on 2026-09-26 with seen status requiring actual display of that exact version content with valid access. Rejected presses and views closed before content appears do not mark it seen. Planning approval only; this approved copy is canonical.
+
+### Story 4.6: Show Relevant Driving Warnings at the Correct Actual Progression State
+
+As the driver,
+I want relevant warning headings to appear alongside the actual trip and stop context at the agreed moment,
+So that I can notice the information with a brief glance without opening content or operating the website while moving.
+
+**Acceptance Criteria:**
+
+**Given** an authorized actual active trip/activity with qualified source and relevance state,
+**When** the driving notice area renders,
+**Then** show only supported current-context notices and explicitly labelled uncertain relevance where appropriate, preserving source/freshness limitations,
+**And** retain route/destination, the correct current/next stop roles, clock, always-visible Menu/reason/countdown and always-available Day/Night/Auto control,
+**And** use the accepted notice/stop side-by-side composition and hierarchy; notice prominence may temporarily dominate without erasing stop context or altering trip/progression,
+**And** exclude personal imported details and never display an unfiltered whole-day/regional notice list as current-trip warnings,
+**And** respect 4.5's version-specific bold/changed cues; showing a heading or warning triangle alone does not mark the detail version seen.
+
+**Given** a planned stop-specific notice with a supported affected occurrence in the selected trip,
+**When** actual committed progression changes,
+**Then** show the outlined yellow warning triangle immediately after the affected stop name when it is two stops ahead,
+**And** while at the preceding stop, retain the triangle but do not automatically show the prominent message merely because the affected stop is next,
+**And** after supported departure/passage from the preceding stop, while approaching the affected next stop, automatically show the concise warning heading,
+**And** retain that message through arrival/dwell at the affected stop, with its current-stop context visible,
+**And** after supported onward departure/passage of that occurrence, clear its prominent message and restore ordinary stop focus without ending the source incident or deleting overview/history evidence,
+**And** test all five states including passage without stopping; scheduled times, animations and a proximity value alone cannot trigger them.
+
+**Given** unknown position, manual stop correction or recovery after an observation gap,
+**When** presentation evaluates approach, dwell or onward passage,
+**Then** use only supported E3 committed state and its observed/manual/uncertain provenance; do not create a separate inferred progression engine,
+**And** unknown position alone cannot establish an approach or clearing trigger; retained context remains visibly uncertain rather than pretending a new measurement,
+**And** a permitted manual correction can update the displayed context under the approved E3 semantics without becoming GPS evidence,
+**And** a qualified later-stop recovery may update current presentation but must preserve the observation gap; never backfill warning displays at unobserved earlier stops or claim the 100-m target was met there,
+**And** at sequence boundaries or missing stop lists, retain relevant trip-level headings and honest missing/uncertain stop context without inventing a preceding stop or staged trigger.
+
+**Given** the selected trip visits the same physical stop more than once,
+**When** a source notice could refer to several occurrences,
+**Then** use 4.4's documented-time/other-source-evidence rule before assigning an occurrence-specific warning trigger,
+**And** without that evidence keep the association explicitly uncertain, with no guessed occurrence, precise approach claim or automatic clearing at an arbitrarily chosen visit,
+**And** if source evidence explicitly supports all visits, apply the relevant occurrence context to each supported visit rather than treating the first passage as source closure,
+**And** test first-versus-later visit, ambiguous association and explicit all-visits scope separately; repeated exposure never creates a new source version or new receipt.
+
+**Given** a newly received acute notice is supported as relevant to the ongoing trip,
+**When** the app has received the notice and assessed it as relevant to the ongoing trip,
+**Then** show its concise heading immediately in the right-hand information area, retaining stop context to the left and route/destination above,
+**And** immediate presentation is measured from that app receipt/relevance decision, not source publication; separately record source publication/update time where supplied, app receipt/relevance decision and actual display for the test,
+**And** test delayed provider delivery and delayed polling: no source-to-screen immediacy is claimed, while the accepted relevant notice is shown without waiting for the planned-stop trigger,
+**And** do not wait for an affected stop to become next or require the planned-stop approach trigger,
+**And** use no covering modal, animation, focus theft, required acknowledgement or automatic detail/source opening,
+**And** preserve explicitly uncertain relevance where source evidence is incomplete; a line-number match alone cannot become certain trip applicability,
+**And** acute classification must be supported by qualified source semantics, not guessed from dramatic wording; this behavior does not promise a working or complete acute-event feed,
+**And** a route-wide acute warning remains governed by its relevance/source lifecycle, not removed merely because one stop was passed; a supported stop-specific message follows its onward-passage clearing rule.
+
+**Given** two important applicable notices are simultaneously eligible for prominent display,
+**When** the driving composition updates,
+**Then** show both short headings together without rotation/carousel, modal overlap or hiding route/stop/control context,
+**And** keep their identities, sources, uncertainty and version state distinct; a shared incident is not duplicated per affected line,
+**And** preserve readable titles and essential text rather than shrinking them merely to fit or requiring the moving driver to scroll/respond,
+**And** when more than two important notices are simultaneously applicable, visibly indicate that additional notices exist, with an accurate count or equally clear text; they cannot silently disappear from the driving view,
+**And** keep the additional notices available through the existing movement-governed overview/detail path without requiring interaction while moving, automatic rotation or hiding the overflow indication,
+**And** test three or more notices, new arrivals, closure and context changes so the additional-notice indication stays accurate; assess long names/layout capacity without inventing severity from unavailable source data.
+
+**Given** source closure/update, onward stop passage, a context correction or final-stop next-trip eligibility,
+**When** visible warnings are reconciled,
+**Then** use the current source version, plan revision and committed actual/preview context; stale rendering callbacks cannot restore an obsolete warning,
+**And** confirmed source closure removes its active heading and stop markers immediately on accepted state, while 4.5 separately manages its ten-minute struck-through overview entry,
+**And** clearing one stop-specific message does not resolve the incident, clear unrelated warnings or erase prior displays,
+**And** next-trip notices may appear from 4.4's separately labelled preview at registered final arrival before ten seconds without activating that trip or starting a same-route return,
+**And** retain intervening non-passenger activity context and limited deadhead coverage; source/context changes do not silently switch actual trip or reset its pin,
+**And** updates, later relevance and repeated displays do not by themselves become new-notice events; this story emits no chime.
+
+**Given** the driver attempts notice detail or original-source access from the driving view,
+**When** the action is invoked or reliable movement returns,
+**Then** reuse 4.5's exact-version detail/seen handling and 3.2's shared standstill/startup/outage permission at invocation and display, with immediate restricted-detail collapse on motion,
+**And** only actual authorized display of that version's content can record seen; a rejected press, heading-only presentation or view closed before content appears cannot do so,
+**And** return focus to a visible appropriate control after closure; source access cannot bypass movement restrictions,
+**And** automatic warning presentation never opens detail, marks understanding or offers a supposedly working Registrert/swipe action before its later story.
+
+**Given** a warning or marker is actually rendered, updated or removed from the driving surface,
+**When** display evidence is recorded,
+**Then** extend 4.5's day evidence with the exact version, actual/preview context, display kind and supported observed/manual/uncertain progression needed by the later summary,
+**And** distinguish receipt, eligibility, marker, heading and authorized detail display; an eligible item that was never rendered is not recorded as shown,
+**And** do not infer the driver read or acted on a displayed warning; no raw GPS archive or per-render/per-poll event stream is introduced,
+**And** persist the minimal state/evidence and required outbox events atomically, using inherited FastAPI/PostgreSQL ownership/revision checks and matching receipts,
+**And** local or server failure is reported honestly: unsaved evidence is not labelled saved and a server error cannot discard an accepted local event or reset version state.
+
+**Given** retained notices during source/network loss, compatible reopen or storage/access failure,
+**When** driving presentation recovers,
+**Then** retain useful permitted information with source-specific stale/unavailable status and uncertain restored position, never treating reconnect/reopen as fresh evidence,
+**And** preserve existing seen state and context, with no new startup exception, receipt, source version or forced detail opening,
+**And** absent initial data retains the unavailable-source warning rather than implying no disruptions; a failed source does not erase unaffected warnings,
+**And** honor private access/logout/expiry before rendering; storage failure cannot fabricate current progress or confirmed display history,
+**And** whole-day offline boot/authority/reconciliation remain E5 integration, and full source/device recovery remains E8-P qualification.
+
+**Given** the active-driving layouts in day/night, long Norwegian names, two warnings and retained uncertainty,
+**When** accessibility and target-device checks run,
+**Then** expose accessible stop roles and associated warning descriptions with meaningful state announcements rather than every sensor tick or duplicate poll,
+**And** keep essential labels readable without color alone, preserve keyboard focus and avoid automatic scrolling/attention-stealing transitions,
+**And** verify actual mounted Lenovo/Brave glance readability and layout fit separately from screenshot/component checks, with no driver interaction required during moving observations,
+**And** use approved DESIGN tokens and keep manual theme/wake behavior independent; a notice cannot reset those controls or the movement/outage timer,
+**And** all private snapshots/evidence retain the existing AD-12 deadline, source-cache separation and no-private-data-in-demo/logs rules; display/clear/reopen never extends retention.
+
+**Traceability:** FR-12 current/next relevance presentation; FR-13 source/uncertainty; FR-14 heading/version and closure integration; FR-16 safe interaction; bounded FR-17–20 retained/failure state and FR-22 display evidence. NFR-1–4; UX-DR10/11/12/13/14/19/20/21/23/38/39/40/41/44 and adopted DESIGN driving composition. AD-2/5 local evidence/receipts, AD-7/8 source facts/lifecycle, AD-9 one actual-progression engine, AD-10/12 access/expiry and AD-14 recovery. FR-15 sound and UX-DR22 registration/dismissal remain later stories.
+
+**Dependencies:** Implemented 4.5 and its source/relevance/version foundations; E3 display through 3.5, manual/qualified progression and gap recovery through 3.8, terminal/preview context through 3.9 (non-passenger context inherited through 4.4). Actual source applicability/acute classification and sensor quality must be qualified rather than assumed. No future acknowledgement, sound or summary screen is needed to demonstrate the warning composition and evidence.
+
+**Implementation evidence:** Planned five-stage sequence including non-stop passage, manual versus uncertain progress, gap recovery without backfilled display, repeated stop occurrence with/without source evidence; immediate acute versus staged planned notices and unsupported acute classification; two simultaneous warnings/long names; route-wide versus stop-specific clearing, closure versus overview timer, update/context races and final-arrival preview without return start; rejected/opened detail version tests, actual-render versus merely eligible evidence, local commit/receipt faults, offline reopen/access/expiry, accessible focus/announcements and real mounted glance checks. Tests are specified, not run.
+
+**Size boundary:** Driving composition and presentation triggers using existing source/relevance/progression contracts, with its display evidence and permitted detail reuse. No new source, new sensor rules, operational-engine duplication, acknowledgement/manual hiding, audio, mentoring UI, report UI or general recovery engine. Actual target-device limits are qualification findings, not silently relaxed V1 requirements.
+
+**Pilot qualification:** Labelled progression/source fixtures and fullstack evidence contribute to E8-D. E8-P needs integrated actual source, mounted readability, sensor/progression and offline/authority behavior; acute-feed availability is not established by a working fixture. E8-E remains subsequent real-shift evaluation.
+
+**Approval:** Approved by the owner on 2026-09-26 with immediate acute presentation measured from app receipt and relevance assessment, not source publication. More than two simultaneous important notices must have a visible additional-notices indication and cannot disappear silently. Planning approval only; this approved copy is canonical.
+
+### Story 4.7: Register a Notice or Hide an Uncertain Overview Entry Without Changing Source Facts
+
+As the driver,
+I want to reduce a selected notice's prominence or explicitly remove an uncertain overview entry after checking the original source,
+So that I can manage already considered information without erasing evidence or claiming that the source incident has ended.
+
+**Acceptance Criteria:**
+
+**Given** a prominent notice version in the driving view and permitted interaction,
+**When** the driver selects its large Registrert button or completes its optional forgiving swipe-to-dismiss,
+**Then** record registration for that exact incident/version in the combined working day and remove only its prominent driving message,
+**And** restore ordinary stop emphasis where no other prominent notice needs that area, preserving unrelated messages and the accurate indication of additional notices from 4.6,
+**And** retain the applicable stop-warning triangle and the notice in Skiftdetaljer; registration is not incident resolution, source confirmation, overview hiding or proof of comprehension,
+**And** provide equally usable labelled button/keyboard access so swipe is never the only action; incomplete or cancelled swipes change nothing,
+**And** registration is optional and never required to continue driving, progress stops or change an otherwise permitted context.
+
+**Given** two or more eligible notices, including more than two important concurrent warnings,
+**When** one version is registered,
+**Then** affect only that selected version, not the entire incident family, all visible rows or all notices at a stop,
+**And** keep other prominent/remaining notices and their additional-notice indication correct; registering one cannot silently discard an undisplayed eligible notice,
+**And** the retained marker remains tied to supported source/occurrence relevance, including multiple affected visits; registration cannot invent or remove source applicability,
+**And** if an unchanged registered version becomes relevant again later in the same day, preserve its registration rather than reintroducing its prominent message merely because the trip/context changed.
+
+**Given** reliable movement, genuine startup, or qualified speed loss/recovery,
+**When** either registration or manual overview hiding is opened, gestured or committed,
+**Then** use 3.2's shared permission at invocation and commit, including distinct labelled unknown-speed startup and elapsed-five-minute exceptions,
+**And** all reliable speed above zero locks these actions; unknown speed is not standstill and the direct GPS-loss stop-arrow exception does not authorize notice dismissal,
+**And** movement/revocation before commit cancels the incomplete action and keeps the previous committed state; movement after a completed commit does not undo its evidence,
+**And** immediately close restricted detail and leave focus in visible permitted UI, without resetting movement/outage history or requiring acknowledgement while moving.
+
+**Given** a retained overview notice marked Status usikker – sjekk originalkilden because it disappeared without confirmed ending,
+**When** the driver has checked the original source and explicitly chooses to remove that version from the overview,
+**Then** require an explicit indication that the source was checked and record the chosen exact version, manual removal and applicable day/context,
+**And** explain that this hides the overview entry without confirming resolution; cancellation leaves it visible and no free-text or sensitive reason is required,
+**And** offering/following a source link or receiving an HTTP success cannot automatically prove the driver checked the source; preserve the manual origin of that indication,
+**And** source-link use obeys movement policy; if the source has not actually been checked, retain the uncertain entry rather than silently hiding it on a failed link,
+**And** the app may record the driver's explicit report of an external source check without requiring a new online round trip to certify it,
+**And** distinguish this action from Registrert and the automatic ten-minute removal of a source-confirmed ended notice; it does not silently register a driving message or alter source lifecycle.
+
+**Given** the selected version is registered or manually hidden,
+**When** identical content is fetched again, relevance changes, or the compatible view/app restarts,
+**Then** preserve the same day/version-specific registration and hidden state, including while offline,
+**And** an unchanged manually hidden version stays out of the overview for the rest of that combined day; polling, a new retrieval timestamp, a later work part or context switch cannot bring it back,
+**And** preserve prior source/display/interaction evidence and the original day expiry; neither action deletes history or starts a new retention period,
+**And** seen, registered and hidden are independent facts: neither action marks detail seen unless that exact content was actually displayed with valid access under 4.5,
+**And** normal confirmed source closure still removes active markers/warnings according to 4.3/4.6, regardless of local registration.
+
+**Given** a genuinely changed source version arrives after the previous version was seen, registered or hidden,
+**When** 4.3 accepts it and 4.4 evaluates relevance,
+**Then** keep the earlier actions attached only to the earlier version; the changed version is unseen until its actual authorized detail display,
+**And** an applicable changed version returns to the overview as updated with changed/bold treatment even when the earlier version was manually hidden,
+**And** reassess its driving prominence under 4.6 rather than inheriting the old registration or forcing a warning outside its supported relevance/stage,
+**And** this is an update, not a newly received incident: expose that distinction to the later audio story and emit no chime here,
+**And** uncertain source ordering cannot be bypassed by inventing a new version solely to clear registration/hiding.
+
+**Given** an action started for version A while version B, source closure, plan/context change or logout arrives,
+**When** a button/gesture callback would commit,
+**Then** validate current access, permitted interaction, day, target version and action applicability; never retarget A's action silently to B,
+**And** if A remains a valid target, only A may receive the action; otherwise reject/cancel visibly without hiding/registering B or unrelated notices,
+**And** a closed notice cannot be turned back into an active one by a stale callback, and the client closure timer is not reset by registration/manual hiding,
+**And** duplicate taps, swipe/button overlap and immutable retry produce one effect and one necessary event, not contradictory or duplicated corrections.
+
+**Given** a permitted registration or manual-hide action is committed,
+**When** local persistence and later synchronization run,
+**Then** atomically save the exact-version interaction state and outbox evidence before showing the action as completed,
+**And** preserve the notice snapshot, original source status/uncertainty and prior display evidence needed by E7, distinguishing registration from manual overview removal and source-confirmed ending,
+**And** a local write failure leaves the previously committed presentation/state authoritative, reports that the action was not saved and permits a safe retry,
+**And** use inherited FastAPI/PostgreSQL owner/day/revision checks, immutable batches and valid matching receipts; network failure does not discard a local commit and only a matching receipt marks server confirmation,
+**And** source polling cannot overwrite these client-owned facts; competing/stale synchronization preserves permitted local work for existing explicit conflict handling.
+
+**Given** retained interaction state is unavailable, unreadable or expired,
+**When** the view reopens or tries to restore notice presentation,
+**Then** explain the storage/state uncertainty rather than silently resetting versions to new or claiming a registration/removal succeeded,
+**And** do not infer a new source receipt, new-notice sound entitlement or fresh source content from the missing marker,
+**And** honor private access/logout/expiry locks and existing recovery behavior, keeping full active-day offline boot/authority and cross-client recovery in E5,
+**And** apply the existing AD-12 deadline to every private local/server/outbox copy; source-cache cleanup cannot erase the unexpired day's required version evidence.
+
+**Given** notice actions are tested with touch, keyboard, text enlargement and assistive technology,
+**When** controls render or an action changes prominence/visibility,
+**Then** expose the selected notice/version context, action purpose, permitted/disabled state and visible reason without color or gesture alone,
+**And** preserve a clear distinction between Registrert and removal from overview, with a cancel-preserving source-check/removal flow,
+**And** move focus to an appropriate remaining visible control after removal; never leave focus in a disappeared row or hidden motion-closed detail,
+**And** announce meaningful committed changes without poll repetition, automatic source opening or demands for driver interaction,
+**And** actual mounted touch/glove usability remains target-device qualification; fixtures cannot establish safe real-world interaction.
+
+**Traceability:** FR-14 uncertain-disappearance manual removal, version lifecycle and persistent interaction state; FR-16 movement policy; bounded FR-17/20 recovery and FR-22 manual correction evidence. NFR-1–4; UX-DR19/20/22/23/38/39/40/44 and EXPERIENCE notice acknowledgement/manual removal. AD-2/4/5 atomic client state, PostgreSQL receipts and evidence; AD-7/8 unchanged source facts/exact versions; AD-9 shared policy; AD-10/12 access/retention; AD-14 compatible recovery. FR-15 audio implementation remains separate.
+
+**Dependencies:** Implemented 4.6 and inherited 4.3–4.5 source/version/relevance/list/evidence contracts plus E1/E3 permission/persistence. No later audio, summary UI, mentor workflow or complete E5 recovery is required to demonstrate these two version-scoped actions. Tests distinguish source-check self-report from automated verification without introducing a new verification service.
+
+**Implementation evidence:** Button/swipe/cancel; selected notice among two and three-plus; preserved marker/overview after registration; unknown-speed exceptions versus real motion and motion mid-gesture; uncertain disappearance with source-check indication/cancel/unreachable source; seen independence; unchanged replay/context/restart versus changed-version return; A-action/B-update, closure/logout races, duplicate actions; failed local commit, lost/mismatched receipt, offline restore/storage failure and expiry. Verify actual PostgreSQL persistence and exact-version events with labelled fixtures. Tests are planned, not run.
+
+**Size boundary:** Version-specific Registrert and manual uncertain-overview removal with their persistence, evidence and accessibility. No source editing, inferred incident resolution, new sound mechanism, movement policy changes, mentor exceptions, summary/PDF UI, bulk dismiss-all or permanent notice archive.
+
+**Pilot qualification:** Repeatable action/persistence/failure evidence contributes to E8-D. E8-P requires actual mounted interaction, qualified source versions and integrated offline/access behavior; optional acknowledgement never becomes required driving work. E8-E remains subsequent field evaluation.
+
+**Approval:** Approved by the owner on 2026-09-26 with the stated scope: Registrert and manual hiding affect only the selected version in the driver's day-specific interaction state; neither changes source facts or proves comprehension. Planning approval only; this approved copy is canonical.
+
+### Story 4.8: Sound One Discreet Chime Only for a Newly Received Relevant Notice During the Ongoing Trip
+
+As the driver,
+I want a short discreet chime for a genuinely new notice received during and relevant to my ongoing trip,
+So that new information can draw brief attention without repeated sounds for updates, replay or later changes of context.
+
+**Acceptance Criteria:**
+
+**Given** an authorized ongoing actual trip and a newly accepted source incident in the combined day's receipt history,
+**When** receipt is committed and 4.4 assesses the incident as relevant to that ongoing trip,
+**Then** make one short discreet chime eligible, using stable incident/receipt and actual-trip context rather than merely a newly rendered heading or unseen flag,
+**And** qualification of relevance and source identity is required; uncertain identity/relevance remains visually explicit but cannot be guessed into a definite audible trigger,
+**And** use actual receipt and relevance during the ongoing trip, not source publication time, timetable activation or receipt of a backend synchronization acknowledgement,
+**And** preserve the distinction between source/publication/update time, app receipt, relevance assessment and playback attempt; delayed source delivery is not a claim of immediate publication-to-sound delivery,
+**And** this policy applies to eligible new notices, not only acute ones: a newly received relevant planned notice may chime before its later staged prominent display, which must not chime again.
+
+**Given** an updated version, unchanged poll, source closure, supported reopening of a known incident or an already received notice becoming relevant later,
+**When** the view, source state or actual/preview trip changes,
+**Then** remain silent; new bold emphasis, new material version or restored visibility after manual hiding is not a newly received incident,
+**And** preparation-to-driving transition, final-stop next-trip preview, same-route return activation, plan revisions, manual trip correction and approaching a warned stop cannot reclassify an old receipt as new,
+**And** fetching/receiving a notice before an ongoing trip or while it is irrelevant does not queue a chime for when it later becomes relevant,
+**And** distinguish a genuinely first-received incident during reconnect from replay of a previously received one; only the former can qualify if current trip/relevance requirements still hold,
+**And** inability to recover trustworthy receipt history is uncertainty, not permission to sound cached notices as new.
+
+**Given** a qualifying receipt, duplicate callbacks or repeated render/poll events,
+**When** the audio side effect is scheduled,
+**Then** durably identify and claim the single attempt for that day/incident receipt before invoking playback, using existing atomic local state/event conventions,
+**And** a repeated receipt, callback, reopen or retry cannot invoke the same chime again; multiple views/tabs must not each play it for the same controlling-day event,
+**And** test crash points before and after the durable claim and before/after the playback request: do not promise atomic exactly-once audible output across a browser/device crash,
+**And** if a crash leaves the outcome indeterminate, retain that uncertainty and do not replay an old sound on recovery; visual notice availability remains independent,
+**And** a failed/unreliable local claim or lost receipt history cannot produce a falsely deduplicated success; report the audio/state limitation rather than guessing it is safe to replay.
+
+**Given** more than one distinct new relevant incident arrives together,
+**When** eligible playback attempts are handled,
+**Then** avoid overlapping chimes and repeated alarm loops, preserving a distinct bounded attempt identity for each qualifying receipt,
+**And** recheck actual context, current applicability and access immediately before each attempt; cancel stale pending attempts if the trip ends/changes, source closure makes them inapplicable or private access locks,
+**And** do not replay queued sounds as a catch-up burst after suspension, browser activation, reopening or a later trip,
+**And** keep all notices and the 4.6 additional-notices indication visible as applicable; audio scheduling does not silently remove a notice,
+**And** qualify observed multi-notice sound behavior for distraction and document any inability to meet the short/discreet requirement before pilot acceptance.
+
+**Given** browser audio is unsupported, blocked, suspended, denied or fails,
+**When** an eligible playback is attempted or capability changes,
+**Then** retain the visual notice and show a concise honest audio-unavailable/not-confirmed status without opening a modal or asking for driver action while moving,
+**And** distinguish eligible, attempted, browser-reported playback success/failure and indeterminate outcomes; a resolved API call does not prove the driver heard or understood the sound,
+**And** any browser-required activation/setup occurs through a deliberate permitted interaction before operational reliance, following the existing movement/access rules and actual platform requirements,
+**And** later audio activation/recovery prepares future eligible notices only; it does not replay an earlier blocked or missed chime,
+**And** do not add hidden media loops, native/background guarantees, OS-volume overrides or a new notification service; failed support is a qualification gap, not a passed requirement because visual fallback works.
+
+**Given** a chime is attempted, succeeds or fails,
+**When** the application applies its result,
+**Then** leave detail collapsed, keyboard focus and active trip/progression unchanged, and preserve all movement locks including source/detail/acknowledgement restrictions,
+**And** no sound action marks the notice seen, registered, hidden, source-confirmed or understood,
+**And** sound eligibility is independent of the stop-approach visual trigger; a heard chime does not prove that the notice heading was rendered,
+**And** a late playback callback after context change cannot trigger another sound, reopen private content or write success into the wrong day/version; cancel remaining playback where supported without pretending already emitted sound can be undone,
+**And** unavailable audio cannot block stop progression, manual fallback or later permitted notice review.
+
+**Given** receipt, attempt and outcome evidence is retained or synchronized,
+**When** local state is reopened or the backend acknowledges its immutable batch,
+**Then** persist only the minimum linked incident/version/receipt, context, attempt identity and observed outcome needed for duplicate prevention and honest day evidence,
+**And** reuse authenticated FastAPI/PostgreSQL owner/day/revision validation, atomic outbox handling and matching receipts; only a matching receipt marks server confirmation,
+**And** server/network failure does not reset a local attempt or become a replay trigger; backend ingestion remains source state and cannot mark audio played on the tablet,
+**And** record browser outcome separately from actual audibility established by controlled qualification; do not store a per-frame audio log or infer comprehension,
+**And** private records follow the existing AD-12 expiry, logout locks and source-cache separation without a permanent notice/sound archive; retries/reopen never extend authority or retention.
+
+**Given** the actual mounted Lenovo tablet and Brave browser,
+**When** the implemented audio behavior is qualified,
+**Then** record device/OS/browser versions, permissions, required interaction/activation, relevant audio-output/volume settings and tested foreground/power conditions,
+**And** test an eligible new notice, silent updates/old-notice transitions, denied/blocked playback, multiple eligible receipts, network loss/recovery, tab/app foreground return and restart,
+**And** distinguish browser-reported playback from independently observed audible output, including short duration/discreet character under stated representative conditions,
+**And** perform controlled observations without requiring driver interaction while moving; no operating-system mute or unusable audio path is silently treated as audible success,
+**And** report exact cases passed, failed or untested, including missed/duplicate/unnecessary chimes and recovery limitations; unsupported capability returns a solution decision and cannot pass E8-P through desktop simulation,
+**And** no background sound delivery or reliable background execution is claimed by a foreground test.
+
+**Given** visual status and capability/setup feedback,
+**When** inspected with keyboard, touch or assistive technology,
+**Then** retain a complete visual route to the same notice information; audio is never the sole representation of a warning,
+**And** label unavailable/uncertain status without color alone, avoid repeated status announcements on unchanged polls and preserve focus,
+**And** any controlled audio test used for qualification is clearly a test, not a source incident or fabricated operational notice receipt,
+**And** use sanitized qualification evidence with no private shift identifiers or raw GPS traces.
+
+**Traceability:** FR-15 chime eligibility/silence; FR-12 ongoing-trip relevance; FR-14 persistent receipt/version history; FR-16 no interaction bypass; bounded FR-17/20 restart and FR-22 provenance. NFR-1–4 and SM-C1 unnecessary-chime/distraction evidence; UX-DR19/23/25/38/40/44 and EXPERIENCE sound rules. AD-2/5 durable identity/outbox, AD-7 qualified relevance, AD-8 source newness versus updates, AD-9 actual context, AD-10/12 access/expiry and AD-14 compatible recovery. Source and device evidence remain separate.
+
+**Dependencies:** Implemented 4.7 and inherited 4.3–4.6 stable identity/relevance/receipt/display state, E1 persistence and E3 actual-context/movement foundations. Actual Lenovo/Brave access is required for audio qualification; position/speed or wake qualification does not establish sound support. Verify current browser API requirements when implementing; no future E5/E7 screen is required to demonstrate this bounded chime policy and persisted attempt behavior.
+
+**Implementation evidence:** Eligibility/silence reference matrix, preparation/current/next-trip transitions, new-versus-replayed reconnect data, planned chime versus later visual approach, exact-version updates/hidden return; duplicate callbacks/views, storage failure and crash boundaries, stale queue/context/logout, blocked playback then activation without catch-up, outcome/receipt faults and expiry. Real PostgreSQL tests cover synchronized records; actual device tests separately establish audibility and limitations. Tests are planned, not run.
+
+**Size boundary:** One short browser chime, its new-receipt eligibility/deduplication, minimal outcome status and real-device qualification. No speech, recurring alarms, sound library/settings suite, native/background notifications, volume override, source substitutions, new operational engine or general offline recovery.
+
+**Pilot qualification:** Repeatable labelled receipt/context fixtures contribute to E8-D but do not prove audible tablet behavior. E8-P requires actual Lenovo/Brave audio evidence and integrated source/receipt/recovery behavior, with failures honestly reported. E8-E remains subsequent real-shift evaluation including unnecessary-chime/distraction observations.
+
+**Approval:** Approved by the owner on 2026-09-26 with sound tied to a newly received relevant notice during the actual ongoing trip. Updates/later context changes remain silent, and uncertain playback outcomes do not replay old audio. Planning approval only; this approved copy is canonical. E4 epic-level confirmation remains a separate checkpoint.
+
+## Epic 5: Continue a Prepared Day and Reconcile Recovery
+
+The owner can continue the available prepared-day capabilities through network loss/restart, preserve explicit choices, resolve conflicts and transfer writer authority deliberately. E5 owns FR-17/18/20 and active-day FR-1 plus applicable FR-24 protocols. Its first story establishes bounded access; the following stories complete coherent offline boot, integrated recovery and reconciliation. E6/E7 later extend these contracts for their own features.
+### Story 5.1: Continue an Already Active Day When Ordinary Sign-In Expires
+
+As the pilot owner,
+I want my already active working day to retain its explicitly granted access after ordinary sign-in expires,
+So that the fixed fourteen-day sign-in period does not interrupt the shift or silently authorize another day.
+
+**Acceptance Criteria:**
+
+**Given** valid ordinary application authentication and an owned confirmed combined day with a known planned final end,
+**When** preparation requests day authority,
+**Then** create the server-managed grant bound to authenticated owner, application session/client and that concrete day, persisting it in PostgreSQL before confirming issuance,
+**And** bound its deadline by the then-confirmed planned final end plus seven days, retaining the issue-time basis and any earlier applicable day-grant/data limit; the ordinary fourteen-day deadline remains a separate scope rule,
+**And** retries of the same request return the established grant without silently extending it; polling, receipt lookup or merely revisiting preparation cannot refresh authorization,
+**And** an unconfirmed/expired day, forged owner/client/day reference or missing ordinary authority cannot obtain a new grant,
+**And** grant issuance and plan confirmation alone do not mark the day active, start a trip or prove any work performed.
+
+**Given** the browser has ordinary and/or day-scoped authority,
+**When** the session cookie and authorization response are handled,
+**Then** preserve a credential able to identify the granted scope after ordinary day fourteen using the existing opaque, host-only Secure/HttpOnly/SameSite cookie model,
+**And** a longer cookie lifetime preserves identification only; it never extends app_authenticated_at plus fourteen days or confers general access,
+**And** retain only necessary non-secret grant scope/deadline/status metadata in the existing private local store; do not replace the adopted session model with a JavaScript bearer token,
+**And** keep CSRF/exact-origin protection, authenticated server-derived ownership and private no-store behavior for grant and operational endpoints.
+
+**Given** a granted prepared day and still-valid ordinary authority,
+**When** the existing operational entry path actually starts that day in this slice's online scenario,
+**Then** record the active-day transition atomically with its required operational evidence and preserve the distinct prepared-versus-active lifecycle,
+**And** require that transition to belong to the authorized day/client and current writer/context; do not infer it from grant creation, elapsed schedule time or a client-submitted active flag alone,
+**And** a failed transition cannot be reported as server-confirmed active; local/server confirmation remains subject to existing matching-receipt rules,
+**And** preserve actual trip/manual pin, plan revision and movement history; starting day scope creates no GPS/progression evidence,
+**And** offline start/reconciliation of a properly prepared day remains required in later E5 recovery work; this online test path does not introduce a permanent requirement for server acknowledgement of every local operational transition.
+
+**Given** a day already active under its valid grant before ordinary authentication expires,
+**When** app_authenticated_at plus fourteen days is reached,
+**Then** continue that day's authorized E1–E4 operations within the granted scope/deadline without forced logout/navigation or a mid-shift password prompt solely because ordinary access expired,
+**And** validate the concrete day/client and permitted endpoint operation on the backend, including existing scoped plan corrections, operational events, notice retrieval and receipt lookup as applicable,
+**And** retain active trip, corrections, stop progress, notice interaction state and pending work; do not reset them through a global ordinary-session-expiry handler,
+**And** explain between-day renewal requirements without modal interruption or required driver action while moving,
+**And** test ordinary expiry in the running authorized view both online and during a network interruption: expiry alone does not lock the already active locally available day. This does not claim complete offline boot or future whole-day recovery.
+
+**Given** ordinary authentication has expired and the cookie still identifies a valid day grant,
+**When** the caller tries to start a prepared/new day, obtain a new grant, access another day or invoke unrelated ordinary-account operations,
+**Then** deny that broader scope and require fresh ordinary application authorization before starting another day,
+**And** test a granted but never-started prepared day separately from the already active day; possession of its grant cannot convert it to active after ordinary expiry,
+**And** a different client/owner, a guessed day ID, altered local metadata or direct API call cannot reuse the active day's exception for another scope,
+**And** preserve explicit logout and access-status/recovery controls without treating them as authority for broader private data access,
+**And** initial selection of another trip within the same active day stays distinct from starting a different day.
+
+**Given** a confirmed later plan revision changes an unended day's planned final end,
+**When** access and data deadlines are re-evaluated,
+**Then** apply AD-12's data-expiry rule separately from the existing grant deadline: a changed planned end does not silently extend the previously granted authority,
+**And** preserve any earlier applicable deadline; reopening, synchronization, delayed work or client clock changes cannot restart either clock,
+**And** an authority extension requires separate fresh application authorization under AD-10, not an automatic consequence of a source/plan update,
+**And** test late additions with a later planned end and a revision with an earlier data expiry, including overnight dates; neither can resurrect expired data,
+**And** show the effective relevant deadlines and unresolved authority where necessary without claiming complete-day access coverage from a cookie alone.
+
+**Given** an ended/aborted day or a grant/data deadline reached,
+**When** authorization evaluates a request,
+**Then** deny resumed operational activity for a terminal day and permit only bounded completion-review/outstanding-settlement scope where applicable,
+**And** after end/abort cap that scope at the earliest of the existing grant deadline, actual end plus seven days and data expiry,
+**And** expiry checks deny protected read/write/export/settlement outside its valid authority before deduplication or scheduled purge; an old receipt/batch ID cannot bypass expiry,
+**And** use terminal-state fixtures to test this authorization contract without implementing E7's actual end/review/PDF flows here,
+**And** local cleanup and server removal include this slice's grant/private metadata at existing expiry, without extending storage or reviving data to complete synchronization.
+
+**Given** explicit logout, known server revocation or account revocation,
+**When** this slice's granted day is open or a request arrives,
+**Then** reuse 1.2's immediate local lock and durable pending-revocation behavior; ordinary expiry and explicit revocation remain different outcomes,
+**And** server logout/revocation invalidates the applicable session and its grants; account revocation invalidates all affected sessions/grants,
+**And** on connectivity recovery resolve pending revocation before other private requests; retained unexpired work requires settled revocation and fresh same-owner app login before recovery,
+**And** new login cannot silently discard pending revocation, and lost server responses cannot be shown as confirmed logout,
+**And** disconnected clients cannot instantly learn an unseen remote revocation; once learned, lock rather than using the active-day exception to bypass it.
+
+**Given** grant/session storage failure, a stale asynchronous response, corrupted local authority metadata or unreliable timing evidence,
+**When** authority is issued, read, resumed or applied,
+**Then** show a specific access/state failure instead of fabricating grant issuance, confirmed activity or a renewed deadline,
+**And** late responses cannot unlock logout-locked content or replace a newer owner/day/client scope,
+**And** do not trust arbitrary browser-clock rollback or an unverified local active flag as proof of authorization; test clock changes and preserve original deadlines,
+**And** if valid scope cannot be established, do not grant broader access or silently reset private storage; preserve permitted recoverable data within its original expiry and explain the unresolved state,
+**And** make ordinary expiry, explicit revocation, invalid scope and unavailable validation distinguishable so a generic 401 handler cannot destroy valid active-day continuation.
+
+**Given** outer Access failure/expiry or a login HTML/redirect response while the application grant remains valid,
+**When** existing requests fail,
+**Then** treat the response as unavailable gated connectivity, not successful data/receipt, app reauthorization or proof of app logout,
+**And** do not force navigation to login while driving; preserve the already authorized local active view and show unavailable updates,
+**And** Access renewal alone cannot create/extend app/day authority or unlock a pending logout,
+**And** this story tests response classification with controlled fixtures only; actual Access-token lifetime preflight, coherent offline boot and gate-blocked renewal/logout integration remain later E5/E8 work under AD-13.
+
+**Given** the access status and renewal/deadline information is presented,
+**When** inspected with keyboard, touch or enlarged text,
+**Then** use clear Norwegian distinctions between continued access to this active day, expired ordinary access and the need to sign in before another day,
+**And** preserve the shared movement policy, focus and non-color error cues; no technical grant/session identifiers are exposed as product instructions,
+**And** retain private identifiers/credentials outside logs, source control and demo assets; all day metadata follows the existing AD-12 retention rather than a new permanent access history.
+
+**Traceability:** FR-1 active-day exception and explicit revocation; prerequisites for FR-17/18/20; authority/expiry portion of FR-24. NFR-2/3/4 and safe status NFR-1; UX-DR3/23/38/39/44 and EXPERIENCE private-access continuity. AD-2 local authority boundaries, AD-4/5 authenticated transactions/receipts, AD-9 prepared/active/terminal distinction, AD-10 bounded day grants, AD-11 client/writer binding, AD-12 expiry, AD-13 outer-gate separation and AD-14 retained-client access compatibility. All approved architecture remains in force.
+
+**Dependencies:** Existing E1 access/logout/persistence, E2 confirmed dated day model, E3 operational activation/context and E4 scoped source/notice operations through 4.8. Online active-day authorization and in-place expiry handling are independently testable. Full offline activation/restart proof, coherent assets, gate-lifetime readiness, generic outbox recovery and writer transfer/conflict handling are explicit subsequent E5 obligations, not claimed complete here. No E6/E7 production UI or real deployment is required for this slice's authorization tests.
+
+**Implementation evidence:** Real FastAPI/PostgreSQL and browser tests for grant issuance/retry/failure, cookie lifetime versus fixed app expiry, before/at/after day fourteen for active versus prepared day, same-day versus new-day operations and direct unauthorized API requests; client/owner mismatch, plan-end revisions with unchanged grant, terminal minimum deadlines, expiry-before-dedup/purge, online/offline running-view expiry, logout/pending revocation/new login, late responses, corrupt state/clock changes and Access HTML fixtures. Separate actually executed evidence from planned tests; none run while drafting.
+
+**Size boundary:** Bounded day-grant issuance and enforcement, the online active-day transition path and ordinary-expiry continuation of existing operations. No new auth product, full offline shell, complete offline activation/reconciliation, writer transfer UI, generalized sync/conflict engine, E7 terminal UI or Cloudflare provisioning. Existing feature-local persistence remains in force; subsequent stories complete the whole-day recovery contract.
+
+**Pilot qualification:** Local fullstack authority tests contribute to E8-D. E8-P requires actual Lenovo/Brave cookie/restart behavior, outer Access expiry/renewal, complete offline activation/recovery and bounded settlement integration. E8-E remains later actual-shift evaluation. Passing the online slice alone does not authorize a real shift.
+
+**Approval:** Approved by the owner on 2026-09-26 with the stated scope: the continuation grant is limited to the already active concrete day, creates no new fourteen-day period and cannot start a prepared/new day after ordinary expiry. Planning approval only; this approved copy is canonical.
+
+### Story 5.2: Keep a Complete Compatible App Build Available for Offline Opening
+
+As the pilot owner,
+I want the application files needed for my prepared or active day verified and available on this device,
+So that reopening does not silently depend on a missing file, a login page cached as code or a mixture of incompatible app versions.
+
+**Acceptance Criteria:**
+
+**Given** the current supported application build and permitted preparation,
+**When** its local asset set is prepared,
+**Then** enumerate the actual nonpersonal resources required by that build, including entry/bootstrap code, dependent/lazy modules, styles, fonts/icons and any implemented runtime assets required by the day flows,
+**And** identify build ID, required API/event contract and local storage schema separately from plan/source/server revisions,
+**And** use the deployed build's trusted manifest/validation basis rather than declaring success because the current screen happens to load,
+**And** cache verified nonpersonal resources in Service Worker/Cache Storage; private plans, notices, source responses, session data, originals and outbox payloads remain outside that asset cache.
+
+**Given** an asset download succeeds, fails, redirects or returns unexpected content,
+**When** the staged set is validated,
+**Then** check the expected resource identity/build, response type/content and integrity using the documented build validation scheme before accepting it,
+**And** reject missing/truncated/wrong-build resources and HTML login/error pages returned in place of code, including misleading HTTP success responses,
+**And** resolve the complete resource set before publishing its verified-ready marker; one successful request or a backend cache hit is not local completeness,
+**And** retain the preceding usable verified set on interruption, quota failure or validation error; show specific missing/incomplete status and a non-destructive retry,
+**And** do not expose raw cache names, hashes or internal exception text as driver instructions.
+
+**Given** downloads/staging and readiness publication span separate browser storage operations,
+**When** the browser closes or a write fails at any boundary,
+**Then** recovery cannot treat a partial staged cache or an orphaned marker as a complete set,
+**And** verify the referenced assets before selecting a build for boot, publishing selection only once the referenced set is complete and valid,
+**And** retries reuse valid compatible staged resources without mixing unrelated builds or discarding private day data,
+**And** test interrupted download, last-asset failure, failure before/after marker publication and missing resources after an earlier successful verification; readiness must reflect the currently available set.
+
+**Given** a day is prepared and later actually activated through the existing path,
+**When** its required application identity is persisted,
+**Then** bind the day/recovery record to the verified compatible build it requires without changing its plan, authority, operational outcome or retention,
+**And** preserve that required build for an active day and retained pending work; scheduled departure, refresh or a newer network response cannot silently change it,
+**And** do not advertise complete app assets if the required build cannot be identified/verified from trustworthy version/schema metadata,
+**And** storing the build reference does not itself start the day or create a new day grant, and a grant is not proof that the assets exist locally.
+
+**Given** a complete retained required build and network loss or an outer Access login response,
+**When** the browser reopens the application,
+**Then** route to that one coherent locally verified build without requiring fresh network resources, including lazy routes/resources needed by the implemented flows,
+**And** before private rendering apply existing local logout/revocation/storage/expiry and 5.1 day-scope checks; cached executable code is not authority to expose private content,
+**And** the bounded test here proves coherent application entry and guarded access, not full active-day restoration, offline start or successful future synchronization,
+**And** test browser close/reopen offline and controlled Access-blocked responses separately; reconnect cannot replace a selected required build with a login document or mixed newer assets,
+**And** app-entry success cannot be used as evidence that GPS, source updates, sound, private data coverage or access lifetime is sufficient.
+
+**Given** a successor build/worker becomes installed or active while a retained day still requires the previous build,
+**When** all tabs close and the browser opens again,
+**Then** worker installation/activation alone must not switch that day's app version, run a new incompatible schema migration or delete its required files,
+**And** use explicit build-aware boot routing to retain one coherent required version; do not rely solely on a waiting-worker assumption or absence of a force-reload call,
+**And** coordinate concurrent tabs/workers for publication/selection so one cannot invalidate the resources another retained active context requires,
+**And** test a labelled old/new build pair with differing assets/contracts and a newly activated worker; retained work still boots its required build,
+**And** controlled between-day release activation, backend compatibility/migration/rollback and writer transfer remain later E5 work under AD-11/14; this slice supplies their necessary retention/routing invariant.
+
+**Given** required assets are missing, corrupted, evicted or incompatible,
+**When** offline opening cannot safely select a complete compatible build,
+**Then** use the available minimal recovery entry to explain unavailable application files and preserve private data rather than running a random old/new mixture or clearing storage as repair,
+**And** a permitted retry can replenish the exact required compatible set when reachable; it cannot silently substitute an incompatible build or extend data/authority deadlines,
+**And** report the limits honestly: total browser storage/worker eviction may also remove the recovery entry, so do not promise an offline recovery screen when no executable resources remain,
+**And** test partial eviction separately from complete browser-data loss; do not fabricate recovered private work when that data has also been removed,
+**And** browser storage remains evictable; a successful preparation check is not a guarantee of future physical storage survival.
+
+**Given** preparation presents plan, data, application and access information,
+**When** readiness is refreshed or a plan revision adds later activities,
+**Then** show separately confirmed plan status, per-trip downloaded data coverage from 2.8, source/notice availability and freshness, verified app-file status, and known authority/deadline limitations from 5.1,
+**And** a partial day's data never yields Hele dagen klargjort even when the app asset set is complete,
+**And** changed plan/build references invalidate affected coverage claims without silently deleting still-usable data or overriding manual corrections,
+**And** app-assets success alone gives no global offline-ready/pilot-ready claim; full day activation/recovery and actual Access-token lifetime coverage remain unqualified until their later integration,
+**And** verify the independent cases complete assets/incomplete data, complete data/incomplete assets, confirmed plan/unknown source coverage and valid grant/ordinary access expired with prepared-versus-active scope,
+**And** retain readable text/symbol statuses, keyboard access and shared movement restrictions without a modal demand to repair preparation during driving.
+
+**Given** obsolete staging/resources or private build references are cleaned up,
+**When** pruning runs,
+**Then** preserve resources still required by active/unexpired retained work and compatible pending recovery; do not prune merely because two releases exist or seven days elapsed since deployment,
+**And** keep one selected build and a staged successor normally, with additional nonpersonal code retained only when existing work actually requires it,
+**And** private day/build associations follow their original AD-12 expiry, while nonpersonal app-code cache has its separate bounded lifecycle,
+**And** cleanup/retry cannot remove pending logout, immutable outboxes, manual choices, notice state or data as a workaround for cache failure,
+**And** do not introduce private historical backups, mirrored raw files or a permanent private recovery archive.
+
+**Given** preparation/boot status is persisted or served,
+**When** fullstack/access checks apply,
+**Then** retain non-secret device-local asset verification metadata locally; a server receipt cannot assert that a browser resource is actually present,
+**And** reuse the existing authenticated FastAPI/PostgreSQL day/version scope for any synchronized private association, introducing only fields needed by this slice and preserving matching-receipt semantics,
+**And** allow no credentialed demo-to-private cache/API reuse, and never save credentials, Access pages or private responses as app assets,
+**And** report failed local or backend writes without false durable/server confirmation; no per-asset operational event spam, new service or new authentication model is required.
+
+**Traceability:** Asset/readiness prerequisites of FR-17/20, continuity FR-1 and source/availability portion of FR-18/19, private metadata FR-24. NFR-2/3/4 and readable status NFR-1; UX-DR3/23/38/44. AD-2 separated readiness and nonpersonal assets/private IndexedDB, AD-5 separate build/domain identities, AD-10 access before private rendering, AD-11 tab/worker coordination, AD-12 retention/eviction limits, AD-13 Access-response separation and AD-14 required-build coherent boot/retention. Full source/device qualification is not supplied by asset tests.
+
+**Dependencies:** Implemented 5.1 bounded authority and existing E1–E4 private app/data/version state; 2.8 per-trip bundle coverage. Uses the built app's actual resource graph, with controlled second-build fixtures for routing tests. Does not require a future migration UI, generalized state recovery, writer transfer or E6/E7 implementation; later features must extend the required resource set when introduced. No live provisioning/deployment is needed for local controlled boot tests.
+
+**Implementation evidence:** Complete/missing/lazy assets, wrong build/type/hash, login HTML, network and quota failures, staging/marker crash boundaries, old/new worker activation after all tabs close, parallel tab selection, partial eviction and complete storage-loss distinction; guarded offline entry, logout and expiry, preserved private/outbox data, independent plan/data/assets/access status and reference-aware cleanup. Actual Lenovo/Brave storage/restart and outer-gate behavior remain separate target qualification. Tests are specified, not executed during planning.
+
+**Size boundary:** Verified nonpersonal build preparation, required-build boot routing and separate app-assets status. No complete day-state restoration/offline activation, Access renewal preflight, new release activation UX, generalized migrations/rollback, sync reconciliation, writer transfer or new PDF/mentor functionality. The existing V1 offline requirement remains assigned to the subsequent integrated slices rather than claimed by a cached shell.
+
+**Pilot qualification:** Repeatable local build/cache failure tests contribute to E8-D. E8-P needs actual Lenovo/Brave close/restart/eviction behavior, integrated whole-day state/authority and Access-expiry recovery; a verified asset manifest alone is insufficient. E8-E remains subsequent field evaluation.
+
+**Approval:** Approved by the owner on 2026-09-26 with the stated scope: readiness requires a complete, verified compatible asset set; updates or repair cannot delete private work or bypass access rules. Planning approval only; this approved copy is canonical.
+
+### Story 5.3: Resume the Already Active Working Day Offline Without Losing Choices
+
+As the pilot owner,
+I want to reopen my already active working day on the same tablet with its saved trips, corrections and notices,
+So that an interruption does not require reimport or erase my decisions, and I can continue the available work through the rest of the loaded day without internet.
+
+**Acceptance Criteria:**
+
+**Given** an owned, already active day with locally committed state, applicable authority and a complete compatible build from 5.2,
+**When** the browser reopens after closure or device restart with no usable server connection,
+**Then** check local lock/pending revocation, owner/client/day identity, original authority/data deadlines and active lifecycle before rendering private information or starting operational effects,
+**And** restore that day without PDF reupload, bus-number reentry or a required server round trip, including after ordinary fourteen-day expiry when 5.1's already-active continuation scope remains valid,
+**And** reject a prepared/new, ended/aborted or expired day as an active-day resume target; cookie presence, scheduled departure or a guessed active flag cannot establish eligibility,
+**And** history navigation and late callbacks cannot briefly expose locked/private content; unreliable lock/authority reads retain the AD-10 failure behavior rather than unlocking automatically,
+**And** use ended/aborted fixtures to prove non-resumption without implementing E7 completion screens here.
+
+**Given** a permitted recovery with retained E1–E4 state,
+**When** the operational view is reconstructed,
+**Then** read a consistent committed state and its outbox/revision references rather than combining a newer plan with unrelated older operational state,
+**And** restore the combined-day identity and service dates, confirmed plan revision and activity order, physical bus and change-time provenance, actual trip and manual pin, exact stop occurrence, progress origin/uncertainty and recorded outcomes/corrections,
+**And** preserve pending reviewed-plan changes as pending rather than auto-confirming them; restore the manual theme preference and existing source/notice version state without converting planned facts into observations,
+**And** do not rerun initial automatic trip selection over an established actual trip or manually selected context,
+**And** restore completed committed actions exactly once; actions interrupted before their local transaction committed remain uncompleted, with no orphan outbox event or invented successful save,
+**And** publishing the restored view is not a new operational action and must not duplicate historical events, create a new batch identity or change the server revision.
+
+**Given** a restored own day with multiple downloaded trips, intermediate activities and more than one work part,
+**When** the owner continues while disconnected,
+**Then** existing trip progression, permitted stop/trip corrections and actual transitions can use every available later trip's downloaded stop list and known activity facts, not just the trip active before closure,
+**And** keep each work part's reporting time/depot and overnight service-date/calendar-date relationship, including Friday 25:30 displayed as Saturday 01:30 where appropriate,
+**And** missing or never-downloaded stops/source data remain visibly missing with the approved manual fallback; a partial bundle never acquires whole-day-prepared status,
+**And** retain actual manual selection until its approved release condition; current time alone cannot skip delayed work, select another trip or mark a break/bus change completed,
+**And** commit each new permitted change and outbox event together locally before showing completion; quota/write failure preserves the last committed state and reports failure without pretending a correction was saved.
+
+**Given** stored position/speed evidence and a period with no observations while the app was closed,
+**When** sensing and movement controls resume,
+**Then** retain the last known stop context as uncertain and show the observation gap; a stored fix or speed is not a new measurement or proof that the bus remained there,
+**And** use 3.1's actual qualified signal states and 3.2's persisted history/timing: restart cannot manufacture the genuine first-start exception, reuse an obsolete zero speed as standstill, or reset/start a fresh five-minute outage period,
+**And** a trustworthy already-elapsed qualifying outage may enable its explicitly labelled exception; incomplete or inconsistent history cannot infer that the exception has elapsed or that unrestricted controls are safe,
+**And** direct previous/next controls require the qualified GPS-loss condition from 3.7, not network loss or unknown speed alone; each press still moves at most one known stop,
+**And** resume qualified sensing through the existing engine; unambiguous later-stop recovery preserves the gap and never certifies the 100-metre target for unobserved passages or silently overwrites a conflicting manual correction,
+**And** restore any ten-second display transition from its recorded final-arrival basis without inventing arrival/physical activity during the gap; same-route return still requires independent return-start evidence or the separate qualified-loss Next press.
+
+**Given** previously received notices and saved driver interaction/audio state,
+**When** the recovered day displays retained notices,
+**Then** preserve exact source/version identity, source versus retrieval timestamps, relevance uncertainty, seen/registered/hidden state and confirmed-ending timing from E4,
+**And** unchanged notices do not become new, unseen or newly audible merely through recovery; uncertain prior playback never causes old audio to replay,
+**And** do not restore open detail before movement/access permission is established, or mark a version seen just because its state was loaded,
+**And** derive time-limited presentation from the original recorded basis without resetting its timer or deleting summary evidence; passage of time alone is not source-confirmed resolution,
+**And** display the prominent yellow-triangle connectivity/updates warning plus retained source freshness or unavailability, without implying fresh retrieval or all-clear conditions; later automatic reconnect orchestration remains a separate slice.
+
+**Given** retained unsynchronized changes or an immutable batch whose server outcome is unknown,
+**When** recovery opens the local working day,
+**Then** preserve event/batch identities, payloads, writer epoch, expected revision, prior receipts and locally saved versus server-confirmed status under the existing AD-5/12 rules,
+**And** no server response, elapsed time or successful local restore counts as acknowledgement; existing receipt handling may confirm only the matching batch,
+**And** do not replace more recent local committed work with an older server snapshot or automatically submit pending events under another writer epoch,
+**And** use existing same-origin writer coordination before operational side effects; another tab cannot run a second local progression/sound writer, and an observed lost writer authority cannot be bypassed by reopening,
+**And** unseen remote takeover/revocation while disconnected is not claimed detectable; explicit cross-device transfer/conflict resolution remains subsequent E5 work,
+**And** test a real FastAPI/PostgreSQL accepted baseline followed by offline local corrections and reopen, preserving the different local and server states without requiring a future reconciliation UI.
+
+**Given** incomplete, inconsistent, corrupt or evicted private data, incompatible schema references or unreadable storage,
+**When** reconstruction cannot establish a coherent authorized operational context,
+**Then** show a bounded recovery failure/uncertainty state using only independently readable authorized facts, never fabricate an active trip, physical bus, completed action or unlocked role,
+**And** preserve still-permitted recoverable work and offer non-destructive retry when interaction permits; do not clear private storage, fetch an older snapshot over unsynchronized changes or silently choose another day as repair,
+**And** distinguish missing optional trip data with its existing fallback from broken identity/authority/critical operational state that prevents safe resumption,
+**And** recheck original deadlines on startup, resume and while running; delete expired private copies before use as required by AD-12, never extend them for recovery or synchronization,
+**And** state actual loss where data has been evicted; no claim of durable backup or recovery of unsaved work, and no additional raw GPS tracks/private diagnostic logs.
+
+**Given** restoration is exercised in representative controlled scenarios,
+**When** checking the result,
+**Then** cover browser close/reopen, tablet restart as a target-device case, network-only loss, Access-blocked responses and simultaneous GPS loss separately,
+**And** include a manually pinned delayed trip, repeated stop occurrence, an overnight later trip in a second work part, bus correction, changed/seen/hidden notice versions and an uncertain sound attempt,
+**And** inject closure before/after local commit, an unresolved batch response, partial bundle, corrupt required state, logout/read failure, active-versus-prepared day-fourteen expiry and original data expiry,
+**And** compare restored state with the committed pre-interruption facts and account explicitly for elapsed timers and new qualified observations; restoration itself supplies no observation evidence,
+**And** require no mandatory dialogue or reentry while driving; expose uncertainty and unavailable controls using readable text/symbols and the existing movement policy.
+
+**Traceability:** Same-client active-day FR-20 and E1–E4 whole-day continuity FR-17; bounded FR-1, retained evidence FR-6–16/19 and expiry FR-24. NFR-1–4; UX-DR3/7/14–24/38/44, with UX-DR31's recovery invariant extended by E6 rather than new mentor functionality here. AD-2 committed local authority, AD-3/9 single operational engine, AD-4/5 PostgreSQL and immutable synchronization state, AD-10 scope/locking, AD-11 writer identity, AD-12 fixed expiry, AD-13 gate failures and AD-14 coherent required build. FR-18 reconnect success/conflicts and full E6/E7 recovery are not claimed complete.
+
+**Dependencies:** Implemented 5.1 authority, 5.2 coherent boot, 2.8 available day data and E1–E4 feature persistence/operational contracts, including 3.1 qualified sensing limits and 3.2 movement rules. Demonstrate the already active same-client path with an accepted baseline; no future offline-start reconciliation, takeover, migration, mentor or summary feature is a prerequisite.
+
+**Size boundary:** Recovery coordinator and integration of existing own-day state into one consistent guarded view, plus continued existing offline operations through later activities. Reuse feature persistence and the operational engine. No new generic event-sourcing system, offline activation of a merely prepared day, generalized sync/conflict UI, Access lifetime preflight, writer transfer, migrations or E6/E7 implementation. Their V1 requirements remain assigned, not removed.
+
+**Pilot qualification:** Controlled browser/fullstack recovery cases contribute to E8-D. E8-P must qualify actual Lenovo/Brave closure/tablet restart, surviving browser storage, real sensing freshness and access/offline behavior across the integrated day; fixtures do not prove these. E8-E remains later field evaluation. These tests are specified, not executed during planning.
+
+**Approval:** Approved by the owner on 2026-09-26 with the stated scope: reopening restores the saved active day and driver choices while old measurements, missing data and pending synchronization retain their correct uncertainty. Planning approval only; this approved copy is canonical.
+
+### Story 5.4: Start a Previously Prepared Day Offline Within Valid Ordinary Access
+
+As the pilot owner,
+I want to start my previously confirmed and prepared working day when the connection is unavailable,
+So that loss of internet before departure does not prevent use of the available day, while expired sign-in cannot authorize a new day.
+
+**Acceptance Criteria:**
+
+**Given** a confirmed unexpired own day prepared on this client while authorized,
+**When** the existing operational entry path is used without a reachable server,
+**Then** require still-valid ordinary application authority, the existing server-issued owner/session/client/day grant, established writer scope and a coherent compatible local build before committing the prepared-to-active transition,
+**And** validate the locally retained confirmed plan/revision and available bundle associations, showing missing data rather than assuming that plan confirmation proves complete preparation,
+**And** missing/uncertain authority, pending logout, known revocation, another owner/client, terminal state or expiry cannot be bypassed by a cached login screen, cookie presence or an editable active flag,
+**And** no grant, ordinary session, writer epoch or fresh fourteen-day period is created offline; this uses preparation completed under 5.1 and existing access rules.
+
+**Given** an eligible prepared day and a valid actual entry into its operational lifecycle,
+**When** the transition is performed through the existing E3 entry flow,
+**Then** atomically persist the active-day transition and its typed outbox event before showing local activation as complete,
+**And** retain the concrete day, confirmed plan revision, client/writer scope, original grant and access-deadline basis, event identity/sequence and necessary timing evidence for later validation,
+**And** distinguish the transition's occurrence time from later server receipt time; keep uncertain timing explicitly uncertain rather than backdating it,
+**And** creating a grant, viewing the plan, scheduled departure or a download completion alone cannot activate a day,
+**And** activation itself does not confirm a trip match, departure, stop passage or completed activity; existing E3 ambiguity handling and movement restrictions govern trip choice,
+**And** no extra mandatory driving-time confirmation or new trip-selection algorithm is introduced.
+
+**Given** ordinary access expires at app_authenticated_at plus fourteen days,
+**When** offline activation is attempted just before, at or after that boundary,
+**Then** permit only a valid transition committed before expiry; at/after expiry leave a merely prepared day unstarted and require renewed ordinary application authorization before starting it,
+**And** recheck access at commit: opening a screen before the deadline is insufficient if the transition commits after it,
+**And** an already committed eligible active day continues within its unchanged day scope under 5.1 and can reopen through 5.3 even when server acknowledgement has not yet arrived,
+**And** delayed synchronization, reopening, clock changes and Access renewal cannot move the original transition earlier, extend its grant/data deadline or create a new ordinary period,
+**And** document and test the timing basis and its limits across suspension/restart/clock rollback; a caller-supplied occurred_at alone cannot prove eligibility. If timing/authority cannot be established, expose the uncertainty and require appropriate access recovery rather than inventing eligibility.
+
+**Given** activation is interrupted by write failure, closure, repeated entry or simultaneous tabs,
+**When** the app resumes or the operation is retried,
+**Then** before-commit failure leaves the day prepared with no orphan activation event; after-commit recovery restores the same active transition/event without a duplicate start or reset of deadlines,
+**And** reuse existing same-origin writer coordination and transactional state checks so only one transition is committed for this day,
+**And** an unresolved start on one tab cannot be replaced by a later scheduled trip or a different active day on another tab,
+**And** quota/read failure is visible and preserves permitted data; no automatic storage clearing, new identity or fabricated server acknowledgement repairs it,
+**And** persist activation without resetting established movement history or manufacturing the genuine first-start exception.
+
+**Given** a day validly activated locally and not yet accepted as active on the server,
+**When** a controlled reconnection submits the transition through the existing immutable batch path,
+**Then** FastAPI validates authenticated owner/client/day, the previously issued grant and its original bounds, plan/lifecycle context, current writer authority, expected revision and activation eligibility before PostgreSQL accepts the transition,
+**And** accept a transition delivered after ordinary expiry only when a verifiable timing basis establishes that activation occurred during valid ordinary access, within the unchanged continuation grant; the client's own timestamp, active flag or event ordering alone is insufficient, and delayed delivery alone does not require a fresh login when that basis is established,
+**And** validate the transition and relevant preceding persisted state/evidence, not a bare active flag or a backdated timestamp; document which evidence establishes eligibility and what the server cannot independently know about disconnected timing,
+**And** if eligibility cannot be established or authority has been revoked, do not silently authorize broader access or label the transition server-confirmed; preserve permitted pending work and expose the specific unresolved access/reconciliation outcome,
+**And** accept the activation and its deduplication/receipt/revision atomically under AD-5; subsequent events follow valid causal order without requiring a generic future conflict UI,
+**And** test real PostgreSQL acceptance before expiry and, after expiry, only with an explicitly documented verifiable timing basis; separately test client-only timestamps, forged late activation and missing/unverifiable timing evidence. Without that basis the start remains locally recorded with unresolved server status, no acceptance receipt or activation mutation, and the limitation is raised for a separate owner solution decision; do not claim the requirement passed or change V1 automatically.
+
+**Given** submission succeeds, loses its response or conflicts with newer server state,
+**When** a retry or response is handled,
+**Then** preserve the original immutable batch/event identity and payload, with one in-flight batch per day; only its valid matching receipt changes status to server-confirmed,
+**And** identical authorized retry after a lost response returns the established receipt without another activation or revision increment; changed content under reused identity is rejected,
+**And** stale writer/revision, terminal/expired day, unknown scope or incompatible payload cannot produce partial activation, silent overwrite, automatic takeover or re-upload of expired data,
+**And** keep permitted local work and stop incompatible submission for explicit recovery under AD-10/11; generalized conflict resolution and writer-transfer UI remain later E5 work,
+**And** learned logout/revocation takes precedence; pending revocation is settled before other private traffic, and fresh login cannot silently discard it,
+**And** HTML login pages, redirects or Access/network failures leave server confirmation pending/failed with the correct reason, not accepted and not proof of application logout.
+
+**Given** local activation succeeded while source retrieval is unavailable,
+**When** the driver uses or reopens the day,
+**Then** reuse 5.3's whole available-day continuity and honest uncertainty, including later trips, manual choices, bus identity and retained notice states,
+**And** show local activation versus server-confirmation status separately from source freshness, GPS quality, per-trip data coverage, app assets and credential lifetime,
+**And** missing source matches/stops do not become verified through activation; approved no-match/manual fallbacks remain usable where their own prerequisites hold, while incomplete data cannot be labelled Hele dagen klargjort,
+**And** source fetch success cannot acknowledge activation, and activation acceptance cannot clear an outstanding missing-update warning,
+**And** display understandable Norwegian text/symbols without exposing grant/epoch identifiers or demanding login while driving. Full automatic reconnect orchestration and actual Access lifetime preflight are subsequent slices.
+
+**Given** acceptance evidence is prepared for this slice,
+**When** the implementation is tested,
+**Then** include confirmed versus unconfirmed plans, valid versus missing grant, complete versus partial data, prepared versus already active/terminal day and ordinary-access boundary cases,
+**And** cover clock rollback/uncertain timing, closure on each side of commit, duplicate tabs, offline start followed by restart after ordinary expiry, delayed server delivery, lost receipt, stale writer/revision, revocation and original expiry,
+**And** retain only the fields required for the activation/validation contract in existing local state and authenticated FastAPI/PostgreSQL scope; no generic event-sourcing system, alternate credential or private archive is added,
+**And** apply AD-12 to every associated event, receipt and authority reference; retries or an unresolved eligibility decision do not extend retention. Keep private identifiers and payloads out of test publications and logs.
+
+**Traceability:** Offline entry portion of FR-17, bounded FR-1, FR-20 continuation after local activation, shared FR-6/16/19 and expiry/receipt FR-24. NFR-1–4; UX-DR3/14/23/38/44 and EXPERIENCE private access, shift overview and movement states. AD-2 local atomic authority, AD-3/9 operational lifecycle, AD-4/5 PostgreSQL validation/receipts, AD-10 fixed ordinary access and concrete-day continuation, AD-11 writer scope, AD-12 expiry, AD-13 gated connectivity and AD-14 coherent prepared build. No change to AD-1–AD-14.
+
+**Dependencies:** Implemented 5.1 server-issued day scope and online transition, 5.2 coherent assets, 5.3 same-client recovery, E2 confirmed dated plan/bundle, E3 operational entry/movement policy and existing E1–E4 synchronization primitives. The normal offline-start/delayed-acceptance case and protected rejection paths are testable here; future reconciliation UI, Access provisioning, E6 roles and E7 closing UI are not prerequisites.
+
+**Size boundary:** One prepared-to-active transition, its durable local evidence and normal later server acceptance/retry. No offline sign-in, authority issuance, cross-device takeover, generalized conflict resolution, full preparation dashboard, release migration or E6/E7 implementation. An unresolved timing/evidence limitation is a delivery risk requiring an owner solution decision, not an automatic change to V1.
+
+**Pilot qualification:** Controlled browser/FastAPI/PostgreSQL scenarios contribute to E8-D. E8-P must verify actual Lenovo/Brave time/storage/restart, credential behavior and the integrated prepared-day path before real-shift use. E8-E remains the later field evaluation. No tests or implementation are performed while drafting.
+
+**Approval:** Approved by the owner on 2026-09-26 with post-expiry server acceptance requiring a verifiable timing basis, never the client timestamp alone. Without it the start remains locally recorded with unresolved server status and the limitation requires a separate solution decision. Planning approval only; this approved copy is canonical.
+
+### Story 5.5: Check Access Coverage Before Duty and Renew Without Changing Day Authority
+
+As the pilot owner,
+I want preparation to show whether the verified outer access credential covers my granted day and settlement period,
+So that I can address an access expiry before duty without mistaking a renewed gateway login for renewed application access or guaranteed connectivity.
+
+**Acceptance Criteria:**
+
+**Given** authorized preparation for a concrete confirmed day with an existing 5.1 grant,
+**When** the app checks outer access coverage,
+**Then** use the actual Access token expiry from backend-verified signature, expected issuer/audience and expiry, not the configured policy duration, cookie presence or an unverified browser-decoded claim,
+**And** return only the necessary non-secret verified expiry/check time and scope-bound status through the authenticated same-origin backend; never expose or persist the raw token as application data or a browser service credential,
+**And** compare against that day's bounded grant deadline including its permitted settlement interval plus an explicitly documented, tested clock margin; a policy labelled one month is not evidence of this request's remaining lifetime,
+**And** keep the ordinary app deadline, day-grant deadline and AD-12 data deadline distinct; do not calculate a new grant from this check or silently extend an earlier applicable bound,
+**And** failure to verify identity, token or scope returns unavailable/invalid coverage rather than success and cannot expose private day data.
+
+**Given** verified expiry and the current coverage target,
+**When** preparation displays the result,
+**Then** distinguish sufficient, insufficient, expired and unverified/unavailable coverage with readable Norwegian text and relevant expiry/check time,
+**And** test expiry below, equal to and above the required deadline plus margin; only coverage meeting the documented bound is sufficient,
+**And** show confirmed plan, per-trip downloaded data, complete app assets, ordinary/day authority and current connectivity separately; sufficient Access lifetime alone means neither Hele dagen klargjort nor a promise of fresh sources or continuous online operation,
+**And** cached verification keeps its original check time/expiry and is not presented as newly verified while offline; missing verification stays unknown,
+**And** re-evaluate when the selected day, applicable grant/deadline or relevant identity changes, rejecting stale asynchronous results for another scope; re-evaluation changes no deadline,
+**And** where ordinary access has expired for a merely prepared day, require application reauthorization before starting it regardless of Access coverage.
+
+**Given** coverage is insufficient/expired or the gate requires renewal,
+**When** the owner deliberately chooses renewal while the interaction policy permits,
+**Then** preserve committed working state, outbox identities, manual choices, required build and existing deadlines before leaving/returning through the supported access flow,
+**And** recheck the actual returned credential through backend verification; a completed login page, redirect or successful HTTP status is not evidence of sufficient lifetime,
+**And** cancellation, failed renewal or an unchanged/shorter returned expiry leaves the result visibly unresolved or insufficient and allows a permitted retry without clearing data,
+**And** a renewed Access credential does not update app_authenticated_at, create/extend a day grant, activate a day, transfer writer authority, resolve 5.4's unverified start timing or mark any pending work accepted,
+**And** no automatic navigation or login demand interrupts driving; recovery reapplies the existing access and movement guards rather than restoring unrestricted detail.
+
+**Given** an already authorized local day and an outer gate that expires, redirects or fails during operation,
+**When** API/source-update attempts fail,
+**Then** classify verified gate rejection separately from application expiry/revocation, ordinary network failure and source failure where evidence permits; when the cause cannot be established, show unavailable access/updates without inventing a diagnosis,
+**And** HTML login/error pages, unexpected content types, redirects and CORS/network failures never become receipts, source success or cached app assets,
+**And** preserve permitted local operation under 5.1–5.4 and show the access/update limitation; Access failure alone does not erase the local day or prove application logout,
+**And** pause affected private update/sync attempts until actual usable access is re-established, avoiding navigation loops or indefinite in-progress status; renewed reachability alone does not clear failed source retrieval or acknowledge outbox events,
+**And** genuinely known app revocation/local lock remains effective regardless of outer access. General reconnect orchestration and source-success warning clearance remain the following E5 integration.
+
+**Given** local logout has locked private content and server revocation remains pending while Access blocks the request,
+**When** the owner follows the permitted gate-renewal path,
+**Then** keep private content locked throughout renewal and return, including history navigation and late callbacks,
+**And** permit only the access recovery needed to reach revocation, sending pending application revocation before any other private traffic; no preparation/source/sync request runs first,
+**And** show server logout as unconfirmed until its actual confirmation; lost response leaves the durable pending state and retry behavior from 1.2,
+**And** request outer Access logout only after application revocation is confirmed; distinguish a subsequent outer logout failure from the already confirmed application revocation,
+**And** Access login alone cannot recover retained work; apply 1.2/AD-10's settled revocation and fresh application login by the same owner, preserving original deletion deadlines,
+**And** storage/read failure cannot silently drop the pending revocation or unlock private content after restart.
+
+**Given** coverage checks, renewal callbacks or status persistence overlap with changed application context,
+**When** a response is applied,
+**Then** recheck the current owner/client/day and lock state and discard stale status from a previous scope rather than unlocking or overwriting it,
+**And** a second tab cannot use renewal to alter the active writer, duplicate an operational transition or drop immutable batches,
+**And** save only needed non-secret coverage metadata; private day associations follow existing AD-12 expiry and do not become a permanent access history,
+**And** retain private/demo origin isolation, exact-origin/CSRF protections and no-store behavior; the public demo cannot obtain private coverage, cookies or renewal callbacks,
+**And** reuse existing FastAPI/PostgreSQL authority records without adding a token vault, alternate login architecture or unrelated tables; failed status persistence is visible and never a false saved/verified result.
+
+**Given** this implementation is evaluated before actual deployment,
+**When** controlled browser/backend tests run,
+**Then** exercise valid/invalid signatures, issuer/audience mismatch, absent/expired token, shorter-than-configured lifetime, margin boundaries and mismatched day scope,
+**And** cover renewal success/cancel/failure/insufficient result, ordinary app expiry despite successful Access renewal, active local continuation, gate HTML/network ambiguity, stale callbacks and pending-logout renewal ordering,
+**And** distinguish fixture-proven application behavior from actual Cloudflare policy/global-session/identity-provider behavior; simulated verification is labelled and cannot be enabled as a production bypass,
+**And** document the measured/assumed clock margin and limits; E8-P must qualify the actual margin and returned token coverage on the intended route and Lenovo/Brave before real shifts,
+**And** if the deployed route cannot provide the adopted lifetime/renewal behavior, report a solution decision under AD-13 rather than disabling expiry validation or certifying readiness.
+
+**Traceability:** Access-readiness/renewal portions of FR-1/17/18/20 and private metadata FR-24; NFR-1–4; UX-DR3/14/23/38/39/44 and EXPERIENCE private access, data status and recovery. AD-2 separated readiness, AD-5 matching receipt status, AD-10 bounded app/day access and pending logout, AD-11 unchanged writer authority, AD-12 fixed retention, AD-13 verified token lifetime/renewal and AD-14 protected coherent boot. This does not qualify source coverage or supply a verifiable offline-start time for 5.4.
+
+**Dependencies:** Implemented 5.1–5.4 authority/boot/continuity and 1.2 logout behavior; existing authenticated API and app/source response classification. Controlled Access fixtures can verify this slice without live service provisioning or future conflict-resolution UI. Actual private-route protection and policy configuration remain prerequisites for E8-P, not assumed implemented by these tests.
+
+**Size boundary:** Verified coverage check, separate status and deliberate renewal/recheck including gate-blocked logout ordering. No Cloudflare provisioning/deployment, changes to adopted session durations, new identity provider, full synchronization engine, takeover, E6/E7 UI or inferred timing-proof mechanism.
+
+**Pilot qualification:** Controlled browser/FastAPI validation and preserved PostgreSQL authority state contribute to E8-D. E8-P requires the real gate/identity sessions, tablet redirects/cookies, clock margin and private-route protection; E8-E remains later field evaluation. Tests are specified, not executed during story planning.
+
+**Approval:** Approved by the owner on 2026-09-26 with sufficient coverage based on the actually verified Access expiry; renewal changes neither application sign-in nor day authority. Pending logout keeps private content locked while revocation is unresolved; subsequent recovery still follows AD-10 and 1.2. Planning approval only; this approved copy is canonical.
+
+### Story 5.6: Refresh After Reconnection Without Hiding Missing Updates or Pending Work
+
+As the driver continuing a working day,
+I want the app to refresh automatically when usable connectivity returns and show what has actually recovered,
+So that I can continue without mistaking a restored network connection for current source information or confirmed server storage.
+
+**Acceptance Criteria:**
+
+**Given** a permitted day running locally through a connection/update failure,
+**When** browser connectivity hints, foreground return or a bounded retry suggest reconnection,
+**Then** automatically attempt recovery through the existing private backend without requiring driver interaction,
+**And** treat a browser online flag as a hint, not proof that the backend, Access gate or provider is reachable; show checking/unavailable status until the relevant response supports stronger wording,
+**And** check local locks, pending revocation, day authority and expiry before private traffic; pending logout follows 1.2/5.5 before other requests,
+**And** known revocation locks locally, while outer Access failure uses 5.5's separate classification/renewal path without forced login navigation while driving,
+**And** keep existing permitted local operation and the active trip/manual choices throughout recovery; reconnect creates no movement evidence, new day, access extension or release activation.
+
+**Given** actual backend connectivity is restored but source refresh or operational submission is outstanding,
+**When** the top status is updated,
+**Then** show connection restored with synchronization/updates pending and retain the prominent yellow-triangle missing-update warning until required retrieval succeeds,
+**And** separately expose source-update state and locally saved work awaiting server confirmation, using concise text/symbols rather than technical queue/cursor identifiers,
+**And** source success with a pending/failed outbox does not mean all work is synchronized; an acknowledged outbox with failed source retrieval does not clear the missing-update warning,
+**And** do not present a failed/timed-out attempt as indefinitely in progress; identify pending, retry delayed, failed, access blocked or conflict requiring review where supported,
+**And** when there are no pending operational events, do not invent a synchronization task or treat an empty queue as evidence that source retrieval succeeded.
+
+**Given** restored authorized connectivity for the current source/day scope,
+**When** automatic source recovery starts,
+**Then** initiate or join 4.2's central per-source/pilot-area retrieval, respecting qualified cadence/provider limits and existing cursor/baseline recovery; multiple tabs/clients cannot multiply provider requests,
+**And** accept a qualifying shared retrieval that covers the recovery need, with committed source generation/scope evidence, without forcing a duplicate provider fetch for each reconnect,
+**And** an old pre-failure success, unchanged cached status, successful API health check, source request initiation or first page of a partial response cannot satisfy that need,
+**And** define and test the recovery basis using source generation/scope and accepted request/result state rather than client-clock order alone, including a backend retrieval completed while this browser was disconnected,
+**And** retain prior useful notices and source metadata while collection fails or remains partial; no response absence alone proves closure or an empty road network.
+
+**Given** a required source retrieval completes according to its qualified protocol,
+**When** validated results/status are committed on the backend and successfully applied to the current client context,
+**Then** clear only the corresponding missing-update condition; do not clear it solely because the backend reports success if the client could not receive or commit the applicable result,
+**And** failed sources/scopes retain visible local warnings; the overall missing-update warning remains while a required update is unresolved, without falsely describing the healthy sources as failed,
+**And** successful retrieval means that retrieval completed, not that source content is fresh, metadata is complete or all real disruptions are covered; retain original source update time, last source success and client receipt time separately,
+**And** an empty delta is no change; a complete empty result establishes only its qualified source scope/time, and never a general all-clear,
+**And** refresh never changes confirmed plans, manual times/stops, actual trip/progress or driver notice state by treating source data as operational authority,
+**And** reuse E4 lifecycle/relevance/seen/hidden/audio rules: unchanged/replayed notices and updates remain silent as specified; any genuinely new eligible receipt uses 4.8's policy rather than reconnect itself becoming an audio trigger.
+
+**Given** committed local operational events or an immutable in-flight batch awaiting confirmation,
+**When** usable access and current writer authority permit normal resubmission,
+**Then** resume the existing AD-5 submission path in order, with one stable batch in flight per day and unchanged batch/event identity and payload after an uncertain response,
+**And** only a valid matching receipt marks its accepted events confirmed in the local transaction; HTTP success, source retrieval or a read of server state cannot substitute for it,
+**And** preserve locally committed changes made during the request and pending events outside the acknowledged batch; an acknowledgement cannot replace the whole local view with the submitted snapshot,
+**And** a valid delayed receipt remains processable after a reconnect-generation change under current access/expiry rules, whereas stale source-status callbacks cannot regress newer source state; these different ordering rules must be tested separately,
+**And** retry a lost acceptance response without duplicating PostgreSQL effects; failure to save the receipt locally retains the immutable batch for safe retry,
+**And** 5.4 activation delivered after ordinary expiry remains unresolved without its required verifiable timing basis; reconnect or a fresh Access credential cannot manufacture that evidence.
+
+**Given** source throttling/timeouts, repeated network flapping or concurrent recovery triggers,
+**When** attempts are scheduled and completed,
+**Then** coalesce duplicate triggers, use bounded documented retry/backoff consistent with provider rules and terminate each attempt with an honest result,
+**And** ensure a stale failure cannot replace a later successful generation or clear a newer failure for another scope; pending timestamps do not reset forever on every online event,
+**And** a failure of one independent source/submission path does not block unrelated authorized paths, subject to global access/revocation and causal event-order constraints,
+**And** tab coordination prevents duplicate operational senders; source refresh stays centrally coordinated and does not increment operational server revisions,
+**And** offer a movement-permitted retry where useful without demanding it during driving, stealing focus, opening detail or repeatedly announcing unchanged status; provide accessible focus handling for any invoked feedback surface.
+
+**Given** a revision/writer conflict, invalid payload/schema, terminal/expired day or learned authority change,
+**When** an attempted submission or response reports that condition,
+**Then** stop incompatible retries for the affected work and preserve permitted local events and their original identities for explicit resolution; never silently overwrite, change epochs, mint substitute batches or take over by timeout,
+**And** an old client stops acting as writer once it learns of transfer; retained changes remain identifiable for later review and are not auto-submitted under the new epoch,
+**And** apply access/data expiry before read/send/application of late responses; expired work cannot be re-uploaded or given a new grace period to finish recovery,
+**And** preserve retirement-versus-acknowledgement distinctions for any existing retired batch; this slice does not implement E7 terminal trimming/settlement,
+**And** expose bounded recovery status and existing safe local/read-only behavior as applicable; explicit conflict-resolution and planned/emergency transfer UI remain subsequent stories, not a prerequisite for detecting/protecting these cases.
+
+**Given** status/recovery metadata and actual synchronized data are persisted,
+**When** storage, logout or privacy checks run,
+**Then** reuse IndexedDB and authenticated FastAPI/PostgreSQL contracts, adding only necessary current recovery scope/generation/status metadata,
+**And** failed local/backend writes cannot be shown as saved/applied; retain prior usable permitted state and retry non-destructively,
+**And** private associations, outboxes and receipts retain original AD-12 deadlines; no permanent attempt history, raw response archive, credentials or GPS tracks are introduced,
+**And** private/demo separation and authenticated scope checks remain effective for refresh triggers/status and receipt retrieval; responses arriving after logout or a different owner/day cannot expose private content.
+
+**Given** a controlled E1–E5 day with retained notices and pending local corrections,
+**When** recovery tests run,
+**Then** cover the cross-product of source success/failure and outbox accepted/pending/failure, plus no pending events, first-ever source failure, multiple source scopes, partial pages and valid empty delta,
+**And** cover online-with-unreachable-backend, Access HTML, source outage with healthy backend, network flapping, restart during retry, concurrent tabs, stale callbacks and valid late matching receipts,
+**And** inject database/local acknowledgement failure, lost acceptance response, edits during submission, logout/revocation, original expiry, writer conflict and unresolved 5.4 timing evidence,
+**And** verify real PostgreSQL receipt/revision effects separately from source generations and inspect client warnings at each transition; neither path's success may conceal the other's unresolved outcome.
+
+**Traceability:** Primary FR-18 and shared FR-12/13/17/19/20, FR-1/16 access and safe presentation, FR-24 retention. NFR-1–4; UX-DR14/19/22/23/38/39/44; AD-2 retained local authority, AD-4/5 atomic receipts and independent source state, AD-7 central qualified retrieval, AD-8 notice identity, AD-9 unchanged actual context, AD-10/11 authority/conflict gates, AD-12 original expiry, AD-13 gate failures and AD-14 compatible client contract. No successful reconnect certifies live coverage or pilot readiness.
+
+**Dependencies:** Implemented 5.5 access handling, 5.1–5.4 continuity/activation, 4.2 qualified source retrieval/status, E4 lifecycle through 4.8 and existing E1–E4 immutable submission/receipt handlers. This integrates those paths and protects conflicts; it does not depend on a future conflict UI or transfer implementation to demonstrate normal recovery and rejection handling.
+
+**Size boundary:** Reconnect coordinator and shared status, using existing source and submission mechanisms. No new adapter, generic synchronization framework, conflict-resolution UI, writer transfer, terminal settlement, migrations or E6/E7 functionality. Actual source qualification remains 4.1/4.2 evidence and E8-P integration.
+
+**Pilot qualification:** Repeatable browser/FastAPI/PostgreSQL fault scenarios contribute to E8-D. E8-P must qualify actual tethering, host/home-network and Access/source failure/recovery on Lenovo/Brave, with retained driving context and readable warnings. E8-E remains later field evaluation. Tests are specified, not run in planning.
+
+**Approval:** Approved by the owner on 2026-09-26 with restored connectivity, validated source updates and confirmed server storage remaining separate statuses. Pending revocation is processed first; conflicts and lost receipts cannot cause silent overwrite. Planning approval only; this approved copy is canonical.
+
+### Story 5.7: Review Conflicting Local Work Before Applying or Discarding It
+
+As the pilot owner,
+I want to compare preserved local changes with the server's accepted state and explicitly choose their outcome,
+So that reconnecting cannot silently overwrite my work or apply an obsolete device's changes as current authority.
+
+**Acceptance Criteria:**
+
+**Given** 5.6 detects an operational revision/writer conflict or unexplained server-state change,
+**When** the conflict is retained for review,
+**Then** stop affected automatic submission, preserving the local committed state, immutable pending events/batches and the accepted baseline/revision known to this client within their original expiry,
+**And** distinguish confirmed conflict, unknown submission outcome, rejected payload and lost writer authority; do not present every failure as a choice between two equally confirmed versions,
+**And** create only the minimal conflict/review references needed to avoid overwriting the surviving work, not a permanent duplicate archive,
+**And** show a concise review-needed status without opening a comparison or demanding driver action while moving; local operations remain subject to actual access/writer restrictions.
+
+**Given** a batch may already have committed but its response was lost,
+**When** review obtains the authorized server state and receipt/status information,
+**Then** establish the known batch outcome before proposing its effects as new corrections; an existing valid matching receipt acknowledges only its original accepted events,
+**And** authorized receipt retrieval is read-only and does not require the original writer epoch to remain current, but still requires valid owner/day scope and unexpired data,
+**And** a timeout, failed lookup or simple absence of a receipt while an original request may still commit is not proof of rejection or permission to duplicate/discard its effects,
+**And** leave unresolved outcomes visibly unresolved and preserve pending identities; never mint a replacement batch merely to escape a lost receipt,
+**And** source generations, retrieval timestamps and client clock order are not evidence of an operational server revision or a winner.
+
+**Given** authorized access to a coherent accepted server state and identifiable retained local changes,
+**When** the owner opens review under the existing movement policy,
+**Then** show the compared day/plan, server revision and last server-received time, retained local change origins, receipt status and relevant original deadlines in understandable terms,
+**And** compare the current server result with local intended changes and the known baseline where available; missing baseline/facts remain unknown rather than reconstructed by guessing,
+**And** persist the exact comparison inputs, local change-set identity and server revision with the review selections so reopening does not silently compare a different basis,
+**And** permit explicit choices to retain a valid local correction for application, keep the server result/discard the identified local proposal, or leave an item unresolved; no preselected bulk winner or last-write-wins merge,
+**And** show dependent items as a coherent group where independent selection would violate plan/context/event invariants, and explain what the chosen result will change before confirmation,
+**And** cancel/close preserves saved review choices without applying them. Keyboard focus and touch controls follow the existing accessible review and movement restrictions.
+
+**Given** proposed corrections affect existing own-day operations,
+**When** a selected result is validated,
+**Then** use the same domain rules as its existing feature and preserve original evidence separately from the new manual correction: actual/manual/uncertain origin does not become GPS or source evidence,
+**And** distinguish actual bus-change time from registration time, unknown times from supplied times, exact stop occurrence from stop name, and skipped/interrupted work from completed work,
+**And** retain source notice facts and exact-version seen/registered/hidden meanings; a review choice cannot create a source-confirmed ending, mark unseen content seen or replay an old sound,
+**And** preserve confirmed plan scope, service date, activity order, manual trip pin and recorded outcomes unless an explicit valid domain action authorizes the particular change,
+**And** a required plan revision uses the existing E2 comparison/confirmation rules rather than accepting a whole conflicting plan as an unrestricted overwrite,
+**And** unsupported/dependent corrections stay unresolved with a reason; do not loosen movement, access, terminal or data-quality rules to make a conflict disappear.
+
+**Given** the owner confirms selected valid corrections while holding current write authority,
+**When** the resolution is committed and submitted,
+**Then** recheck current permission, day/plan context, the reviewed local change set, expected server revision and writer epoch; commit the new local correction proposal and its new outbox events atomically before reporting it locally saved,
+**And** create new correction events/batch identities under current authority with minimal provenance linking to the reviewed conflict; never edit or resubmit the old immutable batch under a new epoch,
+**And** FastAPI/PostgreSQL validate the current authority, expected revision, eligible original outcomes and domain invariants before atomically accepting corrections, deduplication, receipt and next revision,
+**And** server changes or newly discovered original acceptance invalidate the stale proposal rather than silently rebasing it; preserve the review and require comparison again,
+**And** do not claim resolved-on-server until the matching correction receipt is durably recorded locally; a lost response retries the same new batch unchanged without applying the correction twice,
+**And** do not let a delayed old request duplicate, undo or contradict the accepted resolution; test original acceptance before review and delayed requests rejected by the established revision/epoch/outcome checks. If an original outcome is still unsafe to resolve, keep it pending rather than claiming a race was settled.
+
+**Given** local or server facts change while review is open, or an item is explicitly discarded,
+**When** confirmation or reopening occurs,
+**Then** compare the saved review basis with current facts; a new local correction, new server revision, changed plan or authority invalidates affected choices and requires renewed review,
+**And** explicit discard names the affected unsynchronized proposal and its consequences, without labelling that proposal server-accepted or deleting an already accepted historical fact,
+**And** do not discard an unknown-outcome submission as though it was rejected; resolve its status first or retain the uncertainty,
+**And** atomically record the valid local decision and update only its eligible queue/review references, leaving unrelated pending work and newer corrections intact,
+**And** clean up redundant applied/discarded conflict copies once their outcome is established, retaining only necessary correction/receipt evidence until the original AD-12 expiry; there is no new conflict-retention period.
+
+**Given** this client has lost writer authority or lacks usable access/current server evidence,
+**When** it opens or attempts to apply a review,
+**Then** allow only review/read operations actually authorized by current owner/day access; loss of a day grant does not automatically grant read access, and local lock still hides private content,
+**And** never let review itself increment writer_epoch, rebind a grant or take control; application requires established current authority, with transfer handled separately,
+**And** an old client preserves permitted pending work for later explicit review and stops acting as writer once it learns of takeover; it cannot auto-submit old work under the replacement epoch,
+**And** offline saved review is labelled against its last verified basis and cannot be declared server-resolved without validation; access recovery follows AD-10 and pending revocation remains first,
+**And** a generic conflict choice cannot solve 5.4's missing verifiable start-time basis, resurrect expired/terminal work or authorize a new day after ordinary expiry.
+
+**Given** storage failure, expiry, logout or interrupted resolution,
+**When** review/resolution is saved, sent or recovered,
+**Then** preserve the last committed permitted state and immutable batches, with explicit failure rather than silent reset or false completion,
+**And** restart restores review inputs/decisions and distinguishes locally saved resolution, server-confirmed resolution and unresolved originals without applying anything twice,
+**And** check original access/data deadlines before private display, status lookup and submission; expiration deletes affected private copies and forbids replay rather than extending them for review,
+**And** use authenticated FastAPI and real PostgreSQL transactions for required resolution metadata, introducing only fields/entities needed by this slice; no private payloads in logs, public demo or diagnostic exports.
+
+**Given** representative operational conflict fixtures and an actual PostgreSQL backend,
+**When** verification runs,
+**Then** test a same-writer stale revision, a former writer with authorized read but no write, lost-original receipt, accepted original discovered during review and an original still of unknown outcome,
+**And** test local/server changes during review, grouped dependent corrections, explicit retain/discard/defer, cancel/reopen, transaction failure, resolution receipt loss and delayed old requests,
+**And** include a manual stop correction at a repeated stop, a bus-change registration with unknown actual time, a notice version that changed and a plan revision requiring E2 confirmation,
+**And** verify no silent overwrite, false acknowledgement, duplicate effect, unauthorized takeover or new expiry; fixture-established current authority makes these tests independent of future transfer UI.
+
+**Traceability:** Explicit recovery/conflict portions of FR-18/20 and preservation FR-17; shared FR-1/6/9/11/14/16 and FR-24 expiry. NFR-1–4; UX-DR8/14/16/17/19/22/23/38/39/44. AD-2 preserved local work, AD-4/5 transactional receipts and immutable batches, AD-8 source versus driver state, AD-9 operational invariants, AD-10 read/write access and logout, AD-11 explicit review/new corrections under current authority, AD-12 conflict-copy cleanup and original expiry. E6/E7 extend their specific role/terminal invariants later.
+
+**Dependencies:** Implemented 5.6 conflict detection, E1 immutable receipt/status support and E2–E4 domain validation/provenance, plus 5.1–5.5 access and recovery. Same-client revision conflicts are independently resolvable; former/current-writer fixtures verify boundaries without a future transfer flow. Ingesting another physical device's retained work accompanies the later explicit transfer/recovery story, not an implicit cross-account capability here.
+
+**Size boundary:** One preserved-conflict comparison and explicit correction/discard/defer flow using existing domain commands. No generic merge engine, automatic rebase, writer transfer, device-to-device transport, mentor workflow, terminal trimming/settlement or clock-proof solution. Domain-specific failures remain explicit rather than creating unrestricted edits.
+
+**Pilot qualification:** Controlled client/FastAPI/PostgreSQL race and recovery tests contribute to E8-D. E8-P needs integrated actual-device disconnect/reconnect and later writer-transfer behavior with readable, movement-governed review. E8-E remains field evaluation. Tests are specified, not executed in planning.
+
+**Approval:** Approved by the owner on 2026-09-26 with revision conflict, rejected change and unknown lost-receipt outcome kept distinct. Review requires a valid basis; driver choices cannot overwrite history or give manual corrections false source/GPS evidence. Planning approval only; this approved copy is canonical.
+
+### Story 5.8: Transfer an Active Day Deliberately to a Verified Replacement Device
+
+As the pilot owner,
+I want to transfer my active working day to another authenticated device after synchronizing the current one,
+So that the replacement continues the correct state without two authorized writers, lost corrections or renewed deadlines.
+
+**Acceptance Criteria:**
+
+**Given** an active unexpired own day, its current writer and an available replacement client,
+**When** the owner begins a planned transfer under the existing movement policy,
+**Then** identify the concrete day and intended destination explicitly, require the destination to be authenticated as the same owner, and validate applicable source/destination access on the backend,
+**And** require usable backend connectivity for the transfer itself; a locally cached plan or grant cannot authorize an offline ownership transfer,
+**And** show preparation, sending remaining work, transfer outcome and destination readiness as distinct steps without exposing technical epoch/session identifiers,
+**And** no missed heartbeat, network timeout, new login or opening the day on another device triggers takeover,
+**And** no mandatory transfer interaction occurs while driving; source links/detail and transfer controls retain access/movement restrictions.
+
+**Given** the owner deliberately prepares the source client for handover,
+**When** transfer preparation starts,
+**Then** stop new operational mutations on that client and its coordinated tabs, including automatic progression/notice interaction or audio-attempt effects that would create unsynchronized operational state,
+**And** persist the handover-pending guard so reopening cannot silently resume as writer during an unresolved transfer; show that normal tracking/writing is paused and preserve an honest observation gap,
+**And** drain already committed work using 5.6 and matching receipts, resolving any unknown outcome/conflict through the existing paths before planned transfer can proceed,
+**And** verify that the server has the necessary current recovery state, plan/bundle references, manual choices, movement/outage history and notice-version/receipt/attempt state; an apparently empty queue alone is not proof of a complete recovery basis,
+**And** reuse necessary existing checkpoint/event contracts rather than mirroring every internal client field or copying cookies/credentials,
+**And** a failed write/drain, unresolved 5.4 activation or unresolved conflict leaves transfer incomplete and preserves permitted work; it cannot silently become emergency takeover.
+
+**Given** an explicitly identified destination before the authority transfer,
+**When** pre-transfer readiness is checked,
+**Then** verify valid same-owner destination access and the actual complete compatible app-file set required for this day before retiring the source writer/day-grant authority,
+**And** bind the result to this destination, required build and handover attempt; a generic cached ready flag, another client or an unverified server assumption about local files is insufficient,
+**And** missing/corrupt files, failed local verification, unavailable destination or invalid access prevents transfer, leaving the source authority unchanged; a source already paused resumes only under the existing verified cancellation rules,
+**And** recheck applicable access at the transfer transaction and invalidate obsolete preparation evidence when the required build/destination changes,
+**And** this precheck does not replace post-transfer state/revision verification or guarantee that browser storage cannot subsequently be evicted.
+
+**Given** source changes are stopped, required work is confirmed and the destination has passed access/app-file verification for this transfer,
+**When** FastAPI accepts the planned transfer request,
+**Then** verify current owner/day/client authority, source writer epoch, final expected server revision, active lifecycle and unexpired grant/data limits,
+**And** in one PostgreSQL transaction increment writer_epoch, bind the existing bounded day authority to the new authenticated client/session, retire the former client's day grant and persist the retry-safe transfer result with its post-transfer server revision,
+**And** preserve existing grant/data deadlines and the destination's ordinary authentication clock; transfer creates neither a new fourteen-day period nor an automatic grant extension,
+**And** authorization extension, if ever requested separately, follows AD-10 fresh application authorization rather than being bundled into transfer,
+**And** a mismatched revision/epoch, wrong owner/destination, missing access, terminal day or expired scope causes no partial transfer; preserve source work and require explicit correction/review,
+**And** requests racing from the former writer are ordered by transaction checks: an earlier accepted mutation invalidates a stale transfer basis, while a new mutation after transfer is rejected under the old epoch. Existing authorized receipt reads remain distinct from new writes.
+
+**Given** a transfer request or its response may be lost,
+**When** either permitted client retries or checks its outcome,
+**Then** use the same persisted operation identity and immutable request content; identical authorized retry/status lookup returns the established result without another epoch increment or deadline change,
+**And** distinguish not completed, confirmed transferred and unknown outcome; timeout or a missing response alone never reactivates the source or makes the destination ready,
+**And** preserve expiry and read-access checks for lookup; retirement of the old grant does not itself confer status/private-read authority. Use an authorized destination or appropriate application access recovery where the old client no longer has scope,
+**And** restarting either device restores the pending/confirmed handover state and continues outcome verification without guessing from its old local snapshot,
+**And** test database failure before commit, lost response after commit, changed-content retries and concurrent attempts to two different destinations; only the valid serialized transfer succeeds.
+
+**Given** the backend confirms the transfer with a post-transfer revision,
+**When** the destination prepares to control the day,
+**Then** load or verify the required recovery state and day data against that returned revision, under the new day authority and current writer epoch, before operational mutation or audio/progression side effects start,
+**And** verify the compatible complete app assets and required data references from 5.2; previously downloaded state alone cannot establish destination readiness,
+**And** a state/revision mismatch, missing critical recovery data, local write failure or superseding authority change keeps the destination not ready, preserving data without reverting ownership by guesswork,
+**And** persist the verified recovered state and authority references before showing ready-to-continue; verify current authority again if intervening activity makes the transfer result stale,
+**And** preserve manual trip pin, exact stop occurrence, bus-change provenance, plan/service date, notice seen/registered/hidden and audio-attempt state; partial optional stop/source data remains explicitly incomplete under existing fallbacks,
+**And** positions/speeds from the source are historical, not live destination observations. Preserve the observation gap and established movement history; changing device does not create a genuine-first-start exception, restart a five-minute period, replay old audio or certify unobserved progression.
+
+**Given** transfer is confirmed or remains uncertain,
+**When** the source receives the result, reconnects or reopens,
+**Then** keep it from operational writing once authority has moved, and reject new old-epoch mutations on the backend even if its UI has stale information,
+**And** retain only permitted local data within original deadlines, with read visibility governed by current access; do not describe grant retirement as global account logout or erase all source data as a transfer side effect,
+**And** unexpected retained/new local work is shown for explicit 5.7 review rather than silently submitted under the destination epoch,
+**And** do not promise physical prevention of all disconnected edits on an uninformed device; the prepared source guard and server authority checks are the bounded guarantees,
+**And** source content, app version, source freshness and actual bus identity do not change merely because device ownership changed.
+
+**Given** the owner cancels preparation or the destination cannot complete recovery,
+**When** the workflow exits or retries,
+**Then** allow source writing to resume only if the transfer is established not to have occurred and current authority is verified, lifting the local pause without resetting operational history,
+**And** cancellation after a possibly committed request cannot be treated as rollback; establish its outcome first,
+**And** after confirmed transfer, destination recovery failure does not automatically give the source authority back. Retry destination recovery or use a new explicit valid transfer; no timeout-based fallback,
+**And** an unavailable source or undrainable work explains why planned transfer cannot finish; emergency takeover remains a separately reviewed story,
+**And** keep pending revocation ahead of all private transfer traffic, invalidate late callbacks after logout, and apply original expiry before resume/read/send. Renewal or retry never extends retention.
+
+**Given** this planned handover is tested with two isolated browser clients and real PostgreSQL,
+**When** verification exercises the workflow,
+**Then** cover successful drain/transfer/recovery, changes racing with source freeze, old queued requests, wrong-owner destination, stale revision, competing destinations, lost transfer response and source/destination restart at each boundary,
+**And** test old ordinary authentication expired with a valid active-day grant and an authenticated destination, preserving the old grant bound while distinguishing receipt/status read permissions,
+**And** test invalid destination access and missing/corrupt app files before transfer, verifying no authority retirement; separately test files lost after the precheck, stale destination state, post-transfer revision mismatch, missing critical state, partial optional data and destination write failure, all requiring explicit recovery without automatic transfer back,
+**And** include manual stop/bus corrections, notice version/audio state and a pre-existing GPS outage so restoration proves both continuity and absence of a fresh-start permission bypass,
+**And** verify one current backend writer, atomic grant retirement/rebinding, identical-retry results and unchanged deadlines; no claim of success from device UI alone,
+**And** store only minimal transfer/recovery metadata in existing local and FastAPI/PostgreSQL scope, protected by ownership/CSRF/no-store and original AD-12 deletion; no public pairing links, credential export or permanent private handover archive.
+
+**Traceability:** Planned device continuation within FR-18/20 and FR-17; bounded FR-1, shared FR-6/9/14/16 and retention FR-24. NFR-1–4; UX-DR3/14/16/19/23/38/39/44. AD-2 local authority, AD-4/5 atomic persistence/receipts, AD-8 retained notice state, AD-9 operational continuity, AD-10 client-bound day authority, AD-11 planned transfer and post-transfer verification, AD-12 deadlines, AD-13 usable gated access and AD-14 compatible recovery. Role/terminal extensions remain E6/E7.
+
+**Dependencies:** Implemented 5.1–5.7 grants, coherent build, same-client recovery, normal synchronization and conflict handling; existing E1–E4 recovery contracts. Two authenticated same-owner clients can demonstrate this slice. No emergency takeover, device transport of unsynchronized conflict copies or future E6/E7 UI is required.
+
+**Size boundary:** One online planned handover with source freeze/drain, atomic authority transfer, retry-safe outcome and verified destination recovery. No cross-account sharing, automatic ownership expiry, emergency takeover, broad pairing platform or credential migration. Remaining unavailable-device recovery is a separate slice.
+
+**Pilot qualification:** Repeatable two-client/FastAPI/PostgreSQL races contribute to E8-D. E8-P requires actual target-device stop/resume, usable replacement-device capability, compatible cached assets, gate/session and signal-state recovery; software authority alone does not qualify replacement hardware. E8-E remains later field evaluation. Tests are specified, not executed during planning.
+
+**Approval:** Approved by the owner on 2026-09-26 with destination access and required app files verified before the old writer authority is retired. Post-transfer state must still be verified against the server revision before controlling the day; failure requires explicit recovery and never automatic transfer back. Planning approval only; this approved copy is canonical.
+
+### Story 5.9: Take Over an Unavailable Device's Day with Explicit Missing-Work Awareness
+
+As the pilot owner,
+I want to deliberately take over my active day from an unavailable or undrainable device using the last verified server state,
+So that I can continue on a replacement while knowing that unsynchronized old-device work may be missing and will not silently merge later.
+
+**Acceptance Criteria:**
+
+**Given** planned transfer cannot finish because the former device is unavailable or cannot drain its work,
+**When** the same owner opens the separate emergency takeover path,
+**Then** require valid authenticated access on the replacement and reachable authorized backend state for the concrete active unexpired day,
+**And** show the last server-received operational timestamp/revision and its available recovery basis, clearly stating that later work on the old device may be missing,
+**And** distinguish server receipt time from actual activity/observation time and from source retrieval time; none proves when the old device last operated,
+**And** require an explicit owner confirmation of the named day/destination and possible missing work, under existing movement restrictions; timeout, login or missing heartbeat alone cannot trigger takeover,
+**And** cancellation leaves authority unchanged, and the old device's cooperation is not a hidden prerequisite for this emergency path.
+
+**Given** a takeover warning is presented against a specific server revision,
+**When** the owner confirms it,
+**Then** verify the review basis still matches the authoritative day/writer/revision before transfer; newly accepted old-device work or another takeover invalidates a stale confirmation and requires refreshed review,
+**And** show known available/missing context without claiming the backend can enumerate events never received from an offline device,
+**And** verify the replacement's same-owner access and actual required complete compatible app-file set before retiring old authority, following 5.8's destination-bound precheck,
+**And** invalid access, missing app files or an ineligible day prevents transfer rather than weakening the precheck because the action is labelled emergency,
+**And** unavailable critical recovery context is explicit; emergency takeover cannot turn a merely prepared or unverified active flag into an authorized active day. In particular, unresolved 5.4 timing evidence is not repaired by choosing takeover.
+
+**Given** the owner confirms an eligible unchanged takeover basis and destination readiness,
+**When** the backend commits takeover,
+**Then** atomically increment writer_epoch, rebind the existing bounded day grant to the authenticated replacement/session, retire the old client's grant and save the post-transfer revision and operation result in PostgreSQL,
+**And** preserve all existing authority/data limits; neither emergency selection, fresh destination login nor missing old-device work automatically extends the old grant or data deadline,
+**And** no old-client drain is claimed, and no fabricated completion/acknowledgement is added for work that never reached the server,
+**And** racing old-device writes either commit before the checked takeover basis, causing review to become stale, or are rejected as new mutations under the old epoch afterward; there is no arrival-order merge,
+**And** use 5.8's stable request identity/status lookup for lost responses and repeated attempts, respecting current read authorization and expiry; unknown outcome is not permission to start a second takeover or return authority automatically.
+
+**Given** takeover is confirmed,
+**When** the replacement recovers the day,
+**Then** load/verify permitted recovery state and data against the returned post-transfer revision and current authority before controlling the day, using 5.8 rather than trusting a previously downloaded copy,
+**And** show that restored context is the last server-accepted basis with possible missing old-device work; do not label the reconstruction a complete record of actual driving,
+**And** preserve known manual pins, bus identity/provenance, stop occurrence, corrections and notice-version states, retaining unknown/missing values rather than inferring later outcomes from the schedule,
+**And** old position/speed and source information remain historical with an observation gap; transfer provides no new GPS evidence, full standstill, first-start exemption or proof of the 100-metre target,
+**And** if actual context needs correction, use existing movement-permitted E3 actions and manual provenance; absent critical state cannot silently choose an arbitrary trip or unrestricted control state,
+**And** revision mismatch, local persistence failure, subsequently evicted files or changed authority keeps the replacement not ready and requires explicit recovery, never automatic transfer back.
+
+**Given** unsynchronized old-device work may include notice receipt/audio-attempt state,
+**When** retained notices are reconstructed on the replacement,
+**Then** preserve known source identity/version and confirmed interaction state, but do not infer that unknown old-device seen/registered/audio results were absent,
+**And** treat the retained backlog as recovery, not newly arriving notices that deserve catch-up chimes; an indeterminate old playback outcome remains silent,
+**And** genuinely new receipts after takeover use existing 4.8 eligibility under the actual current trip, not takeover itself as an audio trigger,
+**And** do not mark notice content seen merely by downloading it or erase a known hidden/registered version; missing interaction evidence remains explicitly uncertain where material to the displayed result.
+
+**Given** the former device returns with retained local work,
+**When** it learns from an authorized authority/status check or rejected request that takeover occurred,
+**Then** stop its writer activity and coordinated tabs, preserve permitted immutable events/batches and last local context, and explain that the day is controlled elsewhere,
+**And** do not adopt the new epoch, retry old events under new identities, overwrite the replacement's state or discard old work as if acknowledged,
+**And** read/review access still follows AD-10: retired day authority is not a new read grant; settle pending logout and require appropriate same-owner application authorization where needed,
+**And** use authorized original receipt/status lookup to distinguish already accepted events from rejected or unresolved ones, including lost responses from before takeover, without resubmitting operational effects,
+**And** a still-disconnected former device cannot know immediately that takeover occurred and may continue accumulating local changes; takeover status must say that backend authority moved, not that the old device has already stopped. The backend rejects later new writes under its old authority, and all permitted local changes remain possible unsynchronized work for explicit review once the device returns,
+**And** retain local work for the separate explicit cross-device review path with 5.7's provenance/outcome rules; this slice does not claim that retained old-device changes have already reached the current writer.
+
+**Given** account revocation, pending logout, terminal state, original expiry or an unsafe recovery condition,
+**When** takeover, lookup or return-device recovery is attempted,
+**Then** apply access/lifecycle checks before any private read or write; an emergency label bypasses none of them,
+**And** enforce original AD-12 expiry on both devices and server-held copies, including transfer metadata and pending conflict references; do not extend retention to wait for the old device,
+**And** after expiry no late upload may recreate the day; if the old device/storage is permanently lost, report that its never-synchronized work may be unrecoverable rather than inventing a backup,
+**And** preserve useful permitted state through transaction/local-write failure and distinguish local preservation from server acceptance,
+**And** store only necessary authenticated takeover/confirmation/revision metadata in existing local and FastAPI/PostgreSQL scope, with private/demo isolation and no private payloads or credentials in logs.
+
+**Given** two isolated clients and a real PostgreSQL backend,
+**When** verification exercises emergency takeover,
+**Then** cover an offline/lost old device, an available but undrainable device, explicit cancel/confirm, wrong-owner caller, expired/terminal/prepared day, missing destination assets and unknown activation eligibility,
+**And** test old writes arriving before/after the takeover transaction, two competing replacements, a changing confirmation basis, database failure, lost response, retry and replacement restart/recovery failure,
+**And** retain unsynchronized manual trip/stop/bus changes and notice/audio state on the former device; verify the replacement exposes the possible gap and its return neither duplicates accepted work nor silently merges rejected/unknown work,
+**And** keep the former device disconnected through confirmed takeover, make another local correction, then reconnect: the UI never claimed it had already stopped, new old-epoch writes are rejected and the local correction survives for explicit review; separately verify unchanged deadlines, pending-logout lock, no fresh-start exemption, no old audio replay and one current backend writer,
+**And** use authoritative fixtures to test grant/epoch behavior, not to claim real replacement-device sensing or actual source coverage.
+
+**Traceability:** Emergency recovery FR-18/20 and continuity FR-17, bounded FR-1, shared actual-context/manual/notice FR-6/9/11/14/15/16 and expiry FR-24. NFR-1–4; UX-DR3/14/16/17/19/23/25/38/39/44. AD-2 local work and offline limits, AD-4/5 atomic authority/receipt outcome, AD-8 notice provenance, AD-9 context, AD-10 access, AD-11 explicit emergency takeover and former-writer preservation, AD-12 accepted loss/expiry, AD-13 gated access and AD-14 compatible recovery. E6/E7 later extend their role/terminal evidence rules.
+
+**Dependencies:** Implemented 5.8 transfer transaction/prechecks/result recovery, 5.7 conflict outcome/provenance rules, 5.6 reconnect detection and E1–E4 persistence/sensing/notice contracts. This slice demonstrates takeover and preserved former-device work without a future cross-device evidence transport UI. That remaining integration will feed 5.7 under current authority.
+
+**Size boundary:** Explicit emergency takeover from the last server-held basis and safe returning-old-client behavior, reusing planned-transfer primitives. No automatic failover, cross-account collaboration, new credential architecture, private backup, full evidence transport/reconciliation UI, E6/E7 functionality or timing-proof workaround.
+
+**Pilot qualification:** Controlled two-client/FastAPI/PostgreSQL cases contribute to E8-D. E8-P requires integrated actual-device takeover/restart, honest missing-work presentation, qualified replacement capabilities and later cross-device review. E8-E remains later field evaluation. No implementation or actual tests occur during planning.
+
+**Approval:** Approved by the owner on 2026-09-26 with a disconnected former device unable to learn takeover immediately. Server authority transfer must not claim the old device already stopped; later old-authority writes are rejected and permitted local changes remain possible unsynchronized work for explicit review. Planning approval only; this approved copy is canonical.
+
+### Story 5.10: Bring Surviving Old-Device Work into Explicit Current-Writer Review
+
+As the pilot owner,
+I want permitted unsynchronized changes surviving on a former device made available for review on the device now controlling my day,
+So that I can recover valid corrections without replaying obsolete batches or silently replacing newer work.
+
+**Acceptance Criteria:**
+
+**Given** a former device returns after 5.8/5.9 with possible unsynchronized work,
+**When** the owner opens recovery under valid access and movement permission,
+**Then** preserve the original day/client/epoch, event/batch identities and immutable content, the known baseline and available receipts, including changes made while the device was unaware of takeover,
+**And** distinguish accepted, definitively rejected and unknown-outcome work using authorized status lookup; missing receipt alone does not prove rejection,
+**And** show what remains only on the old device, what has been received for review and what is actually resolved, without labelling every surviving change lost or unaccepted,
+**And** retired day authority alone is insufficient to view/send retained private work; apply same-owner access recovery and pending-revocation rules before private traffic,
+**And** the old device stays out of operational writer mode and cannot submit original effects under a replacement epoch.
+
+**Given** an authorized former device and an authorized current writer for the same concrete unexpired day,
+**When** the owner explicitly requests transfer of the identified retained work for review,
+**Then** provide a bounded authenticated private recovery path through the existing application/backend, with the destination and source work set explicitly identified,
+**And** require current-writer authorization for creating/accepting the review intake and revalidate its current day/epoch/revision scope on the backend; the former client's retired authority cannot authorize operational or unrestricted server mutations,
+**And** the former device may supply only the identified evidence to that authorized isolated review intake under valid same-owner access; document/test this narrow request/response authorization contract without adding a bearer login, public upload link, credentials exchange or cross-account sharing,
+**And** stage it as conflict/recovery evidence, not as an operational SyncBatch execution: receipt for review transport is explicitly distinct from an AD-5 receipt acknowledging original event effects,
+**And** receiving the work cannot change the confirmed plan, active trip, progress, source facts, notice seen/audio state, writer epoch or day grant,
+**And** cancellation or unavailable destination leaves permitted source work intact; there is no automatic background merge or takeover-back.
+
+**Given** a retained work set is offered for review transfer,
+**When** it is validated and persisted,
+**Then** bind its stable identity to owner/day, source client/epoch, original event identities, content integrity and necessary plan/context/baseline references, preserving original origins, occurrence/registration times and unknown values,
+**And** include only the minimal allowed payload and context needed for interpretation and 5.7 review; exclude raw import originals, credentials, raw GPS tracks and unrelated days/people,
+**And** validate schema, size, identities, references and original expiry before treating the set as complete; imported client metadata is a provenance claim, not independent proof of GPS, source truth or an eligible pre-expiry start,
+**And** reject mixed-owner/day, altered-content identity reuse, unsupported or truncated sets without partially applying domain effects; retain recoverable input with a clear reason where still permitted,
+**And** partial transfer is visibly incomplete and cannot be used as a complete comparison; failure of some items never silently discards the remainder or describes the whole set as recovered,
+**And** use existing IndexedDB/FastAPI/PostgreSQL infrastructure with only the necessary bounded review-intake metadata and payloads, not a generic file-sync/archive service.
+
+**Given** transfer is interrupted, duplicated or its receipt is lost,
+**When** the source/current writer retries or checks status,
+**Then** use the same review-set identity/content and stable intake outcome so retries do not create duplicate proposals or apply events,
+**And** show server-received-for-review only after validated complete intake is committed; show available-on-current-device only after that device has received and saved the applicable set,
+**And** neither transport status acknowledges old operational batches or permits silent deletion of unresolved source work,
+**And** restart recovers partial/complete/status distinctions, and a false success or local write failure leaves the set retryable without changing its content/expiry,
+**And** a writer change, logout or stale authorization invalidates the affected intake authorization; require a new explicit authorized destination/basis rather than delivering private work to an obsolete context.
+
+**Given** the current writer has a complete permitted review set,
+**When** the owner inspects or applies it,
+**Then** feed it into 5.7's comparison against the verified current server state, showing the former-device origin and any unknown original outcomes,
+**And** deduplicate by original event/batch identity and accepted receipt evidence before proposing new effects; repeated transfer or a late original receipt cannot make an already accepted effect apply twice,
+**And** persist the exact received set and server/local comparison basis with retain/discard/defer choices; subsequent local/server/plan/authority changes invalidate affected review and require comparison again,
+**And** selected valid corrections become new events under the current writer, with original evidence and manual correction provenance distinguishable; do not rewrite old batches or history,
+**And** bus actual time stays unknown when unknown, stop identity includes the trip occurrence, notice state remains version-specific, and no imported action produces a new chime or fresh GPS evidence merely by being received,
+**And** unresolved 5.4 time evidence, terminal restrictions and rejected domain invariants remain unresolved/protected rather than becoming valid through a generic recovery approval.
+
+**Given** the current writer applies, explicitly discards or defers reviewed items,
+**When** the corresponding resolution status is recorded and returned to the former device,
+**Then** bind the disposition to the exact reviewed set/items and the established original outcomes; applied corrections require their own matching operational receipt before server-confirmed resolution,
+**And** distinguish received for review, applied as a new correction, explicitly discarded and still unresolved; discarding does not manufacture an original acceptance receipt,
+**And** remove only redundant applied/discarded conflict copies once the exact permitted outcome is established, preserving unrelated/newer source changes and necessary correction/receipt evidence under the original deadline,
+**And** a lost disposition response leaves the former device's status unresolved and safely repeatable; it cannot prompt duplicate application or broad deletion,
+**And** a delayed old request remains governed by the old epoch and original receipt rules: read-only acknowledgement of prior acceptance is distinct from permission to mutate the current day,
+**And** the old device cannot infer all its work was handled from one item's success or from a newer server revision alone.
+
+**Given** retained work or a staged review set reaches its original retention deadline, loses access or cannot be recovered,
+**When** display, sending, status lookup or cleanup occurs,
+**Then** apply AD-10/12 to every source, staged, destination and review copy, including any earlier known applicable day deadline; intake/review/retry never starts a new retention period,
+**And** prevent expired-day re-upload/recreation even if the current writer would like to recover it, and remove expired copies before use when a closed/offline client returns,
+**And** preserve only permitted trimmed content when a terminal/privacy restriction is already in force; this transport cannot revive payloads retired under AD-12 or implement E7's closing protocol by replaying them,
+**And** permanent loss of the former device's only copy is reported as potentially unrecoverable; the feature does not promise an archive, historical backup or offline peer-to-peer transfer,
+**And** failed storage/status operations retain allowed work without false durable success; logs and demo fixtures contain no private payloads or credentials.
+
+**Given** two isolated same-owner clients with actual PostgreSQL persistence,
+**When** recovery-transfer tests run,
+**Then** include an old device that changed a stop/bus after an unobserved takeover, an accepted event with lost receipt, a rejected old-epoch event and an unknown outcome,
+**And** cover exact replay, changed content under reused identity, partial/malformed set, wrong owner/day/destination, expired grant/data, pending logout and a second takeover during intake,
+**And** test interruption before/after staging and destination save, lost transport/disposition responses, reopened review, edits during review and late original receipts,
+**And** verify receipt meanings and current-authority checks independently: evidence transport never increments operational progress or changes writer authority, while chosen corrections require the existing authenticated atomic mutation/receipt path,
+**And** demonstrate one retained correction selected for application and another explicitly deferred/discarded, with no false source/GPS provenance, duplicate effects or deletion of unrelated work.
+
+**Traceability:** Cross-device reconciliation portion of FR-18/20 and preservation FR-17; bounded FR-1, existing manual/notice FR-9/11/14/16 and expiry FR-24. NFR-1–4; UX-DR3/14/16/17/19/23/38/39/44. AD-2 preserved local evidence, AD-4/5 isolated persisted review versus immutable operational receipts, AD-8 notice version state, AD-9 domain validity, AD-10 owner access, AD-11 old-device review and new current-authority corrections, AD-12 all-copy retention/accepted loss, AD-13 private ingress and AD-14 compatible schemas. E6/E7 extend permitted role/terminal content later.
+
+**Dependencies:** Implemented 5.7 explicit review, 5.8/5.9 authority transfer and former-device preservation, 5.6 status/receipt checks and existing feature provenance. This adds the missing bounded cross-device intake/disposition integration; it does not require future migration or E6/E7 UI.
+
+**Size boundary:** One same-owner review evidence transfer feeding 5.7 and returning exact resolution status. No operational merge engine, new account-sharing model, general file export/import, automatic authority return, archival backup or terminal-state reconstruction. Normal operational mutations still require current writer authority and expected revision.
+
+**Pilot qualification:** Controlled two-client/FastAPI/PostgreSQL cases contribute to E8-D. E8-P must verify actual device interruption/storage/access behavior and readable explicit review with 5.8/5.9 integrated. E8-E remains later field evaluation. No implementation, provisioning or actual tests occur during planning.
+
+**Approval:** Approved by the owner on 2026-09-26 with review intake distinct from applying corrections, no return of old-device writer authority, and preserved provenance, receipt status and original deadlines through partial/repeated transfer. Planning approval only; this approved copy is canonical.
+
+### Story 5.11: Keep Retained Working Days Compatible with a New Backend
+
+As the pilot owner,
+I want the app version holding my working day and pending changes to remain usable with an updated backend through the affected data's expiry,
+So that a server update does not strand valid work, break logout or force me to replace the active day's app.
+
+**Acceptance Criteria:**
+
+**Given** retained E1–E5 work and its required application build/contracts,
+**When** a successor backend is prepared,
+**Then** identify the builds, API/event formats and recovery/response contracts still required by that work, separately from local storage schema, plan revision, server revision and writer epoch,
+**And** pin and record the tested release artifacts/dependency versions so the tested old client and new backend can be reproduced with fictional fixtures,
+**And** retain support through the affected data's actual AD-12 expiry, not merely the last two releases, seven days after deployment or time since the last heartbeat,
+**And** account for disconnected clients and pending work; absence of recent traffic is not proof that the required contract is unused. Document what establishes safe retirement and leave it unsupported as a retirement decision when relevant expiry/usage bounds are unresolved,
+**And** compatibility metadata/code retention must not extend private data retention, duplicate private payloads into an archive or grant broader authority.
+
+**Given** an actual retained coherent client and valid existing owner/day authority,
+**When** it calls the successor backend in a controlled compatibility test,
+**Then** preserve the contracts it needs for retained draft/plan/day recovery, data/source/notice updates, immutable event submission, receipts, errors, day access and logout/revocation,
+**And** verify old-client interpretation and resulting state, not only successful HTTP status or a backend parser accepting its request,
+**And** preserve meaningful distinctions for conflict, pending/unknown outcome, invalid payload, expired work, application access failure and outer-gate failure; no generic success/error fallback may erase their handling,
+**And** newer responses cannot silently omit information needed for old-client manual choices, uncertainty, exact notice versions or access scope,
+**And** source retrieval remains separate from operational revisions and update success cannot acknowledge pending events.
+
+**Given** an immutable batch was saved before the backend update or accepted before a lost response,
+**When** the retained client submits/retries it against the new backend,
+**Then** interpret its original supported schema without changing batch/event IDs, payload content, ordering, hashes or expected-revision meaning to make it fit the new format,
+**And** under current authorization return an existing identical receipt for prior acceptance without applying effects or incrementing revisions again, including when the original expected revision is behind,
+**And** reject changed content under a reused identity, unauthorized old-epoch mutations and invalid/unsupported payloads without partial writes; read-only receipt lookup retains its separate authorization rule,
+**And** maintain one stable in-flight batch per day and preserve unresolved work on error; an update cannot turn transport receipts from 5.10 into operational acknowledgements,
+**And** 5.4's unverifiable post-expiry start remains unresolved across the update rather than being reclassified as accepted by a new decoder.
+
+**Given** the backend schema or stored representation changes for the successor,
+**When** the controlled migration and compatibility checks run against PostgreSQL,
+**Then** preserve ownership, original grant/data deadlines, domain identities, event/receipt deduplication, writer epochs and necessary recovery/conflict references,
+**And** introduce only schema changes needed by the concrete version transition and use transactional migration where possible, with documented/tested recovery for multi-step exceptions,
+**And** old-contract reads/writes operate correctly against the resulting schema while required; a database migration cannot silently change operational meaning or reset client-visible revision relationships,
+**And** injected interruption/failure does not publish a partially compatible backend as ready or require clearing private data as repair,
+**And** do not introduce historical private database backups/snapshots/archived WAL as the rollback mechanism; code rollback is allowed only against a verified compatible storage schema, otherwise stop and use an explicit non-destructive recovery path.
+
+**Given** an ordinary-sign-in expiry, explicit logout/revocation or data expiry occurs around a version transition,
+**When** either supported client version invokes the relevant operation,
+**Then** continue only the already active authorized day under the original 5.1 bounds, while denying a prepared/new-day start after ordinary expiry without renewed authorization,
+**And** preserve immediate private locking and pending revocation across old/new logout contracts; an update cannot unlock retained work or process other private traffic first,
+**And** authenticate and apply scope/expiry checks before deduplication/receipt retrieval; compatibility support never permits resurrection of expired or terminal work,
+**And** retain protected API outcomes understood by the retained client so it can distinguish required cleanup from temporary unavailability without deleting recoverable unexpired work,
+**And** test expiry before/at/after its real boundary independently of release date; return the correct authorized expired/gone outcome rather than using contract removal as a substitute for retention enforcement.
+
+**Given** a newer client accesses retained work through the successor backend,
+**When** contract-level recovery is requested,
+**Then** recover permitted existing drafts, current-day state, pending/receipt/conflict evidence and retained read-only representations with original identities and deadlines intact,
+**And** preserve legacy unknown values and source/manual provenance instead of filling new required-looking fields by guessing,
+**And** use controlled terminal/read-only fixtures where E7 screens do not yet exist; the test proves API semantics, not completed E7 summary or PDF functionality,
+**And** local stored-format migration and owner-accepted app activation remain a later story; backend recovery success alone is not evidence that browser migration worked,
+**And** never replace newer unsynchronized local work through a generic server refresh while testing either client generation.
+
+**Given** a required retained contract is unsupported or cannot pass compatibility checks,
+**When** an ordinary successor release is evaluated or a runtime mismatch is encountered,
+**Then** do not qualify that release for replacing the backend serving the affected retained work until compatibility is restored or an explicit owner solution decision is made within adopted boundaries,
+**And** report unsupported scope clearly without silently discarding work, dropping fields, creating replacement identities, forcing an active-day client upgrade or pretending a blocked release passed,
+**And** a minimum new client may be required before authorizing a new day, but that check must not revoke existing authorized active-day continuation or bounded settlement,
+**And** keep actual release activation between days with a pending-work check under AD-14; this story defines/tests the compatibility prerequisite and does not deploy or implement the browser activation flow,
+**And** keep support bounded to actually required contracts; no generic multi-version platform or speculative future adapters are added.
+
+**Given** reproducible old/new artifacts and a real PostgreSQL database,
+**When** compatibility evidence is produced,
+**Then** run the retained actual client contract against the successor backend/schema and test the newer client against retained data; a new test client using only new DTOs is insufficient,
+**And** cover unchanged and materially changed notices, null metadata, old-format immutable batches, receipt loss across upgrade, same-ID changed content, stale writer/revision, review-intake versus operational receipt and pending logout,
+**And** include ordinary expiry with valid active-day grant, denied new-day start, original data expiry, multiple retained releases still legitimately needed, and work outliving seven days from a deployment,
+**And** inject migration interruption and test declared code/schema rollback combinations, recording which combinations passed, failed or remain untested,
+**And** verify actual client behavior and PostgreSQL effects with anonymized/fictional data, without logging private payloads or claiming fixture success establishes live source/device compatibility.
+
+**Traceability:** Version-continuity portions of FR-1/17/18/20/24 and retained feature contracts FR-2–16/19; NFR-2/3/4 and readable errors NFR-1. UX-DR3/19/23/38/44; AD-2 durable local work, AD-3/4 client/backend and PostgreSQL boundary, AD-5 immutable schemas/receipts, AD-8 notice versions, AD-10/11 access/authority, AD-12 actual expiry/no private historical backups, AD-13 portable protected backend and AD-14 compatibility through expiry. Source/device and future E6/E7 behavior remain separately qualified.
+
+**Dependencies:** Implemented E1–E5 contracts through 5.10 and 5.2 required-build metadata. Use the existing working build as the retained artifact and a controlled concrete successor transition for compatibility evidence. Browser migration/activation UI and E6/E7 production screens are not prerequisites; later new features must extend this contract suite when introduced.
+
+**Size boundary:** Compatibility support and evidence for one concrete old/new backend transition, covering the existing required client contracts. No deployment, release orchestration platform, browser migration/activation UI, new feature families, blanket lifetime support or private disaster-recovery archive.
+
+**Pilot qualification:** Reproducible actual-client/FastAPI/PostgreSQL compatibility tests contribute to E8-D. E8-P requires the actual retained tablet build against the release candidate, including gated access, pending work and integrated recovery. E8-E remains later field evaluation. No implementation, migrations, deployment or actual tests occur during planning.
+
+**Approval:** Approved by the owner on 2026-09-26 with compatibility tied to actual data lifetime and verified using a real retained client, including lost receipts and pending logout. Required contract failures block release. Planning approval only; this approved copy is canonical.
+
+### Story 5.12: Accept an App Update Between Days Without Losing Retained Work
+
+As the pilot owner,
+I want to activate a verified app update between working days with retained work safely carried forward,
+So that updating or recovering from a failed update cannot interrupt an active day, lose pending changes or bypass access rules.
+
+**Acceptance Criteria:**
+
+**Given** a successor application build is available,
+**When** its assets are downloaded/staged,
+**Then** reuse 5.2's complete integrity-checked app-file set and preserve the selected build and retained private data until activation prerequisites are satisfied,
+**And** distinguish download, verification, update available, blocked, migrating and activation complete; downloading or a new Service Worker becoming active is not owner acceptance or permission to migrate,
+**And** bind any activation choice to the specific verified build and applicable storage transition, not an indefinite agreement to install whatever becomes available next,
+**And** reject missing/wrong-build/login-page assets and failed staging without pruning the build still needed by an active day or retained work.
+
+**Given** the owner is between working days and chooses to activate the staged build,
+**When** the app checks the update preconditions,
+**Then** verify no active day is using the affected store/build, including coordinated tabs, and inspect retained drafts, prepared days, pending batches, conflicts, review intake/dispositions, handover state and pending logout,
+**And** verify a supported migration path and 5.11 backend compatibility for all retained contracts before activation; inability to establish compatibility leaves activation blocked rather than assuming the newest code is safe,
+**And** pending work need not be deleted or falsely acknowledged to permit updating: migrate it only through a proven preserving path; unresolved authority/transfer or unsafe storage conditions block activation where consistency cannot be established,
+**And** explain blockers in ordinary Norwegian and allow postponement; postpone/cancel before migration leaves the selected build and work intact,
+**And** a new-client requirement may block authorizing a new day, but does not revoke an existing active day's continuation, erase retained work or manufacture a new sign-in/grant,
+**And** an active day in any affected context blocks the ordinary app/schema switch even if another tab displays the main menu or the planned finishing time has passed.
+
+**Given** an owner-approved update passes preconditions,
+**When** the migration/activation begins,
+**Then** coordinate tabs and workers using the established locking/version scheme, rechecking active-day and storage state at the commit boundary so racing operations cannot mutate an obsolete schema,
+**And** blocked database upgrades or uncooperative tabs give a visible pending/blocked result, not destructive database deletion or silent forced activation,
+**And** use versioned transactional local migrations where possible; for necessary multi-step transitions document the recoverable states and test interruption at each persistent boundary,
+**And** preserve a coherent boot decision across the non-atomic boundaries between asset cache, private IndexedDB and build-selection metadata; never publish a ready marker for a partially migrated or incompatible combination,
+**And** a second updater or delayed callback cannot select another build or run a completed migration twice; persisted transition state supports restart without guessing.
+
+**Given** retained private E1–E5 records are migrated,
+**When** the new local schema is committed,
+**Then** preserve owner/day/plan/context identities, service dates, manual trip pins and stop corrections, bus-change provenance, notice identities/version states, audio-attempt outcomes, movement history/outage timing and unknown values,
+**And** preserve writer epochs, original access/data deadlines, lock/pending-revocation state, unsynchronized events and batches, receipts, conflicts and review/handover states without converting pending or received-for-review into accepted,
+**And** immutable outbox IDs/payloads and their integrity basis remain unchanged for retry under the original supported event schema; migrating local indexes/wrappers is not permission to rewrite event content or reset sequence/revision meaning,
+**And** retain manual theme preferences and the operational context contract that E6/E7 will extend; current fixtures do not imply those later features are implemented,
+**And** migration changes representation only, never marks a draft confirmed, a prepared day active, an uncertain action observed or a terminal day resumed,
+**And** demonstrate equality of required preserved facts and original immutable batch representations before/after the concrete transition, rather than merely checking that the new screen loads.
+
+**Given** all browser tabs close while a successor worker/update is waiting, or an activation is interrupted,
+**When** the app reopens online, offline or with Access expired,
+**Then** an active day still boots its required coherent build through 5.2 without accepting the waiting successor or starting migration,
+**And** an interrupted between-day migration resumes or recovers only through its validated state transition and compatible code/storage combination; closing/reopening is not fresh consent for a different update,
+**And** run private lock/authority/expiry checks before rendering or sending retained work; no stale history page or late update callback may expose locked content,
+**And** original data expiry still applies during migration and on return: delete expired private copies before use rather than extending their lifetime for recovery,
+**And** retain the actual observation gap and movement history; update/restart is not a new measurement or a new first-start exemption.
+
+**Given** migration, validation or post-migration opening fails,
+**When** recovery is offered,
+**Then** report the failed/blocked transition and preserve permitted data plus any still-usable compatible build; no clear-storage repair, random old/new mixture, silent field dropping or recreated outbox identity is allowed,
+**And** reactivate older code only if it is proven compatible with the current stored schema and retained contracts; an irreversible schema transition cannot be undone by selecting an older bundle,
+**And** when no compatible executable path remains, stop activation and offer explicit non-destructive recovery rather than claiming successful rollback or promising an unavailable offline recovery screen,
+**And** any temporary migration staging is bounded recovery state under the same privacy/expiry rules, cleaned when no longer required; it is not a historical private snapshot/archive or a new disaster-recovery feature,
+**And** distinguish browser eviction/actual missing data from recoverable migration failure, without claiming to restore information that no longer exists.
+
+**Given** logout, revocation or an expired application session overlaps an update,
+**When** activation, recovery or a server request is attempted,
+**Then** preserve 1.2/5.5 local locking and pending-revocation priority; updating is never a prerequisite for using the retained supported logout/revocation path,
+**And** Access renewal or new app code alone cannot unlock retained private work, discard unresolved revocation or renew ordinary/day authority,
+**And** current access guards remain effective if the migration is blocked, and late callbacks cannot apply a different owner/day's private state,
+**And** local migration completion is not server confirmation: any required authenticated private metadata synchronization uses existing matching receipts, while the ordinary operational outbox remains unchanged,
+**And** reject demo/private storage or credential mixing; no credentials/private payloads appear in release artifacts, logs or test publications.
+
+**Given** activation succeeded and obsolete assets/staging may be cleaned up,
+**When** pruning checks run,
+**Then** retain files/formats actually required by active or unexpired retained work and pending compatible recovery, following 5.2/5.11 rather than release count or deployment age alone,
+**And** keep one selected build and one staged successor as the normal V1 case, with additional nonpersonal code only for a demonstrated retained-work need,
+**And** remove redundant permitted migration copies after validated completion and original expiry as applicable; code retention cannot hide expired private associations,
+**And** show activated only after the selected app can open its migrated guarded state coherently, preserving readable status, keyboard focus and non-color feedback without forcing update interaction during driving.
+
+**Given** an actual retained client/storage fixture and a concrete compatible successor,
+**When** browser integration and real backend receipt checks run,
+**Then** test accepted/postponed update, incomplete staged files, pending work with a supported path, unsafe transition, active day in another tab, a blocked database upgrade and simultaneous updaters,
+**And** close/reopen with an update waiting during an active day both offline and Access-expired; verify no app/schema switch,
+**And** interrupt every persisted migration/selection boundary, inject quota/read/write failures and test compatible rollback versus blocked destructive downgrade,
+**And** include an immutable accepted-but-unacknowledged batch, pending logout, manual corrections, exact notice/audio state, review intake, handover ambiguity and original expiry during closure; verify retries against PostgreSQL retain the original meaning and no duplicated effects,
+**And** distinguish actual stored-format migration evidence from backend-only compatibility tests; E6/E7 must later extend preservation tests for their added state.
+
+**Traceability:** Controlled client-update continuity FR-1/17/18/20/24 and retained E1–E4 behavior; NFR-1–4; UX-DR3/14/16/19/23/24/38/39/44. AD-2 local transactions/assets, AD-3 coherent client engine, AD-5 immutable event contracts, AD-8 notice version preservation, AD-9 context/movement, AD-10/11 access and writer authority, AD-12 original expiry/no private historical backup, AD-13 Access separation and AD-14 staged accepted activation, migration and storage-compatible rollback.
+
+**Dependencies:** Implemented 5.2 complete assets/boot routing, 5.11 backend compatibility and existing E1–E5 stored state through 5.10. Use a concrete old/new local schema transition and controlled terminal fixtures where needed without requiring future E7 screens. No future settlement or mentor feature is needed to prove this update path; later consumers extend its preservation contract.
+
+**Size boundary:** One controlled owner-accepted app/local-schema transition and its failure recovery, using existing assets/version and backend contracts. No deployment, generic release platform, new features, private backup system, historical data restoration or E7 closing protocol.
+
+**Pilot qualification:** Controlled browser/FastAPI/PostgreSQL interruption cases contribute to E8-D. E8-P requires actual Lenovo/Brave multi-tab/worker/IndexedDB lifecycle, close/restart with a waiting update, storage failures and integrated Access/offline behavior. E8-E remains later field evaluation. No implementation, migration, deployment or actual tests occur during planning.
+
+**Approval:** Approved by the owner on 2026-09-26 with downloaded/staged updates distinct from actual build activation, preserving active days, pending work and access rules through migration/restart. Planning approval only; this approved copy is canonical.
+
+### Story 5.13: Settle a Closed Day Without Replaying Deleted Work
+
+As the pilot owner,
+I want permitted final facts and pending corrections preserved and settled when closing my day requires other data to be deleted,
+So that closure neither loses the allowed result nor reintroduces private information through a retry or delayed request.
+
+**Acceptance Criteria:**
+
+**Given** a valid explicitly confirmed own-day end/abort command and an applicable retention projection,
+**When** closure affects local state and pending payloads,
+**Then** validate owner/day/context, applicable authority and the command's confirmed actual end/abort basis, keeping it distinct from scheduled end or an intermediate work-part/accompaniment ending,
+**And** retain only the final facts/corrections permitted by the established domain/privacy rules; unknown outcomes/times stay unknown and retained manual/source/GPS provenance does not change,
+**And** test the retention projection with explicit accompanied-versus-unaccompanied fixture portions: keep allowed accompanied evidence and exclude the linked plan's unaccompanied remainder, without implementing E6's assignment UI or inventing actual accompaniment,
+**And** a missing/inconsistent retention basis is a visible failure, not permission to preserve the entire private day indefinitely or guess which evidence is permitted,
+**And** this protocol does not auto-confirm ending from position, schedule, depot arrival or elapsed time. E7 later invokes it through its approved confirmation flow.
+
+**Given** affected private payloads occur in operational state, pending batches or conflict/review copies,
+**When** the local closing transaction commits,
+**Then** atomically preserve permitted final facts and unsynchronized corrections in one minimal trimmed recovery checkpoint, record the terminal local state and delete prohibited payloads from the affected local copies,
+**And** retire the original affected batch/event identities rather than modifying their immutable payloads; if a batch mixes permitted and prohibited content, retain the permitted result in the checkpoint instead of resending a modified original,
+**And** keep only permitted checkpoint content plus necessary payload-free identity/hash/status metadata for original-outcome lookup, within the original applicable deadline,
+**And** retirement means no more payload replay, not acknowledgement, proof of rejection or successful server deletion,
+**And** coordinate tabs and outgoing work so no new original payload is queued after closing; already transmitted requests may still arrive and must be handled by the server transaction below,
+**And** a transaction failure does not present closure/trimming as committed or discard the only permitted correction; stop unsafe sending, expose the failure and retry the validated local transaction. Original expiry/locking guards still apply.
+
+**Given** local closure/deletion has committed while another tab, stale local copy or delayed request still holds the former content,
+**When** any tab/worker tries to persist, restore, render again or enqueue that content, including after restart,
+**Then** check the durable current day closure/deletion state and applicable expiry within the guarded write/recovery path before accepting the result; a stale in-memory active flag or cached snapshot cannot override it,
+**And** persist the minimal payload-free closure/deletion guard with the local closing transaction, and coordinate/invalidate stale views and writers; cross-tab notification alone is insufficient if a tab was suspended or missed it,
+**And** reject or trim prohibited late content without saving it back into the day, outbox, review intake or migration/recovery copies, preserving only permitted checkpoint/receipt-status outcomes,
+**And** unreadable/missing authoritative recovery state cannot be interpreted as permission to recreate the old day; retain locking/error behavior and original expiry rather than manufacture fresh scope,
+**And** the guard follows the existing retention boundary and contains no prohibited payload or permanent private history; expiry/existence guards still prevent resurrection after normal cleanup,
+**And** test two simultaneous tabs with an old queued save, suspended/resumed tabs missing notifications, stale snapshot recovery on restart and a delayed source/server response after local closure but before server settlement; none can restore deleted content or queue its replay.
+
+**Given** local closure succeeded without confirmed server settlement,
+**When** the app closes/reopens, reconnects or a late callback arrives,
+**Then** recover the same minimal checkpoint and retired-ID metadata with the day still terminal locally, distinguishing locally closed from server settlement pending/failed,
+**And** never reconstruct deleted content from caches, old responses, review intake, migration staging or another retained snapshot, and never use the original retired batch as a retry payload,
+**And** keep checkpoint identity/content stable across retries; closure does not restore an active trip, restart timers or authorize new operational activity,
+**And** local trimming does not claim that already transmitted/server-held or disconnected other-device copies were simultaneously erased; server settlement and later guarded device recovery must enforce the corresponding deletion,
+**And** any existing minimal retained result remains available only within its authorized post-end scope; actual summary/PDF rendering and subsequent read-only entry remain E7 work.
+
+**Given** retired originals may have been accepted before the closing request,
+**When** authorized reconciliation reaches the backend,
+**Then** use payload-free receipt/status lookup keyed by the preserved identities/integrity metadata to discover existing acceptance without uploading deleted content,
+**And** preserve valid existing receipts and compare known outcomes with the actual server revision; unexplained revision changes require explicit 5.7/AD-11 review,
+**And** a missing receipt or an in-flight original is not labelled rejected; retain the distinction until the closure transaction resolves the ordering/fence outcome,
+**And** old-epoch receipt lookup is read-only and still requires valid owner/day access and unexpired data; it does not restore old writer authority,
+**And** returned status/receipt data must not echo prohibited original payloads or rehydrate deleted linked-person context. Accepted IDs/status remain evidence only within their retention bounds.
+
+**Given** a valid minimal closure checkpoint, reconciled known outcomes and current writer/expected revision,
+**When** the client submits the checkpoint for settlement,
+**Then** use new batch/event IDs distinct from all retired originals; the checkpoint records the retained result and terminal state rather than replaying old event effects,
+**And** authorize current owner/day scope, current writer, expected revision, schema, terminal intent and the allowed retained projection on FastAPI/PostgreSQL; a caller cannot declare arbitrary prohibited fields allowed,
+**And** in one PostgreSQL transaction preserve existing accepted receipts, fence still-unaccepted retired identities, accept the checkpoint/result, close the day and remove prohibited linked data from all relevant server-held copies,
+**And** include source/day associations, revisions, checkpoints, outboxes/review intake/conflict copies and receipt content as applicable, without deleting unrelated public source facts or other owners' work,
+**And** atomically commit the closure receipt and next revision with those effects; any injected database failure leaves no partial acceptance, fencing or server closure claimed,
+**And** keep a single stable closure batch in flight; it supersedes retired payload submission without reviving or treating retired batches as acknowledged.
+
+**Given** an original request races with closure settlement,
+**When** the backend serializes their transactions,
+**Then** if the original committed first, retain its authorized prior receipt and account for the resulting revision before a valid checkpoint can commit; do not apply its effects twice through checkpoint replay,
+**And** if closure commits first, fence unaccepted retired IDs so later original submissions return batch_retired without inserting their effects or deleted payloads into retained day state,
+**And** authorized retries of already accepted originals return their prior receipt rather than being misclassified as newly rejected, even though their prohibited payload content has been removed,
+**And** terminal-state validation also prevents resurrection through fresh batch/event IDs, not merely the listed retired identities,
+**And** distinguish permitted bounded post-end review corrections from operational resumption; this protocol does not create unrestricted post-end editing or implement E7's review decisions,
+**And** test each ordering with real PostgreSQL transactions, including an original accepted between lookup and settlement, which makes the expected revision stale and requires reconciliation again.
+
+**Given** settlement commits but its response is lost, or writer/revision/access changes before acceptance,
+**When** retry/status handling runs,
+**Then** retry the same new closure IDs and unchanged payload within valid access/expiry, returning the existing matching receipt without another close, revision increment or repeated domain effects,
+**And** mark server-confirmed settlement only after a matching closure receipt is durably recorded locally; HTTP success, local deletion, an original receipt or a transport receipt from 5.10 is insufficient,
+**And** stale epoch/revision preserves only the allowed trimmed checkpoint for explicit review; do not restore prohibited originals, silently rebase, mint replacement IDs or take over automatically,
+**And** pending logout/revocation retains priority, and 5.5 Access recovery leaves private content locked as required; no retention extension or access bypass is granted to finish settlement,
+**And** update/migration uses 5.11/5.12 contracts to preserve the same closure/retirement meanings across supported builds.
+
+**Given** a closed/aborted day and its pending checkpoint/status records,
+**When** deadlines or remote earlier ending information are evaluated,
+**Then** apply the one combined-day AD-12 data clock and any earlier applicable limit, with post-end authority capped at the earliest of existing day-grant deadline, actual end/abort plus seven days and data expiry,
+**And** distinguish that data deadline from authority expiry; no lookup, retry, review, export, reopening or new receipt restarts either clock,
+**And** expire/delete all affected private checkpoint, receipt, retired-ID, conflict and grant copies when due even if settlement never succeeded; server checks deny expired access independently of periodic purging,
+**And** a returning closed/offline device deletes expired data before private use and never uploads it to recreate the day; a newly learned earlier ending creates no grace period,
+**And** absent explicit ending, the existing planned-end expiry remains applicable without fabricating a completed shift; fixtures test this boundary separately from actual confirmed closure,
+**And** no historical private backup or retained prohibited payload is introduced to make retry easier.
+
+**Given** the protocol is exercised before E6/E7 user interfaces exist,
+**When** acceptance evidence is produced,
+**Then** use explicit validated close and abort command fixtures with a minimal allowed-result schema and mixed allowed/prohibited linked-data fixtures, not a production bypass that accepts arbitrary client trim claims,
+**And** include unsent originals, accepted originals with lost receipts, mixed batches, lookup failure, original-before-closure and closure-before-original races, fresh-ID resurrection attempts and unknown revision changes,
+**And** inject failure before/after local closing commit, at each server atomic effect, before/after closure receipt delivery, on local receipt save and during restart/expiry,
+**And** inspect IndexedDB and actual PostgreSQL copies to verify permitted final facts/corrections survive while prohibited data cannot be replayed or recovered from secondary copies,
+**And** keep local-closure, retired-original outcome and server-settlement status separately readable, with movement-governed error/retry feedback and no forced driver interaction,
+**And** leave E7 end confirmation, actual accompaniment-derived scope, initial summary review, PDF and final whole-lifecycle acceptance as explicit integration obligations rather than claiming these fixtures completed them.
+
+**Traceability:** E5 settlement/retention protocol FR-24, recovery FR-18/20 and offline final-result preservation FR-17; bounded FR-1 and consumed terminal/summary FR-21/22 without their UI implementation. NFR-1–4; UX-DR23/31/32/33/35/36/38/44 where applicable to recovery/terminal scope. AD-2 atomic local state, AD-4/5 PostgreSQL receipts/revisions, AD-10 bounded post-end authority, AD-11 conflicts/current writer, AD-12 minimal closure checkpoint, payload retirement, atomic fences/cleanup and original expiry, AD-13 gate failures and AD-14 compatible retained-client settlement. E6/E7 own actual role/summary/closing integration.
+
+**Dependencies:** Existing 5.1 authority, 5.6 retry, 5.7 review, 5.10 copy tracking and 5.11/5.12 compatible recovery. Concrete protocol schemas and validated fixtures make closure settlement independently testable; it must not wait for E6/E7 screens to supply its transaction, retirement or fencing behavior. Later features provide their real permitted-content projection and extend all-copy integration tests.
+
+**Size boundary:** One end-to-end AD-12 settlement protocol, including its inseparable local retirement/server fence race. Reuse existing identity, receipt, conflict and expiry infrastructure. No end-shift UI, mentor assignment engine, summary/PDF renderer, general event compaction, archive or new authentication model.
+
+**Pilot qualification:** Deterministic client/FastAPI/PostgreSQL race and all-copy deletion tests contribute to E8-D. E8-P requires integration with actual E6/E7 closing/retention, device restart, gate failure, source/old-device responses and supported app updates. E8-E remains later field evaluation. Tests are specified, not executed during planning.
+
+**Approval:** Approved by the owner on 2026-09-26 with durable deletion/closure state preventing another tab, old local copy or delayed response from restoring deleted content after local closure, tested through restart and concurrent tabs. Unknown original-batch outcome remains distinct from the new closure receipt. Planning approval only; this approved copy is canonical.
+
+## Epic 6: Guide and Teach with Explicit Person and Driver Context
+
+The owner can operate as FADDER or INSTRUKTØR with separate own/linked plans, accompaniment blocks, classroom/office work, own driving and explicit acute takeover/return. Recovery preserves the actual role and tracking context; accompanied evidence remains bounded to observed portions. Shared E2–E5 engines and AD-6/9/12 apply; each slice provides its own access, persistence, errors and privacy.
+
+### Story 6.1: Review My Own Mentor Assignment Before Linking Another Person's Plan
+
+As the pilot owner preparing FADDER or INSTRUKTØR work,
+I want to review my own assignment, own driving and other permitted activities in my own confirmed day,
+So that another person's trips cannot silently become my planned driving or determine my work sequence.
+
+**Acceptance Criteria:**
+
+**Given** an owned unexpired own-plan draft imported or entered through the existing E2 flow,
+**When** the owner reviews mentor assignment information,
+**Then** show the own plan as Egen arbeidsplan and allow explicit review/correction of planned FADDER/INSTRUKTØR assignment and applicable own activities using the shared editor,
+**And** retain original interpreted values and manual correction provenance; an unexplained source code, missing assignment or ambiguous activity is not classified as mentoring by guessing,
+**And** preserve service date, extended overnight times, each work part's reporting time/depot, actual bus versus vehicle duty and one combined-day order,
+**And** keep assignment role, actual driver/guiding role and account authentication as separate concepts; selecting a planned mentor assignment creates no new login role, simulated context or operational permission.
+
+**Given** the reviewed planned assignment is FADDER,
+**When** its own-plan activities and accompaniment requirement are validated,
+**Then** represent the requirement to accompany one same person for that person's whole shift during the fadder assignment, with person/linked-plan selection visibly pending until explicitly established in the later linking flow,
+**And** do not invent a person, truncate the whole-shift requirement to a convenient trip or silently allow person switching within the same fadder assignment,
+**And** reject classroom/office activity as fulfilment of that fadder role rather than silently converting it to instructor work; keep the editable input and explanation,
+**And** keep genuine own-driving trips separately owned by Egen arbeidsplan; a fadder activity without accompaniment cannot be marked fully linked/ready through a fictional person,
+**And** missing timing/person data remains identified as unresolved where applicable, without supplying false actual accompaniment evidence.
+
+**Given** the reviewed planned assignment is INSTRUKTØR,
+**When** the owner reviews the own-day activity sequence,
+**Then** distinguish planned accompaniment periods, classroom teaching, office work and own driving, with known times/places and explicit unknowns,
+**And** permit an instructor day containing classroom/office work and optional own driving with no accompaniment and no linked-person plan,
+**And** preserve one or several planned accompaniment periods as distinct own activities, without choosing their person/trip automatically; later explicit linking may support different people and return to a previous person,
+**And** missing/overlapping activity timing that prevents correct own-day order/final end must be resolved under existing E2 rules before confirmation, while unknown optional locations stay unknown,
+**And** classroom/office preparation creates neither an active passenger trip nor fabricated stop progression or completed teaching/office work.
+
+**Given** own-driving trips and planned mentor activities coexist,
+**When** the own-plan review or a prepared-day preview is shown,
+**Then** planned own driving refers only to trips belonging to the owner's own confirmed plan or its explicit valid revision,
+**And** identical route/time/stop values do not turn another person's trip into an own trip; keep stable target-plan/activity identity in the stored contract,
+**And** expose absent own trips through the existing correction/addition path rather than filling them from a future linked list,
+**And** the own plan governs reporting, activity sequence and final own-day end; a mentor label or accompaniment boundary does not replace that lifecycle,
+**And** acute takeover remains a later explicit operational action, not an alternative way to plan own driving in this review.
+
+**Given** a corrected own draft or a scoped revision of an already confirmed own plan,
+**When** the owner confirms the reviewed assignment/activity result,
+**Then** confirm only the exact revision actually reviewed through 2.7/2.12, committing the allowed plan change and outbox event atomically before reporting it locally saved,
+**And** if the draft, base plan or relevant state changes during review, mark the review stale and require comparison/confirmation again; cancel preserves the prior confirmed plan,
+**And** confirming the own plan does not confirm an unreviewed linked plan, select a person/block, assert actual accompaniment, activate a new day or change the current driver/guiding state,
+**And** permit confirmation of an otherwise valid own plan with accompaniment links explicitly pending; own-plan confirmation and readiness to accompany are separate statuses,
+**And** preserve active own trip/pin, performed evidence and unrelated plans. If existing links are affected in an integration fixture, mark them unresolved for explicit repair, never retarget by similarity; actual linked-revision UI remains a later E6 slice,
+**And** late plan changes retain the existing AD-12 final-end/earlier-limit rules and cannot silently extend day authority.
+
+**Given** the confirmed own mentor plan is saved and reopened,
+**When** the preparation/overview surface renders it online or from permitted local storage,
+**Then** retain planned role, activity types/order, own-trip ownership, provenance and pending-link state without reimport or invented linked-person data,
+**And** use a clear text label for the planned assignment within the own-plan panel; never imply that a prominent FADDER/INSTRUKTØR assignment label means operational guiding controls are already enabled,
+**And** show unsupported/unavailable linked preparation honestly in this slice without presenting the whole mentor day as ready; a valid no-accompaniment instructor day does not receive a false missing-person error,
+**And** unknown/stale data remains visibly so, with readable text/symbols, keyboard focus and shared movement restrictions for editing/review,
+**And** a planned role, resumed view or scheduled boundary cannot unlock driver controls, reset outage history or copy another context's manual pin. Actual operational role controls remain separate stories.
+
+**Given** persistence, synchronization, access or expiry fails,
+**When** this slice saves, reads or confirms own-plan assignment state,
+**Then** use existing owner-scoped IndexedDB and authenticated FastAPI/PostgreSQL plan/revision contracts, adding only the necessary assignment/activity fields and validation,
+**And** enforce the role/activity/plan-ownership rules on the backend as well as the UI; a forged linked-plan own-trip reference or foreign account scope cannot bypass them,
+**And** local write failure never reports a saved/confirmed revision; server failure leaves valid local work pending and only a matching receipt changes server-confirmation status,
+**And** preserve the E1/E5 lock, pending-revocation, conflict and original expiry behavior, including no new/prepared-day start after ordinary expiry via an assignment change,
+**And** this is private operational preparation, distinct from the public fictional instructor demo; no access to another person's account, raw-file retention or permanent person directory is added.
+
+**Given** representative anonymized/fictional own plans and real PostgreSQL,
+**When** the implementation is verified,
+**Then** test a fadder assignment with pending whole-shift link and separate own trip, an instructor day with several planned accompaniment periods, and an instructor day with only classroom/office and optional own driving,
+**And** test prohibited classroom/office-as-fadder classification, unexplained source code, missing optional place, ambiguous order/end, split-day reporting/depot and Friday 25:30 ordering through save/reopen,
+**And** include two identical-looking own/foreign-plan trip fixtures, stale review, scoped revision, local failure, lost/mismatched receipt, wrong-owner API access, logout and expiry,
+**And** verify that own-plan confirmation/reopen changes neither actual driving role nor movement permission and does not manufacture person links or performed work,
+**And** distinguish plan-review tests from actual accompaniment, role transitions, qualified tablet usability and integrated E6 recovery, which remain their later acceptance boundaries.
+
+**Traceability:** Own-plan preparation extensions of FR-2/4/5 and FR-6 ownership boundary, shared FR-16/20/24 and future FR-22 provenance under UX UJ-3/4. NFR-1–4; UX-DR4/5/6/7/8/26/27/28/29/38/39/43/44, with operational portions of UX-DR29–31 remaining subsequent E6 stories. EXPERIENCE FADDER and INSTRUKTØR assignment scope and revision ownership; DESIGN separate own/linked panels and text role indication. AD-2/4/5 atomic local/server plan state, AD-6 shared reviewed import, AD-9 assignment versus actual context, AD-10 bounded access and AD-12 own combined-day retention. All AD-1–AD-14 remain unchanged.
+
+**Dependencies:** Implemented E2 own editor/import/confirmation/revision, E3 movement and actual-context contracts, E5 persistence/access/recovery through 5.13. No later linked-person import, accompaniment engine, takeover UI or E7 report is required to demonstrate this own-plan review and persistence slice.
+
+**Size boundary:** Own-plan planned role/activity distinctions, review/confirmation, protected persistence and honest pending-link/no-accompaniment states. No new OCR engine, linked-person import, actual accompaniment selection/progression, unrestricted guiding mode, acute takeover, classroom/office execution view or summary renderer.
+
+**Pilot qualification:** Controlled own-plan/browser/FastAPI/PostgreSQL cases contribute to E8-D. E8-P needs the actual reviewed forms/data, mounted readability and integrated later E6 role/link/recovery behavior; assignment confirmation alone is not permission to use mentoring on a real shift. E8-E remains field evaluation. No implementation or actual tests occur during planning.
+
+**Approval:** Approved by the owner on 2026-09-26 as scoped. An own plan may be confirmed with a visibly pending link without confirming accompaniment or making the other person's trip planned own driving. Planning approval only; this approved copy is canonical.
+
+### Story 6.2: Review and Confirm a Separate Private Copy of an Accompanied Person's Shift
+
+As the pilot owner preparing FADDER or INSTRUKTØR work,
+I want to import, correct and separately confirm the intended person's shift within my own working day,
+So that I can prepare the necessary route context without replacing my own plan or claiming that accompaniment has begun.
+
+**Acceptance Criteria:**
+
+**Given** an accessible, unexpired own working day with its own mentor plan reviewed and confirmed through 6.1,
+**When** the owner starts preparation of another person's shift,
+**Then** create a separately identified imported-plan draft associated with that own day and the explicitly identified intended person, with the target visible throughout import, editing and confirmation,
+**And** show separate Egen arbeidsplan and accompanied-person plan panels; use only the person information needed to distinguish the imported contexts, without a permanent person directory or another account's identity/permissions,
+**And** an unknown or ambiguous intended-person association remains visibly unresolved and cannot silently be assigned to an existing person by similar name, route or time,
+**And** selecting a file is neither confirmation of its person/contents nor linking it to an accompaniment block; an instructor day without accompaniment still needs no imported person plan.
+
+**Given** a PDF, one or several JPG/PNG files, or a manually entered plan for this target,
+**When** the shared E2 import/editor interprets and displays the result,
+**Then** retain editable extracted activities, source/manual provenance, uncertainty and visible missing pages/parts; extraction/OCR success is not confirmation,
+**And** reuse multi-image ordering and correction-preservation rules, preventing repeated processing/retries from duplicating activities or dropping prior edits,
+**And** preserve service date and extended time separately from calendar display: Friday 25:30 remains Friday's shift activity and displays as Saturday 01:30 where calendar time is used, in the correct sequence after save/reopen,
+**And** preserve reporting/depot/work-part details and physical bus versus vehicle-duty identity; unknown data remains unknown and failed extraction still permits manual entry/correction,
+**And** source matching uses the applicable trip identity and service date, retaining manual corrections and distinguishing no match, ambiguity and retrieval failure; no match copies a trip from another private plan.
+
+**Given** a source file is being processed or compared with the interpreted draft,
+**When** processing finishes, fails, is cancelled or is interrupted, or the review is reopened,
+**Then** apply AD-6 transient-original handling: delete backend originals and processing copies after interpretation/failure/cancellation, with interrupted-process cleanup; do not retain originals in IndexedDB, Service Worker caches, logs or persistent queues,
+**And** while a selected original is still transiently available in the browser, permit the existing side-by-side source comparison; after reopening explain that the original must be selected again while interpreted data and manual corrections are preserved,
+**And** explain the deletion rule during import review; retaining the necessary interpreted information does not authorize a raw OCR archive or permanent source-file copy,
+**And** cancelling this import leaves own and previously confirmed person plans intact, with any retained unconfirmed draft clearly identified and subject to its original expiry.
+
+**Given** the owner has reviewed the intended person, target plan and corrected draft revision,
+**When** the owner explicitly confirms that person's imported plan,
+**Then** confirm only the exact revision reviewed, with the E2 requirements for service date, order and planned end satisfied; require a new review if the draft or relevant target/day basis changes,
+**And** label and persist confirmation as the FADDER/INSTRUKTØR owner having reviewed this private imported copy and its exact revision; do not imply that the accompanied person confirmed, approved or authenticated the plan. Preserve this attribution through reopen, synchronization and downstream plan references,
+**And** permit reviewed trips without a source match under 2.7's rules, retaining missing-stop/missing-bus/unknown-source status rather than marking these fields verified,
+**And** atomically store the separate confirmed plan and required outbox event, removing redundant draft copies only after successful local confirmation,
+**And** do not modify the own plan, its planned own trips, active trip/pin, actual role, accompaniment state or performed evidence; this action grants no guiding exception and does not declare any work performed,
+**And** show separate statuses for person-plan confirmation, still-pending accompaniment linking and actual data coverage; confirmed contents alone cannot claim the whole mentor day is ready.
+
+**Given** two imported plans have overlapping routes/times or the same person will be accompanied again later,
+**When** plans are listed, reopened or selected for preparation,
+**Then** preserve stable person/plan/revision identities within this owner and own day, showing enough context to distinguish them without merging by route/time/name similarity,
+**And** expose an already confirmed copy for later explicit reuse rather than requiring a duplicate import; no reuse automatically creates an accompaniment block or carries completion/manual pin evidence,
+**And** an attempt to replace an existing confirmed copy cannot silently run as a new import or overwrite it; use the subsequent explicit linked-revision review/repair flow, while this slice can independently create, review and reopen new copies,
+**And** a forged target or correction cannot turn this person's trip into planned own driving or change another stored plan.
+
+**Given** this private imported data is saved, synchronized, reopened or becomes due for deletion,
+**When** browser and backend process it,
+**Then** extend the existing owner/day-scoped IndexedDB and authenticated FastAPI/PostgreSQL contracts with only the person/plan/draft identity and fields this slice needs; enforce scope and confirmation rules on both client and server,
+**And** local failure never reports saved/confirmed state; a missing or mismatched receipt leaves server status unconfirmed and stable retries do not duplicate the imported plan. Expired access, pending logout, stale revision or obsolete writer authority cannot bypass E1/E5 guards,
+**And** use the unconfirmed draft's fixed creation-plus-seven-days deadline or an earlier associated-own-day deadline under AD-12; confirmation removes redundant drafts and associates needed extracted data with that own combined day's existing retention rules, without resetting a clock or extending an earlier binding deadline,
+**And** the imported person's planned/actual shift ending never starts a separate retention clock or changes the mentor's own-day end or authority,
+**And** register this new data type in the existing all-copy expiry and 5.13 closure/retirement guards now: without actual accompanied evidence, linked operational content is not retained after own-day closure; delayed responses, stale tabs or pending batches cannot restore prohibited content. Fixture-based closure is sufficient here, without a future summary screen,
+**And** importing provides no access to another person's account or original records; private imported data is unavailable to public fictional demo access, public logs or assessment artifacts, and personal source fields do not enter the active driving view.
+
+**Given** representative anonymized/fictional own and person shifts, the shared import engines and real PostgreSQL,
+**When** this slice is verified,
+**Then** test PDF, ordered multi-image input and manual fallback; identify the tested formats and failure cases without treating these tests as new OCR/source qualification,
+**And** test partial extraction, retained correction across retry/reopen, Friday 25:30 and two candidate trips showing Saturday 01:30, identical-looking own/person trips and two distinct imported-person contexts,
+**And** test confirmation attribution in the review, reopened plan and stored/API result: the mentor is the reviewer, the accompanied person is the subject of the imported copy, and no label or record claims their approval,
+**And** test separate confirmations, changed review revision, cancel, wrong target/owner, local failure, lost/mismatched receipt, logout, expiry and interrupted-original cleanup,
+**And** test own-day closure with no accompanied evidence, pending imported-plan work, stale tab/delayed response and earlier draft/day expiry, verifying all relevant client/server copies against the existing deletion protocol,
+**And** prove that import/confirmation/reopening never changes operative role, selects an active linked trip, manufactures accompaniment evidence or copies a trip into own driving.
+
+**Traceability:** FR-2/3/4/5 imported-plan preparation and FR-6 ownership boundary, shared FR-1/16/20/24, under UX UJ-3/4. NFR-1–4; UX-DR4/5/6/7/8/26/27/28/36/38/39/43/44. EXPERIENCE assignment scope, revision ownership and Accompanied-person imports and summary scope; DESIGN separate own/linked panels and source-deletion notice. AD-2/4/5 atomic storage/receipts, AD-6 shared interpretation/transient originals, AD-9 no implicit role/context transition, AD-10/11 authority and AD-12 all-copy retention. All AD-1–AD-14 remain unchanged.
+
+**Dependencies:** Approved 6.1 own-plan preparation, E2 shared import/edit/matching/confirmation and E1/E5 access, persistence and expiry/settlement through 5.13. Tests may invoke existing terminal commands with no-accompaniment fixtures. No later block-linking, operational mentoring, linked-revision repair or E7 summary screen is needed to complete this import slice.
+
+**Size boundary:** Adapt the existing reviewed import flow to a separately identified private person-plan copy, including target visibility, confirmation, persistence and lifecycle integration. No second OCR engine, person directory, cross-account integration, actual accompaniment selection, operational role switch, linked-plan revision/repair UI or summary/PDF renderer. Later E6 stories explicitly link confirmed plans and establish observed portions.
+
+**Pilot qualification:** Controlled browser/FastAPI/PostgreSQL import and deletion cases contribute to E8-D. E8-P still requires actual representative formats, qualified extraction/source coverage, tablet review usability and verified temporary/provider handling before real files. E8-E remains field evaluation. None is claimed executed or passed by this planning story.
+
+**Approval:** Approved by the owner on 2026-09-26 with explicit confirmation attribution: confirmed means that the FADDER/INSTRUKTØR has reviewed their private copy of the other person's shift, never that the other person has confirmed the plan. Planning approval only; this approved copy is canonical.
+
+### Story 6.3: Explicitly Link a Planned Accompaniment Activity to the Reviewed Person and Shift Scope
+
+As the pilot owner preparing FADDER or INSTRUKTØR work,
+I want to review and confirm which person-plan and portion each own accompaniment activity refers to,
+So that the intended accompaniment is clear without silently selecting a person, starting guidance or changing planned trip ownership.
+
+**Acceptance Criteria:**
+
+**Given** an accessible unexpired own day, its confirmed mentor assignment and separately reviewed person-plan copies from 6.2,
+**When** the owner prepares a link for an own accompaniment activity,
+**Then** show the own activity/assignment, intended person, imported plan and its revision in separate clearly labelled contexts, including service date, relevant times and the proposed scope,
+**And** require explicit selection and review rather than choosing by matching name, line, departure time, current position or scheduled boundary,
+**And** preserve stable owner/day/activity/person/plan identities and the own and imported plan revisions used for the comparison; a reused person-plan remains the same private copy while each distinct accompaniment block has its own identity,
+**And** describe imported-plan confirmation as the mentor's review of their copy, never the accompanied person's approval or a live link to their account,
+**And** do not offer classroom/office or planned own-driving trips as accompaniment activities, and do not turn imported trips into own planned driving.
+
+**Given** the selected own assignment is FADDER,
+**When** the owner reviews its proposed accompaniment link,
+**Then** require one same person's whole shift during that fadder assignment, displaying the linked shift's known boundaries and work parts rather than silently narrowing the link to one convenient trip,
+**And** disallow another person or an instructor-style partial scope within that fadder assignment; explain the unresolved mismatch without changing the assignment type automatically,
+**And** if a known missing section, ambiguous shift boundary or conflict with the own assignment prevents establishing whole-shift scope, keep the link visibly unresolved for correction instead of claiming the whole shift is linked,
+**And** distinguish completeness of the reviewed plan scope from availability of source matches or downloadable stop data: a missing route match alone does not prove that the plan scope is partial, and whole-shift linking does not certify source/data completeness.
+
+**Given** the selected own assignment is INSTRUKTØR,
+**When** the owner defines planned accompaniment scope,
+**Then** support one trip, part of a day or a shorter/longer interval within the selected reviewed plan, with explicit boundaries sufficient to identify the intended portion,
+**And** retain service date and calendar-date translation across midnight; a time-only label or repeated stop name cannot identify a unique trip/activity/stop occurrence where several exist,
+**And** allow separate blocks for different people and a later return to an already reviewed person-plan, without merging the blocks or copying completion, manual pin or actual accompaniment evidence between them,
+**And** preserve intervening classroom/office/own-driving activities in the own sequence; a valid no-accompaniment instructor day requires no artificial block or person,
+**And** a selected interval is a planned boundary, not evidence that an entire boundary trip or activity was actually accompanied or completed.
+
+**Given** proposed links have missing targets, ambiguous portions, overlaps or incompatible own/person-plan timing,
+**When** the owner reviews or attempts to confirm the affected link,
+**Then** identify the affected activity, person and boundary and retain the editable proposal with a clear unresolved status rather than choosing or truncating a scope automatically,
+**And** require resolution of ambiguity that prevents identifying the intended person and portion; optional unknown location or missing stop/source data remains explicitly unknown without inventing a value,
+**And** highlight competing/overlapping links and keep their ambiguity unresolved until explicit correction; never let a scheduled time select the actual person or grant guiding controls,
+**And** cancellation preserves the previous confirmed link, own plan and imported copies. Planned-link changes cannot rewrite an already active tracking context or historical evidence; operational switching and affected-link repair are separate later slices.
+
+**Given** the owner has reviewed an unambiguous proposed link against its exact own and imported plan revisions,
+**When** the owner explicitly confirms the planned link,
+**Then** atomically persist the block identity, person/plan/activity references, reviewed revisions, explicit scope and owner confirmation provenance with the required outbox event,
+**And** if either reviewed revision, the target activity, scope or relevant authority changes before commitment, retain the proposal as stale/unresolved and require review again; do not silently rebase or retarget a similar trip,
+**And** show planned-link confirmation separately from mentor-reviewed person-plan confirmation, data coverage, server receipt and actual accompaniment; partial downloaded coverage cannot become whole-day readiness,
+**And** confirmation changes no actual driver/guiding role, active trip, manual pin, performed-work evidence or own-day lifecycle; clock passage, GPS proximity and reopening cannot turn the planned link into actual accompaniment,
+**And** full linked-plan revision/repair UI is not required here, but consumers can detect stale references from the stored revision basis rather than silently treating them as current.
+
+**Given** a planned link is reopened, synchronized or becomes subject to locking, closure or expiry,
+**When** the client and backend recover or process it,
+**Then** preserve the selected scope, identities, reviewed revisions, confirmation attribution and unresolved/pending statuses through the shared E5 persistence/recovery contracts,
+**And** implement only necessary link fields/validation in owner/day-scoped IndexedDB and authenticated FastAPI/PostgreSQL; reject cross-owner/day, forged plan/activity relationships, invalid FADDER scope and stale writer/revision on the backend as well as the UI,
+**And** local failure cannot report a saved link; only a matching receipt confirms server acceptance, with immutable retries and preserved proposals on conflict or unknown outcome,
+**And** reuse the existing movement policy for preparation/editing and existing access, pending-revocation and fixed-expiry guards; a planned mentor link creates no unrestricted-control exception or new first-start/GPS-loss period,
+**And** the link shares the own day's existing retention and closure rules and creates no separate clock from the other person's shift or a block ending. Planned-only linked context is removed through 5.13 at own-day closure when no actual accompaniment evidence exists; stale tabs, pending payloads and delayed replies cannot recreate it,
+**And** private person/link information remains excluded from public demo access, logs and active-driving personal detail; no cross-account authority or permanent person history is added.
+
+**Given** anonymized/fictional own and imported plans, browser clients and real PostgreSQL,
+**When** this slice is verified,
+**Then** test one whole-shift same-person FADDER link, rejected partial/person-switch FADDER scope, known incomplete imported shift and conflicting own assignment boundaries,
+**And** test INSTRUKTØR with a single trip, a bounded interval, people A then B then A around classroom/office activities, and a valid day without accompaniment,
+**And** test Friday 25:30 as Saturday 01:30, multiple trips sharing that display time, repeated stop occurrences, identical-looking trips in different plans, missing optional data, ambiguous boundaries and overlapping links,
+**And** test stale own/imported revision during review, cancel, local failure, lost/mismatched receipt, forged scope/owner, logout, expiry, reload and terminal cleanup across concurrent tabs/delayed replies,
+**And** verify that confirming/reopening a planned link or passing its scheduled boundary never selects the actual person/trip, unlocks guiding controls, completes work or inherits another block's pin/evidence.
+
+**Traceability:** UX UJ-3/4 extensions of FR-2/4/5, FR-6 plan ownership/context boundary, shared FR-1/16/20/24 and future FR-22 evidence attribution. NFR-1–4; UX-DR5/7/8/26/27/28/30/36/38/39/44. EXPERIENCE FADDER and INSTRUKTØR assignment scope, Revision ownership and linked contexts and Explicit tracking-context changes; DESIGN separate own/linked panels. AD-2/4/5 atomic state and receipts, AD-6 reviewed copies, AD-9 planned versus actual role/context, AD-10/11 bounded access/writer authority and AD-12 retention. Operational portions of these requirements remain later E6 stories; no AD-1–AD-14 decision changes.
+
+**Dependencies:** 6.1 own assignment, 6.2 separately mentor-reviewed person copies, existing E3 interaction policy and E1/E5 persistence/access/closure through 5.13. Stale-reference, active-context and terminal cleanup behavior can be verified with existing commands and fixtures, without a future operational mentor or summary screen.
+
+**Size boundary:** One planned-link editor/review/confirmation path with FADDER/INSTRUKTØR scope validation, protected storage and recovery. No active accompaniment entry/exit, guiding controls, live trip/notice progression, own-driving/takeover transition, linked-revision repair UI or summary renderer. Those remain required later slices, not removed requirements.
+
+**Pilot qualification:** Controlled linking/browser/FastAPI/PostgreSQL cases contribute to E8-D. E8-P still requires representative whole/partial shifts, device readability and integrated explicit operational context changes, recovery and closure. E8-E remains field evaluation; planned whole-shift scope cannot certify actual whole-shift accompaniment. No implementation or actual qualification tests occur during planning.
+
+**Approval:** Approved by the owner on 2026-09-26 as scoped. Linking uses specific plan revisions and explicit scope; actual accompaniment still requires separate entry. Tests include incomplete FADDER shifts and INSTRUKTØR periods A to B and back to A. Planning approval only; this approved copy is canonical.
+
+### Story 6.4: Explicitly Start and End One Actual Accompaniment Period
+
+As the pilot owner accompanying someone as FADDER or INSTRUKTØR,
+I want to explicitly start guidance for a reviewed person and block, use that person's route context, and end my accompaniment separately,
+So that the app supports the person I am actually accompanying without mistaking a planned assignment for my actual role or claiming unobserved work.
+
+**Acceptance Criteria:**
+
+**Given** an already active, accessible own day and a resolved planned accompaniment link from 6.3,
+**When** the owner requests actual accompaniment entry,
+**Then** show the intended person, assignment role, own activity, imported copy/revision and planned scope for explicit confirmation that the owner is now accompanying rather than driving,
+**And** require the existing actual-role/movement policy to permit the entry action before enabling any guiding exception; selecting an assignment or requesting the entry screen cannot itself unlock driver controls,
+**And** revalidate the reviewed link, both plan revisions, current own-day authority and absence of an unresolved competing actual accompaniment context before committing; stale/missing/ambiguous targets remain unresolved and cancellation preserves prior state,
+**And** schedule, position, imported assignment, source update or reopening alone cannot start accompaniment. This transition does not activate a merely prepared day, issue authority or resolve 5.4's delayed-start timing risk,
+**And** if entry leaves another active tracking context, preserve its observations and manual correction as history without completing/aborting its unfinished trip; explain the context change in the confirmation rather than silently replacing it.
+
+**Given** the owner confirms permitted entry,
+**When** the local transition is committed,
+**Then** atomically persist actual guiding role, assignment, own activity, person/plan/revision, block and new tracking-context identity, the owner's explicit start event and the corresponding outbox event,
+**And** record entry with its manual origin and available timing basis, separate from planned block time and any later server receipt; it does not prove a prior physical handover, an earlier unrecorded start or GPS-confirmed passage,
+**And** initialize trip/progression state only for this context, with no inherited manual pin or completion evidence from another block/person or an earlier visit to this person,
+**And** a failed local commit does not show guidance as active or unlock controls; a lost server response leaves a valid locally committed entry explicitly pending, with stable retry identity and no duplicate period,
+**And** the imported plan remains a mentor-reviewed copy, not approval by the other person, own planned driving or access to their account.
+
+**Given** one actual accompaniment context is active,
+**When** the operational view and controls render,
+**Then** display persistent FADDER or INSTRUKTØR role text that clearly identifies guiding, and expose Menu, trip/stop choice, notice details and acknowledgement while guiding despite vehicle movement or qualified GPS loss,
+**And** use the same E3 state machine and E4 source/notice rules with the selected linked plan as route/stop/notice/trip context; own plan still governs own activities and final day end,
+**And** keep required route/destination, stop emphasis, uncertainty and source provenance; personal imported details stay out of the active driving-style view, while permitted context details clearly identify the selected person and block,
+**And** provide the immediate safety effect of Jeg kjører: apply driver restrictions and collapse prohibited details before any subsequent plan choice, preserving current trip/context/pin. Persist the actual-role change or retain a restrictive recovery state if persistence fails; do not leave guiding controls enabled after the owner says they are driving,
+**And** actual role, not assignment label, controls permissions. Full planned-own-driving selection and acute-takeover/return workflows remain separate later stories; this slice's common role guard must work without them.
+
+**Given** a guiding-only action or detail view was opened before Jeg kjører changed the actual role,
+**When** an action attempts to commit or a delayed callback/response attempts to apply its user effect,
+**Then** recheck the current actual role, movement policy, access and target context at the guarded mutation boundary, not only when the view was opened; reject an action now locked and explain that the role changed,
+**And** close/cancel prohibited detail and pending gestures; an old view, queued click, asynchronous validation or source response cannot perform a newly prohibited correction, acknowledgement or context change, reopen locked detail or mark undisplayed content seen,
+**And** reuse ordered role/context state and backend transition validation; never authorize a new action from a stale guiding flag supplied by the client,
+**And** distinguish a new delayed action from later synchronization/receipt of an action already validly committed before the role change: preserve the latter's original context and immutable identity as history without replaying it into the current view or granting permission again. Ordinary permitted source refresh is not itself a guiding action.
+
+**Given** actual trip or stop context must be established or changes within the same accompanied plan,
+**When** the shared operational engine evaluates qualified evidence or an explicit permitted correction,
+**Then** apply E3 candidate, pin, service-date, stop-occurrence, final-stop and return-trip rules within the selected person-plan and current tracking context; no arbitrary trip is selected when candidates are ambiguous,
+**And** keep guidance role and unresolved-trip status distinct so the owner can explicitly select a trip from the appropriate reviewed linked plan; route/time similarity cannot choose another person's or an own-plan trip,
+**And** on missing stop data attempt supported recovery when available, otherwise retain known facts and missing-stop status with manual outcomes under existing rules; offline/source failure cannot invent stops or block the permitted manual fallback,
+**And** preserve manual correction origin, qualified sensing history and observation gaps. Entering midway or finding a later stop cannot certify earlier passages, the whole trip or the 100-metre target for unobserved portions,
+**And** retain notice source/version/seen/acknowledgement and sound semantics: a context selection or previously received notice becoming relevant is not a new receipt and cannot replay old sound; seen requires that exact version's content to be displayed with valid access,
+**And** a scheduled block boundary cannot switch person, end guidance or release a pin while actual context is unchanged. An unresolved mismatch between actual accompaniment and planned scope must be visible, without manufacturing a plan revision or trimming observed facts to make the schedule appear correct.
+
+**Given** this actual accompaniment period is ongoing,
+**When** the owner explicitly ends accompaniment through the permitted action,
+**Then** close only that actual period/tracking context and record the explicit end with its origin; preserve bounded observations, gaps, manual corrections and uncertainty for the accompanied portion,
+**And** ending accompaniment does not complete or abort the other person's unfinished passenger trip, assert that all planned scope was accompanied, finish the owner's combined day, or choose the next person/activity automatically,
+**And** remove the active guiding exception and show a neutral next-activity/uncertain state governed by driver-safe interaction restrictions, without claiming that the owner has begun driving,
+**And** do not infer actual ending from planned time, end of the imported person's shift or lost position/network. A retry/reload cannot create another ending event or restart the ended period,
+**And** cancellation preserves the current period. Local failure must not claim that the end was saved; any immediate withdrawal of guiding permission remains restrictive rather than silently re-enabling it on recovery.
+
+**Given** the active or ended period is saved, reopened, synchronized or subject to deletion,
+**When** browser and backend process it,
+**Then** extend existing owner/day-scoped IndexedDB and authenticated FastAPI/PostgreSQL contracts only with required actual-period/context fields and evidence; validate link, revision, writer authority and transition legality on both sides,
+**And** reopen this same period with actual role, person/plan/block/context and pin together. Restored measurements remain historical and interrupted observation remains a gap; incomplete recovery cannot infer guiding from the assignment or start a new startup/GPS-loss exception,
+**And** retain separate local/pending/server-confirmed status, immutable retries, conflict review and E1/E5 access/revocation guards; no denied or obsolete writer can create a valid operational transition,
+**And** expose accompanied evidence with explicit manual/observed/unknown provenance for later E7 consumption, separating it from own work and retaining no inferred results for the other person's unaccompanied remainder,
+**And** integrate evidence with existing AD-12/5.13 own-day closure, trimming and all-copy expiry now: retain only permitted accompanied facts, discard unused imported context, prevent stale-tab/response resurrection and preserve original deadlines; no independent period/person retention clock,
+**And** keep private operational state isolated from public fictional demo data and prevent personal payloads or permanent GPS tracks from entering logs. Cross-device mentor recovery and all later role transitions remain separate integration slices.
+
+**Given** anonymized/fictional FADDER and INSTRUKTØR plans, controlled source/sensor inputs, browser clients and real PostgreSQL,
+**When** this slice is verified,
+**Then** test explicit entry/end, no entry from schedule/reopen/position, rejected stale/ambiguous link and cancellation, and start controls locked in actual driver motion before guiding is confirmed,
+**And** test visible guiding role with open controls in motion/GPS loss, immediate driver restriction when Jeg kjører is requested, local failure during role change, and no assignment-based permission restoration,
+**And** begin trip/stop correction, notice acknowledgement and detail loading while guiding, select Jeg kjører while moving, then complete them from a stale view/delayed callback: assert no now-locked mutation, detail reopening or false seen marker. Also test the opposite ordering, with a valid pre-change committed event receiving its delayed receipt without replay,
+**And** test entry midway, ambiguous linked trips, missing stop data offline, repeated stop occurrences, manual pin, observation gap and same-stop return-start rules through the reused engines,
+**And** test an old notice becoming relevant without sound, exact-version content display, separate source/receipt status, preservation of valid existing seen state, no falsely marked seen version and no copied completion/pin state,
+**And** test ending before a passenger trip finishes, planned end passing while guidance continues, saved/reopened actual context, no automatic next-person choice, local failure, lost receipt, stale writer, logout and fixed expiry,
+**And** test terminal trimming with accompanied evidence plus an unaccompanied remainder, including pending batches and stale tab/delayed replies. Controlled fixtures do not establish real source/sensor or tablet performance.
+
+**Traceability:** UX UJ-3/4 extensions of FR-6–11/16/20 and bounded FR-22/24 evidence, shared FR-1 and source FR-12–15/19 through E4. NFR-1–4; UX-DR10–23/26–29/31/36/38/39/44. EXPERIENCE Operational role and plan states, FADDER and INSTRUKTØR assignment scope, Explicit tracking-context changes and Accompanied-person imports and summary scope; DESIGN persistent role badge and driving focus. AD-2/3/4/5 storage and shared engine, AD-7/8 source and driver state, AD-9 actual role/context, AD-10/11 authority and AD-12 evidence/retention. All AD-1–AD-14 remain binding; remaining transitions/recovery/output are not claimed complete here.
+
+**Dependencies:** 6.3 resolved planned link and 6.1–6.2 reviewed plans; implemented E3 operational/movement engine, E4 notices and E5 same-client recovery, synchronization and terminal guards through 5.13. Requires no later multi-person switching, classroom/office execution, own-driving selector, full acute takeover/return or E7 report UI to demonstrate one actual period and its bounded evidence.
+
+**Size boundary:** One continuous accompaniment period with entry, shared operational view, explicit end and minimal safe role/context/evidence persistence. Reuse existing sensing, trip progression, notices, access and storage engines. Multi-block/person orchestration, classroom/office execution, complete own-driving/acute-takeover flows, linked-revision repair and full cross-device mentor recovery remain separate stories. Immediate driver restriction and same-period safe recovery cannot be deferred.
+
+**Pilot qualification:** Controlled browser/FastAPI/PostgreSQL behavior contributes to E8-D. E8-P must qualify actual mounted role readability, control access, person/trip context, source/sensor behavior and integrated remaining E6 transitions/recovery before real mentoring use. E8-E remains field evaluation; manual entry/end alone cannot establish that the whole planned shift was observed or that progression targets were met. No actual tests or implementation are performed during planning.
+
+**Approval:** Approved by the owner on 2026-09-26 with commit-time role revalidation: after Jeg kjører, started guiding actions must be checked against the new role when saved; delayed responses and open views cannot complete an action that is now locked. Planning approval only; this approved copy is canonical.
+
+### Story 6.5: Explicitly Switch Instructor Person or Accompaniment Block Without Transferring Trip Evidence
+
+As an INSTRUKTØR accompanying different people or portions of their shifts,
+I want to explicitly switch to a reviewed person and block, including returning to a previous person,
+So that the app follows my actual accompaniment without carrying another period's trip lock, observations or completion into the new context.
+
+**Acceptance Criteria:**
+
+**Given** an accessible active own day with reviewed person-plan copies, resolved planned links and an actual accompaniment or neutral between-period state,
+**When** the owner requests a change of accompanied person or block,
+**Then** show the current person/period and proposed person/period separately, with own activity, imported plan identity/revision, service date and explicit accompanied scope sufficient to distinguish overlapping or identical-looking trips,
+**And** require deliberate selection and confirmation of actual change; a next scheduled time, source response, position, completed passenger trip or available candidate cannot select a new person/block automatically,
+**And** offer only valid links for the own assignment/day. A FADDER assignment cannot use this flow to switch to another person or a partial instructor scope; unresolved own-plan/link changes need explicit repair rather than automatic role conversion,
+**And** reusing a previously reviewed person-plan does not require reimport, does not imply that the other person approved it and does not merge old and new periods,
+**And** ambiguous/missing/overlapping links remain visibly unresolved, with cancellation preserving the current actual period and its pin; confirmed own and imported plans remain unchanged.
+
+**Given** the owner reviews an eligible target and confirms actual accompaniment of that person and portion,
+**When** the transition commits under current role/movement/access rules,
+**Then** atomically close the outgoing actual tracking period if one is active and open the new period with its own context identity, person/plan/block references, reviewed revision basis, actual guiding role and ordered manual transition evidence,
+**And** retain outgoing observations, manual pin history, gaps and uncertain outcomes under their original context; leaving it neither completes nor aborts the other person's unfinished passenger trip,
+**And** the new period starts without inherited pin, passage/departure evidence or completion. Establish its actual trip and stop context through the existing 6.4/E3 rules rather than assuming the scheduled trip or resuming the previous visit's pin,
+**And** a return A to B to A, or a change to another block for A, creates a distinct actual tracking period even when it references the same person-plan and same trip. Preserve the observed segments separately without filling the gap or counting an entire trip twice as completed,
+**And** record the owner's explicit change and available timing basis separately from planned boundaries and later server receipt; it is not independent evidence of a physical handover before that recorded action,
+**And** changing accompaniment does not end the own combined day, start own driving or create new app/day authority.
+
+**Given** a change dialog, correction, gesture or asynchronous operation was opened against an earlier role/context/revision,
+**When** it attempts to commit after Jeg kjører, another transition, a revision change or loss of authority,
+**Then** revalidate current actual role, permitted movement state, access and exact source/target review basis at commit, using 6.4's guard; a stale action cannot switch the person, reopen locked details, acknowledge a notice or move a stop in the new context,
+**And** Jeg kjører applies driver restrictions immediately even while the change dialog is open; discard/invalidate that stale guiding confirmation and require an explicit newly permitted review rather than treating it as consent to return to guiding,
+**And** if the target becomes stale, disappears or becomes unresolved before commitment, leave the outgoing context unchanged except for an independently committed role/safety change. A failed proposed switch cannot roll that safety change back,
+**And** legitimate previously committed events and their delayed receipts remain associated with their original context and immutable identity, without executing the user action again or reviving old permissions,
+**And** source data received for an old context may be retained only within existing source/cache/expiry rules; it cannot silently retarget the active person or turn an old measurement into a new observation.
+
+**Given** an actual switch has committed,
+**When** the operational view, notices and next-activity information update,
+**Then** visibly update the permitted person/block context and use the target linked plan for route, stops and trip progression, retaining the persistent actual guiding role label and the own plan as the workday sequence,
+**And** do not flash the previous person's trip as the selected new trip while target selection is unresolved; show explicit pending/uncertain trip context instead,
+**And** recompute notice relevance using documented target trip/date/stop identity and source evidence; context change is not a new notice receipt or a new source version and cannot replay prior sound,
+**And** preserve legitimately shared notice version/seen/acknowledgement state through the established E4 identity rules, without copying unrelated notices or marking unseen content seen merely because the previous person's view showed another version,
+**And** new trip establishment retains observation gaps and the existing quality limits; no A–B–A transition can claim the 100-metre goal for unobserved passages or infer completion of classroom/office work or another person's remainder.
+
+**Given** local persistence, synchronization or restart interrupts a person/block switch,
+**When** the system resumes or retries,
+**Then** recover either the committed new context or the prior complete context, never a mix of the new role/person and old plan/block/pin; incomplete evidence remains restrictive/uncertain and cannot infer unrestricted guiding,
+**And** use the shared IndexedDB/outbox transaction and authenticated FastAPI/PostgreSQL transition with current writer/expected revision, adding only the transition fields needed here; enforce same owner/day, assignment scope and references on the backend as well as in the UI,
+**And** an unsuccessful local transaction never reports a saved switch; a lost server response leaves the locally committed result pending with unchanged batch/event IDs. Matching receipts alone establish server confirmation and duplicate delivery cannot create another period,
+**And** conflicting or rejected changes preserve permitted local evidence for 5.7 review; neither a server reply nor an old tab can silently restore the former person as current, roll back Jeg kjører or switch writer authority,
+**And** retain movement/outage history through switching and reload; neither a new block nor a return to A creates a new genuine-startup or five-minute exception,
+**And** apply E1/E5 logout/access and AD-12 expiry/closure to every context, checkpoint, conflict copy and pending payload. Switching creates no new retention clock; own-day closure retains only actual accompanied portions and cannot resurrect the discarded remainder from old replies or tabs,
+**And** private person/context data stays isolated from public demo access, logs and other accounts, with personal import details excluded from the active driving-style view.
+
+**Given** anonymized/fictional linked plans, browser clients, controlled observations/notices and real PostgreSQL,
+**When** the implementation is verified,
+**Then** test actual A to B to A and A-block-1 to A-block-2, including the same trip on return, unfinished outgoing passenger trips, manual pins and an observation gap while away,
+**And** test identical-looking routes/times, overnight service date, unresolved overlapping links, FADDER person-switch rejection, stale own/imported revision and cancel,
+**And** begin the switch while guiding, invoke Jeg kjører in motion before save, and deliver stale confirmations/callbacks from the dialog and old view; verify the new role guard rejects now-locked effects. Contrast with a valid pre-change committed event whose later receipt only confirms its historical acceptance,
+**And** test crash before/after local commit, concurrent tabs, local write failure, lost/mismatched receipt, stale writer, server conflict, logout and expiry, proving there is at most one current context with correctly partitioned historical periods,
+**And** test an already received notice becoming relevant to B without new sound, legitimate same-version seen state across contexts, no falsely seen version and no copied trip completion/pin,
+**And** use existing own-day closure commands to verify retained A/B accompanied evidence and removal of the unaccompanied remainder from all affected copies, including pending old-context responses. No future summary renderer is needed for these tests.
+
+**Traceability:** UX UJ-4 extensions of FR-5/6/9/16/20 and accompanied evidence FR-22/24; shared FR-1 and E4 notice requirements. NFR-1–4; UX-DR8/14/16/19/22/26/27/28/29/30/31/36/38/39/44. EXPERIENCE FADDER and INSTRUKTØR assignment scope, Explicit tracking-context changes, Role and context recovery and accompanied-only summary scope. AD-2/4/5 atomic transition/receipts, AD-8 notice identity, AD-9 actual context/pin, AD-10/11 authority and AD-12 retention. All AD-1–AD-14 remain unchanged.
+
+**Dependencies:** 6.3 reviewed planned links, 6.4 actual-period entry/end and commit-time role guards; shared E3/E4 operational/notice engines and E5 synchronization/conflict/closure contracts through 5.13. Tests can use already prepared A/B links and neutral between-period states. No later classroom/office execution, own-driving selector, full acute takeover/return, linked-revision repair UI or E7 summary is a prerequisite.
+
+**Size boundary:** One explicit actual person/block transition coordinating existing period entry/end, target selection and atomic context persistence. Classroom/office execution and no-accompaniment instructor operation remain a separate slice; planned own driving, full takeover/return, linked-revision repair and full cross-device mentor recovery remain subsequent required work. No new importer, sensing or synchronization engine.
+
+**Pilot qualification:** Controlled A–B–A browser/FastAPI/PostgreSQL cases contribute to E8-D. E8-P still requires actual device clarity, role-change races and integration across own tasks, mentoring, recovery and closure. E8-E remains field evaluation; explicit transition records do not establish outcomes during observation gaps. No implementation or actual tests occur during planning.
+
+**Approval:** Approved by the owner on 2026-09-26 as scoped. A–B–A uses separate actual accompaniment periods: history is preserved while trip/stop context must be established afresh on return. Atomic transition and commit-time role validation are retained. Planning approval only; this approved copy is canonical.
+
+### Story 6.6: Follow Classroom and Office Activities in My Own Instructor Day
+
+As an INSTRUKTØR with classroom teaching or office work,
+I want to follow my current and next own activity before, between or after accompaniment periods, including a day without accompaniment,
+So that my own work remains usable and distinct from passenger-trip progression and the other person's outcomes.
+
+**Acceptance Criteria:**
+
+**Given** an accessible active own day with reviewed INSTRUKTØR classroom/office activities from 6.1,
+**When** the owner views or explicitly selects one of those activities under the existing interaction policy,
+**Then** show the current own activity, its type, known planned times/place and next known own activity with clear unknowns, the persistent clock and accessible Menu,
+**And** retain service date, overnight ordering and each work part's reporting/depot context; a split-day gap remains a gap without inferring rest, transfer or completion,
+**And** distinguish the planned sequence/preview from an explicitly selected actual activity context: passing a scheduled boundary cannot by itself replace active accompaniment, release a trip pin or declare classroom/office work started or performed,
+**And** an instructor day containing only classroom/office activities works without importing another person's plan, selecting a fictitious person or showing a false missing-accompaniment error,
+**And** classroom/office remains an own-plan activity, not a FADDER activity or a trip copied from another person's plan; unknown activity codes still require the existing review/correction flow.
+
+**Given** an actual accompaniment period is active and the owner selects an eligible own classroom/office activity,
+**When** the explicit context change is confirmed and committed,
+**Then** atomically end the outgoing accompaniment context and select the own activity, preserving the outgoing observed portion, pin history, manual corrections and uncertain outcomes under their original context,
+**And** this change neither completes nor aborts the other person's unfinished passenger trip, rewrites either confirmed plan nor ends the owner's combined day,
+**And** remove active linked trip/stop progression and the guiding exception from the classroom/office context without deleting the still-needed imported plan or claiming that the owner has started driving,
+**And** show the assignment and current activity clearly, for example INSTRUKTØR with Klasserom or Kontor, without presenting the assignment label as permission for unrestricted guiding controls,
+**And** if review is cancelled or its target/revision becomes invalid before commit, preserve the prior complete context except for an independently committed safety/role change; do not partly end accompaniment and partly retain its active trip.
+
+**Given** classroom or office is the current activity,
+**When** the screen is displayed or observations and delayed responses arrive,
+**Then** show own activity information without an active passenger trip, stop rail, stop-passage progression, fictitious accompanied person or passenger-trip completion,
+**And** retained imported plans and prior trip evidence remain historical/prepared context, not active work; late callbacks from an exited linked context cannot advance it as if still accompanied or replace the current own activity,
+**And** apply existing notice relevance, metadata and access rules where applicable to known own activity facts, preserving uncertainty instead of borrowing the former person's trip relevance. This state is not an ongoing actual trip and cannot trigger the 4.8 new-notice trip chime,
+**And** preserve legitimate source/notice history and silent updates without fabricating a new notice/version, seen marker or sound from the context change,
+**And** use the established current-role/movement guards for interactive actions; classroom/office is not a new movement exception. Jeg kjører still imposes driver restrictions immediately, and pending actions recheck role/access/context at commit as required by 6.4.
+
+**Given** activity selection, elapsed time, position or transition to another activity supplies evidence,
+**When** a classroom/office outcome is stored or displayed,
+**Then** distinguish planned start/end, recorded context selection/change, known movement/location observations and any independently supported outcome, retaining each origin and uncertainty,
+**And** neither being near a classroom/office, elapsed scheduled duration, choosing the activity nor leaving it alone proves that teaching or office work was completed; without outcome-specific evidence retain Gjennomføring usikker for the later E7 initial review,
+**And** do not backfill a missing actual start/end from scheduled times or registration time; preserve a known actual event time separately from when it was recorded, and leave unknown actual times unknown,
+**And** keep these own-activity outcomes separate from accompanied-driver trip completion, own planned driving and temporary takeovers in the evidence supplied to E7,
+**And** this story supplies the activity view and honest evidence, not a new automatic completion rule, summary confirmation screen, attendance record, teaching assessment or payroll calculation.
+
+**Given** the next own activity is another classroom/office task or a planned accompaniment block,
+**When** the owner deliberately moves to the next appropriate context,
+**Then** changing own tasks preserves the previous uncertain result rather than treating selection of the next task as completion,
+**And** actual accompaniment entry reuses 6.4/6.5 with explicit person/portion confirmation and current link/revision validation; a return to the same person establishes trip/stop context afresh without inheriting its earlier pin or filling the classroom/office observation gap,
+**And** missing or ambiguous next context stays visible and unresolved instead of selecting the nearest timetable match. An invalid next link cannot erase the current own activity or earlier evidence,
+**And** if the next planned activity is own driving, identify it as an own-plan activity without automatically starting it; the full own-driving selection flow remains a subsequent story while the immediate Jeg kjører safety guard already applies,
+**And** no next activity or reaching the final classroom/office planned end automatically closes the working day. Final own-day end/abort remains E7's explicit flow.
+
+**Given** own activity state or its evidence is saved, synchronized, reopened or due for deletion,
+**When** browser and backend process it,
+**Then** extend existing own activity/context fields only as needed in owner/day-scoped IndexedDB and authenticated FastAPI/PostgreSQL, reusing atomic context/outbox transitions and validating plan identity, role, expected revision and current writer authority,
+**And** local failure cannot report a successful transition; only a matching receipt confirms server storage. Immutable retries cannot duplicate selections or manufacture outcomes, and conflicts preserve local evidence for explicit review,
+**And** recover the complete saved own context with pending status/uncertainty and no restored linked passenger progress; absent/corrupt context cannot infer guiding, fresh measurements or a new startup/GPS-loss exception,
+**And** cached own activities remain usable offline under existing access rules, including a no-accompaniment instructor day. Missing optional location/source data stays unknown; this story neither starts a prepared day after ordinary expiry nor resolves 5.4's timing-evidence issue,
+**And** apply logout/pending-revocation locks and AD-12 expiry/5.13 terminal guards to every private copy. Activity changes/reopen cannot renew retention, day authority or resurrect discarded linked data; preserve permitted own facts and actual accompanied evidence for the existing closure command,
+**And** do not add permanent staff/student records, raw GPS tracks or private operational data in public demo access/logs. The own combined-day lifecycle continues to govern both own tasks and imported context.
+
+**Given** anonymized/fictional plans, browser clients, controlled position/time/source inputs and real PostgreSQL,
+**When** the slice is verified,
+**Then** test a classroom/office-only instructor day with no linked plan, classroom before accompaniment, office between A and B, and classroom after the final accompaniment period,
+**And** test departure from an unfinished accompanied trip, return to A after office with no inherited pin and a visible observation gap, two consecutive own tasks and an absent/ambiguous next activity,
+**And** test schedule-only, location-only and combined location/time evidence without proof of teaching/work: each remains unconfirmed; choosing/leaving the activity cannot certify its outcome or invent actual times,
+**And** test unknown location, overnight service date, split-day gap, FADDER classroom/office rejection and final planned activity ending without own-day closure,
+**And** test current-role revalidation after Jeg kjører, stale linked callbacks, target revision changes, cancelled transition, crash before/after commit, offline reopen, failed local write, lost/mismatched receipt, wrong owner/writer, logout and fixed expiry,
+**And** test readable activity/next-activity hierarchy, clock/Menu, long labels, enlarged text, keyboard focus and explicit unknown/disabled states; no precise gesture or action while driving is required,
+**And** verify through existing closure fixtures that own uncertain outcomes and actual accompanied portions stay distinct while unaccompanied imported remainder is deleted from all affected copies. No E7 renderer is needed to verify this contract.
+
+**Traceability:** UX UJ-4 extensions of FR-4/5/10/20 and evidence FR-22/24; shared FR-1/16/17. NFR-1–4; UX-DR7/12/14/17/18/26/27/28/29/31/36/38/39/44. EXPERIENCE classroom/office and no-accompaniment instructor states, explicit context changes and own-versus-accompanied outcome boundaries; DESIGN own activity hierarchy and role text. AD-2/4/5 atomic persistence/receipts, AD-8 notice state, AD-9 explicit context and honest non-passenger evidence, AD-10/11 authority and AD-12 retention. All AD-1–AD-14 remain unchanged.
+
+**Dependencies:** 6.1 own instructor assignment, 6.4 actual accompaniment entry/end and commit-time role guards, 6.5 context switching, 3.10 non-passenger display/evidence and E5 access/recovery/closure through 5.13. A classroom/office-only day can be demonstrated without any linked plan. Later own-driving/takeover flows and E7 review/PDF are not prerequisites for this slice.
+
+**Size boundary:** Adapt the existing own-activity display/state to classroom/office and integrate explicit context changes with existing accompaniment periods. Reuse the established engines; no new scheduler, completion inference, teaching/attendance administration, full own-driving selector, takeover/return flow, general linked-revision repair, full cross-device mentor recovery or summary renderer.
+
+**Pilot qualification:** Controlled browser/FastAPI/PostgreSQL activity/evidence cases contribute to E8-D. E8-P requires actual tablet readability, representative instructor sequences and integrated role/context/recovery/closure behavior; location/time cannot qualify unobserved teaching/work as completed. E8-E remains field evaluation. No implementation or actual tests occur during planning.
+
+**Approval:** Approved by the owner on 2026-09-26 as scoped. Classroom and office are own instructor activities; context change documents neither completed work nor outcomes on the other person's trip. Planning approval only; this approved copy is canonical.
+
+### Story 6.7: Switch to Planned Own Driving Using Only My Confirmed Own Trips
+
+As the pilot owner assigned FADDER or INSTRUKTØR work with separate own driving,
+I want Jeg kjører to apply driver restrictions immediately and then select my planned own trip from my own confirmed shift,
+So that my actual role and trip ownership stay correct even if selection is delayed, cancelled or fails.
+
+**Acceptance Criteria:**
+
+**Given** an accessible active own day in guiding, classroom/office or another permitted mentor context,
+**When** the owner chooses Jeg kjører for planned own driving,
+**Then** immediately apply the existing driver movement restrictions and show FØRER instead of an active guiding-role badge before any trip selection, source request or server response,
+**And** collapse prohibited details and invalidate pending guiding-only actions through 6.4's commit-time role guard; selecting this action never waits for a route match before restricting interaction,
+**And** persist actual-role change with its origin and available timing basis, retaining a restrictive recovery guard if persistence fails; never report the change saved when it is not,
+**And** keep assignment role separate from actual driving role. This action alone selects no own trip, changes no planned ownership and proves neither actual departure nor completion of any work,
+**And** retain the current trip/context/pin until a valid explicit context transition. If it belongs to the linked plan, keep that ownership clear and indicate that a planned own trip has not yet been selected; do not relabel it as own driving merely because the role changed,
+**And** observations after the role change retain their actual role and current context, not a continued guiding label or retroactive allocation to a subsequently selected own trip.
+
+**Given** driver restrictions are in force and the owner opens the planned-own-trip selector,
+**When** the current E3 movement/access policy permits selection,
+**Then** list only eligible trips belonging to the owner's confirmed own plan or a valid explicitly confirmed revision of it, with route/direction, service date and time sufficient to distinguish candidates,
+**And** exclude linked-person trips even when route, stops and departure time match an own trip; use stable plan/trip identity and validate ownership on the backend as well as the client,
+**And** never copy or offer the linked trip as a fallback when the own trip is absent. Explain the missing own trip and use the existing permitted own-plan correction/addition and confirmation path before it becomes selectable,
+**And** preserve source failure versus no match and manual corrections; do not require a source match where the reviewed own trip is valid under E2's missing-data rules,
+**And** when selection is locked, show a concise pending-selection status without asking the driver to resolve it while moving. Unknown speed and approved startup/GPS-loss exceptions follow the existing qualified E3 rules; the role change resets none of their history.
+
+**Given** an exact own-plan revision and trip have been reviewed for selection,
+**When** the owner confirms the choice under current role/movement/access rules,
+**Then** revalidate the plan/trip, expected context/revision and writer authority at commit, then atomically exit the prior tracking/activity context and establish the selected own-trip context in driver role,
+**And** preserve prior accompanied observations, pin history and uncertain own-activity outcomes under their original identities; leaving a linked trip does not complete or abort it, and leaving classroom/office does not certify work performed,
+**And** initialize the own trip through existing E3 selection/progression rules without importing another context's pin, stop passage, completion or old observation as a fresh measurement,
+**And** retain the explicit selection's manual provenance and applicable pin behavior. Trip selection alone is not GPS-confirmed start-stop arrival, actual departure or evidence that earlier stops were passed,
+**And** use the selected own trip for stops, notices and progression while preserving the own combined-day sequence/lifecycle. Source relevance and sound follow E4; selecting a context cannot replay already received notice sound,
+**And** a stale/removed trip or changed relevant revision requires a fresh review; no similar linked or own trip is substituted silently.
+
+**Given** trip selection is cancelled, fails, remains locked or has an uncertain result,
+**When** the owner returns to the operational view or reopens the app,
+**Then** preserve FØRER restrictions and the last durably established context with honest pending/uncertain status; cancellation of trip selection cannot undo the preceding Jeg kjører action or restore guiding permission,
+**And** a failed context transaction cannot leave a new own-plan label with an old linked pin, or discard the earlier role change; restore a complete committed context or a restrictive unresolved state,
+**And** open selectors, delayed source matches, stale tabs and callbacks must recheck current role, access and target context/revision before applying an effect; they cannot select a now-invalid trip or reopen locked details,
+**And** distinguish a valid pre-change committed event's later receipt from a new stale action: preserve historical event identity without replaying it into the current context,
+**And** a stopped bus, scheduled mentor activity or assignment label cannot automatically return the owner to guiding. A later actual guidance entry requires the existing explicit permitted 6.4/6.5 transition, with a newly established context; same-context acute takeover/return remains the separate next slice.
+
+**Given** Jeg kjører was requested but local role/guard storage fails, its outcome is uncertain, or the app restarts before own-trip selection is complete,
+**When** controls are rendered or state is restored from any local/server copy,
+**Then** keep driver restrictions until the actual role is reliably resolved through the existing permitted recovery/explicit role path; an older guiding snapshot, missing marker or a successful read of old state cannot by itself establish current guiding permission,
+**And** the safety rule must work even if the write that would record the restrictive guard never commits: unresolved role/recovery validity defaults to restricted controls, not the older FADDER/INSTRUKTØR role,
+**And** show the storage/role uncertainty without claiming the role event or own-trip selection was saved; retry or a late receipt cannot lift restrictions or require interaction while driving,
+**And** preserve known context/evidence without inventing a successful transition, new authority, fresh measurements or an automatic return to guidance.
+
+**Given** the own trip is selected and has incomplete data or reaches an operational boundary,
+**When** the existing engine processes evidence or a permitted manual action,
+**Then** use E3's qualified stop/progression, manual pin, missing-stop recovery/fallback, correction/abort/skip and final-stop/return-start rules unchanged,
+**And** offline/source failure cannot fabricate stops or block the approved explicit manual outcome; retain unknown progression, historical readings and observation gaps honestly,
+**And** completion of an own trip or its scheduled end cannot start another person's accompaniment, change actual role or end the combined day automatically,
+**And** own trip outcomes remain distinct from accompanied-driver outcomes and temporary takeover evidence. This own-trip flow cannot convert the acute FADDER current-trip exception into planned own ownership.
+
+**Given** role/own-trip state or evidence is stored, synchronized, recovered or deleted,
+**When** browser and backend process the transition,
+**Then** reuse owner/day-scoped IndexedDB and authenticated FastAPI/PostgreSQL role/context transactions, outbox identities, expected revision and writer validation, adding only the necessary transition state,
+**And** keep the immediate restrictive role transition independent from successful trip selection; local failure is not success, server failure leaves committed work pending and only a matching receipt confirms server storage,
+**And** immutable retries do not duplicate role events or periods; conflicts retain allowed evidence for explicit review and cannot silently restore old guiding permissions or change writer authority,
+**And** recover actual role, own/linked plan identity, selected context/pin, pending selection and movement/outage history consistently. Incomplete recovery cannot infer guiding or a new startup/outage allowance,
+**And** apply existing access/logout, AD-12 fixed expiry and 5.13 all-copy closure/retirement guards. No role/trip change extends authority or retention; retained own-driving facts and actual accompanied portions remain separate while unaccompanied imported remainder is removed at own-day closure,
+**And** keep private plans/evidence isolated from other accounts, public demo and logs; no persistent raw GPS history or new person directory is introduced.
+
+**Given** anonymized/fictional FADDER and INSTRUKTØR days, controlled observations/source replies, browser clients and real PostgreSQL,
+**When** the slice is verified,
+**Then** test transition from guiding and from classroom/office, including an instructor day with no linked plan and a FADDER day with distinct own trips,
+**And** test immediate restriction in motion before any selection, old guiding actions completing late, cancelled/locked/missing own-trip choice and reload: none may restore guiding permission,
+**And** test identical-looking own and linked trips, a forged linked reference, Friday 25:30 and multiple calendar-time candidates, explicit own-plan addition, changed revision and a missing-stop own trip offline,
+**And** test prior unfinished linked trip and manual pin preservation without transfer, prior uncertain classroom outcome, context selection without invented departure/passage and no old notice sound replay,
+**And** test local failure before/after the restrictive role transition and before/after own-context commit, concurrent tabs, delayed callbacks, lost/mismatched receipts, stale writer, logout, fixed expiry and terminal cleanup of all relevant copies,
+**And** force role and restrictive-guard writes to fail or remain uncertain, terminate/restart before own-trip choice, and supply an older guiding local/server copy: verify controls remain restricted until a permitted role resolution. Include failure before any new marker is committed, delayed stale response and repeated restart,
+**And** verify safe context/permission recovery and readable FØRER/pending-selection state without requiring a driver response while moving. Controlled tests do not establish mounted tablet or sensor performance.
+
+**Traceability:** UX UJ-3/4 extensions of FR-5/6/9/16/20, shared FR-1/3 and evidence FR-22/24. NFR-1–4; UX-DR5/8/14/16/26/27/28/29/31/36/38/39/43/44. EXPERIENCE planned own-driving ownership, immediate Jeg kjører restriction, explicit tracking-context change and role recovery; DESIGN FØRER replacing the guiding badge. AD-2/4/5 atomic persistence/receipts, AD-8 notice identity, AD-9 actual-role/context invariants, AD-10/11 authority and AD-12 retention. All AD-1–AD-14 remain unchanged.
+
+**Dependencies:** 6.4 immediate role restriction/commit-time guards, 6.5 explicit context transition, 6.6 own instructor activity state, E2 reviewed own-plan revision, E3 own-trip engine, E4 notices and E5 persistence/recovery/closure through 5.13. No future full acute takeover/return, linked-revision repair UI or E7 report is required to demonstrate this own-trip flow.
+
+**Size boundary:** Complete the planned-own-driving role/selection transition using existing guards, selector, context engine and storage. No copied linked trips, automatic role return, acute FADDER current-trip takeover/return UI, new matching/sensing/synchronization engine, full cross-device mentor recovery or summary renderer. Immediate driver restriction survives cancellation and failed selection within this slice.
+
+**Pilot qualification:** Controlled browser/FastAPI/PostgreSQL role/ownership/race tests contribute to E8-D. E8-P requires mounted role clarity, permitted selection, real device/source behavior and integration with subsequent takeover/recovery/closure. E8-E remains field evaluation. No implementation or actual tests occur during planning.
+
+**Approval:** Approved by the owner on 2026-09-26 with restrictive recovery after Jeg kjører: guiding controls stay locked despite failed/uncertain storage or restart before trip selection; keep driver restrictions until role resolution and never reopen guiding from an older copy. Planning approval only; this approved copy is canonical.
+
+### Story 6.8: Take Over the Current Linked Trip as FADDER and Explicitly Return to Guiding
+
+As a FADDER who temporarily needs to drive the accompanied person's current trip,
+I want to apply driver restrictions immediately while keeping the current trip context, then explicitly return to guiding when I am accompanying again,
+So that a temporary actual driver change neither loses progress nor rewrites planned trip ownership.
+
+**Acceptance Criteria:**
+
+**Given** an accessible active own day with an actual FADDER accompaniment context and its current linked trip,
+**When** the owner selects Jeg kjører for the acute current-trip takeover,
+**Then** immediately show FØRER and enforce E3 driver restrictions before any persistence response, route request or additional choice, using 6.4/6.7's safety and stale-action guards,
+**And** retain the same person/linked plan, accompaniment block, tracking-context identity, current trip/direction, stop progress, manual pin and notice context. A change of driver alone neither starts a new tracking context nor reinitializes progression,
+**And** require no creation of a planned own trip, own-trip selection, new route match or plan revision to apply the restriction and retain current context,
+**And** record this as temporary actual driving on the linked trip, distinct from 6.7's planned own-driving flow. Neither imported plan changes ownership or content, and the linked trip never appears as a newly planned own trip,
+**And** this exception is the adopted FADDER current-trip case, not an implicit extension to INSTRUKTØR takeover or a general linked-trip own-driving selector. The universal immediate restriction from Jeg kjører still applies even when a takeover target is invalid or unresolved,
+**And** unresolved current trip/progression remains visibly unresolved: the safety action cannot invent a trip or stop, release a manual pin or authorize an arbitrary substitute.
+
+**Given** the acute role change is recorded or retried,
+**When** its evidence and later observations are persisted,
+**Then** store the actual role transition and its manual origin against the existing context, with registration time, available event-time basis and retained uncertainty, using the existing atomic local/outbox contract,
+**And** distinguish a known actual takeover time from registration time; if an earlier physical takeover time is unknown, leave it unknown rather than assigning it from schedule, position or an old measurement,
+**And** preserve previous guiding observations and attribute subsequent known observations to their actual role/context without relabelling the whole trip as driven by the fadder or rewriting earlier observations,
+**And** repeated delivery of the same action is idempotent and does not create several takeovers. A later distinct explicit takeover after a valid return creates its own role segment within the appropriate existing context,
+**And** role change alone is not evidence of GPS-confirmed movement, stop passage, passenger-trip completion, physical bus replacement or completed own work; no permanent raw GPS track is added.
+
+**Given** FØRER is the actual role after takeover,
+**When** the ongoing trip receives observations, notices or a valid operational transition,
+**Then** continue the existing E3 progression, manual-pin, final-stop/return-start and missing-stop fallback rules with the retained context and actual driver interaction policy,
+**And** retain qualified speed/position history, outages and uncertainty; role switching never creates a first-start exemption, restarts the five-minute interval, treats unknown speed as zero or hides an observation gap,
+**And** preserve E4 source/version/seen/acknowledgement state and recompute only genuinely changed relevance. Takeover or return is not a new notice receipt and cannot replay old audio,
+**And** a normal supported trip transition does not return the owner to guiding or copy the previous trip's pin into the next trip. Actual role remains FØRER until an explicit permitted return,
+**And** stale guiding dialogs, gestures, validation callbacks or source replies cannot commit now-locked actions or reopen prohibited details. A receipt for a valid earlier committed action only confirms its original history.
+
+**Given** a temporary takeover is active and the owner is now accompanying again,
+**When** the owner uses Jeg sitter på igjen through the permitted Menu path,
+**Then** evaluate permission using the current driver-role movement/access rules before granting any guiding exception, and require an explicit current-context return action,
+**And** revalidate actual role, takeover/context identity, current trip state, revision and authority at commit; a stale dialog from another trip/context cannot return the app to guiding or restore an old trip snapshot,
+**And** only after a valid local commit show active FADDER guidance/open controls and record the manual return against the same tracking context, preserving its then-current trip/direction, progression, pin and notices,
+**And** a stopped bus, planned time, end of a trip, app reopen or assignment label cannot confirm that someone else is driving. Return requires the owner's explicit action, and nothing in this flow authorizes lifting restrictions while the owner is still driving,
+**And** cancel, locked controls, invalid target or failed/uncertain local return storage leaves driver restrictions in force. If the return was durably committed but server acknowledgement is missing, retain its explicit local/pending status under existing offline rules rather than claiming server confirmation,
+**And** if the former accompaniment context has been exited, ended or changed to another person/own activity, do not resurrect it through the old return action; use the existing explicit context-entry path with fresh validation.
+
+**Given** takeover/return persistence fails, the app restarts or recovery presents older guiding data,
+**When** the operational view is restored,
+**Then** restore actual role and current context together, with a recorded unresolved takeover recovering as FØRER until a valid explicit return is established,
+**And** inherit 6.7's restrictive recovery even if the role/guard write never committed: an older local/server guiding copy, absent marker, lost response or imported FADDER label cannot establish current guiding permission when the outcome is uncertain,
+**And** retain driver-safe controls and clearly indicate role/storage uncertainty until permitted role resolution; do not invent saved role events, exact physical handover times or fresh sensor evidence,
+**And** a late takeover/return receipt updates only the appropriate historical acceptance status and cannot roll the current role backward or replay a transition; a stale tab cannot lift restrictions by writing its older guiding state,
+**And** a return committed before a crash must be distinguishable from a merely requested return; contradictory or incomplete evidence cannot be resolved by choosing the less restrictive role.
+
+**Given** these role segments and observations are saved, synchronized, reviewed for conflict or become due for deletion,
+**When** client and backend process them,
+**Then** extend existing owner/day-scoped IndexedDB and authenticated FastAPI/PostgreSQL context/event contracts only with needed takeover/return fields, validating current writer, expected revision, role/context sequence and FADDER eligibility,
+**And** keep immediate restrictive behavior independent of successful server storage; local failure is not saved success and only a matching receipt confirms server acceptance. Immutable retries cannot duplicate transitions or remap observations,
+**And** distinguish the mentor's actual temporary driving from planned own trips and guiding portions in evidence supplied to E7, retaining manual/observed/uncertain origin and observation gaps; neither role segment asserts whole-trip completion,
+**And** apply E1/E5 access/revocation and AD-12/5.13 own-day retention/closure to all copies. Preserve permitted takeover/accompanied evidence, discard the unaccompanied remainder and prevent stale-tab/delayed-response resurrection. No new clock, authority or permanent person/driver performance history is created,
+**And** preserve private/demo/account separation and existing conflict review; no silent merge can convert uncertain role evidence into a confirmed return or bypass the safety guard.
+
+**Given** anonymized/fictional FADDER fixtures, browser clients, controlled observations/source replies and real PostgreSQL,
+**When** this slice is verified,
+**Then** test takeover during a manually pinned linked trip with exact trip/direction/stop/context preservation, including missing stop data and an ambiguous progression state without fabricated certainty,
+**And** test rejection of linked-to-own ownership conversion and INSTRUKTØR acute-takeover classification, while immediate driver restriction remains available without a valid takeover target,
+**And** test permitted explicit return, return locked by reliable motion, cancelled return, stale return after context/trip change, repeated takeover/return cycles and normal trip completion without automatic guiding restoration,
+**And** test local role/guard write failure before any new marker, crash before/after takeover or return commit, old guiding copies, concurrent tabs and delayed receipts. Unknown outcomes remain restrictive; a proven locally committed return remains distinct from missing server acknowledgement,
+**And** test outdated guiding actions after Jeg kjører, no reset of outage/startup history, no old sound replay, retained manual pin, historical measurement age and preserved gaps,
+**And** test known/unknown physical takeover time versus registration time, unchanged prior observations, wrong owner/writer, stale revision, logout, expiry and terminal trimming of permitted role segments versus unaccompanied remainder across pending copies,
+**And** verify readable FØRER/FADDER and uncertainty labels with no required driver interaction while moving. Tests are controlled evidence, not proof of actual physical handover or qualified tablet behavior.
+
+**Traceability:** UX UJ-3 explicit acute FADDER exception extending FR-6/9/16/20 and FR-22/24 evidence, shared FR-1 and E3/E4 operational requirements. NFR-1–4; UX-DR14/16/19/22/26/27/29/31/36/38/39/44. EXPERIENCE Acute FADDER takeover, Explicit tracking-context changes, Role and context recovery and accompanied-only evidence; DESIGN FØRER role treatment and preserved route/stops. AD-2/4/5 atomic state/receipts, AD-8 notice identity, AD-9 same-context actual-role transition, AD-10/11 authority and AD-12 retention. All AD-1–AD-14 remain unchanged.
+
+**Dependencies:** 6.4 actual accompaniment and commit-time role guards, 6.7 immediate/restart-safe restrictive role state and own-driving distinction, existing E3/E4 operational engine and E5 synchronization/conflict/closure through 5.13. No future linked-revision repair, full cross-device mentor recovery or E7 report is needed to demonstrate one takeover/return cycle and its bounded evidence.
+
+**Size boundary:** One same-context FADDER takeover/return cycle and its persistence/evidence, reusing existing engine, driver restrictions and recovery guards. No new planned trip, role model for other takeover cases, person switching, plan revision, sensing engine, generic synchronization system or summary renderer. Full cross-device role recovery remains a later integration slice; safe same-client restart is required here.
+
+**Pilot qualification:** Controlled browser/FastAPI/PostgreSQL takeover/race/retention tests contribute to E8-D. E8-P requires actual tablet role clarity, current-context retention, permitted return controls and integrated remaining recovery/closure behavior before real use. E8-E remains field evaluation. No implementation or actual tests occur during planning.
+
+**Approval:** Approved by the owner on 2026-09-26 as scoped. Acute FADDER takeover retains the ongoing trip and records the driver change as a distinct manually reported event. Return requires an explicit permitted action; uncertain storage retains driver restrictions. Planning approval only; this approved copy is canonical.
+
+### Story 6.9: Revise the Intended Linked Plan and Explicitly Repair Affected Accompaniment Links
+
+As the pilot owner preparing or using FADDER/INSTRUKTØR plans,
+I want to review a revision of the intended private person-plan copy and explicitly repair affected accompaniment links,
+So that changed future work becomes usable without mixing people's plans, moving the active trip or rewriting observed work.
+
+**Acceptance Criteria:**
+
+**Given** accessible unexpired own and imported-person plans,
+**When** the owner starts a file or manual revision,
+**Then** require an explicit target own plan or named imported copy and retain that owner/person/plan identity visibly throughout input, scope selection, comparison and confirmation,
+**And** reuse E2's shared PDF/image/manual revision flow with whole-plan, selected-part and additions-only scope; persist the exact target, base revision, input/proposal revision and selected scope so reopening shows what was compared,
+**And** match existing activities only within that target plan using supported identity/service-date evidence. Another person's or own-plan trip is never a match merely because line, time or stops are identical,
+**And** retain manual correction/source provenance, unknown data and temporal uncertainty, including extended service-date times; no fresh extraction or matching answer silently replaces an existing correction,
+**And** follow AD-6 original/processing cleanup and reopen-with-reselected-original behavior. This remains the mentor's private copy and review, never approval by or editing of the other person's account.
+
+**Given** a scoped linked-plan proposal is compared with its saved base,
+**When** the owner reviews changes,
+**Then** show added, changed, proposed-removed and unchanged eligible activities, with before/after values and a list of accompaniment links whose person/trip/portion/boundaries are affected,
+**And** distinguish future planned links from active tracking context and historical observed periods; show the effect on whole-shift FADDER scope and each affected INSTRUKTØR block, including later returns to the same person,
+**And** a partial file's omission is not enough to propose deletion, additions-only removes nothing, and actual removals require explicit review within the established replacement scope,
+**And** blocking identity/date/order/scope ambiguity must be resolved before confirmation; source no-match/missing stops/bus may remain visibly unknown under E2 rules,
+**And** a changed base, target, scope or proposal invalidates the previous review and requires comparison again rather than retaining confirmation eligibility.
+
+**Given** a current resolved revision proposal is explicitly confirmed,
+**When** local application commits,
+**Then** atomically apply only the reviewed eligible changes to that target, advance its revision, persist the revision event and mark affected accompaniment links unresolved with their former reference/scope and the reason for repair,
+**And** preserve stable identities for supported existing matches and create identities only for genuine additions; never remap a removed trip or interval to a similar trip automatically,
+**And** preserve other plans, performed evidence, active trip/direction/progression/pin and actual role, including an ongoing FADDER takeover. An activity that became active/performed during review is protected and requires fresh comparison instead of partial application claimed as complete,
+**And** a valid revision may remain locally confirmed while affected planned links await repair; show those separate statuses. Unresolved links cannot start a new accompaniment context or silently extend/change its scope,
+**And** if revision affects an active accompaniment link, keep the ongoing tracking context explicitly bound to the exact plan revision on which it was established, with the affected link visibly unresolved. Persist and render the active revision separately from the newer confirmed plan revision; neither revision application, reopen, synchronization nor a late source response may silently substitute the newer revision into the active trip,
+**And** retain the necessary active-revision facts within existing AD-12 limits; further use of the changed link requires explicit current-basis review/repair. Even repaired planned links do not silently rebind the active context: any actual context change still uses the explicit permitted transition and preserves earlier evidence,
+**And** unchanged references in the revised copy retain their identity and original review provenance, but a newer plan revision is not silently claimed reviewed for a new context. Revalidate and explicitly review the applicable link against the current revision before new use. Unrelated plans/links are not invalidated by association alone.
+
+**Given** a link is unresolved after a linked-plan revision or an accepted own-plan change to its referenced assignment/activity,
+**When** the owner opens link repair,
+**Then** show its previous person/plan/revision/scope beside the current target and explain the changed or missing reference, preserving the old basis until explicit resolution,
+**And** permit deliberate selection of a valid current portion and confirmation through 6.3's rules, or explicit removal of a no-longer-needed planned link without deleting its historical observed periods; cancellation leaves the unresolved link intact,
+**And** keep FADDER tied to the same person's whole shift and INSTRUKTØR blocks explicitly bounded; known missing sections, conflicting boundaries, repeated stop occurrences or ambiguous overnight trips cannot be repaired by guessing,
+**And** target-plan repair cannot silently select a different person. A needed person/assignment change follows the existing explicit plan/link path and still creates no actual operational switch,
+**And** recheck exact own/linked plan revisions, target identity/scope and current role/access at repair commit. Save the newly reviewed link basis/provenance atomically; intervening changes require a new review,
+**And** integrating own-plan revisions uses the existing E2 commit path with link invalidation in the same transaction; no interval may expose a changed activity with a falsely valid old link.
+
+**Given** a repaired link is saved while old operational observations or callbacks still exist,
+**When** the link is used, reopened or a delayed result arrives,
+**Then** retain repair as a planned association distinct from the active and historical context. Actual person/block entry or change still requires 6.4/6.5 and current permissions,
+**And** never move the active manual pin to the repaired trip, retroactively attribute earlier observations to the new portion/person, turn a manual field into source/GPS evidence or infer completion of removed work,
+**And** E4 relevance and retained source/seen state remain tied to the actual supported context; a revised plan or repaired link is not a new notice receipt and cannot replay old sound,
+**And** invalidate stale confirmations/gestures at commit after Jeg kjører, access loss or context/revision changes, retaining 6.7's restrictive recovery. A delayed receipt for an already committed revision confirms only that original revision, not a new repair or role change,
+**And** preserve per-trip data coverage honestly after revision; new/changed trip data is not automatically downloaded or verified. Partial coverage cannot be labelled whole-day ready.
+
+**Given** revision/repair persistence, synchronization or recovery fails,
+**When** browser and backend process or reopen the work,
+**Then** reuse owner/day-scoped IndexedDB and authenticated FastAPI/PostgreSQL revision/outbox contracts, extending only necessary link-impact and repair state; validate target ownership, writer authority, expected revision and protected operational facts server-side,
+**And** local failure/cancel leaves the prior committed plan and links intact; a committed local revision with unresolved links remains distinguishable from an unapplied proposal and from completed repair,
+**And** stable proposal/application/event identities prevent duplicate revision or repair on retry, with only matching receipts establishing server confirmation. Conflicts preserve permitted proposals/evidence for 5.7 review without silent rollback or partial backend writes,
+**And** recover revisions, unresolved reasons and original/current link bases together; no crash or stale tab may show a half-applied revision or falsely repaired link,
+**And** obey AD-12 draft/own-day deadlines, logout/expiry and 5.13 terminal guards across proposals, old revisions, conflicts, outboxes and checkpoints. A linked person's changed final end does not change the mentor's own-day end, access grant or retention clock; only an applicable confirmed own-plan revision may affect own planned end under the exact existing AD-12 rules,
+**And** keep only required interpreted private data, preserve permitted observed evidence and remove the unaccompanied remainder at own-day closure without resurrection by pending revisions/responses; no permanent source/history archive or cross-account rights are added.
+
+**Given** anonymized/fictional own and linked plans, browser clients and real PostgreSQL,
+**When** the slice is verified,
+**Then** test file/manual changes to one of two identical-looking person plans, whole/part/additions scope, partial-file omission, explicitly removed future trip and retained manual correction,
+**And** test a FADDER whole-shift boundary change and incomplete replacement, INSTRUKTØR A–B–A with only A links affected, a repaired interval with repeated stop occurrences and Friday 25:30/calendar-date ambiguity,
+**And** test a trip becoming active/performed while review is open, ongoing takeover with pinned active trip preserved, an own activity changed with atomic invalidation of its links and prior observed periods remaining unchanged,
+**And** keep an active context on revision R1 while confirming R2 that affects its link: verify visible unresolved status and R1-bound trip/stops/pin after reload, delayed R2 responses and synchronization; repair alone cannot swap the active basis, and use of the changed link requires explicit review and permitted transition,
+**And** test revision saved but repair pending, cancelled repair, stale base during both reviews, no automatic similar-trip/person substitution and explicit new-context entry after repair without inherited evidence,
+**And** test role change before commit, failure before/after revision and repair transactions, restart, duplicate actions, lost/mismatched receipts, wrong target/owner/writer, conflict, logout, expiry and terminal cleanup with delayed old proposals,
+**And** verify that changing the linked plan's end time does not extend own-day retention/access and that updated data coverage is distinct from confirmation. No future report screen is required to verify these contracts.
+
+**Traceability:** UX UJ-3/4 extensions of FR-2/3/4/5 and FR-6/9/16/20 preservation, FR-22/24 provenance/retention. NFR-1–4; UX-DR4/5/7/8/16/26/27/28/30/31/36/38/39/43/44. EXPERIENCE Revision ownership and linked contexts, explicit scope and actual-versus-planned context; DESIGN separate own/linked review panels. AD-2/4/5 atomic revisions/receipts, AD-6 shared import/transient originals, AD-7/8 source/notice boundaries, AD-9 active context/pin, AD-10/11 authority and AD-12 deadlines/all-copy cleanup. All AD-1–AD-14 remain unchanged.
+
+**Dependencies:** E2 comparison/application through 2.11–2.12, 6.2 reviewed private copy, 6.3 links, 6.4–6.8 operational roles/contexts and E5 conflict/closure infrastructure through 5.13. Uses existing E2 machinery and scoped repair rather than a new general merge engine; no later full cross-device mentor recovery or E7 renderer is required.
+
+**Size boundary:** Adapt the existing revision transaction to named linked copies, atomically invalidate impacted links and repair their explicit planned references. Active/historical context is protected rather than edited. No new importer/matching engine, arbitrary history rewrite, automatic person switch, cross-account editing or summary/PDF UI. General device-transfer recovery remains a separate E6 integration slice.
+
+**Pilot qualification:** Controlled browser/FastAPI/PostgreSQL revision/repair and race cases contribute to E8-D. E8-P still needs representative actual updates, mounted review usability and integrated role/recovery/closure behavior. E8-E remains field evaluation; approving a copied plan revision verifies neither source coverage nor the other person's performance. No implementation or actual tests occur during planning.
+
+**Approval:** Approved by the owner on 2026-09-26 with active-revision binding: when revision affects an active accompaniment link, its ongoing trip remains bound to the revision it was established on with visibly unresolved linking; no silent newer-revision substitution, and further use of the changed link requires explicit review. Planning approval only; this approved copy is canonical.
+
+### Story 6.10: Recover the Complete Actual Mentor Context Across Restart and Authorized Device Transfer
+
+As the pilot owner using FADDER or INSTRUKTØR workflows,
+I want restart and authorized device recovery to restore my actual role, person, period and precise plan/trip basis together,
+So that I can continue the same day without reopening unsafe controls, following the wrong plan revision or losing the distinction between my work and accompanied observations.
+
+**Acceptance Criteria:**
+
+**Given** an accessible retained mentor day and the existing E5 recovery flows,
+**When** the recovery coordinator loads E6 state,
+**Then** validate and restore one coherent committed view of assignment and actual role, own activity/plan, selected person/imported plan, planned block and actual period, active tracking context/trip/manual pin, takeover/return evidence and restrictive role-recovery status,
+**And** include the exact active plan revision and necessary retained facts, latest confirmed plan revision, unresolved-link reasons/review basis and pending revision/repair status as distinct fields; a newer plan is not automatically the active trip's basis,
+**And** restore associated observations/gaps, movement/outage history, source/data coverage, notice version/interaction/audio state, local/server receipt state and current writer authority through the shared engines rather than rebuilding them from schedule or position,
+**And** restore only a compatible owner/day-scoped set. Missing, inconsistent or unsupported relationships show a restricted unresolved state without assembling a new person/role/plan combination from unrelated snapshots,
+**And** preserve the mentor-as-reviewer meaning of person-plan confirmation and keep planned links, actual accompaniment and source/GPS verification separate.
+
+**Given** the same browser reopens an already active day online or offline,
+**When** current bounded access and required app/data checks permit recovery,
+**Then** resume the committed actual E6 context through 5.3, including guiding, classroom/office, planned own driving or acute FADDER takeover, without requiring reimport or activating another prepared day,
+**And** an active context bound to revision R1 remains on R1 when R2 is confirmed and its link is unresolved; if R1's necessary data is missing, show the missing basis rather than silently substituting R2, guessing stop identities or fabricating progress,
+**And** a temporary driver takeover remains FØRER until a valid explicit return is established. Apply 6.7/6.8's restrictive recovery when writes or outcomes are uncertain, including failure before any restrictive marker committed; an older guiding copy cannot resolve that uncertainty,
+**And** retain A–B–A as separate historical actual periods, current own activity and each context's pin/evidence. Reopening the current period differs from entering a new one: recovery keeps its valid pin, whereas a later explicit new period establishes trip/stop context afresh,
+**And** measurements remain historical and any observation interruption stays a gap. Restore qualified sensing history without a new first-start or five-minute allowance; no recovery certifies unobserved passages or the 100-metre target,
+**And** preserve no-accompaniment instructor days without inventing a linked person, passenger progression or completed classroom/office work.
+
+**Given** the owner initiates planned device handover under 5.8,
+**When** the existing transfer protocol freezes/drains the source and validates the recipient,
+**Then** include all required E6 role/context/revision/link/evidence state in the synchronized recovery basis, and check that the recipient's authorized app build can interpret these fields and has the needed verified app files before retiring source authority,
+**And** after the existing atomic writer/grant transfer, verify the recipient's complete recovery set against the returned post-transfer server revision before allowing control; a previously downloaded mentor snapshot is insufficient,
+**And** preserve original grant/data deadlines and exact active-plan revision, pin and pending link repair. Do not silently choose the latest imported revision, discard role uncertainty or recreate a period during transfer,
+**And** if required data/state verification fails after transfer, keep the recipient non-controlling/restricted for explicit recovery; source writer rights do not automatically return,
+**And** distinguish a transferred historical role state from current physical role where the recovery interval leaves it uncertain. Do not infer permission to guide merely from the imported assignment or an unverified copy.
+
+**Given** the former device is unavailable, disconnected or unable to drain and the owner uses explicit emergency device takeover under 5.9,
+**When** the recipient reviews and accepts the last server-held recovery basis,
+**Then** show the server timestamp/revision and possible missing E6 changes, specifically including an unreceived Jeg kjører, person/context transition, takeover/return or plan/link revision,
+**And** use the existing destination prerequisites and atomic writer/grant transfer, followed by verified recovery; neither the FADDER driver-takeover action nor a role label is a substitute for this device-authority protocol,
+**And** when emergency takeover lacks up-to-date state from the former device, actual role is unknown even if the server copy says guiding and contains no Jeg kjører event. Absence of that event proves neither that the mentor is still accompanying nor that no driver change occurred,
+**And** show unknown actual role separately from the enforced driver restrictions, and retain those restrictions until the role is explicitly clarified through a permitted action against the valid retained basis. Do not label the physical role confirmed merely because the safer permission policy is applied,
+**And** do not invent the missing transition, actual time, current person or stop. Preserve last-known facts and gap/unknown statuses; current role clarification is manual evidence, not reconstruction of the old device's observations,
+**And** the disconnected old device cannot know immediately that authority moved. The backend rejects later new mutations under its old writer epoch, while its permitted local unsynchronized work remains for explicit review; do not claim the old device has already stopped.
+
+**Given** old-device E6 work returns or recovery reveals a revision conflict or unknown receipt outcome,
+**When** it is received and reviewed through 5.10/5.7,
+**Then** retain original client/epoch/event identities, person/plan/revision/block/context, actual-role origins, known occurrence versus registration times, receipt state and original expiry. Intake for review does not apply operational changes,
+**And** compare against the verified current basis without merging periods by person/route/time, transferring pins across periods or letting arrival order select the current actual role,
+**And** preserve legitimate prior acceptance via authorized receipt lookup. Any chosen new correction uses current authority and exact reviewed context, and does not replay an old batch or silently restore an earlier guiding role,
+**And** manual recovery cannot become GPS/source evidence, certify unobserved work or retroactively move observations to another person/revision by guessing; unresolved differences stay explicit,
+**And** keep 6.9 affected-link review separate from accepting a recovered file/plan. Restoring R2 or repairing its link cannot silently rebind an active R1 context,
+**And** old-device disposition never returns writer rights automatically, extends deadlines or restores content removed by terminal closure.
+
+**Given** recovery, an app-version transition or a delayed response races with current operations,
+**When** state would be rendered, mutated or confirmed,
+**Then** enforce existing access/logout/expiry and 6.4 commit-time role/context guards before the effect; pending revocation is handled before other private traffic, and recovery cannot unlock private data or guiding from a stale view,
+**And** validate E6 recovery fields through the existing 5.11 retained-client/backend and 5.12 local migration contracts for their actual data lifetime. Missing role/revision fields cannot default to guiding or latest-plan substitution; active-day build pinning remains unchanged,
+**And** a late receipt only updates the original operation's acceptance; old state responses, suspended tabs or callbacks cannot switch role/person/active revision or mark a current version seen without its content being shown,
+**And** preserve notice identity, legitimate seen/registered state and audio-attempt uncertainty across devices. Missing old-device sound evidence never causes playback of an old notice; recovering a context is not a new notice receipt,
+**And** reuse owner/day-scoped IndexedDB and authenticated FastAPI/PostgreSQL recovery contracts and transactional validation, adding only required E6 fields/integrity checks rather than a second synchronizer or authority model.
+
+**Given** a recovered day has ended, been aborted or reached its applicable expiry,
+**When** recovery or old-device work intake attempts to restore it,
+**Then** apply the existing terminal/retention rules before use: an ended day never resumes, expired data is deleted before display/send, and received terminal/deletion state prevents stale-copy resurrection,
+**And** within the permitted completion-review/settlement window retain only minimal allowed own facts, actual accompanied portions and temporary driver segments with their origins/gaps, separated for E7; discard the unaccompanied imported remainder from all local/server/recovery/conflict/pending copies using 5.13,
+**And** preserve active/historical revision facts only as needed within the existing deadline, never as a permanent archive or a new seven-day clock from recovery/device transfer,
+**And** no synthetic reconstruction replaces irretrievably lost data. Report missing work honestly under AD-12's accepted loss risk, without storing private backups, raw originals or a permanent GPS track,
+**And** private E6 context remains isolated from other accounts and public fictional demo access; no recovery payload, credential or personal operational data enters logs or assessment artifacts.
+
+**Given** two isolated same-owner browser clients, compatible and retained builds, controlled inputs and real PostgreSQL,
+**When** this E6 recovery integration is verified,
+**Then** test same-client offline restart and planned transfer in guiding, classroom/office, pending own-trip selection and acute FADDER takeover/return states, including A–B–A history, manual pin, qualified GPS outage and missing data,
+**And** test active R1 plus confirmed R2 with unresolved link before/after repair, missing R1 facts and delayed R2 replies: no recovery path may swap the active basis or label the link resolved without review,
+**And** test emergency transfer with an old-device unsynchronized Jeg kjører but server snapshot still guiding, failed role/guard writes, uncertain return, changed person and plan revisions: missing evidence stays explicit and permissions restrictive pending permitted resolution,
+**And** test emergency takeover with no current old-device state and no Jeg kjører event in any available record, while the server says guiding: actual role remains explicitly unknown, driver restrictions remain active, and absence of an event cannot unlock guiding. Verify that only a current explicit permitted role clarification resolves it, including after recipient restart,
+**And** test recipient missing/incompatible app files before transfer, verification failure after transfer, lost transfer/ordinary receipts, conflicting devices, suspended old tabs and returning old work without authority restoration,
+**And** test E6 fields through a real retained-client contract and one local migration interruption using the existing E5 harness, including pending logout and role uncertainty, without changing the adopted update policy,
+**And** test bounded conflict intake, unknown old notice audio, earlier own-day closure/expiry, no replay/resurrection and preserved permitted evidence partitions. Record demonstrated versus missing recovery evidence rather than claiming recovery of absent data,
+**And** these are integration acceptance criteria for implemented E6 data paths, not implementation-readiness validation or evidence that pilot/device qualification has already passed.
+
+**Traceability:** FR-17/18/20 extended to UX UJ-3/4, shared FR-1/6/9/16 and FR-22/24 evidence/retention. NFR-1–4; UX-DR8/14/16/19/22/23/26–31/36/38/39/44. EXPERIENCE Role and context recovery, revision ownership, acute takeover and accompanied-only evidence. AD-2/4/5 recovery/receipts, AD-8 notice state, AD-9 coherent actual role/context, AD-10/11 bounded authority and transfer, AD-12 expiry/accepted loss, AD-13 access failures and AD-14 compatible retained contracts/builds. All AD-1–AD-14 remain unchanged.
+
+**Dependencies:** Implemented E6 state/evidence through 6.9 and E5 same-client recovery, explicit conflicts, planned/emergency transfer, old-device intake, compatible releases and terminal settlement through 5.13. Uses existing E5 flows with E6 payload/validation extensions. No E7 end/review/PDF UI is needed for recovery/terminal command fixtures.
+
+**Size boundary:** Integrate the existing E6 state set with established E5 recovery/transfer/contracts and verify its identity/role/revision invariants end to end. No new transfer protocol, synchronization engine, event-sourcing framework, backup, cross-account sharing, automatic role inference or summary renderer. Earlier stories retain their feature-level recovery ownership; this slice closes the cross-feature/device integration seam.
+
+**Pilot qualification:** Controlled recovery/transfer/browser/FastAPI/PostgreSQL evidence contributes to E8-D. E8-P requires actual Lenovo/Brave behavior, qualified replacement setup, access/file readiness and integrated role/revision/closure tests before real shifts. E8-E remains field evaluation. Data loss remains possible under AD-12; planning approval does not establish device support or solve 5.4's timing risk.
+
+**Approval:** Approved by the owner on 2026-09-26 with unknown actual role after emergency takeover lacking up-to-date former-device state, even if the server says guiding. Driver restrictions remain until explicit permitted role clarification; absence of a Jeg kjører event does not prove continued accompaniment. Planning approval only; this approved copy is canonical.
+
+## Epic 7: Close the Day, Inspect Outcomes and Export a Summary
+
+The owner can explicitly end/abort one combined day, settle uncertain outcomes in the initial review, export a local PDF offline and later reopen only for reading/export until fixed expiry. Own and accompanied evidence remain distinct, and all-copy terminal cleanup cannot resurrect work. FR-21–24, summary/export portions of FR-17/20 and UX-DR32–36 apply; E3/E4/E6 supply evidence and E5/AD-12 supply settlement and expiry contracts.
+
+### Story 7.1: Explicitly End or Abort the Combined Working Day Without Inventing Completed Work
+
+As the pilot owner finishing or terminating my working day,
+I want to confirm normal ending or early abortion and retain the permitted result even offline,
+So that the day cannot resume accidentally and unfinished or uncertain work is not presented as completed.
+
+**Acceptance Criteria:**
+
+**Given** an accessible active own combined day,
+**When** final own-depot arrival is supported or the owner needs to end without detectable arrival,
+**Then** offer the red Avslutt skift action in the final-depot context and the existing Menu fallback for normal ending under the same confirmation and current interaction rules,
+**And** allow normal ending through Menu when GPS/depot evidence is missing or the day ends in a valid non-driving instructor activity; absence of depot detection does not force aborted status or fabricate depot arrival,
+**And** keep early termination an explicit distinct aborted choice through the same confirmation/result flow, with the chosen normal/aborted outcome unambiguous before confirmation. Do not request medical details or introduce a mandatory reason collection,
+**And** identify the concrete own combined day and show relevant remaining work/parts so an intermediate depot visit, split-day gap, ended accompaniment block or other person's shift end cannot appear to end the whole day automatically,
+**And** scheduled final time, current location, closed browser and final passenger-stop registration are not substitutes for explicit own-day ending. An ended/expired day cannot be a fresh end target.
+
+**Given** the owner invokes normal end or abort,
+**When** the Er du sikker? dialog is shown and confirmed or cancelled,
+**Then** identify the day, normal/aborted choice and consequence that the whole day will end without resumption; explain that activity uncertainty is retained for the subsequent review,
+**And** cancel leaves the day, current context, role, pin, evidence and pending work unchanged; opening the dialog creates no terminal event,
+**And** recheck access, current writer/revision, actual-role/movement permission and the relevant review basis at commit. A stale dialog, independently changed role or terminal state cannot authorize an invalid close or a different outcome,
+**And** use E3's actual qualified movement rules and E6's role guards: unknown recovered role uses driver restrictions until a permitted explicit clarification, while a verified actual guiding role retains only its adopted permissions. End confirmation itself cannot resolve role uncertainty or bypass logout,
+**And** if motion or Jeg kjører removes permission, close/invalidate prohibited confirmation with accessible focus handling. A delayed click/response cannot complete the now-locked action; no mandatory driver response is required.
+
+**Given** a valid explicit end/abort confirmation,
+**When** the local closing transaction commits,
+**Then** integrate the actual E3/E4/E6 day with 5.13's terminal protocol: atomically record the chosen terminal state and confirmed ending event, preserve the minimal allowed result/checkpoint, apply prohibited-content trimming, retire affected original payload identities and persist the closure/deletion guard before reporting local success,
+**And** use the original committed end/abort time and available timing provenance consistently on retry; do not substitute planned end, GPS arrival, server receipt time or a later reopen as a new ending time,
+**And** end operational continuation for the whole combined day and its active context, without rewriting a pinned unfinished trip as completed/aborted merely because the day ended. Preserve existing trip/activity outcomes and mark unresolved remaining work honestly for later review,
+**And** retain own tasks/own driving, actual accompanied portions and temporary takeover evidence separately, with manual/observed/unknown provenance and gaps. Do not keep the other person's unaccompanied remainder in old revisions, outboxes or recovery copies,
+**And** preserve only necessary context/revision facts for those retained outcomes; an active R1 with a newer R2/unresolved link cannot be silently merged or remapped as part of ending,
+**And** a failed local transaction cannot claim successful ending or partially delete data while presenting an active day. An uncertain commit outcome requires guarded state recovery before either reattempting the same intent or allowing active operation; do not assume failure and restart a possibly ended day.
+
+**Given** local closure succeeded online or offline,
+**When** the post-end result view opens or the app restarts,
+**Then** show normal-ended versus aborted status, own-day identity, committed ending time/provenance, applicable expiry and local closure versus server settlement status, with an entry into the initial post-end review area and a main-menu route,
+**And** retain the permitted outcome data for subsequent E7 review/summary stories. This slice may expose the basic retained-result view without implementing full outcome editing, summary composition, PDF or affirmation selection,
+**And** neither missing server acknowledgement nor unavailable summary/export functionality can resume the day, delete permitted pending work or make an ended day active through back/history navigation,
+**And** do not report every trip/activity as completed because normal end was selected; missing work and uncertainty remain visible as such in the retained result boundary, with no false GPS/depot evidence,
+**And** normal completion without position is recorded as the owner's explicit normal end, not a detected arrival or forced abort. Closing one combined day creates no authority or automatic start for a next prepared day.
+
+**Given** original pending batches, receipts, source callbacks, other tabs or server settlement race with closure,
+**When** the existing E5 settlement path processes the day,
+**Then** use 5.13 unchanged: payload-free old-outcome lookup, new immutable closure identities, expected-revision validation and atomic PostgreSQL receipt/fence/terminal cleanup. An old-batch unknown outcome is not the new closure receipt,
+**And** mark server-confirmed closure only after its matching receipt is durably recorded locally. Lost/failed replies leave a terminal local day with settlement pending; retry does not create a new end or extend its deadline,
+**And** all stale-tab, old-copy and late-response writes/renders/enqueues respect terminal/deletion state, preventing resumption and prohibited-content resurrection. Local closure cannot claim that disconnected devices or all server copies were already erased,
+**And** authenticated FastAPI/PostgreSQL validates owner/day, writer authority, end kind and actual permitted projection using E3/E4/E6 data, not an arbitrary client claim that fields may be retained,
+**And** pending logout/revocation and conflict review remain mandatory. A locally active day whose delayed activation lacks 5.4's verifiable timing basis may retain its valid local ending and unresolved server status, but closure cannot establish that missing proof or bypass server eligibility; the separate solution decision remains open.
+
+**Given** the day is ended/aborted or has never been explicitly ended,
+**When** retention and access deadlines are evaluated,
+**Then** use the one combined-day AD-12 rule with applicable earlier limits: confirmed actual end/abort plus seven days for ended data, planned final end plus seven days for never-ended data, and the existing non-sliding draft rules,
+**And** preserve AD-10's separate post-end authority cap at the earliest of the existing day-grant deadline, actual end/abort plus seven days and data expiry. Do not present data retention as guaranteed permission to read or edit it,
+**And** no retry, server acceptance, review, export, reopen or device recovery resets those clocks; a never-ended expiry deletes data without declaring the day or activities completed,
+**And** use existing expiry guards across client/server/recovery/conflict/receipt/grant copies even when settlement is pending. User-held exported files remain outside app deletion, but no private archive or backup is introduced,
+**And** detailed initial-review permissions and later retained read/export UI remain subsequent E7 work under these boundaries, not a general post-end editing or resume capability.
+
+**Given** the day is ended offline with a locally reported ending time whose trustworthy timing basis is not established,
+**When** the client/server presents the end event or computes access and retention deadlines,
+**Then** distinguish the user's locally reported time, its registration and verifiable timing evidence/status; a committed local end event or matching transport receipt alone does not make the reported clock value independently verified,
+**And** uncertainty cannot extend storage or authority: enforce the earliest currently applicable deadline, preserving any earlier binding limit until the outcome is resolved through an evidenced authorized path. A future-skewed client clock, later receipt or retry cannot grant extra lifetime,
+**And** keep local terminal status separate from unresolved timing/server settlement; do not resume the day while waiting, infer an exact physical end from receipt time or silently turn a local timestamp into proof,
+**And** if a verifiable basis cannot be established, retain the restriction and expose the limitation for a separate solution decision; do not invent a timing-proof mechanism or change AD-10/12 or the open 5.4 decision.
+
+**Given** anonymized/fictional own-only, split and mentor days, browser clients and real PostgreSQL,
+**When** this terminal-action integration is verified,
+**Then** test final-depot prompt, normal Menu fallback with GPS loss, no-depot instructor day, explicit early abort, cancel, intermediate depot/gap/block ending and scheduled end without automatic closure,
+**And** test locked confirmation during reliable driver motion, role changing after the dialog opens, unknown role after emergency recovery and stale queued confirmation; accepted closure never bypasses the current policy,
+**And** test active unfinished trip/manual pin, uncertain classroom/office work, A–B–A observations, temporary takeover and active R1/newer R2: ending preserves origins and incomplete results while trimming only prohibited imported remainder,
+**And** test local failure/uncertain outcome before/after the atomic close, double confirmation, restart/history navigation, offline closure, lost/mismatched settlement receipts, concurrent/suspended tabs and delayed old batches/source replies,
+**And** inspect actual IndexedDB/PostgreSQL retained copies with existing 5.13 race tests adapted to these real E6 projections, including forged trim content, old writer, pending logout, conflict and 5.4 unresolved server eligibility,
+**And** test original end-time/deadline stability through retries and earlier limits, expiry while settlement is pending and never-ended deletion without false completion. Verify readable red action, explicit end kind, keyboard/dialog focus, enlarged text and clear local/server/error labels,
+**And** test an offline end with forward/backward clock changes, unverifiable reported time, delayed receipt, restart and an earlier grant/data deadline; retain separate local-reported versus verified-time status and enforce the earliest applicable limit until evidenced resolution, including deletion/access denial while settlement remains unresolved,
+**And** distinguish this story's terminal contract and basic post-end result from later summary/manual-review/PDF acceptance and real device qualification.
+
+**Traceability:** Primary FR-21, integrated terminal portions of FR-24, offline ending/recovery FR-17/20 and preserved evidence for FR-22; shared FR-1/11/16. NFR-1–4; UX-DR7/14/17/23/31/32/33/36/38/39/41/44. EXPERIENCE end/abort confirmation, split-day and initial-versus-retained summary permissions, mentor evidence and retention; DESIGN red end action and explicit confirmation. AD-2/4/5 atomic local/backend closure and receipts, AD-9 terminal operational state, AD-10/11 authority and conflicts, AD-12 trimming/deadlines, AD-13/14 access/build recovery. All AD-1–AD-14 remain unchanged.
+
+**Dependencies:** E3 permitted actions/non-passenger context, E4 recorded display/source evidence, E5 terminal settlement through 5.13 and actual E6 state/projections through 6.10. Existing protocol commands now receive real end UI and E6 data integration. Subsequent summary review/PDF screens are not prerequisites for explicit terminal action, protected retention and basic ended-state display.
+
+**Size boundary:** One end-to-end normal-end/abort command and confirmation UI for the own combined day, integrating the existing settlement protocol and actual evidence projection. No second settlement engine, full summary composition, manual outcome editing, retained-summary browser, PDF rendering or closing-affirmation bank. Those are required later E7 slices; final lifecycle evidence will include them.
+
+**Pilot qualification:** Controlled browser/FastAPI/PostgreSQL closure and fault evidence contributes to E8-D. E8-P requires mounted end-action usability, actual role/access/recovery conditions and whole E7 review/export/cleanup integration before real shifts. E8-E remains field evaluation. Role uncertainty and 5.4 timing proof remain test/decision points, not solved by planning approval. No implementation or actual tests occur during this step.
+
+**Approval:** Approved by the owner on 2026-09-26 with offline-ending time provenance: distinguish locally reported end time from verifiable timing evidence; uncertain time cannot extend storage/access and the earliest applicable deadline remains enforced until resolution. Planning approval only; this approved copy is canonical.
+
+### Story 7.2: Manually Confirm Uncertain Activities During the Initial Post-End Review
+
+As the pilot owner reviewing an ended or aborted day,
+I want to inspect uncertain activity outcomes and explicitly confirm only what I can attest to during the initial review,
+So that the retained result reflects my manual confirmation without pretending that it was observed automatically or reopening the day.
+
+**Acceptance Criteria:**
+
+**Given** the combined own day has been locally ended/aborted through 7.1 and bounded access permits the initial post-end review,
+**When** the initial review opens,
+**Then** identify the ended day and show eligible uncertain activities with known planned facts, relevant retained observations/corrections and the reason completion remains uncertain, without mixing planned, observed, manual or unknown status,
+**And** distinguish own activities/own driving, actually accompanied portions and temporary takeover evidence using retained identities and revisions; the reviewed person-plan is still the mentor's copy, not the other person's attestation,
+**And** show end status, local/server status and applicable retention/access limits, including unresolved end-time provenance from 7.1; the review remains possible offline only within existing authority and retained-data rules,
+**And** never require confirmation of all uncertain entries to leave the review. Unselected or unanswered entries stay uncertain, including an interrupted or skipped activity that cannot legitimately be counted complete,
+**And** this is an outcome-review list using the retained result, not yet the complete daily summary, notice-history composition, PDF or closing-affirmation renderer.
+
+**Given** an eligible uncertain activity is shown and the owner can attest to its completion,
+**When** the owner explicitly confirms that particular reviewed outcome,
+**Then** record a manual confirmation against its stable own-day/activity/context identity and exact reviewed evidence basis, preserving the prior uncertain state and its supporting facts as provenance,
+**And** present the resulting status as manually confirmed, not GPS-confirmed, source-verified or confirmed by the accompanied person; no location/stop/source measurement is manufactured,
+**And** preserve confirmation registration time and any known actual occurrence time separately; an unknown actual start/end remains unknown and is not copied from planned time or the time of clicking confirmation,
+**And** confirmation concerns only the eligible retained outcome. It cannot rewrite skipped/aborted work, create a passenger final-stop arrival, certify the whole of a partially observed trip, change physical bus/person attribution by guessing or add the other person's deleted/unaccompanied remainder,
+**And** passenger-trip completion still follows the adopted registered-final-stop/abort rules. This slice does not introduce an arbitrary mark-everything-complete control or post-end operational stop correction,
+**And** missing optional timing/location does not force invented values; leaving the entry uncertain remains a valid explicit choice with no penalty or score.
+
+**Given** a review confirmation is attempted or cancelled,
+**When** the guarded local mutation runs,
+**Then** validate the exact retained outcome/evidence revision, initial-review-open state, current writer/day authority, current interaction permission and expiry before atomically saving the manual event/result and its outbox record,
+**And** if a relevant correction, recovered old-device item, context basis or review phase changes while the entry is open, invalidate the stale confirmation and require review again; do not silently apply it to a newer or different outcome,
+**And** cancellation leaves that entry unchanged; a failed local save never shows it confirmed. Double-click/retry of the same confirmation has one effect and a matching receipt alone establishes server confirmation,
+**And** unknown actual role retains driver restrictions under 6.10, and a delayed dialog cannot bypass a newly applicable restriction. A terminal day or a review screen does not itself prove standstill or resolve role uncertainty,
+**And** do not alter terminal normal/aborted status, final end time, original plan, active-trip history or any deadline. No confirmation restarts operations, creates a new active day or changes an unknown reported end time into verified timing evidence.
+
+**Given** manual confirmation is saved while closure settlement is pending or its receipt is lost,
+**When** local recovery or synchronization processes review events,
+**Then** preserve them as separate bounded post-end correction events using the existing 5.13/AD-5 protocol and immutable identities; never mutate an in-flight closure checkpoint/batch payload or revive retired original events,
+**And** submit/apply them only in a valid ordered terminal-review sequence under current authorization/revision, retaining local/pending/unresolved status if the server cannot yet accept the closing basis,
+**And** FastAPI/PostgreSQL validates that each field/outcome change is allowed during initial review and preserves the distinction between old receipt outcome, closure receipt and review-confirmation receipt,
+**And** server rejection/conflict or unknown acceptance preserves only permitted local work for explicit resolution, without silently rewriting a confirmed fact, backdating an event to gain authority or using a client timestamp alone to bypass an expired scope,
+**And** 5.4 activation timing and 7.1 unverifiable ending time remain separate open evidence/decision issues. Review cannot establish their missing proof or extend the earliest applicable deadline.
+
+**Given** the initial review remains open and the owner requests to finish it,
+**When** the app presents the finish-review confirmation,
+**Then** show which activities still have uncertain outcomes and explain that confirming closes editing while those outcomes remain uncertain; do not require the owner to attest to them,
+**And** only an explicit confirmation against the current review revision closes the phase. Cancel, Back, accidental navigation, tab closure or a crash alone never consumes the opportunity to continue review,
+**And** if outcomes or the review basis change while the confirmation is open, refresh the remaining-uncertainty list and require confirmation again; an unseen newer revision cannot be closed using an older dialog,
+**And** on permitted confirmation, atomically persist closed-for-new-edits state and invalidate outstanding edit capabilities. Later retained-summary access is read/export-only; older open snapshots, tabs, back/history navigation and delayed responses cannot reopen editing,
+**And** an edit not validly committed before explicit closure cannot save afterward; committed review events may still synchronize under their original ordered basis without granting new edit permission,
+**And** before explicit completion, interrupted review can resume from the durable current open phase within existing access and retention limits, including after Back, menu navigation, tab closure or restart. No operational day is resumed and no deadline is extended,
+**And** if an explicit completion save fails definitively, preserve the open phase and explain the failure; if its commit outcome is unknown, restrict editing while the phase is resolved against authoritative durable state. Recover open review when no closure committed, and read-only access when closure did commit. Neither navigation nor an uncertain result alone establishes permanent closure or permission to edit,
+**And** preserve permitted pending confirmations throughout recovery. The complete closing presentation and retained-summary browser remain later E7 slices.
+
+**Given** retained review state/confirmations are stored, recovered or expire,
+**When** client and backend process them,
+**Then** extend existing owner/day-scoped IndexedDB and authenticated FastAPI/PostgreSQL result/event contracts only with necessary review-phase and manual-confirmation data; coordinate tabs and enforce monotonic closed-review state, writer/revision validation and allowed post-end changes,
+**And** preserve manual origin, original evidence/context revision, timing uncertainty and distinct local/server status across offline restart, conflict handling and compatible builds, without carrying one activity's confirmation to another,
+**And** apply current access/logout and AD-10/12/7.1 deadline rules to result, pending corrections, review metadata, conflicts and receipts. Locally reported uncertain time cannot renew authority or retention; the earliest applicable limit is enforced while timing remains unresolved,
+**And** expiry still deletes permitted retained work even if a confirmation never obtained a receipt; review-open status cannot pause cleanup. Existing terminal/deletion guards prevent old tabs, intake or replies restoring prohibited content,
+**And** no private source file, deleted linked remainder, extra raw movement archive, driver rating or cross-account editing capability is introduced. Demo/public access remains isolated.
+
+**Given** anonymized/fictional ended and aborted own/mentor days, browser clients and real PostgreSQL,
+**When** this slice is verified,
+**Then** test uncertain break/deadhead/bus-change/office/classroom outcomes with missing evidence, individual manual confirmation and leaving entries uncertain without inventing occurrence times,
+**And** test normal end versus aborted day, partial accompanied periods, takeover segments, active-old/latest-new revision provenance and rejected attempts to confirm unaccompanied remainder, rewrite skipped/aborted work or fabricate final-stop arrival,
+**And** test cancellation, stale evidence during review, current-role restriction, failed local save, duplicate confirmation, lost/mismatched review receipt, closure still pending, wrong owner/writer and explicit conflict handling,
+**And** test the finish dialog listing remaining uncertain activities, cancellation and an outcome/revision change requiring refreshed confirmation. Explicitly finish with pending saved events, then try Back, another tab, restart, stale edits and late replies: new edits stay barred while committed events retain their synchronization status,
+**And** separately test Back, accidental navigation, main-menu navigation, tab closure and crash before explicit completion: review remains resumable within authority/expiry. Test definitive completion-save failure and lost commit outcome resolved both as open and as closed, including concurrent tabs; never infer closure just from leaving a screen,
+**And** test offline review, pending logout, original/earlier expiry and forward-skewed unverifiable ending time without extended permission,
+**And** inspect IndexedDB/PostgreSQL to verify immutable closure payloads, allowed post-end event ordering, retained manual provenance and all-copy cleanup; test readable uncertainty/manual labels, keyboard/dialog focus and no forced confirmation. No complete PDF/summary renderer is needed for these cases.
+
+**Traceability:** Manual uncertain-outcome portion of FR-22, bounded post-end FR-1/17/20/24 and preserved FR-21 terminal status. NFR-1–4; UX-DR14/17/23/31/32/33/36/38/39/41/44. Owner clarification of 2026-09-26 supersedes navigation-as-closure wording in EXPERIENCE: only explicit finish confirmation closes editing. EXPERIENCE Initial and retained summary permissions, activity completion uncertainty, mentor accompanied-only evidence and retention; DESIGN distinct outcomes/manual origin. AD-2/4/5 atomic local/server events, AD-9 no operational resumption, AD-10 bounded review authority, AD-11 explicit conflicts, AD-12 retained projection/expiry and AD-14 compatible review state. All AD-1–AD-14 remain unchanged.
+
+**Dependencies:** 7.1 real terminal result and time-provenance guards, E3/E6 outcome evidence through 6.10 and E5 post-end settlement/conflict contracts through 5.13. The review list, per-outcome confirmation and explicitly confirmed review-completion boundary work without later complete summary/PDF/closing screens; a minimal main-menu/closing entry is sufficient.
+
+**Size boundary:** Initial-review outcome list, explicit individual uncertain-activity confirmation, bounded persistence and durable explicit-completion-to-read-only boundary. No generic post-end editor, passenger stop reconstruction, new proof of physical events, full daily-summary composition, PDF, affirmation bank or permanent archive. Detailed retained-summary navigation remains later, but it cannot reopen editing established closed here.
+
+**Pilot qualification:** Controlled browser/FastAPI/PostgreSQL review/explicit-completion/receipt cases contribute to E8-D. E8-P requires mounted review usability, actual role/access behavior and full end/review/export/expiry integration. E8-E remains field evaluation. Manual attestation is not independent evidence of physical completion; role uncertainty and 5.4/7.1 timing issues remain test/decision points. No implementation or actual tests occur during planning.
+
+**Approval:** Approved by the owner on 2026-09-26 with explicit review completion required after showing remaining uncertain activities. Back, accidental navigation, tab closure or crash alone cannot consume review continuation; phase recovery preserves access/expiry limits. Planning approval only; this approved copy is canonical.
+
+### Story 7.3: Inspect One Daily Summary with Distinct Outcomes and Evidence
+
+As the pilot owner reviewing an ended or aborted day,
+I want one readable summary of my activities, actually accompanied portions, displayed notices, corrections and source problems,
+So that I can understand what was recorded without confusing planned work, manual statements and observed facts.
+
+**Acceptance Criteria:**
+
+**Given** an ended/aborted combined own day with an authorized retained result from 7.1,
+**When** the owner opens its summary,
+**Then** compose one summary from a coherent retained revision, identifying the own day and its normal/aborted end status, including all own work parts and their reporting/depot context where retained,
+**And** distinguish completed, skipped, aborted, uncertain and manually confirmed outcomes using existing E3/E6/7.2 evidence rules. Planned time, position, elapsed time or closing the day cannot manufacture physical completion,
+**And** passenger completion still requires the adopted registered-final-stop basis and respects explicit abort; registered manual progression remains manual evidence, not GPS evidence,
+**And** preserve the service date and order through midnight while displaying calendar dates where needed: Friday 25:30 belongs to Friday's day and is Saturday 01:30 in calendar presentation,
+**And** show unknown physical bus numbers, times and missing facts as unknown; distinguish physical bus, duty and trip identity. Known occurrence times and registration times remain separate, including late bus-change reports and unverifiable offline end time.
+
+**Given** the day contains own work, accompanying periods, own driving or an acute FADDER takeover,
+**When** these outcomes are presented together,
+**Then** visibly separate own planned activities and driving, actually accompanied portions and manually reported takeover segments; a reviewed copy of another person's plan is not that person's confirmation,
+**And** preserve separate A–B–A periods, their actual observed scope, observation gaps and the exact plan revisions underlying them. A newer linked plan cannot replace historical evidence or resolve an unresolved link,
+**And** a partial accompanied trip does not become a whole completed trip or own driving. A later recovered stop cannot prove that the 100-metre goal was met during an observation gap,
+**And** exclude discarded/unaccompanied remainder under AD-12. Missing evidence stays visible as missing rather than being filled from the other person's full plan or a newly fetched source.
+
+**Given** retained notice-display records, manual corrections and source-problem records exist,
+**When** the summary composes its evidence sections,
+**Then** include relevant notices actually displayed, linked to their exact source version, day/context and recorded presentation kind; distinguish preview from actual-trip context and heading presentation from displayed detail where the evidence supports it,
+**And** fetching, queuing, an attempted rejected view or an audio attempt alone cannot establish displayed content. Seen, Registrert and manually hidden statuses remain separate version-specific driver states and do not prove understanding or change source facts,
+**And** preserve retained source identity, validity/update information and known gaps. Do not present a fetch time as a source publication time, or a failed/partial source response as proof that no notices existed,
+**And** present manual corrections and source problems with their retained context and provenance, without turning corrections into source/GPS evidence or assigning earlier observations to a guessed bus/person,
+**And** summary reading does not change historical operational seen/registered states, replay sound, restart notice timers or fetch a newer notice version to silently replace what was displayed then.
+
+**Given** the retained result includes locally saved confirmations or unresolved synchronization,
+**When** the summary loads, refreshes or recovers offline,
+**Then** use the existing owner/day-scoped IndexedDB and authenticated FastAPI/PostgreSQL result contracts to read one consistent permitted basis, extending only fields/projections needed for this summary,
+**And** display locally saved, server-confirmed and unresolved receipt/conflict status accurately. Only the existing matching-receipt rules establish server confirmation; network availability alone does not,
+**And** a failed/partial load cannot erase available results or mix incompatible revisions into an apparently complete summary. Identify unavailable sections or retain the last coherent authorized view with its revision/status visibly stated,
+**And** integrate a newly accepted review event coherently while preserving its manual provenance; a delayed older response cannot overwrite it. Do not create a new evidence collector, separate history database or independent synchronization protocol,
+**And** render the summary offline from permitted retained data without needing the original import files or fresh source access. Absent local data remains unavailable, not reconstructed by guessing.
+
+**Given** the initial review is still open, explicitly finished, or its phase is unresolved,
+**When** the owner uses the summary and available review entry,
+**Then** permit eligible editing only through 7.2 while its durable current phase and authority allow it. Summary navigation, Back, closing the tab or restart alone never consumes review continuation,
+**And** explicit review completion first shows remaining uncertain activities and follows 7.2's guarded confirmation. Thereafter the summary is read-only; unresolved phase restricts editing until resolved, without claiming that navigation closed it,
+**And** summary rendering never resumes the ended day, starts another day, changes end time, extends a deadline or resolves unknown physical role. Existing interaction restrictions still apply,
+**And** use the adopted readable tablet-landscape/PC summary layout with textual outcome/provenance labels rather than colour alone, accessible keyboard/focus behavior and clearly associated local/server and missing-data messages. PDF, closing affirmation and the retained-day selection browser are separate later slices.
+
+**Given** summary data is read, cached, refreshed or expires,
+**When** client/backend enforce access and lifecycle,
+**Then** authorize owner/day scope, enforce logout and pending-revocation locks, and apply the existing AD-10/12 limits to result and any derived summary copy; show applicable expiry without starting a fresh clock,
+**And** unverifiable local end time cannot extend retention/access; the earliest applicable deadline continues to apply under 7.1. The open 5.4 timing decision and role-uncertainty rules remain unresolved by presentation,
+**And** expiry/terminal guards prevent an old tab, cached response or older local snapshot restoring deleted content. No raw source file, extra movement archive, private historical backup, driver score or cross-account summary is introduced,
+**And** private operational summaries remain separate from fictional/anonymized demonstration data.
+
+**Given** fictional/anonymized mixed days, browser clients and real PostgreSQL,
+**When** this slice is verified against a known retained-result fixture,
+**Then** compare every summary section with the fixture for normal and aborted days, split work parts crossing midnight, unknown bus/time, uncertain and manually confirmed non-passenger activities, skipped/aborted passenger trips and known final-stop outcomes,
+**And** test A–B–A, partial accompaniment, own driving/takeover segments, observation gaps and old-active/new-linked revision history; prove that neither whole-trip completion nor unaccompanied remainder is invented,
+**And** test two displayed versions of one notice, heading-only versus detail, preview versus actual context, fetched-but-never-displayed notices, unknown metadata and partial/failed sources. Reopening the summary must neither play sound nor alter historical driver statuses,
+**And** test pending manual confirmation, lost receipt, partial load, delayed old response, offline restart, explicit review completion versus interruption, wrong owner, pending logout and expiry across simultaneous tabs,
+**And** inspect local/server data for coherent revision/provenance and cleanup, and verify readable textual states and keyboard navigation. Record controlled evidence for E8-D without claiming actual device/source qualification.
+
+**Traceability:** Summary composition portion of FR-22; offline/recovery FR-17/20, bounded FR-1/24 and retained FR-21 terminal outcome. NFR-1–4; UX-DR23/31/32/33/36/38/39/44. EXPERIENCE summary permissions, outcome uncertainty and accompanied-only evidence; DESIGN summary layout and distinct states. Owner clarification in 7.2 governs explicit review completion. AD-2/4/5 local/server evidence, AD-7/8 source/display provenance, AD-9 outcome/context invariants, AD-10/11 bounded access and explicit conflicts, AD-12 trimmed retention and AD-14 compatible data. AD-1–AD-14 remain unchanged.
+
+**Dependencies:** 7.1 retained terminal result, 7.2 review-phase/manual confirmation, existing E3/E4 evidence through 4.8, E5 settlement contracts and E6 scoped evidence through 6.10. Works using already available records and a direct ended-day entry; no future PDF, closing screen or retained-day browser is needed.
+
+**Size boundary:** One daily-summary read model and screen over existing evidence, with coherent local/server rendering and access/expiry integration. No new operational engine, source adapter, generic editor, PDF generator, affirmation bank, historical browser or permanent archive. Implement only the database projection/query changes this view needs.
+
+**Pilot qualification:** Controlled coherent-summary, provenance, offline, access and lifecycle cases contribute to E8-D. E8-P still requires actual Lenovo/Brave readability and integrated end/review/summary/export/expiry checks; source and observation coverage cannot be inferred from a correct renderer. E8-E remains real-workday evaluation. No implementation or actual tests occur during planning.
+
+**Approval:** Approved by the owner on 2026-09-26 as scoped. The owner affirmed distinct planned facts, observations, manual confirmations and uncertainty; only actually recorded notice presentation is represented as displayed, and summary reading does not close initial review. Planning approval only; this approved copy is canonical.
+
+### Story 7.4: Export the Daily Summary as a Private Local PDF Offline
+
+As the pilot owner reviewing an ended or aborted day,
+I want to explicitly export its summary as a readable local PDF, including while offline,
+So that I can keep a user-controlled copy with the same evidence and uncertainty as the summary.
+
+**Acceptance Criteria:**
+
+**Given** a permitted retained daily summary from 7.3 and the required verified application assets are available,
+**When** the owner explicitly requests PDF export,
+**Then** generate the PDF locally from one coherent summary revision without requiring a live server, source lookup, external fonts or a remote conversion service,
+**And** use the existing authorized local result, or existing authenticated FastAPI/PostgreSQL summary retrieval when needed and available, without adding a server PDF store or export archive. A missing local result remains unavailable offline rather than being invented,
+**And** export remains optional for the user; day completion, initial-review completion and return navigation cannot trigger automatic export or require it,
+**And** include the PDF generation resources in existing asset readiness and compatible-update checks. Missing/incompatible resources produce a recoverable error, not a claim that PDF export works offline.
+
+**Given** the selected summary revision contains own work, accompanied portions, takeovers, displayed notices, corrections and source problems,
+**When** the PDF content is composed,
+**Then** preserve the same permitted content and distinctions as 7.3: planned versus observed facts, completed/skipped/aborted/uncertain/manual outcomes, exact actually displayed notice versions, source attribution and missing evidence,
+**And** keep own activities and driving separate from actually accompanied portions and manual takeover events. Exclude the other person's unaccompanied remainder and deleted source originals; do not reconstruct either from newer source data,
+**And** identify the combined own day, service date, relevant calendar dates, summary revision and export-generation time, distinguishing that time from actual event times and verifiable timing evidence. Unknown occurrence times remain unknown,
+**And** show the snapshot's local/server receipt status, unresolved source/data gaps and applicable own-day expiry. A locally saved result may be exported with its pending status; export does not certify server acceptance or missing physical evidence,
+**And** if required summary sections cannot be read consistently, explain the failure and preserve retry. Known gaps already represented as uncertainty in a coherent summary remain exportable and visibly incomplete in the same way as that summary; a rendering/load failure cannot silently omit a section.
+
+**Given** a short or long summary and the adopted document design,
+**When** pages are laid out,
+**Then** produce a portrait A4 document with readable headings, outcome table, notice/evidence detail and numbered page footers, following DESIGN's PDF hierarchy and type references rather than capturing the tablet screen,
+**And** paginate all permitted content across as many pages as needed; the two-page mockup is not a limit. Keep headings, continued rows/sections and provenance understandable across page breaks,
+**And** retain Norwegian characters, long stop/source names, multiline notices and readable textual outcome labels. No clipped or silently truncated evidence, unreadably shrunk type or colour-only uncertainty indication is acceptable,
+**And** keep text selectable and in a sensible document reading order; inspect the rendered pages as well as extracted text when verifying export.
+
+**Given** export starts while review is open or saved summary data can change,
+**When** generation and browser handoff occur,
+**Then** bind the export to the exact coherent revision selected at the request, without mixing subsequent confirmations, receipts or corrections into its pages,
+**And** if a newer result becomes available, keep the export's revision/status explicit and allow a new user-initiated export; do not silently label the older file current or modify a file already handed to the user,
+**And** generation, download initiation, cancelling a file dialog and reading the PDF cannot complete the initial review, close editing, resume operations or alter original end/retention times. 7.2's explicit review-completion boundary remains controlling,
+**And** repeated explicit exports may create separate user-held files but do not create operational events, duplicate manual confirmations or change notice seen/registered state.
+
+**Given** the owner starts, cancels or retries export,
+**When** the app generates the file and hands it to the browser's supported local-file mechanism,
+**Then** provide accessible progress, error and retry feedback while preserving the ended day, its summary and review phase,
+**And** distinguish PDF generation from browser handoff and confirmed saving. Claim a saved file only when the chosen mechanism supplies reliable confirmation; otherwise report the observed handoff and let the user locate/check the downloaded file,
+**And** handle cancellation, generation failure, denied/unavailable file capability, storage failure and an interrupted tab without claiming success or automatically replaying a download on restart,
+**And** retry uses an explicitly selected currently permitted summary revision and current access checks; failure does not resume the day, discard valid work, reset expiry or require a network-only workaround for the offline requirement.
+
+**Given** a private export request or an in-flight export,
+**When** data is read and immediately before a new browser handoff,
+**Then** enforce current owner/day access, logout/pending-revocation lock, applicable interaction restrictions and AD-10/12 expiry; an ended day does not prove standstill or resolve unknown role,
+**And** cancel undelivered private output and release app-managed temporary data when a known lock/deletion/expiry invalidates access. Old tabs, delayed completion callbacks and stale snapshots cannot hand off a newly prohibited export or restore deleted content,
+**And** keep generated private PDF buffers temporary and outside permanent caches, backend storage, logs, repository and CI artifacts. No automatic upload, publication or sharing is performed,
+**And** explain before handoff that a user-held PDF can contain actual operational identifiers and lies outside automatic app cleanup. Once handed off, the app does not claim it can revoke or delete that external copy; showing app-data expiry must not imply expiry of the exported file,
+**And** export never extends authority or the data clock. Unverifiable offline end time follows 7.1's earliest-applicable-limit rule; this story does not resolve the 5.4 timing-evidence decision.
+
+**Given** an explicitly fictional/demo summary supplied through the isolated demo contract,
+**When** the same PDF renderer is used,
+**Then** visibly mark every page as demo/simulation, including overflow pages, and preserve simulated evidence labels,
+**And** permit only fictional/anonymized demo inputs and never load private credentials, operational records or a private fallback. Private actual identifiers must not enter assessment artifacts,
+**And** verify the renderer boundary with fixtures now; integration with the full public demo remains E8 work and is not a prerequisite for private export.
+
+**Given** anonymized/fictional fixtures, the prepared client and existing backend/summary contracts,
+**When** the story is verified,
+**Then** export offline after restart with the server and external resources unavailable; check a short summary and a document longer than two pages against the exact selected summary revision,
+**And** render and inspect every page for long Norwegian names, multiline notice versions, cross-midnight dates, uncertain/manual outcomes, source gaps, pending receipts and own/accompanied/takeover separation; compare extracted content to the fixture to detect omitted or duplicated evidence,
+**And** test an open review with a concurrent correction/receipt, explicit review completion, cancelled or failed handoff, blocked file capability, retry and tab interruption; verify no false saved status, lost review opportunity or replayed download,
+**And** test logout, pending revocation and expiry during generation, including another tab and a delayed callback, plus cleanup of app-owned temporary output. An already user-held file is explicitly outside that cleanup claim,
+**And** verify every page of a multipage demo export is marked and contains no real identifiers. Use controlled browser evidence for E8-D; qualify actual offline generation, download/opening and readability on Lenovo/Brave before E8-P approval.
+
+**Traceability:** Primary FR-23; exported FR-22 evidence, offline FR-17, bounded FR-1/20/24 and demo-export boundary FR-25. NFR-1–4; UX-DR23/33/35/36/38/39/44. EXPERIENCE PDF document, recoverable export failures and accompanied-only evidence; DESIGN portrait A4 document, hierarchy and page numbering. AD-2 offline assets/data, AD-3/4 existing fullstack summary contracts, AD-5 accurate receipt status, AD-8 source/version evidence, AD-9 terminal/review semantics, AD-10 access, AD-12 temporary copies and user-held-PDF exception, AD-13 demo isolation and AD-14 compatible assets. All AD-1–AD-14 remain unchanged.
+
+**Dependencies:** 7.3 coherent summary read model and its inherited 7.1/7.2 access/review boundaries; verified assets and compatible builds through 5.2/5.12. Uses existing FastAPI/PostgreSQL data contracts; introduce no tables unless this bounded export behavior actually needs them. Public-demo integration, retained-day browser and closing affirmation are later independent slices.
+
+**Size boundary:** One local PDF renderer and explicit browser export flow, with pagination, revision binding, offline assets, access/error handling and isolated demo labelling. No CSV, generic report designer, remote converter, automatic sharing, PDF archive or new evidence collection. CSV remains optional outside required V1 scope; required PDF behavior is not removed if qualification fails.
+
+**Pilot qualification:** E8-D can demonstrate correctly rendered fictional fixtures and controlled failures. E8-P requires actual Lenovo/Brave offline export and file retrieval/opening, lifecycle/race and readability evidence; unsupported capability becomes a separate solution decision, not a silent V1 exception. E8-E remains field evaluation. No implementation, actual PDF generation or device tests occur during story planning.
+
+**Approval:** Approved by the owner on 2026-09-26 as scoped. The owner affirmed one-revision offline PDF generation, preserved uncertainty and receipt status, no unsupported claim that browser handoff confirms saving, and the necessary explanation that a downloaded PDF is outside app cleanup. Planning approval only; this approved copy is canonical.
+
+### Story 7.5: Reopen Retained Daily Summaries from the Main Menu Within Existing Limits
+
+As the pilot owner,
+I want to find an ended day's retained summary from the main menu and read or export it while authorized,
+So that I can inspect recent results without resuming ended work or creating a permanent history.
+
+**Acceptance Criteria:**
+
+**Given** the owner opens the retained-summary entry from the main menu,
+**When** authorized local data and any available authorized server results are listed,
+**Then** identify each eligible ended/aborted combined own day once, with its service date, terminal status, applicable data expiry, local availability and local/server status; use sufficient retained identity to distinguish different days sharing a date,
+**And** parts of a split day and linked-person plans do not appear as separate completed own days. Prepared, active and never-ended days are not silently converted to completed summaries because a planned end time passed,
+**And** show whether initial review is explicitly complete, still open or unresolved. The list itself does not close review, end a day, acknowledge pending work or confirm an outcome,
+**And** provide clear loading, empty, partial/unavailable and access-required states. A failed server listing cannot erase local pending summaries or claim that no retained results exist,
+**And** use readable dates, expiry and textual status labels with keyboard/focus support, following the adopted tablet-landscape/PC summary and menu presentation.
+
+**Given** an authorized retained day is selected,
+**When** its summary is opened,
+**Then** resolve its stable own-day identity and one coherent permitted revision through the existing 7.3 view; do not select the most recent day or a linked person's plan merely because names/dates match,
+**And** expose the existing 7.4 user-initiated PDF export when its data, assets, access and interaction prerequisites hold, retaining exact revision/provenance, uncertainty and file-handoff semantics,
+**And** after explicitly completed review, provide reading/export only, with no resume-day action or renewed edit permission. Back/history navigation, direct links, refresh, another tab and stale open dialogs obey the same boundary,
+**And** preserve notice-display history, manual origin, gaps and pending receipt status. Opening a summary cannot replay notice audio, mark historical versions seen, refresh their evidence or turn local saving into server confirmation,
+**And** returning to the menu neither activates a prepared day nor changes another currently active day, its role, trip, progression, writer authority or retention clock. Summary viewing is not an operational context switch.
+
+**Given** the selected ended day has an interrupted initial review,
+**When** the current durable review phase is established,
+**Then** offer a clearly labelled continuation of initial review only while that phase is still open and all existing 7.2 authority, writer and interaction checks permit it; ordinary summary reading remains a separate action,
+**And** Back, accidental navigation, tab closure, crash or previous summary reading cannot be used as proof that review was finished. Only the explicit 7.2 completion confirmation closes it,
+**And** if phase data is missing, inconsistent or an explicit completion commit is unresolved, show that uncertainty and restrict editing until resolved. An older open copy cannot override a known completion, and an unresolved phase cannot be presented as definitely completed,
+**And** recovered open review remains subject to the original expiry and current permissions. This entry cannot reopen explicitly completed review or resume the ended day's operations.
+
+**Given** the app is offline, the server is unavailable or local storage has lost data,
+**When** the list or a selected summary is opened or retried,
+**Then** list and read the authorized summaries actually retained locally without depending on a source refresh; expose missing local content and unavailable server verification separately,
+**And** preserve existing coherent local results during partial loads, delayed responses and retries. Reconcile one day by its identity/revision and existing receipt/conflict rules, not by arrival order or an apparent newer client timestamp,
+**And** if the data exists only on the server, retrieve it only through existing authenticated, unexpired summary contracts when connected. Until retrieval succeeds, do not suggest that opening/export is available offline,
+**And** distinguish inaccessible or unavailable data from known expired/deleted data where the current evidence permits; do not promise recovery after browser eviction or device/volume loss,
+**And** restarting the app cannot silently finish a review, replay an export or auto-start another day. Any required login/recovery uses existing E1/E5 rules, preserving unresolved revocation and permitted pending work.
+
+**Given** a summary list, detail request or export entry is accessed,
+**When** the client and backend evaluate permissions,
+**Then** enforce owner and concrete-day scope for both list metadata and content. A bounded grant for one day does not authorize listing or reading other days; possession of a local record or URL is not authority,
+**And** distinguish data retention from access validity. Seven-day retention does not guarantee seven days of unrestricted login; valid renewed same-owner authorization may restore access only to data that has not expired, without restarting its retention clock,
+**And** pending logout/revocation locks private rows and details immediately under the existing rules. Server failure cannot silently bypass access checks, and a stale response cannot redisplay locked content,
+**And** apply existing movement/actual-role rules to summary selection, review and export, including restrictions while another day is active. An ended summary or a recovered server role does not prove standstill or resolve role uncertainty,
+**And** use owner-scoped IndexedDB data and authenticated FastAPI/PostgreSQL listing/detail queries over existing retained results; add only indexes/fields needed for this entry, not a second history database or new writer-transfer protocol.
+
+**Given** a listed or open summary reaches a binding data deadline or an earlier deadline becomes known,
+**When** startup, resume, running expiry checks or reconnect processes the state,
+**Then** remove expired private list metadata and content through the existing AD-12 cleanup and deny further read/export independently of backend purge timing. An open summary becomes a nonprivate unavailable/expired state before further use,
+**And** invalidate stale list/detail results and temporary references so that another tab, Back/history navigation or a delayed response cannot restore deleted data. Do not retain a private tombstone archive just to populate the list,
+**And** enforce the original combined-day clock and any earlier applicable limit; browsing, fetching, re-login and exporting never reset it. Unverifiable end time follows 7.1's earliest-applicable-limit rule; review-open or unsynchronized status does not suspend expiry,
+**And** acknowledge that a closed browser can only clean up on return, before use; do not claim exact-time deletion while it is not running. A downloaded user-held PDF remains outside app cleanup as explained in 7.4,
+**And** no extra raw tracking, linked-person remainder, permanent driver history, private backups or pilot archive is introduced. The public demo remains isolated from private list/detail data.
+
+**Given** fictional/anonymized retained days, browser clients and real PostgreSQL,
+**When** the story is verified,
+**Then** test multiple ended and aborted days, two identities sharing a service date, a split day crossing midnight, linked-person context and a never-ended day; list each eligible own day once without invented completion,
+**And** test completed review versus interrupted open review after Back, tab closure and crash, an unresolved completion commit, concurrent completion in another tab and a stale editing link. Only a genuinely permitted open review can continue,
+**And** open an older summary while a different day is active and verify unchanged actual role, trip, progression, writer authority and clocks; verify applicable interaction restrictions,
+**And** test local-only pending results, partial/failed server listing, server-only results while offline, local eviction, delayed older responses, wrong owner, day-only access versus broader valid login and pending logout,
+**And** test expiry while list/detail is open, startup after expiry, reconnect revealing an earlier deadline, concurrent tabs and delayed data/export callbacks. Verify cleanup in local storage and PostgreSQL and absence of expired metadata/content revival,
+**And** verify readable date/status/expiry labels, keyboard focus, 7.3 evidence fidelity and 7.4 export access. These controlled cases contribute to E8-D; actual device/offline recovery and safe navigation remain E8-P qualification.
+
+**Traceability:** Retained read/export access under FR-22/23/24, offline/recovery FR-17/20, bounded FR-1 and terminal FR-21. NFR-1–4; UX-DR23/32/33/35/36/38/39/44. EXPERIENCE retained summaries from the main menu, date/expiry and no operational resumption, as explicitly amended by the owner's 7.2 completion rule; DESIGN distinct summary/menu presentation. AD-2 local data, AD-3/4/5 existing fullstack result/revision contracts, AD-9 terminal/context boundaries, AD-10/11 access versus writer authority, AD-12 fixed retention/all-copy deletion, AD-13 demo isolation and AD-14 compatible recovery. All AD-1–AD-14 remain unchanged.
+
+**Dependencies:** 7.2 explicit review phase, 7.3 coherent summary, 7.4 local export and existing E1/E5 access/recovery/cleanup including 5.6. Existing E3/E6 interaction and role guards remain controlling. No later closing message or full demo is required to demonstrate the main-menu entry.
+
+**Size boundary:** One bounded retained-summary list and selection/navigation flow, with current scope/phase checks and integration of existing read/export/cleanup contracts. No new summary renderer, editor, synchronization engine, archive, search/reporting suite or day-resumption mechanism. The closing message and remaining lifecycle coverage are separate E7 work.
+
+**Pilot qualification:** Controlled list/read/export/access/recovery cases contribute to E8-D. E8-P requires actual Lenovo/Brave navigation, offline restart, lock/expiry behavior and integrated role/lifecycle checks; E8-E remains field evaluation. The 5.4 timing-evidence decision, 7.1 ending-time uncertainty and recovered-role restrictions remain open test/decision points. No implementation or actual tests occur during planning.
+
+**Approval:** Approved by the owner on 2026-09-26 as scoped. The owner affirmed distinct own-day identities sharing a date, preservation of an open initial review, no cross-day metadata access under a single-day grant, and expiry enforcement while a summary is open. Planning approval only; this approved copy is canonical.
+
+### Story 7.6: Close with a Varied Factual Greeting and Clear Next Actions
+
+As the pilot owner finishing an ended or aborted working day,
+I want a calm closing screen with a brief relevant greeting and clear summary/main-menu actions,
+So that I can leave the day without confusing encouragement with verified completion or resuming ended work.
+
+**Acceptance Criteria:**
+
+**Given** the combined own day has a valid locally committed normal-end or abort result from 7.1,
+**When** its closing screen is shown,
+**Then** display `Takk for i dag`, one short eligible greeting and clear actions for the daily summary and main menu, following DESIGN's centered restrained closing composition, readable type and accessible focus/labels,
+**And** distinguish normal end from abort and retain the existing local/server status and relevant access/expiry information. A greeting never certifies server settlement, physical shutdown, rest, handover or completion of uncertain activities,
+**And** do not show a final-day closing state solely because a part ended, an intermediate depot was reached, a planned time passed or a pending end action was cancelled/failed,
+**And** an unverified locally reported end time remains qualified under 7.1; a clock shown on this screen is not additional timing evidence.
+
+**Given** a static bank of preapproved formulations and permitted retained facts for the specific day,
+**When** a greeting is selected,
+**Then** select or assemble the greeting only from preapproved formulations with explicit, testable eligibility rules using recorded facts such as split work parts, confirmed plan changes, a recorded guiding assignment or an aborted day. Any allowed combination must remain coherent and supported as a whole; no free generation or AI service is introduced,
+**And** treat the accepted gallery's ten samples as the starting bank subject to their factual predicates, not as unconditional text. A plan can establish a planned structure/assignment, but cannot establish that every part or the guiding work was performed,
+**And** claims about actual duration, completed work or an ended assignment require corresponding evidence; abort alone cannot establish an exact shorter duration when timing is unknown. Choose a neutral alternative if the available evidence does not support the wording,
+**And** never infer that driving was good/safe, all tasks succeeded, a break was taken, the user feels a particular way or has no work left elsewhere. No score, performance assessment or completion praise for uncertain work is produced,
+**And** keep plan, observed and manual provenance intact. A manually confirmed fact is not promoted to independent GPS/source evidence to qualify a stronger claim,
+**And** provide multiple preapproved, meaningfully different formulations also for neutral days, including days with no usable specific category. Uncertainty or source failure does not force an invented positive outcome, and variation cannot consist only of punctuation, dates or other substituted identifiers.
+
+**Given** more than one eligible greeting and a permitted record of the preceding day's actually shown variant,
+**When** selecting for a newly ended day,
+**Then** avoid that previous variant and distribute selections across eligible alternatives over a series of similar days, using neutral alternatives when the specific category offers too few choices. Merely alternating the same two texts is insufficient when more suitable preapproved formulations are available; do not map every day of one type to the same sentence,
+**And** use stable day identity rather than the date label alone, so two different working days with the same date cannot overwrite each other's choice. Reopening an older day must not make it the preceding day for a newer day's rotation,
+**And** retain the selected variant for the same day across ordinary rerenders/reopening while it remains supported by the permitted current facts. A relevant evidence change that invalidates the wording requires a truthful replacement, without rewriting operational evidence,
+**And** distinguish selecting a variant from actually showing it with valid access. A blocked or failed display is not recorded as shown; retries and concurrent tabs cannot manufacture repeated completed days or advance rotation as though a new day occurred,
+**And** if earlier selection/display state is unavailable, expired or lost, use an eligible neutral/available choice without claiming a guaranteed non-repeat. Never retrieve deleted day data or create permanent history just to recover variation.
+
+**Given** the closing screen is used before initial review was explicitly finished, after it was finished, or while its phase is unresolved,
+**When** the owner navigates to summary, review or main menu,
+**Then** preserve the 7.2 review phase: viewing the greeting or choosing main menu is not explicit review completion. Offer continuation through the existing permitted open-review flow rather than silently consuming it,
+**And** only the existing confirmation showing remaining uncertain activities closes editing. Once completed, summary access is read/export-only; unresolved phase keeps editing restricted until resolved,
+**And** Back, restart, a stale closing screen or repeated navigation cannot resume the ended day, start a prepared day, change another active day's role/trip/writer state or replay an export,
+**And** main menu may expose the existing preparation path, but starting another day still requires its own confirmation and valid access. The closing screen supplies neither a new login period nor a new day grant,
+**And** preserve existing movement and unknown-role restrictions on actions. An ended day or a positive greeting does not establish standstill or resolve physical role.
+
+**Given** the client is offline or selection/rotation state cannot be saved or recovered,
+**When** the closing flow renders,
+**Then** use the verified local text bank and permitted retained day facts without requiring server/source access. A recoverable greeting-state failure must not undo terminal state or block summary/main-menu navigation,
+**And** degrade to factual neutral text if the specific basis is unavailable. Preserve actual day/access/storage error status where relevant; never claim that a selection, review completion or server update was saved when it was not,
+**And** reuse owner/day-scoped IndexedDB and existing authenticated FastAPI/PostgreSQL retained-result contracts for only the minimal choice/display metadata needed for stable recovery and variation; changes require existing authority/revision rules and cannot mutate immutable operational batches,
+**And** treat reading a retained closing screen as reading, not as a writer takeover or a new closure event. If a client lacks permission to save presentation metadata, it cannot bypass that restriction merely to record a greeting,
+**And** apply AD-10/12 logout, scope and original expiry to day-linked greeting metadata, derived facts, replies and caches. Do not hide private day/category associations in permanent account settings, logs, backups or a cross-day archive,
+**And** stop private fact-based display on lock/expiry and prevent old tabs or delayed callbacks restoring it. Neither selection, reopening nor synchronization extends the earliest applicable deadline. Generic text does not retain expired private facts.
+
+**Given** the same closing component is exercised with fictional/demo data,
+**When** simulated days end or restart,
+**Then** keep simulation visible and use a separate demo selection/display state. Demo choices never affect operative variation and never access private facts or credentials,
+**And** fixture-based verification of the component is sufficient for this story; the complete public demo remains E8 integration work.
+
+**Given** fictional/anonymized day fixtures and the existing browser/FastAPI/PostgreSQL contracts,
+**When** the story is verified,
+**Then** test normal end, abort, split parts, confirmed changes, planned-but-unperformed guiding, unknown outcomes/timing and manual confirmation against explicit expected eligible/ineligible variants; ensure unsupported samples fall back to neutral wording,
+**And** run a controlled series of six otherwise equivalent working days with permitted retained selection state, and separately six neutral-only days. With at least three suitable preapproved formulations available in each case, require at least three meaningfully distinct greetings across the series, no adjacent repeat and no simple two-text alternation; inspect the actual wording as well as variant IDs. Dates, punctuation and variable identifiers alone do not count as variation,
+**And** reopen/restart each same-day result during those series and verify the original choice is unchanged unless its factual basis becomes invalid. Inspect bounded storage, then expire earlier days and repeat selection without retrieving or retaining deleted shift history; no guaranteed non-repeat is claimed when prior state has legitimately disappeared,
+**And** test two own days sharing a date, only one category-specific variant with neutral alternatives, no preceding-day record, rereading an older day, simultaneous tabs and a blocked display. Verify no false shown record, new-day event or permanent private rotation history,
+**And** test offline restart, failed metadata save, incompatible/missing selection state, logout/expiry while open and delayed responses; preserve terminal status, truthful local/server status and fixed deadlines,
+**And** test open/closed/unresolved initial review and navigation into a menu with another active day. No screen visit closes review or changes operational context,
+**And** verify readable day/night presentation and keyboard focus, plus demo/operative separation. Record controlled evidence for E8-D; actual Lenovo/Brave readability and integrated closing/navigation behavior remain E8-P qualification.
+
+**Traceability:** Closing portion of FR-22, preserved FR-21 terminal state, offline/recovery FR-17/20, bounded FR-1/24 and isolated demo boundary FR-25. NFR-1–4; UX-DR32/33/34/38/39/44. EXPERIENCE Latest navigation and closing decisions and Closing message; accepted gallery screens 26/37; DESIGN centered closing composition. The explicit 7.2 review-completion amendment governs navigation. AD-2 local assets/state, AD-3/4/5 existing fullstack persistence, AD-9 terminal/context semantics, AD-10/11 current authority, AD-12 short retention and AD-13/14 demo/build isolation. All AD-1–AD-14 remain unchanged.
+
+**Dependencies:** 7.1 terminal result, 7.2 review phase, 7.3 factual summary basis and 7.5 retained/menu navigation, with existing E1/E5 access/assets/recovery and E3/E6 role guards. No future story is required for the closing component to function.
+
+**Size boundary:** One closing screen, static eligible-text selection and minimal bounded choice/display persistence integrated with existing navigation. No AI service, performance analysis, new operational engine, new summary/PDF renderer, permanent history or independent synchronization mechanism. No new schema beyond metadata actually needed by this slice.
+
+**Pilot qualification:** Controlled factual-selection/navigation/storage cases contribute to E8-D. E8-P still requires actual target-device behavior and integrated lifecycle evidence; E8-E remains field evaluation. Role uncertainty and the open 5.4/7.1 timing-evidence risks are not solved by a closing message. No implementation or actual tests occur during planning.
+
+**Approval:** Approved by the owner on 2026-09-26 with factual composition from multiple preapproved formulations, including neutral alternatives; test a series of equivalent working days for noticeable variation beyond avoiding yesterday's text. Same-day choice remains stable, no permanent shift history or unsupported work claims are introduced, and greeting/navigation changes neither initial-review phase nor closure receipt status. The controlled series criterion uses six similar days and at least three meaningfully distinct eligible texts, separately for neutral days. Planning approval only; this approved copy is canonical.
+
+## Epic 8: Demonstrate, Qualify and Evaluate the Delivered Assistant
+
+E8 implements the isolated no-login fictional PC demonstration and assembles evidence for the private fullstack delivery, actual target-environment qualification and subsequent field evaluation. FR-25, integrated FR-1–24/NFR-1–4 evidence and UX-DR37 apply. E8-D demonstrable delivery, E8-P pre-pilot qualification and E8-E three-workday evaluation remain separate checkpoints. A public static demo cannot replace private FastAPI/PostgreSQL evidence, and simulated inputs cannot establish live-source or device capability. This first slice supplies one isolated basic scenario and safe restart; the full scenario suite and gates remain later work.
+
+### Story 8.1: Run and Restart an Isolated Fictional PC Demo Without Signing In
+
+As the course assessor using an ordinary PC browser,
+I want to open a clearly fictional demo without signing in and repeat a basic working-day scenario,
+So that I can inspect the assistant's implemented behavior without private operational records or physical GPS.
+
+**Acceptance Criteria:**
+
+**Given** the public demo entry and private login page,
+**When** the assessor selects the clearly labelled demo entry or opens the demo directly,
+**Then** load the demo on its own origin without requiring private sign-in, a test account or pilot credentials, using the adopted separate static demo-web boundary,
+**And** identify the experience as fictional simulation before starting and keep that indication visible throughout operational views, summary, closing and export. Demo assessor mode is distinct from the private operational INSTRUKTØR role,
+**And** provide one versioned, wholly fictional basic own-day scenario with explicit starting facts and brief start/restart instructions. Do not use anonymized production imports as an automatic fallback or claim that the fixture was successfully extracted by OCR,
+**And** normal use requires neither geolocation permission nor a live timetable/disruption source. A local two-origin setup can demonstrate this slice without provisioning a public hostname or tunnel.
+
+**Given** the fictional scenario is initialized,
+**When** the assessor starts it and supplies its scripted position/speed sequence through clearly separate simulation controls,
+**Then** feed typed fictional inputs through the existing operational/source ports into the same E3 state engine and implemented E4/E7 behavior used by the private application; do not create a separate permissive demo engine or a slideshow of expected outcomes,
+**And** exercise a bounded scenario from known plan/stop data through actual trip selection, simulated standstill/movement/progression, explicit final own-day ending, initial review and summary. Demonstrate the existing user-initiated 7.4 PDF export with simulation marking on every page,
+**And** keep assessor simulation controls separate from in-scenario driver actions: changing simulated speed is a test input, not a driver-control exception. Reliable simulated motion must apply the same restrictions as equivalent qualified inputs in the operational engine,
+**And** make simulated signal timestamps, quality and any scenario time advancement coherent across the shared engine. Do not reset operational timers or directly set completed/seen/confirmed state merely to advance the demonstration,
+**And** use fictional source/stop identities and expected outcomes with a documented fixture baseline. Simulated measurements and notice facts remain visibly simulated; they do not establish real source coverage, sensor quality or achievement of the real 100-metre target,
+**And** display any simulated synchronization/receipt result as simulated. A static demo cannot claim to have persisted private operational data through FastAPI/PostgreSQL or supply evidence of real server acceptance.
+
+**Given** a scenario is running, ended or partially modified,
+**When** the assessor explicitly restarts it,
+**Then** reset only that demo run to its documented initial fixture and create a distinct run identity, with clean fictional plan/progression/manual-choice/notice/review state,
+**And** discard or invalidate pending callbacks, queued simulated responses and timers from the former run so that they cannot alter the new run, replay old sound or complete a previously cancelled export,
+**And** repeated execution of the same input sequence produces the same expected operational outcomes. Demo greeting variation remains isolated under 7.6 and does not imply an operational history,
+**And** coordinate demo tabs so each run's state and reset outcome are unambiguous; duplicate restart requests cannot mix old and new state. Private tabs/data are never reset or affected,
+**And** a browser reload is distinguished from an explicit fresh restart: recover a compatible saved demo run if supported by the existing persistence contract, or clearly explain that a new run is needed. Never present lost state as recovered or automatically resume an ended operational day,
+**And** demo restart remains an explicit simulation facility, not a capability to resume a completed private shift.
+
+**Given** the demo bundle, fictional fixtures, storage and network adapters,
+**When** initialization, normal operation, export or restart runs,
+**Then** keep demo storage, asset caches, configuration, selection history and adapters separate from the private origin. No private credentials, API tokens, original imports or operational payloads are shipped in the demo bundle or source maps,
+**And** do not read/write the private FastAPI service, PostgreSQL, private browser storage or live source adapters. The no-login demo must not proxy or relay private requests, accept a private API target from a URL parameter, or import private data through cross-origin messages,
+**And** test private API rejection with absent/invalid authority independently of hidden controls; host-only cookies and exact-origin/CORS protections from E1/AD-10 remain necessary even for sibling hosts. UI separation alone is insufficient,
+**And** use existing domain contracts with isolated fictional persistence/adapters. No demo database or new private entities are needed by this static-demo slice; private fullstack/database delivery must be demonstrated separately in E8-D,
+**And** keep fixture reset and simulation controls out of the private runtime. The later Compose/network/ingress qualification must verify the same boundary at deployment; this story does not claim that network topology or Cloudflare access is already qualified.
+
+**Given** fixture loading, local storage, an app asset or a compatible schema is unavailable,
+**When** the demo cannot safely initialize or continue,
+**Then** remain visibly in the fictional context, explain what failed and offer a bounded retry or explicit fresh demo restart without loading private records or manufacturing successful progression,
+**And** distinguish a real demo-loading/storage failure from a deliberately simulated operational failure. Any demo-only cleanup touches only demo state; it cannot clear the private client's unsynchronized work,
+**And** maintain readable PC presentation, keyboard-operable controls, focus after start/restart/error and textual simulation/disabled-state labels rather than colour alone. Apply the accepted PC design responsively rather than assuming its reference frame is a fixed browser size,
+**And** provide only controls whose shared behavior is implemented. New-notice, internet-loss and qualified GPS-loss scenario controls remain required subsequent E8 slices; this basic story must not display a misleading passed/working status for them.
+
+**Given** a clean PC browser, fictional fixtures and local distinct demo/private origins,
+**When** this slice is verified,
+**Then** open the demo without a session or physical GPS, run the documented basic input sequence, end the fictional day, review/inspect its summary and generate a correctly labelled PDF using the actual shared features,
+**And** compare intermediate and final domain states to the fixture expectations, including driver restrictions during movement and preserved uncertainty/manual origin, rather than checking only screenshots,
+**And** repeat from an active run and an ended run, including duplicate restart, delayed old callback, multiple demo tabs and reload. Verify no old run state, sound or export reaches the new run and no private state changes,
+**And** inspect network requests, storage, built assets/configuration and API rejection with a synthetic private sentinel to verify isolation, including when the private app is signed in in another tab. Never use real private operational records for this test,
+**And** test missing/corrupt fixtures, denied storage and incompatible saved state, verifying clear fictional failure and no private fallback. Test keyboard traversal, readable layout and simulation labels on every exported page,
+**And** record scenario/build identifiers, browser version, procedure and observed results as controlled demo evidence. A passing fixture run is not live-source/device qualification, private PostgreSQL evidence or permission for a real shift.
+
+**Traceability:** First implementation slice of FR-25 and UX-DR37/UJ-2; private isolation FR-1/NFR-3, shared information-integrity NFR-2, PC usability NFR-1 and honest qualification boundary NFR-4. Demo export FR-23/UX-DR35, truthful summary/closing FR-22/UX-DR33/34 and shared operational/source rules are consumed, not reimplemented. EXPERIENCE no-login demo entry, simulation controls and failure paths; DESIGN separate PC simulation and persistent labels. AD-1 ports, AD-2 separated storage/assets, AD-3 one shared TypeScript engine, AD-7/8 fictional source adapters, AD-9 shared domain semantics, AD-10 separate origin/no credentials, AD-12 no private archive, AD-13 static demo-web isolation and AD-14 compatible builds. AD-4/5 private PostgreSQL/receipt requirements remain binding on the private application; simulated substitutes do not satisfy them. All AD-1–AD-14 remain unchanged.
+
+**Dependencies:** E1 private access boundary, implemented shared E2/E3 plan and operational contracts through 3.9, E4 notice semantics through 4.8 and E7 terminal/review/summary/export/closing through 7.6. Uses a prepared fictional fixture rather than implementing import/OCR again. No future E8 story is required to run the basic demo locally; full failure-scenario suite, hosted assessment access and evidence gates remain subsequent work.
+
+**Size boundary:** One no-login isolated demo entry, one basic fictional scenario, typed signal controls, shared-feature wiring, demo-only persistence/reset and boundary tests. No full scenario catalogue, new engine, live-source qualification, private fullstack proof, account system, DNS/tunnel provisioning or deployment. The agreed assessment period and exact assessor browser remain later scheduling/qualification clarifications, not blockers for this local slice.
+
+**Qualification boundary:** Contributes to E8-D but does not pass that checkpoint alone. E8-D also requires private fullstack/real-PostgreSQL evidence and reproducible delivery documentation. E8-P remains actual source/OCR/device/access/host/lifecycle qualification before shifts; E8-E remains the subsequent three-workday evaluation. The 5.4/7.1 timing-evidence solution decisions remain open and cannot be solved by simulated clocks. No implementation, execution of tests, provisioning or deployment occurs during story planning.
+
+**Approval:** Approved by the owner on 2026-09-27 as scoped. The owner affirmed technical isolation from the private application and tests that prevent old-run events affecting a new run after restart. This story contributes to E8-D; E8-P and E8-E remain separate checkpoints. Planning approval only; this approved copy is canonical.
+
+### Story 8.2: Repeat Notice, Network and Positioning Failure Scenarios in the Isolated Demo
+
+As the course assessor,
+I want to trigger fictional new notices, network loss and positioning loss independently and observe recovery,
+So that I can repeat and inspect the implemented restrictions and uncertainty rules without mistaking simulation for real qualification.
+
+**Acceptance Criteria:**
+
+**Given** the isolated demo from 8.1 and its known fictional starting state,
+**When** the assessor selects a notice, connection or positioning scenario,
+**Then** show the selected scenario, required starting context and clearly labelled simulation controls with brief steps and expected observations,
+**And** provide independent controls for fictional source delivery, simulated connectivity and position/speed inputs; a single generic failure toggle cannot silently turn all three off or on,
+**And** feed versioned scripted inputs through the existing adapters and shared E3/E4/E5 behavior rather than setting UI labels, permissions, completion or acknowledgement states directly,
+**And** bind every injected event and delayed callback to the current demo run. Invalid triggers explain the missing prerequisite rather than silently changing the selected trip, role or operational history,
+**And** keep simulation visible in screens, summaries and exported evidence, with actual browser/loading failures distinguished from intentional scenario inputs. Assessor controls do not give the fictional driver extra permissions.
+
+**Given** an ongoing fictional trip and a known source baseline,
+**When** the assessor triggers a genuinely new relevant notice through the fictional source adapter,
+**Then** apply the existing source identity/version, relevance, source-time versus retrieval-time and display rules, including acute display from receipt/relevance assessment rather than simulated source publication,
+**And** expose documented fictional provenance and unknown metadata where the fixture omits it; source error or partial response cannot erase useful notices or claim there are none,
+**And** demonstrate the existing one-attempt chime eligibility for a new relevant receipt during the ongoing trip, plus silent duplicate delivery, material update and an already received notice becoming relevant later,
+**And** use the real browser audio path with truthful blocked/failed/uncertain playback status; the simulator cannot label an unobserved sound as heard or replay old sound after later audio permission,
+**And** include a controlled update and explicit source-supported ending for that same incident so repeated runs show version emphasis and lifecycle behavior without inventing an ending from absence alone,
+**And** retained summary/PDF evidence includes only presentation actually recorded by the shared view, not every scripted notice or every injection attempt. Seen/registered/hidden states retain their distinct meanings.
+
+**Given** usable simulated positioning and an ongoing prepared fictional day,
+**When** the assessor enables simulated network loss,
+**Then** make the fictional remote adapters unavailable while local plan, downloaded stop lists, prior notices and permitted corrections remain usable; show loss of updates without making retained data appear fresh,
+**And** continue sensor-driven progression and movement restrictions while qualified simulated observations continue. Network loss alone neither enables GPS-loss arrows nor creates a speed-outage exception,
+**And** source events scripted while disconnected cannot arrive through a hidden bypass. On recovery, distinguish a genuinely first-received incident from replay of an incident received before the outage,
+**And** recovering connectivity first shows checking/pending updates; successful source refresh and any simulated receipt state remain separate. Include a case where connectivity returns but source retrieval still fails/returns only part of its response,
+**And** preserve active trip, manual corrections and pending fictional work; restoration is not a fresh position, new day or blanket server confirmation. The static demo still makes no actual private API/database calls,
+**And** explicitly identify this as injected connectivity failure. It is not evidence of actual tethering loss, full offline asset readiness, Access recovery or PostgreSQL settlement; those remain separate delivery/qualification tests.
+
+**Given** the signal-quality contract from 3.1/3.2 and the shared progression engine,
+**When** the assessor selects the positioning/speed scenarios,
+**Then** demonstrate separately: genuine startup before first valid speed, speed loss with usable position, qualified position loss with usable speed, and combined signal loss after a valid measurement,
+**And** use the adopted signal-quality rules and explicitly record their configuration/version in the fixture; do not invent unqualified sensor thresholds or treat a simulated successful threshold as real-device evidence,
+**And** missing/stale speed remains unknown, not zero. After a previous valid speed including zero, show the five-minute restriction from established outage onset and test immediately before, at and after its expiry; visible startup/outage exceptions explain availability without claiming standstill,
+**And** unknown speed alone does not enable direct stop arrows. Only qualified position loss exposes them, with each press moving at most one known stop in the selected trip; manual correction stays manual evidence,
+**And** restored valid speed immediately applies its own permission rule. Reliable motion stays locked even after the five-minute exception; restored position alone cannot establish standstill,
+**And** recovered positioning uses the correct stop occurrence within the selected trip, preserves the manual pin/history and keeps ambiguity visible. An observation gap remains visible and cannot count as proof that unobserved passages met the 100-metre target.
+
+**Given** outage timing, manual correction or pending fictional notice events exist,
+**When** the scenario advances time, reloads, recovers or explicitly restarts,
+**Then** any time-step control advances a clearly simulated clock coherently across observation ages, outage timers and source lifecycle; it must not directly unlock controls or refresh an old zero sample,
+**And** reload within a run preserves established startup/history/outage timing under the existing compatible recovery contract. Stale observations remain stale; unreadable timing state yields honest restricted uncertainty rather than a new startup exception or guessed elapsed time,
+**And** distinguish an explicit new-run restart from same-run reload. Only the former intentionally resets the fixture under 8.1; neither action can affect private data or operational sessions,
+**And** inject combinations in both recovery orders: network returns while positioning remains lost, and positioning returns while source access is still unavailable. Recovery of one channel cannot clear the other's warning or grant its permissions,
+**And** late callbacks, audio attempts and scheduled source events from the old run are cancelled or rejected after restart, including when they arrive at the same simulated time as a new-run event,
+**And** simulated clocks never establish trustworthy timing for 5.4/7.1 server eligibility or alter the adopted access/retention rules.
+
+**Given** scripted scenario definitions and per-run state,
+**When** they are saved, replayed or fail,
+**Then** reuse 8.1's separated demo storage and existing domain contracts, recording only fictional run state and the bounded metadata needed for repeatability; no private data, credentials, endpoints or cross-origin relay is introduced,
+**And** demo controls/adapters remain excluded from private runtime. The same operational engine must handle equivalent typed inputs without a demo-only exception in its business rules,
+**And** fixture load, storage or adapter failures produce a visible fictional error with retry/restart and no private fallback. Reset never clears another origin's data,
+**And** keep controls keyboard accessible and separate from the operational view, with explicit selected-state and failure labels; countdown accessibility announces meaningful permission changes rather than every second,
+**And** do not add a demo database or claim real FastAPI/PostgreSQL evidence. Existing fullstack behavior must be tested with the private application's authorized fictional fixtures in a separate E8 slice.
+
+**Given** the versioned fixtures, shared implementation and ordinary PC browser,
+**When** this slice is verified,
+**Then** record starting state, injected sequence, expected and observed domain/UI results for each of the three scenario groups and the two combined-recovery orders, and repeat each from a fresh run,
+**And** test new versus duplicate/updated/ended notices, irrelevant-before-relevant receipt, source partial/failure, browser audio blocked/uncertain and the exact actually displayed versions retained in summary/PDF,
+**And** test network-only failure, speed-only loss, position-only loss and combined loss, including valid zero before loss, stale zero after reload, invalid sample bursts, five-minute boundaries, one-step correction and ambiguous return to a repeated stop,
+**And** explicitly restart with pending source replies, an outage timer and an audio attempt; deliver the old callbacks and verify that none affects the new run. Test reload separately so it cannot reset an ongoing outage,
+**And** inspect isolated network/storage behavior and simulation labels, preserving a synthetic private sentinel unchanged. Record actual browser/build/fixture identifiers and failures; do not premark scenarios passed or treat screenshots alone as evidence of engine behavior,
+**And** a failure against the adopted rules is an implementation finding requiring correction or an explicit owner decision; it cannot be hidden by changing the expected fixture or silently weakening V1 behavior.
+
+**Traceability:** Required FR-25 failure/recovery scenario portion and UX-DR37/UJ-2, using FR-9/12–20 behavior, FR-22/23 labelled evidence and NFR-1–4. UX-DR14/15/19–23/33/35/38/39/44 as consumed by shared views. EXPERIENCE repeatable new-notice/internet/GPS loss, qualified exceptions and honest recovery; DESIGN distinct simulation controls and uncertainty labels. AD-1/3 shared ports/engine, AD-2 isolated local persistence, AD-7/8 source semantics, AD-9 independent position/speed and manual authority, AD-10/13 demo isolation and AD-14 compatible recovery. AD-4/5 real backend evidence and AD-12 private expiry remain binding elsewhere, never satisfied by a simulated acknowledgement. All AD-1–AD-14 remain unchanged.
+
+**Dependencies:** 8.1 isolated entry/reset/basic scenario; implemented 3.1/3.2 quality/permission, 3.7/3.8 correction/recovery, E4 source/display/audio through 4.8 and 5.6 reconnect behavior, plus the existing E7 summary/export. No future E8 story is required to run these fictional scenarios locally.
+
+**Size boundary:** Three bounded failure-scenario groups plus their interaction/recovery cases over existing engines. No generic scenario-authoring UI, new operational/source engine, live-source/device qualification, complete mentor scenario catalogue, deployment or private fullstack evidence package. Scenario definitions and controls are fictional adapters, not production bypasses.
+
+**Qualification boundary:** Contributes repeatable evidence to E8-D without passing that checkpoint alone. E8-P still requires actual source/OCR/Lenovo/Brave/access/host/offline/lifecycle qualification; E8-E remains the subsequent three-workday evaluation. The 5.4/7.1 timing-evidence solution decisions stay open. No application implementation, actual scenario execution, readiness/final validation, provisioning or deployment occurs during this planning step.
+
+**Approval:** Approved by the owner on 2026-09-27 as scoped. The owner emphasized independent network, position and speed cases and that simulated outcomes must never be presented as actual source or sensor evidence. Planning approval only; this approved copy is canonical.
+
+### Story 8.3: Produce Reproducible Evidence of the Private Fullstack Day Lifecycle
+
+As the project owner preparing the IBE160 delivery,
+I want a repeatable verification of the actual private React/FastAPI/PostgreSQL flow with wholly fictional data,
+So that fullstack persistence, recovery and lifecycle claims are supported by observed results rather than the public static demo.
+
+**Acceptance Criteria:**
+
+**Given** the implemented E1–E7 application and an isolated qualification environment,
+**When** the evidence run is prepared,
+**Then** use the actual private frontend, Python/FastAPI validation/authentication and PostgreSQL 18 with the application's migrations and contracts; neither SQLite, an in-memory server store nor a mocked success response can substitute for persistence evidence,
+**And** identify the code/build, schema/API versions, configuration, browser, fixture versions and commands necessary to reproduce the run. Document environment prerequisites and stop clearly when they are missing,
+**And** provision only fictional test identities/data in this isolated environment through controlled setup; run user actions through ordinary private sign-in and authorization, not a bypassed production login or public-demo endpoint,
+**And** make environment checks prevent fixture seeding, fault injection, clock controls or cleanup against the pilot database/host. Test helpers are not published in the private production or public demo runtime,
+**And** record which external inputs are fictional adapters, which import components actually execute and which layers are real. Simulated source/sensor inputs do not turn this run into Entur/OCR-layout/Lenovo qualification.
+
+**Given** a versioned fictional fixture set with expected dates, ordering, plan revisions, identities and outcome provenance,
+**When** the operator follows the documented lifecycle procedure,
+**Then** exercise one own-day path and one mentor path using existing application actions: import through the real backend interpreter, inspect uncertain fields, manually correct, explicitly confirm, prepare available data, start within valid ordinary authorization, perform permitted fictional-input operations, end/abort, review, read summary and export PDF,
+**And** use one defined text-PDF import case plus a bounded image/scanned case through the implemented OCR path, documenting the exact formats/cases actually run and known failures. A directly seeded confirmed plan cannot count as tested import/review; representative real-layout coverage still comes from 2.1 and later E8-P qualification,
+**And** include service/calendar dates crossing midnight and a manual correction that differs from the fictional route source. Preserve the correction, day ordering, explicit confirmed revision and uncertainty through persistence and recovery,
+**And** the mentor path includes separate own work and only partially accompanied evidence, with known unaccompanied remainder that must be removed on own-day closure. Reuse E6's fixtures/contracts; do not invent new role or attribution rules,
+**And** preserve actual displayed notice versions and source/manual/unknown status in the summary and the revision-bound local PDF. All retained/exported evidence in this run is labelled as fictional qualification data,
+**And** exercise normal ending in one path and explicit abort in the other; neither terminal choice certifies uncertain physical activity. Initial review ends only through its explicit confirmation, and retained entry is read/export-only afterward.
+
+**Given** a representative confirmed plan change, operational correction and terminal/review event in these paths,
+**When** each passes from the client to the backend,
+**Then** correlate the visible local/pending/server-confirmed state with committed IndexedDB state/outbox, the authenticated request and matching receipt, and independently read the expected PostgreSQL records/revision,
+**And** verify ownership, event/batch identity, expected revision and domain effects with sanitized test identifiers; an HTTP success, screenshot, empty queue or client cache is not sufficient evidence of database commitment,
+**And** demonstrate database-backed recovery after restarting the application services while retaining the test database volume, then loading the result in an authorized clean browser context without its former local data. No automatic writer transfer or revival of an ended day is permitted,
+**And** verify that requests with no authority, another test owner or only a different concrete-day scope cannot read private metadata/content or apply changes. Rejected writes leave the database unchanged,
+**And** inspect private source-file cleanup after interpretation and end-of-day linked-plan trimming, without copying original uploads, secrets or raw GPS tracks into the evidence report.
+
+**Given** existing E1/E5/E7 fault hooks and test procedures scoped to the isolated environment,
+**When** controlled failures are injected into the same actual stack,
+**Then** demonstrate a local transaction failure before completion, a PostgreSQL transaction failure, and a server commit whose response is lost. Show their different visible and durable outcomes,
+**And** retry the lost-response operation with the identical immutable batch and verify one domain effect, one accepted receipt identity and no extra revision increment from retry. A mismatched receipt must not mark the client work confirmed,
+**And** interrupt actual client access to the test backend while retaining local data, make a permitted correction, restart the client with prepared assets, then restore connectivity and verify preservation and reconciliation. A browser online flag alone is not proof of backend/source recovery,
+**And** use the existing stale-writer/revision cases to prove rejection without silent overwrite. Preserve permitted pending work for explicit handling rather than automatically taking authority or rewriting old batches,
+**And** test old-request versus closure ordering through the real 5.13 PostgreSQL transaction/fence contract, with an actual E6 retained projection. Distinguish retired-original outcome, local closure and the new closure receipt; old payloads cannot restore discarded linked data,
+**And** reuse relevant existing automated evidence where its build/contracts/fixture conditions match; execute the composed path and its necessary integration gaps rather than duplicating every feature test or claiming old results validate changed code.
+
+**Given** the composed day has retained results, pending events, review state, PDF temporary data and summary/greeting metadata,
+**When** logout, terminal cleanup and the fixed data deadline are tested,
+**Then** check current access and deletion behavior in client, backend and PostgreSQL, including another tab, delayed response and a restart before private display,
+**And** verify removal of all applicable private copies under the existing AD-12 inventory, plus rejection of late reads/writes independently of asynchronous purge. Preserve unrelated test-day/public-source data; do not claim deletion just from a hidden screen,
+**And** include a never-ended fixture expiring from planned final end without becoming completed, and an ended fixture retaining an earlier binding limit despite retries/review/export,
+**And** distinguish a downloaded user-held PDF from app-managed buffers/copies; do not claim the app deletes external files. Evidence must not introduce a permanent private backup or pilot archive,
+**And** any accelerated test clock or fault injection is explicitly labelled as a test mechanism. It cannot establish the missing real time proof for 5.4/7.1; unverifiable delayed activation/end-time cases remain restricted/unresolved and linked to the open solution decision.
+
+**Given** observed results from the repeatable procedures,
+**When** the evidence report is assembled,
+**Then** list each case with requirement/story reference, starting conditions, expected result, actual result, execution identity and supporting sanitized UI/API/database observations,
+**And** distinguish passed, failed, not run and blocked cases; separately state whether the feature is implemented and what was actually verified. Do not substitute a planned test or fixture expectation for an observed pass,
+**And** provide reproducible run/reset instructions scoped to the fictional test environment, a concise sequence for inspecting frontend/backend/database behavior, and evidence location/version references. Another authorized developer must be able to repeat the procedure from documented prerequisites,
+**And** check the report, screenshots, PDFs and diagnostic excerpts for real operational identifiers, credentials, cookies, tokens and private payloads before using them in assessment material. Use wholly fictional fixtures for shareable artifacts; no uncontrolled database dumps,
+**And** report failure and limitation ownership without automatically changing V1 or architecture. Fixes remain the responsibility of the owning E1–E7 feature stories; this evidence slice is not permission to replace missing behavior with a demonstration stub,
+**And** keep this report separate from the later complete delivery/reflection/AI-use package and formal E8-D decision. It contributes the private fullstack evidence but does not itself pass E8-D, E8-P or E8-E.
+
+**Traceability:** Explicit PRD fullstack/database obligation and E8-D private end-to-end evidence; selected integrated FR-1–5/9/14/17–24, UX-DR23/31–36/38/44 and NFR-2/3, with controlled NFR-1/4 observations limited to the stated environment. Shared import, role, notice and lifecycle criteria remain in their owning E1–E7 stories. AD-1 actual adapters with declared fixture boundaries, AD-2 client transactions/assets, AD-3 real React/FastAPI, AD-4 PostgreSQL 18, AD-5 immutable batches/receipts/atomicity, AD-6 transient import originals, AD-8 provenance, AD-9 terminal/role rules, AD-10/11 authority, AD-12 cleanup, AD-13 separated test/private/demo environments and AD-14 versioned evidence. All AD-1–AD-14 remain unchanged.
+
+**Dependencies:** Implemented relevant E1–E7 slices through 7.6, including E2 extraction/review, E5 recovery/settlement and E6 mentor projections. 8.1/8.2 establish the public-demo evidence boundary; this story uses a separate private test environment. Local isolated deployment of the actual application suffices; public hostname/tunnel/assessment hosting and future E8 stories are not prerequisites. Missing implementation or representative evidence is reported blocked/unverified, not silently supplied by this qualification story.
+
+**Size boundary:** One bounded own-day/mentor lifecycle evidence pack and selected persistence/fault/expiry cases, reusing existing test infrastructure. Not a new application implementation, complete security audit, all-feature regression rewrite, live-source/device qualification, production provisioning, publication or final readiness review. Full target-environment gates, delivery documentation and field evaluation remain later E8 work.
+
+**Qualification boundary:** Real local fullstack/database evidence contributes to E8-D. Fictional source/sensor inputs and a controlled desktop environment cannot pass E8-P's actual source/OCR/device/access/host requirements. E8-E follows E8-P with three actual workdays. The 5.4/7.1 timing basis remains open; capacity/delivery remain unresolved. This story is being planned only: no tests, application changes, provisioning or deployment are executed now.
+
+**Approval:** Approved by the owner on 2026-09-27 as scoped. Tests must demonstrate the actual client-to-PostgreSQL chain and report passed, failed, blocked and not-run cases distinctly. The evidence contributes to E8-D and does not replace E8-P. Planning approval only; this approved copy is canonical.
+
+### Story 8.4: Run the Adopted Portable Service Stack with Controlled Restart and Data Preservation
+
+As the project owner operating the delivered assistant,
+I want a reproducible, versioned service setup that starts and recovers predictably on the Windows desktop,
+So that I can run the private application and isolated demo without depending on development servers or losing stored work during ordinary service restarts.
+
+**Acceptance Criteria:**
+
+**Given** the implemented application and the adopted AD-13 host choice,
+**When** the runtime package is built and configured,
+**Then** supply versioned images and a portable Compose definition for exactly the adopted service roles: cloudflared, private-web, demo-web, api and db, using Docker Desktop Linux containers on the Windows desktop and PostgreSQL 18,
+**And** build the production frontend/backend artifacts with pinned dependencies and identify image/build, API/event and schema versions. Do not run continuous development watchers or rebuild loops as normal service operation,
+**And** separate environment configuration, externally supplied secrets and named working volumes from images/source. Do not bake credentials, uploaded files, private database snapshots or hardcoded owner-specific Windows paths into release artifacts,
+**And** document the required host/software prerequisites and a reproducible configure/start/status/stop procedure, keeping ordinary stop/restart distinct from destructive test-volume reset,
+**And** keep the tunnel route disabled/unpublished until the later protected-ingress work has verified its prerequisites. Missing credentials or route configuration must not trigger an unprotected direct-port fallback. This story's runnable local service package does not depend on provisioning a domain, account or public route.
+
+**Given** the five service roles and their configured networks,
+**When** private and demo requests are routed in the isolated verification setup,
+**Then** private-web serves the private client and its same-origin API route; only api connects to the PostgreSQL working database, while demo-web serves static fictional assets with no private backend or database access,
+**And** restrict the connector to intended web ingress services and reject unmatched host routes. Demo requests cannot use the private API proxy or reach api/db through container networks,
+**And** do not expose pilot database/API/private HTTP host ports as a way around the future Access boundary. Use the isolated qualification setup for local probes without enabling production exposure,
+**And** verify allowed and denied paths through actual requests/network checks, not just Compose declarations or hidden UI controls. Retain host-only cookies and exact-origin/CORS protections; no demo-to-private credential relay is introduced,
+**And** document that actual named-tunnel, JWT, provider handling and browser-trusted external HTTPS evidence remains the subsequent ingress qualification, not a pass inferred from local connectivity.
+
+**Given** a fresh empty test working volume or an existing compatible database,
+**When** services start,
+**Then** enforce database and schema readiness before the API accepts dependent traffic; apply the existing versioned migration procedure without racing multiple migration attempts or claiming ready after failure,
+**And** missing/invalid configuration, unavailable database or unsupported schema yields clear operator diagnostics without credentials/private payloads. Partial startup cannot report the complete application healthy,
+**And** use the adopted unless-stopped policy for long-running services and distinguish service liveness from useful readiness. A health check alone must not be described as automatically restarting a hung process,
+**And** provide an explicit documented diagnosis/restart procedure for a running but unresponsive service; never clear the database or browser storage as the standard repair step,
+**And** reconnect application services after temporary database/network interruption using existing idempotency and source-state contracts, without a second source poller, duplicate operational effects or manual-choice overwrite.
+
+**Given** fictional retained work, an immutable pending/accepted batch and persisted source/cleanup state,
+**When** the API, web services, database container or Docker runtime is stopped and restarted without deleting working volumes,
+**Then** preserve the PostgreSQL working data and resume the existing receipt/revision semantics. Retry of the same accepted batch returns its original authorized receipt, rather than applying another change,
+**And** restore polling/cleanup from their stored state; expired data is denied before use independently of scheduled purge. A container restart cannot restart day retention, ordinary login, a grant or notice freshness,
+**And** preserve the separation between a client still running offline and the unavailable host. Host recovery does not manufacture a source update or immediately establish that pending client work is confirmed,
+**And** test recovery using the actual packaged services and 8.3's fictional evidence path, including database unavailability, delayed response and service restart. Record missing or failed recovery rather than treating container status as proof of application correctness,
+**And** keep normal PostgreSQL transaction/recovery machinery while excluding historical private backups, archived WAL and snapshot-based rollback. Working-volume loss remains the adopted accepted data-loss risk, not something this restart story claims to solve.
+
+**Given** a package update or rollback is prepared,
+**When** the owner follows the deployment procedure in the isolated environment,
+**Then** reuse 5.11/5.12 and AD-14 compatibility checks: identify supported retained clients, required old assets/contracts and migration compatibility before switching server images,
+**And** an image change cannot authorize a browser build switch or force a new-day login into an existing active day. Staged client assets remain distinct from accepted activation,
+**And** failed migration or incompatible rollback stops with preserved data and an explicit recovery path; never automatically downgrade storage, reset volumes or restore a historical private snapshot,
+**And** document the ordinary between-days update check including pending work. This packages the existing release contracts; complete old-client/target-device qualification remains an E8-P obligation.
+
+**Given** the owner intends to operate on the Windows desktop,
+**When** the host starts or undergoes a full reboot,
+**Then** document and test the adopted limitation that Windows sign-in is required before Docker Desktop starts, and verify application-service recovery after sign-in rather than promising unattended pre-login availability,
+**And** record the interval from full Windows restart through sign-in and Docker Desktop startup as service downtime, extending it until the required application services are actually ready. Record observed restart/unavailability, sign-in, runtime-start and application-ready milestones with their time basis; a missing observation remains unknown rather than zero downtime,
+**And** on recovery retain the original source update/retrieval timestamps and show pending/failed freshness until an actual qualifying fetch supports a new retrieval status. Resume polling, pending work and cleanup without extending login/day/data deadlines, including deadlines that passed during the interruption,
+**And** document host-awake requirements and verify that an ordinary screen lock does not itself stop the tested service setup. Sleep/shutdown or home-network loss invokes existing prepared-client offline behavior, not continuous-server availability,
+**And** apply explicit CPU/memory bounds and one OCR job at a time, without inventing a throughput/noise guarantee. Record configured limits and any initialization/resource failure,
+**And** leave measured resource/noise acceptability, full home-network failure/recovery and actual Lenovo/Brave behavior for their target-environment qualification, retaining failures as open blockers where relevant,
+**And** portable configuration must not require an acquired Linux host or paid server. Preserve the stable-origin/single-operational-database rule for any later migration; this story performs no host migration.
+
+**Given** runtime volumes, temporary files, logs and build artifacts,
+**When** their configuration and ordinary recovery are inspected,
+**Then** keep private data in the intended working/temporary locations only, use existing original-file cleanup on success/failure/interruption, and avoid persistent request-body dumps or raw OCR/GPS archives,
+**And** preserve the AD-12 all-copy deletion behavior through packaged restarts; neither logs, images, crash diagnostics nor test artifacts become an undeclared private archive,
+**And** use fictional fixtures for verification and scrub secret-bearing diagnostics before documenting them. Keep test helpers and fault controls out of the production runtime,
+**And** do not claim local cleanup proves Cloudflare/provider erasure or forensic erasure. Provider upload/logging handling still requires the separate adopted qualification before real files.
+
+**Given** a clean isolated test setup and a documented Windows desktop configuration,
+**When** the package is verified,
+**Then** demonstrate reproducible build/start, schema readiness, a real private request through FastAPI/PostgreSQL and isolated demo access using 8.3 fixtures,
+**And** test missing configuration, unavailable database, failed migration, allowed/denied network paths, restart with retained volume, an unresponsive-service recovery procedure and rejected destructive/incompatible recovery,
+**And** test service startup after Windows sign-in/reboot, screen lock, configured resource bounds and single OCR concurrency; record the environment and observed outcomes without extrapolating to an untested host,
+**And** deliberately delay sign-in after a full Windows restart and record the full interruption through actual application readiness. Retain old source data, pending work and a deadline crossing the outage; verify no fresh-data claim from restart, no receipt claim from process startup and no grace period or deadline extension. Test recovery while the source remains unavailable as well as after a successful qualifying refresh,
+**And** provide a concise runbook, version manifest and passed/failed/blocked/not-run report with links to sanitized evidence. Never report a route published, Access configured, noise acceptable or E8-P passed based solely on this package,
+**And** report any conflict with the adopted topology or runtime limitations for an explicit owner decision; do not silently change hosting/security/backup choices to make startup pass.
+
+**Traceability:** AD-13 portable five-service runtime and desktop restart/resource obligations; AD-3/4 actual application/PostgreSQL packaging, AD-2/5/7/8 stored-state and receipt continuity, AD-6 temporary import handling, AD-10/11 private scope/writer preservation, AD-12 cleanup/no private backups and AD-14 compatible releases. Supporting FR-1/17/18/20/24/25 and NFR-2/3/4, fullstack/database delivery and E8-D reproducibility; UX-DR23/37/44 remain preserved by the packaged features. All AD-1–AD-14 remain unchanged.
+
+**Dependencies:** Implemented application and separate demo, 8.3 repeatable fictional fullstack evidence, E5 release/recovery/settlement contracts through 5.13 and E7 full lifecycle. An isolated local setup suffices without later public ingress or assessment scheduling. Host/software availability is an execution prerequisite to record explicitly, not permission to simulate a successful reboot test.
+
+**Size boundary:** The adopted service package, local network boundaries and operator start/restart/update runbook with bounded fictional recovery evidence. No DNS/tunnel/Access provisioning, live publication, provider-policy approval, full resource/noise qualification, field evaluation or new business/synchronization logic. Protected external ingress and assessment availability remain separate required E8 slices; no pilot permission is granted here.
+
+**Qualification boundary:** Contributes runtime/reproducibility evidence to E8-D and specific recorded host cases to later E8-P assessment; neither gate passes automatically. Actual private ingress, provider handling, target-device recovery, source behavior and release qualification remain mandatory before pilot use; E8-E follows afterward. The 5.4/7.1 timing decisions remain open. This is a planning draft only: no services, accounts, containers, migrations, provisioning or deployment are started in this step.
+
+**Approval:** Approved by the owner on 2026-09-27 with the full-Windows-restart interval through sign-in and Docker Desktop startup explicitly documented as downtime; actual service readiness determines the end of the interruption. Recovery must resume work without presenting retained source data as fresh or extending deadlines. Added delayed-sign-in, unavailable-source and deadline-crossing test cases with observed timing milestones. Planning approval only; this approved copy is canonical.
+
+### Story 8.5: Establish Protected External Access and Verify the Private/Demo Trust Boundary
+
+As the project owner accessing the assistant from an ordinary browser,
+I want the private host protected by the adopted outer access gate and independent app login, with the fictional demo separate,
+So that remote access does not expose operational records or undermine offline access and deletion rules.
+
+**Acceptance Criteria:**
+
+**Given** the tested 8.4 package and owner-confirmed domain/account/private identity choices,
+**When** the external route is prepared in a later authorized implementation/deployment phase,
+**Then** configure the adopted named Cloudflare Tunnel with stable distinct private and demo hostnames, intended service destinations and an explicit unmatched-route rejection,
+**And** protect the entire private hostname, including API, auth, import and asset paths, with an owner-only Access application before enabling/publishing its route. Verify the expected Access enforcement at the private tunnel route; a protected login page alone is insufficient,
+**And** use the owner's explicit identity restriction with the adopted email-OTP candidate, not a permissive email-domain rule or public registration. Keep account/domain/identity values unresolved until supplied; do not invent them or buy a service as part of story planning,
+**And** preserve the separate public no-login fictional demo. It has no private backend/database route, shared credentials or authenticated relay, including through alternate paths/hostnames,
+**And** do not expose pilot database/API/private HTTP host ports, add browser service tokens or disable the gate as a workaround. Missing prerequisites or failed access checks leave the affected route unavailable rather than silently public.
+
+**Given** a request reaches the private service boundary,
+**When** access claims and app authority are evaluated,
+**Then** validate the Access JWT signature, expected issuer, intended application audience and expiry before relying on its claims, while retaining the separate E1 app session, CSRF/exact-origin controls and owner/day authorization,
+**And** reject absent/invalid/expired/wrong-audience credentials, spoofed identity headers and direct-origin bypass attempts without disclosing private payloads. Passing Access alone does not sign in to the app, authorize another day or restore revoked authority,
+**And** keep host-only secure app cookies and no credentialed demo-to-private CORS. Neither successful demo access nor a sibling hostname is private authority,
+**And** verify browser-trusted HTTPS from an ordinary external PC browser and the intended tablet/browser over its mobile connection without certificate-warning bypasses. A trusted secure context does not by itself prove usable positioning or wake behavior,
+**And** record observed allowed/denied results against the actual route, not only dashboard configuration or local mocks, using fictional test data before any real operational files.
+
+**Given** the actual Access application/policy and global identity session configuration,
+**When** the owner prepares a concrete test day and evaluates access coverage,
+**Then** start from the adopted one-month policy/session target with compatible identity settings, inspect hidden shorter overrides and test the actual backend-verified token expiry through 5.5,
+**And** compare actual remaining lifetime with the existing bounded day/settlement deadline and tested margin, keeping plan/data/assets readiness, current connectivity, app-session expiry and data expiry distinct. Configuration labelled one month is not proof of sufficient coverage,
+**And** exercise deliberate renewal, cancellation, failure and insufficient returned lifetime. Renewal cannot change app_authenticated_at, grant/writer authority, stored deadlines or the validity of 5.4/7.1 timing evidence,
+**And** keep cached verification labelled with its original check time. Gate/host restart cannot refresh it, create a grace period or turn an old source result into fresh information.
+
+**Given** an authorized prepared active test day and an actual gate expiry/rejection or host/network interruption,
+**When** client source/synchronization requests fail and later recover,
+**Then** exercise existing 5.5/5.6 handling of Access redirects, HTML login responses, unexpected content types, network/CORS uncertainty and genuine application responses. None of these error pages may become an app asset or successful receipt,
+**And** preserve permitted local operation, manual choices, pending work and original expiry; show unavailable updates and distinguish network restoration, valid source refresh and matching server acceptance,
+**And** do not force login navigation during driving. Deliberate renewal waits for permitted interaction and does not interpret unknown role/speed as standstill,
+**And** test logout ordering: revoke the app session before Access logout; if a closed gate prevents pending revocation, renew Access while private content remains locally locked, then process revocation before other private traffic. Access login alone never unlocks retained work,
+**And** include a second tab, stale callback and lost response so renewal/logout cannot drop pending revocation, duplicate accepted work or restore locked content,
+**And** use 8.4's recorded downtime distinction when testing host restart: sign-in/runtime wait is a real interruption, and a restored route does not establish fresh sources or extend any deadline.
+
+**Given** private data would traverse Cloudflare and local services,
+**When** provider handling is assessed before using real files,
+**Then** inventory the actual upload/TLS path, edge caching, request/body logging, diagnostics, archival and relevant retention/configuration for the selected service/account; support conclusions with dated authoritative provider documentation, actual settings and controlled fictional probes where observable,
+**And** bypass edge caching for the private host, apply no-store to private/API/auth responses, and disable private body capture/archival. Preserve AD-2's separately verified nonpersonal offline assets without caching auth redirects or private API bodies as assets,
+**And** distinguish observed configuration and documented provider commitments from properties the project cannot inspect or verify. Successful local deletion and a no-store header do not prove provider erasure,
+**And** record whether AD-6/AD-12 can be met for real uploads and retained metadata, with any unresolved limitations explicit. Do not send real operational files until this boundary is adequately established for the adopted requirements,
+**And** if the requirements cannot be met or evidence is insufficient, block real-file/pilot use and raise a separate owner solution decision about the route, including the adopted Tailscale fallback candidate. Do not silently switch architecture, relax deletion requirements or claim that fictional testing qualified private processing,
+**And** keep tokens, OTPs, private owner identity and request payloads out of repository/screenshots/log excerpts; use sanitized references to configuration evidence.
+
+**Given** the external private/demo routes are enabled for controlled fictional verification,
+**When** the owner operates or disables the ingress,
+**Then** provide a runbook for credential placement/rotation, allowed identities, hostname-to-service mapping, status checks and closing the route without deleting working data,
+**And** a failed tunnel/gate or maintenance action leaves prepared-client offline behavior intact within existing authority; no alternate unprotected URL or automatic second operational database is introduced,
+**And** keep deployment status separate from application and pilot readiness. Record exact browser/environment and observed downtime/recovery rather than promising uninterrupted access,
+**And** demonstrate ordinary no-login PC demo access externally without exposing private configuration or requiring the assessor to authenticate as the pilot owner. The assessment availability period and full delivery package remain later work.
+
+**Given** the configured route, fictional fixtures and actual gate/client behavior,
+**When** the story is verified,
+**Then** report passed, failed, blocked and not-run cases for owner Access plus app login, unauthorized identity, invalid/expired/mismatched JWT, spoofed headers, private API paths, unmatched hosts, direct bypass and demo-to-private attempts,
+**And** test actual HTTPS on PC and target mobile-connected tablet, actual token lifetime/renewal and expiry while local work exists, blocked pending logout, HTML responses and stale callbacks; inspect private cache behavior without retaining sensitive evidence,
+**And** distinguish controlled short-lived expiry testing from observation of the production policy's actual returned expiry. No altered client clock counts as proof of token renewal or 5.4/7.1 timing eligibility,
+**And** attach the provider-handling conclusion, unresolved findings, route-disable procedure and prerequisites still needed for E8-P. An accessible URL and a successful login are not sufficient to mark the whole story or pilot gate passed,
+**And** run verification using the existing app/backend/database contracts without adding an alternate session scheme, token vault or unrelated database entities; fixes to 5.5/5.6 remain in those shared implementations.
+
+**Traceability:** AD-13 named tunnel, whole-host owner-only Access before publication, provider trust boundary, cache policy, external HTTPS and ordinary-browser delivery; AD-10 independent app authority/logout and public demo isolation; AD-2/5 offline assets and receipt correctness; AD-6/12 upload handling, original deadlines and no private archives; AD-11 writer preservation and AD-14 coherent offline builds. FR-1/17/20/24/25, NFR-2/3/4 and UX-DR23/37/38/44; 5.5/5.6 supply client behavior while this story establishes and exercises the actual outer gate. All AD-1–AD-14 remain unchanged.
+
+**Dependencies:** 8.4 packaged service/network boundaries, E1 session/revocation behavior through 1.2, 5.5 verified access coverage and 5.6 reconnect, plus 8.1/8.2 isolated demo. Actual owner account/domain/identity, target equipment and later deployment authorization are execution prerequisites. No later E8 story is required to verify the protected route with fictional data; missing prerequisites remain visibly blocked rather than guessed.
+
+**Size boundary:** One protected external ingress and its private/demo/provider boundary, with actual Access lifetime/logout integration. No replacement authentication system, alternate-host migration, all-source/device qualification, full day field trial or final E8-D/P/E approval. Public assessment scheduling and complete delivery documentation are separate required work. Implementation tasks may separate configuration, application wiring and evidence without weakening the single boundary.
+
+**Qualification boundary:** Supports externally accessible E8-D delivery and supplies the access/provider subset of E8-P evidence. Full E8-P still requires actual import/sources, sensor/interaction, whole-day recovery/expiry, resources/noise and releases; E8-E follows after E8-P. The 5.4/7.1 timing basis remains open. This is only story planning: no account, DNS, route, Access policy, service, upload, provisioning or deployment is created or changed now.
+
+**Approval:** Approved by the owner on 2026-09-27 as scoped, emphasizing that provider handling of uploaded files must be documented before real shifts are used; a functioning Access route alone does not qualify pilot use. Planning approval only; this approved copy is canonical.
+
+### Story 8.6: Assemble the Assessable IBE160 Delivery and Record the E8-D Checkpoint
+
+As the project owner preparing assessment,
+I want a versioned delivery package with repeatable demonstrations, traceable evidence and an honest requirement-status report,
+So that the assessor can inspect the implemented work and its limitations without being given private access or a false claim of pilot readiness.
+
+**Acceptance Criteria:**
+
+**Given** the implemented release and evidence produced by the owning stories and 8.1–8.5,
+**When** the delivery package is assembled,
+**Then** identify the code revision, application/build/schema and fixture versions, public demo entry, setup/run instructions, test/evidence locations and the known limitations of that exact release,
+**And** provide a concise ordinary-PC walkthrough for the basic fictional day, notice/network/position/speed scenarios, explicit restart and labelled PDF, with expected observations and recovery from a failed demo load,
+**And** link separately to the private fullstack evidence from 8.3 and reproducible authorized test-environment instructions. Public static demo success must not stand in for React/FastAPI/PostgreSQL evidence,
+**And** keep assessor use possible without pilot-owner credentials, operational files or physical GPS. An authorized developer's private-stack reproduction procedure is distinct from the public assessor walkthrough,
+**And** record when evidence was produced and which release it applies to. Changed contracts/builds require targeted revalidation; an old passing report is not automatically valid for the packaged release.
+
+**Given** FR-1–25, NFR-1–4, approved UX requirements and AD-1–AD-14,
+**When** delivery status is mapped to evidence,
+**Then** include every requirement with its owning story, implementation status, evidence reference, tested environment/input type and any unresolved limitation or decision,
+**And** distinguish implementation from verification, and verification outcomes as passed, failed, blocked or not run. Mark fictional source/sensor inputs, controlled faults and actual observations explicitly,
+**And** preserve the specific limits of each result: available source coverage is not all-clear, a single successful OCR fixture is not representative format qualification, browser simulation is not Lenovo evidence, a functioning Access route is not provider approval, and source success is not confirmed server saving,
+**And** include the open 5.4/7.1 time-basis decision and its enforced restrictions, plus any source/device/provider/role/recovery blockers. Do not resolve them by wording, change V1 scope, or present a manual/demo substitute as the required automatic capability,
+**And** retain coverage of E6 mentor paths and the E7 complete lifecycle in the evidence index, even where the public demo exposes only a bounded subset. Missing evidence remains visible rather than being omitted from the matrix.
+
+**Given** the saved development log, adopted decisions, actual code changes and test records,
+**When** the AI-use and reflection material is prepared,
+**Then** describe the tools/workflows used, human decisions and review, observed defects/corrections, quality-assurance methods and their limitations, with traceable examples drawn from the real project record,
+**And** cover the process, challenges, chosen solutions and relevant ethical/technical consequences without inventing hours, pilot results, independent reviews or successful checks that did not occur,
+**And** separate approved planning from implemented behavior and executed evidence; an approved story or architecture decision is not a passed test,
+**And** identify unresolved course-format/submission instructions and use owner-confirmed applicable requirements before final handoff. Historical date references in the brief are not a confirmed deadline, and the old 40–160-hour range is not an available budget,
+**And** preserve private information boundaries when selecting examples. Do not publish raw operational records, tokens, private identity/configuration, uploaded originals or unrestricted conversation/log extracts merely to document AI use.
+
+**Given** the separate public demo and the course's assessment-access requirement,
+**When** the owner prepares the availability plan,
+**Then** record the agreed assessment period including the applicable Christmas period, responsible operator, intended PC browser/environment and a procedure for reporting/recovering access failures. Exact dates/environment must come from owner/course clarification, not an invented deadline,
+**And** test a fresh external ordinary-PC browser session without pilot login against the actual demo link, including the documented scenario/restart/export path and separation from the private route,
+**And** document the 8.4 Windows restart/sign-in/Docker startup interruption and its effect on demo availability, with recovery responsibilities. An untested uptime promise is not an availability plan,
+**And** keep scheduling unknowns marked unresolved and the affected acceptance incomplete until clarified. They do not block preparation of other package contents or justify publishing private access,
+**And** no automated course message, credential handoff or submission is implied by this story plan; the user supplies/authorizes external coordination when needed during execution.
+
+**Given** report text, screenshots, PDFs, logs and source/run artifacts intended for assessment,
+**When** the shareable package is checked,
+**Then** verify that public examples and demonstration data are fictional or appropriately anonymized, with explicit simulation labels and no exact private operational identifiers or secrets,
+**And** preserve the distinction between a private user-held PDF and a shareable assessment PDF. The private export exception does not authorize identifiable publication,
+**And** link to sanitized evidence rather than archiving private database dumps, originals, raw movement tracks or hidden private copies. Documentation does not create an exception to AD-12 expiry,
+**And** check links, version references and run instructions by following the documented paths against the release. Record broken links, non-reproducible cases and missing prerequisites as findings rather than marking the package complete from file presence alone,
+**And** keep source/OCR/device/provider evidence provenance intact when summarizing it; do not strip limitations to produce a stronger delivery claim.
+
+**Given** the versioned package, requirement matrix and observed demonstration/fullstack results,
+**When** the E8-D checkpoint is presented for owner review,
+**Then** state whether the running delivery and its evidence meet the demonstrability boundary, what remains pending/blocked and which specific failures prevent an affirmative E8-D outcome,
+**And** require actual repeatable public demo and real private fullstack/database evidence for an affirmative demonstrability claim; screenshots, prepared documents or a deployed URL alone are insufficient,
+**And** distinguish a demonstrable delivery with explicitly recorded operational limitations from a fully satisfied V1. An unresolved required feature remains unresolved even if the course demonstration can run,
+**And** record the owner-reviewed E8-D outcome and evidence version separately from E8-P and E8-E. A negative or incomplete E8-D result remains so until the relevant findings are resolved and checked,
+**And** no E8-D decision authorizes real shifts. E8-P still requires the actual source/import/device/access/host/recovery/release gates, and E8-E still requires the later three-workday evaluation. Neither is marked passed by assembling this package,
+**And** preserve capacity/delivery uncertainty and escalate any requested scope change to its own explicit decision. Do not turn missing time into silent removal of requirements.
+
+**Traceability:** E8-D approved delivery boundary; FR-25 ordinary-PC assessment and SM-5, explicit fullstack/database requirement and integrated FR-1–24 evidence; NFR-1–4 with actual limits retained. UX-DR35/37/38/44 and relevant evidence for the remaining approved UX inventory; adopted AD-1–AD-14 remain unchanged. Product Brief addendum records AI-use/quality-assurance and reflection obligations; PRD C-2/C-3 identify assessment-period/environment clarification. This story packages existing evidence and records demonstrability, not a new product capability or replacement pilot gate.
+
+**Dependencies:** Implemented 8.1/8.2 demo, 8.3 private fullstack evidence, 8.4 reproducible runtime and 8.5 protected/private versus public access evidence, plus existing feature/qualification records. Later source/device/integration reports may still be pending and must be listed honestly; they are not a hidden future-story dependency for recording an E8-D outcome. Unknown assessment dates/browser block only the affected availability acceptance until clarified.
+
+**Size boundary:** One versioned delivery/evidence index, concise walkthrough/run references, requirement-status matrix, grounded AI-use/reflection material and explicit E8-D decision record. Reuse existing reports/runbooks rather than recreate all tests or write a second architecture. No new application feature, full E8-P test campaign, real-shift evaluation, automatic external submission or new private archive. This story cannot be marked fully delivered while its own required availability/evidence checks remain unresolved.
+
+**Qualification boundary:** E8-D assesses demonstrability only. Actual import/source consolidation, target-device qualification, integrated host/offline/recovery/releases, the E8-P decision and E8-E field evaluation remain subsequent separate work. The 5.4/7.1 time basis stays open until its explicit solution decision. This is story planning: no package is submitted, no E8-D outcome is issued and no implementation, tests, provisioning, deployment or readiness/final-validation workflow is started now.
+
+**Approval:** Approved by the owner on 2026-09-27 as scoped: E8-D requires a functioning demonstration and documented fullstack testing, with explicit failed, blocked and not-run requirement status. It does not authorize actual shifts. Planning approval only; this approved copy is canonical.
+
+### Story 8.7: Qualify the Implemented Import and Source Chain for the Pilot Cases
+
+As the pilot owner,
+I want a reproducible report showing which representative imports, dated trips and original-source notices the implemented release actually handles,
+So that the import/source portion of the pilot decision rests on observed capability and explicit gaps rather than successful fixtures or early candidate investigations alone.
+
+**Acceptance Criteria:**
+
+**Given** the early reports from 2.1, 2.2 and 4.1 and the implemented import, timetable and notice adapters,
+**When** the bounded qualification inventory is prepared,
+**Then** identify the tested release, adapter/tool versions, configuration, source endpoints/observation dates and sanitized reference cases, linking reusable prior evidence and checking whether it still applies,
+**And** cover representative text/two-column/multipage/scanned PDFs, ordered JPG/PNG groups, poor or incomplete inputs, dated trips for lines 20/24/28/42 and the required notice categories from 4.1. List missing cases rather than silently narrowing the inventory,
+**And** use independently checked expected dates, times, activities, order and source references; an output produced by the system under test is not its own answer key,
+**And** separate actual source/layout observations, historical evidence, labelled synthetic edge cases and untested cases. The early investigations remain early work; this story reuses them and checks the implemented chain rather than postponing or repeating all discovery.
+
+**Given** representative anonymized files with checked expected facts and a permitted processing environment,
+**When** they pass through the actual private UI, backend extraction/OCR and persisted draft/review flow,
+**Then** compare extracted fields and activity/page order against the reference and report correct, incorrect, missing and uncertain values, including errors only the driver can detect; do not invent an unapproved accuracy threshold,
+**And** test all relevant scanned pages, missing/truncated parts and several ordered JPG/PNG files added to one draft without duplicates or loss of corrections. A successful OCR process cannot imply a complete or confirmed plan,
+**And** verify side-by-side PDF review while the original is available, preserved edits after reopening with a clear request to select the original again, visible unknowns, and explicit confirmation of only the revision actually reviewed. A concurrent draft change requires renewed review,
+**And** exercise failed/cancelled/interrupted extraction and recovery cleanup in the packaged implementation. Known drafts/confirmed plans survive; temporary originals/renderings/processing copies are removed as required by AD-6, with storage/swap limitations reported honestly and no originals in persistent browser caches, logs or queues,
+**And** document provider handling under 8.5 before routing real shift files through external ingress. Local success or anonymization alone is not proof of provider handling, and real operational files are not needed for this bounded qualification.
+
+**Given** checked representative trip facts and the adopted targeted Entur queries,
+**When** the implemented matcher prepares the whole working day, including later trips and separate work parts,
+**Then** compare actual returned identifiers, route/direction, endpoints, ordered stops and date/time evidence against the reference; document the fields and their observed/documented meaning rather than assume a service-date field exists,
+**And** test Friday 25:30 as Saturday 01:30 while preserving Friday service date and working-day order through correction, saving and reopening. Include several Saturday 01:30 candidates and require evidence-supported identity or explicit ambiguity rather than choosing by displayed time alone,
+**And** distinguish unique match, multiple candidates, successful no match, incomplete response and source failure. Preserve manual corrections when a new or delayed result disagrees, showing source values and the difference instead of silently replacing edits,
+**And** verify per-trip preparation coverage and missing stop information across the whole day. Partial coverage never becomes whole-day-ready; a driver-confirmed unmatched trip remains missing source/stop facts, with no fabricated progression or verified physical bus number,
+**And** include repeated-stop occurrences in the checked identity cases. A name or proximity alone cannot identify the intended occurrence; source updates cannot silently alter the confirmed plan or active trip context.
+
+**Given** the actual automatic notice adapter and suitable Svipper originals during a stated observation period,
+**When** the implemented retrieval/normalization/relevance chain is compared with those originals,
+**Then** record coverage separately for each pilot line and available categories, tracing original source to incident identity, version/status, applicability and actual client presentation. Neither a matching headline nor a successful empty fetch proves coverage,
+**And** verify full/delta baseline, pagination, stable IDs, supplied validity/update metadata, relevant line/direction/stop references and source access using the qualified semantics from 4.1. Missing update time remains unknown and separate from successful retrieval time,
+**And** measure observed fetch intervals and available source freshness evidence separately; central polling targets about two minutes within provider limits, without a two-minute publication-to-display guarantee,
+**And** verify updates, explicit endings and uncertain disappearance against available source evidence, plus repeated/out-of-order/partial/failed responses. Retained information is not erased or falsely closed, and fetch time/content hashes do not manufacture source ordering,
+**And** where a notice can concern several occurrences of one stop, select a particular occurrence only with documented time or other source evidence; otherwise retain uncertain applicability. General diversion text cannot create a replacement stop sequence,
+**And** distinguish an actually verified absence of relevant notices from no suitable observation opportunity. Missing live update/ending/category examples remain unqualified even when labelled fixtures demonstrate correct application behavior; planned-notice coverage does not establish acute or road-by-road deadhead coverage.
+
+**Given** actual adapters and the existing failure contracts,
+**When** a bounded set of source timeouts, access/rate-limit failures, malformed/partial responses and delayed responses is exercised safely,
+**Then** record which failures were observed and which were induced at the adapter boundary; do not deliberately overload a provider or present injected responses as actual source observations,
+**And** check that source-specific status distinguishes no initial data, retained potentially stale data, network recovery awaiting a valid fetch and failed refresh. A successful source fetch is not a server-storage receipt,
+**And** report the tested sample, durations and limitations, including unavailable cases. This is not the full-day offline/device/host test campaign and cannot claim those gates passed.
+
+**Given** the case results and reproducible evidence,
+**When** the consolidated import/source report is completed,
+**Then** give passed, failed, blocked or not-run outcomes per case with expected versus observed result, input provenance and evidence reference, and conclude what works, what requires driver checking/correction and what currently does not work,
+**And** map each gap to its requirement and owning implementation story, distinguish a finished investigation from a passed import/source gate, and provide explicit blockers/next decisions for E8-P. Completing an honest negative report does not qualify the capability,
+**And** raise inadequate import, timetable or notice coverage for a separate owner solution decision. Do not remove V1 requirements, substitute manual/demo data for automatic capability, choose a new provider/OCR stack independently or introduce bulk NeTEx/GTFS without the AD-7 decision,
+**And** retain only sanitized case IDs, minimum dated public-source evidence, aggregate findings and reproducible generic/fictional fixtures. Do not create a permanent private or anonymized operational quality archive, raw OCR/GPS record or retention exception; transient associations follow AD-6/12,
+**And** identify which release/configuration the conclusion qualifies and which changes require affected checks to be repeated. E8-D status can reference these findings, but E8-P still requires the separate device, durability, access/deployment and release gates; E8-E remains later actual-shift evaluation.
+
+**Traceability:** E8-P import/source gate; FR-2–5, FR-12–14/18/19 and source prerequisites for FR-15/17/20; NFR-2/3/4; UX-DR4–9/19–21/23/42–44. AD-6 reviewed import/transient originals, AD-7 qualified dated matching and automatic source coverage, AD-8 source lifecycle, AD-5 identity/provenance, AD-12 private evidence limits and AD-13 deployed import/provider boundaries. All AD-1–AD-14 remain unchanged. No sensor accuracy, audio or mounted-readability result is claimed here.
+
+**Dependencies:** Executed 2.1/2.2/4.1 investigations, implemented E2 import/review/matching/day preparation and E4 retrieval/lifecycle/relevance, plus 8.4 packaged runtime and the applicable 8.5 provider/access evidence. Requires representative anonymized references and permitted source access. Missing inputs/evidence are explicit blockers, not fabricated passes. No future E8 story or actual working-shift pilot is needed to complete this bounded report.
+
+**Size boundary:** One consolidated import/source evidence report with targeted integration checks reusing existing harnesses, reference cases and reports. No new production importer/source architecture, all-E2/E4 regression rewrite, unlimited live observation or automatic remediation. Predetermine a bounded case inventory/observation window; if execution needs splitting, preserve every required case and the consolidated decision, with missing evidence visibly incomplete. Functional repairs stay with their owning stories and require rechecking the affected evidence.
+
+**Qualification boundary:** Supplies only import/source evidence for E8-P, never pilot permission by itself. The 5.4/7.1 timing decision and other E8 gates remain open. This is story planning; no source research, uploads, queries, implementation, actual tests, provisioning, deployment or readiness/final-validation workflow is executed now.
+
+**Approval:** Approved by the owner on 2026-09-27 as scoped: the report must distinguish actually observed source/import coverage from synthetic tests and untested cases. Negative findings require a separate solution decision before they can be considered resolved. Planning approval only; this approved copy is canonical.
+
+### Story 8.8: Qualify the Implemented Driving Experience on the Mounted Lenovo Tablet
+
+As the pilot owner,
+I want observed evidence of sensing, interaction, readability, theme, screen-wake and sound behavior on the actual mounted Lenovo/Brave setup,
+So that the device portion of pilot qualification reflects the delivered application and its real limits rather than desktop simulations or browser API success alone.
+
+**Acceptance Criteria:**
+
+**Given** the actual target tablet and implemented release, with existing 3.1, E3, E4 and E6 evidence,
+**When** a bounded device qualification protocol is prepared,
+**Then** record actual tablet variant, OS/Brave/app versions, mount/viewing position, viewport/text scale, permissions, display/power/audio settings, trusted HTTPS and tethering arrangement, plus the case inventory and conditions actually available,
+**And** reuse earlier evidence only where its environment/contracts still apply, and record the configured position/speed quality rules and their 3.1 evidence; planning approval alone is not qualified sensor evidence,
+**And** separate actual browser observations, independent physical observations, controlled injected conditions and unavailable/not-run cases. Fictional plans/notice inputs may test the actual UI but cannot establish source coverage or real sensor performance,
+**And** conduct pre-pilot controlled observation without operational reliance on the unqualified app and without requiring the driver to operate it while moving. Use a separate observer or unattended capture; test taps/gestures while stationary or in an explicitly labelled controlled setup. This is not an actual-shift E8-E trial.
+
+**Given** reliable observations or loss of usable position and/or speed on the target device,
+**When** the implemented adapter and shared movement policy process acquisition, ageing, interruption and recovery,
+**Then** test permission denial/revocation, genuine initial startup, valid zero/low/moving speed, null/stale/rejected values, separate position/speed loss and network-only loss, recording what the browser actually delivers,
+**And** include at least five minutes without a new usable observation after valid position and speed. Record last valid sample time, separate position/speed freshness expiry, qualified outage onset, browser reports or silence and recovery; the five-minute exception never makes an old value usable,
+**And** verify immediate driver restriction for reliable speed above zero, distinct visibly labelled startup/outage exceptions with Hastighet ukjent, the existing five-minute boundary and immediate current-speed rules on reliable recovery. Unknown speed is not standstill,
+**And** verify that reload, suspension, clock changes, stale zero or unreliable storage cannot manufacture startup eligibility or reset an established outage interval. Unsupported elapsed-time evidence remains explicit and cannot unlock by guesswork,
+**And** qualify direct previous/next buttons only under the 3.1-defined position-loss conditions: unknown speed alone and network loss alone cannot enable them. Each press moves at most one stop within the selected trip's known list, with manual provenance retained.
+
+**Given** an active trip with a checked ordered stop list and independently observed actual departures/passages,
+**When** the integrated progression display is measured on the mounted device,
+**Then** measure distance travelled from the independent reference event to the displayed progression change, including passage without stopping, and report individual distances and deviations against the at-most-100-m target,
+**And** document the reference method, timing alignment and measurement uncertainty. Neither the app's own detection nor its unqualified position stream can independently validate itself; insufficient reference precision leaves the case inconclusive rather than passed,
+**And** include representative close stops (the reported approximately 250-m scenario where available), shared/nearby stops, repeated occurrences of one stop, noise and delays. Do not claim that the sample covers every route or that 250 m is a verified network minimum,
+**And** test loss/recovery and a later-stop reacquisition: preserve the visible observation gap and manual corrections, identify the correct occurrence with supported evidence, and never count unobserved passages as having met the 100-m target,
+**And** test final arrival separately from return start when both use the same physical stop. Waiting, repeated position, noise, timetable and ten seconds cannot start the return; qualified GPS loss requires the separate Next press after registered final arrival,
+**And** report false advancement, missed/delayed advancement and unsupported cases alongside successful ones. A failed target remains failed even when uncertain/manual fallback works.
+
+**Given** the approved driving, notice and mentor views on the mounted tablet,
+**When** glance/readability and controlled interaction checks are performed,
+**Then** check the one-to-two-second glance requirement under stated conditions, preserving at-stop/between-stop ordering and dominant stop, route/destination, clock, Menu and uncertainty; static screenshots or calculated contrast alone cannot establish glance readability,
+**And** cover daylight/direct sun, darkness and tunnel/light transitions where safely available, long names, text enlargement, landscape fit, missing/uncertain data, two important headings and a visible indication of additional notices. Untested lighting/fit conditions remain explicit gaps; mock-frame dimensions are not fixed breakpoints,
+**And** test forgiving touch targets with the actual mounting and relevant gloves/vibration conditions without requiring precise gestures or moving-driver operation. Report missed/accidental actions and clipped critical content, not only visual preferences,
+**And** check keyboard/focus and accessible labels/stop roles, warning descriptions, non-color status and meaningful announcements without announcing every poll/countdown second. Movement closes restricted content immediately and never leaves focus hidden,
+**And** verify action permission again at commit, including a role change to Jeg kjører while a guiding action is pending. Failed/uncertain persistence and emergency recovery with unknown actual role retain driver restrictions; an old guiding copy is not permission to reopen controls,
+**And** mentor A–B–A/context changes preserve separate periods and require fresh trip/stop context; no display or role transition proves a physical activity was completed. Reuse the owning E6 case matrix rather than invent a new role policy.
+
+**Given** implemented manual Day/Night, Auto and active-trip screen-wake support,
+**When** their behavior is observed across bright/dark conditions, foreground return, lock, restart and relevant power-saving settings,
+**Then** document the actual Auto mechanism, permissions, response and stability, including flicker or unavailable support. Manual choice persists until explicit Auto; a working manual fallback cannot qualify unsupported automatic adaptation,
+**And** keep theme controls available under the adopted policy without changing trip, movement locks, countdown, notice state or private access,
+**And** measure actual display-awake behavior over a stated duration, distinguishing a browser-reported wake lock from a screen that actually stays awake. Record release, reacquisition, unavailable support and late callbacks after lock/context change,
+**And** foreground return cannot turn saved measurements into fresh data or create startup eligibility; a held wake resource does not prove continued GPS delivery,
+**And** do not claim background tracking/audio, native support, ambient sensing or uninterrupted operation from a foreground test, and do not introduce hidden-media or OS-policy workarounds.
+
+**Given** implemented notice sound behavior and clearly labelled test receipts on the actual device,
+**When** eligible new notices and silent control cases are exercised,
+**Then** distinguish new relevant receipt during the ongoing trip from updates, replay, preparation/next-trip context and old notices becoming relevant later; only the approved new-receipt case is eligible for a short discreet chime,
+**And** compare browser playback outcome with independently observed audibility under stated output/volume and representative ambient conditions, including blocked/denied audio and more than one eligible notice. Record missed, duplicate or distracting sounds without inferring driver hearing or understanding,
+**And** test activation before use, suspend/foreground return, restart and uncertain playback outcome: later activation or recovery cannot replay old audio or produce a catch-up burst,
+**And** verify visual warnings remain available, sound never opens detail or changes seen/registered state, and device sound results do not establish live source coverage. An API success, visual fallback or untested audio path cannot be counted as an audible pass.
+
+**Given** the measured device results and unresolved cases,
+**When** the qualification report is completed,
+**Then** provide passed, failed, blocked and not-run outcomes per case with environment, expected/observed behavior and evidence type; separately state demonstrated support, conditional support, unsupported behavior and remaining uncertainty,
+**And** link failures to their owning requirements/stories and require an explicit owner solution decision for material sensor, progression, Auto, wake, sound or usability gaps. An honest completed report is not a passed device gate, and fallback never silently removes an adopted requirement,
+**And** retain sanitized timing/distance/error summaries and necessary nonprivate screenshots, remove temporary raw position observations after analysis and create no permanent GPS, private shift or performance archive under AD-12,
+**And** identify which device/build/settings the evidence qualifies and which changes invalidate affected checks. Keep the 5.4/7.1 time-basis decision unresolved; device-clock tests do not prove server eligibility,
+**And** contribute only the operational-device portion of E8-P. Source evidence, full-day durability/access/host/release checks and the explicit E8-P decision remain separate; E8-E follows permission to begin actual-shift evaluation.
+
+**Traceability:** E8-P operational-device gate; FR-6–11/15/16 and device integration of FR-12–14/17/20, with NFR-1–4. UX-DR10–25/26–31/38–41/44 and DESIGN mounted contrast/fit/touch requirements. AD-9 sensing, one operational engine and role rules; AD-2/5/10/11/12 state, access, uncertain recovery and minimal evidence; AD-13 target HTTPS and AD-14 compatible recovery. All AD-1–AD-14 remain unchanged. Source completeness and server-timing proof are not supplied by this report.
+
+**Dependencies:** Executed 3.1 quality investigation and implemented E3 driving/theme/wake, E4 presentation/audio through 4.8 and E6 roles/recovery through 6.10, with their existing E5 foundations; applicable 8.5 trusted private access. Actual tablet/mount and a safe observation opportunity are required. Use known test plans/labelled notices where appropriate without pretending they are live source observations. No later E8 story or actual pilot shift is a prerequisite for this bounded pre-pilot report.
+
+**Size boundary:** One consolidated device qualification report and targeted integrated checks using existing probes/harnesses and prior feature evidence; no new sensing/role engine, browser migration, native wrapper, all-feature regression rewrite or three-workday trial. Fixes remain with owning stories. Set a bounded case inventory and observation sessions; unavailable conditions remain gaps. If execution needs splitting, retain every requirement and the consolidated device decision rather than expanding the test campaign indefinitely or dropping cases.
+
+**Qualification boundary:** Planning only. No hardware observations, moving tests, implementation, provisioning, deployment or readiness/final-validation workflow are performed now, and no E8-D/P/E outcome is issued.
+
+**Approval:** Approved by the owner on 2026-09-27 as scoped, emphasizing measurement of the 100-m target against independently observed passage/departure and a clear distinction between actual mounted Lenovo/Brave behavior and simulated states. Planning approval only; this approved copy is canonical.
+
+### Story 8.9: Qualify Whole-Day Offline Continuity, Authority Recovery and Final Settlement
+
+As the pilot owner,
+I want observed evidence that a prepared day survives disconnection, interruption, authority changes and closure without losing permitted work or reviving deleted data,
+So that operational continuity and its limits are established before actual-shift reliance.
+
+**Acceptance Criteria:**
+
+**Given** the implemented E1–E7 flows, actual Lenovo/Brave client, intended private ingress and real FastAPI/PostgreSQL 18 backend,
+**When** the bounded continuity qualification inventory is prepared,
+**Then** identify build/schema/configuration, devices and browser profiles, access/writer scopes, independently specified fictional day facts and expected state/receipt/deadline outcomes,
+**And** reuse existing E5/E6/E7 and 8.3 evidence, testing the integration seams with an own-day path and a mentor path that include later trips, split work, an overnight boundary, manual corrections and uncertain outcomes,
+**And** distinguish actual network/device/storage/backend observations from labelled source/sensor inputs and accelerated boundary fixtures. Use no real private shift files or permanent raw tracks for this controlled qualification,
+**And** define a representative full-day duration from the chosen case, record actual elapsed offline duration and interruptions, and exercise later activities through summary/PDF. A fast-forwarded fixture or short outage cannot be reported as demonstrated full-duration offline use,
+**And** keep this a controlled pre-pilot exercise with no required moving-driver interaction or reliance on an unqualified app. Actual source and sensor support remains evidenced separately by 8.7/8.8.
+
+**Given** a confirmed day with verified compatible app assets, documented per-trip data coverage and valid authority,
+**When** mobile internet/tethering or the route to the backend becomes unavailable and the browser/tablet is closed and restarted,
+**Then** verify the entire available day remains usable through later trips/activities, manual corrections, explicit end/abort, preserved first-review continuation, summary and local PDF without reimport or bus-number reentry,
+**And** compare recovery with committed pre-interruption facts: selected day/plan revision, active trip and repeated-stop occurrence, manual pin/bus, notice version/seen/hidden/audio state, role/person/block and outage history. Missing or corrupt critical context causes visible bounded failure, not guessed restoration,
+**And** keep restored measurements old, missing stop data missing, unseen updates unavailable and pending batches unconfirmed; network loss alone cannot activate position-loss controls or infer motion/standstill,
+**And** distinguish complete versus partial day data and complete versus missing app assets. Missing/evicted required storage cannot be repaired by silently clearing private work, mixing builds, choosing an older snapshot or inventing recoverable data,
+**And** exercise a local write/read/quota failure and interruption before/after commit. Only an atomic saved state/event may appear locally completed; an unfinished action cannot be reported as saved or server-confirmed.
+
+**Given** independent ordinary app access, a concrete-day grant and the actual verified Access expiry,
+**When** access boundaries, offline start, renewal, logout and recovery are tested,
+**Then** distinguish an already active day continuing after the fixed app_authenticated_at plus 14 days from a prepared/new day that cannot start after that expiry. Day scope never exposes another day's metadata or creates another ordinary-access period,
+**And** test 5.4 activation just before/at/after expiry and later server submission. Acceptance after ordinary expiry requires the explicitly documented verifiable timing basis; client time, event order, a test clock or a local active flag alone is insufficient,
+**And** if that basis is unresolved, keep local activation and server status distinct, record the affected requirement as unresolved/blocked and retain the separate owner solution decision. Do not manufacture a passed path or change V1 through qualification wording,
+**And** exercise actual Access renewal/blocking behavior separately from labelled short-expiry fixtures. Verified token expiry determines coverage; renewal does not change app authority, writer epoch or data deadline, and HTML/redirect responses are neither cached app assets nor receipts,
+**And** logout immediately locks private content even without a server reply. Pending revocation goes before other private traffic; gate renewal occurs while locked, and retained work requires a fresh same-owner app login after pending logout is settled,
+**And** unreadable/unreliable lock storage, restart, history navigation, other tabs and delayed callbacks cannot automatically reopen private content or silently discard pending revocation. A disconnected client cannot claim instant knowledge of remote revocation.
+
+**Given** locally committed work and source/transport/receipt outcomes that may differ,
+**When** connectivity returns through actual client/backend/database paths,
+**Then** verify network recovery, validated source refresh and confirmed server saving remain separate statuses; partial/failed source results preserve prior information and corrections,
+**And** exercise lost/mismatched receipts, identical immutable retries, changed content under a reused identity, database failure and a revision conflict. Only a matching durably recorded receipt confirms the sent batch; actual PostgreSQL effects, deduplication and revision must match without partial writes,
+**And** distinguish rejected changes, unresolved outcomes and revision conflicts, preserving still-permitted local work for explicit review against a valid server basis. An unexplained revision cannot be silently rebased or merged by arrival order,
+**And** test permission/context changes during review and at commit. Manual trip/stop/role corrections retain provenance and cannot rewrite prior observations as source or GPS evidence; pending logout and expiry still take precedence.
+
+**Given** two same-owner clients and permitted planned or emergency transfer,
+**When** authority is moved and the former client later returns,
+**Then** for planned transfer verify destination access and required app files before retiring the old writer; verify destination state against the post-transfer server revision before control. Failed verification requires explicit recovery, not automatic writer return,
+**And** for emergency takeover expose last known server state and possible missing work. Keep the old client offline during transfer, make a further local change, then reconnect: old-epoch mutations are rejected, but permitted unsynchronized work remains for explicit review; the app must not claim the disconnected device already stopped,
+**And** verify evidence intake is not application of corrections or operational acknowledgement. Chosen corrections use current authority and new events, with repeated/partial intake preserving original provenance, receipt state and deadlines,
+**And** unknown actual mentor role on emergency recovery retains driver restrictions even if the server says guiding. No recorded Jeg kjører event is not proof of accompaniment; resolution is explicit and permitted,
+**And** test lost transfer responses, concurrent tabs/replacement attempts and failed local recovery without two accepted backend writers or automatic takeover from timeout. A replacement's software authority does not qualify its hardware; actual operational replacement support needs its own applicable device evidence.
+
+**Given** offline normal ending or abortion with pending original batches and linked-person data,
+**When** the explicit end/review flow and later settlement execute,
+**Then** preserve local terminal status and allowed facts/corrections in the minimal trimmed checkpoint, remove prohibited linked portions, and prevent another tab, old local copy or delayed response from restoring deleted content across restart,
+**And** keep original batch outcomes unresolved until authorized payload-free lookup or transaction outcome establishes them. Retired identity is not acknowledgement; a matching old-batch or evidence-transport receipt cannot confirm the new closure settlement,
+**And** exercise original-before-closure and closure-before-original transactions in PostgreSQL, failure/response loss and retry. Preserve accepted receipts, fence unaccepted retired IDs, reject resurrection under fresh IDs and confirm closure only with its own matching receipt,
+**And** first review closes only by explicit confirmation after showing remaining uncertain activities. Navigation/crash does not consume continuation; later retained entry is read/export only, and neither path resumes the day or extends a deadline,
+**And** test 7.1 locally reported ending time separately from verifiable timing evidence. An uncertain timestamp or later receipt cannot extend retention/access; enforce the earliest applicable binding limit pending evidenced resolution and keep the timing decision open.
+
+**Given** allowed private data exists in local/server revisions, checkpoints, outboxes, conflicts, receipts, grants and summaries,
+**When** an applicable deadline is reached while active, closed, disconnected or suspended,
+**Then** verify AD-12's non-sliding draft deadline and one combined-day data clock, with the separate AD-10 post-end authority cap and all earlier applicable limits. Viewing, export, confirmed additions, retry, server acknowledgement and recovery cannot reset an existing fixed deadline,
+**And** exercise local startup/resume/while-open guards and server denial before periodic purge, deletion of all affected copies, expired receipt lookup and late uploads. A closed browser purges before use on return; newly learned earlier ending provides no grace period,
+**And** expiration of a never-ended day never declares its activities completed. Pending settlement cannot delay expiry, and permitted review/export still requires current access,
+**And** document accepted loss after eviction/device/volume failure without introducing historical backups, archived private WAL or a hidden recovery archive. Logical deletion is not forensic erasure; user-held PDFs remain outside app cleanup,
+**And** accelerated expiry tests prove only the declared boundary logic; document their time basis and separately identify actual device observations. They do not resolve 5.4/7.1 or prove elapsed full-day endurance.
+
+**Given** the bounded scenarios finish with successful, failed or incomplete outcomes,
+**When** the continuity report is compiled,
+**Then** record passed, failed, blocked and not-run cases with actual duration, environment, fault origin, expected/observed state, receipt/database evidence and limitations, keeping observed versus synthetic evidence distinct,
+**And** map gaps to owning stories and explicit decisions, especially 5.4/7.1 time proof and unknown-role recovery. A completed report does not qualify a failed capability or authorize actual shifts,
+**And** retain sanitized evidence without private payloads, credentials or raw tracks, with no extra operational database/archive to support testing,
+**And** state the tested build and compatibility assumptions. Host restart/resource/noise and actual release/migration qualification remain separate required evidence, not implicitly passed by same-version continuity,
+**And** keep E8-D, E8-P and E8-E separate; no requirement or architecture choice is waived to obtain a positive result.
+
+**Traceability:** E8-P durability/recovery and integrated access/expiry gates; FR-1/17–24, preserved FR-2–16 provenance and outcomes; NFR-1–4. UX-DR3/7/8/14–23/26–36/42–44 as exercised through the existing flows. AD-2/4/5 local atomicity and real PostgreSQL receipts, AD-8/9 notice/context integrity, AD-10/11 bounded authority/transfer, AD-12 closure/expiry/accepted loss, AD-13 Access separation and AD-14 coherent existing build. All AD-1–AD-14 remain unchanged.
+
+**Dependencies:** Implemented E5 through 5.13, E6 through 6.10 and E7 end/review/summary/PDF/retained entry through 7.5, actual 8.3 fullstack harness, applicable 8.5 ingress/Access and 8.8 target-device evidence. Uses the current deployed test release and labelled nonprivate scenarios. No later E8 host/release report or actual pilot shift is needed to execute these checks; incomplete prerequisites are reported as blocked rather than assumed.
+
+**Size boundary:** One bounded continuity qualification report using existing feature/fault harnesses, one full-duration prepared-day observation and selected two-client/closure boundary branches. No new synchronizer, transfer protocol, timing-proof design, all-feature regression rewrite or three-workday trial. Repairs remain with owning stories. Host recovery/resource/noise and old/new release compatibility are deliberately a separate upcoming story; no requirements are removed. Missing cases stay incomplete if observation needs another session.
+
+**Qualification boundary:** Planning only. No actual endurance/access/database tests, destructive storage experiments, implementation, provisioning, deployment or readiness/final-validation workflow are executed now. E8-D/P/E outcomes remain pending.
+
+**Approval:** Approved by the owner on 2026-09-27 as scoped: the actual full-day Lenovo/Brave test must document duration and observed outcomes; fast-forwarded cases cover separate failure paths. The 5.4/7.1 timing basis remains explicitly unresolved until its own solution decision is made. Planning approval only; this approved copy is canonical.
+
+### Story 8.10: Qualify Host Recovery, Resource Use and Compatible Release Changes
+
+As the owner operating the pilot service,
+I want measured evidence that the actual Windows host recovers predictably and a concrete release transition preserves retained work on Lenovo/Brave,
+So that host interruptions and updates have known limits without exposing private data, losing pending work or silently extending authority.
+
+**Acceptance Criteria:**
+
+**Given** the implemented 8.4 package, 8.5 ingress and 5.11/5.12 release contracts,
+**When** the bounded qualification setup is recorded,
+**Then** identify the actual Windows hardware, OS/Docker versions, five-service Compose configuration, resource/power settings, home-network path and actual tablet/browser, with versioned old/new client, server, image and storage-schema artifacts,
+**And** use an isolated permitted test deployment with fictional retained work and the real PostgreSQL 18 engine; keep fault controls and fixtures out of the operational service. Do not run two independent operational databases behind the same live route,
+**And** reuse valid prior evidence, stating actual versus induced conditions, tested duration and missing prerequisites. Pin one concrete old/new release and storage transition rather than claiming generic future compatibility,
+**And** distinguish planned test steps from performed observations. This story neither changes the adopted host/provider choice nor requires a new hosting platform or historical private backup.
+
+**Given** retained day state, source cursor/baseline, pending or accepted-but-unacknowledged batches and original deadlines,
+**When** the actual host undergoes a full Windows restart with deliberately delayed sign-in,
+**Then** record observed service-unavailability, Windows sign-in, Docker startup and actual application-ready milestones with their time basis, counting the entire interval as downtime; missing observations remain unknown,
+**And** verify application/database/schema readiness and a working authenticated request/receipt path, not just a running container or open port. Document the accepted lack of unattended pre-sign-in startup,
+**And** test a locked screen separately from sleep/shutdown, and exercise home-network/tunnel interruption and recovery independently of mobile-client connectivity. The prepared tablet must show actual offline/access/source/sync status rather than claim continuous server availability,
+**And** verify retained database facts, immutable receipts and source baseline survive ordinary restart; polling and cleanup resume without duplicate effects or a second unintended poller,
+**And** preserve original source update/retrieval times until a qualifying fetch occurs, distinguishing a source still unavailable from successful refresh. Process startup cannot mark client work server-confirmed,
+**And** cross an applicable expiry during interruption: deny expired data before use even before background purge, and never restart ordinary login, day grants, data deadlines or notice freshness as a recovery grace period.
+
+**Given** an unavailable database, partial startup or running but unresponsive service,
+**When** the operator follows the actual diagnosis/recovery runbook,
+**Then** verify failure is visible, readiness is withheld appropriately and the documented bounded restart/reconnect procedure recovers compatible services without clearing working volumes or browser storage,
+**And** distinguish configured restart policy from observed recovery; a health check alone is not an automatic hung-process restart mechanism,
+**And** verify provider protection and private/demo isolation remain effective during partial startup/recovery. No exposed private host port, Access bypass or demo relay becomes a repair path,
+**And** inspect interruption cleanup of temporary import/OCR copies, logs and artifacts without retaining private payloads or claiming forensic/provider erasure from local deletion,
+**And** record permanent volume/device loss as the accepted possible loss of unsynchronized or unbacked-up work; no private snapshot, archived WAL or recreated old state is introduced to make recovery appear successful.
+
+**Given** the actual desktop with explicit CPU/memory limits and one OCR job at a time,
+**When** idle operation, representative polling/synchronization/demo traffic and a bounded representative anonymized OCR workload are observed,
+**Then** record actual duration, workload/input size, CPU/memory use, request/processing delays and failures, including the effect on the owner's ordinary desktop use under stated conditions,
+**And** verify one-job concurrency, bounded resource behavior, no continuous builds/watchers and continued status/cleanup handling during resource pressure. Successful work may not conceal dropped requests, duplicated jobs or retained temporary originals,
+**And** document noise observations, ambient conditions, measurement method and its limits, separating any instrument measurement from the owner's listening/usability judgement. Do not invent a decibel limit, throughput guarantee or acceptable result from configured limits alone. Any reviewer assessment must be grounded in the stated method and actual observations, distinct from the owner acceptability decision,
+**And** record the owner's explicit judgement of acceptable desktop noise/resource impact against the stated use conditions. If acceptability is unassessed or disputed, keep that part unresolved; an efficient-looking metric is not owner acceptance,
+**And** resource/availability/noise failure requires a separate solution decision within AD-13, not automatic Linux/cloud migration, loosened security, increased retention or a passed host gate.
+
+**Given** an actual retained client with unexpired work and a concrete successor backend/schema,
+**When** compatibility is exercised through the actual protected path and PostgreSQL,
+**Then** run the older executable client, not merely new tests emitting old-looking requests, and verify both its response interpretation and the resulting database/state/receipt effects,
+**And** cover old immutable batches including a lost receipt across update, source/notice versions and unknown metadata, recovery/errors, stale writer/revision, pending logout and payload-free original-outcome lookup versus new closure receipt,
+**And** retain E6 role/person/block/pin and permitted accompanied evidence plus E7 terminal/review/summary semantics; a representation change cannot invent provenance, open guiding controls, resume a terminal day or restore trimmed information,
+**And** preserve original supported IDs/payloads, deadlines, writer scope and deduplication across server migration. Required contracts stay supported through the affected data's actual expiry, not a fixed release count or seven days from deployment; lack of recent traffic does not prove an offline client is gone,
+**And** include declared retention-boundary cases and multiple still-required client formats where applicable, marking accelerated expiry tests as such rather than actual elapsed observations,
+**And** a required contract failure blocks rollout to the affected retained work. A minimum client for a new day cannot revoke continuation/settlement for an already authorized day, and a new decoder cannot resolve 5.4/7.1 timing uncertainty.
+
+**Given** a complete staged successor on Lenovo/Brave and an active day requiring its existing build,
+**When** all tabs close, a waiting Service Worker activates and the app/tablet reopens offline or with Access expired,
+**Then** verify the active day still boots its required coherent build without an unapproved app/schema switch. Worker activation, downloaded assets and user-accepted version change remain separate facts,
+**And** test partial/wrong-build assets, login HTML in place of an asset and missing/evicted required files: show the appropriate bounded failure and preserve private work; never run a mixed build or clear storage as repair,
+**And** between days, test accepting, postponing and blocking the specific verified update after checking pending work, locks, active days in other tabs, transfer state and a supported migration path. Planned finishing time or another tab's main menu does not prove the day ended,
+**And** preserve private access guards and pending revocation before any retained content or traffic, including history navigation and late callbacks. Update or Access renewal alone cannot unlock the old day or discard an unresolved logout,
+**And** separately verify the ordinary-PC fictional demo still loads and resets after the package change without gaining private access. This is bounded release regression, not a new assessment-availability or E8-D decision.
+
+**Given** an accepted local/backend migration or a proposed rollback,
+**When** interruption, quota/write failure, a blocked database upgrade or competing tabs occurs at its persisted boundaries,
+**Then** verify documented transactional recovery or the explicit recoverable states of a necessary multi-step transition, without reporting a partially migrated combination as ready,
+**And** compare preserved facts before/after: manual choices, actual role/context, notice seen/hidden/audio state, movement history, immutable batches, conflicts/intake, pending logout, grants/writer epochs, closure fences, first-review state and original expiry,
+**And** ensure repeated callbacks/restart cannot migrate twice, invent a new startup exemption, replay old sound or turn pending work into acknowledged work. Expired copies are removed before use, including bounded migration staging,
+**And** allow code rollback only with verified storage/contract compatibility. An incompatible downgrade is blocked with an explicit non-destructive recovery path; do not restore a private historical snapshot or claim a missing executable path exists,
+**And** retain complete nonpersonal assets/formats still required by actual unexpired work, normally one selected build and a staged successor. Additional necessary code retention does not authorize extra private data retention,
+**And** a failed compatibility/migration result remains a release blocker until repaired and rechecked or addressed through an explicit solution decision consistent with adopted boundaries.
+
+**Given** host/resource and release cases have observed outcomes,
+**When** the consolidated report/runbook update is completed,
+**Then** list passed, failed, blocked and not-run cases, actual outage/workload durations, measured observations versus fixtures, tested version combinations and remaining operator actions/limitations,
+**And** tie each finding to its requirement, owning implementation story and any owner decision, with targeted revalidation required after relevant host/configuration/build changes,
+**And** retain sanitized results and reproducible procedures, not private originals, credentials, database dumps or a permanent operational archive,
+**And** keep 5.4/7.1 expressly unresolved until its own evidenced solution decision. Host timestamps, a changed clock or successful deployment do not establish disconnected activation/end timing,
+**And** provide evidence for the host/deployment and release parts of E8-P only. Report completion, successful startup or a compatible release alone does not grant actual-shift permission; E8-D/P/E remain separate decisions.
+
+**Traceability:** E8-P access/deployment and release gates; AD-13 Windows/Docker startup, private/demo boundary, resource/noise and portable operation; AD-14 retained-client support, coherent boot, accepted activation, migration and compatible rollback. AD-2/4/5/6/7/8/9/10/11/12 preservation, cleanup, authority and expiry remain binding. Supporting FR-1/17–25 and retained E1–E7 behavior, NFR-1–4, UX-DR3/14/19/23/24/26–39/44. No AD-1–AD-14 choice is changed.
+
+**Dependencies:** Implemented 8.4 runtime, 8.5 protected access, 5.11/5.12 release paths, 5.13 closure protocol, full E6/E7 retained-state extensions and the existing 8.9 continuity harness/evidence. Actual Windows host, Lenovo/Brave, controlled network/reboot access and reproducible old/new artifacts are execution prerequisites. No future E8-P decision or actual pilot shift is needed for controlled testing; missing artifacts or test access remain blocked.
+
+**Size boundary:** One bounded host/resource report and qualification of one concrete old/new release transition, reusing existing test/runbook material. No new deployment platform, update engine, monitoring service, backup scheme, host migration or full replay of 8.7–8.9. Functional repairs remain with owning stories. Predetermine representative workloads and observation windows; retain missing required evidence as incomplete if another session is needed.
+
+**Qualification boundary:** Story planning only. No host restart, network disruption, service change, migration, deployment, hardware test, provisioning or readiness/final-validation workflow is performed now, and no E8-D/P/E outcome is issued.
+
+**Approval:** Approved by the owner on 2026-09-27 as scoped: document measured downtime and the concrete release transition, including active-day and pending-work outcomes. Noise assessment must use the stated measurement method and actual observations, with owner acceptability separately recorded. Planning approval only; this approved copy is canonical.
+
+### Story 8.11: Record the Evidence-Based E8-P Decision Before Actual-Shift Use
+
+As the pilot owner,
+I want one traceable decision showing whether the required qualification gates have passed for the intended release and equipment,
+So that permission to begin actual-shift use is explicit and cannot be inferred from approved plans, a demonstration or completed reports.
+
+**Acceptance Criteria:**
+
+**Given** the approved V1 requirements, UX decisions, AD-1–AD-14 and available executed qualification reports,
+**When** the E8-P decision packet is assembled,
+**Then** identify the candidate client/backend/build/schema versions, source/provider configuration, actual Lenovo/Brave and Windows host, and intended pilot use within the adopted scope,
+**And** map each mandatory gate item to its requirement, owning story, dated evidence and tested conditions, separating implementation status from passed, failed, blocked and not-run verification results,
+**And** preserve the difference between actual observations, documented provider semantics, synthetic faults, accelerated boundaries and unknowns. A report's completion or a story's planning approval is not a capability pass,
+**And** check that the evidence still applies to this exact candidate and its relevant configuration; changed contracts, hardware/settings or source semantics require affected revalidation rather than inheriting an old pass automatically,
+**And** keep E8-D demonstrability status separately visible without making assessor acceptance or an affirmative E8-D result a substitute for operational evidence. The three-workday E8-E evaluation is subsequent work, not a prerequisite used to justify starting an unqualified pilot.
+
+**Given** the five adopted architecture release gates,
+**When** their coverage is checked,
+**Then** include representative import and actual timetable/notice-source evidence from 8.7, including dated matching, full-day/per-trip coverage, explicit driver confirmation, transient-file cleanup and source metadata/lifecycle limitations,
+**And** include 8.8 actual mounted-device position/speed and 100-m progression results against independent passage/departure references, movement/role restrictions, readability/touch, Auto, observed screen-wake and actual audio evidence,
+**And** include 8.9 full-duration offline/restart, local/database atomicity, receipt/conflict/transfer, unknown-role recovery, terminal settlement and all-copy expiry evidence. Report actual duration separately from fast-forwarded failure cases,
+**And** include 8.5/8.9/8.10 private access, actual Access expiry/renewal/logout, HTTPS, demo isolation and documented provider upload/cache/logging handling before real files, plus measured Windows downtime, home-network recovery and resource/noise evidence with the owner's acceptability decision,
+**And** include 8.10's concrete retained-client/new-backend and local migration/activation evidence through affected data expiry, with active days, pending work, logout and immutable receipts preserved,
+**And** identify missing or contradictory evidence at item level. Do not average passing items across gates, treat zero observed notices as source coverage or count a working manual fallback as a passed automatic requirement.
+
+**Given** negative findings, accepted architectural limitations or unresolved solution questions,
+**When** their disposition is prepared for owner review,
+**Then** distinguish an already adopted limitation (such as sign-in before Docker startup and possible permanent loss without historical backups) from a newly failed capability, missing evidence or proposed requirement change,
+**And** record what the accepted limitation permits and its observed consequences; it does not waive the tests or extend access/retention. A new exception cannot be inferred from the existence of an older accepted risk,
+**And** keep 5.4/7.1 explicitly unresolved until its separate solution decision, with affected behavior/status and earliest applicable deadlines shown. Client timestamps, host uptime and successful receipt transport cannot serve as disconnected-time proof,
+**And** a solution decision alone is not a passed implementation or test: link the adopted resolution and the required implemented/retested evidence before closing the affected gate item,
+**And** keep material source/OCR/device/privacy/recovery/release failures and mandatory blocked/not-run cases open. Do not silently narrow the pilot to avoid them, substitute simulation/manual entry, revise AD-1–AD-14 or remove V1 requirements,
+**And** any proposed scope/architecture change goes to a separate explicit owner decision and subsequent affected planning/evidence update; this checkpoint does not enact such a change or label a waived test passed.
+
+**Given** the versioned packet and item-level findings,
+**When** the owner reviews the formal E8-P checkpoint,
+**Then** present an explicit recommendation with reasons and record the owner's dated outcome as permission granted, not granted, or decision pending, linked to the exact evidence/candidate version,
+**And** an affirmative outcome requires recorded applicable passes for all mandatory gates and resolved blocking decisions with evidence, explicitly including the 5.4/7.1 timing basis. No conditional pass may hide a mandatory failed, blocked or not-run item,
+**And** if evidence is insufficient or contradictory, record what must be resolved/tested and retain no-permission/pending status without erasing the negative result. A completed negative decision packet can complete this documentation task while E8-P remains unpassed,
+**And** obtain explicit owner confirmation for the actual gate outcome; acceptance of this story plan, silence, a deployment URL or automatic checklist completion is never permission for real shifts,
+**And** state the qualified release, equipment/configuration and tested limitations. A later material change or discovered invalidating fault requires affected requalification and an explicit updated decision before renewed reliance; unrelated evidence need not be rerun without reason,
+**And** do not call E8-E complete, all V1 requirements satisfied or instructor assessment passed merely because E8-P permits the bounded actual-shift pilot.
+
+**Given** an E8-P decision is recorded,
+**When** the handoff to later evaluation is prepared,
+**Then** keep the decision, evidence index, unresolved actions and applicable operating limitations readable and versioned, with a clear distinction between permission granted and work still needed before it can be granted,
+**And** link existing preparation, known-failure and recovery instructions, preserving the adopted rules for offline readiness, source uncertainty, access and no required interaction while driving. Do not create a new operational policy or instruct a driver to troubleshoot while moving,
+**And** state that the later E8-E protocol and three actual assigned workdays remain separate; neither scheduling nor execution of those days occurs in this decision story,
+**And** retain only sanitized decision/evidence references, not private shift originals, raw GPS, secrets or database snapshots. No pilot archive or new service/database entity is needed,
+**And** keep capacity/delivery uncertainty explicit without using it to pass missing requirements. Unresolved assessment scheduling may remain an E8-D issue but cannot conceal an operational E8-P blocker.
+
+**Given** the packet and decision rules are checked for correctness,
+**When** missing, failed, stale or contradictory evidence is encountered,
+**Then** verify the packet would retain no-permission/pending status for cases such as only simulated GPS evidence, no representative source example, unknown provider handling, unresolved timing eligibility, untested noise acceptability or a required retained-client failure,
+**And** verify that a completed negative report and an owner-approved proposed fix remain distinct from implemented/retested success, and that an outdated pass does not cover a materially changed candidate,
+**And** verify the affirmative record is possible only with the mandatory evidence and explicit owner decision. Any labelled examples used to check this document's logic must remain examples, never an actual permission record,
+**And** record omissions/corrections without inventing test execution or overwriting earlier evidence. This is a qualification-decision check, not activation of BMAD implementation readiness or step-04 final validation.
+
+**Traceability:** Formal E8-P boundary and all five architecture pre-pilot gates; FR-1–24 operational requirements, NFR-1–4 and the applicable approved UX inventory. FR-25/E8-D remains separately reported; SM-1–4 and distraction/trust evaluation belong to subsequent E8-E. AD-1–AD-14 remain binding, particularly AD-6/7/9 actual capability, AD-10/11/12 authority/time/privacy and AD-13/14 operating/release evidence. This story consolidates decisions; owning stories still implement and test their functions.
+
+**Dependencies:** Executed reports/evidence from 8.5 and 8.7–8.10 with relevant underlying E1–E7 results, plus the owner for the eventual formal decision. The packet can honestly record absent evidence or a negative outcome; absence cannot support permission. No future E8-E story or actual-shift observation is needed to record E8-P, and no future story is relied on to supply a missing mandatory pre-pilot pass.
+
+**Size boundary:** One traceable versioned E8-P packet, discrepancy/action list, owner decision and handoff references. Reuse existing reports; no new test campaign, feature implementation, architecture change, automated approval system, pilot execution or readiness workflow. Resolving a blocker remains separately owned work followed by an updated evidence-based gate decision.
+
+**Qualification boundary:** This is an approved story plan only. No actual E8-P assessment/outcome, permission for shifts, implementation, tests, provisioning, deployment or BMAD readiness/final-validation step is performed now. E8-D/P/E remain separate pending checkpoints.
+
+**Approval:** Approved by the owner on 2026-09-27 as the plan for the decision basis, not E8-P permission. Actual shifts require a later dated owner decision based on passed mandatory gates and resolved blockers, explicitly including the 5.4/7.1 timing basis. Planning approval only; this approved copy is canonical.
+
+### Story 8.12: Evaluate Three Actual Working Days and Record the E8-E Outcome
+
+As the pilot owner,
+I want a bounded evaluation of the assistant on three actual assigned working days, including effort, missed information, progression, distraction and trust,
+So that its observed usefulness and shortcomings are documented honestly, separately from a demonstrable delivery and pre-pilot qualification.
+
+**Acceptance Criteria:**
+
+**Given** the intended release/equipment and the recorded E8-P decision,
+**When** actual-shift evaluation is prepared,
+**Then** require a later dated affirmative owner decision under 8.11, backed by passed mandatory gates and resolved blockers including the 5.4/7.1 timing basis with required implementation/retest evidence; approval of this or earlier story plans cannot authorize the shifts,
+**And** check that the evaluated build/configuration and equipment remain covered by that decision. A material change or new invalidating finding requires affected requalification and an updated decision before renewed operational reliance,
+**And** planning the protocol may proceed while E8-P is pending, but no actual-shift trial is executed or counted as authorized evaluation to supply missing pre-pilot evidence,
+**And** use three actual assigned working days rather than fabricated/repeated demo days. They need not be identical, consecutive or cover all four pilot lines; record the actual variation without selecting only successful cases,
+**And** do not infer dates, remaining hours or a delivery commitment from this three-day plan. Scheduling is agreed later with the owner and actual assignments.
+
+**Given** the adopted PRD SM-1–4 and SM-C1/C2 measures,
+**When** the owner agrees the observation protocol before the first evaluation day,
+**Then** define the timing method, categories of checking effort, notice reference/comparison method, independent progression observation method and uncertainty handling, plus the already qualified quality limits used to classify reliable positioning,
+**And** include assistant use, original-source verification and continued searching elsewhere in total checking effort, identifying preparation/checking versus evaluation-only note-taking and recording uncertainty rather than hiding time outside the app,
+**And** retain the approximate 10–15 minutes daily target and the recalled 20–30 minutes per eight-hour day baseline with their limitations. Record actual workday length and context; any normalized comparison must show its method and cannot become a measured baseline or controlled time-saving claim,
+**And** agree any remaining observation detail or numerical criterion before using it for judgement; do not invent new success thresholds or relax existing ones after seeing results. Changes during the trial are dated with their effect on comparability,
+**And** arrange independent passage/departure references without driver input while moving; observer or unattended methods must respect AD-12. If a reference cannot be obtained, mark that field measure unmeasured rather than use the app's own detection as ground truth,
+**And** use brief external notes at a safe permitted time and optional user-initiated private PDF exports. Observation must not require moving-driver taps, source browsing or deliberately induced operational failures; controlled fault evidence stays in earlier qualification reports.
+
+**Given** each authorized assigned working day,
+**When** the assistant is used and the day is reviewed,
+**Then** record actual use duration, relevant working conditions and activities, usable/unavailable features, checking-time observations and their measurement uncertainty using a pseudonymous day reference for shareable reporting,
+**And** record what worked, missing information, failures, manual interventions, interrupted use and reason, alongside successful operation. Do not count scheduled activities as performed or infer physical actions from display transitions,
+**And** capture actual corrected import/driver confirmation, automatic source retrieval, recovery when it actually occurs and summary/PDF outcome for SM-4; an unencountered recovery event remains unobserved in the field, linked separately to prior qualification evidence,
+**And** distinguish source and sensor observations, manually reported facts, local saved state and server confirmation. A PDF or notes cannot turn a pending receipt, uncertain activity or observation gap into verified completion,
+**And** note changes of build/device/configuration and interruptions, retaining the applicable permission basis. No update, export or evaluation entry extends app access or data retention.
+
+**Given** source evidence relevant to the actually driven trips and times,
+**When** planned-notice outcomes are assessed for SM-2 and trust,
+**Then** compare received/displayed notices with independently checked original-source evidence, documenting applicability, source availability, observation/publication/update/fetch times where known and missed, irrelevant or uncertain notices,
+**And** distinguish a notice unavailable from the source during the relevant period from an app retrieval/relevance/display failure, and retain unknowns where historic source state cannot be established; a later webpage cannot automatically prove what existed earlier,
+**And** a day with no applicable notice provides no positive coverage evidence. Report the evaluated sample and missing categories rather than generalizing to all lines or promising acute-event coverage,
+**And** record false freshness, hidden outages and source-checking effort alongside successful delivery. A displayed/seen/registered notice is not proof of comprehension, and later receipt does not retroactively count as timely display,
+**And** preserve notice/source references in sanitized evidence without publishing private shift associations or exact operational identifiers.
+
+**Given** independently observed passage/departure events during actual use and the qualified sensing basis,
+**When** SM-3 progression is evaluated,
+**Then** compare the actual event with the displayed progression change using distance travelled afterward, including passage without stopping and close-stop cases where encountered; report reference method, sample size and uncertainty against the at-most-100-m target,
+**And** record delayed, wrong or missed progression, manual corrections and unreliable-position periods separately. Do not drop failures from the denominator or treat a proximity radius as passage evidence,
+**And** a later-stop reacquisition preserves the observation gap and does not certify the unobserved passages. Repeated-stop occurrence, manual correction and actual trip identity remain distinct,
+**And** if no sufficiently independent/precise reference exists for a case, leave the field result inconclusive; prior 8.8 qualification can be cited separately but cannot be relabelled as that day's observation,
+**And** do not claim the 100-m goal met when measured deviations show otherwise; negative findings return to the existing solution/qualification decision process.
+
+**Given** time/coverage/progression results and the driver's observations,
+**When** distraction and trust counter-metrics are compiled,
+**Then** record unnecessary/missed/repeated chimes, confusing transitions, manual interventions and pressure to interact while driving, explicitly acknowledging the adopted startup, outage, direct-stop and theme exceptions,
+**And** record irrelevant notices, false freshness, hidden outages, wrong progression and falsely completed activities alongside missed information; lower checking time cannot hide these costs,
+**And** distinguish observed events, the driver's subjective experience and missing observations; no driver score, medical inference or unsupported causal safety claim is introduced,
+**And** if a new finding invalidates required capability or safe reliance, record interruption/non-reliance and return it for the affected E8-P decision rather than continuing just to reach three days. Do not troubleshoot or stage failures while driving,
+**And** retain partial/aborted days and negative outcomes in the report. Do not silently replace or exclude them; any additional/replacement day and its counting rationale require an explicit owner decision without rewriting the original evidence.
+
+**Given** private summaries, optional exported PDFs and external notes support analysis,
+**When** the evaluation report is produced,
+**Then** preserve the existing distinction between private user-held evidence and material prepared for repository/course sharing; anonymize exact shift, bus, vehicle-duty, trip and person identifiers and avoid reconstructable private day associations,
+**And** use external notes and only voluntarily exported PDFs; missing export or browser download uncertainty remains an evidence gap, not permission to reconstruct or retain prohibited data,
+**And** app data, originals, pending work, grants and all other copies still expire under AD-6/12. Three-day evaluation creates no archive exception, new telemetry database or reason to delay cleanup,
+**And** discard temporary raw positioning after the necessary analysis and retain sanitized distance/timing/error summaries. A shareable evidence summary is not a permanent anonymized operational quality dataset,
+**And** explain that user-held PDFs/external notes are outside automatic app deletion; do not publish or delete those external originals automatically as part of this story.
+
+**Given** the actual three-day evidence and its limitations,
+**When** the owner reviews E8-E,
+**Then** present day-by-day and combined outcomes for SM-1–4 and SM-C1/C2, separating planned behavior/tests, actually measured behavior and observed achievement, missed targets, inconclusive/unobserved cases and separately cited controlled qualification/demo results,
+**And** discuss varying assignments/conditions, small sample and recalled baseline; no claim of controlled causal improvement, universal coverage, certified traffic safety or permanent production readiness follows from three days,
+**And** record a dated owner-reviewed E8-E outcome, evidence/protocol versions and follow-up decisions. Completed evaluation is distinct from every product target being achieved: an honest negative result can complete the agreed evaluation,
+**And** fewer than three actual evaluation days or missing agreed observations remain explicitly incomplete unless an owner-approved protocol change is separately recorded; do not declare the original three-day plan fulfilled or fabricate results,
+**And** keep E8-D assessment/demonstration and E8-P permission as separate records. Completing E8-E neither retroactively authorizes unqualified use nor closes unrelated V1 defects, timing questions or course-assessment requirements by implication,
+**And** carry material gaps into explicit solution decisions without silently changing scope or architecture. No new actual-shift evaluation or broader rollout is authorized by the report itself.
+
+**Traceability:** E8-E agreed three-workday field evaluation; PRD section 9 SM-1–4, SM-C1/C2 and Product Brief/addendum evaluation agreement. Operational evidence FR-2–5/7–9/12–24, NFR-1–4 and UX provenance/uncertainty/movement/summary rules; FR-25/SM-5 remain E8-D. AD-6/9/10/12 govern transient originals, independent movement evidence, permission/access and no retained private archive; all AD-1–AD-14 remain unchanged. Earlier brief speed-limit references do not add a deferred feature to this V1 evaluation.
+
+**Dependencies:** A later actual affirmative 8.11 E8-P decision for the evaluated candidate, existing E7 summary/PDF behavior and external owner notes, and an owner-agreed observation protocol/actual assignments. Story-plan approval of 8.11 is insufficient. No later story or new app feature is required; unavailable permission or evaluation opportunities block field execution and leave its outcomes unclaimed.
+
+**Size boundary:** One agreed bounded three-day protocol, collection using existing outputs/external notes, sanitized analysis and an E8-E decision. The three-day observation duration is inherent, not a one-session implementation estimate. No new instrumentation platform, permanent history, extra product feature, controlled causal study or automatic publication. Defect repair and any extra evaluation days are explicit separate work, not hidden inside a successful-result requirement.
+
+**Qualification boundary:** This is only an approved story plan. No actual shifts are authorized, scheduled or evaluated now; no protocol execution, data collection, implementation, deployment, readiness or workflow final validation is started. E8-D/P/E remain separate pending checkpoints.
+
+**Approval:** Approved by the owner on 2026-09-27 as a story plan only: agree the three-day protocol before the first shift, include negative/interrupted days, and distinguish planned, unobserved and actually measured behavior. Actual shifts still require a later positive dated E8-P owner decision. This approved copy is canonical; E8 coverage approval remains a separate checkpoint.
