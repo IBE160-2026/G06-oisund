@@ -38,7 +38,7 @@ So that permission to begin actual-shift use is explicit and cannot be inferred 
 **When** their disposition is prepared for owner review,
 **Then** distinguish an already adopted limitation (such as sign-in before Docker startup and possible permanent loss without historical backups) from a newly failed capability, missing evidence or proposed requirement change,
 **And** record what the accepted limitation permits and its observed consequences; it does not waive the tests or extend access/retention. A new exception cannot be inferred from the existence of an older accepted risk,
-**And** keep 5.4/7.1 explicitly unresolved until its separate solution decision, with affected behavior/status and earliest applicable deadlines shown. Client timestamps, host uptime and successful receipt transport cannot serve as disconnected-time proof,
+**And** cite adopted TIME-01 for 5.4/7.1 while keeping missing implementation and executed evidence open. Client timestamps, host uptime and successful receipt transport cannot prove pre-E server acceptance or move Tg/D,
 **And** a solution decision alone is not a passed implementation or test: link the adopted resolution and the required implemented/retested evidence before closing the affected gate item,
 **And** keep material source/OCR/device/privacy/recovery/release failures and mandatory blocked/not-run cases open. Do not silently narrow the pilot to avoid them, substitute simulation/manual entry, revise AD-1–AD-14 or remove V1 requirements,
 **And** any proposed scope/architecture change goes to a separate explicit owner decision and subsequent affected planning/evidence update; this checkpoint does not enact such a change or label a waived test passed.
@@ -46,7 +46,7 @@ So that permission to begin actual-shift use is explicit and cannot be inferred 
 **Given** the versioned packet and item-level findings,
 **When** the owner reviews the formal E8-P checkpoint,
 **Then** present an explicit recommendation with reasons and record the owner's dated outcome as permission granted, not granted, or decision pending, linked to the exact evidence/candidate version,
-**And** an affirmative outcome requires recorded applicable passes for all mandatory gates and resolved blocking decisions with evidence, explicitly including the 5.4/7.1 timing basis. No conditional pass may hide a mandatory failed, blocked or not-run item,
+**And** an affirmative outcome requires recorded applicable passes for all mandatory gates and resolved blocking decisions with evidence, explicitly including implemented and executed TIME-01 checks. No conditional pass may hide a mandatory failed, blocked or not-run item,
 **And** if evidence is insufficient or contradictory, record what must be resolved/tested and retain no-permission/pending status without erasing the negative result. A completed negative decision packet can complete this documentation task while E8-P remains unpassed,
 **And** obtain explicit owner confirmation for the actual gate outcome; acceptance of this story plan, silence, a deployment URL or automatic checklist completion is never permission for real shifts,
 **And** state the qualified release, equipment/configuration and tested limitations. A later material change or discovered invalidating fault requires affected requalification and an explicit updated decision before renewed reliance; unrelated evidence need not be rerun without reason,
@@ -62,7 +62,7 @@ So that permission to begin actual-shift use is explicit and cannot be inferred 
 
 **Given** the packet and decision rules are checked for correctness,
 **When** missing, failed, stale or contradictory evidence is encountered,
-**Then** verify the packet would retain no-permission/pending status for cases such as only simulated GPS evidence, no representative source example, unknown provider handling, unresolved timing eligibility, untested noise acceptability or a required retained-client failure,
+**Then** verify the packet would retain no-permission/pending status for cases such as only simulated GPS evidence, no representative source example, unknown provider handling, missing TIME-01 implementation/evidence, untested noise acceptability or a required retained-client failure,
 **And** verify that a completed negative report and an owner-approved proposed fix remain distinct from implemented/retested success, and that an outdated pass does not cover a materially changed candidate,
 **And** verify the affirmative record is possible only with the mandatory evidence and explicit owner decision. Any labelled examples used to check this document's logic must remain examples, never an actual permission record,
 **And** record omissions/corrections without inventing test execution or overwriting earlier evidence. This is a qualification-decision check, not activation of BMAD implementation readiness or step-04 final validation.
@@ -75,4 +75,8 @@ So that permission to begin actual-shift use is explicit and cannot be inferred 
 
 **Qualification boundary:** This is an approved story plan only. No actual E8-P assessment/outcome, permission for shifts, implementation, tests, provisioning, deployment or BMAD readiness/final-validation step is performed now. E8-D/P/E remain separate pending checkpoints.
 
-**Approval:** Approved by the owner on 2026-09-27 as the plan for the decision basis, not E8-P permission. Actual shifts require a later dated owner decision based on passed mandatory gates and resolved blockers, explicitly including the 5.4/7.1 timing basis. Planning approval only; the approved copy in epics.md is canonical.
+**Approval:** Approved by the owner on 2026-09-27 as the plan for the decision basis, not E8-P permission. Actual shifts require a later dated owner decision based on passed mandatory gates and resolved blockers, explicitly including TIME-01 implementation and evidence. Planning approval only; the approved copy in epics.md is canonical.
+
+**TIME-01 E8-P gate (owner, 2026-09-27):** The policy choice is adopted, so the packet must cite TIME-01 rather than list its solution as undecided. Before a positive E8-P outcome require executed 5.4/7.1 and 8.9 evidence for strict pre-E server acceptance, Tg/D, distinct approved/unknown/rejected results, warning before/during unresolved offline start, post-E approved-day review/export, uncertain-time device lock/delete and the custody/reconnect/hand-in/wipe/loss procedure. Verify registered Lenovo/Brave OS protection and backup settings, the named custodian and recorded drill. An unreachable device cannot supply verified local deletion; record this limit and the stop-pilot response. No planned or synthetic check counts as passed actual-device evidence. IR-01 measurement evidence and other failed/blocked/not-run gates remain separate.
+
+**IR-01 E8-P gate (owner, 2026-09-27):** The contrast policy is decided, but its execution is pending. The packet must cite measured rendered UI text, necessary non-text/icon and focus results from owning stories, separate page-level rendered-PDF results from 7.4, and actual mounted Lenovo/Brave readability/glare/focus observations from 8.8 for the release candidate. Missing, failed or blocked applicable evidence cannot be counted as a pass or replaced by palette calculations, mockups or the IR-01 decision itself. Overall WCAG AAA conformance is not asserted.

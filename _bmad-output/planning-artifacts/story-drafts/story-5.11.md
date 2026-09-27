@@ -43,7 +43,7 @@ So that a server update does not strand valid work, break logout or force me to 
 **And** under current authorization return an existing identical receipt for prior acceptance without applying effects or incrementing revisions again, including when the original expected revision is behind,
 **And** reject changed content under a reused identity, unauthorized old-epoch mutations and invalid/unsupported payloads without partial writes; read-only receipt lookup retains its separate authorization rule,
 **And** maintain one stable in-flight batch per day and preserve unresolved work on error; an update cannot turn transport receipts from 5.10 into operational acknowledgements,
-**And** 5.4's unverifiable post-expiry start remains unresolved across the update rather than being reclassified as accepted by a new decoder.
+**And** 5.4 first acceptance at/after E remains rejected across the update; a lost pre-E receipt stays recoverable by status lookup, never by a new decoder.
 
 **Given** the backend schema or stored representation changes for the successor,
 **When** the controlled migration and compatibility checks run against PostgreSQL,

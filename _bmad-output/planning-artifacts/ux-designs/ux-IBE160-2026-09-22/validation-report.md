@@ -3,7 +3,15 @@
 - **DESIGN:** [DESIGN.md](DESIGN.md)
 - **EXPERIENCE:** [EXPERIENCE.md](EXPERIENCE.md)
 - **Rapporttid:** 2026-09-22T19:06:26Z
-- **Status:** Alle 11 ulike opprinnelige funn håndtert; mekanisk sluttkontroll er gjennomført; implementasjonsverifikasjon gjenstår.
+- **Status:** Historisk validering med IR-01-tillegg 2026-09-27. Produktbeslutningen er tatt; rendret kontrast, PDF og Lenovo/Brave er ikke verifisert.
+
+## IR-01-tillegg — produkteierbeslutning 2026-09-27
+
+Readinessgjennomgangen påviste at R2 nedenfor feilaktig sa at numeriske krav allerede var lagt til. På valideringstidspunktet fantes bare utvalgte fargeparberegninger i DESIGN, uten en generell terskel for nye tekstpar, nødvendige ikke-tekstlige elementer og fokus. Den eldre R2-statusen er historikk, ikke bevis for utført måling eller et tidligere vedtak.
+
+Produkteier har nå vedtatt prosjektets V1-akseptansekrav i PRD NFR-1, DESIGN og EXPERIENCE: minst **4,5:1** for all informativ tekst, **3:1** for nødvendig ikke-tekstlig informasjon, og synlig fokusmarkering med areal minst tilsvarende en **2 CSS-pikslers** perimeter, **3:1** endring på samme piksler mellom fokusert/ufokusert og **3:1** mot tilstøtende farger der det trengs for å identifisere fokus. Fokus må ikke være helt tildekket. Kravene gjelder dagtema, nattema, begge Auto-utfall og relevante tilstander. Farge alene kan ikke formidle tilstand. Dette er prosjektkrav informert av WCAG 2.2, **ikke** en påstand om samlet WCAG AAA-samsvar.
+
+**Kontroll som gjenstår:** Mål faktisk rendret UI per fargepar/tilstand, inkludert semantiske ikoner og fokus. DESIGNs bare gule soltoken mot hvit bakgrunn er beregnet til **1,59:1**. Den statiske kjøreskissen har også mørk understrek/ytterkant på solfiguren (`#171717` mot hvitt, beregnet **17,93:1**), men selve implementerte silhuetten/kanten i alle tilstander og eventuell korrigering er ikke verifisert. Mål **rendret PDF separat**, hver side og variant, med tekst og nødvendige grafiske tilstander mot faktisk bakgrunn. Registrer rå ratio, testmiljø og bestått/feilet/blokkert/ikke målt. Story 1.1, 1.3, 3.5, 3.14 og 7.4 eier avgrensede kontroller; 8.8 eier senere faktisk lesbarhet på montert Lenovo/Brave. Ingen av disse nye målingene eller E8-portene er bestått gjennom dette dokumenttillegget.
 
 ## Samlet vurdering
 
@@ -70,9 +78,9 @@ Ingen registrerte.
 
 **Opprinnelig observasjon:** Eksempelkontraster og ønsket om høy kontrast ga ingen målbar terskel for nye tekstkombinasjoner, fokusmarkeringer eller kontrollgrenser i begge temaer.
 
-**Tiltak og avklaring:** Numeriske akseptansekrav for tekst og ikke-tekst er lagt til. Dette gjør kravet testbart, men dokumenterer ikke at alle skjermtilstander eller montert bruk er testet.
+**Tiltak og avklaring (korrigert 2026-09-27):** Den opprinnelige påstanden om allerede innlagte numeriske krav var feil. IR-01-tillegget over dokumenterer senere produkteierbeslutning og rettet kontrakt i PRD/DESIGN/EXPERIENCE. Kravet er nå testbart; målingene er ikke utført.
 
-**Status:** Rettet i dokumentkontrakten.
+**Status:** Beslutning og dokumentkontrakt rettet etter readinessfunn IR-01. Rendret UI/PDF og montert enhet gjenstår som egne bevis.
 
 #### R4 — Avsluttet oppsummering hadde motstridende redigeringsregler
 

@@ -57,7 +57,7 @@ So that fullstack persistence, recovery and lifecycle claims are supported by ob
 **And** verify removal of all applicable private copies under the existing AD-12 inventory, plus rejection of late reads/writes independently of asynchronous purge. Preserve unrelated test-day/public-source data; do not claim deletion just from a hidden screen,
 **And** include a never-ended fixture expiring from planned final end without becoming completed, and an ended fixture retaining an earlier binding limit despite retries/review/export,
 **And** distinguish a downloaded user-held PDF from app-managed buffers/copies; do not claim the app deletes external files. Evidence must not introduce a permanent private backup or pilot archive,
-**And** any accelerated test clock or fault injection is explicitly labelled as a test mechanism. It cannot establish the missing real time proof for 5.4/7.1; unverifiable delayed activation/end-time cases remain restricted/unresolved and linked to the open solution decision.
+**And** any accelerated test clock or fault injection is explicitly labelled as a test mechanism. It cannot establish TIME-01 server acceptance or Tg/D behavior on the real candidate; late activation is rejected and uncertain-time cases remain restricted pending actual evidence.
 
 **Given** observed results from the repeatable procedures,
 **When** the evidence report is assembled,
@@ -74,6 +74,6 @@ So that fullstack persistence, recovery and lifecycle claims are supported by ob
 
 **Size boundary:** One bounded own-day/mentor lifecycle evidence pack and selected persistence/fault/expiry cases, reusing existing test infrastructure. Not a new application implementation, complete security audit, all-feature regression rewrite, live-source/device qualification, production provisioning, publication or final readiness review. Full target-environment gates, delivery documentation and field evaluation remain later E8 work.
 
-**Qualification boundary:** Real local fullstack/database evidence contributes to E8-D. Fictional source/sensor inputs and a controlled desktop environment cannot pass E8-P's actual source/OCR/device/access/host requirements. E8-E follows E8-P with three actual workdays. The 5.4/7.1 timing basis remains open; capacity/delivery remain unresolved. This story is being planned only: no tests, application changes, provisioning or deployment are executed now.
+**Qualification boundary:** Real local fullstack/database evidence contributes to E8-D. Fictional source/sensor inputs and a controlled desktop environment cannot pass E8-P's actual source/OCR/device/access/host requirements. E8-E follows E8-P with three actual workdays. TIME-01 policy is adopted but untested; capacity/delivery remain unresolved. This story is being planned only: no tests, application changes, provisioning or deployment are executed now.
 
 **Approval:** Approved by the owner on 2026-09-27 as scoped. Tests must demonstrate the actual client-to-PostgreSQL chain and report passed, failed, blocked and not-run cases distinctly. The evidence contributes to E8-D and does not replace E8-P. Planning approval only; the approved copy in epics.md is canonical.

@@ -62,7 +62,7 @@ So that I can recover valid corrections without replaying obsolete batches or si
 **And** persist the exact received set and server/local comparison basis with retain/discard/defer choices; subsequent local/server/plan/authority changes invalidate affected review and require comparison again,
 **And** selected valid corrections become new events under the current writer, with original evidence and manual correction provenance distinguishable; do not rewrite old batches or history,
 **And** bus actual time stays unknown when unknown, stop identity includes the trip occurrence, notice state remains version-specific, and no imported action produces a new chime or fresh GPS evidence merely by being received,
-**And** unresolved 5.4 time evidence, terminal restrictions and rejected domain invariants remain unresolved/protected rather than becoming valid through a generic recovery approval.
+**And** unknown pre-E acceptance or rejected 5.4 activation, terminal restrictions and rejected domain invariants remain unresolved/protected rather than becoming valid through a generic recovery approval.
 
 **Given** the current writer applies, explicitly discards or defers reviewed items,
 **When** the corresponding resolution status is recorded and returned to the former device,

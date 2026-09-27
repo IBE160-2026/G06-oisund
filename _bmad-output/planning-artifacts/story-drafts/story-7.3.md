@@ -58,7 +58,7 @@ So that I can understand what was recorded without confusing planned work, manua
 **Given** summary data is read, cached, refreshed or expires,
 **When** client/backend enforce access and lifecycle,
 **Then** authorize owner/day scope, enforce logout and pending-revocation locks, and apply the existing AD-10/12 limits to result and any derived summary copy; show applicable expiry without starting a fresh clock,
-**And** unverifiable local end time cannot extend retention/access; the earliest applicable deadline continues to apply under 7.1. The open 5.4 timing decision and role-uncertainty rules remain unresolved by presentation,
+**And** unverifiable local end time cannot extend retention/access; the earliest applicable deadline continues to apply under 7.1. TIME-01 implementation and role-uncertainty rules remain unresolved by presentation,
 **And** expiry/terminal guards prevent an old tab, cached response or older local snapshot restoring deleted content. No raw source file, extra movement archive, private historical backup, driver score or cross-account summary is introduced,
 **And** private operational summaries remain separate from fictional/anonymized demonstration data.
 
@@ -79,3 +79,5 @@ So that I can understand what was recorded without confusing planned work, manua
 **Pilot qualification:** Controlled coherent-summary, provenance, offline, access and lifecycle cases contribute to E8-D. E8-P still requires actual Lenovo/Brave readability and integrated end/review/summary/export/expiry checks; source and observation coverage cannot be inferred from a correct renderer. E8-E remains real-workday evaluation. No implementation or actual tests occur during planning.
 
 **Approval:** Approved by the owner on 2026-09-26 as scoped. The owner affirmed distinct planned facts, observations, manual confirmations and uncertainty; only actually recorded notice presentation is represented as displayed, and summary reading does not close initial review. Planning approval only; the approved copy in epics.md is canonical.
+
+**TIME-01 amendment (owner, 2026-09-27):** The ordinary retained daily summary for a day approved before E remains viewable after E only for its owner/day within the grant, effective D and earlier access caps after trusted time/status control. Show activation approval, offline closure settlement and summary receipt states separately; a server-approved start alone does not confirm later results. An unresolved or rejected local start is not a server-approved summary. After rejection, only a distinct still-permitted local-result review under 7.4 may be offered following fresh same-owner login and trusted checks. Test list/detail labels and blocked unknown-time/expired states.

@@ -11,7 +11,7 @@ dependencies: ['5.3', '5.1', '2.7', '2.8', '3.4', '1.4']
 
 ## Epic 5: Continue a Prepared Day and Reconcile Recovery
 
-This slice adds the missing prepared-to-active transition without a network round trip, and bounded server acceptance of that transition after reconnection. It reuses existing application authentication, prior server-issued day authority, local transactions and immutable receipts. It does not introduce offline login, authority creation or a new authentication architecture.
+This slice adds a provisional prepared-to-active transition without a network round trip and server acceptance only when durably committed before ordinary expiry E. It reuses existing authentication, a fresh original server-issued day grant with immutable Tg, local transactions and receipts. TIME-01 (owner, 2026-09-27) supersedes this story's former post-E timing-proof acceptance language.
 
 ### Story 5.4: Start a Previously Prepared Day Offline Within Valid Ordinary Access
 
@@ -26,24 +26,26 @@ So that loss of internet before departure does not prevent use of the available 
 **Then** require still-valid ordinary application authority, the existing server-issued owner/session/client/day grant, established writer scope and a coherent compatible local build before committing the prepared-to-active transition,
 **And** validate the locally retained confirmed plan/revision and available bundle associations, showing missing data rather than assuming that plan confirmation proves complete preparation,
 **And** missing/uncertain authority, pending logout, known revocation, another owner/client, terminal state or expiry cannot be bypassed by a cached login screen, cookie presence or an editable active flag,
-**And** no grant, ordinary session, writer epoch or fresh fourteen-day period is created offline; this uses preparation completed under 5.1 and existing access rules.
+**And** require the original final grant to have been issued by the server within 24 hours before first planned activity with immutable Tg; older preparation may be retained but a stale/missing final grant cannot authorize offline start,
+**And** no grant, ordinary session, writer epoch or fresh fourteen-day period is created offline; this uses preparation completed under 5.1 and existing access rules,
+**And** show before committing the offline start that it may be rejected unless the server durably approves it before E, with trusted remaining time only if available; do not present the warning as a successful server decision.
 
 **Given** an eligible prepared day and a valid actual entry into its operational lifecycle,
 **When** the transition is performed through the existing E3 entry flow,
 **Then** atomically persist the active-day transition and its typed outbox event before showing local activation as complete,
-**And** retain the concrete day, confirmed plan revision, client/writer scope, original grant and access-deadline basis, event identity/sequence and necessary timing evidence for later validation,
-**And** distinguish the transition's occurrence time from later server receipt time; keep uncertain timing explicitly uncertain rather than backdating it,
+**And** retain the concrete day, confirmed plan revision, client/writer scope, original grant, immutable Tg and E, event identity/sequence and local time provenance for display/audit, without treating client timing as authorization proof,
+**And** distinguish local occurrence from server durable acceptance time; keep the state `Uavklart` until a matching pre-E server receipt is established, and repeat the possible-rejection warning throughout that state,
 **And** creating a grant, viewing the plan, scheduled departure or a download completion alone cannot activate a day,
 **And** activation itself does not confirm a trip match, departure, stop passage or completed activity; existing E3 ambiguity handling and movement restrictions govern trip choice,
 **And** no extra mandatory driving-time confirmation or new trip-selection algorithm is introduced.
 
 **Given** ordinary access expires at app_authenticated_at plus fourteen days,
 **When** offline activation is attempted just before, at or after that boundary,
-**Then** permit only a valid transition committed before expiry; at/after expiry leave a merely prepared day unstarted and require renewed ordinary application authorization before starting it,
+**Then** permit a provisional local transition only while ordinary authority can be verified before E; at/after expiry leave a merely prepared day unstarted and require renewed application sign-in and a new server-confirmed start,
 **And** recheck access at commit: opening a screen before the deadline is insufficient if the transition commits after it,
-**And** an already committed eligible active day continues within its unchanged day scope under 5.1 and can reopen through 5.3 even when server acknowledgement has not yet arrived,
+**And** after E only an already server-approved active day has 5.1 continuation scope. A provisional local start with no established pre-E acceptance stays unresolved and cannot claim that exception; use narrowly scoped status lookup after reconnect before permitting further private operation,
 **And** delayed synchronization, reopening, clock changes and Access renewal cannot move the original transition earlier, extend its grant/data deadline or create a new ordinary period,
-**And** document and test the timing basis and its limits across suspension/restart/clock rollback; a caller-supplied occurred_at alone cannot prove eligibility. If timing/authority cannot be established, expose the uncertainty and require appropriate access recovery rather than inventing eligibility.
+**And** test suspension/restart/clock rollback; a caller-supplied occurred_at cannot prove eligibility. Offline restart with unverifiable time locks private view/actions/export until trusted control under TIME-01, preserving the local copy until deletion or recovery.
 
 **Given** activation is interrupted by write failure, closure, repeated entry or simultaneous tabs,
 **When** the app resumes or the operation is retried,
@@ -56,11 +58,12 @@ So that loss of internet before departure does not prevent use of the available 
 **Given** a day validly activated locally and not yet accepted as active on the server,
 **When** a controlled reconnection submits the transition through the existing immutable batch path,
 **Then** FastAPI validates authenticated owner/client/day, the previously issued grant and its original bounds, plan/lifecycle context, current writer authority, expected revision and activation eligibility before PostgreSQL accepts the transition,
-**And** accept a transition delivered after ordinary expiry only when a verifiable timing basis establishes that activation occurred during valid ordinary access, within the unchanged continuation grant; the client's own timestamp, active flag or event ordering alone is insufficient, and delayed delivery alone does not require a fresh login when that basis is established,
-**And** validate the transition and relevant preceding persisted state/evidence, not a bare active flag or a backdated timestamp; document which evidence establishes eligibility and what the server cannot independently know about disconnected timing,
-**And** if eligibility cannot be established or authority has been revoked, do not silently authorize broader access or label the transition server-confirmed; preserve permitted pending work and expose the specific unresolved access/reconciliation outcome,
+**And** accept the activation only when the server transaction durably commits its domain change, deduplication and receipt strictly before E. Mere request arrival, queued work, client `occurred_at`, local active flag and event order cannot establish pre-E server acceptance,
+**And** reject first acceptance at or after E regardless of claimed offline start time; fresh sign-in may authorize a new prospective server-confirmed start if the day remains valid, but cannot retroactively approve earlier local work,
+**And** if a matching activation was accepted before E but the response was lost, use an authorized narrow receipt/status lookup to recover that fact without a second mutation; a later lookup time does not move acceptance time,
+**And** when acceptance is unknown show `Uavklart`, preserve only still-permitted local work and do not imply server approval. On a known rejection stop operations and show `Oppstart ikke servergodkjent`; after fresh same-owner sign-in and trusted time/status check offer only separately marked review/export of unexpired own local work under FR-23,
 **And** accept the activation and its deduplication/receipt/revision atomically under AD-5; subsequent events follow valid causal order without requiring a generic future conflict UI,
-**And** test real PostgreSQL acceptance before expiry and, after expiry, only with an explicitly documented verifiable timing basis; separately test client-only timestamps, forged late activation and missing/unverifiable timing evidence. Without that basis the start remains locally recorded with unresolved server status, no acceptance receipt or activation mutation, and the limitation is raised for a separate owner solution decision; do not claim the requirement passed or change V1 automatically.
+**And** test real PostgreSQL acceptance strictly before E, rejection at/after E regardless of client time, lost pre-E receipt recovered after E, forged activation, missing Tg, revocation and no partial writes. Keep rejected versus unknown local results distinct; this TIME-01 decision resolves the policy question, not its implementation or tests.
 
 **Given** submission succeeds, loses its response or conflicts with newer server state,
 **When** a retry or response is handled,
@@ -82,7 +85,7 @@ So that loss of internet before departure does not prevent use of the available 
 **Given** acceptance evidence is prepared for this slice,
 **When** the implementation is tested,
 **Then** include confirmed versus unconfirmed plans, valid versus missing grant, complete versus partial data, prepared versus already active/terminal day and ordinary-access boundary cases,
-**And** cover clock rollback/uncertain timing, closure on each side of commit, duplicate tabs, offline start followed by restart after ordinary expiry, delayed server delivery, lost receipt, stale writer/revision, revocation and original expiry,
+**And** cover clock rollback/uncertain timing, closure on each side of commit, duplicate tabs, offline start followed by restart before/after E, pre-E acceptance with lost receipt, first arrival at/after E, stale writer/revision, revocation and original expiry; assert the pre-start and persistent pending-state warning,
 **And** retain only the fields required for the activation/validation contract in existing local state and authenticated FastAPI/PostgreSQL scope; no generic event-sourcing system, alternate credential or private archive is added,
 **And** apply AD-12 to every associated event, receipt and authority reference; retries or an unresolved eligibility decision do not extend retention. Keep private identifiers and payloads out of test publications and logs.
 
@@ -90,8 +93,8 @@ So that loss of internet before departure does not prevent use of the available 
 
 **Dependencies:** Implemented 5.1 server-issued day scope and online transition, 5.2 coherent assets, 5.3 same-client recovery, E2 confirmed dated plan/bundle, E3 operational entry/movement policy and existing E1–E4 synchronization primitives. The normal offline-start/delayed-acceptance case and protected rejection paths are testable here; future reconciliation UI, Access provisioning, E6 roles and E7 closing UI are not prerequisites.
 
-**Size boundary:** One prepared-to-active transition, its durable local evidence and normal later server acceptance/retry. No offline sign-in, authority issuance, cross-device takeover, generalized conflict resolution, full preparation dashboard, release migration or E6/E7 implementation. An unresolved timing/evidence limitation is a delivery risk requiring an owner solution decision, not an automatic change to V1.
+**Size boundary:** One provisional prepared-to-active transition, immutable Tg/E references, pre-E server acceptance or explicit rejection, status lookup/retry and visible warning. No offline sign-in, authority issuance, cross-device takeover, generalized conflict resolution, full preparation dashboard, release migration or E6/E7 implementation. TIME-01 is approved policy; implementation and E8-P evidence remain pending.
 
 **Pilot qualification:** Controlled browser/FastAPI/PostgreSQL scenarios contribute to E8-D. E8-P must verify actual Lenovo/Brave time/storage/restart, credential behavior and the integrated prepared-day path before real-shift use. E8-E remains the later field evaluation. No tests or implementation are performed while drafting.
 
-**Approval:** Approved by the owner on 2026-09-26 with post-expiry server acceptance requiring a verifiable timing basis, never the client timestamp alone. Without it the start remains locally recorded with unresolved server status and the limitation requires a separate solution decision. Planning approval only; the approved copy in epics.md is canonical.
+**Approval:** Original story approved 2026-09-26. TIME-01 was adopted by the owner on 2026-09-27 and supersedes post-E acceptance based on offline timing proof: first durable server acceptance must precede E; rejected/unknown local work stays distinct. Planning approval only; the approved copy in epics.md is canonical.

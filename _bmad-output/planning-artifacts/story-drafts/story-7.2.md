@@ -48,7 +48,7 @@ So that the retained result reflects my manual confirmation without pretending t
 **And** submit/apply them only in a valid ordered terminal-review sequence under current authorization/revision, retaining local/pending/unresolved status if the server cannot yet accept the closing basis,
 **And** FastAPI/PostgreSQL validates that each field/outcome change is allowed during initial review and preserves the distinction between old receipt outcome, closure receipt and review-confirmation receipt,
 **And** server rejection/conflict or unknown acceptance preserves only permitted local work for explicit resolution, without silently rewriting a confirmed fact, backdating an event to gain authority or using a client timestamp alone to bypass an expired scope,
-**And** 5.4 activation timing and 7.1 unverifiable ending time remain separate open evidence/decision issues. Review cannot establish their missing proof or extend the earliest applicable deadline.
+**And** 5.4 pre-E acceptance and 7.1 Tg/D remain separate implementation/evidence issues under adopted TIME-01. Review cannot establish their missing proof or extend the earliest applicable deadline.
 
 **Given** the initial review remains open and the owner requests to finish it,
 **When** the app presents the finish-review confirmation,
@@ -85,6 +85,8 @@ So that the retained result reflects my manual confirmation without pretending t
 
 **Size boundary:** Initial-review outcome list, explicit individual uncertain-activity confirmation, bounded persistence and durable explicit-completion-to-read-only boundary. No generic post-end editor, passenger stop reconstruction, new proof of physical events, full daily-summary composition, PDF, affirmation bank or permanent archive. Detailed retained-summary navigation remains later, but it cannot reopen editing established closed here.
 
-**Pilot qualification:** Controlled browser/FastAPI/PostgreSQL review/explicit-completion/receipt cases contribute to E8-D. E8-P requires mounted review usability, actual role/access behavior and full end/review/export/expiry integration. E8-E remains field evaluation. Manual attestation is not independent evidence of physical completion; role uncertainty and 5.4/7.1 timing issues remain test/decision points. No implementation or actual tests occur during planning.
+**Pilot qualification:** Controlled browser/FastAPI/PostgreSQL review/explicit-completion/receipt cases contribute to E8-D. E8-P requires mounted review usability, actual role/access behavior and full end/review/export/expiry integration. E8-E remains field evaluation. Manual attestation is not independent evidence of physical completion; role uncertainty and TIME-01 behavior remain test/evidence points. No implementation or actual tests occur during planning.
 
 **Approval:** Approved by the owner on 2026-09-26 with explicit review completion required after showing remaining uncertain activities. Back, accidental navigation, tab closure or crash alone cannot consume review continuation; phase recovery preserves access/expiry limits. Planning approval only; the approved copy in epics.md is canonical.
+
+**TIME-01 amendment (owner, 2026-09-27):** Initial post-end review remains available only within valid owner/day authority, effective D and trusted time control. A server-approved start does not certify offline closure or the reviewed result; show their own local versus server receipt status. A rejected offline activation cannot enter the ordinary approved-day review; after fresh same-owner sign-in and trusted checks, still-retained own local work may enter only the distinct read/export path, with no retroactive manual outcome confirmation as an approved day. Uncertain-time restart stays locked before review.

@@ -61,7 +61,7 @@ So that I can continue without mistaking a restored network connection for curre
 **And** preserve locally committed changes made during the request and pending events outside the acknowledged batch; an acknowledgement cannot replace the whole local view with the submitted snapshot,
 **And** a valid delayed receipt remains processable after a reconnect-generation change under current access/expiry rules, whereas stale source-status callbacks cannot regress newer source state; these different ordering rules must be tested separately,
 **And** retry a lost acceptance response without duplicating PostgreSQL effects; failure to save the receipt locally retains the immutable batch for safe retry,
-**And** 5.4 activation delivered after ordinary expiry remains unresolved without its required verifiable timing basis; reconnect or a fresh Access credential cannot manufacture that evidence.
+**And** 5.4 first acceptance at/after E is rejected under TIME-01; reconnect or a fresh Access credential cannot move E or manufacture earlier acceptance.
 
 **Given** source throttling/timeouts, repeated network flapping or concurrent recovery triggers,
 **When** attempts are scheduled and completed,
@@ -102,3 +102,5 @@ So that I can continue without mistaking a restored network connection for curre
 **Pilot qualification:** Repeatable browser/FastAPI/PostgreSQL fault scenarios contribute to E8-D. E8-P must qualify actual tethering, host/home-network and Access/source failure/recovery on Lenovo/Brave, with retained driving context and readable warnings. E8-E remains later field evaluation. Tests are specified, not run in planning.
 
 **Approval:** Approved by the owner on 2026-09-26 with restored connectivity, validated source updates and confirmed server storage remaining separate statuses. Pending revocation is processed first; conflicts and lost receipts cannot cause silent overwrite. Planning approval only; the approved copy in epics.md is canonical.
+
+**TIME-01 amendment (owner, 2026-09-27):** On reconnection, resolve an unresolved offline activation by its immutable identity and server acceptance time before dependent operational batches. A pre-E durable acceptance with lost response may be recovered by narrow receipt/status lookup; first acceptance at/after E is rejected regardless of client time. Keep `Uavklart` visible until resolved, then show approved or rejected status. A rejected start stops operations and routes still-retained own work to the distinct post-login local-result review/export under FR-23. Reconnection does not move E, Tg or D, unlock uncertain-time private content before trusted checks, or turn transport success into server approval.

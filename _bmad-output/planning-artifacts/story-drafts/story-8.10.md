@@ -80,7 +80,7 @@ So that host interruptions and updates have known limits without exposing privat
 **Then** list passed, failed, blocked and not-run cases, actual outage/workload durations, measured observations versus fixtures, tested version combinations and remaining operator actions/limitations,
 **And** tie each finding to its requirement, owning implementation story and any owner decision, with targeted revalidation required after relevant host/configuration/build changes,
 **And** retain sanitized results and reproducible procedures, not private originals, credentials, database dumps or a permanent operational archive,
-**And** keep 5.4/7.1 expressly unresolved until its own evidenced solution decision. Host timestamps, a changed clock or successful deployment do not establish disconnected activation/end timing,
+**And** apply adopted TIME-01 while keeping missing implementation and evidence open. Host timestamps, clock changes and deployment do not establish pre-E server acceptance or move Tg/D,
 **And** provide evidence for the host/deployment and release parts of E8-P only. Report completion, successful startup or a compatible release alone does not grant actual-shift permission; E8-D/P/E remain separate decisions.
 
 **Traceability:** E8-P access/deployment and release gates; AD-13 Windows/Docker startup, private/demo boundary, resource/noise and portable operation; AD-14 retained-client support, coherent boot, accepted activation, migration and compatible rollback. AD-2/4/5/6/7/8/9/10/11/12 preservation, cleanup, authority and expiry remain binding. Supporting FR-1/17–25 and retained E1–E7 behavior, NFR-1–4, UX-DR3/14/19/23/24/26–39/44. No AD-1–AD-14 choice is changed.
