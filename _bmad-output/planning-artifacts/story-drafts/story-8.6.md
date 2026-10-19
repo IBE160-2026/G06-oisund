@@ -1,5 +1,5 @@
 ---
-status: approved
+status: superseded-by-scope-02
 created: 2026-09-27
 epic: E8
 story: '8.6'
@@ -8,6 +8,11 @@ approved: true
 approvedOn: 2026-09-27
 dependencies: ['8.1', '8.2', '8.3', '8.4', '8.5']
 ---
+
+<!-- scope-02-historical -->
+> **Historical baseline — superseded for active V1 on 2026-10-19.** Jonas approved [SCOPE-02](../sprint-change-proposal-2026-10-19.md). The [current backlog](../epics.md), PRD and UX/architecture spines govern. Earlier approvals, mandatory language, unresolved questions and test plans below describe the previous scope; they neither reactivate deferred features nor establish current test results. The proposal maps every old story to rewritten or deferred responsibilities. TIME-01's offline mechanisms are deferred; applicable IR-01 UI criteria remain.
+<!-- /scope-02-historical -->
+
 
 ### Story 8.6: Assemble the Assessable IBE160 Delivery and Record the E8-D Checkpoint
 

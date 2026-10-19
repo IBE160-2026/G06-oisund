@@ -1,48 +1,58 @@
-﻿---
-title: "IBE160 Bus-Driver Assistant — Product Brief"
-status: final
+---
+title: "IBE160 Bus Driver Assistant — Product Brief"
+status: approved
+decision: SCOPE-02
 created: 2026-09-21
-updated: 2026-09-21
+updated: 2026-10-19
 ---
 
-# Product Brief: Bus-Driver Assistant
+# Product Brief: Bus Driver Assistant
 
 ## Purpose and users
 
-A bus-driver assistant designed primarily for a tablet mounted in the cab. It brings the day's work and relevant operational information into one view tailored to the shift, helping the driver prepare before departure and stay oriented throughout the day, with less searching during breaks.
-
-The first user and evaluator is Jonas, a bus driver in Tromsø. The pilot covers lines 20, 24, 28 and 42; 20 and 24 remain distinct despite similar routes. The broader concept should support other routes and cities. It is decision support, not a replacement for traffic signs, official instructions or safe driving.
+A tablet-adapted website that helps a bus driver prepare and consult a clear overview of the day's work while stopped. The first user is Jonas in Tromsø; lines 20, 24, 28 and 42 provide initial examples. A course assessor uses fictional data on an ordinary PC. The website supports the driver without replacing official instructions, signs, Tide or NavCon.
 
 ## Problem and evidence
 
-Shift information and actual bus assignments are available through an app and Selfservice, while operational messages arrive through SMS, NavCon, websites and media. Jonas estimates that checking these sources consumes 20–30 minutes of an eight-hour day, including much of his breaks. He wants to relax rather than search for information he may have missed.
+Shift information, bus assignments and operational messages are spread across Selfservice, an app, SMS, NavCon and websites. Jonas estimates 20–30 minutes of information checking per eight-hour day. Eleven previously examined shift reports contain useful planned activities but variable layouts; extraction can mix columns, times and activities. Physical bus assignments must not be inferred from vehicle-duty identifiers.
 
-An early prototype showed promise in daily summaries and automatic trip switching, but supplied an incorrect diversion and missed known roadworks and a moved stop. These user-reported observations make information reliability the central risk. Supplied shift PDFs contain much of the planned work, but omit physical bus assignments and have variable layouts. In Jonas's experience, planned deviations appear on Svipper in time; acute events can lag.
+The earlier prototype reportedly missed relevant notices and supplied an incorrect diversion. Reliability and honest uncertainty remain important. The [supporting evidence](addendum.md) is historical research, not a claim of implemented or verified capability.
 
-## First-version scope
+## Approved course V1
 
-- **Shift preparation:** Import a Selfservice PDF and allow manual entry of the assigned bus. Present a daily overview of trips, breaks, start/end locations, bus changes and car-transfer activities. Car numbers are unnecessary. Direct Selfservice integration is excluded.
-- **Active trip:** Show current line, trip, direction/destination and next stop in a glanceable view. Follow actual progress using GPS or real-time information; timetable-only switching is insufficient. Allow manual next/previous trip selection for skipped trips or incorrect detection.
-- **Planned deviations:** Present Svipper-published deviations relevant to the shift and current trip, including applicable roadworks, closures, diversions and moved stops. Show validity, last update and a button to the original source. Live queue delays and acute cancellations are excluded.
-- **Speed information:** Current speed limit plus warning of the next change when 100 metres or less remain is an important desired first-version capability. Data coverage and positioning reliability are unverified; this is an explicit delivery risk, not a guaranteed capability.
-- **Demonstration and real use:** Provide a test/demo function with clearly labelled simulated data and support evaluation during actual shifts. Simulation alone cannot demonstrate operational usefulness.
+On 19 October Jonas approved [SCOPE-02](../../sprint-change-proposal-2026-10-19.md) in response to [instructor feedback](tilbakemelding-product-brief.md). This replaces the earlier first-version scope.
 
-The course project must demonstrate a full-stack solution and use a database. Technical architecture, frameworks and the source of speed-limit data remain undecided.
+- Import supported text-based Selfservice PDFs into an unconfirmed draft; inspect, directly correct, add, remove and order activities before confirmation.
+- Enter the physical bus manually and show reporting time, planned trips, breaks, known locations, bus changes and transfers in a chronological overview.
+- Select an activity directly or with previous/next controls. Selection and planned time do not establish observed location or completion.
+- Maintain a simple source-linked notice list manually, with line tags, nullable validity/source-update time and separate entered/checked time. Filter by the day's lines and dates, identifying uncertainty. This version does not automatically fetch Svipper notices.
+- Save and reopen plans through a real backend and database while connected. Record manual outcomes, explicitly end/abort and read a small recap.
+- Run a resettable local fictional fullstack demonstration without live feeds, GPS, paid accounts or real shift files.
+
+Retain basic private access, transient input files, bounded retention and readable tablet/PC interfaces. Existing confirmed work is not replaced by another upload. Draft edits precede activation; complex in-day revisions are deferred.
 
 ## Trust and failure behavior
 
-When trip detection is uncertain, retain the last selected trip, clearly indicate uncertainty and allow manual correction. If deviation retrieval fails, retain previously retrieved messages with a clear warning that they may be outdated. If road identification or the speed limit is uncertain, show uncertainty rather than presenting an old limit or one from an adjacent road as valid, and withhold unverified change warnings. Distinguish the source's last update from the time the assistant retrieved it; do not invent missing metadata.
+Extraction stays unconfirmed until reviewed. Missing fields, unsupported layouts and unknown activity codes remain visible; manual entry is available but does not count as successful PDF extraction. Imported Vogn is not the physical bus, and Travel to is not automatically pilot-car travel.
 
-## Value and success criteria
+Separate planned, manually corrected, unknown and fictional information. Source-update time is not entry/check time. No manually registered notices does not mean no disruptions. Failed or uncertain saves stay visibly unresolved until checked against the server. No GPS, live next-stop, movement-lock or offline restart guarantee is made. End/abort never silently completes unrecorded work.
 
-The intended advantage is a single view filtered to the driver's actual work, with information that can be checked at its source. Existing tools remain relevant: NavCon already provides schedule deviation in minutes and seconds, so duplicating that display is outside the MVP.
+## Success criteria
 
-The agreed target is to halve information-checking time to approximately 10–15 minutes per eight-hour day, including use of the assistant and source verification. Success means those checks are sufficient, without continued searching across channels, and relevant planned deviations are not overlooked in the evaluated cases.
+The functional acceptance contract is in [PRD section 8](../../prds/prd-IBE160-2026-09-21/prd.md):
 
-Initial evaluation covers three actual working days using the shifts Jonas receives, not repeated identical shifts. After each day, record checking time, what worked, missing information and observed errors in trip selection or speed limits. Results are indicative: shifts vary and the baseline is recalled rather than measured. Demonstrated features and observed real-shift outcomes must be reported separately.
+1. For 3–5 independently checked anonymized PDFs, supported extraction preserves expected known activities and fields; errors/unsupported categories are reported separately. Corrections and confirmed results match a checked expected plan after save/reload.
+2. Manual selection distinguishes line, direction and date, including midnight; it never marks an activity complete.
+3. Notice filtering, source metadata, empty/unavailable states and manual maintenance labels are testable against fixed examples.
+4. Real frontend/API/PostgreSQL persistence, private/demo isolation, explicit closure, expiry, failed saves and readable included interfaces have executed evidence.
+5. The assessor can follow a clean local README and repeat fictional scenarios. A static browser mock alone is insufficient.
 
-## Feasibility and broader vision
+Reducing checking time toward 10–15 minutes remains a longer-term hypothesis. Count manual notice upkeep and source verification in that time. A demo does not prove real-world time saving, source completeness or operational usefulness; a three-workday field trial belongs to a separately scoped later evaluation.
 
-Jonas is working alone for approximately ten working weeks at 4–16 hours weekly (40–160 hours), with submission expected in mid-December 2026; the exact date is unconfirmed. The combined scope is ambitious, particularly at the lower end of that range. Reliable PDF interpretation, matching Svipper messages to trips, actual-progress detection on overlapping lines, and speed-limit data require early feasibility checks. If these fail, scope must be revisited explicitly; simulation must not be presented as live capability.
+## Feasibility and later increments
 
-Approaching-bus awareness is the first proposed extension, followed by AI-based relevance prioritization and short alert generation. Weather now and for the next hour—temperature, wind, precipitation, cloud cover/sunshine and slippery-condition information—is also a future candidate, ranked below speed information. The broader vision is timely, relevant operational support across locations. Detailed source evidence, scenarios, course guidance and unresolved questions are preserved in [the addendum](addendum.md).
+Jonas estimates 60–80 remaining hours, including a holiday week potentially providing about 40 hours. Submission is expected in December 2026; the exact date remains unconfirmed. Plan against approximately 60 hours with at least 12 hours reserved for correction and delivery. The first PDF experiment is timeboxed to roughly 3–4 hours. An inadequate supported input set requires a documented scope decision, not a false pass.
+
+V1 uses a frontend, backend and database. The adopted stack is React/TypeScript, FastAPI and PostgreSQL; actual versions are verified during bootstrap.
+
+Automatic notices and timetable enrichment, GPS/stop progression, speed information, offline execution, FADDER/operational INSTRUKTØR, advanced revisions and PDF export are deferred. Weather, meeting-bus awareness, AI and direct Selfservice integration remain later candidates. None is an implicit semester commitment.

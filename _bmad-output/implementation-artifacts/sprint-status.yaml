@@ -1,0 +1,68 @@
+# STATUS DEFINITIONS:
+# ==================
+# Epic Status:
+#   - backlog: Epic not yet started
+#   - in-progress: Epic actively being worked on
+#   - done: All stories in epic completed
+
+# Story Status:
+#   - backlog: Story only exists in epic file
+#   - ready-for-dev: Story file created, ready for development
+#   - in-progress: Developer actively working on implementation
+#   - review: Implementation complete, ready for review
+#   - done: Story completed
+
+# Retrospective Status:
+#   - optional: Can be completed but not required
+#   - done: Retrospective has been completed
+
+# Action Item Status:
+#   - open: Committed during a retrospective, not yet addressed
+#   - in-progress: Actively being worked on
+#   - done: Completed
+
+# WORKFLOW NOTES:
+# ===============
+# - Epic transitions to 'in-progress' automatically when its first story starts (via build's sprint sync)
+# - Stories can be worked in parallel if team capacity allows
+# - Developer typically creates the next story after the previous one is 'done' to incorporate learnings
+# - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
+# - Retrospective appends its action items to action_items; the status view surfaces open ones
+generated: 10-19-2026 14:35
+last_updated: 10-19-2026 14:35
+project: IBE160
+project_key: NOKEY
+tracking_system: file-system
+story_location: D:/IBE160/_bmad-output/implementation-artifacts
+development_status:
+  epic-9: backlog
+  9-1-establish-supported-imports: backlog
+  9-2-run-a-persisted-fictional-day-locally: backlog
+  9-3-access-private-work: backlog
+  9-4-save-and-reopen-a-draft: backlog
+  epic-9-retrospective: optional
+
+  epic-10: backlog
+  10-1-review-a-text-pdf: backlog
+  10-2-correct-the-draft: backlog
+  10-3-confirm-the-reviewed-plan: backlog
+  10-4-record-the-physical-bus: backlog
+  10-5-read-the-day: backlog
+  epic-10-retrospective: optional
+
+  epic-11: backlog
+  11-1-choose-the-intended-activity: backlog
+  11-2-understand-the-selected-activity: backlog
+  11-3-record-outcomes-and-close: backlog
+  11-4-maintain-a-planned-notice: backlog
+  11-5-read-line-date-notices: backlog
+  11-6-recover-from-an-unavailable-server: backlog
+  epic-11-retrospective: optional
+
+  epic-12: backlog
+  12-1-enforce-the-retained-data-boundary: backlog
+  12-2-repeat-a-fictional-assessment: backlog
+  12-3-use-the-included-views-on-tablet-and-pc: backlog
+  12-4-verify-the-complete-user-flow: backlog
+  12-5-deliver-a-reproducible-submission: backlog
+  epic-12-retrospective: optional

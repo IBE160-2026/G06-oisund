@@ -1,5 +1,5 @@
 ---
-status: approved
+status: superseded-by-scope-02
 created: 2026-09-26
 epic: E4
 story: '4.2'
@@ -9,6 +9,11 @@ approved: true
 approvedOn: 2026-09-26
 dependencies: ['4.1', '1.4', '2.7', '3.2']
 ---
+
+<!-- scope-02-historical -->
+> **Historical baseline — superseded for active V1 on 2026-10-19.** Jonas approved [SCOPE-02](../sprint-change-proposal-2026-10-19.md). The [current backlog](../epics.md), PRD and UX/architecture spines govern. Earlier approvals, mandatory language, unresolved questions and test plans below describe the previous scope; they neither reactivate deferred features nor establish current test results. The proposal maps every old story to rewritten or deferred responsibilities. TIME-01's offline mechanisms are deferred; applicable IR-01 UI criteria remain.
+<!-- /scope-02-historical -->
+
 
 ## Epic 4: Understand Relevant Notices and Their Sources
 

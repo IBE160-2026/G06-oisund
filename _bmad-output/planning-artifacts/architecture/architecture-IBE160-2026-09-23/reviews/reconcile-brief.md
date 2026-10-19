@@ -1,3 +1,7 @@
+<!-- scope-02-historical -->
+> **Historical baseline — superseded for active V1 on 2026-10-19.** Jonas approved [SCOPE-02](../../../sprint-change-proposal-2026-10-19.md). The [current backlog](../../../epics.md), PRD and UX/architecture spines govern. Earlier approvals, mandatory language, unresolved questions and test plans below describe the previous scope; they neither reactivate deferred features nor establish current test results. The proposal maps every old story to rewritten or deferred responsibilities. TIME-01's offline mechanisms are deferred; applicable IR-01 UI criteria remain.
+<!-- /scope-02-historical -->
+
 # Product Brief reconciliation
 
 Verdict: **Pass with two small clarifications.** No unhandled architectural dimension or contradiction with the effective brief scope was found. Later PRD/UX and adopted architecture decisions correctly supersede the brief's original speed-limit ambition, Selfservice-PDF wording and older raw-file retention assumptions.
