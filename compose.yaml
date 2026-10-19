@@ -1,0 +1,42 @@
+name: ibe160-fictional-assessment
+services:
+  db:
+    image: postgres:17-alpine@sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24
+    environment:
+      POSTGRES_DB: fictional_assessment
+      POSTGRES_USER: fictional
+      POSTGRES_PASSWORD: fictional-local-only
+    volumes:
+      - fictional_pg:/var/lib/postgresql/data
+    healthcheck:
+      test: [CMD-SHELL, pg_isready -U fictional -d fictional_assessment]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+  api:
+    build: ./backend
+    environment:
+      APP_MODE: fictional-assessment
+      DATABASE_URL: postgresql://fictional:fictional-local-only@db/fictional_assessment
+    ports: ['127.0.0.1:8000:8000']
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+  frontend:
+    build: ./frontend
+    ports: ['127.0.0.1:5173:5173']
+    depends_on:
+      api:
+        condition: service_healthy
+    healthcheck:
+      test: [CMD, node, -e, "fetch('http://127.0.0.1:5173').then(r=>{if(!r.ok)process.exit(1)})"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+volumes:
+  fictional_pg:

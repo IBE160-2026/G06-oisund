@@ -37,6 +37,7 @@ htmlcov/
 coverage.xml
 test-results/
 playwright-report/
+.cache/
 
 # Secrets and local environment; keep example files
 .env
