@@ -29,17 +29,17 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 10-19-2026 14:35
-last_updated: 10-20-2026 23:25
+last_updated: 10-20-2026 23:36
 project: IBE160
 project_key: NOKEY
 tracking_system: file-system
 story_location: D:/IBE160/_bmad-output/implementation-artifacts
 development_status:
-  epic-9: in-progress
+  epic-9: done
   9-1-establish-supported-imports: done
   9-2-run-a-persisted-fictional-day-locally: done
   9-3-access-private-work: done
-  9-4-save-and-reopen-a-draft: review # Friendly date/time entry verified; owner walkthrough and final approval pending.
+  9-4-save-and-reopen-a-draft: done # Owner approved after walkthrough, including bus/reset/delete and friendly time entry.
   epic-9-retrospective: optional
 
   epic-10: backlog

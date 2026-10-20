@@ -161,6 +161,12 @@ No intent gaps. Footprint: private DB/API/UI and tests. Verify migration replay/
 
 ## Verification
 
+### Owner acceptance and closure — 2026-10-20
+
+- Jonas explicitly approved story9.4 after walkthrough: "Aha, da henger jeg med. da kan dette godkjennes." He reported the friendly time entry working well and accepted the explanation of activity types, planned times and optional original-clock/uncertainty/provenance fields. Earlier walkthrough amendments added manual bus/derived duty and clear/reset/delete. No additional UI change is inferred from the explanatory discussion.
+- Acceptance relies on recorded independent review, 61 passing private backend tests, 54 passing browser tests, production build and real restart/persistence evidence. No new tests or operational mutations for this documentation closure. Sprint9.4 and Epic9 are done because all four stories are accepted; retrospective stays optional and later stories remain backlog. This dated closure supersedes earlier pending-approval handoffs.
+- Walkthrough completion customization resolved to empty. No new commit/push or next story.
+
 ### Time-entry final root verification — 2026-10-20
 
 - Root read the time-entry and correction diffs and inspected synthetic renders. The exact final disposable verifier passed **61 backend tests (86.48s)**, actual PostgreSQL/API restart, migration replay/account/session/draft/operation/deadline equality, cleanup, production TypeScript/Vite build and **54 browser tests (2.1m)**. The prior two verifier unit tests remain applicable to unchanged verifier code. No product code changed after this run.
