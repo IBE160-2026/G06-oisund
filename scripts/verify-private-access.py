@@ -1,5 +1,6 @@
 """Sequential, local integration evidence; emits no account/session credentials."""
 import http.cookiejar
+import os
 import json
 from pathlib import Path
 import secrets
@@ -10,6 +11,8 @@ import urllib.request
 from uuid import uuid4
 
 ROOT = Path(__file__).resolve().parent.parent
+if os.environ.get('COMPOSE_PROJECT_NAME') != 'ibe160-private-tests':
+    raise SystemExit('Select disposable COMPOSE_PROJECT_NAME=ibe160-private-tests before verification.')
 PRIVATE = ['docker', 'compose', '-f', 'compose.private.yaml']
 NAME = 'synthetic-restart-' + uuid4().hex
 PASSWORD = secrets.token_urlsafe(24)

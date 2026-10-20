@@ -10,6 +10,8 @@ from fastapi.responses import JSONResponse
 from pydantic import BaseModel, ConfigDict, Field
 
 from . import auth
+from . import draft_storage
+from .draft_domain import DraftList, DraftRecord, IssueOperation, IssuedOperation, OperationResult, SaveDraft
 from .private_storage import cleanup, database
 
 
@@ -47,7 +49,8 @@ async def boundary(request, call_next):
             # Consume incrementally before JSON decoding; Content-Length is untrusted.
             body = bytearray()
             async for chunk in request.stream():
-                if len(body) + len(chunk) > 4096:
+                limit = 1048576 if request.url.path == '/drafts' or request.url.path.startswith('/drafts/') else 4096
+                if len(body) + len(chunk) > limit:
                     raise HTTPException(413, 'Forespørselen er for stor.')
                 body.extend(chunk)
             request._body = bytes(body)
@@ -128,3 +131,33 @@ def logout(request: Request, response: Response):
         conn.execute('DELETE FROM sessions WHERE token_hash=%s', (auth.digest(request.cookies.get(auth.SESSION, '')),))
     response.delete_cookie(auth.SESSION, path='/', httponly=True, samesite='strict')
     return {'revoked': True}
+
+
+@app.get('/drafts', response_model=DraftList)
+def drafts(request: Request):
+    return draft_storage.listing(request)
+
+
+@app.get('/drafts/{identifier}', response_model=DraftRecord)
+def draft(identifier: UUID, request: Request):
+    return draft_storage.read(request, identifier)
+
+
+@app.post('/draft-operations', response_model=IssuedOperation)
+def issue_operation(body: IssueOperation, request: Request):
+    return draft_storage.issue(request, body.draft_id)
+
+
+@app.get('/draft-operations/{identifier}', response_model=OperationResult)
+def find_operation(identifier: UUID, request: Request):
+    return draft_storage.lookup(request, identifier)
+
+
+@app.post('/drafts', response_model=DraftRecord)
+def create_draft(body: SaveDraft, request: Request):
+    return draft_storage.save(request, None, body)
+
+
+@app.post('/drafts/{identifier}', response_model=DraftRecord)
+def update_draft(identifier: UUID, body: SaveDraft, request: Request):
+    return draft_storage.save(request, identifier, body)

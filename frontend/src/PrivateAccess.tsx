@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { PrivateDrafts } from './PrivateDrafts';
 
 const API = 'http://127.0.0.1:8001';
 // Only a logout lock, never an account, credential or private presentation. A cookie
@@ -30,22 +31,24 @@ export function PrivateAccess() {
   const heading = useRef<HTMLHeadingElement>(null);
   const usernameInput = useRef<HTMLInputElement>(null);
   const [focusLogin, setFocusLogin] = useState(false);
+  const [suspended, setSuspended] = useState(false);
+  const draftDirty = useRef(false);
 
   async function request(path: string, options?: RequestInit) {
     const response = await fetch(API + path, { ...options, credentials: 'include', cache: 'no-store', signal: AbortSignal.timeout(10000) });
     if (!response.ok || !response.headers.get('content-type')?.includes('application/json')) {
-      if (response.status === 401) throw new Error('Logg inn på nytt. Brukernavn eller passord kan være feil.');
-      if (response.status === 429) throw new Error('For mange forsøk. Vent 15 minutter før du prøver igjen.');
-      throw new Error('Tjenesten er utilgjengelig eller avviste forespørselen.');
+      const error = new Error(response.status === 401 ? 'Logg inn på nytt. Brukernavn eller passord kan være feil.' : response.status === 429 ? 'For mange forsøk. Vent 15 minutter før du prøver igjen.' : 'Tjenesten er utilgjengelig eller avviste forespørselen.');
+      throw Object.assign(error, { status: response.status });
     }
     return response.json();
   }
   async function mutation(path: string, body?: object) {
     if (!navigator.locks) throw new Error('Nettleseren støtter ikke sikker innlogging.');
     return navigator.locks.request('private-auth-mutations', async () => {
-      if (path === '/auth/login' && pending()) throw new Error('Fullfør utlogging først.');
+      if (path !== '/auth/logout' && pending()) throw new Error('Fullfør utlogging først.');
       const proof = await request('/auth/csrf');
       if (typeof proof.csrf_token !== 'string') throw new Error('Tilgangen kunne ikke bekreftes.');
+      if (path !== '/auth/logout' && pending()) throw new Error('Fullfør utlogging først.');
       return request(path, { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-CSRF-Token': proof.csrf_token }, body: JSON.stringify(body ?? {}) });
     });
   }
@@ -53,6 +56,7 @@ export function PrivateAccess() {
     generation.current++; setSession(null); setPassword(''); setUsername(''); setMessage(text);
   }
   async function logout() {
+    if (!pending() && draftDirty.current && !window.confirm('Ulagrede endringer går tapt ved utlogging. Vil du logge ut?')) return;
     lockKnown.current = true;
     markPending(true); setLocked(true); clear('Utlogging er ikke bekreftet. Privat innhold er låst.'); setBusy(true);
     channel.current?.postMessage('logout-pending');
@@ -76,9 +80,12 @@ export function PrivateAccess() {
       const result = await request('/auth/session');
       if (current !== generation.current || pending()) return;
       if (!validSession(result)) throw new Error('Logg inn på nytt.');
-      setSession(result); setMessage('Du er logget inn.');
-    } catch {
-      if (current === generation.current) { setSession(null); setMessage('Logg inn for å åpne privat arbeidsrom.'); }
+      setSession(previous => previous?.account_id === result.account_id && previous.created_at === result.created_at ? previous : result); setSuspended(false); setMessage('Du er logget inn.');
+    } catch (error: any) {
+      if (current === generation.current) {
+        if (error?.status === 401) { setSession(null); setSuspended(false); setMessage('Logg inn for å åpne privat arbeidsrom.'); }
+        else { setSuspended(true); setMessage('Tilgangen kan ikke bekreftes. Privat innhold er skjult. Prøv igjen når tjenesten er tilgjengelig.'); }
+      }
     } finally { if (current === generation.current) setBusy(false); }
   }
   async function login(event: React.FormEvent) {
@@ -92,7 +99,7 @@ export function PrivateAccess() {
       const result = await mutation('/auth/login', credentials);
       if (current !== generation.current || pending()) return;
       if (!validSession(result)) throw new Error('Tilgangen kunne ikke bekreftes.');
-      setUsername(''); setSession(result); setMessage('Du er logget inn.');
+      setUsername(''); setSession(result); setSuspended(false); setMessage('Du er logget inn.');
     } catch (error) {
       if (current === generation.current) setMessage(error instanceof Error ? error.message : 'Innlogging er ikke bekreftet.');
     } finally { if (current === generation.current) setBusy(false); }
@@ -110,8 +117,8 @@ export function PrivateAccess() {
     };
     void restore();
     // BFCache/history must not resurrect a private view; revalidate with the server.
-    function hide() { generation.current++; setSession(null); setMessage('Kontrollerer tilgang …'); }
-    function show() { setSession(null); void restore(); }
+    function hide() { generation.current++; setSuspended(true); setMessage('Kontrollerer tilgang …'); }
+    function show() { void restore(); }
     function visibility() {
       if (document.visibilityState === 'hidden') hide();
       else show();
@@ -140,10 +147,11 @@ export function PrivateAccess() {
   return <main>
     <p className="badge">Privat tilgang</p>
     <h1 ref={heading} tabIndex={-1}>{session && !locked ? 'Privat arbeidsrom' : 'Logg inn'}</h1>
-    <p role="status" aria-live="polite" className="status">{message}</p>
+    <p role="status" aria-label="Tilgangsstatus" aria-live="polite" className="status">{message}</p>
+    {suspended && session && !locked && <button disabled={busy} onClick={() => void restore()}>Kontroller tilgang igjen</button>}
     {locked ? <button disabled={busy} onClick={() => void logout()}>Prøv utlogging igjen</button>
       : session ? <section aria-label="Privat arbeidsrom">
-        <p>Arbeidsrommet er tomt. Lagring av private utkast kommer senere.</p>
+        <PrivateDrafts key={session.account_id + session.created_at} request={async path => { if (pending() || suspended) throw Error(); return request(path); }} mutation={mutation} dirtyChanged={value => { draftDirty.current = value; }} expired={() => { clear('Økten er utløpt. Logg inn på nytt.'); setBusy(false); setFocusLogin(true); }} suspended={suspended} />
         <p>Økten utløper {new Intl.DateTimeFormat('nb-NO', { dateStyle: 'short', timeStyle: 'short', timeZone: 'Europe/Oslo' }).format(new Date(session.expires_at))}.</p>
         <button disabled={busy} onClick={() => void logout()}>Logg ut</button>
       </section> : <form onSubmit={event => void login(event)} aria-label="Innlogging">

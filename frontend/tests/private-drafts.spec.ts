@@ -1,0 +1,242 @@
+import { test, expect, type Page } from '@playwright/test';
+import { execFileSync } from 'node:child_process';
+import { randomUUID, randomBytes } from 'node:crypto';
+
+const username = 'synthetic-drafts-browser-' + randomUUID();
+const password = randomBytes(24).toString('hex');
+function python(program: string) {
+  if (process.env.COMPOSE_PROJECT_NAME !== 'ibe160-private-tests') throw Error('Disposable project selection required');
+  return execFileSync('docker', ['compose', '-p', 'ibe160-private-tests', '-f', 'compose.private.yaml', 'exec', '-T', 'private-api', 'python', '-'], { cwd: '..', input: 'from app.auth import require_synthetic_accounts\nfrom app.private_storage import database\nwith database() as conn:\n require_synthetic_accounts(conn)\n' + program, encoding: 'utf8' });
+}
+test.beforeAll(() => { python(`from app.auth import provision\nprovision(${JSON.stringify(username)}, ${JSON.stringify(password)})\nwith database() as conn:\n conn.execute('DELETE FROM login_limits')\n`); });
+test.beforeEach(() => { python("with database() as conn:\n conn.execute('DELETE FROM login_limits')\n"); });
+test.afterAll(() => { python(`with database() as conn:\n owner=conn.execute('SELECT id FROM accounts WHERE username=%s', (${JSON.stringify(username)},)).fetchone()['id']\n conn.execute('DELETE FROM drafts WHERE owner=%s',(owner,))\n conn.execute('DELETE FROM draft_operations WHERE owner=%s',(owner,))\n conn.execute('DELETE FROM sessions WHERE owner=%s',(owner,))\n conn.execute('DELETE FROM accounts WHERE id=%s',(owner,))\n conn.execute('DELETE FROM login_limits')\n`); });
+async function login(page: Page) {
+  await page.goto('/private');
+  await page.getByLabel('Brukernavn', { exact: true }).fill(username);
+  await page.getByLabel('Passord', { exact: true }).fill(password);
+  await page.getByRole('button', { name: 'Logg inn', exact: true }).click();
+  await expect(page.getByRole('heading', { name: 'Mine utkast' })).toBeVisible();
+}
+async function fill(page: Page) {
+  await page.getByLabel('Tjenestedato', { exact: true }).fill('2026-10-24');
+  await page.getByLabel('Vognløp', { exact: true }).fill('0007');
+  await page.getByLabel('Sanntidsverdi (tre sifre)').fill('007');
+  await page.getByRole('button', { name: 'Legg til aktivitet' }).click();
+  await page.getByLabel('Opprinnelig kode').fill('Unknown/42');
+  await page.getByLabel('Start med dato og Oslo-offset').fill('2026-10-25T00:00+02:00');
+  await page.getByLabel('Slutt med dato og Oslo-offset').fill('2026-10-25T02:30+01:00');
+  await page.getByLabel('Opprinnelig startklokke').fill('24:00');
+  await page.getByLabel('Opprinnelig sluttklokke').fill('26:30');
+  await page.getByLabel('Kilde / manuell rettelse').fill('Manuell rettelse, ukjent sted.');
+}
+const status = (page: Page) => page.getByRole('region', { name: 'Private utkast' }).getByRole('status');
+
+for (const width of [768, 1440]) test(`keyboard save and reopen midnight facts at ${width}px`, async ({ page }) => {
+  await page.setViewportSize({ width, height: 1100 });
+  await login(page); await fill(page);
+  await page.getByRole('button', { name: 'Lagre utkast', exact: true }).focus();
+  await page.keyboard.press('Enter');
+  await expect(status(page)).toHaveText('Lagret. Versjon 1.');
+  await expect(page.getByRole('heading', { name: 'Rediger utkast' })).toBeFocused();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  expect(await page.evaluate(async () => [localStorage.length, sessionStorage.length, (await indexedDB.databases()).length])).toEqual([0, 0, 0]);
+  await page.screenshot({ path: `../Docs/evidence/9-4-${width}.png`, fullPage: true });
+  await page.reload();
+  await page.getByRole('button', { name: /Åpne 2026-10-24/ }).first().click();
+  await expect(page.getByLabel('Vognløp', { exact: true })).toHaveValue('0007');
+  await expect(page.getByLabel('Opprinnelig sluttklokke')).toHaveValue('26:30');
+  await expect(page.getByLabel('Slutt med dato og Oslo-offset')).toHaveValue('2026-10-25T02:30+01:00');
+  await page.getByLabel('Vognløp', { exact: true }).fill('local-unsaved');
+  await page.evaluate(() => {
+    Object.defineProperty(document, 'visibilityState', { configurable: true, get: () => 'hidden' }); document.dispatchEvent(new Event('visibilitychange'));
+    Object.defineProperty(document, 'visibilityState', { configurable: true, get: () => 'visible' }); document.dispatchEvent(new Event('visibilitychange'));
+  });
+  await expect(page.getByLabel('Vognløp', { exact: true })).toHaveValue('local-unsaved');
+  page.once('dialog', dialog => dialog.dismiss());
+  await page.getByRole('button', { name: 'Nytt utkast', exact: true }).click();
+  await expect(page.getByLabel('Vognløp', { exact: true })).toHaveValue('local-unsaved');
+  page.once('dialog', dialog => dialog.accept());
+  await page.getByRole('button', { name: 'Logg ut', exact: true }).click();
+  await expect(page.getByRole('heading', { name: 'Mine utkast' })).toHaveCount(0);
+});
+
+test('lost acknowledgement, authorized lookup and HTML failure retain original operation', async ({ page }) => {
+  await login(page); await fill(page);
+  let original = '';
+  let originalTarget = '';
+  let accepted: any;
+  await page.route('**:8001/drafts', async route => {
+    if (route.request().method() !== 'POST') { await route.continue(); return; }
+    original = route.request().postData()!; originalTarget = route.request().url();
+    accepted = await (await route.fetch()).json(); await route.abort();
+  });
+  await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
+  await expect(status(page)).toContainText('Lagring er uavklart.');
+  await expect(page.getByLabel('Vognløp', { exact: true })).toHaveValue('0007');
+  await page.unroute('**:8001/drafts');
+  await page.route('**:8001/auth/session', route => route.abort());
+  await page.evaluate(() => {
+    Object.defineProperty(document, 'visibilityState', { configurable: true, get: () => 'hidden' }); document.dispatchEvent(new Event('visibilitychange'));
+    Object.defineProperty(document, 'visibilityState', { configurable: true, get: () => 'visible' }); document.dispatchEvent(new Event('visibilitychange'));
+  });
+  await expect(page.getByRole('button', { name: 'Kontroller tilgang igjen' })).toBeEnabled();
+  await expect(page.getByLabel('Vognløp', { exact: true })).toBeHidden();
+  await page.unroute('**:8001/auth/session');
+  await page.getByRole('button', { name: 'Kontroller tilgang igjen' }).click();
+  await expect(page.getByLabel('Vognløp', { exact: true })).toHaveValue('0007');
+  let committedRetry = '', committedTarget = '';
+  await page.route('**:8001/drafts', async route => {
+    if (route.request().method() !== 'POST') { await route.continue(); return; }
+    committedRetry = route.request().postData()!; committedTarget = route.request().url();
+    const response = await route.fetch(); expect(await response.json()).toEqual(accepted);
+    await route.fulfill({ response });
+  });
+  await page.getByRole('button', { name: 'Prøv samme lagringsforsøk igjen' }).click();
+  await expect(status(page)).toHaveText('Lagret. Versjon 1.');
+  expect(committedTarget).toBe(originalTarget);
+  expect(committedRetry).toBe(original);
+  const owned = await (await page.request.get('http://127.0.0.1:8001/drafts')).json();
+  expect(owned.drafts.filter((draft: any) => draft.id === accepted.id)).toEqual([expect.objectContaining({ id: accepted.id, revision: 1 })]);
+  await page.unroute('**:8001/drafts');
+  await page.getByLabel('Vognløp', { exact: true }).fill('new');
+  await page.route('**:8001/drafts/*', route => route.request().method() === 'POST' ? route.fulfill({ contentType: 'text/html', body: '<html>login</html>' }) : route.continue());
+  await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
+  await expect(status(page)).toContainText('Lagring er uavklart.');
+  await page.unroute('**:8001/drafts/*');
+  let retry = '';
+  page.on('request', request => { if (request.method() === 'POST' && new URL(request.url()).pathname.startsWith('/drafts/')) retry = request.postData()!; });
+  await page.getByRole('button', { name: 'Prøv samme lagringsforsøk igjen' }).click();
+  await expect(status(page)).toHaveText('Lagret. Versjon 2.');
+  expect(JSON.parse(original).draft.vehicle_duty).toBe('0007');
+  expect(JSON.parse(retry).draft.vehicle_duty).toBe('new');
+});
+
+test('stale revision preserves local input and offers saved comparison', async ({ page, context }) => {
+  await login(page); await fill(page);
+  await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
+  await expect(status(page)).toHaveText('Lagret. Versjon 1.');
+  const other = await context.newPage();
+  await other.goto('/private'); await other.getByRole('button', { name: /Åpne 2026-10-24/ }).first().click();
+  await other.getByLabel('Vognløp', { exact: true }).fill('remote');
+  await other.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
+  await expect(status(other)).toHaveText('Lagret. Versjon 2.');
+  await page.bringToFront();
+  await page.getByLabel('Vognløp', { exact: true }).fill('local');
+  await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
+  await expect(status(page)).toContainText('Konflikt.');
+  await expect(page.getByLabel('Vognløp', { exact: true })).toHaveValue('local');
+  await expect(page.getByRole('region', { name: 'Sammenlign versjoner' })).toContainText('remote');
+  page.once('dialog', dialog => dialog.accept());
+  await page.getByRole('button', { name: 'Last inn lagret versjon' }).click();
+  await expect(page.getByLabel('Vognløp', { exact: true })).toHaveValue('remote');
+  await other.close();
+});
+
+test('JSON with an invalid acknowledgement stays unresolved until authorized lookup', async ({ page }) => {
+  await login(page); await fill(page);
+  await page.route('**:8001/drafts', async route => {
+    if (route.request().method() !== 'POST') { await route.continue(); return; }
+    const response = await route.fetch(); const body = await response.json();
+    await route.fulfill({ json: { ...body, revision: 999 } });
+  });
+  await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
+  await expect(status(page)).toContainText('Lagring er uavklart.');
+  await expect(page.getByLabel('Vognløp', { exact: true })).toHaveValue('0007');
+  await page.unroute('**:8001/drafts');
+  await page.getByRole('button', { name: 'Kontroller lagringsforsøket' }).click();
+  await expect(status(page)).toHaveText('Lagret. Versjon 1.');
+});
+
+test('expired authorization clears unsaved private fields on revalidation', async ({ page }) => {
+  await login(page); await fill(page);
+  python(`with database() as conn:\n conn.execute("UPDATE sessions SET created_at=statement_timestamp()-interval '14 days',expires_at=statement_timestamp() WHERE owner IN (SELECT id FROM accounts WHERE username=%s)", (${JSON.stringify(username)},))\n`);
+  await page.evaluate(() => {
+    Object.defineProperty(document, 'visibilityState', { configurable: true, get: () => 'hidden' }); document.dispatchEvent(new Event('visibilitychange'));
+    Object.defineProperty(document, 'visibilityState', { configurable: true, get: () => 'visible' }); document.dispatchEvent(new Event('visibilitychange'));
+  });
+  await expect(page.getByLabel('Brukernavn', { exact: true })).toBeEnabled();
+  await expect(page.getByLabel('Vognløp', { exact: true })).toHaveCount(0);
+  expect(await page.evaluate(() => [localStorage.length, sessionStorage.length])).toEqual([0, 0]);
+});
+
+test('413 keeps fields editable and a corrected draft can be saved', async ({ page }) => {
+  await login(page); await fill(page);
+  await page.route('**:8001/drafts', route => route.request().method() === 'POST' ? route.fulfill({ status: 413, json: { detail: 'Too large' } }) : route.continue());
+  await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
+  await expect(status(page)).toContainText('Utkastet er for stort. Forkort tekst eller fjern aktiviteter');
+  await expect(page.getByLabel('Vognløp', { exact: true })).toBeEnabled();
+  await expect(page.getByLabel('Vognløp', { exact: true })).toHaveValue('0007');
+  await expect(page.getByRole('button', { name: 'Prøv samme lagringsforsøk igjen' })).toHaveCount(0);
+  await page.getByLabel('Vognløp', { exact: true }).fill('corrected');
+  await page.unroute('**:8001/drafts');
+  await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
+  await expect(status(page)).toHaveText('Lagret. Versjon 1.');
+});
+
+test('UTF-8 size preflight preserves valid Unicode input without issuing a save', async ({ page }) => {
+  await login(page);
+  const id = randomUUID(), now = Date.now();
+  const rows = Array.from({ length: 200 }, () => ({ id: randomUUID(), type: null, raw_code: null, start: null, end: null, source_start: null, source_end: null, from_place: null, to_place: null, trip: null, line: null, direction: null, uncertainty: '界'.repeat(1000), provenance: '界'.repeat(1000) }));
+  const record = { id, created_at: new Date(now).toISOString(), expires_at: new Date(now + 7 * 86400000).toISOString(), revision: 1, draft: { service_date: null, vehicle_duty: null, realtime_duty: null, physical_bus: null, activities: rows } };
+  await page.route('**:8001/drafts', route => route.fulfill({ json: { drafts: [{ ...record, service_date: null }] } }));
+  await page.route('**:8001/drafts/' + id, route => route.fulfill({ json: record }));
+  await page.getByRole('button', { name: 'Oppdater listen' }).click();
+  await page.getByRole('button', { name: 'Åpne ukjent tjenestedato · versjon 1' }).click();
+  let issued = false;
+  page.on('request', request => { if (request.url().endsWith('/draft-operations') && request.method() === 'POST') issued = true; });
+  await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
+  await expect(status(page)).toContainText('Utkastet er for stort.');
+  await expect(page.getByLabel('Usikkerhet / ukjente fakta').first()).toBeEnabled();
+  await expect(page.getByLabel('Usikkerhet / ukjente fakta').first()).toHaveValue('界'.repeat(1000));
+  expect(issued).toBe(false);
+});
+
+test('slightly future server creation timestamps remain valid acknowledgements', async ({ page }) => {
+  await login(page); await fill(page);
+  await page.route('**:8001/drafts', async route => {
+    if (route.request().method() !== 'POST') { await route.continue(); return; }
+    const response = await route.fetch(), body = await response.json();
+    const serverTime = Date.now() + 60000;
+    await route.fulfill({ json: { ...body, created_at: new Date(serverTime).toISOString(), expires_at: new Date(serverTime + 7 * 86400000).toISOString() } });
+  });
+  await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
+  await expect(status(page)).toHaveText('Lagret. Versjon 1.');
+});
+
+test('supported historical Oslo offset saves and reopens unchanged', async ({ page }) => {
+  await login(page); await fill(page);
+  await page.getByLabel('Start med dato og Oslo-offset').fill('1894-01-01T12:00+00:43');
+  await page.getByLabel('Slutt med dato og Oslo-offset').fill('1894-01-01T12:00+00:43');
+  await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
+  await expect(status(page)).toHaveText('Lagret. Versjon 1.');
+  await page.reload();
+  await page.getByRole('button', { name: /Åpne 2026-10-24/ }).first().click();
+  await expect(page.getByLabel('Start med dato og Oslo-offset')).toHaveValue('1894-01-01T12:00+00:43');
+});
+
+test('reorder and remove preserve ordered identities with their facts after reopen', async ({ page }) => {
+  await login(page); await fill(page);
+  await page.getByLabel('Opprinnelig kode').fill('A');
+  for (const code of ['B', 'C']) {
+    await page.getByRole('button', { name: 'Legg til aktivitet' }).click();
+    await page.getByLabel('Opprinnelig kode').last().fill(code);
+  }
+  const firstResponse = page.waitForResponse(response => response.request().method() === 'POST' && new URL(response.url()).pathname === '/drafts');
+  await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
+  const original = await (await firstResponse).json();
+  await expect(status(page)).toHaveText('Lagret. Versjon 1.');
+  await page.getByRole('button', { name: 'Flytt opp', exact: true }).nth(2).click();
+  await page.getByRole('button', { name: 'Fjern aktivitet 1', exact: true }).click();
+  const secondResponse = page.waitForResponse(response => response.request().method() === 'POST' && new URL(response.url()).pathname === '/drafts/' + original.id);
+  await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
+  const expected = [original.draft.activities[2], original.draft.activities[1]];
+  expect((await (await secondResponse).json()).draft.activities).toEqual(expected);
+  await expect(status(page)).toHaveText('Lagret. Versjon 2.');
+  await page.reload();
+  const reopened = page.waitForResponse(response => response.request().method() === 'GET' && new URL(response.url()).pathname === '/drafts/' + original.id);
+  await page.getByRole('button', { name: /Åpne 2026-10-24 · versjon 2/ }).first().click();
+  expect((await (await reopened).json()).draft.activities).toEqual(expected);
+  await expect(page.getByLabel('Opprinnelig kode').nth(0)).toHaveValue('C');
+  await expect(page.getByLabel('Opprinnelig kode').nth(1)).toHaveValue('B');
+});

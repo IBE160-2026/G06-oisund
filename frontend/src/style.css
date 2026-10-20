@@ -19,3 +19,12 @@ dl { display: grid; grid-template-columns: minmax(6rem, 1fr) 2fr; gap: .4rem 1re
 dt { font-weight: 600; } dd { margin: 0; }
 ol { padding-left: 1.5rem; } li { padding: .3rem 1rem; margin-bottom: 1rem; border: 1px solid #637581; border-radius: .3rem; }
 @media (max-width: 700px) { main { margin: 0; padding: 1.2rem; border-radius: 0; } .controls { flex-direction: column; } button { width: 100%; } }
+.draft-form { max-width: none; width: 100%; }
+fieldset { width: 100%; min-width: 0; border: 1px solid #536775; padding: 1rem; margin: .7rem 0; }
+legend { font-weight: 700; }
+.draft-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.draft-form label { display: block; }
+pre { white-space: pre-wrap; overflow-wrap: anywhere; background: #edf3f7; padding: 1rem; }
+.fact { display: contents; }
+select:focus-visible, h2:focus-visible { outline: 3px solid #000; outline-offset: 4px; }
+@media (max-width: 700px) { .draft-grid { grid-template-columns: 1fr; } }

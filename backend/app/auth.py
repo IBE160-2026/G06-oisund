@@ -119,7 +119,7 @@ def session(conn, request):
     token = request.cookies.get(SESSION, '')
     if not token or len(token) > 128:
         raise HTTPException(401, 'Logg inn på nytt.')
-    row = conn.execute('SELECT * FROM sessions WHERE token_hash=%s AND expires_at > clock_timestamp()', (digest(token),)).fetchone()
-    if not row:
+    row = conn.execute('SELECT *, expires_at > clock_timestamp() AS live FROM sessions WHERE token_hash=%s FOR UPDATE', (digest(token),)).fetchone()
+    if not row or not conn.execute('SELECT %s > clock_timestamp() AS live', (row['expires_at'],)).fetchone()['live']:
         raise HTTPException(401, 'Logg inn på nytt.')
     return row

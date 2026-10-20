@@ -25,6 +25,8 @@ ORIGIN = 'http://127.0.0.1:5173'
 
 @pytest.fixture(autouse=True)
 def synthetic_only():
+    if os.environ.get('PRIVATE_TEST_PROJECT') != 'ibe160-private-tests':
+        pytest.skip('Disposable project marker required')
     with database() as conn:
         auth.require_synthetic_accounts(conn)
 

@@ -12,9 +12,9 @@ Repoet inneholder gruppens applikasjon og dokumentasjon av utvikling, testing og
 
 On 19 October 2026 the owner approved [SCOPE-02](./_bmad-output/planning-artifacts/sprint-change-proposal-2026-10-19.md): a smaller course V1 with supported text-PDF import and correction, a saved day overview, manual activity navigation, manually maintained source-linked notices and a local fullstack demonstration.
 
-The [active plan](./_bmad-output/planning-artifacts/epics.md) contains four epics and 20 stories. [Sprint tracking](./_bmad-output/implementation-artifacts/sprint-status.yaml) records stories 9.1, 9.2 and 9.3 as done; [readiness](./_bmad-output/planning-artifacts/implementation-readiness.md) covers planning, not implemented or tested product behavior. The [earlier baseline](./_bmad-output/planning-artifacts/archive/pre-scope-02-2026-10-19/README.md) is historical.
+The [active plan](./_bmad-output/planning-artifacts/epics.md) contains four epics and 20 stories. [Sprint tracking](./_bmad-output/implementation-artifacts/sprint-status.yaml) records stories 9.1–9.3 as done and 9.4 in review awaiting owner walkthrough/approval; [readiness](./_bmad-output/planning-artifacts/implementation-readiness.md) covers planning, not implemented or tested product behavior. The [earlier baseline](./_bmad-output/planning-artifacts/archive/pre-scope-02-2026-10-19/README.md) is historical.
 
-Story 9.2 implements a real React/TypeScript → FastAPI → PostgreSQL assessment slice. It accepts only the exact fictional example. Story 9.3 adds separately provisioned private access and an empty workspace; draft editing remains story 9.4. Story 9.1 adds an independent local PDF qualification CLI; PDF import is not connected to the application yet.
+Story 9.2 implements a real React/TypeScript → FastAPI → PostgreSQL assessment slice. It accepts only the exact fictional example. Story 9.3 adds separately provisioned private access; story 9.4 adds manual private draft saving/reopening. Story 9.1 adds an independent local PDF qualification CLI; PDF import is not connected to the application yet.
 
 ## Run the fictional assessment
 
@@ -73,13 +73,13 @@ docker compose down --volumes
 
 Resolved and executed from the actual package/image registries on 19 October 2026: Python **3.13.16**, PostgreSQL **17.11**, Node **24.19.0**, FastAPI **0.149.0**, uvicorn **0.54.0**, psycopg **3.3.6**, React/React DOM **19.3.1**, TypeScript **7.0.2**, Vite **8.3.4**, Playwright **1.64.1**. Docker server: **29.7.2**. Container base images are pinned by immutable digest, Python transitive versions by `backend/requirements.lock`, and npm dependencies/integrities by `frontend/package-lock.json`. Registry versions may differ from documentation pages; these are observed executable versions, not a claim about future latest releases.
 
-There is no editable/revision UI, application PDF handling, navigation/notices, live feed, GPS, offline operation or cloud deployment. The fixed fictional owner is only for local assessment; private access uses its own runtime below. Browser automation is bounded development evidence; actual tablet hardware, assistive technology and a complete accessibility audit remain unqualified. The development log records the exact performed checks and limitations.
+The private workspace supports manual draft revisions. Application PDF handling, live feeds, GPS, offline operation and cloud deployment remain outside this implementation. The fixed fictional owner is only for local assessment; private access uses its own runtime below. Browser automation is bounded development evidence; actual tablet hardware, assistive technology and a complete accessibility audit remain unqualified. The development log records the exact performed checks and limitations.
 
 ## Run private access locally
 
 Verification commands below require a **disposable, synthetic-only private database**. They refuse before test mutations when any non-synthetic account exists; account, session and throttle metadata are then left unchanged. The CLI reserves the `synthetic-` account prefix for automated fixtures and refuses operator provisioning in that namespace. Tests clear throttle metadata, so never bypass their guard to run alongside real accounts. Once real accounts are provisioned, first stop the operational private API to free port 8001, then set `$env:COMPOSE_PROJECT_NAME = 'ibe160-private-tests'` and run `docker compose -f compose.private.yaml up -d --build --wait`. Keep this variable set while running all private tests, browser tests and verification scripts: Docker inherits it and selects a separate disposable volume/network. Stop the disposable project with `docker compose -f compose.private.yaml down`, clear the variable using `Remove-Item Env:COMPOSE_PROJECT_NAME`, then restart the operational private project. Do not delete the operational volume or its local database secret.
 
-Authentication mutations use an origin-scoped browser Web Lock held through response completion. Logout stays pending behind earlier logins across tabs, so a delayed login cookie cannot arrive after confirmed revocation. Unsupported browsers fail closed. Visibility changes clear authenticated presentation while preserving unfinished login input.
+Private mutations use an origin-scoped browser Web Lock held through response completion. Logout stays pending behind earlier mutations across tabs, so a delayed login cookie cannot arrive after confirmed revocation. Unsupported browsers fail closed. Visibility changes hide the workspace during server revalidation; a matching valid session preserves unsaved in-memory draft edits. An unavailable revalidation keeps those edits hidden in memory and offers another access check. Session expiry or logout clears the workspace.
 
 Start the fictional project above for the frontend, then start the separate private project. No account or application password is preconfigured. Generate the private PostgreSQL bootstrap secret locally; it is ignored by Git and mounted as a Docker secret rather than stored in Compose or the API URL:
 
@@ -90,7 +90,7 @@ docker compose -f compose.private.yaml up -d --build --wait
 docker compose -f compose.private.yaml exec private-api python -m app.manage provision YOUR_USERNAME
 ```
 
-Provisioning requires an interactive terminal and prompts twice with hidden input (12–256 characters). Do not use `-T`, password arguments or environment variables for account provisioning. Duplicate names fail safely; there is no public signup. Open **http://127.0.0.1:5173/private**. The empty Norwegian workspace supports sign-in and logout; it contains no draft CRUD. The default `/` remains the fictional demo. Private health is **http://127.0.0.1:8001/health**.
+Provisioning requires an interactive terminal and prompts twice with hidden input (12–256 characters). Do not use `-T`, password arguments or environment variables for account provisioning. Duplicate names fail safely; there is no public signup. Open **http://127.0.0.1:5173/private** to enter, save and reopen manual Norwegian drafts. The default `/` remains the fictional demo. Private health is **http://127.0.0.1:8001/health**.
 
 The dedicated project/cluster/network/volume is `ibe160-private-work` / `private_pg`; no database host port is published. Demo reset cannot reach private storage. The local generated database secret is a bootstrap cluster credential, distinct from provisioned accounts. Preserve `.private-runtime/postgres-password` while retaining the private volume; PostgreSQL bootstrap does not change the existing role password when a different file is generated. Do not remove or replace it to reset an account. `docker compose -f compose.private.yaml down` preserves the private volume and accounts. No private reset command is provided.
 
@@ -105,7 +105,7 @@ Private presentation/credentials stay in page memory. No localStorage, sessionSt
 ```powershell
 docker compose -f compose.private.yaml exec -T private-api python -m app.manage migrate
 docker compose -f compose.private.yaml exec -T private-api python -m app.manage cleanup
-docker compose -f compose.private.yaml exec -T private-api python -m pytest -q tests/test_private_access.py
+docker compose -f compose.private.yaml exec -T -e PRIVATE_TEST_PROJECT=ibe160-private-tests private-api python -m pytest -q tests/test_private_access.py tests/test_private_drafts.py
 uv run --no-project scripts/verify-private-access.py
 cd frontend
 npm.cmd run build
@@ -114,6 +114,26 @@ cd ..
 ```
 
 Tests provision random synthetic accounts and delete them afterward. The verification script sequentially restarts private PostgreSQL/API, reapplies migrations, runs cleanup and **resets fictional demo data**, comparing the original session and deadline after each step; it emits no credentials. Browser tests cover 768/1440px keyboard/focus/wrapping, expiry, back/reload, concurrent tabs, unconfirmed and lost logout replies, and stale responses. Synthetic transport/deadline tests are labeled separately from real server/database checks. Screenshots: [768px](Docs/evidence/9-3-768.png), [1440px](Docs/evidence/9-3-1440.png). These profile/access checks do not establish draft retention or draft acceptance; story 9.4 introduces that behavior.
+
+## Save and reopen a private draft
+
+In `/private`, use **Nytt utkast**, enter an optional service date and vehicle duty, and add ordered activities. Empty facts remain unknown. Explicit instants include calendar date and the valid Europe/Oslo offset, for example `2026-10-25T00:00+02:00` and `2026-10-25T02:30+01:00`; original clocks such as `24:00` or `26:30` have separate fields. Unknown raw codes, places and manual provenance remain unchanged. Physical bus stays unknown. The form supports 200 activities with bounded text fields; private draft request bodies have a 1 MiB ceiling while authentication keeps its 4096-byte ceiling.
+
+The backend validates Oslo offsets for all dates. Before 1970, browser validation checks explicit date/offset syntax, finite instants, calendar dates and intervals, relying on the backend for timezone rules: the tested browser's historical Oslo data differs from the backend (for example, Oslo's `1894-01-01T12:00+00:43` is incorrectly treated using Berlin rules by browser Intl). Modern dates additionally use an Intl Oslo round-trip check.
+
+**Lagre utkast** acknowledges a specific revision and stable draft/activity identities. **Mine utkast** reopens authorized server state after reload. A stale update preserves local input and offers a saved-version comparison; loading that version requires confirming that local changes will be discarded. Failed or non-JSON acknowledgements remain unresolved, retaining the original operation and input in page memory. **Kontroller lagringsforsøket** or retrying the same operation settles that effect. Avoid closing/reloading an unresolved save: browser persistence/offline recovery is intentionally absent. Navigation and logout warn before losing unsaved input.
+
+Draft retention is exactly seven days from server creation; updates, viewing, replay, restart and sign-in do not extend it. Unused creation operations also expire after seven days; accepted operations share their draft's deadline. Authorization and expiry checks run within the revision/idempotency transaction. Startup and hourly maintenance purge drafts and cascading operation records. A missing/purged operation cannot recreate work. Foreign work receives a generic denial; an owned expired record receives an expiry message while it remains awaiting purge.
+
+Run the complete isolated verifier from the repository root:
+
+```powershell
+$env:COMPOSE_PROJECT_NAME = 'ibe160-private-tests'
+uv run --no-project scripts/verify-private-drafts.py
+Remove-Item Env:COMPOSE_PROJECT_NAME
+```
+
+It refuses without that exact project selection, stops the operational private API, builds the disposable project on port 8001, checks synthetic-only accounts before mutations, runs backend tests, restart/migration/cleanup evidence, production build and the browser suite, then stops disposable services and restores the operational API in `finally`. It preserves both volumes and the existing secret; it never resets operational data. Disposable test records may remain for inspection. The script uses existing `npm.cmd`/`npx.cmd` commands on Windows. Private backend tests additionally require `PRIVATE_TEST_PROJECT=ibe160-private-tests` within the container. Owner walkthrough and final acceptance remain separate from automated verification.
 
 ## Qualify the approved text-PDF examples
 

@@ -10,6 +10,7 @@ function python(program: string) {
     { cwd: '..', input: program, encoding: 'utf8' });
 }
 test.beforeAll(() => {
+  if (process.env.COMPOSE_PROJECT_NAME !== 'ibe160-private-tests') throw Error('Disposable project selection required');
   python(`from app.auth import provision, require_synthetic_accounts\nfrom app.private_storage import database\nwith database() as conn:\n require_synthetic_accounts(conn)\nprovision(${JSON.stringify(username)}, ${JSON.stringify(password)})\nwith database() as conn:\n require_synthetic_accounts(conn)\n conn.execute('DELETE FROM login_limits')\n`);
 });
 test.afterAll(() => {
@@ -39,7 +40,7 @@ for (const width of [768, 1440]) {
     await expect(page.getByRole('button', { name: 'Logg inn', exact: true })).toBeFocused();
     await page.keyboard.press('Enter');
     await expect(page.getByRole('heading', { name: 'Privat arbeidsrom' })).toBeFocused();
-    await expect(page.getByText('Arbeidsrommet er tomt.', { exact: false })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Mine utkast' })).toBeVisible();
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
     expect(await page.evaluate(() => [localStorage.length, sessionStorage.length])).toEqual([0, 0]);
     const cookies = await context.cookies();
@@ -120,7 +121,7 @@ test('known fixed deadline clears in-memory presentation', async ({ page }) => {
   } }));
   await page.goto('/private');
   await expect(page.getByRole('heading', { name: 'Privat arbeidsrom' })).toBeVisible();
-  await expect(page.getByRole('status')).toHaveText('Økten er utløpt. Logg inn på nytt.', { timeout: 6000 });
+  await expect(page.getByRole('status', { name: 'Tilgangsstatus' })).toHaveText('Økten er utløpt. Logg inn på nytt.', { timeout: 6000 });
   await expect(page.getByLabel('Brukernavn', { exact: true })).toBeFocused();
   await expect(page.getByRole('heading', { name: 'Privat arbeidsrom' })).toHaveCount(0);
 });
