@@ -19,6 +19,7 @@ implementationStarted: false
 **User outcome:** 3–5 anonymized PDFs with independently checked expected activities, dates and uncertainty; record exact/partial/unsupported extraction and a pass/fail decision.
 
 **Acceptance criteria:**
+- Fixture baseline approved by Jonas Øisund on 2026-10-20: use all seven anonymized PDFs and the [approved fasit](../../../Eksempelfiler/README.md) as independent expected facts. Fixture preparation and owner approval are complete; extraction classification and pass/fail evidence remain open. Preserve source rows while checking allowed pause grouping, vehicle duty versus physical bus, three-digit realtime values with leading zeros, example 5 paid free time and example 6 clarified deadhead. Record the tested subset explicitly if the timebox covers fewer than seven PDFs.
 - Use independently checked expected facts rather than deriving expected results from the parser output. Classify each fixture/layout as supported, partial or unsupported. Stop the 3–4-hour experiment with evidence and a recommendation; a failed useful input set triggers an explicit scope decision. V1-02 can proceed independently with fictional data.
 - Apply the current PRD/architecture/UX rules for the data and controls this slice introduces; preserve manual/unknown/fictional distinctions and private ownership. Do not implement deferred features as prerequisites.
 - Record meaningful executed evidence, failures and limits for this outcome. Planning text and mockups are not test results.

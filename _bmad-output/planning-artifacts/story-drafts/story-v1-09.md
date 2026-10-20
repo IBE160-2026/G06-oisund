@@ -19,6 +19,7 @@ implementationStarted: false
 **User outcome:** reporting time and ordered trips/breaks/transfers/bus changes match the confirmed plan; separate known parts/locations and overnight dates remain visible.
 
 **Acceptance criteria:**
+- Apply the [owner-approved display rules (2026-10-20)](../../../Eksempelfiler/README.md): adjacent pause types may form one pause spanning their combined interval; any MealBreak makes it matpause, Coffee alone is kaffepause, and Split break is split break/deltskiftpause. Check example 2 matpause 12:01–12:43 and example 7 matpause 08:52–09:28 while retaining source rows/provenance. Show vehicle duty separately from manually assigned actual bus, preserve three-digit realtime values including zeros, and do not infer a physical bus change from a duty change.
 - Compare the displayed order, reporting time, breaks, transfers and known locations with the saved expected plan. Include overnight and separated work-period cases; no invented transfer, later depot or completion. Missing bus remains unassigned.
 - Apply the current PRD/architecture/UX rules for the data and controls this slice introduces; preserve manual/unknown/fictional distinctions and private ownership. Do not implement deferred features as prerequisites.
 - Record meaningful executed evidence, failures and limits for this outcome. Planning text and mockups are not test results.

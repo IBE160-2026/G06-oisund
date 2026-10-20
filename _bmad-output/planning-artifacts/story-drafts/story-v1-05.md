@@ -19,6 +19,7 @@ implementationStarted: false
 **User outcome:** supported files produce an unconfirmed draft with page/field uncertainty; original/temporary files are transient and cleaned after success/failure/cancel, including interrupted-job cleanup.
 
 **Acceptance criteria:**
+- Use the [owner-approved PDF baseline (2026-10-20)](../../../Eksempelfiler/README.md). Parse Vogn as vehicle duty, retain full 960xxx and its final three-character realtime-screen value (including leading zeros), and leave physical bus unknown. Preserve source activity/provenance when adjacent pauses are grouped; apply the documented meal/coffee/split-duty labels. Check the explained paid free time in example 5 and 15:33–16:00 Skoglyst–Breivika deadhead in example 6. Do not generalize that Travel to interpretation to unrelated rows.
 - Compare every supported fixture against independent expected activities/fields. Reject unsupported scans/images visibly; clean originals after success/failure/cancel and interrupted processing. Existing confirmed work remains intact. No raw files or extracted-text archives persist in logs/client storage.
 - Apply the current PRD/architecture/UX rules for the data and controls this slice introduces; preserve manual/unknown/fictional distinctions and private ownership. Do not implement deferred features as prerequisites.
 - Record meaningful executed evidence, failures and limits for this outcome. Planning text and mockups are not test results.

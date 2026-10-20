@@ -67,6 +67,7 @@ FR-7–9, FR-15 and FR-23 are deferred; the remaining original FRs are narrowed 
 **User outcome:** 3–5 anonymized PDFs with independently checked expected activities, dates and uncertainty; record exact/partial/unsupported extraction and a pass/fail decision.
 
 **Acceptance criteria:**
+- Fixture baseline approved by Jonas Øisund on 2026-10-20: use all seven anonymized PDFs and the [approved fasit](../../Eksempelfiler/README.md) as independent expected facts. Fixture preparation and owner approval are complete; extraction classification and pass/fail evidence remain open. Preserve source rows while checking allowed pause grouping, vehicle duty versus physical bus, three-digit realtime values with leading zeros, example 5 paid free time and example 6 clarified deadhead. Record the tested subset explicitly if the timebox covers fewer than seven PDFs.
 - Use independently checked expected facts rather than deriving expected results from the parser output. Classify each fixture/layout as supported, partial or unsupported. Stop the 3–4-hour experiment with evidence and a recommendation; a failed useful input set triggers an explicit scope decision. V1-02 can proceed independently with fictional data.
 - Apply the current PRD/architecture/UX rules for the data and controls this slice introduces; preserve manual/unknown/fictional distinctions and private ownership. Do not implement deferred features as prerequisites.
 - Record meaningful executed evidence, failures and limits for this outcome. Planning text and mockups are not test results.
@@ -141,6 +142,7 @@ FR-7–9, FR-15 and FR-23 are deferred; the remaining original FRs are narrowed 
 **User outcome:** supported files produce an unconfirmed draft with page/field uncertainty; original/temporary files are transient and cleaned after success/failure/cancel, including interrupted-job cleanup.
 
 **Acceptance criteria:**
+- Use the [owner-approved PDF baseline (2026-10-20)](../../Eksempelfiler/README.md). Parse Vogn as vehicle duty, retain full 960xxx and its final three-character realtime-screen value (including leading zeros), and leave physical bus unknown. Preserve source activity/provenance when adjacent pauses are grouped; apply the documented meal/coffee/split-duty labels. Check the explained paid free time in example 5 and 15:33–16:00 Skoglyst–Breivika deadhead in example 6. Do not generalize that Travel to interpretation to unrelated rows.
 - Compare every supported fixture against independent expected activities/fields. Reject unsupported scans/images visibly; clean originals after success/failure/cancel and interrupted processing. Existing confirmed work remains intact. No raw files or extracted-text archives persist in logs/client storage.
 - Apply the current PRD/architecture/UX rules for the data and controls this slice introduces; preserve manual/unknown/fictional distinctions and private ownership. Do not implement deferred features as prerequisites.
 - Record meaningful executed evidence, failures and limits for this outcome. Planning text and mockups are not test results.
@@ -192,6 +194,7 @@ FR-7–9, FR-15 and FR-23 are deferred; the remaining original FRs are narrowed 
 **User outcome:** manual entry/correction preserves route and vehicle duty; imported Vogn never becomes an assumed physical bus.
 
 **Acceptance criteria:**
+- Apply the [owner-approved vehicle-duty/bus distinction (2026-10-20)](../../Eksempelfiler/README.md): Vogn 960xxx is a collection of trips, and xxx is the three-character realtime-screen input (e.g. 006 or 090), never a physical bus identifier. None of the seven PDFs contains the actual bus; it must be obtained externally and entered manually. A changed vehicle duty does not establish a physical bus change; no automatic/live integration is added by this clarification.
 - Preserve leading zeros/meaningful bus identifier formatting. A bus correction changes no route, activity ID or vehicle-duty identity. Imported Vogn cannot prefill an assumed physical bus.
 - Apply the current PRD/architecture/UX rules for the data and controls this slice introduces; preserve manual/unknown/fictional distinctions and private ownership. Do not implement deferred features as prerequisites.
 - Record meaningful executed evidence, failures and limits for this outcome. Planning text and mockups are not test results.
@@ -209,6 +212,7 @@ FR-7–9, FR-15 and FR-23 are deferred; the remaining original FRs are narrowed 
 **User outcome:** reporting time and ordered trips/breaks/transfers/bus changes match the confirmed plan; separate known parts/locations and overnight dates remain visible.
 
 **Acceptance criteria:**
+- Apply the [owner-approved display rules (2026-10-20)](../../Eksempelfiler/README.md): adjacent pause types may form one pause spanning their combined interval; any MealBreak makes it matpause, Coffee alone is kaffepause, and Split break is split break/deltskiftpause. Check example 2 matpause 12:01–12:43 and example 7 matpause 08:52–09:28 while retaining source rows/provenance. Show vehicle duty separately from manually assigned actual bus, preserve three-digit realtime values including zeros, and do not infer a physical bus change from a duty change.
 - Compare the displayed order, reporting time, breaks, transfers and known locations with the saved expected plan. Include overnight and separated work-period cases; no invented transfer, later depot or completion. Missing bus remains unassigned.
 - Apply the current PRD/architecture/UX rules for the data and controls this slice introduces; preserve manual/unknown/fictional distinctions and private ownership. Do not implement deferred features as prerequisites.
 - Record meaningful executed evidence, failures and limits for this outcome. Planning text and mockups are not test results.

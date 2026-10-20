@@ -19,6 +19,7 @@ implementationStarted: false
 **User outcome:** manual entry/correction preserves route and vehicle duty; imported Vogn never becomes an assumed physical bus.
 
 **Acceptance criteria:**
+- Apply the [owner-approved vehicle-duty/bus distinction (2026-10-20)](../../../Eksempelfiler/README.md): Vogn 960xxx is a collection of trips, and xxx is the three-character realtime-screen input (e.g. 006 or 090), never a physical bus identifier. None of the seven PDFs contains the actual bus; it must be obtained externally and entered manually. A changed vehicle duty does not establish a physical bus change; no automatic/live integration is added by this clarification.
 - Preserve leading zeros/meaningful bus identifier formatting. A bus correction changes no route, activity ID or vehicle-duty identity. Imported Vogn cannot prefill an assumed physical bus.
 - Apply the current PRD/architecture/UX rules for the data and controls this slice introduces; preserve manual/unknown/fictional distinctions and private ownership. Do not implement deferred features as prerequisites.
 - Record meaningful executed evidence, failures and limits for this outcome. Planning text and mockups are not test results.
