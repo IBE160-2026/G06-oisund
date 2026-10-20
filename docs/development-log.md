@@ -401,3 +401,8 @@ Document checks verified unique canonical story counts, saved approvals, depende
 - After accepting story 9.4, Jonas explicitly requested commit, push and an updated development log. This authorizes publishing the three local implementation/refinement commits and the owner-acceptance/closure documentation to origin/main, superseding earlier no-push boundaries for this completed story.
 - The verified application HEAD before closure publication is `56c0e2059a42bfb5787cb0402d13a6a392f70a9d`. Closure keeps story 9.4 and Epic 9 done, with the retrospective optional and later stories backlog. Reviewed the closure diff and whitespace; no application code changed after the recorded 61 backend/54 browser tests and production build, so no tests were rerun for publication.
 - Publication includes README, implementation spec, sprint tracking and this log. No operational database actions or next story. Git commit/push success is verified separately after execution; this entry does not preclaim that outcome.
+
+### Story 9.4 publication confirmed — 2026-10-20
+
+- Created closure/publication commit `9a1ad9fc0d120636b768b0281636df9d29afe202` and successfully pushed the accepted story implementation, both walkthrough refinements and closure to `origin/main` at `https://github.com/IBE160-2026/G06-oisund.git`. Git reported `76a663b..9a1ad9f main -> main`; local HEAD and the updated origin/main reference matched, and the working tree was clean after publication.
+- Whitespace checks passed. This confirmation is a documentation-only follow-up; no additional application changes, test runs, operational data actions or next story. Its own commit/push is verified separately after recording this entry.
