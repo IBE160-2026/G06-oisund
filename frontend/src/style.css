@@ -9,6 +9,12 @@ h1, h2, h3 { line-height: 1.25; }
 button { font: inherit; font-weight: 600; color: white; background: #173e60; border: 2px solid #173e60; border-radius: .3rem; padding: .7rem 1rem; cursor: pointer; }
 button:disabled { background: #e4e9ed; color: #465763; border-color: #637581; cursor: default; }
 button:focus-visible { outline: 3px solid #000; outline-offset: 4px; }
+input:focus-visible, a:focus-visible, h1:focus-visible { outline: 3px solid #000; outline-offset: 4px; }
+form { display: flex; flex-direction: column; align-items: flex-start; gap: .6rem; max-width: 30rem; }
+form label { font-weight: 600; }
+input { font: inherit; color: #162c3c; background: white; padding: .65rem; border: 2px solid #536775; border-radius: .3rem; width: 100%; min-width: 0; }
+form button { margin-top: .7rem; }
+a { color: #173e60; }
 dl { display: grid; grid-template-columns: minmax(6rem, 1fr) 2fr; gap: .4rem 1rem; }
 dt { font-weight: 600; } dd { margin: 0; }
 ol { padding-left: 1.5rem; } li { padding: .3rem 1rem; margin-bottom: 1rem; border: 1px solid #637581; border-radius: .3rem; }

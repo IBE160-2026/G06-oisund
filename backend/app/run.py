@@ -1,6 +1,14 @@
+import os
 import uvicorn
-from .storage import migrate
 
 if __name__ == '__main__':
+    if os.environ.get('APP_MODE') == 'private-local':
+        from .auth import configuration
+        from .private_storage import migrate
+        configuration()
+        target = 'app.private_main:app'
+    else:
+        from .storage import migrate
+        target = 'app.main:app'
     migrate()
-    uvicorn.run('app.main:app', host='0.0.0.0', port=8000)
+    uvicorn.run(target, host='0.0.0.0', port=8000, access_log=False)

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import './style.css';
+import { PrivateAccess } from './PrivateAccess';
 
 type Activity = { id: string; kind: 'trip' | 'break'; start: string; end: string; place: string | null; trip_code: string | null; provenance: 'fictional-planned' };
 type Day = { fictional: true; service_date: string; timezone: 'Europe/Oslo'; vehicle_duty: string | null; physical_bus: string | null; activities: Activity[] };
@@ -128,4 +129,4 @@ function App() {
     <p>Et nytt eksempel og lagrede dager utløper etter syv dager. Gjentatt lagring forlenger ikke fristen. Usendte data finnes bare mens siden er åpen.</p>
   </main>;
 }
-createRoot(document.getElementById('root')!).render(<App />);
+createRoot(document.getElementById('root')!).render(location.pathname === '/private' ? <PrivateAccess /> : <App />);

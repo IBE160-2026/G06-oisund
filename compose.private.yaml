@@ -1,0 +1,39 @@
+name: ibe160-private-work
+services:
+  private-db:
+    image: postgres:17-alpine@sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24
+    environment:
+      POSTGRES_DB: private_work
+      POSTGRES_USER: private_work
+      POSTGRES_PASSWORD_FILE: /run/secrets/private_postgres_password
+    secrets: [private_postgres_password]
+    volumes:
+      - private_pg:/var/lib/postgresql/data
+    healthcheck:
+      test: [CMD-SHELL, pg_isready -U private_work -d private_work]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+  private-api:
+    build: ./backend
+    environment:
+      APP_MODE: private-local
+      PRIVATE_DATABASE_URL: postgresql://private_work@private-db/private_work
+      PRIVATE_DATABASE_PASSWORD_FILE: /run/secrets/private_postgres_password
+      PRIVATE_ORIGIN: http://127.0.0.1:5173
+      PRIVATE_LOOPBACK_DEVELOPMENT: '1'
+    secrets: [private_postgres_password]
+    ports: ['127.0.0.1:8001:8000']
+    depends_on:
+      private-db:
+        condition: service_healthy
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+volumes:
+  private_pg:
+secrets:
+  private_postgres_password:
+    file: ./.private-runtime/postgres-password
