@@ -30,6 +30,7 @@ def remove_drafts(users):
         auth.require_synthetic_accounts(conn)
         conn.execute('DELETE FROM drafts WHERE owner=ANY(%s)', (users[1],))
         conn.execute('DELETE FROM draft_operations WHERE owner=ANY(%s)', (users[1],))
+        conn.execute('DELETE FROM draft_deletions WHERE owner=ANY(%s)', (users[1],))
 
 
 def content():
@@ -106,7 +107,7 @@ def test_all_routes_deny_foreign_unauthenticated_and_forgery(client, users):
         assert client.get(path).headers['cache-control'] == 'no-store'
 
 
-@pytest.mark.parametrize('change', ['negative', 'summer_offset', 'spring_gap', 'no_offset', 'duplicate', 'bus', 'too_many', 'bad_date', 'numeric_date', 'calendar_overflow'])
+@pytest.mark.parametrize('change', ['negative', 'summer_offset', 'spring_gap', 'no_offset', 'duplicate', 'bus', 'too_many', 'bad_date', 'numeric_date', 'calendar_overflow', 'offset_minutes_60', 'offset_minutes_winter', 'offset_hour_24'])
 def test_validation_preserves_unknowns_rejects_contradictions(client, users, change):
     assert login(client, users).status_code == 200
     facts = content()
@@ -115,11 +116,14 @@ def test_validation_preserves_unknowns_rejects_contradictions(client, users, cha
     if change == 'spring_gap': facts['activities'][0]['start'] = '2026-03-29T02:30+01:00'
     if change == 'no_offset': facts['activities'][0]['start'] = '2026-10-25T00:00'
     if change == 'duplicate': facts['activities'].append(facts['activities'][0])
-    if change == 'bus': facts['physical_bus'] = 'invented'
+    if change == 'bus': facts['physical_bus'] = 'x' * 101
     if change == 'too_many': facts['activities'] *= 201
     if change == 'bad_date': facts['service_date'] = '2026-02-30'
     if change == 'numeric_date': facts['service_date'] = 0
     if change == 'calendar_overflow': facts['activities'][0]['start'] = '9999-12-31T23:59+00:00'
+    if change == 'offset_minutes_60': facts['activities'][0]['start'] = '2026-10-25T00:00+01:60'
+    if change == 'offset_minutes_winter': facts['activities'][0]['start'] = '2026-01-01T12:00+00:60'
+    if change == 'offset_hour_24': facts['activities'][0]['start'] = '2026-10-25T00:00+24:00'
     assert save(client, facts)[0].status_code == 422
     assert client.get('/drafts').json() == {'drafts': []}
 
@@ -172,7 +176,7 @@ def wait_for_blocker(identifier):
     raise AssertionError('Expected request to reach the held row lock')
 
 
-@pytest.mark.parametrize('action', ['read', 'issue', 'lookup', 'replay', 'update'])
+@pytest.mark.parametrize('action', ['read', 'issue', 'lookup', 'replay', 'update', 'delete'])
 def test_blocking_draft_or_operation_lock_cannot_outlive_session(client, users, action):
     assert login(client, users).status_code == 200
     response, accepted_body = save(client)
@@ -193,6 +197,7 @@ def test_blocking_draft_or_operation_lock_cannot_outlive_session(client, users, 
                 if action == 'lookup': return remote.get('/draft-operations/' + accepted_body['operation_id'])
                 if action == 'issue': return remote.post('/draft-operations', headers=proof, json={'draft_id': identifier})
                 if action == 'replay': return remote.post('/drafts', headers=proof, json=accepted_body)
+                if action == 'delete': return remote.post('/drafts/' + identifier + '/delete', headers=proof, json={'operation_id': str(uuid4()), 'expected_revision': 1})
                 return remote.post('/drafts/' + identifier, headers=proof, json={'operation_id': operation, 'expected_revision': 1, 'draft': content()})
 
         future = pool.submit(blocked_request)
@@ -243,3 +248,94 @@ def test_cleanup_and_expired_request_follow_session_before_draft_locks(client, u
             read.result(timeout=5)
         assert denied.value.status_code == 401
         purge.result(timeout=5)
+
+
+@pytest.mark.parametrize('duty,derived', [('0007', '007'), ('AB001', '001'), ('1234', '234'), ('12', None), ('007x', None), (None, None)])
+def test_bus_is_manual_and_realtime_is_derived(client, users, duty, derived):
+    assert login(client, users).status_code == 200
+    facts = content()
+    facts.update(vehicle_duty=duty, realtime_duty='999', physical_bus='Bus-0012')
+    response, body = save(client, facts)
+    assert response.status_code == 200
+    original = response.json()
+    assert original['draft']['realtime_duty'] == derived
+    assert original['draft']['physical_bus'] == 'Bus-0012'
+    assert client.get('/drafts/' + original['id']).json() == original
+    facts.update(vehicle_duty='D009', physical_bus='Bus-0008')
+    updated, _ = save(client, facts, original['id'], 1)
+    assert updated.json()['draft']['realtime_duty'] == '009'
+    assert updated.json()['draft']['physical_bus'] == 'Bus-0008'
+    assert updated.json()['expires_at'] == original['expires_at']
+
+
+def test_legacy_draft_operation_normalizes_without_rewriting(client, users):
+    from app.draft_storage import fingerprint
+    from psycopg.types.json import Jsonb
+    assert login(client, users).status_code == 200
+    response, body = save(client)
+    original = response.json()
+    legacy = {**original['draft'], 'realtime_duty': '999'}
+    legacy_result = {**original, 'draft': legacy}
+    legacy_body = {**body, 'draft': legacy}
+    legacy_hash = fingerprint(None, legacy_body)
+    with database() as conn:
+        conn.execute('UPDATE drafts SET content=%s WHERE id=%s', (Jsonb(legacy), original['id']))
+        conn.execute('UPDATE draft_operations SET result=%s,payload_hash=%s WHERE id=%s', (Jsonb(legacy_result), legacy_hash, body['operation_id']))
+    assert client.get('/drafts/' + original['id']).json() == original
+    assert client.post('/drafts', headers=headers(client), json=legacy_body).json() == original
+    assert client.get('/draft-operations/' + body['operation_id']).json()['result'] == original
+    legacy_body['draft'] = {**legacy, 'physical_bus': 'changed-fact'}
+    assert client.post('/drafts', headers=headers(client), json=legacy_body).status_code == 409
+    with database() as conn:
+        assert conn.execute('SELECT content FROM drafts WHERE id=%s', (original['id'],)).fetchone()['content'] == legacy
+        stored = conn.execute('SELECT result,payload_hash FROM draft_operations WHERE id=%s', (body['operation_id'],)).fetchone()
+        assert stored == {'result': legacy_result, 'payload_hash': legacy_hash}
+
+
+def test_delete_is_owned_revision_checked_and_replayable_without_resurrection(client, users):
+    assert login(client, users).status_code == 200
+    response, save_body = save(client)
+    identifier = response.json()['id']
+    other_draft, _ = save(client)
+    path = '/drafts/' + identifier + '/delete'
+    deletion = {'operation_id': str(uuid4()), 'expected_revision': 1}
+    with httpx.Client(base_url=URL) as other:
+        assert other.post(path, headers=headers(other), json=deletion).status_code == 401
+        assert login(other, users, 1).status_code == 200
+        assert other.post(path, headers=headers(other), json=deletion).status_code == 404
+    assert client.post(path, json=deletion).status_code == 403
+    assert client.post(path, headers={**headers(client), 'Origin': 'http://evil.invalid'}, json=deletion).status_code == 403
+    assert client.post(path, headers=headers(client), json={**deletion, 'expected_revision': 2}).status_code == 409
+    accepted = client.post(path, headers=headers(client), json=deletion)
+    assert accepted.status_code == 200 and accepted.json() == {'deleted_id': identifier}
+    assert accepted.headers['cache-control'] == 'no-store'
+    assert client.post(path, headers=headers(client), json=deletion).json() == accepted.json()
+    assert client.get('/draft-deletions/' + deletion['operation_id']).json() == accepted.json()
+    assert client.post(path, headers=headers(client), json={**deletion, 'expected_revision': 2}).status_code == 409
+    assert client.get('/drafts/' + identifier).status_code == 404
+    assert client.get('/draft-operations/' + save_body['operation_id']).status_code == 404
+    assert client.post('/drafts', headers=headers(client), json=save_body).status_code == 404
+    assert client.get('/drafts/' + other_draft.json()['id']).status_code == 200
+    with httpx.Client(base_url=URL) as other:
+        assert login(other, users, 1).status_code == 200
+        assert other.get('/draft-deletions/' + deletion['operation_id']).status_code == 404
+        assert other.post(path, headers=headers(other), json=deletion).status_code == 404
+    with database() as conn:
+        tombstone = conn.execute('SELECT * FROM draft_deletions WHERE id=%s', (deletion['operation_id'],)).fetchone()
+        assert tombstone['expires_at'].isoformat().replace('+00:00', 'Z') == response.json()['expires_at']
+        assert not conn.execute('SELECT 1 FROM draft_operations WHERE draft_id=%s', (identifier,)).fetchone()
+        conn.execute('UPDATE draft_deletions SET expires_at=clock_timestamp() WHERE id=%s', (deletion['operation_id'],))
+    assert client.get('/draft-deletions/' + deletion['operation_id']).status_code == 410
+    cleanup()
+    assert client.get('/draft-deletions/' + deletion['operation_id']).status_code == 404
+
+
+def test_expired_draft_cannot_be_deleted(client, users):
+    assert login(client, users).status_code == 200
+    response, _ = save(client)
+    identifier = response.json()['id']
+    with database() as conn:
+        conn.execute("UPDATE drafts SET created_at=statement_timestamp()-interval '7 days',expires_at=statement_timestamp() WHERE id=%s", (identifier,))
+    assert client.post('/drafts/' + identifier + '/delete', headers=headers(client), json={'operation_id': str(uuid4()), 'expected_revision': 1}).status_code == 410
+    with database() as conn:
+        assert not conn.execute('SELECT 1 FROM draft_deletions WHERE draft_id=%s', (identifier,)).fetchone()

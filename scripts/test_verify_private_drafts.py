@@ -1,5 +1,7 @@
 """Verifier control-flow tests; every subprocess is stubbed."""
 import os
+import io
+import json
 from pathlib import Path
 import runpy
 from types import SimpleNamespace
@@ -8,6 +10,35 @@ from unittest.mock import patch
 
 
 class RestorationTest(unittest.TestCase):
+    def test_fictional_api_is_awaited_before_demo_denial_checks(self):
+        calls = []
+        started = False
+
+        def subprocess_stub(args, **kwargs):
+            nonlocal started
+            calls.append(args)
+            if 'ibe160-fictional-assessment' in args and args[-1] == 'api':
+                self.assertIn('--wait', args)
+                started = True
+            return SimpleNamespace(returncode=0, stdout='')
+
+        def http_stub(request, **kwargs):
+            if isinstance(request, str):
+                self.assertIn(':8000/', request)
+                self.assertTrue(started)
+                raise RuntimeError('stop after prerequisite check')
+            path = request.full_url
+            value = {'csrf_token': 'synthetic'} if path.endswith('/auth/csrf') else {'operation_id': 'synthetic'} if path.endswith('/draft-operations') else {'id': 'synthetic', 'draft': {'realtime_duty': '007', 'physical_bus': 'Bus-0012'}}
+            response = io.BytesIO(json.dumps(value).encode())
+            response.headers = {'Cache-Control': 'no-store'}
+            return response
+
+        with patch.dict(os.environ, {'COMPOSE_PROJECT_NAME': 'ibe160-private-tests'}), patch('subprocess.run', subprocess_stub), patch('urllib.request.build_opener', return_value=SimpleNamespace(open=http_stub)):
+            with self.assertRaisesRegex(RuntimeError, 'stop after prerequisite check'):
+                runpy.run_path(str(Path(__file__).with_name('verify-private-drafts.py')))
+        self.assertTrue(started)
+        self.assertEqual(calls[-1][-4:], ['up', '-d', '--wait', 'private-api'])
+
     def test_operational_restore_is_attempted_even_when_disposable_stop_fails(self):
         calls = []
 

@@ -40,4 +40,5 @@ def cleanup():
         conn.execute('DELETE FROM sessions WHERE expires_at <= clock_timestamp()')
         conn.execute('DELETE FROM drafts WHERE expires_at <= clock_timestamp()')
         conn.execute('DELETE FROM draft_operations WHERE expires_at <= clock_timestamp()')
+        conn.execute('DELETE FROM draft_deletions WHERE expires_at <= clock_timestamp()')
         conn.execute('DELETE FROM login_limits WHERE expires_at <= clock_timestamp()')

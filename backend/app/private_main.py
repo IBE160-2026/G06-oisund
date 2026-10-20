@@ -11,7 +11,7 @@ from pydantic import BaseModel, ConfigDict, Field
 
 from . import auth
 from . import draft_storage
-from .draft_domain import DraftList, DraftRecord, IssueOperation, IssuedOperation, OperationResult, SaveDraft
+from .draft_domain import DeleteDraft, DeletedDraft, DraftList, DraftRecord, IssueOperation, IssuedOperation, OperationResult, SaveDraft
 from .private_storage import cleanup, database
 
 
@@ -161,3 +161,13 @@ def create_draft(body: SaveDraft, request: Request):
 @app.post('/drafts/{identifier}', response_model=DraftRecord)
 def update_draft(identifier: UUID, body: SaveDraft, request: Request):
     return draft_storage.save(request, identifier, body)
+
+
+@app.post('/drafts/{identifier}/delete', response_model=DeletedDraft)
+def delete_draft(identifier: UUID, body: DeleteDraft, request: Request):
+    return draft_storage.delete(request, identifier, body)
+
+
+@app.get('/draft-deletions/{identifier}', response_model=DeletedDraft)
+def find_deletion(identifier: UUID, request: Request):
+    return draft_storage.deletion_lookup(request, identifier)

@@ -64,8 +64,10 @@ try:
     python(f'from app.auth import provision\nprovision({username!r}, {password!r})\n')
     session = request('/auth/login', {'username': username, 'password': password})
     operation = request('/draft-operations', {})['operation_id']
-    body = {'operation_id': operation, 'expected_revision': 0, 'draft': {'service_date': '2026-10-24', 'vehicle_duty': '007', 'activities': [{'id': str(uuid4()), 'raw_code': 'Unknown', 'source_start': '25:10', 'start': '2026-10-25T01:10+02:00', 'end': '2026-10-25T01:10+02:00'}]}}
+    body = {'operation_id': operation, 'expected_revision': 0, 'draft': {'service_date': '2026-10-24', 'vehicle_duty': '0007', 'physical_bus': 'Bus-0012', 'activities': [{'id': str(uuid4()), 'raw_code': 'Unknown', 'source_start': '25:10', 'start': '2026-10-25T01:10+02:00', 'end': '2026-10-25T01:10+02:00'}]}}
     original = request('/drafts', body)
+    assert original['draft']['realtime_duty'] == '007' and original['draft']['physical_bus'] == 'Bus-0012'
+    run(['docker', 'compose', '-p', 'ibe160-fictional-assessment', 'up', '-d', '--build', '--wait', 'api'])
     denied('/drafts', 404, 8000)
     denied('/drafts/' + original['id'], 404, 8000)
     denied('/draft-operations/' + operation, 404, 8000)

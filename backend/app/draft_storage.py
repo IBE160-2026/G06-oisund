@@ -7,6 +7,7 @@ from fastapi import HTTPException
 from psycopg.types.json import Jsonb
 
 from . import auth
+from .draft_domain import DraftContent
 from .private_storage import database
 
 
@@ -34,7 +35,19 @@ def owned(conn, owner, identifier, request):
 
 def presentation(row):
     return {'id': str(row['id']), 'created_at': row['created_at'].isoformat(),
-            'expires_at': row['expires_at'].isoformat(), 'revision': row['revision'], 'draft': row['content']}
+            'expires_at': row['expires_at'].isoformat(), 'revision': row['revision'], 'draft': normalize_content(row['content'])}
+
+
+def normalize_content(content):
+    return DraftContent.model_validate(content).model_dump(mode='json')
+
+
+def normalize_result(result):
+    return {**result, 'draft': normalize_content(result['draft'])}
+
+
+def fingerprint(identifier, payload):
+    return hashlib.sha256(json.dumps({'target': str(identifier), 'body': payload}, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
 
 
 def listing(request):
@@ -90,12 +103,12 @@ def lookup(request, identifier):
         owner = authorized(conn, request)
         row = operation(conn, owner, identifier, request)
         auth.session(conn, request)
-        return {'state': 'accepted' if row['result'] else 'pending', 'result': row['result']}
+        return {'state': 'accepted' if row['result'] else 'pending', 'result': normalize_result(row['result']) if row['result'] else None}
 
 
 def save(request, identifier, body):
     payload = body.model_dump(mode='json')
-    fingerprint = hashlib.sha256(json.dumps({'target': str(identifier), 'body': payload}, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
+    digest = fingerprint(identifier, payload)
     with database() as conn:
         owner = authorized(conn, request)
         # Lock drafts before operations consistently, including lookup paths.
@@ -105,9 +118,14 @@ def save(request, identifier, body):
         op = operation(conn, owner, body.operation_id, request)
         auth.session(conn, request)
         if op['result']:
-            if op['payload_hash'] != fingerprint:
+            result = normalize_result(op['result'])
+            # Older snapshots/fingerprints retain the previously editable value.
+            # Compare normalized accepted facts without rewriting stored work.
+            accepted_payload = {'operation_id': str(body.operation_id), 'expected_revision': result['revision'] - 1, 'draft': result['draft']}
+            accepted_target = op['draft_id'] if result['revision'] > 1 else None
+            if op['payload_hash'] != digest and fingerprint(accepted_target, accepted_payload) != digest:
                 raise HTTPException(409, 'Lagringsforsøket har annet innhold. Behold dine lokale endringer.')
-            return op['result']
+            return result
         if op['draft_id'] != identifier:
             deny()
         if (existing['revision'] if existing else 0) != body.expected_revision:
@@ -121,6 +139,45 @@ def save(request, identifier, body):
             row = conn.execute('INSERT INTO drafts(id,owner,revision,content) VALUES (%s,%s,1,%s) RETURNING *', (uuid4(), owner, Jsonb(content))).fetchone()
         result = presentation(row)
         conn.execute('UPDATE draft_operations SET draft_id=%s,expires_at=%s,payload_hash=%s,result=%s WHERE id=%s',
-                     (row['id'], row['expires_at'], fingerprint, Jsonb(result), body.operation_id))
+                     (row['id'], row['expires_at'], digest, Jsonb(result), body.operation_id))
         auth.session(conn, request)
         return result
+
+
+def deletion(conn, owner, identifier, request):
+    row = conn.execute('SELECT * FROM draft_deletions WHERE id=%s AND owner=%s FOR UPDATE', (identifier, owner)).fetchone()
+    auth.session(conn, request)
+    if row and not conn.execute('SELECT %s > clock_timestamp() AS live', (row['expires_at'],)).fetchone()['live']:
+        raise HTTPException(410, 'Slettingsforsøket er utløpt.')
+    return row
+
+
+def deletion_lookup(request, operation_id):
+    with database() as conn:
+        owner = authorized(conn, request)
+        row = deletion(conn, owner, operation_id, request)
+        if not row:
+            deny()
+        return {'deleted_id': row['draft_id']}
+
+
+def delete(request, identifier, body):
+    with database() as conn:
+        owner = authorized(conn, request)
+        accepted = deletion(conn, owner, body.operation_id, request)
+        if accepted:
+            if accepted['draft_id'] != identifier or accepted['expected_revision'] != body.expected_revision:
+                raise HTTPException(409, 'Slettingsforsøket har annet innhold.')
+            return {'deleted_id': identifier}
+        row = owned(conn, owner, identifier, request)
+        if row['revision'] != body.expected_revision:
+            raise HTTPException(409, 'Utkastet er endret. Sammenlign med lagret versjon før sletting.')
+        inserted = conn.execute('INSERT INTO draft_deletions VALUES (%s,%s,%s,%s,%s) ON CONFLICT DO NOTHING RETURNING id',
+                                (body.operation_id, owner, identifier, body.expected_revision, row['expires_at'])).fetchone()
+        auth.session(conn, request)
+        if not inserted:
+            deny()
+        if not conn.execute('DELETE FROM drafts WHERE id=%s AND expires_at > clock_timestamp() RETURNING id', (identifier,)).fetchone():
+            raise HTTPException(410, 'Utkastet er utløpt.')
+        auth.session(conn, request)
+        return {'deleted_id': identifier}

@@ -22,11 +22,13 @@ context:
 
 **Approach:** Add a Norwegian manual draft form, owned list, save/update and reopen in private PostgreSQL.
 
+**Owner walkthrough amendment (2026-10-20):** Replace the redundant editable realtime value with a manual `Buss/vogn` (physical bus) field. Derive the realtime value from the last three digits of vehicle duty, preserving leading zeros; never derive the physical bus. Add clear vehicle-duty, reset/discard and saved-draft deletion actions. This instruction authorizes these changes within the ongoing 9.4 walkthrough; it does not approve the story or start 10.4's confirmed/active-day bus workflow.
+
 ## Boundaries & Constraints
 
 **Always:** Preserve existing accounts, data, secret and demo isolation. Use additive migrations. Check session-derived ownership and expiry transactionally. Reuse CSRF/origin, no-store, logout locks and 14-day sessions. Draft expiry is seven days after server creation, never extended by use/retry/sign-in. Purge drafts/operations on startup/hourly. Keep private input in memory; clear on logout/session expiry. Warn before avoidable unsaved navigation.
 
-**Never:** Test against operational storage, reset private data, persist private browser content/logs, integrate PDF, confirm/activate days, assign buses or implement 10.2's full correction workflow.
+**Never:** Test against operational storage, reset private data, persist private browser content/logs, integrate PDF, confirm/activate days, assign buses in confirmed/active plans or implement 10.2's full correction workflow.
 
 ## I/O & Edge-Case Matrix
 
@@ -38,6 +40,9 @@ context:
 | Replay/stale | Same operation/payload; changed payload; old revision | Replay returns accepted result; changed payload/stale update conflicts | Preserve local input for comparison; no force overwrite |
 | Access/expiry | Foreign/demo request, expired session/draft | Deny before reads/retries/writes; no resurrection | Distinct renewal, safe denial and owned-expiry presentation |
 | Reload | Saved state plus unsaved edits | Restore server state after authorization | Warn unsaved input may be lost; no offline recovery |
+| Bus/duty | Manually entered bus and full vehicle duty | Bus remains distinct; realtime value is derived from a final three-digit numeric suffix, otherwise unknown | Preserve leading zeros and never infer a bus |
+| Clear/reset | Clear duty; reset unsaved form; discard saved-form edits | Clear duty affects only duty/derived value; reset restores last saved snapshot or empties a new draft | Confirm destructive reset; never delete saved work via reset |
+| Delete | Explicitly confirmed deletion of the selected saved draft | Authorize owner/session/expiry and expected revision; remove only that draft and related operations | Cancel changes nothing; stale revision conflicts; lost reply stays unconfirmed until authorized retry/lookup; old save operations cannot recreate deleted work |
 
 </frozen-after-approval>
 
@@ -51,8 +56,10 @@ context:
 ## Tasks & Acceptance
 
 **Execution:**
+- [x] `backend/app/draft_domain.py`, `draft_storage.py`, `private_main.py` — accept nullable bounded physical bus; derive realtime duty server-side from numeric suffix. Normalize API presentations, operation snapshots and fingerprints consistently without rewriting existing stored drafts. Add POST deletion with expected revision under existing owner/session/expiry locks; cascade related operations so replay cannot recreate deleted drafts. A successful response names only the deleted identifier; missing/foreign targets use safe denial. No bulk reset.
+- [x] `frontend/src/PrivateDrafts.tsx` — replace editable realtime input with `Buss/vogn`; optionally show derived realtime as text. Add `Tøm vognløp`, `Tilbakestill utkast`/`Forkast endringer` and confirmed `Slett utkast`. Preserve bus/activities when clearing duty. Reset restores saved snapshot or empties a new form; deletion removes only the selected saved draft. Do not discard an unresolved save/delete operation: settle it first or retain its original identity for retry. Lost delete replies retain a locked pending-delete state until authorized retry/lookup; distinguish acknowledged deletion from unavailable/denied state and prevent late responses from resurrecting UI.
+- [x] `backend/tests/test_private_drafts.py`, `frontend/tests/private-drafts.spec.ts`, `scripts/verify-private-drafts.py` — isolated tests for bus/suffix round-trip and correction with leading zeros, clear/reset/cancel, successful/stale/cross-owner/forged/expired deletion, committed lost delete reply/retry and old-save no-resurrection. Update restart evidence/screenshots/README/log; do not touch ordinary account data in tests.
 - [x] `scripts/verify-private-drafts.py`, `README.md` — use existing isolated setup: stop operational API, select `COMPOSE_PROJECT_NAME=ibe160-private-tests`, preserve secret/operational volume, run disposable project on 8001; restore operational API afterward. Refuse test mutations unless project selection and synthetic-account guard pass.
-- [x] `backend/app/draft_domain.py`, `backend/migrations/private/002_drafts.sql` — nullable service date, vehicle duty and ordered activities: UUID, type/raw code, start/end, places, trip/line/direction, uncertainty/provenance. Preserve source clocks; physical bus stays unknown. Bound fields/rows; allow unresolved fields/zero durations, reject negative intervals/invalid Oslo offsets. Add revisions/operations.
 - [x] `backend/app/draft_storage.py`, `private_storage.py` — atomic access/revision checks, idempotency and cascading expiry. Preissue creation operations; unused operations expire after seven days and accepted operations share draft expiry. Missing/expired operations cannot recreate work.
 - [x] `backend/app/private_main.py` — owned list/read/create/update/operation lookup, safe errors, bounded draft requests; retain authentication limits.
 - [x] `frontend/src/PrivateDrafts.tsx`, `PrivateAccess.tsx`, `style.css` — manual activity entry/field updates, list/reopen, save states, conflict comparison/reload. Preserve edits across visibility revalidation of the same valid session.
@@ -68,8 +75,11 @@ context:
 
 - 2026-10-20: Owner approved the specification and requested continued implementation. Re-read from disk; no external edits. Approved intent is frozen.
 - 2026-10-20: Implemented additive private drafts and operation snapshots, transactional session/owner/revision/expiry checks, validated API contracts and bounded manual Norwegian UI. Visibility revalidation hides private fields while retaining memory through an unavailable check; a confirmed invalid session or logout clears it. Conflict comparison uses labelled facts without exposing record identifiers. No PDF integration or activation flow.
+- 2026-10-20: Implemented the owner walkthrough amendment: manual bus, server-derived duty suffix, clear/reset/discard and revision-checked individual deletion. Added additive `003_draft_deletions.sql`: content-free deletion acknowledgements keep the original owner/operation/revision/deadline solely for authorized lost-reply settlement; saved content and save operations cascade away. Legacy draft/operation JSON and hashes are not rewritten; API results and replay comparisons normalize derived values consistently.
 
 ## Spec Change Log
+
+- 2026-10-20: The owner explicitly requested bus entry and clear/reset/delete during walkthrough. Updated the human-owned boundaries and matrix to record that authorization. Keep private isolation, fixed retention, stable revisions/idempotency, visibility/logout protections and all previously passing behavior. This follow-up changes the existing 9.4 implementation; no next story is started.
 
 ## Review Triage Log
 
@@ -94,11 +104,38 @@ context:
 
 All retained findings were patched and verified. No findings deferred. Historical browser/server timezone-data differences were reproduced: before 1970 the browser validates syntax/calendar/intervals while the backend authoritatively validates Oslo offsets; modern browser Oslo validation remains. Root additionally corrected synthetic login-throttle setup when the expanded browser file exceeded ten attempts; production limits are unchanged.
 
+### Walkthrough amendment review
+
+| Finding | Verdict | Evidence and route |
+|---|---|---|
+| Amendment blind 1: normalized malformed offset | medium | Python normalizes +00:60; the backend regex allows it while the browser rejects it. Patch explicit offset bounds and regression. |
+| Amendment blind 2: unfinished operation cap | low | Carried: same location/claim as Blind 5; preserve its rejection under the low-finding complexity rule. |
+| Amendment blind 3: 200-draft list | low | Carried: same location/claim as Blind 1; preserve its rejection under the low-finding complexity rule. |
+| Amendment blind 4: stale list response | medium | Overlapping refresh calls share one deletion epoch, so an older list can overwrite post-save revisions. Patch per-request ordering and delayed-response coverage. |
+| Amendment blind 5: terminal deletion expiry locks UI | medium | HTTP410 leaves pendingDelete forever although expiry is definitive. Patch terminal-expiry recovery without claiming successful deletion. |
+| Amendment blind 6: malformed list crashes render | medium | Array-only validation admits null elements, then render accesses item.id. Patch bounded summary validation and recoverable failure presentation. |
+| Amendment blind 7: verifier assumes demo API | medium | Denial checks call8000 before the verifier starts the fictional project. Patch explicit prerequisite startup before those checks. |
+| Amendment blind 8: restoring initially stopped API | low | Restoration always enables the operational API. In this owner's documented workflow it runs before/after testing; state tracking adds branches for an uncommon alternative. Rejected under low-finding complexity rule. |
+| Amendment blind 9: UTF-16/code-point mismatch | low | Browser length differs from Pydantic for emoji. Directly align text bounds/validation with code-point counting and add a round-trip regression. |
+| Amendment blind 10: removal loses focus | medium | Removing the focused activity button leaves keyboard focus without a useful location. Patch focus to the stable editor heading and assert it. |
+| Amendment edge 1: normalized malformed offset | medium | Same verified regex/fromisoformat mismatch as amendment blind1; patch together. |
+| Amendment edge 2: UTF-16/code-point mismatch | low | Same text-length mismatch as amendment blind9; direct correction together. |
+| Amendment edge 3: 200-draft list | low | Carried: same location/claim as Blind1; preserve existing rejection. |
+| Amendment verification 1: stale-delete UI untested | medium | Pre-verified: backend409 is covered but browser lock release/comparison is not. Patch a real two-tab stale deletion/cancel/reload regression. |
+
+All retained amendment findings are corrected and verified; no findings deferred. Direct corrections cover offset bounds, list validation/order, terminal deletion expiry recovery, verifier prerequisites, Unicode bounds and keyboard focus. Real browser coverage includes stale deletion recovery and confirmation before replacing local edits.
+
 ## Design Notes
 
 No intent gaps. Footprint: private DB/API/UI and tests. Verify migration replay/account preservation before operational application. Planning performs no database actions.
 
 ## Verification
+
+### Owner amendment final root verification — 2026-10-20
+
+- Root inspected the amendment/review-correction diffs and synthetic screenshots. The exact final disposable verifier passed **47 backend tests (73.05s)**, real PostgreSQL/API restart, migration replay/account/session/draft/operation/deadline equality, cleanup, TypeScript/Vite build and **44 browser tests (1.3m)**. Both fully mocked verifier control-flow tests passed (**2 tests, 0.095s**). No application code changed afterward.
+- The original matrix remains covered, with additional executed tests for manual bus/derived suffix, leading zeros, legacy snapshots/fingerprints without storage rewriting, clear/reset/discard/cancel, deletion access/revision/session/expiry, committed/uncommitted lost deletion replies, lookup/retry, old-save no-resurrection, terminal expiry recovery and stale-delete comparison. List races/invalid summaries, Unicode round-trip and removal focus also passed.
+- Applied additive003 to the ordinary runtime only after isolated verification. Read-only counts before/after were identical: **1 account, 1 draft**. Database container/volume/secret retained; API healthy. Counts do not claim a full private-content snapshot. No operational test mutations/reset or private payload inspection. Disposable services stopped; old regression screenshots restored. Spec done means implementation complete; sprint remains review awaiting continued owner walkthrough/final approval. Local commit follows; no push.
 
 ### Final root verification and matrix audit — 2026-10-20
 

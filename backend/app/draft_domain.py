@@ -33,7 +33,7 @@ class Activity(StrictModel):
     def oslo_instant(cls, value):
         if value is None:
             return value
-        if not re.fullmatch(r'\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(?::\d{2})?[+-]\d{2}:\d{2}', value):
+        if not re.fullmatch(r'\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(?::\d{2})?[+-](?:[01]\d|2[0-3]):[0-5]\d', value):
             raise ValueError('Explicit date and offset required')
         instant = datetime.fromisoformat(value)
         try:
@@ -55,8 +55,18 @@ class DraftContent(StrictModel):
     service_date: date | None = None
     vehicle_duty: str | None = Field(default=None, max_length=100)
     realtime_duty: str | None = Field(default=None, max_length=3, pattern=r'^[0-9]{3}$')
-    physical_bus: None = None
+    physical_bus: str | None = Field(default=None, max_length=100)
     activities: list[Activity] = Field(default_factory=list, max_length=200)
+
+    @model_validator(mode='before')
+    @classmethod
+    def derived_realtime(cls, value):
+        if isinstance(value, dict):
+            value = dict(value)
+            duty = value.get('vehicle_duty')
+            suffix = re.search(r'([0-9]{3})$', duty) if isinstance(duty, str) else None
+            value['realtime_duty'] = suffix.group(1) if suffix else None
+        return value
 
     @field_validator('service_date', mode='before')
     @classmethod
@@ -80,6 +90,15 @@ class SaveDraft(StrictModel):
     operation_id: UUID
     expected_revision: int = Field(ge=0, strict=True)
     draft: DraftContent
+
+
+class DeleteDraft(StrictModel):
+    operation_id: UUID
+    expected_revision: int = Field(ge=1, strict=True)
+
+
+class DeletedDraft(StrictModel):
+    deleted_id: UUID
 
 
 class DraftRecord(StrictModel):
