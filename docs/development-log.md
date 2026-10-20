@@ -276,3 +276,8 @@ Document checks verified unique canonical story counts, saved approvals, depende
 
 - After accepting story 9.1, Jonas explicitly requested commit, push and an updated development log. This supersedes the earlier no-commit/no-push boundary for the completed story. Publication includes the adapter/CLI, independent oracle/transcription script, pinned dependencies, tests, evidence, owner acceptance and synchronized documentation/tracking.
 - No application code changed after the recorded final verification: 76 import tests and 18 actual HTTP/PostgreSQL tests passed. This publication step checks the full staged diff and whitespace; no new test execution is claimed. No next story starts. Commit/push outcome will be recorded after Git confirms publication.
+
+### Story 9.1 publication confirmed — 2026-10-20
+
+- Created commit `6a9979d568d93793a7495565832b7f450430a249` (`feat: qualify supported PDF imports for story 9.1`) and successfully pushed it to `origin/main` at `https://github.com/IBE160-2026/G06-oisund.git`. Git reported `e8c0cf2..6a9979d main -> main`; local HEAD and the updated origin/main reference matched, and the working tree was clean immediately after publication.
+- The commit contains all 14 intended files, including the independent transcription script and owner closure. Staged whitespace checks passed. This confirmation is a documentation-only follow-up; no new code, test run or next story. Its own push is verified separately after committing this log entry.
