@@ -22,3 +22,11 @@ typing_extensions==4.16.0
 uvicorn==0.54.0
 annotated-doc==0.0.5
 opentelemetry-api==1.45.1
+pdfplumber==0.11.10
+pdfminer.six==20260107
+pillow==13.0.0
+pypdfium2==5.14.0
+charset-normalizer==3.5.2
+cryptography==50.0.2
+cffi==2.1.1
+pycparser==3.11

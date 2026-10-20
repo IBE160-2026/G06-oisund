@@ -1,0 +1,2205 @@
+{
+  "approval": {
+    "owner": "Jonas Øisund",
+    "date": "2026-10-20",
+    "source": "Eksempelfiler/README.md",
+    "source_sha256": "c221000e9d6b1314749efb918af05de3e8a3f4e133147c80384123d2a033d1c3",
+    "transcription": "Independent approved Markdown tables transcribed before parser execution; source pages are field provenance."
+  },
+  "fixtures": [
+    {
+      "file": "Eksempel-1-anonymisert.pdf",
+      "sha256": "8727cc5245adeb3a1a236fcacc0176f988c87ee68767c1adc8942e78a30d5a4f",
+      "header": {
+        "shift_id": "90000001",
+        "service_date": "2030-01-04",
+        "weekday": "Fri",
+        "pages": 4,
+        "start": "06:08",
+        "end": "17:35",
+        "end_day": 0,
+        "work": "10h17",
+        "span": "11h27",
+        "employer": "Tide Buss",
+        "department": "Tromsø",
+        "driver": "Testsjåfør (00000)",
+        "origin": "Garasje Gimle",
+        "destination": "Garasje Gimle",
+        "supplements": [
+          "25,00% 0h00",
+          "40,00% 0h00"
+        ]
+      },
+      "duties": [
+        "960300",
+        "960300",
+        "960301"
+      ],
+      "duty_after_activities": [
+        1,
+        16,
+        26
+      ],
+      "activities": [
+        {
+          "pages": [
+            1
+          ],
+          "start": "06:08",
+          "end": "06:11",
+          "label": "Sign-on",
+          "kind": "Sign-on",
+          "line": null,
+          "trip_id": null,
+          "origin": null,
+          "destination": null,
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "06:18",
+          "end": "06:36",
+          "label": "tom",
+          "kind": "deadhead",
+          "line": null,
+          "trip_id": "75807",
+          "origin": "Garasje Gimle",
+          "destination": "Sorgenfri",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "06:39",
+          "end": "07:05",
+          "label": "30",
+          "kind": "trip",
+          "line": "30",
+          "trip_id": "1000",
+          "origin": "Sorgenfri",
+          "destination": "Universitetssykehuset Nord-Norge",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "07:05",
+          "end": "07:08",
+          "label": "tom",
+          "kind": "deadhead",
+          "line": null,
+          "trip_id": "75031",
+          "origin": "Universitetssykehuset Nord-Norge",
+          "destination": "Universitetssykehuset Nord-Norge",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "07:24",
+          "end": "07:52",
+          "label": "30",
+          "kind": "trip",
+          "line": "30",
+          "trip_id": "1005",
+          "origin": "Universitetssykehuset Nord-Norge",
+          "destination": "Sorgenfri",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "07:56",
+          "end": "08:26",
+          "label": "30",
+          "kind": "trip",
+          "line": "30",
+          "trip_id": "1004",
+          "origin": "Sorgenfri",
+          "destination": "Universitetssykehuset Nord-Norge",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "08:26",
+          "end": "08:26",
+          "label": "tom",
+          "kind": "deadhead",
+          "line": null,
+          "trip_id": "75803",
+          "origin": "Universitetssykehuset Nord-Norge",
+          "destination": "Universitetssykehuset Nord-Norge",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "08:32",
+          "end": "09:00",
+          "label": "30",
+          "kind": "trip",
+          "line": "30",
+          "trip_id": "1009",
+          "origin": "Universitetssykehuset Nord-Norge",
+          "destination": "Sorgenfri",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1,
+            2
+          ],
+          "start": "09:02",
+          "end": "09:29",
+          "label": "30",
+          "kind": "trip",
+          "line": "30",
+          "trip_id": "1008",
+          "origin": "Sorgenfri",
+          "destination": "Universitetssykehuset Nord-Norge",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            2
+          ],
+          "start": "09:29",
+          "end": "09:31",
+          "label": "tom",
+          "kind": "deadhead",
+          "line": null,
+          "trip_id": "75033",
+          "origin": "Universitetssykehuset Nord-Norge",
+          "destination": "Universitetssykehuset Nord-Norge",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            2
+          ],
+          "start": "09:45",
+          "end": "10:13",
+          "label": "30",
+          "kind": "trip",
+          "line": "30",
+          "trip_id": "1013",
+          "origin": "Universitetssykehuset Nord-Norge",
+          "destination": "Sorgenfri",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            2
+          ],
+          "start": "10:16",
+          "end": "10:43",
+          "label": "30",
+          "kind": "trip",
+          "line": "30",
+          "trip_id": "1012",
+          "origin": "Sorgenfri",
+          "destination": "Universitetssykehuset Nord-Norge",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            2
+          ],
+          "start": "10:43",
+          "end": "10:46",
+          "label": "tom",
+          "kind": "deadhead",
+          "line": null,
+          "trip_id": "75809",
+          "origin": "Universitetssykehuset Nord-Norge",
+          "destination": "Garasje Gimle",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            2
+          ],
+          "start": "10:49",
+          "end": "10:50",
+          "label": "Sign-off",
+          "kind": "Sign-off",
+          "line": null,
+          "trip_id": null,
+          "origin": null,
+          "destination": null,
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            2
+          ],
+          "start": "10:50",
+          "end": "12:00",
+          "label": "Split break",
+          "kind": "Split break",
+          "line": null,
+          "trip_id": null,
+          "origin": null,
+          "destination": null,
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            2
+          ],
+          "start": "12:00",
+          "end": "12:01",
+          "label": "Sign-on",
+          "kind": "Sign-on",
+          "line": null,
+          "trip_id": null,
+          "origin": null,
+          "destination": null,
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            2
+          ],
+          "start": "12:08",
+          "end": "12:11",
+          "label": "tom",
+          "kind": "deadhead",
+          "line": null,
+          "trip_id": "75811",
+          "origin": "Garasje Gimle",
+          "destination": "Universitetssykehuset Nord-Norge",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            2
+          ],
+          "start": "12:14",
+          "end": "12:42",
+          "label": "30",
+          "kind": "trip",
+          "line": "30",
+          "trip_id": "1017",
+          "origin": "Universitetssykehuset Nord-Norge",
+          "destination": "Sorgenfri",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            2,
+            3
+          ],
+          "start": "12:43",
+          "end": "13:10",
+          "label": "30",
+          "kind": "trip",
+          "line": "30",
+          "trip_id": "1016",
+          "origin": "Sorgenfri",
+          "destination": "Universitetssykehuset Nord-Norge",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            3
+          ],
+          "start": "13:10",
+          "end": "13:12",
+          "label": "tom",
+          "kind": "deadhead",
+          "line": null,
+          "trip_id": "75045",
+          "origin": "Universitetssykehuset Nord-Norge",
+          "destination": "Universitetssykehuset Nord-Norge",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            3
+          ],
+          "start": "13:26",
+          "end": "13:54",
+          "label": "30",
+          "kind": "trip",
+          "line": "30",
+          "trip_id": "1021",
+          "origin": "Universitetssykehuset Nord-Norge",
+          "destination": "Sorgenfri",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            3
+          ],
+          "start": "13:57",
+          "end": "14:24",
+          "label": "30",
+          "kind": "trip",
+          "line": "30",
+          "trip_id": "1020",
+          "origin": "Sorgenfri",
+          "destination": "Universitetssykehuset Nord-Norge",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            3
+          ],
+          "start": "14:24",
+          "end": "14:26",
+          "label": "tom",
+          "kind": "deadhead",
+          "line": null,
+          "trip_id": "75818",
+          "origin": "Universitetssykehuset Nord-Norge",
+          "destination": "Universitetssykehuset Nord-Norge",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            3
+          ],
+          "start": "14:34",
+          "end": "14:39",
+          "label": "Travel to",
+          "kind": "Travel to",
+          "line": null,
+          "trip_id": null,
+          "origin": null,
+          "destination": null,
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            3
+          ],
+          "start": "14:39",
+          "end": "15:05",
+          "label": "Coffee",
+          "kind": "Coffee",
+          "line": null,
+          "trip_id": null,
+          "origin": null,
+          "destination": null,
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            3
+          ],
+          "start": "15:05",
+          "end": "15:10",
+          "label": "Travel from",
+          "kind": "Travel from",
+          "line": null,
+          "trip_id": null,
+          "origin": null,
+          "destination": null,
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            3
+          ],
+          "start": "15:10",
+          "end": "15:38",
+          "label": "30",
+          "kind": "trip",
+          "line": "30",
+          "trip_id": "1027",
+          "origin": "Universitetssykehuset Nord-Norge",
+          "destination": "Sorgenfri",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            3
+          ],
+          "start": "15:40",
+          "end": "16:10",
+          "label": "30",
+          "kind": "trip",
+          "line": "30",
+          "trip_id": "1026",
+          "origin": "Sorgenfri",
+          "destination": "Universitetssykehuset Nord-Norge",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            3
+          ],
+          "start": "16:10",
+          "end": "16:13",
+          "label": "tom",
+          "kind": "deadhead",
+          "line": null,
+          "trip_id": "75037",
+          "origin": "Universitetssykehuset Nord-Norge",
+          "destination": "Universitetssykehuset Nord-Norge",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            3,
+            4
+          ],
+          "start": "16:25",
+          "end": "16:53",
+          "label": "30",
+          "kind": "trip",
+          "line": "30",
+          "trip_id": "1031",
+          "origin": "Universitetssykehuset Nord-Norge",
+          "destination": "Sorgenfri",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            4
+          ],
+          "start": "16:57",
+          "end": "17:27",
+          "label": "30",
+          "kind": "trip",
+          "line": "30",
+          "trip_id": "1030",
+          "origin": "Sorgenfri",
+          "destination": "Universitetssykehuset Nord-Norge",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            4
+          ],
+          "start": "17:27",
+          "end": "17:30",
+          "label": "tom",
+          "kind": "deadhead",
+          "line": null,
+          "trip_id": "75814",
+          "origin": "Universitetssykehuset Nord-Norge",
+          "destination": "Garasje Gimle",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            4
+          ],
+          "start": "17:33",
+          "end": "17:35",
+          "label": "Sign-off",
+          "kind": "Sign-off",
+          "line": null,
+          "trip_id": null,
+          "origin": null,
+          "destination": null,
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        }
+      ],
+      "pause_groups": [
+        {
+          "rows": [
+            15
+          ],
+          "start": "2030-01-04T10:50:00+01:00",
+          "end": "2030-01-04T12:00:00+01:00",
+          "kind": "split",
+          "labels": [
+            "Split break"
+          ]
+        },
+        {
+          "rows": [
+            25
+          ],
+          "start": "2030-01-04T14:39:00+01:00",
+          "end": "2030-01-04T15:05:00+01:00",
+          "kind": "coffee",
+          "labels": [
+            "Coffee"
+          ]
+        }
+      ],
+      "expected_counts": {
+        "trips": 15,
+        "deadheads": 10
+      },
+      "owner_notes": []
+    },
+    {
+      "file": "Eksempel-2-anonymisert.pdf",
+      "sha256": "a21fa69a0d6de93df84c7523c5a7ae8e6537c4e62e5ff0508dfa21cb1c3a260c",
+      "header": {
+        "shift_id": "90000002",
+        "service_date": "2030-01-01",
+        "weekday": "Tue",
+        "pages": 1,
+        "start": "07:51",
+        "end": "16:42",
+        "end_day": 0,
+        "work": "8h21",
+        "span": "8h51",
+        "employer": "Tide Buss",
+        "department": "Tromsø",
+        "driver": "Testsjåfør (00000)",
+        "origin": "Garasje Gimle",
+        "destination": "Garasje Gimle",
+        "supplements": [
+          "25,00% 0h00"
+        ]
+      },
+      "duties": [
+        "960146",
+        "960146"
+      ],
+      "duty_after_activities": [
+        1,
+        10
+      ],
+      "activities": [
+        {
+          "pages": [
+            1
+          ],
+          "start": "07:51",
+          "end": "07:54",
+          "label": "Sign-on",
+          "kind": "Sign-on",
+          "line": null,
+          "trip_id": null,
+          "origin": null,
+          "destination": null,
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "07:59",
+          "end": "08:22",
+          "label": "tom",
+          "kind": "deadhead",
+          "line": null,
+          "trip_id": "74540",
+          "origin": "Garasje Gimle",
+          "destination": "Solligården",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "08:25",
+          "end": "09:09",
+          "label": "28",
+          "kind": "trip",
+          "line": "28",
+          "trip_id": "1022",
+          "origin": "Solligården",
+          "destination": "Hamna skole øst",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "09:09",
+          "end": "09:59",
+          "label": "28",
+          "kind": "trip",
+          "line": "28",
+          "trip_id": "1035",
+          "origin": "Hamna skole øst",
+          "destination": "Solligården",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "10:25",
+          "end": "11:09",
+          "label": "28",
+          "kind": "trip",
+          "line": "28",
+          "trip_id": "1034",
+          "origin": "Solligården",
+          "destination": "Hamna skole øst",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "11:09",
+          "end": "11:59",
+          "label": "28",
+          "kind": "trip",
+          "line": "28",
+          "trip_id": "1047",
+          "origin": "Hamna skole øst",
+          "destination": "Solligården",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "11:59",
+          "end": "12:01",
+          "label": "Sign-off",
+          "kind": "Sign-off",
+          "line": null,
+          "trip_id": null,
+          "origin": null,
+          "destination": null,
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "12:01",
+          "end": "12:31",
+          "label": "MealBreak",
+          "kind": "MealBreak",
+          "line": null,
+          "trip_id": null,
+          "origin": null,
+          "destination": null,
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "12:31",
+          "end": "12:43",
+          "label": "Paid meal before",
+          "kind": "Paid meal before",
+          "line": null,
+          "trip_id": null,
+          "origin": null,
+          "destination": null,
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "12:43",
+          "end": "12:45",
+          "label": "Sign-on",
+          "kind": "Sign-on",
+          "line": null,
+          "trip_id": null,
+          "origin": null,
+          "destination": null,
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "12:45",
+          "end": "13:29",
+          "label": "28",
+          "kind": "trip",
+          "line": "28",
+          "trip_id": "1048",
+          "origin": "Solligården",
+          "destination": "Hamna skole øst",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "13:29",
+          "end": "14:19",
+          "label": "28",
+          "kind": "trip",
+          "line": "28",
+          "trip_id": "1061",
+          "origin": "Hamna skole øst",
+          "destination": "Solligården",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "14:35",
+          "end": "15:19",
+          "label": "28",
+          "kind": "trip",
+          "line": "28",
+          "trip_id": "1064",
+          "origin": "Solligården",
+          "destination": "Hamna skole øst",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "15:19",
+          "end": "16:15",
+          "label": "28",
+          "kind": "trip",
+          "line": "28",
+          "trip_id": "1077",
+          "origin": "Hamna skole øst",
+          "destination": "Solligården",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "16:15",
+          "end": "16:38",
+          "label": "tom",
+          "kind": "deadhead",
+          "line": null,
+          "trip_id": "74542",
+          "origin": "Solligården",
+          "destination": "Garasje Gimle",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "16:40",
+          "end": "16:42",
+          "label": "Sign-off",
+          "kind": "Sign-off",
+          "line": null,
+          "trip_id": null,
+          "origin": null,
+          "destination": null,
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        }
+      ],
+      "pause_groups": [
+        {
+          "rows": [
+            8,
+            9
+          ],
+          "start": "2030-01-01T12:01:00+01:00",
+          "end": "2030-01-01T12:43:00+01:00",
+          "kind": "meal",
+          "labels": [
+            "MealBreak",
+            "Paid meal before"
+          ]
+        }
+      ],
+      "expected_counts": {
+        "trips": 8,
+        "deadheads": 2
+      },
+      "owner_notes": []
+    },
+    {
+      "file": "Eksempel-3-anonymisert.pdf",
+      "sha256": "e00d0e540045ebd1974642d571aee919522cd737f3cb63c3b0c040dce91af21b",
+      "header": {
+        "shift_id": "90000003",
+        "service_date": "2030-01-11",
+        "weekday": "Fri",
+        "pages": 1,
+        "start": "06:51",
+        "end": "09:26",
+        "end_day": 0,
+        "work": "2h35",
+        "span": "2h35",
+        "employer": "Tide Buss",
+        "department": "Tromsø",
+        "driver": "Testsjåfør (00000)",
+        "origin": "Garasje Gimle",
+        "destination": "Garasje Gimle",
+        "supplements": [
+          "25,00% 0h00"
+        ]
+      },
+      "duties": [
+        "960127"
+      ],
+      "duty_after_activities": [
+        1
+      ],
+      "activities": [
+        {
+          "pages": [
+            1
+          ],
+          "start": "06:51",
+          "end": "06:54",
+          "label": "Sign-on",
+          "kind": "Sign-on",
+          "line": null,
+          "trip_id": null,
+          "origin": null,
+          "destination": null,
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "06:59",
+          "end": "07:22",
+          "label": "tom",
+          "kind": "deadhead",
+          "line": null,
+          "trip_id": "75344",
+          "origin": "Garasje Gimle",
+          "destination": "Solligården",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "07:25",
+          "end": "08:09",
+          "label": "28",
+          "kind": "trip",
+          "line": "28",
+          "trip_id": "1010",
+          "origin": "Solligården",
+          "destination": "Hamna skole øst",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "08:09",
+          "end": "08:59",
+          "label": "28",
+          "kind": "trip",
+          "line": "28",
+          "trip_id": "1023",
+          "origin": "Hamna skole øst",
+          "destination": "Solligården",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "08:59",
+          "end": "09:22",
+          "label": "tom",
+          "kind": "deadhead",
+          "line": null,
+          "trip_id": "75903",
+          "origin": "Solligården",
+          "destination": "Garasje Gimle",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "09:24",
+          "end": "09:26",
+          "label": "Sign-off",
+          "kind": "Sign-off",
+          "line": null,
+          "trip_id": null,
+          "origin": null,
+          "destination": null,
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        }
+      ],
+      "pause_groups": [],
+      "expected_counts": {
+        "trips": 2,
+        "deadheads": 2
+      },
+      "owner_notes": []
+    },
+    {
+      "file": "Eksempel-4-anonymisert.pdf",
+      "sha256": "51ed1b3950e1868502f408abfee74755079f5cac7e2b5e8d7ba7db51e9370ade",
+      "header": {
+        "shift_id": "90000004",
+        "service_date": "2030-01-05",
+        "weekday": "Sat",
+        "pages": 1,
+        "start": "22:36",
+        "end": "04:10",
+        "end_day": 1,
+        "work": "5h04",
+        "span": "5h34",
+        "employer": "Tide Buss",
+        "department": "Tromsø",
+        "driver": "Testsjåfør (00000)",
+        "origin": "Garasje Gimle",
+        "destination": "Garasje Gimle",
+        "supplements": [
+          "25,00% 0h00",
+          "40,00% 0h00"
+        ]
+      },
+      "duties": [
+        "960090",
+        "960090"
+      ],
+      "duty_after_activities": [
+        1,
+        8
+      ],
+      "activities": [
+        {
+          "pages": [
+            1
+          ],
+          "start": "22:36",
+          "end": "22:39",
+          "label": "Sign-on",
+          "kind": "Sign-on",
+          "line": null,
+          "trip_id": null,
+          "origin": null,
+          "destination": null,
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "22:44",
+          "end": "22:53",
+          "label": "tom",
+          "kind": "deadhead",
+          "line": null,
+          "trip_id": "7351",
+          "origin": "Garasje Gimle",
+          "destination": "Skognesvegen",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "22:55",
+          "end": "23:41",
+          "label": "24",
+          "kind": "trip",
+          "line": "24",
+          "trip_id": "6069",
+          "origin": "Skognesvegen",
+          "destination": "Kroken sykehjem",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "23:50",
+          "end": "00:35",
+          "label": "24",
+          "kind": "trip",
+          "line": "24",
+          "trip_id": "6072",
+          "origin": "Kroken sykehjem",
+          "destination": "Skognesvegen",
+          "end_day": 1,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "00:35",
+          "end": "00:44",
+          "label": "tom",
+          "kind": "deadhead",
+          "line": null,
+          "trip_id": "7405",
+          "origin": "Skognesvegen",
+          "destination": "Garasje Gimle",
+          "end_day": 1,
+          "start_day": 1,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "00:44",
+          "end": "00:45",
+          "label": "Sign-off",
+          "kind": "Sign-off",
+          "line": null,
+          "trip_id": null,
+          "origin": null,
+          "destination": null,
+          "end_day": 1,
+          "start_day": 1,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "00:45",
+          "end": "01:15",
+          "label": "MealBreak",
+          "kind": "MealBreak",
+          "line": null,
+          "trip_id": null,
+          "origin": null,
+          "destination": null,
+          "end_day": 1,
+          "start_day": 1,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "01:15",
+          "end": "01:17",
+          "label": "Sign-on",
+          "kind": "Sign-on",
+          "line": null,
+          "trip_id": null,
+          "origin": null,
+          "destination": null,
+          "end_day": 1,
+          "start_day": 1,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "01:17",
+          "end": "01:28",
+          "label": "tom",
+          "kind": "deadhead",
+          "line": null,
+          "trip_id": "7394",
+          "origin": "Garasje Gimle",
+          "destination": "Bankgata",
+          "end_day": 1,
+          "start_day": 1,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "01:30",
+          "end": "02:03",
+          "label": "33",
+          "kind": "trip",
+          "line": "33",
+          "trip_id": "6601",
+          "origin": "Bankgata",
+          "destination": "Universitetssykehuset Nord-Norge",
+          "end_day": 1,
+          "start_day": 1,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "02:03",
+          "end": "02:14",
+          "label": "tom",
+          "kind": "deadhead",
+          "line": null,
+          "trip_id": "7083",
+          "origin": "Universitetssykehuset Nord-Norge",
+          "destination": "Bankgata",
+          "end_day": 1,
+          "start_day": 1,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "02:30",
+          "end": "03:03",
+          "label": "33",
+          "kind": "trip",
+          "line": "33",
+          "trip_id": "6603",
+          "origin": "Bankgata",
+          "destination": "Universitetssykehuset Nord-Norge",
+          "end_day": 1,
+          "start_day": 1,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "03:03",
+          "end": "03:14",
+          "label": "tom",
+          "kind": "deadhead",
+          "line": null,
+          "trip_id": "7084",
+          "origin": "Universitetssykehuset Nord-Norge",
+          "destination": "Bankgata",
+          "end_day": 1,
+          "start_day": 1,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "03:30",
+          "end": "04:03",
+          "label": "33",
+          "kind": "trip",
+          "line": "33",
+          "trip_id": "6605",
+          "origin": "Bankgata",
+          "destination": "Universitetssykehuset Nord-Norge",
+          "end_day": 1,
+          "start_day": 1,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "04:03",
+          "end": "04:06",
+          "label": "tom",
+          "kind": "deadhead",
+          "line": null,
+          "trip_id": "7224",
+          "origin": "Universitetssykehuset Nord-Norge",
+          "destination": "Garasje Gimle",
+          "end_day": 1,
+          "start_day": 1,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "04:08",
+          "end": "04:10",
+          "label": "Sign-off",
+          "kind": "Sign-off",
+          "line": null,
+          "trip_id": null,
+          "origin": null,
+          "destination": null,
+          "end_day": 1,
+          "start_day": 1,
+          "owner_fields": []
+        }
+      ],
+      "pause_groups": [
+        {
+          "rows": [
+            7
+          ],
+          "start": "2030-01-06T00:45:00+01:00",
+          "end": "2030-01-06T01:15:00+01:00",
+          "kind": "meal",
+          "labels": [
+            "MealBreak"
+          ]
+        }
+      ],
+      "expected_counts": {
+        "trips": 5,
+        "deadheads": 6
+      },
+      "owner_notes": []
+    },
+    {
+      "file": "Eksempel-5-anonymisert.pdf",
+      "sha256": "6952f5e516dc8edd4dfeb9d367cc47ed6d239507d435bca096e7cea07a7ed5a0",
+      "header": {
+        "shift_id": "90000005",
+        "service_date": "2030-01-03",
+        "weekday": "Thu",
+        "pages": 1,
+        "start": "06:51",
+        "end": "08:51",
+        "end_day": 0,
+        "work": "2h00",
+        "span": "2h00",
+        "employer": "Tide Buss",
+        "department": "Tromsø",
+        "driver": "Testsjåfør (00000)",
+        "origin": "Garasje Gimle",
+        "destination": "Garasje Gimle",
+        "supplements": [
+          "25,00% 0h00"
+        ]
+      },
+      "duties": [
+        "960006"
+      ],
+      "duty_after_activities": [
+        1
+      ],
+      "activities": [
+        {
+          "pages": [
+            1
+          ],
+          "start": "06:51",
+          "end": "06:54",
+          "label": "Sign-on",
+          "kind": "Sign-on",
+          "line": null,
+          "trip_id": null,
+          "origin": null,
+          "destination": null,
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "06:59",
+          "end": "07:38",
+          "label": "tom",
+          "kind": "deadhead",
+          "line": null,
+          "trip_id": "75619",
+          "origin": "Garasje Gimle",
+          "destination": "Olavsvern",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "07:40",
+          "end": "08:13",
+          "label": "413",
+          "kind": "trip",
+          "line": "413",
+          "trip_id": "1002",
+          "origin": "Olavsvern",
+          "destination": "Skipper Arnesens veg",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "08:13",
+          "end": "08:25",
+          "label": "tom",
+          "kind": "deadhead",
+          "line": null,
+          "trip_id": "75620",
+          "origin": "Skipper Arnesens veg",
+          "destination": "Garasje Gimle",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "08:27",
+          "end": "08:29",
+          "label": "Sign-off",
+          "kind": "Sign-off",
+          "line": null,
+          "trip_id": null,
+          "origin": null,
+          "destination": null,
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        }
+      ],
+      "pause_groups": [],
+      "expected_counts": {
+        "trips": 1,
+        "deadheads": 2
+      },
+      "owner_notes": [
+        "08:29–08:51 paid free time; not a PDF activity"
+      ]
+    },
+    {
+      "file": "Eksempel-6-anonymisert.pdf",
+      "sha256": "f99cfee396306de580f1afefc6d3eef9fa1b3b4114d866920a5ad9fb5f666208",
+      "header": {
+        "shift_id": "90000006",
+        "service_date": "2030-01-07",
+        "weekday": "Mon",
+        "pages": 1,
+        "start": "04:50",
+        "end": "17:07",
+        "end_day": 0,
+        "work": "6h27",
+        "span": "12h17",
+        "employer": "Tide Buss",
+        "department": "Tromsø",
+        "driver": "Testsjåfør (00000)",
+        "origin": "Garasje Gimle",
+        "destination": "Garasje Gimle",
+        "supplements": [
+          "25,00% 1h10"
+        ]
+      },
+      "duties": [
+        "960078",
+        "960109",
+        "960109"
+      ],
+      "duty_after_activities": [
+        1,
+        10,
+        13
+      ],
+      "activities": [
+        {
+          "pages": [
+            1
+          ],
+          "start": "04:50",
+          "end": "04:53",
+          "label": "Sign-on",
+          "kind": "Sign-on",
+          "line": null,
+          "trip_id": null,
+          "origin": null,
+          "destination": null,
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "04:58",
+          "end": "05:06",
+          "label": "tom",
+          "kind": "deadhead",
+          "line": null,
+          "trip_id": "81348",
+          "origin": "Garasje Gimle",
+          "destination": "Skattøra Borettslag",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "05:09",
+          "end": "06:07",
+          "label": "20",
+          "kind": "trip",
+          "line": "20",
+          "trip_id": "1001",
+          "origin": "Skattøra Borettslag",
+          "destination": "Malmvegen snuplass",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "06:17",
+          "end": "06:56",
+          "label": "22",
+          "kind": "trip",
+          "line": "22",
+          "trip_id": "1000",
+          "origin": "Malmvegen snuplass",
+          "destination": "Skognesvegen",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "07:10",
+          "end": "07:56",
+          "label": "24",
+          "kind": "trip",
+          "line": "24",
+          "trip_id": "1015",
+          "origin": "Skognesvegen",
+          "destination": "Kroken sykehjem",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "08:05",
+          "end": "08:55",
+          "label": "24",
+          "kind": "trip",
+          "line": "24",
+          "trip_id": "1028",
+          "origin": "Kroken sykehjem",
+          "destination": "Skognesvegen",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "08:55",
+          "end": "09:07",
+          "label": "tom",
+          "kind": "deadhead",
+          "line": null,
+          "trip_id": "81351",
+          "origin": "Skognesvegen",
+          "destination": "Garasje Gimle",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "09:09",
+          "end": "09:10",
+          "label": "Sign-off",
+          "kind": "Sign-off",
+          "line": null,
+          "trip_id": null,
+          "origin": null,
+          "destination": null,
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "09:10",
+          "end": "15:00",
+          "label": "Split break",
+          "kind": "Split break",
+          "line": null,
+          "trip_id": null,
+          "origin": null,
+          "destination": null,
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "15:00",
+          "end": "15:01",
+          "label": "Sign-on",
+          "kind": "Sign-on",
+          "line": null,
+          "trip_id": null,
+          "origin": null,
+          "destination": null,
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "15:06",
+          "end": "15:10",
+          "label": "tom",
+          "kind": "deadhead",
+          "line": null,
+          "trip_id": "81285",
+          "origin": "Garasje Gimle",
+          "destination": "Universitetssykehuset Nord-Norge",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "15:12",
+          "end": "15:33",
+          "label": "X35",
+          "kind": "trip",
+          "line": "X35",
+          "trip_id": "1001",
+          "origin": "Universitetssykehuset Nord-Norge",
+          "destination": "Skoglyst",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "15:33",
+          "end": "16:00",
+          "label": "Travel to",
+          "kind": "deadhead",
+          "line": null,
+          "trip_id": null,
+          "origin": "Skoglyst",
+          "destination": "Breivika",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": [
+            "kind",
+            "start",
+            "origin",
+            "destination"
+          ]
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "16:00",
+          "end": "16:34",
+          "label": "X43",
+          "kind": "trip",
+          "line": "X43",
+          "trip_id": "1007",
+          "origin": "Breivika",
+          "destination": "Eidkjosen",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "16:34",
+          "end": "17:03",
+          "label": "tom",
+          "kind": "deadhead",
+          "line": null,
+          "trip_id": "80698",
+          "origin": "Eidkjosen",
+          "destination": "Garasje Gimle",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "17:05",
+          "end": "17:07",
+          "label": "Sign-off",
+          "kind": "Sign-off",
+          "line": null,
+          "trip_id": null,
+          "origin": null,
+          "destination": null,
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        }
+      ],
+      "pause_groups": [
+        {
+          "rows": [
+            9
+          ],
+          "start": "2030-01-07T09:10:00+01:00",
+          "end": "2030-01-07T15:00:00+01:00",
+          "kind": "split",
+          "labels": [
+            "Split break"
+          ]
+        }
+      ],
+      "expected_counts": {
+        "trips": 6,
+        "deadheads": 5
+      },
+      "owner_notes": []
+    },
+    {
+      "file": "Eksempel-7-anonymisert.pdf",
+      "sha256": "7c9ec37904a61c90780e6be97468d99ae66c9f9e58353f8e60c932b22f465e39",
+      "header": {
+        "shift_id": "90000007",
+        "service_date": "2030-01-18",
+        "weekday": "Fri",
+        "pages": 1,
+        "start": "04:49",
+        "end": "16:49",
+        "end_day": 0,
+        "work": "11h30",
+        "span": "12h00",
+        "employer": "Tide Buss",
+        "department": "Tromsø",
+        "driver": "Testsjåfør (00000)",
+        "origin": "Garasje Gimle",
+        "destination": "Garasje Gimle",
+        "supplements": [
+          "25,00% 1h11"
+        ]
+      },
+      "duties": [
+        "960077",
+        "960077",
+        "960077",
+        "960110"
+      ],
+      "duty_after_activities": [
+        1,
+        10,
+        13,
+        17
+      ],
+      "activities": [
+        {
+          "pages": [
+            1
+          ],
+          "start": "04:49",
+          "end": "04:52",
+          "label": "Sign-on",
+          "kind": "Sign-on",
+          "line": null,
+          "trip_id": null,
+          "origin": null,
+          "destination": null,
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "04:57",
+          "end": "05:06",
+          "label": "tom",
+          "kind": "deadhead",
+          "line": null,
+          "trip_id": "69352",
+          "origin": "Garasje Gimle",
+          "destination": "Skognesvegen",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "05:09",
+          "end": "06:03",
+          "label": "24",
+          "kind": "trip",
+          "line": "24",
+          "trip_id": "1001",
+          "origin": "Skognesvegen",
+          "destination": "Kroken sykehjem",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "06:20",
+          "end": "07:15",
+          "label": "24",
+          "kind": "trip",
+          "line": "24",
+          "trip_id": "1004",
+          "origin": "Kroken sykehjem",
+          "destination": "Skognesvegen",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "07:29",
+          "end": "08:23",
+          "label": "24",
+          "kind": "trip",
+          "line": "24",
+          "trip_id": "1015",
+          "origin": "Skognesvegen",
+          "destination": "Kroken sykehjem",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "08:23",
+          "end": "08:50",
+          "label": "tom",
+          "kind": "deadhead",
+          "line": null,
+          "trip_id": "69831",
+          "origin": "Kroken sykehjem",
+          "destination": "Skattøra Borettslag",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "08:50",
+          "end": "08:52",
+          "label": "Sign-off",
+          "kind": "Sign-off",
+          "line": null,
+          "trip_id": null,
+          "origin": null,
+          "destination": null,
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "08:52",
+          "end": "08:58",
+          "label": "Paid meal after",
+          "kind": "Paid meal after",
+          "line": null,
+          "trip_id": null,
+          "origin": null,
+          "destination": null,
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "08:58",
+          "end": "09:28",
+          "label": "MealBreak",
+          "kind": "MealBreak",
+          "line": null,
+          "trip_id": null,
+          "origin": null,
+          "destination": null,
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "09:28",
+          "end": "09:30",
+          "label": "Sign-on",
+          "kind": "Sign-on",
+          "line": null,
+          "trip_id": null,
+          "origin": null,
+          "destination": null,
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "09:30",
+          "end": "10:33",
+          "label": "42",
+          "kind": "trip",
+          "line": "42",
+          "trip_id": "1039",
+          "origin": "Skattøra Borettslag",
+          "destination": "Eidkjosen",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "10:38",
+          "end": "11:40",
+          "label": "42",
+          "kind": "trip",
+          "line": "42",
+          "trip_id": "1048",
+          "origin": "Eidkjosen",
+          "destination": "Skattøra Borettslag",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "11:40",
+          "end": "12:02",
+          "label": "Coffee",
+          "kind": "Coffee",
+          "line": null,
+          "trip_id": null,
+          "origin": null,
+          "destination": null,
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "12:02",
+          "end": "13:00",
+          "label": "20",
+          "kind": "trip",
+          "line": "20",
+          "trip_id": "1051",
+          "origin": "Skattøra Borettslag",
+          "destination": "Malmvegen snuplass",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "13:05",
+          "end": "13:58",
+          "label": "20",
+          "kind": "trip",
+          "line": "20",
+          "trip_id": "1060",
+          "origin": "Malmvegen snuplass",
+          "destination": "Skattøra Borettslag",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "13:58",
+          "end": "14:13",
+          "label": "tom",
+          "kind": "deadhead",
+          "line": null,
+          "trip_id": "14",
+          "origin": "Skattøra Borettslag",
+          "destination": "Skognesvegen",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "14:13",
+          "end": "14:39",
+          "label": "Coffee",
+          "kind": "Coffee",
+          "line": null,
+          "trip_id": null,
+          "origin": null,
+          "destination": null,
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "14:39",
+          "end": "15:33",
+          "label": "24",
+          "kind": "trip",
+          "line": "24",
+          "trip_id": "1049",
+          "origin": "Skognesvegen",
+          "destination": "Kroken sykehjem",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "15:38",
+          "end": "16:33",
+          "label": "24",
+          "kind": "trip",
+          "line": "24",
+          "trip_id": "1056",
+          "origin": "Kroken sykehjem",
+          "destination": "Skognesvegen",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "16:33",
+          "end": "16:45",
+          "label": "tom",
+          "kind": "deadhead",
+          "line": null,
+          "trip_id": "69626",
+          "origin": "Skognesvegen",
+          "destination": "Garasje Gimle",
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        },
+        {
+          "pages": [
+            1
+          ],
+          "start": "16:47",
+          "end": "16:49",
+          "label": "Sign-off",
+          "kind": "Sign-off",
+          "line": null,
+          "trip_id": null,
+          "origin": null,
+          "destination": null,
+          "end_day": 0,
+          "start_day": 0,
+          "owner_fields": []
+        }
+      ],
+      "pause_groups": [
+        {
+          "rows": [
+            8,
+            9
+          ],
+          "start": "2030-01-18T08:52:00+01:00",
+          "end": "2030-01-18T09:28:00+01:00",
+          "kind": "meal",
+          "labels": [
+            "Paid meal after",
+            "MealBreak"
+          ]
+        },
+        {
+          "rows": [
+            13
+          ],
+          "start": "2030-01-18T11:40:00+01:00",
+          "end": "2030-01-18T12:02:00+01:00",
+          "kind": "coffee",
+          "labels": [
+            "Coffee"
+          ]
+        },
+        {
+          "rows": [
+            17
+          ],
+          "start": "2030-01-18T14:13:00+01:00",
+          "end": "2030-01-18T14:39:00+01:00",
+          "kind": "coffee",
+          "labels": [
+            "Coffee"
+          ]
+        }
+      ],
+      "expected_counts": {
+        "trips": 9,
+        "deadheads": 4
+      },
+      "owner_notes": []
+    }
+  ]
+}
