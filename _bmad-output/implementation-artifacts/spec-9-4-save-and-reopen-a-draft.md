@@ -24,6 +24,8 @@ context:
 
 **Owner walkthrough amendment (2026-10-20):** Replace the redundant editable realtime value with a manual `Buss/vogn` (physical bus) field. Derive the realtime value from the last three digits of vehicle duty, preserving leading zeros; never derive the physical bus. Add clear vehicle-duty, reset/discard and saved-draft deletion actions. This instruction authorizes these changes within the ongoing 9.4 walkthrough; it does not approve the story or start 10.4's confirmed/active-day bus workflow.
 
+**Owner time-entry amendment (2026-10-20):** Use the entered service date as the default calendar date for new/empty activity start/end controls. Present ordinary labelled date/time inputs and automatically use Europe/Oslo; never require users to type an ISO instant or UTC offset. Keep dates independently editable (including a convenient next-day choice) for overnight work. Do not silently move entered/saved activity instants when service date changes. Spring-gap times are invalid; repeated autumn times require an explicit first/second occurrence choice. Preserve authoritative explicit instants in saved data, including existing drafts, original source clocks and fixed retention. This is continued owner-authorized 9.4 walkthrough refinement, not final acceptance.
+
 ## Boundaries & Constraints
 
 **Always:** Preserve existing accounts, data, secret and demo isolation. Use additive migrations. Check session-derived ownership and expiry transactionally. Reuse CSRF/origin, no-store, logout locks and 14-day sessions. Draft expiry is seven days after server creation, never extended by use/retry/sign-in. Purge drafts/operations on startup/hourly. Keep private input in memory; clear on logout/session expiry. Warn before avoidable unsaved navigation.
@@ -43,6 +45,7 @@ context:
 | Bus/duty | Manually entered bus and full vehicle duty | Bus remains distinct; realtime value is derived from a final three-digit numeric suffix, otherwise unknown | Preserve leading zeros and never infer a bus |
 | Clear/reset | Clear duty; reset unsaved form; discard saved-form edits | Clear duty affects only duty/derived value; reset restores last saved snapshot or empties a new draft | Confirm destructive reset; never delete saved work via reset |
 | Delete | Explicitly confirmed deletion of the selected saved draft | Authorize owner/session/expiry and expected revision; remove only that draft and related operations | Cancel changes nothing; stale revision conflicts; lost reply stays unconfirmed until authorized retry/lookup; old save operations cannot recreate deleted work |
+| Friendly time entry | Service date, local clock and explicit calendar day in Oslo | Default new dates from service date; automatically resolve seasonal offsets; save/reopen identical explicit instants | Preserve incomplete/invalid local input in memory, block saving unresolved times, reject nonexistent clocks and ask which occurrence for repeated clocks; never infer overnight date from clock order |
 
 </frozen-after-approval>
 
@@ -56,6 +59,9 @@ context:
 ## Tasks & Acceptance
 
 **Execution:**
+- [x] `frontend/src/PrivateDrafts.tsx` and a focused time-control module — replace raw ISO start/end text fields with ordinary start/end date and time controls. Prefill new/empty dates from service date, support explicit next day, preserve existing instants and incomplete input, and integrate resolution state with dirty/reset/reopen/logout/unavailable/conflict/delete protections. Do not silently change existing activity dates when service date changes. Render understandable Norwegian validation/ambiguity messages without offset entry.
+- [x] `backend/app/draft_domain.py`, `private_main.py` and focused time-resolution helper as needed — resolve local calendar clocks with authoritative Europe/Oslo rules, including summer/winter, historical existing facts, gaps and repeated hours. No fixed UTC offset or dependence on device timezone. Reuse protected bounded/no-store/CSRF/session contracts if a resolver endpoint is needed; preserve saved draft representation and existing storage.
+- [x] `backend/tests/test_private_drafts.py`, `frontend/tests/private-drafts.spec.ts` and focused tests — isolated coverage for service-date defaults, ordinary/summer/winter resolution, explicit midnight next-day, changed service date preserving entered instants, incomplete/invalid entry retained, spring gap and both autumn occurrences, save/reopen, existing draft compatibility, and stale asynchronous resolution where applicable. Update README/log/screenshots/status; run review and appropriate final verification before ordinary rollout.
 - [x] `backend/app/draft_domain.py`, `draft_storage.py`, `private_main.py` — accept nullable bounded physical bus; derive realtime duty server-side from numeric suffix. Normalize API presentations, operation snapshots and fingerprints consistently without rewriting existing stored drafts. Add POST deletion with expected revision under existing owner/session/expiry locks; cascade related operations so replay cannot recreate deleted drafts. A successful response names only the deleted identifier; missing/foreign targets use safe denial. No bulk reset.
 - [x] `frontend/src/PrivateDrafts.tsx` — replace editable realtime input with `Buss/vogn`; optionally show derived realtime as text. Add `Tøm vognløp`, `Tilbakestill utkast`/`Forkast endringer` and confirmed `Slett utkast`. Preserve bus/activities when clearing duty. Reset restores saved snapshot or empties a new form; deletion removes only the selected saved draft. Do not discard an unresolved save/delete operation: settle it first or retain its original identity for retry. Lost delete replies retain a locked pending-delete state until authorized retry/lookup; distinguish acknowledged deletion from unavailable/denied state and prevent late responses from resurrecting UI.
 - [x] `backend/tests/test_private_drafts.py`, `frontend/tests/private-drafts.spec.ts`, `scripts/verify-private-drafts.py` — isolated tests for bus/suffix round-trip and correction with leading zeros, clear/reset/cancel, successful/stale/cross-owner/forged/expired deletion, committed lost delete reply/retry and old-save no-resurrection. Update restart evidence/screenshots/README/log; do not touch ordinary account data in tests.
@@ -76,8 +82,11 @@ context:
 - 2026-10-20: Owner approved the specification and requested continued implementation. Re-read from disk; no external edits. Approved intent is frozen.
 - 2026-10-20: Implemented additive private drafts and operation snapshots, transactional session/owner/revision/expiry checks, validated API contracts and bounded manual Norwegian UI. Visibility revalidation hides private fields while retaining memory through an unavailable check; a confirmed invalid session or logout clears it. Conflict comparison uses labelled facts without exposing record identifiers. No PDF integration or activation flow.
 - 2026-10-20: Implemented the owner walkthrough amendment: manual bus, server-derived duty suffix, clear/reset/discard and revision-checked individual deletion. Added additive `003_draft_deletions.sql`: content-free deletion acknowledgements keep the original owner/operation/revision/deadline solely for authorized lost-reply settlement; saved content and save operations cascade away. Legacy draft/operation JSON and hashes are not rewritten; API results and replay comparisons normalize derived values consistently.
+- 2026-10-20: Implemented friendly local date/time controls with separate memory-only incomplete input and authoritative protected Oslo resolution. New/empty dates default from service date, explicit next-day and repeated-hour choices are available, and stale async replies cannot replace newer input. Existing explicit instants/source clocks and storage schema remain unchanged. Focused verification passed 14 resolver/backend cases and 8 browser cases; root independent review and final verification remain pending.
 
 ## Spec Change Log
+
+- 2026-10-20: Owner requested defaulting activity times from the entered date and assuming Oslo time. Added the human-owned time-entry amendment and matrix: friendly date/time controls, authoritative automatic timezone resolution, explicit overnight/ambiguous-time choices, no silent date shifting, and preservation of all earlier bus/delete/isolation/save guarantees.
 
 - 2026-10-20: The owner explicitly requested bus entry and clear/reset/delete during walkthrough. Updated the human-owned boundaries and matrix to record that authorization. Keep private isolation, fixed retention, stable revisions/idempotency, visibility/logout protections and all previously passing behavior. This follow-up changes the existing 9.4 implementation; no next story is started.
 
@@ -125,11 +134,38 @@ All retained findings were patched and verified. No findings deferred. Historica
 
 All retained amendment findings are corrected and verified; no findings deferred. Direct corrections cover offset bounds, list validation/order, terminal deletion expiry recovery, verifier prerequisites, Unicode bounds and keyboard focus. Real browser coverage includes stale deletion recovery and confirmation before replacing local edits.
 
+### Time-entry amendment review
+
+| Finding | Verdict | Evidence and route |
+|---|---|---|
+| Time blind 1: autumn selection revalidation | medium | disabled toggles restart resolution and set ambiguous although the selected candidate still exists. Patch preservation of a still-valid explicit selection; visibility regression. |
+| Time blind 2: terminal save lookup locks UI | medium | settle() keeps pending after404/410, so replacement/reset stay locked after final expiry. Patch terminal recovery retaining visible input for comparison, blocking automatic reuse, and allowing explicit empty new/reset actions without claiming save success. |
+| Time blind 3: list200 | low | Carried: same location/claim as original Blind1 and amendment list findings; preserve rejection under the low-finding complexity rule. |
+| Time blind 4: conflict recovery | false | Carried: same claim as original Blind2; approved comparison plus deliberate reload is implemented. Automatic merge or clone is not required. |
+| Time blind 5: lost issuance/cap | low | Carried: same unacknowledged issuance/admission-cap claim as original Blind5; preserve low-finding rejection. |
+| Time blind 6: obsolete offset error instructions | medium | Current422 text asks for manual offset even though the new UI has no offset field. Patch friendly interval validation identifying the affected activity and next-day choice; remove obsolete guidance. |
+| Time blind 7: populated activity removal | medium | Unsaved populated activity/time input can be lost immediately without recovery. Patch confirmation for populated/edited activity removal and cancellation coverage. Saved draft reset remains available. |
+| Time blind 8: unavailable list appears empty | medium | Initial/error list state still renders no saved drafts. Patch explicit loading/unavailable/empty text while retaining last valid list/form. |
+| Time blind 9: many live regions | low | Hundreds of simultaneous announcements require an unusually large unsaved edited plan and resumed resolution; consolidating statuses adds plumbing. Rejected under the low-finding complexity rule; labelled controls and existing polite feedback remain. |
+| Time blind 10: verifier initial state | low | Carried: same claim as amendment blind8; preserve its low-finding rejection for this documented running-service workflow. |
+| Time verification 1: clear-time save/reopen untested | medium | Pre-verified gap: neither clear-time action is exercised. Patch actual clear/save/reopen null preservation, other instant/source unchanged and clearing unresolved input releasing save. |
+| Time verification other 1: autumn selection | medium | Same verified selection-loss cause as time blind1; patch together. |
+| Time edge 1: autumn selection | medium | Same verified selection-loss cause as time blind1; patch together. |
+| Time edge 2: list200 | low | Carried: same original list-limit claim; preserve rejection. |
+
+All retained time-entry findings were patched and verified; no findings deferred. Autumn selection survives suspension, terminal unavailable save operations permit only explicit empty recovery, interval errors use the friendly controls, populated removal requires confirmation, list states are distinct, and explicit clear-time persistence is covered.
+
 ## Design Notes
 
 No intent gaps. Footprint: private DB/API/UI and tests. Verify migration replay/account preservation before operational application. Planning performs no database actions.
 
 ## Verification
+
+### Time-entry final root verification — 2026-10-20
+
+- Root read the time-entry and correction diffs and inspected synthetic renders. The exact final disposable verifier passed **61 backend tests (86.48s)**, actual PostgreSQL/API restart, migration replay/account/session/draft/operation/deadline equality, cleanup, production TypeScript/Vite build and **54 browser tests (2.1m)**. The prior two verifier unit tests remain applicable to unchanged verifier code. No product code changed after this run.
+- New matrix coverage passed: service-date defaults, explicit next day, unchanged entered dates after service-date changes, authoritative winter/summer/historical/gap/both-fold resolution, device timezone America/New_York, retained incomplete/unavailable input, stale response suppression, preserved existing explicit seconds/offsets/source clocks, and clear/save/reopen nulls. Review regressions cover chosen folds after visibility, terminal save expiry/purge recovery without resurrection, friendly interval errors, removal cancellation/focus and list loading/failure/empty presentation. Prior bus/delete/auth/save tests all passed in the full browser suite.
+- Rolled out verified API without a new migration. Read-only ordinary counts before/after were **1 account, 0 drafts**, unchanged across this rollout; no private payload was inspected or mutated. Database container/volume/secret retained; API healthy; disposable services stopped. Restored only regenerated9.2/9.3 evidence and retained9.4 renders. Spec done denotes implementation; sprint remains review for continued owner walkthrough/final approval. Local commit follows; no push or later story.
 
 ### Owner amendment final root verification — 2026-10-20
 

@@ -339,3 +339,38 @@ def test_expired_draft_cannot_be_deleted(client, users):
     assert client.post('/drafts/' + identifier + '/delete', headers=headers(client), json={'operation_id': str(uuid4()), 'expected_revision': 1}).status_code == 410
     with database() as conn:
         assert not conn.execute('SELECT 1 FROM draft_deletions WHERE draft_id=%s', (identifier,)).fetchone()
+
+
+@pytest.mark.parametrize('day,clock,state,candidates', [
+    ('2026-01-15', '12:30', 'resolved', ['2026-01-15T12:30+01:00']),
+    ('2026-07-15', '12:30', 'resolved', ['2026-07-15T12:30+02:00']),
+    ('2026-07-16', '00:10:15', 'resolved', ['2026-07-16T00:10:15+02:00']),
+    ('2026-03-29', '02:30', 'gap', []),
+    ('2026-10-25', '02:30', 'ambiguous', ['2026-10-25T02:30+02:00', '2026-10-25T02:30+01:00']),
+    ('1894-01-01', '12:00', 'resolved', ['1894-01-01T12:00+00:43']),
+    ('9999-12-31', '23:59', 'resolved', ['9999-12-31T23:59+01:00']),
+])
+def test_local_time_resolution_is_authoritative_without_storage_changes(client, users, day, clock, state, candidates):
+    assert login(client, users).status_code == 200
+    response = client.post('/draft-times/resolve', headers=headers(client), json={'calendar_date': day, 'clock': clock})
+    assert response.status_code == 200 and response.json() == {'state': state, 'candidates': candidates}
+    assert response.headers['cache-control'] == 'no-store'
+    assert client.get('/drafts').json() == {'drafts': []}
+
+
+@pytest.mark.parametrize('day,clock', [('2026-02-30', '12:00'), ('2026-01-01', '24:00'), ('2026-01-01', '12:60'), ('2026-01-01', '12:00+01:00'), ('10000-01-01', '23:59'), ('0001-01-01', '00:00')])
+def test_local_time_resolution_rejects_invalid_or_unrepresentable_values(client, users, day, clock):
+    assert login(client, users).status_code == 200
+    assert client.post('/draft-times/resolve', headers=headers(client), json={'calendar_date': day, 'clock': clock}).status_code == 422
+
+
+def test_local_time_resolution_reuses_session_csrf_and_bounds(client, users):
+    facts = {'calendar_date': '2026-07-15', 'clock': '12:30'}
+    assert client.post('/draft-times/resolve', headers=headers(client), json=facts).status_code == 401
+    assert login(client, users).status_code == 200
+    assert client.post('/draft-times/resolve', json=facts).status_code == 403
+    assert client.post('/draft-times/resolve', headers={**headers(client), 'Origin': 'http://evil.invalid'}, json=facts).status_code == 403
+    assert client.post('/draft-times/resolve', headers=headers(client), content=b'x' * 4097).status_code == 413
+    with database() as conn:
+        conn.execute("UPDATE sessions SET created_at=statement_timestamp()-interval '14 days',expires_at=statement_timestamp() WHERE owner=%s", (users[1][0],))
+    assert client.post('/draft-times/resolve', headers=headers(client), json=facts).status_code == 401

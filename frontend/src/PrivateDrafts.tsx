@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { PrivateTimeInput } from './PrivateTimeInput';
 
 type Activity = { id: string } & Record<string, string | null>;
 type Content = { service_date: string | null; vehicle_duty: string | null; realtime_duty: string | null; physical_bus: string | null; activities: Activity[] };
@@ -50,19 +51,37 @@ function validSummary(value: any): value is Summary {
 
 export function PrivateDrafts({ request, mutation, dirtyChanged, expired, suspended }: Props) {
   const [list, setList] = useState<Summary[]>([]);
+  const [listState, setListState] = useState<'loading' | 'ready' | 'error'>('loading');
   const [saved, setSaved] = useState<Saved | null>(null);
   const [content, setContent] = useState<Content>(empty);
   const [pending, setPending] = useState<Pending | null>(null);
+  const [saveUnavailable, setSaveUnavailable] = useState(false);
   const [pendingDelete, setPendingDelete] = useState<PendingDelete | null>(null);
   const [comparison, setComparison] = useState<Saved | null>(null);
   const [message, setMessage] = useState('Nytt utkast. Ikke lagret.');
   const [busy, setBusy] = useState(false);
   const [draftExpired, setDraftExpired] = useState(false);
+  const [timeEpoch, setTimeEpoch] = useState(0);
+  const [timeStates, setTimeStates] = useState<Record<string, { dirty: boolean; unresolved: boolean }>>({});
+  const timeStatesRef = useRef(timeStates);
   const alive = useRef(true);
   const deletionEpoch = useRef(0);
   const listRequest = useRef(0);
   const title = useRef<HTMLHeadingElement>(null);
-  const dirty = canonical(content) !== canonical(saved?.draft ?? empty()) || !!pending || !!pendingDelete;
+  const dirty = canonical(content) !== canonical(saved?.draft ?? empty()) || !!pending || !!pendingDelete || saveUnavailable || Object.values(timeStates).some(value => value.dirty);
+  const unresolvedTimes = Object.values(timeStates).some(value => value.unresolved);
+  const entryLocked = busy || !!pending || !!pendingDelete || saveUnavailable || suspended || draftExpired;
+  function resetTimes() { timeStatesRef.current = {}; setTimeStates({}); setTimeEpoch(value => value + 1); }
+  function timeState(id: string, field: string, dirty: boolean, unresolved: boolean) {
+    const current = timeStatesRef.current, key = id + ':' + field;
+    if (current[key]?.dirty === dirty && current[key]?.unresolved === unresolved) return;
+    timeStatesRef.current = { ...current, [key]: { dirty, unresolved } }; setTimeStates(timeStatesRef.current);
+  }
+  function removeTimeStates(id: string) { timeStatesRef.current = Object.fromEntries(Object.entries(timeStatesRef.current).filter(([key]) => !key.startsWith(id + ':'))); setTimeStates(timeStatesRef.current); }
+  function changeTime(id: string, field: string, value: string | null) {
+    setContent(current => ({ ...current, activities: current.activities.map(activity => activity.id === id ? { ...activity, [field]: value } : activity) }));
+    setMessage('Ulagrede endringer.');
+  }
   function failed(error: any) {
     if (error?.status === 401) { expired(); return; }
     setMessage(error?.status === 410 ? 'Utkastet eller lagringsforsøket er utløpt. Lokale endringer er ikke lagret.' : error?.status === 404 ? 'Tilgangen ble avvist.' : 'Tjenesten er utilgjengelig. Lokale endringer er ikke lagret.');
@@ -70,16 +89,18 @@ export function PrivateDrafts({ request, mutation, dirtyChanged, expired, suspen
   async function refresh() {
     const epoch = deletionEpoch.current;
     const sequence = ++listRequest.current;
+    setListState('loading');
     try {
       const result = await request('/drafts');
       if (!alive.current || epoch !== deletionEpoch.current || sequence !== listRequest.current) return;
       if (!result || !Array.isArray(result.drafts) || result.drafts.length > 200 || !result.drafts.every(validSummary)
         || new Set(result.drafts.map((item: Summary) => item.id)).size !== result.drafts.length) {
-        setMessage('Listen kunne ikke lastes. Prøv Oppdater listen igjen. Skjemaet er beholdt.'); return;
+        setListState('error'); setMessage('Listen kunne ikke lastes. Prøv Oppdater listen igjen. Skjemaet er beholdt.'); return;
       }
       setList(result.drafts.map(({ id, revision, expires_at, service_date }: Summary) => ({ id, revision, expires_at, service_date })));
+      setListState('ready');
       setMessage(current => current.startsWith('Listen kunne ikke lastes.') ? 'Listen er oppdatert.' : current);
-    } catch (error) { if (alive.current && epoch === deletionEpoch.current && sequence === listRequest.current) failed(error); }
+    } catch (error) { if (alive.current && epoch === deletionEpoch.current && sequence === listRequest.current) { setListState('error'); failed(error); } }
   }
   useEffect(() => { alive.current = true; void refresh(); return () => { alive.current = false; }; }, []);
   useEffect(() => { dirtyChanged(dirty); return () => dirtyChanged(false); }, [dirty]);
@@ -98,7 +119,11 @@ export function PrivateDrafts({ request, mutation, dirtyChanged, expired, suspen
     window.addEventListener('beforeunload', warn); document.addEventListener('click', navigate);
     return () => { window.removeEventListener('beforeunload', warn); document.removeEventListener('click', navigate); };
   }, [dirty]);
-  function adopt(value: Saved) { setSaved(value); setContent(value.draft); setPending(null); setComparison(null); setMessage(`Lagret. Versjon ${value.revision}.`); title.current?.focus(); }
+  function adopt(value: Saved) { resetTimes(); setSaveUnavailable(false); setSaved(value); setContent(value.draft); setPending(null); setComparison(null); setMessage(`Lagret. Versjon ${value.revision}.`); title.current?.focus(); }
+  function terminalSave(status: number) {
+    setPending(null); setSaveUnavailable(true);
+    setMessage(`Lagring er ikke bekreftet. ${status === 410 ? 'Lagringsforsøket er utløpt.' : 'Lagringsforsøket finnes ikke lenger eller er utilgjengelig.'} Lokale inndata er beholdt for gjennomgang og kan ikke sendes på nytt. Velg Nytt utkast eller Tilbakestill for å starte med et tomt skjema.`);
+  }
   async function reopen(id: string) {
     if (dirty && !window.confirm('Ulagrede endringer går tapt. Åpne lagret utkast?')) return;
     setBusy(true);
@@ -120,15 +145,21 @@ export function PrivateDrafts({ request, mutation, dirtyChanged, expired, suspen
         setPending(null);
         setMessage('Konflikt. Dine lokale endringer er beholdt. Sammenlign med lagret versjon.');
         if (saved) { try { const value = await request('/drafts/' + saved.id); if (alive.current && valid(value)) setComparison(value); } catch (e) { failed(e); } }
-      } else if ([404, 410, 413, 422].includes(error?.status)) {
+      } else if ([404, 410].includes(error?.status)) {
+        terminalSave(error.status);
+      } else if ([413, 422].includes(error?.status)) {
         setPending(null);
         if (error.status === 413) setMessage('Utkastet er for stort. Forkort tekst eller fjern aktiviteter før du lagrer igjen. Ingen endringer er lagret.');
-        else if (error.status === 422) setMessage('Kontroller feltene. Bruk eksplisitt dato og gyldig Oslo-offset; slutt kan ikke være før start. Ingen endringer er lagret.');
+        else if (error.status === 422) setMessage('Kontroller feltene og aktivitetenes datoer og klokkeslett. Velg riktig kalenderdag eller neste dag ved nattarbeid. Ingen endringer er lagret.');
         else failed(error);
       } else setMessage('Lagring er uavklart. Behold siden åpen. Kontroller eller prøv samme lagringsforsøk igjen.');
     }
   }
   async function save() {
+    if (saveUnavailable) return;
+    if (Object.values(timeStatesRef.current).some(value => value.unresolved)) { setMessage('Kontroller uavklarte datoer og klokkeslett før lagring. Inndata er beholdt.'); return; }
+    const invalidInterval = content.activities.findIndex(activity => activity.start && activity.end && Date.parse(activity.end) < Date.parse(activity.start));
+    if (invalidInterval >= 0) { setMessage(`Aktivitet ${invalidInterval + 1}: Slutt er før start. Kontroller dato og klokkeslett, og bruk «Slutt: neste dag» ved nattarbeid. Inndata er beholdt.`); return; }
     setBusy(true); setMessage('Lagrer …');
     try {
       let operation = pending;
@@ -156,20 +187,29 @@ export function PrivateDrafts({ request, mutation, dirtyChanged, expired, suspen
       if (result.state === 'accepted') await acknowledge(result.result, pending);
       else if (result.state === 'pending' && result.result === null) setMessage('Forsøket er ikke lagret. Prøv samme lagringsforsøk igjen.');
       else throw Error();
-    } catch (error) { if (alive.current) failed(error); }
+    } catch (error: any) { if (alive.current) { if ([404, 410].includes(error?.status)) terminalSave(error.status); else failed(error); } }
     finally { if (alive.current) setBusy(false); }
   }
-  function edit(next: Content) { setContent({ ...next, realtime_duty: realtime(next.vehicle_duty) }); setMessage('Ulagrede endringer.'); }
+  function edit(next: Content) {
+    setContent(current => ({ ...next, realtime_duty: realtime(next.vehicle_duty), activities: next.activities.map(activity => {
+      const existing = current.activities.find(value => value.id === activity.id);
+      return existing ? { ...activity, start: existing.start, end: existing.end } : activity;
+    }) }));
+    setMessage('Ulagrede endringer.');
+  }
   function reset() {
-    if (pending || pendingDelete || !window.confirm(saved ? 'Forkaste lokale endringer og gjenopprette sist lagrede utkast?' : 'Tømme det ulagrede utkastet?')) return;
-    setContent(saved ? structuredClone(saved.draft) : empty()); setComparison(null);
+    if (pending || pendingDelete || !window.confirm(saved && !saveUnavailable ? 'Forkaste lokale endringer og gjenopprette sist lagrede utkast?' : 'Tømme det ulagrede utkastet?')) return;
+    if (saveUnavailable) { setSaveUnavailable(false); setSaved(null); resetTimes(); setContent(empty()); setComparison(null); setMessage('Nytt utkast. Ikke lagret.'); title.current?.focus(); return; }
+    resetTimes(); setContent(saved ? structuredClone(saved.draft) : empty()); setComparison(null);
     setMessage(saved ? `Lagret. Versjon ${saved.revision}. Lokale endringer er forkastet.` : 'Nytt utkast. Ikke lagret.'); title.current?.focus();
   }
   function acknowledgeDelete(value: any, operation: PendingDelete) {
     if (!value || value.deleted_id !== operation.id || Object.keys(value).length !== 1) throw Error();
     if (!alive.current) return;
     deletionEpoch.current++;
+    resetTimes();
     setList(current => current.filter(item => item.id !== operation.id));
+    setListState('ready');
     setSaved(null); setContent(empty()); setPendingDelete(null); setComparison(null);
     setMessage('Utkastet er slettet.'); title.current?.focus();
   }
@@ -189,7 +229,9 @@ export function PrivateDrafts({ request, mutation, dirtyChanged, expired, suspen
       if (error?.status === 401) { expired(); return; }
       if (error?.status === 410) {
         deletionEpoch.current++;
+        resetTimes();
         setList(current => current.filter(item => item.id !== operation.id));
+        setListState('ready');
         setSaved(null); setContent(empty()); setPendingDelete(null); setComparison(null);
         setMessage('Sletting kunne ikke bekreftes fordi utkastet eller slettingsforsøket er utløpt. Du kan opprette et nytt utkast.'); title.current?.focus();
       } else if (error?.status === 409) {
@@ -201,30 +243,39 @@ export function PrivateDrafts({ request, mutation, dirtyChanged, expired, suspen
       }
     } finally { if (alive.current) setBusy(false); }
   }
+  function removeActivity(activity: Activity) {
+    const populated = Object.entries(activity).some(([key, value]) => key !== 'id' && value !== null && value !== '')
+      || Object.entries(timeStatesRef.current).some(([key, state]) => key.startsWith(activity.id + ':') && (state.dirty || state.unresolved));
+    if (populated && !window.confirm('Fjerne denne aktiviteten og inndataene? Endringen lagres først når du lagrer utkastet.')) return;
+    removeTimeStates(activity.id); edit({ ...content, activities: content.activities.filter(value => value.id !== activity.id) }); title.current?.focus();
+  }
   return <section aria-label="Private utkast" hidden={suspended}>
     <h2>Mine utkast</h2>
     <p>Utkast slettes sju dager etter opprettelse. Ulagrede endringer finnes bare mens denne siden er åpen.</p>
-    <div className="controls"><button disabled={busy || !!pending || !!pendingDelete} onClick={() => { if (!dirty || window.confirm('Ulagrede endringer går tapt. Opprette nytt utkast?')) { setSaved(null); setContent(empty()); setPending(null); setComparison(null); setMessage('Nytt utkast. Ikke lagret.'); title.current?.focus(); } }}>Nytt utkast</button><button disabled={busy || !!pendingDelete} onClick={() => void refresh()}>Oppdater listen</button></div>
-    {list.length === 0 ? <p>Ingen lagrede utkast.</p> : <ul>{list.map(item => <li key={item.id}><button disabled={busy || !!pending || !!pendingDelete} onClick={() => void reopen(item.id)}>Åpne {item.service_date ?? 'ukjent tjenestedato'} · versjon {item.revision}</button> <span>Utløper {new Date(item.expires_at).toLocaleString('nb-NO', { timeZone: 'Europe/Oslo' })}</span></li>)}</ul>}
+    <div className="controls"><button disabled={busy || !!pending || !!pendingDelete} onClick={() => { if (!dirty || window.confirm('Ulagrede endringer går tapt. Opprette nytt utkast?')) { resetTimes(); setSaveUnavailable(false); setSaved(null); setContent(empty()); setPending(null); setComparison(null); setMessage('Nytt utkast. Ikke lagret.'); title.current?.focus(); } }}>Nytt utkast</button><button disabled={busy || !!pendingDelete} onClick={() => void refresh()}>Oppdater listen</button></div>
+    {listState === 'loading' && <p>Laster lagrede utkast …</p>}
+    {listState === 'error' && <p>Listen er utilgjengelig. Prøv Oppdater listen igjen.</p>}
+    {list.length === 0 ? listState === 'ready' && <p>Ingen lagrede utkast.</p> : <ul>{list.map(item => <li key={item.id}><button disabled={busy || !!pending || !!pendingDelete || saveUnavailable} onClick={() => void reopen(item.id)}>Åpne {item.service_date ?? 'ukjent tjenestedato'} · versjon {item.revision}</button> <span>Utløper {new Date(item.expires_at).toLocaleString('nb-NO', { timeZone: 'Europe/Oslo' })}</span></li>)}</ul>}
     <h2 ref={title} tabIndex={-1}>{saved ? 'Rediger utkast' : 'Nytt manuelt utkast'}</h2>
     <p role="status" aria-live="polite" className="status">{message}</p>
     {saved && <p>Utløper {new Date(saved.expires_at).toLocaleString('nb-NO', { timeZone: 'Europe/Oslo' })}. Fristen forlenges ikke.</p>}
     <form className="draft-form" onSubmit={event => { event.preventDefault(); void save(); }}>
-      <fieldset disabled={busy || !!pending || !!pendingDelete || suspended || draftExpired}><legend>Dagens opplysninger</legend>
+      <fieldset disabled={entryLocked}><legend>Dagens opplysninger</legend>
         <label>Tjenestedato<input type="date" value={content.service_date ?? ''} onChange={e => edit({ ...content, service_date: e.target.value || null })} /></label>
         <label>Vognløp<input maxLength={200} value={content.vehicle_duty ?? ''} onChange={e => edit({ ...content, vehicle_duty: boundedText(e.target.value, 100) || null })} /></label>
         <button type="button" onClick={() => edit({ ...content, vehicle_duty: null })}>Tøm vognløp</button>
         <p>Sanntidsverdi: {content.realtime_duty ?? 'ukjent'} (avledet fra vognløp).</p>
         <label>Buss/vogn<input maxLength={200} value={content.physical_bus ?? ''} onChange={e => edit({ ...content, physical_bus: boundedText(e.target.value, 100) || null })} /></label>
-        <p>Tidspunkt: YYYY-MM-DDTHH:mm+01:00 (vinter) eller +02:00 (sommer). Behold opprinnelig klokke, for eksempel 25:10, i kildefeltet. Tomme felt betyr ukjent.</p>
-        {content.activities.map((activity, index) => <fieldset key={activity.id}><legend>Aktivitet {index + 1}</legend><div className="draft-grid">{fields.map(([key, label]) => <label key={key}>{label}<input maxLength={2 * textLimit(key)} value={activity[key] ?? ''} onChange={e => edit({ ...content, activities: content.activities.map(a => a.id === activity.id ? { ...a, [key]: boundedText(e.target.value, textLimit(key)) || null } : a) })} /></label>)}</div>
-          <div className="controls"><button type="button" disabled={index === 0} onClick={() => { const rows = [...content.activities]; [rows[index - 1], rows[index]] = [rows[index], rows[index - 1]]; edit({ ...content, activities: rows }); }}>Flytt opp</button><button type="button" onClick={() => { edit({ ...content, activities: content.activities.filter(a => a.id !== activity.id) }); title.current?.focus(); }}>Fjern aktivitet {index + 1}</button></div>
+        <p>Alle klokkeslett bruker Oslo-tid. Velg riktig kalenderdag for nattarbeid. Opprinnelige klokker som 25:10 kan beholdes i kildefeltene. Tomme klokkeslett betyr ukjent.</p>
+        {content.activities.map((activity, index) => <fieldset key={activity.id}><legend>Aktivitet {index + 1}</legend><div className="draft-grid">{(['start', 'end'] as const).map(field => <PrivateTimeInput key={timeEpoch + ':' + field} label={field === 'start' ? 'Start' : 'Slutt'} value={activity[field]} defaultDate={content.service_date} disabled={entryLocked} resolve={body => mutation('/draft-times/resolve', body)} onValue={value => changeTime(activity.id, field, value)} onState={(dirty, unresolved) => timeState(activity.id, field, dirty, unresolved)} expired={expired} />)}</div><div className="draft-grid">{fields.filter(([key]) => key !== 'start' && key !== 'end').map(([key, label]) => <label key={key}>{label}<input maxLength={2 * textLimit(key)} value={activity[key] ?? ''} onChange={e => edit({ ...content, activities: content.activities.map(a => a.id === activity.id ? { ...a, [key]: boundedText(e.target.value, textLimit(key)) || null } : a) })} /></label>)}</div>
+          <div className="controls"><button type="button" disabled={index === 0} onClick={() => { const rows = [...content.activities]; [rows[index - 1], rows[index]] = [rows[index], rows[index - 1]]; edit({ ...content, activities: rows }); }}>Flytt opp</button><button type="button" onClick={() => removeActivity(activity)}>Fjern aktivitet {index + 1}</button></div>
         </fieldset>)}
         <button type="button" disabled={content.activities.length >= 200} onClick={() => edit({ ...content, activities: [...content.activities, { id: crypto.randomUUID(), ...Object.fromEntries(fields.map(([key]) => [key, null])) }] })}>Legg til aktivitet</button>
       </fieldset>
-      <button disabled={busy || suspended || !!comparison || !!pendingDelete || draftExpired} type="submit">{pending ? 'Prøv samme lagringsforsøk igjen' : 'Lagre utkast'}</button>
+      {unresolvedTimes && <p>Kontroller uavklarte datoer og klokkeslett før lagring. Inndata er beholdt.</p>}
+      <button disabled={busy || suspended || !!comparison || !!pendingDelete || saveUnavailable || draftExpired || unresolvedTimes} type="submit">{pending ? 'Prøv samme lagringsforsøk igjen' : 'Lagre utkast'}</button>
     </form>
-    <div className="controls"><button disabled={busy || !!pending || !!pendingDelete || suspended} onClick={reset}>{saved ? 'Forkast endringer' : 'Tilbakestill utkast'}</button>{saved && <button disabled={busy || !!pending || !!pendingDelete || suspended || draftExpired || !!comparison} onClick={() => void removeDraft()}>Slett utkast</button>}</div>
+    <div className="controls"><button disabled={busy || !!pending || !!pendingDelete || suspended} onClick={reset}>{saved && !saveUnavailable ? 'Forkast endringer' : 'Tilbakestill utkast'}</button>{saved && <button disabled={busy || !!pending || !!pendingDelete || saveUnavailable || suspended || draftExpired || !!comparison} onClick={() => void removeDraft()}>Slett utkast</button>}</div>
     {pendingDelete && <div className="controls"><button disabled={busy} onClick={() => void removeDraft()}>Prøv samme slettingsforsøk igjen</button><button disabled={busy} onClick={() => void removeDraft(true)}>Kontroller slettingen</button></div>}
     {pending && <button disabled={busy} onClick={() => void settle()}>Kontroller lagringsforsøket</button>}
     {comparison && <section aria-label="Sammenlign versjoner"><h3>Lagret versjon {comparison.revision}</h3><p>Lokale endringer står i skjemaet. Last inn lagret versjon for å forkaste dem.</p><dl><dt>Tjenestedato</dt><dd>{comparison.draft.service_date ?? 'Ukjent'}</dd><dt>Vognløp</dt><dd>{comparison.draft.vehicle_duty ?? 'Ukjent'}</dd><dt>Sanntidsverdi</dt><dd>{comparison.draft.realtime_duty ?? 'Ukjent'}</dd><dt>Buss/vogn</dt><dd>{comparison.draft.physical_bus ?? 'Ukjent'}</dd></dl><ol>{comparison.draft.activities.map(activity => <li key={activity.id}><dl>{fields.map(([key, label]) => <div className="fact" key={key}><dt>{label}</dt><dd>{activity[key] ?? 'Ukjent'}</dd></div>)}</dl></li>)}</ol><button onClick={() => { if (window.confirm('Forkaste lokale endringer og laste lagret versjon?')) adopt(comparison); }}>Last inn lagret versjon</button></section>}

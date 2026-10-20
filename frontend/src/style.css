@@ -26,5 +26,6 @@ legend { font-weight: 700; }
 .draft-form label { display: block; }
 pre { white-space: pre-wrap; overflow-wrap: anywhere; background: #edf3f7; padding: 1rem; }
 .fact { display: contents; }
+select { font: inherit; width: 100%; min-width: 0; color: #162c3c; background: white; border: 2px solid #536775; padding: .65rem; border-radius: .3rem; }
 select:focus-visible, h2:focus-visible { outline: 3px solid #000; outline-offset: 4px; }
 @media (max-width: 700px) { .draft-grid { grid-template-columns: 1fr; } }

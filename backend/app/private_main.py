@@ -11,6 +11,7 @@ from pydantic import BaseModel, ConfigDict, Field
 
 from . import auth
 from . import draft_storage
+from .draft_time import LocalTime, TimeResolution, resolve as resolve_time
 from .draft_domain import DeleteDraft, DeletedDraft, DraftList, DraftRecord, IssueOperation, IssuedOperation, OperationResult, SaveDraft
 from .private_storage import cleanup, database
 
@@ -171,3 +172,15 @@ def delete_draft(identifier: UUID, body: DeleteDraft, request: Request):
 @app.get('/draft-deletions/{identifier}', response_model=DeletedDraft)
 def find_deletion(identifier: UUID, request: Request):
     return draft_storage.deletion_lookup(request, identifier)
+
+
+@app.post('/draft-times/resolve', response_model=TimeResolution)
+def local_time(body: LocalTime, request: Request):
+    with database() as conn:
+        draft_storage.authorized(conn, request)
+        try:
+            result = resolve_time(body)
+        except (ValueError, OverflowError):
+            raise HTTPException(422, 'Kontroller dato og klokkeslett.') from None
+        auth.session(conn, request)
+        return result

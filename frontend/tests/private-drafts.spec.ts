@@ -24,8 +24,11 @@ async function fill(page: Page) {
   await page.getByLabel('Buss/vogn', { exact: true }).fill('Bus-0012');
   await page.getByRole('button', { name: 'Legg til aktivitet' }).click();
   await page.getByLabel('Opprinnelig kode').fill('Unknown/42');
-  await page.getByLabel('Start med dato og Oslo-offset').fill('2026-10-25T00:00+02:00');
-  await page.getByLabel('Slutt med dato og Oslo-offset').fill('2026-10-25T02:30+01:00');
+  await page.getByLabel('Startdato', { exact: true }).fill('2026-10-25');
+  await page.getByLabel('Starttid', { exact: true }).fill('00:00');
+  await page.getByLabel('Sluttdato', { exact: true }).fill('2026-10-25');
+  await page.getByLabel('Sluttid', { exact: true }).fill('02:30');
+  await page.getByLabel('Slutt: forekomst', { exact: true }).selectOption({ label: 'Andre forekomst' });
   await page.getByLabel('Opprinnelig startklokke').fill('24:00');
   await page.getByLabel('Opprinnelig sluttklokke').fill('26:30');
   await page.getByLabel('Kilde / manuell rettelse').fill('Manuell rettelse, ukjent sted.');
@@ -46,7 +49,8 @@ for (const width of [768, 1440]) test(`keyboard save and reopen midnight facts a
   await page.getByRole('button', { name: /Åpne 2026-10-24/ }).first().click();
   await expect(page.getByLabel('Vognløp', { exact: true })).toHaveValue('0007');
   await expect(page.getByLabel('Opprinnelig sluttklokke')).toHaveValue('26:30');
-  await expect(page.getByLabel('Slutt med dato og Oslo-offset')).toHaveValue('2026-10-25T02:30+01:00');
+  await expect(page.getByLabel('Sluttdato', { exact: true })).toHaveValue('2026-10-25');
+  await expect(page.getByLabel('Sluttid', { exact: true })).toHaveValue('02:30');
   await page.getByLabel('Vognløp', { exact: true }).fill('local-unsaved');
   await page.evaluate(() => {
     Object.defineProperty(document, 'visibilityState', { configurable: true, get: () => 'hidden' }); document.dispatchEvent(new Event('visibilitychange'));
@@ -208,13 +212,16 @@ test('slightly future server creation timestamps remain valid acknowledgements',
 
 test('supported historical Oslo offset saves and reopens unchanged', async ({ page }) => {
   await login(page); await fill(page);
-  await page.getByLabel('Start med dato og Oslo-offset').fill('1894-01-01T12:00+00:43');
-  await page.getByLabel('Slutt med dato og Oslo-offset').fill('1894-01-01T12:00+00:43');
+  await page.getByLabel('Startdato', { exact: true }).fill('1894-01-01');
+  await page.getByLabel('Starttid', { exact: true }).fill('12:00');
+  await page.getByLabel('Sluttdato', { exact: true }).fill('1894-01-01');
+  await page.getByLabel('Sluttid', { exact: true }).fill('12:00');
   await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
   await expect(status(page)).toHaveText('Lagret. Versjon 1.');
   await page.reload();
   await page.getByRole('button', { name: /Åpne 2026-10-24/ }).first().click();
-  await expect(page.getByLabel('Start med dato og Oslo-offset')).toHaveValue('1894-01-01T12:00+00:43');
+  await expect(page.getByLabel('Startdato', { exact: true })).toHaveValue('1894-01-01');
+  await expect(page.getByLabel('Starttid', { exact: true })).toHaveValue('12:00');
 });
 
 test('reorder and remove preserve ordered identities with their facts after reopen', async ({ page }) => {
@@ -230,6 +237,7 @@ test('reorder and remove preserve ordered identities with their facts after reop
   await expect(status(page)).toHaveText('Lagret. Versjon 1.');
   await page.getByRole('button', { name: 'Flytt opp', exact: true }).nth(2).click();
   await page.getByRole('button', { name: 'Fjern aktivitet 1', exact: true }).focus();
+  page.once('dialog', dialog => dialog.accept());
   await page.keyboard.press('Enter');
   await expect(page.getByRole('heading', { name: 'Rediger utkast' })).toBeFocused();
   const secondResponse = page.waitForResponse(response => response.request().method() === 'POST' && new URL(response.url()).pathname === '/drafts/' + original.id);
@@ -434,4 +442,254 @@ test('stale deletion releases its lock and requires confirmed saved-version repl
   await page.getByRole('button', { name: 'Last inn lagret versjon' }).click();
   await expect(page.getByLabel('Buss/vogn', { exact: true })).toHaveValue('remote-newer');
   await other.close();
+});
+
+test.describe('friendly Oslo time entry', () => {
+  test.use({ timezoneId: 'America/New_York' });
+
+  test('service defaults and explicit next day preserve entered dates when service date changes', async ({ page }) => {
+    await login(page);
+    await page.getByLabel('Tjenestedato', { exact: true }).fill('2026-07-15');
+    await page.getByRole('button', { name: 'Legg til aktivitet' }).click();
+    await expect(page.getByLabel('Startdato', { exact: true })).toHaveValue('2026-07-15');
+    await expect(page.getByLabel('Sluttdato', { exact: true })).toHaveValue('2026-07-15');
+    await page.getByLabel('Starttid', { exact: true }).fill('23:50');
+    await page.getByLabel('Sluttid', { exact: true }).fill('00:10');
+    await page.getByRole('button', { name: 'Slutt: neste dag' }).click();
+    await expect(page.getByLabel('Sluttdato', { exact: true })).toHaveValue('2026-07-16');
+    await page.getByLabel('Tjenestedato', { exact: true }).fill('2026-07-20');
+    await expect(page.getByLabel('Startdato', { exact: true })).toHaveValue('2026-07-15');
+    await expect(page.getByLabel('Sluttdato', { exact: true })).toHaveValue('2026-07-16');
+    const result = page.waitForResponse(response => response.request().method() === 'POST' && new URL(response.url()).pathname === '/drafts');
+    await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
+    const saved = await (await result).json();
+    expect(saved.draft.activities[0].start).toBe('2026-07-15T23:50+02:00');
+    expect(saved.draft.activities[0].end).toBe('2026-07-16T00:10+02:00');
+    await expect(status(page)).toHaveText('Lagret. Versjon 1.');
+    await page.reload();
+    await page.getByRole('button', { name: 'Åpne 2026-07-20 · versjon 1', exact: true }).click();
+    await expect(page.getByLabel('Starttid', { exact: true })).toHaveValue('23:50');
+    await expect(page.getByLabel('Sluttdato', { exact: true })).toHaveValue('2026-07-16');
+  });
+
+  test('incomplete and spring-gap input survives while both autumn occurrences require a choice', async ({ page }) => {
+    await login(page);
+    await page.getByLabel('Tjenestedato', { exact: true }).fill('2026-03-29');
+    await page.getByRole('button', { name: 'Legg til aktivitet' }).click();
+    await page.getByLabel('Starttid', { exact: true }).fill('02:30');
+    await expect(page.getByText('Dette klokkeslettet finnes ikke i Oslo', { exact: false })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Lagre utkast', exact: true })).toBeDisabled();
+    await page.getByLabel('Startdato', { exact: true }).fill('');
+    await expect(page.getByLabel('Starttid', { exact: true })).toHaveValue('02:30');
+    await page.evaluate(() => {
+      Object.defineProperty(document, 'visibilityState', { configurable: true, get: () => 'hidden' }); document.dispatchEvent(new Event('visibilitychange'));
+      Object.defineProperty(document, 'visibilityState', { configurable: true, get: () => 'visible' }); document.dispatchEvent(new Event('visibilitychange'));
+    });
+    await expect(page.getByLabel('Startdato', { exact: true })).toHaveValue('');
+    await expect(page.getByLabel('Starttid', { exact: true })).toHaveValue('02:30');
+    await page.getByLabel('Startdato', { exact: true }).fill('2026-10-25');
+    await expect(page.getByLabel('Start: forekomst', { exact: true })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Lagre utkast', exact: true })).toBeDisabled();
+    await page.getByLabel('Start: forekomst', { exact: true }).selectOption({ label: 'Første forekomst' });
+    await page.getByLabel('Sluttdato', { exact: true }).fill('2026-10-25');
+    await page.getByLabel('Sluttid', { exact: true }).fill('02:30');
+    await page.getByLabel('Slutt: forekomst', { exact: true }).selectOption({ label: 'Andre forekomst' });
+    await page.evaluate(() => {
+      Object.defineProperty(document, 'visibilityState', { configurable: true, get: () => 'hidden' }); document.dispatchEvent(new Event('visibilitychange'));
+      Object.defineProperty(document, 'visibilityState', { configurable: true, get: () => 'visible' }); document.dispatchEvent(new Event('visibilitychange'));
+    });
+    await expect(page.getByLabel('Start: forekomst', { exact: true })).toHaveValue('2026-10-25T02:30+02:00');
+    await expect(page.getByLabel('Slutt: forekomst', { exact: true })).toHaveValue('2026-10-25T02:30+01:00');
+    await expect(page.getByRole('button', { name: 'Lagre utkast', exact: true })).toBeEnabled();
+    const result = page.waitForResponse(response => response.request().method() === 'POST' && new URL(response.url()).pathname === '/drafts');
+    await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
+    const saved = await (await result).json();
+    expect(saved.draft.activities[0].start).toBe('2026-10-25T02:30+02:00');
+    expect(saved.draft.activities[0].end).toBe('2026-10-25T02:30+01:00');
+    await expect(status(page)).toHaveText('Lagret. Versjon 1.');
+  });
+
+  test('unavailable and stale resolution retains input and saves only the latest clock', async ({ page }) => {
+    await login(page);
+    await page.getByLabel('Tjenestedato', { exact: true }).fill('2026-01-15');
+    await page.getByRole('button', { name: 'Legg til aktivitet' }).click();
+    await page.route('**:8001/draft-times/resolve', route => route.abort());
+    await page.getByLabel('Starttid', { exact: true }).fill('10:00');
+    await expect(page.getByText('Tidspunktet kunne ikke kontrolleres.', { exact: false })).toBeVisible();
+    await expect(page.getByLabel('Starttid', { exact: true })).toHaveValue('10:00');
+    await expect(page.getByRole('button', { name: 'Lagre utkast', exact: true })).toBeDisabled();
+    await page.unroute('**:8001/draft-times/resolve');
+    let release!: () => void, entered!: () => void;
+    const gate = new Promise<void>(resolve => { release = resolve; });
+    const waiting = new Promise<void>(resolve => { entered = resolve; });
+    let first = true;
+    await page.route('**:8001/draft-times/resolve', async route => {
+      if (!first) { await route.continue(); return; }
+      first = false; const response = await route.fetch(); entered(); await gate; await route.fulfill({ response });
+    });
+    try {
+      await page.getByRole('button', { name: 'Kontroller starttid igjen' }).click(); await waiting;
+      await page.getByLabel('Starttid', { exact: true }).fill('11:00');
+      release();
+      const result = page.waitForResponse(response => response.request().method() === 'POST' && new URL(response.url()).pathname === '/drafts');
+      await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
+      expect((await (await result).json()).draft.activities[0].start).toBe('2026-01-15T11:00+01:00');
+      await expect(status(page)).toHaveText('Lagret. Versjon 1.');
+    } finally { release(); }
+  });
+
+  test('existing explicit instants and source clocks remain identical during unrelated edits', async ({ page }) => {
+    await login(page);
+    const proof = await (await page.request.get('http://127.0.0.1:8001/auth/csrf')).json();
+    const headers = { Origin: 'http://127.0.0.1:5173', 'X-CSRF-Token': proof.csrf_token };
+    const operation = await (await page.request.post('http://127.0.0.1:8001/draft-operations', { headers, data: {} })).json();
+    const original = await (await page.request.post('http://127.0.0.1:8001/drafts', { headers, data: { operation_id: operation.operation_id, expected_revision: 0, draft: { service_date: '2026-11-03', activities: [{ id: randomUUID(), start: '2026-10-25T02:30:15+01:00', end: '2026-10-25T02:45:16+01:00', source_start: '26:30' }] } } })).json();
+    await page.getByRole('button', { name: 'Oppdater listen' }).click();
+    await page.getByRole('button', { name: 'Åpne 2026-11-03 · versjon 1', exact: true }).click();
+    await expect(page.getByLabel('Starttid', { exact: true })).toHaveValue('02:30:15');
+    await expect(page.getByLabel('Startdato', { exact: true })).toHaveValue('2026-10-25');
+    await page.getByLabel('Buss/vogn', { exact: true }).fill('manual-bus');
+    const result = page.waitForResponse(response => response.request().method() === 'POST' && new URL(response.url()).pathname === '/drafts/' + original.id);
+    await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
+    const updated = await (await result).json();
+    expect(updated.draft.activities).toEqual(original.draft.activities);
+    expect(updated.expires_at).toBe(original.expires_at);
+  });
+
+  test('clearing saved, incomplete and gap times saves null without changing other facts', async ({ page }) => {
+    await login(page); await fill(page);
+    const initialResponse = page.waitForResponse(response => response.request().method() === 'POST' && new URL(response.url()).pathname === '/drafts');
+    await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
+    const original = await (await initialResponse).json();
+    await expect(status(page)).toHaveText('Lagret. Versjon 1.');
+    await page.getByRole('button', { name: 'Start: tøm tidspunkt', exact: true }).click();
+    const clearedResponse = page.waitForResponse(response => response.request().method() === 'POST' && new URL(response.url()).pathname === '/drafts/' + original.id);
+    await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
+    const cleared = await (await clearedResponse).json();
+    expect(cleared.draft.activities[0]).toEqual({ ...original.draft.activities[0], start: null });
+    await expect(status(page)).toHaveText('Lagret. Versjon 2.');
+    await page.reload();
+    await page.getByRole('button', { name: /Åpne 2026-10-24 · versjon 2/ }).first().click();
+    await expect(page.getByLabel('Starttid', { exact: true })).toHaveValue('');
+    await expect(page.getByLabel('Sluttid', { exact: true })).toHaveValue('02:30');
+    await expect(page.getByLabel('Opprinnelig startklokke')).toHaveValue('24:00');
+    await page.getByLabel('Startdato', { exact: true }).fill('2026-03-29');
+    await page.getByLabel('Starttid', { exact: true }).fill('02:30');
+    await expect(page.getByText('Dette klokkeslettet finnes ikke i Oslo', { exact: false })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Lagre utkast', exact: true })).toBeDisabled();
+    await page.getByRole('button', { name: 'Start: tøm tidspunkt', exact: true }).click();
+    await expect(page.getByRole('button', { name: 'Lagre utkast', exact: true })).toBeEnabled();
+    await page.getByLabel('Startdato', { exact: true }).fill('');
+    await page.getByLabel('Starttid', { exact: true }).fill('10:00');
+    await expect(page.getByRole('button', { name: 'Lagre utkast', exact: true })).toBeDisabled();
+    await page.getByRole('button', { name: 'Start: tøm tidspunkt', exact: true }).click();
+    await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
+    await expect(status(page)).toHaveText('Lagret. Versjon 3.');
+  });
+});
+
+for (const purged of [false, true]) test(`terminal lost-save lookup releases only an explicitly empty recovery (${purged})`, async ({ page }) => {
+  await login(page); await fill(page);
+  let accepted: any, originalBody: any;
+  await page.route('**:8001/drafts', async route => {
+    if (route.request().method() !== 'POST') { await route.continue(); return; }
+    originalBody = route.request().postDataJSON(); accepted = await (await route.fetch()).json(); await route.abort();
+  });
+  await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
+  await expect(status(page)).toContainText('Lagring er uavklart.');
+  await page.unroute('**:8001/drafts');
+  python(`with database() as conn:\n conn.execute("UPDATE drafts SET created_at=statement_timestamp()-interval '7 days',expires_at=statement_timestamp() WHERE id=%s", (${JSON.stringify(accepted.id)},))\n conn.execute('UPDATE draft_operations SET expires_at=(SELECT expires_at FROM drafts WHERE id=%s) WHERE draft_id=%s', (${JSON.stringify(accepted.id)},${JSON.stringify(accepted.id)}))\n${purged ? 'from app.private_storage import cleanup\ncleanup()\n' : ''}`);
+  await page.getByRole('button', { name: 'Kontroller lagringsforsøket' }).click();
+  await expect(status(page)).toContainText('Lagring er ikke bekreftet.');
+  await expect(status(page)).toContainText('kan ikke sendes på nytt');
+  await expect(page.getByLabel('Buss/vogn', { exact: true })).toHaveValue('Bus-0012');
+  await expect(page.getByLabel('Starttid', { exact: true })).toHaveValue('00:00');
+  await expect(page.getByRole('button', { name: 'Lagre utkast', exact: true })).toBeDisabled();
+  await expect(page.getByRole('button', { name: 'Prøv samme lagringsforsøk igjen' })).toHaveCount(0);
+  page.once('dialog', dialog => dialog.accept());
+  await page.getByRole('button', { name: purged ? 'Nytt utkast' : 'Tilbakestill utkast', exact: true }).click();
+  await expect(page.getByLabel('Buss/vogn', { exact: true })).toHaveValue('');
+  await expect(page.getByLabel('Starttid', { exact: true })).toHaveCount(0);
+  const freshResponse = page.waitForResponse(response => response.request().method() === 'POST' && new URL(response.url()).pathname === '/drafts');
+  await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
+  const fresh = await (await freshResponse).json();
+  expect(fresh.id).not.toBe(accepted.id); expect(fresh.draft.activities).toEqual([]);
+  expect(fresh.draft.physical_bus).toBeNull();
+  const proof = await (await page.request.get('http://127.0.0.1:8001/auth/csrf')).json();
+  expect((await page.request.post('http://127.0.0.1:8001/drafts', { headers: { Origin: 'http://127.0.0.1:5173', 'X-CSRF-Token': proof.csrf_token }, data: originalBody })).status()).toBe(purged ? 404 : 410);
+});
+
+test('negative intervals are explained before sending and generic validation uses friendly time guidance', async ({ page }) => {
+  await login(page);
+  await page.getByLabel('Tjenestedato', { exact: true }).fill('2026-07-15');
+  await page.getByRole('button', { name: 'Legg til aktivitet' }).click();
+  await page.getByLabel('Starttid', { exact: true }).fill('23:00');
+  await page.getByLabel('Sluttid', { exact: true }).fill('01:00');
+  let operations = 0;
+  page.on('request', request => { if (request.url().endsWith('/draft-operations') && request.method() === 'POST') operations++; });
+  await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
+  await expect(status(page)).toContainText('Aktivitet 1: Slutt er før start.');
+  await expect(status(page)).toContainText('Slutt: neste dag'); expect(operations).toBe(0);
+  await page.getByRole('button', { name: 'Slutt: neste dag', exact: true }).click();
+  await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
+  await expect(status(page)).toHaveText('Lagret. Versjon 1.');
+  await page.getByLabel('Buss/vogn', { exact: true }).fill('changed');
+  await page.route('**:8001/drafts/*', route => route.request().method() === 'POST' ? route.fulfill({ status: 422, json: { detail: 'Invalid synthetic value' } }) : route.continue());
+  await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
+  await expect(status(page)).toContainText('Velg riktig kalenderdag eller neste dag');
+  await expect(status(page)).not.toContainText('offset');
+});
+
+test('activity removal cancellation preserves unresolved raw input and canonical facts', async ({ page }) => {
+  await login(page); await fill(page);
+  const firstResponse = page.waitForResponse(response => response.request().method() === 'POST' && new URL(response.url()).pathname === '/drafts');
+  await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
+  const original = await (await firstResponse).json();
+  await expect(status(page)).toHaveText('Lagret. Versjon 1.');
+  await page.getByLabel('Sluttdato', { exact: true }).fill('');
+  await page.getByLabel('Kilde / manuell rettelse').fill('unsaved provenance');
+  page.once('dialog', dialog => dialog.dismiss());
+  await page.getByRole('button', { name: 'Fjern aktivitet 1', exact: true }).click();
+  await expect(page.getByLabel('Sluttdato', { exact: true })).toHaveValue('');
+  await expect(page.getByLabel('Sluttid', { exact: true })).toHaveValue('02:30');
+  await expect(page.getByLabel('Starttid', { exact: true })).toHaveValue('00:00');
+  await expect(page.getByLabel('Kilde / manuell rettelse')).toHaveValue('unsaved provenance');
+  await page.getByLabel('Sluttdato', { exact: true }).fill('2026-10-25');
+  await page.getByLabel('Slutt: forekomst', { exact: true }).selectOption({ label: 'Andre forekomst' });
+  const updateResponse = page.waitForResponse(response => response.request().method() === 'POST' && new URL(response.url()).pathname === '/drafts/' + original.id);
+  await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
+  const updated = await (await updateResponse).json();
+  expect(updated.draft.activities[0]).toEqual({ ...original.draft.activities[0], provenance: 'unsaved provenance' });
+  await expect(status(page)).toHaveText('Lagret. Versjon 2.');
+  await page.getByRole('button', { name: 'Legg til aktivitet' }).click();
+  let dialogs = 0;
+  const rejectDialog = async (dialog: any) => { dialogs++; await dialog.dismiss(); };
+  page.on('dialog', rejectDialog);
+  await page.getByRole('button', { name: 'Fjern aktivitet 2', exact: true }).click();
+  page.off('dialog', rejectDialog);
+  expect(dialogs).toBe(0);
+  await expect(page.getByLabel('Starttid', { exact: true })).toHaveCount(1);
+});
+
+test('initial failed lists and later failures never claim an acknowledged empty list', async ({ page }) => {
+  await page.route('**:8001/drafts', route => route.abort());
+  await login(page);
+  await expect(page.getByText('Listen er utilgjengelig.', { exact: false })).toBeVisible();
+  await expect(page.getByText('Ingen lagrede utkast.', { exact: true })).toHaveCount(0);
+  await page.getByLabel('Buss/vogn', { exact: true }).fill('retained');
+  await page.unroute('**:8001/drafts');
+  await page.route('**:8001/drafts', route => route.fulfill({ json: { drafts: [] } }));
+  await page.getByRole('button', { name: 'Oppdater listen' }).click();
+  await expect(page.getByText('Ingen lagrede utkast.', { exact: true })).toBeVisible();
+  await expect(page.getByLabel('Buss/vogn', { exact: true })).toHaveValue('retained');
+  await page.unroute('**:8001/drafts');
+  await page.getByLabel('Tjenestedato', { exact: true }).fill('2026-11-04');
+  await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
+  await expect(status(page)).toHaveText('Lagret. Versjon 1.');
+  await page.route('**:8001/drafts', route => route.abort());
+  await page.getByRole('button', { name: 'Oppdater listen' }).click();
+  await expect(page.getByText('Listen er utilgjengelig.', { exact: false })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Åpne 2026-11-04 · versjon 1', exact: true })).toBeVisible();
+  await expect(page.getByLabel('Buss/vogn', { exact: true })).toHaveValue('retained');
+  await expect(page.getByText('Ingen lagrede utkast.', { exact: true })).toHaveCount(0);
 });
