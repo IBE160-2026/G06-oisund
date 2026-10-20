@@ -112,7 +112,7 @@ function App() {
   return <main>
     <p className="badge">Fiktive demodata</p>
     <h1>Fiktiv arbeidsdag</h1>
-    <p>Kun et fast eksempel for lokal vurdering. Ingen innlogging eller private arbeidsdager. Bruk oversikten mens du står stille.</p>
+    <p>Kun et fast eksempel for lokal vurdering. Demoen krever ingen innlogging og viser ingen private arbeidsdager. Bruk oversikten mens du står stille.</p>
     <p role="status" aria-live="polite" className="status">{message}</p>
     <div className="controls">
       <button disabled={busy} onClick={() => void example()}>Last inn nytt fiktivt eksempel</button>
@@ -127,6 +127,7 @@ function App() {
     </section>}
     {saved && <p>Bekreftet lagret {display(saved.created_at)}. Slettes senest {display(saved.expires_at)}. Nettadressen åpner dette fiktive eksemplet på nytt.</p>}
     <p>Et nytt eksempel og lagrede dager utløper etter syv dager. Gjentatt lagring forlenger ikke fristen. Usendte data finnes bare mens siden er åpen.</p>
+    <p><a href="/private">Gå til privat tilgang</a>. Har du en aktiv økt, åpnes arbeidsrommet. Å åpne demoen logger deg ikke ut.</p>
   </main>;
 }
 createRoot(document.getElementById('root')!).render(location.pathname === '/private' ? <PrivateAccess /> : <App />);

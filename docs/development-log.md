@@ -298,3 +298,25 @@ Document checks verified unique canonical story counts, saved approvals, depende
 - Three independent review layers and root audit produced fifteen individually triaged findings. Fixed late-login/logout ordering with cross-tab Web Locks, persistent logout lock, common throttle windows, non-ASCII/signed/aged CSRF rejection tests, synthetic-only verification safety, post-render focus, unfinished input preservation, threaded CSRF checks and streamed request-size bounds. No finding was deferred; the dedicated local bootstrap-superuser finding was rejected as hypothetical privilege hardening under the workflow's low-finding rule.
 - Root read the full diff and inspected both screenshots. Final root verification: private HTTP/PostgreSQL 14 passed (27.33s), existing assessment 18 passed (1.03s), approved import 76 passed (3.22s), full Playwright 23 passed (23.3s), frontend production build/typecheck passed. Actual private DB/API restart, unchanged deadlines/security metadata, migration replay, cleanup, isolated demo reset and revocation passed sequentially. Both Compose configs and pip check passed; all spec matrix rows have executed coverage. Sandbox permission failures were retried successfully with escalation.
 - Restored only regression-generated 9.2 screenshots; retained 9.3 images. Spec is done, sprint 9.3 is review and epic 9 remains in-progress. Stories 9.1/9.2 remain done; 9.4 remains backlog. No retained blocker, draft/PDF integration or next story. Local commit follows this entry per BMAD; no push. README documents setup and synthetic-only testing after real account provisioning.
+
+### Story9.3 owner walkthrough feedback — 2026-10-20
+
+- Owner confirmed account provisioning/sign-in and clear signed-in/signed-out/demo states with reassuring logout messages. Walkthrough remains open; no final acceptance inferred.
+- Added demo-to-private navigation following owner feedback. The demo now explains that opening it does not log out an active private session; private access returns to the workspace or sign-in according to server session state.
+- Production build/typecheck and healthy frontend rebuild passed. One-off Edge checks verified bidirectional navigation and keyboard activation at768/1440px with no overflow, using fresh contexts. No private-account mutations or synthetic-only suite execution. Follow-up uncommitted; no push.
+
+### Story 9.3 manual walkthrough observations completed — 2026-10-20
+
+- Jonas confirmed synchronized sign-in/sign-out across tabs and a clear generic error for incorrect credentials; he prefers that it does not identify which credential is wrong. Earlier observations confirmed provisioning, clear private/demo/logout states and the corrected demo-to-private navigation.
+- Recorded owner observations only; final approval remains pending and sprint stays review. No additional tests, commit or push.
+
+### Story 9.3 owner acceptance and closure — 2026-10-20
+
+- Jonas explicitly approved story 9.3 with "godkjenn" after the complete walkthrough and accepted demo-navigation correction. Synchronized sprint tracking and README to done. Epic 9 remains in-progress; story 9.4 remains backlog.
+- Approval relies on recorded automated checks and the owner's reported manual observations. No tests rerun for this tracking/documentation closure. Navigation follow-up already passed production build/typecheck and fresh-context Edge navigation/keyboard checks at 768/1440px.
+- Workflow completion customization resolved to empty. No commit/push or next story. The earlier implementation commit remains local; navigation and walkthrough/closure follow-ups remain uncommitted.
+
+### Story 9.3 publication authorization — 2026-10-20
+
+- After accepting story 9.3, Jonas explicitly requested "Commit og push". This authorizes publishing the local implementation commit and the navigation/walkthrough/closure follow-up, superseding earlier no-push boundaries for this completed story.
+- Publication records the previously verified navigation correction and completed sprint status. No application code has changed since its recorded production build and Edge navigation/keyboard checks. Reviewed the complete follow-up diff and whitespace; no new test run or next story. Git publication outcome is verified after committing this entry.
