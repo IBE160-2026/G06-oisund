@@ -235,3 +235,9 @@ Document checks verified unique canonical story counts, saved approvals, depende
 
 - Jonas reported that the local slice appears to work as documented, then explicitly requested commit and push. This is owner-reported local verification; no additional device or accessibility qualification is inferred. Sprint story remains review.
 - Authorized publication scope is the completed story 9.2 implementation, tests, evidence, setup instructions and tracking/log updates. No next change or story starts in this session. Publication success is verified separately after Git execution.
+
+## 2026-10-20 — Story 9.2 closed and tracking reconciled
+
+- At Jonas's request, reconciled story 9.2 from review to done in sprint tracking. The implementation spec was already done. Closure relies on the recorded final 18 API/PostgreSQL tests, 13 browser tests, production build/typecheck, real restart/outage checks, independent review with no retained blocker, and the owner's successful local use reported on 19 October.
+- README now reports the completed story; the spec includes a dated closure entry that supersedes its earlier review handoff. Epic 9 stays in-progress and every other story stays backlog. Approved planning definitions remain intact; live implementation status is tracked separately.
+- Confirmed the 19 October implementation publication: commit `040170eed4e043ecb899e39547270e0de6acf82a` was pushed to origin/main. Today's reconciliation is documentation/tracking only. No application code changed or application tests rerun; no next story, new commit or push.

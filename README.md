@@ -12,7 +12,7 @@ Repoet inneholder gruppens applikasjon og dokumentasjon av utvikling, testing og
 
 On 19 October 2026 the owner approved [SCOPE-02](./_bmad-output/planning-artifacts/sprint-change-proposal-2026-10-19.md): a smaller course V1 with supported text-PDF import and correction, a saved day overview, manual activity navigation, manually maintained source-linked notices and a local fullstack demonstration.
 
-The [active plan](./_bmad-output/planning-artifacts/epics.md) contains four epics and 20 stories. [Sprint tracking](./_bmad-output/implementation-artifacts/sprint-status.yaml) records story 9.2 in review and the remaining stories in backlog; [readiness](./_bmad-output/planning-artifacts/implementation-readiness.md) covers planning, not implemented or tested product behavior. The [earlier baseline](./_bmad-output/planning-artifacts/archive/pre-scope-02-2026-10-19/README.md) is historical.
+The [active plan](./_bmad-output/planning-artifacts/epics.md) contains four epics and 20 stories. [Sprint tracking](./_bmad-output/implementation-artifacts/sprint-status.yaml) records story 9.2 as done and the remaining stories in backlog; [readiness](./_bmad-output/planning-artifacts/implementation-readiness.md) covers planning, not implemented or tested product behavior. The [earlier baseline](./_bmad-output/planning-artifacts/archive/pre-scope-02-2026-10-19/README.md) is historical.
 
 Story 9.2 implements a real React/TypeScript → FastAPI → PostgreSQL assessment slice. It accepts only the exact fictional example; private access, editing and PDF import remain later stories.
 

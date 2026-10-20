@@ -103,7 +103,7 @@ Plan prepared under the owner's explicit authorization to prepare and implement 
 - `npm ci` audit — zero vulnerabilities; `pip check` — no broken requirements. Initial Vite audit finding was resolved by upgrading; initial CSS-module type error was corrected before final successful build.
 - `git diff --check` — no whitespace errors.
 
-Limitations: browser connector had no available browser surface; development browser automation used installed Edge instead. Actual tablet hardware, assistive technology and exhaustive accessibility testing are not claimed. All other stories remain untouched; implementation is ready for review, with no commit/push.
+Limitations: browser connector had no available browser surface; development browser automation used installed Edge instead. Actual tablet hardware, assistive technology and exhaustive accessibility testing are not claimed. Current completion status is recorded in the closure entry below; earlier verification and handoff entries retain their dated historical meaning.
 
 
 
@@ -116,3 +116,9 @@ Limitations: browser connector had no available browser surface; development bro
 - Matrix audit: save/reopen, replay/concurrency, invalid requests, isolated configuration/reset and expiry have passing PostgreSQL/HTTP tests; lost committed acknowledgement and valid retry have passing browser tests; outage/restart have passing real-service scripts; browser tests cover 410 and elapsed expiry, identity/lifetime rejection and explicit overnight rendering at the two tested widths.
 - Two targeted browser checks briefly collided with root's deliberate API outage. Root then serialized the service checks and reran the entire browser suite successfully; no failed or skipped case remains in the final run.
 - Spec is done. Sprint story remains review per build's terminal synchronization rule, with epic 9 in-progress and every other story backlog. Missing anonymized PDFs/fasit keep 9.1 unstarted; the approved independent 9.2 fallback was used. Actual tablet hardware/comprehensive accessibility qualification remain outside this slice's evidence. No next story was started.
+
+### Owner closure and status reconciliation — 2026-10-20
+
+- The owner reported successful local use on 19 October and requested reconciliation to completed status on 20 October. All acceptance tasks are checked; the final 18 API/PostgreSQL tests, 13 browser tests, production build/typecheck, actual restart/outage checks and independent review are recorded above. No blocking implementation finding remains for this slice.
+- Both this implementation spec and sprint story 9.2 are now done. Epic 9 remains in-progress; every other story remains backlog. The approved planning copy retains its original scope/acceptance definition; implementation evidence and live status are held here and in sprint tracking.
+- Implementation was committed and pushed on 19 October as `040170eed4e043ecb899e39547270e0de6acf82a`. This closure changes documentation/tracking only; it does not rerun application tests, start another story, commit or push. PDF fixtures/fasit and later device/accessibility qualification remain separate outstanding work.
