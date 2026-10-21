@@ -16,7 +16,7 @@ The [active plan](./_bmad-output/planning-artifacts/epics.md) contains four epic
 
 Story 9.2 implements a real React/TypeScript → FastAPI → PostgreSQL assessment slice. It accepts only the exact fictional example. Story 9.3 adds separately provisioned private access; story 9.4 adds manual private draft saving/reopening. Story 9.1 adds an independent local PDF qualification CLI; PDF import is not connected to the application yet.
 
-The account-switch follow-up binds private editor requests to the displayed account/session, including when another window's login notification is missed. See the [repair and verification record](./_bmad-output/implementation-artifacts/spec-epic-9-bind-private-editor-identity.md). The retrospective's historical verdict and other proposed action items remain recorded separately.
+The account-switch follow-up binds private editor requests to the displayed account/session, including when another window's login notification is missed. Jonas approved this repair after walkthrough on 22 October 2026; its retrospective action is done. See the [repair and verification record](./_bmad-output/implementation-artifacts/spec-epic-9-bind-private-editor-identity.md). The retrospective's historical verdict and other proposed action items remain recorded separately. No new story was started.
 
 ## Run the fictional assessment
 
