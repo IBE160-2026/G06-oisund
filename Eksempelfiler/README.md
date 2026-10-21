@@ -1,12 +1,14 @@
 # Fasit til skifteksemplene
 
-Fasit for de sju anonymiserte PDF-ene i denne mappen, utarbeidet 20. oktober 2026 ved tekstlesing og visuell kontroll av alle ti sider. Tabellenes aktiviteter er transkribert fra PDF-ene, uavhengig av en importimplementasjon. Fasiten dokumenterer forventet innhold; den dokumenterer ikke at applikasjonen har bestått importtestene.
+Fasit for de ni anonymiserte PDF-ene i denne mappen, totalt 13 sider. Eksempel 1–7 ble gjennomgått 20. oktober 2026; eksempel 8–9 ble lagt til under testing av story 10.1 og gjennomgått 21. oktober 2026. Alle sidene er kontrollert med tekstlesing og visuell kontroll. Tabellenes aktiviteter er transkribert fra PDF-ene, uavhengig av en importimplementasjon. Fasiten dokumenterer forventet innhold; den dokumenterer ikke at applikasjonen har bestått importtestene.
 
 Se [LES-MEG.txt](LES-MEG.txt) for anonymisering og begrensninger. Dette er bearbeidede historiske skift med fiktive datoer, ikke gjeldende arbeidsplaner.
 
 ## Godkjenning
 
-**Godkjent av Jonas Øisund 20. oktober 2026 (2026-10-20).** Godkjenningen omfatter fasiten for alle sju PDF-er og avklaringene om betalt fritid, Travel to som tomkjøring i eksempel 6, sammenslåing og navngivning av pauser, vognløp og manuell registrering av faktisk buss. Fasiten er godkjent som forventningsgrunnlag for implementering og kontroll av import. Godkjenningen er ikke en bestått importtest eller en ferdigmelding av story 9.1.
+**Godkjent av Jonas Øisund 20. oktober 2026 (2026-10-20).** Godkjenningen omfatter fasiten for de opprinnelige sju PDF-ene (eksempel 1–7) og avklaringene om betalt fritid, Travel to som tomkjøring i eksempel 6, sammenslåing og navngivning av pauser, vognløp og manuell registrering av faktisk buss. Fasiten er godkjent som forventningsgrunnlag for implementering og kontroll av import. Godkjenningen er ikke en bestått importtest eller en ferdigmelding av story 9.1.
+
+**Tillegg 21. oktober 2026:** Eksempel 8 og 9 er nye testtilfeller fra testing/eiergjennomgang av story 10.1. De er transkribert som et tillegg til fasiten. Godkjenningen fra 20. oktober og tidligere importtestresultater gjelder eksempel 1–7; de utvides ikke automatisk til de nye filene. **Godkjent av Jonas Øisund 21. oktober 2026 (2026-10-21): fasiten for eksempel 8 og 9**, inkludert avklaringen om pilotbil CAR - 1 til CAR - 4 og retur på tomtur 76567. Godkjenningen gjelder forventningsgrunnlaget; den er ikke en importtest eller godkjenning av hele story 10.1. Se [datert dokumentasjonsnotat](../docs/evidence/10-1-additional-fixtures.md). Dokumentert importkvalifisering av de to nye eksemplene gjenstår.
 
 ## Leseregler
 
@@ -34,12 +36,16 @@ Avklart av prosjekteier 20. oktober 2026: Tilstøtende pausetyper kan samles til
 | 7 | Paid meal after 08:52–08:58 + MealBreak 08:58–09:28 | Matpause 08:52–09:28 (36 min) |
 | 7 | Coffee 11:40–12:02 | Kaffepause 11:40–12:02 (22 min) |
 | 7 | Coffee 14:13–14:39 | Kaffepause 14:13–14:39 (26 min) |
+| 8 | Paid meal after 09:38–09:53 + MealBreak 09:53–10:23 | Matpause 09:38–10:23 (45 min) |
+| 9 | Coffee 06:40–06:58 | Kaffepause 06:40–06:58 (18 min) |
+| 9 | Coffee 08:21–08:38 | Kaffepause 08:21–08:38 (17 min) |
+| 9 | Coffee 10:08–11:00 | Kaffepause 10:08–11:00 (52 min) |
 
 Sign-on, Sign-off og transportaktiviteter er ikke pausetyper i denne sammenslåingen. De to kaffepausene i eksempel 7 er adskilt av kjøring og forblir to pauser. Eksempel 3 og 5 har ingen eksplisitte pausetyper. Den betalte fritiden i eksempel 5 er beskrevet separat.
 
 ## Vognløp, sanntidsskjerm og faktisk buss
 
-Avklart av prosjekteier 20. oktober 2026: Alle vognløpene i disse eksemplene har prefikset `960`. **De tre siste sifrene skal inn i sanntidsskjermen.** Behold dem som tre sifre, inkludert innledende nuller. Behold også det fulle vognløpsnummeret fra PDF-en.
+Avklart av prosjekteier 20. oktober 2026: De ordinære vognløpene i eksempel 1–7 har prefikset `960`; det samme gjelder `960181` og `960176` i det senere tillegget eksempel 8. Eksempel 8 inneholder dessuten `CAR - 1`, som prosjekteier 21. oktober avklarte som pilotbil. Betegnelsene `CAR - 1` til `CAR - 4` kan forekomme. Behold betegnelsen uten å utlede en tresifret sanntidsverdi eller faktisk buss. Eksempel 9 har ingen Vogn-oppføring. **De tre siste sifrene skal inn i sanntidsskjermen.** Behold dem som tre sifre, inkludert innledende nuller. Behold også det fulle vognløpsnummeret fra PDF-en.
 
 | Eksempel | Vognløp i rekkefølge, uten gjentatte oppføringer av samme løp | Verdi til sanntidsskjermen |
 | --- | --- | --- |
@@ -50,6 +56,8 @@ Avklart av prosjekteier 20. oktober 2026: Alle vognløpene i disse eksemplene ha
 | 5 | 960006 | `006` |
 | 6 | 960078 → 960109 | `078` → `109` |
 | 7 | 960077 → 960110 | `077` → `110` |
+| 8 | 960181 → 960176 → CAR - 1 (pilotbil) | `181` → `176`; ikke utledet for pilotbil |
+| 9 | Ikke oppgitt | Ikke oppgitt |
 
 **Faktisk buss finnes ikke noe sted i disse PDF-ene.** Opplysningen må hentes eksternt og legges inn manuelt i assistenten. Importen skal derfor la faktisk buss være ukjent frem til manuell registrering; verken hele vognløpsnummeret eller de tre siste sifrene skal fylle feltet for faktisk buss. Tabellen angir verdier til sanntidsskjermen, ikke at sanntidsintegrasjon er implementert.
 
@@ -66,8 +74,10 @@ Alle skift har arbeidsgiver `Tide Buss`, avdeling `Tromsø`, sjåfør `Testsjåf
 | [5](Eksempel-5-anonymisert.pdf) | 90000005 | 2030-01-03 | Thu | 1 | 06:51–08:51 | 2h00 | 2h00 | 1 | 2 |
 | [6](Eksempel-6-anonymisert.pdf) | 90000006 | 2030-01-07 | Mon | 1 | 04:50–17:07 | 6h27 | 12h17 | 6 | 5 |
 | [7](Eksempel-7-anonymisert.pdf) | 90000007 | 2030-01-18 | Fri | 1 | 04:49–16:49 | 11h30 | 12h00 | 9 | 4 |
+| [8](Eksempel-8-anonymisert.pdf) | 90000008 | 2030-01-10 | Thu | 2 | 06:17–15:15 | 8h28 | 8h58 | 11 | 5 |
+| [9](Eksempel-9-anonymisert.pdf) | 90000009 | 2030-01-14 | Mon | 1 | 04:40–14:00 | 9h20 | 9h20 | 0 | 0 |
 
-Totalt: **46 ruteturer og 31 tomkjøringer**: 30 med etiketten `tom / turnummer`, samt `Travel to` i eksempel 6, avklart som tomkjøring av prosjekteier. Sidehenvisningene i tabellene viser hvor aktiviteten står; en aktivitet over flere sider har begge sidetallene.
+Totalt for eksempel 1–9: **57 ruteturer og 36 tomkjøringer**: 35 med etiketten `tom / turnummer`, samt `Travel to` i eksempel 6, avklart som tomkjøring av prosjekteier. I tillegg kommer én særskilt `CAR / 76566`-post i eksempel 8 for overgang til pilotbil. Den telles separat fra turene; returen med pilotbilen er tomtur `76567` og inngår i de 36 tomkjøringene. Opprinnelig eksempel 1–7 har fortsatt 46 ruteturer og 31 tomkjøringer. Sidehenvisningene i tabellene viser hvor aktiviteten står; en aktivitet over flere sider har begge sidetallene.
 
 ## Eksempel 1: flere sider, delt skift og bytte av vognløp
 
@@ -249,6 +259,61 @@ Vognløp `960077` står etter første Sign-on, etter Sign-on 09:28–09:30 og f�
 
 Kontrollpunkter: Tur `42 / 1048` fortsetter i høyre spalte. Behold det korte tomturnummeret `14`. Skiftet har to Coffee-aktiviteter og ett bytte av vognløp; Sign-off før matpausen betyr ikke at hele skiftet er avsluttet.
 
+## Eksempel 8: bytte av vognløp, CAR-post og ekstra notatside
+
+**Lagt til under testing av story 10.1, 21. oktober 2026.** Tillegg til forventningsgrunnlaget; ikke omfattet av godkjenningen 20. oktober eller de tidligere testresultatene for eksempel 1–7.
+
+Skift `90000008`, torsdag 10. januar 2030. Tillegg i hodet: `25,00% 0h00`, `40,00% 0h00`. Vognløp `960181` står etter Sign-on 06:17–06:20, `960176` etter Sign-on 10:23–10:25, og kildeverdien `CAR - 1` før `CAR / 76566` kl. 14:58. De ordinære sanntidsverdiene er `181` og `176`. Faktisk buss er ikke oppgitt.
+
+| Side | Tid | Aktivitet / linje og tur | Fra → til |
+| --- | --- | --- | --- |
+| 1 | 06:17–06:20 | Sign-on | Ikke oppgitt |
+| 1 | 06:25–06:35 | tom / 75468 | Garasje Gimle → Wi-To |
+| 1 | 06:35–06:55 | 40 / 1001 | Wi-To → Smørblomstvegen |
+| 1 | 06:55–07:45 | 40 / 1006 | Smørblomstvegen → Wi-To |
+| 1 | 07:55–08:15 | 40 / 1011 | Wi-To → Smørblomstvegen |
+| 1 | 08:15–09:05 | 40 / 1018 | Smørblomstvegen → Wi-To |
+| 1 | 09:05–09:07 | tom / 75467 | Wi-To → Tromsø Prostneset |
+| 1 | 09:18–09:34 | 21 / 1009 | Tromsø Prostneset → Forskningsparken |
+| 1 | 09:34–09:35 | tom / 76569 | Forskningsparken → Garasje Gimle |
+| 1 | 09:37–09:38 | Sign-off | Ikke oppgitt |
+| 1 | 09:38–09:53 | Paid meal after | Ikke oppgitt |
+| 1 | 09:53–10:23 | MealBreak | Ikke oppgitt |
+| 1 | 10:23–10:25 | Sign-on | Ikke oppgitt |
+| 1 | 10:30–10:40 | tom / 76570 | Garasje Gimle → Wi-To |
+| 1 | 10:40–11:00 | 40 / 1023 | Wi-To → Smørblomstvegen |
+| 1 | 11:00–11:50 | 40 / 1030 | Smørblomstvegen → Wi-To |
+| 1 | 12:10–12:32 | 40 / 1029 | Wi-To → Smørblomstvegen |
+| 1 | 12:32–13:22 | 40 / 1036 | Smørblomstvegen → Wi-To |
+| 1 | 13:40–14:02 | 40 / 1035 | Wi-To → Smørblomstvegen |
+| 1 | 14:02–14:56 | 40 / 1042 | Smørblomstvegen → Wi-To |
+| 1 | 14:58–14:58 | CAR / 76566 (overgang til pilotbil, avklart av prosjekteier) | Wi-To → Wi-To |
+| 1 | 14:58–15:12 | tom / 76567 (retur med pilotbil) | Wi-To → Garasje Gimle |
+| 1 | 15:13–15:15 | Sign-off | Ikke oppgitt |
+
+Kontrollpunkter: Alle 23 eksplisitte aktivitetsrader står på side 1. Side 2 gjentar skifthodet og har en tom Notes-del; den skal ikke lage et ekstra skift eller aktiviteter. Paid meal after og MealBreak kan vises som én matpause 09:38–10:23 (45 minutter). Vognløpsbyttet til `960176` skal følge aktivitetene etter andre Sign-on; det fastslår ikke et fysisk bussbytte. Turene på linje 40 kan passere Wi-To før den siste Wi-To-raden: for eksempel er slutt på tur `1006` **07:45**, ikke første passering **07:22**. Ikke avkort turene ved første forekomst av endestedets navn.
+
+**Avklart av prosjekteier 21. oktober 2026:** `Vogn CAR - 1` betegner pilotbil fra reguleringssted; betegnelsene **CAR - 1 til CAR - 4** kan brukes. I dette tilfellet gjelder det reguleringsstedet i Sentrum: En annen bussjåfør overtar bussen, og skiftets sjåfør kjører bilen den andre sjåføren kom med i retur. **Tomtur 76567 kl. 14:58–15:12 kjøres dermed med pilotbil, ikke buss.** `CAR / 76566` kl. 14:58–14:58 beholdes som egen kildepost for overgangen til pilotbil, med begge Wi-To-endepunktene; ikke fjern den som duplikat eller nullminutters post. Wi-To er stedsteksten i PDF-en; reguleringsstedet i Sentrum og bilbyttets betydning er prosjekteiers forklaring. Behold CAR-betegnelsen særskilt fra de ordinære 960-vognløpene og ikke utled faktisk buss eller en tresifret sanntidsverdi fra den. I assistenten skal det fremgå at returen er tomkjøring med pilotbil. Avklaringen inngår i fasiten som Jonas godkjente 21. oktober 2026; godkjenningen er ikke en bestått importtest.
+
+## Eksempel 9: fadder-/instruktørarbeid uten turer
+
+**Lagt til under testing av story 10.1, 21. oktober 2026.** Tillegg til forventningsgrunnlaget; ikke omfattet av godkjenningen 20. oktober eller de tidligere testresultatene for eksempel 1–7.
+
+Skift `90000009`, mandag 14. januar 2030. Skifthode 04:40–14:00, arbeidstid og utstrekk begge `9h20`. Tillegg: `25,00% 1h20`, `40,00% 0h00`. Ingen Vogn-oppføring, linjer eller turnumre. Faktisk buss er ikke oppgitt.
+
+| Side | Tid | Aktivitet / linje og tur | Fra → til |
+| --- | --- | --- | --- |
+| 1 | 04:40–04:43 | Sign-on | Ikke oppgitt |
+| 1 | 04:43–06:40 | Fadder | Ikke oppgitt |
+| 1 | 06:40–06:58 | Coffee | Ikke oppgitt |
+| 1 | 06:58–08:21 | Fadder | Ikke oppgitt |
+| 1 | 08:21–08:38 | Coffee | Ikke oppgitt |
+| 1 | 08:38–10:08 | Fadder | Ikke oppgitt |
+| 1 | 10:08–11:00 | Coffee | Ikke oppgitt |
+| 1 | 11:00–14:00 | Instruktør | Ikke oppgitt |
+
+Kontrollpunkter: Åtte eksplisitte aktiviteter, ingen ruteturer eller tomturer. Kildeetikettene Fadder og Instruktør skal bevares og ikke forsvinne fordi dokumentet mangler kjøring. Eventuell intern aktivitetstype må behandles eksplisitt; uavklart mapping er ikke dokumentasjon på at kilden er tom. Ikke utled konkrete turer, vognløp, buss, mentorfunksjoner eller nye roller i produktet fra disse etikettene. De tre Coffee-intervallene er separate kaffepauser på henholdsvis 18, 17 og 52 minutter. Ingen matpause eller Split break står i kilden. Ingen Sign-off står etter Instruktør; ikke legg til en slik rad. Siste eksplisitte aktivitet slutter kl. 14:00 og samsvarer med skifthodet.
+
 ## Bruk ved kontroll av import
 
 Sammenlign først skiftidentitet, datoer og hodeverdier. Kontroller deretter hver aktivitetsrad i rekkefølge, turenes linje/nummer, endepunkter, tider og vognoppføringer. Kontroller særlig spalte-/sideskift, kalenderdato etter midnatt og at ukjent informasjon forblir ukjent.
@@ -262,5 +327,7 @@ Sammenlign først skiftidentitet, datoer og hodeverdier. Kontroller deretter hve
 | 5 | 5 | Siste aktivitet 08:29, betalt skiftslutt 08:51 |
 | 6 | 16 | Delt skift; X-linjer; Travel to er 27 min tomkjøring Skoglyst → Breivika uten ventetid |
 | 7 | 21 | Spaltefortsettelse; tomtur 14; to Coffee-aktiviteter; bytte av vognløp |
+| 8 | 23 | Ny under testing av 10.1; vognløpsbytte; overgang til pilotbil og retur på tomtur 76567; gjentatt Wi-To; ekstra notatside |
+| 9 | 8 | Ny under testing av 10.1; Fadder/Instruktør uten turer; tre kaffepauser |
 
-Totalt **113 eksplisitte aktivitetsrader**, uten skifthoder, vognoppføringer, mellomliggende holdeplasser eller den forklarte betalte fritiden i eksempel 5. Bevaring av disse opplysningene er forventninger til importen; faktisk resultat og eventuell klassifisering som fullstendig/delvis/ikke støttet må registreres når importen prøves.
+Totalt **144 eksplisitte aktivitetsrader** for eksempel 1–9 (113 i det opprinnelige settet 1–7 og 31 i tillegget 8–9), uten skifthoder, vognoppføringer, mellomliggende holdeplasser eller den forklarte betalte fritiden i eksempel 5. Bevaring av disse opplysningene er forventninger til importen; faktisk resultat og eventuell klassifisering som fullstendig/delvis/ikke støttet må registreres når importen prøves.

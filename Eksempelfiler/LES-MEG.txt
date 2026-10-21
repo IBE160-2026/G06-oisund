@@ -1,9 +1,15 @@
-﻿ANONYMISERTE SKIFTEKSEMPLER - TESTDATA
+ANONYMISERTE SKIFTEKSEMPLER - TESTDATA
 
-Sju PDF-er, totalt ti sider.
+Ni PDF-er, totalt 13 sider. Eksempel 1–7 utgjør det opprinnelige settet
+med ti sider. Eksempel 8–9 ble lagt til under testing av story 10.1
+21. oktober 2026, med henholdsvis to sider og én side.
+Fasiten for eksempel 1–7 ble godkjent av Jonas Øisund 20. oktober 2026.
+Fasiten for eksempel 8–9 ble godkjent av Jonas Øisund 21. oktober 2026,
+inkludert avklaringen om pilotbil. Tidligere importtestresultater gjelder
+fortsatt bare eksempel 1–7; godkjenning er ikke en ny importtest.
 
 Navn og ansattnummer er erstattet med Testsjåfør (00000).
-Skift-ID er erstattet med 90000001 til 90000007.
+Skift-ID er erstattet med 90000001 til 90000009.
 Skiftdatoene er fiktive datoer i januar 2030. Opprinnelig ukedag er bevart.
 Utskriftens dato og klokkeslett er fjernet. PDF-metadata er fjernet.
 Erstattet tekst er fjernet fra PDF-innholdet, ikke bare dekket til.
@@ -15,5 +21,7 @@ Dette er bearbeidede historiske skift, ikke gjeldende rute- eller arbeidsplaner.
 Ingen kildedata er rettet. Se README.md for fasit med aktivitetsoversikt,
 kontrollpunkter og forklaringer fra prosjekteier om betalt fritid i eksempel 5
 og Travel to som tomkjøring i eksempel 6, samt regler for pauser og vognløp.
+Eksempel 8 har eieravklart pilotbil (CAR - 1 til CAR - 4); tomtur 76567
+er retur med pilotbil etter at en annen sjåfør overtar bussen.
 Fjerning av direkte personkjennetegn garanterer ikke at en person med tilgang
 til de opprinnelige arbeidsplanene ikke kan kjenne igjen et skift.
