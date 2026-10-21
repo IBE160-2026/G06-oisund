@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 10-19-2026 14:35
-last_updated: 10-21-2026
+last_updated: 10-21-2026 23:27
 project: IBE160
 project_key: NOKEY
 tracking_system: file-system
@@ -40,7 +40,7 @@ development_status:
   9-2-run-a-persisted-fictional-day-locally: done
   9-3-access-private-work: done
   9-4-save-and-reopen-a-draft: done # Owner approved after walkthrough, including bus/reset/delete and friendly time entry.
-  epic-9-retrospective: optional
+  epic-9-retrospective: done
 
   epic-10: in-progress
   10-1-review-a-text-pdf: done # Owner approved walkthrough 2026-10-21; accepted false t-marker warning in example 8.
@@ -66,3 +66,41 @@ development_status:
   12-4-verify-the-complete-user-flow: backlog
   12-5-deliver-a-reproducible-submission: backlog
   epic-12-retrospective: optional
+action_items:
+  - id: "epic-9-retro-item-1-bind-editor-identity"
+    epic: 9
+    action: "Bind private editor mutations to the expected account/session and invalidate
+      other windows on identity change; verify the two-visible-window unsaved-draft
+      scenario (F1, E9-A1)."
+    owner: "Developer"
+    status: open
+    ref: "D:/IBE160/_bmad-output/implementation-artifacts/epic-9-retro-2026-10-21.md"
+  - id: "epic-9-retro-item-2-atomic-operation-expiry"
+    epic: 9
+    action: "Require a live creation operation at atomic acceptance and verify expiry
+      between validation and creation (F3, E9-A2)."
+    owner: "Developer"
+    status: open
+    ref: "D:/IBE160/_bmad-output/implementation-artifacts/epic-9-retro-2026-10-21.md"
+  - id: "epic-9-retro-item-3-discover-all-live-drafts"
+    epic: 9
+    action: "Add pagination or a matching live-draft capacity contract; verify discoverability
+      at 201 drafts (F2, E9-A3)."
+    owner: "Developer"
+    status: open
+    ref: "D:/IBE160/_bmad-output/implementation-artifacts/epic-9-retro-2026-10-21.md"
+  - id: "epic-9-retro-item-4-operation-admission-tests"
+    epic: 9
+    action: "Verify the 200 pending-operation boundary, rejection without mutation,
+      and exclusion of accepted/expired operations (F4, E9-A4)."
+    owner: "Developer / QA"
+    status: open
+    ref: "D:/IBE160/_bmad-output/implementation-artifacts/epic-9-retro-2026-10-21.md"
+  - id: "epic-9-retro-item-5-cross-story-verification"
+    epic: 9
+    action: "Include story IDs in amendment commit subjects, keep restart/browser
+      verification sequential, and inspect cross-window identity and transaction boundaries
+      before next-story acceptance (E9-A5)."
+    owner: "Jonas / developer"
+    status: open
+    ref: "D:/IBE160/_bmad-output/implementation-artifacts/epic-9-retro-2026-10-21.md"

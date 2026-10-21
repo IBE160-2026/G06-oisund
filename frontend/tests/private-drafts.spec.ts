@@ -346,6 +346,7 @@ test('a delayed earlier list cannot replace the post-save revision list', async 
   await page.getByLabel('Tjenestedato', { exact: true }).fill('2026-11-01');
   await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
   await expect(status(page)).toHaveText('Lagret. Versjon 1.');
+  await expect(page.getByRole('button', { name: 'Åpne 2026-11-01 · versjon 1', exact: true })).toBeVisible();
   let release!: () => void, entered!: () => void;
   const gate = new Promise<void>(resolve => { release = resolve; });
   const waiting = new Promise<void>(resolve => { entered = resolve; });
@@ -686,6 +687,8 @@ test('initial failed lists and later failures never claim an acknowledged empty 
   await page.getByLabel('Tjenestedato', { exact: true }).fill('2026-11-04');
   await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
   await expect(status(page)).toHaveText('Lagret. Versjon 1.');
+  // The acknowledgement precedes the separately revalidated list refresh.
+  await expect(page.getByRole('button', { name: 'Åpne 2026-11-04 · versjon 1', exact: true })).toBeVisible();
   await page.route('**:8001/drafts', route => route.abort());
   await page.getByRole('button', { name: 'Oppdater listen' }).click();
   await expect(page.getByText('Listen er utilgjengelig.', { exact: false })).toBeVisible();
