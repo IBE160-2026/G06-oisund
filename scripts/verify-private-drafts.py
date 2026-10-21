@@ -58,19 +58,22 @@ try:
     run(OPERATIONAL + ['stop', 'private-api'])
     run(PRIVATE + ['up', '-d', '--build', '--wait'])
     python('')
-    print(run(PRIVATE + ['exec', '-T', '-e', 'PRIVATE_TEST_PROJECT=' + PROJECT, 'private-api', 'python', '-m', 'pytest', '-q', '--tb=short', 'tests/test_private_access.py', 'tests/test_private_drafts.py']), flush=True)
+    print(run(PRIVATE + ['run', '--rm', '--no-deps', '-v', str(ROOT / 'Eksempelfiler') + ':/fixtures:ro', '-e', 'PRIVATE_TEST_PROJECT=' + PROJECT, '-e', 'PRIVATE_TEST_API=http://private-api:8000', 'private-api', 'python', '-m', 'pytest', '-q', '--tb=short', 'tests/test_private_access.py', 'tests/test_private_drafts.py', 'tests/test_private_import.py', 'tests/test_pdf_import.py']), flush=True)
     username = 'synthetic-draft-restart-' + uuid4().hex
     password = secrets.token_urlsafe(24)
     python(f'from app.auth import provision\nprovision({username!r}, {password!r})\n')
     session = request('/auth/login', {'username': username, 'password': password})
     operation = request('/draft-operations', {})['operation_id']
     body = {'operation_id': operation, 'expected_revision': 0, 'draft': {'service_date': '2026-10-24', 'vehicle_duty': '0007', 'physical_bus': 'Bus-0012', 'activities': [{'id': str(uuid4()), 'raw_code': 'Unknown', 'source_start': '25:10', 'start': '2026-10-25T01:10+02:00', 'end': '2026-10-25T01:10+02:00'}]}}
+    imported = json.loads(python('import sys\nsys.path.insert(0, "/app/tests")\nfrom test_pdf_import import synthetic_text_pdf\nfrom app.pdf_import import parse_document\nfrom app.private_import import interpret\nprint(interpret(parse_document(synthetic_text_pdf())).model_dump_json())\n'))
+    body['draft'] = {**imported, 'vehicle_duty': '0007', 'physical_bus': 'Bus-0012'}
     original = request('/drafts', body)
     assert original['draft']['realtime_duty'] == '007' and original['draft']['physical_bus'] == 'Bus-0012'
     run(['docker', 'compose', '-p', 'ibe160-fictional-assessment', 'up', '-d', '--build', '--wait', 'api'])
     denied('/drafts', 404, 8000)
     denied('/drafts/' + original['id'], 404, 8000)
     denied('/draft-operations/' + operation, 404, 8000)
+    denied('/imports/pdf', 404, 8000)
     expired_operation = request('/draft-operations', {})['operation_id']
     python(f"with database() as conn:\n conn.execute('UPDATE draft_operations SET expires_at=clock_timestamp() WHERE id=%s', ({expired_operation!r},))\n")
     for _ in range(2):

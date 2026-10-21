@@ -19,7 +19,7 @@ from app import auth
 from app.private_storage import cleanup, database, migrate
 
 pytestmark = pytest.mark.skipif(os.environ.get('APP_MODE') != 'private-local', reason='Separate private runtime required')
-URL = 'http://127.0.0.1:8000'
+URL = os.environ.get('PRIVATE_TEST_API', 'http://127.0.0.1:8000')
 ORIGIN = 'http://127.0.0.1:5173'
 
 

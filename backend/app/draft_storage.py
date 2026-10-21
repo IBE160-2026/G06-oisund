@@ -108,6 +108,7 @@ def lookup(request, identifier):
 
 def save(request, identifier, body):
     payload = body.model_dump(mode='json')
+    payload['draft'] = normalize_content(payload['draft'])
     digest = fingerprint(identifier, payload)
     with database() as conn:
         owner = authorized(conn, request)

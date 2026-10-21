@@ -1,0 +1,393 @@
+﻿{
+    "approval":  {
+                     "date":  "2026-10-21",
+                     "source":  "Docs/evidence/10-1-additional-fixtures.md",
+                     "transcription":  "Independent approved README source tables; no parser output used. CAR is a vehicle designation/transfer, not a route line."
+                 },
+    "fixtures":  [
+                     {
+                         "file":  "Eksempel-8-anonymisert.pdf",
+                         "sha256":  "e44612caac1b676f1ea4d9bf88f8378960a0fb097ffe517a9e9d442f1edfa03d",
+                         "activities":  [
+                                            {
+                                                "start":  "06:17",
+                                                "end":  "06:20",
+                                                "label":  "Sign-on",
+                                                "line":  null,
+                                                "trip_id":  null,
+                                                "origin":  null,
+                                                "destination":  null,
+                                                "pages":  [
+                                                              1
+                                                          ]
+                                            },
+                                            {
+                                                "start":  "06:25",
+                                                "end":  "06:35",
+                                                "label":  "tom",
+                                                "line":  null,
+                                                "trip_id":  "75468",
+                                                "origin":  "Garasje Gimle",
+                                                "destination":  "Wi-To",
+                                                "pages":  [
+                                                              1
+                                                          ]
+                                            },
+                                            {
+                                                "start":  "06:35",
+                                                "end":  "06:55",
+                                                "label":  "40",
+                                                "line":  "40",
+                                                "trip_id":  "1001",
+                                                "origin":  "Wi-To",
+                                                "destination":  "Smørblomstvegen",
+                                                "pages":  [
+                                                              1
+                                                          ]
+                                            },
+                                            {
+                                                "start":  "06:55",
+                                                "end":  "07:45",
+                                                "label":  "40",
+                                                "line":  "40",
+                                                "trip_id":  "1006",
+                                                "origin":  "Smørblomstvegen",
+                                                "destination":  "Wi-To",
+                                                "pages":  [
+                                                              1
+                                                          ]
+                                            },
+                                            {
+                                                "start":  "07:55",
+                                                "end":  "08:15",
+                                                "label":  "40",
+                                                "line":  "40",
+                                                "trip_id":  "1011",
+                                                "origin":  "Wi-To",
+                                                "destination":  "Smørblomstvegen",
+                                                "pages":  [
+                                                              1
+                                                          ]
+                                            },
+                                            {
+                                                "start":  "08:15",
+                                                "end":  "09:05",
+                                                "label":  "40",
+                                                "line":  "40",
+                                                "trip_id":  "1018",
+                                                "origin":  "Smørblomstvegen",
+                                                "destination":  "Wi-To",
+                                                "pages":  [
+                                                              1
+                                                          ]
+                                            },
+                                            {
+                                                "start":  "09:05",
+                                                "end":  "09:07",
+                                                "label":  "tom",
+                                                "line":  null,
+                                                "trip_id":  "75467",
+                                                "origin":  "Wi-To",
+                                                "destination":  "Tromsø Prostneset",
+                                                "pages":  [
+                                                              1
+                                                          ]
+                                            },
+                                            {
+                                                "start":  "09:18",
+                                                "end":  "09:34",
+                                                "label":  "21",
+                                                "line":  "21",
+                                                "trip_id":  "1009",
+                                                "origin":  "Tromsø Prostneset",
+                                                "destination":  "Forskningsparken",
+                                                "pages":  [
+                                                              1
+                                                          ]
+                                            },
+                                            {
+                                                "start":  "09:34",
+                                                "end":  "09:35",
+                                                "label":  "tom",
+                                                "line":  null,
+                                                "trip_id":  "76569",
+                                                "origin":  "Forskningsparken",
+                                                "destination":  "Garasje Gimle",
+                                                "pages":  [
+                                                              1
+                                                          ]
+                                            },
+                                            {
+                                                "start":  "09:37",
+                                                "end":  "09:38",
+                                                "label":  "Sign-off",
+                                                "line":  null,
+                                                "trip_id":  null,
+                                                "origin":  null,
+                                                "destination":  null,
+                                                "pages":  [
+                                                              1
+                                                          ]
+                                            },
+                                            {
+                                                "start":  "09:38",
+                                                "end":  "09:53",
+                                                "label":  "Paid meal after",
+                                                "line":  null,
+                                                "trip_id":  null,
+                                                "origin":  null,
+                                                "destination":  null,
+                                                "pages":  [
+                                                              1
+                                                          ]
+                                            },
+                                            {
+                                                "start":  "09:53",
+                                                "end":  "10:23",
+                                                "label":  "MealBreak",
+                                                "line":  null,
+                                                "trip_id":  null,
+                                                "origin":  null,
+                                                "destination":  null,
+                                                "pages":  [
+                                                              1
+                                                          ]
+                                            },
+                                            {
+                                                "start":  "10:23",
+                                                "end":  "10:25",
+                                                "label":  "Sign-on",
+                                                "line":  null,
+                                                "trip_id":  null,
+                                                "origin":  null,
+                                                "destination":  null,
+                                                "pages":  [
+                                                              1
+                                                          ]
+                                            },
+                                            {
+                                                "start":  "10:30",
+                                                "end":  "10:40",
+                                                "label":  "tom",
+                                                "line":  null,
+                                                "trip_id":  "76570",
+                                                "origin":  "Garasje Gimle",
+                                                "destination":  "Wi-To",
+                                                "pages":  [
+                                                              1
+                                                          ]
+                                            },
+                                            {
+                                                "start":  "10:40",
+                                                "end":  "11:00",
+                                                "label":  "40",
+                                                "line":  "40",
+                                                "trip_id":  "1023",
+                                                "origin":  "Wi-To",
+                                                "destination":  "Smørblomstvegen",
+                                                "pages":  [
+                                                              1
+                                                          ]
+                                            },
+                                            {
+                                                "start":  "11:00",
+                                                "end":  "11:50",
+                                                "label":  "40",
+                                                "line":  "40",
+                                                "trip_id":  "1030",
+                                                "origin":  "Smørblomstvegen",
+                                                "destination":  "Wi-To",
+                                                "pages":  [
+                                                              1
+                                                          ]
+                                            },
+                                            {
+                                                "start":  "12:10",
+                                                "end":  "12:32",
+                                                "label":  "40",
+                                                "line":  "40",
+                                                "trip_id":  "1029",
+                                                "origin":  "Wi-To",
+                                                "destination":  "Smørblomstvegen",
+                                                "pages":  [
+                                                              1
+                                                          ]
+                                            },
+                                            {
+                                                "start":  "12:32",
+                                                "end":  "13:22",
+                                                "label":  "40",
+                                                "line":  "40",
+                                                "trip_id":  "1036",
+                                                "origin":  "Smørblomstvegen",
+                                                "destination":  "Wi-To",
+                                                "pages":  [
+                                                              1
+                                                          ]
+                                            },
+                                            {
+                                                "start":  "13:40",
+                                                "end":  "14:02",
+                                                "label":  "40",
+                                                "line":  "40",
+                                                "trip_id":  "1035",
+                                                "origin":  "Wi-To",
+                                                "destination":  "Smørblomstvegen",
+                                                "pages":  [
+                                                              1
+                                                          ]
+                                            },
+                                            {
+                                                "start":  "14:02",
+                                                "end":  "14:56",
+                                                "label":  "40",
+                                                "line":  "40",
+                                                "trip_id":  "1042",
+                                                "origin":  "Smørblomstvegen",
+                                                "destination":  "Wi-To",
+                                                "pages":  [
+                                                              1
+                                                          ]
+                                            },
+                                            {
+                                                "start":  "14:58",
+                                                "end":  "14:58",
+                                                "label":  "CAR",
+                                                "line":  null,
+                                                "trip_id":  "76566",
+                                                "origin":  "Wi-To",
+                                                "destination":  "Wi-To",
+                                                "pages":  [
+                                                              1
+                                                          ]
+                                            },
+                                            {
+                                                "start":  "14:58",
+                                                "end":  "15:12",
+                                                "label":  "tom",
+                                                "line":  null,
+                                                "trip_id":  "76567",
+                                                "origin":  "Wi-To",
+                                                "destination":  "Garasje Gimle",
+                                                "pages":  [
+                                                              1
+                                                          ]
+                                            },
+                                            {
+                                                "start":  "15:13",
+                                                "end":  "15:15",
+                                                "label":  "Sign-off",
+                                                "line":  null,
+                                                "trip_id":  null,
+                                                "origin":  null,
+                                                "destination":  null,
+                                                "pages":  [
+                                                              1
+                                                          ]
+                                            }
+                                        ]
+                     },
+                     {
+                         "file":  "Eksempel-9-anonymisert.pdf",
+                         "sha256":  "65b50ecb01c5372a17aa2a2e7db9d3bda88767db908448c3ba70cf540d666b18",
+                         "activities":  [
+                                            {
+                                                "start":  "04:40",
+                                                "end":  "04:43",
+                                                "label":  "Sign-on",
+                                                "line":  null,
+                                                "trip_id":  null,
+                                                "origin":  null,
+                                                "destination":  null,
+                                                "pages":  [
+                                                              1
+                                                          ]
+                                            },
+                                            {
+                                                "start":  "04:43",
+                                                "end":  "06:40",
+                                                "label":  "Fadder",
+                                                "line":  null,
+                                                "trip_id":  null,
+                                                "origin":  null,
+                                                "destination":  null,
+                                                "pages":  [
+                                                              1
+                                                          ]
+                                            },
+                                            {
+                                                "start":  "06:40",
+                                                "end":  "06:58",
+                                                "label":  "Coffee",
+                                                "line":  null,
+                                                "trip_id":  null,
+                                                "origin":  null,
+                                                "destination":  null,
+                                                "pages":  [
+                                                              1
+                                                          ]
+                                            },
+                                            {
+                                                "start":  "06:58",
+                                                "end":  "08:21",
+                                                "label":  "Fadder",
+                                                "line":  null,
+                                                "trip_id":  null,
+                                                "origin":  null,
+                                                "destination":  null,
+                                                "pages":  [
+                                                              1
+                                                          ]
+                                            },
+                                            {
+                                                "start":  "08:21",
+                                                "end":  "08:38",
+                                                "label":  "Coffee",
+                                                "line":  null,
+                                                "trip_id":  null,
+                                                "origin":  null,
+                                                "destination":  null,
+                                                "pages":  [
+                                                              1
+                                                          ]
+                                            },
+                                            {
+                                                "start":  "08:38",
+                                                "end":  "10:08",
+                                                "label":  "Fadder",
+                                                "line":  null,
+                                                "trip_id":  null,
+                                                "origin":  null,
+                                                "destination":  null,
+                                                "pages":  [
+                                                              1
+                                                          ]
+                                            },
+                                            {
+                                                "start":  "10:08",
+                                                "end":  "11:00",
+                                                "label":  "Coffee",
+                                                "line":  null,
+                                                "trip_id":  null,
+                                                "origin":  null,
+                                                "destination":  null,
+                                                "pages":  [
+                                                              1
+                                                          ]
+                                            },
+                                            {
+                                                "start":  "11:00",
+                                                "end":  "14:00",
+                                                "label":  "Instruktør",
+                                                "line":  null,
+                                                "trip_id":  null,
+                                                "origin":  null,
+                                                "destination":  null,
+                                                "pages":  [
+                                                              1
+                                                          ]
+                                            }
+                                        ]
+                     }
+                 ]
+}

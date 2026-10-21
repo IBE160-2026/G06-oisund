@@ -165,6 +165,83 @@ def test_nulls_zero_interval_request_bounds(client, users):
     assert client.post('/auth/login', headers=headers(client), content=b'x' * 4097).status_code == 413
 
 
+def test_transient_import_save_reopen_replay_and_access(client, users):
+    from pathlib import Path
+    from app.qualify_imports import ORACLE
+    import json
+    expected = json.loads(ORACLE.read_text())['fixtures']
+    assert client.post('/imports/pdf', headers={**headers(client), 'Content-Type': 'application/pdf'}, content=b'%PDF-').status_code == 401
+    assert login(client, users).status_code == 200
+    for fixture in expected:
+        data = (Path('/fixtures') / fixture['file']).read_bytes()
+        assert client.post('/imports/pdf', content=data).status_code == 403
+        result = client.post('/imports/pdf', headers={**headers(client), 'Content-Type': 'application/pdf'}, content=data)
+        assert result.status_code == 200 and result.headers['cache-control'] == 'no-store'
+        facts = result.json()
+        assert facts['physical_bus'] is None and len(facts['activities']) == len(fixture['activities'])
+        assert client.get('/drafts').json() == {'drafts': []}
+        saved, body = save(client, facts)
+        assert saved.status_code == 200 and saved.json()['draft'] == facts
+        record = saved.json()
+        assert client.get('/drafts/' + record['id']).json() == record
+        assert client.post('/drafts', headers=headers(client), json=body).json() == record
+        assert client.get('/draft-operations/' + body['operation_id']).json()['result'] == record
+        changed = {**facts, 'physical_bus': 'Manual-001'}
+        updated, _ = save(client, changed, record['id'], 1)
+        assert updated.json()['draft']['import_metadata'] == facts['import_metadata']
+        assert updated.json()['expires_at'] == record['expires_at']
+        with database() as conn:
+            conn.execute('DELETE FROM drafts WHERE id=%s', (record['id'],))
+    assert client.post('/imports/pdf', headers=headers(client), content=b'%PDF-').status_code == 415
+    assert client.post('/imports/pdf', headers={**headers(client), 'Content-Type': 'application/pdf'}, content=b'x' * (10 * 1024 * 1024 + 1)).status_code == 413
+    with database() as conn:
+        conn.execute("UPDATE sessions SET created_at=statement_timestamp()-interval '14 days', expires_at=statement_timestamp() WHERE owner=%s", (users[1][0],))
+    assert client.post('/imports/pdf', headers={**headers(client), 'Content-Type': 'application/pdf'}, content=b'%PDF-').status_code == 401
+
+
+@pytest.mark.parametrize('number', [8, 9])
+def test_additional_import_save_reopen_replay(client, users, number):
+    from pathlib import Path
+    from test_private_import import assert_additional
+    assert login(client, users).status_code == 200
+    data = Path(f'/fixtures/Eksempel-{number}-anonymisert.pdf').read_bytes()
+    result = client.post('/imports/pdf', headers={**headers(client), 'Content-Type': 'application/pdf'}, content=data)
+    assert result.status_code == 200
+    facts = result.json()
+    assert_additional(facts, number)
+    assert client.get('/drafts').json() == {'drafts': []}
+    saved, body = save(client, facts)
+    assert saved.status_code == 200
+    record = saved.json()
+    assert record['draft'] == facts
+    assert client.get('/drafts/' + record['id']).json() == record
+    assert client.post('/drafts', headers=headers(client), json=body).json() == record
+    assert client.get('/draft-operations/' + body['operation_id']).json()['result'] == record
+    assert_additional(record['draft'], number)
+
+
+def test_duty_changes_roundtrip_replay_and_removal(client, users):
+    assert login(client, users).status_code == 200
+    facts = content()
+    second = {**facts['activities'][0], 'id': str(uuid4())}
+    third = {**second, 'id': str(uuid4())}
+    facts['activities'] += [second, third]
+    facts['vehicle_duty'] = '960181'
+    facts['realtime_duty'] = '181'
+    facts['vehicle_duty_changes'] = [{'from_activity_id': second['id'], 'vehicle_duty': '960176', 'realtime_duty': '176'}]
+    saved, body = save(client, facts)
+    assert saved.status_code == 200
+    record = saved.json()
+    assert record['draft'] == facts
+    assert client.get('/drafts/' + record['id']).json() == record
+    assert client.post('/drafts', headers=headers(client), json=body).json() == record
+    facts['vehicle_duty_changes'] = []
+    cleared, _ = save(client, facts, record['id'], 1)
+    assert cleared.status_code == 200 and cleared.json()['draft']['vehicle_duty_changes'] == []
+    assert cleared.json()['expires_at'] == record['expires_at']
+    assert client.get('/drafts/' + record['id']).json() == cleared.json()
+
+
 def wait_for_blocker(identifier):
     deadline = time.monotonic() + 5
     with database() as observer:

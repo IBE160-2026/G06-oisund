@@ -11,8 +11,9 @@ from pydantic import BaseModel, ConfigDict, Field
 
 from . import auth
 from . import draft_storage
+from . import private_import
 from .draft_time import LocalTime, TimeResolution, resolve as resolve_time
-from .draft_domain import DeleteDraft, DeletedDraft, DraftList, DraftRecord, IssueOperation, IssuedOperation, OperationResult, SaveDraft
+from .draft_domain import DeleteDraft, DeletedDraft, DraftContent, DraftList, DraftRecord, IssueOperation, IssuedOperation, OperationResult, SaveDraft
 from .private_storage import cleanup, database
 
 
@@ -33,6 +34,7 @@ async def lifespan(app):
     try:
         yield
     finally:
+        await private_import.shutdown()
         task.cancel()
         with suppress(asyncio.CancelledError):
             await task
@@ -47,6 +49,13 @@ app.add_middleware(CORSMiddleware, allow_origins=[auth.configuration()], allow_c
 async def boundary(request, call_next):
     try:
         if request.method not in {'GET', 'HEAD', 'OPTIONS'}:
+            await asyncio.to_thread(auth.check_mutation, request)
+            if request.url.path == '/imports/pdf':
+                response = await call_next(request)
+                response.headers['Cache-Control'] = 'no-store'
+                response.headers['Pragma'] = 'no-cache'
+                response.headers['X-Content-Type-Options'] = 'nosniff'
+                return response
             # Consume incrementally before JSON decoding; Content-Length is untrusted.
             body = bytearray()
             async for chunk in request.stream():
@@ -55,7 +64,6 @@ async def boundary(request, call_next):
                     raise HTTPException(413, 'Forespørselen er for stor.')
                 body.extend(chunk)
             request._body = bytes(body)
-            await asyncio.to_thread(auth.check_mutation, request)
         response = await call_next(request)
     except HTTPException as error:
         response = JSONResponse({'detail': error.detail}, status_code=error.status_code, headers=error.headers)
@@ -137,6 +145,11 @@ def logout(request: Request, response: Response):
 @app.get('/drafts', response_model=DraftList)
 def drafts(request: Request):
     return draft_storage.listing(request)
+
+
+@app.post('/imports/pdf', response_model=DraftContent)
+async def import_pdf(request: Request):
+    return await private_import.preview(request)
 
 
 @app.get('/drafts/{identifier}', response_model=DraftRecord)

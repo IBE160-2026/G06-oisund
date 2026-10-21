@@ -58,7 +58,10 @@ def extracted():
 
 def test_oracle_independence_integrity_and_counts():
     assert EXPECTED['approval']['date']=='2026-10-20'
-    assert hashlib.sha256((FIXTURES/'README.md').read_bytes()).hexdigest()==EXPECTED['approval']['source_sha256']
+    # The live README now also contains the separately approved examples 8/9.
+    # Preserve the exact historical source rather than changing its approval hash.
+    approved_source = ORACLE.parent / 'import-source-2026-10-20.md'
+    assert hashlib.sha256(approved_source.read_bytes()).hexdigest()==EXPECTED['approval']['source_sha256']
     assert [len(f['activities']) for f in EXPECTED['fixtures']]==[33,16,6,16,5,16,21]
     assert sum(f['expected_counts']['trips'] for f in EXPECTED['fixtures'])==46
     assert sum(f['expected_counts']['deadheads'] for f in EXPECTED['fixtures'])==31

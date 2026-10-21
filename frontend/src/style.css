@@ -29,3 +29,17 @@ pre { white-space: pre-wrap; overflow-wrap: anywhere; background: #edf3f7; paddi
 select { font: inherit; width: 100%; min-width: 0; color: #162c3c; background: white; border: 2px solid #536775; padding: .65rem; border-radius: .3rem; }
 select:focus-visible, h2:focus-visible { outline: 3px solid #000; outline-offset: 4px; }
 @media (max-width: 700px) { .draft-grid { grid-template-columns: 1fr; } }
+.import-facts { margin: 1.5rem 0; padding: 1rem; border: 2px solid currentColor; overflow-wrap: anywhere; }
+.import-columns, .source-header { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.import-facts li { padding: .5rem 0; }
+.import-facts dl { min-width: 0; margin: .5rem 0; }
+.import-facts dt { font-weight: bold; }
+.import-facts dd { margin: 0 0 .6rem; }
+h3:focus-visible { outline: 3px solid #000; outline-offset: 4px; }
+@media (max-width: 800px) { .import-columns, .source-header { grid-template-columns: 1fr; } }
+.source-disclosure { margin: 1rem 0; }
+.source-disclosure summary { cursor: pointer; font-weight: 700; padding: .7rem; border: 1px solid #536775; }
+.import-warning { background: #fff5d6; color: #422e00; border-left: 4px solid #8a6100; padding: .7rem; }
+.import-warning li { margin: .3rem 0; padding: .3rem; }
+.import-warning button { margin-left: .5rem; padding: .35rem .6rem; }
+summary:focus-visible, fieldset:focus-visible { outline: 3px solid #000; outline-offset: 4px; }

@@ -93,18 +93,23 @@ def parse_document(data: bytes) -> ImportDraft:
                     if re.fullmatch(r'[A-Za-z]',line):
                         annotations.append(dict(value=line,meaning=None,provenance=provenance))
                         continue
-                    duty = re.fullmatch(r'Vogn\s+(\S+)',line)
+                    duty = re.fullmatch(r'Vogn\s+(CAR\s*-\s*[1-4]|\S+)',line)
                     trip = re.fullmatch(r'(\S+)\s*/\s*(\S+)\s+(.+?)\s+('+CLOCK+r')',line)
-                    activity = re.fullmatch(r'(Sign-on|Sign-off|Split break|Coffee|MealBreak|Paid meal before|Paid meal after|Travel to|Travel from)\s+('+CLOCK+r')(?:\s+('+CLOCK+r'))?',line)
+                    activity = re.fullmatch(r'(Sign-on|Sign-off|Split break|Coffee|MealBreak|Paid meal before|Paid meal after|Travel to|Travel from|Fadder|Instruktør)\s+('+CLOCK+r')(?:\s+('+CLOCK+r'))?',line)
                     stop = re.fullmatch(r'(?:\d+\.\d+\s+)?(.+?)\s+('+CLOCK+r')',line)
                     if duty:
                         source_rows.append(dict(location=provenance,fields={'duty':duty[1]}))
-                        duties.append(dict(value=duty[1],suffix=duty[1][-3:],after_activity=len(activities),provenance=provenance))
+                        suffix = re.search(r'([0-9]{3})$', duty[1])
+                        if not suffix and not re.fullmatch(r'CAR(?:\s*-\s*[1-4])?', duty[1]):
+                            unresolved.append(dict(code='unrecognized_source_line',provenance=provenance))
+                        duties.append(dict(value=duty[1],suffix=suffix[1] if suffix else None,after_activity=len(activities),provenance=provenance))
                         current = None
                     elif trip or activity:
                         if trip:
                             label, trip_id, origin, start_clock = trip.groups()
-                            item=dict(label=label,kind='deadhead' if label=='tom' else 'trip',line=None if label=='tom' else label,
+                            car = bool(duties and re.fullmatch(r'CAR(?:\s*-\s*[1-4])?', duties[-1]['value']))
+                            kind = 'deadhead_car' if label == 'tom' and car else 'deadhead' if label == 'tom' else 'CAR' if label == 'CAR' else 'trip'
+                            item=dict(label=label,kind=kind,line=None if label in ('tom', 'CAR') else label,
                                       trip_id=trip_id,origin=origin,destination=None,start=clock(start_clock),end=None)
                         else:
                             label, a, b = activity.groups()
@@ -151,14 +156,14 @@ def parse_document(data: bytes) -> ImportDraft:
                 item['provenance'][field+suffix]=calendar_provenance(f'activities.{item["source_order"]}.{field}')
             if item[field] is None or instant is None:
                 unresolved.append(dict(code='unresolved_time',activity=item['source_order'],field=field))
-        if item['kind'] in ('trip','deadhead') and item['destination'] is None:
+        if item['kind'] in ('trip','deadhead','deadhead_car','CAR') and item['destination'] is None:
             unresolved.append(dict(code='missing_endpoint',activity=item['source_order']))
         if item['start_instant'] and item['end_instant'] and item['end_instant']<item['start_instant']:
             unresolved.append(dict(code='reversed_activity_time',activity=item['source_order']))
     return dict(header=header,activities=activities,duties=duties,physical_bus=None,timezone='Europe/Oslo',
                 provenance={'header':{key:calendar_provenance('header.'+('end' if key in ('end_day','end_instant') else 'start')) if key in ('start_instant','end_instant','end_day') else {'derived_from':['document.pages']} if key=='pages' else {'page':1,'region':'header','field':key} for key in header},
                             'header_evidence':header_evidence,'source_rows':source_rows,'calendar':'derived from service date, header start and stated Utstrekk',
-                            'duty_suffix':'derived final three characters; owner-approved meaning'},
+                            'duty_suffix':'derived final three numeric characters when present; owner-approved meaning'},
                 unresolved=unresolved,annotations=annotations,pause_groups=group_pauses(activities))
 
 

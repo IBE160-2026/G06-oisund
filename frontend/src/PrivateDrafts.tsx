@@ -1,13 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
 import { PrivateTimeInput } from './PrivateTimeInput';
+import { PrivateImport, SourceFacts, validMetadata, type ImportMetadata } from './PrivateImport';
+import { dutyChanges, effectiveDuty, dutySuffix, importIssues, type DutyChange } from './draftInterpretation';
 
 type Activity = { id: string } & Record<string, string | null>;
-type Content = { service_date: string | null; vehicle_duty: string | null; realtime_duty: string | null; physical_bus: string | null; activities: Activity[] };
+export type Content = { service_date: string | null; vehicle_duty: string | null; realtime_duty: string | null; physical_bus: string | null; activities: Activity[]; import_metadata?: ImportMetadata; vehicle_duty_changes?: DutyChange[] };
 type Saved = { id: string; created_at: string; expires_at: string; revision: number; draft: Content };
 type Summary = Pick<Saved, 'id' | 'expires_at' | 'revision'> & { service_date: string | null };
 type Pending = { path: string; body: { operation_id: string; expected_revision: number; draft: Content } };
 type PendingDelete = { id: string; body: { operation_id: string; expected_revision: number } };
-type Props = { request: (path: string) => Promise<any>; mutation: (path: string, body: object) => Promise<any>; dirtyChanged: (dirty: boolean) => void; expired: () => void; suspended: boolean };
+type Props = { upload: (file: File, signal: AbortSignal) => Promise<any>; request: (path: string) => Promise<any>; mutation: (path: string, body: object) => Promise<any>; dirtyChanged: (dirty: boolean) => void; expired: () => void; suspended: boolean };
 const empty = (): Content => ({ service_date: null, vehicle_duty: null, realtime_duty: null, physical_bus: null, activities: [] });
 const realtime = (duty: string | null) => duty?.match(/([0-9]{3})$/)?.[1] ?? null;
 const fields = [['type', 'Aktivitetstype'], ['raw_code', 'Opprinnelig kode'], ['start', 'Start med dato og Oslo-offset'], ['end', 'Slutt med dato og Oslo-offset'], ['source_start', 'Opprinnelig startklokke'], ['source_end', 'Opprinnelig sluttklokke'], ['from_place', 'Fra sted'], ['to_place', 'Til sted'], ['trip', 'Turnummer'], ['line', 'Linje'], ['direction', 'Retning'], ['uncertainty', 'Usikkerhet / ukjente fakta'], ['provenance', 'Kilde / manuell rettelse']] as const;
@@ -25,16 +27,21 @@ function instant(v: any) {
   const local = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Oslo', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }).format(new Date(v));
   return local === v.slice(0, 16).replace('T', ' ');
 }
-function validContent(draft: any) {
+export function validContent(draft: any) {
   const nullable = (v: any, max: number) => v === null || (typeof v === 'string' && Array.from(v).length <= max);
-  return draft && Object.keys(draft).sort().join() === 'activities,physical_bus,realtime_duty,service_date,vehicle_duty'
+  return draft && Object.keys(draft).filter(key => !['import_metadata', 'vehicle_duty_changes'].includes(key)).sort().join() === 'activities,physical_bus,realtime_duty,service_date,vehicle_duty'
+    && (draft.import_metadata === undefined || validMetadata(draft.import_metadata))
     && (draft.service_date === null || calendar(draft.service_date)) && nullable(draft.vehicle_duty, 100)
     && draft.realtime_duty === realtime(draft.vehicle_duty) && nullable(draft.physical_bus, 100)
     && Array.isArray(draft.activities) && draft.activities.length <= 200
     && new Set(draft.activities.map((a: any) => a?.id)).size === draft.activities.length
     && draft.activities.every((a: any) => a && uuid(a.id) && Object.keys(a).length === fields.length + 1
       && fields.every(([key]) => nullable(a[key], textLimit(key)))
-      && instant(a.start) && instant(a.end) && (!a.start || !a.end || Date.parse(a.end) >= Date.parse(a.start)));
+      && instant(a.start) && instant(a.end) && (!a.start || !a.end || Date.parse(a.end) >= Date.parse(a.start)))
+    && (draft.vehicle_duty_changes === undefined || (Array.isArray(draft.vehicle_duty_changes) && draft.vehicle_duty_changes.length <= 200
+      && new Set(draft.vehicle_duty_changes.map((change: any) => change?.from_activity_id)).size === draft.vehicle_duty_changes.length
+      && draft.vehicle_duty_changes.every((change: any) => change && Object.keys(change).sort().join() === 'from_activity_id,realtime_duty,vehicle_duty'
+        && draft.activities.some((activity: Activity) => activity.id === change.from_activity_id) && nullable(change.vehicle_duty, 100) && change.realtime_duty === dutySuffix(change.vehicle_duty))));
 }
 function valid(value: any): value is Saved {
   return value && uuid(value.id) && Number.isInteger(value.revision) && value.revision > 0
@@ -49,7 +56,7 @@ function validSummary(value: any): value is Summary {
     && Date.parse(value.expires_at) - Date.parse(value.created_at) === 7 * 86400000;
 }
 
-export function PrivateDrafts({ request, mutation, dirtyChanged, expired, suspended }: Props) {
+export function PrivateDrafts({ upload, request, mutation, dirtyChanged, expired, suspended }: Props) {
   const [list, setList] = useState<Summary[]>([]);
   const [listState, setListState] = useState<'loading' | 'ready' | 'error'>('loading');
   const [saved, setSaved] = useState<Saved | null>(null);
@@ -68,6 +75,8 @@ export function PrivateDrafts({ request, mutation, dirtyChanged, expired, suspen
   const deletionEpoch = useRef(0);
   const listRequest = useRef(0);
   const title = useRef<HTMLHeadingElement>(null);
+  const changes = dutyChanges(content);
+  const issues = importIssues(content);
   const dirty = canonical(content) !== canonical(saved?.draft ?? empty()) || !!pending || !!pendingDelete || saveUnavailable || Object.values(timeStates).some(value => value.dirty);
   const unresolvedTimes = Object.values(timeStates).some(value => value.unresolved);
   const entryLocked = busy || !!pending || !!pendingDelete || saveUnavailable || suspended || draftExpired;
@@ -107,7 +116,7 @@ export function PrivateDrafts({ request, mutation, dirtyChanged, expired, suspen
   useEffect(() => {
     setDraftExpired(false);
     if (!saved) return;
-    const expire = () => { setDraftExpired(true); setMessage('Utkastet er utløpt. Lokale endringer er ikke lagret.'); };
+    const expire = () => { setDraftExpired(true); if (saved.draft.import_metadata) { resetTimes(); setContent(empty()); setSaved(null); setPending(null); setComparison(null); } setMessage('Utkastet er utløpt. Lokale endringer er ikke lagret.'); };
     const remaining = Date.parse(saved.expires_at) - Date.now();
     if (remaining <= 0) { expire(); return; }
     const timer = window.setTimeout(expire, remaining);
@@ -247,10 +256,16 @@ export function PrivateDrafts({ request, mutation, dirtyChanged, expired, suspen
     const populated = Object.entries(activity).some(([key, value]) => key !== 'id' && value !== null && value !== '')
       || Object.entries(timeStatesRef.current).some(([key, state]) => key.startsWith(activity.id + ':') && (state.dirty || state.unresolved));
     if (populated && !window.confirm('Fjerne denne aktiviteten og inndataene? Endringen lagres først når du lagrer utkastet.')) return;
-    removeTimeStates(activity.id); edit({ ...content, activities: content.activities.filter(value => value.id !== activity.id) }); title.current?.focus();
+    removeTimeStates(activity.id); edit({ ...content, ...(content.vehicle_duty_changes !== undefined || changes.length ? { vehicle_duty_changes: changes.filter(change => change.from_activity_id !== activity.id) } : {}), activities: content.activities.filter(value => value.id !== activity.id) }); title.current?.focus();
+  }
+  function setDutyChange(id: string, value: string | null | undefined) {
+    const next = changes.filter(change => change.from_activity_id !== id);
+    if (value !== undefined) next.push({ from_activity_id: id, vehicle_duty: value, realtime_duty: dutySuffix(value) });
+    edit({ ...content, vehicle_duty_changes: next });
   }
   return <section aria-label="Private utkast" hidden={suspended}>
     <h2>Mine utkast</h2>
+    <PrivateImport upload={upload} suspended={suspended} locked={entryLocked || !!comparison} expired={expired} adopt={value => { if (dirty && !window.confirm('Ulagrede endringer går tapt. Bruke importen som et separat nytt utkast?')) return false; resetTimes(); setSaved(null); setContent(value); setComparison(null); setSaveUnavailable(false); setMessage('Importen er et separat, ulagret utkast. Kontroller fakta og lagre uttrykkelig.'); title.current?.focus(); return true; }} />
     <p>Utkast slettes sju dager etter opprettelse. Ulagrede endringer finnes bare mens denne siden er åpen.</p>
     <div className="controls"><button disabled={busy || !!pending || !!pendingDelete} onClick={() => { if (!dirty || window.confirm('Ulagrede endringer går tapt. Opprette nytt utkast?')) { resetTimes(); setSaveUnavailable(false); setSaved(null); setContent(empty()); setPending(null); setComparison(null); setMessage('Nytt utkast. Ikke lagret.'); title.current?.focus(); } }}>Nytt utkast</button><button disabled={busy || !!pendingDelete} onClick={() => void refresh()}>Oppdater listen</button></div>
     {listState === 'loading' && <p>Laster lagrede utkast …</p>}
@@ -259,15 +274,30 @@ export function PrivateDrafts({ request, mutation, dirtyChanged, expired, suspen
     <h2 ref={title} tabIndex={-1}>{saved ? 'Rediger utkast' : 'Nytt manuelt utkast'}</h2>
     <p role="status" aria-live="polite" className="status">{message}</p>
     {saved && <p>Utløper {new Date(saved.expires_at).toLocaleString('nb-NO', { timeZone: 'Europe/Oslo' })}. Fristen forlenges ikke.</p>}
+    {content.import_metadata && <details key={'source:' + (saved?.id ?? 'new') + ':' + timeEpoch} className="source-disclosure"><summary>Vis kildefakta fra PDF</summary><SourceFacts metadata={content.import_metadata} /></details>}
+    {issues.length > 0 && <section className="import-warning" aria-label="Usikkerheter fra importen"><h3>Kontroller usikkerheter fra importen</h3>
+      <p>Dette er uavklarte kildeopplysninger. De fylles ikke automatisk inn. Du kan lagre et uferdig utkast.</p>
+      <ul>{issues.map((issue, index) => {
+        const activityIndex = content.activities.findIndex(activity => activity.id === issue.activityId);
+        return <li key={index}>{issue.text} {activityIndex >= 0 && <button type="button" onClick={() => document.getElementById('activity-' + issue.activityId)?.focus()}>Se aktivitet {activityIndex + 1}</button>}{issue.activityId && activityIndex < 0 && <span> Opprinnelig aktivitet er fjernet fra utkastet.</span>}</li>;
+      })}</ul></section>}
     <form className="draft-form" onSubmit={event => { event.preventDefault(); void save(); }}>
       <fieldset disabled={entryLocked}><legend>Dagens opplysninger</legend>
         <label>Tjenestedato<input type="date" value={content.service_date ?? ''} onChange={e => edit({ ...content, service_date: e.target.value || null })} /></label>
         <label>Vognløp<input maxLength={200} value={content.vehicle_duty ?? ''} onChange={e => edit({ ...content, vehicle_duty: boundedText(e.target.value, 100) || null })} /></label>
+        <p>Vognløp ved starten av dagen. Bytter kan angis ved aktivitetene nedenfor og gjelder fra den aktiviteten til neste bytte. Et vognløpsbytte endrer ikke Buss/vogn.</p>
         <button type="button" onClick={() => edit({ ...content, vehicle_duty: null })}>Tøm vognløp</button>
         <p>Sanntidsverdi: {content.realtime_duty ?? 'ukjent'} (avledet fra vognløp).</p>
         <label>Buss/vogn<input maxLength={200} value={content.physical_bus ?? ''} onChange={e => edit({ ...content, physical_bus: boundedText(e.target.value, 100) || null })} /></label>
         <p>Alle klokkeslett bruker Oslo-tid. Velg riktig kalenderdag for nattarbeid. Opprinnelige klokker som 25:10 kan beholdes i kildefeltene. Tomme klokkeslett betyr ukjent.</p>
-        {content.activities.map((activity, index) => <fieldset key={activity.id}><legend>Aktivitet {index + 1}</legend><div className="draft-grid">{(['start', 'end'] as const).map(field => <PrivateTimeInput key={timeEpoch + ':' + field} label={field === 'start' ? 'Start' : 'Slutt'} value={activity[field]} defaultDate={content.service_date} disabled={entryLocked} resolve={body => mutation('/draft-times/resolve', body)} onValue={value => changeTime(activity.id, field, value)} onState={(dirty, unresolved) => timeState(activity.id, field, dirty, unresolved)} expired={expired} />)}</div><div className="draft-grid">{fields.filter(([key]) => key !== 'start' && key !== 'end').map(([key, label]) => <label key={key}>{label}<input maxLength={2 * textLimit(key)} value={activity[key] ?? ''} onChange={e => edit({ ...content, activities: content.activities.map(a => a.id === activity.id ? { ...a, [key]: boundedText(e.target.value, textLimit(key)) || null } : a) })} /></label>)}</div>
+        {content.activities.map((activity, index) => <fieldset key={activity.id} id={'activity-' + activity.id} tabIndex={-1}><legend>Aktivitet {index + 1}</legend>
+          <p>Gjeldende vognløp: {effectiveDuty(content, index) ?? 'ukjent'} · sanntidsverdi {dutySuffix(effectiveDuty(content, index)) ?? 'ukjent'}.</p>
+          {changes.some(change => change.from_activity_id === activity.id) ? <div className="duty-change">
+            <label>Vognløp fra aktivitet {index + 1}<input maxLength={200} value={changes.find(change => change.from_activity_id === activity.id)?.vehicle_duty ?? ''} onChange={event => setDutyChange(activity.id, boundedText(event.target.value, 100) || null)} /></label>
+            <button type="button" onClick={() => setDutyChange(activity.id, undefined)}>Fjern vognløpsbytte fra aktivitet {index + 1}</button>
+          </div> : <button type="button" onClick={() => setDutyChange(activity.id, effectiveDuty(content, index))}>Bytt vognløp fra aktivitet {index + 1}</button>}
+          <div className="draft-grid">{(['start', 'end'] as const).map(field => <PrivateTimeInput key={timeEpoch + ':' + field} label={field === 'start' ? 'Start' : 'Slutt'} value={activity[field]} defaultDate={content.service_date} disabled={entryLocked} resolve={body => mutation('/draft-times/resolve', body)} onValue={value => changeTime(activity.id, field, value)} onState={(dirty, unresolved) => timeState(activity.id, field, dirty, unresolved)} expired={expired} />)}</div>
+          <div className="draft-grid">{fields.filter(([key]) => key !== 'start' && key !== 'end').map(([key, label]) => <label key={key} className={key === 'uncertainty' && issues.some(issue => issue.activityId === activity.id) ? 'import-warning' : undefined}>{label}<input aria-label={label} aria-describedby={key === 'uncertainty' && issues.some(issue => issue.activityId === activity.id) ? 'uncertainty-source-' + activity.id : undefined} maxLength={2 * textLimit(key)} value={activity[key] ?? ''} onChange={e => edit({ ...content, activities: content.activities.map(a => a.id === activity.id ? { ...a, [key]: boundedText(e.target.value, textLimit(key)) || null } : a) })} />{key === 'uncertainty' && issues.some(issue => issue.activityId === activity.id) && <small id={'uncertainty-source-' + activity.id}>Fra importen: {issues.filter(issue => issue.activityId === activity.id).map(issue => issue.text).join(' ')}</small>}</label>)}</div>
           <div className="controls"><button type="button" disabled={index === 0} onClick={() => { const rows = [...content.activities]; [rows[index - 1], rows[index]] = [rows[index], rows[index - 1]]; edit({ ...content, activities: rows }); }}>Flytt opp</button><button type="button" onClick={() => removeActivity(activity)}>Fjern aktivitet {index + 1}</button></div>
         </fieldset>)}
         <button type="button" disabled={content.activities.length >= 200} onClick={() => edit({ ...content, activities: [...content.activities, { id: crypto.randomUUID(), ...Object.fromEntries(fields.map(([key]) => [key, null])) }] })}>Legg til aktivitet</button>
@@ -278,6 +308,6 @@ export function PrivateDrafts({ request, mutation, dirtyChanged, expired, suspen
     <div className="controls"><button disabled={busy || !!pending || !!pendingDelete || suspended} onClick={reset}>{saved && !saveUnavailable ? 'Forkast endringer' : 'Tilbakestill utkast'}</button>{saved && <button disabled={busy || !!pending || !!pendingDelete || saveUnavailable || suspended || draftExpired || !!comparison} onClick={() => void removeDraft()}>Slett utkast</button>}</div>
     {pendingDelete && <div className="controls"><button disabled={busy} onClick={() => void removeDraft()}>Prøv samme slettingsforsøk igjen</button><button disabled={busy} onClick={() => void removeDraft(true)}>Kontroller slettingen</button></div>}
     {pending && <button disabled={busy} onClick={() => void settle()}>Kontroller lagringsforsøket</button>}
-    {comparison && <section aria-label="Sammenlign versjoner"><h3>Lagret versjon {comparison.revision}</h3><p>Lokale endringer står i skjemaet. Last inn lagret versjon for å forkaste dem.</p><dl><dt>Tjenestedato</dt><dd>{comparison.draft.service_date ?? 'Ukjent'}</dd><dt>Vognløp</dt><dd>{comparison.draft.vehicle_duty ?? 'Ukjent'}</dd><dt>Sanntidsverdi</dt><dd>{comparison.draft.realtime_duty ?? 'Ukjent'}</dd><dt>Buss/vogn</dt><dd>{comparison.draft.physical_bus ?? 'Ukjent'}</dd></dl><ol>{comparison.draft.activities.map(activity => <li key={activity.id}><dl>{fields.map(([key, label]) => <div className="fact" key={key}><dt>{label}</dt><dd>{activity[key] ?? 'Ukjent'}</dd></div>)}</dl></li>)}</ol><button onClick={() => { if (window.confirm('Forkaste lokale endringer og laste lagret versjon?')) adopt(comparison); }}>Last inn lagret versjon</button></section>}
+    {comparison && <section aria-label="Sammenlign versjoner"><h3>Lagret versjon {comparison.revision}</h3><p>Lokale endringer står i skjemaet. Last inn lagret versjon for å forkaste dem.</p><dl><dt>Tjenestedato</dt><dd>{comparison.draft.service_date ?? 'Ukjent'}</dd><dt>Vognløp</dt><dd>{comparison.draft.vehicle_duty ?? 'Ukjent'}</dd><dt>Sanntidsverdi</dt><dd>{comparison.draft.realtime_duty ?? 'Ukjent'}</dd><dt>Buss/vogn</dt><dd>{comparison.draft.physical_bus ?? 'Ukjent'}</dd></dl><ol>{comparison.draft.activities.map((activity, index) => <li key={activity.id}><dl><dt>Gjeldende vognløp</dt><dd>{effectiveDuty(comparison.draft, index) ?? 'Ukjent'} · sanntidsverdi {dutySuffix(effectiveDuty(comparison.draft, index)) ?? 'Ukjent'}</dd>{fields.map(([key, label]) => <div className="fact" key={key}><dt>{label}</dt><dd>{activity[key] ?? 'Ukjent'}</dd></div>)}</dl></li>)}</ol><button onClick={() => { if (window.confirm('Forkaste lokale endringer og laste lagret versjon?')) adopt(comparison); }}>Last inn lagret versjon</button></section>}
   </section>;
 }

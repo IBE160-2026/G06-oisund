@@ -35,12 +35,21 @@ export function PrivateAccess() {
   const draftDirty = useRef(false);
 
   async function request(path: string, options?: RequestInit) {
-    const response = await fetch(API + path, { ...options, credentials: 'include', cache: 'no-store', signal: AbortSignal.timeout(10000) });
+    const response = await fetch(API + path, { ...options, credentials: 'include', cache: 'no-store', signal: options?.signal ?? AbortSignal.timeout(10000) });
     if (!response.ok || !response.headers.get('content-type')?.includes('application/json')) {
       const error = new Error(response.status === 401 ? 'Logg inn på nytt. Brukernavn eller passord kan være feil.' : response.status === 429 ? 'For mange forsøk. Vent 15 minutter før du prøver igjen.' : 'Tjenesten er utilgjengelig eller avviste forespørselen.');
       throw Object.assign(error, { status: response.status });
     }
     return response.json();
+  }
+  async function upload(file: File, signal: AbortSignal) {
+    if (!navigator.locks || pending() || suspended || signal.aborted) throw Error();
+    return navigator.locks.request('private-auth-mutations', { signal }, async () => {
+      if (pending() || suspended || signal.aborted) throw Error();
+      const proof = await request('/auth/csrf', { signal: AbortSignal.any([signal, AbortSignal.timeout(10000)]) });
+      if (pending() || suspended || signal.aborted || typeof proof.csrf_token !== 'string') throw Error();
+      return request('/imports/pdf', { method: 'POST', headers: { 'Content-Type': 'application/pdf', 'X-CSRF-Token': proof.csrf_token }, body: file, signal: AbortSignal.any([signal, AbortSignal.timeout(45000)]) });
+    });
   }
   async function mutation(path: string, body?: object) {
     if (!navigator.locks) throw new Error('Nettleseren støtter ikke sikker innlogging.');
@@ -151,7 +160,7 @@ export function PrivateAccess() {
     {suspended && session && !locked && <button disabled={busy} onClick={() => void restore()}>Kontroller tilgang igjen</button>}
     {locked ? <button disabled={busy} onClick={() => void logout()}>Prøv utlogging igjen</button>
       : session ? <section aria-label="Privat arbeidsrom">
-        <PrivateDrafts key={session.account_id + session.created_at} request={async path => { if (pending() || suspended) throw Error(); return request(path); }} mutation={mutation} dirtyChanged={value => { draftDirty.current = value; }} expired={() => { clear('Økten er utløpt. Logg inn på nytt.'); setBusy(false); setFocusLogin(true); }} suspended={suspended} />
+        <PrivateDrafts key={session.account_id + session.created_at} upload={upload} request={async path => { if (pending() || suspended) throw Error(); return request(path); }} mutation={mutation} dirtyChanged={value => { draftDirty.current = value; }} expired={() => { clear('Økten er utløpt. Logg inn på nytt.'); setBusy(false); setFocusLogin(true); }} suspended={suspended} />
         <p>Økten utløper {new Intl.DateTimeFormat('nb-NO', { dateStyle: 'short', timeStyle: 'short', timeZone: 'Europe/Oslo' }).format(new Date(session.expires_at))}.</p>
         <button disabled={busy} onClick={() => void logout()}>Logg ut</button>
       </section> : <form onSubmit={event => void login(event)} aria-label="Innlogging">

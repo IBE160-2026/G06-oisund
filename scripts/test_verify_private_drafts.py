@@ -20,7 +20,7 @@ class RestorationTest(unittest.TestCase):
             if 'ibe160-fictional-assessment' in args and args[-1] == 'api':
                 self.assertIn('--wait', args)
                 started = True
-            return SimpleNamespace(returncode=0, stdout='')
+            return SimpleNamespace(returncode=0, stdout='{}' if 'model_dump_json' in (kwargs.get('input') or '') else '')
 
         def http_stub(request, **kwargs):
             if isinstance(request, str):
