@@ -35,6 +35,25 @@ async function fill(page: Page) {
 }
 const status = (page: Page) => page.getByRole('region', { name: 'Private utkast' }).getByRole('status');
 
+test('manual unknowns and unresolved time input follow activity identity through reorder and discard', async ({ page }) => {
+  await login(page); await fill(page);
+  await expect(page.getByRole('group', { name: 'Aktivitet 1', exact: true })).toContainText('Manuell aktivitet');
+  await page.getByLabel('Aktivitetstype', { exact: true }).fill('trip');
+  await expect(page.locator('.current-unknown').filter({ hasText: 'turnummer, linje' })).toBeVisible();
+  await page.getByLabel('Aktivitetstype', { exact: true }).fill('');
+  await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
+  await expect(status(page)).toHaveText('Lagret. Versjon 1.');
+  await page.getByLabel('Starttid', { exact: true }).fill('');
+  await page.getByRole('button', { name: 'Legg til aktivitet' }).click();
+  await page.getByRole('group', { name: 'Aktivitet 2', exact: true }).getByRole('button', { name: 'Flytt opp', exact: true }).click();
+  await expect(page.getByRole('group', { name: 'Aktivitet 2', exact: true }).getByLabel('Starttid', { exact: true })).toHaveValue('');
+  page.once('dialog', d => d.dismiss()); await page.getByRole('button', { name: 'Forkast endringer' }).click();
+  await expect(page.getByLabel('Starttid', { exact: true }).nth(1)).toHaveValue('');
+  page.once('dialog', d => d.accept()); await page.getByRole('button', { name: 'Forkast endringer' }).click();
+  await expect(page.getByLabel('Starttid', { exact: true })).toHaveValue(/^00:00(:00)?$/);
+  await expect(status(page)).toContainText('Versjon 1');
+});
+
 for (const width of [768, 1440]) test(`keyboard save and reopen midnight facts at ${width}px`, async ({ page }) => {
   await page.setViewportSize({ width, height: 1100 });
   await login(page); await fill(page);

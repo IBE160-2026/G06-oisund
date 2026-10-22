@@ -46,6 +46,126 @@ async function upload(page: Page) {
   await expect(page.getByRole('button', { name: 'Bruk som separat nytt utkast' })).toBeVisible();
 }
 
+for (const width of [768, 1440]) test(`corrections structure legacy duties cancel and reopen at ${width}px`, async ({ page }) => {
+  await page.setViewportSize({ width, height: 1100 });
+  await login(page);
+  let source: any;
+  await page.route('**:8001/imports/pdf', async route => {
+    const value = await (await route.fetch()).json(); delete value.vehicle_duty_changes;
+    source = structuredClone(value.import_metadata); await route.fulfill({ json: value });
+  });
+  await page.getByLabel('Velg tekst-PDF', { exact: true }).setInputFiles({ name: 'corrections.pdf', mimeType: 'application/pdf', buffer: dutyPdf });
+  await page.getByRole('button', { name: 'Bruk som separat nytt utkast' }).click();
+  const row = () => page.locator('#activity-' + source.activities[2].activity_id);
+  await expect(page.locator('.correction-marker')).toHaveCount(0);
+  const first = page.locator('#activity-' + source.activities[0].activity_id);
+  await first.getByLabel('Opprinnelig startklokke', { exact: true }).fill('15:00:00');
+  await first.getByLabel('Starttid', { exact: true }).fill('15:00');
+  await expect(page.getByRole('button', { name: 'Lagre utkast', exact: true })).toBeEnabled();
+  await expect(first.locator('.correction-marker')).toHaveCount(0);
+  await first.locator('summary').click();
+  for (const [input, field, clock] of [['Starttid', 'Start med dato', '15:00'], ['Sluttid', 'Slutt med dato', '15:01']]) {
+    const fact = first.locator('.comparison-fact').filter({ has: page.locator('dt').filter({ hasText: field }) });
+    await first.getByLabel(input, { exact: true }).fill('');
+    await expect(first.locator('.pending-time')).toContainText('er uavklart');
+    await expect(fact).toContainText('Gjeldende: Inntastet tidspunkt er uavklart');
+    await expect(fact).toContainText('Opprinnelig: 2030-01-02T');
+    await expect(fact.locator('.correction-marker')).toHaveCount(0);
+    await expect(first.locator('.correction-marker')).toHaveCount(0);
+    await expect(first.locator('.current-unknown')).not.toContainText(input === 'Starttid' ? 'start' : 'slutt');
+    await expect(first.getByLabel(input, { exact: true })).toHaveValue('');
+    await expect(page.getByRole('button', { name: 'Lagre utkast', exact: true })).toBeDisabled();
+    await first.getByLabel(input, { exact: true }).fill(clock);
+    await expect(page.getByRole('button', { name: 'Lagre utkast', exact: true })).toBeEnabled();
+    await expect(first.locator('.pending-time')).toHaveCount(0);
+  }
+  await first.getByLabel('Starttid', { exact: true }).fill('15:00:30');
+  await expect(page.getByRole('button', { name: 'Lagre utkast', exact: true })).toBeEnabled();
+  await expect(first.getByText('Manuelt rettet fra opprinnelig tolkning.', { exact: false })).toBeVisible();
+  await expect(row()).toContainText('Gjeldende ukjente fakta: aktivitetstype, start, fra sted, til sted');
+  await row().getByLabel('Aktivitetstype', { exact: true }).fill('deadhead');
+  await row().getByLabel('Fra sted', { exact: true }).fill('Manuelt sted med langt navn for kontroll av linjebryting');
+  await row().getByLabel('Turnummer', { exact: true }).fill('Manual-09');
+  async function assertPlaceTripAndRestoration() {
+    const fact = (label: string) => row().locator('.comparison-fact').filter({ has: page.locator('dt').filter({ hasText: new RegExp('^' + label) }) });
+    for (const [label, value] of [['Fra sted', 'Manuelt sted med langt navn for kontroll av linjebryting'], ['Turnummer', 'Manual-09']]) {
+      await expect(fact(label)).toContainText('Opprinnelig: Ukjent');
+      await expect(fact(label)).toContainText('Gjeldende: ' + value);
+      await expect(fact(label).locator('.correction-marker')).toHaveCount(1);
+      await row().getByLabel(label, { exact: true }).fill('');
+      await expect(fact(label).locator('.correction-marker')).toHaveCount(0);
+      await expect(fact(label)).toContainText('Gjeldende: Ukjent');
+      await expect(fact(label === 'Fra sted' ? 'Turnummer' : 'Fra sted').locator('.correction-marker')).toHaveCount(1);
+      await expect(fact('Aktivitetstype').locator('.correction-marker')).toHaveCount(1);
+      await row().getByLabel(label, { exact: true }).fill(value);
+      await expect(fact(label).locator('.correction-marker')).toHaveCount(1);
+    }
+  }
+  await assertPlaceTripAndRestoration();
+  await row().getByRole('button', { name: 'Flytt opp', exact: true }).click();
+  await expect(row().getByLabel('Vognløp fra aktivitet 2', { exact: true })).toHaveValue('960176');
+  await expect(row()).toContainText('Manuelt rettet fra opprinnelig tolkning');
+  await row().getByRole('button', { name: 'Flytt opp', exact: true }).click();
+  await expect(row().getByRole('button', { name: 'Flytt opp', exact: true })).toBeDisabled();
+  await page.getByRole('button', { name: 'Legg til aktivitet' }).click();
+  const manual = page.getByRole('group', { name: 'Aktivitet 5', exact: true });
+  await expect(manual).toContainText('Manuell aktivitet');
+  await manual.getByLabel('Aktivitetstype', { exact: true }).fill('Manuelt arbeid');
+  await manual.getByRole('button', { name: 'Flytt opp', exact: true }).click();
+  const response = page.waitForResponse(r => r.request().method() === 'POST' && new URL(r.url()).pathname === '/drafts');
+  await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
+  const saved = await (await response).json();
+  expect(saved.draft.import_metadata).toEqual(source);
+  expect(saved.draft.activities.find((activity: any) => activity.id === source.activities[0].activity_id).start).toBe('2030-01-02T15:00:30+01:00');
+  expect(saved.draft.vehicle_duty_changes[0].from_activity_id).toBe(source.activities[2].activity_id);
+  await row().getByLabel('Aktivitetstype', { exact: true }).fill('cancel-me');
+  await page.getByRole('group', { name: 'Aktivitet 2', exact: true }).getByRole('button', { name: 'Flytt opp', exact: true }).click();
+  await page.getByRole('button', { name: 'Legg til aktivitet' }).click();
+  page.once('dialog', d => d.dismiss()); await page.getByRole('button', { name: 'Forkast endringer' }).click();
+  await expect(row().getByLabel('Aktivitetstype', { exact: true })).toHaveValue('cancel-me');
+  await expect(page.getByLabel('Aktivitetstype', { exact: true })).toHaveCount(6);
+  page.once('dialog', d => d.accept()); await page.getByRole('button', { name: 'Forkast endringer' }).click();
+  await expect(page.getByLabel('Aktivitetstype', { exact: true })).toHaveCount(5);
+  await expect(row().getByLabel('Vognløp fra aktivitet 1', { exact: true })).toHaveValue('960176');
+  expect(await (await page.request.get('http://127.0.0.1:8001/drafts/' + saved.id)).json()).toEqual(saved);
+  await page.reload(); await page.getByRole('button', { name: /Åpne 2030-01-02/ }).first().click();
+  await expect(first.getByLabel('Starttid', { exact: true })).toHaveValue('15:00:30');
+  await expect(first.getByText('Manuelt rettet fra opprinnelig tolkning.', { exact: false })).toBeVisible();
+  await expect(row().getByLabel('Aktivitetstype', { exact: true })).toHaveValue('deadhead');
+  await row().locator('summary').focus(); await page.keyboard.press('Enter');
+  await expect(row().locator('summary')).toBeFocused();
+  await expect(row()).toContainText('Opprinnelig: Ukjent');
+  await expect(row()).toContainText('Gjeldende: deadhead');
+  await assertPlaceTripAndRestoration();
+  await row().getByLabel('Aktivitetstype', { exact: true }).fill('');
+  await expect(row().locator('.comparison-fact').filter({ has: page.locator('dt:text-is("Aktivitetstype")') })).not.toContainText('Manuelt rettet');
+  await row().getByLabel('Aktivitetstype', { exact: true }).fill('deadhead');
+  for (const night of [false, true]) {
+    const toggle = page.getByRole('button', { name: 'Nattmodus' });
+    if ((await toggle.getAttribute('aria-pressed') === 'true') !== night) await toggle.click();
+    for (const control of [row().locator('summary'), page.getByRole('region', { name: 'Usikkerheter fra importen' }).getByRole('button').first(), row().getByLabel('Usikkerhet / ukjente fakta', { exact: true })]) {
+      await control.focus(); await page.keyboard.press('Tab'); await page.keyboard.press('Shift+Tab');
+      await expect(control).toBeFocused();
+      await expect(control).toHaveCSS('outline-width', '3px');
+      const lightPanel = await control.evaluate(element => !!element.closest('.import-warning, .current-unknown'));
+      await expect(control).toHaveCSS('outline-color', night && !lightPanel ? 'rgb(255, 227, 155)' : 'rgb(0, 0, 0)');
+    }
+  }
+  if (width === 1440) await page.getByRole('button', { name: 'Nattmodus' }).click();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await row().locator('summary').focus(); await page.keyboard.press('Tab'); await page.keyboard.press('Shift+Tab');
+  await expect(row().locator('summary')).toBeFocused();
+  await row().scrollIntoViewIfNeeded();
+  await page.screenshot({ path: `../Docs/evidence/10-2-${width}.png` });
+  expect(await page.evaluate(async () => [localStorage.length, sessionStorage.length, (await indexedDB.databases()).length])).toEqual([0, 0, 0]);
+  page.once('dialog', d => d.accept()); await row().getByRole('button', { name: 'Fjern aktivitet 1', exact: true }).click();
+  await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
+  await expect(page.getByText('Lagret. Versjon 2.', { exact: true })).toBeVisible();
+  const removed = await (await page.request.get('http://127.0.0.1:8001/drafts/' + saved.id)).json();
+  expect(removed.draft.import_metadata).toEqual(source);
+  expect(removed.draft.vehicle_duty_changes).toEqual([]);
+});
+
 for (const number of [8, 9]) test(`approved example ${number} preserves work and vehicle changes through save and reopen`, async ({ page }) => {
   await login(page);
   let facts: any;
@@ -71,6 +191,7 @@ for (const number of [8, 9]) test(`approved example ${number} preserves work and
   }
   await page.getByRole('button', { name: 'Bruk som separat nytt utkast' }).click();
   const checkEditor = async () => {
+    await expect(page.locator('.correction-marker')).toHaveCount(0);
     await expect(page.getByLabel('Aktivitetstype', { exact: true })).toHaveCount(count);
     await expect(page.locator('details.source-disclosure')).not.toHaveAttribute('open');
     await expect(page.getByLabel('Buss/vogn', { exact: true })).toHaveValue('');

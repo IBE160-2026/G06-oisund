@@ -99,6 +99,10 @@ async function login(page: Page, index: number) {
   await page.getByLabel('Passord', { exact: true }).fill(accounts[index].password);
   await page.getByRole('button', { name: 'Logg inn', exact: true }).click();
   await expect(page.getByRole('heading', { name: 'Mine utkast' })).toBeVisible();
+  // Finish the login's automatic list read before switching the shared account.
+  // Otherwise that earlier read can correctly invalidate the old editor first,
+  // before the mutation this scenario intends to exercise.
+  await expect(page.getByText('Laster lagrede utkast …', { exact: true })).toHaveCount(0);
 }
 
 test('account login in another visible window promptly clears the previous editor', async ({ page, context }) => {

@@ -15,12 +15,58 @@ from pydantic import ValidationError
 
 from app import private_import
 from app.draft_domain import DraftContent
-from app.pdf_import import extract_pdf
+from app.pdf_import import extract_pdf, ImportFailure
 from app.qualify_imports import ORACLE
 from test_pdf_import import synthetic_pdf, synthetic_text_pdf
 
 
 ADDITIONAL = json.loads((ORACLE.parent / 'import_additional_expected.json').read_text(encoding='utf-8-sig'))['fixtures']
+
+
+@pytest.mark.parametrize('case', list('ABCDE'))
+def test_independent_correction_fasit_activity_facts(case):
+    """Activity endpoints only: not distance/intermediate-stop qualification."""
+    expected = next(shift for shift in json.loads(Path('/fixtures/Fasit-testskift.json').read_text(encoding='utf-8-sig'))['shifts'] if shift['case'] == case)
+    data = Path(f'/fixtures/Testskift-{case}.pdf').read_bytes()
+    # These layouts are deliberately not added to the qualified adapter contract.
+    # Keep the observed rejection visible instead of silently claiming coverage.
+    if case in ('B', 'D'):
+        with pytest.raises(ImportFailure, match='conflicting_headers'):
+            extract_pdf(data)
+        return
+    facts = private_import.interpret(extract_pdf(data)).model_dump(mode='json')
+    events = [event for event in expected['events'] if event['kind'] != 'vehicle']
+    if case in ('A', 'C'):
+        assert len(events) == {'A': 5, 'C': 15}[case]
+        assert len([event for event in events if event['kind'] == 'movement']) == {'A': 3, 'C': 9}[case]
+        assert all(row['trip'] is None for row in facts['activities'])
+        events = [event for event in events if event['kind'] == 'activity']
+        assert facts['import_metadata']['qualification'] == 'partial'
+        assert facts['import_metadata']['unresolved']
+    assert len(facts['activities']) == len(events)
+    assert facts['physical_bus'] is None
+    assert facts['import_metadata']['header']['end'] == expected['end']
+    for row, event in zip(facts['activities'], events):
+        if event['kind'] == 'movement':
+            first, last = event['stops'][0], event['stops'][-1]
+            assert (row['trip'], row['line'], row['from_place'], row['to_place']) == (event['trip_id'], event['line'], first['name'], last['name'])
+            assert (row['source_start'], row['source_end']) == (first['time'], last['time'])
+            assert row['start'][:16] == first['local_datetime']
+            assert row['end'][:16] == last['local_datetime']
+        else:
+            assert row['raw_code'] == event['label']
+            assert row['type'] == event['label']
+            assert (row['source_start'], row['source_end']) == (event['start'], event['end'])
+            assert row['from_place'] is row['to_place'] is None
+            assert (row['start'][:16] if row['start'] else None) == event.get('start_local')
+            assert (row['end'][:16] if row['end'] else None) == event.get('end_local')
+    if case == 'A':
+        assert facts['activities'][-1]['source_end'] == '08:28' != expected['end']
+    if case == 'C':
+        assert facts['activities'][0]['start'][:10] != facts['activities'][-1]['end'][:10]
+    if case == 'E':
+        assert facts['activities'][-1]['type'] == 'Instruktør'
+        assert all(row['type'] != 'Sign-off' and row['trip'] is None for row in facts['activities'])
 
 
 def assert_additional(facts, number):

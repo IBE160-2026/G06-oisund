@@ -53,6 +53,35 @@ def save(client, facts=None, identifier=None, revision=0, operation=None):
     return client.post('/drafts' + ('/' + identifier if identifier else ''), headers=headers(client), json=body), body
 
 
+def test_combined_import_correction_structure_and_fixed_expiry(client, users):
+    import copy
+    from app.private_import import interpret
+    from app.pdf_import import parse_document
+    from test_pdf_import import synthetic_text_pdf
+    assert login(client, users).status_code == 200
+    facts = interpret(parse_document(synthetic_text_pdf())).model_dump(mode='json', exclude_none=False)
+    original_metadata = copy.deepcopy(facts['import_metadata'])
+    first, _ = save(client, facts)
+    assert first.status_code == 200
+    original = first.json()
+    facts = copy.deepcopy(original['draft'])
+    anchor = facts['activities'][-1]['id']
+    facts['vehicle_duty_changes'] = [{'from_activity_id': anchor, 'vehicle_duty': 'CAR - 1', 'realtime_duty': None}]
+    facts['activities'][0].update(type='Manuelt arbeid', from_place='Manuelt sted', trip='001')
+    manual = content()['activities'][0]
+    facts['activities'] = [facts['activities'][-1], manual, *facts['activities'][:-1]]
+    updated, body = save(client, facts, original['id'], 1)
+    assert updated.status_code == 200
+    result = updated.json()
+    assert result['draft'] == body['draft']
+    assert result['draft']['import_metadata'] == original_metadata
+    assert result['expires_at'] == original['expires_at']
+    assert client.get('/drafts/' + original['id']).json() == result
+    assert result['draft']['activities'][1]['type'] is None
+    assert result['draft']['activities'][1]['from_place'] is None
+    assert result['draft']['vehicle_duty_changes'][0]['from_activity_id'] == anchor
+
+
 def test_roundtrip_replay_revisions_and_concurrent_writes(client, users):
     assert login(client, users).status_code == 200
     result, body = save(client)

@@ -1,5 +1,31 @@
 import type { Content } from './PrivateDrafts';
 
+// Compare persisted facts with the original interpretation, never the last save.
+// Stable activity IDs also distinguish manual additions from removed source rows.
+export const sourceFields: Record<string, string> = { type: 'kind', raw_code: 'label', start: 'start_instant', end: 'end_instant', source_start: 'start', source_end: 'end', from_place: 'origin', to_place: 'destination', trip: 'trip_id', line: 'line' };
+export function originalActivity(content: Content, id: string): Record<string, string | null> | undefined {
+  const source = content.import_metadata?.activities.find(row => row.activity_id === id);
+  if (!source) return;
+  return Object.fromEntries(Object.entries(sourceFields).map(([field, key]) => [field, field === 'type'
+    ? source.origins.kind === 'unresolved' ? null : source.kind === 'deadhead_car' ? 'Tomkjøring med CAR' : source.kind
+    : source[key]]));
+}
+export function sameFact(field: string, current: string | null, original: string | null): boolean {
+  if (current === original) return true;
+  if ((field === 'start' || field === 'end') && current && original) return Date.parse(current) === Date.parse(original);
+  if ((field === 'source_start' || field === 'source_end') && current && original) {
+    const clock = (value: string) => /^\d{1,2}:\d{2}(:00)?$/.test(value) ? value.split(':').slice(0, 2).map(Number).join(':') : value;
+    return clock(current) === clock(original);
+  }
+  return false;
+}
+export function currentUnknowns(activity: Content['activities'][number]): string[] {
+  const result = [['type', 'aktivitetstype'], ['start', 'start'], ['end', 'slutt'], ['from_place', 'fra sted'], ['to_place', 'til sted']].filter(([field]) => !activity[field]?.trim()).map(([, label]) => label);
+  if (['trip', 'deadhead', 'deadhead_car', 'Tomkjøring med CAR', 'CAR'].includes(activity.type ?? '') && !activity.trip?.trim()) result.push('turnummer');
+  if (activity.type === 'trip' && !activity.line?.trim()) result.push('linje');
+  return result;
+}
+
 export type DutyChange = { from_activity_id: string; vehicle_duty: string | null; realtime_duty: string | null };
 export const dutySuffix = (duty: string | null) => duty?.match(/([0-9]{3})$/)?.[1] ?? null;
 export function dutyChanges(content: Content): DutyChange[] {

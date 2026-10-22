@@ -43,3 +43,18 @@ h3:focus-visible { outline: 3px solid #000; outline-offset: 4px; }
 .import-warning li { margin: .3rem 0; padding: .3rem; }
 .import-warning button { margin-left: .5rem; padding: .35rem .6rem; }
 summary:focus-visible, fieldset:focus-visible { outline: 3px solid #000; outline-offset: 4px; }
+.private-drafts { padding: .5rem; }
+.current-unknown { border: 2px solid #8a6100; background: #fff5d6; color: #422e00; padding: .7rem; }
+.activity-origin, .correction-marker { font-weight: 700; }
+.activity-comparison summary { cursor: pointer; padding: .7rem; border: 1px solid currentColor; }
+.activity-comparison dl { display: block; }
+.comparison-fact { padding: .6rem 0; border-bottom: 1px solid currentColor; }
+.activity-comparison dd { overflow-wrap: anywhere; }
+.private-drafts.night { color: #edf3f7; background: #162c3c; }
+.night .status, .night .import-facts { color: #edf3f7; background: #203e53; }
+.night input, .night select { color: #edf3f7; background: #203e53; border-color: #b6c8d5; color-scheme: dark; }
+.night button { color: #162c3c; background: #d6eafa; border-color: #b6c8d5; }
+.night button:disabled { color: #465763; background: #e4e9ed; }
+.night fieldset, .night li { border-color: #b6c8d5; }
+.night :focus-visible { outline: 3px solid #ffe39b; outline-offset: 4px; }
+.night .import-warning :focus-visible, .night .current-unknown :focus-visible { outline-color: #000; }
