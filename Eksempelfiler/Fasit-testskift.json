@@ -1,0 +1,1636 @@
+{
+  "version": "1.0",
+  "synthetic": true,
+  "timezone": "Europe/Oslo",
+  "purpose": "Independent expected output; not an application-specific import schema",
+  "shifts": [
+    {
+      "case": "A",
+      "shift_id": "97000001",
+      "date": "04/02/2030",
+      "start": "06:50",
+      "end": "08:50",
+      "start_place": "Garasje Måneglimt",
+      "end_place": "Garasje Måneglimt",
+      "work": "2h00",
+      "span": "2h00",
+      "supplement": "25,00% 0h00  |  40,00% 0h00",
+      "events": [
+        {
+          "kind": "activity",
+          "label": "Sign-on",
+          "start": "06:50",
+          "end": "06:53",
+          "sequence": 1,
+          "start_local": "2030-02-04T06:50",
+          "end_local": "2030-02-04T06:53"
+        },
+        {
+          "kind": "vehicle",
+          "vehicle": "700001",
+          "sequence": 2
+        },
+        {
+          "kind": "movement",
+          "line": "tom",
+          "trip_id": "90101",
+          "km": 12.4,
+          "stops": [
+            {
+              "name": "Garasje Måneglimt",
+              "time": "06:58",
+              "local_datetime": "2030-02-04T06:58"
+            },
+            {
+              "name": "Kvartsodden kai",
+              "time": "07:20",
+              "local_datetime": "2030-02-04T07:20"
+            }
+          ],
+          "sequence": 3,
+          "vehicle": "700001",
+          "passenger_service": false,
+          "intermediate_stops": 0
+        },
+        {
+          "kind": "movement",
+          "line": "731",
+          "trip_id": "1002",
+          "km": 16.7,
+          "stops": [
+            {
+              "name": "Kvartsodden kai",
+              "time": "07:22",
+              "local_datetime": "2030-02-04T07:22"
+            },
+            {
+              "name": "Lyktebekken",
+              "time": "07:27",
+              "local_datetime": "2030-02-04T07:27"
+            },
+            {
+              "name": "Moseglass kryss",
+              "time": "07:35",
+              "local_datetime": "2030-02-04T07:35"
+            },
+            {
+              "name": "Vardeengen skole",
+              "time": "07:41",
+              "local_datetime": "2030-02-04T07:41"
+            },
+            {
+              "name": "Sølvgran allé",
+              "time": "07:49",
+              "local_datetime": "2030-02-04T07:49"
+            },
+            {
+              "name": "Tåkelyng senter",
+              "time": "07:55",
+              "local_datetime": "2030-02-04T07:55"
+            },
+            {
+              "name": "Krystallporten",
+              "time": "08:10",
+              "local_datetime": "2030-02-04T08:10"
+            }
+          ],
+          "sequence": 4,
+          "vehicle": "700001",
+          "passenger_service": true,
+          "intermediate_stops": 5
+        },
+        {
+          "kind": "movement",
+          "line": "tom",
+          "trip_id": "90102",
+          "km": 5.9,
+          "stops": [
+            {
+              "name": "Krystallporten",
+              "time": "08:10",
+              "local_datetime": "2030-02-04T08:10"
+            },
+            {
+              "name": "Garasje Måneglimt",
+              "time": "08:25",
+              "local_datetime": "2030-02-04T08:25"
+            }
+          ],
+          "sequence": 5,
+          "vehicle": "700001",
+          "passenger_service": false,
+          "intermediate_stops": 0
+        },
+        {
+          "kind": "activity",
+          "label": "Sign-off",
+          "start": "08:26",
+          "end": "08:28",
+          "sequence": 6,
+          "start_local": "2030-02-04T08:26",
+          "end_local": "2030-02-04T08:28"
+        }
+      ],
+      "source_examples": [
+        3,
+        5
+      ],
+      "note": "",
+      "expected_passenger_trips": 1,
+      "expected_movements": 3,
+      "expected_activities": 2,
+      "expected_vehicle_markers": 1,
+      "expected_warnings": [
+        "SHIFT_END_MISMATCH: header 08:50, final Sign-off ends 08:28; 22 minutes unresolved"
+      ]
+    },
+    {
+      "case": "B",
+      "shift_id": "97000002",
+      "date": "05/02/2030",
+      "start": "05:10",
+      "end": "17:30",
+      "start_place": "Garasje Måneglimt",
+      "end_place": "Garasje Måneglimt",
+      "work": "6h30",
+      "span": "12h20",
+      "supplement": "25,00% 0h50",
+      "events": [
+        {
+          "kind": "activity",
+          "label": "Sign-on",
+          "start": "05:10",
+          "end": "05:13",
+          "sequence": 1,
+          "start_local": "2030-02-05T05:10",
+          "end_local": "2030-02-05T05:13"
+        },
+        {
+          "kind": "vehicle",
+          "vehicle": "700101",
+          "sequence": 2
+        },
+        {
+          "kind": "movement",
+          "line": "tom",
+          "trip_id": "90201",
+          "km": 4.0,
+          "stops": [
+            {
+              "name": "Garasje Måneglimt",
+              "time": "05:18",
+              "local_datetime": "2030-02-05T05:18"
+            },
+            {
+              "name": "Alvetind terminal",
+              "time": "05:30",
+              "local_datetime": "2030-02-05T05:30"
+            }
+          ],
+          "sequence": 3,
+          "vehicle": "700101",
+          "passenger_service": false,
+          "intermediate_stops": 0
+        },
+        {
+          "kind": "movement",
+          "line": "71",
+          "trip_id": "1001",
+          "km": 23.1,
+          "stops": [
+            {
+              "name": "Alvetind terminal",
+              "time": "05:32",
+              "local_datetime": "2030-02-05T05:32"
+            },
+            {
+              "name": "Fjærstein",
+              "time": "05:38",
+              "local_datetime": "2030-02-05T05:38"
+            },
+            {
+              "name": "Måneringen",
+              "time": "05:42",
+              "local_datetime": "2030-02-05T05:42"
+            },
+            {
+              "name": "Måneringen",
+              "time": "05:43",
+              "local_datetime": "2030-02-05T05:43"
+            },
+            {
+              "name": "Glitterbekk",
+              "time": "05:50",
+              "local_datetime": "2030-02-05T05:50"
+            },
+            {
+              "name": "Ravnelykt",
+              "time": "05:58",
+              "local_datetime": "2030-02-05T05:58"
+            },
+            {
+              "name": "Stjernekratt",
+              "time": "06:05",
+              "local_datetime": "2030-02-05T06:05"
+            },
+            {
+              "name": "Skiferlys snuplass",
+              "time": "06:12",
+              "local_datetime": "2030-02-05T06:12"
+            }
+          ],
+          "sequence": 4,
+          "vehicle": "700101",
+          "passenger_service": true,
+          "intermediate_stops": 6
+        },
+        {
+          "kind": "movement",
+          "line": "72",
+          "trip_id": "1001",
+          "km": 16.8,
+          "stops": [
+            {
+              "name": "Skiferlys snuplass",
+              "time": "06:20",
+              "local_datetime": "2030-02-05T06:20"
+            },
+            {
+              "name": "Perlemoen",
+              "time": "06:25",
+              "local_datetime": "2030-02-05T06:25"
+            },
+            {
+              "name": "Trollglass skole",
+              "time": "06:31",
+              "local_datetime": "2030-02-05T06:31"
+            },
+            {
+              "name": "Sølvfløyen",
+              "time": "06:38",
+              "local_datetime": "2030-02-05T06:38"
+            },
+            {
+              "name": "Duggporten",
+              "time": "06:44",
+              "local_datetime": "2030-02-05T06:44"
+            },
+            {
+              "name": "Ravneglass kai",
+              "time": "06:50",
+              "local_datetime": "2030-02-05T06:50"
+            }
+          ],
+          "sequence": 5,
+          "vehicle": "700101",
+          "passenger_service": true,
+          "intermediate_stops": 4
+        },
+        {
+          "kind": "movement",
+          "line": "tom",
+          "trip_id": "90202",
+          "km": 0.7,
+          "stops": [
+            {
+              "name": "Ravneglass kai",
+              "time": "06:50",
+              "local_datetime": "2030-02-05T06:50"
+            },
+            {
+              "name": "Ravneglass kai",
+              "time": "07:00",
+              "local_datetime": "2030-02-05T07:00"
+            }
+          ],
+          "sequence": 6,
+          "vehicle": "700101",
+          "passenger_service": false,
+          "intermediate_stops": 0
+        },
+        {
+          "kind": "movement",
+          "line": "71",
+          "trip_id": "1002",
+          "km": 23.0,
+          "stops": [
+            {
+              "name": "Ravneglass kai",
+              "time": "07:05",
+              "local_datetime": "2030-02-05T07:05"
+            },
+            {
+              "name": "Blålykt",
+              "time": "07:09",
+              "local_datetime": "2030-02-05T07:09"
+            },
+            {
+              "name": "Kobberengen",
+              "time": "07:14",
+              "local_datetime": "2030-02-05T07:14"
+            },
+            {
+              "name": "Drømmeåsen",
+              "time": "07:19",
+              "local_datetime": "2030-02-05T07:19"
+            },
+            {
+              "name": "Vindperlen",
+              "time": "07:24",
+              "local_datetime": "2030-02-05T07:24"
+            },
+            {
+              "name": "Nordkrystall",
+              "time": "07:29",
+              "local_datetime": "2030-02-05T07:29"
+            },
+            {
+              "name": "Lauvstjernen",
+              "time": "07:34",
+              "local_datetime": "2030-02-05T07:34"
+            },
+            {
+              "name": "Fjærveien",
+              "time": "07:39",
+              "local_datetime": "2030-02-05T07:39"
+            },
+            {
+              "name": "Månebroen",
+              "time": "07:44",
+              "local_datetime": "2030-02-05T07:44"
+            },
+            {
+              "name": "Sølvsvingen",
+              "time": "07:49",
+              "local_datetime": "2030-02-05T07:49"
+            },
+            {
+              "name": "Alvetind terminal",
+              "time": "07:55",
+              "local_datetime": "2030-02-05T07:55"
+            }
+          ],
+          "sequence": 7,
+          "vehicle": "700101",
+          "passenger_service": true,
+          "intermediate_stops": 9
+        },
+        {
+          "kind": "movement",
+          "line": "tom",
+          "trip_id": "90203",
+          "km": 0.7,
+          "stops": [
+            {
+              "name": "Alvetind terminal",
+              "time": "07:55",
+              "local_datetime": "2030-02-05T07:55"
+            },
+            {
+              "name": "Alvetind terminal",
+              "time": "07:55",
+              "local_datetime": "2030-02-05T07:55"
+            }
+          ],
+          "sequence": 8,
+          "vehicle": "700101",
+          "passenger_service": false,
+          "intermediate_stops": 0
+        },
+        {
+          "kind": "activity",
+          "label": "Travel to",
+          "start": "08:05",
+          "end": "08:10",
+          "sequence": 9,
+          "start_local": "2030-02-05T08:05",
+          "end_local": "2030-02-05T08:10"
+        },
+        {
+          "kind": "activity",
+          "label": "Coffee",
+          "start": "08:10",
+          "end": "08:35",
+          "sequence": 10,
+          "start_local": "2030-02-05T08:10",
+          "end_local": "2030-02-05T08:35"
+        },
+        {
+          "kind": "activity",
+          "label": "Travel from",
+          "start": "08:35",
+          "end": "08:40",
+          "sequence": 11,
+          "start_local": "2030-02-05T08:35",
+          "end_local": "2030-02-05T08:40"
+        },
+        {
+          "kind": "vehicle",
+          "vehicle": "700102",
+          "sequence": 12
+        },
+        {
+          "kind": "movement",
+          "line": "71",
+          "trip_id": "1003",
+          "km": 18.2,
+          "stops": [
+            {
+              "name": "Alvetind terminal",
+              "time": "08:40",
+              "local_datetime": "2030-02-05T08:40"
+            },
+            {
+              "name": "Sølvsvingen",
+              "time": "08:45",
+              "local_datetime": "2030-02-05T08:45"
+            },
+            {
+              "name": "Månebroen",
+              "time": "08:50",
+              "local_datetime": "2030-02-05T08:50"
+            },
+            {
+              "name": "Ravnelykt",
+              "time": "08:56",
+              "local_datetime": "2030-02-05T08:56"
+            },
+            {
+              "name": "Perlemoen",
+              "time": "09:03",
+              "local_datetime": "2030-02-05T09:03"
+            },
+            {
+              "name": "Stjernekratt",
+              "time": "09:09",
+              "local_datetime": "2030-02-05T09:09"
+            },
+            {
+              "name": "Skiferlys snuplass",
+              "time": "09:15",
+              "local_datetime": "2030-02-05T09:15"
+            }
+          ],
+          "sequence": 13,
+          "vehicle": "700102",
+          "passenger_service": true,
+          "intermediate_stops": 5
+        },
+        {
+          "kind": "movement",
+          "line": "tom",
+          "trip_id": "90204",
+          "km": 5.7,
+          "stops": [
+            {
+              "name": "Skiferlys snuplass",
+              "time": "09:15",
+              "local_datetime": "2030-02-05T09:15"
+            },
+            {
+              "name": "Garasje Måneglimt",
+              "time": "09:27",
+              "local_datetime": "2030-02-05T09:27"
+            }
+          ],
+          "sequence": 14,
+          "vehicle": "700102",
+          "passenger_service": false,
+          "intermediate_stops": 0
+        },
+        {
+          "kind": "activity",
+          "label": "Sign-off",
+          "start": "09:29",
+          "end": "09:30",
+          "sequence": 15,
+          "start_local": "2030-02-05T09:29",
+          "end_local": "2030-02-05T09:30"
+        },
+        {
+          "kind": "activity",
+          "label": "Split break",
+          "start": "09:30",
+          "end": "15:20",
+          "sequence": 16,
+          "start_local": "2030-02-05T09:30",
+          "end_local": "2030-02-05T15:20"
+        },
+        {
+          "kind": "activity",
+          "label": "Sign-on",
+          "start": "15:20",
+          "end": "15:21",
+          "sequence": 17,
+          "start_local": "2030-02-05T15:20",
+          "end_local": "2030-02-05T15:21"
+        },
+        {
+          "kind": "vehicle",
+          "vehicle": "700103",
+          "sequence": 18
+        },
+        {
+          "kind": "movement",
+          "line": "tom",
+          "trip_id": "90205",
+          "km": 1.3,
+          "stops": [
+            {
+              "name": "Garasje Måneglimt",
+              "time": "15:26",
+              "local_datetime": "2030-02-05T15:26"
+            },
+            {
+              "name": "Alvetind terminal",
+              "time": "15:30",
+              "local_datetime": "2030-02-05T15:30"
+            }
+          ],
+          "sequence": 19,
+          "vehicle": "700103",
+          "passenger_service": false,
+          "intermediate_stops": 0
+        },
+        {
+          "kind": "movement",
+          "line": "X71",
+          "trip_id": "1001",
+          "km": 7.4,
+          "stops": [
+            {
+              "name": "Alvetind terminal",
+              "time": "15:32",
+              "local_datetime": "2030-02-05T15:32"
+            },
+            {
+              "name": "Skumringsmoen",
+              "time": "15:36",
+              "local_datetime": "2030-02-05T15:36"
+            },
+            {
+              "name": "Glødåsen",
+              "time": "15:40",
+              "local_datetime": "2030-02-05T15:40"
+            },
+            {
+              "name": "Vingestein",
+              "time": "15:44",
+              "local_datetime": "2030-02-05T15:44"
+            },
+            {
+              "name": "Duggporten",
+              "time": "15:48",
+              "local_datetime": "2030-02-05T15:48"
+            },
+            {
+              "name": "Speilbekken",
+              "time": "15:52",
+              "local_datetime": "2030-02-05T15:52"
+            },
+            {
+              "name": "Himmelgløtt",
+              "time": "15:56",
+              "local_datetime": "2030-02-05T15:56"
+            },
+            {
+              "name": "Opalengen",
+              "time": "16:01",
+              "local_datetime": "2030-02-05T16:01"
+            },
+            {
+              "name": "Opallys skole",
+              "time": "16:05",
+              "local_datetime": "2030-02-05T16:05"
+            }
+          ],
+          "sequence": 20,
+          "vehicle": "700103",
+          "passenger_service": true,
+          "intermediate_stops": 7
+        },
+        {
+          "kind": "activity",
+          "label": "Travel to",
+          "start": null,
+          "end": null,
+          "sequence": 21,
+          "start_local": null,
+          "end_local": null,
+          "unclassified_timestamp": "2030-02-05T16:20",
+          "unclassified_time": "16:20",
+          "raw_time_position": "first time column"
+        },
+        {
+          "kind": "vehicle",
+          "vehicle": "700103",
+          "sequence": 22
+        },
+        {
+          "kind": "movement",
+          "line": "X72",
+          "trip_id": "1007",
+          "km": 14.5,
+          "stops": [
+            {
+              "name": "Kvartslunden",
+              "time": "16:20",
+              "local_datetime": "2030-02-05T16:20"
+            },
+            {
+              "name": "Blålykt",
+              "time": "16:27",
+              "local_datetime": "2030-02-05T16:27"
+            },
+            {
+              "name": "Kobberengen",
+              "time": "16:34",
+              "local_datetime": "2030-02-05T16:34"
+            },
+            {
+              "name": "Vindperlen",
+              "time": "16:42",
+              "local_datetime": "2030-02-05T16:42"
+            },
+            {
+              "name": "Nordkrystall",
+              "time": "16:50",
+              "local_datetime": "2030-02-05T16:50"
+            },
+            {
+              "name": "Ravneglass kai",
+              "time": "16:58",
+              "local_datetime": "2030-02-05T16:58"
+            }
+          ],
+          "sequence": 23,
+          "vehicle": "700103",
+          "passenger_service": true,
+          "intermediate_stops": 4
+        },
+        {
+          "kind": "movement",
+          "line": "tom",
+          "trip_id": "90206",
+          "km": 13.8,
+          "stops": [
+            {
+              "name": "Ravneglass kai",
+              "time": "16:58",
+              "local_datetime": "2030-02-05T16:58"
+            },
+            {
+              "name": "Garasje Måneglimt",
+              "time": "17:25",
+              "local_datetime": "2030-02-05T17:25"
+            }
+          ],
+          "sequence": 24,
+          "vehicle": "700103",
+          "passenger_service": false,
+          "intermediate_stops": 0
+        },
+        {
+          "kind": "activity",
+          "label": "Sign-off",
+          "start": "17:28",
+          "end": "17:30",
+          "sequence": 25,
+          "start_local": "2030-02-05T17:28",
+          "end_local": "2030-02-05T17:30"
+        }
+      ],
+      "source_examples": [
+        1,
+        6,
+        7
+      ],
+      "note": "",
+      "expected_passenger_trips": 6,
+      "expected_movements": 12,
+      "expected_activities": 9,
+      "expected_vehicle_markers": 4,
+      "expected_warnings": [
+        "INCOMPLETE_ACTIVITY: Travel to has only 16:20; time role and other endpoint unknown",
+        "ZERO_TIME_POSITIVE_DISTANCE: tom 90203, 0.7 km at 07:55",
+        "UNSPECIFIED_GAP: retain gaps without assigning an activity"
+      ]
+    },
+    {
+      "case": "C",
+      "shift_id": "97000003",
+      "date": "08/02/2030",
+      "start": "22:10",
+      "end": "03:50",
+      "start_place": "Garasje Måneglimt",
+      "end_place": "Garasje Måneglimt",
+      "work": "5h10",
+      "span": "5h40",
+      "supplement": "25,00% 0h00  |  40,00% 0h00",
+      "events": [
+        {
+          "kind": "activity",
+          "label": "Sign-on",
+          "start": "22:10",
+          "end": "22:13",
+          "sequence": 1,
+          "start_local": "2030-02-08T22:10",
+          "end_local": "2030-02-08T22:13"
+        },
+        {
+          "kind": "vehicle",
+          "vehicle": "700201",
+          "sequence": 2
+        },
+        {
+          "kind": "movement",
+          "line": "tom",
+          "trip_id": "90301",
+          "km": 5.6,
+          "stops": [
+            {
+              "name": "Garasje Måneglimt",
+              "time": "22:18",
+              "local_datetime": "2030-02-08T22:18"
+            },
+            {
+              "name": "Gløtt terminal",
+              "time": "22:28",
+              "local_datetime": "2030-02-08T22:28"
+            }
+          ],
+          "sequence": 3,
+          "vehicle": "700201",
+          "passenger_service": false,
+          "intermediate_stops": 0
+        },
+        {
+          "kind": "movement",
+          "line": "81",
+          "trip_id": "6001",
+          "km": 16.9,
+          "stops": [
+            {
+              "name": "Gløtt terminal",
+              "time": "22:30",
+              "local_datetime": "2030-02-08T22:30"
+            },
+            {
+              "name": "Nattperlen",
+              "time": "22:37",
+              "local_datetime": "2030-02-08T22:37"
+            },
+            {
+              "name": "Stjerneskaret",
+              "time": "22:45",
+              "local_datetime": "2030-02-08T22:45"
+            },
+            {
+              "name": "Silkemyr",
+              "time": "22:53",
+              "local_datetime": "2030-02-08T22:53"
+            },
+            {
+              "name": "Månevarden",
+              "time": "23:01",
+              "local_datetime": "2030-02-08T23:01"
+            },
+            {
+              "name": "Myrglass snuplass",
+              "time": "23:10",
+              "local_datetime": "2030-02-08T23:10"
+            }
+          ],
+          "sequence": 4,
+          "vehicle": "700201",
+          "passenger_service": true,
+          "intermediate_stops": 4
+        },
+        {
+          "kind": "movement",
+          "line": "81",
+          "trip_id": "6002",
+          "km": 17.1,
+          "stops": [
+            {
+              "name": "Myrglass snuplass",
+              "time": "23:40",
+              "local_datetime": "2030-02-08T23:40"
+            },
+            {
+              "name": "Månevarden",
+              "time": "23:47",
+              "local_datetime": "2030-02-08T23:47"
+            },
+            {
+              "name": "Silkemyr",
+              "time": "23:54",
+              "local_datetime": "2030-02-08T23:54"
+            },
+            {
+              "name": "Stjerneskaret",
+              "time": "00:00",
+              "local_datetime": "2030-02-09T00:00"
+            },
+            {
+              "name": "Nattperlen",
+              "time": "00:07",
+              "local_datetime": "2030-02-09T00:07"
+            },
+            {
+              "name": "Gløtt øst",
+              "time": "00:13",
+              "local_datetime": "2030-02-09T00:13"
+            },
+            {
+              "name": "Lykteporten",
+              "time": "00:19",
+              "local_datetime": "2030-02-09T00:19"
+            },
+            {
+              "name": "Gløtt terminal",
+              "time": "00:25",
+              "local_datetime": "2030-02-09T00:25"
+            }
+          ],
+          "sequence": 5,
+          "vehicle": "700201",
+          "passenger_service": true,
+          "intermediate_stops": 6
+        },
+        {
+          "kind": "movement",
+          "line": "tom",
+          "trip_id": "90302",
+          "km": 5.7,
+          "stops": [
+            {
+              "name": "Gløtt terminal",
+              "time": "00:25",
+              "local_datetime": "2030-02-09T00:25"
+            },
+            {
+              "name": "Garasje Måneglimt",
+              "time": "00:35",
+              "local_datetime": "2030-02-09T00:35"
+            }
+          ],
+          "sequence": 6,
+          "vehicle": "700201",
+          "passenger_service": false,
+          "intermediate_stops": 0
+        },
+        {
+          "kind": "activity",
+          "label": "Sign-off",
+          "start": "00:35",
+          "end": "00:37",
+          "sequence": 7,
+          "start_local": "2030-02-09T00:35",
+          "end_local": "2030-02-09T00:37"
+        },
+        {
+          "kind": "activity",
+          "label": "MealBreak",
+          "start": "00:37",
+          "end": "01:07",
+          "sequence": 8,
+          "start_local": "2030-02-09T00:37",
+          "end_local": "2030-02-09T01:07"
+        },
+        {
+          "kind": "activity",
+          "label": "Paid meal before",
+          "start": "01:07",
+          "end": "01:19",
+          "sequence": 9,
+          "start_local": "2030-02-09T01:07",
+          "end_local": "2030-02-09T01:19"
+        },
+        {
+          "kind": "activity",
+          "label": "Sign-on",
+          "start": "01:19",
+          "end": "01:21",
+          "sequence": 10,
+          "start_local": "2030-02-09T01:19",
+          "end_local": "2030-02-09T01:21"
+        },
+        {
+          "kind": "vehicle",
+          "vehicle": "700201",
+          "sequence": 11
+        },
+        {
+          "kind": "movement",
+          "line": "tom",
+          "trip_id": "90303",
+          "km": 4.7,
+          "stops": [
+            {
+              "name": "Garasje Måneglimt",
+              "time": "01:21",
+              "local_datetime": "2030-02-09T01:21"
+            },
+            {
+              "name": "Gløtt terminal",
+              "time": "01:30",
+              "local_datetime": "2030-02-09T01:30"
+            }
+          ],
+          "sequence": 12,
+          "vehicle": "700201",
+          "passenger_service": false,
+          "intermediate_stops": 0
+        },
+        {
+          "kind": "movement",
+          "line": "82",
+          "trip_id": "6601",
+          "km": 12.3,
+          "stops": [
+            {
+              "name": "Gløtt terminal",
+              "time": "01:32",
+              "local_datetime": "2030-02-09T01:32"
+            },
+            {
+              "name": "Stjernestrand",
+              "time": "01:38",
+              "local_datetime": "2030-02-09T01:38"
+            },
+            {
+              "name": "Sølvfrø skole",
+              "time": "01:44",
+              "local_datetime": "2030-02-09T01:44"
+            },
+            {
+              "name": "Nordlykt",
+              "time": "01:50",
+              "local_datetime": "2030-02-09T01:50"
+            },
+            {
+              "name": "Nordlykt",
+              "time": "01:50",
+              "local_datetime": "2030-02-09T01:50"
+            },
+            {
+              "name": "Glasshagen",
+              "time": "02:01",
+              "local_datetime": "2030-02-09T02:01"
+            },
+            {
+              "name": "Sølvmyr snuplass",
+              "time": "02:10",
+              "local_datetime": "2030-02-09T02:10"
+            }
+          ],
+          "sequence": 13,
+          "vehicle": "700201",
+          "passenger_service": true,
+          "intermediate_stops": 5
+        },
+        {
+          "kind": "movement",
+          "line": "tom",
+          "trip_id": "90304",
+          "km": 4.9,
+          "stops": [
+            {
+              "name": "Sølvmyr snuplass",
+              "time": "02:10",
+              "local_datetime": "2030-02-09T02:10"
+            },
+            {
+              "name": "Gløtt terminal",
+              "time": "02:25",
+              "local_datetime": "2030-02-09T02:25"
+            }
+          ],
+          "sequence": 14,
+          "vehicle": "700201",
+          "passenger_service": false,
+          "intermediate_stops": 0
+        },
+        {
+          "kind": "movement",
+          "line": "82",
+          "trip_id": "6603",
+          "km": 12.3,
+          "stops": [
+            {
+              "name": "Gløtt terminal",
+              "time": "02:40",
+              "local_datetime": "2030-02-09T02:40"
+            },
+            {
+              "name": "Stjernestrand",
+              "time": "02:46",
+              "local_datetime": "2030-02-09T02:46"
+            },
+            {
+              "name": "Sølvfrø skole",
+              "time": "02:52",
+              "local_datetime": "2030-02-09T02:52"
+            },
+            {
+              "name": "Nordlykt",
+              "time": "02:58",
+              "local_datetime": "2030-02-09T02:58"
+            },
+            {
+              "name": "Nordlykt",
+              "time": "02:59",
+              "local_datetime": "2030-02-09T02:59"
+            },
+            {
+              "name": "Glasshagen",
+              "time": "03:11",
+              "local_datetime": "2030-02-09T03:11"
+            },
+            {
+              "name": "Sølvmyr snuplass",
+              "time": "03:20",
+              "local_datetime": "2030-02-09T03:20"
+            }
+          ],
+          "sequence": 15,
+          "vehicle": "700201",
+          "passenger_service": true,
+          "intermediate_stops": 5
+        },
+        {
+          "kind": "movement",
+          "line": "tom",
+          "trip_id": "90305",
+          "km": 6.2,
+          "stops": [
+            {
+              "name": "Sølvmyr snuplass",
+              "time": "03:20",
+              "local_datetime": "2030-02-09T03:20"
+            },
+            {
+              "name": "Garasje Måneglimt",
+              "time": "03:45",
+              "local_datetime": "2030-02-09T03:45"
+            }
+          ],
+          "sequence": 16,
+          "vehicle": "700201",
+          "passenger_service": false,
+          "intermediate_stops": 0
+        },
+        {
+          "kind": "activity",
+          "label": "Sign-off",
+          "start": "03:48",
+          "end": "03:50",
+          "sequence": 17,
+          "start_local": "2030-02-09T03:48",
+          "end_local": "2030-02-09T03:50"
+        }
+      ],
+      "source_examples": [
+        2,
+        4,
+        7
+      ],
+      "note": "",
+      "expected_passenger_trips": 4,
+      "expected_movements": 9,
+      "expected_activities": 6,
+      "expected_vehicle_markers": 2,
+      "expected_warnings": [
+        "DUPLICATE_STOP_ROW: Nordlykt 01:50 repeated; retain both rows pending confirmation"
+      ]
+    },
+    {
+      "case": "D",
+      "shift_id": "97000004",
+      "date": "11/02/2030",
+      "start": "08:00",
+      "end": "13:00",
+      "start_place": "Garasje Måneglimt",
+      "end_place": "Garasje Måneglimt",
+      "work": "4h30",
+      "span": "5h00",
+      "supplement": "25,00% 0h00  |  40,00% 0h00",
+      "events": [
+        {
+          "kind": "activity",
+          "label": "Sign-on",
+          "start": "08:00",
+          "end": "08:03",
+          "sequence": 1,
+          "start_local": "2030-02-11T08:00",
+          "end_local": "2030-02-11T08:03"
+        },
+        {
+          "kind": "vehicle",
+          "vehicle": "700301",
+          "sequence": 2
+        },
+        {
+          "kind": "movement",
+          "line": "tom",
+          "trip_id": "90401",
+          "km": 4.6,
+          "stops": [
+            {
+              "name": "Garasje Måneglimt",
+              "time": "08:08",
+              "local_datetime": "2030-02-11T08:08"
+            },
+            {
+              "name": "Lyngkrystall terminal",
+              "time": "08:20",
+              "local_datetime": "2030-02-11T08:20"
+            }
+          ],
+          "sequence": 3,
+          "vehicle": "700301",
+          "passenger_service": false,
+          "intermediate_stops": 0
+        },
+        {
+          "kind": "movement",
+          "line": "91",
+          "trip_id": "1001",
+          "km": 9.5,
+          "stops": [
+            {
+              "name": "Lyngkrystall terminal",
+              "time": "08:20",
+              "local_datetime": "2030-02-11T08:20"
+            },
+            {
+              "name": "Kobbestein",
+              "time": "08:25",
+              "local_datetime": "2030-02-11T08:25"
+            },
+            {
+              "name": "Sørglimt",
+              "time": "08:31",
+              "local_datetime": "2030-02-11T08:31"
+            },
+            {
+              "name": "Eikelykt",
+              "time": "08:38",
+              "local_datetime": "2030-02-11T08:38"
+            },
+            {
+              "name": "Blåskjær",
+              "time": "08:44",
+              "local_datetime": "2030-02-11T08:44"
+            },
+            {
+              "name": "Moselys hage",
+              "time": "08:50",
+              "local_datetime": "2030-02-11T08:50"
+            }
+          ],
+          "sequence": 4,
+          "vehicle": "700301",
+          "passenger_service": true,
+          "intermediate_stops": 4
+        },
+        {
+          "kind": "movement",
+          "line": "91",
+          "trip_id": "1002",
+          "km": 17.3,
+          "stops": [
+            {
+              "name": "Moselys hage",
+              "time": "08:50",
+              "local_datetime": "2030-02-11T08:50"
+            },
+            {
+              "name": "Blåskjær",
+              "time": "08:57",
+              "local_datetime": "2030-02-11T08:57"
+            },
+            {
+              "name": "Eikelykt",
+              "time": "09:04",
+              "local_datetime": "2030-02-11T09:04"
+            },
+            {
+              "name": "Sørglimt",
+              "time": "09:12",
+              "local_datetime": "2030-02-11T09:12"
+            },
+            {
+              "name": "Lyngkrystall terminal",
+              "time": "09:20",
+              "local_datetime": "2030-02-11T09:20"
+            },
+            {
+              "name": "Blåskjær studio",
+              "time": "09:28",
+              "local_datetime": "2030-02-11T09:28"
+            },
+            {
+              "name": "Ravnelys park",
+              "time": "09:34",
+              "local_datetime": "2030-02-11T09:34"
+            },
+            {
+              "name": "Lyngkrystall terminal",
+              "time": "09:40",
+              "local_datetime": "2030-02-11T09:40"
+            }
+          ],
+          "sequence": 5,
+          "vehicle": "700301",
+          "passenger_service": true,
+          "intermediate_stops": 6
+        },
+        {
+          "kind": "movement",
+          "line": "tom",
+          "trip_id": "90402",
+          "km": 0.5,
+          "stops": [
+            {
+              "name": "Lyngkrystall terminal",
+              "time": "09:40",
+              "local_datetime": "2030-02-11T09:40"
+            },
+            {
+              "name": "Frostglimt plass",
+              "time": "09:42",
+              "local_datetime": "2030-02-11T09:42"
+            }
+          ],
+          "sequence": 6,
+          "vehicle": "700301",
+          "passenger_service": false,
+          "intermediate_stops": 0
+        },
+        {
+          "kind": "movement",
+          "line": "92",
+          "trip_id": "1001",
+          "km": 5.5,
+          "stops": [
+            {
+              "name": "Frostglimt plass",
+              "time": "09:50",
+              "local_datetime": "2030-02-11T09:50"
+            },
+            {
+              "name": "Mosefrø",
+              "time": "09:55",
+              "local_datetime": "2030-02-11T09:55"
+            },
+            {
+              "name": "Glasstunet",
+              "time": "10:01",
+              "local_datetime": "2030-02-11T10:01"
+            },
+            {
+              "name": "Dugglykt",
+              "time": "10:07",
+              "local_datetime": "2030-02-11T10:07"
+            },
+            {
+              "name": "Kornstjernen",
+              "time": "10:14",
+              "local_datetime": "2030-02-11T10:14"
+            },
+            {
+              "name": "Kornlykt park",
+              "time": "10:20",
+              "local_datetime": "2030-02-11T10:20"
+            }
+          ],
+          "sequence": 7,
+          "vehicle": "700301",
+          "passenger_service": true,
+          "intermediate_stops": 4
+        },
+        {
+          "kind": "movement",
+          "line": "tom",
+          "trip_id": "90403",
+          "km": 0.6,
+          "stops": [
+            {
+              "name": "Kornlykt park",
+              "time": "10:20",
+              "local_datetime": "2030-02-11T10:20"
+            },
+            {
+              "name": "Garasje Måneglimt",
+              "time": "10:25",
+              "local_datetime": "2030-02-11T10:25"
+            }
+          ],
+          "sequence": 8,
+          "vehicle": "700301",
+          "passenger_service": false,
+          "intermediate_stops": 0
+        },
+        {
+          "kind": "activity",
+          "label": "Sign-off",
+          "start": "10:27",
+          "end": "10:28",
+          "sequence": 9,
+          "start_local": "2030-02-11T10:27",
+          "end_local": "2030-02-11T10:28"
+        },
+        {
+          "kind": "activity",
+          "label": "Paid meal after",
+          "start": "10:28",
+          "end": "10:43",
+          "sequence": 10,
+          "start_local": "2030-02-11T10:28",
+          "end_local": "2030-02-11T10:43"
+        },
+        {
+          "kind": "activity",
+          "label": "MealBreak",
+          "start": "10:43",
+          "end": "11:13",
+          "sequence": 11,
+          "start_local": "2030-02-11T10:43",
+          "end_local": "2030-02-11T11:13"
+        },
+        {
+          "kind": "activity",
+          "label": "Sign-on",
+          "start": "11:13",
+          "end": "11:15",
+          "sequence": 12,
+          "start_local": "2030-02-11T11:13",
+          "end_local": "2030-02-11T11:15"
+        },
+        {
+          "kind": "vehicle",
+          "vehicle": "700302",
+          "sequence": 13
+        },
+        {
+          "kind": "movement",
+          "line": "tom",
+          "trip_id": "90404",
+          "km": 4.6,
+          "stops": [
+            {
+              "name": "Garasje Måneglimt",
+              "time": "11:20",
+              "local_datetime": "2030-02-11T11:20"
+            },
+            {
+              "name": "Lyngkrystall terminal",
+              "time": "11:30",
+              "local_datetime": "2030-02-11T11:30"
+            }
+          ],
+          "sequence": 14,
+          "vehicle": "700302",
+          "passenger_service": false,
+          "intermediate_stops": 0
+        },
+        {
+          "kind": "movement",
+          "line": "91",
+          "trip_id": "1003",
+          "km": 20.5,
+          "stops": [
+            {
+              "name": "Lyngkrystall terminal",
+              "time": "11:30",
+              "local_datetime": "2030-02-11T11:30"
+            },
+            {
+              "name": "Kobbestein",
+              "time": "11:36",
+              "local_datetime": "2030-02-11T11:36"
+            },
+            {
+              "name": "Sørglimt",
+              "time": "11:42",
+              "local_datetime": "2030-02-11T11:42"
+            },
+            {
+              "name": "Eikelykt",
+              "time": "11:48",
+              "local_datetime": "2030-02-11T11:48"
+            },
+            {
+              "name": "Moselys hage",
+              "time": "11:54",
+              "local_datetime": "2030-02-11T11:54"
+            },
+            {
+              "name": "Lyngkrystall terminal",
+              "time": "12:00",
+              "local_datetime": "2030-02-11T12:00"
+            },
+            {
+              "name": "Blåskjær studio",
+              "time": "12:06",
+              "local_datetime": "2030-02-11T12:06"
+            },
+            {
+              "name": "Ravnelys park",
+              "time": "12:12",
+              "local_datetime": "2030-02-11T12:12"
+            },
+            {
+              "name": "Fjærgløtt",
+              "time": "12:18",
+              "local_datetime": "2030-02-11T12:18"
+            },
+            {
+              "name": "Krystallhagen",
+              "time": "12:24",
+              "local_datetime": "2030-02-11T12:24"
+            },
+            {
+              "name": "Lyngkrystall terminal",
+              "time": "12:30",
+              "local_datetime": "2030-02-11T12:30"
+            }
+          ],
+          "sequence": 15,
+          "vehicle": "700302",
+          "passenger_service": true,
+          "intermediate_stops": 9
+        },
+        {
+          "kind": "vehicle",
+          "vehicle": "CAR - 1",
+          "sequence": 16
+        },
+        {
+          "kind": "movement",
+          "line": "CAR",
+          "trip_id": "91001",
+          "km": 0.0,
+          "stops": [
+            {
+              "name": "Lyngkrystall terminal",
+              "time": "12:32",
+              "local_datetime": "2030-02-11T12:32"
+            },
+            {
+              "name": "Lyngkrystall terminal",
+              "time": "12:32",
+              "local_datetime": "2030-02-11T12:32"
+            }
+          ],
+          "sequence": 17,
+          "vehicle": "CAR - 1",
+          "passenger_service": false,
+          "intermediate_stops": 0
+        },
+        {
+          "kind": "movement",
+          "line": "tom",
+          "trip_id": "91002",
+          "km": 4.7,
+          "stops": [
+            {
+              "name": "Lyngkrystall terminal",
+              "time": "12:32",
+              "local_datetime": "2030-02-11T12:32"
+            },
+            {
+              "name": "Garasje Måneglimt",
+              "time": "12:57",
+              "local_datetime": "2030-02-11T12:57"
+            }
+          ],
+          "sequence": 18,
+          "vehicle": "CAR - 1",
+          "passenger_service": false,
+          "intermediate_stops": 0
+        },
+        {
+          "kind": "activity",
+          "label": "Sign-off",
+          "start": "12:58",
+          "end": "13:00",
+          "sequence": 19,
+          "start_local": "2030-02-11T12:58",
+          "end_local": "2030-02-11T13:00"
+        }
+      ],
+      "source_examples": [
+        7,
+        8
+      ],
+      "note": "Etter tur 1003: bytt til CAR - 1 ved Lyngkrystall terminal. Retur til garasjen med bilen.",
+      "expected_passenger_trips": 4,
+      "expected_movements": 10,
+      "expected_activities": 6,
+      "expected_vehicle_markers": 3,
+      "expected_warnings": [
+        "ZERO_DURATION_TRANSFER: CAR 91001 at 12:32; preserve as an event"
+      ]
+    },
+    {
+      "case": "E",
+      "shift_id": "Fadder",
+      "date": "12/02/2030",
+      "start": "05:00",
+      "end": "13:30",
+      "start_place": "Garasje Måneglimt",
+      "end_place": "Garasje Måneglimt",
+      "work": "8h30",
+      "span": "8h30",
+      "supplement": "25,00% 1h00  |  40,00% 0h00",
+      "events": [
+        {
+          "kind": "activity",
+          "label": "Sign-on",
+          "start": "05:00",
+          "end": "05:03",
+          "sequence": 1,
+          "start_local": "2030-02-12T05:00",
+          "end_local": "2030-02-12T05:03"
+        },
+        {
+          "kind": "activity",
+          "label": "Fadder",
+          "start": "05:03",
+          "end": "07:00",
+          "sequence": 2,
+          "start_local": "2030-02-12T05:03",
+          "end_local": "2030-02-12T07:00"
+        },
+        {
+          "kind": "activity",
+          "label": "Coffee",
+          "start": "07:00",
+          "end": "07:20",
+          "sequence": 3,
+          "start_local": "2030-02-12T07:00",
+          "end_local": "2030-02-12T07:20"
+        },
+        {
+          "kind": "activity",
+          "label": "Fadder",
+          "start": "07:20",
+          "end": "09:00",
+          "sequence": 4,
+          "start_local": "2030-02-12T07:20",
+          "end_local": "2030-02-12T09:00"
+        },
+        {
+          "kind": "activity",
+          "label": "Coffee",
+          "start": "09:00",
+          "end": "09:15",
+          "sequence": 5,
+          "start_local": "2030-02-12T09:00",
+          "end_local": "2030-02-12T09:15"
+        },
+        {
+          "kind": "activity",
+          "label": "Fadder",
+          "start": "09:15",
+          "end": "10:30",
+          "sequence": 6,
+          "start_local": "2030-02-12T09:15",
+          "end_local": "2030-02-12T10:30"
+        },
+        {
+          "kind": "activity",
+          "label": "Coffee",
+          "start": "10:30",
+          "end": "11:00",
+          "sequence": 7,
+          "start_local": "2030-02-12T10:30",
+          "end_local": "2030-02-12T11:00"
+        },
+        {
+          "kind": "activity",
+          "label": "Instruktør",
+          "start": "11:00",
+          "end": "13:30",
+          "sequence": 8,
+          "start_local": "2030-02-12T11:00",
+          "end_local": "2030-02-12T13:30"
+        }
+      ],
+      "source_examples": [
+        9
+      ],
+      "note": "",
+      "expected_passenger_trips": 0,
+      "expected_movements": 0,
+      "expected_activities": 8,
+      "expected_vehicle_markers": 0,
+      "expected_warnings": [
+        "NO_EXPLICIT_FINAL_SIGN_OFF: header end 13:30 and last Instruktør end agree; do not invent Sign-off"
+      ]
+    }
+  ]
+}
