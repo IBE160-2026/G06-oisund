@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import { PrivateTimeInput } from './PrivateTimeInput';
+import { PrivateConfirmation } from './PrivateConfirmation';
 import { PrivateImport, SourceFacts, validMetadata, type ImportMetadata } from './PrivateImport';
 import { dutyChanges, effectiveDuty, dutySuffix, importIssues, originalActivity, sameFact, currentUnknowns, type DutyChange } from './draftInterpretation';
 
 type Activity = { id: string } & Record<string, string | null>;
 export type Content = { service_date: string | null; vehicle_duty: string | null; realtime_duty: string | null; physical_bus: string | null; activities: Activity[]; import_metadata?: ImportMetadata; vehicle_duty_changes?: DutyChange[] };
-type Saved = { id: string; created_at: string; expires_at: string; revision: number; draft: Content };
+export type Saved = { id: string; created_at: string; expires_at: string; revision: number; draft: Content };
 type Summary = Pick<Saved, 'id' | 'expires_at' | 'revision'> & { service_date: string | null };
 type Pending = { path: string; body: { operation_id: string; expected_revision: number; draft: Content } };
 type PendingDelete = { id: string; body: { operation_id: string; expected_revision: number } };
@@ -73,6 +74,7 @@ function ActivityComparison({ content, activity, index, unresolved }: { content:
 
 export function PrivateDrafts({ upload, request, mutation, dirtyChanged, expired, suspended }: Props) {
   const [night, setNight] = useState(false);
+  const [confirmationLocked, setConfirmationLocked] = useState(false);
   const [list, setList] = useState<Summary[]>([]);
   const [listState, setListState] = useState<'loading' | 'ready' | 'error'>('loading');
   const [saved, setSaved] = useState<Saved | null>(null);
@@ -128,7 +130,7 @@ export function PrivateDrafts({ upload, request, mutation, dirtyChanged, expired
     } catch (error) { if (alive.current && epoch === deletionEpoch.current && sequence === listRequest.current) { setListState('error'); failed(error); } }
   }
   useEffect(() => { alive.current = true; void refresh(); return () => { alive.current = false; }; }, []);
-  useEffect(() => { dirtyChanged(dirty); return () => dirtyChanged(false); }, [dirty]);
+  useEffect(() => { dirtyChanged(dirty || confirmationLocked); return () => dirtyChanged(false); }, [dirty, confirmationLocked]);
   useEffect(() => {
     setDraftExpired(false);
     if (!saved) return;
@@ -139,11 +141,11 @@ export function PrivateDrafts({ upload, request, mutation, dirtyChanged, expired
     return () => clearTimeout(timer);
   }, [saved]);
   useEffect(() => {
-    const warn = (event: BeforeUnloadEvent) => { if (dirty) { event.preventDefault(); event.returnValue = ''; } };
-    const navigate = (event: MouseEvent) => { if (dirty && (event.target as Element)?.closest('a') && !window.confirm('Ulagrede endringer går tapt. Vil du fortsette?')) event.preventDefault(); };
+    const warn = (event: BeforeUnloadEvent) => { if (dirty || confirmationLocked) { event.preventDefault(); event.returnValue = ''; } };
+    const navigate = (event: MouseEvent) => { if ((dirty || confirmationLocked) && (event.target as Element)?.closest('a') && !window.confirm('Ulagrede endringer eller uavklart bekreftelse/sletting går tapt. Vil du fortsette?')) event.preventDefault(); };
     window.addEventListener('beforeunload', warn); document.addEventListener('click', navigate);
     return () => { window.removeEventListener('beforeunload', warn); document.removeEventListener('click', navigate); };
-  }, [dirty]);
+  }, [dirty, confirmationLocked]);
   function adopt(value: Saved) { resetTimes(); setSaveUnavailable(false); setSaved(value); setContent(value.draft); setPending(null); setComparison(null); setMessage(`Lagret. Versjon ${value.revision}.`); title.current?.focus(); }
   function terminalSave(status: number) {
     setPending(null); setSaveUnavailable(true);
@@ -279,9 +281,10 @@ export function PrivateDrafts({ upload, request, mutation, dirtyChanged, expired
     if (value !== undefined) next.push({ from_activity_id: id, vehicle_duty: value, realtime_duty: dutySuffix(value) });
     edit({ ...content, vehicle_duty_changes: next });
   }
-  return <section aria-label="Private utkast" className={night ? 'private-drafts night' : 'private-drafts'} hidden={suspended}>
+  return <div className={night ? 'private-drafts night' : 'private-drafts'} hidden={suspended}><section aria-label="Private utkast">
     <button type="button" aria-pressed={night} onClick={() => setNight(value => !value)}>Nattmodus</button>
     <h2>Mine utkast</h2>
+    <fieldset className="confirmation-editor" disabled={confirmationLocked}>
     <PrivateImport upload={upload} suspended={suspended} locked={entryLocked || !!comparison} expired={expired} adopt={value => { if (dirty && !window.confirm('Ulagrede endringer går tapt. Bruke importen som et separat nytt utkast?')) return false; resetTimes(); setSaved(null); setContent(value); setComparison(null); setSaveUnavailable(false); setMessage('Importen er et separat, ulagret utkast. Kontroller fakta og lagre uttrykkelig.'); title.current?.focus(); return true; }} />
     <p>Utkast slettes sju dager etter opprettelse. Ulagrede endringer finnes bare mens denne siden er åpen.</p>
     <div className="controls"><button disabled={busy || !!pending || !!pendingDelete} onClick={() => { if (!dirty || window.confirm('Ulagrede endringer går tapt. Opprette nytt utkast?')) { resetTimes(); setSaveUnavailable(false); setSaved(null); setContent(empty()); setPending(null); setComparison(null); setMessage('Nytt utkast. Ikke lagret.'); title.current?.focus(); } }}>Nytt utkast</button><button disabled={busy || !!pendingDelete} onClick={() => void refresh()}>Oppdater listen</button></div>
@@ -329,5 +332,8 @@ export function PrivateDrafts({ upload, request, mutation, dirtyChanged, expired
     {pendingDelete && <div className="controls"><button disabled={busy} onClick={() => void removeDraft()}>Prøv samme slettingsforsøk igjen</button><button disabled={busy} onClick={() => void removeDraft(true)}>Kontroller slettingen</button></div>}
     {pending && <button disabled={busy} onClick={() => void settle()}>Kontroller lagringsforsøket</button>}
     {comparison && <section aria-label="Sammenlign versjoner"><h3>Lagret versjon {comparison.revision}</h3><p>Lokale endringer står i skjemaet. Last inn lagret versjon for å forkaste dem.</p><dl><dt>Tjenestedato</dt><dd>{comparison.draft.service_date ?? 'Ukjent'}</dd><dt>Vognløp</dt><dd>{comparison.draft.vehicle_duty ?? 'Ukjent'}</dd><dt>Sanntidsverdi</dt><dd>{comparison.draft.realtime_duty ?? 'Ukjent'}</dd><dt>Buss/vogn</dt><dd>{comparison.draft.physical_bus ?? 'Ukjent'}</dd></dl><ol>{comparison.draft.activities.map((activity, index) => <li key={activity.id}><dl><dt>Gjeldende vognløp</dt><dd>{effectiveDuty(comparison.draft, index) ?? 'Ukjent'} · sanntidsverdi {dutySuffix(effectiveDuty(comparison.draft, index)) ?? 'Ukjent'}</dd>{fields.map(([key, label]) => <div className="fact" key={key}><dt>{label}</dt><dd>{activity[key] ?? 'Ukjent'}</dd></div>)}</dl></li>)}</ol><button onClick={() => { if (window.confirm('Forkaste lokale endringer og laste lagret versjon?')) adopt(comparison); }}>Last inn lagret versjon</button></section>}
-  </section>;
+    </fieldset>
+    </section>
+    <PrivateConfirmation saved={saved} clean={!dirty && !busy && !comparison && !draftExpired} request={request} mutation={mutation} expired={expired} suspended={suspended} lock={setConfirmationLocked} />
+  </div>;
 }

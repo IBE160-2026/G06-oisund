@@ -60,6 +60,9 @@ test.beforeEach(() => python("with database() as conn:\n conn.execute('DELETE FR
 test.afterAll(() => {
   for (const account of accounts) python(`with database() as conn:
  owner=conn.execute('SELECT id FROM accounts WHERE username=%s', (${JSON.stringify(account.username)},)).fetchone()['id']
+ conn.execute('DELETE FROM workday_deletions WHERE owner=%s', (owner,))
+ conn.execute('DELETE FROM workday_operations WHERE owner=%s', (owner,))
+ conn.execute('DELETE FROM workdays WHERE owner=%s', (owner,))
  conn.execute('DELETE FROM drafts WHERE owner=%s', (owner,))
  conn.execute('DELETE FROM draft_operations WHERE owner=%s', (owner,))
  conn.execute('DELETE FROM draft_deletions WHERE owner=%s', (owner,))
@@ -238,6 +241,100 @@ test('a delayed private list is rejected after another window changes account', 
     release();
     await other.close();
   }
+});
+
+test('missed broadcasts cannot reopen a plan from the next account', async ({ page, context }) => {
+  const other = await twoLoggedOutWindows(page, context, true);
+  await login(page, 0);
+  await login(other, 1);
+  let reads = 0;
+  page.on('request', request => { if (new URL(request.url()).pathname === '/workdays') reads++; });
+  await page.getByRole('button', { name: 'Oppdater planlisten', exact: true }).click();
+  await expect(page.getByRole('heading', { name: 'Mine utkast' })).toHaveCount(0);
+  expect(reads).toBe(0);
+  await other.close();
+});
+
+test('delayed plan list cannot enter a workspace after a silent account switch', async ({ page, context }) => {
+  const other = await twoLoggedOutWindows(page, context, true);
+  await login(page, 0);
+  // Finish initial plan discovery before intercepting this explicit read.
+  await expect(page.getByRole('status', { name: 'Bekreftelsesstatus' })).toHaveText('Planlisten er oppdatert.');
+  let release!: () => void, entered!: () => void;
+  const gate = new Promise<void>(resolve => { release = resolve; });
+  const received = new Promise<void>(resolve => { entered = resolve; });
+  await page.route('**:8001/workdays', async route => {
+    const response = await route.fetch(); entered(); await gate;
+    await route.fulfill({ response });
+  });
+  try {
+    await page.getByRole('button', { name: 'Oppdater planlisten', exact: true }).click();
+    await received; await login(other, 1); release();
+    await expect(page.getByRole('heading', { name: 'Mine utkast' })).toHaveCount(0);
+    await expect(page.getByRole('region', { name: 'Bekreft plan' })).toHaveCount(0);
+  } finally { release(); await other.close(); }
+});
+
+for (const delayed of [false, true]) test(`plan deletion ${delayed ? 'delayed acknowledgement' : 'preflight'} cannot cross a silent account switch`, async ({ page, context }) => {
+  const other = await twoLoggedOutWindows(page, context, true);
+  await login(page, 0);
+  async function post(path: string, data: object) {
+    const proof = await (await context.request.get(API + '/auth/csrf')).json();
+    const response = await context.request.post(API + path, { headers: { Origin: 'http://127.0.0.1:5173', 'X-CSRF-Token': proof.csrf_token }, data });
+    expect(response.status()).toBe(200); return response.json();
+  }
+  const serviceDate = delayed ? '2033-02-04' : '2033-02-03';
+  const draft = await post('/drafts', { operation_id: (await post('/draft-operations', {})).operation_id, expected_revision: 0, draft: { service_date: serviceDate, activities: [{ id: randomUUID(), type: 'manual', start: '2033-02-03T10:00+01:00', end: '2033-02-03T11:00+01:00' }] } });
+  const review = await post('/workday-reviews', { draft_id: draft.id, expected_revision: 1 });
+  const plan = await post('/drafts/' + draft.id + '/confirm', { operation_id: review.operation_id, expected_revision: 1, acknowledgements: review.unknowns.map((item: any) => item.id), classifications: {} });
+  await page.getByRole('button', { name: 'Oppdater planlisten', exact: true }).click();
+  await page.getByRole('button', { name: 'Åpne plan ' + serviceDate + ' · versjon 1', exact: true }).click();
+  let release!: () => void, entered!: () => void, writes = 0;
+  const gate = new Promise<void>(resolve => { release = resolve; });
+  const received = new Promise<void>(resolve => { entered = resolve; });
+  page.on('request', request => { if (request.url().endsWith('/workdays/' + plan.id + '/delete')) writes++; });
+  if (delayed) await page.route('**:8001/workdays/*/delete', async route => { const response = await route.fetch(); entered(); await gate; await route.fulfill({ response }); });
+  try {
+    if (!delayed) await post('/auth/login', accounts[1]);
+    page.once('dialog', dialog => dialog.accept());
+    await page.getByRole('button', { name: 'Slett bekreftet plan', exact: true }).click();
+    if (delayed) { await received; await post('/auth/login', accounts[1]); release(); }
+    await expect(page.getByRole('region', { name: 'Bekreft plan' })).toHaveCount(0);
+    expect(writes).toBe(delayed ? 1 : 0);
+    await post('/auth/login', accounts[0]);
+    expect((await context.request.get(API + '/workdays/' + plan.id)).status()).toBe(delayed ? 404 : 200);
+  } finally { release(); await other.close(); }
+});
+
+test('review fix delayed accepted confirmation cannot cross a silent account switch', async ({ page, context }) => {
+  const other = await twoLoggedOutWindows(page, context, true);
+  await login(page, 0);
+  async function post(path: string, data: object) {
+    const proof = await (await context.request.get(API + '/auth/csrf')).json();
+    const response = await context.request.post(API + path, { headers: { Origin: 'http://127.0.0.1:5173', 'X-CSRF-Token': proof.csrf_token }, data });
+    expect(response.status()).toBe(200); return response.json();
+  }
+  const draft = await post('/drafts', { operation_id: (await post('/draft-operations', {})).operation_id, expected_revision: 0, draft: { service_date: '2033-02-05', activities: [{ id: randomUUID(), type: 'manual', start: '2033-02-05T10:00+01:00', end: '2033-02-05T11:00+01:00' }] } });
+  await page.getByRole('button', { name: 'Oppdater listen', exact: true }).click();
+  await page.getByRole('button', { name: 'Åpne 2033-02-05 · versjon 1', exact: true }).click();
+  await page.getByRole('button', { name: 'Gjennomgå lagret utkast', exact: true }).click();
+  await expect(page.getByRole('region', { name: 'Gjennomgått versjon' })).toBeVisible();
+  for (const box of await page.getByRole('region', { name: 'Gjennomgått versjon' }).getByRole('checkbox').all()) await box.check();
+  let release!: () => void, entered!: () => void, accepted: any, decisions: any, writes = 0;
+  const gate = new Promise<void>(resolve => { release = resolve; });
+  const received = new Promise<void>(resolve => { entered = resolve; });
+  await page.route('**:8001/drafts/*/confirm', async route => { writes++; decisions = route.request().postDataJSON(); const response = await route.fetch(); expect(response.status()).toBe(200); accepted = await response.json(); entered(); await gate; await route.fulfill({ response }); });
+  try {
+    await page.getByRole('button', { name: 'Bekreft gjennomgått plan', exact: true }).click();
+    await received; await post('/auth/login', accounts[1]); release();
+    await expect(page.getByRole('region', { name: 'Bekreft plan' })).toHaveCount(0);
+    expect(writes).toBe(1);
+    await post('/auth/login', accounts[0]);
+    expect(await (await context.request.get(API + '/workday-operations/' + decisions.operation_id)).json()).toEqual({ state: 'accepted', result: accepted });
+    expect(accepted.source_draft_id).toBe(draft.id);
+    expect(accepted.acknowledgements.sort()).toEqual(decisions.acknowledgements.sort());
+    expect(accepted.classifications).toEqual(decisions.classifications);
+  } finally { release(); await other.close(); }
 });
 
 for (const action of ['cancel', 'logout'] as const) test(`${action} cancels an import waiting for its session preflight`, async ({ page }) => {

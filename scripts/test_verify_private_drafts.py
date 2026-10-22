@@ -20,7 +20,7 @@ class RestorationTest(unittest.TestCase):
             if 'ibe160-fictional-assessment' in args and args[-1] == 'api':
                 self.assertIn('--wait', args)
                 started = True
-            return SimpleNamespace(returncode=0, stdout='{}' if 'model_dump_json' in (kwargs.get('input') or '') else '')
+            return SimpleNamespace(returncode=0, stdout='{"activities":[]}' if 'model_dump_json' in (kwargs.get('input') or '') else '')
 
         def http_stub(request, **kwargs):
             if isinstance(request, str):
@@ -28,7 +28,18 @@ class RestorationTest(unittest.TestCase):
                 self.assertTrue(started)
                 raise RuntimeError('stop after prerequisite check')
             path = request.full_url
-            value = {'csrf_token': 'synthetic'} if path.endswith('/auth/csrf') else {'operation_id': 'synthetic'} if path.endswith('/draft-operations') else {'id': 'synthetic', 'draft': {'realtime_duty': '007', 'physical_bus': 'Bus-0012'}}
+            if path.endswith('/auth/csrf'):
+                value = {'csrf_token': 'synthetic'}
+            elif path.endswith('/auth/login'):
+                value = {'account_id': 'synthetic'}
+            elif path.endswith('/draft-operations'):
+                value = {'operation_id': 'synthetic'}
+            elif path.endswith('/workday-reviews'):
+                value = {'operation_id': 'synthetic', 'unknowns': [], 'classifications_required': []}
+            elif path.endswith('/delete'):
+                value = {'operation_id': 'synthetic', 'deleted_id': 'synthetic', 'source_revision': 1}
+            else:
+                value = {'id': 'synthetic', 'revision': 1, 'draft': {'realtime_duty': '007', 'physical_bus': 'Bus-0012'}}
             response = io.BytesIO(json.dumps(value).encode())
             response.headers = {'Cache-Control': 'no-store'}
             return response

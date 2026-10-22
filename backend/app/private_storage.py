@@ -39,6 +39,9 @@ def cleanup():
         # Requests lock sessions before drafts; cleanup must follow that order too.
         conn.execute('DELETE FROM sessions WHERE expires_at <= clock_timestamp()')
         conn.execute('DELETE FROM drafts WHERE expires_at <= clock_timestamp()')
+        conn.execute('DELETE FROM workdays WHERE expires_at <= clock_timestamp()')
+        conn.execute('DELETE FROM workday_operations WHERE expires_at <= clock_timestamp() OR (workday_id IS NULL AND NOT EXISTS (SELECT 1 FROM drafts WHERE drafts.id=workday_operations.draft_id))')
         conn.execute('DELETE FROM draft_operations WHERE expires_at <= clock_timestamp()')
         conn.execute('DELETE FROM draft_deletions WHERE expires_at <= clock_timestamp()')
+        conn.execute('DELETE FROM workday_deletions WHERE expires_at <= clock_timestamp()')
         conn.execute('DELETE FROM login_limits WHERE expires_at <= clock_timestamp()')

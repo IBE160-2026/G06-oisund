@@ -58,3 +58,12 @@ summary:focus-visible, fieldset:focus-visible { outline: 3px solid #000; outline
 .night fieldset, .night li { border-color: #b6c8d5; }
 .night :focus-visible { outline: 3px solid #ffe39b; outline-offset: 4px; }
 .night .import-warning :focus-visible, .night .current-unknown :focus-visible { outline-color: #000; }
+/* Saved-revision confirmation remains readable in both inherited palettes. */
+.confirmation-editor { border: 0; padding: 0; margin: 0; min-width: 0; }
+.private-confirmation { border-top: 2px solid currentColor; margin-top: 2rem; padding-top: 1rem; overflow-wrap: anywhere; }
+.private-confirmation fieldset { min-width: 0; }
+.private-confirmation pre { white-space: pre-wrap; overflow-wrap: anywhere; font-size: .9rem; }
+.private-confirmation dd { margin-inline-start: 1rem; overflow-wrap: anywhere; }
+.private-confirmation select { max-width: 100%; min-height: 44px; font: inherit; }
+.private-confirmation .confirmation-ack { display: flex; align-items: flex-start; gap: .75rem; padding-block: .5rem; }
+.private-confirmation .confirmation-ack input { flex: 0 0 auto; width: 1.4rem; height: 1.4rem; margin-top: .1rem; }

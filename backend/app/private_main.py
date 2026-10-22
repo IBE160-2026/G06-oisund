@@ -11,6 +11,8 @@ from pydantic import BaseModel, ConfigDict, Field
 
 from . import auth
 from . import draft_storage
+from . import workday_storage
+from .workday_domain import ConfirmRequest, ReviewRequest, Review, WorkdayRecord, WorkdayList, WorkdayOperation, DeleteWorkdayRequest, DeletedWorkday
 from . import private_import
 from .draft_time import LocalTime, TimeResolution, resolve as resolve_time
 from .draft_domain import DeleteDraft, DeletedDraft, DraftContent, DraftList, DraftRecord, IssueOperation, IssuedOperation, OperationResult, SaveDraft
@@ -197,3 +199,38 @@ def local_time(body: LocalTime, request: Request):
             raise HTTPException(422, 'Kontroller dato og klokkeslett.') from None
         auth.session(conn, request)
         return result
+
+
+@app.post('/workday-reviews', response_model=Review)
+def review_workday(body: ReviewRequest, request: Request):
+    return workday_storage.review(request, body)
+
+
+@app.post('/drafts/{identifier}/confirm', response_model=WorkdayRecord)
+def confirm_workday(identifier: UUID, body: ConfirmRequest, request: Request):
+    return workday_storage.confirm(request, identifier, body)
+
+
+@app.get('/workday-operations/{identifier}', response_model=WorkdayOperation)
+def find_workday_operation(identifier: UUID, request: Request):
+    return workday_storage.lookup(request, identifier)
+
+
+@app.get('/workdays', response_model=WorkdayList)
+def workdays(request: Request, cursor: UUID | None = None):
+    return workday_storage.listing(request, cursor)
+
+
+@app.get('/workdays/{identifier}', response_model=WorkdayRecord)
+def workday(identifier: UUID, request: Request):
+    return workday_storage.read(request, identifier)
+
+
+@app.post('/workdays/{identifier}/delete', response_model=DeletedWorkday)
+def delete_workday(identifier: UUID, body: DeleteWorkdayRequest, request: Request):
+    return workday_storage.delete(request, identifier, body)
+
+
+@app.get('/workday-deletions/{identifier}', response_model=DeletedWorkday)
+def find_workday_deletion(identifier: UUID, request: Request):
+    return workday_storage.deletion_lookup(request, identifier)

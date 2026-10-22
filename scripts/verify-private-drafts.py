@@ -58,7 +58,7 @@ try:
     run(OPERATIONAL + ['stop', 'private-api'])
     run(PRIVATE + ['up', '-d', '--build', '--wait'])
     python('')
-    print(run(PRIVATE + ['run', '--rm', '--no-deps', '-v', str(ROOT / 'Eksempelfiler') + ':/fixtures:ro', '-e', 'PRIVATE_TEST_PROJECT=' + PROJECT, '-e', 'PRIVATE_TEST_API=http://private-api:8000', 'private-api', 'python', '-m', 'pytest', '-q', '--tb=short', 'tests/test_private_access.py', 'tests/test_private_drafts.py', 'tests/test_private_import.py', 'tests/test_pdf_import.py']), flush=True)
+    print(run(PRIVATE + ['run', '--rm', '--no-deps', '-v', str(ROOT / 'Eksempelfiler') + ':/fixtures:ro', '-e', 'PRIVATE_TEST_PROJECT=' + PROJECT, '-e', 'PRIVATE_TEST_API=http://private-api:8000', 'private-api', 'python', '-m', 'pytest', '-q', '--tb=short', 'tests/test_private_access.py', 'tests/test_private_drafts.py', 'tests/test_private_workdays.py', 'tests/test_private_import.py', 'tests/test_pdf_import.py']), flush=True)
     username = 'synthetic-draft-restart-' + uuid4().hex
     password = secrets.token_urlsafe(24)
     python(f'from app.auth import provision\nprovision({username!r}, {password!r})\n')
@@ -69,11 +69,32 @@ try:
     body['draft'] = {**imported, 'vehicle_duty': '0007', 'physical_bus': 'Bus-0012'}
     original = request('/drafts', body)
     assert original['draft']['realtime_duty'] == '007' and original['draft']['physical_bus'] == 'Bus-0012'
+    # A separate saved revision gives restart evidence for the confirmed snapshot,
+    # its decisions and independent deadline, alongside the existing draft proof.
+    planned = json.loads(json.dumps(imported))
+    planned['service_date'] = '2031-01-02'
+    for index, activity in enumerate(planned['activities']):
+        activity.update(start=f'2031-01-02T{10 + index // 60:02}:{index % 60:02}+01:00', end=f'2031-01-02T{10 + index // 60:02}:{index % 60:02}+01:00')
+    plan_source = request('/drafts', {'operation_id': request('/draft-operations', {})['operation_id'], 'expected_revision': 0, 'draft': planned})
+    review = request('/workday-reviews', {'draft_id': plan_source['id'], 'expected_revision': 1})
+    confirmation = {'operation_id': review['operation_id'], 'expected_revision': 1, 'acknowledgements': [item['id'] for item in review['unknowns']], 'classifications': {key: 'manual' for key in review['classifications_required']}}
+    confirmed = request('/drafts/' + plan_source['id'] + '/confirm', confirmation)
+    deleted_source = request('/drafts', {'operation_id': request('/draft-operations', {})['operation_id'], 'expected_revision': 0, 'draft': planned})
+    deleted_review = request('/workday-reviews', {'draft_id': deleted_source['id'], 'expected_revision': 1})
+    deleted_confirmation = {'operation_id': deleted_review['operation_id'], 'expected_revision': 1, 'acknowledgements': [item['id'] for item in deleted_review['unknowns']], 'classifications': {key: 'manual' for key in deleted_review['classifications_required']}}
+    deleted_plan = request('/drafts/' + deleted_source['id'] + '/confirm', deleted_confirmation)
+    deletion = {'operation_id': str(uuid4()), 'source_revision': 1}
+    receipt = request('/workdays/' + deleted_plan['id'] + '/delete', deletion)
+    pending_review = request('/workday-reviews', {'draft_id': original['id'], 'expected_revision': original['revision']})
+    state_program = f"import json\nwith database() as conn:\n print(json.dumps({{'plans':conn.execute('SELECT * FROM workdays WHERE owner=%s ORDER BY id', ({session['account_id']!r},)).fetchall(), 'operations':conn.execute('SELECT * FROM workday_operations WHERE owner=%s ORDER BY id', ({session['account_id']!r},)).fetchall(), 'deletions':conn.execute('SELECT * FROM workday_deletions WHERE owner=%s ORDER BY id', ({session['account_id']!r},)).fetchall(), 'confirmed_sources':conn.execute('SELECT id,confirmed FROM drafts WHERE owner=%s ORDER BY id', ({session['account_id']!r},)).fetchall()}},default=str,sort_keys=True))\n"
+    persisted_confirmation_state = python(state_program)
     run(['docker', 'compose', '-p', 'ibe160-fictional-assessment', 'up', '-d', '--build', '--wait', 'api'])
     denied('/drafts', 404, 8000)
     denied('/drafts/' + original['id'], 404, 8000)
     denied('/draft-operations/' + operation, 404, 8000)
     denied('/imports/pdf', 404, 8000)
+    denied('/workdays', 404, 8000)
+    denied('/workdays/' + confirmed['id'], 404, 8000)
     expired_operation = request('/draft-operations', {})['operation_id']
     python(f"with database() as conn:\n conn.execute('UPDATE draft_operations SET expires_at=clock_timestamp() WHERE id=%s', ({expired_operation!r},))\n")
     for _ in range(2):
@@ -84,10 +105,20 @@ try:
     assert request('/drafts/' + original['id']) == original
     assert request('/drafts', body) == original
     assert request('/draft-operations/' + operation) == {'state': 'accepted', 'result': original}
+    assert request('/workdays/' + confirmed['id']) == confirmed
+    assert request('/drafts/' + plan_source['id'] + '/confirm', confirmation) == confirmed
+    assert request('/workday-operations/' + confirmation['operation_id']) == {'state': 'accepted', 'result': confirmed}
+    assert request('/workday-operations/' + pending_review['operation_id']) == {'state': 'pending', 'result': None}
+    assert request('/workday-deletions/' + deletion['operation_id']) == receipt
+    assert request('/workdays/' + deleted_plan['id'] + '/delete', deletion) == receipt
+    assert request('/drafts/' + deleted_source['id']) == deleted_source
+    denied('/workdays/' + deleted_plan['id'], 404)
+    denied('/workday-operations/' + deleted_confirmation['operation_id'], 404)
+    assert python(state_program) == persisted_confirmation_state
     denied('/draft-operations/' + expired_operation, 404)
     run(PRIVATE + ['exec', '-T', 'private-api', 'python', '-m', 'app.manage', 'cleanup'])
     assert request('/drafts/' + original['id']) == original
-    print('PASS: PostgreSQL/API restart, migration replay, account/session preservation, identical draft/operation/deadline and cleanup.', flush=True)
+    print('PASS: PostgreSQL/API restart, migration replay, account/session preservation, identical draft/confirmed-plan/decisions/operation/deletion-receipt/source-marker/deadlines and cleanup.', flush=True)
     print(run(['npm.cmd', 'run', 'build'], cwd=ROOT / 'frontend'), flush=True)
     run(['docker', 'compose', '-p', 'ibe160-fictional-assessment', 'up', '-d', '--build', '--wait', 'frontend'])
     print(run(['npx.cmd', 'playwright', 'test'], cwd=ROOT / 'frontend'))

@@ -180,5 +180,6 @@ def delete(request, identifier, body):
             deny()
         if not conn.execute('DELETE FROM drafts WHERE id=%s AND expires_at > clock_timestamp() RETURNING id', (identifier,)).fetchone():
             raise HTTPException(410, 'Utkastet er utløpt.')
+        conn.execute('DELETE FROM workday_operations WHERE draft_id=%s AND workday_id IS NULL', (identifier,))
         auth.session(conn, request)
         return {'deleted_id': identifier}

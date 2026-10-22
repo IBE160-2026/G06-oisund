@@ -41,6 +41,12 @@ def users():
     yield names, ids, password
     with database() as conn:
         auth.require_synthetic_accounts(conn)
+        conn.execute('DELETE FROM workday_deletions WHERE owner=ANY(%s)', (ids,))
+        conn.execute('DELETE FROM workday_operations WHERE owner=ANY(%s)', (ids,))
+        conn.execute('DELETE FROM workdays WHERE owner=ANY(%s)', (ids,))
+        conn.execute('DELETE FROM drafts WHERE owner=ANY(%s)', (ids,))
+        conn.execute('DELETE FROM draft_operations WHERE owner=ANY(%s)', (ids,))
+        conn.execute('DELETE FROM draft_deletions WHERE owner=ANY(%s)', (ids,))
         conn.execute('DELETE FROM sessions WHERE owner=ANY(%s)', (ids,))
         conn.execute('DELETE FROM accounts WHERE id=ANY(%s)', (ids,))
         conn.execute('DELETE FROM login_limits')
