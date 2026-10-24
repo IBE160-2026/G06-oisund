@@ -325,6 +325,7 @@ for (const delayed of [false, true, 'denied-current'] as const) test(`physical b
   const path = '/workdays/' + plan.id + '/physical-bus';
   await page.getByRole('button', { name: 'Oppdater planlisten', exact: true }).click();
   await page.getByRole('button', { name: 'Åpne plan ' + serviceDate + ' · versjon 1', exact: true }).click();
+  await expect(page.getByRole('region', { name: 'Dagsoversikt', exact: true })).toBeVisible();
   await page.getByRole('region', { name: 'Fysisk buss', exact: true }).getByLabel('Fysisk buss', { exact: true }).fill('0012 old account');
   let release!: () => void, entered!: () => void, writes = 0;
   const gate = new Promise<void>(resolve => release = resolve), received = new Promise<void>(resolve => entered = resolve);
@@ -342,6 +343,7 @@ for (const delayed of [false, true, 'denied-current'] as const) test(`physical b
     await page.getByRole('button', { name: 'Lagre fysisk buss', exact: true }).click();
     if (delayed) { await received; await post('/auth/login', accounts[1]); release(); }
     await expect(page.getByRole('region', { name: 'Bekreft plan' })).toHaveCount(0);
+    await expect(page.getByRole('region', { name: 'Dagsoversikt', exact: true })).toHaveCount(0);
     expect(writes).toBe(delayed ? 1 : 0);
     await post('/auth/login', accounts[0]);
     const value = await (await context.request.get(API + path)).json();

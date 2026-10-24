@@ -167,6 +167,7 @@ test('missing lookup stays uncertain; successful lookup verifies current bus', a
   await page.getByRole('button', { name: 'Kontroller busslagringen', exact: true }).click();
   await expect(busStatus(page)).toContainText('uavklart'); await expect(busInput(page)).toHaveValue('0012');
   await expect(page.getByRole('heading', { name: 'Bekreftet plan · versjon 1', exact: true })).toBeVisible();
+  await expect(page.getByRole('region', { name: 'Dagsoversikt', exact: true })).toBeVisible();
   await page.unroute('**:8001/workdays/*/physical-bus');
   await page.getByRole('button', { name: 'Prøv samme busslagring igjen', exact: true }).click();
   await expect(busStatus(page)).toHaveText('Fysisk buss er lagret.');
@@ -233,6 +234,7 @@ test('remote deletion after bus acceptance hides authority and preserves the sam
   });
   await busInput(page).fill('behold lokalt 0012'); await saveBus(page).click();
   await expect(page.getByText('Planfakta er skjult til plantilgangen er kontrollert.', { exact: true })).toBeVisible();
+  await expect(page.getByRole('region', { name: 'Dagsoversikt', exact: true })).toHaveCount(0);
   await expect(page.getByRole('heading', { name: 'Bekreftet plan · versjon 1', exact: true })).toHaveCount(0);
   await expect(page.getByText(/^Lagret verdi:/)).toHaveCount(0);
   await expect(busInput(page)).toHaveValue('behold lokalt 0012');
@@ -254,10 +256,12 @@ test('denied current bus read hides authority until successful recovery and oper
   });
   await busInput(page).fill('0012'); await saveBus(page).click();
   await expect(page.getByText('Planfakta er skjult til plantilgangen er kontrollert.', { exact: true })).toBeVisible();
+  await expect(page.getByRole('region', { name: 'Dagsoversikt', exact: true })).toHaveCount(0);
   await expect(busInput(page)).toHaveValue('0012');
   denied = false;
   await page.getByRole('button', { name: 'Kontroller plantilgangen', exact: true }).click();
   await expect(page.getByRole('heading', { name: 'Bekreftet plan · versjon 1', exact: true })).toBeVisible();
+  await expect(page.getByRole('region', { name: 'Dagsoversikt', exact: true })).toBeVisible();
   await expect(busStatus(page)).toContainText('fortsatt uavklart');
   await page.getByRole('button', { name: 'Kontroller busslagringen', exact: true }).click();
   await expect(busStatus(page)).toHaveText('Fysisk buss er lagret.'); await expect(busInput(page)).toHaveValue('0012');
@@ -272,9 +276,11 @@ test('initial denied bus read recovery populates the current saved value', async
   await page.route('**:8001' + path, route => denied ? route.fulfill({ status: 404, json: { detail: 'synthetic denied initial read' } }) : route.continue());
   await page.getByRole('button', { name: 'Åpne plan 2031-01-02 · versjon 1', exact: true }).click();
   await expect(page.getByText('Planfakta er skjult til plantilgangen er kontrollert.', { exact: true })).toBeVisible();
+  await expect(page.getByRole('region', { name: 'Dagsoversikt', exact: true })).toHaveCount(0);
   denied = false; await page.getByRole('button', { name: 'Kontroller plantilgangen', exact: true }).click();
   await expect(busInput(page)).toHaveValue(' 0012 ');
   await expect(page.getByRole('heading', { name: 'Bekreftet plan · versjon 1', exact: true })).toBeVisible();
+  await expect(page.getByRole('region', { name: 'Dagsoversikt', exact: true })).toBeVisible();
 });
 
 const beforeUnload = (page: Page) => page.evaluate(() => { const event = new Event('beforeunload', { cancelable: true }); window.dispatchEvent(event); return event.defaultPrevented; });

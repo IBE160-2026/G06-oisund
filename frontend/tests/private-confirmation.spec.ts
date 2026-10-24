@@ -154,7 +154,7 @@ test('review fix preserves later-page discovery after deleting the last first-pa
   await expect(page.getByRole('status', { name: 'Bekreftelsesstatus' })).toContainText('Den bekreftede planen er slettet.');
   await page.getByRole('button', { name: 'Last flere planer', exact: true }).click();
   await page.getByRole('button', { name: 'Åpne plan 2032-02-03 · versjon 1', exact: true }).click();
-  await expect(page.getByRole('region', { name: 'Bekreftet plan', exact: true }).getByText('2032-02-03', { exact: true })).toBeVisible();
+  await expect(page.getByRole('region', { name: 'Bekreftet plan', exact: true }).getByRole('region', { name: 'Dagsoversikt', exact: true }).getByText('2032-02-03', { exact: true })).toBeVisible();
   expect(cursor).toBe(plan.id);
 });
 
@@ -170,7 +170,7 @@ for (const status of [404, 410]) test(`review fix clears only the denied same-ID
   await page.getByRole('button', { name: 'Åpne plan 2032-02-03 · versjon 1', exact: true }).click();
   await page.getByRole('button', { name: 'Åpne plan 2031-01-02 · versjon 1', exact: true }).click();
   await expect(page.getByRole('status', { name: 'Bekreftelsesstatus' })).toHaveText('Tilgangen ble avvist eller fristen er utløpt.');
-  await expect(page.getByRole('region', { name: 'Bekreftet plan', exact: true }).getByText('2032-02-03', { exact: true })).toBeVisible();
+  await expect(page.getByRole('region', { name: 'Bekreftet plan', exact: true }).getByRole('region', { name: 'Dagsoversikt', exact: true }).getByText('2032-02-03', { exact: true })).toBeVisible();
 });
 
 for (const held of ['deletion', 'read']) test(`review fix expiry clears busy and leave locks during held ${held}`, async ({ page, context }) => {
@@ -293,9 +293,9 @@ test('accepted confirmation with invalid reply stays uncertain and resolves thro
   await expect(page.getByLabel('Vognløp', { exact: true })).toBeDisabled();
 });
 
-test('advertised instructor classification preserves source facts and accepted plans refresh discovery', async ({ page, context }) => {
-  await login(page); const draft = await seed(page, context); await review(page);
-  await page.getByRole('combobox').selectOption({ label: 'Instruktør' });
+for (const [classification, label] of [['Instruktør', 'Instruktør'], ['Sign-on', 'Oppmøte']]) test(`advertised ${classification} classification preserves source facts and accepted plans refresh discovery`, async ({ page, context }) => {
+  await login(page); const draft = await seed(page, context, 'Fiktiv ukjent type'); await review(page);
+  await page.getByRole('combobox').selectOption({ label });
   for (const box of await page.getByRole('region', { name: 'Gjennomgått versjon' }).getByRole('checkbox').all()) await box.check();
   await page.getByRole('button', { name: 'Bekreft gjennomgått plan', exact: true }).click();
   await expect(page.getByRole('region', { name: 'Bekreftet plan', exact: true })).toBeVisible();
@@ -303,7 +303,15 @@ test('advertised instructor classification preserves source facts and accepted p
   const plans = await (await context.request.get(API + '/workdays')).json();
   const plan = await (await context.request.get(API + '/workdays/' + plans.workdays[0].id)).json();
   expect(plan.draft).toEqual(draft.draft);
-  expect(plan.classifications).toEqual({ [draft.draft.activities[0].id]: 'Instruktør' });
+  expect(plan.classifications).toEqual({ [draft.draft.activities[0].id]: classification });
+  const day = page.getByRole('region', { name: 'Dagsoversikt', exact: true });
+  for (const reopened of [false, true]) {
+    if (reopened) { await page.getByRole('button', { name: 'Lukk planen', exact: true }).click(); await page.getByRole('button', { name: 'Åpne plan 2031-01-02 · versjon 1', exact: true }).click(); }
+    await expect(day).toContainText(`Oppgitt type: Fiktiv ukjent type · Bekreftet klassifisering: ${label}`);
+    await expect(day.locator('.day-activity').getByRole('heading', { name: label, exact: true })).toBeVisible();
+    if (classification === 'Sign-on') { await expect(day.locator('.day-reporting')).toContainText('02.01.2031, 10:00'); await expect(day).not.toContainText('ingen bekreftet Sign-on'); }
+    else await expect(day).toContainText('Ukjent · ingen bekreftet Sign-on');
+  }
 });
 
 test('accepted plan remains visible when automatic discovery refresh fails', async ({ page, context }) => {
@@ -345,7 +353,7 @@ test('two-page discovery retains earlier summaries and reopens a later-page plan
   expect(cursors).toEqual([first.id]);
   await page.getByRole('button', { name: 'Åpne plan 2032-02-03 · versjon 1', exact: true }).click();
   const reopened = page.getByRole('region', { name: 'Bekreftet plan', exact: true });
-  await expect(reopened).toBeVisible(); await expect(reopened.getByText('2032-02-03', { exact: true })).toBeVisible();
+  await expect(reopened).toBeVisible(); await expect(reopened.getByRole('region', { name: 'Dagsoversikt', exact: true }).getByText('2032-02-03', { exact: true })).toBeVisible();
 });
 
 test('corrected imported draft retains readable original source facts in review and reopened plan', async ({ page, context }) => {
@@ -367,6 +375,12 @@ test('corrected imported draft retains readable original source facts in review 
   const confirmed = page.getByRole('region', { name: 'Bekreftet plan', exact: true });
   await expect(confirmed).toBeVisible(); await page.getByRole('button', { name: 'Lukk planen', exact: true }).click();
   await page.getByRole('button', { name: 'Åpne plan 2031-01-02 · versjon 1', exact: true }).click();
+  const row = confirmed.getByRole('region', { name: 'Dagsoversikt', exact: true }).locator(`[data-activity-id="${draft.draft.activities[0].id}"]`);
+  await row.getByText('Kilde og rettelser · aktivitet 1', { exact: true }).click();
+  await expect(row.getByText('Fra sted · rettet', { exact: true })).toBeVisible();
+  await expect(row).toContainText(`Bekreftet: Manuelt rettet sted · Opprinnelig: ${source.activities[0].origin ?? 'Ukjent'}`);
+  await expect(row.getByText('Rettet fra opprinnelig tolkning.', { exact: true })).toBeVisible();
+  await confirmed.getByText('Bekreftede detaljer og historisk kilde', { exact: true }).click();
   await expect(confirmed.getByText('Manuelt rettet sted', { exact: true })).toBeVisible();
   await confirmed.getByText('Bevarte kildefakta', { exact: true }).click();
   await expect(confirmed.getByRole('region', { name: 'Kildefakta fra PDF', exact: true }).getByText(/^2030-01-01/).first()).toBeVisible();

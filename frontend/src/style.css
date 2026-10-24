@@ -72,3 +72,22 @@ summary:focus-visible, fieldset:focus-visible { outline: 3px solid #000; outline
 .bus-value { white-space: pre-wrap; overflow-wrap: anywhere; }
 .private-bus input { max-width: 100%; }
 .night .private-bus .import-warning button { color: #fff; background: #173e60; border-color: #173e60; }
+
+.day-overview { margin-block: 1.5rem; color: #162c3c; background: #fff; padding: 1rem; border: 2px solid #536775; }
+.day-overview h4 { margin-block: .5rem; font-size: 1.1em; }
+.day-overview p { margin-block: .5rem; }
+.day-overview .day-reporting { border-left: 5px solid #173e60; background: #edf3f7; padding: 1rem; }
+.day-overview .day-list { list-style: none; padding: 0; margin-top: 1.5rem; }
+.day-overview .day-list > li { padding: 1rem; margin-block: 1rem; border: 2px solid #536775; }
+.day-overview .day-list > .day-gap { border-style: dashed; }
+.day-overview .day-time { font-weight: 700; }
+.day-overview .day-member { padding-block: .5rem; overflow-wrap: anywhere; }
+.day-overview .day-member + .day-member { border-top: 2px solid #536775; }
+.day-overview .day-uncertainty { color: #422e00; background: #fff5d6; padding: .6rem; border-left: 4px solid #8a6100; }
+.day-overview summary, .day-confirmed-details > summary { cursor: pointer; min-height: 44px; padding: .7rem; border: 1px solid currentColor; font-weight: 600; }
+.day-overview dl { display: block; }
+.day-overview dl > div { margin-block: .7rem; }
+.night .day-overview { color: #edf3f7; background: #162c3c; border-color: #b6c8d5; }
+.night .day-overview .day-reporting { color: #edf3f7; background: #203e53; border-color: #b6c8d5; }
+.night .day-overview .day-list > li, .night .day-overview .day-member + .day-member { border-color: #b6c8d5; }
+.night .day-overview .day-uncertainty :focus-visible { outline-color: #000; }
