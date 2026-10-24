@@ -60,7 +60,7 @@ try:
     run(OPERATIONAL + ['stop', 'private-api'])
     run(PRIVATE + ['up', '-d', '--build', '--wait'])
     python('')
-    print(run(PRIVATE + ['run', '--rm', '--no-deps', '-v', str(ROOT / 'Eksempelfiler') + ':/fixtures:ro', '-e', 'PRIVATE_TEST_PROJECT=' + PROJECT, '-e', 'PRIVATE_TEST_API=http://private-api:8000', 'private-api', 'python', '-m', 'pytest', '-q', '--tb=short', 'tests/test_private_access.py', 'tests/test_private_drafts.py', 'tests/test_private_workdays.py', 'tests/test_private_bus.py', 'tests/test_private_import.py', 'tests/test_pdf_import.py']), flush=True)
+    print(run(PRIVATE + ['run', '--rm', '--no-deps', '-v', str(ROOT / 'Eksempelfiler') + ':/fixtures:ro', '-e', 'PRIVATE_TEST_PROJECT=' + PROJECT, '-e', 'PRIVATE_TEST_API=http://private-api:8000', 'private-api', 'python', '-m', 'pytest', '-q', '--tb=short', 'tests/test_private_access.py', 'tests/test_private_drafts.py', 'tests/test_private_workdays.py', 'tests/test_private_bus.py', 'tests/test_private_selection.py', 'tests/test_private_start.py', 'tests/test_private_import.py', 'tests/test_pdf_import.py']), flush=True)
     username = 'synthetic-draft-restart-' + uuid4().hex
     password = secrets.token_urlsafe(24)
     python(f'from app.auth import provision\nprovision({username!r}, {password!r})\n')
@@ -88,6 +88,19 @@ try:
     bus_receipt = request(bus_path, bus_body)
     current_bus = request(bus_path)
     assert current_bus == bus_receipt['result'] and current_bus['expires_at'] == confirmed['expires_at']
+    selection_path = '/workdays/' + confirmed['id'] + '/selection'
+    lifecycle_path = '/workdays/' + confirmed['id'] + '/lifecycle'
+    start_path = '/workdays/' + confirmed['id'] + '/start'
+    assert request(selection_path)['activity_id'] is None
+    initial_lifecycle = request(lifecycle_path)
+    assert initial_lifecycle['state'] == 'confirmed' and initial_lifecycle['started_at'] is None and initial_lifecycle['revision'] == 0
+    selection_body = {'operation_id': str(uuid4()), 'expected_revision': 0, 'activity_id': confirmed['draft']['activities'][-1]['id']}
+    selection_receipt = request(selection_path, selection_body)
+    assert request(lifecycle_path) == initial_lifecycle
+    start_body = {'operation_id': str(uuid4()), 'expected_revision': 0}
+    start_receipt = request(start_path, start_body)
+    assert start_receipt['result']['state'] == 'active' and start_receipt['result']['revision'] == 1
+    assert request(selection_path) == selection_receipt['result']
     deleted_source = request('/drafts', {'operation_id': request('/draft-operations', {})['operation_id'], 'expected_revision': 0, 'draft': planned})
     deleted_review = request('/workday-reviews', {'draft_id': deleted_source['id'], 'expected_revision': 1})
     deleted_confirmation = {'operation_id': deleted_review['operation_id'], 'expected_revision': 1, 'acknowledgements': [item['id'] for item in deleted_review['unknowns']], 'classifications': {key: 'manual' for key in deleted_review['classifications_required']}}
@@ -97,6 +110,12 @@ try:
     pending_review = request('/workday-reviews', {'draft_id': original['id'], 'expected_revision': original['revision']})
     state_program = f"import json\nwith database() as conn:\n print(json.dumps({{'plans':conn.execute('SELECT * FROM workdays WHERE owner=%s ORDER BY id', ({session['account_id']!r},)).fetchall(), 'operations':conn.execute('SELECT * FROM workday_operations WHERE owner=%s ORDER BY id', ({session['account_id']!r},)).fetchall(), 'deletions':conn.execute('SELECT * FROM workday_deletions WHERE owner=%s ORDER BY id', ({session['account_id']!r},)).fetchall(), 'confirmed_sources':conn.execute('SELECT id,confirmed FROM drafts WHERE owner=%s ORDER BY id', ({session['account_id']!r},)).fetchall()}},default=str,sort_keys=True))\n"
     state_program = state_program.replace("'confirmed_sources':", "'buses':conn.execute('SELECT b.* FROM workday_buses b JOIN workdays w ON b.workday_id=w.id WHERE w.owner=%s ORDER BY b.workday_id', (" + repr(session['account_id']) + ",)).fetchall(), 'bus_operations':conn.execute('SELECT * FROM workday_bus_operations WHERE owner=%s ORDER BY id', (" + repr(session['account_id']) + ",)).fetchall(), 'confirmed_sources':")
+    persisted_confirmation_state = python(state_program)
+    # Include raw mutable authorities and both immutable receipt tables in the
+    # exact populated migration/restart comparison, with no current-time fields.
+    for table, key in [('workday_selections', 'workday_id'), ('workday_lifecycles', 'workday_id'), ('workday_selection_operations', 'id'), ('workday_start_operations', 'id')]:
+        query = ('SELECT t.* FROM ' + table + ' t JOIN workdays w ON t.workday_id=w.id WHERE w.owner=%s ORDER BY t.' + key)
+        state_program = state_program.replace("'confirmed_sources':", repr(table) + ":conn.execute(" + repr(query) + ", (" + repr(session['account_id']) + ",)).fetchall(), 'confirmed_sources':")
     persisted_confirmation_state = python(state_program)
     def listed_drafts():
         rows, cursor, visited = [], None, set()
@@ -122,6 +141,10 @@ try:
     denied(bus_path, 404, 8000)
     denied(bus_path, 404, 8000, bus_body)
     denied('/workday-bus-operations/' + bus_body['operation_id'], 404, 8000)
+    for route in [selection_path, lifecycle_path, '/workday-selection-operations/' + selection_body['operation_id'], '/workday-start-operations/' + start_body['operation_id']]:
+        denied(route, 404, 8000)
+    denied(selection_path, 404, 8000, selection_body)
+    denied(start_path, 404, 8000, start_body)
     expired_operation = request('/draft-operations', {})['operation_id']
     python(f"with database() as conn:\n conn.execute('UPDATE draft_operations SET expires_at=clock_timestamp() WHERE id=%s', ({expired_operation!r},))\n")
     # Synthetic pre-upgrade issuance: default v1/false columns preserve pending
@@ -142,6 +165,9 @@ try:
     legacy_pending_review['unknowns'] = json.loads(python(f"from app.draft_domain import DraftContent\nfrom app.workday_domain import assessment\nimport json\nprint(json.dumps(assessment(DraftContent.model_validate({legacy_review_source['draft']!r}), policy_version=1)['unknowns']))\n"))
     legacy_confirmation = {'operation_id': legacy_review['operation_id'], 'expected_revision': 1, 'acknowledgements': [item['id'] for item in legacy_review['unknowns']], 'classifications': {key: 'manual' for key in legacy_review['classifications_required']}}
     legacy_plan = request('/drafts/' + legacy_draft['id'] + '/confirm', legacy_confirmation)
+    legacy_lifecycle_path = '/workdays/' + legacy_plan['id'] + '/lifecycle'
+    legacy_lifecycle = request(legacy_lifecycle_path)
+    assert legacy_lifecycle['state'] == 'confirmed' and legacy_lifecycle['revision'] == 0 and legacy_lifecycle['started_at'] is None
     # Keep both accepted and not-yet-accepted v2 reviews across the same restart.
     v2_cases = []
     for accepted in [True, False]:
@@ -167,6 +193,13 @@ try:
     assert request(bus_path) == current_bus
     assert request(bus_path, bus_body) == bus_receipt
     assert request('/workday-bus-operations/' + bus_body['operation_id']) == bus_receipt
+    assert request(selection_path) == selection_receipt['result']
+    assert request(selection_path, selection_body) == selection_receipt
+    assert request('/workday-selection-operations/' + selection_body['operation_id']) == selection_receipt
+    assert request(lifecycle_path) == start_receipt['result']
+    assert request(start_path, start_body) == start_receipt
+    assert request('/workday-start-operations/' + start_body['operation_id']) == start_receipt
+    assert request(legacy_lifecycle_path) == legacy_lifecycle
     assert request('/workdays/' + confirmed['id']) == confirmed
     assert request('/drafts/' + plan_source['id'] + '/confirm', confirmation) == confirmed
     assert request('/workday-operations/' + confirmation['operation_id']) == {'state': 'accepted', 'result': confirmed}

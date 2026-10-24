@@ -2,7 +2,8 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { validContent, type Content, type Saved } from './PrivateDrafts';
 import { SourceFacts } from './PrivateImport';
 import { PrivateBus } from './PrivateBus';
-import { PrivateDayOverview } from './PrivateDayOverview';
+import { PrivateActivitySelection } from './PrivateActivitySelection';
+import { PrivateShiftStart } from './PrivateShiftStart';
 import { effectiveDuty, activityFactMissing, displayFact, currentUncertainty } from './draftInterpretation';
 
 type Review = { operation_id: string; operation_expires_at: string; draft_id: string; revision: number; draft: Content; blockers: string[]; unknowns: { id: string; label: string }[]; classifications_required: string[]; supported_types: string[]; final_end: string | null; expires_at: string | null };
@@ -52,11 +53,27 @@ function Facts({ content, classifications = {}, historical = false }: { content:
 
 export function PrivateConfirmation({ saved, clean, request, mutation, expired, suspended, lock }: Props) {
   const [planOpen, setPlanOpen] = useState(0);
+  const availabilityRef = useRef({ bus: true, selection: true, start: true });
   const [planAvailable, setPlanAvailable] = useState(true);
-  const guardAvailability = useCallback((value: boolean) => setPlanAvailable(value), []);
+  const guardAvailability = useCallback((key: 'bus' | 'selection' | 'start', value: boolean) => {
+    availabilityRef.current[key] = value; setPlanAvailable(Object.values(availabilityRef.current).every(Boolean));
+  }, []);
+  const busAvailability = useCallback((value: boolean) => guardAvailability('bus', value), [guardAvailability]);
+  const selectionAvailability = useCallback((value: boolean) => guardAvailability('selection', value), [guardAvailability]);
+  const startAvailability = useCallback((value: boolean) => guardAvailability('start', value), [guardAvailability]);
+  const lockRef = useRef({ bus: false, selection: false, start: false });
   const [busLocked, setBusLocked] = useState(false);
   const busLockedRef = useRef(false);
-  const guardBus = useCallback((value: boolean) => { busLockedRef.current = value; if (value) { reading.current++; epoch.current++; setBusy(false); } setBusLocked(value); }, []);
+  const guardChild = useCallback((key: 'bus' | 'selection' | 'start', value: boolean) => {
+    lockRef.current[key] = value;
+    const locked = Object.values(lockRef.current).some(Boolean);
+    busLockedRef.current = locked;
+    if (value) { reading.current++; epoch.current++; setBusy(false); }
+    setBusLocked(locked);
+  }, []);
+  const guardBus = useCallback((value: boolean) => guardChild('bus', value), [guardChild]);
+  const guardSelection = useCallback((value: boolean) => guardChild('selection', value), [guardChild]);
+  const guardStart = useCallback((value: boolean) => guardChild('start', value), [guardChild]);
   const [review, setReview] = useState<Review | null>(null);
   const [acks, setAcks] = useState<string[]>([]);
   const [classes, setClasses] = useState<Record<string, string>>({});
@@ -76,6 +93,7 @@ export function PrivateConfirmation({ saved, clean, request, mutation, expired, 
   const alive = useRef(true), epoch = useRef(0);
   const title = useRef<HTMLHeadingElement>(null);
   const selected = saved ? saved.id + ':' + saved.revision : '';
+  useEffect(() => { availabilityRef.current = { bus: true, selection: true, start: true }; setPlanAvailable(true); }, [plan?.id, planOpen]);
   useEffect(() => { alive.current = true; return () => { alive.current = false; }; }, []);
   useEffect(() => { lock(!!pending || !!deleting || busLocked); return () => lock(false); }, [pending, deleting, busLocked]);
   useEffect(() => { epoch.current++; if (!pending) { setReview(null); setAcks([]); setClasses({}); } }, [selected, clean]);
@@ -229,7 +247,7 @@ export function PrivateConfirmation({ saved, clean, request, mutation, expired, 
       {!pending && <div className="controls"><button disabled={busy || busLocked || suspended || review.blockers.length > 0 || acks.length !== visibleUnknowns.length || review.classifications_required.some(id => !classes[id])} onClick={() => void send()}>Bekreft gjennomgått plan</button><button disabled={busy} onClick={() => { setReview(null); setAcks([]); setClasses({}); setMessage('Gjennomgangen er avbrutt. Utkastet er uendret.'); }}>Avbryt gjennomgang</button></div>}
     </section>}
     {pending && <div className="controls"><button disabled={busy || busLocked || suspended} onClick={() => void send()}>Prøv samme bekreftelse igjen</button><button disabled={busy || busLocked || suspended} onClick={() => void send(true)}>Kontroller bekreftelsen</button></div>}
-    {plan && <section aria-label="Bekreftet plan">{planAvailable ? <><h3>Bekreftet plan · versjon {plan.source_revision}</h3><p>Status: bekreftet.</p><p>Siste aktivitetsslutt: {date(plan.final_end)}. Utløper {date(plan.expires_at)}. Fristen forlenges ikke.</p></> : <p>Planfakta er skjult til plantilgangen er kontrollert.</p>}<PrivateBus key={plan.id + ':' + planOpen} id={plan.id} expiresAt={plan.expires_at} request={request} mutation={mutation} suspended={suspended || !!deleting || !!pending} expired={expired} lock={guardBus} availability={guardAvailability} />{planAvailable && <><p>Historiske fakta og godtatte ukjente opplysninger gjelder tidspunktet for bekreftelsen. Bussregistreringen over gjelder nå.</p><PrivateDayOverview content={plan.draft} classifications={plan.classifications} finalEnd={plan.final_end} expiresAt={plan.expires_at} /><details className="day-confirmed-details"><summary>Bekreftede detaljer og historisk kilde</summary><Facts historical content={plan.draft} classifications={plan.classifications} /></details><details><summary>Godtatte ukjente fakta</summary><ul>{plan.unknowns.map(item => <li key={item.id}>{item.label}</li>)}</ul></details></>}<div className="controls"><button disabled={!planAvailable || !!deleting || !!pending || busLocked || suspended} onClick={() => void remove()}>Slett bekreftet plan</button><button disabled={busy || !!deleting || busLocked} onClick={() => setPlan(null)}>Lukk planen</button></div></section>}
+    {plan && <section aria-label="Bekreftet plan">{planAvailable ? <><h3>Bekreftet plan · versjon {plan.source_revision}</h3><p>Historisk bekreftelse: {date(plan.confirmed_at)}.</p><p>Siste aktivitetsslutt: {date(plan.final_end)}. Utløper {date(plan.expires_at)}. Fristen forlenges ikke.</p></> : <p>Planfakta er skjult til plantilgangen er kontrollert.</p>}<PrivateBus key={plan.id + ':' + planOpen} id={plan.id} expiresAt={plan.expires_at} request={request} mutation={mutation} suspended={suspended || !!deleting || !!pending} expired={expired} lock={guardBus} availability={busAvailability} factsAvailable={planAvailable} /><PrivateShiftStart key={'start:' + plan.id + ':' + planOpen} id={plan.id} expiresAt={plan.expires_at} plannedStart={plan.draft.activities[0].start!} request={request} mutation={mutation} suspended={suspended || !!deleting || !!pending} expired={expired} lock={guardStart} availability={startAvailability} factsAvailable={planAvailable} /><PrivateActivitySelection key={'selection:' + plan.id + ':' + planOpen} id={plan.id} expiresAt={plan.expires_at} content={plan.draft} classifications={plan.classifications} finalEnd={plan.final_end} request={request} mutation={mutation} suspended={suspended || !!deleting || !!pending} expired={expired} lock={guardSelection} availability={selectionAvailability} factsAvailable={planAvailable} />{planAvailable && <><p>Historiske fakta og godtatte ukjente opplysninger gjelder tidspunktet for bekreftelsen. Bussregistreringen over gjelder nå.</p><details className="day-confirmed-details"><summary>Bekreftede detaljer og historisk kilde</summary><Facts historical content={plan.draft} classifications={plan.classifications} /></details><details><summary>Godtatte ukjente fakta</summary><ul>{plan.unknowns.map(item => <li key={item.id}>{item.label}</li>)}</ul></details></>}<div className="controls"><button disabled={!planAvailable || !!deleting || !!pending || busLocked || suspended} onClick={() => void remove()}>Slett bekreftet plan</button><button disabled={busy || !!deleting || busLocked} onClick={() => setPlan(null)}>Lukk planen</button></div></section>}
     {deleting && <div className="controls"><button disabled={busy || suspended} onClick={() => void remove()}>Prøv samme sletting igjen</button><button disabled={busy || suspended} onClick={() => void remove(true)}>Kontroller slettingen</button></div>}
     <h3>Mine bekreftede planer</h3><button disabled={busy || !!pending || !!deleting || busLocked || suspended} onClick={() => void list()}>Oppdater planlisten</button>
     {items.length === 0 && <p>Ingen planer er lastet.</p>}<ul>{items.map(item => <li key={item.id}><button disabled={busy || !!pending || !!deleting || busLocked || suspended} onClick={() => void reopen(item.id)}>Åpne plan {item.service_date ?? 'ukjent dato'} · versjon {item.source_revision}</button> Utløper {date(item.expires_at)}</li>)}</ul>

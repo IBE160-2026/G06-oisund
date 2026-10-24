@@ -3,13 +3,14 @@ import { normalizeBus as normalized, busError } from './busValue';
 
 type Bus = { workday_id: string; physical_bus: string | null; revision: number; expires_at: string };
 type Operation = { operation_id: string; expected_revision: number; physical_bus: string | null };
-type Props = { id: string; expiresAt: string; request: (path: string) => Promise<any>; mutation: (path: string, body: object) => Promise<any>; suspended: boolean; expired: () => void; lock: (value: boolean) => void; availability: (value: boolean) => void };
-export function PrivateBus({ id, expiresAt, request, mutation, suspended, expired, lock, availability }: Props) {
+type Props = { factsAvailable?: boolean; id: string; expiresAt: string; request: (path: string) => Promise<any>; mutation: (path: string, body: object) => Promise<any>; suspended: boolean; expired: () => void; lock: (value: boolean) => void; availability: (value: boolean) => void };
+export function PrivateBus({ id, expiresAt, request, mutation, suspended, expired, lock, availability, factsAvailable = true }: Props) {
   const [saved, setSaved] = useState<Bus | null>(null), [text, setText] = useState('');
   const [pending, setPending] = useState<Operation | null>(null), [comparison, setComparison] = useState<Bus | null>(null);
   const [busy, setBusy] = useState(true), [message, setMessage] = useState('Henter gjeldende registrering …');
   const [focusInput, setFocusInput] = useState(false);
-  const [available, setAvailable] = useState(true);
+  const [ownAvailable, setAvailable] = useState(true);
+  const available = ownAvailable && factsAvailable;
   const alive = useRef(true), sending = useRef(false), editing = useRef(false), generation = useRef(0);
   const input = useRef<HTMLInputElement>(null);
   const path = '/workdays/' + id + '/physical-bus';

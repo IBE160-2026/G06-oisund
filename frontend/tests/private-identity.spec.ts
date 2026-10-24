@@ -352,6 +352,50 @@ for (const delayed of [false, true, 'denied-current'] as const) test(`physical b
   } finally { release(); await other.close(); }
 });
 
+for (const resource of ['selection', 'start']) for (const delayed of [false, true, 'denied-current'] as const) test(`${resource} ${delayed === 'denied-current' ? 'denied current read' : delayed ? 'delayed reply' : 'preflight'} cannot cross a silent account switch`, async ({ page, context }) => {
+  const other = await twoLoggedOutWindows(page, context, true); await login(page, 0);
+  async function post(path: string, data: object) {
+    const proof = await (await context.request.get(API + '/auth/csrf')).json();
+    const response = await context.request.post(API + path, { headers: { Origin: 'http://127.0.0.1:5173', 'X-CSRF-Token': proof.csrf_token }, data });
+    expect(response.status()).toBe(200); return response.json();
+  }
+  const serviceDate = `2035-0${resource === 'selection' ? 1 : 2}-0${delayed === 'denied-current' ? 4 : delayed ? 3 : 2}`;
+  const activityId = randomUUID();
+  const draft = await post('/drafts', { operation_id: (await post('/draft-operations', {})).operation_id, expected_revision: 0, draft: { service_date: serviceDate, activities: [{ id: activityId, type: 'manual', start: serviceDate + 'T10:00+01:00', end: serviceDate + 'T11:00+01:00' }] } });
+  const review = await post('/workday-reviews', { draft_id: draft.id, expected_revision: 1 });
+  const plan = await post('/drafts/' + draft.id + '/confirm', { operation_id: review.operation_id, expected_revision: 1, acknowledgements: [], classifications: {} });
+  const path = '/workdays/' + plan.id + '/' + resource;
+  const read = '/workdays/' + plan.id + '/' + (resource === 'start' ? 'lifecycle' : resource);
+  await page.getByRole('button', { name: 'Oppdater planlisten', exact: true }).click();
+  await page.getByRole('button', { name: 'Åpne plan ' + serviceDate + ' · versjon 1', exact: true }).click();
+  const action = page.getByRole('button', { name: resource === 'selection' ? 'Velg aktivitet 1' : 'Start skift', exact: true });
+  await expect(action).toBeEnabled();
+  let release!: () => void, entered!: () => void, writes = 0;
+  const gate = new Promise<void>(resolve => release = resolve), received = new Promise<void>(resolve => entered = resolve);
+  page.on('request', request => { if (request.url().endsWith(path) && request.method() === 'POST') writes++; });
+  if (delayed === true) await page.route('**:8001' + path, async route => {
+    if (route.request().method() === 'GET') return route.continue();
+    const response = await route.fetch(); entered(); await gate; await route.fulfill({ response });
+  });
+  if (delayed === 'denied-current') await page.route('**:8001' + read, async route => {
+    if (route.request().method() === 'POST') return route.continue();
+    entered(); await gate; await route.fulfill({ status: 404, json: { detail: 'synthetic denied read' } });
+  });
+  try {
+    if (!delayed) await post('/auth/login', accounts[1]);
+    await action.click();
+    if (delayed) { await received; await post('/auth/login', accounts[1]); release(); }
+    await expect(page.getByRole('region', { name: 'Bekreft plan' })).toHaveCount(0);
+    await expect(page.getByRole('region', { name: 'Dagsoversikt', exact: true })).toHaveCount(0);
+    expect(writes).toBe(delayed ? 1 : 0);
+    await post('/auth/login', accounts[0]);
+    const value = await (await context.request.get(API + read)).json();
+    expect(value.revision).toBe(delayed ? 1 : 0);
+    if (resource === 'selection') expect(value.activity_id).toBe(delayed ? activityId : null);
+    else expect(value.state).toBe(delayed ? 'active' : 'confirmed');
+  } finally { release(); await other.close(); }
+});
+
 test('review fix delayed accepted confirmation cannot cross a silent account switch', async ({ page, context }) => {
   const other = await twoLoggedOutWindows(page, context, true);
   await login(page, 0);

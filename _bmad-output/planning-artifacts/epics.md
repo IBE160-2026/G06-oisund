@@ -6,7 +6,8 @@ approved: true
 approvedOn: 2026-10-19
 epics: 4
 stories: 20
-implementationStatus: not-started
+implementationStatus: historical-planning-baseline
+currentDeliveryTracking: ../implementation-artifacts/sprint-status.yaml
 ---
 
 # IBE160 — Active Course V1 Backlog
@@ -17,7 +18,7 @@ Jonas approved [SCOPE-02](sprint-change-proposal-2026-10-19.md) on 19 October. T
 
 Four new epics use numeric IDs **9–12** for the BMAD parser, with aliases **V1-E1–V1-E4**. Stories retain the approved stable aliases **V1-01–V1-20**, mapped below. No old ID is reused for different work. The previous eight epics/80 stories are historical, including their approvals; see the [archive](archive/pre-scope-02-2026-10-19/README.md) and the proposal's exhaustive old-to-new map.
 
-No application feature is implemented or accepted by planning approval. All new stories start in backlog. Plans here and under story-drafts are planning definitions, not executable completion evidence. First implementation tasks are V1-01 and V1-02; the second can run if representative PDFs are unavailable.
+No application feature is implemented or accepted by planning approval. At the approved planning baseline, all new stories started in backlog. That baseline is historical; current delivery is recorded in [sprint tracking](../implementation-artifacts/sprint-status.yaml) and promoted implementation specifications. Plans here and under story-drafts are planning definitions, not executable completion evidence. First implementation tasks are V1-01 and V1-02; the second can run if representative PDFs are unavailable.
 
 ## Delivery boundary
 
@@ -227,9 +228,11 @@ FR-7–9, FR-15 and FR-23 are deferred; the remaining original FRs are narrowed 
 
 **Depends on:** earlier included slices, as explicitly declared below. No dependency on an old deferred epic.
 
+**Owner-approved allocation, 2026-10-24:** Story 11.1 additionally owns explicit `Start skift`, persisted start status and first server-accepted actual start time, with repeated/concurrent/lost-response recovery. Activity consultation/selection is available before start and never activates or completes work. Planned and actual start stay distinct. Story 11.2 reuses the selected activity and current lifecycle. Story 11.3 extends that lifecycle for outcomes/end/abort/recap and must reuse the existing start action/time rather than duplicate it; terminal guards and shortened expiry belong there. Story 11.6 integrates recovery without postponing 11.1 write integrity. This allocation changes scope, not implementation or final acceptance status; use sprint tracking and the promoted 11.1 specification for current delivery state.
+
 ### Story 11.1: Choose the intended activity
 
-**Stable alias:** V1-10. **Status:** backlog; approved scope, implementation/evidence not started.
+**Stable alias:** V1-10. **Historical planning baseline:** backlog; implementation/evidence had not started at scope approval. Current 11.1 implementation/review and owner-acceptance state is recorded in [sprint tracking](../implementation-artifacts/sprint-status.yaml) and the [promoted specification](../implementation-artifacts/spec-11-1-choose-the-intended-activity.md).
 **Depends on:** V1-09.
 **Traceability:** FR-6/10/11/20; AC-03; SCOPE-02.
 

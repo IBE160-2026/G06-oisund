@@ -91,3 +91,9 @@ summary:focus-visible, fieldset:focus-visible { outline: 3px solid #000; outline
 .night .day-overview .day-reporting { color: #edf3f7; background: #203e53; border-color: #b6c8d5; }
 .night .day-overview .day-list > li, .night .day-overview .day-member + .day-member { border-color: #b6c8d5; }
 .night .day-overview .day-uncertainty :focus-visible { outline-color: #000; }
+.private-activity-selection, .private-shift-start { margin-block: 1.5rem; padding: 1rem; border: 2px solid currentColor; border-radius: 8px; overflow-wrap: anywhere; }
+.private-activity-selection button, .private-shift-start button, .day-member button { min-height: 58px; border-width: 2px; border-radius: 8px; white-space: normal; overflow-wrap: anywhere; }
+.selected-activity { border-inline-start: 4px solid currentColor; padding-inline-start: 1rem; }
+.activity-selection-marker { font-weight: 700; }
+.private-activity-selection [role="status"]:focus-visible, .private-shift-start [role="status"]:focus-visible { outline: 3px solid #000; outline-offset: 4px; }
+.night .private-activity-selection [role="status"]:focus-visible, .night .private-shift-start [role="status"]:focus-visible { outline-color: #ffe39b; }

@@ -12,7 +12,9 @@ from pydantic import BaseModel, ConfigDict, Field
 from . import auth
 from . import draft_storage
 from . import workday_storage
-from . import workday_bus_storage
+from . import workday_bus_storage, workday_selection_storage, workday_lifecycle_storage
+from .workday_selection_domain import SaveSelection, SelectionRecord, SelectionReceipt
+from .workday_lifecycle_domain import StartWorkday, LifecycleRecord, StartReceipt
 from .workday_bus_domain import SaveBus, BusRecord, BusReceipt
 from .workday_domain import ConfirmRequest, ReviewRequest, Review, WorkdayRecord, WorkdayList, WorkdayOperation, DeleteWorkdayRequest, DeletedWorkday
 from . import private_import
@@ -251,3 +253,33 @@ def save_physical_bus(identifier: UUID, body: SaveBus, request: Request):
 @app.get('/workday-bus-operations/{identifier}', response_model=BusReceipt)
 def find_bus_operation(identifier: UUID, request: Request):
     return workday_bus_storage.lookup(request, identifier)
+
+
+@app.get('/workdays/{identifier}/selection', response_model=SelectionRecord)
+def activity_selection(identifier: UUID, request: Request):
+    return workday_selection_storage.read(request, identifier)
+
+
+@app.post('/workdays/{identifier}/selection', response_model=SelectionReceipt)
+def save_activity_selection(identifier: UUID, body: SaveSelection, request: Request):
+    return workday_selection_storage.save(request, identifier, body)
+
+
+@app.get('/workday-selection-operations/{identifier}', response_model=SelectionReceipt)
+def find_selection_operation(identifier: UUID, request: Request):
+    return workday_selection_storage.lookup(request, identifier)
+
+
+@app.get('/workdays/{identifier}/lifecycle', response_model=LifecycleRecord)
+def workday_lifecycle(identifier: UUID, request: Request):
+    return workday_lifecycle_storage.read(request, identifier)
+
+
+@app.post('/workdays/{identifier}/start', response_model=StartReceipt)
+def start_workday(identifier: UUID, body: StartWorkday, request: Request):
+    return workday_lifecycle_storage.save(request, identifier, body)
+
+
+@app.get('/workday-start-operations/{identifier}', response_model=StartReceipt)
+def find_start_operation(identifier: UUID, request: Request):
+    return workday_lifecycle_storage.lookup(request, identifier)

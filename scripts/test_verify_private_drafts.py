@@ -10,6 +10,25 @@ import unittest
 from unittest.mock import patch
 
 
+def activity_resource_stub():
+    selection = {'workday_id': 'synthetic', 'activity_id': None, 'revision': 0, 'expires_at': 'synthetic'}
+    lifecycle = {'workday_id': 'synthetic', 'state': 'confirmed', 'started_at': None, 'revision': 0, 'expires_at': 'synthetic'}
+    def reply(request):
+        if isinstance(request, str): return None
+        path = request.full_url
+        if path.endswith('/selection'):
+            if request.data is not None:
+                selection.update(activity_id='synthetic-activity', revision=1)
+                return {'result': dict(selection)}
+            return dict(selection)
+        if path.endswith('/lifecycle'): return dict(lifecycle)
+        if path.endswith('/start'):
+            lifecycle.update(state='active', started_at='synthetic-server-time', revision=1)
+            return {'result': dict(lifecycle)}
+        return None
+    return reply
+
+
 class RestorationTest(unittest.TestCase):
     def test_physical_bus_fictional_probes_use_valid_post_origin_and_body(self):
         source = Path(__file__).with_name('verify-private-drafts.py').read_text(encoding='utf-8')
@@ -41,15 +60,17 @@ class RestorationTest(unittest.TestCase):
         def subprocess_stub(args, **kwargs):
             calls.append(args)
             return SimpleNamespace(returncode=0, stdout='{"activities":[]}' if 'model_dump_json' in (kwargs.get('input') or '') else '')
+        resources = activity_resource_stub()
         def http_stub(request, **kwargs):
             path = request.full_url
-            if path.endswith('/auth/csrf'): value = {'csrf_token': 'synthetic'}
+            if (value := resources(request)) is not None: pass
+            elif path.endswith('/auth/csrf'): value = {'csrf_token': 'synthetic'}
             elif path.endswith('/auth/login'): value = {'account_id': 'synthetic'}
             elif path.endswith('/draft-operations'): value = {'operation_id': 'synthetic'}
             elif path.endswith('/workday-reviews'): value = {'operation_id': 'synthetic', 'unknowns': [], 'classifications_required': []}
             elif path.endswith('/physical-bus'):
                 value = {'revision': 0, 'physical_bus': None, 'expires_at': 'synthetic'} if request.data is None else {'result': {'revision': 1, 'physical_bus': 'mismatched acknowledgement', 'expires_at': 'synthetic'}}
-            else: value = {'id': 'synthetic', 'expires_at': 'synthetic', 'revision': 1, 'draft': {'realtime_duty': '007', 'physical_bus': 'Bus-0012'}}
+            else: value = {'id': 'synthetic', 'expires_at': 'synthetic', 'revision': 1, 'draft': {'realtime_duty': '007', 'physical_bus': 'Bus-0012', 'activities': [{'id': 'synthetic-activity'}]}}
             response = io.BytesIO(json.dumps(value).encode()); response.headers = {'Cache-Control': 'no-store'}
             return response
         with patch.dict(os.environ, {'COMPOSE_PROJECT_NAME': 'ibe160-private-tests'}), patch('subprocess.run', subprocess_stub), patch('urllib.request.build_opener', return_value=SimpleNamespace(open=http_stub)):
@@ -66,9 +87,11 @@ class RestorationTest(unittest.TestCase):
                 def subprocess_stub(args, **kwargs):
                     calls.append(args)
                     return SimpleNamespace(returncode=0, stdout='{"activities":[]}' if 'model_dump_json' in (kwargs.get('input') or '') else '')
+                resources = activity_resource_stub()
                 def http_stub(request, **kwargs):
                     path = request.full_url
-                    if path.endswith('/auth/csrf'): value = {'csrf_token': 'synthetic'}
+                    if (value := resources(request)) is not None: pass
+                    elif path.endswith('/auth/csrf'): value = {'csrf_token': 'synthetic'}
                     elif path.endswith('/auth/login'): value = {'account_id': 'synthetic'}
                     elif path.endswith('/draft-operations'): value = {'operation_id': 'synthetic'}
                     elif path.endswith('/workday-reviews'): value = {'operation_id': 'synthetic', 'unknowns': [], 'classifications_required': []}
@@ -80,7 +103,7 @@ class RestorationTest(unittest.TestCase):
                         self.assertLessEqual(len(pages), 2, 'Verifier followed an invalid cursor instead of failing fast')
                         cursor = '00000000-0000-4000-8000-000000000002' if len(pages) == 1 else next_cursor
                         value = {'drafts': [{'id': str(len(pages))}], 'next_cursor': cursor}
-                    else: value = {'id': 'synthetic', 'expires_at': 'synthetic', 'revision': 1, 'draft': {'realtime_duty': '007', 'physical_bus': 'Bus-0012'}}
+                    else: value = {'id': 'synthetic', 'expires_at': 'synthetic', 'revision': 1, 'draft': {'realtime_duty': '007', 'physical_bus': 'Bus-0012', 'activities': [{'id': 'synthetic-activity'}]}}
                     response = io.BytesIO(json.dumps(value).encode())
                     response.headers = {'Cache-Control': 'no-store'}
                     return response
@@ -105,13 +128,15 @@ class RestorationTest(unittest.TestCase):
                 started = True
             return SimpleNamespace(returncode=0, stdout='{"activities":[]}' if 'model_dump_json' in (kwargs.get('input') or '') else '')
 
+        resources = activity_resource_stub()
         def http_stub(request, **kwargs):
             if isinstance(request, str):
                 self.assertIn(':8000/', request)
                 self.assertTrue(started)
                 raise RuntimeError('stop after prerequisite check')
             path = request.full_url
-            if path.endswith('/auth/csrf'):
+            if (value := resources(request)) is not None: pass
+            elif path.endswith('/auth/csrf'):
                 value = {'csrf_token': 'synthetic'}
             elif path.endswith('/auth/login'):
                 value = {'account_id': 'synthetic'}
@@ -126,7 +151,7 @@ class RestorationTest(unittest.TestCase):
             elif path.endswith('/drafts') and request.data is None:
                 value = {'drafts': [], 'next_cursor': None}
             else:
-                value = {'id': 'synthetic', 'expires_at': 'synthetic', 'revision': 1, 'draft': {'realtime_duty': '007', 'physical_bus': 'Bus-0012'}}
+                value = {'id': 'synthetic', 'expires_at': 'synthetic', 'revision': 1, 'draft': {'realtime_duty': '007', 'physical_bus': 'Bus-0012', 'activities': [{'id': 'synthetic-activity'}]}}
             response = io.BytesIO(json.dumps(value).encode())
             response.headers = {'Cache-Control': 'no-store'}
             return response

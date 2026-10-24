@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 10-19-2026 14:35
-last_updated: 10-24-2026 18:18
+last_updated: 10-24-2026 21:12
 project: IBE160
 project_key: NOKEY
 tracking_system: file-system
@@ -50,8 +50,8 @@ development_status:
   10-5-read-the-day: done # Owner approved 2026-10-24; 236 backend/API and 190 Playwright tests passed. Actual iPad check not run.
   epic-10-retrospective: done
 
-  epic-11: backlog
-  11-1-choose-the-intended-activity: backlog
+  epic-11: in-progress
+  11-1-choose-the-intended-activity: done # Jonas explicitly accepted 2026-10-24 after manual feedback; commit/push subsequently authorized.
   11-2-understand-the-selected-activity: backlog
   11-3-record-outcomes-and-close: backlog
   11-4-maintain-a-planned-notice: backlog

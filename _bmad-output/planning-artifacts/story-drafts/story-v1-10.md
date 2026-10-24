@@ -1,5 +1,7 @@
 ---
-status: backlog
+status: historical-planning-baseline
+planningBaselineStatus: backlog
+currentDeliveryTracking: ../../implementation-artifacts/sprint-status.yaml
 scopeApproval: approved
 decision: SCOPE-02
 approvedOn: 2026-10-19
@@ -7,14 +9,16 @@ alias: V1-10
 epic: 11
 story: '11.1'
 dependencies: [V1-09]
-implementationStarted: false
+planningBaselineImplementationStarted: false
 ---
 
 ### Story 11.1: Choose the intended activity
 
-**Stable alias:** V1-10. **Status:** backlog; approved scope, implementation/evidence not started.
+**Stable alias:** V1-10. **Historical planning baseline:** backlog; implementation/evidence had not started at scope approval. Current 11.1 implementation/review and owner-acceptance state is recorded in [sprint tracking](../../implementation-artifacts/sprint-status.yaml) and the [promoted specification](../../implementation-artifacts/spec-11-1-choose-the-intended-activity.md).
 **Depends on:** V1-09.
 **Traceability:** FR-6/10/11/20; AC-03; SCOPE-02.
+
+**Owner-approved scope addition, 2026-10-24:** Include separate explicit `Start skift`, server-persisted start status/actual first start time and repeated/concurrent/lost-response recovery. Keep planned and actual start distinct. Consultation/selection works before start and never activates or completes work. Story 11.3 extends this lifecycle for outcomes/closure without duplicating Start. The promoted [11.1 specification](../../implementation-artifacts/spec-11-1-choose-the-intended-activity.md) records the approved details; this addition is not final product acceptance.
 
 **User outcome:** direct and previous/next selection distinguish lines 20/24 and direction; selection persists online and never advances by clock or changes completion status.
 
