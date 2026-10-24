@@ -103,8 +103,12 @@ export function PrivateAccess() {
   async function request(path: string, options?: RequestInit) {
     const response = await fetch(API + path, { ...options, credentials: 'include', cache: 'no-store', signal: options?.signal ?? AbortSignal.timeout(10000) });
     if (!response.ok || !response.headers.get('content-type')?.includes('application/json')) {
+      let apiDetail: unknown;
+      if (!response.ok && response.headers.get('content-type')?.includes('application/json')) {
+        try { const body = await response.json(); if (body && Object.keys(body).join() === 'detail') apiDetail = body.detail; } catch { /* A transport status alone never settles an uncertain write. */ }
+      }
       const error = new Error(response.status === 401 ? 'Logg inn på nytt. Brukernavn eller passord kan være feil.' : response.status === 429 ? 'For mange forsøk. Vent 15 minutter før du prøver igjen.' : 'Tjenesten er utilgjengelig eller avviste forespørselen.');
-      throw Object.assign(error, { status: response.status });
+      throw Object.assign(error, { status: response.status, apiDetail });
     }
     return response.json();
   }

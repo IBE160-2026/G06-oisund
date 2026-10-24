@@ -12,6 +12,8 @@ from pydantic import BaseModel, ConfigDict, Field
 from . import auth
 from . import draft_storage
 from . import workday_storage
+from . import workday_bus_storage
+from .workday_bus_domain import SaveBus, BusRecord, BusReceipt
 from .workday_domain import ConfirmRequest, ReviewRequest, Review, WorkdayRecord, WorkdayList, WorkdayOperation, DeleteWorkdayRequest, DeletedWorkday
 from . import private_import
 from .draft_time import LocalTime, TimeResolution, resolve as resolve_time
@@ -145,8 +147,8 @@ def logout(request: Request, response: Response):
 
 
 @app.get('/drafts', response_model=DraftList)
-def drafts(request: Request):
-    return draft_storage.listing(request)
+def drafts(request: Request, cursor: UUID | None = None):
+    return draft_storage.listing(request, cursor)
 
 
 @app.post('/imports/pdf', response_model=DraftContent)
@@ -234,3 +236,18 @@ def delete_workday(identifier: UUID, body: DeleteWorkdayRequest, request: Reques
 @app.get('/workday-deletions/{identifier}', response_model=DeletedWorkday)
 def find_workday_deletion(identifier: UUID, request: Request):
     return workday_storage.deletion_lookup(request, identifier)
+
+
+@app.get('/workdays/{identifier}/physical-bus', response_model=BusRecord)
+def physical_bus(identifier: UUID, request: Request):
+    return workday_bus_storage.read(request, identifier)
+
+
+@app.post('/workdays/{identifier}/physical-bus', response_model=BusReceipt)
+def save_physical_bus(identifier: UUID, body: SaveBus, request: Request):
+    return workday_bus_storage.save(request, identifier, body)
+
+
+@app.get('/workday-bus-operations/{identifier}', response_model=BusReceipt)
+def find_bus_operation(identifier: UUID, request: Request):
+    return workday_bus_storage.lookup(request, identifier)

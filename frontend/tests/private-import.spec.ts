@@ -32,7 +32,7 @@ data=pdf_bytes([b'<< /Type /Catalog /Pages 2 0 R >>',b'<< /Type /Pages /Count 1 
 print(base64.b64encode(data).decode())
 `).trim(), 'base64');
 });
-test.beforeEach(() => python("with database() as conn:\n conn.execute('DELETE FROM login_limits')\n"));
+test.beforeEach(() => python(`with database() as conn:\n owner=conn.execute('SELECT id FROM accounts WHERE username=%s', (${JSON.stringify(username)},)).fetchone()['id']\n conn.execute('DELETE FROM drafts WHERE owner=%s',(owner,))\n conn.execute('DELETE FROM draft_operations WHERE owner=%s',(owner,))\n conn.execute('DELETE FROM draft_deletions WHERE owner=%s',(owner,))\n conn.execute('DELETE FROM login_limits')\n`));
 test.afterAll(() => python(`with database() as conn:\n owner=conn.execute('SELECT id FROM accounts WHERE username=%s', (${JSON.stringify(username)},)).fetchone()['id']\n conn.execute('DELETE FROM drafts WHERE owner=%s',(owner,))\n conn.execute('DELETE FROM draft_operations WHERE owner=%s',(owner,))\n conn.execute('DELETE FROM draft_deletions WHERE owner=%s',(owner,))\n conn.execute('DELETE FROM sessions WHERE owner=%s',(owner,))\n conn.execute('DELETE FROM accounts WHERE id=%s',(owner,))\n conn.execute('DELETE FROM login_limits')\n`));
 async function login(page: Page) {
   await page.goto('/private');

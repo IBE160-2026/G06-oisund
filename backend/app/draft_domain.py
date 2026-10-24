@@ -263,7 +263,8 @@ class DraftSummary(StrictModel):
 
 
 class DraftList(StrictModel):
-    drafts: list[DraftSummary] = Field(max_length=200)
+    drafts: list[DraftSummary] = Field(max_length=50)
+    next_cursor: UUID | None
 
 
 class IssuedOperation(StrictModel):

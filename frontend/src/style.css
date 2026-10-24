@@ -27,7 +27,7 @@ legend { font-weight: 700; }
 pre { white-space: pre-wrap; overflow-wrap: anywhere; background: #edf3f7; padding: 1rem; }
 .fact { display: contents; }
 select { font: inherit; width: 100%; min-width: 0; color: #162c3c; background: white; border: 2px solid #536775; padding: .65rem; border-radius: .3rem; }
-select:focus-visible, h2:focus-visible { outline: 3px solid #000; outline-offset: 4px; }
+select:focus-visible, h2:focus-visible, .draft-loaded-count:focus-visible { outline: 3px solid #000; outline-offset: 4px; }
 @media (max-width: 700px) { .draft-grid { grid-template-columns: 1fr; } }
 .import-facts { margin: 1.5rem 0; padding: 1rem; border: 2px solid currentColor; overflow-wrap: anywhere; }
 .import-columns, .source-header { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
@@ -67,3 +67,8 @@ summary:focus-visible, fieldset:focus-visible { outline: 3px solid #000; outline
 .private-confirmation select { max-width: 100%; min-height: 44px; font: inherit; }
 .private-confirmation .confirmation-ack { display: flex; align-items: flex-start; gap: .75rem; padding-block: .5rem; }
 .private-confirmation .confirmation-ack input { flex: 0 0 auto; width: 1.4rem; height: 1.4rem; margin-top: .1rem; }
+
+.private-bus { border: 2px solid var(--border, currentColor); padding: 1rem; margin: 1rem 0; }
+.bus-value { white-space: pre-wrap; overflow-wrap: anywhere; }
+.private-bus input { max-width: 100%; }
+.night .private-bus .import-warning button { color: #fff; background: #173e60; border-color: #173e60; }

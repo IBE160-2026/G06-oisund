@@ -9,7 +9,7 @@ function python(program: string) {
   return execFileSync('docker', ['compose', '-p', 'ibe160-private-tests', '-f', 'compose.private.yaml', 'exec', '-T', 'private-api', 'python', '-'], { cwd: '..', input: 'from app.auth import require_synthetic_accounts\nfrom app.private_storage import database\nwith database() as conn:\n require_synthetic_accounts(conn)\n' + program, encoding: 'utf8' });
 }
 test.beforeAll(() => { python(`from app.auth import provision\nprovision(${JSON.stringify(username)}, ${JSON.stringify(password)})\nwith database() as conn:\n conn.execute('DELETE FROM login_limits')\n`); });
-test.beforeEach(() => { python("with database() as conn:\n conn.execute('DELETE FROM login_limits')\n"); });
+test.beforeEach(() => { python(`with database() as conn:\n owner=conn.execute('SELECT id FROM accounts WHERE username=%s', (${JSON.stringify(username)},)).fetchone()['id']\n conn.execute('DELETE FROM drafts WHERE owner=%s',(owner,))\n conn.execute('DELETE FROM draft_operations WHERE owner=%s',(owner,))\n conn.execute('DELETE FROM draft_deletions WHERE owner=%s',(owner,))\n conn.execute('DELETE FROM login_limits')\n`); });
 test.afterAll(() => { python(`with database() as conn:\n owner=conn.execute('SELECT id FROM accounts WHERE username=%s', (${JSON.stringify(username)},)).fetchone()['id']\n conn.execute('DELETE FROM drafts WHERE owner=%s',(owner,))\n conn.execute('DELETE FROM draft_operations WHERE owner=%s',(owner,))\n conn.execute('DELETE FROM draft_deletions WHERE owner=%s',(owner,))\n conn.execute('DELETE FROM sessions WHERE owner=%s',(owner,))\n conn.execute('DELETE FROM accounts WHERE id=%s',(owner,))\n conn.execute('DELETE FROM login_limits')\n`); });
 async function login(page: Page) {
   await page.goto('/private');
@@ -34,6 +34,94 @@ async function fill(page: Page) {
   await page.getByLabel('Kilde / manuell rettelse').fill('Manuell rettelse, ukjent sted.');
 }
 const status = (page: Page) => page.getByRole('region', { name: 'Private utkast' }).getByRole('status');
+
+test('all 201 saved drafts remain reachable and the final page reopens', async ({ page }) => {
+  await page.setViewportSize({ width: 768, height: 1100 });
+  python(`from uuid import UUID\nfrom psycopg.types.json import Jsonb\nwith database() as conn:\n owner=conn.execute('SELECT id FROM accounts WHERE username=%s', (${JSON.stringify(username)},)).fetchone()['id']\n conn.execute('DELETE FROM drafts WHERE owner=%s', (owner,))\n for n in range(1,202):\n  conn.execute('INSERT INTO drafts(id,owner,revision,content) VALUES (%s,%s,1,%s)', (UUID(int=n),owner,Jsonb({'service_date':'2032-12-31' if n==201 else None,'physical_bus':'Later-page' if n==201 else None,'activities':[]})))\n`);
+  await login(page);
+  await expect(page.getByRole('button', { name: /^Åpne / })).toHaveCount(50);
+  for (const count of [100, 150, 200, 201]) {
+    const more = page.getByRole('button', { name: 'Vis flere utkast' });
+    if (count === 201) { await more.focus(); await page.keyboard.press('Enter'); }
+    else await more.click();
+    await expect(page.getByRole('button', { name: /^Åpne / })).toHaveCount(count);
+  }
+  await expect(page.getByRole('button', { name: 'Vis flere utkast' })).toHaveCount(0);
+  await expect(page.getByText('Lastet 201 utkast.', { exact: true })).toBeFocused();
+  await expect(page.getByText('Lastet 201 utkast.', { exact: true })).toHaveCSS('outline-width', '3px');
+  await expect(page.getByText('Lastet 201 utkast.', { exact: true })).toHaveCSS('outline-style', 'solid');
+  await page.getByRole('button', { name: 'Åpne 2032-12-31 · versjon 1', exact: true }).scrollIntoViewIfNeeded();
+  await page.screenshot({ path: 'test-results/e9-pagination-768.png' });
+  await page.getByRole('button', { name: 'Åpne 2032-12-31 · versjon 1', exact: true }).click();
+  await expect(page.getByLabel('Buss/vogn', { exact: true })).toHaveValue('Later-page');
+  await page.getByRole('button', { name: 'Oppdater listen' }).click();
+  await expect(page.getByRole('button', { name: /^Åpne / })).toHaveCount(50);
+  for (const invalidate of ['refresh', 'delete']) {
+    let release!: () => void, entered!: () => void;
+    const gate = new Promise<void>(resolve => { release = resolve; });
+    const waiting = new Promise<void>(resolve => { entered = resolve; });
+    await page.route('**:8001/drafts?cursor=*', async route => {
+      const response = await route.fetch(); entered(); await gate; await route.fulfill({ response });
+    });
+    try {
+      await page.getByRole('button', { name: 'Vis flere utkast' }).click(); await waiting;
+      if (invalidate === 'refresh') {
+        await page.getByRole('button', { name: 'Oppdater listen' }).click();
+        await expect(page.getByText('Laster lagrede utkast …', { exact: true })).toHaveCount(0);
+      } else {
+        page.once('dialog', dialog => dialog.accept());
+        await page.getByRole('button', { name: 'Slett utkast', exact: true }).click();
+        await expect(status(page)).toHaveText('Utkastet er slettet.');
+      }
+      const late = page.waitForResponse(response => new URL(response.url()).searchParams.has('cursor'));
+      release(); await (await late).finished();
+      await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve(null)))));
+      await expect(page.getByRole('button', { name: /^Åpne / })).toHaveCount(50);
+    } finally { release(); await page.unroute('**:8001/drafts?cursor=*'); }
+  }
+  python(`with database() as conn:\n conn.execute('DELETE FROM drafts WHERE owner IN (SELECT id FROM accounts WHERE username=%s)', (${JSON.stringify(username)},))\n`);
+});
+
+for (const [label, next_cursor] of [['missing', undefined], ['invalid', 'invalid'], ['inconsistent', '00000000-0000-4000-8000-000000000001']] as const) test(`malformed pagination is recoverable (${label})`, async ({ page }) => {
+  await login(page); await fill(page);
+  await page.route('**:8001/drafts', route => route.fulfill({ json: { drafts: [], ...(next_cursor === undefined ? {} : { next_cursor }) } }));
+  await page.getByRole('button', { name: 'Oppdater listen' }).click();
+  await expect(status(page)).toContainText('Listen kunne ikke lastes.');
+  await expect(page.getByLabel('Buss/vogn', { exact: true })).toHaveValue('Bus-0012');
+  await page.unroute('**:8001/drafts');
+  await page.getByRole('button', { name: 'Oppdater listen' }).click();
+  await expect(status(page)).toHaveText('Listen er oppdatert.');
+});
+
+for (const malformed of ['duplicate', 'out-of-order', 'before-cursor', 'continuation']) test(`malformed later page retains rows cursor and input (${malformed})`, async ({ page }) => {
+  const id = (n: number) => '00000000-0000-4000-8000-' + n.toString(16).padStart(12, '0');
+  const created_at = new Date().toISOString();
+  const expires_at = new Date(Date.parse(created_at) + 7 * 86400000).toISOString();
+  const row = (n: number) => ({ id: id(n), created_at, expires_at, revision: 1, service_date: null });
+  const rows = Array.from({ length: 50 }, (_, index) => row(index + 1));
+  const later = row;
+  await page.route('**:8001/drafts', route => route.fulfill({ json: { drafts: rows, next_cursor: id(50) } }));
+  let correct = false;
+  const cursors: string[] = [];
+  await page.route('**:8001/drafts?cursor=*', route => {
+    cursors.push(new URL(route.request().url()).searchParams.get('cursor')!);
+    const drafts = malformed === 'duplicate' ? [later(51), later(51)] : malformed === 'out-of-order' ? [later(52), later(51)] : malformed === 'before-cursor' ? [later(49)] : [later(51)];
+    return route.fulfill({ json: correct ? { drafts: [later(51)], next_cursor: null } : { drafts, next_cursor: malformed === 'continuation' ? id(52) : null } });
+  });
+  await login(page);
+  await expect(page.getByRole('button', { name: /^Åpne / })).toHaveCount(50);
+  await page.getByLabel('Buss/vogn', { exact: true }).fill('Retained later-page input');
+  await page.getByRole('button', { name: 'Vis flere utkast' }).click();
+  await expect(status(page)).toContainText('Listen kunne ikke lastes.');
+  await expect(page.getByRole('button', { name: /^Åpne / })).toHaveCount(50);
+  await expect(page.getByLabel('Buss/vogn', { exact: true })).toHaveValue('Retained later-page input');
+  correct = true;
+  await page.getByRole('button', { name: 'Vis flere utkast' }).click();
+  await expect(page.getByRole('button', { name: /^Åpne / })).toHaveCount(51);
+  await expect(page.getByText('Lastet 51 utkast.', { exact: true })).toBeFocused();
+  await expect(page.getByLabel('Buss/vogn', { exact: true })).toHaveValue('Retained later-page input');
+  expect(cursors).toEqual([id(50), id(50)]);
+});
 
 test('manual unknowns and unresolved time input follow activity identity through reorder and discard', async ({ page }) => {
   await login(page); await fill(page);
@@ -204,7 +292,7 @@ test('UTF-8 size preflight preserves valid Unicode input without issuing a save'
   const id = randomUUID(), now = Date.now();
   const rows = Array.from({ length: 200 }, () => ({ id: randomUUID(), type: null, raw_code: null, start: null, end: null, source_start: null, source_end: null, from_place: null, to_place: null, trip: null, line: null, direction: null, uncertainty: '界'.repeat(1000), provenance: '界'.repeat(1000) }));
   const record = { id, created_at: new Date(now).toISOString(), expires_at: new Date(now + 7 * 86400000).toISOString(), revision: 1, draft: { service_date: null, vehicle_duty: null, realtime_duty: null, physical_bus: null, activities: rows } };
-  await page.route('**:8001/drafts', route => route.fulfill({ json: { drafts: [{ ...record, service_date: null }] } }));
+  await page.route('**:8001/drafts', route => route.fulfill({ json: { next_cursor: null, drafts: [{ ...record, service_date: null }] } }));
   await page.route('**:8001/drafts/' + id, route => route.fulfill({ json: record }));
   await page.getByRole('button', { name: 'Oppdater listen' }).click();
   await page.getByRole('button', { name: 'Åpne ukjent tjenestedato · versjon 1' }).click();
@@ -390,7 +478,7 @@ test('a delayed earlier list cannot replace the post-save revision list', async 
 
 for (const invalid of [null, { id: randomUUID(), revision: 1, expires_at: 'invalid', service_date: '2026-11-01' }]) test(`malformed summary remains recoverable (${invalid === null ? 'null' : 'invalid'})`, async ({ page }) => {
   await login(page); await fill(page);
-  await page.route('**:8001/drafts', route => route.fulfill({ json: { drafts: [invalid] } }));
+  await page.route('**:8001/drafts', route => route.fulfill({ json: { next_cursor: null, drafts: [invalid] } }));
   await page.getByRole('button', { name: 'Oppdater listen' }).click();
   await expect(status(page)).toContainText('Listen kunne ikke lastes.');
   await expect(page.getByLabel('Buss/vogn', { exact: true })).toHaveValue('Bus-0012');
@@ -696,9 +784,10 @@ test('initial failed lists and later failures never claim an acknowledged empty 
   await login(page);
   await expect(page.getByText('Listen er utilgjengelig.', { exact: false })).toBeVisible();
   await expect(page.getByText('Ingen lagrede utkast.', { exact: true })).toHaveCount(0);
+  await expect(page.getByText('Lastet 0 utkast.', { exact: true })).toHaveCount(0);
   await page.getByLabel('Buss/vogn', { exact: true }).fill('retained');
   await page.unroute('**:8001/drafts');
-  await page.route('**:8001/drafts', route => route.fulfill({ json: { drafts: [] } }));
+  await page.route('**:8001/drafts', route => route.fulfill({ json: { next_cursor: null, drafts: [] } }));
   await page.getByRole('button', { name: 'Oppdater listen' }).click();
   await expect(page.getByText('Ingen lagrede utkast.', { exact: true })).toBeVisible();
   await expect(page.getByLabel('Buss/vogn', { exact: true })).toHaveValue('retained');

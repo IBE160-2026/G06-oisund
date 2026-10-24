@@ -120,7 +120,7 @@ test('known fixed deadline clears in-memory presentation', async ({ page }) => {
   await page.route('**:8001/auth/session', route => route.fulfill({ json: {
     account_id: accountId, expires_at: new Date(deadline).toISOString(), created_at: new Date(deadline - 14 * 86400000).toISOString(),
   } }));
-  await page.route('**:8001/drafts', route => route.fulfill({ json: { drafts: [] } }));
+  await page.route('**:8001/drafts', route => route.fulfill({ json: { next_cursor: null, drafts: [] } }));
   await page.goto('/private');
   await expect(page.getByRole('heading', { name: 'Privat arbeidsrom' })).toBeVisible();
   await expect(page.getByRole('status', { name: 'Tilgangsstatus' })).toHaveText('Økten er utløpt. Logg inn på nytt.', { timeout: 6000 });

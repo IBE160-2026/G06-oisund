@@ -44,4 +44,5 @@ def cleanup():
         conn.execute('DELETE FROM draft_operations WHERE expires_at <= clock_timestamp()')
         conn.execute('DELETE FROM draft_deletions WHERE expires_at <= clock_timestamp()')
         conn.execute('DELETE FROM workday_deletions WHERE expires_at <= clock_timestamp()')
+        conn.execute('DELETE FROM workday_bus_operations WHERE expires_at <= clock_timestamp()')
         conn.execute('DELETE FROM login_limits WHERE expires_at <= clock_timestamp()')

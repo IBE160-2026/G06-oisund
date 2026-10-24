@@ -1,10 +1,11 @@
 """Real PostgreSQL/API draft matrix, exclusively in the disposable project."""
 import concurrent.futures
+from contextlib import contextmanager
 import os
 import threading
 import time
 from types import SimpleNamespace
-from uuid import uuid4
+from uuid import UUID, uuid4
 
 import httpx
 import pytest
@@ -51,6 +52,99 @@ def issue(client, identifier=None):
 def save(client, facts=None, identifier=None, revision=0, operation=None):
     body = {'operation_id': operation or issue(client, identifier), 'expected_revision': revision, 'draft': facts or content()}
     return client.post('/drafts' + ('/' + identifier if identifier else ''), headers=headers(client), json=body), body
+
+
+@pytest.mark.parametrize('boundary', ['insert', 'accept'])
+@pytest.mark.parametrize('target', ['create', 'update'])
+def test_operation_expiry_at_write_boundary_rolls_back(client, users, monkeypatch, boundary, target):
+    from app import draft_storage
+    from app.draft_domain import SaveDraft
+    assert login(client, users).status_code == 200
+    original = save(client)[0].json() if target == 'update' else None
+    identifier = UUID(original['id']) if original else None
+    operation = issue(client, str(identifier) if identifier else None)
+    facts = {**(original['draft'] if original else content()), 'physical_bus': 'Boundary update'}
+    body = SaveDraft.model_validate({'operation_id': operation, 'expected_revision': 1 if original else 0, 'draft': facts})
+    with database() as conn:
+        pending = conn.execute('SELECT * FROM draft_operations WHERE id=%s', (operation,)).fetchone()
+    request = SimpleNamespace(cookies={auth.SESSION: client.cookies.get(auth.SESSION)})
+    class Connection:
+        def __init__(self, conn): self.conn = conn
+        def execute(self, query, params=None):
+            trigger = ('UPDATE drafts SET content=' if original else 'INSERT INTO drafts') if boundary == 'insert' else 'UPDATE draft_operations SET draft_id='
+            if query.startswith(trigger):
+                self.conn.execute('UPDATE draft_operations SET expires_at=clock_timestamp() WHERE id=%s', (operation,))
+            return self.conn.execute(query, params)
+    @contextmanager
+    def wrapped():
+        with database() as conn: yield Connection(conn)
+    monkeypatch.setattr(draft_storage, 'database', wrapped)
+    with pytest.raises(HTTPException) as error:
+        draft_storage.save(request, identifier, body)
+    assert error.value.status_code == 410
+    with database() as conn:
+        assert conn.execute('SELECT count(*) AS n FROM drafts WHERE owner=%s', (users[1][0],)).fetchone()['n'] == (1 if original else 0)
+        assert conn.execute('SELECT * FROM draft_operations WHERE id=%s', (operation,)).fetchone() == pending
+    monkeypatch.undo()
+    if original:
+        assert client.get('/drafts/' + original['id']).json() == original
+    accepted, payload = save(client, body.draft.model_dump(mode='json'), str(identifier) if identifier else None, body.expected_revision, operation)
+    assert accepted.status_code == 200
+    assert accepted.json()['revision'] == body.expected_revision + 1
+    if original:
+        assert accepted.json()['id'] == original['id'] and accepted.json()['expires_at'] == original['expires_at']
+    assert client.post('/drafts' + ('/' + str(identifier) if identifier else ''), headers=headers(client), json=payload).json() == accepted.json()
+
+
+def test_draft_discovery_reaches_200_and_201_without_truncation(client, users):
+    assert login(client, users).status_code == 200
+    accepted = [save(client)[0].json() for _ in range(200)]
+    def discover():
+        seen, cursor = [], None
+        while True:
+            response = client.get('/drafts' + ('?cursor=' + cursor if cursor else ''))
+            assert response.status_code == 200 and response.headers['cache-control'] == 'no-store'
+            page = response.json()
+            assert len(page['drafts']) <= 50
+            seen.extend(row['id'] for row in page['drafts'])
+            cursor = page['next_cursor']
+            if cursor is None: return seen
+    assert set(discover()) == {row['id'] for row in accepted}
+    # Put foreign and expired owned rows immediately around each UUID page edge.
+    foreign = []
+    with database() as conn:
+        for edge in sorted(accepted, key=lambda row: row['id'])[49::50]:
+            before, after = UUID(int=UUID(edge['id']).int - 1), UUID(int=UUID(edge['id']).int + 1)
+            conn.execute('INSERT INTO drafts(id,owner,revision,content,created_at,expires_at) SELECT %s,%s,1,content,created_at,expires_at FROM drafts WHERE id=%s', (before, users[1][1], edge['id']))
+            conn.execute("INSERT INTO drafts(id,owner,revision,content,created_at,expires_at) SELECT %s,owner,1,content,statement_timestamp()-interval '7 days 1 second',statement_timestamp()-interval '1 second' FROM drafts WHERE id=%s", (after, edge['id']))
+            foreign.append(str(before))
+    accepted.append(save(client)[0].json())
+    seen = discover()
+    assert len(seen) == len(set(seen)) == 201
+    assert set(seen) == {row['id'] for row in accepted}
+    assert client.get('/drafts/' + seen[-1]).json() == next(row for row in accepted if row['id'] == seen[-1])
+    assert client.get('/drafts?cursor=invalid').status_code == 422
+    with httpx.Client(base_url=URL) as other:
+        assert login(other, users, 1).status_code == 200
+        assert {row['id'] for row in other.get('/drafts').json()['drafts']} == set(foreign)
+        assert {row['id'] for row in other.get('/drafts?cursor=' + seen[49]).json()['drafts']} == {identifier for identifier in foreign if identifier > seen[49]}
+
+
+def test_pending_draft_admission_200_excludes_accepted_expired_and_does_not_mutate(client, users):
+    assert login(client, users).status_code == 200
+    accepted, _ = save(client)
+    expired = issue(client)
+    with database() as conn:
+        conn.execute('UPDATE draft_operations SET expires_at=clock_timestamp() WHERE id=%s', (expired,))
+    for _ in range(200): issue(client)
+    with database() as conn:
+        before = conn.execute('SELECT * FROM draft_operations WHERE owner=%s ORDER BY id', (users[1][0],)).fetchall()
+    assert len(before) == 202
+    assert client.post('/draft-operations', headers=headers(client), json={}).status_code == 429
+    with database() as conn:
+        assert conn.execute('SELECT * FROM draft_operations WHERE owner=%s ORDER BY id', (users[1][0],)).fetchall() == before
+        assert conn.execute('SELECT count(*) AS n FROM drafts WHERE owner=%s', (users[1][0],)).fetchone()['n'] == 1
+    assert client.get('/drafts/' + accepted.json()['id']).json() == accepted.json()
 
 
 def test_combined_import_correction_structure_and_fixed_expiry(client, users):
@@ -125,7 +219,7 @@ def test_all_routes_deny_foreign_unauthenticated_and_forgery(client, users):
         for path, payload in writes:
             assert other.post(path, headers=headers(other), json=payload).status_code == 401
         assert login(other, users, 1).status_code == 200
-        assert other.get('/drafts').json() == {'drafts': []}
+        assert other.get('/drafts').json() == {'drafts': [], 'next_cursor': None}
         for path in reads:
             denied = other.get(path)
             assert denied.status_code == 404 and identifier not in denied.text and op not in denied.text
@@ -154,7 +248,7 @@ def test_validation_preserves_unknowns_rejects_contradictions(client, users, cha
     if change == 'offset_minutes_winter': facts['activities'][0]['start'] = '2026-01-01T12:00+00:60'
     if change == 'offset_hour_24': facts['activities'][0]['start'] = '2026-10-25T00:00+24:00'
     assert save(client, facts)[0].status_code == 422
-    assert client.get('/drafts').json() == {'drafts': []}
+    assert client.get('/drafts').json() == {'drafts': [], 'next_cursor': None}
 
 
 def test_expiry_session_operation_and_purge_boundaries(client, users):
@@ -169,7 +263,7 @@ def test_expiry_session_operation_and_purge_boundaries(client, users):
         conn.execute("UPDATE drafts SET created_at=statement_timestamp()-interval '7 days',expires_at=statement_timestamp() WHERE id=%s", (identifier,))
         conn.execute('UPDATE draft_operations SET expires_at=(SELECT expires_at FROM drafts WHERE id=%s) WHERE draft_id=%s', (identifier, identifier))
     assert client.get('/drafts/' + identifier).status_code == 410
-    assert client.get('/drafts').json() == {'drafts': []}
+    assert client.get('/drafts').json() == {'drafts': [], 'next_cursor': None}
     assert client.post('/drafts', headers=headers(client), json=body).status_code == 410
     assert client.get('/draft-operations/' + body['operation_id']).status_code == 410
     assert client.post('/draft-operations', headers=headers(client), json={'draft_id': identifier}).status_code == 410
@@ -208,7 +302,7 @@ def test_transient_import_save_reopen_replay_and_access(client, users):
         assert result.status_code == 200 and result.headers['cache-control'] == 'no-store'
         facts = result.json()
         assert facts['physical_bus'] is None and len(facts['activities']) == len(fixture['activities'])
-        assert client.get('/drafts').json() == {'drafts': []}
+        assert client.get('/drafts').json() == {'drafts': [], 'next_cursor': None}
         saved, body = save(client, facts)
         assert saved.status_code == 200 and saved.json()['draft'] == facts
         record = saved.json()
@@ -238,7 +332,7 @@ def test_additional_import_save_reopen_replay(client, users, number):
     assert result.status_code == 200
     facts = result.json()
     assert_additional(facts, number)
-    assert client.get('/drafts').json() == {'drafts': []}
+    assert client.get('/drafts').json() == {'drafts': [], 'next_cursor': None}
     saved, body = save(client, facts)
     assert saved.status_code == 200
     record = saved.json()
@@ -461,7 +555,7 @@ def test_local_time_resolution_is_authoritative_without_storage_changes(client, 
     response = client.post('/draft-times/resolve', headers=headers(client), json={'calendar_date': day, 'clock': clock})
     assert response.status_code == 200 and response.json() == {'state': state, 'candidates': candidates}
     assert response.headers['cache-control'] == 'no-store'
-    assert client.get('/drafts').json() == {'drafts': []}
+    assert client.get('/drafts').json() == {'drafts': [], 'next_cursor': None}
 
 
 @pytest.mark.parametrize('day,clock', [('2026-02-30', '12:00'), ('2026-01-01', '24:00'), ('2026-01-01', '12:60'), ('2026-01-01', '12:00+01:00'), ('10000-01-01', '23:59'), ('0001-01-01', '00:00')])

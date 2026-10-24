@@ -77,6 +77,7 @@ export function PrivateDrafts({ upload, request, mutation, dirtyChanged, expired
   const [confirmationLocked, setConfirmationLocked] = useState(false);
   const [list, setList] = useState<Summary[]>([]);
   const [listState, setListState] = useState<'loading' | 'ready' | 'error'>('loading');
+  const [nextCursor, setNextCursor] = useState<string | null>(null);
   const [saved, setSaved] = useState<Saved | null>(null);
   const [content, setContent] = useState<Content>(empty);
   const [pending, setPending] = useState<Pending | null>(null);
@@ -93,6 +94,8 @@ export function PrivateDrafts({ upload, request, mutation, dirtyChanged, expired
   const deletionEpoch = useRef(0);
   const listRequest = useRef(0);
   const title = useRef<HTMLHeadingElement>(null);
+  const loadedCount = useRef<HTMLParagraphElement>(null);
+  const focusLoadedCount = useRef(false);
   const changes = dutyChanges(content);
   const issues = importIssues(content);
   const dirty = canonical(content) !== canonical(saved?.draft ?? empty()) || !!pending || !!pendingDelete || saveUnavailable || Object.values(timeStates).some(value => value.dirty);
@@ -113,23 +116,29 @@ export function PrivateDrafts({ upload, request, mutation, dirtyChanged, expired
     if (error?.status === 401) { expired(); return; }
     setMessage(error?.status === 410 ? 'Utkastet eller lagringsforsøket er utløpt. Lokale endringer er ikke lagret.' : error?.status === 404 ? 'Tilgangen ble avvist.' : 'Tjenesten er utilgjengelig. Lokale endringer er ikke lagret.');
   }
-  async function refresh() {
+  async function refresh(cursor: string | null = null) {
     const epoch = deletionEpoch.current;
     const sequence = ++listRequest.current;
     setListState('loading');
     try {
-      const result = await request('/drafts');
+      const result = await request('/drafts' + (cursor ? '?cursor=' + cursor : ''));
       if (!alive.current || epoch !== deletionEpoch.current || sequence !== listRequest.current) return;
-      if (!result || !Array.isArray(result.drafts) || result.drafts.length > 200 || !result.drafts.every(validSummary)
-        || new Set(result.drafts.map((item: Summary) => item.id)).size !== result.drafts.length) {
+      if (!result || Object.keys(result).sort().join() !== 'drafts,next_cursor' || !Array.isArray(result.drafts) || result.drafts.length > 50 || !result.drafts.every(validSummary)
+        || new Set(result.drafts.map((item: Summary) => item.id)).size !== result.drafts.length
+        || result.drafts.some((item: Summary, index: number) => (index > 0 && item.id <= result.drafts[index - 1].id) || (cursor && item.id <= cursor))
+        || (result.next_cursor !== null && (!uuid(result.next_cursor) || result.drafts.length !== 50 || result.next_cursor !== result.drafts[49].id))) {
         setListState('error'); setMessage('Listen kunne ikke lastes. Prøv Oppdater listen igjen. Skjemaet er beholdt.'); return;
       }
-      setList(result.drafts.map(({ id, revision, expires_at, service_date }: Summary) => ({ id, revision, expires_at, service_date })));
+      const rows = result.drafts.map(({ id, revision, expires_at, service_date }: Summary) => ({ id, revision, expires_at, service_date }));
+      focusLoadedCount.current = !!cursor && result.next_cursor === null;
+      setList(current => cursor ? [...current, ...rows.filter((row: Summary) => !current.some(item => item.id === row.id))] : rows);
+      setNextCursor(result.next_cursor);
       setListState('ready');
       setMessage(current => current.startsWith('Listen kunne ikke lastes.') ? 'Listen er oppdatert.' : current);
     } catch (error) { if (alive.current && epoch === deletionEpoch.current && sequence === listRequest.current) { setListState('error'); failed(error); } }
   }
   useEffect(() => { alive.current = true; void refresh(); return () => { alive.current = false; }; }, []);
+  useEffect(() => { if (focusLoadedCount.current) { focusLoadedCount.current = false; loadedCount.current?.focus(); } }, [list]);
   useEffect(() => { dirtyChanged(dirty || confirmationLocked); return () => dirtyChanged(false); }, [dirty, confirmationLocked]);
   useEffect(() => {
     setDraftExpired(false);
@@ -142,7 +151,7 @@ export function PrivateDrafts({ upload, request, mutation, dirtyChanged, expired
   }, [saved]);
   useEffect(() => {
     const warn = (event: BeforeUnloadEvent) => { if (dirty || confirmationLocked) { event.preventDefault(); event.returnValue = ''; } };
-    const navigate = (event: MouseEvent) => { if ((dirty || confirmationLocked) && (event.target as Element)?.closest('a') && !window.confirm('Ulagrede endringer eller uavklart bekreftelse/sletting går tapt. Vil du fortsette?')) event.preventDefault(); };
+    const navigate = (event: MouseEvent) => { if ((dirty || confirmationLocked) && (event.target as Element)?.closest('a') && !window.confirm('Ulagrede endringer eller uavklart busslagring/bekreftelse/sletting går tapt. Vil du fortsette?')) event.preventDefault(); };
     window.addEventListener('beforeunload', warn); document.addEventListener('click', navigate);
     return () => { window.removeEventListener('beforeunload', warn); document.removeEventListener('click', navigate); };
   }, [dirty, confirmationLocked]);
@@ -291,6 +300,8 @@ export function PrivateDrafts({ upload, request, mutation, dirtyChanged, expired
     {listState === 'loading' && <p>Laster lagrede utkast …</p>}
     {listState === 'error' && <p>Listen er utilgjengelig. Prøv Oppdater listen igjen.</p>}
     {list.length === 0 ? listState === 'ready' && <p>Ingen lagrede utkast.</p> : <ul>{list.map(item => <li key={item.id}><button disabled={busy || !!pending || !!pendingDelete || saveUnavailable} onClick={() => void reopen(item.id)}>Åpne {item.service_date ?? 'ukjent tjenestedato'} · versjon {item.revision}</button> <span>Utløper {new Date(item.expires_at).toLocaleString('nb-NO', { timeZone: 'Europe/Oslo' })}</span></li>)}</ul>}
+    <p className="draft-loaded-count" ref={loadedCount} tabIndex={-1} aria-live="polite">{listState === 'ready' ? `Lastet ${list.length} utkast.` : listState === 'loading' ? 'Antall utkast avklares …' : 'Antall utkast er utilgjengelig.'}</p>
+    {nextCursor && <button disabled={listState === 'loading' || busy || !!pendingDelete} onClick={() => void refresh(nextCursor)}>Vis flere utkast</button>}
     <h2 ref={title} tabIndex={-1}>{saved ? 'Rediger utkast' : 'Nytt manuelt utkast'}</h2>
     <p role="status" aria-live="polite" className="status">{message}</p>
     {saved && <p>Utløper {new Date(saved.expires_at).toLocaleString('nb-NO', { timeZone: 'Europe/Oslo' })}. Fristen forlenges ikke.</p>}

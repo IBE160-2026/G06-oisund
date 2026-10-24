@@ -50,13 +50,13 @@ def fingerprint(identifier, payload):
     return hashlib.sha256(json.dumps({'target': str(identifier), 'body': payload}, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
 
 
-def listing(request):
+def listing(request, cursor=None):
     with database() as conn:
         owner = authorized(conn, request)
         rows = conn.execute('SELECT id,created_at,expires_at,revision,content->>\'service_date\' AS service_date '
-                            'FROM drafts WHERE owner=%s AND expires_at > clock_timestamp() ORDER BY created_at DESC LIMIT 200', (owner,)).fetchall()
+                            'FROM drafts WHERE owner=%s AND expires_at > clock_timestamp() AND (%s::uuid IS NULL OR id > %s) ORDER BY id LIMIT 51', (owner, cursor, cursor)).fetchall()
         auth.session(conn, request)
-        return {'drafts': rows}
+        return {'drafts': rows[:50], 'next_cursor': rows[49]['id'] if len(rows) > 50 else None}
 
 
 def read(request, identifier):
@@ -133,14 +133,21 @@ def save(request, identifier, body):
             raise HTTPException(409, 'Utkastet er endret. Sammenlign med lagret versjon før du fortsetter.')
         content = body.draft.model_dump(mode='json')
         if existing:
-            row = conn.execute('UPDATE drafts SET content=%s,revision=revision+1 WHERE id=%s AND expires_at > clock_timestamp() RETURNING *', (Jsonb(content), identifier)).fetchone()
+            row = conn.execute('UPDATE drafts SET content=%s,revision=revision+1 WHERE id=%s AND expires_at > clock_timestamp() '
+                               'AND EXISTS (SELECT 1 FROM draft_operations WHERE id=%s AND expires_at > clock_timestamp()) RETURNING *', (Jsonb(content), identifier, body.operation_id)).fetchone()
             if not row:
                 raise HTTPException(410, 'Utkastet er utløpt.')
         else:
-            row = conn.execute('INSERT INTO drafts(id,owner,revision,content) VALUES (%s,%s,1,%s) RETURNING *', (uuid4(), owner, Jsonb(content))).fetchone()
+            row = conn.execute('INSERT INTO drafts(id,owner,revision,content) SELECT %s,%s,1,%s '
+                               'WHERE EXISTS (SELECT 1 FROM draft_operations WHERE id=%s AND expires_at > clock_timestamp()) RETURNING *', (uuid4(), owner, Jsonb(content), body.operation_id)).fetchone()
+            if not row:
+                raise HTTPException(410, 'Lagringsforsøket er utløpt.')
         result = presentation(row)
-        conn.execute('UPDATE draft_operations SET draft_id=%s,expires_at=%s,payload_hash=%s,result=%s WHERE id=%s',
-                     (row['id'], row['expires_at'], digest, Jsonb(result), body.operation_id))
+        accepted = conn.execute('UPDATE draft_operations SET draft_id=%s,expires_at=%s,payload_hash=%s,result=%s WHERE id=%s '
+                                'AND expires_at > clock_timestamp() AND %s > clock_timestamp() RETURNING id',
+                                (row['id'], row['expires_at'], digest, Jsonb(result), body.operation_id, row['expires_at'])).fetchone()
+        if not accepted:
+            raise HTTPException(410, 'Lagringsforsøket er utløpt.')
         auth.session(conn, request)
         return result
 

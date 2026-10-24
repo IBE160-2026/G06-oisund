@@ -214,15 +214,17 @@ test('account switch queued between draft operation and save never sends the pre
   }
 });
 
-test('a delayed private list is rejected after another window changes account', async ({ page, context }) => {
+for (const paginated of [false, true]) test(`a delayed private list is rejected after another window changes account (cursor=${paginated})`, async ({ page, context }) => {
+  if (paginated) python(`from uuid import uuid4\nfrom psycopg.types.json import Jsonb\nwith database() as conn:\n owner=conn.execute('SELECT id FROM accounts WHERE username=%s', (${JSON.stringify(accounts[0].username)},)).fetchone()['id']\n for n in range(51):\n  conn.execute('INSERT INTO drafts(id,owner,revision,content) VALUES (%s,%s,1,%s)',(uuid4(),owner,Jsonb({'service_date':'2034-06-07','activities':[]})))\n`);
   const other = await twoLoggedOutWindows(page, context, true);
   await login(page, 0);
+  await page.getByLabel('Buss/vogn', { exact: true }).fill('Previous account private input');
   await expect(page.getByText('Laster lagrede utkast …', { exact: true })).toHaveCount(0);
   let release!: () => void;
   let fetched!: () => void;
   const gate = new Promise<void>(resolve => { release = resolve; });
   const received = new Promise<void>(resolve => { fetched = resolve; });
-  await page.route('**:8001/drafts', async route => {
+  await page.route(paginated ? '**:8001/drafts?cursor=*' : '**:8001/drafts', async route => {
     const response = await route.fetch();
     expect(response.status()).toBe(200);
     fetched();
@@ -230,16 +232,19 @@ test('a delayed private list is rejected after another window changes account', 
     await route.fulfill({ response });
   });
   try {
-    await page.getByRole('button', { name: 'Oppdater listen', exact: true }).click();
+    await page.getByRole('button', { name: paginated ? 'Vis flere utkast' : 'Oppdater listen', exact: true }).click();
     await received;
     // Reads must leave the auth lock available while waiting for their body.
     await login(other, 1);
     release();
     await expect(page.getByRole('heading', { name: 'Mine utkast' })).toHaveCount(0);
     await expect(page.getByLabel('Buss/vogn', { exact: true })).toHaveCount(0);
+    await expect(other.getByLabel('Buss/vogn', { exact: true })).toHaveValue('');
+    await expect(other.getByRole('button', { name: /Åpne 2034-06-07/ })).toHaveCount(0);
   } finally {
     release();
     await other.close();
+    if (paginated) python(`with database() as conn:\n conn.execute("DELETE FROM drafts WHERE owner IN (SELECT id FROM accounts WHERE username=%s) AND content->>'service_date'='2034-06-07'", (${JSON.stringify(accounts[0].username)},))\n`);
   }
 });
 
@@ -303,6 +308,45 @@ for (const delayed of [false, true]) test(`plan deletion ${delayed ? 'delayed ac
     expect(writes).toBe(delayed ? 1 : 0);
     await post('/auth/login', accounts[0]);
     expect((await context.request.get(API + '/workdays/' + plan.id)).status()).toBe(delayed ? 404 : 200);
+  } finally { release(); await other.close(); }
+});
+
+for (const delayed of [false, true, 'denied-current'] as const) test(`physical bus ${delayed === 'denied-current' ? 'denied current read' : delayed ? 'delayed reply' : 'preflight'} cannot cross a silent account switch`, async ({ page, context }) => {
+  const other = await twoLoggedOutWindows(page, context, true); await login(page, 0);
+  async function post(path: string, data: object) {
+    const proof = await (await context.request.get(API + '/auth/csrf')).json();
+    const response = await context.request.post(API + path, { headers: { Origin: 'http://127.0.0.1:5173', 'X-CSRF-Token': proof.csrf_token }, data });
+    expect(response.status()).toBe(200); return response.json();
+  }
+  const serviceDate = delayed === 'denied-current' ? '2034-01-04' : delayed ? '2034-01-03' : '2034-01-02';
+  const draft = await post('/drafts', { operation_id: (await post('/draft-operations', {})).operation_id, expected_revision: 0, draft: { service_date: serviceDate, activities: [{ id: randomUUID(), type: 'manual', start: '2034-01-02T10:00+01:00', end: '2034-01-02T11:00+01:00' }] } });
+  const review = await post('/workday-reviews', { draft_id: draft.id, expected_revision: 1 });
+  const plan = await post('/drafts/' + draft.id + '/confirm', { operation_id: review.operation_id, expected_revision: 1, acknowledgements: review.unknowns.map((item: any) => item.id), classifications: {} });
+  const path = '/workdays/' + plan.id + '/physical-bus';
+  await page.getByRole('button', { name: 'Oppdater planlisten', exact: true }).click();
+  await page.getByRole('button', { name: 'Åpne plan ' + serviceDate + ' · versjon 1', exact: true }).click();
+  await page.getByRole('region', { name: 'Fysisk buss', exact: true }).getByLabel('Fysisk buss', { exact: true }).fill('0012 old account');
+  let release!: () => void, entered!: () => void, writes = 0;
+  const gate = new Promise<void>(resolve => release = resolve), received = new Promise<void>(resolve => entered = resolve);
+  page.on('request', request => { if (request.url().endsWith(path) && request.method() === 'POST') writes++; });
+  if (delayed === true) await page.route('**:8001' + path, async route => {
+    if (route.request().method() === 'GET') return route.continue();
+    const response = await route.fetch(); entered(); await gate; await route.fulfill({ response });
+  });
+  if (delayed === 'denied-current') await page.route('**:8001' + path, async route => {
+    if (route.request().method() === 'POST') return route.continue();
+    entered(); await gate; await route.fulfill({ status: 404, json: { detail: 'synthetic denied current read' } });
+  });
+  try {
+    if (!delayed) await post('/auth/login', accounts[1]);
+    await page.getByRole('button', { name: 'Lagre fysisk buss', exact: true }).click();
+    if (delayed) { await received; await post('/auth/login', accounts[1]); release(); }
+    await expect(page.getByRole('region', { name: 'Bekreft plan' })).toHaveCount(0);
+    expect(writes).toBe(delayed ? 1 : 0);
+    await post('/auth/login', accounts[0]);
+    const value = await (await context.request.get(API + path)).json();
+    expect(value.physical_bus).toBe(delayed ? '0012 old account' : null);
+    expect(value.revision).toBe(delayed ? 1 : 0);
   } finally { release(); await other.close(); }
 });
 
