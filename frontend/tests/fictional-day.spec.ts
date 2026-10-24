@@ -32,7 +32,7 @@ for (const width of [1440, 768]) {
     await expect(page.getByText('Eksempelbyen', { exact: false })).toBeVisible();
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy();
     expect(await page.evaluate(() => localStorage.length)).toBe(0);
-    await page.screenshot({ path: `../Docs/evidence/9-2-${width}.png`, fullPage: true });
+    await page.screenshot({ path: `../docs/evidence/11-2-regression-9-2-${width}.png`, fullPage: true });
   });
 }
 

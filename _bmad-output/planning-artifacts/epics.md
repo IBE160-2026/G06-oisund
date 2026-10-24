@@ -249,11 +249,13 @@ FR-7–9, FR-15 and FR-23 are deferred; the remaining original FRs are narrowed 
 
 ### Story 11.2: Understand the selected activity
 
-**Stable alias:** V1-11. **Status:** backlog; approved scope, implementation/evidence not started.
+**Stable alias:** V1-11. **Historical planning baseline:** backlog. Current implementation/acceptance is tracked in [sprint status](../implementation-artifacts/sprint-status.yaml) and the [11.2 specification](../implementation-artifacts/spec-11-2-understand-the-selected-activity.md).
 **Depends on:** V1-10.
 **Traceability:** FR-3/10; NFR-2; AC-03; SCOPE-02.
 
 **User outcome:** show trip or non-passenger type, planned times and known places; missing stop data has no fabricated current/next stop. Boundary controls clearly show no previous/next.
+
+**Owner-approved refinement, 2026-10-24:** Separate upload, interpretation control/editing, day and selected activity screens. Select/open a member from the day, consult only that member with previous/next, and return without losing registered data or selection. Preserve unsaved/recovery state and access guards. Navigation does not Start or record outcomes. Notices and end/recap have planned day-linked destinations but remain 11.3–11.5 work. Intermediate stops are post-V1; demo expansion remains later work.
 
 **Acceptance criteria:**
 - Render selected trip or non-passenger type with planned dates/times and known places. Label manual selection; never render an invented current/next stop or GPS-confirmed location. Known missing information is distinct from no previous/next activity.

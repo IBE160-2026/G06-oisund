@@ -1,3 +1,4 @@
+import { preparation, editor } from './private-screen-helpers';
 import { test, expect, type Page } from '@playwright/test';
 import { execFileSync } from 'node:child_process';
 import { randomUUID, randomBytes } from 'node:crypto';
@@ -42,7 +43,7 @@ async function login(page: Page) {
   await expect(page.getByRole('heading', { name: 'Mine utkast' })).toBeVisible();
 }
 async function upload(page: Page) {
-  await page.getByLabel('Velg tekst-PDF', { exact: true }).setInputFiles({ name: 'synthetic.pdf', mimeType: 'application/pdf', buffer: pdf });
+  await preparation(page); await page.getByLabel('Velg tekst-PDF', { exact: true }).setInputFiles({ name: 'synthetic.pdf', mimeType: 'application/pdf', buffer: pdf });
   await expect(page.getByRole('button', { name: 'Bruk som separat nytt utkast' })).toBeVisible();
 }
 
@@ -54,7 +55,7 @@ for (const width of [768, 1440]) test(`corrections structure legacy duties cance
     const value = await (await route.fetch()).json(); delete value.vehicle_duty_changes;
     source = structuredClone(value.import_metadata); await route.fulfill({ json: value });
   });
-  await page.getByLabel('Velg tekst-PDF', { exact: true }).setInputFiles({ name: 'corrections.pdf', mimeType: 'application/pdf', buffer: dutyPdf });
+  await preparation(page); await page.getByLabel('Velg tekst-PDF', { exact: true }).setInputFiles({ name: 'corrections.pdf', mimeType: 'application/pdf', buffer: dutyPdf });
   await page.getByRole('button', { name: 'Bruk som separat nytt utkast' }).click();
   const row = () => page.locator('#activity-' + source.activities[2].activity_id);
   await expect(page.locator('.correction-marker')).toHaveCount(0);
@@ -107,28 +108,28 @@ for (const width of [768, 1440]) test(`corrections structure legacy duties cance
   await expect(row()).toContainText('Manuelt rettet fra opprinnelig tolkning');
   await row().getByRole('button', { name: 'Flytt opp', exact: true }).click();
   await expect(row().getByRole('button', { name: 'Flytt opp', exact: true })).toBeDisabled();
-  await page.getByRole('button', { name: 'Legg til aktivitet' }).click();
+  await editor(page); await page.getByRole('button', { name: 'Legg til aktivitet' }).click();
   const manual = page.getByRole('group', { name: 'Aktivitet 5', exact: true });
   await expect(manual).toContainText('Manuell aktivitet');
   await manual.getByLabel('Aktivitetstype', { exact: true }).fill('Manuelt arbeid');
   await manual.getByRole('button', { name: 'Flytt opp', exact: true }).click();
   const response = page.waitForResponse(r => r.request().method() === 'POST' && new URL(r.url()).pathname === '/drafts');
-  await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
+  await editor(page); await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
   const saved = await (await response).json();
   expect(saved.draft.import_metadata).toEqual(source);
   expect(saved.draft.activities.find((activity: any) => activity.id === source.activities[0].activity_id).start).toBe('2030-01-02T15:00:30+01:00');
   expect(saved.draft.vehicle_duty_changes[0].from_activity_id).toBe(source.activities[2].activity_id);
   await row().getByLabel('Aktivitetstype', { exact: true }).fill('cancel-me');
   await page.getByRole('group', { name: 'Aktivitet 2', exact: true }).getByRole('button', { name: 'Flytt opp', exact: true }).click();
-  await page.getByRole('button', { name: 'Legg til aktivitet' }).click();
-  page.once('dialog', d => d.dismiss()); await page.getByRole('button', { name: 'Forkast endringer' }).click();
+  await editor(page); await page.getByRole('button', { name: 'Legg til aktivitet' }).click();
+  page.once('dialog', d => d.dismiss()); await editor(page); await page.getByRole('button', { name: 'Forkast endringer' }).click();
   await expect(row().getByLabel('Aktivitetstype', { exact: true })).toHaveValue('cancel-me');
   await expect(page.getByLabel('Aktivitetstype', { exact: true })).toHaveCount(6);
-  page.once('dialog', d => d.accept()); await page.getByRole('button', { name: 'Forkast endringer' }).click();
+  page.once('dialog', d => d.accept()); await editor(page); await page.getByRole('button', { name: 'Forkast endringer' }).click();
   await expect(page.getByLabel('Aktivitetstype', { exact: true })).toHaveCount(5);
   await expect(row().getByLabel('Vognløp fra aktivitet 1', { exact: true })).toHaveValue('960176');
   expect(await (await page.request.get('http://127.0.0.1:8001/drafts/' + saved.id)).json()).toEqual(saved);
-  await page.reload(); await page.getByRole('button', { name: /Åpne 2030-01-02/ }).first().click();
+  await page.reload(); await preparation(page); await page.getByRole('button', { name: /Åpne 2030-01-02/ }).first().click();
   await expect(first.getByLabel('Starttid', { exact: true })).toHaveValue('15:00:30');
   await expect(first.getByText('Manuelt rettet fra opprinnelig tolkning.', { exact: false })).toBeVisible();
   await expect(row().getByLabel('Aktivitetstype', { exact: true })).toHaveValue('deadhead');
@@ -156,10 +157,10 @@ for (const width of [768, 1440]) test(`corrections structure legacy duties cance
   await row().locator('summary').focus(); await page.keyboard.press('Tab'); await page.keyboard.press('Shift+Tab');
   await expect(row().locator('summary')).toBeFocused();
   await row().scrollIntoViewIfNeeded();
-  await page.screenshot({ path: `../Docs/evidence/10-2-${width}.png` });
+  await page.screenshot({ path: `../docs/evidence/11-2-regression-10-2-${width}.png` });
   expect(await page.evaluate(async () => [localStorage.length, sessionStorage.length, (await indexedDB.databases()).length])).toEqual([0, 0, 0]);
   page.once('dialog', d => d.accept()); await row().getByRole('button', { name: 'Fjern aktivitet 1', exact: true }).click();
-  await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
+  await editor(page); await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
   await expect(page.getByText('Lagret. Versjon 2.', { exact: true })).toBeVisible();
   const removed = await (await page.request.get('http://127.0.0.1:8001/drafts/' + saved.id)).json();
   expect(removed.draft.import_metadata).toEqual(source);
@@ -174,7 +175,7 @@ for (const number of [8, 9]) test(`approved example ${number} preserves work and
   await page.route('**:8001/imports/pdf', async route => {
     const response = await route.fetch(); facts = await response.json(); await route.fulfill({ response });
   });
-  await page.getByLabel('Velg tekst-PDF', { exact: true }).setInputFiles(resolve(`../Eksempelfiler/Eksempel-${number}-anonymisert.pdf`));
+  await preparation(page); await page.getByLabel('Velg tekst-PDF', { exact: true }).setInputFiles(resolve(`../Eksempelfiler/Eksempel-${number}-anonymisert.pdf`));
   await expect(page.getByRole('button', { name: 'Bruk som separat nytt utkast' })).toBeVisible();
   const count = number === 8 ? 23 : 8;
   expect(facts.activities).toHaveLength(count);
@@ -211,14 +212,14 @@ for (const number of [8, 9]) test(`approved example ${number} preserves work and
     if (route.request().method() !== 'POST') return route.continue();
     const response = await route.fetch(); saved = await response.json(); await route.fulfill({ response });
   });
-  await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
+  await editor(page); await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
   await expect(page.getByText('Lagret. Versjon 1.', { exact: true })).toBeVisible();
   expect(saved.draft).toEqual(facts);
   await page.reload();
   await page.getByRole('button', { name: new RegExp(`Åpne 2030-01-${number === 8 ? '10' : '14'}`) }).first().click();
   await checkEditor();
   expect(await (await page.request.get('http://127.0.0.1:8001/drafts/' + saved.id)).json()).toEqual(saved);
-  await page.getByRole('group', { name: `Aktivitet ${number === 8 ? 22 : 2}`, exact: true }).screenshot({ path: `../Docs/evidence/10-1-example-${number}-activity.png` });
+  await page.getByRole('group', { name: `Aktivitet ${number === 8 ? 22 : 2}`, exact: true }).screenshot({ path: `../docs/evidence/11-2-regression-10-1-example-${number}-activity.png` });
 });
 for (const width of [768, 1440]) test(`keyboard review separate adoption save recovery reopen at ${width}px`, async ({ page }) => {
   await page.setViewportSize({ width, height: 1100 });
@@ -233,7 +234,7 @@ for (const width of [768, 1440]) test(`keyboard review separate adoption save re
   await expect(facts).not.toContainText('Synthetic Driver');
   expect(await page.getByLabel('Velg tekst-PDF', { exact: true }).inputValue()).toBe('');
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
-  await page.screenshot({ path: `../Docs/evidence/10-1-${width}.png`, fullPage: true });
+  await page.screenshot({ path: `../docs/evidence/11-2-regression-10-1-${width}.png`, fullPage: true });
   await page.getByRole('button', { name: 'Bruk som separat nytt utkast' }).focus(); await page.keyboard.press('Enter');
   await expect(page.getByRole('heading', { name: 'Nytt manuelt utkast' })).toBeFocused();
   await expect(page.getByLabel('Buss/vogn', { exact: true })).toHaveValue('');
@@ -242,16 +243,16 @@ for (const width of [768, 1440]) test(`keyboard review separate adoption save re
     if (route.request().method() !== 'POST') return route.continue();
     accepted = await (await route.fetch()).json(); await route.abort();
   });
-  await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
+  await editor(page); await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
   await expect(page.getByText('Lagring er uavklart.', { exact: false })).toBeVisible();
   await page.unroute('**:8001/drafts');
   await page.getByRole('button', { name: 'Kontroller lagringsforsøket' }).click();
   await expect(page.getByText('Lagret. Versjon 1.', { exact: true })).toBeVisible();
   await page.getByLabel('Vognløp', { exact: true }).fill('0007');
-  page.once('dialog', d => d.accept()); await page.getByRole('button', { name: 'Forkast endringer' }).click();
+  page.once('dialog', d => d.accept()); await editor(page); await page.getByRole('button', { name: 'Forkast endringer' }).click();
   await expect(page.getByLabel('Vognløp', { exact: true })).toHaveValue('');
   await page.reload();
-  await page.getByRole('button', { name: /Åpne 2030-01-01/ }).first().click();
+  await preparation(page); await page.getByRole('button', { name: /Åpne 2030-01-01/ }).first().click();
   expect(await (await page.request.get('http://127.0.0.1:8001/drafts/' + accepted.id)).json()).toEqual(accepted);
   await expect(page.locator('details.source-disclosure')).not.toHaveAttribute('open');
   await page.getByText('Vis kildefakta fra PDF', { exact: true }).click();
@@ -261,11 +262,11 @@ for (const width of [768, 1440]) test(`keyboard review separate adoption save re
 
 test('failed review keeps editor and edit protection guards separate adoption', async ({ page }) => {
   await login(page);
-  await page.getByLabel('Buss/vogn', { exact: true }).fill('Earlier-001');
-  await page.getByLabel('Velg tekst-PDF', { exact: true }).setInputFiles({ name: 'broken.pdf', mimeType: 'application/pdf', buffer: Buffer.from('%PDF-corrupt') });
+  await editor(page); await page.getByLabel('Buss/vogn', { exact: true }).fill('Earlier-001');
+  await preparation(page); await page.getByLabel('Velg tekst-PDF', { exact: true }).setInputFiles({ name: 'broken.pdf', mimeType: 'application/pdf', buffer: Buffer.from('%PDF-corrupt') });
   await expect(page.getByText('PDF-en kunne ikke tolkes.', { exact: false })).toBeVisible();
   await expect(page.getByLabel('Buss/vogn', { exact: true })).toHaveValue('Earlier-001');
-  await page.screenshot({ path: '../Docs/evidence/10-1-error.png', fullPage: true });
+  await page.screenshot({ path: '../docs/evidence/11-2-regression-10-1-error.png', fullPage: true });
   await upload(page);
   page.once('dialog', d => d.dismiss()); await page.getByRole('button', { name: 'Bruk som separat nytt utkast' }).click();
   await expect(page.getByLabel('Buss/vogn', { exact: true })).toHaveValue('Earlier-001');
@@ -276,11 +277,11 @@ test('failed review keeps editor and edit protection guards separate adoption', 
 
 test('cancel and logout discard late replies and raw selection', async ({ page }) => {
   await login(page);
-  await page.getByLabel('Buss/vogn', { exact: true }).fill('Earlier');
+  await editor(page); await page.getByLabel('Buss/vogn', { exact: true }).fill('Earlier');
   let release!: () => void;
   const gate = new Promise<void>(resolve => { release = resolve; });
   await page.route('**:8001/imports/pdf', async route => { const response = await route.fetch(); await gate; await route.fulfill({ response }).catch(() => {}); });
-  await page.getByLabel('Velg tekst-PDF', { exact: true }).setInputFiles({ name: 'synthetic.pdf', mimeType: 'application/pdf', buffer: pdf });
+  await preparation(page); await page.getByLabel('Velg tekst-PDF', { exact: true }).setInputFiles({ name: 'synthetic.pdf', mimeType: 'application/pdf', buffer: pdf });
   await page.getByRole('button', { name: 'Avbryt import' }).click(); release();
   await expect(page.getByRole('button', { name: 'Bruk som separat nytt utkast' })).toHaveCount(0);
   await expect(page.getByLabel('Buss/vogn', { exact: true })).toHaveValue('Earlier');
@@ -293,11 +294,11 @@ test('cancel and logout discard late replies and raw selection', async ({ page }
 test('invalid metadata or HTML cannot become a review', async ({ page }) => {
   await login(page);
   await page.route('**:8001/imports/pdf', route => route.fulfill({ contentType: 'text/html', body: '<html>login</html>' }));
-  await page.getByLabel('Velg tekst-PDF', { exact: true }).setInputFiles({ name: 'synthetic.pdf', mimeType: 'application/pdf', buffer: pdf });
+  await preparation(page); await page.getByLabel('Velg tekst-PDF', { exact: true }).setInputFiles({ name: 'synthetic.pdf', mimeType: 'application/pdf', buffer: pdf });
   await expect(page.getByText('PDF-en kunne ikke tolkes.', { exact: false })).toBeVisible();
   await page.unroute('**:8001/imports/pdf');
   await page.route('**:8001/imports/pdf', async route => { const value = await (await route.fetch()).json(); value.import_metadata.header.driver = 'forbidden'; await route.fulfill({ json: value }); });
-  await page.getByLabel('Velg tekst-PDF', { exact: true }).setInputFiles({ name: 'synthetic.pdf', mimeType: 'application/pdf', buffer: pdf });
+  await preparation(page); await page.getByLabel('Velg tekst-PDF', { exact: true }).setInputFiles({ name: 'synthetic.pdf', mimeType: 'application/pdf', buffer: pdf });
   await expect(page.getByText('PDF-en kunne ikke tolkes.', { exact: false })).toBeVisible();
   await expect(page.getByRole('button', { name: 'Bruk som separat nytt utkast' })).toHaveCount(0);
 });
@@ -315,12 +316,12 @@ test('unknown uncertainty references keep code field column and line', async ({ 
 
 for (const state of ['hidden', 'expired']) test(`delayed import is discarded after ${state} access revalidation`, async ({ page }) => {
   await login(page);
-  await page.getByLabel('Buss/vogn', { exact: true }).fill('Earlier-private');
+  await editor(page); await page.getByLabel('Buss/vogn', { exact: true }).fill('Earlier-private');
   let release!: () => void, started!: () => void;
   const gate = new Promise<void>(resolve => { release = resolve; });
   const accepted = new Promise<void>(resolve => { started = resolve; });
   await page.route('**:8001/imports/pdf', async route => { const response = await route.fetch(); started(); await gate; await route.fulfill({ response }).catch(() => {}); });
-  await page.getByLabel('Velg tekst-PDF', { exact: true }).setInputFiles({ name: 'synthetic.pdf', mimeType: 'application/pdf', buffer: pdf });
+  await preparation(page); await page.getByLabel('Velg tekst-PDF', { exact: true }).setInputFiles({ name: 'synthetic.pdf', mimeType: 'application/pdf', buffer: pdf });
   await accepted;
   if (state === 'expired') python(`with database() as conn:\n conn.execute("UPDATE sessions SET created_at=statement_timestamp()-interval '14 days',expires_at=statement_timestamp() WHERE owner IN (SELECT id FROM accounts WHERE username=%s)", (${JSON.stringify(username)},))\n`);
   else await page.route('**:8001/auth/session', route => route.abort());
@@ -345,7 +346,7 @@ for (const state of ['hidden', 'expired']) test(`delayed import is discarded aft
 
 test('partial fictional Travel to preserves known end and unresolved facts through save reopen', async ({ page }) => {
   await login(page);
-  await page.getByLabel('Velg tekst-PDF', { exact: true }).setInputFiles({ name: 'partial-fictional.pdf', mimeType: 'application/pdf', buffer: partialPdf });
+  await preparation(page); await page.getByLabel('Velg tekst-PDF', { exact: true }).setInputFiles({ name: 'partial-fictional.pdf', mimeType: 'application/pdf', buffer: partialPdf });
   await expect(page.getByRole('button', { name: 'Bruk som separat nytt utkast' })).toBeVisible();
   async function assertPartial() {
     const facts = page.getByRole('region', { name: 'Kildefakta fra PDF' });
@@ -366,11 +367,11 @@ test('partial fictional Travel to preserves known end and unresolved facts throu
   await expect(page.getByLabel('Fra sted', { exact: true }).nth(1)).toHaveValue('');
   await expect(page.getByLabel('Til sted', { exact: true }).nth(1)).toHaveValue('');
   const savedResponse = page.waitForResponse(response => response.request().method() === 'POST' && new URL(response.url()).pathname === '/drafts');
-  await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
+  await editor(page); await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
   const saved = await (await savedResponse).json();
   expect(saved.draft.activities[1]).toEqual(expect.objectContaining({ raw_code: 'Travel to', source_end: '16:00', start: null, type: null, from_place: null, to_place: null }));
   await page.reload();
-  await page.getByRole('button', { name: /Åpne 2030-01-01/ }).first().click();
+  await preparation(page); await page.getByRole('button', { name: /Åpne 2030-01-01/ }).first().click();
   await expect(page.locator('details.source-disclosure')).not.toHaveAttribute('open');
   await page.getByText('Vis kildefakta fra PDF', { exact: true }).click();
   await assertPartial();
@@ -379,7 +380,7 @@ test('partial fictional Travel to preserves known end and unresolved facts throu
 
 test('duty changes, readable uncertainty and collapsed facts survive editing and reopen', async ({ page }) => {
   await login(page);
-  await page.getByLabel('Velg tekst-PDF', { exact: true }).setInputFiles({ name: 'fictional-duty-changes.pdf', mimeType: 'application/pdf', buffer: dutyPdf });
+  await preparation(page); await page.getByLabel('Velg tekst-PDF', { exact: true }).setInputFiles({ name: 'fictional-duty-changes.pdf', mimeType: 'application/pdf', buffer: dutyPdf });
   await expect(page.getByRole('button', { name: 'Bruk som separat nytt utkast' })).toBeVisible();
   await page.getByRole('button', { name: 'Bruk som separat nytt utkast' }).click();
   await expect(page.locator('details.source-disclosure')).not.toHaveAttribute('open');
@@ -394,29 +395,29 @@ test('duty changes, readable uncertainty and collapsed facts survive editing and
   await expect(page.getByLabel('Usikkerhet / ukjente fakta', { exact: true }).nth(2)).toHaveValue(/Kontroller start.*Travel to/);
   await page.getByRole('button', { name: 'Se aktivitet 3', exact: true }).first().click();
   await expect(third).toBeFocused();
-  await page.getByLabel('Buss/vogn', { exact: true }).fill('Bus-42');
+  await editor(page); await page.getByLabel('Buss/vogn', { exact: true }).fill('Bus-42');
   await page.getByLabel('Vognløp fra aktivitet 3', { exact: true }).fill('960006');
   await page.getByRole('button', { name: 'Bytt vognløp fra aktivitet 2', exact: true }).click();
   await page.getByLabel('Vognløp fra aktivitet 2', { exact: true }).fill('960090');
   await expect(fourth).toContainText('Gjeldende vognløp: 960006 · sanntidsverdi 006');
-  await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
+  await editor(page); await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
   await expect(page.getByText('Lagret. Versjon 1.', { exact: true })).toBeVisible();
   await page.reload();
-  await page.getByRole('button', { name: /Åpne 2030-01-02/ }).first().click();
+  await preparation(page); await page.getByRole('button', { name: /Åpne 2030-01-02/ }).first().click();
   await expect(page.getByLabel('Vognløp fra aktivitet 2', { exact: true })).toHaveValue('960090');
   await expect(page.getByLabel('Vognløp fra aktivitet 3', { exact: true })).toHaveValue('960006');
   await expect(page.getByLabel('Buss/vogn', { exact: true })).toHaveValue('Bus-42');
   await expect(page.locator('details.source-disclosure')).not.toHaveAttribute('open');
   await expect(page.getByRole('region', { name: 'Usikkerheter fra importen' })).toContainText('Aktivitetstypen er uavklart');
-  await page.screenshot({ path: '../Docs/evidence/10-1-amended-editor.png', fullPage: true });
+  await page.screenshot({ path: '../docs/evidence/11-2-regression-10-1-amended-editor.png', fullPage: true });
   await page.getByRole('button', { name: 'Fjern vognløpsbytte fra aktivitet 3', exact: true }).click();
   await expect(fourth).toContainText('Gjeldende vognløp: 960090 · sanntidsverdi 090');
   await page.getByRole('button', { name: 'Fjern vognløpsbytte fra aktivitet 2', exact: true }).click();
   await expect(fourth).toContainText('Gjeldende vognløp: 960181 · sanntidsverdi 181');
-  await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
+  await editor(page); await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
   await expect(page.getByText('Lagret. Versjon 2.', { exact: true })).toBeVisible();
   await page.reload();
-  await page.getByRole('button', { name: /Åpne 2030-01-02/ }).first().click();
+  await preparation(page); await page.getByRole('button', { name: /Åpne 2030-01-02/ }).first().click();
   await expect(page.getByLabel(/^Vognløp fra aktivitet/)).toHaveCount(0);
   await expect(fourth).toContainText('Gjeldende vognløp: 960181 · sanntidsverdi 181');
 });
@@ -429,20 +430,20 @@ test('legacy imported duty occurrences remain editable without rewriting origina
     for (const activity of value.activities) activity.uncertainty = null;
     await route.fulfill({ json: value });
   });
-  await page.getByLabel('Velg tekst-PDF', { exact: true }).setInputFiles({ name: 'legacy-fictional.pdf', mimeType: 'application/pdf', buffer: dutyPdf });
+  await preparation(page); await page.getByLabel('Velg tekst-PDF', { exact: true }).setInputFiles({ name: 'legacy-fictional.pdf', mimeType: 'application/pdf', buffer: dutyPdf });
   await page.getByRole('button', { name: 'Bruk som separat nytt utkast' }).click();
   await expect(page.getByLabel('Vognløp fra aktivitet 3', { exact: true })).toHaveValue('960176');
   await expect(page.getByRole('region', { name: 'Usikkerheter fra importen' })).toContainText('Kontroller start');
-  await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
+  await editor(page); await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
   await expect(page.getByText('Lagret. Versjon 1.', { exact: true })).toBeVisible();
   await page.reload();
-  await page.getByRole('button', { name: /Åpne 2030-01-02/ }).first().click();
+  await preparation(page); await page.getByRole('button', { name: /Åpne 2030-01-02/ }).first().click();
   await expect(page.getByLabel('Vognløp fra aktivitet 3', { exact: true })).toHaveValue('960176');
   await page.getByRole('button', { name: 'Fjern vognløpsbytte fra aktivitet 3', exact: true }).click();
-  await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
+  await editor(page); await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
   await expect(page.getByText('Lagret. Versjon 2.', { exact: true })).toBeVisible();
   await page.reload();
-  await page.getByRole('button', { name: /Åpne 2030-01-02/ }).first().click();
+  await preparation(page); await page.getByRole('button', { name: /Åpne 2030-01-02/ }).first().click();
   await expect(page.getByLabel(/^Vognløp fra aktivitet/)).toHaveCount(0);
 });
 
@@ -452,7 +453,7 @@ test('upload holds the mutation lock from rotating proof through cancellation', 
   const gate = new Promise<void>(resolve => { release = resolve; });
   const proofStarted = new Promise<void>(resolve => { started = resolve; });
   await page.route('**:8001/auth/csrf', async route => { const response = await route.fetch(); started(); await gate; await route.fulfill({ response }).catch(() => {}); });
-  await page.getByLabel('Velg tekst-PDF', { exact: true }).setInputFiles({ name: 'synthetic.pdf', mimeType: 'application/pdf', buffer: pdf });
+  await preparation(page); await page.getByLabel('Velg tekst-PDF', { exact: true }).setInputFiles({ name: 'synthetic.pdf', mimeType: 'application/pdf', buffer: pdf });
   await proofStarted;
   await page.evaluate(() => {
     (window as any).competingMutationEntered = false;
@@ -471,7 +472,7 @@ test('logout promptly cancels an import holding the mutation lock', async ({ pag
   const gate = new Promise<void>(resolve => { release = resolve; });
   const accepted = new Promise<void>(resolve => { started = resolve; });
   await page.route('**:8001/imports/pdf', async route => { const response = await route.fetch(); started(); await gate; await route.fulfill({ response }).catch(() => {}); });
-  await page.getByLabel('Velg tekst-PDF', { exact: true }).setInputFiles({ name: 'synthetic.pdf', mimeType: 'application/pdf', buffer: pdf });
+  await preparation(page); await page.getByLabel('Velg tekst-PDF', { exact: true }).setInputFiles({ name: 'synthetic.pdf', mimeType: 'application/pdf', buffer: pdf });
   await accepted;
   await page.getByRole('button', { name: 'Logg ut', exact: true }).click();
   await expect(page.getByRole('status', { name: 'Tilgangsstatus' })).toHaveText('Du er logget ut.');

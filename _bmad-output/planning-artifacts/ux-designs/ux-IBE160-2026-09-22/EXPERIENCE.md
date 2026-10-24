@@ -2,7 +2,7 @@
 name: IBE160 — Experience Spine
 status: approved
 decision: SCOPE-02
-updated: 2026-10-19
+updated: 2026-10-24
 ---
 
 # Experience Spine — Course V1
@@ -14,6 +14,8 @@ updated: 2026-10-19
 V1 supports preparation and consultation while stopped. It neither measures movement nor certifies standstill. No interaction is required while driving. Planned and manually selected information must not look GPS-confirmed.
 
 ## Information architecture and flows
+
+**Owner clarification, 2026-10-24 (11.2):** Upload, interpretation control/editing, confirmed day and selected activity are separate screens with clear navigation, not consecutive sections of one long page. Flow: upload → inspect/edit/confirm → open day → select/open activity → return to day with registered data and saved choice intact. Day may scroll; selected activity prioritizes only its own facts and previous/next, allowing long/enlarged content to scroll. Preserve unsaved input and unresolved commands across safe internal navigation; keep recovery reachable and existing loss/access guards effective. Navigation never starts a shift or records an outcome. Existing explicit Start and bus controls belong with the day. Future notices have a secondary day-linked destination (11.4/11.5); end/abort/recap belongs in day/shift navigation (11.3), without implementing them in 11.2. Intermediate-stop extraction/display is post-V1; expansion of the limited working demo remains later planned work.
 
 | Surface | Entry and actions | Exit / failure |
 |---|---|---|

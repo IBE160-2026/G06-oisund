@@ -47,7 +47,7 @@ for (const width of [768, 1440]) {
     const session = cookies.find(cookie => cookie.name === 'private_session');
     expect(session?.httpOnly).toBe(true);
     expect(session?.sameSite).toBe('Strict');
-    await page.screenshot({ path: `../Docs/evidence/9-3-${width}.png`, fullPage: true });
+    await page.screenshot({ path: `../docs/evidence/11-2-regression-9-3-${width}.png`, fullPage: true });
     await page.reload();
     await expect(page.getByRole('heading', { name: 'Privat arbeidsrom' })).toBeVisible();
     await page.getByRole('button', { name: 'Logg ut', exact: true }).click();

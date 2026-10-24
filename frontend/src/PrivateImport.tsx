@@ -74,13 +74,14 @@ export function SourceFacts({ metadata: m, historical = false }: { metadata: Imp
   </section>;
 }
 
-export function PrivateImport({ upload, adopt, expired, suspended, locked }: { upload: (file: File, signal: AbortSignal) => Promise<any>; adopt: (content: Content) => boolean; expired: () => void; suspended: boolean; locked: boolean }) {
+export function PrivateImport({ upload, adopt, expired, suspended, locked, stage, reviewReady, backToUpload }: { upload: (file: File, signal: AbortSignal) => Promise<any>; adopt: (content: Content) => boolean; expired: () => void; suspended: boolean; locked: boolean; stage: 'upload' | 'review'; reviewReady: () => void; backToUpload: () => void }) {
   const [review, setReview] = useState<Content | null>(null);
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState('Velg en tekst-PDF for en midlertidig gjennomgang. Originalen og filnavnet lagres ikke.');
   const controller = useRef<AbortController | null>(null);
   const epoch = useRef(0);
   const heading = useRef<HTMLHeadingElement>(null);
+  useEffect(() => { if (stage === 'review') heading.current?.focus(); }, [stage]);
   function cancel(text = 'Importen er avbrutt. Tidligere arbeid er beholdt.') { epoch.current++; controller.current?.abort(); controller.current = null; setBusy(false); setReview(null); setMessage(text); }
   useEffect(() => () => { epoch.current++; controller.current?.abort(); }, []);
   useEffect(() => { if (suspended) cancel(); }, [suspended]);
@@ -95,7 +96,7 @@ export function PrivateImport({ upload, adopt, expired, suspended, locked }: { u
       const value = await upload(file, abort.signal);
       if (current !== epoch.current) return;
       if (!validContent(value) || !value.import_metadata || value.physical_bus !== null) throw Error();
-      setReview(value); setMessage('Gjennomgangen er klar. Kontroller kildefakta før du bruker dem i et separat utkast.'); heading.current?.focus();
+      setReview(value); reviewReady(); setMessage('Gjennomgangen er klar. Kontroller kildefakta før du bruker dem i et separat utkast.'); heading.current?.focus();
     } catch (error: any) {
       if (current !== epoch.current) return;
       if (error?.status === 401) { expired(); return; }
@@ -103,8 +104,9 @@ export function PrivateImport({ upload, adopt, expired, suspended, locked }: { u
     } finally { if (current === epoch.current) { setBusy(false); controller.current = null; } }
   }
   return <section aria-label="Importer tekst-PDF"><h3 ref={heading} tabIndex={-1}>Gjennomgå en tekst-PDF</h3><p aria-live="polite">{message}</p>
-    <label>Velg tekst-PDF<input type="file" accept=".pdf,application/pdf" disabled={busy || suspended || locked} onChange={event => { const file = event.target.files?.[0]; event.target.value = ''; void select(file); }} /></label>
-    {(busy || review) && <button onClick={() => cancel()}>{busy ? 'Avbryt import' : 'Forkast gjennomgang'}</button>}
-    {review?.import_metadata && <><SourceFacts metadata={review.import_metadata} /><button disabled={suspended || locked} onClick={() => { if (adopt(review)) cancel('Tolkningen er overført til et separat, ulagret utkast.'); }}>Bruk som separat nytt utkast</button></>}
+    <label hidden={stage !== 'upload'}>Velg tekst-PDF<input type="file" accept=".pdf,application/pdf" disabled={busy || suspended || locked} onChange={event => { const file = event.target.files?.[0]; event.target.value = ''; void select(file); }} /></label>
+    {stage === 'upload' && review && <button onClick={reviewReady}>Fortsett importgjennomgang</button>}
+    {(busy || review) && <button onClick={() => { cancel(); backToUpload(); }}>{busy ? 'Avbryt import' : 'Forkast gjennomgang'}</button>}
+    {stage === 'review' && review?.import_metadata && <><SourceFacts metadata={review.import_metadata} /><button disabled={suspended || locked} onClick={() => { if (adopt(review)) cancel('Tolkningen er overført til et separat, ulagret utkast.'); }}>Bruk som separat nytt utkast</button></>}
   </section>;
 }

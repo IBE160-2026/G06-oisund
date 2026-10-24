@@ -1,3 +1,4 @@
+import { preparation, editor, planScreen } from './private-screen-helpers';
 import { test, expect, type Page, type BrowserContext } from '@playwright/test';
 import { execFileSync } from 'node:child_process';
 import { randomUUID, randomBytes } from 'node:crypto';
@@ -37,13 +38,13 @@ async function post(context: BrowserContext, path: string, body: object) {
 async function seed(page: Page, context: BrowserContext, kind: string | null = null, extra: Record<string, string | null> = {}) {
   const operation = await post(context, '/draft-operations', {});
   const draft = await post(context, '/drafts', { operation_id: operation.operation_id, expected_revision: 0, draft: { service_date: '2031-01-02', vehicle_duty: 'CAR - 1', physical_bus: null, activities: [{ id: randomUUID(), type: kind, raw_code: 'Fictional code', start: '2031-01-02T10:00+01:00', end: '2031-01-02T11:00+01:00', from_place: 'Fiktivt langt oppmøtested med navn som skal brytes og være lesbart i smale vinduer', to_place: null, uncertainty: 'Fiktiv ukjent opplysning', ...extra }] } });
-  await page.getByRole('button', { name: 'Oppdater listen', exact: true }).click();
-  await page.getByRole('button', { name: 'Åpne 2031-01-02 · versjon 1', exact: true }).first().click();
+  await preparation(page); await page.getByRole('button', { name: 'Oppdater listen', exact: true }).click();
+  await preparation(page); await page.getByRole('button', { name: 'Åpne 2031-01-02 · versjon 1', exact: true }).first().click();
   await expect(page.getByRole('button', { name: 'Gjennomgå lagret utkast' })).toBeEnabled();
   return draft;
 }
 async function review(page: Page) {
-  await page.getByRole('button', { name: 'Gjennomgå lagret utkast' }).click();
+  await editor(page); await page.getByRole('button', { name: 'Gjennomgå lagret utkast' }).click();
   await expect(page.getByRole('region', { name: 'Gjennomgått versjon' })).toBeVisible();
 }
 async function decide(page: Page) {
@@ -68,15 +69,15 @@ function syntheticImport() {
 test('review fixes legacy mixed note survives unrelated draft save and reopen exactly', async ({ page, context }) => {
   await login(page); const imported = syntheticImport();
   const draft = await post(context, '/drafts', { operation_id: (await post(context, '/draft-operations', {})).operation_id, expected_revision: 0, draft: imported });
-  await page.getByRole('button', { name: 'Oppdater listen', exact: true }).click();
-  await page.getByRole('button', { name: 'Åpne 2031-01-02 · versjon 1', exact: true }).click();
+  await preparation(page); await page.getByRole('button', { name: 'Oppdater listen', exact: true }).click();
+  await preparation(page); await page.getByRole('button', { name: 'Åpne 2031-01-02 · versjon 1', exact: true }).click();
   const note = page.getByLabel('Usikkerhet / ukjente fakta', { exact: true }).first();
   await expect(note).toHaveValue('   Concrete manual note.  ');
   await page.getByLabel('Vognløp', { exact: true }).fill('0007');
-  await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
+  await editor(page); await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
   await expect(page.getByRole('region', { name: 'Private utkast' }).getByRole('status')).toHaveText('Lagret. Versjon 2.');
-  await page.getByRole('button', { name: 'Oppdater listen', exact: true }).click();
-  await page.getByRole('button', { name: 'Åpne 2031-01-02 · versjon 2', exact: true }).click();
+  await preparation(page); await page.getByRole('button', { name: 'Oppdater listen', exact: true }).click();
+  await preparation(page); await page.getByRole('button', { name: 'Åpne 2031-01-02 · versjon 2', exact: true }).click();
   await expect(note).toHaveValue('   Concrete manual note.  ');
   const stored = await (await context.request.get(API + '/drafts/' + draft.id)).json();
   expect(stored.draft.activities).toEqual(draft.draft.activities);
@@ -91,9 +92,9 @@ for (const policy of [1, 2]) test(`review fixes real legacy policy ${policy} reo
   const decisions = { operation_id: issued.operation_id, expected_revision: 1, acknowledgements: unknowns.map((item: any) => item.id), classifications: {} };
   const plan = await post(context, '/drafts/' + draft.id + '/confirm', decisions);
   expect(plan.draft).toEqual(draft.draft); expect(plan.unknowns).toEqual(unknowns);
-  await page.getByRole('button', { name: 'Oppdater planlisten', exact: true }).click();
+  await preparation(page); await page.getByRole('button', { name: 'Oppdater planlisten', exact: true }).click();
   for (let opened = 0; opened < 2; opened++) {
-    await page.getByRole('button', { name: 'Åpne plan 2031-01-02 · versjon 1', exact: true }).click();
+    await preparation(page); await page.getByRole('button', { name: 'Åpne plan 2031-01-02 · versjon 1', exact: true }).click();
     const confirmed = page.getByRole('region', { name: 'Bekreftet plan', exact: true });
     const current = confirmed.getByRole('region', { name: 'Dagsoversikt', exact: true }).locator(`[data-activity-id="${draft.draft.activities[0].id}"]`);
     await expect(current.locator('.day-uncertainty')).toHaveText('Usikkerhet: Concrete manual note.');
@@ -104,7 +105,7 @@ for (const policy of [1, 2]) test(`review fixes real legacy policy ${policy} reo
     await expect(rawNote.locator('.day-uncertainty')).toHaveCount(0);
     expect(await (await context.request.get(API + '/workdays/' + plan.id)).json()).toEqual(plan);
     expect(await (await context.request.get(API + '/workday-operations/' + issued.operation_id)).json()).toEqual({ state: 'accepted', result: plan });
-    await page.getByRole('button', { name: 'Lukk planen', exact: true }).click();
+    await planScreen(page); await page.getByRole('button', { name: 'Lukk planen', exact: true }).click();
   }
   expect(await post(context, '/drafts/' + draft.id + '/confirm', decisions)).toEqual(plan);
 });
@@ -119,7 +120,7 @@ for (const tamper of ['swapped', 'misleading']) test(`review fixes reject ${tamp
     else value.unknowns[0].label = 'Everything is complete. No missing fact.';
     await route.fulfill({ response, json: value });
   });
-  await page.getByRole('button', { name: 'Gjennomgå lagret utkast', exact: true }).click();
+  await editor(page); await page.getByRole('button', { name: 'Gjennomgå lagret utkast', exact: true }).click();
   await expect(page.getByRole('status', { name: 'Bekreftelsesstatus' })).toContainText('Tjenesten kunne ikke bekrefte svaret');
   await expect(page.getByRole('region', { name: 'Gjennomgått versjon' })).toHaveCount(0);
   expect(confirmations).toBe(0);
@@ -164,7 +165,7 @@ for (const malformed of ['unassociated', 'non-trip', 'invented-field']) test(`fe
     value.unknowns.push({ id: malformed === 'unassociated' ? randomUUID() + ':line' : draft.draft.activities[0].id + ':' + (malformed === 'invented-field' ? 'raw_code' : 'line'), label: 'Malformed candidate' });
     await route.fulfill({ response, json: value });
   });
-  await page.getByRole('button', { name: 'Gjennomgå lagret utkast', exact: true }).click();
+  await editor(page); await page.getByRole('button', { name: 'Gjennomgå lagret utkast', exact: true }).click();
   await expect(page.getByRole('status', { name: 'Bekreftelsesstatus' })).toContainText('Tjenesten kunne ikke bekrefte svaret');
   await expect(page.getByRole('region', { name: 'Gjennomgått versjon' })).toHaveCount(0);
 });
@@ -210,8 +211,8 @@ for (const [kind, field, value, missing] of [
 async function openedPlan(page: Page, context: BrowserContext) {
   await login(page); const draft = await seed(page, context, 'trip');
   const plan = await confirmSaved(context, draft);
-  await page.getByRole('button', { name: 'Oppdater planlisten', exact: true }).click();
-  await page.getByRole('button', { name: 'Åpne plan 2031-01-02 · versjon 1', exact: true }).click();
+  await preparation(page); await page.getByRole('button', { name: 'Oppdater planlisten', exact: true }).click();
+  await preparation(page); await page.getByRole('button', { name: 'Åpne plan 2031-01-02 · versjon 1', exact: true }).click();
   await expect(page.getByRole('region', { name: 'Bekreftet plan', exact: true })).toBeVisible();
   return { draft, plan };
 }
@@ -230,9 +231,9 @@ for (const width of [768, 1440]) for (const night of [false, true]) test(`plan d
   page.once('dialog', dialog => dialog.accept());
   await page.keyboard.press('Enter');
   await expect(page.getByRole('status', { name: 'Bekreftelsesstatus' })).toContainText('Den bekreftede planen er slettet.');
-  await expect(page.getByRole('heading', { name: 'Gjennomgå og bekreft' })).toBeFocused();
+  await expect(page.getByRole('heading', { name: 'Mine utkast' })).toBeFocused();
   await expect(page.getByRole('region', { name: 'Bekreftet plan', exact: true })).toHaveCount(0);
-  await page.getByRole('region', { name: 'Bekreft plan', exact: true }).screenshot({ path: `../docs/evidence/10-3-deleted-${width}-${night ? 'night' : 'day'}.png` });
+  await page.getByRole('region', { name: 'Bekreft plan', exact: true }).screenshot({ path: `../docs/evidence/11-2-regression-10-3-deleted-${width}-${night ? 'night' : 'day'}.png` });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   await page.reload(); await expect(page.getByRole('heading', { name: 'Mine utkast' })).toBeVisible();
   await expect(page.getByRole('button', { name: 'Åpne plan 2031-01-02 · versjon 1', exact: true })).toHaveCount(0);
@@ -252,10 +253,10 @@ for (const reply of ['html', 'html404', 'wrong', 'network', 'unsent']) test(`pla
     else await route.fulfill({ json: { operation_id: randomUUID(), deleted_id: plan.id, source_revision: 1 } });
   });
   page.once('dialog', dialog => dialog.accept());
-  await page.getByRole('button', { name: 'Slett bekreftet plan', exact: true }).click();
+  await planScreen(page); await page.getByRole('button', { name: 'Slett bekreftet plan', exact: true }).click();
   await expect(page.getByRole('status', { name: 'Bekreftelsesstatus' })).toContainText('Slettingen er uavklart. Behold siden åpen');
   await expect(page.getByRole('button', { name: 'Lukk planen', exact: true })).toBeDisabled();
-  await expect(page.getByRole('button', { name: 'Oppdater planlisten', exact: true })).toBeDisabled();
+  await expect(page.getByRole('button', { includeHidden: true, name: 'Oppdater planlisten', exact: true })).toBeDisabled();
   await expect(page.getByLabel('Vognløp', { exact: true })).toBeDisabled();
   expect(await page.evaluate(() => { const event = new Event('beforeunload', { cancelable: true }); window.dispatchEvent(event); return event.defaultPrevented; })).toBe(true);
   page.once('dialog', async dialog => { expect(dialog.type()).toBe('confirm'); await dialog.dismiss(); });
@@ -281,9 +282,9 @@ for (const read of ['list', 'plan']) test(`plan deletion discards delayed ${read
   const path = read === 'list' ? '**:8001/workdays' : '**:8001/workdays/' + plan.id;
   await page.route(path, async route => { const response = await route.fetch(); entered(); await gate; await route.fulfill({ response }); });
   try {
-    await page.getByRole('button', { name: read === 'list' ? 'Oppdater planlisten' : 'Åpne plan 2031-01-02 · versjon 1', exact: true }).click();
+    await preparation(page); await page.getByRole('button', { name: read === 'list' ? 'Oppdater planlisten' : 'Åpne plan 2031-01-02 · versjon 1', exact: true }).click();
     await waiting;
-    page.once('dialog', dialog => dialog.accept()); await page.getByRole('button', { name: 'Slett bekreftet plan', exact: true }).click();
+    page.once('dialog', dialog => dialog.accept()); await planScreen(page); await page.getByRole('button', { name: 'Slett bekreftet plan', exact: true }).click();
     await expect(page.getByRole('status', { name: 'Bekreftelsesstatus' })).toContainText('Den bekreftede planen er slettet.');
     const returned = page.waitForResponse(response => response.url().endsWith(read === 'list' ? ':8001/workdays' : '/workdays/' + plan.id));
     release(); await (await returned).finished();
@@ -299,12 +300,12 @@ test('review fix preserves later-page discovery after deleting the last first-pa
   await page.route('**:8001/workdays', route => route.fulfill({ json: { workdays: [summary(plan)], next_cursor: plan.id } }));
   let cursor: string | null = null;
   await page.route('**:8001/workdays?*', async route => { cursor = new URL(route.request().url()).searchParams.get('cursor'); await route.fulfill({ json: { workdays: [summary(later)], next_cursor: null } }); });
-  await page.getByRole('button', { name: 'Oppdater planlisten', exact: true }).click();
+  await preparation(page); await page.getByRole('button', { name: 'Oppdater planlisten', exact: true }).click();
   await expect(page.getByRole('button', { name: 'Last flere planer', exact: true })).toBeEnabled();
-  page.once('dialog', dialog => dialog.accept()); await page.getByRole('button', { name: 'Slett bekreftet plan', exact: true }).click();
+  page.once('dialog', dialog => dialog.accept()); await planScreen(page); await page.getByRole('button', { name: 'Slett bekreftet plan', exact: true }).click();
   await expect(page.getByRole('status', { name: 'Bekreftelsesstatus' })).toContainText('Den bekreftede planen er slettet.');
-  await page.getByRole('button', { name: 'Last flere planer', exact: true }).click();
-  await page.getByRole('button', { name: 'Åpne plan 2032-02-03 · versjon 1', exact: true }).click();
+  await preparation(page); await page.getByRole('button', { name: 'Last flere planer', exact: true }).click();
+  await preparation(page); await page.getByRole('button', { name: 'Åpne plan 2032-02-03 · versjon 1', exact: true }).click();
   await expect(page.getByRole('region', { name: 'Bekreftet plan', exact: true }).getByRole('region', { name: 'Dagsoversikt', exact: true }).getByText('2032-02-03', { exact: true })).toBeVisible();
   expect(cursor).toBe(plan.id);
 });
@@ -313,15 +314,15 @@ for (const status of [404, 410]) test(`review fix clears only the denied same-ID
   const { draft, plan } = await openedPlan(page, context);
   const otherDraft = await post(context, '/drafts', { operation_id: (await post(context, '/draft-operations', {})).operation_id, expected_revision: 0, draft: { ...draft.draft, service_date: '2032-02-03' } });
   await confirmSaved(context, otherDraft);
-  await page.getByRole('button', { name: 'Oppdater planlisten', exact: true }).click();
+  await preparation(page); await page.getByRole('button', { name: 'Oppdater planlisten', exact: true }).click();
   await page.route('**:8001/workdays/' + plan.id, route => route.fulfill({ status, json: { detail: 'Synthetic denial' } }));
-  await page.getByRole('button', { name: 'Åpne plan 2031-01-02 · versjon 1', exact: true }).click();
+  await preparation(page); await page.getByRole('button', { name: 'Åpne plan 2031-01-02 · versjon 1', exact: true }).click();
   await expect(page.getByRole('region', { name: 'Bekreftet plan', exact: true })).toHaveCount(0);
   await expect(page.getByRole('status', { name: 'Bekreftelsesstatus' })).toHaveText('Tilgangen ble avvist eller fristen er utløpt.');
-  await page.getByRole('button', { name: 'Åpne plan 2032-02-03 · versjon 1', exact: true }).click();
-  await page.getByRole('button', { name: 'Åpne plan 2031-01-02 · versjon 1', exact: true }).click();
+  await preparation(page); await page.getByRole('button', { name: 'Åpne plan 2032-02-03 · versjon 1', exact: true }).click();
+  await preparation(page); await page.getByRole('button', { name: 'Åpne plan 2031-01-02 · versjon 1', exact: true }).click();
   await expect(page.getByRole('status', { name: 'Bekreftelsesstatus' })).toHaveText('Tilgangen ble avvist eller fristen er utløpt.');
-  await expect(page.getByRole('region', { name: 'Bekreftet plan', exact: true }).getByRole('region', { name: 'Dagsoversikt', exact: true }).getByText('2032-02-03', { exact: true })).toBeVisible();
+  await planScreen(page); await expect(page.getByRole('region', { name: 'Bekreftet plan', exact: true }).getByRole('region', { name: 'Dagsoversikt', exact: true }).getByText('2032-02-03', { exact: true })).toBeVisible();
 });
 
 for (const held of ['deletion', 'read']) test(`review fix expiry clears busy and leave locks during held ${held}`, async ({ page, context }) => {
@@ -332,7 +333,7 @@ for (const held of ['deletion', 'read']) test(`review fix expiry clears busy and
   // Schedule retention timers near the deadline so expiry precedes the
   // independent ten-second transport timeout of the held request.
   await page.clock.setSystemTime(new Date(Date.parse(plan.expires_at) - 5000));
-  await page.getByRole('button', { name: 'Oppdater planlisten', exact: true }).click();
+  await preparation(page); await page.getByRole('button', { name: 'Oppdater planlisten', exact: true }).click();
   const open = page.getByRole('button', { name: `Åpne plan ${draft.draft.service_date} · versjon 1`, exact: true });
   await open.click();
   await expect(page.getByRole('region', { name: 'Bekreftet plan', exact: true })).toBeVisible();
@@ -342,10 +343,10 @@ for (const held of ['deletion', 'read']) test(`review fix expiry clears busy and
   const path = held === 'deletion' ? '**:8001/workday-deletions/*' : '**:8001/workdays/' + plan.id;
   await page.route(path, async route => { const response = await route.fetch(); entered(); await gate; await route.fulfill({ response }); });
   try {
-    if (held === 'deletion') { page.once('dialog', dialog => dialog.accept()); await page.getByRole('button', { name: 'Slett bekreftet plan', exact: true }).click(); }
-    else await open.click();
+    if (held === 'deletion') { page.once('dialog', dialog => dialog.accept()); await planScreen(page); await page.getByRole('button', { name: 'Slett bekreftet plan', exact: true }).click(); }
+    else { await preparation(page); await open.click(); }
     await waiting;
-    await expect(page.getByRole('button', { name: 'Oppdater planlisten', exact: true })).toBeDisabled();
+    await expect(page.getByRole('button', { includeHidden: true, name: 'Oppdater planlisten', exact: true })).toBeDisabled();
     if (held === 'deletion') expect(await page.evaluate(() => { const event = new Event('beforeunload', { cancelable: true }); window.dispatchEvent(event); return event.defaultPrevented; })).toBe(true);
     await page.clock.fastForward(Date.parse(plan.expires_at) - await page.evaluate(() => Date.now()) + 1000);
     await expect(page.getByRole('region', { name: 'Bekreftet plan', exact: true })).toHaveCount(0);
@@ -375,13 +376,13 @@ for (const reply of ['failed', 'malformed', 'mismatched', 'delayed']) test(`revi
     else { const response = await route.fetch(); entered(); await gate; await route.fulfill({ response }); }
   });
   try {
-    page.once('dialog', dialog => dialog.accept()); await page.getByRole('button', { name: 'Slett bekreftet plan', exact: true }).click();
+    page.once('dialog', dialog => dialog.accept()); await planScreen(page); await page.getByRole('button', { name: 'Slett bekreftet plan', exact: true }).click();
     if (reply === 'delayed') await waiting;
     else await expect(page.getByRole('status', { name: 'Bekreftelsesstatus' })).toContainText('Slettingen er uavklart. Behold siden åpen');
     expect(receiptPath).toBe('/workday-deletions/' + body.operation_id);
     await expect(page.getByRole('region', { name: 'Bekreftet plan', exact: true })).toBeVisible();
     await expect(page.getByRole('button', { name: 'Lukk planen', exact: true })).toBeDisabled();
-    await expect(page.getByRole('button', { name: 'Oppdater planlisten', exact: true })).toBeDisabled();
+    await expect(page.getByRole('button', { includeHidden: true, name: 'Oppdater planlisten', exact: true })).toBeDisabled();
     await expect(page.getByLabel('Vognløp', { exact: true })).toBeDisabled();
     expect(await page.evaluate(() => { const event = new Event('beforeunload', { cancelable: true }); window.dispatchEvent(event); return event.defaultPrevented; })).toBe(true);
     page.once('dialog', dialog => dialog.dismiss()); await page.getByRole('link', { name: 'Åpne fiktiv demo', exact: true }).click();
@@ -406,7 +407,7 @@ test('saved revision review cancels unchanged, editing invalidates, unknowns and
   await page.getByLabel('Vognløp', { exact: true }).fill('0007');
   await expect(page.getByRole('region', { name: 'Gjennomgått versjon' })).toHaveCount(0);
   await expect(page.getByRole('button', { name: 'Gjennomgå lagret utkast' })).toBeDisabled();
-  await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
+  await editor(page); await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
   await expect(page.getByRole('button', { name: 'Gjennomgå lagret utkast' })).toBeEnabled();
   await review(page); await decide(page);
   await page.getByRole('button', { name: 'Bekreft gjennomgått plan', exact: true }).click();
@@ -450,14 +451,14 @@ for (const [classification, label] of [['Instruktør', 'Instruktør'], ['Sign-on
   for (const box of await page.getByRole('region', { name: 'Gjennomgått versjon' }).getByRole('checkbox').all()) await box.check();
   await page.getByRole('button', { name: 'Bekreft gjennomgått plan', exact: true }).click();
   await expect(page.getByRole('region', { name: 'Bekreftet plan', exact: true })).toBeVisible();
-  await expect(page.getByRole('button', { name: 'Åpne plan 2031-01-02 · versjon 1', exact: true })).toBeVisible();
+  await preparation(page); await expect(page.getByRole('button', { name: 'Åpne plan 2031-01-02 · versjon 1', exact: true })).toBeVisible(); await planScreen(page);
   const plans = await (await context.request.get(API + '/workdays')).json();
   const plan = await (await context.request.get(API + '/workdays/' + plans.workdays[0].id)).json();
   expect(plan.draft).toEqual(draft.draft);
   expect(plan.classifications).toEqual({ [draft.draft.activities[0].id]: classification });
   const day = page.getByRole('region', { name: 'Dagsoversikt', exact: true });
   for (const reopened of [false, true]) {
-    if (reopened) { await page.getByRole('button', { name: 'Lukk planen', exact: true }).click(); await page.getByRole('button', { name: 'Åpne plan 2031-01-02 · versjon 1', exact: true }).click(); }
+    if (reopened) { await preparation(page); await planScreen(page); await page.getByRole('button', { name: 'Lukk planen', exact: true }).click(); await page.getByRole('button', { name: 'Åpne plan 2031-01-02 · versjon 1', exact: true }).click(); }
     await expect(day).toContainText(`Oppgitt type: Fiktiv ukjent type · Bekreftet klassifisering: ${label}`);
     await expect(day.locator('.day-activity').getByRole('heading', { name: label, exact: true })).toBeVisible();
     if (classification === 'Sign-on') { await expect(day.locator('.day-reporting')).toContainText('02.01.2031, 10:00'); await expect(day).not.toContainText('ingen bekreftet Sign-on'); }
@@ -477,9 +478,9 @@ test('accepted plan remains visible when automatic discovery refresh fails', asy
 test('reopening rejects a snapshot that omits required classification decisions', async ({ page, context }) => {
   await login(page); const draft = await seed(page, context);
   const plan = await confirmSaved(context, draft);
-  await page.getByRole('button', { name: 'Oppdater planlisten', exact: true }).click();
+  await preparation(page); await page.getByRole('button', { name: 'Oppdater planlisten', exact: true }).click();
   await page.route('**:8001/workdays/' + plan.id, route => route.fulfill({ json: { ...plan, classifications: {} } }));
-  await page.getByRole('button', { name: 'Åpne plan 2031-01-02 · versjon 1', exact: true }).click();
+  await preparation(page); await page.getByRole('button', { name: 'Åpne plan 2031-01-02 · versjon 1', exact: true }).click();
   await expect(page.getByRole('status', { name: 'Bekreftelsesstatus' })).toContainText('kunne ikke bekrefte');
   await expect(page.getByRole('region', { name: 'Bekreftet plan', exact: true })).toHaveCount(0);
 });
@@ -496,13 +497,13 @@ test('two-page discovery retains earlier summaries and reopens a later-page plan
     await route.fulfill({ json: { workdays: [summary(second)], next_cursor: null } });
   });
   await page.route('**:8001/workdays', route => route.fulfill({ json: { workdays: [summary(first)], next_cursor: first.id } }));
-  await page.getByRole('button', { name: 'Oppdater planlisten', exact: true }).click();
+  await preparation(page); await page.getByRole('button', { name: 'Oppdater planlisten', exact: true }).click();
   await expect(page.getByRole('button', { name: 'Åpne plan 2031-01-02 · versjon 1', exact: true })).toBeVisible();
-  await page.getByRole('button', { name: 'Last flere planer', exact: true }).click();
+  await preparation(page); await page.getByRole('button', { name: 'Last flere planer', exact: true }).click();
   await expect(page.getByRole('button', { name: 'Åpne plan 2031-01-02 · versjon 1', exact: true })).toBeVisible();
   await expect(page.getByRole('button', { name: 'Åpne plan 2032-02-03 · versjon 1', exact: true })).toBeVisible();
   expect(cursors).toEqual([first.id]);
-  await page.getByRole('button', { name: 'Åpne plan 2032-02-03 · versjon 1', exact: true }).click();
+  await preparation(page); await page.getByRole('button', { name: 'Åpne plan 2032-02-03 · versjon 1', exact: true }).click();
   const reopened = page.getByRole('region', { name: 'Bekreftet plan', exact: true });
   await expect(reopened).toBeVisible(); await expect(reopened.getByRole('region', { name: 'Dagsoversikt', exact: true }).getByText('2032-02-03', { exact: true })).toBeVisible();
 });
@@ -515,8 +516,8 @@ test('corrected imported draft retains readable original source facts in review 
   imported.activities.forEach((activity: any, i: number) => { activity.start = `2031-01-02T10:0${i}+01:00`; activity.end = activity.start; });
   imported.activities[0].from_place = 'Manuelt rettet sted';
   const draft = await post(context, '/drafts', { operation_id: (await post(context, '/draft-operations', {})).operation_id, expected_revision: 0, draft: imported });
-  await page.getByRole('button', { name: 'Oppdater listen', exact: true }).click();
-  await page.getByRole('button', { name: 'Åpne 2031-01-02 · versjon 1', exact: true }).click();
+  await preparation(page); await page.getByRole('button', { name: 'Oppdater listen', exact: true }).click();
+  await preparation(page); await page.getByRole('button', { name: 'Åpne 2031-01-02 · versjon 1', exact: true }).click();
   await review(page);
   const reviewed = page.getByRole('region', { name: 'Gjennomgått versjon' });
   await expect(reviewed.getByText('Manuelt rettet sted', { exact: true })).toBeVisible();
@@ -524,8 +525,8 @@ test('corrected imported draft retains readable original source facts in review 
   await expect(reviewed.getByRole('region', { name: 'Kildefakta fra PDF', exact: true }).getByText(/^2030-01-01/).first()).toBeVisible();
   await decide(page); await page.getByRole('button', { name: 'Bekreft gjennomgått plan', exact: true }).click();
   const confirmed = page.getByRole('region', { name: 'Bekreftet plan', exact: true });
-  await expect(confirmed).toBeVisible(); await page.getByRole('button', { name: 'Lukk planen', exact: true }).click();
-  await page.getByRole('button', { name: 'Åpne plan 2031-01-02 · versjon 1', exact: true }).click();
+  await expect(confirmed).toBeVisible(); await planScreen(page); await page.getByRole('button', { name: 'Lukk planen', exact: true }).click();
+  await preparation(page); await page.getByRole('button', { name: 'Åpne plan 2031-01-02 · versjon 1', exact: true }).click();
   const row = confirmed.getByRole('region', { name: 'Dagsoversikt', exact: true }).locator(`[data-activity-id="${draft.draft.activities[0].id}"]`);
   await row.getByText('Kilde og rettelser · aktivitet 1', { exact: true }).click();
   await expect(row.getByText('Fra sted · rettet', { exact: true })).toBeVisible();
@@ -544,11 +545,11 @@ test('expired plan summaries are removed and delayed expired lists cannot repopu
   await page.clock.install(); await login(page);
   const summary = { id: randomUUID(), source_draft_id: randomUUID(), source_revision: 1, service_date: '2032-02-03', expires_at: new Date(Date.now() + 3000).toISOString() };
   await page.route('**:8001/workdays', route => route.fulfill({ json: { workdays: [summary], next_cursor: null } }));
-  await page.getByRole('button', { name: 'Oppdater planlisten', exact: true }).click();
+  await preparation(page); await page.getByRole('button', { name: 'Oppdater planlisten', exact: true }).click();
   await expect(page.getByRole('button', { name: 'Åpne plan 2032-02-03 · versjon 1', exact: true })).toBeVisible();
   await page.clock.fastForward(4000);
   await expect(page.getByRole('button', { name: 'Åpne plan 2032-02-03 · versjon 1', exact: true })).toHaveCount(0);
-  await page.getByRole('button', { name: 'Oppdater planlisten', exact: true }).click();
+  await preparation(page); await page.getByRole('button', { name: 'Oppdater planlisten', exact: true }).click();
   await expect(page.getByRole('status', { name: 'Bekreftelsesstatus' })).toContainText('kunne ikke bekrefte');
   await expect(page.getByRole('button', { name: 'Åpne plan 2032-02-03 · versjon 1', exact: true })).toHaveCount(0);
 });
@@ -575,16 +576,16 @@ for (const width of [768, 1440]) for (const night of [false, true]) test(`review
   await review(page);
   await expect(page.getByRole('heading', { name: 'Gjennomgå og bekreft' })).toBeFocused();
   const region = page.getByRole('region', { name: 'Gjennomgått versjon' });
-  await region.screenshot({ path: `../docs/evidence/10-3-review-${width}-${night ? 'night' : 'day'}.png` });
+  await region.screenshot({ path: `../docs/evidence/11-2-regression-10-3-review-${width}-${night ? 'night' : 'day'}.png` });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   const select = region.getByRole('combobox'); await select.focus(); await page.keyboard.press('m'); await page.keyboard.press('Tab');
   await decide(page); await page.getByRole('button', { name: 'Bekreft gjennomgått plan', exact: true }).click();
   const confirmed = page.getByRole('region', { name: 'Bekreftet plan', exact: true });
   await expect(confirmed).toBeVisible(); await confirmed.getByText('Godtatte ukjente fakta', { exact: true }).click();
-  await confirmed.screenshot({ path: `../docs/evidence/10-3-confirmed-${width}-${night ? 'night' : 'day'}.png` });
-  await page.getByRole('button', { name: 'Lukk planen', exact: true }).click();
-  await page.getByRole('button', { name: 'Oppdater planlisten', exact: true }).click();
-  await page.getByRole('button', { name: 'Åpne plan 2031-01-02 · versjon 1', exact: true }).last().click();
+  await confirmed.screenshot({ path: `../docs/evidence/11-2-regression-10-3-confirmed-${width}-${night ? 'night' : 'day'}.png` });
+  await planScreen(page); await page.getByRole('button', { name: 'Lukk planen', exact: true }).click();
+  await preparation(page); await page.getByRole('button', { name: 'Oppdater planlisten', exact: true }).click();
+  await preparation(page); await page.getByRole('button', { name: 'Åpne plan 2031-01-02 · versjon 1', exact: true }).last().click();
   await expect(confirmed).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 });

@@ -75,6 +75,10 @@ function ActivityComparison({ content, activity, index, unresolved }: { content:
 
 export function PrivateDrafts({ upload, request, mutation, dirtyChanged, expired, suspended }: Props) {
   const [night, setNight] = useState(false);
+  const [screen, setScreen] = useState<'upload' | 'import' | 'editor' | 'plan'>('upload');
+  const [hasPlan, setHasPlan] = useState(false); const [consulting, setConsulting] = useState(false);
+  const preparationTitle = useRef<HTMLHeadingElement>(null);
+  useEffect(() => { if (screen === 'upload') preparationTitle.current?.focus(); if (screen === 'editor') title.current?.focus(); }, [screen]);
   const [confirmationLocked, setConfirmationLocked] = useState(false);
   const [list, setList] = useState<Summary[]>([]);
   const [listState, setListState] = useState<'loading' | 'ready' | 'error'>('loading');
@@ -156,7 +160,7 @@ export function PrivateDrafts({ upload, request, mutation, dirtyChanged, expired
     window.addEventListener('beforeunload', warn); document.addEventListener('click', navigate);
     return () => { window.removeEventListener('beforeunload', warn); document.removeEventListener('click', navigate); };
   }, [dirty, confirmationLocked]);
-  function adopt(value: Saved) { resetTimes(); setSaveUnavailable(false); setSaved(value); setContent(value.draft); setPending(null); setComparison(null); setMessage(`Lagret. Versjon ${value.revision}.`); title.current?.focus(); }
+  function adopt(value: Saved) { setScreen('editor'); resetTimes(); setSaveUnavailable(false); setSaved(value); setContent(value.draft); setPending(null); setComparison(null); setMessage(`Lagret. Versjon ${value.revision}.`); title.current?.focus(); }
   function terminalSave(status: number) {
     setPending(null); setSaveUnavailable(true);
     setMessage(`Lagring er ikke bekreftet. ${status === 410 ? 'Lagringsforsøket er utløpt.' : 'Lagringsforsøket finnes ikke lenger eller er utilgjengelig.'} Lokale inndata er beholdt for gjennomgang og kan ikke sendes på nytt. Velg Nytt utkast eller Tilbakestill for å starte med et tomt skjema.`);
@@ -292,20 +296,23 @@ export function PrivateDrafts({ upload, request, mutation, dirtyChanged, expired
     if (value !== undefined) next.push({ from_activity_id: id, vehicle_duty: value, realtime_duty: dutySuffix(value) });
     edit({ ...content, vehicle_duty_changes: next });
   }
-  return <div className={night ? 'private-drafts night' : 'private-drafts'} hidden={suspended}><section aria-label="Private utkast">
+  return <div className={(night ? 'private-drafts night' : 'private-drafts') + (consulting ? ' consulting' : '')} hidden={suspended}><section aria-label="Private utkast">
     <button type="button" aria-pressed={night} onClick={() => setNight(value => !value)}>Nattmodus</button>
-    <h2>Mine utkast</h2>
-    <fieldset className="confirmation-editor" disabled={confirmationLocked}>
-    <PrivateImport upload={upload} suspended={suspended} locked={entryLocked || !!comparison} expired={expired} adopt={value => { if (dirty && !window.confirm('Ulagrede endringer går tapt. Bruke importen som et separat nytt utkast?')) return false; resetTimes(); setSaved(null); setContent(value); setComparison(null); setSaveUnavailable(false); setMessage('Importen er et separat, ulagret utkast. Kontroller fakta og lagre uttrykkelig.'); title.current?.focus(); return true; }} />
+    <nav className="private-screen-nav" aria-label="Plan og forberedelse"><button disabled={confirmationLocked || !!pending || !!pendingDelete || busy || suspended} aria-current={screen === 'upload' ? 'page' : undefined} onClick={() => setScreen('upload')}>Forberedelse og planlister</button><button disabled={confirmationLocked || !!pending || !!pendingDelete || busy || suspended} aria-current={screen === 'editor' ? 'page' : undefined} onClick={() => setScreen('editor')}>Kontroller og rediger utkast</button>{hasPlan && <button disabled={confirmationLocked || !!pending || !!pendingDelete || busy || suspended} aria-current={screen === 'plan' ? 'page' : undefined} onClick={() => setScreen('plan')}>Til den åpne planen</button>}</nav>
+    <div hidden={screen !== 'upload'}><h2 ref={preparationTitle} tabIndex={-1}>Mine utkast</h2></div>
+    <p hidden={screen !== 'upload' && screen !== 'editor'} role="status" aria-live="polite" className="status">{message}</p><fieldset className="confirmation-editor" disabled={confirmationLocked}>
+    <div hidden={screen !== 'upload' && screen !== 'import'}><PrivateImport stage={screen === 'import' ? 'review' : 'upload'} reviewReady={() => setScreen(current => current === 'upload' ? 'import' : current)} backToUpload={() => setScreen('upload')} upload={upload} suspended={suspended} locked={entryLocked || !!comparison} expired={expired} adopt={value => { if (dirty && !window.confirm('Ulagrede endringer går tapt. Bruke importen som et separat nytt utkast?')) return false; resetTimes(); setSaved(null); setContent(value); setComparison(null); setSaveUnavailable(false); setMessage('Importen er et separat, ulagret utkast. Kontroller fakta og lagre uttrykkelig.'); setScreen('editor'); return true; }} /></div>
+    <div hidden={screen !== 'upload'}>
     <p>Utkast slettes sju dager etter opprettelse. Ulagrede endringer finnes bare mens denne siden er åpen.</p>
-    <div className="controls"><button disabled={busy || !!pending || !!pendingDelete} onClick={() => { if (!dirty || window.confirm('Ulagrede endringer går tapt. Opprette nytt utkast?')) { resetTimes(); setSaveUnavailable(false); setSaved(null); setContent(empty()); setPending(null); setComparison(null); setMessage('Nytt utkast. Ikke lagret.'); title.current?.focus(); } }}>Nytt utkast</button><button disabled={busy || !!pendingDelete} onClick={() => void refresh()}>Oppdater listen</button></div>
+    <div className="controls"><button disabled={busy || !!pending || !!pendingDelete} onClick={() => { if (!dirty || window.confirm('Ulagrede endringer går tapt. Opprette nytt utkast?')) { resetTimes(); setSaveUnavailable(false); setSaved(null); setContent(empty()); setPending(null); setComparison(null); setMessage('Nytt utkast. Ikke lagret.'); setScreen('editor'); } }}>Nytt utkast</button><button disabled={busy || !!pendingDelete} onClick={() => void refresh()}>Oppdater listen</button></div>
     {listState === 'loading' && <p>Laster lagrede utkast …</p>}
     {listState === 'error' && <p>Listen er utilgjengelig. Prøv Oppdater listen igjen.</p>}
     {list.length === 0 ? listState === 'ready' && <p>Ingen lagrede utkast.</p> : <ul>{list.map(item => <li key={item.id}><button disabled={busy || !!pending || !!pendingDelete || saveUnavailable} onClick={() => void reopen(item.id)}>Åpne {item.service_date ?? 'ukjent tjenestedato'} · versjon {item.revision}</button> <span>Utløper {new Date(item.expires_at).toLocaleString('nb-NO', { timeZone: 'Europe/Oslo' })}</span></li>)}</ul>}
     <p className="draft-loaded-count" ref={loadedCount} tabIndex={-1} aria-live="polite">{listState === 'ready' ? `Lastet ${list.length} utkast.` : listState === 'loading' ? 'Antall utkast avklares …' : 'Antall utkast er utilgjengelig.'}</p>
     {nextCursor && <button disabled={listState === 'loading' || busy || !!pendingDelete} onClick={() => void refresh(nextCursor)}>Vis flere utkast</button>}
-    <h2 ref={title} tabIndex={-1}>{saved ? 'Rediger utkast' : 'Nytt manuelt utkast'}</h2>
-    <p role="status" aria-live="polite" className="status">{message}</p>
+    </div>
+    <div hidden={screen !== 'editor'}><h2 ref={title} tabIndex={-1}>{saved ? 'Rediger utkast' : 'Nytt manuelt utkast'}</h2>
+
     {saved && <p>Utløper {new Date(saved.expires_at).toLocaleString('nb-NO', { timeZone: 'Europe/Oslo' })}. Fristen forlenges ikke.</p>}
     {content.import_metadata && <details key={'source:' + (saved?.id ?? 'new') + ':' + timeEpoch} className="source-disclosure"><summary>Vis kildefakta fra PDF</summary><SourceFacts metadata={content.import_metadata} /></details>}
     {issues.length > 0 && <section className="import-warning" aria-label="Usikkerheter fra importen"><h3>Kontroller usikkerheter fra importen</h3>
@@ -347,8 +354,8 @@ export function PrivateDrafts({ upload, request, mutation, dirtyChanged, expired
     {pendingDelete && <div className="controls"><button disabled={busy} onClick={() => void removeDraft()}>Prøv samme slettingsforsøk igjen</button><button disabled={busy} onClick={() => void removeDraft(true)}>Kontroller slettingen</button></div>}
     {pending && <button disabled={busy} onClick={() => void settle()}>Kontroller lagringsforsøket</button>}
     {comparison && <section aria-label="Sammenlign versjoner"><h3>Lagret versjon {comparison.revision}</h3><p>Lokale endringer står i skjemaet. Last inn lagret versjon for å forkaste dem.</p><dl><dt>Tjenestedato</dt><dd>{comparison.draft.service_date ?? 'Ukjent'}</dd><dt>Vognløp</dt><dd>{comparison.draft.vehicle_duty ?? 'Ukjent'}</dd><dt>Sanntidsverdi</dt><dd>{comparison.draft.realtime_duty ?? 'Ukjent'}</dd><dt>Buss/vogn</dt><dd>{comparison.draft.physical_bus ?? 'Ukjent'}</dd></dl><ol>{comparison.draft.activities.map((activity, index) => <li key={activity.id}><dl><dt>Gjeldende vognløp</dt><dd>{effectiveDuty(comparison.draft, index) ?? 'Ukjent'} · sanntidsverdi {dutySuffix(effectiveDuty(comparison.draft, index)) ?? 'Ukjent'}</dd>{fields.map(([key, label]) => <div className="fact" key={key}><dt>{label}</dt><dd>{displayFact(key, activity[key]) ?? 'Ukjent'}</dd></div>)}</dl></li>)}</ol><button onClick={() => { if (window.confirm('Forkaste lokale endringer og laste lagret versjon?')) adopt(comparison); }}>Last inn lagret versjon</button></section>}
-    </fieldset>
+    </div></fieldset>
     </section>
-    <PrivateConfirmation saved={saved} clean={!dirty && !busy && !comparison && !draftExpired} request={request} mutation={mutation} expired={expired} suspended={suspended} lock={setConfirmationLocked} />
+    <PrivateConfirmation consultationChanged={setConsulting} screen={screen} showPlan={() => setScreen('plan')} showPreparation={() => setScreen('upload')} planChanged={setHasPlan} saved={saved} clean={!dirty && !busy && !comparison && !draftExpired} request={request} mutation={mutation} expired={expired} suspended={suspended} lock={setConfirmationLocked} />
   </div>;
 }

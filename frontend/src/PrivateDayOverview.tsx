@@ -9,15 +9,15 @@ const interval = (start: string, end: string) => `${osloDateTime(start)} – ${o
 function Duty({ member }: { member: DayMember }) {
   return <p>Vognløp: {known(member.duty)} · Sanntidsverdi: {member.suffix ?? (member.duty?.startsWith('CAR') ? 'Ikke utledet for CAR' : 'Ukjent')}</p>;
 }
-type SelectionProps = { selectedId?: string | null; choose?: (id: string) => void; selectionDisabled?: boolean };
-function Member({ member, content, grouped = false, selectedId, choose, selectionDisabled }: { member: DayMember; content: Content; grouped?: boolean } & SelectionProps) {
+type SelectionProps = { selectedId?: string | null; choose?: (id: string) => void; selectionDisabled?: boolean; openSelected?: () => void; openDisabled?: boolean };
+function Member({ member, content, grouped = false, selectedId, choose, selectionDisabled, openSelected, openDisabled }: { member: DayMember; content: Content; grouped?: boolean } & SelectionProps) {
   const a = member.activity;
   const original = originalActivity(content, a.id);
   const corrected = original && Object.entries(original).filter(([field, value]) => !sameFact(field, a[field], value)).map(([field]) => field);
   const unknowns = currentUnknowns({ ...a, type: member.kind });
   const identifiers = [['line', 'Linje'], ['trip', 'Tur'], ['direction', 'Retning']].filter(([field]) => member.kind === 'trip' || field === 'trip' && ['deadhead', 'deadhead_car', 'Tomkjøring med CAR', 'CAR'].includes(member.kind) || !activityFactMissing(a[field]));
   return <div className="day-member" data-activity-id={a.id}>
-    {choose && <><p className="activity-selection-marker">{selectedId === a.id ? 'Manuelt valgt aktivitet' : 'Ikke valgt'}</p><button type="button" aria-label={`Velg aktivitet ${member.index + 1}`} aria-description={activityChoiceLabel(a, member.kind)} aria-current={selectedId === a.id ? 'true' : undefined} disabled={selectionDisabled || selectedId === a.id} onClick={() => choose(a.id)}>{selectedId === a.id ? 'Valgt aktivitet' : `Velg aktivitet ${member.index + 1}`}</button></>}
+    {choose && <><p className="activity-selection-marker">{selectedId === a.id ? 'Manuelt valgt aktivitet' : 'Ikke valgt'}</p><button type="button" aria-label={`Velg aktivitet ${member.index + 1}`} aria-description={activityChoiceLabel(a, member.kind)} aria-current={selectedId === a.id ? 'true' : undefined} disabled={selectionDisabled || selectedId === a.id} onClick={() => choose(a.id)}>{selectedId === a.id ? 'Valgt aktivitet' : `Velg aktivitet ${member.index + 1}`}</button>{selectedId === a.id && openSelected && <button data-open-activity={a.id} disabled={openDisabled} onClick={openSelected}>Åpne aktivitet {member.index + 1}</button>}</>}
     {grouped && <><p><strong>{dayTypeLabels[member.kind] ?? 'Ukjent aktivitetstype'}</strong></p><p>{interval(a.start!, a.end!)}</p></>}
     {a.raw_code && <p>Kode: {displayFact('raw_code', a.raw_code)}</p>}
     {a.type !== member.kind && <p>Oppgitt type: {known(displayFact('type', a.type))} · Bekreftet klassifisering: {dayTypeLabels[member.kind] ?? member.kind}</p>}

@@ -1,4 +1,4 @@
-import { test, expect, openedPlan, API, post, randomUUID, selected, shiftStatus, beforeUnload, reopen, python, setup, relativeInstants } from './private-activity-helpers';
+import { test, expect, openedPlan, API, post, randomUUID, selected, shiftStatus, beforeUnload, reopen, python, setup, relativeInstants, dayScreen, activityScreen } from './private-activity-helpers';
 setup();
 const oslo = (value: string) => new Intl.DateTimeFormat('nb-NO', { timeZone: 'Europe/Oslo', day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }).format(new Date(value));
 
@@ -28,12 +28,12 @@ test('independent explicit start without selection reopen reload and unchanged p
   };
   await timestamps();
   await expect(page.getByText('Startet manuelt', { exact: true })).toBeVisible();
-  await page.getByRole('button', { name: 'Velg aktivitet 2', exact: true }).click(); await expect(selected(page)).toContainText('Linje: 24');
-  await reopen(page); await expect(page.getByText('Startet manuelt', { exact: true })).toBeVisible();
+  await page.getByRole('button', { name: 'Velg aktivitet 2', exact: true }).click(); await activityScreen(page); await expect(selected(page)).toContainText('Linje: 24');
+  await dayScreen(page); await reopen(page); await expect(page.getByText('Startet manuelt', { exact: true })).toBeVisible();
   await timestamps();
   await page.reload(); await page.getByRole('button', { name: 'Åpne plan 2031-01-02 · versjon 1', exact: true }).click();
-  await expect(page.getByText('Startet manuelt', { exact: true })).toBeVisible(); await expect(selected(page)).toContainText('Linje: 24');
-  await timestamps();
+  await expect(page.getByText('Startet manuelt', { exact: true })).toBeVisible(); await activityScreen(page); await expect(selected(page)).toContainText('Linje: 24');
+  await dayScreen(page); await timestamps();
   expect(await (await context.request.get(API + '/workdays/' + plan.id + '/lifecycle')).json()).toEqual(actual);
   expect(await (await context.request.get(API + '/workdays/' + plan.id)).json()).toEqual(plan);
 });
@@ -56,8 +56,8 @@ for (const reply of ['lost', 'html', 'malformed']) test(`uncertain ${reply} star
   await page.getByRole('button', { name: 'Start skift', exact: true }).click(); await expect(shiftStatus(page)).toContainText('uavklart');
   await expect(page.getByRole('button', { name: 'Kontroller skiftstarten', exact: true })).toBeEnabled();
   await expect(page.getByText('Startet manuelt', { exact: true })).toHaveCount(0); await expect.poll(() => beforeUnload(page), { timeout: 5000 }).toBe(true);
-  // Resolving a separate choice must not release the unresolved start guard.
-  await page.getByRole('button', { name: 'Velg aktivitet 1', exact: true }).click(); await expect(selected(page)).toContainText('Linje: 20');
+  // The day keeps unresolved start recovery reachable before another activity can open.
+  await expect(page.getByRole('button', { name: 'Velg aktivitet 1', exact: true })).toBeDisabled();
   await expect(page.getByRole('button', { name: 'Lukk planen', exact: true })).toBeDisabled();
   await page.unroute('**:8001' + path); let retry: any; page.on('request', req => { if (req.url().endsWith(path) && req.method() === 'POST') retry = req.postDataJSON(); });
   await page.getByRole('button', { name: 'Prøv samme skiftstart igjen', exact: true }).click(); await expect(shiftStatus(page)).toHaveText('Skiftstart er lagret.'); expect(retry).toEqual(original);

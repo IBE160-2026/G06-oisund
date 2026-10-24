@@ -95,5 +95,26 @@ summary:focus-visible, fieldset:focus-visible { outline: 3px solid #000; outline
 .private-activity-selection button, .private-shift-start button, .day-member button { min-height: 58px; border-width: 2px; border-radius: 8px; white-space: normal; overflow-wrap: anywhere; }
 .selected-activity { border-inline-start: 4px solid currentColor; padding-inline-start: 1rem; }
 .activity-selection-marker { font-weight: 700; }
+[hidden] { display: none !important; }
+.private-screen-nav { display: flex; flex-wrap: wrap; gap: .75rem; margin-block: 1rem; }
+.private-screen-nav button { min-height: 58px; border: 2px solid currentColor; border-radius: 8px; overflow-wrap: anywhere; }
+.private-screen-nav [aria-current="page"] { font-weight: 700; text-decoration: underline; text-underline-offset: .2em; }
+.private-confirmation .selected-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); gap: 1rem 2rem; }
+.selected-facts > div { min-width: 0; }
+.selected-facts dt { font-weight: 700; }
+.private-confirmation .selected-facts dd { margin: .25rem 0 0; white-space: pre-wrap; overflow-wrap: anywhere; }
+.selected-activity h3 { font-size: 1.5em; }
+.private-workspace { margin-block: .5rem; padding: 1rem; }
+.private-workspace .private-access-header { display: flex; flex-wrap: wrap; align-items: center; gap: .3rem 1rem; margin-bottom: .5rem; }
+.private-workspace .private-access-header h1 { font-size: 1rem; margin: 0; }
+.private-workspace .private-access-header .badge { margin: 0; padding: .1rem .4rem; }
+.private-workspace .private-access-header .status { min-height: 0; padding: .2rem .6rem; margin: 0; }
+.consulting .private-screen-nav { display: none; }
+.consulting .private-confirmation { border: 0; margin: 0; padding: 0; }
+.consulting .private-activity-selection { margin-block: .5rem; padding: .75rem; }
+.consulting .private-activity-selection > [role="status"] { margin-block: .25rem; }
+.consulting .private-activity-selection > .controls { margin-block: .5rem; }
+.consulting .selected-activity h3 { margin-block: .5rem; }
+.consulting .selected-activity p { margin-block: .5rem; }
 .private-activity-selection [role="status"]:focus-visible, .private-shift-start [role="status"]:focus-visible { outline: 3px solid #000; outline-offset: 4px; }
 .night .private-activity-selection [role="status"]:focus-visible, .night .private-shift-start [role="status"]:focus-visible { outline-color: #ffe39b; }

@@ -2,7 +2,7 @@
 name: IBE160 — Design Spine
 status: approved
 decision: SCOPE-02
-updated: 2026-10-19
+updated: 2026-10-24
 ---
 
 # Design Spine — Course V1
@@ -30,6 +30,8 @@ Use system-ui/Segoe UI sans-serif. Reuse preparation reference values as startin
 Yellow #F5C842 needs the dark #171717 outline/symbol on day white; yellow fill alone is insufficient. All states also use text or a distinguishable shape. Green means saved/confirmed data only, never verified road clearance or physical completion.
 
 ## Layout and controls
+
+**Owner clarification, 2026-10-24 (11.2):** Render upload, control/edit, day and selected activity as separate primary screens. Keep navigation and screen heading clear, move focus meaningfully on transitions, and preserve registered state and unsaved proposals. Do not leave import/editor/full day list visible behind the selected activity. Day scrolling is allowed; detail prioritizes member facts and previous/next, with wrapping and accessible scrolling for long/enlarged content. Day hosts shift/bus context; future notices and end/recap receive secondary destinations in their own stories, without placeholder actions masquerading as delivered functions.
 
 Landscape tablet and ordinary PC are primary. A narrow layout stacks columns in reading order; exact breakpoints are implementation choices tested against long content and text enlargement. Static mock minimum widths are not product requirements.
 

@@ -1,3 +1,4 @@
+import { preparation, editor } from './private-screen-helpers';
 import { test, expect, type BrowserContext, type Page } from '@playwright/test';
 import { execFileSync } from 'node:child_process';
 import { randomUUID, randomBytes } from 'node:crypto';
@@ -5,7 +6,7 @@ import { randomUUID, randomBytes } from 'node:crypto';
 test('an obsolete unauthorized read cannot clear input after same-session revalidation', async ({ page }) => {
   await visibleWindow(page);
   await login(page, 0);
-  await page.getByLabel('Buss/vogn', { exact: true }).fill('Keep after revalidation');
+  await editor(page); await page.getByLabel('Buss/vogn', { exact: true }).fill('Keep after revalidation');
   let release!: () => void, entered!: () => void;
   const gate = new Promise<void>(resolve => { release = resolve; });
   const waiting = new Promise<void>(resolve => { entered = resolve; });
@@ -14,7 +15,7 @@ test('an obsolete unauthorized read cannot clear input after same-session revali
     await route.fulfill({ status: 401, json: { detail: 'Synthetic delayed expiry' } });
   });
   try {
-    await page.getByRole('button', { name: 'Oppdater listen', exact: true }).click();
+    await preparation(page); await page.getByRole('button', { name: 'Oppdater listen', exact: true }).click();
     await waiting;
     await page.evaluate(() => {
       Object.defineProperty(document, 'visibilityState', { configurable: true, get: () => 'hidden' });
@@ -33,9 +34,9 @@ test('an obsolete unauthorized read cannot clear input after same-session revali
 test('unavailable identity validation hides and then restores the same unsaved input', async ({ page }) => {
   await visibleWindow(page);
   await login(page, 0);
-  await page.getByLabel('Buss/vogn', { exact: true }).fill('Keep through outage');
+  await editor(page); await page.getByLabel('Buss/vogn', { exact: true }).fill('Keep through outage');
   await page.route('**:8001/auth/session', route => route.abort());
-  await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
+  await editor(page); await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
   await expect(page.getByRole('region', { name: 'Private utkast' })).toBeHidden();
   await expect(page.getByRole('button', { name: 'Kontroller tilgang igjen' })).toBeEnabled();
   await page.unroute('**:8001/auth/session');
@@ -111,7 +112,7 @@ async function login(page: Page, index: number) {
 test('account login in another visible window promptly clears the previous editor', async ({ page, context }) => {
   const other = await twoLoggedOutWindows(page, context);
   await login(page, 0);
-  await page.getByLabel('Buss/vogn', { exact: true }).fill('A private unsaved work');
+  await editor(page); await page.getByLabel('Buss/vogn', { exact: true }).fill('A private unsaved work');
   // A login must leave an already open, logged-out login form usable.
   await expect(other.getByLabel('Brukernavn', { exact: true })).toBeEnabled();
   await login(other, 1);
@@ -123,14 +124,14 @@ test('account login in another visible window promptly clears the previous edito
 test('missed account broadcast cannot save a new unsaved draft under the next account', async ({ page, context }) => {
   const other = await twoLoggedOutWindows(page, context, true);
   await login(page, 0);
-  await page.getByLabel('Buss/vogn', { exact: true }).fill('A must never become B work');
+  await editor(page); await page.getByLabel('Buss/vogn', { exact: true }).fill('A must never become B work');
   await login(other, 1);
   const before = await (await context.request.get(API + '/drafts')).json();
   let posts = 0;
   page.on('request', request => {
     if (request.method() === 'POST' && ['/draft-operations', '/drafts'].includes(new URL(request.url()).pathname)) posts++;
   });
-  await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
+  await editor(page); await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
   await expect(page.getByRole('heading', { name: 'Mine utkast' })).toHaveCount(0);
   expect(posts).toBe(0);
   expect(await (await context.request.get(API + '/drafts')).json()).toEqual(before);
@@ -140,13 +141,13 @@ test('missed account broadcast cannot save a new unsaved draft under the next ac
 test('missed account broadcast cannot refresh the previous workspace with the next accounts list', async ({ page, context }) => {
   const other = await twoLoggedOutWindows(page, context, true);
   await login(page, 0);
-  await page.getByLabel('Buss/vogn', { exact: true }).fill('A unsaved editor');
+  await editor(page); await page.getByLabel('Buss/vogn', { exact: true }).fill('A unsaved editor');
   await login(other, 1);
-  await other.getByLabel('Tjenestedato', { exact: true }).fill('2031-02-03');
-  await other.getByLabel('Buss/vogn', { exact: true }).fill('B private draft');
-  await other.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
+  await editor(other); await other.getByLabel('Tjenestedato', { exact: true }).fill('2031-02-03');
+  await editor(other); await other.getByLabel('Buss/vogn', { exact: true }).fill('B private draft');
+  await editor(other); await other.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
   await expect(other.getByRole('region', { name: 'Private utkast' }).getByRole('status')).toHaveText('Lagret. Versjon 1.');
-  await page.getByRole('button', { name: 'Oppdater listen', exact: true }).click();
+  await preparation(page); await page.getByRole('button', { name: 'Oppdater listen', exact: true }).click();
   await expect(page.getByRole('heading', { name: 'Mine utkast' })).toHaveCount(0);
   await expect(page.getByRole('button', { name: /Åpne 2031-02-03/ })).toHaveCount(0);
   await other.close();
@@ -155,13 +156,13 @@ test('missed account broadcast cannot refresh the previous workspace with the ne
 test('missed account broadcast blocks PDF upload from the previous workspace', async ({ page, context }) => {
   const other = await twoLoggedOutWindows(page, context, true);
   await login(page, 0);
-  await page.getByLabel('Buss/vogn', { exact: true }).fill('A private work before import');
+  await editor(page); await page.getByLabel('Buss/vogn', { exact: true }).fill('A private work before import');
   await login(other, 1);
   let uploads = 0;
   page.on('request', request => {
     if (request.method() === 'POST' && new URL(request.url()).pathname === '/imports/pdf') uploads++;
   });
-  await page.getByLabel('Velg tekst-PDF', { exact: true }).setInputFiles({
+  await preparation(page); await page.getByLabel('Velg tekst-PDF', { exact: true }).setInputFiles({
     name: 'synthetic.pdf', mimeType: 'application/pdf', buffer: Buffer.from('%PDF-1.4\n%%EOF'),
   });
   await expect(page.getByRole('heading', { name: 'Mine utkast' })).toHaveCount(0);
@@ -172,7 +173,7 @@ test('missed account broadcast blocks PDF upload from the previous workspace', a
 test('account switch queued between draft operation and save never sends the previous accounts content', async ({ page, context }) => {
   const other = await twoLoggedOutWindows(page, context, true);
   await login(page, 0);
-  await page.getByLabel('Buss/vogn', { exact: true }).fill('A content cannot cross the queued login');
+  await editor(page); await page.getByLabel('Buss/vogn', { exact: true }).fill('A content cannot cross the queued login');
   const countB = () => Number(python(`with database() as conn:
  print(conn.execute('SELECT count(*) AS n FROM drafts WHERE owner IN (SELECT id FROM accounts WHERE username=%s)', (${JSON.stringify(accounts[1].username)},)).fetchone()['n'])
 `).trim());
@@ -193,7 +194,7 @@ test('account switch queued between draft operation and save never sends the pre
     await route.fulfill({ response });
   });
   try {
-    await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
+    await editor(page); await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
     await committed;
     await other.getByLabel('Brukernavn', { exact: true }).fill(accounts[1].username);
     await other.getByLabel('Passord', { exact: true }).fill(accounts[1].password);
@@ -218,7 +219,7 @@ for (const paginated of [false, true]) test(`a delayed private list is rejected 
   if (paginated) python(`from uuid import uuid4\nfrom psycopg.types.json import Jsonb\nwith database() as conn:\n owner=conn.execute('SELECT id FROM accounts WHERE username=%s', (${JSON.stringify(accounts[0].username)},)).fetchone()['id']\n for n in range(51):\n  conn.execute('INSERT INTO drafts(id,owner,revision,content) VALUES (%s,%s,1,%s)',(uuid4(),owner,Jsonb({'service_date':'2034-06-07','activities':[]})))\n`);
   const other = await twoLoggedOutWindows(page, context, true);
   await login(page, 0);
-  await page.getByLabel('Buss/vogn', { exact: true }).fill('Previous account private input');
+  await editor(page); await page.getByLabel('Buss/vogn', { exact: true }).fill('Previous account private input');
   await expect(page.getByText('Laster lagrede utkast …', { exact: true })).toHaveCount(0);
   let release!: () => void;
   let fetched!: () => void;
@@ -232,7 +233,7 @@ for (const paginated of [false, true]) test(`a delayed private list is rejected 
     await route.fulfill({ response });
   });
   try {
-    await page.getByRole('button', { name: paginated ? 'Vis flere utkast' : 'Oppdater listen', exact: true }).click();
+    await preparation(page); await page.getByRole('button', { name: paginated ? 'Vis flere utkast' : 'Oppdater listen', exact: true }).click();
     await received;
     // Reads must leave the auth lock available while waiting for their body.
     await login(other, 1);
@@ -254,7 +255,7 @@ test('missed broadcasts cannot reopen a plan from the next account', async ({ pa
   await login(other, 1);
   let reads = 0;
   page.on('request', request => { if (new URL(request.url()).pathname === '/workdays') reads++; });
-  await page.getByRole('button', { name: 'Oppdater planlisten', exact: true }).click();
+  await preparation(page); await page.getByRole('button', { name: 'Oppdater planlisten', exact: true }).click();
   await expect(page.getByRole('heading', { name: 'Mine utkast' })).toHaveCount(0);
   expect(reads).toBe(0);
   await other.close();
@@ -273,7 +274,7 @@ test('delayed plan list cannot enter a workspace after a silent account switch',
     await route.fulfill({ response });
   });
   try {
-    await page.getByRole('button', { name: 'Oppdater planlisten', exact: true }).click();
+    await preparation(page); await page.getByRole('button', { name: 'Oppdater planlisten', exact: true }).click();
     await received; await login(other, 1); release();
     await expect(page.getByRole('heading', { name: 'Mine utkast' })).toHaveCount(0);
     await expect(page.getByRole('region', { name: 'Bekreft plan' })).toHaveCount(0);
@@ -292,8 +293,8 @@ for (const delayed of [false, true]) test(`plan deletion ${delayed ? 'delayed ac
   const draft = await post('/drafts', { operation_id: (await post('/draft-operations', {})).operation_id, expected_revision: 0, draft: { service_date: serviceDate, activities: [{ id: randomUUID(), type: 'manual', start: '2033-02-03T10:00+01:00', end: '2033-02-03T11:00+01:00' }] } });
   const review = await post('/workday-reviews', { draft_id: draft.id, expected_revision: 1 });
   const plan = await post('/drafts/' + draft.id + '/confirm', { operation_id: review.operation_id, expected_revision: 1, acknowledgements: review.unknowns.map((item: any) => item.id), classifications: {} });
-  await page.getByRole('button', { name: 'Oppdater planlisten', exact: true }).click();
-  await page.getByRole('button', { name: 'Åpne plan ' + serviceDate + ' · versjon 1', exact: true }).click();
+  await preparation(page); await page.getByRole('button', { name: 'Oppdater planlisten', exact: true }).click();
+  await preparation(page); await page.getByRole('button', { name: 'Åpne plan ' + serviceDate + ' · versjon 1', exact: true }).click();
   let release!: () => void, entered!: () => void, writes = 0;
   const gate = new Promise<void>(resolve => { release = resolve; });
   const received = new Promise<void>(resolve => { entered = resolve; });
@@ -323,8 +324,8 @@ for (const delayed of [false, true, 'denied-current'] as const) test(`physical b
   const review = await post('/workday-reviews', { draft_id: draft.id, expected_revision: 1 });
   const plan = await post('/drafts/' + draft.id + '/confirm', { operation_id: review.operation_id, expected_revision: 1, acknowledgements: review.unknowns.map((item: any) => item.id), classifications: {} });
   const path = '/workdays/' + plan.id + '/physical-bus';
-  await page.getByRole('button', { name: 'Oppdater planlisten', exact: true }).click();
-  await page.getByRole('button', { name: 'Åpne plan ' + serviceDate + ' · versjon 1', exact: true }).click();
+  await preparation(page); await page.getByRole('button', { name: 'Oppdater planlisten', exact: true }).click();
+  await preparation(page); await page.getByRole('button', { name: 'Åpne plan ' + serviceDate + ' · versjon 1', exact: true }).click();
   await expect(page.getByRole('region', { name: 'Dagsoversikt', exact: true })).toBeVisible();
   await page.getByRole('region', { name: 'Fysisk buss', exact: true }).getByLabel('Fysisk buss', { exact: true }).fill('0012 old account');
   let release!: () => void, entered!: () => void, writes = 0;
@@ -366,8 +367,8 @@ for (const resource of ['selection', 'start']) for (const delayed of [false, tru
   const plan = await post('/drafts/' + draft.id + '/confirm', { operation_id: review.operation_id, expected_revision: 1, acknowledgements: [], classifications: {} });
   const path = '/workdays/' + plan.id + '/' + resource;
   const read = '/workdays/' + plan.id + '/' + (resource === 'start' ? 'lifecycle' : resource);
-  await page.getByRole('button', { name: 'Oppdater planlisten', exact: true }).click();
-  await page.getByRole('button', { name: 'Åpne plan ' + serviceDate + ' · versjon 1', exact: true }).click();
+  await preparation(page); await page.getByRole('button', { name: 'Oppdater planlisten', exact: true }).click();
+  await preparation(page); await page.getByRole('button', { name: 'Åpne plan ' + serviceDate + ' · versjon 1', exact: true }).click();
   const action = page.getByRole('button', { name: resource === 'selection' ? 'Velg aktivitet 1' : 'Start skift', exact: true });
   await expect(action).toBeEnabled();
   let release!: () => void, entered!: () => void, writes = 0;
@@ -405,9 +406,9 @@ test('review fix delayed accepted confirmation cannot cross a silent account swi
     expect(response.status()).toBe(200); return response.json();
   }
   const draft = await post('/drafts', { operation_id: (await post('/draft-operations', {})).operation_id, expected_revision: 0, draft: { service_date: '2033-02-05', activities: [{ id: randomUUID(), type: 'manual', start: '2033-02-05T10:00+01:00', end: '2033-02-05T11:00+01:00' }] } });
-  await page.getByRole('button', { name: 'Oppdater listen', exact: true }).click();
-  await page.getByRole('button', { name: 'Åpne 2033-02-05 · versjon 1', exact: true }).click();
-  await page.getByRole('button', { name: 'Gjennomgå lagret utkast', exact: true }).click();
+  await preparation(page); await page.getByRole('button', { name: 'Oppdater listen', exact: true }).click();
+  await preparation(page); await page.getByRole('button', { name: 'Åpne 2033-02-05 · versjon 1', exact: true }).click();
+  await editor(page); await page.getByRole('button', { name: 'Gjennomgå lagret utkast', exact: true }).click();
   await expect(page.getByRole('region', { name: 'Gjennomgått versjon' })).toBeVisible();
   for (const box of await page.getByRole('region', { name: 'Gjennomgått versjon' }).getByRole('checkbox').all()) await box.check();
   let release!: () => void, entered!: () => void, accepted: any, decisions: any, writes = 0;
@@ -449,7 +450,7 @@ for (const action of ['cancel', 'logout'] as const) test(`${action} cancels an i
     await route.fulfill({ response }).catch(() => {});
   });
   try {
-    await page.getByLabel('Velg tekst-PDF', { exact: true }).setInputFiles({
+    await preparation(page); await page.getByLabel('Velg tekst-PDF', { exact: true }).setInputFiles({
       name: 'synthetic.pdf', mimeType: 'application/pdf', buffer: Buffer.from('%PDF-1.4\n%%EOF'),
     });
     await entered;

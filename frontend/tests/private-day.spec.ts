@@ -207,8 +207,8 @@ test.describe('synthetic day browser', () => {
     const source = confirmed.getByText('Bevarte kildefakta', { exact: true }); await source.scrollIntoViewIfNeeded(); await expect(source).toBeVisible();
     await source.click(); await expect(confirmed.getByRole('heading', { name: 'Historiske kildefakta fra PDF · før rettelser og bekreftelse', exact: true })).toBeVisible(); await source.click(); await historical.click();
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
-    await day.screenshot({ path: `../docs/evidence/10-5-day-${width}-${night ? 'night' : 'day'}-200.png` });
-    await confirmed.screenshot({ path: `../docs/evidence/10-5-full-plan-${width}-${night ? 'night' : 'day'}-200.png` });
+    await day.screenshot({ path: `../docs/evidence/11-2-regression-10-5-day-${width}-${night ? 'night' : 'day'}-200.png` });
+    await confirmed.screenshot({ path: `../docs/evidence/11-2-regression-10-5-full-plan-${width}-${night ? 'night' : 'day'}-200.png` });
     await page.getByRole('button', { name: 'Lukk planen', exact: true }).click();
     await page.getByRole('button', { name: 'Åpne plan 2031-01-02 · versjon 2', exact: true }).last().click();
     await expect(day).toContainText('Rettet fiktivt sluttsted');
@@ -334,7 +334,7 @@ test.describe('synthetic day browser', () => {
       await test.info().attach(`day-overview-contrast-${night ? 'night' : 'day'}`, { body: JSON.stringify(measured), contentType: 'application/json' });
       await page.keyboard.press('Enter');
       await expect(summary).toBeFocused();
-      await day.screenshot({ path: `../docs/evidence/10-5-day-contrast-${night ? 'night' : 'day'}.png` });
+      await day.screenshot({ path: `../docs/evidence/11-2-regression-10-5-day-contrast-${night ? 'night' : 'day'}.png` });
       await page.keyboard.press('Enter');
     }
   });

@@ -230,10 +230,10 @@ export function PrivateAccess() {
     if (focusLogin && !session && !locked && !busy) { usernameInput.current?.focus(); setFocusLogin(false); }
   }, [focusLogin, session, locked, busy]);
 
-  return <main>
-    <p className="badge">Privat tilgang</p>
+  return <main className={session && !locked ? 'private-workspace' : undefined}>
+    <header className="private-access-header"><p className="badge">Privat tilgang</p>
     <h1 ref={heading} tabIndex={-1}>{session && !locked ? 'Privat arbeidsrom' : 'Logg inn'}</h1>
-    <p role="status" aria-label="Tilgangsstatus" aria-live="polite" className="status">{message}</p>
+    <p role="status" aria-label="Tilgangsstatus" aria-live="polite" className="status">{message}</p></header>
     {suspended && session && !locked && <button disabled={busy} onClick={() => void restore()}>Kontroller tilgang igjen</button>}
     {locked ? <button disabled={busy} onClick={() => void logout()}>Prøv utlogging igjen</button>
       : session ? <section aria-label="Privat arbeidsrom">

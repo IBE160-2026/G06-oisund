@@ -1,4 +1,4 @@
-import { test, expect, openedPlan, API, post, randomUUID, selected, activityStatus, shiftStatus, beforeUnload, reopen, setup } from './private-activity-helpers';
+import { test, expect, openedPlan, API, post, randomUUID, selected, activityStatus, shiftStatus, beforeUnload, reopen, setup, dayScreen, activityScreen } from './private-activity-helpers';
 import { writeFileSync } from 'node:fs';
 setup();
 
@@ -8,15 +8,16 @@ test('direct previous next exact stable members equal times pauses gaps midnight
   await expect(page.getByRole('button', { name: 'Velg aktivitet 1', exact: true })).toHaveText('Velg aktivitet 1');
   await page.getByRole('button', { name: 'Velg aktivitet 1', exact: true }).click();
   await expect(activityStatus(page)).toHaveText('Aktivitetsvalget er lagret.');
+  await dayScreen(page);
   const firstChoice = page.getByRole('button', { name: 'Velg aktivitet 1', exact: true });
   await expect(firstChoice).toHaveAccessibleDescription(/Passasjertur.*Linje: 20.*Retning: Nord.*02.01.2031/);
   await expect(firstChoice).toHaveAttribute('aria-current', 'true');
   await expect(page.locator('.day-member [aria-current="true"]')).toHaveCount(1);
-  await expect(activityStatus(page)).toBeFocused();
+  await activityScreen(page); await expect(activityStatus(page)).toBeFocused();
   await expect(selected(page)).toContainText('Linje: 20'); await expect(selected(page)).toContainText('Retning: Nord');
   await expect(page.getByRole('button', { name: 'Ingen forrige aktivitet', exact: true })).toBeDisabled();
   let writes = 0; page.on('request', req => { if (req.url().endsWith('/selection') && req.method() === 'POST') writes++; });
-  await expect(page.getByRole('button', { name: 'Velg aktivitet 1', exact: true })).toBeDisabled(); expect(writes).toBe(0);
+  await dayScreen(page); await expect(page.getByRole('button', { name: 'Velg aktivitet 1', exact: true })).toBeDisabled(); expect(writes).toBe(0); await activityScreen(page);
   for (let i = 1; i < activities.length; i++) {
     await page.getByRole('button', { name: 'Neste aktivitet', exact: true }).click();
     await expect(activityStatus(page)).toHaveText('Aktivitetsvalget er lagret.');
@@ -24,26 +25,26 @@ test('direct previous next exact stable members equal times pauses gaps midnight
   }
   await expect(selected(page)).toContainText('03.01.2031'); await expect(page.getByRole('button', { name: 'Ingen neste aktivitet', exact: true })).toBeDisabled();
   await page.getByRole('button', { name: 'Forrige aktivitet', exact: true }).click(); await expect(selected(page)).toContainText('Matpause');
-  await page.getByText('Vis 2 pauserader', { exact: true }).click();
+  await dayScreen(page); const pauses = page.getByText('Vis 2 pauserader', { exact: true }); if (!await pauses.evaluate(el => (el.parentElement as HTMLDetailsElement).open)) await pauses.click();
   await expect(page.locator('[data-activity-id="' + activities[3].id + '"]').getByText('Manuelt valgt aktivitet', { exact: true })).toBeVisible();
   await page.getByRole('button', { name: 'Velg aktivitet 3', exact: true }).click(); await expect(selected(page)).toContainText('Kaffepause');
-  await reopen(page); await expect(selected(page)).toContainText('Kaffepause');
-  await page.reload(); await page.getByRole('button', { name: 'Åpne plan 2031-01-02 · versjon 1', exact: true }).click(); await expect(selected(page)).toContainText('Kaffepause');
-  await expect(page.getByText('Ikke startet', { exact: true })).toBeVisible();
+  await dayScreen(page); await reopen(page); await activityScreen(page); await expect(selected(page)).toContainText('Kaffepause');
+  await page.reload(); await page.getByRole('button', { name: 'Åpne plan 2031-01-02 · versjon 1', exact: true }).click(); await activityScreen(page); await expect(selected(page)).toContainText('Kaffepause');
+  await dayScreen(page); await expect(page.getByText('Ikke startet', { exact: true })).toBeVisible();
   expect(await (await context.request.get(API + '/workdays/' + plan.id)).json()).toEqual(plan);
 });
 
 test('identical facts equal times still identify the exact selected member ordinal', async ({ page, context }) => {
   const { plan, activities } = await openedPlan(page, context, false, undefined, undefined, true);
-  for (const index of [0, 1]) {
+  for (const index of [0, 1]) { await dayScreen(page);
     await page.getByRole('button', { name: `Velg aktivitet ${index + 1}`, exact: true }).click();
     await expect(selected(page)).toContainText(`Aktivitet ${index + 1} av 5`);
-    const current = page.locator('.day-member [aria-current="true"]');
+    await dayScreen(page); const current = page.locator('.day-member [aria-current="true"]');
     await expect(current).toHaveCount(1); await expect(current).toHaveAccessibleName(`Velg aktivitet ${index + 1}`);
     expect(await current.evaluate(el => el.closest('[data-activity-id]')?.getAttribute('data-activity-id'))).toBe(activities[index].id);
     expect((await (await context.request.get(API + '/workdays/' + plan.id + '/selection')).json()).activity_id).toBe(activities[index].id);
   }
-  await reopen(page); await expect(selected(page)).toContainText('Aktivitet 2 av 5');
+  await dayScreen(page); await reopen(page); await activityScreen(page); await expect(selected(page)).toContainText('Aktivitet 2 av 5');
 });
 
 for (const resource of ['selection', 'lifecycle']) for (const phase of ['initial', 'refreshed']) test(`malformed ${phase} current ${resource} records never establish authority`, async ({ page, context }) => {
@@ -59,10 +60,10 @@ for (const resource of ['selection', 'lifecycle']) for (const phase of ['initial
   const refresh = page.getByRole('button', { name: resource === 'selection' ? 'Kontroller plantilgang og aktivitetsvalg' : 'Hent skiftstatus igjen', exact: true });
   for (const faulty of faults) {
     if (phase === 'initial') await page.getByRole('button', { name: 'Lukk planen', exact: true }).click();
-    else { await refresh.click(); await expect(resource === 'selection' ? selected(page) : page.getByText('Startet manuelt', { exact: true })).toBeVisible(); }
+    else { await dayScreen(page); await refresh.click(); if (resource === 'selection') await activityScreen(page); await expect(resource === 'selection' ? selected(page) : page.getByText('Startet manuelt', { exact: true })).toBeVisible(); }
     await page.route('**:8001' + path, route => route.fulfill({ status: 200, json: faulty }));
     if (phase === 'initial') await page.getByRole('button', { name: 'Åpne plan 2031-01-02 · versjon 1', exact: true }).click();
-    else await refresh.click();
+    else { await dayScreen(page); await refresh.click(); }
     if (resource === 'selection') {
       await expect(page.getByText('Lagret aktivitetsvalg kan ikke bekreftes.', { exact: true })).toBeVisible();
       await expect(selected(page)).toHaveCount(0); await expect(page.locator('.day-member [aria-current="true"]')).toHaveCount(0);
@@ -83,10 +84,10 @@ test('stale proposal explicit comparison and accepted older receipt preserve new
   await expect(activityStatus(page)).toContainText('endret i et annet vindu');
   await expect(page.getByText(/^Lokalt forslag/)).toContainText('Linje: 20');
   await expect(page.getByText(/^Gjeldende lagret valg/)).toContainText('Linje: 24');
-  await page.getByRole('button', { name: 'Last inn lagret aktivitetsvalg', exact: true }).click(); await expect(selected(page)).toContainText('Linje: 24');
+  await page.getByRole('button', { name: 'Last inn lagret aktivitetsvalg', exact: true }).click(); await activityScreen(page); await expect(selected(page)).toContainText('Linje: 24');
   await expect(activityStatus(page)).toHaveText('Lagret aktivitetsvalg er lastet inn. Det lokale forslaget er fjernet.');
-  await expect(activityStatus(page)).toBeFocused(); await expect(page.getByText(/^Lokalt forslag/)).toHaveCount(0);
-  let original: any;
+  await activityScreen(page); await expect(activityStatus(page)).toBeFocused(); await expect(page.getByText(/^Lokalt forslag/)).toHaveCount(0);
+  await dayScreen(page); let original: any;
   await page.route('**:8001' + path, async route => {
     if (route.request().method() !== 'POST') return route.continue();
     original = route.request().postDataJSON(); await route.fetch();
@@ -99,9 +100,9 @@ test('stale proposal explicit comparison and accepted older receipt preserve new
   await page.unroute('**:8001' + path); await page.getByRole('button', { name: 'Kontroller aktivitetsvalget', exact: true }).click();
   await expect(activityStatus(page)).toContainText('Forsøket ble lagret. Et nyere');
   expect((await (await context.request.get(API + path)).json()).activity_id).toBe(activities[4].id);
-  await page.getByRole('button', { name: 'Last inn lagret aktivitetsvalg', exact: true }).click(); await expect(selected(page)).toContainText('03.01.2031');
+  await page.getByRole('button', { name: 'Last inn lagret aktivitetsvalg', exact: true }).click(); await activityScreen(page); await expect(selected(page)).toContainText('03.01.2031');
   await expect(activityStatus(page)).toHaveText('Lagret aktivitetsvalg er lastet inn. Det lokale forslaget er fjernet.');
-  await expect(activityStatus(page)).toBeFocused(); await expect(page.getByText(/^Lokalt forslag/)).toHaveCount(0);
+  await activityScreen(page); await expect(activityStatus(page)).toBeFocused(); await expect(page.getByText(/^Lokalt forslag/)).toHaveCount(0);
   expect((await (await context.request.get(API + '/workday-selection-operations/' + original.operation_id)).json()).result.activity_id).toBe(activities[0].id);
 });
 
@@ -112,10 +113,10 @@ test('selected non-passenger labels preserve applicable identifiers and visible 
   await page.getByRole('button', { name: 'Velg aktivitet 1', exact: true }).click();
   await expect(selected(page)).toContainText('Oppmøte'); await expect(selected(page)).toContainText('Planlagt start:');
   await expect(selected(page)).not.toContainText(/Linje:|Tur:|Retning:/);
-  await page.getByText('Vis 2 pauserader', { exact: true }).click();
+  await dayScreen(page); await page.getByText('Vis 2 pauserader', { exact: true }).click();
   await page.getByRole('button', { name: 'Velg aktivitet 4', exact: true }).click(); await expect(selected(page)).toContainText('Matpause');
   await expect(selected(page)).not.toContainText(/Linje:|Tur:|Retning:/);
-  await page.getByText('Vis 2 pauserader', { exact: true }).click();
+  await dayScreen(page); await page.getByText('Vis 2 pauserader', { exact: true }).click();
   await expect(page.getByText('Manuelt valgt aktivitet i denne pausegruppen: aktivitet 4.', { exact: true })).toBeVisible();
 });
 
@@ -159,20 +160,20 @@ for (const width of [768, 1440]) for (const night of [false, true]) test(`select
   await page.evaluate(() => { document.documentElement.style.fontSize = '200%'; });
   const choose = page.getByRole('button', { name: 'Velg aktivitet 1', exact: true }); await choose.focus(); await page.keyboard.press('Enter');
   await expect(selected(page)).toContainText('Linje: 20');
-  await page.getByRole('button', { name: 'Start skift', exact: true }).click(); await expect(shiftStatus(page)).toHaveText('Skiftstart er lagret.');
+  await dayScreen(page); await page.getByRole('button', { name: 'Start skift', exact: true }).click(); await expect(shiftStatus(page)).toHaveText('Skiftstart er lagret.');
   await expect(shiftStatus(page)).toBeFocused();
   await expect(page.getByText('Startet manuelt', { exact: true })).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
-  const control = page.getByRole('button', { name: 'Neste aktivitet', exact: true }); await control.focus();
+  await activityScreen(page); const control = page.getByRole('button', { name: 'Neste aktivitet', exact: true }); await control.focus();
   expect(await control.evaluate(el => el.getBoundingClientRect().height)).toBeGreaterThanOrEqual(58);
-  await page.getByRole('region', { name: 'Bekreftet plan', exact: true }).screenshot({ path: `../docs/evidence/11-1-selection-${width}-${night ? 'night' : 'day'}.png` });
+  await page.getByRole('region', { name: 'Bekreftet plan', exact: true }).screenshot({ path: `../docs/evidence/11-2-regression-11-1-selection-${width}-${night ? 'night' : 'day'}.png` });
   expect(await (await context.request.get(API + '/workdays/' + plan.id)).json()).toEqual(plan);
 });
 
 test('rendered selector start markers boundaries and focus meet IR-01 in both themes', async ({ page, context }) => {
   await openedPlan(page, context);
   await page.getByRole('button', { name: 'Velg aktivitet 1', exact: true }).click(); await expect(selected(page)).toBeVisible();
-  const measurements: object[] = [];
+  await dayScreen(page); const measurements: object[] = [];
   for (const night of [false, true]) {
     if (night) await page.getByRole('button', { name: 'Nattmodus', exact: true }).click();
     const measured = await page.getByRole('region', { name: 'Bekreftet plan', exact: true }).evaluate(element => {
@@ -203,7 +204,7 @@ test('rendered selector start markers boundaries and focus meet IR-01 in both th
       await test.info().attach(`11-1-${night ? 'night' : 'day'}-${name}`, { body: JSON.stringify({ ...measured, focus }), contentType: 'application/json' });
     }
   }
-  writeFileSync('../docs/evidence/11-1-contrast.json', JSON.stringify(measurements, null, 2) + '\n');
+  writeFileSync('../docs/evidence/11-2-regression-11-1-contrast.json', JSON.stringify(measurements, null, 2) + '\n');
 });
 
 test('single member has both disabled boundaries and no clock-driven selection', async ({ page, context }) => {
@@ -211,7 +212,7 @@ test('single member has both disabled boundaries and no clock-driven selection',
   await expect(page.getByText('Ingen aktivitet valgt', { exact: true })).toBeVisible(); await expect(page.getByText('Ikke startet', { exact: true })).toBeVisible();
   await page.getByRole('button', { name: 'Velg aktivitet 1', exact: true }).click();
   await expect(selected(page)).toBeVisible();
-  await page.clock.fastForward(120000);
+  await page.clock.fastForward(120000); await dayScreen(page);
   await expect(page.getByText('Ikke startet', { exact: true })).toBeVisible();
   await expect(page.getByRole('button', { name: 'Ingen forrige aktivitet', exact: true })).toBeDisabled(); await expect(page.getByRole('button', { name: 'Ingen neste aktivitet', exact: true })).toBeDisabled();
   expect((await (await context.request.get(API + '/workdays/' + plan.id + '/lifecycle')).json()).state).toBe('confirmed');

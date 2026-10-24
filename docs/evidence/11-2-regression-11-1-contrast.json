@@ -1,0 +1,158 @@
+[
+  {
+    "theme": "Day",
+    "control": "Neste aktivitet",
+    "text": 6.126270626473104,
+    "boundary": 14.387145266736685,
+    "direct": [
+      {
+        "disabled": true,
+        "current": "true",
+        "text": 6.126270626473104,
+        "boundary": 4.781375582652278,
+        "height": 58
+      },
+      {
+        "disabled": false,
+        "current": null,
+        "text": 11.085379609993499,
+        "boundary": 11.085379609993499,
+        "height": 58
+      }
+    ],
+    "focus": {
+      "width": 3,
+      "ratio": 21
+    }
+  },
+  {
+    "theme": "Day",
+    "control": "Start skift",
+    "text": 6.126270626473104,
+    "boundary": 14.387145266736685,
+    "direct": [
+      {
+        "disabled": true,
+        "current": "true",
+        "text": 6.126270626473104,
+        "boundary": 4.781375582652278,
+        "height": 58
+      },
+      {
+        "disabled": false,
+        "current": null,
+        "text": 11.085379609993499,
+        "boundary": 11.085379609993499,
+        "height": 58
+      }
+    ],
+    "focus": {
+      "width": 3,
+      "ratio": 21
+    }
+  },
+  {
+    "theme": "Day",
+    "control": "Velg aktivitet 2",
+    "text": 6.126270626473104,
+    "boundary": 14.387145266736685,
+    "direct": [
+      {
+        "disabled": true,
+        "current": "true",
+        "text": 6.126270626473104,
+        "boundary": 4.781375582652278,
+        "height": 58
+      },
+      {
+        "disabled": false,
+        "current": null,
+        "text": 11.085379609993499,
+        "boundary": 11.085379609993499,
+        "height": 58
+      }
+    ],
+    "focus": {
+      "width": 3,
+      "ratio": 21
+    }
+  },
+  {
+    "theme": "Night",
+    "control": "Neste aktivitet",
+    "text": 6.126270626473104,
+    "boundary": 12.855408864593942,
+    "direct": [
+      {
+        "disabled": true,
+        "current": "true",
+        "text": 6.126270626473104,
+        "boundary": 8.3661568844563,
+        "height": 58
+      },
+      {
+        "disabled": false,
+        "current": null,
+        "text": 11.652752702162216,
+        "boundary": 8.3661568844563,
+        "height": 58
+      }
+    ],
+    "focus": {
+      "width": 3,
+      "ratio": 11.45007504521487
+    }
+  },
+  {
+    "theme": "Night",
+    "control": "Start skift",
+    "text": 6.126270626473104,
+    "boundary": 12.855408864593942,
+    "direct": [
+      {
+        "disabled": true,
+        "current": "true",
+        "text": 6.126270626473104,
+        "boundary": 8.3661568844563,
+        "height": 58
+      },
+      {
+        "disabled": false,
+        "current": null,
+        "text": 11.652752702162216,
+        "boundary": 8.3661568844563,
+        "height": 58
+      }
+    ],
+    "focus": {
+      "width": 3,
+      "ratio": 11.45007504521487
+    }
+  },
+  {
+    "theme": "Night",
+    "control": "Velg aktivitet 2",
+    "text": 6.126270626473104,
+    "boundary": 12.855408864593942,
+    "direct": [
+      {
+        "disabled": true,
+        "current": "true",
+        "text": 6.126270626473104,
+        "boundary": 8.3661568844563,
+        "height": 58
+      },
+      {
+        "disabled": false,
+        "current": null,
+        "text": 11.652752702162216,
+        "boundary": 8.3661568844563,
+        "height": 58
+      }
+    ],
+    "focus": {
+      "width": 3,
+      "ratio": 11.45007504521487
+    }
+  }
+]
