@@ -206,7 +206,8 @@ def test_duty_changes_and_readable_uncertainties_survive_mapping(mapped):
     partial = mapped[5][1]['activities'][12]
     assert 'Kontroller start' in partial['uncertainty']
     assert 'Aktivitetstypen er uavklart' in partial['uncertainty']
-    assert any('Kildemerket' in (row['uncertainty'] or '') for row in mapped[0][1]['activities'])
+    assert mapped[0][1]['import_metadata']['annotations']
+    assert all('Kildemerket' not in (row['uncertainty'] or '') for row in mapped[0][1]['activities'])
 
 
 def test_duty_change_identity_suffix_and_explicit_empty_override(mapped):

@@ -133,3 +133,11 @@ Receipt admission is bounded at 2,000 unexpired accepted bus receipts per owner.
 Final root sequential run in progress on restored/reviewed source (`tmp/10-4-root-final.log`): **236 backend/API tests passed in 272.31s**, exact restart/migration bus/receipt/plan/source/decision/deadline equality passed, production bundle `index-FOJ_MQro.js` built. Five fully mocked verifier controls passed separately in 0.143s. The 157-case browser phase and final runtime preservation/availability checks remain pending at this entry.
 
 Run `scripts/verify-private-drafts.py` with `COMPOSE_PROJECT_NAME=ibe160-private-tests`: new suites, full regressions, restart/migration equality, production build. Run restoration tests and `git diff --check`. Inspect Day/Night renders and browser-storage absence. Complete independent BMAD review layers, triage/fix/retest. Preserve ordinary data/account/secret, restore availability and prepare tested runtime/owner checks. No tests/runtime changes during planning.
+
+## E10-A1–A3 maintenance follow-up — 2026-10-24
+
+The approved draft-contracts bundle preserves the normalized original import baseline (including absence for manual drafts), shares fresh-write physical-bus semantics, and pins review policy to issued operations and confirmed plans. Missing deadhead/CAR trip numbers remain visible as unknown without a separate acknowledgement; passenger direction joins the draft unknown display. Historical acceptance above remains unchanged. See [the maintenance evidence](../../docs/evidence/epic-10-draft-contracts.md). Implementation checks and owner acceptance for this follow-up are tracked separately; E10-A1–A3 remain in-progress.
+
+## Owner review amendment — 2026-10-24
+
+The approved `spec-epic-10-review-feedback.md` adds explicit clear buttons beside draft and current bus inputs. Clear creates an unsaved empty proposal; save, cancel, retry, conflict and reopen retain existing semantics and fixed expiry. Fresh invalid saves are disabled/grey, with input and associated errors preserved; already pending retry identities remain available. Existing Unicode White_Space, 100-code-point/NUL rules, leading zeros (including 000x) and meaningful spaces are unchanged. Original story acceptance is historical; amendment owner acceptance remains pending.

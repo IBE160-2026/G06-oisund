@@ -117,3 +117,28 @@ Retrospective: E9-A1 done, preserve regression coverage. E9-A2 atomic-expiry les
 ## Verification
 
 Run `scripts/verify-private-drafts.py` with `COMPOSE_PROJECT_NAME=ibe160-private-tests`, `npm.cmd run build`, and `git diff --check`. Backend/restart/browser phases run sequentially with synthetic storage; restore operational availability preserving accounts/volume/secret. Inspect rendered states and browser-storage absence. Complete independent BMAD review layers, fix findings and provide owner checks before acceptance. No tests/runtime changes during planning.
+
+## E10-A1–A3 maintenance follow-up — 2026-10-24
+
+The approved draft-contracts bundle preserves the normalized original import baseline (including absence for manual drafts), shares fresh-write physical-bus semantics, and pins review policy to issued operations and confirmed plans. Missing deadhead/CAR trip numbers remain visible as unknown without a separate acknowledgement; passenger direction joins the draft unknown display. Historical acceptance above remains unchanged. See [the maintenance evidence](../../docs/evidence/epic-10-draft-contracts.md). Implementation checks and owner acceptance for this follow-up are tracked separately; E10-A1–A3 remain in-progress.
+
+| Missing or uncertain fact | Required action for a new confirmation |
+|---|---|
+| Service date; at least one activity; explicit valid Oslo start/end; nonnegative intervals and ordered starts | Correct and save; acknowledgement cannot bypass these blockers. |
+| Unsupported/missing original activity type | Choose an explicit supported classification for the saved revision. |
+| From/to place, any supported type | Explicit acknowledgement for each missing place. |
+| Passenger trip number, line or direction | Explicit acknowledgement for each missing identifier. |
+| Trip number for supported deadhead/CAR movement | Visible “Ukjent”; no separate acknowledgement, per Jonas's 2026-10-24 choice. |
+| Movement line/direction; identifiers for other supported non-passenger work | No dedicated missing-identifier acknowledgement. |
+| Initially unsupported original type | Preserve the existing passenger-identifier acknowledgement superset, even after classification. |
+| Day duty/bus; explicitly unknown duty-change anchor | Explicit acknowledgement. |
+| Nonempty uncertainty note; retained unresolved source issue or source annotation | Explicit acknowledgement of each listed item. |
+| Source clocks, original raw code or provenance | No new dedicated acknowledgement for absence; never invent a value. |
+
+Existing issued reviews and confirmed plans retain their pinned historical policy and decisions. Activity absence presentation matches the existing assessment whitespace semantics; physical bus uses its separate explicit Unicode White_Space contract. These changes do not add activity activation, progress or later Epic 11 behavior.
+
+## Owner review amendment — 2026-10-24
+
+For newly issued reviews, the approved `spec-epic-10-review-feedback.md` narrows acknowledgements to effective passenger trip activities only: missing trip number, line, direction, from/to place or substantive current uncertainty. Classification changes remove obsolete candidates and checked decisions; returning to trip does not restore removed checks. Confirmation independently derives the exact effective set; missing/extra decisions reject atomically. Client acceptance compares the plan against frozen submitted classifications. Service date/activity/time/order/expiry blockers remain strict.
+
+Existing v1/v2 operations/plans keep their original first-acceptance/replay/presentation semantics; policy 3 is pinned only on fresh issuance via migration 008. Original marker/source issues remain neutral source information, with exact generated marker text excluded from current warnings without rewriting saved facts. Recognized Trip/trip type/code display becomes tur. Original story acceptance remains historical; amendment owner acceptance is pending.

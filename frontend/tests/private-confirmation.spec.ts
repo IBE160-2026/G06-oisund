@@ -34,9 +34,9 @@ async function post(context: BrowserContext, path: string, body: object) {
   const response = await context.request.post(API + path, { headers: { Origin: 'http://127.0.0.1:5173', 'X-CSRF-Token': proof.csrf_token }, data: body });
   expect(response.status()).toBe(200); return response.json();
 }
-async function seed(page: Page, context: BrowserContext, kind: string | null = null) {
+async function seed(page: Page, context: BrowserContext, kind: string | null = null, extra: Record<string, string | null> = {}) {
   const operation = await post(context, '/draft-operations', {});
-  const draft = await post(context, '/drafts', { operation_id: operation.operation_id, expected_revision: 0, draft: { service_date: '2031-01-02', vehicle_duty: 'CAR - 1', physical_bus: null, activities: [{ id: randomUUID(), type: kind, raw_code: 'Fictional code', start: '2031-01-02T10:00+01:00', end: '2031-01-02T11:00+01:00', from_place: 'Fiktivt langt oppmøtested med navn som skal brytes og være lesbart i smale vinduer', to_place: null, uncertainty: 'Fiktiv ukjent opplysning' }] } });
+  const draft = await post(context, '/drafts', { operation_id: operation.operation_id, expected_revision: 0, draft: { service_date: '2031-01-02', vehicle_duty: 'CAR - 1', physical_bus: null, activities: [{ id: randomUUID(), type: kind, raw_code: 'Fictional code', start: '2031-01-02T10:00+01:00', end: '2031-01-02T11:00+01:00', from_place: 'Fiktivt langt oppmøtested med navn som skal brytes og være lesbart i smale vinduer', to_place: null, uncertainty: 'Fiktiv ukjent opplysning', ...extra }] } });
   await page.getByRole('button', { name: 'Oppdater listen', exact: true }).click();
   await page.getByRole('button', { name: 'Åpne 2031-01-02 · versjon 1', exact: true }).first().click();
   await expect(page.getByRole('button', { name: 'Gjennomgå lagret utkast' })).toBeEnabled();
@@ -53,8 +53,159 @@ async function decide(page: Page) {
 }
 async function confirmSaved(context: BrowserContext, draft: any) {
   const reviewed = await post(context, '/workday-reviews', { draft_id: draft.id, expected_revision: draft.revision });
-  return post(context, '/drafts/' + draft.id + '/confirm', { operation_id: reviewed.operation_id, expected_revision: draft.revision, acknowledgements: reviewed.unknowns.map((item: any) => item.id), classifications: Object.fromEntries(reviewed.classifications_required.map((id: string) => [id, 'manual'])) });
+  return post(context, '/drafts/' + draft.id + '/confirm', { operation_id: reviewed.operation_id, expected_revision: draft.revision, acknowledgements: reviewed.unknowns.filter((item: any) => !reviewed.classifications_required.includes(item.id.split(':')[0])).map((item: any) => item.id), classifications: Object.fromEntries(reviewed.classifications_required.map((id: string) => [id, 'manual'])) });
 }
+
+function syntheticImport() {
+  const imported = JSON.parse(python('import sys\nsys.path.insert(0,"/app/tests")\nfrom test_pdf_import import synthetic_text_pdf\nfrom app.pdf_import import parse_document\nfrom app.private_import import interpret\nprint(interpret(parse_document(synthetic_text_pdf())).model_dump_json())\n'));
+  imported.service_date = '2031-01-02';
+  imported.activities.forEach((activity: any, index: number) => { activity.start = `2031-01-02T10:0${index}+01:00`; activity.end = activity.start; activity.type = index === 0 ? 'trip' : 'manual'; });
+  imported.import_metadata.annotations = [{ value: 't', meaning: null, provenance: { page: 1, column: null, line: null } }];
+  imported.activities[0].uncertainty = '  Kildemerket t har ukjent betydning (side 1). Concrete manual note.  ';
+  return imported;
+}
+
+test('review fixes legacy mixed note survives unrelated draft save and reopen exactly', async ({ page, context }) => {
+  await login(page); const imported = syntheticImport();
+  const draft = await post(context, '/drafts', { operation_id: (await post(context, '/draft-operations', {})).operation_id, expected_revision: 0, draft: imported });
+  await page.getByRole('button', { name: 'Oppdater listen', exact: true }).click();
+  await page.getByRole('button', { name: 'Åpne 2031-01-02 · versjon 1', exact: true }).click();
+  const note = page.getByLabel('Usikkerhet / ukjente fakta', { exact: true }).first();
+  await expect(note).toHaveValue('   Concrete manual note.  ');
+  await page.getByLabel('Vognløp', { exact: true }).fill('0007');
+  await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
+  await expect(page.getByRole('region', { name: 'Private utkast' }).getByRole('status')).toHaveText('Lagret. Versjon 2.');
+  await page.getByRole('button', { name: 'Oppdater listen', exact: true }).click();
+  await page.getByRole('button', { name: 'Åpne 2031-01-02 · versjon 2', exact: true }).click();
+  await expect(note).toHaveValue('   Concrete manual note.  ');
+  const stored = await (await context.request.get(API + '/drafts/' + draft.id)).json();
+  expect(stored.draft.activities).toEqual(draft.draft.activities);
+  expect(stored.draft.import_metadata).toEqual(draft.draft.import_metadata);
+});
+
+for (const policy of [1, 2]) test(`review fixes real legacy policy ${policy} reopens exact facts decisions and expiry`, async ({ page, context }) => {
+  await login(page); const imported = syntheticImport();
+  const draft = await post(context, '/drafts', { operation_id: (await post(context, '/draft-operations', {})).operation_id, expected_revision: 0, draft: imported });
+  const issued = await post(context, '/workday-reviews', { draft_id: draft.id, expected_revision: 1 });
+  const unknowns = JSON.parse(python(`from app.draft_domain import DraftContent\nfrom app.workday_domain import assessment\nimport json\nwith database() as conn:\n conn.execute('UPDATE workday_operations SET assessment_policy_version=%s WHERE id=%s', (${policy}, ${JSON.stringify(issued.operation_id)}))\n content=conn.execute('SELECT content FROM drafts WHERE id=%s', (${JSON.stringify(draft.id)},)).fetchone()['content']\nprint(json.dumps(assessment(DraftContent.model_validate(content), policy_version=${policy})['unknowns']))\n`));
+  const decisions = { operation_id: issued.operation_id, expected_revision: 1, acknowledgements: unknowns.map((item: any) => item.id), classifications: {} };
+  const plan = await post(context, '/drafts/' + draft.id + '/confirm', decisions);
+  expect(plan.draft).toEqual(draft.draft); expect(plan.unknowns).toEqual(unknowns);
+  await page.getByRole('button', { name: 'Oppdater planlisten', exact: true }).click();
+  for (let opened = 0; opened < 2; opened++) {
+    await page.getByRole('button', { name: 'Åpne plan 2031-01-02 · versjon 1', exact: true }).click();
+    const confirmed = page.getByRole('region', { name: 'Bekreftet plan', exact: true });
+    const current = confirmed.getByRole('region', { name: 'Dagsoversikt', exact: true }).locator(`[data-activity-id="${draft.draft.activities[0].id}"]`);
+    await expect(current.locator('.day-uncertainty')).toHaveText('Usikkerhet: Concrete manual note.');
+    await confirmed.getByText('Bekreftede detaljer og historisk kilde', { exact: true }).click();
+    const rawNote = confirmed.locator('.day-confirmed-details .fact').filter({ has: page.locator('dt', { hasText: 'Usikkerhet / ukjente fakta' }) }).locator('dd').first();
+    expect(await rawNote.textContent()).toBe(imported.activities[0].uncertainty);
+    await expect(rawNote).toBeVisible();
+    await expect(rawNote.locator('.day-uncertainty')).toHaveCount(0);
+    expect(await (await context.request.get(API + '/workdays/' + plan.id)).json()).toEqual(plan);
+    expect(await (await context.request.get(API + '/workday-operations/' + issued.operation_id)).json()).toEqual({ state: 'accepted', result: plan });
+    await page.getByRole('button', { name: 'Lukk planen', exact: true }).click();
+  }
+  expect(await post(context, '/drafts/' + draft.id + '/confirm', decisions)).toEqual(plan);
+});
+
+for (const tamper of ['swapped', 'misleading']) test(`review fixes reject ${tamper} candidate labels before consent`, async ({ page, context }) => {
+  await login(page); await seed(page, context, 'trip');
+  let confirmations = 0;
+  page.on('request', request => { if (request.method() === 'POST' && request.url().endsWith('/confirm')) confirmations++; });
+  await page.route('**/workday-reviews', async route => {
+    const response = await route.fetch(); const value = await response.json();
+    if (tamper === 'swapped') [value.unknowns[0].label, value.unknowns[1].label] = [value.unknowns[1].label, value.unknowns[0].label];
+    else value.unknowns[0].label = 'Everything is complete. No missing fact.';
+    await route.fulfill({ response, json: value });
+  });
+  await page.getByRole('button', { name: 'Gjennomgå lagret utkast', exact: true }).click();
+  await expect(page.getByRole('status', { name: 'Bekreftelsesstatus' })).toContainText('Tjenesten kunne ikke bekrefte svaret');
+  await expect(page.getByRole('region', { name: 'Gjennomgått versjon' })).toHaveCount(0);
+  expect(confirmations).toBe(0);
+});
+
+test('feedback classification switching prunes decisions and frozen lost response settles non-trip', async ({ page, context }) => {
+  await login(page); const draft = await seed(page, context);
+  await review(page);
+  const region = page.getByRole('region', { name: 'Gjennomgått versjon' });
+  const classification = region.getByRole('combobox');
+  await expect(region.getByRole('checkbox')).toHaveCount(0);
+  await classification.selectOption('trip');
+  await expect(region.getByRole('checkbox')).toHaveCount(5);
+  for (const box of await region.getByRole('checkbox').all()) await box.check();
+  await classification.selectOption('manual');
+  await expect(region.getByRole('checkbox')).toHaveCount(0);
+  await classification.selectOption('trip');
+  for (const box of await region.getByRole('checkbox').all()) await expect(box).not.toBeChecked();
+  await expect(region.getByRole('button', { name: 'Bekreft gjennomgått plan', exact: true })).toBeDisabled();
+  await classification.selectOption('Coffee');
+  let submitted: any;
+  await page.route('**/drafts/' + draft.id + '/confirm', async route => {
+    submitted = route.request().postDataJSON();
+    const response = await route.fetch(); expect(response.status()).toBe(200);
+    await route.fulfill({ status: 200, contentType: 'text/html', body: '<html>lost reply</html>' });
+  });
+  await region.getByRole('button', { name: 'Bekreft gjennomgått plan', exact: true }).click();
+  await expect(page.getByRole('button', { name: 'Kontroller bekreftelsen', exact: true })).toBeVisible();
+  await expect.poll(() => submitted).toBeTruthy();
+  await expect(page.getByRole('status', { name: 'Bekreftelsesstatus' })).toContainText('Bekreftelsen er uavklart.');
+  expect(submitted.acknowledgements).toEqual([]);
+  expect(submitted.classifications).toEqual({ [draft.draft.activities[0].id]: 'Coffee' });
+  await expect(classification).toBeDisabled();
+  await page.getByRole('button', { name: 'Kontroller bekreftelsen', exact: true }).click();
+  await expect(page.getByRole('region', { name: 'Bekreftet plan', exact: true })).toBeVisible();
+});
+
+for (const malformed of ['unassociated', 'non-trip', 'invented-field']) test(`feedback rejects malformed review candidate ${malformed}`, async ({ page, context }) => {
+  await login(page); const draft = await seed(page, context, malformed === 'non-trip' ? 'Coffee' : 'trip');
+  await page.route('**/workday-reviews', async route => {
+    const response = await route.fetch(); const value = await response.json();
+    value.unknowns.push({ id: malformed === 'unassociated' ? randomUUID() + ':line' : draft.draft.activities[0].id + ':' + (malformed === 'invented-field' ? 'raw_code' : 'line'), label: 'Malformed candidate' });
+    await route.fulfill({ response, json: value });
+  });
+  await page.getByRole('button', { name: 'Gjennomgå lagret utkast', exact: true }).click();
+  await expect(page.getByRole('status', { name: 'Bekreftelsesstatus' })).toContainText('Tjenesten kunne ikke bekrefte svaret');
+  await expect(page.getByRole('region', { name: 'Gjennomgått versjon' })).toHaveCount(0);
+});
+
+for (const kind of ['trip', 'deadhead', 'CAR']) test(`review unknown contract and passenger direction for ${kind}`, async ({ page, context }) => {
+  await login(page); await seed(page, context, kind);
+  const currentUnknowns = page.getByText(/Gjeldende ukjente fakta:/);
+  if (kind === 'trip') await expect(currentUnknowns).toContainText('retning');
+  await review(page);
+  const region = page.getByRole('region', { name: 'Gjennomgått versjon' });
+  await expect(region).toContainText('Godta manglende turinformasjon');
+  await expect(region.getByRole('checkbox', { name: /turnummer er ukjent/ })).toHaveCount(kind === 'trip' ? 1 : 0);
+  await expect(region.getByRole('checkbox', { name: /retning er ukjent/ })).toHaveCount(kind === 'trip' ? 1 : 0);
+  await decide(page);
+  await region.getByRole('button', { name: 'Bekreft gjennomgått plan', exact: true }).click();
+  await expect(page.getByRole('region', { name: 'Bekreftet plan', exact: true })).toBeVisible();
+});
+
+for (const [kind, field, value, missing] of [
+  ['trip', 'direction', '\ufeff', false],
+  ['trip', 'direction', '\u001c', true],
+  ['deadhead', 'trip', '', true],
+  ['CAR', 'trip', ' \u0085\u001c ', true],
+] as const) test(`activity absence presentation ${kind} ${field} ${JSON.stringify(value)}`, async ({ page, context }) => {
+  await login(page); const saved = await seed(page, context, kind, { [field]: value });
+  const label = field === 'direction' ? 'retning' : 'turnummer';
+  const unknown = page.getByText(/Gjeldende ukjente fakta:/);
+  if (kind === 'trip' && missing) await expect(unknown).toContainText(label); else await expect(unknown).not.toContainText(label);
+  await review(page);
+  const region = page.getByRole('region', { name: 'Gjennomgått versjon' });
+  const fact = region.locator('.fact').filter({ has: page.locator('dt', { hasText: field === 'direction' ? /^Retning$/ : /^Turnummer$/ }) }).locator('dd');
+  expect(await fact.textContent()).toBe(missing ? 'Ukjent' : value);
+  await expect(region.getByRole('checkbox', { name: new RegExp(label + ' er ukjent') })).toHaveCount(kind === 'trip' && missing ? 1 : 0);
+  await decide(page); await region.getByRole('button', { name: 'Bekreft gjennomgått plan', exact: true }).click();
+  const day = page.getByRole('region', { name: 'Dagsoversikt', exact: true });
+  const member = day.locator('[data-activity-id="' + saved.draft.activities[0].id + '"]');
+  if (kind === 'trip' && missing) await expect(member.locator('p').filter({ hasText: /^Ukjent:/ })).toContainText(label);
+  else if (kind === 'trip') expect(await member.textContent()).toContain('Retning: ' + value);
+  else await expect(member.locator('p').filter({ hasText: /^Ukjent:/ })).not.toContainText(label);
+  expect((await (await context.request.get(API + '/drafts/' + saved.id)).json()).draft.activities[0][field]).toBe(value);
+});
 
 async function openedPlan(page: Page, context: BrowserContext) {
   await login(page); const draft = await seed(page, context, 'trip');
@@ -263,7 +414,7 @@ test('saved revision review cancels unchanged, editing invalidates, unknowns and
   await expect(plan).toBeVisible();
   await expect(plan.getByRole('heading', { name: 'Bekreftet plan · versjon 2' })).toBeVisible();
   await plan.getByText('Godtatte ukjente fakta', { exact: true }).click();
-  await expect(plan.getByText('Buss/vogn er ukjent.', { exact: true })).toBeVisible();
+  await expect(plan.getByText('Buss/vogn er ukjent.', { exact: true })).toHaveCount(0);
   await expect(plan.getByText(/from_place|source_start|operation_id/)).toHaveCount(0);
   expect(await page.evaluate(async () => ({ local: Object.keys(localStorage), session: Object.keys(sessionStorage), databases: (await indexedDB.databases()).map(d => d.name) })) ).toEqual({ local: [], session: [], databases: [] });
 });

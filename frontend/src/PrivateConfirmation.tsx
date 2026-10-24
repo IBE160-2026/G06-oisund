@@ -3,7 +3,7 @@ import { validContent, type Content, type Saved } from './PrivateDrafts';
 import { SourceFacts } from './PrivateImport';
 import { PrivateBus } from './PrivateBus';
 import { PrivateDayOverview } from './PrivateDayOverview';
-import { effectiveDuty } from './draftInterpretation';
+import { effectiveDuty, activityFactMissing, displayFact, currentUncertainty } from './draftInterpretation';
 
 type Review = { operation_id: string; operation_expires_at: string; draft_id: string; revision: number; draft: Content; blockers: string[]; unknowns: { id: string; label: string }[]; classifications_required: string[]; supported_types: string[]; final_end: string | null; expires_at: string | null };
 type Decisions = { operation_id: string; expected_revision: number; acknowledgements: string[]; classifications: Record<string, string> };
@@ -18,6 +18,17 @@ const date = (v: string) => new Date(v).toLocaleString('nb-NO', { timeZone: 'Eur
 const finalEnd = (content: Content) => Math.max(...content.activities.map(a => Date.parse(a.end ?? '')));
 const typeLabels: Record<string, string> = { trip: 'Passasjertur', deadhead: 'Tomkjøring', deadhead_car: 'Tomkjøring med CAR', 'Tomkjøring med CAR': 'Tomkjøring med CAR (kildetype)', CAR: 'CAR', 'Sign-on': 'Oppmøte', 'Sign-off': 'Avslutning', MealBreak: 'Matpause', Coffee: 'Kaffepause', 'Split break': 'Deltskiftpause', 'Paid meal before': 'Betalt matpause før', 'Paid meal after': 'Betalt matpause etter', 'Travel to': 'Reise til', 'Travel from': 'Reise fra', Fadder: 'Fadder', Instruktør: 'Instruktør', manual: 'Manuelt klassifisert arbeid' };
 const supportedTypes = Object.keys(typeLabels);
+function validCandidates(value: Review): boolean {
+  const expected = value.draft.activities.flatMap((activity, index) => {
+    if (activity.type !== 'trip' && !value.classifications_required.includes(activity.id)) return [];
+    const prefix = `Aktivitet ${index + 1}: `;
+    return [
+      ...[['from_place', 'fra sted'], ['to_place', 'til sted'], ['trip', 'turnummer'], ['line', 'linje'], ['direction', 'retning']].filter(([field]) => activityFactMissing(activity[field])).map(([field, title]) => ({ id: activity.id + ':' + field, label: prefix + title + ' er ukjent.' })),
+      ...(activityFactMissing(currentUncertainty(value.draft, activity)) ? [] : [{ id: activity.id + ':uncertainty', label: prefix + currentUncertainty(value.draft, activity) }]),
+    ];
+  });
+  return expected.length === value.unknowns.length && value.unknowns.every(item => expected.some(candidate => candidate.id === item.id && candidate.label === item.label));
+}
 function validPlan(value: any): value is Plan {
   return value && Object.keys(value).sort().join() === 'acknowledgements,classifications,confirmed_at,draft,expires_at,final_end,id,source_draft_id,source_revision,state,unknowns'
     && uuid(value.id) && uuid(value.source_draft_id) && Number.isInteger(value.source_revision) && value.source_revision > 0
@@ -34,7 +45,7 @@ function validPlan(value: any): value is Plan {
 const factNames: Record<string, string> = { type: 'Aktivitetstype', raw_code: 'Opprinnelig kode', start: 'Start med dato og Oslo-offset', end: 'Slutt med dato og Oslo-offset', source_start: 'Opprinnelig startklokke', source_end: 'Opprinnelig sluttklokke', from_place: 'Fra sted', to_place: 'Til sted', trip: 'Turnummer', line: 'Linje', direction: 'Retning', uncertainty: 'Usikkerhet / ukjente fakta', provenance: 'Kilde / manuell rettelse' };
 function Facts({ content, classifications = {}, historical = false }: { content: Content; classifications?: Record<string, string>; historical?: boolean }) {
   return <><dl>{Object.entries(content).filter(([key]) => !['activities', 'import_metadata', 'vehicle_duty_changes'].includes(key)).map(([key, value]) => <div key={key}><dt>{{ service_date: 'Tjenestedato', vehicle_duty: 'Vognløp', realtime_duty: 'Sanntidsverdi', physical_bus: historical ? 'Fysisk buss ved bekreftelse (historisk)' : 'Fysisk buss (manuelt i utkastet)' }[key] ?? key}</dt><dd>{String(value ?? 'Ukjent')}</dd></div>)}</dl>
-    <ol>{content.activities.map((activity, index) => <li key={activity.id}><h4>Aktivitet {index + 1}</h4><p>Vognløp: {effectiveDuty(content, index) ?? 'Ukjent'}</p><dl>{Object.entries(activity).filter(([key]) => key !== 'id').map(([key, value]) => <div className="fact" key={key}><dt>{factNames[key] ?? key}</dt><dd>{value ?? 'Ukjent'}</dd></div>)}</dl>{classifications[activity.id] && <p>Eksplisitt klassifisert som: {typeLabels[classifications[activity.id]]}</p>}</li>)}</ol>
+    <ol>{content.activities.map((activity, index) => <li key={activity.id}><h4>Aktivitet {index + 1}</h4><p>Vognløp: {effectiveDuty(content, index) ?? 'Ukjent'}</p><dl>{Object.entries(activity).filter(([key]) => key !== 'id').map(([key, value]) => <div className="fact" key={key}><dt>{factNames[key] ?? key}</dt><dd>{activityFactMissing(key === 'uncertainty' && !historical ? currentUncertainty(content, activity) : value) ? 'Ukjent' : key === 'uncertainty' && !historical ? currentUncertainty(content, activity) : displayFact(key, value)}</dd></div>)}</dl>{classifications[activity.id] && <p>Eksplisitt klassifisert som: {typeLabels[classifications[activity.id]]}</p>}</li>)}</ol>
     {content.import_metadata && <details><summary>Bevarte kildefakta</summary><SourceFacts metadata={content.import_metadata} historical={historical} /></details>}
     </>;
 }
@@ -50,6 +61,11 @@ export function PrivateConfirmation({ saved, clean, request, mutation, expired, 
   const [acks, setAcks] = useState<string[]>([]);
   const [classes, setClasses] = useState<Record<string, string>>({});
   const [pending, setPending] = useState<Decisions | null>(null);
+  const relevantUnknowns = (value: Review, classifications: Record<string, string>) => value.unknowns.filter(item => {
+    const activity = value.draft.activities.find(activity => item.id.startsWith(activity.id + ':'));
+    return !!activity && (classifications[activity.id] ?? activity.type) === 'trip';
+  });
+  const visibleUnknowns = review ? relevantUnknowns(review, classes) : [];
   const [deleting, setDeleting] = useState<Deletion | null>(null);
   const deletionRef = useRef<Deletion | null>(null), reading = useRef(0), sendingDeletion = useRef(false);
   const [plan, setPlan] = useState<Plan | null>(null);
@@ -118,16 +134,18 @@ export function PrivateConfirmation({ saved, clean, request, mutation, expired, 
         || !Array.isArray(value.blockers) || !value.blockers.every((v: any) => typeof v === 'string') || !Array.isArray(value.unknowns) || value.unknowns.length > 3000
         || !value.unknowns.every((v: any) => v && typeof v.id === 'string' && v.id.length <= 200 && typeof v.label === 'string') || new Set(value.unknowns.map((v: any) => v.id)).size !== value.unknowns.length
         || !Array.isArray(value.classifications_required) || !value.classifications_required.every((id: any) => saved.draft.activities.some(a => a.id === id)) || new Set(value.classifications_required).size !== value.classifications_required.length
+        || canonical([...value.classifications_required].sort()) !== canonical(saved.draft.activities.filter(activity => !supportedTypes.includes(activity.type ?? '')).map(activity => activity.id).sort())
         || !Array.isArray(value.supported_types) || canonical([...value.supported_types].sort()) !== canonical([...supportedTypes].sort())
+        || !validCandidates(value)
         || (value.blockers.length === 0 && (Date.parse(value.final_end) !== finalEnd(saved.draft) || Date.parse(value.expires_at) - Date.parse(value.final_end) !== 7 * 86400000 || !live(value.expires_at)))) throw Error();
-      setReview(value); setAcks([]); setClasses({}); setPlan(null); setMessage('Gjennomgå den lagrede versjonen og alle ukjente fakta.'); title.current?.focus();
+      setReview(value); setAcks([]); setClasses({}); setPlan(null); setMessage('Gjennomgå den lagrede versjonen og beslutningene som er oppført.'); title.current?.focus();
     } catch (error) { if (alive.current && generation === epoch.current) failure(error); }
     finally { if (alive.current) setBusy(false); }
   }
   function accept(value: any, decisions: Decisions) {
     if (!review || !validPlan(value) || value.source_draft_id !== review.draft_id || value.source_revision !== review.revision
       || canonical(value.draft) !== canonical(review.draft) || Date.parse(value.expires_at) !== Date.parse(review.expires_at!)
-      || canonical(value.unknowns) !== canonical(review.unknowns)
+      || canonical(value.unknowns) !== canonical(relevantUnknowns(review, decisions.classifications))
       || canonical([...value.acknowledgements].sort()) !== canonical([...decisions.acknowledgements].sort()) || canonical(value.classifications) !== canonical(decisions.classifications)) throw Error();
     setPlan(value); setPending(null); setReview(null); setMessage('Planen er bekreftet. Ingen aktivitet er startet eller fullført.'); title.current?.focus();
   }
@@ -203,11 +221,12 @@ export function PrivateConfirmation({ saved, clean, request, mutation, expired, 
     {review && <section aria-label="Gjennomgått versjon"><h3>Lagret versjon {review.revision}</h3><p>Siste aktivitetsslutt: {review.final_end ? date(review.final_end) : 'Uavklart'}. Planen utløper: {review.expires_at ? date(review.expires_at) : 'Uavklart'}.</p>
       {review.blockers.length > 0 && <div className="import-warning"><h4>Rett før bekreftelse</h4><ul>{review.blockers.map((v, i) => <li key={i}>{v}</li>)}</ul></div>}
       <Facts content={review.draft} classifications={classes} />
+      <p>Godta manglende turinformasjon og gjeldende usikkerhet for passasjerturer der de er oppført nedenfor. Ukjent aktivitetstype må klassifiseres.</p>
       <fieldset disabled={busy || !!pending || suspended}><legend>Beslutninger for versjon {review.revision}</legend>
-        {review.classifications_required.map(id => <label key={id}>Klassifisering aktivitet {review.draft.activities.findIndex(a => a.id === id) + 1}<select value={classes[id] ?? ''} onChange={e => setClasses(current => ({ ...current, [id]: e.target.value }))}><option value="">Velg eksplisitt type</option>{review.supported_types.map(kind => <option key={kind} value={kind}>{typeLabels[kind]}</option>)}</select></label>)}
-        {review.unknowns.map(item => <label className="confirmation-ack" key={item.id}><input type="checkbox" checked={acks.includes(item.id)} onChange={e => setAcks(current => e.target.checked ? [...current, item.id] : current.filter(id => id !== item.id))} />Jeg har gjennomgått og godtar: {item.label}</label>)}
+        {review.classifications_required.map(id => <label key={id}>Klassifisering aktivitet {review.draft.activities.findIndex(a => a.id === id) + 1}<select value={classes[id] ?? ''} onChange={e => { const next = { ...classes, [id]: e.target.value }; setClasses(next); const allowed = new Set(relevantUnknowns(review, next).map(item => item.id)); setAcks(current => current.filter(id => allowed.has(id))); }}><option value="">Velg eksplisitt type</option>{review.supported_types.map(kind => <option key={kind} value={kind}>{typeLabels[kind]}</option>)}</select></label>)}
+        {visibleUnknowns.map(item => <label className="confirmation-ack" key={item.id}><input type="checkbox" checked={acks.includes(item.id)} onChange={e => setAcks(current => e.target.checked ? [...current, item.id] : current.filter(id => id !== item.id))} />Jeg har gjennomgått og godtar: {item.label}</label>)}
       </fieldset>
-      {!pending && <div className="controls"><button disabled={busy || busLocked || suspended || review.blockers.length > 0 || acks.length !== review.unknowns.length || review.classifications_required.some(id => !classes[id])} onClick={() => void send()}>Bekreft gjennomgått plan</button><button disabled={busy} onClick={() => { setReview(null); setAcks([]); setClasses({}); setMessage('Gjennomgangen er avbrutt. Utkastet er uendret.'); }}>Avbryt gjennomgang</button></div>}
+      {!pending && <div className="controls"><button disabled={busy || busLocked || suspended || review.blockers.length > 0 || acks.length !== visibleUnknowns.length || review.classifications_required.some(id => !classes[id])} onClick={() => void send()}>Bekreft gjennomgått plan</button><button disabled={busy} onClick={() => { setReview(null); setAcks([]); setClasses({}); setMessage('Gjennomgangen er avbrutt. Utkastet er uendret.'); }}>Avbryt gjennomgang</button></div>}
     </section>}
     {pending && <div className="controls"><button disabled={busy || busLocked || suspended} onClick={() => void send()}>Prøv samme bekreftelse igjen</button><button disabled={busy || busLocked || suspended} onClick={() => void send(true)}>Kontroller bekreftelsen</button></div>}
     {plan && <section aria-label="Bekreftet plan">{planAvailable ? <><h3>Bekreftet plan · versjon {plan.source_revision}</h3><p>Status: bekreftet.</p><p>Siste aktivitetsslutt: {date(plan.final_end)}. Utløper {date(plan.expires_at)}. Fristen forlenges ikke.</p></> : <p>Planfakta er skjult til plantilgangen er kontrollert.</p>}<PrivateBus key={plan.id + ':' + planOpen} id={plan.id} expiresAt={plan.expires_at} request={request} mutation={mutation} suspended={suspended || !!deleting || !!pending} expired={expired} lock={guardBus} availability={guardAvailability} />{planAvailable && <><p>Historiske fakta og godtatte ukjente opplysninger gjelder tidspunktet for bekreftelsen. Bussregistreringen over gjelder nå.</p><PrivateDayOverview content={plan.draft} classifications={plan.classifications} finalEnd={plan.final_end} expiresAt={plan.expires_at} /><details className="day-confirmed-details"><summary>Bekreftede detaljer og historisk kilde</summary><Facts historical content={plan.draft} classifications={plan.classifications} /></details><details><summary>Godtatte ukjente fakta</summary><ul>{plan.unknowns.map(item => <li key={item.id}>{item.label}</li>)}</ul></details></>}<div className="controls"><button disabled={!planAvailable || !!deleting || !!pending || busLocked || suspended} onClick={() => void remove()}>Slett bekreftet plan</button><button disabled={busy || !!deleting || busLocked} onClick={() => setPlan(null)}>Lukk planen</button></div></section>}

@@ -19,10 +19,22 @@ export function sameFact(field: string, current: string | null, original: string
   }
   return false;
 }
+// Python str.strip's explicit whitespace set, used by activity assessment.
+// Unlike bus absence, U+001C–001F count as blank here; FEFF remains meaningful.
+export const activityFactMissing = (value: string | null | undefined): boolean => value == null || /^[\u0009-\u000d\u001c-\u0020\u0085\u00a0\u1680\u2000-\u200a\u2028\u2029\u202f\u205f\u3000]*$/u.test(value);
+export const displayFact = (field: string, value: string | null | undefined) => (field === 'type' || field === 'kind' || field === 'raw_code' || field === 'label') && (value === 'trip' || value === 'Trip') ? 'tur' : value;
+export function currentUncertainty(content: Content, activity: Content['activities'][number], trim = true): string {
+  let value = activity.uncertainty ?? '';
+  // Exact retained document fragments are neutral even with unknown positions;
+  // this does not attach an unlocated annotation to the displayed activity.
+  for (const marker of sourceMarkers(content)) value = value.split(marker.fragment).join('');
+  return trim ? value.replace(/^[\u0009-\u000d\u001c-\u0020\u0085\u00a0\u1680\u2000-\u200a\u2028\u2029\u202f\u205f\u3000]+|[\u0009-\u000d\u001c-\u0020\u0085\u00a0\u1680\u2000-\u200a\u2028\u2029\u202f\u205f\u3000]+$/gu, '') : value;
+}
 export function currentUnknowns(activity: Content['activities'][number]): string[] {
-  const result = [['type', 'aktivitetstype'], ['start', 'start'], ['end', 'slutt'], ['from_place', 'fra sted'], ['to_place', 'til sted']].filter(([field]) => !activity[field]?.trim()).map(([, label]) => label);
-  if (['trip', 'deadhead', 'deadhead_car', 'Tomkjøring med CAR', 'CAR'].includes(activity.type ?? '') && !activity.trip?.trim()) result.push('turnummer');
-  if (activity.type === 'trip' && !activity.line?.trim()) result.push('linje');
+  const result = [['type', 'aktivitetstype'], ['start', 'start'], ['end', 'slutt'], ['from_place', 'fra sted'], ['to_place', 'til sted']].filter(([field]) => activityFactMissing(activity[field])).map(([, label]) => label);
+  if (activity.type === 'trip' && activityFactMissing(activity.trip)) result.push('turnummer');
+  if (activity.type === 'trip' && activityFactMissing(activity.line)) result.push('linje');
+  if (activity.type === 'trip' && activityFactMissing(activity.direction)) result.push('retning');
   return result;
 }
 
@@ -70,16 +82,6 @@ export function importIssues(content: Content): { activityId?: string; text: str
   for (const source of metadata.activities) {
     if (source.origins.kind === 'unresolved') result.push({ activityId: source.activity_id, text: 'Aktivitetstypen er uavklart.' });
   }
-  for (const marker of metadata.annotations) {
-    const candidates: { line: number; id: string }[] = [];
-    for (const source of metadata.activities) for (const points of Object.values(source.provenance)) {
-      if (Array.isArray(points)) for (const point of points) {
-        if (point.page === marker.provenance.page && point.column === marker.provenance.column && point.line <= marker.provenance.line) candidates.push({ line: point.line, id: source.activity_id });
-      }
-    }
-    candidates.sort((a, b) => b.line - a.line);
-    result.push({ activityId: candidates[0]?.id, text: `Kildemerket ${marker.value} har ukjent betydning (side ${marker.provenance.page}).` });
-  }
   const seen = new Set<string>();
   return result.filter(issue => {
     const key = (issue.activityId ?? '') + ':' + issue.text;
@@ -87,4 +89,25 @@ export function importIssues(content: Content): { activityId?: string; text: str
     seen.add(key);
     return true;
   });
+}
+type Marker = { activityId?: string; text: string; fragment: string };
+const markerCache = new WeakMap<Content, Marker[]>();
+export function sourceMarkers(content: Content): Marker[] {
+  const cached = markerCache.get(content);
+  if (cached) return cached;
+  const metadata = content.import_metadata;
+  if (!metadata) return [];
+  const result: { activityId?: string; text: string; fragment: string }[] = [];
+  for (const marker of metadata.annotations) {
+    const candidates: { line: number; id: string; order: number }[] = [];
+    for (const source of metadata.activities) for (const points of Object.values(source.provenance)) {
+      if (Array.isArray(points)) for (const point of points) {
+        if (marker.provenance.line != null && marker.provenance.column != null && point.line != null && point.page === marker.provenance.page && point.column === marker.provenance.column && point.line <= marker.provenance.line) candidates.push({ line: point.line, id: source.activity_id, order: source.source_order });
+      }
+    }
+    candidates.sort((a, b) => b.line - a.line || b.order - a.order);
+    result.push({ activityId: candidates[0]?.id, text: `Kildemerke: ${marker.value} (side ${marker.provenance.page}).`, fragment: `Kildemerket ${marker.value} har ukjent betydning (side ${marker.provenance.page}).` });
+  }
+  markerCache.set(content, result);
+  return result;
 }

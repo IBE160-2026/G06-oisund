@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 10-19-2026 14:35
-last_updated: 10-24-2026 04:17
+last_updated: 10-24-2026 18:18
 project: IBE160
 project_key: NOKEY
 tracking_system: file-system
@@ -42,13 +42,13 @@ development_status:
   9-4-save-and-reopen-a-draft: done # Owner approved after walkthrough, including bus/reset/delete and friendly time entry.
   epic-9-retrospective: done
 
-  epic-10: done # All five stories owner-accepted; no retrospective requested.
+  epic-10: done # All five stories owner-accepted; retrospective completed with open follow-up items.
   10-1-review-a-text-pdf: done # Owner approved walkthrough 2026-10-21; accepted false t-marker warning in example 8.
   10-2-correct-the-draft: done # Owner approved walkthrough 2026-10-22, including clarified discard wording.
   10-3-confirm-the-reviewed-plan: done # Jonas accepted original flow and deletion walkthrough steps 1–4 on 2026-10-22; 213 backend/API and 120 browser tests passed.
   10-4-record-the-physical-bus: done # Jonas reports testing works as intended, 2026-10-24; 236 backend/API and 157 browser tests passed.
   10-5-read-the-day: done # Owner approved 2026-10-24; 236 backend/API and 190 Playwright tests passed. Actual iPad check not run.
-  epic-10-retrospective: optional
+  epic-10-retrospective: done
 
   epic-11: backlog
   11-1-choose-the-intended-activity: backlog
@@ -104,3 +104,44 @@ action_items:
     owner: "Jonas / developer"
     status: done
     ref: "D:/IBE160/_bmad-output/implementation-artifacts/epic-9-retro-2026-10-21.md"
+  # A1-A3: policy-3 amendment reviewed/fixed; final 288 API + 220 browser passes and runtime verified. Owner accepted amended A1-A3 follow-up 2026-10-24.
+  - id: "epic-10-retro-item-1-preserve-import-baseline"
+    epic: 10
+    action: "E10-A1 / F1: preserve imported source metadata across existing-draft
+      updates; add API baseline-preservation/rejection and ordinary correction/reopen
+      regressions without breaking revisions, retry or expiry."
+    owner: "Developer"
+    status: done        # Implemented under draft-contracts maintenance; owner accepted 2026-10-24.
+    ref: "D:/IBE160/_bmad-output/implementation-artifacts/epic-10-retro-2026-10-24.md"
+  - id: "epic-10-retro-item-2-align-bus-representability"
+    epic: 10
+    action: "E10-A2 / F2: align draft physical-bus NUL validation with current-bus
+      representability; verify useful rejection, no accepted mutation and valid Unicode/leading-zero
+      roundtrip."
+    owner: "Developer / QA"
+    status: done        # Shared rules plus disabled invalid save/explicit clear amendment; owner accepted 2026-10-24.
+    ref: "D:/IBE160/_bmad-output/implementation-artifacts/epic-10-retro-2026-10-24.md"
+  - id: "epic-10-retro-item-3-align-unknown-acknowledgements"
+    epic: 10
+    action: "E10-A3 / F3: decide and align required/acknowledged/visible-unknown fields
+      per activity type, including missing deadhead/CAR trip numbers; preserve existing
+      accepted-plan/replay compatibility."
+    owner: "Jonas / developer"
+    status: done        # Owner approved passenger-only policy 3 plus neutral source markers; amendment accepted 2026-10-24.
+    ref: "D:/IBE160/_bmad-output/implementation-artifacts/epic-10-retro-2026-10-24.md"
+  - id: "epic-10-retro-item-4-verify-theme-persistence"
+    epic: 10
+    action: "E10-A4 / F4: complete existing 12.3 manual-theme persistence requirement
+      with non-private-only storage and reload/privacy evidence, or obtain explicit
+      owner reconciliation."
+    owner: "Developer"
+    status: open
+    ref: "D:/IBE160/_bmad-output/implementation-artifacts/epic-10-retro-2026-10-24.md"
+  - id: "epic-10-retro-item-5-record-ipad-verification"
+    epic: 10
+    action: "E10-A5 / F5: record actual iPad/Safari portrait/landscape, Day/Night,
+      touch/enlargement/control observations in 12.3/12.4; keep desktop evidence and
+      owner acceptance distinct."
+    owner: "Jonas / QA"
+    status: open
+    ref: "D:/IBE160/_bmad-output/implementation-artifacts/epic-10-retro-2026-10-24.md"

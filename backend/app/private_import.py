@@ -9,7 +9,7 @@ from . import auth
 from .draft_domain import DraftContent, SourceHeader
 from .pdf_import import MAX_BYTES, ImportFailure, extract_pdf
 from .private_storage import database
-from .import_issues import annotation_rows, issue_text
+from .import_issues import issue_text
 
 slots = BoundedSemaphore(2)
 active: set[Event] = set()
@@ -32,11 +32,9 @@ def interpret(source):
     if int(header['start'].split(':')[0]) >= 24 or day.utcoffset() != (day + timedelta(days=1)).utcoffset() or day.utcoffset() != finish.utcoffset():
         raise ImportFailure('unqualified_calendar')
     rows, source_rows = [], []
-    markers = annotation_rows(source)
     for row in source['activities']:
         identifier = str(uuid4())
         unknown = [issue_text(item) for item in source['unresolved'] if item.get('activity') == row['source_order']]
-        unknown.extend(f'Kildemerket {item["value"]} har ukjent betydning (side {item["provenance"]["page"]}).' for item in markers.get(row['source_order'], []))
         if row['kind'] == 'Travel to' and not row['start_instant']:
             unknown.append('Aktivitetstypen er uavklart. Travel to er beholdt fra kilden.')
         rows.append(dict(id=identifier, type=None if row['kind'] == 'Travel to' and not row['start_instant'] else 'Tomkjøring med CAR' if row['kind'] == 'deadhead_car' else row['kind'],

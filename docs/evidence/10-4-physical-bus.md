@@ -62,3 +62,7 @@ Open http://127.0.0.1:5173/private using your existing access. Use a separate sy
 4. Check keyboard focus in Day/Night and verify that vognløp, the three-digit realtime value, confirmed activities/source facts and expiry remain unchanged. An unsaved bus change must block plan replacement/deletion and warn before navigation/logout.
 
 Automated isolated tests cover the 200/201 draft boundary, admission, expiry and lost-reply races; no manual clock/database changes or hundreds of ordinary drafts are required. Record your own result and final acceptance separately. No acceptance is inferred from passing automation.
+
+## Review-feedback amendment — 2026-10-24
+
+Both bus fields expose explicit clear proposals and disable invalid fresh saves while retaining accessible errors/input and pending retry controls. Regression cases cover 102-code-point rejection, 100-code-point validity, exact 000x/spaces, clear/cancel/save/reopen and unchanged expiry. Focused results and final independent verification are recorded in `epic-10-review-feedback.md`; earlier evidence and owner story acceptance remain historical. Amendment owner acceptance is pending.

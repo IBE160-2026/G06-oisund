@@ -54,6 +54,95 @@ def save(client, facts=None, identifier=None, revision=0, operation=None):
     return client.post('/drafts' + ('/' + identifier if identifier else ''), headers=headers(client), json=body), body
 
 
+@pytest.mark.parametrize('mutation', ['alter', 'source_row', 'remove', 'add'])
+def test_source_baseline_is_immutable_and_rejection_is_atomic(client, users, mutation):
+    from app.private_import import interpret
+    from app.pdf_import import parse_document
+    from test_pdf_import import synthetic_text_pdf
+    import copy
+    assert login(client, users).status_code == 200
+    imported = interpret(parse_document(synthetic_text_pdf())).model_dump(mode='json')
+    original, accepted_body = save(client, content() if mutation == 'add' else imported)
+    original = original.json()
+    candidate = copy.deepcopy(original['draft'])
+    if mutation == 'alter': candidate['import_metadata']['header']['shift_id'] += '-changed'
+    if mutation == 'source_row': candidate['import_metadata']['activities'][0]['origin'] = 'Changed original endpoint'
+    if mutation == 'remove': candidate.pop('import_metadata')
+    if mutation == 'add': candidate['import_metadata'] = imported['import_metadata']
+    operation = issue(client, original['id'])
+    with database() as conn:
+        before = conn.execute('SELECT * FROM draft_operations WHERE id=%s', (operation,)).fetchone()
+    rejected, _ = save(client, candidate, original['id'], 1, operation)
+    assert rejected.status_code == 422
+    assert client.get('/drafts/' + original['id']).json() == original
+    with database() as conn:
+        assert conn.execute('SELECT * FROM draft_operations WHERE id=%s', (operation,)).fetchone() == before
+    corrected = copy.deepcopy(original['draft'])
+    corrected['activities'].reverse()
+    corrected['activities'][0]['from_place'] = 'Corrected place'
+    updated, _ = save(client, corrected, original['id'], 1, operation)
+    assert updated.status_code == 200
+    assert updated.json()['draft'].get('import_metadata') == original['draft'].get('import_metadata')
+    # Replay the accepted create after later corrections, before comparing baseline.
+    assert client.post('/drafts', headers=headers(client), json=accepted_body).json() == original
+
+
+def test_absent_and_null_manual_source_are_equivalent(client, users):
+    assert login(client, users).status_code == 200
+    original = save(client)[0].json()
+    value = {**original['draft'], 'import_metadata': None}
+    assert save(client, value, original['id'], 1)[0].status_code == 200
+
+
+@pytest.mark.parametrize('value', ['', '\u0085\u2003\u3000', '\u001c', '\ufeff', ' 0006 / 090 ', '😀' * 100, 'bad\x00bus', '😀' * 101])
+def test_fresh_bus_contract_preserves_exact_receipts_and_rejects_atomically(client, users, value):
+    assert login(client, users).status_code == 200
+    facts = {**content(), 'physical_bus': value}
+    operation = issue(client)
+    with database() as conn:
+        pending = conn.execute('SELECT * FROM draft_operations WHERE id=%s', (operation,)).fetchone()
+    response, body = save(client, facts, operation=operation)
+    if '\x00' in value or len(value) > 100:
+        assert response.status_code == 422
+        with database() as conn:
+            assert conn.execute('SELECT * FROM draft_operations WHERE id=%s', (operation,)).fetchone() == pending
+        return
+    assert response.status_code == 200
+    original = response.json()
+    expected = None if value in ['', '\u0085\u2003\u3000'] else value
+    assert original['draft']['physical_bus'] == expected
+    assert client.post('/drafts', headers=headers(client), json=body).json() == original
+    if value != expected:
+        changed = {**body, 'draft': {**body['draft'], 'physical_bus': expected}}
+        assert client.post('/drafts', headers=headers(client), json=changed).status_code == 409
+
+
+def test_legacy_pending_bus_body_and_receipt_remain_verbatim(client, users):
+    assert login(client, users).status_code == 200
+    operation = issue(client)
+    with database() as conn:
+        conn.execute('UPDATE draft_operations SET normalize_physical_bus=false WHERE id=%s', (operation,))
+    response, body = save(client, {**content(), 'physical_bus': '\u0085\u2003'}, operation=operation)
+    original = response.json()
+    assert response.status_code == 200 and original['draft']['physical_bus'] == '\u0085\u2003'
+    assert save(client, {**original['draft'], 'physical_bus': 'new'}, original['id'], 1)[0].status_code == 200
+    migrate(); migrate()
+    assert client.post('/drafts', headers=headers(client), json=body).json() == original
+    assert client.get('/draft-operations/' + operation).json()['result'] == original
+
+
+def test_legacy_pending_bus_nul_rejects_before_storage_without_mutation(client, users):
+    assert login(client, users).status_code == 200
+    operation = issue(client)
+    with database() as conn:
+        conn.execute('UPDATE draft_operations SET normalize_physical_bus=false WHERE id=%s', (operation,))
+        before = conn.execute('SELECT * FROM draft_operations WHERE id=%s', (operation,)).fetchone()
+    response, _ = save(client, {**content(), 'physical_bus': 'bad\x00bus'}, operation=operation)
+    assert response.status_code == 422
+    with database() as conn:
+        assert conn.execute('SELECT * FROM draft_operations WHERE id=%s', (operation,)).fetchone() == before
+
+
 @pytest.mark.parametrize('boundary', ['insert', 'accept'])
 @pytest.mark.parametrize('target', ['create', 'update'])
 def test_operation_expiry_at_write_boundary_rolls_back(client, users, monkeypatch, boundary, target):
@@ -480,7 +569,7 @@ def test_legacy_draft_operation_normalizes_without_rewriting(client, users):
     legacy_hash = fingerprint(None, legacy_body)
     with database() as conn:
         conn.execute('UPDATE drafts SET content=%s WHERE id=%s', (Jsonb(legacy), original['id']))
-        conn.execute('UPDATE draft_operations SET result=%s,payload_hash=%s WHERE id=%s', (Jsonb(legacy_result), legacy_hash, body['operation_id']))
+        conn.execute('UPDATE draft_operations SET result=%s,payload_hash=%s,normalize_physical_bus=false WHERE id=%s', (Jsonb(legacy_result), legacy_hash, body['operation_id']))
     assert client.get('/drafts/' + original['id']).json() == original
     assert client.post('/drafts', headers=headers(client), json=legacy_body).json() == original
     assert client.get('/draft-operations/' + body['operation_id']).json()['result'] == original

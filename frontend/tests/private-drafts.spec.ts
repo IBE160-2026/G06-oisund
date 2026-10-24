@@ -35,6 +35,44 @@ async function fill(page: Page) {
 }
 const status = (page: Page) => page.getByRole('region', { name: 'Private utkast' }).getByRole('status');
 
+test('review fixes uncertainty preserves character-by-character multiword input save and reopen', async ({ page }) => {
+  await login(page); await fill(page);
+  const note = page.getByLabel('Usikkerhet / ukjente fakta', { exact: true });
+  const text = '  First word second word  ';
+  await note.pressSequentially(text);
+  await expect(note).toHaveValue(text);
+  const accepted = page.waitForResponse(response => response.request().method() === 'POST' && new URL(response.url()).pathname === '/drafts');
+  await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
+  const saved = await (await accepted).json();
+  expect(saved.draft.activities[0].uncertainty).toBe(text);
+  await expect(status(page)).toHaveText('Lagret. Versjon 1.');
+  await page.getByRole('button', { name: 'Oppdater listen', exact: true }).click();
+  await page.getByRole('button', { name: 'Åpne 2026-10-24 · versjon 1', exact: true }).click();
+  await expect(note).toHaveValue(text);
+});
+
+test('draft bus fresh writes share Unicode rules and invalid input remains editable', async ({ page }) => {
+  await login(page);
+  const input = page.getByLabel('Buss/vogn', { exact: true });
+  const save = page.getByRole('button', { name: 'Lagre utkast', exact: true });
+  let writes = 0;
+  page.on('request', req => { if (req.method() === 'POST' && /\/drafts(?:\/[^/]+)?$/.test(new URL(req.url()).pathname)) writes++; });
+  for (const value of ['🚍'.repeat(101), 'A\0B']) {
+    await input.fill(value); await expect(save).toBeDisabled();
+    await expect(input).toHaveValue(value); await expect(status(page)).toContainText('Inndata er beholdt');
+    await expect(input).toHaveAttribute('aria-invalid', 'true');
+    await expect(input).toHaveAttribute('aria-describedby', 'draft-bus-error');
+    await expect(input).toHaveAccessibleDescription(/Inndata er beholdt/);
+    expect(writes).toBe(0);
+  }
+  for (const [value, expected] of [['\u0085\u2003', ''], ['\ufeff', '\ufeff'], [' 0006 / 090 ', ' 0006 / 090 '], ['🚍'.repeat(100), '🚍'.repeat(100)]] as const) {
+    await input.fill(value); await save.focus(); await page.keyboard.press('Enter');
+    await expect(status(page)).toContainText('Lagret. Versjon'); await expect(input).toHaveValue(expected);
+    await expect(input).toHaveAttribute('aria-invalid', 'false');
+    await expect(page.locator('#draft-bus-error')).toHaveCount(0);
+  }
+});
+
 test('all 201 saved drafts remain reachable and the final page reopens', async ({ page }) => {
   await page.setViewportSize({ width: 768, height: 1100 });
   python(`from uuid import UUID\nfrom psycopg.types.json import Jsonb\nwith database() as conn:\n owner=conn.execute('SELECT id FROM accounts WHERE username=%s', (${JSON.stringify(username)},)).fetchone()['id']\n conn.execute('DELETE FROM drafts WHERE owner=%s', (owner,))\n for n in range(1,202):\n  conn.execute('INSERT INTO drafts(id,owner,revision,content) VALUES (%s,%s,1,%s)', (UUID(int=n),owner,Jsonb({'service_date':'2032-12-31' if n==201 else None,'physical_bus':'Later-page' if n==201 else None,'activities':[]})))\n`);
@@ -725,6 +763,27 @@ for (const purged of [false, true]) test(`terminal lost-save lookup releases onl
   expect(fresh.draft.physical_bus).toBeNull();
   const proof = await (await page.request.get('http://127.0.0.1:8001/auth/csrf')).json();
   expect((await page.request.post('http://127.0.0.1:8001/drafts', { headers: { Origin: 'http://127.0.0.1:5173', 'X-CSRF-Token': proof.csrf_token }, data: originalBody })).status()).toBe(purged ? 404 : 410);
+});
+
+test('feedback invalid draft bus disables save and explicit clear preserves cancel and reopen', async ({ page }) => {
+  await login(page); await fill(page);
+  const bus = page.getByLabel('Buss/vogn', { exact: true });
+  const save = page.getByRole('button', { name: 'Lagre utkast', exact: true });
+  await bus.fill('🚍'.repeat(102)); await expect(save).toBeDisabled();
+  await expect(bus).toHaveAccessibleDescription(/Maksimum er 100 tegn/);
+  await bus.fill('🚍'.repeat(100)); await expect(save).toBeEnabled();
+  await bus.fill(' 000x / 090 '); await save.click();
+  await expect(status(page)).toHaveText('Lagret. Versjon 1.');
+  await page.getByRole('button', { name: 'Tøm buss/vogn', exact: true }).click();
+  await expect(bus).toHaveValue('');
+  page.once('dialog', dialog => dialog.accept());
+  await page.getByRole('button', { name: 'Forkast endringer', exact: true }).click();
+  await expect(bus).toHaveValue(' 000x / 090 ');
+  await page.getByRole('button', { name: 'Tøm buss/vogn', exact: true }).click();
+  await save.click(); await expect(status(page)).toHaveText('Lagret. Versjon 2.');
+  await page.getByRole('button', { name: 'Oppdater listen', exact: true }).click();
+  await page.getByRole('button', { name: /Åpne .* · versjon 2/ }).click();
+  await expect(bus).toHaveValue('');
 });
 
 test('negative intervals are explained before sending and generic validation uses friendly time guidance', async ({ page }) => {

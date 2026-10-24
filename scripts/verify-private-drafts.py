@@ -124,6 +124,37 @@ try:
     denied('/workday-bus-operations/' + bus_body['operation_id'], 404, 8000)
     expired_operation = request('/draft-operations', {})['operation_id']
     python(f"with database() as conn:\n conn.execute('UPDATE draft_operations SET expires_at=clock_timestamp() WHERE id=%s', ({expired_operation!r},))\n")
+    # Synthetic pre-upgrade issuance: default v1/false columns preserve pending
+    # request bodies, accepted decisions and exact raw facts across migration.
+    legacy_operation = request('/draft-operations', {})['operation_id']
+    python(f"with database() as conn:\n conn.execute('UPDATE draft_operations SET normalize_physical_bus=false WHERE id=%s', ({legacy_operation!r},))\n")
+    legacy_body = {'operation_id': legacy_operation, 'expected_revision': 0, 'draft': {**planned, 'physical_bus': '\u0085\u2003'}}
+    legacy_draft = request('/drafts', legacy_body)
+    assert legacy_draft['draft']['physical_bus'] == legacy_body['draft']['physical_bus']
+    legacy_pending_operation = request('/draft-operations', {})['operation_id']
+    python(f"with database() as conn:\n conn.execute('UPDATE draft_operations SET normalize_physical_bus=false WHERE id=%s', ({legacy_pending_operation!r},))\n")
+    legacy_pending_body = {'operation_id': legacy_pending_operation, 'expected_revision': 0, 'draft': {**planned, 'physical_bus': '\u0085'}}
+    legacy_review = request('/workday-reviews', {'draft_id': legacy_draft['id'], 'expected_revision': 1})
+    legacy_review_source = request('/drafts', {'operation_id': request('/draft-operations', {})['operation_id'], 'expected_revision': 0, 'draft': {**planned, 'physical_bus': '\u001c'}})
+    legacy_pending_review = request('/workday-reviews', {'draft_id': legacy_review_source['id'], 'expected_revision': 1})
+    python(f"with database() as conn:\n conn.execute('UPDATE workday_operations SET assessment_policy_version=1 WHERE id=ANY(%s::uuid[])', ({[legacy_review['operation_id'], legacy_pending_review['operation_id']]!r},))\n")
+    legacy_review['unknowns'] = json.loads(python(f"from app.draft_domain import DraftContent\nfrom app.workday_domain import assessment\nimport json\nprint(json.dumps(assessment(DraftContent.model_validate({legacy_draft['draft']!r}), policy_version=1)['unknowns']))\n"))
+    legacy_pending_review['unknowns'] = json.loads(python(f"from app.draft_domain import DraftContent\nfrom app.workday_domain import assessment\nimport json\nprint(json.dumps(assessment(DraftContent.model_validate({legacy_review_source['draft']!r}), policy_version=1)['unknowns']))\n"))
+    legacy_confirmation = {'operation_id': legacy_review['operation_id'], 'expected_revision': 1, 'acknowledgements': [item['id'] for item in legacy_review['unknowns']], 'classifications': {key: 'manual' for key in legacy_review['classifications_required']}}
+    legacy_plan = request('/drafts/' + legacy_draft['id'] + '/confirm', legacy_confirmation)
+    # Keep both accepted and not-yet-accepted v2 reviews across the same restart.
+    v2_cases = []
+    for accepted in [True, False]:
+        source = request('/drafts', {'operation_id': request('/draft-operations', {})['operation_id'], 'expected_revision': 0, 'draft': planned})
+        issued = request('/workday-reviews', {'draft_id': source['id'], 'expected_revision': 1})
+        python(f"with database() as conn:\n conn.execute('UPDATE workday_operations SET assessment_policy_version=2 WHERE id=%s', ({issued['operation_id']!r},))\n")
+        unknowns = json.loads(python(f"from app.draft_domain import DraftContent\nfrom app.workday_domain import assessment\nimport json\nprint(json.dumps(assessment(DraftContent.model_validate({source['draft']!r}), policy_version=2)['unknowns']))\n"))
+        decision = {'operation_id': issued['operation_id'], 'expected_revision': 1, 'acknowledgements': [item['id'] for item in unknowns], 'classifications': {key: 'manual' for key in issued['classifications_required']}}
+        result = request('/drafts/' + source['id'] + '/confirm', decision) if accepted else None
+        v2_cases.append((source, decision, result, unknowns))
+    state_program = state_program.replace("'plans':", "'drafts':conn.execute('SELECT * FROM drafts WHERE owner=%s ORDER BY id', (" + repr(session['account_id']) + ",)).fetchall(), 'draft_operations':conn.execute('SELECT * FROM draft_operations WHERE owner=%s AND expires_at > clock_timestamp() ORDER BY id', (" + repr(session['account_id']) + ",)).fetchall(), 'plans':")
+    persisted_confirmation_state = python(state_program)
+    persisted_draft_list = listed_drafts()
     for _ in range(2):
         run(PRIVATE + ['exec', '-T', 'private-api', 'python', '-m', 'app.manage', 'migrate'])
     run(PRIVATE + ['restart', 'private-db', 'private-api'])
@@ -146,6 +177,23 @@ try:
     denied('/workdays/' + deleted_plan['id'], 404)
     denied('/workday-operations/' + deleted_confirmation['operation_id'], 404)
     assert python(state_program) == persisted_confirmation_state
+    for source, decision, result, unknowns in v2_cases:
+        if result is None:
+            assert request('/workday-operations/' + decision['operation_id']) == {'state': 'pending', 'result': None}
+            result = request('/drafts/' + source['id'] + '/confirm', decision)
+            assert result['unknowns'] == unknowns and result['draft'] == source['draft']
+        assert request('/drafts/' + source['id'] + '/confirm', decision) == result
+        assert request('/workday-operations/' + decision['operation_id']) == {'state': 'accepted', 'result': result}
+        assert request('/workdays/' + result['id']) == result
+    assert request('/drafts', legacy_body) == legacy_draft
+    assert request('/drafts/' + legacy_draft['id'] + '/confirm', legacy_confirmation) == legacy_plan
+    assert request('/workday-operations/' + legacy_pending_review['operation_id']) == {'state': 'pending', 'result': None}
+    legacy_pending_result = request('/drafts', legacy_pending_body)
+    assert legacy_pending_result['draft']['physical_bus'] == '\u0085'
+    legacy_pending_confirmation = {'operation_id': legacy_pending_review['operation_id'], 'expected_revision': 1, 'acknowledgements': [item['id'] for item in legacy_pending_review['unknowns']], 'classifications': {key: 'manual' for key in legacy_pending_review['classifications_required']}}
+    legacy_pending_plan = request('/drafts/' + legacy_review_source['id'] + '/confirm', legacy_pending_confirmation)
+    assert legacy_pending_plan['draft']['physical_bus'] == '\u001c'
+    assert set(legacy_pending_plan['acknowledgements']) == set(legacy_pending_confirmation['acknowledgements'])
     denied('/draft-operations/' + expired_operation, 404)
     run(PRIVATE + ['exec', '-T', 'private-api', 'python', '-m', 'app.manage', 'cleanup'])
     assert request('/drafts/' + original['id']) == original

@@ -53,7 +53,7 @@ async function decide(page: Page) {
 }
 async function confirmSaved(context: BrowserContext, draft: any) {
   const reviewed = await post(context, '/workday-reviews', { draft_id: draft.id, expected_revision: draft.revision });
-  return post(context, '/drafts/' + draft.id + '/confirm', { operation_id: reviewed.operation_id, expected_revision: draft.revision, acknowledgements: reviewed.unknowns.map((item: any) => item.id), classifications: Object.fromEntries(reviewed.classifications_required.map((id: string) => [id, 'manual'])) });
+  return post(context, '/drafts/' + draft.id + '/confirm', { operation_id: reviewed.operation_id, expected_revision: draft.revision, acknowledgements: reviewed.unknowns.filter((item: any) => !reviewed.classifications_required.includes(item.id.split(':')[0])).map((item: any) => item.id), classifications: Object.fromEntries(reviewed.classifications_required.map((id: string) => [id, 'manual'])) });
 }
 
 async function openedPlan(page: Page, context: BrowserContext) {
@@ -68,6 +68,26 @@ async function openedPlan(page: Page, context: BrowserContext) {
 const busInput = (page: Page) => page.getByRole('region', { name: 'Fysisk buss', exact: true }).getByLabel('Fysisk buss', { exact: true });
 const busStatus = (page: Page) => page.getByRole('status', { name: 'Bussstatus' });
 const saveBus = (page: Page) => page.getByRole('button', { name: 'Lagre fysisk buss', exact: true });
+
+test('feedback clear current bus is an unsaved proposal with cancel save and reopen', async ({ page, context }) => {
+  const { plan } = await openedPlan(page, context);
+  await busInput(page).fill(' 000x / 090 '); await saveBus(page).click();
+  await expect(busStatus(page)).toHaveText('Fysisk buss er lagret.');
+  const path = API + '/workdays/' + plan.id + '/physical-bus';
+  const before = await (await context.request.get(path)).json();
+  await page.getByRole('button', { name: 'Tøm fysisk buss', exact: true }).click();
+  await expect(busInput(page)).toHaveValue('');
+  expect(await (await context.request.get(path)).json()).toEqual(before);
+  await page.getByRole('button', { name: 'Avbryt bussendring', exact: true }).click();
+  await expect(busInput(page)).toHaveValue(' 000x / 090 ');
+  await page.getByRole('button', { name: 'Tøm fysisk buss', exact: true }).click();
+  await saveBus(page).click(); await expect(busStatus(page)).toHaveText('Fysisk buss er lagret.');
+  const cleared = await (await context.request.get(path)).json();
+  expect(cleared.physical_bus).toBeNull(); expect(cleared.expires_at).toBe(plan.expires_at);
+  await page.getByRole('button', { name: 'Lukk planen', exact: true }).click();
+  await page.getByRole('button', { name: 'Åpne plan 2031-01-02 · versjon 1', exact: true }).click();
+  await expect(busInput(page)).toHaveValue('');
+});
 
 for (const width of [768, 1440]) for (const night of [false, true]) test(`bus keyboard correction clearing reopening ${width} ${night ? 'Night' : 'Day'}`, async ({ page, context }) => {
   await page.setViewportSize({ width, height: 1000 });
@@ -295,11 +315,18 @@ test('Unicode whitespace contract preserves FEFF and meaningful formatting throu
   }
 });
 
-test('oversized and NUL input explain rejection and preserve the previous valid proposal', async ({ page, context }) => {
+test('oversized and NUL input explain rejection and retain invalid input for correction', async ({ page, context }) => {
   await openedPlan(page, context); await expect(busInput(page)).toBeEnabled(); await busInput(page).fill('0012');
   let writes = 0; page.on('request', req => { if (req.url().endsWith('/physical-bus') && req.method() === 'POST') writes++; });
-  await busInput(page).fill('🚍'.repeat(101)); await expect(busStatus(page)).toContainText('Maksimum er 100 tegn'); await expect(busInput(page)).toHaveValue('0012');
-  await busInput(page).fill('A\0B'); await expect(busStatus(page)).toContainText('NUL-tegn'); await expect(busInput(page)).toHaveValue('0012'); expect(writes).toBe(0);
+  await busInput(page).fill('🚍'.repeat(102)); await expect(busStatus(page)).toContainText('Maksimum er 100 tegn'); await expect(busInput(page)).toHaveValue('🚍'.repeat(102));
+  await expect(busInput(page)).toHaveAttribute('aria-invalid', 'true'); await expect(busInput(page)).toHaveAttribute('aria-describedby', 'physical-bus-error');
+  await expect(busInput(page)).toHaveAccessibleDescription(/Maksimum er 100 tegn/);
+  await expect(saveBus(page)).toBeDisabled(); expect(writes).toBe(0);
+  await busInput(page).fill('A\0B'); await expect(busStatus(page)).toContainText('NUL-tegn'); await expect(busInput(page)).toHaveValue('A\0B');
+  await expect(busInput(page)).toHaveAttribute('aria-invalid', 'true'); await expect(busInput(page)).toHaveAccessibleDescription(/NUL-tegn/);
+  await expect(saveBus(page)).toBeDisabled(); expect(writes).toBe(0);
+  await busInput(page).fill('0012');
+  await expect(busInput(page)).toHaveAttribute('aria-invalid', 'false'); await expect(page.locator('#physical-bus-error')).toHaveCount(0);
   await expect(saveBus(page)).toBeEnabled(); await saveBus(page).click(); await expect(busStatus(page)).toHaveText('Fysisk buss er lagret.');
 });
 
@@ -314,6 +341,25 @@ test('returning to a normalized saved value releases bus-only guards without a w
   await busInput(page).fill('different'); await expectUnload(page, true);
   await busInput(page).fill('0012'); await expect(saveBus(page)).toBeDisabled(); await expectUnload(page, false);
   expect(writes).toBe(0); expect((await (await context.request.get(API + '/workdays/' + plan.id + '/physical-bus')).json()).revision).toBe(1);
+});
+
+test('review fixes invalid whitespace against saved-null bus remains cancellable and guarded', async ({ page, context }) => {
+  const { plan } = await openedPlan(page, context);
+  let writes = 0; page.on('request', req => { if (req.url().endsWith('/physical-bus') && req.method() === 'POST') writes++; });
+  const invalid = ' '.repeat(101);
+  await busInput(page).fill(invalid);
+  await expect(busInput(page)).toHaveValue(invalid); await expect(saveBus(page)).toBeDisabled();
+  await expect(page.getByRole('button', { name: 'Avbryt bussendring', exact: true })).toBeEnabled();
+  await expect(page.getByRole('button', { name: 'Lukk planen', exact: true })).toBeDisabled();
+  await expect(page.getByRole('button', { name: 'Nytt utkast', exact: true })).toBeDisabled();
+  await expectUnload(page, true);
+  page.once('dialog', dialog => dialog.dismiss());
+  await page.getByRole('link', { name: 'Åpne fiktiv demo', exact: true }).click();
+  await expect(page).toHaveURL(/\/private$/); await expect(busInput(page)).toHaveValue(invalid);
+  await page.getByRole('button', { name: 'Avbryt bussendring', exact: true }).click();
+  await expect(busInput(page)).toHaveValue(''); await expectUnload(page, false);
+  expect(writes).toBe(0);
+  expect((await (await context.request.get(API + '/workdays/' + plan.id + '/physical-bus')).json()).physical_bus).toBeNull();
 });
 
 test('authoritative receipt capacity rejection preserves editable input and cancellation', async ({ page, context }) => {

@@ -8,6 +8,7 @@ from psycopg.types.json import Jsonb
 
 from . import auth
 from .draft_domain import DraftContent
+from .bus_value import normalize_bus, validate_bus
 from .private_storage import database
 
 
@@ -76,7 +77,7 @@ def issue(request, identifier):
         count = conn.execute('SELECT count(*) AS n FROM draft_operations WHERE owner=%s AND expires_at > clock_timestamp() AND result IS NULL', (owner,)).fetchone()['n']
         if count >= 200:
             raise HTTPException(429, 'For mange uavklarte lagringer.')
-        row = conn.execute("INSERT INTO draft_operations(id,owner,draft_id,expires_at) VALUES (%s,%s,%s,COALESCE(%s,statement_timestamp()+interval '7 days')) RETURNING id,expires_at",
+        row = conn.execute("INSERT INTO draft_operations(id,owner,draft_id,expires_at,normalize_physical_bus) VALUES (%s,%s,%s,COALESCE(%s,statement_timestamp()+interval '7 days'),true) RETURNING id,expires_at",
                            (uuid4(), owner, identifier, draft['expires_at'] if draft else None)).fetchone()
         auth.session(conn, request)
         return {'operation_id': row['id'], 'expires_at': row['expires_at']}
@@ -124,7 +125,7 @@ def save(request, identifier, body):
             # Compare normalized accepted facts without rewriting stored work.
             accepted_payload = {'operation_id': str(body.operation_id), 'expected_revision': result['revision'] - 1, 'draft': result['draft']}
             accepted_target = op['draft_id'] if result['revision'] > 1 else None
-            if op['payload_hash'] != digest and fingerprint(accepted_target, accepted_payload) != digest:
+            if op['payload_hash'] != digest and (op['normalize_physical_bus'] or fingerprint(accepted_target, accepted_payload) != digest):
                 raise HTTPException(409, 'Lagringsforsøket har annet innhold. Behold dine lokale endringer.')
             return result
         if op['draft_id'] != identifier:
@@ -132,6 +133,14 @@ def save(request, identifier, body):
         if (existing['revision'] if existing else 0) != body.expected_revision:
             raise HTTPException(409, 'Utkastet er endret. Sammenlign med lagret versjon før du fortsetter.')
         content = body.draft.model_dump(mode='json')
+        if existing and normalize_content(existing['content']).get('import_metadata') != content.get('import_metadata'):
+            raise HTTPException(422, 'Opprinnelige kildefakta kan ikke endres. En ny import må lagres som et separat utkast.')
+        try:
+            validate_bus(content['physical_bus'])
+        except ValueError as error:
+            raise HTTPException(422, str(error)) from None
+        if op['normalize_physical_bus']:
+            content['physical_bus'] = normalize_bus(content['physical_bus'])
         if existing:
             row = conn.execute('UPDATE drafts SET content=%s,revision=revision+1 WHERE id=%s AND expires_at > clock_timestamp() '
                                'AND EXISTS (SELECT 1 FROM draft_operations WHERE id=%s AND expires_at > clock_timestamp()) RETURNING *', (Jsonb(content), identifier, body.operation_id)).fetchone()

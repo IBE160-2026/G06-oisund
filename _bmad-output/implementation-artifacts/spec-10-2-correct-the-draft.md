@@ -100,3 +100,7 @@ Dispatch: coordinated presentation and integration evidence. No unresolved inten
 ## Verification
 
 Run `scripts/verify-private-drafts.py` with `COMPOSE_PROJECT_NAME=ibe160-private-tests`: disposable API/PostgreSQL, restart, build and browser checks. Run `npm.cmd run build` and `git diff --check`. Inspect new renders, contrast/focus and absence of browser storage. Keep runtime checks sequential and restore operational API availability without changing ordinary account/data. Record actual failures and coverage limits; no application tests during planning.
+
+## E10-A1–A3 maintenance follow-up — 2026-10-24
+
+The approved draft-contracts bundle preserves the normalized original import baseline (including absence for manual drafts), shares fresh-write physical-bus semantics, and pins review policy to issued operations and confirmed plans. Missing deadhead/CAR trip numbers remain visible as unknown without a separate acknowledgement; passenger direction joins the draft unknown display. Historical acceptance above remains unchanged. See [the maintenance evidence](../../docs/evidence/epic-10-draft-contracts.md). Implementation checks and owner acceptance for this follow-up are tracked separately; E10-A1–A3 remain in-progress.

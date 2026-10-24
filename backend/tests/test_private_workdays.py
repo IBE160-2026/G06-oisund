@@ -44,13 +44,209 @@ def prepare(client, value=None):
     assert response.status_code == 200
     reviewed = response.json()
     body = {'operation_id': reviewed['operation_id'], 'expected_revision': draft['revision'],
-            'acknowledgements': [item['id'] for item in reviewed['unknowns']],
+            'acknowledgements': [item['id'] for item in reviewed['unknowns'] if item['id'].split(':')[0] not in reviewed['classifications_required']],
             'classifications': {key: 'manual' for key in reviewed['classifications_required']}}
     return draft, reviewed, body
 
 
 def confirm(client, draft, body):
     return client.post('/drafts/' + draft['id'] + '/confirm', headers=headers(client), json=body)
+
+
+@pytest.mark.parametrize('policy', [1, 2])
+@pytest.mark.parametrize('bus', ['\ufeff', '\u001c', '\u0085'])
+def test_review_policy_pins_pending_and_accepted_decisions(client, users, policy, bus):
+    from psycopg.types.json import Jsonb
+    assert login(client, users).status_code == 200
+    draft = save(client, facts())[0].json()
+    # Historical content must survive reads; neither the model nor migration normalizes it.
+    value = {**draft['draft'], 'physical_bus': bus}
+    with database() as conn:
+        conn.execute('UPDATE drafts SET content=%s WHERE id=%s', (Jsonb(value), draft['id']))
+    draft = client.get('/drafts/' + draft['id']).json()
+    reviewed = review(client, draft).json()
+    with database() as conn:
+        conn.execute('UPDATE workday_operations SET assessment_policy_version=%s WHERE id=%s', (policy, reviewed['operation_id']))
+        pending_before = conn.execute('SELECT * FROM workday_operations WHERE id=%s', (reviewed['operation_id'],)).fetchone()
+    # Independent field oracle: Python strip treats U+001C as blank and FEFF
+    # as meaningful; the explicit Unicode White_Space policy preserves U+001C.
+    keys = {'day:physical_bus'} if bus == '\u0085' or bus == '\u001c' and policy == 1 else set()
+    activity = value['activities'][0]
+    prefix = activity['id'] + ':'
+    keys |= {prefix + field for field in ['from_place', 'trip', 'direction']}
+    keys.add(prefix + 'uncertainty')
+    body = {'operation_id': reviewed['operation_id'], 'expected_revision': 1,
+            'acknowledgements': sorted(keys), 'classifications': {}}
+    migrate(); migrate()
+    with database() as conn:
+        assert conn.execute('SELECT * FROM workday_operations WHERE id=%s', (reviewed['operation_id'],)).fetchone() == pending_before
+    response = confirm(client, draft, body)
+    assert response.status_code == 200
+    plan = response.json()
+    assert {item['id'] for item in plan['unknowns']} == keys and plan['draft']['physical_bus'] == bus
+    with database() as conn:
+        assert conn.execute('SELECT assessment_policy_version FROM workdays WHERE id=%s', (plan['id'],)).fetchone()['assessment_policy_version'] == policy
+        conn.execute('DELETE FROM drafts WHERE id=%s', (draft['id'],))
+    migrate(); migrate()
+    assert confirm(client, draft, body).json() == plan
+    assert client.get('/workdays/' + plan['id']).json() == plan
+
+
+def test_populated_pre007_tables_gain_only_pinned_defaults_without_rewriting_rows(client, users):
+    from pathlib import Path
+    assert login(client, users).status_code == 200
+    draft, _, body = prepare(client)
+    assert confirm(client, draft, body).status_code == 200
+    prepare(client)  # Include pending draft and review operations alongside receipts.
+    assert client.post('/draft-operations', headers=headers(client), json={}).status_code == 200
+    with database() as conn:
+        auth.require_synthetic_accounts(conn)
+        before = {}
+        additions = {'draft_operations': ('normalize_physical_bus', False),
+                     'workday_operations': ('assessment_policy_version', 1),
+                     'workdays': ('assessment_policy_version', 1)}
+        for table, (column, _) in additions.items():
+            names = [row['column_name'] for row in conn.execute("SELECT column_name FROM information_schema.columns WHERE table_schema='public' AND table_name=%s AND column_name<>%s ORDER BY ordinal_position", (table, column)).fetchall()]
+            fields = ','.join(names)
+            # Temporary pre-007 tables shadow only this connection; public data
+            # and the live API schema never change.
+            conn.execute(f'CREATE TEMP TABLE {table} AS SELECT {fields} FROM public.{table} WHERE owner=%s', (users[1][0],))
+            before[table] = conn.execute(f'SELECT * FROM {table} ORDER BY id').fetchall()
+            assert before[table]
+        sql = (Path(__file__).resolve().parent.parent / 'migrations/private/007_draft_contracts.sql').read_text(encoding='utf-8')
+        conn.execute(sql); conn.execute(sql)
+        for table, (column, default) in additions.items():
+            after = conn.execute(f'SELECT * FROM {table} ORDER BY id').fetchall()
+            assert all(row[column] == default for row in after)
+            assert [{key: value for key, value in row.items() if key != column} for row in after] == before[table]
+
+
+def test_populated_pre008_policy_constraints_widen_without_changing_any_row(client, users):
+    from pathlib import Path
+    assert login(client, users).status_code == 200
+    draft, _, body = prepare(client)
+    assert confirm(client, draft, body).status_code == 200
+    prepare(client)
+    with database() as conn:
+        auth.require_synthetic_accounts(conn)
+        before = {}
+        for table, policy in [('workdays', 1), ('workday_operations', 2)]:
+            conn.execute(f'CREATE TEMP TABLE {table} AS SELECT * FROM public.{table} WHERE owner=%s', (users[1][0],))
+            conn.execute(f'UPDATE {table} SET assessment_policy_version=%s', (policy,))
+            conn.execute(f'ALTER TABLE {table} ADD CONSTRAINT {table}_assessment_policy_version_check CHECK (assessment_policy_version IN (1,2))')
+            before[table] = conn.execute(f'SELECT * FROM {table} ORDER BY id').fetchall()
+            assert before[table]
+        sql = (Path(__file__).resolve().parent.parent / 'migrations/private/008_review_feedback.sql').read_text(encoding='utf-8')
+        conn.execute(sql); conn.execute(sql)
+        for table in before:
+            assert conn.execute(f'SELECT * FROM {table} ORDER BY id').fetchall() == before[table]
+            conn.execute(f'UPDATE {table} SET assessment_policy_version=3')
+
+
+@pytest.mark.parametrize('kind', ['trip', 'deadhead', 'deadhead_car', 'CAR', 'Tomkjøring med CAR', 'manual', 'Sign-on', 'Sign-off', 'Coffee', 'MealBreak', 'Split break', 'Paid meal before', 'Paid meal after', 'Fadder', 'Instruktør', 'Travel to', 'Travel from', None])
+def test_new_review_explicit_unknown_field_matrix(client, users, kind):
+    assert login(client, users).status_code == 200
+    value = facts()
+    activity = value['activities'][0]
+    activity.update(type=kind, trip=None, line=None, direction=None, from_place=None, to_place=None,
+                    raw_code=None, source_start=None, source_end=None, provenance=None, uncertainty='Check source')
+    draft, reviewed, body = prepare(client, value)
+    keys = {item['id'] for item in reviewed['unknowns']}
+    prefix = activity['id'] + ':'
+    assert {prefix + field for field in ['from_place', 'to_place', 'uncertainty']} <= keys if kind in ['trip', None] else not keys
+    assert {field for field in ['trip', 'line', 'direction'] if prefix + field in keys} == ({'trip', 'line', 'direction'} if kind in ['trip', None] else set())
+    assert not any(prefix + field in keys for field in ['raw_code', 'source_start', 'source_end', 'provenance'])
+    with database() as conn:
+        pending = conn.execute('SELECT * FROM workday_operations WHERE id=%s', (body['operation_id'],)).fetchone()
+        source = conn.execute('SELECT * FROM drafts WHERE id=%s', (draft['id'],)).fetchone()
+    for omitted in body['acknowledgements']:
+        incomplete = {**body, 'acknowledgements': [key for key in body['acknowledgements'] if key != omitted]}
+        assert confirm(client, draft, incomplete).status_code == 422
+        with database() as conn:
+            assert conn.execute('SELECT * FROM workday_operations WHERE id=%s', (body['operation_id'],)).fetchone() == pending
+            assert conn.execute('SELECT * FROM drafts WHERE id=%s', (draft['id'],)).fetchone() == source
+            assert not conn.execute('SELECT id FROM workdays WHERE source_draft_id=%s', (draft['id'],)).fetchone()
+    assert confirm(client, draft, body).status_code == 200
+
+
+@pytest.mark.parametrize('classification', ['trip', 'manual', 'deadhead', 'Coffee'])
+def test_v3_classification_controls_exact_effective_trip_set(client, users, classification):
+    assert login(client, users).status_code == 200
+    value = facts()
+    activity = value['activities'][0]
+    activity.update(type='Unmapped', trip=None, line=None, direction=None, from_place=None, to_place=None, uncertainty='Concrete note')
+    draft, reviewed, body = prepare(client, value)
+    body['classifications'] = {activity['id']: classification}
+    expected = [activity['id'] + ':' + field for field in ['from_place', 'to_place', 'trip', 'line', 'direction', 'uncertainty']] if classification == 'trip' else []
+    body['acknowledgements'] = expected
+    with database() as conn:
+        before = conn.execute('SELECT * FROM workday_operations WHERE id=%s', (body['operation_id'],)).fetchone()
+        assert before['assessment_policy_version'] == 3
+    for invalid in [[key for key in expected if key != omitted] for omitted in expected] + [expected + ['day:physical_bus'], expected + [activity['id'] + ':raw_code']]:
+        assert confirm(client, draft, {**body, 'acknowledgements': invalid}).status_code == 422
+        with database() as conn:
+            assert conn.execute('SELECT * FROM workday_operations WHERE id=%s', (body['operation_id'],)).fetchone() == before
+            assert not conn.execute('SELECT id FROM workdays WHERE source_draft_id=%s', (draft['id'],)).fetchone()
+    response = confirm(client, draft, body)
+    assert response.status_code == 200
+    plan = response.json()
+    assert plan['draft'] == draft['draft']
+    assert {item['id'] for item in plan['unknowns']} == set(expected)
+    assert client.get('/workday-operations/' + body['operation_id']).json()['result'] == plan
+
+
+@pytest.mark.parametrize('suffix', ['', ' Concrete manual note.'])
+def test_v3_only_exact_generated_marker_fragments_are_neutral(client, users, suffix):
+    from app.private_import import interpret
+    from app.pdf_import import parse_document
+    from test_pdf_import import synthetic_text_pdf
+    from app.import_issues import annotation_rows
+    assert login(client, users).status_code == 200
+    value = interpret(parse_document(synthetic_text_pdf())).model_dump(mode='json')
+    metadata = value['import_metadata']
+    # Retained provenance independently identifies the row receiving the old text.
+    row_number, markers = next(iter(annotation_rows(metadata).items()))
+    source = next(row for row in metadata['activities'] if row['source_order'] == row_number)
+    target = next(row for row in value['activities'] if row['id'] == source['activity_id'])
+    for index, activity in enumerate(value['activities']):
+        activity.update(type='manual', start=f'2031-01-02T10:{index:02}+01:00', end=f'2031-01-02T10:{index:02}+01:00')
+    target.update(type='trip', uncertainty=' '.join(f'Kildemerket {marker["value"]} har ukjent betydning (side {marker["provenance"]["page"]}).' for marker in markers) + suffix)
+    draft, reviewed, body = prepare(client, value)
+    notes = [item for item in reviewed['unknowns'] if item['id'] == target['id'] + ':uncertainty']
+    assert len(notes) == bool(suffix)
+    if suffix:
+        assert notes[0]['label'].endswith('Concrete manual note.')
+        assert 'Kildemerket' not in notes[0]['label']
+    assert not any(item['id'].startswith('source:') for item in reviewed['unknowns'])
+    assert confirm(client, draft, body).json()['draft'] == draft['draft']
+    assert client.get('/drafts/' + draft['id']).json() == draft
+
+
+@pytest.mark.parametrize('remainder', ['', 'Concrete manual note.', 'Kildemerket other har ukjent betydning (side 1).'])
+def test_v3_legacy_null_marker_positions_do_not_invent_associations(client, users, remainder):
+    from app.private_import import interpret
+    from app.pdf_import import parse_document
+    from app.draft_domain import DraftContent
+    from app.import_issues import annotation_rows, marker_fragments
+    from test_pdf_import import synthetic_text_pdf
+    assert login(client, users).status_code == 200
+    value = interpret(parse_document(synthetic_text_pdf())).model_dump(mode='json')
+    for activity in value['activities']:
+        activity.update(type='trip', start='2031-01-02T10:00+01:00', end='2031-01-02T11:00+01:00', uncertainty='Kildemerket t har ukjent betydning (side 1). ' + remainder)
+    for source in value['import_metadata']['activities']:
+        for points in source['provenance'].values():
+            if isinstance(points, list):
+                for point in points:
+                    point['line'] = None
+    value['import_metadata']['annotations'] = [{'value': 't', 'meaning': None, 'provenance': {'page': 1, 'column': 1, 'line': None}}]
+    validated = DraftContent.model_validate(value)
+    assert annotation_rows(validated.import_metadata.model_dump(mode='json')) == {}
+    assert marker_fragments(validated) == ['Kildemerket t har ukjent betydning (side 1).']
+    draft, reviewed, body = prepare(client, validated.model_dump(mode='json'))
+    notes = [item for item in reviewed['unknowns'] if item['id'].endswith(':uncertainty')]
+    assert len(notes) == (len(value['activities']) if remainder else 0)
+    assert all(item['label'].split(': ', 1)[1] == remainder for item in notes)
+    assert confirm(client, draft, body).json()['draft'] == draft['draft']
 
 
 def test_plan_deletion_concurrent_receipt_preserves_source_other_records_and_denies_resurrection(client, users):
@@ -202,7 +398,7 @@ def test_exact_snapshot_replay_decisions_and_independent_source_retention(client
     assert datetime.fromisoformat(plan['expires_at']) - datetime.fromisoformat(plan['final_end']) == timedelta(days=7)
     assert confirm(client, draft, body).json() == plan
     assert confirm(client, draft, {**body, 'classifications': {value['activities'][0]['id']: 'trip'}}).status_code == 409
-    assert confirm(client, draft, {**body, 'acknowledgements': []}).status_code == 409
+    assert confirm(client, draft, {**body, 'acknowledgements': ['extra:decision']}).status_code == 409
     with database() as conn:
         conn.execute('DELETE FROM drafts WHERE id=%s', (draft['id'],))
     cleanup(); migrate(); migrate()
@@ -448,10 +644,12 @@ def test_largest_unknown_decision_set_fits_bounded_confirmation_contract(client,
     metadata['annotations'] = [{'value': 'synthetic-marker', 'meaning': None, 'provenance': {'page': 1}}] * 400
     value['import_metadata'] = metadata
     draft, reviewed, body = prepare(client, value)
-    assert len(reviewed['unknowns']) == 2802
+    assert len(reviewed['unknowns']) == 1200
+    body['classifications'] = {key: 'trip' for key in reviewed['classifications_required']}
+    body['acknowledgements'] = [item['id'] for item in reviewed['unknowns']]
     response = confirm(client, draft, body)
     assert response.status_code == 200
-    assert len(response.json()['acknowledgements']) == 2802
+    assert len(response.json()['acknowledgements']) == 1200
 
 
 @pytest.mark.parametrize('kind', ['Fadder', 'Instruktør', 'Travel to', 'Travel from', 'Paid meal before', 'Paid meal after', 'CAR', 'Tomkjøring med CAR'])
@@ -468,15 +666,15 @@ def test_advertised_classifications_accept_previously_omitted_choices(client, us
 
 
 @pytest.mark.parametrize('duty', [None, '   '])
-def test_unknown_activity_duty_anchor_requires_acknowledgement_and_survives(client, users, duty):
+def test_unknown_activity_duty_anchor_is_source_fact_without_decision_and_survives(client, users, duty):
     assert login(client, users).status_code == 200
     value = facts()
     anchor = value['activities'][0]['id']
     value['vehicle_duty_changes'] = [{'from_activity_id': anchor, 'vehicle_duty': duty}]
     draft, reviewed, body = prepare(client, value)
     key = 'duty:' + anchor + ':vehicle_duty'
-    assert any(item['id'] == key and 'Aktivitet 1' in item['label'] for item in reviewed['unknowns'])
-    assert confirm(client, draft, {**body, 'acknowledgements': [item for item in body['acknowledgements'] if item != key]}).status_code == 422
+    assert not any(item['id'] == key for item in reviewed['unknowns'])
+    assert confirm(client, draft, {**body, 'acknowledgements': body['acknowledgements'] + [key]}).status_code == 422
     response = confirm(client, draft, body)
     assert response.status_code == 200
     assert response.json()['draft'] == draft['draft']

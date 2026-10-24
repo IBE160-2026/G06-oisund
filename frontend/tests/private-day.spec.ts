@@ -230,6 +230,44 @@ test.describe('synthetic day browser', () => {
     await expect(day.getByText(/3 sammenhengende pauserader/)).toHaveText('3 sammenhengende pauserader. Vognløp: 02.01.2031, 08:00: 960006 (sanntidsverdi 006) → 02.01.2031, 08:10: 960090 (sanntidsverdi 090) → 02.01.2031, 08:20: 960006 (sanntidsverdi 006). Hver del vises i detaljene.');
     expect(await day.locator('details').first().evaluate(element => (element as HTMLDetailsElement).open)).toBe(false);
   });
+  for (const note of ['', 'Concrete manual note.']) test(`feedback generated markers stay neutral with note ${JSON.stringify(note)}`, async ({ page, context }) => {
+    const { saved } = await prepare(page, context, true, input => {
+      const source = input.import_metadata!.activities[0];
+      const target = input.activities.find(activity => activity.type === 'trip')!;
+      source.activity_id = target.id;
+      const point = source.provenance.label[0];
+      input.import_metadata!.annotations = [{ value: 't', meaning: null, provenance: point }];
+      target.raw_code = 'Trip';
+      target.uncertainty = `Kildemerket t har ukjent betydning (side ${point.page}). ${note}`;
+    });
+    const target = saved.draft.activities.find((activity: any) => activity.type === 'trip');
+    const member = page.getByRole('region', { name: 'Dagsoversikt', exact: true }).locator(`[data-activity-id="${target.id}"]`);
+    await expect(member).toContainText('Kildemerke: t');
+    await expect(member).toContainText('Kode: tur');
+    await expect(member.locator('.day-uncertainty')).toHaveCount(note ? 1 : 0);
+    if (note) await expect(member.locator('.day-uncertainty')).toHaveText('Usikkerhet: ' + note);
+    await member.getByText('Kilde og rettelser', { exact: false }).click();
+    await expect(member).not.toContainText('Trip');
+    const persisted = await (await context.request.get(API + '/drafts/' + saved.id)).json();
+    expect(persisted.draft.activities.find((activity: any) => activity.id === target.id).uncertainty).toBe(target.uncertainty);
+  });
+
+  for (const remainder of ['', 'Concrete manual note.', 'Kildemerket other har ukjent betydning (side 1).']) test(`feedback unknown marker position stays neutral and unassociated with ${JSON.stringify(remainder)}`, async ({ page, context }) => {
+    const { saved } = await prepare(page, context, true, input => {
+      input.import_metadata!.annotations = [{ value: 't', meaning: null, provenance: { page: 1, column: null, line: null } }];
+      input.activities.find(activity => activity.type === 'trip')!.uncertainty = 'Kildemerket t har ukjent betydning (side 1). ' + remainder;
+    });
+    const day = page.getByRole('region', { name: 'Dagsoversikt', exact: true });
+    await expect(day.getByText('Kildemerke: t (side 1).', { exact: true })).toBeVisible();
+    await expect(day.locator('[data-activity-id]').filter({ hasText: 'Kildemerke: t' })).toHaveCount(0);
+    const target = saved.draft.activities.find((activity: any) => activity.type === 'trip');
+    const member = day.locator(`[data-activity-id="${target.id}"]`);
+    await expect(member.locator('.day-uncertainty')).toHaveCount(remainder ? 1 : 0);
+    if (remainder) await expect(member.locator('.day-uncertainty')).toHaveText('Usikkerhet: ' + remainder);
+    const persisted = await (await context.request.get(API + '/drafts/' + saved.id)).json();
+    expect(persisted.draft.activities.find((activity: any) => activity.id === target.id).uncertainty).toBe(target.uncertainty);
+  });
+
   test('original source issues remain visible on matched rows and globally without overriding corrections', async ({ page, context }) => {
     const { saved } = await prepare(page, context, true, input => {
       const metadata = input.import_metadata!;
@@ -241,12 +279,26 @@ test.describe('synthetic day browser', () => {
     const day = page.getByRole('region', { name: 'Dagsoversikt', exact: true });
     const pause = day.locator(`[data-day-row="${saved.draft.activities[1].id}"]`);
     await expect(pause).toContainText('Opprinnelig kildeusikkerhet (før rettelser og bekreftelse): Endested mangler');
-    await expect(pause).toContainText('Kildemerket synthetic-marker har ukjent betydning');
+    await expect(pause).toContainText('Kildemerke: synthetic-marker');
     await expect(pause).toContainText('Bekreftede fakta i oversikten gjelder.');
     await expect(pause.getByRole('heading', { name: 'Matpause', exact: true })).toBeVisible();
     await expect(day.getByText(/Opprinnelig kildeusikkerhet.*En kilderad kunne ikke tolkes/)).toBeVisible();
     await expect(day).toContainText('Rettet fiktivt sluttsted');
+    await expect(day.locator('.day-source-information').filter({ hasText: 'Endested mangler' })).toBeVisible();
+    await expect(day.locator('.day-uncertainty').filter({ hasText: 'Opprinnelig kildeusikkerhet' })).toHaveCount(0);
+    await expect(pause.locator('.day-uncertainty').filter({ hasText: 'Syntetisk usikkerhet beholdes' }).first()).toBeVisible();
     expect(await pause.locator('details').first().evaluate(element => (element as HTMLDetailsElement).open)).toBe(false);
+  });
+
+  for (const kind of ['deadhead', 'deadhead_car', 'Tomkjøring med CAR', 'CAR']) test(`review fixes movement ${kind} missing trip remains a neutral visible fact`, async ({ page, context }) => {
+    const { saved } = await prepare(page, context, false, input => {
+      input.activities = [activity(kind, '08:00', '08:10', { trip: null, from_place: 'Origin', to_place: 'Destination' })];
+      input.vehicle_duty_changes = [];
+    });
+    const member = page.getByRole('region', { name: 'Dagsoversikt', exact: true }).locator(`[data-activity-id="${saved.draft.activities[0].id}"]`);
+    await expect(member.getByText('Tur: Ukjent', { exact: true })).toBeVisible();
+    await expect(member.locator('.day-uncertainty')).toHaveCount(0);
+    await expect(member.getByRole('checkbox')).toHaveCount(0);
   });
   test('invalid historical source start falls back to raw source clock after real save confirm and reopen', async ({ page, context }) => {
     const { saved, plan } = await prepare(page, context, false, input => { input.import_metadata!.header.start_instant = 'not-an-instant'; });

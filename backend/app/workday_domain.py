@@ -6,6 +6,8 @@ from uuid import UUID
 from pydantic import Field, model_validator
 
 from .draft_domain import DraftContent, StrictModel
+from .bus_value import normalize_bus
+from .import_issues import current_uncertainty, marker_fragments
 
 SupportedType = Literal['trip', 'deadhead', 'deadhead_car', 'Tomkjøring med CAR', 'CAR',
                    'Sign-on', 'Sign-off', 'MealBreak', 'Coffee', 'Split break',
@@ -42,9 +44,20 @@ class ConfirmRequest(StrictModel):
         return self
 
 
-def assessment(content, classifications=None):
-    """Stable keys bind each acknowledgement to the operation's saved revision."""
+def assessment(content, classifications=None, policy_version=1):
+    """Stable keys bind decisions to an issued revision and internal policy.
+
+    Required: date, activities, explicit ordered times and supported classification.
+    Decisions: places, passenger identifiers, day duty/bus, duty anchors, source
+    issues/annotations and uncertainty. Unknown original types retain passenger
+    decisions regardless of classification. Movement identifiers, source clocks,
+    raw codes and provenance add no decisions. V1 keeps historical strip behavior;
+    V2 assesses bus absence using the fresh-write Unicode White_Space contract.
+    V3 only asks for effective passenger-trip facts and substantive current notes;
+    original annotations/issues stay neutral source information.
+    """
     classifications = classifications or {}
+    fragments = marker_fragments(content) if policy_version >= 3 else None
     blockers, unknowns, required = [], [], []
     if not content.service_date:
         blockers.append('Tjenestedato mangler. Rett og lagre utkastet.')
@@ -53,7 +66,9 @@ def assessment(content, classifications=None):
     def unknown(key, label):
         unknowns.append({'id': key, 'label': label})
     for field, label in [('vehicle_duty', 'Vognløp'), ('physical_bus', 'Buss/vogn')]:
-        if not (getattr(content, field) or '').strip():
+        value = getattr(content, field)
+        missing = normalize_bus(value) is None if field == 'physical_bus' and policy_version >= 2 else not (value or '').strip()
+        if missing and policy_version < 3:
             unknown('day:' + field, label + ' er ukjent.')
     previous = None
     ends = []
@@ -61,7 +76,7 @@ def assessment(content, classifications=None):
     for index, activity in enumerate(content.activities):
         key, label = str(activity.id), f'Aktivitet {index + 1}'
         change = duty_changes.get(activity.id)
-        if change and not (change.vehicle_duty or '').strip():
+        if policy_version < 3 and change and not (change.vehicle_duty or '').strip():
             unknown('duty:' + key + ':vehicle_duty', label + ': vognløpet fra denne aktiviteten er ukjent.')
         kind = classifications.get(key, activity.type)
         if activity.type not in SUPPORTED_TYPES:
@@ -75,6 +90,17 @@ def assessment(content, classifications=None):
             previous = start
         if activity.end:
             ends.append(datetime.fromisoformat(activity.end))
+        # Fresh reviews offer trip candidates for unresolved types. Confirmation
+        # supplies classifications and independently narrows the exact set.
+        if policy_version >= 3:
+            if kind == 'trip' or activity.type not in SUPPORTED_TYPES and key not in classifications:
+                for field, title in [('from_place', 'fra sted'), ('to_place', 'til sted'), ('trip', 'turnummer'), ('line', 'linje'), ('direction', 'retning')]:
+                    if not (getattr(activity, field) or '').strip():
+                        unknown(key + ':' + field, label + ': ' + title + ' er ukjent.')
+                note = current_uncertainty(content, activity, fragments)
+                if note:
+                    unknown(key + ':uncertainty', label + ': ' + note)
+            continue
         for field, title in [('from_place', 'fra sted'), ('to_place', 'til sted'), ('uncertainty', 'usikkerhetsnotat')]:
             value = getattr(activity, field)
             if field == 'uncertainty':
@@ -88,7 +114,7 @@ def assessment(content, classifications=None):
                 if not (getattr(activity, field) or '').strip():
                     unknown(key + ':' + field, label + ': ' + title + ' er ukjent.')
     metadata = content.import_metadata
-    if metadata:
+    if metadata and policy_version < 3:
         for index, item in enumerate(metadata.unresolved):
             unknown(f'source:unresolved:{index}', f'Kildeusikkerhet: {item.code} (aktivitet {item.activity or "ukjent"}, felt {item.field or "ukjent"}).')
         for index, item in enumerate(metadata.annotations):

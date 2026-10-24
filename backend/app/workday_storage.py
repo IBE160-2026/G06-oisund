@@ -17,7 +17,7 @@ def presentation(row):
             'final_end': row['final_end'], 'expires_at': row['expires_at'], 'state': 'confirmed',
             'draft': draft_storage.normalize_content(row['content']),
             'acknowledgements': row['acknowledgements'], 'classifications': row['classifications'],
-            'unknowns': assessment(content, row['classifications'])['unknowns']}
+            'unknowns': assessment(content, row['classifications'], row['assessment_policy_version'])['unknowns']}
 
 
 def owned(conn, owner, identifier, request):
@@ -42,10 +42,10 @@ def review(request, body):
         if count >= 200:
             raise HTTPException(429, 'For mange uavklarte bekreftelser.')
         content = DraftContent.model_validate(source['content'])
-        facts = assessment(content)
+        facts = assessment(content, policy_version=3)
         if facts['expires_at'] and not conn.execute('SELECT %s > clock_timestamp() AS live', (facts['expires_at'],)).fetchone()['live']:
             facts['blockers'].append('Planens slutt + sju dager er allerede utløpt. Rett og lagre tidspunktet.')
-        row = conn.execute('INSERT INTO workday_operations(id,owner,draft_id,expected_revision,expires_at) SELECT %s,%s,id,revision,expires_at FROM drafts WHERE id=%s AND expires_at > clock_timestamp() RETURNING id,expires_at',
+        row = conn.execute('INSERT INTO workday_operations(id,owner,draft_id,expected_revision,expires_at,assessment_policy_version) SELECT %s,%s,id,revision,expires_at,3 FROM drafts WHERE id=%s AND expires_at > clock_timestamp() RETURNING id,expires_at',
                            (uuid4(), owner, body.draft_id)).fetchone()
         if not row:
             raise HTTPException(410, 'Utkastet er utløpt.')
@@ -93,20 +93,20 @@ def confirm(request, identifier, body):
             raise HTTPException(409, 'Utkastet er endret. Gjennomgå den lagrede versjonen på nytt.')
         content = DraftContent.model_validate(source['content'])
         decisions = {str(key): value for key, value in body.classifications.items()}
-        facts = assessment(content, decisions)
+        facts = assessment(content, decisions, op['assessment_policy_version'])
         if facts['blockers'] or set(decisions) != set(facts['classifications_required']):
             raise HTTPException(422, 'Rett blokkeringene og klassifiser alle ukjente aktivitetstyper.')
         if set(body.acknowledgements) != {item['id'] for item in facts['unknowns']}:
-            raise HTTPException(422, 'Alle ukjente fakta må gjennomgås og godtas for denne versjonen.')
+            raise HTTPException(422, 'Alle oppførte ukjente opplysninger må gjennomgås og godtas for denne versjonen.')
         if source['confirmed'] or conn.execute('SELECT id FROM workdays WHERE source_draft_id=%s', (identifier,)).fetchone():
             raise HTTPException(409, 'Utkastet har allerede en bekreftet plan. Åpne planen.')
         auth.session(conn, request)
-        row = conn.execute('INSERT INTO workdays(id,owner,source_draft_id,source_revision,final_end,expires_at,content,acknowledgements,classifications) '
-                           'SELECT %s,%s,id,revision,%s,%s,%s,%s,%s FROM drafts WHERE id=%s AND owner=%s AND revision=%s '
+        row = conn.execute('INSERT INTO workdays(id,owner,source_draft_id,source_revision,final_end,expires_at,content,acknowledgements,classifications,assessment_policy_version) '
+                           'SELECT %s,%s,id,revision,%s,%s,%s,%s,%s,%s FROM drafts WHERE id=%s AND owner=%s AND revision=%s '
                            'AND expires_at > clock_timestamp() AND %s > clock_timestamp() '
                            'AND EXISTS (SELECT 1 FROM workday_operations WHERE id=%s AND expires_at > clock_timestamp()) RETURNING *',
                            (uuid4(), owner, facts['final_end'], facts['expires_at'], Jsonb(content.model_dump(mode='json')),
-                            Jsonb(sorted(body.acknowledgements)), Jsonb(decisions), identifier, owner, body.expected_revision,
+                            Jsonb(sorted(body.acknowledgements)), Jsonb(decisions), op['assessment_policy_version'], identifier, owner, body.expected_revision,
                             facts['expires_at'], body.operation_id)).fetchone()
         if not row:
             raise HTTPException(410, 'Utkastet, forsøket eller planens frist er utløpt.')

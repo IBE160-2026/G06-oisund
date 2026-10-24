@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { normalizeBus as normalized, busError } from './busValue';
 
 type Bus = { workday_id: string; physical_bus: string | null; revision: number; expires_at: string };
 type Operation = { operation_id: string; expected_revision: number; physical_bus: string | null };
@@ -13,8 +14,6 @@ export function PrivateBus({ id, expiresAt, request, mutation, suspended, expire
   const input = useRef<HTMLInputElement>(null);
   const path = '/workdays/' + id + '/physical-bus';
   useEffect(() => { if (focusInput && saved && !busy && !pending && !comparison && !suspended) { input.current?.focus(); setFocusInput(false); } }, [focusInput, saved, busy, pending, comparison, suspended]);
-  // Unicode White_Space, shared explicitly with workday_bus_domain.py. FEFF is meaningful.
-  const normalized = (v: string) => /^[\u0009-\u000d\u0020\u0085\u00a0\u1680\u2000-\u200a\u2028\u2029\u202f\u205f\u3000]*$/u.test(v) ? null : v;
   function valid(v: any): v is Bus {
     return v && Object.keys(v).sort().join() === 'expires_at,physical_bus,revision,workday_id' && v.workday_id === id
       && Number.isSafeInteger(v.revision) && v.revision >= 0 && (v.physical_bus === null || typeof v.physical_bus === 'string' && Array.from(v.physical_bus).length <= 100 && !v.physical_bus.includes('\0') && normalized(v.physical_bus) !== null)
@@ -57,12 +56,12 @@ export function PrivateBus({ id, expiresAt, request, mutation, suspended, expire
   }
   useEffect(() => { alive.current = true; void load(); return () => { alive.current = false; generation.current++; lock(false); }; }, [id]);
   function change(value: string) {
-    if (value.includes('\0')) { setMessage('NUL-tegn kan ikke lagres. Feltet er ikke endret; forrige gyldige forslag er beholdt.'); return; }
-    if (Array.from(value).length > 100) { setMessage('Maksimum er 100 tegn. Feltet er ikke endret; forrige gyldige forslag er beholdt.'); return; }
-    editing.current = normalized(value) !== saved?.physical_bus; generation.current++; lock(editing.current); setText(value); setMessage(editing.current ? 'Ulagret manuell registrering.' : 'Ingen ulagret bussendring.');
+    editing.current = !!busError(value) || normalized(value) !== saved?.physical_bus; generation.current++; lock(editing.current); setText(value); setMessage(editing.current ? 'Ulagret manuell registrering.' : 'Ingen ulagret bussendring.');
+    const error = busError(value); if (error) setMessage(error);
   }
   async function send(lookup = false) {
     if (!saved || sending.current || suspended) return;
+    if (!pending && busError(text)) { setMessage(busError(text)!); return; }
     const operation = pending ?? { operation_id: crypto.randomUUID(), expected_revision: saved.revision, physical_bus: normalized(text) };
     sending.current = true; editing.current = true; lock(true); setPending(operation); setBusy(true); setMessage('Lagringen er uavklart til svaret er kontrollert.');
     let verifying = false;
@@ -103,11 +102,13 @@ export function PrivateBus({ id, expiresAt, request, mutation, suspended, expire
     {!available && <p>Gjeldende buss og planfakta er skjult fordi plantilgangen ikke er bekreftet. Teksten under er ditt lokale forslag.</p>}
     {!available && <button disabled={busy || suspended} onClick={() => void revalidate()}>Kontroller plantilgangen</button>}
     {saved ? <>{available && <p>Lagret verdi: <span className="bus-value">{saved.physical_bus ?? 'Ukjent'}</span> · bussversjon {saved.revision}</p>}
-      <label>Fysisk buss<input ref={input} value={text} autoComplete="off" disabled={busy || !!pending || !!comparison || suspended} onChange={event => change(event.target.value)} /></label>
+      <label>Fysisk buss<input ref={input} value={text} autoComplete="off" aria-invalid={!!busError(text)} aria-describedby={busError(text) ? 'physical-bus-error' : undefined} disabled={busy || !!pending || !!comparison || suspended} onChange={event => change(event.target.value)} /></label>
+      <button type="button" disabled={busy || !!pending || !!comparison || suspended} onClick={() => change('')}>Tøm fysisk buss</button>
+      {busError(text) && <p id="physical-bus-error">{busError(text)}</p>}
       <p>Inntil 100 tegn. Tomt felt betyr ukjent. Tekst og innledende nuller bevares.</p>
       {comparison && available && <div className="import-warning"><p>Nyere lagret verdi: <span className="bus-value">{comparison.physical_bus ?? 'Ukjent'}</span> · bussversjon {comparison.revision}</p><p>Ditt inntastede forslag: <span className="bus-value">{normalized(text) ?? 'Ukjent'}</span></p><button disabled={busy || suspended} onClick={() => { adopt(comparison); setFocusInput(true); setMessage('Lagret verdi er lastet inn. Du kan korrigere den og lagre på nytt.'); }}>Last inn lagret buss</button></div>}
       {pending ? <div className="controls"><button disabled={busy || suspended} onClick={() => void send()}>Prøv samme busslagring igjen</button><button disabled={busy || suspended} onClick={() => void send(true)}>Kontroller busslagringen</button></div>
-        : !comparison && <div className="controls"><button disabled={busy || suspended || !editing.current} onClick={() => void send()}>Lagre fysisk buss</button><button disabled={busy || suspended || !editing.current} onClick={() => { adopt(saved); setMessage('Endringen er avbrutt. Lagret registrering er uendret.'); input.current?.focus(); }}>Avbryt bussendring</button></div>}</>
+        : !comparison && <div className="controls"><button disabled={busy || suspended || !editing.current || !!busError(text)} onClick={() => void send()}>Lagre fysisk buss</button><button disabled={busy || suspended || !editing.current} onClick={() => { adopt(saved); setMessage('Endringen er avbrutt. Lagret registrering er uendret.'); input.current?.focus(); }}>Avbryt bussendring</button></div>}</>
       : <button disabled={busy || suspended} onClick={() => void load()}>Hent bussregistreringen igjen</button>}
   </section>;
 }

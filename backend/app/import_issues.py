@@ -17,14 +17,32 @@ def annotation_rows(source):
     result = {}
     for annotation in source['annotations']:
         location = annotation['provenance']
+        if location.get('line') is None or location.get('column') is None:
+            continue
         candidates = []
         for row in source['activities']:
             for locations in row['provenance'].values():
                 if not isinstance(locations, list):
                     continue
                 for point in locations:
-                    if (point.get('page'), point.get('column')) == (location.get('page'), location.get('column')) and point.get('line', 0) <= location.get('line', 0):
-                        candidates.append((point.get('line', 0), row['source_order']))
+                    if point.get('line') is not None and (point.get('page'), point.get('column')) == (location.get('page'), location.get('column')) and point['line'] <= location['line']:
+                        candidates.append((point['line'], row['source_order']))
         if candidates:
             result.setdefault(max(candidates)[1], []).append(annotation)
     return result
+
+
+def marker_fragments(content):
+    """Known document fragments are neutral independently of row association."""
+    return list(dict.fromkeys(
+        f'Kildemerket {marker.value} har ukjent betydning (side {marker.provenance.page}).'
+        for marker in content.import_metadata.annotations
+    )) if content.import_metadata else []
+
+
+def current_uncertainty(content, activity, fragments=None):
+    """Hide only exact old generated marker fragments, retaining stored text."""
+    value = activity.uncertainty or ''
+    for fragment in marker_fragments(content) if fragments is None else fragments:
+        value = value.replace(fragment, '')
+    return value.strip()

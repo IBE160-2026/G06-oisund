@@ -154,7 +154,7 @@ def test_unicode_limit_and_receipt_admission_are_bounded_without_mutation(client
     assert state() == before
 
 
-@pytest.mark.parametrize('value,expected', [('\u0085', None), (' \u0085\t', None), ('\ufeff', '\ufeff'), (' \u0085A\ufeff ', ' \u0085A\ufeff ')])
+@pytest.mark.parametrize('value,expected', [('\u0085', None), (' \u0085\t', None), ('\u1680\u2003\u2028\u202f\u205f\u3000', None), ('\u001c', '\u001c'), ('\ufeff', '\ufeff'), (' \u0085A\ufeff ', ' \u0085A\ufeff ')])
 def test_explicit_unicode_whitespace_preserves_meaningful_formatting(client, users, value, expected):
     _, plan, path = opened(client, users)
     payload = body(value)

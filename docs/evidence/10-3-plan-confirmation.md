@@ -77,3 +77,7 @@ Reload the app, then use the three amendment walkthrough steps above: cancel fir
 ## Owner acceptance — 2026-10-22
 
 Jonas confirms deletion walkthrough steps 1–4 work as expected and explicitly approves story 10.3. Original-flow steps 1–5 had already passed. Both the confirmation feature and deletion amendment are accepted; sprint 10.3 is done. Earlier owner-acceptance-pending notes are superseded. This records acceptance only; implementation and existing verification results are unchanged.
+
+## Review-feedback amendment — 2026-10-24
+
+Fresh reviews now pin policy 3 and require only effective passenger-trip decisions. Classification removes obsolete checks, and lost-response acceptance validates the frozen submitted classifications. Migration 008 preserves v1/v2 facts, decisions, hashes and deadlines. New regression coverage includes the passenger/non-passenger matrix, individual omitted/extra decisions, neutral generated markers versus substantive notes, classification switching and same-operation lookup. Focused results and final independent verification are recorded in `epic-10-review-feedback.md`; earlier evidence remains historical. Owner acceptance is pending.
