@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 10-19-2026 14:35
-last_updated: 10-25-2026 16:16
+last_updated: 10-25-2026 21:45
 project: IBE160
 project_key: NOKEY
 tracking_system: file-system
@@ -54,7 +54,7 @@ development_status:
   11-1-choose-the-intended-activity: done # Jonas explicitly accepted 2026-10-24 after manual feedback; commit/push subsequently authorized.
   11-2-understand-the-selected-activity: done # Jonas explicitly accepted 2026-10-25: works well and much clearer. Commit/push subsequently authorized; no next story.
   11-3-record-outcomes-and-close: done # Jonas explicitly accepted 2026-10-25; commit/push authorized, next story unstarted.
-  11-4-maintain-a-planned-notice: backlog
+  11-4-maintain-a-planned-notice: done # Jonas accepted corrected SMS/text/all-lines delivery 2026-10-25; 61 API/49 browser passes, rollout/data preservation verified. Commit/push authorized; next story unstarted.
   11-5-read-line-date-notices: backlog
   11-6-recover-from-an-unavailable-server: backlog
   epic-11-retrospective: optional

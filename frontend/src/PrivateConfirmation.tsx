@@ -65,11 +65,11 @@ export function PrivateConfirmation({ saved, clean, request, mutation, expired, 
   const busAvailability = useCallback((value: boolean) => guardAvailability('bus', value), [guardAvailability]);
   const selectionAvailability = useCallback((value: boolean) => guardAvailability('selection', value), [guardAvailability]);
   const startAvailability = useCallback((value: boolean) => guardAvailability('start', value), [guardAvailability]);
-  const lockRef = useRef({ bus: false, selection: false, start: false, outcome: false });
+  const lockRef = useRef({ bus: false, selection: false, start: false, outcome: false, notice: false });
   const [busLocked, setBusLocked] = useState(false);
   const [dayNavigationLocked, setDayNavigationLocked] = useState(false);
   const busLockedRef = useRef(false);
-  const guardChild = useCallback((key: 'bus' | 'selection' | 'start' | 'outcome', value: boolean) => {
+  const guardChild = useCallback((key: 'bus' | 'selection' | 'start' | 'outcome' | 'notice', value: boolean) => {
     lockRef.current[key] = value;
     const locked = Object.values(lockRef.current).some(Boolean);
     busLockedRef.current = locked;
@@ -80,6 +80,7 @@ export function PrivateConfirmation({ saved, clean, request, mutation, expired, 
   const guardSelection = useCallback((value: boolean) => guardChild('selection', value), [guardChild]);
   const guardStart = useCallback((value: boolean) => guardChild('start', value), [guardChild]);
   const guardOutcome = useCallback((value: boolean) => guardChild('outcome', value), [guardChild]);
+  const guardNotice = useCallback((value: boolean) => guardChild('notice', value), [guardChild]);
   const [review, setReview] = useState<Review | null>(null);
   const [acks, setAcks] = useState<string[]>([]);
   const [classes, setClasses] = useState<Record<string, string>>({});
@@ -279,7 +280,7 @@ export function PrivateConfirmation({ saved, clean, request, mutation, expired, 
     </section>}
     {pending && <div className="controls"><button disabled={busy || busLocked || suspended} onClick={() => void send()}>Prøv samme bekreftelse igjen</button><button disabled={busy || busLocked || suspended} onClick={() => void send(true)}>Kontroller bekreftelsen</button></div>}
     </div>
-    {plan && <PrivateWorkdayView validPlan={validPlan} historicalDetails={<Facts historical content={plan.draft} classifications={plan.classifications} />} busy={busy} key={plan.id + ':' + planOpen} plan={plan} hidden={screen !== 'plan'} activityOpen={activityOpen} setActivityOpen={setActivityOpen} request={request} mutation={mutation} suspended={suspended || !!deleting || !!pending} expired={expired} planAvailable={planAvailable} dayNavigationLocked={dayNavigationLocked} busLocked={busLocked} guardBus={guardBus} guardSelection={guardSelection} guardStart={guardStart} guardOutcome={guardOutcome} busAvailability={busAvailability} selectionAvailability={selectionAvailability} startAvailability={startAvailability} remove={() => void remove()} closeView={() => { setPlan(null); showPreparation(); }} showPreparation={showPreparation} shorten={value => setPlan(current => current?.id === plan.id && Date.parse(value) < Date.parse(current.expires_at) ? { ...current, expires_at: value } : current)} />}
+    {plan && <PrivateWorkdayView validPlan={validPlan} historicalDetails={<Facts historical content={plan.draft} classifications={plan.classifications} />} busy={busy} key={plan.id + ':' + planOpen} plan={plan} hidden={screen !== 'plan'} activityOpen={activityOpen} setActivityOpen={setActivityOpen} request={request} mutation={mutation} suspended={suspended || !!deleting || !!pending} expired={expired} planAvailable={planAvailable} dayNavigationLocked={dayNavigationLocked} busLocked={busLocked} guardBus={guardBus} guardSelection={guardSelection} guardStart={guardStart} guardOutcome={guardOutcome} guardNotice={guardNotice} busAvailability={busAvailability} selectionAvailability={selectionAvailability} startAvailability={startAvailability} remove={() => void remove()} closeView={() => { setPlan(null); showPreparation(); }} showPreparation={showPreparation} shorten={value => setPlan(current => current?.id === plan.id && Date.parse(value) < Date.parse(current.expires_at) ? { ...current, expires_at: value } : current)} />}
     <div hidden={screen !== 'plan'}>{deleting && <div className="controls"><button disabled={busy || suspended} onClick={() => void remove()}>Prøv samme sletting igjen</button><button disabled={busy || suspended} onClick={() => void remove(true)}>Kontroller slettingen</button></div>}</div>
     <div hidden={screen !== 'upload'}><h3>Mine bekreftede planer</h3><button disabled={busy || !!pending || !!deleting || busLocked || suspended} onClick={() => void list()}>Oppdater planlisten</button>
     {items.length === 0 && <p>Ingen planer er lastet.</p>}<ul>{items.map(item => <li key={item.id}><button disabled={busy || !!pending || !!deleting || busLocked || suspended} onClick={() => void reopen(item.id)}>Åpne plan {item.service_date ?? 'ukjent dato'} · versjon {item.source_revision}</button> Utløper {date(item.expires_at)}</li>)}</ul>

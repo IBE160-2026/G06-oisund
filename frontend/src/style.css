@@ -123,3 +123,20 @@ summary:focus-visible, fieldset:focus-visible { outline: 3px solid #000; outline
 .private-confirmation [aria-label="Oppsummering av skift"] ol { padding-inline-start: 1.5rem; }
 .private-confirmation [aria-label="Oppsummering av skift"] li { margin-block: .75rem; }
 .private-confirmation [aria-label="Bekreft avslutning"] summary { cursor: pointer; min-height: 58px; border: 2px solid currentColor; border-radius: 8px; padding: .7rem; }
+/* Manual notices use the existing private form/control palette and focus rules. */
+.private-notices, .notice-list, .notice-facts { min-width: 0; }
+.notice-list { padding-left: 1.4rem; }
+.notice-list li { margin-block: 1rem; }
+.notice-facts, .notice-list summary { overflow-wrap: anywhere; }
+.private-notices fieldset { min-width: 0; }
+.private-notices label, .private-notices textarea { display: block; }
+.private-notices input, .private-notices textarea { max-width: 100%; box-sizing: border-box; }
+.private-notices textarea { width: 100%; min-width: 0; font: inherit; color: #162c3c; background: white; border: 2px solid #536775; padding: .65rem; border-radius: .3rem; resize: vertical; }
+.private-notices textarea:focus-visible { outline: 3px solid #000; outline-offset: 4px; }
+.night .private-notices textarea { color: #edf3f7; background: #203e53; border-color: #b6c8d5; color-scheme: dark; }
+.night .private-notices textarea:focus-visible { outline-color: #ffe39b; }
+.private-notices input, .notice-list summary { min-height: 58px; }
+.notice-list summary { cursor: pointer; border: 2px solid currentColor; border-radius: 8px; padding: .7rem; }
+.night .private-notices a { color: #d6eafa; }
+.night .private-notices .import-warning a { color: #173e60; }
+.night .private-notices .import-warning button { color: #fff; background: #173e60; border-color: #173e60; }

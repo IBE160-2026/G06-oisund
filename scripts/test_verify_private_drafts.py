@@ -13,9 +13,21 @@ from unittest.mock import patch
 def activity_resource_stub():
     selection = {'workday_id': 'synthetic', 'activity_id': None, 'revision': 0, 'expires_at': 'synthetic'}
     lifecycle = {'workday_id': 'synthetic', 'state': 'confirmed', 'started_at': None, 'revision': 0, 'expires_at': 'synthetic'}
+    notice = {'id': 'synthetic-notice', 'revision': 0, 'checked_revision': None, 'status': 'registered', 'expires_at': 'synthetic'}
     def reply(request):
         if isinstance(request, str): return None
         path = request.full_url
+        if path.endswith('/notices'):
+            if request.data is not None:
+                notice.update(json.loads(request.data)['content'])
+                notice.update(revision=1, checked_revision=None, status='registered')
+                return {'result': dict(notice)}
+            return {'notices': [dict(notice)], 'expires_at': 'synthetic'}
+        if '/notices/' in path:
+            notice['revision'] += 1
+            if path.endswith('/check'): notice['checked_revision'] = notice['revision']
+            if path.endswith('/end'): notice['status'] = 'ended_manually'
+            return {'result': dict(notice)}
         if path.endswith('/selection'):
             if request.data is not None:
                 selection.update(activity_id='synthetic-activity', revision=1)
@@ -30,6 +42,29 @@ def activity_resource_stub():
 
 
 class RestorationTest(unittest.TestCase):
+    def test_notice_verification_failure_restores_operational_api(self):
+        calls = []; resources = activity_resource_stub()
+        def subprocess_stub(args, **kwargs):
+            calls.append(args)
+            return SimpleNamespace(returncode=0, stdout='{"activities":[]}' if 'model_dump_json' in (kwargs.get('input') or '') else '')
+        def http_stub(request, **kwargs):
+            path = request.full_url
+            if path.endswith('/notices') and request.data is not None: raise RuntimeError('synthetic notice verification failure')
+            if (value := resources(request)) is not None: pass
+            elif path.endswith('/auth/csrf'): value = {'csrf_token': 'synthetic'}
+            elif path.endswith('/auth/login'): value = {'account_id': 'synthetic'}
+            elif path.endswith('/draft-operations'): value = {'operation_id': 'synthetic'}
+            elif path.endswith('/workday-reviews'): value = {'operation_id': 'synthetic', 'unknowns': [], 'classifications_required': []}
+            elif path.endswith('/physical-bus'):
+                value = {'revision': 0, 'physical_bus': None, 'expires_at': 'synthetic'} if request.data is None else {'result': {'revision': 0, 'physical_bus': None, 'expires_at': 'synthetic'}}
+            else: value = {'id': 'synthetic', 'expires_at': 'synthetic', 'revision': 1, 'draft': {'realtime_duty': '007', 'physical_bus': 'Bus-0012', 'activities': [{'id': 'synthetic-activity'}]}}
+            response = io.BytesIO(json.dumps(value).encode()); response.headers = {'Cache-Control': 'no-store'}
+            return response
+        with patch.dict(os.environ, {'COMPOSE_PROJECT_NAME': 'ibe160-private-tests'}), patch('subprocess.run', subprocess_stub), patch('urllib.request.build_opener', return_value=SimpleNamespace(open=http_stub)):
+            with self.assertRaisesRegex(RuntimeError, 'synthetic notice verification failure'): runpy.run_path(str(Path(__file__).with_name('verify-private-drafts.py')))
+        self.assertEqual(calls[-2][3], 'ibe160-private-tests'); self.assertEqual(calls[-2][-1], 'stop')
+        self.assertEqual(calls[-1][3], 'ibe160-private-work'); self.assertEqual(calls[-1][-4:], ['up', '-d', '--wait', 'private-api'])
+
     def test_terminal_verification_failure_restores_operational_api(self):
         calls = []
         resources = activity_resource_stub()

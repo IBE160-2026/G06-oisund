@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 
 type Resolution = { state: 'resolved' | 'ambiguous' | 'gap'; candidates: string[] };
-type Props = { label: 'Start' | 'Slutt'; value: string | null; defaultDate: string | null; disabled: boolean;
+type Props = { label: string; value: string | null; defaultDate: string | null; disabled: boolean;
   resolve: (body: object) => Promise<unknown>; onValue: (value: string | null) => void;
   onState: (dirty: boolean, unresolved: boolean) => void; expired: () => void };
 const parts = (value: string | null, day: string | null) => ({ date: value?.slice(0, 10) ?? day ?? '', clock: value?.match(/T(\d{2}:\d{2}(?::\d{2})?)/)?.[1] ?? '' });
@@ -63,7 +63,7 @@ export function PrivateTimeInput(props: Props) {
   const messages: Record<string, string> = { empty: 'Klokkeslett er ukjent.', saved: 'Lagret tidspunkt i Oslo-tid.', resolved: 'Tidspunktet er klart i Oslo-tid.', incomplete: 'Fyll ut både dato og klokkeslett, eller tøm tidspunktet.', resolving: 'Kontrollerer Oslo-tid …', gap: 'Dette klokkeslettet finnes ikke i Oslo når klokken stilles frem. Velg et annet tidspunkt.', ambiguous: 'Dette klokkeslettet forekommer to ganger. Velg første eller andre forekomst.', invalid: 'Kontroller dato og klokkeslett.', unavailable: 'Tidspunktet kunne ikke kontrolleres. Inndata er beholdt. Prøv igjen.' };
   return <fieldset disabled={props.disabled}><legend>{props.label} (Oslo-tid)</legend>
     <label>{props.label}dato<input type="date" value={date} onChange={e => change(e.target.value, clock)} /></label>
-    <label>{props.label === 'Start' ? 'Starttid' : 'Sluttid'}<input type="time" step="1" value={clock} onChange={e => change(date, e.target.value)} /></label>
+    <label>{props.label === 'Start' ? 'Starttid' : props.label === 'Slutt' ? 'Sluttid' : props.label + ': klokkeslett'}<input type="time" step="1" value={clock} onChange={e => change(date, e.target.value)} /></label>
     <div className="controls"><button type="button" disabled={!date && !props.defaultDate} onClick={nextDay}>{props.label}: neste dag</button>
       <button type="button" onClick={() => { generation.current++; setDate(props.defaultDate ?? ''); setClock(''); setTouched(false); setSelected(null); setOptions([]); setState('empty'); callbacks.current.onState(false, false); callbacks.current.onValue(null); }}>{props.label}: tøm tidspunkt</button></div>
     {options.length === 2 && <label>{props.label}: forekomst<select aria-label={props.label + ': forekomst'} value={selected ?? ''} onChange={e => { if (options.includes(e.target.value)) { setSelected(e.target.value); setState('resolved'); callbacks.current.onValue(e.target.value); } }}><option value="" disabled>Velg forekomst</option><option value={options[0]}>Første forekomst</option><option value={options[1]}>Andre forekomst</option></select></label>}

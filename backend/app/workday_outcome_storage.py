@@ -85,7 +85,7 @@ def save(request, identifier, body, close=False):
             conn.execute('UPDATE workday_lifecycles SET state=%s,ended_at=%s,revision=2 WHERE workday_id=%s', (body.action, ending, identifier))
             conn.execute('UPDATE workdays SET expires_at=%s WHERE id=%s', (deadline, identifier))
             # Operation metadata follows current retention; immutable JSON stays historical.
-            for table in ['workday_operations', 'workday_start_operations', 'workday_bus_operations', 'workday_selection_operations', 'workday_outcome_operations', 'workday_close_operations']:
+            for table in ['workday_operations', 'workday_start_operations', 'workday_bus_operations', 'workday_selection_operations', 'workday_outcome_operations', 'workday_close_operations', 'workday_notice_operations']:
                 conn.execute('UPDATE ' + table + ' SET expires_at=LEAST(expires_at,%s) WHERE workday_id=%s', (deadline, identifier))
             plan = {**plan, 'expires_at': deadline}
             result = LifecycleRecord(**workday_lifecycle_storage.current(conn, plan)).model_dump(mode='json')

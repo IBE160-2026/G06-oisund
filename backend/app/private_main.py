@@ -18,6 +18,8 @@ from .workday_lifecycle_domain import StartWorkday, LifecycleRecord, StartReceip
 from .workday_lifecycle_domain import CloseWorkday
 from .workday_outcome_domain import SaveOutcome, OutcomeRecord, OutcomeReceipt, WorkdayRecap
 from . import workday_outcome_storage
+from . import workday_notice_storage
+from .workday_notice_domain import SaveNotice, NoticeCommand, NoticeRecord, NoticeList, NoticeReceipt
 from .workday_bus_domain import SaveBus, BusRecord, BusReceipt
 from .workday_domain import ConfirmRequest, ReviewRequest, Review, WorkdayRecord, WorkdayList, WorkdayOperation, DeleteWorkdayRequest, DeletedWorkday
 from . import private_import
@@ -68,7 +70,7 @@ async def boundary(request, call_next):
             # Consume incrementally before JSON decoding; Content-Length is untrusted.
             body = bytearray()
             async for chunk in request.stream():
-                limit = 1048576 if request.url.path == '/drafts' or request.url.path.startswith('/drafts/') else 4096
+                limit = 1048576 if request.url.path == '/drafts' or request.url.path.startswith('/drafts/') else 32768 if '/notices' in request.url.path else 4096
                 if len(body) + len(chunk) > limit:
                     raise HTTPException(413, 'Forespørselen er for stor.')
                 body.extend(chunk)
@@ -316,3 +318,38 @@ def start_workday(identifier: UUID, body: StartWorkday, request: Request):
 @app.get('/workday-start-operations/{identifier}', response_model=StartReceipt)
 def find_start_operation(identifier: UUID, request: Request):
     return workday_lifecycle_storage.lookup(request, identifier)
+
+
+@app.get('/workdays/{identifier}/notices', response_model=NoticeList)
+def notices(identifier: UUID, request: Request, cursor: UUID | None = None):
+    return workday_notice_storage.read(request, identifier, cursor=cursor)
+
+
+@app.get('/workdays/{identifier}/notices/{notice_id}', response_model=NoticeRecord)
+def notice(identifier: UUID, notice_id: UUID, request: Request):
+    return workday_notice_storage.read(request, identifier, notice_id)
+
+
+@app.post('/workdays/{identifier}/notices', response_model=NoticeReceipt)
+def create_notice(identifier: UUID, body: SaveNotice, request: Request):
+    return workday_notice_storage.save(request, identifier, body)
+
+
+@app.post('/workdays/{identifier}/notices/{notice_id}', response_model=NoticeReceipt)
+def edit_notice(identifier: UUID, notice_id: UUID, body: SaveNotice, request: Request):
+    return workday_notice_storage.save(request, identifier, body, notice_id)
+
+
+@app.post('/workdays/{identifier}/notices/{notice_id}/check', response_model=NoticeReceipt)
+def check_notice(identifier: UUID, notice_id: UUID, body: NoticeCommand, request: Request):
+    return workday_notice_storage.save(request, identifier, body, notice_id, 'check')
+
+
+@app.post('/workdays/{identifier}/notices/{notice_id}/end', response_model=NoticeReceipt)
+def end_notice(identifier: UUID, notice_id: UUID, body: NoticeCommand, request: Request):
+    return workday_notice_storage.save(request, identifier, body, notice_id, 'end')
+
+
+@app.get('/workday-notice-operations/{identifier}', response_model=NoticeReceipt)
+def find_notice_operation(identifier: UUID, request: Request):
+    return workday_notice_storage.lookup(request, identifier)

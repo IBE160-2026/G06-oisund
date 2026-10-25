@@ -7,6 +7,7 @@ import subprocess
 import urllib.request
 import urllib.error
 import http.cookiejar
+from datetime import datetime
 from uuid import UUID, uuid4
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -60,7 +61,7 @@ try:
     run(OPERATIONAL + ['stop', 'private-api'])
     run(PRIVATE + ['up', '-d', '--build', '--wait'])
     python('')
-    print(run(PRIVATE + ['run', '--rm', '--no-deps', '-v', str(ROOT / 'Eksempelfiler') + ':/fixtures:ro', '-e', 'PRIVATE_TEST_PROJECT=' + PROJECT, '-e', 'PRIVATE_TEST_API=http://private-api:8000', 'private-api', 'python', '-m', 'pytest', '-q', '--tb=short', 'tests/test_private_access.py', 'tests/test_private_drafts.py', 'tests/test_private_workdays.py', 'tests/test_private_bus.py', 'tests/test_private_selection.py', 'tests/test_private_start.py', 'tests/test_private_outcomes.py', 'tests/test_private_import.py', 'tests/test_pdf_import.py']), flush=True)
+    print(run(PRIVATE + ['run', '--rm', '--no-deps', '-v', str(ROOT / 'Eksempelfiler') + ':/fixtures:ro', '-e', 'PRIVATE_TEST_PROJECT=' + PROJECT, '-e', 'PRIVATE_TEST_API=http://private-api:8000', 'private-api', 'python', '-m', 'pytest', '-q', '--tb=short', 'tests/test_private_access.py', 'tests/test_private_drafts.py', 'tests/test_private_workdays.py', 'tests/test_private_bus.py', 'tests/test_private_selection.py', 'tests/test_private_start.py', 'tests/test_private_outcomes.py', 'tests/test_private_notices.py', 'tests/test_private_import.py', 'tests/test_pdf_import.py']), flush=True)
     username = 'synthetic-draft-restart-' + uuid4().hex
     password = secrets.token_urlsafe(24)
     python(f'from app.auth import provision\nprovision({username!r}, {password!r})\n')
@@ -101,6 +102,18 @@ try:
     start_receipt = request(start_path, start_body)
     assert start_receipt['result']['state'] == 'active' and start_receipt['result']['revision'] == 1
     assert request(selection_path) == selection_receipt['result']
+    notice_path = '/workdays/' + confirmed['id'] + '/notices'
+    notice_body = {'operation_id': str(uuid4()), 'expected_revision': 0, 'expected_lifecycle_revision': 1, 'content': {'title': 'Synthetic SMS traffic notice', 'summary': 'Temporary stop', 'description': 'Monday 06-08\nTuesday 16-18\nUse the temporary stop.', 'source_note': 'SMS from synthetic traffic control', 'line_scope': 'all', 'line_tags': [], 'source_url': None, 'source_updated_at': None, 'valid_from': '2031-01-02T23:00+01:00', 'valid_until': None}}
+    notice_receipt = request(notice_path, notice_body)
+    notice_id = notice_receipt['result']['id']
+    assert all(notice_receipt['result'][key] == value for key, value in notice_body['content'].items())
+    notice_check = {'operation_id': str(uuid4()), 'expected_revision': 1, 'expected_lifecycle_revision': 1}
+    notice_checked_receipt = request(notice_path + '/' + notice_id + '/check', notice_check)
+    notice_ending = {'operation_id': str(uuid4()), 'expected_revision': 2, 'expected_lifecycle_revision': 1}
+    notice_ended_receipt = request(notice_path + '/' + notice_id + '/end', notice_ending)
+    notice_snapshot = request(notice_path)
+    assert notice_snapshot['notices'] == [notice_ended_receipt['result']]
+    assert notice_snapshot['notices'][0]['checked_revision'] == 2 and notice_snapshot['notices'][0]['status'] == 'ended_manually'
     deleted_source = request('/drafts', {'operation_id': request('/draft-operations', {})['operation_id'], 'expected_revision': 0, 'draft': planned})
     deleted_review = request('/workday-reviews', {'draft_id': deleted_source['id'], 'expected_revision': 1})
     deleted_confirmation = {'operation_id': deleted_review['operation_id'], 'expected_revision': 1, 'acknowledgements': [item['id'] for item in deleted_review['unknowns']], 'classifications': {key: 'manual' for key in deleted_review['classifications_required']}}
@@ -113,7 +126,7 @@ try:
     persisted_confirmation_state = python(state_program)
     # Include raw mutable authorities and both immutable receipt tables in the
     # exact populated migration/restart comparison, with no current-time fields.
-    for table, key in [('workday_selections', 'workday_id'), ('workday_lifecycles', 'workday_id'), ('workday_selection_operations', 'id'), ('workday_start_operations', 'id'), ('workday_outcome_revisions', 'workday_id'), ('workday_outcomes', 'activity_id'), ('workday_outcome_operations', 'id'), ('workday_close_operations', 'id')]:
+    for table, key in [('workday_selections', 'workday_id'), ('workday_lifecycles', 'workday_id'), ('workday_selection_operations', 'id'), ('workday_start_operations', 'id'), ('workday_outcome_revisions', 'workday_id'), ('workday_outcomes', 'activity_id'), ('workday_outcome_operations', 'id'), ('workday_close_operations', 'id'), ('workday_notices', 'id'), ('workday_notice_operations', 'id')]:
         query = ('SELECT t.* FROM ' + table + ' t JOIN workdays w ON t.workday_id=w.id WHERE w.owner=%s ORDER BY t.' + key)
         state_program = state_program.replace("'confirmed_sources':", repr(table) + ":conn.execute(" + repr(query) + ", (" + repr(session['account_id']) + ",)).fetchall(), 'confirmed_sources':")
     persisted_confirmation_state = python(state_program)
@@ -145,6 +158,9 @@ try:
         denied(route, 404, 8000)
     denied(selection_path, 404, 8000, selection_body)
     denied(start_path, 404, 8000, start_body)
+    for route in [notice_path, notice_path + '/' + notice_id, '/workday-notice-operations/' + notice_body['operation_id']]:
+        denied(route, 404, 8000)
+    denied(notice_path, 404, 8000, notice_body)
     # Retain a distinct terminal plan while leaving legacy active/unstarted
     # cases intact. Exercise unknown membership and shortened current authority.
     terminal_source = request('/drafts', {'operation_id': request('/draft-operations', {})['operation_id'], 'expected_revision': 0, 'draft': planned})
@@ -154,6 +170,8 @@ try:
     terminal_base = '/workdays/' + terminal_plan['id']
     terminal_start_body = {'operation_id': str(uuid4()), 'expected_revision': 0}
     terminal_start = request(terminal_base + '/start', terminal_start_body)
+    terminal_notice_body = {**notice_body, 'operation_id': str(uuid4())}
+    terminal_notice_receipt = request(terminal_base + '/notices', terminal_notice_body)
     outcome_body = {'operation_id': str(uuid4()), 'expected_revision': 0, 'expected_lifecycle_revision': 1, 'activity_id': terminal_plan['draft']['activities'][0]['id'], 'outcome': 'skipped'}
     outcome_receipt = request(terminal_base + '/outcome', outcome_body)
     close_body = {'operation_id': str(uuid4()), 'expected_revision': 1, 'expected_outcome_revision': 1, 'action': 'ended'}
@@ -165,6 +183,10 @@ try:
     assert terminal_snapshot['outcomes']['outcomes'][0]['outcome'] == 'skipped'
     assert all(item['outcome'] == 'unregistered' for item in terminal_snapshot['outcomes']['outcomes'][1:])
     assert terminal_snapshot['plan']['expires_at'] < terminal_plan['expires_at']
+    terminal_notices = request(terminal_base + '/notices')
+    assert terminal_notices['expires_at'] == terminal_snapshot['plan']['expires_at']
+    assert terminal_notices['notices'][0]['expires_at'] == terminal_snapshot['plan']['expires_at']
+    assert datetime.fromisoformat(json.loads(python(f"import json\nwith database() as conn:\n print(json.dumps(str(conn.execute('SELECT expires_at FROM workday_notice_operations WHERE id=%s', ({terminal_notice_body['operation_id']!r},)).fetchone()['expires_at'])))\n"))) == datetime.fromisoformat(terminal_snapshot['plan']['expires_at'])
     for route in [terminal_base + '/outcomes', terminal_base + '/recap', '/workday-outcome-operations/' + outcome_body['operation_id'], '/workday-close-operations/' + close_body['operation_id']]:
         denied(route, 404, 8000)
     denied(terminal_base + '/outcome', 404, 8000, outcome_body)
@@ -223,6 +245,15 @@ try:
     assert request(lifecycle_path) == start_receipt['result']
     assert request(start_path, start_body) == start_receipt
     assert request('/workday-start-operations/' + start_body['operation_id']) == start_receipt
+    assert request(notice_path) == notice_snapshot
+    assert request(notice_path, notice_body) == notice_receipt
+    assert request(notice_path + '/' + notice_id + '/check', notice_check) == notice_checked_receipt
+    assert request(notice_path + '/' + notice_id + '/end', notice_ending) == notice_ended_receipt
+    for payload, expected in [(notice_body, notice_receipt), (notice_check, notice_checked_receipt), (notice_ending, notice_ended_receipt)]:
+        assert request('/workday-notice-operations/' + payload['operation_id']) == expected
+    assert request(terminal_base + '/notices') == terminal_notices
+    assert request(terminal_base + '/notices', terminal_notice_body) == terminal_notice_receipt
+    assert request('/workday-notice-operations/' + terminal_notice_body['operation_id']) == terminal_notice_receipt
     assert request(legacy_lifecycle_path) == legacy_lifecycle
     assert request(terminal_base + '/recap') == terminal_snapshot
     assert request(terminal_base + '/close', close_body) == close_receipt
