@@ -162,7 +162,7 @@ class WorkdayRecord(StrictModel):
 
     @model_validator(mode='after')
     def fixed_deadline(self):
-        if self.expires_at - self.final_end != timedelta(days=7):
+        if self.expires_at > self.final_end + timedelta(days=7):
             raise ValueError('Invalid plan retention')
         return self
 

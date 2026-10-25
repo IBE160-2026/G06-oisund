@@ -8,6 +8,7 @@ def issue_text(issue):
         'unrecognized_source_line': 'En kilderad kunne ikke tolkes. Kontroller kilden.',
         'unproven_calendar_interval': 'Kalenderdatoene kunne ikke fastslås fra skiftintervallet.',
         'reversed_activity_time': 'Slutt ligger før start. Kontroller dato og klokkeslett.',
+        'unclassified_time': 'Ett klokkeslett står i første tidskolonne. Kontroller om det er start eller slutt; begge er uavklart.',
     }
     return names.get(issue['code'], f'Ukjent kildeusikkerhet ({issue["code"]}).')
 

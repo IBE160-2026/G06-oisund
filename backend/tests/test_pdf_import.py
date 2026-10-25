@@ -36,18 +36,111 @@ def pdf_bytes(objects,encryption=''):
     return result+f'trailer\n<< /Size {len(offsets)} /Root 1 0 R{encryption} >>\nstartxref\n{xref}\n%%EOF'.encode()
 
 
-def synthetic_text_pdf():
+def synthetic_text_pdf(duty=None):
     lines=[(810,'Synthetic Employer - Origin Skift: TEST'),
            (790,'Date: 01/01/2030 Tue Synthetic Driver'),(770,'Division: Example'),
            (750,'Skift start: 06:00 Origin Arb.tid: 0h10 Utstrekk: 0h10'),
            (738,'Skift slutt: 06:10 Destination Tillegg: 25,00%0h00'),
            (720,'Sign-on 06:00 06:01'),(700,'tom / 99 Origin 06:02 t'),
            (680,'N'),(660,'1.0 Destination 06:03'),(640,'Coffee 06:03 06:04 N'),(620,'t')]
+    if duty is not None:
+        lines.insert(6, (710, 'Vogn '+duty))
     content='\n'.join(f'BT /F1 9 Tf 20 {y} Td ({text}) Tj ET' for y,text in lines).encode()
     return pdf_bytes([b'<< /Type /Catalog /Pages 2 0 R >>',b'<< /Type /Pages /Count 1 /Kids [3 0 R] >>',
         b'<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 841] /Resources << /Font << /F1 4 0 R >> >> /Contents 5 0 R >>',
         b'<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>',
         f'<< /Length {len(content)} >>\nstream\n'.encode()+content+b'\nendstream'])
+
+
+def repeated_header_pdf(change=None, bodies=None):
+    """Spatially separate page captions from genuine repeated source identity."""
+    fields = dict(shift='TEST', date='01/01/2030', driver='Synthetic Driver',
+                  employer='Synthetic Employer', department='Example', start='06:00', end='06:10')
+    streams = []
+    for page in (1, 2):
+        values = {**fields, **(change or {} if page == 2 else {})}
+        lines = [(20, 810, f'{values["employer"]} - Origin Skift: {values["shift"]}'),
+                 (20, 790, f'Date: {values["date"]} Tue {values["driver"]}'),
+                 (20, 770, f'Division: {values["department"]}'), (430, 770, f'Part {page}'),
+                 (20, 750, f'Skift start: {values["start"]} Origin Arb.tid: 0h10 Utstrekk: 0h10'),
+                 (20, 738, f'Skift slutt: {values["end"]} Destination Tillegg: 25,00%0h00')]
+        lines += bodies[page-1] if bodies is not None else [(20, 720, 'Sign-on 06:00 06:01')]
+        streams.append('\n'.join(f'BT /F1 9 Tf {x} {y} Td ({text}) Tj ET' for x, y, text in lines).encode('latin-1'))
+    return pdf_bytes([b'<< /Type /Catalog /Pages 2 0 R >>', b'<< /Type /Pages /Count 2 /Kids [3 0 R 4 0 R] >>',
+        *[f'<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 841] /Resources << /Font << /F1 5 0 R >> >> /Contents {n} 0 R >>'.encode() for n in (6, 7)],
+        b'<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>',
+        *[f'<< /Length {len(content)} >>\nstream\n'.encode()+content+b'\nendstream' for content in streams]])
+
+
+def test_repeated_spatial_header_ignores_only_the_separate_page_caption():
+    source = extract_pdf(repeated_header_pdf())
+    assert source['header']['department'] == 'Example'
+    assert source['provenance']['header_evidence']['1'] == source['provenance']['header_evidence']['2']
+
+
+def test_repeated_identical_activity_clock_uses_each_physical_time_column():
+    lines = [(20, 810, 'Synthetic Employer - Origin Skift: CLOCKS'), (20, 790, 'Date: 01/01/2030 Tue Synthetic Driver'),
+             (20, 770, 'Division: Example'), (20, 750, 'Skift start: 06:00 Origin Arb.tid: 0h10 Utstrekk: 0h10'),
+             (20, 738, 'Skift slutt: 06:10 Destination Tillegg: 25,00%0h00'),
+             (20, 715, 'Travel to'), (205, 715, '06:05'), (20, 690, 'Travel to'), (265, 690, '06:05'),
+             (20, 660, '20 / 1 1.0 km'), (20, 645, 'Origin 06:06'), (20, 630, 'Destination 06:07')]
+    content = '\n'.join(f'BT /F1 9 Tf {x} {y} Td ({text}) Tj ET' for x, y, text in lines).encode()
+    data = pdf_bytes([b'<< /Type /Catalog /Pages 2 0 R >>', b'<< /Type /Pages /Count 1 /Kids [3 0 R] >>',
+        b'<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 841] /Resources << /Font << /F1 4 0 R >> >> /Contents 5 0 R >>',
+        b'<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>', f'<< /Length {len(content)} >>\nstream\n'.encode()+content+b'\nendstream'])
+    source = extract_pdf(data)
+    assert [row['label'] for row in source['activities']] == ['Travel to', 'Travel to', '20']
+    assert source['activities'][0]['start'] is source['activities'][0]['end'] is None
+    assert source['activities'][1]['start'] is None and source['activities'][1]['end'] == '06:05'
+    assert [issue['activity'] for issue in source['unresolved'] if issue['code'] == 'unclassified_time'] == [1]
+    assert source['activities'][0]['provenance']['label'][0]['line'] == 1
+    assert source['activities'][1]['provenance']['label'][0]['line'] == 2
+
+
+@pytest.mark.parametrize('evidence', ['heading', 'footer'])
+@pytest.mark.parametrize('identity', ['valid', 'wrong-line', 'wrong-trip', 'no-current'])
+def test_continuation_evidence_requires_the_current_movement_identity(evidence, identity):
+    label, trip = ('21', '1') if identity == 'wrong-line' else ('20', '2') if identity == 'wrong-trip' else ('20', '1')
+    first = [(20, 720, '20 / 1 1.0 km'), (20, 705, 'Origin 06:01'), (20, 690, 'Intermediate 06:03')]
+    if identity == 'no-current':
+        first = [(20, 720, 'Sign-on 06:00 06:01')]
+    if evidence == 'footer':
+        first.append((20, 675, f'Tur {label} / {trip} fortsetter på neste side.'))
+    second = [(20, 720, f'{label} / {trip} - fortsettelse'), (20, 705, 'Destination 06:05')] if evidence == 'heading' else [(20, 720, 'Destination 06:05')]
+    data = repeated_header_pdf(bodies=[first, second])
+    if identity != 'valid':
+        with pytest.raises(ImportFailure, match='conflicting_continuation'):
+            extract_pdf(data)
+    else:
+        source = extract_pdf(data)
+        assert len(source['activities']) == 1
+        movement = source['activities'][0]
+        assert (movement['line'], movement['trip_id'], movement['origin'], movement['destination']) == ('20', '1', 'Origin', 'Destination')
+        assert movement['pages'] == [1, 2]
+        assert movement['provenance']['origin'][0]['page'] == 1
+        assert movement['provenance']['destination'][0]['page'] == 2
+
+
+def test_separated_heading_format_reaches_activity_only_columns_and_later_pages():
+    first = [(20, 720, '20 / 1 1.0 km'), (20, 705, 'Origin 06:01'), (20, 690, 'Destination 06:02'),
+             (320, 720, 'Travel to'), (505, 720, '06:03')]
+    second = [(20, 720, 'Travel to'), (205, 720, '06:04'),
+              (320, 720, 'Travel to'), (505, 720, '06:05'),
+              (320, 690, 'Travel to'), (565, 690, '06:06')]
+    source = extract_pdf(repeated_header_pdf(bodies=[first, second]))
+    assert [row['label'] for row in source['activities']] == ['20', 'Travel to', 'Travel to', 'Travel to', 'Travel to']
+    assert all(row['start'] is row['end'] is None for row in source['activities'][1:4])
+    assert source['activities'][4]['start'] is None and source['activities'][4]['end'] == '06:06'
+    assert [item['activity'] for item in source['unresolved'] if item['code'] == 'unclassified_time'] == [2, 3, 4]
+    assert [note['value'] for note in source['annotations']] == [f'Travel to 06:0{minute} · første tidskolonne' for minute in (3, 4, 5)]
+
+
+@pytest.mark.parametrize('change', [dict(shift='OTHER'), dict(date='02/01/2030'), dict(driver='Other Driver'),
+                                  dict(employer='Other Employer'), dict(department='Other Department'),
+                                  dict(start='06:01'), dict(end='06:11')])
+def test_genuinely_conflicting_repeated_header_identity_still_rejected(change):
+    with pytest.raises(ImportFailure, match='conflicting_headers'):
+        extract_pdf(repeated_header_pdf(change))
 
 
 @pytest.fixture(scope='module')

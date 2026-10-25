@@ -3,7 +3,7 @@ import { activityFactMissing, currentUncertainty, sourceMarkers } from './draftI
 import { dayTypeLabels, osloDateTime } from './dayOverview';
 
 // Read only: the caller supplies an acknowledged member, never a proposal.
-export function SelectedActivityDetails({ content, classifications, activityId }: { content: Content; classifications: Record<string, string>; activityId: string }) {
+export function SelectedActivityDetails({ content, classifications, activityId, readOnly = false }: { content: Content; classifications: Record<string, string>; activityId: string; readOnly?: boolean }) {
   const index = content.activities.findIndex(activity => activity.id === activityId);
   if (index < 0) return null;
   const activity = content.activities[index];
@@ -13,8 +13,8 @@ export function SelectedActivityDetails({ content, classifications, activityId }
     || field === 'trip' && ['deadhead', 'deadhead_car', 'Tomkjøring med CAR', 'CAR'].includes(kind) || !activityFactMissing(activity[field]));
   const uncertainty = currentUncertainty(content, activity);
   return <div className="selected-activity" data-selected-activity-id={activity.id}>
-    <h3>{kind === 'trip' ? 'Valgt tur' : 'Valgt aktivitet'}</h3>
-    <p><strong>Manuelt valgt · Aktivitet {index + 1} av {content.activities.length}</strong></p>
+    <h3>{readOnly ? 'Aktivitet i lesevisning' : kind === 'trip' ? 'Valgt tur' : 'Valgt aktivitet'}</h3>
+    <p><strong>{readOnly ? 'Skrivebeskyttet konsultasjon' : 'Manuelt valgt'} · Aktivitet {index + 1} av {content.activities.length}</strong></p>
     <dl className="selected-facts">
       <div><dt>Aktivitetstype: </dt><dd>{dayTypeLabels[kind] ?? known(kind)}</dd></div>
       <div><dt>Planlagt start: </dt><dd>{activity.start ? osloDateTime(activity.start) : 'Ukjent'}</dd></div>

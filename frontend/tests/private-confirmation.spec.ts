@@ -225,7 +225,7 @@ for (const width of [768, 1440]) for (const night of [false, true]) test(`plan d
   page.on('request', request => { if (request.url().endsWith('/delete')) requests++; });
   page.once('dialog', async dialog => { expect(dialog.type()).toBe('confirm'); expect(dialog.message()).toContain('Dette kan ikke angres. Kildeutkastet beholdes.'); await dialog.dismiss(); });
   const remove = page.getByRole('button', { name: 'Slett bekreftet plan', exact: true });
-  await remove.focus(); await page.keyboard.press('Enter');
+  await expect(remove).toBeEnabled(); await remove.focus(); await page.keyboard.press('Enter');
   await expect(remove).toBeFocused(); expect(requests).toBe(0);
   expect(await (await context.request.get(API + '/workdays/' + plan.id)).json()).toEqual(plan);
   page.once('dialog', dialog => dialog.accept());
@@ -327,7 +327,7 @@ for (const status of [404, 410]) test(`review fix clears only the denied same-ID
 
 for (const held of ['deletion', 'read']) test(`review fix expiry clears busy and leave locks during held ${held}`, async ({ page, context }) => {
   await page.clock.install(); await login(page);
-  const ending = python("from datetime import datetime,timedelta\nfrom zoneinfo import ZoneInfo\nprint((datetime.now(ZoneInfo('Europe/Oslo'))-timedelta(days=7)+timedelta(seconds=60)).replace(microsecond=0).isoformat())\n").trim();
+  const ending = python("from datetime import datetime,timedelta,timezone\nfrom zoneinfo import ZoneInfo\nprint((datetime.now(timezone.utc)-timedelta(days=7)+timedelta(seconds=60)).replace(microsecond=0).astimezone(ZoneInfo('Europe/Oslo')).isoformat())\n").trim();
   const draft = await post(context, '/drafts', { operation_id: (await post(context, '/draft-operations', {})).operation_id, expected_revision: 0, draft: { service_date: ending.slice(0, 10), activities: [{ id: randomUUID(), type: 'manual', start: ending, end: ending }] } });
   const plan = await confirmSaved(context, draft);
   // Schedule retention timers near the deadline so expiry precedes the

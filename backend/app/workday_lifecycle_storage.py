@@ -7,9 +7,9 @@ from .workday_lifecycle_domain import LifecycleRecord
 
 
 def current(conn, plan):
-    row = conn.execute('SELECT state,started_at,revision FROM workday_lifecycles WHERE workday_id=%s', (plan['id'],)).fetchone()
+    row = conn.execute('SELECT state,started_at,ended_at,revision FROM workday_lifecycles WHERE workday_id=%s', (plan['id'],)).fetchone()
     return {'workday_id': plan['id'], 'state': row['state'] if row else 'confirmed',
-            'started_at': row['started_at'] if row else None, 'revision': row['revision'] if row else 0,
+            'started_at': row['started_at'] if row else None, 'ended_at': row['ended_at'] if row else None, 'revision': row['revision'] if row else 0,
             'expires_at': plan['expires_at']}
 
 
@@ -33,6 +33,7 @@ def lookup(request, identifier):
         if not conn.execute('SELECT %s > clock_timestamp() AS live', (op['expires_at'],)).fetchone()['live']:
             raise HTTPException(410, 'Lagringsforsøket er utløpt.')
         auth.session(conn, request)
+        workday_storage.owned(conn, owner, op['workday_id'], request)
         return {'operation_id': op['id'], 'result': op['result']}
 
 
@@ -53,6 +54,7 @@ def save(request, identifier, body):
             workday_storage.owned(conn, owner, identifier, request)
             return {'operation_id': op['id'], 'result': op['result']}
         latest = current(conn, plan)
+        workday_storage.require_mutable(conn, plan)
         # Different explicit attempts converge on the immutable first start.
         if body.expected_revision != latest['revision'] and not (latest['state'] == 'active' and body.expected_revision == 0):
             raise HTTPException(409, 'Skiftstatusen er endret. Last inn lagret status.')

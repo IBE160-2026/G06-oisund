@@ -18,6 +18,8 @@ implementationStarted: false
 
 **User outcome:** manually mark completed/skipped/interrupted/unknown, confirm normal end or abort, then read a short recap. Cancel preserves the day; ending cannot silently complete remaining activities or resume afterwards.
 
+**Owner-approved refinement, 2026-10-25:** Outcome registration requires an explicitly started active shift. Before Start, day reading, activity choice and details remain available; selection/navigation never Starts or records outcomes. Use separate activity/outcome, day-linked closure confirmation and retained read-only recap screens. Preserve unsaved proposals and reachable recovery. This file retains the historical backlog baseline; use [sprint status](../../implementation-artifacts/sprint-status.yaml) and the [promoted 11.3 specification](../../implementation-artifacts/spec-11-3-record-outcomes-and-close.md) for actual implementation/review and owner acceptance.
+
 **Acceptance criteria:**
 - Default outcomes remain unknown until explicitly recorded. Allow manual completion/skipped/interrupted before terminal closure; confirm/cancel normal end or abort. Atomically persist terminal status/server time/expiry once. No post-end editing, silent completion or resumption. Recap is read-only within expiry.
 - Apply the current PRD/architecture/UX rules for the data and controls this slice introduces; preserve manual/unknown/fictional distinctions and private ownership. Do not implement deferred features as prerequisites.

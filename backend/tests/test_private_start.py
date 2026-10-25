@@ -12,7 +12,7 @@ from test_private_selection import opened, body, routes
 def test_legacy_unstarted_selection_then_start_replay_and_second_start(client, users):
     draft, plan = opened(client, users)
     path, read = routes(plan, 'start'); selection = '/workdays/' + plan['id'] + '/selection'
-    initial = {'workday_id': plan['id'], 'state': 'confirmed', 'started_at': None, 'revision': 0, 'expires_at': plan['expires_at']}
+    initial = {'workday_id': plan['id'], 'state': 'confirmed', 'started_at': None, 'ended_at': None, 'revision': 0, 'expires_at': plan['expires_at']}
     # Existing confirmed plans have no lifecycle row: no eager backfill/rewrite.
     with database() as conn: assert not conn.execute('SELECT 1 FROM workday_lifecycles WHERE workday_id=%s', (plan['id'],)).fetchone()
     migrate(); migrate(); assert client.get(read).json() == initial

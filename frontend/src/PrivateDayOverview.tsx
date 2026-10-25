@@ -2,6 +2,7 @@ import { activityChoiceLabel } from './activityChoiceLabel';
 import type { Content } from './PrivateDrafts';
 import { activityFactMissing, currentUncertainty, displayFact, sourceMarkers, currentUnknowns, importIssues, originalActivity, sameFact } from './draftInterpretation';
 import { dayTypeLabels, osloDateTime, projectDay, type DayMember } from './dayOverview';
+import { outcomeLabels, type Outcome } from './PrivateWorkdayProgress';
 
 const known = (value: string | null | undefined) => activityFactMissing(value) ? 'Ukjent' : value;
 const fieldNames: Record<string, string> = { type: 'Aktivitetstype', raw_code: 'Kode', start: 'Start', end: 'Slutt', source_start: 'Kildestart', source_end: 'Kildeslutt', from_place: 'Fra sted', to_place: 'Til sted', trip: 'Turnummer', line: 'Linje' };
@@ -9,15 +10,16 @@ const interval = (start: string, end: string) => `${osloDateTime(start)} – ${o
 function Duty({ member }: { member: DayMember }) {
   return <p>Vognløp: {known(member.duty)} · Sanntidsverdi: {member.suffix ?? (member.duty?.startsWith('CAR') ? 'Ikke utledet for CAR' : 'Ukjent')}</p>;
 }
-type SelectionProps = { selectedId?: string | null; choose?: (id: string) => void; selectionDisabled?: boolean; openSelected?: () => void; openDisabled?: boolean };
-function Member({ member, content, grouped = false, selectedId, choose, selectionDisabled, openSelected, openDisabled }: { member: DayMember; content: Content; grouped?: boolean } & SelectionProps) {
+type SelectionProps = { selectedId?: string | null; choose?: (id: string) => void; selectionDisabled?: boolean; openSelected?: () => void; openDisabled?: boolean; outcomes?: { activity_id: string; outcome: Outcome }[]; readOnly?: boolean };
+function Member({ member, content, grouped = false, selectedId, choose, selectionDisabled, openSelected, openDisabled, outcomes, readOnly }: { member: DayMember; content: Content; grouped?: boolean } & SelectionProps) {
   const a = member.activity;
   const original = originalActivity(content, a.id);
   const corrected = original && Object.entries(original).filter(([field, value]) => !sameFact(field, a[field], value)).map(([field]) => field);
   const unknowns = currentUnknowns({ ...a, type: member.kind });
   const identifiers = [['line', 'Linje'], ['trip', 'Tur'], ['direction', 'Retning']].filter(([field]) => member.kind === 'trip' || field === 'trip' && ['deadhead', 'deadhead_car', 'Tomkjøring med CAR', 'CAR'].includes(member.kind) || !activityFactMissing(a[field]));
   return <div className="day-member" data-activity-id={a.id}>
-    {choose && <><p className="activity-selection-marker">{selectedId === a.id ? 'Manuelt valgt aktivitet' : 'Ikke valgt'}</p><button type="button" aria-label={`Velg aktivitet ${member.index + 1}`} aria-description={activityChoiceLabel(a, member.kind)} aria-current={selectedId === a.id ? 'true' : undefined} disabled={selectionDisabled || selectedId === a.id} onClick={() => choose(a.id)}>{selectedId === a.id ? 'Valgt aktivitet' : `Velg aktivitet ${member.index + 1}`}</button>{selectedId === a.id && openSelected && <button data-open-activity={a.id} disabled={openDisabled} onClick={openSelected}>Åpne aktivitet {member.index + 1}</button>}</>}
+    {outcomes && <p>Registrert aktivitetsstatus: <strong>{outcomeLabels[outcomes.find(item => item.activity_id === a.id)?.outcome ?? 'unregistered']}</strong></p>}
+    {choose && <><p className="activity-selection-marker">{selectedId === a.id ? readOnly ? 'Åpnet i lesevisning' : 'Manuelt valgt aktivitet' : 'Ikke valgt'}</p><button type="button" aria-label={`${readOnly ? 'Les' : 'Velg'} aktivitet ${member.index + 1}`} aria-description={activityChoiceLabel(a, member.kind)} aria-current={selectedId === a.id ? 'true' : undefined} disabled={selectionDisabled || selectedId === a.id} onClick={() => choose(a.id)}>{selectedId === a.id ? readOnly ? 'Åpnet aktivitet' : 'Valgt aktivitet' : `${readOnly ? 'Les' : 'Velg'} aktivitet ${member.index + 1}`}</button>{selectedId === a.id && openSelected && <button data-open-activity={a.id} disabled={openDisabled} onClick={openSelected}>Åpne aktivitet {member.index + 1}</button>}</>}
     {grouped && <><p><strong>{dayTypeLabels[member.kind] ?? 'Ukjent aktivitetstype'}</strong></p><p>{interval(a.start!, a.end!)}</p></>}
     {a.raw_code && <p>Kode: {displayFact('raw_code', a.raw_code)}</p>}
     {a.type !== member.kind && <p>Oppgitt type: {known(displayFact('type', a.type))} · Bekreftet klassifisering: {dayTypeLabels[member.kind] ?? member.kind}</p>}
@@ -60,7 +62,8 @@ export function PrivateDayOverview({ content, classifications, finalEnd, expires
       ? <li className="day-gap" key={row.id}><strong>Uklassifisert tidsrom</strong><p>{interval(row.start, row.end)}</p><p>Ingen aktivitet er oppgitt for tidsrommet.</p></li>
       : <li className="day-activity" key={row.id} data-day-row={row.id}>
         <h4>{row.label}</h4><p className="day-time">{interval(row.start, row.end)}</p>
-        {row.members.length > 1 && row.members.some(member => member.activity.id === selection.selectedId) && <p className="activity-selection-marker">Manuelt valgt aktivitet i denne pausegruppen: aktivitet {row.members.find(member => member.activity.id === selection.selectedId)!.index + 1}.</p>}
+        {row.members.length > 1 && selection.outcomes && <p>Registrerte aktivitetsstatuser i pausegruppen: {row.members.map(member => `aktivitet ${member.index + 1}: ${outcomeLabels[selection.outcomes!.find(item => item.activity_id === member.activity.id)?.outcome ?? 'unregistered']}`).join(' · ')}.</p>}
+        {row.members.length > 1 && row.members.some(member => member.activity.id === selection.selectedId) && <p className="activity-selection-marker">{selection.readOnly ? 'Aktivitet i lesevisning i denne pausegruppen' : 'Manuelt valgt aktivitet i denne pausegruppen'}: aktivitet {row.members.find(member => member.activity.id === selection.selectedId)!.index + 1}.</p>}
         {row.overlap && <p className="day-uncertainty">Overlapper en tidligere planlagt aktivitet.</p>}
         {issues.filter(issue => row.members.some(member => member.activity.id === issue.activityId)).map((issue, index) => sourceWarning(issue.text, index))}
         {row.members.length > 1 ? <><p>{row.members.length} sammenhengende pauserader. Vognløp: {row.members.filter((member, index) => index === 0 || member.duty !== row.members[index - 1].duty).map(member => `${osloDateTime(member.activity.start!)}: ${member.duty ?? 'Ukjent'} (sanntidsverdi ${member.suffix ?? 'ukjent / ikke utledet'})`).join(' → ')}. Hver del vises i detaljene.</p>

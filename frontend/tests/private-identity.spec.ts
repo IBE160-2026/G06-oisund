@@ -295,6 +295,9 @@ for (const delayed of [false, true]) test(`plan deletion ${delayed ? 'delayed ac
   const plan = await post('/drafts/' + draft.id + '/confirm', { operation_id: review.operation_id, expected_revision: 1, acknowledgements: review.unknowns.map((item: any) => item.id), classifications: {} });
   await preparation(page); await page.getByRole('button', { name: 'Oppdater planlisten', exact: true }).click();
   await preparation(page); await page.getByRole('button', { name: 'Åpne plan ' + serviceDate + ' · versjon 1', exact: true }).click();
+  // Finish the mounted current-authority read before deliberately changing
+  // identity; otherwise that read can safely remove the workspace first.
+  await expect(page.getByRole('button', { name: 'Slett bekreftet plan', exact: true })).toBeEnabled();
   let release!: () => void, entered!: () => void, writes = 0;
   const gate = new Promise<void>(resolve => { release = resolve; });
   const received = new Promise<void>(resolve => { entered = resolve; });
@@ -369,8 +372,13 @@ for (const resource of ['selection', 'start']) for (const delayed of [false, tru
   const read = '/workdays/' + plan.id + '/' + (resource === 'start' ? 'lifecycle' : resource);
   await preparation(page); await page.getByRole('button', { name: 'Oppdater planlisten', exact: true }).click();
   await preparation(page); await page.getByRole('button', { name: 'Åpne plan ' + serviceDate + ' · versjon 1', exact: true }).click();
-  const action = page.getByRole('button', { name: resource === 'selection' ? 'Velg aktivitet 1' : 'Start skift', exact: true });
+  let action = page.getByRole('button', { name: resource === 'selection' ? 'Velg aktivitet 1' : 'Start skift', exact: true });
   await expect(action).toBeEnabled();
+  if (resource === 'start') {
+    await action.click();
+    action = page.getByRole('button', { name: 'Bekreft skiftstart', exact: true });
+    await expect(action).toBeEnabled();
+  }
   let release!: () => void, entered!: () => void, writes = 0;
   const gate = new Promise<void>(resolve => release = resolve), received = new Promise<void>(resolve => entered = resolve);
   page.on('request', request => { if (request.url().endsWith(path) && request.method() === 'POST') writes++; });

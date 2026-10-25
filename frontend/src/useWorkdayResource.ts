@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
+import { validLifecycle } from './PrivateWorkdayProgress';
 
 export type ResourceProps = {
   id: string; expiresAt: string;
   request: (path: string) => Promise<any>; mutation: (path: string, body: object) => Promise<any>;
   suspended: boolean; expired: () => void; lock: (value: boolean) => void; availability: (value: boolean) => void;
+  shorten?: (value: string) => void;
 };
 type Record = { workday_id: string; revision: number; expires_at: string };
 const canonical = (v: any): string => JSON.stringify(v, (_, value) => value && typeof value === 'object' && !Array.isArray(value) ? Object.fromEntries(Object.keys(value).sort().map(key => [key, value[key]])) : value);
@@ -20,13 +22,14 @@ export function useWorkdayResource<T extends Record>(props: ResourceProps, resou
   const [message, setMessage] = useState('Henter lagret status …');
   const alive = useRef(true), sending = useRef(false), generation = useRef(0), unresolved = useRef(false);
   const path = '/workdays/' + id + '/' + (resource === 'start' ? 'lifecycle' : resource);
-  const valid = (v: any): v is T => v && v.workday_id === id && Number.isSafeInteger(v.revision) && v.revision >= 0
-    && typeof v.expires_at === 'string' && Date.parse(v.expires_at) === Date.parse(expiresAt) && Date.parse(expiresAt) > Date.now() && validFields(v);
+  const valid = (v: any, historical = false): v is T => v && v.workday_id === id && Number.isSafeInteger(v.revision) && v.revision >= 0
+    && typeof v.expires_at === 'string' && (historical || Date.parse(v.expires_at) <= Date.parse(expiresAt)) && Date.parse(v.expires_at) > Date.now() && validFields(v);
   function adopt(value: T) { setSaved(value); setComparison(null); setPending(null); setProposal(null); setRejected(false); unresolved.current = false; lock(false); }
   async function current() {
     try {
       const value = await request(path);
       if (!valid(value)) throw Error();
+      props.shorten?.(value.expires_at);
       if (alive.current) { setAvailable(true); availability(true); }
       return value;
     } catch (error: any) {
@@ -63,12 +66,13 @@ export function useWorkdayResource<T extends Record>(props: ResourceProps, resou
       const receipt = lookup ? await request('/workday-' + resource + '-operations/' + operation.operation_id)
         : await mutation('/workdays/' + id + '/' + resource, operation);
       if (!alive.current) return;
-      if (!receipt || Object.keys(receipt).sort().join() !== 'operation_id,result' || receipt.operation_id !== operation.operation_id || !valid(receipt.result) || !accepted(receipt.result, operation)) throw Error();
+      if (!receipt || Object.keys(receipt).sort().join() !== 'operation_id,result' || receipt.operation_id !== operation.operation_id || !valid(receipt.result, true) || !accepted(receipt.result, operation)) throw Error();
       verifying = true;
       const latest = await current();
       if (!alive.current) return;
-      if (latest.revision < receipt.result.revision || latest.revision === receipt.result.revision && canonical(latest) !== canonical(receipt.result)) throw Error();
+      if (latest.revision < receipt.result.revision || latest.revision === receipt.result.revision && canonical({ ...latest, expires_at: receipt.result.expires_at }) !== canonical(receipt.result)) throw Error();
       if (latest.revision > receipt.result.revision) {
+        if (resource === 'start') { adopt(latest); setMessage('Lagret skiftstatus er hentet.'); return; }
         setPending(null); setComparison(latest); setMessage('Forsøket ble lagret. Et nyere aktivitetsvalg finnes; sammenlign og last inn lagret valg.');
       } else { adopt(latest); setMessage(resource === 'start' ? 'Skiftstart er lagret.' : 'Aktivitetsvalget er lagret.'); }
     } catch (error: any) {
@@ -86,6 +90,14 @@ export function useWorkdayResource<T extends Record>(props: ResourceProps, resou
       if (!verifying && !lookup && error?.status === 409) {
         try {
           const latest = await current(); if (!alive.current) return;
+          if (error.apiDetail === 'Skiftet er avsluttet. Planen er skrivebeskyttet.') {
+            const lifecycle = resource === 'start' ? latest : await request('/workdays/' + id + '/lifecycle');
+            if (!validLifecycle(lifecycle) || lifecycle.workday_id !== id || !['ended', 'aborted'].includes(lifecycle.state) || Date.parse(lifecycle.expires_at) > Date.parse(latest.expires_at)) throw Error();
+            if (!alive.current) return;
+            if (resource === 'start') { adopt(latest); setMessage('Skiftet er avsluttet. Avvist skiftstart er avbrutt.'); }
+            else { setPending(null); setComparison(latest); setMessage('Skiftet er avsluttet. Valgforslaget ble ikke lagret. Sammenlign og last inn lagret aktivitetsvalg.'); }
+            return;
+          }
           if (latest.revision <= operation.expected_revision) throw Error();
           setPending(null); setComparison(latest); setMessage('Lagret status er endret i et annet vindu. Forslaget er beholdt. Sammenlign og last inn lagret status.');
         } catch { if (alive.current) setMessage('Forsøket er uavklart. Kontroller eller prøv samme forsøk.'); }

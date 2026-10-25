@@ -17,7 +17,7 @@ test('relative fixture uses elapsed UTC durations across the Oslo autumn transit
 
 test('independent explicit start without selection reopen reload and unchanged planned snapshot', async ({ page, context }) => {
   const { plan } = await openedPlan(page, context);
-  await page.getByRole('button', { name: 'Start skift', exact: true }).click(); await expect(shiftStatus(page)).toHaveText('Skiftstart er lagret.');
+  await page.getByRole('button', { name: 'Start skift', exact: true }).click(); await page.getByRole('button', { name: 'Bekreft skiftstart', exact: true }).click(); await expect(shiftStatus(page)).toHaveText('Skiftstart er lagret.');
   await expect(page.getByText('Ingen aktivitet valgt', { exact: true })).toBeVisible();
   await expect(page.getByText(/^Planlagt start:/)).toContainText('02.01.2031');
   const actual = await (await context.request.get(API + '/workdays/' + plan.id + '/lifecycle')).json();
@@ -40,7 +40,7 @@ test('independent explicit start without selection reopen reload and unchanged p
 
 test('explicit start after planned departure preserves its distinct authoritative actual time', async ({ page, context }) => {
   const { plan, activities } = await openedPlan(page, context, true, -120);
-  await page.getByRole('button', { name: 'Start skift', exact: true }).click(); await expect(shiftStatus(page)).toHaveText('Skiftstart er lagret.');
+  await page.getByRole('button', { name: 'Start skift', exact: true }).click(); await page.getByRole('button', { name: 'Bekreft skiftstart', exact: true }).click(); await expect(shiftStatus(page)).toHaveText('Skiftstart er lagret.');
   const actual = await (await context.request.get(API + '/workdays/' + plan.id + '/lifecycle')).json();
   expect(Date.parse(actual.started_at)).toBeGreaterThan(Date.parse(activities[0].start!));
   expect(await (await context.request.get(API + '/workdays/' + plan.id)).json()).toEqual(plan);
@@ -53,7 +53,7 @@ for (const reply of ['lost', 'html', 'malformed']) test(`uncertain ${reply} star
     if (reply === 'lost') return route.abort();
     await route.fulfill(reply === 'html' ? { status: 200, contentType: 'text/html', body: '<html>lost</html>' } : { status: 200, json: { operation_id: original.operation_id, result: {} } });
   });
-  await page.getByRole('button', { name: 'Start skift', exact: true }).click(); await expect(shiftStatus(page)).toContainText('uavklart');
+  await page.getByRole('button', { name: 'Start skift', exact: true }).click(); await page.getByRole('button', { name: 'Bekreft skiftstart', exact: true }).click(); await expect(shiftStatus(page)).toContainText('uavklart');
   await expect(page.getByRole('button', { name: 'Kontroller skiftstarten', exact: true })).toBeEnabled();
   await expect(page.getByText('Startet manuelt', { exact: true })).toHaveCount(0); await expect.poll(() => beforeUnload(page), { timeout: 5000 }).toBe(true);
   // The day keeps unresolved start recovery reachable before another activity can open.
@@ -84,8 +84,8 @@ for (const resource of ['selection', 'start']) test(`validated ${resource} capac
   python(`with database() as conn:\n conn.execute('INSERT INTO workday_${resource}_operations SELECT gen_random_uuid(),owner,workday_id,payload_hash,result,expires_at FROM workday_${resource}_operations CROSS JOIN generate_series(1,1999) WHERE id=%s', (${JSON.stringify(receipt.operation_id)},))\n`);
   // UI still holds revision zero: selection needs fresh state to hit admission.
   if (resource === 'selection') await page.getByRole('button', { name: 'Kontroller plantilgang og aktivitetsvalg', exact: true }).click();
-  await page.getByRole('button', { name: resource === 'selection' ? 'Velg aktivitet 1' : 'Start skift', exact: true }).click();
-  const status = resource === 'selection' ? page.getByRole('status', { name: 'Aktivitetsstatus' }) : shiftStatus(page);
+  await page.getByRole('button', { name: resource === 'selection' ? 'Velg aktivitet 1' : 'Start skift', exact: true }).click(); if (resource === 'start') await page.getByRole('button', { name: 'Bekreft skiftstart', exact: true }).click();
+  const status = resource === 'selection' ? page.getByRole('status', { name: 'Aktivitetsvalgstatus' }) : shiftStatus(page);
   await expect(status).toContainText('grensen på 2000'); await expect.poll(() => beforeUnload(page), { timeout: 5000 }).toBe(true);
   await page.getByRole('button', { name: resource === 'selection' ? 'Avbryt avvist aktivitetsvalg' : 'Avbryt avvist skiftstart', exact: true }).click();
   await expect(status).toHaveText(resource === 'selection' ? 'Avvist aktivitetsvalg er avbrutt. Lagret valg er uendret.' : 'Avvist skiftstart er avbrutt. Lagret skiftstatus er uendret.');
@@ -108,7 +108,7 @@ for (const resource of ['selection', 'start']) test(`${resource} late accepted r
     const response = await route.fetch(); entered(); await gate; await route.fulfill({ response });
   });
   try {
-    await page.getByRole('button', { name: resource === 'selection' ? 'Velg aktivitet 1' : 'Start skift', exact: true }).click(); await received;
+    await page.getByRole('button', { name: resource === 'selection' ? 'Velg aktivitet 1' : 'Start skift', exact: true }).click(); if (resource === 'start') await page.getByRole('button', { name: 'Bekreft skiftstart', exact: true }).click(); await received;
     await expect.poll(() => beforeUnload(page), { timeout: 5000 }).toBe(true);
     await page.clock.fastForward(6000);
     await expect(page.getByRole('region', { name: 'Bekreftet plan', exact: true })).toHaveCount(0);
@@ -126,7 +126,7 @@ for (const resource of ['selection', 'start']) test(`${resource} deleted plan hi
     if (route.request().method() !== 'POST') return route.continue();
     original = route.request().postDataJSON(); await route.fetch(); await route.fulfill({ status: 200, contentType: 'text/html', body: '<html>lost</html>' });
   });
-  await page.getByRole('button', { name: resource === 'selection' ? 'Velg aktivitet 1' : 'Start skift', exact: true }).click();
+  await page.getByRole('button', { name: resource === 'selection' ? 'Velg aktivitet 1' : 'Start skift', exact: true }).click(); if (resource === 'start') await page.getByRole('button', { name: 'Bekreft skiftstart', exact: true }).click();
   const check = page.getByRole('button', { name: resource === 'selection' ? 'Kontroller aktivitetsvalget' : 'Kontroller skiftstarten', exact: true });
   await expect(check).toBeEnabled(); await page.unroute('**:8001' + path);
   await post(context, '/workdays/' + plan.id + '/delete', { operation_id: randomUUID(), source_revision: 1 });

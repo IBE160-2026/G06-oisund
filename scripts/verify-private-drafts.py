@@ -60,7 +60,7 @@ try:
     run(OPERATIONAL + ['stop', 'private-api'])
     run(PRIVATE + ['up', '-d', '--build', '--wait'])
     python('')
-    print(run(PRIVATE + ['run', '--rm', '--no-deps', '-v', str(ROOT / 'Eksempelfiler') + ':/fixtures:ro', '-e', 'PRIVATE_TEST_PROJECT=' + PROJECT, '-e', 'PRIVATE_TEST_API=http://private-api:8000', 'private-api', 'python', '-m', 'pytest', '-q', '--tb=short', 'tests/test_private_access.py', 'tests/test_private_drafts.py', 'tests/test_private_workdays.py', 'tests/test_private_bus.py', 'tests/test_private_selection.py', 'tests/test_private_start.py', 'tests/test_private_import.py', 'tests/test_pdf_import.py']), flush=True)
+    print(run(PRIVATE + ['run', '--rm', '--no-deps', '-v', str(ROOT / 'Eksempelfiler') + ':/fixtures:ro', '-e', 'PRIVATE_TEST_PROJECT=' + PROJECT, '-e', 'PRIVATE_TEST_API=http://private-api:8000', 'private-api', 'python', '-m', 'pytest', '-q', '--tb=short', 'tests/test_private_access.py', 'tests/test_private_drafts.py', 'tests/test_private_workdays.py', 'tests/test_private_bus.py', 'tests/test_private_selection.py', 'tests/test_private_start.py', 'tests/test_private_outcomes.py', 'tests/test_private_import.py', 'tests/test_pdf_import.py']), flush=True)
     username = 'synthetic-draft-restart-' + uuid4().hex
     password = secrets.token_urlsafe(24)
     python(f'from app.auth import provision\nprovision({username!r}, {password!r})\n')
@@ -113,7 +113,7 @@ try:
     persisted_confirmation_state = python(state_program)
     # Include raw mutable authorities and both immutable receipt tables in the
     # exact populated migration/restart comparison, with no current-time fields.
-    for table, key in [('workday_selections', 'workday_id'), ('workday_lifecycles', 'workday_id'), ('workday_selection_operations', 'id'), ('workday_start_operations', 'id')]:
+    for table, key in [('workday_selections', 'workday_id'), ('workday_lifecycles', 'workday_id'), ('workday_selection_operations', 'id'), ('workday_start_operations', 'id'), ('workday_outcome_revisions', 'workday_id'), ('workday_outcomes', 'activity_id'), ('workday_outcome_operations', 'id'), ('workday_close_operations', 'id')]:
         query = ('SELECT t.* FROM ' + table + ' t JOIN workdays w ON t.workday_id=w.id WHERE w.owner=%s ORDER BY t.' + key)
         state_program = state_program.replace("'confirmed_sources':", repr(table) + ":conn.execute(" + repr(query) + ", (" + repr(session['account_id']) + ",)).fetchall(), 'confirmed_sources':")
     persisted_confirmation_state = python(state_program)
@@ -145,6 +145,30 @@ try:
         denied(route, 404, 8000)
     denied(selection_path, 404, 8000, selection_body)
     denied(start_path, 404, 8000, start_body)
+    # Retain a distinct terminal plan while leaving legacy active/unstarted
+    # cases intact. Exercise unknown membership and shortened current authority.
+    terminal_source = request('/drafts', {'operation_id': request('/draft-operations', {})['operation_id'], 'expected_revision': 0, 'draft': planned})
+    terminal_review = request('/workday-reviews', {'draft_id': terminal_source['id'], 'expected_revision': 1})
+    terminal_decisions = {'operation_id': terminal_review['operation_id'], 'expected_revision': 1, 'acknowledgements': [item['id'] for item in terminal_review['unknowns']], 'classifications': {key: 'manual' for key in terminal_review['classifications_required']}}
+    terminal_plan = request('/drafts/' + terminal_source['id'] + '/confirm', terminal_decisions)
+    terminal_base = '/workdays/' + terminal_plan['id']
+    terminal_start_body = {'operation_id': str(uuid4()), 'expected_revision': 0}
+    terminal_start = request(terminal_base + '/start', terminal_start_body)
+    outcome_body = {'operation_id': str(uuid4()), 'expected_revision': 0, 'expected_lifecycle_revision': 1, 'activity_id': terminal_plan['draft']['activities'][0]['id'], 'outcome': 'skipped'}
+    outcome_receipt = request(terminal_base + '/outcome', outcome_body)
+    close_body = {'operation_id': str(uuid4()), 'expected_revision': 1, 'expected_outcome_revision': 1, 'action': 'ended'}
+    close_receipt = request(terminal_base + '/close', close_body)
+    terminal_snapshot = request(terminal_base + '/recap')
+    assert terminal_snapshot['lifecycle'] == close_receipt['result']
+    assert terminal_snapshot['lifecycle']['started_at'] == terminal_start['result']['started_at']
+    assert terminal_snapshot['outcomes']['outcomes'] == outcome_receipt['result']['outcomes']
+    assert terminal_snapshot['outcomes']['outcomes'][0]['outcome'] == 'skipped'
+    assert all(item['outcome'] == 'unregistered' for item in terminal_snapshot['outcomes']['outcomes'][1:])
+    assert terminal_snapshot['plan']['expires_at'] < terminal_plan['expires_at']
+    for route in [terminal_base + '/outcomes', terminal_base + '/recap', '/workday-outcome-operations/' + outcome_body['operation_id'], '/workday-close-operations/' + close_body['operation_id']]:
+        denied(route, 404, 8000)
+    denied(terminal_base + '/outcome', 404, 8000, outcome_body)
+    denied(terminal_base + '/close', 404, 8000, close_body)
     expired_operation = request('/draft-operations', {})['operation_id']
     python(f"with database() as conn:\n conn.execute('UPDATE draft_operations SET expires_at=clock_timestamp() WHERE id=%s', ({expired_operation!r},))\n")
     # Synthetic pre-upgrade issuance: default v1/false columns preserve pending
@@ -200,6 +224,13 @@ try:
     assert request(start_path, start_body) == start_receipt
     assert request('/workday-start-operations/' + start_body['operation_id']) == start_receipt
     assert request(legacy_lifecycle_path) == legacy_lifecycle
+    assert request(terminal_base + '/recap') == terminal_snapshot
+    assert request(terminal_base + '/close', close_body) == close_receipt
+    assert request('/workday-close-operations/' + close_body['operation_id']) == close_receipt
+    assert request(terminal_base + '/outcome', outcome_body) == outcome_receipt
+    assert request('/workday-outcome-operations/' + outcome_body['operation_id']) == outcome_receipt
+    assert request(terminal_base + '/start', terminal_start_body) == terminal_start
+    assert request('/workday-operations/' + terminal_decisions['operation_id'])['result'] == terminal_snapshot['plan']
     assert request('/workdays/' + confirmed['id']) == confirmed
     assert request('/drafts/' + plan_source['id'] + '/confirm', confirmation) == confirmed
     assert request('/workday-operations/' + confirmation['operation_id']) == {'state': 'accepted', 'result': confirmed}

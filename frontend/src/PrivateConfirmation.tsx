@@ -1,14 +1,14 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { validContent, type Content, type Saved } from './PrivateDrafts';
 import { SourceFacts } from './PrivateImport';
-import { PrivateBus } from './PrivateBus';
-import { PrivateActivitySelection } from './PrivateActivitySelection';
-import { PrivateShiftStart } from './PrivateShiftStart';
+
+
+import { PrivateWorkdayView } from './PrivateWorkdayView';
 import { effectiveDuty, activityFactMissing, displayFact, currentUncertainty } from './draftInterpretation';
 
 type Review = { operation_id: string; operation_expires_at: string; draft_id: string; revision: number; draft: Content; blockers: string[]; unknowns: { id: string; label: string }[]; classifications_required: string[]; supported_types: string[]; final_end: string | null; expires_at: string | null };
 type Decisions = { operation_id: string; expected_revision: number; acknowledgements: string[]; classifications: Record<string, string> };
-type Plan = { id: string; source_draft_id: string; source_revision: number; confirmed_at: string; final_end: string; expires_at: string; state: 'confirmed'; draft: Content; acknowledgements: string[]; classifications: Record<string, string>; unknowns: { id: string; label: string }[] };
+export type Plan = { id: string; source_draft_id: string; source_revision: number; confirmed_at: string; final_end: string; expires_at: string; state: 'confirmed'; draft: Content; acknowledgements: string[]; classifications: Record<string, string>; unknowns: { id: string; label: string }[] };
 type Summary = Pick<Plan, 'id' | 'source_draft_id' | 'source_revision' | 'expires_at'> & { service_date: string | null };
 type Deletion = { id: string; expires_at: string; body: { operation_id: string; source_revision: number } };
 type Props = { saved: Saved | null; clean: boolean; request: (path: string) => Promise<any>; mutation: (path: string, body: object) => Promise<any>; expired: () => void; suspended: boolean; lock: (value: boolean) => void; screen: 'upload' | 'import' | 'editor' | 'plan'; showPlan: () => void; showPreparation: () => void; planChanged: (value: boolean) => void; consultationChanged: (value: boolean) => void };
@@ -30,13 +30,13 @@ function validCandidates(value: Review): boolean {
   });
   return expected.length === value.unknowns.length && value.unknowns.every(item => expected.some(candidate => candidate.id === item.id && candidate.label === item.label));
 }
-function validPlan(value: any): value is Plan {
+export function validPlan(value: any): value is Plan {
   return value && Object.keys(value).sort().join() === 'acknowledgements,classifications,confirmed_at,draft,expires_at,final_end,id,source_draft_id,source_revision,state,unknowns'
     && uuid(value.id) && uuid(value.source_draft_id) && Number.isInteger(value.source_revision) && value.source_revision > 0
     && value.state === 'confirmed' && Number.isFinite(Date.parse(value.confirmed_at)) && live(value.expires_at)
     && validContent(value.draft) && value.draft.service_date && value.draft.activities.length > 0
     && value.draft.activities.every((a: any, i: number) => a.start && a.end && (i === 0 || Date.parse(a.start) >= Date.parse(value.draft.activities[i - 1].start)))
-    && Date.parse(value.final_end) === finalEnd(value.draft) && Date.parse(value.expires_at) - Date.parse(value.final_end) === 7 * 86400000
+    && Date.parse(value.final_end) === finalEnd(value.draft) && Date.parse(value.expires_at) <= Date.parse(value.final_end) + 7 * 86400000
     && Array.isArray(value.acknowledgements) && value.acknowledgements.length <= 3000 && value.acknowledgements.every((v: any) => typeof v === 'string' && v.length <= 200)
     && new Set(value.acknowledgements).size === value.acknowledgements.length && value.classifications && typeof value.classifications === 'object' && !Array.isArray(value.classifications)
     && Array.isArray(value.unknowns) && value.unknowns.length === value.acknowledgements.length && new Set(value.unknowns.map((v: any) => v?.id)).size === value.unknowns.length && value.unknowns.every((v: any) => v && typeof v.label === 'string' && value.acknowledgements.includes(v.id))
@@ -44,7 +44,7 @@ function validPlan(value: any): value is Plan {
     && Object.entries(value.classifications).every(([, kind]) => supportedTypes.includes(kind as string));
 }
 const factNames: Record<string, string> = { type: 'Aktivitetstype', raw_code: 'Opprinnelig kode', start: 'Start med dato og Oslo-offset', end: 'Slutt med dato og Oslo-offset', source_start: 'Opprinnelig startklokke', source_end: 'Opprinnelig sluttklokke', from_place: 'Fra sted', to_place: 'Til sted', trip: 'Turnummer', line: 'Linje', direction: 'Retning', uncertainty: 'Usikkerhet / ukjente fakta', provenance: 'Kilde / manuell rettelse' };
-function Facts({ content, classifications = {}, historical = false }: { content: Content; classifications?: Record<string, string>; historical?: boolean }) {
+export function Facts({ content, classifications = {}, historical = false }: { content: Content; classifications?: Record<string, string>; historical?: boolean }) {
   return <><dl>{Object.entries(content).filter(([key]) => !['activities', 'import_metadata', 'vehicle_duty_changes'].includes(key)).map(([key, value]) => <div key={key}><dt>{{ service_date: 'Tjenestedato', vehicle_duty: 'Vognløp', realtime_duty: 'Sanntidsverdi', physical_bus: historical ? 'Fysisk buss ved bekreftelse (historisk)' : 'Fysisk buss (manuelt i utkastet)' }[key] ?? key}</dt><dd>{String(value ?? 'Ukjent')}</dd></div>)}</dl>
     <ol>{content.activities.map((activity, index) => <li key={activity.id}><h4>Aktivitet {index + 1}</h4><p>Vognløp: {effectiveDuty(content, index) ?? 'Ukjent'}</p><dl>{Object.entries(activity).filter(([key]) => key !== 'id').map(([key, value]) => <div className="fact" key={key}><dt>{factNames[key] ?? key}</dt><dd>{activityFactMissing(key === 'uncertainty' && !historical ? currentUncertainty(content, activity) : value) ? 'Ukjent' : key === 'uncertainty' && !historical ? currentUncertainty(content, activity) : displayFact(key, value)}</dd></div>)}</dl>{classifications[activity.id] && <p>Eksplisitt klassifisert som: {typeLabels[classifications[activity.id]]}</p>}</li>)}</ol>
     {content.import_metadata && <details><summary>Bevarte kildefakta</summary><SourceFacts metadata={content.import_metadata} historical={historical} /></details>}
@@ -65,11 +65,11 @@ export function PrivateConfirmation({ saved, clean, request, mutation, expired, 
   const busAvailability = useCallback((value: boolean) => guardAvailability('bus', value), [guardAvailability]);
   const selectionAvailability = useCallback((value: boolean) => guardAvailability('selection', value), [guardAvailability]);
   const startAvailability = useCallback((value: boolean) => guardAvailability('start', value), [guardAvailability]);
-  const lockRef = useRef({ bus: false, selection: false, start: false });
+  const lockRef = useRef({ bus: false, selection: false, start: false, outcome: false });
   const [busLocked, setBusLocked] = useState(false);
   const [dayNavigationLocked, setDayNavigationLocked] = useState(false);
   const busLockedRef = useRef(false);
-  const guardChild = useCallback((key: 'bus' | 'selection' | 'start', value: boolean) => {
+  const guardChild = useCallback((key: 'bus' | 'selection' | 'start' | 'outcome', value: boolean) => {
     lockRef.current[key] = value;
     const locked = Object.values(lockRef.current).some(Boolean);
     busLockedRef.current = locked;
@@ -79,6 +79,7 @@ export function PrivateConfirmation({ saved, clean, request, mutation, expired, 
   const guardBus = useCallback((value: boolean) => guardChild('bus', value), [guardChild]);
   const guardSelection = useCallback((value: boolean) => guardChild('selection', value), [guardChild]);
   const guardStart = useCallback((value: boolean) => guardChild('start', value), [guardChild]);
+  const guardOutcome = useCallback((value: boolean) => guardChild('outcome', value), [guardChild]);
   const [review, setReview] = useState<Review | null>(null);
   const [acks, setAcks] = useState<string[]>([]);
   const [classes, setClasses] = useState<Record<string, string>>({});
@@ -188,7 +189,7 @@ export function PrivateConfirmation({ saved, clean, request, mutation, expired, 
   }
   function accept(value: any, decisions: Decisions) {
     if (!review || !validPlan(value) || value.source_draft_id !== review.draft_id || value.source_revision !== review.revision
-      || canonical(value.draft) !== canonical(review.draft) || Date.parse(value.expires_at) !== Date.parse(review.expires_at!)
+      || canonical(value.draft) !== canonical(review.draft) || Date.parse(value.expires_at) > Date.parse(review.expires_at!)
       || canonical(value.unknowns) !== canonical(relevantUnknowns(review, decisions.classifications))
       || canonical([...value.acknowledgements].sort()) !== canonical([...decisions.acknowledgements].sort()) || canonical(value.classifications) !== canonical(decisions.classifications)) throw Error();
     setPlan(value); setActivityOpen(false); showPlan(); setPending(null); setReview(null); setMessage('Planen er bekreftet. Ingen aktivitet er startet eller fullført.'); title.current?.focus();
@@ -227,7 +228,7 @@ export function PrivateConfirmation({ saved, clean, request, mutation, expired, 
     const generation = ++reading.current;
     const read = { id, generation }; planRead.current = read;
     setBusy(true);
-    try { const value = await request('/workdays/' + id); if (!alive.current || generation !== reading.current || openingScreen !== presentation.current.version || deletionRef.current || busLockedRef.current) return; const summary = items.find(item => item.id === id); if (!validPlan(value) || value.id !== id || !summary || value.source_draft_id !== summary.source_draft_id || value.source_revision !== summary.source_revision || value.draft.service_date !== summary.service_date || Date.parse(value.expires_at) !== Date.parse(summary.expires_at)) throw Error(); setPlanOpen(current => current + 1); setPlan(value); setActivityOpen(false); showPlan(); setMessage('Bekreftet plan åpnet. Fristen er uendret.'); title.current?.focus(); }
+    try { const value = await request('/workdays/' + id); if (!alive.current || generation !== reading.current || openingScreen !== presentation.current.version || deletionRef.current || busLockedRef.current) return; const summary = items.find(item => item.id === id); if (!validPlan(value) || value.id !== id || !summary || value.source_draft_id !== summary.source_draft_id || value.source_revision !== summary.source_revision || value.draft.service_date !== summary.service_date || Date.parse(value.expires_at) > Date.parse(summary.expires_at)) throw Error(); setPlanOpen(current => current + 1); setPlan(value); setActivityOpen(false); showPlan(); setMessage('Bekreftet plan åpnet. Fristen er uendret.'); title.current?.focus(); }
     catch (error: any) { if (alive.current && generation === reading.current && !deletionRef.current) { if ([404, 410].includes(error?.status)) setPlan(current => current?.id === id ? null : current); failure(error); } }
     finally { if (planRead.current === read) planRead.current = null; if (alive.current && generation === reading.current) setBusy(false); }
   }
@@ -278,7 +279,7 @@ export function PrivateConfirmation({ saved, clean, request, mutation, expired, 
     </section>}
     {pending && <div className="controls"><button disabled={busy || busLocked || suspended} onClick={() => void send()}>Prøv samme bekreftelse igjen</button><button disabled={busy || busLocked || suspended} onClick={() => void send(true)}>Kontroller bekreftelsen</button></div>}
     </div>
-    {plan && <section hidden={screen !== 'plan'} aria-label="Bekreftet plan"><div hidden={activityOpen}><h2 ref={dayTitle} tabIndex={-1}>Dagen din</h2>{planAvailable ? <><h3>Bekreftet plan · versjon {plan.source_revision}</h3><p>Historisk bekreftelse: {date(plan.confirmed_at)}.</p><p>Siste aktivitetsslutt: {date(plan.final_end)}. Utløper {date(plan.expires_at)}. Fristen forlenges ikke.</p></> : <p>Planfakta er skjult til plantilgangen er kontrollert.</p>}<PrivateBus key={plan.id + ':' + planOpen} id={plan.id} expiresAt={plan.expires_at} request={request} mutation={mutation} suspended={suspended || !!deleting || !!pending} expired={expired} lock={guardBus} availability={busAvailability} factsAvailable={planAvailable} /><PrivateShiftStart key={'start:' + plan.id + ':' + planOpen} id={plan.id} expiresAt={plan.expires_at} plannedStart={plan.draft.activities[0].start!} request={request} mutation={mutation} suspended={suspended || !!deleting || !!pending} expired={expired} lock={guardStart} availability={startAvailability} factsAvailable={planAvailable} /></div><PrivateActivitySelection key={'selection:' + plan.id + ':' + planOpen} id={plan.id} expiresAt={plan.expires_at} content={plan.draft} classifications={plan.classifications} finalEnd={plan.final_end} activityOpen={activityOpen} navigationLocked={dayNavigationLocked} openActivity={() => setActivityOpen(true)} backToDay={() => setActivityOpen(false)} request={request} mutation={mutation} suspended={suspended || !!deleting || !!pending} expired={expired} lock={guardSelection} availability={selectionAvailability} factsAvailable={planAvailable} /><div hidden={activityOpen}>{planAvailable && <><p>Historiske fakta og godtatte ukjente opplysninger gjelder tidspunktet for bekreftelsen. Bussregistreringen over gjelder nå.</p><details className="day-confirmed-details"><summary>Bekreftede detaljer og historisk kilde</summary><Facts historical content={plan.draft} classifications={plan.classifications} /></details><details><summary>Godtatte ukjente fakta</summary><ul>{plan.unknowns.map(item => <li key={item.id}>{item.label}</li>)}</ul></details></>}<div className="controls"><button disabled={!planAvailable || !!deleting || !!pending || busLocked || suspended} onClick={() => void remove()}>Slett bekreftet plan</button><button disabled={busy || !!deleting || busLocked} onClick={() => { setPlan(null); showPreparation(); }}>Lukk planen</button></div></div></section>}
+    {plan && <PrivateWorkdayView validPlan={validPlan} historicalDetails={<Facts historical content={plan.draft} classifications={plan.classifications} />} busy={busy} key={plan.id + ':' + planOpen} plan={plan} hidden={screen !== 'plan'} activityOpen={activityOpen} setActivityOpen={setActivityOpen} request={request} mutation={mutation} suspended={suspended || !!deleting || !!pending} expired={expired} planAvailable={planAvailable} dayNavigationLocked={dayNavigationLocked} busLocked={busLocked} guardBus={guardBus} guardSelection={guardSelection} guardStart={guardStart} guardOutcome={guardOutcome} busAvailability={busAvailability} selectionAvailability={selectionAvailability} startAvailability={startAvailability} remove={() => void remove()} closeView={() => { setPlan(null); showPreparation(); }} showPreparation={showPreparation} shorten={value => setPlan(current => current?.id === plan.id && Date.parse(value) < Date.parse(current.expires_at) ? { ...current, expires_at: value } : current)} />}
     <div hidden={screen !== 'plan'}>{deleting && <div className="controls"><button disabled={busy || suspended} onClick={() => void remove()}>Prøv samme sletting igjen</button><button disabled={busy || suspended} onClick={() => void remove(true)}>Kontroller slettingen</button></div>}</div>
     <div hidden={screen !== 'upload'}><h3>Mine bekreftede planer</h3><button disabled={busy || !!pending || !!deleting || busLocked || suspended} onClick={() => void list()}>Oppdater planlisten</button>
     {items.length === 0 && <p>Ingen planer er lastet.</p>}<ul>{items.map(item => <li key={item.id}><button disabled={busy || !!pending || !!deleting || busLocked || suspended} onClick={() => void reopen(item.id)}>Åpne plan {item.service_date ?? 'ukjent dato'} · versjon {item.source_revision}</button> Utløper {date(item.expires_at)}</li>)}</ul>

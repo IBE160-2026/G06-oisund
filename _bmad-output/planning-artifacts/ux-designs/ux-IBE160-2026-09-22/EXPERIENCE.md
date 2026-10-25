@@ -2,7 +2,7 @@
 name: IBE160 — Experience Spine
 status: approved
 decision: SCOPE-02
-updated: 2026-10-24
+updated: 2026-10-25
 ---
 
 # Experience Spine — Course V1
@@ -41,7 +41,7 @@ V1 supports preparation and consultation while stopped. It neither measures move
 
 **Activity selection:** direct selection list identifies route, direction/destination and departure/date; line number alone is insufficient. Previous/next includes non-passenger activities and is disabled with a clear boundary label at the ends. The prominent label is `Valgt tur` or `Valgt aktivitet`, with `Manuelt valgt`. Do not show `Du er her`, current/next stop, GPS marker or arrival timer. Scheduled time cannot change selection.
 
-**Outcomes:** default `Ikke registrert`; explicit `Fullført manuelt`, `Hoppet over`, `Avbrutt`. Change outcomes before closure; selection is separate. Show unresolved outcomes in the end dialog. `Avslutt skift` / `Avbryt skift` → confirmation/cancel. The recap shows the saved plan and manual/unknown outcomes, with expiry. A neutral `Takk for i dag` is sufficient; no inferred success or scores.
+**Outcomes:** default `Ikke registrert`; explicit `Fullført manuelt`, `Hoppet over`, `Avbrutt`. Owner clarification, 2026-10-25: registration requires an explicitly started active shift. Before Start, day reading, activity selection and details remain available; selection never Starts or records outcomes. Change outcomes before closure, including explicit return to unregistered; use a separately labelled area and explicit Save. Show saved counts and remaining unregistered members on a separate day-linked confirmation screen. `Avslutt skift` / `Avbryt skift` → confirmation/cancel with return focus. The separate read-only recap shows the saved plan and manual/unknown outcomes, with expiry. Terminal consultation never writes another selection. Keep proposals and recovery reachable across navigation; known-unsent proposals may be discarded locally when current facts are unavailable, while uncertain commands retain checking/retry. A neutral `Takk for i dag` is sufficient; no inferred success or scores.
 
 **Notice list:** heading `Manuelt vedlikeholdte avvik`; each item carries its source link and metadata. Shared multi-line notice appears once listing all matched lines; separate incidents remain separate. Known validity excludes non-overlap; unknown/partial validity remains labelled uncertain. Use `Kildens oppdateringstid er ukjent` for a null source time, and separate `Registrert` / `Sist kontrollert` timestamps. Reading/editing does not automatically update checked time; an explicit source-check action does. No precise trip/stop match or automatic coverage claim.
 
@@ -71,3 +71,9 @@ V1 supports preparation and consultation while stopped. It neither measures move
 Keyboard order follows reading order; controls have action labels, visible selected/disabled state and meaningful focus. Dialog focus returns to its invoking control; cancellation changes nothing. No color-only status, hover-only essential action or required swipe. Do not announce every refresh; announce meaningful save/failure transitions. Long Norwegian place names and enlarged text must wrap without hiding controls or critical information.
 
 Use manual Day/Night and applicable IR-01 values from DESIGN. Test actual rendered forms, warnings, dialog, disabled boundaries and focus; tablet/PC fit requires observations. No previous mock acceptance proves these implemented states. Deferred UJ-3/UJ-4, sensor locks, offline/transfer, plan-revision and export flows are historical and must not remain as active navigation.
+
+## Owner activity-flow refinement — 2026-10-25
+
+Use Aktivitetsstatus for the user-facing outcome concept and retain Fullført manuelt. Activity selection still opens consultation without starting or recording anything. Provide Start and End/Abort directly from the selected activity, with explicit confirmation/cancel and current lifecycle context, reusing one lifecycle authority. Cancel returns to the exact originating activity and invoking control. The day entry points have consistent Start confirmation; accepted closure retains the approved separate read-only recap. Keep unsaved/pending/current-authority protections and long/enlarged Day/Night navigation. The owner reports the recap and other exercised behavior good; final story acceptance remains pending.
+
+Owner acceptance, 2026-10-25: Jonas accepted the implemented activity-flow refinement and authorized commit/push. Existing later tablet/theme obligations remain separate; no next story is started.

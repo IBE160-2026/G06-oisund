@@ -69,7 +69,7 @@ export async function openedPlan(page: Page, context: BrowserContext, single = f
   return { draft, plan, activities };
 }
 export const selected = (page: Page) => page.locator('.selected-activity');
-export const activityStatus = (page: Page) => page.getByRole('status', { name: 'Aktivitetsstatus' });
+export const activityStatus = (page: Page) => page.getByRole('status', { name: 'Aktivitetsvalgstatus' });
 export const shiftStatus = (page: Page) => page.getByRole('status', { name: 'Skiftstatus' });
 export const beforeUnload = (page: Page) => page.evaluate(() => { const e = new Event('beforeunload', { cancelable: true }); window.dispatchEvent(e); return e.defaultPrevented; });
 export async function dayScreen(page: Page) { if (await page.getByRole('button', { name: 'Tilbake til dagen', exact: true }).isVisible()) await page.getByRole('button', { name: 'Tilbake til dagen', exact: true }).click(); }

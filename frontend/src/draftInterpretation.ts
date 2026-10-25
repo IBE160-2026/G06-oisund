@@ -70,6 +70,7 @@ export function importIssues(content: Content): { activityId?: string; text: str
   const result: { activityId?: string; text: string }[] = metadata.unresolved.map(issue => {
     const names: Record<string, string> = {
       unresolved_time: `Kontroller ${issue.field === 'start' ? 'start' : issue.field === 'end' ? 'slutt' : 'tidspunkt'}: klokkeslett eller kalenderdato er ukjent.`,
+      unclassified_time: 'Ett klokkeslett står i første tidskolonne. Kontroller om det er start eller slutt; begge er uavklart.',
       missing_endpoint: 'Endested mangler i tolkningen. Kontroller mot kilden.',
       unrecognized_source_line: 'En kilderad kunne ikke tolkes. Kontroller kilden.',
       unproven_calendar_interval: 'Kalenderdatoene kunne ikke fastslås fra skiftintervallet.',

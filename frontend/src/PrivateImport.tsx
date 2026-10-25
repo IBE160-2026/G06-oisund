@@ -44,7 +44,7 @@ export function validMetadata(v: any): v is ImportMetadata {
 }
 
 const pauseNames: Record<string, string> = { meal: 'matpause', coffee: 'kaffepause', split: 'deltskiftpause', paid_meal: 'betalt pause' };
-const uncertaintyNames: Record<string, string> = { unresolved_time: 'Klokkeslett eller kalenderdato er uavklart', missing_endpoint: 'Endested mangler', unrecognized_source_line: 'Kilderad kunne ikke tolkes', unproven_calendar_interval: 'Skiftintervallet kunne ikke fastslås', reversed_activity_time: 'Slutt ligger før start' };
+const uncertaintyNames: Record<string, string> = { unresolved_time: 'Klokkeslett eller kalenderdato er uavklart', unclassified_time: 'Ett klokkeslett står i første tidskolonne; start og slutt er uavklart', missing_endpoint: 'Endested mangler', unrecognized_source_line: 'Kilderad kunne ikke tolkes', unproven_calendar_interval: 'Skiftintervallet kunne ikke fastslås', reversed_activity_time: 'Slutt ligger før start' };
 const show = (v: unknown) => v === null || v === undefined ? 'Ukjent / uavklart' : Array.isArray(v) ? v.join(', ') : String(v);
 const activityKind = (value: string) => value === 'trip' || value === 'Trip' ? 'tur' : value === 'deadhead_car' ? 'Tomkjøring med CAR' : value;
 const factNames: Record<string, string> = { label: 'Aktivitetsnavn', kind: 'Type', line: 'Linje', trip_id: 'Turnummer', origin: 'Fra sted', destination: 'Til sted', start: 'Startklokke', end: 'Sluttklokke', start_instant: 'Start med kalenderdato', end_instant: 'Slutt med kalenderdato', start_day: 'Startdag', end_day: 'Sluttdag', service_date: 'Tjenestedato', span: 'Utstrekk', pages: 'Sider', shift_id: 'Skift', weekday: 'Ukedag', department: 'Avdeling', work: 'Arbeidstid', supplements: 'Tillegg' };

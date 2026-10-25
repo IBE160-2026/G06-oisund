@@ -30,6 +30,39 @@ def activity_resource_stub():
 
 
 class RestorationTest(unittest.TestCase):
+    def test_terminal_verification_failure_restores_operational_api(self):
+        calls = []
+        resources = activity_resource_stub()
+        def subprocess_stub(args, **kwargs):
+            calls.append(args)
+            return SimpleNamespace(returncode=0, stdout='{"activities":[]}' if 'model_dump_json' in (kwargs.get('input') or '') else '')
+        def http_stub(request, **kwargs):
+            import urllib.error
+            path = request if isinstance(request, str) else request.full_url
+            if ':8000/' in path:
+                raise urllib.error.HTTPError(path, 404, 'synthetic denial', {}, None)
+            if path.endswith('/close'):
+                raise RuntimeError('synthetic terminal verification failure')
+            if (value := resources(request)) is not None: pass
+            elif path.endswith('/auth/csrf'): value = {'csrf_token': 'synthetic'}
+            elif path.endswith('/auth/login'): value = {'account_id': 'synthetic'}
+            elif path.endswith('/draft-operations'): value = {'operation_id': 'synthetic'}
+            elif path.endswith('/workday-reviews'): value = {'operation_id': 'synthetic', 'unknowns': [], 'classifications_required': []}
+            elif path.endswith('/physical-bus'):
+                value = {'revision': 0, 'physical_bus': None, 'expires_at': 'synthetic'} if request.data is None else {'result': {'revision': 0, 'physical_bus': None, 'expires_at': 'synthetic'}}
+            elif path.endswith('/delete'): value = {'operation_id': 'synthetic', 'deleted_id': 'synthetic', 'source_revision': 1}
+            elif path.endswith('/drafts') and request.data is None: value = {'drafts': [], 'next_cursor': None}
+            else: value = {'id': 'synthetic', 'expires_at': 'synthetic', 'revision': 1, 'draft': {'realtime_duty': '007', 'physical_bus': 'Bus-0012', 'activities': [{'id': 'synthetic-activity'}]}}
+            response = io.BytesIO(json.dumps(value).encode()); response.headers = {'Cache-Control': 'no-store'}
+            return response
+        with patch.dict(os.environ, {'COMPOSE_PROJECT_NAME': 'ibe160-private-tests'}), patch('subprocess.run', subprocess_stub), patch('urllib.request.build_opener', return_value=SimpleNamespace(open=http_stub)):
+            with self.assertRaisesRegex(RuntimeError, 'synthetic terminal verification failure'):
+                runpy.run_path(str(Path(__file__).with_name('verify-private-drafts.py')))
+        self.assertEqual(calls[-2][3], 'ibe160-private-tests')
+        self.assertEqual(calls[-2][-1], 'stop')
+        self.assertEqual(calls[-1][3], 'ibe160-private-work')
+        self.assertEqual(calls[-1][-4:], ['up', '-d', '--wait', 'private-api'])
+
     def test_physical_bus_fictional_probes_use_valid_post_origin_and_body(self):
         source = Path(__file__).with_name('verify-private-drafts.py').read_text(encoding='utf-8')
         tree = ast.parse(source)

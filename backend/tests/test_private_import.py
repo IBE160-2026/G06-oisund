@@ -28,34 +28,23 @@ def test_independent_correction_fasit_activity_facts(case):
     """Activity endpoints only: not distance/intermediate-stop qualification."""
     expected = next(shift for shift in json.loads(Path('/fixtures/Fasit-testskift.json').read_text(encoding='utf-8-sig'))['shifts'] if shift['case'] == case)
     data = Path(f'/fixtures/Testskift-{case}.pdf').read_bytes()
-    # These layouts are deliberately not added to the qualified adapter contract.
-    # Keep the observed rejection visible instead of silently claiming coverage.
-    if case in ('B', 'D'):
-        with pytest.raises(ImportFailure, match='conflicting_headers'):
-            extract_pdf(data)
-        return
     facts = private_import.interpret(extract_pdf(data)).model_dump(mode='json')
     events = [event for event in expected['events'] if event['kind'] != 'vehicle']
-    if case in ('A', 'C'):
-        assert len(events) == {'A': 5, 'C': 15}[case]
-        assert len([event for event in events if event['kind'] == 'movement']) == {'A': 3, 'C': 9}[case]
-        assert all(row['trip'] is None for row in facts['activities'])
-        events = [event for event in events if event['kind'] == 'activity']
-        assert facts['import_metadata']['qualification'] == 'partial'
-        assert facts['import_metadata']['unresolved']
-    assert len(facts['activities']) == len(events)
+    assert len(facts['activities']) == len(events) == {'A': 5, 'B': 21, 'C': 15, 'D': 16, 'E': 8}[case]
+    assert len([event for event in events if event['kind'] == 'movement']) == {'A': 3, 'B': 12, 'C': 9, 'D': 10, 'E': 0}[case]
+    assert [duty['value'] for duty in facts['import_metadata']['duties']] == [event['vehicle'] for event in expected['events'] if event['kind'] == 'vehicle']
     assert facts['physical_bus'] is None
     assert facts['import_metadata']['header']['end'] == expected['end']
     for row, event in zip(facts['activities'], events):
         if event['kind'] == 'movement':
             first, last = event['stops'][0], event['stops'][-1]
-            assert (row['trip'], row['line'], row['from_place'], row['to_place']) == (event['trip_id'], event['line'], first['name'], last['name'])
-            assert (row['source_start'], row['source_end']) == (first['time'], last['time'])
+            assert (row['trip'], row['line'], row['from_place'], row['to_place']) == (event['trip_id'], None if event['line'] in ('tom', 'CAR') else event['line'], first['name'], last['name'])
+            assert (row['source_start'], row['source_end']) == (first['time'].zfill(5), last['time'].zfill(5))
             assert row['start'][:16] == first['local_datetime']
             assert row['end'][:16] == last['local_datetime']
         else:
             assert row['raw_code'] == event['label']
-            assert row['type'] == event['label']
+            assert row['type'] == (None if event.get('unclassified_time') else event['label'])
             assert (row['source_start'], row['source_end']) == (event['start'], event['end'])
             assert row['from_place'] is row['to_place'] is None
             assert (row['start'][:16] if row['start'] else None) == event.get('start_local')
@@ -64,9 +53,25 @@ def test_independent_correction_fasit_activity_facts(case):
         assert facts['activities'][-1]['source_end'] == '08:28' != expected['end']
     if case == 'C':
         assert facts['activities'][0]['start'][:10] != facts['activities'][-1]['end'][:10]
+    if case == 'B':
+        travel = next(row for row, event in zip(facts['activities'], events) if event.get('unclassified_time'))
+        assert travel['start'] is travel['end'] is travel['source_start'] is travel['source_end'] is None
+        assert 'første tidskolonne' in travel['uncertainty']
+        assert any(note['value'] == 'Travel to 16:20 · første tidskolonne' for note in facts['import_metadata']['annotations'])
+        continued = next(row for row in facts['import_metadata']['activities'] if row['line'] == 'X71')
+        assert continued['pages'] == [1, 2]
+        assert continued['provenance']['origin'][0]['page'] == 1
+        assert continued['provenance']['destination'][0]['page'] == 2
+    if case == 'D':
+        assert facts['activities'][-3]['type'] == 'CAR'
+        assert facts['activities'][-2]['type'] == 'Tomkjøring med CAR'
+        assert facts['activities'][-3]['start'] == facts['activities'][-3]['end']
     if case == 'E':
         assert facts['activities'][-1]['type'] == 'Instruktør'
         assert all(row['type'] != 'Sign-off' and row['trip'] is None for row in facts['activities'])
+    if case in ('A', 'C', 'E'):
+        assert facts['import_metadata']['qualification'] == 'bounded-layout'
+        assert facts['import_metadata']['unresolved'] == []
 
 
 def assert_additional(facts, number):
@@ -136,14 +141,7 @@ def test_car_designations_have_no_numeric_suffix_and_end_at_next_duty(designatio
 
 def test_unrecognized_vehicle_designation_stays_partial():
     from app.pdf_import import parse_document
-    # A separate source row insertion avoids making assumptions about PDF offsets.
-    from unittest.mock import patch
-    import pdfplumber
-    original = pdfplumber.page.CroppedPage.extract_text
-    def unknown(page, *args, **kwargs):
-        return original(page, *args, **kwargs).replace('Sign-on 06:00 06:01', 'Sign-on 06:00 06:01\nVogn UNKNOWN')
-    with patch.object(pdfplumber.page.CroppedPage, 'extract_text', unknown):
-        source = parse_document(synthetic_text_pdf())
+    source = parse_document(synthetic_text_pdf(duty='UNKNOWN'))
     assert any(d['value'] == 'UNKNOWN' and d['suffix'] is None for d in source['duties'])
     assert private_import.interpret(source).import_metadata.qualification == 'partial'
 

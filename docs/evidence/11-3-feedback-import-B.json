@@ -1,0 +1,12 @@
+{
+  "case": "B",
+  "activities": 21,
+  "movements": 12,
+  "savedAndReopened": true,
+  "qualification": "partial",
+  "unknowns": [
+    "unclassified_time",
+    "unresolved_time",
+    "unresolved_time"
+  ]
+}

@@ -30,6 +30,12 @@ def owned(conn, owner, identifier, request):
     return row
 
 
+def require_mutable(conn, plan):
+    row = conn.execute('SELECT state FROM workday_lifecycles WHERE workday_id=%s', (plan['id'],)).fetchone()
+    if row and row['state'] in {'ended', 'aborted'}:
+        raise HTTPException(409, 'Skiftet er avsluttet. Planen er skrivebeskyttet.')
+
+
 def review(request, body):
     with database() as conn:
         owner = draft_storage.authorized(conn, request)
@@ -126,6 +132,8 @@ def lookup(request, identifier):
         owner = draft_storage.authorized(conn, request)
         _, _, plan = operation(conn, owner, identifier, request)
         auth.session(conn, request)
+        if plan:
+            owned(conn, owner, plan['id'], request)
         return {'state': 'accepted' if plan else 'pending', 'result': presentation(plan) if plan else None}
 
 
@@ -134,6 +142,7 @@ def read(request, identifier):
         owner = draft_storage.authorized(conn, request)
         plan = owned(conn, owner, identifier, request)
         auth.session(conn, request)
+        owned(conn, owner, identifier, request)
         return presentation(plan)
 
 

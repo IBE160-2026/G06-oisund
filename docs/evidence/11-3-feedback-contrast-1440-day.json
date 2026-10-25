@@ -1,0 +1,67 @@
+{
+  "start": {
+    "text": 11.085379609993499,
+    "boundary": 14.387145266736685,
+    "focus": 21,
+    "focusWidth": 3,
+    "height": 99.96875,
+    "controls": [
+      {
+        "disabled": false,
+        "text": 11.085379609993499,
+        "height": 99.96875
+      },
+      {
+        "disabled": false,
+        "text": 11.085379609993499,
+        "height": 99.96875
+      }
+    ],
+    "overflow": false
+  },
+  "activity": {
+    "text": 11.085379609993499,
+    "boundary": 14.387145266736685,
+    "focus": 21,
+    "focusWidth": 3,
+    "height": 99.96875,
+    "controls": [
+      {
+        "disabled": false,
+        "text": 14.387145266736685,
+        "height": 90.59375
+      },
+      {
+        "disabled": false,
+        "text": 11.085379609993499,
+        "height": 99.96875
+      },
+      {
+        "disabled": false,
+        "text": 11.085379609993499,
+        "height": 99.96875
+      }
+    ],
+    "overflow": false
+  },
+  "close": {
+    "text": 11.085379609993499,
+    "boundary": 14.387145266736685,
+    "focus": 21,
+    "focusWidth": 3,
+    "height": 99.96875,
+    "controls": [
+      {
+        "disabled": false,
+        "text": 11.085379609993499,
+        "height": 99.96875
+      },
+      {
+        "disabled": false,
+        "text": 11.085379609993499,
+        "height": 99.96875
+      }
+    ],
+    "overflow": false
+  }
+}

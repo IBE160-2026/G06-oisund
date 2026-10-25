@@ -118,3 +118,8 @@ summary:focus-visible, fieldset:focus-visible { outline: 3px solid #000; outline
 .consulting .selected-activity p { margin-block: .5rem; }
 .private-activity-selection [role="status"]:focus-visible, .private-shift-start [role="status"]:focus-visible { outline: 3px solid #000; outline-offset: 4px; }
 .night .private-activity-selection [role="status"]:focus-visible, .night .private-shift-start [role="status"]:focus-visible { outline-color: #ffe39b; }
+.private-confirmation [aria-label="Registrert aktivitetsstatus"], .private-confirmation [aria-label="Bekreft skiftstart"], .private-confirmation [aria-label="Bekreft avslutning"], .private-confirmation [aria-label="Oppsummering av skift"] { border: 2px solid currentColor; border-radius: 8px; padding: 1rem; margin-block: 1rem; overflow-wrap: anywhere; }
+.private-confirmation button, .private-confirmation select { min-height: 58px; border-width: 2px; border-radius: 8px; white-space: normal; overflow-wrap: anywhere; }
+.private-confirmation [aria-label="Oppsummering av skift"] ol { padding-inline-start: 1.5rem; }
+.private-confirmation [aria-label="Oppsummering av skift"] li { margin-block: .75rem; }
+.private-confirmation [aria-label="Bekreft avslutning"] summary { cursor: pointer; min-height: 58px; border: 2px solid currentColor; border-radius: 8px; padding: .7rem; }

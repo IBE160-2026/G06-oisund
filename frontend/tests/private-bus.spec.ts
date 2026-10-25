@@ -70,6 +70,7 @@ const busInput = (page: Page) => page.getByRole('region', { name: 'Fysisk buss',
 const busStatus = (page: Page) => page.getByRole('status', { name: 'Bussstatus' });
 const saveBus = (page: Page) => page.getByRole('button', { name: 'Lagre fysisk buss', exact: true });
 
+
 test('feedback clear current bus is an unsaved proposal with cancel save and reopen', async ({ page, context }) => {
   const { plan } = await openedPlan(page, context);
   await busInput(page).fill(' 000x / 090 '); await saveBus(page).click();
@@ -95,6 +96,7 @@ for (const width of [768, 1440]) for (const night of [false, true]) test(`bus ke
   const { plan, draft } = await openedPlan(page, context);
   if (night) await page.getByRole('button', { name: 'Nattmodus' }).click();
   await expect(busStatus(page)).toContainText('Ukjent');
+  await expect(busInput(page)).toBeEnabled();
   await busInput(page).focus(); await page.keyboard.type(' 0006 / 090 ');
   await expect(busInput(page)).toBeFocused();
   await page.getByRole('region', { name: 'Fysisk buss', exact: true }).screenshot({ path: `../docs/evidence/11-2-regression-10-4-bus-unsaved-${width}-${night ? 'night' : 'day'}.png` });
@@ -407,7 +409,7 @@ for (const unresolved of [false, true]) test(`bus-only outer leave guards retain
 
 for (const unresolved of [false, true]) test(`near-expiry bus-only ${unresolved ? 'unresolved' : 'unsaved'} state clears presentation guards and late replies`, async ({ page, context }) => {
   await page.clock.install(); await login(page);
-  const ending = python("from datetime import datetime,timedelta\nfrom zoneinfo import ZoneInfo\nprint((datetime.now(ZoneInfo('Europe/Oslo'))-timedelta(days=7)+timedelta(seconds=60)).replace(microsecond=0).isoformat())\n").trim();
+  const ending = python("from datetime import datetime,timedelta,timezone\nfrom zoneinfo import ZoneInfo\nprint((datetime.now(timezone.utc)-timedelta(days=7)+timedelta(seconds=60)).replace(microsecond=0).astimezone(ZoneInfo('Europe/Oslo')).isoformat())\n").trim();
   const draft = await post(context, '/drafts', { operation_id: (await post(context, '/draft-operations', {})).operation_id, expected_revision: 0, draft: { service_date: ending.slice(0, 10), activities: [{ id: randomUUID(), type: 'manual', start: ending, end: ending }] } });
   await preparation(page); await page.getByRole('button', { name: 'Oppdater listen', exact: true }).click(); await page.getByRole('button', { name: `Åpne ${draft.draft.service_date} · versjon 1`, exact: true }).click();
   const plan = await confirmSaved(context, draft); await page.clock.setSystemTime(new Date(Date.parse(plan.expires_at) - 5000));

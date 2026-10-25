@@ -59,6 +59,12 @@ def parse_document(data: bytes) -> ImportDraft:
             raise ImportFailure('encrypted')
         if not 0 < len(pdf.pages) <= MAX_PAGES:
             raise ImportFailure('page_limit')
+        # Format is demonstrated by the document, not by the particular column
+        # containing a lone clock. Continuation/activity-only columns retain it.
+        separate_movements = any(
+            re.fullmatch(r'\S+\s*/\s*\S+\s+\d+(?:[.,]\d+)?\s+km', line)
+            for page in pdf.pages for column in (0, 1)
+            for line in (page.crop((column*page.width/2,110,(column+1)*page.width/2,790)).extract_text() or '').splitlines())
         for number, page in enumerate(pdf.pages, 1):
             if not page.chars:
                 raise ImportFailure('image_only_or_empty')
@@ -67,8 +73,17 @@ def parse_document(data: bytes) -> ImportDraft:
             date = re.search(r'Date:\s*(\d{2}/\d{2}/\d{4})\s+(\w+)\s+(.+)', head)
             start = re.search(r'Skift start:\s*('+CLOCK+r')\s+(.+?)\s+Arb.tid:\s*(\d+h\d+)\s+Utstrekk:\s*(\d+h\d+)', head)
             end = re.search(r'Skift slutt:\s*('+CLOCK+r')\s+(.+?)\s+Tillegg:', head)
-            employer = re.search(r'^(.+?) - ', head)
-            division = re.search(r'Division:\s*(.+)', head)
+            identity_line = next((line for line in head.splitlines() if 'Skift:' in line), '')
+            employer = re.search(r'^(.+?)(?: - | / )', identity_line) or re.search(r'^(.+?) - ', head)
+            # Locate the actual field: qualified reports place it on either
+            # side. A separate caption in the opposite column is not identity.
+            anchors = [word for word in page.crop((0, 0, page.width, 110)).extract_words() if word['text'] == 'Division:']
+            division = None
+            if len(anchors) == 1:
+                anchor = anchors[0]
+                edge = page.width/2 if anchor['x0'] < page.width/2 else page.width
+                field = page.crop((anchor['x0']-1, anchor['top']-2, edge, anchor['bottom']+2)).extract_text() or ''
+                division = re.search(r'Division:\s*(.+)', field)
             if not all([identity,date,start,end,employer,division]):
                 raise ImportFailure('unsupported_header')
             facts = dict(shift_id=identity[1], service_date=datetime.strptime(date[1],'%d/%m/%Y').date().isoformat(),
@@ -84,8 +99,22 @@ def parse_document(data: bytes) -> ImportDraft:
             # Qualified HASTUS layout: full-width header, two body columns.
             for column in (0, 1):
                 body = page.crop((column*page.width/2,110,(column+1)*page.width/2,790))
-                for line_no, line in enumerate((body.extract_text() or '').splitlines(),1):
+                body_lines = (body.extract_text() or '').splitlines()
+                positioned_lines = {}
+                for row in body.extract_text_lines():
+                    positioned_lines.setdefault(row['text'], []).append(row)
+                words = body.extract_words()
+                for line_no, line in enumerate(body_lines,1):
+                    occurrences = positioned_lines.get(line, [])
+                    text_line = occurrences.pop(0) if occurrences else None
                     provenance = dict(page=number,column=column+1,line=line_no)
+                    if text_line is not None and text_line['top'] <= 111:
+                        overlap_end = re.fullmatch(r'Skift slutt:\s*('+CLOCK+r')\s+(.+)', line)
+                        overlap_supplements = re.fullmatch(r'Tillegg:\s*(?:\d+,\d+%\s*\d+h\d+\s*(?:\|\s*)?)+', line)
+                        if overlap_end and (clock(overlap_end[1]), overlap_end[2]) == (facts['end'], facts['destination']):
+                            continue
+                        if overlap_supplements and [f'{p} {v}' for p, v in re.findall(r'(\d+,\d+%)\s*(\d+h\d+)', line)] == facts['supplements']:
+                            continue
                     marker=re.search(r'(?<=[0-9])\s+([A-Za-z])$',line)
                     if marker:
                         annotations.append(dict(value=marker[1],meaning=None,provenance=provenance))
@@ -95,37 +124,56 @@ def parse_document(data: bytes) -> ImportDraft:
                         continue
                     duty = re.fullmatch(r'Vogn\s+(CAR\s*-\s*[1-4]|\S+)',line)
                     trip = re.fullmatch(r'(\S+)\s*/\s*(\S+)\s+(.+?)\s+('+CLOCK+r')',line)
+                    trip_heading = re.fullmatch(r'(\S+)\s*/\s*(\S+)\s+\d+(?:[.,]\d+)?\s+km',line)
+                    continuation = re.fullmatch(r'(\S+)\s*/\s*(\S+)\s+-\s+fortsettelse',line)
+                    continuation_notice = re.fullmatch(r'Tur (\S+)\s*/\s*(\S+) fortsetter på neste side\.',line)
                     activity = re.fullmatch(r'(Sign-on|Sign-off|Split break|Coffee|MealBreak|Paid meal before|Paid meal after|Travel to|Travel from|Fadder|Instruktør)\s+('+CLOCK+r')(?:\s+('+CLOCK+r'))?',line)
                     stop = re.fullmatch(r'(?:\d+\.\d+\s+)?(.+?)\s+('+CLOCK+r')',line)
-                    if duty:
+                    if continuation:
+                        if current is None or (current['label'], current['trip_id']) != continuation.groups():
+                            raise ImportFailure('conflicting_continuation')
+                    elif continuation_notice:
+                        if current is None or (current['label'], current['trip_id']) != continuation_notice.groups():
+                            raise ImportFailure('conflicting_continuation')
+                    elif duty:
                         source_rows.append(dict(location=provenance,fields={'duty':duty[1]}))
                         suffix = re.search(r'([0-9]{3})$', duty[1])
                         if not suffix and not re.fullmatch(r'CAR(?:\s*-\s*[1-4])?', duty[1]):
                             unresolved.append(dict(code='unrecognized_source_line',provenance=provenance))
                         duties.append(dict(value=duty[1],suffix=suffix[1] if suffix else None,after_activity=len(activities),provenance=provenance))
                         current = None
-                    elif trip or activity:
-                        if trip:
-                            label, trip_id, origin, start_clock = trip.groups()
+                    elif trip or trip_heading or activity:
+                        if trip or trip_heading:
+                            label, trip_id, origin, start_clock = trip.groups() if trip else (*trip_heading.groups(), None, None)
                             car = bool(duties and re.fullmatch(r'CAR(?:\s*-\s*[1-4])?', duties[-1]['value']))
                             kind = 'deadhead_car' if label == 'tom' and car else 'deadhead' if label == 'tom' else 'CAR' if label == 'CAR' else 'trip'
                             item=dict(label=label,kind=kind,line=None if label in ('tom', 'CAR') else label,
-                                      trip_id=trip_id,origin=origin,destination=None,start=clock(start_clock),end=None)
+                                      trip_id=trip_id,origin=origin,destination=None,start=clock(start_clock) if start_clock else None,end=None)
                         else:
                             label, a, b = activity.groups()
                             item=dict(label=label,kind=label,line=None,trip_id=None,origin=None,destination=None,
                                       start=clock(a) if b else None,end=clock(b or a))
+                            if b is None and separate_movements and text_line is not None:
+                                clocks = [word for word in words if word['text'] == a and abs(word['top'] - text_line['top']) < 2]
+                                if len(clocks) == 1 and (clocks[0]['x1'] - column*page.width/2) / (page.width/2) < .85:
+                                    # A lone clock in the first time column does
+                                    # not prove either semantic endpoint.
+                                    item['end'] = None
+                                    annotations.append(dict(value=f'{label} {a} · første tidskolonne',meaning=None,provenance=provenance))
+                                    unresolved.append(dict(code='unclassified_time',activity=len(activities)+1,provenance=provenance))
                         item.update(pages=[number],provenance={key:[provenance] for key in item},source_order=len(activities)+1)
                         source_rows.append(dict(location=provenance,fields={key:value for key,value in item.items() if key not in ('provenance','pages','source_order','kind')}))
                         activities.append(item)
-                        current = item if trip else None
+                        current = item if trip or trip_heading else None
                     elif stop and current is not None:
-                        source_rows.append(dict(location=provenance,fields={'destination':stop[1],'end':clock(stop[2])}))
-                        current['destination'], current['end'] = stop[1],clock(stop[2])
+                        first = current['origin'] is None and current['start'] is None
+                        place, instant = ('origin', 'start') if first else ('destination', 'end')
+                        source_rows.append(dict(location=provenance,fields={place:stop[1],instant:clock(stop[2])}))
+                        current[place], current[instant] = stop[1],clock(stop[2])
                         if number not in current['pages']:
                             current['pages'].append(number)
-                        current['provenance']['destination']=[provenance]
-                        current['provenance']['end']=[provenance]
+                        current['provenance'][place]=[provenance]
+                        current['provenance'][instant]=[provenance]
                     elif line not in ('Notes:',) and not line.startswith(('HASTUS','Page:')):
                         unresolved.append(dict(code='unrecognized_source_line',provenance=provenance))
             page.close()

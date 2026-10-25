@@ -160,7 +160,7 @@ for (const width of [768, 1440]) for (const night of [false, true]) test(`select
   await page.evaluate(() => { document.documentElement.style.fontSize = '200%'; });
   const choose = page.getByRole('button', { name: 'Velg aktivitet 1', exact: true }); await choose.focus(); await page.keyboard.press('Enter');
   await expect(selected(page)).toContainText('Linje: 20');
-  await dayScreen(page); await page.getByRole('button', { name: 'Start skift', exact: true }).click(); await expect(shiftStatus(page)).toHaveText('Skiftstart er lagret.');
+  await dayScreen(page); await page.getByRole('button', { name: 'Start skift', exact: true }).click(); await page.getByRole('button', { name: 'Bekreft skiftstart', exact: true }).click(); await expect(shiftStatus(page)).toHaveText('Skiftstart er lagret.');
   await expect(shiftStatus(page)).toBeFocused();
   await expect(page.getByText('Startet manuelt', { exact: true })).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);

@@ -217,7 +217,7 @@ test('uploaded synthetic document passes separate interpretation editor confirma
   const bus = page.getByRole('region', { name: 'Fysisk buss', exact: true }).getByLabel('Fysisk buss', { exact: true });
   await bus.fill('SYNTHETIC-11-2'); await page.getByRole('button', { name: 'Lagre fysisk buss', exact: true }).click();
   await expect(page.getByRole('status', { name: 'Bussstatus', exact: true })).toContainText('lagret');
-  await page.getByRole('button', { name: 'Start skift', exact: true }).click(); await expect(page.getByText('Startet manuelt', { exact: true })).toBeVisible();
+  await page.getByRole('button', { name: 'Start skift', exact: true }).click(); await page.getByRole('button', { name: 'Bekreft skiftstart', exact: true }).click(); await expect(page.getByText('Startet manuelt', { exact: true })).toBeVisible();
   const before = await Promise.all(['/physical-bus', '/lifecycle'].map(async path => { const response = await context.request.get(API + '/workdays/' + plan.id + path); expect(response.status()).toBe(200); return response.json(); }));
   await page.getByRole('button', { name: 'Velg aktivitet 1', exact: true }).click();
   await expect(fact(page, 'Fra')).toHaveText('Rettet syntetisk oppmøtested');
@@ -246,7 +246,7 @@ test('unsaved draft time input survives preparation and plan navigation; bus and
   await page.getByRole('button', { name: 'Avbryt bussendring', exact: true }).click();
   const path = '/workdays/' + plan.id + '/start';
   await page.route('**:8001' + path, async route => { await route.fetch(); await route.abort(); });
-  await page.getByRole('button', { name: 'Start skift', exact: true }).click();
+  await page.getByRole('button', { name: 'Start skift', exact: true }).click(); await page.getByRole('button', { name: 'Bekreft skiftstart', exact: true }).click();
   await expect(page.getByRole('button', { name: 'Kontroller skiftstarten', exact: true })).toBeEnabled();
   await expect(page.getByRole('button', { name: 'Forberedelse og planlister', exact: true })).toBeDisabled();
   await page.unroute('**:8001' + path); await page.getByRole('button', { name: 'Kontroller skiftstarten', exact: true }).click();

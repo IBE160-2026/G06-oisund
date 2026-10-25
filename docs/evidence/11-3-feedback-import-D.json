@@ -1,0 +1,11 @@
+{
+  "case": "D",
+  "activities": 16,
+  "movements": 10,
+  "savedAndReopened": true,
+  "qualification": "partial",
+  "unknowns": [
+    "unrecognized_source_line",
+    "unrecognized_source_line"
+  ]
+}

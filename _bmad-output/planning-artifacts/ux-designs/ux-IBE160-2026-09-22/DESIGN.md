@@ -2,7 +2,7 @@
 name: IBE160 — Design Spine
 status: approved
 decision: SCOPE-02
-updated: 2026-10-24
+updated: 2026-10-25
 ---
 
 # Design Spine — Course V1
@@ -35,6 +35,8 @@ Yellow #F5C842 needs the dark #171717 outline/symbol on day white; yellow fill a
 
 Landscape tablet and ordinary PC are primary. A narrow layout stacks columns in reading order; exact breakpoints are implementation choices tested against long content and text enlargement. Static mock minimum widths are not product requirements.
 
+**Owner clarification, 2026-10-25 (11.3):** Outcome registration belongs to the started active shift; pre-start day/selection/detail consultation stays available. Separate the selected member's outcome area and explicit Save from selection controls. Day links to an end/abort confirmation with saved counts and expandable unregistered members, then a separate read-only recap. Keep cancel/return focus, unknown outcomes and reachable unsaved/uncertain recovery explicit; terminal consultation has read-only labels and no persisted selection changes.
+
 Draft review: source preview and editable activities side by side where space allows, otherwise stacked. Day overview: chronological activity list with notice region secondary. Selected activity: route/destination or activity type and known planned dates/times, followed by visible previous/next/direct-selection controls. Keep selection distinct from outcome controls. No stop rail/current-location marker/GPS countdown.
 
 Use forgiving labelled touch controls, starting from the accepted preparation minimum height of 58px, 8px corners and 2px border. No precision gesture required. Manual Day/Night shows its current state through label/icon and a non-color selected cue; omit Auto. Menu and primary actions remain discoverable without relying on the old locked driving footer.
@@ -52,3 +54,9 @@ Measure actual rendered default/focus/selected/warning/error/unavailable/disable
 Private access, draft editor, confirmation, bus field, day list, activity selector, explicit outcomes, manual notice editor/list/detail, save/error/conflict status, end/abort dialog, recap and fictional demo label/reset all need real keyboard/readability/contrast checks.
 
 Record measured ratios and actual browser/device observations as pass/fail/not-run. Check long Norwegian labels, midnight dates, multiple notices, unknown fields, error recovery and enlarged text. Reuse [preparation.html](mockups/preparation.html) only with the current scope overlay in the [mockup index](mockups/README.md); reference images do not establish implementation behavior or target-device acceptance.
+
+## Owner activity-flow refinement — 2026-10-25
+
+Use Aktivitetsstatus for the user-facing outcome concept and retain Fullført manuelt. Activity selection still opens consultation without starting or recording anything. Provide Start and End/Abort directly from the selected activity, with explicit confirmation/cancel and current lifecycle context, reusing one lifecycle authority. Cancel returns to the exact originating activity and invoking control. The day entry points have consistent Start confirmation; accepted closure retains the approved separate read-only recap. Keep unsaved/pending/current-authority protections and long/enlarged Day/Night navigation. The owner reports the recap and other exercised behavior good; final story acceptance remains pending.
+
+Owner acceptance, 2026-10-25: Jonas accepted the implemented activity-flow refinement and authorized commit/push. Existing later tablet/theme obligations remain separate; no next story is started.

@@ -268,11 +268,13 @@ FR-7–9, FR-15 and FR-23 are deferred; the remaining original FRs are narrowed 
 
 ### Story 11.3: Record outcomes and close
 
-**Stable alias:** V1-12. **Status:** backlog; approved scope, implementation/evidence not started.
+**Stable alias:** V1-12. **Historical planning baseline:** backlog. Current implementation/review and owner acceptance are tracked in [sprint status](../implementation-artifacts/sprint-status.yaml) and the [11.3 specification](../implementation-artifacts/spec-11-3-record-outcomes-and-close.md).
 **Depends on:** V1-11.
 **Traceability:** FR-11/21/22/24; AC-08; SCOPE-02.
 
 **User outcome:** manually mark completed/skipped/interrupted/unknown, confirm normal end or abort, then read a short recap. Cancel preserves the day; ending cannot silently complete remaining activities or resume afterwards.
+
+**Owner-approved refinement, 2026-10-25:** Outcome registration requires an explicitly started active shift. Before Start, the day, activity selection and details remain available. Selection/navigation never Starts or records outcomes. Keep separate activity/outcome, day-linked closure confirmation and read-only recap screens, preserving input and reachable recovery. The complete plan and implementation are approved; final owner acceptance is a separate recorded event.
 
 **Acceptance criteria:**
 - Default outcomes remain unknown until explicitly recorded. Allow manual completion/skipped/interrupted before terminal closure; confirm/cancel normal end or abort. Atomically persist terminal status/server time/expiry once. No post-end editing, silent completion or resumption. Recap is read-only within expiry.

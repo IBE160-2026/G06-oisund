@@ -1,0 +1,114 @@
+[
+  {
+    "text": 6.126270626473104,
+    "boundary": 12.855408864593942,
+    "focus": 11.45007504521487,
+    "focusWidth": 3,
+    "height": 90.59375,
+    "controls": [
+      {
+        "disabled": false,
+        "text": 10.005601690488291,
+        "height": 90.59375
+      },
+      {
+        "disabled": true,
+        "text": 6.126270626473104,
+        "height": 99.96875
+      },
+      {
+        "disabled": true,
+        "text": 6.126270626473104,
+        "height": 99.96875
+      }
+    ]
+  },
+  {
+    "text": 11.652752702162216,
+    "boundary": 12.855408864593942,
+    "focus": 11.45007504521487,
+    "focusWidth": 3,
+    "height": 99.96875,
+    "controls": [
+      {
+        "text": 12.855408864593942,
+        "height": 99.96875
+      },
+      {
+        "disabled": false,
+        "text": 11.652752702162216,
+        "height": 99.96875
+      },
+      {
+        "disabled": false,
+        "text": 11.652752702162216,
+        "height": 99.96875
+      }
+    ]
+  },
+  {
+    "text": 11.652752702162216,
+    "boundary": 12.855408864593942,
+    "focus": 11.45007504521487,
+    "focusWidth": 3,
+    "height": 99.96875,
+    "controls": [
+      {
+        "text": 12.855408864593942,
+        "height": 99.96875
+      },
+      {
+        "disabled": false,
+        "text": 11.652752702162216,
+        "height": 99.96875
+      },
+      {
+        "disabled": false,
+        "text": 11.652752702162216,
+        "height": 99.96875
+      }
+    ]
+  },
+  {
+    "text": 11.652752702162216,
+    "boundary": 12.855408864593942,
+    "focus": 11.45007504521487,
+    "focusWidth": 3,
+    "height": 99.96875,
+    "controls": [
+      {
+        "text": 12.855408864593942,
+        "height": 99.96875
+      },
+      {
+        "disabled": false,
+        "text": 11.652752702162216,
+        "height": 99.96875
+      },
+      {
+        "disabled": false,
+        "text": 11.652752702162216,
+        "height": 99.96875
+      }
+    ]
+  },
+  {
+    "text": 11.652752702162216,
+    "boundary": 12.855408864593942,
+    "focus": 11.45007504521487,
+    "focusWidth": 3,
+    "height": 99.96875,
+    "controls": [
+      {
+        "disabled": false,
+        "text": 11.652752702162216,
+        "height": 99.96875
+      },
+      {
+        "disabled": false,
+        "text": 11.652752702162216,
+        "height": 99.96875
+      }
+    ]
+  }
+]

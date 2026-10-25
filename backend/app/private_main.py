@@ -15,6 +15,9 @@ from . import workday_storage
 from . import workday_bus_storage, workday_selection_storage, workday_lifecycle_storage
 from .workday_selection_domain import SaveSelection, SelectionRecord, SelectionReceipt
 from .workday_lifecycle_domain import StartWorkday, LifecycleRecord, StartReceipt
+from .workday_lifecycle_domain import CloseWorkday
+from .workday_outcome_domain import SaveOutcome, OutcomeRecord, OutcomeReceipt, WorkdayRecap
+from . import workday_outcome_storage
 from .workday_bus_domain import SaveBus, BusRecord, BusReceipt
 from .workday_domain import ConfirmRequest, ReviewRequest, Review, WorkdayRecord, WorkdayList, WorkdayOperation, DeleteWorkdayRequest, DeletedWorkday
 from . import private_import
@@ -268,6 +271,36 @@ def save_activity_selection(identifier: UUID, body: SaveSelection, request: Requ
 @app.get('/workday-selection-operations/{identifier}', response_model=SelectionReceipt)
 def find_selection_operation(identifier: UUID, request: Request):
     return workday_selection_storage.lookup(request, identifier)
+
+
+@app.get('/workdays/{identifier}/outcomes', response_model=OutcomeRecord)
+def activity_outcomes(identifier: UUID, request: Request):
+    return workday_outcome_storage.read(request, identifier)
+
+
+@app.post('/workdays/{identifier}/outcome', response_model=OutcomeReceipt)
+def save_activity_outcome(identifier: UUID, body: SaveOutcome, request: Request):
+    return workday_outcome_storage.save(request, identifier, body)
+
+
+@app.get('/workday-outcome-operations/{identifier}', response_model=OutcomeReceipt)
+def find_outcome_operation(identifier: UUID, request: Request):
+    return workday_outcome_storage.lookup(request, identifier, 'outcome')
+
+
+@app.post('/workdays/{identifier}/close', response_model=StartReceipt)
+def close_workday(identifier: UUID, body: CloseWorkday, request: Request):
+    return workday_outcome_storage.save(request, identifier, body, close=True)
+
+
+@app.get('/workday-close-operations/{identifier}', response_model=StartReceipt)
+def find_close_operation(identifier: UUID, request: Request):
+    return workday_outcome_storage.lookup(request, identifier, 'close')
+
+
+@app.get('/workdays/{identifier}/recap', response_model=WorkdayRecap)
+def workday_recap(identifier: UUID, request: Request):
+    return workday_outcome_storage.read(request, identifier, recap=True)
 
 
 @app.get('/workdays/{identifier}/lifecycle', response_model=LifecycleRecord)

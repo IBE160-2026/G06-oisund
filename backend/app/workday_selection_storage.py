@@ -33,6 +33,7 @@ def lookup(request, identifier):
         if not conn.execute('SELECT %s > clock_timestamp() AS live', (op['expires_at'],)).fetchone()['live']:
             raise HTTPException(410, 'Lagringsforsøket er utløpt.')
         auth.session(conn, request)
+        workday_storage.owned(conn, owner, op['workday_id'], request)
         return {'operation_id': op['id'], 'result': op['result']}
 
 
@@ -52,6 +53,7 @@ def save(request, identifier, body):
             auth.session(conn, request)
             workday_storage.owned(conn, owner, identifier, request)
             return {'operation_id': op['id'], 'result': op['result']}
+        workday_storage.require_mutable(conn, plan)
         if current(conn, plan)['revision'] != body.expected_revision:
             raise HTTPException(409, 'Aktivitetsvalget er endret. Sammenlign med lagret verdi.')
         if conn.execute('SELECT count(*) AS n FROM workday_selection_operations WHERE owner=%s AND expires_at > clock_timestamp()', (owner,)).fetchone()['n'] >= 2000:
