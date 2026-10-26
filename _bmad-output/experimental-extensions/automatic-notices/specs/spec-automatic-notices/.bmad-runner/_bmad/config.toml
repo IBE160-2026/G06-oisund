@@ -1,0 +1,9 @@
+[core]
+project_name = "IBE160 automatic notices experimental spec"
+communication_language = "Norwegian"
+document_output_language = "English"
+output_folder = "D:/IBE160-plan-automatic-notices/_bmad-output/experimental-extensions/automatic-notices/specs/spec-automatic-notices"
+[modules.bmm]
+planning_artifacts = "D:/IBE160-plan-automatic-notices/_bmad-output/experimental-extensions/automatic-notices/specs/spec-automatic-notices"
+implementation_artifacts = "D:/IBE160-plan-automatic-notices/_bmad-output/experimental-extensions/automatic-notices/specs/spec-automatic-notices"
+project_knowledge = "D:/IBE160-plan-automatic-notices/_bmad-output/experimental-extensions/automatic-notices/specs/spec-automatic-notices"

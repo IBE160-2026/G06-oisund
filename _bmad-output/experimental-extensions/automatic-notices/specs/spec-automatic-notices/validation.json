@@ -1,0 +1,40 @@
+{
+  "date": "2026-10-26",
+  "verdict": "pass-as-draft",
+  "owner_accepted": false,
+  "workspace": "D:\\IBE160-plan-automatic-notices",
+  "spec_destination": "D:\\IBE160-plan-automatic-notices\\_bmad-output\\experimental-extensions\\automatic-notices\\specs\\spec-automatic-notices",
+  "branch": "codex/plan-automatic-notices",
+  "head": "aa0fcfb48904c7e0bdd6c68280e5db2d21f478ed",
+  "capability_ids": [
+    "CAP-1",
+    "CAP-2",
+    "CAP-3",
+    "CAP-4",
+    "CAP-5",
+    "CAP-6",
+    "CAP-7"
+  ],
+  "intent_success_pairs": 7,
+  "all_companion_and_source_paths_exist": true,
+  "original_extension_files_hash_unchanged": 17,
+  "tracked_changes": [],
+  "all_untracked_confined_to_extension": true,
+  "open_questions": [
+    "Q-1",
+    "Q-2",
+    "Q-3",
+    "Q-4",
+    "Q-5",
+    "Q-6",
+    "Q-7"
+  ],
+  "product_tests_run": false,
+  "architecture_or_stories_run": false,
+  "commit_merge_push": false,
+  "self_validation_passes": [
+    "coherence:pass-as-draft",
+    "preservation:pass"
+  ],
+  "mechanical_note": "Initial Unicode marker check used Windows default encoding; corrected check explicitly reads UTF-8. Documents and original input hashes unchanged."
+}

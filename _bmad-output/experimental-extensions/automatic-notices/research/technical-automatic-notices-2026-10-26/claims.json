@@ -1,0 +1,38 @@
+[
+  {
+    "claim": "Entur documents TRO SIRI SX and 4 GET/min; GTFS alert matrix blank; actual bounded page succeeds but completeness not established.",
+    "class": "access",
+    "pub_date": "2026-08-31",
+    "date_basis": "page update"
+  },
+  {
+    "claim": "Entur profile documents explicit Progress closed distribution; actual TRO closure unobserved.",
+    "class": "lifecycle",
+    "pub_date": "2019-03-19",
+    "date_basis": "page update"
+  },
+  {
+    "claim": "Entur terms require application identity and NLOD attribution; no accuracy/completeness guarantee.",
+    "class": "licence",
+    "pub_date": "2026-09-28",
+    "date_basis": "page update"
+  },
+  {
+    "claim": "One TRO SX page includes a Svipper-linked Giaverbukta event; source content cross-channel consistent, same upstream possible.",
+    "class": "live-example",
+    "pub_date": "2026-10-26",
+    "date_basis": "observation"
+  },
+  {
+    "claim": "Svipper public notice shell uses JS rendering, no supported public notice API established.",
+    "class": "access",
+    "pub_date": "2026-10-26",
+    "date_basis": "observation"
+  },
+  {
+    "claim": "Vegvesen official DATEX source requires registration; unauthenticated snapshot returned401; no live Tromso event obtained.",
+    "class": "access",
+    "pub_date": "2026-10-26",
+    "date_basis": "observation"
+  }
+]

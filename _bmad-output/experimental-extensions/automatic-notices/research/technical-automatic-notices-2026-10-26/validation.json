@@ -1,0 +1,68 @@
+{
+  "date": "2026-10-26",
+  "root": "D:\\IBE160-plan-automatic-notices",
+  "branch": "codex/plan-automatic-notices",
+  "head": "aa0fcfb48904c7e0bdd6c68280e5db2d21f478ed",
+  "citation_check": {
+    "markers": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "appendix_rows": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "dangling_markers": [],
+    "orphaned_rows": [],
+    "ok": true
+  },
+  "claims": {
+    "unverified": 6
+  },
+  "tracked_changes": [],
+  "all_untracked_confined_to_extension": true,
+  "untracked_paths": [
+    "_bmad-output/experimental-extensions/automatic-notices/README.md",
+    "_bmad-output/experimental-extensions/automatic-notices/bmad-workflow.md",
+    "_bmad-output/experimental-extensions/automatic-notices/research/technical-automatic-notices-2026-10-26/.memlog.md",
+    "_bmad-output/experimental-extensions/automatic-notices/research/technical-automatic-notices-2026-10-26/brief.md",
+    "_bmad-output/experimental-extensions/automatic-notices/research/technical-automatic-notices-2026-10-26/claims.json",
+    "_bmad-output/experimental-extensions/automatic-notices/research/technical-automatic-notices-2026-10-26/digests/entur-r1.md",
+    "_bmad-output/experimental-extensions/automatic-notices/research/technical-automatic-notices-2026-10-26/digests/project-context.md",
+    "_bmad-output/experimental-extensions/automatic-notices/research/technical-automatic-notices-2026-10-26/digests/standards-r1.md",
+    "_bmad-output/experimental-extensions/automatic-notices/research/technical-automatic-notices-2026-10-26/digests/svipper-r1.md",
+    "_bmad-output/experimental-extensions/automatic-notices/research/technical-automatic-notices-2026-10-26/digests/vegvesen-r1.md",
+    "_bmad-output/experimental-extensions/automatic-notices/research/technical-automatic-notices-2026-10-26/digests/verification-r1.md",
+    "_bmad-output/experimental-extensions/automatic-notices/research/technical-automatic-notices-2026-10-26/quality-check.md",
+    "_bmad-output/experimental-extensions/automatic-notices/research/technical-automatic-notices-2026-10-26/research.md",
+    "_bmad-output/experimental-extensions/automatic-notices/research/technical-automatic-notices-2026-10-26/staleness.json",
+    "_bmad-output/experimental-extensions/automatic-notices/scope.md",
+    "_bmad-output/experimental-extensions/automatic-notices/source-map.md"
+  ],
+  "product_tests_run": false,
+  "committed_pushed_or_merged": false,
+  "preserved_establishment_files": [
+    "README.md",
+    "scope.md",
+    "source-map.md",
+    "bmad-workflow.md"
+  ]
+}
