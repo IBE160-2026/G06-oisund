@@ -1,66 +1,41 @@
-# First-delivery boundary and route interface
+# Scope and current planning decisions
 
 **EXPERIMENTAL EXTENSION — OUTSIDE APPROVED V1 SCOPE**
 
-Proposals for V1.3.0, not approved behavior. This document owns scope, dependencies and product choices; [research](research/technical-position-progression-2026-10-26/research.md) owns external evidence and device uncertainties.
+V1.3.0 planning draft, updated 2026-10-26. User clarifications U1–U5 and [PP-D1–D4](specs/spec-position-progression/decisions.md) supersede contrary proposals in the original research-era scope. They are direction for planning, not approval of implemented behavior. The current contract is [SPEC and companions](specs/spec-position-progression/SPEC.md); [research](research/technical-position-progression-2026-10-26/research.md) retains the external evidence and untested platform questions.
 
-## Small useful delivery
+## User clarifications
 
-On a manually selected passenger activity with a user-confirmed, compatible dated route association, the user explicitly starts position assistance and chooses an initial stop occurrence. Show a compact ordered stop list and an advisory “Anslått ved / Neste planlagte holdeplass” marker. Identify service date, direction and selected range. “Next planned” is not an assertion of actual arrival, boarding, departure or work performed. No map, audio or interaction while driving is required; preparation and correction are intended while stopped.
+- **U1 — Start:** choose the first stop of the trip/range actually driven. Mid-trip start and resume permit another relevant occurrence; full-pattern index1 is not mandatory.
+- **U2 — Recovery:** desired automatic reacquisition can relocate the estimate across several missed stops when fresh measurements and route context are clear. It never records those stops as observed. Manual post-gap selection is now required for the first delivery (PP-D1).
+- **U3 — Advisory manual anchor:** a new manual choice gets protection against immediate GPS replacement. Later coherent reliable measurements can outweigh an older anchor; age alone is never evidence that GPS is right.
+- **U4 — Saved stop:** retain the latest stop identity, trip/occurrence context, evidence time and manual/GPS provenance for a next-trip proposal. Remap identity into the new pattern/range; do not carry sequence numbers or assume a shared origin. Preserve existing access/deletion deadlines.
+- **U5 — Coordinates:** propose Entur NSR as authoritative for Quay/StopPlace coordinates. Preserve ID mapping, source, version, validity and parent/platform distinction. Describe the additions locally; the route plan is unchanged.
 
-Keep three separate values: the confirmed route reference, the user's manual anchor/selection, and the computed estimate. Location can move only the last of these. It cannot select another activity, confirm another departure, start/end/abort a shift or record/alter completed, skipped, interrupted or unknown outcomes. Schedule time is context only. Reaching the last occurrence ends the estimate's range; it never selects a return trip or closes work.
+## First-delivery planning boundary
 
-First pilot: one qualified dated line-20 trip/range at a time, using the route extension's bounded P1 output. Its seven research-era dates are examples, not a promise of future coverage. Select a new named date window after V1 when needed. Full regional coverage, all variants and reliable loop tracking are not prerequisites: ambiguous cases must remain manual.
+The first delivery plans foreground, opt-in assistance on one manually selected, user-confirmed dated trip. Start from an explicitly chosen/accepted occurrence; use qualified measurements for ordinary progression and later reassessment of that advisory anchor. A manual correction resets evidence and briefly protects the choice; explicit Pause remains a separate control.
 
-## Route dependency and proposed read-only contract
+After interruption, first delivery requests manual occurrence choice and fresh acquisition. Qualified automatic multi-stop relocation is deferred by PP-D1. The user's manual choice can jump directly to the relevant occurrence without catch-up steps. PP-D2 permits reuse within the same workday/shift identity, including across midnight, never merely the same calendar date. PP-T1 proposes one online, workday-owned last-stop record, available for the next selected trip. Different workdays require manual start; reuse cannot extend access/deletion deadlines. This replaces the original session-only-anchor proposal without introducing a full GPS history.
 
-Current route SPEC/data-contract/matching/technical-addendum and CRN-E1 are drafts. They propose saved draft review and a frozen reference carried into the workday; no consumer interface is implemented. Do not mutate an active plan to attach new route evidence. An eligible previously reviewed reference is required; otherwise show manual mode.
+A3: all numerical gates are experiment seeds, not validated limits. Threshold expiry never overrides freshness, coherence, plausible movement or ambiguity checks. No reliability/cadence claim exists for the Lenovo; identify model/SKU and qualify Brave/Chrome separately later. See [behavior](specs/spec-position-progression/behavior.md).
 
-| Input group | Minimum information required by progression | Missing/conflicting behavior |
-|---|---|---|
-| Private binding | Stable activity identity; authorized workday and reviewed reference revision; association review status and selected source snapshot. | Do not start against a stale selection, revoked access or a changed reference. No private identifiers leave for public lookup. |
-| Dated identity | Provider/namespace/mapping mode, line ID, generic journey ID plus operating date and any required start discriminator; qualified dated ID if available. | Line number, current clock or privateCode alone cannot choose a trip. Known calendar/identity contradiction blocks assistance. |
-| Direction/pattern | Selected pattern revision, source direction and per-occurrence destination display; inclusive first/last occurrence positions. | Do not reverse/deduplicate the opposite direction or equate headsign with final stop. |
-| Ordered occurrences | Stable occurrence key within the versioned pattern, sequence, StopPlace and scheduled Quay/mapping where available; planned arrival/departure with service-day offsets and explicit instants. | Repeated visits to one quay remain distinct. Unqualified ordering/range/date stays manual. Timetable estimates cannot replace planned identity. |
-| Position anchors — proposed addition | WGS84 latitude/longitude for each used occurrence, mapped quay/stop identity, coordinate kind, source/version/validity and quality/unknown status. | Route P1 does not guarantee these. Qualify Journey Planner/NSR mapping; a parent stop centroid is not silently treated as the boarding position. Missing/unsuitable coordinates disable automatic estimates for that portion. |
-| Geometry — optional later | Directed geometry tied to this exact pattern/version and occurrence measures along it. | No map-matching claim without qualified geometry. Geometry never replaces stop order or resolves every parallel-road ambiguity. |
-| Reference health | Source snapshot/retrieval/validity, matching evidence and user-confirmed versus unverified-reference status. | Expose stale source status separately from stale position. Unknown physical suitability or changed pattern requires manual mode/review, not automatic rematching. |
+## Dependencies and boundaries
 
-This is a proposed information contract, not field-name/API/database agreement. A user-confirmed unverified public reference remains unverified; assistance additionally requires a compatible date, unique selected occurrence range and qualified position anchors. Route's conceptual notice vocabulary is insufficient by itself. Its QF-02/04/05/09 outcomes qualify relevant identity/time/order claims; coordinate qualification is an additional gap. CRN-E1 draft review/carry-forward is the functional dependency; automatic notices, P2 catalogues and Entur live vehicles are not.
+The latest available route plan at 7cada9d2e66af9806358f582bc8ea459321a6563 is draft P1 line20 association in draft review with frozen workday carry-forward. Require the compatible dated journey, unique selected occurrence range, source direction/headsign, explicit service/calendar times and ordered repeated occurrences. A confirmed unverified reference stays labelled unverified; hard contradictions prevent assistance. Neither a line/trip number/privateCode nor nearest time proves identity.
 
-Approved V1's local loopback runtime does not establish a reachable, trusted HTTPS origin on the tablet. A later tablet experiment needs an explicitly qualified access/HTTPS configuration. Do not expose services or change deployment as part of this planning task.
+The proposed [handoff](specs/spec-position-progression/route-interface.md) adds qualified NSR coordinates/version mappings and separate route-health versus measurement-health states. Geometry is optional. Missing coordinates keep the affected portion manual; an accurate fix does not repair missing data. Pattern/source refresh cannot overwrite frozen references or manual route facts. No enrichment of an active plan is authorized.
 
-## Conservative estimation proposal
+Keep estimated stop, manual assertion and confirmed route distinct. Position/time cannot select another activity, mark performed/skipped/interrupted outcomes, start/end/abort work or infer a return trip. A last-stop suggestion requires explicit next-trip selection and acceptance. Existing ownership, revision/retry recovery, fixed expiry, online authority, transient originals, private/demo isolation and readable Day/Night/focus behavior remain.
 
-1. On explicit start, bind a session generation to the selected reference and manual anchor. Feature-check secure context and Geolocation; request permission then use watchPosition. Clear the watch on pause/hidden/exit/access loss and reject callbacks from earlier generations.
-2. Validate timestamp, reported accuracy and coordinate bounds before evaluating progress. Reject duplicate/out-of-order timestamps, stale/future-dated fixes, implausible jumps and a recent callback carrying an old measurement. Recompute freshness on every callback and visibility/resume, not solely with a timer. Detect device-clock discontinuity and reacquire.
-3. Evaluate only nearby sequential occurrences within the selected range. Require several distinct fresh measurements, plausible displacement over elapsed time and consistent route context. Repeated measurements may share the same error; count alone is not proof of correctness. Use approach/departure hysteresis and optional reliable movement bearing. Source inbound/outbound is not a compass bearing.
-4. Advance an estimate by at most one supported occurrence transition. Never jump to the nearest stop anywhere in the line or advance because the timetable says it is due. An observed approach followed by departure supports only an estimated passage. If stop regions overlap, another route segment fits, or passage evidence is absent, freeze the estimate and show uncertainty.
-5. After a gap, tunnel, position jump or apparent detour, retain the last estimate as explicitly old and acquire a new sequence. Do not fill missed stops with assumed progress. A large re-anchor requires the user's explicit choice. Stops-only evidence cannot distinguish every parallel road; qualify suitable pilot sections and suppress ambiguous estimates.
+Trusted HTTPS and actual tablet access must be qualified separately; the current loopback runtime is not a tablet deployment. Raw measurements remain in a bounded transient buffer; clear them on pause, switch, access loss or closure. No coordinate history, analytics payload, public position query or private persistent browser cache. Browser/OS location providers may still use network services.
 
-Illustrative tuning seeds only: reject observations older than 15 seconds or with reported radius above 50 metres; require at least three distinct fixes spanning six seconds; hold at most six fixes and no more than 30 seconds in memory. These are proposed ceilings/windows for later experiments, not measured performance or universal acceptance thresholds. Even a 10-metre reported radius can be insufficient between close platforms. Define entry/exit distances from the qualified stop layout and field observations; no universal arrival radius is chosen now. Sparse updates may keep the display uncertain indefinitely, which is preferable to invented progress.
+Implementation waits for completed/tested V1, required route functionality and separate authorization. No automatic-notice, live-vehicle or complete-regional-catalogue dependency. Line20 is the initial pilot proposal; research-era dates do not guarantee future coverage. This round creates [one extension epic with four stories](epics.md), and executes no product tests, location collection, services, commits or publication.
 
-## Manual control, interruption and privacy
+## Settled decisions and remaining qualification
 
-| Situation | Proposed visible behavior |
-|---|---|
-| Not started / permission denied / source unavailable | Manual list remains usable; explain the cause without repeatedly requesting permission. |
-| Waiting / weak / stale / ambiguous | Text status plus measurement age/reported radius when known; no confident current-position marker and no transition. |
-| Manual correction | Set the chosen occurrence, stop following, and retain that anchor until explicit “Fortsett posisjonsstøtte”. Do not undo it on the next callback. |
-| Hidden page, screen lock, user pause | Stop assistance; on return revalidate access/reference and offer explicit resume with fresh measurements. No background continuity claim. |
-| Reload / discarded page | Recover only authorized server-saved work and manual activity selection; assistance is off. Session-only stop anchor and estimate are lost, so request a new anchor and say so. Never reset to an inferred stop. |
-| Activity/trip switch, expiry, logout, terminal closure | Stop watching and clear sample buffer; invalidate old callbacks. Preserve saved user facts under their existing lifecycle, never extend expiry. |
+Q1/Q2 are closed by PP-D1/PP-D2: manual recovery first and same-workday anchor reuse across midnight. No material product choice remains open for this bounded epic. These are planning decisions, not acceptance of implementation. The manual anchor stays advisory over time; continuous qualified GPS progression does not require a confirmation at each stop. Explicit Pause/Off remains binding.
 
-Process fixes in page memory; discard rejected fixes immediately, expire the bounded buffer and clear it on pause/session end. No default coordinate history, analytics payload, server upload, public API position query or private browser persistence. Saved manual route corrections remain in the route/workday layer; no sensor output overwrites them. “Local processing” describes this application's policy: browser/OS location providers may still use network services. No device-wide offline or zero-disclosure promise follows.
+Accuracy thresholds, coordinate qualification, trusted tablet access and hardware suitability are evidence gaps assigned as small tasks in the affected stories. The [fictional example](specs/spec-position-progression/fictional-example.md) demonstrates the boundary and the separate future recovery branch, with no GPS test evidence.
 
-## Five material product choices
-
-| Choice | Recommended provisional answer | Tradeoff / checkpoint |
-|---|---|---|
-| First operating mode | Foreground, opt-in advisory estimate on one confirmed trip. | Background/screen-off continuity is excluded; qualify Brave and Chrome separately. |
-| Authority and recovery | Manual selection wins; correction pauses; explicit resume and fresh reacquisition. | More conservative recovery, no silent movement of manual choices. |
-| Eligible route data | Require dated binding, ordered occurrences and qualified coordinates; geometry optional. | Some routes/sections stay manual. Review contract with route planning before implementation. |
-| Persistence | Session-only samples/estimate/stop anchor; retain existing saved route/activity facts. | Reload needs a new anchor. Persistent stop-anchor recovery would be a separate scoped decision. |
-| Accuracy policy | Prefer visible uncertainty and fewer advances; tune gates on the actual tablet. | No reliability/latency target claimed until measured. Reject the pilot if the device cannot separate its selected stops. |
-
-Later possibilities: geometry-assisted disambiguation, wider route qualification, saved manual anchor, optional screen wake support, verified Entur vehicle supplement and separately researched background/native behavior. None is needed for this first increment. No epics/stories, navigation engine or full PRD/UX/architecture round is created here.
+Later possibilities include qualified automatic reacquisition, geometry-assisted ambiguity handling, wider route coverage, optional screen-wake support and verified Entur vehicle supplementation. Background/native behavior requires separate investigation.

@@ -21,3 +21,17 @@ All commands after creation use `D:/IBE160-plan-position-progression` explicitly
 
 Document-only checks: citation references, claim ledger/staleness, local links/experimental labels, editorial and source-semantic review, output boundary and other-worktree fingerprint comparison. See research `checks/validation.md` for results and limits. No product tests or device observations belong to these checks.
 
+
+## Specification continuation
+
+The current [SPEC](specs/spec-position-progression/SPEC.md) applies user clarifications U1–U5 over earlier product recommendations. Route HEAD rechecked as 7cada9d2e66af9806358f582bc8ea459321a6563 with clean status; its specification, data contract, technical addition and epic overview remain read-only inputs. Initial position-worktree status was clean at 854d038ec185aa8d75c27d91dcc1c9910a4ab6c8. No new research or implementation evidence is asserted. This round's process memory and validation live in that spec folder; routing proof is .bmad-runner/resolved-spec-workflow.json and resolved-spec-config.json.
+
+## Epic continuation, 2026-10-26
+
+Latest user instruction settles manual first-delivery recovery and same-workday anchor reuse across midnight, while retaining advisory manual anchors and explicit Pause/Off. [Decision register](specs/spec-position-progression/decisions.md) records authority separately from proposals. [PP-E1](epics.md) adds four extension-only stories; no V1 backlog or route document was edited.
+
+This continuation began on codex/plan-position-progression at 854d038ec185aa8d75c27d91dcc1c9910a4ab6c8 with prior uncommitted spec/README/scope/research-memory changes and an empty index. They were preserved. Actual workdir and repository root were both D:/IBE160-plan-position-progression; origin remains https://github.com/IBE160-2026/G06-oisund.git. Route HEAD was rechecked as 7cada9d2e66af9806358f582bc8ea459321a6563 with clean status.
+
+Read-only references: existing spec/research package, route SPEC/data-contract/technical-addendum at that HEAD, current inherited V1 architecture spine and targeted frontend/backend authority surfaces listed in the technical addendum. Current worktree HEAD is a planning baseline, not evidence of V1 completion. No new external research or actual device evidence.
+
+Installed bmad-spec updated the specification from append-only memory; installed bmad-create-epics-and-stories was followed through requirements, one epic, four stories and final document validation. The user's explicit complete-task scope supplies continuation through the workflow's review gates; draft stories are not falsely recorded as user-approved implementation. Existing SPEC replaces a new PRD and short local additions replace any broad architecture/UX round. [Routing proof](.bmad-runner/epics-routing.json), local config views and [document validator](.bmad-runner/validate-planning.py) stay within this extension. BMAD completion/help does not launch another workflow or implementation.

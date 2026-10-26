@@ -1,0 +1,13 @@
+{
+  "checked": "2026-10-26",
+  "runner_root": "D:/IBE160-plan-position-progression/_bmad-output/experimental-extensions/position-progression/.bmad-runner",
+  "repository_root": "D:/IBE160-plan-position-progression",
+  "output": "D:/IBE160-plan-position-progression/_bmad-output/experimental-extensions/position-progression/epics.md",
+  "spec_workspace": "D:/IBE160-plan-position-progression/_bmad-output/experimental-extensions/position-progression/specs/spec-position-progression",
+  "memory": "D:/IBE160-plan-position-progression/_bmad-output/experimental-extensions/position-progression/specs/spec-position-progression/.memlog.md",
+  "step_config": "D:/IBE160-plan-position-progression/_bmad-output/experimental-extensions/position-progression/.bmad-runner/_bmad/bmm/config.yaml",
+  "all_destinations_inside_extension": true,
+  "shared_config_changed": false,
+  "authorization": "Latest user request supplies the input set, one epic and coverage; proceed through workflow steps without re-eliciting settled choices. This does not approve implementation or story acceptance.",
+  "input_substitution": "Existing SPEC, scope and companions stand in for a new PRD; existing V1 architecture is read-only; short local technical addition supplies extension differences. No new broad UX or architecture ceremony."
+}

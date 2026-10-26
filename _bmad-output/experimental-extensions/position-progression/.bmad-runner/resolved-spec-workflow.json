@@ -1,0 +1,12 @@
+{
+  "workflow": {
+    "activation_steps_prepend": [],
+    "activation_steps_append": [],
+    "persistent_facts": [],
+    "on_complete": "",
+    "spec_template": "assets/spec-template.md",
+    "spec_filename": "SPEC.md",
+    "spec_output_path": "D:/IBE160-plan-position-progression/_bmad-output/experimental-extensions/position-progression/specs",
+    "run_folder_pattern": "spec-{slug}"
+  }
+}

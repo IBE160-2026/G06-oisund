@@ -19,6 +19,10 @@ claims_unverified: 5
 
 **EXPERIMENTAL EXTENSION — OUTSIDE APPROVED V1 SCOPE**
 
+## Product-direction update after research
+
+The subsequent user clarifications are recorded in [current SPEC](../../specs/spec-position-progression/SPEC.md). Its advisory manual-anchor, bounded saved-stop and recovery rules supersede older product proposals below, including session-only anchor persistence. External findings, sources and original research checks remain a historical snapshot; this note is not new research or device validation.
+
 ## Recommendation
 
 Propose standard web Geolocation with foreground-only, opt-in stop estimates, conservative uncertainty and explicit manual recovery. A qualified dated route reference and occurrence coordinates must exist first. Do not promise continuous background positioning or suitability of the Lenovo tablet. Browser lifecycle constraints support this limited scope; the hardware and matching quality remain untested. [1][2]
