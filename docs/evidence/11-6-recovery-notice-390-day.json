@@ -1,0 +1,136 @@
+{
+  "overflow": false,
+  "text": 6.126270626473104,
+  "focus": 21,
+  "focusWidth": 3,
+  "focusVisible": true,
+  "focusNotObscured": true,
+  "controls": [
+    {
+      "name": "Tilbake til dagen",
+      "height": 151.15625,
+      "text": 11.085379609993499,
+      "boundary": 11.085379609993499
+    },
+    {
+      "name": "Hent lagrede avvik",
+      "height": 151.15625,
+      "text": 11.085379609993499,
+      "boundary": 11.085379609993499
+    },
+    {
+      "name": "Kontroller avvikslagringen",
+      "height": 202.34375,
+      "text": 11.085379609993499,
+      "boundary": 11.085379609993499
+    },
+    {
+      "name": "Prøv samme avvikslagring igjen",
+      "height": 202.34375,
+      "text": 11.085379609993499,
+      "boundary": 11.085379609993499
+    },
+    {
+      "name": "Tilbake til avvik",
+      "height": 99.96875,
+      "text": 11.085379609993499,
+      "boundary": 11.085379609993499
+    },
+    {
+      "name": "",
+      "height": 96.78125,
+      "text": 14.387145266736685,
+      "boundary": 5.890983174353286
+    },
+    {
+      "name": "",
+      "height": 96.78125,
+      "text": 14.387145266736685,
+      "boundary": 5.890983174353286
+    },
+    {
+      "name": "Lokalt forslag under utilgjengelig server. Lokalt forslag under utilgjengelig server. Lokalt forslag under utilgjengelig server. Lokalt forslag under utilgjengelig server. Lokalt forslag under utilgjengelig server. Lokalt forslag under utilgjengelig server. Lokalt forslag under utilgjengelig server. Lokalt forslag under utilgjengelig server. Lokalt forslag under utilgjengelig server. Lokalt forslag under utilgjengelig server. Lokalt forslag under utilgjengelig server. Lokalt forslag under utilgjengelig server. ",
+      "height": 403.90625,
+      "text": 14.387145266736685,
+      "boundary": 5.890983174353286
+    },
+    {
+      "name": "Bestemte linjerAlle linjer",
+      "height": 90.59375,
+      "text": 14.387145266736685,
+      "boundary": 5.890983174353286
+    },
+    {
+      "name": "",
+      "height": 96.78125,
+      "text": 14.387145266736685,
+      "boundary": 5.890983174353286
+    },
+    {
+      "name": "",
+      "height": 96.78125,
+      "text": 14.387145266736685,
+      "boundary": 5.890983174353286
+    },
+    {
+      "name": "",
+      "height": 96.78125,
+      "text": 14.387145266736685,
+      "boundary": 5.890983174353286
+    },
+    {
+      "name": "",
+      "height": 98.78125,
+      "text": 14.387145266736685,
+      "boundary": 5.890983174353286
+    },
+    {
+      "name": "",
+      "height": 98.78125,
+      "text": 14.387145266736685,
+      "boundary": 5.890983174353286
+    },
+    {
+      "name": "Kilden oppdatert: tøm tidspunkt",
+      "height": 355.90625,
+      "text": 6.126270626473104,
+      "boundary": 4.781375582652278
+    },
+    {
+      "name": "",
+      "height": 98.78125,
+      "text": 14.387145266736685,
+      "boundary": 5.890983174353286
+    },
+    {
+      "name": "",
+      "height": 98.78125,
+      "text": 14.387145266736685,
+      "boundary": 5.890983174353286
+    },
+    {
+      "name": "Gyldig fra: tøm tidspunkt",
+      "height": 304.71875,
+      "text": 6.126270626473104,
+      "boundary": 4.781375582652278
+    },
+    {
+      "name": "",
+      "height": 98.78125,
+      "text": 14.387145266736685,
+      "boundary": 5.890983174353286
+    },
+    {
+      "name": "",
+      "height": 98.78125,
+      "text": 14.387145266736685,
+      "boundary": 5.890983174353286
+    },
+    {
+      "name": "Gyldig til: tøm tidspunkt",
+      "height": 304.71875,
+      "text": 6.126270626473104,
+      "boundary": 4.781375582652278
+    }
+  ]
+}

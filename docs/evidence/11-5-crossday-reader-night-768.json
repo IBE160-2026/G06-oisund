@@ -1,0 +1,347 @@
+{
+  "overflow": false,
+  "text": 10.005601690488291,
+  "focus": 11.45007504521487,
+  "focusWidth": 3,
+  "focusVisible": true,
+  "focusNotObscured": true,
+  "controls": [
+    {
+      "tag": "BUTTON",
+      "disabled": false,
+      "height": 99.96875,
+      "text": 11.652752702162216,
+      "boundary": 8.3661568844563
+    },
+    {
+      "tag": "BUTTON",
+      "disabled": false,
+      "height": 99.96875,
+      "text": 11.652752702162216,
+      "boundary": 8.3661568844563
+    },
+    {
+      "tag": "SELECT",
+      "disabled": false,
+      "height": 90.59375,
+      "text": 10.005601690488291,
+      "boundary": 8.3661568844563
+    },
+    {
+      "tag": "SELECT",
+      "disabled": false,
+      "height": 90.59375,
+      "text": 10.005601690488291,
+      "boundary": 8.3661568844563
+    },
+    {
+      "tag": "BUTTON",
+      "disabled": false,
+      "height": 99.96875,
+      "text": 11.652752702162216,
+      "boundary": 8.3661568844563
+    },
+    {
+      "tag": "SUMMARY",
+      "height": 509.46875,
+      "text": 12.855408864593942,
+      "boundary": 12.855408864593942
+    }
+  ],
+  "focusTargets": [
+    {
+      "tag": "BUTTON",
+      "name": "Tilbake til dagen",
+      "contrast": 11.45007504521487,
+      "width": 3,
+      "visible": true,
+      "unobscured": true,
+      "rect": {
+        "x": 49,
+        "y": 369.71875,
+        "width": 308.03125,
+        "height": 99.96875,
+        "top": 369.71875,
+        "right": 357.03125,
+        "bottom": 469.6875,
+        "left": 49
+      },
+      "fragments": [
+        {
+          "rect": {
+            "x": 49,
+            "y": 369.71875,
+            "width": 308.03125,
+            "height": 99.96875,
+            "top": 369.71875,
+            "right": 357.03125,
+            "bottom": 469.6875,
+            "left": 49
+          },
+          "hit": "BUTTON",
+          "unobscured": true
+        }
+      ]
+    },
+    {
+      "tag": "BUTTON",
+      "name": "Til avviksvedlikehold",
+      "contrast": 11.45007504521487,
+      "width": 3,
+      "visible": true,
+      "unobscured": true,
+      "rect": {
+        "x": 49,
+        "y": 492.078125,
+        "width": 366.890625,
+        "height": 99.96875,
+        "top": 492.078125,
+        "right": 415.890625,
+        "bottom": 592.046875,
+        "left": 49
+      },
+      "fragments": [
+        {
+          "rect": {
+            "x": 49,
+            "y": 492.078125,
+            "width": 366.890625,
+            "height": 99.96875,
+            "top": 492.078125,
+            "right": 415.890625,
+            "bottom": 592.046875,
+            "left": 49
+          },
+          "hit": "BUTTON",
+          "unobscured": true
+        }
+      ]
+    },
+    {
+      "tag": "SELECT",
+      "name": "Bekreftet linje",
+      "contrast": 11.45007504521487,
+      "width": 3,
+      "visible": true,
+      "unobscured": true,
+      "rect": {
+        "x": 49,
+        "y": 691.234375,
+        "width": 670,
+        "height": 90.59375,
+        "top": 691.234375,
+        "right": 719,
+        "bottom": 781.828125,
+        "left": 49
+      },
+      "fragments": [
+        {
+          "rect": {
+            "x": 49,
+            "y": 691.234375,
+            "width": 670,
+            "height": 90.59375,
+            "top": 691.234375,
+            "right": 719,
+            "bottom": 781.828125,
+            "left": 49
+          },
+          "hit": "SELECT",
+          "unobscured": true
+        }
+      ]
+    },
+    {
+      "tag": "SELECT",
+      "name": "Planlagt kalenderdato (Oslo)",
+      "contrast": 11.45007504521487,
+      "width": 3,
+      "visible": true,
+      "unobscured": true,
+      "rect": {
+        "x": 49,
+        "y": 749.015625,
+        "width": 670,
+        "height": 90.59375,
+        "top": 749.015625,
+        "right": 719,
+        "bottom": 839.609375,
+        "left": 49
+      },
+      "fragments": [
+        {
+          "rect": {
+            "x": 49,
+            "y": 749.015625,
+            "width": 670,
+            "height": 90.59375,
+            "top": 749.015625,
+            "right": 719,
+            "bottom": 839.609375,
+            "left": 49
+          },
+          "hit": "SELECT",
+          "unobscured": true
+        }
+      ]
+    },
+    {
+      "tag": "BUTTON",
+      "name": "Hent avvik på nytt",
+      "contrast": 11.45007504521487,
+      "width": 3,
+      "visible": true,
+      "unobscured": true,
+      "rect": {
+        "x": 49,
+        "y": 739.609375,
+        "width": 333.234375,
+        "height": 99.96875,
+        "top": 739.609375,
+        "right": 382.234375,
+        "bottom": 839.578125,
+        "left": 49
+      },
+      "fragments": [
+        {
+          "rect": {
+            "x": 49,
+            "y": 739.609375,
+            "width": 333.234375,
+            "height": 99.96875,
+            "top": 739.609375,
+            "right": 382.234375,
+            "bottom": 839.578125,
+            "left": 49
+          },
+          "hit": "BUTTON",
+          "unobscured": true
+        }
+      ]
+    },
+    {
+      "tag": "SUMMARY",
+      "name": "Langt norsk stedsnavn og trafikkmelding Langt norsk stedsnavn og trafikkmelding ",
+      "contrast": 11.45007504521487,
+      "width": 3,
+      "visible": true,
+      "unobscured": true,
+      "rect": {
+        "x": 126.796875,
+        "y": 164.921875,
+        "width": 559.203125,
+        "height": 509.46875,
+        "top": 164.921875,
+        "right": 686,
+        "bottom": 674.390625,
+        "left": 126.796875
+      },
+      "fragments": [
+        {
+          "rect": {
+            "x": 126.796875,
+            "y": 164.921875,
+            "width": 559.203125,
+            "height": 509.46875,
+            "top": 164.921875,
+            "right": 686,
+            "bottom": 674.390625,
+            "left": 126.796875
+          },
+          "hit": "SPAN",
+          "unobscured": true
+        }
+      ]
+    },
+    {
+      "tag": "A",
+      "name": "https://example.org/lang-kilde-lang-kilde-lang-kilde-lang-kilde-lang-kilde-lang-",
+      "contrast": 11.45007504521487,
+      "width": 3,
+      "visible": true,
+      "unobscured": true,
+      "rect": {
+        "x": 126.796875,
+        "y": 295.953125,
+        "width": 540.46875,
+        "height": 247.75,
+        "top": 295.953125,
+        "right": 667.265625,
+        "bottom": 543.703125,
+        "left": 126.796875
+      },
+      "fragments": [
+        {
+          "rect": {
+            "x": 126.796875,
+            "y": 295.953125,
+            "width": 518.09375,
+            "height": 43,
+            "top": 295.953125,
+            "right": 644.890625,
+            "bottom": 338.953125,
+            "left": 126.796875
+          },
+          "hit": "A",
+          "unobscured": true
+        },
+        {
+          "rect": {
+            "x": 126.796875,
+            "y": 347.140625,
+            "width": 540.46875,
+            "height": 43,
+            "top": 347.140625,
+            "right": 667.265625,
+            "bottom": 390.140625,
+            "left": 126.796875
+          },
+          "hit": "A",
+          "unobscured": true
+        },
+        {
+          "rect": {
+            "x": 126.796875,
+            "y": 398.328125,
+            "width": 534.46875,
+            "height": 43,
+            "top": 398.328125,
+            "right": 661.265625,
+            "bottom": 441.328125,
+            "left": 126.796875
+          },
+          "hit": "A",
+          "unobscured": true
+        },
+        {
+          "rect": {
+            "x": 126.796875,
+            "y": 449.515625,
+            "width": 540.46875,
+            "height": 43,
+            "top": 449.515625,
+            "right": 667.265625,
+            "bottom": 492.515625,
+            "left": 126.796875
+          },
+          "hit": "A",
+          "unobscured": true
+        },
+        {
+          "rect": {
+            "x": 126.796875,
+            "y": 500.703125,
+            "width": 460.6875,
+            "height": 43,
+            "top": 500.703125,
+            "right": 587.484375,
+            "bottom": 543.703125,
+            "left": 126.796875
+          },
+          "hit": "A",
+          "unobscured": true
+        }
+      ]
+    }
+  ]
+}

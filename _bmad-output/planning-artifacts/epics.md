@@ -304,14 +304,15 @@ FR-7–9, FR-15 and FR-23 are deferred; the remaining original FRs are narrowed 
 
 ### Story 11.5: Read line/date notices
 
-**Stable alias:** V1-14. **Status:** backlog; approved scope, implementation/evidence not started.
+**Stable alias:** V1-14. **Status:** done; Jonas explicitly accepted the corrected account registry and expiry/extension delivery on 2026-10-26 (`Godkjent.`). Final gate: 420 backend and all 472 browser cases passed; migration/runtime/data preservation verified locally. No commit/push or further work is authorized by this acceptance.
 **Depends on:** V1-09, V1-13.
 **Traceability:** FR-12/13/14/19; AC-04/05; SCOPE-02.
 
-**User outcome:** show each applicable notice once with all matching lines; separate incidents remain separate; unknown validity is qualified and no entries does not mean no disruptions. No current-stop matching claim.
+**User outcome:** register each account notice once and reuse it automatically across eligible days until its required ending date or earlier manual ending. Allow extension only before expiry; show each matching incident once, qualify unknown starts and coverage, and never imply precise stop relevance or clear roads.
 
 **Acceptance criteria:**
-- Test shared line 20/24 notice once with both matching lines, a separate event on line 20, known non-overlap and unknown/partial validity. Use planned date intervals, not current-trip certainty. Empty/unavailable/unchecked states are distinct, and no list state claims full source coverage.
+- Owner correction 2026-10-26: one account-owned notice must appear automatically on later imported/confirmed days with matching lines/intervals. Require a future ending date; date-only means end of that Oslo date. Automatic Utløpt and earlier Avsluttet manuelt are distinct from source check. Extend only while live; reject resurrection after expiry/manual ending. Original-shift deletion/closure/expiry cannot remove a still-valid notice. Preserve legacy records/receipts and qualify missing end dates for explicit completion.
+- Test shared 20/24 once, separate incidents, day A to B without re-entry, known non-overlap, unknown start, date-only/precise-clock/DST ending, pre-/at-/post-deadline extension and retention cleanup. Empty/unavailable/unchecked states stay distinct and never establish source completeness or road clearance.
 - Apply the current PRD/architecture/UX rules for the data and controls this slice introduces; preserve manual/unknown/fictional distinctions and private ownership. Do not implement deferred features as prerequisites.
 - Record meaningful executed evidence, failures and limits for this outcome. Planning text and mockups are not test results.
 
@@ -321,7 +322,7 @@ FR-7–9, FR-15 and FR-23 are deferred; the remaining original FRs are narrowed 
 
 ### Story 11.6: Recover from an unavailable server
 
-**Stable alias:** V1-15. **Status:** backlog; approved scope, implementation/evidence not started.
+**Stable alias:** V1-15. **Status:** done; Jonas explicitly accepted the integrated delivery on 2026-10-26. Fresh final gate: 421 backend tests and all 479 browser cases passed; current source manifest recorded. See the [execution specification](../implementation-artifacts/spec-11-6-recover-from-an-unavailable-server.md) and [delivery evidence](../../docs/evidence/11-6-server-recovery.md).
 **Depends on:** V1-04, V1-12, V1-14.
 **Traceability:** FR-17/18/20; NFR-2; AC-07; SCOPE-02.
 

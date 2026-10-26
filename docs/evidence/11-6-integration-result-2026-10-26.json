@@ -1,0 +1,42 @@
+{
+  "head": "aa0fcfb48904c7e0bdd6c68280e5db2d21f478ed",
+  "source_files": 120,
+  "source_manifest_sha256": "1e0101380841d712125ce999a36d3f20dc43dfe66de253ae22016679111524e5",
+  "initial_files_retained": 1004,
+  "historical_evidence_preserved": 390,
+  "fixtures_preserved": 24,
+  "frozen_blocks_preserved": 26,
+  "runtime_backend_files": 44,
+  "served_assets": {
+    "index-8lnBnkIq.css": "92e8b81a21bfb3a68614fe7d44e4617cf7f08b223cd9934bac55dc8eca0155d3",
+    "index-DE5vJ8Ms.js": "0c12c680ffdc21d501aba5bc6a6f2017f770261fd323c0e853fa21aad621a60e"
+  },
+  "retro_unchanged": true,
+  "index_empty": true,
+  "full_gate_exit": 0,
+  "backend_tests": {
+    "passed": 421,
+    "duration_seconds": 526.37,
+    "warnings": 1
+  },
+  "browser_tests": {
+    "passed": 479,
+    "duration": "38.9m",
+    "single_invocation": true
+  },
+  "restoration_controls_passed": 7,
+  "focused_account_api_passed": 10,
+  "focused_browser_integration_passed": 7,
+  "automated_environment": {
+    "platform": "Windows desktop",
+    "browser": "Edge 156.0.4314.42",
+    "playwright": "1.64.1",
+    "node": "24.19.0"
+  },
+  "manual_environment_selected": "Desktop local browser; actual browser/version/results pending owner",
+  "manual_acceptance": "pending",
+  "planned_later_platform": "Lenovo Pad / Android / Brave / mobile network to home desktop",
+  "remote_access_timing": "Between Epic 11 and Epic 12; no setup in this task",
+  "full_log": "tmp/11-6-integration-final-full.log",
+  "initial_gate": "deliberately interrupted after 78 progress dots; incomplete, not passing"
+}

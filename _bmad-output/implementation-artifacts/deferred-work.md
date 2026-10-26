@@ -1,0 +1,3 @@
+- source_spec: `_bmad-output/implementation-artifacts/spec-11-5-cross-day-notice-register.md`
+  summary: Clamp the existing private-session timeout when a device clock is more than about eleven days behind the server.
+  evidence: `frontend/src/PrivateAccess.tsx:226` passes the full remaining fourteen-day session lease plus device skew to setTimeout without a 2,147,483,647 ms clamp; the corrective browser investigation encountered immediate expiry under fourteen-day backward skew. This access controller is unchanged from the preserved initial tree. Notice expiry itself now uses server timestamps plus monotonic elapsed time and is tested with two-hour initial skew and a one-day backward clock jump; broader access-clock behavior remains separate.

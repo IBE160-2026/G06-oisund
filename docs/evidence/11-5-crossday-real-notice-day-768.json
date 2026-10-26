@@ -1,0 +1,608 @@
+{
+  "editor": {
+    "overflow": false,
+    "text": 6.126270626473104,
+    "focus": 21,
+    "focusWidth": 3,
+    "focusVisible": true,
+    "focusNotObscured": true,
+    "controls": [
+      {
+        "tag": "BUTTON",
+        "disabled": false,
+        "height": 99.96875,
+        "text": 11.085379609993499,
+        "boundary": 11.085379609993499
+      },
+      {
+        "tag": "BUTTON",
+        "disabled": false,
+        "height": 99.96875,
+        "text": 11.085379609993499,
+        "boundary": 11.085379609993499
+      },
+      {
+        "tag": "BUTTON",
+        "disabled": false,
+        "height": 99.96875,
+        "text": 11.085379609993499,
+        "boundary": 11.085379609993499
+      },
+      {
+        "tag": "INPUT",
+        "disabled": false,
+        "height": 96.78125,
+        "text": 14.387145266736685,
+        "boundary": 5.890983174353286
+      },
+      {
+        "tag": "INPUT",
+        "disabled": false,
+        "height": 96.78125,
+        "text": 14.387145266736685,
+        "boundary": 5.890983174353286
+      },
+      {
+        "tag": "TEXTAREA",
+        "disabled": false,
+        "height": 403.90625,
+        "text": 14.387145266736685,
+        "boundary": 5.890983174353286
+      },
+      {
+        "tag": "SELECT",
+        "disabled": false,
+        "height": 90.59375,
+        "text": 14.387145266736685,
+        "boundary": 5.890983174353286
+      },
+      {
+        "tag": "INPUT",
+        "disabled": false,
+        "height": 96.78125,
+        "text": 14.387145266736685,
+        "boundary": 5.890983174353286
+      },
+      {
+        "tag": "INPUT",
+        "disabled": false,
+        "height": 96.78125,
+        "text": 14.387145266736685,
+        "boundary": 5.890983174353286
+      },
+      {
+        "tag": "INPUT",
+        "disabled": false,
+        "height": 96.78125,
+        "text": 14.387145266736685,
+        "boundary": 5.890983174353286
+      },
+      {
+        "tag": "INPUT",
+        "disabled": false,
+        "height": 98.78125,
+        "text": 14.387145266736685,
+        "boundary": 5.890983174353286
+      },
+      {
+        "tag": "INPUT",
+        "disabled": false,
+        "height": 98.78125,
+        "text": 14.387145266736685,
+        "boundary": 5.890983174353286
+      },
+      {
+        "tag": "BUTTON",
+        "disabled": true,
+        "height": 99.96875,
+        "text": 6.126270626473104,
+        "boundary": 4.781375582652278
+      },
+      {
+        "tag": "BUTTON",
+        "disabled": false,
+        "height": 99.96875,
+        "text": 11.085379609993499,
+        "boundary": 11.085379609993499
+      },
+      {
+        "tag": "INPUT",
+        "disabled": false,
+        "height": 98.78125,
+        "text": 14.387145266736685,
+        "boundary": 5.890983174353286
+      },
+      {
+        "tag": "INPUT",
+        "disabled": false,
+        "height": 98.78125,
+        "text": 14.387145266736685,
+        "boundary": 5.890983174353286
+      },
+      {
+        "tag": "BUTTON",
+        "disabled": true,
+        "height": 99.96875,
+        "text": 6.126270626473104,
+        "boundary": 4.781375582652278
+      },
+      {
+        "tag": "BUTTON",
+        "disabled": false,
+        "height": 99.96875,
+        "text": 11.085379609993499,
+        "boundary": 11.085379609993499
+      },
+      {
+        "tag": "INPUT",
+        "disabled": false,
+        "height": 98.78125,
+        "text": 14.387145266736685,
+        "boundary": 5.890983174353286
+      },
+      {
+        "tag": "INPUT",
+        "disabled": false,
+        "height": 98.78125,
+        "text": 14.387145266736685,
+        "boundary": 5.890983174353286
+      },
+      {
+        "tag": "BUTTON",
+        "disabled": false,
+        "height": 99.96875,
+        "text": 11.085379609993499,
+        "boundary": 11.085379609993499
+      },
+      {
+        "tag": "BUTTON",
+        "disabled": false,
+        "height": 99.96875,
+        "text": 11.085379609993499,
+        "boundary": 11.085379609993499
+      },
+      {
+        "tag": "BUTTON",
+        "disabled": false,
+        "height": 99.96875,
+        "text": 11.085379609993499,
+        "boundary": 11.085379609993499
+      },
+      {
+        "tag": "BUTTON",
+        "disabled": false,
+        "height": 99.96875,
+        "text": 11.085379609993499,
+        "boundary": 11.085379609993499
+      }
+    ]
+  },
+  "saved": {
+    "overflow": false,
+    "text": 11.085379609993499,
+    "focus": 21,
+    "focusWidth": 3,
+    "focusVisible": true,
+    "focusNotObscured": true,
+    "controls": [
+      {
+        "tag": "BUTTON",
+        "disabled": false,
+        "height": 99.96875,
+        "text": 11.085379609993499,
+        "boundary": 11.085379609993499
+      },
+      {
+        "tag": "BUTTON",
+        "disabled": false,
+        "height": 99.96875,
+        "text": 11.085379609993499,
+        "boundary": 11.085379609993499
+      },
+      {
+        "tag": "BUTTON",
+        "disabled": false,
+        "height": 99.96875,
+        "text": 11.085379609993499,
+        "boundary": 11.085379609993499
+      },
+      {
+        "tag": "SUMMARY",
+        "height": 509.46875,
+        "text": 14.387145266736685,
+        "boundary": 14.387145266736685
+      },
+      {
+        "tag": "BUTTON",
+        "disabled": false,
+        "height": 509.46875,
+        "text": 11.085379609993499,
+        "boundary": 11.085379609993499
+      },
+      {
+        "tag": "BUTTON",
+        "disabled": false,
+        "height": 99.96875,
+        "text": 11.085379609993499,
+        "boundary": 11.085379609993499
+      },
+      {
+        "tag": "BUTTON",
+        "disabled": false,
+        "height": 99.96875,
+        "text": 11.085379609993499,
+        "boundary": 11.085379609993499
+      }
+    ]
+  },
+  "conflict": {
+    "overflow": false,
+    "text": 6.126270626473104,
+    "focus": 21,
+    "focusWidth": 3,
+    "focusVisible": true,
+    "focusNotObscured": true,
+    "controls": [
+      {
+        "tag": "BUTTON",
+        "disabled": false,
+        "height": 99.96875,
+        "text": 11.085379609993499,
+        "boundary": 11.085379609993499
+      },
+      {
+        "tag": "BUTTON",
+        "disabled": false,
+        "height": 99.96875,
+        "text": 11.085379609993499,
+        "boundary": 11.085379609993499
+      },
+      {
+        "tag": "BUTTON",
+        "disabled": false,
+        "height": 99.96875,
+        "text": 11.085379609993499,
+        "boundary": 11.085379609993499
+      },
+      {
+        "tag": "INPUT",
+        "disabled": false,
+        "height": 96.78125,
+        "text": 14.387145266736685,
+        "boundary": 5.890983174353286
+      },
+      {
+        "tag": "INPUT",
+        "disabled": false,
+        "height": 96.78125,
+        "text": 14.387145266736685,
+        "boundary": 5.890983174353286
+      },
+      {
+        "tag": "TEXTAREA",
+        "disabled": false,
+        "height": 403.90625,
+        "text": 14.387145266736685,
+        "boundary": 5.890983174353286
+      },
+      {
+        "tag": "SELECT",
+        "disabled": false,
+        "height": 90.59375,
+        "text": 14.387145266736685,
+        "boundary": 5.890983174353286
+      },
+      {
+        "tag": "INPUT",
+        "disabled": false,
+        "height": 96.78125,
+        "text": 14.387145266736685,
+        "boundary": 5.890983174353286
+      },
+      {
+        "tag": "INPUT",
+        "disabled": false,
+        "height": 96.78125,
+        "text": 14.387145266736685,
+        "boundary": 5.890983174353286
+      },
+      {
+        "tag": "INPUT",
+        "disabled": false,
+        "height": 96.78125,
+        "text": 14.387145266736685,
+        "boundary": 5.890983174353286
+      },
+      {
+        "tag": "INPUT",
+        "disabled": false,
+        "height": 98.78125,
+        "text": 14.387145266736685,
+        "boundary": 5.890983174353286
+      },
+      {
+        "tag": "INPUT",
+        "disabled": false,
+        "height": 98.78125,
+        "text": 14.387145266736685,
+        "boundary": 5.890983174353286
+      },
+      {
+        "tag": "BUTTON",
+        "disabled": true,
+        "height": 99.96875,
+        "text": 6.126270626473104,
+        "boundary": 4.781375582652278
+      },
+      {
+        "tag": "BUTTON",
+        "disabled": false,
+        "height": 99.96875,
+        "text": 11.085379609993499,
+        "boundary": 11.085379609993499
+      },
+      {
+        "tag": "INPUT",
+        "disabled": false,
+        "height": 98.78125,
+        "text": 14.387145266736685,
+        "boundary": 5.890983174353286
+      },
+      {
+        "tag": "INPUT",
+        "disabled": false,
+        "height": 98.78125,
+        "text": 14.387145266736685,
+        "boundary": 5.890983174353286
+      },
+      {
+        "tag": "BUTTON",
+        "disabled": true,
+        "height": 99.96875,
+        "text": 6.126270626473104,
+        "boundary": 4.781375582652278
+      },
+      {
+        "tag": "BUTTON",
+        "disabled": false,
+        "height": 99.96875,
+        "text": 11.085379609993499,
+        "boundary": 11.085379609993499
+      },
+      {
+        "tag": "INPUT",
+        "disabled": false,
+        "height": 98.78125,
+        "text": 14.387145266736685,
+        "boundary": 5.890983174353286
+      },
+      {
+        "tag": "INPUT",
+        "disabled": false,
+        "height": 98.78125,
+        "text": 14.387145266736685,
+        "boundary": 5.890983174353286
+      },
+      {
+        "tag": "BUTTON",
+        "disabled": false,
+        "height": 99.96875,
+        "text": 11.085379609993499,
+        "boundary": 11.085379609993499
+      },
+      {
+        "tag": "BUTTON",
+        "disabled": false,
+        "height": 99.96875,
+        "text": 11.085379609993499,
+        "boundary": 11.085379609993499
+      },
+      {
+        "tag": "BUTTON",
+        "disabled": false,
+        "height": 128.75,
+        "text": 11.085379609993499,
+        "boundary": 10.17953044280476
+      },
+      {
+        "tag": "BUTTON",
+        "disabled": true,
+        "height": 99.96875,
+        "text": 6.126270626473104,
+        "boundary": 4.781375582652278
+      },
+      {
+        "tag": "BUTTON",
+        "disabled": false,
+        "height": 99.96875,
+        "text": 11.085379609993499,
+        "boundary": 11.085379609993499
+      }
+    ]
+  },
+  "unavailable": {
+    "overflow": false,
+    "text": 6.126270626473104,
+    "focus": 21,
+    "focusWidth": 3,
+    "focusVisible": true,
+    "focusNotObscured": true,
+    "controls": [
+      {
+        "tag": "BUTTON",
+        "disabled": false,
+        "height": 99.96875,
+        "text": 11.085379609993499,
+        "boundary": 11.085379609993499
+      },
+      {
+        "tag": "BUTTON",
+        "disabled": false,
+        "height": 99.96875,
+        "text": 11.085379609993499,
+        "boundary": 11.085379609993499
+      },
+      {
+        "tag": "BUTTON",
+        "disabled": false,
+        "height": 99.96875,
+        "text": 11.085379609993499,
+        "boundary": 11.085379609993499
+      },
+      {
+        "tag": "INPUT",
+        "disabled": false,
+        "height": 96.78125,
+        "text": 14.387145266736685,
+        "boundary": 5.890983174353286
+      },
+      {
+        "tag": "INPUT",
+        "disabled": false,
+        "height": 96.78125,
+        "text": 14.387145266736685,
+        "boundary": 5.890983174353286
+      },
+      {
+        "tag": "TEXTAREA",
+        "disabled": false,
+        "height": 403.90625,
+        "text": 14.387145266736685,
+        "boundary": 5.890983174353286
+      },
+      {
+        "tag": "SELECT",
+        "disabled": false,
+        "height": 90.59375,
+        "text": 14.387145266736685,
+        "boundary": 5.890983174353286
+      },
+      {
+        "tag": "INPUT",
+        "disabled": false,
+        "height": 96.78125,
+        "text": 14.387145266736685,
+        "boundary": 5.890983174353286
+      },
+      {
+        "tag": "INPUT",
+        "disabled": false,
+        "height": 96.78125,
+        "text": 14.387145266736685,
+        "boundary": 5.890983174353286
+      },
+      {
+        "tag": "INPUT",
+        "disabled": false,
+        "height": 96.78125,
+        "text": 14.387145266736685,
+        "boundary": 5.890983174353286
+      },
+      {
+        "tag": "INPUT",
+        "disabled": false,
+        "height": 98.78125,
+        "text": 14.387145266736685,
+        "boundary": 5.890983174353286
+      },
+      {
+        "tag": "INPUT",
+        "disabled": false,
+        "height": 98.78125,
+        "text": 14.387145266736685,
+        "boundary": 5.890983174353286
+      },
+      {
+        "tag": "BUTTON",
+        "disabled": true,
+        "height": 99.96875,
+        "text": 6.126270626473104,
+        "boundary": 4.781375582652278
+      },
+      {
+        "tag": "BUTTON",
+        "disabled": false,
+        "height": 99.96875,
+        "text": 6.126270626473104,
+        "boundary": 4.781375582652278
+      },
+      {
+        "tag": "INPUT",
+        "disabled": false,
+        "height": 98.78125,
+        "text": 14.387145266736685,
+        "boundary": 5.890983174353286
+      },
+      {
+        "tag": "INPUT",
+        "disabled": false,
+        "height": 98.78125,
+        "text": 14.387145266736685,
+        "boundary": 5.890983174353286
+      },
+      {
+        "tag": "BUTTON",
+        "disabled": true,
+        "height": 99.96875,
+        "text": 6.126270626473104,
+        "boundary": 4.781375582652278
+      },
+      {
+        "tag": "BUTTON",
+        "disabled": false,
+        "height": 99.96875,
+        "text": 6.126270626473104,
+        "boundary": 4.781375582652278
+      },
+      {
+        "tag": "INPUT",
+        "disabled": false,
+        "height": 98.78125,
+        "text": 14.387145266736685,
+        "boundary": 5.890983174353286
+      },
+      {
+        "tag": "INPUT",
+        "disabled": false,
+        "height": 98.78125,
+        "text": 14.387145266736685,
+        "boundary": 5.890983174353286
+      },
+      {
+        "tag": "BUTTON",
+        "disabled": false,
+        "height": 99.96875,
+        "text": 6.126270626473104,
+        "boundary": 4.781375582652278
+      },
+      {
+        "tag": "BUTTON",
+        "disabled": false,
+        "height": 99.96875,
+        "text": 6.126270626473104,
+        "boundary": 4.781375582652278
+      },
+      {
+        "tag": "BUTTON",
+        "disabled": true,
+        "height": 128.75,
+        "text": 6.126270626473104,
+        "boundary": 4.390662297050625
+      },
+      {
+        "tag": "BUTTON",
+        "disabled": true,
+        "height": 99.96875,
+        "text": 6.126270626473104,
+        "boundary": 4.781375582652278
+      },
+      {
+        "tag": "BUTTON",
+        "disabled": false,
+        "height": 99.96875,
+        "text": 11.085379609993499,
+        "boundary": 11.085379609993499
+      }
+    ]
+  }
+}

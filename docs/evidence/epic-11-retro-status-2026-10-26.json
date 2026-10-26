@@ -1,0 +1,18 @@
+{
+  "sprint_update": {
+    "ok": true,
+    "retro_key_found": true,
+    "retro_status_before": "optional",
+    "retro_status_after": "done",
+    "action_items_added": 12,
+    "action_items_updated": 0,
+    "last_updated": "10-26-2026 19:42",
+    "verdict": "accepted-with-open-items"
+  },
+  "epic_status": "done",
+  "story_count": 6,
+  "pending_stories": [],
+  "verdict": "accepted-with-open-items",
+  "epic_12": "backlog",
+  "source_manifest_sha256": "1e0101380841d712125ce999a36d3f20dc43dfe66de253ae22016679111524e5"
+}

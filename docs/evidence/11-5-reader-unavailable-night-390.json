@@ -1,0 +1,149 @@
+{
+  "overflow": false,
+  "text": 10.005601690488291,
+  "focus": 11.45007504521487,
+  "focusWidth": 3,
+  "focusVisible": true,
+  "focusNotObscured": true,
+  "controls": [
+    {
+      "tag": "BUTTON",
+      "disabled": false,
+      "height": 151.15625,
+      "text": 11.652752702162216,
+      "boundary": 8.3661568844563
+    },
+    {
+      "tag": "BUTTON",
+      "disabled": false,
+      "height": 202.34375,
+      "text": 11.652752702162216,
+      "boundary": 8.3661568844563
+    },
+    {
+      "tag": "SELECT",
+      "disabled": true,
+      "height": 90.59375,
+      "text": 10.005601690488291,
+      "boundary": 8.3661568844563
+    },
+    {
+      "tag": "SELECT",
+      "disabled": true,
+      "height": 90.59375,
+      "text": 10.005601690488291,
+      "boundary": 8.3661568844563
+    },
+    {
+      "tag": "BUTTON",
+      "disabled": false,
+      "height": 151.15625,
+      "text": 11.652752702162216,
+      "boundary": 8.3661568844563
+    }
+  ],
+  "focusTargets": [
+    {
+      "tag": "BUTTON",
+      "name": "Tilbake til dagen",
+      "contrast": 11.45007504521487,
+      "width": 3,
+      "visible": true,
+      "unobscured": true,
+      "rect": {
+        "x": 49,
+        "y": 344.75,
+        "width": 292,
+        "height": 151.15625,
+        "top": 344.75,
+        "right": 341,
+        "bottom": 495.90625,
+        "left": 49
+      },
+      "fragments": [
+        {
+          "rect": {
+            "x": 49,
+            "y": 344.75,
+            "width": 292,
+            "height": 151.15625,
+            "top": 344.75,
+            "right": 341,
+            "bottom": 495.90625,
+            "left": 49
+          },
+          "hit": "BUTTON",
+          "unobscured": true
+        }
+      ]
+    },
+    {
+      "tag": "BUTTON",
+      "name": "Til avviksvedlikehold",
+      "contrast": 11.45007504521487,
+      "width": 3,
+      "visible": true,
+      "unobscured": true,
+      "rect": {
+        "x": 49,
+        "y": 518.296875,
+        "width": 292,
+        "height": 202.34375,
+        "top": 518.296875,
+        "right": 341,
+        "bottom": 720.640625,
+        "left": 49
+      },
+      "fragments": [
+        {
+          "rect": {
+            "x": 49,
+            "y": 518.296875,
+            "width": 292,
+            "height": 202.34375,
+            "top": 518.296875,
+            "right": 341,
+            "bottom": 720.640625,
+            "left": 49
+          },
+          "hit": "BUTTON",
+          "unobscured": true
+        }
+      ]
+    },
+    {
+      "tag": "BUTTON",
+      "name": "Hent avvik på nytt",
+      "contrast": 11.45007504521487,
+      "width": 3,
+      "visible": true,
+      "unobscured": true,
+      "rect": {
+        "x": 49,
+        "y": 344.390625,
+        "width": 292,
+        "height": 151.15625,
+        "top": 344.390625,
+        "right": 341,
+        "bottom": 495.546875,
+        "left": 49
+      },
+      "fragments": [
+        {
+          "rect": {
+            "x": 49,
+            "y": 344.390625,
+            "width": 292,
+            "height": 151.15625,
+            "top": 344.390625,
+            "right": 341,
+            "bottom": 495.546875,
+            "left": 49
+          },
+          "hit": "BUTTON",
+          "unobscured": true
+        }
+      ]
+    }
+  ]
+}

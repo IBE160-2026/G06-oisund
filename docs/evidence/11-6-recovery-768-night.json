@@ -1,0 +1,29 @@
+{
+  "overflow": false,
+  "height": 99.96875,
+  "text": 10.005601690488291,
+  "focus": 11.45007504521487,
+  "focusVisible": true,
+  "outlineWidth": 3,
+  "focusNotObscured": true,
+  "controls": [
+    {
+      "name": "Prøv samme lagringsforsøk igjen",
+      "height": 99.96875,
+      "text": 11.652752702162216,
+      "boundary": 8.3661568844563
+    },
+    {
+      "name": "Prøv samme lagringsforsøk igjen",
+      "height": 99.96875,
+      "text": 11.652752702162216,
+      "boundary": 8.3661568844563
+    },
+    {
+      "name": "Kontroller lagringsforsøket",
+      "height": 99.96875,
+      "text": 11.652752702162216,
+      "boundary": 8.3661568844563
+    }
+  ]
+}

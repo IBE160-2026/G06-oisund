@@ -14,7 +14,7 @@ The owner approved [SCOPE-02](../../sprint-change-proposal-2026-10-19.md). The [
 
 One React/TypeScript browser frontend, one Python/FastAPI modular backend and PostgreSQL. Preserve the adopted stack; verify supported, mutually compatible versions and lock actual dependencies at bootstrap. Old September version numbers are not verified executable requirements. No production or integration SQLite substitute. Choose a small migration tool in implementation and test migrations; no framework-wide scaffolding requirements.
 
-The backend is authoritative for saved drafts, plans, manual selection/outcomes, sessions and day-associated notices. Browser memory holds form edits and current presentation only. No private IndexedDB/localStorage cache, service worker, outbox, GPS engine, writer epoch, day grant or multi-build offline recovery. A non-private manual theme preference may use localStorage.
+The backend is authoritative for saved drafts, plans, manual selection/outcomes, sessions and account-owned notices reused across days (owner correction 2026-10-26). Browser memory holds form edits and current presentation only. No private IndexedDB/localStorage cache, service worker, outbox, GPS engine, writer epoch, day grant or multi-build offline recovery. A non-private manual theme preference may use localStorage.
 
 ## Boundaries and contracts
 
@@ -23,7 +23,7 @@ The backend is authoritative for saved drafts, plans, manual selection/outcomes,
 | ImportDraft | Stable ID, authenticated owner, creation/expiry, revision, service/calendar dates, ordered typed activities, page/field uncertainty and manual corrections. No persistent original/raw extraction archive. |
 | Workday | Stable ID, owner, state, revision, confirmed plan, fixed planned-end retention bound, selected activity, bus assignment and explicit manual outcomes. |
 | Activity | Stable identity independent of line, source order, type, explicit dates/times, line/direction/destination for trips, known endpoints/places, vehicle duty separate from bus, nullable nonessential facts. |
-| ManualNotice | Stable ID, workday ID, title, explicit line tags, original-source URL, nullable validity/source-update time, separate entered/checked time, explicit status. No inferred version lifecycle. |
+| ManualNotice | Owner correction 2026-10-26: stable incident ID and account owner, optional original-workday provenance only; title, explicit selected/all-line scope, optional short/deep text/source/HTTP(S), required future ending, nullable start/source update, separate entry/edit/check/manual-ending facts. One record serves all eligible days. Automatic expiry is distinct from manual ending; extension only before current expiry. Preserve legacy IDs/content/receipts without inferred validity. |
 | SaveResult | Stable operation ID, accepted record ID/revision and server time; errors identify invalid/unauthorized/expired/conflict/unavailable. A lost response is not a failed commit assertion. |
 
 Use UUIDs, server-derived owner, UTC instants plus Europe/Oslo service/calendar interpretation. Typed request/response schemas are validated server-side; generated TypeScript types may help but do not replace validation. External source IDs are not needed for manual selection. Keep manual and source facts distinct.
@@ -46,7 +46,7 @@ Start with a timeboxed text-PDF extraction experiment on 3–5 anonymized PDFs w
 
 Process uploads in private transient storage, remove source/processing copies on success/failure/cancel and clean interrupted jobs at startup. Never store originals in browser persistence, logs, queues, repository or images. Persist only interpreted facts, page/field uncertainty and corrections. Source preview lasts only for the current selection; reopening a draft may require selecting the original again.
 
-Draft expiry is creation + seven days. On confirmation fix planned-final-end + seven days as the maximum. End/abort may shorten this to server ending + seven days. Viewing/editing/retry/sign-in never extends it. Deny expired operations immediately; purge related records and idempotency metadata on startup and at least hourly. Associated notices/outcomes share the workday deadline. No historical private backups/archive or permanent GPS/driver profile. Database logical deletion is not forensic erasure.
+Draft expiry is creation + seven days. On confirmation fix planned-final-end + seven days as the maximum. End/abort may shorten this to server ending + seven days. Associated outcomes share the workday deadline. Owner correction 2026-10-26 separates account notices: retain them and independent command metadata until effective ending plus seven days, irrespective of original-shift deletion/closure/expiry. A future deadline is required, manual earlier ending is terminal and extension must be atomically accepted before current expiry. Expired records cannot revive. Legacy missing-end rows keep their original storage bound until explicitly completed; already-ended legacy records receive a one-time seven-day migration grace. Viewing/retry/sign-in never extends retention. Deny purged/expired authority and clean up on startup/hourly. Preserve immutable historical receipts; do not use their old parent metadata as current global authority. No historical private backups/archive or permanent GPS/driver profile. Database logical deletion is not forensic erasure.
 
 ## Access and demo boundary
 
@@ -58,7 +58,7 @@ Use a separate fictional demo origin/runtime configuration and isolated storage,
 
 ## Notice and UI ownership
 
-Manual notice editor stores source metadata without crawling/fetching the source. Filter explicit tags and known validity using PRD rules; unknown validity remains a qualified candidate. Do not infer resolution, current-trip accuracy, completeness or freshness from an edit timestamp. Validate HTTP(S) source links and escape imported/source text.
+Manual notice editor stores source metadata without crawling/fetching the source. Filter explicit tags and planned intervals using PRD rules. An unknown start remains qualified when the required ending is known and live; legacy missing-ending records remain in maintenance as `Mangler sluttdato`, excluded from the active reader until explicitly completed. Do not infer resolution, current-trip accuracy, completeness or freshness from an edit timestamp. Validate HTTP(S) source links and escape imported/source text.
 
 Frontend owns selection/form presentation and manual Day/Night. Shared domain functions enforce lifecycle, filtering and date interpretation in API tests where authoritative; avoid conflicting frontend-only rules. No GPS, sound, Auto theme, wake lock, movement locks or stop displays.
 

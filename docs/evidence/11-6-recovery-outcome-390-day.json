@@ -1,0 +1,58 @@
+{
+  "overflow": false,
+  "text": 6.126270626473104,
+  "focus": 21,
+  "focusWidth": 3,
+  "focusVisible": true,
+  "focusNotObscured": true,
+  "controls": [
+    {
+      "name": "Prøv samme aktivitetsstatus igjen",
+      "height": 202.34375,
+      "text": 11.085379609993499,
+      "boundary": 11.085379609993499
+    },
+    {
+      "name": "Kontroller aktivitetsstatusen",
+      "height": 202.34375,
+      "text": 11.085379609993499,
+      "boundary": 11.085379609993499
+    },
+    {
+      "name": "Hent skift og aktivitetsstatus igjen",
+      "height": 202.34375,
+      "text": 11.085379609993499,
+      "boundary": 11.085379609993499
+    },
+    {
+      "name": "Les avvik for linjer og datoer",
+      "height": 151.15625,
+      "text": 11.085379609993499,
+      "boundary": 11.085379609993499
+    },
+    {
+      "name": "Tilbake til dagen",
+      "height": 151.15625,
+      "text": 11.085379609993499,
+      "boundary": 11.085379609993499
+    },
+    {
+      "name": "Neste aktivitet",
+      "height": 151.15625,
+      "text": 11.085379609993499,
+      "boundary": 11.085379609993499
+    },
+    {
+      "name": "Kontroller plantilgang og aktivitetsvalg",
+      "height": 304.71875,
+      "text": 11.085379609993499,
+      "boundary": 11.085379609993499
+    },
+    {
+      "name": "Hent skiftstatus igjen",
+      "height": 202.34375,
+      "text": 11.085379609993499,
+      "boundary": 11.085379609993499
+    }
+  ]
+}
