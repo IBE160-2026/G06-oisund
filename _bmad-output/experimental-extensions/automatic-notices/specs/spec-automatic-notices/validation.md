@@ -42,3 +42,8 @@ Correction made during validation: narrative spacing; no behavioral meaning or c
 ## Mechanical checks and limitations
 
 validation.json records exact destination, branch/HEAD, capability structure, companion/source paths, marker coverage, original-input hashes and Git path isolation. The runner uses only extension-local TOML and read-only installed resolvers; actual resolved spec destination was checked before SPEC writes. No official bmad-spec validator CLI exists in the installed instructions: the required validation is the two judgment passes above. Qualification gates are future work, not falsely reported as passed. Open numeric/product choices prevent a final pilot-acceptance verdict.
+
+
+## Epic-planning update — 26 October 2026
+
+The earlier report describes the initial spec run. Current continuation passes both Spec validation passes as draft. Seven capabilities and adopted research are preserved. See [planning validation](../../planning/validation.md) for four stories/32 criteria and remaining gates. No final owner approval or ready-for-dev claim.

@@ -48,3 +48,11 @@ Proposal: owner/driver distinguishes possible relevance, user association, sourc
 ## Necessary versus later
 
 Failing completeness, truthful uncertainty, source access, identity or manual preservation prevents acceptance of the dependent behavior. Q-7 controls effort/workload stop decisions. Narrowing or partial-only fallback needs owner choice. Automatic Svipper enrichment, ET cancellation completeness, regional expansion, Vegvesen and precise route/stop matching are later improvements, not generic gates for the line/time pilot.
+
+## Binding to the bounded epic plan
+
+The current user permits a short epic/story plan, not implementation. Use planning/epics.md relative to the extension root for delivery order and story-local K-1–K-4. Q-1 is the supplied two-line/two-workday planning boundary; Q-2–Q-6 are provisional standards, not final owner approval. Their presence no longer blocks drawing up stories. G-1–G-5 remain acceptance evidence for dependent behavior, rather than a demand for all research before any bounded code experiment.
+
+AN-E1 uses complete full baselines and resynchronization only. Long-lived delta delivery is deferred; recovery controls still cover lost/expired page continuity. Controlled cases may establish rare close/version/conflict behavior without pretending actual TRO transitions were observed. A live complete baseline is still required for G-1. K-2 chooses actual permitted workdays and precise bindings; invented mappings or shifted-date fixtures cannot qualify real relevance.
+
+The first CAP-7 slice is one explicit reversible manual/source link with side-by-side conflicting facts; automatic grouping/merging and multi-provider ingestion are deferred. Evaluation, rights/retention and manual-data preservation remain in the final story and each earlier dependent slice; they are not deferred obligations after release.

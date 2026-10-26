@@ -1,19 +1,25 @@
-# Open product decisions
+# Product decisions for the first bounded epic
 
 > **EXPERIMENTAL EXTENSION — OUTSIDE APPROVED V1 SCOPE**
 
-Every proposal below awaits owner choice. None is accepted by being in the draft. Resolve by appending to .memlog.md and re-deriving through bmad-spec.
+Updated for the 2026-10-26 short epic-planning request. **Planning input/default is not final owner product approval or implementation permission.** Existing Q-1–Q-7 identifiers remain stable. No question blocks drafting this plan: the user supplied the material scope, and the remaining proposals can be provisional without hiding uncertainty.
 
-| ID / priority | Owner decision | Reasoned proposal | Needed before |
+| ID | Classification for this plan | Working answer / reason | Decision still needed |
 |---|---|---|---|
-|Q-1 /1| Pilot lines/days | Start Tromsø 20/24 and two representative confirmed plans; add 28/42 after reviewed canonical bindings. Research has structured 20/24, local detail for 28/42 but no qualified bindings. | Scope/qualification denominator |
-|Q-2 /1| No-line review scope | Mapped pilot stops and compatible explicit broad scope, plus grouped unresolved TRO items with counts/reasons and reversible dismissal. Measure noise rather than discard unknowns. | Review readiness |
-|Q-3 /1| Refresh and age thresholds | Five-minute cycle target, fifteen-minute no-success age warning; show partial/resync and baseline age immediately. Numbers are not provider latency; paging/rate limits prevail. | Freshness acceptance |
-|Q-4 /2| Time boundaries/association semantics | Half-open overlap, point activities at their instant. Automatic results always possible; explicit user action confirms only plan association. | Matching acceptance |
-|Q-5 /1| History and private-link retention | Keep private linkage within existing authority/expiry; only source revisions needed to explain reviewed changes during that lifetime. Separately decide public-source history period. No new indefinite storage or plan-expiry extension. | Persistent implementation |
-|Q-6 /1| Acceptance dataset/thresholds | At least 30 labelled cases/two workdays; zero invariant violations, proposed 95% recall/90% precision for qualified line/time subset. Measure review burden/manual time before choosing a saving target. | Pilot success verdict |
-|Q-7 /2| Effort limit/go-no-go | Owner checkpoint after source/mapping qualification and after a trial capped provisionally at two workdays plus one evaluation session; agree a separate development/maintenance budget. None is authorized now. | Future execution/budget commitment |
+| Q-1 | User-supplied planning boundary | Entur TRO SX, exact reviewed line bindings for 20/24 and two representative confirmed workdays; Svipper manual control only. No full route catalogue dependency. | Select actual permitted dates/fixtures during K-2; final pilot acceptance not granted. |
+| Q-2 | Provisional standard | Mapped pilot-stop and compatible explicit broad messages plus a grouped unresolved TRO inbox, with reasons, honest totals/paging and reversible dismissal. Unknowns remain reachable rather than dropped for noise. | Validate review burden in S3/S4; only ask to reduce review scope if measured volume forces a scope trade-off. |
+| Q-3 | Provisional numeric standard | Five-minute full-baseline cycle target; fifteen minutes without successful complete synchronization marks old data. Partial/resync/baseline age shown immediately and independently. Rate limits/paging/backoff take precedence. | Confirm suitability from observed cycle costs/source behavior; no SLA or final threshold approval. |
+| Q-4 | Provisional semantic standard | Half-open interval overlap; point activities use their instant. Unknown offset/DST remains uncertain. All automatic nominations say possible; only explicit action confirms local association. | Revisit only if independent examples contradict expected user meaning; not a new architecture workflow. |
+| Q-5 | Provisional bounded retention | Current normalized source view; unreferenced superseded/not-seen evidence for seven days after supersession/last observation. Keep selected evidence explaining live private review only to its existing parent expiry; no raw XML archive, plan-lifetime extension or indefinite history. | Validate actual rights/data minimization and cleanup before persistence acceptance. This duration is a planning default, not owner-approved policy. |
+| Q-6 | Provisional evaluation standard | At least 30 independently labelled cases across two workdays; all truthfulness, privacy and manual-preservation invariants pass. Proposed 95% recall/90% precision applies only to adjudicated line/time subset, with raw denominators and unknown count. Measure review time; no invented saving target. | Owner chooses go/no-go after evidence. Numbers do not establish regional completeness/statistical reliability. |
+| Q-7 | Deferred commitment | Checkpoint after source/mapping qualification and after two-workday evaluation plus one review session. No additional development/maintenance budget or actual driving trial authorized. | Agree effort and separate implementation authorization before execution; negotiate narrower scope if a measured blocker/cost demands it. |
 
-## Evidence is not product approval
+## First-epic simplifications
 
-Documented in research: Entur open access conditions, licence/rate rules and SX profile semantics. Observed: three partial TRO records, missing optional version/time, stop-only/nested selectors, richer Svipper articles. Research recommendation: Entur first with local checks and preserved provenance. Product proposals: inbox workflow, labels, mapping interface and numeric targets above. Unknown: complete collection mechanics, actual TRO lifecycle transitions, source latency/completeness and benefit. Provider contact is a targeted resolution option when required, not a blanket condition.
+Use fresh complete paged baselines, not long-lived delta synchronization. Sessions may be used for paging only after K-1 proves their semantics. No automatic Svipper ingestion, other providers, route/GPS dependency, fuzzy LineRef construction or automatic cross-source merge. One explicit reversible manual/source link and side-by-side contributions meet the first overlap-review need.
+
+## Evidence is not approval
+
+The completed research documents open access/profile semantics and observes only three partial TRO records, including stop-only/nested qualifiers and missing version/update time. It does not qualify complete collection, actual lifecycle transitions, delivery latency or benefit. The new technical-addendum.md identifies concrete code extension points; K-1–K-4 are small story-local qualifications. Provider contact is conditional on a specific unresolved blocker.
+
+If completeness cannot be established, the plan does not silently change to a partial-only product. If future retention rights, review volume or qualified mappings require a different first delivery, bring that material choice to the owner in one focused question then. None is assumed resolved by this document.

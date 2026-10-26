@@ -30,3 +30,14 @@ Only these planning documents were authored during establishment. No product imp
 Start future sessions in this worktree and read these four files first. Recheck Git state and source versions, especially before using the newer 11.5/11.6 reference material. Keep all extension outputs below this document root. A branch does not prevent path collisions after integration: follow the routing rules in [bmad-workflow.md](bmad-workflow.md).
 
 An implementation or course-scope decision requires a separate explicit authorization. This workspace grants neither.
+
+## Current planning handoff — 26 October 2026
+
+The completed [research report](research/technical-automatic-notices-2026-10-26/research.md), [specification package](specs/spec-automatic-notices/SPEC.md) and [single AN-E1 epic with four stories](planning/epics.md) now form the extension-local planning handoff. [Product decisions](specs/spec-automatic-notices/product-decisions.md) distinguish supplied planning scope from provisional defaults and later acceptance choices. [Document validation](planning/validation.md) records qualification/readiness limits. No pilot/product implementation or V1 acceptance follows from these files.
+
+The canonical technical companion is technical-addendum.md; technical-notes.md is retained only as a superseded working draft. The separate route-network worktree is not an output destination for this initiative.
+
+
+## Current short epic plan — 26 October 2026
+
+[AN-E1 epic and four stories](planning/epics.md) now follow the completed research/spec. See [technical addendum](specs/spec-automatic-notices/technical-addendum.md), [provisional product decisions](specs/spec-automatic-notices/product-decisions.md) and [document validation](planning/validation.md). technical-notes.md remains a superseded working draft. No implementation or final approval is implied.

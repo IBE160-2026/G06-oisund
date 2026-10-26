@@ -1,13 +1,17 @@
 ---
 id: SPEC-automatic-notices
 status: draft
+approval: not-granted
+updated: 2026-10-26
 created: 2026-10-26
+planning_stage: epic-draft
 companions:
   - source-lifecycle.md
   - relevance-rules.md
   - compatibility.md
   - qualification.md
   - product-decisions.md
+  - technical-addendum.md
   - ../../research/technical-automatic-notices-2026-10-26/research.md
 sources:
   - ../../scope.md
@@ -17,7 +21,7 @@ sources:
 
 > **EXPERIMENTAL EXTENSION — OUTSIDE APPROVED V1 SCOPE**
 
-This draft and its companions define the specification for review, not approved implementation requirements. Product decisions remain pending in product-decisions.md. The research companion supplies evidence; its blanket recommendations do not override this draft's explicitly scoped qualification gates.
+This draft and its companions define the specification for review, not approved implementation requirements. The user supplied the first-epic planning boundary; remaining product choices use explicitly provisional defaults in product-decisions.md. The research companion supplies evidence; its blanket recommendations do not override this draft's explicitly scoped qualification gates.
 
 ## Why
 
@@ -63,7 +67,7 @@ An opportunity to reduce repeated source checking for drivers: qualify a small a
 
 ## Non-goals
 
-- Product implementation/tests/services, architecture workflow, stories, V1 changes or Git publication in this planning run.
+- Product implementation/tests/services, full architecture/UX workflows, V1 changes or Git publication in this planning run; extension epic/story planning is authorized.
 - GPS, automatic stop progression, complete route datasets, vehicle tracking, offline guarantees, dispatch authority and real-driving deployment.
 - Automatic Svipper extraction, ET/VM/GTFS-alert expansion or Vegvesen integration in the first slice.
 
@@ -73,9 +77,9 @@ A bounded demonstration nominates explainable possible relevance, keeps stop-onl
 
 ## Assumptions
 
-- Proposed pilot starts with 20/24 and manual Svipper checks; owner approval is pending.
+- Current planning basis is 20/24, two representative workdays and manual Svipper checks. Other defaults remain provisional; implementation/pilot acceptance is not authorized.
 - A small reviewed mapping set plus explicit review can evaluate line/time relevance without complete routes; usefulness remains unproven.
 
 ## Open Questions
 
-- Q-1–Q-7 in product-decisions.md: pilot scope, no-line inbox, refresh/age, interval/association semantics, retention, acceptance targets and effort/go-no-go. All await owner decisions.
+- Q-1–Q-7 in product-decisions.md: pilot scope, no-line inbox, refresh/age, interval/association semantics, retention, acceptance targets and effort/go-no-go. See product-decisions.md for supplied planning basis, provisional defaults and later checkpoints; no inferred final approval.

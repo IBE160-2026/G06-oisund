@@ -36,5 +36,39 @@
     "coherence:pass-as-draft",
     "preservation:pass"
   ],
-  "mechanical_note": "Initial Unicode marker check used Windows default encoding; corrected check explicitly reads UTF-8. Documents and original input hashes unchanged."
+  "mechanical_note": "Initial Unicode marker check used Windows default encoding; corrected check explicitly reads UTF-8. Documents and original input hashes unchanged.",
+  "epic_planning_update": {
+    "date": "2026-10-26",
+    "verdict": "pass-as-planning-draft",
+    "owner_approved": false,
+    "ready_for_dev": false,
+    "worktree": "D:\\IBE160-plan-automatic-notices",
+    "branch": "codex/plan-automatic-notices",
+    "head": "36bfc196dba1c885b3fcda19b79a64ab86746ee6",
+    "epic": "AN-E1",
+    "stories": [
+      "AN-E1-S1",
+      "AN-E1-S2",
+      "AN-E1-S3",
+      "AN-E1-S4"
+    ],
+    "gwt_acceptance_criteria": 32,
+    "capabilities_covered": [
+      "CAP-1",
+      "CAP-2",
+      "CAP-3",
+      "CAP-4",
+      "CAP-5",
+      "CAP-6",
+      "CAP-7"
+    ],
+    "forward_dependencies": false,
+    "input_and_companion_paths_exist": true,
+    "research_files_hash_unchanged": 13,
+    "scope_and_source_map_unchanged": true,
+    "routing_rechecked": true,
+    "product_tests_run": false,
+    "implementation_run": false,
+    "commit_push_merge": false
+  }
 }

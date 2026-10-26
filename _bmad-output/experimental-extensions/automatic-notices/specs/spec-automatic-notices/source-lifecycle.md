@@ -49,3 +49,7 @@ P: Show never-qualified, collecting/partial, complete-current, unavailable and n
 P/Q-3: Five-minute refresh target and fifteen-minute age warning are proposals, not SLA. All paging/retry/recovery shares the documented rate budget; backoff/throttling cannot masquerade as a met cadence. Provider publication latency remains unknown. Failed attempts do not erase prior success clocks.
 
 P: Svipper is manually opened for selected local checks. Keep URL, explicit observed facts and check time; opening a link alone is not a completed check. No automatic scraping or presentation-API dependence. Contact a provider only when documentation and bounded permitted qualification cannot resolve a specific blocking ambiguity.
+
+## First-epic collection choice
+
+For AN-E1, use fresh complete paged baselines; no long-lived delta mode is delivered. Requestor/session identity is used only if K-1 qualifies its page-continuation semantics within a cycle. A restart or expired/unknown cursor requires a new full baseline; partial-only operation is not an accepted substitute. The earlier delta discussion remains a future-mode constraint, not an additional first-epic feature. Provisional Q-3 timing and Q-5 retention are classified in product-decisions.md; technical-addendum.md locates the bounded implementation responsibilities.

@@ -39,3 +39,14 @@ These are reserved paths, not completed documents or pre-created research runs.
 Before each future run, inspect current Git status, resolved configuration/customization and the final absolute destination list. Scope discovery to extension inputs; whitelist parent references. Check the resulting diff contains only E paths. Keep any needed runner configuration inside E, so integrating planning files cannot alter global BMAD behavior or active V1 documents.
 
 These controls must survive later integration: preserve the extension directory and its labels, and review the actual paths in the diff. A branch isolates concurrent editing; it does not isolate shared filenames after merge.
+
+## Current short-process override — 26 October 2026
+
+The owner now requests a short brownfield epic/story plan, explicitly replacing the earlier proposed full architecture/UX sequencing for this planning task. Reuse the existing spec/product architecture, add only the short technical companion, and use the installed CE extraction/design/story/validation steps with provisional defaults. Repeated menus are omitted under the owner's instruction to ask only materially scope-changing questions; step completion is document work, never owner approval.
+
+Actual CE routing is verified through both planning/.bmad-runner/_bmad/bmm/config.yaml and the central resolver: planning_artifacts is E/planning and the output is E/planning/epics.md. No global BMAD configuration, V1 epics/status or route-network file is written. Keep AN-E1/AN-E1-S1..S4 IDs; do not use the V1 sprint dispatcher. No stories.yaml is generated or required by this CE handoff. Existing SPEC remains draft, with CAP-1..CAP-7 stable; technical-addendum.md is the single active technical supplement. Full routing/check results live in planning/.bmad-runner/resolved-final.json and planning/validation.json.
+
+
+## Executed short continuation — 26 October 2026
+
+The user authorized a short brownfield epic/story continuation using the existing spec, inherited architecture/UX and short technical addendum. CE extraction, epic grouping, story drafting and document checks were adapted sequentially; no full new brief/PRD/UX/architecture round or routine menu ceremony. Defaults remain provisional and stepsCompleted never means ready-for-dev or owner approval. The now-created E/planning/.bmad-runner binds actual central TOML and legacy YAML outputs to E/planning; resolved.json records the recheck, empty hooks and no on-complete. Outputs are epics.md, memory and validation. This section updates earlier reserved/future-run wording; global configuration is unchanged. Before future runs recheck routing. No spec stories.yaml dispatcher, sprint status or V1 numbering was created. Implementation requires separate authorization/effort checkpoint, accepted-baseline review and pre-persistence rights/retention check. K-1–K-4 qualify only dependent slices.
