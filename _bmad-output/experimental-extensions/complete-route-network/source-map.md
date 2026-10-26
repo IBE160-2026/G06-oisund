@@ -91,3 +91,12 @@ No external source was queried or validated during establishment. Existing proje
 
 Record publisher, source URL, publication/version and access date for external claims. Keep project context separate from verified external findings, as required by Deep Recon. Do not bulk-download route datasets merely to establish this workspace.
 
+
+
+## P1 short continuation and isolation — 26 October2026
+
+Earlier establishment/current-state/next-step statements above are historical. Before this continuation route HEAD/remote were d441176 and tree/index clean, with no epic/story draft. Other worktrees: main aa0fcfb and notices da86707. The read-only AN-E1/SX20/24/two-day plan is not route requirements. User says a wrong prompt here caused the detour; no config cause is inferred. Inherited central/legacy defaults target V1 and remain unchanged. Local runner resolves route plan/spec/memory/check outputs; [audit](planning/isolation.md) records proof. No notice artifact was copied/moved/edited.
+
+Current inputs: full completed research.md; SPEC and all five original companions/memory; inherited architecture/DESIGN/EXPERIENCE; read-only draft_domain/draft_storage/workday_domain/workday_storage/private_main/private_storage/private_import and PrivateDrafts/PrivateImport/PrivateConfirmation. Strict DTO lacks structured headsign/stops; original import metadata immutable; confirmation binds exact revision. Technical-addendum records proposed extension boundaries. Uncommitted main changes are not adopted.
+
+Current user authorizes short epic/story planning and route-document publication, replacing old full PRD/UX/architecture next-step advice for this task. Active [CRN-E1](planning/epics.md) has no sprint/dispatcher. P1 seven named dates/API/draft confirmation; P2/GPS/progression/notices deferred. All implementation waits for complete/tested V1 and later go-ahead. [Validation](planning/validation.md) distinguishes document checks from unexecuted source/product qualifications.

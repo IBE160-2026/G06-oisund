@@ -5,12 +5,15 @@ approval: not-approved
 scope: EXPERIMENTAL EXTENSION — OUTSIDE APPROVED V1 SCOPE
 created: 2026-10-26
 updated: 2026-10-26
+planning_stage: P1-epic-draft
 companions:
   - coverage.md
   - matching.md
   - data-contract.md
   - qualification.md
   - decisions.md
+  - pilot-manifest.md
+  - technical-addendum.md
   - ../../research/technical-complete-route-network-2026-10-26/research.md
   - ../../../../planning-artifacts/architecture/architecture-IBE160-2026-09-23/ARCHITECTURE-SPINE.md
   - ../../../../planning-artifacts/ux-designs/ux-IBE160-2026-09-22/DESIGN.md
@@ -57,7 +60,8 @@ Drivers reviewing imported shifts need to identify the intended dated departure 
 
 ## Constraints
 
-- Pilot/stage boundaries, assumptions A1–A6 and decisions Q1–Q8 are proposals, not adopted source or architecture choices; qualification tasks gate only the claims they affect.
+- Current planning scope is P1 line20, seven named dates and explicit draft review. Remaining A1–A6/Q1–Q8 defaults are provisional; P2 and external integrations stay deferred. Qualification gates only the claim affected.
+- Implementation waits until V1 is complete and has been tested for a while, followed by explicit owner readiness/implementation authorization. This run authorizes planning documents and their publication only.
 - A shift number, privateCode, line number or nearest departure time alone cannot establish a dated match. Retain ambiguity and imported/source/manual distinctions.
 - Selection, schedule and stop order never establish physical position, shift activation or completion. Geometry and progression are separate capabilities.
 - Keep stable activity identity, physical bus and vehicle duty separate; enrichment cannot silently alter an activated/terminal plan or extend private retention.
@@ -67,7 +71,7 @@ Drivers reviewing imported shifts need to identify the intended dated departure 
 
 - New network generation or optimization of lines, frequencies, fleet or driver schedules; reconstructing private operational duties from public service data.
 - GPS/automatic stop progression, driving qualification, live positions, maps/geometry delivery in the first increment, notice ingestion or exact disruption matching.
-- Expanding V1, offline continuity, cloud deployment, mentor roles or export; implementation, architecture workflow and story breakdown in this task.
+- Expanding V1, offline continuity, cloud deployment, mentor roles or export; implementation, full architecture/UX workflows or V1 tracking changes in this task; short extension epic/story planning and document publication are authorized.
 
 ## Success signal
 
@@ -75,8 +79,8 @@ A later P1 demonstration distinguishes the twelve declared example outcomes with
 
 ## Assumptions
 
-A1 proposes a seven-date line-20 experiment; A2 proposes complete coverage of lines 20/24/28/42 over 28 service dates. A3 requires explicit user confirmation in draft review; A4 follows API-first qualification with NeTEx/NSR and a GTFS alternative. A5 proposes conservative exact evidence rules; A6 proposes daily reference checks and a 24-hour staleness label. Full boundaries and exceptions are in the companions.
+A1 follows the supplied seven-date line-20 planning boundary, with literal historical casebook dates in pilot-manifest.md; A2 remains a deferred proposal for complete coverage of lines20/24/28/42 over28 service dates. A3 requires explicit user confirmation in draft review; A4 follows API-first qualification with NeTEx/NSR and a GTFS alternative. A5 proposes conservative exact evidence rules; A6 proposes preparation-time checks and a24-hour staleness label for P1; regional daily acquisition remains deferred with P2. Full boundaries and exceptions are in the companions.
 
 ## Open Questions
 
-Q1/Q2: approve the pilot membership and horizon. Q3: approve the first confirmation/lifecycle boundary. Q4/Q5: approve access progression and matching policy. Q6/Q7: settle update/staleness and public-reference retention/ownership. Q8: ratify the identity vocabulary before another extension consumes it. Recommended answers, timing and evidence gaps are in decisions.md and qualification.md.
+Q1/Q2 now supply P1 planning scope; literal dates/any later replacement window and P2 approval remain distinct. Q3/Q4 follow the requested draft/API-first boundary. Q5 conservative matching and Q6/Q7 freshness/retention are provisional checkpoints; Q8 external vocabulary agreement is deferred. V1 completion/testing and later implementation authorization are mandatory before execution. See decisions.md and qualification.md.

@@ -1,0 +1,9 @@
+[core]
+project_name = "Complete route network P1 planning"
+communication_language = "Norwegian"
+document_output_language = "English"
+output_folder = "D:/IBE160-plan-complete-route-network/_bmad-output/experimental-extensions/complete-route-network"
+[modules.bmm]
+planning_artifacts = "D:/IBE160-plan-complete-route-network/_bmad-output/experimental-extensions/complete-route-network/planning"
+implementation_artifacts = "D:/IBE160-plan-complete-route-network/_bmad-output/experimental-extensions/complete-route-network/planning/not-dispatched"
+project_knowledge = "D:/IBE160-plan-complete-route-network/_bmad-output/experimental-extensions/complete-route-network/specs/spec-complete-route-network"

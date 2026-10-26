@@ -52,3 +52,8 @@ Do not include private workday IDs, shift numbers, driver identity, corrections 
 ## Position/progression boundary
 
 Planned calls, current clock time and a realtime schedule flag cannot establish location. A later progression proposal would need vehicle/GPS observations with identity, observation timestamp, accuracy, age, mapping uncertainty, failure behavior and user correction in the same scope decision. No such behavior or positioning stream is included in this draft's first delivery.
+
+
+## Current P1 update policy
+
+The short CRN-E1 plan narrows A6 to preparation/explicit bounded API checks and the provisional24-hour new-proposal age rule. Earlier scheduled regional-download advice is for deferred P2, not a background P1 feature. [Technical addendum](technical-addendum.md) and [decisions](decisions.md) define bounded public query evidence versus selected private copies; Q7 rights/actual retention limits remain pre-persistence checks. No private lifetime is extended.

@@ -57,3 +57,8 @@ Not promoted into product requirements: establishment chronology, exhaustive com
 ## What this pass does not settle
 
 Owner approval of pilot/horizon/review/access/threshold defaults; provider number mapping; full regional contents/coverage; positive repeated-stop/DST/refresh behavior; exact notice crosswalk or public retention implementation. Those are Q decisions or QF evidence tasks. No unfinished requirement is disguised as a passing runtime check.
+
+
+## P1 epic-planning continuation — 26 October2026
+
+The initial checks above describe the original spec-only run. This authorized continuation adds pilot-manifest/technical-addendum and CRN-E1 with four planning-draft stories. Coherence/preservation pass as draft, not implementation readiness. P2/external consumer deferred. See [current validation](../../planning/validation.md) for31 criteria, links/dependencies/source preservation and remaining qualifications. Completed/tested V1 and later owner go-ahead are mandatory before execution; document publication is authorized now.

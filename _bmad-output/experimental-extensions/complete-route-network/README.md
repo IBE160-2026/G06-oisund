@@ -36,3 +36,8 @@ Start future work in this worktree and read all three documents. Keep all extens
 
 This establishment performed no product changes, database/service actions, full external research, data ingestion, tests, deployment, merge, push or commit. Future implementation and any change to the approved delivery boundary require a separate decision.
 
+
+
+## Current P1 planning handoff — 26 October2026
+
+[Specification](specs/spec-complete-route-network/SPEC.md), [decisions](specs/spec-complete-route-network/decisions.md), [seven-date manifest](specs/spec-complete-route-network/pilot-manifest.md), [technical addition](specs/spec-complete-route-network/technical-addendum.md), [CRN-E1/four stories](planning/epics.md), [isolation audit](planning/isolation.md) and [document checks](planning/validation.md) are the current short handoff. P1 line20/draft matching excludes P2/GPS/progression/notices. Implementation waits until V1 complete and tested for a while, then separate owner authorization. Research-era dates do not promise future live coverage; defaults remain provisional. Runner proof: planning/.bmad-runner/resolved.json. Stories remain draft/not approved despite publication. The user attributes the earlier detour to a wrong prompt in this chat; notice work remains preserved, not route requirements.

@@ -2,11 +2,11 @@
 
 **EXPERIMENTAL EXTENSION — OUTSIDE APPROVED V1 SCOPE**
 
-Draft proposals A1/A2/A4; not approved implementation requirements. Supports CAP-1 and stage boundaries for CAP-2–7. Research basis: adopted research.md §§1, 5 and recommendations. Completeness is always relative to a named manifest revision and service-date interval.
+P1/API-first is now supplied planning scope; A2/P2 and remaining defaults stay provisional, not approved implementation requirements. Supports CAP-1 and stage boundaries for CAP-2–7. Research basis: adopted research.md §§1, 5 and recommendations. Completeness is always relative to a named manifest revision and service-date interval.
 
 ## P1 — qualify matching, not a network-completeness claim
 
-Proposed first deliverable: a bounded preparation/review experiment for **Svipper line 20**, both directions, including the published variants in a declared seven-consecutive-service-date interval. Select dates inside verified source coverage and record them literally for each run. The retained research observations for 2026-10-26 through 2026-11-01 are seed evidence, not a promise that a future live API retains those dates.
+Current first-epic planning boundary: a bounded preparation/review experiment for **Svipper line 20**, both directions, including the published variants in a declared seven-consecutive-service-date interval. Select dates inside verified source coverage and record them literally for each run. The retained research observations for 2026-10-26 through 2026-11-01 are seed evidence, not a promise that a future live API retains those dates.
 
 Use targeted Entur line/journey/date lookups and retained, attributed public evidence. Inspect planned calls, direction/destination and source provenance for a stable imported activity. Keep all outcomes reviewable and require user confirmation. Restrict the first association workflow to draft review; do not revise an active plan. No network-wide import, map, geometry or automatic progression is required.
 
@@ -41,3 +41,8 @@ P1: qualified targeted Entur queries with meaningful client identification, boun
 P2: qualify one controlled regional Troms NeTEx snapshot with the appropriate valid National Stop Registry (NSR) references, then compare coverage against the manifest. Record schema/profile/parser and referenced object versions. NeTEx is the research-preferred candidate because of source richness, not a committed library/database design. Regional acquisition must respect published access/download limits and avoid repeated full downloads.
 
 GTFS remains an alternative after comparing every required datum, service calendar, destination/occurrence rule and identifier crosswalk. Document losses explicitly; adopt only if the agreed pilot semantics survive. Archive HEAD availability is not qualification. Svipper PDFs/maps/planner provide local discrepancy checks; neither identical content nor synchronized updates with Entur is assumed.
+
+
+## Current P1 planning binding
+
+The short epic is [CRN-E1](../../planning/epics.md). Its [revision1 manifest](pilot-manifest.md) names all seven service dates; it is historical/partial evidence, not promised future live coverage. P1 line20/draft/API-first is supplied planning scope; P2 remains unapproved and outside this epic. Implementation waits until V1 complete/tested for a while and separate owner authorization.

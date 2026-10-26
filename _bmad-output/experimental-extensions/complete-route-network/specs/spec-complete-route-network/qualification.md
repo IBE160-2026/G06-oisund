@@ -53,3 +53,8 @@ P2 separately requires all approved manifest cells and required content dimensio
 ## Document-task validation boundary
 
 The installed bmad-spec coherence and preservation passes are recorded in validation.md and .memlog.md. They establish this draft's internal consistency and source coverage, not API behavior, full-network coverage, owner approval or operational acceptance. No product tests, ingestion or service actions are authorized by this file.
+
+
+## CRN-E1 story-local qualification
+
+This companion remains the canonical QF/QC catalogue; it is now sliced by [CRN-E1](../../planning/epics.md), not an executed test report. S1 owns QF-09/07 lookup closure/access; S2 QF-02/04 and supported QF-05 cases; S3 QF-05/07 reviewed range/persistence; S4 QF-06 changes and the QC-01–12 ledger. QF-03 only gates a number-join rule. QF-01/P2 and external QF-08 remain deferred. Unsupported advanced cases may demonstrate safe-unresolved behavior without pretending a positive matching pass. All execution waits for the V1 completion/testing gate.
