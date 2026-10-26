@@ -1,0 +1,3677 @@
+{
+  "accessed_utc": "2026-10-26T08:47:37.070496+00:00",
+  "url": "https://api.entur.io/journey-planner/v3/graphql",
+  "method": "POST",
+  "query": "{ sample0: serviceJourney(id:\"TRO:ServiceJourney:20_260918104872543_1009\") { id privateCode directionType journeyPattern { id name } estimatedCalls(date:\"2026-10-26\") { date stopPositionInPattern aimedArrivalTime aimedDepartureTime realtime cancellation destinationDisplay { frontText } scheduledQuay { id name stopPlace { id name } } } } sample1: serviceJourney(id:\"TRO:ServiceJourney:20_260918105148184_1000\") { id privateCode directionType journeyPattern { id name } estimatedCalls(date:\"2026-10-26\") { date stopPositionInPattern aimedArrivalTime aimedDepartureTime realtime cancellation destinationDisplay { frontText } scheduledQuay { id name stopPlace { id name } } } } sample2: serviceJourney(id:\"TRO:ServiceJourney:20_260918104886042_1133\") { id privateCode directionType journeyPattern { id name } estimatedCalls(date:\"2026-10-26\") { date stopPositionInPattern aimedArrivalTime aimedDepartureTime realtime cancellation destinationDisplay { frontText } scheduledQuay { id name stopPlace { id name } } } } sample3: serviceJourney(id:\"TRO:ServiceJourney:20_260918105162575_6600\") { id privateCode directionType journeyPattern { id name } estimatedCalls(date:\"2026-10-31\") { date stopPositionInPattern aimedArrivalTime aimedDepartureTime realtime cancellation destinationDisplay { frontText } scheduledQuay { id name stopPlace { id name } } } } }\n",
+  "client": "ibe160-complete-route-network-research",
+  "status": 200,
+  "headers": {
+    "access-control-allow-credentials": "false",
+    "content-type": "application/json",
+    "date": "Mon, 26 Oct 2026 08:47:35 GMT",
+    "vary": "Accept, Accept-Encoding, Accept-Language",
+    "x-correlation-id": "bf99bd7d-cd25-4634-b09a-2ff438d17333",
+    "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+    "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+    "pragma": "no-cache",
+    "expires": "0",
+    "x-content-type-options": "nosniff",
+    "strict-transport-security": "max-age=31536000; includeSubDomains",
+    "x-frame-options": "DENY",
+    "x-xss-protection": "1; mode=block",
+    "x-robots-tag": "none",
+    "rate-limit-allowed": "2000",
+    "rate-limit-used": "4",
+    "rate-limit-available": "1996",
+    "rate-limit-range": "PT2M",
+    "rate-limit-expiry-time": "Mon Oct 26 2026 08:48:32 GMT-0000 (GMT)",
+    "access-control-allow-origin": "*",
+    "access-control-allow-headers": "origin, x-requested-with, accept, ET-Client-Name, ET-Client-Id, Content-Type, X-Correlation-Id, entur-pos",
+    "access-control-max-age": "3628800",
+    "access-control-allow-methods": "GET, PUT, POST, DELETE",
+    "x-request-id": "ec36beca-dd47-4f1f-bb44-7e06b4d1899c",
+    "via": "1.1 google",
+    "Alt-Svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+    "Connection": "close",
+    "Transfer-Encoding": "chunked"
+  },
+  "body": {
+    "data": {
+      "sample0": {
+        "id": "TRO:ServiceJourney:20_260918104872543_1009",
+        "privateCode": "1009",
+        "directionType": "outbound",
+        "journeyPattern": {
+          "id": "TRO:JourneyPattern:20_Outbound_260918104825105_260819122860815",
+          "name": "20_1_07_Lav"
+        },
+        "estimatedCalls": [
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 0,
+            "aimedArrivalTime": "2026-10-26T06:35:00+01:00",
+            "aimedDepartureTime": "2026-10-26T06:35:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Kroken via sentrum"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:90847",
+              "name": "Skattøra Borettslag",
+              "stopPlace": {
+                "id": "NSR:StopPlace:53331",
+                "name": "Skattøra Borettslag"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 1,
+            "aimedArrivalTime": "2026-10-26T06:36:00+01:00",
+            "aimedDepartureTime": "2026-10-26T06:36:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Kroken via sentrum"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:89699",
+              "name": "Varden borettslag",
+              "stopPlace": {
+                "id": "NSR:StopPlace:52717",
+                "name": "Varden borettslag"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 2,
+            "aimedArrivalTime": "2026-10-26T06:37:00+01:00",
+            "aimedDepartureTime": "2026-10-26T06:37:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Kroken via sentrum"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:95924",
+              "name": "Brattbakken snuplass",
+              "stopPlace": {
+                "id": "NSR:StopPlace:56013",
+                "name": "Brattbakken snuplass"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 3,
+            "aimedArrivalTime": "2026-10-26T06:37:00+01:00",
+            "aimedDepartureTime": "2026-10-26T06:37:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Kroken via sentrum"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:92294",
+              "name": "Stakkevollan skole",
+              "stopPlace": {
+                "id": "NSR:StopPlace:54093",
+                "name": "Stakkevollan skole"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 4,
+            "aimedArrivalTime": "2026-10-26T06:38:00+01:00",
+            "aimedDepartureTime": "2026-10-26T06:38:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Kroken via sentrum"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:88761",
+              "name": "Rundvannet",
+              "stopPlace": {
+                "id": "NSR:StopPlace:52222",
+                "name": "Rundvannet"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 5,
+            "aimedArrivalTime": "2026-10-26T06:39:00+01:00",
+            "aimedDepartureTime": "2026-10-26T06:39:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Kroken via sentrum"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:91109",
+              "name": "Knausen",
+              "stopPlace": {
+                "id": "NSR:StopPlace:53468",
+                "name": "Knausen"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 6,
+            "aimedArrivalTime": "2026-10-26T06:40:00+01:00",
+            "aimedDepartureTime": "2026-10-26T06:40:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Kroken via sentrum"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:89397",
+              "name": "Utsikten",
+              "stopPlace": {
+                "id": "NSR:StopPlace:52558",
+                "name": "Utsikten"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 7,
+            "aimedArrivalTime": "2026-10-26T06:41:00+01:00",
+            "aimedDepartureTime": "2026-10-26T06:41:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Kroken via sentrum"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:94742",
+              "name": "Bakkehaugvegen",
+              "stopPlace": {
+                "id": "NSR:StopPlace:55385",
+                "name": "Bakkehaugvegen"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 8,
+            "aimedArrivalTime": "2026-10-26T06:42:00+01:00",
+            "aimedDepartureTime": "2026-10-26T06:42:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Kroken via sentrum"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:89508",
+              "name": "Vales veg",
+              "stopPlace": {
+                "id": "NSR:StopPlace:52616",
+                "name": "Vales veg"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 9,
+            "aimedArrivalTime": "2026-10-26T06:42:00+01:00",
+            "aimedDepartureTime": "2026-10-26T06:42:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Kroken via sentrum"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:95704",
+              "name": "Gimlevegen",
+              "stopPlace": {
+                "id": "NSR:StopPlace:55898",
+                "name": "Gimlevegen"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 10,
+            "aimedArrivalTime": "2026-10-26T06:43:00+01:00",
+            "aimedDepartureTime": "2026-10-26T06:44:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Kroken via sentrum"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:89253",
+              "name": "UNN",
+              "stopPlace": {
+                "id": "NSR:StopPlace:52482",
+                "name": "UNN"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 11,
+            "aimedArrivalTime": "2026-10-26T06:45:00+01:00",
+            "aimedDepartureTime": "2026-10-26T06:45:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Kroken via sentrum"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:89263",
+              "name": "UiT",
+              "stopPlace": {
+                "id": "NSR:StopPlace:52488",
+                "name": "UiT"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 12,
+            "aimedArrivalTime": "2026-10-26T06:46:00+01:00",
+            "aimedDepartureTime": "2026-10-26T06:46:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Kroken via sentrum"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:89268",
+              "name": "UiT/Planetariet",
+              "stopPlace": {
+                "id": "NSR:StopPlace:52491",
+                "name": "UiT/Planetariet"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 13,
+            "aimedArrivalTime": "2026-10-26T06:47:00+01:00",
+            "aimedDepartureTime": "2026-10-26T06:47:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Kroken via sentrum"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:89984",
+              "name": "Veslefrikkvegen",
+              "stopPlace": {
+                "id": "NSR:StopPlace:52870",
+                "name": "Veslefrikkvegen"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 14,
+            "aimedArrivalTime": "2026-10-26T06:48:00+01:00",
+            "aimedDepartureTime": "2026-10-26T06:48:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Kroken via sentrum"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:96029",
+              "name": "Templarheimen",
+              "stopPlace": {
+                "id": "NSR:StopPlace:56068",
+                "name": "Templarheimen"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 15,
+            "aimedArrivalTime": "2026-10-26T06:49:00+01:00",
+            "aimedDepartureTime": "2026-10-26T06:49:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Kroken via sentrum"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:96096",
+              "name": "Grøholtvegen",
+              "stopPlace": {
+                "id": "NSR:StopPlace:56101",
+                "name": "Grøholtvegen"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 16,
+            "aimedArrivalTime": "2026-10-26T06:50:00+01:00",
+            "aimedDepartureTime": "2026-10-26T06:50:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Kroken via sentrum"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:96580",
+              "name": "Doktordalen",
+              "stopPlace": {
+                "id": "NSR:StopPlace:56360",
+                "name": "Doktordalen"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 17,
+            "aimedArrivalTime": "2026-10-26T06:51:00+01:00",
+            "aimedDepartureTime": "2026-10-26T06:51:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Kroken via sentrum"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:96823",
+              "name": "Nøysomheten",
+              "stopPlace": {
+                "id": "NSR:StopPlace:56488",
+                "name": "Nøysomheten"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 18,
+            "aimedArrivalTime": "2026-10-26T06:52:00+01:00",
+            "aimedDepartureTime": "2026-10-26T06:52:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Kroken via sentrum"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:92999",
+              "name": "Storskogen",
+              "stopPlace": {
+                "id": "NSR:StopPlace:54464",
+                "name": "Storskogen"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 19,
+            "aimedArrivalTime": "2026-10-26T06:53:00+01:00",
+            "aimedDepartureTime": "2026-10-26T06:53:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Kroken via sentrum"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:91642",
+              "name": "Kvamstykket",
+              "stopPlace": {
+                "id": "NSR:StopPlace:53751",
+                "name": "Kvamstykket"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 20,
+            "aimedArrivalTime": "2026-10-26T06:54:00+01:00",
+            "aimedDepartureTime": "2026-10-26T06:54:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Kroken via sentrum"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:90643",
+              "name": "Sjømannsskolen",
+              "stopPlace": {
+                "id": "NSR:StopPlace:53223",
+                "name": "Sjømannsskolen"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 21,
+            "aimedArrivalTime": "2026-10-26T06:55:00+01:00",
+            "aimedDepartureTime": "2026-10-26T06:55:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Kroken via sentrum"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:97024",
+              "name": "Petersborggata",
+              "stopPlace": {
+                "id": "NSR:StopPlace:56592",
+                "name": "Petersborggata"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 22,
+            "aimedArrivalTime": "2026-10-26T06:56:00+01:00",
+            "aimedDepartureTime": "2026-10-26T06:56:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Kroken via sentrum"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:91229",
+              "name": "Kongsbakken",
+              "stopPlace": {
+                "id": "NSR:StopPlace:53533",
+                "name": "Kongsbakken"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 23,
+            "aimedArrivalTime": "2026-10-26T06:57:00+01:00",
+            "aimedDepartureTime": "2026-10-26T06:57:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Kroken"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:90421",
+              "name": "Wi-To",
+              "stopPlace": {
+                "id": "NSR:StopPlace:53103",
+                "name": "Wi-To"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 24,
+            "aimedArrivalTime": "2026-10-26T07:04:00+01:00",
+            "aimedDepartureTime": "2026-10-26T07:04:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Kroken"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:88813",
+              "name": "Kystens hus",
+              "stopPlace": {
+                "id": "NSR:StopPlace:52250",
+                "name": "Kystens hus"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 25,
+            "aimedArrivalTime": "2026-10-26T07:05:00+01:00",
+            "aimedDepartureTime": "2026-10-26T07:05:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Kroken"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:91057",
+              "name": "Skippergata",
+              "stopPlace": {
+                "id": "NSR:StopPlace:53442",
+                "name": "Skippergata"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 26,
+            "aimedArrivalTime": "2026-10-26T07:07:00+01:00",
+            "aimedDepartureTime": "2026-10-26T07:07:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Kroken"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:96235",
+              "name": "Bruhodet øst",
+              "stopPlace": {
+                "id": "NSR:StopPlace:56177",
+                "name": "Bruhodet øst"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 27,
+            "aimedArrivalTime": "2026-10-26T07:08:00+01:00",
+            "aimedDepartureTime": "2026-10-26T07:08:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Kroken"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:96987",
+              "name": "Otium",
+              "stopPlace": {
+                "id": "NSR:StopPlace:56572",
+                "name": "Otium"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 28,
+            "aimedArrivalTime": "2026-10-26T07:09:00+01:00",
+            "aimedDepartureTime": "2026-10-26T07:09:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Kroken"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:96431",
+              "name": "Båthavna",
+              "stopPlace": {
+                "id": "NSR:StopPlace:56279",
+                "name": "Båthavna"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 29,
+            "aimedArrivalTime": "2026-10-26T07:11:00+01:00",
+            "aimedDepartureTime": "2026-10-26T07:11:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Kroken"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:91305",
+              "name": "Kraftforsyninga",
+              "stopPlace": {
+                "id": "NSR:StopPlace:53573",
+                "name": "Kraftforsyninga"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 30,
+            "aimedArrivalTime": "2026-10-26T07:12:00+01:00",
+            "aimedDepartureTime": "2026-10-26T07:12:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Kroken"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:93632",
+              "name": "Marinelageret",
+              "stopPlace": {
+                "id": "NSR:StopPlace:54797",
+                "name": "Marinelageret"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 31,
+            "aimedArrivalTime": "2026-10-26T07:13:00+01:00",
+            "aimedDepartureTime": "2026-10-26T07:13:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Kroken"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:89849",
+              "name": "Sauestad",
+              "stopPlace": {
+                "id": "NSR:StopPlace:52798",
+                "name": "Sauestad"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 32,
+            "aimedArrivalTime": "2026-10-26T07:14:00+01:00",
+            "aimedDepartureTime": "2026-10-26T07:14:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Kroken"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:104870",
+              "name": "Uranusvegen",
+              "stopPlace": {
+                "id": "NSR:StopPlace:52527",
+                "name": "Uranusvegen"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 33,
+            "aimedArrivalTime": "2026-10-26T07:15:00+01:00",
+            "aimedDepartureTime": "2026-10-26T07:15:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Kroken"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:88470",
+              "name": "Tomasjordnes",
+              "stopPlace": {
+                "id": "NSR:StopPlace:52069",
+                "name": "Tomasjordnes"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 34,
+            "aimedArrivalTime": "2026-10-26T07:17:00+01:00",
+            "aimedDepartureTime": "2026-10-26T07:17:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Kroken"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:94667",
+              "name": "Austheim nord",
+              "stopPlace": {
+                "id": "NSR:StopPlace:55347",
+                "name": "Austheim nord"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 35,
+            "aimedArrivalTime": "2026-10-26T07:18:00+01:00",
+            "aimedDepartureTime": "2026-10-26T07:18:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Kroken"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:93292",
+              "name": "Lunheim vest",
+              "stopPlace": {
+                "id": "NSR:StopPlace:54620",
+                "name": "Lunheim vest"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 36,
+            "aimedArrivalTime": "2026-10-26T07:18:00+01:00",
+            "aimedDepartureTime": "2026-10-26T07:18:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Kroken"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:94215",
+              "name": "Myrland",
+              "stopPlace": {
+                "id": "NSR:StopPlace:55106",
+                "name": "Myrland"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 37,
+            "aimedArrivalTime": "2026-10-26T07:19:00+01:00",
+            "aimedDepartureTime": "2026-10-26T07:19:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Kroken"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:91413",
+              "name": "Krokelva",
+              "stopPlace": {
+                "id": "NSR:StopPlace:53632",
+                "name": "Krokelva"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 38,
+            "aimedArrivalTime": "2026-10-26T07:19:00+01:00",
+            "aimedDepartureTime": "2026-10-26T07:19:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Kroken"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:91454",
+              "name": "Krokensenteret",
+              "stopPlace": {
+                "id": "NSR:StopPlace:53653",
+                "name": "Krokensenteret"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 39,
+            "aimedArrivalTime": "2026-10-26T07:20:00+01:00",
+            "aimedDepartureTime": "2026-10-26T07:20:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Kroken"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:91660",
+              "name": "Kvartsvegen",
+              "stopPlace": {
+                "id": "NSR:StopPlace:53760",
+                "name": "Kvartsvegen"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 40,
+            "aimedArrivalTime": "2026-10-26T07:20:00+01:00",
+            "aimedDepartureTime": "2026-10-26T07:20:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Kroken"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:95832",
+              "name": "Granittvegen",
+              "stopPlace": {
+                "id": "NSR:StopPlace:55963",
+                "name": "Granittvegen"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 41,
+            "aimedArrivalTime": "2026-10-26T07:25:00+01:00",
+            "aimedDepartureTime": "2026-10-26T07:25:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Kroken"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:100583",
+              "name": "Malmvegen snuplass",
+              "stopPlace": {
+                "id": "NSR:StopPlace:54782",
+                "name": "Malmvegen snuplass"
+              }
+            }
+          }
+        ]
+      },
+      "sample1": {
+        "id": "TRO:ServiceJourney:20_260918105148184_1000",
+        "privateCode": "1000",
+        "directionType": "inbound",
+        "journeyPattern": {
+          "id": "TRO:JourneyPattern:20_Inbound_260918105029327_260819122860815",
+          "name": "20_2_04_BRS_Stand"
+        },
+        "estimatedCalls": [
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 0,
+            "aimedArrivalTime": "2026-10-26T05:16:00+01:00",
+            "aimedDepartureTime": "2026-10-26T05:16:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan via sentrum"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:93604",
+              "name": "Malmvegen snuplass",
+              "stopPlace": {
+                "id": "NSR:StopPlace:54782",
+                "name": "Malmvegen snuplass"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 1,
+            "aimedArrivalTime": "2026-10-26T05:17:00+01:00",
+            "aimedDepartureTime": "2026-10-26T05:17:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan via sentrum"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:95831",
+              "name": "Granittvegen",
+              "stopPlace": {
+                "id": "NSR:StopPlace:55963",
+                "name": "Granittvegen"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 2,
+            "aimedArrivalTime": "2026-10-26T05:18:00+01:00",
+            "aimedDepartureTime": "2026-10-26T05:18:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan via sentrum"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:91661",
+              "name": "Kvartsvegen",
+              "stopPlace": {
+                "id": "NSR:StopPlace:53760",
+                "name": "Kvartsvegen"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 3,
+            "aimedArrivalTime": "2026-10-26T05:18:00+01:00",
+            "aimedDepartureTime": "2026-10-26T05:18:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan via sentrum"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:95766",
+              "name": "Gneisvegen",
+              "stopPlace": {
+                "id": "NSR:StopPlace:55926",
+                "name": "Gneisvegen"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 4,
+            "aimedArrivalTime": "2026-10-26T05:19:00+01:00",
+            "aimedDepartureTime": "2026-10-26T05:19:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan via sentrum"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:91455",
+              "name": "Krokensenteret",
+              "stopPlace": {
+                "id": "NSR:StopPlace:53653",
+                "name": "Krokensenteret"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 5,
+            "aimedArrivalTime": "2026-10-26T05:20:00+01:00",
+            "aimedDepartureTime": "2026-10-26T05:20:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan via sentrum"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:91414",
+              "name": "Krokelva",
+              "stopPlace": {
+                "id": "NSR:StopPlace:53632",
+                "name": "Krokelva"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 6,
+            "aimedArrivalTime": "2026-10-26T05:21:00+01:00",
+            "aimedDepartureTime": "2026-10-26T05:21:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan via sentrum"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:94216",
+              "name": "Myrland",
+              "stopPlace": {
+                "id": "NSR:StopPlace:55106",
+                "name": "Myrland"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 7,
+            "aimedArrivalTime": "2026-10-26T05:22:00+01:00",
+            "aimedDepartureTime": "2026-10-26T05:22:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan via sentrum"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:93293",
+              "name": "Lunheim vest",
+              "stopPlace": {
+                "id": "NSR:StopPlace:54620",
+                "name": "Lunheim vest"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 8,
+            "aimedArrivalTime": "2026-10-26T05:23:00+01:00",
+            "aimedDepartureTime": "2026-10-26T05:23:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan via sentrum"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:94668",
+              "name": "Austheim nord",
+              "stopPlace": {
+                "id": "NSR:StopPlace:55347",
+                "name": "Austheim nord"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 9,
+            "aimedArrivalTime": "2026-10-26T05:24:00+01:00",
+            "aimedDepartureTime": "2026-10-26T05:24:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan via sentrum"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:88471",
+              "name": "Tomasjordnes",
+              "stopPlace": {
+                "id": "NSR:StopPlace:52069",
+                "name": "Tomasjordnes"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 10,
+            "aimedArrivalTime": "2026-10-26T05:25:00+01:00",
+            "aimedDepartureTime": "2026-10-26T05:25:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan via sentrum"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:89337",
+              "name": "Uranusvegen",
+              "stopPlace": {
+                "id": "NSR:StopPlace:52527",
+                "name": "Uranusvegen"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 11,
+            "aimedArrivalTime": "2026-10-26T05:26:00+01:00",
+            "aimedDepartureTime": "2026-10-26T05:26:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan via sentrum"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:89850",
+              "name": "Sauestad",
+              "stopPlace": {
+                "id": "NSR:StopPlace:52798",
+                "name": "Sauestad"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 12,
+            "aimedArrivalTime": "2026-10-26T05:27:00+01:00",
+            "aimedDepartureTime": "2026-10-26T05:27:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan via sentrum"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:93631",
+              "name": "Marinelageret",
+              "stopPlace": {
+                "id": "NSR:StopPlace:54797",
+                "name": "Marinelageret"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 13,
+            "aimedArrivalTime": "2026-10-26T05:28:00+01:00",
+            "aimedDepartureTime": "2026-10-26T05:28:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan via sentrum"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:91304",
+              "name": "Kraftforsyninga",
+              "stopPlace": {
+                "id": "NSR:StopPlace:53573",
+                "name": "Kraftforsyninga"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 14,
+            "aimedArrivalTime": "2026-10-26T05:34:00+01:00",
+            "aimedDepartureTime": "2026-10-26T05:34:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan via sentrum"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:96040",
+              "name": "Breivika",
+              "stopPlace": {
+                "id": "NSR:StopPlace:56073",
+                "name": "Breivika"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 15,
+            "aimedArrivalTime": "2026-10-26T05:38:00+01:00",
+            "aimedDepartureTime": "2026-10-26T05:38:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan via sentrum"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:108762",
+              "name": "Seminarbakken",
+              "stopPlace": {
+                "id": "NSR:StopPlace:52957",
+                "name": "Seminarbakken"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 16,
+            "aimedArrivalTime": "2026-10-26T05:39:00+01:00",
+            "aimedDepartureTime": "2026-10-26T05:39:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan via sentrum"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:91058",
+              "name": "Skippergata",
+              "stopPlace": {
+                "id": "NSR:StopPlace:53442",
+                "name": "Skippergata"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 17,
+            "aimedArrivalTime": "2026-10-26T05:40:00+01:00",
+            "aimedDepartureTime": "2026-10-26T05:40:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan via sentrum"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:88527",
+              "name": "Torgsenteret",
+              "stopPlace": {
+                "id": "NSR:StopPlace:52099",
+                "name": "Torgsenteret"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 18,
+            "aimedArrivalTime": "2026-10-26T05:45:00+01:00",
+            "aimedDepartureTime": "2026-10-26T05:45:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan via UNN"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:95300",
+              "name": "Fr. Langes gate",
+              "stopPlace": {
+                "id": "NSR:StopPlace:55683",
+                "name": "Fr. Langes gate"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 19,
+            "aimedArrivalTime": "2026-10-26T05:46:00+01:00",
+            "aimedDepartureTime": "2026-10-26T05:46:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan via UNN"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:97022",
+              "name": "Petersborggata",
+              "stopPlace": {
+                "id": "NSR:StopPlace:56592",
+                "name": "Petersborggata"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 20,
+            "aimedArrivalTime": "2026-10-26T05:47:00+01:00",
+            "aimedDepartureTime": "2026-10-26T05:47:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan via UNN"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:90641",
+              "name": "Sjømannsskolen",
+              "stopPlace": {
+                "id": "NSR:StopPlace:53223",
+                "name": "Sjømannsskolen"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 21,
+            "aimedArrivalTime": "2026-10-26T05:48:00+01:00",
+            "aimedDepartureTime": "2026-10-26T05:48:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan via UNN"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:91643",
+              "name": "Kvamstykket",
+              "stopPlace": {
+                "id": "NSR:StopPlace:53751",
+                "name": "Kvamstykket"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 22,
+            "aimedArrivalTime": "2026-10-26T05:49:00+01:00",
+            "aimedDepartureTime": "2026-10-26T05:49:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan via UNN"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:92996",
+              "name": "Storskogen",
+              "stopPlace": {
+                "id": "NSR:StopPlace:54464",
+                "name": "Storskogen"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 23,
+            "aimedArrivalTime": "2026-10-26T05:50:00+01:00",
+            "aimedDepartureTime": "2026-10-26T05:50:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan via UNN"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:96824",
+              "name": "Nøysomheten",
+              "stopPlace": {
+                "id": "NSR:StopPlace:56488",
+                "name": "Nøysomheten"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 24,
+            "aimedArrivalTime": "2026-10-26T05:51:00+01:00",
+            "aimedDepartureTime": "2026-10-26T05:51:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan via UNN"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:96579",
+              "name": "Doktordalen",
+              "stopPlace": {
+                "id": "NSR:StopPlace:56360",
+                "name": "Doktordalen"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 25,
+            "aimedArrivalTime": "2026-10-26T05:52:00+01:00",
+            "aimedDepartureTime": "2026-10-26T05:52:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan via UNN"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:96097",
+              "name": "Grøholtvegen",
+              "stopPlace": {
+                "id": "NSR:StopPlace:56101",
+                "name": "Grøholtvegen"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 26,
+            "aimedArrivalTime": "2026-10-26T05:53:00+01:00",
+            "aimedDepartureTime": "2026-10-26T05:53:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan via UNN"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:96030",
+              "name": "Templarheimen",
+              "stopPlace": {
+                "id": "NSR:StopPlace:56068",
+                "name": "Templarheimen"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 27,
+            "aimedArrivalTime": "2026-10-26T05:54:00+01:00",
+            "aimedDepartureTime": "2026-10-26T05:54:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan via UNN"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:89983",
+              "name": "Veslefrikkvegen",
+              "stopPlace": {
+                "id": "NSR:StopPlace:52870",
+                "name": "Veslefrikkvegen"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 28,
+            "aimedArrivalTime": "2026-10-26T05:55:00+01:00",
+            "aimedDepartureTime": "2026-10-26T05:55:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan via UNN"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:89269",
+              "name": "UiT/Planetariet",
+              "stopPlace": {
+                "id": "NSR:StopPlace:52491",
+                "name": "UiT/Planetariet"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 29,
+            "aimedArrivalTime": "2026-10-26T05:56:00+01:00",
+            "aimedDepartureTime": "2026-10-26T05:56:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan via UNN"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:89264",
+              "name": "UiT",
+              "stopPlace": {
+                "id": "NSR:StopPlace:52488",
+                "name": "UiT"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 30,
+            "aimedArrivalTime": "2026-10-26T05:57:00+01:00",
+            "aimedDepartureTime": "2026-10-26T05:57:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan via UNN"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:89251",
+              "name": "UNN",
+              "stopPlace": {
+                "id": "NSR:StopPlace:52482",
+                "name": "UNN"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 31,
+            "aimedArrivalTime": "2026-10-26T05:58:00+01:00",
+            "aimedDepartureTime": "2026-10-26T05:58:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:95703",
+              "name": "Gimlevegen",
+              "stopPlace": {
+                "id": "NSR:StopPlace:55898",
+                "name": "Gimlevegen"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 32,
+            "aimedArrivalTime": "2026-10-26T05:59:00+01:00",
+            "aimedDepartureTime": "2026-10-26T05:59:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:89507",
+              "name": "Vales veg",
+              "stopPlace": {
+                "id": "NSR:StopPlace:52616",
+                "name": "Vales veg"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 33,
+            "aimedArrivalTime": "2026-10-26T05:59:00+01:00",
+            "aimedDepartureTime": "2026-10-26T05:59:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:94741",
+              "name": "Bakkehaugvegen",
+              "stopPlace": {
+                "id": "NSR:StopPlace:55385",
+                "name": "Bakkehaugvegen"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 34,
+            "aimedArrivalTime": "2026-10-26T06:01:00+01:00",
+            "aimedDepartureTime": "2026-10-26T06:01:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:89395",
+              "name": "Utsikten",
+              "stopPlace": {
+                "id": "NSR:StopPlace:52558",
+                "name": "Utsikten"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 35,
+            "aimedArrivalTime": "2026-10-26T06:02:00+01:00",
+            "aimedDepartureTime": "2026-10-26T06:02:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:91108",
+              "name": "Knausen",
+              "stopPlace": {
+                "id": "NSR:StopPlace:53468",
+                "name": "Knausen"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 36,
+            "aimedArrivalTime": "2026-10-26T06:03:00+01:00",
+            "aimedDepartureTime": "2026-10-26T06:03:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:88762",
+              "name": "Rundvannet",
+              "stopPlace": {
+                "id": "NSR:StopPlace:52222",
+                "name": "Rundvannet"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 37,
+            "aimedArrivalTime": "2026-10-26T06:03:00+01:00",
+            "aimedDepartureTime": "2026-10-26T06:03:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:92296",
+              "name": "Stakkevollan skole",
+              "stopPlace": {
+                "id": "NSR:StopPlace:54093",
+                "name": "Stakkevollan skole"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 38,
+            "aimedArrivalTime": "2026-10-26T06:04:00+01:00",
+            "aimedDepartureTime": "2026-10-26T06:04:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:95925",
+              "name": "Brattbakken snuplass",
+              "stopPlace": {
+                "id": "NSR:StopPlace:56013",
+                "name": "Brattbakken snuplass"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 39,
+            "aimedArrivalTime": "2026-10-26T06:04:00+01:00",
+            "aimedDepartureTime": "2026-10-26T06:04:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:89697",
+              "name": "Varden borettslag",
+              "stopPlace": {
+                "id": "NSR:StopPlace:52717",
+                "name": "Varden borettslag"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 40,
+            "aimedArrivalTime": "2026-10-26T06:05:00+01:00",
+            "aimedDepartureTime": "2026-10-26T06:05:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:89702",
+              "name": "Varden",
+              "stopPlace": {
+                "id": "NSR:StopPlace:52720",
+                "name": "Varden"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 41,
+            "aimedArrivalTime": "2026-10-26T06:06:00+01:00",
+            "aimedDepartureTime": "2026-10-26T06:06:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:89010",
+              "name": "Tunvegen vest",
+              "stopPlace": {
+                "id": "NSR:StopPlace:52357",
+                "name": "Tunvegen vest"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 42,
+            "aimedArrivalTime": "2026-10-26T06:09:00+01:00",
+            "aimedDepartureTime": "2026-10-26T06:09:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:90848",
+              "name": "Skattøra Borettslag",
+              "stopPlace": {
+                "id": "NSR:StopPlace:53331",
+                "name": "Skattøra Borettslag"
+              }
+            }
+          }
+        ]
+      },
+      "sample2": {
+        "id": "TRO:ServiceJourney:20_260918104886042_1133",
+        "privateCode": "1133",
+        "directionType": "outbound",
+        "journeyPattern": {
+          "id": "TRO:JourneyPattern:20_Outbound_260918104880982_260819122860815",
+          "name": "20_1_05_BRS_Stein"
+        },
+        "estimatedCalls": [
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 0,
+            "aimedArrivalTime": "2026-10-26T23:03:00+01:00",
+            "aimedDepartureTime": "2026-10-26T23:03:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes via sentrum"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:90847",
+              "name": "Skattøra Borettslag",
+              "stopPlace": {
+                "id": "NSR:StopPlace:53331",
+                "name": "Skattøra Borettslag"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 1,
+            "aimedArrivalTime": "2026-10-26T23:05:00+01:00",
+            "aimedDepartureTime": "2026-10-26T23:05:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes via sentrum"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:89699",
+              "name": "Varden borettslag",
+              "stopPlace": {
+                "id": "NSR:StopPlace:52717",
+                "name": "Varden borettslag"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 2,
+            "aimedArrivalTime": "2026-10-26T23:06:00+01:00",
+            "aimedDepartureTime": "2026-10-26T23:06:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes via sentrum"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:95924",
+              "name": "Brattbakken snuplass",
+              "stopPlace": {
+                "id": "NSR:StopPlace:56013",
+                "name": "Brattbakken snuplass"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 3,
+            "aimedArrivalTime": "2026-10-26T23:06:00+01:00",
+            "aimedDepartureTime": "2026-10-26T23:06:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes via sentrum"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:92294",
+              "name": "Stakkevollan skole",
+              "stopPlace": {
+                "id": "NSR:StopPlace:54093",
+                "name": "Stakkevollan skole"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 4,
+            "aimedArrivalTime": "2026-10-26T23:07:00+01:00",
+            "aimedDepartureTime": "2026-10-26T23:07:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes via sentrum"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:88761",
+              "name": "Rundvannet",
+              "stopPlace": {
+                "id": "NSR:StopPlace:52222",
+                "name": "Rundvannet"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 5,
+            "aimedArrivalTime": "2026-10-26T23:08:00+01:00",
+            "aimedDepartureTime": "2026-10-26T23:08:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes via sentrum"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:91109",
+              "name": "Knausen",
+              "stopPlace": {
+                "id": "NSR:StopPlace:53468",
+                "name": "Knausen"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 6,
+            "aimedArrivalTime": "2026-10-26T23:09:00+01:00",
+            "aimedDepartureTime": "2026-10-26T23:09:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes via sentrum"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:89397",
+              "name": "Utsikten",
+              "stopPlace": {
+                "id": "NSR:StopPlace:52558",
+                "name": "Utsikten"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 7,
+            "aimedArrivalTime": "2026-10-26T23:10:00+01:00",
+            "aimedDepartureTime": "2026-10-26T23:10:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes via sentrum"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:94742",
+              "name": "Bakkehaugvegen",
+              "stopPlace": {
+                "id": "NSR:StopPlace:55385",
+                "name": "Bakkehaugvegen"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 8,
+            "aimedArrivalTime": "2026-10-26T23:11:00+01:00",
+            "aimedDepartureTime": "2026-10-26T23:11:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes via sentrum"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:89508",
+              "name": "Vales veg",
+              "stopPlace": {
+                "id": "NSR:StopPlace:52616",
+                "name": "Vales veg"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 9,
+            "aimedArrivalTime": "2026-10-26T23:11:00+01:00",
+            "aimedDepartureTime": "2026-10-26T23:11:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes via sentrum"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:95704",
+              "name": "Gimlevegen",
+              "stopPlace": {
+                "id": "NSR:StopPlace:55898",
+                "name": "Gimlevegen"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 10,
+            "aimedArrivalTime": "2026-10-26T23:12:00+01:00",
+            "aimedDepartureTime": "2026-10-26T23:13:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes via sentrum"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:89253",
+              "name": "UNN",
+              "stopPlace": {
+                "id": "NSR:StopPlace:52482",
+                "name": "UNN"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 11,
+            "aimedArrivalTime": "2026-10-26T23:14:00+01:00",
+            "aimedDepartureTime": "2026-10-26T23:14:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes via sentrum"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:89263",
+              "name": "UiT",
+              "stopPlace": {
+                "id": "NSR:StopPlace:52488",
+                "name": "UiT"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 12,
+            "aimedArrivalTime": "2026-10-26T23:15:00+01:00",
+            "aimedDepartureTime": "2026-10-26T23:15:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes via sentrum"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:89268",
+              "name": "UiT/Planetariet",
+              "stopPlace": {
+                "id": "NSR:StopPlace:52491",
+                "name": "UiT/Planetariet"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 13,
+            "aimedArrivalTime": "2026-10-26T23:16:00+01:00",
+            "aimedDepartureTime": "2026-10-26T23:16:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes via sentrum"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:89984",
+              "name": "Veslefrikkvegen",
+              "stopPlace": {
+                "id": "NSR:StopPlace:52870",
+                "name": "Veslefrikkvegen"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 14,
+            "aimedArrivalTime": "2026-10-26T23:17:00+01:00",
+            "aimedDepartureTime": "2026-10-26T23:17:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes via sentrum"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:96029",
+              "name": "Templarheimen",
+              "stopPlace": {
+                "id": "NSR:StopPlace:56068",
+                "name": "Templarheimen"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 15,
+            "aimedArrivalTime": "2026-10-26T23:18:00+01:00",
+            "aimedDepartureTime": "2026-10-26T23:18:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes via sentrum"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:96096",
+              "name": "Grøholtvegen",
+              "stopPlace": {
+                "id": "NSR:StopPlace:56101",
+                "name": "Grøholtvegen"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 16,
+            "aimedArrivalTime": "2026-10-26T23:19:00+01:00",
+            "aimedDepartureTime": "2026-10-26T23:19:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes via sentrum"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:96580",
+              "name": "Doktordalen",
+              "stopPlace": {
+                "id": "NSR:StopPlace:56360",
+                "name": "Doktordalen"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 17,
+            "aimedArrivalTime": "2026-10-26T23:20:00+01:00",
+            "aimedDepartureTime": "2026-10-26T23:20:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes via sentrum"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:96823",
+              "name": "Nøysomheten",
+              "stopPlace": {
+                "id": "NSR:StopPlace:56488",
+                "name": "Nøysomheten"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 18,
+            "aimedArrivalTime": "2026-10-26T23:21:00+01:00",
+            "aimedDepartureTime": "2026-10-26T23:21:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes via sentrum"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:92999",
+              "name": "Storskogen",
+              "stopPlace": {
+                "id": "NSR:StopPlace:54464",
+                "name": "Storskogen"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 19,
+            "aimedArrivalTime": "2026-10-26T23:22:00+01:00",
+            "aimedDepartureTime": "2026-10-26T23:22:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes via sentrum"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:91642",
+              "name": "Kvamstykket",
+              "stopPlace": {
+                "id": "NSR:StopPlace:53751",
+                "name": "Kvamstykket"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 20,
+            "aimedArrivalTime": "2026-10-26T23:23:00+01:00",
+            "aimedDepartureTime": "2026-10-26T23:23:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes via sentrum"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:90643",
+              "name": "Sjømannsskolen",
+              "stopPlace": {
+                "id": "NSR:StopPlace:53223",
+                "name": "Sjømannsskolen"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 21,
+            "aimedArrivalTime": "2026-10-26T23:24:00+01:00",
+            "aimedDepartureTime": "2026-10-26T23:24:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes via sentrum"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:97024",
+              "name": "Petersborggata",
+              "stopPlace": {
+                "id": "NSR:StopPlace:56592",
+                "name": "Petersborggata"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 22,
+            "aimedArrivalTime": "2026-10-26T23:25:00+01:00",
+            "aimedDepartureTime": "2026-10-26T23:25:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes via sentrum"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:91229",
+              "name": "Kongsbakken",
+              "stopPlace": {
+                "id": "NSR:StopPlace:53533",
+                "name": "Kongsbakken"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 23,
+            "aimedArrivalTime": "2026-10-26T23:26:00+01:00",
+            "aimedDepartureTime": "2026-10-26T23:26:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes via Kroken"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:90421",
+              "name": "Wi-To",
+              "stopPlace": {
+                "id": "NSR:StopPlace:53103",
+                "name": "Wi-To"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 24,
+            "aimedArrivalTime": "2026-10-26T23:33:00+01:00",
+            "aimedDepartureTime": "2026-10-26T23:33:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes via Kroken"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:88813",
+              "name": "Kystens hus",
+              "stopPlace": {
+                "id": "NSR:StopPlace:52250",
+                "name": "Kystens hus"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 25,
+            "aimedArrivalTime": "2026-10-26T23:33:00+01:00",
+            "aimedDepartureTime": "2026-10-26T23:33:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes via Kroken"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:91057",
+              "name": "Skippergata",
+              "stopPlace": {
+                "id": "NSR:StopPlace:53442",
+                "name": "Skippergata"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 26,
+            "aimedArrivalTime": "2026-10-26T23:34:00+01:00",
+            "aimedDepartureTime": "2026-10-26T23:34:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes via Kroken"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:90149",
+              "name": "Seminarbakken",
+              "stopPlace": {
+                "id": "NSR:StopPlace:52957",
+                "name": "Seminarbakken"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 27,
+            "aimedArrivalTime": "2026-10-26T23:38:00+01:00",
+            "aimedDepartureTime": "2026-10-26T23:38:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes via Kroken"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:96039",
+              "name": "Breivika",
+              "stopPlace": {
+                "id": "NSR:StopPlace:56073",
+                "name": "Breivika"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 28,
+            "aimedArrivalTime": "2026-10-26T23:45:00+01:00",
+            "aimedDepartureTime": "2026-10-26T23:45:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes via Kroken"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:91305",
+              "name": "Kraftforsyninga",
+              "stopPlace": {
+                "id": "NSR:StopPlace:53573",
+                "name": "Kraftforsyninga"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 29,
+            "aimedArrivalTime": "2026-10-26T23:45:00+01:00",
+            "aimedDepartureTime": "2026-10-26T23:45:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes via Kroken"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:93632",
+              "name": "Marinelageret",
+              "stopPlace": {
+                "id": "NSR:StopPlace:54797",
+                "name": "Marinelageret"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 30,
+            "aimedArrivalTime": "2026-10-26T23:46:00+01:00",
+            "aimedDepartureTime": "2026-10-26T23:46:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes via Kroken"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:89849",
+              "name": "Sauestad",
+              "stopPlace": {
+                "id": "NSR:StopPlace:52798",
+                "name": "Sauestad"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 31,
+            "aimedArrivalTime": "2026-10-26T23:47:00+01:00",
+            "aimedDepartureTime": "2026-10-26T23:47:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes via Kroken"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:104870",
+              "name": "Uranusvegen",
+              "stopPlace": {
+                "id": "NSR:StopPlace:52527",
+                "name": "Uranusvegen"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 32,
+            "aimedArrivalTime": "2026-10-26T23:48:00+01:00",
+            "aimedDepartureTime": "2026-10-26T23:48:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes via Kroken"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:88470",
+              "name": "Tomasjordnes",
+              "stopPlace": {
+                "id": "NSR:StopPlace:52069",
+                "name": "Tomasjordnes"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 33,
+            "aimedArrivalTime": "2026-10-26T23:50:00+01:00",
+            "aimedDepartureTime": "2026-10-26T23:50:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes via Kroken"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:94667",
+              "name": "Austheim nord",
+              "stopPlace": {
+                "id": "NSR:StopPlace:55347",
+                "name": "Austheim nord"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 34,
+            "aimedArrivalTime": "2026-10-26T23:51:00+01:00",
+            "aimedDepartureTime": "2026-10-26T23:51:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes via Kroken"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:93292",
+              "name": "Lunheim vest",
+              "stopPlace": {
+                "id": "NSR:StopPlace:54620",
+                "name": "Lunheim vest"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 35,
+            "aimedArrivalTime": "2026-10-26T23:51:00+01:00",
+            "aimedDepartureTime": "2026-10-26T23:51:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes via Kroken"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:94215",
+              "name": "Myrland",
+              "stopPlace": {
+                "id": "NSR:StopPlace:55106",
+                "name": "Myrland"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 36,
+            "aimedArrivalTime": "2026-10-26T23:52:00+01:00",
+            "aimedDepartureTime": "2026-10-26T23:52:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes via Kroken"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:91413",
+              "name": "Krokelva",
+              "stopPlace": {
+                "id": "NSR:StopPlace:53632",
+                "name": "Krokelva"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 37,
+            "aimedArrivalTime": "2026-10-26T23:53:00+01:00",
+            "aimedDepartureTime": "2026-10-26T23:53:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:91454",
+              "name": "Krokensenteret",
+              "stopPlace": {
+                "id": "NSR:StopPlace:53653",
+                "name": "Krokensenteret"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 38,
+            "aimedArrivalTime": "2026-10-26T23:54:00+01:00",
+            "aimedDepartureTime": "2026-10-26T23:54:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:91660",
+              "name": "Kvartsvegen",
+              "stopPlace": {
+                "id": "NSR:StopPlace:53760",
+                "name": "Kvartsvegen"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 39,
+            "aimedArrivalTime": "2026-10-26T23:54:00+01:00",
+            "aimedDepartureTime": "2026-10-26T23:54:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:95832",
+              "name": "Granittvegen",
+              "stopPlace": {
+                "id": "NSR:StopPlace:55963",
+                "name": "Granittvegen"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 40,
+            "aimedArrivalTime": "2026-10-26T23:57:00+01:00",
+            "aimedDepartureTime": "2026-10-26T23:57:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:100583",
+              "name": "Malmvegen snuplass",
+              "stopPlace": {
+                "id": "NSR:StopPlace:54782",
+                "name": "Malmvegen snuplass"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 41,
+            "aimedArrivalTime": "2026-10-26T23:57:00+01:00",
+            "aimedDepartureTime": "2026-10-26T23:57:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:93604",
+              "name": "Malmvegen snuplass",
+              "stopPlace": {
+                "id": "NSR:StopPlace:54782",
+                "name": "Malmvegen snuplass"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 42,
+            "aimedArrivalTime": "2026-10-26T23:58:00+01:00",
+            "aimedDepartureTime": "2026-10-26T23:58:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:95831",
+              "name": "Granittvegen",
+              "stopPlace": {
+                "id": "NSR:StopPlace:55963",
+                "name": "Granittvegen"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 43,
+            "aimedArrivalTime": "2026-10-26T23:59:00+01:00",
+            "aimedDepartureTime": "2026-10-26T23:59:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:91661",
+              "name": "Kvartsvegen",
+              "stopPlace": {
+                "id": "NSR:StopPlace:53760",
+                "name": "Kvartsvegen"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 44,
+            "aimedArrivalTime": "2026-10-27T00:00:00+01:00",
+            "aimedDepartureTime": "2026-10-27T00:00:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:91455",
+              "name": "Krokensenteret",
+              "stopPlace": {
+                "id": "NSR:StopPlace:53653",
+                "name": "Krokensenteret"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 45,
+            "aimedArrivalTime": "2026-10-27T00:00:00+01:00",
+            "aimedDepartureTime": "2026-10-27T00:00:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:91441",
+              "name": "Kroken kryss",
+              "stopPlace": {
+                "id": "NSR:StopPlace:53646",
+                "name": "Kroken kryss"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 46,
+            "aimedArrivalTime": "2026-10-27T00:00:00+01:00",
+            "aimedDepartureTime": "2026-10-27T00:00:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:91460",
+              "name": "Krokenstranda",
+              "stopPlace": {
+                "id": "NSR:StopPlace:53655",
+                "name": "Krokenstranda"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 47,
+            "aimedArrivalTime": "2026-10-27T00:01:00+01:00",
+            "aimedDepartureTime": "2026-10-27T00:01:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:91306",
+              "name": "Skjelnan skole",
+              "stopPlace": {
+                "id": "NSR:StopPlace:53574",
+                "name": "Skjelnan skole"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 48,
+            "aimedArrivalTime": "2026-10-27T00:01:00+01:00",
+            "aimedDepartureTime": "2026-10-27T00:01:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:91298",
+              "name": "Skjelnan",
+              "stopPlace": {
+                "id": "NSR:StopPlace:53570",
+                "name": "Skjelnan"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 49,
+            "aimedArrivalTime": "2026-10-27T00:01:00+01:00",
+            "aimedDepartureTime": "2026-10-27T00:01:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:91316",
+              "name": "Skjelnanvegen",
+              "stopPlace": {
+                "id": "NSR:StopPlace:53579",
+                "name": "Skjelnanvegen"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 50,
+            "aimedArrivalTime": "2026-10-27T00:02:00+01:00",
+            "aimedDepartureTime": "2026-10-27T00:02:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:89980",
+              "name": "Seljelund",
+              "stopPlace": {
+                "id": "NSR:StopPlace:52868",
+                "name": "Seljelund"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 51,
+            "aimedArrivalTime": "2026-10-27T00:03:00+01:00",
+            "aimedDepartureTime": "2026-10-27T00:03:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:89995",
+              "name": "Seljelund nord",
+              "stopPlace": {
+                "id": "NSR:StopPlace:52876",
+                "name": "Seljelund nord"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 52,
+            "aimedArrivalTime": "2026-10-27T00:03:00+01:00",
+            "aimedDepartureTime": "2026-10-27T00:03:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:93790",
+              "name": "Movik Myrland",
+              "stopPlace": {
+                "id": "NSR:StopPlace:54878",
+                "name": "Movik Myrland"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 53,
+            "aimedArrivalTime": "2026-10-27T00:04:00+01:00",
+            "aimedDepartureTime": "2026-10-27T00:04:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:93821",
+              "name": "Movik Råttbukta",
+              "stopPlace": {
+                "id": "NSR:StopPlace:54896",
+                "name": "Movik Råttbukta"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 54,
+            "aimedArrivalTime": "2026-10-27T00:04:00+01:00",
+            "aimedDepartureTime": "2026-10-27T00:04:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:93847",
+              "name": "Movikvegen",
+              "stopPlace": {
+                "id": "NSR:StopPlace:54909",
+                "name": "Movikvegen"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 55,
+            "aimedArrivalTime": "2026-10-27T00:05:00+01:00",
+            "aimedDepartureTime": "2026-10-27T00:05:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:93812",
+              "name": "Movik Rotneset sør",
+              "stopPlace": {
+                "id": "NSR:StopPlace:54890",
+                "name": "Movik Rotneset sør"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 56,
+            "aimedArrivalTime": "2026-10-27T00:05:00+01:00",
+            "aimedDepartureTime": "2026-10-27T00:05:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:93800",
+              "name": "Movik Rotneset",
+              "stopPlace": {
+                "id": "NSR:StopPlace:54883",
+                "name": "Movik Rotneset"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 57,
+            "aimedArrivalTime": "2026-10-27T00:05:00+01:00",
+            "aimedDepartureTime": "2026-10-27T00:05:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:93032",
+              "name": "Storslettvegen",
+              "stopPlace": {
+                "id": "NSR:StopPlace:54483",
+                "name": "Storslettvegen"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 58,
+            "aimedArrivalTime": "2026-10-27T00:06:00+01:00",
+            "aimedDepartureTime": "2026-10-27T00:06:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:93833",
+              "name": "Movik snuplass",
+              "stopPlace": {
+                "id": "NSR:StopPlace:54902",
+                "name": "Movik snuplass"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 59,
+            "aimedArrivalTime": "2026-10-27T00:07:00+01:00",
+            "aimedDepartureTime": "2026-10-27T00:07:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:92984",
+              "name": "Lilleneset",
+              "stopPlace": {
+                "id": "NSR:StopPlace:54457",
+                "name": "Lilleneset"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 60,
+            "aimedArrivalTime": "2026-10-27T00:07:00+01:00",
+            "aimedDepartureTime": "2026-10-27T00:07:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:93202",
+              "name": "Strand",
+              "stopPlace": {
+                "id": "NSR:StopPlace:54573",
+                "name": "Strand"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 61,
+            "aimedArrivalTime": "2026-10-27T00:07:00+01:00",
+            "aimedDepartureTime": "2026-10-27T00:07:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:93407",
+              "name": "Lysneset",
+              "stopPlace": {
+                "id": "NSR:StopPlace:54679",
+                "name": "Lysneset"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 62,
+            "aimedArrivalTime": "2026-10-27T00:07:00+01:00",
+            "aimedDepartureTime": "2026-10-27T00:07:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:93417",
+              "name": "Lysnestunet",
+              "stopPlace": {
+                "id": "NSR:StopPlace:54684",
+                "name": "Lysnestunet"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 63,
+            "aimedArrivalTime": "2026-10-27T00:08:00+01:00",
+            "aimedDepartureTime": "2026-10-27T00:08:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:89188",
+              "name": "Tønsnes Blautmyra",
+              "stopPlace": {
+                "id": "NSR:StopPlace:52450",
+                "name": "Tønsnes Blautmyra"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 64,
+            "aimedArrivalTime": "2026-10-27T00:09:00+01:00",
+            "aimedDepartureTime": "2026-10-27T00:09:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:89198",
+              "name": "Tønsnes Øra",
+              "stopPlace": {
+                "id": "NSR:StopPlace:52456",
+                "name": "Tønsnes Øra"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 65,
+            "aimedArrivalTime": "2026-10-27T00:10:00+01:00",
+            "aimedDepartureTime": "2026-10-27T00:10:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:89192",
+              "name": "Tønsnes Hollabåttjønnen",
+              "stopPlace": {
+                "id": "NSR:StopPlace:52453",
+                "name": "Tønsnes Hollabåttjønnen"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 66,
+            "aimedArrivalTime": "2026-10-27T00:10:00+01:00",
+            "aimedDepartureTime": "2026-10-27T00:10:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:96182",
+              "name": "Grøtsund Fort",
+              "stopPlace": {
+                "id": "NSR:StopPlace:56148",
+                "name": "Grøtsund Fort"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 67,
+            "aimedArrivalTime": "2026-10-27T00:11:00+01:00",
+            "aimedDepartureTime": "2026-10-27T00:11:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:90904",
+              "name": "Kjoselvdalen skytebane",
+              "stopPlace": {
+                "id": "NSR:StopPlace:53360",
+                "name": "Kjoselvdalen skytebane"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 68,
+            "aimedArrivalTime": "2026-10-27T00:12:00+01:00",
+            "aimedDepartureTime": "2026-10-27T00:12:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:92418",
+              "name": "Skytterstien",
+              "stopPlace": {
+                "id": "NSR:StopPlace:54161",
+                "name": "Skytterstien"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 69,
+            "aimedArrivalTime": "2026-10-27T00:13:00+01:00",
+            "aimedDepartureTime": "2026-10-27T00:13:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:90153",
+              "name": "Vikavegen",
+              "stopPlace": {
+                "id": "NSR:StopPlace:52959",
+                "name": "Vikavegen"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 70,
+            "aimedArrivalTime": "2026-10-27T00:13:00+01:00",
+            "aimedDepartureTime": "2026-10-27T00:13:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:89218",
+              "name": "Tønsvik snuplass",
+              "stopPlace": {
+                "id": "NSR:StopPlace:52467",
+                "name": "Tønsvik snuplass"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 71,
+            "aimedArrivalTime": "2026-10-27T00:14:00+01:00",
+            "aimedDepartureTime": "2026-10-27T00:14:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:89213",
+              "name": "Tønsvik Storvasselva",
+              "stopPlace": {
+                "id": "NSR:StopPlace:52464",
+                "name": "Tønsvik Storvasselva"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 72,
+            "aimedArrivalTime": "2026-10-27T00:14:00+01:00",
+            "aimedDepartureTime": "2026-10-27T00:14:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:89208",
+              "name": "Tønsvik Joenga",
+              "stopPlace": {
+                "id": "NSR:StopPlace:52461",
+                "name": "Tønsvik Joenga"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 73,
+            "aimedArrivalTime": "2026-10-27T00:15:00+01:00",
+            "aimedDepartureTime": "2026-10-27T00:15:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:89203",
+              "name": "Tønsvik Fisk",
+              "stopPlace": {
+                "id": "NSR:StopPlace:52459",
+                "name": "Tønsvik Fisk"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 74,
+            "aimedArrivalTime": "2026-10-27T00:15:00+01:00",
+            "aimedDepartureTime": "2026-10-27T00:15:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:92617",
+              "name": "Lavollen",
+              "stopPlace": {
+                "id": "NSR:StopPlace:54264",
+                "name": "Lavollen"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 75,
+            "aimedArrivalTime": "2026-10-27T00:16:00+01:00",
+            "aimedDepartureTime": "2026-10-27T00:16:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:89222",
+              "name": "Tønsåsen",
+              "stopPlace": {
+                "id": "NSR:StopPlace:52469",
+                "name": "Tønsåsen"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 76,
+            "aimedArrivalTime": "2026-10-27T00:17:00+01:00",
+            "aimedDepartureTime": "2026-10-27T00:17:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:90942",
+              "name": "Åsneset",
+              "stopPlace": {
+                "id": "NSR:StopPlace:53380",
+                "name": "Åsneset"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 77,
+            "aimedArrivalTime": "2026-10-27T00:17:00+01:00",
+            "aimedDepartureTime": "2026-10-27T00:17:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:90948",
+              "name": "Åsneset nord",
+              "stopPlace": {
+                "id": "NSR:StopPlace:53383",
+                "name": "Åsneset nord"
+              }
+            }
+          },
+          {
+            "date": "2026-10-26",
+            "stopPositionInPattern": 78,
+            "aimedArrivalTime": "2026-10-27T00:21:00+01:00",
+            "aimedDepartureTime": "2026-10-27T00:21:00+01:00",
+            "realtime": true,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Steinnes"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:92496",
+              "name": "Steinnes snuplass",
+              "stopPlace": {
+                "id": "NSR:StopPlace:54202",
+                "name": "Steinnes snuplass"
+              }
+            }
+          }
+        ]
+      },
+      "sample3": {
+        "id": "TRO:ServiceJourney:20_260918105162575_6600",
+        "privateCode": "6600",
+        "directionType": "inbound",
+        "journeyPattern": {
+          "id": "TRO:JourneyPattern:20_Inbound_260918105162482_260819122860815",
+          "name": "20_2_02_FrLangn- Skatt"
+        },
+        "estimatedCalls": [
+          {
+            "date": "2026-10-31",
+            "stopPositionInPattern": 0,
+            "aimedArrivalTime": "2026-11-01T01:30:00+01:00",
+            "aimedDepartureTime": "2026-11-01T01:30:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan via UNN"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:95300",
+              "name": "Fr. Langes gate",
+              "stopPlace": {
+                "id": "NSR:StopPlace:55683",
+                "name": "Fr. Langes gate"
+              }
+            }
+          },
+          {
+            "date": "2026-10-31",
+            "stopPositionInPattern": 1,
+            "aimedArrivalTime": "2026-11-01T01:31:00+01:00",
+            "aimedDepartureTime": "2026-11-01T01:31:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan via UNN"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:97022",
+              "name": "Petersborggata",
+              "stopPlace": {
+                "id": "NSR:StopPlace:56592",
+                "name": "Petersborggata"
+              }
+            }
+          },
+          {
+            "date": "2026-10-31",
+            "stopPositionInPattern": 2,
+            "aimedArrivalTime": "2026-11-01T01:32:00+01:00",
+            "aimedDepartureTime": "2026-11-01T01:32:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan via UNN"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:90641",
+              "name": "Sjømannsskolen",
+              "stopPlace": {
+                "id": "NSR:StopPlace:53223",
+                "name": "Sjømannsskolen"
+              }
+            }
+          },
+          {
+            "date": "2026-10-31",
+            "stopPositionInPattern": 3,
+            "aimedArrivalTime": "2026-11-01T01:33:00+01:00",
+            "aimedDepartureTime": "2026-11-01T01:33:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan via UNN"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:91643",
+              "name": "Kvamstykket",
+              "stopPlace": {
+                "id": "NSR:StopPlace:53751",
+                "name": "Kvamstykket"
+              }
+            }
+          },
+          {
+            "date": "2026-10-31",
+            "stopPositionInPattern": 4,
+            "aimedArrivalTime": "2026-11-01T01:33:00+01:00",
+            "aimedDepartureTime": "2026-11-01T01:33:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan via UNN"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:92996",
+              "name": "Storskogen",
+              "stopPlace": {
+                "id": "NSR:StopPlace:54464",
+                "name": "Storskogen"
+              }
+            }
+          },
+          {
+            "date": "2026-10-31",
+            "stopPositionInPattern": 5,
+            "aimedArrivalTime": "2026-11-01T01:34:00+01:00",
+            "aimedDepartureTime": "2026-11-01T01:34:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan via UNN"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:96824",
+              "name": "Nøysomheten",
+              "stopPlace": {
+                "id": "NSR:StopPlace:56488",
+                "name": "Nøysomheten"
+              }
+            }
+          },
+          {
+            "date": "2026-10-31",
+            "stopPositionInPattern": 6,
+            "aimedArrivalTime": "2026-11-01T01:35:00+01:00",
+            "aimedDepartureTime": "2026-11-01T01:35:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan via UNN"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:96579",
+              "name": "Doktordalen",
+              "stopPlace": {
+                "id": "NSR:StopPlace:56360",
+                "name": "Doktordalen"
+              }
+            }
+          },
+          {
+            "date": "2026-10-31",
+            "stopPositionInPattern": 7,
+            "aimedArrivalTime": "2026-11-01T01:35:00+01:00",
+            "aimedDepartureTime": "2026-11-01T01:35:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan via UNN"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:96097",
+              "name": "Grøholtvegen",
+              "stopPlace": {
+                "id": "NSR:StopPlace:56101",
+                "name": "Grøholtvegen"
+              }
+            }
+          },
+          {
+            "date": "2026-10-31",
+            "stopPositionInPattern": 8,
+            "aimedArrivalTime": "2026-11-01T01:36:00+01:00",
+            "aimedDepartureTime": "2026-11-01T01:36:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan via UNN"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:96030",
+              "name": "Templarheimen",
+              "stopPlace": {
+                "id": "NSR:StopPlace:56068",
+                "name": "Templarheimen"
+              }
+            }
+          },
+          {
+            "date": "2026-10-31",
+            "stopPositionInPattern": 9,
+            "aimedArrivalTime": "2026-11-01T01:37:00+01:00",
+            "aimedDepartureTime": "2026-11-01T01:37:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan via UNN"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:89983",
+              "name": "Veslefrikkvegen",
+              "stopPlace": {
+                "id": "NSR:StopPlace:52870",
+                "name": "Veslefrikkvegen"
+              }
+            }
+          },
+          {
+            "date": "2026-10-31",
+            "stopPositionInPattern": 10,
+            "aimedArrivalTime": "2026-11-01T01:38:00+01:00",
+            "aimedDepartureTime": "2026-11-01T01:38:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan via UNN"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:89269",
+              "name": "UiT/Planetariet",
+              "stopPlace": {
+                "id": "NSR:StopPlace:52491",
+                "name": "UiT/Planetariet"
+              }
+            }
+          },
+          {
+            "date": "2026-10-31",
+            "stopPositionInPattern": 11,
+            "aimedArrivalTime": "2026-11-01T01:39:00+01:00",
+            "aimedDepartureTime": "2026-11-01T01:39:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan via UNN"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:89264",
+              "name": "UiT",
+              "stopPlace": {
+                "id": "NSR:StopPlace:52488",
+                "name": "UiT"
+              }
+            }
+          },
+          {
+            "date": "2026-10-31",
+            "stopPositionInPattern": 12,
+            "aimedArrivalTime": "2026-11-01T01:39:00+01:00",
+            "aimedDepartureTime": "2026-11-01T01:39:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan via UNN"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:89251",
+              "name": "UNN",
+              "stopPlace": {
+                "id": "NSR:StopPlace:52482",
+                "name": "UNN"
+              }
+            }
+          },
+          {
+            "date": "2026-10-31",
+            "stopPositionInPattern": 13,
+            "aimedArrivalTime": "2026-11-01T01:40:00+01:00",
+            "aimedDepartureTime": "2026-11-01T01:40:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:95703",
+              "name": "Gimlevegen",
+              "stopPlace": {
+                "id": "NSR:StopPlace:55898",
+                "name": "Gimlevegen"
+              }
+            }
+          },
+          {
+            "date": "2026-10-31",
+            "stopPositionInPattern": 14,
+            "aimedArrivalTime": "2026-11-01T01:41:00+01:00",
+            "aimedDepartureTime": "2026-11-01T01:41:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:89507",
+              "name": "Vales veg",
+              "stopPlace": {
+                "id": "NSR:StopPlace:52616",
+                "name": "Vales veg"
+              }
+            }
+          },
+          {
+            "date": "2026-10-31",
+            "stopPositionInPattern": 15,
+            "aimedArrivalTime": "2026-11-01T01:41:00+01:00",
+            "aimedDepartureTime": "2026-11-01T01:41:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:94741",
+              "name": "Bakkehaugvegen",
+              "stopPlace": {
+                "id": "NSR:StopPlace:55385",
+                "name": "Bakkehaugvegen"
+              }
+            }
+          },
+          {
+            "date": "2026-10-31",
+            "stopPositionInPattern": 16,
+            "aimedArrivalTime": "2026-11-01T01:43:00+01:00",
+            "aimedDepartureTime": "2026-11-01T01:43:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:89395",
+              "name": "Utsikten",
+              "stopPlace": {
+                "id": "NSR:StopPlace:52558",
+                "name": "Utsikten"
+              }
+            }
+          },
+          {
+            "date": "2026-10-31",
+            "stopPositionInPattern": 17,
+            "aimedArrivalTime": "2026-11-01T01:43:00+01:00",
+            "aimedDepartureTime": "2026-11-01T01:43:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:91108",
+              "name": "Knausen",
+              "stopPlace": {
+                "id": "NSR:StopPlace:53468",
+                "name": "Knausen"
+              }
+            }
+          },
+          {
+            "date": "2026-10-31",
+            "stopPositionInPattern": 18,
+            "aimedArrivalTime": "2026-11-01T01:44:00+01:00",
+            "aimedDepartureTime": "2026-11-01T01:44:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:88762",
+              "name": "Rundvannet",
+              "stopPlace": {
+                "id": "NSR:StopPlace:52222",
+                "name": "Rundvannet"
+              }
+            }
+          },
+          {
+            "date": "2026-10-31",
+            "stopPositionInPattern": 19,
+            "aimedArrivalTime": "2026-11-01T01:44:00+01:00",
+            "aimedDepartureTime": "2026-11-01T01:44:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:92296",
+              "name": "Stakkevollan skole",
+              "stopPlace": {
+                "id": "NSR:StopPlace:54093",
+                "name": "Stakkevollan skole"
+              }
+            }
+          },
+          {
+            "date": "2026-10-31",
+            "stopPositionInPattern": 20,
+            "aimedArrivalTime": "2026-11-01T01:45:00+01:00",
+            "aimedDepartureTime": "2026-11-01T01:45:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:95925",
+              "name": "Brattbakken snuplass",
+              "stopPlace": {
+                "id": "NSR:StopPlace:56013",
+                "name": "Brattbakken snuplass"
+              }
+            }
+          },
+          {
+            "date": "2026-10-31",
+            "stopPositionInPattern": 21,
+            "aimedArrivalTime": "2026-11-01T01:45:00+01:00",
+            "aimedDepartureTime": "2026-11-01T01:45:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:89697",
+              "name": "Varden borettslag",
+              "stopPlace": {
+                "id": "NSR:StopPlace:52717",
+                "name": "Varden borettslag"
+              }
+            }
+          },
+          {
+            "date": "2026-10-31",
+            "stopPositionInPattern": 22,
+            "aimedArrivalTime": "2026-11-01T01:46:00+01:00",
+            "aimedDepartureTime": "2026-11-01T01:46:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:89702",
+              "name": "Varden",
+              "stopPlace": {
+                "id": "NSR:StopPlace:52720",
+                "name": "Varden"
+              }
+            }
+          },
+          {
+            "date": "2026-10-31",
+            "stopPositionInPattern": 23,
+            "aimedArrivalTime": "2026-11-01T01:47:00+01:00",
+            "aimedDepartureTime": "2026-11-01T01:47:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:89010",
+              "name": "Tunvegen vest",
+              "stopPlace": {
+                "id": "NSR:StopPlace:52357",
+                "name": "Tunvegen vest"
+              }
+            }
+          },
+          {
+            "date": "2026-10-31",
+            "stopPositionInPattern": 24,
+            "aimedArrivalTime": "2026-11-01T01:50:00+01:00",
+            "aimedDepartureTime": "2026-11-01T01:50:00+01:00",
+            "realtime": false,
+            "cancellation": false,
+            "destinationDisplay": {
+              "frontText": "Stakkevollan"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:90848",
+              "name": "Skattøra Borettslag",
+              "stopPlace": {
+                "id": "NSR:StopPlace:53331",
+                "name": "Skattøra Borettslag"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

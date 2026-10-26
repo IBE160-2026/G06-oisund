@@ -1,0 +1,126 @@
+[
+  {
+    "headers": {
+      "X-GUploader-UploadID": [
+        "AP6rU82Fc78OLcqb2rtJkYwPdLb_Nv_D4Ql5HfphEly_93_gL3W11AxCx9qYFbgzyJaCtLpI"
+      ],
+      "Date": [
+        "Mon, 26 Oct 2026 08:50:46 GMT"
+      ],
+      "Cache-Control": [
+        "public, max-age=3600"
+      ],
+      "ETag": [
+        "\"83cab1b024dea1b1399c3ef93c2851e9\""
+      ],
+      "x-goog-generation": [
+        "1792970837742987"
+      ],
+      "x-goog-metageneration": [
+        "1"
+      ],
+      "x-goog-stored-content-encoding": [
+        "identity"
+      ],
+      "x-goog-stored-content-length": [
+        "7718133"
+      ],
+      "x-goog-hash": [
+        "crc32c=YMt1dg==",
+        "md5=g8qxsCTeobE5nD75PChR6Q=="
+      ],
+      "x-goog-storage-class": [
+        "STANDARD"
+      ],
+      "Accept-Ranges": [
+        "bytes"
+      ],
+      "Server": [
+        "UploadServer"
+      ],
+      "Alt-Svc": [
+        "h3=\":443\"; ma=2592000",
+        "h3-29=\":443\"; ma=2592000"
+      ],
+      "Content-Type": [
+        "application/octet-stream"
+      ],
+      "Expires": [
+        "Mon, 26 Oct 2026 09:50:46 GMT"
+      ],
+      "Last-Modified": [
+        "Sun, 25 Oct 2026 23:27:17 GMT"
+      ],
+      "Content-Length": [
+        "7718133"
+      ]
+    },
+    "format": "netex",
+    "method": "HEAD",
+    "status": 200,
+    "url": "https://storage.googleapis.com/marduk-production/outbound/netex/rb_tro-aggregated-netex.zip",
+    "accessed": "2026-10-26T08:50:47.8055941Z"
+  },
+  {
+    "headers": {
+      "X-GUploader-UploadID": [
+        "AP6rU83GA2a1E9mJWSXsel1wAce7BFP8wOnW8hZ5JEsrL6ZsFNAlyLnTbLULGrx-uKydiI2m"
+      ],
+      "Date": [
+        "Mon, 26 Oct 2026 08:50:46 GMT"
+      ],
+      "Cache-Control": [
+        "public, max-age=3600"
+      ],
+      "ETag": [
+        "\"45c0ca5cc2f4f7a3a406ea5afc0aa1f7\""
+      ],
+      "x-goog-generation": [
+        "1792970875012487"
+      ],
+      "x-goog-metageneration": [
+        "1"
+      ],
+      "x-goog-stored-content-encoding": [
+        "identity"
+      ],
+      "x-goog-stored-content-length": [
+        "14346274"
+      ],
+      "x-goog-hash": [
+        "crc32c=bUXSbA==",
+        "md5=RcDKXML096OkBupa/Aqh9w=="
+      ],
+      "x-goog-storage-class": [
+        "STANDARD"
+      ],
+      "Accept-Ranges": [
+        "bytes"
+      ],
+      "Server": [
+        "UploadServer"
+      ],
+      "Alt-Svc": [
+        "h3=\":443\"; ma=2592000",
+        "h3-29=\":443\"; ma=2592000"
+      ],
+      "Content-Type": [
+        "application/octet-stream"
+      ],
+      "Expires": [
+        "Mon, 26 Oct 2026 09:50:46 GMT"
+      ],
+      "Last-Modified": [
+        "Sun, 25 Oct 2026 23:27:55 GMT"
+      ],
+      "Content-Length": [
+        "14346274"
+      ]
+    },
+    "format": "gtfs",
+    "method": "HEAD",
+    "status": 200,
+    "url": "https://storage.googleapis.com/marduk-production/outbound/gtfs/rb_tro-aggregated-gtfs.zip",
+    "accessed": "2026-10-26T08:50:47.9841400Z"
+  }
+]

@@ -1,0 +1,1 @@
+{ authorities { id name } __type(name:"DatedServiceJourney") { fields { name args { name type { kind name ofType { name } } } type { kind name ofType { name } } } } }

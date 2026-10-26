@@ -1,0 +1,1 @@
+{ __type(name:"Line") { fields { name description args { name } type { kind name ofType { name } } } } }

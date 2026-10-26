@@ -1,0 +1,471 @@
+{
+  "accessed_utc": "2026-10-26T08:48:11.833687+00:00",
+  "url": "https://api.entur.io/journey-planner/v3/graphql",
+  "method": "POST",
+  "query": "{ nightDST:serviceJourney(id:\"TRO:ServiceJourney:20_260918105162575_6600\") { estimatedCalls(date:\"2026-10-24\") { date stopPositionInPattern aimedDepartureTime destinationDisplay { frontText } scheduledQuay { id name } } } wrongDay:serviceJourney(id:\"TRO:ServiceJourney:20_260918105162575_6600\") { estimatedCalls(date:\"2026-10-26\") { date stopPositionInPattern aimedDepartureTime } } __type(name:\"TimetabledPassingTime\") { fields { name type { kind name ofType { name } } } } }\n",
+  "client": "ibe160-complete-route-network-research",
+  "status": 200,
+  "headers": {
+    "access-control-allow-credentials": "false",
+    "Content-Length": "6622",
+    "content-type": "application/json",
+    "date": "Mon, 26 Oct 2026 08:48:10 GMT",
+    "vary": "Accept, Accept-Encoding, Accept-Language",
+    "x-correlation-id": "a6ea52f2-1886-43f7-996b-857e6f268e18",
+    "alt-svc": "h3=\":443\"; ma=2592000",
+    "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+    "pragma": "no-cache",
+    "expires": "0",
+    "x-content-type-options": "nosniff",
+    "strict-transport-security": "max-age=31536000; includeSubDomains",
+    "x-frame-options": "DENY",
+    "x-xss-protection": "1; mode=block",
+    "x-robots-tag": "none",
+    "rate-limit-allowed": "2000",
+    "rate-limit-used": "5",
+    "rate-limit-available": "1995",
+    "rate-limit-range": "PT2M",
+    "rate-limit-expiry-time": "Mon Oct 26 2026 08:48:32 GMT-0000 (GMT)",
+    "access-control-allow-origin": "*",
+    "access-control-allow-headers": "origin, x-requested-with, accept, ET-Client-Name, ET-Client-Id, Content-Type, X-Correlation-Id, entur-pos",
+    "access-control-max-age": "3628800",
+    "access-control-allow-methods": "GET, PUT, POST, DELETE",
+    "x-request-id": "97ba10ff-efb2-4b6b-ba94-adb0f31f4215",
+    "via": "1.1 google",
+    "Alt-Svc": "h3=\":443\"; ma=2592000",
+    "Connection": "close"
+  },
+  "body": {
+    "data": {
+      "nightDST": {
+        "estimatedCalls": [
+          {
+            "date": "2026-10-24",
+            "stopPositionInPattern": 0,
+            "aimedDepartureTime": "2026-10-25T01:30:00+02:00",
+            "destinationDisplay": {
+              "frontText": "Stakkevollan via UNN"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:95300",
+              "name": "Fr. Langes gate"
+            }
+          },
+          {
+            "date": "2026-10-24",
+            "stopPositionInPattern": 1,
+            "aimedDepartureTime": "2026-10-25T01:31:00+02:00",
+            "destinationDisplay": {
+              "frontText": "Stakkevollan via UNN"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:97022",
+              "name": "Petersborggata"
+            }
+          },
+          {
+            "date": "2026-10-24",
+            "stopPositionInPattern": 2,
+            "aimedDepartureTime": "2026-10-25T01:32:00+02:00",
+            "destinationDisplay": {
+              "frontText": "Stakkevollan via UNN"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:90641",
+              "name": "Sjømannsskolen"
+            }
+          },
+          {
+            "date": "2026-10-24",
+            "stopPositionInPattern": 3,
+            "aimedDepartureTime": "2026-10-25T01:33:00+02:00",
+            "destinationDisplay": {
+              "frontText": "Stakkevollan via UNN"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:91643",
+              "name": "Kvamstykket"
+            }
+          },
+          {
+            "date": "2026-10-24",
+            "stopPositionInPattern": 4,
+            "aimedDepartureTime": "2026-10-25T01:33:00+02:00",
+            "destinationDisplay": {
+              "frontText": "Stakkevollan via UNN"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:92996",
+              "name": "Storskogen"
+            }
+          },
+          {
+            "date": "2026-10-24",
+            "stopPositionInPattern": 5,
+            "aimedDepartureTime": "2026-10-25T01:34:00+02:00",
+            "destinationDisplay": {
+              "frontText": "Stakkevollan via UNN"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:96824",
+              "name": "Nøysomheten"
+            }
+          },
+          {
+            "date": "2026-10-24",
+            "stopPositionInPattern": 6,
+            "aimedDepartureTime": "2026-10-25T01:35:00+02:00",
+            "destinationDisplay": {
+              "frontText": "Stakkevollan via UNN"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:96579",
+              "name": "Doktordalen"
+            }
+          },
+          {
+            "date": "2026-10-24",
+            "stopPositionInPattern": 7,
+            "aimedDepartureTime": "2026-10-25T01:35:00+02:00",
+            "destinationDisplay": {
+              "frontText": "Stakkevollan via UNN"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:96097",
+              "name": "Grøholtvegen"
+            }
+          },
+          {
+            "date": "2026-10-24",
+            "stopPositionInPattern": 8,
+            "aimedDepartureTime": "2026-10-25T01:36:00+02:00",
+            "destinationDisplay": {
+              "frontText": "Stakkevollan via UNN"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:96030",
+              "name": "Templarheimen"
+            }
+          },
+          {
+            "date": "2026-10-24",
+            "stopPositionInPattern": 9,
+            "aimedDepartureTime": "2026-10-25T01:37:00+02:00",
+            "destinationDisplay": {
+              "frontText": "Stakkevollan via UNN"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:89983",
+              "name": "Veslefrikkvegen"
+            }
+          },
+          {
+            "date": "2026-10-24",
+            "stopPositionInPattern": 10,
+            "aimedDepartureTime": "2026-10-25T01:38:00+02:00",
+            "destinationDisplay": {
+              "frontText": "Stakkevollan via UNN"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:89269",
+              "name": "UiT/Planetariet"
+            }
+          },
+          {
+            "date": "2026-10-24",
+            "stopPositionInPattern": 11,
+            "aimedDepartureTime": "2026-10-25T01:39:00+02:00",
+            "destinationDisplay": {
+              "frontText": "Stakkevollan via UNN"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:89264",
+              "name": "UiT"
+            }
+          },
+          {
+            "date": "2026-10-24",
+            "stopPositionInPattern": 12,
+            "aimedDepartureTime": "2026-10-25T01:39:00+02:00",
+            "destinationDisplay": {
+              "frontText": "Stakkevollan via UNN"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:89251",
+              "name": "UNN"
+            }
+          },
+          {
+            "date": "2026-10-24",
+            "stopPositionInPattern": 13,
+            "aimedDepartureTime": "2026-10-25T01:40:00+02:00",
+            "destinationDisplay": {
+              "frontText": "Stakkevollan"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:95703",
+              "name": "Gimlevegen"
+            }
+          },
+          {
+            "date": "2026-10-24",
+            "stopPositionInPattern": 14,
+            "aimedDepartureTime": "2026-10-25T01:41:00+02:00",
+            "destinationDisplay": {
+              "frontText": "Stakkevollan"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:89507",
+              "name": "Vales veg"
+            }
+          },
+          {
+            "date": "2026-10-24",
+            "stopPositionInPattern": 15,
+            "aimedDepartureTime": "2026-10-25T01:41:00+02:00",
+            "destinationDisplay": {
+              "frontText": "Stakkevollan"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:94741",
+              "name": "Bakkehaugvegen"
+            }
+          },
+          {
+            "date": "2026-10-24",
+            "stopPositionInPattern": 16,
+            "aimedDepartureTime": "2026-10-25T01:43:00+02:00",
+            "destinationDisplay": {
+              "frontText": "Stakkevollan"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:89395",
+              "name": "Utsikten"
+            }
+          },
+          {
+            "date": "2026-10-24",
+            "stopPositionInPattern": 17,
+            "aimedDepartureTime": "2026-10-25T01:43:00+02:00",
+            "destinationDisplay": {
+              "frontText": "Stakkevollan"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:91108",
+              "name": "Knausen"
+            }
+          },
+          {
+            "date": "2026-10-24",
+            "stopPositionInPattern": 18,
+            "aimedDepartureTime": "2026-10-25T01:44:00+02:00",
+            "destinationDisplay": {
+              "frontText": "Stakkevollan"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:88762",
+              "name": "Rundvannet"
+            }
+          },
+          {
+            "date": "2026-10-24",
+            "stopPositionInPattern": 19,
+            "aimedDepartureTime": "2026-10-25T01:44:00+02:00",
+            "destinationDisplay": {
+              "frontText": "Stakkevollan"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:92296",
+              "name": "Stakkevollan skole"
+            }
+          },
+          {
+            "date": "2026-10-24",
+            "stopPositionInPattern": 20,
+            "aimedDepartureTime": "2026-10-25T01:45:00+02:00",
+            "destinationDisplay": {
+              "frontText": "Stakkevollan"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:95925",
+              "name": "Brattbakken snuplass"
+            }
+          },
+          {
+            "date": "2026-10-24",
+            "stopPositionInPattern": 21,
+            "aimedDepartureTime": "2026-10-25T01:45:00+02:00",
+            "destinationDisplay": {
+              "frontText": "Stakkevollan"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:89697",
+              "name": "Varden borettslag"
+            }
+          },
+          {
+            "date": "2026-10-24",
+            "stopPositionInPattern": 22,
+            "aimedDepartureTime": "2026-10-25T01:46:00+02:00",
+            "destinationDisplay": {
+              "frontText": "Stakkevollan"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:89702",
+              "name": "Varden"
+            }
+          },
+          {
+            "date": "2026-10-24",
+            "stopPositionInPattern": 23,
+            "aimedDepartureTime": "2026-10-25T01:47:00+02:00",
+            "destinationDisplay": {
+              "frontText": "Stakkevollan"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:89010",
+              "name": "Tunvegen vest"
+            }
+          },
+          {
+            "date": "2026-10-24",
+            "stopPositionInPattern": 24,
+            "aimedDepartureTime": "2026-10-25T01:50:00+02:00",
+            "destinationDisplay": {
+              "frontText": "Stakkevollan"
+            },
+            "scheduledQuay": {
+              "id": "NSR:Quay:90848",
+              "name": "Skattøra Borettslag"
+            }
+          }
+        ]
+      },
+      "wrongDay": {
+        "estimatedCalls": []
+      },
+      "__type": {
+        "fields": [
+          {
+            "name": "quay",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "name": "Quay"
+              }
+            }
+          },
+          {
+            "name": "arrival",
+            "type": {
+              "kind": "OBJECT",
+              "name": "TimeAndDayOffset",
+              "ofType": null
+            }
+          },
+          {
+            "name": "departure",
+            "type": {
+              "kind": "OBJECT",
+              "name": "TimeAndDayOffset",
+              "ofType": null
+            }
+          },
+          {
+            "name": "timingPoint",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "name": "Boolean"
+              }
+            }
+          },
+          {
+            "name": "forBoarding",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "name": "Boolean"
+              }
+            }
+          },
+          {
+            "name": "forAlighting",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "name": "Boolean"
+              }
+            }
+          },
+          {
+            "name": "requestStop",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "name": "Boolean"
+              }
+            }
+          },
+          {
+            "name": "earliestDepartureTime",
+            "type": {
+              "kind": "OBJECT",
+              "name": "TimeAndDayOffset",
+              "ofType": null
+            }
+          },
+          {
+            "name": "latestArrivalTime",
+            "type": {
+              "kind": "OBJECT",
+              "name": "TimeAndDayOffset",
+              "ofType": null
+            }
+          },
+          {
+            "name": "serviceJourney",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "name": "ServiceJourney"
+              }
+            }
+          },
+          {
+            "name": "destinationDisplay",
+            "type": {
+              "kind": "OBJECT",
+              "name": "DestinationDisplay",
+              "ofType": null
+            }
+          },
+          {
+            "name": "notices",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "name": null
+              }
+            }
+          },
+          {
+            "name": "bookingArrangements",
+            "type": {
+              "kind": "OBJECT",
+              "name": "BookingArrangement",
+              "ofType": null
+            }
+          }
+        ]
+      }
+    }
+  }
+}

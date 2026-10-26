@@ -1,0 +1,1 @@
+{ datedServiceJourneys(lines:["TRO:Line:1_20","TRO:Line:1_42"],operatingDays:["2026-10-26"]) { id operatingDay serviceJourney { id publicCode privateCode directionType line { id publicCode } quays(first:1) { id name } lastQuay:quays(last:1) { id name } } } __type(name:"EstimatedCall") { fields { name type { kind name ofType { name } } } } }

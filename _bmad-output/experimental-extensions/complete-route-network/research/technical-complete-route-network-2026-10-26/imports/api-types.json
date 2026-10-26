@@ -1,0 +1,48 @@
+{
+  "accessed_utc": "2026-10-26T08:45:08.235588+00:00",
+  "url": "https://api.entur.io/journey-planner/v3/graphql",
+  "method": "POST",
+  "query": "{ authorities { id name } transitInfo { startOfService endOfService } __type(name:\"Line\") { fields { name args { name } type { kind name ofType { name } } } } __type2:__type(name:\"DatedServiceJourney\") { fields { name args { name type { kind name ofType { name } } } type { kind name ofType { name } } } } }\n",
+  "client": "ibe160-complete-route-network-research",
+  "status": 200,
+  "headers": {
+    "access-control-allow-credentials": "false",
+    "Content-Length": "182",
+    "content-type": "application/json",
+    "date": "Mon, 26 Oct 2026 08:45:07 GMT",
+    "vary": "Accept, Accept-Encoding, Accept-Language",
+    "x-correlation-id": "eeb9b6ce-4ea6-45d9-b574-0486b90c0784",
+    "alt-svc": "h3=\":443\"; ma=2592000",
+    "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+    "pragma": "no-cache",
+    "expires": "0",
+    "x-content-type-options": "nosniff",
+    "strict-transport-security": "max-age=31536000; includeSubDomains",
+    "x-frame-options": "DENY",
+    "x-xss-protection": "1; mode=block",
+    "x-robots-tag": "none",
+    "rate-limit-allowed": "2000",
+    "rate-limit-used": "2",
+    "rate-limit-available": "1998",
+    "rate-limit-range": "PT2M",
+    "rate-limit-expiry-time": "Mon Oct 26 2026 08:46:32 GMT-0000 (GMT)",
+    "access-control-allow-origin": "*",
+    "access-control-allow-headers": "origin, x-requested-with, accept, ET-Client-Name, ET-Client-Id, Content-Type, X-Correlation-Id, entur-pos",
+    "access-control-max-age": "3628800",
+    "access-control-allow-methods": "GET, PUT, POST, DELETE",
+    "x-request-id": "3e746207-6d77-44e2-9eb8-cc486fa61145",
+    "via": "1.1 google",
+    "Alt-Svc": "h3=\":443\"; ma=2592000",
+    "Connection": "close"
+  },
+  "body": {
+    "errors": [
+      {
+        "message": "This request is not asking for introspection in good faith - QueryType.__type is present too often!",
+        "extensions": {
+          "classification": "BadFaithIntrospection"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,1 @@
+{ serviceJourney(id:"TRO:ServiceJourney:20_260918105162575_6600") { id passingTimes { departure { time dayOffset } quay { id name } } } }

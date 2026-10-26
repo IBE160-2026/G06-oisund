@@ -1,0 +1,297 @@
+{
+  "accessed_utc": "2026-10-26T08:49:47.431562+00:00",
+  "url": "https://api.entur.io/journey-planner/v3/graphql",
+  "method": "POST",
+  "query": "{ serviceJourney(id:\"TRO:ServiceJourney:20_260918105162575_6600\") { id passingTimes { departure { time dayOffset } quay { id name } } } }\n",
+  "client": "ibe160-complete-route-network-research",
+  "status": 200,
+  "headers": {
+    "access-control-allow-credentials": "false",
+    "Content-Length": "2623",
+    "content-type": "application/json",
+    "date": "Mon, 26 Oct 2026 08:49:46 GMT",
+    "vary": "Accept, Accept-Encoding, Accept-Language",
+    "x-correlation-id": "139f2696-eecc-4944-80d7-8312ce63aace",
+    "alt-svc": "h3=\":443\"; ma=2592000",
+    "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+    "pragma": "no-cache",
+    "expires": "0",
+    "x-content-type-options": "nosniff",
+    "strict-transport-security": "max-age=31536000; includeSubDomains",
+    "x-frame-options": "DENY",
+    "x-xss-protection": "1; mode=block",
+    "x-robots-tag": "none",
+    "rate-limit-allowed": "2000",
+    "rate-limit-used": "1",
+    "rate-limit-available": "1999",
+    "rate-limit-range": "PT2M",
+    "rate-limit-expiry-time": "Mon Oct 26 2026 08:51:46 GMT-0000 (GMT)",
+    "access-control-allow-origin": "*",
+    "access-control-allow-headers": "origin, x-requested-with, accept, ET-Client-Name, ET-Client-Id, Content-Type, X-Correlation-Id, entur-pos",
+    "access-control-max-age": "3628800",
+    "access-control-allow-methods": "GET, PUT, POST, DELETE",
+    "x-request-id": "1f162572-2ad3-4c60-abb3-cf0dde784caf",
+    "via": "1.1 google",
+    "Alt-Svc": "h3=\":443\"; ma=2592000",
+    "Connection": "close"
+  },
+  "body": {
+    "data": {
+      "serviceJourney": {
+        "id": "TRO:ServiceJourney:20_260918105162575_6600",
+        "passingTimes": [
+          {
+            "departure": {
+              "time": "01:30:00",
+              "dayOffset": 1
+            },
+            "quay": {
+              "id": "NSR:Quay:95300",
+              "name": "Fr. Langes gate"
+            }
+          },
+          {
+            "departure": {
+              "time": "01:31:00",
+              "dayOffset": 1
+            },
+            "quay": {
+              "id": "NSR:Quay:97022",
+              "name": "Petersborggata"
+            }
+          },
+          {
+            "departure": {
+              "time": "01:32:00",
+              "dayOffset": 1
+            },
+            "quay": {
+              "id": "NSR:Quay:90641",
+              "name": "Sjømannsskolen"
+            }
+          },
+          {
+            "departure": {
+              "time": "01:33:00",
+              "dayOffset": 1
+            },
+            "quay": {
+              "id": "NSR:Quay:91643",
+              "name": "Kvamstykket"
+            }
+          },
+          {
+            "departure": {
+              "time": "01:33:00",
+              "dayOffset": 1
+            },
+            "quay": {
+              "id": "NSR:Quay:92996",
+              "name": "Storskogen"
+            }
+          },
+          {
+            "departure": {
+              "time": "01:34:00",
+              "dayOffset": 1
+            },
+            "quay": {
+              "id": "NSR:Quay:96824",
+              "name": "Nøysomheten"
+            }
+          },
+          {
+            "departure": {
+              "time": "01:35:00",
+              "dayOffset": 1
+            },
+            "quay": {
+              "id": "NSR:Quay:96579",
+              "name": "Doktordalen"
+            }
+          },
+          {
+            "departure": {
+              "time": "01:35:00",
+              "dayOffset": 1
+            },
+            "quay": {
+              "id": "NSR:Quay:96097",
+              "name": "Grøholtvegen"
+            }
+          },
+          {
+            "departure": {
+              "time": "01:36:00",
+              "dayOffset": 1
+            },
+            "quay": {
+              "id": "NSR:Quay:96030",
+              "name": "Templarheimen"
+            }
+          },
+          {
+            "departure": {
+              "time": "01:37:00",
+              "dayOffset": 1
+            },
+            "quay": {
+              "id": "NSR:Quay:89983",
+              "name": "Veslefrikkvegen"
+            }
+          },
+          {
+            "departure": {
+              "time": "01:38:00",
+              "dayOffset": 1
+            },
+            "quay": {
+              "id": "NSR:Quay:89269",
+              "name": "UiT/Planetariet"
+            }
+          },
+          {
+            "departure": {
+              "time": "01:39:00",
+              "dayOffset": 1
+            },
+            "quay": {
+              "id": "NSR:Quay:89264",
+              "name": "UiT"
+            }
+          },
+          {
+            "departure": {
+              "time": "01:39:00",
+              "dayOffset": 1
+            },
+            "quay": {
+              "id": "NSR:Quay:89251",
+              "name": "UNN"
+            }
+          },
+          {
+            "departure": {
+              "time": "01:40:00",
+              "dayOffset": 1
+            },
+            "quay": {
+              "id": "NSR:Quay:95703",
+              "name": "Gimlevegen"
+            }
+          },
+          {
+            "departure": {
+              "time": "01:41:00",
+              "dayOffset": 1
+            },
+            "quay": {
+              "id": "NSR:Quay:89507",
+              "name": "Vales veg"
+            }
+          },
+          {
+            "departure": {
+              "time": "01:41:00",
+              "dayOffset": 1
+            },
+            "quay": {
+              "id": "NSR:Quay:94741",
+              "name": "Bakkehaugvegen"
+            }
+          },
+          {
+            "departure": {
+              "time": "01:43:00",
+              "dayOffset": 1
+            },
+            "quay": {
+              "id": "NSR:Quay:89395",
+              "name": "Utsikten"
+            }
+          },
+          {
+            "departure": {
+              "time": "01:43:00",
+              "dayOffset": 1
+            },
+            "quay": {
+              "id": "NSR:Quay:91108",
+              "name": "Knausen"
+            }
+          },
+          {
+            "departure": {
+              "time": "01:44:00",
+              "dayOffset": 1
+            },
+            "quay": {
+              "id": "NSR:Quay:88762",
+              "name": "Rundvannet"
+            }
+          },
+          {
+            "departure": {
+              "time": "01:44:00",
+              "dayOffset": 1
+            },
+            "quay": {
+              "id": "NSR:Quay:92296",
+              "name": "Stakkevollan skole"
+            }
+          },
+          {
+            "departure": {
+              "time": "01:45:00",
+              "dayOffset": 1
+            },
+            "quay": {
+              "id": "NSR:Quay:95925",
+              "name": "Brattbakken snuplass"
+            }
+          },
+          {
+            "departure": {
+              "time": "01:45:00",
+              "dayOffset": 1
+            },
+            "quay": {
+              "id": "NSR:Quay:89697",
+              "name": "Varden borettslag"
+            }
+          },
+          {
+            "departure": {
+              "time": "01:46:00",
+              "dayOffset": 1
+            },
+            "quay": {
+              "id": "NSR:Quay:89702",
+              "name": "Varden"
+            }
+          },
+          {
+            "departure": {
+              "time": "01:47:00",
+              "dayOffset": 1
+            },
+            "quay": {
+              "id": "NSR:Quay:89010",
+              "name": "Tunvegen vest"
+            }
+          },
+          {
+            "departure": {
+              "time": "01:50:00",
+              "dayOffset": 1
+            },
+            "quay": {
+              "id": "NSR:Quay:90848",
+              "name": "Skattøra Borettslag"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

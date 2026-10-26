@@ -1,0 +1,69 @@
+{
+  "validation_kind": "spec-document-only",
+  "checks": {
+    "exact_workspace": true,
+    "draft_not_approved": true,
+    "five_core_fields": true,
+    "seven_unique_stable_caps": true,
+    "intent_and_success_each": true,
+    "all_referenced_paths_exist": true,
+    "nine_companions_one_absorbed_source": true,
+    "no_process_metadata_in_frontmatter": true,
+    "experimental_marker_all_authored": true,
+    "kernel_has_no_diagrams_or_template_comments": true,
+    "no_story_breakdown": true,
+    "no_implementation_artifacts": true
+  },
+  "referenced_paths": [
+    {
+      "path": "coverage.md",
+      "exists": true
+    },
+    {
+      "path": "matching.md",
+      "exists": true
+    },
+    {
+      "path": "data-contract.md",
+      "exists": true
+    },
+    {
+      "path": "qualification.md",
+      "exists": true
+    },
+    {
+      "path": "decisions.md",
+      "exists": true
+    },
+    {
+      "path": "../../research/technical-complete-route-network-2026-10-26/research.md",
+      "exists": true
+    },
+    {
+      "path": "../../../../planning-artifacts/architecture/architecture-IBE160-2026-09-23/ARCHITECTURE-SPINE.md",
+      "exists": true
+    },
+    {
+      "path": "../../../../planning-artifacts/ux-designs/ux-IBE160-2026-09-22/DESIGN.md",
+      "exists": true
+    },
+    {
+      "path": "../../../../planning-artifacts/ux-designs/ux-IBE160-2026-09-22/EXPERIENCE.md",
+      "exists": true
+    },
+    {
+      "path": "../../scope.md",
+      "exists": true
+    }
+  ],
+  "capability_ids": [
+    "CAP-1",
+    "CAP-2",
+    "CAP-3",
+    "CAP-4",
+    "CAP-5",
+    "CAP-6",
+    "CAP-7"
+  ],
+  "ok": true
+}

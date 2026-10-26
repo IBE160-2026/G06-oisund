@@ -1,0 +1,62 @@
+[
+  {
+    "claim": "[1] Entur documents richer NeTEx than derived GTFS and upload/nightly exports with48h history trim; single publisher.",
+    "class": "landscape",
+    "pub_date": "2026-05-21"
+  },
+  {
+    "claim": "[2] Point-to-point journey planning filters alternatives; cannot establish complete catalogue from travel suggestions.",
+    "class": "patterns",
+    "pub_date": "2026-06-08"
+  },
+  {
+    "claim": "[3] GTFS and independent Nordic model distinguish service date, ordered repeated occurrences and geometry.",
+    "class": "patterns",
+    "pub_date": "2026-04-27"
+  },
+  {
+    "claim": "[4] Live line20 returned799 templates,136 active2026-10-26; selected calls expose dates/IDs, but completeness unverified.",
+    "class": "live-observation",
+    "pub_date": "2026-10-26"
+  },
+  {
+    "claim": "[5] Svipper PDF20 weekday Malmvegen05:16 to Skattora06:09 agrees with independently sourced live Entur sample endpoints/aimed times only.",
+    "class": "live-observation",
+    "pub_date": "2026-10-26"
+  },
+  {
+    "claim": "[7] PrivateCode may hold planner trip number but no shift-to-public crosswalk was established.",
+    "class": "patterns",
+    "pub_date": "2026-09-23"
+  },
+  {
+    "claim": "[9] Official UI links for Troms NeTEx and GTFS resolve and HEAD200; no ZIP contents parsed.",
+    "class": "live-observation",
+    "pub_date": "2026-10-26"
+  },
+  {
+    "claim": "[13] Live TRO original import timestamp2026-10-23 differs from archive generation2026-10-25; body timezone unspecified.",
+    "class": "live-observation",
+    "pub_date": "2026-10-26"
+  },
+  {
+    "claim": "[14] NSR provides separate StopPlace/Quay and current/future/historic version exports; no permanence guarantee inferred.",
+    "class": "landscape",
+    "pub_date": "2026-05-21"
+  },
+  {
+    "claim": "[17] Nordic noon-reference DST rule independently corroborates GTFS need for service-day axis; not proof of all producer encodings.",
+    "class": "patterns",
+    "pub_date": "2025-11-05"
+  },
+  {
+    "claim": "[22] Entur lists TRO SIRI SX but blank GTFS-RT alerts; default SIRI identifiers map to static data.",
+    "class": "versions-compatibility",
+    "pub_date": "2026-08-31"
+  },
+  {
+    "claim": "[23] SIRI SX supports broad and dated journey selectors; actual TRO message association not probed.",
+    "class": "patterns",
+    "pub_date": "2024-12-02"
+  }
+]

@@ -1,0 +1,491 @@
+{
+  "accessed_utc": "2026-10-26T08:45:26.094518+00:00",
+  "url": "https://api.entur.io/journey-planner/v3/graphql",
+  "method": "POST",
+  "query": "{ authorities { id name } __type(name:\"DatedServiceJourney\") { fields { name args { name type { kind name ofType { name } } } type { kind name ofType { name } } } } }\n",
+  "client": "ibe160-complete-route-network-research",
+  "status": 200,
+  "headers": {
+    "access-control-allow-credentials": "false",
+    "Content-Length": "5092",
+    "content-type": "application/json",
+    "date": "Mon, 26 Oct 2026 08:45:24 GMT",
+    "vary": "Accept, Accept-Encoding, Accept-Language",
+    "x-correlation-id": "c5ecbddd-01cb-4fd3-a6db-4e5da6acd40c",
+    "alt-svc": "h3=\":443\"; ma=2592000",
+    "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+    "pragma": "no-cache",
+    "expires": "0",
+    "x-content-type-options": "nosniff",
+    "strict-transport-security": "max-age=31536000; includeSubDomains",
+    "x-frame-options": "DENY",
+    "x-xss-protection": "1; mode=block",
+    "x-robots-tag": "none",
+    "rate-limit-allowed": "2000",
+    "rate-limit-used": "3",
+    "rate-limit-available": "1997",
+    "rate-limit-range": "PT2M",
+    "rate-limit-expiry-time": "Mon Oct 26 2026 08:46:32 GMT-0000 (GMT)",
+    "access-control-allow-origin": "*",
+    "access-control-allow-headers": "origin, x-requested-with, accept, ET-Client-Name, ET-Client-Id, Content-Type, X-Correlation-Id, entur-pos",
+    "access-control-max-age": "3628800",
+    "access-control-allow-methods": "GET, PUT, POST, DELETE",
+    "x-request-id": "a1924cba-9b78-4506-895e-ce4dfa62c90d",
+    "via": "1.1 google",
+    "Alt-Svc": "h3=\":443\"; ma=2592000",
+    "Connection": "close"
+  },
+  "body": {
+    "data": {
+      "authorities": [
+        {
+          "id": "GOA:Authority:GOA",
+          "name": "Go-Ahead Norge AS"
+        },
+        {
+          "id": "INN:Authority:INN_ID",
+          "name": "Innlandstrafikk"
+        },
+        {
+          "id": "MOR:Authority:AM008",
+          "name": "AMBU Pendlerrute"
+        },
+        {
+          "id": "NBU:Authority:002",
+          "name": "Flybussen Connect"
+        },
+        {
+          "id": "FJL:Authority:FJL",
+          "name": "Fjord Line"
+        },
+        {
+          "id": "BLI:Authority:1",
+          "name": "Blindleia Charter"
+        },
+        {
+          "id": "GOF:Authority:1",
+          "name": "Go Fjords"
+        },
+        {
+          "id": "HAV:Authority:999523587",
+          "name": "Havila"
+        },
+        {
+          "id": "MOR:Authority:MOR",
+          "name": "FRAM"
+        },
+        {
+          "id": "SOF:Authority:1",
+          "name": "Skyss"
+        },
+        {
+          "id": "SKY:Authority:SKY",
+          "name": "Skyss"
+        },
+        {
+          "id": "VYG:Authority:FLB",
+          "name": "Vy"
+        },
+        {
+          "id": "VYX:Authority:JVB",
+          "name": "Jotunheimen og Valdresruten Bilselskap"
+        },
+        {
+          "id": "TID:Authority:TID",
+          "name": "Tide AS"
+        },
+        {
+          "id": "VYB:Authority:1",
+          "name": "VY Bus4You"
+        },
+        {
+          "id": "FTR:Authority:1",
+          "name": "Flåm Travel"
+        },
+        {
+          "id": "SNT:Authority:52a66664-3548-5ce8-9ddc-a95c68fc4962",
+          "name": "Snälltåget"
+        },
+        {
+          "id": "HYK:Authority:1",
+          "name": "Hyke"
+        },
+        {
+          "id": "ATU:Authority:1",
+          "name": "Ålesund Turvogn Service"
+        },
+        {
+          "id": "SOF:Authority:17",
+          "name": "Skyss"
+        },
+        {
+          "id": "SJV:Authority:SJV",
+          "name": "SJ"
+        },
+        {
+          "id": "VYS:Authority:513",
+          "name": "Norrtåg"
+        },
+        {
+          "id": "TEL:Authority:TFK_ID",
+          "name": "Farte"
+        },
+        {
+          "id": "HAF:Authority:1",
+          "name": "Alpinco"
+        },
+        {
+          "id": "NWM:Authority:1",
+          "name": "Norway's best"
+        },
+        {
+          "id": "NWB:Authority:1",
+          "name": "Norway's best"
+        },
+        {
+          "id": "NYC:Authority:1",
+          "name": "Bygdøyfergen"
+        },
+        {
+          "id": "BAR:Authority:1",
+          "name": "Best Arctic Group"
+        },
+        {
+          "id": "TRO:Authority:1",
+          "name": "Svipper"
+        },
+        {
+          "id": "TFJ:Authority:1",
+          "name": "The Fjords"
+        },
+        {
+          "id": "VYX:Authority:1",
+          "name": "Vy Buss"
+        },
+        {
+          "id": "NOR:Authority:12",
+          "name": "Nordland fylkeskommune"
+        },
+        {
+          "id": "TTS:Authority:1",
+          "name": "Torghatten"
+        },
+        {
+          "id": "VIL:Authority:1",
+          "name": "Rada Reiseliv"
+        },
+        {
+          "id": "BRA:Authority:4",
+          "name": "Brakar"
+        },
+        {
+          "id": "HUR:Authority:1",
+          "name": "Hurtigruten"
+        },
+        {
+          "id": "VYG:Authority:VY",
+          "name": "Vy"
+        },
+        {
+          "id": "SOF:Authority:26",
+          "name": "Lustrabaatane"
+        },
+        {
+          "id": "BFO:Authority:1",
+          "name": "Torghatten Sør"
+        },
+        {
+          "id": "BOR:Authority:1",
+          "name": "Boreal Norge"
+        },
+        {
+          "id": "HOG:Authority:1",
+          "name": "Høgsfjordferja"
+        },
+        {
+          "id": "KOL:Authority:30",
+          "name": "Fjord1 ASA"
+        },
+        {
+          "id": "OST:Authority:264",
+          "name": "Västtrafik AB"
+        },
+        {
+          "id": "VOG:Authority:1",
+          "name": "Voss Gondol"
+        },
+        {
+          "id": "TEL:Authority:89",
+          "name": "Fjonesundet"
+        },
+        {
+          "id": "SAM:Authority:300",
+          "name": "Öresundståg"
+        },
+        {
+          "id": "AVI:Authority:Avinor",
+          "name": "Avinor"
+        },
+        {
+          "id": "MOR:Authority:SUND",
+          "name": "Sundbåten"
+        },
+        {
+          "id": "OIS:Authority:1",
+          "name": "MF Øisang"
+        },
+        {
+          "id": "VYG:Authority:VYT",
+          "name": "Vy"
+        },
+        {
+          "id": "FJT:Authority:1",
+          "name": "Fjord Tours"
+        },
+        {
+          "id": "VLA:Authority:1",
+          "name": "Vestlandske"
+        },
+        {
+          "id": "UNI:Authority:UNI",
+          "name": "Unibuss"
+        },
+        {
+          "id": "VKT:Authority:VKT_ID",
+          "name": "VKT"
+        },
+        {
+          "id": "FLI:Authority:FlixMobility",
+          "name": "FlixBus"
+        },
+        {
+          "id": "AKT:Authority:AKT_ID",
+          "name": "Agder Kollektivtrafikk AS"
+        },
+        {
+          "id": "BEF:Authority:1",
+          "name": "Beffen"
+        },
+        {
+          "id": "FJX:Authority:1",
+          "name": "Fjord X"
+        },
+        {
+          "id": "VYG:Authority:TAG",
+          "name": "Vy Tåg"
+        },
+        {
+          "id": "BSR:Authority:1",
+          "name": "Bussring"
+        },
+        {
+          "id": "ATB:Authority:2",
+          "name": "ATB"
+        },
+        {
+          "id": "BRA:Authority:26",
+          "name": "Askeladden Reiser"
+        },
+        {
+          "id": "BRA:Authority:27",
+          "name": "Forsvarsbygg Oscarsborgfergen"
+        },
+        {
+          "id": "FIN:Authority:FIN_ID",
+          "name": "Snelandia"
+        },
+        {
+          "id": "KOL:Authority:KOL",
+          "name": "Kolumbus"
+        },
+        {
+          "id": "NWY:Authority:d1ea7af1-3c2a-4825-893f-21408ef08480",
+          "name": "NOR-WAY Bussekspress"
+        },
+        {
+          "id": "KOL:Authority:26",
+          "name": "Norled AS"
+        },
+        {
+          "id": "KOL:Authority:8",
+          "name": "Kolumbus"
+        },
+        {
+          "id": "ULR:Authority:1",
+          "name": "Ulriken"
+        },
+        {
+          "id": "OST:Authority:1",
+          "name": "Østfold kollektivtrafikk"
+        },
+        {
+          "id": "ASH:Authority:1",
+          "name": "Arctic Sea Hotel & Apartments"
+        },
+        {
+          "id": "GFS:Authority:1",
+          "name": "Geiranger Fjordservice"
+        },
+        {
+          "id": "OST:Authority:155",
+          "name": "Fredrikstad kommune"
+        },
+        {
+          "id": "SJN:Authority:SJN",
+          "name": "SJ Nord"
+        },
+        {
+          "id": "RUT:Authority:RUT",
+          "name": "Ruter"
+        },
+        {
+          "id": "FLT:Authority:FLT",
+          "name": "Flytoget"
+        }
+      ],
+      "__type": {
+        "fields": [
+          {
+            "name": "id",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "name": "ID"
+              }
+            }
+          },
+          {
+            "name": "operatingDay",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Date",
+              "ofType": null
+            }
+          },
+          {
+            "name": "serviceJourney",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "name": "ServiceJourney"
+              }
+            }
+          },
+          {
+            "name": "tripAlteration",
+            "args": [],
+            "type": {
+              "kind": "ENUM",
+              "name": "ServiceAlteration",
+              "ofType": null
+            }
+          },
+          {
+            "name": "extraJourney",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "name": "Boolean"
+              }
+            }
+          },
+          {
+            "name": "vehicleAssignment",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "DatedServiceJourneyVehicleAssignment",
+              "ofType": null
+            }
+          },
+          {
+            "name": "replacementForRelation",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "name": null
+              }
+            }
+          },
+          {
+            "name": "replacedByRelation",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "name": null
+              }
+            }
+          },
+          {
+            "name": "journeyPattern",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "JourneyPattern",
+              "ofType": null
+            }
+          },
+          {
+            "name": "quays",
+            "args": [
+              {
+                "name": "first",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                }
+              },
+              {
+                "name": "last",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                }
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "name": null
+              }
+            }
+          },
+          {
+            "name": "estimatedCalls",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "name": null
+              }
+            }
+          },
+          {
+            "name": "realTimeJourneyState",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "RealTimeJourneyState",
+              "ofType": null
+            }
+          }
+        ]
+      }
+    }
+  }
+}
