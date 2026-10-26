@@ -1,0 +1,74 @@
+{
+  "workflow": {
+    "activation_steps_prepend": [],
+    "activation_steps_append": [],
+    "persistent_facts": [],
+    "research_output_path": "D:/IBE160-plan-position-progression/_bmad-output/experimental-extensions/position-progression/research",
+    "run_folder_pattern": "{research_type}-{topic_slug}-{date}",
+    "research_template": "assets/research.template.md",
+    "preset": "quick",
+    "subagents": "none",
+    "max_sources_per_round": 5,
+    "max_depth": 1,
+    "validation": "normal",
+    "red_team": "off",
+    "use_workflows": "off",
+    "subagent_models": [],
+    "preferred_sources": [
+      "w3.org",
+      "developer.chrome.com",
+      "chromium.googlesource.com",
+      "developer.android.com",
+      "support.brave.com",
+      "developer.entur.org"
+    ],
+    "banned_sources": [],
+    "output_format": "md",
+    "html_theme": "",
+    "audience": "",
+    "external_sources": [],
+    "doc_standards": [
+      "skill:bmad-review lenses=structure,prose"
+    ],
+    "external_handoffs": [],
+    "on_complete": "",
+    "research_types": [
+      {
+        "code": "market",
+        "name": "Market Research",
+        "when": "Market opportunity, customers, competition, sizing, or go-to-market for a product or business decision.",
+        "pack": "types/market.md"
+      },
+      {
+        "code": "domain",
+        "name": "Domain Research",
+        "when": "Understanding an industry, sector, or field: structure, players, rules, vocabulary, dynamics.",
+        "pack": "types/domain.md"
+      },
+      {
+        "code": "technical",
+        "name": "Technical Research",
+        "when": "A technology area's landscape, patterns, integration approaches, and implementation reality.",
+        "pack": "types/technical.md"
+      },
+      {
+        "code": "competitive",
+        "name": "Competitive Research",
+        "when": "Teardown of specific named competitors: offers, pricing, positioning, trajectory, their customers' sentiment.",
+        "pack": "types/competitive.md"
+      },
+      {
+        "code": "user-voice",
+        "name": "User-Voice Research",
+        "when": "What users of a product or category actually experience and want: reviews, communities, jobs-to-be-done.",
+        "pack": "types/user-voice.md"
+      },
+      {
+        "code": "academic-lit",
+        "name": "Academic Literature",
+        "when": "Published research: literature review, state of the art, grounding an approach in papers.",
+        "pack": "types/academic-lit.md"
+      }
+    ]
+  }
+}

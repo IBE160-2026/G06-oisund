@@ -1,0 +1,33 @@
+{
+  "other_worktrees_unchanged_since_research_baseline": false,
+  "changed": [
+    "IBE160"
+  ],
+  "reference_deltas": {
+    "IBE160": {
+      "head_before": "aa0fcfb48904c7e0bdd6c68280e5db2d21f478ed",
+      "head_after": "aa0fcfb48904c7e0bdd6c68280e5db2d21f478ed",
+      "status_equal": true,
+      "diff_equal": false,
+      "changed_dirty_paths": [
+        "README.md",
+        "_bmad-output/implementation-artifacts/epic-11-context.md",
+        "_bmad-output/implementation-artifacts/epic-11-retro-2026-10-26.md",
+        "_bmad-output/implementation-artifacts/spec-11-5-cross-day-notice-register.md",
+        "_bmad-output/implementation-artifacts/spec-11-5-read-line-date-notices.md",
+        "_bmad-output/implementation-artifacts/sprint-status.yaml",
+        "_bmad-output/planning-artifacts/epics.md",
+        "_bmad-output/planning-artifacts/story-drafts/story-v1-14.md",
+        "_bmad-output/specs/spec-11-5-cross-day-notice-register/.memlog.md",
+        "_bmad-output/specs/spec-11-5-cross-day-notice-register/implementation-plan.md",
+        "docs/development-log.md",
+        "docs/evidence/11-5-crossday-register.md",
+        "docs/evidence/11-5-line-date-notices.md",
+        "docs/evidence/11-6-server-recovery.md"
+      ]
+    }
+  },
+  "own_head": "aa0fcfb48904c7e0bdd6c68280e5db2d21f478ed",
+  "own_branch": "codex/plan-position-progression",
+  "own_status": "?? _bmad-output/experimental-extensions/position-progression/.bmad-runner/_bmad/config.toml\n?? _bmad-output/experimental-extensions/position-progression/.bmad-runner/_bmad/custom/bmad-deep-recon.toml\n?? _bmad-output/experimental-extensions/position-progression/.bmad-runner/audit.py\n?? _bmad-output/experimental-extensions/position-progression/.bmad-runner/check-documents.py\n?? _bmad-output/experimental-extensions/position-progression/.bmad-runner/isolation-result.json\n?? _bmad-output/experimental-extensions/position-progression/.bmad-runner/reference-baseline.json\n?? _bmad-output/experimental-extensions/position-progression/.bmad-runner/resolved-config.json\n?? _bmad-output/experimental-extensions/position-progression/.bmad-runner/resolved-review.json\n?? _bmad-output/experimental-extensions/position-progression/.bmad-runner/resolved-workflow.json\n?? _bmad-output/experimental-extensions/position-progression/README.md\n?? _bmad-output/experimental-extensions/position-progression/research/technical-position-progression-2026-10-26/.memlog.md\n?? _bmad-output/experimental-extensions/position-progression/research/technical-position-progression-2026-10-26/brief.md\n?? _bmad-output/experimental-extensions/position-progression/research/technical-position-progression-2026-10-26/checks/citation-semantic.md\n?? _bmad-output/experimental-extensions/position-progression/research/technical-position-progression-2026-10-26/checks/citations.json\n?? _bmad-output/experimental-extensions/position-progression/research/technical-position-progression-2026-10-26/checks/claim-tally.json\n?? _bmad-output/experimental-extensions/position-progression/research/technical-position-progression-2026-10-26/checks/documents.json\n?? _bmad-output/experimental-extensions/position-progression/research/technical-position-progression-2026-10-26/checks/editorial.md\n?? _bmad-output/experimental-extensions/position-progression/research/technical-position-progression-2026-10-26/checks/known-date-claims.json\n?? _bmad-output/experimental-extensions/position-progression/research/technical-position-progression-2026-10-26/checks/staleness.json\n?? _bmad-output/experimental-extensions/position-progression/research/technical-position-progression-2026-10-26/checks/word-metrics.json\n?? _bmad-output/experimental-extensions/position-progression/research/technical-position-progression-2026-10-26/claims.json\n?? _bmad-output/experimental-extensions/position-progression/research/technical-position-progression-2026-10-26/digests/api-r1.md\n?? _bmad-output/experimental-extensions/position-progression/research/technical-position-progression-2026-10-26/digests/lifecycle-r1.md\n?? _bmad-output/experimental-extensions/position-progression/research/technical-position-progression-2026-10-26/digests/route-r1.md\n?? _bmad-output/experimental-extensions/position-progression/research/technical-position-progression-2026-10-26/research.md\n?? _bmad-output/experimental-extensions/position-progression/scope.md\n?? _bmad-output/experimental-extensions/position-progression/source-map.md\n"
+}
