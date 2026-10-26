@@ -13,13 +13,13 @@ export function setup() {
 test.beforeAll(() => python(`from app.auth import provision\nprovision(${JSON.stringify(account.username)}, ${JSON.stringify(account.password)})\n`));
 test.beforeEach(() => python(`with database() as conn:
  owner=conn.execute('SELECT id FROM accounts WHERE username=%s', (${JSON.stringify(account.username)},)).fetchone()['id']
- for table in ['workday_deletions','workday_operations','workdays','drafts','draft_operations','draft_deletions']:
+ for table in ['account_notice_operations','workday_notice_operations','workday_notices','workday_deletions','workday_operations','workdays','drafts','draft_operations','draft_deletions']:
   conn.execute('DELETE FROM '+table+' WHERE owner=%s',(owner,))
  conn.execute('DELETE FROM login_limits')
 `));
 test.afterAll(() => python(`with database() as conn:
  owner=conn.execute('SELECT id FROM accounts WHERE username=%s', (${JSON.stringify(account.username)},)).fetchone()['id']
- for table in ['workday_deletions','workday_operations','workdays','drafts','draft_operations','draft_deletions','sessions']:
+ for table in ['account_notice_operations','workday_notice_operations','workday_notices','workday_deletions','workday_operations','workdays','drafts','draft_operations','draft_deletions','sessions']:
   conn.execute('DELETE FROM '+table+' WHERE owner=%s',(owner,))
  conn.execute('DELETE FROM accounts WHERE id=%s',(owner,))
  conn.execute('DELETE FROM login_limits')
@@ -73,7 +73,15 @@ export const activityStatus = (page: Page) => page.getByRole('status', { name: '
 export const shiftStatus = (page: Page) => page.getByRole('status', { name: 'Skiftstatus' });
 export const beforeUnload = (page: Page) => page.evaluate(() => { const e = new Event('beforeunload', { cancelable: true }); window.dispatchEvent(e); return e.defaultPrevented; });
 export async function dayScreen(page: Page) { if (await page.getByRole('button', { name: 'Tilbake til dagen', exact: true }).isVisible()) await page.getByRole('button', { name: 'Tilbake til dagen', exact: true }).click(); }
-export async function activityScreen(page: Page) { const open = page.getByRole('button', { name: 'Åpne valgt aktivitet', exact: true }); await expect(selected(page).or(open)).toBeVisible(); if (await open.isVisible()) await open.click(); }
+export async function activityScreen(page: Page) {
+  const open = page.getByRole('button', { name: 'Åpne valgt aktivitet', exact: true });
+  // Acknowledged selection can auto-open between seeing this button and clicking
+  // it. Retry that harmless view transition, but always require actual details.
+  await expect(async () => {
+    if (!await selected(page).isVisible()) await open.click({ timeout: 500 });
+    await expect(selected(page)).toBeVisible({ timeout: 500 });
+  }).toPass({ timeout: 5000, intervals: [100, 250, 500] });
+}
 export async function reopen(page: Page) {
   await page.getByRole('button', { name: 'Lukk planen', exact: true }).click();
   await page.getByRole('button', { name: 'Åpne plan 2031-01-02 · versjon 1', exact: true }).click();

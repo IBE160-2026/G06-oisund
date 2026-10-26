@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { recoverOperation } from './recoverOperation';
 import { PrivateTimeInput } from './PrivateTimeInput';
 import { PrivateConfirmation } from './PrivateConfirmation';
 import { PrivateImport, SourceFacts, validMetadata, type ImportMetadata } from './PrivateImport';
@@ -79,6 +80,8 @@ export function PrivateDrafts({ upload, request, mutation, dirtyChanged, expired
   const [hasPlan, setHasPlan] = useState(false); const [consulting, setConsulting] = useState(false);
   const preparationTitle = useRef<HTMLHeadingElement>(null);
   useEffect(() => { if (screen === 'upload') preparationTitle.current?.focus(); if (screen === 'editor') title.current?.focus(); }, [screen]);
+  const [registryOpen, setRegistryOpen] = useState(false), [registryNavigation, setRegistryNavigation] = useState(0);
+  const [registryDirty, setRegistryDirty] = useState(false);
   const [confirmationLocked, setConfirmationLocked] = useState(false);
   const [list, setList] = useState<Summary[]>([]);
   const [listState, setListState] = useState<'loading' | 'ready' | 'error'>('loading');
@@ -119,7 +122,7 @@ export function PrivateDrafts({ upload, request, mutation, dirtyChanged, expired
   }
   function failed(error: any) {
     if (error?.status === 401) { expired(); return; }
-    setMessage(error?.status === 410 ? 'Utkastet eller lagringsforsøket er utløpt. Lokale endringer er ikke lagret.' : error?.status === 404 ? 'Tilgangen ble avvist.' : 'Tjenesten er utilgjengelig. Lokale endringer er ikke lagret.');
+    setMessage(pending ? 'Lagring er uavklart. Tjenesten kunne ikke bekrefte utfallet. Det opprinnelige forsøket og inndata er beholdt.' : error?.status === 410 ? 'Utkastet eller lagringsforsøket er utløpt. Inndata er beholdt.' : error?.status === 404 ? 'Tilgangen ble avvist.' : 'Tjenesten er utilgjengelig. Inndata er beholdt.');
   }
   async function refresh(cursor: string | null = null) {
     const epoch = deletionEpoch.current;
@@ -132,63 +135,80 @@ export function PrivateDrafts({ upload, request, mutation, dirtyChanged, expired
         || new Set(result.drafts.map((item: Summary) => item.id)).size !== result.drafts.length
         || result.drafts.some((item: Summary, index: number) => (index > 0 && item.id <= result.drafts[index - 1].id) || (cursor && item.id <= cursor))
         || (result.next_cursor !== null && (!uuid(result.next_cursor) || result.drafts.length !== 50 || result.next_cursor !== result.drafts[49].id))) {
-        setListState('error'); setMessage('Listen kunne ikke lastes. Prøv Oppdater listen igjen. Skjemaet er beholdt.'); return;
+        setListState('error'); return;
       }
       const rows = result.drafts.map(({ id, revision, expires_at, service_date }: Summary) => ({ id, revision, expires_at, service_date }));
       focusLoadedCount.current = !!cursor && result.next_cursor === null;
       setList(current => cursor ? [...current, ...rows.filter((row: Summary) => !current.some(item => item.id === row.id))] : rows);
       setNextCursor(result.next_cursor);
       setListState('ready');
-      setMessage(current => current.startsWith('Listen kunne ikke lastes.') ? 'Listen er oppdatert.' : current);
-    } catch (error) { if (alive.current && epoch === deletionEpoch.current && sequence === listRequest.current) { setListState('error'); failed(error); } }
+    } catch (error: any) { if (alive.current && epoch === deletionEpoch.current && sequence === listRequest.current) { setListState('error'); if (error?.status === 401) expired(); } }
   }
   useEffect(() => { alive.current = true; void refresh(); return () => { alive.current = false; }; }, []);
   useEffect(() => { if (focusLoadedCount.current) { focusLoadedCount.current = false; loadedCount.current?.focus(); } }, [list]);
-  useEffect(() => { dirtyChanged(dirty || confirmationLocked); return () => dirtyChanged(false); }, [dirty, confirmationLocked]);
+  useEffect(() => { dirtyChanged(dirty || confirmationLocked || registryDirty); return () => dirtyChanged(false); }, [dirty, confirmationLocked, registryDirty]);
   useEffect(() => {
     setDraftExpired(false);
     if (!saved) return;
-    const expire = () => { setDraftExpired(true); if (saved.draft.import_metadata) { resetTimes(); setContent(empty()); setSaved(null); setPending(null); setComparison(null); } setMessage('Utkastet er utløpt. Lokale endringer er ikke lagret.'); };
+    const expire = () => { setDraftExpired(true); if (saved.draft.import_metadata) { resetTimes(); setContent(empty()); setSaved(null); setPending(null); setComparison(null); } setMessage('Utkastet er utløpt. Lagringsutfallet kan ikke bekreftes, og utkastet kan ikke åpnes igjen.'); };
     const remaining = Date.parse(saved.expires_at) - Date.now();
     if (remaining <= 0) { expire(); return; }
     const timer = window.setTimeout(expire, remaining);
     return () => clearTimeout(timer);
   }, [saved]);
   useEffect(() => {
-    const warn = (event: BeforeUnloadEvent) => { if (dirty || confirmationLocked) { event.preventDefault(); event.returnValue = ''; } };
-    const navigate = (event: MouseEvent) => { if ((dirty || confirmationLocked) && (event.target as Element)?.closest('a') && !window.confirm('Ulagrede endringer eller uavklart busslagring/bekreftelse/sletting går tapt. Vil du fortsette?')) event.preventDefault(); };
+    const warn = (event: BeforeUnloadEvent) => { if (dirty || confirmationLocked || registryDirty) { event.preventDefault(); event.returnValue = ''; } };
+    const navigate = (event: MouseEvent) => { if ((dirty || confirmationLocked || registryDirty) && (event.target as Element)?.closest('a') && !window.confirm('Ulagrede endringer eller uavklart busslagring/bekreftelse/sletting går tapt. Vil du fortsette?')) event.preventDefault(); };
     window.addEventListener('beforeunload', warn); document.addEventListener('click', navigate);
     return () => { window.removeEventListener('beforeunload', warn); document.removeEventListener('click', navigate); };
-  }, [dirty, confirmationLocked]);
+  }, [dirty, confirmationLocked, registryDirty]);
   function adopt(value: Saved) { setScreen('editor'); resetTimes(); setSaveUnavailable(false); setSaved(value); setContent(value.draft); setPending(null); setComparison(null); setMessage(`Lagret. Versjon ${value.revision}.`); title.current?.focus(); }
   function terminalSave(status: number) {
     setPending(null); setSaveUnavailable(true);
     setMessage(`Lagring er ikke bekreftet. ${status === 410 ? 'Lagringsforsøket er utløpt.' : 'Lagringsforsøket finnes ikke lenger eller er utilgjengelig.'} Lokale inndata er beholdt for gjennomgang og kan ikke sendes på nytt. Velg Nytt utkast eller Tilbakestill for å starte med et tomt skjema.`);
   }
-  async function reopen(id: string) {
-    if (dirty && !window.confirm('Ulagrede endringer går tapt. Åpne lagret utkast?')) return;
+  async function reopen(id: string, confirmed = false) {
+    if (!confirmed && dirty && !window.confirm('Ulagrede endringer går tapt. Åpne lagret utkast?')) return;
     setBusy(true);
-    try { const value = await request('/drafts/' + id); if (!valid(value) || value.id !== id) throw Error(); if (alive.current) adopt(value); }
+    const shown = confirmed ? comparison : null;
+    try {
+      const value = await request('/drafts/' + id);
+      if (!valid(value) || value.id !== id || shown && (value.id !== shown.id || value.created_at !== shown.created_at || value.expires_at !== shown.expires_at
+        || value.revision < shown.revision || value.revision === shown.revision && canonical(value) !== canonical(shown))) throw Error();
+      if (alive.current) adopt(value);
+    }
     catch (error) { if (alive.current) failed(error); }
     finally { if (alive.current) setBusy(false); }
   }
-  async function acknowledge(value: any, operation: Pending) {
+  async function acknowledge(value: any, operation: Pending, verified = () => {}) {
     if (!valid(value) || value.revision !== operation.body.expected_revision + 1 || canonical(value.draft) !== canonical(operation.body.draft)
-      || (saved && value.id !== saved.id)) throw Error('Invalid acknowledgement');
-    if (alive.current) { adopt(value); await refresh(); }
+      || (operation.path !== '/drafts' && operation.path !== '/drafts/' + value.id)) throw Error('Invalid acknowledgement');
+    verified();
+    // Historical receipts prove an effect, while this authorized read establishes
+    // the current revision available for reopening and confirmation.
+    const latest = await request('/drafts/' + value.id);
+    if (!valid(latest) || latest.id !== value.id || latest.created_at !== value.created_at || latest.expires_at !== value.expires_at
+      || latest.revision < value.revision || latest.revision === value.revision && canonical(latest) !== canonical(value)) throw Error('Invalid current draft');
+    if (!alive.current) return;
+    if (latest.revision > value.revision) {
+      setPending(null); setComparison(latest);
+      setMessage('Forsøket ble lagret. En nyere lagret versjon finnes. Ditt opprinnelige forslag er beholdt. Sammenlign før du laster inn lagret versjon.');
+    } else adopt(latest);
+    await refresh();
   }
   async function send(operation: Pending) {
-    try { await acknowledge(await mutation(operation.path, operation.body), operation); }
+    let accepted = false;
+    try { await acknowledge(await mutation(operation.path, operation.body), operation, () => { accepted = true; }); }
     catch (error: any) {
       if (!alive.current) return;
       if (error?.status === 401) { expired(); return; }
-      if (error?.status === 409) {
+      if (!accepted && error?.status === 409 && ['Utkastet er endret. Sammenlign med lagret versjon før du fortsetter.', 'Lagringsforsøket har annet innhold. Behold dine lokale endringer.'].includes(error.apiDetail)) {
         setPending(null);
         setMessage('Konflikt. Dine lokale endringer er beholdt. Sammenlign med lagret versjon.');
         if (saved) { try { const value = await request('/drafts/' + saved.id); if (alive.current && valid(value)) setComparison(value); } catch (e) { failed(e); } }
-      } else if ([404, 410].includes(error?.status)) {
+      } else if (terminalDraftError(error)) {
         terminalSave(error.status);
-      } else if ([413, 422].includes(error?.status)) {
+      } else if (!accepted && (error?.status === 413 && error.apiDetail === 'Forespørselen er for stor.' || error?.status === 422 && error.apiDetail === 'Kontroller feltene.')) {
         setPending(null);
         if (error.status === 413) setMessage('Utkastet er for stort. Forkort tekst eller fjern aktiviteter før du lagrer igjen. Ingen endringer er lagret.');
         else if (error.status === 422) setMessage('Kontroller feltene og aktivitetenes datoer og klokkeslett. Velg riktig kalenderdag eller neste dag ved nattarbeid. Ingen endringer er lagret.');
@@ -205,6 +225,7 @@ export function PrivateDrafts({ upload, request, mutation, dirtyChanged, expired
     setBusy(true); setMessage('Lagrer …');
     try {
       let operation = pending;
+      if (operation) { await settle(true); return; }
       if (!operation) {
         const candidate = { operation_id: '00000000-0000-4000-8000-000000000000', expected_revision: saved?.revision ?? 0, draft: content };
         if (new TextEncoder().encode(JSON.stringify(candidate)).byteLength > 1048576) {
@@ -221,15 +242,24 @@ export function PrivateDrafts({ upload, request, mutation, dirtyChanged, expired
     } catch (error) { if (alive.current) failed(error); }
     finally { if (alive.current) setBusy(false); }
   }
-  async function settle() {
+  function terminalDraftError(error: any) {
+    return error?.status === 404 && error.apiDetail === 'Tilgangen ble avvist.'
+      || error?.status === 410 && ['Lagringsforsøket er utløpt. Det kan ikke gjenopprettes.', 'Lagringsforsøket er utløpt.', 'Utkastet er utløpt.', 'Utkastet er utløpt og kan ikke åpnes igjen.'].includes(error.apiDetail);
+  }
+  async function settle(retry = false) {
     if (!pending) return;
+    const operation = pending;
     setBusy(true);
     try {
-      const result = await request('/draft-operations/' + pending.body.operation_id);
-      if (result.state === 'accepted') await acknowledge(result.result, pending);
-      else if (result.state === 'pending' && result.result === null) setMessage('Forsøket er ikke lagret. Prøv samme lagringsforsøk igjen.');
+      const result = await request('/draft-operations/' + operation.body.operation_id);
+      if (!result || Object.keys(result).sort().join() !== 'result,state') throw Error();
+      if (result.state === 'accepted') await acknowledge(result.result, operation);
+      else if (result.state === 'pending' && result.result === null) {
+        if (retry) await send(operation);
+        else setMessage('Serveren har ikke registrert en lagring for forsøket. Inndata er beholdt. Du kan prøve samme lagringsforsøk igjen.');
+      }
       else throw Error();
-    } catch (error: any) { if (alive.current) { if ([404, 410].includes(error?.status)) terminalSave(error.status); else failed(error); } }
+    } catch (error: any) { if (alive.current) { if (error?.status === 401) expired(); else if (terminalDraftError(error)) terminalSave(error.status); else setMessage('Lagring er uavklart. Tjenesten kunne ikke bekrefte utfallet. Det opprinnelige forsøket og inndata er beholdt.'); } }
     finally { if (alive.current) setBusy(false); }
   }
   function edit(next: Content) {
@@ -256,6 +286,7 @@ export function PrivateDrafts({ upload, request, mutation, dirtyChanged, expired
     setMessage('Utkastet er slettet.'); title.current?.focus();
   }
   async function removeDraft(lookup = false) {
+    const retry = !!pendingDelete;
     let operation = pendingDelete;
     if (!operation) {
       if (!saved || pending || !window.confirm('Slette dette lagrede utkastet og lokale endringer? Dette kan ikke angres.')) return;
@@ -264,19 +295,23 @@ export function PrivateDrafts({ upload, request, mutation, dirtyChanged, expired
     }
     setBusy(true); setMessage(lookup ? 'Kontrollerer sletting …' : 'Sletter …');
     try {
-      const result = lookup ? await request('/draft-deletions/' + operation.body.operation_id) : await mutation('/drafts/' + operation.id + '/delete', operation.body);
+      const original = operation;
+      const status = () => request('/draft-deletions/' + original.body.operation_id);
+      const mutate = () => mutation('/drafts/' + original.id + '/delete', original.body);
+      const authorize = async () => { const value = await request('/drafts/' + original.id); if (!valid(value) || value.id !== original.id) throw Error(); };
+      const result = lookup ? await status() : retry ? await recoverOperation(status, authorize, mutate) : await mutate();
       acknowledgeDelete(result, operation);
     } catch (error: any) {
       if (!alive.current) return;
       if (error?.status === 401) { expired(); return; }
-      if (error?.status === 410) {
+      if (error?.status === 410 && ['Slettingsforsøket er utløpt.', 'Utkastet er utløpt.', 'Utkastet er utløpt og kan ikke åpnes igjen.'].includes(error.apiDetail)) {
         deletionEpoch.current++;
         resetTimes();
         setList(current => current.filter(item => item.id !== operation.id));
         setListState('ready');
         setSaved(null); setContent(empty()); setPendingDelete(null); setComparison(null);
         setMessage('Sletting kunne ikke bekreftes fordi utkastet eller slettingsforsøket er utløpt. Du kan opprette et nytt utkast.'); title.current?.focus();
-      } else if (error?.status === 409) {
+      } else if (error?.status === 409 && ['Slettingsforsøket har annet innhold.', 'Utkastet er endret. Sammenlign med lagret versjon før sletting.'].includes(error.apiDetail)) {
         setPendingDelete(null); setMessage('Konflikt. Utkastet er endret og er ikke slettet. Dine lokale endringer er beholdt.');
         try { const value = await request('/drafts/' + operation.id); if (alive.current && valid(value)) setComparison(value); } catch (e) { if (alive.current) failed(e); }
       } else {
@@ -298,9 +333,9 @@ export function PrivateDrafts({ upload, request, mutation, dirtyChanged, expired
   }
   return <div className={(night ? 'private-drafts night' : 'private-drafts') + (consulting ? ' consulting' : '')} hidden={suspended}><section aria-label="Private utkast">
     <button type="button" aria-pressed={night} onClick={() => setNight(value => !value)}>Nattmodus</button>
-    <nav className="private-screen-nav" aria-label="Plan og forberedelse"><button disabled={confirmationLocked || !!pending || !!pendingDelete || busy || suspended} aria-current={screen === 'upload' ? 'page' : undefined} onClick={() => setScreen('upload')}>Forberedelse og planlister</button><button disabled={confirmationLocked || !!pending || !!pendingDelete || busy || suspended} aria-current={screen === 'editor' ? 'page' : undefined} onClick={() => setScreen('editor')}>Kontroller og rediger utkast</button>{hasPlan && <button disabled={confirmationLocked || !!pending || !!pendingDelete || busy || suspended} aria-current={screen === 'plan' ? 'page' : undefined} onClick={() => setScreen('plan')}>Til den åpne planen</button>}</nav>
-    <div hidden={screen !== 'upload'}><h2 ref={preparationTitle} tabIndex={-1}>Mine utkast</h2></div>
-    <p hidden={screen !== 'upload' && screen !== 'editor'} role="status" aria-live="polite" className="status">{message}</p><fieldset className="confirmation-editor" disabled={confirmationLocked}>
+    <nav className="private-screen-nav" aria-label="Plan og forberedelse"><button disabled={confirmationLocked || !!pending || !!pendingDelete || busy || suspended} aria-current={screen === 'upload' ? 'page' : undefined} onClick={() => { setScreen('upload'); setRegistryNavigation(v => v + 1); }}>Forberedelse og planlister</button><button disabled={confirmationLocked || !!pending || !!pendingDelete || busy || suspended} aria-current={screen === 'editor' ? 'page' : undefined} onClick={() => { setScreen('editor'); setRegistryNavigation(v => v + 1); }}>Kontroller og rediger utkast</button>{hasPlan && <button disabled={confirmationLocked || !!pending || !!pendingDelete || busy || suspended} aria-current={screen === 'plan' ? 'page' : undefined} onClick={() => { setScreen('plan'); setRegistryNavigation(v => v + 1); }}>Til den åpne planen</button>}</nav>
+    <div hidden={registryOpen || screen !== 'upload'}><h2 ref={preparationTitle} tabIndex={-1}>Mine utkast</h2></div>
+    <p hidden={registryOpen || screen !== 'upload' && screen !== 'editor'} role="status" aria-live="polite" className="status">{message}</p><fieldset hidden={registryOpen} className="confirmation-editor" disabled={confirmationLocked}>
     <div hidden={screen !== 'upload' && screen !== 'import'}><PrivateImport stage={screen === 'import' ? 'review' : 'upload'} reviewReady={() => setScreen(current => current === 'upload' ? 'import' : current)} backToUpload={() => setScreen('upload')} upload={upload} suspended={suspended} locked={entryLocked || !!comparison} expired={expired} adopt={value => { if (dirty && !window.confirm('Ulagrede endringer går tapt. Bruke importen som et separat nytt utkast?')) return false; resetTimes(); setSaved(null); setContent(value); setComparison(null); setSaveUnavailable(false); setMessage('Importen er et separat, ulagret utkast. Kontroller fakta og lagre uttrykkelig.'); setScreen('editor'); return true; }} /></div>
     <div hidden={screen !== 'upload'}>
     <p>Utkast slettes sju dager etter opprettelse. Ulagrede endringer finnes bare mens denne siden er åpen.</p>
@@ -353,9 +388,9 @@ export function PrivateDrafts({ upload, request, mutation, dirtyChanged, expired
     <div className="controls"><button disabled={busy || !!pending || !!pendingDelete || suspended} onClick={reset}>{saved && !saveUnavailable ? 'Forkast endringer' : 'Tilbakestill utkast'}</button>{saved && <button disabled={busy || !!pending || !!pendingDelete || saveUnavailable || suspended || draftExpired || !!comparison} onClick={() => void removeDraft()}>Slett utkast</button>}</div>
     {pendingDelete && <div className="controls"><button disabled={busy} onClick={() => void removeDraft()}>Prøv samme slettingsforsøk igjen</button><button disabled={busy} onClick={() => void removeDraft(true)}>Kontroller slettingen</button></div>}
     {pending && <button disabled={busy} onClick={() => void settle()}>Kontroller lagringsforsøket</button>}
-    {comparison && <section aria-label="Sammenlign versjoner"><h3>Lagret versjon {comparison.revision}</h3><p>Lokale endringer står i skjemaet. Last inn lagret versjon for å forkaste dem.</p><dl><dt>Tjenestedato</dt><dd>{comparison.draft.service_date ?? 'Ukjent'}</dd><dt>Vognløp</dt><dd>{comparison.draft.vehicle_duty ?? 'Ukjent'}</dd><dt>Sanntidsverdi</dt><dd>{comparison.draft.realtime_duty ?? 'Ukjent'}</dd><dt>Buss/vogn</dt><dd>{comparison.draft.physical_bus ?? 'Ukjent'}</dd></dl><ol>{comparison.draft.activities.map((activity, index) => <li key={activity.id}><dl><dt>Gjeldende vognløp</dt><dd>{effectiveDuty(comparison.draft, index) ?? 'Ukjent'} · sanntidsverdi {dutySuffix(effectiveDuty(comparison.draft, index)) ?? 'Ukjent'}</dd>{fields.map(([key, label]) => <div className="fact" key={key}><dt>{label}</dt><dd>{displayFact(key, activity[key]) ?? 'Ukjent'}</dd></div>)}</dl></li>)}</ol><button onClick={() => { if (window.confirm('Forkaste lokale endringer og laste lagret versjon?')) adopt(comparison); }}>Last inn lagret versjon</button></section>}
+    {comparison && <section aria-label="Sammenlign versjoner"><h3>Lagret versjon {comparison.revision}</h3><p>Lokale endringer står i skjemaet. Last inn lagret versjon for å forkaste dem.</p><dl><dt>Tjenestedato</dt><dd>{comparison.draft.service_date ?? 'Ukjent'}</dd><dt>Vognløp</dt><dd>{comparison.draft.vehicle_duty ?? 'Ukjent'}</dd><dt>Sanntidsverdi</dt><dd>{comparison.draft.realtime_duty ?? 'Ukjent'}</dd><dt>Buss/vogn</dt><dd>{comparison.draft.physical_bus ?? 'Ukjent'}</dd></dl><ol>{comparison.draft.activities.map((activity, index) => <li key={activity.id}><dl><dt>Gjeldende vognløp</dt><dd>{effectiveDuty(comparison.draft, index) ?? 'Ukjent'} · sanntidsverdi {dutySuffix(effectiveDuty(comparison.draft, index)) ?? 'Ukjent'}</dd>{fields.map(([key, label]) => <div className="fact" key={key}><dt>{label}</dt><dd>{displayFact(key, activity[key]) ?? 'Ukjent'}</dd></div>)}</dl></li>)}</ol><button onClick={() => { if (window.confirm('Forkaste lokale endringer og laste lagret versjon?')) void reopen(comparison.id, true); }}>Last inn lagret versjon</button></section>}
     </div></fieldset>
     </section>
-    <PrivateConfirmation consultationChanged={setConsulting} screen={screen} showPlan={() => setScreen('plan')} showPreparation={() => setScreen('upload')} planChanged={setHasPlan} saved={saved} clean={!dirty && !busy && !comparison && !draftExpired} request={request} mutation={mutation} expired={expired} suspended={suspended} lock={setConfirmationLocked} />
+    <PrivateConfirmation registryOpen={setRegistryOpen} registryNavigation={registryNavigation} registryDirty={setRegistryDirty} consultationChanged={setConsulting} screen={screen} showPlan={() => setScreen('plan')} showPreparation={() => setScreen('upload')} planChanged={setHasPlan} saved={saved} clean={!dirty && !busy && !comparison && !draftExpired} request={request} mutation={mutation} expired={expired} suspended={suspended} lock={setConfirmationLocked} />
   </div>;
 }

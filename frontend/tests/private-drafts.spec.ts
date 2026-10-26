@@ -125,11 +125,12 @@ for (const [label, next_cursor] of [['missing', undefined], ['invalid', 'invalid
   await login(page); await fill(page);
   await page.route('**:8001/drafts', route => route.fulfill({ json: { drafts: [], ...(next_cursor === undefined ? {} : { next_cursor }) } }));
   await preparation(page); await page.getByRole('button', { name: 'Oppdater listen' }).click();
-  await expect(status(page)).toContainText('Listen kunne ikke lastes.');
+  await expect(page.getByText('Listen er utilgjengelig. Prøv Oppdater listen igjen.', { exact: true })).toBeVisible();
   await expect(page.getByLabel('Buss/vogn', { exact: true })).toHaveValue('Bus-0012');
   await page.unroute('**:8001/drafts');
   await preparation(page); await page.getByRole('button', { name: 'Oppdater listen' }).click();
-  await expect(status(page)).toHaveText('Listen er oppdatert.');
+  await expect(page.getByText('Listen er utilgjengelig. Prøv Oppdater listen igjen.', { exact: true })).toHaveCount(0);
+  await expect(status(page)).toContainText('Ulagrede endringer');
 });
 
 for (const malformed of ['duplicate', 'out-of-order', 'before-cursor', 'continuation']) test(`malformed later page retains rows cursor and input (${malformed})`, async ({ page }) => {
@@ -151,7 +152,7 @@ for (const malformed of ['duplicate', 'out-of-order', 'before-cursor', 'continua
   await preparation(page); await expect(page.getByRole('button', { name: /^Åpne / })).toHaveCount(50);
   await editor(page); await page.getByLabel('Buss/vogn', { exact: true }).fill('Retained later-page input');
   await preparation(page); await page.getByRole('button', { name: 'Vis flere utkast' }).click();
-  await expect(status(page)).toContainText('Listen kunne ikke lastes.');
+  await expect(page.getByText('Listen er utilgjengelig. Prøv Oppdater listen igjen.', { exact: true })).toBeVisible();
   await preparation(page); await expect(page.getByRole('button', { name: /^Åpne / })).toHaveCount(50);
   await expect(page.getByLabel('Buss/vogn', { exact: true })).toHaveValue('Retained later-page input');
   correct = true;
@@ -246,8 +247,10 @@ test('lost acknowledgement, authorized lookup and HTML failure retain original o
   });
   await page.getByRole('button', { name: 'Prøv samme lagringsforsøk igjen' }).click();
   await expect(status(page)).toHaveText('Lagret. Versjon 1.');
-  expect(committedTarget).toBe(originalTarget);
-  expect(committedRetry).toBe(original);
+  expect(committedTarget).toBe('');
+  expect(committedRetry).toBe('');
+  expect((await (await page.request.get('http://127.0.0.1:8001/draft-operations/' + JSON.parse(original).operation_id)).json()).result).toEqual(accepted);
+  expect(originalTarget).toBe('http://127.0.0.1:8001/drafts');
   const owned = await (await page.request.get('http://127.0.0.1:8001/drafts')).json();
   expect(owned.drafts.filter((draft: any) => draft.id === accepted.id)).toEqual([expect.objectContaining({ id: accepted.id, revision: 1 })]);
   await page.unroute('**:8001/drafts');
@@ -314,7 +317,7 @@ test('expired authorization clears unsaved private fields on revalidation', asyn
 
 test('413 keeps fields editable and a corrected draft can be saved', async ({ page }) => {
   await login(page); await fill(page);
-  await page.route('**:8001/drafts', route => route.request().method() === 'POST' ? route.fulfill({ status: 413, json: { detail: 'Too large' } }) : route.continue());
+  await page.route('**:8001/drafts', route => route.request().method() === 'POST' ? route.fulfill({ status: 413, json: { detail: 'Forespørselen er for stor.' } }) : route.continue());
   await editor(page); await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
   await expect(status(page)).toContainText('Utkastet er for stort. Forkort tekst eller fjern aktiviteter');
   await expect(page.getByLabel('Vognløp', { exact: true })).toBeEnabled();
@@ -345,15 +348,16 @@ test('UTF-8 size preflight preserves valid Unicode input without issuing a save'
 });
 
 test('slightly future server creation timestamps remain valid acknowledgements', async ({ page }) => {
+  // Keep timers running and use consistent real server facts. Only the
+  // browser clock is behind; the receipt and current GET must still agree.
+  await page.clock.install({ time: new Date(Date.now() - 60000) });
   await login(page); await fill(page);
-  await page.route('**:8001/drafts', async route => {
-    if (route.request().method() !== 'POST') { await route.continue(); return; }
-    const response = await route.fetch(), body = await response.json();
-    const serverTime = Date.now() + 60000;
-    await route.fulfill({ json: { ...body, created_at: new Date(serverTime).toISOString(), expires_at: new Date(serverTime + 7 * 86400000).toISOString() } });
-  });
+  const response = page.waitForResponse(response => response.request().method() === 'POST' && new URL(response.url()).pathname === '/drafts');
   await editor(page); await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
+  const saved = await (await response).json();
+  expect(Date.parse(saved.created_at)).toBeGreaterThan(await page.evaluate(() => Date.now()));
   await expect(status(page)).toHaveText('Lagret. Versjon 1.');
+  expect(await (await page.request.get('http://127.0.0.1:8001/drafts/' + saved.id)).json()).toEqual(saved);
 });
 
 test('supported historical Oslo offset saves and reopens unchanged', async ({ page }) => {
@@ -461,7 +465,8 @@ test('confirmed deletion retains its identity through a committed lost reply', a
   await page.route('**:8001/drafts/*/delete', async route => { retry = route.request().postData()!; retryTarget = route.request().url(); await route.continue(); });
   await page.getByRole('button', { name: 'Prøv samme slettingsforsøk igjen' }).click();
   await expect(status(page)).toHaveText('Utkastet er slettet.');
-  expect(retry).toBe(original); expect(retryTarget).toBe(originalTarget);
+  expect(retry).toBe(''); expect(retryTarget).toBe('');
+  expect((await (await page.request.get('http://127.0.0.1:8001/draft-deletions/' + JSON.parse(original).operation_id)).json()).deleted_id).toBe(new URL(originalTarget).pathname.split('/')[2]);
   expect((await page.request.get('http://127.0.0.1:8001/drafts/' + saved.id)).status()).toBe(404);
   const proof = await (await page.request.get('http://127.0.0.1:8001/auth/csrf')).json();
   expect((await page.request.post('http://127.0.0.1:8001/drafts', { headers: { Origin: 'http://127.0.0.1:5173', 'X-CSRF-Token': proof.csrf_token }, data: JSON.parse(saveBody) })).status()).toBe(404);
@@ -519,11 +524,12 @@ for (const invalid of [null, { id: randomUUID(), revision: 1, expires_at: 'inval
   await login(page); await fill(page);
   await page.route('**:8001/drafts', route => route.fulfill({ json: { next_cursor: null, drafts: [invalid] } }));
   await preparation(page); await page.getByRole('button', { name: 'Oppdater listen' }).click();
-  await expect(status(page)).toContainText('Listen kunne ikke lastes.');
+  await expect(page.getByText('Listen er utilgjengelig. Prøv Oppdater listen igjen.', { exact: true })).toBeVisible();
   await expect(page.getByLabel('Buss/vogn', { exact: true })).toHaveValue('Bus-0012');
   await page.unroute('**:8001/drafts');
   await preparation(page); await page.getByRole('button', { name: 'Oppdater listen' }).click();
-  await expect(status(page)).toHaveText('Listen er oppdatert.');
+  await expect(page.getByText('Listen er utilgjengelig. Prøv Oppdater listen igjen.', { exact: true })).toHaveCount(0);
+  await expect(status(page)).toContainText('Ulagrede endringer');
   await editor(page); await expect(page.getByRole('button', { name: 'Lagre utkast', exact: true })).toBeEnabled();
 });
 
@@ -803,7 +809,7 @@ test('negative intervals are explained before sending and generic validation use
   await editor(page); await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
   await expect(status(page)).toHaveText('Lagret. Versjon 1.');
   await page.getByLabel('Buss/vogn', { exact: true }).fill('changed');
-  await page.route('**:8001/drafts/*', route => route.request().method() === 'POST' ? route.fulfill({ status: 422, json: { detail: 'Invalid synthetic value' } }) : route.continue());
+  await page.route('**:8001/drafts/*', route => route.request().method() === 'POST' ? route.fulfill({ status: 422, json: { detail: 'Kontroller feltene.' } }) : route.continue());
   await editor(page); await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
   await expect(status(page)).toContainText('Velg riktig kalenderdag eller neste dag');
   await expect(status(page)).not.toContainText('offset');

@@ -1,8 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { validContent, type Content, type Saved } from './PrivateDrafts';
 import { SourceFacts } from './PrivateImport';
+import { recoverOperation } from './recoverOperation';
 
 
+import { NoticeScreens, usePrivateNotices } from './PrivateNotices';
 import { PrivateWorkdayView } from './PrivateWorkdayView';
 import { effectiveDuty, activityFactMissing, displayFact, currentUncertainty } from './draftInterpretation';
 
@@ -11,7 +13,7 @@ type Decisions = { operation_id: string; expected_revision: number; acknowledgem
 export type Plan = { id: string; source_draft_id: string; source_revision: number; confirmed_at: string; final_end: string; expires_at: string; state: 'confirmed'; draft: Content; acknowledgements: string[]; classifications: Record<string, string>; unknowns: { id: string; label: string }[] };
 type Summary = Pick<Plan, 'id' | 'source_draft_id' | 'source_revision' | 'expires_at'> & { service_date: string | null };
 type Deletion = { id: string; expires_at: string; body: { operation_id: string; source_revision: number } };
-type Props = { saved: Saved | null; clean: boolean; request: (path: string) => Promise<any>; mutation: (path: string, body: object) => Promise<any>; expired: () => void; suspended: boolean; lock: (value: boolean) => void; screen: 'upload' | 'import' | 'editor' | 'plan'; showPlan: () => void; showPreparation: () => void; planChanged: (value: boolean) => void; consultationChanged: (value: boolean) => void };
+type Props = { saved: Saved | null; clean: boolean; request: (path: string) => Promise<any>; mutation: (path: string, body: object) => Promise<any>; expired: () => void; suspended: boolean; lock: (value: boolean) => void; screen: 'upload' | 'import' | 'editor' | 'plan'; showPlan: () => void; showPreparation: () => void; planChanged: (value: boolean) => void; consultationChanged: (value: boolean) => void; registryDirty: (value: boolean) => void; registryOpen: (value: boolean) => void; registryNavigation: number };
 const uuid = (v: any): v is string => typeof v === 'string' && /^[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i.test(v);
 const canonical = (v: any): string => JSON.stringify(v, (_, value) => value && typeof value === 'object' && !Array.isArray(value) ? Object.fromEntries(Object.keys(value).sort().map(key => [key, value[key]])) : value);
 const live = (v: any) => typeof v === 'string' && Number.isFinite(Date.parse(v)) && Date.parse(v) > Date.now();
@@ -51,7 +53,8 @@ export function Facts({ content, classifications = {}, historical = false }: { c
     </>;
 }
 
-export function PrivateConfirmation({ saved, clean, request, mutation, expired, suspended, lock, screen, showPlan, showPreparation, planChanged, consultationChanged }: Props) {
+export function PrivateConfirmation({ saved, clean, request, mutation, expired, suspended, lock, screen, showPlan, showPreparation, planChanged, consultationChanged, registryDirty, registryOpen, registryNavigation }: Props) {
+  const [noticeReaderOpen, setNoticeReaderOpen] = useState(false);
   const [planOpen, setPlanOpen] = useState(0);
   const [activityOpen, setActivityOpen] = useState(false);
   const dayTitle = useRef<HTMLHeadingElement>(null);
@@ -80,7 +83,10 @@ export function PrivateConfirmation({ saved, clean, request, mutation, expired, 
   const guardSelection = useCallback((value: boolean) => guardChild('selection', value), [guardChild]);
   const guardStart = useCallback((value: boolean) => guardChild('start', value), [guardChild]);
   const guardOutcome = useCallback((value: boolean) => guardChild('outcome', value), [guardChild]);
-  const guardNotice = useCallback((value: boolean) => guardChild('notice', value), [guardChild]);
+
+  const notices = usePrivateNotices({ suspended, request, mutation, expired, lock: registryDirty, changed: () => {} });
+  useEffect(() => { registryOpen(notices.screen !== 'day' || screen === 'plan' && noticeReaderOpen); }, [notices.screen, noticeReaderOpen, screen]);
+  useEffect(() => { notices.navigate('day'); }, [registryNavigation]);
   const [review, setReview] = useState<Review | null>(null);
   const [acks, setAcks] = useState<string[]>([]);
   const [classes, setClasses] = useState<Record<string, string>>({});
@@ -163,7 +169,7 @@ export function PrivateConfirmation({ saved, clean, request, mutation, expired, 
         || !value.workdays.every((v: any) => v && uuid(v.id) && uuid(v.source_draft_id) && Number.isInteger(v.source_revision) && v.source_revision > 0 && live(v.expires_at) && (v.service_date === null || /^\d{4}-\d{2}-\d{2}$/.test(v.service_date)))) throw Error();
       const combined = more ? [...items, ...value.workdays] : value.workdays;
       if (new Set(combined.map((v: Summary) => v.id)).size !== combined.length) throw Error();
-      setItems(combined); setCursor(value.next_cursor); setMessage(afterConfirmation ? 'Planen er bekreftet. Ingen aktivitet er startet eller fullført.' : 'Planlisten er oppdatert.');
+      setItems(combined); setCursor(value.next_cursor); setMessage(afterConfirmation ? 'Planen er bekreftet. Planlisten er oppdatert.' : 'Planlisten er oppdatert.');
     } catch (error: any) { if (alive.current && generation === reading.current && !deletionRef.current) { if (afterConfirmation && error?.status !== 401) setMessage('Planen er bekreftet. Planlisten kunne ikke oppdateres. Prøv Oppdater planlisten.'); else failure(error); } }
     finally { if (alive.current && generation === reading.current) setBusy(false); }
   }
@@ -188,38 +194,58 @@ export function PrivateConfirmation({ saved, clean, request, mutation, expired, 
     } catch (error) { if (alive.current && generation === epoch.current) failure(error); }
     finally { if (alive.current) setBusy(false); }
   }
-  function accept(value: any, decisions: Decisions) {
+  async function accept(value: any, decisions: Decisions, generation: number, authorityEpoch: number) {
     if (!review || !validPlan(value) || value.source_draft_id !== review.draft_id || value.source_revision !== review.revision
       || canonical(value.draft) !== canonical(review.draft) || Date.parse(value.expires_at) > Date.parse(review.expires_at!)
       || canonical(value.unknowns) !== canonical(relevantUnknowns(review, decisions.classifications))
       || canonical([...value.acknowledgements].sort()) !== canonical([...decisions.acknowledgements].sort()) || canonical(value.classifications) !== canonical(decisions.classifications)) throw Error();
-    setPlan(value); setActivityOpen(false); showPlan(); setPending(null); setReview(null); setMessage('Planen er bekreftet. Ingen aktivitet er startet eller fullført.'); title.current?.focus();
+    const latest = await request('/workdays/' + value.id);
+    if (!validPlan(latest) || latest.id !== value.id || latest.source_draft_id !== value.source_draft_id || latest.source_revision !== value.source_revision
+      || canonical(latest.draft) !== canonical(value.draft) || canonical(latest.classifications) !== canonical(value.classifications)
+      || canonical(latest.acknowledgements) !== canonical(value.acknowledgements) || Date.parse(latest.expires_at) > Date.parse(value.expires_at)) throw Error();
+    if (!alive.current || generation !== reading.current || authorityEpoch !== epoch.current || deletionRef.current || busLockedRef.current) return false;
+    setPlan(latest); setActivityOpen(false); showPlan(); setPending(null); setReview(null); setMessage('Planen er bekreftet. Lagret plan er hentet.'); title.current?.focus();
+    return true;
   }
   async function send(lookup = false) {
     if (!review || busLockedRef.current) return;
-    const generation = reading.current;
+    const generation = reading.current, authorityEpoch = epoch.current;
     const decisions = pending ?? { operation_id: review.operation_id, expected_revision: review.revision, acknowledgements: [...acks].sort(), classifications: { ...classes } };
     let checking = false;
     setPending(decisions); setBusy(true); setMessage('Bekreftelse er uavklart til svaret er kontrollert.');
     try {
-      const value = lookup ? await request('/workday-operations/' + decisions.operation_id) : await mutation('/drafts/' + review.draft_id + '/confirm', decisions);
+      let value;
+      if (lookup || pending) {
+        const status = await request('/workday-operations/' + decisions.operation_id);
+        if (!status || Object.keys(status).sort().join() !== 'result,state') throw Error();
+        if (status.state === 'accepted') { checking = true; if (await accept(status.result, decisions, generation, authorityEpoch)) await list(false, true); return; }
+        if (status.state !== 'pending' || status.result !== null) throw Error();
+        if (lookup) { setMessage('Serveren har ikke registrert en bekreftelse for forsøket. Beslutningene er beholdt. Prøv samme bekreftelse igjen.'); return; }
+      }
+      value = await mutation('/drafts/' + review.draft_id + '/confirm', decisions);
       if (!alive.current || generation !== reading.current || deletionRef.current || busLockedRef.current) return;
       if (lookup) {
         if (!value || Object.keys(value).sort().join() !== 'result,state') throw Error();
         if (value.state === 'pending' && value.result === null) { setMessage('Forsøket er ikke akseptert. Prøv samme bekreftelse igjen.'); return; }
         if (value?.state !== 'accepted') throw Error();
-        accept(value.result, decisions);
+        if (!await accept(value.result, decisions, generation, authorityEpoch)) return;
       } else {
         checking = true;
         const operation = await request('/workday-operations/' + decisions.operation_id);
         if (!alive.current || generation !== reading.current || deletionRef.current || busLockedRef.current) return;
         if (!operation || Object.keys(operation).sort().join() !== 'result,state' || operation.state !== 'accepted' || canonical(operation.result) !== canonical(value)) throw Error();
-        accept(value, decisions);
+        if (!await accept(value, decisions, generation, authorityEpoch)) return;
       }
       await list(false, true);
     } catch (error: any) {
       if (!alive.current || generation !== reading.current || deletionRef.current || busLockedRef.current) return;
-      if ([401, 404, 409, 410, 413, 422].includes(error?.status) && (!checking || error?.status === 401)) { setPending(null); setReview(null); failure(error); }
+      if (error?.status === 401 || !checking && !lookup && typeof error.apiDetail === 'string' && [
+        'Tilgangen ble avvist.', 'Bekreftelsesforsøket er utløpt.', 'Utkastet, forsøket eller planens frist er utløpt.',
+        'Bekreftelsesforsøket gjelder en annen versjon.', 'Bekreftelsesforsøket har andre beslutninger.',
+        'Utkastet er endret. Gjennomgå den lagrede versjonen på nytt.', 'Utkastet har allerede en bekreftet plan. Åpne planen.',
+        'Rett blokkeringene og klassifiser alle ukjente aktivitetstyper.', 'Alle oppførte ukjente opplysninger må gjennomgås og godtas for denne versjonen.',
+        'Kontroller feltene.', 'Forespørselen er for stor.',
+      ].includes(error.apiDetail)) { setPending(null); setReview(null); failure(error); }
       else setMessage('Bekreftelsen er uavklart. Behold siden åpen og kontroller eller prøv samme bekreftelse igjen.');
     } finally { if (alive.current && generation === reading.current) setBusy(false); }
   }
@@ -235,6 +261,7 @@ export function PrivateConfirmation({ saved, clean, request, mutation, expired, 
   }
   async function remove(lookup = false) {
     if (sendingDeletion.current || suspended || busLockedRef.current) return;
+    const retry = !!deletionRef.current;
     let operation = deletionRef.current;
     if (!operation) {
       if (!plan || !window.confirm('Slette denne bekreftede planen? Dette kan ikke angres. Kildeutkastet beholdes.')) return;
@@ -243,7 +270,15 @@ export function PrivateConfirmation({ saved, clean, request, mutation, expired, 
     }
     sendingDeletion.current = true; setBusy(true); setMessage('Slettingen er uavklart til svaret er kontrollert.');
     try {
-      const value = lookup ? await request('/workday-deletions/' + operation.body.operation_id) : await mutation('/workdays/' + operation.id + '/delete', operation.body);
+      const original = operation;
+      const status = () => request('/workday-deletions/' + original.body.operation_id);
+      const mutate = () => mutation('/workdays/' + original.id + '/delete', original.body);
+      const authorize = async () => {
+        const current = await request('/workdays/' + original.id);
+        if (!validPlan(current) || current.id !== original.id || current.source_revision !== original.body.source_revision || Date.parse(current.expires_at) > Date.parse(original.expires_at)
+          || !alive.current || deletionRef.current !== original) throw Error();
+      };
+      const value = lookup ? await status() : retry ? await recoverOperation(status, authorize, mutate) : await mutate();
       if (!alive.current || deletionRef.current !== operation) return;
       if (!value || Object.keys(value).sort().join() !== 'deleted_id,operation_id,source_revision' || value.deleted_id !== operation.id || value.operation_id !== operation.body.operation_id || value.source_revision !== operation.body.source_revision || !live(operation.expires_at)) throw Error();
       // Guarded reads revalidate the displayed session after receiving their
@@ -262,7 +297,7 @@ export function PrivateConfirmation({ saved, clean, request, mutation, expired, 
   }
   return <section className="private-confirmation" aria-label="Bekreft plan" aria-busy={busy}>
     <p hidden={screen === 'plan' && activityOpen && /^(Bekreftet plan åpnet|Planen er bekreftet|Planlisten er oppdatert)/.test(message)} role="status" aria-label="Bekreftelsesstatus">{message}</p>
-    <div hidden={screen !== 'editor'}>
+    <div hidden={screen !== 'editor' || notices.screen !== 'day'}>
     <h2 ref={title} tabIndex={-1}>Gjennomgå og bekreft</h2>
     <p>Bekreftelse lagrer en egen plan. Planen utløper sju dager etter siste aktivitetsslutt. Gjennomgang gjelder bare den lagrede versjonen.</p>
     <p>Et utkast som allerede er brukt til bekreftelse krever et nytt, separat utkast for en ny plan.</p>
@@ -280,9 +315,11 @@ export function PrivateConfirmation({ saved, clean, request, mutation, expired, 
     </section>}
     {pending && <div className="controls"><button disabled={busy || busLocked || suspended} onClick={() => void send()}>Prøv samme bekreftelse igjen</button><button disabled={busy || busLocked || suspended} onClick={() => void send(true)}>Kontroller bekreftelsen</button></div>}
     </div>
-    {plan && <PrivateWorkdayView validPlan={validPlan} historicalDetails={<Facts historical content={plan.draft} classifications={plan.classifications} />} busy={busy} key={plan.id + ':' + planOpen} plan={plan} hidden={screen !== 'plan'} activityOpen={activityOpen} setActivityOpen={setActivityOpen} request={request} mutation={mutation} suspended={suspended || !!deleting || !!pending} expired={expired} planAvailable={planAvailable} dayNavigationLocked={dayNavigationLocked} busLocked={busLocked} guardBus={guardBus} guardSelection={guardSelection} guardStart={guardStart} guardOutcome={guardOutcome} guardNotice={guardNotice} busAvailability={busAvailability} selectionAvailability={selectionAvailability} startAvailability={startAvailability} remove={() => void remove()} closeView={() => { setPlan(null); showPreparation(); }} showPreparation={showPreparation} shorten={value => setPlan(current => current?.id === plan.id && Date.parse(value) < Date.parse(current.expires_at) ? { ...current, expires_at: value } : current)} />}
+    <div hidden={screen === 'plan' && noticeReaderOpen}><NoticeScreens notices={notices} serviceDate={plan?.draft.service_date ?? null} back={() => notices.navigate('day')} /></div>
+    {(!plan || screen !== 'plan') && notices.screen === 'day' && <button disabled={suspended} onClick={notices.open}>Manuelt vedlikeholdte avvik</button>}
+    {plan && <PrivateWorkdayView validPlan={validPlan} historicalDetails={<Facts historical content={plan.draft} classifications={plan.classifications} />} busy={busy} key={plan.id + ':' + planOpen} plan={plan} hidden={screen !== 'plan'} activityOpen={activityOpen} setActivityOpen={setActivityOpen} request={request} mutation={mutation} suspended={suspended || !!deleting || !!pending} expired={expired} planAvailable={planAvailable} dayNavigationLocked={dayNavigationLocked} busLocked={busLocked} guardBus={guardBus} guardSelection={guardSelection} guardStart={guardStart} guardOutcome={guardOutcome} notices={notices} readerChanged={setNoticeReaderOpen} busAvailability={busAvailability} selectionAvailability={selectionAvailability} startAvailability={startAvailability} remove={() => void remove()} closeView={() => { setPlan(null); showPreparation(); }} showPreparation={showPreparation} shorten={value => setPlan(current => current?.id === plan.id && Date.parse(value) < Date.parse(current.expires_at) ? { ...current, expires_at: value } : current)} />}
     <div hidden={screen !== 'plan'}>{deleting && <div className="controls"><button disabled={busy || suspended} onClick={() => void remove()}>Prøv samme sletting igjen</button><button disabled={busy || suspended} onClick={() => void remove(true)}>Kontroller slettingen</button></div>}</div>
-    <div hidden={screen !== 'upload'}><h3>Mine bekreftede planer</h3><button disabled={busy || !!pending || !!deleting || busLocked || suspended} onClick={() => void list()}>Oppdater planlisten</button>
+    <div hidden={screen !== 'upload' || notices.screen !== 'day'}><h3>Mine bekreftede planer</h3><button disabled={busy || !!pending || !!deleting || busLocked || suspended} onClick={() => void list()}>Oppdater planlisten</button>
     {items.length === 0 && <p>Ingen planer er lastet.</p>}<ul>{items.map(item => <li key={item.id}><button disabled={busy || !!pending || !!deleting || busLocked || suspended} onClick={() => void reopen(item.id)}>Åpne plan {item.service_date ?? 'ukjent dato'} · versjon {item.source_revision}</button> Utløper {date(item.expires_at)}</li>)}</ul>
     {cursor && <button disabled={busy || !!pending || !!deleting || busLocked || suspended} onClick={() => void list(true)}>Last flere planer</button>}
     </div>

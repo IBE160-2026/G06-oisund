@@ -1,9 +1,11 @@
 import asyncio
 from contextlib import asynccontextmanager, suppress
 from uuid import UUID
+from datetime import date
+from typing import Annotated
 
 import psycopg
-from fastapi import FastAPI, HTTPException, Request, Response
+from fastapi import FastAPI, HTTPException, Request, Response, Query
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
@@ -19,7 +21,8 @@ from .workday_lifecycle_domain import CloseWorkday
 from .workday_outcome_domain import SaveOutcome, OutcomeRecord, OutcomeReceipt, WorkdayRecap
 from . import workday_outcome_storage
 from . import workday_notice_storage
-from .workday_notice_domain import SaveNotice, NoticeCommand, NoticeRecord, NoticeList, NoticeReceipt
+from .workday_notice_domain import SaveNotice, NoticeCommand, NoticeRecord, NoticeList, NoticeReceipt, AccountNoticeCommand, SaveAccountNotice, AccountNoticeList
+from .notice_reader_domain import NoticeReader
 from .workday_bus_domain import SaveBus, BusRecord, BusReceipt
 from .workday_domain import ConfirmRequest, ReviewRequest, Review, WorkdayRecord, WorkdayList, WorkdayOperation, DeleteWorkdayRequest, DeletedWorkday
 from . import private_import
@@ -318,6 +321,41 @@ def start_workday(identifier: UUID, body: StartWorkday, request: Request):
 @app.get('/workday-start-operations/{identifier}', response_model=StartReceipt)
 def find_start_operation(identifier: UUID, request: Request):
     return workday_lifecycle_storage.lookup(request, identifier)
+
+
+@app.get('/workdays/{identifier}/notice-reader', response_model=NoticeReader)
+def notice_reader(identifier: UUID, request: Request, line: Annotated[str | None, Query(min_length=1, max_length=100)] = None, calendar_date: date | None = None):
+    return workday_notice_storage.reader(request, identifier, line, calendar_date)
+
+
+@app.get('/notices', response_model=AccountNoticeList)
+def account_notices(request: Request, cursor: UUID | None = None):
+    return workday_notice_storage.read(request, cursor=cursor)
+
+
+@app.get('/notices/{notice_id}', response_model=NoticeRecord)
+def account_notice(notice_id: UUID, request: Request):
+    return workday_notice_storage.read(request, notice_id=notice_id)
+
+
+@app.post('/notices', response_model=NoticeReceipt)
+def create_account_notice(body: SaveAccountNotice, request: Request):
+    return workday_notice_storage.save(request, None, body)
+
+
+@app.post('/notices/{notice_id}', response_model=NoticeReceipt)
+def edit_account_notice(notice_id: UUID, body: SaveAccountNotice, request: Request):
+    return workday_notice_storage.save(request, None, body, notice_id)
+
+
+@app.post('/notices/{notice_id}/check', response_model=NoticeReceipt)
+def check_account_notice(notice_id: UUID, body: AccountNoticeCommand, request: Request):
+    return workday_notice_storage.save(request, None, body, notice_id, 'check')
+
+
+@app.post('/notices/{notice_id}/end', response_model=NoticeReceipt)
+def end_account_notice(notice_id: UUID, body: AccountNoticeCommand, request: Request):
+    return workday_notice_storage.save(request, None, body, notice_id, 'end')
 
 
 @app.get('/workdays/{identifier}/notices', response_model=NoticeList)

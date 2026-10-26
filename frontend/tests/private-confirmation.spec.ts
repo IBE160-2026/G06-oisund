@@ -420,6 +420,28 @@ test('saved revision review cancels unchanged, editing invalidates, unknowns and
   expect(await page.evaluate(async () => ({ local: Object.keys(localStorage), session: Object.keys(sessionStorage), databases: (await indexedDB.databases()).map(d => d.name) })) ).toEqual({ local: [], session: [], databases: [] });
 });
 
+test('confirmation current read cannot adopt across source-expiry authority change until explicit recovery', async ({ page, context }) => {
+  await page.clock.install(); await login(page); await seed(page, context, 'trip'); await review(page); await decide(page);
+  let release!: () => void, received!: () => void, first = true;
+  const held = new Promise<void>(resolve => { release = resolve; }), entered = new Promise<void>(resolve => { received = resolve; });
+  await page.route('**:8001/workdays/*', async route => {
+    if (!first || route.request().method() !== 'GET') return route.continue();
+    first = false; const response = await route.fetch(); received(); await held; await route.fulfill({ response });
+  });
+  try {
+    await page.getByRole('button', { name: 'Bekreft gjennomgått plan', exact: true }).click(); await entered;
+    // The confirmed future plan and session remain live. Only the source's
+    // seven-day timer changes the editor's authority epoch during this read.
+    await page.clock.fastForward(7 * 86400000 + 10000); release();
+    await expect(page.getByRole('button', { name: 'Kontroller bekreftelsen', exact: true })).toBeEnabled();
+    await expect(page.getByRole('region', { name: 'Bekreftet plan', exact: true })).toHaveCount(0);
+    expect((await (await context.request.get(API + '/workdays')).json()).workdays).toHaveLength(1);
+    await page.getByRole('button', { name: 'Kontroller bekreftelsen', exact: true }).click();
+    await expect(page.getByRole('region', { name: 'Bekreftet plan', exact: true })).toBeVisible();
+    await expect(page.getByRole('status', { name: 'Bekreftelsesstatus', exact: true })).toHaveText('Planen er bekreftet. Lagret plan er hentet.');
+  } finally { release(); }
+});
+
 test('accepted confirmation with invalid reply stays uncertain and resolves through authorized lookup', async ({ page, context }) => {
   await page.clock.install();
   await login(page); await seed(page, context, 'trip'); await review(page); await decide(page);

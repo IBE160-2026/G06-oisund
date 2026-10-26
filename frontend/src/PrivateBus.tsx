@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { recoverOperation } from './recoverOperation';
 import { normalizeBus as normalized, busError } from './busValue';
 import { validLifecycle } from './PrivateWorkdayProgress';
 
@@ -70,7 +71,9 @@ export function PrivateBus({ id, expiresAt, request, mutation, suspended, expire
     sending.current = true; editing.current = true; lock(true); setPending(operation); setBusy(true); setMessage('Lagringen er uavklart til svaret er kontrollert.');
     let verifying = false;
     try {
-      const receipt = lookup ? await request('/workday-bus-operations/' + operation.operation_id) : await mutation(path, operation);
+      const status = () => request('/workday-bus-operations/' + operation.operation_id);
+      const mutate = () => mutation(path, operation);
+      const receipt = lookup ? await status() : pending ? await recoverOperation(status, current, mutate) : await mutate();
       if (!alive.current) return;
       if (!receipt || Object.keys(receipt).sort().join() !== 'operation_id,result' || receipt.operation_id !== operation.operation_id || !valid(receipt.result, true)
         || receipt.result.revision !== operation.expected_revision + 1 || receipt.result.physical_bus !== operation.physical_bus) throw Error();
@@ -91,7 +94,7 @@ export function PrivateBus({ id, expiresAt, request, mutation, suspended, expire
         } catch { if (alive.current) setMessage('Lagringen er uavklart. Kontroller eller prøv samme lagring igjen.'); }
         return;
       }
-      if (!verifying && !lookup && error?.status === 409) {
+      if (!verifying && !lookup && error?.status === 409 && ['Skiftet er avsluttet. Planen er skrivebeskyttet.', 'Lagringsforsøket har annet innhold.', 'Bussregistreringen er endret. Sammenlign med lagret verdi.'].includes(error.apiDetail)) {
         try {
           const latest = await current(); if (!alive.current) return;
           if (error.apiDetail === 'Skiftet er avsluttet. Planen er skrivebeskyttet.') {

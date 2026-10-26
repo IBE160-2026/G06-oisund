@@ -70,8 +70,12 @@ test('activity pending Start and failed lookup keep one original operation and r
   await check.click(); await expect(check).toBeEnabled(); await expect(shiftStatus(page)).toContainText('uavklart');
   await dayScreen(page); await expect(button(page, 'Kontroller skiftstarten')).toBeEnabled(); await expect(button(page, 'Lukk planen')).toBeDisabled();
   await page.unroute('**:8001' + path); page.on('request', request => { if (request.url() === API + path && request.method() === 'POST') { retry = request.postDataJSON(); posts++; } });
+  await button(page, 'Prøv samme skiftstart igjen').click(); await expect(check).toBeEnabled(); await expect(shiftStatus(page)).toContainText('uavklart');
+  expect(retry).toBeUndefined(); expect(posts).toBe(1); await expect.poll(() => beforeUnload(page)).toBe(true);
+  await page.unroute('**:8001/workday-start-operations/*');
   await button(page, 'Prøv samme skiftstart igjen').click(); await expect(shiftStatus(page)).toHaveText('Skiftstart er lagret.');
-  expect(retry).toEqual(original); expect(posts).toBe(2); await expect.poll(() => beforeUnload(page)).toBe(false);
+  expect(retry).toBeUndefined(); expect(posts).toBe(1); await expect.poll(() => beforeUnload(page)).toBe(false);
+  expect((await (await context.request.get(API + '/workday-start-operations/' + original.operation_id)).json()).operation_id).toBe(original.operation_id);
   await activityScreen(page); await expect(selected(page)).toHaveAttribute('data-selected-activity-id', activities[0].id);
   const saved = await current(context, plan.id); expect(saved.outcomes.revision).toBe(0); expect(saved.lifecycle.revision).toBe(1);
 });

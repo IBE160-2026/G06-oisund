@@ -135,7 +135,8 @@ for (const reply of ['lost', 'html', 'malformed']) test(`uncertain ${reply} choi
   await expect(page.getByRole('button', { name: 'Lukk planen', exact: true })).toBeDisabled(); await expect.poll(() => beforeUnload(page), { timeout: 5000 }).toBe(true);
   await page.unroute('**:8001' + path); let retry: any;
   page.on('request', req => { if (req.url().endsWith(path) && req.method() === 'POST') retry = req.postDataJSON(); });
-  await page.getByRole('button', { name: 'Prøv samme aktivitetsvalg igjen', exact: true }).click(); await expect(selected(page)).toContainText('Linje: 20'); expect(retry).toEqual(original);
+  await page.getByRole('button', { name: 'Prøv samme aktivitetsvalg igjen', exact: true }).click(); await expect(selected(page)).toContainText('Linje: 20'); expect(retry).toBeUndefined();
+  expect((await (await context.request.get(API + '/workday-selection-operations/' + original.operation_id)).json()).result.activity_id).toBe(original.activity_id);
   await expect.poll(() => beforeUnload(page), { timeout: 5000 }).toBe(false);
 });
 

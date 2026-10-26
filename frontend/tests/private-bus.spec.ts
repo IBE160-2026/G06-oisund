@@ -175,7 +175,8 @@ test('lost reply uses identical operation retry and compares newer accepted stat
   let retried: any;
   page.on('request', request => { if (request.url().endsWith(path) && request.method() === 'POST') retried = request.postDataJSON(); });
   await page.getByRole('button', { name: 'Prøv samme busslagring igjen', exact: true }).click();
-  await expect(busStatus(page)).toContainText('nyere registrering'); expect(retried).toEqual(first);
+  await expect(busStatus(page)).toContainText('nyere registrering'); expect(retried).toBeUndefined();
+  expect((await (await context.request.get(API + '/workday-bus-operations/' + first.operation_id)).json()).result.physical_bus).toBe(first.physical_bus);
   await expect(busInput(page)).toHaveValue('0006');
   expect((await (await context.request.get(API + path)).json()).physical_bus).toBe('0090');
 });
@@ -194,6 +195,31 @@ test('missing lookup stays uncertain; successful lookup verifies current bus', a
   await page.unroute('**:8001/workdays/*/physical-bus');
   await page.getByRole('button', { name: 'Prøv samme busslagring igjen', exact: true }).click();
   await expect(busStatus(page)).toHaveText('Fysisk buss er lagret.');
+});
+
+for (const failure of ['unavailable', 'malformed']) test(`absent bus receipt with ${failure} current authorization never resends`, async ({ page, context }) => {
+  const { plan } = await openedPlan(page, context); await expect(busInput(page)).toBeEnabled();
+  const path = '/workdays/' + plan.id + '/physical-bus'; const commands: any[] = [];
+  await page.route('**:8001' + path, async route => {
+    if (route.request().method() === 'GET') return route.continue();
+    commands.push(route.request().postDataJSON()); await route.abort();
+  });
+  await busInput(page).fill('Retained original bus'); await saveBus(page).click();
+  const recover = page.getByRole('button', { name: 'Prøv samme busslagring igjen', exact: true }); await expect(recover).toBeEnabled();
+  expect((await context.request.get(API + '/workday-bus-operations/' + commands[0].operation_id)).status()).toBe(404);
+  await page.unroute('**:8001' + path);
+  await page.route('**:8001' + path, async route => {
+    if (route.request().method() === 'POST') { commands.push(route.request().postDataJSON()); return route.continue(); }
+    if (failure === 'unavailable') return route.fulfill({ status: 503, json: { detail: 'Synthetic current read unavailable' } });
+    const response = await route.fetch(), current = await response.json(); await route.fulfill({ json: { ...current, revision: 'invalid' } });
+  });
+  await recover.click(); await expect(recover).toBeEnabled(); await expect(busStatus(page)).toContainText('uavklart');
+  expect(commands).toHaveLength(1); await expect(busInput(page)).toHaveValue('Retained original bus');
+  await page.unroute('**:8001' + path);
+  expect((await (await context.request.get(API + path)).json()).revision).toBe(0);
+  page.on('request', request => { if (request.method() === 'POST' && request.url() === API + path) commands.push(request.postDataJSON()); });
+  await recover.click(); await expect(busStatus(page)).toHaveText('Fysisk buss er lagret.');
+  expect(commands).toHaveLength(2); expect(commands[1]).toEqual(commands[0]);
 });
 
 test('malformed accepted receipt stays unresolved until guarded operation lookup', async ({ page, context }) => {
@@ -266,7 +292,7 @@ test('remote deletion after bus acceptance hides authority and preserves the sam
   page.on('request', request => { if (request.url().endsWith(path) && request.method() === 'POST') retry = request.postDataJSON(); });
   await page.getByRole('button', { name: 'Prøv samme busslagring igjen', exact: true }).click();
   await expect(page.getByRole('button', { name: 'Kontroller busslagringen', exact: true })).toBeEnabled();
-  expect(retry).toEqual(original); expect((await context.request.get(API + path)).status()).toBe(404);
+  expect(retry).toBeUndefined(); expect(original.physical_bus).toBe('behold lokalt 0012'); expect((await context.request.get(API + path)).status()).toBe(404);
   await expect(busInput(page)).toHaveValue('behold lokalt 0012');
 });
 
@@ -387,7 +413,8 @@ for (const malformed of [false, true]) test(`accepted write followed by ${malfor
   await busInput(page).fill('0012'); await saveBus(page).click(); await expect(page.getByRole('button', { name: 'Prøv samme busslagring igjen', exact: true })).toBeEnabled();
   await expect(busInput(page)).toBeDisabled(); await expectUnload(page, true);
   await page.unroute('**:8001' + path); let retry: any; page.on('request', req => { if (req.url().endsWith(path) && req.method() === 'POST') retry = req.postDataJSON(); });
-  await page.getByRole('button', { name: 'Prøv samme busslagring igjen', exact: true }).click(); await expect(busStatus(page)).toHaveText('Fysisk buss er lagret.'); expect(retry).toEqual(original);
+  await page.getByRole('button', { name: 'Prøv samme busslagring igjen', exact: true }).click(); await expect(busStatus(page)).toHaveText('Fysisk buss er lagret.'); expect(retry).toBeUndefined();
+  expect((await (await context.request.get(API + '/workday-bus-operations/' + original.operation_id)).json()).result.physical_bus).toBe(original.physical_bus);
 });
 
 for (const unresolved of [false, true]) test(`bus-only outer leave guards retain ${unresolved ? 'unresolved' : 'dirty'} proposals and release`, async ({ page, context }) => {

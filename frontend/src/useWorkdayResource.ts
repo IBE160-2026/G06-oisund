@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { recoverOperation } from './recoverOperation';
 import { validLifecycle } from './PrivateWorkdayProgress';
 
 export type ResourceProps = {
@@ -63,8 +64,9 @@ export function useWorkdayResource<T extends Record>(props: ResourceProps, resou
     setPending(operation); setProposal(operation); setBusy(true); setMessage('Forsøket er uavklart til svaret er kontrollert.');
     let verifying = false;
     try {
-      const receipt = lookup ? await request('/workday-' + resource + '-operations/' + operation.operation_id)
-        : await mutation('/workdays/' + id + '/' + resource, operation);
+      const status = () => request('/workday-' + resource + '-operations/' + operation.operation_id);
+      const mutate = () => mutation('/workdays/' + id + '/' + resource, operation);
+      const receipt = lookup ? await status() : pending ? await recoverOperation(status, current, mutate) : await mutate();
       if (!alive.current) return;
       if (!receipt || Object.keys(receipt).sort().join() !== 'operation_id,result' || receipt.operation_id !== operation.operation_id || !valid(receipt.result, true) || !accepted(receipt.result, operation)) throw Error();
       verifying = true;
@@ -87,7 +89,7 @@ export function useWorkdayResource<T extends Record>(props: ResourceProps, resou
         } catch { if (alive.current) setMessage('Forsøket er uavklart. Kontroller eller prøv samme forsøk.'); }
         return;
       }
-      if (!verifying && !lookup && error?.status === 409) {
+      if (!verifying && !lookup && error?.status === 409 && ['Skiftet er avsluttet. Planen er skrivebeskyttet.', 'Lagringsforsøket har annet innhold.', 'Aktivitetsvalget er endret. Sammenlign med lagret verdi.', 'Skiftstatusen er endret. Last inn lagret status.'].includes(error.apiDetail)) {
         try {
           const latest = await current(); if (!alive.current) return;
           if (error.apiDetail === 'Skiftet er avsluttet. Planen er skrivebeskyttet.') {

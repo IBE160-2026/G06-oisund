@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
+import { recoverOperation } from './recoverOperation';
 import { PrivateTimeInput } from './PrivateTimeInput';
-import { validLifecycle, type Lifecycle } from './PrivateWorkdayProgress';
+
 import { osloDateTime } from './dayOverview';
 
 type Content = { title: string; line_tags: string[]; line_scope: 'selected' | 'all'; summary: string | null; description: string | null; source_note: string | null; source_url: string | null; source_updated_at: string | null; valid_from: string | null; valid_until: string | null };
-type Notice = Content & { id: string; workday_id: string; revision: number; status: 'registered' | 'ended_manually'; entered_at: string; edited_at: string; checked_at: string | null; checked_revision: number | null; expires_at: string };
-type Command = { path: string; kind: 'save' | 'check' | 'end'; target: string | null; before: Notice | null; body: { operation_id: string; expected_revision: number; expected_lifecycle_revision: number; content?: Content } };
-type Props = { id: string; expiresAt: string; lifecycle: Lifecycle | null; factsAvailable: boolean; suspended: boolean; request: (path: string) => Promise<any>; mutation: (path: string, body: object) => Promise<any>; expired: () => void; lock: (value: boolean) => void; shorten: (value: string) => void; changed: () => void };
+export type Notice = Content & { id: string; workday_id: string | null; revision: number; status: 'registered' | 'ended_manually'; entered_at: string; edited_at: string; checked_at: string | null; checked_revision: number | null; expires_at: string };
+type Command = { path: string; kind: 'save' | 'check' | 'end'; target: string | null; before: Notice | null; body: { operation_id: string; expected_revision: number; content?: Content } };
+type Props = { suspended: boolean; request: (path: string) => Promise<any>; mutation: (path: string, body: object) => Promise<any>; expired: () => void; lock: (value: boolean) => void; changed: () => void };
 const uuid = (v: any): v is string => typeof v === 'string' && /^[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i.test(v);
 const stamp = (v: any): v is string => {
   if (typeof v !== 'string') return false;
@@ -57,9 +58,9 @@ const multiline = (v: any, max: number) => typeof v === 'string' && v.trim() ===
 const nullable = (v: any) => v === null || stamp(v);
 const sameInstant = (a: string | null, b: string | null) => a === null ? b === null : b !== null && stamp(a) && stamp(b) && instantKey(a) === instantKey(b);
 function sameContent(a: Content, b: Content) { return ['summary', 'description', 'source_note'].every(k => (a[k as keyof Content] ?? null) === (b[k as keyof Content] ?? null)) && (a.line_scope ?? 'selected') === (b.line_scope ?? 'selected') && a.title === b.title && canonical(a.line_tags) === canonical(b.line_tags) && a.source_url === b.source_url && ['source_updated_at', 'valid_from', 'valid_until'].every(k => sameInstant(a[k as keyof Content] as string | null, b[k as keyof Content] as string | null)); }
-export function validNotice(v: any, id: string): v is Notice {
+export function validNotice(v: any, _id?: string): v is Notice {
   return v && Object.keys(v).filter(k => !['summary', 'description', 'source_note', 'line_scope'].includes(k)).sort().join() === 'checked_at,checked_revision,edited_at,entered_at,expires_at,id,line_tags,revision,source_updated_at,source_url,status,title,valid_from,valid_until,workday_id'
-    && uuid(v.id) && v.workday_id === id && Number.isSafeInteger(v.revision) && v.revision > 0 && plain(v.title, 300) && (v.source_url === null || http(v.source_url))
+    && uuid(v.id) && (v.workday_id === null || uuid(v.workday_id)) && Number.isSafeInteger(v.revision) && v.revision > 0 && plain(v.title, 300) && (v.source_url === null || http(v.source_url))
     && ['selected', 'all'].includes(v.line_scope ?? 'selected') && (v.summary == null || plain(v.summary, 1000)) && (v.source_note == null || plain(v.source_note, 500)) && (v.description == null || multiline(v.description, 5000))
     && Array.isArray(v.line_tags) && ((v.line_scope ?? 'selected') === 'all' ? v.line_tags.length === 0 : v.line_tags.length > 0) && v.line_tags.length <= 50 && v.line_tags.every((t: any) => plain(t, 300)) && new Set(v.line_tags).size === v.line_tags.length
     && ['registered', 'ended_manually'].includes(v.status) && ['entered_at', 'edited_at', 'expires_at'].every(k => stamp(v[k])) && Date.parse(v.entered_at) <= Date.parse(v.edited_at) && Date.parse(v.edited_at) < Date.parse(v.expires_at)
@@ -73,12 +74,15 @@ export function usePrivateNotices(props: Props) {
   const [screen, setScreen] = useState<'day' | 'list' | 'editor'>('day');
   const [records, setRecords] = useState<Notice[]>([]), [available, setAvailable] = useState(false), [busy, setBusy] = useState(false);
   const [denied, setDenied] = useState(false);
-  const [lifecycle, setLifecycle] = useState<Lifecycle | null>(null), [pending, setPending] = useState<Command | null>(null);
+  const [pending, setPending] = useState<Command | null>(null);
   const [draft, setDraft] = useState<Content | null>(null), [base, setBase] = useState<Notice | null>(null), [tags, setTags] = useState('');
   const [timeStates, setTimeStates] = useState<Record<string, { dirty: boolean; unresolved: boolean }>>({});
   const [comparison, setComparison] = useState<Notice | null>(null), [conflict, setConflict] = useState(false), [editorKey, setEditorKey] = useState(0);
   const [expanded, setExpanded] = useState<string | null>(null), [message, setMessage] = useState('Avvikslisten er ikke hentet.');
   const [validationAttempted, setValidationAttempted] = useState(false);
+  const [now, setNow] = useState(Date.now());
+  const serverAnchor = useRef({ instant: Date.now(), elapsed: performance.now() });
+  useEffect(() => { const timer = window.setInterval(() => setNow(serverAnchor.current.instant + performance.now() - serverAnchor.current.elapsed), 1000); return () => clearInterval(timer); }, []);
   const alive = useRef(true), sending = useRef(false), original = useRef<Command | null>(null), generation = useRef(0), navigation = useRef(0);
   const title = useRef<HTMLHeadingElement>(null), entry = useRef<HTMLButtonElement>(null);
   const tagResult = parseTags(tags);
@@ -96,18 +100,19 @@ export function usePrivateNotices(props: Props) {
     summary: normalized.summary !== null && !plain(normalized.summary, 1000) ? 'Kort forklaring: maks 1000 tegn uten kontrolltegn.' : null,
     description: normalized.description !== null && !multiline(normalized.description, 5000) ? 'Detaljert forklaring: maks 5000 tegn; linjeskift og tabulator er tillatt.' : null,
     source_note: normalized.source_note !== null && !plain(normalized.source_note, 500) ? 'Kildebeskrivelse: maks 500 tegn uten kontrolltegn.' : null,
+    valid_until: !normalized.valid_until || Date.parse(normalized.valid_until) <= now ? 'Oppgi en fremtidig sluttdato. Et tomt klokkeslett betyr 23:59:59 på Oslo-datoen.' : null,
     source_url: normalized.source_url !== null && !http(normalized.source_url) ? 'Kildelenken må være en gyldig HTTP(S)-adresse, for eksempel https://svipper.no/, maks 2048 tegn og uten mellomrom, omvendt skråstrek eller kontrolltegn.' : null,
   } : {};
   const fieldErrors = Object.values(errors).filter((v): v is string => !!v);
-  const authority = lifecycle && props.lifecycle && lifecycle.revision > props.lifecycle.revision ? lifecycle : props.lifecycle;
-  const terminal = !!authority && ['ended', 'aborted'].includes(authority.state);
-  const mutable = props.factsAvailable && available && !!authority && !terminal && !props.suspended;
+  const authority = null;
+  const terminal = !!base && !editable(base, now);
+  const mutable = available && !terminal && !props.suspended;
   async function request(path: string) {
     try { return await props.request(path); }
     catch (error: any) { if ([404, 410].includes(error?.status)) await props.request('/auth/session'); throw error; }
   }
   useEffect(() => { props.lock(dirty || !!pending); }, [dirty, pending]);
-  useEffect(() => { alive.current = true; return () => { alive.current = false; generation.current++; props.lock(false); }; }, [props.id]);
+  useEffect(() => { alive.current = true; return () => { alive.current = false; generation.current++; props.lock(false); }; }, []);
   function navigate(value: 'day' | 'list' | 'editor') { navigation.current++; setScreen(value); }
   useEffect(() => { if (screen !== 'day') title.current?.focus(); else entry.current?.focus(); }, [screen]);
   function unavailable(error: any, version: number) {
@@ -116,28 +121,27 @@ export function usePrivateNotices(props: Props) {
     setAvailable(false);
     if ([404, 410].includes(error?.status)) { setDenied(true); setComparison(null); }
     props.changed();
-    if (error?.status === 410 && error.apiDetail === 'Planen er utløpt.') props.shorten(new Date().toISOString());
   }
   async function current(version = generation.current) {
     let cursor: string | null = null; const all: Notice[] = [];
-    let deadline: string | null = null;
     do {
-      const value = await request('/workdays/' + props.id + '/notices' + (cursor ? '?cursor=' + cursor : ''));
+      const requestedAt = performance.now();
+      const value = await request('/notices' + (cursor ? '?cursor=' + cursor : ''));
       if (!alive.current || version !== generation.current) throw Error('Superseded read');
-      if (!value || Object.keys(value).sort().join() !== 'expires_at,next_cursor,notices,workday_id' || value.workday_id !== props.id || !stamp(value.expires_at) || Date.parse(value.expires_at) > Date.parse(props.expiresAt) || Date.parse(value.expires_at) <= Date.now()
-        || !Array.isArray(value.notices) || value.notices.length > 50 || !(value.next_cursor === null || uuid(value.next_cursor)) || value.next_cursor && (value.notices.length !== 50 || value.next_cursor === cursor)
-        || !value.notices.every((v: any) => validNotice(v, props.id) && v.expires_at === value.expires_at)) throw Error();
-      if (deadline !== null && deadline !== value.expires_at) throw Error();
-      deadline = value.expires_at; all.push(...value.notices); cursor = value.next_cursor;
-      if (all.length > 200 || new Set(all.map(v => v.id)).size !== all.length) throw Error();
+      if (!value || Object.keys(value).sort().join() !== 'next_cursor,notices,server_now' || !stamp(value.server_now)
+        || !Array.isArray(value.notices) || value.notices.length > 50 || !(value.next_cursor === null || uuid(value.next_cursor))
+        || value.next_cursor && (value.notices.length !== 50 || value.next_cursor === cursor)
+        || !value.notices.every((v: any) => validNotice(v) && Date.parse(v.expires_at) > Date.parse(value.server_now))) throw Error();
+      // Count the whole request interval conservatively: a delayed response
+      // must not grant a fresh validity interval from its arrival time.
+      serverAnchor.current = { instant: Date.parse(value.server_now), elapsed: requestedAt }; setNow(serverAnchor.current.instant + performance.now() - requestedAt);
+      all.push(...value.notices); cursor = value.next_cursor;
+      if (new Set(all.map(v => v.id)).size !== all.length) throw Error();
     } while (cursor);
-    const status = await request('/workdays/' + props.id + '/lifecycle');
-    if (!validLifecycle(status) || !nullable(status.started_at) || !nullable(status.ended_at) || status.workday_id !== props.id || !stamp(status.expires_at) || Date.parse(status.expires_at) > Date.parse(deadline!) || Date.parse(status.expires_at) <= Date.now()) throw Error();
-    if (!alive.current || version !== generation.current) throw Error();
-    // The last parent read wins when closure shortened retention during pagination.
-    const values = all.map(v => ({ ...v, expires_at: status.expires_at }));
-    setRecords(values); setLifecycle(status); setAvailable(true); setDenied(false); props.shorten(status.expires_at); props.changed();
-    return { records: values, lifecycle: status };
+    setRecords(all); setAvailable(true); setDenied(false); props.changed();
+    const newer = base && all.find(v => v.id === base.id && v.revision > base.revision);
+    if (draft && newer && !original.current) { setComparison(newer); setConflict(true); }
+    return { records: all, serverNow: serverAnchor.current.instant + performance.now() - serverAnchor.current.elapsed };
   }
   async function load() {
     if (sending.current || props.suspended) return;
@@ -148,7 +152,7 @@ export function usePrivateNotices(props: Props) {
   }
   function open() { navigate('list'); void load(); }
   function edit(value: Notice | null) {
-    if (!mutable || pending || draft) return;
+    if (!available || props.suspended || pending || draft || value && !editable(value, now)) return;
     setValidationAttempted(false);
     setBase(value); setDraft(value ? content(value) : empty()); setTags(value ? tagText(value.line_tags) : ''); setTimeStates({}); setComparison(null); setConflict(false); setEditorKey(v => v + 1); navigate('editor');
   }
@@ -165,19 +169,35 @@ export function usePrivateNotices(props: Props) {
   }
   async function send(command?: Command, lookup = false) {
     if (sending.current || props.suspended) return;
+    const retry = !!original.current;
     const op = original.current ?? command; if (!op) return;
     const destination = navigation.current, version = ++generation.current; original.current = op; setPending(op); props.lock(true); sending.current = true; setBusy(true); setMessage('Lagringen er uavklart til svaret er kontrollert.');
-    let verified = false;
+    let verified = false, dispatched = false;
     try {
-      const value = lookup ? await request('/workday-notice-operations/' + op.body.operation_id) : await props.mutation(op.path, op.body);
+      const status = () => request('/workday-notice-operations/' + op.body.operation_id);
+      const mutate = () => { dispatched = true; return props.mutation(op.path, op.body); };
+      const authorize = async () => {
+        const latest = await current(version);
+        const target = latest.records.find(v => v.id === op.target);
+        // An absent receipt authorizes a retry only while this original command
+        // still has a live target/deadline. Never dispatch an expired original.
+        if (op.target ? !target || !editable(target, latest.serverNow) : !op.body.content?.valid_until || Date.parse(op.body.content.valid_until) <= latest.serverNow) {
+          throw Object.assign(Error('Original command cannot be recovered'), { noticeUnrecoverable: true });
+        }
+      };
+      const value = lookup ? await status() : retry ? await recoverOperation(status, authorize, mutate) : await mutate();
       if (!alive.current) return;
-      if (!value || Object.keys(value).sort().join() !== 'operation_id,result' || value.operation_id !== op.body.operation_id || !validNotice(value.result, props.id) || !accepted(value.result, op) || Date.parse(value.result.expires_at) <= Date.now()) throw Error();
+      if (!value || Object.keys(value).sort().join() !== 'operation_id,result' || value.operation_id !== op.body.operation_id || !validNotice(value.result) || !accepted(value.result, op)) throw Error();
+      verified = true;
       if (!lookup && canonical(await request('/workday-notice-operations/' + op.body.operation_id)) !== canonical(value)) throw Error();
       if (!alive.current) return;
-      verified = true;
       const latest = await current(); if (!alive.current) return;
       const saved = latest.records.find(v => v.id === value.result.id);
-      if (!saved || saved.revision < value.result.revision || saved.revision === value.result.revision && canonical({ ...saved, expires_at: value.result.expires_at }) !== canonical(value.result)) throw Error();
+      // These two fields are mutable authority/provenance, not historical
+      // command effects: retention can change and parent deletion sets NULL.
+      if (!saved || saved.revision < value.result.revision
+        || saved.workday_id !== value.result.workday_id && !(saved.workday_id === null && value.result.workday_id !== null)
+        || saved.revision === value.result.revision && canonical({ ...saved, expires_at: value.result.expires_at, workday_id: value.result.workday_id }) !== canonical(value.result)) throw Error();
       original.current = null; setPending(null); setExpanded(saved.id);
       if (saved.revision > value.result.revision && op.kind === 'save') { setComparison(saved); setConflict(true); setMessage('Forsøket ble lagret. Et nyere avvik finnes. Forslaget er beholdt for sammenligning.'); }
       else { if (op.kind === 'save') { setDraft(null); setBase(null); setTimeStates({}); setEditorKey(v => v + 1); } setMessage(op.kind === 'check' ? 'Kildekontrollen er lagret.' : op.kind === 'end' ? 'Avviket er avsluttet manuelt.' : 'Avviket er lagret.'); if (destination === navigation.current) navigate('list'); }
@@ -188,12 +208,35 @@ export function usePrivateNotices(props: Props) {
         try { await props.request('/auth/session'); if (!alive.current) return; }
         catch (access: any) { if (access?.status === 401) props.expired(); return; }
       }
-      const known = !lookup && !verified && (
-        error?.status === 409 && ['Lagret avvik eller skiftstatus er endret. Hent og gjennomgå på nytt.', 'Skiftet er avsluttet. Planen er skrivebeskyttet.', 'Avviket er allerede avsluttet manuelt.'].includes(error.apiDetail)
-        || error?.status === 422 && error.apiDetail === 'Kontroller feltene.'
-        || error?.status === 429 && ['notice_receipt_capacity', 'notice_capacity'].includes(error.apiDetail?.code));
+      let unrecoverable = error?.noticeUnrecoverable === true;
+      const retentionDenied = error?.status === 410 && ['Lagringsforsøket er utløpt.', 'Avvikets lagringstid er utløpt.'].includes(error.apiDetail);
+      const absent = error?.status === 404 && error.apiDetail === 'Tilgangen ble avvist.';
+      if (retentionDenied || absent) {
+        try {
+          const latest = await current(version);
+          const target = latest.records.find(v => v.id === op.target);
+          unrecoverable = retentionDenied || (op.target ? !target || !editable(target, latest.serverNow) : !!op.body.content?.valid_until && Date.parse(op.body.content.valid_until) <= latest.serverNow);
+        } catch (readError: any) {
+          if (readError?.status === 401) { props.expired(); return; }
+          // A failed or malformed current read is not proof of disappearance.
+        }
+      }
+      if (unrecoverable) {
+        original.current = null; setPending(null);
+        setMessage('Lagringsutfallet kan ikke gjenopprettes etter utløpt lagringstid eller bortfalt avvik. Et lokalt forslag er beholdt og kan forkastes. Det opprinnelige forsøket sendes ikke igjen.');
+        return;
+      }
+      const detail = error?.apiDetail;
+      const capacityDetail = error?.status === 429 && detail && typeof detail === 'object'
+        && Object.keys(detail).sort().join() === 'code,message'
+        && (detail.code === 'notice_capacity' && detail.message === 'Registeret har allerede 200 avvik.'
+          || detail.code === 'notice_receipt_capacity' && detail.message === 'For mange lagringsforsøk. Vent til tidligere avvik utløper.');
+      const known = dispatched && !verified && (
+        error?.status === 409 && ['Lagringsforsøket har annet innhold eller tidligere versjon. Kontroller originalforsøket.', 'Lagret avvik er endret. Hent og gjennomgå på nytt.', 'Avviket er utløpt eller avsluttet manuelt og er skrivebeskyttet.', 'Avviket er utløpt og er skrivebeskyttet.'].includes(detail)
+        || error?.status === 422 && ['Kontroller feltene.', 'Oppgi en fremtidig sluttdato for avviket.', 'Sluttdatoen gir lagringstid utenfor støttet kalender.'].includes(detail)
+        || capacityDetail);
       if (known) {
-        const capacity = error.status === 429 ? error.apiDetail.code === 'notice_capacity' ? 'Dagen har allerede 200 avvik. Forslaget er beholdt og kan forkastes.' : 'For mange lagringsforsøk. Vent til tidligere planer utløper. Forslaget er beholdt og kan forkastes.' : null;
+        const capacity = capacityDetail ? detail.code === 'notice_capacity' ? 'Registeret har allerede 200 avvik. Forslaget er beholdt og kan forkastes.' : 'For mange lagringsforsøk. Vent til tidligere avvik utløper. Forslaget er beholdt og kan forkastes.' : null;
         original.current = null; setPending(null); setConflict(error.status === 409); setMessage(capacity ?? 'Forsøket ble avvist. Forslaget er beholdt. Hent lagrede avvik og sammenlign før et nytt forsøk.');
         try { const latest = await current(version); if (alive.current && version === generation.current) setComparison(latest.records.find(v => v.id === op.target) ?? null); }
         catch (readError) { unavailable(readError, version); }
@@ -204,45 +247,47 @@ export function usePrivateNotices(props: Props) {
     if (intervalError) { setMessage('Gyldig til må være samtidig med eller etter Gyldig fra. Rett gyldighetsintervallet før lagring.'); return; }
     if (!mutable || !normalized || pending || conflict || unresolvedTime || fieldErrors.length) { setValidationAttempted(true); return; }
     setValidationAttempted(false);
-    void send({ path: '/workdays/' + props.id + '/notices' + (base ? '/' + base.id : ''), kind: 'save', target: base?.id ?? null, before: base, body: { operation_id: crypto.randomUUID(), expected_revision: base?.revision ?? 0, expected_lifecycle_revision: authority!.revision, content: normalized } });
+    void send({ path: '/notices' + (base ? '/' + base.id : ''), kind: 'save', target: base?.id ?? null, before: base, body: { operation_id: crypto.randomUUID(), expected_revision: base?.revision ?? 0, content: normalized } });
   }
   function action(value: Notice, kind: 'check' | 'end') {
-    if (!mutable || dirty || pending || busy) return;
+    if (!available || props.suspended || !editable(value, now) || dirty || pending || busy) return;
     if (kind === 'end' && !window.confirm('Avslutte dette avviket manuelt? Dette avslutter bare avviket, ikke skiftet.')) return;
-    void send({ path: '/workdays/' + props.id + '/notices/' + value.id + '/' + kind, kind, target: value.id, before: value, body: { operation_id: crypto.randomUUID(), expected_revision: value.revision, expected_lifecycle_revision: authority!.revision } });
+    void send({ path: '/notices/' + value.id + '/' + kind, kind, target: value.id, before: value, body: { operation_id: crypto.randomUUID(), expected_revision: value.revision } });
   }
   function reviewComparison() {
-    if (pending || !available || !draft || base && !comparison) return;
-    if (comparison) setBase(comparison); setComparison(null); setConflict(false); setMessage('Lagret versjon og skiftstatus er gjennomgått. Det beholdte forslaget kan lagres med et nytt uttrykkelig forsøk.');
+    if (pending || !available || !draft || base && !comparison || comparison && !editable(comparison, now)) return;
+    if (comparison) setBase(comparison); setComparison(null); setConflict(false); setMessage('Lagret avvik er gjennomgått. Det beholdte forslaget kan lagres med et nytt uttrykkelig forsøk.');
   }
-  const feedback = validationAttempted && screen === 'editor' ? fieldErrors.length ? 'Ikke lagret. ' + fieldErrors.join(' ') : 'Endringene er ikke lagret. Kontroller lagringskravene og trykk Lagre avvik når feltene er klare.' : message;
-  return { screen, navigate, open, entry, title, records, available, denied, busy, mutable, terminal, authority, draft, setDraft, tags, setTags, parsedTags, tagError, dirty, pending, expanded, setExpanded, message: feedback, load, edit, discard, save, send, action, comparison, conflict, reviewComparison, editorKey, timeStates, setTimeStates, unresolvedTime, intervalError, fieldErrors, errors, props };
+  const feedback = validationAttempted && screen === 'editor' ? fieldErrors.length ? 'Ikke lagret. ' + fieldErrors.join(' ') : 'Endringene er ikke lagret. Kontroller lagringskravene og trykk Lagre avvik når feltene er klare.'
+    : dirty && !pending && !busy && /^(Avviket er lagret\.|Lagrede avvik er hentet\.|Kildekontrollen er lagret\.|Avviket er avsluttet manuelt\.)$/.test(message)
+      ? 'Ulagrede avviksendringer. Inndata finnes bare mens siden er åpen.' : message;
+  return { screen, navigate, open, entry, title, records, now, available, denied, busy, mutable, terminal, authority, draft, setDraft, tags, setTags, parsedTags, tagError, dirty, pending, expanded, setExpanded, message: feedback, load, edit, discard, save, send, action, comparison, conflict, reviewComparison, editorKey, timeStates, setTimeStates, unresolvedTime, intervalError, fieldErrors, errors, props };
 }
 
-type Controller = ReturnType<typeof usePrivateNotices>;
-export function NoticeScreens({ notices: n, serviceDate, back }: { notices: Controller; serviceDate: string | null; back: () => void }) {
+export type NoticeController = ReturnType<typeof usePrivateNotices>;
+export function NoticeScreens({ notices: n, back }: { notices: NoticeController; serviceDate: string | null; back: () => void }) {
   const p = n.props;
   const disabled = !n.mutable || n.busy || !!n.pending;
   return <section className="private-notices" hidden={n.screen === 'day'} aria-label="Avviksvedlikehold">
     <h2 ref={n.title} tabIndex={-1}>{n.screen === 'editor' ? 'Rediger avvik' : 'Manuelt vedlikeholdte avvik'}</h2>
-    <p>Planlagt tjenestedato: {serviceDate ?? 'Ukjent'}. Alle manuelt registrerte avvik for denne dagen.</p>
+    <p>Forlengelse må lagres før gjeldende sluttid. Utløpte og manuelt avsluttede avvik er skrivebeskyttet historikk. Ingen av delene bekrefter at veien er klar eller at kilden er kontrollert.</p><p>Felles avviksregister for kontoen. Avvik brukes automatisk på alle relevante bekreftede dager frem til sluttdatoen.</p>
     {n.screen !== 'editor' && <p role="status" aria-label="Avviksstatus">{n.message}</p>}
-    {n.terminal && <p>Skiftet er avsluttet. Avvikene er skrivebeskyttet.</p>}
+    {n.terminal && <p>Avviket er utløpt eller avsluttet manuelt og er skrivebeskyttet.</p>}
     {!n.available && <p>Eventuelle tidligere viste opplysninger er ikke oppdatert.</p>}
     <div className="controls"><button disabled={p.suspended} onClick={back}>Tilbake til dagen</button><button disabled={n.busy || p.suspended} onClick={() => void n.load()}>Hent lagrede avvik</button></div>
     {n.pending && <div className="controls"><button disabled={n.busy || p.suspended} onClick={() => void n.send(undefined, true)}>Kontroller avvikslagringen</button><button disabled={n.busy || p.suspended} onClick={() => void n.send()}>Prøv samme avvikslagring igjen</button></div>}
     <div hidden={n.screen !== 'list'}>
-      {n.draft ? <button onClick={() => n.navigate('editor')}>Tilbake til ulagret avvik</button> : !n.terminal && <button disabled={disabled} onClick={() => n.edit(null)}>Registrer avvik</button>}
+      {n.draft ? <button onClick={() => n.navigate('editor')}>Tilbake til ulagret avvik</button> : <button disabled={!n.available || n.busy || !!n.pending || p.suspended} onClick={() => n.edit(null)}>Registrer avvik</button>}
       {n.available && n.records.length === 0 && <p>Ingen avvik er registrert her. Kontroller originalkilden.</p>}
-      <ul className="notice-list">{(!n.denied ? n.records : []).map(value => <li key={value.id}><details open={n.expanded === value.id} onToggle={e => { if (e.currentTarget.open) n.setExpanded(value.id); }}><summary>{value.title} · {value.status === 'registered' ? 'Registrert' : 'Avsluttet manuelt'}</summary><NoticeFacts value={value} />
-        {!n.terminal && <div className="controls"><button disabled={disabled || !!n.draft} onClick={() => n.edit(value)}>Rediger {value.title}</button><button disabled={disabled || n.dirty} onClick={() => n.action(value, 'check')}>Kontrollerte kilden nå</button>{value.status === 'registered' && <button disabled={disabled || n.dirty} onClick={() => n.action(value, 'end')}>Avslutt avvik manuelt</button>}</div>}
+      <ul className="notice-list">{(!n.denied ? n.records.filter(v => Date.parse(v.expires_at) > n.now) : []).map(value => <li key={value.id}><details open={n.expanded === value.id} onToggle={e => { if (e.currentTarget.open) n.setExpanded(value.id); }}><summary>{value.title} · {noticeStatus(value, n.now)}</summary><NoticeFacts value={value} now={n.now} />
+        {editable(value, n.now) && <div className="controls"><button disabled={disabled || !!n.draft} onClick={() => n.edit(value)}>Rediger {value.title}</button><button disabled={disabled || n.dirty} onClick={() => n.action(value, 'check')}>Kontrollerte kilden nå</button>{value.status === 'registered' && <button disabled={disabled || n.dirty} onClick={() => n.action(value, 'end')}>Avslutt avvik manuelt</button>}</div>}
         <p>Kildekontroll registrerer ditt uttrykkelige kontrolltidspunkt. Det er ingen automatisk kontroll eller garanti for dekning.</p>
       </details></li>)}</ul>
     </div>
     <div hidden={n.screen !== 'editor'}>
       <button onClick={() => n.navigate('list')}>Tilbake til avvik</button>
       <p>Gi trafikkmeldingen en tittel. Bruk kort forklaring til et sammendrag og detaljert forklaring til hele meldingen, instruksjoner og separate tidsvinduer. Velg bestemte linjer og oppgi dem fra kilden, eller velg Alle linjer uttrykkelig.</p>
-      <p>Tittel og et uttrykkelig linjevalg er påkrevd. Forklaringer, kildebeskrivelse, lenke og tidspunkt er valgfrie. La tidspunkt stå tomme når kilden ikke oppgir dem.</p>
+      <p>Tittel og et uttrykkelig linjevalg er påkrevd. Sluttdato er påkrevd. Forklaringer, kildebeskrivelse, lenke og øvrige tidspunkt er valgfrie. La kildens oppdateringstid og start stå tomme når de ikke er oppgitt.</p>
       {n.draft && <div key={n.editorKey}><fieldset disabled={disabled}><legend>Kildeopplysninger</legend>
         <label>Tittel<input value={n.draft.title} aria-invalid={!!n.errors.title} aria-describedby={n.errors.title ? 'notice-title-error' : undefined} onChange={e => n.setDraft(v => v && ({ ...v, title: e.target.value }))} /></label>
         {n.errors.title && <p id="notice-title-error">{n.errors.title}</p>}
@@ -262,19 +307,18 @@ export function NoticeScreens({ notices: n, serviceDate, back }: { notices: Cont
         <p>Valgfri HTTP(S)-lenke, også til en felles trafikkoversikt. For SMS kan du la lenken stå tom og beskrive kilden.</p>
         {n.errors.source_url && <p id="notice-source_url-error">{n.errors.source_url}</p>}
         <p>Tomme valgfrie tidspunkt betyr ukjent. Oppgi dato og tid i Oslo, og velg forekomst når klokken stilles tilbake.</p>
-        {(['source_updated_at', 'valid_from', 'valid_until'] as const).map((field, i) => <PrivateTimeInput key={field} label={['Kilden oppdatert', 'Gyldig fra', 'Gyldig til'][i]} value={n.draft![field]} defaultDate={null} disabled={disabled} resolve={body => p.mutation('/draft-times/resolve', body)} expired={p.expired} onValue={value => n.setDraft(v => v && ({ ...v, [field]: value }))} onState={(dirty, unresolved) => n.setTimeStates(values => { const old = values[field]; return old?.dirty === dirty && old?.unresolved === unresolved ? values : { ...values, [field]: { dirty, unresolved } }; })} />)}
+        {(['source_updated_at', 'valid_from', 'valid_until'] as const).map((field, i) => <PrivateTimeInput dateOnlyEnd={field === 'valid_until'} key={field} label={['Kilden oppdatert', 'Gyldig fra', 'Gyldig til'][i]} value={n.draft![field]} defaultDate={null} disabled={disabled} resolve={body => p.mutation('/draft-times/resolve', body)} expired={p.expired} onValue={value => n.setDraft(v => v && ({ ...v, [field]: value }))} onState={(dirty, unresolved) => n.setTimeStates(values => { const old = values[field]; return old?.dirty === dirty && old?.unresolved === unresolved ? values : { ...values, [field]: { dirty, unresolved } }; })} />)}
       </fieldset>
       {n.intervalError && <p role="alert">Gyldig til må være samtidig med eller etter Gyldig fra. Rett gyldighetsintervallet før lagring.</p>}
-      {n.conflict && <div className="import-warning"><p>En lagret versjon eller skiftstatus er endret. Ditt forslag er beholdt.</p>
-        {n.available && !n.denied && n.authority && <section aria-label="Lagret skiftstatus for sammenligning"><h3>Lagret skiftstatus</h3><p>Status: {({ confirmed: 'Ikke startet', active: 'Aktivt', ended: 'Avsluttet', aborted: 'Avbrutt' })[n.authority.state]}</p><p>Startet: {n.authority.started_at ? osloDateTime(n.authority.started_at) : 'Ikke registrert'}</p><p>Avsluttet: {n.authority.ended_at ? osloDateTime(n.authority.ended_at) : 'Ikke registrert'}</p></section>}
-        {n.comparison && !n.denied && <><h3>Nyere lagret avvik</h3><NoticeFacts value={n.comparison} /><button disabled={disabled} onClick={n.reviewComparison}>Jeg har sammenlignet; behold mitt forslag</button></>}
-        {!n.comparison && n.available && !n.terminal && <button disabled={disabled} onClick={n.reviewComparison}>Jeg har gjennomgått lagret skiftstatus; behold mitt forslag</button>}
+      {n.conflict && <div className="import-warning"><p>Det lagrede avviket er endret. Ditt forslag er beholdt.</p>
+                {n.comparison && !n.denied && <><h3>Nyere lagret avvik</h3><NoticeFacts value={n.comparison} now={n.now} /><button disabled={!n.available || n.busy || !!n.pending || p.suspended || !editable(n.comparison, n.now)} onClick={n.reviewComparison}>Jeg har sammenlignet; behold mitt forslag</button></>}
+        {!n.comparison && n.available && !n.terminal && <button disabled={disabled} onClick={n.reviewComparison}>Jeg har gjennomgått registeret; behold mitt forslag</button>}
       </div>}
       <section aria-label="Lagringskrav" aria-live="polite">
         {n.fieldErrors.length > 0 && <><p>Før avviket kan lagres:</p><ul>{n.fieldErrors.map(error => <li key={error}>{error}</li>)}</ul></>}
         {n.unresolvedTime && <p>Kan ikke lagre: {Object.entries(n.timeStates).filter(([, state]) => state.unresolved).map(([field]) => ({ source_updated_at: 'Kilden oppdatert', valid_from: 'Gyldig fra', valid_until: 'Gyldig til' })[field]).join(', ')} er ufullstendig eller uavklart. Se meldingen ved tidspunktet: fyll ut både dato og klokkeslett, velg forekomst ved klokkeomstilling, velg et annet klokkeslett hvis det ikke finnes, eller prøv kontrollen igjen hvis tjenesten er utilgjengelig. Tøm tidspunktet for å lagre det som ukjent.</p>}
         {n.intervalError && <p>Kan ikke lagre: Gyldig til må være samtidig med eller etter Gyldig fra.</p>}
-        {n.pending ? <p>Lagringen må avklares. Bruk «Kontroller avvikslagringen» eller «Prøv samme avvikslagring igjen» øverst.</p> : n.busy ? <p>Venter på svar før du kan lagre.</p> : n.terminal ? <p>Skiftet er avsluttet. Avviket kan ikke lagres.</p> : !n.mutable ? <p>Lagring er utilgjengelig. Hent lagrede avvik eller gå tilbake til dagen og kontroller status.</p> : n.conflict && <p>Sammenlign lagret versjon og skiftstatus før et nytt lagringsforsøk.</p>}
+        {n.pending ? <p>Lagringen må avklares. Bruk «Kontroller avvikslagringen» eller «Prøv samme avvikslagring igjen» øverst.</p> : n.busy ? <p>Venter på svar før du kan lagre.</p> : n.terminal ? <p>Avviket er utløpt eller avsluttet manuelt. Det kan ikke lagres.</p> : !n.mutable ? <p>Lagring er utilgjengelig. Hent lagrede avvik eller gå tilbake til dagen og kontroller status.</p> : n.conflict && <p>Sammenlign lagret avvik før et nytt lagringsforsøk.</p>}
       </section>
       <div className="controls"><button disabled={disabled || n.conflict || n.unresolvedTime || n.intervalError || (n.draft?.line_scope === 'selected' && n.parsedTags === null)} onClick={n.save}>Lagre avvik</button><button disabled={!!n.pending || n.busy} onClick={n.discard}>Forkast ulagrede endringer</button></div>
       {n.screen === 'editor' && <p role="status" aria-label="Avviksstatus">{n.message}</p>}
@@ -283,8 +327,11 @@ export function NoticeScreens({ notices: n, serviceDate, back }: { notices: Cont
   </section>;
 }
 
-function NoticeFacts({ value: v }: { value: Notice }) {
-  return <div className="notice-facts"><p>Tittel: {v.title}</p><p>Linjer fra kilden: {v.line_scope === 'all' ? 'Alle linjer' : tagText(v.line_tags)}</p><p>Status: {v.status === 'registered' ? 'Registrert' : 'Avsluttet manuelt'}</p>
+export const editable = (v: Notice, now = Date.now()) => v.status === 'registered' && (!v.valid_until || Date.parse(v.valid_until) > now) && Date.parse(v.expires_at) > now;
+export const noticeStatus = (v: Notice, now = Date.now()) => v.status === 'ended_manually' ? 'Avsluttet manuelt' : !v.valid_until ? 'Mangler sluttdato' : Date.parse(v.valid_until) <= now ? 'Utløpt' : 'Registrert';
+
+export function NoticeFacts({ value: v, now }: { value: Notice; now: number }) {
+  return <div className="notice-facts"><p>Tittel: {v.title}</p><p>Linjer fra kilden: {v.line_scope === 'all' ? 'Alle linjer' : tagText(v.line_tags)}</p><p>Status: {noticeStatus(v, now)}</p>
     {v.summary && <p>Kort forklaring: {v.summary}</p>}
     {v.description && <p style={{ whiteSpace: 'pre-wrap' }}>Detaljert forklaring: {v.description}</p>}
     {v.source_note && <p>Kildebeskrivelse: {v.source_note}</p>}

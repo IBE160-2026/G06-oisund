@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 
 type Resolution = { state: 'resolved' | 'ambiguous' | 'gap'; candidates: string[] };
-type Props = { label: string; value: string | null; defaultDate: string | null; disabled: boolean;
+type Props = { label: string; value: string | null; defaultDate: string | null; disabled: boolean; dateOnlyEnd?: boolean;
   resolve: (body: object) => Promise<unknown>; onValue: (value: string | null) => void;
   onState: (dirty: boolean, unresolved: boolean) => void; expired: () => void };
 const parts = (value: string | null, day: string | null) => ({ date: value?.slice(0, 10) ?? day ?? '', clock: value?.match(/T(\d{2}:\d{2}(?::\d{2})?)/)?.[1] ?? '' });
@@ -27,14 +27,15 @@ export function PrivateTimeInput(props: Props) {
     let active = true;
     setOptions([]);
     if (!date && !clock) { setState('empty'); return; }
-    if (!date || !clock) { setState('incomplete'); return; }
+    if (!date || !clock && !props.dateOnlyEnd) { setState('incomplete'); return; }
+    const resolvedClock = clock || '23:59:59';
     setState('resolving');
     const timer = window.setTimeout(() => {
-      void callbacks.current.resolve({ calendar_date: date, clock }).then(raw => {
+      void callbacks.current.resolve({ calendar_date: date, clock: resolvedClock }).then(raw => {
         if (!active || current !== generation.current) return;
         const value = raw as Resolution;
         if (!value || !Array.isArray(value.candidates) || value.candidates.length > 2
-          || !value.candidates.every(v => typeof v === 'string' && v.startsWith(date + 'T' + clock) && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(?::\d{2})?[+-]\d{2}:\d{2}$/.test(v) && Number.isFinite(Date.parse(v)))
+          || !value.candidates.every(v => typeof v === 'string' && v.startsWith(date + 'T' + resolvedClock) && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(?::\d{2})?[+-]\d{2}:\d{2}$/.test(v) && Number.isFinite(Date.parse(v)))
           || !(['gap', 'resolved', 'ambiguous'][value.candidates.length] === value.state)
           || new Set(value.candidates).size !== value.candidates.length
           || (value.candidates.length === 2 && Date.parse(value.candidates[0]) >= Date.parse(value.candidates[1]))) throw Error();
@@ -62,6 +63,7 @@ export function PrivateTimeInput(props: Props) {
   }
   const messages: Record<string, string> = { empty: 'Klokkeslett er ukjent.', saved: 'Lagret tidspunkt i Oslo-tid.', resolved: 'Tidspunktet er klart i Oslo-tid.', incomplete: 'Fyll ut både dato og klokkeslett, eller tøm tidspunktet.', resolving: 'Kontrollerer Oslo-tid …', gap: 'Dette klokkeslettet finnes ikke i Oslo når klokken stilles frem. Velg et annet tidspunkt.', ambiguous: 'Dette klokkeslettet forekommer to ganger. Velg første eller andre forekomst.', invalid: 'Kontroller dato og klokkeslett.', unavailable: 'Tidspunktet kunne ikke kontrolleres. Inndata er beholdt. Prøv igjen.' };
   return <fieldset disabled={props.disabled}><legend>{props.label} (Oslo-tid)</legend>
+    {props.dateOnlyEnd && <p>Sluttdato er påkrevd. Uten klokkeslett gjelder avviket til 23:59:59 på denne Oslo-datoen. Et oppgitt klokkeslett brukes nøyaktig.</p>}
     <label>{props.label}dato<input type="date" value={date} onChange={e => change(e.target.value, clock)} /></label>
     <label>{props.label === 'Start' ? 'Starttid' : props.label === 'Slutt' ? 'Sluttid' : props.label + ': klokkeslett'}<input type="time" step="1" value={clock} onChange={e => change(date, e.target.value)} /></label>
     <div className="controls"><button type="button" disabled={!date && !props.defaultDate} onClick={nextDay}>{props.label}: neste dag</button>

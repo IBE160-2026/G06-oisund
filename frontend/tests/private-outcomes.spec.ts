@@ -35,7 +35,8 @@ test('pending activity status describes original member and value after navigati
   await expect(page.getByRole('button', { name: /Forkast ulagret aktivitetsstatus/ })).toHaveCount(0);
   await page.unroute('**:8001' + path); page.on('request', request => { if (request.url() === API + path && request.method() === 'POST') retry = request.postDataJSON(); });
   await page.getByRole('button', { name: 'Prøv samme aktivitetsstatus igjen', exact: true }).click(); await expect(progressStatus(page)).toHaveText('Aktivitetsstatusen er lagret.');
-  expect(retry).toEqual(original); expect(retry.activity_id).toBe(activities[0].id); expect(retry.outcome).toBe('interrupted');
+  expect(retry).toBeUndefined(); expect(original.activity_id).toBe(activities[0].id); expect(original.outcome).toBe('interrupted');
+  expect((await (await context.request.get(API + '/workday-outcome-operations/' + original.operation_id)).json()).result.outcomes[0].outcome).toBe(original.outcome);
   const saved = await recap(context, plan); expect(saved.outcomes.outcomes.map((row: any) => row.outcome)).toEqual(['interrupted', 'unregistered', 'unregistered', 'unregistered', 'unregistered']);
   await expect(selected(page)).toHaveAttribute('data-selected-activity-id', activities[1].id); await expect.poll(() => beforeUnload(page)).toBe(false);
 });
@@ -246,7 +247,7 @@ for (const resource of ['outcome', 'close']) for (const failure of ['lost', 'htm
   let retry: any; page.on('request', request => { if (request.url().endsWith(path) && request.method() === 'POST') retry = request.postDataJSON(); });
   await page.getByRole('button', { name: resource === 'outcome' ? 'Prøv samme aktivitetsstatus igjen' : 'Prøv samme avslutning igjen', exact: true }).click();
   await expect(progressStatus(page)).toHaveText(resource === 'outcome' ? 'Aktivitetsstatusen er lagret.' : 'Skiftet er avsluttet og skrivebeskyttet.');
-  expect(retry).toEqual(original); await expect.poll(() => beforeUnload(page)).toBe(false);
+  expect(retry).toBeUndefined(); expect((await (await context.request.get(API + '/workday-' + resource + '-operations/' + original.operation_id)).json()).operation_id).toBe(original.operation_id); await expect.poll(() => beforeUnload(page)).toBe(false);
 });
 
 test('changed counts reject stale confirmation and require another explicit review', async ({ page, context }) => {
@@ -531,7 +532,7 @@ test('stale outcome rejection distinguishes newer saved value and retained propo
   expect(attempts).toHaveLength(2); expect(attempts[1].expected_revision).toBe(1); expect(attempts[1].operation_id).not.toBe(attempts[0].operation_id); expect((await recap(context, plan)).outcomes.outcomes[0].outcome).toBe('completed');
 });
 
-for (const recovery of ['lookup', 'retry']) test(`lost accepted outcome ${recovery} reconciles a newer correction and releases navigation locks`, async ({ page, context }) => {
+for (const recovery of ['lookup', 'retry']) test(`lost accepted outcome ${recovery} preserves the proposal for comparison with a newer correction`, async ({ page, context }) => {
   const { plan, activities } = await openedPlan(page, context); await start(page); let original: any; const writes: any[] = [];
   const path = '/workdays/' + plan.id + '/outcome';
   await page.route('**:8001' + path, async route => { original = route.request().postDataJSON(); await route.fetch(); await route.fulfill({ status: 200, contentType: 'text/html', body: '<html>lost</html>' }); });
@@ -540,9 +541,12 @@ for (const recovery of ['lookup', 'retry']) test(`lost accepted outcome ${recove
   await expect(page.getByRole('button', { name: 'Kontroller aktivitetsstatusen', exact: true })).toBeEnabled(); await page.unroute('**:8001' + path);
   await post(context, path, { operation_id: randomUUID(), expected_revision: 1, expected_lifecycle_revision: 1, activity_id: activities[0].id, outcome: 'interrupted' });
   await page.getByRole('button', { name: recovery === 'lookup' ? 'Kontroller aktivitetsstatusen' : 'Prøv samme aktivitetsstatus igjen', exact: true }).click();
-  await expect(progressStatus(page)).toHaveText('Aktivitetsstatusen ble lagret. En nyere lagret versjon vises; kontroller den.');
-  await expect(page.getByRole('region', { name: 'Registrert aktivitetsstatus', exact: true })).toContainText('Lagret: Avbrutt'); await expect(page.getByLabel('Manuell aktivitetsstatus', { exact: true })).toHaveValue('interrupted');
-  expect(writes).toHaveLength(recovery === 'lookup' ? 1 : 2); if (recovery === 'retry') expect(writes[1]).toEqual(original);
+  await expect(progressStatus(page)).toHaveText('Aktivitetsstatusen ble lagret. En nyere lagret versjon vises; ditt forslag er beholdt hvis statusen er endret. Sammenlign før et nytt forsøk.');
+  await expect(page.getByRole('region', { name: 'Registrert aktivitetsstatus', exact: true })).toContainText('Lagret: Avbrutt'); await expect(page.getByLabel('Manuell aktivitetsstatus', { exact: true })).toHaveValue('completed');
+  expect(writes).toHaveLength(1);
+  await expect.poll(() => beforeUnload(page)).toBe(true);
+  await page.getByRole('button', { name: 'Avbryt ulagret aktivitetsstatus', exact: true }).click();
+  await expect(page.getByLabel('Manuell aktivitetsstatus', { exact: true })).toHaveValue('interrupted');
   await expect.poll(() => beforeUnload(page)).toBe(false); await dayScreen(page); await expect(page.getByRole('button', { name: 'Lukk planen', exact: true })).toBeEnabled();
   expect((await recap(context, plan)).outcomes.revision).toBe(2);
 });

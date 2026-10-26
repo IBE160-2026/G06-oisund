@@ -60,7 +60,8 @@ for (const reply of ['lost', 'html', 'malformed']) test(`uncertain ${reply} star
   await expect(page.getByRole('button', { name: 'Velg aktivitet 1', exact: true })).toBeDisabled();
   await expect(page.getByRole('button', { name: 'Lukk planen', exact: true })).toBeDisabled();
   await page.unroute('**:8001' + path); let retry: any; page.on('request', req => { if (req.url().endsWith(path) && req.method() === 'POST') retry = req.postDataJSON(); });
-  await page.getByRole('button', { name: 'Prøv samme skiftstart igjen', exact: true }).click(); await expect(shiftStatus(page)).toHaveText('Skiftstart er lagret.'); expect(retry).toEqual(original);
+  await page.getByRole('button', { name: 'Prøv samme skiftstart igjen', exact: true }).click(); await expect(shiftStatus(page)).toHaveText('Skiftstart er lagret.'); expect(retry).toBeUndefined();
+  expect((await (await context.request.get(API + '/workday-start-operations/' + original.operation_id)).json()).result.revision).toBe(original.expected_revision + 1);
   const lifecycle = await (await context.request.get(API + '/workdays/' + plan.id + '/lifecycle')).json();
   expect((await post(context, path, { operation_id: randomUUID(), expected_revision: 0 })).result).toEqual(lifecycle);
   await expect.poll(() => beforeUnload(page), { timeout: 5000 }).toBe(false);
@@ -133,6 +134,6 @@ for (const resource of ['selection', 'start']) test(`${resource} deleted plan hi
   let retry: any; page.on('request', req => { if (req.url().endsWith(path) && req.method() === 'POST') retry = req.postDataJSON(); });
   await page.getByRole('button', { name: resource === 'selection' ? 'Prøv samme aktivitetsvalg igjen' : 'Prøv samme skiftstart igjen', exact: true }).click();
   await expect(page.getByText('Planfakta er skjult til plantilgangen er kontrollert.', { exact: true })).toBeVisible();
-  expect(retry).toEqual(original); await expect(selected(page)).toHaveCount(0); await expect(page.getByText('Startet manuelt', { exact: true })).toHaveCount(0);
+  expect(retry).toBeUndefined(); expect(original.operation_id).toBeTruthy(); await expect(selected(page)).toHaveCount(0); await expect(page.getByText('Startet manuelt', { exact: true })).toHaveCount(0);
   await expect.poll(() => beforeUnload(page), { timeout: 5000 }).toBe(true);
 });

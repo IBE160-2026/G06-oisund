@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { recoverOperation } from './recoverOperation';
 import type { Content } from './PrivateDrafts';
 import { osloDateTime } from './dayOverview';
 import { activityChoiceLabel } from './activityChoiceLabel';
@@ -65,11 +66,14 @@ export function useWorkdayProgress(props: Props) {
   function clearProposal(id: string) { setProposals(previous => { const next = { ...previous }; delete next[id]; return next; }); }
   async function send(command?: Command, lookup = false) {
     if (sending.current || props.suspended) return;
+    const retry = !!original.current;
     const op = original.current ?? command; if (!op) return;
     generation.current++; original.current = op; setPending(op); sending.current = true; setBusy(true); props.lock(true); setMessage('Forsøket er uavklart til svaret er kontrollert.');
     let accepted = false;
     try {
-      const value = lookup ? await props.request('/workday-' + op.kind + '-operations/' + op.body.operation_id) : await props.mutation('/workdays/' + props.id + '/' + op.kind, op.body);
+      const status = () => props.request('/workday-' + op.kind + '-operations/' + op.body.operation_id);
+      const mutate = () => props.mutation('/workdays/' + props.id + '/' + op.kind, op.body);
+      const value = lookup ? await status() : retry ? await recoverOperation(status, fetchCurrent, mutate) : await mutate();
       if (!alive.current) return;
       if (!keys(value, 'operation_id,result') || value.operation_id !== op.body.operation_id || value.result?.workday_id !== props.id || !stamp(value.result.expires_at)) throw Error();
       if (op.kind === 'close') { if (!validLifecycle(value.result) || value.result.state !== op.body.action || value.result.revision !== op.body.expected_revision + 1) throw Error(); }
@@ -82,8 +86,8 @@ export function useWorkdayProgress(props: Props) {
       if (op.kind === 'close' && (latest.lifecycle.state !== value.result.state || latest.lifecycle.ended_at !== value.result.ended_at || latest.lifecycle.started_at !== value.result.started_at || latest.lifecycle.revision !== value.result.revision || Date.parse(latest.plan.expires_at) > Date.parse(value.result.expires_at))) throw Error();
       if (op.kind === 'outcome' && (latest.outcomes.revision < value.result.revision || latest.outcomes.revision === value.result.revision && JSON.stringify(latest.outcomes.outcomes) !== JSON.stringify(value.result.outcomes))) throw Error();
       original.current = null; setPending(null);
-      if (op.kind === 'outcome') clearProposal(op.body.activity_id);
-      setMessage(op.kind === 'close' ? 'Skiftet er avsluttet og skrivebeskyttet.' : latest.outcomes.revision > value.result.revision ? 'Aktivitetsstatusen ble lagret. En nyere lagret versjon vises; kontroller den.' : 'Aktivitetsstatusen er lagret.');
+      if (op.kind === 'outcome' && latest.outcomes.outcomes.find(item => item.activity_id === op.body.activity_id)?.outcome === op.body.outcome) clearProposal(op.body.activity_id);
+      setMessage(op.kind === 'close' ? 'Skiftet er avsluttet og skrivebeskyttet.' : latest.outcomes.revision > value.result.revision ? 'Aktivitetsstatusen ble lagret. En nyere lagret versjon vises; ditt forslag er beholdt hvis statusen er endret. Sammenlign før et nytt forsøk.' : 'Aktivitetsstatusen er lagret.');
       if (op.kind === 'close') { setReview(null); navigate('recap'); }
     } catch (error: any) {
       if (!alive.current) return;

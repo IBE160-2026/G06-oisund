@@ -2,15 +2,15 @@ import { test, expect, openedPlan, API, post, randomUUID, beforeUnload, setup, d
 import { writeFileSync } from 'node:fs';
 setup();
 const status = (page: any) => page.getByRole('status', { name: 'Avviksstatus', exact: true });
-const fields = { title: 'Fiktivt veiarbeid ved svært langt norsk stedsnavn', line_tags: ['020', '24'], source_url: 'https://example.org/originalkilde', source_updated_at: null, valid_from: null, valid_until: null };
+const fields = { title: 'Fiktivt veiarbeid ved svært langt norsk stedsnavn', line_tags: ['020', '24'], source_url: 'https://example.org/originalkilde', source_updated_at: null, valid_from: null, valid_until: '2031-01-04T23:59:59+01:00' };
 async function open(page: any) { await page.getByRole('button', { name: 'Manuelt vedlikeholdte avvik', exact: true }).click(); await expect(page.getByRole('heading', { name: 'Manuelt vedlikeholdte avvik', exact: true })).toBeVisible(); await expect(page.getByRole('button', { name: 'Hent lagrede avvik', exact: true })).toBeEnabled(); }
 async function newNotice(page: any, title = fields.title) {
   await page.getByRole('button', { name: 'Registrer avvik', exact: true }).click(); await expect(page.getByRole('heading', { name: 'Rediger avvik', exact: true })).toBeFocused();
-  await page.getByLabel('Tittel', { exact: true }).fill(title); await page.getByLabel('Linjer fra kilden (kommaseparert)', { exact: true }).fill('020, 24, 020'); await page.getByLabel('Originalkilde (HTTP eller HTTPS)', { exact: true }).fill(fields.source_url);
+  await page.getByLabel('Gyldig tildato', { exact: true }).fill('2031-01-04'); await expect(page.getByRole('region', { name: 'Lagringskrav' })).not.toContainText('ufullstendig'); await page.getByLabel('Tittel', { exact: true }).fill(title); await page.getByLabel('Linjer fra kilden (kommaseparert)', { exact: true }).fill('020, 24, 020'); await page.getByLabel('Originalkilde (HTTP eller HTTPS)', { exact: true }).fill(fields.source_url);
 }
-async function save(page: any) { await page.getByRole('button', { name: 'Lagre avvik', exact: true }).click(); await expect(status(page)).toHaveText('Avviket er lagret.'); }
-async function list(context: any, plan: any) { return (await context.request.get(API + '/workdays/' + plan.id + '/notices')).json(); }
-async function seed(context: any, plan: any, title = fields.title) { return (await post(context, '/workdays/' + plan.id + '/notices', { operation_id: randomUUID(), expected_revision: 0, expected_lifecycle_revision: 0, content: { ...fields, title } })).result; }
+async function save(page: any) { if (!await page.getByLabel('Gyldig tildato', { exact: true }).inputValue()) { await page.getByLabel('Gyldig tildato', { exact: true }).fill('2031-01-04'); await expect(page.getByRole('region', { name: 'Lagringskrav' })).not.toContainText('ufullstendig'); } await page.getByRole('button', { name: 'Lagre avvik', exact: true }).click(); await expect(status(page)).toHaveText('Avviket er lagret.'); }
+async function list(context: any, plan: any) { return (await context.request.get(API + '/notices')).json(); }
+async function seed(context: any, plan: any, title = fields.title) { return (await post(context, '/notices', { operation_id: randomUUID(), expected_revision: 0, content: { ...fields, title } })).result; }
 
 async function textFacts(scope: any, summary: string, description: string, sourceNote: string) {
   await expect(scope.getByText('Kort forklaring: ' + summary, { exact: true })).toBeVisible();
@@ -40,7 +40,7 @@ test('notice feedback explains invalid optional source URL beside save and prese
   await expect(page.getByRole('region', { name: 'Lagringskrav' })).not.toContainText('Kildelenken må være');
   await expect(status(page)).not.toContainText('Kildelenken må være');
   await save(page); const saved = (await list(context, plan)).notices;
-  expect(saved).toHaveLength(1); expect(saved[0].line_tags).toEqual(['24']); expect(saved[0].valid_from).toBeNull(); expect(saved[0].valid_until).toBeNull();
+  expect(saved).toHaveLength(1); expect(saved[0].line_tags).toEqual(['24']); expect(saved[0].valid_from).toBeNull(); expect(saved[0].valid_until).toBe('2031-01-04T23:59:59+01:00');
 });
 
 test('notice feedback names incomplete optional clock beside disabled save and clears when emptied', async ({ page, context }) => {
@@ -56,7 +56,7 @@ test('notice feedback names incomplete optional clock beside disabled save and c
   await expect(page.getByRole('button', { name: 'Lagre avvik', exact: true })).toBeDisabled();
   expect((await list(context, plan)).notices).toHaveLength(0);
   await page.getByRole('button', { name: 'Lagre avvik', exact: true }).scrollIntoViewIfNeeded();
-  await page.screenshot({ path: '../docs/evidence/11-4-real-feedback-required.png', fullPage: true });
+  await page.screenshot({ path: '../docs/evidence/11-5-crossday-real-feedback-required.png', fullPage: true });
   await page.getByLabel('Gyldig fradato', { exact: true }).fill('');
   await expect(requirements).not.toContainText('ufullstendig'); await save(page);
 });
@@ -64,22 +64,22 @@ test('notice feedback names incomplete optional clock beside disabled save and c
 test('historical source clock roundtrip uses authoritative Oslo facts rather than browser historical rules', async ({ page, context }) => {
   const { plan } = await openedPlan(page, context);
   const source = '1894-01-01T12:00+00:43';
-  const n = (await post(context, '/workdays/' + plan.id + '/notices', { operation_id: randomUUID(), expected_revision: 0, expected_lifecycle_revision: 0, content: { ...fields, source_updated_at: source, valid_from: source, valid_until: source } })).result;
+  const n = (await post(context, '/notices', { operation_id: randomUUID(), expected_revision: 0, content: { ...fields, source_updated_at: source, valid_from: source, valid_until: fields.valid_until } })).result;
   await open(page); await page.locator('.notice-list summary').click(); await page.getByRole('button', { name: 'Rediger ' + n.title, exact: true }).click();
   await expect(page.getByLabel('Kilden oppdatert: klokkeslett', { exact: true })).toHaveValue('12:00:00');
-  await page.route('**:8001/workdays/' + plan.id + '/notices/' + n.id, async route => {
+  await page.route('**:8001/notices/' + n.id, async route => {
     const response = await route.fetch(), value = await response.json();
     for (const field of ['source_updated_at', 'valid_from', 'valid_until']) value.result[field] = new Date(value.result[field]).toISOString();
     await route.fulfill({ json: value }); // An older accepted UTC representation must still reconcile.
   });
   await page.getByLabel('Tittel', { exact: true }).fill('Historisk klokkeslett beholdt'); await save(page);
-  const saved = (await list(context, plan)).notices[0]; expect(Date.parse(saved.source_updated_at)).toBe(Date.parse(source)); expect(Date.parse(saved.valid_from)).toBe(Date.parse(source)); expect(Date.parse(saved.valid_until)).toBe(Date.parse(source));
+  const saved = (await list(context, plan)).notices[0]; expect(Date.parse(saved.source_updated_at)).toBe(Date.parse(source)); expect(Date.parse(saved.valid_from)).toBe(Date.parse(source)); expect(Date.parse(saved.valid_until)).toBe(Date.parse(fields.valid_until));
   await expect(page.getByText('Kilden oppdatert: 01.01.1894, 12:00:00 (Oslo-tid)', { exact: true })).toBeVisible();
 });
 
 test('quoted CSV tags preserve exact API tag boundaries on title-only edit', async ({ page, context }) => {
   const { plan } = await openedPlan(page, context); const tags = ['020', '20,24', 'Route "A"', 'a,"b,c"', 'H'.repeat(300)];
-  const n = (await post(context, '/workdays/' + plan.id + '/notices', { operation_id: randomUUID(), expected_revision: 0, expected_lifecycle_revision: 0, content: { ...fields, line_tags: tags } })).result;
+  const n = (await post(context, '/notices', { operation_id: randomUUID(), expected_revision: 0, content: { ...fields, line_tags: tags } })).result;
   await open(page); await page.locator('.notice-list summary').click(); await page.getByRole('button', { name: 'Rediger ' + n.title, exact: true }).click();
   await expect(page.getByLabel('Linjer fra kilden (kommaseparert)', { exact: true })).toHaveValue('020, "20,24", "Route ""A""", "a,""b,c""", ' + 'H'.repeat(300));
   await page.getByLabel('Tittel', { exact: true }).fill('Bare tittel endret'); await save(page); expect((await list(context, plan)).notices[0].line_tags).toEqual(tags);
@@ -88,7 +88,7 @@ test('quoted CSV tags preserve exact API tag boundaries on title-only edit', asy
 
 test('reversed known validity gives a relation error, preserves clocks and makes no request until corrected', async ({ page, context }) => {
   const { plan } = await openedPlan(page, context); await open(page); await newNotice(page); let posts = 0;
-  page.on('request', req => { if (req.method() === 'POST' && req.url().endsWith('/workdays/' + plan.id + '/notices')) posts++; });
+  page.on('request', req => { if (req.method() === 'POST' && req.url().endsWith('/notices')) posts++; });
   await page.getByLabel('Gyldig fradato', { exact: true }).fill('2031-01-02'); await page.getByLabel('Gyldig fra: klokkeslett', { exact: true }).fill('12:00'); await page.getByLabel('Gyldig tildato', { exact: true }).fill('2031-01-02'); await page.getByLabel('Gyldig til: klokkeslett', { exact: true }).fill('11:00');
   await expect(page.getByRole('alert')).toContainText('Gyldig til må være samtidig med eller etter Gyldig fra.'); await expect(page.getByRole('button', { name: 'Lagre avvik', exact: true })).toBeDisabled(); expect(posts).toBe(0); expect((await list(context, plan)).notices).toHaveLength(0); await expect(page.getByLabel('Gyldig fra: klokkeslett', { exact: true })).toHaveValue('12:00');
   await page.getByLabel('Gyldig til: klokkeslett', { exact: true }).fill('13:00'); await expect(page.getByRole('alert')).toHaveCount(0); await save(page); expect(posts).toBe(1);
@@ -96,60 +96,62 @@ test('reversed known validity gives a relation error, preserves clocks and makes
 
 for (const code of ['notice_capacity', 'notice_receipt_capacity']) test(`known ${code} rejection retains specific guidance and the cancellable proposal`, async ({ page, context }) => {
   const { plan } = await openedPlan(page, context); await open(page); await newNotice(page);
-  const message = code === 'notice_capacity' ? 'Dagen har allerede 200 avvik.' : 'For mange lagringsforsøk. Vent til tidligere planer utløper.';
-  await page.route('**:8001/workdays/' + plan.id + '/notices', route => route.request().method() === 'POST' ? route.fulfill({ status: 429, json: { detail: { code, message } } }) : route.continue());
+  const message = code === 'notice_capacity' ? 'Registeret har allerede 200 avvik.' : 'For mange lagringsforsøk. Vent til tidligere avvik utløper.';
+  await page.route('**:8001/notices', route => route.request().method() === 'POST' ? route.fulfill({ status: 429, json: { detail: { code, message } } }) : route.continue());
   await page.getByRole('button', { name: 'Lagre avvik', exact: true }).click(); await expect(status(page)).toContainText(message); await expect(status(page)).not.toContainText('sammenlign'); await expect(page.getByLabel('Tittel', { exact: true })).toHaveValue(fields.title); expect((await list(context, plan)).notices).toHaveLength(0); await page.getByRole('button', { name: 'Forkast ulagrede endringer', exact: true }).click(); await expect.poll(() => beforeUnload(page)).toBe(false);
 });
 
 for (const oldReply of ['success', 'unavailable']) test(`held superseded ${oldReply} load cannot overwrite newer success`, async ({ page, context }) => {
   const { plan } = await openedPlan(page, context); await seed(context, plan); let release!: () => void, received!: () => void, count = 0;
   const gate = new Promise<void>(r => release = r), entered = new Promise<void>(r => received = r);
-  await page.route('**:8001/workdays/' + plan.id + '/notices', async route => { count++; if (count !== 1) return route.continue(); const response = await route.fetch(); received(); await gate; if (oldReply === 'success') await route.fulfill({ response }); else await route.fulfill({ status: 503, json: { detail: 'superseded unavailable' } }); });
+  await page.route('**:8001/notices', async route => { count++; if (count !== 1) return route.continue(); const response = await route.fetch(); received(); await gate; if (oldReply === 'success') await route.fulfill({ response }); else await route.fulfill({ status: 503, json: { detail: 'superseded unavailable' } }); });
   try {
     await page.getByRole('button', { name: 'Manuelt vedlikeholdte avvik', exact: true }).click(); await entered; await page.getByRole('button', { name: 'Tilbake til dagen', exact: true }).click(); await open(page); await expect(status(page)).toHaveText('Lagrede avvik er hentet.');
-    const returned = page.waitForResponse(r => r.url().endsWith('/workdays/' + plan.id + '/notices')); release(); await (await returned).finished(); await expect(status(page)).toHaveText('Lagrede avvik er hentet.'); await expect(page.getByRole('button', { name: 'Registrer avvik', exact: true })).toBeEnabled(); await expect(page.locator('.notice-list summary')).toHaveCount(1);
+    const returned = page.waitForResponse(r => r.url().endsWith('/notices')); release(); await (await returned).finished(); await expect(status(page)).toHaveText('Lagrede avvik er hentet.'); await expect(page.getByRole('button', { name: 'Registrer avvik', exact: true })).toBeEnabled(); await expect(page.locator('.notice-list summary')).toHaveCount(1);
   } finally { release(); }
 });
 
 for (const surface of ['current', 'acknowledgement']) for (const invalid of ['2031-01-02T12:00:00', '2031-02-30T12:00:00Z']) test(`${surface} rejects non-explicit or normalized-invalid timestamp ${invalid}`, async ({ page, context }) => {
   const { plan } = await openedPlan(page, context);
   if (surface === 'current') {
-    await seed(context, plan); await page.route('**:8001/workdays/' + plan.id + '/notices', async route => { const response = await route.fetch(), value = await response.json(); value.notices[0].source_updated_at = invalid; await route.fulfill({ json: value }); });
+    await seed(context, plan); await page.route('**:8001/notices', async route => { const response = await route.fetch(), value = await response.json(); value.notices[0].source_updated_at = invalid; await route.fulfill({ json: value }); });
     await page.getByRole('button', { name: 'Manuelt vedlikeholdte avvik', exact: true }).click(); await expect(status(page)).toContainText('Avvikslisten er utilgjengelig.'); await expect(page.locator('.notice-list summary')).toHaveCount(0); await expect(page.getByRole('button', { name: 'Registrer avvik', exact: true })).toBeDisabled();
   } else {
-    await open(page); await newNotice(page); await page.route('**:8001/workdays/' + plan.id + '/notices', async route => { if (route.request().method() !== 'POST') return route.continue(); const response = await route.fetch(), value = await response.json(); value.result.source_updated_at = invalid; await route.fulfill({ json: value }); });
+    await open(page); await newNotice(page); await page.route('**:8001/notices', async route => { if (route.request().method() !== 'POST') return route.continue(); const response = await route.fetch(), value = await response.json(); value.result.source_updated_at = invalid; await route.fulfill({ json: value }); });
     await page.getByRole('button', { name: 'Lagre avvik', exact: true }).click(); await expect(page.getByRole('button', { name: 'Kontroller avvikslagringen', exact: true })).toBeEnabled(); await expect(status(page)).toContainText('uavklart'); await expect(page.getByLabel('Tittel', { exact: true })).toHaveValue(fields.title); await page.getByRole('button', { name: 'Kontroller avvikslagringen', exact: true }).click(); await expect(status(page)).toHaveText('Avviket er lagret.');
   }
 });
 
 test('complete multipage controller keeps all51 discoverable, edits page2, and rejects partial later-page success', async ({ page, context }) => {
   const { plan } = await openedPlan(page, context); const n = await seed(context, plan);
-  python(`with database() as conn:\n conn.execute("INSERT INTO workday_notices SELECT gen_random_uuid(),workday_id,revision,'Syntetisk avvik '||g.n,title_tags.line_tags,source_url,source_updated_at,valid_from,valid_until,status,entered_at,edited_at,checked_at,checked_revision FROM workday_notices title_tags CROSS JOIN generate_series(1,50) g(n) WHERE id=%s", (${JSON.stringify(n.id)},))\n`);
-  const first = await list(context, plan); const second = await (await context.request.get(API + '/workdays/' + plan.id + '/notices?cursor=' + first.next_cursor)).json(); expect(second.notices).toHaveLength(1); const target = second.notices[0];
-  await page.route('**:8001/workdays/' + plan.id + '/notices?cursor=*', route => route.fulfill({ status: 503, json: { detail: 'synthetic page2 unavailable' } })); await page.getByRole('button', { name: 'Manuelt vedlikeholdte avvik', exact: true }).click(); await expect(status(page)).toContainText('Avvikslisten er utilgjengelig.'); await expect(page.locator('.notice-list summary')).toHaveCount(0); await expect(page.getByRole('button', { name: 'Registrer avvik', exact: true })).toBeDisabled();
-  await page.unroute('**:8001/workdays/' + plan.id + '/notices?cursor=*'); await page.getByRole('button', { name: 'Hent lagrede avvik', exact: true }).click(); await expect(status(page)).toHaveText('Lagrede avvik er hentet.'); await expect(page.locator('.notice-list summary')).toHaveCount(51); await page.locator('.notice-list summary').filter({ hasText: target.title + ' ·' }).click(); await page.getByRole('button', { name: 'Rediger ' + target.title, exact: true }).click(); await page.getByLabel('Tittel', { exact: true }).fill('Endret avvik fra side2'); await save(page); await expect(page.locator('.notice-list summary')).toHaveCount(51);
-  const saved = await (await context.request.get(API + '/workdays/' + plan.id + '/notices/' + target.id)).json(); expect(saved.title).toBe('Endret avvik fra side2'); expect(saved.revision).toBe(2);
+  python(`with database() as conn:\n conn.execute("INSERT INTO workday_notices(id,workday_id,revision,title,line_tags,source_url,source_updated_at,valid_from,valid_until,status,entered_at,edited_at,checked_at,checked_revision,summary,description,source_note,line_scope,owner,expires_at,ended_at) SELECT gen_random_uuid(),workday_id,revision,'Syntetisk avvik '||g.n,title_tags.line_tags,source_url,source_updated_at,valid_from,valid_until,status,entered_at,edited_at,checked_at,checked_revision,summary,description,source_note,line_scope,owner,expires_at,ended_at FROM workday_notices title_tags CROSS JOIN generate_series(1,50) g(n) WHERE id=%s", (${JSON.stringify(n.id)},))\n`);
+  const first = await list(context, plan); const second = await (await context.request.get(API + '/notices?cursor=' + first.next_cursor)).json(); expect(second.notices).toHaveLength(1); const target = second.notices[0];
+  await page.route('**:8001/notices?cursor=*', route => route.fulfill({ status: 503, json: { detail: 'synthetic page2 unavailable' } })); await page.getByRole('button', { name: 'Manuelt vedlikeholdte avvik', exact: true }).click(); await expect(status(page)).toContainText('Avvikslisten er utilgjengelig.'); await expect(page.locator('.notice-list summary')).toHaveCount(0); await expect(page.getByRole('button', { name: 'Registrer avvik', exact: true })).toBeDisabled();
+  await page.unroute('**:8001/notices?cursor=*'); await page.getByRole('button', { name: 'Hent lagrede avvik', exact: true }).click(); await expect(status(page)).toHaveText('Lagrede avvik er hentet.'); await expect(page.locator('.notice-list summary')).toHaveCount(51); await page.locator('.notice-list summary').filter({ hasText: target.title + ' ·' }).click(); await page.getByRole('button', { name: 'Rediger ' + target.title, exact: true }).click(); await page.getByLabel('Tittel', { exact: true }).fill('Endret avvik fra side2'); await save(page); await expect(page.locator('.notice-list summary')).toHaveCount(51);
+  const saved = await (await context.request.get(API + '/notices/' + target.id)).json(); expect(saved.title).toBe('Endret avvik fra side2'); expect(saved.revision).toBe(2);
 });
 
 for (const kind of ['check', 'end']) for (const recovery of ['lookup', 'retry']) test(`lost accepted ${kind} ${recovery} retains original action through day navigation with one effect`, async ({ page, context }) => {
-  const { plan } = await openedPlan(page, context); const n = await seed(context, plan); await open(page); await page.locator('.notice-list summary').click(); const path = '/workdays/' + plan.id + '/notices/' + n.id + '/' + kind; const writes: any[] = [];
+  const { plan } = await openedPlan(page, context); const n = await seed(context, plan); await open(page); await page.locator('.notice-list summary').click(); const path = '/notices/' + n.id + '/' + kind; const writes: any[] = [];
   await page.route('**:8001' + path, async route => { writes.push(route.request().postDataJSON()); await route.fetch(); await route.fulfill({ status: 200, contentType: 'text/html', body: '<html>lost action</html>' }); });
   if (kind === 'end') page.once('dialog', d => d.accept()); await page.getByRole('button', { name: kind === 'check' ? 'Kontrollerte kilden nå' : 'Avslutt avvik manuelt', exact: true }).click(); await expect(page.getByRole('button', { name: 'Kontroller avvikslagringen', exact: true })).toBeEnabled(); const accepted = (await list(context, plan)).notices[0]; expect(accepted.revision).toBe(2);
-  await page.getByRole('button', { name: 'Tilbake til dagen', exact: true }).click(); await expect(page.getByRole('button', { name: 'Lukk planen', exact: true })).toBeDisabled(); await open(page); await page.unroute('**:8001' + path); page.on('request', req => { if (req.method() === 'POST' && req.url().endsWith(path)) writes.push(req.postDataJSON()); });
-  await page.getByRole('button', { name: recovery === 'lookup' ? 'Kontroller avvikslagringen' : 'Prøv samme avvikslagring igjen', exact: true }).click(); await expect(status(page)).toHaveText(kind === 'check' ? 'Kildekontrollen er lagret.' : 'Avviket er avsluttet manuelt.'); expect((await list(context, plan)).notices).toEqual([accepted]); expect(writes).toHaveLength(recovery === 'lookup' ? 1 : 2); if (recovery === 'retry') expect(writes[1]).toEqual(writes[0]); await expect.poll(() => beforeUnload(page)).toBe(false);
+  await page.getByRole('button', { name: 'Tilbake til dagen', exact: true }).click(); await expect(page.getByRole('button', { name: 'Lukk planen', exact: true })).toBeEnabled(); await open(page); await page.unroute('**:8001' + path); page.on('request', req => { if (req.method() === 'POST' && req.url().endsWith(path)) writes.push(req.postDataJSON()); });
+  await page.getByRole('button', { name: recovery === 'lookup' ? 'Kontroller avvikslagringen' : 'Prøv samme avvikslagring igjen', exact: true }).click(); await expect(status(page)).toHaveText(kind === 'check' ? 'Kildekontrollen er lagret.' : 'Avviket er avsluttet manuelt.'); expect((await list(context, plan)).notices).toEqual([accepted]); expect(writes).toHaveLength(1); await expect.poll(() => beforeUnload(page)).toBe(false);
 });
 
-for (const boundary of ['deleted', 'expired']) test(`known rejection followed by ${boundary} current read hides denied facts and reconciles parent`, async ({ page, context }) => {
-  const { plan } = await openedPlan(page, context); const n = await seed(context, plan); await open(page); await page.locator('.notice-list summary').click(); await page.getByRole('button', { name: 'Rediger ' + n.title, exact: true }).click(); await page.getByLabel('Tittel', { exact: true }).fill('Beholdt lokalt forslag');
-  await page.route('**:8001/workdays/' + plan.id + '/notices/' + n.id, async route => {
-    if (boundary === 'deleted') await post(context, '/workdays/' + plan.id + '/delete', { operation_id: randomUUID(), source_revision: 1 }); else python(`with database() as conn:\n conn.execute('UPDATE workdays SET expires_at=clock_timestamp() WHERE id=%s', (${JSON.stringify(plan.id)},))\n`);
-    await route.fulfill({ status: 409, json: { detail: 'Lagret avvik eller skiftstatus er endret. Hent og gjennomgå på nytt.' } });
+for (const boundary of ['deleted', 'expired']) test(`notice ${boundary} after known rejection preserves proposal without exposing historical facts as active`, async ({ page, context }) => {
+  const { plan } = await openedPlan(page, context); const n = await seed(context, plan); await open(page); await page.locator('.notice-list summary').click();
+  await page.getByRole('button', { name: 'Rediger ' + n.title, exact: true }).click(); await page.getByLabel('Tittel', { exact: true }).fill('Beholdt lokalt forslag');
+  await page.route('**:8001/notices/' + n.id, async route => {
+    python(`with database() as conn:\n conn.execute(${JSON.stringify(boundary === 'deleted' ? 'DELETE FROM workday_notices WHERE id=%s' : 'UPDATE workday_notices SET expires_at=clock_timestamp() WHERE id=%s')}, (${JSON.stringify(n.id)},))\n`);
+    await route.fulfill({ status: 409, json: { detail: 'Lagret avvik er endret. Hent og gjennomgå på nytt.' } });
   });
-  await page.getByRole('button', { name: 'Lagre avvik', exact: true }).click();
-  if (boundary === 'expired') { await expect(page.getByRole('region', { name: 'Bekreftet plan', exact: true })).toHaveCount(0); await expect.poll(() => beforeUnload(page)).toBe(false); }
-  else { await expect(page.getByRole('button', { name: 'Forkast ulagrede endringer', exact: true })).toBeEnabled(); await page.getByRole('button', { name: 'Tilbake til avvik', exact: true }).click(); await expect(page.getByRole('link', { name: n.source_url, exact: true })).toHaveCount(0); await expect(page.locator('.notice-list summary')).toHaveCount(0); await expect(page.getByRole('button', { name: 'Registrer avvik', exact: true })).toHaveCount(0); }
+  await page.getByRole('button', { name: 'Lagre avvik', exact: true }).click(); await expect(status(page)).toContainText('Forsøket ble avvist.');
+  await expect(page.getByLabel('Tittel', { exact: true })).toHaveValue('Beholdt lokalt forslag'); expect(await beforeUnload(page)).toBe(true);
+  await page.getByRole('button', { name: 'Tilbake til avvik', exact: true }).click(); await expect(page.locator('.notice-list summary')).toHaveCount(0);
+  await page.getByRole('button', { name: 'Tilbake til ulagret avvik', exact: true }).click(); await page.getByRole('button', { name: 'Forkast ulagrede endringer', exact: true }).click();
+  await expect.poll(() => beforeUnload(page)).toBe(false);
 });
-
 async function measure(page: any) {
   const scope = page.getByRole('region', { name: 'Avviksvedlikehold', exact: true });
   const detail = scope.getByLabel('Detaljert forklaring', { exact: true });
@@ -176,7 +178,7 @@ test('source-linked prestart journey saves exact stable metadata, checks explici
   await open(page); await expect(page.getByText('Ingen avvik er registrert her. Kontroller originalkilden.', { exact: true })).toBeVisible();
   await newNotice(page); await save(page); const first = (await list(context, plan)).notices[0];
   expect(first.line_tags).toEqual(['020', '24']); expect(first.checked_at).toBeNull(); expect(first.status).toBe('registered'); expect(first.valid_from).toBeNull();
-  await expect(page.getByText('Ikke kontrollert', { exact: true })).toBeVisible(); await expect(page.getByText('Gyldighet ukjent', { exact: true })).toBeVisible();
+  await expect(page.getByText('Ikke kontrollert', { exact: true })).toBeVisible(); await expect(page.getByText(/^Delvis kjent gyldighet:/)).toBeVisible();
   expect(await page.getByRole('link', { name: fields.source_url, exact: true }).getAttribute('rel')).toBe('noopener noreferrer'); expect(checks).toBe(0);
   await page.getByRole('button', { name: 'Kontrollerte kilden nå', exact: true }).click(); await expect(status(page)).toHaveText('Kildekontrollen er lagret.');
   const checked = (await list(context, plan)).notices[0]; expect(checked.checked_revision).toBe(checked.revision); expect(checked.edited_at).toBe(first.edited_at);
@@ -184,11 +186,11 @@ test('source-linked prestart journey saves exact stable metadata, checks explici
   await expect(page.getByText(/^Kontrollert før siste endring:/)).toBeVisible(); const edited = (await list(context, plan)).notices[0]; expect(edited.id).toBe(first.id); expect(edited.checked_at).toBe(checked.checked_at);
   page.once('dialog', dialog => dialog.dismiss()); await page.getByRole('button', { name: 'Avslutt avvik manuelt', exact: true }).click(); expect(ends).toBe(0);
   page.once('dialog', dialog => dialog.accept()); await page.getByRole('button', { name: 'Avslutt avvik manuelt', exact: true }).click(); await expect(status(page)).toHaveText('Avviket er avsluttet manuelt.'); expect(ends).toBe(1);
-  await page.getByRole('button', { name: 'Rediger Endret kildeopplysning', exact: true }).click(); await page.getByLabel('Tittel', { exact: true }).fill('Avsluttet med rettet metadata'); await save(page);
+  await expect(page.getByRole('button', { name: 'Rediger Endret kildeopplysning', exact: true })).toHaveCount(0);
   const ended = (await list(context, plan)).notices[0]; expect(ended.status).toBe('ended_manually'); expect(ended.checked_at).toBe(checked.checked_at);
   await page.getByRole('button', { name: 'Tilbake til dagen', exact: true }).click(); await page.getByRole('button', { name: 'Åpne valgt aktivitet', exact: true }).click(); await expect(selected(page)).toHaveAttribute('data-selected-activity-id', activities[1].id);
   expect(selections).toBe(0); expect(starts).toBe(0); expect(checks).toBe(1); expect((await (await context.request.get(API + '/workdays/' + plan.id + '/recap')).json())).toEqual(initial);
-  await dayScreen(page); await page.getByRole('button', { name: 'Lukk planen', exact: true }).click(); await page.getByRole('button', { name: 'Åpne plan 2031-01-02 · versjon 1', exact: true }).click(); await open(page); await page.locator('.notice-list summary').click();
+  await dayScreen(page); await page.getByRole('button', { name: 'Lukk planen', exact: true }).click(); await page.getByRole('button', { name: 'Åpne plan 2031-01-02 · versjon 1', exact: true }).click(); await open(page); if (!await page.getByText('Status: Avsluttet manuelt', { exact: true }).isVisible()) await page.locator('.notice-list summary').click();
   await expect(page.getByText('Status: Avsluttet manuelt', { exact: true })).toBeVisible(); expect((await list(context, plan)).notices).toEqual([ended]);
 });
 
@@ -200,7 +202,7 @@ test('actual synthetic PDF upload correction confirmation notice and terminal re
   await expect(page.getByRole('region', { name: 'Dagsoversikt', exact: true })).toBeVisible(); await page.getByRole('button', { name: 'Velg aktivitet 1', exact: true }).click(); await activityScreen(page); await expect(selected(page)).toContainText('Rettet syntetisk oppmøtested 11.4'); await dayScreen(page);
   await open(page); await newNotice(page, 'Fiktivt avvik etter PDF-bekreftelse'); await save(page); await page.getByRole('button', { name: 'Kontrollerte kilden nå', exact: true }).click(); await expect(status(page)).toHaveText('Kildekontrollen er lagret.'); await page.getByRole('button', { name: 'Tilbake til dagen', exact: true }).click();
   await page.getByRole('button', { name: 'Start skift', exact: true }).click(); await page.getByRole('button', { name: 'Bekreft skiftstart', exact: true }).click(); await expect(page.getByRole('status', { name: 'Skiftstatus', exact: true })).toHaveText('Skiftstart er lagret.'); await page.getByRole('button', { name: 'Avslutt skift', exact: true }).click(); await page.getByRole('button', { name: 'Bekreft avslutning', exact: true }).click(); await expect(page.getByRole('heading', { name: 'Skift avsluttet', exact: true })).toBeVisible();
-  await page.getByRole('button', { name: 'Tilbake til dagen', exact: true }).click(); await page.getByRole('button', { name: 'Manuelt vedlikeholdte avvik', exact: true }).click(); await expect(page.getByText(/^Sist kontrollert:/)).toBeVisible(); await expect(page.getByRole('button', { name: 'Kontrollerte kilden nå', exact: true })).toHaveCount(0);
+  await page.getByRole('button', { name: 'Tilbake til dagen', exact: true }).click(); await page.getByRole('button', { name: 'Manuelt vedlikeholdte avvik', exact: true }).click(); await expect(page.getByText(/^Sist kontrollert:/)).toBeVisible(); await expect(page.getByRole('button', { name: 'Kontrollerte kilden nå', exact: true })).toBeEnabled();
 });
 
 test('dirty notice retains raw optional time, independent bus and activity proposal through safe day and activity navigation', async ({ page, context }) => {
@@ -226,20 +228,20 @@ for (const recovery of ['lookup', 'retry']) test(`lost accepted create ${recover
   await page.getByLabel('Originalkilde (HTTP eller HTTPS)', { exact: true }).fill('');
   await page.getByLabel('Linjeomfang', { exact: true }).selectOption('all');
   let original: any; const writes: any[] = [];
-  const path = '/workdays/' + plan.id + '/notices';
+  const path = '/notices';
   await page.route('**:8001' + path, async route => { if (route.request().method() !== 'POST') return route.continue(); original = route.request().postDataJSON(); await route.fetch(); await route.fulfill({ status: 200, contentType: 'text/html', body: '<html>lost reply</html>' }); });
   page.on('request', req => { if (req.method() === 'POST' && req.url() === API + path) writes.push(req.postDataJSON()); });
   await page.getByRole('button', { name: 'Lagre avvik', exact: true }).click(); await expect(page.getByRole('button', { name: 'Kontroller avvikslagringen', exact: true })).toBeEnabled();
   await expect(page.getByRole('button', { name: 'Forkast ulagrede endringer', exact: true })).toBeDisabled(); await expect.poll(() => beforeUnload(page)).toBe(true);
-  await page.getByRole('button', { name: 'Tilbake til dagen', exact: true }).click(); await expect(page.getByRole('button', { name: 'Lukk planen', exact: true })).toBeDisabled(); await open(page); await page.unroute('**:8001' + path);
+  await page.getByRole('button', { name: 'Tilbake til dagen', exact: true }).click(); await expect(page.getByRole('button', { name: 'Lukk planen', exact: true })).toBeEnabled(); await open(page); await page.unroute('**:8001' + path);
   await page.getByRole('button', { name: recovery === 'lookup' ? 'Kontroller avvikslagringen' : 'Prøv samme avvikslagring igjen', exact: true }).click(); await expect(status(page)).toHaveText('Avviket er lagret.');
-  expect(writes).toHaveLength(recovery === 'lookup' ? 1 : 2); if (recovery === 'retry') expect(writes[1]).toEqual(original); expect((await list(context, plan)).notices).toHaveLength(1); await expect.poll(() => beforeUnload(page)).toBe(false);
+  expect(writes).toHaveLength(1); expect((await list(context, plan)).notices).toHaveLength(1); await expect.poll(() => beforeUnload(page)).toBe(false);
 });
 
 test('stale edit requires comparison and a new explicit save without overwriting newer metadata silently', async ({ page, context }) => {
   const { plan } = await openedPlan(page, context); const initial = await seed(context, plan); await open(page); await page.locator('.notice-list summary').click(); await page.getByRole('button', { name: 'Rediger ' + fields.title, exact: true }).click(); await page.getByLabel('Tittel', { exact: true }).fill('Mitt beholdte forslag');
   const competing = { ...fields, title: 'En annen lagret tittel', summary: 'Competing summary', description: 'Competing first window\nCompeting second window', source_note: 'Competing SMS source', source_url: null, line_scope: 'all', line_tags: [] };
-  await post(context, '/workdays/' + plan.id + '/notices/' + initial.id, { operation_id: randomUUID(), expected_revision: 1, expected_lifecycle_revision: 0, content: competing });
+  await post(context, '/notices/' + initial.id, { operation_id: randomUUID(), expected_revision: 1, content: competing });
   await page.getByRole('button', { name: 'Lagre avvik', exact: true }).click(); await expect(status(page)).toContainText('Forsøket ble avvist.'); await expect(page.getByLabel('Tittel', { exact: true })).toHaveValue('Mitt beholdte forslag'); await expect(page.getByRole('button', { name: 'Lagre avvik', exact: true })).toBeDisabled();
   await expect(page.locator('.private-notices .import-warning').getByText('Tittel: En annen lagret tittel', { exact: true })).toBeVisible();
   const comparisonFacts = page.locator('.private-notices .import-warning .notice-facts');
@@ -250,36 +252,38 @@ test('stale edit requires comparison and a new explicit save without overwriting
   await page.getByRole('button', { name: 'Jeg har sammenlignet; behold mitt forslag', exact: true }).click(); await save(page); expect((await list(context, plan)).notices[0].title).toBe('Mitt beholdte forslag'); expect((await list(context, plan)).notices[0].revision).toBe(3);
 });
 
-test('Start in another window conflicts with create and permits explicit lifecycle review then new save', async ({ page, context }) => {
+test('Start in another window does not change account notice authority', async ({ page, context }) => {
   const { plan } = await openedPlan(page, context); await open(page); await newNotice(page);
-  await post(context, '/workdays/' + plan.id + '/start', { operation_id: randomUUID(), expected_revision: 0 }); await page.getByRole('button', { name: 'Lagre avvik', exact: true }).click(); await expect(status(page)).toContainText('Forsøket ble avvist.');
-  const comparison = page.getByRole('region', { name: 'Lagret skiftstatus for sammenligning', exact: true }); await expect(comparison).toContainText('Status: Aktivt'); await expect(comparison).toContainText('Startet:'); await expect(comparison).not.toContainText('Startet: Ikke registrert'); await expect(comparison).toContainText('Avsluttet: Ikke registrert');
-  await page.getByRole('button', { name: 'Jeg har gjennomgått lagret skiftstatus; behold mitt forslag', exact: true }).click(); await save(page); expect((await list(context, plan)).notices).toHaveLength(1);
+  await post(context, '/workdays/' + plan.id + '/start', { operation_id: randomUUID(), expected_revision: 0 });
+  await save(page); expect((await list(context, plan)).notices).toHaveLength(1);
+  await expect(page.getByRole('region', { name: 'Lagret skiftstatus for sammenligning', exact: true })).toHaveCount(0);
 });
 
-test('terminal recap remains initial on reopen and notice management is read-only with all metadata', async ({ page, context }) => {
+test('terminal recap remains initial on reopen and independent notice management remains writable', async ({ page, context }) => {
   const { plan } = await openedPlan(page, context); const n = await seed(context, plan); await post(context, '/workdays/' + plan.id + '/start', { operation_id: randomUUID(), expected_revision: 0 }); await post(context, '/workdays/' + plan.id + '/close', { operation_id: randomUUID(), expected_revision: 1, expected_outcome_revision: 0, action: 'ended' });
   await page.reload(); await page.getByRole('button', { name: 'Åpne plan 2031-01-02 · versjon 1', exact: true }).click(); await expect(page.getByRole('heading', { name: 'Skift avsluttet', exact: true })).toBeVisible(); await page.getByRole('button', { name: 'Tilbake til dagen', exact: true }).click();
   await page.getByRole('button', { name: 'Manuelt vedlikeholdte avvik', exact: true }).click(); await page.locator('.notice-list summary').click(); await expect(page.getByRole('link', { name: n.source_url, exact: true })).toBeVisible();
-  await expect(page.getByRole('button', { name: 'Registrer avvik', exact: true })).toHaveCount(0); await expect(page.getByRole('button', { name: 'Kontrollerte kilden nå', exact: true })).toHaveCount(0); await expect(page.getByRole('button', { name: 'Avslutt avvik manuelt', exact: true })).toHaveCount(0);
+  await expect(page.getByRole('button', { name: 'Registrer avvik', exact: true })).toBeEnabled(); await expect(page.getByRole('button', { name: 'Kontrollerte kilden nå', exact: true })).toBeEnabled(); await expect(page.getByRole('button', { name: 'Avslutt avvik manuelt', exact: true })).toBeEnabled();
 });
 
-test('known deletion hides retained notice facts and retains pending recovery without false saved feedback', async ({ page, context }) => {
+test('original day deletion preserves account notice facts and explicit check', async ({ page, context }) => {
   const { plan } = await openedPlan(page, context); const n = await seed(context, plan); await open(page); await page.locator('.notice-list summary').click();
-  await post(context, '/workdays/' + plan.id + '/delete', { operation_id: randomUUID(), source_revision: 1 }); await page.getByRole('button', { name: 'Kontrollerte kilden nå', exact: true }).click(); await expect(status(page)).toContainText('uavklart');
-  await expect(page.getByRole('link', { name: n.source_url, exact: true })).toHaveCount(0); await expect(page.getByRole('button', { name: 'Kontroller avvikslagringen', exact: true })).toBeEnabled(); await expect.poll(() => beforeUnload(page)).toBe(true);
+  await post(context, '/workdays/' + plan.id + '/delete', { operation_id: randomUUID(), source_revision: 1 });
+  await page.getByRole('button', { name: 'Kontrollerte kilden nå', exact: true }).click(); await expect(status(page)).toHaveText('Kildekontrollen er lagret.');
+  await expect(page.getByRole('link', { name: n.source_url, exact: true })).toBeVisible();
+  expect((await list(context, plan)).notices[0].id).toBe(n.id); await expect.poll(() => beforeUnload(page)).toBe(false);
 });
 
 test('transient unavailable retains qualified known source links and disables fresh commands', async ({ page, context }) => {
   const { plan } = await openedPlan(page, context); const n = await seed(context, plan); await open(page); await page.locator('.notice-list summary').click();
-  await page.route('**:8001/workdays/' + plan.id + '/notices', route => route.fulfill({ status: 503, json: { detail: 'synthetic unavailable' } })); await page.getByRole('button', { name: 'Hent lagrede avvik', exact: true }).click(); await expect(status(page)).toContainText('Avvikslisten er utilgjengelig.');
+  await page.route('**:8001/notices', route => route.fulfill({ status: 503, json: { detail: 'synthetic unavailable' } })); await page.getByRole('button', { name: 'Hent lagrede avvik', exact: true }).click(); await expect(status(page)).toContainText('Avvikslisten er utilgjengelig.');
   await expect(page.getByText('Eventuelle tidligere viste opplysninger er ikke oppdatert.', { exact: true })).toBeVisible(); await expect(page.getByRole('link', { name: n.source_url, exact: true })).toBeVisible(); await expect(page.getByRole('button', { name: 'Kontrollerte kilden nå', exact: true })).toBeDisabled(); await expect(page.getByText('Ingen avvik er registrert her. Kontroller originalkilden.', { exact: true })).toHaveCount(0);
   const stores = await page.evaluate(() => JSON.stringify({ local: { ...localStorage }, session: { ...sessionStorage } })); expect(stores).not.toContain(n.title); expect(stores).not.toContain(n.source_url);
 });
 
 for (const corruption of ['wrong-parent', 'wrong-content', 'missing-field', 'bad-time', 'HTML']) test(`malformed ${corruption} acknowledgement never establishes save and authorized lookup resolves one effect`, async ({ page, context }) => {
   const { plan } = await openedPlan(page, context); await open(page); await newNotice(page);
-  await page.route('**:8001/workdays/' + plan.id + '/notices', async route => {
+  await page.route('**:8001/notices', async route => {
     if (route.request().method() !== 'POST') return route.continue();
     const response = await route.fetch(), value = await response.json();
     if (corruption === 'HTML') return route.fulfill({ status: 200, contentType: 'text/html', body: '<html>proxy</html>' });
@@ -297,31 +301,32 @@ for (const corruption of ['wrong-parent', 'wrong-content', 'missing-field', 'bad
 test('a delayed accepted reply keeps the subsequently chosen day screen and reachable recovery', async ({ page, context }) => {
   const { plan } = await openedPlan(page, context); await open(page); await newNotice(page);
   let release!: () => void, received!: () => void; const gate = new Promise<void>(r => release = r), entered = new Promise<void>(r => received = r);
-  await page.route('**:8001/workdays/' + plan.id + '/notices', async route => { if (route.request().method() !== 'POST') return route.continue(); const response = await route.fetch(); received(); await gate; await route.fulfill({ response }); });
+  await page.route('**:8001/notices', async route => { if (route.request().method() !== 'POST') return route.continue(); const response = await route.fetch(); received(); await gate; await route.fulfill({ response }); });
   try { await page.getByRole('button', { name: 'Lagre avvik', exact: true }).click(); await entered; await page.getByRole('button', { name: 'Tilbake til dagen', exact: true }).click(); release(); await expect(page.getByRole('button', { name: 'Lukk planen', exact: true })).toBeEnabled(); await expect(page.getByRole('heading', { name: 'Dagen din', exact: true })).toBeVisible(); await expect(page.getByRole('heading', { name: 'Manuelt vedlikeholdte avvik', exact: true })).toBeHidden(); expect((await list(context, plan)).notices).toHaveLength(1); }
   finally { release(); }
 });
 
-test('held initial parent authority cannot expose notice actions before the closed state is known', async ({ page, context }) => {
+test('held initial parent authority does not disable independent account registry entry', async ({ page, context }) => {
   const { plan } = await openedPlan(page, context); await seed(context, plan);
   await page.getByRole('button', { name: 'Lukk planen', exact: true }).click(); await post(context, '/workdays/' + plan.id + '/start', { operation_id: randomUUID(), expected_revision: 0 }); await post(context, '/workdays/' + plan.id + '/close', { operation_id: randomUUID(), expected_revision: 1, expected_outcome_revision: 0, action: 'ended' });
   let release!: () => void, received!: () => void; const gate = new Promise<void>(r => release = r), entered = new Promise<void>(r => received = r);
   await page.route('**:8001/workdays/' + plan.id + '/recap', async route => { const response = await route.fetch(); received(); await gate; await route.fulfill({ response }); });
-  try { await page.getByRole('button', { name: 'Åpne plan 2031-01-02 · versjon 1', exact: true }).click(); await entered; await expect(page.getByRole('button', { name: 'Manuelt vedlikeholdte avvik', exact: true })).toBeDisabled(); release(); await expect(page.getByRole('heading', { name: 'Skift avsluttet', exact: true })).toBeVisible(); }
+  try { await page.getByRole('button', { name: 'Åpne plan 2031-01-02 · versjon 1', exact: true }).click(); await entered; await expect(page.getByRole('button', { name: 'Manuelt vedlikeholdte avvik', exact: true })).toBeEnabled(); release(); await expect(page.getByRole('heading', { name: 'Skift avsluttet', exact: true })).toBeVisible(); }
   finally { release(); }
 });
 
-test('a dirty notice on a shift closed elsewhere remains locally discardable and never writes terminal data', async ({ page, context }) => {
+test('a dirty account notice remains explicitly saveable when the original shift closes elsewhere', async ({ page, context }) => {
   const { plan } = await openedPlan(page, context); await open(page); await newNotice(page, 'Ulagret ved avslutning');
-  await post(context, '/workdays/' + plan.id + '/start', { operation_id: randomUUID(), expected_revision: 0 }); await post(context, '/workdays/' + plan.id + '/close', { operation_id: randomUUID(), expected_revision: 1, expected_outcome_revision: 0, action: 'ended' });
-  await page.getByRole('button', { name: 'Lagre avvik', exact: true }).click(); await expect(status(page)).toContainText('Forsøket ble avvist.'); await expect(page.getByLabel('Tittel', { exact: true })).toHaveValue('Ulagret ved avslutning'); await expect(page.getByRole('button', { name: 'Lagre avvik', exact: true })).toBeDisabled(); expect((await list(context, plan)).notices).toHaveLength(0);
-  await page.getByRole('button', { name: 'Forkast ulagrede endringer', exact: true }).click(); await expect.poll(() => beforeUnload(page)).toBe(false);
+  await post(context, '/workdays/' + plan.id + '/start', { operation_id: randomUUID(), expected_revision: 0 });
+  await post(context, '/workdays/' + plan.id + '/close', { operation_id: randomUUID(), expected_revision: 1, expected_outcome_revision: 0, action: 'ended' });
+  await save(page); expect((await list(context, plan)).notices[0].title).toBe('Ulagret ved avslutning');
+  await expect.poll(() => beforeUnload(page)).toBe(false);
 });
 
 for (const invalidation of ['account', 'session']) test(`held accepted notice response cannot restore ${invalidation} private presentation`, async ({ page, context }) => {
   const { plan } = await openedPlan(page, context); await open(page); await newNotice(page);
   let release!: () => void, received!: () => void; const gate = new Promise<void>(r => release = r), entered = new Promise<void>(r => received = r);
-  await page.route('**:8001/workdays/' + plan.id + '/notices', async route => { if (route.request().method() !== 'POST') return route.continue(); const response = await route.fetch(); received(); await gate; await route.fulfill({ response }); });
+  await page.route('**:8001/notices', async route => { if (route.request().method() !== 'POST') return route.continue(); const response = await route.fetch(); received(); await gate; await route.fulfill({ response }); });
   const next = { username: 'synthetic-held-notice-' + randomUUID(), password: randomUUID() };
   try {
     await page.getByRole('button', { name: 'Lagre avvik', exact: true }).click(); await entered;
@@ -339,16 +344,16 @@ for (const theme of ['Day', 'Night']) for (const width of [768, 1024, 1440]) tes
   await page.getByLabel('Kort forklaring', { exact: true }).fill(summary);
   await page.getByLabel('Detaljert forklaring', { exact: true }).fill(description);
   await page.getByLabel('Kildebeskrivelse', { exact: true }).fill(sourceNote);
-  const editor = await measure(page); await page.screenshot({ path: '../docs/evidence/11-4-real-notice-editor-' + theme.toLowerCase() + '-' + width + '.png', fullPage: true });
+  const editor = await measure(page); await page.screenshot({ path: '../docs/evidence/11-5-crossday-real-notice-editor-' + theme.toLowerCase() + '-' + width + '.png', fullPage: true });
   await save(page); await expect(page.getByRole('heading', { name: 'Manuelt vedlikeholdte avvik', exact: true })).toBeFocused();
   await expect(page.getByText('Kildens oppdateringstid er ukjent', { exact: true })).toBeVisible(); expect((await list(context, plan)).notices).toHaveLength(1);
   await textFacts(page.locator('.notice-list .notice-facts'), summary, description, sourceNote);
-  const saved = await measure(page); await page.screenshot({ path: '../docs/evidence/11-4-real-notice-saved-' + theme.toLowerCase() + '-' + width + '.png', fullPage: true });
+  const saved = await measure(page); await page.screenshot({ path: '../docs/evidence/11-5-crossday-real-notice-saved-' + theme.toLowerCase() + '-' + width + '.png', fullPage: true });
   const n = (await list(context, plan)).notices[0]; await page.getByRole('button', { name: 'Rediger ' + n.title, exact: true }).click(); await page.getByLabel('Tittel', { exact: true }).fill('Mitt forslag ved konflikt');
-  await post(context, '/workdays/' + plan.id + '/notices/' + n.id, { operation_id: randomUUID(), expected_revision: 1, expected_lifecycle_revision: 0, content: { ...fields, title: 'Annen lagret tittel for sammenligning' } });
-  await page.getByRole('button', { name: 'Lagre avvik', exact: true }).click(); await expect(page.getByText('Nyere lagret avvik', { exact: true })).toBeVisible(); const conflict = await measure(page); await page.screenshot({ path: '../docs/evidence/11-4-real-notice-conflict-' + theme.toLowerCase() + '-' + width + '.png', fullPage: true });
-  await page.route('**:8001/workdays/' + plan.id + '/notices', route => route.fulfill({ status: 503, json: { detail: 'synthetic unavailable' } })); await page.getByRole('button', { name: 'Hent lagrede avvik', exact: true }).click(); await expect(status(page)).toContainText('Avvikslisten er utilgjengelig.'); const unavailable = await measure(page);
-  await page.screenshot({ path: '../docs/evidence/11-4-real-notice-unavailable-' + theme.toLowerCase() + '-' + width + '.png', fullPage: true }); writeFileSync('../docs/evidence/11-4-real-notice-' + theme.toLowerCase() + '-' + width + '.json', JSON.stringify({ editor, saved, conflict, unavailable }, null, 2));
+  await post(context, '/notices/' + n.id, { operation_id: randomUUID(), expected_revision: 1, content: { ...fields, title: 'Annen lagret tittel for sammenligning' } });
+  await page.getByRole('button', { name: 'Lagre avvik', exact: true }).click(); await expect(page.getByText('Nyere lagret avvik', { exact: true })).toBeVisible(); const conflict = await measure(page); await page.screenshot({ path: '../docs/evidence/11-5-crossday-real-notice-conflict-' + theme.toLowerCase() + '-' + width + '.png', fullPage: true });
+  await page.route('**:8001/notices', route => route.fulfill({ status: 503, json: { detail: 'synthetic unavailable' } })); await page.getByRole('button', { name: 'Hent lagrede avvik', exact: true }).click(); await expect(status(page)).toContainText('Avvikslisten er utilgjengelig.'); const unavailable = await measure(page);
+  await page.screenshot({ path: '../docs/evidence/11-5-crossday-real-notice-unavailable-' + theme.toLowerCase() + '-' + width + '.png', fullPage: true }); writeFileSync('../docs/evidence/11-5-crossday-real-notice-' + theme.toLowerCase() + '-' + width + '.json', JSON.stringify({ editor, saved, conflict, unavailable }, null, 2));
 });
 
 
@@ -374,13 +379,13 @@ for (const theme of ['Day', 'Night']) test(theme + ' SMS scope proposal survives
   await expect(page.getByRole('region', { name: 'Lagringskrav' })).toContainText('eller velg Alle linjer');
   await page.getByLabel('Linjeomfang', { exact: true }).selectOption('all');
   await measure(page);
-  await page.screenshot({ path: '../docs/evidence/11-4-real-sms-editor-' + theme.toLowerCase() + '-390.png', fullPage: true });
+  await page.screenshot({ path: '../docs/evidence/11-5-crossday-real-sms-editor-' + theme.toLowerCase() + '-390.png', fullPage: true });
   await save(page); const n = (await list(context, plan)).notices[0];
-  expect(n.line_scope).toBe('all'); expect(n.line_tags).toEqual([]); expect(n.source_url).toBeNull(); expect(n.description).toBe(detail); expect(n.valid_from).toBeNull(); expect(n.valid_until).toBeNull();
+  expect(n.line_scope).toBe('all'); expect(n.line_tags).toEqual([]); expect(n.source_url).toBeNull(); expect(n.description).toBe(detail); expect(n.valid_from).toBeNull(); expect(n.valid_until).toBe('2031-01-04T23:59:59+01:00');
   await expect(page.getByText('Linjer fra kilden: Alle linjer', { exact: true })).toBeVisible();
   await textFacts(page.locator('.notice-list .notice-facts'), 'Temporary stop', detail, 'SMS from traffic control');
   await measure(page);
-  await page.screenshot({ path: '../docs/evidence/11-4-real-sms-saved-' + theme.toLowerCase() + '-390.png', fullPage: true });
+  await page.screenshot({ path: '../docs/evidence/11-5-crossday-real-sms-saved-' + theme.toLowerCase() + '-390.png', fullPage: true });
   await page.reload(); await page.getByRole('button', { name: /Åpne plan 2031-01-02/ }).click(); await open(page); await page.locator('.notice-list summary').click();
   await textFacts(page.locator('.notice-list .notice-facts'), 'Temporary stop', detail, 'SMS from traffic control');
   await page.getByRole('button', { name: 'Rediger SMS traffic notice', exact: true }).click();

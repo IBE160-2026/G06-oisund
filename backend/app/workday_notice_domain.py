@@ -1,6 +1,6 @@
 """Explicit source facts and manual actions, without inferred freshness or relevance."""
 import unicodedata
-from datetime import datetime, timezone
+from datetime import date, datetime, time, timezone
 from typing import Annotated, Literal
 from urllib.parse import urlsplit
 from uuid import UUID
@@ -72,7 +72,10 @@ class NoticeContent(StrictModel):
 
     @field_validator('source_updated_at', 'valid_from', 'valid_until')
     @classmethod
-    def oslo_time(cls, value):
+    def oslo_time(cls, value, info):
+        if info.field_name == 'valid_until' and isinstance(value, str) and len(value) == 10:
+            # A date-only ending means the last second of that Oslo date.
+            return datetime.combine(date.fromisoformat(value), time(23, 59, 59), ZoneInfo('Europe/Oslo')).isoformat()
         return Activity.oslo_instant(value)
 
     @model_validator(mode='after')
@@ -96,7 +99,7 @@ class SaveNotice(NoticeCommand):
 
 class NoticeRecord(StrictModel):
     id: UUID
-    workday_id: UUID
+    workday_id: UUID | None
     revision: int = Field(ge=1)
     title: str
     line_tags: list[str]
@@ -132,3 +135,18 @@ class NoticeList(StrictModel):
 class NoticeReceipt(StrictModel):
     operation_id: UUID
     result: NoticeRecord
+
+
+class AccountNoticeCommand(StrictModel):
+    operation_id: UUID
+    expected_revision: int = Field(ge=0, strict=True)
+
+
+class SaveAccountNotice(AccountNoticeCommand):
+    content: NoticeContent
+
+
+class AccountNoticeList(StrictModel):
+    server_now: datetime
+    notices: list[NoticeRecord] = Field(max_length=50)
+    next_cursor: UUID | None
