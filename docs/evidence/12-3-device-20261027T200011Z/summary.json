@@ -1,0 +1,166 @@
+{
+  "testedProductCommit": "8ca318b55b98eb34de54f29ecab038322e3ccab6",
+  "startHEAD": "78ea4d780bc06a1d57c98059ae44d06db34d0061",
+  "ownerAcceptance": "pending",
+  "rawGroupedChecks": 57,
+  "rawPassed": 39,
+  "rawAdapterFailuresPreserved": 18,
+  "rawFailingRows": [
+    {
+      "name": "Open existing synthetic January2 plan with injected touch",
+      "firstError": "Error: expect(locator).toBeVisible() failed"
+    },
+    {
+      "name": "Native Android keyboard opens after injected touch on bus input",
+      "firstError": "locator.scrollIntoViewIfNeeded: Error: strict mode violation: getByLabel('Fysisk buss', { exact: true }) resolved to 2 elements:"
+    },
+    {
+      "name": "Long Norwegian bus proposal remains readable and cancels without write",
+      "firstError": "locator.inputValue: Error: strict mode violation: getByLabel('Fysisk buss', { exact: true }) resolved to 2 elements:"
+    },
+    {
+      "name": "Selected activity opens via injected touch without starting shift",
+      "firstError": "Error: expect(locator).toBeVisible() failed"
+    },
+    {
+      "name": "Corrected bus textbox opens real Android IME",
+      "firstError": "Error: spawnSync C:/Users/Jonas/.codex/.chatgpt-projects/g-p-6ab6b4c1c6888191a96d3242fab912b4/local-tools/android/platform-tools/adb.exe ENOBUFS"
+    },
+    {
+      "name": "Corrected long Norwegian bus proposal and cancel",
+      "firstError": "Error: spawnSync C:/Users/Jonas/.codex/.chatgpt-projects/g-p-6ab6b4c1c6888191a96d3242fab912b4/local-tools/android/platform-tools/adb.exe ENOBUFS"
+    },
+    {
+      "name": "Actual zoom restored to1 and unpersisted notice safely discarded",
+      "firstError": "Error: expect(received).toBe(expected) // Object.is equality"
+    },
+    {
+      "name": "Private logout plus reload preserves Day and clears private view",
+      "firstError": "Error: expect(locator).toBeVisible() failed"
+    },
+    {
+      "name": "Corrected floating point zoom tolerance and discard confirmation",
+      "firstError": "Error: expect(received).toBe(expected) // Object.is equality"
+    },
+    {
+      "name": "Night survives actual route navigation, logout, Back and reload on Brave",
+      "firstError": "Error: expect(locator).toBeVisible() failed"
+    },
+    {
+      "name": "Settled touch verifies Night through navigation logout Back reload and empty private stores",
+      "firstError": "page.goBack: Timeout 10000ms exceeded."
+    },
+    {
+      "name": "Demo lost acknowledgement keeps original recovery and native checkbox indicators",
+      "firstError": "locator.scrollIntoViewIfNeeded: Timeout 10000ms exceeded."
+    },
+    {
+      "name": "Demo portrait confirmation and selection never starts simulation",
+      "firstError": "Error: expect(locator).toBeDisabled() failed"
+    },
+    {
+      "name": "Actual HTML reset modal focus trap and Escape cancellation on Android",
+      "firstError": "TypeError: Cannot read properties of null (reading 'width')"
+    },
+    {
+      "name": "Actual private notice reader on physical portrait Night",
+      "firstError": "Error: expect(locator).toBeVisible() failed"
+    },
+    {
+      "name": "Actual existing synthetic draft editor on physical portrait Night",
+      "firstError": "locator.scrollIntoViewIfNeeded: Timeout 10000ms exceeded."
+    },
+    {
+      "name": "Private reader presentation with explicitly DOM-driven navigation",
+      "firstError": "Error: expect(locator).toBeVisible() failed"
+    },
+    {
+      "name": "Existing draft editor presentation with explicitly DOM-driven navigation",
+      "firstError": "locator.evaluate: Timeout 10000ms exceeded."
+    }
+  ],
+  "separateSmoke": "smoke.json",
+  "manualControls": 2,
+  "qualifiedMeasurementObservations": 28,
+  "textObservations": 1410,
+  "minTextRatio": 6.126270626473104,
+  "boundaryObservations": 398,
+  "minBoundaryRatio": 4.781375582652278,
+  "criticalClipping": 0,
+  "unsupportedProductLayers": 0,
+  "maxHorizontalOverflow": 0,
+  "measurementFiles": [
+    "001-api-assessment-portrait-day-api-assessment-portrait-day.json",
+    "001-demo-confirmation-portrait-night-demo-confirmation-portrait-night.json",
+    "001-demo-import-night-landscape-demo-import-night-landscape.json",
+    "001-demo-real-pending-night-demo-real-pending-night.json",
+    "001-demo-selected-portrait-night-demo-selected-portrait-night.json",
+    "001-login-night-login-night.json",
+    "001-private-day-day-private-day-day.json",
+    "001-private-long-bus-portrait-private-long-bus-portrait.json",
+    "001-private-notice-landscape-day-private-notice-landscape-day.json",
+    "001-private-notice-list-portrait-night-private-notice-list-portrait-night.json",
+    "001-private-portrait-night-private-portrait-night.json",
+    "001-private-preparation-day-private-preparation-day.json",
+    "001-private-reader-verified-night-portrait-private-reader-verified-night-portrait.json",
+    "001-private-selected-night-portrait-private-selected-night-portrait.json",
+    "002-api-assessment-portrait-night-api-assessment-portrait-night.json",
+    "002-demo-outcome-portrait-night-demo-outcome-portrait-night.json",
+    "002-demo-unavailable-long-night-demo-unavailable-long-night.json",
+    "002-login-day-login-day.json",
+    "002-private-day-night-private-day-night.json",
+    "002-private-draft-verified-night-portrait-private-draft-verified-night-portrait.json",
+    "002-private-notice-validation-portrait-night-private-notice-validation-portrait-night.json",
+    "002-private-start-dialog-private-start-dialog.json",
+    "003-api-assessment-saved-reopened-night-api-assessment-saved-reopened-night.json",
+    "003-demo-conflict-night-demo-conflict-night.json",
+    "003-demo-recap-portrait-night-demo-recap-portrait-night.json",
+    "003-private-notice-validation-portrait-day-private-notice-validation-portrait-day.json",
+    "004-demo-recap-portrait-day-demo-recap-portrait-day.json",
+    "005-demo-reset-modal-day-demo-reset-modal-day.json"
+  ],
+  "excludedMeasurementFiles": [
+    {
+      "file": "004-demo-pending-night-demo-pending-night.json",
+      "reason": "Scenario precondition was stale conflict, not pending; kept raw but excluded from qualified state summary."
+    }
+  ],
+  "focus": {
+    "scope": "actual reset modal only; not a full-device focus census",
+    "keyboardStops": 3,
+    "actualPixelPairs": 2,
+    "completedCycle": true,
+    "missing": [],
+    "minimumAreaRatio": 1.4915034795274316
+  },
+  "nativeCheckbox": {
+    "states": 2,
+    "minimumEdgeRatio": 10.131164801445454,
+    "checkedGlyphs": 1
+  },
+  "pinchZoom": {
+    "visualScale": 2,
+    "cssRootFont": "16px",
+    "directFramebuffer": "actual-zoom-2x-direct-framebuffer.png",
+    "scrollFramebuffer": "actual-zoom-2x-after-scroll.png"
+  },
+  "secretScan": {
+    "scope": "Own isolated synthetic account password against all copied source/report/image bytes; no token/cookie values recorded",
+    "files": 137,
+    "found": false
+  },
+  "notTested": [
+    "TalkBack/assistive technology",
+    "OS magnification and Brave text-size settings",
+    "hardware keyboard",
+    "quantitative contrast of individual date/time/select/disclosure native glyph pixels",
+    "live HTTPS/Cloudflare or mobile network for this build",
+    "long-duration subjective ergonomics",
+    "Private draft review/confirmation and private terminal recap were not advanced on-device; existing manual seed plans retained. Demo counterpart and earlier PC checks are separate evidence."
+  ],
+  "methodVersions": {
+    "early": "driver-before-touch-settle.cjs",
+    "later": "driver.cjs",
+    "extraViews": "stage22.cjs waits for enabled then explicitly uses DOM clicks"
+  }
+}

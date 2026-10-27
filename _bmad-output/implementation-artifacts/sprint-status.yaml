@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 10-19-2026 14:35
-last_updated: 10-27-2026 08:54
+last_updated: 10-27-2026 22:02
 project: IBE160
 project_key: NOKEY
 tracking_system: file-system
@@ -62,7 +62,7 @@ development_status:
   epic-12: in-progress
   12-1-enforce-the-retained-data-boundary: done # Jonas explicitly approved 2026-10-27 after manual A-F passed on desktop/Brave.
   12-2-repeat-a-fictional-assessment: done # Jonas explicitly approved corrections and requested commit/push 2026-10-27.
-  12-3-use-the-included-views-on-tablet-and-pc: backlog
+  12-3-use-the-included-views-on-tablet-and-pc: done # Jonas conditional acceptance effective 2026-10-27 after remaining required Lenovo checks passed; device-acceptance report. No merge/commit/push.
   12-4-verify-the-complete-user-flow: backlog
   12-5-deliver-a-reproducible-submission: backlog
   epic-12-retrospective: optional
@@ -135,7 +135,7 @@ action_items:
       with non-private-only storage and reload/privacy evidence, or obtain explicit
       owner reconciliation."
     owner: "Developer"
-    status: open
+    status: done # Technically verified; Jonas accepted 12.3 on 2026-10-27 after required Lenovo checks.
     ref: "D:/IBE160/_bmad-output/implementation-artifacts/epic-10-retro-2026-10-24.md"
   - id: "epic-10-retro-item-5-record-ipad-verification"
     epic: 10
@@ -143,7 +143,7 @@ action_items:
       touch/enlargement/control observations in 12.3/12.4; keep desktop evidence and
       owner acceptance distinct."
     owner: "Jonas / QA"
-    status: open
+    status: done # Current Lenovo/Brave included-view obligation satisfied; final device acceptance report. Wider deployment/12.4 remain separate.
     ref: "D:/IBE160/_bmad-output/implementation-artifacts/epic-10-retro-2026-10-24.md"
   - id: "epic-11-retro-item-1-terminal-plan-recovery"
     epic: 11
@@ -175,7 +175,7 @@ action_items:
     action: "A4: Restore notice-maintenance return focus to its actual visible preparation/day
       invoker; cover keyboard return from preparation with and without an open plan."
     owner: "Developer / QA"
-    status: open
+    status: done # Technically verified; Jonas accepted 12.3 on 2026-10-27 after required Lenovo checks.
     ref: "D:\\IBE160\\_bmad-output\\implementation-artifacts\\epic-11-retro-2026-10-26.md"
   - id: "epic-11-retro-item-5-disambiguate-oslo-notice-times"
     epic: 11
@@ -192,7 +192,7 @@ action_items:
       metadata. Separately qualify delayed read retention before deciding whether
       any read guard needs changing. Existing write guards remain intact."
     owner: "Developer / QA"
-    status: done # Technically verified in 12.1; story owner acceptance remains pending.
+    status: done # Verified in 12.1; Jonas accepted 12.1 on 2026-10-27.
     ref: "D:\\IBE160\\_bmad-output\\implementation-artifacts\\epic-11-retro-2026-10-26.md"
   - id: "epic-11-retro-item-7-validate-source-and-lifetime-journeys"
     epic: 11
@@ -219,7 +219,7 @@ action_items:
       under that existing 12.3/12.4 obligation; do not infer a pass from desktop approval
       or duplicate the old task."
     owner: "Jonas / QA"
-    status: open
+    status: done # Current Lenovo/Brave included-view obligation satisfied; final device acceptance report. Wider deployment/12.4 remain separate.
     ref: "D:\\IBE160\\_bmad-output\\implementation-artifacts\\epic-11-retro-2026-10-26.md"
   - id: "epic-11-retro-item-10-prepare-remote-access-between-epics"
     epic: 11
@@ -227,7 +227,7 @@ action_items:
       Epic 11 and Epic 12, with actual route/origin/session evidence before mobile
       testing. No remote setup or Epic 12 implementation is performed by this retrospective."
     owner: "Jonas / Developer"
-    status: open
+    status: done # Delivered in main before 12.1/12.2 acceptance; fictional pilot recorded in docs/tablet-pilot-result.md. Ordinary deployment remains separate.
     ref: "D:\\IBE160\\_bmad-output\\implementation-artifacts\\epic-11-retro-2026-10-26.md"
   - id: "epic-11-retro-item-11-clamp-extreme-session-clock-timer"
     epic: 11
@@ -235,7 +235,7 @@ action_items:
       a device clock more than about eleven days slow; clamp/schedule safely and verify
       access expiry without changing session leases or notice retention."
     owner: "Developer / QA"
-    status: done # Technically verified in 12.1; story owner acceptance remains pending.
+    status: done # Verified in 12.1; Jonas accepted 12.1 on 2026-10-27.
     ref: "D:\\IBE160\\_bmad-output\\implementation-artifacts\\epic-11-retro-2026-10-26.md"
   - id: "epic-11-retro-item-12-carry-cross-story-invariants"
     epic: 11
@@ -248,4 +248,4 @@ action_items:
     ref: "D:\\IBE160\\_bmad-output\\implementation-artifacts\\epic-11-retro-2026-10-26.md"
 
 
-# Jonas har ikke gjennomført manuell/fysisk akseptansetest av Story 12.1 eller Story 12.2. Teknisk integrasjon og automatiske tester innebærer ikke brukeraksept. Begge avventer Jonas sin testing.
+# Jonas accepted 12.1/12.2 on 2026-10-27. Conditional 12.3 acceptance became effective after remaining required Lenovo checks passed; see docs/evidence/12-3-device-acceptance-2026-10-27.md. Broader deployment/AT limits remain explicit;12.4 backlog.

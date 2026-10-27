@@ -345,7 +345,7 @@ FR-7–9, FR-15 and FR-23 are deferred; the remaining original FRs are narrowed 
 
 ### Story 12.1: Enforce the retained-data boundary
 
-**Stable alias:** V1-16. **Status:** review; local technical integration, owner manual/physical acceptance pending.
+**Stable alias:** V1-16. **Status:** done/accepted; Jonas explicitly approved on 27 October 2026.
 **Depends on:** V1-05, V1-12, V1-13.
 **Traceability:** FR-1/2/24; NFR-3; AC-06/09; SCOPE-02.
 
@@ -362,7 +362,7 @@ FR-7–9, FR-15 and FR-23 are deferred; the remaining original FRs are narrowed 
 
 ### Story 12.2: Repeat a fictional assessment
 
-**Stable alias:** V1-17. **Status:** review; integrated with 12.1, owner manual/physical acceptance pending.
+**Stable alias:** V1-17. **Status:** done/accepted; Jonas approved the corrected integrated delivery on 27 October 2026.
 **Depends on:** V1-12, V1-14, V1-15.
 **Traceability:** FR-25; NFR-2/3; AC-11; SCOPE-02.
 
@@ -379,7 +379,7 @@ FR-7–9, FR-15 and FR-23 are deferred; the remaining original FRs are narrowed 
 
 ### Story 12.3: Use the included views on tablet and PC
 
-**Stable alias:** V1-18. **Status:** backlog; approved scope, implementation/evidence not started.
+**Stable alias:** V1-18. **Status:** done/accepted,27 October2026. Jonas' conditional approval became effective after remaining required physical checks passed; [final acceptance evidence](../../docs/evidence/12-3-device-acceptance-2026-10-27.md). No main merge/commit/push;12.4 remains backlog.
 **Depends on:** V1-09, V1-11, V1-14.
 **Traceability:** NFR-1/4; IR-01; AC-10; SCOPE-02.
 

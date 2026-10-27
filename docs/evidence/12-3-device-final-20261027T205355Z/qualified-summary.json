@@ -1,0 +1,122 @@
+{
+  "time": "2026-10-27T21:02:17.358Z",
+  "groupedAttempts": 19,
+  "passedAttempts": 17,
+  "failedAttempts": [
+    {
+      "name": "Private terminal recap reload reopen retains Night exact saved server facts",
+      "error": "SyntaxError: Unexpected token 'S', \"Skift avsl\"... is not valid JSON"
+    },
+    {
+      "name": "Corrected recap exact text after actual reload and reopen",
+      "error": "Error: expect(locator).toHaveText(expected) failed"
+    }
+  ],
+  "additionalUngroupedAdapterError": "icons.cjs expected editor select; editor contains no select. Original icons-error.txt preserved. Actual select tested later in private review.",
+  "excludedMeasurements": "closure-*-disclosure-pixels.json include border and clip marker; not qualified. Corrected verified-closure-* and verified-details-* crops visually inspected and asserted.",
+  "measurements": {
+    "states": 16,
+    "textObservations": 1960,
+    "minText": 6.126270626473104,
+    "boundaries": 484,
+    "minBoundary": 4.781375582652278,
+    "clipping": 0,
+    "overflow": 0,
+    "unmeasured": 0
+  },
+  "glyphs": {
+    "qualifiedCrops": 14,
+    "minContrast": 6.4156547901981735,
+    "observations": [
+      {
+        "file": "review-day-select-pixels.json",
+        "ratio": 6.4184897232371885,
+        "corePixels": 29
+      },
+      {
+        "file": "review-night-select-pixels.json",
+        "ratio": 6.4156547901981735,
+        "corePixels": 29
+      },
+      {
+        "file": "verified-closure-day-false-pixels.json",
+        "ratio": 14.387145266736685,
+        "corePixels": 159
+      },
+      {
+        "file": "verified-closure-day-true-pixels.json",
+        "ratio": 14.387145266736685,
+        "corePixels": 159
+      },
+      {
+        "file": "verified-closure-night-false-pixels.json",
+        "ratio": 12.855408864593942,
+        "corePixels": 159
+      },
+      {
+        "file": "verified-closure-night-true-pixels.json",
+        "ratio": 12.855408864593942,
+        "corePixels": 159
+      },
+      {
+        "file": "verified-details-day-false-pixels.json",
+        "ratio": 14.387145266736685,
+        "corePixels": 159
+      },
+      {
+        "file": "verified-details-day-true-pixels.json",
+        "ratio": 14.387145266736685,
+        "corePixels": 159
+      },
+      {
+        "file": "verified-details-night-false-pixels.json",
+        "ratio": 12.855408864593942,
+        "corePixels": 159
+      },
+      {
+        "file": "verified-details-night-true-pixels.json",
+        "ratio": 12.855408864593942,
+        "corePixels": 159
+      },
+      {
+        "file": "verified-editor-day-date-pixels.json",
+        "ratio": 21,
+        "corePixels": 238
+      },
+      {
+        "file": "verified-editor-day-time-pixels.json",
+        "ratio": 21,
+        "corePixels": 185
+      },
+      {
+        "file": "verified-editor-night-date-pixels.json",
+        "ratio": 11.197780367657575,
+        "corePixels": 238
+      },
+      {
+        "file": "verified-editor-night-time-pixels.json",
+        "ratio": 11.197780367657575,
+        "corePixels": 185
+      }
+    ],
+    "visualIdentityInspected": true
+  },
+  "focus": {
+    "pointPairs": 4,
+    "censusStates": 2,
+    "censusObservations": 20,
+    "censusPairs": 18,
+    "minChangedAreaOverRequired": 1.555203380876915,
+    "minCensusAdjacentContrast": 11.45007504521487,
+    "completedCycles": true
+  },
+  "privateCheckbox": {
+    "actualSamples": 4,
+    "minEdge": 11.085379609993499,
+    "checkedGlyphs": 2
+  },
+  "passwordScanFiles": 199,
+  "productCodeChanges": 0,
+  "overallAcceptance": "Conditional owner approval effective after all required checks passed; see report scope assessment",
+  "note": "Not a fresh PC broad run; earlier 477/479 untouched. Three bounded test-client issues and bad glyph ROI retained, not relabeled product passes."
+}

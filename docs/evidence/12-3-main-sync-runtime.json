@@ -1,0 +1,863 @@
+{
+  "observed": "2026-10-27T19:24:33.551392+00:00",
+  "revision": "8ca318b55b98eb34de54f29ecab038322e3ccab6",
+  "checks": [
+    {
+      "name": "preserved container /ibe160-story12-integration-api-1",
+      "passed": true
+    },
+    {
+      "name": "preserved container /ibe160-story12-integration-private-api-1",
+      "passed": true
+    },
+    {
+      "name": "preserved container /ibe160-story12-integration-db-1",
+      "passed": true
+    },
+    {
+      "name": "preserved container /ibe160-story12-integration-private-db-1",
+      "passed": true
+    },
+    {
+      "name": "preserved container /ibe160-story122-tests-private-api-1",
+      "passed": true
+    },
+    {
+      "name": "preserved container /ibe160-story122-tests-api-1",
+      "passed": true
+    },
+    {
+      "name": "preserved container /ibe160-story122-tests-private-db-1",
+      "passed": true
+    },
+    {
+      "name": "preserved container /ibe160-story122-tests-db-1",
+      "passed": true
+    },
+    {
+      "name": "preserved container /ibe160-story121-tests-private-api-1",
+      "passed": true
+    },
+    {
+      "name": "preserved container /ibe160-story121-tests-private-db-1",
+      "passed": true
+    },
+    {
+      "name": "preserved container /ibe160-tablet-prep-private-api-1",
+      "passed": true
+    },
+    {
+      "name": "preserved container /ibe160-tablet-prep-gateway-1",
+      "passed": true
+    },
+    {
+      "name": "preserved container /ibe160-tablet-prep-access-gate-1",
+      "passed": true
+    },
+    {
+      "name": "preserved container /ibe160-tablet-prep-private-db-1",
+      "passed": true
+    },
+    {
+      "name": "preserved container /ibe160-private-work-private-api-1",
+      "passed": true
+    },
+    {
+      "name": "preserved container /ibe160-fictional-assessment-frontend-1",
+      "passed": true
+    },
+    {
+      "name": "preserved container /ibe160-fictional-assessment-api-1",
+      "passed": true
+    },
+    {
+      "name": "preserved container /ibe160-private-tests-private-api-1",
+      "passed": true
+    },
+    {
+      "name": "preserved container /ibe160-private-tests-private-db-1",
+      "passed": true
+    },
+    {
+      "name": "preserved container /ibe160-private-work-private-db-1",
+      "passed": true
+    },
+    {
+      "name": "preserved container /ibe160-fictional-assessment-db-1",
+      "passed": true
+    },
+    {
+      "name": "preserved container /friendly_shockley",
+      "passed": true
+    },
+    {
+      "name": "no leftover probe containers",
+      "passed": true
+    },
+    {
+      "name": "accepted15312 all7 HTTP byte hashes unchanged",
+      "passed": true
+    },
+    {
+      "name": "own served /",
+      "passed": true
+    },
+    {
+      "name": "own asset /assets/main-mjCyzRo6.js",
+      "passed": true
+    },
+    {
+      "name": "own asset /assets/FictionalAssessment-DgWBF5_Z.js",
+      "passed": true
+    },
+    {
+      "name": "own asset /assets/FictionalAssessment-Ca5gn51W.css",
+      "passed": true
+    },
+    {
+      "name": "own served /demo",
+      "passed": true
+    },
+    {
+      "name": "own asset /assets/demo-CVYX95Ri.js",
+      "passed": true
+    },
+    {
+      "name": "own asset /assets/FictionalAssessment-DgWBF5_Z.js",
+      "passed": true
+    },
+    {
+      "name": "own asset /assets/FictionalAssessment-Ca5gn51W.css",
+      "passed": true
+    },
+    {
+      "name": "own served /private",
+      "passed": true
+    },
+    {
+      "name": "own asset /assets/main-mjCyzRo6.js",
+      "passed": true
+    },
+    {
+      "name": "own asset /assets/FictionalAssessment-DgWBF5_Z.js",
+      "passed": true
+    },
+    {
+      "name": "own asset /assets/FictionalAssessment-Ca5gn51W.css",
+      "passed": true
+    },
+    {
+      "name": "own project identity api",
+      "passed": true
+    },
+    {
+      "name": "running mounted backend bytes api",
+      "passed": true
+    },
+    {
+      "name": "own project identity private-api",
+      "passed": true
+    },
+    {
+      "name": "running mounted backend bytes private-api",
+      "passed": true
+    },
+    {
+      "name": "own project identity db",
+      "passed": true
+    },
+    {
+      "name": "own project identity private-db",
+      "passed": true
+    },
+    {
+      "name": "own API health 18323",
+      "passed": true
+    },
+    {
+      "name": "own API health 18324",
+      "passed": true
+    },
+    {
+      "name": "build bytes match identity",
+      "passed": true
+    },
+    {
+      "name": "source matches build identity",
+      "passed": true
+    },
+    {
+      "name": "effective API identity",
+      "passed": true
+    },
+    {
+      "name": "tablet-build bytes match identity",
+      "passed": true
+    },
+    {
+      "name": "tablet-source matches build identity",
+      "passed": true
+    },
+    {
+      "name": "tablet-effective API identity",
+      "passed": true
+    },
+    {
+      "name": "accepted main is ancestor",
+      "passed": true
+    },
+    {
+      "name": "main unchanged74849ff",
+      "passed": true
+    },
+    {
+      "name": "main worktree clean",
+      "passed": true
+    },
+    {
+      "name": "backend deployment equal accepted main",
+      "passed": true
+    },
+    {
+      "name": "gateway private app assets plus unmodified base error page",
+      "passed": true
+    },
+    {
+      "name": "gateway contains theme and relative private API",
+      "passed": true
+    },
+    {
+      "name": "gateway excludes demo/fictional API",
+      "passed": true
+    },
+    {
+      "name": "owned preview identity and listener",
+      "passed": true
+    },
+    {
+      "name": "test preview released 18481",
+      "passed": true
+    },
+    {
+      "name": "test preview released 18483",
+      "passed": true
+    },
+    {
+      "name": "manual credentials present",
+      "passed": true
+    }
+  ],
+  "owner_acceptance": "pending",
+  "dependency_acceptance": {
+    "12.1": "accepted",
+    "12.2": "accepted"
+  },
+  "preserved_containers": [
+    {
+      "id": "7991577f9cf5e84519bd5e6449bb5e5e62e96214d4fcd15ec4587bf4d10e58ad",
+      "name": "/ibe160-story12-integration-api-1",
+      "image": "sha256:18f373092c551cd23f3b706aa618162c52aa74bb7e7e18d208e9e1f7a7dc2614",
+      "started": "2026-10-27T15:13:57.527635969Z",
+      "restarts": 0,
+      "labels": {
+        "com.docker.compose.config-hash": "e7b5a4b46332bf19feeb5c0ef72268b8bab94d8574537ea932201d16fdab138a",
+        "com.docker.compose.container-number": "1",
+        "com.docker.compose.depends_on": "db:service_healthy:false",
+        "com.docker.compose.image": "sha256:96bb68631d7e68a1ec35626f47070ff51a673131548159ce33a85a7c139cf5f1",
+        "com.docker.compose.oneoff": "False",
+        "com.docker.compose.project": "ibe160-story12-integration",
+        "com.docker.compose.project.config_files": "D:\\IBE160\\compose.story12-integration.yaml",
+        "com.docker.compose.project.working_dir": "D:\\IBE160",
+        "com.docker.compose.replace": "api-1",
+        "com.docker.compose.service": "api",
+        "com.docker.compose.version": "5.5.1"
+      }
+    },
+    {
+      "id": "be2e42172f8f8bd5e2dd53463434d7db4e4e925d52301979d4fa21ac9b52804b",
+      "name": "/ibe160-story12-integration-private-api-1",
+      "image": "sha256:b42fdb7d79c608df0d0ea5582c7702665c5bf6115012d1b110dce6d3bdb090c9",
+      "started": "2026-10-27T15:31:55.317079835Z",
+      "restarts": 0,
+      "labels": {
+        "com.docker.compose.config-hash": "95f42a5157acffe31ef06141ab128476359906debadd122ff9c92e97cd80828c",
+        "com.docker.compose.container-number": "1",
+        "com.docker.compose.depends_on": "private-db:service_healthy:false",
+        "com.docker.compose.image": "sha256:3f3c1cbc4d03926d4d2455e84559944ec83ddbf1b8ee2b104c759a2821b994be",
+        "com.docker.compose.oneoff": "False",
+        "com.docker.compose.project": "ibe160-story12-integration",
+        "com.docker.compose.project.config_files": "D:\\IBE160\\compose.story12-integration.yaml",
+        "com.docker.compose.project.working_dir": "D:\\IBE160",
+        "com.docker.compose.replace": "private-api-1",
+        "com.docker.compose.service": "private-api",
+        "com.docker.compose.version": "5.5.1"
+      }
+    },
+    {
+      "id": "aeb9125406b628eaaaaf5214c6bd33e59676381528f75147dc3f97f9e6302f6b",
+      "name": "/ibe160-story12-integration-db-1",
+      "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "started": "2026-10-27T15:13:53.291318945Z",
+      "restarts": 0,
+      "labels": {
+        "com.docker.compose.config-hash": "d078ebe81284b632d51e3fd36fc25397103af33d0cd2422f0bebf3cb3fc161df",
+        "com.docker.compose.container-number": "1",
+        "com.docker.compose.depends_on": "",
+        "com.docker.compose.image": "sha256:aa90e97ee862e558111d34cfb8b2c4bec768c2b039fb791341686928560263b3",
+        "com.docker.compose.oneoff": "False",
+        "com.docker.compose.project": "ibe160-story12-integration",
+        "com.docker.compose.project.config_files": "D:\\IBE160\\compose.story12-integration.yaml",
+        "com.docker.compose.project.working_dir": "D:\\IBE160",
+        "com.docker.compose.service": "db",
+        "com.docker.compose.version": "5.5.1"
+      }
+    },
+    {
+      "id": "e57a1b8fd2f53e1b81eadaab8f1346304f32dba6911ed083dbd485aeecd40435",
+      "name": "/ibe160-story12-integration-private-db-1",
+      "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "started": "2026-10-27T15:13:53.43911017Z",
+      "restarts": 0,
+      "labels": {
+        "com.docker.compose.config-hash": "542de275bfdaea107e2e10d0e2d01a24bc5559e8697a200c8edd3e7e36a9293a",
+        "com.docker.compose.container-number": "1",
+        "com.docker.compose.depends_on": "",
+        "com.docker.compose.image": "sha256:aa90e97ee862e558111d34cfb8b2c4bec768c2b039fb791341686928560263b3",
+        "com.docker.compose.oneoff": "False",
+        "com.docker.compose.project": "ibe160-story12-integration",
+        "com.docker.compose.project.config_files": "D:\\IBE160\\compose.story12-integration.yaml",
+        "com.docker.compose.project.working_dir": "D:\\IBE160",
+        "com.docker.compose.service": "private-db",
+        "com.docker.compose.version": "5.5.1"
+      }
+    },
+    {
+      "id": "fd52df01d71b09aab91030bd9922904d8a9dfb651ae4e4c8401089280b566955",
+      "name": "/ibe160-story122-tests-private-api-1",
+      "image": "sha256:72774cad61a241605b3487def5d8cef084a6a48be0ad24e2554df1b8e5a24561",
+      "started": "2026-10-26T21:51:00.368172346Z",
+      "restarts": 0,
+      "labels": {
+        "com.docker.compose.config-hash": "e07eddf458e1b07cf0cf756bbfc364ab85d02b3d4b0b7a50a1158e1ad298eefc",
+        "com.docker.compose.container-number": "1",
+        "com.docker.compose.depends_on": "private-db:service_healthy:false",
+        "com.docker.compose.image": "sha256:162b6d42bd3c691da5ead740434a8113dedd1cb0cfb88938bd93f1cde1d58a43",
+        "com.docker.compose.oneoff": "False",
+        "com.docker.compose.project": "ibe160-story122-tests",
+        "com.docker.compose.project.config_files": "C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\story-12-2\\compose.story122.yaml",
+        "com.docker.compose.project.working_dir": "C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\story-12-2",
+        "com.docker.compose.service": "private-api",
+        "com.docker.compose.version": "5.5.1"
+      }
+    },
+    {
+      "id": "1c7f8857a08a0a61a2439c5642bc5b35beedaa55d1fb6abf78c5084a16ec4564",
+      "name": "/ibe160-story122-tests-api-1",
+      "image": "sha256:06d7ce3538eba6d9c7d4f2caee7246654496079f8b34f17d1365eba7686fb9a8",
+      "started": "2026-10-26T21:51:11.075323136Z",
+      "restarts": 0,
+      "labels": {
+        "com.docker.compose.config-hash": "6de8731efda89d37eb4ebb211db732545a8442e38a862e6d194ce68c91beb04b",
+        "com.docker.compose.container-number": "1",
+        "com.docker.compose.depends_on": "db:service_healthy:false",
+        "com.docker.compose.image": "sha256:2e00e37ead60138b88fa5b617b5db8933c2539e6503acdbc781d7fb1c24b880c",
+        "com.docker.compose.oneoff": "False",
+        "com.docker.compose.project": "ibe160-story122-tests",
+        "com.docker.compose.project.config_files": "C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\story-12-2\\compose.story122.yaml",
+        "com.docker.compose.project.working_dir": "C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\story-12-2",
+        "com.docker.compose.service": "api",
+        "com.docker.compose.version": "5.5.1"
+      }
+    },
+    {
+      "id": "56cc2b541bd914aaf07e3dc6f30942d78479353eefb7bac25d653ae78947f3a8",
+      "name": "/ibe160-story122-tests-private-db-1",
+      "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "started": "2026-10-26T21:50:57.522035414Z",
+      "restarts": 0,
+      "labels": {
+        "com.docker.compose.config-hash": "5a8466f8aa696c4d831fe68e5909b7a0294dd9cdd3ace64eb6c2e10e8703e336",
+        "com.docker.compose.container-number": "1",
+        "com.docker.compose.depends_on": "",
+        "com.docker.compose.image": "sha256:aa90e97ee862e558111d34cfb8b2c4bec768c2b039fb791341686928560263b3",
+        "com.docker.compose.oneoff": "False",
+        "com.docker.compose.project": "ibe160-story122-tests",
+        "com.docker.compose.project.config_files": "C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\story-12-2\\compose.story122.yaml",
+        "com.docker.compose.project.working_dir": "C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\story-12-2",
+        "com.docker.compose.service": "private-db",
+        "com.docker.compose.version": "5.5.1"
+      }
+    },
+    {
+      "id": "5766c65fa74e96f683ef7cfa2b7307ab4a94f0ef9644dbf63a5cb89d2456ddce",
+      "name": "/ibe160-story122-tests-db-1",
+      "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "started": "2026-10-26T21:51:10.66207864Z",
+      "restarts": 0,
+      "labels": {
+        "com.docker.compose.config-hash": "da27d079dd7dac3aea2e1fcbe3b9a87c6efcb0d9ba257e4d63b00e89d298f934",
+        "com.docker.compose.container-number": "1",
+        "com.docker.compose.depends_on": "",
+        "com.docker.compose.image": "sha256:aa90e97ee862e558111d34cfb8b2c4bec768c2b039fb791341686928560263b3",
+        "com.docker.compose.oneoff": "False",
+        "com.docker.compose.project": "ibe160-story122-tests",
+        "com.docker.compose.project.config_files": "C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\story-12-2\\compose.story122.yaml",
+        "com.docker.compose.project.working_dir": "C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\story-12-2",
+        "com.docker.compose.service": "db",
+        "com.docker.compose.version": "5.5.1"
+      }
+    },
+    {
+      "id": "cd1db9210623013a6795d2c793b150212fe769785efc186f0a219f4c85447054",
+      "name": "/ibe160-story121-tests-private-api-1",
+      "image": "sha256:efb271265fc913ab3d0786373e73fefc8008afc791c11d06bfe9b705c84a01c0",
+      "started": "2026-10-26T23:08:28.21447389Z",
+      "restarts": 0,
+      "labels": {
+        "com.docker.compose.config-hash": "5e4d86e2d3faa1f49452b36de8192e00a86135646f1c8c0e65fc4beddeb4bbc8",
+        "com.docker.compose.container-number": "1",
+        "com.docker.compose.depends_on": "private-db:service_healthy:false",
+        "com.docker.compose.image": "sha256:510fdf39dafc7cb72d788f1bb9f346495126425c977a39b5cee2c9bd6a1787ab",
+        "com.docker.compose.oneoff": "False",
+        "com.docker.compose.project": "ibe160-story121-tests",
+        "com.docker.compose.project.config_files": "D:\\IBE160-story-12-1\\compose.story121.yaml",
+        "com.docker.compose.project.working_dir": "D:\\IBE160-story-12-1",
+        "com.docker.compose.service": "private-api",
+        "com.docker.compose.version": "5.5.1"
+      }
+    },
+    {
+      "id": "e020bd052af4452ace6c76077c090cd768d76356064e5c12b30e2a0c9c8c34ba",
+      "name": "/ibe160-story121-tests-private-db-1",
+      "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "started": "2026-10-26T21:42:16.389701314Z",
+      "restarts": 0,
+      "labels": {
+        "com.docker.compose.config-hash": "3c33269eee8196f003db8affb8d79a1c8bf76a06d81003532dc4287900c105f7",
+        "com.docker.compose.container-number": "1",
+        "com.docker.compose.depends_on": "",
+        "com.docker.compose.image": "sha256:aa90e97ee862e558111d34cfb8b2c4bec768c2b039fb791341686928560263b3",
+        "com.docker.compose.oneoff": "False",
+        "com.docker.compose.project": "ibe160-story121-tests",
+        "com.docker.compose.project.config_files": "D:\\IBE160-story-12-1\\compose.story121.yaml",
+        "com.docker.compose.project.working_dir": "D:\\IBE160-story-12-1",
+        "com.docker.compose.service": "private-db",
+        "com.docker.compose.version": "5.5.1"
+      }
+    },
+    {
+      "id": "b6945f433bdd840262e81564450901e9d6e6fcf1f20f30378e9af657b217fd46",
+      "name": "/ibe160-tablet-prep-private-api-1",
+      "image": "sha256:bba90cfe1af32c3247c93a73dcbd795bb9b95140e657b6d4ab27756a0e13d97b",
+      "started": "2026-10-26T21:19:46.048880654Z",
+      "restarts": 0,
+      "labels": {
+        "com.docker.compose.config-hash": "b05f79b15ae0d66728878280a7ff4368bba5ac8a61343bfcb8a80ed845396f92",
+        "com.docker.compose.container-number": "1",
+        "com.docker.compose.depends_on": "",
+        "com.docker.compose.image": "sha256:d423bdc10a76bb64d54a5ad0a58bd36d1085061dd7320c4b9eb5cd46fe434ab1",
+        "com.docker.compose.oneoff": "False",
+        "com.docker.compose.project": "ibe160-tablet-prep",
+        "com.docker.compose.project.config_files": "C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\tablet-access-11-6\\compose.tablet.yaml",
+        "com.docker.compose.project.environment_file": "C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\tablet-access-11-6\\.env.tablet",
+        "com.docker.compose.project.working_dir": "C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\tablet-access-11-6",
+        "com.docker.compose.replace": "private-api-1",
+        "com.docker.compose.service": "private-api",
+        "com.docker.compose.version": "5.5.1"
+      }
+    },
+    {
+      "id": "72046e135e38c995c0cd06df94170f9e219b04a1443ec17f8dcb5f86c10d82c8",
+      "name": "/ibe160-tablet-prep-gateway-1",
+      "image": "sha256:9df97769fca4514f9c408684e0585bd9b3a70c54c79a6cf220d0b78e4dd9876b",
+      "started": "2026-10-26T21:19:52.867214161Z",
+      "restarts": 0,
+      "labels": {
+        "com.docker.compose.config-hash": "0222060c05cbdb7bbed02dd157a648b872033aa3898a1722f0d8b3b7cbade0a9",
+        "com.docker.compose.container-number": "1",
+        "com.docker.compose.depends_on": "",
+        "com.docker.compose.image": "sha256:aed08570b414a468d8f66b412a31c88b11634d32113a1aa941ddfe161940a6ad",
+        "com.docker.compose.oneoff": "False",
+        "com.docker.compose.project": "ibe160-tablet-prep",
+        "com.docker.compose.project.config_files": "C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\tablet-access-11-6\\compose.tablet.yaml",
+        "com.docker.compose.project.environment_file": "C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\tablet-access-11-6\\.env.tablet",
+        "com.docker.compose.project.working_dir": "C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\tablet-access-11-6",
+        "com.docker.compose.replace": "gateway-1",
+        "com.docker.compose.service": "gateway",
+        "com.docker.compose.version": "5.5.1",
+        "maintainer": "NGINX Docker Maintainers <docker-maint@nginx.com>"
+      }
+    },
+    {
+      "id": "8513681afd0272ada2ec2b4de650cfc35c99d651b7f134e3fa00b6b04676a84a",
+      "name": "/ibe160-tablet-prep-access-gate-1",
+      "image": "sha256:25e40c61e6a734c2b19daaeb5c3eb7230f424a917992f3f33e100a2e309484c2",
+      "started": "2026-10-26T20:52:48.986784888Z",
+      "restarts": 0,
+      "labels": {
+        "com.docker.compose.config-hash": "43e41680f0b58d070f029793367a61b585a6c25752009b6fc287b1087f10ea67",
+        "com.docker.compose.container-number": "1",
+        "com.docker.compose.depends_on": "",
+        "com.docker.compose.image": "sha256:b819b33e8b80574d969c4cb59ae4bdcc8605e376bebbf893bdc6a6e6e8f692b2",
+        "com.docker.compose.oneoff": "False",
+        "com.docker.compose.project": "ibe160-tablet-prep",
+        "com.docker.compose.project.config_files": "C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\tablet-access-11-6\\compose.tablet.yaml",
+        "com.docker.compose.project.environment_file": "C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\tablet-access-11-6\\.env.tablet",
+        "com.docker.compose.project.working_dir": "C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\tablet-access-11-6",
+        "com.docker.compose.service": "access-gate",
+        "com.docker.compose.version": "5.5.1"
+      }
+    },
+    {
+      "id": "26f33374638deff773bcfbe507da8a8a7db30db0b28951dce3ad8ecfb9db215a",
+      "name": "/ibe160-tablet-prep-private-db-1",
+      "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "started": "2026-10-26T20:52:10.484784897Z",
+      "restarts": 0,
+      "labels": {
+        "com.docker.compose.config-hash": "822911a56ff189470cce61d1f5f18ca07c45ac032b3b6b17784aa0ef111d7fa8",
+        "com.docker.compose.container-number": "1",
+        "com.docker.compose.depends_on": "",
+        "com.docker.compose.image": "sha256:aa90e97ee862e558111d34cfb8b2c4bec768c2b039fb791341686928560263b3",
+        "com.docker.compose.oneoff": "False",
+        "com.docker.compose.project": "ibe160-tablet-prep",
+        "com.docker.compose.project.config_files": "C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\tablet-access-11-6\\compose.tablet.yaml",
+        "com.docker.compose.project.environment_file": "C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\tablet-access-11-6\\.env.tablet",
+        "com.docker.compose.project.working_dir": "C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\tablet-access-11-6",
+        "com.docker.compose.service": "private-db",
+        "com.docker.compose.version": "5.5.1"
+      }
+    },
+    {
+      "id": "9bb6363dc3816c5c5c27889b2a0f3b9db0172f7e8e668029a61cb45a8ffe906d",
+      "name": "/ibe160-private-work-private-api-1",
+      "image": "sha256:5dff578b747ebf2d16a6335ddc0b432e993b401cf46be1d27a2e6bd7f0898861",
+      "started": "2026-10-26T18:32:09.783471595Z",
+      "restarts": 0,
+      "labels": {
+        "com.docker.compose.config-hash": "01f39c7a2c3d6008e2cab54dbe2d02be6b30e5e7d39cbc37d901bdede314a41f",
+        "com.docker.compose.container-number": "1",
+        "com.docker.compose.depends_on": "private-db:service_healthy:false",
+        "com.docker.compose.image": "sha256:352313584d5ca4d0ec574c263ecb9f90304f1168f35f4aad2170f043689599b9",
+        "com.docker.compose.oneoff": "False",
+        "com.docker.compose.project": "ibe160-private-work",
+        "com.docker.compose.project.config_files": "D:\\IBE160\\compose.private.yaml",
+        "com.docker.compose.project.working_dir": "D:\\IBE160",
+        "com.docker.compose.replace": "private-api-1",
+        "com.docker.compose.service": "private-api",
+        "com.docker.compose.version": "5.5.1"
+      }
+    },
+    {
+      "id": "79693d20ba694917486416a0d0a0883572842f37d8cd7b937060fc138caef511",
+      "name": "/ibe160-fictional-assessment-frontend-1",
+      "image": "sha256:90ef8ce693acea80756dc614e10708f284736430afba3bfba5525b87cc56ac55",
+      "started": "2026-10-26T15:55:57.643134471Z",
+      "restarts": 0,
+      "labels": {
+        "com.docker.compose.config-hash": "7a202a5605e133af323d6ce5d674cba62ac8c2dd7643b134f17cc91e2008d7dd",
+        "com.docker.compose.container-number": "1",
+        "com.docker.compose.depends_on": "api:service_healthy:false",
+        "com.docker.compose.image": "sha256:fd9f93a4f94c719095c8e545a58638b8c36ad8ce6baf27b711b2a2a1006549d1",
+        "com.docker.compose.oneoff": "False",
+        "com.docker.compose.project": "ibe160-fictional-assessment",
+        "com.docker.compose.project.config_files": "D:\\IBE160\\compose.yaml",
+        "com.docker.compose.project.working_dir": "D:\\IBE160",
+        "com.docker.compose.replace": "frontend-1",
+        "com.docker.compose.service": "frontend",
+        "com.docker.compose.version": "5.5.1"
+      }
+    },
+    {
+      "id": "b6a16b87207c2857c84d878b8615d174d81d0f407586681ad8701b2955ed6c53",
+      "name": "/ibe160-fictional-assessment-api-1",
+      "image": "sha256:43c9740447cdcb24855f8addb0eb0a8fe5897726fc524b732a755c78064adff4",
+      "started": "2026-10-26T15:44:25.147799589Z",
+      "restarts": 0,
+      "labels": {
+        "com.docker.compose.config-hash": "cb38ae0d4523fbccddc24c3237721ba076f82f66e177ac4160209d94a25637a2",
+        "com.docker.compose.container-number": "1",
+        "com.docker.compose.depends_on": "db:service_healthy:false",
+        "com.docker.compose.image": "sha256:1d77d5cf478a7476eb86cf92eb95d061c83d6af51d30d214ab22bca9642a7561",
+        "com.docker.compose.oneoff": "False",
+        "com.docker.compose.project": "ibe160-fictional-assessment",
+        "com.docker.compose.project.config_files": "D:\\IBE160\\compose.yaml",
+        "com.docker.compose.project.working_dir": "D:\\IBE160",
+        "com.docker.compose.replace": "api-1",
+        "com.docker.compose.service": "api",
+        "com.docker.compose.version": "5.5.1"
+      }
+    },
+    {
+      "id": "75fe9c9792700c4244abbcbffed33cdf38559c783166978e4d633b03a5bb7d48",
+      "name": "/ibe160-private-tests-private-api-1",
+      "image": "sha256:d9cb0de47c0aebbd648e253672759449ce1d8a3fd1816d8a2caf43c9ef7452d0",
+      "started": "2026-10-26T18:31:55.319748138Z",
+      "restarts": 0,
+      "labels": {
+        "com.docker.compose.config-hash": "01f39c7a2c3d6008e2cab54dbe2d02be6b30e5e7d39cbc37d901bdede314a41f",
+        "com.docker.compose.container-number": "1",
+        "com.docker.compose.depends_on": "private-db:service_healthy:false",
+        "com.docker.compose.image": "sha256:21ba4c1b7970c29296a53078b974bbbe8c4eee6e0952f19c27379b751b7ebdd6",
+        "com.docker.compose.oneoff": "False",
+        "com.docker.compose.project": "ibe160-private-tests",
+        "com.docker.compose.project.config_files": "D:\\IBE160\\compose.private.yaml",
+        "com.docker.compose.project.working_dir": "D:\\IBE160",
+        "com.docker.compose.replace": "private-api-1",
+        "com.docker.compose.service": "private-api",
+        "com.docker.compose.version": "5.5.1"
+      }
+    },
+    {
+      "id": "59df9d68fda8addba018e1f384ea05f7e0bf196093ca9b7455dc6b275bc79502",
+      "name": "/ibe160-private-tests-private-db-1",
+      "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "started": "2026-10-26T18:31:51.564617351Z",
+      "restarts": 0,
+      "labels": {
+        "com.docker.compose.config-hash": "213219d2858d81d1d675e62656644f75b2916ca4c2f2d95fa8b0e111f08eb6be",
+        "com.docker.compose.container-number": "1",
+        "com.docker.compose.depends_on": "",
+        "com.docker.compose.image": "sha256:aa90e97ee862e558111d34cfb8b2c4bec768c2b039fb791341686928560263b3",
+        "com.docker.compose.oneoff": "False",
+        "com.docker.compose.project": "ibe160-private-tests",
+        "com.docker.compose.project.config_files": "D:\\IBE160\\compose.private.yaml",
+        "com.docker.compose.project.working_dir": "D:\\IBE160",
+        "com.docker.compose.service": "private-db",
+        "com.docker.compose.version": "5.5.1"
+      }
+    },
+    {
+      "id": "677f99f9f8411bcb4dc75201640d1c9ac299adb0afb77c7516242a63957967ca",
+      "name": "/ibe160-private-work-private-db-1",
+      "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "started": "2026-10-20T18:47:00.530707318Z",
+      "restarts": 0,
+      "labels": {
+        "com.docker.compose.config-hash": "213219d2858d81d1d675e62656644f75b2916ca4c2f2d95fa8b0e111f08eb6be",
+        "com.docker.compose.container-number": "1",
+        "com.docker.compose.depends_on": "",
+        "com.docker.compose.image": "sha256:aa90e97ee862e558111d34cfb8b2c4bec768c2b039fb791341686928560263b3",
+        "com.docker.compose.oneoff": "False",
+        "com.docker.compose.project": "ibe160-private-work",
+        "com.docker.compose.project.config_files": "D:\\IBE160\\compose.private.yaml",
+        "com.docker.compose.project.working_dir": "D:\\IBE160",
+        "com.docker.compose.replace": "private-db-1",
+        "com.docker.compose.service": "private-db",
+        "com.docker.compose.version": "5.5.1"
+      }
+    },
+    {
+      "id": "c98b143f76524078b1675d811e6112347faf044c6580ab264b55577bfa0a5f5d",
+      "name": "/ibe160-fictional-assessment-db-1",
+      "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "started": "2026-10-19T18:20:21.013996422Z",
+      "restarts": 0,
+      "labels": {
+        "com.docker.compose.config-hash": "c5a191c1c203fd79ad9859b3d886b61f22ee50d41265bdd656cd01dc351353b1",
+        "com.docker.compose.container-number": "1",
+        "com.docker.compose.depends_on": "",
+        "com.docker.compose.image": "sha256:aa90e97ee862e558111d34cfb8b2c4bec768c2b039fb791341686928560263b3",
+        "com.docker.compose.oneoff": "False",
+        "com.docker.compose.project": "ibe160-fictional-assessment",
+        "com.docker.compose.project.config_files": "D:\\IBE160\\compose.yaml",
+        "com.docker.compose.project.working_dir": "D:\\IBE160",
+        "com.docker.compose.replace": "db-1",
+        "com.docker.compose.service": "db",
+        "com.docker.compose.version": "5.5.1"
+      }
+    },
+    {
+      "id": "a3a48e6d8d014c6ee3ea49e639a117fb0160844812e399c9c5fb52d82d473cfc",
+      "name": "/friendly_shockley",
+      "image": "sha256:5dd0d3e6e255913fc30f90b9f2b1d359cc2cbdb48090cc4b65f1676e203243cc",
+      "started": "2026-09-07T21:16:35.61848643Z",
+      "restarts": 0,
+      "labels": {}
+    }
+  ],
+  "accepted15312_sha256": {
+    "/": "5f8de9208810f34e5ea2201ea309f60858475ce07fc9887dd3231143f3061147",
+    "/assets/main-Cg9_S_gY.js": "45dace781f84bedac2fb638b372f18d4312c6d48876943e67d3a271f0cde4081",
+    "/assets/FictionalAssessment-DaSrzsZ_.js": "d1398af282904a9e2464c60efd8dcea53af8719833c07649b1373b369289a28d",
+    "/assets/FictionalAssessment-BDu7t5nn.css": "26a471bdcaeea8978b8a862edd0efa8f2549fc3e7eec110c6ba25554f2fd47c4",
+    "/demo": "1bb3f0137c6f4ed111b1fea9f378f65de96531de6abe04ad3339bbbe06622016",
+    "/assets/demo-BgBSr-Kx.js": "0d5ed8c93af0fd7adc27551846e6ee1d68b0178572b74853fb36825aaab5adf3",
+    "/private": "5f8de9208810f34e5ea2201ea309f60858475ce07fc9887dd3231143f3061147"
+  },
+  "served15323_sha256": {
+    "/": "24bf3bb677146f246d3446dbab2716a74dd2954331df5a50886a27995b29a3e1",
+    "/assets/main-mjCyzRo6.js": "e06eae81214d031fddf7ee98d2f44871f4a538ea0781e2391bf8f022cfe11021",
+    "/assets/FictionalAssessment-DgWBF5_Z.js": "7c658dbd5e696de8b7feb29b3b34f3249d07fcd4eabddcea0a2eb7bd5b9cff03",
+    "/assets/FictionalAssessment-Ca5gn51W.css": "d436cb47d234e7a034e820876840f7cb88c6e119b2912f0c3cb996228416e2d3",
+    "/demo": "4b5537641378df722b5ed462add7f936fc5d6175075cbeb1a34ba665349ed747",
+    "/assets/demo-CVYX95Ri.js": "426dd3c6fb5fa7af760bd0a18c8503c99e63f433ac8403a78427f04bc476c3ee",
+    "/private": "24bf3bb677146f246d3446dbab2716a74dd2954331df5a50886a27995b29a3e1"
+  },
+  "backend_sha256": {
+    ".dockerignore": "b48d4c45e9ad73ebe416bded118bb8bfbe0adafb4e51db8902e8870205dcdb25",
+    "Dockerfile": "c91d60082825b71add45278fee6666de7069d0584b191c0d1ecc379df83e241d",
+    "app/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "app/auth.py": "d8f729690afd3ddbb79724717b385ffd2ab1226a8cb4f207c545afa303e67aad",
+    "app/bus_value.py": "5be4861d3d57d0e7f4ddc908fcd6fbc5ccd52d4940d25283969a6574c783b49b",
+    "app/domain.py": "00caf3939819d84128958d86cea4fc25f5f8ab52d78df894443520ed2c5949ca",
+    "app/draft_domain.py": "2af54e480868792b89ed1822d30a12d10af2d5e39f240e19960044b69f836589",
+    "app/draft_storage.py": "865c849b96ba2af6ebcf6089aebe7812cb93752d5f076dc7f7e55948b4cf648b",
+    "app/draft_time.py": "b6c958f2059a2852aa033ed7cf7c26141cfe231581dc24c427d175d337895abf",
+    "app/import_issues.py": "b9b573cd43f172078dc1e5701689f26c3ba19ce71d8aca45d41612e072f27207",
+    "app/main.py": "29e1b9f48c8807ccb891521131cb104cbebb7e80f164f8e63698da0847d68aea",
+    "app/manage.py": "68640add1f88a9d9f329504c9fc17c082bbc1e25196eb0fe199b827a198f821a",
+    "app/notice_reader_domain.py": "11dc65c6d65e02fe0170fe408a09f0470c10a54bb6e2b0f9735d6d63aa4390fc",
+    "app/pdf_import.py": "06ae62d41f073124af7602cc0e963dd5424b0d5956b3af2083149d91309fc263",
+    "app/private_import.py": "bef1a0ce951826cd59810196f97454c0e05ff0a23f99e8b6c3fb98a7948b2d59",
+    "app/private_main.py": "826c6833a32482a47f35ec9a9fa6bce18fc921c2cb8de06a1e997d3644596b5e",
+    "app/private_storage.py": "d42388811c09adb0d62c302db6fe0b5cac522fc25d8ca6ae5bc2fc4ec10dac62",
+    "app/qualify_imports.py": "4e29620264ed463d6a12406d712424ad040a6354eb5fcb9bbbc35141a3a7658d",
+    "app/run.py": "2f0de523ef255ed144194d6e0b25f7aef920ef503f9b3e3342d7004520f3d0f1",
+    "app/storage.py": "07be14df4c897d9859112e28e68e9e186383064653a83d1e9727ae11489f1b57",
+    "app/workday_bus_domain.py": "8eaad1875aa29e748387928076812ff72593b327e937adcbeaea5272050ab89f",
+    "app/workday_bus_storage.py": "eb5e99d0d47ef795358f1e58411731446174f83e68467d5f778b32ec31fcc7d9",
+    "app/workday_domain.py": "d7ce2bdeef3b1db4b7cd4ca0f8916108cc11d44eb69d4a4f578f3b40cea9a4c6",
+    "app/workday_lifecycle_domain.py": "f0d9332df28a98fb4325b24c6b7f4f523b13f898ee0721832d128164d6d4cfa4",
+    "app/workday_lifecycle_storage.py": "302ad49cd38bfd74b043bccfb8d846552f28ecaae0e545e7ad8e195cda846048",
+    "app/workday_notice_domain.py": "ce7ded29b9402bdc3848038197ba7d077ef1c54fa601978e3ebb6ebdb802a194",
+    "app/workday_notice_storage.py": "1c9453b65dd16aa0447b02827af8371c585792ce698835a8542b6c302101db0f",
+    "app/workday_outcome_domain.py": "020d606d32e8766986b7410c52f4aa7e02a9ffad5a02bd5bf0e40116d4de98f8",
+    "app/workday_outcome_storage.py": "e425963d6182fbf9a0488a091b7f48b7e2e70c7a0683c8fffbebfbdb2562d4cd",
+    "app/workday_selection_domain.py": "7b26d2fe1b687dc71e7199e722eb0f2342b54204a55a5d36066ec5075327532b",
+    "app/workday_selection_storage.py": "172ece4223332e3367bd402c1d9dcb269c414ad38b820f1073918602514eaabb",
+    "app/workday_storage.py": "466e6eeabe43b1e77f2aaa2d111986c25dc200b7c71598341eeddee3d7bdd3d9",
+    "migrations/001_initial.sql": "91ddb841c46c2eb2bc052acdb90c2462d32ae25107d08b3ea361779533e0eb60",
+    "migrations/private/001_access.sql": "503e33d0d0713cf219b51c15f1b1a0183f654f2bb71b32a31bb331070a96df93",
+    "migrations/private/002_drafts.sql": "2e83389f35f31e5ab33de0709cdce6bed3ec4bd14fbe643c88f53792363043f0",
+    "migrations/private/003_draft_deletions.sql": "13802f0a09e26ccab4f8380f1af2de642777d8f5b67e1f25a27f349b4ff9f482",
+    "migrations/private/004_workdays.sql": "7366bf68090b0e67a4df6717bb29490f0aa37e763d2b4e5482fff5540e0f9e24",
+    "migrations/private/005_workday_deletions.sql": "8dc45a272ff0bc3e168cc32b20683e7df45f7cac31dc49e70f9936c8aa90fccd",
+    "migrations/private/006_workday_bus.sql": "e4b6f96a0ce2d3622c3e83b90adbe1c7f7e843cb88611f35041943cb6d56b84d",
+    "migrations/private/007_draft_contracts.sql": "269440bb8682396a829f6c3cbad3fb5a30dc3775002838f81e5c9fb8d19631c3",
+    "migrations/private/008_review_feedback.sql": "631cc9302e14099f96d0d76b9860b5559e0a8490225576d4ff8c24934636c126",
+    "migrations/private/009_workday_selection.sql": "e090e74b4345b1659975d583a95889940e9e67035c359c35e8c40c6f73c28d44",
+    "migrations/private/010_outcomes_and_closure.sql": "0d3de44e334e9c064b597f1ea7605cf447986dd8736a0750680f72d8795f48a6",
+    "migrations/private/011_manual_notices.sql": "43a7fed3daede659fbfed30cf952c6b3c7fb1aadfcca98f8034461a1ed94bc57",
+    "migrations/private/012_real_notice_sources.sql": "0f48d00335ad7c29c096d984b8a5bd5ba03ebbbdc2562549a45cfab1b35c68fc",
+    "migrations/private/013_account_notice_registry.sql": "50b8a90bf1e9ae446a5d8f8d2a028bfac82ffba3bb057c648e8e7b35eb492c36",
+    "migrations/private/014_notice_creation_admissions.sql": "21c2a76f50030cd5709c3b75b7092850cee7663170300cfd5de20118ad647b2b",
+    "requirements.in": "69ff61da71e65a508cbf1c8adf6c7d75363da0eac1d61b04e73e87974ae28b26",
+    "requirements.lock": "3bdc62f8eb049cbc5b25ec3c3eae78afc460f7b10ab55bf7a9b0ee55025f2c57",
+    "tests/fixtures/import-source-2026-10-20.md": "c221000e9d6b1314749efb918af05de3e8a3f4e133147c80384123d2a033d1c3",
+    "tests/fixtures/import_additional_expected.json": "9046a9ee64823475ed743590f91b52964cf9f8a42c6d96cda2b294f14a8aef22",
+    "tests/fixtures/import_expected.json": "184082d7c9dca5a45c5e6d23d95a9f63c8fbc0fcdf43fab3e607dbadef1259bc",
+    "tests/test_account_notices.py": "4f13c365c0170f75d854c238040a992a7d05a449b98c72f09bdc099aa7183a27",
+    "tests/test_assessment.py": "8e18cabdc2e6a900390d94148b50af2c792e5fd9f8c1219a4b369b665ae2dd59",
+    "tests/test_notice_reader.py": "17608a11f24cf622c8694620c7e60a152062985e3d2dcff189ed24549c1a5c7c",
+    "tests/test_pdf_import.py": "38cf9ee68891de7474a89536b087484a1238c2ab0bee1d49beba24bd0a714e4f",
+    "tests/test_private_access.py": "0d0dc93e5af201862e57cf14586ce11732c34747da94a01594fe38955a33a50f",
+    "tests/test_private_bus.py": "a7ff2ef36b3644a4914f5eb7f5a0cdf2e8b5d6c371ca0a9b2bac97431ecc10ec",
+    "tests/test_private_drafts.py": "af028cb572b1c7716e0193e0badb2ad8e51c021b4e7ee78a170f16d3da1b8813",
+    "tests/test_private_import.py": "dadb4f44276375b3ef809e1148d58cd8675b3b1e93956bd151f6c7082e717972",
+    "tests/test_private_notices.py": "53fdbc03da5630339abb75dedb22741795e35301f836ede367d31fd49927cfc5",
+    "tests/test_private_outcomes.py": "6960f7b8d6ab98816a64d58e0556b0fd06a516627a2b44b8d957956e714cb03b",
+    "tests/test_private_selection.py": "88149f5012bed2a27a209ebd012e435463aee77d8e5f200b2a6d83cce19419de",
+    "tests/test_private_start.py": "29e986cb04d2e64cc3b20d64697c67e26e3b8b0797304bfd0037f39ff0ff9225",
+    "tests/test_private_workdays.py": "58541c375468058649ed263c423b233a6fd9f5c4575d11efff78bbb0dd05e9b2",
+    "tests/test_retained_data.py": "60730f54c306b106bc62865956e5977889dd1e6fd421d5925185ad99b137b8fc",
+    "tests/test_tablet_transport.py": "07764f072c78f9e2582758dcc2a1d7d5cc642e4b6ccdbeee7e84ea08659e55d5"
+  },
+  "own_containers": [
+    {
+      "id": "4c74a4e74e6be044d1c4e23d77fb7c72f6111a1568697ac9875e934837a3835e",
+      "name": "/ibe160-story123-tests-api-1",
+      "image": "sha256:2acc520d2b766436231d5b36049e29b87810d4e4a862a993f17861b518ff79bf",
+      "started": "2026-10-27T19:01:23.109913656Z",
+      "restarts": 0,
+      "labels": {
+        "com.docker.compose.config-hash": "74485865af9fd485701d1e1f0fbcee48c481dc58ae7bccb71652928d718f1ef6",
+        "com.docker.compose.container-number": "1",
+        "com.docker.compose.depends_on": "db:service_healthy:false",
+        "com.docker.compose.image": "sha256:933fd929419146258bae37d5427bb0e456fa7178e753301f2a3a384adeccd38f",
+        "com.docker.compose.oneoff": "False",
+        "com.docker.compose.project": "ibe160-story123-tests",
+        "com.docker.compose.project.config_files": "D:\\IBE160\\tmp\\story-12-3\\compose.story123.yaml",
+        "com.docker.compose.project.working_dir": "D:\\IBE160\\tmp\\story-12-3",
+        "com.docker.compose.replace": "api-1",
+        "com.docker.compose.service": "api",
+        "com.docker.compose.version": "5.5.1"
+      }
+    },
+    {
+      "id": "17498da3f1bb2ec36053743cd477866e0ceb07d9dc61f18615f9a00bd0882dc7",
+      "name": "/ibe160-story123-tests-private-api-1",
+      "image": "sha256:d0f2639088ceeca6baec601ff6226bbe66d2917d55fc0741a6839ecb6a9b2d2f",
+      "started": "2026-10-27T19:20:09.085304896Z",
+      "restarts": 0,
+      "labels": {
+        "com.docker.compose.config-hash": "25c0f8aabd178930193e0363b089bee4a54d1a39a24c21442da37c81e4bf2434",
+        "com.docker.compose.container-number": "1",
+        "com.docker.compose.depends_on": "private-db:service_healthy:false",
+        "com.docker.compose.image": "sha256:5dced5f0fe2dce9c139daa3580d6fd7d66917dfaae26e1d7cdf55b4962223b19",
+        "com.docker.compose.oneoff": "False",
+        "com.docker.compose.project": "ibe160-story123-tests",
+        "com.docker.compose.project.config_files": "D:\\IBE160\\tmp\\story-12-3\\compose.story123.yaml",
+        "com.docker.compose.project.working_dir": "D:\\IBE160\\tmp\\story-12-3",
+        "com.docker.compose.replace": "private-api-1",
+        "com.docker.compose.service": "private-api",
+        "com.docker.compose.version": "5.5.1"
+      }
+    },
+    {
+      "id": "1915dbfe810426e17b23c5a93e2b8de22395b98a25620c283206b252c244e1ad",
+      "name": "/ibe160-story123-tests-db-1",
+      "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "started": "2026-10-27T19:01:19.377613638Z",
+      "restarts": 0,
+      "labels": {
+        "com.docker.compose.config-hash": "55bd65694a14c5489762b6abaf08f25904c104bc5e2e9c8716fdc028e8487ceb",
+        "com.docker.compose.container-number": "1",
+        "com.docker.compose.depends_on": "",
+        "com.docker.compose.image": "sha256:aa90e97ee862e558111d34cfb8b2c4bec768c2b039fb791341686928560263b3",
+        "com.docker.compose.oneoff": "False",
+        "com.docker.compose.project": "ibe160-story123-tests",
+        "com.docker.compose.project.config_files": "D:\\IBE160\\tmp\\story-12-3\\compose.story123.yaml",
+        "com.docker.compose.project.working_dir": "D:\\IBE160\\tmp\\story-12-3",
+        "com.docker.compose.service": "db",
+        "com.docker.compose.version": "5.5.1"
+      }
+    },
+    {
+      "id": "667b53445fc4570e4efb6de1903df415a6259fd2c2989febe6ac4b77de299fb2",
+      "name": "/ibe160-story123-tests-private-db-1",
+      "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "started": "2026-10-27T19:01:19.297520771Z",
+      "restarts": 0,
+      "labels": {
+        "com.docker.compose.config-hash": "393457866f5a2b5c478c6e0860e7fbc9dd2db6b349da79d3fe01c59daab44825",
+        "com.docker.compose.container-number": "1",
+        "com.docker.compose.depends_on": "",
+        "com.docker.compose.image": "sha256:aa90e97ee862e558111d34cfb8b2c4bec768c2b039fb791341686928560263b3",
+        "com.docker.compose.oneoff": "False",
+        "com.docker.compose.project": "ibe160-story123-tests",
+        "com.docker.compose.project.config_files": "D:\\IBE160\\tmp\\story-12-3\\compose.story123.yaml",
+        "com.docker.compose.project.working_dir": "D:\\IBE160\\tmp\\story-12-3",
+        "com.docker.compose.service": "private-db",
+        "com.docker.compose.version": "5.5.1"
+      }
+    }
+  ],
+  "gateway_image_id": "sha256:62a616a5397abe30eb56a78d962f480a04e408e857a878d3121a9c2d791fb62b",
+  "gateway_asset_sha256": {
+    "./50x.html": "876766b4e80133fd490603e073d3567425b88794828a9292104244c9e40875ed",
+    "./index.html": "0e8967aacd6e3fd726cb3ecb21a375b9956d4dcf25c4e0c0f867ba95a1997789",
+    "./assets/index-DCxCmWRd.js": "630268f2f5482b42b0b5abdc7563003f6f8841818e9f43866d559ca54d0e9307",
+    "./assets/index-B_Dppown.css": "4d14e34cc179a136aaaba98938f8737146034b79ef87b631e9b4b704d02ef786"
+  },
+  "preview": {
+    "root": "D:\\IBE160\\tmp\\story-12-3",
+    "vite": "D:\\IBE160\\tmp\\story-12-3\\frontend\\node_modules\\vite\\bin\\vite.js",
+    "identity": {
+      "created": "2026-10-27T19:22:57.7547080Z",
+      "pid": 54432,
+      "command": "\"C:\\Program Files\\nodejs\\node.EXE\" D:\\IBE160\\tmp\\story-12-3\\frontend\\node_modules\\vite\\bin\\vite.js preview --host 127.0.0.1 --port 15323 --strictPort"
+    }
+  },
+  "database_limit": "No pre-run database byte fingerprint was captured. Preservation claims cover target isolation, container metadata and served HTTP bytes only."
+}

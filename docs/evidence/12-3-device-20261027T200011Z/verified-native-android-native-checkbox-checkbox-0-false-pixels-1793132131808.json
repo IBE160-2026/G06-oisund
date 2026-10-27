@@ -1,0 +1,44 @@
+{
+  "accent": [
+    214,
+    234,
+    250
+  ],
+  "appearance": "auto",
+  "background": [
+    34,
+    53,
+    75
+  ],
+  "label": "La oppslag feile",
+  "labelHeight": 58,
+  "checked": false,
+  "size": [
+    48,
+    50
+  ],
+  "edgeRatios": [
+    10.131164801445454,
+    10.131164801445454,
+    10.131164801445454,
+    10.131164801445454
+  ],
+  "palette": [
+    [
+      "59,59,59",
+      1190
+    ],
+    [
+      "214,234,250",
+      34
+    ]
+  ],
+  "fill": [
+    59,
+    59,
+    59
+  ],
+  "fillCoverage": 0.9722222222222222,
+  "fillMatchesAccent": false,
+  "glyph": null
+}

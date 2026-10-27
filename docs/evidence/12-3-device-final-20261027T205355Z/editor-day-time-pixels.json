@@ -1,0 +1,46 @@
+{
+  "name": "editor-day-time",
+  "kind": "native-input-affordance",
+  "crop": {
+    "x0": 1220,
+    "y0": 35,
+    "x1": 1284,
+    "y1": 83,
+    "scale": 2
+  },
+  "palette": [
+    [
+      "255,255,255",
+      2750
+    ],
+    [
+      "0,0,0",
+      185
+    ],
+    [
+      "191,191,191",
+      47
+    ],
+    [
+      "127,127,127",
+      46
+    ],
+    [
+      "64,64,64",
+      44
+    ]
+  ],
+  "background": [
+    255,
+    255,
+    255
+  ],
+  "core": [
+    0,
+    0,
+    0
+  ],
+  "corePixels": 185,
+  "ratio": 21,
+  "method": "Most frequent non-background RGB differing >=30 in at least one channel, >=6 actual pixels; no contrast threshold used to select core. Glyph identity requires visual crop inspection."
+}

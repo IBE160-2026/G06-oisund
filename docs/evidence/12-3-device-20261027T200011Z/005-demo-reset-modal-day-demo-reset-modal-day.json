@@ -1,0 +1,94 @@
+{
+  "environment": {
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 800,
+      "height": 1085
+    },
+    "rootFontSize": "16px",
+    "themeClass": "",
+    "theme": "day",
+    "scope": "active native modal only; underlying backdrop/page excluded"
+  },
+  "text": [
+    {
+      "label": "Nullstille bare denne simuleringen?",
+      "ratio": 21,
+      "color": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Forslag, uavklarte svar, kvitteringer og skjermvalg forkastes fra demoens minne. Andre data berøres ",
+      "ratio": 21,
+      "color": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Bekreft nullstilling",
+      "ratio": 11.085379609993499,
+      "color": [
+        255,
+        255,
+        255,
+        1
+      ],
+      "background": [
+        23,
+        62,
+        96,
+        1
+      ]
+    },
+    {
+      "label": "Behold simuleringen",
+      "ratio": 11.085379609993499,
+      "color": [
+        255,
+        255,
+        255,
+        1
+      ],
+      "background": [
+        23,
+        62,
+        96,
+        1
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "label": "Bekreft nullstilling",
+      "ratio": 11.085379609993499,
+      "height": 58
+    },
+    {
+      "label": "Behold simuleringen",
+      "ratio": 11.085379609993499,
+      "height": 58
+    }
+  ],
+  "clipping": [],
+  "unmeasured": [],
+  "overflow": 0
+}

@@ -1,0 +1,53 @@
+{
+  "url": "http://127.0.0.1:15323/private",
+  "headings": [
+    "Privat arbeidsrom",
+    "Skift avsluttet"
+  ],
+  "buttons": [
+    {
+      "name": "Nattmodus",
+      "disabled": false
+    },
+    {
+      "name": "Forberedelse og planlister",
+      "disabled": false
+    },
+    {
+      "name": "Kontroller og rediger utkast",
+      "disabled": false
+    },
+    {
+      "name": "Til den åpne planen",
+      "disabled": false
+    },
+    {
+      "name": "Hent skift og aktivitetsstatus igjen",
+      "disabled": false
+    },
+    {
+      "name": "Tilbake til dagen",
+      "disabled": false
+    },
+    {
+      "name": "Til forberedelse og planlisten",
+      "disabled": false
+    },
+    {
+      "name": "Logg ut",
+      "disabled": false
+    }
+  ],
+  "labels": [],
+  "viewport": {
+    "width": 800,
+    "height": 1085,
+    "visualScale": 1,
+    "visualHeight": 1085
+  },
+  "status": [
+    "Du er logget inn.",
+    "Bekreftet plan åpnet. Fristen er uendret.",
+    "Lagret skift og aktivitetsstatus er hentet."
+  ]
+}

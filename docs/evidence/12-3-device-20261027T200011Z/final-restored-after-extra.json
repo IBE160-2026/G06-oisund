@@ -1,0 +1,59 @@
+{
+  "time": "2026-10-27T20:29:20.314Z",
+  "ui": {
+    "url": "http://127.0.0.1:15323/demo",
+    "headings": [
+      "Prøv en fiktiv arbeidsdag",
+      "1. Velg import"
+    ],
+    "buttons": [
+      {
+        "name": "Bytt til dagvisning",
+        "disabled": false
+      },
+      {
+        "name": "Import",
+        "disabled": false
+      },
+      {
+        "name": "Utkast",
+        "disabled": false
+      },
+      {
+        "name": "Arbeidsdag",
+        "disabled": true
+      },
+      {
+        "name": "Kontomeldinger",
+        "disabled": false
+      },
+      {
+        "name": "Åpne delvis tekst-PDF-eksempel",
+        "disabled": false
+      },
+      {
+        "name": "Prøv format som ikke støttes",
+        "disabled": false
+      },
+      {
+        "name": "Registrer manuelt",
+        "disabled": false
+      },
+      {
+        "name": "Nullstill simuleringen",
+        "disabled": false
+      }
+    ],
+    "labels": [],
+    "viewport": {
+      "width": 800,
+      "height": 1085,
+      "visualScale": 1,
+      "visualHeight": 1085
+    },
+    "status": [
+      "Velg et fiktivt eksempel. Ingenting er lagret."
+    ]
+  },
+  "note": "DOM-driven extra views complete; no private save; account logged out; Night demo restored"
+}

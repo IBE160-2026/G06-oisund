@@ -1,0 +1,626 @@
+{
+  "environment": {
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 800,
+      "height": 1085
+    },
+    "rootFontSize": "16px",
+    "themeClass": "",
+    "theme": "day",
+    "scope": "main"
+  },
+  "text": [
+    {
+      "label": "Bytt til nattvisning",
+      "ratio": 11.085379609993499,
+      "color": [
+        255,
+        255,
+        255,
+        1
+      ],
+      "background": [
+        23,
+        62,
+        96,
+        1
+      ]
+    },
+    {
+      "label": "Visning:",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Dag",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "SIMULERING · bare fiktive data",
+      "ratio": 9.310977521467432,
+      "color": [
+        23,
+        62,
+        96,
+        1
+      ],
+      "background": [
+        224,
+        237,
+        248,
+        1
+      ]
+    },
+    {
+      "label": "Prøv en fiktiv arbeidsdag",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Ingen innlogging, GPS eller kildehenting. Bare dag-/nattvalget lagres i nettleseren. Simulerte data ",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Dette viser bare simulerte kvitteringer. Ingen data lagres i en virkelig database.",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Aktivitetsstatusen er bekreftet i simuleringens minne.",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Import",
+      "ratio": 6.126270626473104,
+      "color": [
+        70,
+        87,
+        99,
+        1
+      ],
+      "background": [
+        228,
+        233,
+        237,
+        1
+      ]
+    },
+    {
+      "label": "Utkast",
+      "ratio": 6.126270626473104,
+      "color": [
+        70,
+        87,
+        99,
+        1
+      ],
+      "background": [
+        228,
+        233,
+        237,
+        1
+      ]
+    },
+    {
+      "label": "Arbeidsdag",
+      "ratio": 6.126270626473104,
+      "color": [
+        70,
+        87,
+        99,
+        1
+      ],
+      "background": [
+        228,
+        233,
+        237,
+        1
+      ]
+    },
+    {
+      "label": "Kontomeldinger",
+      "ratio": 11.085379609993499,
+      "color": [
+        255,
+        255,
+        255,
+        1
+      ],
+      "background": [
+        23,
+        62,
+        96,
+        1
+      ]
+    },
+    {
+      "label": "Avsluttet",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "· skrivebeskyttet oppsummering",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Bekreftet plan: tjenestedato 26.10.2026 · Europe/Oslo · Vognløp",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "F-99",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "· Fysisk buss",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Ukjent",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": ".",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Kildeusikkerhet:",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Simulert delvis tekst-PDF, side 1: vognløp og planlagte tider tolket. Side 2: fysisk buss og sted fo",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Ingen gjenopptakelse. Kontomeldinger ble ikke avsluttet sammen med dagen.",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Linje 100 · Tur A",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": ":",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Fullført manuelt",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Pause",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": ":",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Ikke registrert / ukjent",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Linje 200 · Tur B",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": ":",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Ikke registrert / ukjent",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Lagrede kontomeldinger:",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Ingen nye",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "; fast melding gjelder til 27.10.2026 kl. 02:00.",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Nullstill simuleringen",
+      "ratio": 11.085379609993499,
+      "color": [
+        255,
+        255,
+        255,
+        1
+      ],
+      "background": [
+        23,
+        62,
+        96,
+        1
+      ]
+    },
+    {
+      "label": "Den separate vurderingen med faktisk API/PostgreSQL startes med den isolerte testoppskriften i dokum",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "label": "Bytt til nattvisning",
+      "ratio": 11.085379609993499,
+      "height": 58
+    },
+    {
+      "label": "Import",
+      "ratio": 4.781375582652278,
+      "height": 58
+    },
+    {
+      "label": "Utkast",
+      "ratio": 4.781375582652278,
+      "height": 58
+    },
+    {
+      "label": "Arbeidsdag",
+      "ratio": 4.781375582652278,
+      "height": 58
+    },
+    {
+      "label": "Kontomeldinger",
+      "ratio": 11.085379609993499,
+      "height": 58
+    },
+    {
+      "label": "Nullstill simuleringen",
+      "ratio": 11.085379609993499,
+      "height": 58
+    }
+  ],
+  "clipping": [],
+  "unmeasured": [],
+  "overflow": 0
+}

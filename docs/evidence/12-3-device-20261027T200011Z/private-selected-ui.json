@@ -1,0 +1,66 @@
+{
+  "url": "http://127.0.0.1:15323/private",
+  "headings": [
+    "Privat arbeidsrom",
+    "Valgt tur",
+    "Registrert aktivitetsstatus"
+  ],
+  "buttons": [
+    {
+      "name": "Nattmodus",
+      "disabled": false
+    },
+    {
+      "name": "Les avvik for linjer og datoer",
+      "disabled": false
+    },
+    {
+      "name": "Tilbake til dagen",
+      "disabled": false
+    },
+    {
+      "name": "Ingen forrige aktivitet",
+      "disabled": true
+    },
+    {
+      "name": "Ingen neste aktivitet",
+      "disabled": true
+    },
+    {
+      "name": "Kontroller plantilgang og aktivitetsvalg",
+      "disabled": false
+    },
+    {
+      "name": "Start skift",
+      "disabled": false
+    },
+    {
+      "name": "Hent skiftstatus igjen",
+      "disabled": false
+    },
+    {
+      "name": "Avslutt skift",
+      "disabled": true
+    },
+    {
+      "name": "Avbryt skift",
+      "disabled": true
+    },
+    {
+      "name": "Logg ut",
+      "disabled": false
+    }
+  ],
+  "labels": [],
+  "viewport": {
+    "width": 800,
+    "height": 1085,
+    "visualScale": 1,
+    "visualHeight": 1085
+  },
+  "status": [
+    "Du er logget inn.",
+    "Aktivitetsvalget er lagret.",
+    "Lagret status er hentet."
+  ]
+}

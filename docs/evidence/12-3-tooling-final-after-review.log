@@ -1,0 +1,19 @@
+Owned child started
+
+Owned command timed out; original failure preserved.
+
+EVIDENCE=D:\IBE160\tmp\story-12-3\docs\evidence\12-3-probe-timeout-20261027T094630896379Z-2a365e0d.json EXIT=124
+Feil med æ ø å
+
+EVIDENCE=D:\IBE160\tmp\story-12-3\docs\evidence\12-3-probe-failed-20261027T094630896379Z-2a365e0d.json EXIT=7
+Owned child alive; parent waits for cleanup signal
+Parent exits during cleanup
+
+Owned command timed out; original failure preserved.
+
+EVIDENCE=D:\IBE160\tmp\story-12-3\docs\evidence\12-3-probe-parent-exit-20261027T094630896379Z-2a365e0d.json EXIT=124
+...
+----------------------------------------------------------------------
+Ran 3 tests in 7.667s
+
+OK

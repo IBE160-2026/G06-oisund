@@ -140,3 +140,49 @@ summary:focus-visible, fieldset:focus-visible { outline: 3px solid #000; outline
 .night .private-notices a { color: #d6eafa; }
 .night .private-notices .import-warning a { color: #173e60; }
 .night .private-notices .import-warning button { color: #fff; background: #173e60; border-color: #173e60; }
+/* Story 12.3: shared manual palette, generous controls and text reflow. */
+:root.night { color: #edf3f7; background: #101e29; color-scheme: dark; }
+.night main { color: #edf3f7; background: #162c3c; border-color: #b6c8d5; }
+.night a { color: #d6eafa; }
+.night pre { color: #edf3f7; background: #203e53; }
+.night .status { border-color: #b6c8d5; }
+.night .badge { color: #173e60; background: #e0edf8; border-color: #b6c8d5; }
+.night textarea { color: #edf3f7; background: #203e53; border-color: #b6c8d5; }
+textarea { font: inherit; color: #162c3c; background: #fff; border: 2px solid #536775; padding: .65rem; border-radius: .3rem; }
+button, summary, select, input:not([type=checkbox]):not([type=radio]) { min-height: 58px; }
+button, summary { white-space: normal; overflow-wrap: anywhere; max-width: 100%; }
+.theme-control { display: flex; flex-wrap: wrap; align-items: center; gap: .75rem; margin-block: .5rem 1rem; }
+.theme-control span { font-weight: 700; }
+:focus-visible { outline: 3px solid #000; outline-offset: 4px; }
+/* Bright warning/badge surfaces require a dark focus outline even in Night. */
+.night :is(.import-warning,.current-unknown,.day-uncertainty,.badge) :focus-visible { outline-color: #000; }
+.night :is(.import-warning,.current-unknown,.day-uncertainty) button { color: #fff; background: #173e60; border-color: #173e60; }
+.night :is(.import-warning,.current-unknown,.day-uncertainty) a { color: #173e60; }
+.night :is(.import-warning,.current-unknown,.day-uncertainty) button:disabled { color: #465763; background: #e4e9ed; border-color: #637581; }
+legend { max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+form, section, article, nav, .controls > *, dl > * { min-width: 0; max-width: 100%; }
+input[type=checkbox], input[type=radio] { width: 1.5rem; height: 1.5rem; accent-color: #173e60; }
+@media (max-width: 55rem) { dl { grid-template-columns: 1fr; } .draft-grid { grid-template-columns: 1fr; } }
+.night button:disabled { border-color: #637581; }
+
+/* Keep the complete focus ring clear of viewport edges during keyboard scrolling. */
+html { scroll-padding: 1rem; }
+:focus { scroll-margin: 1rem; }
+
+/* Date/time controls contain native editable subfields; show host focus too. */
+input:focus-within { outline: 3px solid #000; outline-offset: 4px; }
+.night input:focus-within { outline-color: #ffe39b; }
+.night :is(.import-warning,.current-unknown,.day-uncertainty) input:focus-within { outline-color: #000; }
+
+label:has(input[type=checkbox]), label:has(input[type=radio]) { min-height: 58px; }
+.night input[type=checkbox], .night input[type=radio] { accent-color: #d6eafa; }
+.night :is(.import-warning,.current-unknown,.day-uncertainty) input:is([type=checkbox],[type=radio]) { accent-color: #173e60; }
+
+/* Give native choice indicators a full, non-antialiased author boundary. */
+input:is([type=checkbox],[type=radio]) { box-shadow: inset 0 0 0 3px #173e60; border-radius: 3px; }
+.night input:is([type=checkbox],[type=radio]) { box-shadow: inset 0 0 0 3px #d6eafa; }
+.night :is(.import-warning,.current-unknown,.day-uncertainty) input:is([type=checkbox],[type=radio]) { color-scheme: light; box-shadow: inset 0 0 0 3px #173e60; }
+/* Keep focus rings clear of vertically adjacent opaque controls. */
+.private-confirmation button { margin-block: .5rem; }
+/* Do not delegate disabled contrast to translucent native UA styling. */
+input:disabled, select:disabled, textarea:disabled { opacity: 1; color: #465763; background: #e4e9ed; border-color: #637581; }

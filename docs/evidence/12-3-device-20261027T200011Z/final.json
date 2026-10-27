@@ -1,0 +1,119 @@
+{
+  "time": "2026-10-27T20:21:39.191Z",
+  "head": "78ea4d780bc06a1d57c98059ae44d06db34d0061",
+  "testedProductCommit": "8ca318b55b98eb34de54f29ecab038322e3ccab6",
+  "manifest_sha256": "b57c1053a88b4d66467e7296c5f53663e9f7e309b375a5f72f88193d6ce04ea6",
+  "sourceMatches": 41,
+  "builtMatches": 6,
+  "productDiffSince8ca318b": "",
+  "device": {
+    "serial": "HA2BN9HR",
+    "model": "TB361FU",
+    "android": "16",
+    "package": "com.brave.browser",
+    "version": "versionName=1.97.59",
+    "rotationMode": "free",
+    "savedRotation": "1",
+    "autoRotation": "1",
+    "reverse": "UsbFfs tcp:15323 tcp:15323\r\nUsbFfs tcp:18323 tcp:18323\r\nUsbFfs tcp:18324 tcp:18324",
+    "forward": "HA2BN9HR tcp:63857 localabstract:chrome_devtools_remote_26683\r\nHA2BN9HR tcp:50894 localabstract:chrome_devtools_remote"
+  },
+  "manualObservation": {
+    "theme": "night",
+    "viewport": {
+      "width": 800,
+      "height": 1085,
+      "orientation": "portrait-primary",
+      "scale": 1
+    },
+    "events": [
+      {
+        "type": "pointerdown",
+        "trust": true,
+        "pointerType": "touch",
+        "target": "Bytt til nattvisning",
+        "time": 54595.20000000298
+      },
+      {
+        "type": "touchstart",
+        "trust": true,
+        "pointerType": null,
+        "target": "Bytt til nattvisning",
+        "time": 54595.40000000596
+      },
+      {
+        "type": "click",
+        "trust": true,
+        "pointerType": "touch",
+        "target": "Bytt til dagvisning",
+        "time": 54751.90000000596
+      },
+      {
+        "type": "pointerdown",
+        "trust": true,
+        "pointerType": "touch",
+        "target": "Bytt til dagvisning",
+        "time": 56431.80000000447
+      },
+      {
+        "type": "touchstart",
+        "trust": true,
+        "pointerType": null,
+        "target": "Bytt til dagvisning",
+        "time": 56432
+      },
+      {
+        "type": "click",
+        "trust": true,
+        "pointerType": "touch",
+        "target": "Bytt til nattvisning",
+        "time": 56567.5
+      },
+      {
+        "type": "pointerdown",
+        "trust": true,
+        "pointerType": "touch",
+        "target": "Bytt til nattvisning",
+        "time": 56998.80000000447
+      },
+      {
+        "type": "touchstart",
+        "trust": true,
+        "pointerType": null,
+        "target": "Bytt til nattvisning",
+        "time": 56998.90000000596
+      },
+      {
+        "type": "click",
+        "trust": true,
+        "pointerType": "touch",
+        "target": "Bytt til dagvisning",
+        "time": 57062.10000000149
+      }
+    ]
+  },
+  "manualProvenance": {
+    "finger": "Jonas explicitly confirmed finger tap changed to Night",
+    "rotation": "Jonas explicitly confirmed physical portrait keeps Night and visible controls"
+  },
+  "preservedOtherTargets": [
+    {
+      "id": "1",
+      "title": "Ny fane",
+      "url": "chrome-native://newtab/"
+    },
+    {
+      "id": "3",
+      "title": "Bussjåførassistenten – privat",
+      "url": "https://app.bussassistent.com/"
+    },
+    {
+      "id": "2",
+      "title": "Bussjåførassistenten – privat",
+      "url": "https://app.bussassistent.com/"
+    }
+  ],
+  "otherTargetsUnchanged": true,
+  "ownerAcceptance": "pending",
+  "note": "Passive DOM/metadata reads only; no input/focus/screenshot command sent during user observations"
+}

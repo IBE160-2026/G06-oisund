@@ -1,0 +1,92 @@
+{
+  "plan": {
+    "id": "142fb8b0-71c1-4e7c-9e75-196bc4d4a7fa",
+    "source_draft_id": "c8b575db-86fd-4a68-b726-f0dc877e34af",
+    "source_revision": 1,
+    "confirmed_at": "2026-10-27T20:59:48.673281Z",
+    "final_end": "2031-01-06T09:20:00Z",
+    "expires_at": "2026-11-03T20:59:57.982381Z",
+    "state": "confirmed",
+    "draft": {
+      "service_date": "2031-01-06",
+      "vehicle_duty": "SYNTHETIC DEVICE 12.3",
+      "realtime_duty": null,
+      "physical_bus": null,
+      "activities": [
+        {
+          "id": "b6e44d67-d94d-4b0d-9af8-b43bd3657f2d",
+          "type": "trip",
+          "raw_code": null,
+          "start": "2031-01-06T10:00+01:00",
+          "end": "2031-01-06T10:10+01:00",
+          "source_start": null,
+          "source_end": null,
+          "from_place": "Fiktivt oppmøtested",
+          "to_place": "Fiktivt langt norsk destinasjonsnavn med æ ø å og mange ord som skal brytes og fortsatt være lesbare på nettbrettet",
+          "trip": null,
+          "line": "20",
+          "direction": "Nord",
+          "uncertainty": null,
+          "provenance": null
+        },
+        {
+          "id": "6333db7c-4b6a-4b78-a675-348c0148585d",
+          "type": null,
+          "raw_code": "Fiktiv ukjent aktivitet",
+          "start": "2031-01-06T10:10+01:00",
+          "end": "2031-01-06T10:20+01:00",
+          "source_start": null,
+          "source_end": null,
+          "from_place": null,
+          "to_place": null,
+          "trip": null,
+          "line": null,
+          "direction": null,
+          "uncertainty": "Syntetisk usikkerhet; ikke bekreftet fysisk kjøring",
+          "provenance": null
+        }
+      ]
+    },
+    "acknowledgements": [
+      "b6e44d67-d94d-4b0d-9af8-b43bd3657f2d:trip"
+    ],
+    "classifications": {
+      "6333db7c-4b6a-4b78-a675-348c0148585d": "manual"
+    },
+    "unknowns": [
+      {
+        "id": "b6e44d67-d94d-4b0d-9af8-b43bd3657f2d:trip",
+        "label": "Aktivitet 1: turnummer er ukjent."
+      }
+    ]
+  },
+  "lifecycle": {
+    "workday_id": "142fb8b0-71c1-4e7c-9e75-196bc4d4a7fa",
+    "state": "aborted",
+    "started_at": "2026-10-27T20:59:51.093128Z",
+    "ended_at": "2026-10-27T20:59:57.982381Z",
+    "revision": 2,
+    "expires_at": "2026-11-03T20:59:57.982381Z"
+  },
+  "outcomes": {
+    "workday_id": "142fb8b0-71c1-4e7c-9e75-196bc4d4a7fa",
+    "revision": 0,
+    "outcomes": [
+      {
+        "activity_id": "b6e44d67-d94d-4b0d-9af8-b43bd3657f2d",
+        "outcome": "unregistered"
+      },
+      {
+        "activity_id": "6333db7c-4b6a-4b78-a675-348c0148585d",
+        "outcome": "unregistered"
+      }
+    ],
+    "expires_at": "2026-11-03T20:59:57.982381Z"
+  },
+  "bus": {
+    "workday_id": "142fb8b0-71c1-4e7c-9e75-196bc4d4a7fa",
+    "physical_bus": null,
+    "revision": 0,
+    "expires_at": "2026-11-03T20:59:57.982381Z"
+  }
+}

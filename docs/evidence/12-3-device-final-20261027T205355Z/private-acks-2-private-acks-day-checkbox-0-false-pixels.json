@@ -1,0 +1,44 @@
+{
+  "accent": [
+    23,
+    62,
+    96
+  ],
+  "appearance": "auto",
+  "background": [
+    255,
+    255,
+    255
+  ],
+  "label": "Jeg har gjennomgått og godtar: Aktivitet 1: turnummer er ukjent.",
+  "labelHeight": 58,
+  "checked": false,
+  "size": [
+    46,
+    48
+  ],
+  "edgeRatios": [
+    11.085379609993499,
+    11.085379609993499,
+    11.085379609993499,
+    11.085379609993499
+  ],
+  "palette": [
+    [
+      "255,255,255",
+      1089
+    ],
+    [
+      "23,62,96",
+      135
+    ]
+  ],
+  "fill": [
+    255,
+    255,
+    255
+  ],
+  "fillCoverage": 0.8897058823529411,
+  "fillMatchesAccent": false,
+  "glyph": null
+}

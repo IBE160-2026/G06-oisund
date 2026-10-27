@@ -1,0 +1,11 @@
+{
+  "archive": "docs\\evidence\\12-3-bundles\\20261027T190217469866Z-5d574672-tablet-build.tar.gz",
+  "archive_sha256": "274034ce6e3a76ec20e4fdca521a1e7d0d6a93f049405e27fa0b66d4173c96c2",
+  "entries": {
+    "record.json": "ff38647f77e5f79b7b8a519d25f2a73e7c9750e819f51683668e40d3109e7fda",
+    "raw/command.log": "8c66d1f1e9a63fb30fe6c39d016152dac4f11388c0f5034741d50fc4d54072d0",
+    "executed-inputs/frontend/vite.story123-tablet.config.ts": "fd69989d165a0ea231fcdef01ecc837bd564fc4dce3cc84c069b674e79c1607b",
+    "executed-inputs/scripts/verify-story123.py": "22f46e8622c9df302a06c9cc8a658089a114f11686d06ce17fbd2d18e79fb74f",
+    "executed-inputs/deploy/tablet/index.html": "c04eb02e1f1d6d6d555593415ec272f4d8d7002533d7d597bd277593261a3f31"
+  }
+}

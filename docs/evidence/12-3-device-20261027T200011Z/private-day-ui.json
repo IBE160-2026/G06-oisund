@@ -1,0 +1,112 @@
+{
+  "url": "http://127.0.0.1:15323/private",
+  "headings": [
+    "Privat arbeidsrom",
+    "Dagen din",
+    "Bekreftet plan · versjon 1",
+    "Dagen din · bekreftet plan"
+  ],
+  "buttons": [
+    {
+      "name": "Nattmodus",
+      "disabled": false
+    },
+    {
+      "name": "Forberedelse og planlister",
+      "disabled": false
+    },
+    {
+      "name": "Kontroller og rediger utkast",
+      "disabled": false
+    },
+    {
+      "name": "Til den åpne planen",
+      "disabled": false
+    },
+    {
+      "name": "Hent skift og aktivitetsstatus igjen",
+      "disabled": false
+    },
+    {
+      "name": "Les avvik for linjer og datoer",
+      "disabled": false
+    },
+    {
+      "name": "Tøm fysisk buss",
+      "disabled": false
+    },
+    {
+      "name": "Lagre fysisk buss",
+      "disabled": true
+    },
+    {
+      "name": "Avbryt bussendring",
+      "disabled": true
+    },
+    {
+      "name": "Velg en aktivitet først",
+      "disabled": true
+    },
+    {
+      "name": "Velg en aktivitet først",
+      "disabled": true
+    },
+    {
+      "name": "Kontroller plantilgang og aktivitetsvalg",
+      "disabled": false
+    },
+    {
+      "name": "Velg aktivitet 1",
+      "disabled": false
+    },
+    {
+      "name": "Start skift",
+      "disabled": false
+    },
+    {
+      "name": "Hent skiftstatus igjen",
+      "disabled": false
+    },
+    {
+      "name": "Avslutt skift",
+      "disabled": true
+    },
+    {
+      "name": "Avbryt skift",
+      "disabled": true
+    },
+    {
+      "name": "Manuelt vedlikeholdte avvik",
+      "disabled": false
+    },
+    {
+      "name": "Slett bekreftet plan",
+      "disabled": false
+    },
+    {
+      "name": "Lukk planen",
+      "disabled": false
+    },
+    {
+      "name": "Logg ut",
+      "disabled": false
+    }
+  ],
+  "labels": [
+    "Fysisk buss"
+  ],
+  "viewport": {
+    "width": 1280,
+    "height": 605,
+    "visualScale": 1,
+    "visualHeight": 605
+  },
+  "status": [
+    "Du er logget inn.",
+    "Bekreftet plan åpnet. Fristen er uendret.",
+    "Lagret skift og aktivitetsstatus er hentet.",
+    "Ukjent. Ingen fysisk buss er registrert.",
+    "Lagret status er hentet.",
+    "Lagret status er hentet."
+  ]
+}

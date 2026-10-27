@@ -1,0 +1,682 @@
+[
+  {
+    "test": "real private surfaces Day 800px 100% text",
+    "state": "access",
+    "values": {
+      "text": [
+        {
+          "label": "Nattmodus",
+          "ratio": 11.085379609993499,
+          "color": "rgb(255, 255, 255)",
+          "background": "rgb(23, 62, 96)"
+        },
+        {
+          "label": "Visning:",
+          "ratio": 14.387145266736685,
+          "color": "rgb(22, 44, 60)",
+          "background": "rgb(255, 255, 255)"
+        },
+        {
+          "label": "Dag",
+          "ratio": 14.387145266736685,
+          "color": "rgb(22, 44, 60)",
+          "background": "rgb(255, 255, 255)"
+        },
+        {
+          "label": "Privat tilgang",
+          "ratio": 9.310977521467432,
+          "color": "rgb(23, 62, 96)",
+          "background": "rgb(224, 237, 248)"
+        },
+        {
+          "label": "Logg inn",
+          "ratio": 14.387145266736685,
+          "color": "rgb(22, 44, 60)",
+          "background": "rgb(255, 255, 255)"
+        },
+        {
+          "label": "Logg inn for \u00e5 \u00e5pne privat arbeidsrom.",
+          "ratio": 12.855408864593942,
+          "color": "rgb(22, 44, 60)",
+          "background": "rgb(237, 243, 247)"
+        },
+        {
+          "label": "Brukernavn",
+          "ratio": 14.387145266736685,
+          "color": "rgb(22, 44, 60)",
+          "background": "rgb(255, 255, 255)"
+        },
+        {
+          "label": "Passord",
+          "ratio": 14.387145266736685,
+          "color": "rgb(22, 44, 60)",
+          "background": "rgb(255, 255, 255)"
+        },
+        {
+          "label": "Logg inn",
+          "ratio": 11.085379609993499,
+          "color": "rgb(255, 255, 255)",
+          "background": "rgb(23, 62, 96)"
+        },
+        {
+          "label": "Tilgang opprettes av den som drifter l\u00f8sningen. Bruk arbeidsrommet mens du st\u00e5r stille.",
+          "ratio": 14.387145266736685,
+          "color": "rgb(22, 44, 60)",
+          "background": "rgb(255, 255, 255)"
+        },
+        {
+          "label": "\u00c5pne fiktiv demo",
+          "ratio": 11.085379609993499,
+          "color": "rgb(23, 62, 96)",
+          "background": "rgb(255, 255, 255)"
+        },
+        {
+          "label": "control value: INPUT",
+          "ratio": 14.387145266736685,
+          "color": "rgb(22, 44, 60)",
+          "background": "rgb(255, 255, 255)"
+        },
+        {
+          "label": "control value: INPUT",
+          "ratio": 14.387145266736685,
+          "color": "rgb(22, 44, 60)",
+          "background": "rgb(255, 255, 255)"
+        }
+      ],
+      "boundaries": [
+        {
+          "label": "Nattmodus",
+          "ratio": 11.085379609993499,
+          "insideBorder": 1,
+          "outsideBorder": 11.085379609993499,
+          "height": 58
+        },
+        {
+          "label": "INPUT",
+          "ratio": 5.890983174353286,
+          "insideBorder": 5.890983174353286,
+          "outsideBorder": 5.890983174353286,
+          "height": 58
+        },
+        {
+          "label": "INPUT",
+          "ratio": 5.890983174353286,
+          "insideBorder": 5.890983174353286,
+          "outsideBorder": 5.890983174353286,
+          "height": 58
+        },
+        {
+          "label": "Logg inn",
+          "ratio": 11.085379609993499,
+          "insideBorder": 1,
+          "outsideBorder": 11.085379609993499,
+          "height": 58
+        }
+      ],
+      "nativeChoices": [],
+      "overflow": 0
+    }
+  },
+  {
+    "test": "real private surfaces Day 800px 100% text",
+    "state": "access-focus",
+    "values": [
+      {
+        "rect": {
+          "top": 73,
+          "bottom": 131,
+          "left": 33,
+          "right": 150.796875
+        },
+        "visibleOutlineArea": 1054.78125,
+        "requiredOutlineArea": 703.1875,
+        "label": "Nattmodus",
+        "ratio": 21,
+        "width": 3,
+        "visible": true,
+        "inModal": true,
+        "onscreen": true
+      },
+      {
+        "rect": {
+          "top": 416.25,
+          "bottom": 474.25,
+          "left": 33,
+          "right": 767
+        },
+        "visibleOutlineArea": 4752,
+        "requiredOutlineArea": 3168,
+        "label": "INPUT",
+        "ratio": 21,
+        "width": 3,
+        "visible": true,
+        "inModal": true,
+        "onscreen": true
+      },
+      {
+        "rect": {
+          "top": 519.03125,
+          "bottom": 577.03125,
+          "left": 33,
+          "right": 767
+        },
+        "visibleOutlineArea": 4752,
+        "requiredOutlineArea": 3168,
+        "label": "INPUT",
+        "ratio": 21,
+        "width": 3,
+        "visible": true,
+        "inModal": true,
+        "onscreen": true
+      },
+      {
+        "rect": {
+          "top": 597.8125,
+          "bottom": 655.8125,
+          "left": 33,
+          "right": 132.90625
+        },
+        "visibleOutlineArea": 947.4375,
+        "requiredOutlineArea": 631.625,
+        "label": "Logg inn",
+        "ratio": 21,
+        "width": 3,
+        "visible": true,
+        "inModal": true,
+        "onscreen": true
+      },
+      {
+        "rect": {
+          "top": 715.40625,
+          "bottom": 736.40625,
+          "left": 33,
+          "right": 153.65625
+        },
+        "visibleOutlineArea": 849.9375,
+        "requiredOutlineArea": 566.625,
+        "label": "\u00c5pne fiktiv demo",
+        "ratio": 21,
+        "width": 3,
+        "visible": true,
+        "inModal": true,
+        "onscreen": true
+      },
+      {
+        "rect": {
+          "top": 73,
+          "bottom": 131,
+          "left": 33,
+          "right": 150.796875
+        },
+        "visibleOutlineArea": 1054.78125,
+        "requiredOutlineArea": 703.1875,
+        "label": "Nattmodus",
+        "ratio": 21,
+        "width": 3,
+        "visible": true,
+        "inModal": true,
+        "onscreen": true
+      }
+    ]
+  },
+  {
+    "test": "real private surfaces Day 800px 100% text",
+    "state": "draft-editor",
+    "values": {
+      "text": [
+        {
+          "label": "Nattmodus",
+          "ratio": 11.085379609993499,
+          "color": "rgb(255, 255, 255)",
+          "background": "rgb(23, 62, 96)"
+        },
+        {
+          "label": "Visning:",
+          "ratio": 14.387145266736685,
+          "color": "rgb(22, 44, 60)",
+          "background": "rgb(255, 255, 255)"
+        },
+        {
+          "label": "Dag",
+          "ratio": 14.387145266736685,
+          "color": "rgb(22, 44, 60)",
+          "background": "rgb(255, 255, 255)"
+        },
+        {
+          "label": "Privat tilgang",
+          "ratio": 9.310977521467432,
+          "color": "rgb(23, 62, 96)",
+          "background": "rgb(224, 237, 248)"
+        },
+        {
+          "label": "Privat arbeidsrom",
+          "ratio": 14.387145266736685,
+          "color": "rgb(22, 44, 60)",
+          "background": "rgb(255, 255, 255)"
+        },
+        {
+          "label": "Du er logget inn.",
+          "ratio": 12.855408864593942,
+          "color": "rgb(22, 44, 60)",
+          "background": "rgb(237, 243, 247)"
+        },
+        {
+          "label": "Forberedelse og planlister",
+          "ratio": 6.126270626473104,
+          "color": "rgb(70, 87, 99)",
+          "background": "rgb(228, 233, 237)"
+        },
+        {
+          "label": "Kontroller og rediger utkast",
+          "ratio": 6.126270626473104,
+          "color": "rgb(70, 87, 99)",
+          "background": "rgb(228, 233, 237)"
+        },
+        {
+          "label": "Til den \u00e5pne planen",
+          "ratio": 6.126270626473104,
+          "color": "rgb(70, 87, 99)",
+          "background": "rgb(228, 233, 237)"
+        },
+        {
+          "label": "Mine utkast",
+          "ratio": 14.387145266736685,
+          "color": "rgb(22, 44, 60)",
+          "background": "rgb(255, 255, 255)"
+        },
+        {
+          "label": "Nytt utkast. Ikke lagret.",
+          "ratio": 12.855408864593942,
+          "color": "rgb(22, 44, 60)",
+          "background": "rgb(237, 243, 247)"
+        },
+        {
+          "label": "Gjennomg\u00e5 en tekst-PDF",
+          "ratio": 14.387145266736685,
+          "color": "rgb(22, 44, 60)",
+          "background": "rgb(255, 255, 255)"
+        },
+        {
+          "label": "Velg en tekst-PDF for en midlertidig gjennomgang. Originalen og filnavnet lagres ikke.",
+          "ratio": 14.387145266736685,
+          "color": "rgb(22, 44, 60)",
+          "background": "rgb(255, 255, 255)"
+        },
+        {
+          "label": "Velg tekst-PDF",
+          "ratio": 14.387145266736685,
+          "color": "rgb(22, 44, 60)",
+          "background": "rgb(255, 255, 255)"
+        },
+        {
+          "label": "Utkast slettes sju dager etter opprettelse. Ulagrede endringer finnes bare mens denne siden er \u00e5pen.",
+          "ratio": 14.387145266736685,
+          "color": "rgb(22, 44, 60)",
+          "background": "rgb(255, 255, 255)"
+        },
+        {
+          "label": "Nytt utkast",
+          "ratio": 6.126270626473104,
+          "color": "rgb(70, 87, 99)",
+          "background": "rgb(228, 233, 237)"
+        },
+        {
+          "label": "Oppdater listen",
+          "ratio": 6.126270626473104,
+          "color": "rgb(70, 87, 99)",
+          "background": "rgb(228, 233, 237)"
+        },
+        {
+          "label": "\u00c5pne",
+          "ratio": 6.126270626473104,
+          "color": "rgb(70, 87, 99)",
+          "background": "rgb(228, 233, 237)"
+        },
+        {
+          "label": "2031-01-02",
+          "ratio": 6.126270626473104,
+          "color": "rgb(70, 87, 99)",
+          "background": "rgb(228, 233, 237)"
+        },
+        {
+          "label": "\u00b7 versjon",
+          "ratio": 6.126270626473104,
+          "color": "rgb(70, 87, 99)",
+          "background": "rgb(228, 233, 237)"
+        },
+        {
+          "label": "1",
+          "ratio": 6.126270626473104,
+          "color": "rgb(70, 87, 99)",
+          "background": "rgb(228, 233, 237)"
+        },
+        {
+          "label": "Utl\u00f8per",
+          "ratio": 14.387145266736685,
+          "color": "rgb(22, 44, 60)",
+          "background": "rgb(255, 255, 255)"
+        },
+        {
+          "label": "3.11.2026, 09:28:22",
+          "ratio": 14.387145266736685,
+          "color": "rgb(22, 44, 60)",
+          "background": "rgb(255, 255, 255)"
+        },
+        {
+          "label": "Lastet 1 utkast.",
+          "ratio": 14.387145266736685,
+          "color": "rgb(22, 44, 60)",
+          "background": "rgb(255, 255, 255)"
+        },
+        {
+          "label": "Bekreftet plan \u00e5pnet. Fristen er uendret.",
+          "ratio": 14.387145266736685,
+          "color": "rgb(22, 44, 60)",
+          "background": "rgb(255, 255, 255)"
+        },
+        {
+          "label": "Manuelt vedlikeholdte avvik",
+          "ratio": 11.085379609993499,
+          "color": "rgb(255, 255, 255)",
+          "background": "rgb(23, 62, 96)"
+        },
+        {
+          "label": "Mine bekreftede planer",
+          "ratio": 14.387145266736685,
+          "color": "rgb(22, 44, 60)",
+          "background": "rgb(255, 255, 255)"
+        },
+        {
+          "label": "Oppdater planlisten",
+          "ratio": 11.085379609993499,
+          "color": "rgb(255, 255, 255)",
+          "background": "rgb(23, 62, 96)"
+        },
+        {
+          "label": "\u00c5pne plan",
+          "ratio": 11.085379609993499,
+          "color": "rgb(255, 255, 255)",
+          "background": "rgb(23, 62, 96)"
+        },
+        {
+          "label": "2031-01-02",
+          "ratio": 11.085379609993499,
+          "color": "rgb(255, 255, 255)",
+          "background": "rgb(23, 62, 96)"
+        },
+        {
+          "label": "\u00b7 versjon",
+          "ratio": 11.085379609993499,
+          "color": "rgb(255, 255, 255)",
+          "background": "rgb(23, 62, 96)"
+        },
+        {
+          "label": "1",
+          "ratio": 11.085379609993499,
+          "color": "rgb(255, 255, 255)",
+          "background": "rgb(23, 62, 96)"
+        },
+        {
+          "label": "Utl\u00f8per",
+          "ratio": 14.387145266736685,
+          "color": "rgb(22, 44, 60)",
+          "background": "rgb(255, 255, 255)"
+        },
+        {
+          "label": "10.1.2031, 00:10:00",
+          "ratio": 14.387145266736685,
+          "color": "rgb(22, 44, 60)",
+          "background": "rgb(255, 255, 255)"
+        },
+        {
+          "label": "\u00d8kten utl\u00f8per",
+          "ratio": 14.387145266736685,
+          "color": "rgb(22, 44, 60)",
+          "background": "rgb(255, 255, 255)"
+        },
+        {
+          "label": "10.11.2026, 09:28",
+          "ratio": 14.387145266736685,
+          "color": "rgb(22, 44, 60)",
+          "background": "rgb(255, 255, 255)"
+        },
+        {
+          "label": ".",
+          "ratio": 14.387145266736685,
+          "color": "rgb(22, 44, 60)",
+          "background": "rgb(255, 255, 255)"
+        },
+        {
+          "label": "Logg ut",
+          "ratio": 11.085379609993499,
+          "color": "rgb(255, 255, 255)",
+          "background": "rgb(23, 62, 96)"
+        },
+        {
+          "label": "Tilgang opprettes av den som drifter l\u00f8sningen. Bruk arbeidsrommet mens du st\u00e5r stille.",
+          "ratio": 14.387145266736685,
+          "color": "rgb(22, 44, 60)",
+          "background": "rgb(255, 255, 255)"
+        },
+        {
+          "label": "\u00c5pne fiktiv demo",
+          "ratio": 11.085379609993499,
+          "color": "rgb(23, 62, 96)",
+          "background": "rgb(255, 255, 255)"
+        },
+        {
+          "label": "control value: INPUT",
+          "ratio": 14.387145266736685,
+          "color": "rgb(22, 44, 60)",
+          "background": "rgb(255, 255, 255)"
+        }
+      ],
+      "boundaries": [
+        {
+          "label": "Nattmodus",
+          "ratio": 11.085379609993499,
+          "insideBorder": 1,
+          "outsideBorder": 11.085379609993499,
+          "height": 58
+        },
+        {
+          "label": "Forberedelse og planlister",
+          "ratio": 7.489656971391459,
+          "insideBorder": 6.126270626473104,
+          "outsideBorder": 7.489656971391459,
+          "height": 58
+        },
+        {
+          "label": "Kontroller og rediger utkast",
+          "ratio": 7.489656971391459,
+          "insideBorder": 6.126270626473104,
+          "outsideBorder": 7.489656971391459,
+          "height": 58
+        },
+        {
+          "label": "Til den \u00e5pne planen",
+          "ratio": 7.489656971391459,
+          "insideBorder": 6.126270626473104,
+          "outsideBorder": 7.489656971391459,
+          "height": 58
+        },
+        {
+          "label": "INPUT",
+          "ratio": 5.890983174353286,
+          "insideBorder": 5.890983174353286,
+          "outsideBorder": 5.890983174353286,
+          "height": 58
+        },
+        {
+          "label": "Nytt utkast",
+          "ratio": 4.781375582652278,
+          "insideBorder": 3.9109936407002617,
+          "outsideBorder": 4.781375582652278,
+          "height": 58
+        },
+        {
+          "label": "Oppdater listen",
+          "ratio": 4.781375582652278,
+          "insideBorder": 3.9109936407002617,
+          "outsideBorder": 4.781375582652278,
+          "height": 58
+        },
+        {
+          "label": "\u00c5pne 2031-01-02 \u00b7 versjon 1",
+          "ratio": 4.781375582652278,
+          "insideBorder": 3.9109936407002617,
+          "outsideBorder": 4.781375582652278,
+          "height": 58
+        },
+        {
+          "label": "Manuelt vedlikeholdte avvik",
+          "ratio": 11.085379609993499,
+          "insideBorder": 1,
+          "outsideBorder": 11.085379609993499,
+          "height": 58
+        },
+        {
+          "label": "Oppdater planlisten",
+          "ratio": 11.085379609993499,
+          "insideBorder": 1,
+          "outsideBorder": 11.085379609993499,
+          "height": 58
+        },
+        {
+          "label": "\u00c5pne plan 2031-01-02 \u00b7 versjon 1",
+          "ratio": 11.085379609993499,
+          "insideBorder": 1,
+          "outsideBorder": 11.085379609993499,
+          "height": 58
+        },
+        {
+          "label": "Logg ut",
+          "ratio": 11.085379609993499,
+          "insideBorder": 1,
+          "outsideBorder": 11.085379609993499,
+          "height": 58
+        }
+      ],
+      "nativeChoices": [],
+      "overflow": 0
+    }
+  },
+  {
+    "test": "real private surfaces Day 800px 100% text",
+    "state": "draft-editor-focus",
+    "values": [
+      {
+        "rect": {
+          "top": 909.984375,
+          "bottom": 967.984375,
+          "left": 25,
+          "right": 265.21875
+        },
+        "visibleOutlineArea": 1789.3125,
+        "requiredOutlineArea": 1192.875,
+        "label": "Manuelt vedlikeholdte avvik",
+        "ratio": 21,
+        "width": 3,
+        "visible": true,
+        "inModal": true,
+        "onscreen": true
+      },
+      {
+        "rect": {
+          "top": 608.8125,
+          "bottom": 666.8125,
+          "left": 25,
+          "right": 205.171875
+        },
+        "visibleOutlineArea": 1429.03125,
+        "requiredOutlineArea": 952.6875,
+        "label": "Oppdater planlisten",
+        "ratio": 21,
+        "width": 3,
+        "visible": true,
+        "inModal": true,
+        "onscreen": true
+      },
+      {
+        "rect": {
+          "top": 688.609375,
+          "bottom": 746.609375,
+          "left": 82,
+          "right": 351.546875
+        },
+        "visibleOutlineArea": 1965.28125,
+        "requiredOutlineArea": 1310.1875,
+        "label": "\u00c5pne plan 2031-01-02 \u00b7 versjon 1",
+        "ratio": 21,
+        "width": 3,
+        "visible": true,
+        "inModal": true,
+        "onscreen": true
+      },
+      {
+        "rect": {
+          "top": 834,
+          "bottom": 892,
+          "left": 17,
+          "right": 109.171875
+        },
+        "visibleOutlineArea": 901.03125,
+        "requiredOutlineArea": 600.6875,
+        "label": "Logg ut",
+        "ratio": 21,
+        "width": 3,
+        "visible": true,
+        "inModal": true,
+        "onscreen": true
+      },
+      {
+        "rect": {
+          "top": 951.59375,
+          "bottom": 972.59375,
+          "left": 17,
+          "right": 137.65625
+        },
+        "visibleOutlineArea": 849.9375,
+        "requiredOutlineArea": 566.625,
+        "label": "\u00c5pne fiktiv demo",
+        "ratio": 21,
+        "width": 3,
+        "visible": true,
+        "inModal": true,
+        "onscreen": true
+      },
+      {
+        "rect": {
+          "top": 33,
+          "bottom": 91,
+          "left": 17,
+          "right": 134.796875
+        },
+        "visibleOutlineArea": 1054.78125,
+        "requiredOutlineArea": 703.1875,
+        "label": "Nattmodus",
+        "ratio": 21,
+        "width": 3,
+        "visible": true,
+        "inModal": true,
+        "onscreen": true
+      },
+      {
+        "rect": {
+          "top": 13390.21875,
+          "bottom": 13448.21875,
+          "left": 25,
+          "right": 265.21875
+        },
+        "visibleOutlineArea": 0,
+        "requiredOutlineArea": 1192.875,
+        "label": "Manuelt vedlikeholdte avvik",
+        "ratio": 21,
+        "width": 3,
+        "visible": true,
+        "inModal": true,
+        "onscreen": false
+      }
+    ]
+  }
+]

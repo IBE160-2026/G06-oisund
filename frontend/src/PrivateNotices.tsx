@@ -85,6 +85,7 @@ export function usePrivateNotices(props: Props) {
   useEffect(() => { const timer = window.setInterval(() => setNow(privateNow()), 1000); return () => clearInterval(timer); }, []);
   const alive = useRef(true), sending = useRef(false), original = useRef<Command | null>(null), generation = useRef(0), navigation = useRef(0);
   const title = useRef<HTMLHeadingElement>(null), entry = useRef<HTMLButtonElement>(null);
+  const entryId = useRef(''), invokingButton = useRef<HTMLButtonElement | null>(null);
   useEffect(() => {
     setRecords(current => current.some(value => Date.parse(value.expires_at) <= now) ? current.filter(value => Date.parse(value.expires_at) > now) : current);
     const expired = (value: Notice | null | undefined) => !!value && Date.parse(value.expires_at) <= now;
@@ -128,7 +129,12 @@ export function usePrivateNotices(props: Props) {
   useEffect(() => { props.lock(dirty || !!pending); }, [dirty, pending]);
   useEffect(() => { alive.current = true; return () => { alive.current = false; generation.current++; props.lock(false); }; }, []);
   function navigate(value: 'day' | 'list' | 'editor') { navigation.current++; setScreen(value); }
-  useEffect(() => { if (screen !== 'day') title.current?.focus(); else entry.current?.focus(); }, [screen]);
+  useEffect(() => {
+    if (screen !== 'day') return;
+    // Parent navigation reveals the actual invoker after this render.
+    const frame = requestAnimationFrame(() => { const invoker = [document.getElementById(entryId.current), invokingButton.current, entry.current].find(candidate => candidate?.getClientRects().length); invoker?.focus(); });
+    return () => cancelAnimationFrame(frame);
+  }, [screen]);
   function unavailable(error: any, version: number) {
     if (!alive.current || version !== generation.current) return;
     if (error?.status === 401) { props.expired(); return; }
@@ -164,7 +170,7 @@ export function usePrivateNotices(props: Props) {
     catch (error: any) { if (alive.current && version === generation.current) { unavailable(error, version); setMessage('Avvikslisten er utilgjengelig. Prøv igjen eller kontroller originalkilden.'); } }
     finally { if (alive.current && version === generation.current) setBusy(false); }
   }
-  function open() { navigate('list'); void load(); }
+  function open(event?: { currentTarget: HTMLButtonElement }) { const invoker = event?.currentTarget ?? (document.activeElement instanceof HTMLButtonElement ? document.activeElement : null); entryId.current = invoker?.id ?? ''; invokingButton.current = invoker; navigate('list'); void load(); }
   function edit(value: Notice | null) {
     if (!available || props.suspended || pending || draft || value && !editable(value, now)) return;
     setValidationAttempted(false);
@@ -298,7 +304,9 @@ export function usePrivateNotices(props: Props) {
 }
 
 export type NoticeController = ReturnType<typeof usePrivateNotices>;
-export function NoticeScreens({ notices: n, back }: { notices: NoticeController; serviceDate: string | null; back: () => void }) {
+export function NoticeScreens({ notices: n, back, visible = true }: { notices: NoticeController; serviceDate: string | null; back: () => void; visible?: boolean }) {
+  // Reader-to-maintenance also reveals an ancestor after the screen switch.
+  useEffect(() => { if (visible && n.screen !== 'day') n.title.current?.focus(); }, [visible, n.screen]);
   const p = n.props;
   const disabled = !n.mutable || n.busy || !!n.pending;
   return <section className="private-notices" hidden={n.screen === 'day'} aria-label="Avviksvedlikehold">

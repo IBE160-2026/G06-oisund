@@ -1,0 +1,4362 @@
+{
+  "environment": {
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 800,
+      "height": 1085
+    },
+    "rootFontSize": "16px",
+    "themeClass": "",
+    "theme": "day",
+    "scope": "main"
+  },
+  "text": [
+    {
+      "label": "Nattmodus",
+      "ratio": 11.085379609993499,
+      "color": [
+        255,
+        255,
+        255,
+        1
+      ],
+      "background": [
+        23,
+        62,
+        96,
+        1
+      ]
+    },
+    {
+      "label": "Visning:",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Dag",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Privat tilgang",
+      "ratio": 9.310977521467432,
+      "color": [
+        23,
+        62,
+        96,
+        1
+      ],
+      "background": [
+        224,
+        237,
+        248,
+        1
+      ]
+    },
+    {
+      "label": "Privat arbeidsrom",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Du er logget inn.",
+      "ratio": 12.855408864593942,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        237,
+        243,
+        247,
+        1
+      ]
+    },
+    {
+      "label": "Forberedelse og planlister",
+      "ratio": 11.085379609993499,
+      "color": [
+        255,
+        255,
+        255,
+        1
+      ],
+      "background": [
+        23,
+        62,
+        96,
+        1
+      ]
+    },
+    {
+      "label": "Kontroller og rediger utkast",
+      "ratio": 11.085379609993499,
+      "color": [
+        255,
+        255,
+        255,
+        1
+      ],
+      "background": [
+        23,
+        62,
+        96,
+        1
+      ]
+    },
+    {
+      "label": "Lagret. Versjon 1.",
+      "ratio": 12.855408864593942,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        237,
+        243,
+        247,
+        1
+      ]
+    },
+    {
+      "label": "Rediger utkast",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Utløper",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "3.11.2026, 21:54:31",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": ". Fristen forlenges ikke.",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Dagens opplysninger",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Tjenestedato",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Vognløp",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Vognløp ved starten av dagen. Bytter kan angis ved aktivitetene nedenfor og gjelder fra den aktivite",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Tøm vognløp",
+      "ratio": 11.085379609993499,
+      "color": [
+        255,
+        255,
+        255,
+        1
+      ],
+      "background": [
+        23,
+        62,
+        96,
+        1
+      ]
+    },
+    {
+      "label": "Sanntidsverdi:",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "ukjent",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "(avledet fra vognløp).",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Buss/vogn",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Tøm buss/vogn",
+      "ratio": 11.085379609993499,
+      "color": [
+        255,
+        255,
+        255,
+        1
+      ],
+      "background": [
+        23,
+        62,
+        96,
+        1
+      ]
+    },
+    {
+      "label": "Alle klokkeslett bruker Oslo-tid. Velg riktig kalenderdag for nattarbeid. Opprinnelige klokker som 2",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Aktivitet",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "1",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Manuell aktivitet · ingen opprinnelig tolkning",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Gjeldende ukjente fakta:",
+      "ratio": 11.885723930751332,
+      "color": [
+        66,
+        46,
+        0,
+        1
+      ],
+      "background": [
+        255,
+        245,
+        214,
+        1
+      ]
+    },
+    {
+      "label": "turnummer",
+      "ratio": 11.885723930751332,
+      "color": [
+        66,
+        46,
+        0,
+        1
+      ],
+      "background": [
+        255,
+        245,
+        214,
+        1
+      ]
+    },
+    {
+      "label": ". Tomme steder betyr ukjent. Utkastet er ikke bekreftet.",
+      "ratio": 11.885723930751332,
+      "color": [
+        66,
+        46,
+        0,
+        1
+      ],
+      "background": [
+        255,
+        245,
+        214,
+        1
+      ]
+    },
+    {
+      "label": "Gjeldende vognløp:",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "SYNTHETIC DEVICE 12.3",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "· sanntidsverdi",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "ukjent",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": ".",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Bytt vognløp fra aktivitet",
+      "ratio": 11.085379609993499,
+      "color": [
+        255,
+        255,
+        255,
+        1
+      ],
+      "background": [
+        23,
+        62,
+        96,
+        1
+      ]
+    },
+    {
+      "label": "1",
+      "ratio": 11.085379609993499,
+      "color": [
+        255,
+        255,
+        255,
+        1
+      ],
+      "background": [
+        23,
+        62,
+        96,
+        1
+      ]
+    },
+    {
+      "label": "Start",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "(Oslo-tid)",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Start",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "dato",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Starttid",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Start",
+      "ratio": 11.085379609993499,
+      "color": [
+        255,
+        255,
+        255,
+        1
+      ],
+      "background": [
+        23,
+        62,
+        96,
+        1
+      ]
+    },
+    {
+      "label": ": neste dag",
+      "ratio": 11.085379609993499,
+      "color": [
+        255,
+        255,
+        255,
+        1
+      ],
+      "background": [
+        23,
+        62,
+        96,
+        1
+      ]
+    },
+    {
+      "label": "Start",
+      "ratio": 11.085379609993499,
+      "color": [
+        255,
+        255,
+        255,
+        1
+      ],
+      "background": [
+        23,
+        62,
+        96,
+        1
+      ]
+    },
+    {
+      "label": ": tøm tidspunkt",
+      "ratio": 11.085379609993499,
+      "color": [
+        255,
+        255,
+        255,
+        1
+      ],
+      "background": [
+        23,
+        62,
+        96,
+        1
+      ]
+    },
+    {
+      "label": "Lagret tidspunkt i Oslo-tid.",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Slutt",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "(Oslo-tid)",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Slutt",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "dato",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Sluttid",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Slutt",
+      "ratio": 11.085379609993499,
+      "color": [
+        255,
+        255,
+        255,
+        1
+      ],
+      "background": [
+        23,
+        62,
+        96,
+        1
+      ]
+    },
+    {
+      "label": ": neste dag",
+      "ratio": 11.085379609993499,
+      "color": [
+        255,
+        255,
+        255,
+        1
+      ],
+      "background": [
+        23,
+        62,
+        96,
+        1
+      ]
+    },
+    {
+      "label": "Slutt",
+      "ratio": 11.085379609993499,
+      "color": [
+        255,
+        255,
+        255,
+        1
+      ],
+      "background": [
+        23,
+        62,
+        96,
+        1
+      ]
+    },
+    {
+      "label": ": tøm tidspunkt",
+      "ratio": 11.085379609993499,
+      "color": [
+        255,
+        255,
+        255,
+        1
+      ],
+      "background": [
+        23,
+        62,
+        96,
+        1
+      ]
+    },
+    {
+      "label": "Lagret tidspunkt i Oslo-tid.",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Aktivitetstype",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Opprinnelig kode",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Opprinnelig startklokke",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Opprinnelig sluttklokke",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Fra sted",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Til sted",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Turnummer",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Linje",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Retning",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Usikkerhet / ukjente fakta",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Kilde / manuell rettelse",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Flytt opp",
+      "ratio": 6.126270626473104,
+      "color": [
+        70,
+        87,
+        99,
+        1
+      ],
+      "background": [
+        228,
+        233,
+        237,
+        1
+      ]
+    },
+    {
+      "label": "Fjern aktivitet",
+      "ratio": 11.085379609993499,
+      "color": [
+        255,
+        255,
+        255,
+        1
+      ],
+      "background": [
+        23,
+        62,
+        96,
+        1
+      ]
+    },
+    {
+      "label": "1",
+      "ratio": 11.085379609993499,
+      "color": [
+        255,
+        255,
+        255,
+        1
+      ],
+      "background": [
+        23,
+        62,
+        96,
+        1
+      ]
+    },
+    {
+      "label": "Aktivitet",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "2",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Manuell aktivitet · ingen opprinnelig tolkning",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Gjeldende ukjente fakta:",
+      "ratio": 11.885723930751332,
+      "color": [
+        66,
+        46,
+        0,
+        1
+      ],
+      "background": [
+        255,
+        245,
+        214,
+        1
+      ]
+    },
+    {
+      "label": "aktivitetstype, fra sted, til sted",
+      "ratio": 11.885723930751332,
+      "color": [
+        66,
+        46,
+        0,
+        1
+      ],
+      "background": [
+        255,
+        245,
+        214,
+        1
+      ]
+    },
+    {
+      "label": ". Tomme steder betyr ukjent. Utkastet er ikke bekreftet.",
+      "ratio": 11.885723930751332,
+      "color": [
+        66,
+        46,
+        0,
+        1
+      ],
+      "background": [
+        255,
+        245,
+        214,
+        1
+      ]
+    },
+    {
+      "label": "Gjeldende vognløp:",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "SYNTHETIC DEVICE 12.3",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "· sanntidsverdi",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "ukjent",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": ".",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Bytt vognløp fra aktivitet",
+      "ratio": 11.085379609993499,
+      "color": [
+        255,
+        255,
+        255,
+        1
+      ],
+      "background": [
+        23,
+        62,
+        96,
+        1
+      ]
+    },
+    {
+      "label": "2",
+      "ratio": 11.085379609993499,
+      "color": [
+        255,
+        255,
+        255,
+        1
+      ],
+      "background": [
+        23,
+        62,
+        96,
+        1
+      ]
+    },
+    {
+      "label": "Start",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "(Oslo-tid)",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Start",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "dato",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Starttid",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Start",
+      "ratio": 11.085379609993499,
+      "color": [
+        255,
+        255,
+        255,
+        1
+      ],
+      "background": [
+        23,
+        62,
+        96,
+        1
+      ]
+    },
+    {
+      "label": ": neste dag",
+      "ratio": 11.085379609993499,
+      "color": [
+        255,
+        255,
+        255,
+        1
+      ],
+      "background": [
+        23,
+        62,
+        96,
+        1
+      ]
+    },
+    {
+      "label": "Start",
+      "ratio": 11.085379609993499,
+      "color": [
+        255,
+        255,
+        255,
+        1
+      ],
+      "background": [
+        23,
+        62,
+        96,
+        1
+      ]
+    },
+    {
+      "label": ": tøm tidspunkt",
+      "ratio": 11.085379609993499,
+      "color": [
+        255,
+        255,
+        255,
+        1
+      ],
+      "background": [
+        23,
+        62,
+        96,
+        1
+      ]
+    },
+    {
+      "label": "Lagret tidspunkt i Oslo-tid.",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Slutt",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "(Oslo-tid)",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Slutt",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "dato",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Sluttid",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Slutt",
+      "ratio": 11.085379609993499,
+      "color": [
+        255,
+        255,
+        255,
+        1
+      ],
+      "background": [
+        23,
+        62,
+        96,
+        1
+      ]
+    },
+    {
+      "label": ": neste dag",
+      "ratio": 11.085379609993499,
+      "color": [
+        255,
+        255,
+        255,
+        1
+      ],
+      "background": [
+        23,
+        62,
+        96,
+        1
+      ]
+    },
+    {
+      "label": "Slutt",
+      "ratio": 11.085379609993499,
+      "color": [
+        255,
+        255,
+        255,
+        1
+      ],
+      "background": [
+        23,
+        62,
+        96,
+        1
+      ]
+    },
+    {
+      "label": ": tøm tidspunkt",
+      "ratio": 11.085379609993499,
+      "color": [
+        255,
+        255,
+        255,
+        1
+      ],
+      "background": [
+        23,
+        62,
+        96,
+        1
+      ]
+    },
+    {
+      "label": "Lagret tidspunkt i Oslo-tid.",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Aktivitetstype",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Opprinnelig kode",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Opprinnelig startklokke",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Opprinnelig sluttklokke",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Fra sted",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Til sted",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Turnummer",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Linje",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Retning",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Usikkerhet / ukjente fakta",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Kilde / manuell rettelse",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Flytt opp",
+      "ratio": 11.085379609993499,
+      "color": [
+        255,
+        255,
+        255,
+        1
+      ],
+      "background": [
+        23,
+        62,
+        96,
+        1
+      ]
+    },
+    {
+      "label": "Fjern aktivitet",
+      "ratio": 11.085379609993499,
+      "color": [
+        255,
+        255,
+        255,
+        1
+      ],
+      "background": [
+        23,
+        62,
+        96,
+        1
+      ]
+    },
+    {
+      "label": "2",
+      "ratio": 11.085379609993499,
+      "color": [
+        255,
+        255,
+        255,
+        1
+      ],
+      "background": [
+        23,
+        62,
+        96,
+        1
+      ]
+    },
+    {
+      "label": "Legg til aktivitet",
+      "ratio": 11.085379609993499,
+      "color": [
+        255,
+        255,
+        255,
+        1
+      ],
+      "background": [
+        23,
+        62,
+        96,
+        1
+      ]
+    },
+    {
+      "label": "Lagre utkast",
+      "ratio": 11.085379609993499,
+      "color": [
+        255,
+        255,
+        255,
+        1
+      ],
+      "background": [
+        23,
+        62,
+        96,
+        1
+      ]
+    },
+    {
+      "label": "Forkast endringer",
+      "ratio": 11.085379609993499,
+      "color": [
+        255,
+        255,
+        255,
+        1
+      ],
+      "background": [
+        23,
+        62,
+        96,
+        1
+      ]
+    },
+    {
+      "label": "Slett utkast",
+      "ratio": 11.085379609993499,
+      "color": [
+        255,
+        255,
+        255,
+        1
+      ],
+      "background": [
+        23,
+        62,
+        96,
+        1
+      ]
+    },
+    {
+      "label": "Gjennomgå den lagrede versjonen og beslutningene som er oppført.",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Gjennomgå og bekreft",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Bekreftelse lagrer en egen plan. Planen utløper sju dager etter siste aktivitetsslutt. Gjennomgang g",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Et utkast som allerede er brukt til bekreftelse krever et nytt, separat utkast for en ny plan.",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Gjennomgå lagret utkast",
+      "ratio": 11.085379609993499,
+      "color": [
+        255,
+        255,
+        255,
+        1
+      ],
+      "background": [
+        23,
+        62,
+        96,
+        1
+      ]
+    },
+    {
+      "label": "Lagret versjon",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "1",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Siste aktivitetsslutt:",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "5.1.2031, 10:20:00",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": ". Planen utløper:",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "12.1.2031, 10:20:00",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": ".",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Tjenestedato",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "2031-01-05",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Vognløp",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "SYNTHETIC DEVICE 12.3",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Sanntidsverdi",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Ukjent",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Fysisk buss (manuelt i utkastet)",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Ukjent",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Aktivitet",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "1",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Vognløp:",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "SYNTHETIC DEVICE 12.3",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Aktivitetstype",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "tur",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Opprinnelig kode",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Ukjent",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Start med dato og Oslo-offset",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "2031-01-05T10:00+01:00",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Slutt med dato og Oslo-offset",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "2031-01-05T10:10+01:00",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Opprinnelig startklokke",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Ukjent",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Opprinnelig sluttklokke",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Ukjent",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Fra sted",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Fiktivt oppmøtested",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Til sted",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Fiktivt langt norsk destinasjonsnavn med æ ø å og mange ord som skal brytes og fortsatt være lesbare",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Turnummer",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Ukjent",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Linje",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "20",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Retning",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Nord",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Usikkerhet / ukjente fakta",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Ukjent",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Kilde / manuell rettelse",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Ukjent",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Aktivitet",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "2",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Vognløp:",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "SYNTHETIC DEVICE 12.3",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Aktivitetstype",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Ukjent",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Opprinnelig kode",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Fiktiv ukjent aktivitet",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Start med dato og Oslo-offset",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "2031-01-05T10:10+01:00",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Slutt med dato og Oslo-offset",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "2031-01-05T10:20+01:00",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Opprinnelig startklokke",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Ukjent",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Opprinnelig sluttklokke",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Ukjent",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Fra sted",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Ukjent",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Til sted",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Ukjent",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Turnummer",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Ukjent",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Linje",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Ukjent",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Retning",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Ukjent",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Usikkerhet / ukjente fakta",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Syntetisk usikkerhet; ikke bekreftet fysisk kjøring",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Kilde / manuell rettelse",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Ukjent",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Godta manglende turinformasjon og gjeldende usikkerhet for passasjerturer der de er oppført nedenfor",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Beslutninger for versjon",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "1",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Klassifisering aktivitet",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "2",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Jeg har gjennomgått og godtar:",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Aktivitet 1: turnummer er ukjent.",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Bekreft gjennomgått plan",
+      "ratio": 6.126270626473104,
+      "color": [
+        70,
+        87,
+        99,
+        1
+      ],
+      "background": [
+        228,
+        233,
+        237,
+        1
+      ]
+    },
+    {
+      "label": "Avbryt gjennomgang",
+      "ratio": 11.085379609993499,
+      "color": [
+        255,
+        255,
+        255,
+        1
+      ],
+      "background": [
+        23,
+        62,
+        96,
+        1
+      ]
+    },
+    {
+      "label": "Manuelt vedlikeholdte avvik",
+      "ratio": 11.085379609993499,
+      "color": [
+        255,
+        255,
+        255,
+        1
+      ],
+      "background": [
+        23,
+        62,
+        96,
+        1
+      ]
+    },
+    {
+      "label": "Økten utløper",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "10.11.2026, 21:54",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": ".",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Logg ut",
+      "ratio": 11.085379609993499,
+      "color": [
+        255,
+        255,
+        255,
+        1
+      ],
+      "background": [
+        23,
+        62,
+        96,
+        1
+      ]
+    },
+    {
+      "label": "Tilgang opprettes av den som drifter løsningen. Bruk arbeidsrommet mens du står stille.",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Åpne fiktiv demo",
+      "ratio": 11.085379609993499,
+      "color": [
+        23,
+        62,
+        96,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "control value: INPUT",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "control value: INPUT",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "control value: INPUT",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "control value: INPUT",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "control value: INPUT",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "control value: INPUT",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "control value: INPUT",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "control value: Aktivitetstype",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "control value: Opprinnelig kode",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "control value: Opprinnelig startklokke",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "control value: Opprinnelig sluttklokke",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "control value: Fra sted",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "control value: Til sted",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "control value: Turnummer",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "control value: Linje",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "control value: Retning",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "control value: Usikkerhet / ukjente fakta",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "control value: Kilde / manuell rettelse",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "control value: INPUT",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "control value: INPUT",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "control value: INPUT",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "control value: INPUT",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "control value: Aktivitetstype",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "control value: Opprinnelig kode",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "control value: Opprinnelig startklokke",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "control value: Opprinnelig sluttklokke",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "control value: Fra sted",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "control value: Til sted",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "control value: Turnummer",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "control value: Linje",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "control value: Retning",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "control value: Usikkerhet / ukjente fakta",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "control value: Kilde / manuell rettelse",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "control value: SELECT",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "label": "Nattmodus",
+      "ratio": 11.085379609993499,
+      "height": 58
+    },
+    {
+      "label": "Forberedelse og planlister",
+      "ratio": 11.085379609993499,
+      "height": 58
+    },
+    {
+      "label": "Kontroller og rediger utkast",
+      "ratio": 11.085379609993499,
+      "height": 58
+    },
+    {
+      "label": "INPUT",
+      "ratio": 5.890983174353286,
+      "height": 58
+    },
+    {
+      "label": "INPUT",
+      "ratio": 5.890983174353286,
+      "height": 58
+    },
+    {
+      "label": "Tøm vognløp",
+      "ratio": 11.085379609993499,
+      "height": 58
+    },
+    {
+      "label": "INPUT",
+      "ratio": 5.890983174353286,
+      "height": 58
+    },
+    {
+      "label": "Tøm buss/vogn",
+      "ratio": 11.085379609993499,
+      "height": 58
+    },
+    {
+      "label": "Bytt vognløp fra aktivitet 1",
+      "ratio": 11.085379609993499,
+      "height": 58
+    },
+    {
+      "label": "INPUT",
+      "ratio": 5.890983174353286,
+      "height": 58
+    },
+    {
+      "label": "INPUT",
+      "ratio": 5.890983174353286,
+      "height": 58
+    },
+    {
+      "label": "Start: neste dag",
+      "ratio": 11.085379609993499,
+      "height": 58
+    },
+    {
+      "label": "Start: tøm tidspunkt",
+      "ratio": 11.085379609993499,
+      "height": 58
+    },
+    {
+      "label": "INPUT",
+      "ratio": 5.890983174353286,
+      "height": 58
+    },
+    {
+      "label": "INPUT",
+      "ratio": 5.890983174353286,
+      "height": 58
+    },
+    {
+      "label": "Slutt: neste dag",
+      "ratio": 11.085379609993499,
+      "height": 58
+    },
+    {
+      "label": "Slutt: tøm tidspunkt",
+      "ratio": 11.085379609993499,
+      "height": 58
+    },
+    {
+      "label": "Aktivitetstype",
+      "ratio": 5.890983174353286,
+      "height": 58
+    },
+    {
+      "label": "Opprinnelig kode",
+      "ratio": 5.890983174353286,
+      "height": 58
+    },
+    {
+      "label": "Opprinnelig startklokke",
+      "ratio": 5.890983174353286,
+      "height": 58
+    },
+    {
+      "label": "Opprinnelig sluttklokke",
+      "ratio": 5.890983174353286,
+      "height": 58
+    },
+    {
+      "label": "Fra sted",
+      "ratio": 5.890983174353286,
+      "height": 58
+    },
+    {
+      "label": "Til sted",
+      "ratio": 5.890983174353286,
+      "height": 58
+    },
+    {
+      "label": "Turnummer",
+      "ratio": 5.890983174353286,
+      "height": 58
+    },
+    {
+      "label": "Linje",
+      "ratio": 5.890983174353286,
+      "height": 58
+    },
+    {
+      "label": "Retning",
+      "ratio": 5.890983174353286,
+      "height": 58
+    },
+    {
+      "label": "Usikkerhet / ukjente fakta",
+      "ratio": 5.890983174353286,
+      "height": 58
+    },
+    {
+      "label": "Kilde / manuell rettelse",
+      "ratio": 5.890983174353286,
+      "height": 58
+    },
+    {
+      "label": "Flytt opp",
+      "ratio": 4.781375582652278,
+      "height": 58
+    },
+    {
+      "label": "Fjern aktivitet 1",
+      "ratio": 11.085379609993499,
+      "height": 58
+    },
+    {
+      "label": "Bytt vognløp fra aktivitet 2",
+      "ratio": 11.085379609993499,
+      "height": 58
+    },
+    {
+      "label": "INPUT",
+      "ratio": 5.890983174353286,
+      "height": 58
+    },
+    {
+      "label": "INPUT",
+      "ratio": 5.890983174353286,
+      "height": 58
+    },
+    {
+      "label": "Start: neste dag",
+      "ratio": 11.085379609993499,
+      "height": 58
+    },
+    {
+      "label": "Start: tøm tidspunkt",
+      "ratio": 11.085379609993499,
+      "height": 58
+    },
+    {
+      "label": "INPUT",
+      "ratio": 5.890983174353286,
+      "height": 58
+    },
+    {
+      "label": "INPUT",
+      "ratio": 5.890983174353286,
+      "height": 58
+    },
+    {
+      "label": "Slutt: neste dag",
+      "ratio": 11.085379609993499,
+      "height": 58
+    },
+    {
+      "label": "Slutt: tøm tidspunkt",
+      "ratio": 11.085379609993499,
+      "height": 58
+    },
+    {
+      "label": "Aktivitetstype",
+      "ratio": 5.890983174353286,
+      "height": 58
+    },
+    {
+      "label": "Opprinnelig kode",
+      "ratio": 5.890983174353286,
+      "height": 58
+    },
+    {
+      "label": "Opprinnelig startklokke",
+      "ratio": 5.890983174353286,
+      "height": 58
+    },
+    {
+      "label": "Opprinnelig sluttklokke",
+      "ratio": 5.890983174353286,
+      "height": 58
+    },
+    {
+      "label": "Fra sted",
+      "ratio": 5.890983174353286,
+      "height": 58
+    },
+    {
+      "label": "Til sted",
+      "ratio": 5.890983174353286,
+      "height": 58
+    },
+    {
+      "label": "Turnummer",
+      "ratio": 5.890983174353286,
+      "height": 58
+    },
+    {
+      "label": "Linje",
+      "ratio": 5.890983174353286,
+      "height": 58
+    },
+    {
+      "label": "Retning",
+      "ratio": 5.890983174353286,
+      "height": 58
+    },
+    {
+      "label": "Usikkerhet / ukjente fakta",
+      "ratio": 5.890983174353286,
+      "height": 58
+    },
+    {
+      "label": "Kilde / manuell rettelse",
+      "ratio": 5.890983174353286,
+      "height": 58
+    },
+    {
+      "label": "Flytt opp",
+      "ratio": 11.085379609993499,
+      "height": 58
+    },
+    {
+      "label": "Fjern aktivitet 2",
+      "ratio": 11.085379609993499,
+      "height": 58
+    },
+    {
+      "label": "Legg til aktivitet",
+      "ratio": 11.085379609993499,
+      "height": 58
+    },
+    {
+      "label": "Lagre utkast",
+      "ratio": 11.085379609993499,
+      "height": 58
+    },
+    {
+      "label": "Forkast endringer",
+      "ratio": 11.085379609993499,
+      "height": 58
+    },
+    {
+      "label": "Slett utkast",
+      "ratio": 11.085379609993499,
+      "height": 58
+    },
+    {
+      "label": "Gjennomgå lagret utkast",
+      "ratio": 11.085379609993499,
+      "height": 58
+    },
+    {
+      "label": "Velg eksplisitt typePassasjerturTomkjøringTomkjøring med CARTomkjøring med CAR (",
+      "ratio": 5.890983174353286,
+      "height": 58
+    },
+    {
+      "label": "Bekreft gjennomgått plan",
+      "ratio": 4.781375582652278,
+      "height": 58
+    },
+    {
+      "label": "Avbryt gjennomgang",
+      "ratio": 11.085379609993499,
+      "height": 58
+    },
+    {
+      "label": "Manuelt vedlikeholdte avvik",
+      "ratio": 11.085379609993499,
+      "height": 58
+    },
+    {
+      "label": "Logg ut",
+      "ratio": 11.085379609993499,
+      "height": 58
+    }
+  ],
+  "clipping": [],
+  "unmeasured": [],
+  "overflow": 0
+}

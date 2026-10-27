@@ -1,0 +1,63 @@
+{
+  "time": "2026-10-27T20:00:11.153Z",
+  "mode": "CDP-injected touch on actual physical Brave, not human finger",
+  "target": "98DC3098B039D88F7BC83957BBD8AC4C",
+  "metadata": {
+    "url": "http://127.0.0.1:15323/private",
+    "title": "Fiktiv arbeidsdag",
+    "ua": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+    "secure": true,
+    "viewport": {
+      "innerWidth": 1280,
+      "innerHeight": 605,
+      "dpr": 2,
+      "screen": {
+        "width": 1280,
+        "height": 800
+      },
+      "visual": {
+        "width": 1280,
+        "height": 605,
+        "scale": 1
+      }
+    },
+    "health": [
+      {
+        "port": 18323,
+        "status": 200,
+        "mode": "fictional-assessment"
+      },
+      {
+        "port": 18324,
+        "status": 200,
+        "mode": "private-local"
+      }
+    ],
+    "asset": [
+      {
+        "url": "http://127.0.0.1:15323/assets/main-mjCyzRo6.js",
+        "sha256": "e06eae81214d031fddf7ee98d2f44871f4a538ea0781e2391bf8f022cfe11021"
+      }
+    ]
+  },
+  "sourceFiles": 41,
+  "builtFiles": 6,
+  "manifest_sha256": "b57c1053a88b4d66467e7296c5f53663e9f7e309b375a5f72f88193d6ce04ea6",
+  "before": "false",
+  "after": "true",
+  "colorBefore": "rgb(255, 255, 255)",
+  "colorAfter": "rgb(22, 44, 60)",
+  "events": [
+    {
+      "type": "pointerdown",
+      "trusted": true,
+      "pointerType": "touch"
+    },
+    {
+      "type": "touchstart",
+      "trusted": true,
+      "pointerType": null
+    }
+  ],
+  "passed": true
+}

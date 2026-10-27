@@ -1,0 +1,12 @@
+✔ prunes only obsolete manifest-owned test copies and preserves unrelated files (46.5892ms)
+(node:60636) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ explicit relative tablet base overrides legacy; invalid explicit bases fail closed (78.4086ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 263.9047

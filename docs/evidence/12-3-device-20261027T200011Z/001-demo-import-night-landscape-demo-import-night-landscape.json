@@ -1,0 +1,390 @@
+{
+  "environment": {
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1280,
+      "height": 605
+    },
+    "rootFontSize": "16px",
+    "themeClass": "night",
+    "theme": "night",
+    "scope": "main"
+  },
+  "text": [
+    {
+      "label": "Bytt til dagvisning",
+      "ratio": 11.652752702162216,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        214,
+        234,
+        250,
+        1
+      ]
+    },
+    {
+      "label": "Visning:",
+      "ratio": 14.526271923889734,
+      "color": [
+        242,
+        245,
+        250,
+        1
+      ],
+      "background": [
+        23,
+        35,
+        50,
+        1
+      ]
+    },
+    {
+      "label": "Natt",
+      "ratio": 14.526271923889734,
+      "color": [
+        242,
+        245,
+        250,
+        1
+      ],
+      "background": [
+        23,
+        35,
+        50,
+        1
+      ]
+    },
+    {
+      "label": "SIMULERING · bare fiktive data",
+      "ratio": 9.310977521467432,
+      "color": [
+        23,
+        62,
+        96,
+        1
+      ],
+      "background": [
+        224,
+        237,
+        248,
+        1
+      ]
+    },
+    {
+      "label": "Prøv en fiktiv arbeidsdag",
+      "ratio": 14.526271923889734,
+      "color": [
+        242,
+        245,
+        250,
+        1
+      ],
+      "background": [
+        23,
+        35,
+        50,
+        1
+      ]
+    },
+    {
+      "label": "Ingen innlogging, GPS eller kildehenting. Bare dag-/nattvalget lagres i nettleseren. Simulerte data ",
+      "ratio": 14.526271923889734,
+      "color": [
+        242,
+        245,
+        250,
+        1
+      ],
+      "background": [
+        23,
+        35,
+        50,
+        1
+      ]
+    },
+    {
+      "label": "Dette viser bare simulerte kvitteringer. Ingen data lagres i en virkelig database.",
+      "ratio": 14.526271923889734,
+      "color": [
+        242,
+        245,
+        250,
+        1
+      ],
+      "background": [
+        23,
+        35,
+        50,
+        1
+      ]
+    },
+    {
+      "label": "Velg et fiktivt eksempel. Ingenting er lagret.",
+      "ratio": 14.526271923889734,
+      "color": [
+        242,
+        245,
+        250,
+        1
+      ],
+      "background": [
+        23,
+        35,
+        50,
+        1
+      ]
+    },
+    {
+      "label": "Import",
+      "ratio": 11.652752702162216,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        214,
+        234,
+        250,
+        1
+      ]
+    },
+    {
+      "label": "Utkast",
+      "ratio": 11.652752702162216,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        214,
+        234,
+        250,
+        1
+      ]
+    },
+    {
+      "label": "Arbeidsdag",
+      "ratio": 6.126270626473104,
+      "color": [
+        70,
+        87,
+        99,
+        1
+      ],
+      "background": [
+        228,
+        233,
+        237,
+        1
+      ]
+    },
+    {
+      "label": "Kontomeldinger",
+      "ratio": 11.652752702162216,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        214,
+        234,
+        250,
+        1
+      ]
+    },
+    {
+      "label": "Simuler feil ved neste lagring",
+      "ratio": 14.526271923889734,
+      "color": [
+        242,
+        245,
+        250,
+        1
+      ],
+      "background": [
+        23,
+        35,
+        50,
+        1
+      ]
+    },
+    {
+      "label": "1. Velg import",
+      "ratio": 11.446378615684326,
+      "color": [
+        242,
+        245,
+        250,
+        1
+      ],
+      "background": [
+        34,
+        53,
+        75,
+        1
+      ]
+    },
+    {
+      "label": "Faste eksempler, ingen opplasting. Ny import endrer bare forslaget; tidligere kvittering beholdes.",
+      "ratio": 11.446378615684326,
+      "color": [
+        242,
+        245,
+        250,
+        1
+      ],
+      "background": [
+        34,
+        53,
+        75,
+        1
+      ]
+    },
+    {
+      "label": "Åpne delvis tekst-PDF-eksempel",
+      "ratio": 11.652752702162216,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        214,
+        234,
+        250,
+        1
+      ]
+    },
+    {
+      "label": "Prøv format som ikke støttes",
+      "ratio": 11.652752702162216,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        214,
+        234,
+        250,
+        1
+      ]
+    },
+    {
+      "label": "Registrer manuelt",
+      "ratio": 11.652752702162216,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        214,
+        234,
+        250,
+        1
+      ]
+    },
+    {
+      "label": "Nullstill simuleringen",
+      "ratio": 11.652752702162216,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        214,
+        234,
+        250,
+        1
+      ]
+    },
+    {
+      "label": "Den separate vurderingen med faktisk API/PostgreSQL startes med den isolerte testoppskriften i dokum",
+      "ratio": 14.526271923889734,
+      "color": [
+        242,
+        245,
+        250,
+        1
+      ],
+      "background": [
+        23,
+        35,
+        50,
+        1
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "label": "Bytt til dagvisning",
+      "ratio": 12.85717166562016,
+      "height": 58
+    },
+    {
+      "label": "Import",
+      "ratio": 12.85717166562016,
+      "height": 58
+    },
+    {
+      "label": "Utkast",
+      "ratio": 12.85717166562016,
+      "height": 58
+    },
+    {
+      "label": "Arbeidsdag",
+      "ratio": 12.984516775121051,
+      "height": 58
+    },
+    {
+      "label": "Kontomeldinger",
+      "ratio": 12.85717166562016,
+      "height": 58
+    },
+    {
+      "label": "Simuler feil ved neste lagring",
+      "ratio": 14.526271923889734,
+      "height": 58
+    },
+    {
+      "label": "Åpne delvis tekst-PDF-eksempel",
+      "ratio": 10.131164801445454,
+      "height": 58
+    },
+    {
+      "label": "Prøv format som ikke støttes",
+      "ratio": 10.131164801445454,
+      "height": 58
+    },
+    {
+      "label": "Registrer manuelt",
+      "ratio": 10.131164801445454,
+      "height": 58
+    },
+    {
+      "label": "Nullstill simuleringen",
+      "ratio": 12.85717166562016,
+      "height": 58
+    }
+  ],
+  "clipping": [],
+  "unmeasured": [],
+  "overflow": 0
+}

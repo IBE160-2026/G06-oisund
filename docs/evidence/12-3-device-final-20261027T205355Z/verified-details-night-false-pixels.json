@@ -1,0 +1,86 @@
+{
+  "name": "verified-details-night-false",
+  "kind": "disclosure",
+  "crop": {
+    "x0": 24,
+    "y0": 26,
+    "x1": 52,
+    "y1": 74,
+    "scale": 2
+  },
+  "palette": [
+    [
+      "22,44,60",
+      1123
+    ],
+    [
+      "237,243,247",
+      159
+    ],
+    [
+      "153,165,174",
+      21
+    ],
+    [
+      "45,66,80",
+      1
+    ],
+    [
+      "123,137,148",
+      1
+    ],
+    [
+      "201,209,215",
+      1
+    ],
+    [
+      "93,109,121",
+      1
+    ],
+    [
+      "170,181,189",
+      1
+    ],
+    [
+      "62,81,95",
+      1
+    ],
+    [
+      "140,153,163",
+      1
+    ],
+    [
+      "32,53,69",
+      1
+    ],
+    [
+      "218,225,230",
+      1
+    ],
+    [
+      "110,125,136",
+      1
+    ],
+    [
+      "188,197,204",
+      1
+    ],
+    [
+      "80,97,110",
+      1
+    ]
+  ],
+  "background": [
+    22,
+    44,
+    60
+  ],
+  "core": [
+    237,
+    243,
+    247
+  ],
+  "corePixels": 159,
+  "ratio": 12.855408864593942,
+  "method": "Most frequent non-background RGB differing >=30 in at least one channel, >=6 actual pixels; no contrast threshold used to select core. Glyph identity requires visual crop inspection."
+}

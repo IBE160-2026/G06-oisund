@@ -1,0 +1,1793 @@
+{
+  "environment": {
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1280,
+      "height": 605
+    },
+    "rootFontSize": "16px",
+    "themeClass": "night",
+    "theme": "night",
+    "scope": "main"
+  },
+  "text": [
+    {
+      "label": "Nattmodus",
+      "ratio": 11.652752702162216,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        214,
+        234,
+        250,
+        1
+      ]
+    },
+    {
+      "label": "Visning:",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Natt",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Privat tilgang",
+      "ratio": 9.310977521467432,
+      "color": [
+        23,
+        62,
+        96,
+        1
+      ],
+      "background": [
+        224,
+        237,
+        248,
+        1
+      ]
+    },
+    {
+      "label": "Privat arbeidsrom",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Du er logget inn.",
+      "ratio": 10.005601690488291,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        32,
+        62,
+        83,
+        1
+      ]
+    },
+    {
+      "label": "Forberedelse og planlister",
+      "ratio": 11.652752702162216,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        214,
+        234,
+        250,
+        1
+      ]
+    },
+    {
+      "label": "Kontroller og rediger utkast",
+      "ratio": 11.652752702162216,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        214,
+        234,
+        250,
+        1
+      ]
+    },
+    {
+      "label": "Til den åpne planen",
+      "ratio": 11.652752702162216,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        214,
+        234,
+        250,
+        1
+      ]
+    },
+    {
+      "label": "Bekreftet plan åpnet. Fristen er uendret.",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Lagret skift og aktivitetsstatus er hentet.",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Hent skift og aktivitetsstatus igjen",
+      "ratio": 11.652752702162216,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        214,
+        234,
+        250,
+        1
+      ]
+    },
+    {
+      "label": "Les avvik for linjer og datoer",
+      "ratio": 11.652752702162216,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        214,
+        234,
+        250,
+        1
+      ]
+    },
+    {
+      "label": "Dagen din",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Bekreftet plan · versjon",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "1",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Historisk bekreftelse:",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "27.10.2026, 09:20",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": ".",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Siste aktivitetsslutt:",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "02.01.2031, 11:00",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": ". Utløper",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "09.01.2031, 11:00",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": ". Fristen forlenges ikke.",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Fysisk buss",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Gjeldende manuell registrering. Vognløp og sanntidsverdi fastsetter ikke hvilken buss du kjører.",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Ukjent. Ingen fysisk buss er registrert.",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Lagret verdi:",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Ukjent",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "· bussversjon",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "0",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Fysisk buss",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Tøm fysisk buss",
+      "ratio": 11.652752702162216,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        214,
+        234,
+        250,
+        1
+      ]
+    },
+    {
+      "label": "Inntil 100 tegn. Tomt felt betyr ukjent. Tekst og innledende nuller bevares.",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Lagre fysisk buss",
+      "ratio": 6.126270626473104,
+      "color": [
+        70,
+        87,
+        99,
+        1
+      ],
+      "background": [
+        228,
+        233,
+        237,
+        1
+      ]
+    },
+    {
+      "label": "Avbryt bussendring",
+      "ratio": 6.126270626473104,
+      "color": [
+        70,
+        87,
+        99,
+        1
+      ],
+      "background": [
+        228,
+        233,
+        237,
+        1
+      ]
+    },
+    {
+      "label": "Manuelt aktivitetsvalg",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Lagret status er hentet.",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Velg en aktivitet først",
+      "ratio": 6.126270626473104,
+      "color": [
+        70,
+        87,
+        99,
+        1
+      ],
+      "background": [
+        228,
+        233,
+        237,
+        1
+      ]
+    },
+    {
+      "label": "Velg en aktivitet først",
+      "ratio": 6.126270626473104,
+      "color": [
+        70,
+        87,
+        99,
+        1
+      ],
+      "background": [
+        228,
+        233,
+        237,
+        1
+      ]
+    },
+    {
+      "label": "Ingen aktivitet valgt",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Kontroller plantilgang og aktivitetsvalg",
+      "ratio": 11.652752702162216,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        214,
+        234,
+        250,
+        1
+      ]
+    },
+    {
+      "label": "Dagen din · bekreftet plan",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Tjenestedato:",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "2031-01-02",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": ". Alle kalenderdatoer og klokkeslett vises i Europe/Oslo.",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Oppmøte",
+      "ratio": 10.005601690488291,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        32,
+        62,
+        83,
+        1
+      ]
+    },
+    {
+      "label": "Ukjent · ingen bekreftet Sign-on.",
+      "ratio": 10.005601690488291,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        32,
+        62,
+        83,
+        1
+      ]
+    },
+    {
+      "label": "Planlagt siste aktivitetsslutt:",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "02.01.2031, 11:00",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": ".",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Fast utløpsfrist:",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "09.01.2031, 11:00",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": ". Visning og bussendringer forlenger ikke fristen.",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Opplysningene er planlagte. Vognløp og CAR fastslår ikke faktisk buss eller bussbytte.",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Passasjertur",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "02.01.2031, 10:00 – 02.01.2031, 11:00",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Registrert aktivitetsstatus:",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Ikke registrert",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Ikke valgt",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Velg aktivitet 1",
+      "ratio": 11.652752702162216,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        214,
+        234,
+        250,
+        1
+      ]
+    },
+    {
+      "label": "Kode:",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Synthetic line 20",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Fra:",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Ukjent",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "→ Til:",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Ukjent",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Linje: 20 · Tur: Ukjent · Retning: Ukjent",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Vognløp:",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "0020",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "· Sanntidsverdi:",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "020",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Ukjent:",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "fra sted, til sted, turnummer, retning",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": ".",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Kilde og rettelser · aktivitet",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "1",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Skiftstart",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Planlagt start:",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "02.01.2031, 10:00",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": ". Dette er første bekreftede aktivitetsstart.",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Lagret status er hentet.",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Ikke startet",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Skiftstart registreres bare ved en uttrykkelig manuell handling. Registreringen er ikke bevis på fys",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Start skift",
+      "ratio": 11.652752702162216,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        214,
+        234,
+        250,
+        1
+      ]
+    },
+    {
+      "label": "Hent skiftstatus igjen",
+      "ratio": 11.652752702162216,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        214,
+        234,
+        250,
+        1
+      ]
+    },
+    {
+      "label": "Historiske fakta og godtatte ukjente opplysninger gjelder tidspunktet for bekreftelsen. Bussregistre",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Bekreftede detaljer og historisk kilde",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Godtatte ukjente fakta",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Start skiftet før du avslutter eller avbryter.",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Avslutt skift",
+      "ratio": 6.126270626473104,
+      "color": [
+        70,
+        87,
+        99,
+        1
+      ],
+      "background": [
+        228,
+        233,
+        237,
+        1
+      ]
+    },
+    {
+      "label": "Avbryt skift",
+      "ratio": 6.126270626473104,
+      "color": [
+        70,
+        87,
+        99,
+        1
+      ],
+      "background": [
+        228,
+        233,
+        237,
+        1
+      ]
+    },
+    {
+      "label": "Manuelt vedlikeholdte avvik",
+      "ratio": 11.652752702162216,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        214,
+        234,
+        250,
+        1
+      ]
+    },
+    {
+      "label": "Slett bekreftet plan",
+      "ratio": 11.652752702162216,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        214,
+        234,
+        250,
+        1
+      ]
+    },
+    {
+      "label": "Lukk planen",
+      "ratio": 11.652752702162216,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        214,
+        234,
+        250,
+        1
+      ]
+    },
+    {
+      "label": "Lukk planen lukker bare visningen. Slett bekreftet plan er en egen personvernhandling.",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Økten utløper",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "10.11.2026, 21:02",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": ".",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Logg ut",
+      "ratio": 11.652752702162216,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        214,
+        234,
+        250,
+        1
+      ]
+    },
+    {
+      "label": "Tilgang opprettes av den som drifter løsningen. Bruk arbeidsrommet mens du står stille.",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Åpne fiktiv demo",
+      "ratio": 11.652752702162216,
+      "color": [
+        214,
+        234,
+        250,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "control value: INPUT",
+      "ratio": 10.005601690488291,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        32,
+        62,
+        83,
+        1
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "label": "Nattmodus",
+      "ratio": 11.652752702162216,
+      "height": 58
+    },
+    {
+      "label": "Forberedelse og planlister",
+      "ratio": 11.652752702162216,
+      "height": 58
+    },
+    {
+      "label": "Kontroller og rediger utkast",
+      "ratio": 11.652752702162216,
+      "height": 58
+    },
+    {
+      "label": "Til den åpne planen",
+      "ratio": 11.652752702162216,
+      "height": 58
+    },
+    {
+      "label": "Hent skift og aktivitetsstatus igjen",
+      "ratio": 11.652752702162216,
+      "height": 58
+    },
+    {
+      "label": "Les avvik for linjer og datoer",
+      "ratio": 11.652752702162216,
+      "height": 58
+    },
+    {
+      "label": "INPUT",
+      "ratio": 8.3661568844563,
+      "height": 58
+    },
+    {
+      "label": "Tøm fysisk buss",
+      "ratio": 11.652752702162216,
+      "height": 58
+    },
+    {
+      "label": "Lagre fysisk buss",
+      "ratio": 11.768168526686955,
+      "height": 58
+    },
+    {
+      "label": "Avbryt bussendring",
+      "ratio": 11.768168526686955,
+      "height": 58
+    },
+    {
+      "label": "Velg en aktivitet først",
+      "ratio": 11.768168526686955,
+      "height": 58
+    },
+    {
+      "label": "Velg en aktivitet først",
+      "ratio": 11.768168526686955,
+      "height": 58
+    },
+    {
+      "label": "Kontroller plantilgang og aktivitetsvalg",
+      "ratio": 11.652752702162216,
+      "height": 58
+    },
+    {
+      "label": "Velg aktivitet 1",
+      "ratio": 11.652752702162216,
+      "height": 58
+    },
+    {
+      "label": "Kilde og rettelser · aktivitet 1",
+      "ratio": 12.855408864593942,
+      "height": 49.984375
+    },
+    {
+      "label": "Start skift",
+      "ratio": 11.652752702162216,
+      "height": 58
+    },
+    {
+      "label": "Hent skiftstatus igjen",
+      "ratio": 11.652752702162216,
+      "height": 58
+    },
+    {
+      "label": "Bekreftede detaljer og historisk kilde",
+      "ratio": 12.855408864593942,
+      "height": 49.984375
+    },
+    {
+      "label": "Godtatte ukjente fakta",
+      "ratio": 12.855408864593942,
+      "height": 58
+    },
+    {
+      "label": "Avslutt skift",
+      "ratio": 11.768168526686955,
+      "height": 58
+    },
+    {
+      "label": "Avbryt skift",
+      "ratio": 11.768168526686955,
+      "height": 58
+    },
+    {
+      "label": "Manuelt vedlikeholdte avvik",
+      "ratio": 11.652752702162216,
+      "height": 58
+    },
+    {
+      "label": "Slett bekreftet plan",
+      "ratio": 11.652752702162216,
+      "height": 58
+    },
+    {
+      "label": "Lukk planen",
+      "ratio": 11.652752702162216,
+      "height": 58
+    },
+    {
+      "label": "Logg ut",
+      "ratio": 11.652752702162216,
+      "height": 58
+    }
+  ],
+  "clipping": [],
+  "unmeasured": [],
+  "overflow": 0
+}

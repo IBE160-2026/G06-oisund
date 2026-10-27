@@ -143,7 +143,7 @@ for (const width of [768, 1440]) for (const night of [false, true]) test(`bus ke
   await page.getByRole('button', { name: 'Lukk planen', exact: true }).click();
   await preparation(page); await page.getByRole('button', { name: 'Åpne plan 2031-01-02 · versjon 1', exact: true }).click();
   await expect(busInput(page)).toHaveValue('');
-  expect(await page.evaluate(() => [localStorage.length, sessionStorage.length])).toEqual([0, 0]);
+  expect(await page.evaluate(() => [{ ...localStorage }, sessionStorage.length])).toEqual([night ? { 'ibe160-theme': 'night' } : {}, 0]);
   expect(await page.evaluate(async () => ({ databases: (await indexedDB.databases()).length, caches: (await caches.keys()).length }))).toEqual({ databases: 0, caches: 0 });
 });
 

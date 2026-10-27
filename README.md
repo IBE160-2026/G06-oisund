@@ -1,5 +1,8 @@
 # G06 — Individuell
 
+> Publication follow-up,27 October2026: Jonas has now explicitly authorized committing/pushing the completed documentation and evidence, then merging12.3 into main after identity/final checks and pushing main. Earlier no-commit/no-push/no-merge statements describe the previous checkpoint.12.4 remains backlog.
+
+
 Gruppeprosjekt i **IBE160 Programmering med KI** ved Høgskolen i Molde, høsten 2026 (15 studiepoeng).
 
 Repoet inneholder gruppens applikasjon og dokumentasjon av utvikling, testing og kvalitetssikring med KI.
@@ -20,7 +23,7 @@ The account-switch follow-up binds private editor requests to the displayed acco
 
 ## Run the fictional assessment
 
-For the repeatable, no-login simulation with separate screens and controlled failures, use the [Story 12.2 launch, reset and test guide](docs/fictional-assessment.md). It runs without a backend and stores only fictional state in memory. Story 12.1 notice admission/retry is integrated locally; use the [combined manual test checklist](docs/story-12-manual-testing.md) and [fresh integration evidence](docs/evidence/12-integrated-handoff.md). Both stories await manual/physical testing by Jonas; technical integration is not user acceptance.
+For the repeatable, no-login simulation with separate screens and controlled failures, use the [Story 12.2 launch, reset and test guide](docs/fictional-assessment.md). It runs without a backend and stores only fictional state in memory. Story 12.1 notice admission/retry is integrated locally; use the [combined manual test checklist](docs/story-12-manual-testing.md) and [fresh integration evidence](docs/evidence/12-integrated-handoff.md). Jonas accepted Story 12.1 and 12.2 on 27 October 2026; both are done/accepted. Physical-device qualification remains separate.
 
 Requires Docker Desktop with Linux containers and Compose v2. Start Docker Desktop first. Run these commands from this repository root in PowerShell:
 
@@ -280,3 +283,14 @@ Owner acceptance update, 26 October 2026: Jonas explicitly accepted corrected st
 ## Epic 11 accepted and retrospective completed - 26 October 2026
 
 Jonas accepted integrated 11.6. All six Epic 11 stories and the retrospective are done, with verdict **accepted-with-open-items** and 12 proposed follow-ups. The [continued retrospective](_bmad-output/implementation-artifacts/epic-11-retro-2026-10-26.md) incorporates the earlier chat's preserved preliminary analysis, corrected 11.5, the exact 421-backend/479-browser checkpoint, fresh bounded system observations and limitations. Actual Lenovo/Android/Brave/mobile-network testing remains unperformed; remote access is scheduled between Epic 11 and Epic 12. No commit/push, remote setup or Epic 12 work is performed. Older review/pending statements above remain historical.
+
+## Story 12.3 — tablet/PC views and persistent manual theme
+
+Story12.3 is done/accepted on its separate story branch: Jonas' conditional approval became effective after the remaining required physical checks passed on27October2026. See the [final Lenovo acceptance report](docs/evidence/12-3-device-acceptance-2026-10-27.md). Latest instruction: no commit/push; no merge to main. The current Day/Night control covers login, the private workspace, the simulation and actual fictional assessment. An explicit choice persists only `ibe160-theme=day|night`; the earlier temporary-editor description above is historical. Application localStorage contains no private work, passwords or simulated records; existing session-cookie authentication remains in use. Reset/logout/reload preserve the presentation preference; blocked storage falls back to an in-memory choice. There is no Auto mode.
+
+The earlier desktop checkpoint measured rendered text/control/focus, native checkboxes, long Norwegian text and100%/200% text separately from hardware. The [physical Lenovo/Android/Brave USB follow-up](docs/evidence/12-3-device-testing-2026-10-27.md) now records bounded device/native-control/actual-pinch checks plus Jonas' finger and rotation observations. The final follow-up adds private review/confirmation, ended/aborted recap, native glyph contrast and keyboard focus; Jonas approves subjective readability/touch comfort. Untested assistive-technology/OS settings and ordinary deployment limits remain explicit. No overall WCAG claim or complete12.4 user-flow qualification is made.
+
+Use [12.3 startup and manual checklist](docs/story-12-3-manual-testing.md) and [current executed results/limits](docs/evidence/12-3-main-sync-handoff.md). The dedicated environment is frontend 15323, APIs 18323/18324 and Compose `ibe160-story123-tests`, with separate synthetic data. The integrated 12.1/12.2 environment 15312/18312/18313 remains separate; Jonas has accepted both stories (done/accepted). Their historical 477/479 broad result and later successful affected checks are unchanged.
+
+
+Current-main reconciliation (27 October 2026): Story 12.3 incorporates full accepted main `74849ff`, including validated relative tablet transport and accepted local save/conflict/recovery feedback. The dedicated tablet entry now uses the same persistent theme provider. See the [current integration handoff](docs/evidence/12-3-main-sync-handoff.md) for fresh evidence and limitations; the earlier 12.3 handoff is a historical checkpoint. Dedicated tablet browser checks use only a separately built private entry and loopback port 18483; they do not activate external access or qualify physical hardware. Story12.3 is now accepted under the final device decision;12.4 remains backlog. Main is unchanged and no story-to-main merge occurred.

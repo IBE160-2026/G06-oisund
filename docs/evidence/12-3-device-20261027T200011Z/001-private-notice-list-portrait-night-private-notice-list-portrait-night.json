@@ -1,0 +1,444 @@
+{
+  "environment": {
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 800,
+      "height": 1085
+    },
+    "rootFontSize": "16px",
+    "themeClass": "night",
+    "theme": "night",
+    "scope": "main"
+  },
+  "text": [
+    {
+      "label": "Nattmodus",
+      "ratio": 11.652752702162216,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        214,
+        234,
+        250,
+        1
+      ]
+    },
+    {
+      "label": "Visning:",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Natt",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Privat tilgang",
+      "ratio": 9.310977521467432,
+      "color": [
+        23,
+        62,
+        96,
+        1
+      ],
+      "background": [
+        224,
+        237,
+        248,
+        1
+      ]
+    },
+    {
+      "label": "Privat arbeidsrom",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Du er logget inn.",
+      "ratio": 10.005601690488291,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        32,
+        62,
+        83,
+        1
+      ]
+    },
+    {
+      "label": "Forberedelse og planlister",
+      "ratio": 11.652752702162216,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        214,
+        234,
+        250,
+        1
+      ]
+    },
+    {
+      "label": "Kontroller og rediger utkast",
+      "ratio": 11.652752702162216,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        214,
+        234,
+        250,
+        1
+      ]
+    },
+    {
+      "label": "Til den åpne planen",
+      "ratio": 11.652752702162216,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        214,
+        234,
+        250,
+        1
+      ]
+    },
+    {
+      "label": "Bekreftet plan åpnet. Fristen er uendret.",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Manuelt vedlikeholdte avvik",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Forlengelse må lagres før gjeldende sluttid. Utløpte og manuelt avsluttede avvik er skrivebeskyttet ",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Felles avviksregister for kontoen. Avvik brukes automatisk på alle relevante bekreftede dager frem t",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Avvikslisten er ikke hentet.",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Eventuelle tidligere viste opplysninger er ikke oppdatert.",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Tilbake til dagen",
+      "ratio": 11.652752702162216,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        214,
+        234,
+        250,
+        1
+      ]
+    },
+    {
+      "label": "Hent lagrede avvik",
+      "ratio": 6.126270626473104,
+      "color": [
+        70,
+        87,
+        99,
+        1
+      ],
+      "background": [
+        228,
+        233,
+        237,
+        1
+      ]
+    },
+    {
+      "label": "Registrer avvik",
+      "ratio": 6.126270626473104,
+      "color": [
+        70,
+        87,
+        99,
+        1
+      ],
+      "background": [
+        228,
+        233,
+        237,
+        1
+      ]
+    },
+    {
+      "label": "Økten utløper",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "10.11.2026, 21:02",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": ".",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Logg ut",
+      "ratio": 11.652752702162216,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        214,
+        234,
+        250,
+        1
+      ]
+    },
+    {
+      "label": "Tilgang opprettes av den som drifter løsningen. Bruk arbeidsrommet mens du står stille.",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Åpne fiktiv demo",
+      "ratio": 11.652752702162216,
+      "color": [
+        214,
+        234,
+        250,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "label": "Nattmodus",
+      "ratio": 11.652752702162216,
+      "height": 58
+    },
+    {
+      "label": "Forberedelse og planlister",
+      "ratio": 11.652752702162216,
+      "height": 58
+    },
+    {
+      "label": "Kontroller og rediger utkast",
+      "ratio": 11.652752702162216,
+      "height": 58
+    },
+    {
+      "label": "Til den åpne planen",
+      "ratio": 11.652752702162216,
+      "height": 58
+    },
+    {
+      "label": "Tilbake til dagen",
+      "ratio": 11.652752702162216,
+      "height": 58
+    },
+    {
+      "label": "Hent lagrede avvik",
+      "ratio": 11.768168526686955,
+      "height": 58
+    },
+    {
+      "label": "Registrer avvik",
+      "ratio": 11.768168526686955,
+      "height": 58
+    },
+    {
+      "label": "Logg ut",
+      "ratio": 11.652752702162216,
+      "height": 58
+    }
+  ],
+  "clipping": [],
+  "unmeasured": [],
+  "overflow": 0
+}

@@ -1,0 +1,96 @@
+{
+  "url": "http://127.0.0.1:15323/private",
+  "headings": [
+    "Privat arbeidsrom",
+    "Dagen din",
+    "Bekreftet plan · versjon 1",
+    "Dagen din · bekreftet plan"
+  ],
+  "buttons": [
+    {
+      "name": "Nattmodus",
+      "disabled": false
+    },
+    {
+      "name": "Forberedelse og planlister",
+      "disabled": false
+    },
+    {
+      "name": "Kontroller og rediger utkast",
+      "disabled": false
+    },
+    {
+      "name": "Til den åpne planen",
+      "disabled": false
+    },
+    {
+      "name": "Hent skift og aktivitetsstatus igjen",
+      "disabled": false
+    },
+    {
+      "name": "Les avvik for linjer og datoer",
+      "disabled": false
+    },
+    {
+      "name": "Åpne oppsummering",
+      "disabled": false
+    },
+    {
+      "name": "Ingen forrige aktivitet",
+      "disabled": true
+    },
+    {
+      "name": "Neste aktivitet",
+      "disabled": false
+    },
+    {
+      "name": "Åpne valgt aktivitet",
+      "disabled": false
+    },
+    {
+      "name": "Kontroller plantilgang og aktivitetsvalg",
+      "disabled": false
+    },
+    {
+      "name": "Åpnet aktivitet",
+      "disabled": true
+    },
+    {
+      "name": "Åpne aktivitet 1",
+      "disabled": false
+    },
+    {
+      "name": "Les aktivitet 2",
+      "disabled": false
+    },
+    {
+      "name": "Manuelt vedlikeholdte avvik",
+      "disabled": false
+    },
+    {
+      "name": "Slett bekreftet plan",
+      "disabled": false
+    },
+    {
+      "name": "Lukk planen",
+      "disabled": false
+    },
+    {
+      "name": "Logg ut",
+      "disabled": false
+    }
+  ],
+  "labels": [],
+  "viewport": {
+    "width": 800,
+    "height": 1085,
+    "visualScale": 1,
+    "visualHeight": 1085
+  },
+  "status": [
+    "Du er logget inn.",
+    "Bekreftet plan åpnet. Fristen er uendret.",
+    "Lagret skift og aktivitetsstatus er hentet.",
+    "Lagret status er hentet."
+  ]
+}

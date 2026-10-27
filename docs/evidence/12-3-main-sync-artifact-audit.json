@@ -1,0 +1,776 @@
+{
+  "observed": "2026-10-27T19:25:39.495538+00:00",
+  "checks": [
+    {
+      "name": "own secret values nonempty",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-backend-transport-20261027T185050641915Z-eb582a5d.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-backend-transport-20261027T190254406174Z-c878589c.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-browser-20261027T184947947476Z-89ec10ab.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-browser-20261027T185055155765Z-2e19f0f8.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-browser-20261027T190135888667Z-54ce7f61.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-browser-20261027T190258982753Z-1bffeae3.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-browser-20261027T191324534402Z-c1c3772d.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-build-20261027T184911056942Z-d57ff65f.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-build-20261027T190059396568Z-2259b324.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-bundles\\20261027T184852190392Z-26a9c895-up.index.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-bundles\\20261027T184852190392Z-26a9c895-up.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "archive hash 20261027T184852190392Z-26a9c895-up.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "archive entries 20261027T184852190392Z-26a9c895-up.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-bundles\\20261027T184911056942Z-d57ff65f-build.index.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-bundles\\20261027T184911056942Z-d57ff65f-build.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "archive hash 20261027T184911056942Z-d57ff65f-build.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "archive entries 20261027T184911056942Z-d57ff65f-build.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-bundles\\20261027T184915926080Z-4b2ce0e0-verify.index.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-bundles\\20261027T184915926080Z-4b2ce0e0-verify.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "archive hash 20261027T184915926080Z-4b2ce0e0-verify.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "archive entries 20261027T184915926080Z-4b2ce0e0-verify.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-bundles\\20261027T184947947476Z-89ec10ab-browser.index.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-bundles\\20261027T184947947476Z-89ec10ab-browser.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "archive hash 20261027T184947947476Z-89ec10ab-browser.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "archive entries 20261027T184947947476Z-89ec10ab-browser.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-bundles\\20261027T185033047695Z-0b9051d8-tablet-build.index.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-bundles\\20261027T185033047695Z-0b9051d8-tablet-build.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "archive hash 20261027T185033047695Z-0b9051d8-tablet-build.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "archive entries 20261027T185033047695Z-0b9051d8-tablet-build.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-bundles\\20261027T185035989004Z-cba0666d-tablet-browser.index.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-bundles\\20261027T185035989004Z-cba0666d-tablet-browser.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "archive hash 20261027T185035989004Z-cba0666d-tablet-browser.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "archive entries 20261027T185035989004Z-cba0666d-tablet-browser.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-bundles\\20261027T185050641915Z-eb582a5d-backend-transport.index.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-bundles\\20261027T185050641915Z-eb582a5d-backend-transport.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "archive hash 20261027T185050641915Z-eb582a5d-backend-transport.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "archive entries 20261027T185050641915Z-eb582a5d-backend-transport.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-bundles\\20261027T185055155765Z-2e19f0f8-browser.index.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-bundles\\20261027T185055155765Z-2e19f0f8-browser.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "archive hash 20261027T185055155765Z-2e19f0f8-browser.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "archive entries 20261027T185055155765Z-2e19f0f8-browser.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-bundles\\20261027T185654533644Z-8e91290d-tablet-build.index.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-bundles\\20261027T185654533644Z-8e91290d-tablet-build.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "archive hash 20261027T185654533644Z-8e91290d-tablet-build.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "archive entries 20261027T185654533644Z-8e91290d-tablet-build.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-bundles\\20261027T185700217739Z-6588456d-tablet-browser.index.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-bundles\\20261027T185700217739Z-6588456d-tablet-browser.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "archive hash 20261027T185700217739Z-6588456d-tablet-browser.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "archive entries 20261027T185700217739Z-6588456d-tablet-browser.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-bundles\\20261027T185945540944Z-11f8f94a-tablet-browser.index.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-bundles\\20261027T185945540944Z-11f8f94a-tablet-browser.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "archive hash 20261027T185945540944Z-11f8f94a-tablet-browser.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "archive entries 20261027T185945540944Z-11f8f94a-tablet-browser.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-bundles\\20261027T190059396568Z-2259b324-build.index.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-bundles\\20261027T190059396568Z-2259b324-build.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "archive hash 20261027T190059396568Z-2259b324-build.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "archive entries 20261027T190059396568Z-2259b324-build.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-bundles\\20261027T190102042205Z-0fef7b07-verify.index.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-bundles\\20261027T190102042205Z-0fef7b07-verify.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "archive hash 20261027T190102042205Z-0fef7b07-verify.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "archive entries 20261027T190102042205Z-0fef7b07-verify.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-bundles\\20261027T190111954909Z-8022f7a7-gateway-build.index.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-bundles\\20261027T190111954909Z-8022f7a7-gateway-build.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "archive hash 20261027T190111954909Z-8022f7a7-gateway-build.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "archive entries 20261027T190111954909Z-8022f7a7-gateway-build.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-bundles\\20261027T190117937529Z-62cd0d24-gate-check.index.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-bundles\\20261027T190117937529Z-62cd0d24-gate-check.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "archive hash 20261027T190117937529Z-62cd0d24-gate-check.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "archive entries 20261027T190117937529Z-62cd0d24-gate-check.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-bundles\\20261027T190135888667Z-54ce7f61-browser.index.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-bundles\\20261027T190135888667Z-54ce7f61-browser.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "archive hash 20261027T190135888667Z-54ce7f61-browser.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "archive entries 20261027T190135888667Z-54ce7f61-browser.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-bundles\\20261027T190143642963Z-7ec999a8-gate-check.index.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-bundles\\20261027T190143642963Z-7ec999a8-gate-check.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "archive hash 20261027T190143642963Z-7ec999a8-gate-check.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "archive entries 20261027T190143642963Z-7ec999a8-gate-check.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-bundles\\20261027T190148035587Z-a044943a-gateway-config.index.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-bundles\\20261027T190148035587Z-a044943a-gateway-config.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "archive hash 20261027T190148035587Z-a044943a-gateway-config.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "archive entries 20261027T190148035587Z-a044943a-gateway-config.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-bundles\\20261027T190151212433Z-bdf41816-gateway-proxy.index.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-bundles\\20261027T190151212433Z-bdf41816-gateway-proxy.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "archive hash 20261027T190151212433Z-bdf41816-gateway-proxy.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "archive entries 20261027T190151212433Z-bdf41816-gateway-proxy.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-bundles\\20261027T190157277595Z-aa5a619f-probe-failed.index.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-bundles\\20261027T190157277595Z-aa5a619f-probe-failed.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "archive hash 20261027T190157277595Z-aa5a619f-probe-failed.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "archive entries 20261027T190157277595Z-aa5a619f-probe-failed.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-bundles\\20261027T190157277595Z-aa5a619f-probe-parent-exit.index.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-bundles\\20261027T190157277595Z-aa5a619f-probe-parent-exit.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "archive hash 20261027T190157277595Z-aa5a619f-probe-parent-exit.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "archive entries 20261027T190157277595Z-aa5a619f-probe-parent-exit.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-bundles\\20261027T190157277595Z-aa5a619f-probe-timeout.index.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-bundles\\20261027T190157277595Z-aa5a619f-probe-timeout.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "archive hash 20261027T190157277595Z-aa5a619f-probe-timeout.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "archive entries 20261027T190157277595Z-aa5a619f-probe-timeout.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-bundles\\20261027T190217469866Z-5d574672-tablet-build.index.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-bundles\\20261027T190217469866Z-5d574672-tablet-build.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "archive hash 20261027T190217469866Z-5d574672-tablet-build.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "archive entries 20261027T190217469866Z-5d574672-tablet-build.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-bundles\\20261027T190219960924Z-ede9b007-tablet-browser.index.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-bundles\\20261027T190219960924Z-ede9b007-tablet-browser.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "archive hash 20261027T190219960924Z-ede9b007-tablet-browser.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "archive entries 20261027T190219960924Z-ede9b007-tablet-browser.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-bundles\\20261027T190237489569Z-9d3c7b69-tablet-browser.index.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-bundles\\20261027T190237489569Z-9d3c7b69-tablet-browser.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "archive hash 20261027T190237489569Z-9d3c7b69-tablet-browser.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "archive entries 20261027T190237489569Z-9d3c7b69-tablet-browser.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-bundles\\20261027T190254406174Z-c878589c-backend-transport.index.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-bundles\\20261027T190254406174Z-c878589c-backend-transport.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "archive hash 20261027T190254406174Z-c878589c-backend-transport.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "archive entries 20261027T190254406174Z-c878589c-backend-transport.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-bundles\\20261027T190258982753Z-1bffeae3-browser.index.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-bundles\\20261027T190258982753Z-1bffeae3-browser.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "archive hash 20261027T190258982753Z-1bffeae3-browser.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "archive entries 20261027T190258982753Z-1bffeae3-browser.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-bundles\\20261027T191324534402Z-c1c3772d-browser.index.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-bundles\\20261027T191324534402Z-c1c3772d-browser.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "archive hash 20261027T191324534402Z-c1c3772d-browser.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "archive entries 20261027T191324534402Z-c1c3772d-browser.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-bundles\\20261027T192251010882Z-adfce32f-prepare.index.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-bundles\\20261027T192251010882Z-adfce32f-prepare.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "archive hash 20261027T192251010882Z-adfce32f-prepare.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "archive entries 20261027T192251010882Z-adfce32f-prepare.tar.gz",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-gate-check-20261027T190117937529Z-62cd0d24.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-gate-check-20261027T190143642963Z-7ec999a8.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-gateway-build-20261027T190111954909Z-8022f7a7.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-gateway-config-20261027T190148035587Z-a044943a.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-gateway-proxy-20261027T190151212433Z-bdf41816.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-main-sync-accepted-preview-before.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-main-sync-measurement-summary.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-main-sync-node.txt",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-main-sync-qualification.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-main-sync-runtime-before.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-main-sync-runtime-initial.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-main-sync-runtime-method-initial.py",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-main-sync-runtime-method.py",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-main-sync-runtime.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-main-sync-tooling.txt",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-measurements-20261027T190258982753Z-1bffeae3.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-prepare-20261027T192251010882Z-adfce32f.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-probe-failed-20261027T190157277595Z-aa5a619f.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-probe-parent-exit-20261027T190157277595Z-aa5a619f.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-probe-timeout-20261027T190157277595Z-aa5a619f.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-real-20261027T184854728791Z-aefa9eab0a7c.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-real-20261027T184916533209Z-5a862c89d9d2.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-real-20261027T190102656449Z-c8da05e9865d.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-real-20261027T192251651708Z-cee575272597.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-tablet-browser-20261027T185035989004Z-cba0666d.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-tablet-browser-20261027T185700217739Z-6588456d.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-tablet-browser-20261027T185945540944Z-11f8f94a.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-tablet-browser-20261027T190219960924Z-ede9b007.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-tablet-browser-20261027T190237489569Z-9d3c7b69.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-tablet-build-20261027T185033047695Z-0b9051d8.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-tablet-build-20261027T185654533644Z-8e91290d.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-tablet-build-20261027T190217469866Z-5d574672.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-up-20261027T184852190392Z-26a9c895.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-verify-20261027T184915926080Z-4b2ce0e0.json",
+      "passed": true
+    },
+    {
+      "name": "own passwords absent docs\\evidence\\12-3-verify-20261027T190102042205Z-0fef7b07.json",
+      "passed": true
+    },
+    {
+      "name": "historical12.3 raw records byte-identical",
+      "passed": true
+    },
+    {
+      "name": "local document links docs/evidence/12-3-main-sync-handoff.md",
+      "passed": true
+    },
+    {
+      "name": "local document links docs/story-12-3-manual-testing.md",
+      "passed": true
+    },
+    {
+      "name": "local document links _bmad-output/implementation-artifacts/spec-12-3-current-main-sync.md",
+      "passed": true
+    },
+    {
+      "name": "git diff whitespace",
+      "passed": true
+    }
+  ],
+  "new_files_scanned": 102,
+  "historical_raw_paths": 83,
+  "secret_scan_scope": "Only own Story12.3 synthetic manual password and database password against new evidence bytes and archive members; no tunnel token read.",
+  "file_sha256": {
+    "docs\\evidence\\12-3-backend-transport-20261027T185050641915Z-eb582a5d.json": "23f0b4ee84ef0617d5cf4d81ce6175f0d3eaaa9b55910bdc06c6249059820363",
+    "docs\\evidence\\12-3-backend-transport-20261027T190254406174Z-c878589c.json": "eb823bc355c1d842c50c4e4aa03ca2da15dbb223b5c807304ad44fd11887c9e4",
+    "docs\\evidence\\12-3-browser-20261027T184947947476Z-89ec10ab.json": "531a8b20fb9a60eca562a424c7ce737db4d1818a56b20316808e9080f210b6c1",
+    "docs\\evidence\\12-3-browser-20261027T185055155765Z-2e19f0f8.json": "6c44ee46fb48d5630d1bb67a63e6ba1641a77a09a72a8be9a0f7ac0be5135361",
+    "docs\\evidence\\12-3-browser-20261027T190135888667Z-54ce7f61.json": "b8518c01f756b93da52aff050f31566c556136f05302abfd459cbc5f3533a4e0",
+    "docs\\evidence\\12-3-browser-20261027T190258982753Z-1bffeae3.json": "228543d29f5a3e13172b5cb6e9597967ce7222d0548bcf9ed04b765ad3f2a328",
+    "docs\\evidence\\12-3-browser-20261027T191324534402Z-c1c3772d.json": "630bf1b368837280b1991ff98fd1ace84483c3118ecd0fb6c6ec1e4b5dc01ba4",
+    "docs\\evidence\\12-3-build-20261027T184911056942Z-d57ff65f.json": "f74f354fbd96528ce8a8e9b3ba1cbf5182f6870db3e7dd54a5104eaa7f776f9e",
+    "docs\\evidence\\12-3-build-20261027T190059396568Z-2259b324.json": "42ee5af771ab54a89b13289db35a6d8fab50d16d62476b2ec6990602c63674dd",
+    "docs\\evidence\\12-3-bundles\\20261027T184852190392Z-26a9c895-up.index.json": "a13e103aa5cd7e324ff8de679492d15a69f25c786ee021cd798740cc317d4fab",
+    "docs\\evidence\\12-3-bundles\\20261027T184852190392Z-26a9c895-up.tar.gz": "3d2d628bf9bc3639c7b88661ceeadf37e6a7ebc5f731a1d57c46da2a36055550",
+    "docs\\evidence\\12-3-bundles\\20261027T184911056942Z-d57ff65f-build.index.json": "f295ab6dcf4f22e87cb69c962a50cb24e678f3a947a1a528fce446976cf8da76",
+    "docs\\evidence\\12-3-bundles\\20261027T184911056942Z-d57ff65f-build.tar.gz": "1700c2cd57e442853f1d50a703efb0719769ca4f46069d38678a0f94457ee38c",
+    "docs\\evidence\\12-3-bundles\\20261027T184915926080Z-4b2ce0e0-verify.index.json": "84161a6bc59917989659271709abb8c30f11163728547c962fcec004d9e4cd9b",
+    "docs\\evidence\\12-3-bundles\\20261027T184915926080Z-4b2ce0e0-verify.tar.gz": "53165cc713e470843e2d38865f35f8dba138e08129405e0d1496da3e2e0542cb",
+    "docs\\evidence\\12-3-bundles\\20261027T184947947476Z-89ec10ab-browser.index.json": "afe0cb98fb2e6172f7b4f6450c02c94ebc91d9e241ca2a93942862fe174dc0e3",
+    "docs\\evidence\\12-3-bundles\\20261027T184947947476Z-89ec10ab-browser.tar.gz": "9ccc0e39ee556a4caf8521f36474246708da69e228a7bf1855cce17db532fd74",
+    "docs\\evidence\\12-3-bundles\\20261027T185033047695Z-0b9051d8-tablet-build.index.json": "d46cd92414dceb6ceab862522cc4c4b565a63ef5210bfe6e3f04449b75e813f1",
+    "docs\\evidence\\12-3-bundles\\20261027T185033047695Z-0b9051d8-tablet-build.tar.gz": "0bc024706a68aa09f3052a432ef11d6e4c5c339dd7f4f699453d0615ef57741d",
+    "docs\\evidence\\12-3-bundles\\20261027T185035989004Z-cba0666d-tablet-browser.index.json": "1d15731c0374f118cb930e33488e7a9820ffbd0957fbf65536ab00599538a093",
+    "docs\\evidence\\12-3-bundles\\20261027T185035989004Z-cba0666d-tablet-browser.tar.gz": "1d7ad875b2034be5148d8827ea750304333ce0d085b456ce9087e7e36597b281",
+    "docs\\evidence\\12-3-bundles\\20261027T185050641915Z-eb582a5d-backend-transport.index.json": "3e6f0a51a69f5f383928939b6a41701805e554c15ab4711f1bf9b13e9ab4c210",
+    "docs\\evidence\\12-3-bundles\\20261027T185050641915Z-eb582a5d-backend-transport.tar.gz": "b09083d7de26531b5abb4415be01224b81bdac2a4fc5e93a0a81c5f752b849a1",
+    "docs\\evidence\\12-3-bundles\\20261027T185055155765Z-2e19f0f8-browser.index.json": "c2f1b85241d7e83bb295ed0951ca2427965c17cf3f480d147cded8e4b830bea5",
+    "docs\\evidence\\12-3-bundles\\20261027T185055155765Z-2e19f0f8-browser.tar.gz": "91c9b03772057e03f662571bd9ed5f0461f53ab0df4c6ea6666a9828c2c3c3a2",
+    "docs\\evidence\\12-3-bundles\\20261027T185654533644Z-8e91290d-tablet-build.index.json": "d8762333426b87382032487c25b4b9b00b60e9fce01935555376673b3eaa8644",
+    "docs\\evidence\\12-3-bundles\\20261027T185654533644Z-8e91290d-tablet-build.tar.gz": "f4fca3370e3850012df38d34dab162924b2f6103ea5cefc02a138c60a0e85c5d",
+    "docs\\evidence\\12-3-bundles\\20261027T185700217739Z-6588456d-tablet-browser.index.json": "a92452be692eec22ad53d202c5276afd340f2a91c0233da4636fa20c98a9ac0a",
+    "docs\\evidence\\12-3-bundles\\20261027T185700217739Z-6588456d-tablet-browser.tar.gz": "056b512830360894bc3e56078314df0c097d403c0c75fd5254b2956ef2e2cc3c",
+    "docs\\evidence\\12-3-bundles\\20261027T185945540944Z-11f8f94a-tablet-browser.index.json": "e25af2abd6629335a7991098701bfa3d594d502004ead2fe0415f684036b97c6",
+    "docs\\evidence\\12-3-bundles\\20261027T185945540944Z-11f8f94a-tablet-browser.tar.gz": "3330225da548626dedc855abe3e458bfd0c1da91725dd699f2b4fe01ac6a3f58",
+    "docs\\evidence\\12-3-bundles\\20261027T190059396568Z-2259b324-build.index.json": "257b66c219124a2188951b84a6dacc0794249cc0a897be9e9e82897e75db29be",
+    "docs\\evidence\\12-3-bundles\\20261027T190059396568Z-2259b324-build.tar.gz": "c118743c4cf316c6614d7178654f2fe85e76c3f3bf3727a22b44c955d6885fa2",
+    "docs\\evidence\\12-3-bundles\\20261027T190102042205Z-0fef7b07-verify.index.json": "b797de0993eb3f7b7d3d3101ac163946de6255bb73aeb31208f39ba784b9a02e",
+    "docs\\evidence\\12-3-bundles\\20261027T190102042205Z-0fef7b07-verify.tar.gz": "e7eac25f7032ce014b79e204544495963b8863a1f1746e0fc46b1c04bc3a4e01",
+    "docs\\evidence\\12-3-bundles\\20261027T190111954909Z-8022f7a7-gateway-build.index.json": "f66e07a93c49f3d4ceb282475ee97ca715c4005bc18643268cf03bb1806202c9",
+    "docs\\evidence\\12-3-bundles\\20261027T190111954909Z-8022f7a7-gateway-build.tar.gz": "ea51ebaf5b828d5590e5d133854641c475eee96bcb11c59840cbe8de5249dd1a",
+    "docs\\evidence\\12-3-bundles\\20261027T190117937529Z-62cd0d24-gate-check.index.json": "c8d48dec77dcc419772b67f49d574cd012a36613e757b939bfba96d37388e86b",
+    "docs\\evidence\\12-3-bundles\\20261027T190117937529Z-62cd0d24-gate-check.tar.gz": "39dfaeaf9689383fb928ad1aafec77cf14bb9b9bcc3dc54a8e6c034aed74dbf6",
+    "docs\\evidence\\12-3-bundles\\20261027T190135888667Z-54ce7f61-browser.index.json": "32e85aeecb979605eaf48d436847e3acedb510627e33a9860623ed46e4c2eb9b",
+    "docs\\evidence\\12-3-bundles\\20261027T190135888667Z-54ce7f61-browser.tar.gz": "a40c00a06d84c56cc0a5cc65fab4dfc626251f20d12b89ee2c82b327d4be6b43",
+    "docs\\evidence\\12-3-bundles\\20261027T190143642963Z-7ec999a8-gate-check.index.json": "1dc853956f7b1629738dbfae747270875d4668df6717ce16014160f42dc39b57",
+    "docs\\evidence\\12-3-bundles\\20261027T190143642963Z-7ec999a8-gate-check.tar.gz": "a407bd14a7f85282af9d6db87b4bfc86fad22020c7e8aa75284d8f6d670b1bd3",
+    "docs\\evidence\\12-3-bundles\\20261027T190148035587Z-a044943a-gateway-config.index.json": "9a373f9a151cde28944b15990ed32576933b24c0a8d4bc08e2205d80911215bf",
+    "docs\\evidence\\12-3-bundles\\20261027T190148035587Z-a044943a-gateway-config.tar.gz": "96b87628f53dea89a99a34836e09b1c2c18d78b28a8599228a5c759e6d5e8979",
+    "docs\\evidence\\12-3-bundles\\20261027T190151212433Z-bdf41816-gateway-proxy.index.json": "0814a2d78d6b6be80513da521dbee5f77bff434d6ca565e140de1489f160a259",
+    "docs\\evidence\\12-3-bundles\\20261027T190151212433Z-bdf41816-gateway-proxy.tar.gz": "af93a71bb76d36b66ab7fcb927b644ae4bb468e19850118d3f67b68c3ded6da5",
+    "docs\\evidence\\12-3-bundles\\20261027T190157277595Z-aa5a619f-probe-failed.index.json": "4c17fdd3a1dcd0f3cbbc664a5e8c7e5c05901cdc7929f4a5eb992edbb2da36ac",
+    "docs\\evidence\\12-3-bundles\\20261027T190157277595Z-aa5a619f-probe-failed.tar.gz": "c33c3b9614082bfc16bf8eb1223e4d3743f6cc9f23197c439821f31c6278d275",
+    "docs\\evidence\\12-3-bundles\\20261027T190157277595Z-aa5a619f-probe-parent-exit.index.json": "9eb6ecb3d1f98dc6e93dd9cd8050251d4d753c59376695d2a3cc12305697d495",
+    "docs\\evidence\\12-3-bundles\\20261027T190157277595Z-aa5a619f-probe-parent-exit.tar.gz": "b54739d7aa299e6f392d44de8215c13f75fca8f213f0f553312b115516687d66",
+    "docs\\evidence\\12-3-bundles\\20261027T190157277595Z-aa5a619f-probe-timeout.index.json": "899a968c2b3386fbd8dd693851254da5e2617d31816e9ec84cecf7a5c17a6c79",
+    "docs\\evidence\\12-3-bundles\\20261027T190157277595Z-aa5a619f-probe-timeout.tar.gz": "fd87a6cb325be8ed1a1ee6ad7f191d40daa351061a55d14e582135388fb3b505",
+    "docs\\evidence\\12-3-bundles\\20261027T190217469866Z-5d574672-tablet-build.index.json": "9dd98e69952856db02c5711a2161444b6b28b326981e420e6f6f4a5f273aa024",
+    "docs\\evidence\\12-3-bundles\\20261027T190217469866Z-5d574672-tablet-build.tar.gz": "274034ce6e3a76ec20e4fdca521a1e7d0d6a93f049405e27fa0b66d4173c96c2",
+    "docs\\evidence\\12-3-bundles\\20261027T190219960924Z-ede9b007-tablet-browser.index.json": "65093045c7f6dfb3f6450a2003874b4d151b09ccb44ad68c6bd5e4bfe41b5f60",
+    "docs\\evidence\\12-3-bundles\\20261027T190219960924Z-ede9b007-tablet-browser.tar.gz": "3c2256b2f4d09cd4f983cc1f1abb9221a17aeb74d230e5f5d547b4cf2750e298",
+    "docs\\evidence\\12-3-bundles\\20261027T190237489569Z-9d3c7b69-tablet-browser.index.json": "d62ebc2223d58314c009f602060dbd157831600cc06fb7dafb892a4c15368caf",
+    "docs\\evidence\\12-3-bundles\\20261027T190237489569Z-9d3c7b69-tablet-browser.tar.gz": "468740fd3a56ba24403445254cf0cdd4e3127dec9e94bb6a4b0a4cc6dc9cb91f",
+    "docs\\evidence\\12-3-bundles\\20261027T190254406174Z-c878589c-backend-transport.index.json": "6c2ac39e81b59bba34f1eeca979e8346a0003ca2d4256ce912b2db0fe2a44fc5",
+    "docs\\evidence\\12-3-bundles\\20261027T190254406174Z-c878589c-backend-transport.tar.gz": "95944098104918025f798630cd011df9692dc4da9f13069970d8c8f94a3a25fe",
+    "docs\\evidence\\12-3-bundles\\20261027T190258982753Z-1bffeae3-browser.index.json": "ba6a1892eb82a607d2b4d143d198c1f24e43ef8780521720ddb9154dbdcb0097",
+    "docs\\evidence\\12-3-bundles\\20261027T190258982753Z-1bffeae3-browser.tar.gz": "2a7ae12fccc1dc6a5b161f72db8bded9f8b8b39843f0b72daa4b6d640decd8ac",
+    "docs\\evidence\\12-3-bundles\\20261027T191324534402Z-c1c3772d-browser.index.json": "03ce4b33052946160d679a106a3cd51e9e0920a368bc1fd8ab65c2d3073c2a36",
+    "docs\\evidence\\12-3-bundles\\20261027T191324534402Z-c1c3772d-browser.tar.gz": "326ffa6f76ec0ef377f2630281be7500c8eb97850dd5bd716cf8f26e35bffe3d",
+    "docs\\evidence\\12-3-bundles\\20261027T192251010882Z-adfce32f-prepare.index.json": "550193853fe18aa5c9b664eb79963b20d55a1589ed60fa1db7252dc7004f0e5c",
+    "docs\\evidence\\12-3-bundles\\20261027T192251010882Z-adfce32f-prepare.tar.gz": "c8b702be8a025faf779e9d1602b528ade580f5ff6d665a0965f21491a2a94213",
+    "docs\\evidence\\12-3-gate-check-20261027T190117937529Z-62cd0d24.json": "16d1964dd94d7d0d272db96ce34f695d28b8d7fba55f359d8b8fda2672d0d609",
+    "docs\\evidence\\12-3-gate-check-20261027T190143642963Z-7ec999a8.json": "5de84a0638776dead49975cc8cceec82f662f57bd1135b28ff61bd23204ec3f6",
+    "docs\\evidence\\12-3-gateway-build-20261027T190111954909Z-8022f7a7.json": "589cfa70178ea9c1378036257b3cbcaeb214bad5a6085b4b67a746c246f645d7",
+    "docs\\evidence\\12-3-gateway-config-20261027T190148035587Z-a044943a.json": "b745f9d6316178c4d22e132a24549c8dad9f9135bd7dd694657a5575fec7bbc2",
+    "docs\\evidence\\12-3-gateway-proxy-20261027T190151212433Z-bdf41816.json": "fbe571c3267737b25681ec2a783138f875fc1e23fc5bcdbb033d7b59412f61b9",
+    "docs\\evidence\\12-3-main-sync-accepted-preview-before.json": "f3aa2c529210e7c75d5e1be93930b590c8337bb6be0e96ee620e754094f8d4c9",
+    "docs\\evidence\\12-3-main-sync-measurement-summary.json": "e8bdaedf1cd111d970468d1ba18776f1e7aad7cb039a1da20f2045b2bf43b675",
+    "docs\\evidence\\12-3-main-sync-node.txt": "819d20009dd2b00e903066e1a112a84b45371eefdc81ec9b9a64dd838dc8c414",
+    "docs\\evidence\\12-3-main-sync-qualification.json": "8a17fbe84c031829016c4f28fe12296d0a0338f8ac6585082beb773deda8c53c",
+    "docs\\evidence\\12-3-main-sync-runtime-before.json": "7c989105f17c62bcebac484a09701431f22aa5a0ca95c189df2e3a82f75cfdc2",
+    "docs\\evidence\\12-3-main-sync-runtime-initial.json": "1f946036f323ebe135906f228297df2685b730f17fbb76ea415e3dd98b61ae9d",
+    "docs\\evidence\\12-3-main-sync-runtime-method-initial.py": "4cf5381b3b30707942fc6fba94c6bc98f806ae4f1f162ac19fe2f4ec75d5de78",
+    "docs\\evidence\\12-3-main-sync-runtime-method.py": "79493cc6e49a63f521e4df68563c9872de04b11ef0f7ca9cb841f4eac9009a1b",
+    "docs\\evidence\\12-3-main-sync-runtime.json": "2a8edcdc14cef515e6d2bd77da92f55307a37aa8f390443e37b9d0c7772a1699",
+    "docs\\evidence\\12-3-main-sync-tooling.txt": "b79a41a014177f3e2600c4ddc3973913b6ac7f910c524ec275109b229366c1de",
+    "docs\\evidence\\12-3-measurements-20261027T190258982753Z-1bffeae3.json": "30ae1bb1081608dec5da8c71b6d354e09d49b6463a20b5027ef5f08e99b4e163",
+    "docs\\evidence\\12-3-prepare-20261027T192251010882Z-adfce32f.json": "866463238a3709b18176f31f24dbad9ca3e8e3f364c2248487002e4134c26893",
+    "docs\\evidence\\12-3-probe-failed-20261027T190157277595Z-aa5a619f.json": "77d2ea8dbe34bd75ea987ae2beebfa52d3254bb95828debd19a887a6be23ce3a",
+    "docs\\evidence\\12-3-probe-parent-exit-20261027T190157277595Z-aa5a619f.json": "42b843e966953363369b2c61da69139c5cfd4b40f610a2da9e5b74e3835bbf55",
+    "docs\\evidence\\12-3-probe-timeout-20261027T190157277595Z-aa5a619f.json": "6fc1a3c5bda39d5786c27ca00ecbe14ba1754f6ae9f3184b15ede4c17ecdb430",
+    "docs\\evidence\\12-3-real-20261027T184854728791Z-aefa9eab0a7c.json": "9796c56d1d111dc15b8469b77c2361232cf4982ed2aa856aa3f7d4bce674c644",
+    "docs\\evidence\\12-3-real-20261027T184916533209Z-5a862c89d9d2.json": "b5fa7a3f69c9a17ce2ebede20a256e5427eb59945b6e02b71e1a9fcd703eb504",
+    "docs\\evidence\\12-3-real-20261027T190102656449Z-c8da05e9865d.json": "3e5927eecd9aadda4e9ceecff5227d49a86285a6cf91004161c485a7e6eeb020",
+    "docs\\evidence\\12-3-real-20261027T192251651708Z-cee575272597.json": "d77a74344fd03e94653d5eb215270971dda03f7fb6a6118e583e21e82d3df092",
+    "docs\\evidence\\12-3-tablet-browser-20261027T185035989004Z-cba0666d.json": "e9e71adef3f520ee7f03e83a0f4c912179741176fc8176c5a5897608268c1d0b",
+    "docs\\evidence\\12-3-tablet-browser-20261027T185700217739Z-6588456d.json": "2a2d631b37f46fe79794bb0a84af5519a38bc34b57d3213a4edf73fda44242b0",
+    "docs\\evidence\\12-3-tablet-browser-20261027T185945540944Z-11f8f94a.json": "4a64dea32515963bc7d09d8f98351d2638a56c757088e795a9eddc3270777a61",
+    "docs\\evidence\\12-3-tablet-browser-20261027T190219960924Z-ede9b007.json": "85f2c30a0176da4733a11b8c994be5ca23c0a0cc4c9116f1c050b1f2d149b3f7",
+    "docs\\evidence\\12-3-tablet-browser-20261027T190237489569Z-9d3c7b69.json": "744f5b596bb95e0936dc00fc25dee08d29ba5223175d1d54c40e09d0b24c6853",
+    "docs\\evidence\\12-3-tablet-build-20261027T185033047695Z-0b9051d8.json": "e8aee1273308d6d32c3aa0918e0c10cec496c03a671414b9e569e931d74e868f",
+    "docs\\evidence\\12-3-tablet-build-20261027T185654533644Z-8e91290d.json": "5d19631fb968621a0480d1d78103184470b4b6f471194eda512f7c3fcf9ac259",
+    "docs\\evidence\\12-3-tablet-build-20261027T190217469866Z-5d574672.json": "92dcf65fdc41fa2cea2a68397e5e92022e66f71f2803e3e15437c9fc3eb3299e",
+    "docs\\evidence\\12-3-up-20261027T184852190392Z-26a9c895.json": "03215c507e2fc3dfeb09022022f968ea32543b722104612fbd4a1a409430b5cc",
+    "docs\\evidence\\12-3-verify-20261027T184915926080Z-4b2ce0e0.json": "c236a803a57e3bd77d6c334f3cdb56a22b0fadae53f5314716aba99b42d3ea4a",
+    "docs\\evidence\\12-3-verify-20261027T190102042205Z-0fef7b07.json": "22f2cf3d0f6fd4af965c3fa52e981ea681b067fd1613f3ee4d1d81d994ee613e"
+  }
+}

@@ -212,7 +212,7 @@ test.describe('synthetic day browser', () => {
     await page.getByRole('button', { name: 'Lukk planen', exact: true }).click();
     await page.getByRole('button', { name: 'Åpne plan 2031-01-02 · versjon 2', exact: true }).last().click();
     await expect(day).toContainText('Rettet fiktivt sluttsted');
-    expect(await page.evaluate(async () => ({ local: Object.keys(localStorage), session: Object.keys(sessionStorage), databases: (await indexedDB.databases()).map(d => d.name) }))).toEqual({ local: [], session: [], databases: [] });
+    expect(await page.evaluate(async () => ({ local: Object.keys(localStorage), session: Object.keys(sessionStorage), databases: (await indexedDB.databases()).map(d => d.name) }))).toEqual({ local: night ? ['ibe160-theme'] : [], session: [], databases: [] });
   });
   test('missing reporting stays unknown with source header separately labelled', async ({ page, context }) => {
     await prepare(page, context, false);

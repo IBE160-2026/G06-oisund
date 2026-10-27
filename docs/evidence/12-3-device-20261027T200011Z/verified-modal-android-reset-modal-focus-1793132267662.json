@@ -1,0 +1,87 @@
+{
+  "pixelResults": [
+    {
+      "changedArea": 1440,
+      "requiredArea": 965.46875,
+      "representative": "android-reset-modal-1",
+      "coverage": "actual same-pixel focused/unfocused perimeter change at >=3:1",
+      "cacheHit": false
+    },
+    {
+      "changedArea": 1398,
+      "requiredArea": 899.65625,
+      "representative": "android-reset-modal-0",
+      "coverage": "actual same-pixel focused/unfocused perimeter change at >=3:1",
+      "cacheHit": false
+    }
+  ],
+  "census": [
+    {
+      "id": "0",
+      "label": "Bekreft nullstilling"
+    },
+    {
+      "id": "1",
+      "label": "Behold simuleringen"
+    }
+  ],
+  "visited": [
+    "1",
+    "0"
+  ],
+  "missing": [],
+  "completedCycle": true,
+  "results": [
+    {
+      "censusId": "1",
+      "rect": {
+        "top": 582.0078125,
+        "bottom": 640.0078125,
+        "left": 300.9140625,
+        "right": 484.28125
+      },
+      "visibleOutlineArea": 1448.203125,
+      "requiredOutlineArea": 965.46875,
+      "label": "Behold simuleringen",
+      "ratio": 5.9872761849959915,
+      "width": 3,
+      "visible": true,
+      "inModal": true,
+      "onscreen": true
+    },
+    {
+      "censusId": "0",
+      "rect": {
+        "top": 582.0078125,
+        "bottom": 640.0078125,
+        "left": 126,
+        "right": 292.9140625
+      },
+      "visibleOutlineArea": 1349.484375,
+      "requiredOutlineArea": 899.65625,
+      "label": "Bekreft nullstilling",
+      "ratio": 5.9872761849959915,
+      "width": 3,
+      "visible": true,
+      "inModal": true,
+      "onscreen": true
+    },
+    {
+      "censusId": "1",
+      "rect": {
+        "top": 582.0078125,
+        "bottom": 640.0078125,
+        "left": 300.9140625,
+        "right": 484.28125
+      },
+      "visibleOutlineArea": 1448.203125,
+      "requiredOutlineArea": 965.46875,
+      "label": "Behold simuleringen",
+      "ratio": 5.9872761849959915,
+      "width": 3,
+      "visible": true,
+      "inModal": true,
+      "onscreen": true
+    }
+  ]
+}

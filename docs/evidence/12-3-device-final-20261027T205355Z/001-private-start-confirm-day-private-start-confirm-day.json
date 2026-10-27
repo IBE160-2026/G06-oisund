@@ -1,0 +1,423 @@
+{
+  "environment": {
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 800,
+      "height": 1085
+    },
+    "rootFontSize": "16px",
+    "themeClass": "",
+    "theme": "day",
+    "scope": "main"
+  },
+  "text": [
+    {
+      "label": "Nattmodus",
+      "ratio": 11.085379609993499,
+      "color": [
+        255,
+        255,
+        255,
+        1
+      ],
+      "background": [
+        23,
+        62,
+        96,
+        1
+      ]
+    },
+    {
+      "label": "Visning:",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Dag",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Privat tilgang",
+      "ratio": 9.310977521467432,
+      "color": [
+        23,
+        62,
+        96,
+        1
+      ],
+      "background": [
+        224,
+        237,
+        248,
+        1
+      ]
+    },
+    {
+      "label": "Privat arbeidsrom",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Du er logget inn.",
+      "ratio": 12.855408864593942,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        237,
+        243,
+        247,
+        1
+      ]
+    },
+    {
+      "label": "Forberedelse og planlister",
+      "ratio": 11.085379609993499,
+      "color": [
+        255,
+        255,
+        255,
+        1
+      ],
+      "background": [
+        23,
+        62,
+        96,
+        1
+      ]
+    },
+    {
+      "label": "Kontroller og rediger utkast",
+      "ratio": 11.085379609993499,
+      "color": [
+        255,
+        255,
+        255,
+        1
+      ],
+      "background": [
+        23,
+        62,
+        96,
+        1
+      ]
+    },
+    {
+      "label": "Til den åpne planen",
+      "ratio": 11.085379609993499,
+      "color": [
+        255,
+        255,
+        255,
+        1
+      ],
+      "background": [
+        23,
+        62,
+        96,
+        1
+      ]
+    },
+    {
+      "label": "Planen er bekreftet. Planlisten er oppdatert.",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Start skiftet?",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Start lagrer faktisk første start hos serveren. Valgt aktivitet og aktivitetsstatus endres ikke.",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Planlagt start:",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "05.01.2031, 10:00",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": ".",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Bekreft skiftstart",
+      "ratio": 11.085379609993499,
+      "color": [
+        255,
+        255,
+        255,
+        1
+      ],
+      "background": [
+        23,
+        62,
+        96,
+        1
+      ]
+    },
+    {
+      "label": "Tilbake uten å starte",
+      "ratio": 11.085379609993499,
+      "color": [
+        255,
+        255,
+        255,
+        1
+      ],
+      "background": [
+        23,
+        62,
+        96,
+        1
+      ]
+    },
+    {
+      "label": "Økten utløper",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "10.11.2026, 21:54",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": ".",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Logg ut",
+      "ratio": 11.085379609993499,
+      "color": [
+        255,
+        255,
+        255,
+        1
+      ],
+      "background": [
+        23,
+        62,
+        96,
+        1
+      ]
+    },
+    {
+      "label": "Tilgang opprettes av den som drifter løsningen. Bruk arbeidsrommet mens du står stille.",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Åpne fiktiv demo",
+      "ratio": 11.085379609993499,
+      "color": [
+        23,
+        62,
+        96,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "label": "Nattmodus",
+      "ratio": 11.085379609993499,
+      "height": 58
+    },
+    {
+      "label": "Forberedelse og planlister",
+      "ratio": 11.085379609993499,
+      "height": 58
+    },
+    {
+      "label": "Kontroller og rediger utkast",
+      "ratio": 11.085379609993499,
+      "height": 58
+    },
+    {
+      "label": "Til den åpne planen",
+      "ratio": 11.085379609993499,
+      "height": 58
+    },
+    {
+      "label": "Bekreft skiftstart",
+      "ratio": 11.085379609993499,
+      "height": 58
+    },
+    {
+      "label": "Tilbake uten å starte",
+      "ratio": 11.085379609993499,
+      "height": 58
+    },
+    {
+      "label": "Logg ut",
+      "ratio": 11.085379609993499,
+      "height": 58
+    }
+  ],
+  "clipping": [],
+  "unmeasured": [],
+  "overflow": 0
+}

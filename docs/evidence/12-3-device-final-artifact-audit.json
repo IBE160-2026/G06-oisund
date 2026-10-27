@@ -1,0 +1,22 @@
+{
+  "observed": "2026-10-27T21:11:15.848687+00:00",
+  "new_raw_entries_checked": 202,
+  "archive_bytes": 2216800,
+  "archive_sha256": "7e041bbb737ed665aa1b76ea58006820eeac0168c2d7d5ca17b5eabe2c8ae75c",
+  "all_archive_and_disk_bytes_match": true,
+  "historical_137_entries_and_archive_unchanged": true,
+  "source_files_match": 41,
+  "built_files_match": 6,
+  "local_links_checked": 30,
+  "scoped_password_scan": "absent",
+  "diff_whitespace": "passed",
+  "story_status": "done/accepted",
+  "next_story": "12.4 backlog",
+  "head_unchanged": "e87049b9541e6881c4af71f02fdeb8acdf6e7537",
+  "index_empty": true,
+  "main_worktree_clean": true,
+  "commits_created": 0,
+  "pushes": 0,
+  "main_merges": 0,
+  "note": "Acceptance and session documentation remain uncommitted at explicit user request; unperformed compatibility/deployment coverage stays unclaimed."
+}

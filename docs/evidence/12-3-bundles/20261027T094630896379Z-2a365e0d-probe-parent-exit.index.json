@@ -1,0 +1,10 @@
+{
+  "archive": "docs\\evidence\\12-3-bundles\\20261027T094630896379Z-2a365e0d-probe-parent-exit.tar.gz",
+  "archive_sha256": "ec000075eb0b653d839b51367206930c8f8ca6c1e35cef71a7e1b1a708964af6",
+  "entries": {
+    "record.json": "56ca33644b74818f902e94864b8480c06362f34ea305d00e6a5e4fe081701123",
+    "raw/command.log": "1e567df0ca760c2e85a6f70160cd4b65b5267836402163027d9ba9571eb4f85b",
+    "executed-inputs/scripts/verify-story123.py": "905c28ad5bf63f68e8a4f99c94ddceb4f7baa54bb8b0ad8e86358481db9ca248",
+    "executed-inputs/tmp/story123/20261027T094630896379Z-2a365e0d-parent-exit-input/parent.py": "87667465d1beeddd398e1e6a013348e17a209a87d88aa426dd8dfb44566fb899"
+  }
+}

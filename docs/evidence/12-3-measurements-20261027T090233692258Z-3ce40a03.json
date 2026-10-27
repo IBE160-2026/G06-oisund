@@ -1,0 +1,28 @@
+[
+  {
+    "test": "rendered day text, boundaries and keyboard focus meet contrast requirements in both themes",
+    "state": "day-overview-contrast-day",
+    "values": {
+      "text": 14.387145266736685,
+      "reporting": 12.855408864593942,
+      "warning": 11.885723930751332,
+      "boundary": 5.890983174353286,
+      "reportingBoundary": 9.90516774965622,
+      "focus": 21,
+      "focusWidth": 3
+    }
+  },
+  {
+    "test": "rendered day text, boundaries and keyboard focus meet contrast requirements in both themes",
+    "state": "day-overview-contrast-night",
+    "values": {
+      "text": 12.855408864593942,
+      "reporting": 10.005601690488291,
+      "warning": 11.885723930751332,
+      "boundary": 8.3661568844563,
+      "reportingBoundary": 6.511534121373142,
+      "focus": 11.45007504521487,
+      "focusWidth": 3
+    }
+  }
+]

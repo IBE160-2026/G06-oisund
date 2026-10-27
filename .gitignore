@@ -62,3 +62,6 @@ Thumbs.db
 *~
 .private-runtime/
 tmp/
+frontend/.story123-tests/
+
+frontend/dist-story123-tablet/

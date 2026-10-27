@@ -1,0 +1,46 @@
+{
+  "name": "review-night-select",
+  "kind": "native-input-affordance",
+  "crop": {
+    "x0": 1356,
+    "y0": 35,
+    "x1": 1420,
+    "y1": 83,
+    "scale": 2
+  },
+  "palette": [
+    [
+      "32,62,83",
+      3026
+    ],
+    [
+      "185,198,206",
+      29
+    ],
+    [
+      "237,243,247",
+      15
+    ],
+    [
+      "83,107,124",
+      1
+    ],
+    [
+      "135,153,165",
+      1
+    ]
+  ],
+  "background": [
+    32,
+    62,
+    83
+  ],
+  "core": [
+    185,
+    198,
+    206
+  ],
+  "corePixels": 29,
+  "ratio": 6.4156547901981735,
+  "method": "Most frequent non-background RGB differing >=30 in at least one channel, >=6 actual pixels; no contrast threshold used to select core. Glyph identity requires visual crop inspection."
+}

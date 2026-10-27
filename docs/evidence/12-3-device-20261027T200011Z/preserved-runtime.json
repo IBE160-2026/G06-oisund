@@ -1,0 +1,118 @@
+{
+  "containers": [
+    {
+      "name": "/ibe160-story12-integration-api-1",
+      "same": true
+    },
+    {
+      "name": "/ibe160-story12-integration-private-api-1",
+      "same": true
+    },
+    {
+      "name": "/ibe160-story12-integration-db-1",
+      "same": true
+    },
+    {
+      "name": "/ibe160-story12-integration-private-db-1",
+      "same": true
+    },
+    {
+      "name": "/ibe160-story122-tests-private-api-1",
+      "same": true
+    },
+    {
+      "name": "/ibe160-story122-tests-api-1",
+      "same": true
+    },
+    {
+      "name": "/ibe160-story122-tests-private-db-1",
+      "same": true
+    },
+    {
+      "name": "/ibe160-story122-tests-db-1",
+      "same": true
+    },
+    {
+      "name": "/ibe160-story121-tests-private-api-1",
+      "same": true
+    },
+    {
+      "name": "/ibe160-story121-tests-private-db-1",
+      "same": true
+    },
+    {
+      "name": "/ibe160-tablet-prep-private-api-1",
+      "same": true
+    },
+    {
+      "name": "/ibe160-tablet-prep-gateway-1",
+      "same": true
+    },
+    {
+      "name": "/ibe160-tablet-prep-access-gate-1",
+      "same": true
+    },
+    {
+      "name": "/ibe160-tablet-prep-private-db-1",
+      "same": true
+    },
+    {
+      "name": "/ibe160-private-work-private-api-1",
+      "same": true
+    },
+    {
+      "name": "/ibe160-fictional-assessment-frontend-1",
+      "same": true
+    },
+    {
+      "name": "/ibe160-fictional-assessment-api-1",
+      "same": true
+    },
+    {
+      "name": "/ibe160-private-tests-private-api-1",
+      "same": true
+    },
+    {
+      "name": "/ibe160-private-tests-private-db-1",
+      "same": true
+    },
+    {
+      "name": "/ibe160-private-work-private-db-1",
+      "same": true
+    },
+    {
+      "name": "/ibe160-fictional-assessment-db-1",
+      "same": true
+    },
+    {
+      "name": "/friendly_shockley",
+      "same": true
+    },
+    {
+      "name": "/ibe160-story123-tests-api-1",
+      "same": true
+    },
+    {
+      "name": "/ibe160-story123-tests-private-api-1",
+      "same": true
+    },
+    {
+      "name": "/ibe160-story123-tests-db-1",
+      "same": true
+    },
+    {
+      "name": "/ibe160-story123-tests-private-db-1",
+      "same": true
+    }
+  ],
+  "accepted15312_unchanged": true,
+  "accepted15312_sha256": {
+    "/": "5f8de9208810f34e5ea2201ea309f60858475ce07fc9887dd3231143f3061147",
+    "/assets/main-Cg9_S_gY.js": "45dace781f84bedac2fb638b372f18d4312c6d48876943e67d3a271f0cde4081",
+    "/assets/FictionalAssessment-DaSrzsZ_.js": "d1398af282904a9e2464c60efd8dcea53af8719833c07649b1373b369289a28d",
+    "/assets/FictionalAssessment-BDu7t5nn.css": "26a471bdcaeea8978b8a862edd0efa8f2549fc3e7eec110c6ba25554f2fd47c4",
+    "/demo": "1bb3f0137c6f4ed111b1fea9f378f65de96531de6abe04ad3339bbbe06622016",
+    "/assets/demo-BgBSr-Kx.js": "0d5ed8c93af0fd7adc27551846e6ee1d68b0178572b74853fb36825aaab5adf3",
+    "/private": "5f8de9208810f34e5ea2201ea309f60858475ce07fc9887dd3231143f3061147"
+  }
+}

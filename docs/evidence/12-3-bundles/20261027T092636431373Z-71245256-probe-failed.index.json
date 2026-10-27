@@ -1,0 +1,10 @@
+{
+  "archive": "docs\\evidence\\12-3-bundles\\20261027T092636431373Z-71245256-probe-failed.tar.gz",
+  "archive_sha256": "5b4f97ee28392ae2bb366a5660838543688d3d39e4ce6d45d38c982973fc8fdc",
+  "entries": {
+    "record.json": "9a96c0aa84e1999eceb696ad7e4dac8f2f58e5c19dab6eb5963632bc26a0bb85",
+    "raw/command.log": "4179a3abe896a906f19eef608120b679aab0578fe9adc8918c54f8e9ad9bacff",
+    "executed-inputs/scripts/verify-story123.py": "6d23dc77e3ab3050d8d77760b0ad427487eaa0c40a06202beeeeb3312da4fae6",
+    "executed-inputs/tmp/story123/20261027T092636431373Z-71245256-failed-input/probe.py": "626f2774719471fa9bc7504e6ae0648f6b469939b75181a57b85eb921cc98e16"
+  }
+}

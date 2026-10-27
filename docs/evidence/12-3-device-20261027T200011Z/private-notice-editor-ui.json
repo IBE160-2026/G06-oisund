@@ -1,0 +1,99 @@
+{
+  "url": "http://127.0.0.1:15323/private",
+  "headings": [
+    "Privat arbeidsrom",
+    "Rediger avvik"
+  ],
+  "buttons": [
+    {
+      "name": "Nattmodus",
+      "disabled": false
+    },
+    {
+      "name": "Forberedelse og planlister",
+      "disabled": false
+    },
+    {
+      "name": "Kontroller og rediger utkast",
+      "disabled": false
+    },
+    {
+      "name": "Til den åpne planen",
+      "disabled": false
+    },
+    {
+      "name": "Tilbake til dagen",
+      "disabled": false
+    },
+    {
+      "name": "Hent lagrede avvik",
+      "disabled": false
+    },
+    {
+      "name": "Tilbake til avvik",
+      "disabled": false
+    },
+    {
+      "name": "Kilden oppdatert: neste dag",
+      "disabled": true
+    },
+    {
+      "name": "Kilden oppdatert: tøm tidspunkt",
+      "disabled": false
+    },
+    {
+      "name": "Gyldig fra: neste dag",
+      "disabled": true
+    },
+    {
+      "name": "Gyldig fra: tøm tidspunkt",
+      "disabled": false
+    },
+    {
+      "name": "Gyldig til: neste dag",
+      "disabled": true
+    },
+    {
+      "name": "Gyldig til: tøm tidspunkt",
+      "disabled": false
+    },
+    {
+      "name": "Lagre avvik",
+      "disabled": false
+    },
+    {
+      "name": "Forkast ulagrede endringer",
+      "disabled": false
+    },
+    {
+      "name": "Logg ut",
+      "disabled": false
+    }
+  ],
+  "labels": [
+    "Tittel",
+    "Kort forklaring",
+    "Detaljert forklaringFIKTIV forklaring med mange ord og flere linjer.\nFIKTIV forklaring med mange ord og flere linjer.\nFIKTIV forklaring med mange ord og flere linjer.\nFIKTIV forklaring med mange ord og flere linjer.\nFIKTIV forklaring med mange ord og flere linjer.\nFIKTIV forklaring med mange ord og flere linjer.\nFIKTIV forklaring med mange ord og flere linjer.\nFIKTIV forklaring med mange ord og flere linjer.\nFIKTIV forklaring med mange ord og flere linjer.\nFIKTIV forklaring med mange ord og flere linjer.\nFIKTIV forklaring med mange ord og flere linjer.\nFIKTIV forklaring med mange ord og flere linjer.\n",
+    "LinjeomfangBestemte linjerAlle linjer",
+    "Linjer fra kilden (kommaseparert)",
+    "Kildebeskrivelse",
+    "Originalkilde (HTTP eller HTTPS)",
+    "Kilden oppdatertdato",
+    "Kilden oppdatert: klokkeslett",
+    "Gyldig fradato",
+    "Gyldig fra: klokkeslett",
+    "Gyldig tildato",
+    "Gyldig til: klokkeslett"
+  ],
+  "viewport": {
+    "width": 800,
+    "height": 1085,
+    "visualScale": 1,
+    "visualHeight": 1085
+  },
+  "status": [
+    "Du er logget inn.",
+    "Bekreftet plan åpnet. Fristen er uendret.",
+    "Ikke lagret. Linjer er påkrevd: oppgi minst en linje fra kilden eller velg Alle linjer. Oppgi en fremtidig sluttdato. Et tomt klokkeslett betyr 23:59:59 på Oslo-datoen."
+  ]
+}
