@@ -1,0 +1,18 @@
+{
+  "kind": "documentation-only",
+  "scope": "EXPERIMENTAL EXTENSION — OUTSIDE APPROVED V1 SCOPE",
+  "base_commit": "5adc6fb2c0137a3a6519d4f7ba42dd57f0e02f1c",
+  "files_examined": 15,
+  "local_links_and_manifest_paths": 41,
+  "capabilities": 4,
+  "epics": 1,
+  "stories": 4,
+  "given_when_then_criteria": 20,
+  "changes_outside_document_root": [],
+  "potential_secret_files": [],
+  "errors": [],
+  "passed": true,
+  "product_tests_run": false,
+  "physical_gps_run": false,
+  "external_commit_links_http_checked": false
+}

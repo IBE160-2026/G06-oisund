@@ -1,0 +1,30 @@
+{
+  "scope": "EXPERIMENTAL EXTENSION — OUTSIDE APPROVED V1 SCOPE",
+  "date": "2026-10-27",
+  "projectRoot": "D:/IBE160-plan-gps-speed",
+  "baseCommit": "5adc6fb2c0137a3a6519d4f7ba42dd57f0e02f1c",
+  "resolvedDefaults": {
+    "output_folder": "_bmad-output",
+    "planning_artifacts": "{project-root}/_bmad-output/planning-artifacts",
+    "spec_output_path": "{output_folder}/specs",
+    "run_folder_pattern": "spec-{slug}",
+    "document_output_language": "English",
+    "activation_steps_prepend": [],
+    "activation_steps_append": [],
+    "persistent_facts": [],
+    "on_complete": ""
+  },
+  "invocationBindings": {
+    "output_folder": "D:/IBE160-plan-gps-speed/_bmad-output/experimental-extensions/gps-speed",
+    "planning_artifacts": "D:/IBE160-plan-gps-speed/_bmad-output/experimental-extensions/gps-speed/planning",
+    "spec_output_path": "D:/IBE160-plan-gps-speed/_bmad-output/experimental-extensions/gps-speed/specs",
+    "slug": "gps-speed",
+    "spec_workspace": "D:/IBE160-plan-gps-speed/_bmad-output/experimental-extensions/gps-speed/specs/spec-gps-speed",
+    "communication_language": "Norwegian",
+    "document_output_language": "Norwegian",
+    "user_name": "Jonas",
+    "logRoot": "D:/IBE160-plan-gps-speed/_bmad-output/experimental-extensions/gps-speed/process/jonas-oisund"
+  },
+  "mode": "Headless spec; sequential epic workflow with delegated routine decisions under explicit user authorization",
+  "sharedConfigChanged": false
+}
