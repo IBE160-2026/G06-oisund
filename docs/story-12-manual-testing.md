@@ -1,5 +1,7 @@
 # Story 12.1 and 12.2 — Jonas' manual test checklist
 
+**For Jonas' current test session, use the [Norwegian sequential guide: 12.1 first, then 12.2 only if no changes are needed in 12.1](testveiledning-12-1-deretter-12-2.md).** The earlier checklist below is retained as a reference; its section order is not the required execution order.
+
 Jonas har ikke gjennomført manuell/fysisk akseptansetest av Story 12.1 eller Story 12.2. Teknisk integrasjon og automatiske tester innebærer ikke brukeraksept. Begge avventer Jonas sin testing.
 
 Both stories remain `review` / `in-review`, with owner acceptance pending. Local integration is authorized independently of acceptance. See [integration results](evidence/12-integrated-handoff.md) for the current automated results and commit references.

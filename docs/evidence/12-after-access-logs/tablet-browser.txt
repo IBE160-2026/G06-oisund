@@ -1,0 +1,14 @@
+[WebServer] (node:56976) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:23772) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 3 tests using 1 worker
+
+(node:45672) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 frontend\tests\tablet-transport.spec.ts:47:1 › tablet API base overrides the configured legacy API and logout stays effective after reload (1.5s)
+  ok 2 frontend\tests\tablet-transport.spec.ts:59:1 › session suspension hides private input and restores the same unsaved proposal (1.2s)
+  ok 3 frontend\tests\tablet-transport.spec.ts:76:1 › main server-clock expiry remains enforced with the relative tablet API (1.5s)
+
+  3 passed (9.8s)

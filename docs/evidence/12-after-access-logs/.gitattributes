@@ -1,0 +1,5 @@
+# Raw stdout keeps its original bytes, including Compose spacing and CRLF.
+*.txt -text -whitespace
+*.py text eol=lf
+*.json text eol=lf
+.gitattributes text eol=lf
