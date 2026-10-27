@@ -1,5 +1,8 @@
 # Story 12.3 — final Lenovo checks and conditional owner acceptance
 
+> Main integration,27October2026: accepted12.3 was merged without conflicts; the entire committed merge tree equals the accepted story tree. [Final checks and publication record](12-3-publication-final.md) supersede earlier no-merge/no-push checkpoint statements.12.4 remains backlog.
+
+
 > Publication follow-up,27 October2026: Jonas has now explicitly authorized committing/pushing the completed documentation and evidence, then merging12.3 into main after identity/final checks and pushing main. Earlier no-commit/no-push/no-merge statements describe the previous checkpoint.12.4 remains backlog.
 
 

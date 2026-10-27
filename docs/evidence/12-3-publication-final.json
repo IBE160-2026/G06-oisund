@@ -1,0 +1,56 @@
+{
+  "observed": "2026-10-27T21:15:59.636992+00:00",
+  "main_merge": "cd8b4405a1ef5752440e719c3f8abf1253584e11",
+  "story_commit": "1ac729c16b28ae19a0c9509022c92cffe3298aa7",
+  "accepted_tree": "ad97c9465d4e2ce0e26f91cce11297753e97e77f",
+  "merge_tree_exactly_equals_story_tree": true,
+  "product_diff_since_8ca318b": [],
+  "isolated_test_source_hashes_unchanged": 41,
+  "main_source_raw_bytes_match": 21,
+  "main_checkout_crlf_only_differences": [
+    "frontend/index.html",
+    "frontend/package-lock.json",
+    "frontend/package.json",
+    "frontend/src/PrivateActivitySelection.tsx",
+    "frontend/src/PrivateNotices.tsx",
+    "frontend/src/PrivateShiftStart.tsx",
+    "frontend/src/PrivateTimeInput.tsx",
+    "frontend/src/SelectedActivityDetails.tsx",
+    "frontend/src/activityChoiceLabel.ts",
+    "frontend/src/busValue.ts",
+    "frontend/src/dayOverview.ts",
+    "frontend/src/demo.tsx",
+    "frontend/src/draftInterpretation.ts",
+    "frontend/src/main.tsx",
+    "frontend/src/recoverOperation.ts",
+    "frontend/src/style.css",
+    "frontend/src/theme.tsx",
+    "frontend/src/useWorkdayResource.ts",
+    "frontend/src/vite-env.d.ts",
+    "frontend/tsconfig.json"
+  ],
+  "main_source_normalized_content_matches": 41,
+  "isolated_test_build_hashes_unchanged": 6,
+  "raw_evidence": {
+    "12-3-device-20261027T200011Z": {
+      "entries": 137,
+      "archive_sha256": "46e4acb5dad5b33fc837d4bf9c4dcc97df65db4f53238b83f2e45811c11e84f3",
+      "working_and_archive_bytes": "identical"
+    },
+    "12-3-device-final-20261027T205355Z": {
+      "entries": 202,
+      "archive_sha256": "7e041bbb737ed665aa1b76ea58006820eeac0168c2d7d5ca17b5eabe2c8ae75c",
+      "working_and_archive_bytes": "identical"
+    }
+  },
+  "git_committed_raw_blobs_match_indices": 339,
+  "fresh_final_tests": {
+    "typescript_no_emit": "passed",
+    "python_build_environment": "4/4",
+    "node_tooling_configuration": "2/2"
+  },
+  "runtime": "12-3-publication-runtime.json",
+  "story_status": "done/accepted",
+  "next_story": "12.4 backlog",
+  "qualification_scope": "Unchanged product tree; prior accepted story and physical tests retained. No new broad browser/backend run; no rewrite of historical477/479."
+}

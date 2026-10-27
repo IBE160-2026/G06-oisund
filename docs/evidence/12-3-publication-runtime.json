@@ -1,0 +1,124 @@
+{
+  "observed": "2026-10-27T21:14:36.561Z",
+  "mainMerge": "cd8b4405a1ef5752440e719c3f8abf1253584e11",
+  "containersUnchanged": 26,
+  "httpHashesUnchanged": [
+    {
+      "port": 15312,
+      "path": "/",
+      "sha256": "5f8de9208810f34e5ea2201ea309f60858475ce07fc9887dd3231143f3061147"
+    },
+    {
+      "port": 15312,
+      "path": "/assets/main-Cg9_S_gY.js",
+      "sha256": "45dace781f84bedac2fb638b372f18d4312c6d48876943e67d3a271f0cde4081"
+    },
+    {
+      "port": 15312,
+      "path": "/assets/FictionalAssessment-DaSrzsZ_.js",
+      "sha256": "d1398af282904a9e2464c60efd8dcea53af8719833c07649b1373b369289a28d"
+    },
+    {
+      "port": 15312,
+      "path": "/assets/FictionalAssessment-BDu7t5nn.css",
+      "sha256": "26a471bdcaeea8978b8a862edd0efa8f2549fc3e7eec110c6ba25554f2fd47c4"
+    },
+    {
+      "port": 15312,
+      "path": "/demo",
+      "sha256": "1bb3f0137c6f4ed111b1fea9f378f65de96531de6abe04ad3339bbbe06622016"
+    },
+    {
+      "port": 15312,
+      "path": "/assets/demo-BgBSr-Kx.js",
+      "sha256": "0d5ed8c93af0fd7adc27551846e6ee1d68b0178572b74853fb36825aaab5adf3"
+    },
+    {
+      "port": 15312,
+      "path": "/private",
+      "sha256": "5f8de9208810f34e5ea2201ea309f60858475ce07fc9887dd3231143f3061147"
+    },
+    {
+      "port": 15323,
+      "path": "/",
+      "sha256": "24bf3bb677146f246d3446dbab2716a74dd2954331df5a50886a27995b29a3e1"
+    },
+    {
+      "port": 15323,
+      "path": "/assets/main-mjCyzRo6.js",
+      "sha256": "e06eae81214d031fddf7ee98d2f44871f4a538ea0781e2391bf8f022cfe11021"
+    },
+    {
+      "port": 15323,
+      "path": "/assets/FictionalAssessment-DgWBF5_Z.js",
+      "sha256": "7c658dbd5e696de8b7feb29b3b34f3249d07fcd4eabddcea0a2eb7bd5b9cff03"
+    },
+    {
+      "port": 15323,
+      "path": "/assets/FictionalAssessment-Ca5gn51W.css",
+      "sha256": "d436cb47d234e7a034e820876840f7cb88c6e119b2912f0c3cb996228416e2d3"
+    },
+    {
+      "port": 15323,
+      "path": "/demo",
+      "sha256": "4b5537641378df722b5ed462add7f936fc5d6175075cbeb1a34ba665349ed747"
+    },
+    {
+      "port": 15323,
+      "path": "/assets/demo-CVYX95Ri.js",
+      "sha256": "426dd3c6fb5fa7af760bd0a18c8503c99e63f433ac8403a78427f04bc476c3ee"
+    },
+    {
+      "port": 15323,
+      "path": "/private",
+      "sha256": "24bf3bb677146f246d3446dbab2716a74dd2954331df5a50886a27995b29a3e1"
+    }
+  ],
+  "health": [
+    {
+      "port": 18323,
+      "status": 200,
+      "mode": "fictional-assessment"
+    },
+    {
+      "port": 18324,
+      "status": 200,
+      "mode": "private-local"
+    }
+  ],
+  "allBraveTargetsUnchanged": [
+    {
+      "id": "98DC3098B039D88F7BC83957BBD8AC4C",
+      "title": "Fiktiv simulering",
+      "url": "http://127.0.0.1:15323/demo"
+    },
+    {
+      "id": "1",
+      "title": "Ny fane",
+      "url": "chrome-native://newtab/"
+    },
+    {
+      "id": "3",
+      "title": "Bussjåførassistenten – privat",
+      "url": "https://app.bussassistent.com/"
+    },
+    {
+      "id": "2",
+      "title": "Bussjåførassistenten – privat",
+      "url": "https://app.bussassistent.com/"
+    }
+  ],
+  "device": {
+    "url": "http://127.0.0.1:15323/demo",
+    "theme": "night",
+    "viewport": {
+      "width": 800,
+      "height": 1085,
+      "scale": 1
+    },
+    "privateLoaded": false,
+    "asset": "/assets/main-mjCyzRo6.js",
+    "sha256": "e06eae81214d031fddf7ee98d2f44871f4a538ea0781e2391bf8f022cfe11021"
+  },
+  "method": "Read-only Docker metadata and HTTP; actual device CDP evaluate/asset fetch only, no input/focus/navigation; no browser.close, rebuild, service restart or original-tab action"
+}

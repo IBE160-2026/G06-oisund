@@ -1,0 +1,7 @@
+{
+  "exit_code": 1,
+  "error": "AssertionError: frontend/index.html",
+  "cause": "Initial audit expected raw working-copy byte identity across separate Windows checkouts.20 source files differ only by Git checkout CRLF/LF;21 match raw bytes. Full committed merge/story trees are identical.",
+  "correction": "Independently require exact tested-worktree source/build hashes, identical committed trees/product diff, and exact normalized content in main; enumerate every CRLF-only difference. No product file was edited or rebuilt.",
+  "product_failure": false
+}
