@@ -2,16 +2,21 @@
 title: '12.1 — Enforce the retained-data boundary'
 type: bugfix
 created: 2026-10-26
-status: in-review
+status: done
 route: dispatch
 review_loop_iteration: 0
 baseline_commit: 0bae54833f38dc3dbf041d54c324c220618c21da
 story_key: 12-1-enforce-the-retained-data-boundary
-owner_acceptance: pending
+owner_acceptance: accepted
+owner_acceptance_date: 2026-10-27
 technical_status: integrated-verified
 context:
   - D:/IBE160/_bmad-output/specs/spec-12-1-retained-data/implementation-plan.md
 ---
+
+## Owner acceptance — 2026-10-27
+
+Jonas explicitly approved Story 12.1 after completing the agreed manual checklist A–F without problems: “Siden dette var testene som var lagt opp til er story 12.1 godkjent.” Status is now done, owner acceptance accepted. Manual context: Jonas_desktop, Brave private window, reported reference83cdd2b; running product is62a0cf4-equivalent as verified in the current handoff. This accepts12.1 only, not12.2, later device qualification or later stories. Earlier pending-acceptance statements below describe the historical implementation/integration stages. See [manual guide](../../docs/testveiledning-12-1-deretter-12-2.md).
 
 <frozen-after-approval reason="Owner explicitly authorizes autonomous specification, implementation, testing and review; stop before manual acceptance">
 

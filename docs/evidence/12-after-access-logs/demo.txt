@@ -1,0 +1,35 @@
+
+Running 27 tests using 1 worker
+
+(node:66316) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/27] tmp\story12-tests-20261027T151450064458Z-a3c6c73e\fictional-assessment.spec.ts:28:1 › repeat normal journey, selection, cancellation, terminal unknowns and isolation
+[2/27] tmp\story12-tests-20261027T151450064458Z-a3c6c73e\fictional-assessment.spec.ts:44:1 › unavailable, immutable reopen, conflict and unresolved receipt lookup
+[3/27] tmp\story12-tests-20261027T151450064458Z-a3c6c73e\fictional-assessment.spec.ts:58:1 › unsupported/manual preserves saved work; reload is volatile; abort preserves unknowns
+[4/27] tmp\story12-tests-20261027T151450064458Z-a3c6c73e\fictional-assessment.spec.ts:66:1 › notices missing source/start, required ending, scope, lost response and independent lifetime
+[5/27] tmp\story12-tests-20261027T151450064458Z-a3c6c73e\fictional-assessment.spec.ts:76:1 › keyboard and narrow layout plus fresh evidence
+[6/27] tmp\story12-tests-20261027T151450064458Z-a3c6c73e\fictional-assessment.spec.ts:84:1 › confirmed plan stays fixed, pre-Start selection and Start cancellation return to selected activity
+[7/27] tmp\story12-tests-20261027T151450064458Z-a3c6c73e\fictional-assessment.spec.ts:96:1 › notice invalid ending/source, unavailable and conflict preserve proposals
+[8/27] tmp\story12-tests-20261027T151450064458Z-a3c6c73e\fictional-assessment.spec.ts:103:1 › night view and modal reset cancellation preserve state; confirmed reset clears unresolved state
+[9/27] tmp\story12-tests-20261027T151450064458Z-a3c6c73e\fictional-assessment.spec.ts:108:1 › rendered foreground and keyboard focus contrast in both themes
+[10/27] tmp\story12-tests-20261027T151450064458Z-a3c6c73e\fictional-assessment.spec.ts:130:1 › discard confirmation preserves draft on cancellation and outcome proposals survive navigation
+[11/27] tmp\story12-tests-20261027T151450064458Z-a3c6c73e\fictional-assessment.spec.ts:137:1 › all lifecycle cancellations restore invoking day or selected-activity controls
+[12/27] tmp\story12-tests-20261027T151450064458Z-a3c6c73e\fictional-assessment.spec.ts:148:1 › reader states and known-start future exact and past boundaries
+[13/27] tmp\story12-tests-20261027T151450064458Z-a3c6c73e\fictional-assessment.spec.ts:156:1 › faults are consumed by valid saves and remain available after closure
+[14/27] tmp\story12-tests-20261027T151450064458Z-a3c6c73e\fictional-assessment.spec.ts:160:1 › comparison text and focused native-dialog controls have contrast in both themes
+[15/27] tmp\story12-tests-20261027T151450064458Z-a3c6c73e\fictional-day.spec.ts:12:3 › keyboard save and real reload at 1440px
+[16/27] tmp\story12-tests-20261027T151450064458Z-a3c6c73e\fictional-day.spec.ts:12:3 › keyboard save and real reload at 768px
+[17/27] tmp\story12-tests-20261027T151450064458Z-a3c6c73e\fictional-day.spec.ts:39:1 › lost acknowledgement after commit preserves stable retry; unavailable reopen
+[18/27] tmp\story12-tests-20261027T151450064458Z-a3c6c73e\fictional-day.spec.ts:73:1 › HTML and malformed JSON never count as a saved acknowledgement
+[19/27] tmp\story12-tests-20261027T151450064458Z-a3c6c73e\fictional-day.spec.ts:87:3 › reopen rejects future-created response
+[20/27] tmp\story12-tests-20261027T151450064458Z-a3c6c73e\fictional-day.spec.ts:87:3 › reopen rejects reversed response
+[21/27] tmp\story12-tests-20261027T151450064458Z-a3c6c73e\fictional-day.spec.ts:87:3 › reopen rejects expired response
+[22/27] tmp\story12-tests-20261027T151450064458Z-a3c6c73e\fictional-day.spec.ts:87:3 › reopen rejects invalid-lifetime response
+[23/27] tmp\story12-tests-20261027T151450064458Z-a3c6c73e\fictional-day.spec.ts:87:3 › reopen rejects nonsense response
+[24/27] tmp\story12-tests-20261027T151450064458Z-a3c6c73e\fictional-day.spec.ts:87:3 › reopen rejects impossible-date response
+[25/27] tmp\story12-tests-20261027T151450064458Z-a3c6c73e\fictional-day.spec.ts:87:3 › reopen rejects wrong-id response
+[26/27] tmp\story12-tests-20261027T151450064458Z-a3c6c73e\fictional-day.spec.ts:109:1 › 410 clears previously acknowledged state and permits new example
+[27/27] tmp\story12-tests-20261027T151450064458Z-a3c6c73e\fictional-day.spec.ts:125:1 › known expiry clears displayed day without another request
+  27 passed (21.3s)

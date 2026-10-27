@@ -1,0 +1,19 @@
+....
+.
+.
+
+.
+...synthetic failure
+synthetic failure
+
+................
+EXIT=1 SOURCE_UNCHANGED=True LOG=C:\Users\Jonas\AppData\Local\Temp\tmphtb1g5uc\tmp\test-run
+.
+EXIT=2 SOURCE_UNCHANGED=True LOG=C:\Users\Jonas\AppData\Local\Temp\tmp13n6r5tv\tmp\test-run
+.
+EXIT=124 SOURCE_UNCHANGED=True LOG=C:\Users\Jonas\AppData\Local\Temp\tmp_8aidwvj\tmp\test-run
+.
+----------------------------------------------------------------------
+Ran 29 tests in 0.471s
+
+OK

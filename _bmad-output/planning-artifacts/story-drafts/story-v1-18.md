@@ -28,4 +28,7 @@ implementationStarted: true
 
 Sources: [active epics](../epics.md), [PRD](../prds/prd-IBE160-2026-09-21/prd.md), [architecture](../architecture/architecture-IBE160-2026-09-23/ARCHITECTURE-SPINE.md), [EXPERIENCE](../ux-designs/ux-IBE160-2026-09-22/EXPERIENCE.md), [DESIGN](../ux-designs/ux-IBE160-2026-09-22/DESIGN.md). The canonical acceptance block is identical to this planning copy. Promote/refine one story in implementation-artifacts when implementation begins; do not mark it done because this file exists.
 
-Implementation and executed evidence: [12.3 specification](../../implementation-artifacts/spec-12-3-tablet-pc.md), [handoff](../../../docs/evidence/12-3-handoff.md), [manual checklist](../../../docs/story-12-3-manual-testing.md). Physical qualification remains pending; 12.1/12.2 also remain in review.
+Implementation and executed evidence: [12.3 specification](../../implementation-artifacts/spec-12-3-tablet-pc.md), [handoff](../../../docs/evidence/12-3-handoff.md), [manual checklist](../../../docs/story-12-3-manual-testing.md). Physical qualification remains pending; 12.1/12.2 are done/accepted by Jonas (27 October 2026).
+
+
+Current-main reconciliation: [specification](../../implementation-artifacts/spec-12-3-current-main-sync.md) and [fresh integration handoff](../../../docs/evidence/12-3-main-sync-handoff.md). Preserve accepted 12.1/12.2 transport and demo feedback. Theme also covers the dedicated private tablet entry; new isolated automation is separate from earlier checkpoints and actual-device qualification. 12.3 remains review/pending.

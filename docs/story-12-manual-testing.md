@@ -1,5 +1,13 @@
 # Story 12.1 and 12.2 — Jonas' manual test checklist
 
+**Endelig eieraksept 27. oktober 2026:** Jonas har nå uttrykkelig godkjent både Story12.1 og Story12.2, inkludert de kommenterte12.2-rettingene, og bedt om commit/push. Begge er `done` / `owner_acceptance: accepted`. Tidligere ventende-/delakseptstatuser nedenfor er historikk. Godkjenningen bygger på Jonas sin manuelle test og beslutning; automatiske tester er separat evidens. Ingen senere story eller ytterligere fysisk enhetskvalifikasjon inngår.
+
+**Ny demo-retting 27. oktober:** Kjørende frontend15312 er nå bygd fra arbeidskopi basert på `c7a6170beb360b7541c5aeaced805ff78db73f3e` med avgrensede demoendringer. Bygg og37 nettlesertester bestod; [endringer, versjonshash og ny retest](evidence/12-2-manual-feedback-fixes.md). De eldre versjonsvurderingene nedenfor er historikk for det tidligere bygget; privat/backendkode er uendret.
+
+**Gjeldende akseptstatus 27. oktober 2026:** Jonas har uttrykkelig godkjent Story 12.1 etter bestått manuell sjekkliste A–F på Jonas_desktop, Brave privat vindu (oppgitt testreferanse `83cdd2b`). Story 12.1 er `done` / `owner_acceptance: accepted`. For Story12.2 er K bestått og alle ukommenterte deler uttrykkelig godkjent. Storyen som helhet er fortsatt ikke godkjent; de kommenterte rettingene avventer ny manuell test. Eldre utsagn nedenfor om ventende testing av begge storyer er historikk og er erstattet av denne godkjenningen. Automatiske tester innebærer ikke brukeraksept; godkjenningen bygger på Jonas sin manuelle test og uttrykkelige beslutning. Ingen bredere nettbrettkvalifikasjon eller senere story godkjennes her.
+
+**For Jonas' current test session, use the [Norwegian sequential guide: 12.1 first, then 12.2 only if no changes are needed in 12.1](testveiledning-12-1-deretter-12-2.md).** The earlier checklist below is retained as a reference; its section order is not the required execution order.
+
 Jonas har ikke gjennomført manuell/fysisk akseptansetest av Story 12.1 eller Story 12.2. Teknisk integrasjon og automatiske tester innebærer ikke brukeraksept. Begge avventer Jonas sin testing.
 
 Both stories remain `review` / `in-review`, with owner acceptance pending. Local integration is authorized independently of acceptance. See [integration results](evidence/12-integrated-handoff.md) for the current automated results and commit references.

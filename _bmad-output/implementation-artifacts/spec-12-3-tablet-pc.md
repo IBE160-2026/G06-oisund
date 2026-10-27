@@ -11,6 +11,9 @@ owner_acceptance: pending
 context: []
 ---
 
+> Current-main update, 27 October 2026: this document retains the original approved checkpoint and historical verification. The [current reconciliation spec](spec-12-3-current-main-sync.md) supersedes its old no-main-integration restriction and pending 12.1/12.2 assertions: both dependencies are now done/accepted by Jonas. It authorizes full main integration and root commits/push on the existing story branch. Story 12.3 remains review/pending; use the [new handoff](../../docs/evidence/12-3-main-sync-handoff.md) for fresh integrated-build evidence. Previous runs and physical pilot observations do not qualify this version.
+
+
 <frozen-after-approval reason="Owner explicitly requests autonomous implementation, verification and isolated local commits, without stopping after a plan">
 
 ## Intent

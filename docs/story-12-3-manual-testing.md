@@ -1,6 +1,6 @@
 # Story 12.3 — Jonas' manual checklist
 
-**Owner acceptance: pending.** Jonas has not performed manual/physical acceptance of 12.1 or 12.2; both remain in review. 12.3 also remains in review until his explicit approval. Automated desktop results do not qualify physical Lenovo Pad / Android / Brave use.
+**Story 12.3 owner acceptance: pending.** Jonas accepted 12.1 and 12.2 on 27 October 2026; both are done/accepted. 12.3 remains in review until his explicit approval. Automated desktop results do not qualify physical Lenovo Pad / Android / Brave use.
 
 ## Start this isolated build
 
@@ -29,10 +29,10 @@ If the verified preview is already running, use it directly. For a later rebuild
 - [ ] In `/demo`, open the partial example, enter a long Norwegian duty/bus value, save, confirm plan and inspect a selected activity before Start. Selection must not start work. Use the next-save fault controls for unavailable/conflict: proposal and comparison stay readable, and failure never claims saved.
 - [ ] Use keyboard Tab/Shift+Tab in access, editor and maintenance. Open Start/end/reset confirmation; cancel or Escape where offered. Expect a visible focus ring, no keyboard escape from the native reset modal and return to the visible invoking control. Open notice maintenance from preparation both with and without an open plan, then return: focus returns to that preparation button.
 - [ ] Use 200% text and long Norwegian values at narrow/wide PC sizes, then portrait/landscape on the actual tablet when access is available. All content and actions remain reachable without horizontal page scrolling or clipped critical information. Check native field/checkbox indicators and touch targets on the actual device.
-- [ ] Explicitly Start the simulation, save one outcome and leave another unregistered, then cancel and confirm ending. Expect a read-only recap, the saved outcome and unknown/unregistered remainder. Theme changes never record an outcome. Reset removes simulated content while preserving the theme.
+- [ ] Explicitly Start the simulation, save one activity status and leave another unregistered, then cancel and confirm ending. Expect a read-only recap, the saved activity status and unknown/unregistered remainder. Theme changes never record an activity status. Reset removes simulated content while preserving the theme.
 - [ ] Log out of `/private`, use Back and reload. Private content stays unavailable until login; theme remains. Application localStorage contains only `ibe160-theme=day|night` after an explicit theme choice, and no private fields; unrelated preexisting keys are not deleted.
 
-Record pass/fail with build, device/browser version, orientation, zoom/text settings, steps and observed differences. Record Jonas' explicit approval separately. Manual acceptance of 12.1/12.2 still uses [their own checklist](story-12-manual-testing.md).
+Record pass/fail with build, device/browser version, orientation, zoom/text settings, steps and observed differences. Record Jonas' explicit approval separately. 12.1/12.2 are accepted; [their own checklist](story-12-manual-testing.md) remains historical evidence.
 
 ## Requirement-to-evidence map
 
@@ -42,7 +42,7 @@ Record pass/fail with build, device/browser version, orientation, zoom/text sett
 | Long Norwegian text/enlargement/tablet/PC layout | Explicit 100%/200% text cases at 800/1440px in both themes, literal long synthetic values, actual overflow and focus visibility checks. Physical target qualification remains separate. |
 | Persist theme without private data | Exact allowlisted storage assertions across reset/reload/routes/logout; invalid/denied storage tests; existing demo no-network/GPS/private-persistence regression. |
 | Preserve current contracts and scope | Actual private API/PostgreSQL fixtures, independent expected behaviors and regression checks; no backend/schema/parser/retention changes, Auto, wake, GPS or 12.4 work. |
-| Meaningful executed evidence and limitations | [Execution and review report](evidence/12-3-handoff.md) and unique `12-3-*` manifests/measurements; original failures retained. Historical 477/479 is unchanged, not a fresh complete broad pass. |
+| Meaningful executed evidence and limitations | [Current-main integration report](evidence/12-3-main-sync-handoff.md) and unique `12-3-*` manifests/measurements; original failures retained. Historical 477/479 is unchanged, not a fresh complete broad pass. |
 
 ## Repeat automated checks
 
@@ -55,3 +55,20 @@ Record pass/fail with build, device/browser version, orientation, zoom/text sett
 Browser mode starts its own strict-port preview if none is explicitly managed. When using the verified `serve` preview above, set `$env:STORY123_EXTERNAL_SERVER='1'` for browser checks. Clear this process-scoped value afterward. The runner preserves source/test/build hashes, command exits, raw UTF-8 logs, per-state measurements and original failures. Consult the execution report for the exact final regression files actually run.
 
 Native checkbox boundaries/checkmarks are measured from actual Edge PNGs. Individual native calendar/time-picker, select-arrow and disclosure-marker pixels, OS/browser zoom, assistive technology and actual hardware remain unmeasured and require the manual record. Computed text/control measurements do not establish those passes.
+
+
+## Accepted-main feedback and dedicated tablet entry
+
+Use a fresh hard reload of the current build. Historical 12.3 test results precede this integration and do not qualify the new version.
+
+- [ ] In the demo editor, save twice and verify that each confirmation is visible beside the form. Exercise unavailable, conflict and lost acknowledgement: values remain readable in the same readonly form while locked; compare labelled current/proposed fields and revision, then recover the original receipt. Controls use `Simulert lagringsresultat` and `Manuell aktivitetsstatus`.
+- [ ] For the dedicated private tablet entry, run the separate checks below. They build `deploy/tablet/index.html`/`src/tablet.tsx` into `frontend/dist-story123-tablet` and own a strict loopback listener on 18483 during the check. Verify the actual theme changes, reload/logout persistence and no private browser storage. The relative `/private-api` transport is mocked in these browser checks; this is not a live proxy, HTTPS or physical-device pass.
+
+```powershell
+& $py scripts/verify-story123.py tablet-build
+& $py scripts/verify-story123.py tablet-browser
+& $py scripts/verify-story123.py backend-transport
+node --test scripts/test-tablet-configuration.mjs
+```
+
+The standard `build` mode clears inherited `VITE_PRIVATE_API_BASE`; it still targets its own private API 18324. The dedicated build explicitly sets `/private-api` and an intentionally unusable legacy base to prove relative-base priority. Invalid explicit-base checks evaluate the actual configuration prelude and fail closed. The separately built tablet output leaves the standard demo/private output intact. Current gateway/HTTPS transport checks and fresh full matrix outcomes are recorded separately in the integration report.

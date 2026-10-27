@@ -1,0 +1,20 @@
+# Historical locally-managed alternative. The current pilot uses a remotely-
+# managed tunnel and --token-file; see docs/tablet-tunnel-setup.md. Do not apply
+# this YAML or run tunnel login/create for the current dashboard workflow.
+# Store any separately approved completed local configuration OUTSIDE Git.
+tunnel: REPLACE-TUNNEL-UUID
+credentials-file: C:/Users/Jonas/.cloudflared/REPLACE-TUNNEL-UUID.json
+metrics: 127.0.0.1:18083
+no-autoupdate: true
+loglevel: error
+ingress:
+  - hostname: bus.YOUR-DOMAIN.invalid
+    service: http://127.0.0.1:18081
+    originRequest:
+      httpHostHeader: bus.YOUR-DOMAIN.invalid
+      access:
+        required: true
+        teamName: REPLACE-ZERO-TRUST-TEAM
+        audTag:
+          - REPLACE-PRIVATE-APPLICATION-AUD
+  - service: http_status:404

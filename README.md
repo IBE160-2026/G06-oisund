@@ -20,7 +20,7 @@ The account-switch follow-up binds private editor requests to the displayed acco
 
 ## Run the fictional assessment
 
-For the repeatable, no-login simulation with separate screens and controlled failures, use the [Story 12.2 launch, reset and test guide](docs/fictional-assessment.md). It runs without a backend and stores only fictional state in memory. Story 12.1 notice admission/retry is integrated locally; use the [combined manual test checklist](docs/story-12-manual-testing.md) and [fresh integration evidence](docs/evidence/12-integrated-handoff.md). Both stories await manual/physical testing by Jonas; technical integration is not user acceptance.
+For the repeatable, no-login simulation with separate screens and controlled failures, use the [Story 12.2 launch, reset and test guide](docs/fictional-assessment.md). It runs without a backend and stores only fictional state in memory. Story 12.1 notice admission/retry is integrated locally; use the [combined manual test checklist](docs/story-12-manual-testing.md) and [fresh integration evidence](docs/evidence/12-integrated-handoff.md). Jonas accepted Story 12.1 and 12.2 on 27 October 2026; both are done/accepted. Physical-device qualification remains separate.
 
 Requires Docker Desktop with Linux containers and Compose v2. Start Docker Desktop first. Run these commands from this repository root in PowerShell:
 
@@ -287,4 +287,7 @@ This story is implemented on its separate story branch and awaits Jonas' manual 
 
 Rendered text/control/focus and native checkbox measurements, long Norwegian text, keyboard return and 100%/200% text are qualified separately from physical Lenovo Pad / Android / Brave testing. Actual hardware, OS/browser zoom and owner acceptance remain pending. No overall WCAG claim or complete 12.4 user-flow qualification is made.
 
-Use [12.3 startup and manual checklist](docs/story-12-3-manual-testing.md) and [executed results/limits](docs/evidence/12-3-handoff.md). The dedicated environment is frontend 15323, APIs 18323/18324 and Compose `ibe160-story123-tests`, with separate synthetic data. The integrated 12.1/12.2 environment 15312/18312/18313 remains separate; both stories still await Jonas' manual/physical acceptance. Their historical 477/479 broad result and later successful affected checks are unchanged.
+Use [12.3 startup and manual checklist](docs/story-12-3-manual-testing.md) and [executed results/limits](docs/evidence/12-3-handoff.md). The dedicated environment is frontend 15323, APIs 18323/18324 and Compose `ibe160-story123-tests`, with separate synthetic data. The integrated 12.1/12.2 environment 15312/18312/18313 remains separate; Jonas has accepted both stories (done/accepted). Their historical 477/479 broad result and later successful affected checks are unchanged.
+
+
+Current-main reconciliation (27 October 2026): Story 12.3 incorporates full accepted main `74849ff`, including validated relative tablet transport and accepted local save/conflict/recovery feedback. The dedicated tablet entry now uses the same persistent theme provider. See the [current integration handoff](docs/evidence/12-3-main-sync-handoff.md) for fresh evidence and limitations; the earlier 12.3 handoff is a historical checkpoint. Dedicated tablet browser checks use only a separately built private entry and loopback port 18483; they do not activate external access or qualify physical hardware. Story 12.3 remains review/pending and 12.4 remains backlog.

@@ -1,0 +1,120 @@
+
+Running 86 tests using 1 worker
+
+(node:49204) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-access.spec.ts:29:3 › keyboard login, ownership presentation and logout at 768px
+[2/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-access.spec.ts:29:3 › keyboard login, ownership presentation and logout at 1440px
+[3/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-access.spec.ts:66:1 › unreachable logout locks immediately, survives reload and settles before reads
+[4/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-access.spec.ts:86:1 › lost logout acknowledgement retries an already revoked session
+[5/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-access.spec.ts:97:1 › server expiry removes presentation on revalidation
+[6/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-access.spec.ts:105:1 › confirmed logout clears another open tab immediately
+[7/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-access.spec.ts:117:1 › known fixed deadline clears in-memory presentation
+[8/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-access.spec.ts:131:1 › late login response cannot restore a locked presentation
+[9/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-access.spec.ts:148:1 › committed delayed login settles before another tab can confirm logout
+[10/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-access.spec.ts:184:1 › window switching preserves unfinished login input
+[11/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-crossday-notices.spec.ts:28:1 › one account incident appears on two days and survives original parent purge
+[12/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-crossday-notices.spec.ts:59:1 › unsaved proposal and lost accepted original command survive changing days and original day expiry
+[13/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-crossday-notices.spec.ts:74:1 › open reader automatically hides expiry and maintenance exposes distinct read-only history
+[14/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-crossday-notices.spec.ts:90:1 › pending original notice recovery remains mounted when the displayed plan expires
+[15/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-crossday-notices.spec.ts:105:36 › enlarged Day account register ending feedback is readable
+[16/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-crossday-notices.spec.ts:105:36 › enlarged Night account register ending feedback is readable
+[17/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-notice-reader.spec.ts:49:1 › shared and independent candidates filter exact lines and calendar gaps without changing saved state
+[18/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-notice-reader.spec.ts:76:1 › saved all-lines notice remains visible with no known plan lines
+[19/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-notice-reader.spec.ts:89:154 › complete contradictory empty-selected payload hides prior reader results
+[20/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-notice-reader.spec.ts:89:154 › complete contradictory requested-line-absent payload hides prior reader results
+[21/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-notice-reader.spec.ts:89:154 › complete contradictory extra-match payload hides prior reader results
+[22/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-notice-reader.spec.ts:89:154 › complete contradictory missing-unmatched payload hides prior reader results
+[23/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-notice-reader.spec.ts:89:154 › complete contradictory false-uncertainty payload hides prior reader results
+[24/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-notice-reader.spec.ts:89:154 › complete contradictory all-scope-unmatched payload hides prior reader results
+[25/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-notice-reader.spec.ts:107:1 › dirty editor and chosen activity survive reader navigation
+[26/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-notice-reader.spec.ts:116:1 › zero matching differs from zero stored and terminal reader remains read only
+[27/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-notice-reader.spec.ts:129:1 › pending maintenance command survives consulting and original recovery remains reachable
+[28/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-notice-reader.spec.ts:139:60 › held reader success cannot restore account private facts
+[29/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-notice-reader.spec.ts:139:60 › held reader success cannot restore session private facts
+[30/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-notice-reader.spec.ts:139:60 › held reader success cannot restore plan private facts
+[31/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-notice-reader.spec.ts:161:1 › bounded late read becomes unavailable and cannot publish its late success
+[32/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-notice-reader.spec.ts:169:45 › 503 hides successful results, distinguishes empty and recovers
+[33/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-notice-reader.spec.ts:169:45 › malformed hides successful results, distinguishes empty and recovers
+[34/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-notice-reader.spec.ts:177:1 › superseded filter replies cannot replace current results
+[35/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-notice-reader.spec.ts:188:83 › Day 390 enlarged reader keyboard and complete facts
+[36/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-notice-reader.spec.ts:188:83 › Day 768 enlarged reader keyboard and complete facts
+[37/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-notice-reader.spec.ts:188:83 › Day 1024 enlarged reader keyboard and complete facts
+[38/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-notice-reader.spec.ts:188:83 › Day 1440 enlarged reader keyboard and complete facts
+[39/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-notice-reader.spec.ts:188:83 › Night 390 enlarged reader keyboard and complete facts
+[40/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-notice-reader.spec.ts:188:83 › Night 768 enlarged reader keyboard and complete facts
+[41/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-notice-reader.spec.ts:188:83 › Night 1024 enlarged reader keyboard and complete facts
+[42/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-notice-reader.spec.ts:188:83 › Night 1440 enlarged reader keyboard and complete facts
+[43/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-notice-recovery-integration.spec.ts:20:37 › notice committed behind HTML 409 and typed-looking lookup rejection retains one original effect
+[44/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-notice-recovery-integration.spec.ts:20:37 › notice committed behind HTML 422 and typed-looking lookup rejection retains one original effect
+[45/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-notice-recovery-integration.spec.ts:20:37 › notice committed behind HTML 429 and typed-looking lookup rejection retains one original effect
+[46/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-notice-recovery-integration.spec.ts:48:1 › unaccepted create past its ending is never dispatched again and proposal can be discarded
+[47/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-notice-recovery-integration.spec.ts:65:1 › lost accepted source check resolves after automatic ending without reopening writes
+[48/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-notice-recovery-integration.spec.ts:81:50 › held reader response cannot restart already elapsed notice validity
+[49/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-notice-recovery-integration.spec.ts:81:50 › held maintenance response cannot restart already elapsed notice validity
+[50/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-recovery.spec.ts:27:1 › before acceptance repeated retries require status and preserve immutable command through suspension
+[51/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-recovery.spec.ts:51:1 › a real request deadline before backend acceptance or forwarding retains the original command for status-first retry
+[52/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-recovery.spec.ts:75:1 › fresh save preflight failure sends no write POST and retains unconfirmed input after restoration
+[53/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-recovery.spec.ts:90:1 › absent bus receipt authorization race resends the exact original command and cannot overwrite another window
+[54/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-recovery.spec.ts:116:52 › lost acceptance with HTML proxy 409 never establishes rejection or redispatches
+[55/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-recovery.spec.ts:116:52 › lost acceptance with HTML proxy 422 never establishes rejection or redispatches
+[56/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-recovery.spec.ts:116:52 › lost acceptance with HTML proxy 404 never establishes rejection or redispatches
+[57/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-recovery.spec.ts:116:52 › lost acceptance with HTML proxy 410 never establishes rejection or redispatches
+[58/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-recovery.spec.ts:116:52 › lost acceptance with HTML proxy 413 never establishes rejection or redispatches
+[59/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-recovery.spec.ts:116:52 › lost acceptance with HTML proxy 503 never establishes rejection or redispatches
+[60/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-recovery.spec.ts:151:1 › historical acceptance compares latest revision and adoption reads again before discarding proposal
+[61/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-recovery.spec.ts:172:67 › comparison adoption preserves proposal when current draft is regressed
+[62/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-recovery.spec.ts:172:67 › comparison adoption preserves proposal when current draft is retimed
+[63/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-recovery.spec.ts:172:67 › comparison adoption preserves proposal when current draft is contradictory
+[64/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-recovery.spec.ts:190:1 › typed rejection preserves editable input while failed current read after acceptance stays unknown
+[65/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-recovery.spec.ts:202:1 › real API stop and start retains uncertain accepted command and recovers once
+tmp\story12-tests-20261027T152516149301Z-40082d4a\private-recovery.spec.ts:202:1 › real API stop and start retains uncertain accepted command and recovers once
+ Container ibe160-story12-integration-private-api-1 Stopping 
+ Container ibe160-story12-integration-private-api-1 Stopped 
+
+ Container ibe160-story12-integration-private-db-1 Waiting 
+ Container ibe160-story12-integration-private-db-1 Healthy 
+ Container ibe160-story12-integration-private-api-1 Starting 
+ Container ibe160-story12-integration-private-api-1 Started 
+ Container ibe160-story12-integration-private-db-1 Waiting 
+ Container ibe160-story12-integration-private-api-1 Waiting 
+ Container ibe160-story12-integration-private-db-1 Healthy 
+ Container ibe160-story12-integration-private-api-1 Healthy 
+
+[66/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-recovery.spec.ts:223:1 › notice save check and manual end recover with status first and reader refresh shows only saved facts
+[67/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-recovery.spec.ts:269:1 › notice edits replace a previous saved message with explicit unsaved status
+[68/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-recovery.spec.ts:287:1 › dirty notice survives actual API suspension and same-session restoration before explicit save
+tmp\story12-tests-20261027T152516149301Z-40082d4a\private-recovery.spec.ts:287:1 › dirty notice survives actual API suspension and same-session restoration before explicit save
+ Container ibe160-story12-integration-private-api-1 Stopping 
+ Container ibe160-story12-integration-private-api-1 Stopped 
+
+ Container ibe160-story12-integration-private-db-1 Waiting 
+ Container ibe160-story12-integration-private-db-1 Healthy 
+ Container ibe160-story12-integration-private-api-1 Starting 
+ Container ibe160-story12-integration-private-api-1 Started 
+ Container ibe160-story12-integration-private-api-1 Waiting 
+ Container ibe160-story12-integration-private-db-1 Waiting 
+ Container ibe160-story12-integration-private-db-1 Healthy 
+ Container ibe160-story12-integration-private-api-1 Healthy 
+
+[69/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-recovery.spec.ts:330:82 › narrow enlarged Day notice recovery long-message controls remain accessible
+[70/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-recovery.spec.ts:330:82 › narrow enlarged Night notice recovery long-message controls remain accessible
+[71/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-recovery.spec.ts:330:82 › narrow enlarged Day outcome recovery long-message controls remain accessible
+[72/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-recovery.spec.ts:330:82 › narrow enlarged Night outcome recovery long-message controls remain accessible
+[73/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-recovery.spec.ts:354:68 › enlarged 390px Day recovery preserves contrast and keyboard focus without overflow
+[74/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-recovery.spec.ts:354:68 › enlarged 390px Night recovery preserves contrast and keyboard focus without overflow
+[75/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-recovery.spec.ts:354:68 › enlarged 768px Day recovery preserves contrast and keyboard focus without overflow
+[76/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-recovery.spec.ts:354:68 › enlarged 768px Night recovery preserves contrast and keyboard focus without overflow
+[77/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-retention.spec.ts:14:1 › lost issuance response retains proposal and sends no create until explicit retry
+[78/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-retention.spec.ts:29:1 › expired creation admission rejects without receipt and releases retained proposal
+[79/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-retention.spec.ts:45:1 › extremely slow device clock does not overflow session or draft expiry timers
+[80/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-retention.spec.ts:59:1 › fixed device clock clears a short real server session deadline without revalidation
+[81/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-retention.spec.ts:72:39 › fixed device clock clears expired saved manual draft fields
+[82/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-retention.spec.ts:72:39 › fixed device clock clears expired saved imported draft fields
+[83/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-retention.spec.ts:102:37 › fixed device clock removes notice readable history only at storage retention
+[84/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-retention.spec.ts:102:37 › fixed device clock removes notice editor only at storage retention
+[85/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-retention.spec.ts:127:1 › fixed device clock removes reader payload at independent notice storage retention
+[86/86] tmp\story12-tests-20261027T152516149301Z-40082d4a\private-retention.spec.ts:143:1 › fixed device clock clears a confirmed plan at its known server deadline without revalidation
+  86 passed (9.1m)

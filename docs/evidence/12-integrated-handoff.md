@@ -1,5 +1,19 @@
 # Story 12.1 + 12.2 local integration — 27 October 2026
 
+**Endelig eieraksept 27. oktober 2026:** Jonas har nå uttrykkelig godkjent både Story12.1 og Story12.2, inkludert de kommenterte12.2-rettingene, og bedt om commit/push. Begge er `done` / `owner_acceptance: accepted`. Tidligere ventende-/delakseptstatuser nedenfor er historikk. Godkjenningen bygger på Jonas sin manuelle test og beslutning; automatiske tester er separat evidens. Ingen senere story eller ytterligere fysisk enhetskvalifikasjon inngår.
+
+**Ny demo-retting 27. oktober:** Kjørende frontend15312 er nå bygd fra arbeidskopi basert på `c7a6170beb360b7541c5aeaced805ff78db73f3e` med avgrensede demoendringer. Bygg og37 nettlesertester bestod; [endringer, versjonshash og ny retest](12-2-manual-feedback-fixes.md). De eldre versjonsvurderingene nedenfor er historikk for det tidligere bygget; privat/backendkode er uendret.
+
+**Gjeldende akseptstatus 27. oktober 2026:** Jonas har uttrykkelig godkjent Story 12.1 etter bestått manuell sjekkliste A–F på Jonas_desktop, Brave privat vindu (oppgitt testreferanse `83cdd2b`). Story 12.1 er `done` / `owner_acceptance: accepted`. For Story12.2 er K bestått og alle ukommenterte deler uttrykkelig godkjent. Storyen som helhet er fortsatt ikke godkjent; de kommenterte rettingene avventer ny manuell test. Eldre utsagn nedenfor om ventende testing av begge storyer er historikk og er erstattet av denne godkjenningen. Automatiske tester innebærer ikke brukeraksept; godkjenningen bygger på Jonas sin manuelle test og uttrykkelige beslutning. Ingen bredere nettbrettkvalifikasjon eller senere story godkjennes her.
+
+## Current handoff (supersedes version/runtime references in the historical record below)
+
+Main checked at `83cdd2b344aa8ec717d42cd3ecd055daad97a222`; running Story12 build and latest functional evidence are from `62a0cf4f67f2ce1ea2b0da78c76858a10d7adf11`. Later commits change only documentation/logs. Fresh source, runtime, served asset and evidence hash checks confirm equivalence; no rebuild or functional rerun was needed. See [current version decision and results](12-after-access-merge.md) and [Norwegian sequential test guide](../testveiledning-12-1-deretter-12-2.md). Use port15312 for12.1/12.2; port15323 is separate12.3. The original results/references below remain historical.
+
+Jonas sin manuelle/fysiske akseptansetest av Story 12.1 og 12.2 gjenstår. Automatiske tester innebærer ikke brukeraksept.
+
+## Historical integration record
+
 Jonas har ikke gjennomført manuell/fysisk akseptansetest av Story 12.1 eller Story 12.2. Teknisk integrasjon og automatiske tester innebærer ikke brukeraksept. Begge avventer Jonas sin testing.
 
 Both stories are integrated in local main. Required affected checks pass after the recorded corrections; the broad-run and rerun results are distinguished below. Both stories retain review/in-review and pending owner acceptance. [Manual checklist and startup](../story-12-manual-testing.md).

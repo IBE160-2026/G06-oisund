@@ -94,7 +94,7 @@ def stop_owned_tree(process):
 
 
 def manifest():
-    names = subprocess.check_output(['git', 'ls-files', '--cached', '--others', '--exclude-standard', 'frontend', 'backend', 'scripts', 'compose.story123.yaml'], cwd=ROOT, text=True).splitlines()
+    names = subprocess.check_output(['git', 'ls-files', '--cached', '--others', '--exclude-standard', 'frontend', 'backend', 'scripts', 'compose.story123.yaml', 'compose.tablet.yaml', 'deploy', '.dockerignore'], cwd=ROOT, text=True).splitlines()
     return {name: hashlib.sha256((ROOT/name).read_bytes()).hexdigest() for name in names if (ROOT/name).is_file()}
 
 
@@ -108,8 +108,8 @@ def execute(command, cwd=ROOT, env=None, inputs=(), timeout=3600):
     archives.mkdir(parents=True, exist_ok=True)
     archive_path = archives/f'{STAMP}-{MODE}.tar.gz'
     snapshot_inputs = list(inputs) + [Path(__file__)]
-    if MODE == 'browser':
-        snapshot_inputs += [ROOT/'scripts/prepare-story123-tests.mjs', *(ROOT/'frontend/dist').rglob('*')]
+    if MODE in ('browser', 'tablet-browser'):
+        snapshot_inputs += [ROOT/'scripts/prepare-story123-tests.mjs', *(ROOT/('frontend/dist-story123-tablet' if MODE == 'tablet-browser' else 'frontend/dist')).rglob('*')]
     snapshots = {}
     for source in snapshot_inputs:
         if not source.is_file(): continue
@@ -118,7 +118,7 @@ def execute(command, cwd=ROOT, env=None, inputs=(), timeout=3600):
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(source, target)
         snapshots[relative.as_posix()] = hashlib.sha256(target.read_bytes()).hexdigest()
-    record = {'mode': MODE, 'project': PROJECT, 'revision': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(), 'command': command, 'started': datetime.now(timezone.utc).isoformat(), 'source_sha256_before': before, 'executed_input_sha256': actual, 'timeout_seconds': timeout, 'owner_acceptance': 'pending'}
+    record = {'mode': MODE, 'project': PROJECT, 'revision': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(), 'command': command, 'started': datetime.now(timezone.utc).isoformat(), 'source_sha256_before': before, 'executed_input_sha256': actual, 'timeout_seconds': timeout, 'tested_story': '12.3', 'owner_acceptance': 'pending', 'dependency_acceptance': {'12.1': 'accepted', '12.2': 'accepted'}}
     record['executed_input_snapshots'] = snapshots
     record['durable_bundle'] = str(archive_path.relative_to(ROOT))
     log = RUN/'command.log'
@@ -138,18 +138,18 @@ def execute(command, cwd=ROOT, env=None, inputs=(), timeout=3600):
     except (OSError, subprocess.TimeoutExpired) as error:
         record.update(exit_code=124 if isinstance(error, subprocess.TimeoutExpired) else 1, failure_type=type(error).__name__)
     after = manifest()
-    built = {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest() for p in (ROOT/'frontend/dist').rglob('*') if p.is_file()}
-    build_source = {name: value for name, value in before.items() if name.startswith('frontend/src/') or name in ['frontend/package.json', 'frontend/package-lock.json', 'frontend/vite.config.ts', 'frontend/tsconfig.json', 'frontend/index.html', 'frontend/demo.html']}
-    identity_path = ROOT/'.private-runtime/story123-build.json'
-    if MODE == 'build' and record['exit_code'] == 0 and before == after:
+    built = {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest() for p in (ROOT/('frontend/dist-story123-tablet' if MODE.startswith('tablet-') else 'frontend/dist')).rglob('*') if p.is_file()}
+    build_source = {name: value for name, value in before.items() if name.startswith('frontend/src/') or name in ['frontend/package.json', 'frontend/package-lock.json', 'frontend/vite.config.ts', 'frontend/tsconfig.json', 'frontend/index.html', 'frontend/demo.html', 'frontend/vite.story123-tablet.config.ts', 'deploy/tablet/index.html', 'deploy/tablet/Dockerfile', '.dockerignore', 'compose.tablet.yaml']}
+    identity_path = ROOT/('.private-runtime/story123-tablet-build.json' if MODE.startswith('tablet-') else '.private-runtime/story123-build.json')
+    if MODE in ('build', 'tablet-build') and record['exit_code'] == 0 and before == after:
         identity_path.parent.mkdir(exist_ok=True)
         identity_path.write_text(json.dumps({'source': build_source, 'built': built}), encoding='utf-8')
     record['build_sha256'] = built
-    if MODE == 'browser':
+    if MODE in ('browser', 'tablet-browser'):
         identity = json.loads(identity_path.read_text(encoding='utf-8')) if identity_path.exists() else {}
         record['tested_build_matches_current_source'] = identity == {'source': build_source, 'built': built}
     record.update(ended=datetime.now(timezone.utc).isoformat(), source_sha256_after=after, source_unchanged=before == after, executed_inputs_unchanged=actual == hashes(), log=str(log.relative_to(ROOT)), log_sha256=hashlib.sha256(log.read_bytes()).hexdigest())
-    if MODE == 'browser' and (RUN/'report.json').exists():
+    if MODE in ('browser', 'tablet-browser') and (RUN/'report.json').exists():
         report = json.loads((RUN/'report.json').read_text(encoding='utf-8'))
         record['browser_stats'] = report.get('stats')
         record['browser_report_sha256'] = hashlib.sha256((RUN/'report.json').read_bytes()).hexdigest()
@@ -215,12 +215,19 @@ def integration():
     for old, new in [('ibe160-story12-integration', PROJECT), ('compose.story12-integration.yaml', 'compose.story123.yaml'), ('15312','15323'), ('18312','18323'), ('18313','18324'), ('/run/secrets/integration_password','/run/secrets/story123_password'), ('integration_fictional','story123_fictional'), ('integration_private','story123_private'), ('story12-integration-postgres-password','story123-postgres-password'), ('story12-manual-credentials','story123-manual-credentials'), ('synthetic-story12-manual','synthetic-story123-manual'), ('12-integration-real-', '12-3-real-')]:
         source = source.replace(old, new)
     source = source.replace('ROOT = Path(__file__).resolve().parents[1]', 'ROOT = Path(' + repr(str(ROOT)) + ')')
+    # Main's verifier text describes an earlier acceptance checkpoint. Qualify
+    # only this disposable 12.3 translation; preserve historical source/results.
+    acceptance_line = next(line for line in source.splitlines() if line.startswith('ACCEPTANCE = '))
+    source = source.replace(acceptance_line, "ACCEPTANCE = 'Jonas har godkjent Story 12.1 og 12.2 (done/accepted). Dette er teknisk verifikasjon av Story 12.3; eieraksept av 12.3 og fysisk kvalifikasjon gjenstår.'")
+    source = source.replace("'owner_acceptance': 'pending',", "'tested_story': '12.3', 'owner_acceptance': 'pending', 'dependency_acceptance': {'12.1': 'accepted', '12.2': 'accepted'},")
+    source = source.replace('Integration containers retained; owner acceptance pending.', 'Story 12.3 containers retained; 12.3 owner acceptance pending; 12.1/12.2 accepted.')
+
     actual = RUN/'integration.py'
     actual.write_text(source, encoding='utf-8')
     execute([sys.executable, str(actual), MODE], inputs=[actual])
 
 
-def browser():
+def browser(tablet=False):
     subprocess.run([shutil.which('node'), 'scripts/prepare-story123-tests.mjs'], cwd=ROOT, check=True)
     target = ROOT/'frontend/.story123-tests'
     captures = RUN/'captures'
@@ -229,10 +236,11 @@ def browser():
     for path in target.glob('*.ts'):
         source = path.read_text(encoding='utf-8').replace('../docs/evidence', '../tmp/story123/'+STAMP+'/captures')
         path.write_text(source, encoding='utf-8')
-    config = ROOT/'frontend/playwright.story123.config.ts'
-    args = sys.argv[2:] or ['tablet-pc.spec.ts', 'tablet-pc-private.spec.ts']
+    config_name = 'playwright.story123-tablet.config.ts' if tablet else 'playwright.story123.config.ts'
+    config = ROOT/'frontend'/config_name
+    args = sys.argv[2:] or (['tablet-transport.spec.ts'] if tablet else ['tablet-pc.spec.ts', 'tablet-pc-private.spec.ts'])
     env = dict(os.environ, COMPOSE_PROJECT_NAME=PROJECT, STORY123_OUTPUT_DIR=str(RUN/'results'), STORY123_REPORT=str(RUN/'report.json'))
-    execute([shutil.which('npx.cmd') or shutil.which('npx'), 'playwright', 'test', '--config=playwright.story123.config.ts', *args], ROOT/'frontend', env, [config, *target.glob('*.ts')])
+    execute([shutil.which('npx.cmd') or shutil.which('npx'), 'playwright', 'test', '--config='+config_name, *args], ROOT/'frontend', env, [config, *target.glob('*.ts')])
 
 
 def preview():
@@ -248,9 +256,28 @@ def preview():
     else: module.serve_preview()
 
 
+def build_environment(tablet=False):
+    # Relative API must be explicit only for the dedicated proxied tablet build.
+    # Inherited tablet shell state must never redirect ordinary loopback builds.
+    env = dict(os.environ, VITE_PRIVATE_API='http://127.0.0.1:18324', VITE_FICTIONAL_API='http://127.0.0.1:18323')
+    env.pop('VITE_PRIVATE_API_BASE', None)
+    if tablet:
+        env.update(VITE_PRIVATE_API_BASE='/private-api', VITE_PRIVATE_API='https://legacy.invalid/forbidden')
+    return env
+
+
+def backend_transport():
+    # A disposable container in our own project; test module mocks DB access and
+    # never starts application lifespan, migrates, seeds or calls a real account.
+    command = ['docker', 'compose', '-p', PROJECT, '-f', 'compose.story123.yaml', 'run', '--rm', '--no-deps', '-e', 'PYTHONDONTWRITEBYTECODE=1', '--entrypoint', 'python', 'private-api', '-m', 'pytest', '-p', 'no:cacheprovider', '-q', 'tests/test_tablet_transport.py']
+    execute(command, inputs=[ROOT/'compose.story123.yaml', ROOT/'backend/tests/test_tablet_transport.py'], timeout=180)
+
+
 if __name__ == '__main__':
     if MODE in ('up', 'verify', 'prepare'): integration()
-    elif MODE == 'build': execute([shutil.which('npm.cmd') or shutil.which('npm'), 'run', 'build'], ROOT/'frontend', dict(os.environ, VITE_PRIVATE_API='http://127.0.0.1:18324', VITE_FICTIONAL_API='http://127.0.0.1:18323'))
-    elif MODE == 'browser': browser()
+    elif MODE == 'build': execute([shutil.which('npm.cmd') or shutil.which('npm'), 'run', 'build'], ROOT/'frontend', build_environment())
+    elif MODE == 'tablet-build': execute([shutil.which('npx.cmd') or shutil.which('npx'), 'vite', 'build', '--config', 'vite.story123-tablet.config.ts'], ROOT/'frontend', build_environment(True), [ROOT/'frontend/vite.story123-tablet.config.ts', ROOT/'deploy/tablet/index.html'])
+    elif MODE in ('browser', 'tablet-browser'): browser(MODE == 'tablet-browser')
+    elif MODE == 'backend-transport': backend_transport()
     elif MODE in ('serve', 'stop-preview'): preview()
-    else: raise SystemExit('Use up|verify|prepare|build|browser [specs/filters]|serve|stop-preview')
+    else: raise SystemExit('Use up|verify|prepare|build|tablet-build|browser [specs/filters]|tablet-browser|backend-transport|serve|stop-preview')

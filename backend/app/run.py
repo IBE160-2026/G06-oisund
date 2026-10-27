@@ -11,4 +11,4 @@ if __name__ == '__main__':
         from .storage import migrate
         target = 'app.main:app'
     migrate()
-    uvicorn.run(target, host='0.0.0.0', port=8000, access_log=False)
+    uvicorn.run(target, host='0.0.0.0', port=8000, access_log=False, proxy_headers=False)

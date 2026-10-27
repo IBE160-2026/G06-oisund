@@ -1,0 +1,24 @@
+{
+  "status": "REVIEW_ONLY_NOT_AN_API_PAYLOAD_NOT_APPLIED",
+  "management": "remote_dashboard",
+  "tunnel_name": "bussassistent-pilot",
+  "tunnel_id": "REPLACE_AFTER_OWNER_CREATES_INACTIVE_TUNNEL",
+  "published_application": {
+    "hostname": "app.bussassistent.com",
+    "path": null,
+    "service": "http://127.0.0.1:18081",
+    "httpHostHeader": "app.bussassistent.com",
+    "access": {
+      "required": true,
+      "teamName": "bussassistent",
+      "audTag": ["11605406740b9e66f584e9bfc11d3db52f18585de0708c6d5b2741d0268fbbfa"]
+    }
+  },
+  "fallback": {"service": "http_status:404"},
+  "private_ip_cidr_routes": [],
+  "other_published_hostnames": [],
+  "dns": "PROXIED_CNAME_TO_THIS_TUNNEL_ONLY_AFTER_EXPLICIT_OWNER_APPROVAL",
+  "runtime": "portable foreground process with --token-file; loopback metrics 127.0.0.1:18083",
+  "service_installation": false,
+  "autostart": false
+}

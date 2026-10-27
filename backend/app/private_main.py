@@ -96,7 +96,7 @@ async def validation_error(request, error):
 
 
 def cookie(response, name, value, age):
-    response.set_cookie(name, value, max_age=age, httponly=True, secure=False, samesite='strict', path='/')
+    response.set_cookie(name, value, max_age=age, httponly=True, secure=auth.secure_cookies(), samesite='strict', path='/')
 
 
 def presentation(row):
@@ -152,7 +152,7 @@ def profile(identifier: UUID, request: Request):
 def logout(request: Request, response: Response):
     with database() as conn:
         conn.execute('DELETE FROM sessions WHERE token_hash=%s', (auth.digest(request.cookies.get(auth.SESSION, '')),))
-    response.delete_cookie(auth.SESSION, path='/', httponly=True, samesite='strict')
+    response.delete_cookie(auth.SESSION, path='/', httponly=True, secure=auth.secure_cookies(), samesite='strict')
     return {'revoked': True}
 
 

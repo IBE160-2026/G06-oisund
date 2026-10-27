@@ -1,0 +1,29 @@
+{
+  "status": "REVIEW_ONLY_NOT_APPLIED_ACTIVATION_REQUIRES_OWNER_APPROVAL",
+  "management": "remote_dashboard",
+  "tunnel_id": "4aecb83e-cf83-4112-8f76-9a564252e1fe",
+  "identity_source": "owner_supplied_uuid_not_independently_read_back",
+  "published_application": {
+    "hostname": "app.bussassistent.com",
+    "path": null,
+    "service": "http://127.0.0.1:18081",
+    "httpHostHeader": "app.bussassistent.com",
+    "access": {
+      "required": true,
+      "teamName": "bussassistent",
+      "audTag": ["11605406740b9e66f584e9bfc11d3db52f18585de0708c6d5b2741d0268fbbfa"]
+    }
+  },
+  "dns_proposal": {
+    "type": "CNAME",
+    "name": "app.bussassistent.com",
+    "target": "4aecb83e-cf83-4112-8f76-9a564252e1fe.cfargotunnel.com",
+    "proxied": true
+  },
+  "fallback": {"service": "http_status:404"},
+  "private_ip_cidr_routes": [],
+  "other_published_hostnames": [],
+  "metrics": "127.0.0.1:18083",
+  "service_installation": false,
+  "autostart": false
+}

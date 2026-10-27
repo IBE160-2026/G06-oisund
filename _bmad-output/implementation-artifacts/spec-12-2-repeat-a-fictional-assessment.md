@@ -2,17 +2,24 @@
 title: '12.2 — Repeat a fictional assessment'
 type: feature
 created: 2026-10-26
-status: in-review
+status: done
 route: dispatch
 review_loop_iteration: 0
-baseline_commit: 0bae54833f38dc3dbf041d54c324c220618c21da
+baseline_commit: c7a6170beb360b7541c5aeaced805ff78db73f3e
+original_baseline_commit: 0bae54833f38dc3dbf041d54c324c220618c21da
 story_key: 12-2-repeat-a-fictional-assessment
-owner_acceptance: pending
+owner_acceptance: accepted
+owner_acceptance_date: 2026-10-27
 integration_status: verified
 technical_status: integrated-verified
+manual_acceptance: accepted-after-correction-retest
 context:
   - D:/IBE160/_bmad-output/specs/spec-12-2-fictional-assessment/implementation-plan.md
 ---
+
+## Final owner acceptance — 2026-10-27
+
+After passing K, accepting the uncommented parts, and receiving the targeted correction retest steps, Jonas explicitly approved: “Godkjent. Commit og push.” Story12.2 is now done/accepted, including the corrected feedback, readable recovery and terminology. Earlier pending statements below are historical. Story12.1 was separately accepted. No later story or physical tablet qualification is implied. Final tested source and served asset hashes were rechecked before commit; the37-case regression result still applies unchanged.
 
 <frozen-after-approval reason="Owner authorizes autonomous planning, implementation, testing and review; latest instruction defers final notice API verification until 12.1 contract stabilizes">
 
@@ -102,3 +109,35 @@ All retained findings were patched and reinspected by their original reviewers. 
 Jonas har ikke gjennomført manuell/fysisk akseptansetest av Story 12.1 eller Story 12.2. Teknisk integrasjon og automatiske tester innebærer ikke brukeraksept. Begge avventer Jonas sin testing.
 
 Jonas explicitly authorizes separate local commits, integration in order 12.1 then 12.2, automated verification and local main merge before manual acceptance. Earlier no-commit/no-merge instructions describe the historical run and are superseded for this integration. Status remains review/in-review. Current steps and limits: [manual checklist](../../docs/story-12-manual-testing.md).
+
+## Manual feedback correction round — 2026-10-27
+
+Owner reports K passed and explicitly accepts all uncommented parts of12.2. The story as a whole is NOT accepted. Original implementation baseline is retained in original_baseline_commit; baseline_commit now identifies the full Git revision before this narrow correction round. Existing status/docs edits for accepted12.1 are preserved.
+
+Goal: make simulated save results and recovery understandable at the original form, without changing accepted simulation/persistence semantics. Files: frontend/src/FictionalAssessment.tsx (local status, readable current/proposed fields, retained read-only controls, activity-status terminology), frontend/src/fictional-assessment.css (responsive cards/status in Day/Night), frontend/tests/fictional-assessment.spec.ts (retain existing behavioral assertions under renamed labels, add viewport/form preservation/recovery checks). No private backend, adapter protocol, ordinary/pilot/12.3 runtime, or database reset changes.
+
+Acceptance checks: Given draft/message editing, when save succeeds or is unavailable, then nearby status distinguishes saved from unsaved. Given conflict/lost response, when saving, then original labelled fields remain in place and visible/read-only; no JSON replaces the form; readable comparison or original receipt lookup appears at the actions. Given cancel/adopt/failed lookup/successful lookup, then preserve original identity, proposal and no-duplicate semantics. Given activity registration, then use the private app's aktivitetsstatus wording. Given both themes and narrow/wide viewports, then status is visible and comparison readable without horizontal overflow.
+
+Verification: production build, all simulation/actual-fictional browser cases on dedicated15312 with network/storage/GPS denial retained for simulation, scoped new rendered checks at390/1440 in Day/Night for draft and message; inspect fresh screenshots; verify all other container identities unchanged. No rerun of unrelated455 private backend tests is required for demo-only changes. User retests only commented corrections; accepted K and uncommented parts are preserved as manual evidence, with technical regression checks covering overlap.
+
+### Manual correction review triage
+
+All three layers launched before collection; root verified each finding before grouping. All route to direct patches; no product ambiguity or deferred work. Original implementation agent is not active, so root applies patches. No user acceptance is inferred.
+
+| Finding | Verdict / route | Verification and disposition |
+|---|---|---|
+| Blind1 activity message follows selection | medium / patch | Global message persisted across selection; clear at every activity switch. |
+| Blind2 return to saved selection | low / patch | Unconditional unsaved text contradicted equality; derive saved status on equality. |
+| Blind3 opening scroll/focus | medium / patch | Message effect also ran on screen opening; explicit action events now exclusively drive status focus/scroll. |
+| Blind4 recovery focus | medium / patch | Disabled save could lose keyboard focus; focus stable nearby status and keep subsequent recovery actions in DOM order. |
+| Blind5 repeated identical result | medium / patch | Same text skipped effect; increment feedback event and replace live-region content on every action. |
+| Blind6 comparison timestamps | low / patch | Raw datetime-local values appeared; format day/month/year/time with explicit Oslo context. |
+| Blind7 activity feedback coverage | medium / patch | Draft/notice matrix omitted activity feedback; add narrow activity save/cancel/switch/restoration assertions. |
+| Edge1 activity message identity | medium / patch | Same verified root cause as Blind1; preserve activity-specific status. |
+| Edge2 saved-value restoration | low / patch | Same verified root cause as Blind2; derived equality handles restoration. |
+| Edge3 repeated failure visibility | medium / patch | Same verified root cause as Blind5; explicit feedback events cover repeated attempts. |
+| Verification1 missing activity announcement test | medium / patch | Preverified mutation removing activity feedback survived old assertions; new test requires status text and viewport on save/cancel, plus change/switch handling. |
+
+### Final correction verification
+
+Final production build passed in12-integrated-build-20261027T173125952708Z-13d9498f.json. All37 simulation/fictional browser cases passed in29.7s with source/executed hashes unchanged (12-integrated-demo-20261027T173131583172Z-4d165b81.json). All three reviewers reinspected and retained no finding. Runtime source/served asset audit and all23 container metadata comparisons passed. See docs/evidence/12-2-manual-feedback-fixes.md. Status remains in-review/review and owner_acceptance pending: K and uncommented parts are accepted, the corrected comments await owner retest. User instruction overrides generic automatic done/commit workflow steps; only session logs are committed locally. No push.

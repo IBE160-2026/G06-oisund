@@ -1,0 +1,15 @@
+{
+  "accepted": false,
+  "startup_failure_preserved": "tmp/story12-refresh/tablet-browser-startup-failure.log",
+  "build_command": "VITE_PRIVATE_API_BASE=/private-api VITE_PRIVATE_API=http://127.0.0.1:18313 npx vite build --outDir tmp/tablet-refresh-dist (cwd frontend)",
+  "result": "passed",
+  "test_sha256": "F48D87E66A2A6F00E104C721B0982B77849C60253D4177E7E4139580C64CD53C",
+  "build_log_sha256": "6F93255D29BDC6B87A8888C786564AD4D242C6FEEC9FE6B688C26EC03386EEEC",
+  "passed": 3,
+  "config_sha256": "DF4D921A56DEF638093014B57EA43E5F42245FCB050AEAF3EF6EB12F969309BE",
+  "config": "import base from '../playwright.tablet.config';\nexport default { ...base, testDir: '../tests', outputDir: '../../tmp/story12-refresh/tablet-results', webServer: { ...base.webServer, cwd: 'D:/IBE160/frontend', command: 'npx vite preview --outDir tmp/tablet-refresh-dist --port 18481 --host 127.0.0.1 --strictPort' } };\r\n\r\n",
+  "test_command": "npx --prefix frontend playwright test --config=frontend/tmp/tablet-refresh.config.ts",
+  "log_sha256": "D56B0BB49D3CB86577AF4C7622F24C60BF965E2979A8C3BBD0CC15AADD8D7596",
+  "revision": "62a0cf4f67f2ce1ea2b0da78c76858a10d7adf11",
+  "initial_wrong_build_failures": 3
+}

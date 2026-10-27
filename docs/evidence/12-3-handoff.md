@@ -1,5 +1,8 @@
 # Story 12.3 — implementation and verification handoff
 
+> Historical pre-main-sync checkpoint. Its outcomes, original commands and earlier pending-acceptance statements describe that version. Jonas subsequently accepted 12.1 and 12.2 (done/accepted) on 27 October 2026; only 12.3 remains pending. See the [current-main integration handoff](12-3-main-sync-handoff.md) for new sources and fresh verification. No old pass or physical observation is relabelled as qualification of the integrated build.
+
+
 Technical verification is complete: production build, 34/34 task browser cases, 37/37 selected post-review regression cases and 74/74 actual API/database controls passed. All retained findings from three review layers are closed. Owner acceptance is pending. Jonas has not manually/physically accepted Story 12.1, 12.2 or 12.3. This report distinguishes desktop automation from actual-device evidence.
 
 ## Git and isolation
@@ -98,4 +101,4 @@ Node's generator self-test ran at e66d80f; that file is unchanged by 9329311. Ro
 
 ## Remaining acceptance
 
-Jonas must run [the short manual checklist](../story-12-3-manual-testing.md) and explicitly accept 12.3. His manual/physical acceptance of 12.1/12.2 is still pending; their checklist and historical results remain unchanged. Actual Lenovo Pad/Android/Brave/mobile-network, native picker/marker pixels, OS/browser zoom and assistive-technology qualification remain open. Loopback 15323 is ready on this PC; no external route was activated. 12.4 remains backlog. E10-A4 persistence and E11-A4 visible-invoker focus are technically resolved, with no owner approval inferred.
+Jonas must run [the short manual checklist](../story-12-3-manual-testing.md) and explicitly accept 12.3. 12.1/12.2 were subsequently accepted by Jonas on 27 October 2026; their checklist and historical results remain preserved. Actual Lenovo Pad/Android/Brave/mobile-network, native picker/marker pixels, OS/browser zoom and assistive-technology qualification remain open. Loopback 15323 is ready on this PC; no external route was activated. 12.4 remains backlog. E10-A4 persistence and E11-A4 visible-invoker focus are technically resolved, with no owner approval inferred.

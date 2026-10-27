@@ -1,0 +1,5 @@
+# Local test image only; first build the separate prepared runtime image.
+FROM ibe160-tablet-access-gate:11-6
+USER 0
+RUN pip install --no-cache-dir pytest==9.0.3 iniconfig==2.3.1 packaging==26.3 pluggy==1.7.0 Pygments==2.21.0
+USER 10001:10001

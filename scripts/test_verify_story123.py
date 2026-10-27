@@ -16,6 +16,21 @@ runner = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(runner)
 
 
+class BuildEnvironmentTests(unittest.TestCase):
+    def test_standard_build_clears_inherited_relative_tablet_api(self):
+        with patch.dict(os.environ, {'VITE_PRIVATE_API_BASE': '/private-api', 'VITE_PRIVATE_API': 'https://wrong.invalid'}):
+            env = runner.build_environment()
+        self.assertNotIn('VITE_PRIVATE_API_BASE', env)
+        self.assertEqual(env['VITE_PRIVATE_API'], 'http://127.0.0.1:18324')
+        self.assertEqual(env['VITE_FICTIONAL_API'], 'http://127.0.0.1:18323')
+
+    def test_dedicated_tablet_build_has_explicit_relative_base(self):
+        with patch.dict(os.environ, {'VITE_PRIVATE_API_BASE': 'https://wrong.invalid'}):
+            env = runner.build_environment(True)
+        self.assertEqual(env['VITE_PRIVATE_API_BASE'], '/private-api')
+        self.assertEqual(env['VITE_PRIVATE_API'], 'https://legacy.invalid/forbidden')
+
+
 class OwnedExecutionTests(unittest.TestCase):
     def run_command(self, mode, command, timeout, inputs):
         runner.MODE = mode

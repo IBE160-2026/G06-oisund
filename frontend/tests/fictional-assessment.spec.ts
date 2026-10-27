@@ -1,7 +1,7 @@
 import { test, expect, type Page } from '@playwright/test';
 const button = (p: Page, name: string) => p.getByRole('button', { name, exact: true });
 async function edit(p: Page) { await button(p, 'Åpne delvis tekst-PDF-eksempel').click(); }
-async function fault(p: Page, value: string) { if (!await p.getByLabel('Utfall', { exact: true }).isVisible()) await p.getByText('Simuler feil ved neste lagring', { exact: true }).click(); await p.getByLabel('Utfall', { exact: true }).selectOption(value); }
+async function fault(p: Page, value: string) { if (!await p.getByLabel('Simulert lagringsresultat', { exact: true }).isVisible()) await p.getByText('Simuler feil ved neste lagring', { exact: true }).click(); await p.getByLabel('Simulert lagringsresultat', { exact: true }).selectOption(value); }
 async function start(p: Page) { await button(p, 'Lagre forslag i simuleringen').click(); await button(p, 'Se lagret dag før start').click(); await button(p, 'Bekreft plan').click(); await button(p, 'Start arbeidsdagen').click(); await button(p, 'Bekreft Start').click(); }
 test.beforeEach(async ({ page }) => {
   await page.addInitScript(() => {
@@ -28,9 +28,9 @@ test.afterEach(async ({ page }) => { expect(await page.evaluate(() => (window as
 test('repeat normal journey, selection, cancellation, terminal unknowns and isolation', async ({ page }) => {
   for (let repeat = 0; repeat < 2; repeat++) {
     await edit(page); await page.getByLabel('Fysisk buss').fill('Fiktiv 42'); await start(page);
-    await button(page, 'Velg Linje 100 · Tur A').click(); await expect(page.getByText(/Utfall: Ikke registrert/)).toBeVisible();
-    await page.getByLabel('Foreslått utfall').selectOption('Fullført manuelt'); await button(page, 'Lagre utfall').click(); await button(page, 'Til dagsoversikten').click();
-    await expect(page.locator('li').filter({ has: page.getByRole('heading', { name: 'Linje 100 · Tur A', exact: true }) })).toContainText('Utfall: Fullført manuelt'); await button(page, 'Avslutt arbeidsdagen').click(); await expect(page.getByText(/Lagrede kjente utfall: 1 av 3/)).toBeVisible(); await button(page, 'Avbryt bekreftelse').click();
+    await button(page, 'Velg Linje 100 · Tur A').click(); await expect(page.getByText(/Aktivitetsstatus: Ikke registrert/)).toBeVisible();
+    await page.getByLabel('Manuell aktivitetsstatus').selectOption('Fullført manuelt'); await button(page, 'Lagre aktivitetsstatus').click(); await button(page, 'Til dagsoversikten').click();
+    await expect(page.locator('li').filter({ has: page.getByRole('heading', { name: 'Linje 100 · Tur A', exact: true }) })).toContainText('Aktivitetsstatus: Fullført manuelt'); await button(page, 'Avslutt arbeidsdagen').click(); await expect(page.getByText(/Lagrede aktivitetsstatuser: 1 av 3/)).toBeVisible(); await button(page, 'Avbryt bekreftelse').click();
     await button(page, 'Avslutt arbeidsdagen').click(); await button(page, 'Bekreft avsluttet').click();
     await expect(page.getByRole('heading', { name: /skrivebeskyttet/ })).toBeVisible();
     await expect(page.getByText('Pause: Ikke registrert / ukjent', { exact: true })).toBeVisible(); await expect(page.getByText('Linje 100 · Tur A: Fullført manuelt', { exact: true })).toBeVisible();
@@ -83,10 +83,10 @@ test('keyboard and narrow layout plus fresh evidence', async ({ page }) => {
 });
 test('confirmed plan stays fixed, pre-Start selection and Start cancellation return to selected activity', async ({ page }) => {
   await edit(page); await button(page, 'Lagre forslag i simuleringen').click(); await button(page, 'Se lagret dag før start').click(); await button(page, 'Bekreft plan').click();
-  await button(page, 'Velg Linje 100 · Tur A').click(); await expect(button(page, 'Lagre utfall')).toBeDisabled(); await expect(button(page, 'Forrige aktivitet')).toBeDisabled();
+  await button(page, 'Velg Linje 100 · Tur A').click(); await expect(button(page, 'Lagre aktivitetsstatus')).toBeDisabled(); await expect(button(page, 'Forrige aktivitet')).toBeDisabled();
   await button(page, 'Start arbeidsdagen').click(); await button(page, 'Avbryt Start').click(); await expect(button(page, 'Start arbeidsdagen')).toBeFocused();
   await button(page, 'Start arbeidsdagen').click(); await button(page, 'Bekreft Start').click();
-  await page.getByLabel('Foreslått utfall').selectOption('Fullført manuelt'); await button(page, 'Avbryt utfallsforslag').click(); await expect(page.getByLabel('Foreslått utfall')).toHaveValue('Ikke registrert');
+  await page.getByLabel('Manuell aktivitetsstatus').selectOption('Fullført manuelt'); await button(page, 'Avbryt ulagret aktivitetsstatus').click(); await expect(page.getByLabel('Manuell aktivitetsstatus')).toHaveValue('Ikke registrert');
   await button(page, 'Neste aktivitet').click(); await button(page, 'Neste aktivitet').click(); await expect(button(page, 'Neste aktivitet')).toBeDisabled();
   await button(page, 'Utkast').click(); await page.getByLabel('Vognløp').fill('Ny plan'); await button(page, 'Lagre forslag i simuleringen').click(); await button(page, 'Se lagret dag før start').click();
   await expect(page.getByText(/Bekreftet vognløp: F-42/)).toBeVisible();
@@ -130,8 +130,8 @@ test('rendered foreground and keyboard focus contrast in both themes', async ({ 
 test('discard confirmation preserves draft on cancellation and outcome proposals survive navigation', async ({ page }) => {
   await edit(page); await page.getByLabel('Vognløp').fill('Mitt ulagrede forslag'); await button(page, 'Import').click(); await button(page, 'Registrer manuelt').click(); await button(page, 'Behold ulagret forslag').click(); await button(page, 'Utkast').click(); await expect(page.getByLabel('Vognløp')).toHaveValue('Mitt ulagrede forslag');
   await button(page, 'Lagre forslag i simuleringen').click(); await page.getByLabel('Vognløp').fill('Endret'); await button(page, 'Åpne lagret øyeblikksbilde').click(); await page.keyboard.press('Escape'); await expect(page.getByLabel('Vognløp')).toHaveValue('Endret'); await button(page, 'Åpne lagret øyeblikksbilde').click(); await button(page, 'Forkast forslag og fortsett').click();
-  await button(page, 'Se lagret dag før start').click(); await button(page, 'Bekreft plan').click(); await button(page, 'Start arbeidsdagen').click(); await button(page, 'Bekreft Start').click(); await button(page, 'Velg Linje 100 · Tur A').click(); await page.getByLabel('Foreslått utfall').selectOption('Hoppet over'); await button(page, 'Neste aktivitet').click(); await button(page, 'Forrige aktivitet').click(); await expect(page.getByLabel('Foreslått utfall')).toHaveValue('Hoppet over'); await button(page, 'Til dagsoversikten').click(); await button(page, 'Velg Linje 100 · Tur A').click(); await expect(page.getByLabel('Foreslått utfall')).toHaveValue('Hoppet over');
-  await button(page, 'Avslutt arbeidsdagen').click(); await expect(page.getByText(/Lagrede kjente utfall: 0 av 3/)).toBeVisible(); await expect(page.getByText(/Ikke registrert: Linje 100/)).toBeVisible(); await button(page, 'Bekreft avsluttet').click(); await expect(page.getByText(/Bekreftet plan: tjenestedato/)).toContainText('Mitt ulagrede forslag');
+  await button(page, 'Se lagret dag før start').click(); await button(page, 'Bekreft plan').click(); await button(page, 'Start arbeidsdagen').click(); await button(page, 'Bekreft Start').click(); await button(page, 'Velg Linje 100 · Tur A').click(); await page.getByLabel('Manuell aktivitetsstatus').selectOption('Hoppet over'); await button(page, 'Neste aktivitet').click(); await button(page, 'Forrige aktivitet').click(); await expect(page.getByLabel('Manuell aktivitetsstatus')).toHaveValue('Hoppet over'); await button(page, 'Til dagsoversikten').click(); await button(page, 'Velg Linje 100 · Tur A').click(); await expect(page.getByLabel('Manuell aktivitetsstatus')).toHaveValue('Hoppet over');
+  await button(page, 'Avslutt arbeidsdagen').click(); await expect(page.getByText(/Lagrede aktivitetsstatuser: 0 av 3/)).toBeVisible(); await expect(page.getByText(/Ikke registrert: Linje 100/)).toBeVisible(); await button(page, 'Bekreft avsluttet').click(); await expect(page.getByText(/Bekreftet plan: tjenestedato/)).toContainText('Mitt ulagrede forslag');
 });
 
 test('all lifecycle cancellations restore invoking day or selected-activity controls', async ({ page }) => {
@@ -154,8 +154,8 @@ test('reader states and known-start future exact and past boundaries', async ({ 
   }
 });
 test('faults are consumed by valid saves and remain available after closure', async ({ page }) => {
-  await edit(page); await fault(page, 'unavailable'); await button(page, 'Lagre forslag i simuleringen').click(); await expect(page.getByLabel('Utfall', { exact: true })).toHaveValue('normal'); await start(page); await button(page, 'Avslutt arbeidsdagen').click(); await button(page, 'Bekreft avsluttet').click(); await button(page, 'Kontomeldinger').click(); await button(page, 'Vedlikehold meldinger').click();
-  await fault(page, 'lost'); await button(page, 'Lagre melding i simuleringen').click(); await expect(page.getByLabel('Utfall', { exact: true })).toHaveValue('lost'); await page.getByLabel('Slutt (påkrevd)').fill('2026-10-27T02:00'); await button(page, 'Lagre melding i simuleringen').click(); await expect(page.getByLabel('Utfall', { exact: true })).toHaveValue('normal'); await expect(button(page, 'Lagre melding i simuleringen')).toBeDisabled(); await page.getByLabel('La oppslag feile').check(); await button(page, 'Slå opp original kvittering').click(); await expect(page.getByRole('status')).toContainText('fortsatt uavklart'); await page.getByLabel('La oppslag feile').uncheck(); await button(page, 'Slå opp original kvittering').click(); await expect(page.getByRole('status')).toContainText('SIM-2'); await button(page, 'Lagre melding i simuleringen').click(); await expect(page.getByRole('status')).toContainText('SIM-3');
+  await edit(page); await fault(page, 'unavailable'); await button(page, 'Lagre forslag i simuleringen').click(); await expect(page.getByLabel('Simulert lagringsresultat', { exact: true })).toHaveValue('normal'); await start(page); await button(page, 'Avslutt arbeidsdagen').click(); await button(page, 'Bekreft avsluttet').click(); await button(page, 'Kontomeldinger').click(); await button(page, 'Vedlikehold meldinger').click();
+  await fault(page, 'lost'); await button(page, 'Lagre melding i simuleringen').click(); await expect(page.getByLabel('Simulert lagringsresultat', { exact: true })).toHaveValue('lost'); await page.getByLabel('Slutt (påkrevd)').fill('2026-10-27T02:00'); await button(page, 'Lagre melding i simuleringen').click(); await expect(page.getByLabel('Simulert lagringsresultat', { exact: true })).toHaveValue('normal'); await expect(button(page, 'Lagre melding i simuleringen')).toBeDisabled(); await page.getByLabel('La oppslag feile').check(); await button(page, 'Slå opp original kvittering').click(); await expect(page.getByRole('status')).toContainText('fortsatt uavklart'); await page.getByLabel('La oppslag feile').uncheck(); await button(page, 'Slå opp original kvittering').click(); await expect(page.getByRole('status')).toContainText('SIM-2'); await button(page, 'Lagre melding i simuleringen').click(); await expect(page.getByRole('status')).toContainText('SIM-3');
 });
 test('comparison text and focused native-dialog controls have contrast in both themes', async ({ page }) => {
   const contrast = async (selector: string, focus = false) => {
@@ -170,7 +170,87 @@ test('comparison text and focused native-dialog controls have contrast in both t
   await edit(page);
   for (const night of [false, true]) {
     if (night) await button(page, 'Bytt til nattvisning').click();
-    await fault(page, 'conflict'); await button(page, 'Lagre forslag i simuleringen').click(); await contrast('section[aria-label="Konflikt"] pre:first-of-type'); await button(page, 'Ta i bruk gjeldende').click();
+    await fault(page, 'conflict'); await button(page, 'Lagre forslag i simuleringen').click(); await contrast('section[aria-label="Konflikt"] article:first-of-type dl > div:first-child dd'); await button(page, 'Ta i bruk gjeldende').click();
     await button(page, 'Nullstill simuleringen').click(); await page.keyboard.press('Tab'); await expect(button(page, 'Bekreft nullstilling')).toBeFocused(); await contrast('dialog[open] button:first-of-type', true); await contrast('dialog[open] p'); await page.screenshot({ path: `../docs/evidence/12-2-review-dialog-${night ? 'night' : 'day'}-${Date.now()}.png`, fullPage: true }); await button(page, 'Behold simuleringen').click();
+  }
+});
+
+for (const width of [390, 1440]) for (const night of [false, true]) for (const resource of ['draft', 'notice']) {
+  test(`local save feedback and readable recovery preserve ${resource} at ${width}px ${night ? 'Night' : 'Day'}`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 800 });
+    if (night) await button(page, 'Bytt til nattvisning').click();
+    if (resource === 'draft') await edit(page);
+    else {
+      await button(page, 'Kontomeldinger').click(); await button(page, 'Vedlikehold meldinger').click();
+      await page.getByLabel('Slutt (påkrevd)').fill('2026-10-27T02:00');
+    }
+    const field = page.getByLabel(resource === 'draft' ? 'Vognløp' : 'Melding', { exact: true });
+    const save = button(page, resource === 'draft' ? 'Lagre forslag i simuleringen' : 'Lagre melding i simuleringen');
+    await field.fill('Mitt beholdte forslag'); await save.click();
+    await expect(page.getByRole('status')).toContainText('Bekreftet simulert lagring');
+    await expect(page.getByRole('status')).toBeInViewport({ ratio: .5 });
+    await field.fill('Endret, ikke lagret');
+    await expect(page.getByRole('status')).not.toContainText('Bekreftet simulert lagring');
+    await expect(page.getByRole('status')).toContainText('ulagrede endringer');
+    const documentY = async () => field.evaluate(el => el.getBoundingClientRect().top + scrollY);
+    await fault(page, 'conflict');
+    const originalY = await documentY();
+    await save.click();
+    await expect(field).toBeVisible(); await expect(field).toHaveValue('Endret, ikke lagret');
+    await expect(field).toHaveAttribute('readonly', '');
+    expect(await documentY()).toBe(originalY);
+    const comparison = page.getByRole('region', { name: 'Konflikt', exact: true });
+    await expect(comparison.locator('pre')).toHaveCount(0);
+    await expect(comparison.locator('dt').first()).toHaveText(resource === 'draft' ? 'Vognløp' : 'Melding');
+    await expect(comparison).toContainText('Endret, ikke lagret');
+    await expect(comparison).toContainText(resource === 'draft' ? 'F-99' : 'Nyere simulert melding');
+    await expect(page.getByRole('status')).toBeInViewport({ ratio: .5 });
+    await page.screenshot({ path: `../docs/evidence/12-2-feedback-${resource}-${width}-${night ? 'night' : 'day'}-${Date.now()}.png`, fullPage: true });
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+    await button(page, 'Avbryt konflikt').click();
+    await expect(field).toBeEditable(); await expect(field).toHaveValue('Endret, ikke lagret');
+    await fault(page, 'normal'); await save.click(); await button(page, 'Ta i bruk gjeldende').click();
+    const adopted = await field.inputValue();
+    await field.fill('Forslag med tapt svar'); await fault(page, 'lost'); await save.click();
+    await expect(field).toHaveValue('Forslag med tapt svar'); await expect(field).toHaveAttribute('readonly', '');
+    await expect(save).toBeDisabled(); await expect(page.getByRole('status')).toBeInViewport({ ratio: .5 });
+    await expect(page.locator('pre')).toHaveCount(0);
+    await page.getByLabel('La oppslag feile').check(); await button(page, 'Slå opp original kvittering').click();
+    await expect(page.getByRole('status')).toContainText('fortsatt uavklart'); await expect(save).toBeDisabled();
+    await page.getByLabel('La oppslag feile').uncheck(); await button(page, 'Slå opp original kvittering').click();
+    await expect(page.getByRole('status')).toContainText('SIM-3, revisjon 3');
+    await expect(field).toBeEditable(); await expect(field).toHaveValue('Forslag med tapt svar');
+    expect(adopted).not.toBe('Endret, ikke lagret');
+  });
+}
+
+test('activity feedback follows the selected activity and saved value with visible save and cancel messages', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 800 });
+  await edit(page); await start(page); await button(page, 'Velg Linje 100 · Tur A').click();
+  const status = page.getByRole('status'); const choice = page.getByLabel('Manuell aktivitetsstatus');
+  await choice.selectOption('Fullført manuelt'); await expect(status).toContainText('ikke lagret');
+  await button(page, 'Lagre aktivitetsstatus').click();
+  await expect(status).toContainText('Aktivitetsstatusen er bekreftet'); await expect(status).toBeInViewport({ ratio: .5 });
+  await choice.selectOption('Avbrutt'); await expect(status).toContainText('ikke lagret');
+  await choice.selectOption('Fullført manuelt'); await expect(status).toContainText('Lagret aktivitetsstatus: Fullført manuelt');
+  await choice.selectOption('Hoppet over'); await button(page, 'Avbryt ulagret aktivitetsstatus').click();
+  await expect(choice).toHaveValue('Fullført manuelt'); await expect(status).toContainText('avbrutt'); await expect(status).toBeInViewport({ ratio: .5 });
+  await button(page, 'Neste aktivitet').click(); await expect(status).not.toContainText('bekreftet');
+  await expect(status).toContainText('Ikke registrert');
+  await expect(page.getByRole('heading', { name: '5. Valgt aktivitet: Pause', exact: true })).toBeFocused();
+  await button(page, 'Forrige aktivitet').click(); await expect(status).toContainText('Lagret aktivitetsstatus: Fullført manuelt');
+});
+
+test('opening a form preserves heading focus and repeated identical errors return focus and visibility to feedback', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 800 });
+  await edit(page);
+  const heading = page.getByRole('heading', { name: '2. Rediger forslag', exact: true });
+  await expect(heading).toBeFocused(); await expect(heading).toBeInViewport();
+  await button(page, 'Kontomeldinger').click(); await button(page, 'Vedlikehold meldinger').click();
+  const save = button(page, 'Lagre melding i simuleringen'); const status = page.getByRole('status');
+  for (let attempt = 0; attempt < 2; attempt++) {
+    await save.click(); await expect(status).toContainText('sluttid etter simulert nåtid');
+    await expect(status).toBeInViewport({ ratio: .5 }); await expect(page.locator('.demo-feedback')).toBeFocused();
+    await page.evaluate(() => scrollTo(0, 0));
   }
 });
