@@ -20,6 +20,8 @@ test('alpha layers are composited and unsupported opacity is explicitly unmeasur
 test('critical clipped text fails while intentional field and native modal scrolling remain measured', async ({ page }, info) => {
   await page.setContent('<main style="background:white;color:black;width:100px;overflow:hidden"><span style="white-space:nowrap">A very long critical destination label</span></main>');
   await expect(measure(page, info, 'clipped-label')).rejects.toThrow('critical content clipping');
+  await page.setContent('<main style="background:white;color:black;width:100px;overflow:hidden"><input aria-label="Clipped field host" style="width:200px;background:white;color:black;border:2px solid black" value="Internally scrolling value"></main>');
+  await expect(measure(page, info, 'clipped-input-host')).rejects.toThrow('critical content clipping');
   await page.setContent('<main><p>Outside text</p><dialog style="height:100px;width:250px;overflow:auto;background:white;color:black"><p style="height:200px">Scrollable native dialog text remains reachable</p><textarea style="width:150px;height:30px;background:white;color:black;border:2px solid black">Long\nfield\ncontent\nscrolls</textarea></dialog></main>');
   await page.locator('dialog').evaluate((e: HTMLDialogElement) => e.showModal());
   const result = await measure(page, info, 'modal-scrolling');

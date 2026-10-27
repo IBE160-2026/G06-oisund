@@ -35,7 +35,7 @@ export async function measure(page: Page, info: TestInfo, state: string, allowUn
     const text: { label: string; ratio: number; color: Color; background: Color }[] = [];
     const clipping: { label: string; ancestor: string; axis: string }[] = [];
     const inspectClip = (e: Element, rects: DOMRect[], label: string, includeSelf = true) => {
-      if (e.closest('input,textarea,select')) return; // Native field content intentionally scrolls.
+      if (includeSelf && e.closest('input,textarea,select')) return; // Only field contents intentionally scroll; host bounds must remain reachable.
       for (let p: Element | null = includeSelf ? e : e.parentElement; p && p !== document.documentElement; p = p.parentElement) {
         const css = getComputedStyle(p), box = p.getBoundingClientRect();
         const intentionalDialogScroll = p === modal && ['auto', 'scroll'].includes(css.overflowY);

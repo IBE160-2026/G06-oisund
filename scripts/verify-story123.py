@@ -25,25 +25,59 @@ def stop_owned_tree(process):
     """Only the process/session created by execute; never service-name matching."""
     result = {'root_pid': process.pid, 'method': 'owned-session' if os.name != 'nt' else 'owned-pid-tree'}
     if os.name == 'nt':
-        query = "$rows=Get-CimInstance Win32_Process; $ids=[System.Collections.Generic.HashSet[int]]::new(); [void]$ids.Add(" + str(process.pid) + "); do {$added=$false; foreach($row in $rows){if($ids.Contains([int]$row.ParentProcessId) -and $ids.Add([int]$row.ProcessId)){$added=$true}}}while($added); @($ids) | ConvertTo-Json -Compress"
+        query = "$rows=Get-CimInstance Win32_Process; $ids=[System.Collections.Generic.HashSet[int]]::new(); [void]$ids.Add(" + str(process.pid) + "); do {$added=$false; foreach($row in $rows){if($ids.Contains([int]$row.ParentProcessId) -and $ids.Add([int]$row.ProcessId)){$added=$true}}}while($added); @($rows | Where-Object {$ids.Contains([int]$_.ProcessId)} | ForEach-Object {@{pid=[int]$_.ProcessId; created=$_.CreationDate.ToUniversalTime().ToFileTimeUtc().ToString()}}) | ConvertTo-Json -Compress"
         snapshot = subprocess.run(['powershell', '-NoProfile', '-Command', query], capture_output=True, text=True, encoding='utf-8', errors='replace')
-        pids = json.loads(snapshot.stdout) if snapshot.returncode == 0 and snapshot.stdout.strip() else [process.pid]
-        if isinstance(pids, int): pids = [pids]
-        result['observed_pids'] = pids
-        killed = subprocess.run(['taskkill', '/PID', str(process.pid), '/T', '/F'], capture_output=True, text=True, encoding='utf-8', errors='replace')
-        result.update(kill_exit_code=killed.returncode, kill_stdout=killed.stdout, kill_stderr=killed.stderr)
-        process.wait(timeout=15)
+        observed = json.loads(snapshot.stdout) if snapshot.returncode == 0 and snapshot.stdout.strip() else []
+        if isinstance(observed, dict): observed = [observed]
         import ctypes
+        from ctypes import wintypes
         kernel = ctypes.WinDLL('kernel32', use_last_error=True)
+        kernel.OpenProcess.argtypes = [wintypes.DWORD, wintypes.BOOL, wintypes.DWORD]
         kernel.OpenProcess.restype = ctypes.c_void_p
         kernel.WaitForSingleObject.argtypes = [ctypes.c_void_p, ctypes.c_ulong]
         kernel.CloseHandle.argtypes = [ctypes.c_void_p]
-        waits = {}
-        for pid in pids:
-            handle = kernel.OpenProcess(0x00100000, False, pid)
-            waits[str(pid)] = not handle or kernel.WaitForSingleObject(handle, 5000) == 0
-            if handle: kernel.CloseHandle(handle)
-        result.update(awaited_pids=waits, all_observed_exited=all(waits.values()))
+        kernel.GetProcessTimes.argtypes = [ctypes.c_void_p, *([ctypes.POINTER(wintypes.FILETIME)] * 4)]
+        kernel.TerminateProcess.argtypes = [ctypes.c_void_p, wintypes.UINT]
+        # Retain identity-verified handles BEFORE attempting PID-tree cleanup.
+        # Parent exit / PID reuse cannot redirect subsequent survivor cleanup.
+        handles = {process.pid: int(process._handle)}
+        owned_handles, identity_errors, exited_before_open = [], {}, []
+        try:
+            for item in observed:
+                pid = item['pid']
+                if pid == process.pid: continue  # Popen already retains this exact process.
+                handle = kernel.OpenProcess(0x00100000 | 0x1000 | 0x0001, False, pid)
+                if not handle:
+                    if ctypes.get_last_error() == 87: exited_before_open.append(pid)
+                    else: identity_errors[str(pid)] = 'OpenProcess failed: ' + str(ctypes.get_last_error())
+                    continue
+                times = [wintypes.FILETIME() for _ in range(4)]
+                valid = kernel.GetProcessTimes(handle, *(ctypes.byref(value) for value in times))
+                created = (times[0].dwHighDateTime << 32) | times[0].dwLowDateTime
+                # CIM's datetime precision is microseconds; the kernel FILETIME
+                # additionally has a 100ns digit. Reject a reused process ID.
+                if not valid or created // 10 != int(item['created']) // 10:
+                    identity_errors[str(pid)] = 'Snapshot process identity changed; not targeted'
+                    kernel.CloseHandle(handle)
+                    continue
+                handles[pid] = handle
+                owned_handles.append(handle)
+            result['observed_pids'] = list(dict.fromkeys([process.pid, *(item['pid'] for item in observed)]))
+            result.update(identity_errors=identity_errors, exited_before_handle_open=exited_before_open)
+            if kernel.WaitForSingleObject(handles[process.pid], 0) == 258:
+                killed = subprocess.run(['taskkill', '/PID', str(process.pid), '/T', '/F'], capture_output=True, text=True, encoding='utf-8', errors='replace')
+                result.update(kill_exit_code=killed.returncode, kill_stdout=killed.stdout, kill_stderr=killed.stderr)
+            else:
+                result['pid_tree_kill_skipped_root_exited'] = True
+            terminated, waits = {}, {str(pid): True for pid in exited_before_open}
+            for pid, handle in reversed(list(handles.items())):
+                if kernel.WaitForSingleObject(handle, 0) == 258:
+                    terminated[str(pid)] = bool(kernel.TerminateProcess(handle, 124))
+                waits[str(pid)] = kernel.WaitForSingleObject(handle, 5000) == 0
+            process.wait(timeout=15)
+            result.update(terminated_survivors_by_retained_handle=terminated, awaited_pids=waits, all_observed_exited=not identity_errors and all(waits.values()))
+        finally:
+            for handle in owned_handles: kernel.CloseHandle(handle)
     else:
         os.killpg(process.pid, signal.SIGTERM)
         try: process.wait(timeout=5)
