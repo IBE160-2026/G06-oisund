@@ -76,7 +76,6 @@ function ActivityComparison({ content, activity, index, unresolved }: { content:
 }
 
 export function PrivateDrafts({ upload, request, mutation, dirtyChanged, expired, suspended }: Props) {
-  const [night, setNight] = useState(false);
   const [screen, setScreen] = useState<'upload' | 'import' | 'editor' | 'plan'>('upload');
   const [hasPlan, setHasPlan] = useState(false); const [consulting, setConsulting] = useState(false);
   const preparationTitle = useRef<HTMLHeadingElement>(null);
@@ -354,8 +353,7 @@ export function PrivateDrafts({ upload, request, mutation, dirtyChanged, expired
     if (value !== undefined) next.push({ from_activity_id: id, vehicle_duty: value, realtime_duty: dutySuffix(value) });
     edit({ ...content, vehicle_duty_changes: next });
   }
-  return <div className={(night ? 'private-drafts night' : 'private-drafts') + (consulting ? ' consulting' : '')} hidden={suspended}><section aria-label="Private utkast">
-    <button type="button" aria-pressed={night} onClick={() => setNight(value => !value)}>Nattmodus</button>
+  return <div className={'private-drafts' + (consulting ? ' consulting' : '')} hidden={suspended}><section aria-label="Private utkast">
     <nav className="private-screen-nav" aria-label="Plan og forberedelse"><button disabled={confirmationLocked || !!pending || !!pendingDelete || busy || suspended} aria-current={screen === 'upload' ? 'page' : undefined} onClick={() => { setScreen('upload'); setRegistryNavigation(v => v + 1); }}>Forberedelse og planlister</button><button disabled={confirmationLocked || !!pending || !!pendingDelete || busy || suspended} aria-current={screen === 'editor' ? 'page' : undefined} onClick={() => { setScreen('editor'); setRegistryNavigation(v => v + 1); }}>Kontroller og rediger utkast</button>{hasPlan && <button disabled={confirmationLocked || !!pending || !!pendingDelete || busy || suspended} aria-current={screen === 'plan' ? 'page' : undefined} onClick={() => { setScreen('plan'); setRegistryNavigation(v => v + 1); }}>Til den åpne planen</button>}</nav>
     <div hidden={registryOpen || screen !== 'upload'}><h2 ref={preparationTitle} tabIndex={-1}>Mine utkast</h2></div>
     <p hidden={registryOpen || screen !== 'upload' && screen !== 'editor'} role="status" aria-live="polite" className="status">{message}</p><fieldset hidden={registryOpen} className="confirmation-editor" disabled={confirmationLocked}>

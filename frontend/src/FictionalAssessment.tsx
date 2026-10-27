@@ -1,3 +1,4 @@
+import { ThemeControl, useTheme } from './theme';
 import { useEffect, useRef, useState } from 'react';
 import { activities, DemoAdapter, initialDraft, initialNotice, type Draft, type Fault, type Notice, type Receipt } from './fictionalAssessmentModel';
 import './fictional-assessment.css';
@@ -32,7 +33,7 @@ export function FictionalAssessment() {
   const restoreControl = useRef(false);
   function cancelLifecycle() { restoreControl.current = true; setScreen(returnScreen); }
   const [readerState, setReaderState] = useState('normal');
-  const [night, setNight] = useState(false);
+  const { night } = useTheme();
   const resetDialog = useRef<HTMLDialogElement>(null);
   const heading = useRef<HTMLHeadingElement>(null);
   const resetHeading = useRef<HTMLHeadingElement>(null);
@@ -60,10 +61,10 @@ export function FictionalAssessment() {
   function navigate(next: Screen) { if (!locked) { setScreen(next); setMessage(''); } }
   function resetAll() {
     adapter.current = new DemoAdapter(); setDraft(initialDraft()); setNotice(initialNotice()); setDraftReceipt(undefined); setNoticeReceipt(undefined);
-    setPending(undefined); setConflict(undefined); setFault('normal'); setLookupFails(false); setStarted(false); setOutcomes({}); setTerminal(''); setPlan(undefined); setOutcomeProposals({}); setSelected(0); setScope('100'); setReaderState('normal'); setScreen('import'); setReset(false); setNight(false); setMessage('Simuleringen er nullstilt. Ingen nettleserlagring eller andre tjenester er endret.');
+    setPending(undefined); setConflict(undefined); setFault('normal'); setLookupFails(false); setStarted(false); setOutcomes({}); setTerminal(''); setPlan(undefined); setOutcomeProposals({}); setSelected(0); setScope('100'); setReaderState('normal'); setScreen('import'); setReset(false); setMessage('Simuleringen er nullstilt. Ingen nettleserlagring eller andre tjenester er endret.');
   }
-  return <main className={`fictional-assessment${night ? " demo-night" : ""}`}><button onClick={() => setNight(!night)}>{night ? "Bytt til dagvisning" : "Bytt til nattvisning"}</button><p className="badge">SIMULERING · bare fiktive data</p><h1>Prøv en fiktiv arbeidsdag</h1>
-    <p>Ingen innlogging, GPS, kildehenting eller nettleserlagring. Alt forsvinner ved omlasting. Bruk mens du står stille.</p><p>Dette viser bare simulerte kvitteringer. Ingen data lagres i en virkelig database.</p><p role="status" aria-live="polite">{message}</p>
+  return <main className={`fictional-assessment${night ? " demo-night" : ""}`}><ThemeControl demo /><p className="badge">SIMULERING · bare fiktive data</p><h1>Prøv en fiktiv arbeidsdag</h1>
+    <p>Ingen innlogging, GPS eller kildehenting. Bare dag-/nattvalget lagres i nettleseren. Simulerte data forsvinner ved omlasting. Bruk mens du står stille.</p><p>Dette viser bare simulerte kvitteringer. Ingen data lagres i en virkelig database.</p><p role="status" aria-live="polite">{message}</p>
     {<nav aria-label="Demoskjermer"><button disabled={locked || !!terminal} onClick={() => navigate('import')}>Import</button><button disabled={locked || !!terminal} onClick={() => navigate('editor')}>Utkast</button><button disabled={locked || !draftReceipt || !!terminal} onClick={() => navigate(plan ? 'day' : 'preparation')}>Arbeidsdag</button><button disabled={locked} onClick={() => navigate('notices')}>Kontomeldinger</button></nav>}
     {(!terminal || screen === 'notices' || screen === 'notice-editor') && <details><summary>Simuler feil ved neste lagring</summary><label>Utfall<select aria-label="Utfall" disabled={locked} value={fault} onChange={e => setFault(e.target.value as Fault)}><option value="normal">Vanlig</option><option value="unavailable">Utilgjengelig</option><option value="conflict">Nyere revisjon / konflikt</option><option value="lost">Mistet svar etter lagring</option></select></label></details>}
     {pending && <section aria-label="Uavklart svar"><h2>Uavklart: {pending}</h2><p>Navigasjon og ny lagring er sperret. Oppslag endrer ingen data.</p><label><input type="checkbox" checked={lookupFails} onChange={e => setLookupFails(e.target.checked)} />La oppslag feile</label><button onClick={() => { const r = adapter.current.lookup(pending, lookupFails); if (r) { apply(r); setPending(undefined); } else setMessage('Oppslag feilet. Operasjonen er fortsatt uavklart; ingen ny lagring er sendt.'); }}>Slå opp original kvittering</button></section>}

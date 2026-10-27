@@ -16,3 +16,8 @@
 .fictional-assessment pre { color: #162c3c; background: #edf3f7; padding: .75rem; }
 .fictional-assessment.demo-night pre, .fictional-assessment.demo-night dialog { color: #f2f5fa; background: #22354b; }
 .fictional-assessment.demo-night dialog { border-color: #ffe39b; }
+.fictional-assessment button, .fictional-assessment summary, .fictional-assessment select, .fictional-assessment input:not([type=checkbox]) { min-height: 58px; }
+.fictional-assessment.demo-night input, .fictional-assessment.demo-night textarea, .fictional-assessment.demo-night select { color: #f2f5fa; background: #22354b; border-color: #b6c8d5; }
+.fictional-assessment.demo-night li { border-color: #b6c8d5; }
+.fictional-assessment input[type=checkbox] { width: 1.5rem; height: 1.5rem; }
+.fictional-assessment dialog { max-height: calc(100dvh - 3rem); overflow-y: auto; padding: 1.5rem; }

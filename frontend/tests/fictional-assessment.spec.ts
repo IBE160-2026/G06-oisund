@@ -16,7 +16,7 @@ test.beforeEach(async ({ page }) => {
   page.on('pageerror', e => errors.push(e.message));
   await page.route('**/*', route => {
     const url = new URL(route.request().url());
-    const expected = url.origin === 'http://127.0.0.1:15222' && !url.search && (['/demo', '/demo.html'].includes(url.pathname) || /^\/assets\/(demo|FictionalAssessment)-[\w-]+\.(js|css)$/.test(url.pathname));
+    const expected = url.origin === 'http://127.0.0.1:15222' && !url.search && (['/demo', '/demo.html'].includes(url.pathname) || /^\/assets\/(demo|FictionalAssessment|theme)-[\w-]+\.(js|css)$/.test(url.pathname));
     if (expected) return route.continue();
     attempted.push(url.href); return route.abort();
   });
@@ -103,7 +103,7 @@ test('notice invalid ending/source, unavailable and conflict preserve proposals'
 test('night view and modal reset cancellation preserve state; confirmed reset clears unresolved state', async ({ page }) => {
   await button(page, 'Bytt til nattvisning').click(); await expect(page.locator('main')).toHaveClass(/demo-night/); await edit(page); await fault(page, 'lost'); await button(page, 'Lagre forslag i simuleringen').click();
   await button(page, 'Nullstill simuleringen').click(); await expect(page.getByRole('heading', { name: 'Nullstille bare denne simuleringen?' })).toBeFocused(); await page.keyboard.press('Escape'); await expect(button(page, 'Nullstill simuleringen')).toBeFocused(); await expect(button(page, 'Lagre forslag i simuleringen')).toBeDisabled();
-  await button(page, 'Nullstill simuleringen').click(); await button(page, 'Bekreft nullstilling').click(); await expect(page.locator('main')).not.toHaveClass(/demo-night/); await edit(page); await button(page, 'Lagre forslag i simuleringen').click(); await expect(page.getByRole('status')).toContainText('SIM-1');
+  await button(page, 'Nullstill simuleringen').click(); await button(page, 'Bekreft nullstilling').click(); await expect(page.locator('main')).toHaveClass(/demo-night/); await edit(page); await button(page, 'Lagre forslag i simuleringen').click(); await expect(page.getByRole('status')).toContainText('SIM-1');
 });
 test('rendered foreground and keyboard focus contrast in both themes', async ({ page }) => {
   for (const night of [false, true]) {

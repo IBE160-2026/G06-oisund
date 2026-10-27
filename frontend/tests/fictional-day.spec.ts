@@ -17,6 +17,8 @@ for (const width of [1440, 768]) {
     await expect(page.getByText('Fysisk buss')).toBeVisible();
     await assertOvernight(page);
     await page.keyboard.press('Tab');
+    await expect(page.getByRole('button', { name: 'Nattmodus', exact: true })).toBeFocused();
+    await page.keyboard.press('Tab');
     await expect(page.getByRole('button', { name: 'Last inn nytt' })).toBeFocused();
     await page.keyboard.press('Tab');
     await expect(page.getByRole('button', { name: 'Lagre fiktiv dag', exact: true })).toBeFocused();

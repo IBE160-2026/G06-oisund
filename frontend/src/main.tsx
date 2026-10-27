@@ -1,3 +1,4 @@
+import { ThemeProvider, ThemeControl } from './theme';
 import { useEffect, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import './style.css';
@@ -110,7 +111,7 @@ function App() {
     finally { setBusy(false); }
   }
   useEffect(() => { if (!initialized.current) { initialized.current = true; if (identifier) void reopen(identifier); else void example(); } }, []);
-  return <main>
+  return <main><ThemeControl />
     <p className="badge">Fiktive demodata</p>
     <h1>Fiktiv arbeidsdag</h1>
     <p>Kun et fast eksempel for lokal vurdering. Demoen krever ingen innlogging og viser ingen private arbeidsdager. Bruk oversikten mens du står stille.</p>
@@ -132,4 +133,4 @@ function App() {
     <p><a href="/private">Gå til privat tilgang</a>. Har du en aktiv økt, åpnes arbeidsrommet. Å åpne demoen logger deg ikke ut.</p>
   </main>;
 }
-createRoot(document.getElementById('root')!).render(location.pathname === '/demo' ? <FictionalAssessment /> : location.pathname === '/private' ? <PrivateAccess /> : <App />);
+createRoot(document.getElementById('root')!).render(<ThemeProvider>{location.pathname === '/demo' ? <FictionalAssessment /> : location.pathname === '/private' ? <PrivateAccess /> : <App />}</ThemeProvider>);

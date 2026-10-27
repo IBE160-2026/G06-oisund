@@ -158,7 +158,7 @@ for (const width of [768, 1440]) test(`corrections structure legacy duties cance
   await expect(row().locator('summary')).toBeFocused();
   await row().scrollIntoViewIfNeeded();
   await page.screenshot({ path: `../docs/evidence/11-2-regression-10-2-${width}.png` });
-  expect(await page.evaluate(async () => [localStorage.length, sessionStorage.length, (await indexedDB.databases()).length])).toEqual([0, 0, 0]);
+  expect(await page.evaluate(async () => [{ ...localStorage }, sessionStorage.length, (await indexedDB.databases()).length])).toEqual([{ 'ibe160-theme': width === 1440 ? 'day' : 'night' }, 0, 0]);
   page.once('dialog', d => d.accept()); await row().getByRole('button', { name: 'Fjern aktivitet 1', exact: true }).click();
   await editor(page); await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
   await expect(page.getByText('Lagret. Versjon 2.', { exact: true })).toBeVisible();
