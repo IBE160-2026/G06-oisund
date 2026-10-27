@@ -1,7 +1,8 @@
+import { privateNow, observePrivateTime } from './privateClock';
 import { useEffect, useRef, useState } from 'react';
 import { PrivateDrafts } from './PrivateDrafts';
 
-const API = 'http://127.0.0.1:8001';
+const API = (import.meta as ImportMeta & { env: Record<string, string> }).env.VITE_PRIVATE_API ?? 'http://127.0.0.1:8001';
 // Only a logout lock, never an account, credential or private presentation. A cookie
 // survives reload and is shared across tabs, unlike private browser data stores.
 const PENDING = 'private_logout_pending';
@@ -16,7 +17,7 @@ function validSession(value: unknown): value is Session {
   return !!s && typeof s.account_id === 'string' && /^[0-9a-f-]{36}$/i.test(s.account_id)
     && Number.isFinite(Date.parse(s.created_at)) && Number.isFinite(Date.parse(s.expires_at))
     && Date.parse(s.expires_at) - Date.parse(s.created_at) === 14 * 86400000
-    && Date.parse(s.expires_at) > Date.now();
+    && Date.parse(s.expires_at) > privateNow();
 }
 
 export function PrivateAccess() {
@@ -62,7 +63,7 @@ export function PrivateAccess() {
       }
       check();
       const candidate = current as Session;
-      if (sameSession(candidate, expected) && Date.parse(candidate.expires_at) <= Date.now()) {
+      if (sameSession(candidate, expected) && Date.parse(candidate.expires_at) <= privateNow()) {
         throw Object.assign(Error('Økten er utløpt.'), { status: 401 });
       }
       if (!validSession(current) || !sameSession(current, expected)) {
@@ -101,7 +102,9 @@ export function PrivateAccess() {
   }
 
   async function request(path: string, options?: RequestInit) {
+    const requestedAt = performance.now();
     const response = await fetch(API + path, { ...options, credentials: 'include', cache: 'no-store', signal: options?.signal ?? AbortSignal.timeout(10000) });
+    observePrivateTime(response.headers.get('Date'), requestedAt, true);
     if (!response.ok || !response.headers.get('content-type')?.includes('application/json')) {
       let apiDetail: unknown;
       if (!response.ok && response.headers.get('content-type')?.includes('application/json')) {
@@ -221,9 +224,14 @@ export function PrivateAccess() {
     if (!session) return;
     heading.current?.focus();
     const expire = () => { clear('Økten er utløpt. Logg inn på nytt.'); setBusy(false); setFocusLogin(true); };
-    const remaining = Date.parse(session.expires_at) - Date.now();
-    if (remaining <= 0) { expire(); return; }
-    const timer = window.setTimeout(expire, remaining);
+    let timer: number;
+    const checkDeadline = () => {
+      const remaining = Date.parse(session.expires_at) - privateNow();
+      if (remaining <= 0) { expire(); return; }
+      // Recheck the original deadline as the shared server clock advances.
+      timer = window.setTimeout(checkDeadline, Math.min(remaining, 1000));
+    };
+    checkDeadline();
     return () => clearTimeout(timer);
   }, [session]);
   useEffect(() => {

@@ -53,7 +53,7 @@ class RestorationTest(unittest.TestCase):
             if (value := resources(request)) is not None: pass
             elif path.endswith('/auth/csrf'): value = {'csrf_token': 'synthetic'}
             elif path.endswith('/auth/login'): value = {'account_id': 'synthetic'}
-            elif path.endswith('/draft-operations'): value = {'operation_id': 'synthetic'}
+            elif path.endswith(('/draft-operations', '/notice-operations')): value = {'operation_id': 'synthetic'}
             elif path.endswith('/workday-reviews'): value = {'operation_id': 'synthetic', 'unknowns': [], 'classifications_required': []}
             elif path.endswith('/physical-bus'):
                 value = {'revision': 0, 'physical_bus': None, 'expires_at': 'synthetic'} if request.data is None else {'result': {'revision': 0, 'physical_bus': None, 'expires_at': 'synthetic'}}
@@ -81,7 +81,7 @@ class RestorationTest(unittest.TestCase):
             if (value := resources(request)) is not None: pass
             elif path.endswith('/auth/csrf'): value = {'csrf_token': 'synthetic'}
             elif path.endswith('/auth/login'): value = {'account_id': 'synthetic'}
-            elif path.endswith('/draft-operations'): value = {'operation_id': 'synthetic'}
+            elif path.endswith(('/draft-operations', '/notice-operations')): value = {'operation_id': 'synthetic'}
             elif path.endswith('/workday-reviews'): value = {'operation_id': 'synthetic', 'unknowns': [], 'classifications_required': []}
             elif path.endswith('/physical-bus'):
                 value = {'revision': 0, 'physical_bus': None, 'expires_at': 'synthetic'} if request.data is None else {'result': {'revision': 0, 'physical_bus': None, 'expires_at': 'synthetic'}}
@@ -134,7 +134,7 @@ class RestorationTest(unittest.TestCase):
             if (value := resources(request)) is not None: pass
             elif path.endswith('/auth/csrf'): value = {'csrf_token': 'synthetic'}
             elif path.endswith('/auth/login'): value = {'account_id': 'synthetic'}
-            elif path.endswith('/draft-operations'): value = {'operation_id': 'synthetic'}
+            elif path.endswith(('/draft-operations', '/notice-operations')): value = {'operation_id': 'synthetic'}
             elif path.endswith('/workday-reviews'): value = {'operation_id': 'synthetic', 'unknowns': [], 'classifications_required': []}
             elif path.endswith('/physical-bus'):
                 value = {'revision': 0, 'physical_bus': None, 'expires_at': 'synthetic'} if request.data is None else {'result': {'revision': 1, 'physical_bus': 'mismatched acknowledgement', 'expires_at': 'synthetic'}}
@@ -161,7 +161,7 @@ class RestorationTest(unittest.TestCase):
                     if (value := resources(request)) is not None: pass
                     elif path.endswith('/auth/csrf'): value = {'csrf_token': 'synthetic'}
                     elif path.endswith('/auth/login'): value = {'account_id': 'synthetic'}
-                    elif path.endswith('/draft-operations'): value = {'operation_id': 'synthetic'}
+                    elif path.endswith(('/draft-operations', '/notice-operations')): value = {'operation_id': 'synthetic'}
                     elif path.endswith('/workday-reviews'): value = {'operation_id': 'synthetic', 'unknowns': [], 'classifications_required': []}
                     elif path.endswith('/physical-bus'):
                         value = {'revision': 0, 'physical_bus': None, 'expires_at': 'synthetic'} if request.data is None else {'result': {'revision': 0, 'physical_bus': None, 'expires_at': 'synthetic'}}
@@ -208,7 +208,7 @@ class RestorationTest(unittest.TestCase):
                 value = {'csrf_token': 'synthetic'}
             elif path.endswith('/auth/login'):
                 value = {'account_id': 'synthetic'}
-            elif path.endswith('/draft-operations'):
+            elif path.endswith(('/draft-operations', '/notice-operations')):
                 value = {'operation_id': 'synthetic'}
             elif path.endswith('/workday-reviews'):
                 value = {'operation_id': 'synthetic', 'unknowns': [], 'classifications_required': []}

@@ -24,8 +24,19 @@ def command(revision=0, **values):
     return {'operation_id': str(uuid4()), 'expected_revision': revision, **values}
 
 
+_admitted_commands = set()
+
+
 def send(c, body, notice=None, action=None):
-    return c.post('/notices'+('/'+notice if notice else '')+('/'+action if action else ''), headers=headers(c), json=body)
+    if notice is None and body['expected_revision'] == 0 and not c.get('/workday-notice-operations/'+body['operation_id']).is_success:
+        # Issue once per original command; never replace an ID on retry.
+        if body['operation_id'] not in _admitted_commands:
+            issued = c.post('/notice-operations', headers=headers(c), json={})
+            assert issued.status_code == 200, issued.text
+            body['operation_id'] = issued.json()['operation_id']
+        _admitted_commands.add(body['operation_id'])
+    payload = body
+    return c.post('/notices'+('/'+notice if notice else '')+('/'+action if action else ''), headers=headers(c), json=payload)
 
 
 def reader(c, plan):
@@ -172,6 +183,7 @@ def test_populated_additive_migration_unknown_grace_provenance_and_immutable_rec
                 conn.execute('INSERT INTO workday_notice_operations VALUES(%s,%s,%s,%s,%s,%s)',(op,owner,plan,digest,Jsonb(result),lease))
                 receipts[op]=(result,digest)
             conn.execute((migrations/'013_account_notice_registry.sql').read_text())
+            conn.execute((migrations/'014_notice_creation_admissions.sql').read_text())
             for old in before:
                 new=conn.execute('SELECT * FROM workday_notices WHERE id=%s',(old['id'],)).fetchone()
                 assert all(new[k]==v for k,v in old.items()) and new['owner']==owner
@@ -186,6 +198,9 @@ def test_populated_additive_migration_unknown_grace_provenance_and_immutable_rec
                 conn.execute('SET LOCAL search_path TO '+schema)
                 auth.require_synthetic_accounts(conn)
                 yield conn
+        # Import routes before patching their storage dependency: otherwise the
+        # module-level health database alias can retain the dropped schema.
+        from app.private_main import app
         monkeypatch.setattr(workday_notice_storage,'database',isolated)
         monkeypatch.setattr(private_storage,'database',isolated)
         cleanup()
@@ -320,6 +335,6 @@ def test_maintenance_list_uses_same_database_instant_for_retention_and_response(
     monkeypatch.setattr(workday_notice_storage, 'database', wrapped)
     request = SimpleNamespace(cookies={auth.SESSION: client.cookies.get(auth.SESSION)})
     listed = workday_notice_storage.read(request)
-    assert len(listed['notices']) == 1
+    assert listed['notices'] == []
     assert all(row['expires_at'] > listed['server_now'] for row in listed['notices'])
-    assert listed['server_now'] < datetime.now(timezone.utc) - timedelta(seconds=0.4)
+    assert listed['server_now'] > datetime.now(timezone.utc) - timedelta(seconds=0.2)

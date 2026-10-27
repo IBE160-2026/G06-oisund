@@ -1,0 +1,45 @@
+# Dedicated synthetic runtime. Never overrides ordinary Compose services.
+name: ibe160-story121-tests
+services:
+  private-db:
+    image: postgres:17-alpine@sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24
+    environment:
+      POSTGRES_DB: private_work
+      POSTGRES_USER: private_work
+      POSTGRES_PASSWORD_FILE: /run/secrets/private_postgres_password
+    secrets: [private_postgres_password]
+    volumes: [story121_pg:/var/lib/postgresql/data]
+    healthcheck:
+      test: [CMD-SHELL, pg_isready -U private_work -d private_work]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+  private-api:
+    build: ./backend
+    environment:
+      APP_MODE: private-local
+      PRIVATE_DATABASE_URL: postgresql://private_work@private-db/private_work
+      PRIVATE_DATABASE_PASSWORD_FILE: /run/secrets/private_postgres_password
+      PRIVATE_ORIGIN: http://127.0.0.1:15121
+      PRIVATE_LOOPBACK_DEVELOPMENT: '1'
+      PRIVATE_TEST_PROJECT: ibe160-private-tests
+      PRIVATE_TEST_API: http://private-api:8000
+      PRIVATE_TEST_ORIGIN: http://127.0.0.1:15121
+    secrets: [private_postgres_password]
+    volumes:
+      - ./backend:/app:ro
+      - ./Eksempelfiler:/fixtures:ro
+    ports: ['127.0.0.1:18121:8000']
+    depends_on:
+      private-db:
+        condition: service_healthy
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+volumes:
+  story121_pg:
+secrets:
+  private_postgres_password:
+    file: ./.private-runtime/story121-postgres-password

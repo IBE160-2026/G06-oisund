@@ -1,3 +1,4 @@
+import { privateNow, observePrivateTime } from './privateClock';
 import { useEffect, useRef, useState } from 'react';
 import { recoverOperation } from './recoverOperation';
 import { PrivateTimeInput } from './PrivateTimeInput';
@@ -80,11 +81,24 @@ export function usePrivateNotices(props: Props) {
   const [comparison, setComparison] = useState<Notice | null>(null), [conflict, setConflict] = useState(false), [editorKey, setEditorKey] = useState(0);
   const [expanded, setExpanded] = useState<string | null>(null), [message, setMessage] = useState('Avvikslisten er ikke hentet.');
   const [validationAttempted, setValidationAttempted] = useState(false);
-  const [now, setNow] = useState(Date.now());
-  const serverAnchor = useRef({ instant: Date.now(), elapsed: performance.now() });
-  useEffect(() => { const timer = window.setInterval(() => setNow(serverAnchor.current.instant + performance.now() - serverAnchor.current.elapsed), 1000); return () => clearInterval(timer); }, []);
+  const [now, setNow] = useState(privateNow());
+  useEffect(() => { const timer = window.setInterval(() => setNow(privateNow()), 1000); return () => clearInterval(timer); }, []);
   const alive = useRef(true), sending = useRef(false), original = useRef<Command | null>(null), generation = useRef(0), navigation = useRef(0);
   const title = useRef<HTMLHeadingElement>(null), entry = useRef<HTMLButtonElement>(null);
+  useEffect(() => {
+    setRecords(current => current.some(value => Date.parse(value.expires_at) <= now) ? current.filter(value => Date.parse(value.expires_at) > now) : current);
+    const expired = (value: Notice | null | undefined) => !!value && Date.parse(value.expires_at) <= now;
+    // Ending validity creates readable history. Only independent storage
+    // retention loss removes saved editor/receipt/comparison presentation.
+    if (!expired(base) && !expired(comparison) && !expired(original.current?.before)) return;
+    generation.current++; navigation.current++; sending.current = false;
+    original.current = null; setPending(null); setBase(null); setDraft(null);
+    setTags(''); setTimeStates({}); setComparison(null); setConflict(false);
+    setExpanded(null); setEditorKey(value => value+1); setBusy(false);
+    if (screen === 'editor') setScreen('list');
+    setMessage('Avvikets lagringstid er utløpt. Private felt er fjernet.');
+    props.lock(false); props.changed();
+  }, [now, base, comparison, pending]);
   const tagResult = parseTags(tags);
   const parsedTags = Array.isArray(tagResult) ? tagResult : null;
   const tagError = typeof tagResult === 'string' ? tagResult : null;
@@ -130,18 +144,18 @@ export function usePrivateNotices(props: Props) {
       if (!alive.current || version !== generation.current) throw Error('Superseded read');
       if (!value || Object.keys(value).sort().join() !== 'next_cursor,notices,server_now' || !stamp(value.server_now)
         || !Array.isArray(value.notices) || value.notices.length > 50 || !(value.next_cursor === null || uuid(value.next_cursor))
-        || value.next_cursor && (value.notices.length !== 50 || value.next_cursor === cursor)
+        || value.next_cursor && (cursor && value.next_cursor <= cursor || value.notices.some((v: any) => v.id > value.next_cursor))
         || !value.notices.every((v: any) => validNotice(v) && Date.parse(v.expires_at) > Date.parse(value.server_now))) throw Error();
       // Count the whole request interval conservatively: a delayed response
       // must not grant a fresh validity interval from its arrival time.
-      serverAnchor.current = { instant: Date.parse(value.server_now), elapsed: requestedAt }; setNow(serverAnchor.current.instant + performance.now() - requestedAt);
+      observePrivateTime(value.server_now, requestedAt); setNow(privateNow());
       all.push(...value.notices); cursor = value.next_cursor;
       if (new Set(all.map(v => v.id)).size !== all.length) throw Error();
     } while (cursor);
     setRecords(all); setAvailable(true); setDenied(false); props.changed();
     const newer = base && all.find(v => v.id === base.id && v.revision > base.revision);
     if (draft && newer && !original.current) { setComparison(newer); setConflict(true); }
-    return { records: all, serverNow: serverAnchor.current.instant + performance.now() - serverAnchor.current.elapsed };
+    return { records: all, serverNow: privateNow() };
   }
   async function load() {
     if (sending.current || props.suspended) return;
@@ -186,12 +200,12 @@ export function usePrivateNotices(props: Props) {
         }
       };
       const value = lookup ? await status() : retry ? await recoverOperation(status, authorize, mutate) : await mutate();
-      if (!alive.current) return;
+      if (!alive.current || version !== generation.current) return;
       if (!value || Object.keys(value).sort().join() !== 'operation_id,result' || value.operation_id !== op.body.operation_id || !validNotice(value.result) || !accepted(value.result, op)) throw Error();
       verified = true;
       if (!lookup && canonical(await request('/workday-notice-operations/' + op.body.operation_id)) !== canonical(value)) throw Error();
-      if (!alive.current) return;
-      const latest = await current(); if (!alive.current) return;
+      if (!alive.current || version !== generation.current) return;
+      const latest = await current(version); if (!alive.current || version !== generation.current) return;
       const saved = latest.records.find(v => v.id === value.result.id);
       // These two fields are mutable authority/provenance, not historical
       // command effects: retention can change and parent deletion sets NULL.
@@ -202,10 +216,10 @@ export function usePrivateNotices(props: Props) {
       if (saved.revision > value.result.revision && op.kind === 'save') { setComparison(saved); setConflict(true); setMessage('Forsøket ble lagret. Et nyere avvik finnes. Forslaget er beholdt for sammenligning.'); }
       else { if (op.kind === 'save') { setDraft(null); setBase(null); setTimeStates({}); setEditorKey(v => v + 1); } setMessage(op.kind === 'check' ? 'Kildekontrollen er lagret.' : op.kind === 'end' ? 'Avviket er avsluttet manuelt.' : 'Avviket er lagret.'); if (destination === navigation.current) navigate('list'); }
     } catch (error: any) {
-      if (!alive.current) return;
+      if (!alive.current || version !== generation.current) return;
       if (error?.status === 401) { props.expired(); return; }
       if ([404, 410].includes(error?.status)) {
-        try { await props.request('/auth/session'); if (!alive.current) return; }
+        try { await props.request('/auth/session'); if (!alive.current || version !== generation.current) return; }
         catch (access: any) { if (access?.status === 401) props.expired(); return; }
       }
       let unrecoverable = error?.noticeUnrecoverable === true;
@@ -232,6 +246,8 @@ export function usePrivateNotices(props: Props) {
         && (detail.code === 'notice_capacity' && detail.message === 'Registeret har allerede 200 avvik.'
           || detail.code === 'notice_receipt_capacity' && detail.message === 'For mange lagringsforsøk. Vent til tidligere avvik utløper.');
       const known = dispatched && !verified && (
+        !op.target && (error?.status === 404 && detail === 'Tilgangen ble avvist.' || error?.status === 410 && detail === 'Lagringsforsøket er utløpt.')
+        ||
         error?.status === 409 && ['Lagringsforsøket har annet innhold eller tidligere versjon. Kontroller originalforsøket.', 'Lagret avvik er endret. Hent og gjennomgå på nytt.', 'Avviket er utløpt eller avsluttet manuelt og er skrivebeskyttet.', 'Avviket er utløpt og er skrivebeskyttet.'].includes(detail)
         || error?.status === 422 && ['Kontroller feltene.', 'Oppgi en fremtidig sluttdato for avviket.', 'Sluttdatoen gir lagringstid utenfor støttet kalender.'].includes(detail)
         || capacityDetail);
@@ -241,13 +257,30 @@ export function usePrivateNotices(props: Props) {
         try { const latest = await current(version); if (alive.current && version === generation.current) setComparison(latest.records.find(v => v.id === op.target) ?? null); }
         catch (readError) { unavailable(readError, version); }
       } else { if ([404, 410].includes(error?.status)) unavailable(error, version); setMessage('Lagringen er uavklart. Kontroller eller prøv samme forsøk.'); }
-    } finally { sending.current = false; if (alive.current) setBusy(false); }
+    } finally { if (version === generation.current) { sending.current = false; if (alive.current) setBusy(false); } }
   }
-  function save() {
+  async function save() {
     if (intervalError) { setMessage('Gyldig til må være samtidig med eller etter Gyldig fra. Rett gyldighetsintervallet før lagring.'); return; }
-    if (!mutable || !normalized || pending || conflict || unresolvedTime || fieldErrors.length) { setValidationAttempted(true); return; }
+    if (sending.current || busy || !mutable || !normalized || pending || conflict || unresolvedTime || fieldErrors.length) { setValidationAttempted(true); return; }
     setValidationAttempted(false);
-    void send({ path: '/notices' + (base ? '/' + base.id : ''), kind: 'save', target: base?.id ?? null, before: base, body: { operation_id: crypto.randomUUID(), expected_revision: base?.revision ?? 0, content: normalized } });
+    let operationId = crypto.randomUUID();
+    if (!base) {
+      const version = generation.current;
+      sending.current = true; setBusy(true);
+      try {
+        const issued = await props.mutation('/notice-operations', {});
+        if (!alive.current || version !== generation.current) return;
+        if (!issued || Object.keys(issued).sort().join() !== 'expires_at,operation_id' || !uuid(issued.operation_id) || !stamp(issued.expires_at)) throw Error();
+        operationId = issued.operation_id;
+      } catch (error: any) {
+        if (alive.current && version === generation.current) {
+          if (error?.status === 401) props.expired();
+          setMessage('Lagringsforsøket kunne ikke opprettes. Forslaget er beholdt. Prøv Lagre avvik igjen.');
+        }
+        return;
+      } finally { sending.current = false; if (alive.current) setBusy(false); }
+    }
+    void send({ path: '/notices' + (base ? '/' + base.id : ''), kind: 'save', target: base?.id ?? null, before: base, body: { operation_id: operationId, expected_revision: base?.revision ?? 0, content: normalized } });
   }
   function action(value: Notice, kind: 'check' | 'end') {
     if (!available || props.suspended || !editable(value, now) || dirty || pending || busy) return;
@@ -327,8 +360,8 @@ export function NoticeScreens({ notices: n, back }: { notices: NoticeController;
   </section>;
 }
 
-export const editable = (v: Notice, now = Date.now()) => v.status === 'registered' && (!v.valid_until || Date.parse(v.valid_until) > now) && Date.parse(v.expires_at) > now;
-export const noticeStatus = (v: Notice, now = Date.now()) => v.status === 'ended_manually' ? 'Avsluttet manuelt' : !v.valid_until ? 'Mangler sluttdato' : Date.parse(v.valid_until) <= now ? 'Utløpt' : 'Registrert';
+export const editable = (v: Notice, now = privateNow()) => v.status === 'registered' && (!v.valid_until || Date.parse(v.valid_until) > now) && Date.parse(v.expires_at) > now;
+export const noticeStatus = (v: Notice, now = privateNow()) => v.status === 'ended_manually' ? 'Avsluttet manuelt' : !v.valid_until ? 'Mangler sluttdato' : Date.parse(v.valid_until) <= now ? 'Utløpt' : 'Registrert';
 
 export function NoticeFacts({ value: v, now }: { value: Notice; now: number }) {
   return <div className="notice-facts"><p>Tittel: {v.title}</p><p>Linjer fra kilden: {v.line_scope === 'all' ? 'Alle linjer' : tagText(v.line_tags)}</p><p>Status: {noticeStatus(v, now)}</p>

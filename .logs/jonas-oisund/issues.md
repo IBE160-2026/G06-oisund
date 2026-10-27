@@ -17,3 +17,6 @@
 
 - [ ] 2026-10-27 [Status Story 12.1 og 12.2](997-2026-10-27-07-32-34-status-story-12-1-og-12-2.md) — Manuell eieraksept av både 12.1 og 12.2 gjenstår; ingen av storyene er godkjent.
 - [ ] 2026-10-27 [Status Story 12.1 og 12.2](997-2026-10-27-07-32-34-status-story-12-1-og-12-2.md) — Integrer 12.2 med 12.1 (014, opprettelses-ID-er, Date/CORS/felles klokke og porter), og verifiser faktisk avviksopprettelse, samme-ID-gjentakelse og tapt svar.
+- [ ] 2026-10-27 [Story 12.1](997-2026-10-27-00-22-13-story-12-1-retained-data-boundary.md) — Utfør manuell aksept etter stegene i rapporten; teknisk review er ferdig og aksept er ikke registrert.
+- [ ] 2026-10-27 [12.2-integrasjon](997-2026-10-27-00-22-13-story-12-1-retained-data-boundary.md) — Integrer 014/opprettelses-ID-er, Date/CORS/felles klokke og VITE-portkonfigurasjon etter 12.1-rapporten; ingen uferdig 12.2-kode er hentet inn.
+

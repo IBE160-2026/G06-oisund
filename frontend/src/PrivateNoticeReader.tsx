@@ -1,3 +1,4 @@
+import { privateNow, observePrivateTime } from './privateClock';
 import { useEffect, useRef, useState } from 'react';
 import { NoticeFacts, validNotice, type Notice } from './PrivateNotices';
 
@@ -8,7 +9,7 @@ const strings = (v: any, max: number) => Array.isArray(v) && v.length <= max && 
 const sameMembers = (a: string[], b: string[]) => a.length === b.length && a.every(value => b.includes(value));
 function valid(v: any, id: string, expiry: string, line: string, date: string): v is Result {
   return keys(v, 'available_dates,available_lines,candidates,expires_at,selected_date,selected_line,server_now,stored_count,unknown_line_count,unmatched_notice_count,workday_id')
-    && typeof v.server_now === 'string' && Number.isFinite(Date.parse(v.server_now)) && v.workday_id === id && typeof v.expires_at === 'string' && Number.isFinite(Date.parse(v.expires_at)) && Date.parse(v.expires_at) <= Date.parse(expiry) && Date.parse(v.expires_at) > Date.now()
+    && typeof v.server_now === 'string' && Number.isFinite(Date.parse(v.server_now)) && v.workday_id === id && typeof v.expires_at === 'string' && Number.isFinite(Date.parse(v.expires_at)) && Date.parse(v.expires_at) <= Date.parse(expiry) && Date.parse(v.expires_at) > privateNow()
     && strings(v.available_lines, 200) && strings(v.available_dates, 400) && v.available_dates.every((d: string) => /^\d{4}-\d{2}-\d{2}$/.test(d) && new Date(d).toISOString().slice(0, 10) === d)
     && Number.isSafeInteger(v.unknown_line_count) && v.unknown_line_count >= 0 && v.unknown_line_count <= 200
     && Number.isSafeInteger(v.unmatched_notice_count) && v.unmatched_notice_count >= 0 && v.unmatched_notice_count <= v.stored_count
@@ -26,10 +27,14 @@ function valid(v: any, id: string, expiry: string, line: string, date: string): 
 
 export function PrivateNoticeReader(p: { id: string; expiresAt: string; open: boolean; available: boolean; suspended: boolean; request: (path: string) => Promise<any>; expired: () => void; shorten: (value: string) => void; back: () => void; maintenance: () => void }) {
   const [line, setLine] = useState(''), [date, setDate] = useState(''), [retry, setRetry] = useState(0);
-  const [result, setResult] = useState<Result | null>(null), [choices, setChoices] = useState<Result | null>(null);
+  const [result, setResult] = useState<Result | null>(null), [choices, setChoices] = useState<Pick<Result, 'available_lines' | 'available_dates'> | null>(null);
   const [state, setState] = useState<'loading' | 'ready' | 'unavailable'>('loading');
-  const [now, setNow] = useState(Date.now()); const serverAnchor = useRef({ instant: Date.now(), elapsed: performance.now() });
-  useEffect(() => { const timer = window.setInterval(() => setNow(serverAnchor.current.instant + performance.now() - serverAnchor.current.elapsed), 1000); return () => clearInterval(timer); }, []);
+  const [now, setNow] = useState(privateNow());
+  useEffect(() => { const timer = window.setInterval(() => setNow(privateNow()), 1000); return () => clearInterval(timer); }, []);
+  useEffect(() => {
+    setResult(current => current && current.candidates.some(candidate => Date.parse(candidate.notice.expires_at) <= now)
+      ? { ...current, candidates: current.candidates.filter(candidate => Date.parse(candidate.notice.expires_at) > now) } : current);
+  }, [now]);
   const generation = useRef(0), title = useRef<HTMLHeadingElement>(null);
   useEffect(() => { if (p.open) title.current?.focus(); }, [p.open]);
   useEffect(() => {
@@ -42,7 +47,7 @@ export function PrivateNoticeReader(p: { id: string; expiresAt: string; open: bo
     void p.request('/workdays/' + p.id + '/notice-reader' + (query.size ? '?' + query : '')).then(value => {
       if (!active || generation.current !== version) return;
       if (!valid(value, p.id, p.expiresAt, line, date)) throw Error('Malformed reader result');
-      serverAnchor.current = { instant: Date.parse(value.server_now), elapsed: requestedAt }; setNow(serverAnchor.current.instant + performance.now() - requestedAt); setResult(value); setChoices(value); setState('ready'); p.shorten(value.expires_at);
+      observePrivateTime(value.server_now, requestedAt); setNow(privateNow()); setResult(value); setChoices({ available_lines: value.available_lines, available_dates: value.available_dates }); setState('ready'); p.shorten(value.expires_at);
     }).catch(async error => {
       if (!active || generation.current !== version) return;
       setResult(null); setState('unavailable');
@@ -55,7 +60,7 @@ export function PrivateNoticeReader(p: { id: string; expiresAt: string; open: bo
     }).finally(() => window.clearTimeout(timer));
     return () => { active = false; window.clearTimeout(timer); };
   }, [p.id, p.open, p.available, p.suspended, p.expiresAt, line, date, retry]);
-  const trusted = p.open && p.available && !p.suspended && state === 'ready' && result && result.workday_id === p.id && result.selected_line === (line || null) && result.selected_date === (date || null) && Date.parse(result.expires_at) > Date.now() ? result : null;
+  const trusted = p.open && p.available && !p.suspended && state === 'ready' && result && result.workday_id === p.id && result.selected_line === (line || null) && result.selected_date === (date || null) && Date.parse(result.expires_at) > privateNow() ? result : null;
   return <section className="private-notices" hidden={!p.open} aria-label="Avvik for linjer og datoer">
     <h2 tabIndex={-1} ref={title}>Avvik for linjer og datoer</h2>
     <p>Lagrede manuelle kildeopplysninger sammenlignes med bekreftede linjer og planlagte aktivitetsintervaller. Planlagte intervaller styrer tidsmessig relevans. Utløpte og manuelt avsluttede avvik skjules automatisk; valgt aktivitet endrer ikke utvalget. Ingen garanti for kildedekning, nøyaktig tur eller holdeplass. Kontroller originalkilden.</p>
@@ -68,8 +73,8 @@ export function PrivateNoticeReader(p: { id: string; expiresAt: string; open: bo
     {trusted && <>
       {(trusted.unknown_line_count > 0 || trusted.available_lines.length === 0) && <p>Aktiviteter uten oppgitt linje: {trusted.unknown_line_count}. Ingen linje utledes for disse aktivitetene; linjedekningen kan ikke fastslås her.</p>}
       {trusted.unmatched_notice_count > 0 && <p>Lagrede avvik med linjetagger eller ruteoverskrifter uten eksakt samsvar: {trusted.unmatched_notice_count}. Disse kan mangle i utvalget. Ingen linjenumre hentes ut av overskrifter.</p>}
-      {trusted.stored_count === 0 ? <p>Ingen avvik er lagret i registeret. Dette bekrefter ikke at linjene er uten avvik.</p> : trusted.candidates.filter(c => Date.parse(c.notice.valid_until!) > now).length === 0 ? <p>Ingen lagrede avvik samsvarer med valget. Dette bekrefter ikke at linjene er uten avvik.</p> : null}
-      <ul className="notice-list">{trusted.candidates.filter(c => Date.parse(c.notice.valid_until!) > now).map(c => <li key={c.notice.id}><details><summary><span>{c.notice.title} · {c.notice.status === 'ended_manually' ? 'Avsluttet manuelt' : 'Registrert'}</span><br />Linjer: {c.matching_lines.join(', ') || 'Alle linjer; ingen kjente i planen'}</summary>
+      {trusted.stored_count === 0 ? <p>Ingen avvik er lagret i registeret. Dette bekrefter ikke at linjene er uten avvik.</p> : trusted.candidates.filter(c => Date.parse(c.notice.valid_until!) > now && Date.parse(c.notice.expires_at) > now).length === 0 ? <p>Ingen lagrede avvik samsvarer med valget. Dette bekrefter ikke at linjene er uten avvik.</p> : null}
+      <ul className="notice-list">{trusted.candidates.filter(c => Date.parse(c.notice.valid_until!) > now && Date.parse(c.notice.expires_at) > now).map(c => <li key={c.notice.id}><details><summary><span>{c.notice.title} · {c.notice.status === 'ended_manually' ? 'Avsluttet manuelt' : 'Registrert'}</span><br />Linjer: {c.matching_lines.join(', ') || 'Alle linjer; ingen kjente i planen'}</summary>
         <p>Samsvarende bekreftede linjer: {c.matching_lines.join(', ') || 'Ingen kjente'}</p>
         {c.line_uncertain && <p>Usikkert linjesamsvar. Linjetagger eller ruteoverskrifter uten eksakt samsvar: {c.unmatched_tags.join(', ') || 'Ukjent'}. Ingen linjenumre er hentet ut av overskrifter.</p>}
         {c.validity !== 'known' && <p>{c.validity === 'partial' ? 'Delvis kjent gyldighet' : 'Gyldighet ukjent'}: beholdt som mulig kandidat; tidsmessig samsvar er ikke bekreftet.</p>}
