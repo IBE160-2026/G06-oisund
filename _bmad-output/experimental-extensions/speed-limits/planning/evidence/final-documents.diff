@@ -1,0 +1,734 @@
+--- before/README.md
++++ after/README.md
+@@ -2,7 +2,7 @@
+ 
+ **EXPERIMENTAL EXTENSION — OUTSIDE APPROVED V1 SCOPE**
+ 
+-Kort spesifikasjon med pilotmanifest, oppdatert 2026-10-27. Første omfang er registrert aktuell vegfartsgrense og visuelt forvarsel omtrent 300 meter langs kvalifisert kjøreveg før neste endring. Begge beholdes i første plan. V1.4.0 er en planlagt versjon, ikke et godkjent leveranseløfte. Implementering venter på ferdigstilt og testet godkjent V1, nødvendige avhengigheter og særskilt bestilling.
++Ferdig planleggingspakke med kildekvalifisering, spesifikasjon og én epic med sju stories, oppdatert2026-10-27. Første omfang er registrert aktuell vegfartsgrense og visuelt forvarsel omtrent 300 meter langs kvalifisert kjøreveg før neste endring. Begge beholdes i første plan. V1.4.0 er en planlagt versjon, ikke et godkjent leveranseløfte. Implementering venter på ferdigstilt og testet godkjent V1, nødvendige avhengigheter og særskilt bestilling.
+ 
+ ## Arbeidsområde og utgangspunkt
+ 
+@@ -19,11 +19,11 @@
+ 
+ ## Leseveiledning
+ 
+-1. [Gjeldende korte spesifikasjon](specs/spec-speed-limits/SPEC.md), med [produktatferd](specs/spec-speed-limits/behavior.md), [pilotmanifest](specs/spec-speed-limits/pilot-manifest.md), [aksept-/verifikasjonsplan](specs/spec-speed-limits/verification.md) og [offisielle skilt/vilkår](specs/spec-speed-limits/signs-and-rights.md).
+-2. [Valgte produktbeslutninger og neste steg](plan.md).
+-3. [Grensesnitt og arkitekturgjenbruk](interfaces.md).
+-4. [Kildebelagt teknisk undersøkelse](research/technical-speed-limits-2026-10-27/research.md), med små offentlige kildeuttrekk og digests.
+-5. [Utdataruting og BMAD-avgrensning](process/routing.md), [dokumentkontroll](process/validation.md) og [åpne punkter](process/jonas-oisund/issues.md).
++1. [Ferdig epic og sju stories](planning/epics.md), med [sluttvalidering og beredskap](planning/validation.md).
++2. [Gjeldende spesifikasjon](specs/spec-speed-limits/SPEC.md), [atferd](specs/spec-speed-limits/behavior.md), [pilotmanifest v1-planning](specs/spec-speed-limits/pilot-manifest.md), [akseptmatrise](specs/spec-speed-limits/verification.md) og [profil/porter](specs/spec-speed-limits/technical-addendum.md).
++3. [Avsluttet kildekvalifisering](qualification/2026-10-27/qualification.md), [ordnet kildelenkekjede](qualification/2026-10-27/source-bound-route.json), [ikonrettigheter](specs/spec-speed-limits/signs-and-rights.md).
++4. [Produktbeslutninger](plan.md), [grensesnitt](interfaces.md) og [opprinnelig research](research/technical-speed-limits-2026-10-27/research.md).
++5. [BMAD-ruting](planning/evidence/routing.md), [sesjonslogg](process/jonas-oisund/999-2026-10-27-20-11-16-fartsgrenseplanlegging.md) og [åpne gjennomføringsporter](process/jonas-oisund/issues.md).
+ 
+ ## Lesende prosjektgrunnlag
+ 
+@@ -37,8 +37,10 @@
+ 
+ ## Gjeldende pilot og status
+ 
+-Valgt overflatetrasé: Polaria → Strandvegen sørover rundt sørenden av Tromsøya → Kvaløyvegen nordover → Langnes → Flyplassvegen, slutt etter sørlig flyplassrundkjøring. Tre rundkjøringer underveis, fire med slutten etter brukerens rettelse. Foreslått identifisering: Langnesvegen, Workinn, Giæverbukta, flyplassavkjøringen. Eksakte forbindelser/lenker og fartsgrenseplasseringer er fortsatt datakvalifisering, ikke verifisert kjørerute. Ca. én mil og 30/50/60/70 kommer fra brukerens lokalkunnskap.
++Valgt overflatetrasé: Polaria→Strandvegen rundt sørenden→Kvaløyvegen→Langnes→Flyplassvegen, slutt etter sørlig flyplassrundkjøring. Fire rundkjøringer er bundet til NVDB-identifikatorer. Planintervallet går fra node1139933 til1138796, med139 kildesegmenter uten nodebrudd og summert kildelengde cirka8,66km. Det er ikke en fysisk målt eller fullstendig reguleringskvalifisert bussrute.
+ 
+-Fem capabilities og tolv senere akseptkontroller dekker aktuell grense, fast 300m-forvarsel, passering og uavhengig usikkerhet. Overflate/slutt, retning, visuell presentasjon og lyd er avklart; ingen gjenværende produktbeslutning blokkerer spesifikasjonen. Neste lille steg er å kvalifisere manifestets vegkoblinger/data og fryse profil, uten implementering.
++Registrerte verdier30/40/50/60/70 er funnet i målrettede uttrekk. To baklengsbuer fra rutetjenesten er forkastet. Det tidligere265,519m-eksempelet gjennom Workinn er ugyldig; R4 med70→50 ved utkjøring til Flyplassvegen er valgt kandidat for forvarsel gjennom rundkjøring. Riktig bue er18,448m; forvarsel krever fortsatt kvalifisert videre arm.
+ 
+-Spec-kjøringens [faktiske lokale ruting](specs/spec-speed-limits/evidence/routing.md) og [validering](specs/spec-speed-limits/validation.md) dokumenterer avgrensningen. Ingen produktimplementering, produkttester, posisjonsinnsamling, commit, push eller merge er utført. Historiske kontrollresultater fra første undersøkelse gjelder det opprinnelige dokumentsettet; den nye valideringen gjelder denne fortsettelsen.
++Planleggingen er fullført gjennom epics/stories. Ingen nye produktvalg blokkerer planen. Operativ kilde-/feltkontroll, faktiske ikonfiler, implementasjonens syntetiske verifikasjon og fysisk GPS-/skiltkontroll er konkrete senere story-kriterier, ikke påstått bestått. Ferdig/testet V1 og kvalifiserte rutenett-/posisjonsavhengigheter samt separat byggbestilling kreves før implementering.
++
++Alle nye filer, prosessminner og kildebelegg ligger her. Ingen produktimplementering, produkttester, faktisk posisjonsinnsamling, commit, push eller merge er utført. Tidligere spec-kontroller gjelder sitt historiske dokumentsett; [gjeldende sluttkontroll](planning/validation.md) gjelder hele den nye planleveransen.
+--- before/plan.md
++++ after/plan.md
+@@ -1,16 +1,17 @@
+-# Første omfang og valgte produktbeslutninger
++# Omfang og besluttet planspor
+ 
+ **EXPERIMENTAL EXTENSION — OUTSIDE APPROVED V1 SCOPE**
+ 
+-Oppdatert 2026-10-27 etter brukerens produktvalg. [SPEC.md med følgedokumenter](specs/spec-speed-limits/SPEC.md) er gjeldende korte kontrakt. Det tidligere forslaget om 1–2 km på Eidvegen er erstattet av korridoren nedenfor; den opprinnelige undersøkelsen beholder verdi som kildegrunnlag, ikke pilotdekning.
++[Spesifikasjonen](specs/spec-speed-limits/SPEC.md) og [epic med sju stories](planning/epics.md) er den ferdige planleveransen SL-PLAN-1. Én epic samler aktuell registrert vegfartsgrense og fast300m-forvarsel; mindre mellomleveranser reduserer ikke første samlede omfang.
+ 
+-- **SL-D1:** Overflatetrasé Strandvegen ved Polaria sørover rundt sørenden av Tromsøya → Kvaløyvegen nordover → Langnes → flyplassavkjøringen. Slutt etter fjerde rundkjøring på Flyplassvegen, før terminalområdet. Motsatt retning vurderes senere.
+-- **SL-D2:** Tydelig aktuelt norsk fartsgrenseskilt og mindre kommende skilt med avstand som teller ned fra omtrent 300 m langs kvalifisert veg. Både økning og reduksjon. Visuelt uten lyd; synlig kart utenfor scope.
+-- **SL-D3:** Tre rundkjøringer underveis, fire med sluttrundkjøringen etter brukerens rettelse. Ca.10 km og 30/50/60/70 er lokalkunnskap; faktisk lengde, grenser og overgangspunkter må verifiseres.
+-- **SL-D4:** Planlagt trasé kan ikke tvinge målinger til feil veg. Aktuell og kommende visning har uavhengig usikkerhet; ingen tidligere verdi som tilsynelatende aktuell.
++- SL-D1: Overflate Polaria→Strandvegen rundt sørenden→Kvaløyvegen→Langnes→Flyplassvegen, slutt etter R4, ingen terminal eller motsatt retning.
++- SL-D2: Stort offisielt aktuelt skilt, mindre kommende skilt med nedtelling langs veg; både økning og reduksjon, visuelt uten lyd eller kart.
++- SL-D3: Fire rundkjøringer inkludert slutt. Lokal beskrivelse «omtrent én mil» er nå supplert med8,66km summert kildelengde for konkret planintervall; dette er ikke målt kjøring. Kildeuttrekk viser også40, i tillegg til30/50/60/70.
++- SL-D4: Faktisk vegtilknytning og videre vegvalg har separat usikkerhet; planlagt veg tvinger ikke posisjonen. Ingen tidligere grense som falskt aktuell.
++- SL-D8: Brukerens siste bestilling omfatter ferdige epics og stories og erstatter tidligere forbud mot disse. Alle andre avgrensninger beholdes.
++- SL-D10: R2/R3-buer mot feltretningen forkastes. R4/70→50 er konkret kandidat for rundkjøring mellom posisjon og endring;300m beholdes.
++- SL-D11: Offisiell EPS med dokumentert NLOD-spor er valgt for senere ikonleveranse. Numerisk SL-LAB-1 er et forslag for syntetisk kvalifisering, ikke en godkjent fysisk profil.
+ 
+-Foreslått identifisering er R1 Kvaløyvegen/Langnesvegen, R2 Workinn/Langnestunnelen, R3 Giæverbukta, R4 sørlig flyplassavkjøring. [Pilotmanifestet](specs/spec-speed-limits/pilot-manifest.md) beskriver vegvalg, kilder, usikre forbindelser og nødvendige eksakte ID-er uten å fremstille listen som en kildeverifisert nåsituasjon.
++[Kvalifiseringsrapport](qualification/2026-10-27/qualification.md) skiller dokumenterte feltregler, observert data, avledet planrute og fysisk ukjent. Avgrenset dataarbeid er avsluttet; gjenværende operative/fysiske kontroller er eksplisitte porter og story-kriterier.
+ 
+-Tidligere PV-1/PV-2 er avklart. Numerisk kvalitets-/aldersprofil, nåværende vegkobling, dekningshull, variable/midlertidige grenser og filspesifikt lisensspor er kvalifiseringsoppgaver. GPS-fart og dynamisk terskel forblir senere trinn; ingen fartsalarm inngår.
+-
+-Neste lille planleggingssteg: kvalifiser K1–K4 i manifestet med avgrenset offentlig vegdata og frys manifest v1/profilark. Ved kildeavvik ber vi bare om konkret lokal identifisering; ingen ny PRD-/UX-/arkitekturrunde eller epics/stories. Implementering venter på ferdig/testet godkjent V1, implementerte/kvalifiserte avhengigheter og separat bestilling.
++Neste steg i prosjektet er å ferdigstille/teste V1 og kvalifisere avhengighetene. Deretter kan en senere beredskapskontroll vurdere SL-E1; ingen sprint eller bygging starter her. GPS-fart/dynamisk varsling er fortsatt eget senere trinn; fartsoverskridelsesalarm inngår ikke.
+--- before/interfaces.md
++++ after/interfaces.md
+@@ -34,3 +34,7 @@
+ Grenseevaluering returnerer separat status for ukjent aktuell, uavklart videre veg, manglende fremoverdata, ingen kjent endring i komplett 300m-horisont og grensepassering under vurdering. Varselidentitet skiller fysisk endringsforekomst/passering fra snapshotrevisjon; revisjonsbytte invaliderer, men gir ikke automatisk nytt varsel. Numerisk profil-ID/versjon og manifest-ID kreves før evaluering kan erklæres kvalifisert. Foreslått pilotmanifest binder offentlig korridor uten å late som en konkret datert bussavgang er valgt; senere integrasjon med valgt aktivitet trenger fortsatt rutekontrakten ovenfor.
+ 
+ Et kort målevindu og dedupliseringstilstand er øktlokalt. Stillstand kan bevare fersk vegtilknytning, men etablerer ingen ny retning. Ved ukjent kildealder/overskredet profil eller kjent ukvalifisert variabel/midlertidig regulering settes berørt verdi til null. Registrert veggrense, optional qualifiedSpeed og en eventuell fremtidig kjøretøyregelberegning er ulike felt/domener; ingen av de to siste fylles automatisk.
++
++## SL-PLAN-1
++
++[Datakontraktpresisering og numerisk laboratorieprofil](specs/spec-speed-limits/technical-addendum.md) og [storyfordeling](planning/epics.md) konkretiserer dette grensesnittet. Kildebasert pilotmanifest er offentlig planreferanse; det oppretter ikke privat datert rutebinding. Fullt intervall for overordnet/detaljert mapping og feltretning må følge snapshotet. R2/R3 viser hvorfor rutetjenestens korteste kjede må kontrolleres mot feltretning. Katalogens objektretning, basisnettets lenkeretning og vegens metreringsretning er tre forskjellige forhold. Ingen av referanseutvidelsenes kontrakter er endret.
+--- /dev/null
++++ after/planning/epics.md
+@@ -0,0 +1,217 @@
++---
++stepsCompleted: [1, 2, 3, 4]
++status: planning-complete
++scope: EXPERIMENTAL EXTENSION — OUTSIDE APPROVED V1 SCOPE
++planning_version: SL-PLAN-1
++build_authorization: not-granted
++inputDocuments:
++  - ../specs/spec-speed-limits/SPEC.md
++  - ../specs/spec-speed-limits/behavior.md
++  - ../specs/spec-speed-limits/pilot-manifest.md
++  - ../specs/spec-speed-limits/verification.md
++  - ../specs/spec-speed-limits/signs-and-rights.md
++  - ../specs/spec-speed-limits/technical-addendum.md
++  - ../qualification/2026-10-27/qualification.md
++  - ../interfaces.md
++  - ../research/technical-speed-limits-2026-10-27/research.md
++---
++
++# V1.4.0 — Epic Breakdown
++
++**EXPERIMENTAL EXTENSION — OUTSIDE APPROVED V1 SCOPE**
++
++## Overview
++
++Avgrenset brownfield-plan. SPEC/behavior gir kravgrunnlaget i stedet for ny PRD/UX; eksisterende arkitektur bevares. Brukerens forhåndsautorisasjon dekker rutineovergangene i BMAD, ikke bygging eller produktaksept. Ingen sprintstart.
++
++## Requirements Inventory
++
++### Functional Requirements
++
++FR1: Vis aktuell registrert vegfartsgrense med originalt norsk skilt eller tydelig ukjent med årsak (CAP-1/5, AC-01/12).
++FR2: Vis nærmeste kommende økning/reduksjon med mindre skilt og målebasert nedtelling fra omtrent300m langs relevant rettet veg; sen oppstart, tett serie og deduplisering inngår (CAP-2, AC-02–05).
++FR3: Bytt aktuell verdi bare ved underbygget passering; overlapp gir ukjent, ikke gammel eller tidlig ny grense (CAP-3, AC-06).
++FR4: Skill aktuell vegtillit fra videre vegvalg; håndter alle fire rundkjøringer, parallelle veger, hopp og feil arm uten tvang til plan (CAP-4, AC-07/08).
++FR5: Håndter stopp, avbrudd, eksplisitt gjenopptakelse, bortfall av varsel, avvik, kontekst-/kildefeil og tilgangstap (CAP-2/4, AC-09–11).
++FR6: Vis kilde-/databegrensninger og gyldighet; manglende/variable/midlertidige grenser og kjøretøyets tillatte fart må ikke fylles med ubegrunnede tall (CAP-5, AC-12).
++
++### NonFunctional Requirements
++
++NFR1: Kun foreground opt-in; frosset profil og versjonsbinding; ingen ukvalifiserte tall eller gamle callbacks.
++NFR2: Avgrenset offentlig vegsnapshot og kort RAM-vindu; ingen full kjørehistorikk, ekstern GPS-per-fix eller utvidet privat retensjon.
++NFR3: Dag/natt, lesbar skiltforskjell, tekstalternativer og status som ikke bare uttrykkes med farge.
++NFR4: Kilde-/objekt-/nettversjon, gyldighet, hash og avgrenset oppdatering må være etterprøvbar; kildeutfall gir konservativ status.
++
++### Additional Requirements
++
++Gjenbruk React/TypeScript–FastAPI–PostgreSQL. V1 ferdig og testet; V1.2/V1.3 implementert og kvalifisert før bygging. Tillegget trenger eksplisitt rettet geometri og detaljert→overordnet vegkobling; holdeplassorden er utilstrekkelig. Ingen ny tjeneste, global konfigurasjon, synlig kart, lyd, egenfartsavhengighet eller alarm. Starter/greenfield-template gjelder ikke.
++
++### UX Design Requirements
++
++UX-DR1: Stort aktuelt362-skilt og mindre neste362-skilt med tydelige etiketter og ca.-avstand.
++UX-DR2: Ukjent aktuell og skjult kommende har egne årsaker; ingen gammel tallfallback.
++UX-DR3: Ett varselpanel per passering, uten repeterende aktivering ved terskelpendling/gjenkomst; ingen lyd.
++UX-DR4: Eksisterende dag/natt/tilgangs-/fokusregler beholdes; ingen interaksjon under kjøring kreves for vanlig nedtelling.
++
++### FR Coverage Map
++
++| Krav | Epic / stories | Verifikasjonsgrunnlag |
++|---|---|---|
++| FR1 | SL-E1 /1.2,1.3 | AC-01/12 |
++| FR2 | SL-E1 /1.4,1.5 | AC-02–05/07/10 |
++| FR3 | SL-E1 /1.4 | AC-05/06 |
++| FR4 | SL-E1 /1.3,1.5 | AC-07/08 |
++| FR5 | SL-E1 /1.3,1.4,1.6 | AC-09–11 |
++| FR6 | SL-E1 /1.1,1.2,1.6,1.7 | AC-11/12 |
++| NFR1 |1.1,1.3–1.6 | Generasjoner/profil/ingen gamle callbacks |
++| NFR2 |1.1,1.3,1.6,1.7 | RAM-/requesttak og ingen kjørehistorikk |
++| NFR3 |1.2,1.7 | Tema, lesbarhet og tekstalternativ |
++| NFR4 |1.1,1.6 | Proveniens/atomisk snapshot/ferskhet |
++| UX-DR1/2 |1.2,1.4 | Adskilte skilt og usikkerhetsårsaker |
++| UX-DR3 |1.4,1.6 | Passeringsidentitet/gjenkomst uten ny aktivering |
++| UX-DR4 |1.2,1.6,1.7 | Eksisterende tilgang/fokus, ingen kjøreinteraksjon |
++
++[AC-01–12](../specs/spec-speed-limits/verification.md) er senere kontroller, ikke beståtte tester.
++
++## Epic List
++
++### Epic1 / SL-E1: Forstå registrert grense og neste endring på pilotkorridoren
++
++Brukeren kan se aktuell vegfartsgrense og visuelt 300m-forvarsel med underbygget passering og ærlig usikkerhet på valgt Polaria–flyplass-korridor. **FRs covered:** FR1–FR6. **Capabilities:** CAP-1–5.
++
++Én epic fordi data, matching, avstand og samme skiltpanel leverer ett sammenhengende brukerutfall. Å dele dem etter tekniske lag ville skape avhengige epics uten egen nytte. Planlagt sekvens er sju avgrensede stories. Tidligere firestory-skisse er splittet for å skille kildeberedskap, visning, matching, forvarsel, kryss, livssyklus og fysisk aksept. Hver story kan aksepteres innen sin uttrykkelige støtteflate uten å vente på senere story; første del-leveranse reduserer ikke epicens krav om begge visninger.
++
++Eksterne porter: ferdig/testet V1 og implementert/kvalifisert V1.2/V1.3, valgt datert rutebinding, samt senere byggbestilling. Pågående datagap og fysisk GPS kvalifiseres i riktige stories; de blokkerer ikke utkastet. Planen kan ferdigstilles uten å erklære disse portene bestått. Ingen implementering er autorisert.
++
++
++## Epic 1: Forstå registrert grense og neste endring på pilotkorridoren
++
++**ID: SL-E1.** Samlet første leveranse er aktuell registrert vegfartsgrense og fast300m-forvarsel, begge med ærlig usikkerhet. Mellomleveranser er interne avgrensede demonstrasjoner og endrer ikke epicens omfang. Én epic beholdes fordi dette er ett sammenhengende brukerutfall; historiene nedenfor er gjennomførbare i rekkefølge uten avhengighet på senere stories.
++
++**Felles før start:** G0 i [teknisk tillegg](../specs/spec-speed-limits/technical-addendum.md). Alle tester/bygging som omtales nedenfor er senere arbeid. Ingen story utvider omfanget til kart, lyd, egenfart, dynamisk varsel, alarm eller kjøretøyregelberegning. Alle bruker historisk grunnlag med oppdatert kildekontroll før faktisk bruk. Ingen automatisk produksjonsaktivering etter en bestått story.
++
++### Story 1.1: Klargjør et etterprøvbart og avgrenset pilotgrunnlag
++
++**ID:** SL-E1-S1. **Avhengighet:** G0; ingen annen story. **Krav:** FR6, NFR1/2/4. **Størrelse:** én adapter-/manifestleveranse; ingen matcher eller UI-ombygging.
++
++Som pilotansvarlig vil jeg klargjøre en avgrenset korridor med synlig datastatus, slik at eksperimentet bare bruker områder det kan begrunne.
++
++**Acceptance Criteria:**
++
++**Given** SL-P1 og de45 historiske uttrekkene, **When** pilotgrunnlaget forberedes, **Then** en versjonert offentlig snapshotpakke binder hvert valgt intervall til kilde-ID/versjon, felt, gyldighet, CRS, lengde og hash, **And** ukjent metadata, restriksjoner og dekningskanter er eksplisitte.139segmenter/8656,655m er et kontrollgrunnlag, ikke en hardkodet sannhet ved nyere kildeversjon.
++
++**Given** R2/R3 og felt1/3, **When** rutebindingen valideres, **Then** den avviser de korte baklengsbuene og bruker kvalifisert økende retning, **And** alle valgte detaljlenker har kontrollert superstedfesting og feltanvendelighet. Nodekontakt alene godkjenner ikke svingeforbud eller busstilgang. Ikke kvalifisert del markeres utilgjengelig; den kan ikke passere G1 for full korridor.
++
++**Given** manglende, overlappende eller feltavhengige105-verdier, **When** dekningsrapporten lages, **Then** hull og reelle konflikter skiller seg fra to50-objekter for forskjellige felt, **And** MED/MOT på objektet tolkes i lys av katalog105, ikke som generell retningslov. Ingen standard50/80 fyller hull.
++
++**Given** begrensningene i SL-LAB-1, **When** kilden feiler, pagination går i ring eller request-/byte-/objekttak nås, **Then** uthentingen stopper med eksplisitt ufullstendig status, **And** delvis data erstatter aldri et gyldig snapshot atomisk. Ingen råposisjon, privat arbeidsdag eller full kjøreplan sendes til NVDB.
++
++**Given** endelig støttet delområde, **When** historien leveres, **Then** pakke og dekningsrapport kan inspiseres lokalt uten produkt-GPS, **And** et manifest med uløste obligatoriske datafelt kan bare være researchgrunnlag, ikke aktiv pilotpakke. G1s gjenværende avvik har eier og konkret kildekontroll; ingen senere story trengs for å akseptere korrekt blokkering.
++
++### Story 1.2: Vis aktuell registrert grense og tydelig ukjent tilstand
++
++**ID:** SL-E1-S2. **Avhengighet:**1.1. **Krav:** FR1/6, NFR3, UX-DR1/2/4, AC-01/12. **Størrelse:** eksisterende panel + offisielle assets + grenseevaluering fra kontraktsinput; ingen GPS-matcher.
++
++Som sjåfør vil jeg se et forståelig aktuelt skilt eller en tydelig ukjent tilstand, slik at utdatert eller usikkert grunnlag ikke ser sikkert ut.
++
++**Acceptance Criteria:**
++
++**Given** kvalifisert RoadMatch-input for samme snapshot/kontekst og kjent verdi for hele intervallet, **When** panelet rendres, **Then** det viser originalt stort362-skilt med etiketten «Registrert vegfartsgrense», **And** kontraktsfiksturer dekker30/40/50/60/70. Uten kvalifisert input er live-visningen ukjent; en syntetisk demonstrasjon merkes og blandes ikke med privat aktivitet.
++
++**Given** null, stale, feil generasjon, ukjent veg, grenseoverlapp eller kjent ukvalifisert midlertidig/variabel regulering, **When** ny status mottas, **Then** gammel tallverdi fjernes i samme oppdatering og årsaken vises med tekst, **And** en grånet gammel verdi er ikke fallback. Registrert veggrense omtales ikke som bussens samlede tillatte fart.
++
++**Given** offisiell EPS-kilde/NLOD-spor, **When** ikonene tas inn, **Then** assetmanifestet for hver30/40/50/60/70-fil har originalURL, utgiver, hentetid/hash, lisens, attribusjon og eventuell teknisk konvertering, **And** standardproporsjoner/farger er kontrollert; uavklart SVG-rettighet blokkerer akkurat den asseten. Ingen KI-/egenprodusert erstatning.
++
++**Given** dag/natt og eksisterende målskjerm, **When** skilt og ukjent vises, **Then** etiketter/tekstalternativer er forståelige, status er ikke bare farge og panelet følger eksisterende tilgang/fokusregler, **And** ingen ny interaksjon kreves under vanlig kjøring. Fysisk lesbarhet kvitteres separat i1.7.
++
++### Story 1.3: Knytt flere målinger til aktuell veg på avgrensede hovedstrekk
++
++**ID:** SL-E1-S3. **Avhengighet:**1.1–1.2. **Krav:** FR1/4/5, NFR1/2, AC-01/08/09. **Størrelse:** rettlinjet/lokalt sammenhengende matching på1109722/1109517, integrert med panelet; usikre kryss kan gi ukjent uten støtte fra1.5.
++
++Som sjåfør vil jeg at aktuell grense bygger på flere målinger av faktisk veg, slik at en nærliggende veg eller et GPS-hopp ikke gir et feil skilt.
++
++**Acceptance Criteria:**
++
++**Given** én autorisert foreground-posisjonskilde og SL-LAB-1, **When** koherente tidsordnede målinger etablerer unik faktisk veg/retning, **Then** RoadMatch binder målet til rettet lenkeforekomst og begrunnet langsveg-usikkerhetsintervall, **And** panelet viser bare en grense som gjelder hele dette intervallet. Accuracy er et filter, ikke bevis på vegidentitet.
++
++**Given** parallelle veger eller veger over/under hverandre med uavklarte kandidater, **When** nærmeste linje eller holdeplassrekkefølge foreslår én veg, **Then** aktuell forblir ukjent til uavhengig posisjons-/topologievidens skiller dem, **And** planlagt trasé tvinger aldri målinger til denne vegen. Samme tall på to ukjente vegkandidater kvalifiserer ikke vegidentiteten.
++
++**Given** ut-av-rekkefølge-fikser, umulige overganger eller enkeltstående hopp, **When** de mottas, **Then** de kan ikke fremme posisjon/passering, **And** utilstrekkelig gjenværende belegg gir ukjent. Faktisk koherent avvik kan kvalifisere en annen veg med data; forventet videre veg oppheves.
++
++**Given** stillstand med tidligere kvalifisert veg og ferske konsistente fikser, **When** heading mangler eller er gammel, **Then** tidligere underbygget tilknytning kan bevares uten ny retning, **And** manglende oppdateringer over5s gir foreldet status. Grensene5s/25m/sekvens3 over2s kontrolleres både på og rett utenfor terskel i senere syntetiske forløp.
++
++**Given** løpende matching, **When** RAM-vinduet når30fikser/30s eller konteksten oppheves, **Then** data ryddes etter profilen, **And** ingen råfikser lagres i database, browserstorage, logger eller eksterne kall. Ingen ny skjult GPS-watch opprettes.
++
++### Story 1.4: Vis fast300m-forvarsel og underbygg passering
++
++**ID:** SL-E1-S4. **Avhengighet:**1.1–1.3. **Krav:** FR2/3/5, UX-DR1–3, AC-02–06. **Størrelse:** avstand/grense-state-machine + lite kommende panel på allerede kvalifiserte fremoverkjeder; ingen ny kryssklassifisering.
++
++Som sjåfør vil jeg se neste grense og avstanden frem til den, slik at jeg kan forberede både reduksjon og økning uten at aktuell grense byttes for tidlig.
++
++**Acceptance Criteria:**
++
++**Given** unik kvalifisert fremoverkjede og gyldig grensedata, **When** avstandsintervallet går310–320→290–300→230–240m, **Then** kommende skilt er først skjult, aktiveres så og teller ned fra målingene, **And** både50→30 og50→70 følger samme gate. Luftlinje/holdeplassavstand/timer brukes ikke. Egen fart kan være null.
++
++**Given** første sikre måling ved120m, **When** kjeden kvalifiseres, **Then** mindre skilt og ca.120m vises straks med separat etikett, **And** aktuell grense beholdes. Intervallet295–305m aktiverer ikke.
++
++**Given**302/298/301/297m og deretter bevegelse over320m/gjenkomst, **When** målingene gjelder samme passering, **Then** det finnes høyst én aktivering; panel kan trekkes tilbake og komme igjen uten ny animasjon, **And** avstanden kan øke ved underbygget bevegelse bort. Fersk stillstand gir ingen klokkedrevet nedtelling.
++
++**Given** usikkerhetsintervallet overlapper grensen, **When** passeringen vurderes, **Then** aktuell er ukjent og kommende nedtelling skjules, **And** først flere koherente målinger med hele intervallet på ny side og kvalifisert overgang gir ny aktuell. Enkelt GPS-hopp forbi gir ikke passering.
++
++**Given** to endringer80m fra hverandre og en tredje med lik verdi som naboen, **When** første endring passeres sikkert, **Then** neste vises straks med korrekt restavstand, **And** like verdier gir ingen ekstra hendelse og ukjent mellomrom hoppes aldri over. Nøkkel skiller fysisk forekomst/passering fra snapshotrevisjon.
++
++**Given** fremoversikt eller nestegrensedata forsvinner, **When** aktuell veg fortsatt er sikker, **Then** bare upcoming fjernes med årsak, **And** «Ingen registrert endring innen300m» brukes bare ved komplett kvalifisert horisont.
++
++### Story 1.5: Bevar riktig vegvalg gjennom pilotens kryss og rundkjøringer
++
++**ID:** SL-E1-S5. **Avhengighet:**1.1–1.4. **Krav:** FR2/4, AC-07/08/11. **Størrelse:** kvalifisering av de fire planlagte kryssene og deres relevante alternative armer; ingen generell landsdekkende ruter.
++
++Som sjåfør vil jeg beholde sikker aktuell grense selv om neste avkjøring er usikker, slik at forvarselet ikke gjelder en veg jeg kanskje ikke kjører.
++
++**Acceptance Criteria:**
++
++**Given** sikker aktuell veg før en rundkjøring, **When** flere plausible videre armer gir forskjellige fremoverforløp, **Then** current kan bestå mens upcoming skjules med «Videre veg usikker», **And** valgt rutetrasé alene opphever ikke tvetydigheten. En felles kjede frem til endringen kan kvalifiseres selv om et senere vegvalg er uavklart.
++
++**Given** den syntetiske AC-07-kjeden140+40+70m med kvalifisert arm, **When** avstand beregnes, **Then** resultatet er250m inklusive riktig bue, **And** feil arm eller parallelle/planskilt lenker uten forbindelse avvises. Kandidatene har selvstendig forventet vegvalg, ikke ruteplanen som fasit for faktisk posisjon.
++
++**Given** R4-kildekjeden med200m før innkjøring og18,448m bue til70→50, **When** inn-/utarm er kvalifisert, **Then** avstanden er218,448m før visningsavrunding, **And** motsigende målinger trekker varselet tilbake. Kan armen ikke underbygges før innkjøring, er korrekt skjult varsel forventet; storyen lover ikke forhåndsvarsling gjennom enhver rundkjøring.
++
++**Given** R1–R4 med registrerte felt og forbindelser, **When** hvert kontrollpunkt verifiseres syntetisk, **Then** rett arm, feil arm, stopp og gjenopptatt bevegelse får forventet separat current/upcoming-status, **And** R2-baklengs265,519m og R3-baklengsbuen er negative regresjonseksempler. Rundkjørings70 presenteres ikke som trygg anbefalt rundkjøringsfart.
++
++**Given** endepunkt1138796 eller grense for alternativvegdekning, **When** brukeren fortsetter utenfor støttet geometri, **Then** data-/vegkvalifisering trekkes tilbake for berørt del, **And** systemet gir ingen «ingen endring»-garanti utenfor manifestet. Data for alle relevante alternativer må være med før matching der erklæres støttet.
++
++### Story 1.6: Håndter avbrudd, gjenopptakelse og kildebytte uten gamle verdier
++
++**ID:** SL-E1-S6. **Avhengighet:**1.1–1.5. **Krav:** FR5/6, NFR1/2/4, UX-DR3/4, AC-09–12. **Størrelse:** integrert livssyklus/versjonsskifte; gjenbruk allerede implementert opt-in/tilgangsstyring. Basal ugyldighetskontroll i tidligere stories skal allerede virke.
++
++Som sjåfør vil jeg se ærlig status når posisjon eller grunnlag forsvinner, slik at gamle målinger og varsler ikke blir aktuelle igjen ved en feil.
++
++**Acceptance Criteria:**
++
++**Given** GPS-bortfall/tunnel og foreldet evidens, **When** ferskhetsgaten faller, **Then** berørte verdier fjernes uten blind tunnel-/fartsberegning, **And** bare tap av fremoversikt påvirker ikke ellers sikker aktuell grense.
++
++**Given** Pause/Off, skjult side, tilgangstap eller byttet aktivitet, **When** en sen callback fra forrige generasjon kommer, **Then** den ignoreres og sensing starter ikke automatisk, **And** eksplisitt gjenopptakelse krever ny vegkvalifisering i gjeldende kontekst. Private data og kort fiksvindu følger eksisterende utløp/rydding.
++
++**Given** kort pause etter vist varsel, **When** samme fysiske passering kvalifiseres igjen, **Then** panel kan returnere uten ny aktivering, **And** reload er ny økt uten påstått varig historikk. Snapshotrevisjon alene skaper ikke en ny passering.
++
++**Given** kildeutfall, kontrollalder>24t, snapshotalder>7d, ugyldig kilde eller ukjent påkrevd tidsmetadata i laboratorieprofilen, **When** evaluator prøver å vise en verdi, **Then** kun fortsatt eksplisitt gyldig snapshot kan brukes innen grensene, ellers ukjent, **And** hentetid erstatter aldri original virkning/endringstid. Fysisk regulering kan fortsatt avvike selv innen disse grensene.
++
++**Given** nytt snapshot med endret geometri/grense-ID, **When** det tas i bruk, **Then** hele pakken byttes atomisk med ny kvalifisering og uten versjonsblanding, **And** automatiske aktivitet-/stoppvalg, privat retensjon og andre utvidelser endres ikke. Senere kontroller dokumenterer at råposisjoner ikke kommer i nettverks-/logg-/persistensflater.
++
++### Story 1.7: Avgjør om begge visningene er brukbare i den avgrensede piloten
++
++**ID:** SL-E1-S7. **Avhengighet:**1.1–1.6, separat autorisasjon til fysisk test. **Krav:** FR1–6, NFR1–4, UX-DR1–4, AC-01–12. **Størrelse:** ett avgrenset pilot- og beslutningsopplegg; feilretting blir egne senere oppgaver, ikke ubegrenset arbeid i denne storyen.
++
++Som pilotansvarlig vil jeg ha et dokumentert beslutningsgrunnlag fra faktisk enhet og veg, slik at registrert dekning og teoretisk300m ikke forveksles med trygg, fungerende støtte.
++
++**Acceptance Criteria:**
++
++**Given** alle tidligere story-resultater og uttrykkelig tillatelse til fysisk kontroll, **When** piloten klargjøres, **Then** faktisk skilting/retning/vegvalg, Polaria-arbeid, midlertidige/variable begrensninger og enhet/nettleser/HTTPS kontrolleres, **And** ukvalifiserte strekninger stenges i manifestet. Sjåføren skal ikke betjene testverktøy under kjøring; observatør/opplegg avklares før tur.
++
++**Given** SL-LAB-1 som utgangspunkt, **When** fysisk akseptprotokoll fryses før kjøring, **Then** det finnes navngitt profil, kvalifisert feilmodell/kandidatseparasjon og eksplisitt akseptvindu rundt300m samt minste varseltilgjengelighet, **And** tallene er faglig begrunnet og godkjent for forsøket før resultater leses. Manglende kriterier gir «ikke klar», ikke bestått.
++
++**Given** Polaria→flyplassrundkjøringen med R1–R4, **When** aktuelle grenser, økning/reduksjon, passering, kø/stopp, avvik og avbrudd vurderes, **Then** hvert kontrollpunkt får forventet/faktisk resultat og årsak uten full kjørehistorikk, **And** syntetiske tettliggende/hopp-scenarioer brukes der de ikke skal fremprovoseres i trafikken. Ingen faktisk farlig manøver er et testkrav.
++
++**Given** feil aktuell grense, feil-arm-forvarsel eller for tidlig overgang, **When** avvik observeres, **Then** berørt støtte tas ut av piloten og registreres som ikke bestått, **And** det lages ingen samlet godkjenning som skjuler avvik. Sen/manglende varsling måles mot forhåndsvalgt protokoll, ikke tilpasses etter resultatet.
++
++**Given** fullført avgrenset kontroll, **When** beslutningsrapporten leveres, **Then** den skiller bestått/ikke bestått/ikke testet per AC og strekning med enhets-/profil-/snapshotversjon, **And** ferdig epic krever begge visningene innen erklært støttet omfang. Motsatt retning, lyd, kart, egenfart/dynamisk varsel og alarm forblir utenfor. Rapporten kan konkludere med avslag; den gir ikke automatisk produksjonsgodkjenning.
+--- /dev/null
++++ after/planning/validation.md
+@@ -0,0 +1,26 @@
++# Sluttvalidering — SL-PLAN-1
++
++**EXPERIMENTAL EXTENSION — OUTSIDE APPROVED V1 SCOPE**
++
++BMAD steg1–4 fullført som planartefakt. Brukerens bestilling om å fortsette helt til ferdige epics/stories erstatter tidligere forbud mot dette og rutinemessige menyavbrudd. Den er ikke godkjenning av bygging, produkttester eller fysisk innsamling.
++
++## Resultat
++
++- Én brukerorientert epic, sju nummererte stories, alle med brukerbehov, avgrenset størrelse, avhengigheter og Given/When/Then/And-kriterier.
++- FR1–6, NFR1–4, UX-DR1–4, CAP-1–5 og AC-01–12 har sporbar dekning. Aktuell og kommende visning beholdes samlet i første leveranse.
++- Rekkefølge1.1→1.2→1.3→1.4→1.5→1.6→1.7. Ingen fremoveravhengighet:1.2 aksepteres med eksplisitte kontraktsfiksturer,1.3 med hovedstrekk og konservativ kryss-ukjent,1.4 med allerede kvalifisert fremoverkjede. Senere stories utvider støtte; de reparerer ikke en planlagt falsk sikkerhet i tidligere steg.
++- Ingen ny greenfield-start, tjenester eller forhåndsopprettede tabeller. Snapshotadapter/lokal evaluering/panel gjenbruker arkitekturen. Én epic unngår kunstig oppdeling etter tekniske lag og gjentatt endring av samme kjerne på tvers av epics.
++- Kildekontrollen fant og rettet reelle baklengsbuer i R2/R3.139segmenter/ingen nodebrudd og45 lagrede svar med verifiserte hasher er dokumentbelegg, ikke produkt-/GPS-tester.
++- Alle filer ligger i avtalt utvidelsesområde. Delt/global BMAD-konfigurasjon er uendret. Referanseplanene er lest uten skriving.
++
++## Beredskap og begrensninger
++
++**Planlegging: ferdig. Implementeringsberedskap: betinget, ikke godkjent. Fysisk pilot: ikke utført.** G0–G4 i technical-addendum må ikke slås sammen til én «ferdig»-status. Den generelle BMAD-formuleringen «ready for development» brukes ikke som bevis på brukerautorisasjon eller på at fremtidige kvalifiseringsporter er lukket.
++
++Datakvalifiseringen avsluttes på det nivået oppgaven tillater: kildeidentitet, sammenheng, felteretningskorrigering, registrerte intervaller, avgrensning og eksplisitte negative funn. Alle svingebegrensninger, relevante alternative veger, fysisk skilting, assetbytes/lisensmanifest, GPS-feilmodell og fysisk akseptvindu har navngitt story/akseptkriterium. Ikke lov full dekning fra dette uttrekket. EPS/NLOD er valgt rettighetsspor; ingen udokumentert SVG distribueres.
++
++## Kontroller
++
++[Maskinelt dokumentbelegg](evidence/final-checks.json) og [diff mot dokumentert førtilstand](evidence/final-documents.diff) oppdateres ved avslutning. Førtilstand er den lagrede before-documents.json, ikke en commit. Nye filer vises additivt; uendret rådata beholdes. Gjennomgang av kildebetydning og story-kvalitet er utført manuelt; maskinkontrollen gjelder struktur, lenker, plassering, hasher og whitespace. Ingen produkttester.
++
++Neste BMAD-aktivitet er senere beredskapskontroll med bmad-sprint-planning når G0 er dokumentert, i ny kontekst med README/SPEC/epics som inngang. Ingen sprint startes nå; ferdig/testet V1 og kvalifiserte avhengigheter går foran V1.4.0.
+--- /dev/null
++++ after/planning/evidence/routing.md
+@@ -0,0 +1,9 @@
++# Epic-kjøringens ruting
++
++**EXPERIMENTAL EXTENSION — OUTSIDE APPROVED V1 SCOPE**
++
++Kontrollert cwd/root D:/IBE160-plan-speed-limits, branch codex/plan-speed-limits, HEAD 74849ff21bee108fe9cff93d740a96a6c6d2d7c5. Resolver-resultatene viser delt standard _bmad-output/planning-artifacts; denne brukes ikke til skriving. Kjøringslokalt planning_artifacts og output_folder er D:/IBE160-plan-speed-limits/_bmad-output/experimental-extensions/speed-limits/planning. Faktisk output planning/epics.md; kvalifiseringsbelegg qualification/2026-10-27; spec oppdateres i eksisterende specs/spec-speed-limits gjennom bmad-spec. Ingen delt/global konfigurasjon endres.
++
++Brukeren gir eksplisitt forhåndsautorisasjon til sammenhengende planlegging uten rutinegodkjenning. Arbeidsflytens ekstraksjon, epic-design, story-forfatting og sluttvalidering utføres sekvensielt; C-menyer behandles som forhåndsvalgt for utkast, ikke som produkt-/byggaksept. Eksisterende SPEC og behavior erstatter ny PRD/UX-runde; eksisterende arkitektur/interfaces suppleres kort. Norsk output følger brukeren. Ingen sprintstart.
++
++Fullført i denne fortsettelsen: steg3/4, planning/epics.md og planning/validation.md. bmad-spec avledet eksisterende kernel/companions etter memlog SL-D10/11 i samme avtalte spec-mappe. Ingen ny PRD-/UX-/arkitekturrunde. Norsk og lokal output-binding er eksplisitte kjøringsvalg. Ferdig plan er ikke «ready for development» før G0 og berørte datakrav er oppfylt.
+--- before/process/validation.md
++++ after/process/validation.md
+@@ -1,5 +1,6 @@
+ # Dokumentkontroll
+ 
++Tidligere kontroll nedenfor gjelder forrige dokumentversjon. Gjeldende sluttstatus: [SL-PLAN-1](../planning/validation.md).
+ **EXPERIMENTAL EXTENSION ? OUTSIDE APPROVED V1 SCOPE**
+ 
+ 2026-10-27. Verifisert arbeidsmappe/root D:/IBE160-plan-speed-limits og branch codex/plan-speed-limits. Alle nye filer ligger under speed-limits, ingen sporede filer endret. Relative Markdown-lenker kontrollert etter at dette dokumentet ble opprettet. Hovedrepository kontrollert rent p? opprinnelig main-commit; ingen endringer i referanse-worktrees.
+@@ -11,3 +12,7 @@
+ bmad-help-katalogen bekrefter [SPC] bmad-spec som anbefalt neste lille steg i ny kontekst: kort spesifikasjon og pilotmanifest, samme dokumentomr?de. Ingen ny arbeidsflyt, epics/stories eller implementering startet. Sesjonslogg og issues ligger i process/jonas-oisund. Ingen commit/push/merge eller delt konfigurasjonsendring.
+ 
+ Fortsettelsen med bmad-spec har egen [validering](../specs/spec-speed-limits/validation.md). Den opprinnelige kontrollen ovenfor gjaldt researchleveransen; gjeldende spec har fem capabilities, fire foreslåtte rundkjøringskontroller og tolv senere AC-er. Ingen produktverifikasjon er utført.
++
++## Sluttføring gjennom epics/stories
++
++Gjeldende kontroll er [SL-PLAN-1](../planning/validation.md), med korrigert kildekjede, én epic og sju stories. Tidligere funn og kontroller ovenfor er historiske. Ingen produkttester eller commit.
+--- before/specs/spec-speed-limits/.memlog.md
++++ after/specs/spec-speed-limits/.memlog.md
+@@ -1,6 +1,6 @@
+ ---
+ topic: speed-limits
+-updated: 2026-10-27T20:33
++updated: 2026-10-27T21:27
+ ---
+ 
+ - (decision) Run-local output_folder=_bmad-output/experimental-extensions/speed-limits; spec_output_path=that/specs; slug=speed-limits; exact workspace specs/spec-speed-limits. Resolvers inspected before any spec writes. No shared config change. Express artifact mode; user supplies detailed inputs, Norwegian output, no stories.
+@@ -23,3 +23,9 @@
+ - (question) Technical qualification gaps K1-5: exact current directed links/nodes and transitions, roundabout identity, full interval/direction coverage, temporary/variable treatment, source age, numeric measurement/hysteresis profile, asset rights and later physical tests. No unanswered product choice after surface-route/endpoint reply.
+ - (event) Self-validation pass1 coherence: CAP1-5 unique with intent/success, decision-bending constraints, non-goals, concrete AC01-12 and provisional assumptions; no implementation authorization. Pass2 preservation: user corridor/corrected count/endpoint, both warnings, edge cases, source distinctions, interfaces, rights and deferred speed preserved in kernel/companions. Wrapper-only: no story or full planning workflow; routing kept in evidence.
+ - (event) Final document checks passed 2026-10-27: cwd/root/branch and unchanged base verified; 5 unique capabilities, 12 acceptance cases, all relative links and untracked Markdown whitespace checked; every changed/new file inside extension. No product tests. Existing session log/issues updated, PV1/PV2 closed, no commit/push/merge.
++- (decision) SL-D8 User authorizes complete planning through epic/stories, four roundabouts confirmed incl Langnesbakken/Kvaloyvegen and airport. Previous no-epics restriction superseded, no implementation/sprint/tests authorized. Planning version SL-PLAN-0.2; prior docs preserved in planning/evidence/before-documents.json.
++- (source) SL-Q1 NVDB bounded qualification 2026-10-27: source chains 1109722 (51segments) and1109517(35) cover0-1 with shared node1138973, no source node gaps; circles R1=1126029,R2=1126030,R3=1125949,R4=1125950. Targeted105 intervals record30/40/50/60/70 with IDs/versions and transitions. Four-circle legal driving/profile not physically validated.
++- (decision) SL-D9 Add qualification report and technical-addendum companions. Candidate actual roundabout-before-change: R2 arc22.535m plus1126028 242.984m to R3 50-to60 boundary at1138977, total265.519m from selected R2 entry. Full legal directed field/super mappings remain story gates. Suggested CP3 is first outgoing Flyplassvegen detailed link1126506 end1.0 afterR4, before terminal; not a changed corridor.
++- (decision) SL-D10 supersedes SL-D9 distance: V830 section7.2 odd fields follow link direction; R2/R3 reverse arcs rejected. Correct R2 forward wrap80.824m plus242.984m=323.808m. Qualified source candidate R4 forward18.448m to70-to50 node3251245 with detailed1126506 mapped to1125938. Local audit45requests hashes pass,139segments no node gaps,8656.655m from1139933 to1138796; planning geometry only, no legal/physical approval. User authorizes complete epics/stories; preserve all other exclusions.
++- (decision) SL-D11 derive manifest v1-planning with explicit segment bindings, corrected source qualification and technical-addendum. Stable CAP1-5; use official EPS/NLOD source chain, SVG asset rights still unqualified. Proposed numerical lab profile is not live-qualified. Seven small sequential stories replace oversized four-story sketch; planning complete is separate from build-ready and physically accepted. Adopt qualification report and technical addendum as companions.
++- (event) SL-PLAN-1 self-validation pass1 coherence and pass2 preservation complete. CAP1-5 and AC01-12 preserved, epic/story authorization updated, R2/R3 direction evidence corrected, R4 example and EPS route explicit, profile remains lab-only. Spec and companion links retained; planning complete does not authorize implementation or physical testing.
+--- before/specs/spec-speed-limits/pilot-manifest.md
++++ after/specs/spec-speed-limits/pilot-manifest.md
+@@ -2,52 +2,52 @@
+ 
+ **EXPERIMENTAL EXTENSION — OUTSIDE APPROVED V1 SCOPE**
+ 
+-Manifest SL-P1 v0, retning **fra Polaria mot flyplassen**, valgt av bruker. Overflatetrasé og slutt etter flyplassrundkjøringen er avklart. Motsatt retning er senere separat kontroll. Brukerens ca. 10 km og verdiene 30/50/60/70 km/t er **L: lokalkunnskap**, ikke målt lengde, skiltinventar eller verifisert endringsrekkefølge.
++**SL-P1 v1-planning**, Polaria→flyplassen, overflate, slutt etter fjerde rundkjøring. Retning og endepunktvalg er avklart med brukeren. Motsatt retning er utsatt. Dette fryser et kildebundet planforslag, ikke en fysisk godkjent bussrute. D=dokumentert kilde, O=observert uttrekk, F=foreslått avgrensning, U=uavklart, P=fysisk kontroll.
+ 
+-Merking: **D** dokumentert kildeutsagn, **O** observert data, **F** forslag, **U** uavklart datakvalifisering, **P** krever senere fysisk test. Manifestet fryser et navngitt forslag, ikke en ferdig NVDB-rute. CP/R-navnene er våre planidentifikatorer, ikke offentlige node-ID-er.
++## Ordnet trasé og identitet
+ 
+-## Navngitt trasé og kontrollpunkter
++O/F: Startnode1139933 på Strandvegen ved Polaria; slutt node1138796 på Flyplassvegen,37,570m etter rundkjøringens utgang. De139 ordnede kildesegmentene har ingen nodebrudd og summerer til8656,655m, cirka8,66km. Dette er summert kildelengde, ikke GPS-målt kjørelengde. Brukerens «omtrent én mil» var lokalkunnskap. Offentlig adresseprojeksjon0.00775722@1109722 er et søkeanker, ikke pilotens faktiske brukerposisjon.
+ 
+-| ID | Foreslått veg/vegvalg i kjørerekkefølge | Kildebelegg og konkret kontroll |
++| Kontroll / navngitt vegvalg | Valgt kildesekvens / økende intervall | Kontrollpunkt |
+ |---|---|---|
+-| CP0 | Strandvegen ved Polaria, sørover forbi krysset ved Muségata/tunnelinnslaget; ikke inn i tunnelen. | D: fylkeskommunens melding om lyskrysset/arbeid ved Polaria [S1]. U: frys startpunkt på sørgående veg, gjeldende kryssutforming og eventuelle restriksjoner. |
+-| CP1 | Følg Strandvegen gjennom Sørbyen/Bjerkaker til sørenden; overgang til Kvaløyvegen ved Telegrafbukta/Mellomvegens sørlige tilknytning. Ingen avstikker opp Mellomvegen. | F: konkret overflateforslag ut fra valgt korridor og kommuneoversikten [S2]. U: kildetilknytning av nøyaktig navneovergang, alle koblingslenker og lovlig retning; ikke anta en bestemt svingvinkel eller node-ID. |
+-| CP2 | Kvaløyvegen nordover på vestsiden, gjennom Fagereng/Holt og videre til Langnes; behold hovedtraséen ved sidevegene. | D: kommunens oversiktskart plasserer Strandvegen/Kvaløyvegen i disse delene [S2]. U: avgrens parallelle lokalveger, hoved-/kollektivfelt og hvert fartsgrenseintervall. |
+-| R1 | Rundkjøring **Kvaløyvegen × Langnesvegen**: fortsett på Kvaløyvegen mot Workinn, ikke inn Langnesvegen. | D: omtalt som eksisterende kryss i Vegvesenets planbeskrivelse fra 2023 [S3]. F/U: identifisering som første av brukerens tre; frys inn-/utgående lenker. Ikke bruk planlagt ny rundkjøring ved postterminalen som nåsituasjon. |
+-| R2 | **Workinn/Langnestunnelen**: fra Kvaløyvegen sør, videre mot Giæverbukta; velg ikke tunnelarmen eller Huldervegen. | D: historisk trafikkrapport bruker kryss 4 for Langnestunnelen/Workinn [S4]. U: dagens armnavn, felt og koblingsnoder. |
+-| R3 | **Giæverbukta**, møtet Kvaløyvegen/Erling Kjeldsens veg/Ringvegen: velg vestlig videre veg mot flyplassavkjøringen; ikke Ringvegen eller østover Erling Kjeldsens veg. | D: rapportens kryss 7 navngir disse vegene [S4]. F/U: frys hvilken navngitt lenkesekvens som utgjør fortsettelsen etter krysset; eldre vegnummer er ikke tilstrekkelig. |
+-| R4 / CP3 | **Sørlig flyplassavkjøring, E8 × fv.862 × Flyplassvegen**: velg Flyplassvegen mot lufthavnen. Avslutt manifestet på første sikkert identifiserte utgående intervall etter rundkjøringen. | D: Avinor/COWI april 2025 beskriver Flyplassvegen fra denne rundkjøringen mot terminalen og videre til nordlig rundkjøring ved Grindneset [S5]. F: dette er brukerens fjerde/sluttrundkjøring; U: eksakt sluttposisjon. Ikke fortsett til terminal eller Grindneset. |
++| CP0: Strandvegen sørover fra Polaria, overflate forbi Muségata | 1109722:0→1 |1139933→1138973; ikke tunnel eller Bjørnøygata/Mellomvegen-snarvei. |
++| CP1–CP2: rundt sørenden, overgang Strandvegen→Kvaløyvegen, nord via Fagereng/Holt |1109517:0→0.9902808; deretter1126588:0→1 | Navneovergangen finnes i kildekjeden; ikke avstikker til Mellomvegen. Til R1 via1138911→3249937. |
++| R1: Langnesvegen/Langnesbakken–Kvaløyvegen, videre mot Workinn |1126029:0→0.31012056 |3249937→3249939,26,221m bue. |
++| Kvaløyvegen til R2 |1126527:0→1, deretter1126027:0.78574639→1 |Detalj→overordnet1126027 dokumentert; innnode1139057. |
++| R2: Workinn/Langnestunnelen; videre mot Giæverbukta, ikke tunnel/Huldervegen |1126030:0.88033387→1 +0→0.62975708 |1139057→1139060,80,824m bue med feltretningen. |
++| Kvaløyvegen til R3 |1126028:0→1 |1139060→1138977,242,984m. |
++| R3: Giæverbukta, vestover mot flyplassen, ikke Ringvegen/østlig Erling Kjeldsens veg |1125949:0.65287709→1 +0→0.35105026 |1138977→1138963,82,336m bue med feltretningen. |
++| E8/Kvaløyvegen til sørlig flyplassavkjøring |1125918:0→1 |1138963→1138787; detaljerte parallelle kjørebanelenker må respekteres ved matching. |
++| R4: E8/fv862/Flyplassvegen, velg Flyplassvegen |1125950:0.87462251→1 +0→0.05053167 |1138787→3251245,18,448m bue. Ikke filterarm utenom sirkelen. |
++| CP3: avslutt etter rundkjøringen |1126506:0→1 |3251245→1138796; overordnet1125938:0→0.36047074. Terminal og Grindneset er utenfor. |
+ 
+-Tre underveis + fjerde ved slutt følger brukerens rettelse. Kildene støtter navn og eldre eksisterende situasjon, men **verifiserer ikke samlet antall eller dagens sammenhengende kjørerute**. Dersom oppdatert vegdata viser at en kandidat ikke svarer til brukerens kryss, registrer avvik og be bare om den konkrete lokale identifiseringen. Ikke legg inn/utelat en rundkjøring for å få tallet til å stemme.
++Detaljene, geometri i SRID5973, kildefiler/referanser, metadata og avstander står i [source-bound-route.json](../../qualification/2026-10-27/source-bound-route.json). [Kvalifiseringsrapporten](../../qualification/2026-10-27/qualification.md) bevarer råbelegg, avviste alternativer og kildebegrensninger. En topologisk kjede er ikke alene bekreftelse på alle lovlige felt/svinger, eller dagens skilting/arbeidsrestriksjoner.
+ 
+-## Data som må fryses før manifest v1
++## Registrerte grenser og neste endring
+ 
+-For **hvert** CP/R og mellomliggende rettet lenkeforekomst: NVDB veglenkesekvens-ID, delintervall, versjon/tidskontekst, inn-/utnode, lovlige overganger/felt, CRS og lengdegrunnlag. For hver grense/endring: type-105 objekt-ID/versjon, egenskap 2021, gyldighet, stedfesting og anvendelig retning/felt, kilde-/kontrolltid og hash. Identifiser alle hull, overlapp og mulige alternative veger. Dagens eksakte verdier/overgangspunkter er **U**; ingen 30→50→60→70-rekkefølge er satt.
++O: Målrettede type105/egenskap2021-uttrekk viser40→30 på Strandvegen; videre30→50→30→50→60→50 på Kvaløyvegen;50 gjennom R1/R2;60 ved R3,70 på E8,50 ved utkjøring til Flyplassvegen. [Eksakte objekt-ID-er/versjoner/felt/gyldighet](../../qualification/2026-10-27/speed-intervals.csv) og [stedfestede endringer](../../qualification/2026-10-27/registered-changes.json) er kildedata, ikke fysiske skiltobservasjoner. Registrert70 i R4 sier ikke at70 er trygg rundkjøringsfart eller bussens samlede tillatte fart.
+ 
+-Nå tilgjengelige identifikatorer: NVDB type **105**, verdi-egenskap **2021**, kommune **5501**; historiske rapportreferanser **kryss 4/7**, Avinor dokument **A252572 / PLA_Tromsø lufthavn_Planbeskrivelse, v02, 10.04.2025**. Ingen aktuell corridor-node-ID er verifisert. Eldre research-objekter på Eidvegen/Straumsvegen er ikke pilotbelegg.
++**K3, konkret rundkjøring før endring:**70→50 ved node3251245, fra1125950 til1126506/overordnet1125938. Objekt1019488950v1→1019488951v1. Med200m igjen til R4-innkjøring blir avstanden218,448m langs valgt bue til grensen. For en300m-situasjon ligger scenariopunktet281,552m før innkjøringen. Dette er beregnede kildepunkter, ikke samlet posisjon. Ukvalifisert neste arm skjuler forvarsel, men kan beholde sikker aktuell70. Etter valgt slutt gis ingen påstand om endringer utenfor manifestet.
+ 
+-**O, negativt kontrolloppslag:** et begrenset FV7772-søk ga objekt **91485424 v7**, 40 km/t, FV7772 S1D1 m0–715, adresse Stakkevollvegen, stedfesting 1126026/3153346 [S6]. Dette ligger utenfor foreslått pilot og skal ikke fylle manifestet. Bare én side/ett faktisk objekt ble hentet.
++**Viktig rettelse:** Den tidligere265,519m-kandidaten gjennom R2 er forkastet: den brukte bue mot feltretningen. Korrekt kildebue gir323,808m til R3-grensen. AC-07s syntetiske250m illustrasjon beholdes separat. Ingen grense er flyttet for å få et passende eksempel.
+ 
+-## Konkrete kvalifiseringspunkter
++## Status og kontrollpunkter
+ 
+-- **K1:** Bind CP0–CP3/R1–R4 til faktisk sammenhengende, rettet nåsituasjon; beregn lengde. Kontroller Polaria-arbeid separat: planlagt ferdig september er ikke dokumentasjon på ferdigstillelse [S1].
+-- **K2:** Frys alle faktiske verdiendringer og kildegyldighet, inkludert mulige andre verdier enn brukerens fire. Kontroller hull, variable/midlertidige grenser og retning/felt; ikke inferer gyldighet fra MED alene.
+-- **K3:** Velg et konkret endringspunkt etter R2 eller R3 der en rundkjøring ligger mellom en kvalifisert førposisjon og endringen innen 300 m. Hvis naturlig tilfelle mangler, bruk eksplisitt syntetisk variant på verifisert geometri; ikke flytt en registrert grense i kildebelegget.
+-- **K4:** Skaff før-/etter-/feil-arm-/parallellvegscenarier og minst 300 m nødvendig geometri før første varsling. Slutt etter R4 må ikke gi varsel om endring utenfor kvalifisert manifest; eventuell ekstra fremoversikt merkes som eget databehov.
+-- **K5, P:** Etter byggautorisasjon: fysisk kontroll av skilt/overgangspunkter, rettede vegvalg, stopp/kø og nettbrettets målekvalitet. Ingen fysisk test er gjennomført.
++| Punkt | Avsluttet i planleggingen | Senere lukking |
++|---|---|---|
++| K1 | Sammenhengende plankjede, fire ring-ID-er, rettede buer og eksplisitte start/sluttnoder | Felt-/svingtillatelser for buss og Polaria-arbeid må kontrolleres i story1.1/1.7. |
++| K2 | Målrettede105-uttrekk, intervaller og detaljbinding på valgt trase | Oppdatert kildealder, konflikt-/mangeldekning og faktisk midlertidig/variabel regulering i1.1/1.7. |
++| K3 | R4 med virkelig registrert grense; feil R2-kandidat forkastet | Armkvalifisering og langsveg-avstand i1.4/1.5; fysisk avstand i1.7. |
++| K4 | Geometri og scenarioer før/etter, feil arm, parallellveg, datakant | Alternativvegdekning og senere syntetiske kontroller i1.1/1.3–1.6. |
++| K5 | Fysisk plan med stoppkriterier | Ingen fysisk test utført; story1.7. |
+ 
+-Det finnes ingen reell gjenstående produktavklaring om hovedkorridor, kjøreretning, antall eller lyd. Eksakt geometri/armkobling og kildeidentitet er teknisk kvalifiseringsarbeid. Bare dokumentert motstrid med valgt lokalt kryss krever ny brukeravklaring.
++Ingen ny brukeravklaring om korridor/retning/antall/lyd. Dersom senere faktisk vegregulering motsier ønsket vegvalg, dokumenteres det konkrete avviket; ruten tvinges ikke. [Teknisk profil og porter](technical-addendum.md) beskriver forskjellen mellom ferdig plan og kvalifisert produkt.
+ 
+-## Kilder, lest 2026-10-27
++## Primærkilder
+ 
+-[S1] [Troms fylkeskommune, Omkjøring på Strandvegen, 06.08.2026](https://www.tromsfylke.no/aktuelt/omkjoring-pa-strandvegen.76701.aspx). Nåsituasjonen etter planlagt sluttdato er ukjent.
++- [NVDB Les V4 vegnett](https://nvdb-docs.atlas.vegvesen.no/nvdbapil/v4/Vegnett/) og [ruteberegning](https://nvdb-docs.atlas.vegvesen.no/nvdbapil/v4/Rute/); uttrekks-URL-er/tider/hash i [requests.jsonl](../../qualification/2026-10-27/requests.jsonl).
++- [V830, §7.2 feltretning](https://www.vegvesen.no/globalassets/fag/handboker/hb-v830-nasjonalt-vegreferansesystem.pdf?v=491e2d). Dette gjelder originalt NVDB-basisnett; andre eksportformater kan ha annen geometriretning.
++- [Troms fylkeskommune: arbeid ved Polaria](https://www.tromsfylke.no/aktuelt/omkjoring-pa-strandvegen.76701.aspx). Planlagt slutt er ikke ferdigmelding.
++- [Vegvesenets planbeskrivelse2023](https://www.vegvesen.no/globalassets/vegprosjekter/europavei/e8flyplasstunnelen/vedlegg/planbeskrivelse-e8-flyplasstunnelen.-horingsutgave-15.12.2023..pdf?v=496fb7) og [Avinor/COWI april2025](https://www.tromsfylke.no/_f/p1/ib95ee31c-1b21-48f0-8d1f-d44e6c0527f6/planbeskrivelse.PDF) er historisk navne-/atkomststøtte. Nye planlagte tiltak behandles ikke som gjennomført.
+ 
+-[S2] [Tromsø kommune, ARN Tromsø 2025, én sides oversiktskart](https://tromso.kommune.no/sites/default/files/2025-08/ARN%20Troms%C3%B8%202025.pdf?v=192). Steds-/vegnavnstøtte; ikke presis topologi, fartsgrensedata eller nåværende kjøretillatelse. Tekstuttrekk kontrollert; detaljert kartgeometri ikke verifisert.
+-
+-[S3] [Statens vegvesen, E8 Flyplasstunnelen, planbeskrivelse, høringsutgave 15.12.2023, §3.4/4.4](https://www.vegvesen.no/globalassets/vegprosjekter/europavei/e8flyplasstunnelen/vedlegg/planbeskrivelse-e8-flyplasstunnelen.-horingsutgave-15.12.2023..pdf?v=496fb7). Skill eksisterende omtale fra nye planlagte tiltak.
+-
+-[S4] [Statens vegvesen, Trafikkanalyse E8 Flyplasstunnelen, 11.11.2022, §8.4](https://www.vegvesen.no/globalassets/vegprosjekter/europavei/e8flyplasstunnelen/vedlegg/vedlegg-3.-trafikkanalyse-e8-flyplasstunnelen-rev.11.11.2022.pdf?v=49b3dc). Begrenset offentlig indeksert utdrag lest; hele PDF-en overskred webverktøyets størrelsesgrense. Kryssnumrene er rapportens egne, ikke NVDB-ID-er.
+-
+-[S5] [Avinor/COWI, planbeskrivelse Tromsø lufthavn, april 2025, §4.10 s.17–18](https://www.tromsfylke.no/_f/p1/ib95ee31c-1b21-48f0-8d1f-d44e6c0527f6/planbeskrivelse.PDF). Dokument-ID/versjon og datidens hovedatkomst, ingen bevis for gjennomførte fremtidige tiltak.
+-
+-[S6] [NVDB, type-105-søk, 2026-10-27](https://nvdbapiles.atlas.vegvesen.no/vegobjekter/api/v4/vegobjekter/105?kommune=5501&vegsystemreferanse=FV7772&antall=3&inkluder=egenskaper,metadata,lokasjon), lokalt belegg [JSON](evidence/fv7772-speed-sample.json). Søkets antakelse avvist; ingen ytterligere oppslag fulgte.
++Tidligere Eidvegen/Straumsvegen- og FV7772/Stakkevollvegen-uttrekk brukes fortsatt ikke som pilotbelegg.
+--- before/specs/spec-speed-limits/signs-and-rights.md
++++ after/specs/spec-speed-limits/signs-and-rights.md
+@@ -2,7 +2,7 @@
+ 
+ **EXPERIMENTAL EXTENSION — OUTSIDE APPROVED V1 SCOPE**
+ 
+-CAP-1/5 bruker originale norske skilt i kodefamilie 362. Brukeren oppgir 30/50/60/70; dette er ikonbehov til foreslått pilot, ikke kildeverifiserte grenser på bestemte steder.
++CAP-1/5 bruker originale norske skilt i kodefamilie 362. Målrettet NVDB-uttrekk dokumenterer ikonbehov30/40/50/60/70; fysisk skilting er ikke kontrollert.
+ 
+ ## Kilder og kandidatfiler
+ 
+@@ -24,3 +24,7 @@
+ Dette dokumenterer et tilgjengelig viderebruksgrunnlag for det lisensierte datasettet. Geonorges enkelte SVG-sider viste ikke eget lisensfelt; rettighetskoblingen til hver valgt SVG er fortsatt uavklart. Før produktdistribusjon må et assetmanifest dokumentere originalfil, kilde-URL/utgiver, skiltkode, hentet dato/hash, konkret lisens/attribusjon og eventuell rent teknisk konvertering. Velg direkte offisiell EPS-kilde med dokumentert vilkårskjede dersom SVG-sporet ikke kan avklares. Ikke marker rettighetsporten bestått bare fordi filen er nedlastbar.
+ 
+ Bevar standardproporsjoner, rød ring, hvit flate og sorte tall i begge temaer. Stort aktuelt og mindre kommende skilt må testes ved faktisk størrelse, med tekstalternativ og statusetiketter. Ukjent bruker tekst/neutral plassholder uten gammel tallverdi. Eventuelle andre nødvendige skilt/verdier fra faktisk kilde kvalifiseres på samme måte.
++
++## Valgt rettighetsspor for gjennomføring
++
++Første implementeringsvalg er original EPS fra Vegvesenets offisielle nedlasting, siden NLOD-datasettoppføringen uttrykkelig lenker denne ressursen. Vis attribusjon «Skiltillustrasjoner: Statens vegvesen, NLOD» med lenke til lisens/kilde i kildeinformasjon; oppgi eventuell teknisk EPS→SVG-konvertering uten endret utforming. Geonorge-SVG er et alternativ først når filens vilkårskjede er dokumentert. Dette løser valg av kildespor, men er ikke et ferdig assetmanifest: faktiske30/40/50/60/70-filer, hash, tilgjengelighet og konvertering kontrolleres i story1.2. Ingen KI-genererte eller omtegnede skilt. Nyttig40-kandidat finnes i den tidligere lagrede originalen, men distribusjonsrettigheten skal følge valgt spor.
+--- before/specs/spec-speed-limits/SPEC.md
++++ after/specs/spec-speed-limits/SPEC.md
+@@ -11,6 +11,8 @@
+   - pilot-manifest.md
+   - verification.md
+   - signs-and-rights.md
++  - technical-addendum.md
++  - ../../qualification/2026-10-27/qualification.md
+   - ../../interfaces.md
+   - ../../research/technical-speed-limits-2026-10-27/research.md
+ sources: []
+@@ -54,7 +56,7 @@
+ 
+ ## Non-goals
+ 
+-Kart, lyd, GPS-fartsvisning, dynamisk varselavstand, fartsoverskridelsesalarm, kjøretøyregelberegning, motsatt pilotretning, bakgrunns-/tunnelkontinuitet og full Tromsø-dekning. Ingen produktkode, produkttester, faktisk posisjonsinnsamling, tjenester/databaseendringer, epics/stories, commit/push/merge i denne oppgaven.
++Kart, lyd, GPS-fartsvisning, dynamisk varselavstand, fartsoverskridelsesalarm, kjøretøyregelberegning, motsatt pilotretning, bakgrunns-/tunnelkontinuitet og full Tromsø-dekning. Ingen produktkode, produkttester, faktisk posisjonsinnsamling, tjenester/databaseendringer, commit/push/merge i denne oppgaven. Epics/stories inngår nå i planleveransen etter ny bestilling.
+ 
+ ## Success signal
+ 
+@@ -62,7 +64,7 @@
+ 
+ ## Assumptions
+ 
+-- **SL-A1:** R1 Langnesvegen, R2 Workinn, R3 Giæverbukta og R4 sørlig flyplassavkjøring er foreslått identifisering av brukerens fire rundkjøringer, ennå ikke en verifisert nåsituasjonsliste.
+-- **SL-A2:** «Slutt etter flyplassrundkjøringen» avgrenses til første sikkert identifiserte utgående intervall i Flyplassvegen etter R4. Eksakt sluttposisjon fryses ved datakvalifisering; terminalområdet og nordlig Grindneset-rundkjøring inngår ikke.
++- **SL-A1:** R1 Langnesvegen, R2 Workinn, R3 Giæverbukta og R4 sørlig flyplassavkjøring er foreslått identifisering av brukerens fire rundkjøringer, nå bundet til NVDB1126029/1126030/1125949/1125950 i planmanifestet; fysisk nåsituasjon og alle svingetillatelser er ikke verifisert.
++- **SL-A2:** «Slutt etter flyplassrundkjøringen» avgrenses til første sikkert identifiserte utgående intervall i Flyplassvegen etter R4. Planlagt slutt er node1138796 etter1126506:0→1,37,570m etter R4-utgangen; terminalområdet og nordlig Grindneset-rundkjøring inngår ikke.
+ 
+ Ingen gjenværende produktvalg kreves for å ferdigstille denne spesifikasjonen. Tekniske hull og eventuelt avvik mellom foreslått og verifisert kryssidentitet står i pilotmanifestet; de gir ikke anledning til å gjette eller starte bygging.
+--- /dev/null
++++ after/specs/spec-speed-limits/technical-addendum.md
+@@ -0,0 +1,42 @@
++# Teknisk tillegg og kvalifiseringsporter
++
++**EXPERIMENTAL EXTENSION — OUTSIDE APPROVED V1 SCOPE**
++
++SL-PLAN-1, kun plan. Gjenbruk [grensesnitt](../../interfaces.md) og eksisterende React/TypeScript–FastAPI–PostgreSQL. Ingen ny tjeneste, database eller nettverkskonfigurasjon er vedtatt. [Epics og stories](../../planning/epics.md) er bestillingen for en senere, særskilt autorisert gjennomføring.
++
++## Kontrakter og ansvar
++
++- **RoadSnapshot:** manifestId/revision, kilde-URL/hash/hentetid, original endret-/virkningstid, katalog-/schema-versjon, ordnede lenkeforekomster med geometri/CRS/lengde, noder og tillatte overganger, detalj→overordnet mapping/felt, type105 id/versjon/2021-verdi, dekning/hull. Manglende versjonsfelt skal være null, ikke en oppfunnet NVDB-nettversjon; hash og tidskontekst binder det faktiske uttrekket.
++- **PositionEvidence:** én allerede autorisert posisjonskilde, måle-/mottakstid, accuracy, nullable heading/speed, watchGeneration og livssyklus. Speed er valgfri og ubrukt av fast300m-policy. Ingen ekstern forespørsel per fix.
++- **RoadMatch:** manifest/profile/contextGeneration, rettet lenkeforekomst, alongRoadIntervalM, kandidater og avvisningsårsaker; currentRoadQualified, forwardPathQualified og passageQualified er uavhengige. Unknown/null er et gyldig resultat, ikke en feil som fylles med nærmeste veg.
++- **LimitDisplay:** current{value|null,reason,evidenceTime}, upcoming{value,changeOccurrenceId,distanceIntervalM,displayDistanceM}|null, separat reason, sourceAge og generations. Ved grenseoverlapp er current null og upcoming skjult. Hele mulig intervall må ha samme anvendelige aktuelle verdi.
++
++Backend forbereder bare begrensede offentlige korridorsnapshots. Lokal evaluator/matcher beholder korte RAM-vinduer. UI må aldri beregne ny grense fra etikett, holdeplassrekkefølge eller gammel panelverdi. Adapter validerer ukjent schema/tegnkoding før atomisk publisering. Snapshotfeil endrer ikke private aktiviteter.
++
++## SL-LAB-1: tallfestet forslag for senere syntetiske kontroller
++
++Dette er en testprofil, **ikke en kvalifisert GPS-/driftsprofil**. Tallene gjør stories testbare uten å love fysisk nøyaktighet. Endringer krever ny profil-ID og gjentatt berørt kvalifisering.
++
++| Parameter | Forslag / begrunnelse |
++|---|---|
++| Første varsel | Helt positivt avstandsintervall, øvre grense≤300m; behold fast300m. |
++| Visning / hysterese | Avrund sentralestimat til10m, min10m foran. Allerede aktivt panel kan bestå til øvre grense320m, deretter bortfall; gjenkomst er samme passering uten ny animasjon. |
++| Ferskhet / sekvens | Fixalder≤5s, minst3 tidsordnede konsistente fikser over minst2s, ingen innbyrdes gap>5s. Eksakt terskel lik er tillatt; større avvises. Skal undersøkes på målutstyret. |
++| Accuracy / retning | Rapporteringsfilter accuracy≤25m er bare avvisningsfilter. Konsistent bevegelsesretning på rette strekk foreslås innen20grader. Stillstand skaper ingen ny retning; bue vurderes mot lokal tangent. Ingen automatisk tillit fra accuracy/heading alene. |
++| Passering | Minst3 nye koherente fikser, hele usikkerhetsintervallet minst5m etter grensen og lovlig topologisk overgang. Hopp alene teller ikke. |
++| Syntetisk feilmodell | Kontrollene leverer eksplisitte intervaller, inklusive grenseoverlapp. Ikke gjør nettleserens accuracy direkte til en garantert langsveg-grense. Fysisk feilmodell og kandidatseparasjon må kvalifiseres før live. |
++| RAM | Høyst30 fikser og30s (første overskredne grense rydder eldste). Høyst128 passeringsnøkler per økt. Tap av privat kontekst rydder alt; kort pause kan bevare bare deduplisering uten koordinater. |
++| Offentlig snapshot | Forslag for senere adapter: høyst500 segmenter/100 grenseobjekter,20 requests,3MB per respons/10MB samlet per forberedelse,2 begrensede retries. Stopp synlig ved tak; ingen automatisk helkommunehøsting. Dagens manuelle research45oppslag er en annen, avsluttet prosess. |
++| Kildekontroll | Forslag: sjekk før pilotstart; siste vellykkede kontroll≤24t og snapshot≤7d, ellers ukjent. Kjent ugyldighet stopper straks. Dette garanterer ikke fersk fysisk regulering; datoene må revurderes før bruk. Ingen bakgrunnshøsting. |
++
++## Porter som ikke kan erklæres bestått nå
++
++| Port | Konkret lukking / eier i planen |
++|---|---|
++| G0: byggautorisasjon | Ferdig/testet V1, kvalifisert rutenett-/posisjonsstøtte og ny brukerbestilling. Gjelder alle implementeringsstories. |
++| G1: operativt snapshot | Story1.1: oppdatert kildegrunnlag; detalj/felt/sving-/bussrestriksjoner, alternative veger og dekningskanter avklart per støttet del. Uavklart del forblir utilgjengelig. |
++| G2: ikonleveranse | Story1.2: offisiell originalfil for30/40/50/60/70, hash, utgiver, EPS/NLOD-kildekjede og attribusjon; teknisk konvertering kontrolleres. Geonorge-SVG brukes bare ved egen klar vilkårskjede. |
++| G3: lokal kvalifisering | Stories1.3–1.6: implementerte algoritmer og senere syntetiske AC-er; selvstendig forventningsgrunnlag og ingen bruk av planlagt veg som fasit for faktisk veg. |
++| G4: fysisk pilot | Story1.7: kilde-/skiltkontroll, målutstyr og kvalifisert feilmodell; på forhånd signert akseptvindu for tilgjengelighet og varslingsavstand. Rå kjørehistorikk samles ikke automatisk. |
++
++Ingen teknisk dokumentkontroll i denne oppgaven lukker G0–G4. Forberedte stories er ferdige planartefakter; de er ikke klare til ubetinget produksjonsbygging. Både aktuell grense og forvarsel kreves for første samlede leveranse, selv om de bygges i mindre steg.
+--- before/specs/spec-speed-limits/validation.md
++++ after/specs/spec-speed-limits/validation.md
+@@ -1,5 +1,6 @@
+ # Validering av spesifikasjonen
+ 
++Tidligere kontroll nedenfor gjelder forrige dokumentversjon. Gjeldende sluttstatus: [SL-PLAN-1](../../planning/validation.md).
+ **EXPERIMENTAL EXTENSION — OUTSIDE APPROVED V1 SCOPE**
+ 
+ 2026-10-27. Dokumentkontroll, ingen produktverifikasjon.
+@@ -34,3 +35,7 @@
+ Kildekontrollen er begrenset til dokumenterte primærutdrag og offentlig JSON; ingen ny bred research eller uavhengig fysisk kontroll. Nettverktøyet kunne ikke lese hele den store 2022-PDF-en eller detaljsidene for 30/60-symbolene. Disse begrensningene er synlige der påstandene brukes. Ingen krav er falt bort som følge av dette.
+ 
+ Sluttkontroll bestått: [maskinelt kontrollbelegg](evidence/document-checks.json). Fem CAP-er, tolv AC-er, ingen manglende relative lenker eller whitespace-funn; alle endringer innenfor utvidelsen. Git no-index returnerer1 for nye filer også uten feilutskrift; dette er håndtert som diff, ikke feil. Ingen produkttester eller commit.
++
++## SL-PLAN-1 avleder denne versjonen
++
++Ny brukerbestilling tillater epics/stories; tidligere merknader om at ingen slike genereres er historiske. CAP-1–5 og AC-01–12 er bevart. Memlog SL-D10/11 overstyrer feil265,519m-R2-kandidat og tilføyer kildebundet manifest, R4-kandidat, profil og kvalifiseringsrapport. Kernel/companions er avledet fra oppdatert beslutningsminne. Gjeldende [sluttvalidering](../../planning/validation.md) dokumenterer sammenheng og bevaring; ingen produktgodkjenning.
+--- before/specs/spec-speed-limits/verification.md
++++ after/specs/spec-speed-limits/verification.md
+@@ -21,11 +21,11 @@
+ | AC-11 / CAP-4/5 | Avvik, byttet trasé/snapshot/aktivitet, kildeutfall, utløpt data og endret adgang. | Opphev gammel forventet veg/varsel. Aktuell kan komme fra kvalifisert faktisk veg uavhengig av planen. Ingen bruk utenfor gyldig snapshot/tilgang; ingen blanding av versjoner eller datoforfalsket friskhet. |
+ | AC-12 / CAP-1/5 | Hull, motstrid, feltavhengighet eller kjent ukvalifisert variabel/midlertidig regulering; skilt vises dag/natt med tilgjengelig tekst. | Ingen antatt 50/80, ingen statisk verdi presentert som live variabel tilstand. Dokumentert kilde/lisensspor og riktige originale ikoner; ukjent er lesbart. Ingen lyd, synlig kart, egenfart eller fartsalarm. |
+ 
+-AC-04s enkeltverdier forutsetter liten kvalifisert avstandsusikkerhet; legg også til intervall 295–305 m, som **ikke** får aktivere før øvre grense er høyst 300. AC-07 er en eksplisitt syntetisk illustrasjon, ikke målte lengder eller en observert fartsgrenseplassering i Tromsø. K3 i manifestet skal senere velge et reelt sted eller dokumentere den syntetiske erstatningen.
++AC-04s enkeltverdier forutsetter liten kvalifisert avstandsusikkerhet; legg også til intervall 295–305 m, som **ikke** får aktivere før øvre grense er høyst 300. AC-07 er en eksplisitt syntetisk illustrasjon, ikke målte lengder eller en observert fartsgrenseplassering i Tromsø. K3 er nå R4/70→50 ved node3251245:200m før innkjøring +18,448m bue =218,448m. Dette er kildeberegnet, ikke fysisk målt. R2/265,519m er avvist på grunn av feltretning.
+ 
+ ## Senere gjennomføring og beviskrav
+ 
+-1. **Dokument-/datakvalifisering, neste lille planleggingssteg:** Kontroller K1–K4, frys manifest v1 og et versjonert profilark med numeriske grenser for alder, sekvenslengde/tid, accuracy/vegalternativer, geometrifeil, passeringsmargin og hysterese. Begrunn også maksimal kildealder, RAM-vindu og innhentingstak. Ukjent verdi er ikke en stilltiende standard. Kontroller rettigheter for 30/50/60/70 og alle faktisk nødvendige tilleggsskilt.
++1. **Dokument-/datakvalifisering, nå kildeunderbygget med åpne operative porter:** Kontroller K1–K4, frys manifest v1 og et versjonert profilark med numeriske grenser for alder, sekvenslengde/tid, accuracy/vegalternativer, geometrifeil, passeringsmargin og hysterese. Begrunn også maksimal kildealder, RAM-vindu og innhentingstak. Ukjent verdi er ikke en stilltiende standard. Kontroller rettigheter for 30/40/50/60/70 og alle faktisk nødvendige tilleggsskilt.
+ 2. **Etter ferdig/testet V1, kvalifiserte avhengigheter og separat byggbestilling:** Utfør syntetiske kontroller AC-01–12 mot frosset offentlig geometri og eksplisitt konstruerte målinger. Registrer forventet/faktisk current/upcoming/status, nettverksavstand, passeringstilstand og profil-/snapshotversjon. Ikke bruk stoppestedsorden som oracle for vegmatch. Kontroller null avhengighet til egenfartsvisning.
+ 3. **Senere autorisert fysisk pilot:** Kontroller skilt og vegkoblinger ved CP0–CP3/R1–R4, deretter faktisk nettbrett/OS/nettleser, foreground/HTTPS, tillatelser, kø/stopp, avbrudd/gjenopptakelse og dag/nattlesbarhet. Registrer eksakte enhets-/profilversjoner og avvik uten full kjørehistorikk; ingen innsamling utføres i denne oppgaven.
+ 4. **Beslutningsport:** Sammenhold observert varslingsavstand, manglende varsler og feilvisninger med på forhånd fastsatt fysisk akseptvindu rundt 300 m. Et slikt toleransevindu er ikke kvalifisert nå. Ethvert unsupported aktuelt tall/feil-arm-varsel stopper aksept for berørt del. Delvis dekning merkes eksplisitt; fire kryss eller full korridor kan ikke erklæres bestått fra ett delstrekk.
+@@ -33,3 +33,5 @@
+ Reversert retning får eget senere manifest og egne grense-/armkontroller. GPS-fart og dynamisk tidsbasert terskel holdes i separat oppfølging, med CAP-semantikken bevart og uten automatisk alarmutvidelse.
+ 
+ Sporing av tidligere kvalifiseringspunkter: QF-1→K1/K2, QF-2→K2 og signs-and-rights, QF-3→K1/K4 og interfaces, QF-4→AC-01–12, QF-5→fysisk pilot og byggport. Ingen av disse erklæres gjennomført av spesifikasjonen.
++
++Senere gjennomføringsansvar er fordelt i [stories1.1–1.7](../../planning/epics.md); [SL-LAB-1](technical-addendum.md) gjør profilgrenser eksplisitte uten å erklære GPS-kvalifisering bestått. Ingen av AC-01–12 er kjørt som produkttest i denne oppgaven.
+--- before/process/jonas-oisund/999-2026-10-27-20-11-16-fartsgrenseplanlegging.md
++++ after/process/jonas-oisund/999-2026-10-27-20-11-16-fartsgrenseplanlegging.md
+@@ -2,11 +2,11 @@
+ 
+ **EXPERIMENTAL EXTENSION — OUTSIDE APPROVED V1 SCOPE**
+ 
+-## 2026-10-27 kl. 20:33 — Jonas Øisund
++## 2026-10-27 kl. 21:26 — Jonas Øisund
+ 
+ ### Oppgave
+ 
+-Etablere separat arbeidsområde og et avgrenset planleggingsgrunnlag for eksperimentell V1.4.0: aktuell registrert vegfartsgrense og fast 300m-forvarsel. Ingen implementering, produkttester, posisjonsinnsamling eller commit.
++Etablere separat arbeidsområde og et avgrenset planleggingsgrunnlag for eksperimentell V1.4.0: aktuell registrert vegfartsgrense og fast 300m-forvarsel. Ingen implementering, produkttester, posisjonsinnsamling eller commit. Senere bestilling utvidet leveransen til gjenværende datakvalifisering og ferdige epics/stories.
+ 
+ ### Plan
+ 
+@@ -23,13 +23,14 @@
+ 
+ Fortsettelse samme dato: bmad-spec brukt i verifisert lokal mappe specs/spec-speed-limits. Fem capabilities og følgedokumenter for atferd, pilotmanifest, tolv senere AC-er og ikonrettigheter er laget; root README/plan/interfaces er oppdatert. Brukeren avklarte overflatetrasé og slutt etter flyplassrundkjøringen; rettelsen tre underveis/fjerde ved slutt er bevart. PV-1/PV-2 lukket i issues. Kryssnavnene er begrunnede forslag med kildebelegg og konkrete datagap, ikke en fiktivt komplett NVDB-rute. Lite FV7772-oppslag traff Stakkevollvegen og ble avvist som pilotbelegg. Ingen nye skiltfiler eller posisjoner samlet. Tidligere selvvalgt Eidvegen-pilot erstattet. Spec Law sammenheng/bevaring kontrollert, dokumentlenker, additivt diff og whitespace er kontrollert uten funn. Ingen commit, også for denne loggen, etter eksplisitt brukerkrav.
+ 
+-Neste lille steg: kvalifiser manifest K1–K4 og frys v1/profilark; ingen ny planprosess eller bygging. [Gjeldende SPEC](../../specs/spec-speed-limits/SPEC.md).
++Sluttføring: eksisterende delarbeid i qualification/planning gjenopptatt. To siste små NVDB-oppslag fullførte rammen45oppslag/1 597 560byte. Råhashene stemmer. V830-feltreglene avdekket feil R2/R3-buer i foreløpig kandidat; korrigert R2→R3 er323,808m. R4/70→50 erstatter rundkjøringskandidaten.139 ordnede segmenter uten nodebrudd,8656,655m summert kildelengde, fra1139933 til1138796. Ingen lovnad om fysisk/rutejuridisk godkjenning.
++
++Bmad-spec avledet kernel/pilotmanifest/teknisk tillegg etter oppdatert memlog. Bmad-create-epics-and-stories fullført gjennom fire steg: én epic og sju stories med BDD, avhengigheter og FR/NFR/UX/AC-sporing. README/plan/interfaces og statuser er samordnet. EPS/NLOD valgt rettighetsspor; faktisk assetleveranse og fysisk kvalifisering er senere kriterier. Dokumentkontroller og diff finnes i [sluttvalideringen](../../planning/validation.md). Kun kilde-/dokumentkontroller; ingen produktkode eller produkttester. Ingen commit/push/merge. Alle skriveruter er innenfor utvidelsen.
+ 
+ ### Åpne punkter
+ 
+-- PV-1/PV-2 er løst; ingen gjenværende produktvalg blokkerer spesifikasjonen.
+-- QF-1/2: Dokumenter komplett pilotintervall, retning/feltsemantikk, kildealder, midlertidig/variabel regulering og lisensspor for skiltfiler.
+-- QF-3/4: Kvalifiser rettet rutetrasé/NVDB-kobling og syntetiske forløp for begge visninger, inkludert 300m-forvarsel.
+-- QF-5: Ferdig/testet V1, kvalifiserte avhengigheter og ny implementeringsbestilling før implementering; faktisk enhets-/GPS-kvalifisering er ikke utført.
++- QF-1/2 og QF-2b: Operativ kilde-/felt-/svingdekning, midlertidig/variabel regulering og faktisk ikonmanifest gjenstår i stories1.1/1.2/1.7.
++- QF-3/4: Senere implementasjon/verifikasjon og fysisk profil/akseptvindu; kildeobservasjoner erstatter ikke GPS-kvalifisering.
++- QF-5: Ferdig/testet V1 og kvalifiserte avhengigheter samt separat bygg-/fysisk testbestilling.
+ 
+-Alle punkter speilet i [issues.md](issues.md). bmad-spec-steget er gjennomført i denne fortsettelsen. Neste steg er avgrenset datakvalifisering av manifest/profil, uten epics/stories eller full ny planleggingsrunde.
++Speilet i [issues.md](issues.md). PV-1/PV-2, kildeplanlegging QF-1a og ferdig epic/storyplan QF-3a er løst. Neste aktivitet er avhengighets-/beredskapsarbeid, ikke ny full planleggingsrunde. Ingen nye produktvalg kreves nå.
+--- before/process/jonas-oisund/issues.md
++++ after/process/jonas-oisund/issues.md
+@@ -2,9 +2,14 @@
+ 
+ **EXPERIMENTAL EXTENSION — OUTSIDE APPROVED V1 SCOPE**
+ 
+-Utvidelseslokal liste etter eksplisitt krav om at alt nytt ligger i dette området. Eksisterende .logs/jonas-oisund/issues.md er lest og bevart; andre prosjektpunkter kopieres ikke hit.
++Utvidelseslokal liste. Prosjektets andre logger/issues er bevart. Sesjon: [Fartsgrenseplanlegging](999-2026-10-27-20-11-16-fartsgrenseplanlegging.md).
+ 
+-- [x] 2026-10-27 [Fartsgrenseplanlegging](999-2026-10-27-20-11-16-fartsgrenseplanlegging.md) — PV-1/PV-2: Korridor/retning og visuelt panel uten lyd avklart. Overflatetrasé Polaria–flyplassavkjøringen, slutt etter fjerde rundkjøring. (løst 2026-10-27)
+-- [ ] 2026-10-27 [Fartsgrenseplanlegging](999-2026-10-27-20-11-16-fartsgrenseplanlegging.md) — QF-1/2: Dokumenter komplett pilotintervall, retning/feltsemantikk, kildealder, begrensninger ved midlertidig/variabel regulering og lisensspor for faktiske skiltfiler.
+-- [ ] 2026-10-27 [Fartsgrenseplanlegging](999-2026-10-27-20-11-16-fartsgrenseplanlegging.md) — QF-3/4: AC-01–12 og forventet atferd er nå spesifisert; faktisk rettet rutetrasé/NVDB-kobling, numerisk profil og senere syntetisk/fysisk kvalifisering gjenstår. Se specs/spec-speed-limits/pilot-manifest.md K1–K5 og verification.md.
+-- [ ] 2026-10-27 [Fartsgrenseplanlegging](999-2026-10-27-20-11-16-fartsgrenseplanlegging.md) — QF-5: Før senere implementering må godkjent V1 være ferdig/testet og nødvendig rutenett-/posisjonsstøtte kvalifisert; innhent separat implementeringsbestilling. Faktisk enhets-/GPS-kvalifisering er ikke utført.
++- [x] 2026-10-27 PV-1/PV-2: Korridor/retning, overflate, fire rundkjøringer/slutt etter flyplassrundkjøring og visuelt uten lyd avklart. (løst2026-10-27)
++- [x] 2026-10-27 QF-1a: Avgrenset kildekvalifisering og plankjede fullført;139segmenter, nodekontinuitet, feltrettede buer, målrettede105-intervaller og detail/super-binding. R2-feil korrigert, R4 valgt. (løst2026-10-27)
++- [x] 2026-10-27 QF-3a: Planlegging fullført gjennom SL-E1/S1–S7, CAP/AC-/kravsporing og profilforslag. (løst2026-10-27)
++- [ ] 2026-10-27 QF-1/2: Operativt snapshot, alle relevante felt-/sving-/bussrestriksjoner, alternativvegdekning, kildealder og midlertidig/variabel regulering: story1.1 og fysisk1.7. Historiske uttrekk garanterer ikke fysisk dekning.
++- [ ] 2026-10-27 QF-2b: Valgt EPS/NLOD-spor er dokumentert; faktiske30/40/50/60/70-filer/hash/attribusjon/konvertering må kontrolleres i1.2 før distribusjon. Per-SVG-vilkår er fortsatt ikke bekreftet.
++- [ ] 2026-10-27 QF-3/4: Kontrakts-/matcher-/300m-/passeringskontroller i1.2–1.6 er planlagt, ikke kjørt. SL-LAB-1 må kvalifiseres med selvstendig forventningsgrunnlag; feilmodell/kandidatseparasjon og fysisk akseptvindu fryses før1.7.
++- [ ] 2026-10-27 QF-5: V1 ferdig/testet og avhengigheter implementert/kvalifisert, deretter separat byggbestilling og senere fysisk testautorisasjon. Ingen faktisk posisjons-/enhetskvalifisering utført.
++
++Alle punkter spores til [ferdig epic-plan](../../planning/epics.md) og [porter](../../specs/spec-speed-limits/technical-addendum.md). Ingen nye produktvalg er åpne nå. Historiske samlepunkt QF-1–5 er beholdt med presisert status og underpunkter.
+--- /dev/null
++++ after/qualification/2026-10-27/qualification.md
+@@ -0,0 +1,70 @@
++﻿# Kildekvalifisering — SL-Q1 / 2026-10-27
++
++**EXPERIMENTAL EXTENSION — OUTSIDE APPROVED V1 SCOPE**
++
++Resultat: **avgrenset kilde- og topologikvalifisering ferdig for planlegging; ikke fysisk validert eller klar til bruk**. Korrigert planrute har 139 kildesegmenter, ingen nodebrudd og 8656,655 m summert kildelengde. Alle svingebegrensninger, faktisk skilting og GPS-kvalitet er ikke erklært bestått. Se [reproduserbar lokal kontroll](qualify-local.py), [kontrollresultat](local-audit.json) og [ordnet kildekjede](source-bound-route.json).
++
++## Metode og belegg
++
++45 lesende oppslag, 1 597 560 responsbyte totalt, ingen automatisk helkommunehøsting. Kildene er Kartverkets offentlige adresse-API og NVDB Les V4. Maks45 oppslag /3MB per respons var satt som ramme. Alle URL-er, UTC-tider, feil, størrelser og SHA-256 ligger i [requests.jsonl](requests.jsonl); råsvar og det avgrensede innsamlingshjelpeskriptet ligger her. HTTP200 betyr teknisk svar, ikke rett rute eller fullstendig regulering. Adresser er offentlige søkeankre, ikke vegpunkter eller innsamlede GPS-fikser. Fuzzy søk og privatvegtreff er ikke brukt som bevis på pilot.
++
++NVDB [Vegnett](https://nvdb-docs.atlas.vegvesen.no/nvdbapil/v4/Vegnett/), [Rute](https://nvdb-docs.atlas.vegvesen.no/nvdbapil/v4/Rute/), [Posisjon](https://nvdb-docs.atlas.vegvesen.no/nvdbapil/v4/Posisjon/) og [Vegobjekter](https://nvdb-docs.atlas.vegvesen.no/nvdbapil/v4/Vegobjekter/) forklarer feltene/avgrensningene. Hentede OpenAPI-definisjoner er openapi-vegnett.json og openapi-vegobjekter.json. Produsentens dokumentasjon og data er samme kildefamilie, ikke uavhengig fysisk bekreftelse.
++
++## Kildebekreftet geometri
++
++[pilot-named-roads.json](pilot-named-roads.json) inneholder153 segmenter for de tre navngitte kommunale vegsystemene, med tom sluttkontroll i pilot-named-roads-tail.json. For hovedlenkesekvens **1109722** (Strandvegen) dekker51 segmenter posisjon0–1. **1109517** (Strandvegen-overgang/Kvaløyvegen) har35 segmenter posisjon0–1. Sortert kildekjede har ingen intervall-/nodebrudd; de møtes i **node1138973**. Lengdesummer er henholdsvis2637,505 og4101,444m i kildens lengdefelt; dette er ikke total pilotlengde eller målt kjøreavstand fra Polaria.
++
++Sørgående/vestlig rundt sørenden og deretter nordgående øker kildeposisjon på disse to lenkene. strict-strand.json og strict-kvaloy.json returnerte hver KOMPLETT over avgrensede geometriankre med bare riktig hovedlenke. Sluttkontrollen binder komplette kildesegmenter fra node1139933 ved Polaria til node1138796 på Flyplassvegen, 37,570 m etter R4-utgangen. Det er et eksplisitt valgt planintervall; adresseprojeksjonen 0.00775722@1109722 er et separat offentlig søkeanker, ikke innsamlet posisjon. Kildelengde er ikke målt kjørelengde. En sum av separate rutesvar alene beviser ikke sammenheng.
++
++| Kontroll | NVDB-lenke | Foreslått valgt rundkjøringsbue fra kilde-/rutesvar | Avgrensning |
++|---|---|---|---|
++| R1, Langnesvegen/Langnesbakken–Kvaløyvegen | 1126029 | 0→0.31012056, fra node3249937 til3249939 | Inn fra1126588, ut1126527; felt/forbud må sluttkontrolleres. |
++| R2, Workinn/Langnestunnelen | 1126030 | 0.88033387→1 + 0→0.62975708, økende posisjon, fra1139057 til1139060 | Videre via1126028 tilR3, ikke tunnelarmen. |
++| R3, Giæverbukta | 1125949 | 0.65287709→1 + 0→0.35105026, økende, fra1138977 til1138963 | Videre mot1125918/E8, ikke Ringvegen/østover. |
++| R4, sørlig flyplassavkjøring | 1125950 | 0.87462251→1 og0→0.05053167, fra1138787 via3251244 til3251245 | Ut1126506/Flyplassvegen. Bypass/filterarm finnes; må ikke telle som kjørt bue. |
++
++R1–R3: [pilot-north-roads.json](pilot-north-roads.json), et200-segmenters utsnitt som **ikke** er uttømmende. R4: [airport-circle.json](airport-circle.json),12 segmenter. Buer og armer: surface-r1-r2.json, surface-r2-r3.json, surface-r3-circle.json og surface-circle-exit.json. Kilden gir geometri/topologiske noder; brukerens bekreftede antall gjentas ikke som nytt spørsmål. Kildens retning på stedfesting/metrering er ikke automatisk lovlig kjøreretning for buss.
++
++**Detaljert til overordnet:** super-1126527.json knytter detaljert kjørebanesekvens1126527 til overordnet1126027, med blant annet felt1/3K. super-1126487.json knytter1126487 til1125918, med blant annet felt1/3. De to siste oppslagene gir også1126588→1109517 og1126506→1125938 (super-1126588.json og super-1126506.json). Detaljert1126506 har komplett overordnet stedfesting0–0.36047074 på1125938, som er dekket av50-objekt1019488951/1. Dette dekker de valgte detaljlenkene i planforslaget; feltspesifikke svingetillatelser og alle alternative armer er fortsatt ikke verifisert. Samme relative posisjon på to slike sekvenser kan ikke sammenlignes direkte.
++
++## Registrerte verdier og overgangspunkter
++
++Komplett sluttkontroll er gjort for de tre **målrettede** type105-søkene, ikke for alle veger i nordutsnittet. Belegg: pilot-south-speed.json (9objekter), pilot-north-target-speed.json (8) og pilot-detailed-speed.json (3), med hver sin tomme tail. Objekter kan forekomme i flere søk. [speed-intervals.csv](speed-intervals.csv) bevarer objekter, versjon, intervall, felt, kilde og tidsmetadata; [registered-changes.json](registered-changes.json) har avledede kildegrenser og koordinater der et segment begynner på samme punkt.
++
++| Registrert endring / område | Kildestedfesting | Objekt etter grensen / versjon |
++|---|---|---|
++| Strandvegen40→30 | 0.57617192@1109722, KV40500 S1D1 ca.m1522; UTM33(652445.407,7730007.401) | 91472646/1; før91472647/1 |
++| Rundt sørenden30→50 | 0.00216787@1109517, UTM33(651788.3,7729809.899) | 91472898/2; før91472899/1 |
++| Kvaløyvegen50→30 | 0.26535564@1109517, ca.m1075; UTM33(651356.3,7730763.8) | 932902367/1 |
++| Kvaløyvegen30→50 | 0.39829852@1109517, ca.m1620; UTM33(651280.66,7731301.39) | 91472898/2 |
++| Kvaløyvegen50→60 | 0.47840131@1109517, ca.m1948; UTM33(651247,7731621.09) | 91472897/1 |
++| Kvaløyvegen60→50 | 0.88134235@1109517, ca.m3600; UTM33(651516.417,7733216.343) | 91472896/1 |
++| R1, forbindelsen tilR2 og R2 | Overordnet1126027 og sirkler1126029/1126030; registrert50 | 91485634/3,91485668/2,91485667/3 |
++| FraR2 motR3:50; vedR3:60 | 1126028 til node1138977; R3 0.65287709@1125949 ved valgt innkjøring | 91485525/6 →1019488949/2 |
++| E8 motR4:60→70 | 0.36159129@1125918; EV8 S1D1 ca.m789 | 1019488950/1; før1019488949/2 |
++| R4:70; flyplassutkjøring:50 | R4 1125950 registrert70; EV8 S1D1 m0–98 /1125938 registrert50 | 1019488950/1 →1019488951/1 |
++
++Dette er **registrerte veggrenser** i NVDB, ikke attestasjon av fysisk skilt, maksimal trygg rundkjøringsfart eller bussens kjøretøygrense. R4s registrerte70 illustrerer hvorfor dette skillet er viktig. Overgangen70→50 er nå kildebundet til node3251245, fra1125950 til1126506. Eksakt fysisk skiltposisjon og midlertidig skilting gjenstår. På nordenden av1109517 finnes to50-objekter91472894/1 og91472895/1 som er feltavgrenset; de må ikke feiltolkes som dobbelt konflikt eller som retningsbevis fra MED alene.
++
++De viste hovedgrenseobjektene er sist endret i2025. Sideuttrekket inneholder også91472893v6 med virkning2026-10-01/endring2026-10-06; dette objektet ligger utenfor valgt slutt. Hentetid er aldri ny virkningsdato. Full midlertidig/variabel dekning, alle svingeforbud/feltvalg og fysiske overgangspunkter er ikke bekreftet.
++
++## Konkret rundkjøring før kommende grense
++
++**Rettet funn:** Den tidligere kandidaten265,519m brukte R2 mot registrert feltretning. [V830 §7.2](https://www.vegvesen.no/globalassets/fag/handboker/hb-v830-nasjonalt-vegreferansesystem.pdf?v=491e2d) beskriver oddetallsfelt med lenkeretningen. R2/R3 har felt1/3; korteste baklengsbue fra rutetjenesten forkastes. Økende R2-bue er80,824m; med242,984m videre blir det323,808m til60-grensen ved R3. Det er ikke et før-R2-tilfelle innen300m. R3 korrigeres tilsvarende til82,336m. Dette er en konkret feil i vårt foreløpige rutevalg, ikke endring av kildefartsgrensen.
++
++**Valgt K3-kandidat:** R4, innnode1138787 → økende bue18,448m → utgang3251245 →1126506 med registrert50. Med200m til innkjøringen er kildeavstanden218,448m til70→50. Ved en kildebasert posisjon281,552m før innkjøringen er avstanden300m. Disse posisjonene er beregnede scenariopunkter, ikke målte GPS-fikser. Dette støtter planlegging av rundkjøring mellom posisjon og endring, men forvarsel må fortsatt undertrykkes hvis valgt arm ikke er kvalifisert. Planlagt arm alene er utilstrekkelig. Ingen fartsgrense flyttes. AC-07s syntetiske250m består som separat regneeksempel.
++
++## Negative funn som må bevares
++
++- Nærmeste-punkt-oppslag ved sørenden og flyplassen traff privatveger. Filtrert oppslag på navngitt kommunalveg ga andre kandidater. Nærmeste veg kan ikke brukes som kjørt trasé.
++- pilot-directed-route.json inneholder124 segmenter, men status4040 IKKE_FUNNET_RUTE. Lengde7380,522m er ikke en komplett pilotrute.
++- surface-strand.json er KOMPLETT, men velger Bjørnøygata/Mellomvegen og avvises for valgt Strandvegen-trasé. route-north.json er KOMPLETT, men bruker forbindelser som hopper overR2/R3. surface-r3-r4.json velger filterarm uten R4-bue. Komplett API-status er ikke komplett oppfyllelse av valgt korridor.
++- Noen korte rutesøk ga ingen rute; geometriankre ga brukbare hovedsekvenser. Dette er et observasjonsfunn om søkeparametre, ikke bevis på at vegene er stengt.
++
++## Avslutning av denne datakvalifiseringen
++
++K1: sammenhengende plankjede, navn, retning i sirkelbuene og kildeidentifikatorer dokumentert. K2: målrettede type105-intervaller og aktuelle detalj/overordnet-bindinger dokumentert; ingen full garanti for regulering eller faktisk skilting. K3: R4-kandidat dokumentert, feilaktig R2-kandidat forkastet. K4: før/etter, feil arm, parallelle veger og manglende kantdekning har eksplisitte senere scenarioer. K5: fysisk kontroll er ikke utført.
++
++Kildesvarene er uendret; alle45 forespørslers lagrede SHA-256 stemmer. Noen eldre svar har tegnkodingsfeil i tekstnøkler; tall/ID-er ble kontrollert separat, og produksjonsadapteren må avvise ukjent schema eller dokumentere korrigering. Hele nordutsnittet er ikke komplett, og alternativvegdekning er ikke bevist. Full lovlig bussrute kan ikke utledes fra nodekjeden eller HTTP200 alene.
++
++Gjenværende kvalifisering ligger som konkrete ferdigkriterier i [stories1.1–1.7](../../planning/epics.md), med separat [profil og porter](../../specs/spec-speed-limits/technical-addendum.md). Dette er ferdig planlegging med åpne gjennomføringsporter, ikke en erklæring om at alt kan kvalifiseres uten bygging/fysisk test. Ingen flere dataoppslag i denne runden.

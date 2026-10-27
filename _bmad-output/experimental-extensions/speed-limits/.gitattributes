@@ -1,0 +1,5 @@
+# Preserve source evidence bytes and recorded SHA-256 across platforms.
+*.json -text
+*.jsonl -text
+*.csv -text
+*.svg -text

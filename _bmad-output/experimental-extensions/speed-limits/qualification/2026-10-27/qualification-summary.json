@@ -1,0 +1,144 @@
+{
+  "level": "source-data-observation-only",
+  "roads": {
+    "1109722": {
+      "segments": 51,
+      "interval": [
+        0.0,
+        1.0
+      ],
+      "node_gaps": [],
+      "source_length_m": 2637.505,
+      "first_node": "1139933",
+      "last_node": "1138973"
+    },
+    "1109517": {
+      "segments": 35,
+      "interval": [
+        0.0,
+        1.0
+      ],
+      "node_gaps": [],
+      "source_length_m": 4101.444,
+      "first_node": "1138973",
+      "last_node": "1138919"
+    }
+  },
+  "roundabouts": {
+    "R1": {
+      "link": 1126029,
+      "segments": 10,
+      "nodes": [
+        "1138916",
+        "1138917",
+        "1138919",
+        "1138922",
+        "1138933",
+        "1138934",
+        "3249936",
+        "3249937",
+        "3249938",
+        "3249939"
+      ]
+    },
+    "R2": {
+      "link": 1126030,
+      "segments": 12,
+      "nodes": [
+        "1139057",
+        "1139060",
+        "1139072",
+        "1139076",
+        "3249911",
+        "3249913",
+        "3249914",
+        "3249915",
+        "3249916",
+        "3249917",
+        "3249918",
+        "3251595"
+      ]
+    },
+    "R3": {
+      "link": 1125949,
+      "segments": 12,
+      "nodes": [
+        "1138963",
+        "1138972",
+        "1138977",
+        "1138988",
+        "3249300",
+        "3249302",
+        "3249303",
+        "3249304",
+        "3249305",
+        "3249306",
+        "3249307",
+        "3251155"
+      ]
+    },
+    "R4": {
+      "link": 1125950,
+      "segments": 12,
+      "nodes": [
+        "1138773",
+        "1138774",
+        "1138775",
+        "1138778",
+        "1138780",
+        "1138781",
+        "1138787",
+        "1138789",
+        "3251242",
+        "3251243",
+        "3251244",
+        "3251245"
+      ]
+    }
+  },
+  "rejected_routes": [
+    {
+      "file": "pilot-directed-route.json",
+      "metadata": {
+        "antall": 124,
+        "lengde": 7380.522,
+        "status": 4040,
+        "status_tekst": "IKKE_FUNNET_RUTE"
+      },
+      "reason": "partial, shortcut or filter-arm variant; not accepted as four-roundabout surface pilot"
+    },
+    {
+      "file": "surface-strand.json",
+      "metadata": {
+        "antall": 40,
+        "lengde": 2125.683,
+        "status": 2000,
+        "status_tekst": "KOMPLETT"
+      },
+      "reason": "partial, shortcut or filter-arm variant; not accepted as four-roundabout surface pilot"
+    },
+    {
+      "file": "route-north.json",
+      "metadata": {
+        "antall": 35,
+        "lengde": 1865.481,
+        "status": 2000,
+        "status_tekst": "KOMPLETT"
+      },
+      "reason": "partial, shortcut or filter-arm variant; not accepted as four-roundabout surface pilot"
+    },
+    {
+      "file": "surface-r3-r4.json",
+      "metadata": {
+        "antall": 15,
+        "lengde": 1227.448,
+        "status": 2000,
+        "status_tekst": "KOMPLETT"
+      },
+      "reason": "partial, shortcut or filter-arm variant; not accepted as four-roundabout surface pilot"
+    }
+  ],
+  "request_count": 43,
+  "downloaded_bytes": 1591935,
+  "status": "historical provisional summary; superseded by local-audit.json and source-bound-route.json"
+}

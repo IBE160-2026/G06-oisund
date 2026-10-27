@@ -1,0 +1,22 @@
+﻿{
+  "today": "2026-10-27",
+  "claims": [
+    {
+      "claim": "API type-105 observation (observation date, not source publication)",
+      "class": "compatibility",
+      "pub_date": "2026-10-27",
+      "recheck": "2026-11-27",
+      "stale": false
+    },
+    {
+      "claim": "Geonorge SVG availability (observation date, not license freshness)",
+      "class": "compatibility",
+      "pub_date": "2026-10-27",
+      "recheck": "2026-11-27",
+      "stale": false
+    }
+  ],
+  "stale_count": 0,
+  "earliest_recheck": "2026-11-27",
+  "no_window_classes": []
+}
