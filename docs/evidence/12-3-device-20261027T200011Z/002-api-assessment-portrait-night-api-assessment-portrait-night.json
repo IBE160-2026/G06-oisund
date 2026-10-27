@@ -1,0 +1,696 @@
+{
+  "environment": {
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 800,
+      "height": 1085
+    },
+    "rootFontSize": "16px",
+    "themeClass": "night",
+    "theme": "night",
+    "scope": "main"
+  },
+  "text": [
+    {
+      "label": "Nattmodus",
+      "ratio": 11.652752702162216,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        214,
+        234,
+        250,
+        1
+      ]
+    },
+    {
+      "label": "Visning:",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Natt",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Fiktive demodata",
+      "ratio": 9.310977521467432,
+      "color": [
+        23,
+        62,
+        96,
+        1
+      ],
+      "background": [
+        224,
+        237,
+        248,
+        1
+      ]
+    },
+    {
+      "label": "Fiktiv arbeidsdag",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Kun et fast eksempel for lokal vurdering. Demoen krever ingen innlogging og viser ingen private arbe",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Ikke lagret. Eksemplet er planlagt og fiktivt.",
+      "ratio": 10.005601690488291,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        32,
+        62,
+        83,
+        1
+      ]
+    },
+    {
+      "label": "Last inn nytt fiktivt eksempel",
+      "ratio": 11.652752702162216,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        214,
+        234,
+        250,
+        1
+      ]
+    },
+    {
+      "label": "Lagre fiktiv dag",
+      "ratio": 11.652752702162216,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        214,
+        234,
+        250,
+        1
+      ]
+    },
+    {
+      "label": "Åpne lagret dag på nytt",
+      "ratio": 6.126270626473104,
+      "color": [
+        70,
+        87,
+        99,
+        1
+      ],
+      "background": [
+        228,
+        233,
+        237,
+        1
+      ]
+    },
+    {
+      "label": "Prøv gjentakbar simulering uten backend",
+      "ratio": 11.652752702162216,
+      "color": [
+        214,
+        234,
+        250,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Tjenestedato",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "2026-10-19",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Tidssone",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Europe/Oslo",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Vognløp",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "DEMO-01",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Fysisk buss",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Ukjent",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Planlagte, fiktive aktiviteter",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Tur",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "19.10.2026, 23:30",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "–",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "20.10.2026, 00:15",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Sted:",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Eksempelbyen",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "· Turkode:",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Ukjent",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Fiktiv · Planlagt",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Pause",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "20.10.2026, 00:15",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "–",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "20.10.2026, 00:45",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Sted:",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Ukjent",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "· Turkode:",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Ukjent",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Fiktiv · Planlagt",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Et nytt eksempel og lagrede dager utløper etter syv dager. Gjentatt lagring forlenger ikke fristen. ",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Gå til privat tilgang",
+      "ratio": 11.652752702162216,
+      "color": [
+        214,
+        234,
+        250,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": ". Har du en aktiv økt, åpnes arbeidsrommet. Å åpne demoen logger deg ikke ut.",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "label": "Nattmodus",
+      "ratio": 11.652752702162216,
+      "height": 58
+    },
+    {
+      "label": "Last inn nytt fiktivt eksempel",
+      "ratio": 11.652752702162216,
+      "height": 58
+    },
+    {
+      "label": "Lagre fiktiv dag",
+      "ratio": 11.652752702162216,
+      "height": 58
+    },
+    {
+      "label": "Åpne lagret dag på nytt",
+      "ratio": 11.768168526686955,
+      "height": 58
+    }
+  ],
+  "clipping": [],
+  "unmeasured": [],
+  "overflow": 0
+}

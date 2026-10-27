@@ -2,6 +2,12 @@
 
 **Story 12.3 owner acceptance: pending.** Jonas accepted 12.1 and 12.2 on 27 October 2026; both are done/accepted. 12.3 remains in review until his explicit approval. Automated desktop results do not qualify physical Lenovo Pad / Android / Brave use.
 
+## Physical Lenovo result — 27 October2026
+
+Physical TB361FU / Android16 / Brave1.97.59 USB testing is now recorded in the [device report](evidence/12-3-device-testing-2026-10-27.md). Covered device checks, native controls, actual2x pinch, selected focus pixels and theme/privacy lifecycle passed after bounded adapter corrections. Jonas separately confirmed finger theme activation and physical portrait keeping Night/visible controls. These are partial device results, not overall owner acceptance.
+
+Do not repeat the generic checklist below wholesale: use the report's completed-scope table. Remaining owner work is personal reading/touch comfort and explicit12.3 acceptance; if relevant, assistive technology/OS magnification/hardware keyboard. Private review/terminal recap and individual native glyph-contrast limits are explicitly unperformed. Earlier desktop-only limitations below describe that checkpoint and are superseded only for the exact scopes recorded in the device report. USB reverse15323/18323/18324 accesses this build, independently of the older remote pilot.
+
 ## Start this isolated build
 
 Use PowerShell in `D:/IBE160/tmp/story-12-3`, with Docker Desktop running:

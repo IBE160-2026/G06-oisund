@@ -1,0 +1,67 @@
+{
+  "b": {
+    "x": 177,
+    "y": 438.71875,
+    "width": 90.1875,
+    "height": 58
+  },
+  "hit": {
+    "hit": "Logg ut",
+    "scrollY": 1088.5,
+    "v": {
+      "height": 605,
+      "visualHeight": 605,
+      "offset": 0,
+      "scale": 1
+    }
+  },
+  "events": [
+    {
+      "type": "pointerdown",
+      "trusted": true
+    },
+    {
+      "type": "touchstart",
+      "trusted": true
+    },
+    {
+      "type": "click",
+      "trusted": true
+    }
+  ],
+  "network": [
+    {
+      "path": "/auth/logout",
+      "status": 200
+    }
+  ],
+  "ui": {
+    "url": "http://127.0.0.1:15323/private",
+    "headings": [
+      "Logg inn"
+    ],
+    "buttons": [
+      {
+        "name": "Nattmodus",
+        "disabled": false
+      },
+      {
+        "name": "Logg inn",
+        "disabled": false
+      }
+    ],
+    "labels": [
+      "Brukernavn",
+      "Passord"
+    ],
+    "viewport": {
+      "width": 1280,
+      "height": 605,
+      "visualScale": 1,
+      "visualHeight": 541
+    },
+    "status": [
+      "Du er logget ut."
+    ]
+  }
+}

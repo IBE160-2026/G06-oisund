@@ -1,0 +1,264 @@
+{
+  "environment": {
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 800,
+      "height": 1085
+    },
+    "rootFontSize": "16px",
+    "themeClass": "",
+    "theme": "day",
+    "scope": "main"
+  },
+  "text": [
+    {
+      "label": "Nattmodus",
+      "ratio": 11.085379609993499,
+      "color": [
+        255,
+        255,
+        255,
+        1
+      ],
+      "background": [
+        23,
+        62,
+        96,
+        1
+      ]
+    },
+    {
+      "label": "Visning:",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Dag",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Fiktive demodata",
+      "ratio": 9.310977521467432,
+      "color": [
+        23,
+        62,
+        96,
+        1
+      ],
+      "background": [
+        224,
+        237,
+        248,
+        1
+      ]
+    },
+    {
+      "label": "Fiktiv arbeidsdag",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Kun et fast eksempel for lokal vurdering. Demoen krever ingen innlogging og viser ingen private arbe",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Laster fiktivt eksempel …",
+      "ratio": 12.855408864593942,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        237,
+        243,
+        247,
+        1
+      ]
+    },
+    {
+      "label": "Last inn nytt fiktivt eksempel",
+      "ratio": 6.126270626473104,
+      "color": [
+        70,
+        87,
+        99,
+        1
+      ],
+      "background": [
+        228,
+        233,
+        237,
+        1
+      ]
+    },
+    {
+      "label": "Lagre fiktiv dag",
+      "ratio": 6.126270626473104,
+      "color": [
+        70,
+        87,
+        99,
+        1
+      ],
+      "background": [
+        228,
+        233,
+        237,
+        1
+      ]
+    },
+    {
+      "label": "Åpne lagret dag på nytt",
+      "ratio": 6.126270626473104,
+      "color": [
+        70,
+        87,
+        99,
+        1
+      ],
+      "background": [
+        228,
+        233,
+        237,
+        1
+      ]
+    },
+    {
+      "label": "Prøv gjentakbar simulering uten backend",
+      "ratio": 11.085379609993499,
+      "color": [
+        23,
+        62,
+        96,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Et nytt eksempel og lagrede dager utløper etter syv dager. Gjentatt lagring forlenger ikke fristen. ",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": "Gå til privat tilgang",
+      "ratio": 11.085379609993499,
+      "color": [
+        23,
+        62,
+        96,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "label": ". Har du en aktiv økt, åpnes arbeidsrommet. Å åpne demoen logger deg ikke ut.",
+      "ratio": 14.387145266736685,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        255,
+        255,
+        255,
+        1
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "label": "Nattmodus",
+      "ratio": 11.085379609993499,
+      "height": 58
+    },
+    {
+      "label": "Last inn nytt fiktivt eksempel",
+      "ratio": 4.781375582652278,
+      "height": 58
+    },
+    {
+      "label": "Lagre fiktiv dag",
+      "ratio": 4.781375582652278,
+      "height": 58
+    },
+    {
+      "label": "Åpne lagret dag på nytt",
+      "ratio": 4.781375582652278,
+      "height": 58
+    }
+  ],
+  "clipping": [],
+  "unmeasured": [],
+  "overflow": 0
+}

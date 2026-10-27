@@ -1,0 +1,73 @@
+{
+  "url": "http://127.0.0.1:15323/private",
+  "headings": [
+    "Privat arbeidsrom",
+    "Mine utkast",
+    "Gjennomgå en tekst-PDF",
+    "Mine bekreftede planer"
+  ],
+  "buttons": [
+    {
+      "name": "Nattmodus",
+      "disabled": false
+    },
+    {
+      "name": "Forberedelse og planlister",
+      "disabled": false
+    },
+    {
+      "name": "Kontroller og rediger utkast",
+      "disabled": false
+    },
+    {
+      "name": "Nytt utkast",
+      "disabled": false
+    },
+    {
+      "name": "Oppdater listen",
+      "disabled": false
+    },
+    {
+      "name": "Åpne 2031-01-03 · versjon 1",
+      "disabled": false
+    },
+    {
+      "name": "Åpne 2031-01-02 · versjon 1",
+      "disabled": false
+    },
+    {
+      "name": "Manuelt vedlikeholdte avvik",
+      "disabled": false
+    },
+    {
+      "name": "Oppdater planlisten",
+      "disabled": false
+    },
+    {
+      "name": "Åpne plan 2031-01-02 · versjon 1",
+      "disabled": false
+    },
+    {
+      "name": "Åpne plan 2031-01-03 · versjon 1",
+      "disabled": false
+    },
+    {
+      "name": "Logg ut",
+      "disabled": false
+    }
+  ],
+  "labels": [
+    "Velg tekst-PDF"
+  ],
+  "viewport": {
+    "width": 1280,
+    "height": 605,
+    "visualScale": 1,
+    "visualHeight": 605
+  },
+  "status": [
+    "Du er logget inn.",
+    "Nytt utkast. Ikke lagret.",
+    "Planlisten er oppdatert."
+  ]
+}

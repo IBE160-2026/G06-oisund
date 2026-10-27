@@ -1,0 +1,1 @@
+  mCurrentFocus=Window{7c5f2e8 u0 com.brave.browser/com.google.android.apps.chrome.Main}

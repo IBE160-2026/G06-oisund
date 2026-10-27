@@ -1,0 +1,1573 @@
+{
+  "environment": {
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 800,
+      "height": 1085
+    },
+    "rootFontSize": "16px",
+    "themeClass": "night",
+    "theme": "night",
+    "scope": "main"
+  },
+  "text": [
+    {
+      "label": "Nattmodus",
+      "ratio": 11.652752702162216,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        214,
+        234,
+        250,
+        1
+      ]
+    },
+    {
+      "label": "Visning:",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Natt",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Privat tilgang",
+      "ratio": 9.310977521467432,
+      "color": [
+        23,
+        62,
+        96,
+        1
+      ],
+      "background": [
+        224,
+        237,
+        248,
+        1
+      ]
+    },
+    {
+      "label": "Privat arbeidsrom",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Du er logget inn.",
+      "ratio": 10.005601690488291,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        32,
+        62,
+        83,
+        1
+      ]
+    },
+    {
+      "label": "Forberedelse og planlister",
+      "ratio": 11.652752702162216,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        214,
+        234,
+        250,
+        1
+      ]
+    },
+    {
+      "label": "Kontroller og rediger utkast",
+      "ratio": 11.652752702162216,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        214,
+        234,
+        250,
+        1
+      ]
+    },
+    {
+      "label": "Til den åpne planen",
+      "ratio": 11.652752702162216,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        214,
+        234,
+        250,
+        1
+      ]
+    },
+    {
+      "label": "Bekreftet plan åpnet. Fristen er uendret.",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Rediger avvik",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Forlengelse må lagres før gjeldende sluttid. Utløpte og manuelt avsluttede avvik er skrivebeskyttet ",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Felles avviksregister for kontoen. Avvik brukes automatisk på alle relevante bekreftede dager frem t",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Tilbake til dagen",
+      "ratio": 11.652752702162216,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        214,
+        234,
+        250,
+        1
+      ]
+    },
+    {
+      "label": "Hent lagrede avvik",
+      "ratio": 11.652752702162216,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        214,
+        234,
+        250,
+        1
+      ]
+    },
+    {
+      "label": "Tilbake til avvik",
+      "ratio": 11.652752702162216,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        214,
+        234,
+        250,
+        1
+      ]
+    },
+    {
+      "label": "Gi trafikkmeldingen en tittel. Bruk kort forklaring til et sammendrag og detaljert forklaring til he",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Tittel og et uttrykkelig linjevalg er påkrevd. Sluttdato er påkrevd. Forklaringer, kildebeskrivelse,",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Kildeopplysninger",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Tittel",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Kort forklaring",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Detaljert forklaring",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Linjeomfang",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Linjer fra kilden (kommaseparert)",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Oppgi linjene eller kopier hele ruteoverskriften fra kilden, maks 300 tegn per linje. Ingen linjenum",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Linjer med komma eller anførselstegn omsluttes av doble anførselstegn. Et anførselstegn i en slik li",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Linjer er påkrevd: oppgi minst en linje fra kilden eller velg Alle linjer.",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Kildebeskrivelse",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Originalkilde (HTTP eller HTTPS)",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Valgfri HTTP(S)-lenke, også til en felles trafikkoversikt. For SMS kan du la lenken stå tom og beskr",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Tomme valgfrie tidspunkt betyr ukjent. Oppgi dato og tid i Oslo, og velg forekomst når klokken still",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Kilden oppdatert",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "(Oslo-tid)",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Kilden oppdatert",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "dato",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Kilden oppdatert: klokkeslett",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Kilden oppdatert",
+      "ratio": 6.126270626473104,
+      "color": [
+        70,
+        87,
+        99,
+        1
+      ],
+      "background": [
+        228,
+        233,
+        237,
+        1
+      ]
+    },
+    {
+      "label": ": neste dag",
+      "ratio": 6.126270626473104,
+      "color": [
+        70,
+        87,
+        99,
+        1
+      ],
+      "background": [
+        228,
+        233,
+        237,
+        1
+      ]
+    },
+    {
+      "label": "Kilden oppdatert",
+      "ratio": 11.652752702162216,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        214,
+        234,
+        250,
+        1
+      ]
+    },
+    {
+      "label": ": tøm tidspunkt",
+      "ratio": 11.652752702162216,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        214,
+        234,
+        250,
+        1
+      ]
+    },
+    {
+      "label": "Klokkeslett er ukjent.",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Gyldig fra",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "(Oslo-tid)",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Gyldig fra",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "dato",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Gyldig fra: klokkeslett",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Gyldig fra",
+      "ratio": 6.126270626473104,
+      "color": [
+        70,
+        87,
+        99,
+        1
+      ],
+      "background": [
+        228,
+        233,
+        237,
+        1
+      ]
+    },
+    {
+      "label": ": neste dag",
+      "ratio": 6.126270626473104,
+      "color": [
+        70,
+        87,
+        99,
+        1
+      ],
+      "background": [
+        228,
+        233,
+        237,
+        1
+      ]
+    },
+    {
+      "label": "Gyldig fra",
+      "ratio": 11.652752702162216,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        214,
+        234,
+        250,
+        1
+      ]
+    },
+    {
+      "label": ": tøm tidspunkt",
+      "ratio": 11.652752702162216,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        214,
+        234,
+        250,
+        1
+      ]
+    },
+    {
+      "label": "Klokkeslett er ukjent.",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Gyldig til",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "(Oslo-tid)",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Sluttdato er påkrevd. Uten klokkeslett gjelder avviket til 23:59:59 på denne Oslo-datoen. Et oppgitt",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Gyldig til",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "dato",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Gyldig til: klokkeslett",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Gyldig til",
+      "ratio": 6.126270626473104,
+      "color": [
+        70,
+        87,
+        99,
+        1
+      ],
+      "background": [
+        228,
+        233,
+        237,
+        1
+      ]
+    },
+    {
+      "label": ": neste dag",
+      "ratio": 6.126270626473104,
+      "color": [
+        70,
+        87,
+        99,
+        1
+      ],
+      "background": [
+        228,
+        233,
+        237,
+        1
+      ]
+    },
+    {
+      "label": "Gyldig til",
+      "ratio": 11.652752702162216,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        214,
+        234,
+        250,
+        1
+      ]
+    },
+    {
+      "label": ": tøm tidspunkt",
+      "ratio": 11.652752702162216,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        214,
+        234,
+        250,
+        1
+      ]
+    },
+    {
+      "label": "Klokkeslett er ukjent.",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Før avviket kan lagres:",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Linjer er påkrevd: oppgi minst en linje fra kilden eller velg Alle linjer.",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Oppgi en fremtidig sluttdato. Et tomt klokkeslett betyr 23:59:59 på Oslo-datoen.",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Lagre avvik",
+      "ratio": 11.652752702162216,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        214,
+        234,
+        250,
+        1
+      ]
+    },
+    {
+      "label": "Forkast ulagrede endringer",
+      "ratio": 11.652752702162216,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        214,
+        234,
+        250,
+        1
+      ]
+    },
+    {
+      "label": "Ikke lagret. Linjer er påkrevd: oppgi minst en linje fra kilden eller velg Alle linjer. Oppgi en fre",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Ulagrede endringer finnes bare mens siden er åpen.",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Økten utløper",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "10.11.2026, 21:02",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": ".",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Logg ut",
+      "ratio": 11.652752702162216,
+      "color": [
+        22,
+        44,
+        60,
+        1
+      ],
+      "background": [
+        214,
+        234,
+        250,
+        1
+      ]
+    },
+    {
+      "label": "Tilgang opprettes av den som drifter løsningen. Bruk arbeidsrommet mens du står stille.",
+      "ratio": 12.855408864593942,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "Åpne fiktiv demo",
+      "ratio": 11.652752702162216,
+      "color": [
+        214,
+        234,
+        250,
+        1
+      ],
+      "background": [
+        22,
+        44,
+        60,
+        1
+      ]
+    },
+    {
+      "label": "control value: INPUT",
+      "ratio": 10.005601690488291,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        32,
+        62,
+        83,
+        1
+      ]
+    },
+    {
+      "label": "control value: INPUT",
+      "ratio": 10.005601690488291,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        32,
+        62,
+        83,
+        1
+      ]
+    },
+    {
+      "label": "control value: Detaljert forklaring",
+      "ratio": 10.005601690488291,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        32,
+        62,
+        83,
+        1
+      ]
+    },
+    {
+      "label": "control value: Linjeomfang",
+      "ratio": 10.005601690488291,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        32,
+        62,
+        83,
+        1
+      ]
+    },
+    {
+      "label": "control value: INPUT",
+      "ratio": 10.005601690488291,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        32,
+        62,
+        83,
+        1
+      ]
+    },
+    {
+      "label": "control value: INPUT",
+      "ratio": 10.005601690488291,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        32,
+        62,
+        83,
+        1
+      ]
+    },
+    {
+      "label": "control value: INPUT",
+      "ratio": 10.005601690488291,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        32,
+        62,
+        83,
+        1
+      ]
+    },
+    {
+      "label": "control value: INPUT",
+      "ratio": 10.005601690488291,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        32,
+        62,
+        83,
+        1
+      ]
+    },
+    {
+      "label": "control value: INPUT",
+      "ratio": 10.005601690488291,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        32,
+        62,
+        83,
+        1
+      ]
+    },
+    {
+      "label": "control value: INPUT",
+      "ratio": 10.005601690488291,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        32,
+        62,
+        83,
+        1
+      ]
+    },
+    {
+      "label": "control value: INPUT",
+      "ratio": 10.005601690488291,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        32,
+        62,
+        83,
+        1
+      ]
+    },
+    {
+      "label": "control value: INPUT",
+      "ratio": 10.005601690488291,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        32,
+        62,
+        83,
+        1
+      ]
+    },
+    {
+      "label": "control value: INPUT",
+      "ratio": 10.005601690488291,
+      "color": [
+        237,
+        243,
+        247,
+        1
+      ],
+      "background": [
+        32,
+        62,
+        83,
+        1
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "label": "Nattmodus",
+      "ratio": 11.652752702162216,
+      "height": 58
+    },
+    {
+      "label": "Forberedelse og planlister",
+      "ratio": 11.652752702162216,
+      "height": 58
+    },
+    {
+      "label": "Kontroller og rediger utkast",
+      "ratio": 11.652752702162216,
+      "height": 58
+    },
+    {
+      "label": "Til den åpne planen",
+      "ratio": 11.652752702162216,
+      "height": 58
+    },
+    {
+      "label": "Tilbake til dagen",
+      "ratio": 11.652752702162216,
+      "height": 58
+    },
+    {
+      "label": "Hent lagrede avvik",
+      "ratio": 11.652752702162216,
+      "height": 58
+    },
+    {
+      "label": "Tilbake til avvik",
+      "ratio": 11.652752702162216,
+      "height": 58
+    },
+    {
+      "label": "INPUT",
+      "ratio": 8.3661568844563,
+      "height": 58
+    },
+    {
+      "label": "INPUT",
+      "ratio": 8.3661568844563,
+      "height": 58
+    },
+    {
+      "label": "FIKTIV forklaring med mange ord og flere linjer.\nFIKTIV forklaring med mange ord",
+      "ratio": 8.3661568844563,
+      "height": 203.953125
+    },
+    {
+      "label": "Bestemte linjerAlle linjer",
+      "ratio": 8.3661568844563,
+      "height": 58
+    },
+    {
+      "label": "INPUT",
+      "ratio": 8.3661568844563,
+      "height": 58
+    },
+    {
+      "label": "INPUT",
+      "ratio": 8.3661568844563,
+      "height": 58
+    },
+    {
+      "label": "INPUT",
+      "ratio": 8.3661568844563,
+      "height": 58
+    },
+    {
+      "label": "INPUT",
+      "ratio": 8.3661568844563,
+      "height": 58
+    },
+    {
+      "label": "INPUT",
+      "ratio": 8.3661568844563,
+      "height": 58
+    },
+    {
+      "label": "Kilden oppdatert: neste dag",
+      "ratio": 11.768168526686955,
+      "height": 58
+    },
+    {
+      "label": "Kilden oppdatert: tøm tidspunkt",
+      "ratio": 11.652752702162216,
+      "height": 58
+    },
+    {
+      "label": "INPUT",
+      "ratio": 8.3661568844563,
+      "height": 58
+    },
+    {
+      "label": "INPUT",
+      "ratio": 8.3661568844563,
+      "height": 58
+    },
+    {
+      "label": "Gyldig fra: neste dag",
+      "ratio": 11.768168526686955,
+      "height": 58
+    },
+    {
+      "label": "Gyldig fra: tøm tidspunkt",
+      "ratio": 11.652752702162216,
+      "height": 58
+    },
+    {
+      "label": "INPUT",
+      "ratio": 8.3661568844563,
+      "height": 58
+    },
+    {
+      "label": "INPUT",
+      "ratio": 8.3661568844563,
+      "height": 58
+    },
+    {
+      "label": "Gyldig til: neste dag",
+      "ratio": 11.768168526686955,
+      "height": 58
+    },
+    {
+      "label": "Gyldig til: tøm tidspunkt",
+      "ratio": 11.652752702162216,
+      "height": 58
+    },
+    {
+      "label": "Lagre avvik",
+      "ratio": 11.652752702162216,
+      "height": 58
+    },
+    {
+      "label": "Forkast ulagrede endringer",
+      "ratio": 11.652752702162216,
+      "height": 58
+    },
+    {
+      "label": "Logg ut",
+      "ratio": 11.652752702162216,
+      "height": 58
+    }
+  ],
+  "clipping": [],
+  "unmeasured": [],
+  "overflow": 0
+}

@@ -1,0 +1,70 @@
+{
+  "url": "http://127.0.0.1:15323/demo",
+  "headings": [
+    "Prøv en fiktiv arbeidsdag",
+    "2. Rediger forslag",
+    "Gjeldende versus foreslått",
+    "Gjeldende lagret versjon",
+    "Ditt ulagrede forslag"
+  ],
+  "buttons": [
+    {
+      "name": "Bytt til dagvisning",
+      "disabled": false
+    },
+    {
+      "name": "Import",
+      "disabled": true
+    },
+    {
+      "name": "Utkast",
+      "disabled": true
+    },
+    {
+      "name": "Arbeidsdag",
+      "disabled": true
+    },
+    {
+      "name": "Kontomeldinger",
+      "disabled": true
+    },
+    {
+      "name": "Lagre forslag i simuleringen",
+      "disabled": true
+    },
+    {
+      "name": "Åpne lagret øyeblikksbilde",
+      "disabled": true
+    },
+    {
+      "name": "Se lagret dag før start",
+      "disabled": true
+    },
+    {
+      "name": "Ta i bruk gjeldende",
+      "disabled": false
+    },
+    {
+      "name": "Avbryt konflikt",
+      "disabled": false
+    },
+    {
+      "name": "Nullstill simuleringen",
+      "disabled": false
+    }
+  ],
+  "labels": [
+    "Simulert lagringsresultatVanligUtilgjengeligNyere revisjon / konfliktMistet svar etter lagring",
+    "Vognløp",
+    "Fysisk buss (tom = ukjent)"
+  ],
+  "viewport": {
+    "width": 1280,
+    "height": 605,
+    "visualScale": 1,
+    "visualHeight": 605
+  },
+  "status": [
+    "Konflikt. Forslaget er ikke lagret. Sammenlign med gjeldende revisjon."
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "url": "http://127.0.0.1:15323/private",
+  "headings": [
+    "Logg inn"
+  ],
+  "buttons": [
+    {
+      "name": "Nattmodus",
+      "disabled": false
+    },
+    {
+      "name": "Logg inn",
+      "disabled": false
+    }
+  ],
+  "labels": [
+    "Brukernavn",
+    "Passord"
+  ],
+  "viewport": {
+    "width": 1280,
+    "height": 605,
+    "visualScale": 1,
+    "visualHeight": 605
+  },
+  "status": [
+    "Logg inn for å åpne privat arbeidsrom."
+  ]
+}

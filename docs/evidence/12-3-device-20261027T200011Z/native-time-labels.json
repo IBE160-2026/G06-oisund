@@ -1,0 +1,77 @@
+[
+  {
+    "text": "Angi tid",
+    "class": "android.widget.TextView",
+    "bounds": "[224,984][391,1058]"
+  },
+  {
+    "text": "20",
+    "class": "android.widget.Button",
+    "bounds": "[587,1062][715,1194]"
+  },
+  {
+    "text": "21",
+    "class": "android.widget.EditText",
+    "bounds": "[587,1194][715,1290]"
+  },
+  {
+    "text": "22",
+    "class": "android.widget.Button",
+    "bounds": "[587,1290][715,1422]"
+  },
+  {
+    "text": ":",
+    "class": "android.widget.TextView",
+    "bounds": "[723,1225][728,1258]"
+  },
+  {
+    "text": "06",
+    "class": "android.widget.Button",
+    "bounds": "[736,1062][863,1194]"
+  },
+  {
+    "text": "07",
+    "class": "android.widget.EditText",
+    "bounds": "[736,1194][863,1290]"
+  },
+  {
+    "text": "08",
+    "class": "android.widget.Button",
+    "bounds": "[736,1290][863,1422]"
+  },
+  {
+    "text": ":",
+    "class": "android.widget.TextView",
+    "bounds": "[871,1225][876,1258]"
+  },
+  {
+    "text": "59",
+    "class": "android.widget.Button",
+    "bounds": "[884,1062][1012,1194]"
+  },
+  {
+    "text": "00",
+    "class": "android.widget.EditText",
+    "bounds": "[884,1194][1012,1290]"
+  },
+  {
+    "text": "01",
+    "class": "android.widget.Button",
+    "bounds": "[884,1290][1012,1422]"
+  },
+  {
+    "text": "Tøm",
+    "class": "android.widget.Button",
+    "bounds": "[264,1430][392,1526]"
+  },
+  {
+    "text": "Avbryt",
+    "class": "android.widget.Button",
+    "bounds": "[1055,1430][1208,1526]"
+  },
+  {
+    "text": "Angi",
+    "class": "android.widget.Button",
+    "bounds": "[1224,1430][1352,1526]"
+  }
+]

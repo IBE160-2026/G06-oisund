@@ -1,0 +1,79 @@
+{
+  "time": "2026-10-27T20:20:23.506Z",
+  "provenance": "Jonas explicitly reported one finger tap switched to Night; observer sends no input",
+  "result": {
+    "theme": "night",
+    "label": "Bytt til dagvisning",
+    "events": [
+      {
+        "type": "pointerdown",
+        "trust": true,
+        "pointerType": "touch",
+        "target": "Bytt til nattvisning",
+        "time": 54595.20000000298
+      },
+      {
+        "type": "touchstart",
+        "trust": true,
+        "pointerType": null,
+        "target": "Bytt til nattvisning",
+        "time": 54595.40000000596
+      },
+      {
+        "type": "click",
+        "trust": true,
+        "pointerType": "touch",
+        "target": "Bytt til dagvisning",
+        "time": 54751.90000000596
+      },
+      {
+        "type": "pointerdown",
+        "trust": true,
+        "pointerType": "touch",
+        "target": "Bytt til dagvisning",
+        "time": 56431.80000000447
+      },
+      {
+        "type": "touchstart",
+        "trust": true,
+        "pointerType": null,
+        "target": "Bytt til dagvisning",
+        "time": 56432
+      },
+      {
+        "type": "click",
+        "trust": true,
+        "pointerType": "touch",
+        "target": "Bytt til nattvisning",
+        "time": 56567.5
+      },
+      {
+        "type": "pointerdown",
+        "trust": true,
+        "pointerType": "touch",
+        "target": "Bytt til nattvisning",
+        "time": 56998.80000000447
+      },
+      {
+        "type": "touchstart",
+        "trust": true,
+        "pointerType": null,
+        "target": "Bytt til nattvisning",
+        "time": 56998.90000000596
+      },
+      {
+        "type": "click",
+        "trust": true,
+        "pointerType": "touch",
+        "target": "Bytt til dagvisning",
+        "time": 57062.10000000149
+      }
+    ],
+    "viewport": {
+      "width": 1280,
+      "height": 605,
+      "orientation": "landscape-secondary",
+      "scale": 1
+    }
+  }
+}

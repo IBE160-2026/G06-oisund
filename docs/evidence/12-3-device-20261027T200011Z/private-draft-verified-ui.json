@@ -1,0 +1,121 @@
+{
+  "url": "http://127.0.0.1:15323/private",
+  "headings": [
+    "Privat arbeidsrom",
+    "Rediger utkast",
+    "Gjennomgå og bekreft"
+  ],
+  "buttons": [
+    {
+      "name": "Nattmodus",
+      "disabled": false
+    },
+    {
+      "name": "Forberedelse og planlister",
+      "disabled": false
+    },
+    {
+      "name": "Kontroller og rediger utkast",
+      "disabled": false
+    },
+    {
+      "name": "Til den åpne planen",
+      "disabled": false
+    },
+    {
+      "name": "Tøm vognløp",
+      "disabled": false
+    },
+    {
+      "name": "Tøm buss/vogn",
+      "disabled": false
+    },
+    {
+      "name": "Bytt vognløp fra aktivitet 1",
+      "disabled": false
+    },
+    {
+      "name": "Start: neste dag",
+      "disabled": false
+    },
+    {
+      "name": "Start: tøm tidspunkt",
+      "disabled": false
+    },
+    {
+      "name": "Slutt: neste dag",
+      "disabled": false
+    },
+    {
+      "name": "Slutt: tøm tidspunkt",
+      "disabled": false
+    },
+    {
+      "name": "Flytt opp",
+      "disabled": true
+    },
+    {
+      "name": "Fjern aktivitet 1",
+      "disabled": false
+    },
+    {
+      "name": "Legg til aktivitet",
+      "disabled": false
+    },
+    {
+      "name": "Lagre utkast",
+      "disabled": false
+    },
+    {
+      "name": "Forkast endringer",
+      "disabled": false
+    },
+    {
+      "name": "Slett utkast",
+      "disabled": false
+    },
+    {
+      "name": "Gjennomgå lagret utkast",
+      "disabled": false
+    },
+    {
+      "name": "Manuelt vedlikeholdte avvik",
+      "disabled": false
+    },
+    {
+      "name": "Logg ut",
+      "disabled": false
+    }
+  ],
+  "labels": [
+    "Tjenestedato",
+    "Vognløp",
+    "Buss/vogn",
+    "Startdato",
+    "Starttid",
+    "Sluttdato",
+    "Sluttid",
+    "Aktivitetstype",
+    "Opprinnelig kode",
+    "Opprinnelig startklokke",
+    "Opprinnelig sluttklokke",
+    "Fra sted",
+    "Til sted",
+    "Turnummer",
+    "Linje",
+    "Retning",
+    "Usikkerhet / ukjente fakta",
+    "Kilde / manuell rettelse"
+  ],
+  "viewport": {
+    "width": 800,
+    "height": 1085,
+    "visualScale": 1,
+    "visualHeight": 1085
+  },
+  "status": [
+    "Du er logget inn.",
+    "Lagret. Versjon 1.",
+    "Bekreftet plan åpnet. Fristen er uendret."
+  ]
+}
