@@ -1,5 +1,7 @@
 # Integreringskontroll for nettbrettilgang, 2026-10-27
 
+Senere sluttresultat for den faktiske f5-piloten: [tablet-pilot-result.md](tablet-pilot-result.md). Praktisk naturlig cookie-/øktutløp, ny MFA og bevart verdi er nå observert, og tunnelen er stoppet. Nedenstående integreringshistorikk skal ikke leses som deploy av den kombinerte main-versjonen.
+
 ## Oppdatert: godkjent commit/merge og testet kombinasjon
 
 **Utført:** Merge-commit `ca1d6470fcab636fe9c754f02d78990e418f0cca` er ferdigstilt i tilgangsbranchen og lokal main er fast-forwardet til den etter eiers uttrykkelige godkjenning. Ingen push. De to opprinnelige lokale dokumentasjonsfilene i D:\IBE160 er bevart byte for byte og fortsatt henholdsvis endret/utracket. Hovedindex har ingen stagede filer. Alle 23 baseline-containere har uendret ID, StartedAt, restartteller og image; engangstestcontainere og preview-port 18481 er ryddet. Tunnelen er ikke startet/stoppet av merge-operasjonen. Kjørende fysisk pilot bruker fortsatt f5-baserte images; deploy av de kombinerte image-versjonene er en separat operasjon og ikke utført. Ingen ordinær migrering eller storyaksept er gjort.

@@ -1,6 +1,12 @@
 # Tunnelklargjøring før separat publiseringsgodkjenning
 
-## Gjeldende status: godkjent pilotpublisering og pågående prøver 2026-10-27
+## Sluttstatus 2026-10-27
+
+Pilotprøvene er avsluttet og dokumentert samlet i [sluttrapporten](tablet-pilot-result.md), som er gjeldende resultatoversikt. Etter naturlig cookie-/øktutløp krevde direkte API Access-innlogging uten utkast; ny MFA og bevart sist lagret verdi ble bekreftet av eier. Eier logget ut og stoppet tunnelen med Ctrl+C. Agentens sluttkontroll fant null cloudflared-prosesser og null metrics-lyttere. Fire lokale pilotcontainere kjører fortsatt, gateway bare 127.0.0.1:18081. Godkjent DNS/rute er ikke fjernet, ingen connector/autostart kjører. Fysisk pilot er fortsatt f5-basert; nyere main-kombinasjon er ikke deployet. Ingen faktisk signert utløpt JWT er replay-testet eksternt.
+
+## Historiske milepæler og tidligere planer 2026-10-27
+
+Avsnittene nedenfor er løpende historikk, inkludert daværende «gjenstår»/«ikke utført». Bruk sluttrapporten for hva som senere ble gjennomført.
 
 Naturlig utløpsprøve planlagt fra eiers desktop-cookie-metadata: CF_Authorization Expires 2026-10-27T15:27:06.168Z, altså 16:27:06 i Oslo (CET, UTC+1). UTC-klokken ved planlegging var 14:44:29. Testtid foreslått etter 16:28 Oslo uten ny Access-innlogging/øktfornyelse eller klientklokkeendring i mellomtiden. Første leseforsøk i samme desktop-økt og direkte API skal da kreve Access igjen eller skjule innhold når tilgang ikke kan bekreftes. Cookie-expiry er offentlig tidsmetadata, ikke avlest JWT-exp-claim; prøven beviser ikke isolert avvisning av et signert utløpt JWT når nettleseren allerede har fjernet cookien. Syntetiske signatur/utløpstester og praktisk cookie-/øktutløp må beskrives separat. Ingen faktisk utløpsprøve er ennå rapportert.
 
