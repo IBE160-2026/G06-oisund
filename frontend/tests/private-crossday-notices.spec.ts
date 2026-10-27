@@ -75,7 +75,7 @@ test('open reader automatically hides expiry and maintenance exposes distinct re
   await page.addInitScript(() => { const original = Date.now; Date.now = () => original() - 2 * 3600000; });
   await openedPlan(page, context, true, -60);
   const ending = relativeInstants(6)[0];
-  const receipt = await post(context, '/notices', { operation_id: randomUUID(), expected_revision: 0, content: { title: 'Short active incident', line_tags: ['20'], valid_until: ending } });
+  const receipt = await post(context, '/notices', { operation_id: (await post(context, '/notice-operations', {})).operation_id, expected_revision: 0, content: { title: 'Short active incident', line_tags: ['20'], valid_until: ending } });
   await page.getByRole('button', { name: 'Les avvik for linjer og datoer', exact: true }).click();
   const reader = page.getByRole('region', { name: 'Avvik for linjer og datoer', exact: true });
   await expect(reader.locator('summary')).toHaveCount(1);

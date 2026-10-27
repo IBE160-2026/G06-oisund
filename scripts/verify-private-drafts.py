@@ -105,7 +105,7 @@ try:
     assert start_receipt['result']['state'] == 'active' and start_receipt['result']['revision'] == 1
     assert request(selection_path) == selection_receipt['result']
     notice_path = '/notices'
-    notice_body = {'operation_id': str(uuid4()), 'expected_revision': 0, 'content': {'title': 'Synthetic SMS traffic notice', 'summary': 'Temporary stop', 'description': 'Monday 06-08\nTuesday 16-18\nUse the temporary stop.', 'source_note': 'SMS from synthetic traffic control', 'line_scope': 'all', 'line_tags': [], 'source_url': None, 'source_updated_at': None, 'valid_from': '2031-01-02T23:00:00+01:00', 'valid_until': '2031-01-04T23:59:59+01:00'}}
+    notice_body = {'operation_id': request('/notice-operations', {})['operation_id'], 'expected_revision': 0, 'content': {'title': 'Synthetic SMS traffic notice', 'summary': 'Temporary stop', 'description': 'Monday 06-08\nTuesday 16-18\nUse the temporary stop.', 'source_note': 'SMS from synthetic traffic control', 'line_scope': 'all', 'line_tags': [], 'source_url': None, 'source_updated_at': None, 'valid_from': '2031-01-02T23:00:00+01:00', 'valid_until': '2031-01-04T23:59:59+01:00'}}
     notice_receipt = request(notice_path, notice_body)
     notice_id = notice_receipt['result']['id']
     assert all(notice_receipt['result'][key] == value for key, value in notice_body['content'].items())

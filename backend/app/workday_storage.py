@@ -151,7 +151,10 @@ def listing(request, cursor=None):
         owner = draft_storage.authorized(conn, request)
         rows = conn.execute("SELECT id,source_draft_id,source_revision,content->>'service_date' AS service_date,expires_at FROM workdays WHERE owner=%s AND expires_at > clock_timestamp() AND (%s::uuid IS NULL OR id > %s) ORDER BY id LIMIT 51", (owner, cursor, cursor)).fetchall()
         auth.session(conn, request)
-        return {'workdays': rows[:50], 'next_cursor': rows[49]['id'] if len(rows) > 50 else None}
+        final_now = conn.execute('SELECT clock_timestamp() AS now').fetchone()['now']
+        scanned_cursor = rows[-1]['id'] if len(rows) > 50 else None
+        rows = [row for row in rows if row['expires_at'] > final_now]
+        return {'workdays': rows[:50], 'next_cursor': rows[49]['id'] if len(rows) > 50 else scanned_cursor}
 
 
 def deletion(conn, owner, identifier, request):

@@ -1,3 +1,4 @@
+import { privateNow } from './privateClock';
 import { useEffect, useRef, useState } from 'react';
 import { recoverOperation } from './recoverOperation';
 import type { Content } from './PrivateDrafts';
@@ -34,7 +35,7 @@ export function useWorkdayProgress(props: Props) {
     if (!keys(v, 'bus,lifecycle,outcomes,plan') || !props.validPlan(v.plan) || v.plan.id !== props.id || JSON.stringify(v.plan.draft) !== JSON.stringify(props.content) || !validLifecycle(v.lifecycle)) return false;
     const o = v.outcomes, b = v.bus;
     return [v.lifecycle, o, b].every(item => item?.workday_id === props.id && stamp(item.expires_at) && Date.parse(item.expires_at) === Date.parse(v.plan.expires_at))
-      && Date.parse(v.plan.expires_at) <= Date.parse(props.expiresAt) && Date.parse(v.plan.expires_at) > Date.now()
+      && Date.parse(v.plan.expires_at) <= Date.parse(props.expiresAt) && Date.parse(v.plan.expires_at) > privateNow()
       && keys(o, 'expires_at,outcomes,revision,workday_id') && Number.isSafeInteger(o.revision) && o.revision >= 0 && Array.isArray(o.outcomes) && o.outcomes.length === props.content.activities.length
       && o.outcomes.every((item: any, i: number) => keys(item, 'activity_id,outcome') && item.activity_id === props.content.activities[i].id && Object.hasOwn(outcomeLabels, item.outcome))
       && keys(b, 'expires_at,physical_bus,revision,workday_id') && Number.isSafeInteger(b.revision) && b.revision >= 0 && (b.physical_bus === null || typeof b.physical_bus === 'string' && !busError(b.physical_bus) && normalizeBus(b.physical_bus) !== null)

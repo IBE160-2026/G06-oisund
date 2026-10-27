@@ -96,6 +96,17 @@ def test_origins_and_non_assessment_denial(client, monkeypatch):
         database()
 
 
+def test_configured_browser_origin_uses_same_cors_and_write_boundary(client):
+    origin = os.environ.get('FICTIONAL_ORIGIN', 'http://127.0.0.1:5173')
+    reply = client.options('/operations', headers={'Origin': origin, 'Access-Control-Request-Method': 'POST'})
+    assert reply.status_code == 200
+    assert reply.headers['access-control-allow-origin'] == origin
+    reply = client.post('/operations', headers={'Origin': origin}, json={})
+    assert reply.status_code == 200
+    assert reply.headers['access-control-allow-origin'] == origin
+    assert client.post('/operations', headers={'Origin': 'http://127.0.0.1:19999'}, json={}).status_code == 403
+
+
 def test_malformed_identifiers(client):
     assert client.get('/days/not-a-uuid').status_code == 422
     assert client.post('/operations', json={'private': 'unsupported'}).status_code == 422

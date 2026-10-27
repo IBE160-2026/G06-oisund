@@ -1,0 +1,224 @@
+{
+  "run": "20261026T214831Z",
+  "scope": "ibe160-story122-tests",
+  "commands": [
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0,
+      "stdout": "0bae54833f38dc3dbf041d54c324c220618c21da\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "docker",
+        "ps",
+        "-aq",
+        "--filter",
+        "label=com.docker.compose.project=ibe160-story122-tests"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "docker",
+        "compose",
+        "-p",
+        "ibe160-story122-tests",
+        "-f",
+        "C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\story-12-2\\compose.story122.yaml",
+        "up",
+        "-d",
+        "--build"
+      ],
+      "exit_code": 0,
+      "stdout": "#1 [internal] load local bake definitions\n#1 reading from stdin 1.29kB 0.1s done\n#1 DONE 0.1s\n\n#2 [api internal] load build definition from Dockerfile\n#2 transferring dockerfile: 270B 0.0s done\n#2 DONE 0.0s\n\n#3 [private-api internal] load metadata for docker.io/library/python:3.13-slim@sha256:70729b46c69b4f1e97c4822c1af3df53a1476cf5ddc6c087c0c10bc3a5678c2f\n#3 DONE 0.1s\n\n#4 [api internal] load .dockerignore\n#4 transferring context: 75B 0.0s done\n#4 DONE 0.1s\n\n#5 [api 1/5] FROM docker.io/library/python:3.13-slim@sha256:70729b46c69b4f1e97c4822c1af3df53a1476cf5ddc6c087c0c10bc3a5678c2f\n#5 resolve docker.io/library/python:3.13-slim@sha256:70729b46c69b4f1e97c4822c1af3df53a1476cf5ddc6c087c0c10bc3a5678c2f 0.1s done\n#5 DONE 0.1s\n\n#6 [private-api internal] load build context\n#6 transferring context: 550.69kB 0.1s done\n#6 DONE 0.1s\n\n#5 [private-api 1/5] FROM docker.io/library/python:3.13-slim@sha256:70729b46c69b4f1e97c4822c1af3df53a1476cf5ddc6c087c0c10bc3a5678c2f\n#5 resolve docker.io/library/python:3.13-slim@sha256:70729b46c69b4f1e97c4822c1af3df53a1476cf5ddc6c087c0c10bc3a5678c2f 0.1s done\n#5 DONE 0.1s\n\n#7 [private-api 2/5] WORKDIR /app\n#7 CACHED\n\n#8 [private-api 3/5] COPY requirements.lock .\n#8 CACHED\n\n#9 [api 4/5] RUN pip install --no-cache-dir -r requirements.lock\n#9 CACHED\n\n#10 [private-api 5/5] COPY . .\n#10 DONE 0.1s\n\n#10 [api 5/5] COPY . .\n#10 DONE 0.1s\n\n#11 [private-api] exporting to image\n#11 exporting layers\n#11 exporting layers 0.2s done\n#11 exporting manifest sha256:162b6d42bd3c691da5ead740434a8113dedd1cb0cfb88938bd93f1cde1d58a43 0.1s done\n#11 exporting config sha256:37c55e050a733036e4c8ea13bd0296e26b7822c1c25b677348e9e98613c4db6e\n#11 exporting config sha256:37c55e050a733036e4c8ea13bd0296e26b7822c1c25b677348e9e98613c4db6e 0.1s done\n#11 exporting attestation manifest sha256:a133eaaae86d47a717f0237317172d9459a4c2dc94b50fad6562cfff6a1db51e\n#11 exporting attestation manifest sha256:a133eaaae86d47a717f0237317172d9459a4c2dc94b50fad6562cfff6a1db51e 0.1s done\n#11 exporting manifest list sha256:1681dca4070e20c1d263e66291dba83c6b1a9897ee1e4225fe8b961ab42a408e 0.1s done\n#11 naming to docker.io/library/ibe160-story122-tests-private-api:latest done\n#11 unpacking to docker.io/library/ibe160-story122-tests-private-api:latest\n#11 unpacking to docker.io/library/ibe160-story122-tests-private-api:latest 0.4s done\n#11 DONE 1.1s\n\n#12 [api] exporting to image\n#12 exporting layers 0.2s done\n#12 exporting manifest sha256:2e00e37ead60138b88fa5b617b5db8933c2539e6503acdbc781d7fb1c24b880c 0.1s done\n#12 exporting config sha256:b63485d4dece4d0429952608fc3c6af6705fd9882bfe16c135a10196472c803d 0.1s done\n#12 exporting attestation manifest sha256:98645f51af2c562abda914330a724c7445a7f827aa01ac7108743253b72bfaa9 0.1s done\n#12 exporting manifest list sha256:5959d875a58964517938a18a015b8611f330cc93be5aecb2fdce27d1b61ce8bf 0.1s done\n#12 naming to docker.io/library/ibe160-story122-tests-api:latest 0.0s done\n#12 unpacking to docker.io/library/ibe160-story122-tests-api:latest 0.4s done\n#12 DONE 1.0s\n\n#13 [api] resolving provenance for metadata file\n#13 DONE 0.0s\n\n#14 [private-api] resolving provenance for metadata file\n#14 DONE 0.0s\n",
+      "stderr": " Image ibe160-story122-tests-private-api Building \n Image ibe160-story122-tests-api Building \n Image ibe160-story122-tests-api Built \n Image ibe160-story122-tests-private-api Built \n Network ibe160-story122-tests_default Creating \n Volume ibe160-story122-tests_story122_fictional Creating \n Volume ibe160-story122-tests_story122_private Creating \n Network ibe160-story122-tests_default Creating \n Volume ibe160-story122-tests_story122_private Creating \n Volume ibe160-story122-tests_story122_fictional Creating \n Volume ibe160-story122-tests_story122_fictional Created \n Volume ibe160-story122-tests_story122_fictional Created \n Volume ibe160-story122-tests_story122_private Created \n Volume ibe160-story122-tests_story122_private Created \n Network ibe160-story122-tests_default Created \n Network ibe160-story122-tests_default Created \n Container ibe160-story122-tests-private-db-1 Creating \n Container ibe160-story122-tests-db-1 Creating \n Container ibe160-story122-tests-db-1 Created \n Container ibe160-story122-tests-api-1 Creating \n Container ibe160-story122-tests-private-db-1 Created \n Container ibe160-story122-tests-private-api-1 Creating \n Container ibe160-story122-tests-api-1 Created \n Container ibe160-story122-tests-private-api-1 Created \n Container ibe160-story122-tests-db-1 Starting \n Container ibe160-story122-tests-private-db-1 Starting \n Container ibe160-story122-tests-db-1 Started \n Container ibe160-story122-tests-db-1 Waiting \n Container ibe160-story122-tests-private-db-1 Started \n Container ibe160-story122-tests-private-db-1 Waiting \n Container ibe160-story122-tests-db-1 Healthy \n Container ibe160-story122-tests-api-1 Starting \n Container ibe160-story122-tests-api-1 Started \n Container ibe160-story122-tests-private-db-1 Healthy \n Container ibe160-story122-tests-private-api-1 Starting \n Container ibe160-story122-tests-private-api-1 Started \n"
+    },
+    {
+      "command": [
+        "docker",
+        "compose",
+        "-p",
+        "ibe160-story122-tests",
+        "-f",
+        "C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\story-12-2\\compose.story122.yaml",
+        "restart",
+        "api",
+        "db"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": " Container ibe160-story122-tests-api-1 Restarting \n Container ibe160-story122-tests-db-1 Restarting \n Container ibe160-story122-tests-db-1 Started \n Container ibe160-story122-tests-api-1 Started \n"
+    },
+    {
+      "command": [
+        "docker",
+        "compose",
+        "-p",
+        "ibe160-story122-tests",
+        "-f",
+        "C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\story-12-2\\compose.story122.yaml",
+        "exec",
+        "-T",
+        "api",
+        "python",
+        "-m",
+        "app.manage",
+        "reset",
+        "--fictional-only"
+      ],
+      "exit_code": 0,
+      "stdout": "Fictional day: bbd2aa9a-2a8b-4776-a644-1b2bf6f95268\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "docker",
+        "compose",
+        "-p",
+        "ibe160-story122-tests",
+        "-f",
+        "C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\story-12-2\\compose.story122.yaml",
+        "exec",
+        "-T",
+        "db",
+        "psql",
+        "-U",
+        "fictional",
+        "-d",
+        "fictional_assessment",
+        "-Atc",
+        "SELECT count(*) FROM fictional_days"
+      ],
+      "exit_code": 0,
+      "stdout": "1\n",
+      "stderr": ""
+    }
+  ],
+  "checks": [
+    {
+      "name": "isolated project absent before run",
+      "passed": true
+    },
+    {
+      "name": "actual fixed fixture saved",
+      "passed": true
+    },
+    {
+      "name": "actual exact replay preserves original receipt",
+      "passed": true
+    },
+    {
+      "name": "changed replay rejected without overwrite",
+      "passed": true
+    },
+    {
+      "name": "read original snapshot after conflict",
+      "passed": true
+    },
+    {
+      "name": "fictional API lost caller acknowledgement recovered by same replay",
+      "passed": true
+    },
+    {
+      "name": "PostgreSQL snapshot survives own API/database restart",
+      "passed": true
+    },
+    {
+      "name": "private unauthenticated denial /workdays",
+      "passed": true
+    },
+    {
+      "name": "private unauthenticated denial /drafts",
+      "passed": true
+    },
+    {
+      "name": "private unauthenticated denial /notices",
+      "passed": true
+    },
+    {
+      "name": "guarded reset removes first isolated receipt",
+      "passed": true
+    },
+    {
+      "name": "guarded reset removes second isolated receipt",
+      "passed": true
+    },
+    {
+      "name": "guarded reset reseeds exactly one fictional day",
+      "passed": true
+    }
+  ],
+  "pending": [
+    "Actual notice creation/retry/lost-response API verification awaits stable 12.1 admission contract."
+  ],
+  "baseline": "0bae54833f38dc3dbf041d54c324c220618c21da",
+  "source_sha256": {
+    "frontend\\src\\activityChoiceLabel.ts": "9119abac5644752c520bfb857d711651a08f5695e3c32573d0b011b8991ef559",
+    "frontend\\src\\busValue.ts": "124ab831a1bd1cf5d003db5d92ca8afc91387638120dc67d67be6261abff8a2d",
+    "frontend\\src\\dayOverview.ts": "b699bc425b36b6e1625d0d6a1b7b3bcc9c9e0b3b4fcd9beb815b1d606f43d642",
+    "frontend\\src\\demo.tsx": "5fc2cf2a07c99c08eebf7c9b0b0a2d5f76456a8838e31f11316e42f3a4c715a9",
+    "frontend\\src\\draftInterpretation.ts": "1417161dd95d32086f6dd6c27e0b339673363415a49a47c3548f5a086a1949f1",
+    "frontend\\src\\fictional-assessment.css": "39cac010f09374f20551950f0ed3a00fe1ae5c8db31260f95331a4c0eff20d0e",
+    "frontend\\src\\FictionalAssessment.tsx": "c82d63ae039cdaa31aeccad10c90ec633c5d5273389495196658dc8375525edd",
+    "frontend\\src\\fictionalAssessmentModel.ts": "a1ca9004a046652b9af725cf887c390ce6961949412968ec0b3acb011bf974c1",
+    "frontend\\src\\main.tsx": "dd2636a480b9210d580c51c9295e7e343db74f410573ce00b801b2e99e9dbae6",
+    "frontend\\src\\PrivateAccess.tsx": "8d21406efaa524a0391ac36c11731b455d253a26c983b429f0cd880c38a86d84",
+    "frontend\\src\\PrivateActivitySelection.tsx": "bb1ef8db3d1cbfd22372769811ddebed0d0e0ca4a59a6862ac90783b5e3c9668",
+    "frontend\\src\\PrivateBus.tsx": "b34012fc2e6a44a810bc99445b7611cd4bcdca0d6995762ba59c05248e9bdf3a",
+    "frontend\\src\\PrivateConfirmation.tsx": "9af4482d99e5e685c2e1d0bd29fd91c8b405ed4bf137db611ca6b4f66c694c00",
+    "frontend\\src\\PrivateDayOverview.tsx": "d001a712f6cdf3f43c1626493a584106aa4023fb305bc6c12b11555b4d405c4d",
+    "frontend\\src\\PrivateDrafts.tsx": "900e224dd1bd0a1607722461d0d90056b00e535a9865f9f91c1f0e6f3fbd9054",
+    "frontend\\src\\PrivateImport.tsx": "f9ecb439578a481f08ee0d6c02d5fc7cfd61abe2917f8f5023e17b334709a653",
+    "frontend\\src\\PrivateNoticeReader.tsx": "a81a5a189c7f561c0888fafc70677c4c803454d79a130030872027e704cef991",
+    "frontend\\src\\PrivateNotices.tsx": "b0d4b3ff40e87d40c5fe071be8cce4e73a1fab3a67f9057564410357a68db922",
+    "frontend\\src\\PrivateShiftStart.tsx": "a8ac38bb86ea1ab3384e50badeee7895f25a97c86c71cf17f8515b53bc96024c",
+    "frontend\\src\\PrivateTimeInput.tsx": "5d41813cf5ee1c25bbd9b939ada5be6281073145ad8883821787195d243ab2aa",
+    "frontend\\src\\PrivateWorkdayProgress.tsx": "20e21ccdbf850670a97daeffb4883bdda3cacc45a8b82d2e71039feef47db272",
+    "frontend\\src\\PrivateWorkdayView.tsx": "0bbe975ade729e1ad2a7ffaf7506c64c678e1d560fbe68f8ae290914cbfe4115",
+    "frontend\\src\\recoverOperation.ts": "155e99d62a16aa731f8ac761e6b9802cd1f882aa414e7fca1e1429148eb170a4",
+    "frontend\\src\\SelectedActivityDetails.tsx": "e0704da99335bbf0666d50aaee94129049965371f0ca1568a31dbc290c836749",
+    "frontend\\src\\style.css": "3dde7f4a8c2c4825e4ae43247e06896cab3b9f0edc2682882960d5f77d10572c",
+    "frontend\\src\\useWorkdayResource.ts": "cf06a792dae6e389fbb31bf8e3e17136f24ac0cda614ce2a727edd260f3c6a44",
+    "frontend\\src\\vite-env.d.ts": "424faf9241dd699dda995b367ed36665732da1e6ec1f33b2fd40394488ecac92",
+    "backend\\app\\__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "backend\\app\\auth.py": "0f2f608de243988593a0255ebb455e7adc1ea64154bbf1cdd01786b0dcc56f11",
+    "backend\\app\\bus_value.py": "5be4861d3d57d0e7f4ddc908fcd6fbc5ccd52d4940d25283969a6574c783b49b",
+    "backend\\app\\domain.py": "00caf3939819d84128958d86cea4fc25f5f8ab52d78df894443520ed2c5949ca",
+    "backend\\app\\draft_domain.py": "2af54e480868792b89ed1822d30a12d10af2d5e39f240e19960044b69f836589",
+    "backend\\app\\draft_storage.py": "f3b5f1b1806455d549599e4c913d656cf22ae4ccfba94a106361d18d6d92dce7",
+    "backend\\app\\draft_time.py": "b6c958f2059a2852aa033ed7cf7c26141cfe231581dc24c427d175d337895abf",
+    "backend\\app\\import_issues.py": "b9b573cd43f172078dc1e5701689f26c3ba19ce71d8aca45d41612e072f27207",
+    "backend\\app\\main.py": "9db9fa1460560986e1cf318382caf8554c7a18735c0ca745f193377738fec727",
+    "backend\\app\\manage.py": "68640add1f88a9d9f329504c9fc17c082bbc1e25196eb0fe199b827a198f821a",
+    "backend\\app\\notice_reader_domain.py": "e4c537d1f6b8342f555b41b2bee7a937a5795c107ef5b3e759d4370d6649352e",
+    "backend\\app\\pdf_import.py": "06ae62d41f073124af7602cc0e963dd5424b0d5956b3af2083149d91309fc263",
+    "backend\\app\\private_import.py": "bef1a0ce951826cd59810196f97454c0e05ff0a23f99e8b6c3fb98a7948b2d59",
+    "backend\\app\\private_main.py": "d680fb6d37775f4d4f23c66bc8d46309b4e4c28502d5e200b61e00c717bcf043",
+    "backend\\app\\private_storage.py": "d374b513460deac24c6f36b8f76a0b1709c3513532332e1e8bfdf8dc54d0254c",
+    "backend\\app\\qualify_imports.py": "4e29620264ed463d6a12406d712424ad040a6354eb5fcb9bbbc35141a3a7658d",
+    "backend\\app\\run.py": "f1ebc199fcd9ef7c7def86d8fd9514eea1dc9d3a7655795202439245cc617d4b",
+    "backend\\app\\storage.py": "07be14df4c897d9859112e28e68e9e186383064653a83d1e9727ae11489f1b57",
+    "backend\\app\\workday_bus_domain.py": "8eaad1875aa29e748387928076812ff72593b327e937adcbeaea5272050ab89f",
+    "backend\\app\\workday_bus_storage.py": "eb5e99d0d47ef795358f1e58411731446174f83e68467d5f778b32ec31fcc7d9",
+    "backend\\app\\workday_domain.py": "d7ce2bdeef3b1db4b7cd4ca0f8916108cc11d44eb69d4a4f578f3b40cea9a4c6",
+    "backend\\app\\workday_lifecycle_domain.py": "f0d9332df28a98fb4325b24c6b7f4f523b13f898ee0721832d128164d6d4cfa4",
+    "backend\\app\\workday_lifecycle_storage.py": "302ad49cd38bfd74b043bccfb8d846552f28ecaae0e545e7ad8e195cda846048",
+    "backend\\app\\workday_notice_domain.py": "ce7ded29b9402bdc3848038197ba7d077ef1c54fa601978e3ebb6ebdb802a194",
+    "backend\\app\\workday_notice_storage.py": "011bcc110c6e30e6aba10ba9119ba3cf8fa9a2156b9a11143b7ff6e7d844b285",
+    "backend\\app\\workday_outcome_domain.py": "020d606d32e8766986b7410c52f4aa7e02a9ffad5a02bd5bf0e40116d4de98f8",
+    "backend\\app\\workday_outcome_storage.py": "e425963d6182fbf9a0488a091b7f48b7e2e70c7a0683c8fffbebfbdb2562d4cd",
+    "backend\\app\\workday_selection_domain.py": "7b26d2fe1b687dc71e7199e722eb0f2342b54204a55a5d36066ec5075327532b",
+    "backend\\app\\workday_selection_storage.py": "172ece4223332e3367bd402c1d9dcb269c414ad38b820f1073918602514eaabb",
+    "backend\\app\\workday_storage.py": "aef2ea6c5f7c5da24731e6d69d26845ba623f09f5f10c6235344287091dc6f0d",
+    "compose.story122.yaml": "c1a1cb53d6f7ea9d8664c4d57b712749e639000cb32f95954274f5351243b0eb",
+    "scripts\\verify-story122.py": "067a948c08a4e7f1e52f911c7cd4f9cd49da9dffce8516a83376ad9758078a42"
+  },
+  "result": "passed-independent-checks; notice integration pending"
+}

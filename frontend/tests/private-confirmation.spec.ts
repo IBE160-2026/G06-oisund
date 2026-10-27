@@ -464,7 +464,10 @@ test('accepted confirmation with invalid reply stays uncertain and resolves thro
   await expect(page.getByRole('button', { name: 'Kontroller bekreftelsen', exact: true })).toBeEnabled();
   await page.getByRole('button', { name: 'Kontroller bekreftelsen', exact: true }).click();
   await expect(page.getByRole('region', { name: 'Bekreftet plan', exact: true })).toBeVisible();
-  await expect(page.getByLabel('Vognløp', { exact: true })).toBeDisabled();
+  // 12.1: the accepted plan survives, while its expired source presentation
+  // is erased. The independent empty editor can accept a fresh draft.
+  await expect(page.getByLabel('Vognløp', { exact: true })).toHaveValue('');
+  await expect(page.getByLabel('Starttid', { exact: true })).toHaveCount(0);
 });
 
 for (const [classification, label] of [['Instruktør', 'Instruktør'], ['Sign-on', 'Oppmøte']]) test(`advertised ${classification} classification preserves source facts and accepted plans refresh discovery`, async ({ page, context }) => {

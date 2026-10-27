@@ -121,7 +121,7 @@ test('all 201 saved drafts remain reachable and the final page reopens', async (
   python(`with database() as conn:\n conn.execute('DELETE FROM drafts WHERE owner IN (SELECT id FROM accounts WHERE username=%s)', (${JSON.stringify(username)},))\n`);
 });
 
-for (const [label, next_cursor] of [['missing', undefined], ['invalid', 'invalid'], ['inconsistent', '00000000-0000-4000-8000-000000000001']] as const) test(`malformed pagination is recoverable (${label})`, async ({ page }) => {
+for (const [label, next_cursor] of [['missing', undefined], ['invalid', 'invalid'], ['non-uuid', '00000000-0000-4000-8000-invalid-cursor']] as const) test(`malformed pagination is recoverable (${label})`, async ({ page }) => {
   await login(page); await fill(page);
   await page.route('**:8001/drafts', route => route.fulfill({ json: { drafts: [], ...(next_cursor === undefined ? {} : { next_cursor }) } }));
   await preparation(page); await page.getByRole('button', { name: 'Oppdater listen' }).click();
@@ -146,7 +146,7 @@ for (const malformed of ['duplicate', 'out-of-order', 'before-cursor', 'continua
   await page.route('**:8001/drafts?cursor=*', route => {
     cursors.push(new URL(route.request().url()).searchParams.get('cursor')!);
     const drafts = malformed === 'duplicate' ? [later(51), later(51)] : malformed === 'out-of-order' ? [later(52), later(51)] : malformed === 'before-cursor' ? [later(49)] : [later(51)];
-    return route.fulfill({ json: correct ? { drafts: [later(51)], next_cursor: null } : { drafts, next_cursor: malformed === 'continuation' ? id(52) : null } });
+    return route.fulfill({ json: correct ? { drafts: [later(51)], next_cursor: null } : { drafts, next_cursor: malformed === 'continuation' ? id(50) : null } });
   });
   await login(page);
   await preparation(page); await expect(page.getByRole('button', { name: /^Åpne / })).toHaveCount(50);
@@ -870,4 +870,23 @@ test('initial failed lists and later failures never claim an acknowledged empty 
   await preparation(page); await expect(page.getByRole('button', { name: 'Åpne 2026-11-04 · versjon 1', exact: true })).toBeVisible();
   await expect(page.getByLabel('Buss/vogn', { exact: true })).toHaveValue('retained');
   await expect(page.getByText('Ingen lagrede utkast.', { exact: true })).toHaveCount(0);
+});
+
+
+test('sparse draft pages and consecutive empty scan pages reach later retained rows', async ({ page }) => {
+  const id = (n: number) => '00000000-0000-4000-8000-' + n.toString(16).padStart(12, '0');
+  const created_at = new Date().toISOString();
+  const expires_at = new Date(Date.parse(created_at) + 7 * 86400000).toISOString();
+  const row = (n: number) => ({ id: id(n), created_at, expires_at, revision: 1, service_date: '2031-01-02' });
+  const scanned: string[] = [];
+  await page.route('**:8001/drafts', route => route.fulfill({ json: { drafts: [row(1)], next_cursor: id(51) } }));
+  await page.route('**:8001/drafts?cursor=*', route => {
+    const cursor = new URL(route.request().url()).searchParams.get('cursor')!; scanned.push(cursor);
+    return route.fulfill({ json: cursor === id(51) ? { drafts: [], next_cursor: id(102) } : cursor === id(102) ? { drafts: [], next_cursor: id(153) } : { drafts: [row(154)], next_cursor: null } });
+  });
+  await login(page); await preparation(page);
+  for (let i=0; i<3; i++) await page.getByRole('button', { name: 'Vis flere utkast', exact: true }).click();
+  await expect(page.getByRole('button', { name: /^\u00c5pne 2031-01-02/ })).toHaveCount(2);
+  await expect(page.getByText('Lastet 2 utkast.', { exact: true })).toBeVisible();
+  expect(scanned).toEqual([id(51), id(102), id(153)]);
 });

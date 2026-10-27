@@ -286,7 +286,7 @@ test('notice edits replace a previous saved message with explicit unsaved status
 
 test('dirty notice survives actual API suspension and same-session restoration before explicit save', async ({ page, context }) => {
   test.setTimeout(90000); const { plan } = await openedPlan(page, context);
-  const notice = (await post(context, '/notices', { operation_id: randomUUID(), expected_revision: 0, content: { title: 'Saved notice before outage', line_tags: ['20'], source_url: null, source_updated_at: null, valid_from: null, valid_until: '2031-01-04T23:59:59+01:00' } })).result;
+  const notice = (await post(context, '/notices', { operation_id: (await post(context, '/notice-operations', {})).operation_id, expected_revision: 0, content: { title: 'Saved notice before outage', line_tags: ['20'], source_url: null, source_updated_at: null, valid_from: null, valid_until: '2031-01-04T23:59:59+01:00' } })).result;
   await page.getByRole('button', { name: 'Manuelt vedlikeholdte avvik', exact: true }).click();
   await page.locator('.notice-list summary').click(); await page.getByRole('button', { name: 'Rediger ' + notice.title, exact: true }).click();
   await page.getByLabel('Tittel', { exact: true }).fill('Retained edited notice during outage');

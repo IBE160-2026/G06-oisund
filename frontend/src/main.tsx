@@ -2,11 +2,12 @@ import { useEffect, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import './style.css';
 import { PrivateAccess } from './PrivateAccess';
+import { FictionalAssessment } from './FictionalAssessment';
 
 type Activity = { id: string; kind: 'trip' | 'break'; start: string; end: string; place: string | null; trip_code: string | null; provenance: 'fictional-planned' };
 type Day = { fictional: true; service_date: string; timezone: 'Europe/Oslo'; vehicle_duty: string | null; physical_bus: string | null; activities: Activity[] };
 type Saved = { id: string; day: Day; created_at: string; expires_at: string };
-const API = 'http://127.0.0.1:8000';
+const API = (import.meta as ImportMeta & { env: Record<string, string> }).env.VITE_FICTIONAL_API ?? 'http://127.0.0.1:8000';
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 function validInstant(value: unknown): value is string {
   if (typeof value !== 'string') return false;
@@ -119,6 +120,7 @@ function App() {
       <button disabled={busy || !day || !operation} onClick={() => void save()}>Lagre fiktiv dag{saved && operation ? ' igjen' : ''}</button>
       <button disabled={busy || !identifier} onClick={() => void reopen()}>Åpne lagret dag på nytt</button>
     </div>
+    <p><a href="/demo.html">Prøv gjentakbar simulering uten backend</a></p>
     {day && <section aria-labelledby="day-heading">
       <h2 id="day-heading">Tjenestedato {day.service_date}</h2>
       <dl><dt>Tidssone</dt><dd>{day.timezone}</dd><dt>Vognløp</dt><dd>{day.vehicle_duty ?? 'Ukjent'}</dd><dt>Fysisk buss</dt><dd>{day.physical_bus ?? 'Ukjent'}</dd></dl>
@@ -130,4 +132,4 @@ function App() {
     <p><a href="/private">Gå til privat tilgang</a>. Har du en aktiv økt, åpnes arbeidsrommet. Å åpne demoen logger deg ikke ut.</p>
   </main>;
 }
-createRoot(document.getElementById('root')!).render(location.pathname === '/private' ? <PrivateAccess /> : <App />);
+createRoot(document.getElementById('root')!).render(location.pathname === '/demo' ? <FictionalAssessment /> : location.pathname === '/private' ? <PrivateAccess /> : <App />);

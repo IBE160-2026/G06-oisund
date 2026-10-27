@@ -1,3 +1,4 @@
+import { privateNow } from './privateClock';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { validContent, type Content, type Saved } from './PrivateDrafts';
 import { SourceFacts } from './PrivateImport';
@@ -16,7 +17,7 @@ type Deletion = { id: string; expires_at: string; body: { operation_id: string; 
 type Props = { saved: Saved | null; clean: boolean; request: (path: string) => Promise<any>; mutation: (path: string, body: object) => Promise<any>; expired: () => void; suspended: boolean; lock: (value: boolean) => void; screen: 'upload' | 'import' | 'editor' | 'plan'; showPlan: () => void; showPreparation: () => void; planChanged: (value: boolean) => void; consultationChanged: (value: boolean) => void; registryDirty: (value: boolean) => void; registryOpen: (value: boolean) => void; registryNavigation: number };
 const uuid = (v: any): v is string => typeof v === 'string' && /^[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i.test(v);
 const canonical = (v: any): string => JSON.stringify(v, (_, value) => value && typeof value === 'object' && !Array.isArray(value) ? Object.fromEntries(Object.keys(value).sort().map(key => [key, value[key]])) : value);
-const live = (v: any) => typeof v === 'string' && Number.isFinite(Date.parse(v)) && Date.parse(v) > Date.now();
+const live = (v: any) => typeof v === 'string' && Number.isFinite(Date.parse(v)) && Date.parse(v) > privateNow();
 const date = (v: string) => new Date(v).toLocaleString('nb-NO', { timeZone: 'Europe/Oslo' });
 const finalEnd = (content: Content) => Math.max(...content.activities.map(a => Date.parse(a.end ?? '')));
 const typeLabels: Record<string, string> = { trip: 'Passasjertur', deadhead: 'Tomkjøring', deadhead_car: 'Tomkjøring med CAR', 'Tomkjøring med CAR': 'Tomkjøring med CAR (kildetype)', CAR: 'CAR', 'Sign-on': 'Oppmøte', 'Sign-off': 'Avslutning', MealBreak: 'Matpause', Coffee: 'Kaffepause', 'Split break': 'Deltskiftpause', 'Paid meal before': 'Betalt matpause før', 'Paid meal after': 'Betalt matpause etter', 'Travel to': 'Reise til', 'Travel from': 'Reise fra', Fadder: 'Fadder', Instruktør: 'Instruktør', manual: 'Manuelt klassifisert arbeid' };
@@ -122,14 +123,14 @@ export function PrivateConfirmation({ saved, clean, request, mutation, expired, 
     if (!deadline) return;
     let timer = 0;
     const check = () => {
-      const remaining = Date.parse(deadline) - Date.now();
+      const remaining = Date.parse(deadline) - privateNow();
       if (remaining <= 0) {
         if (plan && planRead.current?.id === plan.id && planRead.current.generation === reading.current) { reading.current++; planRead.current = null; setBusy(false); }
         if (deleting) { reading.current++; deletionRef.current = null; setDeleting(null); setBusy(false); }
         setPlan(null); setActivityOpen(false);
         if (!pending && !review) setMessage('Planen eller gjennomgangen er utløpt. Kontroller listen på nytt.');
         if (screen === 'plan') showPreparation();
-      } else timer = window.setTimeout(check, Math.min(remaining, 2147483647));
+      } else timer = window.setTimeout(check, Math.min(remaining, 1000));
     };
     check(); return () => clearTimeout(timer);
   }, [plan, deleting, screen, !!pending, !!review]);
@@ -139,9 +140,9 @@ export function PrivateConfirmation({ saved, clean, request, mutation, expired, 
     if (!deadline) return;
     let timer = 0;
     const check = () => {
-      const remaining = Date.parse(deadline) - Date.now();
+      const remaining = Date.parse(deadline) - privateNow();
       if (remaining <= 0) { reading.current++; epoch.current++; setBusy(false); setReview(null); setPending(null); setAcks([]); setClasses({}); setMessage('Planen eller gjennomgangen er utløpt. Kontroller listen på nytt.'); }
-      else timer = window.setTimeout(check, Math.min(remaining, 2147483647));
+      else timer = window.setTimeout(check, Math.min(remaining, 1000));
     };
     check(); return () => clearTimeout(timer);
   }, [review, pending, saved?.expires_at]);
@@ -149,9 +150,9 @@ export function PrivateConfirmation({ saved, clean, request, mutation, expired, 
     if (!items.length) return;
     let timer = 0;
     const check = () => {
-      const remaining = Math.min(...items.map(item => Date.parse(item.expires_at))) - Date.now();
+      const remaining = Math.min(...items.map(item => Date.parse(item.expires_at))) - privateNow();
       if (remaining <= 0) { setItems(current => current.filter(item => live(item.expires_at))); setCursor(null); }
-      else timer = window.setTimeout(check, Math.min(remaining, 2147483647));
+      else timer = window.setTimeout(check, Math.min(remaining, 1000));
     };
     check(); return () => clearTimeout(timer);
   }, [items]);

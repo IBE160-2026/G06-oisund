@@ -1,0 +1,76 @@
+{
+  "run": "20261026T220411706929Z-a5bf80782560",
+  "commands": [
+    {
+      "command": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "exit_code": 0,
+      "stdout": "\n> ibe160-fictional-assessment@0.1.0 build\n> tsc --noEmit && vite build\n\nvite v8.3.4 building client environment for production...\ntransforming...\n✓ 40 modules transformed.\nrendering chunks...\ncomputing gzip size...\ndist/demo.html                                  0.45 kB │ gzip:  0.29 kB\ndist/index.html                                 0.46 kB │ gzip:  0.30 kB\ndist/assets/FictionalAssessment-D4XQNhTQ.css   11.99 kB │ gzip:  2.64 kB\ndist/assets/demo-BtreGJFf.js                    0.15 kB │ gzip:  0.15 kB\ndist/assets/main-CYOooo5H.js                  172.91 kB │ gzip: 46.61 kB\ndist/assets/FictionalAssessment-CPc2smYF.js   239.28 kB │ gzip: 74.30 kB\n\n✓ built in 205ms\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "npx",
+        "playwright",
+        "test",
+        "--config",
+        "playwright.story122.config.ts"
+      ],
+      "exit_code": 0,
+      "stdout": "\nRunning 14 tests using 1 worker\n\n  ok  1 tests\\fictional-assessment.spec.ts:28:1 › repeat normal journey, selection, cancellation, terminal unknowns and isolation (2.1s)\n  ok  2 tests\\fictional-assessment.spec.ts:44:1 › unavailable, immutable reopen, conflict and unresolved receipt lookup (905ms)\n  ok  3 tests\\fictional-assessment.spec.ts:58:1 › unsupported/manual preserves saved work; reload is volatile; abort preserves unknowns (723ms)\n  ok  4 tests\\fictional-assessment.spec.ts:66:1 › notices missing source/start, required ending, scope, lost response and independent lifetime (965ms)\n  ok  5 tests\\fictional-assessment.spec.ts:76:1 › keyboard and narrow layout plus fresh evidence (679ms)\n  ok  6 tests\\fictional-assessment.spec.ts:84:1 › confirmed plan stays fixed, pre-Start selection and Start cancellation return to selected activity (1.0s)\n  ok  7 tests\\fictional-assessment.spec.ts:96:1 › notice invalid ending/source, unavailable and conflict preserve proposals (694ms)\n  ok  8 tests\\fictional-assessment.spec.ts:103:1 › night view and modal reset cancellation preserve state; confirmed reset clears unresolved state (612ms)\n  ok  9 tests\\fictional-assessment.spec.ts:108:1 › rendered foreground and keyboard focus contrast in both themes (496ms)\n  ok 10 tests\\fictional-assessment.spec.ts:130:1 › discard confirmation preserves draft on cancellation and outcome proposals survive navigation (939ms)\n  ok 11 tests\\fictional-assessment.spec.ts:137:1 › all lifecycle cancellations restore invoking day or selected-activity controls (850ms)\n  ok 12 tests\\fictional-assessment.spec.ts:148:1 › reader states and known-start future exact and past boundaries (716ms)\n  ok 13 tests\\fictional-assessment.spec.ts:156:1 › faults are consumed by valid saves and remain available after closure (998ms)\n  ok 14 tests\\fictional-assessment.spec.ts:160:1 › comparison text and focused native-dialog controls have contrast in both themes (972ms)\n\n  14 passed (17.0s)\n",
+      "stderr": "[WebServer] (node:46928) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n(node:24784) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
+    }
+  ],
+  "source_sha256": {
+    "frontend\\src\\activityChoiceLabel.ts": "9119abac5644752c520bfb857d711651a08f5695e3c32573d0b011b8991ef559",
+    "frontend\\src\\busValue.ts": "124ab831a1bd1cf5d003db5d92ca8afc91387638120dc67d67be6261abff8a2d",
+    "frontend\\src\\dayOverview.ts": "b699bc425b36b6e1625d0d6a1b7b3bcc9c9e0b3b4fcd9beb815b1d606f43d642",
+    "frontend\\src\\demo.tsx": "5fc2cf2a07c99c08eebf7c9b0b0a2d5f76456a8838e31f11316e42f3a4c715a9",
+    "frontend\\src\\draftInterpretation.ts": "1417161dd95d32086f6dd6c27e0b339673363415a49a47c3548f5a086a1949f1",
+    "frontend\\src\\fictional-assessment.css": "721721416a857ce7f35298bff0a021cd67d29640c99f6b49dd698fecaadb0de4",
+    "frontend\\src\\FictionalAssessment.tsx": "d71b4a9299ad901a44571bd56052ed4b26c43127316433150a13a6b60e8c20b5",
+    "frontend\\src\\fictionalAssessmentModel.ts": "a1ca9004a046652b9af725cf887c390ce6961949412968ec0b3acb011bf974c1",
+    "frontend\\src\\main.tsx": "dd2636a480b9210d580c51c9295e7e343db74f410573ce00b801b2e99e9dbae6",
+    "frontend\\src\\PrivateAccess.tsx": "8d21406efaa524a0391ac36c11731b455d253a26c983b429f0cd880c38a86d84",
+    "frontend\\src\\PrivateActivitySelection.tsx": "bb1ef8db3d1cbfd22372769811ddebed0d0e0ca4a59a6862ac90783b5e3c9668",
+    "frontend\\src\\PrivateBus.tsx": "b34012fc2e6a44a810bc99445b7611cd4bcdca0d6995762ba59c05248e9bdf3a",
+    "frontend\\src\\PrivateConfirmation.tsx": "9af4482d99e5e685c2e1d0bd29fd91c8b405ed4bf137db611ca6b4f66c694c00",
+    "frontend\\src\\PrivateDayOverview.tsx": "d001a712f6cdf3f43c1626493a584106aa4023fb305bc6c12b11555b4d405c4d",
+    "frontend\\src\\PrivateDrafts.tsx": "900e224dd1bd0a1607722461d0d90056b00e535a9865f9f91c1f0e6f3fbd9054",
+    "frontend\\src\\PrivateImport.tsx": "f9ecb439578a481f08ee0d6c02d5fc7cfd61abe2917f8f5023e17b334709a653",
+    "frontend\\src\\PrivateNoticeReader.tsx": "a81a5a189c7f561c0888fafc70677c4c803454d79a130030872027e704cef991",
+    "frontend\\src\\PrivateNotices.tsx": "b0d4b3ff40e87d40c5fe071be8cce4e73a1fab3a67f9057564410357a68db922",
+    "frontend\\src\\PrivateShiftStart.tsx": "a8ac38bb86ea1ab3384e50badeee7895f25a97c86c71cf17f8515b53bc96024c",
+    "frontend\\src\\PrivateTimeInput.tsx": "5d41813cf5ee1c25bbd9b939ada5be6281073145ad8883821787195d243ab2aa",
+    "frontend\\src\\PrivateWorkdayProgress.tsx": "20e21ccdbf850670a97daeffb4883bdda3cacc45a8b82d2e71039feef47db272",
+    "frontend\\src\\PrivateWorkdayView.tsx": "0bbe975ade729e1ad2a7ffaf7506c64c678e1d560fbe68f8ae290914cbfe4115",
+    "frontend\\src\\recoverOperation.ts": "155e99d62a16aa731f8ac761e6b9802cd1f882aa414e7fca1e1429148eb170a4",
+    "frontend\\src\\SelectedActivityDetails.tsx": "e0704da99335bbf0666d50aaee94129049965371f0ca1568a31dbc290c836749",
+    "frontend\\src\\style.css": "3dde7f4a8c2c4825e4ae43247e06896cab3b9f0edc2682882960d5f77d10572c",
+    "frontend\\src\\useWorkdayResource.ts": "cf06a792dae6e389fbb31bf8e3e17136f24ac0cda614ce2a727edd260f3c6a44",
+    "frontend\\src\\vite-env.d.ts": "424faf9241dd699dda995b367ed36665732da1e6ec1f33b2fd40394488ecac92",
+    "frontend\\tests\\fictional-assessment.spec.ts": "65d4570234495fb607daa4f3092eda5d794cce12b04437069bf8a0a5679f01e3",
+    "scripts\\verify-story122-frontend.py": "9eae6effa35fa0361c80c2865bfa7bebecf244dbd5d334a115d36262a303ff55",
+    "frontend\\.dockerignore": "8dddd5bb92e96a3ba01bbf50fcbaebe72b7816695816f212e21d29022c6c11b7",
+    "frontend\\demo.html": "93081e16e5983ad3b2fe38078947c3a501641efa76bfd31c9220e35cbebcb382",
+    "frontend\\Dockerfile": "aa2f396d454446c07d85a15b9cace57cfbd5a61f67da5869ba7ab8a24855faca",
+    "frontend\\index.html": "1b2491ecc40bc60d0d03790ca66e50eeacc43132233f7465fbb956d0f3b99dbc",
+    "frontend\\package-lock.json": "f79805cfd50c3866147a0984c0bb8585e1c40c66ca28997cfaaf5f4479534e2f",
+    "frontend\\package.json": "f970fee83af9ca2f67a7ce8a34545ae21f7a303152d0e3202745fe8e8e9911b0",
+    "frontend\\playwright.config.ts": "e58960b8950e966f9307866c9313ec5ad7f304ccd0c7cf2d56919921f4da81e5",
+    "frontend\\playwright.story122.config.ts": "f146ec4f48cadc171cc1e86b1664ef96a503ca7b056f9b232ed83a72cc77ce40",
+    "frontend\\tsconfig.json": "33d46914a31f3bea00112957323a794e74ac90297f4d14eb3bd9b9282e7c9ebe",
+    "frontend\\vite.config.ts": "820669e1c96056664ee8f8b1db55fd38e2c0dec1559fc1decc46fb4783fe3c2e"
+  },
+  "build_sha256": {
+    "frontend\\dist\\demo.html": "28b1b1f76325c8d185404d9e52d528eb0fea30ef1e4a96aefd68a6b0052389fb",
+    "frontend\\dist\\index.html": "4f9fe939f6bc70d4fa0633fa516cc2632a942b8f4bdf612215320cfd2fd3e8d6",
+    "frontend\\dist\\assets\\demo-BtreGJFf.js": "e6eb571289ad4b29867f7265602ac61b6bf84d84b49d6d4d3caed4c2cbdbeb9d",
+    "frontend\\dist\\assets\\FictionalAssessment-CPc2smYF.js": "5e45783c4ed10dcdd7de9240e311df4d8e4c41231b2a5aade138ce7692485329",
+    "frontend\\dist\\assets\\FictionalAssessment-D4XQNhTQ.css": "10d4b4068a3910ebe1446c5ebdea4fda83609c783bbea02fd45ccb8359e334c1",
+    "frontend\\dist\\assets\\main-CYOooo5H.js": "21a806a824f02db3ed97c99080f12aefb177a2600094b8b73e6b6e8fa3a4ac21"
+  }
+}

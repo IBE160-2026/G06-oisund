@@ -1,3 +1,4 @@
+import { privateNow } from './privateClock';
 import { useEffect, useRef, useState } from 'react';
 import { recoverOperation } from './recoverOperation';
 import { normalizeBus as normalized, busError } from './busValue';
@@ -20,7 +21,7 @@ export function PrivateBus({ id, expiresAt, request, mutation, suspended, expire
   function valid(v: any, historical = false): v is Bus {
     return v && Object.keys(v).sort().join() === 'expires_at,physical_bus,revision,workday_id' && v.workday_id === id
       && Number.isSafeInteger(v.revision) && v.revision >= 0 && (v.physical_bus === null || typeof v.physical_bus === 'string' && Array.from(v.physical_bus).length <= 100 && !v.physical_bus.includes('\0') && normalized(v.physical_bus) !== null)
-      && typeof v.expires_at === 'string' && (historical || Date.parse(v.expires_at) <= Date.parse(expiresAt)) && Date.parse(v.expires_at) > Date.now();
+      && typeof v.expires_at === 'string' && (historical || Date.parse(v.expires_at) <= Date.parse(expiresAt)) && Date.parse(v.expires_at) > privateNow();
   }
   function adopt(value: Bus) { setSaved(value); setText(value.physical_bus ?? ''); setComparison(null); setPending(null); editing.current = false; lock(false); }
   async function current(): Promise<Bus> {
