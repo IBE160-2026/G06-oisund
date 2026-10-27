@@ -1,5 +1,11 @@
 # Testveiledning: Story 12.1 først, deretter 12.2
 
+**Endelig eieraksept 27. oktober 2026:** Jonas har nå uttrykkelig godkjent både Story12.1 og Story12.2, inkludert de kommenterte12.2-rettingene, og bedt om commit/push. Begge er `done` / `owner_acceptance: accepted`. Tidligere ventende-/delakseptstatuser nedenfor er historikk. Godkjenningen bygger på Jonas sin manuelle test og beslutning; automatiske tester er separat evidens. Ingen senere story eller ytterligere fysisk enhetskvalifikasjon inngår.
+
+**Ny demo-retting 27. oktober:** Kjørende frontend15312 er nå bygd fra arbeidskopi basert på `c7a6170beb360b7541c5aeaced805ff78db73f3e` med avgrensede demoendringer. Bygg og37 nettlesertester bestod; [endringer, versjonshash og ny retest](evidence/12-2-manual-feedback-fixes.md). De eldre versjonsvurderingene nedenfor er historikk for det tidligere bygget; privat/backendkode er uendret.
+
+**Gjeldende akseptstatus 27. oktober 2026:** Jonas har uttrykkelig godkjent Story 12.1 etter bestått manuell sjekkliste A–F på Jonas_desktop, Brave privat vindu (oppgitt testreferanse `83cdd2b`). Story 12.1 er `done` / `owner_acceptance: accepted`. For Story12.2 er K bestått og alle ukommenterte deler uttrykkelig godkjent. Storyen som helhet er fortsatt ikke godkjent; de kommenterte rettingene avventer ny manuell test. Eldre utsagn nedenfor om ventende testing av begge storyer er historikk og er erstattet av denne godkjenningen. Automatiske tester innebærer ikke brukeraksept; godkjenningen bygger på Jonas sin manuelle test og uttrykkelige beslutning. Ingen bredere nettbrettkvalifikasjon eller senere story godkjennes her.
+
 Jonas har ikke gjennomført manuell/fysisk akseptansetest av Story 12.1 eller Story 12.2. Teknisk integrasjon og automatiske tester innebærer ikke brukeraksept. Begge avventer Jonas sin testing.
 
 Jonas sin manuelle/fysiske akseptansetest av Story 12.1 og 12.2 gjenstår. Automatiske tester innebærer ikke brukeraksept.
@@ -139,6 +145,17 @@ Siste kommando bruker midlertidige syntetiske kontoer, omstarter integrasjonsmil
 
 Hvis 12.1 må endres, test rettingen og berørte 12.1-punkter på nytt. Gå videre først når du igjen kan si at 12.1 ikke krever endringer. En senere 12.2-feil som berører 12.1, åpner stoppunktet igjen.
 
+## Retest av kommenterte12.2-punkter
+
+K er bestått og øvrige ukommenterte deler er godkjent av Jonas. Åpne <http://127.0.0.1:15312/demo> og oppdater med Ctrl+Shift+R for nytt bygg; dette nullstiller simuleringens minne, ikke faktisk lagrede/private data.
+
+1. Lagre et forslag: tydelig statusboks ved lagringsknappen skal bekrefte simulert lagring. Endre et felt: status skal vise ulagrede endringer. Gjenta for kontomelding og aktivitetsstatus.
+2. Velg «Simulert lagringsresultat → Nyere revisjon / konflikt» og lagre. Originalfeltene skal bli stående leselige og skrivebeskyttet. Under handlingene vises gjeldende og foreslåtte verdier med feltnavn, uten kode/JSON. Avbryt skal bevare forslaget; «Ta i bruk gjeldende» er et separat valg som henter lagrede verdier.
+3. Velg «Mistet svar etter lagring» og lagre. Feltene skal fortsatt vises, lagring/navigasjon skal være sperret og nærliggende status skal si uavklart. La oppslag feile én gang; slå deretter opp original kvittering med haken fjernet. Bekreft lagring uten nytt lagringsforsøk.
+4. Kontroller ordene «Manuell aktivitetsstatus», «Lagre aktivitetsstatus» og «Avbryt ulagret aktivitetsstatus». Ved aktivitetsbytte skal ikke forrige aktivitets lagringsbekreftelse følge med. Test gjerne dag-/nattvisning.
+
+Disse rettingene er automatisk kontrollert, men er ikke godkjent av Jonas ennå. Ingen ny full gjennomgang av de allerede godkjente, ukommenterte delene kreves av denne veiledningen.
+
 ## 4. Test 12.2 — bare etter passert stoppunkt
 
 ### G. Normal flyt i simuleringen
@@ -146,17 +163,17 @@ Hvis 12.1 må endres, test rettingen og berørte 12.1-punkter på nytt. Gå vide
 1. Åpne `/demo`. Forvent **SIMULERING · bare fiktive data**, uten innlogging.
 2. Velg **Åpne delvis tekst-PDF-eksempel**. Kontroller at kildeusikkerhet vises.
 3. Endre vognløp/buss. Velg **Lagre forslag i simuleringen → Se lagret dag før start → Bekreft plan**.
-4. Velg en aktivitet før Start. Prøv **Forrige aktivitet / Neste aktivitet**, også første og siste aktivitet.
+4. Velg en aktivitet før Start. Bruk **Forrige aktivitet / Neste aktivitet** til du når begge ender av listen. På første aktivitet skal Forrige være deaktivert; på siste skal Neste være deaktivert. Det forventes ikke egne knapper for å hoppe til første/siste aktivitet.
 5. Velg **Start arbeidsdagen**; avbryt én gang og bekreft deretter med **Bekreft Start**.
-6. Velg foreslått utfall **Fullført manuelt** for én aktivitet, og velg **Lagre utfall**. La en annen aktivitet stå uregistrert.
+6. Velg **Manuell aktivitetsstatus → Fullført manuelt** for én aktivitet, og velg **Lagre aktivitetsstatus**. La en annen aktivitet stå uregistrert.
 
-**Forventet:** Valg, navigasjon og lagring starter/fullfører ingen aktivitet automatisk. Bare eksplisitt Start starter dagen. Lagret utfall tilhører riktig aktivitet. Vognløp og fysisk buss holdes fra hverandre; ukjente fakta forblir ukjente.
+**Forventet:** Valg, navigasjon og lagring starter/fullfører ingen aktivitet automatisk. Bare eksplisitt Start starter dagen. Lagret aktivitetsstatus tilhører riktig aktivitet. Vognløp og fysisk buss holdes fra hverandre; ukjente fakta forblir ukjente.
 
 ### H. Feil ved lagring uten tap av forslag
 
 Bruk **Nullstill simuleringen → Bekreft nullstilling** mellom forsøk ved behov. Start et nytt utkast, endre et felt og åpne **Simuler feil ved neste lagring** før lagring.
 
-| Velg i «Utfall» | Handling og forventet resultat |
+| Velg i «Simulert lagringsresultat» | Handling og forventet resultat |
 |---|---|
 | Utilgjengelig | Lagre. Forslaget beholdes, og appen sier ikke lagret. Prøv normal lagring igjen. |
 | Nyere revisjon / konflikt | Lagre. Gjeldende og foreslåtte verdier vises hver for seg. **Avbryt konflikt** beholder forslaget; **Ta i bruk gjeldende** er et eget valg. |
@@ -174,26 +191,33 @@ Bruk **Nullstill simuleringen → Bekreft nullstilling** mellom forsøk ved beho
 
 ### J. Avslutning, avbrudd og gjentakbar nullstilling
 
-1. Start en simulert dag, lagre ett utfall og la en annen aktivitet stå uregistrert.
+1. Start en simulert dag, lagre én aktivitetsstatus og la en annen aktivitet stå uregistrert.
 2. Velg **Avslutt arbeidsdagen**, og avbryt bekreftelsen én gang. Forvent retur til riktig skjerm og kontroll.
-3. Avslutt deretter med bekreftelse. Kontroller antall lagrede utfall og ukjente aktiviteter i oppsummeringen.
+3. Avslutt deretter med bekreftelse. Kontroller antall lagrede aktivitetsstatuser og ukjente aktiviteter i oppsummeringen.
 4. Åpne **Kontomeldinger** igjen. Meldingen beholder egen levetid etter avsluttet dag.
 5. Velg **Nullstill simuleringen**: avbryt først, bekreft deretter og gjenta normalflyten. Prøv også **Avbryt arbeidsdagen** med bekreftelse i en ny simulering.
 6. Prøv **Prøv format som ikke støttes** og merket manuell fallback. Kontroller tastatur, fokus, Dag/Natt og smal/forstørret visning.
 
-**Forventet:** Oppsummeringen er skrivebeskyttet; uregistrerte utfall fullføres ikke automatisk. Avbrutt nullstilling bevarer tilstanden, bekreftet nullstilling rydder bare simuleringens minne. Oppdatering av siden starter også simuleringen på nytt.
+**Forventet:** Oppsummeringen er skrivebeskyttet; uregistrerte aktivitetsstatuser fullføres ikke automatisk. Avbrutt nullstilling bevarer tilstanden, bekreftet nullstilling rydder bare simuleringens minne. Oppdatering av siden starter også simuleringen på nytt.
 
 **Begrensninger:** Tre faste aktiviteter; fallback redigerer vognløp/buss, ikke hele aktivitetslisten. Ingen faktisk PDF-tolking i simuleringen. Eldre melding uten slutt har ingen fullføringshandling i demoen. Bredere temapersistens og fysisk enhetskvalifikasjon tilhører senere arbeid.
 
 ### K. Faktisk databaseflyt og bevaring av private testdata
 
-1. Åpne `/` i en egen fane. Vent på **Ikke lagret**, og velg **Lagre fiktiv dag**.
-2. Forvent **Lagret og bekreftet av tjenesten.** Ta vare på adressen med `?day=…`.
-3. Last den lagrede adressen på nytt. Forvent **Lagret eksempel er hentet fra tjenesten.** Kontroller datoer over midnatt og ukjent fysisk buss.
-4. Nullstill simuleringen på `/demo`. Åpne den lagrede adressen fra punkt 2 igjen.
-5. Logg inn på `/private`, og kontroller at 3. januar-planen og testhistorikken fra 12.1 fortsatt finnes som forventet.
+Her tester du **to forskjellige sider og lagringsmåter**. `/demo` er simuleringen du har brukt hittil; data finnes bare i fanens minne. Forsiden `/` bruker den isolerte, faktiske fiktive API-en/PostgreSQL-databasen. K skal vise at en lagret dag overlever ny sideinnlasting og nullstilling av simuleringen, mens private testdata også bevares. Du skal ikke stoppe tjenester eller nullstille databaser.
 
-**Forventet:** Simuleringens nullstilling påvirker verken faktisk lagret fiktiv dag eller private testdata. Faktiske og simulerte kvitteringer er forskjellige. Ikke kjør det tekniske `verify`-verktøyet mellom punkt 2 og 4: det nullstiller den faktiske fiktive databasen som del av sin egen test.
+1. Behold `/demo`-fanen. Åpne **en ny fane i samme private nettleservindu**, og skriv hele adressen <http://127.0.0.1:15312/> (uten `/demo` eller `/private`).
+2. Forvent overskriften **Fiktiv arbeidsdag** og merket **Fiktive demodata**. Dette er en annen side enn **Prøv en fiktiv arbeidsdag**. Vent til status viser **Ikke lagret. Eksemplet er planlagt og fiktivt.** Hvis et gammelt lagret eksempel åpnes, bruk adressen uten `?day=…`, eller velg **Last inn nytt fiktivt eksempel**.
+3. Noter tjenestedato, vognløp, fysisk buss og dato/klokkeslett for aktivitetene. Se at planlagt arbeid krysser midnatt: datoen skifter etter midnatt; det er ikke en negativ varighet. Ukjent fysisk buss skal ikke fylles inn automatisk.
+4. Trykk **Lagre fiktiv dag**. Forvent status **Lagret og bekreftet av tjenesten.**, informasjon om bekreftet lagring/slettetid, og en adresse som nå inneholder `?day=` etterfulgt av en ID.
+5. **Kopier hele denne adressen** til et testnotat. Ikke velg «Last inn nytt fiktivt eksempel» nå. Trykk **Ctrl+R** i fanen med den lagrede dagen.
+6. Forvent **Lagret eksempel er hentet fra tjenesten.** Sammenlign med punkt3: samme ID i adressen, tjenestedato, vognløp, fysisk buss og aktiviteter. Det er henting av lagret dag, ikke ny lagring.
+7. Gå tilbake til `/demo`-fanen. Velg **Nullstill simuleringen → Bekreft nullstilling**. Forvent at bare simuleringen går tilbake til start.
+8. Åpne den **kopierte adressen fra punkt5** i en ny fane, eller lim den inn igjen i fanen med faktisk lagret dag. Forvent på nytt **Lagret eksempel er hentet fra tjenesten.**, samme ID og samme verdier. Du skal ikke trykke Lagre en gang til for å få dagen tilbake.
+9. Åpne <http://127.0.0.1:15312/private> i samme private vindu. Logg inn med samme syntetiske konto som i12.1 hvis appen ber om det. **3. januar2031-planen** skal fortsatt kunne åpnes, mens **2. januar-planen** fortsatt skal være slettet. Avvikshistorikken fra12.1 skal være bevart i vedlikehold; avsluttede/utløpte avvik trenger ikke vises som aktive.
+10. Rapporter K som bestått/feil/ikke testet for tre observasjoner: **lagret dag overlever Ctrl+R**, **lagret dag overlever nullstilling av `/demo`**, **private testdata er uendret**. Ved feil: noter hvilket punkt og teksten som faktisk vises; behold lagret adresse og testtilstand.
+
+**Forventet:** Simuleringens nullstilling påvirker verken faktisk lagret fiktiv dag eller private testdata. Faktiske og simulerte kvitteringer er forskjellige. Ikke kjør det tekniske `verify`-verktøyet under K: det nullstiller den faktiske fiktive databasen som del av sin egen test.
 
 ## 5. Resultatmal
 
