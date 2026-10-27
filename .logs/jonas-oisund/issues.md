@@ -1,5 +1,7 @@
 # Åpne punkter
 
+Manuell 12.1-test er startet27.10.2026 på Jonas_desktop, Brave privat vindu, oppgitt testreferanse83cdd2b. Klargjøring bekreftet: forventede planer og linje20 finnes. A–F og eieraksept er fortsatt åpne;12.2 avventer stoppunktet etter12.1.
+
 - [x] 2026-10-27 [Nettbrett-tokenlagring](997-2026-10-27-13-19-30-nettbrett-tokenlagring.md) — Eier må fullføre skjult tokenlagring; kontroller deretter bare eksistens og ACL uten innholdslesing. (løst 2026-10-27: eier bekreftet lagring; metadata og ACL kontrollert uten innholdslesing.)
 - [x] 2026-10-27 [Nettbrett-tokenlagring](997-2026-10-27-13-19-30-nettbrett-tokenlagring.md) — Fiktiv f5-pilot: Lenovo Wi-Fi/mobilnett, MFA, lagring/gjenåpning, observert nettbrudd, tilbakekalling/API-nekt/ny MFA, naturlig cookie-/øktutløpsforløp, cookieflagg, privat 200/no-store/DYNAMIC og CSRF-nekt uten header er dokumentert. Annen ikke-medlemsidentitet ble avvist. Eier logget ut og stoppet tunnelen; agent bekreftet null prosesser/metrics-lyttere. (avsluttet 2026-10-27; docs/tablet-pilot-result.md)
 - [ ] 2026-10-27 [Nettbrett-tokenlagring](997-2026-10-27-13-19-30-nettbrett-tokenlagring.md) — Før eventuell ordinær bruk: separat beslutning om deploy/data, riktige images og fysisk kvalifikasjon av nyere main-kombinasjon, samt avklart rotasjon/sikkerhetskopi/drift. Den kjørende lokalpiloten er fortsatt f5-basert; Story 12-aksept håndteres separat. Ingen autostart eller ordinær datatilgang er aktivert.
