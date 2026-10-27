@@ -6,7 +6,7 @@ import { PrivateAccess } from './PrivateAccess';
 type Activity = { id: string; kind: 'trip' | 'break'; start: string; end: string; place: string | null; trip_code: string | null; provenance: 'fictional-planned' };
 type Day = { fictional: true; service_date: string; timezone: 'Europe/Oslo'; vehicle_duty: string | null; physical_bus: string | null; activities: Activity[] };
 type Saved = { id: string; day: Day; created_at: string; expires_at: string };
-const API = 'http://127.0.0.1:8000';
+const API = (import.meta as ImportMeta & { env: Record<string, string> }).env.VITE_FICTIONAL_API ?? 'http://127.0.0.1:8000';
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 function validInstant(value: unknown): value is string {
   if (typeof value !== 'string') return false;

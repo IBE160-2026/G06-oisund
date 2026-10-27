@@ -1,5 +1,5 @@
 ---
-status: backlog
+status: review
 scopeApproval: approved
 decision: SCOPE-02
 approvedOn: 2026-10-19
@@ -7,12 +7,14 @@ alias: V1-16
 epic: 12
 story: '12.1'
 dependencies: [V1-05, V1-12, V1-13]
-implementationStarted: false
+implementationStarted: true
+technicallyReadyOn: 2026-10-27
+ownerAcceptance: pending
 ---
 
 ### Story 12.1: Enforce the retained-data boundary
 
-**Stable alias:** V1-16. **Status:** backlog; approved scope, implementation/evidence not started.
+**Stable alias:** V1-16. **Status:** review; technically verified in isolated worktree, owner manual acceptance pending.
 **Depends on:** V1-05, V1-12, V1-13.
 **Traceability:** FR-1/2/24; NFR-3; AC-06/09; SCOPE-02.
 

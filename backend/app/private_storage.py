@@ -40,6 +40,7 @@ def cleanup():
         conn.execute('DELETE FROM sessions WHERE expires_at <= clock_timestamp()')
         conn.execute('DELETE FROM workday_notices WHERE expires_at <= clock_timestamp()')
         conn.execute('DELETE FROM account_notice_operations WHERE expires_at <= clock_timestamp()')
+        conn.execute('DELETE FROM notice_creation_admissions WHERE expires_at <= clock_timestamp()')
         conn.execute('DELETE FROM drafts WHERE expires_at <= clock_timestamp()')
         conn.execute('DELETE FROM workdays WHERE expires_at <= clock_timestamp()')
         conn.execute('DELETE FROM workday_operations WHERE expires_at <= clock_timestamp() OR (workday_id IS NULL AND NOT EXISTS (SELECT 1 FROM drafts WHERE drafts.id=workday_operations.draft_id))')

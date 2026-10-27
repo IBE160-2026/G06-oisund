@@ -1,3 +1,4 @@
+import { privateNow } from './privateClock';
 import { useEffect, useRef, useState } from 'react';
 import { recoverOperation } from './recoverOperation';
 import { PrivateTimeInput } from './PrivateTimeInput';
@@ -49,13 +50,13 @@ export function validContent(draft: any) {
 function valid(value: any): value is Saved {
   return value && uuid(value.id) && Number.isInteger(value.revision) && value.revision > 0
     && Number.isFinite(Date.parse(value.created_at)) && Date.parse(value.expires_at) - Date.parse(value.created_at) === 7 * 86400000
-    && Date.parse(value.expires_at) > Date.now() && validContent(value.draft);
+    && Date.parse(value.expires_at) > privateNow() && validContent(value.draft);
 }
 function validSummary(value: any): value is Summary {
   return value && uuid(value.id) && Number.isInteger(value.revision) && value.revision > 0 && value.revision <= 2147483647
     && (value.service_date === null || calendar(value.service_date))
     && typeof value.created_at === 'string' && value.created_at.length <= 40 && Number.isFinite(Date.parse(value.created_at))
-    && typeof value.expires_at === 'string' && value.expires_at.length <= 40 && Date.parse(value.expires_at) > Date.now()
+    && typeof value.expires_at === 'string' && value.expires_at.length <= 40 && Date.parse(value.expires_at) > privateNow()
     && Date.parse(value.expires_at) - Date.parse(value.created_at) === 7 * 86400000;
 }
 
@@ -134,7 +135,7 @@ export function PrivateDrafts({ upload, request, mutation, dirtyChanged, expired
       if (!result || Object.keys(result).sort().join() !== 'drafts,next_cursor' || !Array.isArray(result.drafts) || result.drafts.length > 50 || !result.drafts.every(validSummary)
         || new Set(result.drafts.map((item: Summary) => item.id)).size !== result.drafts.length
         || result.drafts.some((item: Summary, index: number) => (index > 0 && item.id <= result.drafts[index - 1].id) || (cursor && item.id <= cursor))
-        || (result.next_cursor !== null && (!uuid(result.next_cursor) || result.drafts.length !== 50 || result.next_cursor !== result.drafts[49].id))) {
+        || (result.next_cursor !== null && (!uuid(result.next_cursor) || cursor && result.next_cursor <= cursor || result.drafts.some((item: Summary) => item.id > result.next_cursor)))) {
         setListState('error'); return;
       }
       const rows = result.drafts.map(({ id, revision, expires_at, service_date }: Summary) => ({ id, revision, expires_at, service_date }));
@@ -148,12 +149,21 @@ export function PrivateDrafts({ upload, request, mutation, dirtyChanged, expired
   useEffect(() => { if (focusLoadedCount.current) { focusLoadedCount.current = false; loadedCount.current?.focus(); } }, [list]);
   useEffect(() => { dirtyChanged(dirty || confirmationLocked || registryDirty); return () => dirtyChanged(false); }, [dirty, confirmationLocked, registryDirty]);
   useEffect(() => {
+    const timer = window.setInterval(() => setList(current => current.some(row => Date.parse(row.expires_at) <= privateNow()) ? current.filter(row => Date.parse(row.expires_at) > privateNow()) : current), 1000);
+    return () => clearInterval(timer);
+  }, []);
+  useEffect(() => {
     setDraftExpired(false);
     if (!saved) return;
-    const expire = () => { setDraftExpired(true); if (saved.draft.import_metadata) { resetTimes(); setContent(empty()); setSaved(null); setPending(null); setComparison(null); } setMessage('Utkastet er utløpt. Lagringsutfallet kan ikke bekreftes, og utkastet kan ikke åpnes igjen.'); };
-    const remaining = Date.parse(saved.expires_at) - Date.now();
-    if (remaining <= 0) { expire(); return; }
-    const timer = window.setTimeout(expire, remaining);
+    const expire = () => { setDraftExpired(true); deletionEpoch.current++; listRequest.current++; resetTimes(); setContent(empty()); setSaved(null); setPending(null); setPendingDelete(null); setComparison(null); setSaveUnavailable(false); setList(current => current.filter(row => row.id !== saved.id)); setMessage('Utkastet er utløpt. Lagringsutfallet kan ikke bekreftes, og utkastet kan ikke åpnes igjen.'); };
+    let timer: number;
+    const checkDeadline = () => {
+      const remaining = Date.parse(saved.expires_at) - privateNow();
+      if (remaining <= 0) { expire(); return; }
+      // Recheck the original deadline as the shared server clock advances.
+      timer = window.setTimeout(checkDeadline, Math.min(remaining, 1000));
+    };
+    checkDeadline();
     return () => clearTimeout(timer);
   }, [saved]);
   useEffect(() => {
@@ -164,29 +174,35 @@ export function PrivateDrafts({ upload, request, mutation, dirtyChanged, expired
   }, [dirty, confirmationLocked, registryDirty]);
   function adopt(value: Saved) { setScreen('editor'); resetTimes(); setSaveUnavailable(false); setSaved(value); setContent(value.draft); setPending(null); setComparison(null); setMessage(`Lagret. Versjon ${value.revision}.`); title.current?.focus(); }
   function terminalSave(status: number) {
+    if (saved) {
+      deletionEpoch.current++; listRequest.current++; resetTimes(); setContent(empty()); setSaved(null); setComparison(null); setPendingDelete(null); setList(current => current.filter(row => row.id !== saved.id));
+    }
     setPending(null); setSaveUnavailable(true);
-    setMessage(`Lagring er ikke bekreftet. ${status === 410 ? 'Lagringsforsøket er utløpt.' : 'Lagringsforsøket finnes ikke lenger eller er utilgjengelig.'} Lokale inndata er beholdt for gjennomgang og kan ikke sendes på nytt. Velg Nytt utkast eller Tilbakestill for å starte med et tomt skjema.`);
+    setMessage(`Lagring er ikke bekreftet. ${status === 410 ? 'Lagringsforsøket er utløpt.' : 'Lagringsforsøket finnes ikke lenger eller er utilgjengelig.'} ${saved ? 'Private felt fra det utløpte utkastet er fjernet.' : 'Lokale inndata er beholdt for gjennomgang og kan ikke sendes på nytt.'} Velg Nytt utkast eller Tilbakestill for å starte med et tomt skjema.`);
   }
   async function reopen(id: string, confirmed = false) {
     if (!confirmed && dirty && !window.confirm('Ulagrede endringer går tapt. Åpne lagret utkast?')) return;
+    const epoch = deletionEpoch.current;
     setBusy(true);
     const shown = confirmed ? comparison : null;
     try {
       const value = await request('/drafts/' + id);
+      if (epoch !== deletionEpoch.current) return;
       if (!valid(value) || value.id !== id || shown && (value.id !== shown.id || value.created_at !== shown.created_at || value.expires_at !== shown.expires_at
         || value.revision < shown.revision || value.revision === shown.revision && canonical(value) !== canonical(shown))) throw Error();
       if (alive.current) adopt(value);
     }
-    catch (error) { if (alive.current) failed(error); }
+    catch (error: any) { if (alive.current && epoch === deletionEpoch.current) { if (saved?.id === id && terminalDraftError(error)) terminalSave(error.status); else failed(error); } }
     finally { if (alive.current) setBusy(false); }
   }
-  async function acknowledge(value: any, operation: Pending, verified = () => {}) {
+  async function acknowledge(value: any, operation: Pending, verified = () => {}, epoch = deletionEpoch.current) {
     if (!valid(value) || value.revision !== operation.body.expected_revision + 1 || canonical(value.draft) !== canonical(operation.body.draft)
       || (operation.path !== '/drafts' && operation.path !== '/drafts/' + value.id)) throw Error('Invalid acknowledgement');
     verified();
     // Historical receipts prove an effect, while this authorized read establishes
     // the current revision available for reopening and confirmation.
     const latest = await request('/drafts/' + value.id);
+    if (epoch !== deletionEpoch.current) return;
     if (!valid(latest) || latest.id !== value.id || latest.created_at !== value.created_at || latest.expires_at !== value.expires_at
       || latest.revision < value.revision || latest.revision === value.revision && canonical(latest) !== canonical(value)) throw Error('Invalid current draft');
     if (!alive.current) return;
@@ -197,10 +213,11 @@ export function PrivateDrafts({ upload, request, mutation, dirtyChanged, expired
     await refresh();
   }
   async function send(operation: Pending) {
+    const epoch = deletionEpoch.current;
     let accepted = false;
-    try { await acknowledge(await mutation(operation.path, operation.body), operation, () => { accepted = true; }); }
+    try { await acknowledge(await mutation(operation.path, operation.body), operation, () => { accepted = true; }, epoch); }
     catch (error: any) {
-      if (!alive.current) return;
+      if (!alive.current || epoch !== deletionEpoch.current) return;
       if (error?.status === 401) { expired(); return; }
       if (!accepted && error?.status === 409 && ['Utkastet er endret. Sammenlign med lagret versjon før du fortsetter.', 'Lagringsforsøket har annet innhold. Behold dine lokale endringer.'].includes(error.apiDetail)) {
         setPending(null);
@@ -217,6 +234,7 @@ export function PrivateDrafts({ upload, request, mutation, dirtyChanged, expired
     }
   }
   async function save() {
+    const epoch = deletionEpoch.current;
     if (saveUnavailable) return;
     if (!pending && busError(content.physical_bus)) { setMessage(busError(content.physical_bus)!); return; }
     if (Object.values(timeStatesRef.current).some(value => value.unresolved)) { setMessage('Kontroller uavklarte datoer og klokkeslett før lagring. Inndata er beholdt.'); return; }
@@ -233,13 +251,14 @@ export function PrivateDrafts({ upload, request, mutation, dirtyChanged, expired
           return;
         }
         const issued = await mutation('/draft-operations', { draft_id: saved?.id ?? null });
+        if (epoch !== deletionEpoch.current) return;
         if (!uuid(issued.operation_id) || !Number.isFinite(Date.parse(issued.expires_at))) throw Error();
         operation = { path: saved ? '/drafts/' + saved.id : '/drafts', body: { operation_id: issued.operation_id, expected_revision: saved?.revision ?? 0, draft: { ...structuredClone(content), physical_bus: normalizeBus(content.physical_bus) } } };
         if (!alive.current) return;
         setPending(operation);
       }
       await send(operation);
-    } catch (error) { if (alive.current) failed(error); }
+    } catch (error: any) { if (alive.current && epoch === deletionEpoch.current) { if (saved && terminalDraftError(error)) terminalSave(error.status); else failed(error); } }
     finally { if (alive.current) setBusy(false); }
   }
   function terminalDraftError(error: any) {
@@ -249,17 +268,19 @@ export function PrivateDrafts({ upload, request, mutation, dirtyChanged, expired
   async function settle(retry = false) {
     if (!pending) return;
     const operation = pending;
+    const epoch = deletionEpoch.current;
     setBusy(true);
     try {
       const result = await request('/draft-operations/' + operation.body.operation_id);
+      if (epoch !== deletionEpoch.current) return;
       if (!result || Object.keys(result).sort().join() !== 'result,state') throw Error();
-      if (result.state === 'accepted') await acknowledge(result.result, operation);
+      if (result.state === 'accepted') await acknowledge(result.result, operation, () => {}, epoch);
       else if (result.state === 'pending' && result.result === null) {
         if (retry) await send(operation);
         else setMessage('Serveren har ikke registrert en lagring for forsøket. Inndata er beholdt. Du kan prøve samme lagringsforsøk igjen.');
       }
       else throw Error();
-    } catch (error: any) { if (alive.current) { if (error?.status === 401) expired(); else if (terminalDraftError(error)) terminalSave(error.status); else setMessage('Lagring er uavklart. Tjenesten kunne ikke bekrefte utfallet. Det opprinnelige forsøket og inndata er beholdt.'); } }
+    } catch (error: any) { if (alive.current && epoch === deletionEpoch.current) { if (error?.status === 401) expired(); else if (terminalDraftError(error)) terminalSave(error.status); else setMessage('Lagring er uavklart. Tjenesten kunne ikke bekrefte utfallet. Det opprinnelige forsøket og inndata er beholdt.'); } }
     finally { if (alive.current) setBusy(false); }
   }
   function edit(next: Content) {
@@ -286,6 +307,7 @@ export function PrivateDrafts({ upload, request, mutation, dirtyChanged, expired
     setMessage('Utkastet er slettet.'); title.current?.focus();
   }
   async function removeDraft(lookup = false) {
+    const epoch = deletionEpoch.current;
     const retry = !!pendingDelete;
     let operation = pendingDelete;
     if (!operation) {
@@ -300,9 +322,10 @@ export function PrivateDrafts({ upload, request, mutation, dirtyChanged, expired
       const mutate = () => mutation('/drafts/' + original.id + '/delete', original.body);
       const authorize = async () => { const value = await request('/drafts/' + original.id); if (!valid(value) || value.id !== original.id) throw Error(); };
       const result = lookup ? await status() : retry ? await recoverOperation(status, authorize, mutate) : await mutate();
+      if (epoch !== deletionEpoch.current) return;
       acknowledgeDelete(result, operation);
     } catch (error: any) {
-      if (!alive.current) return;
+      if (!alive.current || epoch !== deletionEpoch.current) return;
       if (error?.status === 401) { expired(); return; }
       if (error?.status === 410 && ['Slettingsforsøket er utløpt.', 'Utkastet er utløpt.', 'Utkastet er utløpt og kan ikke åpnes igjen.'].includes(error.apiDetail)) {
         deletionEpoch.current++;

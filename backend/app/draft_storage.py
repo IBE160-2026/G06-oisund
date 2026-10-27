@@ -57,7 +57,10 @@ def listing(request, cursor=None):
         rows = conn.execute('SELECT id,created_at,expires_at,revision,content->>\'service_date\' AS service_date '
                             'FROM drafts WHERE owner=%s AND expires_at > clock_timestamp() AND (%s::uuid IS NULL OR id > %s) ORDER BY id LIMIT 51', (owner, cursor, cursor)).fetchall()
         auth.session(conn, request)
-        return {'drafts': rows[:50], 'next_cursor': rows[49]['id'] if len(rows) > 50 else None}
+        final_now = conn.execute('SELECT clock_timestamp() AS now').fetchone()['now']
+        scanned_cursor = rows[-1]['id'] if len(rows) > 50 else None
+        rows = [row for row in rows if row['expires_at'] > final_now]
+        return {'drafts': rows[:50], 'next_cursor': rows[49]['id'] if len(rows) > 50 else scanned_cursor}
 
 
 def read(request, identifier):
@@ -65,6 +68,7 @@ def read(request, identifier):
         owner = authorized(conn, request)
         row = owned(conn, owner, identifier, request)
         auth.session(conn, request)
+        owned(conn, owner, row['id'], request)
         return presentation(row)
 
 
