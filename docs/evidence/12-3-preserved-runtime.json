@@ -1,0 +1,16 @@
+{
+  "comparison": "normalized line endings and trailing whitespace because initial PowerShell capture added CR/newline bytes",
+  "normalized_html_equal": true,
+  "before_capture_sha256": "47ae69f97dcbd9a7859e9e528b91c1b7e3927c8cf67a021880676e414839eae4",
+  "after_http_bytes_sha256": "b1145df05bbf759045e125b6ff6d9965d92403dfdb8b6138db5f5d400ff80cb3",
+  "container_ids_unchanged": [
+    "cb4c3b7467ca",
+    "d58d12327212",
+    "aeb9125406b6",
+    "e57a1b8fd2f5"
+  ],
+  "old_database_byte_fingerprint": "not captured; no exact DB-byte comparison claimed",
+  "observed_at": "2026-10-27T09:32:15.467949+00:00",
+  "before_html_capture": "<!doctype html><html lang=\"nb\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>Fiktiv simulering</title>  <script type=\"module\" crossorigin src=\"/assets/demo-BtreGJFf.js\"></script>\n  <link rel=\"modulepreload\" crossorigin href=\"/assets/FictionalAssessment-CPc2smYF.js\">\n  <link rel=\"stylesheet\" crossorigin href=\"/assets/FictionalAssessment-D4XQNhTQ.css\">\n</head><body><div id=\"root\"></div></body></html>\r\n\r\n",
+  "after_html": "<!doctype html><html lang=\"nb\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>Fiktiv simulering</title>  <script type=\"module\" crossorigin src=\"/assets/demo-BtreGJFf.js\"></script>\n  <link rel=\"modulepreload\" crossorigin href=\"/assets/FictionalAssessment-CPc2smYF.js\">\n  <link rel=\"stylesheet\" crossorigin href=\"/assets/FictionalAssessment-D4XQNhTQ.css\">\n</head><body><div id=\"root\"></div></body></html>\r\n"
+}

@@ -1,5 +1,5 @@
 ---
-status: backlog
+status: review
 scopeApproval: approved
 decision: SCOPE-02
 approvedOn: 2026-10-19
@@ -7,12 +7,12 @@ alias: V1-18
 epic: 12
 story: '12.3'
 dependencies: [V1-09, V1-11, V1-14]
-implementationStarted: false
+implementationStarted: true
 ---
 
 ### Story 12.3: Use the included views on tablet and PC
 
-**Stable alias:** V1-18. **Status:** backlog; approved scope, implementation/evidence not started.
+**Stable alias:** V1-18. **Status:** review; technical implementation and evidence recorded; Jonas' manual acceptance is pending.
 **Depends on:** V1-09, V1-11, V1-14.
 **Traceability:** NFR-1/4; IR-01; AC-10; SCOPE-02.
 
@@ -27,3 +27,5 @@ implementationStarted: false
 
 
 Sources: [active epics](../epics.md), [PRD](../prds/prd-IBE160-2026-09-21/prd.md), [architecture](../architecture/architecture-IBE160-2026-09-23/ARCHITECTURE-SPINE.md), [EXPERIENCE](../ux-designs/ux-IBE160-2026-09-22/EXPERIENCE.md), [DESIGN](../ux-designs/ux-IBE160-2026-09-22/DESIGN.md). The canonical acceptance block is identical to this planning copy. Promote/refine one story in implementation-artifacts when implementation begins; do not mark it done because this file exists.
+
+Implementation and executed evidence: [12.3 specification](../../implementation-artifacts/spec-12-3-tablet-pc.md), [handoff](../../../docs/evidence/12-3-handoff.md), [manual checklist](../../../docs/story-12-3-manual-testing.md). Physical qualification remains pending; 12.1/12.2 also remain in review.

@@ -1,0 +1,435 @@
+{
+  "archive": "12-3-recorded-raw-through-regression.tar.gz",
+  "sha256": "bc8baa4f6505e504735a6a90f4b72c0a4e9739e5ea8b97a46d23cf9f21477e8d",
+  "inputs": [
+    {
+      "run": "20261027T090233692258Z-3ce40a03",
+      "exact_inputs_preserved": 29,
+      "unavailable_inputs": []
+    },
+    {
+      "run": "20261027T085409659655Z-0057a88f",
+      "exact_inputs_preserved": 29,
+      "unavailable_inputs": []
+    }
+  ],
+  "files": [
+    {
+      "path": "tmp\\story123\\20261027T081642590419Z-b4b738fe\\command.log",
+      "sha256": "ebe5338d6390d86246de1fd2a68a5170335f2197c5e96ba3d515f90d79e90309"
+    },
+    {
+      "path": "tmp\\story123\\20261027T081642590419Z-b4b738fe\\integration.py",
+      "sha256": "cf98704d643fb0628680749d143f425174d6ca68392d02d81ac1bb900ff6e65d"
+    },
+    {
+      "path": "tmp\\story123\\20261027T081747285993Z-0d32e579\\command.log",
+      "sha256": "991f3ea782e8ad9e6befb65d04754d98341d662d8b2c6ef3c10ae7c84b1597cd"
+    },
+    {
+      "path": "tmp\\story123\\20261027T081815777928Z-fa5333a9\\command.log",
+      "sha256": "df9dd40e35d2ae410fabdb486088aca5db0e3e8dde88438618d078b2f2e6e001"
+    },
+    {
+      "path": "tmp\\story123\\20261027T082007701838Z-04c11855\\command.log",
+      "sha256": "ccc801bdca40feb4d0fcfd14419ab90f8fed6a80ace9a5f779deefb52cc2a4ef"
+    },
+    {
+      "path": "tmp\\story123\\20261027T082007701838Z-04c11855\\integration.py",
+      "sha256": "71d58882e91e00d7fabb54f02caa12a307d3962aaa8efd910f3c00a657451aa6"
+    },
+    {
+      "path": "tmp\\story123\\20261027T082208044188Z-366789da\\command.log",
+      "sha256": "b9bf4d8146823ce324e99420fdb3ccf75049422de3d7b720e9afee348984c9c0"
+    },
+    {
+      "path": "tmp\\story123\\20261027T082218529811Z-9534e5f3\\command.log",
+      "sha256": "05390d4da68dc34dde6eac4b0ae5764c8e18ce3791314a4dfb673907034807ee"
+    },
+    {
+      "path": "tmp\\story123\\20261027T082218529811Z-9534e5f3\\report.json",
+      "sha256": "6bbaed8210a7f83c981f01c98c94a4e19c89d1d5c393ad48a43908fad0adf2b3"
+    },
+    {
+      "path": "tmp\\story123\\20261027T082538322185Z-c41720f4\\command.log",
+      "sha256": "6bc00e3e5cffee9adb40accfff1bffb803d33572d5abcfd92d431882808d23f6"
+    },
+    {
+      "path": "tmp\\story123\\20261027T082548698193Z-7506507b\\command.log",
+      "sha256": "127da730f55d775922f9b02c977d966e449196a31a770142c71220e0ba8a9b6f"
+    },
+    {
+      "path": "tmp\\story123\\20261027T082548698193Z-7506507b\\report.json",
+      "sha256": "6b1194949d88d858a784ee338dbf5067394a372e542573b5a64a09ebce13266a"
+    },
+    {
+      "path": "tmp\\story123\\20261027T082654422684Z-a7bbbc00\\command.log",
+      "sha256": "b7a12500d89b0d503007aac1285e175c404fd8ff34906ce476995acef9ab1efd"
+    },
+    {
+      "path": "tmp\\story123\\20261027T082703527914Z-68fcdef2\\command.log",
+      "sha256": "442cf0a41bdd2e54f3d99417a0e083f3d860fba784c4395b6f5153d9b1cc3d0b"
+    },
+    {
+      "path": "tmp\\story123\\20261027T082703527914Z-68fcdef2\\report.json",
+      "sha256": "3753e71ccd527f833d8110ccf67e3a05f10b1083dae9b2342758e9dee535cc14"
+    },
+    {
+      "path": "tmp\\story123\\20261027T082812287240Z-4445965e\\command.log",
+      "sha256": "511c26376bfd56d46ad1288315223d9d34f14643c55a67d01d86d7352bf80fe2"
+    },
+    {
+      "path": "tmp\\story123\\20261027T082812287240Z-4445965e\\report.json",
+      "sha256": "c2701490ae170dc8a5fbc4fa1903e9a374b0bd42efee6fb19a5b89d3749fca4d"
+    },
+    {
+      "path": "tmp\\story123\\20261027T082855411789Z-a7b9f413\\command.log",
+      "sha256": "d6f83679765e9aea9a596b1b6021274c79d2dc7dfb8c6191ff58ac4ed01fcf7c"
+    },
+    {
+      "path": "tmp\\story123\\20261027T082855411789Z-a7b9f413\\report.json",
+      "sha256": "6755f36e06446241ba6487cb86ccd21269fd4bcd97e562e2726a14b7dbd8a3c4"
+    },
+    {
+      "path": "tmp\\story123\\20261027T083122595098Z-9cca0f5f\\command.log",
+      "sha256": "0f605d5488e7c9e0b5d2370916f09d868e998083d61c557fc30e420462eed93d"
+    },
+    {
+      "path": "tmp\\story123\\20261027T083130888211Z-7f710d93\\command.log",
+      "sha256": "c50515c07458bbadc2e2ae7930086ccfa9b868eb97c9e1e5bcd33ac555ed404b"
+    },
+    {
+      "path": "tmp\\story123\\20261027T083130888211Z-7f710d93\\report.json",
+      "sha256": "0600eaf74a937bbcd9bbcc03edd7dacf6d0829cac0c4e54e85f375a0e9a8fcc7"
+    },
+    {
+      "path": "tmp\\story123\\20261027T083454009019Z-dbda35b0\\command.log",
+      "sha256": "52e359ccfa9d6d8a0b67f425fae0622a947cce5116ff230b00ff66e46840c046"
+    },
+    {
+      "path": "tmp\\story123\\20261027T083454009019Z-dbda35b0\\report.json",
+      "sha256": "3e2b14386f69244ee527dcabde50667e275578a02bc381337781dfbdafc9d4ba"
+    },
+    {
+      "path": "tmp\\story123\\20261027T083549026172Z-060d3432\\command.log",
+      "sha256": "cbc121e4e1c898cc9c34fe7d8fc08c4c11434b322ec034b05ba21ca7a90de84b"
+    },
+    {
+      "path": "tmp\\story123\\20261027T083549026172Z-060d3432\\report.json",
+      "sha256": "933dcfc48bb403b3c10806267836c3ae62fb7609c141b6b09c5eddf883c9879a"
+    },
+    {
+      "path": "tmp\\story123\\20261027T083717539843Z-86800a5e\\command.log",
+      "sha256": "a3f3cc22e0e6eeb5bc8ed883cac613e088bd9ba0638ca4f3c7f64ead71e1697f"
+    },
+    {
+      "path": "tmp\\story123\\20261027T083726643294Z-50035d72\\command.log",
+      "sha256": "eb4627995344ff2023942580f3ab70e0fad992bdafef977a72800c7bffa6af5a"
+    },
+    {
+      "path": "tmp\\story123\\20261027T083726643294Z-50035d72\\report.json",
+      "sha256": "4c54c76133e28086ac3f0c189cd8dc16ffb5847c75c60d2ea809d9798b6edd6b"
+    },
+    {
+      "path": "tmp\\story123\\20261027T083834542147Z-1e928b4e\\command.log",
+      "sha256": "27104aa459ffd23e35886c5d62e897e193d464b391391857074be1065a5afa56"
+    },
+    {
+      "path": "tmp\\story123\\20261027T083834542147Z-1e928b4e\\report.json",
+      "sha256": "acc439ad3eb50bdab1550360583471cb6856e4bbda5ec9f2d2bdcd17282cd117"
+    },
+    {
+      "path": "tmp\\story123\\20261027T084412168640Z-1383412d\\command.log",
+      "sha256": "bdcf7b878c0f07844b6abfe6b2fd2e713d4497b7cb092e4daa0b715594aa9abc"
+    },
+    {
+      "path": "tmp\\story123\\20261027T084421811587Z-48b3f683\\command.log",
+      "sha256": "fe1ee99025228485f0de5abb236a90586473bf0f4fb93062fbc3af882742c0c2"
+    },
+    {
+      "path": "tmp\\story123\\20261027T084421811587Z-48b3f683\\report.json",
+      "sha256": "b9e0c2ba4e79c0a25d1e6860e805b98af7de84e3c1d9ca44460695f7666b7e26"
+    },
+    {
+      "path": "tmp\\story123\\20261027T084800913455Z-01ffe2b8\\command.log",
+      "sha256": "b41c194b81318c76475d9e1f3e5dad09e23b8203b4980638ce04abfa5586f1c3"
+    },
+    {
+      "path": "tmp\\story123\\20261027T084809968493Z-a2c6edd7\\command.log",
+      "sha256": "b947c61fcb288fb1ff83ad8c7bc9091717e2d09a1a2a579fa8cef08fe8576fdc"
+    },
+    {
+      "path": "tmp\\story123\\20261027T084809968493Z-a2c6edd7\\report.json",
+      "sha256": "c0ef094a38ab81bdf9af10524a0e153b68ce6e31cd22096f346100c879645536"
+    },
+    {
+      "path": "tmp\\story123\\20261027T085115279667Z-d4d89db7\\command.log",
+      "sha256": "412f478392466bf402a8e18937c3df113bf5f20b23ed309d050fa7d126eda823"
+    },
+    {
+      "path": "tmp\\story123\\20261027T085125825764Z-6de0fc6e\\command.log",
+      "sha256": "e9a946c4ba765ef6d1b22c1cbfc38815bd73885035fc899b12f5a0c1bea781e6"
+    },
+    {
+      "path": "tmp\\story123\\20261027T085125825764Z-6de0fc6e\\report.json",
+      "sha256": "0b393a8842f4584e66322c4dc88c7fa6d4713fc51fc12c95a51e08a4032670d4"
+    },
+    {
+      "path": "tmp\\story123\\20261027T085409659655Z-0057a88f\\command.log",
+      "sha256": "bddb477eef0bba2ab67f7335c59951f5cefb724fa09694f495834a65cc722b8e"
+    },
+    {
+      "path": "tmp\\story123\\20261027T085409659655Z-0057a88f\\report.json",
+      "sha256": "237550230ace250e97f658b1066f3f3825c67dcc040c50064d8c0d397bd61355"
+    },
+    {
+      "path": "tmp\\story123\\20261027T085409659655Z-0057a88f\\inputs\\frontend\\playwright.story123.config.ts",
+      "sha256": "62d0038e26b55ce2be13604859e121f48b91dc71e10963e6575a0d7b19c459f6"
+    },
+    {
+      "path": "tmp\\story123\\20261027T085409659655Z-0057a88f\\inputs\\frontend\\.story123-tests\\fictional-assessment.spec.ts",
+      "sha256": "cab4e6622aeeb41387ac44078184548cefba1a755317264e6c8ea737248e21e8"
+    },
+    {
+      "path": "tmp\\story123\\20261027T085409659655Z-0057a88f\\inputs\\frontend\\.story123-tests\\private-access.spec.ts",
+      "sha256": "caffd2adf84454ed0b3391f5be62d207e861fb93f4f0f34ae826a87af528c67d"
+    },
+    {
+      "path": "tmp\\story123\\20261027T085409659655Z-0057a88f\\inputs\\frontend\\.story123-tests\\private-activity-helpers.ts",
+      "sha256": "4cb70c0b6cb816c476d2ab2083b4b6605a9223b472790514313c1e58516496c1"
+    },
+    {
+      "path": "tmp\\story123\\20261027T085409659655Z-0057a88f\\inputs\\frontend\\.story123-tests\\private-bus.spec.ts",
+      "sha256": "b1bd2fa57ce85bc54d7de21d20ce5e639434e99768339bb377b4747d9252d411"
+    },
+    {
+      "path": "tmp\\story123\\20261027T085409659655Z-0057a88f\\inputs\\frontend\\.story123-tests\\private-confirmation.spec.ts",
+      "sha256": "469975e113df4caad8f890896ee2f26e43f5319eeb8fb5bb8c25b49b8ba305e0"
+    },
+    {
+      "path": "tmp\\story123\\20261027T085409659655Z-0057a88f\\inputs\\frontend\\.story123-tests\\private-crossday-notices.spec.ts",
+      "sha256": "a2359d0b94a0bd2ef9d4633ff315ba1ae161fc04fbc6ba83ccff7c26af5cc836"
+    },
+    {
+      "path": "tmp\\story123\\20261027T085409659655Z-0057a88f\\inputs\\frontend\\.story123-tests\\private-crossday-review-fixes.spec.ts",
+      "sha256": "cb7af320c3a0f3712f3d2ef129c61aa06727bd5c4071718f7bf7365badf5adfc"
+    },
+    {
+      "path": "tmp\\story123\\20261027T085409659655Z-0057a88f\\inputs\\frontend\\.story123-tests\\private-day.spec.ts",
+      "sha256": "290545dd99211cbd81e243128094d9f7ef9078acf7116a5d26a6d008af12f9d3"
+    },
+    {
+      "path": "tmp\\story123\\20261027T085409659655Z-0057a88f\\inputs\\frontend\\.story123-tests\\private-drafts.spec.ts",
+      "sha256": "7f0f05cc524fcd3210fe026ce67c4af22357fdb6598c0272df2563a907ba2c30"
+    },
+    {
+      "path": "tmp\\story123\\20261027T085409659655Z-0057a88f\\inputs\\frontend\\.story123-tests\\private-identity.spec.ts",
+      "sha256": "fa715f13ca69510165598a20d4755c0764cca61bd9c1c1e59a383be68f7850bd"
+    },
+    {
+      "path": "tmp\\story123\\20261027T085409659655Z-0057a88f\\inputs\\frontend\\.story123-tests\\private-import.spec.ts",
+      "sha256": "80727087410fadaf820fc786fd75bf0968ad86dbb82a28a2f19c6f2a4f17606e"
+    },
+    {
+      "path": "tmp\\story123\\20261027T085409659655Z-0057a88f\\inputs\\frontend\\.story123-tests\\private-notice-reader.spec.ts",
+      "sha256": "a4c525cb4042d6bb85777d87b453bf56d96366f1917605f86071dfc1d3111a23"
+    },
+    {
+      "path": "tmp\\story123\\20261027T085409659655Z-0057a88f\\inputs\\frontend\\.story123-tests\\private-notice-recovery-integration.spec.ts",
+      "sha256": "6fbbec23ced9e692f8fc0fa865dac72897335e4da03e26da78d8e9703dd281dd"
+    },
+    {
+      "path": "tmp\\story123\\20261027T085409659655Z-0057a88f\\inputs\\frontend\\.story123-tests\\private-notices.spec.ts",
+      "sha256": "f5237c6e3b8003b9586e5cd7465764d3d30cad7c8f662d19d1a4ebf4be84ad7c"
+    },
+    {
+      "path": "tmp\\story123\\20261027T085409659655Z-0057a88f\\inputs\\frontend\\.story123-tests\\private-outcomes.spec.ts",
+      "sha256": "6907fb8bff652d2b4b49e523e25da9c6e06b0ae83691ccde845a1137f3fa55c5"
+    },
+    {
+      "path": "tmp\\story123\\20261027T085409659655Z-0057a88f\\inputs\\frontend\\.story123-tests\\private-owner-feedback.spec.ts",
+      "sha256": "8743f402b7a8724973c77eccff738aafcff2147c5cabba0e15f6755d56e3bb71"
+    },
+    {
+      "path": "tmp\\story123\\20261027T085409659655Z-0057a88f\\inputs\\frontend\\.story123-tests\\private-owner-import.spec.ts",
+      "sha256": "2bcf32255cc072af80f8e9f778856f7c9f866c3aa0c100a5ff42958ffd9a2659"
+    },
+    {
+      "path": "tmp\\story123\\20261027T085409659655Z-0057a88f\\inputs\\frontend\\.story123-tests\\private-recovery.spec.ts",
+      "sha256": "9ac8655e2f8a7ecbfb9b12043d54541212ae3c19a8a7d4cada3c7693fa50f2c9"
+    },
+    {
+      "path": "tmp\\story123\\20261027T085409659655Z-0057a88f\\inputs\\frontend\\.story123-tests\\private-retention.spec.ts",
+      "sha256": "fb3a3540b9e2c6953a9d0edc00d48c3ce8db7c2b2ade6a0d7ad4a2e42c29eca9"
+    },
+    {
+      "path": "tmp\\story123\\20261027T085409659655Z-0057a88f\\inputs\\frontend\\.story123-tests\\private-screen-helpers.ts",
+      "sha256": "45f7abbea556e47a993e3b131b67b5280057eda7525ef19b8d06bf0334d002ab"
+    },
+    {
+      "path": "tmp\\story123\\20261027T085409659655Z-0057a88f\\inputs\\frontend\\.story123-tests\\private-selected-activity.spec.ts",
+      "sha256": "533ce7f8a0a725b9f6faa25c5ce93edcc78e8bfdc5882d3bf751de79582f436c"
+    },
+    {
+      "path": "tmp\\story123\\20261027T085409659655Z-0057a88f\\inputs\\frontend\\.story123-tests\\private-selection.spec.ts",
+      "sha256": "b674d4486c7ff39caa21cbef3c73ce88cae7a660ad2cf7d6de2fc6a2ca70ae55"
+    },
+    {
+      "path": "tmp\\story123\\20261027T085409659655Z-0057a88f\\inputs\\frontend\\.story123-tests\\private-start.spec.ts",
+      "sha256": "b47e9dab44c2d241f6c231fcabfed79cd1928289b404b9216363c9acd8f96383"
+    },
+    {
+      "path": "tmp\\story123\\20261027T085409659655Z-0057a88f\\inputs\\frontend\\.story123-tests\\tablet-pc-measurements.ts",
+      "sha256": "344619a31bef531ba5021820ec124752d80e135bb3a0fea03f9142bce8f5624f"
+    },
+    {
+      "path": "tmp\\story123\\20261027T085409659655Z-0057a88f\\inputs\\frontend\\.story123-tests\\tablet-pc-native.ts",
+      "sha256": "1180f97c52e57a133ba4a36aa3e0bd52f63f9e889502d59c3d886c97a6e552a9"
+    },
+    {
+      "path": "tmp\\story123\\20261027T085409659655Z-0057a88f\\inputs\\frontend\\.story123-tests\\tablet-pc-private.spec.ts",
+      "sha256": "d2672d4b4649f7f50214d8100d62a0117d0eacde5b99201c2e18dd47b516481c"
+    },
+    {
+      "path": "tmp\\story123\\20261027T085409659655Z-0057a88f\\inputs\\frontend\\.story123-tests\\tablet-pc.spec.ts",
+      "sha256": "3dc1f209fddbc205045e2f282774050680ab80cf112dc1830d39e26e7879e414"
+    },
+    {
+      "path": "tmp\\story123\\20261027T090138067002Z-964b76d0\\command.log",
+      "sha256": "3c6cc70d9fe488a11c9109ca15a0b1d954265f03d7307fbe31cebef183f67104"
+    },
+    {
+      "path": "tmp\\story123\\20261027T090138067002Z-964b76d0\\integration.py",
+      "sha256": "71d58882e91e00d7fabb54f02caa12a307d3962aaa8efd910f3c00a657451aa6"
+    },
+    {
+      "path": "tmp\\story123\\20261027T090233692258Z-3ce40a03\\command.log",
+      "sha256": "876116aa3bb556e6487c84ef1eb32a63a0ddd5cbf18dbc93ba066ef338b7ac5d"
+    },
+    {
+      "path": "tmp\\story123\\20261027T090233692258Z-3ce40a03\\report.json",
+      "sha256": "5ba2df79de3de0758b964501bb7b5fbd1283409ee830e3dbb2a37a37554f509b"
+    },
+    {
+      "path": "tmp\\story123\\20261027T090233692258Z-3ce40a03\\inputs\\frontend\\playwright.story123.config.ts",
+      "sha256": "62d0038e26b55ce2be13604859e121f48b91dc71e10963e6575a0d7b19c459f6"
+    },
+    {
+      "path": "tmp\\story123\\20261027T090233692258Z-3ce40a03\\inputs\\frontend\\.story123-tests\\fictional-assessment.spec.ts",
+      "sha256": "6faf29e0e282a472284c2d7df29c97c21cf298d3d3d07e7b586566655ea025e3"
+    },
+    {
+      "path": "tmp\\story123\\20261027T090233692258Z-3ce40a03\\inputs\\frontend\\.story123-tests\\fictional-day.spec.ts",
+      "sha256": "3d8209b0fc0bb0cf402f75580fa458916eb005459cbac5eb1f8340fb79595e14"
+    },
+    {
+      "path": "tmp\\story123\\20261027T090233692258Z-3ce40a03\\inputs\\frontend\\.story123-tests\\private-access.spec.ts",
+      "sha256": "20255a880885300d152680e2a8c4de1ec7f22fa2adb82045602f0d09685e31b8"
+    },
+    {
+      "path": "tmp\\story123\\20261027T090233692258Z-3ce40a03\\inputs\\frontend\\.story123-tests\\private-activity-helpers.ts",
+      "sha256": "4cb70c0b6cb816c476d2ab2083b4b6605a9223b472790514313c1e58516496c1"
+    },
+    {
+      "path": "tmp\\story123\\20261027T090233692258Z-3ce40a03\\inputs\\frontend\\.story123-tests\\private-bus.spec.ts",
+      "sha256": "88f465ec2f00c275758c9d7376600815c36ded9b23a828a2211990d3f7c0f0e0"
+    },
+    {
+      "path": "tmp\\story123\\20261027T090233692258Z-3ce40a03\\inputs\\frontend\\.story123-tests\\private-confirmation.spec.ts",
+      "sha256": "16af4c15b8dec1077a82a06879d536350289b5d908765de0b026d7d3e60c96e3"
+    },
+    {
+      "path": "tmp\\story123\\20261027T090233692258Z-3ce40a03\\inputs\\frontend\\.story123-tests\\private-crossday-notices.spec.ts",
+      "sha256": "9be289c4bc01662228e686dc80f7315141a287a8d8201f6e0548e00fbaa4bc84"
+    },
+    {
+      "path": "tmp\\story123\\20261027T090233692258Z-3ce40a03\\inputs\\frontend\\.story123-tests\\private-crossday-review-fixes.spec.ts",
+      "sha256": "cb7af320c3a0f3712f3d2ef129c61aa06727bd5c4071718f7bf7365badf5adfc"
+    },
+    {
+      "path": "tmp\\story123\\20261027T090233692258Z-3ce40a03\\inputs\\frontend\\.story123-tests\\private-day.spec.ts",
+      "sha256": "c5a44e661859a263af976bd053198b1dbbfab8b5796055b9e9116463261ee0c3"
+    },
+    {
+      "path": "tmp\\story123\\20261027T090233692258Z-3ce40a03\\inputs\\frontend\\.story123-tests\\private-drafts.spec.ts",
+      "sha256": "e960d0c2f63305d6538d63c2a719cbc22c68601c7a766f7e7566ef72028fd423"
+    },
+    {
+      "path": "tmp\\story123\\20261027T090233692258Z-3ce40a03\\inputs\\frontend\\.story123-tests\\private-identity.spec.ts",
+      "sha256": "fa715f13ca69510165598a20d4755c0764cca61bd9c1c1e59a383be68f7850bd"
+    },
+    {
+      "path": "tmp\\story123\\20261027T090233692258Z-3ce40a03\\inputs\\frontend\\.story123-tests\\private-import.spec.ts",
+      "sha256": "5254dc67d5927098729256a083dc6adff108b979605fb2b874f8c8622723bd20"
+    },
+    {
+      "path": "tmp\\story123\\20261027T090233692258Z-3ce40a03\\inputs\\frontend\\.story123-tests\\private-notice-reader.spec.ts",
+      "sha256": "4f36b058e9c23dfc9ad9cd7cc7611b654097be68a40e48d9d2e5f7df0c06e125"
+    },
+    {
+      "path": "tmp\\story123\\20261027T090233692258Z-3ce40a03\\inputs\\frontend\\.story123-tests\\private-notice-recovery-integration.spec.ts",
+      "sha256": "6fbbec23ced9e692f8fc0fa865dac72897335e4da03e26da78d8e9703dd281dd"
+    },
+    {
+      "path": "tmp\\story123\\20261027T090233692258Z-3ce40a03\\inputs\\frontend\\.story123-tests\\private-notices.spec.ts",
+      "sha256": "be09f916a870fd80c255b03af0d1f315b2a498a2b7a0c97894f54acea230ef6f"
+    },
+    {
+      "path": "tmp\\story123\\20261027T090233692258Z-3ce40a03\\inputs\\frontend\\.story123-tests\\private-outcomes.spec.ts",
+      "sha256": "1689c8786250a6c29220edfa91ef5a3011f3b756623f45212ff32f7b44d13c8e"
+    },
+    {
+      "path": "tmp\\story123\\20261027T090233692258Z-3ce40a03\\inputs\\frontend\\.story123-tests\\private-owner-feedback.spec.ts",
+      "sha256": "903955db9751815563609210b2306334bcd0bd306cd32c8e9befd15ea66fdb87"
+    },
+    {
+      "path": "tmp\\story123\\20261027T090233692258Z-3ce40a03\\inputs\\frontend\\.story123-tests\\private-owner-import.spec.ts",
+      "sha256": "5573b27e300f8125bce87ab019b0d0779078acae43cb6b5d5226d56c559e9f71"
+    },
+    {
+      "path": "tmp\\story123\\20261027T090233692258Z-3ce40a03\\inputs\\frontend\\.story123-tests\\private-recovery.spec.ts",
+      "sha256": "e2b1dbdd89376790573e4723545f85fc3100e7f1565588925e34c95fdce5ca32"
+    },
+    {
+      "path": "tmp\\story123\\20261027T090233692258Z-3ce40a03\\inputs\\frontend\\.story123-tests\\private-retention.spec.ts",
+      "sha256": "fb3a3540b9e2c6953a9d0edc00d48c3ce8db7c2b2ade6a0d7ad4a2e42c29eca9"
+    },
+    {
+      "path": "tmp\\story123\\20261027T090233692258Z-3ce40a03\\inputs\\frontend\\.story123-tests\\private-screen-helpers.ts",
+      "sha256": "45f7abbea556e47a993e3b131b67b5280057eda7525ef19b8d06bf0334d002ab"
+    },
+    {
+      "path": "tmp\\story123\\20261027T090233692258Z-3ce40a03\\inputs\\frontend\\.story123-tests\\private-selected-activity.spec.ts",
+      "sha256": "99dce3ea0bc9bc4c1e56088103d6f47a566aec2be995fbc129eaf3c691e31990"
+    },
+    {
+      "path": "tmp\\story123\\20261027T090233692258Z-3ce40a03\\inputs\\frontend\\.story123-tests\\private-selection.spec.ts",
+      "sha256": "9f5b72c9ce2afefe9fb62561a8ecb6ff81fa9d769d2a16385405225682b0aeb0"
+    },
+    {
+      "path": "tmp\\story123\\20261027T090233692258Z-3ce40a03\\inputs\\frontend\\.story123-tests\\private-start.spec.ts",
+      "sha256": "b47e9dab44c2d241f6c231fcabfed79cd1928289b404b9216363c9acd8f96383"
+    },
+    {
+      "path": "tmp\\story123\\20261027T090233692258Z-3ce40a03\\inputs\\frontend\\.story123-tests\\tablet-pc-measurements.ts",
+      "sha256": "344619a31bef531ba5021820ec124752d80e135bb3a0fea03f9142bce8f5624f"
+    },
+    {
+      "path": "tmp\\story123\\20261027T090233692258Z-3ce40a03\\inputs\\frontend\\.story123-tests\\tablet-pc-native.ts",
+      "sha256": "1180f97c52e57a133ba4a36aa3e0bd52f63f9e889502d59c3d886c97a6e552a9"
+    },
+    {
+      "path": "tmp\\story123\\20261027T090233692258Z-3ce40a03\\inputs\\frontend\\.story123-tests\\tablet-pc-private.spec.ts",
+      "sha256": "d2672d4b4649f7f50214d8100d62a0117d0eacde5b99201c2e18dd47b516481c"
+    },
+    {
+      "path": "tmp\\story123\\20261027T090233692258Z-3ce40a03\\inputs\\frontend\\.story123-tests\\tablet-pc.spec.ts",
+      "sha256": "3dc1f209fddbc205045e2f282774050680ab80cf112dc1830d39e26e7879e414"
+    },
+    {
+      "path": "tmp\\story123\\20261027T085409659655Z-0057a88f\\inputs\\frontend\\.story123-tests\\fictional-day.spec.ts",
+      "sha256": "0def610f72e57fe2f15aab9fce7c6699fdd7d66261b24a637fa1ee10ea662f32"
+    }
+  ],
+  "limitation": "Earlier exploratory browser input copies were overwritten; only their recorded hashes and available raw log/report bytes are preserved. Exact29/184 inputs are included only where hash matches prove identity."
+}

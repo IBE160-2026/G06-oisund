@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 10-19-2026 14:35
-last_updated: 10-27-2026 08:54
+last_updated: 10-27-2026 11:02
 project: IBE160
 project_key: NOKEY
 tracking_system: file-system
@@ -62,7 +62,7 @@ development_status:
   epic-12: in-progress
   12-1-enforce-the-retained-data-boundary: review # Integrated and technically verified; Jonas manual/physical acceptance pending.
   12-2-repeat-a-fictional-assessment: review # Integrated with 12.1 and technically verified; Jonas manual/physical acceptance pending.
-  12-3-use-the-included-views-on-tablet-and-pc: in-progress
+  12-3-use-the-included-views-on-tablet-and-pc: review # Technical desktop verification; Jonas acceptance pending.
   12-4-verify-the-complete-user-flow: backlog
   12-5-deliver-a-reproducible-submission: backlog
   epic-12-retrospective: optional
@@ -135,7 +135,7 @@ action_items:
       with non-private-only storage and reload/privacy evidence, or obtain explicit
       owner reconciliation."
     owner: "Developer"
-    status: open
+    status: done # Technically verified in 12.3; Jonas story acceptance remains pending.
     ref: "D:/IBE160/_bmad-output/implementation-artifacts/epic-10-retro-2026-10-24.md"
   - id: "epic-10-retro-item-5-record-ipad-verification"
     epic: 10
@@ -175,7 +175,7 @@ action_items:
     action: "A4: Restore notice-maintenance return focus to its actual visible preparation/day
       invoker; cover keyboard return from preparation with and without an open plan."
     owner: "Developer / QA"
-    status: open
+    status: done # Technically verified in 12.3; Jonas story acceptance remains pending.
     ref: "D:\\IBE160\\_bmad-output\\implementation-artifacts\\epic-11-retro-2026-10-26.md"
   - id: "epic-11-retro-item-5-disambiguate-oslo-notice-times"
     epic: 11

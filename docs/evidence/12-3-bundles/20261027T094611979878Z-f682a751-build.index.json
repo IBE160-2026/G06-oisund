@@ -1,0 +1,9 @@
+{
+  "archive": "docs\\evidence\\12-3-bundles\\20261027T094611979878Z-f682a751-build.tar.gz",
+  "archive_sha256": "ed53c23446c1e54bf1342b74bb93b8c025eb7ce91f6b59226ad126d4f618a51b",
+  "entries": {
+    "record.json": "b8c890d13505f5ef2822c4a163398b5ad0ee7e1e66dfb5e80805f88df437a454",
+    "raw/command.log": "154beb6667332d99508185a5f86d5c785d3ca91901437ea52d24eda0d3f17b2d",
+    "executed-inputs/scripts/verify-story123.py": "905c28ad5bf63f68e8a4f99c94ddceb4f7baa54bb8b0ad8e86358481db9ca248"
+  }
+}

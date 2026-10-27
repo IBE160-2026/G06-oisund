@@ -280,3 +280,11 @@ Owner acceptance update, 26 October 2026: Jonas explicitly accepted corrected st
 ## Epic 11 accepted and retrospective completed - 26 October 2026
 
 Jonas accepted integrated 11.6. All six Epic 11 stories and the retrospective are done, with verdict **accepted-with-open-items** and 12 proposed follow-ups. The [continued retrospective](_bmad-output/implementation-artifacts/epic-11-retro-2026-10-26.md) incorporates the earlier chat's preserved preliminary analysis, corrected 11.5, the exact 421-backend/479-browser checkpoint, fresh bounded system observations and limitations. Actual Lenovo/Android/Brave/mobile-network testing remains unperformed; remote access is scheduled between Epic 11 and Epic 12. No commit/push, remote setup or Epic 12 work is performed. Older review/pending statements above remain historical.
+
+## Story 12.3 — tablet/PC views and persistent manual theme
+
+This story is implemented on its separate story branch and awaits Jonas' manual acceptance. The current Day/Night control covers login, the private workspace, the simulation and actual fictional assessment. An explicit choice persists only `ibe160-theme=day|night`; the earlier temporary-editor description above is historical. Application localStorage contains no private work, passwords or simulated records; existing session-cookie authentication remains in use. Reset/logout/reload preserve the presentation preference; blocked storage falls back to an in-memory choice. There is no Auto mode.
+
+Rendered text/control/focus and native checkbox measurements, long Norwegian text, keyboard return and 100%/200% text are qualified separately from physical Lenovo Pad / Android / Brave testing. Actual hardware, OS/browser zoom and owner acceptance remain pending. No overall WCAG claim or complete 12.4 user-flow qualification is made.
+
+Use [12.3 startup and manual checklist](docs/story-12-3-manual-testing.md) and [executed results/limits](docs/evidence/12-3-handoff.md). The dedicated environment is frontend 15323, APIs 18323/18324 and Compose `ibe160-story123-tests`, with separate synthetic data. The integrated 12.1/12.2 environment 15312/18312/18313 remains separate; both stories still await Jonas' manual/physical acceptance. Their historical 477/479 broad result and later successful affected checks are unchanged.
