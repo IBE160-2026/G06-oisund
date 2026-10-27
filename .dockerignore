@@ -1,12 +1,14 @@
 # Allow only build inputs; never send local secrets/data or Git metadata.
 **
 !frontend/
+frontend/**
 !frontend/package.json
 !frontend/package-lock.json
 !frontend/tsconfig.json
 !frontend/src/
 !frontend/src/**
 !deploy/
+deploy/**
 !deploy/tablet/
 !deploy/tablet/**
 **/__pycache__

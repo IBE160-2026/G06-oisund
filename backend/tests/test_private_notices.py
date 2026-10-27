@@ -25,7 +25,8 @@ def content(**values):
 
 
 def send(client, plan, body, notice=None, action=None):
-    return client.post('/notices' + ('/' + notice if notice else '') + ('/' + action if action else ''), headers=headers(client), json=body)
+    from test_account_notices import send as account_send
+    return account_send(client, body, notice, action)
 
 
 def read(client, plan):
@@ -199,7 +200,8 @@ def test_competing_edits_checks_end_have_one_revision_winner(client, users, acti
 def test_final_atomic_authority_rolls_back_notice_and_receipt(client, users, monkeypatch, boundary):
     _, plan = opened(client, users); initial = read(client, plan)
     from app.workday_notice_domain import SaveAccountNotice
-    body = SaveAccountNotice(**command(content=content()))
+    issued = client.post('/notice-operations', headers=headers(client), json={}).json()
+    body = SaveAccountNotice(**{**command(content=content()), 'operation_id': issued['operation_id']})
     request = SimpleNamespace(cookies={auth.SESSION: client.cookies.get(auth.SESSION)})
     class Connection:
         def __init__(self, conn): self.conn = conn
@@ -223,6 +225,8 @@ def test_notice_commands_serialize_with_parent_closure_and_deletion(client, user
     _,plan=opened(client,users)
     n=send(client,plan,command(content=content())).json()['result']; start(client,plan)
     body=command(0 if action=='create' else 1,**({'content':content(title='Racing proposal')} if action in {'create','save'} else {}))
+    if action == 'create':
+        body['operation_id'] = client.post('/notice-operations', headers=headers(client), json={}).json()['operation_id']
     notice_path='/notices'+('' if action=='create' else '/'+n['id'])+('/'+action if action in {'check','end'} else '')
     competing=closing() if other=='close' else {'operation_id':str(uuid4()),'source_revision':1}
     proof,cookies=headers(client),dict(client.cookies)

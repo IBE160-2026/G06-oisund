@@ -1,5 +1,26 @@
 # Integreringskontroll for nettbrettilgang, 2026-10-27
 
+## Oppdatert: godkjent commit/merge og testet kombinasjon
+
+Eier godkjente senere uttrykkelig commit og deretter merge, uten push. Tilgangsarbeidet ble committet som `35c4548`, og sesjonsloggen separat som `252616b`. Main på d5bf85d er nå kombinert i tilgangs-worktree-et før endelig commit/innfletting. Konflikten i PrivateAccess er løst ved at validert VITE_PRIVATE_API_BASE prioriteres for nettbrett, mens nyere mains VITE_PRIVATE_API og eksisterende loopback-default beholdes. PrivateClock/Date-observasjon, fristtimer, nye API-ruter og Date/CORS er beholdt. Ingen storyaksept er gitt av dette.
+
+Det første gatewaybygget avslørte at parent-unntak i root-.dockerignore også slapp inn nye mains demo/Vite-konfigurasjon og lokale node_modules. Allowlisten er rettet ved å ekskludere innhold igjen før de eksplisitte unntakene. Dockerfile kopierer nå bare packagefiler, tsconfig og src eksplisitt, med separat privat index. Det korrigerte bygget er kontrollert uten demo.html og med relativ /private-api. Det første testimaget ble aldri satt i drift; ingen kjørende images/containere er erstattet.
+
+| Ny kontroll av kombinert kandidat | Resultat |
+|---|---|
+| API-build, eget image main-review-d5 | Bestod |
+| HTTPS/cookie/CSRF, nettverksløse testdobler | 14 bestod; kjent Starlette TestClient-deprecation |
+| Ekte API/PostgreSQL i engangs-tmpfs på eget internt nett | 14 migreringer, gjentatt migrering, rollebegrensning, HTTPS-cookies/CSRF/feil origin/eierskap, samme-ID-replay/gjenåpning/utlogging bestod; ikke ekte TLS |
+| Standard frontend TypeScript/Vite-build | Bestod med både tablet-base og alternativ legacy-API konfigurert |
+| Ny isolert headless Edge-regresjon på 127.0.0.1:18481 | 3 bestod: relativ API prioritet og logout/reload, skjerming og bevart forslag ved suspensjon, serverklokkeutløp fra nyere main. Alle API-kall simulert og andre nettmål blokkert. Ingen ordinære API-er/DB-er brukt. |
+| Privat gatewaybuild og innhold | Bestod, egen privat inngang uten demo og med /private-api |
+| Ekte Nginx/proxy med syntetisk upstream/gate | 120 avvisninger med null avviste kall til upstream, gyldig identitet/Origin/CSRF/cookies/no-store/CSP og gate-nede fail-closed bestod |
+| Standalone Compose | Bestod uten oppstart av tjenester |
+
+Browserregresjonens første klokketest slo ut fordi en innledende API-respons allerede utløste forventet skjerming før klikket. Testen ventet deretter på ferdige innledende nettlesinger før klokkeendringen, og alle tre bestod. Produktets klokkevern ble ikke svekket. Ingen full Story 12-regresjon eller ny faktisk nettbrettprøve av kombinasjonen er påstått. Fysisk pilot kjører fortsatt f5-images; mergeresultat starter ikke tunnel/containere eller migrerer data. Naturlig Access-utløpsprøve etter Oslo 16:28 står separat åpen.
+
+Planen nedenfor beskriver den opprinnelige lesekontrollen. Kombinasjons- og testpunktene ovenfor erstatter den tidligere opplysningen om at ingen samlet kandidat var laget.
+
 ## Faktisk base og ny main
 
 Den kjørende fiktive piloten og dette worktree-ets HEAD bygger på godkjent Epic 11: `f5ffa4bf64696b8e1abf910ccd8ac106663d30a9`. Ingen commit er laget i tilgangsarbeidet.

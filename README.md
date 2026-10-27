@@ -20,6 +20,8 @@ The account-switch follow-up binds private editor requests to the displayed acco
 
 ## Run the fictional assessment
 
+For the repeatable, no-login simulation with separate screens and controlled failures, use the [Story 12.2 launch, reset and test guide](docs/fictional-assessment.md). It runs without a backend and stores only fictional state in memory. Story 12.1 notice admission/retry is integrated locally; use the [combined manual test checklist](docs/story-12-manual-testing.md) and [fresh integration evidence](docs/evidence/12-integrated-handoff.md). Both stories await manual/physical testing by Jonas; technical integration is not user acceptance.
+
 Requires Docker Desktop with Linux containers and Compose v2. Start Docker Desktop first. Run these commands from this repository root in PowerShell:
 
 ```powershell

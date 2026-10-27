@@ -10,7 +10,7 @@ async function newNotice(page: any, title = fields.title) {
 }
 async function save(page: any) { if (!await page.getByLabel('Gyldig tildato', { exact: true }).inputValue()) { await page.getByLabel('Gyldig tildato', { exact: true }).fill('2031-01-04'); await expect(page.getByRole('region', { name: 'Lagringskrav' })).not.toContainText('ufullstendig'); } await page.getByRole('button', { name: 'Lagre avvik', exact: true }).click(); await expect(status(page)).toHaveText('Avviket er lagret.'); }
 async function list(context: any, plan: any) { return (await context.request.get(API + '/notices')).json(); }
-async function seed(context: any, plan: any, title = fields.title) { return (await post(context, '/notices', { operation_id: randomUUID(), expected_revision: 0, content: { ...fields, title } })).result; }
+async function seed(context: any, plan: any, title = fields.title) { return (await post(context, '/notices', { operation_id: (await post(context, '/notice-operations', {})).operation_id, expected_revision: 0, content: { ...fields, title } })).result; }
 
 async function textFacts(scope: any, summary: string, description: string, sourceNote: string) {
   await expect(scope.getByText('Kort forklaring: ' + summary, { exact: true })).toBeVisible();
@@ -64,7 +64,7 @@ test('notice feedback names incomplete optional clock beside disabled save and c
 test('historical source clock roundtrip uses authoritative Oslo facts rather than browser historical rules', async ({ page, context }) => {
   const { plan } = await openedPlan(page, context);
   const source = '1894-01-01T12:00+00:43';
-  const n = (await post(context, '/notices', { operation_id: randomUUID(), expected_revision: 0, content: { ...fields, source_updated_at: source, valid_from: source, valid_until: fields.valid_until } })).result;
+  const n = (await post(context, '/notices', { operation_id: (await post(context, '/notice-operations', {})).operation_id, expected_revision: 0, content: { ...fields, source_updated_at: source, valid_from: source, valid_until: fields.valid_until } })).result;
   await open(page); await page.locator('.notice-list summary').click(); await page.getByRole('button', { name: 'Rediger ' + n.title, exact: true }).click();
   await expect(page.getByLabel('Kilden oppdatert: klokkeslett', { exact: true })).toHaveValue('12:00:00');
   await page.route('**:8001/notices/' + n.id, async route => {
@@ -79,7 +79,7 @@ test('historical source clock roundtrip uses authoritative Oslo facts rather tha
 
 test('quoted CSV tags preserve exact API tag boundaries on title-only edit', async ({ page, context }) => {
   const { plan } = await openedPlan(page, context); const tags = ['020', '20,24', 'Route "A"', 'a,"b,c"', 'H'.repeat(300)];
-  const n = (await post(context, '/notices', { operation_id: randomUUID(), expected_revision: 0, content: { ...fields, line_tags: tags } })).result;
+  const n = (await post(context, '/notices', { operation_id: (await post(context, '/notice-operations', {})).operation_id, expected_revision: 0, content: { ...fields, line_tags: tags } })).result;
   await open(page); await page.locator('.notice-list summary').click(); await page.getByRole('button', { name: 'Rediger ' + n.title, exact: true }).click();
   await expect(page.getByLabel('Linjer fra kilden (kommaseparert)', { exact: true })).toHaveValue('020, "20,24", "Route ""A""", "a,""b,c""", ' + 'H'.repeat(300));
   await page.getByLabel('Tittel', { exact: true }).fill('Bare tittel endret'); await save(page); expect((await list(context, plan)).notices[0].line_tags).toEqual(tags);
@@ -417,4 +417,33 @@ test('notice field errors have stable unique associations and clear when correct
   await page.getByLabel('Linjeomfang', { exact: true }).selectOption('all');
   await expect(page.getByLabel('Tittel', { exact: true })).toHaveAttribute('aria-invalid', 'false');
   await expect(page.locator('[id^="notice-"][id$="-error"]')).toHaveCount(0);
+});
+
+
+test('sparse notice pages and consecutive empty scans reach a later retained incident', async ({ page, context }) => {
+  const { plan } = await openedPlan(page, context);
+  const a = await seed(context, plan, 'First retained incident');
+  const b = await seed(context, plan, 'Later retained incident');
+  const id = (n: number) => '00000000-0000-4000-8000-' + n.toString(16).padStart(12, '0');
+  const scanned: string[] = [];
+  const envelope = (notices: any[], next_cursor: string | null) => ({ notices, next_cursor, server_now: new Date().toISOString() });
+  await page.route('**:8001/notices', route => route.fulfill({ json: envelope([{ ...a, id: id(1) }], id(51)) }));
+  await page.route('**:8001/notices?cursor=*', route => {
+    const cursor = new URL(route.request().url()).searchParams.get('cursor')!; scanned.push(cursor);
+    return route.fulfill({ json: cursor === id(51) ? envelope([], id(102)) : cursor === id(102) ? envelope([], id(153)) : envelope([{ ...b, id: id(154) }], null) });
+  });
+  await open(page);
+  await expect(page.locator('.notice-list summary')).toHaveCount(2);
+  await expect(page.locator('.notice-list')).toContainText('Later retained incident');
+  expect(scanned).toEqual([id(51), id(102), id(153)]);
+});
+
+test('nonadvancing notice scan cursor is rejected without presenting partial private rows', async ({ page, context }) => {
+  await openedPlan(page, context);
+  const cursor = '00000000-0000-4000-8000-000000000051';
+  await page.route('**:8001/notices', route => route.fulfill({ json: { notices: [], next_cursor: cursor, server_now: new Date().toISOString() } }));
+  await page.route('**:8001/notices?cursor=*', route => route.fulfill({ json: { notices: [], next_cursor: cursor, server_now: new Date().toISOString() } }));
+  await open(page);
+  await expect(status(page)).toContainText('Avvikslisten er utilgjengelig.');
+  await expect(page.locator('.notice-list summary')).toHaveCount(0);
 });

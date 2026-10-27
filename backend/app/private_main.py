@@ -56,7 +56,7 @@ async def lifespan(app):
 
 app = FastAPI(title='Privat arbeidsrom', lifespan=lifespan, docs_url=None, redoc_url=None, openapi_url=None)
 app.add_middleware(CORSMiddleware, allow_origins=[auth.configuration()], allow_credentials=True,
-                   allow_methods=['GET', 'POST'], allow_headers=['Content-Type', 'X-CSRF-Token'])
+                   allow_methods=['GET', 'POST'], allow_headers=['Content-Type', 'X-CSRF-Token'], expose_headers=['Date'])
 
 
 @app.middleware('http')
@@ -336,6 +336,15 @@ def account_notices(request: Request, cursor: UUID | None = None):
 @app.get('/notices/{notice_id}', response_model=NoticeRecord)
 def account_notice(notice_id: UUID, request: Request):
     return workday_notice_storage.read(request, notice_id=notice_id)
+
+
+class NoticeAdmission(BaseModel):
+    model_config = ConfigDict(extra='forbid', strict=True)
+
+
+@app.post('/notice-operations', response_model=IssuedOperation)
+def issue_notice_operation(body: NoticeAdmission, request: Request):
+    return workday_notice_storage.issue(request)
 
 
 @app.post('/notices', response_model=NoticeReceipt)

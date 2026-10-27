@@ -2,7 +2,8 @@ FROM node:24.19.0-alpine@sha256:d32cdf619f63fe0471182d08996dd516c6275bb5fd31ae06
 WORKDIR /app
 COPY frontend/package*.json ./
 RUN npm ci
-COPY frontend/ ./
+COPY frontend/tsconfig.json ./tsconfig.json
+COPY frontend/src/ ./src/
 COPY deploy/tablet/index.html ./index.html
 ENV VITE_PRIVATE_API_BASE=/private-api
 RUN npm run build

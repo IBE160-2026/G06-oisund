@@ -38,8 +38,8 @@ def instant(value):
     return (datetime.fromisoformat(value) if isinstance(value, str) else value).astimezone(timezone.utc)
 
 
-def project(plan, rows, line=None, calendar_date=None):
-    projected_at = datetime.now(timezone.utc)
+def project(plan, rows, line=None, calendar_date=None, *, projected_at=None):
+    projected_at = projected_at if projected_at is not None else datetime.now(timezone.utc)
     activities = plan['content']['activities']
     lines = sorted({a['line'].strip() for a in activities if (a.get('line') or '').strip()})
     unknown = sum(not (a.get('line') or '').strip() for a in activities)

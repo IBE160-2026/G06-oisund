@@ -65,7 +65,7 @@ test('unaccepted create past its ending is never dispatched again and proposal c
 test('lost accepted source check resolves after automatic ending without reopening writes', async ({ page, context }) => {
   test.setTimeout(45000); await openedPlan(page, context);
   const ending = relativeInstants(8)[0];
-  const notice = (await post(context, '/notices', { operation_id: randomUUID(), expected_revision: 0, content: content({ valid_until: ending }) })).result;
+  const notice = (await post(context, '/notices', { operation_id: (await post(context, '/notice-operations', {})).operation_id, expected_revision: 0, content: content({ valid_until: ending }) })).result;
   await open(page); await page.locator('.notice-list summary').click(); let writes = 0;
   await page.route('**:8001/notices/' + notice.id + '/check', async route => { writes++; await route.fetch(); await route.abort(); });
   await page.getByRole('button', { name: 'Kontrollerte kilden nå', exact: true }).click(); await expect(retry(page)).toBeEnabled();
@@ -81,7 +81,7 @@ test('lost accepted source check resolves after automatic ending without reopeni
 for (const surface of ['reader', 'maintenance']) test(`held ${surface} response cannot restart already elapsed notice validity`, async ({ page, context }) => {
   test.setTimeout(45000); await openedPlan(page, context, true, -60);
   const ending = relativeInstants(5)[0];
-  await post(context, '/notices', { operation_id: randomUUID(), expected_revision: 0, content: content({ valid_until: ending }) });
+  await post(context, '/notices', { operation_id: (await post(context, '/notice-operations', {})).operation_id, expected_revision: 0, content: content({ valid_until: ending }) });
   const path = surface === 'reader' ? '**:8001/workdays/*/notice-reader' : '**:8001/notices';
   let release!: () => void, received!: () => void;
   const gate = new Promise<void>(resolve => release = resolve), entered = new Promise<void>(resolve => received = resolve);

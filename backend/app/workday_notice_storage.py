@@ -1,6 +1,6 @@
 """Account-serialized incidents and immutable receipts independent of plans."""
 from datetime import datetime, timedelta, timezone
-from uuid import uuid5, NAMESPACE_URL
+from uuid import uuid4, uuid5, NAMESPACE_URL
 from fastapi import HTTPException
 from psycopg.types.json import Jsonb
 from . import auth, draft_storage, workday_storage
@@ -21,21 +21,46 @@ def member(conn, owner, notice_id):
     return row
 
 
+def issue(request):
+    with database() as conn:
+        owner = draft_storage.authorized(conn, request)
+        count = conn.execute('SELECT count(*) AS n FROM notice_creation_admissions WHERE owner=%s AND expires_at>clock_timestamp()', (owner,)).fetchone()['n']
+        if count >= 200:
+            raise HTTPException(429, 'For mange uavklarte lagringer.')
+        row = conn.execute("INSERT INTO notice_creation_admissions(id,owner,expires_at) VALUES(%s,%s,clock_timestamp()+interval '7 days') RETURNING id,expires_at", (uuid4(), owner)).fetchone()
+        auth.session(conn, request)
+        return {'operation_id': row['id'], 'expires_at': row['expires_at']}
+
+
+def admission(conn, owner, identifier):
+    row = conn.execute('SELECT expires_at FROM notice_creation_admissions WHERE id=%s AND owner=%s FOR UPDATE', (identifier, owner)).fetchone()
+    if not row:
+        draft_storage.deny()
+    if not conn.execute('SELECT %s>clock_timestamp() AS live', (row['expires_at'],)).fetchone()['live']:
+        raise HTTPException(410, 'Lagringsforsøket er utløpt.')
+    return row
+
+
 def read(request, identifier=None, notice_id=None, cursor=None):
     with database() as conn:
         owner = draft_storage.authorized(conn, request)
         if identifier:
             workday_storage.owned(conn, owner, identifier, request)
         if notice_id:
-            result = record(member(conn, owner, notice_id))
-        else:
-            listed_at = conn.execute('SELECT clock_timestamp() AS now').fetchone()['now']
-            rows = conn.execute('SELECT * FROM workday_notices WHERE owner=%s AND expires_at>%s AND (%s::uuid IS NULL OR id>%s) ORDER BY id LIMIT 51', (owner, listed_at, cursor, cursor)).fetchall()
-            result = {'server_now': listed_at, 'notices': [record(row) for row in rows[:50]], 'next_cursor': rows[49]['id'] if len(rows)>50 else None}
+            member(conn, owner, notice_id)
+            auth.session(conn, request)
             if identifier:
-                plan = workday_storage.owned(conn, owner, identifier, request)
-                result = {k: v for k, v in result.items() if k != 'server_now'} | {'workday_id': identifier, 'expires_at': plan['expires_at']}
+                workday_storage.owned(conn, owner, identifier, request)
+            return record(member(conn, owner, notice_id))
+        rows = conn.execute('SELECT * FROM workday_notices WHERE owner=%s AND expires_at>clock_timestamp() AND (%s::uuid IS NULL OR id>%s) ORDER BY id LIMIT 51', (owner, cursor, cursor)).fetchall()
         auth.session(conn, request)
+        plan = workday_storage.owned(conn, owner, identifier, request) if identifier else None
+        listed_at = conn.execute('SELECT clock_timestamp() AS now').fetchone()['now']
+        scanned_cursor = rows[-1]['id'] if len(rows) > 50 else None
+        rows = [row for row in rows if row['expires_at'] > listed_at]
+        result = {'server_now': listed_at, 'notices': [record(row) for row in rows[:50]], 'next_cursor': rows[49]['id'] if len(rows)>50 else scanned_cursor}
+        if plan:
+            result = {k: v for k, v in result.items() if k != 'server_now'} | {'workday_id': identifier, 'expires_at': plan['expires_at']}
         return result
 
 
@@ -73,10 +98,11 @@ def reader(request, identifier, line=None, calendar_date=None):
         # Migration preserves incidents formerly bounded per workday. Aggregate
         # discovery must include every retained row, even above the new-create cap.
         rows = conn.execute('SELECT * FROM workday_notices WHERE owner=%s AND expires_at>clock_timestamp() ORDER BY id', (owner,)).fetchall()
-        result = project(plan, rows, line, calendar_date)
         auth.session(conn, request)
-        workday_storage.owned(conn, owner, identifier, request)
-        return result
+        plan = workday_storage.owned(conn, owner, identifier, request)
+        projected_at = conn.execute('SELECT clock_timestamp() AS now').fetchone()['now']
+        rows = [row for row in rows if row['expires_at'] > projected_at]
+        return project(plan, rows, line, calendar_date, projected_at=projected_at)
 
 
 def save(request, identifier, body, notice_id=None, action='save'):
@@ -100,6 +126,9 @@ def save(request, identifier, body, notice_id=None, action='save'):
             raise HTTPException(409, 'Avvik er nå kontofelles. Hent registeret og gjennomgå forslaget på nytt.')
         if conn.execute('SELECT 1 FROM account_notice_operations WHERE id=%s UNION ALL SELECT 1 FROM workday_notice_operations WHERE id=%s', (body.operation_id, body.operation_id)).fetchone():
             return operation(conn, owner, body.operation_id, request, digest)
+        creating = notice_id is None
+        if creating:
+            admission(conn, owner, body.operation_id)
         row = member(conn, owner, notice_id) if notice_id else None
         now = conn.execute('SELECT clock_timestamp() AS now').fetchone()['now']
         if row and (row['status'] != 'registered' or row['valid_until'] is not None and row['valid_until'] <= now):
@@ -140,4 +169,13 @@ def save(request, identifier, body, notice_id=None, action='save'):
         member(conn, owner, notice_id)
         if row and not conn.execute('SELECT %s>clock_timestamp() AS live', (row['valid_until'] or row['expires_at'],)).fetchone()['live']:
             raise HTTPException(409, 'Avviket er utløpt og er skrivebeskyttet.')
+        if creating:
+            if not conn.execute('SELECT %s>clock_timestamp() AS live', (body.content.valid_until,)).fetchone()['live']:
+                raise HTTPException(422, 'Oppgi en fremtidig sluttdato for avviket.')
+            admission(conn, owner, body.operation_id)
+            consumed = conn.execute('DELETE FROM notice_creation_admissions WHERE id=%s AND owner=%s AND expires_at>clock_timestamp() AND %s::timestamptz>clock_timestamp() RETURNING id', (body.operation_id, owner, body.content.valid_until)).fetchone()
+            if not consumed:
+                if not conn.execute('SELECT %s>clock_timestamp() AS live', (body.content.valid_until,)).fetchone()['live']:
+                    raise HTTPException(422, 'Oppgi en fremtidig sluttdato for avviket.')
+                raise HTTPException(410, 'Lagringsforsøket er utløpt.')
         return {'operation_id': body.operation_id, 'result': result}

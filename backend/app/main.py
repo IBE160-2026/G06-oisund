@@ -1,4 +1,5 @@
 import asyncio
+import os
 from contextlib import asynccontextmanager, suppress
 from datetime import datetime
 from uuid import UUID, uuid4
@@ -44,13 +45,14 @@ class Empty(StrictModel):
 
 
 app = FastAPI(title='Fiktive demodata', lifespan=lifespan)
-app.add_middleware(CORSMiddleware, allow_origins=['http://127.0.0.1:5173'],
+ORIGIN = os.environ.get('FICTIONAL_ORIGIN', 'http://127.0.0.1:5173')
+app.add_middleware(CORSMiddleware, allow_origins=[ORIGIN],
                    allow_methods=['GET', 'POST'], allow_headers=['Content-Type'])
 
 
 @app.middleware('http')
 async def boundary(request: Request, call_next):
-    if request.method == 'POST' and request.headers.get('origin') not in {None, 'http://127.0.0.1:5173'}:
+    if request.method == 'POST' and request.headers.get('origin') not in {None, ORIGIN}:
         return JSONResponse({'detail': 'Origin denied'}, status_code=403, headers={'Cache-Control': 'no-store'})
     try:
         response = await call_next(request)

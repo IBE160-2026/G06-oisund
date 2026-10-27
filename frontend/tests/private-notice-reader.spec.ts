@@ -43,7 +43,7 @@ async function measure(page: any) {
 
 const region = (page: any) => page.getByRole('region', { name: 'Avvik for linjer og datoer', exact: true });
 async function open(page: any) { await page.getByRole('button', { name: 'Les avvik for linjer og datoer', exact: true }).click(); await expect(region(page).getByRole('status')).toHaveText('Lagrede avvik er hentet.'); }
-async function seed(context: any, plan: any, title: string, extra = {}) { return (await post(context, '/notices', { operation_id: randomUUID(), expected_revision: 0, content: { title, line_tags: ['20', '24'], source_url: null, source_updated_at: null, valid_from: null, valid_until: '2031-01-04T23:59:59+01:00', ...extra } })).result; }
+async function seed(context: any, plan: any, title: string, extra = {}) { return (await post(context, '/notices', { operation_id: (await post(context, '/notice-operations', {})).operation_id, expected_revision: 0, content: { title, line_tags: ['20', '24'], source_url: null, source_updated_at: null, valid_from: null, valid_until: '2031-01-04T23:59:59+01:00', ...extra } })).result; }
 async function snapshot(context: any, plan: any) { return Promise.all(['', '/notices', '/selection', '/lifecycle', '/recap'].map(async suffix => (await context.request.get(API + '/workdays/' + plan.id + suffix)).json())); }
 
 test('shared and independent candidates filter exact lines and calendar gaps without changing saved state', async ({ page, context }) => {

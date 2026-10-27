@@ -2,7 +2,7 @@ import { test, expect, openedPlan, post, API, setup, python, randomUUID, beforeU
 setup();
 const status = (page: any) => page.getByRole('status', { name: 'Avviksstatus', exact: true });
 const noticeContent = (extra = {}) => ({ title: 'Review incident', line_tags: ['20'], valid_until: '2031-01-04T23:59:59+01:00', ...extra });
-async function seed(context: any, extra = {}) { return (await post(context, '/notices', { operation_id: randomUUID(), expected_revision: 0, content: noticeContent(extra) })).result; }
+async function seed(context: any, extra = {}) { return (await post(context, '/notices', { operation_id: (await post(context, '/notice-operations', {})).operation_id, expected_revision: 0, content: noticeContent(extra) })).result; }
 async function open(page: any) { await page.getByRole('button', { name: 'Manuelt vedlikeholdte avvik', exact: true }).click(); await expect(status(page)).toHaveText('Lagrede avvik er hentet.'); }
 async function edit(page: any, notice: any, title = 'Retained local proposal') {
   await open(page); await page.locator('.notice-list summary').click();
