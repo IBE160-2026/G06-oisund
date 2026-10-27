@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { validContent, type Content } from './PrivateDrafts';
+import { pdfUploadError } from './pdfUpload';
 
 type Fact = string | number | null;
 export type ImportMetadata = {
@@ -95,16 +96,19 @@ export function PrivateImport({ upload, adopt, expired, suspended, locked, stage
     try {
       const value = await upload(file, abort.signal);
       if (current !== epoch.current) return;
-      if (!validContent(value) || !value.import_metadata || value.physical_bus !== null) throw Error();
+      if (!validContent(value) || !value.import_metadata || value.physical_bus !== null) throw Object.assign(Error(), { importFailure: 'response' });
       setReview(value); reviewReady(); setMessage('Gjennomgangen er klar. Kontroller kildefakta før du bruker dem i et separat utkast.'); heading.current?.focus();
     } catch (error: any) {
       if (current !== epoch.current) return;
       if (error?.status === 401) { expired(); return; }
-      setMessage(error?.status === 429 ? 'Import er opptatt. Prøv igjen eller opprett manuelt utkast.' : 'PDF-en kunne ikke tolkes. Den kan være skannet, skadet, kryptert eller utenfor grensene (10 MiB, 20 sider, 30 sekunder). Prøv en kvalifisert tekst-PDF eller opprett manuelt utkast.');
+      setMessage(pdfUploadError(error));
     } finally { if (current === epoch.current) { setBusy(false); controller.current = null; } }
   }
   return <section aria-label="Importer tekst-PDF"><h3 ref={heading} tabIndex={-1}>Gjennomgå en tekst-PDF</h3><p aria-live="polite">{message}</p>
-    <label hidden={stage !== 'upload'}>Velg tekst-PDF<input type="file" accept=".pdf,application/pdf" disabled={busy || suspended || locked} onChange={event => { const file = event.target.files?.[0]; event.target.value = ''; void select(file); }} /></label>
+    <label hidden={stage !== 'upload'}>Velg tekst-PDF<input type="file" accept=".pdf,application/pdf" disabled={busy || suspended || locked} onChange={event => {
+      const input = event.currentTarget, file = input.files?.[0];
+      void select(file).finally(() => { if (input.files?.[0] === file) input.value = ''; });
+    }} /></label>
     {stage === 'upload' && review && <button onClick={reviewReady}>Fortsett importgjennomgang</button>}
     {(busy || review) && <button onClick={() => { cancel(); backToUpload(); }}>{busy ? 'Avbryt import' : 'Forkast gjennomgang'}</button>}
     {stage === 'review' && review?.import_metadata && <><SourceFacts metadata={review.import_metadata} /><button disabled={suspended || locked} onClick={() => { if (adopt(review)) cancel('Tolkningen er overført til et separat, ulagret utkast.'); }}>Bruk som separat nytt utkast</button></>}

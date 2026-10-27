@@ -61,6 +61,7 @@ Thumbs.db
 *.swo
 *~
 .private-runtime/
+.codex-attachments/
 tmp/
 frontend/.story123-tests/
 

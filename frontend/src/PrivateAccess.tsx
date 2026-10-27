@@ -2,6 +2,7 @@ import { ThemeControl } from './theme';
 import { privateNow, observePrivateTime } from './privateClock';
 import { useEffect, useRef, useState } from 'react';
 import { PrivateDrafts } from './PrivateDrafts';
+import { readPdfBytes, waitForPdfAccess } from './pdfUpload';
 
 const apiEnvironment = (import.meta as ImportMeta & { env: Record<string, string | undefined> }).env;
 const configuredApi = apiEnvironment.VITE_PRIVATE_API_BASE;
@@ -41,6 +42,7 @@ export function PrivateAccess() {
   const draftDirty = useRef(false);
   const activeSession = useRef<Session | null>(null);
   const accessSuspended = useRef(false);
+  const restoring = useRef<Promise<void> | null>(null);
 
   function suspend(value: boolean) { accessSuspended.current = value; setSuspended(value); }
   function acceptSession(value: Session) { activeSession.current = value; setSession(previous => sameSession(previous, value) ? previous : value); }
@@ -117,15 +119,26 @@ export function PrivateAccess() {
       const error = new Error(response.status === 401 ? 'Logg inn på nytt. Brukernavn eller passord kan være feil.' : response.status === 429 ? 'For mange forsøk. Vent 15 minutter før du prøver igjen.' : 'Tjenesten er utilgjengelig eller avviste forespørselen.');
       throw Object.assign(error, { status: response.status, apiDetail });
     }
-    return response.json();
+    try { return await response.json(); }
+    catch (error) {
+      if (error instanceof SyntaxError) throw Object.assign(Error('Serveren returnerte et ugyldig svar.'), { importFailure: 'response' });
+      throw error;
+    }
   }
   async function upload(file: File, signal: AbortSignal) {
     if (!session) throw Error();
+    const bytes = await readPdfBytes(file, signal);
+    // Android's native picker can return its change event before the visible
+    // page's session check finishes. Wait for that check, then let workspace
+    // enforce the original account/session and cancellation as usual.
+    await waitForPdfAccess(
+      () => !accessSuspended.current && !restoring.current && document.visibilityState === 'visible',
+      () => sameSession(activeSession.current, session) && !pending(), signal);
     return workspace(session, async check => {
       const proof = await request('/auth/csrf', { signal: AbortSignal.any([signal, AbortSignal.timeout(10000)]) });
       check();
       if (typeof proof.csrf_token !== 'string') throw Error();
-      return request('/imports/pdf', { method: 'POST', headers: { 'Content-Type': 'application/pdf', 'X-CSRF-Token': proof.csrf_token }, body: file, signal: AbortSignal.any([signal, AbortSignal.timeout(45000)]) });
+      return request('/imports/pdf', { method: 'POST', headers: { 'Content-Type': 'application/pdf', 'X-CSRF-Token': proof.csrf_token }, body: bytes, signal: AbortSignal.any([signal, AbortSignal.timeout(45000)]) });
     }, signal);
   }
   async function mutation(path: string, body?: object, expected?: Session) {
@@ -162,7 +175,13 @@ export function PrivateAccess() {
       if (current === generation.current) setMessage('Utlogging er ikke bekreftet. Privat innhold er låst. Prøv utlogging igjen når tjenesten er tilgjengelig.');
     } finally { if (current === generation.current) setBusy(false); }
   }
-  async function restore() {
+  function restore() {
+    const attempt = restoreSession();
+    restoring.current = attempt;
+    void attempt.finally(() => { if (restoring.current === attempt) restoring.current = null; });
+    return attempt;
+  }
+  async function restoreSession() {
     if (pending()) { await logout(); return; }
     const current = ++generation.current;
     setBusy(true);
