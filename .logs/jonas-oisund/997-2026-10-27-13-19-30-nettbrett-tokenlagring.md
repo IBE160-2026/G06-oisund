@@ -67,3 +67,22 @@ Eier bekreftet fortsatt tom DNS-liste og rapporterte deretter False for klientfi
 Eier bekreftet vellykket portabel klientlagring med hash/signatur OK. Lokal Compose-isolasjon og 18 live HTTP-nektprøver bestod på nytt, inkludert no-store, feil Host og intern auth-rute. Ingen offentlig trafikk, dataendring eller tunnelstart. Neste mulige steg er særskilt godkjenning av en foreground-connector uten opprettelse av DNS/ruter for å lese faktisk tunnelkonfigurasjon; eventuell publisering krever egen etterfølgende godkjenning. Eksterne/fysiske prøver står fortsatt åpne i issues.md. Ingen commit/merge/push.
 
 Eier godkjente deretter eksplisitt midlertidig manuell tunnelstart uten DNS/endringer/nye ruter/installasjon/autostart og utførte kommandoen i egen PowerShell. Skjermbilde viste én aktiv replica, null ruter og PASS på prechecks, men Inactive-status; fullført HTTP-trafikk/healthy-status er ikke bevist. Eier bekreftet tom liste i tunnelens egen Routes-fane og stoppet med Ctrl+C til ledeteksten var tilbake. Agentens etterkontroll: null cloudflared-prosesser og null metrics-lyttere på 18083. Dette avslutter det avgrensede trinnet. Publisering og ny start er fortsatt separate beslutninger. Videre skjema kan klargjøres uten lagring før godkjenning; eksterne/fysiske tester i issues.md gjenstår. Ingen commit/merge/push.
+
+## 2026-10-27 kl. 16:03 — Jonas Øisund
+
+### Oppgave
+Eier godkjente commit og deretter merge mens naturlig Access-utløpsprøve avventes. Ingen push eller deploy er autorisert av denne instruksen.
+
+### Plan
+Bevare lokal dokumentasjon og kjørende tjenester; kombinere nyere main i tilgangs-worktree-et, løse konflikt, kjøre relevante isolerte kontroller og deretter fast-forwarde main.
+
+### Resultat
+Tilgangscommit 35c4548 og separat første loggcommit 252616b. Main-kombinasjon og konfliktløsning er committet som ca1d6470fcab636fe9c754f02d78990e418f0cca, og main er fast-forwardet til den. Tilgangens relative API prioriteres, nyere main sin API-konfigurasjon og privateClock/Date beholdes. Fikset Docker-allowlist og eksplisitt frontendkopiering etter at første testbuild feilaktig tok med demo; dette imaget ble aldri satt i drift. Endelig privat build er uten demo.html og bruker /private-api.
+
+14 nettverksløse transporttester, 14 ekte migreringer/gjentatt migrering i engangs-tmpfs-DB med auth/CSRF/origin/eierskap/replay/logout, 120 proxynektprøver med null avviste kall til upstream og gate-nede fail-closed bestod. Tre nye isolerte Edge-regresjoner bestod: API-prioritet og logout/reload, suspensjon/inndatabevaring, og serverklokkeutløp. Første klokketest hadde testtiming-race og viste allerede forventet utløp før klikket; testen venter nå på ferdige innledende lesinger. Ingen produktvern ble svekket. Standard frontend og privat gateway bygde. Full Story 12-regresjon eller ny fysisk prøve av kombinasjonen er ikke påstått.
+
+De to opprinnelige lokale dokumentene i D:\IBE160 er bevart byte for byte og fortsatt henholdsvis endret og utracket. Hovedindex var tom etter merge. Alle 23 baseline-containere har uendret ID, StartedAt, restartteller og image. Ingen engangstestcontainere eller preview-lytter 18481 gjenstår. Bare nye egne test-images er bygd. Ingen ordinære/pilotcontainere er stoppet, ombygd eller startet av Git-arbeidet. Tunnelen/utløpsprøven er urørt. Ingen push, DNS-, brannmur- eller tjenesteendring og ingen story-/retroaksept. Dokumentert detaljert i docs/tablet-main-review.md. Sluttdokumentasjon er committet separat som 5cccfc9.
+
+### Åpne punkter
+- Naturlig cookie-/Access-utløpsprøve etter Oslo 16:28 og separat faktisk signert utløpt token er ikke eksternt verifisert.
+- Den fysiske piloten bruker fortsatt f5-images. Eventuell deploy av den kombinerte versjonen og ny fysisk kvalifikasjon er separat arbeid. Dette er presisert i eksisterende tilgangspunkt i issues.md.
