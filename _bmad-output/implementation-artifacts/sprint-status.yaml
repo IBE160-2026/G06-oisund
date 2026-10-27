@@ -62,7 +62,7 @@ development_status:
   epic-12: in-progress
   12-1-enforce-the-retained-data-boundary: review # Integrated and technically verified; Jonas manual/physical acceptance pending.
   12-2-repeat-a-fictional-assessment: review # Integrated with 12.1 and technically verified; Jonas manual/physical acceptance pending.
-  12-3-use-the-included-views-on-tablet-and-pc: backlog
+  12-3-use-the-included-views-on-tablet-and-pc: in-progress
   12-4-verify-the-complete-user-flow: backlog
   12-5-deliver-a-reproducible-submission: backlog
   epic-12-retrospective: optional
