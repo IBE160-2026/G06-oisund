@@ -119,6 +119,10 @@ def execute(command, cwd=ROOT, env=None, inputs=(), timeout=3600):
         shutil.copyfile(source, target)
         snapshots[relative.as_posix()] = hashlib.sha256(target.read_bytes()).hexdigest()
     record = {'mode': MODE, 'project': PROJECT, 'revision': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(), 'command': command, 'started': datetime.now(timezone.utc).isoformat(), 'source_sha256_before': before, 'executed_input_sha256': actual, 'timeout_seconds': timeout, 'tested_story': '12.3', 'owner_acceptance': 'pending', 'dependency_acceptance': {'12.1': 'accepted', '12.2': 'accepted'}}
+    if MODE in ('build', 'tablet-build', 'browser', 'tablet-browser'):
+        record['effective_api_settings'] = effective_api_settings(env if MODE in ('build', 'tablet-build') else build_environment(MODE == 'tablet-browser'))
+    if MODE == 'tablet-browser':
+        record['tablet_preview_origin'] = 'http://127.0.0.1:' + env['STORY123_TABLET_PORT']
     record['executed_input_snapshots'] = snapshots
     record['durable_bundle'] = str(archive_path.relative_to(ROOT))
     log = RUN/'command.log'
@@ -143,11 +147,12 @@ def execute(command, cwd=ROOT, env=None, inputs=(), timeout=3600):
     identity_path = ROOT/('.private-runtime/story123-tablet-build.json' if MODE.startswith('tablet-') else '.private-runtime/story123-build.json')
     if MODE in ('build', 'tablet-build') and record['exit_code'] == 0 and before == after:
         identity_path.parent.mkdir(exist_ok=True)
-        identity_path.write_text(json.dumps({'source': build_source, 'built': built}), encoding='utf-8')
+        identity_path.write_text(json.dumps(build_identity(build_source, built, record['effective_api_settings'])), encoding='utf-8')
     record['build_sha256'] = built
     if MODE in ('browser', 'tablet-browser'):
         identity = json.loads(identity_path.read_text(encoding='utf-8')) if identity_path.exists() else {}
-        record['tested_build_matches_current_source'] = identity == {'source': build_source, 'built': built}
+        record['tested_build_matches_current_source'] = identity == build_identity(build_source, built, record['effective_api_settings'])
+        record['tested_build_matches_expected_api_settings'] = identity.get('effective_api_settings') == record['effective_api_settings']
     record.update(ended=datetime.now(timezone.utc).isoformat(), source_sha256_after=after, source_unchanged=before == after, executed_inputs_unchanged=actual == hashes(), log=str(log.relative_to(ROOT)), log_sha256=hashlib.sha256(log.read_bytes()).hexdigest())
     if MODE in ('browser', 'tablet-browser') and (RUN/'report.json').exists():
         report = json.loads((RUN/'report.json').read_text(encoding='utf-8'))
@@ -238,8 +243,16 @@ def browser(tablet=False):
         path.write_text(source, encoding='utf-8')
     config_name = 'playwright.story123-tablet.config.ts' if tablet else 'playwright.story123.config.ts'
     config = ROOT/'frontend'/config_name
-    args = sys.argv[2:] or (['tablet-transport.spec.ts'] if tablet else ['tablet-pc.spec.ts', 'tablet-pc-private.spec.ts'])
-    env = dict(os.environ, COMPOSE_PROJECT_NAME=PROJECT, STORY123_OUTPUT_DIR=str(RUN/'results'), STORY123_REPORT=str(RUN/'report.json'))
+    args = sys.argv[2:]
+    port = '18483'
+    if tablet and '--port' in args:
+        offset = args.index('--port')
+        if offset + 1 >= len(args) or args[offset + 1] not in ('18481', '18483'):
+            raise SystemExit('Tablet preview port must be 18481 or 18483')
+        port = args[offset + 1]
+        args = args[:offset] + args[offset + 2:]
+    args = args or (['tablet-transport.spec.ts'] if tablet else ['tablet-pc.spec.ts', 'tablet-pc-private.spec.ts'])
+    env = dict(os.environ, COMPOSE_PROJECT_NAME=PROJECT, STORY123_OUTPUT_DIR=str(RUN/'results'), STORY123_REPORT=str(RUN/'report.json'), STORY123_TABLET_PORT=port)
     execute([shutil.which('npx.cmd') or shutil.which('npx'), 'playwright', 'test', '--config='+config_name, *args], ROOT/'frontend', env, [config, *target.glob('*.ts')])
 
 
@@ -266,6 +279,21 @@ def build_environment(tablet=False):
     return env
 
 
+def effective_api_settings(env):
+    # These are the only build settings recorded. Never serialize the process
+    # environment, credentials, connection strings or unrelated Vite variables.
+    return {key: env.get(key) for key in ('VITE_PRIVATE_API_BASE', 'VITE_PRIVATE_API', 'VITE_FICTIONAL_API')}
+
+
+def build_identity(source, built, settings):
+    return {'source': source, 'built': built, 'effective_api_settings': settings}
+
+
+def build_command(tablet=False):
+    command = [shutil.which('npm.cmd') or shutil.which('npm'), 'run', 'build']
+    return command + ['--', '--config', 'vite.story123-tablet.config.ts'] if tablet else command
+
+
 def backend_transport():
     # A disposable container in our own project; test module mocks DB access and
     # never starts application lifespan, migrates, seeds or calls a real account.
@@ -275,9 +303,9 @@ def backend_transport():
 
 if __name__ == '__main__':
     if MODE in ('up', 'verify', 'prepare'): integration()
-    elif MODE == 'build': execute([shutil.which('npm.cmd') or shutil.which('npm'), 'run', 'build'], ROOT/'frontend', build_environment())
-    elif MODE == 'tablet-build': execute([shutil.which('npx.cmd') or shutil.which('npx'), 'vite', 'build', '--config', 'vite.story123-tablet.config.ts'], ROOT/'frontend', build_environment(True), [ROOT/'frontend/vite.story123-tablet.config.ts', ROOT/'deploy/tablet/index.html'])
+    elif MODE == 'build': execute(build_command(), ROOT/'frontend', build_environment())
+    elif MODE == 'tablet-build': execute(build_command(True), ROOT/'frontend', build_environment(True), [ROOT/'frontend/vite.story123-tablet.config.ts', ROOT/'deploy/tablet/index.html'])
     elif MODE in ('browser', 'tablet-browser'): browser(MODE == 'tablet-browser')
     elif MODE == 'backend-transport': backend_transport()
     elif MODE in ('serve', 'stop-preview'): preview()
-    else: raise SystemExit('Use up|verify|prepare|build|tablet-build|browser [specs/filters]|tablet-browser|backend-transport|serve|stop-preview')
+    else: raise SystemExit('Use up|verify|prepare|build|tablet-build|browser [specs/filters]|tablet-browser [--port 18481|18483]|backend-transport|serve|stop-preview')

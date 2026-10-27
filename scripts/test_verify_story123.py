@@ -30,6 +30,20 @@ class BuildEnvironmentTests(unittest.TestCase):
         self.assertEqual(env['VITE_PRIVATE_API_BASE'], '/private-api')
         self.assertEqual(env['VITE_PRIVATE_API'], 'https://legacy.invalid/forbidden')
 
+    def test_identity_records_only_allowlisted_api_settings_and_rejects_wrong_mode(self):
+        env = dict(runner.build_environment(), PASSWORD='never-record', VITE_OTHER_SECRET='never-record')
+        settings = runner.effective_api_settings(env)
+        self.assertEqual(set(settings), {'VITE_PRIVATE_API_BASE', 'VITE_PRIVATE_API', 'VITE_FICTIONAL_API'})
+        normal = runner.build_identity({'source': 'hash'}, {'asset': 'hash'}, settings)
+        tablet = runner.build_identity({'source': 'hash'}, {'asset': 'hash'}, runner.effective_api_settings(runner.build_environment(True)))
+        self.assertNotEqual(normal, tablet)
+        self.assertNotIn('never-record', json.dumps(normal))
+        self.assertNotEqual({'source': normal['source'], 'built': normal['built']}, normal)
+
+    def test_tablet_build_uses_checked_npm_script_with_dedicated_config(self):
+        self.assertEqual(runner.build_command(True)[1:], ['run', 'build', '--', '--config', 'vite.story123-tablet.config.ts'])
+
+
 
 class OwnedExecutionTests(unittest.TestCase):
     def run_command(self, mode, command, timeout, inputs):
