@@ -86,3 +86,20 @@ De to opprinnelige lokale dokumentene i D:\IBE160 er bevart byte for byte og for
 ### Åpne punkter
 - Naturlig cookie-/Access-utløpsprøve etter Oslo 16:28 og separat faktisk signert utløpt token er ikke eksternt verifisert.
 - Den fysiske piloten bruker fortsatt f5-images. Eventuell deploy av den kombinerte versjonen og ny fysisk kvalifikasjon er separat arbeid. Dette er presisert i eksisterende tilgangspunkt i issues.md.
+
+## 2026-10-27 kl. 16:45 — Jonas Øisund
+
+### Oppgave
+Dokumentere sluttresultatet etter naturlig Access-utløp, ny MFA, bevart fiktiv verdi, apputlogging og manuell tunnelstopp. Oppsummere reelle rester uten å fremstille løsningen som risikofri eller Story 12 som godkjent.
+
+### Plan
+Kontrollere bare prosess/metrics/pilotmetadata; samle fysisk og isolert evidens i én gjeldende rapport, bevare andre chatters logg-/issuepunkter og registrere konkrete avgrensninger.
+
+### Resultat
+Eier kom tilbake kl. 16:33 etter oppgitt CF_Authorization-expiry 16:27:06 Oslo og så privat innhold skjult. Direkte API krevde Access uten utkast. Ny MFA ble krevd; sist lagrede fiktive verdi var bevart. Eier bekreftet apputlogging og Ctrl+C-stopp. Agentens sluttkontroll: null cloudflared-prosesser, null metrics-lyttere 18083. Fire lokale pilotcontainere kjører fortsatt, API/DB healthy; gateway bare 127.0.0.1:18081, ingen hostporter for DB/API/gate. DNS/rute er ikke fjernet. Ingen service/autostart er installert.
+
+Sluttrapport docs/tablet-pilot-result.md skiller brukerutførte fysiske prøver, automatiserte kontroller, f5-pilot og nyere isolert testet main-kombinasjon. Eksakt utløpstidspunkt og isolert ekte signert utløpt JWT er ikke bevist. Gammel tunnelveilednings tidslinje er merket historikk. Main sin senere loggcommit 40bd15d ble hentet inn med fast-forward i eget worktree før dokumentering; andre chatters punkter er bevart. Sluttrapport og lenker er committet separat. Eget pilot-testpunkt er lukket og reelle deploy-/bevisgrenser står i issues.md. Ingen ordinære data/tjenester, DNS, brannmur eller story-/retrostatus endret. Ingen push.
+
+### Åpne punkter
+- Separat deploybeslutning, riktig imageversjon og ny fysisk kvalifikasjon av nyere kombinasjon før eventuell ordinær bruk; drift/rotasjon/sikkerhetskopi må avklares da.
+- Bevisgrensene i sluttrapporten består: faktisk signert utløpt JWT, øvrige ikke-fysisk-prøvde sikkerhets-/skrivetimingvarianter samt uavhengig WAN/IPv6-/OS/supply-chain-kontroll. Ingen hemmeligheter skal innhentes i chat for å lukke dem. Begge rester er speilet i egne issues.md-punkter.
