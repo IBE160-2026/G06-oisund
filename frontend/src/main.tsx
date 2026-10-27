@@ -113,7 +113,6 @@ function App() {
   return <main>
     <p className="badge">Fiktive demodata</p>
     <h1>Fiktiv arbeidsdag</h1>
-    <p><a href="/demo.html">Prøv gjentakbar simulering uten backend</a></p>
     <p>Kun et fast eksempel for lokal vurdering. Demoen krever ingen innlogging og viser ingen private arbeidsdager. Bruk oversikten mens du står stille.</p>
     <p role="status" aria-live="polite" className="status">{message}</p>
     <div className="controls">
@@ -121,6 +120,7 @@ function App() {
       <button disabled={busy || !day || !operation} onClick={() => void save()}>Lagre fiktiv dag{saved && operation ? ' igjen' : ''}</button>
       <button disabled={busy || !identifier} onClick={() => void reopen()}>Åpne lagret dag på nytt</button>
     </div>
+    <p><a href="/demo.html">Prøv gjentakbar simulering uten backend</a></p>
     {day && <section aria-labelledby="day-heading">
       <h2 id="day-heading">Tjenestedato {day.service_date}</h2>
       <dl><dt>Tidssone</dt><dd>{day.timezone}</dd><dt>Vognløp</dt><dd>{day.vehicle_duty ?? 'Ukjent'}</dd><dt>Fysisk buss</dt><dd>{day.physical_bus ?? 'Ukjent'}</dd></dl>

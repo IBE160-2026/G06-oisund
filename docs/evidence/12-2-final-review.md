@@ -1,3 +1,5 @@
+Current local integration (2026-10-27): see [combined evidence](12-integrated-handoff.md) and [manual checklist](../story-12-manual-testing.md). The report below is the preserved separate-story handoff, including historical no-commit/no-merge restrictions. Owner acceptance remains pending.
+
 # Story 12.2 — independent-scope handoff
 
 The repeatable fictional demo is technically verified and ready for manual review. Overall acceptance is pending: final actual notice creation/retry/lost-response integration must wait for the stable, integrated 12.1 contract. No owner acceptance is recorded.

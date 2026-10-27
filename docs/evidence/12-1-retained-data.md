@@ -1,3 +1,5 @@
+Current local integration (2026-10-27): see [combined evidence](12-integrated-handoff.md) and [manual checklist](../story-12-manual-testing.md). The report below is the preserved separate-story handoff, including historical no-commit/no-merge restrictions. Owner acceptance remains pending.
+
 # Story 12.1 retained-data boundary
 
 Status: technically complete and ready for manual owner acceptance. Stable backend/private Playwright gates, independent review, actual restart/hourly/runtime qualification passed. Owner acceptance remains pending. Nothing deployed, committed, pushed or merged.

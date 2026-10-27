@@ -8,8 +8,9 @@ review_loop_iteration: 0
 baseline_commit: 0bae54833f38dc3dbf041d54c324c220618c21da
 story_key: 12-1-enforce-the-retained-data-boundary
 owner_acceptance: pending
+technical_status: integrated-verified
 context:
-  - D:/IBE160-story-12-1/_bmad-output/specs/spec-12-1-retained-data/implementation-plan.md
+  - D:/IBE160/_bmad-output/specs/spec-12-1-retained-data/implementation-plan.md
 ---
 
 <frozen-after-approval reason="Owner explicitly authorizes autonomous specification, implementation, testing and review; stop before manual acceptance">
@@ -108,3 +109,9 @@ Root actual two-startup populated 013 to 014/repeat-migration probe passed: due 
 Stable gates passed:441 backend/domain/PDF tests in556.74s and all479 private Playwright cases in40.4m, exit0 and unchanged source manifests in each invocation. All eleven script controls passed. Three independent reviews/reinspections retained no finding; V3 passed in the complete gate. Root populated startup/restart, accelerated hourly scheduling, served build/runtime identity and main/historical preservation checks passed. E11-A6/A11 technically resolved; A7/A8/A12 carried into this story evidence while their broader follow-through remains tracked. Two synthetic line20 acceptance days provisioned only in the dedicated test cluster; credentials stored under ignored .private-runtime.
 
 Keep status in-review and owner_acceptance pending under explicit owner instruction. Generic Build done/commit steps and session-log commit are superseded by the explicit no-commit/manual-acceptance boundary. No staging/commit/push/merge, external activation or further story performed. See [delivery evidence](../../docs/evidence/12-1-retained-data.md) and [machine verification](../../docs/evidence/12-1-verification.json).
+
+## Local integration authorization — 2026-10-27
+
+Jonas har ikke gjennomført manuell/fysisk akseptansetest av Story 12.1 eller Story 12.2. Teknisk integrasjon og automatiske tester innebærer ikke brukeraksept. Begge avventer Jonas sin testing.
+
+Jonas explicitly authorizes separate local commits, integration in order 12.1 then 12.2, automated verification and local main merge before manual acceptance. Earlier no-commit/no-merge instructions describe the historical run and are superseded for this integration. Status remains review/in-review. Current steps and limits: [manual checklist](../../docs/story-12-manual-testing.md).

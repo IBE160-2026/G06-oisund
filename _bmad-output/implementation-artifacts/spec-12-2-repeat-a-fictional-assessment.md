@@ -8,10 +8,10 @@ review_loop_iteration: 0
 baseline_commit: 0bae54833f38dc3dbf041d54c324c220618c21da
 story_key: 12-2-repeat-a-fictional-assessment
 owner_acceptance: pending
-integration_status: pending-12-1-contract
-technical_status: independent-scope-verified
+integration_status: verified
+technical_status: integrated-verified
 context:
-  - C:/Users/Jonas/.codex/.chatgpt-projects/g-p-6ab6b4c1c6888191a96d3242fab912b4/story-12-2/_bmad-output/specs/spec-12-2-fictional-assessment/implementation-plan.md
+  - D:/IBE160/_bmad-output/specs/spec-12-2-fictional-assessment/implementation-plan.md
 ---
 
 <frozen-after-approval reason="Owner authorizes autonomous planning, implementation, testing and review; latest instruction defers final notice API verification until 12.1 contract stabilizes">
@@ -96,3 +96,9 @@ Production TypeScript/Vite build; task-only Playwright browser gate; real Postgr
 ## Final root verification — 2026-10-26
 
 All retained findings were patched and reinspected by their original reviewers. Root production build and fourteen Edge cases passed in 12-2-frontend-20261026T220411706929Z-a5bf80782560.json. Actual eighteen-test/API/PostgreSQL evidence is retained separately; sixty-two running backend input files match worktree bytes, with no backend changes. All414 historical evidence hashes match. See [final handoff](../../docs/evidence/12-2-final-review.md) and [audit](../../docs/evidence/12-2-final-audit.json). Owner acceptance and actual12.1-dependent notice verification remain pending; user instruction overrides automatic done/commit workflow steps. No further story begins.
+
+## Local integration authorization — 2026-10-27
+
+Jonas har ikke gjennomført manuell/fysisk akseptansetest av Story 12.1 eller Story 12.2. Teknisk integrasjon og automatiske tester innebærer ikke brukeraksept. Begge avventer Jonas sin testing.
+
+Jonas explicitly authorizes separate local commits, integration in order 12.1 then 12.2, automated verification and local main merge before manual acceptance. Earlier no-commit/no-merge instructions describe the historical run and are superseded for this integration. Status remains review/in-review. Current steps and limits: [manual checklist](../../docs/story-12-manual-testing.md).

@@ -1,6 +1,6 @@
 # Repeatable fictional assessment (12.2)
 
-Status: independent implementation verified and ready for manual review; final 12.1-dependent notice integration and owner acceptance pending. See [final review and executed results](evidence/12-2-final-review.md).
+Status: Story 12.1 admission/retry integration is implemented locally; owner acceptance remains pending. Use the [combined startup and manual checklist](story-12-manual-testing.md) and [fresh integration results](evidence/12-integrated-handoff.md). The standalone commands below describe the separate historical 12.2 environment.
 
 ## Launch and reset
 
@@ -22,7 +22,7 @@ No existing service-stopping verification orchestrator is used. No ordinary priv
 
 ## Limits and dependency routing
 
-Simulation receipts prove only the isolated teaching model. Actual notice creation, retry and lost-response API integration remain **pending the stable 12.1 admission contract**; no such checks are marked passed and owner acceptance remains pending. The old fictional `/days` replay API is a different contract. This change does not implement notice expiry/deletion or private recovery/time/identity followups. E11-A8 evidence separation and source/build identity apply here. E11-A7 source shapes and E11-A12 explicit identity/manual/receipt semantics are represented independently in simulation; A6/A11 privacy boundary qualification remains 12.1. Broader theme/persistence/device qualification remains outside this story. Local screenshots/Edge viewport checks do not qualify a physical tablet.
+Simulation receipts prove only the isolated teaching model. Actual notice creation, retry and lost-response API integration is covered separately by the combined integration verifier and fresh report; owner acceptance remains pending. The standalone verifier retains its historical independent scope. The old fictional `/days` replay API is a different contract. E11-A8 evidence separation and source/build identity apply here. E11-A7 source shapes and E11-A12 explicit identity/manual/receipt semantics are represented independently in simulation; A6/A11 privacy boundary qualification belongs to 12.1. Broader theme/persistence/device qualification remains outside this story. Local screenshots/Edge viewport checks do not qualify a physical tablet.
 
 Manual fallback edits only duty/bus for a fixed fictional activity sample; it does not author activities. The legacy missing-ending row is illustrative and excluded from the reader; completing that legacy row is not implemented. Next-save fault choices are consumed once by a valid save and remain available for independent notice edits after closure. Controlled reader examples distinguish no stored messages, empty filtered results and unavailable/unknown contents.
 

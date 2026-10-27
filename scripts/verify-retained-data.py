@@ -44,6 +44,7 @@ def run(label, args, cwd=ROOT, env=None):
 
 PREVIEW = LOGS / 'frontend-server.json'
 VITE = ROOT / 'frontend/node_modules/vite/bin/vite.js'
+PREVIEW_PORT = 15121
 
 
 def process_identity(pid):
@@ -55,7 +56,7 @@ def process_identity(pid):
 
 
 def preview_listener(pid):
-    result = subprocess.run(['powershell.exe', '-NoProfile', '-Command', "Get-NetTCPConnection -State Listen -LocalPort 15121 -ErrorAction SilentlyContinue | Select-Object -ExpandProperty OwningProcess"], capture_output=True, text=True)
+    result = subprocess.run(['powershell.exe', '-NoProfile', '-Command', f"Get-NetTCPConnection -State Listen -LocalPort {PREVIEW_PORT} -ErrorAction SilentlyContinue | Select-Object -ExpandProperty OwningProcess"], capture_output=True, text=True)
     return int(pid) in [int(value) for value in result.stdout.split() if value.isdigit()]
 
 
@@ -63,7 +64,7 @@ def owned_preview(record, current):
     return (record.get('root') == str(ROOT) and record.get('vite') == str(VITE)
             and current is not None and record.get('identity') == current
             and str(VITE).casefold() in current['command'].casefold()
-            and '--port 15121' in current['command'] and '--strictPort' in current['command'])
+            and f'--port {PREVIEW_PORT}' in current['command'] and '--strictPort' in current['command'])
 
 
 def stop_preview():
@@ -86,11 +87,11 @@ def serve_preview():
     # race is also caught by child exit and verified listener ownership.
     with socket.socket() as probe:
         try:
-            probe.bind(('127.0.0.1', 15121))
+            probe.bind(('127.0.0.1', PREVIEW_PORT))
         except OSError as error:
-            raise RuntimeError('Port 15121 is occupied; existing listener left untouched.') from error
+            raise RuntimeError(f'Port {PREVIEW_PORT} is occupied; existing listener left untouched.') from error
     with (LOGS / 'frontend-server.log').open('ab') as log:
-        process = subprocess.Popen([shutil.which('node') or 'node', str(VITE), 'preview', '--host', '127.0.0.1', '--port', '15121', '--strictPort'], cwd=ROOT / 'frontend', stdout=log, stderr=subprocess.STDOUT, creationflags=subprocess.CREATE_NO_WINDOW)
+        process = subprocess.Popen([shutil.which('node') or 'node', str(VITE), 'preview', '--host', '127.0.0.1', '--port', str(PREVIEW_PORT), '--strictPort'], cwd=ROOT / 'frontend', stdout=log, stderr=subprocess.STDOUT, creationflags=subprocess.CREATE_NO_WINDOW)
     identity = process_identity(process.pid)
     record = {'root': str(ROOT), 'vite': str(VITE), 'identity': identity}
     if identity is None or not owned_preview(record, identity):
@@ -102,9 +103,9 @@ def serve_preview():
             if process.poll() is not None:
                 raise RuntimeError('Preview startup failed; see frontend-server.log.')
             try:
-                with urllib.request.urlopen('http://127.0.0.1:15121/', timeout=0.5) as response:
+                with urllib.request.urlopen(f'http://127.0.0.1:{PREVIEW_PORT}/', timeout=0.5) as response:
                     if response.status == 200 and preview_listener(process.pid):
-                        print(f'Verified isolated frontend process {process.pid} ready on 15121', flush=True)
+                        print(f'Verified isolated frontend process {process.pid} ready on {PREVIEW_PORT}', flush=True)
                         return
             except (OSError, TimeoutError):
                 pass
