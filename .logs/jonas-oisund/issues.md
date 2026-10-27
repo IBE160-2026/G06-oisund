@@ -20,3 +20,9 @@
 - [ ] 2026-10-27 [Story 12.1](997-2026-10-27-00-22-13-story-12-1-retained-data-boundary.md) — Utfør manuell aksept etter stegene i rapporten; teknisk review er ferdig og aksept er ikke registrert.
 - [ ] 2026-10-27 [12.2-integrasjon](997-2026-10-27-00-22-13-story-12-1-retained-data-boundary.md) — Integrer 014/opprettelses-ID-er, Date/CORS/felles klokke og VITE-portkonfigurasjon etter 12.1-rapporten; ingen uferdig 12.2-kode er hentet inn.
 
+- [x] 2026-10-26 [Story 12.2](997-2026-10-26-22-33-00-story-12-2-fictional-assessment.md) — Løs uv/Python midlertidig-filtilgang ved obligatorisk bmad-build-oppstart. (løst 2026-10-26 med prosessavgrenset TEMP/TMP/TMPDIR/UV_CACHE_DIR i Git-ignorert worktree-tmp; ny konfigurasjonsblokkering registrert nedenfor.)
+
+- [x] 2026-10-26 [Story 12.2](997-2026-10-26-22-33-00-story-12-2-fictional-assessment.md) — Rett manglende communication_language i støttet lokal TOML-konfigurasjon og prøv oppstart på nytt etter uttrykkelig autorisasjon. (løst 2026-10-26: Git-ignorert lokal [core]-verdi Norwegian; renderer exit 0.)
+- [ ] 2026-10-26 [Story 12.2](997-2026-10-26-22-33-00-story-12-2-fictional-assessment.md) — Verifiser faktisk avviksopprettelse, samme-ID-gjentakelse og tapt svar etter stabil og integrert 12.1-kontrakt; ingen uferdig kode er hentet inn.
+- [ ] 2026-10-26 [Story 12.2](997-2026-10-26-22-33-00-story-12-2-fictional-assessment.md) — Manuell aksept gjenstår for den teknisk verifiserte uavhengige demoen; fast aktivitetsutvalg/illustrativ legacy-post er dokumenterte begrensninger. Ingen aksept registrert.
+

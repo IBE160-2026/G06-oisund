@@ -1,0 +1,70 @@
+{
+  "run": "20261026T215748Z",
+  "commands": [
+    {
+      "command": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "exit_code": 0,
+      "stdout": "\n> ibe160-fictional-assessment@0.1.0 build\n> tsc --noEmit && vite build\n\nvite v8.3.4 building client environment for production...\ntransforming...\n✓ 40 modules transformed.\nrendering chunks...\ncomputing gzip size...\ndist/demo.html                                  0.45 kB │ gzip:  0.29 kB\ndist/index.html                                 0.46 kB │ gzip:  0.30 kB\ndist/assets/FictionalAssessment-CSCsyzrh.css   11.74 kB │ gzip:  2.61 kB\ndist/assets/demo-DE42gC21.js                    0.15 kB │ gzip:  0.15 kB\ndist/assets/main-D1C1RNXq.js                  172.91 kB │ gzip: 46.61 kB\ndist/assets/FictionalAssessment-QutEpxh3.js   237.41 kB │ gzip: 73.85 kB\n\n✓ built in 248ms\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "npx",
+        "playwright",
+        "test",
+        "--config",
+        "playwright.story122.config.ts"
+      ],
+      "exit_code": 0,
+      "stdout": "\nRunning 10 tests using 1 worker\n\n  ok  1 tests\\fictional-assessment.spec.ts:20:1 › repeat normal journey, selection, cancellation, terminal unknowns and isolation (2.1s)\n  ok  2 tests\\fictional-assessment.spec.ts:36:1 › unavailable, immutable reopen, conflict and unresolved receipt lookup (1.2s)\n  ok  3 tests\\fictional-assessment.spec.ts:50:1 › unsupported/manual preserves saved work; reload is volatile; abort preserves unknowns (795ms)\n  ok  4 tests\\fictional-assessment.spec.ts:58:1 › notices missing source/start, required ending, scope, lost response and independent lifetime (1.0s)\n  ok  5 tests\\fictional-assessment.spec.ts:68:1 › keyboard and narrow layout plus fresh evidence (800ms)\n  ok  6 tests\\fictional-assessment.spec.ts:76:1 › confirmed plan stays fixed, pre-Start selection and Start cancellation return to selected activity (1.2s)\n  ok  7 tests\\fictional-assessment.spec.ts:88:1 › notice invalid ending/source, unavailable and conflict preserve proposals (892ms)\n  ok  8 tests\\fictional-assessment.spec.ts:95:1 › night view and modal reset cancellation preserve state; confirmed reset clears unresolved state (830ms)\n  ok  9 tests\\fictional-assessment.spec.ts:100:1 › rendered foreground and keyboard focus contrast in both themes (623ms)\n  ok 10 tests\\fictional-assessment.spec.ts:122:1 › discard confirmation preserves draft on cancellation and outcome proposals survive navigation (1.0s)\n\n  10 passed (14.8s)\n",
+      "stderr": "[WebServer] (node:55876) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n(node:48972) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
+    }
+  ],
+  "source_sha256": {
+    "frontend\\src\\activityChoiceLabel.ts": "9119abac5644752c520bfb857d711651a08f5695e3c32573d0b011b8991ef559",
+    "frontend\\src\\busValue.ts": "124ab831a1bd1cf5d003db5d92ca8afc91387638120dc67d67be6261abff8a2d",
+    "frontend\\src\\dayOverview.ts": "b699bc425b36b6e1625d0d6a1b7b3bcc9c9e0b3b4fcd9beb815b1d606f43d642",
+    "frontend\\src\\demo.tsx": "5fc2cf2a07c99c08eebf7c9b0b0a2d5f76456a8838e31f11316e42f3a4c715a9",
+    "frontend\\src\\draftInterpretation.ts": "1417161dd95d32086f6dd6c27e0b339673363415a49a47c3548f5a086a1949f1",
+    "frontend\\src\\fictional-assessment.css": "f8b67c7776c8b8d6193263449533c74b0e71d5902fe0f2f41e49277577022a7c",
+    "frontend\\src\\FictionalAssessment.tsx": "0e89a8ec506e389e19bd493eba4cb615af8b5b9232a135b944ddf7bec5c85f8b",
+    "frontend\\src\\fictionalAssessmentModel.ts": "a1ca9004a046652b9af725cf887c390ce6961949412968ec0b3acb011bf974c1",
+    "frontend\\src\\main.tsx": "dd2636a480b9210d580c51c9295e7e343db74f410573ce00b801b2e99e9dbae6",
+    "frontend\\src\\PrivateAccess.tsx": "8d21406efaa524a0391ac36c11731b455d253a26c983b429f0cd880c38a86d84",
+    "frontend\\src\\PrivateActivitySelection.tsx": "bb1ef8db3d1cbfd22372769811ddebed0d0e0ca4a59a6862ac90783b5e3c9668",
+    "frontend\\src\\PrivateBus.tsx": "b34012fc2e6a44a810bc99445b7611cd4bcdca0d6995762ba59c05248e9bdf3a",
+    "frontend\\src\\PrivateConfirmation.tsx": "9af4482d99e5e685c2e1d0bd29fd91c8b405ed4bf137db611ca6b4f66c694c00",
+    "frontend\\src\\PrivateDayOverview.tsx": "d001a712f6cdf3f43c1626493a584106aa4023fb305bc6c12b11555b4d405c4d",
+    "frontend\\src\\PrivateDrafts.tsx": "900e224dd1bd0a1607722461d0d90056b00e535a9865f9f91c1f0e6f3fbd9054",
+    "frontend\\src\\PrivateImport.tsx": "f9ecb439578a481f08ee0d6c02d5fc7cfd61abe2917f8f5023e17b334709a653",
+    "frontend\\src\\PrivateNoticeReader.tsx": "a81a5a189c7f561c0888fafc70677c4c803454d79a130030872027e704cef991",
+    "frontend\\src\\PrivateNotices.tsx": "b0d4b3ff40e87d40c5fe071be8cce4e73a1fab3a67f9057564410357a68db922",
+    "frontend\\src\\PrivateShiftStart.tsx": "a8ac38bb86ea1ab3384e50badeee7895f25a97c86c71cf17f8515b53bc96024c",
+    "frontend\\src\\PrivateTimeInput.tsx": "5d41813cf5ee1c25bbd9b939ada5be6281073145ad8883821787195d243ab2aa",
+    "frontend\\src\\PrivateWorkdayProgress.tsx": "20e21ccdbf850670a97daeffb4883bdda3cacc45a8b82d2e71039feef47db272",
+    "frontend\\src\\PrivateWorkdayView.tsx": "0bbe975ade729e1ad2a7ffaf7506c64c678e1d560fbe68f8ae290914cbfe4115",
+    "frontend\\src\\recoverOperation.ts": "155e99d62a16aa731f8ac761e6b9802cd1f882aa414e7fca1e1429148eb170a4",
+    "frontend\\src\\SelectedActivityDetails.tsx": "e0704da99335bbf0666d50aaee94129049965371f0ca1568a31dbc290c836749",
+    "frontend\\src\\style.css": "3dde7f4a8c2c4825e4ae43247e06896cab3b9f0edc2682882960d5f77d10572c",
+    "frontend\\src\\useWorkdayResource.ts": "cf06a792dae6e389fbb31bf8e3e17136f24ac0cda614ce2a727edd260f3c6a44",
+    "frontend\\src\\vite-env.d.ts": "424faf9241dd699dda995b367ed36665732da1e6ec1f33b2fd40394488ecac92",
+    "frontend\\tests\\fictional-assessment.spec.ts": "4e525b5b9f4d8a183f1320813ce8ff52ccc857915b942b124cf9af45cfa4923b",
+    "frontend\\vite.config.ts": "820669e1c96056664ee8f8b1db55fd38e2c0dec1559fc1decc46fb4783fe3c2e",
+    "frontend\\playwright.story122.config.ts": "eebb4f8ff63453512a01a6628d21311b43ac5bb67dc52ade9cfa7bef5cf8da88",
+    "frontend\\package-lock.json": "f79805cfd50c3866147a0984c0bb8585e1c40c66ca28997cfaaf5f4479534e2f",
+    "frontend\\demo.html": "93081e16e5983ad3b2fe38078947c3a501641efa76bfd31c9220e35cbebcb382",
+    "scripts\\verify-story122-frontend.py": "15a28880c4ef1f50444f4a2d8c797a800f78f50937d4648652b76a7cb472b77d"
+  },
+  "build_sha256": {
+    "frontend\\dist\\demo.html": "5a5ed3f42d65491db6a377f17b213d4a2b868db043ed031b76853b7be81d5d27",
+    "frontend\\dist\\index.html": "7bcee0878cbcaec4819efb965352ac1142b8909df297f207caaed361642959ed",
+    "frontend\\dist\\assets\\demo-DE42gC21.js": "87342ea2e43b1b5919fbad9b1327d22b822813b5bc826e27fe6605d22e92e32f",
+    "frontend\\dist\\assets\\FictionalAssessment-CSCsyzrh.css": "5f93ccbb72cf6d81f0fdd9da1678e12f312dc82196dfcba742f66a393838a1e5",
+    "frontend\\dist\\assets\\FictionalAssessment-QutEpxh3.js": "2773ce02ffac683382d98a04ad43be7618ae42b69cb6dcd90b81098f87f58662",
+    "frontend\\dist\\assets\\main-D1C1RNXq.js": "e62adcc9e1366084a1289ab0ee1390f552dd6c6f95764c6d33bd3f63c0474122"
+  }
+}

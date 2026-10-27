@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import './style.css';
 import { PrivateAccess } from './PrivateAccess';
+import { FictionalAssessment } from './FictionalAssessment';
 
 type Activity = { id: string; kind: 'trip' | 'break'; start: string; end: string; place: string | null; trip_code: string | null; provenance: 'fictional-planned' };
 type Day = { fictional: true; service_date: string; timezone: 'Europe/Oslo'; vehicle_duty: string | null; physical_bus: string | null; activities: Activity[] };
@@ -112,6 +113,7 @@ function App() {
   return <main>
     <p className="badge">Fiktive demodata</p>
     <h1>Fiktiv arbeidsdag</h1>
+    <p><a href="/demo.html">Prøv gjentakbar simulering uten backend</a></p>
     <p>Kun et fast eksempel for lokal vurdering. Demoen krever ingen innlogging og viser ingen private arbeidsdager. Bruk oversikten mens du står stille.</p>
     <p role="status" aria-live="polite" className="status">{message}</p>
     <div className="controls">
@@ -130,4 +132,4 @@ function App() {
     <p><a href="/private">Gå til privat tilgang</a>. Har du en aktiv økt, åpnes arbeidsrommet. Å åpne demoen logger deg ikke ut.</p>
   </main>;
 }
-createRoot(document.getElementById('root')!).render(location.pathname === '/private' ? <PrivateAccess /> : <App />);
+createRoot(document.getElementById('root')!).render(location.pathname === '/demo' ? <FictionalAssessment /> : location.pathname === '/private' ? <PrivateAccess /> : <App />);

@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 10-19-2026 14:35
-last_updated: 10-27-2026 00:20
+last_updated: 10-27-2026 08:00
 project: IBE160
 project_key: NOKEY
 tracking_system: file-system
@@ -60,8 +60,8 @@ development_status:
   epic-11-retrospective: done
 
   epic-12: in-progress
-  12-1-enforce-the-retained-data-boundary: review # Technically verified; owner acceptance pending.
-  12-2-repeat-a-fictional-assessment: backlog
+  12-1-enforce-the-retained-data-boundary: review # Owner acceptance pending.
+  12-2-repeat-a-fictional-assessment: review # Integration verification in progress; owner acceptance pending.
   12-3-use-the-included-views-on-tablet-and-pc: backlog
   12-4-verify-the-complete-user-flow: backlog
   12-5-deliver-a-reproducible-submission: backlog
@@ -246,3 +246,4 @@ action_items:
     owner: "Developer / QA"
     status: open
     ref: "D:\\IBE160\\_bmad-output\\implementation-artifacts\\epic-11-retro-2026-10-26.md"
+
