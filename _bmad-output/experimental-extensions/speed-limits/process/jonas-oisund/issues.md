@@ -13,3 +13,5 @@ Utvidelseslokal liste. Prosjektets andre logger/issues er bevart. Sesjon: [Farts
 - [ ] 2026-10-27 QF-5: V1 ferdig/testet og avhengigheter implementert/kvalifisert, deretter separat byggbestilling og senere fysisk testautorisasjon. Ingen faktisk posisjons-/enhetskvalifisering utført.
 
 Alle punkter spores til [ferdig epic-plan](../../planning/epics.md) og [porter](../../specs/spec-speed-limits/technical-addendum.md). Ingen nye produktvalg er åpne nå. Historiske samlepunkt QF-1–5 er beholdt med presisert status og underpunkter.
+
+- [ ] 2026-10-27 [Fartsgrenseplanlegging](999-2026-10-27-20-11-16-fartsgrenseplanlegging.md) — QF-6: NFR5/AC-13–14 er spesifisert; senere verifikasjon av ny korridor uten kjerneendring, pakkeoverlapp/grensekonflikter og samlet ressursbudsjett i stories1.1/1.3–1.6 gjenstår. Ingen utvidet byutrulling er bestilt.

@@ -2,7 +2,7 @@
 
 **EXPERIMENTAL EXTENSION — OUTSIDE APPROVED V1 SCOPE**
 
-## 2026-10-27 kl. 21:38 — Jonas Øisund
+## 2026-10-27 kl. 21:47 — Jonas Øisund
 
 ### Oppgave
 
@@ -31,7 +31,11 @@ Bmad-spec avledet kernel/pilotmanifest/teknisk tillegg etter oppdatert memlog. B
 
 Publisering etter eksplisitt bestilling: planleggingspakken er committet som 647f570fdf766b9b4303ac790cbef7d99e57ffa4 og pushet til origin/codex/plan-speed-limits. Remote-hash er verifisert med ls-remote. Commiten inneholder99 filer, kun under utvidelsen. Én blanklinje ved EOF i researchskriptet er fjernet. Utvidelseslokal .gitattributes bevarer rå JSON/JSONL/CSV/SVG uten linjeskiftkonvertering; alle44 vellykkede responsfiler fra45 forespørsler har korrekte SHA-256 også i Git-indexen. Staged Markdown/Python/attributter passerte whitespace-kontroll. Sesjonslogg og issues føres i separat loggcommit etter prosjektoppskriften. Ingen merge, implementering eller produkttester; main/referanse-worktrees er ikke endret. Ingen nye åpne produktpunkter fra publiseringen.
 
+Presisering SL-D12: brukeren krever ny korridor gjennom manifest/kvalifiserte vegdata uten endring i matching-, grenseevaluerings- eller varslingskjernen. Spesifikasjon, grensesnitt, teknisk tillegg, pilotmanifest og eksisterende stories er samordnet i SL-PLAN-1.1. Pilotnavn/ID-er/rundkjøringer er kun data/testgrunnlag. Flere avgrensede pakker har eksplisitt kobling, kompatibilitet, overlapp-/konfliktbehandling, samlet budsjett og fysisk passeringsidentitet. NFR5 og AC-13/14 dekker korridorbytte og pakkegrenser. Fem CAP-er og sju stories beholdes. Dokumentlenker, struktur og diff kontrollert; ingen produkttester eller ny datainnsamling. Dokumentcommit8790b13b73fa4f94bc72ee736498f6a2359ea899; publisering fortsetter på samme branch etter tidligere commit/push-bestilling. Rådata er uendret.
+
 ### Åpne punkter
+
+- QF-6: Senere AC-13/14 må bekrefte korridorbytte uten kodeendring og korrekt behandling av flere datapakker, jf. NFR5/stories1.1/1.3–1.6.
 
 - QF-1/2 og QF-2b: Operativ kilde-/felt-/svingdekning, midlertidig/variabel regulering og faktisk ikonmanifest gjenstår i stories1.1/1.2/1.7.
 - QF-3/4: Senere implementasjon/verifikasjon og fysisk profil/akseptvindu; kildeobservasjoner erstatter ikke GPS-kvalifisering.
