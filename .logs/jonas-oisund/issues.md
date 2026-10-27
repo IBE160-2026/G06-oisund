@@ -1,7 +1,7 @@
 # Åpne punkter
 
 - [x] 2026-10-27 [Mobil PDF-opplasting](995-2026-10-27-23-17-00-mobil-pdf-opplasting.md) — Automatisk godkjenningskontroll blokkerte først gatewayoppdateringen. Jonas godkjente deretter uttrykkelig; det testede bygget er aktivert, andre containere bevart og tilgangsnekt/no-store verifisert. (deploy løst 2026-10-27; fysisk retest står nedenfor)
-- [ ] 2026-10-27 [Mobil PDF-opplasting](995-2026-10-27-23-17-00-mobil-pdf-opplasting.md) — Last app.bussassistent.com på nytt og verifiser de tre importene på brukerens Pixel etter rettingen av filvelger-/tilgangskappløpet. Originalene er bevart privat; fysisk bestått retest er ennå ikke påstått.
+- [x] 2026-10-27 [Mobil PDF-opplasting](995-2026-10-27-23-17-00-mobil-pdf-opplasting.md) — Last app.bussassistent.com på nytt og verifiser de tre importene på brukerens Pixel etter rettingen av filvelger-/tilgangskappløpet. (løst 2026-10-27: Jonas bekreftet at filene lastes opp som tiltenkt på mobil, godkjente rettingen og autoriserte push. Originalene er bevart privat.)
 
 Manuell 12.1-sjekkliste A–F er bestått27.10.2026 på Jonas_desktop, Brave privat vindu, oppgitt testreferanse83cdd2b. A–E uten problemer. F1: riktig API18313/drafts og Cache-Control:no-store. F2: fire lagringsområder tomme, ingen Service Worker. F3–F4: privat innhold skjult etter utlogging/Tilbake/oppdatering; ny innlogging viste3.januar-planen, og slettet2.januar-plan forble borte. Ingen rettingsbehov rapportert; stoppunktet før12.2 er passert. Jonas har deretter uttrykkelig godkjent12.1; status done/accepted.12.2 er nå også uttrykkelig godkjent av Jonas etter retest av rettingene; begge storyer er done/accepted27.10.2026.
 
