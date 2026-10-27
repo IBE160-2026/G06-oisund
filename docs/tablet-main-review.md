@@ -2,6 +2,8 @@
 
 ## Oppdatert: godkjent commit/merge og testet kombinasjon
 
+**Utført:** Merge-commit `ca1d6470fcab636fe9c754f02d78990e418f0cca` er ferdigstilt i tilgangsbranchen og lokal main er fast-forwardet til den etter eiers uttrykkelige godkjenning. Ingen push. De to opprinnelige lokale dokumentasjonsfilene i D:\IBE160 er bevart byte for byte og fortsatt henholdsvis endret/utracket. Hovedindex har ingen stagede filer. Alle 23 baseline-containere har uendret ID, StartedAt, restartteller og image; engangstestcontainere og preview-port 18481 er ryddet. Tunnelen er ikke startet/stoppet av merge-operasjonen. Kjørende fysisk pilot bruker fortsatt f5-baserte images; deploy av de kombinerte image-versjonene er en separat operasjon og ikke utført. Ingen ordinær migrering eller storyaksept er gjort.
+
 Eier godkjente senere uttrykkelig commit og deretter merge, uten push. Tilgangsarbeidet ble committet som `35c4548`, og sesjonsloggen separat som `252616b`. Main på d5bf85d er nå kombinert i tilgangs-worktree-et før endelig commit/innfletting. Konflikten i PrivateAccess er løst ved at validert VITE_PRIVATE_API_BASE prioriteres for nettbrett, mens nyere mains VITE_PRIVATE_API og eksisterende loopback-default beholdes. PrivateClock/Date-observasjon, fristtimer, nye API-ruter og Date/CORS er beholdt. Ingen storyaksept er gitt av dette.
 
 Det første gatewaybygget avslørte at parent-unntak i root-.dockerignore også slapp inn nye mains demo/Vite-konfigurasjon og lokale node_modules. Allowlisten er rettet ved å ekskludere innhold igjen før de eksplisitte unntakene. Dockerfile kopierer nå bare packagefiler, tsconfig og src eksplisitt, med separat privat index. Det korrigerte bygget er kontrollert uten demo.html og med relativ /private-api. Det første testimaget ble aldri satt i drift; ingen kjørende images/containere er erstattet.
@@ -54,4 +56,4 @@ Lokal main ble ved ny lesekontroll funnet på `d5bf85d81b813e040bd718504d6edbddc
 
 ## Avgrensning
 
-Konflikten er identifisert og løsningsplanen konkretisert, men en samlet kandidat mot d5-main er ennå ikke laget, bygget eller testet. Ingen påstand om ferdig main-integrering fremsettes. Kjørende pilot er fortsatt f5; tilgansdata/hemmeligheter følger ikke med noen patch. Ekstern publisering/testing er separat godkjent av eier, og gir ingen commit-/merge-/push-godkjenning.
+Konflikten er løst, den kombinerte kandidaten er bygd og relevant isolert regresjon bestod som angitt øverst. Lokal main-integrering er gjennomført etter senere uttrykkelig commit-/merge-godkjenning; push er ikke godkjent eller utført. Kjørende pilot er fortsatt f5, og tilgangsdata/hemmeligheter følger ikke med Git. Naturlig Access-utløp og eksakt faktisk signert utløpt token er fortsatt separate, ikke praktisk verifiserte tilfeller. Dette er ingen generell påstand om risikofri drift eller full Story 12-godkjenning.

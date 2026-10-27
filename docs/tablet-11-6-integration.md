@@ -1,5 +1,7 @@
 # Nettbrettilgang integrert med godkjent Epic 11
 
+**Utført lokal merge 2026-10-27:** Den kombinerte kandidaten er flettet inn i main med merge-commit ca1d647. Ingen push eller deploy. Eierens to lokale dokumentasjonsendringer er bevart byte for byte og alle 23 eksisterende containere er uendret. Se tablet-main-review.md for testresultater og praktiske begrensninger. Naturlig Access-utløp avventes fortsatt kl. 16:28 Oslo.
+
 **Senere oppdatering 2026-10-27:** Eier har nå godkjent commit/merge uten push. Kombinasjonen med nyere main og den løste API-konfigurasjonskonflikten er bygd og testet isolert, inkludert 14 transporttester, 14 migreringer i engangs-DB, 120 proxynektprøver og 3 fokuserte browserregresjoner. Se siste avsnitt øverst i tablet-main-review.md. Ingen kjørende pilot/ordinære tjenester er oppdatert av Git-arbeidet; fysisk pilot er fortsatt den godkjente f5-baserte versjonen. Ingen ny storyaksept er gitt.
 
 **Ny integreringsstatus 2026-10-27:** Piloten bygger fortsatt på f5ffa4b, men main har senere fått tekniske Story 12-endringer i annen chat. Én faktisk tekstkonflikt er funnet i PrivateAccess.tsx. Se [ny main-kontroll og konkret integreringsplan](tablet-main-review.md). Den nedenstående statusen er historikk, ikke bevis for at tilgangskandidaten er ferdig kombinert med ny main. Gjeldende godkjent pilotpublisering og eksterne/fysiske prøver står i tablet-tunnel-setup.md.
