@@ -14,3 +14,6 @@
 - [ ] 2026-10-26 [Publisering av Epic 11](999-2026-10-26-20-23-06-publiser-epic-11.md) — E11-A12: Ta med invariantmatrise for identitet, manuelle handlinger, kvitteringer og utløp i senere 12.1/12.4-verifikasjon.
 - [ ] 2026-10-26 [Publisering av Epic 11](999-2026-10-26-20-23-06-publiser-epic-11.md) — E10-A4: Eksisterende temapersistens med reload-/personvernevidens gjenstår under 12.3.
 - [ ] 2026-10-26 [Publisering av Epic 11](999-2026-10-26-20-23-06-publiser-epic-11.md) — E10-A5: Faktisk nettbrett-/mobilnettkvalifikasjon gjenstår; desktop-godkjenning er ikke fysisk enhetstesting.
+
+- [ ] 2026-10-27 [Story 12.1](997-2026-10-27-00-22-13-story-12-1-retained-data-boundary.md) — Utfør manuell aksept etter stegene i rapporten; teknisk review er ferdig og aksept er ikke registrert.
+- [ ] 2026-10-27 [12.2-integrasjon](997-2026-10-27-00-22-13-story-12-1-retained-data-boundary.md) — Integrer 014/opprettelses-ID-er, Date/CORS/felles klokke og VITE-portkonfigurasjon etter 12.1-rapporten; ingen uferdig 12.2-kode er hentet inn.
