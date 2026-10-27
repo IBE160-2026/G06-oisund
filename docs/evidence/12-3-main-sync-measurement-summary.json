@@ -1,0 +1,46 @@
+{
+  "source_record": "docs/evidence/12-3-browser-20261027T190258982753Z-1bffeae3.json",
+  "run": "20261027T190258982753Z-1bffeae3",
+  "scope": "positive actual product states only; deliberate negative helper probes excluded",
+  "state_measurements": 312,
+  "text_measurements": 25112,
+  "minimum_text_ratio": 6.126270626473104,
+  "boundary_measurements": 6584,
+  "minimum_boundary_ratio": 4.781375582652278,
+  "keyboard_stops": 5912,
+  "minimum_focus_adjacent_ratio": 5.9872761849959915,
+  "minimum_focus_width": 3,
+  "focus_hosts_with_unfocused_signature_checked": 5632,
+  "actual_same_pixel_pairs": 1940,
+  "representative_cache_results": 3692,
+  "minimum_same_pixel_changed_area_to_required_area": 1.2913835053276281,
+  "native_states": 80,
+  "minimum_native_edge_ratio": 10.131164801445454,
+  "checked_glyph_samples": 40,
+  "minimum_checked_glyph_component_area": 63,
+  "glyph_pixel_contrast_threshold": 3,
+  "unmeasured_product_layers": [],
+  "critical_clipping": [],
+  "user_agents": [
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36 Edg/156.0.0.0"
+  ],
+  "root_font_sizes": [
+    "16px",
+    "32px"
+  ],
+  "unmeasured": [
+    "native calendar/time-picker icons/popups",
+    "native select-arrow and disclosure-marker pixels",
+    "physical Lenovo Pad / Android / Brave",
+    "OS/browser chrome zoom",
+    "assistive technology"
+  ],
+  "owner_acceptance": "pending",
+  "provenance": {
+    "method": "docs/evidence/12-3-summary-method.py",
+    "method_sha256": "5c46472256ca4e3376d6024911b713afd9a8c8a7542b180ce3acbd8d14e09bba",
+    "record_sha256": "228543d29f5a3e13172b5cb6e9597967ce7222d0548bcf9ed04b765ad3f2a328",
+    "measurements": "docs/evidence/12-3-measurements-20261027T190258982753Z-1bffeae3.json",
+    "measurements_sha256": "30ae1bb1081608dec5da8c71b6d354e09d49b6463a20b5027ef5f08e99b4e163"
+  }
+}

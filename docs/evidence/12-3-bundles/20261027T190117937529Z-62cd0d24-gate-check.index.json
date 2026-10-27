@@ -1,0 +1,31 @@
+{
+  "archive": "docs\\evidence\\12-3-bundles\\20261027T190117937529Z-62cd0d24-gate-check.tar.gz",
+  "archive_sha256": "39dfaeaf9689383fb928ad1aafec77cf14bb9b9bcc3dc54a8e6c034aed74dbf6",
+  "entries": {
+    "record.json": "eede409930e7e97528c727f2051c5ad3c00260d9a68743433d08c1aca55fe65f",
+    "executed-inputs/.dockerignore": "4752c9894b0117fdef2f7f8d04cfc11518105de53a1f69fb887b409890faa834",
+    "executed-inputs/compose.tablet.yaml": "bae0685cf424f65e162828d1cbee2c0ae7c8ee7e08655670e855dd6f13fb1c73",
+    "raw/command.log": "d82703b3aa76a18eed25947034989ea6584547d0a71cc67a003e4823ae3ef12a",
+    "executed-inputs/scripts/tablet-proxy-probe.py": "879b0d8b7c50c7829f0d77174c521338d484fa9da65ed23940923361823a016e",
+    "executed-inputs/scripts/test-tablet-config.ps1": "d8bacb5cffc78a69af614e898857de82932b7cb9f93df635106e8584cf72c728",
+    "executed-inputs/scripts/verify-story123.py": "22f46e8622c9df302a06c9cc8a658089a114f11686d06ce17fbd2d18e79fb74f",
+    "executed-inputs/scripts/verify-tablet-proxy.ps1": "d576f768039b11f2981bee954b6553bd014bac20b94dce3e1a270fae985854b0",
+    "executed-inputs/deploy/tablet/.env.tablet.example": "63d68a77def2348000a10787651a1e9a7d74e8c30d77305790753677f21257cd",
+    "executed-inputs/deploy/tablet/access-plan.example.json": "7994d5b08957dfd44c8650ee212c7d8d57bda9c28a6a442cb7b0752907d18203",
+    "executed-inputs/deploy/tablet/access-policy.example.json": "8c917f42a097474488559a6b4322a1b16688897693df3f2467f155976f979821",
+    "executed-inputs/deploy/tablet/cloudflared.example.yml": "d690eec96f794050303d3c6186c1cb7822aba8b3f5400f8fa27087a8b9aed530",
+    "executed-inputs/deploy/tablet/Dockerfile": "7152f852374709274a40e599583d1a0388bca34546f7bcc12dcb8ad6a4103f02",
+    "executed-inputs/deploy/tablet/index.html": "c04eb02e1f1d6d6d555593415ec272f4d8d7002533d7d597bd277593261a3f31",
+    "executed-inputs/deploy/tablet/init-private-role.sql": "8a76eac4482d6d2ad8b965bbca632aa4d285172a30bc25b36877b2eed3f8ea27",
+    "executed-inputs/deploy/tablet/nginx-main.conf": "d0d20d2e20ff677249ca272d8a553399536c328cd5b4e066f0d4918003e9d042",
+    "executed-inputs/deploy/tablet/nginx.conf.template": "bff28a48e9694ff0d77e7e3c788e76e7ccc3bd9bbd38183639a8d5298a1b4fa6",
+    "executed-inputs/deploy/tablet/tunnel-dashboard-review.example.json": "e6968032677e638900b7c54df8cf2e385fa6bf4cad0cdddbf349dc389920aaeb",
+    "executed-inputs/deploy/tablet/tunnel-pilot-review.json": "2ec854740b719ebe1fefdabb67d8d6037ef3235fd8d927b737e2cf12f569c255",
+    "executed-inputs/deploy/tablet/access_gate/Dockerfile": "f7df6b1c9cf4020c318df29b4822687cc91a78e3cf33a2c10454a8f47ac71ea7",
+    "executed-inputs/deploy/tablet/access_gate/Dockerfile.test": "354caa0386ac72da027eb5f28b30c0bd7c786236bf9dbf6f9b6934ab5274993d",
+    "executed-inputs/deploy/tablet/access_gate/gate.py": "f2ae5aacf44192025ecc43a3978d1c08917d3de37d2c0e10752c14e3bb6367d9",
+    "executed-inputs/deploy/tablet/access_gate/requirements.lock": "a1c39ca7f82178d2b9ab7d354f058098d03e97e8b8deda6ae459e4a9d2286720",
+    "executed-inputs/deploy/tablet/access_gate/test_gate.py": "e8fa8e1b60481f01aab99ad0a19eaaad53cc00540e936237a4e007db1514aae4",
+    "executed-inputs/tmp/story123-main-sync/auxiliary.py": "c9e81b538ac6955d0c19193ce33911ae0dfbef49ae343edfda3101ee6e7d78d0"
+  }
+}

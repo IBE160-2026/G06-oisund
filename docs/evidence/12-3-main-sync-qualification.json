@@ -1,0 +1,235 @@
+{
+  "tested_revision": "8ca318b55b98eb34de54f29ecab038322e3ccab6",
+  "accepted_main": "74849ff21bee108fe9cff93d740a96a6c6d2d7c5",
+  "owner_acceptance": "pending",
+  "dependency_acceptance": {
+    "12.1": "accepted",
+    "12.2": "accepted"
+  },
+  "final_gates": [
+    {
+      "scope": "Checked standard build, inherited tablet base cleared",
+      "record": "docs/evidence/12-3-build-20261027T190059396568Z-2259b324.json",
+      "result": "passed",
+      "record_sha256": "42ee5af771ab54a89b13289db35a6d8fab50d16d62476b2ec6990602c63674dd",
+      "gate_exit_code": 0,
+      "revision": "8ca318b55b98eb34de54f29ecab038322e3ccab6",
+      "source_unchanged": true,
+      "executed_inputs_unchanged": true,
+      "durable_bundle": "docs\\evidence\\12-3-bundles\\20261027T190059396568Z-2259b324-build.tar.gz",
+      "durable_bundle_sha256": "c118743c4cf316c6614d7178654f2fe85e76c3f3bf3727a22b44c955d6885fa2"
+    },
+    {
+      "scope": "Actual API/PostgreSQL",
+      "record": "docs/evidence/12-3-verify-20261027T190102042205Z-0fef7b07.json",
+      "result": "74/74",
+      "record_sha256": "22f2cf3d0f6fd4af965c3fa52e981ea681b067fd1613f3ee4d1d81d994ee613e",
+      "gate_exit_code": 0,
+      "revision": "8ca318b55b98eb34de54f29ecab038322e3ccab6",
+      "source_unchanged": true,
+      "executed_inputs_unchanged": true,
+      "durable_bundle": "docs\\evidence\\12-3-bundles\\20261027T190102042205Z-0fef7b07-verify.tar.gz",
+      "durable_bundle_sha256": "e7eac25f7032ce014b79e204544495963b8863a1f1746e0fc46b1c04bc3a4e01"
+    },
+    {
+      "scope": "Accepted demo and actual fictional assessment",
+      "record": "docs/evidence/12-3-browser-20261027T190135888667Z-54ce7f61.json",
+      "result": "37/37",
+      "record_sha256": "b8518c01f756b93da52aff050f31566c556136f05302abfd459cbc5f3533a4e0",
+      "gate_exit_code": 0,
+      "revision": "8ca318b55b98eb34de54f29ecab038322e3ccab6",
+      "source_unchanged": true,
+      "executed_inputs_unchanged": true,
+      "durable_bundle": "docs\\evidence\\12-3-bundles\\20261027T190135888667Z-54ce7f61-browser.tar.gz",
+      "durable_bundle_sha256": "a40c00a06d84c56cc0a5cc65fab4dfc626251f20d12b89ee2c82b327d4be6b43",
+      "browser_stats": {
+        "startTime": "2026-10-27T19:01:40.156Z",
+        "duration": 36256.178,
+        "expected": 37,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "build_and_api_settings_match": true
+    },
+    {
+      "scope": "Checked dedicated tablet build",
+      "record": "docs/evidence/12-3-tablet-build-20261027T190217469866Z-5d574672.json",
+      "result": "passed",
+      "record_sha256": "92dcf65fdc41fa2cea2a68397e5e92022e66f71f2803e3e15437c9fc3eb3299e",
+      "gate_exit_code": 0,
+      "revision": "8ca318b55b98eb34de54f29ecab038322e3ccab6",
+      "source_unchanged": true,
+      "executed_inputs_unchanged": true,
+      "durable_bundle": "docs\\evidence\\12-3-bundles\\20261027T190217469866Z-5d574672-tablet-build.tar.gz",
+      "durable_bundle_sha256": "274034ce6e3a76ec20e4fdca521a1e7d0d6a93f049405e27fa0b66d4173c96c2"
+    },
+    {
+      "scope": "Dedicated tablet browser18483",
+      "record": "docs/evidence/12-3-tablet-browser-20261027T190219960924Z-ede9b007.json",
+      "result": "5/5",
+      "record_sha256": "85f2c30a0176da4733a11b8c994be5ca23c0a0cc4c9116f1c050b1f2d149b3f7",
+      "gate_exit_code": 0,
+      "revision": "8ca318b55b98eb34de54f29ecab038322e3ccab6",
+      "source_unchanged": true,
+      "executed_inputs_unchanged": true,
+      "durable_bundle": "docs\\evidence\\12-3-bundles\\20261027T190219960924Z-ede9b007-tablet-browser.tar.gz",
+      "durable_bundle_sha256": "3c2256b2f4d09cd4f983cc1f1abb9221a17aeb74d230e5f5d547b4cf2750e298",
+      "browser_stats": {
+        "startTime": "2026-10-27T19:02:24.537Z",
+        "duration": 12094.283,
+        "expected": 5,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "build_and_api_settings_match": true
+    },
+    {
+      "scope": "Dedicated tablet browser18481 compatibility",
+      "record": "docs/evidence/12-3-tablet-browser-20261027T190237489569Z-9d3c7b69.json",
+      "result": "5/5",
+      "record_sha256": "744f5b596bb95e0936dc00fc25dee08d29ba5223175d1d54c40e09d0b24c6853",
+      "gate_exit_code": 0,
+      "revision": "8ca318b55b98eb34de54f29ecab038322e3ccab6",
+      "source_unchanged": true,
+      "executed_inputs_unchanged": true,
+      "durable_bundle": "docs\\evidence\\12-3-bundles\\20261027T190237489569Z-9d3c7b69-tablet-browser.tar.gz",
+      "durable_bundle_sha256": "468740fd3a56ba24403445254cf0cdd4e3127dec9e94bb6a4b0a4cc6dc9cb91f",
+      "browser_stats": {
+        "startTime": "2026-10-27T19:02:42.412Z",
+        "duration": 11314.832,
+        "expected": 5,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "build_and_api_settings_match": true
+    },
+    {
+      "scope": "Backend transport",
+      "record": "docs/evidence/12-3-backend-transport-20261027T190254406174Z-c878589c.json",
+      "result": "14/14",
+      "record_sha256": "eb823bc355c1d842c50c4e4aa03ca2da15dbb223b5c807304ad44fd11887c9e4",
+      "gate_exit_code": 0,
+      "revision": "8ca318b55b98eb34de54f29ecab038322e3ccab6",
+      "source_unchanged": true,
+      "executed_inputs_unchanged": true,
+      "durable_bundle": "docs\\evidence\\12-3-bundles\\20261027T190254406174Z-c878589c-backend-transport.tar.gz",
+      "durable_bundle_sha256": "95944098104918025f798630cd011df9692dc4da9f13069970d8c8f94a3a25fe"
+    },
+    {
+      "scope": "Complete12.3 matrix, negative probes and cross-tab clear",
+      "record": "docs/evidence/12-3-browser-20261027T190258982753Z-1bffeae3.json",
+      "result": "34/34",
+      "record_sha256": "228543d29f5a3e13172b5cb6e9597967ce7222d0548bcf9ed04b765ad3f2a328",
+      "gate_exit_code": 0,
+      "revision": "8ca318b55b98eb34de54f29ecab038322e3ccab6",
+      "source_unchanged": true,
+      "executed_inputs_unchanged": true,
+      "durable_bundle": "docs\\evidence\\12-3-bundles\\20261027T190258982753Z-1bffeae3-browser.tar.gz",
+      "durable_bundle_sha256": "2a7ae12fccc1dc6a5b161f72db8bded9f8b8b39843f0b72daa4b6d640decd8ac",
+      "browser_stats": {
+        "startTime": "2026-10-27T19:03:03.420Z",
+        "duration": 616056.438,
+        "expected": 34,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "build_and_api_settings_match": true
+    },
+    {
+      "scope": "Selected private regression suites",
+      "record": "docs/evidence/12-3-browser-20261027T191324534402Z-c1c3772d.json",
+      "result": "86/86",
+      "record_sha256": "630bf1b368837280b1991ff98fd1ace84483c3118ecd0fb6c6ec1e4b5dc01ba4",
+      "gate_exit_code": 0,
+      "revision": "8ca318b55b98eb34de54f29ecab038322e3ccab6",
+      "source_unchanged": true,
+      "executed_inputs_unchanged": true,
+      "durable_bundle": "docs\\evidence\\12-3-bundles\\20261027T191324534402Z-c1c3772d-browser.tar.gz",
+      "durable_bundle_sha256": "326ffa6f76ec0ef377f2630281be7500c8eb97850dd5bd716cf8f26e35bffe3d",
+      "browser_stats": {
+        "startTime": "2026-10-27T19:13:29.172Z",
+        "duration": 548150.165,
+        "expected": 86,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "build_and_api_settings_match": true
+    },
+    {
+      "scope": "Actual private gateway image build",
+      "record": "docs/evidence/12-3-gateway-build-20261027T190111954909Z-8022f7a7.json",
+      "result": "passed",
+      "record_sha256": "589cfa70178ea9c1378036257b3cbcaeb214bad5a6085b4b67a746c246f645d7",
+      "gate_exit_code": 0,
+      "revision": "8ca318b55b98eb34de54f29ecab038322e3ccab6",
+      "source_unchanged": true,
+      "executed_inputs_unchanged": true,
+      "durable_bundle": "docs\\evidence\\12-3-bundles\\20261027T190111954909Z-8022f7a7-gateway-build.tar.gz",
+      "durable_bundle_sha256": "ea51ebaf5b828d5590e5d133854641c475eee96bcb11c59840cbe8de5249dd1a"
+    },
+    {
+      "scope": "Access gate with current mounted source",
+      "record": "docs/evidence/12-3-gate-check-20261027T190143642963Z-7ec999a8.json",
+      "result": "13/13",
+      "record_sha256": "5de84a0638776dead49975cc8cceec82f662f57bd1135b28ff61bd23204ec3f6",
+      "gate_exit_code": 0,
+      "revision": "8ca318b55b98eb34de54f29ecab038322e3ccab6",
+      "source_unchanged": true,
+      "executed_inputs_unchanged": true,
+      "durable_bundle": "docs\\evidence\\12-3-bundles\\20261027T190143642963Z-7ec999a8-gate-check.tar.gz",
+      "durable_bundle_sha256": "a407bd14a7f85282af9d6db87b4bfc86fad22020c7e8aa75284d8f6d670b1bd3"
+    },
+    {
+      "scope": "Tablet Compose configuration, no services started",
+      "record": "docs/evidence/12-3-gateway-config-20261027T190148035587Z-a044943a.json",
+      "result": "passed",
+      "record_sha256": "b745f9d6316178c4d22e132a24549c8dad9f9135bd7dd694657a5575fec7bbc2",
+      "gate_exit_code": 0,
+      "revision": "8ca318b55b98eb34de54f29ecab038322e3ccab6",
+      "source_unchanged": true,
+      "executed_inputs_unchanged": true,
+      "durable_bundle": "docs\\evidence\\12-3-bundles\\20261027T190148035587Z-a044943a-gateway-config.tar.gz",
+      "durable_bundle_sha256": "96b87628f53dea89a99a34836e09b1c2c18d78b28a8599228a5c759e6d5e8979"
+    },
+    {
+      "scope": "Gateway/proxy negative and admitted requests",
+      "record": "docs/evidence/12-3-gateway-proxy-20261027T190151212433Z-bdf41816.json",
+      "result": "120 rejected plus valid/fail-closed checks",
+      "record_sha256": "fbe571c3267737b25681ec2a783138f875fc1e23fc5bcdbb033d7b59412f61b9",
+      "gate_exit_code": 0,
+      "revision": "8ca318b55b98eb34de54f29ecab038322e3ccab6",
+      "source_unchanged": true,
+      "executed_inputs_unchanged": true,
+      "durable_bundle": "docs\\evidence\\12-3-bundles\\20261027T190151212433Z-bdf41816-gateway-proxy.tar.gz",
+      "durable_bundle_sha256": "af93a71bb76d36b66ab7fcb927b644ae4bb468e19850118d3f67b68c3ded6da5"
+    },
+    {
+      "scope": "Additive manual fixture preparation",
+      "record": "docs/evidence/12-3-prepare-20261027T192251010882Z-adfce32f.json",
+      "result": "17/17",
+      "record_sha256": "866463238a3709b18176f31f24dbad9ca3e8e3f364c2248487002e4134c26893",
+      "gate_exit_code": 0,
+      "revision": "8ca318b55b98eb34de54f29ecab038322e3ccab6",
+      "source_unchanged": true,
+      "executed_inputs_unchanged": true,
+      "durable_bundle": "docs\\evidence\\12-3-bundles\\20261027T192251010882Z-adfce32f-prepare.tar.gz",
+      "durable_bundle_sha256": "c8b702be8a025faf779e9d1602b528ade580f5ff6d665a0965f21491a2a94213"
+    }
+  ],
+  "unit_checks": {
+    "python": {
+      "passed": 7,
+      "log": "docs/evidence/12-3-main-sync-tooling.txt"
+    },
+    "node": {
+      "passed": 2,
+      "log": "docs/evidence/12-3-main-sync-node.txt"
+    }
+  },
+  "limits": "Selected scopes only. No new complete479-browser or455-backend broad run, live Cloudflare/TLS or physical/native/OS-zoom/assistive-technology acceptance."
+}

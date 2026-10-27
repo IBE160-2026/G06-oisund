@@ -67,8 +67,9 @@ Use a fresh hard reload of the current build. Historical 12.3 test results prece
 ```powershell
 & $py scripts/verify-story123.py tablet-build
 & $py scripts/verify-story123.py tablet-browser
+& $py scripts/verify-story123.py tablet-browser --port 18481
 & $py scripts/verify-story123.py backend-transport
 node --test scripts/test-tablet-configuration.mjs
 ```
 
-The standard `build` mode clears inherited `VITE_PRIVATE_API_BASE`; it still targets its own private API 18324. The dedicated build explicitly sets `/private-api` and an intentionally unusable legacy base to prove relative-base priority. Invalid explicit-base checks evaluate the actual configuration prelude and fail closed. The separately built tablet output leaves the standard demo/private output intact. Current gateway/HTTPS transport checks and fresh full matrix outcomes are recorded separately in the integration report.
+The standard `build` mode clears inherited `VITE_PRIVATE_API_BASE`; it still targets its own private API 18324. The dedicated build runs TypeScript checks and explicitly sets `/private-api` and an intentionally unusable legacy base to prove relative-base priority. Port 18481 is an additional compatibility check for the retained original tablet configuration; both ports are strict loopback listeners owned only for each check. Tests include failed logout, persistent locking across reload, successful retry and retained theme, with empty private storage/cache/service-worker assertions. Invalid explicit-base checks evaluate the actual configuration prelude and fail closed. The separately built tablet output leaves the standard demo/private output intact. Current gateway/HTTPS transport checks and fresh full matrix outcomes are recorded separately in the integration report.

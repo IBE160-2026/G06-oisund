@@ -192,7 +192,7 @@ action_items:
       metadata. Separately qualify delayed read retention before deciding whether
       any read guard needs changing. Existing write guards remain intact."
     owner: "Developer / QA"
-    status: done # Technically verified in 12.1; story owner acceptance remains pending.
+    status: done # Verified in 12.1; Jonas accepted 12.1 on 2026-10-27.
     ref: "D:\\IBE160\\_bmad-output\\implementation-artifacts\\epic-11-retro-2026-10-26.md"
   - id: "epic-11-retro-item-7-validate-source-and-lifetime-journeys"
     epic: 11
@@ -227,7 +227,7 @@ action_items:
       Epic 11 and Epic 12, with actual route/origin/session evidence before mobile
       testing. No remote setup or Epic 12 implementation is performed by this retrospective."
     owner: "Jonas / Developer"
-    status: open
+    status: done # Delivered in main before 12.1/12.2 acceptance; fictional pilot recorded in docs/tablet-pilot-result.md. Ordinary deployment remains separate.
     ref: "D:\\IBE160\\_bmad-output\\implementation-artifacts\\epic-11-retro-2026-10-26.md"
   - id: "epic-11-retro-item-11-clamp-extreme-session-clock-timer"
     epic: 11
@@ -235,7 +235,7 @@ action_items:
       a device clock more than about eleven days slow; clamp/schedule safely and verify
       access expiry without changing session leases or notice retention."
     owner: "Developer / QA"
-    status: done # Technically verified in 12.1; story owner acceptance remains pending.
+    status: done # Verified in 12.1; Jonas accepted 12.1 on 2026-10-27.
     ref: "D:\\IBE160\\_bmad-output\\implementation-artifacts\\epic-11-retro-2026-10-26.md"
   - id: "epic-11-retro-item-12-carry-cross-story-invariants"
     epic: 11
@@ -248,4 +248,4 @@ action_items:
     ref: "D:\\IBE160\\_bmad-output\\implementation-artifacts\\epic-11-retro-2026-10-26.md"
 
 
-# Jonas har ikke gjennomført manuell/fysisk akseptansetest av Story 12.1 eller Story 12.2. Teknisk integrasjon og automatiske tester innebærer ikke brukeraksept. Begge avventer Jonas sin testing.
+# Jonas accepted Story 12.1 and 12.2 on 2026-10-27 after manual testing and correction retest. Story 12.3 remains review/pending; current physical qualification remains separate.
