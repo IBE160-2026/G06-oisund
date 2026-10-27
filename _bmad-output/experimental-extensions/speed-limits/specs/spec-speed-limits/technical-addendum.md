@@ -2,11 +2,11 @@
 
 **EXPERIMENTAL EXTENSION — OUTSIDE APPROVED V1 SCOPE**
 
-SL-PLAN-1, kun plan. Gjenbruk [grensesnitt](../../interfaces.md) og eksisterende React/TypeScript–FastAPI–PostgreSQL. Ingen ny tjeneste, database eller nettverkskonfigurasjon er vedtatt. [Epics og stories](../../planning/epics.md) er bestillingen for en senere, særskilt autorisert gjennomføring.
+SL-PLAN-1.1, kun plan. Gjenbruk [grensesnitt](../../interfaces.md) og eksisterende React/TypeScript–FastAPI–PostgreSQL. Ingen ny tjeneste, database eller nettverkskonfigurasjon er vedtatt. [Epics og stories](../../planning/epics.md) er bestillingen for en senere, særskilt autorisert gjennomføring.
 
 ## Kontrakter og ansvar
 
-- **RoadSnapshot:** manifestId/revision, kilde-URL/hash/hentetid, original endret-/virkningstid, katalog-/schema-versjon, ordnede lenkeforekomster med geometri/CRS/lengde, noder og tillatte overganger, detalj→overordnet mapping/felt, type105 id/versjon/2021-verdi, dekning/hull. Manglende versjonsfelt skal være null, ikke en oppfunnet NVDB-nettversjon; hash og tidskontekst binder det faktiske uttrekket.
+- **RoadSnapshot:** manifestId/revision, kilde-URL/hash/hentetid, original endret-/virkningstid, katalog-/schema-versjon, packageSetId/revision og eksakte packageId/revision/hash, ordnede lenkeforekomster med geometri/CRS/lengde, noder og tillatte overganger, detalj→overordnet mapping/felt, type105 id/versjon/2021-verdi, dekning/hull. Manglende versjonsfelt skal være null, ikke en oppfunnet NVDB-nettversjon; hash og tidskontekst binder det faktiske uttrekket.
 - **PositionEvidence:** én allerede autorisert posisjonskilde, måle-/mottakstid, accuracy, nullable heading/speed, watchGeneration og livssyklus. Speed er valgfri og ubrukt av fast300m-policy. Ingen ekstern forespørsel per fix.
 - **RoadMatch:** manifest/profile/contextGeneration, rettet lenkeforekomst, alongRoadIntervalM, kandidater og avvisningsårsaker; currentRoadQualified, forwardPathQualified og passageQualified er uavhengige. Unknown/null er et gyldig resultat, ikke en feil som fylles med nærmeste veg.
 - **LimitDisplay:** current{value|null,reason,evidenceTime}, upcoming{value,changeOccurrenceId,distanceIntervalM,displayDistanceM}|null, separat reason, sourceAge og generations. Ved grenseoverlapp er current null og upcoming skjult. Hele mulig intervall må ha samme anvendelige aktuelle verdi.
@@ -40,3 +40,26 @@ Dette er en testprofil, **ikke en kvalifisert GPS-/driftsprofil**. Tallene gjør
 | G4: fysisk pilot | Story1.7: kilde-/skiltkontroll, målutstyr og kvalifisert feilmodell; på forhånd signert akseptvindu for tilgjengelighet og varslingsavstand. Rå kjørehistorikk samles ikke automatisk. |
 
 Ingen teknisk dokumentkontroll i denne oppgaven lukker G0–G4. Forberedte stories er ferdige planartefakter; de er ikke klare til ubetinget produksjonsbygging. Både aktuell grense og forvarsel kreves for første samlede leveranse, selv om de bygges i mindre steg.
+
+
+## SL-D12: korridoruavhengig kjerne og avgrensede datapakker
+
+Matching, grenseevaluering og varsling skal arbeide på den samme normaliserte vegdatakontrakten for alle kvalifiserte korridorer. Ny korridor krever nytt manifest, kvalifiserte data og kontrollbelegg; den skal ikke kreve endringer eller spesialgrener i kjernelogikken. Kildeadapteren normaliserer kildeformatet generelt. Manifest/profil skal være deklarative data, ikke injisert kode, korridorspesifikke algoritmer eller unntak som omgår kvalifisering.
+
+Pilotnavn, koordinater, veg-/node-/lenke-ID-er, R1–R4, valgte buer og endepunkt hører hjemme i manifest, datapakker og testfiksturer. Kjernen får topologi, geometri, felt, regulering og kvalifisert evidens; ingen beslutning skal avhenge av at en ID er en bestemt Tromsø-lenke. Rundkjøring er en generell topologisk situasjon. Første kvalifisering bruker piloten, men algoritmens støtte er definert av datakontrakten og kvaliteten, ikke en innebygd korridorliste.
+
+| Datagrense | Nødvendig kontrakt |
+|---|---|
+| Korridormanifest | Manifest-ID/revisjon, valgt rettet trasé og forekomstidentitet, kvalifiseringsbelegg, profilreferanse og eksakt sett av pakke-ID/revisjon/hash. Vegnavn er etiketter. |
+| Vegdatapakke | Eksplisitt geografisk/topologisk dekning og hull, kilde-/schema-/gyldighetsmetadata, geometri/CRS, noder/lenker/felt, regulering og forbindelser ved pakkegrensen. Samme kilde-ID kan finnes i flere pakker. |
+| Samlet evalueringsgrunnlag | Et versjonert, kompatibelt sett av pakker valideres før atomisk aktivering. En pakkegrense er ikke en vegslutt, kryssing, grenseendring eller ny passering. |
+
+Senere bydekning kan bestå av flere slike pakker. Det krever ikke én ubegrenset byfil eller en ny variant av kjernen. Første leveranse planlegger kontrakten og kontroller med små pakker; full byhøsting, automatisk pakkeoppdagelse og driftsutrulling for hele byen inngår ikke nå.
+
+Før en kjede går over en pakkegrense må koblings-ID-er/retning, CRS, kildeversjon/tidskontekst og felt-/reguleringsanvendelighet være kompatible eller ha eksplisitt kvalifisert mapping. Like navn, nærliggende koordinater eller overlappende flater er ikke en kobling. Identiske kildeforekomster i overlapp dedupliseres; uforenlige verdier/topologier gir synlig konflikt, aldri vilkårlig «siste pakke vinner».
+
+Forvarsel krever komplett kvalifisert kjede til endringen også når den ligger i nabopakken. Manglende/utløpt nabopakke skjuler forvarsel, mens kvalifisert aktuell veg i egen pakke kan bestå. Usikker aktuell tilknytning eller konflikt på aktuelt intervall gir ukjent. «Ingen endring innen 300 m» krever komplett horisont på tvers av nødvendige pakker. Fysisk endrings-/passeringsidentitet skal ikke være avledet bare av pakke-ID, slik at overlapper og pakkegrenser ikke skaper dobbeltvarsler.
+
+Kildeoppdateringer i et aktivt sett utløser eksisterende atomisk bytte og ny kvalifisering; ingen blanding av inkompatible versjoner. Passering av en intern grense i et allerede kvalifisert sett utløser derimot ikke et nytt snapshotbytte. Flere pakker skal ikke omgå ressursgrenser: laboratorieprofilens segment-/objekt-/byte-/requesttak gjelder samlet aktivt sett/forberedelse. Senere bydrift må ha et avgrenset aktivt utvalg og kvalifisert samlet budsjett; ingen privat posisjon eller full kjørehistorikk sendes ut for å velge pakker.
+
+Senere AC-13/14 kvalifiserer kontrakten og gjenbruk uten å love operativ dekning på en ny korridor. Gjeldende data-/GPS-/V1-porter gjelder også hver ny korridor.

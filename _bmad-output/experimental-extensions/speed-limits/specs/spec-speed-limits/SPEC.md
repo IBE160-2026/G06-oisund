@@ -48,6 +48,8 @@ Gi bussjåføren et forståelig, rådgivende bilde av registrert vegfartsgrense 
 
 ## Constraints
 
+- Ny korridor tas i bruk gjennom nytt manifest og kvalifiserte vegdatapakker uten endringer i kjernelogikken for matching, grenseevaluering eller varsling. Pilotens vegnavn, lenke-ID-er og rundkjøringer er data/testgrunnlag. Datakontrakten skal støtte senere bydekning gjennom flere avgrensede pakker, med kvalifiserte overganger og samme usikkerhetsregler.
+
 - Bygging venter på ferdig/testet godkjent V1 og implementert/kvalifisert rutenett- og posisjonsstøtte, kvalifisert vegkobling og egen senere bestilling.
 - Fast terskel 300 m beholdes i første leveranse. Planlagt trasé støtter, men overstyrer aldri motstridende posisjonsbevis. Holdeplassorden/nærmeste veg beviser ikke kjørt trasé.
 - Foreground opt-in og eksplisitt gjenopptakelse følger posisjonsplanen. Pause/Off, skjult side, tilgangstap og kontekstbytte invaliderer gamle callbacks/verdier.
@@ -56,11 +58,11 @@ Gi bussjåføren et forståelig, rådgivende bilde av registrert vegfartsgrense 
 
 ## Non-goals
 
-Kart, lyd, GPS-fartsvisning, dynamisk varselavstand, fartsoverskridelsesalarm, kjøretøyregelberegning, motsatt pilotretning, bakgrunns-/tunnelkontinuitet og full Tromsø-dekning. Ingen produktkode, produkttester, faktisk posisjonsinnsamling, tjenester/databaseendringer, commit/push/merge i denne oppgaven. Epics/stories inngår nå i planleveransen etter ny bestilling.
+Kart, lyd, GPS-fartsvisning, dynamisk varselavstand, fartsoverskridelsesalarm, kjøretøyregelberegning, motsatt pilotretning, bakgrunns-/tunnelkontinuitet og full Tromsø-dekning. Ingen produktkode, produkttester, faktisk posisjonsinnsamling, tjenester/databaseendringer eller merge i denne oppgaven. Git-publisering følger særskilt bestilling. Epics/stories inngår nå i planleveransen etter ny bestilling.
 
 ## Success signal
 
-En senere kvalifisert demonstrasjon består AC-01–AC-12 med begge skiltvisningene, underbygget passering og riktige ukjent-tilstander. Hele den valgte korridoren kan først kalles dekket når manifestets alle lenkeintervaller og fire rundkjøringer er kontrollert; ingen slik demonstrasjon er utført nå.
+En senere kvalifisert demonstrasjon består AC-01–AC-14 med begge skiltvisningene, underbygget passering og riktige ukjent-tilstander. Hele den valgte korridoren kan først kalles dekket når manifestets alle lenkeintervaller og fire rundkjøringer er kontrollert; ingen slik demonstrasjon er utført nå.
 
 ## Assumptions
 

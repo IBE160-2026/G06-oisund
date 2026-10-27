@@ -2,7 +2,7 @@
 stepsCompleted: [1, 2, 3, 4]
 status: planning-complete
 scope: EXPERIMENTAL EXTENSION — OUTSIDE APPROVED V1 SCOPE
-planning_version: SL-PLAN-1
+planning_version: SL-PLAN-1.1
 build_authorization: not-granted
 inputDocuments:
   - ../specs/spec-speed-limits/SPEC.md
@@ -42,6 +42,8 @@ NFR2: Avgrenset offentlig vegsnapshot og kort RAM-vindu; ingen full kjørehistor
 NFR3: Dag/natt, lesbar skiltforskjell, tekstalternativer og status som ikke bare uttrykkes med farge.
 NFR4: Kilde-/objekt-/nettversjon, gyldighet, hash og avgrenset oppdatering må være etterprøvbar; kildeutfall gir konservativ status.
 
+NFR5: Ny korridor skal tas i bruk med nytt manifest og kvalifiserte vegdata uten endring i matching-, grenseevaluerings- eller varslingskjernen. Pilotidentiteter er data/fiksturer. Kontrakten støtter senere bydekning med flere avgrensede, kompatible datapakker og samlet ressursbudsjett.
+
 ### Additional Requirements
 
 Gjenbruk React/TypeScript–FastAPI–PostgreSQL. V1 ferdig og testet; V1.2/V1.3 implementert og kvalifisert før bygging. Tillegget trenger eksplisitt rettet geometri og detaljert→overordnet vegkobling; holdeplassorden er utilstrekkelig. Ingen ny tjeneste, global konfigurasjon, synlig kart, lyd, egenfartsavhengighet eller alarm. Starter/greenfield-template gjelder ikke.
@@ -67,11 +69,12 @@ UX-DR4: Eksisterende dag/natt/tilgangs-/fokusregler beholdes; ingen interaksjon 
 | NFR2 |1.1,1.3,1.6,1.7 | RAM-/requesttak og ingen kjørehistorikk |
 | NFR3 |1.2,1.7 | Tema, lesbarhet og tekstalternativ |
 | NFR4 |1.1,1.6 | Proveniens/atomisk snapshot/ferskhet |
+| NFR5 |1.1,1.3–1.6 | AC-13/14, korridorbytte og pakkepartisjonering |
 | UX-DR1/2 |1.2,1.4 | Adskilte skilt og usikkerhetsårsaker |
 | UX-DR3 |1.4,1.6 | Passeringsidentitet/gjenkomst uten ny aktivering |
 | UX-DR4 |1.2,1.6,1.7 | Eksisterende tilgang/fokus, ingen kjøreinteraksjon |
 
-[AC-01–12](../specs/spec-speed-limits/verification.md) er senere kontroller, ikke beståtte tester.
+[AC-01–14](../specs/spec-speed-limits/verification.md) er senere kontroller, ikke beståtte tester.
 
 ## Epic List
 
@@ -87,6 +90,8 @@ Eksterne porter: ferdig/testet V1 og implementert/kvalifisert V1.2/V1.3, valgt d
 ## Epic 1: Forstå registrert grense og neste endring på pilotkorridoren
 
 **ID: SL-E1.** Samlet første leveranse er aktuell registrert vegfartsgrense og fast300m-forvarsel, begge med ærlig usikkerhet. Mellomleveranser er interne avgrensede demonstrasjoner og endrer ikke epicens omfang. Én epic beholdes fordi dette er ett sammenhengende brukerutfall; historiene nedenfor er gjennomførbare i rekkefølge uten avhengighet på senere stories.
+
+**Felles arkitekturkrav:** NFR5 gjelder alle stories. Pilotnavn/ID-er i kriteriene nedenfor identifiserer testgrunnlaget; de tillater ikke hardkoding i produktkjernen. Ingen nye stories eller byutrulling er lagt til.
 
 **Felles før start:** G0 i [teknisk tillegg](../specs/spec-speed-limits/technical-addendum.md). Alle tester/bygging som omtales nedenfor er senere arbeid. Ingen story utvider omfanget til kart, lyd, egenfart, dynamisk varsel, alarm eller kjøretøyregelberegning. Alle bruker historisk grunnlag med oppdatert kildekontroll før faktisk bruk. Ingen automatisk produksjonsaktivering etter en bestått story.
 
@@ -108,6 +113,8 @@ Som pilotansvarlig vil jeg klargjøre en avgrenset korridor med synlig datastatu
 
 **Given** endelig støttet delområde, **When** historien leveres, **Then** pakke og dekningsrapport kan inspiseres lokalt uten produkt-GPS, **And** et manifest med uløste obligatoriske datafelt kan bare være researchgrunnlag, ikke aktiv pilotpakke. G1s gjenværende avvik har eier og konkret kildekontroll; ingen senere story trengs for å akseptere korrekt blokkering.
 
+**Given** et nytt manifest og kvalifiserte vegdatapakker innen samme kontrakt, **When** korridoren forberedes, **Then** den kan aktiveres gjennom data uten endret kjernelogikk eller kjørbare manifest-unntak, **And** hver pakke og det samlede settet har eksplisitt identitet, kompatibilitet, dekning og budsjett. Korridorspesifikke navn/ID-er og utvalgsgeometri finnes bare i data/testgrunnlag (NFR5, AC-13/14).
+
 ### Story 1.2: Vis aktuell registrert grense og tydelig ukjent tilstand
 
 **ID:** SL-E1-S2. **Avhengighet:**1.1. **Krav:** FR1/6, NFR3, UX-DR1/2/4, AC-01/12. **Størrelse:** eksisterende panel + offisielle assets + grenseevaluering fra kontraktsinput; ingen GPS-matcher.
@@ -126,7 +133,7 @@ Som sjåfør vil jeg se et forståelig aktuelt skilt eller en tydelig ukjent til
 
 ### Story 1.3: Knytt flere målinger til aktuell veg på avgrensede hovedstrekk
 
-**ID:** SL-E1-S3. **Avhengighet:**1.1–1.2. **Krav:** FR1/4/5, NFR1/2, AC-01/08/09. **Størrelse:** rettlinjet/lokalt sammenhengende matching på1109722/1109517, integrert med panelet; usikre kryss kan gi ukjent uten støtte fra1.5.
+**ID:** SL-E1-S3. **Avhengighet:**1.1–1.2. **Krav:** FR1/4/5, NFR1/2, AC-01/08/09. **Størrelse:** generell matching på lokalt sammenhengende hovedstrekk, integrert med panelet; pilotlenkene1109722/1109517 er testdata; usikre kryss kan gi ukjent uten støtte fra1.5.
 
 Som sjåfør vil jeg at aktuell grense bygger på flere målinger av faktisk veg, slik at en nærliggende veg eller et GPS-hopp ikke gir et feil skilt.
 
@@ -141,6 +148,8 @@ Som sjåfør vil jeg at aktuell grense bygger på flere målinger av faktisk veg
 **Given** stillstand med tidligere kvalifisert veg og ferske konsistente fikser, **When** heading mangler eller er gammel, **Then** tidligere underbygget tilknytning kan bevares uten ny retning, **And** manglende oppdateringer over5s gir foreldet status. Grensene5s/25m/sekvens3 over2s kontrolleres både på og rett utenfor terskel i senere syntetiske forløp.
 
 **Given** løpende matching, **When** RAM-vinduet når30fikser/30s eller konteksten oppheves, **Then** data ryddes etter profilen, **And** ingen råfikser lagres i database, browserstorage, logger eller eksterne kall. Ingen ny skjult GPS-watch opprettes.
+
+**Given** en selvstendig syntetisk korridor og en separat omdøpt pilotfikstur, **When** samme matcherbygg brukes med nye manifester, **Then** faktisk veg/retning og usikkerhet bestemmes fra input og generelle regler uten kodeendring, **And** ingen pilot-ID eller vegnavn brukes som matchregel (NFR5, AC-13).
 
 ### Story 1.4: Vis fast300m-forvarsel og underbygg passering
 
@@ -162,9 +171,11 @@ Som sjåfør vil jeg se neste grense og avstanden frem til den, slik at jeg kan 
 
 **Given** fremoversikt eller nestegrensedata forsvinner, **When** aktuell veg fortsatt er sikker, **Then** bare upcoming fjernes med årsak, **And** «Ingen registrert endring innen300m» brukes bare ved komplett kvalifisert horisont.
 
+**Given** en endring i en kompatibel nabopakke, **When** samme nettverk evalueres som én eller to pakker, **Then** langsveg-avstand, grenseevaluering, 300m-varsel og passeringsidentitet er like, **And** pakkeoverlapp gir ikke dobbeltvarsling; manglende fremoverdata skjuler bare berørt støtte. Annen korridor bruker samme kjernebygg (NFR5, AC-13/14).
+
 ### Story 1.5: Bevar riktig vegvalg gjennom pilotens kryss og rundkjøringer
 
-**ID:** SL-E1-S5. **Avhengighet:**1.1–1.4. **Krav:** FR2/4, AC-07/08/11. **Størrelse:** kvalifisering av de fire planlagte kryssene og deres relevante alternative armer; ingen generell landsdekkende ruter.
+**ID:** SL-E1-S5. **Avhengighet:**1.1–1.4. **Krav:** FR2/4, AC-07/08/11. **Størrelse:** generell kryss-/rundkjøringslogikk kvalifisert med pilotens fire kryss og deres relevante alternative armer; ingen landsdekkende utrulling.
 
 Som sjåfør vil jeg beholde sikker aktuell grense selv om neste avkjøring er usikker, slik at forvarselet ikke gjelder en veg jeg kanskje ikke kjører.
 
@@ -179,6 +190,8 @@ Som sjåfør vil jeg beholde sikker aktuell grense selv om neste avkjøring er u
 **Given** R1–R4 med registrerte felt og forbindelser, **When** hvert kontrollpunkt verifiseres syntetisk, **Then** rett arm, feil arm, stopp og gjenopptatt bevegelse får forventet separat current/upcoming-status, **And** R2-baklengs265,519m og R3-baklengsbuen er negative regresjonseksempler. Rundkjørings70 presenteres ikke som trygg anbefalt rundkjøringsfart.
 
 **Given** endepunkt1138796 eller grense for alternativvegdekning, **When** brukeren fortsetter utenfor støttet geometri, **Then** data-/vegkvalifisering trekkes tilbake for berørt del, **And** systemet gir ingen «ingen endring»-garanti utenfor manifestet. Data for alle relevante alternativer må være med før matching der erklæres støttet.
+
+**Given** nye kryss/rundkjøringer med andre ID-er, antall og buelengder i en syntetisk korridor, **When** generisk vegvalg evalueres, **Then** utfallet følger kvalifisert topologi/felt/evidens uten særkode for R1–R4, **And** kodediff/importkontroll viser at pilotspesifikke navn og lenker ligger i data/testgrunnlag (NFR5, AC-13).
 
 ### Story 1.6: Håndter avbrudd, gjenopptakelse og kildebytte uten gamle verdier
 
@@ -198,9 +211,11 @@ Som sjåfør vil jeg se ærlig status når posisjon eller grunnlag forsvinner, s
 
 **Given** nytt snapshot med endret geometri/grense-ID, **When** det tas i bruk, **Then** hele pakken byttes atomisk med ny kvalifisering og uten versjonsblanding, **And** automatiske aktivitet-/stoppvalg, privat retensjon og andre utvidelser endres ikke. Senere kontroller dokumenterer at råposisjoner ikke kommer i nettverks-/logg-/persistensflater.
 
+**Given** et avgrenset aktivt pakkesett, **When** pakkenes rekkefølge endres, en nabo mangler, eller overlapp/CRS/tidsversjoner er uforenlige, **Then** identiske gyldige pakker gir samme utfall uavhengig av rekkefølge, mens berørt konflikt gir ukjent/undertrykt varsel, **And** ingen «siste pakke vinner», skjult versjonsblanding eller overskridelse av samlet budsjett tillates. Et faktisk settbytte skjer atomisk med ny kvalifisering; intern pakkegrense alene er ikke en ny passering (NFR5, AC-14).
+
 ### Story 1.7: Avgjør om begge visningene er brukbare i den avgrensede piloten
 
-**ID:** SL-E1-S7. **Avhengighet:**1.1–1.6, separat autorisasjon til fysisk test. **Krav:** FR1–6, NFR1–4, UX-DR1–4, AC-01–12. **Størrelse:** ett avgrenset pilot- og beslutningsopplegg; feilretting blir egne senere oppgaver, ikke ubegrenset arbeid i denne storyen.
+**ID:** SL-E1-S7. **Avhengighet:**1.1–1.6, separat autorisasjon til fysisk test. **Krav:** FR1–6, NFR1–5, UX-DR1–4, AC-01–14. **Størrelse:** ett avgrenset pilot- og beslutningsopplegg; feilretting blir egne senere oppgaver, ikke ubegrenset arbeid i denne storyen.
 
 Som pilotansvarlig vil jeg ha et dokumentert beslutningsgrunnlag fra faktisk enhet og veg, slik at registrert dekning og teoretisk300m ikke forveksles med trygg, fungerende støtte.
 

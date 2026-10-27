@@ -44,3 +44,7 @@ Registrerte verdier30/40/50/60/70 er funnet i målrettede uttrekk. To baklengsbu
 Planleggingen er fullført gjennom epics/stories. Ingen nye produktvalg blokkerer planen. Operativ kilde-/feltkontroll, faktiske ikonfiler, implementasjonens syntetiske verifikasjon og fysisk GPS-/skiltkontroll er konkrete senere story-kriterier, ikke påstått bestått. Ferdig/testet V1 og kvalifiserte rutenett-/posisjonsavhengigheter samt separat byggbestilling kreves før implementering.
 
 Alle nye filer, prosessminner og kildebelegg ligger her. Ingen produktimplementering, produkttester, faktisk posisjonsinnsamling, commit, push eller merge er utført. Tidligere spec-kontroller gjelder sitt historiske dokumentsett; [gjeldende sluttkontroll](planning/validation.md) gjelder hele den nye planleveransen.
+
+## Presisering SL-D12
+
+En ny korridor tas i bruk med nytt manifest og kvalifiserte vegdatapakker uten endringer i kjernelogikken for matching, grenseevaluering eller varsling. Pilotnavn, lenke-ID-er og rundkjøringer ligger i data/testgrunnlag. Senere bydekning kan bruke flere avgrensede pakker med kontrollerte koblinger, versjoner og samlet ressursbudsjett. [Teknisk kontrakt](specs/spec-speed-limits/technical-addendum.md) og NFR5/AC-13–14 i eksisterende stories gjør kravet etterprøvbart. Ingen implementering eller byhøsting er startet.

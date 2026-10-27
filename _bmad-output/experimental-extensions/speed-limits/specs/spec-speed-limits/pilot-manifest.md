@@ -4,6 +4,8 @@
 
 **SL-P1 v1-planning**, Polaria→flyplassen, overflate, slutt etter fjerde rundkjøring. Retning og endepunktvalg er avklart med brukeren. Motsatt retning er utsatt. Dette fryser et kildebundet planforslag, ikke en fysisk godkjent bussrute. D=dokumentert kilde, O=observert uttrekk, F=foreslått avgrensning, U=uavklart, P=fysisk kontroll.
 
+Dette er ett data-/testmanifest for den generelle kjernen. Alle nedenstående vegnavn, ID-er, rundkjøringsbuer og kontrollpunkter skal ligge i manifest/datapakker/testgrunnlag, aldri som særtilfeller i kjernelogikken. Ny korridor følger samme kontrakt og kvalifisering, jf. [SL-D12](technical-addendum.md).
+
 ## Ordnet trasé og identitet
 
 O/F: Startnode1139933 på Strandvegen ved Polaria; slutt node1138796 på Flyplassvegen,37,570m etter rundkjøringens utgang. De139 ordnede kildesegmentene har ingen nodebrudd og summerer til8656,655m, cirka8,66km. Dette er summert kildelengde, ikke GPS-målt kjørelengde. Brukerens «omtrent én mil» var lokalkunnskap. Offentlig adresseprojeksjon0.00775722@1109722 er et søkeanker, ikke pilotens faktiske brukerposisjon.

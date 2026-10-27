@@ -38,3 +38,8 @@ Et kort målevindu og dedupliseringstilstand er øktlokalt. Stillstand kan bevar
 ## SL-PLAN-1
 
 [Datakontraktpresisering og numerisk laboratorieprofil](specs/spec-speed-limits/technical-addendum.md) og [storyfordeling](planning/epics.md) konkretiserer dette grensesnittet. Kildebasert pilotmanifest er offentlig planreferanse; det oppretter ikke privat datert rutebinding. Fullt intervall for overordnet/detaljert mapping og feltretning må følge snapshotet. R2/R3 viser hvorfor rutetjenestens korteste kjede må kontrolleres mot feltretning. Katalogens objektretning, basisnettets lenkeretning og vegens metreringsretning er tre forskjellige forhold. Ingen av referanseutvidelsenes kontrakter er endret.
+
+
+## Korridorer og pakker — SL-D12
+
+Manifestet binder en korridor til ett eller flere kvalifiserte vegdatapakker med packageId/revision/hash og en samlet packageSetId/revision. Kjernen konsumerer den normaliserte kontrakten, ikke pilotnavn eller forhåndskodede lenker. Ny korridor er et data-/kvalifiseringsbytte uten endringer i matching, grenseevaluering eller varsling. Detaljene om kompatibilitet, grensekoblinger, overlapp, konflikt og samlet ressursbudsjett står i [teknisk tillegg](specs/spec-speed-limits/technical-addendum.md). Pakke-ID holdes atskilt fra fysisk endrings-/passeringsidentitet. Rutenettets valgte korridor kan fortsatt ikke overstyre målinger om faktisk veg. Senere bydekning kan bruke flere avgrensede pakker; ingen byutrulling eller ny innsamling bestilles her.

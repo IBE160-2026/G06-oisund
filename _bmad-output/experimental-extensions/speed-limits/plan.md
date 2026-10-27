@@ -15,3 +15,7 @@
 [Kvalifiseringsrapport](qualification/2026-10-27/qualification.md) skiller dokumenterte feltregler, observert data, avledet planrute og fysisk ukjent. Avgrenset dataarbeid er avsluttet; gjenværende operative/fysiske kontroller er eksplisitte porter og story-kriterier.
 
 Neste steg i prosjektet er å ferdigstille/teste V1 og kvalifisere avhengighetene. Deretter kan en senere beredskapskontroll vurdere SL-E1; ingen sprint eller bygging starter her. GPS-fart/dynamisk varsling er fortsatt eget senere trinn; fartsoverskridelsesalarm inngår ikke.
+
+## Presisering SL-D12
+
+En ny korridor tas i bruk med nytt manifest og kvalifiserte vegdatapakker uten endringer i kjernelogikken for matching, grenseevaluering eller varsling. Pilotnavn, lenke-ID-er og rundkjøringer ligger i data/testgrunnlag. Senere bydekning kan bruke flere avgrensede pakker med kontrollerte koblinger, versjoner og samlet ressursbudsjett. [Teknisk kontrakt](specs/spec-speed-limits/technical-addendum.md) og NFR5/AC-13–14 i eksisterende stories gjør kravet etterprøvbart. Ingen implementering eller byhøsting er startet.
