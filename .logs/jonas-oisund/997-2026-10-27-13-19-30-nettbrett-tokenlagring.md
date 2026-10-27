@@ -103,3 +103,19 @@ Sluttrapport docs/tablet-pilot-result.md skiller brukerutførte fysiske prøver,
 ### Åpne punkter
 - Separat deploybeslutning, riktig imageversjon og ny fysisk kvalifikasjon av nyere kombinasjon før eventuell ordinær bruk; drift/rotasjon/sikkerhetskopi må avklares da.
 - Bevisgrensene i sluttrapporten består: faktisk signert utløpt JWT, øvrige ikke-fysisk-prøvde sikkerhets-/skrivetimingvarianter samt uavhengig WAN/IPv6-/OS/supply-chain-kontroll. Ingen hemmeligheter skal innhentes i chat for å lukke dem. Begge rester er speilet i egne issues.md-punkter.
+
+## 2026-10-27 kl. 16:52 — Jonas Øisund
+
+### Oppgave
+Eier ba om å pushe ferdig committet arbeid dersom noe var utestående. Tilgangsarbeidet er ellers stoppet mens eier fullfører Story 12.1–12.3.
+
+### Plan
+Kontrollere main/remote og lokal status, pushe bare committet main uten force, bevare ukommitterte filer fra den andre chatten og bekrefte remote-hodet.
+
+### Resultat
+Main på 3c6282d6e31236b039abc7ef1821fb19c4d5530d lå foran origin/main ce0669f. Utførte git push origin med eksakt kildecommit til refs/heads/main, uten force. Push lyktes, og git ls-remote bekreftet remote main på 3c6282d6e31236b039abc7ef1821fb19c4d5530d. Dermed er tidligere tilgangskode, merge, sluttrapport og ferdige loggcommits publisert. Denne etterfølgende loggoppdateringen sendes i samme publiseringsøkt; ingen produktkode endres.
+
+Endret docs/story-12-manual-testing.md, ny testveiledning og ukommitterte Story 12-evidensfiler ble ikke staget eller committet og inngikk ikke i pushen. Ingen branchbytte/stash, tjenestestart, tunnelstart, DNS-, brannmur- eller dataendring. Ingen tester gjentatt for selve Git-overføringen; kildekoden er den allerede verifiserte. Ingen ny Story 12-aksept gitt.
+
+### Åpne punkter
+Ingen nye. Eksisterende deploy-/bevisgrenser står i issues.md og docs/tablet-pilot-result.md; Story 12-arbeidet håndteres videre i den andre chatten.
