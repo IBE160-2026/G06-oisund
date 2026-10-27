@@ -1,0 +1,55 @@
+name: ibe160-story122-tests
+services:
+  db:
+    image: postgres:17-alpine@sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24
+    environment:
+      POSTGRES_DB: fictional_assessment
+      POSTGRES_USER: fictional
+      POSTGRES_PASSWORD: synthetic-story122-only
+    volumes: [story122_fictional:/var/lib/postgresql/data]
+    healthcheck:
+      test: [CMD-SHELL, pg_isready -U fictional -d fictional_assessment]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+  api:
+    build: ./backend
+    environment:
+      APP_MODE: fictional-assessment
+      DATABASE_URL: postgresql://fictional:synthetic-story122-only@db/fictional_assessment
+    ports: ['127.0.0.1:18222:8000']
+    depends_on:
+      db:
+        condition: service_healthy
+  private-db:
+    image: postgres:17-alpine@sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24
+    environment:
+      POSTGRES_DB: private_work
+      POSTGRES_USER: private_work
+      POSTGRES_PASSWORD_FILE: /run/secrets/story122_password
+    secrets: [story122_password]
+    volumes: [story122_private:/var/lib/postgresql/data]
+    healthcheck:
+      test: [CMD-SHELL, pg_isready -U private_work -d private_work]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+  private-api:
+    build: ./backend
+    environment:
+      APP_MODE: private-local
+      PRIVATE_DATABASE_URL: postgresql://private_work@private-db/private_work
+      PRIVATE_DATABASE_PASSWORD_FILE: /run/secrets/story122_password
+      PRIVATE_ORIGIN: http://127.0.0.1:15222
+      PRIVATE_LOOPBACK_DEVELOPMENT: '1'
+    secrets: [story122_password]
+    ports: ['127.0.0.1:18223:8000']
+    depends_on:
+      private-db:
+        condition: service_healthy
+volumes:
+  story122_fictional:
+  story122_private:
+secrets:
+  story122_password:
+    file: ./.private-runtime/story122-postgres-password

@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 10-19-2026 14:35
-last_updated: 10-26-2026 19:42
+last_updated: 10-26-2026 23:09
 project: IBE160
 project_key: NOKEY
 tracking_system: file-system
@@ -59,9 +59,9 @@ development_status:
   11-6-recover-from-an-unavailable-server: done # Jonas explicitly accepted integrated 11.6 on 2026-10-26; 421 backend / 479 browser passes. Retro authorized; no publication.
   epic-11-retrospective: done
 
-  epic-12: backlog
+  epic-12: in-progress
   12-1-enforce-the-retained-data-boundary: backlog
-  12-2-repeat-a-fictional-assessment: backlog
+  12-2-repeat-a-fictional-assessment: review # Independent scope verified; owner acceptance and 12.1 notice integration pending.
   12-3-use-the-included-views-on-tablet-and-pc: backlog
   12-4-verify-the-complete-user-flow: backlog
   12-5-deliver-a-reproducible-submission: backlog
