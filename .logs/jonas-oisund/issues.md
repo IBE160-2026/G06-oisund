@@ -1,5 +1,8 @@
 # Åpne punkter
 
+- [x] 2026-10-27 [Nettbrett-tokenlagring](997-2026-10-27-13-19-30-nettbrett-tokenlagring.md) — Eier må fullføre skjult tokenlagring; kontroller deretter bare eksistens og ACL uten innholdslesing. (løst 2026-10-27: eier bekreftet lagring; metadata og ACL kontrollert uten innholdslesing.)
+- [ ] 2026-10-27 [Nettbrett-tokenlagring](997-2026-10-27-13-19-30-nettbrett-tokenlagring.md) — Praktisk naturlig/utløpt Access-token og samlet kandidat/regresjon mot nyere main gjenstår; én API-konfigurasjonskonflikt i PrivateAccess.tsx er identifisert (docs/tablet-main-review.md). Lenovo Wi-Fi/mobilnett, MFA, lagring/gjenåpning, observert nettbrudd og tilbakekalling med direkte API-nekt/ny MFA er brukerbekreftet. Cookieflagg, privat 200/no-store/DYNAMIC og CSRF-nekt uten header er brukerbekreftet. Annen ikke-medlemsidentitet ble avvist før appen. Full sikkerhets-/integreringsgjennomgang er ikke avsluttet.
+
 - [ ] 2026-10-26 [Publisering av Epic 11](999-2026-10-26-20-23-06-publiser-epic-11.md) — E11-A1: Tilby eksplisitt oppgivelse av uavklart planforsøk etter autorisert permanent bortfall.
 - [ ] 2026-10-26 [Publisering av Epic 11](999-2026-10-26-20-23-06-publiser-epic-11.md) — E11-A2: Hent fersk buss-/aktivitetsverdi før sammenligning adopteres og lokalt forslag fjernes.
 - [ ] 2026-10-26 [Publisering av Epic 11](999-2026-10-26-20-23-06-publiser-epic-11.md) — E11-A3: Avklar kjent kapasitetsavslag uavhengig av etterfølgende lesefeil; bevar kontrakttester.
