@@ -1,0 +1,70 @@
+[
+  {
+    "text": "Kilde og rettelser · aktivitet 1",
+    "padding": [
+      "11.2px",
+      "11.2px"
+    ],
+    "border": [
+      "1px",
+      "1px"
+    ],
+    "fontSize": "16px",
+    "lineHeight": "25.6px",
+    "rect": {
+      "width": 678,
+      "height": 49.984375
+    }
+  },
+  {
+    "text": "Kilde og rettelser · aktivitet 2",
+    "padding": [
+      "11.2px",
+      "11.2px"
+    ],
+    "border": [
+      "1px",
+      "1px"
+    ],
+    "fontSize": "16px",
+    "lineHeight": "25.6px",
+    "rect": {
+      "width": 678,
+      "height": 49.984375
+    }
+  },
+  {
+    "text": "Bekreftede detaljer og historisk kilde",
+    "padding": [
+      "11.2px",
+      "11.2px"
+    ],
+    "border": [
+      "1px",
+      "1px"
+    ],
+    "fontSize": "16px",
+    "lineHeight": "25.6px",
+    "rect": {
+      "width": 750,
+      "height": 49.984375
+    }
+  },
+  {
+    "text": "Godtatte ukjente fakta",
+    "padding": [
+      "0px",
+      "0px"
+    ],
+    "border": [
+      "0px",
+      "0px"
+    ],
+    "fontSize": "16px",
+    "lineHeight": "25.6px",
+    "rect": {
+      "width": 750,
+      "height": 58
+    }
+  }
+]

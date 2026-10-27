@@ -1,0 +1,46 @@
+{
+  "name": "verified-editor-night-time",
+  "kind": "native-input-affordance",
+  "crop": {
+    "x0": 1220,
+    "y0": 35,
+    "x1": 1284,
+    "y1": 83,
+    "scale": 2
+  },
+  "palette": [
+    [
+      "32,62,83",
+      2750
+    ],
+    [
+      "255,255,255",
+      185
+    ],
+    [
+      "88,110,126",
+      47
+    ],
+    [
+      "144,159,169",
+      46
+    ],
+    [
+      "199,207,212",
+      44
+    ]
+  ],
+  "background": [
+    32,
+    62,
+    83
+  ],
+  "core": [
+    255,
+    255,
+    255
+  ],
+  "corePixels": 185,
+  "ratio": 11.197780367657575,
+  "method": "Most frequent non-background RGB differing >=30 in at least one channel, >=6 actual pixels; no contrast threshold used to select core. Glyph identity requires visual crop inspection."
+}

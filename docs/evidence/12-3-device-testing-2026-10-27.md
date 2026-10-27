@@ -1,5 +1,8 @@
 # Story 12.3 — physical Lenovo / Brave verification, 27 October 2026
 
+> Later final decision,27 October2026: [remaining required device checks passed and conditional owner approval became effective](12-3-device-acceptance-2026-10-27.md).12.3 is done/accepted. Pending/unperformed statements below describe this earlier checkpoint; original results/failures remain unchanged. No commit/push/main merge in the final follow-up.
+
+
 The covered device checks passed after bounded test-adapter corrections. **No confirmed product defect was found. Story12.3 remains review/pending owner acceptance.** Jonas confirmed the finger theme change and physical portrait rotation separately; neither answer is treated as acceptance of the whole story.12.1/12.2 remain done/accepted. No12.4 work, product correction, main merge, deployment or push was performed.
 
 ## Device, build and isolation

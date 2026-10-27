@@ -1,0 +1,14 @@
+{
+  "observed": "2026-10-27T21:12:07.087317+00:00",
+  "main_before": "74849ff21bee108fe9cff93d740a96a6c6d2d7c5",
+  "product_commit": "8ca318b55b98eb34de54f29ecab038322e3ccab6",
+  "product_diff_since_tested_commit": [],
+  "source_files_match": 41,
+  "built_files_match": 6,
+  "origin_main_current_after_fetch": true,
+  "main_clean": true,
+  "story_owner_acceptance": "accepted",
+  "12.4": "backlog",
+  "authorization": "Latest user message explicitly authorizes docs/evidence commit/push, story-to-main merge, final checks and main push",
+  "note": "Historical raw evidence and its no-commit checkpoint remain immutable. This is a separate publication follow-up."
+}

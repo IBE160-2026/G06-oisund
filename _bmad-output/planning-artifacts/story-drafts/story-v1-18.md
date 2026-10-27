@@ -1,5 +1,5 @@
 ---
-status: review
+status: done
 scopeApproval: approved
 decision: SCOPE-02
 approvedOn: 2026-10-19
@@ -12,7 +12,7 @@ implementationStarted: true
 
 ### Story 12.3: Use the included views on tablet and PC
 
-**Stable alias:** V1-18. **Status:** review; technical implementation and evidence recorded; Jonas' manual acceptance is pending.
+**Stable alias:** V1-18. **Status:** done/accepted, 27 October 2026. Jonas approved physical readability/touch comfort and conditional overall acceptance; remaining required checks passed. See [final acceptance evidence](../../../docs/evidence/12-3-device-acceptance-2026-10-27.md). No commit/push/main merge;12.4 remains backlog.
 **Depends on:** V1-09, V1-11, V1-14.
 **Traceability:** NFR-1/4; IR-01; AC-10; SCOPE-02.
 

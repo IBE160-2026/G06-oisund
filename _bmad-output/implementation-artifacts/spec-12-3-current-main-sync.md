@@ -2,16 +2,24 @@
 title: '12.3 — Reconcile accepted current main and tablet entry'
 type: chore
 created: 2026-10-27
-status: in-review
+status: done
 route: dispatch
 review_loop_iteration: 0
 baseline_commit: df840655ec0a9c9666b59d6fd4981e7f0ffc3585
 main_target: 74849ff21bee108fe9cff93d740a96a6c6d2d7c5
 story_key: 12-3-use-the-included-views-on-tablet-and-pc
 technical_status: integrated-verified
-owner_acceptance: pending
+owner_acceptance: accepted
+accepted_on: 2026-10-27
+acceptance_evidence: ../../docs/evidence/12-3-device-acceptance-2026-10-27.md
 context: []
 ---
+
+> Publication follow-up,27 October2026: Jonas has now explicitly authorized committing/pushing the completed documentation and evidence, then merging12.3 into main after identity/final checks and pushing main. Earlier no-commit/no-push/no-merge statements describe the previous checkpoint.12.4 remains backlog.
+
+
+> Final owner decision, 27 October 2026: **done/accepted**. Jonas approved personal Lenovo/Brave readability and touch comfort and conditionally granted overall acceptance. All remaining required checks passed; see [final device acceptance](../../docs/evidence/12-3-device-acceptance-2026-10-27.md). Earlier frozen scope/pending statements below are historical. His latest no-commit/no-push instruction overrides earlier publication permissions; no main merge or12.4 work.
+
 
 <frozen-after-approval reason="User explicitly authorizes main integration, necessary adaptation, verification, commits and push on the existing story branch">
 

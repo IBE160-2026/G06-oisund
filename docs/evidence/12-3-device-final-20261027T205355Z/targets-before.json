@@ -1,0 +1,22 @@
+[
+  {
+    "id": "98DC3098B039D88F7BC83957BBD8AC4C",
+    "title": "Fiktiv simulering",
+    "url": "http://127.0.0.1:15323/demo"
+  },
+  {
+    "id": "1",
+    "title": "Ny fane",
+    "url": "chrome-native://newtab/"
+  },
+  {
+    "id": "3",
+    "title": "Bussjåførassistenten – privat",
+    "url": "https://app.bussassistent.com/"
+  },
+  {
+    "id": "2",
+    "title": "Bussjåførassistenten – privat",
+    "url": "https://app.bussassistent.com/"
+  }
+]

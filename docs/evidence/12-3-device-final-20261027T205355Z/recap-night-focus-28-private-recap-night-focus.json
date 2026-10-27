@@ -1,0 +1,290 @@
+{
+  "pixelResults": [
+    {
+      "changedArea": 1762,
+      "requiredArea": 1123.84375,
+      "representative": "private-recap-night-1",
+      "coverage": "actual same-pixel focused/unfocused perimeter change at >=3:1",
+      "cacheHit": false
+    },
+    {
+      "changedArea": 1862,
+      "requiredArea": 1161.8125,
+      "representative": "private-recap-night-2",
+      "coverage": "actual same-pixel focused/unfocused perimeter change at >=3:1",
+      "cacheHit": false
+    },
+    {
+      "changedArea": 1526,
+      "requiredArea": 937.90625,
+      "representative": "private-recap-night-3",
+      "coverage": "actual same-pixel focused/unfocused perimeter change at >=3:1",
+      "cacheHit": false
+    },
+    {
+      "changedArea": 2116,
+      "requiredArea": 1360.59375,
+      "representative": "private-recap-night-4",
+      "coverage": "actual same-pixel focused/unfocused perimeter change at >=3:1",
+      "cacheHit": false
+    },
+    {
+      "changedArea": 1677,
+      "requiredArea": 850.125,
+      "representative": "private-recap-night-5",
+      "coverage": "actual same-pixel focused/unfocused perimeter change at >=3:1",
+      "cacheHit": false
+    },
+    {
+      "changedArea": 2405,
+      "requiredArea": 1213.28125,
+      "representative": "private-recap-night-6",
+      "coverage": "actual same-pixel focused/unfocused perimeter change at >=3:1",
+      "cacheHit": false
+    },
+    {
+      "changedArea": 1142,
+      "requiredArea": 592.75,
+      "representative": "private-recap-night-7",
+      "coverage": "actual same-pixel focused/unfocused perimeter change at >=3:1",
+      "cacheHit": false
+    },
+    {
+      "changedArea": 960,
+      "requiredArea": 552.78125,
+      "representative": "private-recap-night-8",
+      "coverage": "actual same-pixel focused/unfocused perimeter change at >=3:1",
+      "cacheHit": false
+    },
+    {
+      "changedArea": 1136,
+      "requiredArea": 695.125,
+      "representative": "private-recap-night-0",
+      "coverage": "actual same-pixel focused/unfocused perimeter change at >=3:1",
+      "cacheHit": false
+    }
+  ],
+  "census": [
+    {
+      "id": "0",
+      "label": "Nattmodus"
+    },
+    {
+      "id": "1",
+      "label": "Forberedelse og planlister"
+    },
+    {
+      "id": "2",
+      "label": "Kontroller og rediger utkast"
+    },
+    {
+      "id": "3",
+      "label": "Til den åpne planen"
+    },
+    {
+      "id": "4",
+      "label": "Hent skift og aktivitetsstatus igjen"
+    },
+    {
+      "id": "5",
+      "label": "Tilbake til dagen"
+    },
+    {
+      "id": "6",
+      "label": "Til forberedelse og planlisten"
+    },
+    {
+      "id": "7",
+      "label": "Logg ut"
+    },
+    {
+      "id": "8",
+      "label": "Åpne fiktiv demo"
+    }
+  ],
+  "visited": [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "0"
+  ],
+  "missing": [],
+  "completedCycle": true,
+  "results": [
+    {
+      "censusId": "1",
+      "rect": {
+        "top": 171.78125,
+        "bottom": 229.78125,
+        "left": 25,
+        "right": 247.9609375
+      },
+      "visibleOutlineArea": 1685.765625,
+      "requiredOutlineArea": 1123.84375,
+      "label": "Forberedelse og planlister",
+      "ratio": 11.45007504521487,
+      "width": 3,
+      "visible": true,
+      "inModal": true,
+      "onscreen": true
+    },
+    {
+      "censusId": "2",
+      "rect": {
+        "top": 171.78125,
+        "bottom": 229.78125,
+        "left": 259.9609375,
+        "right": 492.4140625
+      },
+      "visibleOutlineArea": 1742.71875,
+      "requiredOutlineArea": 1161.8125,
+      "label": "Kontroller og rediger utkast",
+      "ratio": 11.45007504521487,
+      "width": 3,
+      "visible": true,
+      "inModal": true,
+      "onscreen": true
+    },
+    {
+      "censusId": "3",
+      "rect": {
+        "top": 171.78125,
+        "bottom": 229.78125,
+        "left": 504.4140625,
+        "right": 680.890625
+      },
+      "visibleOutlineArea": 1406.859375,
+      "requiredOutlineArea": 937.90625,
+      "label": "Til den åpne planen",
+      "ratio": 11.45007504521487,
+      "width": 3,
+      "visible": true,
+      "inModal": true,
+      "onscreen": true
+    },
+    {
+      "censusId": "4",
+      "rect": {
+        "top": 402.96875,
+        "bottom": 460.96875,
+        "left": 25,
+        "right": 307.1484375
+      },
+      "visibleOutlineArea": 2040.890625,
+      "requiredOutlineArea": 1360.59375,
+      "label": "Hent skift og aktivitetsstatus igjen",
+      "ratio": 11.45007504521487,
+      "width": 3,
+      "visible": true,
+      "inModal": true,
+      "onscreen": true
+    },
+    {
+      "censusId": "5",
+      "rect": {
+        "top": 687.4609375,
+        "bottom": 745.4609375,
+        "left": 43,
+        "right": 197.53125
+      },
+      "visibleOutlineArea": 1275.1875,
+      "requiredOutlineArea": 850.125,
+      "label": "Tilbake til dagen",
+      "ratio": 11.45007504521487,
+      "width": 3,
+      "visible": true,
+      "inModal": true,
+      "onscreen": true
+    },
+    {
+      "censusId": "6",
+      "rect": {
+        "top": 687.4609375,
+        "bottom": 745.4609375,
+        "left": 208.7265625,
+        "right": 454.046875
+      },
+      "visibleOutlineArea": 1819.921875,
+      "requiredOutlineArea": 1213.28125,
+      "label": "Til forberedelse og planlisten",
+      "ratio": 11.45007504521487,
+      "width": 3,
+      "visible": true,
+      "inModal": true,
+      "onscreen": true
+    },
+    {
+      "censusId": "7",
+      "rect": {
+        "top": 918.6484375,
+        "bottom": 976.6484375,
+        "left": 17,
+        "right": 107.1875
+      },
+      "visibleOutlineArea": 889.125,
+      "requiredOutlineArea": 592.75,
+      "label": "Logg ut",
+      "ratio": 11.45007504521487,
+      "width": 3,
+      "visible": true,
+      "inModal": true,
+      "onscreen": true
+    },
+    {
+      "censusId": "8",
+      "rect": {
+        "top": 1037.2421875,
+        "bottom": 1056.2421875,
+        "left": 17,
+        "right": 136.1953125
+      },
+      "visibleOutlineArea": 829.171875,
+      "requiredOutlineArea": 552.78125,
+      "label": "Åpne fiktiv demo",
+      "ratio": 11.45007504521487,
+      "width": 3,
+      "visible": true,
+      "inModal": true,
+      "onscreen": true
+    },
+    {
+      "censusId": "0",
+      "rect": {
+        "top": 33,
+        "bottom": 91,
+        "left": 17,
+        "right": 132.78125
+      },
+      "visibleOutlineArea": 1042.6875,
+      "requiredOutlineArea": 695.125,
+      "label": "Nattmodus",
+      "ratio": 11.45007504521487,
+      "width": 3,
+      "visible": true,
+      "inModal": true,
+      "onscreen": true
+    },
+    {
+      "censusId": "1",
+      "rect": {
+        "top": 171.78125,
+        "bottom": 229.78125,
+        "left": 25,
+        "right": 247.9609375
+      },
+      "visibleOutlineArea": 1685.765625,
+      "requiredOutlineArea": 1123.84375,
+      "label": "Forberedelse og planlister",
+      "ratio": 11.45007504521487,
+      "width": 3,
+      "visible": true,
+      "inModal": true,
+      "onscreen": true
+    }
+  ]
+}

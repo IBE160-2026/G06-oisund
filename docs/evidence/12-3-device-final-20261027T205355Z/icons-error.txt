@@ -1,0 +1,6 @@
+locator.scrollIntoViewIfNeeded: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('select:visible').first()[22m
+
+    at icon (D:\IBE160\tmp\story-12-3\tmp\story123-completion\icons.cjs:3:63)
+    at D:\IBE160\tmp\story-12-3\tmp\story123-completion\icons.cjs:5:422

@@ -1,5 +1,8 @@
 # Story 12.3 — accepted-main reconciliation
 
+> Later final decision,27 October2026: [remaining required device checks passed and conditional owner approval became effective](12-3-device-acceptance-2026-10-27.md).12.3 is done/accepted. Pending/unperformed statements below describe this earlier checkpoint; original results/failures remain unchanged. No commit/push/main merge in the final follow-up.
+
+
 Story 12.1 and 12.2 are done/accepted by Jonas (27 October 2026). Story 12.3 remains review/pending. Full accepted main `74849ff21bee108fe9cff93d740a96a6c6d2d7c5` is merged into the existing `story/12-3-tablet-pc-accessibility` history; this is no merge of the story into main. The [original handoff](12-3-handoff.md) and all previous raw records remain historical checkpoints.
 
 ## Integration decisions

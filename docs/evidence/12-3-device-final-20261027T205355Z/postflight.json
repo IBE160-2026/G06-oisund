@@ -1,0 +1,100 @@
+{
+  "time": "2026-10-27T21:01:46.955Z",
+  "testedProductCommit": "8ca318b55b98eb34de54f29ecab038322e3ccab6",
+  "head": "e87049b9541e6881c4af71f02fdeb8acdf6e7537",
+  "main": "74849ff21bee108fe9cff93d740a96a6c6d2d7c5",
+  "remoteMain": "74849ff21bee108fe9cff93d740a96a6c6d2d7c5",
+  "mainAncestorOfTestedBranch": true,
+  "mainWorktreeClean": true,
+  "productDiff": "",
+  "manifest_sha256": "b57c1053a88b4d66467e7296c5f53663e9f7e309b375a5f72f88193d6ce04ea6",
+  "sourceMatches": 41,
+  "builtMatches": 6,
+  "otherTargetsUnchanged": [
+    {
+      "id": "1",
+      "title": "Ny fane",
+      "url": "chrome-native://newtab/"
+    },
+    {
+      "id": "3",
+      "title": "Bussjåførassistenten – privat",
+      "url": "https://app.bussassistent.com/"
+    },
+    {
+      "id": "2",
+      "title": "Bussjåførassistenten – privat",
+      "url": "https://app.bussassistent.com/"
+    }
+  ],
+  "containersUnchanged": 26,
+  "accepted15312ByteHashesUnchanged": [
+    "/",
+    "/assets/main-Cg9_S_gY.js",
+    "/assets/FictionalAssessment-DaSrzsZ_.js",
+    "/assets/FictionalAssessment-BDu7t5nn.css",
+    "/demo",
+    "/assets/demo-BgBSr-Kx.js",
+    "/private"
+  ],
+  "ui": {
+    "url": "http://127.0.0.1:15323/demo",
+    "headings": [
+      "Prøv en fiktiv arbeidsdag",
+      "1. Velg import"
+    ],
+    "buttons": [
+      {
+        "name": "Bytt til dagvisning",
+        "disabled": false
+      },
+      {
+        "name": "Import",
+        "disabled": false
+      },
+      {
+        "name": "Utkast",
+        "disabled": false
+      },
+      {
+        "name": "Arbeidsdag",
+        "disabled": true
+      },
+      {
+        "name": "Kontomeldinger",
+        "disabled": false
+      },
+      {
+        "name": "Åpne delvis tekst-PDF-eksempel",
+        "disabled": false
+      },
+      {
+        "name": "Prøv format som ikke støttes",
+        "disabled": false
+      },
+      {
+        "name": "Registrer manuelt",
+        "disabled": false
+      },
+      {
+        "name": "Nullstill simuleringen",
+        "disabled": false
+      }
+    ],
+    "labels": [],
+    "viewport": {
+      "width": 800,
+      "height": 1085,
+      "visualScale": 1,
+      "visualHeight": 1085
+    },
+    "status": [
+      "Velg et fiktivt eksempel. Ingenting er lagret."
+    ]
+  },
+  "rotationMode": "free",
+  "savedRotation": "1",
+  "autoRotation": "1",
+  "reverse": "UsbFfs tcp:15323 tcp:15323\r\nUsbFfs tcp:18323 tcp:18323\r\nUsbFfs tcp:18324 tcp:18324",
+  "note": "No ordinary remote/tab/container operations; synthetic additions only in isolated story123 database. Original manual fixture list metadata unchanged; no prior full database-byte snapshot claimed."
+}

@@ -1,0 +1,40 @@
+{
+  "/drafts": {
+    "drafts": [
+      {
+        "id": "437c9601-3673-4d18-9ce2-0d8f7af18e93",
+        "created_at": "2026-10-27T08:20:15.614783Z",
+        "expires_at": "2026-11-03T08:20:15.614783Z",
+        "revision": 1,
+        "service_date": "2031-01-03"
+      },
+      {
+        "id": "adccf88e-aad3-453c-9d54-7ca02003911a",
+        "created_at": "2026-10-27T08:20:15.313899Z",
+        "expires_at": "2026-11-03T08:20:15.313899Z",
+        "revision": 1,
+        "service_date": "2031-01-02"
+      }
+    ],
+    "next_cursor": null
+  },
+  "/workdays": {
+    "workdays": [
+      {
+        "id": "40b4915a-4fa4-46bd-a9d3-8a163ff0c63c",
+        "source_draft_id": "adccf88e-aad3-453c-9d54-7ca02003911a",
+        "source_revision": 1,
+        "service_date": "2031-01-02",
+        "expires_at": "2031-01-09T10:00:00Z"
+      },
+      {
+        "id": "63f88928-710f-4e1b-b127-d1b726a8d70c",
+        "source_draft_id": "437c9601-3673-4d18-9ce2-0d8f7af18e93",
+        "source_revision": 1,
+        "service_date": "2031-01-03",
+        "expires_at": "2031-01-10T10:00:00Z"
+      }
+    ],
+    "next_cursor": null
+  }
+}

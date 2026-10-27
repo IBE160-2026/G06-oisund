@@ -1,0 +1,74 @@
+{
+  "time": "2026-10-27T20:53:55.841Z",
+  "ui": {
+    "url": "http://127.0.0.1:15323/demo",
+    "headings": [
+      "Prøv en fiktiv arbeidsdag",
+      "1. Velg import"
+    ],
+    "buttons": [
+      {
+        "name": "Bytt til dagvisning",
+        "disabled": false
+      },
+      {
+        "name": "Import",
+        "disabled": false
+      },
+      {
+        "name": "Utkast",
+        "disabled": false
+      },
+      {
+        "name": "Arbeidsdag",
+        "disabled": true
+      },
+      {
+        "name": "Kontomeldinger",
+        "disabled": false
+      },
+      {
+        "name": "Åpne delvis tekst-PDF-eksempel",
+        "disabled": false
+      },
+      {
+        "name": "Prøv format som ikke støttes",
+        "disabled": false
+      },
+      {
+        "name": "Registrer manuelt",
+        "disabled": false
+      },
+      {
+        "name": "Nullstill simuleringen",
+        "disabled": false
+      }
+    ],
+    "labels": [],
+    "viewport": {
+      "width": 800,
+      "height": 1085,
+      "visualScale": 1,
+      "visualHeight": 1085
+    },
+    "status": [
+      "Velg et fiktivt eksempel. Ingenting er lagret."
+    ]
+  },
+  "device": {
+    "model": "TB361FU",
+    "android": "16",
+    "brave": "versionName=1.97.59",
+    "rotationMode": "free"
+  },
+  "main": "74849ff21bee108fe9cff93d740a96a6c6d2d7c5",
+  "head": "e87049b9541e6881c4af71f02fdeb8acdf6e7537",
+  "sourceMatches": 41,
+  "builtMatches": 6,
+  "assets": [
+    {
+      "url": "http://127.0.0.1:15323/assets/demo-CVYX95Ri.js",
+      "sha256": "426dd3c6fb5fa7af760bd0a18c8503c99e63f433ac8403a78427f04bc476c3ee"
+    }
+  ]
+}

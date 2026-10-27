@@ -1,0 +1,86 @@
+{
+  "name": "closure-night-closed-disclosure",
+  "kind": "disclosure",
+  "crop": {
+    "x0": 0,
+    "y0": 2,
+    "x1": 40,
+    "y1": 50,
+    "scale": 2
+  },
+  "palette": [
+    [
+      "22,44,60",
+      1544
+    ],
+    [
+      "237,243,247",
+      312
+    ],
+    [
+      "153,165,174",
+      11
+    ],
+    [
+      "60,79,93",
+      4
+    ],
+    [
+      "205,213,219",
+      4
+    ],
+    [
+      "24,46,62",
+      4
+    ],
+    [
+      "235,241,246",
+      3
+    ],
+    [
+      "194,203,210",
+      3
+    ],
+    [
+      "221,229,234",
+      3
+    ],
+    [
+      "134,148,157",
+      3
+    ],
+    [
+      "80,97,110",
+      3
+    ],
+    [
+      "140,153,162",
+      2
+    ],
+    [
+      "43,63,78",
+      2
+    ],
+    [
+      "98,114,126",
+      2
+    ],
+    [
+      "152,164,173",
+      2
+    ]
+  ],
+  "background": [
+    22,
+    44,
+    60
+  ],
+  "core": [
+    237,
+    243,
+    247
+  ],
+  "corePixels": 312,
+  "ratio": 12.855408864593942,
+  "method": "Most frequent non-background RGB differing >=30 in at least one channel, >=6 actual pixels; no contrast threshold used to select core. Glyph identity requires visual crop inspection."
+}

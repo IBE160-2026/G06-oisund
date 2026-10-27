@@ -1,12 +1,17 @@
 # Story 12.3 — Jonas' manual checklist
 
-**Story 12.3 owner acceptance: pending.** Jonas accepted 12.1 and 12.2 on 27 October 2026; both are done/accepted. 12.3 remains in review until his explicit approval. Automated desktop results do not qualify physical Lenovo Pad / Android / Brave use.
+> Publication follow-up,27 October2026: Jonas has now explicitly authorized committing/pushing the completed documentation and evidence, then merging12.3 into main after identity/final checks and pushing main. Earlier no-commit/no-push/no-merge statements describe the previous checkpoint.12.4 remains backlog.
+
+
+**Story 12.3: done/accepted,27 October2026.** Jonas approved personal Lenovo/Brave readability and touch comfort, and granted conditional overall acceptance. The remaining required device checks passed, making that approval effective; see [final decision and evidence](evidence/12-3-device-acceptance-2026-10-27.md). No further mandatory owner action.12.1/12.2 remain accepted;12.4 backlog. Latest instruction prohibits commit/push; no merge was performed.
 
 ## Physical Lenovo result — 27 October2026
 
-Physical TB361FU / Android16 / Brave1.97.59 USB testing is now recorded in the [device report](evidence/12-3-device-testing-2026-10-27.md). Covered device checks, native controls, actual2x pinch, selected focus pixels and theme/privacy lifecycle passed after bounded adapter corrections. Jonas separately confirmed finger theme activation and physical portrait keeping Night/visible controls. These are partial device results, not overall owner acceptance.
+Physical TB361FU / Android16 / Brave1.97.59 USB testing is now recorded in the [device report](evidence/12-3-device-testing-2026-10-27.md). Covered device checks, native controls, actual2x pinch, selected focus pixels and theme/privacy lifecycle passed after bounded adapter corrections. Jonas separately confirmed finger theme activation and physical portrait keeping Night/visible controls. That report is the earlier partial checkpoint; the [final private-flow/glyph/focus follow-up](evidence/12-3-device-acceptance-2026-10-27.md) now completes the required scope and records owner acceptance.
 
-Do not repeat the generic checklist below wholesale: use the report's completed-scope table. Remaining owner work is personal reading/touch comfort and explicit12.3 acceptance; if relevant, assistive technology/OS magnification/hardware keyboard. Private review/terminal recap and individual native glyph-contrast limits are explicitly unperformed. Earlier desktop-only limitations below describe that checkpoint and are superseded only for the exact scopes recorded in the device report. USB reverse15323/18323/18324 accesses this build, independently of the older remote pilot.
+Do not repeat completed checks. Private review/confirmation, ended/aborted private recap, native glyph pixels in both themes, actual keyboard focus and final logout/privacy now passed on the same8ca318b product. TalkBack/hardware keyboard/OS magnification/Brave text-size settings remain untested compatibility coverage, not extra prerequisites under the actual story criteria. Earlier pending/hardware limits below describe prior checkpoints; only specifically evidenced coverage is superseded. USB reverse15323/18323/18324 accesses this build independently of the old remote pilot. No ordinary HTTPS/mobile-network deployment qualification is inferred.
+
+For optional later inspection: log in to the existing synthetic account in `/private`; open5January2031 for ended recap (one completed/one unregistered) or6January2031 for aborted recap (both unregistered), switch Day/Night and reload/reopen. Expect the same server facts, read-only controls and theme. These additive device fixtures leave2/3January manual plans intact. Credentials remain in the ignored local file described below; do not put them in reports.
 
 ## Start this isolated build
 
@@ -28,7 +33,9 @@ If the verified preview is already running, use it directly. For a later rebuild
 - This environment uses Compose `ibe160-story123-tests`, APIs 18323/18324 and its own volumes/secrets. The 12.1/12.2 preview 15312 and APIs 18312/18313 are separate and must remain untouched.
 - These addresses are loopback on this PC. Physical tablet access requires a separately verified route to **this build**. The existing tablet deployment is not evidence for 12.3; no new external route is activated here.
 
-## Short checklist
+## Reusable replay checklist (not outstanding acceptance work)
+
+The unchecked boxes below are a blank template for a future independent replay. They do not supersede the completed scope/evidence above and are not a request for Jonas to repeat it.
 
 - [ ] In a fresh browser context, open `/private`: expect Day and an unpressed `Nattmodus` control. Toggle it: expect `Visning: Natt` and pressed state. Reload, open `/demo`, reset the simulation and return: the chosen theme remains.
 - [ ] Log in using the synthetic account. Open the 2 January plan, day overview, selected activity, bus field and notice reader/maintenance. Switch themes on each type of screen. Text, unknown facts, links, disabled boundaries and current selection must remain distinguishable and readable.

@@ -2,14 +2,22 @@
 title: '12.3 — Use included views on tablet and PC'
 type: feature
 created: 2026-10-27
-status: in-review
+status: done
 route: dispatch
 review_loop_iteration: 0
 baseline_commit: ce0669f6f75f337a2df9471860be1b66efb171f0
 story_key: 12-3-use-the-included-views-on-tablet-and-pc
-owner_acceptance: pending
+owner_acceptance: accepted
+accepted_on: 2026-10-27
+acceptance_evidence: ../../docs/evidence/12-3-device-acceptance-2026-10-27.md
 context: []
 ---
+
+> Publication follow-up,27 October2026: Jonas has now explicitly authorized committing/pushing the completed documentation and evidence, then merging12.3 into main after identity/final checks and pushing main. Earlier no-commit/no-push/no-merge statements describe the previous checkpoint.12.4 remains backlog.
+
+
+> Final owner decision, 27 October 2026: **done/accepted**. Jonas approved personal Lenovo/Brave readability and touch comfort and conditionally granted overall acceptance. All remaining required checks passed; see [final device acceptance](../../docs/evidence/12-3-device-acceptance-2026-10-27.md). Earlier frozen scope/pending statements below are historical. His latest no-commit/no-push instruction overrides earlier publication permissions; no main merge or12.4 work.
+
 
 > Current-main update, 27 October 2026: this document retains the original approved checkpoint and historical verification. The [current reconciliation spec](spec-12-3-current-main-sync.md) supersedes its old no-main-integration restriction and pending 12.1/12.2 assertions: both dependencies are now done/accepted by Jonas. It authorizes full main integration and root commits/push on the existing story branch. Story 12.3 remains review/pending; use the [new handoff](../../docs/evidence/12-3-main-sync-handoff.md) for fresh integrated-build evidence. Previous runs and physical pilot observations do not qualify this version.
 

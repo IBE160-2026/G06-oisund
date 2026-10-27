@@ -1,0 +1,100 @@
+Lagret versjon 1
+
+Siste aktivitetsslutt: 5.1.2031, 10:20:00. Planen utløper: 12.1.2031, 10:20:00.
+
+Tjenestedato
+2031-01-05
+Vognløp
+SYNTHETIC DEVICE 12.3
+Sanntidsverdi
+Ukjent
+Fysisk buss (manuelt i utkastet)
+Ukjent
+Aktivitet 1
+
+Vognløp: SYNTHETIC DEVICE 12.3
+
+Aktivitetstype
+tur
+Opprinnelig kode
+Ukjent
+Start med dato og Oslo-offset
+2031-01-05T10:00+01:00
+Slutt med dato og Oslo-offset
+2031-01-05T10:10+01:00
+Opprinnelig startklokke
+Ukjent
+Opprinnelig sluttklokke
+Ukjent
+Fra sted
+Fiktivt oppmøtested
+Til sted
+Fiktivt langt norsk destinasjonsnavn med æ ø å og mange ord som skal brytes og fortsatt være lesbare på nettbrettet
+Turnummer
+Ukjent
+Linje
+20
+Retning
+Nord
+Usikkerhet / ukjente fakta
+Ukjent
+Kilde / manuell rettelse
+Ukjent
+Aktivitet 2
+
+Vognløp: SYNTHETIC DEVICE 12.3
+
+Aktivitetstype
+Ukjent
+Opprinnelig kode
+Fiktiv ukjent aktivitet
+Start med dato og Oslo-offset
+2031-01-05T10:10+01:00
+Slutt med dato og Oslo-offset
+2031-01-05T10:20+01:00
+Opprinnelig startklokke
+Ukjent
+Opprinnelig sluttklokke
+Ukjent
+Fra sted
+Ukjent
+Til sted
+Ukjent
+Turnummer
+Ukjent
+Linje
+Ukjent
+Retning
+Ukjent
+Usikkerhet / ukjente fakta
+Syntetisk usikkerhet; ikke bekreftet fysisk kjøring
+Kilde / manuell rettelse
+Ukjent
+
+Eksplisitt klassifisert som: Manuelt klassifisert arbeid
+
+Godta manglende turinformasjon og gjeldende usikkerhet for passasjerturer der de er oppført nedenfor. Ukjent aktivitetstype må klassifiseres.
+
+Beslutninger for versjon 1
+Klassifisering aktivitet 2
+Velg eksplisitt type
+Passasjertur
+Tomkjøring
+Tomkjøring med CAR
+Tomkjøring med CAR (kildetype)
+CAR
+Oppmøte
+Avslutning
+Matpause
+Kaffepause
+Deltskiftpause
+Betalt matpause før
+Betalt matpause etter
+Reise til
+Reise fra
+Fadder
+Instruktør
+Manuelt klassifisert arbeid
+Jeg har gjennomgått og godtar: Aktivitet 1: turnummer er ukjent.
+Bekreft gjennomgått plan
+Avbryt gjennomgang
