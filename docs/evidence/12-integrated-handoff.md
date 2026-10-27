@@ -2,7 +2,7 @@
 
 Jonas har ikke gjennomført manuell/fysisk akseptansetest av Story 12.1 eller Story 12.2. Teknisk integrasjon og automatiske tester innebærer ikke brukeraksept. Begge avventer Jonas sin testing.
 
-This report is updated during the integration. Final local main merge is permitted only after the required automatic checks pass. Both stories retain review/in-review and pending owner acceptance. [Manual checklist and startup](../story-12-manual-testing.md).
+Both stories are integrated in local main. Required affected checks pass after the recorded corrections; the broad-run and rerun results are distinguished below. Both stories retain review/in-review and pending owner acceptance. [Manual checklist and startup](../story-12-manual-testing.md).
 
 ## Preserved work and conflict decisions
 
@@ -99,3 +99,14 @@ After that, the actual integration verifier passed all73 checks again, cleanup p
 Runtime/build audit passed after the final readiness configuration:61 backend/migration/test files in each actual API equal host SHA256; their writes predate API startup. Served main/demo HTML and referenced JS/CSS equal the built files. API Date and no-store are present. Evidence `12-integrated-runtime-20261027T075328678549Z.json`.
 
 Technically complete within12.1/12.2. No retained product/review defect remains. Broader private coverage is the documented477 broad passes plus all27 affected recovery cases requalified and both restart cases repeated6times; a second complete479-case invocation was not run. Later12.3/12.4 device/theme/end-to-end obligations are not marked complete. Jonas' manual/physical testing of both stories remains open. The checklist is ready at `docs/story-12-manual-testing.md`; the prepared runtime is loopback15312/18312/18313, not the ordinary or tablet deployment.
+
+## Final local main handoff
+
+- Integrated implementation/evidence commit: `4d678513267eeb16ca35f5646401ccab80885ddd`.
+- Local main merge: `f13d28991ac85934826f0da7b7b81fbc09181f24`. Git ancestry checks confirm both story tips and the integrated implementation are contained in main. Both original story worktrees are still clean and present; no worktree was deleted. origin/main remains `0bae54833f38dc3dbf041d54c324c220618c21da`. Nothing pushed.
+- Final checks were rerun from main itself:29 runner cases (`12-integrated-checks-20261027T075808010055Z-3e276d3e.json`), production build (`12-integrated-build-20261027T075809865447Z-91a668a2.json`),19 fictional API cases (`12-integrated-fictional-20261027T075815182833Z-fe8266db.json`) and27 fictional browser cases (`12-integrated-demo-20261027T075818122580Z-b53434a4.json`) all passed, exit0 and unchanged inputs. The final bundle filenames/hashes match the qualified pre-merge build.
+- Actual main API/PostgreSQL verification passed73 checks again, including reset preservation of the already prepared private manual data (`12-integration-real-20261027T075841579333Z-4115139dc3aa.json`). Additive preparation recheck passed17 checks and preserved the two existing plans (`12-integration-real-20261027T075910401880Z-9b71b3d7ad80.json`). No manual account password was reset.
+- After actual API restart, main runtime/build audit passed:61 files per API match host bytes, source writes predate startup, and served main/demo HTML/JS/CSS match dist (`12-integrated-runtime-20261027T075918536192Z.json`). The preview is running on15312 (verified task-owned process49248); both isolated APIs are ready on18312/18313.
+- Final technical status:12.1 and12.2 are `review` / `in-review`, owner acceptance pending. No outstanding technical integration or retained review defect within these stories. The documented simulation scope limits and later device/theme work remain. Session log and issues preserve the still-open manual/physical acceptance.
+
+Use the checklist, not the ordinary5173/8000/8001 or old tablet deployment, for this integrated build. Start at <http://127.0.0.1:15312/demo> or <http://127.0.0.1:15312/private>. Read credentials locally from the ignored file named in the checklist.
