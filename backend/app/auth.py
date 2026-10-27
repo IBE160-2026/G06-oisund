@@ -2,6 +2,7 @@
 import hashlib
 import hmac
 import os
+import re
 import secrets
 import time
 from urllib.parse import urlparse
@@ -19,13 +20,30 @@ INVALID = 'Ugyldig brukernavn eller passord.'
 def configuration():
     origin = os.environ.get('PRIVATE_ORIGIN', '')
     parsed = urlparse(origin)
-    # Public deployment is deliberately unsupported, including HTTPS configuration.
+    if os.environ.get('PRIVATE_HTTPS_DEPLOYMENT') == '1':
+        # Explicit deployment choice; never infer transport trust from request headers.
+        host = parsed.hostname or ''
+        if (os.environ.get('PRIVATE_LOOPBACK_DEVELOPMENT')
+                or parsed.scheme != 'https' or parsed.username or parsed.password
+                or parsed.path or parsed.query or parsed.fragment
+                or origin != f'https://{host}' or len(host) > 253
+                or not re.fullmatch(r'(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z][a-z0-9-]{0,62}', host)
+                or host.endswith(('.localhost', '.local', '.invalid', '.test', '.example'))
+                or host in {'localhost', 'example.com', 'example.net', 'example.org'}):
+            raise RuntimeError('Explicit canonical public HTTPS origin required')
+        return origin
+    if os.environ.get('PRIVATE_HTTPS_DEPLOYMENT'):
+        raise RuntimeError('Invalid HTTPS deployment flag')
     if (os.environ.get('PRIVATE_LOOPBACK_DEVELOPMENT') != '1'
             or parsed.scheme != 'http' or parsed.hostname not in {'127.0.0.1', 'localhost'}
             or parsed.username or parsed.password or parsed.path or parsed.query or parsed.fragment
             or origin != f'http://{parsed.hostname}:{parsed.port}'):
         raise RuntimeError('Explicit loopback development configuration required')
     return origin
+
+
+def secure_cookies():
+    return configuration().startswith('https://')
 
 
 def digest(value):

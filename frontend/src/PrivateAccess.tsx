@@ -1,13 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
 import { PrivateDrafts } from './PrivateDrafts';
 
-const API = 'http://127.0.0.1:8001';
+const configuredApi = import.meta.env.VITE_PRIVATE_API_BASE;
+if (configuredApi !== undefined && configuredApi !== '/private-api') throw Error('Invalid private API configuration');
+const API = configuredApi ?? 'http://127.0.0.1:8001';
 // Only a logout lock, never an account, credential or private presentation. A cookie
 // survives reload and is shared across tabs, unlike private browser data stores.
 const PENDING = 'private_logout_pending';
 const pending = () => document.cookie.split(';').some(c => c.trim() === PENDING + '=1');
 function markPending(value: boolean) {
-  document.cookie = `${PENDING}=${value ? '1' : ''}; Path=/; SameSite=Strict; Max-Age=${value ? 14 * 86400 : 0}`;
+  document.cookie = `${PENDING}=${value ? '1' : ''}; Path=/; SameSite=Strict; Max-Age=${value ? 14 * 86400 : 0}${location.protocol === 'https:' ? '; Secure' : ''}`;
 }
 type Session = { account_id: string; created_at: string; expires_at: string };
 const sameSession = (left: Session | null, right: Session) => left?.account_id === right.account_id && left.created_at === right.created_at;

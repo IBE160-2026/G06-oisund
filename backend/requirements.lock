@@ -1,6 +1,6 @@
 annotated-types==0.8.0
 anyio==4.15.1
-certifi==2026.10.18
+certifi==2026.10.19
 click==8.5.0
 fastapi==0.149.0
 h11==0.16.0
@@ -15,7 +15,7 @@ psycopg-binary==3.3.6
 pydantic==2.14.1
 pydantic_core==2.50.1
 Pygments==2.21.0
-pytest==8.4.1
+pytest==9.0.3
 starlette==1.9.0
 typing-inspection==0.4.4
 typing_extensions==4.16.0

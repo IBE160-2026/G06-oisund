@@ -1,0 +1,25 @@
+{
+  "status": "DRAFT_REQUIRES_OWNER_APPROVAL_NOT_AN_API_PAYLOAD",
+  "hostname": "bus.YOUR-DOMAIN.invalid",
+  "application": "self_hosted_entire_hostname_all_paths",
+  "allowed_identity": "REPLACE-EXPLICITLY-APPROVED-OWNER@identity.invalid",
+  "allowed_identity_provider_id": "REPLACE-APPROVED-IDP-ID",
+  "policy": {
+    "action": "Allow",
+    "include": "Emails: exactly the single approved address",
+    "require": "Login Methods: exactly the single approved IdP",
+    "unmatched": "deny by default",
+    "other_policies": []
+  },
+  "independent_mfa": {
+    "required": true,
+    "owner_selected_method": "authenticator_application",
+    "identity_provider_mfa_shortcut": false,
+    "authentication_duration": "require every login"
+  },
+  "proposed_application_and_policy_session": "1h",
+  "require_access_protection_account_wide": "enable only after inventory of this new dedicated account",
+  "cache": "bypass entire private hostname; origin no-store",
+  "admin": "verified email, unique password or secured SSO, phishing-resistant MFA plus spare authenticator, private recovery codes, review members/sessions/audit log",
+  "activation": "Access/MFA/owner approval and origin negative tests BEFORE DNS and tunnel run"
+}
