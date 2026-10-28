@@ -1,6 +1,6 @@
 # Story 12.4 komplett brukerflyt
 
-## 2026-10-28 kl. 13:44 — Jonas Øisund
+## 2026-10-28 kl. 13:49 — Jonas Øisund
 
 ### Oppgave
 Gjennomfør Story12.4/V1-19 på egen branch og eget worktree fra faktisk nyeste origin/main, med reell nettleser/API/PostgreSQL, uavhengige syntetiske forventninger og mobilrettingen som testgrunnlag. Lever teknisk ferdig og reviewklart med dokumentasjon, commit og push; ikke flett, deploy, gi manuell aksept eller start12.5.
@@ -37,7 +37,9 @@ USB-oppfølging28.10.2026 etter brukerens beskjed om tilkoblet nettbrett og stop
 - Postflight bestod38/38; alle23 tidligere containeres ID/image/porter og fire tidligere Brave-faners ID/URL-hash er bevart. Egne ekstra demofaner ble lukket, midlertidig UI-dump fjernet. Ingen tunnel er startet, og ingen cloudflared-prosess var aktiv ved sluttkontroll. Egen eksisterende frontend44564 og USB-reverse15324/18325/18326/DevTools50924 står for inspeksjon; ingen eksisterende listener ble drept.
 - Nettbrettet står på http://127.0.0.1:15324/private, på forberedelse/planlister, innlogget med den nye syntetiske kontoen. Ved behov ligger dens legitimasjon bare i ignorert `.private-runtime/story124-device.json`. Egen syntetisk `Download/ibe160-story124-synthetic-A.pdf` er beholdt for manuell prøve. [Fysisk rapport med alle grenser](../../docs/evidence/12-4-device-testing-2026-10-28.md). Eieraksept er fortsatt ikke gitt; ingen merge/deploy/12.5.
 
-Manuell guidet akseptserie på nettbrettet:6 tester totalt —1 import/filvalg,2 korrigering/lagring/gjenåpning,3 bekreftelse/manuelt aktivitetsvalg,4 avvik/fanebytte,5 start/avslutning/oppsummering,6 utlogging. Jonas bekreftet «Test1 bestått»: avbrutt/gjentatt native valg av syntetisk A, gjennomgang med skift97000001/tjenestedato4.februar2030/ukjent buss, fingerlesbarhet/rulling og tilgjengelig «Bruk som separat nytt utkast». Brukeren stoppet før adopsjon. Dette er brukerens rapporterte resultat for test1, ikke samlet storyaksept. Test2–6 og eksplisitt eierbeslutning gjenstår.
+Manuell guidet akseptserie på nettbrettet:6 tester totalt —1 import/filvalg,2 korrigering/lagring/gjenåpning,3 bekreftelse/manuelt aktivitetsvalg,4 avvik/fanebytte,5 start/avslutning/oppsummering,6 utlogging. Jonas bekreftet «Test1 bestått»: avbrutt/gjentatt native valg av syntetisk A, gjennomgang med skift97000001/tjenestedato4.februar2030/ukjent buss, fingerlesbarhet/rulling og tilgjengelig «Bruk som separat nytt utkast». Brukeren stoppet før adopsjon. Dette er brukerens rapporterte resultat for test1, ikke samlet storyaksept. Test3–6 og eksplisitt eierbeslutning gjenstår.
+
+Manuell test2 av6: Jonas bekreftet «Test2 bestått». Nytt separat A-utkast ble korrigert i aktivitet3 (linje731) til «Manuell testholdeplass», med kildenotat «Manuell kontroll – test12.4». Etter første eksplisitte lagring ble Buss/vogn satt til TEST-124 og lagret som versjon2. Reload/gjenåpning av2030-02-04 versjon2 bevarte destinasjon, notat, buss og opprinnelige PDF-kildefakta. Brukeren stoppet før gjennomgang/bekreftelse. Dette er brukerens rapporterte resultat; samlet storyaksept er fortsatt ikke gitt. Status:2/6 bestått, test3–6 gjenstår.
 
 ### Åpne punkter
 - Manuell12.4-aksept gjenstår: gjennomfør sjekklisten på det separate15324-bygget, særlig PDF/korrigering/lagring/gjenåpning, faneavbrudd midt i avviksredigering, konflikt med enda en endring, slutt/avbrudd/gjenlasting og utlogging/kontobytte. Registrer konkret bygg/enhet/nettleser og eierens beslutning; automatisering innebærer ikke aksept.
