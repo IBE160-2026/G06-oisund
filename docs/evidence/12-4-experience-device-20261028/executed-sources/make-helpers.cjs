@@ -1,0 +1,1 @@
+const fs=require('node:fs');const s=fs.readFileSync('tmp/story124-experience-device/flow-A.cjs','utf8');fs.writeFileSync('tmp/story124-experience-device/helpers.cjs',s.slice(0,s.indexOf('(async()=>'))+'module.exports={independent,dismissKeyboard};\n');

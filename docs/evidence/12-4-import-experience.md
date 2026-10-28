@@ -93,3 +93,7 @@ Product/tests/specification/evidence commit: `5ee35ef` (`fix: streamline story12
 `12-4-runtime-20261028T151727047995Z.json` passed all38 checks after the product commit: exact served frontend bytes/API settings/current source, both API containers' mounted backend bytes and restart ordering, health, unauthenticated401/no-store and preservation of all23 pre-existing container IDs/images/ports. Runtime PostgreSQL17.11 and API Python3.13.16 are recorded with dependency versions. Preview15324 remains available; no active-site deployment or tunnel was started.
 
 Technical correction is review-ready. No retained technical finding remains open; the owner-directed four-point retest and explicit acceptance decision remain pending. Story12.4 stays in review/explicitly-not-approved and12.5 remains backlog.
+
+## Subsequent physical qualification of the revised UI
+
+At the owner's explicit request the actual USB Lenovo/Brave was subsequently tested on this same product source. [New physical report](12-4-import-experience-device-2026-10-28.md) records native A bytes/cancellation, direct approval, portrait C correction/save position, both bus actions, durable separate plans and portrait/landscape consultation. All targeted technical scenarios subsequently passed;17 grouped attempts contain13 passes/4 retained harness failures, not17/17. Pre/post runtime audits both passed38/38. No product change or acceptance followed. This supersedes the earlier statement that the revised UI lacked new physical qualification; personal owner assessment remains pending.

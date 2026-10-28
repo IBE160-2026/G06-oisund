@@ -1,0 +1,12 @@
+{
+  "method": "Actual Android system rotation lock via ADB, no CDP device metrics emulation; original settings retained for restoration",
+  "before": {
+    "accelerometer": "1",
+    "rotation": "1"
+  },
+  "portrait": {
+    "width": 800,
+    "height": 1085,
+    "dpr": 2
+  }
+}

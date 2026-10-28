@@ -21,6 +21,9 @@ Use a separate private browser window to keep these loopback session cookies sep
 
 ## Focused retest for the owner-directed correction
 
+The technical parts below have now also passed automated checks on the actual Lenovo/Brave; see the [new physical report](evidence/12-4-import-experience-device-2026-10-28.md), including its failed-attempt limits. Personal comfort/overall experience and explicit owner acceptance remain pending. Repeating every technical check by hand is not a prerequisite; use the steps to assess the experience and report discrepancies. The tablet currently shows a separate new physical automation account with two unstarted plans; the fresh manual account below remains unused.
+
+
 The earlier guided six-test series passed but did not earn acceptance. Use a fresh dedicated synthetic account for this retest so repeated fixture imports do not create confusing duplicate date/version labels among earlier records. Preserve both previous device accounts and their records. Credentials belong only in ignored local runtime state; they must not be copied into this document or screenshots.
 
 1. **Correct import:** import synthetic `Testskift-A.pdf`. Check compact shift97000001,4February2030,06:50–08:50, source places and unknown bus. Open full source details only if desired. Choose **Alt stemmer – lagre og fortsett**. The waiting state and final approval must remain compact without entering the editor. Make only the displayed necessary unknown/type decisions, then confirm. The day opens without automatically starting the shift.
