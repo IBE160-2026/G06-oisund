@@ -1,9 +1,11 @@
 # Story 12.4 komplett brukerflyt
 
-## 2026-10-28 kl. 09:16 — Jonas Øisund
+## 2026-10-28 kl. 12:55 — Jonas Øisund
 
 ### Oppgave
 Gjennomfør Story12.4/V1-19 på egen branch og eget worktree fra faktisk nyeste origin/main, med reell nettleser/API/PostgreSQL, uavhengige syntetiske forventninger og mobilrettingen som testgrunnlag. Lever teknisk ferdig og reviewklart med dokumentasjon, commit og push; ikke flett, deploy, gi manuell aksept eller start12.5.
+
+Desktop-resultatene nedenfor gjelder leveransen før nettbrettet ble koblet til. Den fysiske USB-oppfølgingen er ført som tillegg under Resultat i samme dagsseksjon.
 
 ### Plan
 - Følg faktiske AGENTS/CLAUDE, sesjonslogg og bmad-build; les krav/PRD/arkitektur/UX,12.1–12.3-overleveringer og mobilrettingens diff/spec/evidens.
@@ -22,6 +24,19 @@ Gjennomfør Story12.4/V1-19 på egen branch og eget worktree fra faktisk nyeste 
 - Testbygget kjører på **http://127.0.0.1:15324/private**, separat fra app.bussassistent.com. Syntetisk konto leses bare lokalt fra worktreets ignorerte `.private-runtime/story124-manual-credentials.json`. Bruk eget privat nettleservindu. API18325/18326; egen frontendprosess44564; hovedasset `main-CxykOOFA.js`. [Full evidens og kjøreoppskrift](../../docs/evidence/12-4-handoff.md), [manuell sjekkliste](../../docs/story-12-4-manual-testing.md).
 - E11-A2 og E11-A12 er teknisk løst og markeres lukket i issues.12.4 står review/pending owner acceptance;12.5 forblir backlog. Kapasitetsfeilen i én underagent avbrøt ikke bevarte filer; arbeidet ble videreført. Tidligere «fullført»-varsel ble kontrollert og eksplisitt korrigert: på det tidspunktet var arbeidet uferdig, ucommittet og upushet.
 
+
+USB-oppfølging28.10.2026 etter brukerens beskjed om tilkoblet nettbrett og stoppet tunnel:
+
+- Fysisk Lenovo TB361FU/Android16/Brave1.97.59, Chromium155.0.8059.85, naturlig800×1085 CSS/DPR2. Egen Brave-fane og to nye syntetiske kontoer; opprinnelig manuell testkonto og driftsdata er uendret. Implementering5ca3f7d er uendret; fysisk evidens/dokumentasjon er committet i **11d941507e486b347b93df23424e3e9d1e9f6141**. Kode/eldre leveranse var allerede pushet til80aea19; denne oppfølgingen og loggcommiten pushes videre på samme autoriserte12.4-branch.
+- Ekte Android-filvelger: avbrudd uten lagring bestod; valg fra Nedlastinger sendte nøyaktig45330 syntetiske PDF-bytes med faktisk hidden/visible og tilgangsgjenoppretting, HTTP200 og null automatisk utkastlagring. Originale/private PDF-er er ikke brukt. C ble lastet gjennom filinputautomatisering i den faktiske nettbrettleseren, ikke fysisk native C-filvalg.
+- Uavhengig A/C-fasit, datoer/UTC/døgnskille, korrigert destinasjon/manuell kilde/SYN-124 og bevart opprinnelse bestod gjennom eksplisitt lagring, gjenåpning og bekreftelse. A endte med1 fullført/4 uregistrerte, faktisk database/API-omstart og identisk gjenlastet oppsummering. C ble eksplisitt startet/avbrutt med1 avbrutt/14 uregistrerte og varig, skrivebeskyttet oppsummering.
+- Ekte native Brave-fanebytte til egen demo og tilbake bevarte avvikstittel/flerlinjetekst med0 automatiske POST-er og uendret avviksliste. HOME/retur bevarte samme sesjon og forslag. En tredje linje ble deretter skrevet og eksplisitt lagret én gang. Native fane/HOME ga ingen visibilitychange-hendelser selv uten fokusoverstyring; ikke påstå den hendelsesutløste gjenopprettingen som bevist for avviksfanen. Den native filvelgeren ga ekte hidden/visible. Ingen livssyklus- eller enhetsmetrisk emulering ble brukt.
+- E11-A2 bestod også på fysisk nettbrett: separat faktisk API-skriver lagret B og C etter lokalt forslag; «Last inn lagret» gjorde1 GET/0 nye POST-er og hentet C. Bekreftet utlogging/historikk/reload ga401, ny syntetisk konto tomme lister/404 for fremmed plan, og ny innlogging til original testkonto ga identiske to oppsummeringer. Private nettleserlagre var tomme unntatt tema.
+-23 grupperte/innbyrdes nøstede forsøksrader:15 bestått/8 opprinnelige adapter- eller prekontrollfeil, aldri23/23. Feil omfatter Nylige-søk, relativURL/typestripping, allerede åpnet aktivitetsvisning, manglende visibilityhendelser, feil internt enum-navn og API-nekt sjekket før bekreftet utlogging. Råfeil og rettinger er bevart. Tilkoblings-/riktig-fane-/opptatt-port-avvisninger er dokumentert separat. Ingen ny produktfeil ble etablert.
+- Android-fullsidebilder gjentok viewportfliser; de er beholdt som uttrykkelig ukvalifiserte. Korrekte faktiske viewportbilder er tatt og visuelt kontrollert. Råbytes og endelige kjørtekilder er bevart i tar.gz med SHA256-indeks; legitimasjonssjekk bestod, og ignorerte konto-/cookieverdier er ikke inkludert.
+- Postflight bestod38/38; alle23 tidligere containeres ID/image/porter og fire tidligere Brave-faners ID/URL-hash er bevart. Egne ekstra demofaner ble lukket, midlertidig UI-dump fjernet. Ingen tunnel er startet, og ingen cloudflared-prosess var aktiv ved sluttkontroll. Egen eksisterende frontend44564 og USB-reverse15324/18325/18326/DevTools50924 står for inspeksjon; ingen eksisterende listener ble drept.
+- Nettbrettet står på http://127.0.0.1:15324/private, på forberedelse/planlister, innlogget med den nye syntetiske kontoen. Ved behov ligger dens legitimasjon bare i ignorert `.private-runtime/story124-device.json`. Egen syntetisk `Download/ibe160-story124-synthetic-A.pdf` er beholdt for manuell prøve. [Fysisk rapport med alle grenser](../../docs/evidence/12-4-device-testing-2026-10-28.md). Eieraksept er fortsatt ikke gitt; ingen merge/deploy/12.5.
+
 ### Åpne punkter
 - Manuell12.4-aksept gjenstår: gjennomfør sjekklisten på det separate15324-bygget, særlig PDF/korrigering/lagring/gjenåpning, faneavbrudd midt i avviksredigering, konflikt med enda en endring, slutt/avbrudd/gjenlasting og utlogging/kontobytte. Registrer konkret bygg/enhet/nettleser og eierens beslutning; automatisering innebærer ikke aksept.
-- Ny fysisk nettbrett-/mobilkvalifikasjon er ikke utført; native filvelgerretur og native hidden/visible-gjenoppretting på12.4 er en dokumentert grense. Eventuell senere enhetsprøve krever separat avtalt testrute; ikke erstatt den aktive nettsiden for å muliggjøre dette. Historisk mobilgodkjenning beholdes som historikk.
+- Fysisk USB-oppfølging er gjennomført, men native fane/HOME ga tomme visibility-arrays i den instrumenterte økten. Bevar denne bevisgrensen; en eventuell uinstrumentert finger-/fanebakgrunnsobservasjon er valgfri oppfølging. Native filvelgerretur ga ekte hidden/visible. Automatiserte enhetshandlinger innebærer ikke subjektiv eieraksept.
