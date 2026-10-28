@@ -1,3 +1,5 @@
+> Gjeldende drift fra 28.10.2026: [main/12.4-driftsveiledningen](tablet-production.md). Historiske start-/stoppstatuser nedenfor er bevart.
+
 # Sluttresultat: isolert nettbrettpilot, 27. oktober 2026
 
 ## Resultat og sluttstatus

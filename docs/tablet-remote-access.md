@@ -1,3 +1,5 @@
+> Gjeldende drift fra 28.10.2026: [main/12.4-driftsveiledningen](tablet-production.md). Historiske start-/stoppstatuser nedenfor er bevart.
+
 # Sikker nettbrett-tilgang – forberedt, ikke aktivert
 
 > Historisk første forberedelsesrapport. Gjeldende sikkerhetsoppsett og aktiveringsplan er nå [Sikkerhetsgjennomgang for nettbrettilgang](tablet-access-security.md). Den nye rapporten overstyrer blant annet tidligere proxy uten egen JWT-gate, 24-timersforslag, rettigheter og listen over gjenstående bygg. Bruk den nye planen ved videre arbeid.

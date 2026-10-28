@@ -1,3 +1,5 @@
+> Gjeldende drift fra 28.10.2026: [main/12.4-driftsveiledningen](tablet-production.md). Historiske start-/stoppstatuser nedenfor er bevart.
+
 # Tunnelklargjøring før separat publiseringsgodkjenning
 
 ## Sluttstatus 2026-10-27

@@ -1,0 +1,84 @@
+{
+  "date": "2026-10-28",
+  "source": {
+    "source": "a48f2132fd0059b21b9581bf27d337cb1561d55b",
+    "api": {
+      "tag": "ibe160-tablet-api:main-a48f213",
+      "id": "sha256:26ee88cb518aefb2b2733b6f96fec909c061fe58becd42981ebaf251e134ac12"
+    },
+    "gateway": {
+      "tag": "ibe160-tablet-gateway:main-a48f213",
+      "id": "sha256:50242b65f742441d0928d00775640715ce4748b4420519fbca9ece5b54253bfe"
+    }
+  },
+  "verification": {
+    "unrelated_containers_unchanged": true,
+    "all_remote_table_rows_unchanged": true,
+    "jonas_account_and_hash_unchanged": true,
+    "schema_migrations": [
+      "001_access.sql",
+      "002_drafts.sql",
+      "003_draft_deletions.sql",
+      "004_workdays.sql",
+      "005_workday_deletions.sql",
+      "006_workday_bus.sql",
+      "007_draft_contracts.sql",
+      "008_review_feedback.sql",
+      "009_workday_selection.sql",
+      "010_outcomes_and_closure.sql",
+      "011_manual_notices.sql",
+      "012_real_notice_sources.sql",
+      "013_account_notice_registry.sql",
+      "014_notice_creation_admissions.sql"
+    ],
+    "all_runtime_mounts_independent": true,
+    "only_gateway_loopback_published": true,
+    "api_source_matches_main": true,
+    "served_files_match_tested_build": true,
+    "assets": {
+      "50x.html": "876766b4e80133fd490603e073d3567425b88794828a9292104244c9e40875ed",
+      "index.html": "c0abb632ebe620c951db39ab3481b764c5504ee3b7e21a8aa476bf0809a16d72",
+      "assets/index-DOc41X9S.js": "2d4ecd349dfd74f077210bc32d9b5e385c878c007b4111d45252642f09e54602",
+      "assets/index-B_Dppown.css": "4d14e34cc179a136aaaba98938f8737146034b79ef87b631e9b4b704d02ef786"
+    },
+    "local_access_denials": 15,
+    "public_access_redirects": 3,
+    "tunnel_ready": true
+  },
+  "tests": {
+    "actual_api_import_and_complete_flow": 7,
+    "controlled_mobile_boundary": 32,
+    "actual_api_12_4_preparation": 18,
+    "isolated_https_transport": 14
+  },
+  "backup_restore": {
+    "passed": true,
+    "all_public_table_rows_equal": true,
+    "isolated_network": "none",
+    "isolated_storage": "tmpfs"
+  },
+  "cleanup": {
+    "original_status_entries": 16,
+    "expanded_files": 29,
+    "exact_normalized_main_matches": 16,
+    "all_paths_exist_in_main": true,
+    "archive_verified_files": 906,
+    "old_worktree_removed": true,
+    "old_branch_removed": true
+  },
+  "limits": [
+    "No new physical Pixel/Lenovo run on public production hostname",
+    "No new authenticated edge/MFA session exercised by agent",
+    "No changed DNS/Access/MFA policy",
+    "Source a48f213 is product deployment; later commits are operations/docs only"
+  ],
+  "tunnel_configuration_checks": {
+    "one_named_route": true,
+    "service_loopback": true,
+    "access_required": true,
+    "team_preserved": true,
+    "audience_matches_local_gate": true,
+    "catch_all_denied": true,
+    "four_registered_connections": true
+  }
+}
