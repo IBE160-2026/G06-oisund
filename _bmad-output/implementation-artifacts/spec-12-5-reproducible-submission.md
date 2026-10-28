@@ -2,13 +2,16 @@
 title: '12.5 Deliver a reproducible submission (V1-20)'
 type: chore
 created: '2026-10-28'
-status: in-review
+status: done
 route: dispatch
 baseline_commit: 99c272b09abaa5ffecf3286b406fbf065a445c7c
 review_loop_iteration: 0
-owner_acceptance: pending
+owner_acceptance: accepted
+accepted_on: '2026-10-28'
 context: []
 ---
+
+**Current decision:** Jonas explicitly accepted Story12.5 in full on28October2026 after all ten guided assessment parts. [Acceptance record](../../docs/evidence/12-5-owner-acceptance-2026-10-28.md). The frozen starting intent and earlier review notes retain historical pending wording; current status is done/accepted. Epic12 remains in progress by explicit instruction.
 
 <frozen-after-approval reason="User explicitly authorized autonomous completion through review; product contract changes still require clarification">
 

@@ -1,6 +1,6 @@
-# Known limits and remaining review
+# Known limits
 
-- **12.5 owner acceptance remains pending.** Technical verification does not close Epic 12 or submit to the learning platform. The five planned extensions have not been started by this delivery.
+- **12.5 accepted in full by the owner on28October2026.** [Decision and manual observations](../evidence/12-5-owner-acceptance-2026-10-28.md). Epic 12 closure and learning-platform submission remain separate. The five planned extensions have not been started by this delivery; the limits below remain applicable.
 - **Bounded input.** Only the implemented selectable-text two-column PDF envelope is supported. Scans/arbitrary layouts need manual entry. [Supported input](supported-input.md).
 - **No operational automation.** No GPS, live feeds, inferred completion, offline private persistence, audio or Auto theme. Runtime requires local services; unsaved edits can be lost when closing/reloading or losing authorization. Keep the page open for explicit unresolved-command recovery.
 - **No measured field benefit.** There is no real-work time-saving/safety study. The test corpus and synthetic journeys establish bounded behavior, not source completeness or real-world effectiveness.

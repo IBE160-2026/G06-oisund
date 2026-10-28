@@ -2,7 +2,7 @@
 
 IBE160 Programmering med KI, Høgskolen i Molde, autumn 2026. Author: Jonas Øisund.
 
-This V1 imports a supported text-PDF shift, permits correction and explicit saving, confirms a saved plan, and supports manual activity selection, shift status and source-linked notices. React/TypeScript talks to actual FastAPI and PostgreSQL. Planned times never establish real progress or road clearance. Stories 12.1–12.4 are accepted; delivery story 12.5 awaits owner review. [Submission index](docs/submission/README.md).
+This V1 imports a supported text-PDF shift, permits correction and explicit saving, confirms a saved plan, and supports manual activity selection, shift status and source-linked notices. React/TypeScript talks to actual FastAPI and PostgreSQL. Planned times never establish real progress or road clearance. Stories 12.1–12.5 are accepted; [12.5 owner decision](docs/evidence/12-5-owner-acceptance-2026-10-28.md) records the completed final assessment. Epic 12 closure is separate. [Submission index](docs/submission/README.md).
 
 ## Clean checkout and startup
 

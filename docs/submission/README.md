@@ -1,6 +1,6 @@
 # Submission guide — V1-20 / Story 12.5
 
-Start with the [clean-checkout recipe](../../README.md). This directory is the assessment entry point for the accepted smaller V1 under SCOPE-02. Story 12.5 is a delivery/reproducibility task; owner acceptance remains pending and Epic 12 remains in progress.
+Start with the [clean-checkout recipe](../../README.md). This directory is the assessment entry point for the accepted smaller V1 under SCOPE-02. Story 12.5 is done/accepted after [Jonas's explicit whole-story decision on28October2026](../evidence/12-5-owner-acceptance-2026-10-28.md). Epic 12 remains in progress; closure is separate.
 
 | Review need | Entry |
 |---|---|
