@@ -4,7 +4,7 @@ Owner acceptance is pending. This checklist concerns the isolated synthetic12.4 
 
 ## Open the isolated build
 
-Worktree: `D:/IBE160/tmp/story-12-4`, branch `story/12-4-complete-user-flow`.
+Worktree: `D:/IBE160/tmp/story-12-4`, branch `story/12-4-complete-user-flow`. Qualified implementation commit: `5ca3f7df73f4cf49f5244dbc97a0a3ebb8de9891`; subsequent evidence/log commits preserve the same product bytes. Final served main asset: `main-CxykOOFA.js`; see the linked post-commit runtime audit in the handoff.
 
 ```powershell
 $py = 'C:/Users/Jonas/AppData/Local/Programs/Python/Python312/python.exe'

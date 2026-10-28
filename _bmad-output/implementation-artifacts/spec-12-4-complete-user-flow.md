@@ -108,3 +108,5 @@ Post-review patch inspection confirmed every retained root cause was corrected. 
 Delivery remains in-review/pending owner acceptance by explicit user instruction. This overrides the generic final-step done status; explicit user authorization also permits pushing this branch. No merge, deployment or12.5 work is authorized. Final runtime postflight will record the canonical implementation commit and compare every served build file plus the23 pre-existing container identities.
 
 Root follow-up: canonical LF template pins accept equivalent LF/CRLF checkouts and reject changed source. Final targeted tooling checks12/12 Python and5/5 Node passed. Only EOF blank-line cleanup followed the22/32-case gates; product bytes are unchanged and a fresh served build has identical assets.
+
+Canonical implementation commit `5ca3f7df73f4cf49f5244dbc97a0a3ebb8de9891` passed the post-commit runtime audit38/38 (`docs/evidence/12-4-runtime-20261028T081324378353Z.json`), including all23 preserved pre-existing containers. Later commits contain evidence/logs only; manual owner acceptance remains pending.
