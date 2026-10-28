@@ -1,6 +1,6 @@
 # Story 12.4 komplett brukerflyt
 
-## 2026-10-28 kl. 14:03 — Jonas Øisund
+## 2026-10-28 kl. 14:15 — Jonas Øisund
 
 ### Oppgave
 Gjennomfør Story12.4/V1-19 på egen branch og eget worktree fra faktisk nyeste origin/main, med reell nettleser/API/PostgreSQL, uavhengige syntetiske forventninger og mobilrettingen som testgrunnlag. Lever teknisk ferdig og reviewklart med dokumentasjon, commit og push; ikke flett, deploy, gi manuell aksept eller start12.5.
@@ -44,6 +44,8 @@ Manuell test2 av6: Jonas bekreftet «Test2 bestått». Nytt separat A-utkast ble
 Manuell test3 av6: Jonas bekreftet «Test3 bestått». Lagret A-utkast versjon2 ble gjennomgått og eksplisitt bekreftet med nødvendige ukjent-bekreftelser. Dagen åpnet uten valgt aktivitet og uten Start. Manuelt valg av aktivitet3/linje731 viste «Manuell testholdeplass»; Neste/Forrige returnerte til aktivitet3 uten automatisk start/fullføring. Reload/gjenåpning av plan2030-02-04 versjon2 beholdt valgt aktivitet og rettelsen; skiftet var fortsatt ikke startet. Brukeren stoppet før Start skift. Dette er rapportert manuell testaksept, ikke samlet storyaksept. Status:3/6 bestått, test4–6 gjenstår.
 
 Manuell test4 av6 ble bekreftet bestått av Jonas: nytt avvik «Manuell fanetest12.4», linje731, gyldig tildato5.februar2030 og ukjente øvrige kilde-/gyldighetstidspunkter. Han byttet Brave-fane med fingeren før lagring, kom tilbake til bevarte/redigerbare felt, tilføyde tredje tekstlinje og lagret eksplisitt. Lagret avvik beholdt alle tre linjer; leser for731/4.februar viste det én gang med delvis kjent gyldighet og ukjent/ikke kontrollert kildeinformasjon. Skiftet ble ikke startet. Dette dekker foreslått uinstrumentert manuell observasjon av bevaring/redigering etter fanebytte; instrumenterte visibility-arrays forblir en dokumentert metodegrense, ikke nye målte hendelser. Det tilhørende manuelle oppfølgingspunktet lukkes i issues. Status:4/6 bestått; test5–6 og samlet eieraksept gjenstår.
+
+Manuell test5 av6: Jonas bekreftet «Test5 bestått». Startbekreftelsen ble først avbrutt uten start, deretter eksplisitt bekreftet. Aktivitet3 ble manuelt markert fullført og lagret. Avslutningsgjennomgangen viste1 fullført/4 uregistrerte; første avslutning ble avbrutt uten å avslutte, neste ble eksplisitt bekreftet. Reload/gjenåpning av plan2030-02-04 versjon2 beholdt oppsummeringen, TEST-124 og korrigert destinasjon. Resultatet var skrivebeskyttet uten ny Start/gjenopptakelse. Brukeren stoppet innlogget. Status:5/6 manuelt bestått; test6 (utlogging/kontobytte/gjeninnlogging) og samlet eieraksept gjenstår.
 
 ### Åpne punkter
 - Manuell12.4-aksept gjenstår: gjennomfør sjekklisten på det separate15324-bygget, særlig PDF/korrigering/lagring/gjenåpning, faneavbrudd midt i avviksredigering, konflikt med enda en endring, slutt/avbrudd/gjenlasting og utlogging/kontobytte. Registrer konkret bygg/enhet/nettleser og eierens beslutning; automatisering innebærer ikke aksept.
