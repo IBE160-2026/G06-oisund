@@ -57,6 +57,8 @@ Guidet sluttvurdering 2026-10-28 kl. 20:43: Jonas bekreftet «steg 7 ok». Ekspl
 
 Guidet sluttvurdering 2026-10-28 kl. 20:48: Jonas bekreftet «Steg 8 ok». Han har manuelt kjørt stop/start/status fra den isolerte testkopien og bekreftet fem friske tjenester, bevart avsluttet plan/oppsummering, buss/endested, uendret vist utløpstid og fortsatt tilgjengelig testavvik etter gjenåpning. Dette er manuell bevaringskontroll av det eksisterende syntetiske miljøet, ikke en ny ren installasjon. Neste prøve er uttrykkelig reset av bare disse demonstrasjonsdataene; samlet Story12.5-aksept er fortsatt pending.
 
+Guidet sluttvurdering 2026-10-28 kl. 20:54: Jonas bekreftet «steg 9 ok». Manuell reset/status av ibe160-submission, fem friske tjenester, ny innlogging med samme genererte brukernavn/passord og tomme oppdaterte utkast-/plan-/avvikslister er bestått. Dette gjelder bare demonstrasjonsmiljøet. Steg1–9 er dermed manuelt bekreftet; siste del er vurdering av kravsporbarhet, utført evidens, KI-refleksjon/begrensninger og deretter separat samlet beslutning. Ingen samlet Story12.5-aksept er gitt ennå.
+
 ### Åpne punkter
 
 - Jonas sin sluttvurdering av leveranseoppskriften og uttrykkelige Story12.5-aksept gjenstår; bruk [konkret review-sjekkliste](../../docs/submission/review-checklist.md). Teknisk grønt eller push gir ikke aksept og avslutter ikke Epic12.
