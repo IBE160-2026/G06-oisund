@@ -146,6 +146,12 @@ HTTPS-adresse, laste siden på nytt og prøve mobil/native filvelger, valgfri ko
 godkjenning og busslagring. Dette er en ny driftskontroll, ikke ny Story12.4-aksept.
 Tidligere godkjenning og fysisk evidens er beholdt. [Maskinlesbar rapport](evidence/tablet-production-2026-10-28.json).
 
+### Eierens mobilkontroll etter deploy
+
+28.10.2026: Jonas bekreftet at den publiserte appen fungerer på mobil og at versjonen er den endrede 12.4-versjonen. Dette er brukerens faktiske mobilkontroll; ingen detaljert prøveprotokoll eller separat ny MFA-test ble rapportert.
+Den praktiske mobilkontrollen etter deploy er dermed registrert som bestått.
+Tidligere tekst om hva agenten selv prøvde, og øvrige bevisgrenser, er beholdt.
+
 ## Opprydding og konkret beholdt innhold
 
 `tablet-remote-access` hadde 16 statusoppføringer, utvidet til 29 filer. Alle stier

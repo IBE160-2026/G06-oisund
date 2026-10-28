@@ -67,7 +67,7 @@
     "old_branch_removed": true
   },
   "limits": [
-    "No new physical Pixel/Lenovo run on public production hostname",
+    "Owner confirmed public production works on mobile and recognizes12.4; no detailed new per-scenario device protocol supplied",
     "No new authenticated edge/MFA session exercised by agent",
     "No changed DNS/Access/MFA policy",
     "Source a48f213 is product deployment; later commits are operations/docs only"
@@ -80,5 +80,12 @@
     "audience_matches_local_gate": true,
     "catch_all_denied": true,
     "four_registered_connections": true
+  },
+  "owner_mobile_confirmation": {
+    "date": "2026-10-28",
+    "reported_by": "Jonas",
+    "device": "mobil, modell ikke oppgitt i bekreftelsen",
+    "result": "Appen fungerer; publisert versjon gjenkjennes som endret 12.4",
+    "detailed_scenario_or_mfa_retest_claimed": false
   }
 }
