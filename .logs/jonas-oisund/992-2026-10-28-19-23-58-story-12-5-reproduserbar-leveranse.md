@@ -41,8 +41,10 @@ Gjeldende [README](../../README.md) låser reproduksjonen til `c067fdbb20150219c
 
 Alle30 opprinnelige container-ID-er/images/starttider/tilstander er kontrollert uendret også etter siste omkjøring. Ingen operasjon mot jonas eller eksisterende databaser, passord, tunnel eller produksjon. Ingen merge/deploy/kursinnlevering, eieraksept, Epic12-avslutning eller utvidelsesstart. Sprint/spec står review/in-review, aksept pending. Tidligere åpne prosjektpunkter beholdes. Full Linux-oppskrift, ny fysisk enhetsprøve, naturlig sju-døgnsvarighet og nytte i faktisk bussdrift er ikke påstått.
 
-### Åpne punkter
+Guidet sluttvurdering 2026-10-28 kl. 20:17: Jonas bekreftet «Det ser klart ut. Steg 1 OK» etter gjennomgang av README/oppstarts-, nettbehovs- og resetbeskrivelsen. Dokumentasjonsdelen er dermed manuelt bestått. Dette er ikke en ny installasjonskjøring eller samlet Story12.5-aksept.
 
-Guidet sluttvurdering 2026-10-28 kl. 20:17: Jonas bekreftet «Det ser klart ut. Steg 1 OK» etter gjennomgang av README/oppstarts-, nettbehovs- og resetbeskrivelsen. Dokumentasjonsdelen er dermed manuelt bestått. Dette er ikke en ny installasjonskjøring eller samlet Story12.5-aksept. Neste prøve er syntetisk innlogging og PDF A i det isolerte miljøet.
+Guidet sluttvurdering 2026-10-28 kl. 20:22: Jonas bekreftet «steg 2 ok». Innlogging i det isolerte demomiljøet og import av syntetisk Testskift-A.pdf med forventet dato, vognløp, ukjent fysisk buss og de to viderevalgene er manuelt bestått. Ingen lagring/godkjenning eller samlet aksept er utledet fra denne bekreftelsen. Neste prøve er manuell korrigering, eksplisitt lagring og gjenåpning.
+
+### Åpne punkter
 
 - Jonas sin sluttvurdering av leveranseoppskriften og uttrykkelige Story12.5-aksept gjenstår; bruk [konkret review-sjekkliste](../../docs/submission/review-checklist.md). Teknisk grønt eller push gir ikke aksept og avslutter ikke Epic12.
