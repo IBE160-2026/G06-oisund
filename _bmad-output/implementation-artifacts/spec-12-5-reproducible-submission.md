@@ -75,6 +75,8 @@ Post-review source8d50684338b4f74430cd387dabba9e55edc4b7fd passed6 Node groups o
 
 ## Review Triage Log
 
+Focused reinspection by the three original reviewers closed all retained findings after patches and affected reruns. B6/E2 remain rejected low unsupported-use boundaries, explicitly documented. README pins c067fdbb20150219c041588ed4e990e7b0ef6b94; the clean copy checked out that immutable snapshot and passed current status guards. User review/acceptance remains pending.
+
 | Finding | Verdict | Verified evidence / route |
 |---|---|---|
 | Blind B1: Linux paths differing only in case pass ownership | medium | Original normalization lowercased all platforms. Patch native path comparison; Windows and Linux regression branches. |

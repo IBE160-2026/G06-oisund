@@ -1,6 +1,6 @@
 {
-  "capturedAt": "2026-10-28T18:19:12.787Z",
-  "source": "8d50684338b4f74430cd387dabba9e55edc4b7fd",
+  "capturedAt": "2026-10-28T18:23:15.430Z",
+  "source": "5cea76e39919c842edc8547117528a84f2f7f2ff",
   "checkedPaths": [
     ".dockerignore",
     ".gitattributes",
@@ -39,6 +39,7 @@
     "docs/evidence/12-5-node-review-linux.txt",
     "docs/evidence/12-5-node-review-windows.txt",
     "docs/evidence/12-5-node-tests.txt",
+    "docs/evidence/12-5-pinned-status.txt",
     "docs/evidence/12-5-protected-baseline.json",
     "docs/evidence/12-5-protected-final.json",
     "docs/evidence/12-5-reproduction.md",
