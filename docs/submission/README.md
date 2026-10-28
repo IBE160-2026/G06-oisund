@@ -4,6 +4,7 @@ Start with the [clean-checkout recipe](../../README.md). This directory is the a
 
 | Review need | Entry |
 |---|---|
+| Short approved product brief and course constraints | [product-brief.md](../../_bmad-output/planning-artifacts/briefs/brief-IBE160-2026-09-21/product-brief.md), [course-source record](../../_bmad-output/planning-artifacts/briefs/brief-IBE160-2026-09-21/addendum.md#course-evidence-and-delivery-constraints) |
 | Executed clean setup, environment, source, failures and reruns | [12.5 reproduction evidence](../evidence/12-5-reproduction.md) |
 | Requirements, implementation and exact test selectors | [Traceability](traceability.md) |
 | Accepted synthetic inputs, extraction boundaries and unknowns | [Supported input](supported-input.md) |

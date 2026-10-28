@@ -26,6 +26,9 @@ mkdirSync(ROOT + '/tmp', { recursive: true });
 try {
   action('status');
   const protectedBefore = protectedContainers(), secretsBefore = secretHashes();
+  // Remove expired leftovers from other disposable suites before measuring
+  // preservation of newly acknowledged, unexpired state.
+  action('reset');
   // Populate acknowledged synthetic state through the actual HTTP API, not SQL fixtures.
   python('private-api', `import json,uuid,httpx\nfrom pathlib import Path\naccount=json.loads(Path('/run/secrets/submission_account').read_text())\nwith httpx.Client(base_url='http://127.0.0.1:8000') as client:\n def post(path,body):\n  proof=client.get('/auth/csrf').json()['csrf_token']\n  response=client.post(path,headers={'Origin':'http://127.0.0.1:15325','X-CSRF-Token':proof},json=body)\n  assert response.status_code==200,(path,response.status_code)\n  return response.json()\n post('/auth/login',account)\n operation=post('/draft-operations',{})\n post('/drafts',{'operation_id':operation['operation_id'],'expected_revision':0,'draft':{'service_date':'2030-03-01','activities':[{'id':str(uuid.uuid4()),'type':'Coffee','start':'2030-03-01T08:00+01:00','end':'2030-03-01T08:15+01:00'}]}})\nprint('Acknowledged synthetic draft and session created through HTTP.')\n`);
   const before = snapshot('private-api'), fictionalBefore = snapshot('api');
