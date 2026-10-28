@@ -6,5 +6,6 @@ COPY frontend/ ./
 ENV VITE_FICTIONAL_API=http://127.0.0.1:18327
 ENV VITE_PRIVATE_API=http://127.0.0.1:18328
 RUN npm run build
+RUN mkdir -p node_modules/.vite-temp && chown -R node:node node_modules/.vite-temp
 USER node
 CMD ["npm", "run", "start", "--", "--port", "15325"]

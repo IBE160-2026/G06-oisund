@@ -1,0 +1,23 @@
+# Reader review checklist
+
+Use the [README commands](../../README.md) in a fresh versioned checkout. Record your `git rev-parse HEAD`, Docker/Compose/Node/browser versions, command exits and any failure before retrying. The existing [reproduction report](../evidence/12-5-reproduction.md) identifies which checks have already run and their source limits.
+
+| Action | Expected observation |
+|---|---|
+| `init`, `status` | Five healthy isolated services; generated ignored secrets; exact loopback ports; fictional day plus one synthetic login; no owner prerequisites |
+| Repeat `start`/initialization | Same account/password and unexpired fictional day; no silent renewal/reseed |
+| Import A | Summary visible, no saved draft before explicit action; independent JSON facts agree; unknown fields stay unknown |
+| Correct a destination/provenance and save | Explicit acknowledgement; original source facts stay available separately; no inferred bus/direction |
+| Correct import without editing | **Alt stemmer – lagre og fortsett** reaches distinct saved-version approval without compulsory editor work |
+| Confirm saved revision | Explicit classification/unknown acknowledgement as required; no selected activity and not-started shift |
+| Select/start/status/save | Exact manual activity and explicit persisted status; planned clock causes no automatic movement |
+| Source-linked notice | Explicit future ending and save; check time, source time, validity and manual ending remain distinct |
+| Reload/reopen | Acknowledged plan/bus/activity/status survive; unsaved in-memory proposals are not claimed saved |
+| Stop/start and restart | Entire saved recap/session/deadlines unchanged; retained data read from actual PostgreSQL |
+| End or abort/reopen | Explicit confirmation, stable terminal recap; no restart of terminal shift |
+| Import C/E | Midnight rolls into correct Oslo calendar date; sparse facts remain unknown |
+| `test-backend`, `test-browser` | Real API/PostgreSQL results with actual counts/skips; no historical default ports or ordinary accounts |
+| `reset` | Saved synthetic data/sessions removed, same generated login reprovisioned, fictional seed recreated; unrelated containers/volumes remain |
+| Wrong project/storage / non-synthetic account controls | Nonzero refusal before mutation; dedicated automated safety tests create and remove only their temporary disposable records |
+
+For a failed/missing save reply keep the page open. Use the offered check/retry controls; reconnecting alone never saves. Simulation failure controls on `/demo.html` are explicitly synthetic and cannot replace actual database/restart results. Complete review by assessing [traceability](traceability.md), [AI reflection](ai-reflection.md) and [known limits](known-issues.md); record a separate explicit owner acceptance decision.

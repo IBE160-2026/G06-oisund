@@ -1,301 +1,83 @@
-# G06 — Individuell
+﻿# G06 — Individuell: reproducible V1
 
-> Main integration,27October2026: accepted12.3 was merged without conflicts; the entire committed merge tree equals the accepted story tree. [Final checks and publication record](docs/evidence/12-3-publication-final.md) supersede earlier no-merge/no-push checkpoint statements.12.4 remains backlog.
+IBE160 Programmering med KI, Høgskolen i Molde, autumn 2026. Author: Jonas Øisund.
 
+This V1 imports a supported text-PDF shift, permits correction and explicit saving, confirms a saved plan, and supports manual activity selection, shift status and source-linked notices. React/TypeScript talks to actual FastAPI and PostgreSQL. Planned times never establish real progress or road clearance. Stories 12.1–12.4 are accepted; delivery story 12.5 awaits owner review. [Submission index](docs/submission/README.md).
 
-> Publication follow-up,27 October2026: Jonas has now explicitly authorized committing/pushing the completed documentation and evidence, then merging12.3 into main after identity/final checks and pushing main. Earlier no-commit/no-push/no-merge statements describe the previous checkpoint.12.4 remains backlog.
+## Clean checkout and startup
 
-
-Gruppeprosjekt i **IBE160 Programmering med KI** ved Høgskolen i Molde, høsten 2026 (15 studiepoeng).
-
-Repoet inneholder gruppens applikasjon og dokumentasjon av utvikling, testing og kvalitetssikring med KI.
-
-## Medlemmer
-
-- Jonas Øisund
-
-## Current project state
-
-On 19 October 2026 the owner approved [SCOPE-02](./_bmad-output/planning-artifacts/sprint-change-proposal-2026-10-19.md): a smaller course V1 with supported text-PDF import and correction, a saved day overview, manual activity navigation, manually maintained source-linked notices and a local fullstack demonstration.
-
-The [active plan](./_bmad-output/planning-artifacts/epics.md) contains four epics and 20 stories. [Sprint tracking](./_bmad-output/implementation-artifacts/sprint-status.yaml) records stories 9.1–9.4, Epic 9, stories 10.1–10.5 and Epic 10 as done after owner acceptance. The [Epic 10 retrospective](./_bmad-output/implementation-artifacts/epic-10-retro-2026-10-24.md) is complete with verdict `accepted-with-open-items` and five proposed follow-ups; the later retrospective request supersedes the earlier publication-only instruction. Story 10.3 adds saved-revision review and explicit confirmation; its verification and owner acceptance are tracked in the [confirmation evidence](./docs/evidence/10-3-plan-confirmation.md). The [Epic 9 retrospective](./_bmad-output/implementation-artifacts/epic-9-retro-2026-10-21.md) retains its historical `rejected` verdict; the account-switch repair and subsequent E9-A2–E9-A5 delivery have been accepted; the historical verdict remains unchanged. The 10.1 walkthrough was approved on 21 October 2026 with the known false t-marker warning in example 8 accepted unchanged; see [verification and acceptance](./docs/evidence/10-1-import-review.md). [Readiness](./_bmad-output/planning-artifacts/implementation-readiness.md) covers planning, not implemented or tested product behavior. The [earlier baseline](./_bmad-output/planning-artifacts/archive/pre-scope-02-2026-10-19/README.md) is historical.
-
-Story 9.2 implements a real React/TypeScript → FastAPI → PostgreSQL assessment slice. It accepts only the exact fictional example. Story 9.3 adds separately provisioned private access; story 9.4 adds manual private draft saving/reopening. Story 9.1 supplies the bounded PDF adapter connected to private import in 10.1; 10.2 adds corrections and retained source comparisons.
-
-The account-switch follow-up binds private editor requests to the displayed account/session, including when another window's login notification is missed. Jonas approved this repair after walkthrough on 22 October 2026; its retrospective action is done. See the [repair and verification record](./_bmad-output/implementation-artifacts/spec-epic-9-bind-private-editor-identity.md). The retrospective's historical verdict remains recorded separately. E9-A2–E9-A5 have completed technical follow-up and owner acceptance on 24 October 2026; story 10.4 preserves the identity protection.
-
-## Run the fictional assessment
-
-For the repeatable, no-login simulation with separate screens and controlled failures, use the [Story 12.2 launch, reset and test guide](docs/fictional-assessment.md). It runs without a backend and stores only fictional state in memory. Story 12.1 notice admission/retry is integrated locally; use the [combined manual test checklist](docs/story-12-manual-testing.md) and [fresh integration evidence](docs/evidence/12-integrated-handoff.md). Jonas accepted Story 12.1 and 12.2 on 27 October 2026; both are done/accepted. Physical-device qualification remains separate.
-
-Requires Docker Desktop with Linux containers and Compose v2. Start Docker Desktop first. Run these commands from this repository root in PowerShell:
+Install Git, Node.js 24 with npm, Docker Desktop with Linux containers and Compose v2. Use a desktop Chromium browser. Exact tested versions/source are in the [reproduction record](docs/evidence/12-5-reproduction.md). Run commands in the checkout root in PowerShell or a POSIX terminal:
 
 ```powershell
-docker compose config --quiet
-docker compose up -d --build --wait
-docker compose exec -T api python -m app.manage migrate
-docker compose exec -T api python -m app.manage seed
+git clone --branch story/12-5-reproducible-submission https://github.com/IBE160-2026/G06-oisund.git ibe160-submission
+cd ibe160-submission
+git rev-parse HEAD
+node scripts/submission.mjs init
+node scripts/submission.mjs status
 ```
 
-Open **http://127.0.0.1:5173**. Select **Lagre fiktiv dag**, then **Åpne lagret dag på nytt**, or reload the saved URL. Seed prints an example UUID; `http://127.0.0.1:5173/?day=<UUID>` opens it. The screen always labels `Fiktive demodata`, planned times, explicit calendar dates, Europe/Oslo and unknown facts. It contains an overnight example with separate service/calendar dates. Controls work with Tab and Enter.
+The delivery is versioned Git content; no local archive is needed. `init` generates ignored local database/account secrets, pulls pinned base images, freshly installs locked npm/Python dependencies with an uncached build, builds the frontend, starts five services, applies versioned migrations and idempotently seeds the fictional day and synthetic account. Expect healthy containers, a fictional day UUID and synthetic-account confirmation. Every failed subprocess exits nonzero; resolve the failure before continuing.
 
-API health: http://127.0.0.1:8000/health. Both published ports bind to loopback; PostgreSQL has no host port. Compose creates a dedicated fictional-only PostgreSQL cluster. Its fixed bootstrap credentials are a cluster superuser, not a role restricted to one database. Private or operational data must never share this cluster. Do not publish these services publicly. This slice has no login or private API.
+Installation requires internet access to Git, Docker registries, npm and PyPI. Browser-test installation also downloads Playwright Chromium. Once installed, runtime requires only local loopback connections between browser/frontend/APIs/PostgreSQL, with no CDN, owner account, tunnel, paid service, private PDF, backup or live feed.
 
-The versioned initial SQL migration runs automatically before API startup and can be rerun explicitly. The persistent volume is `ibe160-fictional-assessment_fictional_pg`; stopping/rebuilding containers preserves acknowledged data. Server-issued operation UUIDs exist before sending a day, serialize concurrent attempts and return the same accepted record on identical retry. Changed values for an accepted operation conflict. Only the fixed fixture may be created. Ownership is server-assigned to the fictional assessment owner.
+The fixed project is `ibe160-submission`; its new volumes are `ibe160-submission_submission_fictional` and `ibe160-submission_submission_private`. PostgreSQL publishes no host port. Scripts explicitly select the exact project/file and refuse an existing project owned by another checkout. Leave occupied ports and existing services alone; the recipe fails rather than reclaiming them. Do not use operational Compose overlays.
 
-Seven-day retention starts at the server's first successful day creation and never moves on read/retry. An unused operation also expires in seven days; successful creation aligns its expiry with the day. Expired access is immediately denied; startup and hourly cleanup purge the day and operation together. Unknown/removed operation IDs cannot recreate expired days. No browser storage or recovery cache stores the day; the URL contains only a fictional record UUID. A failed save retains the displayed example in page memory and requires explicit retry; no acknowledgement is claimed for timeout, HTML or malformed results.
+| Entry | Address | Evidence type |
+|---|---|---|
+| Private workspace | http://127.0.0.1:15325/private | Actual authenticated API/PostgreSQL, generated synthetic account |
+| Fixed fictional assessment | http://127.0.0.1:15325/ | Actual fictional save/reopen, separate database |
+| No-login simulation | http://127.0.0.1:15325/demo.html | Labelled in-memory scenarios/failures; no persistence claim |
+| Private / fictional health | http://127.0.0.1:18328/health / http://127.0.0.1:18327/health | Database-backed health |
 
-## Reset, tests and persistence
+## Actual application journey
 
-Reset affects only this Compose assessment database and reseeds the fixed example. Wrong mode, database name, database user or external database host is rejected before connecting:
+Read `.private-runtime/submission/account.json` locally for the generated `synthetic-submission` login. This ignored file is never part of the submission. Preserve both secret files while retaining the volumes. Ordinary `app.manage provision` still refuses the reserved `synthetic-` namespace; only the bounded demonstration initializer provisions this account.
+
+1. Open `/private`, sign in and choose `Eksempelfiler/Testskift-A.pdf` under **Velg tekst-PDF**. A–E and the independent [expected facts](Eksempelfiler/Fasit-testskift.json) are fully synthetic. Import is transient: inspect the summary before saving.
+2. For correct input choose **Alt stemmer – lagre og fortsett**. To exercise correction choose **Rett eller legg til opplysninger**, edit **Til sted** and **Kilde / manuell rettelse**, then **Lagre utkast** and inspect the acknowledgement. PDF facts remain separately available; missing facts stay unknown. A first draft's bus is saved with the whole draft; a clean saved draft offers **Lagre buss/vogn**.
+3. Continue to **Gjennomgå lagret utkast** when offered. Inspect the saved-version approval, explicitly classify activities when required and acknowledge listed unknowns. Select **Bekreft gjennomgått plan**. Confirmation does not start work: the day shows no selected activity and **Ikke startet**.
+4. **Velg aktivitet …**, inspect details, return to the day and explicitly **Start skift** / **Bekreft skiftstart**. Manually select and save an **aktivitetsstatus**. The confirmed plan's bus has its own **Lagre fysisk buss** action.
+5. Optionally open **Manuelt vedlikeholdte avvik**, register a synthetic source-linked notice with a future ending date and explicitly save. Source checking, validity, manual ending and automatic expiry are distinct. **Les avvik for linjer og datoer** filters by exact line and planned Oslo calendar date; an empty list proves no source coverage.
+6. Reload and reopen the saved plan; check acknowledged activity/status/bus. End or abort with explicit confirmation; inspect the recap and reopen. Import C separately for midnight/date rollover; E exercises sparse/unknown facts. [Review checklist](docs/submission/review-checklist.md).
+
+Unsupported/scanned/malformed PDFs offer manual entry. This is a bounded two-column text-layout parser; [supported input and limits](docs/submission/supported-input.md).
+
+## Stop, restart, retention and reset
 
 ```powershell
-docker compose exec -T api python -m app.manage reset --fictional-only
-docker compose exec -T api python -m app.manage cleanup
-docker compose exec -T api python -m pytest -q
-powershell -ExecutionPolicy Bypass -File scripts/verify-persistence.ps1
-powershell -ExecutionPolicy Bypass -File scripts/verify-unavailable.ps1
+node scripts/submission.mjs stop
+node scripts/submission.mjs start
+node scripts/submission.mjs restart
+node scripts/submission.mjs status
 ```
 
-The API tests run against actual HTTP/PostgreSQL, create only fictional examples and simulate expiry by moving test deadlines in the assessment database. They verify replay/concurrency, exact payload equality, validation/no mutation, fixed retention, expiry/purge/no resurrection, origin checks and configuration denial. The restart script creates a day, restarts **both PostgreSQL and API**, waits for database-backed health, compares the entire returned record and checks replay identity.
+Stop/start/restart preserve volumes, sessions and saved records. Repeated initialization neither changes an existing password nor reseeds an unexpired fictional day. Reads/retries/restarts never renew server deadlines. Sessions last 14 days; private drafts/plans have seven-day retention, with dependent records following the parent deadline. Qualified notices have separate storage retention seven days after effective ending; validity is not road clearance. Expired access is immediately refused; startup/hourly cleanup removes expired records. The [evidence](docs/evidence/12-5-reproduction.md) separates restart checks from accelerated expiry tests.
 
-For local browser development tests, install Node.js (verified 24.19.0, npm 11.17.0):
+Unsaved private work lives in page memory; refresh/closing/logout/expiry can lose it. Keep the page open during an unresolved save and use its explicit check/retry controls. Reconnecting alone never saves.
+
+Erase **only** disposable submission data and seed a new fictional day plus the same generated login:
 
 ```powershell
-cd frontend
-npm.cmd ci
-npm.cmd run build
-npx.cmd playwright test
-cd ..
+node scripts/submission.mjs reset
 ```
 
-On Windows the browser tests use installed Microsoft Edge. On Linux install Chromium first with `npx playwright install --with-deps chromium`. Tests use real save/reload at 1440/768 pixels with Oslo overnight date assertions, keyboard/focus checks, overflow checks and no localStorage. They forward a save to the real API, discard its acknowledgement, and verify that browser retry retains the operation and accepted record identity. Bounded response tests reject invalid dates/identities and clear expired presentation after 410 or the known deadline. Screenshots are written to `Docs/evidence/9-2-1440.png` and `9-2-768.png`. Synthetic response/transport failures are identified separately from actual database outage checks.
+Reset checks project/config ownership, running network/volume identities, exact database identity and synthetic-only accounts before mutation. A non-synthetic account refuses the entire reset before either database changes. It preserves generated passwords and migration history; saved synthetic plans/notices/sessions are removed, so sign in again. Never substitute operational databases or delete secrets while retaining volumes. `stop` is sufficient to leave the demo; no global cleanup is required.
 
-To inspect a real outage, load a fresh example, run `docker compose stop db`, then save; expect an unconfirmed/unavailable status and the example to remain visible. Restart with `docker compose up -d --wait db api`, then retry the same button. `docker compose stop api` similarly permits checking a failed reopen. Restore with `docker compose up -d --wait`.
+## Repeat verification
 
 ```powershell
-docker compose down
-# To delete only the fictional assessment volume as well:
-docker compose down --volumes
+node --test scripts/test-submission.mjs
+node scripts/submission.mjs test-backend
+node scripts/submission.mjs install-browser
+node scripts/submission.mjs test-browser
 ```
 
-## Executable versions and limits
+Backend verification runs actual private HTTP/PostgreSQL tests, then fictional/parser tests in their respective containers. Opposite-mode suites are intentionally skipped; actual counts/source belong to the [current evidence](docs/evidence/12-5-reproduction.md). The existing `PRIVATE_TEST_PROJECT=ibe160-private-tests` marker and non-synthetic refusal remain unchanged despite the separate Compose name. Browser tests use freshly installed Playwright Chromium and the actual APIs. Linux may additionally need system libraries: from `frontend`, run `npx playwright install --with-deps chromium`, then return to the root. Generated browser output is ignored under `tmp/`; selected evidence is versioned separately.
 
-Resolved and executed from the actual package/image registries on 19 October 2026: Python **3.13.16**, PostgreSQL **17.11**, Node **24.19.0**, FastAPI **0.149.0**, uvicorn **0.54.0**, psycopg **3.3.6**, React/React DOM **19.3.1**, TypeScript **7.0.2**, Vite **8.3.4**, Playwright **1.64.1**. Docker server: **29.7.2**. Container base images are pinned by immutable digest, Python transitive versions by `backend/requirements.lock`, and npm dependencies/integrities by `frontend/package-lock.json`. Registry versions may differ from documentation pages; these are observed executable versions, not a claim about future latest releases.
+[Traceability](docs/submission/traceability.md), [AI/human reflection](docs/submission/ai-reflection.md) and [known limits](docs/submission/known-issues.md) distinguish extraction, integration, UI, historical physical observations and unperformed field benefit. No real-world time savings or complete accessibility conformance is claimed.
 
-The private workspace supports manual draft revisions and transient review of the bounded text-PDF layout described below. Live feeds, GPS, offline operation and cloud deployment remain outside this implementation. The fixed fictional owner is only for local assessment; private access uses its own runtime below. Browser automation is bounded development evidence; actual tablet hardware, assistive technology and a complete accessibility audit remain unqualified. The development log records the exact performed checks and limitations.
+## Preserved history
 
-## Run private access locally
+Current scope: [SCOPE-02](_bmad-output/planning-artifacts/sprint-change-proposal-2026-10-19.md), [requirements](_bmad-output/planning-artifacts/prds/prd-IBE160-2026-09-21/prd.md), [stories](_bmad-output/planning-artifacts/epics.md), [sprint](_bmad-output/implementation-artifacts/sprint-status.yaml). The earlier accumulated README remains in Git at `99c272b09abaa5ffecf3286b406fbf065a445c7c`.
 
-Verification commands below require a **disposable, synthetic-only private database**. They refuse before test mutations when any non-synthetic account exists; account, session and throttle metadata are then left unchanged. The CLI reserves the `synthetic-` account prefix for automated fixtures and refuses operator provisioning in that namespace. Tests clear throttle metadata, so never bypass their guard to run alongside real accounts. Once real accounts are provisioned, first stop the operational private API to free port 8001, then set `$env:COMPOSE_PROJECT_NAME = 'ibe160-private-tests'` and run `docker compose -f compose.private.yaml up -d --build --wait`. Keep this variable set while running all private tests, browser tests and verification scripts: Docker inherits it and selects a separate disposable volume/network. Stop the disposable project with `docker compose -f compose.private.yaml down`, clear the variable using `Remove-Item Env:COMPOSE_PROJECT_NAME`, then restart the operational private project. Do not delete the operational volume or its local database secret.
-
-Private mutations use an origin-scoped browser Web Lock held through response completion. Logout stays pending behind earlier mutations across tabs, so a delayed login cookie cannot arrive after confirmed revocation. Unsupported browsers fail closed. Visibility changes hide the workspace during server revalidation; a matching valid session preserves unsaved in-memory draft edits. An unavailable revalidation keeps those edits hidden in memory and offers another access check. Session expiry or logout clears the workspace.
-
-Start the fictional project above for the frontend, then start the separate private project. No account or application password is preconfigured. Generate the private PostgreSQL bootstrap secret locally; it is ignored by Git and mounted as a Docker secret rather than stored in Compose or the API URL:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File scripts/initialize-private.ps1
-docker compose -f compose.private.yaml config --quiet
-docker compose -f compose.private.yaml up -d --build --wait
-docker compose -f compose.private.yaml exec private-api python -m app.manage provision YOUR_USERNAME
-```
-
-Provisioning requires an interactive terminal and prompts twice with hidden input (12–256 characters). Do not use `-T`, password arguments or environment variables for account provisioning. Duplicate names fail safely; there is no public signup. Open **http://127.0.0.1:5173/private** to enter, save and reopen manual Norwegian drafts. The default `/` remains the fictional demo. Private health is **http://127.0.0.1:8001/health**.
-
-The dedicated project/cluster/network/volume is `ibe160-private-work` / `private_pg`; no database host port is published. Demo reset cannot reach private storage. The local generated database secret is a bootstrap cluster credential, distinct from provisioned accounts. Preserve `.private-runtime/postgres-password` while retaining the private volume; PostgreSQL bootstrap does not change the existing role password when a different file is generated. Do not remove or replace it to reset an account. `docker compose -f compose.private.yaml down` preserves the private volume and accounts. No private reset command is provided.
-
-Only explicit loopback development is supported. `APP_MODE=private-local`, `PRIVATE_LOOPBACK_DEVELOPMENT=1`, the exact configured loopback frontend origin and the isolated private database identity are required. Public hosts/HTTPS/public deployment configuration fail closed; a public deployment needs a separately designed HTTPS/Secure-cookie configuration. Current cookies are host-only, HttpOnly and SameSite Strict, with insecure transport allowed solely for this explicit local configuration. The shared frontend origin is trusted application code.
-
-Passwords use salted Python/OpenSSL `hashlib.scrypt` (N=32768, r=8, p=3); no new package is required. Parameters follow the documented scrypt alternatives in the [OWASP password storage guidance](https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html), using the [Python 3.13 API](https://docs.python.org/3.13/library/hashlib.html#hashlib.scrypt). Credentials fail generically, and PostgreSQL admits at most 10 attempts per normalized name, 20 per IP and 100 globally per fixed 15-minute window. A global admission cap bounds stored buckets to 201 and prevents unbounded random-name metadata. This intentionally conservative local policy can temporarily block all sign-ins during abuse.
-
-Sessions are opaque 256-bit random tokens stored only as SHA-256 hashes; server deadlines are exactly 14 days from sign-in and never renew. Every private resource checks the server session/ownership and returns `no-store`; own/foreign profile checks distinguish 401 renewal from safe 404 denial. Startup/hourly cleanup removes expired sessions/throttle metadata; accounts are not seven-day drafts. Signed HttpOnly CSRF cookies and custom proof headers plus exact-origin checks protect login/logout, following the [OWASP CSRF guidance](https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html). Concurrent tabs may safely receive a rejected mutation if their CSRF cookies rotate; retry obtains a fresh proof.
-
-Private presentation/credentials stay in page memory. No localStorage, sessionStorage, IndexedDB, service worker or offline grants store private work. A security-only `private_logout_pending=1` host cookie persists the logout lock across reloads; it carries no account identity or private payload. Logout clears presentation immediately and explicitly remains unconfirmed until revocation is acknowledged. Reload settles revocation before session reads or sign-in. BroadcastChannel sends only logout state notifications so another open tab clears immediately; history/visibility transitions revalidate access and stale responses cannot restore the view. This security marker and the HttpOnly authentication/CSRF cookies are the necessary authentication state, not saved work.
-
-```powershell
-docker compose -f compose.private.yaml exec -T private-api python -m app.manage migrate
-docker compose -f compose.private.yaml exec -T private-api python -m app.manage cleanup
-docker compose -f compose.private.yaml exec -T -e PRIVATE_TEST_PROJECT=ibe160-private-tests private-api python -m pytest -q tests/test_private_access.py tests/test_private_drafts.py
-uv run --no-project scripts/verify-private-access.py
-cd frontend
-npm.cmd run build
-npx.cmd playwright test
-cd ..
-```
-
-Tests provision random synthetic accounts and delete them afterward. The verification script sequentially restarts private PostgreSQL/API, reapplies migrations, runs cleanup and **resets fictional demo data**, comparing the original session and deadline after each step; it emits no credentials. Browser tests cover 768/1440px keyboard/focus/wrapping, expiry, back/reload, concurrent tabs, unconfirmed and lost logout replies, and stale responses. Synthetic transport/deadline tests are labeled separately from real server/database checks. Screenshots: [768px](Docs/evidence/9-3-768.png), [1440px](Docs/evidence/9-3-1440.png). These profile/access checks do not establish draft retention or draft acceptance; story 9.4 introduces that behavior.
-
-## Save and reopen a private draft
-
-In `/private`, use **Nytt utkast**, enter an optional service date and vehicle duty, and add ordered activities. Empty facts remain unknown. **Buss/vogn** is the manually entered physical bus, kept separate from vehicle duty. The realtime value is derived from the final three numeric digits of duty, preserving zeros (`0007` → `007`); otherwise it stays unknown. Ordinary **Startdato/Starttid** and **Sluttdato/Sluttid** controls use Oslo time automatically. New/empty dates default from service date; each date remains editable, with an explicit **neste dag** action for overnight work. Changing service date never silently moves an entered/saved activity instant. Original clocks such as `24:00` or `26:30` have separate source fields. Unknown raw codes, places and manual provenance remain unchanged. The form supports 200 activities with bounded text fields; private draft request bodies have a 1 MiB ceiling while authentication keeps its 4096-byte ceiling.
-
-The protected, bounded `/draft-times/resolve` endpoint uses server Europe/Oslo rules for all local clocks, independently of device timezone. Spring-gap clocks are rejected; repeated autumn clocks require an explicit **Første forekomst** or **Andre forekomst** choice. Incomplete, invalid or unavailable resolution retains local input in memory and blocks saving until resolved or deliberately cleared. Dates/source clocks and existing explicit saved instants remain unchanged until edited. Saved data still contains authoritative explicit instants; users never type offsets. Historical response validation relies on backend timezone rules because tested browser Intl historical Oslo data differs from the server; modern responses also use an Intl Oslo round-trip check.
-
-**Lagre utkast** acknowledges a specific revision and stable draft/activity identities. **Mine utkast** reopens authorized server state after reload. A stale update preserves local input and offers a saved-version comparison; loading that version requires confirming that local changes will be discarded. Failed or non-JSON acknowledgements remain unresolved, retaining the original operation and input in page memory. **Kontroller lagringsforsøket** or retrying the same operation settles that effect. Avoid closing/reloading an unresolved save: browser persistence/offline recovery is intentionally absent. Navigation and logout warn before losing unsaved input.
-
-The E9-A2–E9-A5 follow-up adds bounded draft discovery: **Vis flere utkast** loads the next page of up to 50 live owned drafts; **Oppdater listen** starts again. All accepted live drafts remain discoverable beyond 200. Creation checks the original operation's live deadline at atomic acceptance and rolls back on expiry; accepted retries preserve their original result/deadline. The 200-live-unused-operation admission limit excludes accepted/expired operations. See [follow-up evidence and acceptance status](docs/evidence/epic-9-draft-boundaries.md).
-
-**Tøm vognløp** clears only duty and its derived realtime value, preserving the bus and activities. Confirmed **Tilbakestill utkast** empties an unsaved form; **Forkast endringer** restores the last saved snapshot. Neither action deletes saved work. **Slett utkast** requires confirmation and the current saved revision, deletes only that draft and its save operations, and cannot be forced over a newer revision. Unresolved saves/deletes lock reset and replacement actions until settled. A lost delete reply keeps its original deletion identity for authorized lookup or retry; a missing/denied reply is never treated as acknowledged deletion. Content-free deletion acknowledgements expire at the original draft deadline and contain no saved form content. Old save operations cannot recreate a deleted draft. Existing drafts and accepted save snapshots are normalized on presentation without rewriting their stored content or extending retention.
-
-Draft retention is exactly seven days from server creation; updates, viewing, replay, restart and sign-in do not extend it. Unused creation operations also expire after seven days; accepted operations share their draft's deadline. Authorization and expiry checks run within the revision/idempotency transaction. Startup and hourly maintenance purge drafts and cascading operation records. A missing/purged operation cannot recreate work. Foreign work receives a generic denial; an owned expired record receives an expiry message while it remains awaiting purge.
-
-Run the complete isolated verifier from the repository root:
-
-```powershell
-$env:COMPOSE_PROJECT_NAME = 'ibe160-private-tests'
-uv run --no-project scripts/verify-private-drafts.py
-Remove-Item Env:COMPOSE_PROJECT_NAME
-```
-
-It refuses without that exact project selection, stops the operational private API, builds the disposable project on port 8001, checks synthetic-only accounts before mutations, runs backend tests, restart/migration/cleanup evidence, production build and the browser suite, then stops disposable services and restores the operational API in `finally`. It preserves both volumes and the existing secret; it never resets operational data. Disposable test records may remain for inspection. The script uses existing `npm.cmd`/`npx.cmd` commands on Windows. Private backend tests additionally require `PRIVATE_TEST_PROJECT=ibe160-private-tests` within the container. Owner walkthrough and final acceptance remain separate from automated verification.
-
-## Qualify the approved text-PDF examples
-
-Story 10.2 adds **Opprinnelig og gjeldende** per imported activity, textual manual correction markers and manual activity origin. Current unknown places, times/type and required trip facts are separate from historical source warnings. Restore a source value to remove its marker. Incomplete drafts remain unconfirmed and saveable; invalid entered times remain blocked. Activity IDs carry their raw local time inputs and duty boundaries through reordering; deleting an anchor removes its duty change. **Nattmodus** is a temporary editor preference. See [historical correction evidence and A–E import limits](docs/evidence/10-2-draft-corrections.md). The subsequent owner-feedback correction supports the existing generated A–E source rows/endpoints; see [current import and activity-action evidence](docs/evidence/11-3-owner-feedback.md) for the retained uncertainty and support limits.
-
-In `/private`, **Velg tekst-PDF** sends the original as a transient PDF body for review. The review shows whitelisted header facts, ordered source rows beside mapped fields, field/page locations, unknown annotations, repeated full vehicle duties and three-digit suffixes, uncertainty and visual pause groups. Driver/employer identity, file name and raw text archives are excluded from saved metadata. The original and processing copies are released after processing, cancellation or failure. No PDF preview or private content is persisted in the browser.
-
-**Bruk som separat nytt utkast** explicitly adopts the interpretation into a new unsaved draft; existing unsaved edits require a discard decision. **Lagre utkast** remains a separate action using the existing revision, replay and seven-day retention controls. Saved import metadata survives editing/reset/reopen without claiming confirmation or activation. Example 6's Travel to remains partial, with its 16:00 end and unknown start, places and type. Header end and final activity remain distinct; no free-time row is invented. Bus starts unknown. Other layouts are never advertised as qualified.
-
-After adoption/reopen, **Vis kildefakta fra PDF** is closed by default. A compact uncertainty summary stays visible, links to affected activities and includes unknown source markers such as `t`/`N`. New imports populate readable uncertainty notes; existing imported drafts expose the same source issues without rewriting their stored facts. These remain source uncertainties, not automatically resolved facts when a note is edited.
-
-Examples 8 and 9 are also verified through import/save/reopen: all 23/8 activities are preserved, including Fadder/Instruktør work without trips and CAR/pilot-car transfer/return without a numeric realtime suffix. Accepted known limitation: example 8 activity 13 can display a false unknown `t` warning caused by the column crop of `tom / 76567`; the owner approved leaving it unchanged.
-
-The top **Vognløp** is the starting value. Imported changes appear at their activity boundary; each activity shows its effective duty and derived three-digit value. **Bytt vognløp fra aktivitet …** adds an editable change effective until the next change; **Fjern vognløpsbytte …** restores inheritance. Duty changes survive save/reopen and are anchored to stable activity IDs. They do not change **Buss/vogn**. Explicitly removing all changes is retained even if original PDF metadata still contains them. Older imported drafts derive their editable boundaries from source metadata until explicitly changed; no migration or storage rewrite is performed. Direction enrichment remains deferred.
-
-The private `/imports/pdf` endpoint checks session and CSRF/origin before parsing and session again before responding. Upload admission is limited to two simultaneous imports, 10 MiB incrementally, and a 30-second upload deadline. Extraction retains 20-page/30-second/2-MiB-output bounds. The browser offers cancellation and a 45-second request deadline. Disconnect, logout, hidden/revalidated presentation and shutdown discard late replies or cancel extraction. Unsupported/scanned/encrypted/corrupt/bounded failures offer manual entry. See [10.1 evidence](Docs/evidence/10-1-import-review.md) for executed coverage and remaining review/owner checkpoints.
-
-The independent [approved facts](Eksempelfiler/README.md) and [JSON oracle](backend/tests/fixtures/import_expected.json) cover seven anonymized PDFs / ten pages. From the repository root in PowerShell:
-
-```powershell
-docker compose build api
-docker compose run --rm --no-deps -v "${PWD}/Eksempelfiler:/fixtures:ro" api python -m pytest -q tests/test_pdf_import.py
-docker compose run --rm --no-deps -v "${PWD}/Eksempelfiler:/fixtures:ro" api python -m app.qualify_imports /fixtures
-# To save normalized field comparisons, explicitly mount the evidence destination:
-docker compose run --rm --no-deps -v "${PWD}/Eksempelfiler:/fixtures:ro" -v "${PWD}/Docs/evidence:/evidence" api python -m app.qualify_imports /fixtures --output /evidence/9-1-import-qualification.json
-```
-
-The qualification command deliberately exits **1** when any example is partial, unsupported, mismatched or untested. On 20 October, examples **1–5 and 7** matched every qualified source fact; example **6 is partial** because its Travel to row lacks the owner-completed start, endpoints and deadhead interpretation. All **113 source activities, 46 route trips and 30 numbered deadheads** were extracted; the 31st deadhead is owner-assisted. The [evidence report](Docs/evidence/9-1-import-qualification.md) records comparisons, negative results and the supported envelope. Manual completion never upgrades automatic completeness.
-
-The adapter accepts PDF bytes with a `.pdf` filename and PDF signature, up to **10 MiB / 20 pages / 30 seconds per document**, with a **2 MiB result ceiling** in a terminable worker. It rejects corrupt, encrypted and image-only inputs; OCR is excluded. Originals stay in memory and are never included in the image or persisted. Qualification requires the approved SHA-256 values; missing or changed fixtures remain untested. Dependencies are pinned to executed pdfplumber **0.11.10** and its complete transitive set. The official [pdfplumber documentation](https://github.com/jsvine/pdfplumber) describes byte-stream input, cropping, text extraction and resource closing.
-
-Downstream story 10.1 receives `app.pdf_import.extract_pdf` / `ImportDraft`, a separate nullable contract retaining source order, labels, per-field page/column/line provenance, unknown annotations, repeated duty occurrences and source pause rows. Derived calendar instants use Europe/Oslo service date, header start and stated Utstrekk; clock ordering alone does not establish a date. Duty suffixes and pause groups are derived, and actual bus remains null. Owner facts stay in the qualification layer. Only these HASTUS January examples with the observed header and body columns are qualified; extended header clocks (24:00 or later), intermediate stops, other layouts, DST transitions, private input and production integration remain unqualified.
-
-## Reviewed private plans (story 10.3)
-
-Save the draft before selecting **Gjennomgå lagret utkast**. The review shows the exact saved revision, all current facts and preserved source facts, correction guidance, unresolved information and the fixed deadline: latest explicit activity end + seven days. Start times must be chronological; overlaps, gaps and zero-duration transfers remain allowed. Unknown activity types require an explicit supported/manual classification. New policy-3 reviews require acknowledgements only for effective passenger trips: missing trip/line/direction/from/to or substantive current uncertainty. Non-trip facts and original source markers/issues have no dedicated checkbox. Editing invalidates the review; cancellation leaves the saved draft unchanged.
-
-**Bekreft gjennomgått plan** writes one separate, immutable confirmed snapshot for that source draft. Confirmation does not start or complete work. Other drafts create separate plans. The snapshot survives source-draft deletion/expiry, and neither reading nor retry extends its deadline. **Mine bekreftede planer** supports bounded pagination and authorized reopening. Story 10.4 adds the separate manual bus registration below; story 10.5 now adds the chronological day overview, with verification and owner acceptance tracked separately.
-
-A lost or invalid confirmation response stays unresolved. The editor locks while **Kontroller bekreftelsen** or **Prøv samme bekreftelse igjen** resolves the original server-issued operation. Changing decisions for an accepted operation conflicts. All requests use the existing account/session guards, CSRF/origin checks and no-store responses. The additive `004_workdays.sql` migration preserves existing accounts/drafts; expired confirmation metadata is purged with its source or accepted snapshot.
-
-An opened plan offers **Slett bekreftet plan**, followed by a mandatory warning popup. Cancel leaves it unchanged. Acceptance removes only that plan and its confirmation metadata; the source draft and its confirmed marker remain. A new plan requires a separate new draft. Uncertain deletion responses retain the same operation for **Kontroller slettingen** or **Prøv samme sletting igjen**, with navigation/replacement protection. The additive `005_workday_deletions.sql` stores content-free retry receipts only until the deleted plan's original deadline. Older reads and confirmation retries cannot restore a deleted plan.
-
-Run the sequential synthetic verification with `COMPOSE_PROJECT_NAME=ibe160-private-tests` using `scripts/verify-private-drafts.py`; it checks backend contracts, restart/migration persistence and browser regressions, then restores operational availability without resetting its accounts, volume or secret. See [executed evidence and owner walkthrough](docs/evidence/10-3-plan-confirmation.md).
-
-## Manual physical bus (story 10.4)
-
-Story 10.4 was accepted by the owner on 24 October 2026 after reported testing worked as intended. Final sequential verification passed 236 backend/API tests, restart/migration equality, production build, 157 browser tests and five verifier controls. Independent review corrections are resolved; the local API/frontend match tested code, with existing account/data/secret digests and database container preserved. E9-A2–E9-A5 passed their technical gate first and remain verified in this combined run; owner acceptance/action closure is recorded. See [bus evidence](docs/evidence/10-4-physical-bus.md) and [E9 evidence](docs/evidence/epic-9-draft-boundaries.md). Story 10.5 was accepted on 24 October 2026, with commit/push authorized at that publication checkpoint; the later requested retrospective is now complete with open follow-up items. All retained independent-review findings are fixed; final verification passed 236 backend/API tests, restart/migration equality, build, 190 Playwright tests and five verifier controls. See [day-overview evidence and offered manual checks](docs/evidence/10-5-day-overview.md). Actual iPad Safari checks remain not run; owner acceptance does not imply tablet verification. Existing data and original database container are preserved; ordinary services are healthy and test services stopped.
-
-Open a confirmed plan and use **Fysisk buss**. Enter the identifier as text, including leading zeros, spaces and punctuation, then choose **Lagre fysisk buss**. Correcting or emptying the field requires another explicit save. Empty means unknown. **Avbryt bussendring** restores the last loaded value. Closing/reopening or reloading reads saved server state. The initial value is any manually entered bus in the confirmation snapshot, otherwise unknown; an explicit saved clearing remains unknown.
-
-Current manual registration and historical facts at confirmation are labelled separately. Vehicle duty, its three-digit realtime value, activity/source identities, confirmation decisions and fixed expiry remain unchanged. Duty changes never infer a physical bus change. No activity-linked bus-change history or live lookup is added.
-
-Concurrent edits preserve the losing proposal and offer **Last inn lagret buss** for explicit comparison/reload. Lost, malformed or uncertain replies retain the original operation for retry/lookup. Editing and replacement/deletion controls remain protected while unresolved; private input stays in memory. A denied current read hides authoritative saved presentation and offers **Kontroller plantilgangen**, retaining local text and the unresolved attempt. Session identity is rechecked before restoring presentation. Original receipts never replace a newer current bus in the UI.
-
-The additive `006_workday_bus.sql` stores current bus and fixed-expiry receipts separately from immutable plans. Parent deletion/expiry cascades bus data; reads/retries never extend retention. Receipt admission is bounded at 2,000 live receipts per account, with accepted retries reusing their receipt. The existing sequential synthetic verifier includes bus/restart/migration/identity coverage and restoration controls. Ordinary accounts and private data are excluded from automated tests.
-
-E10-A1–A3 maintenance (2026-10-24): original import metadata is frozen after first save; draft and current-bus fresh writes share explicit Unicode whitespace, NUL and 100-code-point rules. Review decisions are pinned internally so existing plans and pending confirmations retain their historical policy. Missing supported deadhead/CAR trip numbers stay visibly unknown without a separate acknowledgement. See [maintenance evidence and owner checks](docs/evidence/epic-10-draft-contracts.md). Jonas accepted the amended A1–A3 follow-up on 24 October 2026; original story acceptance is unchanged.
-
-The earlier maintenance checkpoint passed **267 backend/API + 198 browser** tests; those results predate the policy-3 amendment and remain historical. The current reviewed amendment passed **288 backend/API + 220 browser** tests, exact restart/migration preservation, production build and five restoration controls. Tested code is running locally, ordinary services are healthy and test services stopped. Ordinary data/policies/security/secret are preserved except three expired login-throttle rows removed by existing startup cleanup. See [current evidence and manual checks](docs/evidence/epic-10-review-feedback.md). Jonas accepted the amended follow-up on 24 October 2026; A1–A3 are done. A4/A5 remain open for existing 12.3/12.4; actual iPad/Safari qualification is not inferred. That accepted follow-up is recorded in the committed/pushed baseline `81f1a54`; story 11.1 is accepted for publication.
-
-## Manual activity selection and shift start (story 11.1)
-
-Jonas explicitly accepted story 11.1 on 24 October 2026 and subsequently authorized commit/push. Final verification passed 302 backend/API tests, exact restart/migration comparisons, production build, 257 browser tests and five verifier controls. Independent review findings are resolved without deferral. At that acceptance checkpoint, the tested local API/frontend were available with original data/database/secret preserved and later stories remained backlog. Current 11.2 progress is recorded below and in sprint tracking.
-
-An opened confirmed plan initially has **Ingen aktivitet valgt** and **Ikke startet**. Choose a specific activity in the chronological list, or use **Forrige aktivitet** / **Neste aktivitet** after choosing. Navigation follows every confirmed member, including individual grouped pause rows; gaps have no selection action. Passenger choices show type, line, direction/destination and explicit Oslo calendar start. Other activity choices show their type/time, known relevant places and applicable identifiers; missing route fields are not invented for reporting or pauses. **Valgt tur** / **Valgt aktivitet**, **Manuelt valgt** and a textual list marker identify the last acknowledged choice. Selecting it again does nothing. Reopening/reloading restores current authorized server state.
-
-**Start skift** independently records the first accepted explicit start using the server timestamp. Selection and consultation work before and after start. **Planlagt start** is the first confirmed activity start; **Faktisk start** is the acknowledged manual registration, shown as **Startet manuelt**. Start never chooses, completes or closes an activity, changes the bus, extends retention or proves physical driving. There is no undo or one-active-plan rule in this story. Repeated and simultaneous starts preserve one original actual time and lifecycle revision. Historical confirmation facts remain labelled separately.
-
-Uncertain selection/start replies retain the same operation and body in page memory for checking/retry, with leave protection. Stale selection preserves the local proposal alongside current saved selection for explicit reload. Newer current selection is never replaced by an older receipt. Validated receipt-capacity rejection retains a cancellable proposal; unrecognized errors remain unresolved. Denial hides authoritative presentation across bus/selection/start until each denied resource revalidates. Unavailable lifecycle is unknown, never assumed unstarted. No private browser persistence is added.
-
-Migration `009_workday_selection.sql` adds independent selection/lifecycle authorities and fixed-expiry operation receipts, all cascading with parent deletion. Existing confirmed records/receipts remain compatible; absent lifecycle means confirmed/unstarted revision zero. Live receipts are bounded to 2,000 per account per resource; accepted retries bypass admission. See [11.1 executed evidence and owner checks](docs/evidence/11-1-activity-selection.md) for current verification/review status. Final owner acceptance and actual iPad/Safari checks remain separate.
-
-## Selected activity and separate screens (story 11.2)
-
-The private workspace separates upload, interpretation review/editing, chronological day and selected activity. Use **Velg tekst-PDF** → **Bruk som separat nytt utkast**, correct and **Lagre utkast** → **Gjennomgå lagret utkast** → **Bekreft gjennomgått plan**. The confirmed day opens separately. **Velg aktivitet N** opens that acknowledged member; **Tilbake til dagen** returns without changing saved selection or registrations. **Åpne valgt aktivitet** consults the saved choice without another write. Preparation/editor remain reachable from the day, retaining unsaved input in memory. Unresolved writes retain existing guards and checking/retry actions.
-
-The activity screen shows confirmed type, relevant identifiers, planned start/end with Oslo calendar dates, known/unknown endpoints and current uncertainty. Previous/next includes each pause member; no stops or location are invented. Physical bus remains an explicit day action; 11.3 also exposes confirmed Start/End from the selected activity. Ordinary and enlarged text can wrap/scroll; compact consultation navigation keeps activity facts prominent. No API/schema or private browser persistence change is introduced.
-
-Story 11.2 is reviewed and technically ready for owner testing: 302 PostgreSQL/API tests, exact restart/migration preservation, build and all 284 browser tests passed; five verifier controls passed. All retained independent-review findings are fixed without deferral. The tested build is served locally, original work/account/session/secret data and database are preserved, ordinary services are healthy and test services stopped. Jonas explicitly accepted 11.2 on 25 October 2026, reporting that it works well and is much clearer. Jonas subsequently authorized commit/push on 25 October 2026; 11.3 was then explicitly authorized and is delivered in review below. See [11.2 evidence and concrete walkthrough](docs/evidence/11-2-selected-activity.md) for actual results, earlier failed gates and limitations. Future notices have a secondary day-linked screen (11.4/11.5); selected-activity outcomes and day-linked end/abort/recap are delivered by 11.3 below. Intermediate-stop extraction/display is post-V1. The working limited demo is preserved; its expansion remains later planned work. Actual iPad/Safari and theme-persistence follow-up remain in 12.3/12.4.
-
-## Manual notice maintenance (story 11.4)
-
-Story 11.4 adds **Manuelt vedlikeholdte avvik** as a separate destination from the confirmed day. Register/edit a title, short explanation, detailed multiline explanation and optional source description such as SMS from traffic control. Choose **Bestemte linjer** and enter explicit comma-separated tags, or choose **Alle linjer**. A website address is optional; any supplied link must be HTTP(S), and a shared traffic-message overview is acceptable. Optional source-update and validity times use Oslo resolution and remain unknown when blank. Opening a source or editing never records a source check. **Kontrollerte kilden nå** records an explicit server check; later changes qualify that earlier check. **Avslutt avvik manuelt** requires confirmation and ends only the notice. All records remain in this day's management list, including manually ended records; line/date relevance filtering belongs to 11.5. The owner's SMS/text/all-lines correction is tracked in the [corrective specification](_bmad-output/implementation-artifacts/spec-11-4-real-notice-sources.md); historical verification below predates that correction.
-
-Maintenance is available before Start and while active. Terminal days permit reading only, under the same effective retention deadline. Local proposals and the original uncertain command remain in memory across day/activity/notice navigation, with lookup/same-command retry and explicit stale comparison. No private browser cache or source fetch is introduced. Additive migration `011_manual_notices.sql` preserves existing records/receipts; closure shortens notice receipt metadata atomically. Final verification passed 393 API/PostgreSQL tests, all 395 browser tests, restart/repeated-migration preservation, build and seven verifier controls. All retained independent-review findings were fixed and re-inspected. The tested version is served locally with existing private data/database/secret preserved. See [11.4 implementation evidence and owner walkthrough](docs/evidence/11-4-manual-notices.md) for exact results, earlier failures and device limits. Owner acceptance remains pending; no commit/push or next story.
-
-## Manual activity status and terminal closure (story 11.3)
-
-Owner-approved feedback corrections are delivered: **Aktivitetsstatus**, retained **Fullført manuelt**, and confirmed Start/End/Abort directly from the activity. Existing A–E uploads import all source rows/endpoints/dates, retain B’s unknown time and D’s note warnings, and preserve all nine original regressions. 119 affected import tests, all351 browser cases (27.3m), six verifier controls and build passed. The tested local version is served with original private data/database/secret and PDF/fasit files preserved. See [owner-feedback report and walkthrough](docs/evidence/11-3-owner-feedback.md). Jonas accepted story 11.3 and its corrections on 2026-10-25 and authorized commit/push. The next story remains unstarted.
-
-An explicitly started active shift supports exact-member manual outcomes and corrections, including each pause and non-passenger activity. End/abort has a separate review/cancel/confirmation screen, preserves unregistered members and fixes a terminal server time with a non-extending retention deadline. Reopened terminal plans show a retained read-only recap; day/member consultation cannot resume work or write selection, bus or outcomes. Stable receipts resolve uncertain saves with authorized lookup or the same original request.
-
-Historical pre-feedback checkpoint: implementation was complete and independently reviewed, awaiting owner acceptance. 322 API/PostgreSQL tests, six verifier controls, populated restart/repeated migration and build passed. The complete browser run passed 330 of 334 cases; four DST-sensitive expiry fixture setups were corrected and all four affected cases passed on rerun, with product code unchanged. The tested version is served locally, additive migration 010 is applied, original data/secret/database are preserved and ordinary services are healthy. See [11.3 evidence and owner walkthrough](docs/evidence/11-3-outcomes-and-close.md) for precise results and retained failures. No commit, push or next story. Actual iPad/Safari and theme-persistence follow-up remain in 12.3/12.4.
-
-The owner-directed SMS/text/all-lines correction is also delivered locally: final 61 notice API/PostgreSQL tests and all 49 notice browser tests pass after independent review, with migration/restart and original-data preservation verified. The required title plus explicit specific/all-line choice, optional URL and separate explanation/source fields above describe the current version. Copy any unsaved old-tab text before refreshing. Story 11.4 remains review pending owner acceptance; no commit/push or next story.
-
-## Owner acceptance and publication authorization — 2026-10-25
-
-Jonas explicitly approved the corrected story 11.4 delivery, then instructed commit and push. Owner acceptance is accepted and story/sprint status is done. The technical final gate remains 61 API/PostgreSQL and 49 browser passes with verified migration/restart/data preservation. Earlier pending-acceptance and stop-before-publication statements are historical and superseded by these owner messages. Record the accepted work in Git and push to origin/main; do not start 11.5 or any other story.
-
-## Read manually maintained notices by line and date
-
-**Owner correction, 26 October 2026:** The original per-shift implementation was rejected. Notices now belong to the signed-in account and are reused automatically on every relevant confirmed day. The account registry survives closing, deleting or expiring the original shift. Enter a future ending date; leaving its optional clock empty means **23:59:59 on that Oslo date**. Extend by editing and saving before the existing ending instant. After that instant the notice becomes **Utløpt** and cannot be revived. **Avslutt avvik manuelt** can end it earlier. Both states are distinct from source checking and do not establish road clearance.
-
-The active reader excludes expired, manually ended and missing-ending notices. Maintenance retains qualified history for seven days after effective ending. Older missing-ending records need an explicit future ending before reuse; their existing storage lease is preserved until completion. Older separately entered copies are preserved as separate records, without guessed merging. See the [cross-day correction report and test steps](docs/evidence/11-5-crossday-register.md). This supersedes the per-day/terminal-shift/unknown-ending reader behavior described in the historical 11.4/11.5 checkpoints below. Owner acceptance remains pending.
-
-The corrected version is now served locally with migration 013 applied: all 420 backend and 472 browser tests passed, including restart/repeated migrations and data preservation. Independent review is complete; original ordinary data/database/secret and immutable legacy receipts are preserved. Story 11.5 is review, existing 11.6 remains review, and physical Lenovo Pad/Android/Brave/mobile-network qualification remains unperformed. No owner acceptance, staging, commit, push or further story is included.
-
-In an open confirmed private day, choose **Les avvik for linjer og datoer**. This opens a separate read-only screen. Filter by an exact confirmed line and/or planned **calendar date in Oslo**; all planned dates is the default. The service date remains a separate plan fact. Known notice validity is compared with actual planned activity intervals, including midnight and gaps, independently of the manually selected activity and the current clock. Shared notices appear once with every matching line; separately entered incidents remain separate.
-
-Expand a row for the complete saved explanation/source, validity, registered/manual-ended status and separate source-check time. Unknown/partial validity remains a qualified candidate. Manual ending does not certify road clearance; reading/filtering never checks a source or changes saved state. Empty stored data, no matching records and unavailable reads have different messages, and none establishes complete source coverage. Explicit all-line notices apply even when plan lines are unknown. Tags use exact identifiers: `020` does not silently become `20`, and no numbers are extracted from copied route headings. Warnings explain possible missing matches; **Til avviksvedlikehold** opens the unfiltered 11.4 editor/list with retained proposals and unresolved-command recovery.
-
-Use **Tilbake til dagen** to return without changing the saved activity. Consult the [11.5 delivery evidence and owner walkthrough](docs/evidence/11-5-line-date-notices.md) for executed checks and limitations. Manual owner acceptance remains separate from automated results. The no-login demo is unchanged; use an authorized private day or the disposable synthetic fullstack tests. Subsequent 11.6 recovery work is documented separately below.
-
-The 11.5 delivery checkpoint passed 411 backend tests; its full browser run passed 424/426, including all 26 reader cases, followed by correction of the old shared-helper race and 24/24 checks across the eight affected scenarios. Build, restart/migration/raw-state and seven restoration controls passed. Original private data/database/secret, source PDFs/oracles and historical renders were preserved. All accepted review findings were fixed; manual owner acceptance remains pending. Preserve unsaved old-tab text before refreshing. Later 11.6 changes and verification have their own report below.
-
-## Recover private work when the server is unavailable
-
-Story 11.6 integrates explicit recovery for drafts, notices, activity choices/statuses, bus registration, shift actions and plan confirmation/deletion. Keep the page open during a failure. A failed or missing reply remains **uavklart** until the original operation is checked; retry first resolves that operation and reuses the same identity/content only where the server contract permits it. An accepted historical receipt is reconciled with current saved state. Newer data is not silently overwritten, and retained proposals remain available for comparison.
-
-Use **Kontroller tilgang igjen** after a server outage hides private content, then the original save's check/retry controls. Reconnecting alone does not save. Dirty notice text cannot retain a saved-status claim. Draft-list errors are shown separately from form-saving status. Private content remains in page memory only; refresh/closing, changed login or expiry can lose it, with loss warnings where supported.
-
-The [combined 11.5/11.6 test guide and 11.6 delivery report](docs/evidence/11-6-server-recovery.md) contains explicit PowerShell startup/recovery commands, normal/outage/conflict walkthroughs, exact executed tests and known limits. [11.5 evidence](docs/evidence/11-5-line-date-notices.md) remains separate. Both stories await manual owner acceptance. No commit/push, retrospective or next epic is included in this delivery.
-
-The owner's planned physical test platform is Lenovo Pad with Android and Brave, over the mobile network to the server on the desktop at home (corrected 2026-10-26). This physical test has not been performed. Executed desktop Edge/Playwright automation remains separate; historical iPad/Safari references do not define the planned setup. Receiving the delivery report does not accept either story. This correction changes documentation only and adds no test execution.
-
-Owner acceptance update, 26 October 2026: Jonas explicitly accepted corrected story 11.5 (`Godkjent.`). Its account-owned cross-day/expiry delivery is done; existing 11.6 remains review. Earlier pending-acceptance statements describe historical checkpoints. This does not authorize commit/push or further work, finalize the retrospective, close Epic 11, or establish physical-device qualification.
-
-
-## Current 11.6 integration handoff — 26 October 2026
-
-**421 backend tests passed in 526.37s; all 479 browser cases passed in one invocation (38.9m)**. Populated restart, repeated migrations, exact raw state/receipt/deadline/session preservation, cleanup and TypeScript/Vite build passed. One existing TestClient dependency deprecation warning; no product/test failure. The [current delivery and short manual checklist](docs/evidence/11-6-server-recovery.md#current-integrated-delivery--26-october-2026) identify the exact dirty-tree manifest and preserve historical outcomes. Corrected 11.5 is accepted; 11.6 remains review pending Jonas's local desktop browser test results and explicit approval. Ordinary data/services are preserved and serve the tested version. Planned Lenovo Pad/Android/Brave/mobile-network testing remains unperformed; remote-access setup is scheduled between Epic 11 and Epic 12 and is not part of this task. Retro draft remains unfinalized; no commit/push or Epic 12 work.
-
-
-## Epic 11 accepted and retrospective completed - 26 October 2026
-
-Jonas accepted integrated 11.6. All six Epic 11 stories and the retrospective are done, with verdict **accepted-with-open-items** and 12 proposed follow-ups. The [continued retrospective](_bmad-output/implementation-artifacts/epic-11-retro-2026-10-26.md) incorporates the earlier chat's preserved preliminary analysis, corrected 11.5, the exact 421-backend/479-browser checkpoint, fresh bounded system observations and limitations. Actual Lenovo/Android/Brave/mobile-network testing remains unperformed; remote access is scheduled between Epic 11 and Epic 12. No commit/push, remote setup or Epic 12 work is performed. Older review/pending statements above remain historical.
-
-## Story 12.3 — tablet/PC views and persistent manual theme
-
-Story12.3 is done/accepted on its separate story branch: Jonas' conditional approval became effective after the remaining required physical checks passed on27October2026. See the [final Lenovo acceptance report](docs/evidence/12-3-device-acceptance-2026-10-27.md). Latest instruction: no commit/push; no merge to main. The current Day/Night control covers login, the private workspace, the simulation and actual fictional assessment. An explicit choice persists only `ibe160-theme=day|night`; the earlier temporary-editor description above is historical. Application localStorage contains no private work, passwords or simulated records; existing session-cookie authentication remains in use. Reset/logout/reload preserve the presentation preference; blocked storage falls back to an in-memory choice. There is no Auto mode.
-
-The earlier desktop checkpoint measured rendered text/control/focus, native checkboxes, long Norwegian text and100%/200% text separately from hardware. The [physical Lenovo/Android/Brave USB follow-up](docs/evidence/12-3-device-testing-2026-10-27.md) now records bounded device/native-control/actual-pinch checks plus Jonas' finger and rotation observations. The final follow-up adds private review/confirmation, ended/aborted recap, native glyph contrast and keyboard focus; Jonas approves subjective readability/touch comfort. Untested assistive-technology/OS settings and ordinary deployment limits remain explicit. No overall WCAG claim or complete12.4 user-flow qualification is made.
-
-Use [12.3 startup and manual checklist](docs/story-12-3-manual-testing.md) and [current executed results/limits](docs/evidence/12-3-main-sync-handoff.md). The dedicated environment is frontend 15323, APIs 18323/18324 and Compose `ibe160-story123-tests`, with separate synthetic data. The integrated 12.1/12.2 environment 15312/18312/18313 remains separate; Jonas has accepted both stories (done/accepted). Their historical 477/479 broad result and later successful affected checks are unchanged.
-
-
-Current-main reconciliation (27 October 2026): Story 12.3 incorporates full accepted main `74849ff`, including validated relative tablet transport and accepted local save/conflict/recovery feedback. The dedicated tablet entry now uses the same persistent theme provider. See the [current integration handoff](docs/evidence/12-3-main-sync-handoff.md) for fresh evidence and limitations; the earlier 12.3 handoff is a historical checkpoint. Dedicated tablet browser checks use only a separately built private entry and loopback port 18483; they do not activate external access or qualify physical hardware. Story12.3 is now accepted under the final device decision;12.4 remains backlog. Main is unchanged and no story-to-main merge occurred.
-
-Story12.4 was accepted by Jonas on28October2026 after the improved shift workflow was tested on the tablet. Its complete accepted delivery is integrated on main without product changes; [source integration checks](docs/evidence/12-4-main-integration.md) document exact merge/build identity and reused functional/device evidence. This is source integration only, with existing runtime/data/access preserved;12.5 remains backlog.
+Preserved reports: [12.1/12.2 integration](docs/evidence/12-integrated-handoff.md), [12.3 physical acceptance](docs/evidence/12-3-device-acceptance-2026-10-27.md), [12.4 handoff](docs/evidence/12-4-handoff.md), [12.4 corrected import](docs/evidence/12-4-import-experience.md), [12.4 main integration](docs/evidence/12-4-main-integration.md), [development log](docs/development-log.md). Their original revisions, failures and pending statements remain historical. [Tablet operations](docs/tablet-production.md) describes a separate protected environment and is not a recipe prerequisite.

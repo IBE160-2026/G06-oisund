@@ -1,0 +1,16 @@
+# Submission guide — V1-20 / Story 12.5
+
+Start with the [clean-checkout recipe](../../README.md). This directory is the assessment entry point for the accepted smaller V1 under SCOPE-02. Story 12.5 is a delivery/reproducibility task; owner acceptance remains pending and Epic 12 remains in progress.
+
+| Review need | Entry |
+|---|---|
+| Executed clean setup, environment, source, failures and reruns | [12.5 reproduction evidence](../evidence/12-5-reproduction.md) |
+| Requirements, implementation and exact test selectors | [Traceability](traceability.md) |
+| Accepted synthetic inputs, extraction boundaries and unknowns | [Supported input](supported-input.md) |
+| How human and AI decisions were checked | [AI reflection](ai-reflection.md) |
+| Remaining limitations and deferred work | [Known issues](known-issues.md) |
+| Reader's actual fullstack walkthrough | [Review checklist](review-checklist.md) |
+
+The authoritative [V1-20 story](../../_bmad-output/planning-artifacts/story-drafts/story-v1-20.md), [PRD](../../_bmad-output/planning-artifacts/prds/prd-IBE160-2026-09-21/prd.md) and [12.5 implementation spec](../../_bmad-output/implementation-artifacts/spec-12-5-reproducible-submission.md) define this delivery. Planning text is not test evidence. Original teacher files are not supplied in this checkout; [the recorded course constraints](../../_bmad-output/planning-artifacts/briefs/brief-IBE160-2026-09-21/addendum.md) are the available secondary record, not independently verified originals.
+
+Delivery is the versioned Git branch/check-out. Generated local credentials, runtime files, private PDFs, dumps, backups, node_modules and builds are excluded. No archive is necessary. Review source revisions and dirty-source hashes in each report before reusing its result. A historical pass belongs to its original revision/environment, even when later product source is identical.
