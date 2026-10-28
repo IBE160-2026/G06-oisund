@@ -118,8 +118,8 @@ export function main(action) {
     fictional(['app.manage', 'reset', '--fictional-only']);
   }
   if (action === 'test-backend') {
-    compose(['exec', '-T', 'private-api', 'python', '-m', 'pytest', '-q']);
-    fictional(['pytest', '-q']);
+    compose(['exec', '-T', 'private-api', 'python', '-m', 'pytest', '-q', '--ignore=tests/test_assessment.py', '--ignore=tests/test_pdf_import.py']);
+    fictional(['pytest', '-q', 'tests/test_assessment.py', 'tests/test_pdf_import.py']);
   }
   if (action === 'test-browser') {
     run(process.platform === 'win32' ? 'npx.cmd' : 'npx', ['playwright', 'test', '--config', 'playwright.submission.config.ts'], { cwd: join(ROOT, 'frontend'), shell: process.platform === 'win32' });

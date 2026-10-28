@@ -51,7 +51,7 @@ node scripts/submission.mjs restart
 node scripts/submission.mjs status
 ```
 
-Stop/start/restart preserve volumes, sessions and saved records. Repeated initialization neither changes an existing password nor reseeds an unexpired fictional day. Reads/retries/restarts never renew server deadlines. Sessions last 14 days; private drafts/plans have seven-day retention, with dependent records following the parent deadline. Qualified notices have separate storage retention seven days after effective ending; validity is not road clearance. Expired access is immediately refused; startup/hourly cleanup removes expired records. The [evidence](docs/evidence/12-5-reproduction.md) separates restart checks from accelerated expiry tests.
+Stop/start/restart preserve volumes, sessions and saved records. Repeated initialization neither changes an existing password nor reseeds an unexpired fictional day. Reads/retries/restarts never renew server deadlines. Sessions last 14 days. Drafts expire seven days after their server creation. Confirmed plans expire seven days after the planned final end; an earlier server-recorded closure shortens the deadline to seven days after that closure. The earlier applicable bound is retained without renewal, and dependent records follow the parent deadline. Qualified notices have separate storage retention seven days after effective ending; validity is not road clearance. Expired access is immediately refused; startup/hourly cleanup removes expired records. The [evidence](docs/evidence/12-5-reproduction.md) separates restart checks from accelerated expiry tests.
 
 Unsaved private work lives in page memory; refresh/closing/logout/expiry can lose it. Keep the page open during an unresolved save and use its explicit check/retry controls. Reconnecting alone never saves.
 
@@ -63,6 +63,8 @@ node scripts/submission.mjs reset
 
 Reset checks project/config ownership, running network/volume identities, exact database identity and synthetic-only accounts before mutation. A non-synthetic account refuses the entire reset before either database changes. It preserves generated passwords and migration history; saved synthetic plans/notices/sessions are removed, so sign in again. Never substitute operational databases or delete secrets while retaining volumes. `stop` is sufficient to leave the demo; no global cleanup is required.
 
+To automate the stop/start, exact row/deadline persistence and positive reset checks, run `node scripts/verify-submission-runtime.mjs`. This intentionally resets demonstration data and records results under `tmp/submission-runtime-check.json`; run it after inspecting any manual demo work you want to keep.
+
 ## Repeat verification
 
 ```powershell
@@ -72,7 +74,7 @@ node scripts/submission.mjs install-browser
 node scripts/submission.mjs test-browser
 ```
 
-Backend verification runs actual private HTTP/PostgreSQL tests, then fictional/parser tests in their respective containers. Opposite-mode suites are intentionally skipped; actual counts/source belong to the [current evidence](docs/evidence/12-5-reproduction.md). The existing `PRIVATE_TEST_PROJECT=ibe160-private-tests` marker and non-synthetic refusal remain unchanged despite the separate Compose name. Browser tests use freshly installed Playwright Chromium and the actual APIs. Linux may additionally need system libraries: from `frontend`, run `npx playwright install --with-deps chromium`, then return to the root. Generated browser output is ignored under `tmp/`; selected evidence is versioned separately.
+Backend verification runs private HTTP/PostgreSQL tests with explicit exclusions `--ignore=tests/test_assessment.py --ignore=tests/test_pdf_import.py`, then runs only `tests/test_assessment.py tests/test_pdf_import.py` in the fictional container. Test selection is explicit for each mode; actual counts/source belong to the [current evidence](docs/evidence/12-5-reproduction.md). The existing `PRIVATE_TEST_PROJECT=ibe160-private-tests` marker and non-synthetic refusal remain unchanged despite the separate Compose name. Browser tests use freshly installed Playwright Chromium and the actual APIs. Linux may additionally need system libraries: from `frontend`, run `npx playwright install --with-deps chromium`, then return to the root. Generated browser output is ignored under `tmp/`; selected evidence is versioned separately.
 
 [Traceability](docs/submission/traceability.md), [AI/human reflection](docs/submission/ai-reflection.md) and [known limits](docs/submission/known-issues.md) distinguish extraction, integration, UI, historical physical observations and unperformed field benefit. No real-world time savings or complete accessibility conformance is claimed.
 

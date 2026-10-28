@@ -9,7 +9,8 @@ from urllib.parse import quote
 def main(arguments):
     allowed = (arguments == ['app.run']
                or arguments in [['app.manage', 'migrate'], ['app.manage', 'seed'],
-                                ['app.manage', 'reset', '--fictional-only'], ['pytest', '-q']])
+                                ['app.manage', 'reset', '--fictional-only'],
+                                ['pytest', '-q', 'tests/test_assessment.py', 'tests/test_pdf_import.py']])
     if (not allowed or os.environ.get('APP_MODE') != 'fictional-assessment'
             or os.environ.get('SUBMISSION_PROJECT') != 'ibe160-submission'):
         raise RuntimeError('Bounded fictional submission command required')
