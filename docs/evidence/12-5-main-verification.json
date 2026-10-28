@@ -1,6 +1,6 @@
 {
-  "at": "2026-10-28T20:27:41.312Z",
-  "checkedHead": "dbdbd1813e29c02913b72e15a24f0a3321565d95",
+  "at": "2026-10-28T20:29:29.040Z",
+  "checkedHead": "2b91f0a55fbf3117b39c2cecaf5e5091b9cfbfd9",
   "merge": "dbdbd1813e29c02913b72e15a24f0a3321565d95",
   "accepted": "330d5a21bc38decc95bbd5332edee2acf08e4faa",
   "snapshot": "c067fdbb20150219c041588ed4e990e7b0ef6b94",
@@ -17,7 +17,7 @@
     "Eksempelfiler"
   ],
   "executableDiffFromSnapshot": "empty",
-  "localLinks": 356,
+  "localLinks": 358,
   "lineBounds": 111,
   "demoSource": "c067fdbb20150219c041588ed4e990e7b0ef6b94",
   "demoClean": true,

@@ -1056,12 +1056,12 @@
     ]
   },
   "after": {
-    "at": "2026-10-28T20:26:41.455Z",
+    "at": "2026-10-28T20:28:42.707Z",
     "worktrees": [
       {
         "path": "D:/IBE160",
-        "head": "dbdbd1813e29c02913b72e15a24f0a3321565d95",
-        "status": "M README.md\n?? docs/evidence/12-5-main-frontend-build.txt\n?? docs/evidence/12-5-main-integration.md\n?? docs/evidence/12-5-main-node-linux.txt\n?? docs/evidence/12-5-main-node-windows.txt\n?? docs/evidence/12-5-main-npm-ci.txt\n?? docs/evidence/12-5-main-preservation-method.mjs\n?? docs/evidence/12-5-main-status.txt\n?? docs/evidence/12-5-main-verification-method.mjs\n?? docs/evidence/12-5-main-wrapper.txt"
+        "head": "2b91f0a55fbf3117b39c2cecaf5e5091b9cfbfd9",
+        "status": ""
       },
       {
         "path": "C:/Users/Jonas/.codex/.chatgpt-projects/g-p-6ab6b4c1c6888191a96d3242fab912b4/story-12-2",

@@ -1,0 +1,21 @@
+import {execFileSync,spawnSync} from 'node:child_process';
+import {writeFileSync,existsSync} from 'node:fs';
+const run=(...args)=>execFileSync('git',args,{encoding:'utf8'}).trim();
+const ref='refs/heads/story/12-5-reproducible-submission';
+const local=spawnSync('git',['show-ref','--verify','--quiet',ref]);
+if(local.status!==1)throw Error('Local branch still present or ref check failed');
+if(run('ls-remote','--heads','origin',ref)!=='')throw Error('Remote branch still present');
+const story='330d5a21bc38decc95bbd5332edee2acf08e4faa';
+run('merge-base','--is-ancestor',story,'origin/main');
+if(run('rev-list','--count',story,'--not','origin/main')!=='0')throw Error('Unpublished story commits');
+const retained=[['D:/IBE160/tmp/story-12-5',story],['D:/IBE160/tmp/submission-clean-20261028','c067fdbb20150219c041588ed4e990e7b0ef6b94']].map(([root,expected])=>{
+ const head=run('-C',root,'rev-parse','HEAD');
+ const status=run('-C',root,'status','--porcelain');
+ const branch=spawnSync('git',['-C',root,'symbolic-ref','--quiet','HEAD']);
+ if(head!==expected||status!==''||branch.status!==1)throw Error('Retained checkout changed: '+root);
+ return {root,head,clean:true,detached:true,directoryPreserved:existsSync(root),privateRuntimePresent:existsSync(root+'/.private-runtime')};
+});
+if(!retained[1].privateRuntimePresent)throw Error('Demo private runtime missing');
+const result={at:new Date().toISOString(),publishedMainBeforeCleanup:run('rev-parse','origin/main'),localBranchAbsent:true,remoteBranchAbsent:true,unpublishedStoryCommits:0,retained,noForceDeletion:true,result:'passed'};
+writeFileSync('docs/evidence/12-5-main-cleanup.json',JSON.stringify(result,null,2)+'\n');
+console.log(JSON.stringify(result));
