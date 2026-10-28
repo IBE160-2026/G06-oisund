@@ -87,5 +87,13 @@
     "device": "mobil, modell ikke oppgitt i bekreftelsen",
     "result": "Appen fungerer; publisert versjon gjenkjennes som endret 12.4",
     "detailed_scenario_or_mfa_retest_claimed": false
+  },
+  "final_runtime_state": {
+    "tunnel": "stopped at owner request after completed mobile test",
+    "connector_processes": 0,
+    "metrics_listeners_18083": 0,
+    "production_containers": "all four retained running with identical IDs",
+    "data_and_configuration": "retained; no database/config/DNS/Access changes",
+    "earlier_tunnel_ready_result": "historical successful deployment check before authorized stop"
   }
 }

@@ -1,6 +1,6 @@
 # Gjeldende fjernmiljø: godkjent main med 12.4
 
-Oppdatert 28. oktober 2026. Adresse: https://app.bussassistent.com/private.
+Oppdatert 28. oktober 2026. **Sluttstatus: tunnelen er stoppet etter fullført mobiltest. App/API/database og driftsoppsett er beholdt for neste oppstart.** Adresse: https://app.bussassistent.com/private.
 Denne veiledningen erstatter historiske oppstarts-/stoppstatus i tablet-local-pilot.md,
 tablet-tunnel-setup.md og tablet-pilot-result.md. De rapportene beholdes som historikk.
 Godkjenningsgrunnlag: [12.4-integrasjon](evidence/12-4-main-integration.md) og
@@ -65,7 +65,7 @@ Eksisterende signert cloudflared 2026.10.4 og tokenfil beholdes under
 `C:/Users/Jonas/AppData/Local/BussassistentTabletPilot`. Tunnel-ID
 `4aecb83e-cf83-4112-8f76-9a564252e1fe`, metrics bare `127.0.0.1:18083`.
 Ingen tokenverdi i argumenter/logger. Ingen DNS-, hostname-, Access-, MFA- eller
-cachepolicy ble endret. Connectoren kjører videre etter denne økten.
+cachepolicy ble endret. Connectoren ble startet under deployen og stoppet på eierens uttrykkelige beskjed etter fullført mobiltest 28.10.2026.
 
 Ved stopp: identifiser prosessen fra `tunnel.pid`, kontroller at ExecutablePath er
 den dokumenterte cloudflared-filen og at CommandLine inneholder denne tunnel-ID-en,
