@@ -73,4 +73,6 @@ Ferske integrasjonskontroller:6/6 Node-grupper på Windows og nettverksløs Linu
 
 ### Åpne punkter
 
-- Ingen nye åpne punkter for Story12.5. Tidligere registrerte produkt-/driftspunkter i issues.md er uendret.
+Publisering/opprydding 2026-10-28 kl.21:29: main-push99c272b→`2b91f0a55fbf3117b39c2cecaf5e5091b9cfbfd9` lyktes; ny fetch bekreftet lokal/origin likhet. Begge storyrefs stod330d5a2, og antall storycommits utenfor publisert main var0 før sletting. Worktree tmp/story-12-5 ble rent detached på nøyaktig330d5a2; deretter lyktes remote --delete og lokal branch -d uten tvang. Begge refs er kontrollert borte. Ingen mapper/filer/volumer slettet. Testkopien tmp/submission-clean-20261028 er fortsatt ren/detached påc067fdb med genererte private runtimefiler og fem friske tjenester på http://127.0.0.1:15325/private; dens lokale origin-mappe er bevart. Øvrige arbeidskopier og35 containere/16 volumer er fortsatt uendret. Endelig dokumentasjons-/oppryddingscommit `8558b9d99fc0c6d4a171cdaddb6ae5e074458714` lagrer faktisk etterkontroll og metode. Sluttkontrollen omfatter358 lokale dokumentlenker og111 linjegrenser. Denne separate logg-/issuescommiten pushes til main innen samme uttrykkelige bestilling, med etterfølgende kontroll av main/origin-HEAD og ren arbeidskopi.
+
+- Ingen gjenværende Story12.5-punkter. Epic12 holdes in-progress; retrospektiv må gjennomføres før eventuell avslutning og er ikke startet i denne integrasjonen. Dette er speilet i issues.md. Tidligere produkt-/driftspunkter beholdes.
