@@ -2,10 +2,12 @@
 title: '12.4 Verify the complete user flow (V1-19)'
 type: chore
 created: 2026-10-28
-status: in-review
+status: done
 route: dispatch
 baseline_commit: c3e5d66a7d9faa9af19a58c6002538610c163352
-owner_acceptance: explicitly-not-approved
+owner_acceptance: accepted
+accepted_on: 2026-10-28
+accepted_product_commit: 5ee35efb3753bed10bafc21a53a88fec3d93b287
 review_loop_iteration: 0
 context: []
 ---
@@ -114,3 +116,7 @@ Root follow-up: canonical LF template pins accept equivalent LF/CRLF checkouts a
 Canonical implementation commit `5ca3f7df73f4cf49f5244dbc97a0a3ebb8de9891` passed the post-commit runtime audit38/38 (`docs/evidence/12-4-runtime-20261028T081324378353Z.json`), including all23 preserved pre-existing containers. Later commits contain evidence/logs only; manual owner acceptance remains pending.
 
 Physical USB follow-up28October2026: actual Lenovo/Brave against unchanged5ca3f7d. Native PDF cancellation/exact import, independent A/C correction/save, notice native tab/HOME preservation, second-change adoption, end/abort/reload/restart and logout/account checks passed after documented harness corrections. See `docs/evidence/12-4-device-testing-2026-10-28.md`;23 grouped records are15 passed/8 failed attempts, not23/23. Native picker emits hidden/visible; instrumented notice tab/HOME does not. Runtime audit38/38,23 pre-existing containers/four prior Brave targets preserved, no tunnel. Product unchanged; owner acceptance pending.
+
+## Explicit owner acceptance —28October2026
+
+Jonas stated: «Test på nettbrett er tilfredsstillende, og work flow er mye bedre nå. Story godkjennes.» This explicitly accepts Story12.4 and the revised shift-preparation experience on product commit5ee35ef / main-BRJ12oLt.js. Earlier withheld/pending statements above describe historical checkpoints and are superseded by this decision; raw test evidence and limitations remain unchanged. [Acceptance record](../../docs/evidence/12-4-owner-acceptance-2026-10-28.md). Story12.4 is done/accepted;12.5 remains backlog. No merge, deployment or new test execution follows from recording acceptance.

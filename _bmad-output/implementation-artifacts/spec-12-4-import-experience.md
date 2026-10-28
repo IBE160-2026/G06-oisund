@@ -2,10 +2,12 @@
 title: '12.4 Owner follow-up: a direct shift preparation flow'
 type: bugfix
 created: 2026-10-28
-status: in-review
+status: done
 route: dispatch
 baseline_commit: c884ade743edcc3739086703748ac22d45d2a695
-owner_acceptance: explicitly-not-approved
+owner_acceptance: accepted
+accepted_on: 2026-10-28
+accepted_product_commit: 5ee35efb3753bed10bafc21a53a88fec3d93b287
 review_loop_iteration: 1
 context: []
 ---
@@ -138,3 +140,7 @@ Re-derivation checkpoint: only the four uncommitted frontend source changes were
 Final technical qualification:64/64 affected actual-API/browser cases (`427d7a87`) and32/32 fresh mobile boundary cases (`f3e6ccfa`) passed on unchanged source with matching executed inputs/build/API identity. Fresh served build (`f92bb74f`) is `main-BRJ12oLt.js`. Both complete journeys and all18 new cases passed in the64-case gate. All retained review findings are addressed; no technical finding is deferred. The explicitly rejected low finding remains documented above. Keep status in-review because the owner expressly withheld Story12.4 acceptance; generic workflow auto-done does not override that instruction. The four-point physical/personal retest and explicit decision remain open. Delivery/source/runtime details are in the evidence report and session log.
 
 Physical follow-up at the owner's request also exercises the revised product on actual Lenovo/Android16/Brave1.97.59 in landscape1280×605 and portrait800×1085, no device-metric/API mocks. Native exact-byte A and cancellation, direct approval, C correction/retained position, both bus actions, reload/independent documents and consultation passed after documented harness corrections. Raw17 grouped attempts retain13 passes/4 failures; pre/post runtime38/38. No product source change. See docs/evidence/12-4-import-experience-device-2026-10-28.md. Personal experience assessment/explicit acceptance remain open, so status remains in-review.
+
+## Explicit owner acceptance —28October2026
+
+Jonas stated: «Test på nettbrett er tilfredsstillende, og work flow er mye bedre nå. Story godkjennes.» This explicitly accepts Story12.4 and the revised shift-preparation experience on product commit5ee35ef / main-BRJ12oLt.js. Earlier withheld/pending statements above describe historical checkpoints and are superseded by this decision; raw test evidence and limitations remain unchanged. [Acceptance record](../../docs/evidence/12-4-owner-acceptance-2026-10-28.md). Story12.4 is done/accepted;12.5 remains backlog. No merge, deployment or new test execution follows from recording acceptance.

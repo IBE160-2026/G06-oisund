@@ -1,5 +1,7 @@
 # Story12.4: owner-directed shift preparation correction
 
+**Current acceptance: approved by Jonas on28October2026.** He confirmed the tablet experience is satisfactory and the workflow much better, then explicitly approved Story12.4. [Acceptance record](12-4-owner-acceptance-2026-10-28.md). Pending/withheld statements below describe earlier checkpoints; executed test counts and limits are unchanged. No further mandatory personal retest remains.
+
 ## Owner result and scope
 
 On28October2026 Jonas confirmed all six guided physical Lenovo/Brave tests passed, including logout, empty secondary account and reopening the primary account's saved terminal plan and notice. He explicitly **did not approve Story12.4**. These checks qualify the earlier implementation `5ca3f7df73f4cf49f5244dbc97a0a3ebb8de9891`, not the subsequent correction.

@@ -1,5 +1,7 @@
 # Story12.4 — physical test of the revised import experience
 
+**Current acceptance: approved by Jonas on28October2026.** He confirmed the tablet experience is satisfactory and the workflow much better, then explicitly approved Story12.4. [Acceptance record](12-4-owner-acceptance-2026-10-28.md). Pending/withheld statements below describe earlier checkpoints; executed test counts and limits are unchanged. No further mandatory personal retest remains.
+
 On28October2026 the new owner-directed UI was tested on the actual USB-connected Lenovo TB361FU / Android16 / Brave1.97.59 / Chromium155.0.8059.85. The relevant technical scenarios subsequently passed after the harness corrections below. No new product defect was established and no product source changed. **Story12.4 remains explicitly not approved; personal assessment/acceptance is still pending.**
 
 ## Identity and method

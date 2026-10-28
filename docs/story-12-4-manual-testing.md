@@ -1,5 +1,7 @@
 # Story 12.4 — manual acceptance
 
+**Current acceptance: approved by Jonas on28October2026.** He confirmed the tablet experience is satisfactory and the workflow much better, then explicitly approved Story12.4. [Acceptance record](evidence/12-4-owner-acceptance-2026-10-28.md). Pending/withheld statements below describe earlier checkpoints; executed test counts and limits are unchanged. No further mandatory personal retest remains.
+
 Owner acceptance was **explicitly withheld** on28October2026 after all six guided manual checks passed. The owner requires a better overall shift-entry experience: fewer repeated detail reviews, optional editing for correct imports, dedicated bus-save actions and no jump to the page top after draft saves. [Follow-up specification](../_bmad-output/implementation-artifacts/spec-12-4-import-experience.md). The checks below qualify the earlier flow; new UI requires a focused retest and a new explicit owner decision.
 
 This checklist concerns the isolated synthetic12.4 build, never the active website or owner's account. Automated desktop results and historical physical tests do not constitute acceptance.

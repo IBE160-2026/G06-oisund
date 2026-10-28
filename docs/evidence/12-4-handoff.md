@@ -1,5 +1,7 @@
 # Story 12.4 — complete user-flow verification
 
+**Current acceptance: approved by Jonas on28October2026.** He confirmed the tablet experience is satisfactory and the workflow much better, then explicitly approved Story12.4. [Acceptance record](12-4-owner-acceptance-2026-10-28.md). Pending/withheld statements below describe earlier checkpoints; executed test counts and limits are unchanged. No further mandatory personal retest remains.
+
 This report qualifies the initial implementation and its executed checks. All six subsequent guided physical checks passed, but Jonas explicitly **withheld Story12.4 approval** because the overall shift-entry experience requires improvement. The [owner-directed correction and new verification](12-4-import-experience.md) supersede the initial review-ready checkpoint for delivery.12.5 has not started. The [physical Lenovo follow-up](12-4-device-testing-2026-10-28.md) supersedes initial tablet unavailability, with its exact native-event limits preserved; it does not qualify the later UI correction.
 
 ## Authority and baseline
