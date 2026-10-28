@@ -1,6 +1,6 @@
 # Story 12.4 komplett brukerflyt
 
-## 2026-10-28 kl. 14:18 — Jonas Øisund
+## 2026-10-28 kl. 14:21 — Jonas Øisund
 
 ### Oppgave
 Gjennomfør Story12.4/V1-19 på egen branch og eget worktree fra faktisk nyeste origin/main, med reell nettleser/API/PostgreSQL, uavhengige syntetiske forventninger og mobilrettingen som testgrunnlag. Lever teknisk ferdig og reviewklart med dokumentasjon, commit og push; ikke flett, deploy, gi manuell aksept eller start12.5.
@@ -48,6 +48,8 @@ Manuell test4 av6 ble bekreftet bestått av Jonas: nytt avvik «Manuell fanetest
 Manuell test5 av6: Jonas bekreftet «Test5 bestått». Startbekreftelsen ble først avbrutt uten start, deretter eksplisitt bekreftet. Aktivitet3 ble manuelt markert fullført og lagret. Avslutningsgjennomgangen viste1 fullført/4 uregistrerte; første avslutning ble avbrutt uten å avslutte, neste ble eksplisitt bekreftet. Reload/gjenåpning av plan2030-02-04 versjon2 beholdt oppsummeringen, TEST-124 og korrigert destinasjon. Resultatet var skrivebeskyttet uten ny Start/gjenopptakelse. Brukeren stoppet innlogget. Status:5/6 manuelt bestått; test6 (utlogging/kontobytte/gjeninnlogging) og samlet eieraksept gjenstår.
 
 Manuell test6, første del: Jonas rapporterte «Utlogget og privat innhold skjult» etter stegene bekreftet utlogging, Tilbake/reload og ny åpning av15324/private. Dette bekrefter brukerens UI-observasjon, ikke en ny manuell API401-måling. Agenten kontrollerte eksakt egen testfane og synlig/aktivt innloggingsskjema og fylte den eksisterende andre syntetiske testkontoen fra ignorert lokal tilstand. Ingen innlogging ble sendt; brukeren skal trykke Logg inn selv og kontrollere tomme lagrede lister, deretter logge ut før første konto klargjøres igjen. Ingen legitimasjonsverdier ble skrevet til logger/chat/evidens. Status fortsatt5/6 hele tester bestått; test6 kontobytte og siste gjenåpning samt samlet eieraksept gjenstår.
+
+Manuell test6, andre del: Jonas bekreftet «Andre konto er tom og utlogget». Brukerens observasjon dekker tomme lagrede utkast-/planlister under den andre syntetiske kontoen og bekreftet utlogging derfra. Agenten klargjorde kun første konto i det verifiserte egne innloggingsskjemaet, uten å sende innlogging eller logge legitimasjon. Siste gjenåpningskontroll av plan2030-02-04 versjon2 og det manuelt lagrede avviket skal gjøres av brukeren. Status:5/6 hele tester bestått, utlogging/kontoskillet i test6 bekreftet; siste bevaringskontroll og eksplisitt samlet eieraksept gjenstår.
 
 ### Åpne punkter
 - Manuell12.4-aksept gjenstår: gjennomfør sjekklisten på det separate15324-bygget, særlig PDF/korrigering/lagring/gjenåpning, faneavbrudd midt i avviksredigering, konflikt med enda en endring, slutt/avbrudd/gjenlasting og utlogging/kontobytte. Registrer konkret bygg/enhet/nettleser og eierens beslutning; automatisering innebærer ikke aksept.
