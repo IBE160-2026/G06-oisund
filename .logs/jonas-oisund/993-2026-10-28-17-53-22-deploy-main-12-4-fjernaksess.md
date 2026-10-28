@@ -76,9 +76,20 @@ produksjon. Branchen beholdes. Eksisterende detached12.3/12.4-testworktrees og �
 miljøer er bevart. Hemmeligheter, credentials, databaser og private tabellfingeravtrykk
 er ikke lagt i Git eller logger. Synkede sources er urørt.
 
-### Åpne punkter
+### Åpne punkter ved første overlevering
 - Eierens nye innloggede kontroll på det offentlige bygget fra Pixel/Lenovo gjenstår:
   Access/MFA, jonas med eksisterende passord, native filvelger, import, valgfri korrigering,
   godkjenning og busslagring. Eksisterende Story12.4-aksept endres ikke. Automatisert
   teknisk deployverifikasjon er fullført; ingen ny fysisk eller autentisert edge-prøve
   påstås. Det eksisterende fjernaksesspunktet i issues.md er oppdatert med dette skillet.
+
+### Oppfølging samme dag: brukerbekreftet mobilkontroll
+
+Jonas rapporterte: «Kontrollert på mobil, det funker, versjonen er den som ble endret til i 12.4.»
+Driftsrapport og maskinlesbar evidens er oppdatert med den faktiske brukerbekreftelsen.
+Det eksisterende åpne punktet om praktisk kontroll etter deploy er lukket.
+Bekreftelsen utvides ikke til en detaljert scenarioprotokoll, bestemt enhetsmodell
+eller en separat ny MFA-/JWT-prøve. Ingen drift, data eller kode er endret i oppfølgingen.
+
+### Åpne punkter etter mobilkontrollen
+Ingen nye for denne deployen. Tidligere separate sikkerhetsbevisgrenser beholdes.
