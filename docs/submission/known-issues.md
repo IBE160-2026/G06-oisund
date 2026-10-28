@@ -9,3 +9,5 @@
 - **Teacher source limit.** Original teacher files are absent; the versioned planning addendum records the available course constraints. This package does not claim independent validation against missing originals.
 
 Exact execution failures/reruns and any additional verification gaps belong to the [12.5 reproduction record](../evidence/12-5-reproduction.md). Existing project issues remain in the owner's issue list; this document does not close them by inference.
+
+The five separately planned extensions are **automatic notices**, **complete route network**, **position-based progression**, **speed limits**, and **GPS speed**. They live on separate `codex/plan-*` planning branches. None is an implemented V1 feature, a prerequisite for this recipe, or started by Story 12.5. The original broader product vision and archived designs must not be read as the delivered feature list.

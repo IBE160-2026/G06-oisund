@@ -17,13 +17,16 @@ services:
   api:
     build: ./backend
     # Read the ignored password inside the container, never in a URL or evidence.
-    command: [python, -c, "import os,runpy; from pathlib import Path; from urllib.parse import quote; os.environ['DATABASE_URL']='postgresql://fictional:'+quote(Path('/run/secrets/submission_password').read_text().strip(),safe='')+'@db/fictional_assessment'; runpy.run_module('app.run',run_name='__main__')"]
+    command: [python, /submission/fictional.py, app.run]
     environment:
       APP_MODE: fictional-assessment
+      SUBMISSION_PROJECT: ibe160-submission
+      PYTHONPATH: /app
       FICTIONAL_ORIGIN: http://127.0.0.1:15325
     secrets: [submission_password]
     volumes:
       - ./Eksempelfiler:/fixtures:ro
+      - ./deploy/submission/fictional.py:/submission/fictional.py:ro
     ports: ['127.0.0.1:18327:8000']
     healthcheck:
       test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]

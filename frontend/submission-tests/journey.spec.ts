@@ -21,6 +21,8 @@ function winterInstant(actual: string | null, local: string | null) {
 
 for (const [name, action] of [['A', 'ended'], ['C', 'aborted']] as const) {
   test(`submission actual API/PostgreSQL journey ${name}: import correct save confirm use ${action} reopen`, async ({ page, context, browser }) => {
+    const requestedOrigins = new Set<string>();
+    page.on('request', request => requestedOrigins.add(new URL(request.url()).origin));
     // All writes go to the separately guarded submission runtime; no API routes are mocked.
     execFileSync(process.execPath, ['scripts/submission.mjs', 'status'], { cwd: '..', timeout: 30000 });
     await page.goto('/private');
@@ -145,6 +147,33 @@ for (const [name, action] of [['A', 'ended'], ['C', 'aborted']] as const) {
     mkdirSync('../tmp/submission-browser-results', { recursive: true });
     await page.screenshot({ path: `../tmp/submission-browser-results/journey-${name}.png`, fullPage: true });
     // Synthetic records only; no cookies, token or generated password is recorded.
-    writeFileSync(`../tmp/submission-browser-results/journey-${name}.json`, JSON.stringify({ synthetic: true, mockedApi: false, browser: browser.version(), viewport: page.viewportSize(), exactUploadedBytes: bytes.length, case: name, saved, recap, restartPreserved: name === 'A', storage }, null, 2));
+    expect([...requestedOrigins].every(origin => ['http://127.0.0.1:15325', API].includes(origin))).toBe(true);
+    writeFileSync(`../tmp/submission-browser-results/journey-${name}.json`, JSON.stringify({ synthetic: true, mockedApi: false, browser: browser.version(), viewport: page.viewportSize(), requestedOrigins: [...requestedOrigins], exactUploadedBytes: bytes.length, case: name, saved, recap, restartPreserved: name === 'A', storage }, null, 2));
   });
 }
+
+test('submission correct import B saves directly into distinct saved-version approval', async ({ page, context }) => {
+  execFileSync(process.execPath, ['scripts/submission.mjs', 'status'], { cwd: '..', timeout: 30000 });
+  await page.goto('/private');
+  await page.getByLabel('Brukernavn', { exact: true }).fill(account.username);
+  await page.getByLabel('Passord', { exact: true }).fill(account.password);
+  await button(page, 'Logg inn').click();
+  await expect(page.getByRole('heading', { name: 'Mine utkast', exact: true })).toBeVisible();
+  const before = (await get(context, '/drafts')).drafts.length;
+  const reply = page.waitForResponse(r => r.url() === API + '/imports/pdf' && r.request().method() === 'POST');
+  await page.getByLabel('Velg tekst-PDF', { exact: true }).setInputFiles('../Eksempelfiler/Testskift-B.pdf');
+  const imported = await (await reply).json();
+  const expected = oracle.find((entry: any) => entry.case === 'B');
+  expect(imported.service_date).toBe(expected.date.split('/').reverse().join('-'));
+  expect(imported.import_metadata.header.shift_id).toBe(expected.shift_id);
+  expect((await get(context, '/drafts')).drafts).toHaveLength(before);
+  const savedReply = page.waitForResponse(r => r.url() === API + '/drafts' && r.request().method() === 'POST');
+  await button(page, 'Alt stemmer – lagre og fortsett').click();
+  const response = await savedReply;
+  expect(response.status()).toBe(200);
+  const saved = await response.json();
+  expect(saved.draft).toEqual(imported);
+  await expect(page.getByRole('region', { name: 'Gjennomgått versjon', exact: true })).toBeVisible();
+  expect(await get(context, '/drafts/' + saved.id)).toEqual(saved);
+  expect((await get(context, '/drafts')).drafts).toHaveLength(before + 1);
+});

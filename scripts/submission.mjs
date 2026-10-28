@@ -85,11 +85,12 @@ function verifyRunningStorage() {
   }
 }
 const privateManage = action => compose(['exec', '-T', 'private-api', 'python', '/submission/manage.py', action]);
+const fictional = arguments_ => compose(['exec', '-T', 'api', 'python', '/submission/fictional.py', ...arguments_]);
 function initialize() {
   compose(['exec', '-T', 'private-api', 'python', '-m', 'app.manage', 'migrate']);
   privateManage('init');
-  compose(['exec', '-T', 'api', 'python', '-m', 'app.manage', 'migrate']);
-  compose(['exec', '-T', 'api', 'python', '-m', 'app.manage', 'seed']);
+  fictional(['app.manage', 'migrate']);
+  fictional(['app.manage', 'seed']);
 }
 export function main(action) {
   if (!['init', 'start', 'status', 'stop', 'restart', 'reset', 'test-backend', 'install-browser', 'test-browser'].includes(action)) throw Error('Use init | start | status | stop | restart | reset | test-backend | install-browser | test-browser');
@@ -114,11 +115,11 @@ export function main(action) {
     verifyRunningStorage();
     // Private non-synthetic refusal must precede ANY mutation, including fictional seed.
     privateManage('reset');
-    compose(['exec', '-T', 'api', 'python', '-m', 'app.manage', 'reset', '--fictional-only']);
+    fictional(['app.manage', 'reset', '--fictional-only']);
   }
   if (action === 'test-backend') {
     compose(['exec', '-T', 'private-api', 'python', '-m', 'pytest', '-q']);
-    compose(['exec', '-T', 'api', 'python', '-m', 'pytest', '-q']);
+    fictional(['pytest', '-q']);
   }
   if (action === 'test-browser') {
     run(process.platform === 'win32' ? 'npx.cmd' : 'npx', ['playwright', 'test', '--config', 'playwright.submission.config.ts'], { cwd: join(ROOT, 'frontend'), shell: process.platform === 'win32' });
