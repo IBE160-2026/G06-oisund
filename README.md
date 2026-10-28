@@ -20,6 +20,8 @@ The delivery is versioned Git content; no local archive is needed. `init` genera
 
 Installation requires internet access to Git, Docker registries, npm and PyPI. Browser-test installation also downloads Playwright Chromium. Once installed, runtime requires only local loopback connections between browser/frontend/APIs/PostgreSQL, with no CDN, owner account, tunnel, paid service, private PDF, backup or live feed.
 
+`start` and `restart` use installed images with `--no-build --pull never`. After changing the checked-out source version, use `init` to build that version; installation/rebuilding has the network needs listed above.
+
 The fixed project is `ibe160-submission`; its new volumes are `ibe160-submission_submission_fictional` and `ibe160-submission_submission_private`. PostgreSQL publishes no host port. Scripts explicitly select the exact project/file and refuse an existing project owned by another checkout. Leave occupied ports and existing services alone; the recipe fails rather than reclaiming them. Do not use operational Compose overlays.
 
 | Entry | Address | Evidence type |

@@ -106,11 +106,11 @@ export function main(action) {
   if (action === 'init') generate();
   preflight();
   if (action === 'init') compose(['build', '--pull', '--no-cache']);
-  if (action === 'init' || action === 'start') { compose(['up', '-d', ...(action === 'start' ? ['--build'] : []), '--wait', '--wait-timeout', '180']); initialize(); }
+  if (action === 'init' || action === 'start') { compose(['up', '-d', ...(action === 'start' ? ['--no-build', '--pull', 'never'] : []), '--wait', '--wait-timeout', '180']); initialize(); }
   if (['status', 'test-browser', 'test-backend'].includes(action)) { verifyRunningStorage(); privateManage('check'); }
   if (action === 'status') compose(['ps']);
   if (action === 'stop') compose(['stop']);
-  if (action === 'restart') { compose(['restart']); compose(['up', '-d', '--wait', '--wait-timeout', '180']); }
+  if (action === 'restart') { compose(['restart']); compose(['up', '-d', '--no-build', '--pull', 'never', '--wait', '--wait-timeout', '180']); }
   if (action === 'reset') {
     verifyRunningStorage();
     // Private non-synthetic refusal must precede ANY mutation, including fictional seed.
