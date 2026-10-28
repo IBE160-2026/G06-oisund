@@ -55,6 +55,8 @@ Guidet sluttvurdering 2026-10-28 kl. 20:41: Jonas gjenga avvikets faktiske metad
 
 Guidet sluttvurdering 2026-10-28 kl. 20:43: Jonas bekreftet «steg 7 ok». Eksplisitt avslutning med én manuelt fullført og fire ikke registrerte aktiviteter, reload/gjenåpning av avsluttet plan, bevart buss/korrigert endested og skrivebeskyttet oppsummering uten ny skiftstart er manuelt bestått. Neste prøve er stop/start av bare det isolerte demomiljøet med sammenligning av lagrede fakta/frister; dette er ennå ikke rapportert manuelt. Samlet Story12.5-aksept er fortsatt pending.
 
+Guidet sluttvurdering 2026-10-28 kl. 20:48: Jonas bekreftet «Steg 8 ok». Han har manuelt kjørt stop/start/status fra den isolerte testkopien og bekreftet fem friske tjenester, bevart avsluttet plan/oppsummering, buss/endested, uendret vist utløpstid og fortsatt tilgjengelig testavvik etter gjenåpning. Dette er manuell bevaringskontroll av det eksisterende syntetiske miljøet, ikke en ny ren installasjon. Neste prøve er uttrykkelig reset av bare disse demonstrasjonsdataene; samlet Story12.5-aksept er fortsatt pending.
+
 ### Åpne punkter
 
 - Jonas sin sluttvurdering av leveranseoppskriften og uttrykkelige Story12.5-aksept gjenstår; bruk [konkret review-sjekkliste](../../docs/submission/review-checklist.md). Teknisk grønt eller push gir ikke aksept og avslutter ikke Epic12.
