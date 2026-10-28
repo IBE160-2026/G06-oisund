@@ -93,3 +93,15 @@ eller en separat ny MFA-/JWT-prøve. Ingen drift, data eller kode er endret i op
 
 ### Åpne punkter etter mobilkontrollen
 Ingen nye for denne deployen. Tidligere separate sikkerhetsbevisgrenser beholdes.
+
+### Oppfølging samme dag: mobiltest ferdig, tunnel stoppet
+
+Eier ba uttrykkelig om å stoppe tunnelen og beholde app/database/driftsoppsett.
+Kontrollerte PID55512 mot eksakt cloudflared-bane og tunnel-ID før Stop-Process.
+Etterkontroll: null connectorprosesser og null metrics-lyttere på18083.
+Alle fire produksjonscontainere beholdt kjørende med samme ID-er: gateway6bd0e99aad57,
+gate4cd277b2aa4e, API3bacac07fcf1 og database32e9e1a2a3fa; API/DB fortsatt healthy.
+Ingen data, databasevolumer, images, secrets, konfigurasjon, DNS eller Access/MFA ble
+endret/slettet. Driftsveiledning/evidens angir nå stoppet tunnel. Neste oppstart kan
+bruke eksisterende kontrollerte start-tablet-production.ps1 med samme private runtime.
+Ingen nye åpne punkter. Tidligere ready200/aktiv tunnel er historiske deploykontroller.
