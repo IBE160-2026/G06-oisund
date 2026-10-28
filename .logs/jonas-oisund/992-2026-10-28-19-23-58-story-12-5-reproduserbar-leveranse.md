@@ -49,6 +49,8 @@ Guidet sluttvurdering 2026-10-28 kl. 20:26: Jonas bekreftet «steg 3 ok». Manue
 
 Guidet sluttvurdering 2026-10-28 kl. 20:32: Jonas bekreftet «steg 4 ok etter rett knapp ble nevnt». Veiledningen ble korrigert til den synlige knappen «Fortsett til godkjenning»; «Til godkjenning» øverst åpner samme visning, mens «Åpne …» henter et lagret utkast. Godkjenning av lagret versjon og etterfølgende «Ikke startet»/«Ingen aktivitet valgt» er manuelt bestått. Dette registreres som rettet veiledning, ikke som en påvist produktfeil eller samlet Story12.5-aksept. Neste prøve er eksplisitt valg/start/aktivitetsstatus.
 
+Guidet sluttvurdering 2026-10-28 kl. 20:36: Jonas opplyste at lagringsmeldingen er «Lagret: Fullført manuelt», ikke ordlyden veiledningen oppga, og bekreftet ellers steg5 OK. Eksplisitt aktivitetsvalg uten start, separat bekreftet skiftstart og manuell lagret aktivitetsstatus er bestått. Faktisk observert melding er registrert; ingen produktfeil eller samlet aksept utledes fra ordlydsforskjellen. Neste prøve er manuelt registrert syntetisk avvik og linje-/datolesing.
+
 ### Åpne punkter
 
 - Jonas sin sluttvurdering av leveranseoppskriften og uttrykkelige Story12.5-aksept gjenstår; bruk [konkret review-sjekkliste](../../docs/submission/review-checklist.md). Teknisk grønt eller push gir ikke aksept og avslutter ikke Epic12.
