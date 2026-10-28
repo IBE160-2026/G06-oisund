@@ -1,0 +1,34 @@
+{
+  "recorded_at": "2026-10-28T16:10:48.003640+00:00",
+  "published_main_before_cleanup": "8b45c004cc2be2335b9371e4c5807e6f5ac20a14",
+  "branches": [
+    {
+      "branch": "story/12-3-tablet-pc-accessibility",
+      "head": "1ac729c16b28ae19a0c9509022c92cffe3298aa7",
+      "remote_head": "1ac729c16b28ae19a0c9509022c92cffe3298aa7",
+      "fully_in_main": true,
+      "uncommitted_or_untracked_entries": 0,
+      "unpushed_commits": 0,
+      "worktree": "D:/IBE160/tmp/story-12-3",
+      "private_runtime_present": true,
+      "action": "Delete branch refs; retain worktree/private state and running environment at exact original detached HEAD"
+    },
+    {
+      "branch": "story/12-4-complete-user-flow",
+      "head": "4e38e240917b29450e68f817b85411185ef5eac3",
+      "remote_head": "4e38e240917b29450e68f817b85411185ef5eac3",
+      "fully_in_main": true,
+      "uncommitted_or_untracked_entries": 0,
+      "unpushed_commits": 0,
+      "worktree": "D:/IBE160/tmp/story-12-4",
+      "private_runtime_present": true,
+      "action": "Delete branch refs; retain worktree/private state and running environment at exact original detached HEAD"
+    }
+  ],
+  "remote_deleted": true,
+  "local_deleted": true,
+  "force_deletion_used": false,
+  "worktree_directories_removed": false,
+  "private_files_read_or_removed": false,
+  "runtime_stopped_or_rebuilt": false
+}

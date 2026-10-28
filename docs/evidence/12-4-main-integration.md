@@ -32,3 +32,13 @@ The first whole-record container comparison failed. An immediate independent rer
 ## Publication and cleanup
 
 This report records checked local integration before main publication; the session log records the actual push receipt and subsequent branch cleanup.12.4 stays done/accepted and12.5 stays backlog. No deployment or active-site/data/access change is included. Test environments are retained; any private/active worktrees will be preserved at their exact original commits rather than recursively deleted. The older tablet-remote-access worktree had16 pre-existing changed/untracked entries and is outside this task; it remains untouched.
+
+## Confirmed main publication and branch cleanup
+
+Main push succeeded from c3e5d66 to `8b45c004cc2be2335b9371e4c5807e6f5ac20a14`, including merge b0b2a62 and the integration documentation/checks. Fresh fetch then confirmed local/origin main equality before cleanup. Subsequent commits document cleanup/session status only; product remains unchanged.
+
+Both local and origin branches `story/12-3-tablet-pc-accessibility` (1ac729c16b28ae19a0c9509022c92cffe3298aa7) and `story/12-4-complete-user-flow` (4e38e240917b29450e68f817b85411185ef5eac3) were verified fully reachable from main, equal to origin, and clean with no nonignored untracked files/unpushed commits. Both remote refs were deleted in one atomic push, then both local refs with `git branch -d`; no force flags.
+
+The directories `D:/IBE160/tmp/story-12-3` and `D:/IBE160/tmp/story-12-4` contain private ignored runtime state and support existing environments. They were **retained**, not recursively deleted. Each worktree was detached at its exact original HEAD, with unchanged tracked content and retained .private-runtime; no private files were read or removed. Both are clean. History, code and documentation remain reachable through main. [Cleanup record](12-4-branch-cleanup.json), [method](12-4-branch-cleanup-method.py).
+
+[Post-cleanup audit](12-4-post-cleanup.json) / [method](12-4-post-cleanup-method.py) passed: both branch refs absent locally/on origin, original story commits ancestors of main, accepted product unchanged, all27 containers and five loopback response/transport observations unchanged. All other worktree HEADs and dirty-entry counts match preflight, including16 existing entries in the older tablet-remote-access worktree. No runtime was stopped/restarted/rebuilt, and no tunnel/deploy/data change or12.5 start occurred. The final session-log commit and remote check identify the final main HEAD after this documentation.

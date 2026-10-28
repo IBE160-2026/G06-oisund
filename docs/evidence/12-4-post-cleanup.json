@@ -1,0 +1,86 @@
+{
+  "main_at_check": "8b45c004cc2be2335b9371e4c5807e6f5ac20a14",
+  "merge": "b0b2a6246b329ad0efa85b570c3f9a0d7a932c33",
+  "product_equals_accepted": true,
+  "all27_container_identities_preserved": true,
+  "http_before_equals_after": true,
+  "all_other_worktree_heads_and_dirty_counts_preserved": true,
+  "worktrees": [
+    {
+      "path": "D:/IBE160",
+      "head": "8b45c004cc2be2335b9371e4c5807e6f5ac20a14",
+      "dirty_entries": 1,
+      "branch": "main"
+    },
+    {
+      "path": "C:/Users/Jonas/.codex/.chatgpt-projects/g-p-6ab6b4c1c6888191a96d3242fab912b4/story-12-2",
+      "head": "e8221ff3a61a86beaa5d42c91b9a4c4df69e28f6",
+      "dirty_entries": 0,
+      "branch": "story/12-2-fictional-assessment"
+    },
+    {
+      "path": "C:/Users/Jonas/.codex/.chatgpt-projects/g-p-6ab6b4c1c6888191a96d3242fab912b4/tablet-access-11-6",
+      "head": "0c1f2934d8d865d5372b502c65d8680f75481b43",
+      "dirty_entries": 0,
+      "branch": "setup/tablet-remote-access-11-6"
+    },
+    {
+      "path": "C:/Users/Jonas/.codex/.chatgpt-projects/g-p-6ab6b4c1c6888191a96d3242fab912b4/tablet-remote-access",
+      "head": "aa0fcfb48904c7e0bdd6c68280e5db2d21f478ed",
+      "dirty_entries": 16,
+      "branch": "setup/tablet-remote-access"
+    },
+    {
+      "path": "D:/IBE160/tmp/story-12-3",
+      "head": "1ac729c16b28ae19a0c9509022c92cffe3298aa7",
+      "dirty_entries": 0,
+      "branch": "detached"
+    },
+    {
+      "path": "D:/IBE160/tmp/story-12-4",
+      "head": "4e38e240917b29450e68f817b85411185ef5eac3",
+      "dirty_entries": 0,
+      "branch": "detached"
+    },
+    {
+      "path": "D:/IBE160-plan-automatic-notices",
+      "head": "da867072a8a17249032c00efa51bd61979d41428",
+      "dirty_entries": 0,
+      "branch": "codex/plan-automatic-notices"
+    },
+    {
+      "path": "D:/IBE160-plan-complete-route-network",
+      "head": "7cada9d2e66af9806358f582bc8ea459321a6563",
+      "dirty_entries": 0,
+      "branch": "codex/plan-complete-route-network"
+    },
+    {
+      "path": "D:/IBE160-plan-gps-speed",
+      "head": "e2468abb8bf492007d9f9437698c80d88e9ca280",
+      "dirty_entries": 0,
+      "branch": "codex/plan-gps-speed"
+    },
+    {
+      "path": "D:/IBE160-plan-position-progression",
+      "head": "df47a4e74ca982a2e04d6e5531e7744caf4f4717",
+      "dirty_entries": 0,
+      "branch": "codex/plan-position-progression"
+    },
+    {
+      "path": "D:/IBE160-plan-speed-limits",
+      "head": "5adc6fb2c0137a3a6519d4f7ba42dd57f0e02f1c",
+      "dirty_entries": 0,
+      "branch": "codex/plan-speed-limits"
+    },
+    {
+      "path": "D:/IBE160-story-12-1",
+      "head": "533ca88dc2c99533eb5c11f6bb58d6ee4fe7bde8",
+      "dirty_entries": 0,
+      "branch": "story/12-1-retained-data-boundary"
+    }
+  ],
+  "branches_deleted_and_full_history_in_main": true,
+  "force_used": false,
+  "deploy": false,
+  "passed": true
+}
