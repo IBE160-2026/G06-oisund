@@ -1,13 +1,16 @@
 # Story 12.4 komplett brukerflyt
 
-## 2026-10-28 kl. 14:39 — Jonas Øisund
+## 2026-10-28 kl. 17:13 — Jonas Øisund
 
 ### Oppgave
 Gjennomfør Story12.4/V1-19 på egen branch og eget worktree fra faktisk nyeste origin/main, med reell nettleser/API/PostgreSQL, uavhengige syntetiske forventninger og mobilrettingen som testgrunnlag. Lever teknisk ferdig og reviewklart med dokumentasjon, commit og push; ikke flett, deploy, gi manuell aksept eller start12.5.
 
+Etter den uttrykkelige aksepten ba Jonas også om kildekodefletting/push til main og etterfølgende trygg opprydding av12.3/12.4-branchene. Dette overstyrer den opprinnelige ikke-flett-bestillingen; ingen deploy eller12.5 er bestilt.
+
 Desktop-resultatene nedenfor gjelder leveransen før nettbrettet ble koblet til. Den fysiske USB-oppfølgingen er ført som tillegg under Resultat i samme dagsseksjon.
 
 ### Plan
+- Senere uttrykkelig bestilling: hent remote, kontroller godkjent12.4 og main, flett/push etter vanlig praksis, verifiser uendret produkt og bevar miljøer. Etter kontroll/push: slett fullt innlemmede12.3/12.4-branchreferanser uten tvang; bevar private aktive worktrees.
 - Følg faktiske AGENTS/CLAUDE, sesjonslogg og bmad-build; les krav/PRD/arkitektur/UX,12.1–12.3-overleveringer og mobilrettingens diff/spec/evidens.
 - Bruk [implementeringsstoryen](../../_bmad-output/implementation-artifacts/spec-12-4-complete-user-flow.md) og isolert prosjekt `ibe160-story124-tests` med egne porter/volumer/syntetiske kontoer.
 - Kjør uavhengige helhetsreiser og relevante regresjoner, bevar feil og eksakt kilde-/byggidentitet, rett konkrete kontraktsfeil, gjennomfør tre uavhengige reviewer og dokumenter manuelle grenser.
@@ -83,5 +86,17 @@ Jonas har nå gitt uttrykkelig personlig eieraksept: «Test på nettbrett er til
 
 Status-/akseptdokumentasjon er committet og pushet i4198b1a på story/12-4-complete-user-flow. Brukerens åpne12.4-akseptpunkt i issues.md lukkes med løsningsdato28.10.2026; øvrige åpne saker er uendret. Kun dokumentasjon/status er endret i denne oppfølgingen, ingen produktkode, nye testkjøringer, fletting, deploy, tunnel-/databaseendring eller12.5-arbeid. Det isolerte15324-bygget er uendret.
 
+Godkjent12.4 er nå flettet til main etter ny uttrykkelig bestilling. Faktisk fetch fant main/origin c3e5d66 og12.4/origin4e38e240917b29450e68f817b85411185ef5eac3;4198b1a/4e38e24, UX5ee35ef, fysisk2671ef7 og mobilc0e809f er alle med. Begge involverte arbeidskopier var rene. Ingen nyere main-commits fantes. Tidligere prosjektpraksis --no-ff ble fulgt: flettecommit b0b2a6246b329ad0efa85b570c3f9a0d7a932c33 med foreldrene c3e5d66/4e38e24, uten konflikter. Hele flette-treet9a3a080188411d02d3ba81f45859e4c8fdef8ebc er identisk med godkjent story-tre. Ingen godkjent kode, historikk, fysisk evidens eller akseptdokumentasjon gikk tapt.
+
+Nye kontroller på flettet main: TypeScript --noEmit bestod uten bygg/deploy;12/12 offline Python og6/6 Node bestod. Python-loggens FAIL-linje kommer fra bevisst injisert audit-unntak og følges av unittest OK.215/215 integrasjons-/identitetskontroller bestod. Null committet produkt-/verktøy-/test-/fixture-diff mot godkjent5ee35ef;98 testede produktfiler er like etter LF/CRLF-normalisering,49 har bare checkout-linjeendingsforskjeller. Mobilens PrivateAccess/pdfUpload/tabletconfig og spec/evidens-blobs er nøyaktig bevart fra c0e809f. Tre arkiver og172 individuelle medlemmer (93+47+32) ble verifisert. Godkjente64/64 faktiske API/PostgreSQL/nettleser,32/32 mobilgrenser og faktiske Lenovo-resultater gjenbrukes ved identisk produktinnhold, ikke presentert som nye funksjonelle kjøringer. Historisk317/5/4 og fysisk13 bestått/4 mislykkede forsøksrader beholdes.
+
+Alle27 kjørende container-IDer/images/porter/starttider/restarttellere/kildemount-sett er bevart. HTTP200-bytes på15324/5173/15312/15323 er uendret; bar uautentisert18081-rot gir samme RemoteDisconnected før/etter, ikke et bevis på autentisert fjernhelse. Første preflight stoppet før fletting fordi dette ikke var håndtert; endelig metode registrerer faktisk transportkategori uten tjenesteendring. Første helrecordsammenligning av containere feilet; umiddelbar uavhengig gjenlesing fant ingen feltforskjeller. Første etter-snapshot manglet, så årsak er ubevist. Endelig metode sorterer uordnet mount-liste og krever fortsatt eksakt ID/image/port/start/restart/mount-medlemskap; før/etterverdier og vellykket sluttkontroll er bevart. Ingen Docker-, tunnel-, database- eller deploymutasjon er utført.
+
+Main-push c3e5d66→8b45c004cc2be2335b9371e4c5807e6f5ac20a14 er bekreftet; denne inkluderer fletting og hovedrapport docs/evidence/12-4-main-integration.md. Etterfølgende oppryddingsdokumentasjon3639a3c er også pushet.12.4 forblir done/accepted og12.5 backlog.
+
+Etter main-push ble begge storybrancher kontrollert på ny med fetch:12.3-lokal/origin1ac729c16b28ae19a0c9509022c92cffe3298aa7 og12.4-lokal/origin4e38e240917b29450e68f817b85411185ef5eac3 var like, fullt innlemmet i main, rene uten ikkeignorerte utracked filer og uten upushede commits. Origin-branchene story/12-3-tablet-pc-accessibility og story/12-4-complete-user-flow ble slettet i én atomic push. Lokale branchreferanser ble slettet med git branch -d etter detach på eksakt samme opprinnelige commits; ingen tvangsflag brukt. Begge referanser er kontrollert borte lokalt/remote, mens begge historiske commits fremdeles er main-forfedre.
+
+Worktree-katalogene D:/IBE160/tmp/story-12-3 og D:/IBE160/tmp/story-12-4 ble bevisst beholdt fordi de har ignorert privat runtime-tilstand og brukes av eksisterende miljøer. Ingen private filer ble lest/fjernet, ingen rekursiv sletting eller miljøstans; de er rene detached worktrees på uendrede commits. Etterkontroll docs/evidence/12-4-post-cleanup.json bekrefter uendret produkt og alle27 miljøer/HTTPobservasjoner samt alle andre worktree-HEADer og dirty-antall. Det eldre tablet-remote-access-worktreet hadde16 eksisterende endrede/utrackede oppføringer før start og er urørt; øvrige involverte/test-worktrees er rene. issues.md sin allerede lukkede12.4-linje er supplert med mainintegrasjon/opprydding; andre åpne punkter er uendret. Ingen deploy eller12.5-start.
+
 ### Åpne punkter
-- Ingen for den nå godkjente Story12.4. Andre tidligere registrerte prosjektsaker i issues.md er uendret.
+- Ingen nye for godkjent og main-integrert Story12.4. Eksisterende prosjektsaker i issues.md er uendret; private/test-worktrees og miljøer er bevart.
