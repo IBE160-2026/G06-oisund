@@ -1,0 +1,7 @@
+node : Submission project already belongs to another checkout/configuration; leave it unchanged
+At line:3 char:1
++ node scripts/submission.mjs reset > tmp/12-5-foreign-checkout-refusal ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Submission proj...ve it unchanged:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 

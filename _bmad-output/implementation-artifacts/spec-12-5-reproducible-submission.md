@@ -2,7 +2,7 @@
 title: '12.5 Deliver a reproducible submission (V1-20)'
 type: chore
 created: '2026-10-28'
-status: in-progress
+status: in-review
 route: dispatch
 baseline_commit: 99c272b09abaa5ffecf3286b406fbf065a445c7c
 review_loop_iteration: 0
@@ -52,11 +52,11 @@ context: []
 ## Tasks & Acceptance
 
 **Execution:**
-- [ ] `../../compose.submission.yaml`, `../../deploy/submission/`, `../../scripts/submission*` — provide bounded generated-secret setup, idempotent initialization, isolated seed/reset, health/start/stop/restart/test commands; no existing runtime dependencies.
-- [ ] `../../README.md` — coherent clean-checkout recipe with commands, addresses, expected outcomes, actual demo journey and network needs; link preserved historical reports.
-- [ ] `../../docs/submission/` — entry index, precise requirement-to-test traceability, supported input/limits, actual AI/human reflection, known issues and review checklist.
-- [ ] `../../docs/evidence/12-5-*` — execute README from a separate clean versioned checkout, fresh dependencies and dedicated projects/volumes; record setup, UI/fullstack journey, migration/seed idempotence, restart/deadlines, reset isolation and safety-negative tests, failures and reruns.
-- [ ] `sprint-status.yaml` and this spec — mark review ready only after verification; keep Epic12 in progress and acceptance pending.
+- [x] `../../compose.submission.yaml`, `../../deploy/submission/`, `../../scripts/submission*` — provide bounded generated-secret setup, idempotent initialization, isolated seed/reset, health/start/stop/restart/test commands; no existing runtime dependencies.
+- [x] `../../README.md` — coherent clean-checkout recipe with commands, addresses, expected outcomes, actual demo journey and network needs; link preserved historical reports.
+- [x] `../../docs/submission/` — entry index, precise requirement-to-test traceability, supported input/limits, actual AI/human reflection, known issues and review checklist.
+- [x] `../../docs/evidence/12-5-*` — execute README from a separate clean versioned checkout, fresh dependencies and dedicated projects/volumes; record setup, UI/fullstack journey, migration/seed idempotence, restart/deadlines, reset isolation and safety-negative tests, failures and reruns.
+- [x] `sprint-status.yaml` and this spec — mark review ready only after verification; keep Epic12 in progress and acceptance pending.
 
 **Acceptance Criteria:**
 - Given only the versioned delivery and documented tools/network for installation, when a reader follows README, then the full local real API/PostgreSQL demonstration works without owner data/accounts/tunnel/paid services/live feeds.
@@ -66,6 +66,8 @@ context: []
 ## Implementation Notes
 
 Intent gaps: none after repository investigation. Irreversibles: authorized branch publication only; reset limited to explicitly disposable synthetic data. Footprint: delivery tooling/docs/tests; no product-contract changes planned. User's autonomous completion instruction supersedes intermediate plan approval.
+
+Clean reproduction completed with actual API/PostgreSQL,480 selected backend/parser cases,3 real-browser cases,3 Node and3 wrapper checks; exact row/deadline stop/start/restart and guarded reset passed. Source product/dependency files remain identical to baseline. See ../../docs/evidence/12-5-reproduction.md for canonical revisions, failures and limits. Independent review follows; owner acceptance remains pending.
 
 ## Spec Change Log
 

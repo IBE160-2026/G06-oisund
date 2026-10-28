@@ -1,0 +1,325 @@
+node :  Image ibe160-submission-frontend Building 
+At line:6 char:1
++ node scripts/submission.mjs init > tmp/12-5-init-final.txt 2>&1
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ( Image ibe160-s...ntend Building :String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+ Image ibe160-submission-api Building 
+ Image ibe160-submission-private-api Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 1.70kB 0.1s done
+#1 DONE 0.1s
+
+#2 [frontend internal] load build definition from Dockerfile
+#2 transferring dockerfile: 474B done
+#2 DONE 0.0s
+
+#3 [api internal] load build definition from Dockerfile
+#3 transferring dockerfile: 270B done
+#3 DONE 0.0s
+
+#4 [frontend internal] load metadata for docker.io/library/node:24.19.0-alpine@sha256:d32cdf619f63fe0471182d08996dd516c6275bb5fd31ae06e55a570bd9e1ad43
+#4 DONE 0.0s
+
+#5 [api internal] load metadata for docker.io/library/python:3.13-slim@sha256:70729b46c69b4f1e97c4822c1af3df53a1476cf5ddc6c087c0c10bc3a5678c2f
+#5 DONE 0.0s
+
+#6 [frontend internal] load .dockerignore
+#6 transferring context: 470B done
+#6 DONE 0.0s
+
+#7 [api internal] load .dockerignore
+#7 transferring context: 75B done
+#7 DONE 0.0s
+
+#8 [api internal] load build context
+#8 transferring context: 3.40kB done
+#8 DONE 0.0s
+
+#9 [api 1/5] FROM docker.io/library/python:3.13-slim@sha256:70729b46c69b4f1e97c4822c1af3df53a1476cf5ddc6c087c0c10bc3a5678c2f
+#9 resolve docker.io/library/python:3.13-slim@sha256:70729b46c69b4f1e97c4822c1af3df53a1476cf5ddc6c087c0c10bc3a5678c2f 0.1s done
+#9 DONE 0.1s
+
+#10 [frontend 1/7] FROM docker.io/library/node:24.19.0-alpine@sha256:d32cdf619f63fe0471182d08996dd516c6275bb5fd31ae06e55a570bd9e1ad43
+#10 resolve docker.io/library/node:24.19.0-alpine@sha256:d32cdf619f63fe0471182d08996dd516c6275bb5fd31ae06e55a570bd9e1ad43 0.1s done
+#10 DONE 0.1s
+
+#11 [frontend 2/7] WORKDIR /app
+#11 CACHED
+
+#12 [private-api 2/5] WORKDIR /app
+#12 CACHED
+
+#13 [frontend internal] load build context
+#13 transferring context: 1.90kB done
+#13 DONE 0.0s
+
+#14 [private-api 3/5] COPY requirements.lock .
+#14 DONE 0.1s
+
+#15 [frontend 3/7] COPY frontend/package*.json ./
+#15 DONE 0.1s
+
+#16 [api 4/5] RUN pip install --no-cache-dir -r requirements.lock
+#16 3.123 Collecting annotated-types==0.8.0 (from -r requirements.lock (line 1))
+#16 3.383   Downloading annotated_types-0.8.0-py3-none-any.whl.metadata (15 kB)
+#16 3.508 Collecting anyio==4.15.1 (from -r requirements.lock (line 2))
+#16 3.556   Downloading anyio-4.15.1-py3-none-any.whl.metadata (4.7 kB)
+#16 3.642 Collecting certifi==2026.10.19 (from -r requirements.lock (line 3))
+#16 3.708   Downloading certifi-2026.10.19-py3-none-any.whl.metadata (2.5 kB)
+#16 3.830 Collecting click==8.5.0 (from -r requirements.lock (line 4))
+#16 3.907   Downloading click-8.5.0-py3-none-any.whl.metadata (2.6 kB)
+#16 4.161 Collecting fastapi==0.149.0 (from -r requirements.lock (line 5))
+#16 4.242   Downloading fastapi-0.149.0-py3-none-any.whl.metadata (26 kB)
+#16 4.805 Collecting h11==0.16.0 (from -r requirements.lock (line 6))
+#16 5.102   Downloading h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+#16 5.332 Collecting httpcore==1.0.9 (from -r requirements.lock (line 7))
+#16 5.654   Downloading httpcore-1.0.9-py3-none-any.whl.metadata (21 kB)
+#16 6.190 Collecting httpx==0.28.1 (from -r requirements.lock (line 8))
+#16 6.428   Downloading httpx-0.28.1-py3-none-any.whl.metadata (7.1 kB)
+#16 6.710 Collecting idna==3.20 (from -r requirements.lock (line 9))
+#16 6.948   Downloading idna-3.20-py3-none-any.whl.metadata (7.2 kB)
+#16 7.008 Collecting iniconfig==2.3.1 (from -r requirements.lock (line 10))
+#16 7.048   Downloading iniconfig-2.3.1-py3-none-any.whl.metadata (2.8 kB)
+#16 7.252 Collecting packaging==26.3 (from -r requirements.lock (line 11))
+#16 7.294   Downloading packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+#16 7.356 Collecting pluggy==1.7.0 (from -r requirements.lock (line 12))
+#16 7.562   Downloading pluggy-1.7.0-py3-none-any.whl.metadata (5.0 kB)
+#16 7.632 Collecting psycopg==3.3.6 (from -r requirements.lock (line 13))
+#16 7.832   Downloading psycopg-3.3.6-py3-none-any.whl.metadata (4.4 kB)
+#16 8.667 Collecting psycopg-binary==3.3.6 (from -r requirements.lock (line 14))
+#16 8.695   Downloading psycopg_binary-3.3.6-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (2.7 kB)
+#16 8.914 Collecting pydantic==2.14.1 (from -r requirements.lock (line 15))
+#16 8.943   Downloading pydantic-2.14.1-py3-none-any.whl.metadata (133 kB)
+#16 ...
+
+#17 [frontend 4/7] RUN npm ci
+#17 9.032 
+#17 9.032 added 26 packages, and audited 27 packages in 9s
+#17 9.032 
+#17 9.032 8 packages are looking for funding
+#17 9.032   run `npm fund` for details
+#17 9.034 
+#17 9.034 found 0 vulnerabilities
+#17 9.037 npm notice
+#17 9.037 npm notice New major version of npm available! 11.17.0 -> 12.2.1
+#17 9.037 npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1
+#17 9.037 npm notice To update run: npm install -g npm@12.2.1
+#17 9.037 npm notice
+#17 DONE 9.2s
+
+#18 [frontend 5/7] COPY frontend/ ./
+#18 DONE 0.1s
+
+#19 [frontend 6/7] RUN npm run build
+#19 0.435 
+#19 0.435 > ibe160-fictional-assessment@0.1.0 build
+#19 0.435 > tsc --noEmit && vite build
+#19 0.435 
+#19 1.199 vite v8.3.4 building client environment for production...
+#19 1.224 transforming...
+#19 1.374 ✓ 43 modules transformed.
+#19 1.448 rendering chunks...
+#19 1.529 computing gzip size...
+#19 1.535 dist/demo.html                                  0.45 kB │ gzip:  0.29 kB
+#19 1.535 dist/index.html                                 0.46 kB │ gzip:  0.30 kB
+#19 1.535 dist/assets/FictionalAssessment-Ca5gn51W.css   16.29 kB │ gzip:  3.26 kB
+#19 1.535 dist/assets/demo-CVYX95Ri.js                    0.18 kB │ gzip:  0.16 kB
+#19 1.535 dist/assets/main-BW1RTvUe.js                  185.68 kB │ gzip: 50.43 kB
+#19 1.535 dist/assets/FictionalAssessment-DgWBF5_Z.js   242.63 kB │ gzip: 75.42 kB
+#19 1.535 
+#19 1.536 ✓ built in 334ms
+#19 DONE 1.6s
+
+#16 [api 4/5] RUN pip install --no-cache-dir -r requirements.lock
+#16 10.36 Collecting pydantic_core==2.50.1 (from -r requirements.lock (line 16))
+#16 10.39   Downloading pydantic_core-2.50.1-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.5 kB)
+#16 10.45 Collecting Pygments==2.21.0 (from -r requirements.lock (line 17))
+#16 10.48   Downloading pygments-2.21.0-py3-none-any.whl.metadata (2.5 kB)
+#16 10.54 Collecting pytest==9.0.3 (from -r requirements.lock (line 18))
+#16 10.58   Downloading pytest-9.0.3-py3-none-any.whl.metadata (7.6 kB)
+#16 10.66 Collecting starlette==1.9.0 (from -r requirements.lock (line 19))
+#16 10.70   Downloading starlette-1.9.0-py3-none-any.whl.metadata (6.6 kB)
+#16 10.74 Collecting typing-inspection==0.4.4 (from -r requirements.lock (line 20))
+#16 10.78   Downloading typing_inspection-0.4.4-py3-none-any.whl.metadata (2.6 kB)
+#16 10.84 Collecting typing_extensions==4.16.0 (from -r requirements.lock (line 21))
+#16 10.88   Downloading typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+#16 10.96 Collecting uvicorn==0.54.0 (from -r requirements.lock (line 22))
+#16 10.99   Downloading uvicorn-0.54.0-py3-none-any.whl.metadata (6.6 kB)
+#16 11.04 Collecting annotated-doc==0.0.5 (from -r requirements.lock (line 23))
+#16 11.08   Downloading annotated_doc-0.0.5-py3-none-any.whl.metadata (6.5 kB)
+#16 11.14 Collecting opentelemetry-api==1.45.1 (from -r requirements.lock (line 24))
+#16 11.18   Downloading opentelemetry_api-1.45.1-py3-none-any.whl.metadata (1.4 kB)
+#16 11.24 Collecting pdfplumber==0.11.10 (from -r requirements.lock (line 25))
+#16 11.28   Downloading pdfplumber-0.11.10-py3-none-any.whl.metadata (43 kB)
+#16 11.33 Collecting pdfminer.six==20260107 (from -r requirements.lock (line 26))
+#16 11.36   Downloading pdfminer_six-20260107-py3-none-any.whl.metadata (4.3 kB)
+#16 ...
+
+#20 [frontend 7/7] RUN mkdir -p node_modules/.vite-temp && chown -R node:node node_modules/.vite-temp
+#20 DONE 0.4s
+
+#16 [api 4/5] RUN pip install --no-cache-dir -r requirements.lock
+#16 11.65 Collecting pillow==13.0.0 (from -r requirements.lock (line 27))
+#16 11.68   Downloading pillow-13.0.0-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (9.1 kB)
+#16 11.88 Collecting pypdfium2==5.14.0 (from -r requirements.lock (line 28))
+#16 11.91   Downloading pypdfium2-5.14.0-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (62 kB)
+#16 12.17 Collecting charset-normalizer==3.5.2 (from -r requirements.lock (line 29))
+#16 12.20   Downloading charset_normalizer-3.5.2-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (46 kB)
+#16 12.49 Collecting cryptography==50.0.2 (from -r requirements.lock (line 30))
+#16 12.52   Downloading cryptography-50.0.2-cp311-abi3-manylinux_2_34_x86_64.whl.metadata (4.4 kB)
+#16 12.69 Collecting cffi==2.1.1 (from -r requirements.lock (line 31))
+#16 12.72   Downloading cffi-2.1.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (2.5 kB)
+#16 12.77 Collecting pycparser==3.11 (from -r requirements.lock (line 32))
+#16 12.80   Downloading pycparser-3.11-py3-none-any.whl.metadata (8.2 kB)
+#16 12.90 Downloading annotated_types-0.8.0-py3-none-any.whl (13 kB)
+#16 12.93 Downloading anyio-4.15.1-py3-none-any.whl (132 kB)
+#16 13.11 Downloading certifi-2026.10.19-py3-none-any.whl (136 kB)
+#16 13.30 Downloading click-8.5.0-py3-none-any.whl (125 kB)
+#16 13.38 Downloading fastapi-0.149.0-py3-none-any.whl (145 kB)
+#16 13.46 Downloading h11-0.16.0-py3-none-any.whl (37 kB)
+#16 13.51 Downloading httpcore-1.0.9-py3-none-any.whl (78 kB)
+#16 13.59 Downloading httpx-0.28.1-py3-none-any.whl (73 kB)
+#16 13.63 Downloading idna-3.20-py3-none-any.whl (69 kB)
+#16 13.69 Downloading iniconfig-2.3.1-py3-none-any.whl (7.6 kB)
+#16 13.72 Downloading packaging-26.3-py3-none-any.whl (129 kB)
+#16 13.79 Downloading pluggy-1.7.0-py3-none-any.whl (27 kB)
+#16 13.82 Downloading psycopg-3.3.6-py3-none-any.whl (215 kB)
+#16 13.93 Downloading psycopg_binary-3.3.6-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (5.2 MB)
+#16 15.35    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.2/5.2 MB 3.8 MB/s  0:00:01
+#16 15.38 Downloading pydantic-2.14.1-py3-none-any.whl (488 kB)
+#16 15.49 Downloading pydantic_core-2.50.1-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.2 MB)
+#16 15.85    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.2/2.2 MB 6.2 MB/s  0:00:00
+#16 15.88 Downloading pygments-2.21.0-py3-none-any.whl (1.3 MB)
+#16 16.07    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 6.2 MB/s  0:00:00
+#16 16.10 Downloading pytest-9.0.3-py3-none-any.whl (375 kB)
+#16 16.21 Downloading starlette-1.9.0-py3-none-any.whl (80 kB)
+#16 16.27 Downloading typing_inspection-0.4.4-py3-none-any.whl (14 kB)
+#16 16.29 Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+#16 16.34 Downloading uvicorn-0.54.0-py3-none-any.whl (87 kB)
+#16 16.39 Downloading annotated_doc-0.0.5-py3-none-any.whl (5.3 kB)
+#16 16.42 Downloading opentelemetry_api-1.45.1-py3-none-any.whl (60 kB)
+#16 16.45 Downloading pdfplumber-0.11.10-py3-none-any.whl (60 kB)
+#16 16.48 Downloading pdfminer_six-20260107-py3-none-any.whl (6.6 MB)
+#16 17.60    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.6/6.6 MB 5.8 MB/s  0:00:01
+#16 17.63 Downloading pillow-13.0.0-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (7.1 MB)
+#16 ...
+
+#21 [frontend] exporting to image
+#21 exporting layers 5.4s done
+#21 exporting manifest sha256:c0366eafe796c49e17f6877f7e5705b27f13d875780febcdc992819d4a66551c 0.0s done
+#21 exporting config sha256:69c1a51ea2f6c58bba0e4e2faab7d123f140ff860da6153bb62b379313f3efb7 0.0s done
+#21 exporting attestation manifest sha256:fa8ba900066cb062091dbfaf2c58b77241a525ced6317c7ed0fcebc1fe1cd96e 0.0s done
+#21 exporting manifest list sha256:cb34104dad2f86d64f92fc8272e9e76f834db708e92ab50f17098f7e1eeac79d 0.0s done
+#21 naming to docker.io/library/ibe160-submission-frontend:latest done
+#21 unpacking to docker.io/library/ibe160-submission-frontend:latest 1.3s done
+#21 DONE 7.0s
+
+#22 [frontend] resolving provenance for metadata file
+#22 DONE 0.0s
+
+#16 [api 4/5] RUN pip install --no-cache-dir -r requirements.lock
+#16 18.84    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 7.1/7.1 MB 5.9 MB/s  0:00:01
+#16 18.89 Downloading pypdfium2-5.14.0-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (3.8 MB)
+#16 19.55    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.8/3.8 MB 5.8 MB/s  0:00:00
+#16 19.59 Downloading charset_normalizer-3.5.2-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (254 kB)
+#16 19.66 Downloading cryptography-50.0.2-cp311-abi3-manylinux_2_34_x86_64.whl (4.8 MB)
+#16 20.45    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.8/4.8 MB 6.0 MB/s  0:00:00
+#16 20.49 Downloading cffi-2.1.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (221 kB)
+#16 20.55 Downloading pycparser-3.11-py3-none-any.whl (51 kB)
+#16 20.89 Installing collected packages: typing_extensions, pypdfium2, Pygments, pycparser, psycopg-binary, psycopg, pluggy, pillow, packaging, iniconfig, idna, h11, click, charset-normalizer, certifi, annotated-types, annotated-doc, uvicorn, typing-inspection, pytest, pydantic_core, opentelemetry-api, httpcore, cffi, anyio, starlette, pydantic, httpx, cryptography, pdfminer.six, fastapi, pdfplumber
+#16 25.43 
+#16 25.43 Successfully installed Pygments-2.21.0 annotated-doc-0.0.5 annotated-types-0.8.0 anyio-4.15.1 certifi-2026.10.19 cffi-2.1.1 charset-normalizer-3.5.2 click-8.5.0 cryptography-50.0.2 fastapi-0.149.0 h11-0.16.0 httpcore-1.0.9 httpx-0.28.1 idna-3.20 iniconfig-2.3.1 opentelemetry-api-1.45.1 packaging-26.3 pdfminer.six-20260107 pdfplumber-0.11.10 pillow-13.0.0 pluggy-1.7.0 psycopg-3.3.6 psycopg-binary-3.3.6 pycparser-3.11 pydantic-2.14.1 pydantic_core-2.50.1 pypdfium2-5.14.0 pytest-9.0.3 starlette-1.9.0 typing-inspection-0.4.4 typing_extensions-4.16.0 uvicorn-0.54.0
+#16 25.43 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+#16 25.43 
+#16 25.43 [notice] A new release of pip is available: 26.2.1 -> 26.2.2
+#16 25.43 [notice] To update, run: pip install --upgrade pip
+#16 DONE 25.9s
+
+#23 [private-api 5/5] COPY . .
+#23 DONE 0.1s
+
+#24 [api] exporting to image
+#24 exporting layers
+#24 exporting layers 5.3s done
+#24 exporting manifest sha256:6007de05a66fc0c1a49d39910955bb7eaf7a69bafde941046ca94983b91cff9e 0.0s done
+#24 exporting config sha256:95f47907be6c03db86089e14f8a856193d7383bebcb01b006c7f3e475efaf40e 0.1s done
+#24 exporting attestation manifest sha256:d61565e5bedbe6474ca2c6172368e8f344ef79d2b6b456a6faee6eacaeae098a 0.1s done
+#24 exporting manifest list sha256:4c19a5abbbb3bc9649282c31f6c52916a5dc26cf80bdcd4145c02c3090b67883
+#24 exporting manifest list sha256:4c19a5abbbb3bc9649282c31f6c52916a5dc26cf80bdcd4145c02c3090b67883 0.1s done
+#24 naming to docker.io/library/ibe160-submission-api:latest 0.0s done
+#24 unpacking to docker.io/library/ibe160-submission-api:latest
+#24 unpacking to docker.io/library/ibe160-submission-api:latest 1.6s done
+#24 DONE 7.1s
+
+#25 [private-api] exporting to image
+#25 exporting layers 5.3s done
+#25 exporting manifest sha256:16174395353422448e1a5a8bce4f5c6335cf7a78817904f92b588a61ca1f8b17 0.1s done
+#25 exporting config sha256:edd9594fa4ce5c466b94fa0f27a777acb044c065979750e6d02aa62a2c967558 0.1s done
+#25 exporting attestation manifest sha256:8833b18ac83a7c89d3b9ea54c840177e3169e0befdb709e1a29e6c9f1a320848 0.1s done
+#25 exporting manifest list sha256:7725ce0c88035360331cb8a1dcf2ec3871ad318f2504332ddf27c635e010a22c 0.1s done
+#25 naming to docker.io/library/ibe160-submission-private-api:latest done
+#25 unpacking to docker.io/library/ibe160-submission-private-api:latest 1.6s done
+#25 DONE 7.1s
+
+#26 [private-api] resolving provenance for metadata file
+#26 DONE 0.1s
+
+#27 [api] resolving provenance for metadata file
+#27 DONE 0.0s
+ Image ibe160-submission-frontend Built 
+ Image ibe160-submission-private-api Built 
+ Image ibe160-submission-api Built 
+ Volume ibe160-submission_submission_private Creating 
+ Volume ibe160-submission_submission_fictional Creating 
+ Volume ibe160-submission_submission_fictional Creating 
+ Volume ibe160-submission_submission_private Creating 
+ Network ibe160-submission_default Creating 
+ Network ibe160-submission_default Creating 
+ Volume ibe160-submission_submission_private Created 
+ Volume ibe160-submission_submission_private Created 
+ Volume ibe160-submission_submission_fictional Created 
+ Volume ibe160-submission_submission_fictional Created 
+ Network ibe160-submission_default Created 
+ Network ibe160-submission_default Created 
+ Container ibe160-submission-private-db-1 Creating 
+ Container ibe160-submission-db-1 Creating 
+ Container ibe160-submission-db-1 Created 
+ Container ibe160-submission-api-1 Creating 
+ Container ibe160-submission-private-db-1 Created 
+ Container ibe160-submission-private-api-1 Creating 
+ Container ibe160-submission-api-1 Created 
+ Container ibe160-submission-private-api-1 Created 
+ Container ibe160-submission-frontend-1 Creating 
+ Container ibe160-submission-frontend-1 Created 
+ Container ibe160-submission-db-1 Starting 
+ Container ibe160-submission-private-db-1 Starting 
+ Container ibe160-submission-db-1 Started 
+ Container ibe160-submission-db-1 Waiting 
+ Container ibe160-submission-private-db-1 Started 
+ Container ibe160-submission-private-db-1 Waiting 
+ Container ibe160-submission-db-1 Healthy 
+ Container ibe160-submission-api-1 Starting 
+ Container ibe160-submission-private-db-1 Healthy 
+ Container ibe160-submission-private-api-1 Starting 
+ Container ibe160-submission-api-1 Started 
+ Container ibe160-submission-private-api-1 Started 
+ Container ibe160-submission-private-api-1 Waiting 
+ Container ibe160-submission-api-1 Waiting 
+ Container ibe160-submission-api-1 Healthy 
+ Container ibe160-submission-private-api-1 Healthy 
+ Container ibe160-submission-frontend-1 Starting 
+ Container ibe160-submission-frontend-1 Started 
+ Container ibe160-submission-db-1 Waiting 
+ Container ibe160-submission-api-1 Waiting 
+ Container ibe160-submission-private-db-1 Waiting 
+ Container ibe160-submission-private-api-1 Waiting 
+ Container ibe160-submission-frontend-1 Waiting 
+ Container ibe160-submission-private-api-1 Healthy 
+ Container ibe160-submission-api-1 Healthy 
+ Container ibe160-submission-private-db-1 Healthy 
+ Container ibe160-submission-db-1 Healthy 
+ Container ibe160-submission-frontend-1 Healthy 
+Synthetic submission account verified; credentials remain in ignored local account.json.
+Fictional day: fc254100-c410-4f95-a010-ba6dde3f0bbd
