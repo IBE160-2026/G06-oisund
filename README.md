@@ -11,10 +11,13 @@ Install Git, Node.js 24 with npm, Docker Desktop with Linux containers and Compo
 ```powershell
 git clone --branch story/12-5-reproducible-submission https://github.com/IBE160-2026/G06-oisund.git ibe160-submission
 cd ibe160-submission
+git checkout --detach c067fdbb20150219c041588ed4e990e7b0ef6b94
 git rev-parse HEAD
 node scripts/submission.mjs init
 node scripts/submission.mjs status
 ```
+
+Expected HEAD: `c067fdbb20150219c041588ed4e990e7b0ef6b94`. This immutable snapshot contains the reviewed source and executed evidence. Later branch commits may add review/session documentation; the checkout command keeps the demonstrated version fixed.
 
 The delivery is versioned Git content; no local archive is needed. `init` generates ignored local database/account secrets, pulls pinned base images, freshly installs locked npm/Python dependencies with an uncached build, builds the frontend, starts five services, applies versioned migrations and idempotently seeds the fictional day and synthetic account. Expect healthy containers, a fictional day UUID and synthetic-account confirmation. Every failed subprocess exits nonzero; resolve the failure before continuing.
 
