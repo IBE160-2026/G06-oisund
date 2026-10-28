@@ -1,6 +1,6 @@
 # Story 12.4 komplett brukerflyt
 
-## 2026-10-28 kl. 14:21 — Jonas Øisund
+## 2026-10-28 kl. 14:39 — Jonas Øisund
 
 ### Oppgave
 Gjennomfør Story12.4/V1-19 på egen branch og eget worktree fra faktisk nyeste origin/main, med reell nettleser/API/PostgreSQL, uavhengige syntetiske forventninger og mobilrettingen som testgrunnlag. Lever teknisk ferdig og reviewklart med dokumentasjon, commit og push; ikke flett, deploy, gi manuell aksept eller start12.5.
@@ -51,5 +51,9 @@ Manuell test6, første del: Jonas rapporterte «Utlogget og privat innhold skjul
 
 Manuell test6, andre del: Jonas bekreftet «Andre konto er tom og utlogget». Brukerens observasjon dekker tomme lagrede utkast-/planlister under den andre syntetiske kontoen og bekreftet utlogging derfra. Agenten klargjorde kun første konto i det verifiserte egne innloggingsskjemaet, uten å sende innlogging eller logge legitimasjon. Siste gjenåpningskontroll av plan2030-02-04 versjon2 og det manuelt lagrede avviket skal gjøres av brukeren. Status:5/6 hele tester bestått, utlogging/kontoskillet i test6 bekreftet; siste bevaringskontroll og eksplisitt samlet eieraksept gjenstår.
 
+Manuell test6 av6 er nå bekreftet bestått av Jonas, inkludert gjeninnlogging på første konto og gjenåpning av lagret avsluttet plan og avvik. Alle seks guidede tester er brukerbekreftet bestått på tidligere bygg. Jonas sa samtidig uttrykkelig at Story12.4 **ikke godkjennes**. Beståtte kontroller innebærer ingen aksept.
+
+Eierens etterfølgende utbedringskrav gjelder hele skiftregistreringsopplevelsen og tas inn i12.4: unngå tre–fire gjentatte detaljgjennomganger, la korrekt import fortsette uten tvungen redigering, gjør retting/tillegg til et uttrykkelig valg, tilby egen lagreknapp ved begge bussfelt og unngå hopp til sidetopp etter utkastlagring. Velg egen godkjenningsvisning slik at neste steg ikke krever lang scrolling. [Tilleggsspesifikasjon](../../_bmad-output/implementation-artifacts/spec-12-4-import-experience.md) beskriver sporbare kriterier, bevart eksplisitt lagring/ukjent-beslutning/autoritet/gjenoppretting og isolert testoppsett. bmad-build videreføres med implementeringsagent; ny kilde skal få nye faktiske tester og review. Tidligere evidens kvalifiserer bare det tidligere bygget. Ingen ny retting eller test hevdes ferdig ved dette loggpunktet.
+
 ### Åpne punkter
-- Manuell12.4-aksept gjenstår: gjennomfør sjekklisten på det separate15324-bygget, særlig PDF/korrigering/lagring/gjenåpning, faneavbrudd midt i avviksredigering, konflikt med enda en endring, slutt/avbrudd/gjenlasting og utlogging/kontobytte. Registrer konkret bygg/enhet/nettleser og eierens beslutning; automatisering innebærer ikke aksept.
+- Story12.4 er uttrykkelig ikke godkjent. Utbedre import-/skiftregistreringsopplevelsen etter eierens konkrete krav, test nytt bygg og gjennomfør målrettet personlig retest før ny eierbeslutning. De seks tidligere guidede kontrollene er bestått; de innebærer ingen storyaksept.
