@@ -45,6 +45,8 @@ Guidet sluttvurdering 2026-10-28 kl. 20:17: Jonas bekreftet «Det ser klart ut. 
 
 Guidet sluttvurdering 2026-10-28 kl. 20:22: Jonas bekreftet «steg 2 ok». Innlogging i det isolerte demomiljøet og import av syntetisk Testskift-A.pdf med forventet dato, vognløp, ukjent fysisk buss og de to viderevalgene er manuelt bestått. Ingen lagring/godkjenning eller samlet aksept er utledet fra denne bekreftelsen. Neste prøve er manuell korrigering, eksplisitt lagring og gjenåpning.
 
+Guidet sluttvurdering 2026-10-28 kl. 20:26: Jonas bekreftet «steg 3 ok». Manuell endestedsrettelse og kilde-/rettelsesnotat på linje731/tur1002, buss SYN-125-MANUELL, eksplisitt utkastlagring, reload/gjenåpning og separat bevart originalkilde er manuelt bestått. Bekreftelsen gjelder disse prøvene; planen er ennå ikke bekreftet/startet og samlet Story12.5-aksept er fortsatt ikke gitt. Neste prøve er godkjenning av den lagrede versjonen.
+
 ### Åpne punkter
 
 - Jonas sin sluttvurdering av leveranseoppskriften og uttrykkelige Story12.5-aksept gjenstår; bruk [konkret review-sjekkliste](../../docs/submission/review-checklist.md). Teknisk grønt eller push gir ikke aksept og avslutter ikke Epic12.
