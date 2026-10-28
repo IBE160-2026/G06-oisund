@@ -51,6 +51,8 @@ Guidet sluttvurdering 2026-10-28 kl. 20:32: Jonas bekreftet «steg 4 ok etter re
 
 Guidet sluttvurdering 2026-10-28 kl. 20:36: Jonas opplyste at lagringsmeldingen er «Lagret: Fullført manuelt», ikke ordlyden veiledningen oppga, og bekreftet ellers steg5 OK. Eksplisitt aktivitetsvalg uten start, separat bekreftet skiftstart og manuell lagret aktivitetsstatus er bestått. Faktisk observert melding er registrert; ingen produktfeil eller samlet aksept utledes fra ordlydsforskjellen. Neste prøve er manuelt registrert syntetisk avvik og linje-/datolesing.
 
+Guidet sluttvurdering 2026-10-28 kl. 20:41: Jonas gjenga avvikets faktiske metadata: ukjent kildeoppdatering, delvis kjent gyldighet fra ukjent til05.02.2030 kl.23:59:59 Oslo, registrert/sist endret28.10.2026 kl.20:39 og «Ikke kontrollert». Han bekreftet deretter uttrykkelig «steg 6 ok». Syntetisk avviksregistrering/lagring og linje-/datolesing med bevarte ukjente kildefakta er manuelt bestått. Appens lagringstid er ikke behandlet som kildekontroll. Neste prøve er eksplisitt avslutning og stabil gjenåpnet oppsummering; samlet Story12.5-aksept er fortsatt pending.
+
 ### Åpne punkter
 
 - Jonas sin sluttvurdering av leveranseoppskriften og uttrykkelige Story12.5-aksept gjenstår; bruk [konkret review-sjekkliste](../../docs/submission/review-checklist.md). Teknisk grønt eller push gir ikke aksept og avslutter ikke Epic12.
