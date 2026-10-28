@@ -105,6 +105,8 @@ for (const [name, action] of [['A', 'ended'], ['C', 'aborted']] as const) {
     const title = 'Fiktivt avvik reproduksjon 12.5 ' + name;
     await page.getByLabel('Tittel', { exact: true }).fill(title);
     await page.getByLabel('Detaljert forklaring', { exact: true }).fill('Syntetisk manuell registrering; ingen sanntidskilde.');
+    await page.getByLabel('Kildebeskrivelse', { exact: true }).fill('Fiktiv oppgavekilde for reproduksjonsprøven');
+    await page.getByLabel('Originalkilde (HTTP eller HTTPS)', { exact: true }).fill('https://example.invalid/submission-' + name);
     await page.getByLabel('Linjer fra kilden (kommaseparert)', { exact: true }).fill(name === 'A' ? '731' : '81');
     await page.getByLabel('Gyldig tildato', { exact: true }).fill('2030-02-10');
     await button(page, 'Lagre avvik').click();
@@ -118,6 +120,7 @@ for (const [name, action] of [['A', 'ended'], ['C', 'aborted']] as const) {
     await reader.locator('.notice-list summary').click();
     await expect(reader).toContainText('Kildens oppdateringstid er ukjent');
     await expect(reader).toContainText('Ikke kontrollert');
+    await expect(reader.getByRole('link', { name: 'https://example.invalid/submission-' + name, exact: true })).toBeVisible();
     await reader.getByRole('button', { name: 'Tilbake til dagen', exact: true }).click();
     await button(page, 'Velg aktivitet ' + (index + 1)).click();
     await expect(page.locator('.selected-activity')).toContainText('Syntetisk korrigert endeholdeplass 12.5');
