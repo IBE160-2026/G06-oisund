@@ -1,0 +1,7 @@
+Synthetic submission account verified; credentials remain in ignored local account.json.
+NAME                              IMAGE                                                                                        COMMAND                  SERVICE       CREATED          STATUS                        PORTS
+ibe160-submission-api-1           ibe160-submission-api                                                                        "python /submission/…"   api           26 minutes ago   Up About a minute (healthy)   127.0.0.1:18327->8000/tcp
+ibe160-submission-db-1            postgres:17-alpine@sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24   "docker-entrypoint.s…"   db            26 minutes ago   Up About a minute (healthy)   5432/tcp
+ibe160-submission-frontend-1      ibe160-submission-frontend                                                                   "docker-entrypoint.s…"   frontend      26 minutes ago   Up About a minute (healthy)   127.0.0.1:15325->15325/tcp
+ibe160-submission-private-api-1   ibe160-submission-private-api                                                                "python -m app.run"      private-api   26 minutes ago   Up About a minute (healthy)   127.0.0.1:18328->8000/tcp
+ibe160-submission-private-db-1    postgres:17-alpine@sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24   "docker-entrypoint.s…"   private-db    26 minutes ago   Up About a minute (healthy)   5432/tcp

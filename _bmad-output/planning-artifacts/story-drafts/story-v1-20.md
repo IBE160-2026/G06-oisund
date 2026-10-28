@@ -1,5 +1,5 @@
 ---
-status: backlog
+status: done
 scopeApproval: approved
 decision: SCOPE-02
 approvedOn: 2026-10-19
@@ -7,12 +7,14 @@ alias: V1-20
 epic: 12
 story: '12.5'
 dependencies: [V1-19]
-implementationStarted: false
+implementationStarted: true
+ownerAcceptance: accepted
+acceptedOn: 2026-10-28
 ---
 
 ### Story 12.5: Deliver a reproducible submission
 
-**Stable alias:** V1-20. **Status:** backlog; approved scope, implementation/evidence not started.
+**Stable alias:** V1-20. **Status:** done/accepted by Jonas on28October2026; [implementation specification](../../implementation-artifacts/spec-12-5-reproducible-submission.md), [executed evidence](../../../docs/evidence/12-5-reproduction.md) and [explicit owner decision](../../../docs/evidence/12-5-owner-acceptance-2026-10-28.md). Epic12 closure remains separate.
 **Depends on:** V1-19.
 **Traceability:** FR-25; NFR-4; AC-11/12; SCOPE-02.
 

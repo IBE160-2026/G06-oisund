@@ -1,0 +1,15 @@
+# Known limits
+
+- **12.5 accepted in full by the owner on28October2026.** [Decision and manual observations](../evidence/12-5-owner-acceptance-2026-10-28.md). Epic 12 closure and learning-platform submission remain separate. The five planned extensions have not been started by this delivery; the limits below remain applicable.
+- **Bounded input.** Only the implemented selectable-text two-column PDF envelope is supported. Scans/arbitrary layouts need manual entry. [Supported input](supported-input.md).
+- **No operational automation.** No GPS, live feeds, inferred completion, offline private persistence, audio or Auto theme. Runtime requires local services; unsaved edits can be lost when closing/reloading or losing authorization. Keep the page open for explicit unresolved-command recovery.
+- **No measured field benefit.** There is no real-work time-saving/safety study. The test corpus and synthetic journeys establish bounded behavior, not source completeness or real-world effectiveness.
+- **Device evidence is historical and specific.** Accepted Lenovo/Android/Brave reports from 12.3/12.4 retain their exact builds/routes. The new isolated 12.5 recipe is qualified by its own desktop execution, not silently by previous hardware results. TalkBack, all OS/browser settings and complete accessibility compliance remain unqualified.
+- **Local synthetic runtime only.** Generated credentials and loopback HTTP are appropriate to this disposable demonstration. Production/tablet access tooling has separately recorded unresolved validation/gate follow-ups; see [deferred work](../../_bmad-output/implementation-artifacts/deferred-work.md) and [owner issues](../../.logs/jonas-oisund/issues.md). That environment is untouched and unnecessary here.
+- **Teacher source limit.** Original teacher files are absent; the versioned planning addendum records the available course constraints. This package does not claim independent validation against missing originals.
+
+Exact execution failures/reruns and any additional verification gaps belong to the [12.5 reproduction record](../evidence/12-5-reproduction.md). Existing project issues remain in the owner's issue list; this document does not close them by inference.
+
+The five separately planned extensions are **automatic notices**, **complete route network**, **position-based progression**, **speed limits**, and **GPS speed**. They live on separate `codex/plan-*` planning branches. None is an implemented V1 feature, a prerequisite for this recipe, or started by Story 12.5. The original broader product vision and archived designs must not be read as the delivered feature list.
+
+Run initialization and lifecycle commands sequentially. Existing-container checkout ownership is checked; concurrent first initialization in multiple checkouts is outside this recipe. Keep the original checkout and generated secret files with retained demonstration volumes; do not copy runtime secrets between checkouts to attach old volumes.

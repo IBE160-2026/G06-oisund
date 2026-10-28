@@ -5,11 +5,16 @@ frontend/**
 !frontend/package.json
 !frontend/package-lock.json
 !frontend/tsconfig.json
+!frontend/index.html
+!frontend/demo.html
+!frontend/vite.config.ts
 !frontend/src/
 !frontend/src/**
 !deploy/
 deploy/**
 !deploy/tablet/
 !deploy/tablet/**
+!deploy/submission/
+!deploy/submission/Dockerfile
 **/__pycache__
 **/.pytest_cache

@@ -1,0 +1,17 @@
+docker : test_all_supported_commands_receive_generated_url (test_fictional.FictionalWrapperTests.test_all_supported_com
+mands_receive_generated_url) ... ok
+At line:2 char:1
++ docker run --rm --network none --mount type=bind,source=D:/IBE160/tmp ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (test_all_suppor...ted_url) ... ok:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+test_empty_secret_refuses_before_import (test_fictional.FictionalWrapperTests.test_empty_secret_refuses_before_import) 
+... ok
+test_wrong_target_or_command_refuses_before_reading_secret (test_fictional.FictionalWrapperTests.test_wrong_target_or_c
+ommand_refuses_before_reading_secret) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.009s
+
+OK

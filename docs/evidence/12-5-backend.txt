@@ -1,0 +1,302 @@
+Synthetic submission account verified; credentials remain in ignored local account.json.
+..........FFFFFFFFFFFFFF................................................ [ 15%]
+........................................................................ [ 30%]
+........................................................................ [ 45%]
+........................................................................ [ 60%]
+........................................................................ [ 75%]
+........................................................................ [ 90%]
+................................................                         [100%]
+=================================== FAILURES ===================================
+___________________ test_roundtrip_replay_and_real_postgres ____________________
+
+client = <httpx.Client object at 0x7171375f3e70>
+
+    def test_roundtrip_replay_and_real_postgres(client):
+>       body = new_request(client)
+               ^^^^^^^^^^^^^^^^^^^
+
+tests/test_assessment.py:25: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+client = <httpx.Client object at 0x7171375f3e70>
+
+    def new_request(client):
+>       return {'operation_id': client.post('/operations').json()['operation_id'], 'day': client.get('/fixture').json()}
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'operation_id'
+
+tests/test_assessment.py:21: KeyError
+___________________________ test_concurrent_replays ____________________________
+
+client = <httpx.Client object at 0x717137b83690>
+
+    def test_concurrent_replays(client):
+>       body = new_request(client)
+               ^^^^^^^^^^^^^^^^^^^
+
+tests/test_assessment.py:44: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+client = <httpx.Client object at 0x717137b83690>
+
+    def new_request(client):
+>       return {'operation_id': client.post('/operations').json()['operation_id'], 'day': client.get('/fixture').json()}
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'operation_id'
+
+tests/test_assessment.py:21: KeyError
+_______________________ test_invalid_no_mutation[extra] ________________________
+
+client = <httpx.Client object at 0x71713761db20>, mutation = 'extra'
+
+    @pytest.mark.parametrize('mutation', ['extra', 'date', 'fictional', 'numeric-fictional', 'private', 'timezone', 'unknown-operation'])
+    def test_invalid_no_mutation(client, mutation):
+>       body = new_request(client)
+               ^^^^^^^^^^^^^^^^^^^
+
+tests/test_assessment.py:52: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+client = <httpx.Client object at 0x71713761db20>
+
+    def new_request(client):
+>       return {'operation_id': client.post('/operations').json()['operation_id'], 'day': client.get('/fixture').json()}
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'operation_id'
+
+tests/test_assessment.py:21: KeyError
+________________________ test_invalid_no_mutation[date] ________________________
+
+client = <httpx.Client object at 0x717137c90ad0>, mutation = 'date'
+
+    @pytest.mark.parametrize('mutation', ['extra', 'date', 'fictional', 'numeric-fictional', 'private', 'timezone', 'unknown-operation'])
+    def test_invalid_no_mutation(client, mutation):
+>       body = new_request(client)
+               ^^^^^^^^^^^^^^^^^^^
+
+tests/test_assessment.py:52: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+client = <httpx.Client object at 0x717137c90ad0>
+
+    def new_request(client):
+>       return {'operation_id': client.post('/operations').json()['operation_id'], 'day': client.get('/fixture').json()}
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'operation_id'
+
+tests/test_assessment.py:21: KeyError
+_____________________ test_invalid_no_mutation[fictional] ______________________
+
+client = <httpx.Client object at 0x717137af8410>, mutation = 'fictional'
+
+    @pytest.mark.parametrize('mutation', ['extra', 'date', 'fictional', 'numeric-fictional', 'private', 'timezone', 'unknown-operation'])
+    def test_invalid_no_mutation(client, mutation):
+>       body = new_request(client)
+               ^^^^^^^^^^^^^^^^^^^
+
+tests/test_assessment.py:52: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+client = <httpx.Client object at 0x717137af8410>
+
+    def new_request(client):
+>       return {'operation_id': client.post('/operations').json()['operation_id'], 'day': client.get('/fixture').json()}
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'operation_id'
+
+tests/test_assessment.py:21: KeyError
+_________________ test_invalid_no_mutation[numeric-fictional] __________________
+
+client = <httpx.Client object at 0x717137af8ad0>, mutation = 'numeric-fictional'
+
+    @pytest.mark.parametrize('mutation', ['extra', 'date', 'fictional', 'numeric-fictional', 'private', 'timezone', 'unknown-operation'])
+    def test_invalid_no_mutation(client, mutation):
+>       body = new_request(client)
+               ^^^^^^^^^^^^^^^^^^^
+
+tests/test_assessment.py:52: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+client = <httpx.Client object at 0x717137af8ad0>
+
+    def new_request(client):
+>       return {'operation_id': client.post('/operations').json()['operation_id'], 'day': client.get('/fixture').json()}
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'operation_id'
+
+tests/test_assessment.py:21: KeyError
+______________________ test_invalid_no_mutation[private] _______________________
+
+client = <httpx.Client object at 0x717137af9190>, mutation = 'private'
+
+    @pytest.mark.parametrize('mutation', ['extra', 'date', 'fictional', 'numeric-fictional', 'private', 'timezone', 'unknown-operation'])
+    def test_invalid_no_mutation(client, mutation):
+>       body = new_request(client)
+               ^^^^^^^^^^^^^^^^^^^
+
+tests/test_assessment.py:52: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+client = <httpx.Client object at 0x717137af9190>
+
+    def new_request(client):
+>       return {'operation_id': client.post('/operations').json()['operation_id'], 'day': client.get('/fixture').json()}
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'operation_id'
+
+tests/test_assessment.py:21: KeyError
+______________________ test_invalid_no_mutation[timezone] ______________________
+
+client = <httpx.Client object at 0x717137af9250>, mutation = 'timezone'
+
+    @pytest.mark.parametrize('mutation', ['extra', 'date', 'fictional', 'numeric-fictional', 'private', 'timezone', 'unknown-operation'])
+    def test_invalid_no_mutation(client, mutation):
+>       body = new_request(client)
+               ^^^^^^^^^^^^^^^^^^^
+
+tests/test_assessment.py:52: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+client = <httpx.Client object at 0x717137af9250>
+
+    def new_request(client):
+>       return {'operation_id': client.post('/operations').json()['operation_id'], 'day': client.get('/fixture').json()}
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'operation_id'
+
+tests/test_assessment.py:21: KeyError
+_________________ test_invalid_no_mutation[unknown-operation] __________________
+
+client = <httpx.Client object at 0x717137af9910>, mutation = 'unknown-operation'
+
+    @pytest.mark.parametrize('mutation', ['extra', 'date', 'fictional', 'numeric-fictional', 'private', 'timezone', 'unknown-operation'])
+    def test_invalid_no_mutation(client, mutation):
+>       body = new_request(client)
+               ^^^^^^^^^^^^^^^^^^^
+
+tests/test_assessment.py:52: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+client = <httpx.Client object at 0x717137af9910>
+
+    def new_request(client):
+>       return {'operation_id': client.post('/operations').json()['operation_id'], 'day': client.get('/fixture').json()}
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'operation_id'
+
+tests/test_assessment.py:21: KeyError
+_________________________ test_expiry_no_resurrection __________________________
+
+client = <httpx.Client object at 0x717137af9c10>
+
+    def test_expiry_no_resurrection(client):
+>       body = new_request(client)
+               ^^^^^^^^^^^^^^^^^^^
+
+tests/test_assessment.py:74: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+client = <httpx.Client object at 0x717137af9c10>
+
+    def new_request(client):
+>       return {'operation_id': client.post('/operations').json()['operation_id'], 'day': client.get('/fixture').json()}
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'operation_id'
+
+tests/test_assessment.py:21: KeyError
+____________________ test_origins_and_non_assessment_denial ____________________
+
+client = <httpx.Client object at 0x717137afb110>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x717137ab2580>
+
+    def test_origins_and_non_assessment_denial(client, monkeypatch):
+        assert client.post('/operations', headers={'Origin': 'https://untrusted.example'}).status_code == 403
+        monkeypatch.setenv('APP_MODE', 'private')
+        with pytest.raises(RuntimeError):
+            database()
+        monkeypatch.setenv('APP_MODE', 'fictional-assessment')
+>       monkeypatch.setenv('DATABASE_URL', os.environ['DATABASE_URL'].replace('/fictional_assessment', '/private'))
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_assessment.py:94: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = environ({'PATH': '/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin', 'HOSTNAME': '6a85f6927...T_VERSION': '9.0.3', 'PYTEST_CURRENT_TEST': 'tests/test_assessment.py::test_origins_and_non_assessment_denial (call)'})
+key = 'DATABASE_URL'
+
+>   ???
+E   KeyError: 'DATABASE_URL'
+
+<frozen os>:717: KeyError
+_______ test_configured_browser_origin_uses_same_cors_and_write_boundary _______
+
+client = <httpx.Client object at 0x717137afb290>
+
+    def test_configured_browser_origin_uses_same_cors_and_write_boundary(client):
+        origin = os.environ.get('FICTIONAL_ORIGIN', 'http://127.0.0.1:5173')
+        reply = client.options('/operations', headers={'Origin': origin, 'Access-Control-Request-Method': 'POST'})
+>       assert reply.status_code == 200
+E       assert 400 == 200
+E        +  where 400 = <Response [400 Bad Request]>.status_code
+
+tests/test_assessment.py:102: AssertionError
+__________________________ test_malformed_identifiers __________________________
+
+client = <httpx.Client object at 0x717137c90b90>
+
+    def test_malformed_identifiers(client):
+>       assert client.get('/days/not-a-uuid').status_code == 422
+E       AssertionError: assert 404 == 422
+E        +  where 404 = <Response [404 Not Found]>.status_code
+E        +    where <Response [404 Not Found]> = get('/days/not-a-uuid')
+E        +      where get = <httpx.Client object at 0x717137c90b90>.get
+
+tests/test_assessment.py:111: AssertionError
+_____________________ test_day_expiry_purges_its_operation _____________________
+
+client = <httpx.Client object at 0x717137c90110>
+
+    def test_day_expiry_purges_its_operation(client):
+>       body = new_request(client)
+               ^^^^^^^^^^^^^^^^^^^
+
+tests/test_assessment.py:116: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+client = <httpx.Client object at 0x717137c90110>
+
+    def new_request(client):
+>       return {'operation_id': client.post('/operations').json()['operation_id'], 'day': client.get('/fixture').json()}
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'operation_id'
+
+tests/test_assessment.py:21: KeyError
+=============================== warnings summary ===============================
+../usr/local/lib/python3.13/site-packages/fastapi/testclient.py:1
+  /usr/local/lib/python3.13/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_assessment.py::test_roundtrip_replay_and_real_postgres - Ke...
+FAILED tests/test_assessment.py::test_concurrent_replays - KeyError: 'operati...
+FAILED tests/test_assessment.py::test_invalid_no_mutation[extra] - KeyError: ...
+FAILED tests/test_assessment.py::test_invalid_no_mutation[date] - KeyError: '...
+FAILED tests/test_assessment.py::test_invalid_no_mutation[fictional] - KeyErr...
+FAILED tests/test_assessment.py::test_invalid_no_mutation[numeric-fictional]
+FAILED tests/test_assessment.py::test_invalid_no_mutation[private] - KeyError...
+FAILED tests/test_assessment.py::test_invalid_no_mutation[timezone] - KeyErro...
+FAILED tests/test_assessment.py::test_invalid_no_mutation[unknown-operation]
+FAILED tests/test_assessment.py::test_expiry_no_resurrection - KeyError: 'ope...
+FAILED tests/test_assessment.py::test_origins_and_non_assessment_denial - Key...
+FAILED tests/test_assessment.py::test_configured_browser_origin_uses_same_cors_and_write_boundary
+FAILED tests/test_assessment.py::test_malformed_identifiers - AssertionError:...
+FAILED tests/test_assessment.py::test_day_expiry_purges_its_operation - KeyEr...
+14 failed, 466 passed, 1 warning in 604.78s (0:10:04)
+node : docker exited 1
+At line:2 char:1
++ node scripts/submission.mjs test-backend > tmp/12-5-backend.txt 2>&1
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (docker exited 1:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
