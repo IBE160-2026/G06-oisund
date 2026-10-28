@@ -47,6 +47,8 @@ Guidet sluttvurdering 2026-10-28 kl. 20:22: Jonas bekreftet «steg 2 ok». Innlo
 
 Guidet sluttvurdering 2026-10-28 kl. 20:26: Jonas bekreftet «steg 3 ok». Manuell endestedsrettelse og kilde-/rettelsesnotat på linje731/tur1002, buss SYN-125-MANUELL, eksplisitt utkastlagring, reload/gjenåpning og separat bevart originalkilde er manuelt bestått. Bekreftelsen gjelder disse prøvene; planen er ennå ikke bekreftet/startet og samlet Story12.5-aksept er fortsatt ikke gitt. Neste prøve er godkjenning av den lagrede versjonen.
 
+Guidet sluttvurdering 2026-10-28 kl. 20:32: Jonas bekreftet «steg 4 ok etter rett knapp ble nevnt». Veiledningen ble korrigert til den synlige knappen «Fortsett til godkjenning»; «Til godkjenning» øverst åpner samme visning, mens «Åpne …» henter et lagret utkast. Godkjenning av lagret versjon og etterfølgende «Ikke startet»/«Ingen aktivitet valgt» er manuelt bestått. Dette registreres som rettet veiledning, ikke som en påvist produktfeil eller samlet Story12.5-aksept. Neste prøve er eksplisitt valg/start/aktivitetsstatus.
+
 ### Åpne punkter
 
 - Jonas sin sluttvurdering av leveranseoppskriften og uttrykkelige Story12.5-aksept gjenstår; bruk [konkret review-sjekkliste](../../docs/submission/review-checklist.md). Teknisk grønt eller push gir ikke aksept og avslutter ikke Epic12.
