@@ -85,3 +85,11 @@ The isolated preview is `http://127.0.0.1:15324/private` on the PC and the conne
 2. Import a separate synthetic document and explicitly choose correction/addition. Change a destination and save from that working position. The saved message must be nearby; saving must not return to the page top. Reach approval directly and check that corrected and source facts remain distinguishable.
 3. Use the dedicated bus-save action in a draft and on an open confirmed day. Confirm its scope is clear, saved value survives reopening, unrelated edits cannot be silently saved/lost, and ended work remains read-only.
 4. Assess the overall number of steps and scrolling on the physical tablet, then explicitly approve or reject Story12.4. Passing individual automated or manual checks is not approval.
+
+## Committed-source runtime audit
+
+Product/tests/specification/evidence commit: `5ee35ef` (`fix: streamline story12.4 shift preparation and approval`). Final test records captured the preceding HEAD9be6278 plus exact uncommitted source hashes; all98 frontend/backend product hashes were checked against this committed source and are identical across the final64-case gate,32-case gate and served build. Subsequent documentation/log commits do not change those product bytes.
+
+`12-4-runtime-20261028T151727047995Z.json` passed all38 checks after the product commit: exact served frontend bytes/API settings/current source, both API containers' mounted backend bytes and restart ordering, health, unauthenticated401/no-store and preservation of all23 pre-existing container IDs/images/ports. Runtime PostgreSQL17.11 and API Python3.13.16 are recorded with dependency versions. Preview15324 remains available; no active-site deployment or tunnel was started.
+
+Technical correction is review-ready. No retained technical finding remains open; the owner-directed four-point retest and explicit acceptance decision remain pending. Story12.4 stays in review/explicitly-not-approved and12.5 remains backlog.
