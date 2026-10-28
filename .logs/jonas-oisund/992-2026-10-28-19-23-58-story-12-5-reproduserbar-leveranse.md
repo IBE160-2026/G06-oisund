@@ -43,4 +43,6 @@ Alle30 opprinnelige container-ID-er/images/starttider/tilstander er kontrollert 
 
 ### Åpne punkter
 
+Guidet sluttvurdering 2026-10-28 kl. 20:17: Jonas bekreftet «Det ser klart ut. Steg 1 OK» etter gjennomgang av README/oppstarts-, nettbehovs- og resetbeskrivelsen. Dokumentasjonsdelen er dermed manuelt bestått. Dette er ikke en ny installasjonskjøring eller samlet Story12.5-aksept. Neste prøve er syntetisk innlogging og PDF A i det isolerte miljøet.
+
 - Jonas sin sluttvurdering av leveranseoppskriften og uttrykkelige Story12.5-aksept gjenstår; bruk [konkret review-sjekkliste](../../docs/submission/review-checklist.md). Teknisk grønt eller push gir ikke aksept og avslutter ikke Epic12.
