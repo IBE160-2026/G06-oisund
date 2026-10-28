@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { recoverOperation } from './recoverOperation';
 import { validLifecycle } from './PrivateWorkdayProgress';
+import { privateNow } from './privateClock';
 
 export type ResourceProps = {
   id: string; expiresAt: string;
@@ -26,12 +27,14 @@ export function useWorkdayResource<T extends Record>(props: ResourceProps, resou
   const valid = (v: any, historical = false): v is T => v && v.workday_id === id && Number.isSafeInteger(v.revision) && v.revision >= 0
     && typeof v.expires_at === 'string' && (historical || Date.parse(v.expires_at) <= Date.parse(expiresAt)) && Date.parse(v.expires_at) > Date.now() && validFields(v);
   function adopt(value: T) { setSaved(value); setComparison(null); setPending(null); setProposal(null); setRejected(false); unresolved.current = false; lock(false); }
-  async function current() {
+  async function current(publish = true) {
     try {
       const value = await request(path);
       if (!valid(value)) throw Error();
-      props.shorten?.(value.expires_at);
-      if (alive.current) { setAvailable(true); availability(true); }
+      if (publish) {
+        props.shorten?.(value.expires_at);
+        if (alive.current) { setAvailable(true); availability(true); }
+      }
       return value;
     } catch (error: any) {
       if ([404, 410].includes(error?.status)) {
@@ -39,6 +42,30 @@ export function useWorkdayResource<T extends Record>(props: ResourceProps, resou
         if (alive.current) { setAvailable(false); availability(false); }
       }
       throw error;
+    }
+  }
+  async function adoptCurrent(feedback: string) {
+    if (!comparison || pending || sending.current || suspended) return false;
+    const version = ++generation.current;
+    sending.current = true; setBusy(true);
+    try {
+      const value = await current(false);
+      if (!alive.current || version !== generation.current) return false;
+      if (Date.parse(value.expires_at) <= privateNow()) throw Error();
+      if ([saved, comparison].some(known => known && (value.revision < known.revision
+        || Date.parse(value.expires_at) > Date.parse(known.expires_at)
+        || value.revision === known.revision && canonical({ ...value, expires_at: known.expires_at }) !== canonical(known)))) throw Error();
+      props.shorten?.(value.expires_at); setAvailable(true); availability(true);
+      adopt(value); setMessage(feedback); return true;
+    } catch (error: any) {
+      if (!alive.current || version !== generation.current) return false;
+      if (error?.status === 401) { expired(); return false; }
+      setAvailable(false); availability(false);
+      setMessage('Gjeldende aktivitetsvalg kunne ikke bekreftes. Forslaget er beholdt. Prøv å laste inn lagret aktivitetsvalg igjen.');
+      return false;
+    } finally {
+      sending.current = false;
+      if (alive.current && version === generation.current) setBusy(false);
     }
   }
   async function load() {
@@ -110,5 +137,5 @@ export function useWorkdayResource<T extends Record>(props: ResourceProps, resou
     } finally { sending.current = false; if (alive.current) setBusy(false); }
   }
   function resolve(value: T, feedback: string) { adopt(value); setMessage(feedback); }
-  return { saved, comparison, pending, proposal, rejected, busy, available, message, load, send, resolve };
+  return { saved, comparison, pending, proposal, rejected, busy, available, message, load, send, resolve, adoptCurrent };
 }

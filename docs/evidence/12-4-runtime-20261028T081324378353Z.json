@@ -1,0 +1,340 @@
+{
+  "recorded_at": "2026-10-28T08:13:16.071396+00:00",
+  "project": "ibe160-story124-tests",
+  "checks": [
+    {
+      "name": "api mounted source equals host",
+      "passed": true
+    },
+    {
+      "name": "api started after final source writes",
+      "passed": true
+    },
+    {
+      "name": "private-api mounted source equals host",
+      "passed": true
+    },
+    {
+      "name": "private-api started after final source writes",
+      "passed": true
+    },
+    {
+      "name": "frontend build source equals current source",
+      "passed": true
+    },
+    {
+      "name": "exact API build settings",
+      "passed": true
+    },
+    {
+      "name": "served bytes equal recorded build: demo.html",
+      "passed": true
+    },
+    {
+      "name": "served bytes equal recorded build: index.html",
+      "passed": true
+    },
+    {
+      "name": "served bytes equal recorded build: assets/demo-CVYX95Ri.js",
+      "passed": true
+    },
+    {
+      "name": "served bytes equal recorded build: assets/FictionalAssessment-Ca5gn51W.css",
+      "passed": true
+    },
+    {
+      "name": "served bytes equal recorded build: assets/FictionalAssessment-DgWBF5_Z.js",
+      "passed": true
+    },
+    {
+      "name": "served bytes equal recorded build: assets/main-CxykOOFA.js",
+      "passed": true
+    },
+    {
+      "name": "18325 health",
+      "passed": true
+    },
+    {
+      "name": "18326 health",
+      "passed": true
+    },
+    {
+      "name": "unauthorized private session denied/no-store",
+      "passed": true
+    },
+    {
+      "name": "existing container preserved: ibe160-tablet-prep-gateway-1",
+      "passed": true
+    },
+    {
+      "name": "existing container preserved: ibe160-tablet-prep-private-api-1",
+      "passed": true
+    },
+    {
+      "name": "existing container preserved: ibe160-story123-tests-private-api-1",
+      "passed": true
+    },
+    {
+      "name": "existing container preserved: ibe160-story123-tests-api-1",
+      "passed": true
+    },
+    {
+      "name": "existing container preserved: ibe160-story12-integration-api-1",
+      "passed": true
+    },
+    {
+      "name": "existing container preserved: ibe160-story12-integration-private-api-1",
+      "passed": true
+    },
+    {
+      "name": "existing container preserved: ibe160-story123-tests-db-1",
+      "passed": true
+    },
+    {
+      "name": "existing container preserved: ibe160-story123-tests-private-db-1",
+      "passed": true
+    },
+    {
+      "name": "existing container preserved: ibe160-story12-integration-db-1",
+      "passed": true
+    },
+    {
+      "name": "existing container preserved: ibe160-story12-integration-private-db-1",
+      "passed": true
+    },
+    {
+      "name": "existing container preserved: ibe160-story122-tests-private-api-1",
+      "passed": true
+    },
+    {
+      "name": "existing container preserved: ibe160-story122-tests-api-1",
+      "passed": true
+    },
+    {
+      "name": "existing container preserved: ibe160-story122-tests-private-db-1",
+      "passed": true
+    },
+    {
+      "name": "existing container preserved: ibe160-story122-tests-db-1",
+      "passed": true
+    },
+    {
+      "name": "existing container preserved: ibe160-story121-tests-private-api-1",
+      "passed": true
+    },
+    {
+      "name": "existing container preserved: ibe160-story121-tests-private-db-1",
+      "passed": true
+    },
+    {
+      "name": "existing container preserved: ibe160-tablet-prep-access-gate-1",
+      "passed": true
+    },
+    {
+      "name": "existing container preserved: ibe160-tablet-prep-private-db-1",
+      "passed": true
+    },
+    {
+      "name": "existing container preserved: ibe160-private-work-private-api-1",
+      "passed": true
+    },
+    {
+      "name": "existing container preserved: ibe160-fictional-assessment-frontend-1",
+      "passed": true
+    },
+    {
+      "name": "existing container preserved: ibe160-fictional-assessment-api-1",
+      "passed": true
+    },
+    {
+      "name": "existing container preserved: ibe160-private-work-private-db-1",
+      "passed": true
+    },
+    {
+      "name": "existing container preserved: ibe160-fictional-assessment-db-1",
+      "passed": true
+    }
+  ],
+  "phase": "complete",
+  "revision": "5ca3f7df73f4cf49f5244dbc97a0a3ebb8de9891",
+  "versions": {
+    "host": "Windows-11-10.0.26300-SP0",
+    "host_python": "3.12.10",
+    "node": "v24.19.0",
+    "compose": "5.5.1",
+    "postgresql": "postgres (PostgreSQL) 17.11",
+    "api": {
+      "python": "3.13.16 (main, Oct  6 2026, 02:02:59) [GCC 14.2.0]",
+      "packages": {
+        "fastapi": "0.149.0",
+        "psycopg": "3.3.6",
+        "pdfplumber": "0.11.10",
+        "uvicorn": "0.54.0"
+      }
+    }
+  },
+  "backend_sha256": {
+    ".dockerignore": "b48d4c45e9ad73ebe416bded118bb8bfbe0adafb4e51db8902e8870205dcdb25",
+    "Dockerfile": "c91d60082825b71add45278fee6666de7069d0584b191c0d1ecc379df83e241d",
+    "requirements.in": "69ff61da71e65a508cbf1c8adf6c7d75363da0eac1d61b04e73e87974ae28b26",
+    "requirements.lock": "3bdc62f8eb049cbc5b25ec3c3eae78afc460f7b10ab55bf7a9b0ee55025f2c57",
+    "app/auth.py": "d8f729690afd3ddbb79724717b385ffd2ab1226a8cb4f207c545afa303e67aad",
+    "app/bus_value.py": "5be4861d3d57d0e7f4ddc908fcd6fbc5ccd52d4940d25283969a6574c783b49b",
+    "app/domain.py": "00caf3939819d84128958d86cea4fc25f5f8ab52d78df894443520ed2c5949ca",
+    "app/draft_domain.py": "2af54e480868792b89ed1822d30a12d10af2d5e39f240e19960044b69f836589",
+    "app/draft_storage.py": "865c849b96ba2af6ebcf6089aebe7812cb93752d5f076dc7f7e55948b4cf648b",
+    "app/draft_time.py": "b6c958f2059a2852aa033ed7cf7c26141cfe231581dc24c427d175d337895abf",
+    "app/import_issues.py": "b9b573cd43f172078dc1e5701689f26c3ba19ce71d8aca45d41612e072f27207",
+    "app/main.py": "29e1b9f48c8807ccb891521131cb104cbebb7e80f164f8e63698da0847d68aea",
+    "app/manage.py": "68640add1f88a9d9f329504c9fc17c082bbc1e25196eb0fe199b827a198f821a",
+    "app/notice_reader_domain.py": "11dc65c6d65e02fe0170fe408a09f0470c10a54bb6e2b0f9735d6d63aa4390fc",
+    "app/pdf_import.py": "06ae62d41f073124af7602cc0e963dd5424b0d5956b3af2083149d91309fc263",
+    "app/private_import.py": "bef1a0ce951826cd59810196f97454c0e05ff0a23f99e8b6c3fb98a7948b2d59",
+    "app/private_main.py": "826c6833a32482a47f35ec9a9fa6bce18fc921c2cb8de06a1e997d3644596b5e",
+    "app/private_storage.py": "d42388811c09adb0d62c302db6fe0b5cac522fc25d8ca6ae5bc2fc4ec10dac62",
+    "app/qualify_imports.py": "4e29620264ed463d6a12406d712424ad040a6354eb5fcb9bbbc35141a3a7658d",
+    "app/run.py": "2f0de523ef255ed144194d6e0b25f7aef920ef503f9b3e3342d7004520f3d0f1",
+    "app/storage.py": "07be14df4c897d9859112e28e68e9e186383064653a83d1e9727ae11489f1b57",
+    "app/workday_bus_domain.py": "8eaad1875aa29e748387928076812ff72593b327e937adcbeaea5272050ab89f",
+    "app/workday_bus_storage.py": "eb5e99d0d47ef795358f1e58411731446174f83e68467d5f778b32ec31fcc7d9",
+    "app/workday_domain.py": "d7ce2bdeef3b1db4b7cd4ca0f8916108cc11d44eb69d4a4f578f3b40cea9a4c6",
+    "app/workday_lifecycle_domain.py": "f0d9332df28a98fb4325b24c6b7f4f523b13f898ee0721832d128164d6d4cfa4",
+    "app/workday_lifecycle_storage.py": "302ad49cd38bfd74b043bccfb8d846552f28ecaae0e545e7ad8e195cda846048",
+    "app/workday_notice_domain.py": "ce7ded29b9402bdc3848038197ba7d077ef1c54fa601978e3ebb6ebdb802a194",
+    "app/workday_notice_storage.py": "1c9453b65dd16aa0447b02827af8371c585792ce698835a8542b6c302101db0f",
+    "app/workday_outcome_domain.py": "020d606d32e8766986b7410c52f4aa7e02a9ffad5a02bd5bf0e40116d4de98f8",
+    "app/workday_outcome_storage.py": "e425963d6182fbf9a0488a091b7f48b7e2e70c7a0683c8fffbebfbdb2562d4cd",
+    "app/workday_selection_domain.py": "7b26d2fe1b687dc71e7199e722eb0f2342b54204a55a5d36066ec5075327532b",
+    "app/workday_selection_storage.py": "172ece4223332e3367bd402c1d9dcb269c414ad38b820f1073918602514eaabb",
+    "app/workday_storage.py": "466e6eeabe43b1e77f2aaa2d111986c25dc200b7c71598341eeddee3d7bdd3d9",
+    "app/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "migrations/001_initial.sql": "91ddb841c46c2eb2bc052acdb90c2462d32ae25107d08b3ea361779533e0eb60",
+    "tests/test_account_notices.py": "4f13c365c0170f75d854c238040a992a7d05a449b98c72f09bdc099aa7183a27",
+    "tests/test_assessment.py": "8e18cabdc2e6a900390d94148b50af2c792e5fd9f8c1219a4b369b665ae2dd59",
+    "tests/test_notice_reader.py": "17608a11f24cf622c8694620c7e60a152062985e3d2dcff189ed24549c1a5c7c",
+    "tests/test_pdf_import.py": "38cf9ee68891de7474a89536b087484a1238c2ab0bee1d49beba24bd0a714e4f",
+    "tests/test_private_access.py": "0d0dc93e5af201862e57cf14586ce11732c34747da94a01594fe38955a33a50f",
+    "tests/test_private_bus.py": "a7ff2ef36b3644a4914f5eb7f5a0cdf2e8b5d6c371ca0a9b2bac97431ecc10ec",
+    "tests/test_private_drafts.py": "af028cb572b1c7716e0193e0badb2ad8e51c021b4e7ee78a170f16d3da1b8813",
+    "tests/test_private_import.py": "dadb4f44276375b3ef809e1148d58cd8675b3b1e93956bd151f6c7082e717972",
+    "tests/test_private_notices.py": "53fdbc03da5630339abb75dedb22741795e35301f836ede367d31fd49927cfc5",
+    "tests/test_private_outcomes.py": "6960f7b8d6ab98816a64d58e0556b0fd06a516627a2b44b8d957956e714cb03b",
+    "tests/test_private_selection.py": "88149f5012bed2a27a209ebd012e435463aee77d8e5f200b2a6d83cce19419de",
+    "tests/test_private_start.py": "29e986cb04d2e64cc3b20d64697c67e26e3b8b0797304bfd0037f39ff0ff9225",
+    "tests/test_private_workdays.py": "58541c375468058649ed263c423b233a6fd9f5c4575d11efff78bbb0dd05e9b2",
+    "tests/test_retained_data.py": "60730f54c306b106bc62865956e5977889dd1e6fd421d5925185ad99b137b8fc",
+    "tests/test_tablet_transport.py": "07764f072c78f9e2582758dcc2a1d7d5cc642e4b6ccdbeee7e84ea08659e55d5",
+    "migrations/private/001_access.sql": "503e33d0d0713cf219b51c15f1b1a0183f654f2bb71b32a31bb331070a96df93",
+    "migrations/private/002_drafts.sql": "2e83389f35f31e5ab33de0709cdce6bed3ec4bd14fbe643c88f53792363043f0",
+    "migrations/private/003_draft_deletions.sql": "13802f0a09e26ccab4f8380f1af2de642777d8f5b67e1f25a27f349b4ff9f482",
+    "migrations/private/004_workdays.sql": "7366bf68090b0e67a4df6717bb29490f0aa37e763d2b4e5482fff5540e0f9e24",
+    "migrations/private/005_workday_deletions.sql": "8dc45a272ff0bc3e168cc32b20683e7df45f7cac31dc49e70f9936c8aa90fccd",
+    "migrations/private/006_workday_bus.sql": "e4b6f96a0ce2d3622c3e83b90adbe1c7f7e843cb88611f35041943cb6d56b84d",
+    "migrations/private/007_draft_contracts.sql": "269440bb8682396a829f6c3cbad3fb5a30dc3775002838f81e5c9fb8d19631c3",
+    "migrations/private/008_review_feedback.sql": "631cc9302e14099f96d0d76b9860b5559e0a8490225576d4ff8c24934636c126",
+    "migrations/private/009_workday_selection.sql": "e090e74b4345b1659975d583a95889940e9e67035c359c35e8c40c6f73c28d44",
+    "migrations/private/010_outcomes_and_closure.sql": "0d3de44e334e9c064b597f1ea7605cf447986dd8736a0750680f72d8795f48a6",
+    "migrations/private/011_manual_notices.sql": "43a7fed3daede659fbfed30cf952c6b3c7fb1aadfcca98f8034461a1ed94bc57",
+    "migrations/private/012_real_notice_sources.sql": "0f48d00335ad7c29c096d984b8a5bd5ba03ebbbdc2562549a45cfab1b35c68fc",
+    "migrations/private/013_account_notice_registry.sql": "50b8a90bf1e9ae446a5d8f8d2a028bfac82ffba3bb057c648e8e7b35eb492c36",
+    "migrations/private/014_notice_creation_admissions.sql": "21c2a76f50030cd5709c3b75b7092850cee7663170300cfd5de20118ad647b2b",
+    "tests/fixtures/import-source-2026-10-20.md": "c221000e9d6b1314749efb918af05de3e8a3f4e133147c80384123d2a033d1c3",
+    "tests/fixtures/import_additional_expected.json": "9046a9ee64823475ed743590f91b52964cf9f8a42c6d96cda2b294f14a8aef22",
+    "tests/fixtures/import_expected.json": "184082d7c9dca5a45c5e6d23d95a9f63c8fbc0fcdf43fab3e607dbadef1259bc"
+  },
+  "api_containers": {
+    "api": {
+      "id": "6a6df1656f03bc9180c7e7468d20bd5cc2c703a05d80304c897c6358a0ce108f",
+      "image": "sha256:af878d335c49f418427cf4d6a48bea57967f115a27c9aaaeba570bff1c445a49",
+      "started_at": "2026-10-28T06:08:40.932099569Z"
+    },
+    "private-api": {
+      "id": "289c5d9b71d7e27bdea4da376798120978ee8832e5dc001202fe9848e9882a1a",
+      "image": "sha256:5bed236d59ef8338318d3148118630c5c31111e1005587e94205a933854adc2a",
+      "started_at": "2026-10-28T08:04:54.529027488Z"
+    }
+  },
+  "frontend_source_sha256": {
+    ".dockerignore": "4752c9894b0117fdef2f7f8d04cfc11518105de53a1f69fb887b409890faa834",
+    "compose.tablet.yaml": "bae0685cf424f65e162828d1cbee2c0ae7c8ee7e08655670e855dd6f13fb1c73",
+    "deploy/tablet/Dockerfile": "7152f852374709274a40e599583d1a0388bca34546f7bcc12dcb8ad6a4103f02",
+    "deploy/tablet/index.html": "c04eb02e1f1d6d6d555593415ec272f4d8d7002533d7d597bd277593261a3f31",
+    "frontend/demo.html": "b903169bdbf0b061ba3751785cc0a55c3c639846343eb374536078b3b930482a",
+    "frontend/index.html": "1b2491ecc40bc60d0d03790ca66e50eeacc43132233f7465fbb956d0f3b99dbc",
+    "frontend/package-lock.json": "f79805cfd50c3866147a0984c0bb8585e1c40c66ca28997cfaaf5f4479534e2f",
+    "frontend/package.json": "f970fee83af9ca2f67a7ce8a34545ae21f7a303152d0e3202745fe8e8e9911b0",
+    "frontend/src/FictionalAssessment.tsx": "a16d8d02c51c8fbe7184f13c8fd9ded9013775e59c804282f78b437199af78c9",
+    "frontend/src/PrivateAccess.tsx": "7d0643efb9362577b7d37ca8b87e6d1c4315869c3212b9f9f31a0686e350d08d",
+    "frontend/src/PrivateActivitySelection.tsx": "bac5fa305697b260823e9db6455a4aa906e2e73b7a2f578fead78f4b7aad2e68",
+    "frontend/src/PrivateBus.tsx": "5aa301efa5ac8351354e7957867d718e115ccc578864e11c29434c32a46444ee",
+    "frontend/src/PrivateConfirmation.tsx": "8e815bf0a08e4cf41f6e6cf8aef55fa59fd1b28f9e929021f4968b4de13732a0",
+    "frontend/src/PrivateDayOverview.tsx": "d001a712f6cdf3f43c1626493a584106aa4023fb305bc6c12b11555b4d405c4d",
+    "frontend/src/PrivateDrafts.tsx": "4c3d4e1fbae4a21379b2759453ed993820c08c2b883f38c952cfdcb556784bf9",
+    "frontend/src/PrivateImport.tsx": "be0a58ec2b036d939d1aade4fdfde1dd8c970fd923b6b2d70bdc5212138c175d",
+    "frontend/src/PrivateNoticeReader.tsx": "c67efe75e409afe78dad5b5dddd86032d0e47b6ef03ff8a0f87bd60f9ea522f8",
+    "frontend/src/PrivateNotices.tsx": "c0c51570b3e557c00b9a92da628e35fe4fbd150b5476e476021cb74bb968ee8c",
+    "frontend/src/PrivateShiftStart.tsx": "a8ac38bb86ea1ab3384e50badeee7895f25a97c86c71cf17f8515b53bc96024c",
+    "frontend/src/PrivateTimeInput.tsx": "5d41813cf5ee1c25bbd9b939ada5be6281073145ad8883821787195d243ab2aa",
+    "frontend/src/PrivateWorkdayProgress.tsx": "5737a69a9e6d5d603ae7060adfb80b015c8f2eb7a6656bfdeb68169c78957918",
+    "frontend/src/PrivateWorkdayView.tsx": "9c5f6494bda6f3ddfaa79a14ec1934adfad7035cea74a2dfa75a9606bb291c83",
+    "frontend/src/SelectedActivityDetails.tsx": "e0704da99335bbf0666d50aaee94129049965371f0ca1568a31dbc290c836749",
+    "frontend/src/activityChoiceLabel.ts": "9119abac5644752c520bfb857d711651a08f5695e3c32573d0b011b8991ef559",
+    "frontend/src/busValue.ts": "124ab831a1bd1cf5d003db5d92ca8afc91387638120dc67d67be6261abff8a2d",
+    "frontend/src/dayOverview.ts": "b699bc425b36b6e1625d0d6a1b7b3bcc9c9e0b3b4fcd9beb815b1d606f43d642",
+    "frontend/src/demo.tsx": "2ea374f95ab0637f4f086f347d3933bf74fa250c5c1e4f5a49c7318a92536e1c",
+    "frontend/src/draftInterpretation.ts": "1417161dd95d32086f6dd6c27e0b339673363415a49a47c3548f5a086a1949f1",
+    "frontend/src/fictional-assessment.css": "84658fb27ad5a3c984f9cbc14bc52cf6c082ae22fc126c5446bf62822f940f7c",
+    "frontend/src/fictionalAssessmentModel.ts": "a1ca9004a046652b9af725cf887c390ce6961949412968ec0b3acb011bf974c1",
+    "frontend/src/main.tsx": "e9300c44c4f5c164431ce81bbf40cbc351e09d550f4cd9a81868c74fbe04d6fd",
+    "frontend/src/pdfUpload.ts": "3feee43873a837fe5c358692135e2922b3338e49cba973a69278fbc88fda8bb6",
+    "frontend/src/privateClock.ts": "dbcc746459d8f6b79ea458afb94454d1b7aa654c272ccdf8456ceec66a2ad4b5",
+    "frontend/src/recoverOperation.ts": "155e99d62a16aa731f8ac761e6b9802cd1f882aa414e7fca1e1429148eb170a4",
+    "frontend/src/style.css": "2ccf11cc25117dbf990ade50f99b878dfa346efc0c21de35f4d51252e482dc90",
+    "frontend/src/tablet.tsx": "fac0c8558914c8837614d8646462b5607b303fbd7255b0e0f2d69d9fc2aad753",
+    "frontend/src/theme.tsx": "a07f570968856781dc80434fa8132d7b099fa5ce318a4ba1df79002243f72b1b",
+    "frontend/src/useWorkdayResource.ts": "fba86b3dc20a09897764db76548bbea0654aec1d5f000a6160815291a9753364",
+    "frontend/src/vite-env.d.ts": "424faf9241dd699dda995b367ed36665732da1e6ec1f33b2fd40394488ecac92",
+    "frontend/tsconfig.json": "33d46914a31f3bea00112957323a794e74ac90297f4d14eb3bd9b9282e7c9ebe",
+    "frontend/vite.config.ts": "a5a7bf8825ce70359dd24f69e982b7f8694005cf3b0be00e2707841095701543",
+    "frontend/vite.story124-tablet.config.ts": "a24f1882371ab18354d93608d553d2efe642dacc5f3d0388026d6fc6e443aa8f"
+  },
+  "effective_api_settings": {
+    "VITE_PRIVATE_API_BASE": null,
+    "VITE_PRIVATE_API": "http://127.0.0.1:18326",
+    "VITE_FICTIONAL_API": "http://127.0.0.1:18325"
+  },
+  "served_sha256": {
+    "demo.html": "4b5537641378df722b5ed462add7f936fc5d6175075cbeb1a34ba665349ed747",
+    "index.html": "ca0509081c73c070bcb85ed8a83939f3aeb224e2b1dcb4efff4ba29abca47ec2",
+    "assets/demo-CVYX95Ri.js": "426dd3c6fb5fa7af760bd0a18c8503c99e63f433ac8403a78427f04bc476c3ee",
+    "assets/FictionalAssessment-Ca5gn51W.css": "d436cb47d234e7a034e820876840f7cb88c6e119b2912f0c3cb996228416e2d3",
+    "assets/FictionalAssessment-DgWBF5_Z.js": "7c658dbd5e696de8b7feb29b3b34f3249d07fcd4eabddcea0a2eb7bd5b9cff03",
+    "assets/main-CxykOOFA.js": "2525f87af69be64edc267c2e64b98af7e8a50b1694b42277475f103583c45028"
+  },
+  "preserved_container_names": [
+    "ibe160-tablet-prep-gateway-1",
+    "ibe160-tablet-prep-private-api-1",
+    "ibe160-story123-tests-private-api-1",
+    "ibe160-story123-tests-api-1",
+    "ibe160-story12-integration-api-1",
+    "ibe160-story12-integration-private-api-1",
+    "ibe160-story123-tests-db-1",
+    "ibe160-story123-tests-private-db-1",
+    "ibe160-story12-integration-db-1",
+    "ibe160-story12-integration-private-db-1",
+    "ibe160-story122-tests-private-api-1",
+    "ibe160-story122-tests-api-1",
+    "ibe160-story122-tests-private-db-1",
+    "ibe160-story122-tests-db-1",
+    "ibe160-story121-tests-private-api-1",
+    "ibe160-story121-tests-private-db-1",
+    "ibe160-tablet-prep-access-gate-1",
+    "ibe160-tablet-prep-private-db-1",
+    "ibe160-private-work-private-api-1",
+    "ibe160-fictional-assessment-frontend-1",
+    "ibe160-fictional-assessment-api-1",
+    "ibe160-private-work-private-db-1",
+    "ibe160-fictional-assessment-db-1"
+  ],
+  "passed": true
+}

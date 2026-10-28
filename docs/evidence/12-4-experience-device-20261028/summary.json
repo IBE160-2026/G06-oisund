@@ -1,0 +1,61 @@
+{
+  "recordedAt": "2026-10-28T15:39:27.888Z",
+  "head": "e655c02eefbb60032974f35a189f49009ae014f5",
+  "implementation": "5ee35efb3753bed10bafc21a53a88fec3d93b287",
+  "browser": "155.0.8059.85",
+  "brave": "1.97.59",
+  "device": {
+    "model": "TB361FU",
+    "android": "16"
+  },
+  "method": "Actual USB Lenovo/Brave, native Android picker/rotation, CDP touch and DOM/keyboard/select; actual API/PostgreSQL; no device metrics/lifecycle emulation or API mocks",
+  "records": 17,
+  "passed": 13,
+  "failedAttempts": 4,
+  "countingLimit": "Grouped exploratory attempts, not a clean suite or unique test count; every requested technical scenario subsequently passed. Failures retained.",
+  "priorTargetCount": 5,
+  "priorTargetsPreserved": true,
+  "ownOnlyNewTarget": true,
+  "orientationRestored": {
+    "accelerometer": "1",
+    "rotation": "1"
+  },
+  "servedAsset": "/assets/main-BRJ12oLt.js",
+  "servedSha256": "86df9a48bc01673b421f5f925ac6335793468a966e54df19ff93cdb88ea784b3",
+  "viewport": {
+    "width": 1280,
+    "height": 605,
+    "dpr": 2
+  },
+  "stores": {
+    "local": [],
+    "session": [],
+    "databases": 0,
+    "caches": 0,
+    "workers": 0
+  },
+  "finalUrl": "http://127.0.0.1:15324/private",
+  "finalAccount": "Dedicated synthetic physical automation account; credentials ignored in .private-runtime/story124-experience-device.json; fresh owner-retest account remains unused",
+  "nativeUiDumpRemoved": true,
+  "productChanged": false,
+  "ownerAcceptance": "explicitly not approved; personal assessment remains pending",
+  "executedSourceSha256": {
+    "consultation.cjs": "9a2432c6971deace3f4840141f1db2386a4bde8e3abd4193163ee87927b4eea8",
+    "driver-initial-snapshot.cjs": "5736438ff08b84a2a183c8bef5b396b7df225f4a02388c6daccfc01dd0c12d0a",
+    "driver.cjs": "773c55a6ae7efb3485c54ab90ffbe53e12e21213b512fbf3a4f28c90de803cd3",
+    "finish-C.cjs": "e29e2ec193078a0511f077af73f42bce6dde705eba85b74df0a7cd7f9dbc2be1",
+    "flow-A.cjs": "50ac6934e283b22ab9c11f8628265d17e817f57268f36930c4ae9c4579a6ad14",
+    "flow-C.cjs": "1570b417ca8f907d89440d618feb13a27898ee9e3b3a23941879c05851179625",
+    "helpers.cjs": "7604aef9bebf4d157e896660c2fde7dd50336fc5c843fc0e9a9e8b6f2efaf313",
+    "init.cjs": "3f0539b2ab80276a99df4fb985af53476577b43e60ff655bfa43a48e3668024f",
+    "inspect.cjs": "3ddacce6954d94508925819dab393ffcc3f85cc043b8405f90bc8af71b2494ff",
+    "login.cjs": "bfed6bc59d1b7ef8e547fb3db549becb0c2510d067295c4927ee6e9cc7b651ed",
+    "make-helpers.cjs": "8caeff5d88ce149c3367838406df2a960bc3d7d5ee98507ad44175725dc65fcb",
+    "native-inspect.cjs": "3d596341c40e9cd8eead346c3b27660cae84dd71be092aa0f5084672b0053bd7",
+    "native-only-inspect.cjs": "fbbe751e53d7e258545971b56cb77ba22178e1e5b80cc012cedb9b4b7034e485",
+    "native-retry.cjs": "eaa28ce29d9d9f01b39056c614ff9bd865e4e823e8ce8f30cd1e0b54c73bfcad",
+    "native.cjs": "f7721d809a1c3221f493dbcfdcd0545712538760a119c950bc8d4028f6a98550",
+    "patch-native.cjs": "9eaa8a8b4055520bd08d261261deec96e7d342c27e7f7c025cd76bf355f65c6b",
+    "postflight.cjs": "1c121beea65eea93151013517e955eae492c5cbb99b5caea173ae2073041c190"
+  }
+}

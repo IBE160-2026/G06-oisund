@@ -396,7 +396,7 @@ FR-7–9, FR-15 and FR-23 are deferred; the remaining original FRs are narrowed 
 
 ### Story 12.4: Verify the complete user flow
 
-**Stable alias:** V1-19. **Status:** backlog; approved scope, implementation/evidence not started.
+**Stable alias:** V1-19. **Status:** in-review; [implementation specification](../implementation-artifacts/spec-12-4-complete-user-flow.md) and [executed evidence](../../docs/evidence/12-4-handoff.md), owner acceptance pending.
 **Depends on:** V1-15, V1-16, V1-17, V1-18.
 **Traceability:** FR-1–25 active subset; NFR-2/3/4; AC-01–09/11/12; SCOPE-02.
 

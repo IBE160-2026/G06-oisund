@@ -188,7 +188,7 @@ for (const width of [768, 1440]) test(`keyboard save and reopen midnight facts a
   await editor(page); await page.getByRole('button', { name: 'Lagre utkast', exact: true }).focus();
   await page.keyboard.press('Enter');
   await expect(status(page)).toHaveText('Lagret. Versjon 1.');
-  await expect(page.getByRole('heading', { name: 'Rediger utkast' })).toBeFocused();
+  await expect(page.getByRole('button', { name: 'Lagre utkast', exact: true })).toBeFocused();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   expect(await page.evaluate(async () => [localStorage.length, sessionStorage.length, (await indexedDB.databases()).length])).toEqual([0, 0, 0]);
   await page.screenshot({ path: `../docs/evidence/11-2-regression-9-4-${width}.png`, fullPage: true });

@@ -1,0 +1,122 @@
+[
+  {
+    "test": "activity facts keyboard and enlargement 768 Day",
+    "state": "11-2-768-day-Neste aktivitet",
+    "values": {
+      "text": 14.387145266736685,
+      "boundary": 14.387145266736685,
+      "focus": 21,
+      "focusWidth": 3
+    }
+  },
+  {
+    "test": "activity facts keyboard and enlargement 768 Day",
+    "state": "11-2-768-day-Tilbake til dagen",
+    "values": {
+      "text": 14.387145266736685,
+      "boundary": 14.387145266736685,
+      "focus": 21,
+      "focusWidth": 3
+    }
+  },
+  {
+    "test": "activity facts keyboard and enlargement 768 Night",
+    "state": "11-2-768-night-Neste aktivitet",
+    "values": {
+      "text": 12.855408864593942,
+      "boundary": 12.855408864593942,
+      "focus": 11.45007504521487,
+      "focusWidth": 3
+    }
+  },
+  {
+    "test": "activity facts keyboard and enlargement 768 Night",
+    "state": "11-2-768-night-Tilbake til dagen",
+    "values": {
+      "text": 12.855408864593942,
+      "boundary": 12.855408864593942,
+      "focus": 11.45007504521487,
+      "focusWidth": 3
+    }
+  },
+  {
+    "test": "activity facts keyboard and enlargement 1024 Day",
+    "state": "11-2-1024-day-Neste aktivitet",
+    "values": {
+      "text": 14.387145266736685,
+      "boundary": 14.387145266736685,
+      "focus": 21,
+      "focusWidth": 3
+    }
+  },
+  {
+    "test": "activity facts keyboard and enlargement 1024 Day",
+    "state": "11-2-1024-day-Tilbake til dagen",
+    "values": {
+      "text": 14.387145266736685,
+      "boundary": 14.387145266736685,
+      "focus": 21,
+      "focusWidth": 3
+    }
+  },
+  {
+    "test": "activity facts keyboard and enlargement 1024 Night",
+    "state": "11-2-1024-night-Neste aktivitet",
+    "values": {
+      "text": 12.855408864593942,
+      "boundary": 12.855408864593942,
+      "focus": 11.45007504521487,
+      "focusWidth": 3
+    }
+  },
+  {
+    "test": "activity facts keyboard and enlargement 1024 Night",
+    "state": "11-2-1024-night-Tilbake til dagen",
+    "values": {
+      "text": 12.855408864593942,
+      "boundary": 12.855408864593942,
+      "focus": 11.45007504521487,
+      "focusWidth": 3
+    }
+  },
+  {
+    "test": "activity facts keyboard and enlargement 1440 Day",
+    "state": "11-2-1440-day-Neste aktivitet",
+    "values": {
+      "text": 14.387145266736685,
+      "boundary": 14.387145266736685,
+      "focus": 21,
+      "focusWidth": 3
+    }
+  },
+  {
+    "test": "activity facts keyboard and enlargement 1440 Day",
+    "state": "11-2-1440-day-Tilbake til dagen",
+    "values": {
+      "text": 14.387145266736685,
+      "boundary": 14.387145266736685,
+      "focus": 21,
+      "focusWidth": 3
+    }
+  },
+  {
+    "test": "activity facts keyboard and enlargement 1440 Night",
+    "state": "11-2-1440-night-Neste aktivitet",
+    "values": {
+      "text": 12.855408864593942,
+      "boundary": 12.855408864593942,
+      "focus": 11.45007504521487,
+      "focusWidth": 3
+    }
+  },
+  {
+    "test": "activity facts keyboard and enlargement 1440 Night",
+    "state": "11-2-1440-night-Tilbake til dagen",
+    "values": {
+      "text": 12.855408864593942,
+      "boundary": 12.855408864593942,
+      "focus": 11.45007504521487,
+      "focusWidth": 3
+    }
+  }
+]

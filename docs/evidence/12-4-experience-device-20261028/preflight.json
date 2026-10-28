@@ -1,0 +1,43 @@
+{
+  "date": "2026-10-28T15:23:52.573Z",
+  "product": "5ee35efb3753bed10bafc21a53a88fec3d93b287",
+  "head": "e655c02eefbb60032974f35a189f49009ae014f5",
+  "browser": "155.0.8059.85",
+  "priorTargets": [
+    {
+      "id": "2AB1DFF3BFC20DCA3247A60E3ABF7025",
+      "urlSha256": "c170ebe27231a3cde5aaf1d82ac3876b2d5781ac5b8a238cb80dbea9e87d5d5b"
+    },
+    {
+      "id": "8EA6A35780F5534647F61E1DB61EF9C0",
+      "urlSha256": "b1f4c3ded19f684ff78a317c47f793a1c1cdacbaf71a447c214fa14183fc5999"
+    },
+    {
+      "id": "98DC3098B039D88F7BC83957BBD8AC4C",
+      "urlSha256": "f5ba0f8a28980d0f8b52ae8816c7bc67e69a350588d4965dfb449ccd809f341d"
+    },
+    {
+      "id": "E31A3A70A96F2F0D7B78BD778C98649A",
+      "urlSha256": "6cff1258b01137eff291b6d841ce4027f67e5fe11a6be7c01142a4eef72d71aa"
+    },
+    {
+      "id": "E33A6F8B7BAB27EABCC7D4185B7F78B4",
+      "urlSha256": "c170ebe27231a3cde5aaf1d82ac3876b2d5781ac5b8a238cb80dbea9e87d5d5b"
+    }
+  ],
+  "ownTarget": "FD1CE7062300DC2A844A45F2F85C097E",
+  "device": {
+    "model": "TB361FU",
+    "android": "16"
+  },
+  "viewport": {
+    "width": 1280,
+    "height": 605,
+    "dpr": 2,
+    "ua": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36"
+  },
+  "loadedAsset": "/assets/main-BRJ12oLt.js",
+  "reverse": "UsbFfs tcp:15324 tcp:15324\r\nUsbFfs tcp:18325 tcp:18325\r\nUsbFfs tcp:18326 tcp:18326\r\n\r\n",
+  "noDeviceMetricsEmulation": true,
+  "noApiMocks": true
+}

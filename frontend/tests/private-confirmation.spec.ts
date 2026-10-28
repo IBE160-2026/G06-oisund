@@ -404,7 +404,7 @@ test('saved revision review cancels unchanged, editing invalidates, unknowns and
   await page.getByRole('button', { name: 'Avbryt gjennomgang' }).click();
   expect(await (await context.request.get(API + '/drafts/' + draft.id)).json()).toEqual(draft);
   await review(page);
-  await page.getByLabel('Vognløp', { exact: true }).fill('0007');
+  await editor(page); await page.getByLabel('Vognløp', { exact: true }).fill('0007');
   await expect(page.getByRole('region', { name: 'Gjennomgått versjon' })).toHaveCount(0);
   await expect(page.getByRole('button', { name: 'Gjennomgå lagret utkast' })).toBeDisabled();
   await editor(page); await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
@@ -545,6 +545,7 @@ test('corrected imported draft retains readable original source facts in review 
   await preparation(page); await page.getByRole('button', { name: 'Åpne 2031-01-02 · versjon 1', exact: true }).click();
   await review(page);
   const reviewed = page.getByRole('region', { name: 'Gjennomgått versjon' });
+  await reviewed.getByText('Vis alle opplysninger i lagret versjon', { exact: true }).click();
   await expect(reviewed.getByText('Manuelt rettet sted', { exact: true })).toBeVisible();
   await reviewed.getByText('Bevarte kildefakta', { exact: true }).click();
   await expect(reviewed.getByRole('region', { name: 'Kildefakta fra PDF', exact: true }).getByText(/^2030-01-01/).first()).toBeVisible();

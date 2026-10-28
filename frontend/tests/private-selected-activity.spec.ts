@@ -97,9 +97,14 @@ test('delayed upload failure leaves edited draft and focus intact', async ({ pag
   try {
     await page.getByRole('button', { name: 'Forberedelse og planlister', exact: true }).click(); await page.getByLabel('Velg tekst-PDF', { exact: true }).setInputFiles({ name: 'synthetic.pdf', mimeType: 'application/pdf', buffer: Buffer.from('%PDF-synthetic') }); await received;
     await page.getByRole('button', { name: 'Kontroller og rediger utkast', exact: true }).click(); const input = page.getByLabel('Vognløp', { exact: true }); await input.fill('Behold etter feil'); release();
-    await expect(page.getByRole('region', { name: 'Importer tekst-PDF', exact: true, includeHidden: true })).toContainText('PDF-en kunne ikke tolkes');
+    const importRegion = page.getByRole('region', { name: 'Importer tekst-PDF', exact: true, includeHidden: true });
+    await expect(importRegion).toContainText('Tjenesten er midlertidig utilgjengelig');
+    await expect(importRegion).not.toContainText('PDF-en kunne ikke tolkes');
+    await expect(importRegion.getByRole('button', { name: 'Rett eller legg til opplysninger', exact: true, includeHidden: true })).toHaveCount(0);
+    await expect(importRegion.getByRole('button', { name: 'Alt stemmer – lagre og fortsett', exact: true, includeHidden: true })).toHaveCount(0);
     await expect(input).toBeFocused(); await expect(input).toHaveValue('Behold etter feil');
-    await page.getByRole('button', { name: 'Forberedelse og planlister', exact: true }).click(); await expect(page.getByText('PDF-en kunne ikke tolkes.', { exact: false })).toBeVisible();
+    await page.getByRole('button', { name: 'Forberedelse og planlister', exact: true }).click(); await expect(page.getByText('Tjenesten er midlertidig utilgjengelig', { exact: false })).toBeVisible();
+    await expect(importRegion).not.toContainText('PDF-en kunne ikke tolkes');
   } finally { release(); }
 });
 test('exact acknowledged member dates, opposite directions, identical members and pause members survive consultation', async ({ page, context }) => {
@@ -198,10 +203,10 @@ test('uploaded synthetic document passes separate interpretation editor confirma
   const pdf = Buffer.from(python('import sys, base64\nsys.path.insert(0,"/app/tests")\nfrom test_pdf_import import synthetic_text_pdf\nprint(base64.b64encode(synthetic_text_pdf()).decode())\n').trim(), 'base64');
   await page.goto('/private'); await page.getByLabel('Brukernavn', { exact: true }).fill(account.username); await page.getByLabel('Passord', { exact: true }).fill(account.password); await page.getByRole('button', { name: 'Logg inn', exact: true }).click();
   await page.getByLabel('Velg tekst-PDF', { exact: true }).setInputFiles({ name: 'synthetic-11-2.pdf', mimeType: 'application/pdf', buffer: pdf });
-  await expect(page.getByRole('button', { name: 'Bruk som separat nytt utkast', exact: true })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Rett eller legg til opplysninger', exact: true })).toBeVisible();
   await expect(page.getByLabel('Velg tekst-PDF', { exact: true })).toBeHidden();
   await expect(page.getByRole('button', { name: 'Lagre utkast', exact: true })).toBeHidden();
-  await page.getByRole('button', { name: 'Bruk som separat nytt utkast', exact: true }).click();
+  await page.getByRole('button', { name: 'Rett eller legg til opplysninger', exact: true }).click();
   await expect(page.getByRole('heading', { name: 'Nytt manuelt utkast', exact: true })).toBeFocused();
   await expect(page.getByRole('region', { name: 'Importer tekst-PDF', exact: true })).toBeHidden();
   await page.getByLabel('Fra sted', { exact: true }).first().fill('Rettet syntetisk oppmøtested');
@@ -315,7 +320,7 @@ test('held upload completion retains edited draft and offers an explicit return 
     await expect(page.getByLabel('Vognløp', { exact: true })).toHaveValue('Behold dette forslaget');
     await page.getByRole('button', { name: 'Forberedelse og planlister', exact: true }).click();
     await page.getByRole('button', { name: 'Fortsett importgjennomgang', exact: true }).click();
-    await expect(page.getByRole('button', { name: 'Bruk som separat nytt utkast', exact: true })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Rett eller legg til opplysninger', exact: true })).toBeVisible();
     await page.getByRole('button', { name: 'Kontroller og rediger utkast', exact: true }).click();
     await expect(page.getByLabel('Vognløp', { exact: true })).toHaveValue('Behold dette forslaget');
   } finally { release(); }

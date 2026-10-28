@@ -1,0 +1,11 @@
+{
+  "archive": "docs\\evidence\\12-4-bundles\\20261028T063328720658Z-ed96e097-tablet-build.tar.gz",
+  "archive_sha256": "377e0fd96e71d276f521fff44a37d6bc5c1cd0afb357283ea71bf6461a159ea4",
+  "entries": {
+    "record.json": "8c1de2e22ab29b9f17a4f705c3726d59d8874febeba9a9d7c56ac4488c3c5982",
+    "raw/command.log": "516e32cc49154dabe1baf57420e128288bc981a0497d321c011b821cce72067e",
+    "executed-inputs/scripts/verify-story12-integration.py": "b1b7fb4bf92397071be94e39bbb9cbda3568baed96ede5d226abfc6bd02e70e6",
+    "executed-inputs/scripts/verify-story123.py": "22f46e8622c9df302a06c9cc8a658089a114f11686d06ce17fbd2d18e79fb74f",
+    "executed-inputs/scripts/verify-story124.py": "52a8c008987436a8ed629196bd1fc331c37da9ca4da4576e1edf48f142248dc0"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "recorded_at": "2026-10-28T12:52:07.230044+01:00",
+  "observed_at": null,
+  "note": "Actual tool-output observations, recorded after the attempts; not included in the23 grouped rows.",
+  "observations": [
+    {
+      "phase": "Reconnect while native picker remained foreground",
+      "error": "connectOverCDP timeout30000ms retrieving websocket URL",
+      "correction": "Cancel only own picker; verify no save; connect before reopening native selection."
+    },
+    {
+      "phase": "Reconnect after native tab ordering changed",
+      "error": "Exact target guard refused the first URL-matching own demo target before UI action",
+      "correction": "Find stored exact own target ID before interacting."
+    },
+    {
+      "phase": "Preview startup",
+      "error": "Port15324 is occupied; existing listener left untouched.",
+      "correction": "Verified original owned preview44564 and its served/source identity; reused without killing a listener."
+    }
+  ]
+}

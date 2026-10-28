@@ -1,0 +1,13 @@
+{
+  "unqualified": [
+    "physical-recap-C.png",
+    "physical-journey-A.png"
+  ],
+  "reason": "Android CDP fullPage composites repeat viewport tiles; retained as unqualified captures, not visual/layout evidence.",
+  "qualified": [
+    "physical-recap-A-viewport.png",
+    "physical-recap-C-viewport.png",
+    "physical-recap-C-selected-viewport.png"
+  ],
+  "method": "Natural device viewport, fullPage:false; explicit scroll for selected activity; no device metrics emulation"
+}

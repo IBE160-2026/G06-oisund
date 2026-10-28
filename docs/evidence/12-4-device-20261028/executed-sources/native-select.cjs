@@ -1,0 +1,10 @@
+const d=require('./driver.cjs');function xml(){d.device('shell','uiautomator','dump','/sdcard/ibe160-story124-ui.xml');return d.device('exec-out','cat','/sdcard/ibe160-story124-ui.xml');}function nodes(s){return[...s.matchAll(/<node\s+([^>]+)>?/g)].map(m=>Object.fromEntries([...m[1].matchAll(/([\w-]+)="([^"]*)"/g)].map(x=>[x[1],x[2]])));}function nativeTap(n){const b=n.bounds.match(/\d+/g).map(Number);d.device('shell','input','tap',String((b[0]+b[2])/2),String((b[1]+b[3])/2));}
+(async()=>{const{page}=await d.connect();await d.record('Native Android PDF selection returns with original session and exact memory bytes',async()=>{
+ const response=page.waitForResponse(r=>r.url()===d.API+'/imports/pdf'&&r.request().method()==='POST',{timeout:45000});
+ nativeTap(nodes(xml()).find(n=>n['resource-id']==='com.google.android.documentsui:id/option_menu_search'));
+ d.device('shell','input','text','ibe160-story124-synthetic-A');d.device('shell','input','keyevent','KEYCODE_ENTER');
+ let own;for(let i=0;i<5&&!own;i++){own=nodes(xml()).find(n=>n.text==='ibe160-story124-synthetic-A.pdf');if(!own)await new Promise(r=>setTimeout(r,400));}if(!own)throw Error('Own synthetic filename missing from native search');nativeTap(own);
+ const r=await response;d.expect(r.status()).toBe(200);const actual=r.request().postDataBuffer();const expected=d.fs.readFileSync('Eksempelfiler/Testskift-A.pdf');d.expect(actual).toEqual(expected);const imported=await r.json();d.write('import-A.json',imported);
+ await d.expect(d.button(page,'Bruk som separat nytt utkast')).toBeVisible();const drafts=await d.get(page,'/drafts');d.expect(drafts.drafts).toHaveLength(0);
+ const events=await page.evaluate(()=>window.__device124Events);d.write('native-import-events.json',events);await page.screenshot({path:d.path.join(d.out,'native-import-review.png'),fullPage:false});return{status:r.status(),exactBytes:actual.length,sha256:d.crypto.createHash('sha256').update(actual).digest('hex'),drafts:0,events};
+ });process.exit(0);})().catch(e=>{console.error(e.message);process.exit(1)});

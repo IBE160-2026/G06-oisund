@@ -52,7 +52,7 @@ for (const name of ['A', 'B', 'C', 'D', 'E']) test(`generated ${name} real uploa
   let imported: any;
   await page.route('**:8001/imports/pdf', async route => { const response = await route.fetch(); expect(response.status()).toBe(200); imported = await response.json(); await route.fulfill({ response, json: imported }); });
   await page.getByLabel('Velg tekst-PDF', { exact: true }).setInputFiles('../Eksempelfiler/Testskift-' + name + '.pdf');
-  await expect(page.getByRole('button', { name: 'Bruk som separat nytt utkast', exact: true })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Rett eller legg til opplysninger', exact: true })).toBeVisible();
   expect(imported.activities).toHaveLength(events.length);
   assertIndependentImport(imported);
   expect(events.length).toBe(({ A: 5, B: 21, C: 15, D: 16, E: 8 } as Record<string, number>)[name]);
@@ -66,6 +66,7 @@ for (const name of ['A', 'B', 'C', 'D', 'E']) test(`generated ${name} real uploa
       expect(row.raw_code).toBe(event.label); expect(row.start?.slice(0, 16) ?? null).toBe(event.start_local); expect(row.end?.slice(0, 16) ?? null).toBe(event.end_local);
     }
   }
+  await page.getByText('Vis alle kildefakta fra PDF', { exact: true }).click();
   const facts = page.getByRole('region', { name: 'Kildefakta fra PDF', exact: true });
   await expect(facts.locator(':scope > ol > li')).toHaveCount(events.length);
   await expect(facts).toContainText(expected.shift_id); await expect(facts).toContainText(expected.end);
@@ -81,7 +82,7 @@ for (const name of ['A', 'B', 'C', 'D', 'E']) test(`generated ${name} real uploa
   }
   if (name === 'C') expect(imported.activities.at(-1).end.slice(0, 10)).toBe('2030-02-09');
   if (name === 'D') expect(imported.activities.at(-2).type).toBe('Tomkjøring med CAR');
-  await page.getByRole('button', { name: 'Bruk som separat nytt utkast', exact: true }).click();
+  await page.getByRole('button', { name: 'Rett eller legg til opplysninger', exact: true }).click();
   await expect(page.getByLabel('Aktivitetstype', { exact: true })).toHaveCount(events.length);
   await assertAdoptedUI(imported);
   const saving = page.waitForResponse(r => r.url() === API + '/drafts' && r.request().method() === 'POST');
