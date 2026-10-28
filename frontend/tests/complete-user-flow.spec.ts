@@ -40,7 +40,7 @@ async function importAndSave(page: Page, context: BrowserContext, name: string) 
   expect(imported.service_date).toBe(serviceDate);
   expect(imported.import_metadata.header.service_date).toBe(serviceDate);
   expect(imported.import_metadata.header.shift_id).toBe(expected.shift_id);
-  await expect(button(page, 'Bruk som separat nytt utkast')).toBeVisible();
+  await expect(button(page, 'Rett eller legg til opplysninger')).toBeVisible();
   expect((await json(context, '/drafts')).drafts).toHaveLength(name === 'A' ? 0 : 1);
   expect(imported.activities).toHaveLength(events.length);
   for (let i = 0; i < events.length; i++) {
@@ -61,7 +61,7 @@ async function importAndSave(page: Page, context: BrowserContext, name: string) 
   }
   expect(imported.vehicle_duty).toBe(expected.events.find((event: any) => event.kind === 'vehicle').vehicle);
   expect(imported.physical_bus).toBeNull();
-  await button(page, 'Bruk som separat nytt utkast').click();
+  await button(page, 'Rett eller legg til opplysninger').click();
   const tripIndex = events.findIndex((event: any) => event.passenger_service);
   const trip = page.locator('#activity-' + imported.activities[tripIndex].id);
   await trip.getByLabel('Til sted', { exact: true }).fill('Syntetisk manuelt korrigert endeholdeplass');

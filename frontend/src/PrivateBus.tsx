@@ -148,13 +148,14 @@ export function PrivateBus({ id, expiresAt, request, mutation, suspended, expire
     {!available && !comparison && <button disabled={busy || suspended} onClick={() => void revalidate()}>Kontroller plantilgangen</button>}
     {saved ? <>{available && <p>Lagret verdi: <span className="bus-value">{saved.physical_bus ?? 'Ukjent'}</span> · bussversjon {saved.revision}</p>}
       <label>Fysisk buss<input ref={input} value={text} autoComplete="off" aria-invalid={!!busError(text)} aria-describedby={busError(text) ? 'physical-bus-error' : undefined} disabled={!available || readOnly || busy || !!pending || !!comparison || suspended} onChange={event => change(event.target.value)} /></label>
+      {!pending && !comparison && !readOnly && <button disabled={!available || busy || suspended || !editing.current || !!busError(text)} onClick={() => void send()}>Lagre fysisk buss</button>}<p>Knappen lagrer bare fysisk buss. Andre planopplysninger endres ikke.</p>
       <button type="button" disabled={!available || readOnly || busy || !!pending || !!comparison || suspended} onClick={() => change('')}>Tøm fysisk buss</button>
       {busError(text) && <p id="physical-bus-error">{busError(text)}</p>}
       <p>Inntil 100 tegn. Tomt felt betyr ukjent. Tekst og innledende nuller bevares.</p>
       {comparison && <div className="import-warning">{available && <p>Nyere lagret verdi: <span className="bus-value">{comparison.physical_bus ?? 'Ukjent'}</span> · bussversjon {comparison.revision}</p>}<p>Ditt inntastede forslag: <span className="bus-value">{normalized(text) ?? 'Ukjent'}</span></p><button disabled={busy || suspended} onClick={() => void adoptCurrent()}>Last inn lagret buss</button></div>}
       {readOnly && editing.current && !pending && <button disabled={busy || suspended} onClick={() => { adopt(saved); setMessage('Ulagret bussforslag er forkastet. Skiftet er skrivebeskyttet.'); }}>Forkast ulagret bussendring</button>}
       {pending ? <div className="controls"><button disabled={busy || suspended} onClick={() => void send()}>Prøv samme busslagring igjen</button><button disabled={busy || suspended} onClick={() => void send(true)}>Kontroller busslagringen</button></div>
-        : !comparison && !readOnly && <div className="controls"><button disabled={!available || busy || suspended || !editing.current || !!busError(text)} onClick={() => void send()}>Lagre fysisk buss</button><button disabled={busy || suspended || !editing.current} onClick={() => { adopt(saved); setMessage('Endringen er avbrutt. Lagret registrering er uendret.'); input.current?.focus(); }}>Avbryt bussendring</button></div>}</>
+        : !comparison && !readOnly && <div className="controls"><button disabled={busy || suspended || !editing.current} onClick={() => { adopt(saved); setMessage('Endringen er avbrutt. Lagret registrering er uendret.'); input.current?.focus(); }}>Avbryt bussendring</button></div>}</>
       : <button disabled={busy || suspended} onClick={() => void load()}>Hent bussregistreringen igjen</button>}
   </section>;
 }

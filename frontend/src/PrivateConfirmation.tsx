@@ -14,7 +14,7 @@ type Decisions = { operation_id: string; expected_revision: number; acknowledgem
 export type Plan = { id: string; source_draft_id: string; source_revision: number; confirmed_at: string; final_end: string; expires_at: string; state: 'confirmed'; draft: Content; acknowledgements: string[]; classifications: Record<string, string>; unknowns: { id: string; label: string }[] };
 type Summary = Pick<Plan, 'id' | 'source_draft_id' | 'source_revision' | 'expires_at'> & { service_date: string | null };
 type Deletion = { id: string; expires_at: string; body: { operation_id: string; source_revision: number } };
-type Props = { saved: Saved | null; clean: boolean; request: (path: string) => Promise<any>; mutation: (path: string, body: object) => Promise<any>; expired: () => void; suspended: boolean; lock: (value: boolean) => void; screen: 'upload' | 'import' | 'editor' | 'plan'; showPlan: () => void; showPreparation: () => void; planChanged: (value: boolean) => void; consultationChanged: (value: boolean) => void; registryDirty: (value: boolean) => void; registryOpen: (value: boolean) => void; registryNavigation: number };
+type Props = { saved: Saved | null; clean: boolean; request: (path: string) => Promise<any>; mutation: (path: string, body: object) => Promise<any>; expired: () => void; suspended: boolean; lock: (value: boolean) => void; screen: 'upload' | 'import' | 'editor' | 'direct' | 'approval' | 'plan'; showPlan: () => void; showPreparation: () => void; planChanged: (value: boolean) => void; consultationChanged: (value: boolean) => void; registryDirty: (value: boolean) => void; registryOpen: (value: boolean) => void; registryNavigation: number };
 const uuid = (v: any): v is string => typeof v === 'string' && /^[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i.test(v);
 const canonical = (v: any): string => JSON.stringify(v, (_, value) => value && typeof value === 'object' && !Array.isArray(value) ? Object.fromEntries(Object.keys(value).sort().map(key => [key, value[key]])) : value);
 const live = (v: any) => typeof v === 'string' && Number.isFinite(Date.parse(v)) && Date.parse(v) > privateNow();
@@ -105,6 +105,7 @@ export function PrivateConfirmation({ saved, clean, request, mutation, expired, 
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState('Lagre utkastet før gjennomgang.');
   const alive = useRef(true), epoch = useRef(0);
+  const reviewRead = useRef<{ selected: string; generation: number } | null>(null);
   const planRead = useRef<{ id: string; generation: number } | null>(null);
   const title = useRef<HTMLHeadingElement>(null);
   const selected = saved ? saved.id + ':' + saved.revision : '';
@@ -115,6 +116,7 @@ export function PrivateConfirmation({ saved, clean, request, mutation, expired, 
   useEffect(() => { alive.current = true; return () => { alive.current = false; }; }, []);
   useEffect(() => { lock(!!pending || !!deleting || busLocked); return () => lock(false); }, [pending, deleting, busLocked]);
   useEffect(() => { epoch.current++; if (!pending) { setReview(null); setAcks([]); setClasses({}); } }, [selected, clean]);
+  useEffect(() => { if (screen === 'approval') { title.current?.focus(); if (clean && !review && !pending) void begin(); } }, [screen, clean]);
   useEffect(() => {
     if (!plan) { setActivityOpen(false); if (screen === 'plan') showPreparation(); }
   }, [!!plan, screen]);
@@ -178,6 +180,8 @@ export function PrivateConfirmation({ saved, clean, request, mutation, expired, 
   async function begin() {
     if (!saved || !clean || pending || deletionRef.current || busLockedRef.current) return;
     const generation = epoch.current;
+    if (reviewRead.current?.selected === selected && reviewRead.current.generation === generation) return;
+    const attempt = { selected, generation }; reviewRead.current = attempt;
     setBusy(true);
     try {
       const value = await mutation('/workday-reviews', { draft_id: saved.id, expected_revision: saved.revision });
@@ -193,7 +197,7 @@ export function PrivateConfirmation({ saved, clean, request, mutation, expired, 
         || (value.blockers.length === 0 && (Date.parse(value.final_end) !== finalEnd(saved.draft) || Date.parse(value.expires_at) - Date.parse(value.final_end) !== 7 * 86400000 || !live(value.expires_at)))) throw Error();
       setReview(value); setAcks([]); setClasses({}); setMessage('Gjennomgå den lagrede versjonen og beslutningene som er oppført.'); title.current?.focus();
     } catch (error) { if (alive.current && generation === epoch.current) failure(error); }
-    finally { if (alive.current) setBusy(false); }
+    finally { if (reviewRead.current === attempt) { reviewRead.current = null; if (alive.current) setBusy(false); } }
   }
   async function accept(value: any, decisions: Decisions, generation: number, authorityEpoch: number) {
     if (!review || !validPlan(value) || value.source_draft_id !== review.draft_id || value.source_revision !== review.revision
@@ -298,18 +302,18 @@ export function PrivateConfirmation({ saved, clean, request, mutation, expired, 
   }
   return <section className="private-confirmation" aria-label="Bekreft plan" aria-busy={busy}>
     <p hidden={screen === 'plan' && activityOpen && /^(Bekreftet plan åpnet|Planen er bekreftet|Planlisten er oppdatert)/.test(message)} role="status" aria-label="Bekreftelsesstatus">{message}</p>
-    <div hidden={screen !== 'editor' || notices.screen !== 'day'}>
+    <div hidden={screen !== 'approval' || notices.screen !== 'day'}>
     <h2 ref={title} tabIndex={-1}>Gjennomgå og bekreft</h2>
     <p>Bekreftelse lagrer en egen plan. Planen utløper sju dager etter siste aktivitetsslutt. Gjennomgang gjelder bare den lagrede versjonen.</p>
     <p>Et utkast som allerede er brukt til bekreftelse krever et nytt, separat utkast for en ny plan.</p>
-    <button disabled={!saved || !clean || busy || !!pending || !!deleting || busLocked || suspended} onClick={() => void begin()}>Gjennomgå lagret utkast</button>
+    {!review && <button disabled={!saved || !clean || busy || !!pending || !!deleting || busLocked || suspended} onClick={() => void begin()}>Prøv gjennomgang på nytt</button>}
     {!clean && <p>Lagre endringene før gjennomgang. Endringer opphever tidligere gjennomgang.</p>}
     {review && <section aria-label="Gjennomgått versjon"><h3>Lagret versjon {review.revision}</h3><p>Siste aktivitetsslutt: {review.final_end ? date(review.final_end) : 'Uavklart'}. Planen utløper: {review.expires_at ? date(review.expires_at) : 'Uavklart'}.</p>
       {review.blockers.length > 0 && <div className="import-warning"><h4>Rett før bekreftelse</h4><ul>{review.blockers.map((v, i) => <li key={i}>{v}</li>)}</ul></div>}
-      <Facts content={review.draft} classifications={classes} />
+      <p>Tjenestedato {review.draft.service_date ?? 'ukjent'} · vognløp {review.draft.vehicle_duty ?? 'ukjent'} · buss/vogn {review.draft.physical_bus ?? 'ukjent'} · {review.draft.activities.length} aktiviteter.</p><details><summary>Vis alle opplysninger i lagret versjon</summary><Facts content={review.draft} classifications={classes} /></details>
       <p>Godta manglende turinformasjon og gjeldende usikkerhet for passasjerturer der de er oppført nedenfor. Ukjent aktivitetstype må klassifiseres.</p>
       <fieldset disabled={busy || !!pending || suspended}><legend>Beslutninger for versjon {review.revision}</legend>
-        {review.classifications_required.map(id => <label key={id}>Klassifisering aktivitet {review.draft.activities.findIndex(a => a.id === id) + 1}<select value={classes[id] ?? ''} onChange={e => { const next = { ...classes, [id]: e.target.value }; setClasses(next); const allowed = new Set(relevantUnknowns(review, next).map(item => item.id)); setAcks(current => current.filter(id => allowed.has(id))); }}><option value="">Velg eksplisitt type</option>{review.supported_types.map(kind => <option key={kind} value={kind}>{typeLabels[kind]}</option>)}</select></label>)}
+        {review.classifications_required.map(id => { const index = review.draft.activities.findIndex(a => a.id === id), activity = review.draft.activities[index]; return <div key={id} className="classification-decision"><p id={'classification-context-' + id}>Opprinnelig kode: {displayFact('raw_code', activity.raw_code) ?? 'Ukjent'}. Oppgitt type: {displayFact('type', activity.type) ?? 'Ukjent'}. Start: {activity.start ? date(activity.start) : 'Ukjent dato og tid'} · slutt: {activity.end ? date(activity.end) : 'Ukjent dato og tid'}. Fra: {displayFact('from_place', activity.from_place) ?? 'Ukjent'} · til: {displayFact('to_place', activity.to_place) ?? 'Ukjent'}.</p><label>Klassifisering aktivitet {index + 1}<select aria-describedby={'classification-context-' + id} value={classes[id] ?? ''} onChange={e => { const next = { ...classes, [id]: e.target.value }; setClasses(next); const allowed = new Set(relevantUnknowns(review, next).map(item => item.id)); setAcks(current => current.filter(id => allowed.has(id))); }}><option value="">Velg eksplisitt type</option>{review.supported_types.map(kind => <option key={kind} value={kind}>{typeLabels[kind]}</option>)}</select></label></div>; })}
         {visibleUnknowns.map(item => <label className="confirmation-ack" key={item.id}><input type="checkbox" checked={acks.includes(item.id)} onChange={e => setAcks(current => e.target.checked ? [...current, item.id] : current.filter(id => id !== item.id))} />Jeg har gjennomgått og godtar: {item.label}</label>)}
       </fieldset>
       {!pending && <div className="controls"><button disabled={busy || busLocked || suspended || review.blockers.length > 0 || acks.length !== visibleUnknowns.length || review.classifications_required.some(id => !classes[id])} onClick={() => void send()}>Bekreft gjennomgått plan</button><button disabled={busy} onClick={() => { setReview(null); setAcks([]); setClasses({}); setMessage('Gjennomgangen er avbrutt. Utkastet er uendret.'); }}>Avbryt gjennomgang</button></div>}

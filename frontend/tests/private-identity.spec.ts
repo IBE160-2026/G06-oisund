@@ -479,6 +479,6 @@ for (const action of ['cancel', 'logout'] as const) test(`${action} cancels an i
     expect(uploads).toBe(0);
     // Logout obtains one proof for its own request; the upload obtains none.
     expect(proofs).toBe(action === 'logout' ? 1 : 0);
-    await expect(page.getByRole('button', { name: 'Bruk som separat nytt utkast' })).toHaveCount(0);
+    await expect(page.getByRole('button', { name: 'Rett eller legg til opplysninger' })).toHaveCount(0);
   } finally { release(); }
 });

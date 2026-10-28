@@ -47,6 +47,7 @@ export function validMetadata(v: any): v is ImportMetadata {
 const pauseNames: Record<string, string> = { meal: 'matpause', coffee: 'kaffepause', split: 'deltskiftpause', paid_meal: 'betalt pause' };
 const uncertaintyNames: Record<string, string> = { unresolved_time: 'Klokkeslett eller kalenderdato er uavklart', unclassified_time: 'Ett klokkeslett står i første tidskolonne; start og slutt er uavklart', missing_endpoint: 'Endested mangler', unrecognized_source_line: 'Kilderad kunne ikke tolkes', unproven_calendar_interval: 'Skiftintervallet kunne ikke fastslås', reversed_activity_time: 'Slutt ligger før start' };
 const show = (v: unknown) => v === null || v === undefined ? 'Ukjent / uavklart' : Array.isArray(v) ? v.join(', ') : String(v);
+const sourceDay = (value: unknown) => typeof value === 'string' ? value.slice(0, 10) : 'Ukjent dato';
 const activityKind = (value: string) => value === 'trip' || value === 'Trip' ? 'tur' : value === 'deadhead_car' ? 'Tomkjøring med CAR' : value;
 const factNames: Record<string, string> = { label: 'Aktivitetsnavn', kind: 'Type', line: 'Linje', trip_id: 'Turnummer', origin: 'Fra sted', destination: 'Til sted', start: 'Startklokke', end: 'Sluttklokke', start_instant: 'Start med kalenderdato', end_instant: 'Slutt med kalenderdato', start_day: 'Startdag', end_day: 'Sluttdag', service_date: 'Tjenestedato', span: 'Utstrekk', pages: 'Sider', shift_id: 'Skift', weekday: 'Ukedag', department: 'Avdeling', work: 'Arbeidstid', supplements: 'Tillegg' };
 function reference(path: string): string {
@@ -75,7 +76,7 @@ export function SourceFacts({ metadata: m, historical = false }: { metadata: Imp
   </section>;
 }
 
-export function PrivateImport({ upload, adopt, expired, suspended, locked, stage, reviewReady, backToUpload }: { upload: (file: File, signal: AbortSignal) => Promise<any>; adopt: (content: Content) => boolean; expired: () => void; suspended: boolean; locked: boolean; stage: 'upload' | 'review'; reviewReady: () => void; backToUpload: () => void }) {
+export function PrivateImport({ upload, adopt, expired, suspended, locked, stage, reviewReady, backToUpload }: { upload: (file: File, signal: AbortSignal) => Promise<any>; adopt: (content: Content, intent: 'edit' | 'approve') => boolean; expired: () => void; suspended: boolean; locked: boolean; stage: 'upload' | 'review'; reviewReady: () => void; backToUpload: () => void }) {
   const [review, setReview] = useState<Content | null>(null);
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState('Velg en tekst-PDF for en midlertidig gjennomgang. Originalen og filnavnet lagres ikke.');
@@ -111,6 +112,6 @@ export function PrivateImport({ upload, adopt, expired, suspended, locked, stage
     }} /></label>
     {stage === 'upload' && review && <button onClick={reviewReady}>Fortsett importgjennomgang</button>}
     {(busy || review) && <button onClick={() => { cancel(); backToUpload(); }}>{busy ? 'Avbryt import' : 'Forkast gjennomgang'}</button>}
-    {stage === 'review' && review?.import_metadata && <><SourceFacts metadata={review.import_metadata} /><button disabled={suspended || locked} onClick={() => { if (adopt(review)) cancel('Tolkningen er overført til et separat, ulagret utkast.'); }}>Bruk som separat nytt utkast</button></>}
+    {stage === 'review' && review?.import_metadata && <><h3>Importsammendrag</h3><p>Skift {show(review.import_metadata.header.shift_id)} · {show(review.service_date)} · {review.activities.length} aktiviteter · vognløp {show(review.vehicle_duty)}.</p><p className="import-summary-interval">Oppgitt skift: {show(review.import_metadata.header.start)} · {show(review.import_metadata.header.origin)} → {show(review.import_metadata.header.end)} · {show(review.import_metadata.header.destination)}. Avledede kalenderdatoer: {sourceDay(review.import_metadata.header.start_instant)} – {sourceDay(review.import_metadata.header.end_instant)}.</p><p>Buss/vogn er ukjent. {review.import_metadata.unresolved.length} kildevarsler. Ukjente fakta og aktivitetstyper avgjøres ved godkjenning. Ingenting er lagret ennå.</p><details><summary>Vis alle kildefakta fra PDF</summary><SourceFacts metadata={review.import_metadata} /></details><div className="controls"><button disabled={suspended || locked} onClick={() => { if (adopt(review, 'edit')) cancel('Tolkningen er overført til et separat, ulagret utkast.'); }}>Rett eller legg til opplysninger</button><button disabled={suspended || locked} onClick={() => { if (adopt(review, 'approve')) cancel('Lagring er startet uttrykkelig.'); }}>Alt stemmer – lagre og fortsett</button></div></>}
   </section>;
 }

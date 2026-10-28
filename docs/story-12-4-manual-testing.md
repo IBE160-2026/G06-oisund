@@ -1,10 +1,12 @@
 # Story 12.4 — manual acceptance
 
-Owner acceptance is pending. This checklist concerns the isolated synthetic12.4 build, never the active website or owner's account. Automated desktop results and historical physical tests do not constitute this acceptance.
+Owner acceptance was **explicitly withheld** on28October2026 after all six guided manual checks passed. The owner requires a better overall shift-entry experience: fewer repeated detail reviews, optional editing for correct imports, dedicated bus-save actions and no jump to the page top after draft saves. [Follow-up specification](../_bmad-output/implementation-artifacts/spec-12-4-import-experience.md). The checks below qualify the earlier flow; new UI requires a focused retest and a new explicit owner decision.
+
+This checklist concerns the isolated synthetic12.4 build, never the active website or owner's account. Automated desktop results and historical physical tests do not constitute acceptance.
 
 ## Open the isolated build
 
-Worktree: `D:/IBE160/tmp/story-12-4`, branch `story/12-4-complete-user-flow`. Qualified implementation commit: `5ca3f7df73f4cf49f5244dbc97a0a3ebb8de9891`; subsequent evidence/log commits preserve the same product bytes. Final served main asset: `main-CxykOOFA.js`; see the linked post-commit runtime audit in the handoff.
+Worktree: `D:/IBE160/tmp/story-12-4`, branch `story/12-4-complete-user-flow`. The initial qualified implementation `5ca3f7df73f4cf49f5244dbc97a0a3ebb8de9891` / `main-CxykOOFA.js` is historical. The owner-directed UI correction builds `main-BRJ12oLt.js`; its exact executed source/build records and subsequent served-runtime qualification are in the [new evidence report](evidence/12-4-import-experience.md). Reload the page to replace the earlier in-memory application before retesting.
 
 ```powershell
 $py = 'C:/Users/Jonas/AppData/Local/Programs/Python/Python312/python.exe'
@@ -13,11 +15,20 @@ $py = 'C:/Users/Jonas/AppData/Local/Programs/Python/Python312/python.exe'
 & $py scripts/verify-story124.py serve
 ```
 
-Use a separate private browser window to keep these loopback session cookies separate from other local app ports. Open <http://127.0.0.1:15324/private>. Read the synthetic credentials locally from `.private-runtime/story124-manual-credentials.json`; do not paste credentials into evidence. The separate demo is <http://127.0.0.1:15324/demo>. Actual APIs use loopback18325/18326; own Compose project is `ibe160-story124-tests`. This is separate from `app.bussassistent.com` and its existing operational database/tunnel. No public12.4 route is configured.
+Use a separate private browser window to keep these loopback session cookies separate from other local app ports. Open <http://127.0.0.1:15324/private>. For the new four-point retest, read the fresh synthetic credentials locally from `.private-runtime/story124-experience-manual.json` (the earlier `.private-runtime/story124-manual-credentials.json` is historical and retained); do not paste credentials into evidence. The separate demo is <http://127.0.0.1:15324/demo>. Actual APIs use loopback18325/18326; own Compose project is `ibe160-story124-tests`. This is separate from `app.bussassistent.com` and its existing operational database/tunnel. No public12.4 route is configured.
 
 `serve` builds before starting a verified loopback listener and refuses an occupied port. Before automated browser tests, run `stop-preview` to release only its own preview. `prepare` is additive and does not reset existing manual work. Browser regression fixtures must never use the manual account.
 
-## Acceptance checklist
+## Focused retest for the owner-directed correction
+
+The earlier guided six-test series passed but did not earn acceptance. Use a fresh dedicated synthetic account for this retest so repeated fixture imports do not create confusing duplicate date/version labels among earlier records. Preserve both previous device accounts and their records. Credentials belong only in ignored local runtime state; they must not be copied into this document or screenshots.
+
+1. **Correct import:** import synthetic `Testskift-A.pdf`. Check compact shift97000001,4February2030,06:50–08:50, source places and unknown bus. Open full source details only if desired. Choose **Alt stemmer – lagre og fortsett**. The waiting state and final approval must remain compact without entering the editor. Make only the displayed necessary unknown/type decisions, then confirm. The day opens without automatically starting the shift.
+2. **Explicit correction:** import a separate synthetic `Testskift-C.pdf`, shift97000003. Check service date8February,22:10–03:50 and explicit8→9February source calendar dates. Choose **Rett eller legg til opplysninger** and change a destination to a clearly synthetic manual value. Scroll to **Lagre utkast** once and save. Verify focus/scroll stays at that save action and saved feedback is visible there. Use the adjacent **Fortsett til godkjenning** without scrolling through all fields again; return to editing without confirming yet.
+3. **Both bus-save locations:** in the already saved C draft, change only **Buss/vogn** and use **Lagre buss/vogn**. When unrelated changes also exist, the explanatory text must require **Lagre hele utkastet med buss**, with no hidden persistence/loss of other proposals. Continue and confirm the saved C version. On its day, change **Fysisk buss** with the adjacent **Lagre fysisk buss** action. Reload/reopen the C plan: the independent current bus must survive. The earlier A plan remains separate.
+4. **Overall assessment:** judge the number of steps, repeated information, scrolling, readability and save feedback on the actual tablet. State discrepancies or an explicit Story12.4 acceptance decision. None of these steps grants acceptance automatically; do not repeat all six older checks solely because they are listed below.
+
+## Original broader acceptance checklist (historical reference)
 
 - [ ] Sign in with the synthetic account. Import `Eksempelfiler/Testskift-A.pdf`; compare the review with independently authored `Eksempelfiler/Fasit-testskift.json` caseA. Check source shift identity, line/trip/duty distinctions and unknown bus/direction. Importing must not save anything.
 - [ ] Adopt the review, change one destination/time, enter a manual physical bus and explicitly save. Reload/reopen: corrected facts remain alongside original source facts and uncertainty. Confirm only after explicitly resolving or acknowledging the displayed requirements.

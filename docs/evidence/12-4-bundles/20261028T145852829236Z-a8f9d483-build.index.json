@@ -1,0 +1,11 @@
+{
+  "archive": "docs\\evidence\\12-4-bundles\\20261028T145852829236Z-a8f9d483-build.tar.gz",
+  "archive_sha256": "27a01bd2241e5e3cfc4edc6f3dbd0566896418635ff9e212f2dc2d0c85e52f02",
+  "entries": {
+    "record.json": "33a946aa25a585ce8c7550eb0f15596c82703f67089a7b60ab4113d0f418e59c",
+    "raw/command.log": "c8dce2e0cf608a55f9158feca5659db3c7b95aaf915465d9b915f0ed8b1a99a0",
+    "executed-inputs/scripts/verify-story12-integration.py": "b1b7fb4bf92397071be94e39bbb9cbda3568baed96ede5d226abfc6bd02e70e6",
+    "executed-inputs/scripts/verify-story123.py": "22f46e8622c9df302a06c9cc8a658089a114f11686d06ce17fbd2d18e79fb74f",
+    "executed-inputs/scripts/verify-story124.py": "3a82627a744825faeea36108c574cb262ad9286dc496bdfa89ebcbe31b3f8d59"
+  }
+}

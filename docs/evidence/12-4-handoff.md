@@ -1,6 +1,6 @@
 # Story 12.4 — complete user-flow verification
 
-Technical implementation, independent review and applicable automated verification are complete. Owner acceptance is pending;12.5 has not started. The later [physical Lenovo follow-up](12-4-device-testing-2026-10-28.md) supersedes initial tablet unavailability, with its exact native-event limits preserved.
+This report qualifies the initial implementation and its executed checks. All six subsequent guided physical checks passed, but Jonas explicitly **withheld Story12.4 approval** because the overall shift-entry experience requires improvement. The [owner-directed correction and new verification](12-4-import-experience.md) supersede the initial review-ready checkpoint for delivery.12.5 has not started. The [physical Lenovo follow-up](12-4-device-testing-2026-10-28.md) supersedes initial tablet unavailability, with its exact native-event limits preserved; it does not qualify the later UI correction.
 
 ## Authority and baseline
 

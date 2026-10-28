@@ -195,17 +195,18 @@ for (const outcome of ['restored', 'cancel', 'logout', 'expired', 'different-acc
   release();
   if (outcome === 'restored') {
     await expect.poll(() => state.importedBytes).toEqual([...syntheticPdf.buffer]);
-    await expect(page.getByRole('button', { name: 'Bruk som separat nytt utkast', exact: true })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Rett eller legg til opplysninger', exact: true })).toBeVisible();
+    await page.getByText('Vis alle kildefakta fra PDF', { exact: true }).click();
     const rows = page.getByRole('region', { name: 'Kildefakta fra PDF', exact: true }).locator(':scope > ol > li');
     await expect(rows).toHaveCount(syntheticImport.activities.length);
-    await page.getByRole('button', { name: 'Bruk som separat nytt utkast', exact: true }).click();
+    await page.getByRole('button', { name: 'Rett eller legg til opplysninger', exact: true }).click();
     await expect(page.getByLabel('Aktivitetstype', { exact: true })).toHaveCount(syntheticImport.activities.length);
     expect(state.apiCalls).not.toContain('POST /drafts');
   } else {
     await page.waitForLoadState('networkidle');
     expect(state.apiCalls).not.toContain('POST /imports/pdf');
     expect(state.apiCalls).not.toContain('POST /drafts');
-    await expect(page.getByRole('button', { name: 'Bruk som separat nytt utkast', exact: true })).toHaveCount(0);
+    await expect(page.getByRole('button', { name: 'Rett eller legg til opplysninger', exact: true })).toHaveCount(0);
   }
 });
 

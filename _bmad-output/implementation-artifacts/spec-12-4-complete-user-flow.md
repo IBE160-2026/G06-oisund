@@ -5,7 +5,7 @@ created: 2026-10-28
 status: in-review
 route: dispatch
 baseline_commit: c3e5d66a7d9faa9af19a58c6002538610c163352
-owner_acceptance: pending
+owner_acceptance: explicitly-not-approved
 review_loop_iteration: 0
 context: []
 ---
@@ -72,6 +72,8 @@ context: []
 - Root source review found comparison buttons adopting cached bus/selection directly. Add independent real-API second-change and failed-refresh tests before clearing the local proposal; correct this existing-contract defect if reproduced. Keep explicit cancellation of known rejected commands independent. Backend API/product contracts remain unchanged. Previous gates above qualify their exact earlier source snapshots, not an untested future fix.
 
 ## Spec Change Log
+
+28October2026 owner decision: all six guided manual device checks passed, but Story12.4 was explicitly not approved. The owner requires a more direct overall shift preparation experience. [Owner-directed follow-up](spec-12-4-import-experience.md) captures optional editing after import, reduced repeated detail review, dedicated bus-save actions and retained position after draft saves. This is explicitly authorized within12.4; earlier passing evidence remains scoped to its actual source. No acceptance, merge, deployment or12.5 is authorized.
 
 ## Review Triage Log
 

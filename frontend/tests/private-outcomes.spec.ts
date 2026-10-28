@@ -433,7 +433,7 @@ test('actual synthetic upload edit confirm start outcome close recap journey', a
   const pdf = Buffer.from(python('import sys, base64\nsys.path.insert(0,"/app/tests")\nfrom test_pdf_import import synthetic_text_pdf\nprint(base64.b64encode(synthetic_text_pdf()).decode())\n').trim(), 'base64');
   await page.goto('/private'); await page.getByLabel('Brukernavn', { exact: true }).fill(account.username); await page.getByLabel('Passord', { exact: true }).fill(account.password); await page.getByRole('button', { name: 'Logg inn', exact: true }).click();
   await page.getByLabel('Velg tekst-PDF', { exact: true }).setInputFiles({ name: 'synthetic-11-3.pdf', mimeType: 'application/pdf', buffer: pdf });
-  await page.getByRole('button', { name: 'Bruk som separat nytt utkast', exact: true }).click();
+  await page.getByRole('button', { name: 'Rett eller legg til opplysninger', exact: true }).click();
   await page.getByLabel('Fra sted', { exact: true }).first().fill('Rettet syntetisk oppmøtested 11.3');
   await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
   await page.getByRole('button', { name: 'Gjennomgå lagret utkast', exact: true }).click();
