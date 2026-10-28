@@ -1,0 +1,14 @@
+✔ configuration refuses wrong project, ports, storage source/target and test guard (4.0197ms)
+✔ desired and running private API must use matching guarded storage, endpoints and origins (3.3083ms)
+✔ every service needs healthy running state; missing/duplicate frontend refuses (2.0151ms)
+✔ actual published bindings must be exact loopback ports and databases unpublished (1.0055ms)
+✔ running container refuses foreign project/network/volume before reset (1.1944ms)
+✔ same project from another checkout/config refuses lifecycle changes; case follows native platform (1.1316ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 147.5008

@@ -1,0 +1,2115 @@
+{
+  "before": {
+    "at": "2026-10-28T20:23:46.261Z",
+    "worktrees": [
+      {
+        "path": "D:/IBE160",
+        "head": "99c272b09abaa5ffecf3286b406fbf065a445c7c",
+        "status": ""
+      },
+      {
+        "path": "C:/Users/Jonas/.codex/.chatgpt-projects/g-p-6ab6b4c1c6888191a96d3242fab912b4/story-12-2",
+        "head": "e8221ff3a61a86beaa5d42c91b9a4c4df69e28f6",
+        "status": ""
+      },
+      {
+        "path": "C:/Users/Jonas/.codex/.chatgpt-projects/g-p-6ab6b4c1c6888191a96d3242fab912b4/tablet-access-11-6",
+        "head": "0c1f2934d8d865d5372b502c65d8680f75481b43",
+        "status": ""
+      },
+      {
+        "path": "D:/IBE160/tmp/story-12-3",
+        "head": "1ac729c16b28ae19a0c9509022c92cffe3298aa7",
+        "status": ""
+      },
+      {
+        "path": "D:/IBE160/tmp/story-12-4",
+        "head": "4e38e240917b29450e68f817b85411185ef5eac3",
+        "status": ""
+      },
+      {
+        "path": "D:/IBE160/tmp/story-12-5",
+        "head": "330d5a21bc38decc95bbd5332edee2acf08e4faa",
+        "status": ""
+      },
+      {
+        "path": "D:/IBE160-plan-automatic-notices",
+        "head": "da867072a8a17249032c00efa51bd61979d41428",
+        "status": ""
+      },
+      {
+        "path": "D:/IBE160-plan-complete-route-network",
+        "head": "7cada9d2e66af9806358f582bc8ea459321a6563",
+        "status": ""
+      },
+      {
+        "path": "D:/IBE160-plan-gps-speed",
+        "head": "e2468abb8bf492007d9f9437698c80d88e9ca280",
+        "status": ""
+      },
+      {
+        "path": "D:/IBE160-plan-position-progression",
+        "head": "df47a4e74ca982a2e04d6e5531e7744caf4f4717",
+        "status": ""
+      },
+      {
+        "path": "D:/IBE160-plan-speed-limits",
+        "head": "5adc6fb2c0137a3a6519d4f7ba42dd57f0e02f1c",
+        "status": ""
+      },
+      {
+        "path": "D:/IBE160-story-12-1",
+        "head": "533ca88dc2c99533eb5c11f6bb58d6ee4fe7bde8",
+        "status": ""
+      }
+    ],
+    "containers": [
+      {
+        "id": "080f8b194376a351ddf410ff42cbd45003a711e540d1036b3fdd7f3734ba9b0b",
+        "name": "/ibe160-submission-db-1",
+        "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+        "started": "2026-10-28T19:45:43.929685915Z",
+        "status": "running",
+        "restarts": 0,
+        "ports": {},
+        "mounts": [
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\tmp\\submission-clean-20261028\\.private-runtime\\submission\\postgres-password",
+            "destination": "/run/secrets/submission_password",
+            "rw": false
+          },
+          {
+            "type": "volume",
+            "name": "ibe160-submission_submission_fictional",
+            "source": "/var/lib/docker/volumes/ibe160-submission_submission_fictional/_data",
+            "destination": "/var/lib/postgresql/data",
+            "rw": true
+          }
+        ]
+      },
+      {
+        "id": "17498da3f1bb2ec36053743cd477866e0ceb07d9dc61f18615f9a00bd0882dc7",
+        "name": "/ibe160-story123-tests-private-api-1",
+        "image": "sha256:d0f2639088ceeca6baec601ff6226bbe66d2917d55fc0741a6839ecb6a9b2d2f",
+        "started": "2026-10-27T19:20:09.085304896Z",
+        "status": "running",
+        "restarts": 0,
+        "ports": {
+          "8000/tcp": [
+            {
+              "HostIp": "127.0.0.1",
+              "HostPort": "18324"
+            }
+          ]
+        },
+        "mounts": [
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\tmp\\story-12-3\\backend",
+            "destination": "/app",
+            "rw": false
+          },
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\tmp\\story-12-3\\Eksempelfiler",
+            "destination": "/fixtures",
+            "rw": false
+          },
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\tmp\\story-12-3\\.private-runtime\\story123-postgres-password",
+            "destination": "/run/secrets/story123_password",
+            "rw": false
+          }
+        ]
+      },
+      {
+        "id": "1915dbfe810426e17b23c5a93e2b8de22395b98a25620c283206b252c244e1ad",
+        "name": "/ibe160-story123-tests-db-1",
+        "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+        "started": "2026-10-27T19:01:19.377613638Z",
+        "status": "running",
+        "restarts": 0,
+        "ports": {},
+        "mounts": [
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\tmp\\story-12-3\\.private-runtime\\story123-postgres-password",
+            "destination": "/run/secrets/story123_password",
+            "rw": false
+          },
+          {
+            "type": "volume",
+            "name": "ibe160-story123-tests_story123_fictional",
+            "source": "/var/lib/docker/volumes/ibe160-story123-tests_story123_fictional/_data",
+            "destination": "/var/lib/postgresql/data",
+            "rw": true
+          }
+        ]
+      },
+      {
+        "id": "1c7f8857a08a0a61a2439c5642bc5b35beedaa55d1fb6abf78c5084a16ec4564",
+        "name": "/ibe160-story122-tests-api-1",
+        "image": "sha256:06d7ce3538eba6d9c7d4f2caee7246654496079f8b34f17d1365eba7686fb9a8",
+        "started": "2026-10-26T21:51:11.075323136Z",
+        "status": "running",
+        "restarts": 0,
+        "ports": {
+          "8000/tcp": [
+            {
+              "HostIp": "127.0.0.1",
+              "HostPort": "18222"
+            }
+          ]
+        },
+        "mounts": []
+      },
+      {
+        "id": "1dc65682b0bfaa5b06727a0b37f6b05aac0253fd0d56c27b0a91e9d3c7e84665",
+        "name": "/ibe160-submission-frontend-1",
+        "image": "sha256:cb34104dad2f86d64f92fc8272e9e76f834db708e92ab50f17098f7e1eeac79d",
+        "started": "2026-10-28T19:45:49.527491579Z",
+        "status": "running",
+        "restarts": 0,
+        "ports": {
+          "15325/tcp": [
+            {
+              "HostIp": "127.0.0.1",
+              "HostPort": "15325"
+            }
+          ]
+        },
+        "mounts": []
+      },
+      {
+        "id": "289c5d9b71d7e27bdea4da376798120978ee8832e5dc001202fe9848e9882a1a",
+        "name": "/ibe160-story124-tests-private-api-1",
+        "image": "sha256:5bed236d59ef8338318d3148118630c5c31111e1005587e94205a933854adc2a",
+        "started": "2026-10-28T15:06:10.044949604Z",
+        "status": "running",
+        "restarts": 0,
+        "ports": {
+          "8000/tcp": [
+            {
+              "HostIp": "127.0.0.1",
+              "HostPort": "18326"
+            }
+          ]
+        },
+        "mounts": [
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\tmp\\story-12-4\\backend",
+            "destination": "/app",
+            "rw": false
+          },
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\tmp\\story-12-4\\Eksempelfiler",
+            "destination": "/fixtures",
+            "rw": false
+          },
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\tmp\\story-12-4\\.private-runtime\\story124-postgres-password",
+            "destination": "/run/secrets/story124_password",
+            "rw": false
+          }
+        ]
+      },
+      {
+        "id": "3216efc0ec55ffb5e6ffc97493d8bc9e3b1e6b2154afbbe11ffd440fdd1821e9",
+        "name": "/ibe160-submission-api-1",
+        "image": "sha256:4c19a5abbbb3bc9649282c31f6c52916a5dc26cf80bdcd4145c02c3090b67883",
+        "started": "2026-10-28T19:45:46.733267929Z",
+        "status": "running",
+        "restarts": 0,
+        "ports": {
+          "8000/tcp": [
+            {
+              "HostIp": "127.0.0.1",
+              "HostPort": "18327"
+            }
+          ]
+        },
+        "mounts": [
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\tmp\\submission-clean-20261028\\Eksempelfiler",
+            "destination": "/fixtures",
+            "rw": false
+          },
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\tmp\\submission-clean-20261028\\.private-runtime\\submission\\postgres-password",
+            "destination": "/run/secrets/submission_password",
+            "rw": false
+          },
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\tmp\\submission-clean-20261028\\deploy\\submission\\fictional.py",
+            "destination": "/submission/fictional.py",
+            "rw": false
+          }
+        ]
+      },
+      {
+        "id": "32e9e1a2a3fa8dd2986f2b174c4d4c42405545d9ad0887f7aeb6e93a05e50522",
+        "name": "/ibe160-tablet-prep-private-db-1",
+        "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+        "started": "2026-10-28T16:42:03.509239553Z",
+        "status": "running",
+        "restarts": 0,
+        "ports": {},
+        "mounts": [
+          {
+            "type": "bind",
+            "source": "/run/desktop/mnt/host/c/Users/Jonas/.codex/.chatgpt-projects/g-p-6ab6b4c1c6888191a96d3242fab912b4/operations/releases/a48f2132fd0059b21b9581bf27d337cb1561d55b/deploy/tablet/init-private-role.sql",
+            "destination": "/docker-entrypoint-initdb.d/010-private-role.sql",
+            "rw": false
+          },
+          {
+            "type": "bind",
+            "source": "C:/Users/Jonas/.codex/.chatgpt-projects/g-p-6ab6b4c1c6888191a96d3242fab912b4/operations/runtime/tablet/bootstrap-password",
+            "destination": "/run/secrets/tablet_bootstrap_password",
+            "rw": false
+          },
+          {
+            "type": "bind",
+            "source": "C:/Users/Jonas/.codex/.chatgpt-projects/g-p-6ab6b4c1c6888191a96d3242fab912b4/operations/runtime/tablet/postgres-password",
+            "destination": "/run/secrets/tablet_postgres_password",
+            "rw": false
+          },
+          {
+            "type": "volume",
+            "name": "ibe160-tablet-prep_tablet_pg",
+            "source": "/var/lib/docker/volumes/ibe160-tablet-prep_tablet_pg/_data",
+            "destination": "/var/lib/postgresql/data",
+            "rw": true
+          }
+        ]
+      },
+      {
+        "id": "386444e14bdae6de4c81eb0d25239d45575c1f7ff86f6fc1e73693d3387279a9",
+        "name": "/ibe160-submission-private-db-1",
+        "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+        "started": "2026-10-28T19:45:43.632130381Z",
+        "status": "running",
+        "restarts": 0,
+        "ports": {},
+        "mounts": [
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\tmp\\submission-clean-20261028\\.private-runtime\\submission\\postgres-password",
+            "destination": "/run/secrets/submission_password",
+            "rw": false
+          },
+          {
+            "type": "volume",
+            "name": "ibe160-submission_submission_private",
+            "source": "/var/lib/docker/volumes/ibe160-submission_submission_private/_data",
+            "destination": "/var/lib/postgresql/data",
+            "rw": true
+          }
+        ]
+      },
+      {
+        "id": "3bacac07fcf1c64bb2c4db972d894bdb5cd38db1f37466a4f25a33490dd50f24",
+        "name": "/ibe160-tablet-prep-private-api-1",
+        "image": "sha256:26ee88cb518aefb2b2733b6f96fec909c061fe58becd42981ebaf251e134ac12",
+        "started": "2026-10-28T16:42:07.677236515Z",
+        "status": "running",
+        "restarts": 0,
+        "ports": {},
+        "mounts": [
+          {
+            "type": "bind",
+            "source": "C:/Users/Jonas/.codex/.chatgpt-projects/g-p-6ab6b4c1c6888191a96d3242fab912b4/operations/runtime/tablet/postgres-password",
+            "destination": "/run/secrets/tablet_postgres_password",
+            "rw": false
+          }
+        ]
+      },
+      {
+        "id": "4c74a4e74e6be044d1c4e23d77fb7c72f6111a1568697ac9875e934837a3835e",
+        "name": "/ibe160-story123-tests-api-1",
+        "image": "sha256:2acc520d2b766436231d5b36049e29b87810d4e4a862a993f17861b518ff79bf",
+        "started": "2026-10-27T19:01:23.109913656Z",
+        "status": "running",
+        "restarts": 0,
+        "ports": {
+          "8000/tcp": [
+            {
+              "HostIp": "127.0.0.1",
+              "HostPort": "18323"
+            }
+          ]
+        },
+        "mounts": [
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\tmp\\story-12-3\\backend",
+            "destination": "/app",
+            "rw": false
+          },
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\tmp\\story-12-3\\Eksempelfiler",
+            "destination": "/fixtures",
+            "rw": false
+          },
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\tmp\\story-12-3\\.private-runtime\\story123-postgres-password",
+            "destination": "/run/secrets/story123_password",
+            "rw": false
+          }
+        ]
+      },
+      {
+        "id": "4cd277b2aa4e46aa156da66ae17c73d44632e4e1dc81b8eab3f4cfd9f7f44f49",
+        "name": "/ibe160-tablet-prep-access-gate-1",
+        "image": "sha256:25e40c61e6a734c2b19daaeb5c3eb7230f424a917992f3f33e100a2e309484c2",
+        "started": "2026-10-28T16:42:42.750443414Z",
+        "status": "running",
+        "restarts": 0,
+        "ports": {},
+        "mounts": [
+          {
+            "type": "bind",
+            "source": "C:/Users/Jonas/.codex/.chatgpt-projects/g-p-6ab6b4c1c6888191a96d3242fab912b4/operations/runtime/tablet/access-policy.json",
+            "destination": "/run/secrets/tablet_access_policy",
+            "rw": false
+          }
+        ]
+      },
+      {
+        "id": "56cc2b541bd914aaf07e3dc6f30942d78479353eefb7bac25d653ae78947f3a8",
+        "name": "/ibe160-story122-tests-private-db-1",
+        "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+        "started": "2026-10-26T21:50:57.522035414Z",
+        "status": "running",
+        "restarts": 0,
+        "ports": {},
+        "mounts": [
+          {
+            "type": "bind",
+            "source": "C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\story-12-2\\.private-runtime\\story122-postgres-password",
+            "destination": "/run/secrets/story122_password",
+            "rw": false
+          },
+          {
+            "type": "volume",
+            "name": "ibe160-story122-tests_story122_private",
+            "source": "/var/lib/docker/volumes/ibe160-story122-tests_story122_private/_data",
+            "destination": "/var/lib/postgresql/data",
+            "rw": true
+          }
+        ]
+      },
+      {
+        "id": "5766c65fa74e96f683ef7cfa2b7307ab4a94f0ef9644dbf63a5cb89d2456ddce",
+        "name": "/ibe160-story122-tests-db-1",
+        "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+        "started": "2026-10-26T21:51:10.66207864Z",
+        "status": "running",
+        "restarts": 0,
+        "ports": {},
+        "mounts": [
+          {
+            "type": "volume",
+            "name": "ibe160-story122-tests_story122_fictional",
+            "source": "/var/lib/docker/volumes/ibe160-story122-tests_story122_fictional/_data",
+            "destination": "/var/lib/postgresql/data",
+            "rw": true
+          }
+        ]
+      },
+      {
+        "id": "59df9d68fda8addba018e1f384ea05f7e0bf196093ca9b7455dc6b275bc79502",
+        "name": "/ibe160-private-tests-private-db-1",
+        "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+        "started": "2026-10-26T18:31:51.564617351Z",
+        "status": "exited",
+        "restarts": 0,
+        "ports": {},
+        "mounts": [
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\.private-runtime\\postgres-password",
+            "destination": "/run/secrets/private_postgres_password",
+            "rw": false
+          },
+          {
+            "type": "volume",
+            "name": "ibe160-private-tests_private_pg",
+            "source": "/var/lib/docker/volumes/ibe160-private-tests_private_pg/_data",
+            "destination": "/var/lib/postgresql/data",
+            "rw": true
+          }
+        ]
+      },
+      {
+        "id": "667b53445fc4570e4efb6de1903df415a6259fd2c2989febe6ac4b77de299fb2",
+        "name": "/ibe160-story123-tests-private-db-1",
+        "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+        "started": "2026-10-27T19:01:19.297520771Z",
+        "status": "running",
+        "restarts": 0,
+        "ports": {},
+        "mounts": [
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\tmp\\story-12-3\\.private-runtime\\story123-postgres-password",
+            "destination": "/run/secrets/story123_password",
+            "rw": false
+          },
+          {
+            "type": "volume",
+            "name": "ibe160-story123-tests_story123_private",
+            "source": "/var/lib/docker/volumes/ibe160-story123-tests_story123_private/_data",
+            "destination": "/var/lib/postgresql/data",
+            "rw": true
+          }
+        ]
+      },
+      {
+        "id": "677f99f9f8411bcb4dc75201640d1c9ac299adb0afb77c7516242a63957967ca",
+        "name": "/ibe160-private-work-private-db-1",
+        "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+        "started": "2026-10-20T18:47:00.530707318Z",
+        "status": "running",
+        "restarts": 0,
+        "ports": {},
+        "mounts": [
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\.private-runtime\\postgres-password",
+            "destination": "/run/secrets/private_postgres_password",
+            "rw": false
+          },
+          {
+            "type": "volume",
+            "name": "ibe160-private-work_private_pg",
+            "source": "/var/lib/docker/volumes/ibe160-private-work_private_pg/_data",
+            "destination": "/var/lib/postgresql/data",
+            "rw": true
+          }
+        ]
+      },
+      {
+        "id": "6a6df1656f03bc9180c7e7468d20bd5cc2c703a05d80304c897c6358a0ce108f",
+        "name": "/ibe160-story124-tests-api-1",
+        "image": "sha256:af878d335c49f418427cf4d6a48bea57967f115a27c9aaaeba570bff1c445a49",
+        "started": "2026-10-28T06:08:40.932099569Z",
+        "status": "running",
+        "restarts": 0,
+        "ports": {
+          "8000/tcp": [
+            {
+              "HostIp": "127.0.0.1",
+              "HostPort": "18325"
+            }
+          ]
+        },
+        "mounts": [
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\tmp\\story-12-4\\backend",
+            "destination": "/app",
+            "rw": false
+          },
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\tmp\\story-12-4\\Eksempelfiler",
+            "destination": "/fixtures",
+            "rw": false
+          },
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\tmp\\story-12-4\\.private-runtime\\story124-postgres-password",
+            "destination": "/run/secrets/story124_password",
+            "rw": false
+          }
+        ]
+      },
+      {
+        "id": "6a85f6927af64e6743e3415391e43d1c65bab151e6e82e666516d636eb5ad49b",
+        "name": "/ibe160-submission-private-api-1",
+        "image": "sha256:7725ce0c88035360331cb8a1dcf2ec3871ad318f2504332ddf27c635e010a22c",
+        "started": "2026-10-28T19:45:46.442977352Z",
+        "status": "running",
+        "restarts": 0,
+        "ports": {
+          "8000/tcp": [
+            {
+              "HostIp": "127.0.0.1",
+              "HostPort": "18328"
+            }
+          ]
+        },
+        "mounts": [
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\tmp\\submission-clean-20261028\\Eksempelfiler",
+            "destination": "/fixtures",
+            "rw": false
+          },
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\tmp\\submission-clean-20261028\\.private-runtime\\submission\\account.json",
+            "destination": "/run/secrets/submission_account",
+            "rw": false
+          },
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\tmp\\submission-clean-20261028\\.private-runtime\\submission\\postgres-password",
+            "destination": "/run/secrets/submission_password",
+            "rw": false
+          },
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\tmp\\submission-clean-20261028\\deploy\\submission\\manage.py",
+            "destination": "/submission/manage.py",
+            "rw": false
+          }
+        ]
+      },
+      {
+        "id": "6bd0e99aad57f3053e491cba1d4f811cff92d997ea6a4eb09433cb39ba77e3b4",
+        "name": "/ibe160-tablet-prep-gateway-1",
+        "image": "sha256:50242b65f742441d0928d00775640715ce4748b4420519fbca9ece5b54253bfe",
+        "started": "2026-10-28T16:42:43.067400736Z",
+        "status": "running",
+        "restarts": 0,
+        "ports": {
+          "8080/tcp": [
+            {
+              "HostIp": "127.0.0.1",
+              "HostPort": "18081"
+            }
+          ]
+        },
+        "mounts": []
+      },
+      {
+        "id": "75fe9c9792700c4244abbcbffed33cdf38559c783166978e4d633b03a5bb7d48",
+        "name": "/ibe160-private-tests-private-api-1",
+        "image": "sha256:d9cb0de47c0aebbd648e253672759449ce1d8a3fd1816d8a2caf43c9ef7452d0",
+        "started": "2026-10-26T18:31:55.319748138Z",
+        "status": "exited",
+        "restarts": 0,
+        "ports": {
+          "8000/tcp": [
+            {
+              "HostIp": "127.0.0.1",
+              "HostPort": "8001"
+            }
+          ]
+        },
+        "mounts": [
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\.private-runtime\\postgres-password",
+            "destination": "/run/secrets/private_postgres_password",
+            "rw": false
+          }
+        ]
+      },
+      {
+        "id": "79693d20ba694917486416a0d0a0883572842f37d8cd7b937060fc138caef511",
+        "name": "/ibe160-fictional-assessment-frontend-1",
+        "image": "sha256:90ef8ce693acea80756dc614e10708f284736430afba3bfba5525b87cc56ac55",
+        "started": "2026-10-26T15:55:57.643134471Z",
+        "status": "running",
+        "restarts": 0,
+        "ports": {
+          "5173/tcp": [
+            {
+              "HostIp": "127.0.0.1",
+              "HostPort": "5173"
+            }
+          ]
+        },
+        "mounts": []
+      },
+      {
+        "id": "7991577f9cf5e84519bd5e6449bb5e5e62e96214d4fcd15ec4587bf4d10e58ad",
+        "name": "/ibe160-story12-integration-api-1",
+        "image": "sha256:18f373092c551cd23f3b706aa618162c52aa74bb7e7e18d208e9e1f7a7dc2614",
+        "started": "2026-10-27T15:13:57.527635969Z",
+        "status": "running",
+        "restarts": 0,
+        "ports": {
+          "8000/tcp": [
+            {
+              "HostIp": "127.0.0.1",
+              "HostPort": "18312"
+            }
+          ]
+        },
+        "mounts": [
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\backend",
+            "destination": "/app",
+            "rw": false
+          },
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\Eksempelfiler",
+            "destination": "/fixtures",
+            "rw": false
+          },
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\.private-runtime\\story12-integration-postgres-password",
+            "destination": "/run/secrets/integration_password",
+            "rw": false
+          }
+        ]
+      },
+      {
+        "id": "9bb6363dc3816c5c5c27889b2a0f3b9db0172f7e8e668029a61cb45a8ffe906d",
+        "name": "/ibe160-private-work-private-api-1",
+        "image": "sha256:5dff578b747ebf2d16a6335ddc0b432e993b401cf46be1d27a2e6bd7f0898861",
+        "started": "2026-10-27T21:47:16.146081756Z",
+        "status": "running",
+        "restarts": 0,
+        "ports": {
+          "8000/tcp": [
+            {
+              "HostIp": "127.0.0.1",
+              "HostPort": "8001"
+            }
+          ]
+        },
+        "mounts": [
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\.private-runtime\\postgres-password",
+            "destination": "/run/secrets/private_postgres_password",
+            "rw": false
+          }
+        ]
+      },
+      {
+        "id": "a3a48e6d8d014c6ee3ea49e639a117fb0160844812e399c9c5fb52d82d473cfc",
+        "name": "/friendly_shockley",
+        "image": "sha256:5dd0d3e6e255913fc30f90b9f2b1d359cc2cbdb48090cc4b65f1676e203243cc",
+        "started": "2026-09-07T21:16:35.61848643Z",
+        "status": "exited",
+        "restarts": 0,
+        "ports": {},
+        "mounts": []
+      },
+      {
+        "id": "aeb9125406b628eaaaaf5214c6bd33e59676381528f75147dc3f97f9e6302f6b",
+        "name": "/ibe160-story12-integration-db-1",
+        "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+        "started": "2026-10-27T15:13:53.291318945Z",
+        "status": "running",
+        "restarts": 0,
+        "ports": {},
+        "mounts": [
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\.private-runtime\\story12-integration-postgres-password",
+            "destination": "/run/secrets/integration_password",
+            "rw": false
+          },
+          {
+            "type": "volume",
+            "name": "ibe160-story12-integration_integration_fictional",
+            "source": "/var/lib/docker/volumes/ibe160-story12-integration_integration_fictional/_data",
+            "destination": "/var/lib/postgresql/data",
+            "rw": true
+          }
+        ]
+      },
+      {
+        "id": "b6a16b87207c2857c84d878b8615d174d81d0f407586681ad8701b2955ed6c53",
+        "name": "/ibe160-fictional-assessment-api-1",
+        "image": "sha256:43c9740447cdcb24855f8addb0eb0a8fe5897726fc524b732a755c78064adff4",
+        "started": "2026-10-26T15:44:25.147799589Z",
+        "status": "running",
+        "restarts": 0,
+        "ports": {
+          "8000/tcp": [
+            {
+              "HostIp": "127.0.0.1",
+              "HostPort": "8000"
+            }
+          ]
+        },
+        "mounts": []
+      },
+      {
+        "id": "be2e42172f8f8bd5e2dd53463434d7db4e4e925d52301979d4fa21ac9b52804b",
+        "name": "/ibe160-story12-integration-private-api-1",
+        "image": "sha256:b42fdb7d79c608df0d0ea5582c7702665c5bf6115012d1b110dce6d3bdb090c9",
+        "started": "2026-10-27T15:31:55.317079835Z",
+        "status": "running",
+        "restarts": 0,
+        "ports": {
+          "8000/tcp": [
+            {
+              "HostIp": "127.0.0.1",
+              "HostPort": "18313"
+            }
+          ]
+        },
+        "mounts": [
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\backend",
+            "destination": "/app",
+            "rw": false
+          },
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\Eksempelfiler",
+            "destination": "/fixtures",
+            "rw": false
+          },
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\.private-runtime\\story12-integration-postgres-password",
+            "destination": "/run/secrets/integration_password",
+            "rw": false
+          }
+        ]
+      },
+      {
+        "id": "c22c9bdb4adf01f33db2383190eccb0b7a42a50d0513953cd99695cac666f49d",
+        "name": "/ibe160-story124-tests-db-1",
+        "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+        "started": "2026-10-28T06:08:36.515321701Z",
+        "status": "running",
+        "restarts": 0,
+        "ports": {},
+        "mounts": [
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\tmp\\story-12-4\\.private-runtime\\story124-postgres-password",
+            "destination": "/run/secrets/story124_password",
+            "rw": false
+          },
+          {
+            "type": "volume",
+            "name": "ibe160-story124-tests_story124_fictional",
+            "source": "/var/lib/docker/volumes/ibe160-story124-tests_story124_fictional/_data",
+            "destination": "/var/lib/postgresql/data",
+            "rw": true
+          }
+        ]
+      },
+      {
+        "id": "c98b143f76524078b1675d811e6112347faf044c6580ab264b55577bfa0a5f5d",
+        "name": "/ibe160-fictional-assessment-db-1",
+        "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+        "started": "2026-10-19T18:20:21.013996422Z",
+        "status": "running",
+        "restarts": 0,
+        "ports": {},
+        "mounts": [
+          {
+            "type": "volume",
+            "name": "ibe160-fictional-assessment_fictional_pg",
+            "source": "/var/lib/docker/volumes/ibe160-fictional-assessment_fictional_pg/_data",
+            "destination": "/var/lib/postgresql/data",
+            "rw": true
+          }
+        ]
+      },
+      {
+        "id": "cd1db9210623013a6795d2c793b150212fe769785efc186f0a219f4c85447054",
+        "name": "/ibe160-story121-tests-private-api-1",
+        "image": "sha256:efb271265fc913ab3d0786373e73fefc8008afc791c11d06bfe9b705c84a01c0",
+        "started": "2026-10-26T23:08:28.21447389Z",
+        "status": "running",
+        "restarts": 0,
+        "ports": {
+          "8000/tcp": [
+            {
+              "HostIp": "127.0.0.1",
+              "HostPort": "18121"
+            }
+          ]
+        },
+        "mounts": [
+          {
+            "type": "bind",
+            "source": "D:\\IBE160-story-12-1\\backend",
+            "destination": "/app",
+            "rw": false
+          },
+          {
+            "type": "bind",
+            "source": "D:\\IBE160-story-12-1\\Eksempelfiler",
+            "destination": "/fixtures",
+            "rw": false
+          },
+          {
+            "type": "bind",
+            "source": "D:\\IBE160-story-12-1\\.private-runtime\\story121-postgres-password",
+            "destination": "/run/secrets/private_postgres_password",
+            "rw": false
+          }
+        ]
+      },
+      {
+        "id": "e020bd052af4452ace6c76077c090cd768d76356064e5c12b30e2a0c9c8c34ba",
+        "name": "/ibe160-story121-tests-private-db-1",
+        "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+        "started": "2026-10-26T21:42:16.389701314Z",
+        "status": "running",
+        "restarts": 0,
+        "ports": {},
+        "mounts": [
+          {
+            "type": "bind",
+            "source": "D:\\IBE160-story-12-1\\.private-runtime\\story121-postgres-password",
+            "destination": "/run/secrets/private_postgres_password",
+            "rw": false
+          },
+          {
+            "type": "volume",
+            "name": "ibe160-story121-tests_story121_pg",
+            "source": "/var/lib/docker/volumes/ibe160-story121-tests_story121_pg/_data",
+            "destination": "/var/lib/postgresql/data",
+            "rw": true
+          }
+        ]
+      },
+      {
+        "id": "e57a1b8fd2f53e1b81eadaab8f1346304f32dba6911ed083dbd485aeecd40435",
+        "name": "/ibe160-story12-integration-private-db-1",
+        "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+        "started": "2026-10-27T15:13:53.43911017Z",
+        "status": "running",
+        "restarts": 0,
+        "ports": {},
+        "mounts": [
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\.private-runtime\\story12-integration-postgres-password",
+            "destination": "/run/secrets/integration_password",
+            "rw": false
+          },
+          {
+            "type": "volume",
+            "name": "ibe160-story12-integration_integration_private",
+            "source": "/var/lib/docker/volumes/ibe160-story12-integration_integration_private/_data",
+            "destination": "/var/lib/postgresql/data",
+            "rw": true
+          }
+        ]
+      },
+      {
+        "id": "f2ee6029103f66f2298e48e3f7729c85bf4c8f64d43774146e2ac84a2382ab7c",
+        "name": "/ibe160-story124-tests-private-db-1",
+        "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+        "started": "2026-10-28T15:06:06.075991019Z",
+        "status": "running",
+        "restarts": 0,
+        "ports": {},
+        "mounts": [
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\tmp\\story-12-4\\.private-runtime\\story124-postgres-password",
+            "destination": "/run/secrets/story124_password",
+            "rw": false
+          },
+          {
+            "type": "volume",
+            "name": "ibe160-story124-tests_story124_private",
+            "source": "/var/lib/docker/volumes/ibe160-story124-tests_story124_private/_data",
+            "destination": "/var/lib/postgresql/data",
+            "rw": true
+          }
+        ]
+      },
+      {
+        "id": "fd52df01d71b09aab91030bd9922904d8a9dfb651ae4e4c8401089280b566955",
+        "name": "/ibe160-story122-tests-private-api-1",
+        "image": "sha256:72774cad61a241605b3487def5d8cef084a6a48be0ad24e2554df1b8e5a24561",
+        "started": "2026-10-26T21:51:00.368172346Z",
+        "status": "running",
+        "restarts": 0,
+        "ports": {
+          "8000/tcp": [
+            {
+              "HostIp": "127.0.0.1",
+              "HostPort": "18223"
+            }
+          ]
+        },
+        "mounts": [
+          {
+            "type": "bind",
+            "source": "C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\story-12-2\\.private-runtime\\story122-postgres-password",
+            "destination": "/run/secrets/story122_password",
+            "rw": false
+          }
+        ]
+      }
+    ],
+    "volumes": [
+      {
+        "name": "ibe160-deploy-check_check_pg",
+        "created": "2026-10-28T16:38:41Z",
+        "driver": "local",
+        "mountpoint": "/var/lib/docker/volumes/ibe160-deploy-check_check_pg/_data"
+      },
+      {
+        "name": "ibe160-fictional-assessment_fictional_pg",
+        "created": "2026-10-19T18:06:41Z",
+        "driver": "local",
+        "mountpoint": "/var/lib/docker/volumes/ibe160-fictional-assessment_fictional_pg/_data"
+      },
+      {
+        "name": "ibe160-private-tests_private_pg",
+        "created": "2026-10-20T19:42:24Z",
+        "driver": "local",
+        "mountpoint": "/var/lib/docker/volumes/ibe160-private-tests_private_pg/_data"
+      },
+      {
+        "name": "ibe160-private-work_private_pg",
+        "created": "2026-10-20T18:21:20Z",
+        "driver": "local",
+        "mountpoint": "/var/lib/docker/volumes/ibe160-private-work_private_pg/_data"
+      },
+      {
+        "name": "ibe160-story12-integration_integration_fictional",
+        "created": "2026-10-27T06:47:32Z",
+        "driver": "local",
+        "mountpoint": "/var/lib/docker/volumes/ibe160-story12-integration_integration_fictional/_data"
+      },
+      {
+        "name": "ibe160-story12-integration_integration_private",
+        "created": "2026-10-27T06:47:32Z",
+        "driver": "local",
+        "mountpoint": "/var/lib/docker/volumes/ibe160-story12-integration_integration_private/_data"
+      },
+      {
+        "name": "ibe160-story121-tests_story121_pg",
+        "created": "2026-10-26T21:42:15Z",
+        "driver": "local",
+        "mountpoint": "/var/lib/docker/volumes/ibe160-story121-tests_story121_pg/_data"
+      },
+      {
+        "name": "ibe160-story122-tests_story122_fictional",
+        "created": "2026-10-26T21:50:56Z",
+        "driver": "local",
+        "mountpoint": "/var/lib/docker/volumes/ibe160-story122-tests_story122_fictional/_data"
+      },
+      {
+        "name": "ibe160-story122-tests_story122_private",
+        "created": "2026-10-26T21:50:56Z",
+        "driver": "local",
+        "mountpoint": "/var/lib/docker/volumes/ibe160-story122-tests_story122_private/_data"
+      },
+      {
+        "name": "ibe160-story123-tests_story123_fictional",
+        "created": "2026-10-27T08:16:47Z",
+        "driver": "local",
+        "mountpoint": "/var/lib/docker/volumes/ibe160-story123-tests_story123_fictional/_data"
+      },
+      {
+        "name": "ibe160-story123-tests_story123_private",
+        "created": "2026-10-27T08:16:47Z",
+        "driver": "local",
+        "mountpoint": "/var/lib/docker/volumes/ibe160-story123-tests_story123_private/_data"
+      },
+      {
+        "name": "ibe160-story124-tests_story124_fictional",
+        "created": "2026-10-28T06:04:30Z",
+        "driver": "local",
+        "mountpoint": "/var/lib/docker/volumes/ibe160-story124-tests_story124_fictional/_data"
+      },
+      {
+        "name": "ibe160-story124-tests_story124_private",
+        "created": "2026-10-28T06:04:30Z",
+        "driver": "local",
+        "mountpoint": "/var/lib/docker/volumes/ibe160-story124-tests_story124_private/_data"
+      },
+      {
+        "name": "ibe160-submission_submission_fictional",
+        "created": "2026-10-28T17:27:56Z",
+        "driver": "local",
+        "mountpoint": "/var/lib/docker/volumes/ibe160-submission_submission_fictional/_data"
+      },
+      {
+        "name": "ibe160-submission_submission_private",
+        "created": "2026-10-28T17:27:56Z",
+        "driver": "local",
+        "mountpoint": "/var/lib/docker/volumes/ibe160-submission_submission_private/_data"
+      },
+      {
+        "name": "ibe160-tablet-prep_tablet_pg",
+        "created": "2026-10-26T20:52:10Z",
+        "driver": "local",
+        "mountpoint": "/var/lib/docker/volumes/ibe160-tablet-prep_tablet_pg/_data"
+      }
+    ]
+  },
+  "after": {
+    "at": "2026-10-28T20:26:41.455Z",
+    "worktrees": [
+      {
+        "path": "D:/IBE160",
+        "head": "dbdbd1813e29c02913b72e15a24f0a3321565d95",
+        "status": "M README.md\n?? docs/evidence/12-5-main-frontend-build.txt\n?? docs/evidence/12-5-main-integration.md\n?? docs/evidence/12-5-main-node-linux.txt\n?? docs/evidence/12-5-main-node-windows.txt\n?? docs/evidence/12-5-main-npm-ci.txt\n?? docs/evidence/12-5-main-preservation-method.mjs\n?? docs/evidence/12-5-main-status.txt\n?? docs/evidence/12-5-main-verification-method.mjs\n?? docs/evidence/12-5-main-wrapper.txt"
+      },
+      {
+        "path": "C:/Users/Jonas/.codex/.chatgpt-projects/g-p-6ab6b4c1c6888191a96d3242fab912b4/story-12-2",
+        "head": "e8221ff3a61a86beaa5d42c91b9a4c4df69e28f6",
+        "status": ""
+      },
+      {
+        "path": "C:/Users/Jonas/.codex/.chatgpt-projects/g-p-6ab6b4c1c6888191a96d3242fab912b4/tablet-access-11-6",
+        "head": "0c1f2934d8d865d5372b502c65d8680f75481b43",
+        "status": ""
+      },
+      {
+        "path": "D:/IBE160/tmp/story-12-3",
+        "head": "1ac729c16b28ae19a0c9509022c92cffe3298aa7",
+        "status": ""
+      },
+      {
+        "path": "D:/IBE160/tmp/story-12-4",
+        "head": "4e38e240917b29450e68f817b85411185ef5eac3",
+        "status": ""
+      },
+      {
+        "path": "D:/IBE160/tmp/story-12-5",
+        "head": "330d5a21bc38decc95bbd5332edee2acf08e4faa",
+        "status": ""
+      },
+      {
+        "path": "D:/IBE160-plan-automatic-notices",
+        "head": "da867072a8a17249032c00efa51bd61979d41428",
+        "status": ""
+      },
+      {
+        "path": "D:/IBE160-plan-complete-route-network",
+        "head": "7cada9d2e66af9806358f582bc8ea459321a6563",
+        "status": ""
+      },
+      {
+        "path": "D:/IBE160-plan-gps-speed",
+        "head": "e2468abb8bf492007d9f9437698c80d88e9ca280",
+        "status": ""
+      },
+      {
+        "path": "D:/IBE160-plan-position-progression",
+        "head": "df47a4e74ca982a2e04d6e5531e7744caf4f4717",
+        "status": ""
+      },
+      {
+        "path": "D:/IBE160-plan-speed-limits",
+        "head": "5adc6fb2c0137a3a6519d4f7ba42dd57f0e02f1c",
+        "status": ""
+      },
+      {
+        "path": "D:/IBE160-story-12-1",
+        "head": "533ca88dc2c99533eb5c11f6bb58d6ee4fe7bde8",
+        "status": ""
+      }
+    ],
+    "containers": [
+      {
+        "id": "080f8b194376a351ddf410ff42cbd45003a711e540d1036b3fdd7f3734ba9b0b",
+        "name": "/ibe160-submission-db-1",
+        "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+        "started": "2026-10-28T19:45:43.929685915Z",
+        "status": "running",
+        "restarts": 0,
+        "ports": {},
+        "mounts": [
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\tmp\\submission-clean-20261028\\.private-runtime\\submission\\postgres-password",
+            "destination": "/run/secrets/submission_password",
+            "rw": false
+          },
+          {
+            "type": "volume",
+            "name": "ibe160-submission_submission_fictional",
+            "source": "/var/lib/docker/volumes/ibe160-submission_submission_fictional/_data",
+            "destination": "/var/lib/postgresql/data",
+            "rw": true
+          }
+        ]
+      },
+      {
+        "id": "17498da3f1bb2ec36053743cd477866e0ceb07d9dc61f18615f9a00bd0882dc7",
+        "name": "/ibe160-story123-tests-private-api-1",
+        "image": "sha256:d0f2639088ceeca6baec601ff6226bbe66d2917d55fc0741a6839ecb6a9b2d2f",
+        "started": "2026-10-27T19:20:09.085304896Z",
+        "status": "running",
+        "restarts": 0,
+        "ports": {
+          "8000/tcp": [
+            {
+              "HostIp": "127.0.0.1",
+              "HostPort": "18324"
+            }
+          ]
+        },
+        "mounts": [
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\tmp\\story-12-3\\backend",
+            "destination": "/app",
+            "rw": false
+          },
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\tmp\\story-12-3\\Eksempelfiler",
+            "destination": "/fixtures",
+            "rw": false
+          },
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\tmp\\story-12-3\\.private-runtime\\story123-postgres-password",
+            "destination": "/run/secrets/story123_password",
+            "rw": false
+          }
+        ]
+      },
+      {
+        "id": "1915dbfe810426e17b23c5a93e2b8de22395b98a25620c283206b252c244e1ad",
+        "name": "/ibe160-story123-tests-db-1",
+        "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+        "started": "2026-10-27T19:01:19.377613638Z",
+        "status": "running",
+        "restarts": 0,
+        "ports": {},
+        "mounts": [
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\tmp\\story-12-3\\.private-runtime\\story123-postgres-password",
+            "destination": "/run/secrets/story123_password",
+            "rw": false
+          },
+          {
+            "type": "volume",
+            "name": "ibe160-story123-tests_story123_fictional",
+            "source": "/var/lib/docker/volumes/ibe160-story123-tests_story123_fictional/_data",
+            "destination": "/var/lib/postgresql/data",
+            "rw": true
+          }
+        ]
+      },
+      {
+        "id": "1c7f8857a08a0a61a2439c5642bc5b35beedaa55d1fb6abf78c5084a16ec4564",
+        "name": "/ibe160-story122-tests-api-1",
+        "image": "sha256:06d7ce3538eba6d9c7d4f2caee7246654496079f8b34f17d1365eba7686fb9a8",
+        "started": "2026-10-26T21:51:11.075323136Z",
+        "status": "running",
+        "restarts": 0,
+        "ports": {
+          "8000/tcp": [
+            {
+              "HostIp": "127.0.0.1",
+              "HostPort": "18222"
+            }
+          ]
+        },
+        "mounts": []
+      },
+      {
+        "id": "1dc65682b0bfaa5b06727a0b37f6b05aac0253fd0d56c27b0a91e9d3c7e84665",
+        "name": "/ibe160-submission-frontend-1",
+        "image": "sha256:cb34104dad2f86d64f92fc8272e9e76f834db708e92ab50f17098f7e1eeac79d",
+        "started": "2026-10-28T19:45:49.527491579Z",
+        "status": "running",
+        "restarts": 0,
+        "ports": {
+          "15325/tcp": [
+            {
+              "HostIp": "127.0.0.1",
+              "HostPort": "15325"
+            }
+          ]
+        },
+        "mounts": []
+      },
+      {
+        "id": "289c5d9b71d7e27bdea4da376798120978ee8832e5dc001202fe9848e9882a1a",
+        "name": "/ibe160-story124-tests-private-api-1",
+        "image": "sha256:5bed236d59ef8338318d3148118630c5c31111e1005587e94205a933854adc2a",
+        "started": "2026-10-28T15:06:10.044949604Z",
+        "status": "running",
+        "restarts": 0,
+        "ports": {
+          "8000/tcp": [
+            {
+              "HostIp": "127.0.0.1",
+              "HostPort": "18326"
+            }
+          ]
+        },
+        "mounts": [
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\tmp\\story-12-4\\backend",
+            "destination": "/app",
+            "rw": false
+          },
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\tmp\\story-12-4\\Eksempelfiler",
+            "destination": "/fixtures",
+            "rw": false
+          },
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\tmp\\story-12-4\\.private-runtime\\story124-postgres-password",
+            "destination": "/run/secrets/story124_password",
+            "rw": false
+          }
+        ]
+      },
+      {
+        "id": "3216efc0ec55ffb5e6ffc97493d8bc9e3b1e6b2154afbbe11ffd440fdd1821e9",
+        "name": "/ibe160-submission-api-1",
+        "image": "sha256:4c19a5abbbb3bc9649282c31f6c52916a5dc26cf80bdcd4145c02c3090b67883",
+        "started": "2026-10-28T19:45:46.733267929Z",
+        "status": "running",
+        "restarts": 0,
+        "ports": {
+          "8000/tcp": [
+            {
+              "HostIp": "127.0.0.1",
+              "HostPort": "18327"
+            }
+          ]
+        },
+        "mounts": [
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\tmp\\submission-clean-20261028\\Eksempelfiler",
+            "destination": "/fixtures",
+            "rw": false
+          },
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\tmp\\submission-clean-20261028\\.private-runtime\\submission\\postgres-password",
+            "destination": "/run/secrets/submission_password",
+            "rw": false
+          },
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\tmp\\submission-clean-20261028\\deploy\\submission\\fictional.py",
+            "destination": "/submission/fictional.py",
+            "rw": false
+          }
+        ]
+      },
+      {
+        "id": "32e9e1a2a3fa8dd2986f2b174c4d4c42405545d9ad0887f7aeb6e93a05e50522",
+        "name": "/ibe160-tablet-prep-private-db-1",
+        "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+        "started": "2026-10-28T16:42:03.509239553Z",
+        "status": "running",
+        "restarts": 0,
+        "ports": {},
+        "mounts": [
+          {
+            "type": "bind",
+            "source": "/run/desktop/mnt/host/c/Users/Jonas/.codex/.chatgpt-projects/g-p-6ab6b4c1c6888191a96d3242fab912b4/operations/releases/a48f2132fd0059b21b9581bf27d337cb1561d55b/deploy/tablet/init-private-role.sql",
+            "destination": "/docker-entrypoint-initdb.d/010-private-role.sql",
+            "rw": false
+          },
+          {
+            "type": "bind",
+            "source": "C:/Users/Jonas/.codex/.chatgpt-projects/g-p-6ab6b4c1c6888191a96d3242fab912b4/operations/runtime/tablet/bootstrap-password",
+            "destination": "/run/secrets/tablet_bootstrap_password",
+            "rw": false
+          },
+          {
+            "type": "bind",
+            "source": "C:/Users/Jonas/.codex/.chatgpt-projects/g-p-6ab6b4c1c6888191a96d3242fab912b4/operations/runtime/tablet/postgres-password",
+            "destination": "/run/secrets/tablet_postgres_password",
+            "rw": false
+          },
+          {
+            "type": "volume",
+            "name": "ibe160-tablet-prep_tablet_pg",
+            "source": "/var/lib/docker/volumes/ibe160-tablet-prep_tablet_pg/_data",
+            "destination": "/var/lib/postgresql/data",
+            "rw": true
+          }
+        ]
+      },
+      {
+        "id": "386444e14bdae6de4c81eb0d25239d45575c1f7ff86f6fc1e73693d3387279a9",
+        "name": "/ibe160-submission-private-db-1",
+        "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+        "started": "2026-10-28T19:45:43.632130381Z",
+        "status": "running",
+        "restarts": 0,
+        "ports": {},
+        "mounts": [
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\tmp\\submission-clean-20261028\\.private-runtime\\submission\\postgres-password",
+            "destination": "/run/secrets/submission_password",
+            "rw": false
+          },
+          {
+            "type": "volume",
+            "name": "ibe160-submission_submission_private",
+            "source": "/var/lib/docker/volumes/ibe160-submission_submission_private/_data",
+            "destination": "/var/lib/postgresql/data",
+            "rw": true
+          }
+        ]
+      },
+      {
+        "id": "3bacac07fcf1c64bb2c4db972d894bdb5cd38db1f37466a4f25a33490dd50f24",
+        "name": "/ibe160-tablet-prep-private-api-1",
+        "image": "sha256:26ee88cb518aefb2b2733b6f96fec909c061fe58becd42981ebaf251e134ac12",
+        "started": "2026-10-28T16:42:07.677236515Z",
+        "status": "running",
+        "restarts": 0,
+        "ports": {},
+        "mounts": [
+          {
+            "type": "bind",
+            "source": "C:/Users/Jonas/.codex/.chatgpt-projects/g-p-6ab6b4c1c6888191a96d3242fab912b4/operations/runtime/tablet/postgres-password",
+            "destination": "/run/secrets/tablet_postgres_password",
+            "rw": false
+          }
+        ]
+      },
+      {
+        "id": "4c74a4e74e6be044d1c4e23d77fb7c72f6111a1568697ac9875e934837a3835e",
+        "name": "/ibe160-story123-tests-api-1",
+        "image": "sha256:2acc520d2b766436231d5b36049e29b87810d4e4a862a993f17861b518ff79bf",
+        "started": "2026-10-27T19:01:23.109913656Z",
+        "status": "running",
+        "restarts": 0,
+        "ports": {
+          "8000/tcp": [
+            {
+              "HostIp": "127.0.0.1",
+              "HostPort": "18323"
+            }
+          ]
+        },
+        "mounts": [
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\tmp\\story-12-3\\backend",
+            "destination": "/app",
+            "rw": false
+          },
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\tmp\\story-12-3\\Eksempelfiler",
+            "destination": "/fixtures",
+            "rw": false
+          },
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\tmp\\story-12-3\\.private-runtime\\story123-postgres-password",
+            "destination": "/run/secrets/story123_password",
+            "rw": false
+          }
+        ]
+      },
+      {
+        "id": "4cd277b2aa4e46aa156da66ae17c73d44632e4e1dc81b8eab3f4cfd9f7f44f49",
+        "name": "/ibe160-tablet-prep-access-gate-1",
+        "image": "sha256:25e40c61e6a734c2b19daaeb5c3eb7230f424a917992f3f33e100a2e309484c2",
+        "started": "2026-10-28T16:42:42.750443414Z",
+        "status": "running",
+        "restarts": 0,
+        "ports": {},
+        "mounts": [
+          {
+            "type": "bind",
+            "source": "C:/Users/Jonas/.codex/.chatgpt-projects/g-p-6ab6b4c1c6888191a96d3242fab912b4/operations/runtime/tablet/access-policy.json",
+            "destination": "/run/secrets/tablet_access_policy",
+            "rw": false
+          }
+        ]
+      },
+      {
+        "id": "56cc2b541bd914aaf07e3dc6f30942d78479353eefb7bac25d653ae78947f3a8",
+        "name": "/ibe160-story122-tests-private-db-1",
+        "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+        "started": "2026-10-26T21:50:57.522035414Z",
+        "status": "running",
+        "restarts": 0,
+        "ports": {},
+        "mounts": [
+          {
+            "type": "bind",
+            "source": "C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\story-12-2\\.private-runtime\\story122-postgres-password",
+            "destination": "/run/secrets/story122_password",
+            "rw": false
+          },
+          {
+            "type": "volume",
+            "name": "ibe160-story122-tests_story122_private",
+            "source": "/var/lib/docker/volumes/ibe160-story122-tests_story122_private/_data",
+            "destination": "/var/lib/postgresql/data",
+            "rw": true
+          }
+        ]
+      },
+      {
+        "id": "5766c65fa74e96f683ef7cfa2b7307ab4a94f0ef9644dbf63a5cb89d2456ddce",
+        "name": "/ibe160-story122-tests-db-1",
+        "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+        "started": "2026-10-26T21:51:10.66207864Z",
+        "status": "running",
+        "restarts": 0,
+        "ports": {},
+        "mounts": [
+          {
+            "type": "volume",
+            "name": "ibe160-story122-tests_story122_fictional",
+            "source": "/var/lib/docker/volumes/ibe160-story122-tests_story122_fictional/_data",
+            "destination": "/var/lib/postgresql/data",
+            "rw": true
+          }
+        ]
+      },
+      {
+        "id": "59df9d68fda8addba018e1f384ea05f7e0bf196093ca9b7455dc6b275bc79502",
+        "name": "/ibe160-private-tests-private-db-1",
+        "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+        "started": "2026-10-26T18:31:51.564617351Z",
+        "status": "exited",
+        "restarts": 0,
+        "ports": {},
+        "mounts": [
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\.private-runtime\\postgres-password",
+            "destination": "/run/secrets/private_postgres_password",
+            "rw": false
+          },
+          {
+            "type": "volume",
+            "name": "ibe160-private-tests_private_pg",
+            "source": "/var/lib/docker/volumes/ibe160-private-tests_private_pg/_data",
+            "destination": "/var/lib/postgresql/data",
+            "rw": true
+          }
+        ]
+      },
+      {
+        "id": "667b53445fc4570e4efb6de1903df415a6259fd2c2989febe6ac4b77de299fb2",
+        "name": "/ibe160-story123-tests-private-db-1",
+        "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+        "started": "2026-10-27T19:01:19.297520771Z",
+        "status": "running",
+        "restarts": 0,
+        "ports": {},
+        "mounts": [
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\tmp\\story-12-3\\.private-runtime\\story123-postgres-password",
+            "destination": "/run/secrets/story123_password",
+            "rw": false
+          },
+          {
+            "type": "volume",
+            "name": "ibe160-story123-tests_story123_private",
+            "source": "/var/lib/docker/volumes/ibe160-story123-tests_story123_private/_data",
+            "destination": "/var/lib/postgresql/data",
+            "rw": true
+          }
+        ]
+      },
+      {
+        "id": "677f99f9f8411bcb4dc75201640d1c9ac299adb0afb77c7516242a63957967ca",
+        "name": "/ibe160-private-work-private-db-1",
+        "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+        "started": "2026-10-20T18:47:00.530707318Z",
+        "status": "running",
+        "restarts": 0,
+        "ports": {},
+        "mounts": [
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\.private-runtime\\postgres-password",
+            "destination": "/run/secrets/private_postgres_password",
+            "rw": false
+          },
+          {
+            "type": "volume",
+            "name": "ibe160-private-work_private_pg",
+            "source": "/var/lib/docker/volumes/ibe160-private-work_private_pg/_data",
+            "destination": "/var/lib/postgresql/data",
+            "rw": true
+          }
+        ]
+      },
+      {
+        "id": "6a6df1656f03bc9180c7e7468d20bd5cc2c703a05d80304c897c6358a0ce108f",
+        "name": "/ibe160-story124-tests-api-1",
+        "image": "sha256:af878d335c49f418427cf4d6a48bea57967f115a27c9aaaeba570bff1c445a49",
+        "started": "2026-10-28T06:08:40.932099569Z",
+        "status": "running",
+        "restarts": 0,
+        "ports": {
+          "8000/tcp": [
+            {
+              "HostIp": "127.0.0.1",
+              "HostPort": "18325"
+            }
+          ]
+        },
+        "mounts": [
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\tmp\\story-12-4\\backend",
+            "destination": "/app",
+            "rw": false
+          },
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\tmp\\story-12-4\\Eksempelfiler",
+            "destination": "/fixtures",
+            "rw": false
+          },
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\tmp\\story-12-4\\.private-runtime\\story124-postgres-password",
+            "destination": "/run/secrets/story124_password",
+            "rw": false
+          }
+        ]
+      },
+      {
+        "id": "6a85f6927af64e6743e3415391e43d1c65bab151e6e82e666516d636eb5ad49b",
+        "name": "/ibe160-submission-private-api-1",
+        "image": "sha256:7725ce0c88035360331cb8a1dcf2ec3871ad318f2504332ddf27c635e010a22c",
+        "started": "2026-10-28T19:45:46.442977352Z",
+        "status": "running",
+        "restarts": 0,
+        "ports": {
+          "8000/tcp": [
+            {
+              "HostIp": "127.0.0.1",
+              "HostPort": "18328"
+            }
+          ]
+        },
+        "mounts": [
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\tmp\\submission-clean-20261028\\Eksempelfiler",
+            "destination": "/fixtures",
+            "rw": false
+          },
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\tmp\\submission-clean-20261028\\.private-runtime\\submission\\account.json",
+            "destination": "/run/secrets/submission_account",
+            "rw": false
+          },
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\tmp\\submission-clean-20261028\\.private-runtime\\submission\\postgres-password",
+            "destination": "/run/secrets/submission_password",
+            "rw": false
+          },
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\tmp\\submission-clean-20261028\\deploy\\submission\\manage.py",
+            "destination": "/submission/manage.py",
+            "rw": false
+          }
+        ]
+      },
+      {
+        "id": "6bd0e99aad57f3053e491cba1d4f811cff92d997ea6a4eb09433cb39ba77e3b4",
+        "name": "/ibe160-tablet-prep-gateway-1",
+        "image": "sha256:50242b65f742441d0928d00775640715ce4748b4420519fbca9ece5b54253bfe",
+        "started": "2026-10-28T16:42:43.067400736Z",
+        "status": "running",
+        "restarts": 0,
+        "ports": {
+          "8080/tcp": [
+            {
+              "HostIp": "127.0.0.1",
+              "HostPort": "18081"
+            }
+          ]
+        },
+        "mounts": []
+      },
+      {
+        "id": "75fe9c9792700c4244abbcbffed33cdf38559c783166978e4d633b03a5bb7d48",
+        "name": "/ibe160-private-tests-private-api-1",
+        "image": "sha256:d9cb0de47c0aebbd648e253672759449ce1d8a3fd1816d8a2caf43c9ef7452d0",
+        "started": "2026-10-26T18:31:55.319748138Z",
+        "status": "exited",
+        "restarts": 0,
+        "ports": {
+          "8000/tcp": [
+            {
+              "HostIp": "127.0.0.1",
+              "HostPort": "8001"
+            }
+          ]
+        },
+        "mounts": [
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\.private-runtime\\postgres-password",
+            "destination": "/run/secrets/private_postgres_password",
+            "rw": false
+          }
+        ]
+      },
+      {
+        "id": "79693d20ba694917486416a0d0a0883572842f37d8cd7b937060fc138caef511",
+        "name": "/ibe160-fictional-assessment-frontend-1",
+        "image": "sha256:90ef8ce693acea80756dc614e10708f284736430afba3bfba5525b87cc56ac55",
+        "started": "2026-10-26T15:55:57.643134471Z",
+        "status": "running",
+        "restarts": 0,
+        "ports": {
+          "5173/tcp": [
+            {
+              "HostIp": "127.0.0.1",
+              "HostPort": "5173"
+            }
+          ]
+        },
+        "mounts": []
+      },
+      {
+        "id": "7991577f9cf5e84519bd5e6449bb5e5e62e96214d4fcd15ec4587bf4d10e58ad",
+        "name": "/ibe160-story12-integration-api-1",
+        "image": "sha256:18f373092c551cd23f3b706aa618162c52aa74bb7e7e18d208e9e1f7a7dc2614",
+        "started": "2026-10-27T15:13:57.527635969Z",
+        "status": "running",
+        "restarts": 0,
+        "ports": {
+          "8000/tcp": [
+            {
+              "HostIp": "127.0.0.1",
+              "HostPort": "18312"
+            }
+          ]
+        },
+        "mounts": [
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\backend",
+            "destination": "/app",
+            "rw": false
+          },
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\Eksempelfiler",
+            "destination": "/fixtures",
+            "rw": false
+          },
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\.private-runtime\\story12-integration-postgres-password",
+            "destination": "/run/secrets/integration_password",
+            "rw": false
+          }
+        ]
+      },
+      {
+        "id": "9bb6363dc3816c5c5c27889b2a0f3b9db0172f7e8e668029a61cb45a8ffe906d",
+        "name": "/ibe160-private-work-private-api-1",
+        "image": "sha256:5dff578b747ebf2d16a6335ddc0b432e993b401cf46be1d27a2e6bd7f0898861",
+        "started": "2026-10-27T21:47:16.146081756Z",
+        "status": "running",
+        "restarts": 0,
+        "ports": {
+          "8000/tcp": [
+            {
+              "HostIp": "127.0.0.1",
+              "HostPort": "8001"
+            }
+          ]
+        },
+        "mounts": [
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\.private-runtime\\postgres-password",
+            "destination": "/run/secrets/private_postgres_password",
+            "rw": false
+          }
+        ]
+      },
+      {
+        "id": "a3a48e6d8d014c6ee3ea49e639a117fb0160844812e399c9c5fb52d82d473cfc",
+        "name": "/friendly_shockley",
+        "image": "sha256:5dd0d3e6e255913fc30f90b9f2b1d359cc2cbdb48090cc4b65f1676e203243cc",
+        "started": "2026-09-07T21:16:35.61848643Z",
+        "status": "exited",
+        "restarts": 0,
+        "ports": {},
+        "mounts": []
+      },
+      {
+        "id": "aeb9125406b628eaaaaf5214c6bd33e59676381528f75147dc3f97f9e6302f6b",
+        "name": "/ibe160-story12-integration-db-1",
+        "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+        "started": "2026-10-27T15:13:53.291318945Z",
+        "status": "running",
+        "restarts": 0,
+        "ports": {},
+        "mounts": [
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\.private-runtime\\story12-integration-postgres-password",
+            "destination": "/run/secrets/integration_password",
+            "rw": false
+          },
+          {
+            "type": "volume",
+            "name": "ibe160-story12-integration_integration_fictional",
+            "source": "/var/lib/docker/volumes/ibe160-story12-integration_integration_fictional/_data",
+            "destination": "/var/lib/postgresql/data",
+            "rw": true
+          }
+        ]
+      },
+      {
+        "id": "b6a16b87207c2857c84d878b8615d174d81d0f407586681ad8701b2955ed6c53",
+        "name": "/ibe160-fictional-assessment-api-1",
+        "image": "sha256:43c9740447cdcb24855f8addb0eb0a8fe5897726fc524b732a755c78064adff4",
+        "started": "2026-10-26T15:44:25.147799589Z",
+        "status": "running",
+        "restarts": 0,
+        "ports": {
+          "8000/tcp": [
+            {
+              "HostIp": "127.0.0.1",
+              "HostPort": "8000"
+            }
+          ]
+        },
+        "mounts": []
+      },
+      {
+        "id": "be2e42172f8f8bd5e2dd53463434d7db4e4e925d52301979d4fa21ac9b52804b",
+        "name": "/ibe160-story12-integration-private-api-1",
+        "image": "sha256:b42fdb7d79c608df0d0ea5582c7702665c5bf6115012d1b110dce6d3bdb090c9",
+        "started": "2026-10-27T15:31:55.317079835Z",
+        "status": "running",
+        "restarts": 0,
+        "ports": {
+          "8000/tcp": [
+            {
+              "HostIp": "127.0.0.1",
+              "HostPort": "18313"
+            }
+          ]
+        },
+        "mounts": [
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\backend",
+            "destination": "/app",
+            "rw": false
+          },
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\Eksempelfiler",
+            "destination": "/fixtures",
+            "rw": false
+          },
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\.private-runtime\\story12-integration-postgres-password",
+            "destination": "/run/secrets/integration_password",
+            "rw": false
+          }
+        ]
+      },
+      {
+        "id": "c22c9bdb4adf01f33db2383190eccb0b7a42a50d0513953cd99695cac666f49d",
+        "name": "/ibe160-story124-tests-db-1",
+        "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+        "started": "2026-10-28T06:08:36.515321701Z",
+        "status": "running",
+        "restarts": 0,
+        "ports": {},
+        "mounts": [
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\tmp\\story-12-4\\.private-runtime\\story124-postgres-password",
+            "destination": "/run/secrets/story124_password",
+            "rw": false
+          },
+          {
+            "type": "volume",
+            "name": "ibe160-story124-tests_story124_fictional",
+            "source": "/var/lib/docker/volumes/ibe160-story124-tests_story124_fictional/_data",
+            "destination": "/var/lib/postgresql/data",
+            "rw": true
+          }
+        ]
+      },
+      {
+        "id": "c98b143f76524078b1675d811e6112347faf044c6580ab264b55577bfa0a5f5d",
+        "name": "/ibe160-fictional-assessment-db-1",
+        "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+        "started": "2026-10-19T18:20:21.013996422Z",
+        "status": "running",
+        "restarts": 0,
+        "ports": {},
+        "mounts": [
+          {
+            "type": "volume",
+            "name": "ibe160-fictional-assessment_fictional_pg",
+            "source": "/var/lib/docker/volumes/ibe160-fictional-assessment_fictional_pg/_data",
+            "destination": "/var/lib/postgresql/data",
+            "rw": true
+          }
+        ]
+      },
+      {
+        "id": "cd1db9210623013a6795d2c793b150212fe769785efc186f0a219f4c85447054",
+        "name": "/ibe160-story121-tests-private-api-1",
+        "image": "sha256:efb271265fc913ab3d0786373e73fefc8008afc791c11d06bfe9b705c84a01c0",
+        "started": "2026-10-26T23:08:28.21447389Z",
+        "status": "running",
+        "restarts": 0,
+        "ports": {
+          "8000/tcp": [
+            {
+              "HostIp": "127.0.0.1",
+              "HostPort": "18121"
+            }
+          ]
+        },
+        "mounts": [
+          {
+            "type": "bind",
+            "source": "D:\\IBE160-story-12-1\\backend",
+            "destination": "/app",
+            "rw": false
+          },
+          {
+            "type": "bind",
+            "source": "D:\\IBE160-story-12-1\\Eksempelfiler",
+            "destination": "/fixtures",
+            "rw": false
+          },
+          {
+            "type": "bind",
+            "source": "D:\\IBE160-story-12-1\\.private-runtime\\story121-postgres-password",
+            "destination": "/run/secrets/private_postgres_password",
+            "rw": false
+          }
+        ]
+      },
+      {
+        "id": "e020bd052af4452ace6c76077c090cd768d76356064e5c12b30e2a0c9c8c34ba",
+        "name": "/ibe160-story121-tests-private-db-1",
+        "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+        "started": "2026-10-26T21:42:16.389701314Z",
+        "status": "running",
+        "restarts": 0,
+        "ports": {},
+        "mounts": [
+          {
+            "type": "bind",
+            "source": "D:\\IBE160-story-12-1\\.private-runtime\\story121-postgres-password",
+            "destination": "/run/secrets/private_postgres_password",
+            "rw": false
+          },
+          {
+            "type": "volume",
+            "name": "ibe160-story121-tests_story121_pg",
+            "source": "/var/lib/docker/volumes/ibe160-story121-tests_story121_pg/_data",
+            "destination": "/var/lib/postgresql/data",
+            "rw": true
+          }
+        ]
+      },
+      {
+        "id": "e57a1b8fd2f53e1b81eadaab8f1346304f32dba6911ed083dbd485aeecd40435",
+        "name": "/ibe160-story12-integration-private-db-1",
+        "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+        "started": "2026-10-27T15:13:53.43911017Z",
+        "status": "running",
+        "restarts": 0,
+        "ports": {},
+        "mounts": [
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\.private-runtime\\story12-integration-postgres-password",
+            "destination": "/run/secrets/integration_password",
+            "rw": false
+          },
+          {
+            "type": "volume",
+            "name": "ibe160-story12-integration_integration_private",
+            "source": "/var/lib/docker/volumes/ibe160-story12-integration_integration_private/_data",
+            "destination": "/var/lib/postgresql/data",
+            "rw": true
+          }
+        ]
+      },
+      {
+        "id": "f2ee6029103f66f2298e48e3f7729c85bf4c8f64d43774146e2ac84a2382ab7c",
+        "name": "/ibe160-story124-tests-private-db-1",
+        "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+        "started": "2026-10-28T15:06:06.075991019Z",
+        "status": "running",
+        "restarts": 0,
+        "ports": {},
+        "mounts": [
+          {
+            "type": "bind",
+            "source": "D:\\IBE160\\tmp\\story-12-4\\.private-runtime\\story124-postgres-password",
+            "destination": "/run/secrets/story124_password",
+            "rw": false
+          },
+          {
+            "type": "volume",
+            "name": "ibe160-story124-tests_story124_private",
+            "source": "/var/lib/docker/volumes/ibe160-story124-tests_story124_private/_data",
+            "destination": "/var/lib/postgresql/data",
+            "rw": true
+          }
+        ]
+      },
+      {
+        "id": "fd52df01d71b09aab91030bd9922904d8a9dfb651ae4e4c8401089280b566955",
+        "name": "/ibe160-story122-tests-private-api-1",
+        "image": "sha256:72774cad61a241605b3487def5d8cef084a6a48be0ad24e2554df1b8e5a24561",
+        "started": "2026-10-26T21:51:00.368172346Z",
+        "status": "running",
+        "restarts": 0,
+        "ports": {
+          "8000/tcp": [
+            {
+              "HostIp": "127.0.0.1",
+              "HostPort": "18223"
+            }
+          ]
+        },
+        "mounts": [
+          {
+            "type": "bind",
+            "source": "C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\story-12-2\\.private-runtime\\story122-postgres-password",
+            "destination": "/run/secrets/story122_password",
+            "rw": false
+          }
+        ]
+      }
+    ],
+    "volumes": [
+      {
+        "name": "ibe160-deploy-check_check_pg",
+        "created": "2026-10-28T16:38:41Z",
+        "driver": "local",
+        "mountpoint": "/var/lib/docker/volumes/ibe160-deploy-check_check_pg/_data"
+      },
+      {
+        "name": "ibe160-fictional-assessment_fictional_pg",
+        "created": "2026-10-19T18:06:41Z",
+        "driver": "local",
+        "mountpoint": "/var/lib/docker/volumes/ibe160-fictional-assessment_fictional_pg/_data"
+      },
+      {
+        "name": "ibe160-private-tests_private_pg",
+        "created": "2026-10-20T19:42:24Z",
+        "driver": "local",
+        "mountpoint": "/var/lib/docker/volumes/ibe160-private-tests_private_pg/_data"
+      },
+      {
+        "name": "ibe160-private-work_private_pg",
+        "created": "2026-10-20T18:21:20Z",
+        "driver": "local",
+        "mountpoint": "/var/lib/docker/volumes/ibe160-private-work_private_pg/_data"
+      },
+      {
+        "name": "ibe160-story12-integration_integration_fictional",
+        "created": "2026-10-27T06:47:32Z",
+        "driver": "local",
+        "mountpoint": "/var/lib/docker/volumes/ibe160-story12-integration_integration_fictional/_data"
+      },
+      {
+        "name": "ibe160-story12-integration_integration_private",
+        "created": "2026-10-27T06:47:32Z",
+        "driver": "local",
+        "mountpoint": "/var/lib/docker/volumes/ibe160-story12-integration_integration_private/_data"
+      },
+      {
+        "name": "ibe160-story121-tests_story121_pg",
+        "created": "2026-10-26T21:42:15Z",
+        "driver": "local",
+        "mountpoint": "/var/lib/docker/volumes/ibe160-story121-tests_story121_pg/_data"
+      },
+      {
+        "name": "ibe160-story122-tests_story122_fictional",
+        "created": "2026-10-26T21:50:56Z",
+        "driver": "local",
+        "mountpoint": "/var/lib/docker/volumes/ibe160-story122-tests_story122_fictional/_data"
+      },
+      {
+        "name": "ibe160-story122-tests_story122_private",
+        "created": "2026-10-26T21:50:56Z",
+        "driver": "local",
+        "mountpoint": "/var/lib/docker/volumes/ibe160-story122-tests_story122_private/_data"
+      },
+      {
+        "name": "ibe160-story123-tests_story123_fictional",
+        "created": "2026-10-27T08:16:47Z",
+        "driver": "local",
+        "mountpoint": "/var/lib/docker/volumes/ibe160-story123-tests_story123_fictional/_data"
+      },
+      {
+        "name": "ibe160-story123-tests_story123_private",
+        "created": "2026-10-27T08:16:47Z",
+        "driver": "local",
+        "mountpoint": "/var/lib/docker/volumes/ibe160-story123-tests_story123_private/_data"
+      },
+      {
+        "name": "ibe160-story124-tests_story124_fictional",
+        "created": "2026-10-28T06:04:30Z",
+        "driver": "local",
+        "mountpoint": "/var/lib/docker/volumes/ibe160-story124-tests_story124_fictional/_data"
+      },
+      {
+        "name": "ibe160-story124-tests_story124_private",
+        "created": "2026-10-28T06:04:30Z",
+        "driver": "local",
+        "mountpoint": "/var/lib/docker/volumes/ibe160-story124-tests_story124_private/_data"
+      },
+      {
+        "name": "ibe160-submission_submission_fictional",
+        "created": "2026-10-28T17:27:56Z",
+        "driver": "local",
+        "mountpoint": "/var/lib/docker/volumes/ibe160-submission_submission_fictional/_data"
+      },
+      {
+        "name": "ibe160-submission_submission_private",
+        "created": "2026-10-28T17:27:56Z",
+        "driver": "local",
+        "mountpoint": "/var/lib/docker/volumes/ibe160-submission_submission_private/_data"
+      },
+      {
+        "name": "ibe160-tablet-prep_tablet_pg",
+        "created": "2026-10-26T20:52:10Z",
+        "driver": "local",
+        "mountpoint": "/var/lib/docker/volumes/ibe160-tablet-prep_tablet_pg/_data"
+      }
+    ]
+  },
+  "result": "passed"
+}

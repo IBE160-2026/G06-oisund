@@ -1,0 +1,17 @@
+
+> ibe160-fictional-assessment@0.1.0 build
+> tsc --noEmit && vite build
+
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 43 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/demo.html                                  0.45 kB │ gzip:  0.29 kB
+dist/index.html                                 0.46 kB │ gzip:  0.30 kB
+dist/assets/FictionalAssessment-Ca5gn51W.css   16.29 kB │ gzip:  3.26 kB
+dist/assets/demo-CVYX95Ri.js                    0.18 kB │ gzip:  0.16 kB
+dist/assets/main-BW1RTvUe.js                  185.68 kB │ gzip: 50.43 kB
+dist/assets/FictionalAssessment-DgWBF5_Z.js   242.63 kB │ gzip: 75.42 kB
+
+✓ built in 187ms

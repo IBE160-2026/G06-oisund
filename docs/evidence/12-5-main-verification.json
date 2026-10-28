@@ -1,0 +1,60 @@
+{
+  "at": "2026-10-28T20:27:41.312Z",
+  "checkedHead": "dbdbd1813e29c02913b72e15a24f0a3321565d95",
+  "merge": "dbdbd1813e29c02913b72e15a24f0a3321565d95",
+  "accepted": "330d5a21bc38decc95bbd5332edee2acf08e4faa",
+  "snapshot": "c067fdbb20150219c041588ed4e990e7b0ef6b94",
+  "acceptedAndMergeTree": "c8cad236b865df2e62ba0016b9e949a8eb4f127d",
+  "allAncestors": true,
+  "executablePaths": [
+    "backend",
+    "frontend",
+    "scripts",
+    "deploy",
+    "compose.submission.yaml",
+    ".dockerignore",
+    ".gitattributes",
+    "Eksempelfiler"
+  ],
+  "executableDiffFromSnapshot": "empty",
+  "localLinks": 356,
+  "lineBounds": 111,
+  "demoSource": "c067fdbb20150219c041588ed4e990e7b0ef6b94",
+  "demoClean": true,
+  "assets": [
+    {
+      "asset": "/assets/main-BW1RTvUe.js",
+      "sha256": "8287893144fa68af826d1337cc31505fa94b43e6a23bb84fca0ca26994fab41f",
+      "equalsFreshBuild": true
+    },
+    {
+      "asset": "/assets/FictionalAssessment-DgWBF5_Z.js",
+      "sha256": "7c658dbd5e696de8b7feb29b3b34f3249d07fcd4eabddcea0a2eb7bd5b9cff03",
+      "equalsFreshBuild": true
+    },
+    {
+      "asset": "/assets/FictionalAssessment-Ca5gn51W.css",
+      "sha256": "d436cb47d234e7a034e820876840f7cb88c6e119b2912f0c3cb996228416e2d3",
+      "equalsFreshBuild": true
+    }
+  ],
+  "health": [
+    {
+      "port": 18327,
+      "status": 200,
+      "body": {
+        "status": "ok",
+        "mode": "fictional-assessment"
+      }
+    },
+    {
+      "port": 18328,
+      "status": 200,
+      "body": {
+        "status": "ok",
+        "mode": "private-local"
+      }
+    }
+  ],
+  "result": "passed"
+}
