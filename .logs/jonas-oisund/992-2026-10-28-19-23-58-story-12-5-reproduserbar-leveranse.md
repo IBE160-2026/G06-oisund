@@ -61,6 +61,10 @@ Guidet sluttvurdering 2026-10-28 kl. 20:54: Jonas bekreftet «steg 9 ok». Manue
 
 Guidet sluttvurdering 2026-10-28 kl. 21:07: Jonas bekreftet «steg 10 ok». Han har gjennomgått reproduksjonsrapportens resultater/feil/versjonsgrenser, kravsporbarhet og KI-refleksjon/begrensninger. Alle ti deler av den guidede sluttvurderingen er dermed bekreftet manuelt. Dette etablerer ikke ny fysisk kvalifikasjon, sju-døgnstest eller målt driftsnytte. Samlet Story12.5-aksept holdes fortsatt separat og er eneste gjenstående beslutning i denne gjennomgangen; ingen merge/deploy/Epic12-avslutning er autorisert.
 
+Samlet eierbeslutning 2026-10-28 kl. 21:09: Jonas sa uttrykkelig «Jeg godkjenner story 12.5 i sin helhet.» Story12.5 er nå done/accepted. [Datert akseptdokumentasjon](../../docs/evidence/12-5-owner-acceptance-2026-10-28.md) samler de ti bekreftede manuelle delene, de to veiledningsrettingene og bevisgrensene. Implementeringsstory, sprintstatus, den kanoniske12.5-statusen/planleggingskopien og gjeldende README/leveranseinngang/refleksjon/begrensningsdokument er oppdatert i commit12c847555be40c7ec603c0ca4e72e38adc7e9181. Det åpne12.5-akseptpunktet i issues.md lukkes med løsningsdato.
+
+Akseptregistreringen endrer bare dokumentasjon/status.397 lokale lenker er kontrollert, frozen startintensjon er bytebevart etter LF-normalisering, og sammenligning mot c067fdb viser uendrede produkt-/test-/fixture-/migrerings-/verktøyfiler. Ingen ny funksjonstest er nødvendig eller påstått for statusendringen. Walkthroughens avslutningsregel er løst og tom. Epic12 står uttrykkelig fortsatt in-progress; ingen merge, deploy, tunnel-/konto-/databaseoperasjon, kursinnlevering, retrospektiv eller utvidelsesstart utføres. Opprinnelig godkjenning av branch-push videreføres for akseptdokumentasjon og separat loggcommit; den reproduserbare snapshoten c067fdb og eksisterende runtime beholdes.
+
 ### Åpne punkter
 
-- Jonas sin sluttvurdering av leveranseoppskriften og uttrykkelige Story12.5-aksept gjenstår; bruk [konkret review-sjekkliste](../../docs/submission/review-checklist.md). Teknisk grønt eller push gir ikke aksept og avslutter ikke Epic12.
+- Ingen nye åpne punkter for Story12.5. Tidligere registrerte produkt-/driftspunkter i issues.md er uendret.
