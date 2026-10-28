@@ -1,6 +1,6 @@
 # Story 12.4 komplett brukerflyt
 
-## 2026-10-28 kl. 13:49 — Jonas Øisund
+## 2026-10-28 kl. 13:54 — Jonas Øisund
 
 ### Oppgave
 Gjennomfør Story12.4/V1-19 på egen branch og eget worktree fra faktisk nyeste origin/main, med reell nettleser/API/PostgreSQL, uavhengige syntetiske forventninger og mobilrettingen som testgrunnlag. Lever teknisk ferdig og reviewklart med dokumentasjon, commit og push; ikke flett, deploy, gi manuell aksept eller start12.5.
@@ -40,6 +40,8 @@ USB-oppfølging28.10.2026 etter brukerens beskjed om tilkoblet nettbrett og stop
 Manuell guidet akseptserie på nettbrettet:6 tester totalt —1 import/filvalg,2 korrigering/lagring/gjenåpning,3 bekreftelse/manuelt aktivitetsvalg,4 avvik/fanebytte,5 start/avslutning/oppsummering,6 utlogging. Jonas bekreftet «Test1 bestått»: avbrutt/gjentatt native valg av syntetisk A, gjennomgang med skift97000001/tjenestedato4.februar2030/ukjent buss, fingerlesbarhet/rulling og tilgjengelig «Bruk som separat nytt utkast». Brukeren stoppet før adopsjon. Dette er brukerens rapporterte resultat for test1, ikke samlet storyaksept. Test3–6 og eksplisitt eierbeslutning gjenstår.
 
 Manuell test2 av6: Jonas bekreftet «Test2 bestått». Nytt separat A-utkast ble korrigert i aktivitet3 (linje731) til «Manuell testholdeplass», med kildenotat «Manuell kontroll – test12.4». Etter første eksplisitte lagring ble Buss/vogn satt til TEST-124 og lagret som versjon2. Reload/gjenåpning av2030-02-04 versjon2 bevarte destinasjon, notat, buss og opprinnelige PDF-kildefakta. Brukeren stoppet før gjennomgang/bekreftelse. Dette er brukerens rapporterte resultat; samlet storyaksept er fortsatt ikke gitt. Status:2/6 bestått, test3–6 gjenstår.
+
+Manuell test3 av6: Jonas bekreftet «Test3 bestått». Lagret A-utkast versjon2 ble gjennomgått og eksplisitt bekreftet med nødvendige ukjent-bekreftelser. Dagen åpnet uten valgt aktivitet og uten Start. Manuelt valg av aktivitet3/linje731 viste «Manuell testholdeplass»; Neste/Forrige returnerte til aktivitet3 uten automatisk start/fullføring. Reload/gjenåpning av plan2030-02-04 versjon2 beholdt valgt aktivitet og rettelsen; skiftet var fortsatt ikke startet. Brukeren stoppet før Start skift. Dette er rapportert manuell testaksept, ikke samlet storyaksept. Status:3/6 bestått, test4–6 gjenstår.
 
 ### Åpne punkter
 - Manuell12.4-aksept gjenstår: gjennomfør sjekklisten på det separate15324-bygget, særlig PDF/korrigering/lagring/gjenåpning, faneavbrudd midt i avviksredigering, konflikt med enda en endring, slutt/avbrudd/gjenlasting og utlogging/kontobytte. Registrer konkret bygg/enhet/nettleser og eierens beslutning; automatisering innebærer ikke aksept.
