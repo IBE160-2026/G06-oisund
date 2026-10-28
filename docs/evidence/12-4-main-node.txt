@@ -1,0 +1,19 @@
+✔ translates isolated endpoints and tracked synthetic fixture while preserving unrelated files (60.2778ms)
+✔ refuses unowned collision before overwriting or deleting any entry (45.9381ms)
+✔ refuses owned file link before overwriting or deleting any entry (32.9328ms)
+ℹ Windows file-symlink privilege unavailable; exercised real junction refusal
+✔ refuses obsolete file link before overwriting or deleting any entry (64.0286ms)
+ℹ Windows file-symlink privilege unavailable; exercised real junction refusal
+✔ refuses manifest link before overwriting or deleting any entry (44.2376ms)
+ℹ Windows file-symlink privilege unavailable; exercised real junction refusal
+(node:39580) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ explicit relative tablet base overrides legacy; invalid explicit bases fail closed (116.1192ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 415.8303

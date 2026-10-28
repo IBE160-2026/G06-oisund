@@ -1,0 +1,6 @@
+{
+  "phase": "HTTP preflight",
+  "failure": "RemoteDisconnected",
+  "merge_attempted": false,
+  "correction": "Record each unauthenticated loopback response or transport category without assuming every pre-existing listener serves a successful HTTP root response; no service changed"
+}

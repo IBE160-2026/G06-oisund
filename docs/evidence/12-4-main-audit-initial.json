@@ -1,0 +1,6 @@
+{
+  "phase": "container equality",
+  "passed": false,
+  "failure": "Initial whole-record comparison failed; immediate independent reread found no field differences. Initial after-snapshot was not retained, so root cause is unproven. Final method canonicalizes unordered mount-list order and retains final before/after values. No container action performed.",
+  "initial_method": "audit-initial.py"
+}

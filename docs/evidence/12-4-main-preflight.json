@@ -1,0 +1,402 @@
+{
+  "recorded_at": "2026-10-28T16:04:23.152185+00:00",
+  "main_before": "c3e5d66a7d9faa9af19a58c6002538610c163352",
+  "story_head": "4e38e240917b29450e68f817b85411185ef5eac3",
+  "required_commits_present": true,
+  "worktrees_before": [
+    {
+      "path": "D:/IBE160",
+      "head": "c3e5d66a7d9faa9af19a58c6002538610c163352",
+      "dirty_entries": 0
+    },
+    {
+      "path": "C:/Users/Jonas/.codex/.chatgpt-projects/g-p-6ab6b4c1c6888191a96d3242fab912b4/story-12-2",
+      "head": "e8221ff3a61a86beaa5d42c91b9a4c4df69e28f6",
+      "dirty_entries": 0
+    },
+    {
+      "path": "C:/Users/Jonas/.codex/.chatgpt-projects/g-p-6ab6b4c1c6888191a96d3242fab912b4/tablet-access-11-6",
+      "head": "0c1f2934d8d865d5372b502c65d8680f75481b43",
+      "dirty_entries": 0
+    },
+    {
+      "path": "C:/Users/Jonas/.codex/.chatgpt-projects/g-p-6ab6b4c1c6888191a96d3242fab912b4/tablet-remote-access",
+      "head": "aa0fcfb48904c7e0bdd6c68280e5db2d21f478ed",
+      "dirty_entries": 16
+    },
+    {
+      "path": "D:/IBE160/tmp/story-12-3",
+      "head": "1ac729c16b28ae19a0c9509022c92cffe3298aa7",
+      "dirty_entries": 0
+    },
+    {
+      "path": "D:/IBE160/tmp/story-12-4",
+      "head": "4e38e240917b29450e68f817b85411185ef5eac3",
+      "dirty_entries": 0
+    },
+    {
+      "path": "D:/IBE160-plan-automatic-notices",
+      "head": "da867072a8a17249032c00efa51bd61979d41428",
+      "dirty_entries": 0
+    },
+    {
+      "path": "D:/IBE160-plan-complete-route-network",
+      "head": "7cada9d2e66af9806358f582bc8ea459321a6563",
+      "dirty_entries": 0
+    },
+    {
+      "path": "D:/IBE160-plan-gps-speed",
+      "head": "e2468abb8bf492007d9f9437698c80d88e9ca280",
+      "dirty_entries": 0
+    },
+    {
+      "path": "D:/IBE160-plan-position-progression",
+      "head": "df47a4e74ca982a2e04d6e5531e7744caf4f4717",
+      "dirty_entries": 0
+    },
+    {
+      "path": "D:/IBE160-plan-speed-limits",
+      "head": "5adc6fb2c0137a3a6519d4f7ba42dd57f0e02f1c",
+      "dirty_entries": 0
+    },
+    {
+      "path": "D:/IBE160-story-12-1",
+      "head": "533ca88dc2c99533eb5c11f6bb58d6ee4fe7bde8",
+      "dirty_entries": 0
+    }
+  ],
+  "containers_before": [
+    {
+      "name": "ibe160-story124-tests-api-1",
+      "id": "6a6df1656f03bc9180c7e7468d20bd5cc2c703a05d80304c897c6358a0ce108f",
+      "image": "sha256:af878d335c49f418427cf4d6a48bea57967f115a27c9aaaeba570bff1c445a49",
+      "ports": "127.0.0.1:18325->8000/tcp",
+      "started": "2026-10-28T06:08:40.932099569Z",
+      "restarts": 0,
+      "source_mounts": [
+        {
+          "source": "D:\\IBE160\\tmp\\story-12-4\\backend",
+          "destination": "/app"
+        },
+        {
+          "source": "D:\\IBE160\\tmp\\story-12-4\\Eksempelfiler",
+          "destination": "/fixtures"
+        }
+      ]
+    },
+    {
+      "name": "ibe160-story124-tests-private-api-1",
+      "id": "289c5d9b71d7e27bdea4da376798120978ee8832e5dc001202fe9848e9882a1a",
+      "image": "sha256:5bed236d59ef8338318d3148118630c5c31111e1005587e94205a933854adc2a",
+      "ports": "127.0.0.1:18326->8000/tcp",
+      "started": "2026-10-28T15:06:10.044949604Z",
+      "restarts": 0,
+      "source_mounts": [
+        {
+          "source": "D:\\IBE160\\tmp\\story-12-4\\backend",
+          "destination": "/app"
+        },
+        {
+          "source": "D:\\IBE160\\tmp\\story-12-4\\Eksempelfiler",
+          "destination": "/fixtures"
+        }
+      ]
+    },
+    {
+      "name": "ibe160-story124-tests-db-1",
+      "id": "c22c9bdb4adf01f33db2383190eccb0b7a42a50d0513953cd99695cac666f49d",
+      "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "ports": "5432/tcp",
+      "started": "2026-10-28T06:08:36.515321701Z",
+      "restarts": 0,
+      "source_mounts": []
+    },
+    {
+      "name": "ibe160-story124-tests-private-db-1",
+      "id": "f2ee6029103f66f2298e48e3f7729c85bf4c8f64d43774146e2ac84a2382ab7c",
+      "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "ports": "5432/tcp",
+      "started": "2026-10-28T15:06:06.075991019Z",
+      "restarts": 0,
+      "source_mounts": []
+    },
+    {
+      "name": "ibe160-tablet-prep-gateway-1",
+      "id": "77fb04be36f0d3fc7f6e10974a67a57bda03398ed30188e1cb949bb8b06087a7",
+      "image": "sha256:980c6b662cb29b04e7305d1fa9b0912979651aaf8d1edfb02c10340c99956352",
+      "ports": "127.0.0.1:18081->8080/tcp",
+      "started": "2026-10-27T22:17:37.282804098Z",
+      "restarts": 0,
+      "source_mounts": []
+    },
+    {
+      "name": "ibe160-tablet-prep-private-api-1",
+      "id": "0f77c2ba44a40d807920fea7b699764915baebdfd793cb3baa48ec6ce5cc78f6",
+      "image": "sha256:a585b56ed625132e277353fa57241d9ffa5e340ef7e15ff819b9980bc709c92e",
+      "ports": "",
+      "started": "2026-10-27T21:47:16.399835207Z",
+      "restarts": 0,
+      "source_mounts": []
+    },
+    {
+      "name": "ibe160-story123-tests-private-api-1",
+      "id": "17498da3f1bb2ec36053743cd477866e0ceb07d9dc61f18615f9a00bd0882dc7",
+      "image": "sha256:d0f2639088ceeca6baec601ff6226bbe66d2917d55fc0741a6839ecb6a9b2d2f",
+      "ports": "127.0.0.1:18324->8000/tcp",
+      "started": "2026-10-27T19:20:09.085304896Z",
+      "restarts": 0,
+      "source_mounts": [
+        {
+          "source": "D:\\IBE160\\tmp\\story-12-3\\backend",
+          "destination": "/app"
+        },
+        {
+          "source": "D:\\IBE160\\tmp\\story-12-3\\Eksempelfiler",
+          "destination": "/fixtures"
+        }
+      ]
+    },
+    {
+      "name": "ibe160-story123-tests-api-1",
+      "id": "4c74a4e74e6be044d1c4e23d77fb7c72f6111a1568697ac9875e934837a3835e",
+      "image": "sha256:2acc520d2b766436231d5b36049e29b87810d4e4a862a993f17861b518ff79bf",
+      "ports": "127.0.0.1:18323->8000/tcp",
+      "started": "2026-10-27T19:01:23.109913656Z",
+      "restarts": 0,
+      "source_mounts": [
+        {
+          "source": "D:\\IBE160\\tmp\\story-12-3\\backend",
+          "destination": "/app"
+        },
+        {
+          "source": "D:\\IBE160\\tmp\\story-12-3\\Eksempelfiler",
+          "destination": "/fixtures"
+        }
+      ]
+    },
+    {
+      "name": "ibe160-story12-integration-api-1",
+      "id": "7991577f9cf5e84519bd5e6449bb5e5e62e96214d4fcd15ec4587bf4d10e58ad",
+      "image": "sha256:18f373092c551cd23f3b706aa618162c52aa74bb7e7e18d208e9e1f7a7dc2614",
+      "ports": "127.0.0.1:18312->8000/tcp",
+      "started": "2026-10-27T15:13:57.527635969Z",
+      "restarts": 0,
+      "source_mounts": [
+        {
+          "source": "D:\\IBE160\\backend",
+          "destination": "/app"
+        },
+        {
+          "source": "D:\\IBE160\\Eksempelfiler",
+          "destination": "/fixtures"
+        }
+      ]
+    },
+    {
+      "name": "ibe160-story12-integration-private-api-1",
+      "id": "be2e42172f8f8bd5e2dd53463434d7db4e4e925d52301979d4fa21ac9b52804b",
+      "image": "sha256:b42fdb7d79c608df0d0ea5582c7702665c5bf6115012d1b110dce6d3bdb090c9",
+      "ports": "127.0.0.1:18313->8000/tcp",
+      "started": "2026-10-27T15:31:55.317079835Z",
+      "restarts": 0,
+      "source_mounts": [
+        {
+          "source": "D:\\IBE160\\backend",
+          "destination": "/app"
+        },
+        {
+          "source": "D:\\IBE160\\Eksempelfiler",
+          "destination": "/fixtures"
+        }
+      ]
+    },
+    {
+      "name": "ibe160-story123-tests-db-1",
+      "id": "1915dbfe810426e17b23c5a93e2b8de22395b98a25620c283206b252c244e1ad",
+      "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "ports": "5432/tcp",
+      "started": "2026-10-27T19:01:19.377613638Z",
+      "restarts": 0,
+      "source_mounts": []
+    },
+    {
+      "name": "ibe160-story123-tests-private-db-1",
+      "id": "667b53445fc4570e4efb6de1903df415a6259fd2c2989febe6ac4b77de299fb2",
+      "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "ports": "5432/tcp",
+      "started": "2026-10-27T19:01:19.297520771Z",
+      "restarts": 0,
+      "source_mounts": []
+    },
+    {
+      "name": "ibe160-story12-integration-db-1",
+      "id": "aeb9125406b628eaaaaf5214c6bd33e59676381528f75147dc3f97f9e6302f6b",
+      "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "ports": "5432/tcp",
+      "started": "2026-10-27T15:13:53.291318945Z",
+      "restarts": 0,
+      "source_mounts": []
+    },
+    {
+      "name": "ibe160-story12-integration-private-db-1",
+      "id": "e57a1b8fd2f53e1b81eadaab8f1346304f32dba6911ed083dbd485aeecd40435",
+      "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "ports": "5432/tcp",
+      "started": "2026-10-27T15:13:53.43911017Z",
+      "restarts": 0,
+      "source_mounts": []
+    },
+    {
+      "name": "ibe160-story122-tests-private-api-1",
+      "id": "fd52df01d71b09aab91030bd9922904d8a9dfb651ae4e4c8401089280b566955",
+      "image": "sha256:72774cad61a241605b3487def5d8cef084a6a48be0ad24e2554df1b8e5a24561",
+      "ports": "127.0.0.1:18223->8000/tcp",
+      "started": "2026-10-26T21:51:00.368172346Z",
+      "restarts": 0,
+      "source_mounts": []
+    },
+    {
+      "name": "ibe160-story122-tests-api-1",
+      "id": "1c7f8857a08a0a61a2439c5642bc5b35beedaa55d1fb6abf78c5084a16ec4564",
+      "image": "sha256:06d7ce3538eba6d9c7d4f2caee7246654496079f8b34f17d1365eba7686fb9a8",
+      "ports": "127.0.0.1:18222->8000/tcp",
+      "started": "2026-10-26T21:51:11.075323136Z",
+      "restarts": 0,
+      "source_mounts": []
+    },
+    {
+      "name": "ibe160-story122-tests-private-db-1",
+      "id": "56cc2b541bd914aaf07e3dc6f30942d78479353eefb7bac25d653ae78947f3a8",
+      "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "ports": "5432/tcp",
+      "started": "2026-10-26T21:50:57.522035414Z",
+      "restarts": 0,
+      "source_mounts": []
+    },
+    {
+      "name": "ibe160-story122-tests-db-1",
+      "id": "5766c65fa74e96f683ef7cfa2b7307ab4a94f0ef9644dbf63a5cb89d2456ddce",
+      "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "ports": "5432/tcp",
+      "started": "2026-10-26T21:51:10.66207864Z",
+      "restarts": 0,
+      "source_mounts": []
+    },
+    {
+      "name": "ibe160-story121-tests-private-api-1",
+      "id": "cd1db9210623013a6795d2c793b150212fe769785efc186f0a219f4c85447054",
+      "image": "sha256:efb271265fc913ab3d0786373e73fefc8008afc791c11d06bfe9b705c84a01c0",
+      "ports": "127.0.0.1:18121->8000/tcp",
+      "started": "2026-10-26T23:08:28.21447389Z",
+      "restarts": 0,
+      "source_mounts": [
+        {
+          "source": "D:\\IBE160-story-12-1\\backend",
+          "destination": "/app"
+        },
+        {
+          "source": "D:\\IBE160-story-12-1\\Eksempelfiler",
+          "destination": "/fixtures"
+        }
+      ]
+    },
+    {
+      "name": "ibe160-story121-tests-private-db-1",
+      "id": "e020bd052af4452ace6c76077c090cd768d76356064e5c12b30e2a0c9c8c34ba",
+      "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "ports": "5432/tcp",
+      "started": "2026-10-26T21:42:16.389701314Z",
+      "restarts": 0,
+      "source_mounts": []
+    },
+    {
+      "name": "ibe160-tablet-prep-access-gate-1",
+      "id": "8513681afd0272ada2ec2b4de650cfc35c99d651b7f134e3fa00b6b04676a84a",
+      "image": "sha256:25e40c61e6a734c2b19daaeb5c3eb7230f424a917992f3f33e100a2e309484c2",
+      "ports": "",
+      "started": "2026-10-26T20:52:48.986784888Z",
+      "restarts": 0,
+      "source_mounts": []
+    },
+    {
+      "name": "ibe160-tablet-prep-private-db-1",
+      "id": "26f33374638deff773bcfbe507da8a8a7db30db0b28951dce3ad8ecfb9db215a",
+      "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "ports": "5432/tcp",
+      "started": "2026-10-26T20:52:10.484784897Z",
+      "restarts": 0,
+      "source_mounts": [
+        {
+          "source": "/run/desktop/mnt/host/c/Users/Jonas/.codex/.chatgpt-projects/g-p-6ab6b4c1c6888191a96d3242fab912b4/tablet-access-11-6/deploy/tablet/init-private-role.sql",
+          "destination": "/docker-entrypoint-initdb.d/010-private-role.sql"
+        }
+      ]
+    },
+    {
+      "name": "ibe160-private-work-private-api-1",
+      "id": "9bb6363dc3816c5c5c27889b2a0f3b9db0172f7e8e668029a61cb45a8ffe906d",
+      "image": "sha256:5dff578b747ebf2d16a6335ddc0b432e993b401cf46be1d27a2e6bd7f0898861",
+      "ports": "127.0.0.1:8001->8000/tcp",
+      "started": "2026-10-27T21:47:16.146081756Z",
+      "restarts": 0,
+      "source_mounts": []
+    },
+    {
+      "name": "ibe160-fictional-assessment-frontend-1",
+      "id": "79693d20ba694917486416a0d0a0883572842f37d8cd7b937060fc138caef511",
+      "image": "sha256:90ef8ce693acea80756dc614e10708f284736430afba3bfba5525b87cc56ac55",
+      "ports": "127.0.0.1:5173->5173/tcp",
+      "started": "2026-10-26T15:55:57.643134471Z",
+      "restarts": 0,
+      "source_mounts": []
+    },
+    {
+      "name": "ibe160-fictional-assessment-api-1",
+      "id": "b6a16b87207c2857c84d878b8615d174d81d0f407586681ad8701b2955ed6c53",
+      "image": "sha256:43c9740447cdcb24855f8addb0eb0a8fe5897726fc524b732a755c78064adff4",
+      "ports": "127.0.0.1:8000->8000/tcp",
+      "started": "2026-10-26T15:44:25.147799589Z",
+      "restarts": 0,
+      "source_mounts": []
+    },
+    {
+      "name": "ibe160-private-work-private-db-1",
+      "id": "677f99f9f8411bcb4dc75201640d1c9ac299adb0afb77c7516242a63957967ca",
+      "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "ports": "5432/tcp",
+      "started": "2026-10-20T18:47:00.530707318Z",
+      "restarts": 0,
+      "source_mounts": []
+    },
+    {
+      "name": "ibe160-fictional-assessment-db-1",
+      "id": "c98b143f76524078b1675d811e6112347faf044c6580ab264b55577bfa0a5f5d",
+      "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "ports": "5432/tcp",
+      "started": "2026-10-19T18:20:21.013996422Z",
+      "restarts": 0,
+      "source_mounts": []
+    }
+  ],
+  "http_before": {
+    "18081": {
+      "transport_error": "RemoteDisconnected"
+    },
+    "15324": {
+      "status": 200,
+      "sha256": "318d7a48fd4a530aee0f1fda3636b08b21313bc0ed62aa4fc5d88a55c9d80576"
+    },
+    "5173": {
+      "status": 200,
+      "sha256": "9824c9f50d992057d60e949830a6d2fecaec25320aba48aabd676b06032de3e8"
+    },
+    "15312": {
+      "status": 200,
+      "sha256": "bf091307ddf99fd9775ce251aa4bcbe24ce3a23dafb0ef579c989c3258d24740"
+    },
+    "15323": {
+      "status": 200,
+      "sha256": "24bf3bb677146f246d3446dbab2716a74dd2954331df5a50886a27995b29a3e1"
+    }
+  }
+}

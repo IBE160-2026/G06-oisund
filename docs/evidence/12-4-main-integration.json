@@ -1,0 +1,1279 @@
+{
+  "recorded_at": "2026-10-28T16:08:31.851126+00:00",
+  "merge": "b0b2a6246b329ad0efa85b570c3f9a0d7a932c33",
+  "parents": [
+    "c3e5d66a7d9faa9af19a58c6002538610c163352",
+    "4e38e240917b29450e68f817b85411185ef5eac3"
+  ],
+  "merged_tree": "9a3a080188411d02d3ba81f45859e4c8fdef8ebc",
+  "accepted_product": "5ee35efb3753bed10bafc21a53a88fec3d93b287",
+  "checks": [
+    {
+      "name": "merge has exact expected parents",
+      "passed": true
+    },
+    {
+      "name": "entire merge tree equals accepted story tree",
+      "passed": true
+    },
+    {
+      "name": "zero product/tool/test/fixture diff from accepted product commit",
+      "passed": true
+    },
+    {
+      "name": "mobile correction blob unchanged: frontend/src/PrivateAccess.tsx",
+      "passed": true
+    },
+    {
+      "name": "mobile correction blob unchanged: frontend/src/pdfUpload.ts",
+      "passed": true
+    },
+    {
+      "name": "mobile correction blob unchanged: frontend/playwright.tablet.config.ts",
+      "passed": true
+    },
+    {
+      "name": "mobile correction blob unchanged: _bmad-output/implementation-artifacts/spec-mobile-pdf-upload.md",
+      "passed": true
+    },
+    {
+      "name": "mobile correction blob unchanged: docs/evidence/mobile-pdf-upload.md",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/.dockerignore",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/.dockerignore",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/Dockerfile",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/Dockerfile",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/app/__init__.py",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/app/__init__.py",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/app/auth.py",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/app/auth.py",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/app/bus_value.py",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/app/bus_value.py",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/app/domain.py",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/app/domain.py",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/app/draft_domain.py",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/app/draft_domain.py",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/app/draft_storage.py",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/app/draft_storage.py",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/app/draft_time.py",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/app/draft_time.py",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/app/import_issues.py",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/app/import_issues.py",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/app/main.py",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/app/main.py",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/app/manage.py",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/app/manage.py",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/app/notice_reader_domain.py",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/app/notice_reader_domain.py",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/app/pdf_import.py",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/app/pdf_import.py",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/app/private_import.py",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/app/private_import.py",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/app/private_main.py",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/app/private_main.py",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/app/private_storage.py",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/app/private_storage.py",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/app/qualify_imports.py",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/app/qualify_imports.py",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/app/run.py",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/app/run.py",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/app/storage.py",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/app/storage.py",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/app/workday_bus_domain.py",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/app/workday_bus_domain.py",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/app/workday_bus_storage.py",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/app/workday_bus_storage.py",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/app/workday_domain.py",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/app/workday_domain.py",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/app/workday_lifecycle_domain.py",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/app/workday_lifecycle_domain.py",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/app/workday_lifecycle_storage.py",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/app/workday_lifecycle_storage.py",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/app/workday_notice_domain.py",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/app/workday_notice_domain.py",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/app/workday_notice_storage.py",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/app/workday_notice_storage.py",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/app/workday_outcome_domain.py",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/app/workday_outcome_domain.py",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/app/workday_outcome_storage.py",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/app/workday_outcome_storage.py",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/app/workday_selection_domain.py",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/app/workday_selection_domain.py",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/app/workday_selection_storage.py",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/app/workday_selection_storage.py",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/app/workday_storage.py",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/app/workday_storage.py",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/migrations/001_initial.sql",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/migrations/001_initial.sql",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/migrations/private/001_access.sql",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/migrations/private/001_access.sql",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/migrations/private/002_drafts.sql",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/migrations/private/002_drafts.sql",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/migrations/private/003_draft_deletions.sql",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/migrations/private/003_draft_deletions.sql",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/migrations/private/004_workdays.sql",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/migrations/private/004_workdays.sql",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/migrations/private/005_workday_deletions.sql",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/migrations/private/005_workday_deletions.sql",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/migrations/private/006_workday_bus.sql",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/migrations/private/006_workday_bus.sql",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/migrations/private/007_draft_contracts.sql",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/migrations/private/007_draft_contracts.sql",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/migrations/private/008_review_feedback.sql",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/migrations/private/008_review_feedback.sql",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/migrations/private/009_workday_selection.sql",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/migrations/private/009_workday_selection.sql",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/migrations/private/010_outcomes_and_closure.sql",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/migrations/private/010_outcomes_and_closure.sql",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/migrations/private/011_manual_notices.sql",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/migrations/private/011_manual_notices.sql",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/migrations/private/012_real_notice_sources.sql",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/migrations/private/012_real_notice_sources.sql",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/migrations/private/013_account_notice_registry.sql",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/migrations/private/013_account_notice_registry.sql",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/migrations/private/014_notice_creation_admissions.sql",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/migrations/private/014_notice_creation_admissions.sql",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/requirements.in",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/requirements.in",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/requirements.lock",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/requirements.lock",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/tests/fixtures/import-source-2026-10-20.md",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/tests/fixtures/import-source-2026-10-20.md",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/tests/fixtures/import_additional_expected.json",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/tests/fixtures/import_additional_expected.json",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/tests/fixtures/import_expected.json",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/tests/fixtures/import_expected.json",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/tests/test_account_notices.py",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/tests/test_account_notices.py",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/tests/test_assessment.py",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/tests/test_assessment.py",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/tests/test_notice_reader.py",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/tests/test_notice_reader.py",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/tests/test_pdf_import.py",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/tests/test_pdf_import.py",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/tests/test_private_access.py",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/tests/test_private_access.py",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/tests/test_private_bus.py",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/tests/test_private_bus.py",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/tests/test_private_drafts.py",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/tests/test_private_drafts.py",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/tests/test_private_import.py",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/tests/test_private_import.py",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/tests/test_private_notices.py",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/tests/test_private_notices.py",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/tests/test_private_outcomes.py",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/tests/test_private_outcomes.py",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/tests/test_private_selection.py",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/tests/test_private_selection.py",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/tests/test_private_start.py",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/tests/test_private_start.py",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/tests/test_private_workdays.py",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/tests/test_private_workdays.py",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/tests/test_retained_data.py",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/tests/test_retained_data.py",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: backend/tests/test_tablet_transport.py",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: backend/tests/test_tablet_transport.py",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: frontend/src/FictionalAssessment.tsx",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: frontend/src/FictionalAssessment.tsx",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: frontend/src/PrivateAccess.tsx",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: frontend/src/PrivateAccess.tsx",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: frontend/src/PrivateActivitySelection.tsx",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: frontend/src/PrivateActivitySelection.tsx",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: frontend/src/PrivateBus.tsx",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: frontend/src/PrivateBus.tsx",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: frontend/src/PrivateConfirmation.tsx",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: frontend/src/PrivateConfirmation.tsx",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: frontend/src/PrivateDayOverview.tsx",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: frontend/src/PrivateDayOverview.tsx",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: frontend/src/PrivateDrafts.tsx",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: frontend/src/PrivateDrafts.tsx",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: frontend/src/PrivateImport.tsx",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: frontend/src/PrivateImport.tsx",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: frontend/src/PrivateNoticeReader.tsx",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: frontend/src/PrivateNoticeReader.tsx",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: frontend/src/PrivateNotices.tsx",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: frontend/src/PrivateNotices.tsx",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: frontend/src/PrivateShiftStart.tsx",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: frontend/src/PrivateShiftStart.tsx",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: frontend/src/PrivateTimeInput.tsx",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: frontend/src/PrivateTimeInput.tsx",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: frontend/src/PrivateWorkdayProgress.tsx",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: frontend/src/PrivateWorkdayProgress.tsx",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: frontend/src/PrivateWorkdayView.tsx",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: frontend/src/PrivateWorkdayView.tsx",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: frontend/src/SelectedActivityDetails.tsx",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: frontend/src/SelectedActivityDetails.tsx",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: frontend/src/activityChoiceLabel.ts",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: frontend/src/activityChoiceLabel.ts",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: frontend/src/busValue.ts",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: frontend/src/busValue.ts",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: frontend/src/dayOverview.ts",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: frontend/src/dayOverview.ts",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: frontend/src/demo.tsx",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: frontend/src/demo.tsx",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: frontend/src/draftInterpretation.ts",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: frontend/src/draftInterpretation.ts",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: frontend/src/fictional-assessment.css",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: frontend/src/fictional-assessment.css",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: frontend/src/fictionalAssessmentModel.ts",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: frontend/src/fictionalAssessmentModel.ts",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: frontend/src/main.tsx",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: frontend/src/main.tsx",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: frontend/src/pdfUpload.ts",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: frontend/src/pdfUpload.ts",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: frontend/src/privateClock.ts",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: frontend/src/privateClock.ts",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: frontend/src/recoverOperation.ts",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: frontend/src/recoverOperation.ts",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: frontend/src/style.css",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: frontend/src/style.css",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: frontend/src/tablet.tsx",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: frontend/src/tablet.tsx",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: frontend/src/theme.tsx",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: frontend/src/theme.tsx",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: frontend/src/useWorkdayResource.ts",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: frontend/src/useWorkdayResource.ts",
+      "passed": true
+    },
+    {
+      "name": "tested bytes unchanged: frontend/src/vite-env.d.ts",
+      "passed": true
+    },
+    {
+      "name": "main checkout equals tested source after LF/CRLF normalization: frontend/src/vite-env.d.ts",
+      "passed": true
+    },
+    {
+      "name": "archive hash: docs/evidence/12-4-bundles/20261028T150525812602Z-427d7a87-browser.index.json",
+      "passed": true
+    },
+    {
+      "name": "all archived member bytes: docs/evidence/12-4-bundles/20261028T150525812602Z-427d7a87-browser.index.json",
+      "passed": true
+    },
+    {
+      "name": "archive hash: docs/evidence/12-4-bundles/20261028T151438853623Z-f3e6ccfa-tablet-browser.index.json",
+      "passed": true
+    },
+    {
+      "name": "all archived member bytes: docs/evidence/12-4-bundles/20261028T151438853623Z-f3e6ccfa-tablet-browser.index.json",
+      "passed": true
+    },
+    {
+      "name": "archive hash: docs/evidence/12-4-experience-device-20261028.index.json",
+      "passed": true
+    },
+    {
+      "name": "all archived member bytes: docs/evidence/12-4-experience-device-20261028.index.json",
+      "passed": true
+    },
+    {
+      "name": "all existing27 container identities/images/ports/start/restarts/source-mounts preserved",
+      "passed": true
+    },
+    {
+      "name": "all five unauthenticated loopback responses/transport categories preserved",
+      "passed": true
+    },
+    {
+      "name": "12.4 done;12.5 backlog",
+      "passed": true
+    },
+    {
+      "name": "spec-12-4-complete-user-flow.md accepted/done",
+      "passed": true
+    },
+    {
+      "name": "spec-12-4-import-experience.md accepted/done",
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "tested_product_source_files": 98,
+  "line_ending_only_main_vs_tested": [
+    "backend/.dockerignore",
+    "backend/Dockerfile",
+    "backend/app/domain.py",
+    "backend/app/draft_domain.py",
+    "backend/app/draft_time.py",
+    "backend/app/import_issues.py",
+    "backend/app/manage.py",
+    "backend/app/pdf_import.py",
+    "backend/app/private_import.py",
+    "backend/app/qualify_imports.py",
+    "backend/app/storage.py",
+    "backend/app/workday_bus_storage.py",
+    "backend/app/workday_lifecycle_domain.py",
+    "backend/app/workday_notice_domain.py",
+    "backend/app/workday_outcome_domain.py",
+    "backend/app/workday_outcome_storage.py",
+    "backend/app/workday_selection_domain.py",
+    "backend/migrations/001_initial.sql",
+    "backend/migrations/private/001_access.sql",
+    "backend/migrations/private/002_drafts.sql",
+    "backend/migrations/private/003_draft_deletions.sql",
+    "backend/migrations/private/004_workdays.sql",
+    "backend/migrations/private/005_workday_deletions.sql",
+    "backend/migrations/private/006_workday_bus.sql",
+    "backend/migrations/private/008_review_feedback.sql",
+    "backend/migrations/private/009_workday_selection.sql",
+    "backend/migrations/private/010_outcomes_and_closure.sql",
+    "backend/migrations/private/011_manual_notices.sql",
+    "backend/migrations/private/012_real_notice_sources.sql",
+    "backend/migrations/private/013_account_notice_registry.sql",
+    "backend/requirements.in",
+    "backend/tests/fixtures/import_expected.json",
+    "backend/tests/test_notice_reader.py",
+    "backend/tests/test_pdf_import.py",
+    "backend/tests/test_private_bus.py",
+    "backend/tests/test_private_drafts.py",
+    "backend/tests/test_private_outcomes.py",
+    "backend/tests/test_private_selection.py",
+    "backend/tests/test_private_start.py",
+    "frontend/src/PrivateShiftStart.tsx",
+    "frontend/src/PrivateTimeInput.tsx",
+    "frontend/src/SelectedActivityDetails.tsx",
+    "frontend/src/activityChoiceLabel.ts",
+    "frontend/src/busValue.ts",
+    "frontend/src/dayOverview.ts",
+    "frontend/src/draftInterpretation.ts",
+    "frontend/src/pdfUpload.ts",
+    "frontend/src/recoverOperation.ts",
+    "frontend/src/vite-env.d.ts"
+  ],
+  "archives": [
+    {
+      "index": "docs/evidence/12-4-bundles/20261028T150525812602Z-427d7a87-browser.index.json",
+      "members": 93,
+      "sha256": "5c9b7e192e3f926e1f9ff391c3c61ec8c5403e3d30ad38d03c8df40fc84f39c4"
+    },
+    {
+      "index": "docs/evidence/12-4-bundles/20261028T151438853623Z-f3e6ccfa-tablet-browser.index.json",
+      "members": 47,
+      "sha256": "88d2a2e85b9390a606f13d767cc6b061238de3b3902349adb8fea5251205998e"
+    },
+    {
+      "index": "docs/evidence/12-4-experience-device-20261028.index.json",
+      "members": 32,
+      "sha256": "41723643662f00c2535362fab74a37e3cf49fd90ce0f2569567f9717e95be21d"
+    }
+  ],
+  "containers_after": [
+    {
+      "name": "ibe160-story124-tests-api-1",
+      "id": "6a6df1656f03bc9180c7e7468d20bd5cc2c703a05d80304c897c6358a0ce108f",
+      "image": "sha256:af878d335c49f418427cf4d6a48bea57967f115a27c9aaaeba570bff1c445a49",
+      "ports": "127.0.0.1:18325->8000/tcp",
+      "started": "2026-10-28T06:08:40.932099569Z",
+      "restarts": 0,
+      "source_mounts": [
+        {
+          "source": "D:\\IBE160\\tmp\\story-12-4\\backend",
+          "destination": "/app"
+        },
+        {
+          "source": "D:\\IBE160\\tmp\\story-12-4\\Eksempelfiler",
+          "destination": "/fixtures"
+        }
+      ]
+    },
+    {
+      "name": "ibe160-story124-tests-private-api-1",
+      "id": "289c5d9b71d7e27bdea4da376798120978ee8832e5dc001202fe9848e9882a1a",
+      "image": "sha256:5bed236d59ef8338318d3148118630c5c31111e1005587e94205a933854adc2a",
+      "ports": "127.0.0.1:18326->8000/tcp",
+      "started": "2026-10-28T15:06:10.044949604Z",
+      "restarts": 0,
+      "source_mounts": [
+        {
+          "source": "D:\\IBE160\\tmp\\story-12-4\\backend",
+          "destination": "/app"
+        },
+        {
+          "source": "D:\\IBE160\\tmp\\story-12-4\\Eksempelfiler",
+          "destination": "/fixtures"
+        }
+      ]
+    },
+    {
+      "name": "ibe160-story124-tests-db-1",
+      "id": "c22c9bdb4adf01f33db2383190eccb0b7a42a50d0513953cd99695cac666f49d",
+      "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "ports": "5432/tcp",
+      "started": "2026-10-28T06:08:36.515321701Z",
+      "restarts": 0,
+      "source_mounts": []
+    },
+    {
+      "name": "ibe160-story124-tests-private-db-1",
+      "id": "f2ee6029103f66f2298e48e3f7729c85bf4c8f64d43774146e2ac84a2382ab7c",
+      "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "ports": "5432/tcp",
+      "started": "2026-10-28T15:06:06.075991019Z",
+      "restarts": 0,
+      "source_mounts": []
+    },
+    {
+      "name": "ibe160-tablet-prep-gateway-1",
+      "id": "77fb04be36f0d3fc7f6e10974a67a57bda03398ed30188e1cb949bb8b06087a7",
+      "image": "sha256:980c6b662cb29b04e7305d1fa9b0912979651aaf8d1edfb02c10340c99956352",
+      "ports": "127.0.0.1:18081->8080/tcp",
+      "started": "2026-10-27T22:17:37.282804098Z",
+      "restarts": 0,
+      "source_mounts": []
+    },
+    {
+      "name": "ibe160-tablet-prep-private-api-1",
+      "id": "0f77c2ba44a40d807920fea7b699764915baebdfd793cb3baa48ec6ce5cc78f6",
+      "image": "sha256:a585b56ed625132e277353fa57241d9ffa5e340ef7e15ff819b9980bc709c92e",
+      "ports": "",
+      "started": "2026-10-27T21:47:16.399835207Z",
+      "restarts": 0,
+      "source_mounts": []
+    },
+    {
+      "name": "ibe160-story123-tests-private-api-1",
+      "id": "17498da3f1bb2ec36053743cd477866e0ceb07d9dc61f18615f9a00bd0882dc7",
+      "image": "sha256:d0f2639088ceeca6baec601ff6226bbe66d2917d55fc0741a6839ecb6a9b2d2f",
+      "ports": "127.0.0.1:18324->8000/tcp",
+      "started": "2026-10-27T19:20:09.085304896Z",
+      "restarts": 0,
+      "source_mounts": [
+        {
+          "source": "D:\\IBE160\\tmp\\story-12-3\\backend",
+          "destination": "/app"
+        },
+        {
+          "source": "D:\\IBE160\\tmp\\story-12-3\\Eksempelfiler",
+          "destination": "/fixtures"
+        }
+      ]
+    },
+    {
+      "name": "ibe160-story123-tests-api-1",
+      "id": "4c74a4e74e6be044d1c4e23d77fb7c72f6111a1568697ac9875e934837a3835e",
+      "image": "sha256:2acc520d2b766436231d5b36049e29b87810d4e4a862a993f17861b518ff79bf",
+      "ports": "127.0.0.1:18323->8000/tcp",
+      "started": "2026-10-27T19:01:23.109913656Z",
+      "restarts": 0,
+      "source_mounts": [
+        {
+          "source": "D:\\IBE160\\tmp\\story-12-3\\backend",
+          "destination": "/app"
+        },
+        {
+          "source": "D:\\IBE160\\tmp\\story-12-3\\Eksempelfiler",
+          "destination": "/fixtures"
+        }
+      ]
+    },
+    {
+      "name": "ibe160-story12-integration-api-1",
+      "id": "7991577f9cf5e84519bd5e6449bb5e5e62e96214d4fcd15ec4587bf4d10e58ad",
+      "image": "sha256:18f373092c551cd23f3b706aa618162c52aa74bb7e7e18d208e9e1f7a7dc2614",
+      "ports": "127.0.0.1:18312->8000/tcp",
+      "started": "2026-10-27T15:13:57.527635969Z",
+      "restarts": 0,
+      "source_mounts": [
+        {
+          "source": "D:\\IBE160\\backend",
+          "destination": "/app"
+        },
+        {
+          "source": "D:\\IBE160\\Eksempelfiler",
+          "destination": "/fixtures"
+        }
+      ]
+    },
+    {
+      "name": "ibe160-story12-integration-private-api-1",
+      "id": "be2e42172f8f8bd5e2dd53463434d7db4e4e925d52301979d4fa21ac9b52804b",
+      "image": "sha256:b42fdb7d79c608df0d0ea5582c7702665c5bf6115012d1b110dce6d3bdb090c9",
+      "ports": "127.0.0.1:18313->8000/tcp",
+      "started": "2026-10-27T15:31:55.317079835Z",
+      "restarts": 0,
+      "source_mounts": [
+        {
+          "source": "D:\\IBE160\\backend",
+          "destination": "/app"
+        },
+        {
+          "source": "D:\\IBE160\\Eksempelfiler",
+          "destination": "/fixtures"
+        }
+      ]
+    },
+    {
+      "name": "ibe160-story123-tests-db-1",
+      "id": "1915dbfe810426e17b23c5a93e2b8de22395b98a25620c283206b252c244e1ad",
+      "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "ports": "5432/tcp",
+      "started": "2026-10-27T19:01:19.377613638Z",
+      "restarts": 0,
+      "source_mounts": []
+    },
+    {
+      "name": "ibe160-story123-tests-private-db-1",
+      "id": "667b53445fc4570e4efb6de1903df415a6259fd2c2989febe6ac4b77de299fb2",
+      "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "ports": "5432/tcp",
+      "started": "2026-10-27T19:01:19.297520771Z",
+      "restarts": 0,
+      "source_mounts": []
+    },
+    {
+      "name": "ibe160-story12-integration-db-1",
+      "id": "aeb9125406b628eaaaaf5214c6bd33e59676381528f75147dc3f97f9e6302f6b",
+      "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "ports": "5432/tcp",
+      "started": "2026-10-27T15:13:53.291318945Z",
+      "restarts": 0,
+      "source_mounts": []
+    },
+    {
+      "name": "ibe160-story12-integration-private-db-1",
+      "id": "e57a1b8fd2f53e1b81eadaab8f1346304f32dba6911ed083dbd485aeecd40435",
+      "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "ports": "5432/tcp",
+      "started": "2026-10-27T15:13:53.43911017Z",
+      "restarts": 0,
+      "source_mounts": []
+    },
+    {
+      "name": "ibe160-story122-tests-private-api-1",
+      "id": "fd52df01d71b09aab91030bd9922904d8a9dfb651ae4e4c8401089280b566955",
+      "image": "sha256:72774cad61a241605b3487def5d8cef084a6a48be0ad24e2554df1b8e5a24561",
+      "ports": "127.0.0.1:18223->8000/tcp",
+      "started": "2026-10-26T21:51:00.368172346Z",
+      "restarts": 0,
+      "source_mounts": []
+    },
+    {
+      "name": "ibe160-story122-tests-api-1",
+      "id": "1c7f8857a08a0a61a2439c5642bc5b35beedaa55d1fb6abf78c5084a16ec4564",
+      "image": "sha256:06d7ce3538eba6d9c7d4f2caee7246654496079f8b34f17d1365eba7686fb9a8",
+      "ports": "127.0.0.1:18222->8000/tcp",
+      "started": "2026-10-26T21:51:11.075323136Z",
+      "restarts": 0,
+      "source_mounts": []
+    },
+    {
+      "name": "ibe160-story122-tests-private-db-1",
+      "id": "56cc2b541bd914aaf07e3dc6f30942d78479353eefb7bac25d653ae78947f3a8",
+      "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "ports": "5432/tcp",
+      "started": "2026-10-26T21:50:57.522035414Z",
+      "restarts": 0,
+      "source_mounts": []
+    },
+    {
+      "name": "ibe160-story122-tests-db-1",
+      "id": "5766c65fa74e96f683ef7cfa2b7307ab4a94f0ef9644dbf63a5cb89d2456ddce",
+      "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "ports": "5432/tcp",
+      "started": "2026-10-26T21:51:10.66207864Z",
+      "restarts": 0,
+      "source_mounts": []
+    },
+    {
+      "name": "ibe160-story121-tests-private-api-1",
+      "id": "cd1db9210623013a6795d2c793b150212fe769785efc186f0a219f4c85447054",
+      "image": "sha256:efb271265fc913ab3d0786373e73fefc8008afc791c11d06bfe9b705c84a01c0",
+      "ports": "127.0.0.1:18121->8000/tcp",
+      "started": "2026-10-26T23:08:28.21447389Z",
+      "restarts": 0,
+      "source_mounts": [
+        {
+          "source": "D:\\IBE160-story-12-1\\backend",
+          "destination": "/app"
+        },
+        {
+          "source": "D:\\IBE160-story-12-1\\Eksempelfiler",
+          "destination": "/fixtures"
+        }
+      ]
+    },
+    {
+      "name": "ibe160-story121-tests-private-db-1",
+      "id": "e020bd052af4452ace6c76077c090cd768d76356064e5c12b30e2a0c9c8c34ba",
+      "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "ports": "5432/tcp",
+      "started": "2026-10-26T21:42:16.389701314Z",
+      "restarts": 0,
+      "source_mounts": []
+    },
+    {
+      "name": "ibe160-tablet-prep-access-gate-1",
+      "id": "8513681afd0272ada2ec2b4de650cfc35c99d651b7f134e3fa00b6b04676a84a",
+      "image": "sha256:25e40c61e6a734c2b19daaeb5c3eb7230f424a917992f3f33e100a2e309484c2",
+      "ports": "",
+      "started": "2026-10-26T20:52:48.986784888Z",
+      "restarts": 0,
+      "source_mounts": []
+    },
+    {
+      "name": "ibe160-tablet-prep-private-db-1",
+      "id": "26f33374638deff773bcfbe507da8a8a7db30db0b28951dce3ad8ecfb9db215a",
+      "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "ports": "5432/tcp",
+      "started": "2026-10-26T20:52:10.484784897Z",
+      "restarts": 0,
+      "source_mounts": [
+        {
+          "source": "/run/desktop/mnt/host/c/Users/Jonas/.codex/.chatgpt-projects/g-p-6ab6b4c1c6888191a96d3242fab912b4/tablet-access-11-6/deploy/tablet/init-private-role.sql",
+          "destination": "/docker-entrypoint-initdb.d/010-private-role.sql"
+        }
+      ]
+    },
+    {
+      "name": "ibe160-private-work-private-api-1",
+      "id": "9bb6363dc3816c5c5c27889b2a0f3b9db0172f7e8e668029a61cb45a8ffe906d",
+      "image": "sha256:5dff578b747ebf2d16a6335ddc0b432e993b401cf46be1d27a2e6bd7f0898861",
+      "ports": "127.0.0.1:8001->8000/tcp",
+      "started": "2026-10-27T21:47:16.146081756Z",
+      "restarts": 0,
+      "source_mounts": []
+    },
+    {
+      "name": "ibe160-fictional-assessment-frontend-1",
+      "id": "79693d20ba694917486416a0d0a0883572842f37d8cd7b937060fc138caef511",
+      "image": "sha256:90ef8ce693acea80756dc614e10708f284736430afba3bfba5525b87cc56ac55",
+      "ports": "127.0.0.1:5173->5173/tcp",
+      "started": "2026-10-26T15:55:57.643134471Z",
+      "restarts": 0,
+      "source_mounts": []
+    },
+    {
+      "name": "ibe160-fictional-assessment-api-1",
+      "id": "b6a16b87207c2857c84d878b8615d174d81d0f407586681ad8701b2955ed6c53",
+      "image": "sha256:43c9740447cdcb24855f8addb0eb0a8fe5897726fc524b732a755c78064adff4",
+      "ports": "127.0.0.1:8000->8000/tcp",
+      "started": "2026-10-26T15:44:25.147799589Z",
+      "restarts": 0,
+      "source_mounts": []
+    },
+    {
+      "name": "ibe160-private-work-private-db-1",
+      "id": "677f99f9f8411bcb4dc75201640d1c9ac299adb0afb77c7516242a63957967ca",
+      "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "ports": "5432/tcp",
+      "started": "2026-10-20T18:47:00.530707318Z",
+      "restarts": 0,
+      "source_mounts": []
+    },
+    {
+      "name": "ibe160-fictional-assessment-db-1",
+      "id": "c98b143f76524078b1675d811e6112347faf044c6580ab264b55577bfa0a5f5d",
+      "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "ports": "5432/tcp",
+      "started": "2026-10-19T18:20:21.013996422Z",
+      "restarts": 0,
+      "source_mounts": []
+    }
+  ],
+  "http_after": {
+    "18081": {
+      "transport_error": "RemoteDisconnected"
+    },
+    "15324": {
+      "status": 200,
+      "sha256": "318d7a48fd4a530aee0f1fda3636b08b21313bc0ed62aa4fc5d88a55c9d80576"
+    },
+    "5173": {
+      "status": 200,
+      "sha256": "9824c9f50d992057d60e949830a6d2fecaec25320aba48aabd676b06032de3e8"
+    },
+    "15312": {
+      "status": 200,
+      "sha256": "bf091307ddf99fd9775ce251aa4bcbe24ce3a23dafb0ef579c989c3258d24740"
+    },
+    "15323": {
+      "status": 200,
+      "sha256": "24bf3bb677146f246d3446dbab2716a74dd2954331df5a50886a27995b29a3e1"
+    }
+  },
+  "test_reuse": "Approved final64/64 real-API/browser,32/32 controlled mobile boundaries and actual Lenovo evidence reused by exact committed product equality. These are not new runs. Fresh main checks: TypeScript noEmit, offline Python12/12 and Node6/6.",
+  "product_changes_from_merge": false,
+  "deploy": false
+}
