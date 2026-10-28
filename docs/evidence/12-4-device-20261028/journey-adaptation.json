@@ -1,0 +1,11 @@
+{
+  "originalTestSha256": "0193ef2635db4205324b3e9b53227da601a217550b742c53765c686d53fbc118",
+  "executedSha256": "35cb20f966b7a14633470d45c4c425e9fffab32cebc54db37273e774db0a1b3c",
+  "noDeviceMetricsEmulation": true,
+  "noApiMocks": true,
+  "nativeA": "Reuse actual already-observed native response and independently verified byte-exact45330-byte request; no synthetic network response inserted",
+  "secondDocumentC": "Playwright file-input payload on actual tablet (not native picker)",
+  "apiReads": "credentialed fetch from actual tablet page",
+  "actions": "Native Android picker and CDP touch for login/picker; original journey locators/keyboard/select for remaining application controls",
+  "onlyFirstOriginalJourney": true
+}

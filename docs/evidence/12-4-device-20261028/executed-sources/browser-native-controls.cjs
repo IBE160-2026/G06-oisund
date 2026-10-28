@@ -1,0 +1,2 @@
+const d=require('./driver.cjs');d.device('shell','uiautomator','dump','/sdcard/ibe160-story124-ui.xml');const xml=d.device('exec-out','cat','/sdcard/ibe160-story124-ui.xml');const ns=[...xml.matchAll(/<node\s+([^>]+)>?/g)].map(m=>Object.fromEntries([...m[1].matchAll(/([\w-]+)="([^"]*)"/g)].map(x=>[x[1],x[2]])));console.log(JSON.stringify(ns.filter(n=>/tab_switcher|url_bar|toolbar/.test(n['resource-id']||'')).map(n=>({id:n['resource-id'],desc:/tab_switcher/.test(n['resource-id'])?n['content-desc']:undefined,ownUrl:/15324/.test(n.text||''),bounds:n.bounds}))));
+

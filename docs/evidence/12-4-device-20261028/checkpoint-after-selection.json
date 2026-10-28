@@ -1,0 +1,22 @@
+{
+  "list": {
+    "workdays": [
+      {
+        "id": "8b16b87f-9849-43b4-9d56-e7a1f9b876db",
+        "source_draft_id": "23e244de-88e7-40f2-9c64-2649fec7a533",
+        "source_revision": 1,
+        "service_date": "2030-02-04",
+        "expires_at": "2030-02-11T07:28:00Z"
+      }
+    ],
+    "next_cursor": null
+  },
+  "selectedVisible": true,
+  "events": {
+    "visibility": [],
+    "focus": [
+      "blur",
+      "focus"
+    ]
+  }
+}

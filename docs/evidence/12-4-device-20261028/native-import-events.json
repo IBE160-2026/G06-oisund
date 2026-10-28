@@ -1,0 +1,30 @@
+[
+  {
+    "type": "blur"
+  },
+  {
+    "type": "visibility",
+    "state": "hidden"
+  },
+  {
+    "type": "visibility",
+    "state": "visible"
+  },
+  {
+    "type": "focus"
+  },
+  {
+    "type": "visibility",
+    "state": "hidden"
+  },
+  {
+    "type": "blur"
+  },
+  {
+    "type": "visibility",
+    "state": "visible"
+  },
+  {
+    "type": "focus"
+  }
+]

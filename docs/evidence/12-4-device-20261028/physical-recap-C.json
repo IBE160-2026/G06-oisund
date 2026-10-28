@@ -1,0 +1,2818 @@
+{
+  "plan": {
+    "id": "b50dd105-9a40-4385-8c55-ed86125bfc4a",
+    "source_draft_id": "fcf2bf13-509d-4f96-8dc2-1131a6c257fe",
+    "source_revision": 1,
+    "confirmed_at": "2026-10-28T11:33:17.005081Z",
+    "final_end": "2030-02-09T02:50:00Z",
+    "expires_at": "2026-11-04T11:40:24.960153Z",
+    "state": "confirmed",
+    "draft": {
+      "service_date": "2030-02-08",
+      "vehicle_duty": "700201",
+      "realtime_duty": "201",
+      "physical_bus": "SYN-124",
+      "activities": [
+        {
+          "id": "8b339b8e-29b0-4736-b8c9-3622fd7bf4e1",
+          "type": "Sign-on",
+          "raw_code": "Sign-on",
+          "start": "2030-02-08T22:10:00+01:00",
+          "end": "2030-02-08T22:13:00+01:00",
+          "source_start": "22:10",
+          "source_end": "22:13",
+          "from_place": null,
+          "to_place": null,
+          "trip": null,
+          "line": null,
+          "direction": null,
+          "uncertainty": null,
+          "provenance": "PDF: kildefakta; kalender avledet fra oppgitt skiftintervall."
+        },
+        {
+          "id": "95bde4a6-06a4-4da5-96aa-d30f02c6724c",
+          "type": "deadhead",
+          "raw_code": "tom",
+          "start": "2030-02-08T22:18:00+01:00",
+          "end": "2030-02-08T22:28:00+01:00",
+          "source_start": "22:18",
+          "source_end": "22:28",
+          "from_place": "Garasje Måneglimt",
+          "to_place": "Gløtt terminal",
+          "trip": "90301",
+          "line": null,
+          "direction": null,
+          "uncertainty": null,
+          "provenance": "PDF: kildefakta; kalender avledet fra oppgitt skiftintervall."
+        },
+        {
+          "id": "cb11ed8e-1327-4dbb-862b-c18b59b695de",
+          "type": "trip",
+          "raw_code": "81",
+          "start": "2030-02-08T22:30:00+01:00",
+          "end": "2030-02-08T23:10:00+01:00",
+          "source_start": "22:30",
+          "source_end": "23:10",
+          "from_place": "Gløtt terminal",
+          "to_place": "Syntetisk manuelt korrigert endeholdeplass",
+          "trip": "6001",
+          "line": "81",
+          "direction": null,
+          "uncertainty": null,
+          "provenance": "Manuelt kontrollert mot syntetisk oppgave"
+        },
+        {
+          "id": "f4ae99bc-e62b-47f2-846f-fa922c3e497a",
+          "type": "trip",
+          "raw_code": "81",
+          "start": "2030-02-08T23:40:00+01:00",
+          "end": "2030-02-09T00:25:00+01:00",
+          "source_start": "23:40",
+          "source_end": "00:25",
+          "from_place": "Myrglass snuplass",
+          "to_place": "Gløtt terminal",
+          "trip": "6002",
+          "line": "81",
+          "direction": null,
+          "uncertainty": null,
+          "provenance": "PDF: kildefakta; kalender avledet fra oppgitt skiftintervall."
+        },
+        {
+          "id": "29f47e0f-f99f-4579-be91-c26a567c3e5c",
+          "type": "deadhead",
+          "raw_code": "tom",
+          "start": "2030-02-09T00:25:00+01:00",
+          "end": "2030-02-09T00:35:00+01:00",
+          "source_start": "00:25",
+          "source_end": "00:35",
+          "from_place": "Gløtt terminal",
+          "to_place": "Garasje Måneglimt",
+          "trip": "90302",
+          "line": null,
+          "direction": null,
+          "uncertainty": null,
+          "provenance": "PDF: kildefakta; kalender avledet fra oppgitt skiftintervall."
+        },
+        {
+          "id": "66f9aabd-77e5-48f9-91a9-1bc4b1692fa7",
+          "type": "Sign-off",
+          "raw_code": "Sign-off",
+          "start": "2030-02-09T00:35:00+01:00",
+          "end": "2030-02-09T00:37:00+01:00",
+          "source_start": "00:35",
+          "source_end": "00:37",
+          "from_place": null,
+          "to_place": null,
+          "trip": null,
+          "line": null,
+          "direction": null,
+          "uncertainty": null,
+          "provenance": "PDF: kildefakta; kalender avledet fra oppgitt skiftintervall."
+        },
+        {
+          "id": "e3bc3364-1ccd-477a-a059-5af205f1723c",
+          "type": "MealBreak",
+          "raw_code": "MealBreak",
+          "start": "2030-02-09T00:37:00+01:00",
+          "end": "2030-02-09T01:07:00+01:00",
+          "source_start": "00:37",
+          "source_end": "01:07",
+          "from_place": null,
+          "to_place": null,
+          "trip": null,
+          "line": null,
+          "direction": null,
+          "uncertainty": null,
+          "provenance": "PDF: kildefakta; kalender avledet fra oppgitt skiftintervall."
+        },
+        {
+          "id": "75578154-d911-44fa-ad64-3d072e3efb92",
+          "type": "Paid meal before",
+          "raw_code": "Paid meal before",
+          "start": "2030-02-09T01:07:00+01:00",
+          "end": "2030-02-09T01:19:00+01:00",
+          "source_start": "01:07",
+          "source_end": "01:19",
+          "from_place": null,
+          "to_place": null,
+          "trip": null,
+          "line": null,
+          "direction": null,
+          "uncertainty": null,
+          "provenance": "PDF: kildefakta; kalender avledet fra oppgitt skiftintervall."
+        },
+        {
+          "id": "132f6f32-1dca-4106-bb11-da7f3dd27d18",
+          "type": "Sign-on",
+          "raw_code": "Sign-on",
+          "start": "2030-02-09T01:19:00+01:00",
+          "end": "2030-02-09T01:21:00+01:00",
+          "source_start": "01:19",
+          "source_end": "01:21",
+          "from_place": null,
+          "to_place": null,
+          "trip": null,
+          "line": null,
+          "direction": null,
+          "uncertainty": null,
+          "provenance": "PDF: kildefakta; kalender avledet fra oppgitt skiftintervall."
+        },
+        {
+          "id": "f9fc71b7-107e-4852-898c-e7be78e14a58",
+          "type": "deadhead",
+          "raw_code": "tom",
+          "start": "2030-02-09T01:21:00+01:00",
+          "end": "2030-02-09T01:30:00+01:00",
+          "source_start": "01:21",
+          "source_end": "01:30",
+          "from_place": "Garasje Måneglimt",
+          "to_place": "Gløtt terminal",
+          "trip": "90303",
+          "line": null,
+          "direction": null,
+          "uncertainty": null,
+          "provenance": "PDF: kildefakta; kalender avledet fra oppgitt skiftintervall."
+        },
+        {
+          "id": "8b08f5de-6241-424c-9e64-cc5173ceb5a7",
+          "type": "trip",
+          "raw_code": "82",
+          "start": "2030-02-09T01:32:00+01:00",
+          "end": "2030-02-09T02:10:00+01:00",
+          "source_start": "01:32",
+          "source_end": "02:10",
+          "from_place": "Gløtt terminal",
+          "to_place": "Sølvmyr snuplass",
+          "trip": "6601",
+          "line": "82",
+          "direction": null,
+          "uncertainty": null,
+          "provenance": "PDF: kildefakta; kalender avledet fra oppgitt skiftintervall."
+        },
+        {
+          "id": "80c84f3a-7ce6-4990-a3a8-ef0429eb6a39",
+          "type": "deadhead",
+          "raw_code": "tom",
+          "start": "2030-02-09T02:10:00+01:00",
+          "end": "2030-02-09T02:25:00+01:00",
+          "source_start": "02:10",
+          "source_end": "02:25",
+          "from_place": "Sølvmyr snuplass",
+          "to_place": "Gløtt terminal",
+          "trip": "90304",
+          "line": null,
+          "direction": null,
+          "uncertainty": null,
+          "provenance": "PDF: kildefakta; kalender avledet fra oppgitt skiftintervall."
+        },
+        {
+          "id": "e0f27d9f-5e43-461a-9df3-6dc0c34268c5",
+          "type": "trip",
+          "raw_code": "82",
+          "start": "2030-02-09T02:40:00+01:00",
+          "end": "2030-02-09T03:20:00+01:00",
+          "source_start": "02:40",
+          "source_end": "03:20",
+          "from_place": "Gløtt terminal",
+          "to_place": "Sølvmyr snuplass",
+          "trip": "6603",
+          "line": "82",
+          "direction": null,
+          "uncertainty": null,
+          "provenance": "PDF: kildefakta; kalender avledet fra oppgitt skiftintervall."
+        },
+        {
+          "id": "e786e62e-e501-41ea-8cc6-b6367582b818",
+          "type": "deadhead",
+          "raw_code": "tom",
+          "start": "2030-02-09T03:20:00+01:00",
+          "end": "2030-02-09T03:45:00+01:00",
+          "source_start": "03:20",
+          "source_end": "03:45",
+          "from_place": "Sølvmyr snuplass",
+          "to_place": "Garasje Måneglimt",
+          "trip": "90305",
+          "line": null,
+          "direction": null,
+          "uncertainty": null,
+          "provenance": "PDF: kildefakta; kalender avledet fra oppgitt skiftintervall."
+        },
+        {
+          "id": "ede12bfd-b7f7-4026-afe1-3f1aa7cb479f",
+          "type": "Sign-off",
+          "raw_code": "Sign-off",
+          "start": "2030-02-09T03:48:00+01:00",
+          "end": "2030-02-09T03:50:00+01:00",
+          "source_start": "03:48",
+          "source_end": "03:50",
+          "from_place": null,
+          "to_place": null,
+          "trip": null,
+          "line": null,
+          "direction": null,
+          "uncertainty": null,
+          "provenance": "PDF: kildefakta; kalender avledet fra oppgitt skiftintervall."
+        }
+      ],
+      "import_metadata": {
+        "version": 1,
+        "qualification": "bounded-layout",
+        "timezone": "Europe/Oslo",
+        "header": {
+          "shift_id": "97000003",
+          "service_date": "2030-02-08",
+          "weekday": "Fri",
+          "department": "Fabelvik",
+          "start": "22:10",
+          "end": "03:50",
+          "origin": "Garasje Måneglimt",
+          "destination": "Garasje Måneglimt",
+          "work": "5h10",
+          "span": "5h40",
+          "supplements": [
+            "25,00% 0h00",
+            "40,00% 0h00"
+          ],
+          "pages": 1,
+          "start_instant": "2030-02-08T22:10:00+01:00",
+          "end_instant": "2030-02-09T03:50:00+01:00",
+          "end_day": 1
+        },
+        "header_provenance": {
+          "end": {
+            "page": 1,
+            "column": null,
+            "line": null,
+            "region": "header",
+            "field": "end"
+          },
+          "span": {
+            "page": 1,
+            "column": null,
+            "line": null,
+            "region": "header",
+            "field": "span"
+          },
+          "work": {
+            "page": 1,
+            "column": null,
+            "line": null,
+            "region": "header",
+            "field": "work"
+          },
+          "pages": {
+            "derived_from": [
+              "document.pages"
+            ],
+            "rule": null
+          },
+          "start": {
+            "page": 1,
+            "column": null,
+            "line": null,
+            "region": "header",
+            "field": "start"
+          },
+          "origin": {
+            "page": 1,
+            "column": null,
+            "line": null,
+            "region": "header",
+            "field": "origin"
+          },
+          "end_day": {
+            "derived_from": [
+              "header.end",
+              "header.service_date",
+              "header.start",
+              "header.span",
+              "header.end",
+              "timezone"
+            ],
+            "rule": "unique instant in header interval"
+          },
+          "weekday": {
+            "page": 1,
+            "column": null,
+            "line": null,
+            "region": "header",
+            "field": "weekday"
+          },
+          "shift_id": {
+            "page": 1,
+            "column": null,
+            "line": null,
+            "region": "header",
+            "field": "shift_id"
+          },
+          "department": {
+            "page": 1,
+            "column": null,
+            "line": null,
+            "region": "header",
+            "field": "department"
+          },
+          "destination": {
+            "page": 1,
+            "column": null,
+            "line": null,
+            "region": "header",
+            "field": "destination"
+          },
+          "end_instant": {
+            "derived_from": [
+              "header.end",
+              "header.service_date",
+              "header.start",
+              "header.span",
+              "header.end",
+              "timezone"
+            ],
+            "rule": "unique instant in header interval"
+          },
+          "supplements": {
+            "page": 1,
+            "column": null,
+            "line": null,
+            "region": "header",
+            "field": "supplements"
+          },
+          "service_date": {
+            "page": 1,
+            "column": null,
+            "line": null,
+            "region": "header",
+            "field": "service_date"
+          },
+          "start_instant": {
+            "derived_from": [
+              "header.start",
+              "header.service_date",
+              "header.start",
+              "header.span",
+              "header.end",
+              "timezone"
+            ],
+            "rule": "unique instant in header interval"
+          }
+        },
+        "activities": [
+          {
+            "activity_id": "8b339b8e-29b0-4736-b8c9-3622fd7bf4e1",
+            "source_order": 1,
+            "label": "Sign-on",
+            "kind": "Sign-on",
+            "line": null,
+            "trip_id": null,
+            "origin": null,
+            "destination": null,
+            "start": "22:10",
+            "end": "22:13",
+            "start_instant": "2030-02-08T22:10:00+01:00",
+            "end_instant": "2030-02-08T22:13:00+01:00",
+            "start_day": 0,
+            "end_day": 0,
+            "pages": [
+              1
+            ],
+            "provenance": {
+              "end": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 2,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "kind": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 2,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "line": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 2,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "label": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 2,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "start": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 2,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "origin": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 2,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "end_day": {
+                "derived_from": [
+                  "activities.1.end",
+                  "header.service_date",
+                  "header.start",
+                  "header.span",
+                  "header.end",
+                  "timezone"
+                ],
+                "rule": "unique instant in header interval"
+              },
+              "trip_id": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 2,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "start_day": {
+                "derived_from": [
+                  "activities.1.start",
+                  "header.service_date",
+                  "header.start",
+                  "header.span",
+                  "header.end",
+                  "timezone"
+                ],
+                "rule": "unique instant in header interval"
+              },
+              "destination": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 2,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "end_instant": {
+                "derived_from": [
+                  "activities.1.end",
+                  "header.service_date",
+                  "header.start",
+                  "header.span",
+                  "header.end",
+                  "timezone"
+                ],
+                "rule": "unique instant in header interval"
+              },
+              "start_instant": {
+                "derived_from": [
+                  "activities.1.start",
+                  "header.service_date",
+                  "header.start",
+                  "header.span",
+                  "header.end",
+                  "timezone"
+                ],
+                "rule": "unique instant in header interval"
+              }
+            },
+            "origins": {
+              "end": "extracted",
+              "kind": "derived",
+              "line": "unresolved",
+              "label": "extracted",
+              "start": "extracted",
+              "origin": "unresolved",
+              "end_day": "derived",
+              "trip_id": "unresolved",
+              "start_day": "derived",
+              "destination": "unresolved",
+              "end_instant": "derived",
+              "start_instant": "derived"
+            }
+          },
+          {
+            "activity_id": "95bde4a6-06a4-4da5-96aa-d30f02c6724c",
+            "source_order": 2,
+            "label": "tom",
+            "kind": "deadhead",
+            "line": null,
+            "trip_id": "90301",
+            "origin": "Garasje Måneglimt",
+            "destination": "Gløtt terminal",
+            "start": "22:18",
+            "end": "22:28",
+            "start_instant": "2030-02-08T22:18:00+01:00",
+            "end_instant": "2030-02-08T22:28:00+01:00",
+            "start_day": 0,
+            "end_day": 0,
+            "pages": [
+              1
+            ],
+            "provenance": {
+              "end": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 6,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "kind": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 4,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "line": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 4,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "label": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 4,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "start": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 5,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "origin": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 5,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "end_day": {
+                "derived_from": [
+                  "activities.2.end",
+                  "header.service_date",
+                  "header.start",
+                  "header.span",
+                  "header.end",
+                  "timezone"
+                ],
+                "rule": "unique instant in header interval"
+              },
+              "trip_id": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 4,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "start_day": {
+                "derived_from": [
+                  "activities.2.start",
+                  "header.service_date",
+                  "header.start",
+                  "header.span",
+                  "header.end",
+                  "timezone"
+                ],
+                "rule": "unique instant in header interval"
+              },
+              "destination": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 6,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "end_instant": {
+                "derived_from": [
+                  "activities.2.end",
+                  "header.service_date",
+                  "header.start",
+                  "header.span",
+                  "header.end",
+                  "timezone"
+                ],
+                "rule": "unique instant in header interval"
+              },
+              "start_instant": {
+                "derived_from": [
+                  "activities.2.start",
+                  "header.service_date",
+                  "header.start",
+                  "header.span",
+                  "header.end",
+                  "timezone"
+                ],
+                "rule": "unique instant in header interval"
+              }
+            },
+            "origins": {
+              "end": "extracted",
+              "kind": "derived",
+              "line": "unresolved",
+              "label": "extracted",
+              "start": "extracted",
+              "origin": "extracted",
+              "end_day": "derived",
+              "trip_id": "extracted",
+              "start_day": "derived",
+              "destination": "extracted",
+              "end_instant": "derived",
+              "start_instant": "derived"
+            }
+          },
+          {
+            "activity_id": "cb11ed8e-1327-4dbb-862b-c18b59b695de",
+            "source_order": 3,
+            "label": "81",
+            "kind": "trip",
+            "line": "81",
+            "trip_id": "6001",
+            "origin": "Gløtt terminal",
+            "destination": "Myrglass snuplass",
+            "start": "22:30",
+            "end": "23:10",
+            "start_instant": "2030-02-08T22:30:00+01:00",
+            "end_instant": "2030-02-08T23:10:00+01:00",
+            "start_day": 0,
+            "end_day": 0,
+            "pages": [
+              1
+            ],
+            "provenance": {
+              "end": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 13,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "kind": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 7,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "line": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 7,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "label": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 7,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "start": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 8,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "origin": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 8,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "end_day": {
+                "derived_from": [
+                  "activities.3.end",
+                  "header.service_date",
+                  "header.start",
+                  "header.span",
+                  "header.end",
+                  "timezone"
+                ],
+                "rule": "unique instant in header interval"
+              },
+              "trip_id": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 7,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "start_day": {
+                "derived_from": [
+                  "activities.3.start",
+                  "header.service_date",
+                  "header.start",
+                  "header.span",
+                  "header.end",
+                  "timezone"
+                ],
+                "rule": "unique instant in header interval"
+              },
+              "destination": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 13,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "end_instant": {
+                "derived_from": [
+                  "activities.3.end",
+                  "header.service_date",
+                  "header.start",
+                  "header.span",
+                  "header.end",
+                  "timezone"
+                ],
+                "rule": "unique instant in header interval"
+              },
+              "start_instant": {
+                "derived_from": [
+                  "activities.3.start",
+                  "header.service_date",
+                  "header.start",
+                  "header.span",
+                  "header.end",
+                  "timezone"
+                ],
+                "rule": "unique instant in header interval"
+              }
+            },
+            "origins": {
+              "end": "extracted",
+              "kind": "derived",
+              "line": "extracted",
+              "label": "extracted",
+              "start": "extracted",
+              "origin": "extracted",
+              "end_day": "derived",
+              "trip_id": "extracted",
+              "start_day": "derived",
+              "destination": "extracted",
+              "end_instant": "derived",
+              "start_instant": "derived"
+            }
+          },
+          {
+            "activity_id": "f4ae99bc-e62b-47f2-846f-fa922c3e497a",
+            "source_order": 4,
+            "label": "81",
+            "kind": "trip",
+            "line": "81",
+            "trip_id": "6002",
+            "origin": "Myrglass snuplass",
+            "destination": "Gløtt terminal",
+            "start": "23:40",
+            "end": "00:25",
+            "start_instant": "2030-02-08T23:40:00+01:00",
+            "end_instant": "2030-02-09T00:25:00+01:00",
+            "start_day": 0,
+            "end_day": 1,
+            "pages": [
+              1
+            ],
+            "provenance": {
+              "end": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 22,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "kind": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 14,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "line": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 14,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "label": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 14,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "start": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 15,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "origin": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 15,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "end_day": {
+                "derived_from": [
+                  "activities.4.end",
+                  "header.service_date",
+                  "header.start",
+                  "header.span",
+                  "header.end",
+                  "timezone"
+                ],
+                "rule": "unique instant in header interval"
+              },
+              "trip_id": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 14,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "start_day": {
+                "derived_from": [
+                  "activities.4.start",
+                  "header.service_date",
+                  "header.start",
+                  "header.span",
+                  "header.end",
+                  "timezone"
+                ],
+                "rule": "unique instant in header interval"
+              },
+              "destination": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 22,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "end_instant": {
+                "derived_from": [
+                  "activities.4.end",
+                  "header.service_date",
+                  "header.start",
+                  "header.span",
+                  "header.end",
+                  "timezone"
+                ],
+                "rule": "unique instant in header interval"
+              },
+              "start_instant": {
+                "derived_from": [
+                  "activities.4.start",
+                  "header.service_date",
+                  "header.start",
+                  "header.span",
+                  "header.end",
+                  "timezone"
+                ],
+                "rule": "unique instant in header interval"
+              }
+            },
+            "origins": {
+              "end": "extracted",
+              "kind": "derived",
+              "line": "extracted",
+              "label": "extracted",
+              "start": "extracted",
+              "origin": "extracted",
+              "end_day": "derived",
+              "trip_id": "extracted",
+              "start_day": "derived",
+              "destination": "extracted",
+              "end_instant": "derived",
+              "start_instant": "derived"
+            }
+          },
+          {
+            "activity_id": "29f47e0f-f99f-4579-be91-c26a567c3e5c",
+            "source_order": 5,
+            "label": "tom",
+            "kind": "deadhead",
+            "line": null,
+            "trip_id": "90302",
+            "origin": "Gløtt terminal",
+            "destination": "Garasje Måneglimt",
+            "start": "00:25",
+            "end": "00:35",
+            "start_instant": "2030-02-09T00:25:00+01:00",
+            "end_instant": "2030-02-09T00:35:00+01:00",
+            "start_day": 1,
+            "end_day": 1,
+            "pages": [
+              1
+            ],
+            "provenance": {
+              "end": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 25,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "kind": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 23,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "line": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 23,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "label": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 23,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "start": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 24,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "origin": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 24,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "end_day": {
+                "derived_from": [
+                  "activities.5.end",
+                  "header.service_date",
+                  "header.start",
+                  "header.span",
+                  "header.end",
+                  "timezone"
+                ],
+                "rule": "unique instant in header interval"
+              },
+              "trip_id": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 23,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "start_day": {
+                "derived_from": [
+                  "activities.5.start",
+                  "header.service_date",
+                  "header.start",
+                  "header.span",
+                  "header.end",
+                  "timezone"
+                ],
+                "rule": "unique instant in header interval"
+              },
+              "destination": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 25,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "end_instant": {
+                "derived_from": [
+                  "activities.5.end",
+                  "header.service_date",
+                  "header.start",
+                  "header.span",
+                  "header.end",
+                  "timezone"
+                ],
+                "rule": "unique instant in header interval"
+              },
+              "start_instant": {
+                "derived_from": [
+                  "activities.5.start",
+                  "header.service_date",
+                  "header.start",
+                  "header.span",
+                  "header.end",
+                  "timezone"
+                ],
+                "rule": "unique instant in header interval"
+              }
+            },
+            "origins": {
+              "end": "extracted",
+              "kind": "derived",
+              "line": "unresolved",
+              "label": "extracted",
+              "start": "extracted",
+              "origin": "extracted",
+              "end_day": "derived",
+              "trip_id": "extracted",
+              "start_day": "derived",
+              "destination": "extracted",
+              "end_instant": "derived",
+              "start_instant": "derived"
+            }
+          },
+          {
+            "activity_id": "66f9aabd-77e5-48f9-91a9-1bc4b1692fa7",
+            "source_order": 6,
+            "label": "Sign-off",
+            "kind": "Sign-off",
+            "line": null,
+            "trip_id": null,
+            "origin": null,
+            "destination": null,
+            "start": "00:35",
+            "end": "00:37",
+            "start_instant": "2030-02-09T00:35:00+01:00",
+            "end_instant": "2030-02-09T00:37:00+01:00",
+            "start_day": 1,
+            "end_day": 1,
+            "pages": [
+              1
+            ],
+            "provenance": {
+              "end": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 26,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "kind": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 26,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "line": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 26,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "label": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 26,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "start": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 26,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "origin": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 26,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "end_day": {
+                "derived_from": [
+                  "activities.6.end",
+                  "header.service_date",
+                  "header.start",
+                  "header.span",
+                  "header.end",
+                  "timezone"
+                ],
+                "rule": "unique instant in header interval"
+              },
+              "trip_id": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 26,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "start_day": {
+                "derived_from": [
+                  "activities.6.start",
+                  "header.service_date",
+                  "header.start",
+                  "header.span",
+                  "header.end",
+                  "timezone"
+                ],
+                "rule": "unique instant in header interval"
+              },
+              "destination": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 26,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "end_instant": {
+                "derived_from": [
+                  "activities.6.end",
+                  "header.service_date",
+                  "header.start",
+                  "header.span",
+                  "header.end",
+                  "timezone"
+                ],
+                "rule": "unique instant in header interval"
+              },
+              "start_instant": {
+                "derived_from": [
+                  "activities.6.start",
+                  "header.service_date",
+                  "header.start",
+                  "header.span",
+                  "header.end",
+                  "timezone"
+                ],
+                "rule": "unique instant in header interval"
+              }
+            },
+            "origins": {
+              "end": "extracted",
+              "kind": "derived",
+              "line": "unresolved",
+              "label": "extracted",
+              "start": "extracted",
+              "origin": "unresolved",
+              "end_day": "derived",
+              "trip_id": "unresolved",
+              "start_day": "derived",
+              "destination": "unresolved",
+              "end_instant": "derived",
+              "start_instant": "derived"
+            }
+          },
+          {
+            "activity_id": "e3bc3364-1ccd-477a-a059-5af205f1723c",
+            "source_order": 7,
+            "label": "MealBreak",
+            "kind": "MealBreak",
+            "line": null,
+            "trip_id": null,
+            "origin": null,
+            "destination": null,
+            "start": "00:37",
+            "end": "01:07",
+            "start_instant": "2030-02-09T00:37:00+01:00",
+            "end_instant": "2030-02-09T01:07:00+01:00",
+            "start_day": 1,
+            "end_day": 1,
+            "pages": [
+              1
+            ],
+            "provenance": {
+              "end": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 27,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "kind": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 27,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "line": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 27,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "label": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 27,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "start": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 27,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "origin": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 27,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "end_day": {
+                "derived_from": [
+                  "activities.7.end",
+                  "header.service_date",
+                  "header.start",
+                  "header.span",
+                  "header.end",
+                  "timezone"
+                ],
+                "rule": "unique instant in header interval"
+              },
+              "trip_id": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 27,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "start_day": {
+                "derived_from": [
+                  "activities.7.start",
+                  "header.service_date",
+                  "header.start",
+                  "header.span",
+                  "header.end",
+                  "timezone"
+                ],
+                "rule": "unique instant in header interval"
+              },
+              "destination": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 27,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "end_instant": {
+                "derived_from": [
+                  "activities.7.end",
+                  "header.service_date",
+                  "header.start",
+                  "header.span",
+                  "header.end",
+                  "timezone"
+                ],
+                "rule": "unique instant in header interval"
+              },
+              "start_instant": {
+                "derived_from": [
+                  "activities.7.start",
+                  "header.service_date",
+                  "header.start",
+                  "header.span",
+                  "header.end",
+                  "timezone"
+                ],
+                "rule": "unique instant in header interval"
+              }
+            },
+            "origins": {
+              "end": "extracted",
+              "kind": "derived",
+              "line": "unresolved",
+              "label": "extracted",
+              "start": "extracted",
+              "origin": "unresolved",
+              "end_day": "derived",
+              "trip_id": "unresolved",
+              "start_day": "derived",
+              "destination": "unresolved",
+              "end_instant": "derived",
+              "start_instant": "derived"
+            }
+          },
+          {
+            "activity_id": "75578154-d911-44fa-ad64-3d072e3efb92",
+            "source_order": 8,
+            "label": "Paid meal before",
+            "kind": "Paid meal before",
+            "line": null,
+            "trip_id": null,
+            "origin": null,
+            "destination": null,
+            "start": "01:07",
+            "end": "01:19",
+            "start_instant": "2030-02-09T01:07:00+01:00",
+            "end_instant": "2030-02-09T01:19:00+01:00",
+            "start_day": 1,
+            "end_day": 1,
+            "pages": [
+              1
+            ],
+            "provenance": {
+              "end": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 28,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "kind": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 28,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "line": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 28,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "label": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 28,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "start": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 28,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "origin": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 28,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "end_day": {
+                "derived_from": [
+                  "activities.8.end",
+                  "header.service_date",
+                  "header.start",
+                  "header.span",
+                  "header.end",
+                  "timezone"
+                ],
+                "rule": "unique instant in header interval"
+              },
+              "trip_id": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 28,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "start_day": {
+                "derived_from": [
+                  "activities.8.start",
+                  "header.service_date",
+                  "header.start",
+                  "header.span",
+                  "header.end",
+                  "timezone"
+                ],
+                "rule": "unique instant in header interval"
+              },
+              "destination": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 28,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "end_instant": {
+                "derived_from": [
+                  "activities.8.end",
+                  "header.service_date",
+                  "header.start",
+                  "header.span",
+                  "header.end",
+                  "timezone"
+                ],
+                "rule": "unique instant in header interval"
+              },
+              "start_instant": {
+                "derived_from": [
+                  "activities.8.start",
+                  "header.service_date",
+                  "header.start",
+                  "header.span",
+                  "header.end",
+                  "timezone"
+                ],
+                "rule": "unique instant in header interval"
+              }
+            },
+            "origins": {
+              "end": "extracted",
+              "kind": "derived",
+              "line": "unresolved",
+              "label": "extracted",
+              "start": "extracted",
+              "origin": "unresolved",
+              "end_day": "derived",
+              "trip_id": "unresolved",
+              "start_day": "derived",
+              "destination": "unresolved",
+              "end_instant": "derived",
+              "start_instant": "derived"
+            }
+          },
+          {
+            "activity_id": "132f6f32-1dca-4106-bb11-da7f3dd27d18",
+            "source_order": 9,
+            "label": "Sign-on",
+            "kind": "Sign-on",
+            "line": null,
+            "trip_id": null,
+            "origin": null,
+            "destination": null,
+            "start": "01:19",
+            "end": "01:21",
+            "start_instant": "2030-02-09T01:19:00+01:00",
+            "end_instant": "2030-02-09T01:21:00+01:00",
+            "start_day": 1,
+            "end_day": 1,
+            "pages": [
+              1
+            ],
+            "provenance": {
+              "end": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 29,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "kind": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 29,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "line": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 29,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "label": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 29,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "start": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 29,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "origin": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 29,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "end_day": {
+                "derived_from": [
+                  "activities.9.end",
+                  "header.service_date",
+                  "header.start",
+                  "header.span",
+                  "header.end",
+                  "timezone"
+                ],
+                "rule": "unique instant in header interval"
+              },
+              "trip_id": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 29,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "start_day": {
+                "derived_from": [
+                  "activities.9.start",
+                  "header.service_date",
+                  "header.start",
+                  "header.span",
+                  "header.end",
+                  "timezone"
+                ],
+                "rule": "unique instant in header interval"
+              },
+              "destination": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 29,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "end_instant": {
+                "derived_from": [
+                  "activities.9.end",
+                  "header.service_date",
+                  "header.start",
+                  "header.span",
+                  "header.end",
+                  "timezone"
+                ],
+                "rule": "unique instant in header interval"
+              },
+              "start_instant": {
+                "derived_from": [
+                  "activities.9.start",
+                  "header.service_date",
+                  "header.start",
+                  "header.span",
+                  "header.end",
+                  "timezone"
+                ],
+                "rule": "unique instant in header interval"
+              }
+            },
+            "origins": {
+              "end": "extracted",
+              "kind": "derived",
+              "line": "unresolved",
+              "label": "extracted",
+              "start": "extracted",
+              "origin": "unresolved",
+              "end_day": "derived",
+              "trip_id": "unresolved",
+              "start_day": "derived",
+              "destination": "unresolved",
+              "end_instant": "derived",
+              "start_instant": "derived"
+            }
+          },
+          {
+            "activity_id": "f9fc71b7-107e-4852-898c-e7be78e14a58",
+            "source_order": 10,
+            "label": "tom",
+            "kind": "deadhead",
+            "line": null,
+            "trip_id": "90303",
+            "origin": "Garasje Måneglimt",
+            "destination": "Gløtt terminal",
+            "start": "01:21",
+            "end": "01:30",
+            "start_instant": "2030-02-09T01:21:00+01:00",
+            "end_instant": "2030-02-09T01:30:00+01:00",
+            "start_day": 1,
+            "end_day": 1,
+            "pages": [
+              1
+            ],
+            "provenance": {
+              "end": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 33,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "kind": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 31,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "line": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 31,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "label": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 31,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "start": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 32,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "origin": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 32,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "end_day": {
+                "derived_from": [
+                  "activities.10.end",
+                  "header.service_date",
+                  "header.start",
+                  "header.span",
+                  "header.end",
+                  "timezone"
+                ],
+                "rule": "unique instant in header interval"
+              },
+              "trip_id": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 31,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "start_day": {
+                "derived_from": [
+                  "activities.10.start",
+                  "header.service_date",
+                  "header.start",
+                  "header.span",
+                  "header.end",
+                  "timezone"
+                ],
+                "rule": "unique instant in header interval"
+              },
+              "destination": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 33,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "end_instant": {
+                "derived_from": [
+                  "activities.10.end",
+                  "header.service_date",
+                  "header.start",
+                  "header.span",
+                  "header.end",
+                  "timezone"
+                ],
+                "rule": "unique instant in header interval"
+              },
+              "start_instant": {
+                "derived_from": [
+                  "activities.10.start",
+                  "header.service_date",
+                  "header.start",
+                  "header.span",
+                  "header.end",
+                  "timezone"
+                ],
+                "rule": "unique instant in header interval"
+              }
+            },
+            "origins": {
+              "end": "extracted",
+              "kind": "derived",
+              "line": "unresolved",
+              "label": "extracted",
+              "start": "extracted",
+              "origin": "extracted",
+              "end_day": "derived",
+              "trip_id": "extracted",
+              "start_day": "derived",
+              "destination": "extracted",
+              "end_instant": "derived",
+              "start_instant": "derived"
+            }
+          },
+          {
+            "activity_id": "8b08f5de-6241-424c-9e64-cc5173ceb5a7",
+            "source_order": 11,
+            "label": "82",
+            "kind": "trip",
+            "line": "82",
+            "trip_id": "6601",
+            "origin": "Gløtt terminal",
+            "destination": "Sølvmyr snuplass",
+            "start": "01:32",
+            "end": "02:10",
+            "start_instant": "2030-02-09T01:32:00+01:00",
+            "end_instant": "2030-02-09T02:10:00+01:00",
+            "start_day": 1,
+            "end_day": 1,
+            "pages": [
+              1
+            ],
+            "provenance": {
+              "end": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 41,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "kind": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 34,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "line": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 34,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "label": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 34,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "start": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 35,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "origin": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 35,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "end_day": {
+                "derived_from": [
+                  "activities.11.end",
+                  "header.service_date",
+                  "header.start",
+                  "header.span",
+                  "header.end",
+                  "timezone"
+                ],
+                "rule": "unique instant in header interval"
+              },
+              "trip_id": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 34,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "start_day": {
+                "derived_from": [
+                  "activities.11.start",
+                  "header.service_date",
+                  "header.start",
+                  "header.span",
+                  "header.end",
+                  "timezone"
+                ],
+                "rule": "unique instant in header interval"
+              },
+              "destination": [
+                {
+                  "page": 1,
+                  "column": 1,
+                  "line": 41,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "end_instant": {
+                "derived_from": [
+                  "activities.11.end",
+                  "header.service_date",
+                  "header.start",
+                  "header.span",
+                  "header.end",
+                  "timezone"
+                ],
+                "rule": "unique instant in header interval"
+              },
+              "start_instant": {
+                "derived_from": [
+                  "activities.11.start",
+                  "header.service_date",
+                  "header.start",
+                  "header.span",
+                  "header.end",
+                  "timezone"
+                ],
+                "rule": "unique instant in header interval"
+              }
+            },
+            "origins": {
+              "end": "extracted",
+              "kind": "derived",
+              "line": "extracted",
+              "label": "extracted",
+              "start": "extracted",
+              "origin": "extracted",
+              "end_day": "derived",
+              "trip_id": "extracted",
+              "start_day": "derived",
+              "destination": "extracted",
+              "end_instant": "derived",
+              "start_instant": "derived"
+            }
+          },
+          {
+            "activity_id": "80c84f3a-7ce6-4990-a3a8-ef0429eb6a39",
+            "source_order": 12,
+            "label": "tom",
+            "kind": "deadhead",
+            "line": null,
+            "trip_id": "90304",
+            "origin": "Sølvmyr snuplass",
+            "destination": "Gløtt terminal",
+            "start": "02:10",
+            "end": "02:25",
+            "start_instant": "2030-02-09T02:10:00+01:00",
+            "end_instant": "2030-02-09T02:25:00+01:00",
+            "start_day": 1,
+            "end_day": 1,
+            "pages": [
+              1
+            ],
+            "provenance": {
+              "end": [
+                {
+                  "page": 1,
+                  "column": 2,
+                  "line": 4,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "kind": [
+                {
+                  "page": 1,
+                  "column": 2,
+                  "line": 2,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "line": [
+                {
+                  "page": 1,
+                  "column": 2,
+                  "line": 2,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "label": [
+                {
+                  "page": 1,
+                  "column": 2,
+                  "line": 2,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "start": [
+                {
+                  "page": 1,
+                  "column": 2,
+                  "line": 3,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "origin": [
+                {
+                  "page": 1,
+                  "column": 2,
+                  "line": 3,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "end_day": {
+                "derived_from": [
+                  "activities.12.end",
+                  "header.service_date",
+                  "header.start",
+                  "header.span",
+                  "header.end",
+                  "timezone"
+                ],
+                "rule": "unique instant in header interval"
+              },
+              "trip_id": [
+                {
+                  "page": 1,
+                  "column": 2,
+                  "line": 2,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "start_day": {
+                "derived_from": [
+                  "activities.12.start",
+                  "header.service_date",
+                  "header.start",
+                  "header.span",
+                  "header.end",
+                  "timezone"
+                ],
+                "rule": "unique instant in header interval"
+              },
+              "destination": [
+                {
+                  "page": 1,
+                  "column": 2,
+                  "line": 4,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "end_instant": {
+                "derived_from": [
+                  "activities.12.end",
+                  "header.service_date",
+                  "header.start",
+                  "header.span",
+                  "header.end",
+                  "timezone"
+                ],
+                "rule": "unique instant in header interval"
+              },
+              "start_instant": {
+                "derived_from": [
+                  "activities.12.start",
+                  "header.service_date",
+                  "header.start",
+                  "header.span",
+                  "header.end",
+                  "timezone"
+                ],
+                "rule": "unique instant in header interval"
+              }
+            },
+            "origins": {
+              "end": "extracted",
+              "kind": "derived",
+              "line": "unresolved",
+              "label": "extracted",
+              "start": "extracted",
+              "origin": "extracted",
+              "end_day": "derived",
+              "trip_id": "extracted",
+              "start_day": "derived",
+              "destination": "extracted",
+              "end_instant": "derived",
+              "start_instant": "derived"
+            }
+          },
+          {
+            "activity_id": "e0f27d9f-5e43-461a-9df3-6dc0c34268c5",
+            "source_order": 13,
+            "label": "82",
+            "kind": "trip",
+            "line": "82",
+            "trip_id": "6603",
+            "origin": "Gløtt terminal",
+            "destination": "Sølvmyr snuplass",
+            "start": "02:40",
+            "end": "03:20",
+            "start_instant": "2030-02-09T02:40:00+01:00",
+            "end_instant": "2030-02-09T03:20:00+01:00",
+            "start_day": 1,
+            "end_day": 1,
+            "pages": [
+              1
+            ],
+            "provenance": {
+              "end": [
+                {
+                  "page": 1,
+                  "column": 2,
+                  "line": 12,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "kind": [
+                {
+                  "page": 1,
+                  "column": 2,
+                  "line": 5,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "line": [
+                {
+                  "page": 1,
+                  "column": 2,
+                  "line": 5,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "label": [
+                {
+                  "page": 1,
+                  "column": 2,
+                  "line": 5,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "start": [
+                {
+                  "page": 1,
+                  "column": 2,
+                  "line": 6,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "origin": [
+                {
+                  "page": 1,
+                  "column": 2,
+                  "line": 6,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "end_day": {
+                "derived_from": [
+                  "activities.13.end",
+                  "header.service_date",
+                  "header.start",
+                  "header.span",
+                  "header.end",
+                  "timezone"
+                ],
+                "rule": "unique instant in header interval"
+              },
+              "trip_id": [
+                {
+                  "page": 1,
+                  "column": 2,
+                  "line": 5,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "start_day": {
+                "derived_from": [
+                  "activities.13.start",
+                  "header.service_date",
+                  "header.start",
+                  "header.span",
+                  "header.end",
+                  "timezone"
+                ],
+                "rule": "unique instant in header interval"
+              },
+              "destination": [
+                {
+                  "page": 1,
+                  "column": 2,
+                  "line": 12,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "end_instant": {
+                "derived_from": [
+                  "activities.13.end",
+                  "header.service_date",
+                  "header.start",
+                  "header.span",
+                  "header.end",
+                  "timezone"
+                ],
+                "rule": "unique instant in header interval"
+              },
+              "start_instant": {
+                "derived_from": [
+                  "activities.13.start",
+                  "header.service_date",
+                  "header.start",
+                  "header.span",
+                  "header.end",
+                  "timezone"
+                ],
+                "rule": "unique instant in header interval"
+              }
+            },
+            "origins": {
+              "end": "extracted",
+              "kind": "derived",
+              "line": "extracted",
+              "label": "extracted",
+              "start": "extracted",
+              "origin": "extracted",
+              "end_day": "derived",
+              "trip_id": "extracted",
+              "start_day": "derived",
+              "destination": "extracted",
+              "end_instant": "derived",
+              "start_instant": "derived"
+            }
+          },
+          {
+            "activity_id": "e786e62e-e501-41ea-8cc6-b6367582b818",
+            "source_order": 14,
+            "label": "tom",
+            "kind": "deadhead",
+            "line": null,
+            "trip_id": "90305",
+            "origin": "Sølvmyr snuplass",
+            "destination": "Garasje Måneglimt",
+            "start": "03:20",
+            "end": "03:45",
+            "start_instant": "2030-02-09T03:20:00+01:00",
+            "end_instant": "2030-02-09T03:45:00+01:00",
+            "start_day": 1,
+            "end_day": 1,
+            "pages": [
+              1
+            ],
+            "provenance": {
+              "end": [
+                {
+                  "page": 1,
+                  "column": 2,
+                  "line": 15,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "kind": [
+                {
+                  "page": 1,
+                  "column": 2,
+                  "line": 13,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "line": [
+                {
+                  "page": 1,
+                  "column": 2,
+                  "line": 13,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "label": [
+                {
+                  "page": 1,
+                  "column": 2,
+                  "line": 13,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "start": [
+                {
+                  "page": 1,
+                  "column": 2,
+                  "line": 14,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "origin": [
+                {
+                  "page": 1,
+                  "column": 2,
+                  "line": 14,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "end_day": {
+                "derived_from": [
+                  "activities.14.end",
+                  "header.service_date",
+                  "header.start",
+                  "header.span",
+                  "header.end",
+                  "timezone"
+                ],
+                "rule": "unique instant in header interval"
+              },
+              "trip_id": [
+                {
+                  "page": 1,
+                  "column": 2,
+                  "line": 13,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "start_day": {
+                "derived_from": [
+                  "activities.14.start",
+                  "header.service_date",
+                  "header.start",
+                  "header.span",
+                  "header.end",
+                  "timezone"
+                ],
+                "rule": "unique instant in header interval"
+              },
+              "destination": [
+                {
+                  "page": 1,
+                  "column": 2,
+                  "line": 15,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "end_instant": {
+                "derived_from": [
+                  "activities.14.end",
+                  "header.service_date",
+                  "header.start",
+                  "header.span",
+                  "header.end",
+                  "timezone"
+                ],
+                "rule": "unique instant in header interval"
+              },
+              "start_instant": {
+                "derived_from": [
+                  "activities.14.start",
+                  "header.service_date",
+                  "header.start",
+                  "header.span",
+                  "header.end",
+                  "timezone"
+                ],
+                "rule": "unique instant in header interval"
+              }
+            },
+            "origins": {
+              "end": "extracted",
+              "kind": "derived",
+              "line": "unresolved",
+              "label": "extracted",
+              "start": "extracted",
+              "origin": "extracted",
+              "end_day": "derived",
+              "trip_id": "extracted",
+              "start_day": "derived",
+              "destination": "extracted",
+              "end_instant": "derived",
+              "start_instant": "derived"
+            }
+          },
+          {
+            "activity_id": "ede12bfd-b7f7-4026-afe1-3f1aa7cb479f",
+            "source_order": 15,
+            "label": "Sign-off",
+            "kind": "Sign-off",
+            "line": null,
+            "trip_id": null,
+            "origin": null,
+            "destination": null,
+            "start": "03:48",
+            "end": "03:50",
+            "start_instant": "2030-02-09T03:48:00+01:00",
+            "end_instant": "2030-02-09T03:50:00+01:00",
+            "start_day": 1,
+            "end_day": 1,
+            "pages": [
+              1
+            ],
+            "provenance": {
+              "end": [
+                {
+                  "page": 1,
+                  "column": 2,
+                  "line": 16,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "kind": [
+                {
+                  "page": 1,
+                  "column": 2,
+                  "line": 16,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "line": [
+                {
+                  "page": 1,
+                  "column": 2,
+                  "line": 16,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "label": [
+                {
+                  "page": 1,
+                  "column": 2,
+                  "line": 16,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "start": [
+                {
+                  "page": 1,
+                  "column": 2,
+                  "line": 16,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "origin": [
+                {
+                  "page": 1,
+                  "column": 2,
+                  "line": 16,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "end_day": {
+                "derived_from": [
+                  "activities.15.end",
+                  "header.service_date",
+                  "header.start",
+                  "header.span",
+                  "header.end",
+                  "timezone"
+                ],
+                "rule": "unique instant in header interval"
+              },
+              "trip_id": [
+                {
+                  "page": 1,
+                  "column": 2,
+                  "line": 16,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "start_day": {
+                "derived_from": [
+                  "activities.15.start",
+                  "header.service_date",
+                  "header.start",
+                  "header.span",
+                  "header.end",
+                  "timezone"
+                ],
+                "rule": "unique instant in header interval"
+              },
+              "destination": [
+                {
+                  "page": 1,
+                  "column": 2,
+                  "line": 16,
+                  "region": null,
+                  "field": null
+                }
+              ],
+              "end_instant": {
+                "derived_from": [
+                  "activities.15.end",
+                  "header.service_date",
+                  "header.start",
+                  "header.span",
+                  "header.end",
+                  "timezone"
+                ],
+                "rule": "unique instant in header interval"
+              },
+              "start_instant": {
+                "derived_from": [
+                  "activities.15.start",
+                  "header.service_date",
+                  "header.start",
+                  "header.span",
+                  "header.end",
+                  "timezone"
+                ],
+                "rule": "unique instant in header interval"
+              }
+            },
+            "origins": {
+              "end": "extracted",
+              "kind": "derived",
+              "line": "unresolved",
+              "label": "extracted",
+              "start": "extracted",
+              "origin": "unresolved",
+              "end_day": "derived",
+              "trip_id": "unresolved",
+              "start_day": "derived",
+              "destination": "unresolved",
+              "end_instant": "derived",
+              "start_instant": "derived"
+            }
+          }
+        ],
+        "duties": [
+          {
+            "value": "700201",
+            "suffix": "201",
+            "after_activity": 1,
+            "provenance": {
+              "page": 1,
+              "column": 1,
+              "line": 3,
+              "region": null,
+              "field": null
+            }
+          },
+          {
+            "value": "700201",
+            "suffix": "201",
+            "after_activity": 9,
+            "provenance": {
+              "page": 1,
+              "column": 1,
+              "line": 30,
+              "region": null,
+              "field": null
+            }
+          }
+        ],
+        "annotations": [],
+        "unresolved": [],
+        "pause_groups": [
+          {
+            "rows": [
+              7,
+              8
+            ],
+            "start": "2030-02-09T00:37:00+01:00",
+            "end": "2030-02-09T01:19:00+01:00",
+            "labels": [
+              "MealBreak",
+              "Paid meal before"
+            ],
+            "kind": "meal"
+          }
+        ]
+      }
+    },
+    "acknowledgements": [
+      "8b08f5de-6241-424c-9e64-cc5173ceb5a7:direction",
+      "cb11ed8e-1327-4dbb-862b-c18b59b695de:direction",
+      "e0f27d9f-5e43-461a-9df3-6dc0c34268c5:direction",
+      "f4ae99bc-e62b-47f2-846f-fa922c3e497a:direction"
+    ],
+    "classifications": {},
+    "unknowns": [
+      {
+        "id": "cb11ed8e-1327-4dbb-862b-c18b59b695de:direction",
+        "label": "Aktivitet 3: retning er ukjent."
+      },
+      {
+        "id": "f4ae99bc-e62b-47f2-846f-fa922c3e497a:direction",
+        "label": "Aktivitet 4: retning er ukjent."
+      },
+      {
+        "id": "8b08f5de-6241-424c-9e64-cc5173ceb5a7:direction",
+        "label": "Aktivitet 11: retning er ukjent."
+      },
+      {
+        "id": "e0f27d9f-5e43-461a-9df3-6dc0c34268c5:direction",
+        "label": "Aktivitet 13: retning er ukjent."
+      }
+    ]
+  },
+  "lifecycle": {
+    "workday_id": "b50dd105-9a40-4385-8c55-ed86125bfc4a",
+    "state": "aborted",
+    "started_at": "2026-10-28T11:40:19.879689Z",
+    "ended_at": "2026-10-28T11:40:24.960153Z",
+    "revision": 2,
+    "expires_at": "2026-11-04T11:40:24.960153Z"
+  },
+  "outcomes": {
+    "workday_id": "b50dd105-9a40-4385-8c55-ed86125bfc4a",
+    "revision": 1,
+    "outcomes": [
+      {
+        "activity_id": "8b339b8e-29b0-4736-b8c9-3622fd7bf4e1",
+        "outcome": "unregistered"
+      },
+      {
+        "activity_id": "95bde4a6-06a4-4da5-96aa-d30f02c6724c",
+        "outcome": "unregistered"
+      },
+      {
+        "activity_id": "cb11ed8e-1327-4dbb-862b-c18b59b695de",
+        "outcome": "interrupted"
+      },
+      {
+        "activity_id": "f4ae99bc-e62b-47f2-846f-fa922c3e497a",
+        "outcome": "unregistered"
+      },
+      {
+        "activity_id": "29f47e0f-f99f-4579-be91-c26a567c3e5c",
+        "outcome": "unregistered"
+      },
+      {
+        "activity_id": "66f9aabd-77e5-48f9-91a9-1bc4b1692fa7",
+        "outcome": "unregistered"
+      },
+      {
+        "activity_id": "e3bc3364-1ccd-477a-a059-5af205f1723c",
+        "outcome": "unregistered"
+      },
+      {
+        "activity_id": "75578154-d911-44fa-ad64-3d072e3efb92",
+        "outcome": "unregistered"
+      },
+      {
+        "activity_id": "132f6f32-1dca-4106-bb11-da7f3dd27d18",
+        "outcome": "unregistered"
+      },
+      {
+        "activity_id": "f9fc71b7-107e-4852-898c-e7be78e14a58",
+        "outcome": "unregistered"
+      },
+      {
+        "activity_id": "8b08f5de-6241-424c-9e64-cc5173ceb5a7",
+        "outcome": "unregistered"
+      },
+      {
+        "activity_id": "80c84f3a-7ce6-4990-a3a8-ef0429eb6a39",
+        "outcome": "unregistered"
+      },
+      {
+        "activity_id": "e0f27d9f-5e43-461a-9df3-6dc0c34268c5",
+        "outcome": "unregistered"
+      },
+      {
+        "activity_id": "e786e62e-e501-41ea-8cc6-b6367582b818",
+        "outcome": "unregistered"
+      },
+      {
+        "activity_id": "ede12bfd-b7f7-4026-afe1-3f1aa7cb479f",
+        "outcome": "unregistered"
+      }
+    ],
+    "expires_at": "2026-11-04T11:40:24.960153Z"
+  },
+  "bus": {
+    "workday_id": "b50dd105-9a40-4385-8c55-ed86125bfc4a",
+    "physical_bus": "SYN-current-device124",
+    "revision": 2,
+    "expires_at": "2026-11-04T11:40:24.960153Z"
+  }
+}

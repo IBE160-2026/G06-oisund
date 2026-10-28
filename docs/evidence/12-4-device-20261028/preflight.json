@@ -1,0 +1,36 @@
+{
+  "date": "2026-10-28T11:21:09.347Z",
+  "implementation": "5ca3f7df73f4cf49f5244dbc97a0a3ebb8de9891",
+  "head": "80aea192e7918762f41fd4784e2cfafac1a7b75f",
+  "browser": "155.0.8059.85",
+  "priorTargets": [
+    {
+      "id": "2AB1DFF3BFC20DCA3247A60E3ABF7025",
+      "urlSha256": "c170ebe27231a3cde5aaf1d82ac3876b2d5781ac5b8a238cb80dbea9e87d5d5b"
+    },
+    {
+      "id": "8EA6A35780F5534647F61E1DB61EF9C0",
+      "urlSha256": "2f29b01b1111001a72bf5fdd1632cf90ddcf5208d5727e50313dd8e7e509c159"
+    },
+    {
+      "id": "98DC3098B039D88F7BC83957BBD8AC4C",
+      "urlSha256": "f5ba0f8a28980d0f8b52ae8816c7bc67e69a350588d4965dfb449ccd809f341d"
+    },
+    {
+      "id": "E33A6F8B7BAB27EABCC7D4185B7F78B4",
+      "urlSha256": "c170ebe27231a3cde5aaf1d82ac3876b2d5781ac5b8a238cb80dbea9e87d5d5b"
+    }
+  ],
+  "ownTarget": "E31A3A70A96F2F0D7B78BD778C98649A",
+  "device": {
+    "model": "TB361FU",
+    "android": "16"
+  },
+  "viewport": {
+    "width": 800,
+    "height": 1085,
+    "dpr": 2,
+    "ua": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36"
+  },
+  "reverse": "UsbFfs tcp:15324 tcp:15324\r\nUsbFfs tcp:18325 tcp:18325\r\nUsbFfs tcp:18326 tcp:18326\r\n\r\n"
+}
