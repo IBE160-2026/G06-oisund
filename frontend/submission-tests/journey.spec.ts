@@ -1,10 +1,20 @@
 import { test, expect, type Page, type BrowserContext } from '@playwright/test';
 import { readFileSync, mkdirSync, writeFileSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
+import { randomUUID, randomBytes } from 'node:crypto';
 
 const API = 'http://127.0.0.1:18328';
-const account = JSON.parse(readFileSync('../.private-runtime/submission/account.json', 'utf8'));
-if (account.username !== 'synthetic-submission') throw Error('Only isolated submission credentials are permitted');
+const account = { username: 'synthetic-submission-browser-' + randomUUID(), password: randomBytes(32).toString('hex') };
+function python(program: string) {
+  return execFileSync('docker', ['compose', '--project-directory', process.cwd() + '/..', '-p', 'ibe160-submission', '-f', '../compose.submission.yaml', 'exec', '-T', 'private-api', 'python', '-'], { encoding: 'utf8', input: program, timeout: 30000 });
+}
+test.beforeAll(() => {
+  execFileSync(process.execPath, ['scripts/submission.mjs', 'status'], { cwd: '..', timeout: 30000 });
+  python(`from app.auth import require_synthetic_accounts,password_hash\nfrom app.private_storage import database\nfrom uuid import uuid4\nwith database() as conn:\n conn.execute('LOCK TABLE accounts IN SHARE ROW EXCLUSIVE MODE')\n require_synthetic_accounts(conn)\n conn.execute('INSERT INTO accounts VALUES (%s,%s,%s)',(uuid4(),${JSON.stringify(account.username)},password_hash(${JSON.stringify(account.password)})))\n conn.execute('DELETE FROM login_limits')\n`);
+});
+test.afterAll(() => {
+  python(`from app.auth import require_synthetic_accounts\nfrom app.private_storage import database\nwith database() as conn:\n require_synthetic_accounts(conn)\n owner=conn.execute('SELECT id FROM accounts WHERE username=%s',(${JSON.stringify(account.username)},)).fetchone()\n if owner:\n  for table in ['account_notice_operations','workday_notice_operations','workday_notices','workday_deletions','workday_operations','workdays','drafts','draft_operations','draft_deletions','sessions']:\n   conn.execute('DELETE FROM '+table+' WHERE owner=%s',(owner['id'],))\n  conn.execute('DELETE FROM accounts WHERE id=%s',(owner['id'],))\n conn.execute('DELETE FROM login_limits')\n`);
+});
 const oracle = JSON.parse(readFileSync('../Eksempelfiler/Fasit-testskift.json', 'utf8').replace(/^\uFEFF/, '')).shifts;
 const button = (page: Page, name: string) => page.getByRole('button', { name, exact: true });
 async function get(context: BrowserContext, path: string) {
