@@ -1,16 +1,19 @@
 // Audit changed/versioned submission files; never print generated secret values.
 import { execFileSync } from 'node:child_process';
-import { readFileSync, readdirSync, existsSync, writeFileSync } from 'node:fs';
+import { readFileSync, existsSync, writeFileSync } from 'node:fs';
 const git = args => execFileSync('git', args, { encoding:'utf8' }).trim().split(/\r?\n/).filter(Boolean);
 const paths = [...new Set([...git(['diff','--name-only','99c272b09abaa5ffecf3286b406fbf065a445c7c']), ...git(['ls-files','--others','--exclude-standard'])])].sort();
 const tracked = git(['ls-files']);
 const forbiddenTracked = tracked.filter(p => /(^|\/)(node_modules|\.private-runtime)(\/|$)/.test(p) || /(^|\/)\.env(?:\.|$)/.test(p) && !p.endsWith('.example'));
 const secrets = [];
-for (const directory of ['D:/IBE160/tmp/submission-clean-20261028/.private-runtime/submission','D:/IBE160/tmp/submission-clean-20261028/tmp/failed-initial-runtime','D:/IBE160/tmp/submission-clean-20261028/tmp/failed-second-runtime']) {
-  if (!existsSync(directory)) continue;
+const directories = process.argv.slice(2);
+if (!directories.length) throw Error('Pass explicit ignored submission runtime directories to audit; no secret audit without inputs');
+for (const directory of directories) {
   const passwordPath = directory + '/postgres-password', accountPath = directory + '/account.json';
-  if (existsSync(passwordPath)) secrets.push(readFileSync(passwordPath,'utf8').trim());
-  if (existsSync(accountPath)) secrets.push(JSON.parse(readFileSync(accountPath,'utf8')).password);
+  if (!existsSync(passwordPath) || !existsSync(accountPath)) throw Error('Required synthetic secret inputs are missing');
+  const password=readFileSync(passwordPath,'utf8').trim(),account=JSON.parse(readFileSync(accountPath,'utf8'));
+  if (password.length<32 || account.username!=='synthetic-submission' || typeof account.password!=='string' || account.password.length<32) throw Error('Expected generated synthetic secret inputs');
+  secrets.push(password,account.password);
 }
 const matches = [];
 for (const path of paths) {

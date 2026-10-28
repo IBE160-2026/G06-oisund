@@ -73,6 +73,22 @@ Clean reproduction completed with actual API/PostgreSQL,480 selected backend/par
 
 ## Review Triage Log
 
+| Finding | Verdict | Verified evidence / route |
+|---|---|---|
+| Blind B1: Linux paths differing only in case pass ownership | medium | Original normalization lowercased all platforms. Patch native path comparison; Windows and Linux regression branches. |
+| Blind B2: status omits frontend/health | medium | Original loop inspected four services and no health. Patch exact five-service healthy runtime checks; negative missing/unhealthy frontend cases. |
+| Blind B3: HTTP test target may diverge from guarded SQL | medium | Original desired/live validators omitted PRIVATE_TEST_API/ORIGIN. Patch both configured and running environment checks before tests. |
+| Blind B4: actual published ports are unchecked | medium | Original live validator checked networks/storage only. Patch actual Docker port bindings and database no-publication checks. |
+| Blind B5: configured database mount target unchecked | medium | Original validator checked mount source/type but not destination. Patch exact PostgreSQL data target and negative test. |
+| Blind B6: retained volume ownership after all containers removed | low | Requires reusing/copied runtime secrets in another checkout, outside the clean recipe explicitly requested. Reject complex persistent ownership registry; document original-checkout/secrets boundary. Existing containers and fresh checkouts remain guarded. |
+| Blind B7: all-table restart probe has empty dependent tables | medium | Initial probe populated draft/session; UI A separately proved populated recap restart. Patch representative API-created bus/selection/start/outcome/closure/notice/receipts before all-table comparison. |
+| Blind B8: unrelated volume inventory absent | medium | Initial probe compared container metadata only. Patch volume creation identities and container-volume mount relationships around reset. |
+| Blind B9: audit may pass with zero secret inputs | medium | Initial one-off method silently skipped absent hardcoded directories. Patch mandatory explicit synthetic-runtime directories and missing-input refusal. |
+| Blind B10: mutable branch clone lacks immutable checkout | medium | Branch is mutable and printing HEAD alone does not select delivered source. Patch README to pin the final reviewed source/evidence commit after checks; no tag or deployment required. |
+| Edge E1: same Linux case collision | medium | Same verified cause as B1; carried into the native-path patch and Linux test. |
+| Edge E2: concurrent first initialization before containers exist | low | Concurrent bootstrap is outside the sequential reader recipe and was not exercised. Reject a new global lock/recovery protocol as disproportionate for this bounded delivery; document sequential lifecycle use. No original production project shares this new project name. |
+| Gap G1: whole-command ordinary-account refusal does not cover fictional DB | medium | Direct Python negative test could miss reordered Node reset calls. Patch actual Node command refusal and exact unchanged fingerprints of both databases, then remove only temporary guard rows. |
+
 ## Verification
 
 - Follow the new README exactly in a clean tracked-only clone/export; use no prior dependencies, built files or runtime volumes.

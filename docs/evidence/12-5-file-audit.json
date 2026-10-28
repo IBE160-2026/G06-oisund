@@ -1,8 +1,9 @@
 {
-  "capturedAt": "2026-10-28T17:57:20.519Z",
-  "source": "f5037cbdf7de1790aeb222c0d937fe656ed8b061",
+  "capturedAt": "2026-10-28T18:09:37.505Z",
+  "source": "c6d95e216e352ba2043157e78554358b89039d3a",
   "checkedPaths": [
     ".dockerignore",
+    ".gitattributes",
     "README.md",
     "_bmad-output/implementation-artifacts/spec-12-5-reproducible-submission.md",
     "_bmad-output/implementation-artifacts/sprint-status.yaml",
@@ -18,6 +19,7 @@
     "docs/evidence/12-5-browser.json",
     "docs/evidence/12-5-collection.txt",
     "docs/evidence/12-5-file-audit-method.mjs",
+    "docs/evidence/12-5-file-audit.json",
     "docs/evidence/12-5-foreign-checkout-refusal.txt",
     "docs/evidence/12-5-identity-method.mjs",
     "docs/evidence/12-5-identity.json",

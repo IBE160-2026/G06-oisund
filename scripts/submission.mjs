@@ -8,6 +8,18 @@ export const ROOT = realpathSync(fileURLToPath(new URL('../', import.meta.url)))
 export const PROJECT = 'ibe160-submission';
 const CONFIG = join(ROOT, 'compose.submission.yaml');
 const runtime = join(ROOT, '.private-runtime', 'submission');
+const publishedPorts = { frontend: [15325, 15325], api: [8000, 18327], 'private-api': [8000, 18328] };
+const databaseVolumes = { db: 'submission_fictional', 'private-db': 'submission_private' };
+const privateEnvironment = {
+  APP_MODE: 'private-local', PRIVATE_LOOPBACK_DEVELOPMENT: '1', SUBMISSION_PROJECT: PROJECT,
+  PRIVATE_DATABASE_URL: 'postgresql://private_work@private-db/private_work',
+  PRIVATE_DATABASE_PASSWORD_FILE: '/run/secrets/submission_password',
+  PRIVATE_ORIGIN: 'http://127.0.0.1:15325', PRIVATE_TEST_PROJECT: 'ibe160-private-tests',
+  PRIVATE_TEST_API: 'http://private-api:8000', PRIVATE_TEST_ORIGIN: 'http://127.0.0.1:15325',
+};
+function validatePrivateEnvironment(environment) {
+  if (Object.entries(privateEnvironment).some(([key, value]) => environment?.[key] !== value)) throw Error('Wrong private submission configuration/storage/test endpoint');
+}
 function run(command, args, options = {}) {
   const result = spawnSync(command, args, { cwd: ROOT, stdio: 'inherit', ...options });
   if (result.error) throw result.error;
@@ -21,32 +33,50 @@ function compose(args, capture = false) {
 export function validateConfig(config) {
   const services = config.services;
   if (config.name !== PROJECT || Object.keys(services).sort().join() !== 'api,db,frontend,private-api,private-db') throw Error('Wrong submission project/services');
-  for (const [name, port] of [['frontend', 15325], ['api', 18327], ['private-api', 18328]]) {
+  for (const [name, [target, port]] of Object.entries(publishedPorts)) {
     const ports = services[name].ports;
-    if (ports?.length !== 1 || ports[0].host_ip !== '127.0.0.1' || Number(ports[0].published) !== port) throw Error('Wrong submission loopback ports');
+    if (ports?.length !== 1 || ports[0].host_ip !== '127.0.0.1' || Number(ports[0].published) !== port || Number(ports[0].target) !== target || ports[0].protocol !== 'tcp') throw Error('Wrong submission loopback ports');
   }
   for (const [service, volume] of [['db', 'submission_fictional'], ['private-db', 'submission_private']]) {
     const mounts = services[service].volumes;
-    if (services[service].ports?.length || mounts?.length !== 1 || mounts[0].type !== 'volume' || mounts[0].source !== volume || config.volumes[volume]?.name !== `${PROJECT}_${volume}` || config.volumes[volume]?.external) throw Error('Wrong submission storage');
+    if (services[service].ports?.length || mounts?.length !== 1 || mounts[0].type !== 'volume' || mounts[0].target !== '/var/lib/postgresql/data' || mounts[0].source !== volume || config.volumes[volume]?.name !== `${PROJECT}_${volume}` || config.volumes[volume]?.external) throw Error('Wrong submission storage');
   }
-  const api = services['private-api'].environment;
-  if (api.SUBMISSION_PROJECT !== PROJECT || api.PRIVATE_DATABASE_URL !== 'postgresql://private_work@private-db/private_work' || api.PRIVATE_DATABASE_PASSWORD_FILE !== '/run/secrets/submission_password' || api.PRIVATE_ORIGIN !== 'http://127.0.0.1:15325' || api.PRIVATE_TEST_PROJECT !== 'ibe160-private-tests') throw Error('Wrong private submission configuration');
+  validatePrivateEnvironment(services['private-api'].environment);
 }
 export function validateContainer(container, service, volume) {
+  if (!(service in publishedPorts) && !(service in databaseVolumes)) throw Error('Unknown submission service');
+  if (!container?.State?.Running || container.State.Status !== 'running' || container.State.Health?.Status !== 'healthy') throw Error('Every submission service must be running and healthy');
   const labels = container.Config.Labels;
   if (labels['com.docker.compose.project'] !== PROJECT || labels['com.docker.compose.service'] !== service
       || Object.keys(container.NetworkSettings.Networks).join() !== `${PROJECT}_default`) throw Error('Running container is outside isolated submission project/network');
+  const bindings = Object.entries(container.NetworkSettings.Ports ?? {}).flatMap(([target, values]) => (values ?? []).map(value => ({ target, ...value })));
+  if (service in publishedPorts) {
+    const [target, port] = publishedPorts[service];
+    if (bindings.length !== 1 || bindings[0].target !== `${target}/tcp` || bindings[0].HostIp !== '127.0.0.1' || bindings[0].HostPort !== String(port)) throw Error('Running submission publishes wrong ports');
+  } else if (bindings.length) throw Error('Submission database must not publish a port');
   if (volume) {
     const mounts = container.Mounts.filter(mount => mount.Destination === '/var/lib/postgresql/data');
     if (mounts.length !== 1 || mounts[0].Type !== 'volume' || mounts[0].Name !== `${PROJECT}_${volume}`) throw Error('Running storage is not the isolated submission volume');
   }
   if (service === 'private-api') {
     const env = Object.fromEntries(container.Config.Env.map(value => { const at = value.indexOf('='); return [value.slice(0, at), value.slice(at + 1)]; }));
-    if (env.SUBMISSION_PROJECT !== PROJECT || env.PRIVATE_DATABASE_URL !== 'postgresql://private_work@private-db/private_work' || env.PRIVATE_DATABASE_PASSWORD_FILE !== '/run/secrets/submission_password') throw Error('Running API targets wrong private storage');
+    validatePrivateEnvironment(env);
+  }
+}
+export function validateRuntime(containers) {
+  const services = [...Object.keys(publishedPorts), ...Object.keys(databaseVolumes)];
+  if (containers.length !== services.length) throw Error('Exactly five submission services required');
+  for (const service of services) {
+    const matches = containers.filter(container => container.Config.Labels['com.docker.compose.service'] === service);
+    if (matches.length !== 1) throw Error('Exactly one of each submission service required');
+    validateContainer(matches[0], service, databaseVolumes[service]);
   }
 }
 export function validateOwnership(container, root = ROOT) {
-  const normalize = path => path.replaceAll('\\', '/').toLowerCase().replace(/\/$/, '');
+  const normalize = path => {
+    const normalized = path.replaceAll('\\', '/').replace(/\/$/, '');
+    return process.platform === 'win32' ? normalized.toLowerCase() : normalized;
+  };
   const labels = container.Config.Labels;
   if (labels['com.docker.compose.project'] !== PROJECT
       || normalize(labels['com.docker.compose.project.working_dir'] ?? '') !== normalize(root)
@@ -77,12 +107,9 @@ function generate() {
   }
 }
 function verifyRunningStorage() {
-  for (const [service, volume] of [['db', 'submission_fictional'], ['private-db', 'submission_private'], ['private-api', null], ['api', null]]) {
-    const id = compose(['ps', '-q', service], true).trim();
-    if (!id || id.includes('\n')) throw Error('Exactly one running submission database required');
-    const [container] = JSON.parse(run('docker', ['inspect', id], { stdio: ['ignore', 'pipe', 'inherit'], encoding: 'utf8' }));
-    validateContainer(container, service, volume);
-  }
+  const ids = compose(['ps', '-a', '-q'], true).trim().split(/\s+/).filter(Boolean);
+  if (!ids.length) throw Error('Exactly five submission services required');
+  validateRuntime(JSON.parse(run('docker', ['inspect', ...ids], { stdio: ['ignore', 'pipe', 'inherit'], encoding: 'utf8' })));
 }
 const privateManage = action => compose(['exec', '-T', 'private-api', 'python', '/submission/manage.py', action]);
 const fictional = arguments_ => compose(['exec', '-T', 'api', 'python', '/submission/fictional.py', ...arguments_]);
