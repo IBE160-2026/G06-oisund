@@ -1,0 +1,97 @@
+# Synthetic integration only; never overlays ordinary service definitions.
+name: ibe160-submission
+services:
+  db:
+    image: postgres:17-alpine@sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24
+    environment:
+      POSTGRES_DB: fictional_assessment
+      POSTGRES_USER: fictional
+      POSTGRES_PASSWORD_FILE: /run/secrets/submission_password
+    secrets: [submission_password]
+    volumes: [submission_fictional:/var/lib/postgresql/data]
+    healthcheck:
+      test: [CMD-SHELL, pg_isready -U fictional -d fictional_assessment]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+  api:
+    build: ./backend
+    # Read the ignored password inside the container, never in a URL or evidence.
+    command: [python, -c, "import os,runpy; from pathlib import Path; from urllib.parse import quote; os.environ['DATABASE_URL']='postgresql://fictional:'+quote(Path('/run/secrets/submission_password').read_text().strip(),safe='')+'@db/fictional_assessment'; runpy.run_module('app.run',run_name='__main__')"]
+    environment:
+      APP_MODE: fictional-assessment
+      FICTIONAL_ORIGIN: http://127.0.0.1:15325
+    secrets: [submission_password]
+    volumes:
+      - ./Eksempelfiler:/fixtures:ro
+    ports: ['127.0.0.1:18327:8000']
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+    depends_on:
+      db:
+        condition: service_healthy
+  private-db:
+    image: postgres:17-alpine@sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24
+    environment:
+      POSTGRES_DB: private_work
+      POSTGRES_USER: private_work
+      POSTGRES_PASSWORD_FILE: /run/secrets/submission_password
+    secrets: [submission_password]
+    volumes: [submission_private:/var/lib/postgresql/data]
+    healthcheck:
+      test: [CMD-SHELL, pg_isready -U private_work -d private_work]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+  private-api:
+    build: ./backend
+    environment:
+      APP_MODE: private-local
+      PRIVATE_DATABASE_URL: postgresql://private_work@private-db/private_work
+      PRIVATE_DATABASE_PASSWORD_FILE: /run/secrets/submission_password
+      PRIVATE_ORIGIN: http://127.0.0.1:15325
+      PRIVATE_LOOPBACK_DEVELOPMENT: '1'
+      SUBMISSION_PROJECT: ibe160-submission
+      PYTHONPATH: /app
+      PRIVATE_TEST_PROJECT: ibe160-private-tests
+      PRIVATE_TEST_API: http://private-api:8000
+      PRIVATE_TEST_ORIGIN: http://127.0.0.1:15325
+    secrets: [submission_password, submission_account]
+    volumes:
+      - ./Eksempelfiler:/fixtures:ro
+      - ./deploy/submission/manage.py:/submission/manage.py:ro
+    ports: ['127.0.0.1:18328:8000']
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+    depends_on:
+      private-db:
+        condition: service_healthy
+  frontend:
+    build:
+      context: .
+      dockerfile: deploy/submission/Dockerfile
+    ports: ['127.0.0.1:15325:15325']
+    healthcheck:
+      test: [CMD, node, -e, "fetch('http://127.0.0.1:15325/private').then(r=>{if(!r.ok)process.exit(1)}).catch(()=>process.exit(1))"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+    depends_on:
+      private-api:
+        condition: service_healthy
+      api:
+        condition: service_healthy
+volumes:
+  submission_fictional:
+  submission_private:
+secrets:
+  submission_password:
+    file: ./.private-runtime/submission/postgres-password
+  submission_account:
+    file: ./.private-runtime/submission/account.json
