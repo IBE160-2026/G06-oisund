@@ -67,7 +67,9 @@ context: []
 
 Intent gaps: none after repository investigation. Irreversibles: authorized branch publication only; reset limited to explicitly disposable synthetic data. Footprint: delivery tooling/docs/tests; no product-contract changes planned. User's autonomous completion instruction supersedes intermediate plan approval.
 
-Clean reproduction completed with actual API/PostgreSQL,480 selected backend/parser cases,3 real-browser cases,3 Node and3 wrapper checks; exact row/deadline stop/start/restart and guarded reset passed. Source product/dependency files remain identical to baseline. See ../../docs/evidence/12-5-reproduction.md for canonical revisions, failures and limits. Independent review follows; owner acceptance remains pending.
+Clean reproduction completed with actual API/PostgreSQL, 480 selected backend/parser cases, 3 real-browser cases, 3 Node and 3 wrapper checks; exact row/deadline stop/start/restart and guarded reset passed. Source product/dependency files remain identical to baseline. See ../../docs/evidence/12-5-reproduction.md for canonical revisions, failures and limits. Independent review follows; owner acceptance remains pending.
+
+Post-review source8d50684338b4f74430cd387dabba9e55edc4b7fd passed6 Node groups on Windows and Linux,3 actual browser cases,6 actual database safety cases and the expanded5-check populated lifecycle/reset probe (30 unrelated containers/14 volumes preserved). Two missing-audit-input controls passed. Exact receipts and remaining sequential-bootstrap boundaries are in the reproduction report.
 
 ## Spec Change Log
 

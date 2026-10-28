@@ -1,4 +1,5 @@
 // Audit changed/versioned submission files; never print generated secret values.
+// Usage: node docs/evidence/12-5-file-audit-method.mjs <ignored-runtime> [earlier-ignored-runtimes...]
 import { execFileSync } from 'node:child_process';
 import { readFileSync, existsSync, writeFileSync } from 'node:fs';
 const git = args => execFileSync('git', args, { encoding:'utf8' }).trim().split(/\r?\n/).filter(Boolean);

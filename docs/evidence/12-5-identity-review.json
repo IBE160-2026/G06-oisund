@@ -1,0 +1,348 @@
+{
+  "capturedAt": "2026-10-28T18:15:51.866Z",
+  "source": "8d50684338b4f74430cd387dabba9e55edc4b7fd",
+  "clean": true,
+  "root": "D:\\IBE160\\tmp\\submission-clean-20261028",
+  "host": {
+    "platform": "win32",
+    "release": "10.0.26300",
+    "arch": "x64",
+    "node": "v24.19.0"
+  },
+  "docker": "29.7.2",
+  "compose": "Docker Compose version v5.5.1",
+  "containers": [
+    {
+      "id": "1dc65682b0bfaa5b06727a0b37f6b05aac0253fd0d56c27b0a91e9d3c7e84665",
+      "name": "/ibe160-submission-frontend-1",
+      "imageId": "sha256:cb34104dad2f86d64f92fc8272e9e76f834db708e92ab50f17098f7e1eeac79d",
+      "image": "ibe160-submission-frontend",
+      "startedAt": "2026-10-28T18:13:22.00497948Z",
+      "state": "running",
+      "health": "healthy",
+      "project": "ibe160-submission",
+      "root": "D:\\IBE160\\tmp\\submission-clean-20261028",
+      "config": "D:\\IBE160\\tmp\\submission-clean-20261028\\compose.submission.yaml",
+      "ports": {
+        "15325/tcp": [
+          {
+            "HostIp": "127.0.0.1",
+            "HostPort": "15325"
+          }
+        ]
+      },
+      "networks": [
+        "ibe160-submission_default"
+      ],
+      "mounts": []
+    },
+    {
+      "id": "6a85f6927af64e6743e3415391e43d1c65bab151e6e82e666516d636eb5ad49b",
+      "name": "/ibe160-submission-private-api-1",
+      "imageId": "sha256:7725ce0c88035360331cb8a1dcf2ec3871ad318f2504332ddf27c635e010a22c",
+      "image": "ibe160-submission-private-api",
+      "startedAt": "2026-10-28T18:13:22.20274383Z",
+      "state": "running",
+      "health": "healthy",
+      "project": "ibe160-submission",
+      "root": "D:\\IBE160\\tmp\\submission-clean-20261028",
+      "config": "D:\\IBE160\\tmp\\submission-clean-20261028\\compose.submission.yaml",
+      "ports": {
+        "8000/tcp": [
+          {
+            "HostIp": "127.0.0.1",
+            "HostPort": "18328"
+          }
+        ]
+      },
+      "networks": [
+        "ibe160-submission_default"
+      ],
+      "mounts": [
+        {
+          "type": "bind",
+          "source": "D:\\IBE160\\tmp\\submission-clean-20261028\\deploy\\submission\\manage.py",
+          "destination": "/submission/manage.py",
+          "readWrite": false
+        },
+        {
+          "type": "bind",
+          "source": "D:\\IBE160\\tmp\\submission-clean-20261028\\Eksempelfiler",
+          "destination": "/fixtures",
+          "readWrite": false
+        },
+        {
+          "type": "bind",
+          "source": "D:\\IBE160\\tmp\\submission-clean-20261028\\.private-runtime\\submission\\postgres-password",
+          "destination": "/run/secrets/submission_password",
+          "readWrite": false
+        },
+        {
+          "type": "bind",
+          "source": "D:\\IBE160\\tmp\\submission-clean-20261028\\.private-runtime\\submission\\account.json",
+          "destination": "/run/secrets/submission_account",
+          "readWrite": false
+        }
+      ]
+    },
+    {
+      "id": "3216efc0ec55ffb5e6ffc97493d8bc9e3b1e6b2154afbbe11ffd440fdd1821e9",
+      "name": "/ibe160-submission-api-1",
+      "imageId": "sha256:4c19a5abbbb3bc9649282c31f6c52916a5dc26cf80bdcd4145c02c3090b67883",
+      "image": "ibe160-submission-api",
+      "startedAt": "2026-10-28T18:13:22.343357629Z",
+      "state": "running",
+      "health": "healthy",
+      "project": "ibe160-submission",
+      "root": "D:\\IBE160\\tmp\\submission-clean-20261028",
+      "config": "D:\\IBE160\\tmp\\submission-clean-20261028\\compose.submission.yaml",
+      "ports": {
+        "8000/tcp": [
+          {
+            "HostIp": "127.0.0.1",
+            "HostPort": "18327"
+          }
+        ]
+      },
+      "networks": [
+        "ibe160-submission_default"
+      ],
+      "mounts": [
+        {
+          "type": "bind",
+          "source": "D:\\IBE160\\tmp\\submission-clean-20261028\\.private-runtime\\submission\\postgres-password",
+          "destination": "/run/secrets/submission_password",
+          "readWrite": false
+        },
+        {
+          "type": "bind",
+          "source": "D:\\IBE160\\tmp\\submission-clean-20261028\\deploy\\submission\\fictional.py",
+          "destination": "/submission/fictional.py",
+          "readWrite": false
+        },
+        {
+          "type": "bind",
+          "source": "D:\\IBE160\\tmp\\submission-clean-20261028\\Eksempelfiler",
+          "destination": "/fixtures",
+          "readWrite": false
+        }
+      ]
+    },
+    {
+      "id": "386444e14bdae6de4c81eb0d25239d45575c1f7ff86f6fc1e73693d3387279a9",
+      "name": "/ibe160-submission-private-db-1",
+      "imageId": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "image": "postgres:17-alpine@sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "startedAt": "2026-10-28T18:13:22.141697558Z",
+      "state": "running",
+      "health": "healthy",
+      "project": "ibe160-submission",
+      "root": "D:\\IBE160\\tmp\\submission-clean-20261028",
+      "config": "D:\\IBE160\\tmp\\submission-clean-20261028\\compose.submission.yaml",
+      "ports": {
+        "5432/tcp": null
+      },
+      "networks": [
+        "ibe160-submission_default"
+      ],
+      "mounts": [
+        {
+          "type": "volume",
+          "name": "ibe160-submission_submission_private",
+          "source": "/var/lib/docker/volumes/ibe160-submission_submission_private/_data",
+          "destination": "/var/lib/postgresql/data",
+          "readWrite": true
+        },
+        {
+          "type": "bind",
+          "source": "D:\\IBE160\\tmp\\submission-clean-20261028\\.private-runtime\\submission\\postgres-password",
+          "destination": "/run/secrets/submission_password",
+          "readWrite": false
+        }
+      ]
+    },
+    {
+      "id": "080f8b194376a351ddf410ff42cbd45003a711e540d1036b3fdd7f3734ba9b0b",
+      "name": "/ibe160-submission-db-1",
+      "imageId": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "image": "postgres:17-alpine@sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "startedAt": "2026-10-28T18:13:22.081855153Z",
+      "state": "running",
+      "health": "healthy",
+      "project": "ibe160-submission",
+      "root": "D:\\IBE160\\tmp\\submission-clean-20261028",
+      "config": "D:\\IBE160\\tmp\\submission-clean-20261028\\compose.submission.yaml",
+      "ports": {
+        "5432/tcp": null
+      },
+      "networks": [
+        "ibe160-submission_default"
+      ],
+      "mounts": [
+        {
+          "type": "volume",
+          "name": "ibe160-submission_submission_fictional",
+          "source": "/var/lib/docker/volumes/ibe160-submission_submission_fictional/_data",
+          "destination": "/var/lib/postgresql/data",
+          "readWrite": true
+        },
+        {
+          "type": "bind",
+          "source": "D:\\IBE160\\tmp\\submission-clean-20261028\\.private-runtime\\submission\\postgres-password",
+          "destination": "/run/secrets/submission_password",
+          "readWrite": false
+        }
+      ]
+    }
+  ],
+  "served": [
+    {
+      "asset": "/assets/main-BW1RTvUe.js",
+      "bytes": 185684,
+      "sha256": "8287893144fa68af826d1337cc31505fa94b43e6a23bb84fca0ca26994fab41f",
+      "equalsBuiltImage": true
+    },
+    {
+      "asset": "/assets/FictionalAssessment-DgWBF5_Z.js",
+      "bytes": 242638,
+      "sha256": "7c658dbd5e696de8b7feb29b3b34f3249d07fcd4eabddcea0a2eb7bd5b9cff03",
+      "equalsBuiltImage": true
+    },
+    {
+      "asset": "/assets/FictionalAssessment-Ca5gn51W.css",
+      "bytes": 16298,
+      "sha256": "d436cb47d234e7a034e820876840f7cb88c6e119b2912f0c3cb996228416e2d3",
+      "equalsBuiltImage": true
+    }
+  ],
+  "sourceFileSha256": {
+    ".dockerignore": "37bcec2587054baff6850cfdca0a4fb5331940bd2f8115b7cb19a4a4a33a226a",
+    "Eksempelfiler/Fasit-testskift.json": "e6209e57f5203737baf932400715a1ca3eee02c3a2e65f5770c0273b1fb21450",
+    "Eksempelfiler/Testskift-A.pdf": "700b459a3552012ae2ccd493078c6b597b837379804ebdf386143cb38e4f14c1",
+    "Eksempelfiler/Testskift-B.pdf": "18f11605cb5d26713629dc2f5a52b533fb9b4977018ae7f3dc88d1ccedb00e32",
+    "Eksempelfiler/Testskift-C.pdf": "5790779aa6f1a3f93a1ba62ffbaf237ddc3a48a8e4cf1b99a73d8d7e4f37a063",
+    "Eksempelfiler/Testskift-D.pdf": "9ad8e8293e0567c3949ad9169e809a50816bbb4586c37c72b42b208d4c17f542",
+    "Eksempelfiler/Testskift-E.pdf": "b95cd44c7907a965a89ef4b0a3f18b874f02bc03a357ae1529a21509677229fa",
+    "README.md": "8eba46ddf11eb6f6b235c26ec219096d27c8bd300870546c5d48a5cdad74f9c4",
+    "backend/.dockerignore": "b48d4c45e9ad73ebe416bded118bb8bfbe0adafb4e51db8902e8870205dcdb25",
+    "backend/Dockerfile": "c91d60082825b71add45278fee6666de7069d0584b191c0d1ecc379df83e241d",
+    "backend/app/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "backend/app/auth.py": "d8f729690afd3ddbb79724717b385ffd2ab1226a8cb4f207c545afa303e67aad",
+    "backend/app/bus_value.py": "5be4861d3d57d0e7f4ddc908fcd6fbc5ccd52d4940d25283969a6574c783b49b",
+    "backend/app/domain.py": "00caf3939819d84128958d86cea4fc25f5f8ab52d78df894443520ed2c5949ca",
+    "backend/app/draft_domain.py": "2af54e480868792b89ed1822d30a12d10af2d5e39f240e19960044b69f836589",
+    "backend/app/draft_storage.py": "865c849b96ba2af6ebcf6089aebe7812cb93752d5f076dc7f7e55948b4cf648b",
+    "backend/app/draft_time.py": "b6c958f2059a2852aa033ed7cf7c26141cfe231581dc24c427d175d337895abf",
+    "backend/app/import_issues.py": "b9b573cd43f172078dc1e5701689f26c3ba19ce71d8aca45d41612e072f27207",
+    "backend/app/main.py": "29e1b9f48c8807ccb891521131cb104cbebb7e80f164f8e63698da0847d68aea",
+    "backend/app/manage.py": "68640add1f88a9d9f329504c9fc17c082bbc1e25196eb0fe199b827a198f821a",
+    "backend/app/notice_reader_domain.py": "11dc65c6d65e02fe0170fe408a09f0470c10a54bb6e2b0f9735d6d63aa4390fc",
+    "backend/app/pdf_import.py": "06ae62d41f073124af7602cc0e963dd5424b0d5956b3af2083149d91309fc263",
+    "backend/app/private_import.py": "bef1a0ce951826cd59810196f97454c0e05ff0a23f99e8b6c3fb98a7948b2d59",
+    "backend/app/private_main.py": "826c6833a32482a47f35ec9a9fa6bce18fc921c2cb8de06a1e997d3644596b5e",
+    "backend/app/private_storage.py": "d42388811c09adb0d62c302db6fe0b5cac522fc25d8ca6ae5bc2fc4ec10dac62",
+    "backend/app/qualify_imports.py": "4e29620264ed463d6a12406d712424ad040a6354eb5fcb9bbbc35141a3a7658d",
+    "backend/app/run.py": "2f0de523ef255ed144194d6e0b25f7aef920ef503f9b3e3342d7004520f3d0f1",
+    "backend/app/storage.py": "07be14df4c897d9859112e28e68e9e186383064653a83d1e9727ae11489f1b57",
+    "backend/app/workday_bus_domain.py": "8eaad1875aa29e748387928076812ff72593b327e937adcbeaea5272050ab89f",
+    "backend/app/workday_bus_storage.py": "eb5e99d0d47ef795358f1e58411731446174f83e68467d5f778b32ec31fcc7d9",
+    "backend/app/workday_domain.py": "d7ce2bdeef3b1db4b7cd4ca0f8916108cc11d44eb69d4a4f578f3b40cea9a4c6",
+    "backend/app/workday_lifecycle_domain.py": "f0d9332df28a98fb4325b24c6b7f4f523b13f898ee0721832d128164d6d4cfa4",
+    "backend/app/workday_lifecycle_storage.py": "302ad49cd38bfd74b043bccfb8d846552f28ecaae0e545e7ad8e195cda846048",
+    "backend/app/workday_notice_domain.py": "ce7ded29b9402bdc3848038197ba7d077ef1c54fa601978e3ebb6ebdb802a194",
+    "backend/app/workday_notice_storage.py": "1c9453b65dd16aa0447b02827af8371c585792ce698835a8542b6c302101db0f",
+    "backend/app/workday_outcome_domain.py": "020d606d32e8766986b7410c52f4aa7e02a9ffad5a02bd5bf0e40116d4de98f8",
+    "backend/app/workday_outcome_storage.py": "e425963d6182fbf9a0488a091b7f48b7e2e70c7a0683c8fffbebfbdb2562d4cd",
+    "backend/app/workday_selection_domain.py": "7b26d2fe1b687dc71e7199e722eb0f2342b54204a55a5d36066ec5075327532b",
+    "backend/app/workday_selection_storage.py": "172ece4223332e3367bd402c1d9dcb269c414ad38b820f1073918602514eaabb",
+    "backend/app/workday_storage.py": "466e6eeabe43b1e77f2aaa2d111986c25dc200b7c71598341eeddee3d7bdd3d9",
+    "backend/migrations/001_initial.sql": "91ddb841c46c2eb2bc052acdb90c2462d32ae25107d08b3ea361779533e0eb60",
+    "backend/migrations/private/001_access.sql": "503e33d0d0713cf219b51c15f1b1a0183f654f2bb71b32a31bb331070a96df93",
+    "backend/migrations/private/002_drafts.sql": "2e83389f35f31e5ab33de0709cdce6bed3ec4bd14fbe643c88f53792363043f0",
+    "backend/migrations/private/003_draft_deletions.sql": "13802f0a09e26ccab4f8380f1af2de642777d8f5b67e1f25a27f349b4ff9f482",
+    "backend/migrations/private/004_workdays.sql": "7366bf68090b0e67a4df6717bb29490f0aa37e763d2b4e5482fff5540e0f9e24",
+    "backend/migrations/private/005_workday_deletions.sql": "8dc45a272ff0bc3e168cc32b20683e7df45f7cac31dc49e70f9936c8aa90fccd",
+    "backend/migrations/private/006_workday_bus.sql": "e4b6f96a0ce2d3622c3e83b90adbe1c7f7e843cb88611f35041943cb6d56b84d",
+    "backend/migrations/private/007_draft_contracts.sql": "269440bb8682396a829f6c3cbad3fb5a30dc3775002838f81e5c9fb8d19631c3",
+    "backend/migrations/private/008_review_feedback.sql": "631cc9302e14099f96d0d76b9860b5559e0a8490225576d4ff8c24934636c126",
+    "backend/migrations/private/009_workday_selection.sql": "e090e74b4345b1659975d583a95889940e9e67035c359c35e8c40c6f73c28d44",
+    "backend/migrations/private/010_outcomes_and_closure.sql": "0d3de44e334e9c064b597f1ea7605cf447986dd8736a0750680f72d8795f48a6",
+    "backend/migrations/private/011_manual_notices.sql": "43a7fed3daede659fbfed30cf952c6b3c7fb1aadfcca98f8034461a1ed94bc57",
+    "backend/migrations/private/012_real_notice_sources.sql": "0f48d00335ad7c29c096d984b8a5bd5ba03ebbbdc2562549a45cfab1b35c68fc",
+    "backend/migrations/private/013_account_notice_registry.sql": "50b8a90bf1e9ae446a5d8f8d2a028bfac82ffba3bb057c648e8e7b35eb492c36",
+    "backend/migrations/private/014_notice_creation_admissions.sql": "21c2a76f50030cd5709c3b75b7092850cee7663170300cfd5de20118ad647b2b",
+    "backend/requirements.in": "69ff61da71e65a508cbf1c8adf6c7d75363da0eac1d61b04e73e87974ae28b26",
+    "backend/requirements.lock": "3bdc62f8eb049cbc5b25ec3c3eae78afc460f7b10ab55bf7a9b0ee55025f2c57",
+    "backend/tests/fixtures/import-source-2026-10-20.md": "c221000e9d6b1314749efb918af05de3e8a3f4e133147c80384123d2a033d1c3",
+    "backend/tests/fixtures/import_additional_expected.json": "9046a9ee64823475ed743590f91b52964cf9f8a42c6d96cda2b294f14a8aef22",
+    "backend/tests/fixtures/import_expected.json": "184082d7c9dca5a45c5e6d23d95a9f63c8fbc0fcdf43fab3e607dbadef1259bc",
+    "backend/tests/test_account_notices.py": "4f13c365c0170f75d854c238040a992a7d05a449b98c72f09bdc099aa7183a27",
+    "backend/tests/test_assessment.py": "8e18cabdc2e6a900390d94148b50af2c792e5fd9f8c1219a4b369b665ae2dd59",
+    "backend/tests/test_notice_reader.py": "17608a11f24cf622c8694620c7e60a152062985e3d2dcff189ed24549c1a5c7c",
+    "backend/tests/test_pdf_import.py": "38cf9ee68891de7474a89536b087484a1238c2ab0bee1d49beba24bd0a714e4f",
+    "backend/tests/test_private_access.py": "0d0dc93e5af201862e57cf14586ce11732c34747da94a01594fe38955a33a50f",
+    "backend/tests/test_private_bus.py": "a7ff2ef36b3644a4914f5eb7f5a0cdf2e8b5d6c371ca0a9b2bac97431ecc10ec",
+    "backend/tests/test_private_drafts.py": "af028cb572b1c7716e0193e0badb2ad8e51c021b4e7ee78a170f16d3da1b8813",
+    "backend/tests/test_private_import.py": "dadb4f44276375b3ef809e1148d58cd8675b3b1e93956bd151f6c7082e717972",
+    "backend/tests/test_private_notices.py": "53fdbc03da5630339abb75dedb22741795e35301f836ede367d31fd49927cfc5",
+    "backend/tests/test_private_outcomes.py": "6960f7b8d6ab98816a64d58e0556b0fd06a516627a2b44b8d957956e714cb03b",
+    "backend/tests/test_private_selection.py": "88149f5012bed2a27a209ebd012e435463aee77d8e5f200b2a6d83cce19419de",
+    "backend/tests/test_private_start.py": "29e986cb04d2e64cc3b20d64697c67e26e3b8b0797304bfd0037f39ff0ff9225",
+    "backend/tests/test_private_workdays.py": "58541c375468058649ed263c423b233a6fd9f5c4575d11efff78bbb0dd05e9b2",
+    "backend/tests/test_retained_data.py": "60730f54c306b106bc62865956e5977889dd1e6fd421d5925185ad99b137b8fc",
+    "backend/tests/test_submission_safety.py": "6126b46b254e89ada201aef47dc2902cc599d99564e704ac69aad084d53d423c",
+    "backend/tests/test_tablet_transport.py": "07764f072c78f9e2582758dcc2a1d7d5cc642e4b6ccdbeee7e84ea08659e55d5",
+    "compose.submission.yaml": "12780cce2b22a537a53f4dfffc65848613f09292ccd575150dce48266e46c1cf",
+    "deploy/submission/Dockerfile": "4b3e42fe8d073c2928eab3e27b168dec5da54a948aa036bdb1adb666e4c90e37",
+    "deploy/submission/fictional.py": "e3a2ee88d801ff5ddab09c3319e978c02617bc07cb654c85b44648e1110c03e3",
+    "deploy/submission/manage.py": "087229dc231cf1b7e16c99c959d9d4b22f19f5b1e245f1b96df7599c31cac0ba",
+    "deploy/submission/test_fictional.py": "1fb5e5d5f2e4b9151effc977aad83e3286a541cd4c917b1616a8370584125db5",
+    "frontend/package-lock.json": "f79805cfd50c3866147a0984c0bb8585e1c40c66ca28997cfaaf5f4479534e2f",
+    "frontend/package.json": "f970fee83af9ca2f67a7ce8a34545ae21f7a303152d0e3202745fe8e8e9911b0",
+    "frontend/playwright.submission.config.ts": "b5d12012afbd2b9c39cfb0ff4c3ec918856867af3300664ca8391c100610aa65",
+    "frontend/src/FictionalAssessment.tsx": "a16d8d02c51c8fbe7184f13c8fd9ded9013775e59c804282f78b437199af78c9",
+    "frontend/src/PrivateAccess.tsx": "7d0643efb9362577b7d37ca8b87e6d1c4315869c3212b9f9f31a0686e350d08d",
+    "frontend/src/PrivateActivitySelection.tsx": "bac5fa305697b260823e9db6455a4aa906e2e73b7a2f578fead78f4b7aad2e68",
+    "frontend/src/PrivateBus.tsx": "dafea32a757d68cd8e9c61b83942f0a3f595d6aa54a29278d5e33463843ccf97",
+    "frontend/src/PrivateConfirmation.tsx": "d6e2b026d229eafcf9112800380db22ca353521fb7282904899ac23ee6e2f821",
+    "frontend/src/PrivateDayOverview.tsx": "d001a712f6cdf3f43c1626493a584106aa4023fb305bc6c12b11555b4d405c4d",
+    "frontend/src/PrivateDrafts.tsx": "418734aced9083932b48530eca1d1553df53cd5027fab2bae6e84c62eec69315",
+    "frontend/src/PrivateImport.tsx": "053ea8c742e4be1acb4f2c41a9a51a397d89a6ca5213a3e2d3af6c0b4f7ef76a",
+    "frontend/src/PrivateNoticeReader.tsx": "c67efe75e409afe78dad5b5dddd86032d0e47b6ef03ff8a0f87bd60f9ea522f8",
+    "frontend/src/PrivateNotices.tsx": "c0c51570b3e557c00b9a92da628e35fe4fbd150b5476e476021cb74bb968ee8c",
+    "frontend/src/PrivateShiftStart.tsx": "a8ac38bb86ea1ab3384e50badeee7895f25a97c86c71cf17f8515b53bc96024c",
+    "frontend/src/PrivateTimeInput.tsx": "5d41813cf5ee1c25bbd9b939ada5be6281073145ad8883821787195d243ab2aa",
+    "frontend/src/PrivateWorkdayProgress.tsx": "5737a69a9e6d5d603ae7060adfb80b015c8f2eb7a6656bfdeb68169c78957918",
+    "frontend/src/PrivateWorkdayView.tsx": "50ae5c1a246692bcea2e37a59d7bc19d38c0dacc2d5b0d86595de1a5478ca966",
+    "frontend/src/SelectedActivityDetails.tsx": "e0704da99335bbf0666d50aaee94129049965371f0ca1568a31dbc290c836749",
+    "frontend/src/activityChoiceLabel.ts": "9119abac5644752c520bfb857d711651a08f5695e3c32573d0b011b8991ef559",
+    "frontend/src/busValue.ts": "124ab831a1bd1cf5d003db5d92ca8afc91387638120dc67d67be6261abff8a2d",
+    "frontend/src/dayOverview.ts": "b699bc425b36b6e1625d0d6a1b7b3bcc9c9e0b3b4fcd9beb815b1d606f43d642",
+    "frontend/src/demo.tsx": "2ea374f95ab0637f4f086f347d3933bf74fa250c5c1e4f5a49c7318a92536e1c",
+    "frontend/src/draftInterpretation.ts": "1417161dd95d32086f6dd6c27e0b339673363415a49a47c3548f5a086a1949f1",
+    "frontend/src/fictional-assessment.css": "84658fb27ad5a3c984f9cbc14bc52cf6c082ae22fc126c5446bf62822f940f7c",
+    "frontend/src/fictionalAssessmentModel.ts": "a1ca9004a046652b9af725cf887c390ce6961949412968ec0b3acb011bf974c1",
+    "frontend/src/main.tsx": "e9300c44c4f5c164431ce81bbf40cbc351e09d550f4cd9a81868c74fbe04d6fd",
+    "frontend/src/pdfUpload.ts": "3feee43873a837fe5c358692135e2922b3338e49cba973a69278fbc88fda8bb6",
+    "frontend/src/privateClock.ts": "dbcc746459d8f6b79ea458afb94454d1b7aa654c272ccdf8456ceec66a2ad4b5",
+    "frontend/src/recoverOperation.ts": "155e99d62a16aa731f8ac761e6b9802cd1f882aa414e7fca1e1429148eb170a4",
+    "frontend/src/style.css": "2ccf11cc25117dbf990ade50f99b878dfa346efc0c21de35f4d51252e482dc90",
+    "frontend/src/tablet.tsx": "fac0c8558914c8837614d8646462b5607b303fbd7255b0e0f2d69d9fc2aad753",
+    "frontend/src/theme.tsx": "a07f570968856781dc80434fa8132d7b099fa5ce318a4ba1df79002243f72b1b",
+    "frontend/src/useWorkdayResource.ts": "fba86b3dc20a09897764db76548bbea0654aec1d5f000a6160815291a9753364",
+    "frontend/src/vite-env.d.ts": "424faf9241dd699dda995b367ed36665732da1e6ec1f33b2fd40394488ecac92",
+    "frontend/submission-tests/journey.spec.ts": "38a50b382908fa599e116519a79738e5e71bd744ba4a97261e3b3e16896f5fb8",
+    "frontend/tsconfig.json": "33d46914a31f3bea00112957323a794e74ac90297f4d14eb3bd9b9282e7c9ebe",
+    "frontend/vite.config.ts": "a5a7bf8825ce70359dd24f69e982b7f8694005cf3b0be00e2707841095701543",
+    "scripts/submission.mjs": "21d31a0f93c577d5cd0377399487efd81a9c4a05dcae25005fcb2da09dd35aa8",
+    "scripts/verify-submission-runtime.mjs": "605d93e4cd70ca9483018b9808a549687297febb0037ecd6bd3a3c156480833f"
+  },
+  "privateHealth": {
+    "status": "ok",
+    "mode": "private-local"
+  },
+  "fictionalHealth": {
+    "status": "ok",
+    "mode": "fictional-assessment"
+  }
+}
