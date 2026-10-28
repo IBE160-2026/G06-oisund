@@ -291,16 +291,25 @@ test('cancel and logout discard late replies and raw selection', async ({ page }
   await expect(page.getByLabel('Velg tekst-PDF', { exact: true })).toHaveCount(0);
 });
 
-test('invalid metadata or HTML cannot become a review', async ({ page }) => {
+test('invalid metadata or HTML cannot become a review', async ({ page, context }) => {
   await login(page);
+  let saves = 0;
+  page.on('request', request => { if (request.method() === 'POST' && request.url() === 'http://127.0.0.1:8001/drafts') saves++; });
+  async function responseRejected() {
+    await expect(page.getByText('Serveren returnerte et svar som ikke kunne brukes.', { exact: false })).toBeVisible();
+    await expect(page.getByText('PDF-en kunne ikke tolkes.', { exact: false })).toHaveCount(0);
+    await expect(page.getByRole('button', { name: 'Bruk som separat nytt utkast' })).toHaveCount(0);
+    expect(saves).toBe(0);
+    const drafts = await context.request.get('http://127.0.0.1:8001/drafts');
+    expect(drafts.status()).toBe(200); expect((await drafts.json()).drafts).toEqual([]);
+  }
   await page.route('**:8001/imports/pdf', route => route.fulfill({ contentType: 'text/html', body: '<html>login</html>' }));
   await preparation(page); await page.getByLabel('Velg tekst-PDF', { exact: true }).setInputFiles({ name: 'synthetic.pdf', mimeType: 'application/pdf', buffer: pdf });
-  await expect(page.getByText('PDF-en kunne ikke tolkes.', { exact: false })).toBeVisible();
+  await responseRejected();
   await page.unroute('**:8001/imports/pdf');
   await page.route('**:8001/imports/pdf', async route => { const value = await (await route.fetch()).json(); value.import_metadata.header.driver = 'forbidden'; await route.fulfill({ json: value }); });
   await preparation(page); await page.getByLabel('Velg tekst-PDF', { exact: true }).setInputFiles({ name: 'synthetic.pdf', mimeType: 'application/pdf', buffer: pdf });
-  await expect(page.getByText('PDF-en kunne ikke tolkes.', { exact: false })).toBeVisible();
-  await expect(page.getByRole('button', { name: 'Bruk som separat nytt utkast' })).toHaveCount(0);
+  await responseRejected();
 });
 
 test('unknown uncertainty references keep code field column and line', async ({ page }) => {

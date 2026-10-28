@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 10-19-2026 14:35
-last_updated: 10-27-2026 22:02
+last_updated: 10-28-2026 09:09
 project: IBE160
 project_key: NOKEY
 tracking_system: file-system
@@ -63,7 +63,7 @@ development_status:
   12-1-enforce-the-retained-data-boundary: done # Jonas explicitly approved 2026-10-27 after manual A-F passed on desktop/Brave.
   12-2-repeat-a-fictional-assessment: done # Jonas explicitly approved corrections and requested commit/push 2026-10-27.
   12-3-use-the-included-views-on-tablet-and-pc: done # Jonas conditional acceptance effective 2026-10-27 after remaining required Lenovo checks passed; device-acceptance report. No merge/commit/push.
-  12-4-verify-the-complete-user-flow: backlog
+  12-4-verify-the-complete-user-flow: review
   12-5-deliver-a-reproducible-submission: backlog
   epic-12-retrospective: optional
 action_items:

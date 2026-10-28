@@ -24,12 +24,14 @@ export function PrivateBus({ id, expiresAt, request, mutation, suspended, expire
       && typeof v.expires_at === 'string' && (historical || Date.parse(v.expires_at) <= Date.parse(expiresAt)) && Date.parse(v.expires_at) > privateNow();
   }
   function adopt(value: Bus) { setSaved(value); setText(value.physical_bus ?? ''); setComparison(null); setPending(null); editing.current = false; lock(false); }
-  async function current(): Promise<Bus> {
+  async function current(publish = true): Promise<Bus> {
     try {
       const value = await request(path);
       if (!valid(value)) throw Error();
-      shorten?.(value.expires_at);
-      if (alive.current) { setAvailable(true); availability(true); }
+      if (publish) {
+        shorten?.(value.expires_at);
+        if (alive.current) { setAvailable(true); availability(true); }
+      }
       return value;
     } catch (error: any) {
       if ([404, 410].includes(error?.status)) {
@@ -39,6 +41,31 @@ export function PrivateBus({ id, expiresAt, request, mutation, suspended, expire
         if (alive.current) { setAvailable(false); availability(false); }
       }
       throw error;
+    }
+  }
+  async function adoptCurrent() {
+    if (!comparison || pending || sending.current || suspended) return;
+    const version = ++generation.current;
+    sending.current = true; setBusy(true);
+    try {
+      const value = await current(false);
+      if (!alive.current || version !== generation.current) return;
+      // The comparison may have changed again. Equal revisions must describe
+      // identical facts; retention may shorten but must never be renewed.
+      if ([saved, comparison].some(known => known && (value.revision < known.revision
+        || Date.parse(value.expires_at) > Date.parse(known.expires_at)
+        || value.revision === known.revision && value.physical_bus !== known.physical_bus))) throw Error();
+      shorten?.(value.expires_at); setAvailable(true); availability(true);
+      adopt(value); setFocusInput(true);
+      setMessage(readOnly ? 'Lagret verdi er lastet inn. Skiftet er skrivebeskyttet.' : 'Lagret verdi er lastet inn. Du kan korrigere den og lagre på nytt.');
+    } catch (error: any) {
+      if (!alive.current || version !== generation.current) return;
+      if (error?.status === 401) { expired(); return; }
+      setAvailable(false); availability(false);
+      setMessage('Gjeldende bussregistrering kunne ikke bekreftes. Forslaget er beholdt. Prøv å laste inn lagret buss igjen.');
+    } finally {
+      sending.current = false;
+      if (alive.current && version === generation.current) setBusy(false);
     }
   }
   async function revalidate() {
@@ -118,13 +145,13 @@ export function PrivateBus({ id, expiresAt, request, mutation, suspended, expire
     <h4>Fysisk buss</h4><p>Gjeldende manuell registrering. Vognløp og sanntidsverdi fastsetter ikke hvilken buss du kjører.</p>
     <p role="status" aria-label="Bussstatus">{message}</p>
     {!available && <p>Gjeldende buss og planfakta er skjult fordi plantilgangen ikke er bekreftet. Teksten under er ditt lokale forslag.</p>}
-    {!available && <button disabled={busy || suspended} onClick={() => void revalidate()}>Kontroller plantilgangen</button>}
+    {!available && !comparison && <button disabled={busy || suspended} onClick={() => void revalidate()}>Kontroller plantilgangen</button>}
     {saved ? <>{available && <p>Lagret verdi: <span className="bus-value">{saved.physical_bus ?? 'Ukjent'}</span> · bussversjon {saved.revision}</p>}
       <label>Fysisk buss<input ref={input} value={text} autoComplete="off" aria-invalid={!!busError(text)} aria-describedby={busError(text) ? 'physical-bus-error' : undefined} disabled={!available || readOnly || busy || !!pending || !!comparison || suspended} onChange={event => change(event.target.value)} /></label>
       <button type="button" disabled={!available || readOnly || busy || !!pending || !!comparison || suspended} onClick={() => change('')}>Tøm fysisk buss</button>
       {busError(text) && <p id="physical-bus-error">{busError(text)}</p>}
       <p>Inntil 100 tegn. Tomt felt betyr ukjent. Tekst og innledende nuller bevares.</p>
-      {comparison && available && <div className="import-warning"><p>Nyere lagret verdi: <span className="bus-value">{comparison.physical_bus ?? 'Ukjent'}</span> · bussversjon {comparison.revision}</p><p>Ditt inntastede forslag: <span className="bus-value">{normalized(text) ?? 'Ukjent'}</span></p><button disabled={busy || suspended} onClick={() => { adopt(comparison); setFocusInput(true); setMessage(readOnly ? 'Lagret verdi er lastet inn. Skiftet er skrivebeskyttet.' : 'Lagret verdi er lastet inn. Du kan korrigere den og lagre på nytt.'); }}>Last inn lagret buss</button></div>}
+      {comparison && <div className="import-warning">{available && <p>Nyere lagret verdi: <span className="bus-value">{comparison.physical_bus ?? 'Ukjent'}</span> · bussversjon {comparison.revision}</p>}<p>Ditt inntastede forslag: <span className="bus-value">{normalized(text) ?? 'Ukjent'}</span></p><button disabled={busy || suspended} onClick={() => void adoptCurrent()}>Last inn lagret buss</button></div>}
       {readOnly && editing.current && !pending && <button disabled={busy || suspended} onClick={() => { adopt(saved); setMessage('Ulagret bussforslag er forkastet. Skiftet er skrivebeskyttet.'); }}>Forkast ulagret bussendring</button>}
       {pending ? <div className="controls"><button disabled={busy || suspended} onClick={() => void send()}>Prøv samme busslagring igjen</button><button disabled={busy || suspended} onClick={() => void send(true)}>Kontroller busslagringen</button></div>
         : !comparison && !readOnly && <div className="controls"><button disabled={!available || busy || suspended || !editing.current || !!busError(text)} onClick={() => void send()}>Lagre fysisk buss</button><button disabled={busy || suspended || !editing.current} onClick={() => { adopt(saved); setMessage('Endringen er avbrutt. Lagret registrering er uendret.'); input.current?.focus(); }}>Avbryt bussendring</button></div>}</>

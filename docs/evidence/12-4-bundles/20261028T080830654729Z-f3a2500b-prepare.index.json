@@ -1,0 +1,13 @@
+{
+  "archive": "docs\\evidence\\12-4-bundles\\20261028T080830654729Z-f3a2500b-prepare.tar.gz",
+  "archive_sha256": "d6b6140926c149390143d69e10ed99fd9192bf8020043ac215e66cd4307d4504",
+  "entries": {
+    "record.json": "9bbb62df115c3c6417ff77ea931c87630d47a5364b9e2d3722cabd1355db7b37",
+    "raw/command.log": "6fc341f34beb0bf7814789f451e9d5c0e5ff737b55fba99b3ebebfc0399e6c4a",
+    "raw/integration.py": "219c3f4d31bd7574e047ab0b0f09fe6dc1b5ca5f0ecf6f215758019d03ea7987",
+    "executed-inputs/scripts/verify-story12-integration.py": "b1b7fb4bf92397071be94e39bbb9cbda3568baed96ede5d226abfc6bd02e70e6",
+    "executed-inputs/scripts/verify-story123.py": "22f46e8622c9df302a06c9cc8a658089a114f11686d06ce17fbd2d18e79fb74f",
+    "executed-inputs/scripts/verify-story124.py": "9dab15e14ecdda83c9ce1aaffb474bbfeb9ad6249e834261ea9a6a2e76fb45d3",
+    "executed-inputs/tmp/story124/20261028T080830654729Z-f3a2500b/integration.py": "219c3f4d31bd7574e047ab0b0f09fe6dc1b5ca5f0ecf6f215758019d03ea7987"
+  }
+}

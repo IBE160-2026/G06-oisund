@@ -1,0 +1,16 @@
+✔ translates isolated endpoints and tracked synthetic fixture while preserving unrelated files (30.9655ms)
+✔ refuses unowned collision before overwriting or deleting any entry (21.7149ms)
+✔ refuses owned file link before overwriting or deleting any entry (23.2699ms)
+ℹ Windows file-symlink privilege unavailable; exercised real junction refusal
+✔ refuses obsolete file link before overwriting or deleting any entry (30.0243ms)
+ℹ Windows file-symlink privilege unavailable; exercised real junction refusal
+✔ refuses manifest link before overwriting or deleting any entry (26.6507ms)
+ℹ Windows file-symlink privilege unavailable; exercised real junction refusal
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 244.4852

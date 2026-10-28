@@ -66,3 +66,5 @@ tmp/
 frontend/.story123-tests/
 
 frontend/dist-story123-tablet/
+frontend/.story124-tests/
+frontend/dist-story124-tablet/

@@ -1,5 +1,5 @@
 ---
-status: backlog
+status: in-review
 scopeApproval: approved
 decision: SCOPE-02
 approvedOn: 2026-10-19
@@ -7,12 +7,12 @@ alias: V1-19
 epic: 12
 story: '12.4'
 dependencies: [V1-15, V1-16, V1-17, V1-18]
-implementationStarted: false
+implementationStarted: true
 ---
 
 ### Story 12.4: Verify the complete user flow
 
-**Stable alias:** V1-19. **Status:** backlog; approved scope, implementation/evidence not started.
+**Stable alias:** V1-19. **Status:** in-review; see [implementation specification](../../implementation-artifacts/spec-12-4-complete-user-flow.md) and [executed evidence](../../../docs/evidence/12-4-handoff.md). Owner acceptance remains pending.
 **Depends on:** V1-15, V1-16, V1-17, V1-18.
 **Traceability:** FR-1–25 active subset; NFR-2/3/4; AC-01–09/11/12; SCOPE-02.
 
