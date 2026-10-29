@@ -5,6 +5,7 @@ HTTPS TestClient exercises Secure cookies; this is not a real TLS/browser test.
 import os
 import secrets
 from uuid import uuid4
+from unittest.mock import patch
 
 from fastapi.testclient import TestClient
 from app import auth
@@ -50,6 +51,35 @@ with TestClient(app, base_url=origin) as client:
     assert client.post('/drafts', json=body).status_code == 403
     wrong_origin = {**headers(client), 'Origin': 'https://unapproved.invalid'}
     assert client.post('/drafts', headers=wrong_origin, json=body).status_code == 403
+    for malformed in [
+        {**headers(client), 'X-CSRF-Token': 'incorrect-proof'},
+        {**headers(client), 'Origin': origin + '.unapproved.invalid'},
+        {**headers(client), 'Origin': 'null'},
+    ]:
+        refused = client.post('/drafts', headers=malformed, json=body)
+        assert refused.status_code == 403
+        assert refused.headers['cache-control'] == 'no-store'
+    assert len(client.get('/drafts').json()['drafts']) == 0
+    with TestClient(app, base_url=origin) as no_cookies:
+        missing_cookie = no_cookies.post('/drafts', headers=headers(client), json=body)
+        assert missing_cookie.status_code == 403
+        assert missing_cookie.headers['cache-control'] == 'no-store'
+    # Session expires after the request's Origin/CSRF check, before storage
+    # authorization: a formerly admitted mutation still must not write.
+    original_check = auth.check_mutation
+    def expire_after_transport_check(request):
+        original_check(request)
+        with database() as conn:
+            changed = conn.execute("UPDATE sessions SET created_at=statement_timestamp()-interval '15 days', expires_at=statement_timestamp()-interval '1 day' WHERE token_hash=%s RETURNING token_hash", (auth.digest(request.cookies[auth.SESSION]),)).fetchone()
+            assert changed is not None
+    transport_headers = headers(client)
+    with patch('app.auth.check_mutation', expire_after_transport_check):
+        expired_write = client.post('/drafts', headers=transport_headers, json=body)
+    assert expired_write.status_code == 401, f'expiry boundary returned HTTP {expired_write.status_code}'
+    assert expired_write.headers['cache-control'] == 'no-store'
+    login(client, owner)
+    assert len(client.get('/drafts').json()['drafts']) == 0
+    assert client.get('/draft-operations/' + operation_id).json()['state'] == 'pending'
     saved = client.post('/drafts', headers=headers(client), json=body)
     assert saved.status_code == 200
     record = saved.json()

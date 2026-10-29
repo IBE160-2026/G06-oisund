@@ -1,0 +1,66 @@
+{
+  "docs/evidence/v1-acceptance-reproduction/source-proof.json": {
+    "bytes": 7673,
+    "sha256": "bdce7198d6d889ca110ae35ce2b6a5e734db842832e41ccf223f5a7c824d1224"
+  },
+  "docs/evidence/v1-acceptance-reproduction/submission-browser-report.json": {
+    "bytes": 8782,
+    "sha256": "6ff2cf03358236784d2ba6025f261cd0b0b854da7c6d07af8295d50d8d607cac"
+  },
+  "docs/evidence/v1-acceptance-reproduction/submission-runtime-check.json": {
+    "bytes": 2488,
+    "sha256": "13bda3b4aaa729110cc7568dfcbd9df2b3979156a9a18c5fde2cc3cb5504a705"
+  },
+  "docs/evidence/v1-acceptance-reproduction/v1-acceptance-browser.log": {
+    "bytes": 3055,
+    "sha256": "4b0893fadaa8601d6f42c66a4960f1ea7b65f7d100a204c3a63f30746d593058"
+  },
+  "docs/evidence/v1-acceptance-reproduction/v1-acceptance-npm.log": {
+    "bytes": 147,
+    "sha256": "63e0c2bd644e2afe8b5ab78c3112b1cb39133291503eabf2b8120c1374b10e55"
+  },
+  "docs/evidence/v1-acceptance-reproduction/v1-acceptance-runtime.log": {
+    "bytes": 6119,
+    "sha256": "09788398e11846bee71160fdca31ee4a20489cb4ccb432c35de35841a645cc21"
+  },
+  "docs/evidence/v1-acceptance-methods/archive-v1-acceptance.py": {
+    "bytes": 1915,
+    "sha256": "dab5ded97ab0d1e7fa25230f519161ad62e718cd3c00a89cd14caabb2205f1e8"
+  },
+  "docs/evidence/v1-acceptance-methods/capture-manual-first.cjs": {
+    "bytes": 1591,
+    "sha256": "b6bd983db1acc085c22ff19d091e558386356829bae9c77bb7b79d22bffd9db6"
+  },
+  "docs/evidence/v1-acceptance-methods/manual-device.cjs": {
+    "bytes": 10257,
+    "sha256": "93e0c2fd2ad1aeef0a3aba1c8fb43b26bd9210dc6ad31bf0418ed63e0e3880e3"
+  },
+  "docs/evidence/v1-acceptance-methods/playwright.v1-device-temp.config.ts": {
+    "bytes": 330,
+    "sha256": "8e9dc341ca7907e2fea9be6b6607ac4e41db043405e6e28d794d9a77c35db821"
+  },
+  "docs/evidence/v1-acceptance-methods/prepare-device-suite.cjs": {
+    "bytes": 1398,
+    "sha256": "76344d4e31df5bcaf02d08e09c9f8282e92adae82578afefac84a040902716aa"
+  },
+  "docs/evidence/v1-acceptance-methods/prepare-final-reproduction.py": {
+    "bytes": 2665,
+    "sha256": "f8fb1556c7ca5059467d4a6fabd6e1f27d037741ddc9c592cb4ac319c6ee101f"
+  },
+  "docs/evidence/v1-acceptance-methods/record-delivery-proof.py": {
+    "bytes": 2351,
+    "sha256": "35818f319e553fce5ca8b6a092539e129e43602b8b05fb110aa2b4912629d1f8"
+  },
+  "docs/evidence/v1-acceptance-methods/run-device-suite.py": {
+    "bytes": 1280,
+    "sha256": "dfcd80a455f3f524b0485c2c234e2570ff562245635cb34d73d5a2acce3baac3"
+  },
+  "docs/evidence/v1-acceptance-methods/manual-device-native.cjs": {
+    "bytes": 10862,
+    "sha256": "1a49d6fbbf4419d9705145e6d8bb562b8d16985ba58a76a420eadc93ebdeaf19"
+  },
+  "docs/evidence/v1-acceptance-methods/restore-own-device.cjs": {
+    "bytes": 1155,
+    "sha256": "71d81548680774e2b347c7a9d39dd3ed1f2bd3564101c07efacc306b25444f0e"
+  }
+}

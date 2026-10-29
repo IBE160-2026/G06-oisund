@@ -1,0 +1,170 @@
+[
+  {
+    "test": "rendered selector start markers boundaries and focus meet IR-01 in both themes",
+    "state": "11-1-day-Neste aktivitet",
+    "values": {
+      "text": 6.126270626473104,
+      "boundary": 14.387145266736685,
+      "direct": [
+        {
+          "disabled": true,
+          "current": "true",
+          "text": 6.126270626473104,
+          "boundary": 4.781375582652278,
+          "height": 58
+        },
+        {
+          "disabled": false,
+          "current": null,
+          "text": 11.085379609993499,
+          "boundary": 11.085379609993499,
+          "height": 58
+        }
+      ],
+      "focus": {
+        "width": 3,
+        "ratio": 21
+      }
+    }
+  },
+  {
+    "test": "rendered selector start markers boundaries and focus meet IR-01 in both themes",
+    "state": "11-1-day-Start skift",
+    "values": {
+      "text": 6.126270626473104,
+      "boundary": 14.387145266736685,
+      "direct": [
+        {
+          "disabled": true,
+          "current": "true",
+          "text": 6.126270626473104,
+          "boundary": 4.781375582652278,
+          "height": 58
+        },
+        {
+          "disabled": false,
+          "current": null,
+          "text": 11.085379609993499,
+          "boundary": 11.085379609993499,
+          "height": 58
+        }
+      ],
+      "focus": {
+        "width": 3,
+        "ratio": 21
+      }
+    }
+  },
+  {
+    "test": "rendered selector start markers boundaries and focus meet IR-01 in both themes",
+    "state": "11-1-day-Velg aktivitet 2",
+    "values": {
+      "text": 6.126270626473104,
+      "boundary": 14.387145266736685,
+      "direct": [
+        {
+          "disabled": true,
+          "current": "true",
+          "text": 6.126270626473104,
+          "boundary": 4.781375582652278,
+          "height": 58
+        },
+        {
+          "disabled": false,
+          "current": null,
+          "text": 11.085379609993499,
+          "boundary": 11.085379609993499,
+          "height": 58
+        }
+      ],
+      "focus": {
+        "width": 3,
+        "ratio": 21
+      }
+    }
+  },
+  {
+    "test": "rendered selector start markers boundaries and focus meet IR-01 in both themes",
+    "state": "11-1-night-Neste aktivitet",
+    "values": {
+      "text": 6.126270626473104,
+      "boundary": 12.855408864593942,
+      "direct": [
+        {
+          "disabled": true,
+          "current": "true",
+          "text": 6.126270626473104,
+          "boundary": 3.0089971009464156,
+          "height": 58
+        },
+        {
+          "disabled": false,
+          "current": null,
+          "text": 11.652752702162216,
+          "boundary": 8.3661568844563,
+          "height": 58
+        }
+      ],
+      "focus": {
+        "width": 3,
+        "ratio": 11.45007504521487
+      }
+    }
+  },
+  {
+    "test": "rendered selector start markers boundaries and focus meet IR-01 in both themes",
+    "state": "11-1-night-Start skift",
+    "values": {
+      "text": 6.126270626473104,
+      "boundary": 12.855408864593942,
+      "direct": [
+        {
+          "disabled": true,
+          "current": "true",
+          "text": 6.126270626473104,
+          "boundary": 3.0089971009464156,
+          "height": 58
+        },
+        {
+          "disabled": false,
+          "current": null,
+          "text": 11.652752702162216,
+          "boundary": 8.3661568844563,
+          "height": 58
+        }
+      ],
+      "focus": {
+        "width": 3,
+        "ratio": 11.45007504521487
+      }
+    }
+  },
+  {
+    "test": "rendered selector start markers boundaries and focus meet IR-01 in both themes",
+    "state": "11-1-night-Velg aktivitet 2",
+    "values": {
+      "text": 6.126270626473104,
+      "boundary": 12.855408864593942,
+      "direct": [
+        {
+          "disabled": true,
+          "current": "true",
+          "text": 6.126270626473104,
+          "boundary": 3.0089971009464156,
+          "height": 58
+        },
+        {
+          "disabled": false,
+          "current": null,
+          "text": 11.652752702162216,
+          "boundary": 8.3661568844563,
+          "height": 58
+        }
+      ],
+      "focus": {
+        "width": 3,
+        "ratio": 11.45007504521487
+      }
+    }
+  }
+]

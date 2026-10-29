@@ -15,6 +15,7 @@ yarn-error.log*
 
 # Python environments, bytecode, packaging and caches
 .venv/
+.venv-followup/
 venv/
 env/
 __pycache__/
@@ -67,4 +68,6 @@ frontend/.story123-tests/
 
 frontend/dist-story123-tablet/
 frontend/.story124-tests/
+frontend/.v1followup-tests/
+frontend/dist-v1followup-tablet/
 frontend/dist-story124-tablet/

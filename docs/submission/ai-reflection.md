@@ -1,5 +1,7 @@
 # Human and AI process reflection
 
+This is the historical12.5 reflection, retained at its original scope. The [proposed final update](ai-reflection-proposal.md) covers subsequent D1–D3 work and is pending Jonas's review; it does not replace the historical text or constitute final course-reflection approval.
+
 Jonas supplied the practical use case, source interpretation, scope decisions and acceptance decisions. AI assisted with requirements/specification, architecture, implementation, synthetic test tooling, documentation and review. The [development log](../development-log.md), per-user [session records](../../.logs/jonas-oisund/) and story evidence preserve the sequence and authority. This reflection reports that record; it does not estimate prompt counts, hours saved or percentages of authorship that were not measured.
 
 The useful contribution was turning a large idea into checkable, explicit state transitions: import versus save, saved revision versus confirmation, planned versus actual time, source checking versus validity, and a missing reply versus an acknowledged write. Synthetic fixtures made real API/database testing possible without requiring the owner's private runtime. Independent expected facts reduce the risk of merely testing a parser against its own output.

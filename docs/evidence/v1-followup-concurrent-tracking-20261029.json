@@ -1,0 +1,21 @@
+{
+  "at": "2026-10-29T17:20:27.160805+00:00",
+  "current_main": "9677eba434fe1e5a77f9d4efc45827ebb050c5cc",
+  "candidate": "3c2287ed68d0cbb1923439fc6ee00254395072a4",
+  "changed_main_paths": [
+    "_bmad-output/implementation-artifacts/epic-12-context.md",
+    "_bmad-output/implementation-artifacts/epic-12-retro-2026-10-29.md",
+    "_bmad-output/implementation-artifacts/spec-12-5-reproducible-submission.md",
+    "_bmad-output/planning-artifacts/epics.md",
+    "_bmad-output/implementation-artifacts/sprint-status.yaml",
+    "docs/submission/README.md",
+    "docs/submission/traceability.md",
+    "docs/submission/v1-closeout.md"
+  ],
+  "product_test_tooling_diff_from_initial_baseline": false,
+  "prepared_correction": "docs/evidence/v1-followup-epic12-main-correction.patch",
+  "isolated_apply_check": "passed",
+  "applied_to_main": false,
+  "user_clarification": "The Epic12 completion was a misunderstanding; only12.5 was to be marked done. Epic12 must stay open.",
+  "scope": "eight metadata documents only; no product, tests, runtime or prior logs are overwritten"
+}

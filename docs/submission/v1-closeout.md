@@ -1,12 +1,25 @@
 ---
 date: 2026-10-29
-status: awaiting-owner-decisions
+status: closed-local-V1
 scope: SCOPE-02-course-V1
 epic_12: done
 deferrals_approved_by_this_document: false
 ---
 
 # V1 closure assessment
+
+**Final local V1 decision:** Jonas explicitly accepted C1 and the local V1 basis after all personal controls. [final main integration/closure](../evidence/v1-main-integration-20261029.md) records fulfilled D1–D3 criteria and passing integrated checks; no local blocker or further owner decision remains. **Epic12 and step1 are complete.** C1 `3c2287e` is the corrected delivery source; c067fdb remains historical. Server bonus and broader external operations are excluded; their unperformed controls are not approved deferrals or passed tests. No production deploy, release/tag, coursework or extension follows from closure. Earlier hold/no-merge wording below is historical.
+
+## Later delivery preparation —29October2026
+
+Jonas subsequently requested a self-contained README/final documentation and a proposed reflection, and explicitly carried the unperformed operational controls into the remaining work to be executed/documented in a separate chat. [Delivery readiness](delivery-readiness.md) is the current L1–L7/O1–O6 register. The separate [Access report](../evidence/access-operations-20261029.md) now supplies O1/edge and bounded O2/member-email results on operational eb0eee3. O3–O6 and L3 as a whole remain open; no newer C1/main deployment or general security qualification is inferred. This instruction adds delivery follow-through; local V1/Epic12 acceptance above stays complete. Tag/release/submission remain unperformed and require later explicit instruction. Server bonus remains excluded. Original historical conclusions below retain their original checkpoint meaning.
+
+## Historical pre-remediation owner decision and assessment
+
+On29October2026 Jonas chose **implementation and missing qualification instead of the proposed deferrals** for D1/D2/D3. Work is authorized on the separate `followup/v1-d1-d2-d3` branch. E12-A2 is adopted as future practice, and the early abandonment/rejection/offset design direction is confirmed as a starting point. No implemented-product acceptance, main merge or Epic12 closure is granted. The assessment and proposed decisions below are the **historical pre-remediation closeout checkpoint**, retained unchanged for traceability. [Current qualification ledger](v1-followup-qualification.md), [implementation specification](../../_bmad-output/implementation-artifacts/spec-v1-d1-d2-d3-remediation.md) and [standing walkthrough practice](../working-practices.md) govern follow-through; a point is complete only after its actual criteria pass.
+
+> Historical tracking checkpoint (superseded by the later actual candidate acceptance):
+> Owner clarification,29October2026: the prior Epic12 done publication was a misunderstanding; only Story12.5 was to be marked done. All accepted story results and the completed retrospective remain unchanged. Epic12 stays open pending the closure basis and owner decisions.
 
 All 20 SCOPE-02 stories are accepted and integrated. The [Epic 12 retrospective](../../_bmad-output/implementation-artifacts/epic-12-retro-2026-10-29.md) is complete with `accepted-with-open-items`. No newly demonstrated blocking privacy, duplicate-write, stale-overwrite or retained-data resurrection defect was established in that retrospective. **Formal V1 closure still needs explicit disposition of the residual defects and verification work below.** Story approval and the earlier four tracker-status approvals do not approve those deferrals.
 
@@ -20,7 +33,9 @@ The recommended boundary is the accepted, reproducible local V1 at immutable sou
 
 Historical results retain their versions: 12.1 stable 441 backend/479 browser; integrated 477/479 plus affected passes; 12.4 broad317/5/4 followed by final affected64/64 and controlled mobile32/32; 12.5 final367 private+113 parser/assessment and three actual browser journeys. These counts overlap and are not summed. Device actions, personal approval and simulation remain different evidence. No broad suite, runtime reset, service operation or physical test was repeated for this documentation change.
 
-## Consolidated remaining work and dispositions
+## Historical consolidated remaining work and dispositions
+
+The rows below describe the pre-remediation checkpoint, not the current branch's recommendation. Jonas subsequently rejected D1–D3 deferrals and authorized bounded fixes/qualification. Use the [current follow-up ledger](v1-followup-qualification.md) for implementation, executed checks and remaining acceptance; no historical proposal below records an approved postponement. Attribution correction: `private-recovery.spec.ts:116` exercises draft **creation** (`POST /drafts`), not draft update. Its executed result is unchanged.
 
 **Completed** means no remaining product work established for that item. **Accepted scope limit** is already supported by SCOPE-02 or a recorded owner decision; no fresh deferral is inferred. **Proposed deferral** means the item remains open and needs owner disposition for closure. **Evidence decision** means either complete a bounded missing check or explicitly accept its remaining qualification limit. A decision hold is not itself proof of a blocking implementation failure.
 
@@ -61,7 +76,9 @@ For A8, the remaining crosswalk must distinguish **before dispatch**, **accepted
 | Activity outcome; end/abort closure | [outcomes](../../frontend/tests/private-outcomes.spec.ts), [recovery](../../frontend/tests/private-recovery.spec.ts) | Map actual committed state versus rejected/unforwarded requests for each family; do not substitute a lost-Start case for terminal closure. |
 | Notice create/update/check/manual end | [notice tests](../../frontend/tests/private-notices.spec.ts), [notice integration](../../frontend/tests/private-notice-recovery-integration.spec.ts), [cross-day](../../frontend/tests/private-crossday-notices.spec.ts) | Existing creation HTML409/422/429 and check/end lost-reply tests are concrete. Complete mapping for update/check/end lookup and proxy variants before claiming the entire family matrix. |
 
-## Decisions required from Jonas
+## Historical proposed decisions — superseded by implementation authorization
+
+The choices below were proposed before Jonas chose repairs/qualification. They are not new questions or still-current recommendations. The follow-up ledger's point-status table and owner checklist are the current decision surface; no deferral below was approved.
 
 | Decision | Recommended choice | What approval would and would not do |
 |---|---|---|
@@ -70,7 +87,7 @@ For A8, the remaining crosswalk must distinguish **before dispatch**, **accepted
 | **D3 future process and operational boundary:** E12-A2, B6–B10 and existing external-security proof limits. | Adopt E12-A2 as future practice and keep operational work outside local course-V1 closure. | Future process execution stays open; operational issues stay open. No new declaration that the deployed environment is safe for broader use. |
 | **Formal closure after dispositions.** | Once D1–D3 are resolved, authorize Epic12→done and V1 closure with named residual items, unless a required fix/check remains. | Changes tracking only. No tag/release, course submission, deployment or extension begins. |
 
-**Current tracker decision,29October2026:** Jonas requested updating and pushing the remaining in-progress sprint status. Epic12 is now done: all stories and its retrospective are complete, with the retained `accepted-with-open-items` verdict. This supersedes the earlier tracker hold described in the decision table. It does not approve the specific D1–D3 deferral proposals or close their residual work; those dispositions remain pending. There is no new evidence-backed requirement to repeat all tests or implement extensions.
+**Present decision:** no deferral in D1–D3 has been approved by this assessment. Epic12 remains in-progress. There is no new evidence-backed requirement to repeat all tests or implement extensions. If Jonas accepts the proposed dispositions, Epic12 can then be marked done with the retained `accepted-with-open-items` verdict; if any fix/check is required first, it must be completed before that transition.
 
 ## Documentation and publication record
 

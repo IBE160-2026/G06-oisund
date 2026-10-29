@@ -1,0 +1,9 @@
+{
+  "at": "2026-10-29T15:46:12.729419+00:00",
+  "method": "GET",
+  "url": "https://app.bussassistent.com/private",
+  "credentials_sent": false,
+  "status": 403,
+  "cache_control": "private, max-age=0, no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
+  "server": "cloudflare"
+}

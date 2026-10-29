@@ -1,0 +1,40 @@
+{
+  "test_id": "CF-EXP-01",
+  "phase": "Replay",
+  "time_utc": "2026-10-29T21:42:50.5427792+00:00",
+  "service": "https://app.bussassistent.com",
+  "issuer": "https://bussassistent.cloudflareaccess.com",
+  "audience": "11605406740b9e66f584e9bfc11d3db52f18585de0708c6d5b2741d0268fbbfa",
+  "signature_valid": true,
+  "issued_utc": "2026-10-29T20:42:29.0000000+00:00",
+  "expires_utc": "2026-10-29T21:42:29.0000000+00:00",
+  "exact_token_match": true,
+  "before_control_passed": false,
+  "results": [
+    {
+      "path": "/private",
+      "time_utc": "2026-10-29T21:42:50.3863165+00:00",
+      "status": 302,
+      "redirect_host": "bussassistent.cloudflareaccess.com",
+      "redirect_path": "/cdn-cgi/access/login/app.bussassistent.com",
+      "cache_control": "no-store, must-revalidate, no-cache, max-age=0, private, post-check=0, pre-check=0",
+      "bytes": 143,
+      "app_shell": false,
+      "app_login_required": false,
+      "body_sha256": "12755429beb15d5eb57eafa45b8dba326343dd099bf0552038694c3856e8860e"
+    },
+    {
+      "path": "/private-api/drafts",
+      "time_utc": "2026-10-29T21:42:50.5396286+00:00",
+      "status": 302,
+      "redirect_host": "bussassistent.cloudflareaccess.com",
+      "redirect_path": "/cdn-cgi/access/login/app.bussassistent.com",
+      "cache_control": "no-store, must-revalidate, no-cache, max-age=0, private, post-check=0, pre-check=0",
+      "bytes": 143,
+      "app_shell": false,
+      "app_login_required": false,
+      "body_sha256": "12755429beb15d5eb57eafa45b8dba326343dd099bf0552038694c3856e8860e"
+    }
+  ],
+  "attribution": "External boundary only; origin gate not independently observed"
+}

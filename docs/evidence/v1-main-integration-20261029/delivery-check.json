@@ -1,0 +1,8 @@
+{
+  "at": "2026-10-29T18:59:07.974022+00:00",
+  "verified_bundles": 48,
+  "verified_entries": 913,
+  "checked_changed_markdown_links": 648,
+  "method_sha256": "dcb877e9395954dae7c68767b695d4682e5c6661c891840d6ac995f2759341c2",
+  "result": "passed; no extraction or external network"
+}

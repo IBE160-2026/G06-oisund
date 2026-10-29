@@ -74,7 +74,7 @@ test('historical source clock roundtrip uses authoritative Oslo facts rather tha
   });
   await page.getByLabel('Tittel', { exact: true }).fill('Historisk klokkeslett beholdt'); await save(page);
   const saved = (await list(context, plan)).notices[0]; expect(Date.parse(saved.source_updated_at)).toBe(Date.parse(source)); expect(Date.parse(saved.valid_from)).toBe(Date.parse(source)); expect(Date.parse(saved.valid_until)).toBe(Date.parse(fields.valid_until));
-  await expect(page.getByText('Kilden oppdatert: 01.01.1894, 12:00:00 (Oslo-tid)', { exact: true })).toBeVisible();
+  await expect(page.getByText('Kilden oppdatert: 01.01.1894, 12:00:00 (UTC+00:43)', { exact: true })).toBeVisible();
 });
 
 test('quoted CSV tags preserve exact API tag boundaries on title-only edit', async ({ page, context }) => {

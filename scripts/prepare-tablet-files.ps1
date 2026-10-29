@@ -13,12 +13,13 @@ $tabletRoot = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
 if ($Hostname -cnotmatch '^(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z][a-z0-9-]{0,62}$' -or
     $Hostname -match '\.(invalid|example|test|local|localhost)$' -or $Hostname.Length -gt 253 -or
     $Hostname -in @('example.com','example.net','example.org')) { throw 'Use the actual canonical public DNS hostname.' }
-if ($TeamName -notmatch '^[a-z0-9][a-z0-9-]*$') { throw 'Invalid Zero Trust team name.' }
-if ($Audience -notmatch '^[a-fA-F0-9]{64}$') { throw 'Use the 64-character Access application AUD.' }
+if ($TeamName -cnotmatch '^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\z' -or $TeamName.StartsWith('replace-')) { throw 'Invalid Zero Trust team name.' }
+if ($Audience -notmatch '^[a-fA-F0-9]{64}\z') { throw 'Use the 64-character Access application AUD.' }
 if ($Audience -eq ('0' * 64)) { throw 'Replace placeholder audience.' }
 if (-not $LocalOnly -and (-not $TunnelId -or $TunnelId -eq [guid]::Empty)) { throw 'Actual tunnel ID required for tunnel configuration.' }
 if ($LocalOnly -and ($TunnelId -or $TunnelCredentialPath)) { throw 'Local-only preparation must not supply tunnel identifiers or credentials.' }
-if ($ApprovedOwnerEmail -cnotmatch '^[^\s@*,;<>]+@[^\s@*,;<>]+\.[^\s@*,;<>]+$' -or
+if ($ApprovedOwnerEmail -cnotmatch '^[^\s@*,;<>]+@[^\s@*,;<>]+\.[^\s@*,;<>]+\z' -or
+    $ApprovedOwnerEmail -match '[^\x00-\x7F]' -or
     $ApprovedOwnerEmail -cne $ApprovedOwnerEmail.ToLowerInvariant() -or
     $ApprovedOwnerEmail -match '\.(invalid|test|example)$') { throw 'Use one explicitly approved canonical owner email, never a domain or list.' }
 if (-not $LocalOnly) {

@@ -1,0 +1,2 @@
+{"time":"2026-10-29T18:32:01.650Z","frameId":"2BB033FC74B9B31F12E0F270035ADF69","result":false,"userInput":"","method":"native dialog closed by owner; driver never accepts/dismisses"}
+{"time":"2026-10-29T18:32:08.333Z","frameId":"2BB033FC74B9B31F12E0F270035ADF69","result":true,"userInput":"","method":"native dialog closed by owner; driver never accepts/dismisses"}

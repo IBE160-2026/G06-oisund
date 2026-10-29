@@ -6,3 +6,8 @@
 
 # Linux deployment scripts and units must remain LF even in Windows git archives.
 /deploy/ubuntu/** text eol=lf
+# New verification methods/logs are indexed by their exact executed bytes.
+/docs/evidence/v1-acceptance-methods/** -text -whitespace
+/docs/evidence/v1-acceptance-reproduction/** -text -whitespace
+/docs/evidence/v1-acceptance-init-completion-tail.txt -text -whitespace
+/docs/evidence/v1-main-integration-20261029/** -text -whitespace

@@ -229,7 +229,7 @@ export function PrivateDrafts({ upload, request, mutation, dirtyChanged, expired
       if (!accepted && error?.status === 409 && ['Utkastet er endret. Sammenlign med lagret versjon før du fortsetter.', 'Lagringsforsøket har annet innhold. Behold dine lokale endringer.'].includes(error.apiDetail)) {
         setPending(null);
         setMessage('Konflikt. Dine lokale endringer er beholdt. Sammenlign med lagret versjon.');
-        if (saved) { try { const value = await request('/drafts/' + saved.id); if (alive.current && valid(value)) setComparison(value); } catch (e) { failed(e); } }
+        if (saved) { const requestedId = saved.id; try { const value = await request('/drafts/' + requestedId); if (alive.current && epoch === deletionEpoch.current && valid(value) && value.id === requestedId) setComparison(value); } catch (e) { if (alive.current && epoch === deletionEpoch.current) failed(e); } }
       } else if (terminalDraftError(error)) {
         terminalSave(error.status, operation.path === '/drafts' ? null : operation.path.slice('/drafts/'.length));
       } else if (!accepted && (error?.status === 413 && error.apiDetail === 'Forespørselen er for stor.' || error?.status === 422 && error.apiDetail === 'Kontroller feltene.')) {
@@ -337,10 +337,14 @@ export function PrivateDrafts({ upload, request, mutation, dirtyChanged, expired
       setPendingDelete(operation);
     }
     setBusy(true); setMessage(lookup ? 'Kontrollerer sletting …' : 'Sletter …');
+    let dispatchRefusal = false;
     try {
       const original = operation;
       const status = () => request('/draft-deletions/' + original.body.operation_id);
-      const mutate = () => mutation('/drafts/' + original.id + '/delete', original.body);
+      const mutate = async () => {
+        try { return await mutation('/drafts/' + original.id + '/delete', original.body); }
+        catch (error) { dispatchRefusal = true; throw error; }
+      };
       const authorize = async () => { const value = await request('/drafts/' + original.id); if (!valid(value) || value.id !== original.id) throw Error(); };
       const result = lookup ? await status() : retry ? await recoverOperation(status, authorize, mutate) : await mutate();
       if (epoch !== deletionEpoch.current) return;
@@ -348,16 +352,16 @@ export function PrivateDrafts({ upload, request, mutation, dirtyChanged, expired
     } catch (error: any) {
       if (!alive.current || epoch !== deletionEpoch.current) return;
       if (error?.status === 401) { expired(); return; }
-      if (error?.status === 410 && ['Slettingsforsøket er utløpt.', 'Utkastet er utløpt.', 'Utkastet er utløpt og kan ikke åpnes igjen.'].includes(error.apiDetail)) {
+      if (dispatchRefusal && error?.status === 410 && ['Slettingsforsøket er utløpt.', 'Utkastet er utløpt.', 'Utkastet er utløpt og kan ikke åpnes igjen.'].includes(error.apiDetail)) {
         deletionEpoch.current++;
         resetTimes();
         setList(current => current.filter(item => item.id !== operation.id));
         setListState('ready');
         setSaved(null); setContent(empty()); setPendingDelete(null); setComparison(null);
         setMessage('Sletting kunne ikke bekreftes fordi utkastet eller slettingsforsøket er utløpt. Du kan opprette et nytt utkast.'); title.current?.focus();
-      } else if (error?.status === 409 && ['Slettingsforsøket har annet innhold.', 'Utkastet er endret. Sammenlign med lagret versjon før sletting.'].includes(error.apiDetail)) {
+      } else if (dispatchRefusal && error?.status === 409 && ['Slettingsforsøket har annet innhold.', 'Utkastet er endret. Sammenlign med lagret versjon før sletting.'].includes(error.apiDetail)) {
         setPendingDelete(null); setMessage('Konflikt. Utkastet er endret og er ikke slettet. Dine lokale endringer er beholdt.');
-        try { const value = await request('/drafts/' + operation.id); if (alive.current && valid(value)) setComparison(value); } catch (e) { if (alive.current) failed(e); }
+        try { const value = await request('/drafts/' + operation.id); if (alive.current && epoch === deletionEpoch.current && valid(value) && value.id === operation.id) setComparison(value); } catch (e) { if (alive.current && epoch === deletionEpoch.current) failed(e); }
       } else {
         const reason = error?.status === 404 ? 'Tilgangen til bekreftelsen ble avvist.' : error?.status === 410 ? 'Utkastet eller slettingsforsøket er utløpt.' : 'Tjenesten kunne ikke bekrefte slettingen.';
         setMessage(`Sletting er ikke bekreftet. ${reason} Utkastet er låst. Kontroller eller prøv samme slettingsforsøk igjen.`);
