@@ -11,11 +11,13 @@ accepted_on: '2026-10-28'
 context: []
 ---
 
-**Current decision:** Jonas explicitly accepted Story12.5 in full on28October2026 after all ten guided assessment parts. [Acceptance record](../../docs/evidence/12-5-owner-acceptance-2026-10-28.md). The frozen starting intent and earlier review notes retain historical pending wording; current status is done/accepted. Epic12 is done at Jonas's subsequent status-update request on29October2026, after its completed retrospective; residual follow-ups remain tracked.
+**Current decision:** Jonas explicitly accepted Story12.5 in full on28October2026 after all ten guided assessment parts. [Acceptance record](../../docs/evidence/12-5-owner-acceptance-2026-10-28.md). The frozen starting intent and earlier review notes retain historical pending wording; current status is done/accepted. Epic12 remains in progress by explicit instruction.
 
 <frozen-after-approval reason="User explicitly authorized autonomous completion through review; product contract changes still require clarification">
 
 ## Intent
+
+> Owner clarification,29October2026: the prior Epic12 done publication was a misunderstanding; only Story12.5 was to be marked done. All accepted story results and the completed retrospective remain unchanged. Epic12 stays open pending the closure basis and owner decisions.
 
 **Problem:** README mixes historical checkpoints and cannot establish that an independent reader can reproduce the accepted V1 without the owner's environment.
 

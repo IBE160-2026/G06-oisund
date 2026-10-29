@@ -13,9 +13,11 @@ currentDeliveryStatus: all-20-stories-accepted-epic-12-held-for-closeout
 
 # IBE160 — Active Course V1 Backlog
 
+> Owner clarification,29October2026: the prior Epic12 done publication was a misunderstanding; only Story12.5 was to be marked done. All accepted story results and the completed retrospective remain unchanged. Epic12 stays open pending the closure basis and owner decisions.
+
 ## Current delivery status 29 October 2026
 
-All 20 SCOPE-02 stories (9.1–12.5 / V1-01–20) are done and owner-accepted. Epics 9–12 are done; Jonas requested completing and publishing Epic12's sprint status on29October2026. Residual [V1 closure decisions](../../docs/submission/v1-closeout.md) remain tracked separately. The [Epic 12 retrospective](../implementation-artifacts/epic-12-retro-2026-10-29.md) is complete with `accepted-with-open-items`. Epic completion does not close follow-ups or approve their proposed deferral. Earlier planning baselines and test outcomes retain their original meaning.
+All 20 SCOPE-02 stories (9.1–12.5 / V1-01–20) are done and owner-accepted. Epics 9–11 are done; Epic 12 remains in-progress at the owner's instruction pending the [V1 closure decisions](../../docs/submission/v1-closeout.md). The [Epic 12 retrospective](../implementation-artifacts/epic-12-retro-2026-10-29.md) is complete with `accepted-with-open-items`. Story completion does not close follow-ups or approve their proposed deferral. Earlier planning baselines and test outcomes retain their original meaning.
 
 ## Authority and numbering
 

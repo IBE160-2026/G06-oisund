@@ -1,10 +1,12 @@
 # Epic 12 Context: Verify and Deliver the Assessable Application
 
+> Owner clarification,29October2026: the prior Epic12 done publication was a misunderstanding; only Story12.5 was to be marked done. All accepted story results and the completed retrospective remain unchanged. Epic12 stays open pending the closure basis and owner decisions.
+
 <!-- Compiled from planning artifacts. Edit freely. Regenerate with compile-epic-context if planning docs change. -->
 
 ## Current accepted state 29 October 2026
 
-All five stories are done/accepted and integrated on main: 12.1/12.2 on 27 October, 12.3 after its required Lenovo checks on 27 October, and 12.4/12.5 on 28 October. The [completed retrospective](epic-12-retro-2026-10-29.md) has verdict `accepted-with-open-items`; [V1 closure assessment](../../docs/submission/v1-closeout.md) separates completed work, actual residual defects, evidence gaps and pending owner decisions. Epic 12 is done at Jonas's explicit status-update request on29October2026; residual actions and proposed deferral decisions remain unchanged.
+All five stories are done/accepted and integrated on main: 12.1/12.2 on 27 October, 12.3 after its required Lenovo checks on 27 October, and 12.4/12.5 on 28 October. The [completed retrospective](epic-12-retro-2026-10-29.md) has verdict `accepted-with-open-items`; [V1 closure assessment](../../docs/submission/v1-closeout.md) separates completed work, actual residual defects, evidence gaps and pending owner decisions. Epic 12 stays in-progress until that basis and the necessary decisions are resolved.
 
 Current integration evidence: [12.1/12.2](../../docs/evidence/12-integrated-handoff.md), [12.3](../../docs/evidence/12-3-publication-final.md), [12.4](../../docs/evidence/12-4-main-integration.md), [12.5](../../docs/evidence/12-5-main-integration.md). The immutable reproducible source remains `c067fdbb20150219c041588ed4e990e7b0ef6b94`. Historical runs retain their recorded builds, failures and limits. No extension, release/tag, deployment or course submission is authorized by closure preparation.
 

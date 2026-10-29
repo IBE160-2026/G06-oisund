@@ -2,11 +2,13 @@
 date: 2026-10-29
 status: awaiting-owner-decisions
 scope: SCOPE-02-course-V1
-epic_12: done
+epic_12: in-progress
 deferrals_approved_by_this_document: false
 ---
 
 # V1 closure assessment
+
+> Owner clarification,29October2026: the prior Epic12 done publication was a misunderstanding; only Story12.5 was to be marked done. All accepted story results and the completed retrospective remain unchanged. Epic12 stays open pending the closure basis and owner decisions.
 
 All 20 SCOPE-02 stories are accepted and integrated. The [Epic 12 retrospective](../../_bmad-output/implementation-artifacts/epic-12-retro-2026-10-29.md) is complete with `accepted-with-open-items`. No newly demonstrated blocking privacy, duplicate-write, stale-overwrite or retained-data resurrection defect was established in that retrospective. **Formal V1 closure still needs explicit disposition of the residual defects and verification work below.** Story approval and the earlier four tracker-status approvals do not approve those deferrals.
 
@@ -70,7 +72,7 @@ For A8, the remaining crosswalk must distinguish **before dispatch**, **accepted
 | **D3 future process and operational boundary:** E12-A2, B6–B10 and existing external-security proof limits. | Adopt E12-A2 as future practice and keep operational work outside local course-V1 closure. | Future process execution stays open; operational issues stay open. No new declaration that the deployed environment is safe for broader use. |
 | **Formal closure after dispositions.** | Once D1–D3 are resolved, authorize Epic12→done and V1 closure with named residual items, unless a required fix/check remains. | Changes tracking only. No tag/release, course submission, deployment or extension begins. |
 
-**Current tracker decision,29October2026:** Jonas requested updating and pushing the remaining in-progress sprint status. Epic12 is now done: all stories and its retrospective are complete, with the retained `accepted-with-open-items` verdict. This supersedes the earlier tracker hold described in the decision table. It does not approve the specific D1–D3 deferral proposals or close their residual work; those dispositions remain pending. There is no new evidence-backed requirement to repeat all tests or implement extensions.
+**Present decision:** no deferral in D1–D3 has been approved by this assessment. Epic12 remains in-progress. There is no new evidence-backed requirement to repeat all tests or implement extensions. If Jonas accepts the proposed dispositions, Epic12 can then be marked done with the retained `accepted-with-open-items` verdict; if any fix/check is required first, it must be completed before that transition.
 
 ## Documentation and publication record
 
