@@ -1,3 +1,23 @@
+# Parse only the two opaque application cookies. Duplicate names (including
+# outer-provider cookies) are ambiguous and refused before admission or writes.
+map $http_cookie $duplicate_cookie {
+    default 0;
+    '~(?:^|;\s*)([^=;\s]+)=[^;]*(?:;[^;]*)*;\s*\1=' 1;
+}
+map $http_cookie $private_session_cookie {
+    default "";
+    '~(?:^|;\s*)(private_session=[A-Za-z0-9_=.\-]+)(?:;|$)' $1;
+}
+map $http_cookie $private_csrf_cookie {
+    default "";
+    '~(?:^|;\s*)(private_csrf=[A-Za-z0-9_=.\-]+)(?:;|$)' $1;
+}
+map "$private_session_cookie|$private_csrf_cookie" $private_cookie {
+    default "$private_session_cookie; $private_csrf_cookie";
+    "|" "";
+    '~^\|' $private_csrf_cookie;
+    '~\|$' $private_session_cookie;
+}
 server {
     listen 8080 default_server;
     server_name _;
@@ -13,6 +33,7 @@ server {
     server_tokens off;
     client_max_body_size 12m;
     auth_request /_access_verify;
+    if ($duplicate_cookie) { return 400; }
     add_header Cache-Control "no-store" always;
     add_header Pragma "no-cache" always;
     add_header X-Content-Type-Options "nosniff" always;
@@ -48,6 +69,7 @@ server {
         proxy_set_header Forwarded "";
         proxy_set_header Connection "";
         proxy_set_header Cf-Access-Jwt-Assertion "";
+        proxy_set_header Cookie $private_cookie;
         proxy_redirect off;
         proxy_next_upstream off;
         proxy_buffering off;

@@ -300,6 +300,41 @@ export function PrivateConfirmation({ saved, clean, request, mutation, expired, 
       setMessage([409, 410, 422].includes(error?.status) ? 'Tilgangen, planversjonen eller fristen ble avvist. Slettingen er uavklart; behold siden åpen og kontroller samme forsøk.' : 'Slettingen er uavklart. Behold siden åpen og kontroller eller prøv samme sletting igjen.');
     } finally { sendingDeletion.current = false; if (alive.current) setBusy(false); }
   }
+  async function abandonMissingPlan() {
+    if (!plan || !busLockedRef.current || suspended || busy || deletionRef.current || pending) return;
+    const original = plan;
+    const generation = ++reading.current;
+    setBusy(true);
+    const absent = async () => {
+      let missing = false;
+      try { await request('/workdays/' + original.id); }
+      catch (error: any) {
+        if (error?.status === 404 && error.apiDetail === 'Tilgangen ble avvist.'
+          || error?.status === 410 && error.apiDetail === 'Planen er utløpt.') missing = true;
+        else throw error;
+      }
+      if (!missing) throw Error();
+      // An error response does not receive the wrapper's successful-body
+      // postvalidation. Verify the same displayed session after each denial.
+      await request('/auth/session');
+      if (!alive.current || generation !== reading.current || !live(original.expires_at)) throw Error();
+    };
+    try {
+      await absent();
+      if (!window.confirm('Planen finnes ikke lenger eller er utløpt. Oppgi uavklarte forsøk og forkast lokale endringer for denne planen? Lagring blir ikke bekreftet. Avviksregisteret beholdes.')) return;
+      await absent();
+      reading.current++; epoch.current++;
+      setPlan(null); setActivityOpen(false); setNoticeReaderOpen(false);
+      // Child unmounts release their locks; keep independent account notices.
+      setItems(current => current.filter(item => item.id !== original.id));
+      showPreparation(); setMessage('Den bortfalte planen er lukket. Lokale planforsøk er oppgitt uten bekreftet lagring. Avviksregisteret er beholdt.');
+    } catch (error: any) {
+      if (alive.current && generation === reading.current) {
+        if (error?.status === 401) expired();
+        else setMessage('Bortfalt plan kunne ikke bekreftes. Uavklart forsøk og lokale endringer er beholdt. Ingen lagring er bekreftet.');
+      }
+    } finally { if (alive.current) setBusy(false); }
+  }
   return <section className="private-confirmation" aria-label="Bekreft plan" aria-busy={busy}>
     <p hidden={screen === 'plan' && activityOpen && /^(Bekreftet plan åpnet|Planen er bekreftet|Planlisten er oppdatert)/.test(message)} role="status" aria-label="Bekreftelsesstatus">{message}</p>
     <div hidden={screen !== 'approval' || notices.screen !== 'day'}>
@@ -323,6 +358,7 @@ export function PrivateConfirmation({ saved, clean, request, mutation, expired, 
     <div hidden={screen === 'plan' && noticeReaderOpen}><NoticeScreens visible={screen !== 'plan' || !noticeReaderOpen} notices={notices} serviceDate={plan?.draft.service_date ?? null} back={() => notices.navigate('day')} /></div>
     {(!plan || screen !== 'plan') && notices.screen === 'day' && <button id="notice-entry-preparation" disabled={suspended} onClick={notices.open}>Manuelt vedlikeholdte avvik</button>}
     {plan && <PrivateWorkdayView validPlan={validPlan} historicalDetails={<Facts historical content={plan.draft} classifications={plan.classifications} />} busy={busy} key={plan.id + ':' + planOpen} plan={plan} hidden={screen !== 'plan'} activityOpen={activityOpen} setActivityOpen={setActivityOpen} request={request} mutation={mutation} suspended={suspended || !!deleting || !!pending} expired={expired} planAvailable={planAvailable} dayNavigationLocked={dayNavigationLocked} busLocked={busLocked} guardBus={guardBus} guardSelection={guardSelection} guardStart={guardStart} guardOutcome={guardOutcome} notices={notices} readerChanged={setNoticeReaderOpen} busAvailability={busAvailability} selectionAvailability={selectionAvailability} startAvailability={startAvailability} remove={() => void remove()} closeView={() => { setPlan(null); showPreparation(); }} showPreparation={showPreparation} shorten={value => setPlan(current => current?.id === plan.id && Date.parse(value) < Date.parse(current.expires_at) ? { ...current, expires_at: value } : current)} />}
+    {plan && screen === 'plan' && busLocked && <button disabled={busy || suspended || !!deleting || !!pending} onClick={() => void abandonMissingPlan()}>Oppgi uavklart forsøk og lukk planen</button>}
     <div hidden={screen !== 'plan'}>{deleting && <div className="controls"><button disabled={busy || suspended} onClick={() => void remove()}>Prøv samme sletting igjen</button><button disabled={busy || suspended} onClick={() => void remove(true)}>Kontroller slettingen</button></div>}</div>
     <div hidden={screen !== 'upload' || notices.screen !== 'day'}><h3>Mine bekreftede planer</h3><button disabled={busy || !!pending || !!deleting || busLocked || suspended} onClick={() => void list()}>Oppdater planlisten</button>
     {items.length === 0 && <p>Ingen planer er lastet.</p>}<ul>{items.map(item => <li key={item.id}><button disabled={busy || !!pending || !!deleting || busLocked || suspended} onClick={() => void reopen(item.id)}>Åpne plan {item.service_date ?? 'ukjent dato'} · versjon {item.source_revision}</button> Utløper {date(item.expires_at)}</li>)}</ul>

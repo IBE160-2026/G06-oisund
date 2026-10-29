@@ -1,4 +1,6 @@
 import asyncio
+import logging
+from threading import Lock
 from contextlib import asynccontextmanager, suppress
 from uuid import UUID
 from datetime import date
@@ -31,19 +33,42 @@ from .draft_domain import DeleteDraft, DeletedDraft, DraftContent, DraftList, Dr
 from .private_storage import cleanup, database
 
 
+maintenance_log = logging.getLogger('private.maintenance')
+cleanup_lock = Lock()
+cleanup_state = {'status': 'not-run', 'consecutive_failures': 0}
+
+
+def cleanup_health():
+    with cleanup_lock:
+        return dict(cleanup_state)
+
+
+def run_cleanup():
+    try:
+        cleanup()
+    except psycopg.Error:
+        with cleanup_lock:
+            cleanup_state.update(status='failed', consecutive_failures=min(99, cleanup_state['consecutive_failures'] + 1))
+        maintenance_log.warning('private_cleanup_failed')
+        return False
+    with cleanup_lock:
+        cleanup_state.update(status='ok', consecutive_failures=0)
+    maintenance_log.info('private_cleanup_ok')
+    return True
+
+
 async def maintenance():
     while True:
         await asyncio.sleep(3600)
-        try:
-            await asyncio.to_thread(cleanup)
-        except psycopg.Error:
-            pass
+        await asyncio.to_thread(run_cleanup)
 
 
 @asynccontextmanager
 async def lifespan(app):
     auth.configuration()
-    cleanup()
+    if not run_cleanup():
+        # Startup still refuses to serve when initial cleanup cannot run.
+        raise RuntimeError('Private startup cleanup unavailable') from None
     task = asyncio.create_task(maintenance())
     try:
         yield
@@ -107,7 +132,7 @@ def presentation(row):
 def health():
     with database() as conn:
         conn.execute('SELECT 1')
-    return {'status': 'ok', 'mode': 'private-local'}
+    return {'status': 'ok', 'mode': 'private-local', 'cleanup': cleanup_health()}
 
 
 @app.get('/auth/csrf')
