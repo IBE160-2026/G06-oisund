@@ -1,0 +1,111 @@
+{
+  "at": "2026-10-29T09:05:56.206977+00:00",
+  "checkedHead": "6a4f78661daa40f07cc540f9ebd543c633aa805a",
+  "fetchedOriginMainAtStart": "62ac07586681b22812a633c676e2f18ba49c7489",
+  "sourceSnapshot": "c067fdbb20150219c041588ed4e990e7b0ef6b94",
+  "all20StoriesDone": true,
+  "epic12HeldInProgress": true,
+  "retroDone": true,
+  "confirmedAndDocumentationStatuses": {
+    "epic-11-retro-item-2-refresh-comparison-adoption": "done",
+    "epic-11-retro-item-12-carry-cross-story-invariants": "done",
+    "epic-11-retro-item-7-validate-source-and-lifetime-journeys": "in-progress",
+    "epic-11-retro-item-8-retain-execution-evidence": "in-progress",
+    "epic-12-retro-item-1-reconcile-current-documentation": "done",
+    "epic-12-retro-item-2-review-whole-flow-before-final-gate": "open"
+  },
+  "allOtherEarlierActionFieldsUnchanged": true,
+  "pendingDecisions": [
+    "D1",
+    "D2",
+    "D3",
+    "formal-closure"
+  ],
+  "noDeferralsApprovedByAssessment": true,
+  "localLinksChecked": 458,
+  "allLocalLinksAndLineBoundsExist": true,
+  "historicalEvidenceFilesUnchanged": 1514,
+  "otherWorktreesUnchanged": [
+    {
+      "path": "C:/Users/Jonas/.codex/.chatgpt-projects/g-p-6ab6b4c1c6888191a96d3242fab912b4/story-12-2",
+      "head": "e8221ff3a61a86beaa5d42c91b9a4c4df69e28f6",
+      "status": ""
+    },
+    {
+      "path": "C:/Users/Jonas/.codex/.chatgpt-projects/g-p-6ab6b4c1c6888191a96d3242fab912b4/tablet-access-11-6",
+      "head": "0c1f2934d8d865d5372b502c65d8680f75481b43",
+      "status": ""
+    },
+    {
+      "path": "D:/IBE160/tmp/story-12-3",
+      "head": "1ac729c16b28ae19a0c9509022c92cffe3298aa7",
+      "status": ""
+    },
+    {
+      "path": "D:/IBE160/tmp/story-12-4",
+      "head": "4e38e240917b29450e68f817b85411185ef5eac3",
+      "status": ""
+    },
+    {
+      "path": "D:/IBE160/tmp/story-12-5",
+      "head": "330d5a21bc38decc95bbd5332edee2acf08e4faa",
+      "status": ""
+    },
+    {
+      "path": "D:/IBE160-plan-automatic-notices",
+      "head": "da867072a8a17249032c00efa51bd61979d41428",
+      "status": ""
+    },
+    {
+      "path": "D:/IBE160-plan-complete-route-network",
+      "head": "7cada9d2e66af9806358f582bc8ea459321a6563",
+      "status": ""
+    },
+    {
+      "path": "D:/IBE160-plan-gps-speed",
+      "head": "e2468abb8bf492007d9f9437698c80d88e9ca280",
+      "status": ""
+    },
+    {
+      "path": "D:/IBE160-plan-position-progression",
+      "head": "df47a4e74ca982a2e04d6e5531e7744caf4f4717",
+      "status": ""
+    },
+    {
+      "path": "D:/IBE160-plan-speed-limits",
+      "head": "5adc6fb2c0137a3a6519d4f7ba42dd57f0e02f1c",
+      "status": ""
+    },
+    {
+      "path": "D:/IBE160-story-12-1",
+      "head": "533ca88dc2c99533eb5c11f6bb58d6ee4fe7bde8",
+      "status": ""
+    }
+  ],
+  "executableFixtureAndConfigDifferencesFromSnapshot": [],
+  "freshProductTestsExecuted": [],
+  "serviceOrDatabaseCommandsExecuted": [],
+  "runtimeQualification": "No current runtime-state claim; no service, database, tunnel or account operated.",
+  "documentationHashes": {
+    "README.md": "feadbb9e3c7ab4241478733053d5fd5d97c5414df592ef3897d6c6f52eeba555",
+    "_bmad-output/planning-artifacts/epics.md": "7b90cb0542a79630f71cfe35bbec3a7ddfc3939babc139c0cb2aba52c200652f",
+    "_bmad-output/planning-artifacts/prds/prd-IBE160-2026-09-21/prd.md": "25af66feb66546cc55772c3bdcdc1fbf342da81ab04e6653b6a55e686496250c",
+    "_bmad-output/implementation-artifacts/epic-12-context.md": "88dead65a23fabbc17112ffa11d4e2be9f7ce50b23739adc6f74be986bc5e104",
+    "_bmad-output/implementation-artifacts/epic-12-retro-2026-10-29.md": "85dd7cac73433e3b9c83d1d8c77b4e98bbc8a9954a842679aa5c554125560ce3",
+    "_bmad-output/implementation-artifacts/deferred-work.md": "e8896c2eb7fecea5091f9ac67b1c8639814a19cce81c5586bd9ca49dc6ee9794",
+    "docs/submission/README.md": "18e7b8bb27b78153d57839a7a4a8317bd7a368dad4c6bc8666f9550df0ea217d",
+    "docs/submission/traceability.md": "d45810d0b277644b28c360697eb92bf45deb6858da019fece08f01dbc60f114a",
+    "docs/submission/known-issues.md": "deda606b1dc44215d404b4500742ac39235397308f93e66907d5cba4d72b0e35",
+    "docs/submission/v1-closeout.md": "544ac628b873587455c347a3e840c08ed73743b03e9e65b5a3037b0cfbe24e2b"
+  },
+  "e12A1StatusUpdate": {
+    "ok": true,
+    "retro_key_found": null,
+    "retro_status_before": null,
+    "retro_status_after": null,
+    "action_items_added": 0,
+    "action_items_updated": 1,
+    "last_updated": "10-29-2026 10:03",
+    "verdict": null
+  }
+}

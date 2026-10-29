@@ -2,6 +2,12 @@
 
 <!-- Compiled from planning artifacts. Edit freely. Regenerate with compile-epic-context if planning docs change. -->
 
+## Current accepted state 29 October 2026
+
+All five stories are done/accepted and integrated on main: 12.1/12.2 on 27 October, 12.3 after its required Lenovo checks on 27 October, and 12.4/12.5 on 28 October. The [completed retrospective](epic-12-retro-2026-10-29.md) has verdict `accepted-with-open-items`; [V1 closure assessment](../../docs/submission/v1-closeout.md) separates completed work, actual residual defects, evidence gaps and pending owner decisions. Epic 12 stays in-progress until that basis and the necessary decisions are resolved.
+
+Current integration evidence: [12.1/12.2](../../docs/evidence/12-integrated-handoff.md), [12.3](../../docs/evidence/12-3-publication-final.md), [12.4](../../docs/evidence/12-4-main-integration.md), [12.5](../../docs/evidence/12-5-main-integration.md). The immutable reproducible source remains `c067fdbb20150219c041588ed4e990e7b0ef6b94`. Historical runs retain their recorded builds, failures and limits. No extension, release/tag, deployment or course submission is authorized by closure preparation.
+
 ## Goal
 
 Make the included application assessable through a repeatable isolated fictional journey, executed privacy and integration checks, usable tablet/PC views and reproducible local delivery. Evidence must distinguish simulated demonstrations, actual API/PostgreSQL behavior and unperformed device or field evaluation. The application supports preparation and consultation while stopped; it does not certify standstill, road clearance, source completeness or real-world benefit.
@@ -48,6 +54,8 @@ Retain labelled forgiving controls, keyboard order matching reading order, meani
 Manual Day/Night persists only a non-private preference. Measure all informative text, including large text, at least 4.5:1 against its actual background; necessary non-text information needs 3:1. Focus requires an area equivalent to a 2 CSS-pixel perimeter, 3:1 change on the same pixels between focused/unfocused states, and 3:1 against necessary adjacent colors; it cannot be entirely obscured. Verify actual rendered default, focused, selected, warning, error, unavailable and disabled states in both themes, including compositing, overlays and semantic icon outlines. Palette calculations alone are insufficient. Record raw ratios, environment and passed/failed/not-measured results. Browser viewport checks and static designs do not establish physical tablet usability or overall WCAG AAA conformance. No Auto, wake, GPS or PDF pass is inferred.
 
 ## Cross-Story Dependencies
+
+The dependency contracts below remain applicable. The chronological delivery paragraphs following them are **historical checkpoints**, including their then-current backlog/review/no-merge restrictions. The accepted-state summary above and linked later integration records govern current status.
 
 12.2 builds on the accepted closure, account notice and recovery contracts of 11.3/11.5/11.6. The accepted 11.5 account model overrides older per-workday wording. 12.1 owns retention/deletion enforcement. 12.3 depends on 10.5/11.2/11.5 and owns broader device/theme evidence; 12.1/12.2 were accepted by Jonas on 27 October 2026. 12.4 depends on the combined 12.1–12.3 delivery plus 11.6 and owns complete end-to-end verification, followed by 12.5 clean reproducible delivery. Do not implement deferred GPS, automatic sources, private offline storage, advanced revisions, mentor workflows, PDF export or public hosting as prerequisites.
 

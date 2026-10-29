@@ -10,6 +10,7 @@ Start with the [clean-checkout recipe](../../README.md). This directory is the a
 | Accepted synthetic inputs, extraction boundaries and unknowns | [Supported input](supported-input.md) |
 | How human and AI decisions were checked | [AI reflection](ai-reflection.md) |
 | Remaining limitations and deferred work | [Known issues](known-issues.md) |
+| Consolidated V1 closure work and pending owner decisions | [V1 closure assessment](v1-closeout.md), [completed Epic 12 retrospective](../../_bmad-output/implementation-artifacts/epic-12-retro-2026-10-29.md) |
 | Reader's actual fullstack walkthrough | [Review checklist](review-checklist.md) |
 
 The authoritative [V1-20 story](../../_bmad-output/planning-artifacts/story-drafts/story-v1-20.md), [PRD](../../_bmad-output/planning-artifacts/prds/prd-IBE160-2026-09-21/prd.md) and [12.5 implementation spec](../../_bmad-output/implementation-artifacts/spec-12-5-reproducible-submission.md) define this delivery. Planning text is not test evidence. Original teacher files are not supplied in this checkout; [the recorded course constraints](../../_bmad-output/planning-artifacts/briefs/brief-IBE160-2026-09-21/addendum.md) are the available secondary record, not independently verified originals.

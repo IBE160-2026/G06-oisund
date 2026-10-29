@@ -8,9 +8,14 @@ epics: 4
 stories: 20
 implementationStatus: historical-planning-baseline
 currentDeliveryTracking: ../implementation-artifacts/sprint-status.yaml
+currentDeliveryStatus: all-20-stories-accepted-epic-12-held-for-closeout
 ---
 
 # IBE160 — Active Course V1 Backlog
+
+## Current delivery status 29 October 2026
+
+All 20 SCOPE-02 stories (9.1–12.5 / V1-01–20) are done and owner-accepted. Epics 9–11 are done; Epic 12 remains in-progress at the owner's instruction pending the [V1 closure decisions](../../docs/submission/v1-closeout.md). The [Epic 12 retrospective](../implementation-artifacts/epic-12-retro-2026-10-29.md) is complete with `accepted-with-open-items`. Story completion does not close follow-ups or approve their proposed deferral. Earlier planning baselines and test outcomes retain their original meaning.
 
 ## Authority and numbering
 
@@ -61,7 +66,7 @@ FR-7–9, FR-15 and FR-23 are deferred; the remaining original FRs are narrowed 
 
 ### Story 9.1: Establish supported imports
 
-**Stable alias:** V1-01. **Status:** backlog; approved scope, implementation/evidence not started.
+**Stable alias:** V1-01. **Historical planning baseline:** backlog at scope approval. **Current status:** done/accepted; see the current delivery summary, sprint tracking and promoted implementation evidence.
 **Depends on:** none.
 **Traceability:** FR-2; NFR-2; AC-01; SCOPE-02.
 
@@ -79,7 +84,7 @@ FR-7–9, FR-15 and FR-23 are deferred; the remaining original FRs are narrowed 
 
 ### Story 9.2: Run a persisted fictional day locally
 
-**Stable alias:** V1-02. **Status:** backlog; approved scope, implementation/evidence not started.
+**Stable alias:** V1-02. **Historical planning baseline:** backlog at scope approval. **Current status:** done/accepted; see the current delivery summary, sprint tracking and promoted implementation evidence.
 **Depends on:** none.
 **Traceability:** FR-20/25; NFR-4; AC-11; SCOPE-02.
 
@@ -96,7 +101,7 @@ FR-7–9, FR-15 and FR-23 are deferred; the remaining original FRs are narrowed 
 
 ### Story 9.3: Access private work
 
-**Stable alias:** V1-03. **Status:** backlog; approved scope, implementation/evidence not started.
+**Stable alias:** V1-03. **Historical planning baseline:** backlog at scope approval. **Current status:** done/accepted; see the current delivery summary, sprint tracking and promoted implementation evidence.
 **Depends on:** V1-02.
 **Traceability:** FR-1; NFR-3; AC-09; SCOPE-02.
 
@@ -113,7 +118,7 @@ FR-7–9, FR-15 and FR-23 are deferred; the remaining original FRs are narrowed 
 
 ### Story 9.4: Save and reopen a draft
 
-**Stable alias:** V1-04. **Status:** backlog; approved scope, implementation/evidence not started.
+**Stable alias:** V1-04. **Historical planning baseline:** backlog at scope approval. **Current status:** done/accepted; see the current delivery summary, sprint tracking and promoted implementation evidence.
 **Depends on:** V1-03.
 **Traceability:** FR-4/17/20/24; NFR-2/3; AC-02/07/09; SCOPE-02.
 
@@ -136,7 +141,7 @@ FR-7–9, FR-15 and FR-23 are deferred; the remaining original FRs are narrowed 
 
 ### Story 10.1: Review a text PDF
 
-**Stable alias:** V1-05. **Status:** backlog; approved scope, implementation/evidence not started.
+**Stable alias:** V1-05. **Historical planning baseline:** backlog at scope approval. **Current status:** done/accepted; see the current delivery summary, sprint tracking and promoted implementation evidence.
 **Depends on:** V1-01, V1-04.
 **Traceability:** FR-2/24; NFR-2/3; AC-01/06; SCOPE-02.
 
@@ -154,7 +159,7 @@ FR-7–9, FR-15 and FR-23 are deferred; the remaining original FRs are narrowed 
 
 ### Story 10.2: Correct the draft
 
-**Stable alias:** V1-06. **Status:** backlog; approved scope, implementation/evidence not started.
+**Stable alias:** V1-06. **Historical planning baseline:** backlog at scope approval. **Current status:** done/accepted; see the current delivery summary, sprint tracking and promoted implementation evidence.
 **Depends on:** V1-04, V1-05.
 **Traceability:** FR-2/4; NFR-2; AC-02/06; SCOPE-02.
 
@@ -171,7 +176,7 @@ FR-7–9, FR-15 and FR-23 are deferred; the remaining original FRs are narrowed 
 
 ### Story 10.3: Confirm the reviewed plan
 
-**Stable alias:** V1-07. **Status:** backlog; approved scope, implementation/evidence not started.
+**Stable alias:** V1-07. **Historical planning baseline:** backlog at scope approval. **Current status:** done/accepted; see the current delivery summary, sprint tracking and promoted implementation evidence.
 **Depends on:** V1-06.
 **Traceability:** FR-2/4/5/24; AC-02/07; SCOPE-02.
 
@@ -188,7 +193,7 @@ FR-7–9, FR-15 and FR-23 are deferred; the remaining original FRs are narrowed 
 
 ### Story 10.4: Record the physical bus
 
-**Stable alias:** V1-08. **Status:** backlog; approved scope, implementation/evidence not started.
+**Stable alias:** V1-08. **Historical planning baseline:** backlog at scope approval. **Current status:** done/accepted; see the current delivery summary, sprint tracking and promoted implementation evidence.
 **Depends on:** V1-07.
 **Traceability:** FR-5/11; AC-02; SCOPE-02.
 
@@ -206,7 +211,7 @@ FR-7–9, FR-15 and FR-23 are deferred; the remaining original FRs are narrowed 
 
 ### Story 10.5: Read the day
 
-**Stable alias:** V1-09. **Status:** backlog; approved scope, implementation/evidence not started.
+**Stable alias:** V1-09. **Historical planning baseline:** backlog at scope approval. **Current status:** done/accepted; see the current delivery summary, sprint tracking and promoted implementation evidence.
 **Depends on:** V1-07, V1-08.
 **Traceability:** FR-4/5; AC-02/03; SCOPE-02.
 
@@ -379,7 +384,7 @@ FR-7–9, FR-15 and FR-23 are deferred; the remaining original FRs are narrowed 
 
 ### Story 12.3: Use the included views on tablet and PC
 
-**Stable alias:** V1-18. **Status:** done/accepted,27 October2026. Jonas' conditional approval became effective after remaining required physical checks passed; [final acceptance evidence](../../docs/evidence/12-3-device-acceptance-2026-10-27.md). No main merge/commit/push;12.4 remains backlog.
+**Stable alias:** V1-18. **Status:** done/accepted,27 October2026. Jonas' conditional approval became effective after remaining required physical checks passed; [final acceptance evidence](../../docs/evidence/12-3-device-acceptance-2026-10-27.md). Subsequently merged and published on main; [integration record](../../docs/evidence/12-3-publication-final.md). Earlier no-merge/12.4-backlog statements describe the historical checkpoint.
 **Depends on:** V1-09, V1-11, V1-14.
 **Traceability:** NFR-1/4; IR-01; AC-10; SCOPE-02.
 
@@ -396,7 +401,7 @@ FR-7–9, FR-15 and FR-23 are deferred; the remaining original FRs are narrowed 
 
 ### Story 12.4: Verify the complete user flow
 
-**Stable alias:** V1-19. **Status:** in-review; [implementation specification](../implementation-artifacts/spec-12-4-complete-user-flow.md) and [executed evidence](../../docs/evidence/12-4-handoff.md), owner acceptance pending.
+**Stable alias:** V1-19. **Status:** done/accepted,28 October2026, after the owner-directed workflow correction. [Explicit approval](../../docs/evidence/12-4-owner-acceptance-2026-10-28.md), [accepted main integration](../../docs/evidence/12-4-main-integration.md), [implementation specification](../implementation-artifacts/spec-12-4-complete-user-flow.md) and [original execution evidence](../../docs/evidence/12-4-handoff.md). Original withheld/pending checkpoints and failures remain historical.
 **Depends on:** V1-15, V1-16, V1-17, V1-18.
 **Traceability:** FR-1–25 active subset; NFR-2/3/4; AC-01–09/11/12; SCOPE-02.
 

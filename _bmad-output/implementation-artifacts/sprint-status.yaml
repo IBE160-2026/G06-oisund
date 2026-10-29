@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 10-19-2026 14:35
-last_updated: 10-28-2026 21:09
+last_updated: 10-29-2026 10:03
 project: IBE160
 project_key: NOKEY
 tracking_system: file-system
@@ -62,10 +62,10 @@ development_status:
   epic-12: in-progress
   12-1-enforce-the-retained-data-boundary: done # Jonas explicitly approved 2026-10-27 after manual A-F passed on desktop/Brave.
   12-2-repeat-a-fictional-assessment: done # Jonas explicitly approved corrections and requested commit/push 2026-10-27.
-  12-3-use-the-included-views-on-tablet-and-pc: done # Jonas conditional acceptance effective 2026-10-27 after remaining required Lenovo checks passed; device-acceptance report. No merge/commit/push.
+  12-3-use-the-included-views-on-tablet-and-pc: done # Jonas conditional acceptance effective 2026-10-27 after remaining required Lenovo checks passed; device-acceptance report. Historical checkpoint only; subsequent accepted integration is documented in docs/evidence/12-3-publication-final.md.
   12-4-verify-the-complete-user-flow: done
   12-5-deliver-a-reproducible-submission: done # Jonas explicitly accepted the whole story 2026-10-28; Epic12 closure remains separate.
-  epic-12-retrospective: optional
+  epic-12-retrospective: done
 action_items:
   - id: "epic-9-retro-item-1-bind-editor-identity"
     epic: 9
@@ -143,7 +143,7 @@ action_items:
       touch/enlargement/control observations in 12.3/12.4; keep desktop evidence and
       owner acceptance distinct."
     owner: "Jonas / QA"
-    status: done # Current Lenovo/Brave included-view obligation satisfied; final device acceptance report. Wider deployment/12.4 remain separate.
+    status: done # Current Lenovo/Brave included-view obligation satisfied; final device acceptance report. Historical device scope retained; 12.4 is subsequently accepted, with separate operational qualification limits.
     ref: "D:/IBE160/_bmad-output/implementation-artifacts/epic-10-retro-2026-10-24.md"
   - id: "epic-11-retro-item-1-terminal-plan-recovery"
     epic: 11
@@ -159,7 +159,7 @@ action_items:
       a local proposal through comparison adoption; retain the proposal if the current
       read fails or changes. Add a third-window edit regression."
     owner: "Developer / QA"
-    status: open
+    status: done
     ref: "D:\\IBE160\\_bmad-output\\implementation-artifacts\\epic-11-retro-2026-10-26.md"
   - id: "epic-11-retro-item-3-settle-known-rejections"
     epic: 11
@@ -201,7 +201,7 @@ action_items:
       ending and legacy missing endings. Use owner examples as independent acceptance
       expectations."
     owner: "Jonas / Developer"
-    status: open
+    status: in-progress
     ref: "D:\\IBE160\\_bmad-output\\implementation-artifacts\\epic-11-retro-2026-10-26.md"
   - id: "epic-11-retro-item-8-retain-execution-evidence"
     epic: 11
@@ -210,7 +210,7 @@ action_items:
       status and UTF-8 logs inside the runner rather than PowerShell redirection;
       test each mutation family against proxy/lookup faults without weakening assertions."
     owner: "Developer / QA"
-    status: open
+    status: in-progress
     ref: "D:\\IBE160\\_bmad-output\\implementation-artifacts\\epic-11-retro-2026-10-26.md"
   - id: "epic-11-retro-item-9-reconcile-tablet-qualification"
     epic: 11
@@ -219,7 +219,7 @@ action_items:
       under that existing 12.3/12.4 obligation; do not infer a pass from desktop approval
       or duplicate the old task."
     owner: "Jonas / QA"
-    status: done # Current Lenovo/Brave included-view obligation satisfied; final device acceptance report. Wider deployment/12.4 remain separate.
+    status: done # Current Lenovo/Brave included-view obligation satisfied; final device acceptance report. Historical device scope retained; 12.4 is subsequently accepted, with separate operational qualification limits.
     ref: "D:\\IBE160\\_bmad-output\\implementation-artifacts\\epic-11-retro-2026-10-26.md"
   - id: "epic-11-retro-item-10-prepare-remote-access-between-epics"
     epic: 11
@@ -244,8 +244,24 @@ action_items:
       code/build evidence. Theme persistence stays under existing E10-A4, not a new
       duplicate action."
     owner: "Developer / QA"
-    status: open
+    status: done
     ref: "D:\\IBE160\\_bmad-output\\implementation-artifacts\\epic-11-retro-2026-10-26.md"
 
 
-# Jonas accepted 12.1/12.2 on 2026-10-27. Conditional 12.3 acceptance became effective after remaining required Lenovo checks passed; see docs/evidence/12-3-device-acceptance-2026-10-27.md. Broader deployment/AT limits remain explicit;12.4 backlog.
+# Jonas accepted 12.1/12.2 on 2026-10-27. Conditional 12.3 acceptance became effective after remaining required Lenovo checks passed; see docs/evidence/12-3-device-acceptance-2026-10-27.md. Historical device/AT limits remain explicit; 12.4/12.5 are subsequently accepted and integrated. Epic12 closure is held separately.
+  - id: "epic-12-retro-item-1-reconcile-current-documentation"
+    epic: 12
+    action: "E12-A1: Reconcile current epic/context status and the resolved deferred
+      timer entry against accepted story and integration evidence; label historical
+      checkpoints and link the completed retrospective without relabelling test history."
+    owner: "Developer / Jonas"
+    status: done
+    ref: "_bmad-output/implementation-artifacts/epic-12-retro-2026-10-29.md"
+  - id: "epic-12-retro-item-2-review-whole-flow-before-final-gate"
+    epic: 12
+    action: "E12-A2: At the next authorized workflow change, review the complete preparation/save/approval/use
+      path with Jonas before the final gate; record actual labels, feedback, scrolling
+      and touch observations separately from technical results and explicit acceptance."
+    owner: "Jonas / Developer"
+    status: open
+    ref: "_bmad-output/implementation-artifacts/epic-12-retro-2026-10-29.md"

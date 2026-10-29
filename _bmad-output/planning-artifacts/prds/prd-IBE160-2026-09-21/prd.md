@@ -119,6 +119,8 @@ SM-3 now means correct manual selection; SM-4 means confirmed import and actual 
 
 ## 9. Delivery and open evidence
 
+**Current delivery note,29October2026:** all20 SCOPE-02 stories are accepted; [traceability and actual execution](../../../../docs/submission/traceability.md), [12.5 clean reproduction](../../../../docs/evidence/12-5-reproduction.md) and [V1 closure assessment](../../../../docs/submission/v1-closeout.md) record the implemented envelope, residual follow-ups and pending decisions. Epic12 remains open. The following paragraphs are the **historical pre-implementation planning checkpoint**; they do not mean fixture qualification or the accepted application is still unimplemented. The declared requirements and acceptance criteria above are unchanged.
+
 First timebox PDF feasibility to 3–4 hours; actual fixtures and expected results still need to be established. V1-02 may proceed independently using fictional data. No extraction/library/source result is already passed. If the useful input envelope fails, record evidence and seek a narrower product decision rather than claiming manual entry passed extraction.
 
 Exact December deadline, assessor environment and available holiday schedule remain open. These do not block the first implementation slice. At 8–10 hours and approximately 30 hours, compare actual remaining work with the 60-hour planning basis and protect the testing reserve. Public hosting and real operational use require later decisions.

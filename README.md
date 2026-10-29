@@ -85,6 +85,8 @@ Backend verification runs private HTTP/PostgreSQL tests with explicit exclusions
 
 ## Preserved history
 
+[Completed Epic 12 retrospective](_bmad-output/implementation-artifacts/epic-12-retro-2026-10-29.md) and [V1 closure assessment](docs/submission/v1-closeout.md) record the remaining product/test follow-ups and decisions. All20 stories are accepted; Epic12 remains open pending closure decisions. Proposed deferrals are not owner approvals.
+
 Current scope: [SCOPE-02](_bmad-output/planning-artifacts/sprint-change-proposal-2026-10-19.md), [requirements](_bmad-output/planning-artifacts/prds/prd-IBE160-2026-09-21/prd.md), [stories](_bmad-output/planning-artifacts/epics.md), [sprint](_bmad-output/implementation-artifacts/sprint-status.yaml). The earlier accumulated README remains in Git at `99c272b09abaa5ffecf3286b406fbf065a445c7c`.
 
 Preserved reports: [12.1/12.2 integration](docs/evidence/12-integrated-handoff.md), [12.3 physical acceptance](docs/evidence/12-3-device-acceptance-2026-10-27.md), [12.4 handoff](docs/evidence/12-4-handoff.md), [12.4 corrected import](docs/evidence/12-4-import-experience.md), [12.4 main integration](docs/evidence/12-4-main-integration.md), [development log](docs/development-log.md). Their original revisions, failures and pending statements remain historical. [Tablet operations](docs/tablet-production.md) describes a separate protected environment and is not a recipe prerequisite.

@@ -1,0 +1,1142 @@
+{
+  "date": "2026-10-29T06:36:46.169Z",
+  "range": "8428b87^..62ac075",
+  "head": "62ac07586681b22812a633c676e2f18ba49c7489",
+  "localOriginMain": "62ac07586681b22812a633c676e2f18ba49c7489",
+  "remoteNotFetched": true,
+  "commitCount": 122,
+  "mergeCount": 8,
+  "mergesMeasured": 4,
+  "mergeAccounting": "files excludes merges; merge_files not added; four non-spine merges unmeasured",
+  "storiesSupplied": [
+    "12.1",
+    "12.2",
+    "12.3",
+    "12.4",
+    "12.5"
+  ],
+  "commitAttribution": [
+    {
+      "sha": "62ac07586681b22812a633c676e2f18ba49c7489",
+      "subject": "Logg: plasser publiseringsresultat før åpne punkter",
+      "stories": [],
+      "is_merge": false
+    },
+    {
+      "sha": "b535944c30a7344eba418f1b31ea94303bee40ab",
+      "subject": "Logg: Story 12.5 publisert main og bevart testmiljø",
+      "stories": [
+        "12.5"
+      ],
+      "is_merge": false
+    },
+    {
+      "sha": "8558b9d99fc0c6d4a171cdaddb6ae5e074458714",
+      "subject": "docs(submission): record published main and safe branch cleanup",
+      "stories": [],
+      "is_merge": false
+    },
+    {
+      "sha": "2b91f0a55fbf3117b39c2cecaf5e5091b9cfbfd9",
+      "subject": "Logg: Story 12.5 mainintegrasjon",
+      "stories": [
+        "12.5"
+      ],
+      "is_merge": false
+    },
+    {
+      "sha": "7aac8a2e710ce79123ee880f072a775aa9aa4bdc",
+      "subject": "docs(submission): verify accepted Story 12.5 main integration",
+      "stories": [
+        "12.5"
+      ],
+      "is_merge": false
+    },
+    {
+      "sha": "dbdbd1813e29c02913b72e15a24f0a3321565d95",
+      "subject": "Merge accepted Story 12.5 reproducible submission",
+      "stories": [
+        "12.5"
+      ],
+      "is_merge": true
+    },
+    {
+      "sha": "330d5a21bc38decc95bbd5332edee2acf08e4faa",
+      "subject": "Logg: Story 12.5 godkjent i sin helhet",
+      "stories": [
+        "12.5"
+      ],
+      "is_merge": false
+    },
+    {
+      "sha": "12c847555be40c7ec603c0ca4e72e38adc7e9181",
+      "subject": "Record full owner acceptance of Story 12.5",
+      "stories": [
+        "12.5"
+      ],
+      "is_merge": false
+    },
+    {
+      "sha": "df433d6787d90aa9868e0eb08368b15ac2c45106",
+      "subject": "Logg: Story 12.5 guidet sluttvurdering gjennomført",
+      "stories": [
+        "12.5"
+      ],
+      "is_merge": false
+    },
+    {
+      "sha": "5f699e7442706073940c14d1cb25ee9efce4a47b",
+      "subject": "Logg: Story 12.5 manuell reset bestått",
+      "stories": [
+        "12.5"
+      ],
+      "is_merge": false
+    },
+    {
+      "sha": "59b8c6593a4112f1109f064df456064dea413290",
+      "subject": "Logg: Story 12.5 manuell stop og start bestått",
+      "stories": [
+        "12.5"
+      ],
+      "is_merge": false
+    },
+    {
+      "sha": "41cb703aba64f989f519cd542d9de3aa20344144",
+      "subject": "Logg: Story 12.5 avslutning og oppsummering bestått",
+      "stories": [
+        "12.5"
+      ],
+      "is_merge": false
+    },
+    {
+      "sha": "85c94c6c1a780596810a033ce26fe202e3b8ec54",
+      "subject": "Logg: Story 12.5 avviksregistrering og lesing bestått",
+      "stories": [
+        "12.5"
+      ],
+      "is_merge": false
+    },
+    {
+      "sha": "85f7b71bb6b4fb09c890376d8ef7ccaef9df4410",
+      "subject": "Logg: Story 12.5 manuell bruk bestått",
+      "stories": [
+        "12.5"
+      ],
+      "is_merge": false
+    },
+    {
+      "sha": "c750c989837f8cdf9ed49b78ce7c81fece865292",
+      "subject": "Logg: Story 12.5 plangodkjenning bestått",
+      "stories": [
+        "12.5"
+      ],
+      "is_merge": false
+    },
+    {
+      "sha": "87e698614803193e10d154bcfaed3b80447c7c2a",
+      "subject": "Logg: Story 12.5 rettelse og gjenåpning bestått",
+      "stories": [
+        "12.5"
+      ],
+      "is_merge": false
+    },
+    {
+      "sha": "90bd10c0e7d47aa1bfbb49857c9fbd3aa2232a41",
+      "subject": "Logg: Story 12.5 innlogging og import bestått",
+      "stories": [
+        "12.5"
+      ],
+      "is_merge": false
+    },
+    {
+      "sha": "079fb1bdefda0f0bcb52a04eedd33e5ca6160bd3",
+      "subject": "Logg: Story 12.5 README bestått i sluttvurdering",
+      "stories": [
+        "12.5"
+      ],
+      "is_merge": false
+    },
+    {
+      "sha": "403d404cb6d7f98bbe087015802cafc3f7899b39",
+      "subject": "Logg: Story 12.5 reproduserbar leveranse",
+      "stories": [
+        "12.5"
+      ],
+      "is_merge": false
+    },
+    {
+      "sha": "d40d7f02f015865b621043c564303fb67bb19136",
+      "subject": "Close retained review findings and record immutable snapshot validation",
+      "stories": [],
+      "is_merge": false
+    },
+    {
+      "sha": "5cea76e39919c842edc8547117528a84f2f7f2ff",
+      "subject": "Pin the reviewable submission to its immutable source and evidence snapshot",
+      "stories": [],
+      "is_merge": false
+    },
+    {
+      "sha": "c067fdbb20150219c041588ed4e990e7b0ef6b94",
+      "subject": "Record post-review checks and populated reset preservation evidence",
+      "stories": [],
+      "is_merge": false
+    },
+    {
+      "sha": "8d50684338b4f74430cd387dabba9e55edc4b7fd",
+      "subject": "Harden submission target checks and cover whole-command reset refusal",
+      "stories": [],
+      "is_merge": false
+    },
+    {
+      "sha": "c6d95e216e352ba2043157e78554358b89039d3a",
+      "subject": "Preserve console transcript whitespace as recorded evidence",
+      "stories": [],
+      "is_merge": false
+    },
+    {
+      "sha": "3cd98e4c6dac1836c423160d80ef989caaef8c49",
+      "subject": "Record executed clean reproduction and preserve failures and limits",
+      "stories": [],
+      "is_merge": false
+    },
+    {
+      "sha": "f5037cbdf7de1790aeb222c0d937fe656ed8b061",
+      "subject": "Keep ordinary demonstration startup independent of registries and builds",
+      "stories": [],
+      "is_merge": false
+    },
+    {
+      "sha": "302e30ea3becbc9a54a36363f47a0a1141b8d317",
+      "subject": "Exercise synthetic source references in the reproducible browser journey",
+      "stories": [],
+      "is_merge": false
+    },
+    {
+      "sha": "c14010e62ee25635e311aa12e979b11e5d3b74ed",
+      "subject": "Trace all V1 requirements to executable checks and historical evidence",
+      "stories": [],
+      "is_merge": false
+    },
+    {
+      "sha": "7339e561ae68c34e19de278d248a8ad5887505fc",
+      "subject": "Select backend test modes explicitly and verify persistence and isolated reset",
+      "stories": [],
+      "is_merge": false
+    },
+    {
+      "sha": "2bcbdede3c13918bf45dcf72862ffb2832b6d360",
+      "subject": "Isolate submission browser fixtures from manual demonstration data",
+      "stories": [],
+      "is_merge": false
+    },
+    {
+      "sha": "046de86c1b8b97e58506600bf8a06fa83cdce14e",
+      "subject": "Initialize fictional CLI connections from generated demo secrets",
+      "stories": [],
+      "is_merge": false
+    },
+    {
+      "sha": "86259102cabc5dbd6eb82edf0c0e3a858688ff90",
+      "subject": "Document clean submission recipe and fix unprivileged preview startup",
+      "stories": [],
+      "is_merge": false
+    },
+    {
+      "sha": "a0f417f5b789e2e78fd2d7877eec4ce3a25b3ddc",
+      "subject": "Add isolated reproducible submission runtime and verification",
+      "stories": [],
+      "is_merge": false
+    },
+    {
+      "sha": "99c272b09abaa5ffecf3286b406fbf065a445c7c",
+      "subject": "Logg: stopp tunnel etter fullført mobiltest",
+      "stories": [],
+      "is_merge": false
+    },
+    {
+      "sha": "1ed2c979226a93a312de51d21b667f6552f18010",
+      "subject": "docs(ops): record tunnel stopped after mobile test",
+      "stories": [],
+      "is_merge": false
+    },
+    {
+      "sha": "4c8eb80a34b415fa1560cbe22725c696c1bf5a2c",
+      "subject": "Logg: bekreftet mobilkontroll etter deploy",
+      "stories": [],
+      "is_merge": false
+    },
+    {
+      "sha": "b0737dea1a9d40410596a95b0a27bf33217bdaa5",
+      "subject": "docs(ops): record owner verified mobile deployment",
+      "stories": [],
+      "is_merge": false
+    },
+    {
+      "sha": "2ce6e82f96bf1209e473862e8892cd7d637115ee",
+      "subject": "Logg: deploy main 12.4 og konsolider fjernaksess",
+      "stories": [
+        "12.4"
+      ],
+      "is_merge": false
+    },
+    {
+      "sha": "b862ff80d85868d325b6975e8f553dd457d5738b",
+      "subject": "docs(ops): deploy accepted main and consolidate remote runtime",
+      "stories": [],
+      "is_merge": false
+    },
+    {
+      "sha": "a48f2132fd0059b21b9581bf27d337cb1561d55b",
+      "subject": "Logg: Story 12.4 flettet til main og brancher ryddet",
+      "stories": [
+        "12.4"
+      ],
+      "is_merge": false
+    },
+    {
+      "sha": "3639a3c4e20a30bf2c3dab79e40aae663c4fcf2d",
+      "subject": "docs: record safe cleanup of integrated 12.3 and 12.4 branches",
+      "stories": [
+        "12.3",
+        "12.4"
+      ],
+      "is_merge": false
+    },
+    {
+      "sha": "8b45c004cc2be2335b9371e4c5807e6f5ac20a14",
+      "subject": "docs: verify accepted Story 12.4 integration on main",
+      "stories": [
+        "12.4"
+      ],
+      "is_merge": false
+    },
+    {
+      "sha": "b0b2a6246b329ad0efa85b570c3f9a0d7a932c33",
+      "subject": "Merge accepted Story 12.4 complete user flow",
+      "stories": [
+        "12.4"
+      ],
+      "is_merge": true
+    },
+    {
+      "sha": "4e38e240917b29450e68f817b85411185ef5eac3",
+      "subject": "Logg: Story 12.4 godkjent av Jonas",
+      "stories": [
+        "12.4"
+      ],
+      "is_merge": false
+    },
+    {
+      "sha": "4198b1a17643f917c059e98426caba76ff1eb247",
+      "subject": "docs: record owner acceptance of Story 12.4",
+      "stories": [
+        "12.4"
+      ],
+      "is_merge": false
+    },
+    {
+      "sha": "3352003411fc23eec5577222982b37315b973f62",
+      "subject": "Logg: Fysisk nettbrettest av rettet Story 12.4",
+      "stories": [
+        "12.4"
+      ],
+      "is_merge": false
+    },
+    {
+      "sha": "2671ef70316814ebbb975b9789a676eddd978db5",
+      "subject": "test: qualify revised 12.4 flow on physical Lenovo tablet",
+      "stories": [
+        "12.4"
+      ],
+      "is_merge": false
+    },
+    {
+      "sha": "e655c02eefbb60032974f35a189f49009ae014f5",
+      "subject": "Logg: Forenklet skiftregistrering i Story 12.4",
+      "stories": [
+        "12.4"
+      ],
+      "is_merge": false
+    },
+    {
+      "sha": "7b69521e077777d6054afa9eb3928073c24807cc",
+      "subject": "docs: qualify committed 12.4 runtime and owner retest",
+      "stories": [
+        "12.4"
+      ],
+      "is_merge": false
+    },
+    {
+      "sha": "5ee35efb3753bed10bafc21a53a88fec3d93b287",
+      "subject": "fix: streamline story 12.4 shift preparation and approval",
+      "stories": [
+        "12.4"
+      ],
+      "is_merge": false
+    },
+    {
+      "sha": "9be6278e8cfdb2a118c044a43f03513af8a53e18",
+      "subject": "Logg: Story 12.4 ikke godkjent etter seks beståtte tester",
+      "stories": [
+        "12.4"
+      ],
+      "is_merge": false
+    },
+    {
+      "sha": "c884ade743edcc3739086703748ac22d45d2a695",
+      "subject": "Logg: Manuelt kontoskille bestått og gjeninnlogging klargjort",
+      "stories": [],
+      "is_merge": false
+    },
+    {
+      "sha": "4e7dfe2e258bf6b5c8b3c3312bd040a4c54cd0f5",
+      "subject": "Logg: Manuell utlogging bestått og kontobytte klargjort",
+      "stories": [],
+      "is_merge": false
+    },
+    {
+      "sha": "6e9669c0a986c09fcbab9ea645ff01cd21da37c1",
+      "subject": "Logg: Manuell Story 12.4 test 5 bestått",
+      "stories": [
+        "12.4"
+      ],
+      "is_merge": false
+    },
+    {
+      "sha": "fe94754ca6e97a6c9be0cf6de70e2f4c4f0759e9",
+      "subject": "Logg: Manuell Story 12.4 test 4 bestått",
+      "stories": [
+        "12.4"
+      ],
+      "is_merge": false
+    },
+    {
+      "sha": "e2394ba6fa07f31f3b8121c99b5799cb53d93c12",
+      "subject": "Logg: Manuell Story 12.4 test 3 bestått",
+      "stories": [
+        "12.4"
+      ],
+      "is_merge": false
+    },
+    {
+      "sha": "55c1da4d2522e9954b8e16be4b8198414cd0cbcd",
+      "subject": "Logg: Manuell Story 12.4 test 2 bestått",
+      "stories": [
+        "12.4"
+      ],
+      "is_merge": false
+    },
+    {
+      "sha": "9db6bca686e851de2390dbedd5703d190decda0d",
+      "subject": "Logg: Manuell Story 12.4 test 1 bestått",
+      "stories": [
+        "12.4"
+      ],
+      "is_merge": false
+    },
+    {
+      "sha": "7a7e2eb5aac30f4ed69aaf22fdf5fd09eae5b8aa",
+      "subject": "Logg: Fysisk USB-oppfølging av Story 12.4",
+      "stories": [
+        "12.4"
+      ],
+      "is_merge": false
+    },
+    {
+      "sha": "11d941507e486b347b93df23424e3e9d1e9f6141",
+      "subject": "docs: verify story 12.4 on physical Lenovo over USB",
+      "stories": [
+        "12.4"
+      ],
+      "is_merge": false
+    },
+    {
+      "sha": "80aea192e7918762f41fd4784e2cfafac1a7b75f",
+      "subject": "Logg: Story 12.4 komplett brukerflyt",
+      "stories": [
+        "12.4"
+      ],
+      "is_merge": false
+    },
+    {
+      "sha": "52ff079513819b013f7437d5ff59aebf4c604fce",
+      "subject": "docs: bind story 12.4 evidence to committed runtime",
+      "stories": [
+        "12.4"
+      ],
+      "is_merge": false
+    },
+    {
+      "sha": "5ca3f7df73f4cf49f5244dbc97a0a3ebb8de9891",
+      "subject": "test: verify complete user flow and refresh concurrent adoption",
+      "stories": [],
+      "is_merge": false
+    },
+    {
+      "sha": "c3e5d66a7d9faa9af19a58c6002538610c163352",
+      "subject": "Logg: Mobil PDF-opplasting godkjent og pushet",
+      "stories": [],
+      "is_merge": false
+    },
+    {
+      "sha": "c0e809f6cd350c2661979557269d2ecc81f3dabd",
+      "subject": "fix: preserve mobile PDF uploads across session restoration",
+      "stories": [],
+      "is_merge": false
+    },
+    {
+      "sha": "688ed8ab0b4383ae10c4c606e59ec21c117277c8",
+      "subject": "Logg: Mobil PDF-opplasting aktivert etter godkjenning",
+      "stories": [],
+      "is_merge": false
+    },
+    {
+      "sha": "2fcd02a3230929c7bb7e1d7da7d9f2a3c2cd8538",
+      "subject": "Logg: Mobil PDF-opplasting",
+      "stories": [],
+      "is_merge": false
+    },
+    {
+      "sha": "2dd1b1122dfa8093df156277dae4bb90da059588",
+      "subject": "Logg: Story 12.3 flettet og verifisert på main",
+      "stories": [
+        "12.3"
+      ],
+      "is_merge": false
+    },
+    {
+      "sha": "898514f2dc89104a24e615d3ee0a230dc831cf1f",
+      "subject": "docs: verify accepted Story 12.3 integration on main",
+      "stories": [
+        "12.3"
+      ],
+      "is_merge": false
+    },
+    {
+      "sha": "cd8b4405a1ef5752440e719c3f8abf1253584e11",
+      "subject": "Merge accepted Story 12.3 tablet and PC accessibility",
+      "stories": [
+        "12.3"
+      ],
+      "is_merge": true
+    },
+    {
+      "sha": "1ac729c16b28ae19a0c9509022c92cffe3298aa7",
+      "subject": "Logg: aksept og publisering av Story 12.3",
+      "stories": [
+        "12.3"
+      ],
+      "is_merge": false
+    },
+    {
+      "sha": "ea7764da1fd5528e4d410328bc2d424d9b2ca99c",
+      "subject": "docs: record accepted Story 12.3 and final Lenovo evidence",
+      "stories": [
+        "12.3"
+      ],
+      "is_merge": false
+    },
+    {
+      "sha": "e87049b9541e6881c4af71f02fdeb8acdf6e7537",
+      "subject": "Logg: fysisk Lenovo-test av Story 12.3",
+      "stories": [
+        "12.3"
+      ],
+      "is_merge": false
+    },
+    {
+      "sha": "043ddd29698fb88b0871b643804efec24ed9d46b",
+      "subject": "test: preserve exact physical-device evidence bytes",
+      "stories": [],
+      "is_merge": false
+    },
+    {
+      "sha": "70afccfb0f2309a411c8909c0765fbf89e3b555e",
+      "subject": "test: record physical Lenovo Brave verification for Story 12.3",
+      "stories": [
+        "12.3"
+      ],
+      "is_merge": false
+    },
+    {
+      "sha": "78ea4d780bc06a1d57c98059ae44d06db34d0061",
+      "subject": "Logg: USB-tilgang til isolert Story 12.3",
+      "stories": [
+        "12.3"
+      ],
+      "is_merge": false
+    },
+    {
+      "sha": "d0369b33b4597d8abcebe9877a31c365c0a359c7",
+      "subject": "Logg: story-12-3-nettbrett-og-pc",
+      "stories": [],
+      "is_merge": false
+    },
+    {
+      "sha": "50192e9c78168250df9018dbb1dd9bda5c0fb406",
+      "subject": "docs: qualify Story 12.3 against accepted current main",
+      "stories": [
+        "12.3"
+      ],
+      "is_merge": false
+    },
+    {
+      "sha": "8ca318b55b98eb34de54f29ecab038322e3ccab6",
+      "subject": "test: harden reconciled tablet build and transport verification",
+      "stories": [],
+      "is_merge": false
+    },
+    {
+      "sha": "1197a1fd02aacd99ce27dd561db6990d84d054f4",
+      "subject": "merge: reconcile accepted main with Story 12.3 tablet views",
+      "stories": [
+        "12.3"
+      ],
+      "is_merge": true
+    },
+    {
+      "sha": "74849ff21bee108fe9cff93d740a96a6c6d2d7c5",
+      "subject": "Logg: status-story-12-1-og-12-2",
+      "stories": [],
+      "is_merge": false
+    },
+    {
+      "sha": "83671212f138fa1e4c6f7825fffaf759261bd2ab",
+      "subject": "fix: clarify demo save feedback and record Story 12 acceptance",
+      "stories": [],
+      "is_merge": false
+    },
+    {
+      "sha": "fd63675cb668b318568884d2072626e877472933",
+      "subject": "Logg: status-story-12-1-og-12-2",
+      "stories": [],
+      "is_merge": false
+    },
+    {
+      "sha": "c7a6170beb360b7541c5aeaced805ff78db73f3e",
+      "subject": "Logg: status-story-12-1-og-12-2",
+      "stories": [],
+      "is_merge": false
+    },
+    {
+      "sha": "cc3a6922d253ba98b0cba3ed2ece9d7db3a9eb06",
+      "subject": "Logg: status-story-12-1-og-12-2",
+      "stories": [],
+      "is_merge": false
+    },
+    {
+      "sha": "1e0433795d137ec1ca063a9611fb04ef684b47a9",
+      "subject": "Logg: status-story-12-1-og-12-2",
+      "stories": [],
+      "is_merge": false
+    },
+    {
+      "sha": "1f0f562e45099681066a0bdaed06d80c82765b19",
+      "subject": "Logg: status-story-12-1-og-12-2",
+      "stories": [],
+      "is_merge": false
+    },
+    {
+      "sha": "5f0aeac77713007203a7aa61faaa6e7436369ae0",
+      "subject": "Logg: status-story-12-1-og-12-2",
+      "stories": [],
+      "is_merge": false
+    },
+    {
+      "sha": "a19a397028e96e4d041fd4dd21a2da605cd344c6",
+      "subject": "Logg: status-story-12-1-og-12-2",
+      "stories": [],
+      "is_merge": false
+    },
+    {
+      "sha": "9a669df4c739035300345d0b9d795f239b86f1e1",
+      "subject": "Logg: status-story-12-1-og-12-2",
+      "stories": [],
+      "is_merge": false
+    },
+    {
+      "sha": "829251da5bbd8cc1d33fbfdc6fe28d65dce09bd2",
+      "subject": "Logg: status-story-12-1-og-12-2",
+      "stories": [],
+      "is_merge": false
+    },
+    {
+      "sha": "dfaa289ed7885c6eeaa02fbf08cb768954238d81",
+      "subject": "docs: prepare Story 12.1 and 12.2 acceptance testing on current main",
+      "stories": [
+        "12.1",
+        "12.2"
+      ],
+      "is_merge": false
+    },
+    {
+      "sha": "83cdd2b344aa8ec717d42cd3ecd055daad97a222",
+      "subject": "Logg: publiser nettbrettilgang til origin main",
+      "stories": [],
+      "is_merge": false
+    },
+    {
+      "sha": "3c6282d6e31236b039abc7ef1821fb19c4d5530d",
+      "subject": "Logg: avslutt nettbrettpilot og dokumenter testgrenser",
+      "stories": [],
+      "is_merge": false
+    },
+    {
+      "sha": "c4813f6f7c9e4db34e939a59cc1ec2bdc633fa99",
+      "subject": "docs: record completed tablet pilot and remaining verification limits",
+      "stories": [],
+      "is_merge": false
+    },
+    {
+      "sha": "40bd15de71058563f8cdd12d569d17d43cf26d35",
+      "subject": "Logg: status-story-12-1-og-12-2",
+      "stories": [],
+      "is_merge": false
+    },
+    {
+      "sha": "62a0cf4f67f2ce1ea2b0da78c76858a10d7adf11",
+      "subject": "Logg: nettbrettilgang merget og isolert verifisert",
+      "stories": [],
+      "is_merge": false
+    },
+    {
+      "sha": "5cccfc93e856a5e25db5d4b9cc986ce9175a3ba7",
+      "subject": "docs: record tablet merge validation and preserved runtime",
+      "stories": [],
+      "is_merge": false
+    },
+    {
+      "sha": "ca1d6470fcab636fe9c754f02d78990e418f0cca",
+      "subject": "merge: combine isolated tablet access with current main",
+      "stories": [],
+      "is_merge": true
+    },
+    {
+      "sha": "252616ba84cc1afb02a92ad2a86bc40c6af0fd32",
+      "subject": "Logg: nettbrett-tokenlagring og tilgangsprøver",
+      "stories": [],
+      "is_merge": false
+    },
+    {
+      "sha": "35c45481ab0e88a06b8346c2522e1a2f6cdabc78",
+      "subject": "feat: prepare isolated tablet access with Cloudflare Access",
+      "stories": [],
+      "is_merge": false
+    },
+    {
+      "sha": "d5bf85d81b813e040bd718504d6edbddc5ae70ac",
+      "subject": "Logg: status-story-12-1-og-12-2",
+      "stories": [],
+      "is_merge": false
+    },
+    {
+      "sha": "df840655ec0a9c9666b59d6fd4981e7f0ffc3585",
+      "subject": "Logg: story-12-3-nettbrett-og-pc",
+      "stories": [],
+      "is_merge": false
+    },
+    {
+      "sha": "63e6aea769fb1be6eaff7450219f498f9cfd4a6c",
+      "subject": "Logg: story-12-3-nettbrett-og-pc",
+      "stories": [],
+      "is_merge": false
+    },
+    {
+      "sha": "98c4a94eb83c627e95d7b9e5499a66bb198c3e79",
+      "subject": "docs(12.3): preserve verified evidence and manual test handoff",
+      "stories": [
+        "12.3"
+      ],
+      "is_merge": false
+    },
+    {
+      "sha": "93293117199d6a2c2066b836af9b4d0b0cd9bc5c",
+      "subject": "test(12.3): verify clipped fields and parent-exit cleanup",
+      "stories": [
+        "12.3"
+      ],
+      "is_merge": false
+    },
+    {
+      "sha": "e66d80f8639bdccc7b81165f3b840342943d194c",
+      "subject": "feat(12.3): unify manual themes and qualify accessible tablet views",
+      "stories": [
+        "12.3"
+      ],
+      "is_merge": false
+    },
+    {
+      "sha": "a5b7ca4c830e75c67bb1b4b568a3fa7b9270ee95",
+      "subject": "docs(12.3): record isolated accessibility implementation scope",
+      "stories": [
+        "12.3"
+      ],
+      "is_merge": false
+    },
+    {
+      "sha": "ce0669f6f75f337a2df9471860be1b66efb171f0",
+      "subject": "Logg: status-story-12-1-og-12-2",
+      "stories": [],
+      "is_merge": false
+    },
+    {
+      "sha": "a29b4c116bfc364dc50f9a3e2becb350a0c1b669",
+      "subject": "Logg: status-story-12-1-og-12-2",
+      "stories": [],
+      "is_merge": false
+    },
+    {
+      "sha": "a9242ab118b4bf73f21224cc979e8f6b1a7df573",
+      "subject": "docs(12): record main verification and pending manual handoff",
+      "stories": [],
+      "is_merge": false
+    },
+    {
+      "sha": "f13d28991ac85934826f0da7b7b81fbc09181f24",
+      "subject": "merge: integrate Stories 12.1 and 12.2 pending Jonas acceptance",
+      "stories": [
+        "12.1",
+        "12.2"
+      ],
+      "is_merge": true
+    },
+    {
+      "sha": "05ef8ba8831151ac7f32bd6d72bed2d2d17cd98f",
+      "subject": "Logg: status-story-12-1-og-12-2",
+      "stories": [],
+      "is_merge": false
+    },
+    {
+      "sha": "4d678513267eeb16ca35f5646401ccab80885ddd",
+      "subject": "feat(12): integrate retained-data and fictional assessment for local testing",
+      "stories": [],
+      "is_merge": false
+    },
+    {
+      "sha": "466368c5b3de7ffeb3d4ef802b33c93112978a2b",
+      "subject": "Logg: status-story-12-1-og-12-2",
+      "stories": [],
+      "is_merge": false
+    },
+    {
+      "sha": "b54246fdb4fc6cc6318c63b4705de4961586f41c",
+      "subject": "merge: integrate Story 12.2 while preserving retention and pending acceptance",
+      "stories": [
+        "12.2"
+      ],
+      "is_merge": true
+    },
+    {
+      "sha": "94f9a2006457c7196322804276b95226a12dce01",
+      "subject": "merge: integrate Story 12.1 pending owner testing",
+      "stories": [
+        "12.1"
+      ],
+      "is_merge": true
+    },
+    {
+      "sha": "e8221ff3a61a86beaa5d42c91b9a4c4df69e28f6",
+      "subject": "Logg: story-12-2-fictional-assessment",
+      "stories": [],
+      "is_merge": false
+    },
+    {
+      "sha": "8be5ccde2ffca671366e1e1a1a836bd504b73e65",
+      "subject": "feat(12.2): add repeatable fictional assessment and isolated verification",
+      "stories": [
+        "12.2"
+      ],
+      "is_merge": false
+    },
+    {
+      "sha": "533ca88dc2c99533eb5c11f6bb58d6ee4fe7bde8",
+      "subject": "Logg: story-12-1-retained-data-boundary",
+      "stories": [],
+      "is_merge": false
+    },
+    {
+      "sha": "8428b8724c64ce67638ed32665af455566bcd2da",
+      "subject": "feat(12.1): enforce fixed retention and server-issued notice admission",
+      "stories": [
+        "12.1"
+      ],
+      "is_merge": false
+    },
+    {
+      "sha": "85bf56ef48271868df2c486d883c43081180f2ff",
+      "subject": "Logg: status-story-12-1-og-12-2",
+      "stories": [],
+      "is_merge": false
+    }
+  ],
+  "topNonMergeSourceChurn": [
+    {
+      "path": "scripts/verify-story12-integration.py",
+      "added": 430,
+      "deleted": 0,
+      "net": 430,
+      "commit_count": 1,
+      "binary_revisions": 0
+    },
+    {
+      "path": "scripts/verify-story123.py",
+      "added": 304,
+      "deleted": 20,
+      "net": 284,
+      "commit_count": 3,
+      "binary_revisions": 0
+    },
+    {
+      "path": "scripts/test_verify_story12_integration.py",
+      "added": 198,
+      "deleted": 0,
+      "net": 198,
+      "commit_count": 1,
+      "binary_revisions": 0
+    },
+    {
+      "path": "scripts/test_verify_story124.py",
+      "added": 173,
+      "deleted": 0,
+      "net": 173,
+      "commit_count": 1,
+      "binary_revisions": 0
+    },
+    {
+      "path": "scripts/submission.mjs",
+      "added": 179,
+      "deleted": 21,
+      "net": 158,
+      "commit_count": 5,
+      "binary_revisions": 0
+    },
+    {
+      "path": "scripts/verify-retained-data.py",
+      "added": 164,
+      "deleted": 7,
+      "net": 157,
+      "commit_count": 2,
+      "binary_revisions": 0
+    },
+    {
+      "path": "scripts/tablet-proxy-probe.py",
+      "added": 129,
+      "deleted": 0,
+      "net": 129,
+      "commit_count": 1,
+      "binary_revisions": 0
+    },
+    {
+      "path": "scripts/test_verify_story123.py",
+      "added": 125,
+      "deleted": 0,
+      "net": 125,
+      "commit_count": 3,
+      "binary_revisions": 0
+    },
+    {
+      "path": "scripts/audit-story124-runtime.py",
+      "added": 121,
+      "deleted": 0,
+      "net": 121,
+      "commit_count": 1,
+      "binary_revisions": 0
+    },
+    {
+      "path": "scripts/verify-submission-runtime.mjs",
+      "added": 123,
+      "deleted": 8,
+      "net": 115,
+      "commit_count": 3,
+      "binary_revisions": 0
+    },
+    {
+      "path": "frontend/src/FictionalAssessment.tsx",
+      "added": 134,
+      "deleted": 19,
+      "net": 115,
+      "commit_count": 3,
+      "binary_revisions": 0
+    },
+    {
+      "path": "scripts/verify-story122.py",
+      "added": 112,
+      "deleted": 0,
+      "net": 112,
+      "commit_count": 1,
+      "binary_revisions": 0
+    },
+    {
+      "path": "scripts/verify-story12-checks.py",
+      "added": 109,
+      "deleted": 0,
+      "net": 109,
+      "commit_count": 1,
+      "binary_revisions": 0
+    },
+    {
+      "path": "scripts/verify-story124.py",
+      "added": 101,
+      "deleted": 0,
+      "net": 101,
+      "commit_count": 1,
+      "binary_revisions": 0
+    },
+    {
+      "path": "scripts/test-prepare-story124-tests.mjs",
+      "added": 81,
+      "deleted": 0,
+      "net": 81,
+      "commit_count": 1,
+      "binary_revisions": 0
+    }
+  ],
+  "lineCounts": [
+    {
+      "path": "frontend/src/PrivateDrafts.tsx",
+      "before": 396,
+      "after": 445
+    },
+    {
+      "path": "frontend/src/PrivateNotices.tsx",
+      "before": 343,
+      "after": 384
+    },
+    {
+      "path": "frontend/src/PrivateAccess.tsx",
+      "before": 253,
+      "after": 284
+    },
+    {
+      "path": "frontend/src/PrivateConfirmation.tsx",
+      "before": 327,
+      "after": 332
+    },
+    {
+      "path": "frontend/src/FictionalAssessment.tsx",
+      "before": 0,
+      "after": 115
+    },
+    {
+      "path": "scripts/submission.mjs",
+      "before": 0,
+      "after": 158
+    },
+    {
+      "path": "scripts/verify-story12-integration.py",
+      "before": 0,
+      "after": 430
+    }
+  ],
+  "snapshot": "c067fdbb20150219c041588ed4e990e7b0ef6b94",
+  "executableDifferencesFromSnapshot": [],
+  "priorRuntimeAttempt": {
+    "date": "2026-10-29T06:35:04.655Z",
+    "source": "62ac07586681b22812a633c676e2f18ba49c7489",
+    "observations": [],
+    "requests": [
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:15325/demo.html"
+      }
+    ],
+    "errors": [],
+    "ok": false,
+    "failure": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:15325/demo.html\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:15325/demo.html\", waiting until \"load\"\u001b[22m\n"
+  },
+  "freshObservation": {
+    "date": "2026-10-29T06:35:48.055Z",
+    "source": "62ac07586681b22812a633c676e2f18ba49c7489",
+    "observations": [
+      "Selection before explicit Start cannot save an outcome.",
+      "Explicit Start/outcome/end produces read-only fictional recap; untouched outcomes stay unknown.",
+      "Reload discards only this fresh context's in-memory simulation. No reset/lifecycle/private mutation issued."
+    ],
+    "requests": [
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:61975/demo.html"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:61975/assets/demo-CVYX95Ri.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:61975/assets/FictionalAssessment-DgWBF5_Z.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:61975/assets/FictionalAssessment-Ca5gn51W.css"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:61975/demo.html"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:61975/assets/demo-CVYX95Ri.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:61975/assets/FictionalAssessment-DgWBF5_Z.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:61975/assets/FictionalAssessment-Ca5gn51W.css"
+      }
+    ],
+    "errors": [],
+    "origin": "http://127.0.0.1:61975",
+    "method": "Fresh static Vite build; isolated in-memory demo, no API/PostgreSQL exercised",
+    "assets": [
+      {
+        "url": "http://127.0.0.1:61975/assets/demo-CVYX95Ri.js",
+        "status": 200,
+        "sha256": "426dd3c6fb5fa7af760bd0a18c8503c99e63f433ac8403a78427f04bc476c3ee"
+      },
+      {
+        "url": "http://127.0.0.1:61975/assets/FictionalAssessment-Ca5gn51W.css",
+        "status": 200,
+        "sha256": "d436cb47d234e7a034e820876840f7cb88c6e119b2912f0c3cb996228416e2d3"
+      }
+    ],
+    "storage": {
+      "local": {},
+      "session": {},
+      "serviceWorkers": 0
+    },
+    "ok": true
+  },
+  "reviewDiffSha256": "3635ba785b7919e61ec44589247dc54f89fd929857a717c20e845a5bef99e1d4",
+  "finalization": {
+    "ok": true,
+    "retro_key_found": true,
+    "retro_status_before": "optional",
+    "retro_status_after": "done",
+    "action_items_added": 2,
+    "action_items_updated": 0,
+    "last_updated": "10-29-2026 07:41",
+    "verdict": "accepted-with-open-items"
+  },
+  "documentVerification": {
+    "linksChecked": 37,
+    "allLinksExist": true,
+    "onlyFourConfirmedPriorActionsChanged": true,
+    "onlyRetroDevelopmentStatusChanged": true,
+    "newActions": 2,
+    "reviewFindings": 10,
+    "productPathsUnchangedFromSnapshot": true
+  },
+  "confirmedEarlierActionUpdate": {
+    "ok": true,
+    "retro_key_found": null,
+    "retro_status_before": null,
+    "retro_status_after": null,
+    "action_items_added": 0,
+    "action_items_updated": 4,
+    "last_updated": "10-29-2026 07:44",
+    "verdict": null
+  }
+}
