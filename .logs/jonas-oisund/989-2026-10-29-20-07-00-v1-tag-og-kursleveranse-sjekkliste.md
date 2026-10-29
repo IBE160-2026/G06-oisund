@@ -35,6 +35,10 @@ Nye [delivery-readiness.md](../../docs/submission/delivery-readiness.md) samler 
 
 Kontroll:181 lokale lenker/overskriftsankere i ti endrede/nye Markdown-filer bestod; fire PowerShell-blokker i README bestod parserkontroll uten kjøring. Git-diff viser uendret godkjent backend/frontend/scripts/deploy/Compose/eksempelfiler mot3c2287e og uendret historisk docs/evidence motb3adc70. Ingen produkt-/nettlesertester ble kjørt om igjen, og ingen oppstarts-/Docker-/ADB-/driftskommando ble kjørt. Ti dokumentfiler er klargjort i arbeidskopien for gjennomgang, ikke produktcommittet eller pushet. Bare denne loggen og issues committes lokalt etter instruksen; ingen tag/release, innlevering, serverbonus eller utvidelse er opprettet/utført. Originalcheckout står fortsatt på separat setup/ubuntu-server; vi endrer ikke det arbeidet.
 
+Publisering etter ny uttrykkelig bestilling29.10: Jonas ba om commit og push av dokumentasjonsendringene, med refleksjon fortsatt som forslag og driftskontrollene åpne for egen chat. De ti dokumentfilene er committet separat somb9d29458837d1dfaaff45e13bdaf7f99f1ee6c07 («docs: prepare self-contained V1 delivery and track pending operations»). Diff-/statuskontroll bekreftet korrekt scope, tomt tidligere stagingområde og uendret godkjent produkt/historisk evidens. HANDOFF er samordnet med den nye publiseringsfullmakten; ingen refleksjonsaksept eller driftsresultater er utledet.
+
+Push til origin/main lyktes9719383..b9d2945, inkludert de to tidligere lokale loggcommittene; faktisk ls-remote bekreftetb9d29458837d1dfaaff45e13bdaf7f99f1ee6c07. Denne etterfølgende logg-/issuesoppdateringen committes/pushes separat, med endelig lokal/fjernlikhet og ren Git-status kontrollert etterpå. Refleksjonen er fremdeles tydelig AI-assistert forslag for Jonas; O1–O6 står open/not qualified og det er ikke importert rapport fra annen chat. Ingen tag/release, innlevering, produktendring, serverbonus eller driftsoperasjon er utført.
+
 ### Åpne punkter
 
 - Bekreft gjeldende originale kurskrav, frist, prosjekt-/solo-godkjenning og vurderers innleverings-/tilgangsordning.
