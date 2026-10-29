@@ -151,7 +151,7 @@ action_items:
       release pending navigation guards without reporting success, resending, or changing
       saved records. Add deleted-plan recovery coverage."
     owner: "Developer / QA"
-    status: in-progress
+    status: done # C1 technical/personal evidence and explicit owner acceptance 2026-10-29; future practice remains standing.
     ref: "D:\\IBE160\\_bmad-output\\implementation-artifacts\\epic-11-retro-2026-10-26.md"
   - id: "epic-11-retro-item-2-refresh-comparison-adoption"
     epic: 11
@@ -168,7 +168,7 @@ action_items:
       current facts. Preserve exact error-contract tests across controllers; consider
       machine codes only through a separately approved compatible contract."
     owner: "Developer / QA"
-    status: in-progress
+    status: done # C1 technical/personal evidence and explicit owner acceptance 2026-10-29; future practice remains standing.
     ref: "D:\\IBE160\\_bmad-output\\implementation-artifacts\\epic-11-retro-2026-10-26.md"
   - id: "epic-11-retro-item-4-restore-notice-invoker-focus"
     epic: 11
@@ -183,7 +183,7 @@ action_items:
       notice source/validity times in the repeated Oslo hour, without changing stored
       instants or historical receipts. Add both-fold presentation coverage."
     owner: "Developer / QA"
-    status: in-progress
+    status: done # C1 technical/personal evidence and explicit owner acceptance 2026-10-29; future practice remains standing.
     ref: "D:\\IBE160\\_bmad-output\\implementation-artifacts\\epic-11-retro-2026-10-26.md"
   - id: "epic-11-retro-item-6-pin-late-expiry-boundaries"
     epic: 11
@@ -201,7 +201,7 @@ action_items:
       ending and legacy missing endings. Use owner examples as independent acceptance
       expectations."
     owner: "Jonas / Developer"
-    status: in-progress
+    status: done # C1 technical/personal evidence and explicit owner acceptance 2026-10-29; future practice remains standing.
     ref: "D:\\IBE160\\_bmad-output\\implementation-artifacts\\epic-11-retro-2026-10-26.md"
   - id: "epic-11-retro-item-8-retain-execution-evidence"
     epic: 11
@@ -263,5 +263,5 @@ action_items:
       path with Jonas before the final gate; record actual labels, feedback, scrolling
       and touch observations separately from technical results and explicit acceptance."
     owner: "Jonas / Developer"
-    status: in-progress
+    status: done # C1 technical/personal evidence and explicit owner acceptance 2026-10-29; future practice remains standing.
     ref: "_bmad-output/implementation-artifacts/epic-12-retro-2026-10-29.md"

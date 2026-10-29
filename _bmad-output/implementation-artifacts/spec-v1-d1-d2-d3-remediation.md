@@ -6,9 +6,11 @@ status: done
 route: dispatch
 review_loop_iteration: 0
 baseline_commit: 6d1259628c5fc7cec2d649e4097331d1606d9574
-owner_acceptance: pending
+owner_acceptance: accepted
 context: []
 ---
+
+**Owner decision:** Jonas explicitly accepted C1/local V1 with “Jeg godkjenner kandidaten og V1-grunnlaget” after all personal controls. Integration/closure authority below is now effective; final checks remain.
 
 **Later continuation authority (29October):** Jonas requests completion through V1 closure. Server setup is separate bonus work, excluded from V1/prerequisites. After explicit C1 candidate approval and fulfilled actual criteria, main integration/checks/push, Epic12/V1 closure and safe deletion of the fully integrated follow-up branch are authorized without another merge question. Production operations, server move, release/tag, coursework and extensions remain excluded. The frozen implementation boundary below records the earlier authorization; this explicit later instruction supersedes its no-merge/no-closure restriction only under those conditions. [Current execution/owner record](../../docs/evidence/v1-acceptance-2026-10-29.md).
 

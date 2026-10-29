@@ -1,5 +1,7 @@
 # Known limits
 
+Current owner decision29October2026: **“Jeg godkjenner kandidaten og V1-grunnlaget”**, after all actual personal controls; [record](../evidence/v1-acceptance-2026-10-29.md). Main integration/checks and final Epic12/V1 status follow next. Older pending wording below describes earlier checkpoints; it does not override this explicit acceptance. Server bonus and broader external operations are excluded.
+
 Current C1 qualification supplements this historical12.5 list: [fresh delivery/actual Lenovo and owner controls](../evidence/v1-acceptance-2026-10-29.md). B6–B10 are technically repaired in C1; the older running deployment retains its version. External expired-token/member-MFA/WAN/IPv6/DNS proof limits remain unqualified, not approved deferrals. Server setup is separate bonus work, outside V1 and its prerequisites. Whole-candidate acceptance/integration are pending at this checkpoint.
 
 [V1 closure assessment](v1-closeout.md) is the consolidated remaining-work and decision register. Its proposed dispositions do not silently approve deferrals, close product defects or certify operational deployment. Accepted scope limits below remain distinct from unresolved defects and test gaps.

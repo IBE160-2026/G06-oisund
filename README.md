@@ -6,20 +6,20 @@ This V1 imports a supported text-PDF shift, permits correction and explicit savi
 
 ## Clean checkout and startup
 
-The corrected D1–D3 product snapshot is **`3c2287ed68d0cbb1923439fc6ee00254395072a4`**, newly tested in a separate delivery checkout; whole-candidate owner acceptance remains pending. Use its [current reproduction recipe](docs/submission/v1-followup-reproduction.md#corrected-delivery-snapshot-and-executed-recipe), [fresh reproduction/physical-device record](docs/evidence/v1-acceptance-2026-10-29.md) and [qualification/source ledger](docs/submission/v1-followup-qualification.md). Server setup is separate bonus work, excluded from this V1 and its prerequisites. The accepted `c067fdb` recipe below remains historical; no candidate deployment or course submission follows from a test pass.
+The corrected D1–D3 product snapshot is **`3c2287ed68d0cbb1923439fc6ee00254395072a4`**, newly tested in a separate delivery checkout; Jonas accepted the whole candidate and local V1 basis on29October2026. Use its [current reproduction recipe](docs/submission/v1-followup-reproduction.md#corrected-delivery-snapshot-and-executed-recipe), [fresh reproduction/physical-device record](docs/evidence/v1-acceptance-2026-10-29.md) and [qualification/source ledger](docs/submission/v1-followup-qualification.md). Server setup is separate bonus work, excluded from this V1 and its prerequisites. The accepted `c067fdb` recipe below remains historical; no candidate deployment or course submission follows from a test pass.
 
 Install Git, Node.js 24 with npm, Docker Desktop with Linux containers and Compose v2. Use a desktop Chromium browser. Exact tested versions/source are in the [reproduction record](docs/evidence/12-5-reproduction.md). Run commands in the checkout root in PowerShell or a POSIX terminal:
 
 ```powershell
 git clone --branch main https://github.com/IBE160-2026/G06-oisund.git ibe160-submission
 cd ibe160-submission
-git checkout --detach c067fdbb20150219c041588ed4e990e7b0ef6b94
+git checkout --detach 3c2287ed68d0cbb1923439fc6ee00254395072a4
 git rev-parse HEAD
 node scripts/submission.mjs init
 node scripts/submission.mjs status
 ```
 
-Expected HEAD: `c067fdbb20150219c041588ed4e990e7b0ef6b94`. This immutable snapshot contains the reviewed source and executed evidence. Main also contains later acceptance/integration/session documentation; the checkout command keeps the demonstrated version fixed. The snapshot's historical README names the former story branch: use the clone-from-main command above when starting a new checkout. [Main integration](docs/evidence/12-5-main-integration.md).
+Expected HEAD: `3c2287ed68d0cbb1923439fc6ee00254395072a4`, the owner-accepted corrected product snapshot. Its original README still names c067fdb; follow this current checkout command. The C1 recipe is verified by [fresh isolated reproduction](docs/evidence/v1-acceptance-2026-10-29.md#fresh-delivery-reproduction), with the exact namespace/port adaptation used on this occupied host stated explicitly. The historical accepted12.5 snapshot `c067fdbb20150219c041588ed4e990e7b0ef6b94` and [its integration/evidence](docs/evidence/12-5-main-integration.md) remain unchanged. Later documentation/log commits do not change C1 product bytes.
 
 The delivery is versioned Git content; no local archive is needed. `init` generates ignored local database/account secrets, pulls pinned base images, freshly installs locked npm/Python dependencies with an uncached build, builds the frontend, starts five services, applies versioned migrations and idempotently seeds the fictional day and synthetic account. Expect healthy containers, a fictional day UUID and synthetic-account confirmation. Every failed subprocess exits nonzero; resolve the failure before continuing.
 

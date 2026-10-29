@@ -1,5 +1,7 @@
 # Requirement-to-test traceability
 
+Current owner decision29October2026: **“Jeg godkjenner kandidaten og V1-grunnlaget”**, after all actual personal controls; [record](../evidence/v1-acceptance-2026-10-29.md). Main integration/checks and final Epic12/V1 status follow next. Older pending wording below describes earlier checkpoints; it does not override this explicit acceptance. Server bonus and broader external operations are excluded.
+
 Current C1 supplement: [fresh corrected-snapshot reproduction and actual Lenovo22/22](../evidence/v1-acceptance-2026-10-29.md), with actual API/PostgreSQL delivery3/3, guarded lifecycle and all served-source hashes. These add C1 evidence for AC-07/09/10/11/12 and NFR-2/3/4 without relabelling the historical matrices. Personal selection/Start rejection controls passed; remaining grouped assessment/whole-candidate acceptance is pending. Server bonus work is excluded. No expired-token/assigned-member result is inferred from the owner's available active token/non-member account.
 
 The authorized post-retrospective D1–D3 candidate has its own [qualification and per-family crosswalk](v1-followup-qualification.md). This supplements the historical matrices below; it does not relabel their source revisions or replace the accepted `c067fdb` snapshot. Candidate product acceptance and Epic12 closure remain pending.

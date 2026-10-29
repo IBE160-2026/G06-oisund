@@ -1,5 +1,7 @@
 # Reader review checklist
 
+Current owner decision29October2026: **“Jeg godkjenner kandidaten og V1-grunnlaget”**, after all actual personal controls; [record](../evidence/v1-acceptance-2026-10-29.md). Main integration/checks and final Epic12/V1 status follow next. Older pending wording below describes earlier checkpoints; it does not override this explicit acceptance. Server bonus and broader external operations are excluded.
+
 The corrected product snapshot is C1 `3c2287e`; [fresh recipe results and actual Lenovo/personal controls](../evidence/v1-acceptance-2026-10-29.md) supplement the original12.5 record below. Reuse valid versioned results; do not rerun the full historical backend suite merely to complete the checklist. Owner whole-candidate approval remains a separate pending decision.
 
 Use the [README commands](../../README.md) in a fresh versioned checkout. Record your `git rev-parse HEAD`, Docker/Compose/Node/browser versions, command exits and any failure before retrying. The existing [reproduction report](../evidence/12-5-reproduction.md) identifies which checks have already run and their source limits.

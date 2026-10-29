@@ -5,6 +5,6 @@
 /docs/evidence/12-5-*.txt -whitespace
 
 # New verification methods/logs are indexed by their exact executed bytes.
-/docs/evidence/v1-acceptance-methods/** -text
+/docs/evidence/v1-acceptance-methods/** -text -whitespace
 /docs/evidence/v1-acceptance-reproduction/** -text -whitespace
 /docs/evidence/v1-acceptance-init-completion-tail.txt -text -whitespace
