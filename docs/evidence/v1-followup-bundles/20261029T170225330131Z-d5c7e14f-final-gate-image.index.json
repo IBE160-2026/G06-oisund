@@ -1,0 +1,14 @@
+{
+  "archive": "docs\\evidence\\v1-followup-bundles\\20261029T170225330131Z-d5c7e14f-final-gate-image.tar.gz",
+  "archive_sha256": "634ea3ecb80cdde2c698cb4606cbc9c89ed538a059202df86deeec53a7633f6c",
+  "entries": {
+    "record.json": "2d113278c4b4a8bf396d0d7cebc902879b656c74ddba4508f4fa898d828f2857",
+    "raw/command.log": "a098099908e6581f4faa29da65cfb68f195ca7769989ccb6f6ce9117e6f061b2",
+    "executed-inputs/scripts/verify-retained-data.py": "afeb95a05627a2282c140be8327e7bde662ab9b474a60449d571acd94b314d32",
+    "executed-inputs/scripts/verify-story12-integration.py": "b1b7fb4bf92397071be94e39bbb9cbda3568baed96ede5d226abfc6bd02e70e6",
+    "executed-inputs/scripts/verify-story123.py": "22f46e8622c9df302a06c9cc8a658089a114f11686d06ce17fbd2d18e79fb74f",
+    "executed-inputs/scripts/verify-v1followup.py": "12d9cb51d00b326353cd471ea7d7454d65e9dd11f0e303924ea0b7c49497d302",
+    "executed-inputs/tmp/run-recorded.py": "993c00de0f3877bf970fff1212995e6edf55cf19bda74f4375b060ce15c9e697",
+    "executed-inputs/deploy/tablet/access_gate/Dockerfile": "f7df6b1c9cf4020c318df29b4822687cc91a78e3cf33a2c10454a8f47ac71ea7"
+  }
+}

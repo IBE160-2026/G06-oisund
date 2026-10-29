@@ -1,12 +1,16 @@
 ---
 date: 2026-10-29
-status: awaiting-owner-decisions
+status: candidate-qualified-owner-pending
 scope: SCOPE-02-course-V1
 epic_12: in-progress
 deferrals_approved_by_this_document: false
 ---
 
 # V1 closure assessment
+
+## Owner decision and active follow-up
+
+On29October2026 Jonas chose **implementation and missing qualification instead of the proposed deferrals** for D1/D2/D3. Work is authorized on the separate `followup/v1-d1-d2-d3` branch. E12-A2 is adopted as future practice, and the early abandonment/rejection/offset design direction is confirmed as a starting point. No implemented-product acceptance, main merge or Epic12 closure is granted. The assessment and proposed decisions below are the **historical pre-remediation closeout checkpoint**, retained unchanged for traceability. [Current qualification ledger](v1-followup-qualification.md), [implementation specification](../../_bmad-output/implementation-artifacts/spec-v1-d1-d2-d3-remediation.md) and [standing walkthrough practice](../working-practices.md) govern follow-through; a point is complete only after its actual criteria pass.
 
 All 20 SCOPE-02 stories are accepted and integrated. The [Epic 12 retrospective](../../_bmad-output/implementation-artifacts/epic-12-retro-2026-10-29.md) is complete with `accepted-with-open-items`. No newly demonstrated blocking privacy, duplicate-write, stale-overwrite or retained-data resurrection defect was established in that retrospective. **Formal V1 closure still needs explicit disposition of the residual defects and verification work below.** Story approval and the earlier four tracker-status approvals do not approve those deferrals.
 
@@ -20,7 +24,9 @@ The recommended boundary is the accepted, reproducible local V1 at immutable sou
 
 Historical results retain their versions: 12.1 stable 441 backend/479 browser; integrated 477/479 plus affected passes; 12.4 broad317/5/4 followed by final affected64/64 and controlled mobile32/32; 12.5 final367 private+113 parser/assessment and three actual browser journeys. These counts overlap and are not summed. Device actions, personal approval and simulation remain different evidence. No broad suite, runtime reset, service operation or physical test was repeated for this documentation change.
 
-## Consolidated remaining work and dispositions
+## Historical consolidated remaining work and dispositions
+
+The rows below describe the pre-remediation checkpoint, not the current branch's recommendation. Jonas subsequently rejected D1–D3 deferrals and authorized bounded fixes/qualification. Use the [current follow-up ledger](v1-followup-qualification.md) for implementation, executed checks and remaining acceptance; no historical proposal below records an approved postponement. Attribution correction: `private-recovery.spec.ts:116` exercises draft **creation** (`POST /drafts`), not draft update. Its executed result is unchanged.
 
 **Completed** means no remaining product work established for that item. **Accepted scope limit** is already supported by SCOPE-02 or a recorded owner decision; no fresh deferral is inferred. **Proposed deferral** means the item remains open and needs owner disposition for closure. **Evidence decision** means either complete a bounded missing check or explicitly accept its remaining qualification limit. A decision hold is not itself proof of a blocking implementation failure.
 
@@ -61,7 +67,9 @@ For A8, the remaining crosswalk must distinguish **before dispatch**, **accepted
 | Activity outcome; end/abort closure | [outcomes](../../frontend/tests/private-outcomes.spec.ts), [recovery](../../frontend/tests/private-recovery.spec.ts) | Map actual committed state versus rejected/unforwarded requests for each family; do not substitute a lost-Start case for terminal closure. |
 | Notice create/update/check/manual end | [notice tests](../../frontend/tests/private-notices.spec.ts), [notice integration](../../frontend/tests/private-notice-recovery-integration.spec.ts), [cross-day](../../frontend/tests/private-crossday-notices.spec.ts) | Existing creation HTML409/422/429 and check/end lost-reply tests are concrete. Complete mapping for update/check/end lookup and proxy variants before claiming the entire family matrix. |
 
-## Decisions required from Jonas
+## Historical proposed decisions — superseded by implementation authorization
+
+The choices below were proposed before Jonas chose repairs/qualification. They are not new questions or still-current recommendations. The follow-up ledger's point-status table and owner checklist are the current decision surface; no deferral below was approved.
 
 | Decision | Recommended choice | What approval would and would not do |
 |---|---|---|

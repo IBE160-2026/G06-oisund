@@ -1,0 +1,50 @@
+{
+  "gate": "v1-followup-browser-20261029T165949935004Z-9456009d.json",
+  "images": [
+    {
+      "file": "efb62bae030c-abandonment-after-confirmation.png",
+      "sha256": "efb62bae030c113db29b9754901bd8a6c5726e5c7b75a0d0e21318251f65e8c2",
+      "source_result": "tmp/v1followup/20261029T165949935004Z-9456009d/results/private-d1-remediation-D1--1611b-d-preserves-account-notices/abandonment-after-confirmation.png"
+    },
+    {
+      "file": "ae7a1520fc02-abandonment-before-confirmation.png",
+      "sha256": "ae7a1520fc0230f9a8688ca4226efded2bac32e0e07a2c8d7ba2eb53f15bad27",
+      "source_result": "tmp/v1followup/20261029T165949935004Z-9456009d/results/private-d1-remediation-D1--1611b-d-preserves-account-notices/abandonment-before-confirmation.png"
+    },
+    {
+      "file": "9f5d85690cef-start-rejected-unavailable.png",
+      "sha256": "9f5d85690cef2c6fbe3972f3d789fdc4e123f8e63e372854b50b8fcc78d0bd4a",
+      "source_result": "tmp/v1followup/20261029T165949935004Z-9456009d/results/private-d1-remediation-D1--50505-r-successful-automatic-read/start-rejected-unavailable.png"
+    },
+    {
+      "file": "7a0ddbf70b21-selection-rejected-unavailable.png",
+      "sha256": "7a0ddbf70b21a93ec8db33462f5a70f03c82cfe244bf6f64b7556d0cae8e2147",
+      "source_result": "tmp/v1followup/20261029T165949935004Z-9456009d/results/private-d1-remediation-D1--61b16-r-successful-automatic-read/selection-rejected-unavailable.png"
+    },
+    {
+      "file": "9e60a25d697f-folds-maintenance.png",
+      "sha256": "9e60a25d697f4332ab02aaf078490939472ab175c5f1745a1dd65dd4fdf6d7f5",
+      "source_result": "tmp/v1followup/20261029T165949935004Z-9456009d/results/private-d1-remediation-D1--88cf8-horitative-supplied-offsets/folds-maintenance.png"
+    },
+    {
+      "file": "cb6cc279e3fd-folds-reader.png",
+      "sha256": "cb6cc279e3fd2bd7d207ff0c2e32114a9fb7d004ba9fdfd555b5524e883850f7",
+      "source_result": "tmp/v1followup/20261029T165949935004Z-9456009d/results/private-d1-remediation-D1--88cf8-horitative-supplied-offsets/folds-reader.png"
+    },
+    {
+      "file": "9f5d85690cef-start-rejected-unavailable.png",
+      "sha256": "9f5d85690cef2c6fbe3972f3d789fdc4e123f8e63e372854b50b8fcc78d0bd4a",
+      "source_result": "tmp/v1followup/20261029T165949935004Z-9456009d/results/private-d1-remediation-D1--b6a60-after-failed-automatic-read/start-rejected-unavailable.png"
+    },
+    {
+      "file": "7a0ddbf70b21-selection-rejected-unavailable.png",
+      "sha256": "7a0ddbf70b21a93ec8db33462f5a70f03c82cfe244bf6f64b7556d0cae8e2147",
+      "source_result": "tmp/v1followup/20261029T165949935004Z-9456009d/results/private-d1-remediation-D1--e3656-after-failed-automatic-read/selection-rejected-unavailable.png"
+    },
+    {
+      "file": "b74d4ef8cb0a-a7-independent-synthetic-examples.png",
+      "sha256": "b74d4ef8cb0a8a22bd316fd22d9416a4b0104e3ea1e03aad7688746e45f1a292",
+      "source_result": "tmp/v1followup/20261029T165949935004Z-9456009d/results/private-d2-qualification-D-5e4de-g-and-parent-removal-expiry/a7-independent-synthetic-examples.png"
+    }
+  ]
+}

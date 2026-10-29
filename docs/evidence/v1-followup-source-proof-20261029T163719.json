@@ -1,0 +1,39 @@
+{
+  "at": "2026-10-29T16:37:19.815962+00:00",
+  "scope": "read-only isolated candidate images, loopback static assets and health; no private API payloads or environment",
+  "images": {
+    "ibe160-v1followup-gate:20261029": {
+      "id": "sha256:a6ffb977c35f149af659e63e985db9106d951196c095c8437f7071d0f09d7d64",
+      "file": "deploy/tablet/access_gate/gate.py",
+      "sha256": "962ce2b2081921342973ea24a816920849c70984f2704281c3e121d1743b9723",
+      "matches_worktree_bytes": true
+    },
+    "ibe160-v1followup-tests-private-api": {
+      "id": "sha256:6025101c9935a5dc9e59ad68083c4587d0cc7d9c1222c9b31f93542888572b64",
+      "file": "backend/app/private_main.py",
+      "sha256": "8baaf13121ee7ff6807d8978f9f34348e26e381f5a7785e84e2f92f5075c3e5d",
+      "matches_worktree_bytes": true
+    },
+    "ibe160-v1followup-gateway:20261029": {
+      "id": "sha256:9a460e327d49d8cc6e3c0068965e279ac00f665073f8332591ec39971abfc03e",
+      "file": "deploy/tablet/nginx.conf.template",
+      "sha256": "57ea84c34787ba6ffde80c4556166341c219315f074458dbabf921b38539c019",
+      "matches_worktree_bytes": true
+    }
+  },
+  "served": {
+    "/assets/main-kmEPYoh4.js": "8209b820e29b076960a919546ea8aa7be0c07fa4387ea8be4519add1af70fdb1",
+    "/assets/FictionalAssessment-Ca5gn51W.css": "d436cb47d234e7a034e820876840f7cb88c6e119b2912f0c3cb996228416e2d3",
+    "/assets/FictionalAssessment-DgWBF5_Z.js": "7c658dbd5e696de8b7feb29b3b34f3249d07fcd4eabddcea0a2eb7bd5b9cff03",
+    "/assets/demo-CVYX95Ri.js": "426dd3c6fb5fa7af760bd0a18c8503c99e63f433ac8403a78427f04bc476c3ee"
+  },
+  "private_health": {
+    "status": "ok",
+    "mode": "private-local",
+    "cleanup": {
+      "status": "ok",
+      "consecutive_failures": 0
+    }
+  },
+  "method_sha256": "b67e92d8de3461bb404904e7ffc2cf3922c9b53dd1ad008d400eba0159e3b83c"
+}

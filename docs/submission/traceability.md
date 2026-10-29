@@ -1,5 +1,7 @@
 # Requirement-to-test traceability
 
+The authorized post-retrospective D1–D3 candidate has its own [qualification and per-family crosswalk](v1-followup-qualification.md). This supplements the historical matrices below; it does not relabel their source revisions or replace the accepted `c067fdb` snapshot. Candidate product acceptance and Epic12 closure remain pending.
+
 Current completion and residual-work dispositions are consolidated in [the V1 closure assessment](v1-closeout.md) and [completed Epic12 retrospective](../../_bmad-output/implementation-artifacts/epic-12-retro-2026-10-29.md). All20 stories are accepted, but Epic12 remains in-progress pending explicit decisions. Unfinished A7/A8 follow-through is separated from existing named coverage; a proposed deferral is not a passed test or owner decision.
 
 These are the current SCOPE-02 meanings from the [PRD](../../_bmad-output/planning-artifacts/prds/prd-IBE160-2026-09-21/prd.md), not the superseded GPS/live-feed scope in the archive. Story numbers and V1 aliases follow the [canonical story mapping](../../_bmad-output/planning-artifacts/epics.md#traceability-and-sequence). [Current executed counts, source revision, environment and failures](../evidence/12-5-reproduction.md) qualify the 12.5 runs. A linked test or selector identifies executable coverage, not proof that it ran successfully.

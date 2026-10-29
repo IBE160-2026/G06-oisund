@@ -1,0 +1,83 @@
+{
+  "scope": "synthetic-only D1 D3 implementer checks",
+  "timestamp": "2026-10-29T16:53:04.5058416+01:00",
+  "red": [
+    {
+      "check": "preparation parity",
+      "retained": "tmp/d3-preparation-red.txt",
+      "outcome": "5 invalid policies reached write boundary"
+    },
+    {
+      "check": "bounded key cache",
+      "raw_contains_synthetic_fixture_values": true,
+      "retained": "tmp/d3-gate-red-corrected.txt",
+      "outcome": "3 failed: extra same-window refresh; cached request stalled about2s; key accepted at exact300s boundary"
+    },
+    {
+      "check": "cleanup hourly behavior",
+      "retained": "tmp/d1-cleanup-red.txt",
+      "outcome": "3 failed: no fail/recovery events; missing bounded cleanup state API"
+    }
+  ],
+  "green": [
+    {
+      "check": "cleanup4 plus gate17",
+      "passed": 21,
+      "exit": 0,
+      "command": "PRIVATE_ORIGIN=http://127.0.0.1:15326 PRIVATE_LOOPBACK_DEVELOPMENT=1 PYTHONPATH=backend .venv-followup/Scripts/python.exe -m pytest backend/tests/test_cleanup_observability.py deploy/tablet/access_gate/test_gate.py deploy/tablet/access_gate/test_bounded_gate.py -q --tb=short"
+    },
+    {
+      "passed": 3,
+      "elapsed_seconds": 5.14,
+      "command": ".venv-followup/Scripts/python.exe -m pytest deploy/tablet/access_gate/test_gate_http.py -q --tb=short",
+      "assertions": [
+        "signed JWT variants fail closed/no-store",
+        "four admitted handlers; fifth503 within500ms",
+        "one actual JWKS fetch; cached valid below500ms during stalled fetch; unknown fails below4s; rotation recovers"
+      ],
+      "exit": 0,
+      "check": "loopback HTTP"
+    },
+    {
+      "check": "preparation",
+      "assertions": [
+        "7 invalid policies refused before writes",
+        "positive1character and63character team controls accepted"
+      ],
+      "exit": 0,
+      "command": "pwsh -NoProfile -File scripts/test-prepare-tablet-parity.ps1"
+    },
+    {
+      "check": "frontend typecheck",
+      "exit": 0,
+      "command": "frontend/node_modules/.bin/tsc --noEmit"
+    }
+  ],
+  "pending": [
+    "root browser candidate green",
+    "root actual Nginx cookie forwarding/proxy matrix",
+    "root HTTPS TestClient API/DB probe"
+  ],
+  "limitations": [
+    "Local synthetic HTTP and signed fixtures are not Cloudflare MFA or device observations",
+    "Initial asyncio unit harness blocked on Windows sandbox socketpair; replaced by direct coroutine stepping with controlled async sleep/worker stubs",
+    "First HTTP overload probe saw Windows connection abort before503; bounded header consumption fixed; rerun3 passed"
+  ],
+  "hashes": {
+    "scripts/test-prepare-tablet-parity.ps1": "cdacf6a465fe4c1865930d60aedfa650f5e6a795bd8f0d1af2e7ee71bd0098f0",
+    "deploy/tablet/access_gate/test_bounded_gate.py": "feea719234a90f620197a6e31f4abd236d3eec8790b2673832086cf074d47b54",
+    "deploy/tablet/access_gate/gate.py": "bf049b9d142b30cdb5969192971dd69e60bcbbf524f6d6c636f715d0c9da181b",
+    "scripts/tablet-api-probe.py": "4f66461d8e323027b2e3862970bb6a3c83ed2cda3b711a949eae27730c35d89f",
+    "frontend/src/PrivateNotices.tsx": "f07477bb522ba7c97a4b3e288f50aea810f55826f920e933b47756abf01161e2",
+    "deploy/tablet/nginx.conf.template": "57ea84c34787ba6ffde80c4556166341c219315f074458dbabf921b38539c019",
+    "backend/tests/test_cleanup_observability.py": "e12ccbd8618707c9c05842622a171dd6ae27cdce1cdbff90e73d9d7854da7d8d",
+    "deploy/tablet/access_gate/test_gate_http.py": "38937ea14ddbb45bcab4532a893929b756a706d61ed42783436505a2d04a2aa1",
+    "backend/app/private_main.py": "8baaf13121ee7ff6807d8978f9f34348e26e381f5a7785e84e2f92f5075c3e5d",
+    "scripts/prepare-tablet-files.ps1": "827bd1644c6ca7fae284c1a18b8fd58ef308c88a7fc0357c567637cfad58cfef",
+    "frontend/tests/private-d1-remediation.spec.ts": "62ee054e3e02a824642cc7d3fba6b9a9c46ac5b77f73a809f6acb49b1c407c15",
+    "scripts/tablet-proxy-probe.py": "2477814effef0745168b1a1599cceaed8398978eb8339aff12c879734a5d0bfd",
+    "frontend/src/PrivateDrafts.tsx": "75f5e0bc81dc97abeb9c44c2c2f05c65774166051b9a28cd679617094368bcb3",
+    "frontend/src/PrivateConfirmation.tsx": "ee01812923af0b0aa405bdb7edadcae7865280c71a298fcefcbf616e7b09b36c",
+    "frontend/src/useWorkdayResource.ts": "4672014668e5bec608dd37a752959cb1557edcddc81468502a5fcaca3c835512"
+  }
+}

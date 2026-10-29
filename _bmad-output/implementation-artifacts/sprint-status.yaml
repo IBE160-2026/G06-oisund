@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 10-19-2026 14:35
-last_updated: 10-29-2026 10:03
+last_updated: 10-29-2026 18:06
 project: IBE160
 project_key: NOKEY
 tracking_system: file-system
@@ -151,7 +151,7 @@ action_items:
       release pending navigation guards without reporting success, resending, or changing
       saved records. Add deleted-plan recovery coverage."
     owner: "Developer / QA"
-    status: open
+    status: in-progress
     ref: "D:\\IBE160\\_bmad-output\\implementation-artifacts\\epic-11-retro-2026-10-26.md"
   - id: "epic-11-retro-item-2-refresh-comparison-adoption"
     epic: 11
@@ -168,7 +168,7 @@ action_items:
       current facts. Preserve exact error-contract tests across controllers; consider
       machine codes only through a separately approved compatible contract."
     owner: "Developer / QA"
-    status: open
+    status: in-progress
     ref: "D:\\IBE160\\_bmad-output\\implementation-artifacts\\epic-11-retro-2026-10-26.md"
   - id: "epic-11-retro-item-4-restore-notice-invoker-focus"
     epic: 11
@@ -183,7 +183,7 @@ action_items:
       notice source/validity times in the repeated Oslo hour, without changing stored
       instants or historical receipts. Add both-fold presentation coverage."
     owner: "Developer / QA"
-    status: open
+    status: in-progress
     ref: "D:\\IBE160\\_bmad-output\\implementation-artifacts\\epic-11-retro-2026-10-26.md"
   - id: "epic-11-retro-item-6-pin-late-expiry-boundaries"
     epic: 11
@@ -210,7 +210,7 @@ action_items:
       status and UTF-8 logs inside the runner rather than PowerShell redirection;
       test each mutation family against proxy/lookup faults without weakening assertions."
     owner: "Developer / QA"
-    status: in-progress
+    status: done
     ref: "D:\\IBE160\\_bmad-output\\implementation-artifacts\\epic-11-retro-2026-10-26.md"
   - id: "epic-11-retro-item-9-reconcile-tablet-qualification"
     epic: 11
@@ -263,5 +263,5 @@ action_items:
       path with Jonas before the final gate; record actual labels, feedback, scrolling
       and touch observations separately from technical results and explicit acceptance."
     owner: "Jonas / Developer"
-    status: open
+    status: in-progress
     ref: "_bmad-output/implementation-artifacts/epic-12-retro-2026-10-29.md"

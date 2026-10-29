@@ -2,6 +2,8 @@
 
 [V1 closure assessment](v1-closeout.md) is the consolidated remaining-work and decision register. Its proposed dispositions do not silently approve deferrals, close product defects or certify operational deployment. Accepted scope limits below remain distinct from unresolved defects and test gaps.
 
+Jonas subsequently authorized D1–D3 fixes and missing qualification rather than those proposed deferrals. The separate [candidate ledger](v1-followup-qualification.md) and [reproduction recipe](v1-followup-reproduction.md) record the new work. Historical operational issues below describe the accepted/main checkpoint; fixes on the follow-up branch do not update the running deployment. Candidate acceptance, actual external-security checks and Epic12 closure remain separate.
+
 - **12.5 accepted in full by the owner on28October2026.** [Decision and manual observations](../evidence/12-5-owner-acceptance-2026-10-28.md). Epic 12 closure and learning-platform submission remain separate. The five planned extensions have not been started by this delivery; the limits below remain applicable.
 - **Bounded input.** Only the implemented selectable-text two-column PDF envelope is supported. Scans/arbitrary layouts need manual entry. [Supported input](supported-input.md).
 - **No operational automation.** No GPS, live feeds, inferred completion, offline private persistence, audio or Auto theme. Runtime requires local services; unsaved edits can be lost when closing/reloading or losing authorization. Keep the page open for explicit unresolved-command recovery.

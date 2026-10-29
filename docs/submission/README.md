@@ -2,6 +2,8 @@
 
 Start with the [clean-checkout recipe](../../README.md). This directory is the assessment entry point for the accepted smaller V1 under SCOPE-02. Story 12.5 is done/accepted after [Jonas's explicit whole-story decision on28October2026](../evidence/12-5-owner-acceptance-2026-10-28.md). Epic 12 remains in progress; closure is separate.
 
+The later authorized D1–D3 candidate is separate: [qualification, point status and owner checklist](v1-followup-qualification.md), [candidate reproduction](v1-followup-reproduction.md). Historical12.5 acceptance does not accept this candidate. No course submission, merge, release or deployment is performed by the follow-up.
+
 | Review need | Entry |
 |---|---|
 | Short approved product brief and course constraints | [product-brief.md](../../_bmad-output/planning-artifacts/briefs/brief-IBE160-2026-09-21/product-brief.md), [course-source record](../../_bmad-output/planning-artifacts/briefs/brief-IBE160-2026-09-21/addendum.md#course-evidence-and-delivery-constraints) |
