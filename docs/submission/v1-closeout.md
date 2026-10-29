@@ -12,7 +12,7 @@ deferrals_approved_by_this_document: false
 
 ## Later delivery preparation —29October2026
 
-Jonas subsequently requested a self-contained README/final documentation and a proposed reflection, and explicitly carried the unperformed operational controls into the remaining work to be executed/documented in a separate chat. [Delivery readiness](delivery-readiness.md) is the current L1–L7/O1–O6 register. No results from that chat have been imported here. This instruction adds delivery follow-through; local V1/Epic12 acceptance above stays complete. Tag/release/submission remain unperformed and require later explicit instruction. Server bonus remains excluded. Original historical conclusions below retain their original checkpoint meaning.
+Jonas subsequently requested a self-contained README/final documentation and a proposed reflection, and explicitly carried the unperformed operational controls into the remaining work to be executed/documented in a separate chat. [Delivery readiness](delivery-readiness.md) is the current L1–L7/O1–O6 register. The separate [Access report](../evidence/access-operations-20261029.md) now supplies O1/edge and bounded O2/member-email results on operational eb0eee3. O3–O6 and L3 as a whole remain open; no newer C1/main deployment or general security qualification is inferred. This instruction adds delivery follow-through; local V1/Epic12 acceptance above stays complete. Tag/release/submission remain unperformed and require later explicit instruction. Server bonus remains excluded. Original historical conclusions below retain their original checkpoint meaning.
 
 ## Historical pre-remediation owner decision and assessment
 
