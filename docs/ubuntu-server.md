@@ -1,7 +1,7 @@
 # Ubuntu-server for Bussassistent
 
 Godkjent plan: 2026-10-29. Arbeidsbranch: setup/ubuntu-server.
-Status: grunninstallasjon, gjenoppretting og første autostartprøve er bestått. Apprelease eb0eee3 kjørte med aktiv tunnel. Andre omstart kom ikke tilbake på nett; fysisk konsolldiagnose pågår. Serveren er ikke ferdig driftsgodkjent.
+Status oppdatert 29.10 kl.21:10: fire oppstarter med kernel7.0.0-42 bestått. API-, database- og tunnelkrasjtester bestått med uendrede tabellfingeravtrykk. Faktisk Windows-backup kontrollert. Apprelease eb0eee3, driftsverktøy fra800ffb0. Fysiske nett/lokk/Windows-av-tester og eierinnlogging/lagring gjenstår; historiske funn nedenfor beskriver tidligere tilstand.
 
 ## Maskin og eksisterende drift
 
