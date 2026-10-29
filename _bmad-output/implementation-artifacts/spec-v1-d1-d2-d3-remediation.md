@@ -10,6 +10,8 @@ owner_acceptance: pending
 context: []
 ---
 
+**Later continuation authority (29October):** Jonas requests completion through V1 closure. Server setup is separate bonus work, excluded from V1/prerequisites. After explicit C1 candidate approval and fulfilled actual criteria, main integration/checks/push, Epic12/V1 closure and safe deletion of the fully integrated follow-up branch are authorized without another merge question. Production operations, server move, release/tag, coursework and extensions remain excluded. The frozen implementation boundary below records the earlier authorization; this explicit later instruction supersedes its no-merge/no-closure restriction only under those conditions. [Current execution/owner record](../../docs/evidence/v1-acceptance-2026-10-29.md).
+
 <frozen-after-approval reason="Explicit owner instruction authorizes implementation through review and branch publication; early UX direction confirmed separately">
 
 ## Intent

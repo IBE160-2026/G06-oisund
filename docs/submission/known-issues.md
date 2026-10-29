@@ -1,5 +1,7 @@
 # Known limits
 
+Current C1 qualification supplements this historical12.5 list: [fresh delivery/actual Lenovo and owner controls](../evidence/v1-acceptance-2026-10-29.md). B6–B10 are technically repaired in C1; the older running deployment retains its version. External expired-token/member-MFA/WAN/IPv6/DNS proof limits remain unqualified, not approved deferrals. Server setup is separate bonus work, outside V1 and its prerequisites. Whole-candidate acceptance/integration are pending at this checkpoint.
+
 [V1 closure assessment](v1-closeout.md) is the consolidated remaining-work and decision register. Its proposed dispositions do not silently approve deferrals, close product defects or certify operational deployment. Accepted scope limits below remain distinct from unresolved defects and test gaps.
 
 Jonas subsequently authorized D1–D3 fixes and missing qualification rather than those proposed deferrals. The separate [candidate ledger](v1-followup-qualification.md) and [reproduction recipe](v1-followup-reproduction.md) record the new work. Historical operational issues below describe the accepted/main checkpoint; fixes on the follow-up branch do not update the running deployment. Candidate acceptance, actual external-security checks and Epic12 closure remain separate.

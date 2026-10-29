@@ -54,5 +54,13 @@
   "docs/evidence/v1-acceptance-methods/run-device-suite.py": {
     "bytes": 1280,
     "sha256": "dfcd80a455f3f524b0485c2c234e2570ff562245635cb34d73d5a2acce3baac3"
+  },
+  "docs/evidence/v1-acceptance-methods/manual-device-native.cjs": {
+    "bytes": 10862,
+    "sha256": "1a49d6fbbf4419d9705145e6d8bb562b8d16985ba58a76a420eadc93ebdeaf19"
+  },
+  "docs/evidence/v1-acceptance-methods/restore-own-device.cjs": {
+    "bytes": 1155,
+    "sha256": "71d81548680774e2b347c7a9d39dd3ed1f2bd3564101c07efacc306b25444f0e"
   }
 }
