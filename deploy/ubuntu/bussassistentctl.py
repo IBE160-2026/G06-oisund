@@ -219,10 +219,10 @@ SELECT 'workdays=' || count(*) FROM workdays;"""
             '-d', 'private_work', '-Atc', sql)
 
 
-def database_fingerprint(path):
+def database_fingerprint(path, capture=False):
     sql = "CREATE TEMP TABLE fingerprints(table_name text, row_count bigint, digest text);\nDO $body$\nDECLARE r record;\nBEGIN\nFOR r IN SELECT tablename FROM pg_tables WHERE schemaname='public' ORDER BY tablename LOOP\nEXECUTE format($fmt$INSERT INTO fingerprints SELECT %L, count(*),\nmd5(coalesce(string_agg(row_to_json(t)::text, chr(10) ORDER BY row_to_json(t)::text), ''))\nFROM public.%I t$fmt$, r.tablename, r.tablename);\nEND LOOP;\nEND $body$;\nSELECT * FROM fingerprints ORDER BY table_name;"
-    compose(path, 'exec', '-T', 'private-db', 'psql', '-U', 'tablet_bootstrap',
-            '-d', 'private_work', '-qAtc', sql)
+    return compose(path, 'exec', '-T', 'private-db', 'psql', '-U', 'tablet_bootstrap',
+                   '-d', 'private_work', '-qAtc', sql, capture_output=capture, text=capture)
 
 def install_tools(path):
     import shutil
@@ -239,8 +239,78 @@ def install_tools(path):
     temporary.replace('/usr/local/sbin/bussassistentctl')
     run(['systemctl', 'daemon-reload'])
 
+def test_recovery():
+    """Controlled crash test for this project's API, DB and tunnel only."""
+    import signal
+    path = release()
+    was_active = subprocess.run(['systemctl', 'is-active', '--quiet', 'cloudflared']).returncode == 0
+    run(['systemctl', 'stop', 'cloudflared'])
+    backup(path)
+    before = database_fingerprint(path, capture=True).stdout
+    for service in ('private-api', 'private-db'):
+        container_id = compose(path, 'ps', '-q', service, capture_output=True, text=True).stdout.strip()
+        record = json.loads(run(['docker', 'inspect', container_id], capture_output=True, text=True).stdout)[0]
+        labels = record['Config']['Labels']
+        if (labels.get('com.docker.compose.project') != 'bussassistent'
+                or labels.get('com.docker.compose.service') != service
+                or not record['State']['Running'] or record['State']['Pid'] <= 1):
+            raise ValueError('Refusing fault injection outside the running production project')
+        previous_restarts = record['RestartCount']
+        # pidfd pins the process identity, avoiding signalling a recycled host PID.
+        fd = os.pidfd_open(record['State']['Pid'])
+        try:
+            check = json.loads(run(['docker', 'inspect', container_id], capture_output=True, text=True).stdout)[0]
+            if check['State']['Pid'] != record['State']['Pid'] or not check['State']['Running']:
+                raise ValueError('Container identity changed before fault injection')
+            signal.pidfd_send_signal(fd, signal.SIGKILL)
+        finally:
+            os.close(fd)
+        deadline = time.monotonic() + 90
+        while time.monotonic() < deadline:
+            check = json.loads(run(['docker', 'inspect', container_id], capture_output=True, text=True).stdout)[0]
+            if (check['RestartCount'] > previous_restarts and check['State']['Running']
+                    and check['State'].get('Health', {}).get('Status') == 'healthy'):
+                break
+            time.sleep(2)
+        else:
+            raise ValueError(service + ' did not automatically recover')
+        ready(path)
+        print(service + ': automatic recovery after process crash passed')
+    after = database_fingerprint(path, capture=True).stdout
+    if before != after:
+        raise ValueError('Database fingerprint changed during recovery test; inspect before reopening tunnel')
+    print('All table fingerprints unchanged during crash tests')
+    if was_active:
+        run(['systemctl', 'start', '--no-block', 'cloudflared'])
+        wait_tunnel()
+        old_restarts = run(['systemctl', 'show', 'cloudflared', '-p', 'NRestarts', '--value'],
+                           capture_output=True, text=True).stdout.strip()
+        run(['systemctl', 'kill', '--kill-whom=main', '--signal=SIGKILL', 'cloudflared'])
+        time.sleep(12)
+        wait_tunnel()
+        new_restarts = run(['systemctl', 'show', 'cloudflared', '-p', 'NRestarts', '--value'],
+                           capture_output=True, text=True).stdout.strip()
+        if int(new_restarts) <= int(old_restarts):
+            raise ValueError('Tunnel restart count did not increase')
+        print('Cloudflare Tunnel: automatic recovery after process crash passed')
+
+
+def wait_tunnel():
+    deadline = time.monotonic() + 90
+    while time.monotonic() < deadline:
+        result = subprocess.run(['curl', '-s', '--max-time', '3', '-o', '/dev/null',
+                                 '-w', '%{http_code}', 'http://127.0.0.1:18083/ready'],
+                                capture_output=True, text=True)
+        if result.returncode == 0 and result.stdout == '200':
+            return
+        time.sleep(2)
+    raise ValueError('Tunnel did not become ready')
+
 def main():
     action = sys.argv[1] if len(sys.argv) > 1 else ''
+    if action == 'test-recovery' and len(sys.argv) == 2:
+        test_recovery()
+        return
     if action == 'install-secrets' and len(sys.argv) == 2:
         install_secrets()
         return
