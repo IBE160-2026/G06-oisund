@@ -1,5 +1,7 @@
 # Submission guide — V1-20 / Story 12.5
 
+Corrected product snapshot: C1 `3c2287ed68d0cbb1923439fc6ee00254395072a4`, with [fresh delivery and actual Lenovo verification](../evidence/v1-acceptance-2026-10-29.md) and [current recipe](v1-followup-reproduction.md#corrected-delivery-snapshot-and-executed-recipe). Owner acceptance remains pending; historical c067fdb evidence is preserved. Server bonus work is excluded from this V1. Later conditional merge/closure authority is recorded in the current acceptance record; no coursework/release/deployment is authorized.
+
 Start with the [clean-checkout recipe](../../README.md). This directory is the assessment entry point for the accepted smaller V1 under SCOPE-02. Story 12.5 is done/accepted after [Jonas's explicit whole-story decision on28October2026](../evidence/12-5-owner-acceptance-2026-10-28.md). Epic 12 remains in progress; closure is separate.
 
 The later authorized D1–D3 candidate is separate: [qualification, point status and owner checklist](v1-followup-qualification.md), [candidate reproduction](v1-followup-reproduction.md). Historical12.5 acceptance does not accept this candidate. No course submission, merge, release or deployment is performed by the follow-up.

@@ -8,6 +8,8 @@ deferrals_approved_by_this_document: false
 
 # V1 closure assessment
 
+Current continuation: [C1 fresh delivery/physical verification and stepwise owner controls](../evidence/v1-acceptance-2026-10-29.md). Product snapshot3c2287e is tested; whole-candidate acceptance remains pending. Jonas now authorizes main integration/checks/push, Epic12/V1 closure and safe integrated-branch deletion **after explicit candidate approval and fulfilled criteria**, without a further merge-confirmation question. Until then Epic12 stays in-progress. Server setup is a separate bonus and not part of V1 or a prerequisite; possible later v1.0.1 is outside this delivery. Production operations, release/tag, submission and extensions remain excluded. Earlier no-merge wording below records the previous checkpoint.
+
 ## Owner decision and active follow-up
 
 On29October2026 Jonas chose **implementation and missing qualification instead of the proposed deferrals** for D1/D2/D3. Work is authorized on the separate `followup/v1-d1-d2-d3` branch. E12-A2 is adopted as future practice, and the early abandonment/rejection/offset design direction is confirmed as a starting point. No implemented-product acceptance, main merge or Epic12 closure is granted. The assessment and proposed decisions below are the **historical pre-remediation closeout checkpoint**, retained unchanged for traceability. [Current qualification ledger](v1-followup-qualification.md), [implementation specification](../../_bmad-output/implementation-artifacts/spec-v1-d1-d2-d3-remediation.md) and [standing walkthrough practice](../working-practices.md) govern follow-through; a point is complete only after its actual criteria pass.

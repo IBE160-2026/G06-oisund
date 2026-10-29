@@ -6,7 +6,7 @@ This V1 imports a supported text-PDF shift, permits correction and explicit savi
 
 ## Clean checkout and startup
 
-For the separate, unaccepted D1–D3 follow-up candidate, use its [isolated reproduction recipe](docs/submission/v1-followup-reproduction.md) and [qualification/source ledger](docs/submission/v1-followup-qualification.md). The accepted snapshot recipe below remains historical and unchanged in purpose; do not treat candidate tests as owner acceptance or deploy the candidate through the operational tablet environment.
+The corrected D1–D3 product snapshot is **`3c2287ed68d0cbb1923439fc6ee00254395072a4`**, newly tested in a separate delivery checkout; whole-candidate owner acceptance remains pending. Use its [current reproduction recipe](docs/submission/v1-followup-reproduction.md#corrected-delivery-snapshot-and-executed-recipe), [fresh reproduction/physical-device record](docs/evidence/v1-acceptance-2026-10-29.md) and [qualification/source ledger](docs/submission/v1-followup-qualification.md). Server setup is separate bonus work, excluded from this V1 and its prerequisites. The accepted `c067fdb` recipe below remains historical; no candidate deployment or course submission follows from a test pass.
 
 Install Git, Node.js 24 with npm, Docker Desktop with Linux containers and Compose v2. Use a desktop Chromium browser. Exact tested versions/source are in the [reproduction record](docs/evidence/12-5-reproduction.md). Run commands in the checkout root in PowerShell or a POSIX terminal:
 
