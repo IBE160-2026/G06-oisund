@@ -11,7 +11,7 @@ accepted_on: '2026-10-28'
 context: []
 ---
 
-**Current decision:** Jonas explicitly accepted Story12.5 in full on28October2026 after all ten guided assessment parts. [Acceptance record](../../docs/evidence/12-5-owner-acceptance-2026-10-28.md). The frozen starting intent and earlier review notes retain historical pending wording; current status is done/accepted. Epic12 remains in progress by explicit instruction.
+**Current decision:** Jonas explicitly accepted Story12.5 in full on28October2026 after all ten guided assessment parts. [Acceptance record](../../docs/evidence/12-5-owner-acceptance-2026-10-28.md). The frozen starting intent and earlier review notes retain historical pending wording; current status is done/accepted. Epic12 is done at Jonas's subsequent status-update request on29October2026, after its completed retrospective; residual follow-ups remain tracked.
 
 <frozen-after-approval reason="User explicitly authorized autonomous completion through review; product contract changes still require clarification">
 

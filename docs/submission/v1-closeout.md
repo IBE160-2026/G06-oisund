@@ -2,7 +2,7 @@
 date: 2026-10-29
 status: awaiting-owner-decisions
 scope: SCOPE-02-course-V1
-epic_12: in-progress
+epic_12: done
 deferrals_approved_by_this_document: false
 ---
 
@@ -70,7 +70,7 @@ For A8, the remaining crosswalk must distinguish **before dispatch**, **accepted
 | **D3 future process and operational boundary:** E12-A2, B6–B10 and existing external-security proof limits. | Adopt E12-A2 as future practice and keep operational work outside local course-V1 closure. | Future process execution stays open; operational issues stay open. No new declaration that the deployed environment is safe for broader use. |
 | **Formal closure after dispositions.** | Once D1–D3 are resolved, authorize Epic12→done and V1 closure with named residual items, unless a required fix/check remains. | Changes tracking only. No tag/release, course submission, deployment or extension begins. |
 
-**Present decision:** no deferral in D1–D3 has been approved by this assessment. Epic12 remains in-progress. There is no new evidence-backed requirement to repeat all tests or implement extensions. If Jonas accepts the proposed dispositions, Epic12 can then be marked done with the retained `accepted-with-open-items` verdict; if any fix/check is required first, it must be completed before that transition.
+**Current tracker decision,29October2026:** Jonas requested updating and pushing the remaining in-progress sprint status. Epic12 is now done: all stories and its retrospective are complete, with the retained `accepted-with-open-items` verdict. This supersedes the earlier tracker hold described in the decision table. It does not approve the specific D1–D3 deferral proposals or close their residual work; those dispositions remain pending. There is no new evidence-backed requirement to repeat all tests or implement extensions.
 
 ## Documentation and publication record
 
