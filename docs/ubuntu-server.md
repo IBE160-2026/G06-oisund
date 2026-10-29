@@ -1,8 +1,7 @@
 # Ubuntu-server for Bussassistent
 
 Godkjent plan: 2026-10-29. Arbeidsbranch: setup/ubuntu-server.
-Status: SSH-nøkkeltilgang verifisert, kildebackup tatt med uendrede radfingeravtrykk, driftsfiler lokalt testet; installasjon,
-dataflytting, nettverksretting og oppstartstester på Ubuntu er ikke utført.
+Status: grunninstallasjon, gjenoppretting og første autostartprøve er bestått. Apprelease eb0eee3 kjørte med aktiv tunnel. Andre omstart kom ikke tilbake på nett; fysisk konsolldiagnose pågår. Serveren er ikke ferdig driftsgodkjent.
 
 ## Maskin og eksisterende drift
 
@@ -37,7 +36,7 @@ Bare gateway har vertsnettbinding, 127.0.0.1:18081. Database og API har ingen
 vertsporter. Origin-JWT-gate, appinnlogging, CSRF, HTTPS-cookies og no-store beholdes.
 Ingen innkommende webporter eller Docker TCP-API åpnes.
 
-## Første installasjon (ikke utført)
+## Installasjonsrekkefølge
 
 1. Bekreft fungerende SSH-nøkkel fra Windows. Passord tastes bare i eierens terminal.
 2. Les probe.sh og kjør den på serveren. Undersøk nettverksventing og kort oppstart.
@@ -106,8 +105,7 @@ ved vellykkede backupkjøringer. Windows Backup kopierer via SCP, verifiserer SH
 og beskytter lokal mappe med ACL. Lokale kopier eldre enn 48 timer fjernes ved
 neste vellykkede kjøring. Dette er ikke en uavhengig fristgaranti når maskinen er av.
 
-Av-maskin-kopiering må kjøres fra Windows når den er på; automatisk Windows-task
-er ennå ikke installert. Behold minst én verifisert kopi av serveren før overgang.
+Windows-oppgaven Bussassistent-Backup er installert: daglig04:00 og ved innlogging, bare når Jonas er innlogget. Den prøver på nytt tre ganger med fem minutters mellomrom ved feil. Installér/oppdater med scripts/install-server-backup.ps1. Minst én faktisk planlagt backup er kopiert og SHA256-verifisert. En senere kjøring traff planlagt servernedstenging og feilet uten å erstatte tidligere kopier.
 Backup inneholder private data og kan inneholde rader som senere er slettet.
 Ved restore skal appens opprydding/utløpsregler kjøres før ekstern åpning.
 Tilbakeføring av gamle data må ikke forlenge deres opprinnelige frister.
@@ -119,7 +117,7 @@ Planlegg logg-/diskkontroll og regelmessig faktisk restore-prøve.
 
 ## Utførte lokale kontroller
 
-- 11 isolerte Linux/Python-tester: sti-/SHA-validering, arkivhash, path traversal,
+- 12 isolerte Linux/Python-tester: sti-/SHA-validering, arkivhash, path traversal,
   symlink, ufullstendig release, uendret releaseidentitet ved retry,
   avbrutt dump og rollback med ulikt skjema.
 - bash -n for bootstrap.sh.
@@ -134,3 +132,28 @@ https://pkg.cloudflare.com/
 https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/configure-tunnels/run-parameters/
 
 Diagnose 29.10: ventetjenestens genererte kommando venter bare på enp4s0, som har no-carrier. wlp3s0 er routable. ssh.socket er enabled/active. Bootstrap legger inn en egen drop-in som godtar enten Ethernet eller Wi-Fi med IPv4, uten å endre interface-konfigurasjon. Den korte oppstarten -2 slutter uten en avsluttende årsak i journalen; årsaken er fortsatt ukjent.
+
+## Faktisk serververifikasjon 2026-10-29
+
+- Grunninstallasjon: Docker29.9.2, Compose5.6.1, cloudflared2026.10.6.
+- Nettverksventing rettet; system running og null feilede units før omstart.
+- Restore til tom database bestod; alle25 public-tabeller matcher Windows-originalens
+  radantall og private innholdsfingeravtrykk. Originalvolumet er bevart og stoppet.
+- Release eb0eee3496d8999fb28615b49d4bf60124b6158f startet med fire containere.
+  API/DB healthy; origin uten Access-assertion403; tunnel /ready200; ekstern URL302
+  til tilgangskontroll. Dette er ikke en ny faktisk eierinnlogging.
+- App, tunnel og daglig backup er enabled. Kun SSH og loopback-app/metrics publisert.
+- Første reboot: boot-id48d6f041-3f3d-4449-9cd2-32e15fda4176,34,981s oppstart,
+  app/tunnel tilbake automatisk, system running, alle tabellfingeravtrykk uendret.
+- Andre reboot planlagt19:10:04 Oslo; ingen nettverkstilgang etter flere minutter.
+  Eier ser grønne OK-meldinger, sist systemd-rfkill. Siste melding identifiserer ikke
+  årsaken. Ctrl+Alt+F2 og lokal nettverks-/failed-unit-kontroll er etterspurt.
+- Prosesskrasjtest, fysisk nettbrudd/lokk, faktisk innlogging/lagring og Windows-av-prøve
+  er ikke fullført. Ny avgrenset test-recovery-kommando er skrevet, men ikke kjørt.
+- Driftskode etter eb0eee3 er ennå ikke rullet ut. Ingen push/merge utført.
+
+Den første Git-arkivpakken hadde CRLF i shebang. Rettet med .gitattributes eol=lf
+og normalisering ved verktøyinstallasjon; faktisk korrigert arkiv er kontrollert.
+Oppgaveplanlegging så ikke første kopierte skript fra arbeidsmiljøet. Installeren
+legger derfor en selvstendig, versjonsbestemt kopi i oppgavens faktiske brukerøkt.
+Koden inneholder ingen hemmeligheter; SSH-nøkkelen forblir separat.

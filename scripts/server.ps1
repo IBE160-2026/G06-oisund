@@ -9,7 +9,7 @@ param(
     [string]$BackupDirectory = (Join-Path $env:LOCALAPPDATA 'BussassistentServer/backups')
 )
 $ErrorActionPreference = 'Stop'
-$sshOptions = @('-i', $KeyFile, '-o', 'IdentitiesOnly=yes', '-o', 'BatchMode=yes', '-o', 'StrictHostKeyChecking=yes')
+$sshOptions = @('-i', $KeyFile, '-o', 'IdentitiesOnly=yes', '-o', 'BatchMode=yes', '-o', 'ConnectTimeout=10', '-o', 'ServerAliveInterval=15', '-o', 'ServerAliveCountMax=2', '-o', 'StrictHostKeyChecking=yes')
 function Invoke-Server([string]$Command) {
     & ssh @sshOptions $Server $Command
     if ($LASTEXITCODE -ne 0) { throw "Server command failed ($LASTEXITCODE)." }
@@ -61,6 +61,7 @@ try {
     & scp @sshOptions $archive ($Server + ':/home/jonas/ibe160-upload/' + $Revision + '.tar')
     if ($LASTEXITCODE -ne 0) { throw 'Release transfer failed.' }
     Invoke-Server ('sudo -n /usr/local/sbin/bussassistentctl stage ' + $Revision + ' ' + $digest)
+    Invoke-Server ('sudo -n /usr/local/sbin/bussassistentctl install-tools ' + $Revision)
     Invoke-Server ('sudo -n /usr/local/sbin/bussassistentctl deploy ' + $Revision)
 } finally {
     if (Test-Path -LiteralPath $archive) { Remove-Item -LiteralPath $archive }
