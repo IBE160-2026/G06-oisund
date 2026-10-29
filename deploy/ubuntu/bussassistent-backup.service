@@ -1,0 +1,7 @@
+[Unit]
+Description=Bussassistent daily PostgreSQL backup
+After=bussassistent.service
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/bussassistentctl backup
+UMask=0077
