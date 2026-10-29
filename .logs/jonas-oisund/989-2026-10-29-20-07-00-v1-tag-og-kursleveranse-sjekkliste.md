@@ -49,6 +49,10 @@ Publisering etter uttrykkelig bestilling: Jonas ba om commit/push av de sju doku
 
 Denne publiseringskvitteringen committes separat som logg-only og pushes etterpå; endelig main/origin-likhet og ren Git-status kontrolleres. Ingen tag/release, innlevering, ny aksept av refleksjonen, driftskontroll, deploy eller serverbonus er utført av publiseringen.
 
+Personlig refleksjonsgjennomgang klargjort etter Jonas sin beskjed om at han vil lese i morgen: faktisk gjeldende [refleksjonsforslag](../../docs/submission/ai-reflection-proposal.md) er lest uten å endre teksten. Veiledningen peker på hva bare Jonas kan vurdere: presis arbeidsdeling mellom ham og KI, egne begrunnelser for avgrensning/valg, om12.4- og D1–D3-opplevelsen er riktig beskrevet, egen læring og hva han ville gjort annerledes, etiske/praktiske begrensninger og språk/stemme/dekning mot faktisk kursoppgave. Forslaget er faktatungt og i tredjeperson; personlige begrunnelser/erfaringer må komme fra Jonas, ikke oppfinnes av KI. Testtall er dokumenterte resultater med ulike formål og skal ikke summeres eller bekreftes ved unødvendig omkjøring.
+
+Jonas får lenke til hele engelske utkastet og en konkret nummerert leseveiledning med korte utfyllingsforslag til sin gjennomgang i morgen. Ingen svar eller godkjenning er utledet. Teksten forblir owner review pending, O3–O6 står fortsatt åpne for annen chat, og serverbonus er utenfor. Ingen dokument-/produktendring, ny test, push, tag/release eller innlevering er utført. Kun denne påkrevde lokale loggcommitten opprettes; eksisterende issues-punkt om eiergjennomgang er allerede dekkende og beholdes åpent.
+
 ### Åpne punkter
 
 - Bekreft gjeldende originale kurskrav, frist, prosjekt-/solo-godkjenning og vurderers innleverings-/tilgangsordning.
