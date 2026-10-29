@@ -219,10 +219,11 @@ SELECT 'workdays=' || count(*) FROM workdays;"""
             '-d', 'private_work', '-Atc', sql)
 
 
+def fingerprint_sql():
+    return "CREATE TEMP TABLE fingerprints(table_name text, row_count bigint, digest text);\nDO $body$\nDECLARE r record;\nBEGIN\nFOR r IN SELECT tablename FROM pg_tables WHERE schemaname='public' ORDER BY tablename LOOP\nEXECUTE format($fmt$INSERT INTO fingerprints SELECT %L, count(*),\nmd5(coalesce(string_agg(row_to_json(t)::text, chr(10) ORDER BY row_to_json(t)::text), ''))\nFROM public.%I t$fmt$, r.tablename, r.tablename);\nEND LOOP;\nEND $body$;\nSELECT * FROM fingerprints ORDER BY table_name;"
 def database_fingerprint(path, capture=False):
-    sql = "CREATE TEMP TABLE fingerprints(table_name text, row_count bigint, digest text);\nDO $body$\nDECLARE r record;\nBEGIN\nFOR r IN SELECT tablename FROM pg_tables WHERE schemaname='public' ORDER BY tablename LOOP\nEXECUTE format($fmt$INSERT INTO fingerprints SELECT %L, count(*),\nmd5(coalesce(string_agg(row_to_json(t)::text, chr(10) ORDER BY row_to_json(t)::text), ''))\nFROM public.%I t$fmt$, r.tablename, r.tablename);\nEND LOOP;\nEND $body$;\nSELECT * FROM fingerprints ORDER BY table_name;"
     return compose(path, 'exec', '-T', 'private-db', 'psql', '-U', 'tablet_bootstrap',
-                   '-d', 'private_work', '-qAtc', sql, capture_output=capture, text=capture)
+                   '-d', 'private_work', '-qAtc', fingerprint_sql(), capture_output=capture, text=capture)
 
 def install_tools(path):
     import shutil
@@ -306,8 +307,61 @@ def wait_tunnel():
         time.sleep(2)
     raise ValueError('Tunnel did not become ready')
 
+
+def verify_restore():
+    """Restore a fresh backup into disposable, networkless tmpfs PostgreSQL."""
+    import uuid
+    path = release()
+    before = database_fingerprint(path, capture=True).stdout
+    dump = backup(path)
+    after = database_fingerprint(path, capture=True).stdout
+    if before != after:
+        raise ValueError('Data changed while taking test backup; retry during quiet period')
+    db_id = compose(path, 'ps', '-q', 'private-db', capture_output=True, text=True).stdout.strip()
+    record = json.loads(run(['docker', 'inspect', db_id], capture_output=True, text=True).stdout)[0]
+    image = record['Image']  # Exact installed image, no pull.
+    name = 'bussassistent-restore-check-' + uuid.uuid4().hex[:12]
+    created = False
+    try:
+        run(['docker', 'run', '-d', '--name', name, '--network', 'none',
+             '--memory', '512m', '--pids-limit', '128',
+             '--tmpfs', '/var/lib/postgresql/data:rw,size=512m',
+             '-e', 'POSTGRES_HOST_AUTH_METHOD=trust',
+             '-e', 'POSTGRES_USER=tablet_bootstrap',
+             '-e', 'POSTGRES_DB=private_work', image], stdout=subprocess.DEVNULL)
+        created = True
+        for attempt in range(45):
+            result = subprocess.run(['docker', 'exec', name, 'pg_isready',
+                                     '-U', 'tablet_bootstrap', '-d', 'private_work'],
+                                    stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            if result.returncode == 0:
+                break
+            time.sleep(1)
+        else:
+            raise ValueError('Isolated restore database did not become ready')
+        run(['docker', 'exec', name, 'psql', '-U', 'tablet_bootstrap', '-d', 'private_work',
+             '-v', 'ON_ERROR_STOP=1', '-c', 'CREATE ROLE private_work LOGIN'],
+            stdout=subprocess.DEVNULL, stderr=subprocess.PIPE)
+        with dump.open('rb') as stream:
+            run(['docker', 'exec', '-i', name, 'pg_restore', '-U', 'tablet_bootstrap',
+                 '-d', 'private_work', '--role=private_work', '--no-owner',
+                 '--no-privileges', '--exit-on-error', '--single-transaction'],
+                stdin=stream, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE)
+        restored = run(['docker', 'exec', name, 'psql', '-U', 'tablet_bootstrap',
+                        '-d', 'private_work', '-qAtc', fingerprint_sql()],
+                       capture_output=True, text=True).stdout
+        if restored != before:
+            raise ValueError('Isolated restore fingerprint mismatch')
+        print('Isolated backup restore passed; all table fingerprints match; no production volume mounted')
+    finally:
+        if created:
+            run(['docker', 'rm', '-f', '-v', name], stdout=subprocess.DEVNULL)
+
 def main():
     action = sys.argv[1] if len(sys.argv) > 1 else ''
+    if action == 'verify-restore' and len(sys.argv) == 2:
+        verify_restore()
+        return
     if action == 'test-recovery' and len(sys.argv) == 2:
         test_recovery()
         return
