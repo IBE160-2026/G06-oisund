@@ -45,6 +45,10 @@ Offline-kontroll av JSON bestod: samme service/issuer/AUD/iat/exp, gyldig førko
 
 Sju aktuelle leveransedokumenter hadde fortsatt «ingen rapport mottatt»/alle tester uutført eller tilsvarende gammel tekst. README, leveranseindeks, known limits, refleksjonsforslag, closeout, delivery-readiness og HANDOFF er samordnet i arbeidskopien med faktisk O1/avgrenset O2 og fortsatt åpne O3–O6. Refleksjonen er fortsatt forslag til Jonas, ikke ny eieraksept. Registeret presiserer også at nytt scripts/Test-AccessExpiry.ps1 er operativ diagnose fra b6a98e0, slik at «hele scripts er identisk medC1» ikke påstås; godkjente runtime-/produktinnganger er uendret. Rapport/raw JSON/metodefiler er urørt.163 lokale dokumentlenker/ankere og diff --check bestod. Ingen nye funksjonelle/drifts-/nettverksprøver ble kjørt. Kun sesjonslogg/issues committes lokalt; de sju dokumentrettingene står for gjennomgang. Ingen push, tag/release, innlevering, deploy eller endring av aktive regler/data/drift er utført i denne dokumentkontrollen.
 
+Publisering etter uttrykkelig bestilling: Jonas ba om commit/push av de sju dokumentrettingene, O3–O6 fortsatt åpne for egen chat og refleksjonen fortsatt forslag. Eksakt dokumentomfang og tomt stagingområde ble kontrollert; ingen produkt-/metode-/råevidensendring. Dokumentcommit210166ab8651d0b27dd4be1509eedaca63de6c8e ble opprettet og pushet til origin/main sammen med kontrollogg4866eeb. Faktisk ls-remote bekreftet210166a etter vellykket normal push0c92024..210166a. Utkastmerket owner review pending, O3–O6 open/not qualified og L3 som ikke helt lukket ble kontrollert før commit; issues er lest og disse åpne punktene forblir uendret.
+
+Denne publiseringskvitteringen committes separat som logg-only og pushes etterpå; endelig main/origin-likhet og ren Git-status kontrolleres. Ingen tag/release, innlevering, ny aksept av refleksjonen, driftskontroll, deploy eller serverbonus er utført av publiseringen.
+
 ### Åpne punkter
 
 - Bekreft gjeldende originale kurskrav, frist, prosjekt-/solo-godkjenning og vurderers innleverings-/tilgangsordning.
