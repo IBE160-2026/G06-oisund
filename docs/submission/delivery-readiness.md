@@ -1,0 +1,42 @@
+# V1 delivery preparation and remaining work
+
+Updated29October2026. Local SCOPE-02 V1, D1–D3 and Epic12 are complete and owner-accepted; [actual closure](../evidence/v1-main-integration-20261029.md) and [personal acceptance](../evidence/v1-acceptance-2026-10-29.md) retain their original results. **Tag/release/course submission have not been authorized or performed by this preparation.** Preparation of documentation does not declare the remaining work passed.
+
+## Version and package
+
+The accepted product/test/tooling baseline is C1 `3c2287ed68d0cbb1923439fc6ee00254395072a4`. The final delivery must also contain the subsequent evidence, current README, source traceability and reviewed reflection. Use one exact final main commit containing both, rather than C1 alone. No final delivery SHA or tag name is assigned here. At the later version freeze, record the full commit SHA and provide it with the course delivery. [README](../../README.md) runs that checkout directly and never sends the reader back to an older README. Historical `c067fdb` remains unchanged.
+
+Only versioned content belongs in the delivery. Include source/lockfiles/migrations, synthetic A–E PDFs and independent facts, documentation and versioned evidence. Generated credentials, runtime state, real PDFs, database dumps/backups, tokens, build/dependency directories and local worktrees are excluded. Installation generates the reviewer's own synthetic account. A Git checkout is the documented delivery; create other formats only if the actual course instructions require them.
+
+Server setup is separate bonus work, outside this V1 and its prerequisites; possible future v1.0.1 is not part of the delivery. The five extensions also remain outside V1. Operational checks below concern existing access/security proof boundaries and must not import server-bonus changes into the accepted product.
+
+## Remaining delivery checklist
+
+| ID | Concrete remaining work | Completion evidence / responsible party |
+|---|---|---|
+| L1 | Confirm original current course instructions, deadline, submission channel/formats, project-proposal/individual-work approval and assessor access. | Jonas supplies/confirms actual instructions. The [secondary course-source record](../../_bmad-output/planning-artifacts/briefs/brief-IBE160-2026-09-21/addendum.md#course-evidence-and-delivery-constraints) contains conflicting older deadline information; no date or report/video requirement is invented. |
+| L2 | Review/adapt the [proposed final reflection](ai-reflection-proposal.md), confirm own voice and factual accuracy, and map it to the actual course requirements. | Explicit Jonas review. Draft preparation is complete; final authorship/content approval is pending. The [historical12.5 reflection](ai-reflection.md) stays available. |
+| L3 | Receive the operational-check report from the separate chat, reconcile every O-row below and update this register with actual outcomes/limits. | Jonas requested execution/documentation in a separate chat. No results have yet been imported here. No unchecked row is silently passed or deferred. |
+| L4 | Freeze the exact delivery commit after the necessary documentation/operational results are settled. Verify product/test/tooling identity against C1 and inspect the tracked-file inventory and assessor access. | Record full SHA and any documentation-only difference. If another chat changes product code, inspect the change and obtain appropriate affected verification/acceptance before calling it the same accepted product. |
+| L5 | Check the final checkout's README path, generated synthetic login and local startup on an unused machine/context. Reuse valid existing tests; repeat only a changed instruction/path or a concrete failed check. | Record exact delivery SHA/configuration and actual outcome. Fresh C1 recipe execution already exists; a later documentation-only commit is not relabelled a new full test execution. No ordinary runtime/project/port is reclaimed. |
+| L6 | Later, choose/check tag name and exact target; publish only after explicit instruction. Create a GitHub release only if separately requested/required. | No tag or release is created now. `v1.0.0` is only an earlier proposal. |
+| L7 | Later, deliver the exact authorized ref/attachments through the actual course channel, verify access/download and preserve the receipt. | No coursework is submitted now. |
+
+README/index preparation is complete in this documentation change. L2 owner review, L1/L3 and the later freeze/publication/delivery steps remain open. This is additional delivery preparation requested after local V1 closure; it does not rewrite the accepted epic or historical verdicts.
+
+## Unperformed operational checks — separate chat
+
+All rows are **open / not qualified**, with execution/documentation assigned by Jonas to a separate chat. The earlier [named gap table](v1-followup-qualification.md#named-external-security-gaps-and-their-disposition), [pilot](../tablet-pilot-result.md) and [production record](../tablet-production.md) are the source inventory. Owner reports, signed synthetic fixtures and observations of an older deployment are not new candidate results.
+
+| ID | Missing proof / work to carry forward | Required distinction and actual evidence |
+|---|---|---|
+| O1 | Genuine signed expired Access-token replay at the external boundary. | Record route, deployment/build, expiry and actual refusal/no upstream access. Keep token values local. Only an active token was available previously; a synthetic expired JWT does not close this row. |
+| O2 | Another genuinely assigned member's identity/email-policy/MFA behavior. | Record actual authorized identities/policy outcomes without credentials. The already-denied non-member account is a different observation. Another assigned member was previously unavailable; absent access remains an explicit blocker for this check. |
+| O3 | Remaining external Origin/CSRF/cookie/cache/error and write-timing combinations, including device/network-loss boundaries. | Enumerate concrete cases and distinguish transport admission, app session, dispatch, actual database acceptance and recovered receipt. Record exact build/config/browser/device and observed writes. Existing isolated C1 Nginx/API tests remain valid within their original scope, not a complete external matrix. |
+| O4 | Independently observed WAN/IPv6 exposure/network boundaries. | Report the actual externally observed addresses/routes/scope and negative as well as positive results. Prior router statements are owner reports, not an independent external observation. This document does not authorize changing active access rules or exposure. |
+| O5 | Pathological OS DNS cancellation before the JWKS worker owns a socket. | Measure an explicitly described resolver/OS fixture, caller deadline, worker count and recovery, or document precisely what could not be exercised. Existing connected-fetch/trickle and one-worker/caller bounds do not establish pre-socket cancellation. |
+| O6 | Previously unqualified broader OS/dependency/supply-chain/penetration assurance. | The separate chat must define and record concrete bounded checks and their residual limits; do not mark this broad label fully qualified from a dependency audit or isolated test suite. Any unavailable coverage needs an explicit recorded disposition, not an inferred postponement. |
+
+The separate report must give date, actual source/image/config/route, method/command and exit where applicable, expected/observed result, sanitized evidence location, affected data/operation boundaries and remaining access needs. Mark each case passed, failed or not performed based on its own evidence. Retain old failures/limitations. A pass against the older production version must stay attributed to that version; it does not qualify C1 or imply a deployment.
+
+No operational probe, account/rule change, deployment or service operation is performed in this documentation task. When the separate report arrives, reconcile it with O1–O6 before claiming this owner-requested follow-up complete. Do not assume the other chat has already completed the work.
