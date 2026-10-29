@@ -1,0 +1,18 @@
+{
+  "at": "2026-10-29T17:04:00.748703+00:00",
+  "baseline": "6d1259628c5fc7cec2d649e4097331d1606d9574",
+  "historical_evidence_tracked_files_unchanged_in_git_diff": 1519,
+  "raw_bytes_identical_to_main_worktree": 1399,
+  "only_checkout_CRLF_representation_differs": 120,
+  "checkout_representation": "core.autocrlf=true; differing worktree text bytes normalize only CRLF to LF. No historical tracked evidence diff; original Git blobs and binary artifacts preserved.",
+  "other_worktrees": 12,
+  "other_containers": 35,
+  "other_volumes": 16,
+  "preservation": "unchanged stable identities/state/start/PID/mounts/volume metadata and other worktree HEAD/status",
+  "not_claimed": "RestartCount was not captured at baseline; rolling health logs are not compared. No content-level database audit or global Docker-start neutrality is claimed. Owner manually started Docker after explicit restart-policy disclosure/authorization.",
+  "before_at": "2026-10-29T15:52:14.286098+00:00",
+  "after_at": "2026-10-29T17:03:59.158676+00:00",
+  "before_sha256": "9b7845320e18371d71c9d041b451ae773205f6aaba67b80b8c5aa4ca0e1aff47",
+  "after_sha256": "dbe4e6bbbd2c5fd2f0a4feb4bd1be13b85356c83209e3a3366b144272f62f68c",
+  "method_sha256": "84bc23e32273a3b567b33ededc3e4335fb31847a519987f8b1058f60ade5322f"
+}

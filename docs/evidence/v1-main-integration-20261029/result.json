@@ -1,0 +1,99 @@
+{
+  "started": "2026-10-29T18:53:39.612486+00:00",
+  "main_parent": "6f641d75b26a8f5c8b4852a01f7cbf7646905df6",
+  "accepted_followup": "70d536fe950586ffe3407b5d1116269b44185bb2",
+  "product_snapshot": "3c2287ed68d0cbb1923439fc6ee00254395072a4",
+  "commands": [
+    {
+      "name": "host",
+      "command": [
+        "D:/IBE160/tmp/v1-remediation/.venv-followup/Scripts/python.exe",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "backend/tests/test_cleanup_observability.py",
+        "deploy/tablet/access_gate/test_gate.py",
+        "deploy/tablet/access_gate/test_bounded_gate.py",
+        "deploy/tablet/access_gate/test_gate_http.py",
+        "scripts/test_verify_v1followup.py",
+        "--tb=line"
+      ],
+      "started": "2026-10-29T18:53:39.765632+00:00",
+      "exit_code": 0,
+      "log_sha256": "6b2239c9334d24ffed86000cd9c8c92c956d09e5149653300dfec3b59612d323"
+    },
+    {
+      "name": "preparation",
+      "command": [
+        "pwsh",
+        "-NoProfile",
+        "-File",
+        "scripts/test-prepare-tablet-parity.ps1"
+      ],
+      "started": "2026-10-29T18:53:58.808009+00:00",
+      "exit_code": 0,
+      "log_sha256": "ca1a30dee8e190691621601a4dea7a8f927bcaca68f7ebc6b2f5c06694976c1c"
+    },
+    {
+      "name": "submission-syntax",
+      "command": [
+        "node",
+        "--check",
+        "scripts/submission.mjs"
+      ],
+      "started": "2026-10-29T18:53:59.466031+00:00",
+      "exit_code": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "adapter-syntax",
+      "command": [
+        "node",
+        "--check",
+        "scripts/prepare-v1followup-tests.mjs"
+      ],
+      "started": "2026-10-29T18:53:59.529038+00:00",
+      "exit_code": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "served": {
+    "15326": {
+      "matched_files": 4,
+      "matches_versioned_proof": true
+    },
+    "15327": {
+      "matched_files": 6,
+      "matches_versioned_proof": true
+    },
+    "18330": {
+      "health": {
+        "status": "ok",
+        "mode": "private-local",
+        "cleanup": {
+          "status": "ok",
+          "consecutive_failures": 0
+        }
+      }
+    },
+    "18332": {
+      "health": {
+        "status": "ok",
+        "mode": "private-local",
+        "cleanup": {
+          "status": "ok",
+          "consecutive_failures": 0
+        }
+      }
+    }
+  },
+  "accepted_product_test_tooling_identical": true,
+  "server_bonus_absent": true,
+  "all_reproduction_indexed_git_blobs_match": true,
+  "historical_evidence_unchanged": true,
+  "passed": true,
+  "finished": "2026-10-29T18:54:00.643337+00:00",
+  "method_sha256": "e0b2ccbd545d7ec86da76aa45fd02602c01835aa58a195ec664714d8200f5506"
+}

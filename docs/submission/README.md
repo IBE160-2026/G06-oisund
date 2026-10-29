@@ -1,8 +1,15 @@
 # Submission guide — V1-20 / Story 12.5
 
+Current owner decision29October2026: **“Jeg godkjenner kandidaten og V1-grunnlaget”**, after all actual personal controls; [record](../evidence/v1-acceptance-2026-10-29.md). Main integration/checks passed; Epic12 and consolidated local V1 are complete. See [final main integration/closure](../evidence/v1-main-integration-20261029.md). Older pending wording below describes earlier checkpoints; it does not override this explicit acceptance. Server bonus and broader external operations are excluded.
+
+Corrected product snapshot: C1 `3c2287ed68d0cbb1923439fc6ee00254395072a4`, with [fresh delivery and actual Lenovo verification](../evidence/v1-acceptance-2026-10-29.md) and [current recipe](v1-followup-reproduction.md#corrected-delivery-snapshot-and-executed-recipe). Owner acceptance and local V1 closure are complete; historical c067fdb evidence is preserved. Server bonus work is excluded from this V1. Later conditional merge/closure authority is recorded in the current acceptance record; no coursework/release/deployment is authorized.
+
+> Historical tracking checkpoint (superseded by the later actual candidate acceptance):
 > Owner clarification,29October2026: the prior Epic12 done publication was a misunderstanding; only Story12.5 was to be marked done. All accepted story results and the completed retrospective remain unchanged. Epic12 stays open pending the closure basis and owner decisions.
 
-Start with the [clean-checkout recipe](../../README.md). This directory is the assessment entry point for the accepted smaller V1 under SCOPE-02. Story 12.5 is done/accepted after [Jonas's explicit whole-story decision on28October2026](../evidence/12-5-owner-acceptance-2026-10-28.md). Epic 12 remains in progress; closure is separate.
+Start with the [clean-checkout recipe](../../README.md). This directory is the assessment entry point for the accepted smaller V1 under SCOPE-02. Story 12.5 is done/accepted after [Jonas's explicit whole-story decision on28October2026](../evidence/12-5-owner-acceptance-2026-10-28.md). Epic12/local V1 closure is complete after the accepted D1–D3 integration and final checks.
+
+The later authorized D1–D3 candidate is separate: [qualification, point status and owner checklist](v1-followup-qualification.md), [candidate reproduction](v1-followup-reproduction.md). C1 has its own explicit owner acceptance and main integration; historical12.5 results retain their original source. No course submission, release or deployment is performed.
 
 | Review need | Entry |
 |---|---|

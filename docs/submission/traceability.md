@@ -1,8 +1,15 @@
 # Requirement-to-test traceability
 
+Current owner decision29October2026: **“Jeg godkjenner kandidaten og V1-grunnlaget”**, after all actual personal controls; [record](../evidence/v1-acceptance-2026-10-29.md). Main integration/checks passed; Epic12 and consolidated local V1 are complete. See [final main integration/closure](../evidence/v1-main-integration-20261029.md). Older pending wording below describes earlier checkpoints; it does not override this explicit acceptance. Server bonus and broader external operations are excluded.
+
+Current C1 supplement: [fresh corrected-snapshot reproduction and actual Lenovo22/22](../evidence/v1-acceptance-2026-10-29.md), with actual API/PostgreSQL delivery3/3, guarded lifecycle and all served-source hashes. These add C1 evidence for AC-07/09/10/11/12 and NFR-2/3/4 without relabelling the historical matrices. Personal selection/Start rejection controls passed; all grouped personal controls and whole-candidate acceptance are complete. Server bonus work is excluded. No expired-token/assigned-member result is inferred from the owner's available active token/non-member account.
+
+The authorized post-retrospective D1–D3 candidate has its own [qualification and per-family crosswalk](v1-followup-qualification.md). This supplements the historical matrices below; it does not relabel their source revisions or replace the accepted `c067fdb` snapshot. C1 product acceptance and Epic12/local V1 closure are complete; see [final main integration/closure](../evidence/v1-main-integration-20261029.md).
+
+> Historical tracking checkpoint (superseded by the later actual candidate acceptance):
 > Owner clarification,29October2026: the prior Epic12 done publication was a misunderstanding; only Story12.5 was to be marked done. All accepted story results and the completed retrospective remain unchanged. Epic12 stays open pending the closure basis and owner decisions.
 
-Current completion and residual-work dispositions are consolidated in [the V1 closure assessment](v1-closeout.md) and [completed Epic12 retrospective](../../_bmad-output/implementation-artifacts/epic-12-retro-2026-10-29.md). All20 stories are accepted, but Epic12 remains in-progress pending explicit decisions. Unfinished A7/A8 follow-through is separated from existing named coverage; a proposed deferral is not a passed test or owner decision.
+Current completion and residual-work dispositions are consolidated in [the V1 closure assessment](v1-closeout.md) and [completed Epic12 retrospective](../../_bmad-output/implementation-artifacts/epic-12-retro-2026-10-29.md). All20 stories and C1 are accepted; Epic12/local V1 are complete. A7/A8 follow-through is completed with exact historical/current provenance; no proposed deferral is relabelled approved.
 
 These are the current SCOPE-02 meanings from the [PRD](../../_bmad-output/planning-artifacts/prds/prd-IBE160-2026-09-21/prd.md), not the superseded GPS/live-feed scope in the archive. Story numbers and V1 aliases follow the [canonical story mapping](../../_bmad-output/planning-artifacts/epics.md#traceability-and-sequence). [Current executed counts, source revision, environment and failures](../evidence/12-5-reproduction.md) qualify the 12.5 runs. A linked test or selector identifies executable coverage, not proof that it ran successfully.
 

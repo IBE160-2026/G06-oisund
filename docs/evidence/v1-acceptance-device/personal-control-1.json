@@ -1,0 +1,16 @@
+{
+  "at": "2026-10-29T18:08:58.482Z",
+  "control": 1,
+  "ownerReply": "Bestått og forståelig",
+  "target": "9508CFB504B09412EFF9DE72A2B6DCA0",
+  "observedGuard": false,
+  "status": [
+    "Du er logget inn.",
+    "Bekreftet plan åpnet. Fristen er uendret.",
+    "Lagret skift og aktivitetsstatus er hentet.",
+    "Ukjent. Ingen fysisk buss er registrert.",
+    "Avvist aktivitetsvalg er avbrutt. Lagret valg er uendret.",
+    "Lagret status er hentet."
+  ],
+  "method": "Human finger actions reported by owner; subsequent passive UI assertions on exact owned target"
+}

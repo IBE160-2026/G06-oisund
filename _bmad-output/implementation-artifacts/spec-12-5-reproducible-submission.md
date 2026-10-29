@@ -17,6 +17,7 @@ context: []
 
 ## Intent
 
+> Historical tracking checkpoint before C1 acceptance/final closure (see current V1 closeout):
 > Owner clarification,29October2026: the prior Epic12 done publication was a misunderstanding; only Story12.5 was to be marked done. All accepted story results and the completed retrospective remain unchanged. Epic12 stays open pending the closure basis and owner decisions.
 
 **Problem:** README mixes historical checkpoints and cannot establish that an independent reader can reproduce the accepted V1 without the owner's environment.

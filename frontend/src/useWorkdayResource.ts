@@ -74,25 +74,32 @@ export function useWorkdayResource<T extends Record>(props: ResourceProps, resou
     try {
       const value = await current();
       if (!alive.current || version !== generation.current) return;
-      if (unresolved.current) { setSaved(value); setMessage('Plantilgangen er kontrollert. Forsøket er fortsatt uavklart; kontroller eller prøv samme forsøk.'); }
+      if (unresolved.current || rejected) { setSaved(value); setMessage(rejected ? 'Lagret status er hentet. Det avviste forslaget er beholdt og kan avbrytes.' : 'Plantilgangen er kontrollert. Forsøket er fortsatt uavklart; kontroller eller prøv samme forsøk.'); }
       else { adopt(value); setMessage('Lagret status er hentet.'); }
     } catch (error: any) {
       if (alive.current && version === generation.current) {
         if (error?.status === 401) expired();
-        else { if (!unresolved.current) setSaved(null); setMessage('Status kan ikke bekreftes. Kontroller plantilgangen igjen.'); }
+        else {
+          if (!unresolved.current && !rejected) setSaved(null);
+          setAvailable(false); availability(false);
+          setMessage('Status kan ikke bekreftes. Kontroller plantilgangen igjen.');
+        }
       }
     } finally { if (alive.current && version === generation.current) setBusy(false); }
   }
   useEffect(() => { alive.current = true; void load(); return () => { alive.current = false; generation.current++; lock(false); }; }, [id]);
   async function send(activityId?: string, lookup = false) {
-    if (!saved || sending.current || suspended || comparison || (!pending && resource === 'selection' && !activityId)) return;
+    if (!saved || sending.current || suspended || comparison || !available && !pending || (!pending && resource === 'selection' && !activityId)) return;
     const operation = pending ?? (rejected ? proposal : null) ?? { operation_id: crypto.randomUUID(), expected_revision: saved.revision, ...(activityId ? { activity_id: activityId } : {}) };
     generation.current++; sending.current = true; unresolved.current = true; lock(true);
     setPending(operation); setProposal(operation); setBusy(true); setMessage('Forsøket er uavklart til svaret er kontrollert.');
-    let verifying = false;
+    let verifying = false, dispatchRefusal = false;
     try {
       const status = () => request('/workday-' + resource + '-operations/' + operation.operation_id);
-      const mutate = () => mutation('/workdays/' + id + '/' + resource, operation);
+      const mutate = async () => {
+        try { return await mutation('/workdays/' + id + '/' + resource, operation); }
+        catch (error) { dispatchRefusal = true; throw error; }
+      };
       const receipt = lookup ? await status() : pending ? await recoverOperation(status, current, mutate) : await mutate();
       if (!alive.current) return;
       if (!receipt || Object.keys(receipt).sort().join() !== 'operation_id,result' || receipt.operation_id !== operation.operation_id || !valid(receipt.result, true) || !accepted(receipt.result, operation)) throw Error();
@@ -107,16 +114,26 @@ export function useWorkdayResource<T extends Record>(props: ResourceProps, resou
     } catch (error: any) {
       if (!alive.current) return;
       if (error?.status === 401) { expired(); return; }
-      if (!verifying && !lookup && error?.status === 429 && error.apiDetail && Object.keys(error.apiDetail).sort().join() === 'code,message'
+      if (dispatchRefusal && !verifying && !lookup && error?.status === 429 && error.apiDetail && Object.keys(error.apiDetail).sort().join() === 'code,message'
         && error.apiDetail.code === resource + '_receipt_capacity' && error.apiDetail.message === 'For mange lagringsforsøk. Vent til tidligere planer utløper.') {
         try {
-          const latest = await current(); if (!alive.current) return;
-          setSaved(latest); setPending(null); setRejected(true);
+          await request('/auth/session'); if (!alive.current) return;
+          // A canonical dispatch refusal settles this attempt independently of
+          // whether a later current-state read is available. Keep the proposal
+          // locked until the user explicitly cancels or retries it.
+          setPending(null); setRejected(true); unresolved.current = false;
           setMessage('Forsøket ble avvist: grensen på 2000 lagringsforsøk er nådd. Forslaget er beholdt. Avbryt forslaget eller prøv igjen når tidligere planer utløper.');
+          try { const latest = await current(); if (alive.current) setSaved(latest); }
+          catch (readError: any) {
+            if (!alive.current) return;
+            if (readError?.status === 401) { expired(); return; }
+            setAvailable(false); availability(false);
+            setMessage('Forsøket ble avvist: grensen på 2000 lagringsforsøk er nådd. Gjeldende status er utilgjengelig. Forslaget er beholdt og kan avbrytes.');
+          }
         } catch { if (alive.current) setMessage('Forsøket er uavklart. Kontroller eller prøv samme forsøk.'); }
         return;
       }
-      if (!verifying && !lookup && error?.status === 409 && ['Skiftet er avsluttet. Planen er skrivebeskyttet.', 'Lagringsforsøket har annet innhold.', 'Aktivitetsvalget er endret. Sammenlign med lagret verdi.', 'Skiftstatusen er endret. Last inn lagret status.'].includes(error.apiDetail)) {
+      if (dispatchRefusal && !verifying && !lookup && error?.status === 409 && ['Skiftet er avsluttet. Planen er skrivebeskyttet.', 'Lagringsforsøket har annet innhold.', 'Aktivitetsvalget er endret. Sammenlign med lagret verdi.', 'Skiftstatusen er endret. Last inn lagret status.'].includes(error.apiDetail)) {
         try {
           const latest = await current(); if (!alive.current) return;
           if (error.apiDetail === 'Skiftet er avsluttet. Planen er skrivebeskyttet.') {

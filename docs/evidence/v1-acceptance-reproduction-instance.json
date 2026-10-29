@@ -1,0 +1,67 @@
+{
+  "at": "2026-10-29T18:12:22.104164+00:00",
+  "product_snapshot": "3c2287ed68d0cbb1923439fc6ee00254395072a4",
+  "instance_checkout": "D:\\IBE160\\tmp\\v1-delivery-candidate",
+  "project": "ibe160-v1-delivery",
+  "ports": {
+    "frontend": 15327,
+    "fictional": 18331,
+    "private": 18332
+  },
+  "translations": [
+    [
+      "ibe160-submission",
+      "ibe160-v1-delivery"
+    ],
+    [
+      "15325",
+      "15327"
+    ],
+    [
+      "18327",
+      "18331"
+    ],
+    [
+      "18328",
+      "18332"
+    ]
+  ],
+  "files": {
+    "scripts/submission.mjs": {
+      "original_git_bytes_sha256": "ba6f3ff3f94a266ce491151f687522ccf9ea92443779f189689065b38fcfe8ad",
+      "instance_bytes_sha256": "14fb94c41f4b82ef0bd4983acbcf625c215c4bba2de6edc87c133000d8796166"
+    },
+    "compose.submission.yaml": {
+      "original_git_bytes_sha256": "87a693a2e2445708552de36c0fce563edb1e510ec5d5fb726d3e370290940989",
+      "instance_bytes_sha256": "cbce0762325ca9dcc969de226b0771e0d8b604c73f3236c53b478eb4b8cda992"
+    },
+    "deploy/submission/Dockerfile": {
+      "original_git_bytes_sha256": "4aec5468697077dfcc267e1264e5e995c1eed9d68d88796035d414fa12d3c36c",
+      "instance_bytes_sha256": "dd34de897cf64e7d2359d2d126bb20bfc4dd27715fbfcf5dd5b3715a9cf31bd0"
+    },
+    "deploy/submission/manage.py": {
+      "original_git_bytes_sha256": "a780ca277c6fd2ae84c6e21e3a9c559730555996acf7543f614871c7ad6f6401",
+      "instance_bytes_sha256": "36681636f39b723be9596997d44cf7d40d5cfc96a8ff6018c0228bfc30e2ac42"
+    },
+    "deploy/submission/fictional.py": {
+      "original_git_bytes_sha256": "6f4d3b564ce3ba6a2b2292b03cf1e4d058bfedcff6a90ef0e4576f018b91a6b6",
+      "instance_bytes_sha256": "aedd905a5df5be151827bcdb9542258e65ba530bcb033289fb8a68a452a2b713"
+    },
+    "frontend/playwright.submission.config.ts": {
+      "original_git_bytes_sha256": "96b4d9814b24b31699641c5b40652d6cd300ec61eed0a46d82d635fdc88aab86",
+      "instance_bytes_sha256": "14fde45cbe015ff756a9c05195719b20512c2f352eb5b8991ee9b7e58e3d2f5d"
+    },
+    "scripts/verify-submission-runtime.mjs": {
+      "original_git_bytes_sha256": "417047af220256a9125721b8208c26ec93d124556ff2fc917a24992b14b980fa",
+      "instance_bytes_sha256": "a6d2c971e001bfe2e20ee9bfb6388839dac75c179052794e1381dfa552a54ce8"
+    },
+    "frontend/submission-tests/journey.spec.ts": {
+      "original_git_bytes_sha256": "0d8612bf354bb03d0f5c47be41a102434a8a10076078b74955209c294080ffd8",
+      "instance_bytes_sha256": "7da69d0ac24b319e0491706fc7f4453df2098119d3c76dc3244092e503001a02"
+    }
+  },
+  "app_source_unchanged": true,
+  "server_bonus_absent": true,
+  "existing_submission_untouched": true,
+  "method_sha256": "f8fb1556c7ca5059467d4a6fabd6e1f27d037741ddc9c592cb4ac319c6ee101f"
+}

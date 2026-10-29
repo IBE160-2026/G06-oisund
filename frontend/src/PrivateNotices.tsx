@@ -25,7 +25,7 @@ const canonical = (v: any): string => JSON.stringify(v, (key, value) => timeFiel
 const empty = (): Content => ({ title: '', line_tags: [], line_scope: 'selected', summary: null, description: null, source_note: null, source_url: null, source_updated_at: null, valid_from: null, valid_until: null });
 // The API supplies authoritative Oslo calendar fields; preserve them verbatim.
 const content = (v: Content): Content => ({ title: v.title, line_tags: v.line_tags, line_scope: v.line_scope ?? 'selected', summary: v.summary ?? null, description: v.description ?? null, source_note: v.source_note ?? null, source_url: v.source_url, source_updated_at: v.source_updated_at, valid_from: v.valid_from, valid_until: v.valid_until });
-const sourceDateTime = (v: string) => `${v.slice(8, 10)}.${v.slice(5, 7)}.${v.slice(0, 4)}, ${v.slice(11, 19).replace(/[Z+-].*$/, '')} (Oslo-tid)`;
+const sourceDateTime = (v: string) => `${v.slice(8, 10)}.${v.slice(5, 7)}.${v.slice(0, 4)}, ${v.slice(11).replace(/(?:Z|[+-]\d{2}:\d{2})$/, '')} (UTC${v.endsWith('Z') ? '+00:00' : v.slice(-6)})`;
 const tagText = (tags: string[]) => tags.map(v => /[",]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v).join(', ');
 function parseTags(value: string): string[] | string {
   // One bounded CSV record: ordinary commas still work; doubled quotes preserve

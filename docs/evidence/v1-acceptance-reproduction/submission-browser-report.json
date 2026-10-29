@@ -1,0 +1,235 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "D:\\IBE160\\tmp\\v1-delivery-candidate\\frontend\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--config",
+      "playwright.submission.config.ts"
+    ],
+    "configFile": "D:\\IBE160\\tmp\\v1-delivery-candidate\\frontend\\playwright.submission.config.ts",
+    "rootDir": "D:/IBE160/tmp/v1-delivery-candidate/frontend/submission-tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "D:/IBE160/tmp/v1-delivery-candidate/tmp/submission-browser-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "D:/IBE160/tmp/v1-delivery-candidate/frontend/submission-tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 180000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "D:\\IBE160\\tmp\\v1-delivery-candidate\\tmp\\submission-browser-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "",
+        "testDir": "D:\\IBE160\\tmp\\v1-delivery-candidate\\frontend\\submission-tests",
+        "snapshotDir": "D:\\IBE160\\tmp\\v1-delivery-candidate\\frontend\\submission-tests",
+        "testIgnore": [],
+        "testMatch": "**/*.@(spec|test).?(c|m)[jt]s?(x)",
+        "timeout": 180000,
+        "use": {
+          "baseURL": "http://127.0.0.1:15327",
+          "channel": "chromium",
+          "headless": true,
+          "actionTimeout": 15000,
+          "trace": "retain-on-failure"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": ""
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "line",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "../tmp/submission-browser-report.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "journey.spec.ts",
+      "file": "journey.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "submission actual API/PostgreSQL journey A: import correct save confirm use ended reopen",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 18844,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": "IENvbnRhaW5lciBpYmUxNjAtdjEtZGVsaXZlcnktZnJvbnRlbmQtMSBSZXN0YXJ0aW5nIAogQ29udGFpbmVyIGliZTE2MC12MS1kZWxpdmVyeS1wcml2YXRlLWRiLTEgUmVzdGFydGluZyAKIENvbnRhaW5lciBpYmUxNjAtdjEtZGVsaXZlcnktYXBpLTEgUmVzdGFydGluZyAKIENvbnRhaW5lciBpYmUxNjAtdjEtZGVsaXZlcnktcHJpdmF0ZS1hcGktMSBSZXN0YXJ0aW5nIAogQ29udGFpbmVyIGliZTE2MC12MS1kZWxpdmVyeS1kYi0xIFJlc3RhcnRpbmcgCiBDb250YWluZXIgaWJlMTYwLXYxLWRlbGl2ZXJ5LWZyb250ZW5kLTEgU3RhcnRlZCAKIENvbnRhaW5lciBpYmUxNjAtdjEtZGVsaXZlcnktcHJpdmF0ZS1kYi0xIFN0YXJ0ZWQgCiBDb250YWluZXIgaWJlMTYwLXYxLWRlbGl2ZXJ5LWRiLTEgU3RhcnRlZCAKIENvbnRhaW5lciBpYmUxNjAtdjEtZGVsaXZlcnktYXBpLTEgU3RhcnRlZCAKIENvbnRhaW5lciBpYmUxNjAtdjEtZGVsaXZlcnktcHJpdmF0ZS1hcGktMSBTdGFydGVkIAogQ29udGFpbmVyIGliZTE2MC12MS1kZWxpdmVyeS1hcGktMSBSdW5uaW5nIAogQ29udGFpbmVyIGliZTE2MC12MS1kZWxpdmVyeS1wcml2YXRlLWRiLTEgUnVubmluZyAKIENvbnRhaW5lciBpYmUxNjAtdjEtZGVsaXZlcnktcHJpdmF0ZS1hcGktMSBSdW5uaW5nIAogQ29udGFpbmVyIGliZTE2MC12MS1kZWxpdmVyeS1mcm9udGVuZC0xIFJ1bm5pbmcgCiBDb250YWluZXIgaWJlMTYwLXYxLWRlbGl2ZXJ5LWRiLTEgUnVubmluZyAKIENvbnRhaW5lciBpYmUxNjAtdjEtZGVsaXZlcnktcHJpdmF0ZS1kYi0xIFdhaXRpbmcgCiBDb250YWluZXIgaWJlMTYwLXYxLWRlbGl2ZXJ5LWRiLTEgV2FpdGluZyAKIENvbnRhaW5lciBpYmUxNjAtdjEtZGVsaXZlcnktcHJpdmF0ZS1kYi0xIEhlYWx0aHkgCiBDb250YWluZXIgaWJlMTYwLXYxLWRlbGl2ZXJ5LWRiLTEgSGVhbHRoeSAKIENvbnRhaW5lciBpYmUxNjAtdjEtZGVsaXZlcnktYXBpLTEgV2FpdGluZyAKIENvbnRhaW5lciBpYmUxNjAtdjEtZGVsaXZlcnktcHJpdmF0ZS1hcGktMSBXYWl0aW5nIAogQ29udGFpbmVyIGliZTE2MC12MS1kZWxpdmVyeS1hcGktMSBIZWFsdGh5IAogQ29udGFpbmVyIGliZTE2MC12MS1kZWxpdmVyeS1wcml2YXRlLWFwaS0xIEhlYWx0aHkgCiBDb250YWluZXIgaWJlMTYwLXYxLWRlbGl2ZXJ5LWZyb250ZW5kLTEgV2FpdGluZyAKIENvbnRhaW5lciBpYmUxNjAtdjEtZGVsaXZlcnktZGItMSBXYWl0aW5nIAogQ29udGFpbmVyIGliZTE2MC12MS1kZWxpdmVyeS1hcGktMSBXYWl0aW5nIAogQ29udGFpbmVyIGliZTE2MC12MS1kZWxpdmVyeS1wcml2YXRlLWRiLTEgV2FpdGluZyAKIENvbnRhaW5lciBpYmUxNjAtdjEtZGVsaXZlcnktcHJpdmF0ZS1hcGktMSBXYWl0aW5nIAogQ29udGFpbmVyIGliZTE2MC12MS1kZWxpdmVyeS1mcm9udGVuZC0xIEhlYWx0aHkgCiBDb250YWluZXIgaWJlMTYwLXYxLWRlbGl2ZXJ5LWFwaS0xIEhlYWx0aHkgCiBDb250YWluZXIgaWJlMTYwLXYxLWRlbGl2ZXJ5LXByaXZhdGUtZGItMSBIZWFsdGh5IAogQ29udGFpbmVyIGliZTE2MC12MS1kZWxpdmVyeS1kYi0xIEhlYWx0aHkgCiBDb250YWluZXIgaWJlMTYwLXYxLWRlbGl2ZXJ5LXByaXZhdGUtYXBpLTEgSGVhbHRoeSAK"
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-29T18:19:50.732Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "bf222bad70f76648f722-a2b9404ba3cbca10ad87",
+          "file": "journey.spec.ts",
+          "line": 33,
+          "column": 3
+        },
+        {
+          "title": "submission actual API/PostgreSQL journey C: import correct save confirm use aborted reopen",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 15625,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-29T18:20:15.339Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "bf222bad70f76648f722-ade80bb2ba16839d6fd8",
+          "file": "journey.spec.ts",
+          "line": 33,
+          "column": 3
+        },
+        {
+          "title": "submission correct import B saves directly into distinct saved-version approval",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5760,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-29T18:20:30.984Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "bf222bad70f76648f722-f7b422409fe76d3b2d5a",
+          "file": "journey.spec.ts",
+          "line": 168,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-29T18:19:50.057Z",
+    "duration": 48341.492000000006,
+    "expected": 3,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

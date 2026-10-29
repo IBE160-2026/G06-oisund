@@ -1,0 +1,14 @@
+{
+  "archive": "docs\\evidence\\v1-followup-bundles\\20261029T170250867538Z-a32cd7e0-final-gateway-image.tar.gz",
+  "archive_sha256": "ee14060c1335f98a0cf405613a4be728fed93c3a06a3ec0fcd1a9bcfb909cc2e",
+  "entries": {
+    "record.json": "bbce2bc7ebffc7ec0eefd01f1348801a55e89b2b09185b085a65dc241ae62689",
+    "raw/command.log": "4519e94ef676b75421a7a63f9dca7440f51b6b44685b680567150dc5aeccee65",
+    "executed-inputs/scripts/verify-retained-data.py": "afeb95a05627a2282c140be8327e7bde662ab9b474a60449d571acd94b314d32",
+    "executed-inputs/scripts/verify-story12-integration.py": "b1b7fb4bf92397071be94e39bbb9cbda3568baed96ede5d226abfc6bd02e70e6",
+    "executed-inputs/scripts/verify-story123.py": "22f46e8622c9df302a06c9cc8a658089a114f11686d06ce17fbd2d18e79fb74f",
+    "executed-inputs/scripts/verify-v1followup.py": "12d9cb51d00b326353cd471ea7d7454d65e9dd11f0e303924ea0b7c49497d302",
+    "executed-inputs/tmp/run-recorded.py": "993c00de0f3877bf970fff1212995e6edf55cf19bda74f4375b060ce15c9e697",
+    "executed-inputs/deploy/tablet/Dockerfile": "7152f852374709274a40e599583d1a0388bca34546f7bcc12dcb8ad6a4103f02"
+  }
+}

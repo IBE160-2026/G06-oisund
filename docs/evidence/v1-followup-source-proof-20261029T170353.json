@@ -1,0 +1,39 @@
+{
+  "at": "2026-10-29T17:03:50.388873+00:00",
+  "scope": "read-only isolated candidate images, loopback static assets and health; no private API payloads or environment",
+  "images": {
+    "ibe160-v1followup-gate:20261029-r1": {
+      "id": "sha256:4016ca0e89284feb195797f65eb275145bfbb75e633578ba2245b6f371f109bc",
+      "file": "deploy/tablet/access_gate/gate.py",
+      "sha256": "b8f7c706a30ff73f155f19c85883aaee9803341f6ef331c4607b0d0a29d3f260",
+      "matches_worktree_bytes": true
+    },
+    "ibe160-v1followup-tests-private-api": {
+      "id": "sha256:6025101c9935a5dc9e59ad68083c4587d0cc7d9c1222c9b31f93542888572b64",
+      "file": "backend/app/private_main.py",
+      "sha256": "8baaf13121ee7ff6807d8978f9f34348e26e381f5a7785e84e2f92f5075c3e5d",
+      "matches_worktree_bytes": true
+    },
+    "ibe160-v1followup-gateway:20261029-r1": {
+      "id": "sha256:c7539e0d3aaf2d420796894cadb1d519f30940a585c5ed098f0ce981b39c0520",
+      "file": "deploy/tablet/nginx.conf.template",
+      "sha256": "57ea84c34787ba6ffde80c4556166341c219315f074458dbabf921b38539c019",
+      "matches_worktree_bytes": true
+    }
+  },
+  "served": {
+    "/assets/main-Ce6IpVYI.js": "71a448bc2fd6f4e61c190eddc8961a20f2300a364f15e18dcc019b3f7c0545ee",
+    "/assets/FictionalAssessment-DgWBF5_Z.js": "7c658dbd5e696de8b7feb29b3b34f3249d07fcd4eabddcea0a2eb7bd5b9cff03",
+    "/assets/FictionalAssessment-Ca5gn51W.css": "d436cb47d234e7a034e820876840f7cb88c6e119b2912f0c3cb996228416e2d3",
+    "/assets/demo-CVYX95Ri.js": "426dd3c6fb5fa7af760bd0a18c8503c99e63f433ac8403a78427f04bc476c3ee"
+  },
+  "private_health": {
+    "status": "ok",
+    "mode": "private-local",
+    "cleanup": {
+      "status": "ok",
+      "consecutive_failures": 0
+    }
+  },
+  "method_sha256": "8478e4aee14bf0621e78d45a66bb16101f1c0b7e07b1298df814edcdba32a663"
+}

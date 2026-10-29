@@ -1,0 +1,11 @@
+# Closed local V1 — handoff
+
+Jonas explicitly accepted C1 and the local V1 basis: **“Jeg godkjenner kandidaten og V1-grunnlaget”**. All personal controls passed. D1/D2/D3 and Epic12/local V1 are complete after [actual main integration checks](docs/evidence/v1-main-integration-20261029.md). Immutable corrected product/test/tooling snapshot: **3c2287ed68d0cbb1923439fc6ee00254395072a4**. Historical c067fdb and original evidence remain unchanged. Main publication and ordinary integrated-branch deletion receipts are in the [session log](.logs/jonas-oisund/990-2026-10-29-18-32-00-v1-d1-d2-d3-oppfolging.md); do not invent this document's own commit hash.
+
+Retain `D:/IBE160/tmp/v1-remediation` and its private files, own `ibe160-v1followup-tests` runtime (UI15326/APIs18329/18330), preview and physical Lenovo context. Dedicated local review credentials: `.private-runtime/v1-acceptance-manual-credentials.json`; never print/commit/reset. Corrected native-dialog helper is `tmp/manual-device-native.cjs`; it never accepts/dismisses owner dialogs. Retain the separate detached C1 delivery checkout `D:/IBE160/tmp/v1-delivery-candidate`, its config-only namespace/ports15327/18331/18332, private credentials and test runtime. [Exact recipe/configuration](docs/submission/v1-followup-reproduction.md). No worktree deletion or broad cleanup is needed.
+
+Original `D:/IBE160` Ubuntu/server work is separate bonus work, excluded from V1/prerequisites; possible later v1.0.1 is a future decision. The five extension-planning worktrees and all other ongoing work are preserved.
+
+Genuine expired Access-token replay, another assigned member/MFA policy, WAN/IPv6 and broader operational proof limits remain unperformed. Only an active token and already-denied non-member are available. Isolated candidate evidence and observations of older production remain distinct; integrating bounded B6–B10 source is not deployment. Future E12-A2 walkthroughs remain standing practice, not pre-executed results. No local V1 blocker or additional owner decision remains.
+
+No production data/account/access/remote service operation, production deployment/server move, tag/release, coursework submission or extension work belongs to this closure. Preserve existing operations and retained private/test environments.

@@ -8,16 +8,17 @@ epics: 4
 stories: 20
 implementationStatus: historical-planning-baseline
 currentDeliveryTracking: ../implementation-artifacts/sprint-status.yaml
-currentDeliveryStatus: all-20-stories-accepted-epic-12-held-for-closeout
+currentDeliveryStatus: all-20-stories-and-corrected-V1-accepted-closed
 ---
 
 # IBE160 — Active Course V1 Backlog
 
+> Historical tracking checkpoint before C1 acceptance/final closure (see current V1 closeout):
 > Owner clarification,29October2026: the prior Epic12 done publication was a misunderstanding; only Story12.5 was to be marked done. All accepted story results and the completed retrospective remain unchanged. Epic12 stays open pending the closure basis and owner decisions.
 
 ## Current delivery status 29 October 2026
 
-All 20 SCOPE-02 stories (9.1–12.5 / V1-01–20) are done and owner-accepted. Epics 9–11 are done; Epic 12 remains in-progress at the owner's instruction pending the [V1 closure decisions](../../docs/submission/v1-closeout.md). The [Epic 12 retrospective](../implementation-artifacts/epic-12-retro-2026-10-29.md) is complete with `accepted-with-open-items`. Story completion does not close follow-ups or approve their proposed deferral. Earlier planning baselines and test outcomes retain their original meaning.
+All 20 SCOPE-02 stories (9.1–12.5 / V1-01–20) are done and owner-accepted. Epics9–12 and consolidated local V1 are done after explicit C1 acceptance and [actual final integration checks](../../docs/evidence/v1-main-integration-20261029.md). The [Epic 12 retrospective](../implementation-artifacts/epic-12-retro-2026-10-29.md) is complete with `accepted-with-open-items`. Story completion alone did not close follow-ups: the later D1–D3 remediation/qualification and owner decision now do. No proposed deferral is relabelled approved. Earlier planning baselines and test outcomes retain their original meaning.
 
 ## Authority and numbering
 

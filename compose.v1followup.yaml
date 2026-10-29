@@ -1,0 +1,79 @@
+# Synthetic integration only; never overlays ordinary service definitions.
+name: ibe160-v1followup-tests
+services:
+  db:
+    image: postgres:17-alpine@sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24
+    environment:
+      POSTGRES_DB: fictional_assessment
+      POSTGRES_USER: fictional
+      POSTGRES_PASSWORD_FILE: /run/secrets/v1followup_password
+    secrets: [v1followup_password]
+    volumes: [v1followup_fictional:/var/lib/postgresql/data]
+    healthcheck:
+      test: [CMD-SHELL, pg_isready -U fictional -d fictional_assessment]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+  api:
+    build: ./backend
+    # Read the ignored password inside the container, never in a URL or evidence.
+    command: [python, -c, "import os,runpy; from pathlib import Path; from urllib.parse import quote; os.environ['DATABASE_URL']='postgresql://fictional:'+quote(Path('/run/secrets/v1followup_password').read_text().strip(),safe='')+'@db/fictional_assessment'; runpy.run_module('app.run',run_name='__main__')"]
+    environment:
+      APP_MODE: fictional-assessment
+      FICTIONAL_ORIGIN: http://127.0.0.1:15326
+    secrets: [v1followup_password]
+    volumes:
+      - ./backend:/app:ro
+      - ./Eksempelfiler:/fixtures:ro
+    ports: ['127.0.0.1:18329:8000']
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+    depends_on:
+      db:
+        condition: service_healthy
+  private-db:
+    image: postgres:17-alpine@sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24
+    environment:
+      POSTGRES_DB: private_work
+      POSTGRES_USER: private_work
+      POSTGRES_PASSWORD_FILE: /run/secrets/v1followup_password
+    secrets: [v1followup_password]
+    volumes: [v1followup_private:/var/lib/postgresql/data]
+    healthcheck:
+      test: [CMD-SHELL, pg_isready -U private_work -d private_work]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+  private-api:
+    build: ./backend
+    environment:
+      APP_MODE: private-local
+      PRIVATE_DATABASE_URL: postgresql://private_work@private-db/private_work
+      PRIVATE_DATABASE_PASSWORD_FILE: /run/secrets/v1followup_password
+      PRIVATE_ORIGIN: http://127.0.0.1:15326
+      PRIVATE_LOOPBACK_DEVELOPMENT: '1'
+      PRIVATE_TEST_PROJECT: ibe160-private-tests
+      PRIVATE_TEST_API: http://private-api:8000
+      PRIVATE_TEST_ORIGIN: http://127.0.0.1:15326
+    secrets: [v1followup_password]
+    volumes:
+      - ./backend:/app:ro
+      - ./Eksempelfiler:/fixtures:ro
+    ports: ['127.0.0.1:18330:8000']
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+    depends_on:
+      private-db:
+        condition: service_healthy
+volumes:
+  v1followup_fictional:
+  v1followup_private:
+secrets:
+  v1followup_password:
+    file: ./.private-runtime/v1followup-postgres-password

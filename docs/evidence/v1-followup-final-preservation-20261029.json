@@ -1,0 +1,22 @@
+{
+  "at": "2026-10-29T17:27:00.651952+00:00",
+  "baseline_at": "2026-10-29T15:52:14.286098+00:00",
+  "unchanged_other_worktrees": 11,
+  "concurrent_worktree_changes_preserved": [
+    {
+      "path": "D:/IBE160",
+      "head": "9677eba434fe1e5a77f9d4efc45827ebb050c5cc",
+      "status": "?? deploy/ubuntu/\n?? scripts/server.ps1"
+    }
+  ],
+  "ordinary_containers_unchanged": true,
+  "ordinary_volumes_unchanged": true,
+  "ordinary_containers": 35,
+  "ordinary_volumes": 16,
+  "own_followup_and_tracking_worktrees_excluded": true,
+  "authorized_tracking_correction_main": "6f641d75b26a8f5c8b4852a01f7cbf7646905df6",
+  "tracking_only_parent": "9677eba434fe1e5a77f9d4efc45827ebb050c5cc",
+  "product_candidate_not_merged": "3c2287ed68d0cbb1923439fc6ee00254395072a4",
+  "note": "The original D:/IBE160 checkout switched concurrently to setup/ubuntu-server with untracked deploy/ubuntu work before the tracking correction. It was not edited/switched/stashed by this task. Main metadata correction was explicitly owner-authorized and performed in a separate worktree. Historical earlier unchanged checkpoint remains valid at its timestamp. RestartCount and database contents are not audited.",
+  "method_sha256": "560c5552bc32325654042dd844df13dbf9f78b6a4caa2c0361214d0f6b323363"
+}

@@ -9,6 +9,8 @@ from threading import Thread
 
 TOKENS = {}
 UPSTREAM_CALLS = 0
+GATE_COOKIE_SEEN = False
+GATE_CALLS = 0
 
 
 class Upstream(BaseHTTPRequestHandler):
@@ -18,6 +20,8 @@ class Upstream(BaseHTTPRequestHandler):
             value = TOKENS
         elif self.path == '/probe-count':
             value = {'count': UPSTREAM_CALLS}
+        elif self.path == '/probe-gate':
+            value = {'cookie_seen': GATE_COOKIE_SEEN, 'calls': GATE_CALLS}
         else:
             UPSTREAM_CALLS += 1
             value = {'path': self.path, 'headers': dict(self.headers)}
@@ -92,6 +96,30 @@ def probe():
         assert response.headers['Cache-Control'] == 'no-store'
         assert "connect-src 'self'" in response.headers['Content-Security-Policy']
         assert 'Secure' in response.headers['Set-Cookie']
+    # Inspect actual Nginx forwarding, not a string/config approximation.
+    for supplied, expected in [
+        ('CF_Authorization=outer; unrelated=discard; private_session=session; private_csrf=proof', 'private_session=session; private_csrf=proof'),
+        ('private_csrf=proof; private_session=session; unrelated=discard; CF_Authorization=outer', 'private_session=session; private_csrf=proof'),
+        ('unrelated=discard; not_private_session=wrong; private_csrf_extra=wrong', ''),
+        ('', ''), ('private_csrf=proof', 'private_csrf=proof'), ('private_session=session', 'private_session=session'),
+    ]:
+        with request('/private-api/cookie-inspection', 'POST', {**headers, 'Cookie': supplied}) as response:
+            assert response.status == 200
+            actual = {key.lower(): value for key, value in json.load(response)['headers'].items()}
+            assert actual.get('cookie', '') == expected
+            assert 'cf-access-jwt-assertion' not in actual
+            assert response.headers['Cache-Control'] == 'no-store'
+    with urllib.request.urlopen('http://private-api:8000/probe-count') as response:
+        before_duplicates = json.load(response)['count']
+    for supplied in ['private_session=a; private_session=b', 'private_csrf=a; unrelated=x; private_csrf=b', 'CF_Authorization=a; CF_Authorization=b', 'unrelated=a; unrelated=b']:
+        with request('/private-api/cookie-inspection', 'POST', {**headers, 'Cookie': supplied}) as response:
+            assert response.status == 400
+            assert response.headers['Cache-Control'] == 'no-store'
+    with urllib.request.urlopen('http://private-api:8000/probe-count') as response:
+        assert json.load(response)['count'] == before_duplicates, 'Ambiguous cookie reached upstream'
+    with urllib.request.urlopen('http://private-api:8000/probe-gate') as response:
+        gate = json.load(response)
+        assert gate['calls'] > 0 and not gate['cookie_seen'], 'Admission received cookies'
     for path in ['/demo', '/days', '/auth/session', '/private-api', '/index.html', '/_access_verify']:
         with request(path) as response:
             assert response.status == 404, (path, response.status)
@@ -118,10 +146,16 @@ def unavailable_probe():
 
 if __name__ == '__main__':
     if sys.argv[1] == 'server':
-        from gate import handler_for
+        from gate import handler_for, BoundedServer
         from test_gate import synthetic_fixture
         admission, TOKENS, *_ = synthetic_fixture()
-        Thread(target=HTTPServer(('0.0.0.0', 8081), handler_for(admission)).serve_forever, daemon=True).start()
+        class ObservedGate(handler_for(admission)):
+            def do_GET(self):
+                global GATE_COOKIE_SEEN, GATE_CALLS
+                GATE_CALLS += 1
+                GATE_COOKIE_SEEN = GATE_COOKIE_SEEN or bool(self.headers.get_all('Cookie', []))
+                super().do_GET()
+        Thread(target=BoundedServer(('0.0.0.0', 8081), ObservedGate).serve_forever, daemon=True).start()
         HTTPServer(('0.0.0.0', 8000), Upstream).serve_forever()
     elif sys.argv[1] == 'down':
         unavailable_probe()

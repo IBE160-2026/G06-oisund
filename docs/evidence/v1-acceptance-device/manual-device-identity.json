@@ -1,0 +1,19 @@
+{
+  "time": "2026-10-29T18:29:21.662Z",
+  "product": "3c2287ed68d0cbb1923439fc6ee00254395072a4",
+  "browser": "155.0.8059.85",
+  "target": "2BB033FC74B9B31F12E0F270035ADF69",
+  "model": "TB361FU",
+  "android": "16",
+  "method": "actual USB Lenovo browser; separate context, viewport:null; no device metrics emulation",
+  "ui": {
+    "width": 800,
+    "height": 1085,
+    "dpr": 2,
+    "ua": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+    "orientation": "portrait-primary"
+  },
+  "assets": [
+    "/assets/main-Ce6IpVYI.js"
+  ]
+}

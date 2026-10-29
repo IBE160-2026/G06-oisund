@@ -1,0 +1,100 @@
+{
+  "at": "2026-10-29T18:20:46.447274+00:00",
+  "source": "3c2287ed68d0cbb1923439fc6ee00254395072a4",
+  "instance": "ibe160-v1-delivery",
+  "images": {
+    "api": {
+      "id": "sha256:682cb560e87db6ac33358ae02a1f43ba92d25303f90dbf5307452f9254b3b369",
+      "all_app_python_normalized_sha256": {
+        "app/private_import.py": "c393a106353f5e3765258ca05d3be5ac94850cb82175703fce7070a5668e6351",
+        "app/private_storage.py": "bbbb79a1fd3e6d3e90f2245bcac017b5e983d7d744f47529e6cf89f2992a74d5",
+        "app/draft_domain.py": "97bacd8b7683ba3635b75455810adc43fbdf01e292744940b43cd3fe38279ba7",
+        "app/workday_selection_storage.py": "20973ee3a93e690ae9ba3eac7d19f811d460a6338cea115a03dec64c90dbd8f4",
+        "app/draft_time.py": "e6bd1fa7075c98ee9855825de2de319099725fbe5e2d57f0a67090e1974da209",
+        "app/workday_domain.py": "db5aced3a8354765219c8a7eeb32fda23cdaf51997566c76c62f9b259ae916dc",
+        "app/workday_selection_domain.py": "b337bcc1c5c9f3dcd8a6385ab3feb4a7bd8a9d45815ba39f03788170f51c53bd",
+        "app/workday_bus_domain.py": "52770b0bedd181fae1100e31162c149f8609820ef3e7ba513a46f30e32768f45",
+        "app/workday_outcome_domain.py": "4b0be3d79c493f9b2ce30472a21f8ebb3bcd3657b9c0529956014d74abbb227b",
+        "app/workday_notice_domain.py": "f5858d0b5b95ee2859521ca3504d9e7f0ada61f1fc0a937e02e1010f2962dfb8",
+        "app/bus_value.py": "ccb957be6693f12f8aeb191efbe0c8abef775d05bdba8473c76ea2ca3995bf08",
+        "app/qualify_imports.py": "cf24c77d7aed413897572ffb7ec18110751be263e0f61e1343382aa02a6c7cf8",
+        "app/workday_lifecycle_domain.py": "81f6567dd9c7ad72a7731f2b64d91eaa612aadfe67cbbeafc0c31b3bb9932d08",
+        "app/manage.py": "85ec8b01661bdb13818623238855951b80e22b7681876033eea309c5a72ddcb7",
+        "app/storage.py": "cdf8241fb1972b32aab40da3f19063caff7ae2d00c99779be7816e99e8d72df9",
+        "app/workday_notice_storage.py": "a2ada35380a4b78c05ca386e8cbd46e67d51ae8c145bb78b2d8a2a42bc67d710",
+        "app/domain.py": "f2e2cf0a7c89fe5165bf602e54106ab23c26c4b92b595205a997f1c728435ed2",
+        "app/workday_lifecycle_storage.py": "80a80fb2a74a45794bba682f4dff65d8879319eee5af760854dff0a29301b4be",
+        "app/workday_storage.py": "89cbbd883453121ff39b9d0e254dfbbc4c24b653c667d1c9030d216a1e472ac9",
+        "app/pdf_import.py": "fe92405e16e37f831c2c30b2125fc3f25ff577ac4592cc7db4013bb207ce762c",
+        "app/run.py": "a31bd86dd65b59adf9bdb441afd7a60aaa5b94c28d0cf3871488684ec943ad1a",
+        "app/notice_reader_domain.py": "6eb59a431e882b0d2c9e80cc600962664f1aa3c6b59cf221025aa4690ec4ec6d",
+        "app/draft_storage.py": "ce7bc2ea8684f4acf46bbdaef3a0ccf579bf83158417b8d16fe845fc62f9ef96",
+        "app/import_issues.py": "fa0445afce067468b14897ae5d1871ee15c91c618980964a846f843ed4055c0d",
+        "app/main.py": "3f38f223acfd61bcbd698766105fab5c4524e256442bf5850af138af7a73e1ab",
+        "app/private_main.py": "5802b2ba64d3784b0754330b90182219fed3635ffff32c980df55ce6621fc3c3",
+        "app/auth.py": "1af5fec5533383ddcb91913f28e356dcfaadcc3344e2604f0d41da785cc3349a",
+        "app/workday_outcome_storage.py": "727bde834388cb4904d53c2502a7829cbeb0e9a062224ab639641523bdc72e93",
+        "app/workday_bus_storage.py": "e3cf135612673d4d89f24694c7c3e5bbf8565011578fc62571eb58da3d19863c",
+        "app/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "matches_snapshot": true
+    },
+    "private-api": {
+      "id": "sha256:89b5454c581d3fe5fbb33179207ebbafc599623538c925fcdc67b2566d240b77",
+      "all_app_python_normalized_sha256": {
+        "app/private_import.py": "c393a106353f5e3765258ca05d3be5ac94850cb82175703fce7070a5668e6351",
+        "app/private_storage.py": "bbbb79a1fd3e6d3e90f2245bcac017b5e983d7d744f47529e6cf89f2992a74d5",
+        "app/draft_domain.py": "97bacd8b7683ba3635b75455810adc43fbdf01e292744940b43cd3fe38279ba7",
+        "app/workday_selection_storage.py": "20973ee3a93e690ae9ba3eac7d19f811d460a6338cea115a03dec64c90dbd8f4",
+        "app/draft_time.py": "e6bd1fa7075c98ee9855825de2de319099725fbe5e2d57f0a67090e1974da209",
+        "app/workday_domain.py": "db5aced3a8354765219c8a7eeb32fda23cdaf51997566c76c62f9b259ae916dc",
+        "app/workday_selection_domain.py": "b337bcc1c5c9f3dcd8a6385ab3feb4a7bd8a9d45815ba39f03788170f51c53bd",
+        "app/workday_bus_domain.py": "52770b0bedd181fae1100e31162c149f8609820ef3e7ba513a46f30e32768f45",
+        "app/workday_outcome_domain.py": "4b0be3d79c493f9b2ce30472a21f8ebb3bcd3657b9c0529956014d74abbb227b",
+        "app/workday_notice_domain.py": "f5858d0b5b95ee2859521ca3504d9e7f0ada61f1fc0a937e02e1010f2962dfb8",
+        "app/bus_value.py": "ccb957be6693f12f8aeb191efbe0c8abef775d05bdba8473c76ea2ca3995bf08",
+        "app/qualify_imports.py": "cf24c77d7aed413897572ffb7ec18110751be263e0f61e1343382aa02a6c7cf8",
+        "app/workday_lifecycle_domain.py": "81f6567dd9c7ad72a7731f2b64d91eaa612aadfe67cbbeafc0c31b3bb9932d08",
+        "app/manage.py": "85ec8b01661bdb13818623238855951b80e22b7681876033eea309c5a72ddcb7",
+        "app/storage.py": "cdf8241fb1972b32aab40da3f19063caff7ae2d00c99779be7816e99e8d72df9",
+        "app/workday_notice_storage.py": "a2ada35380a4b78c05ca386e8cbd46e67d51ae8c145bb78b2d8a2a42bc67d710",
+        "app/domain.py": "f2e2cf0a7c89fe5165bf602e54106ab23c26c4b92b595205a997f1c728435ed2",
+        "app/workday_lifecycle_storage.py": "80a80fb2a74a45794bba682f4dff65d8879319eee5af760854dff0a29301b4be",
+        "app/workday_storage.py": "89cbbd883453121ff39b9d0e254dfbbc4c24b653c667d1c9030d216a1e472ac9",
+        "app/pdf_import.py": "fe92405e16e37f831c2c30b2125fc3f25ff577ac4592cc7db4013bb207ce762c",
+        "app/run.py": "a31bd86dd65b59adf9bdb441afd7a60aaa5b94c28d0cf3871488684ec943ad1a",
+        "app/notice_reader_domain.py": "6eb59a431e882b0d2c9e80cc600962664f1aa3c6b59cf221025aa4690ec4ec6d",
+        "app/draft_storage.py": "ce7bc2ea8684f4acf46bbdaef3a0ccf579bf83158417b8d16fe845fc62f9ef96",
+        "app/import_issues.py": "fa0445afce067468b14897ae5d1871ee15c91c618980964a846f843ed4055c0d",
+        "app/main.py": "3f38f223acfd61bcbd698766105fab5c4524e256442bf5850af138af7a73e1ab",
+        "app/private_main.py": "5802b2ba64d3784b0754330b90182219fed3635ffff32c980df55ce6621fc3c3",
+        "app/auth.py": "1af5fec5533383ddcb91913f28e356dcfaadcc3344e2604f0d41da785cc3349a",
+        "app/workday_outcome_storage.py": "727bde834388cb4904d53c2502a7829cbeb0e9a062224ab639641523bdc72e93",
+        "app/workday_bus_storage.py": "e3cf135612673d4d89f24694c7c3e5bbf8565011578fc62571eb58da3d19863c",
+        "app/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "matches_snapshot": true
+    }
+  },
+  "served": {
+    "assets/FictionalAssessment-Ca5gn51W.css": "d436cb47d234e7a034e820876840f7cb88c6e119b2912f0c3cb996228416e2d3",
+    "assets/FictionalAssessment-DgWBF5_Z.js": "7c658dbd5e696de8b7feb29b3b34f3249d07fcd4eabddcea0a2eb7bd5b9cff03",
+    "assets/demo-CVYX95Ri.js": "426dd3c6fb5fa7af760bd0a18c8503c99e63f433ac8403a78427f04bc476c3ee",
+    "assets/main-BlSUGlbk.js": "68b3ee217d61063f12abd07dbcfac9d7e886ed30df36dcb491e192af45e15227",
+    "demo.html": "4b5537641378df722b5ed462add7f936fc5d6175075cbeb1a34ba665349ed747",
+    "index.html": "08f7f7db9a166cb55162cbbb2c0eabb7af3b051bd945f59e09a8bd7fc045afee"
+  },
+  "18331_health": {
+    "status": "ok",
+    "mode": "fictional-assessment"
+  },
+  "18332_health": {
+    "status": "ok",
+    "mode": "private-local",
+    "cleanup": {
+      "status": "ok",
+      "consecutive_failures": 0
+    }
+  },
+  "frontend_image": "sha256:f541508f6bde7d034564e726081fd195eb2f50b23c559f58af1949ae4e7d4538"
+}

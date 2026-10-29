@@ -1,0 +1,5 @@
+const fs=require('node:fs'),path=require('node:path');
+const {chromium}=require(path.join(process.cwd(),'frontend/node_modules/@playwright/test'));
+(async()=>{const state=JSON.parse(fs.readFileSync('.private-runtime/v1-acceptance-manual-state.json'));const device=JSON.parse(fs.readFileSync('.private-runtime/v1-acceptance-device.json'));const browser=await chromium.connectOverCDP(device.endpoint);let found=false;
+for(const context of browser.contexts())for(const page of context.pages()){const cdp=await context.newCDPSession(page);if((await cdp.send('Target.getTargetInfo')).targetInfo.targetId!==state.target)continue;found=true;await page.bringToFront();console.log(JSON.stringify({target:state.target,visible:await page.evaluate(()=>document.visibilityState),loginVisible:await page.getByRole('button',{name:'Logg inn',exact:true}).isVisible(),abandonVisible:await page.getByRole('button',{name:'Oppgi uavklart forsøk og lukk planen',exact:true}).isVisible(),messages:await page.getByRole('status').allTextContents()}));}
+if(!found)throw Error('Owned target missing');await browser.close();})().catch(e=>{console.log(e.message);process.exit(1)});
