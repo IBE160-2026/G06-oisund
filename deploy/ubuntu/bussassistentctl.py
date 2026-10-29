@@ -332,7 +332,7 @@ def verify_restore():
         created = True
         for attempt in range(45):
             result = subprocess.run(['docker', 'exec', name, 'pg_isready',
-                                     '-U', 'tablet_bootstrap', '-d', 'private_work'],
+                                     '-h', '127.0.0.1', '-U', 'tablet_bootstrap', '-d', 'private_work'],
                                     stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
             if result.returncode == 0:
                 break
@@ -340,7 +340,9 @@ def verify_restore():
         else:
             raise ValueError('Isolated restore database did not become ready')
         run(['docker', 'exec', name, 'psql', '-U', 'tablet_bootstrap', '-d', 'private_work',
-             '-v', 'ON_ERROR_STOP=1', '-c', 'CREATE ROLE private_work LOGIN'],
+             '-v', 'ON_ERROR_STOP=1', '-c', 'CREATE ROLE private_work LOGIN',
+             '-c', 'ALTER DATABASE private_work OWNER TO private_work',
+             '-c', 'ALTER SCHEMA public OWNER TO private_work'],
             stdout=subprocess.DEVNULL, stderr=subprocess.PIPE)
         with dump.open('rb') as stream:
             run(['docker', 'exec', '-i', name, 'pg_restore', '-U', 'tablet_bootstrap',
