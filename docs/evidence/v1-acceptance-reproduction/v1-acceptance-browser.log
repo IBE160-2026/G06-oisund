@@ -1,0 +1,60 @@
+Synthetic submission account verified; credentials remain in ignored local account.json.
+
+Running 3 tests using 1 worker
+
+
+
+(node:3960) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1/3] submission-tests\journey.spec.ts:33:3 › submission actual API/PostgreSQL journey A: import correct save confirm use ended reopen
+submission-tests\journey.spec.ts:33:3 › submission actual API/PostgreSQL journey A: import correct save confirm use ended reopen
+
+
+
+
+
+
+ Container ibe160-v1-delivery-frontend-1 Restarting 
+ Container ibe160-v1-delivery-private-db-1 Restarting 
+ Container ibe160-v1-delivery-api-1 Restarting 
+ Container ibe160-v1-delivery-private-api-1 Restarting 
+ Container ibe160-v1-delivery-db-1 Restarting 
+ Container ibe160-v1-delivery-frontend-1 Started 
+ Container ibe160-v1-delivery-private-db-1 Started 
+ Container ibe160-v1-delivery-db-1 Started 
+ Container ibe160-v1-delivery-api-1 Started 
+ Container ibe160-v1-delivery-private-api-1 Started 
+ Container ibe160-v1-delivery-api-1 Running 
+ Container ibe160-v1-delivery-private-db-1 Running 
+ Container ibe160-v1-delivery-private-api-1 Running 
+ Container ibe160-v1-delivery-frontend-1 Running 
+ Container ibe160-v1-delivery-db-1 Running 
+ Container ibe160-v1-delivery-private-db-1 Waiting 
+ Container ibe160-v1-delivery-db-1 Waiting 
+ Container ibe160-v1-delivery-private-db-1 Healthy 
+ Container ibe160-v1-delivery-db-1 Healthy 
+ Container ibe160-v1-delivery-api-1 Waiting 
+ Container ibe160-v1-delivery-private-api-1 Waiting 
+ Container ibe160-v1-delivery-api-1 Healthy 
+ Container ibe160-v1-delivery-private-api-1 Healthy 
+ Container ibe160-v1-delivery-frontend-1 Waiting 
+ Container ibe160-v1-delivery-db-1 Waiting 
+ Container ibe160-v1-delivery-api-1 Waiting 
+ Container ibe160-v1-delivery-private-db-1 Waiting 
+ Container ibe160-v1-delivery-private-api-1 Waiting 
+ Container ibe160-v1-delivery-frontend-1 Healthy 
+ Container ibe160-v1-delivery-api-1 Healthy 
+ Container ibe160-v1-delivery-private-db-1 Healthy 
+ Container ibe160-v1-delivery-db-1 Healthy 
+ Container ibe160-v1-delivery-private-api-1 Healthy 
+[2/3] submission-tests\journey.spec.ts:33:3 › submission actual API/PostgreSQL journey C: import correct save confirm use aborted reopen
+submission-tests\journey.spec.ts:33:3 › submission actual API/PostgreSQL journey C: import correct save confirm use aborted reopen
+
+
+[3/3] submission-tests\journey.spec.ts:168:1 › submission correct import B saves directly into distinct saved-version approval
+submission-tests\journey.spec.ts:168:1 › submission correct import B saves directly into distinct saved-version approval
+
+
+  3 passed (48.3s)
+(node:35192) [DEP0190] DeprecationWarning: Passing args to a child process with shell option true can lead to security vulnerabilities, as the arguments are not escaped, only concatenated.
+(Use `node --trace-deprecation ...` to show where the warning was created)
