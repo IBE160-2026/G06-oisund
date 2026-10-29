@@ -1,7 +1,7 @@
 # Ubuntu-server for Bussassistent
 
 Godkjent plan: 2026-10-29. Arbeidsbranch: setup/ubuntu-server.
-Status oppdatert 29.10 kl.21:10: fire oppstarter med kernel7.0.0-42 bestått. API-, database- og tunnelkrasjtester bestått med uendrede tabellfingeravtrykk. Faktisk Windows-backup kontrollert. Apprelease eb0eee3, driftsverktøy fra800ffb0. Eier har bekreftet innlogging/lagring og bevart utkast etter oppdatering og ny innlogging. Lokkprøve på ekstern strøm bestått21:18. Nettbrudd/gjenoppkobling bestått21:25 uten omstart av tunnelprosessen. Windows-av-prøve gjenstår; historiske funn nedenfor beskriver tidligere tilstand.
+Status oppdatert 29.10 etter Windows-av-prøven: fire oppstarter med kernel7.0.0-42 bestått. API-, database- og tunnelkrasjtester bestått med uendrede tabellfingeravtrykk. Faktisk Windows-backup kontrollert. Apprelease eb0eee3, driftsverktøy fra800ffb0. Eier har bekreftet innlogging/lagring og bevart utkast etter oppdatering og ny innlogging. Lokkprøve på ekstern strøm bestått21:18. Nettbrudd/gjenoppkobling bestått21:25 uten omstart av tunnelprosessen. Eier har også bestått mobilnettprøve og innlogging/lagring med Windows helt avslått, uten feil. Etterkontroll viser frisk app/tunnel og vellykket Windows-backup etter innlogging. Langtidsstabilitet observeres videre; historiske funn nedenfor beskriver tidligere tilstand.
 
 ## Maskin og eksisterende drift
 
