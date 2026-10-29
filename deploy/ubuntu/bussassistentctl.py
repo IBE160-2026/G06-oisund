@@ -231,10 +231,10 @@ def install_tools(path):
         target = Path('/etc/systemd/system') / name
         if target.is_symlink():
             raise ValueError('Unexpected service symlink')
-        shutil.copyfile(path / 'deploy/ubuntu' / name, target)
+        target.write_text((path / 'deploy/ubuntu' / name).read_text(), newline='\n')
         target.chmod(0o644)
     temporary = Path('/usr/local/sbin/bussassistentctl.new')
-    shutil.copyfile(path / 'deploy/ubuntu/bussassistentctl.py', temporary)
+    temporary.write_text((path / 'deploy/ubuntu/bussassistentctl.py').read_text(), newline='\n')
     temporary.chmod(0o755)
     temporary.replace('/usr/local/sbin/bussassistentctl')
     run(['systemctl', 'daemon-reload'])

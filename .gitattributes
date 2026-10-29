@@ -3,3 +3,6 @@
 
 # Executed console transcripts retain pytest/Compose trailing spaces verbatim.
 /docs/evidence/12-5-*.txt -whitespace
+
+# Linux deployment scripts and units must remain LF even in Windows git archives.
+/deploy/ubuntu/** text eol=lf
