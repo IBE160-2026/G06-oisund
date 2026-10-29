@@ -1,0 +1,31 @@
+{
+  "at": "2026-10-29T17:27:47.340055+00:00",
+  "owner_authorization": "Explicit approval in this chat to publish only the eight-file tracking correction to main; product/test/runtime excluded.",
+  "metadata_commit": "26b9e259c72346ca73a7b447998d16e6fcca86be",
+  "separate_log_commit_and_verified_remote_main": "6f641d75b26a8f5c8b4852a01f7cbf7646905df6",
+  "previous_main": "9677eba434fe1e5a77f9d4efc45827ebb050c5cc",
+  "development_status_changes": {
+    "epic-12": [
+      "done",
+      "in-progress"
+    ]
+  },
+  "action_items_unchanged": true,
+  "story_12_5": "done",
+  "retrospective": "done",
+  "changed_paths": [
+    ".logs/jonas-oisund/991-2026-10-29-07-44-31-epic-12-retrospektiv.md",
+    ".logs/jonas-oisund/issues.md",
+    "_bmad-output/implementation-artifacts/epic-12-context.md",
+    "_bmad-output/implementation-artifacts/epic-12-retro-2026-10-29.md",
+    "_bmad-output/implementation-artifacts/spec-12-5-reproducible-submission.md",
+    "_bmad-output/implementation-artifacts/sprint-status.yaml",
+    "_bmad-output/planning-artifacts/epics.md",
+    "docs/submission/README.md",
+    "docs/submission/traceability.md",
+    "docs/submission/v1-closeout.md"
+  ],
+  "product_test_tooling_deployment_diff": false,
+  "product_candidate_unmerged": "3c2287ed68d0cbb1923439fc6ee00254395072a4",
+  "other_original_checkout": "setup/ubuntu-server work preserved; separate correction worktree used"
+}

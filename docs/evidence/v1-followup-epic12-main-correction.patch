@@ -1,0 +1,131 @@
+--- a/_bmad-output/implementation-artifacts/epic-12-context.md
++++ b/_bmad-output/implementation-artifacts/epic-12-context.md
+@@ -1,10 +1,12 @@
+ # Epic 12 Context: Verify and Deliver the Assessable Application
++
++> Owner clarification,29October2026: the prior Epic12 done publication was a misunderstanding; only Story12.5 was to be marked done. All accepted story results and the completed retrospective remain unchanged. Epic12 stays open pending the closure basis and owner decisions.
+ 
+ <!-- Compiled from planning artifacts. Edit freely. Regenerate with compile-epic-context if planning docs change. -->
+ 
+ ## Current accepted state 29 October 2026
+ 
+-All five stories are done/accepted and integrated on main: 12.1/12.2 on 27 October, 12.3 after its required Lenovo checks on 27 October, and 12.4/12.5 on 28 October. The [completed retrospective](epic-12-retro-2026-10-29.md) has verdict `accepted-with-open-items`; [V1 closure assessment](../../docs/submission/v1-closeout.md) separates completed work, actual residual defects, evidence gaps and pending owner decisions. Epic 12 is done at Jonas's explicit status-update request on29October2026; residual actions and proposed deferral decisions remain unchanged.
++All five stories are done/accepted and integrated on main: 12.1/12.2 on 27 October, 12.3 after its required Lenovo checks on 27 October, and 12.4/12.5 on 28 October. The [completed retrospective](epic-12-retro-2026-10-29.md) has verdict `accepted-with-open-items`; [V1 closure assessment](../../docs/submission/v1-closeout.md) separates completed work, actual residual defects, evidence gaps and pending owner decisions. Epic 12 stays in-progress until that basis and the necessary decisions are resolved.
+ 
+ Current integration evidence: [12.1/12.2](../../docs/evidence/12-integrated-handoff.md), [12.3](../../docs/evidence/12-3-publication-final.md), [12.4](../../docs/evidence/12-4-main-integration.md), [12.5](../../docs/evidence/12-5-main-integration.md). The immutable reproducible source remains `c067fdbb20150219c041588ed4e990e7b0ef6b94`. Historical runs retain their recorded builds, failures and limits. No extension, release/tag, deployment or course submission is authorized by closure preparation.
+ 
+--- a/_bmad-output/implementation-artifacts/epic-12-retro-2026-10-29.md
++++ b/_bmad-output/implementation-artifacts/epic-12-retro-2026-10-29.md
+@@ -9,7 +9,9 @@
+ 
+ # Epic 12 retrospective — Verify and Deliver the Assessable Application
+ 
+-> Current status,29October2026: Jonas subsequently requested updating and pushing the remaining in-progress sprint status; Epic12 is now done. Its stories and retrospective are complete, with verdict accepted-with-open-items. Residual actions and D1–D3 disposition proposals remain unchanged. The earlier in-progress/no-push statements below describe historical checkpoints, before the publication and status-update requests. [The V1 closure assessment](../../docs/submission/v1-closeout.md) preserves the remaining work and decision boundaries.
++> Owner clarification,29October2026: the prior Epic12 done publication was a misunderstanding; only Story12.5 was to be marked done. All accepted story results and the completed retrospective remain unchanged. Epic12 stays open pending the closure basis and owner decisions.
++
++> Closeout preparation follow-up,29October2026: Jonas subsequently authorized publishing this completed retrospective, its evidence, confirmed tracking changes and necessary documentation. [The consolidated V1 closure assessment](../../docs/submission/v1-closeout.md) now classifies every remaining registered action and the older unnumbered observations. The original no-push/no-document-remediation statements below describe retrospective completion, before that authorization. E12-A1 documentation reconciliation is now completed; E12-A2 and residual product/test/security work remain open. No proposed deferral has been approved, and Epic12 stays in-progress.
+ 
+ ## Epic summary
+ 
+--- a/_bmad-output/implementation-artifacts/spec-12-5-reproducible-submission.md
++++ b/_bmad-output/implementation-artifacts/spec-12-5-reproducible-submission.md
+@@ -11,11 +11,13 @@
+ context: []
+ ---
+ 
+-**Current decision:** Jonas explicitly accepted Story12.5 in full on28October2026 after all ten guided assessment parts. [Acceptance record](../../docs/evidence/12-5-owner-acceptance-2026-10-28.md). The frozen starting intent and earlier review notes retain historical pending wording; current status is done/accepted. Epic12 is done at Jonas's subsequent status-update request on29October2026, after its completed retrospective; residual follow-ups remain tracked.
++**Current decision:** Jonas explicitly accepted Story12.5 in full on28October2026 after all ten guided assessment parts. [Acceptance record](../../docs/evidence/12-5-owner-acceptance-2026-10-28.md). The frozen starting intent and earlier review notes retain historical pending wording; current status is done/accepted. Epic12 remains in progress by explicit instruction.
+ 
+ <frozen-after-approval reason="User explicitly authorized autonomous completion through review; product contract changes still require clarification">
+ 
+ ## Intent
++
++> Owner clarification,29October2026: the prior Epic12 done publication was a misunderstanding; only Story12.5 was to be marked done. All accepted story results and the completed retrospective remain unchanged. Epic12 stays open pending the closure basis and owner decisions.
+ 
+ **Problem:** README mixes historical checkpoints and cannot establish that an independent reader can reproduce the accepted V1 without the owner's environment.
+ 
+--- a/_bmad-output/planning-artifacts/epics.md
++++ b/_bmad-output/planning-artifacts/epics.md
+@@ -13,9 +13,11 @@
+ 
+ # IBE160 — Active Course V1 Backlog
+ 
++> Owner clarification,29October2026: the prior Epic12 done publication was a misunderstanding; only Story12.5 was to be marked done. All accepted story results and the completed retrospective remain unchanged. Epic12 stays open pending the closure basis and owner decisions.
++
+ ## Current delivery status 29 October 2026
+ 
+-All 20 SCOPE-02 stories (9.1–12.5 / V1-01–20) are done and owner-accepted. Epics 9–12 are done; Jonas requested completing and publishing Epic12's sprint status on29October2026. Residual [V1 closure decisions](../../docs/submission/v1-closeout.md) remain tracked separately. The [Epic 12 retrospective](../implementation-artifacts/epic-12-retro-2026-10-29.md) is complete with `accepted-with-open-items`. Epic completion does not close follow-ups or approve their proposed deferral. Earlier planning baselines and test outcomes retain their original meaning.
++All 20 SCOPE-02 stories (9.1–12.5 / V1-01–20) are done and owner-accepted. Epics 9–11 are done; Epic 12 remains in-progress at the owner's instruction pending the [V1 closure decisions](../../docs/submission/v1-closeout.md). The [Epic 12 retrospective](../implementation-artifacts/epic-12-retro-2026-10-29.md) is complete with `accepted-with-open-items`. Story completion does not close follow-ups or approve their proposed deferral. Earlier planning baselines and test outcomes retain their original meaning.
+ 
+ ## Authority and numbering
+ 
+--- a/_bmad-output/implementation-artifacts/sprint-status.yaml
++++ b/_bmad-output/implementation-artifacts/sprint-status.yaml
+@@ -29,7 +29,7 @@
+ # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
+ # - Retrospective appends its action items to action_items; the status view surfaces open ones
+ generated: 10-19-2026 14:35
+-last_updated: 10-29-2026 16:35
++last_updated: 10-29-2026 18:20
+ project: IBE160
+ project_key: NOKEY
+ tracking_system: file-system
+@@ -59,7 +59,7 @@
+   11-6-recover-from-an-unavailable-server: done # Jonas explicitly accepted integrated 11.6 on 2026-10-26; 421 backend / 479 browser passes. Retro authorized; no publication.
+   epic-11-retrospective: done
+ 
+-  epic-12: done # Jonas requested completion/status publication 2026-10-29; all stories and retrospective done. Residual actions remain open.
++  epic-12: in-progress # Owner clarified 2026-10-29: only Story12.5 was to be marked done; epic stays open.
+   12-1-enforce-the-retained-data-boundary: done # Jonas explicitly approved 2026-10-27 after manual A-F passed on desktop/Brave.
+   12-2-repeat-a-fictional-assessment: done # Jonas explicitly approved corrections and requested commit/push 2026-10-27.
+   12-3-use-the-included-views-on-tablet-and-pc: done # Jonas conditional acceptance effective 2026-10-27 after remaining required Lenovo checks passed; device-acceptance report. Historical checkpoint only; subsequent accepted integration is documented in docs/evidence/12-3-publication-final.md.
+--- a/docs/submission/README.md
++++ b/docs/submission/README.md
+@@ -1,6 +1,8 @@
+ # Submission guide — V1-20 / Story 12.5
+ 
+-Start with the [clean-checkout recipe](../../README.md). This directory is the assessment entry point for the accepted smaller V1 under SCOPE-02. Story 12.5 is done/accepted after [Jonas's explicit whole-story decision on28October2026](../evidence/12-5-owner-acceptance-2026-10-28.md). Epic 12 is done at Jonas's request on29October2026, with accepted-with-open-items retrospective and residual work tracked separately.
++> Owner clarification,29October2026: the prior Epic12 done publication was a misunderstanding; only Story12.5 was to be marked done. All accepted story results and the completed retrospective remain unchanged. Epic12 stays open pending the closure basis and owner decisions.
++
++Start with the [clean-checkout recipe](../../README.md). This directory is the assessment entry point for the accepted smaller V1 under SCOPE-02. Story 12.5 is done/accepted after [Jonas's explicit whole-story decision on28October2026](../evidence/12-5-owner-acceptance-2026-10-28.md). Epic 12 remains in progress; closure is separate.
+ 
+ | Review need | Entry |
+ |---|---|
+--- a/docs/submission/traceability.md
++++ b/docs/submission/traceability.md
+@@ -1,6 +1,8 @@
+ # Requirement-to-test traceability
+ 
+-Current completion and residual-work dispositions are consolidated in [the V1 closure assessment](v1-closeout.md) and [completed Epic12 retrospective](../../_bmad-output/implementation-artifacts/epic-12-retro-2026-10-29.md). All20 stories are accepted; Epic12 is done at Jonas's request on29October2026, with residual actions still tracked. Unfinished A7/A8 follow-through is separated from existing named coverage; a proposed deferral is not a passed test or owner decision.
++> Owner clarification,29October2026: the prior Epic12 done publication was a misunderstanding; only Story12.5 was to be marked done. All accepted story results and the completed retrospective remain unchanged. Epic12 stays open pending the closure basis and owner decisions.
++
++Current completion and residual-work dispositions are consolidated in [the V1 closure assessment](v1-closeout.md) and [completed Epic12 retrospective](../../_bmad-output/implementation-artifacts/epic-12-retro-2026-10-29.md). All20 stories are accepted, but Epic12 remains in-progress pending explicit decisions. Unfinished A7/A8 follow-through is separated from existing named coverage; a proposed deferral is not a passed test or owner decision.
+ 
+ These are the current SCOPE-02 meanings from the [PRD](../../_bmad-output/planning-artifacts/prds/prd-IBE160-2026-09-21/prd.md), not the superseded GPS/live-feed scope in the archive. Story numbers and V1 aliases follow the [canonical story mapping](../../_bmad-output/planning-artifacts/epics.md#traceability-and-sequence). [Current executed counts, source revision, environment and failures](../evidence/12-5-reproduction.md) qualify the 12.5 runs. A linked test or selector identifies executable coverage, not proof that it ran successfully.
+ 
+--- a/docs/submission/v1-closeout.md
++++ b/docs/submission/v1-closeout.md
+@@ -2,11 +2,13 @@
+ date: 2026-10-29
+ status: awaiting-owner-decisions
+ scope: SCOPE-02-course-V1
+-epic_12: done
++epic_12: in-progress
+ deferrals_approved_by_this_document: false
+ ---
+ 
+ # V1 closure assessment
++
++> Owner clarification,29October2026: the prior Epic12 done publication was a misunderstanding; only Story12.5 was to be marked done. All accepted story results and the completed retrospective remain unchanged. Epic12 stays open pending the closure basis and owner decisions.
+ 
+ All 20 SCOPE-02 stories are accepted and integrated. The [Epic 12 retrospective](../../_bmad-output/implementation-artifacts/epic-12-retro-2026-10-29.md) is complete with `accepted-with-open-items`. No newly demonstrated blocking privacy, duplicate-write, stale-overwrite or retained-data resurrection defect was established in that retrospective. **Formal V1 closure still needs explicit disposition of the residual defects and verification work below.** Story approval and the earlier four tracker-status approvals do not approve those deferrals.
+ 
+@@ -70,7 +72,7 @@
+ | **D3 future process and operational boundary:** E12-A2, B6–B10 and existing external-security proof limits. | Adopt E12-A2 as future practice and keep operational work outside local course-V1 closure. | Future process execution stays open; operational issues stay open. No new declaration that the deployed environment is safe for broader use. |
+ | **Formal closure after dispositions.** | Once D1–D3 are resolved, authorize Epic12→done and V1 closure with named residual items, unless a required fix/check remains. | Changes tracking only. No tag/release, course submission, deployment or extension begins. |
+ 
+-**Current tracker decision,29October2026:** Jonas requested updating and pushing the remaining in-progress sprint status. Epic12 is now done: all stories and its retrospective are complete, with the retained `accepted-with-open-items` verdict. This supersedes the earlier tracker hold described in the decision table. It does not approve the specific D1–D3 deferral proposals or close their residual work; those dispositions remain pending. There is no new evidence-backed requirement to repeat all tests or implement extensions.
++**Present decision:** no deferral in D1–D3 has been approved by this assessment. Epic12 remains in-progress. There is no new evidence-backed requirement to repeat all tests or implement extensions. If Jonas accepts the proposed dispositions, Epic12 can then be marked done with the retained `accepted-with-open-items` verdict; if any fix/check is required first, it must be completed before that transition.
+ 
+ ## Documentation and publication record
+ 
