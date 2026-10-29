@@ -264,8 +264,9 @@ def main():
         return
     if action == 'enable' and len(sys.argv) == 2:
         ready(release())
-        run(['systemctl', 'enable', '--now', 'bussassistent.service'])
-        run(['systemctl', 'enable', '--now', 'cloudflared.service', 'bussassistent-backup.timer'])
+        run(['systemctl', 'enable', 'bussassistent.service', 'cloudflared.service', 'bussassistent-backup.timer'])
+        # ExecStart takes the same operation lock; queue startup without waiting on ourselves.
+        run(['systemctl', 'start', '--no-block', 'bussassistent.service', 'cloudflared.service', 'bussassistent-backup.timer'])
         return
     if action == 'reboot' and len(sys.argv) == 2:
         run(['shutdown', '-r', '+1', 'Bussassistent planned restart verification'])
@@ -320,7 +321,7 @@ def main():
             print('Deployment failed; tunnel remains stopped. Inspect before rollback.', file=sys.stderr)
             raise
         if tunnel_was_active:
-            run(['systemctl', 'start', 'cloudflared'])
+            run(['systemctl', 'start', '--no-block', 'cloudflared'])
         print('Active release: ' + target.name)
         return
     path = release()

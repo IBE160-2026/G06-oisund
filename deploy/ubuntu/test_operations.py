@@ -144,5 +144,16 @@ class OperationsTests(unittest.TestCase):
         self.assertEqual(existing.read_text(), 'preserve-old-value')
         self.assertFalse((config_dir / 'secrets/postgres-password').exists())
 
+    def test_enable_does_not_wait_on_its_own_operation_lock(self):
+        path = self.root / 'releases' / COMMIT
+        path.mkdir()
+        (self.root / 'current').symlink_to(path)
+        with patch.object(sys, 'argv', ['ctl', 'enable']), patch.object(ops, 'ready'), patch.object(ops, 'run') as run:
+            ops.main()
+        calls = [call.args[0] for call in run.call_args_list]
+        self.assertEqual(calls[0][0:2], ['systemctl', 'enable'])
+        self.assertNotIn('--now', calls[0])
+        self.assertIn('--no-block', calls[1])
+
 if __name__ == '__main__':
     unittest.main()
