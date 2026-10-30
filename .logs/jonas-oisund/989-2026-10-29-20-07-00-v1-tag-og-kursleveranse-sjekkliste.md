@@ -58,3 +58,35 @@ Jonas får lenke til hele engelske utkastet og en konkret nummerert leseveiledni
 - Bekreft gjeldende originale kurskrav, frist, prosjekt-/solo-godkjenning og vurderers innleverings-/tilgangsordning.
 - Jonas må gjennomgå og eventuelt tilpasse refleksjonsforslaget, og bekrefte endelig dokumentasjon/leveranseinnhold før eksakt versjonsfrysing. README/index er teknisk klargjort; endelig frosset oppskriftsvei kontrolleres ved behov uten bred testomkjøring.
 - O3–O6 gjenstår: eksterne Origin/CSRF/cookie/cache/skrive-/enhetstidskombinasjoner, WAN/IPv6, DNS før socket-eierskap og konkret bredere OS/supply-chain/penetrasjon. O1 ved edge og avgrenset O2 er dokumentert på operativ eb0eee3; L3 er ikke helt lukket. Ingen godkjent utsettelse eller generell sikkerhetsgaranti utledes.
+
+
+## 2026-10-31 kl. 00:39 — Jonas Øisund
+
+### Oppgave
+
+Samordne V1-sluttdokumentasjonen etter ferdig Ubuntu-integrasjon. Jonas har uttrykkelig bestemt at serveroppsettet inngår i V1; tidligere bonus/v1.0.1-avgrensning er erstattet. Commit og push dokumentasjonen på faktisk oppdatert main, uten kode-/driftsendringer, tag/release eller innlevering. Refleksjonsforslaget er fortsatt ikke gjennomgått.
+
+### Plan
+
+- Les faktiske AGENTS/CLAUDE/sesjonsloggregler, leveransefiler, krav/status og server-/Access-evidens.
+- Hent GitHub/origin-status; bevar lokal logghistorikk og alle andre worktrees/endringer.
+- Samordne de to kjøreoppsettene, nåstatus og gjenværende leveranse-/driftspunkter; kontroller lenker og dokumentomfang før publisering.
+
+### Resultat
+
+Git fetch og GitHub-connector bekreftet origin/main5dc64000e1f42a550875146e28ac43b363332606. Main-worktree hadde én lokal loggcommit36caae3 og lå bak den ferdige serverintegrasjonen. Vanlig merge d6f12d8 tok inn oppdatert main uten konflikt og bevarte loggcommitten; ingen rebase/reset eller endring av andre worktrees. Original D:/IBE160 er nå detached på5dc6400, ikke lenger en aktiv serverbranch. Ingen lokale prosjektregler om obligatorisk branch/PR er funnet; direkte normal main-push følger bestillingen.
+
+Dokumentcommit7cbcee7 samordner23 filer: README, leveranseindeks/sjekkliste, ny samlet [V1-scope/version map](../../docs/submission/v1-scope-and-operations.md), serverguide, HANDOFF, sporbarhet, begrensninger og gjeldende omfang/status. Historiske krav/retrospektiv/kvalifikasjonsrapporter får daterte nåstatusmerknader; opprinnelige resultatlegemer i de to endrede evidensrapportene er bevart uendret. Refleksjonen har kun redaksjonell omfangsmerknad og to faktiske avgrensningsrettinger; ingen personlige refleksjoner eller godkjenning er skrevet på Jonas sine vegne.
+
+Applikasjon/C1/D1–D3/Epic12 forblir godkjent og ferdig. Ubuntu-integrasjon/overlevering og eierbekreftet innlogging/lagring på faktisk deployet addd27b er fullført. Tidligere tester og O1/avgrenset O2 på eb0eee3 beholder sine egne versjoner; mainpublisering er ikke deploy. Langtidsstabilitet og ubevist fryseårsak videreføres som observasjon, uten nytt oppfunnet akseptkrav. O3–O6 står open/not qualified, ikke godkjente utsettelser. L3 trenger faktiske resultater eller uttrykkelig disposisjon; leveransehindring må ha konkret funn/kravgrunnlag. L1/L2/L4/L5 og senere L6/L7 beskriver reelt gjenstående arbeid.
+
+Kontroll:677 lokale fil-/ankerlenker i23 endrede/nye dokumenter bestod. Fire README-PowerShell-blokker bestod parserkontroll uten utføring. Diff --check bestod. Backend/frontend er uendret mot akseptert C1; backend/frontend/tablet-gate matcher64f91a7-grunnlaget som serverloggen oppgir. Ingen endring i appkode, scripts, deploy-/Compose-konfigurasjon eller rå testevidens mot origin/main. Ingen regresjon, driftsprobe, konto-/regelendring, deploy, serveroperasjon, tag/release, innlevering eller utvidelse utført. Lokal Python-appalias kunne ikke startes; dokumentverktøyet brukte installert Python3.12 direkte. Vanlig Git-henting måtte kjøres med nødvendig tilgang; ingen avvist automatisk godkjenning.
+
+Issues har fått tydelig31.10-nåstatus som erstatter eldre bonusomtale uten å slette historikk; eksisterende åpne kurs-/refleksjons-/drifts-/stabilitetspunkter beholdes. Denne logg-/issuesendringen committes separat og umiddelbart etter oppskriften. Ny remote-/ancestor-kontroll og normal push følger; publisert SHA og ren lokal/fjernstatus kontrolleres før sluttsvar.
+
+### Åpne punkter
+
+- Jonas sin gjennomgang og ferdigstilling av refleksjonen; faktiske kurskrav, frist, format og sensortilgang må bekreftes.
+- O3–O6 forblir åpne for faktiske resultater eller uttrykkelig disposisjon, uten automatisk utsettelse eller ny generell leveranseport.
+- Endelig leveransecommit/innhold og nødvendig oppskriftskontroll, senere særskilt autorisert tag og innlevering gjenstår.
+- Videre langtidsstabilitetsobservasjon er allerede registrert i serveroppfølgingen; ingen ny eiertest eller gjenåpning av ferdig arbeid.
