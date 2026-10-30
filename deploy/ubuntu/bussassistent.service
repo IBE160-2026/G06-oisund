@@ -1,0 +1,20 @@
+[Unit]
+Description=Bussassistent private application
+Requires=docker.service
+After=docker.service network-online.target
+Wants=network-online.target
+PartOf=docker.service
+StartLimitIntervalSec=0
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/local/sbin/bussassistentctl start
+ExecStop=/usr/local/sbin/bussassistentctl stop
+TimeoutStartSec=300
+TimeoutStopSec=120
+Restart=on-failure
+RestartSec=20
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,8 @@
+[Unit]
+Description=Bussassistent daily backup schedule
+[Timer]
+OnCalendar=*-*-* 03:15:00 Europe/Oslo
+Persistent=true
+RandomizedDelaySec=300
+[Install]
+WantedBy=timers.target

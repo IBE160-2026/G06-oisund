@@ -1,0 +1,121 @@
+# Standalone file. Never combine with compose.yaml or compose.private.yaml.
+name: bussassistent
+services:
+  private-db:
+    restart: on-failure
+    logging:
+      driver: local
+      options: {max-size: '10m', max-file: '3'}
+    user: postgres
+    read_only: true
+    cap_drop: [ALL]
+    tmpfs: [/tmp:mode=1777, /var/run/postgresql:mode=1777]
+    security_opt: [no-new-privileges:true]
+    pids_limit: 128
+    image: postgres:17-alpine@sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24
+    environment:
+      POSTGRES_DB: private_work
+      POSTGRES_USER: tablet_bootstrap
+      POSTGRES_PASSWORD_FILE: /run/secrets/tablet_bootstrap_password
+    secrets: [tablet_postgres_password, tablet_bootstrap_password]
+    volumes:
+      - tablet_pg:/var/lib/postgresql/data
+      - ../../deploy/tablet/init-private-role.sql:/docker-entrypoint-initdb.d/010-private-role.sql:ro
+    networks: [storage]
+    healthcheck:
+      test: [CMD-SHELL, pg_isready -U private_work -d private_work]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+  private-api:
+    restart: on-failure
+    logging:
+      driver: local
+      options: {max-size: '10m', max-file: '3'}
+    image: bussassistent-api:${RELEASE_ID:?Set RELEASE_ID}
+    build: ../../backend
+    user: '10001:10001'
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    pids_limit: 128
+    tmpfs: ['/tmp:size=128m,mode=1777']
+    environment:
+      APP_MODE: private-local
+      PRIVATE_HTTPS_DEPLOYMENT: '1'
+      PRIVATE_ORIGIN: https://${TABLET_HOST:?Set TABLET_HOST in ignored .env.tablet}
+      PRIVATE_DATABASE_URL: postgresql://private_work@private-db/private_work
+      PRIVATE_DATABASE_PASSWORD_FILE: /run/secrets/tablet_postgres_password
+    secrets: [tablet_postgres_password]
+    networks: [app, storage]
+    depends_on:
+      private-db:
+        condition: service_healthy
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+  gateway:
+    restart: on-failure
+    logging:
+      driver: local
+      options: {max-size: '10m', max-file: '3'}
+    image: bussassistent-gateway:${RELEASE_ID:?Set RELEASE_ID}
+    build:
+      context: ../..
+      dockerfile: deploy/tablet/Dockerfile
+    environment:
+      TABLET_HOST: ${TABLET_HOST:?Set TABLET_HOST}
+    user: '101:101'
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    pids_limit: 64
+    tmpfs: ['/tmp:size=32m,mode=1777']
+    ports: ['127.0.0.1:18081:8080']
+    # Docker requires a non-internal bridge for actual host port publishing.
+    # Only this gateway joins it; the sole published binding stays loopback.
+    networks: [app, front]
+    depends_on:
+      access-gate:
+        condition: service_started
+      private-api:
+        condition: service_healthy
+  access-gate:
+    restart: on-failure
+    logging:
+      driver: local
+      options: {max-size: '10m', max-file: '3'}
+    image: bussassistent-access-gate:${RELEASE_ID:?Set RELEASE_ID}
+    build:
+      context: ../..
+      dockerfile: deploy/tablet/access_gate/Dockerfile
+    user: '10001:10001'
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    pids_limit: 32
+    networks: [app, keys]
+    secrets: [tablet_access_policy]
+volumes:
+  tablet_pg:
+    name: bussassistent_private_pg
+networks:
+  front:
+    driver: bridge
+    enable_ipv6: false
+    driver_opts:
+      com.docker.network.bridge.host_binding_ipv4: '127.0.0.1'
+  app:
+    internal: true
+  keys:
+  storage:
+    internal: true
+secrets:
+  tablet_bootstrap_password:
+    file: /etc/bussassistent/secrets/bootstrap-password
+  tablet_access_policy:
+    file: /etc/bussassistent/secrets/access-policy.json
+  tablet_postgres_password:
+    file: /etc/bussassistent/secrets/postgres-password

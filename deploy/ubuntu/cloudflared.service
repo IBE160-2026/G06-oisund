@@ -1,0 +1,25 @@
+[Unit]
+Description=Bussassistent Cloudflare Tunnel
+After=network-online.target bussassistent.service
+Wants=network-online.target bussassistent.service
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+User=bussassistent-tunnel
+Group=bussassistent-tunnel
+LoadCredential=tunnel-token:/etc/bussassistent/tunnel-token
+ExecStart=/usr/bin/cloudflared tunnel --no-autoupdate --metrics 127.0.0.1:18083 run --token-file ${CREDENTIALS_DIRECTORY}/tunnel-token
+Restart=always
+RestartSec=10
+TimeoutStopSec=30
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+CapabilityBoundingSet=
+UMask=0077
+
+[Install]
+WantedBy=multi-user.target
