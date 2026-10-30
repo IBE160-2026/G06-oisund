@@ -120,7 +120,7 @@ Bestått29.10:
 
 Senere integrasjon/deploy/rollback og nøyaktige releaser registreres i
 [driftsloggen](../.logs/jonas-oisund/990-2026-10-29-18-30-00-ubuntu-server.md).
-Historiske feil og avgrensninger bevares der. De manuelle testene ovenfor gjelder
+Historiske feil og avgrensninger bevares der. Eier bekreftet31.10.2026 at innlogging/lagringstesten også bestod på integrert release addd27b. De øvrige manuelle testene ovenfor gjelder
 releasen som var aktiv da de ble gjennomført; de er ikke ny eieraksept av senere kode.
 
 Tester ved integrasjon:12 driftstester (chown mockes i ikke-root-testkjøringen),
