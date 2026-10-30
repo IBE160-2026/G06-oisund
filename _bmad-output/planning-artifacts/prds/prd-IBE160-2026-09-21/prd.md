@@ -9,6 +9,8 @@ updated: 2026-10-19
 
 # Bus Driver Assistant — Course V1
 
+> Current-scope note, 31 October 2026: Jonas includes completed Ubuntu integration in final V1. [Superseding scope/status and version-specific evidence](../../../../docs/submission/v1-scope-and-operations.md). Earlier bonus/v1.0.1 exclusions or no-deployment statements below describe their original checkpoint. Application/D1–D3/Epic12 acceptance is unchanged; original tests are not relabelled later-code runs. O3–O6 remain open; final freeze, reflection review and course submission remain pending.
+
 ## 1. Authority and delivery boundary
 
 Jonas explicitly approved [SCOPE-02](../../sprint-change-proposal-2026-10-19.md) on 19 October 2026. This PRD implements that decision and supersedes the September V1 contract. The [brief](../../briefs/brief-IBE160-2026-09-21/product-brief.md), current UX and architecture govern alongside this PRD. Earlier addenda, decisions, mockups and story approvals are historical wherever they conflict. The [historical index](../../archive/pre-scope-02-2026-10-19/README.md) preserves the previous baseline.
@@ -21,7 +23,7 @@ One private driver, initially using Tromsø lines 20/24/28/42; a course assessor
 
 Remaining effort is estimated at 60–80 hours; approximately 60 is the initial planning basis with at least 12 reserved for fixes/delivery. December is the expected submission month, exact date unknown. Fullstack/database is an explicit owner requirement. No paid account, external feed or GPS is required during local demo runtime; setup may require dependency downloads.
 
-Deferred: OCR/scans/images, transit lookup, GPS/stop progression, movement locks/timers, automatic notices and precise trip/stop matching, offline private persistence, device transfer, mentor roles, advanced in-day revision, PDF export, audio, Auto theme, wake lock, external hosting and three-day field evaluation. Speed/weather/meeting buses, route calculation and AI are also outside V1.
+Deferred: OCR/scans/images, transit lookup, GPS/stop progression, movement locks/timers, automatic notices and precise trip/stop matching, offline private persistence, device transfer, mentor roles, advanced in-day revision, PDF export, audio, Auto theme, wake lock and three-day field evaluation. External hosting was deferred in the original SCOPE-02 checkpoint; the completed Ubuntu integration is now included under the 31 October owner decision above. Speed/weather/meeting buses, route calculation and AI are also outside V1.
 
 ## 3. User journeys
 
@@ -123,4 +125,4 @@ SM-3 now means correct manual selection; SM-4 means confirmed import and actual 
 
 First timebox PDF feasibility to 3–4 hours; actual fixtures and expected results still need to be established. V1-02 may proceed independently using fictional data. No extraction/library/source result is already passed. If the useful input envelope fails, record evidence and seek a narrower product decision rather than claiming manual entry passed extraction.
 
-Exact December deadline, assessor environment and available holiday schedule remain open. These do not block the first implementation slice. At 8–10 hours and approximately 30 hours, compare actual remaining work with the 60-hour planning basis and protect the testing reserve. Public hosting and real operational use require later decisions.
+Exact December deadline, assessor environment and available holiday schedule remain open. These do not block the first implementation slice. At 8–10 hours and approximately 30 hours, compare actual remaining work with the 60-hour planning basis and protect the testing reserve. The original checkpoint deferred public hosting and real operational use; the completed Ubuntu integration and owner-tested operational setup are now included under the decision above, while final course delivery remains pending.

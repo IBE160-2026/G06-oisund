@@ -1,5 +1,7 @@
 # Accepted corrected V1 — main integration and closure
 
+> Current-scope note, 31 October 2026: Jonas includes completed Ubuntu integration in final V1. [Superseding scope/status and version-specific evidence](../submission/v1-scope-and-operations.md). Earlier bonus/v1.0.1 exclusions or no-deployment statements below describe their original checkpoint. Application/D1–D3/Epic12 acceptance is unchanged; original tests are not relabelled later-code runs. O3–O6 remain open; final freeze, reflection review and course submission remain pending.
+
 Jonas explicitly accepted **“Jeg godkjenner kandidaten og V1-grunnlaget”** after the [complete personal Lenovo walkthrough](v1-acceptance-2026-10-29.md). His prior conditional instruction authorizes integration/checks/push, Epic12/local-V1 closure and non-forced deletion of the fully integrated branch without another merge confirmation.
 
 Accepted immutable product/test/tooling snapshot: **`3c2287ed68d0cbb1923439fc6ee00254395072a4`** (C1). Accepted published follow-up tip: `70d536fe950586ffe3407b5d1116269b44185bb2`. Updated main parent: `6f641d75b26a8f5c8b4852a01f7cbf7646905df6`. The integration is performed in `D:/IBE160/tmp/epic12-tracking-correction`; original `D:/IBE160` remains on its separate Ubuntu bonus branch. Final merge/push/deletion receipts are recorded in the [session log](../../.logs/jonas-oisund/990-2026-10-29-18-32-00-v1-d1-d2-d3-oppfolging.md) and actual Git refs, rather than inventing this document's own commit hash.

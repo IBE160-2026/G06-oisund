@@ -1,5 +1,7 @@
 # V1 follow-up qualification ledger
 
+> Current-scope note, 31 October 2026: Jonas includes completed Ubuntu integration in final V1. [Superseding scope/status and version-specific evidence](v1-scope-and-operations.md). Earlier bonus/v1.0.1 exclusions or no-deployment statements below describe their original checkpoint. Application/D1–D3/Epic12 acceptance is unchanged; original tests are not relabelled later-code runs. O3–O6 remain open; final freeze, reflection review and course submission remain pending.
+
 ## Later bounded operations result — 29 October 2026
 
 [CF-MEMBER-02 and CF-EXP-01](../evidence/access-operations-20261029.md) now pass on the existing Ubuntu release **eb0eee3496d8999fb28615b49d4bf60124b6158f**, not on newer C1/main. A real active member excluded by the exact email policy was denied on app/API; the same genuine signed token passed before expiry and received Cloudflare Access 302 on both routes after actual expiry. Edge rejection is not a separate local-gate replay proof. Owner changed the team domain during this session; membership denial, fresh MFA and owner access were rechecked on the resulting configuration. Test membership/token files were removed; owner requested the tunnel remain running. Earlier statements below about these two unavailable observations describe the prior qualification session and remain historical. WAN/IPv6, the broader external matrix, OS DNS and other assurance limits are unchanged. Local V1/Epic12 acceptance and deployment status are not rewritten.

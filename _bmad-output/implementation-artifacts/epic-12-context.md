@@ -1,5 +1,7 @@
 # Epic 12 Context: Verify and Deliver the Assessable Application
 
+> Current-scope note, 31 October 2026: Jonas includes completed Ubuntu integration in final V1. [Superseding scope/status and version-specific evidence](../../docs/submission/v1-scope-and-operations.md). Earlier bonus/v1.0.1 exclusions or no-deployment statements below describe their original checkpoint. Application/D1–D3/Epic12 acceptance is unchanged; original tests are not relabelled later-code runs. O3–O6 remain open; final freeze, reflection review and course submission remain pending.
+
 > Historical tracking checkpoint before C1 acceptance/final closure (see current V1 closeout):
 > Owner clarification,29October2026: the prior Epic12 done publication was a misunderstanding; only Story12.5 was to be marked done. All accepted story results and the completed retrospective remain unchanged. Epic12 stays open pending the closure basis and owner decisions.
 
@@ -9,7 +11,7 @@
 
 All five stories are done/accepted and integrated on main: 12.1/12.2 on 27 October, 12.3 after its required Lenovo checks on 27 October, and 12.4/12.5 on 28 October. The [completed retrospective](epic-12-retro-2026-10-29.md) has verdict `accepted-with-open-items`; [V1 closure assessment](../../docs/submission/v1-closeout.md) separates completed work, actual residual defects, evidence gaps and pending owner decisions. Those decisions and D1–D3 criteria are now fulfilled: Jonas accepted C1/local V1 after all personal checks, and [main integration checks passed](../../docs/evidence/v1-main-integration-20261029.md). Epic12/local V1 are done; no further local decision remains.
 
-Current integration evidence: [12.1/12.2](../../docs/evidence/12-integrated-handoff.md), [12.3](../../docs/evidence/12-3-publication-final.md), [12.4](../../docs/evidence/12-4-main-integration.md), [12.5](../../docs/evidence/12-5-main-integration.md). The corrected immutable product source is `3c2287ed68d0cbb1923439fc6ee00254395072a4`; c067fdb remains the historical12.5 snapshot. Server setup is separate bonus work, excluded from V1/prerequisites. Historical runs retain their recorded builds, failures and limits. No extension, release/tag, deployment or course submission is authorized by closure preparation.
+Current integration evidence: [12.1/12.2](../../docs/evidence/12-integrated-handoff.md), [12.3](../../docs/evidence/12-3-publication-final.md), [12.4](../../docs/evidence/12-4-main-integration.md), [12.5](../../docs/evidence/12-5-main-integration.md). The corrected immutable product source is `3c2287ed68d0cbb1923439fc6ee00254395072a4`; c067fdb remains the historical12.5 snapshot. Ubuntu integration is included in final V1 under the later owner decision above; local assessment remains independent of that server. Historical runs retain their recorded builds, failures and limits. No extension, release/tag, deployment or course submission is authorized by closure preparation.
 
 ## Goal
 

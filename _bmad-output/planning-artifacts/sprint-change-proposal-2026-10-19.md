@@ -13,6 +13,8 @@ deadline: December 2026; exact date unconfirmed
 
 # SCOPE-02 — Deliver a smaller, testable driver assistant
 
+> Current-scope note, 31 October 2026: Jonas includes completed Ubuntu integration in final V1. [Superseding scope/status and version-specific evidence](../../docs/submission/v1-scope-and-operations.md). Earlier bonus/v1.0.1 exclusions or no-deployment statements below describe their original checkpoint. Application/D1–D3/Epic12 acceptance is unchanged; original tests are not relabelled later-code runs. O3–O6 remain open; final freeze, reflection review and course submission remain pending.
+
 ## 1. Issue summary and evidence
 
 The instructor's [feedback dated 6 October](briefs/brief-IBE160-2026-09-21/tilbakemelding-product-brief.md) identifies delivery scope as the main problem. The problem definition, real driver involvement and honest failure behavior are strengths. The requested response is a smaller first version, functional acceptance criteria, representative PDF fixtures and early implementation.
