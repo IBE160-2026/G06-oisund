@@ -107,3 +107,5 @@ Manuell 12.1-sjekkliste A–F er bestått27.10.2026 på Jonas_desktop, Brave pri
 Oppdatering til siste passordpunkt31.10: separat implementeringsoppdrag er nå gitt. S1 teknisk kontrollert i dbf3373 (41 backend/18 fokusnettleser,77 syntetiske regresjoner, to reviewrunder). S2–S4 gjennomføres videre; fysisk nettbrett/PC/passordbehandler, praktisk identitetskontroll/overlevering uten opptak og eieraksept er fortsatt **utsatt – krever eier**. Ingen fullført story/epic eller releasegodkjenning er registrert.
 
 S2-oppdatering31.10:3249cb1 implementerer operatørkode/migrasjon/helper, trelags-review og73 backend/18 helpertester bestått. S3/S4 gjenstår; faktisk SSH, identitet/overlevering uten opptak og fysisk eieraksept er fortsatt utsatt – krever eier. Ingen produksjonsendring.
+
+S3-oppdatering31.10:5db0425 implementerer kodeinnløsning, trelags-review og sluttest103 backend/35 fokuserte nettlesertester, samt82 eksisterende syntetiske regresjoner. S4 samlet gateway-/migrerings-/restorekontroll fortsetter. Historiske testinndata-/utskriftsavvik er dokumentert og korrigert; faktiske eierkontroller er fortsatt utsatt – krever eier.
