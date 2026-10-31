@@ -9,3 +9,5 @@ Når endringen er bekreftet, er alle kontoens appøkter logget ut. Logg inn igje
 Hvis svaret blir borte, er resultatet ukjent: endringen kan være lagret. Passordfeltene fjernes, og forespørselen sendes aldri automatisk på nytt. Fullfør utlogging med knappen som vises, og prøv deretter det nye passordet. Hvis det ikke virker, kan det gamle fortsatt gjelde.
 
 En frakoblet enhet kan ikke varsles straks. Ved neste tilgangskontroll avvises gamle økter og privat innhold skjules/fjernes. Ulagrede opplysninger som bare finnes i nettleseren kan gå tapt ved økttap. Ingen passord eller private utkast lagres i nettleserens permanente lagring.
+
+Glemt gjeldende apppassord? Bruk [operatørkode og gjenoppretting](password-recovery.md) fra innloggingssiden etter uttrykkelig utlogging.

@@ -159,7 +159,7 @@ As a user who forgot the app password,
 I want to enter the operator's code and choose a new password,
 So that I regain my own account and saved work without needing the forgotten password.
 
-**Readiness:** implementation-ready specification; isolated execution authorized 2026-10-31. **Depends on:** S1 and S2. **Scope/value:** complete no-app-session redemption endpoint and login-adjacent flow, reusing S1 replacement/revocation and S2 proof state. No email link, public recovery request or general profile.
+**Readiness:** implemented and technically reviewed; mandatory owner/device qualification remains pending (in-review). **Depends on:** S1 and S2. **Scope/value:** complete no-app-session redemption endpoint and login-adjacent flow, reusing S1 replacement/revocation and S2 proof state. No email link, public recovery request or general profile.
 
 **Traceability:** CAP-2/3, PM-FR3/4/5/6, PM-NFR1–5, PM-UX2/3/4.
 
@@ -178,13 +178,16 @@ So that I regain my own account and saved work without needing the forgotten pas
 
 **Tasks & Acceptance:**
 
-- [ ] `private_main.py`, recovery/auth service — strict no-session DTO and canonical response; constant-time digest check, normalized username binding, bounded dummy path and rate-limit admission before expensive work. Reuse S1 account gate and current-password hashing policy; atomically consume proof and revoke every app session. Use DB time immediately before acceptance.
-- [ ] `frontend/src/PrivateAccess.tsx` and small recovery form — login help, operator-code entry, support instructions, new password confirmation, explicit existing-session exit and uncertain completion. No reset token in URL or browser persistence. Reuse CSRF fetch and cookie transport without requiring app login.
-- [ ] Add real DB/API tests for every code state including exact expiry, incorrect account, concurrent winners and stale login; validate generic public failure timing under a bounded comparative test rather than claiming perfectly constant network timing.
-- [ ] Browser tests for no-session recovery, wrong-account workspace, all-device logout, back/visibility/stale replies, lost response and dirty/uncertain business writes; rendered Day/Night and tablet/PC evidence. Reuse existing synthetic setup and account-isolation fixtures.
-- [ ] Update user instructions and operator runbook with end-to-end self/teacher recovery, no-auto-login, consumed-code/uncertain-result handling and limitations when SSH or outer Access is unavailable.
+- [x] `private_main.py`, recovery/auth service — strict no-session DTO and canonical response; constant-time digest check, normalized username binding, bounded dummy path and rate-limit admission before expensive work. Reuse S1 account gate and current-password hashing policy; atomically consume proof and revoke every app session. Use DB time immediately before acceptance.
+- [x] `frontend/src/PrivateAccess.tsx` and small recovery form — login help, operator-code entry, support instructions, new password confirmation, explicit existing-session exit and uncertain completion. No reset token in URL or browser persistence. Reuse CSRF fetch and cookie transport without requiring app login.
+- [x] Add real DB/API tests for every code state including exact expiry, incorrect account, concurrent winners and stale login; validate generic public failure timing under a bounded comparative test rather than claiming perfectly constant network timing.
+- [x] Browser tests for no-session recovery, wrong-account workspace, all-device logout, back/visibility/stale replies, lost response and dirty/uncertain business writes; rendered Day/Night and tablet/PC evidence. Reuse existing synthetic setup and account-isolation fixtures.
+- [x] Update user instructions and operator runbook with end-to-end self/teacher recovery, no-auto-login, consumed-code/uncertain-result handling and limitations when SSH or outer Access is unavailable.
 
 **Completion evidence:** full operator → app → new login journey for A/B, race and rejection evidence, preserved data and no secret logs. Security and usability checks pass here, not postponed to S4.
+
+
+Independent evidence: [S3 implementation/review](../implementation/spec-pm-e1-s3.md), [executed tests and limitations](../implementation/s3-evidence.md). Parent final103 backend and35 focused browser passes,82 selected synthetic legacy regressions and three-layer review are complete. Checked tasks represent independent technical work only; S3-AC9 physical-device/password-manager/owner acceptance and actual SSH/handoff remain **utsatt – krever eier**. Story is not complete.
 
 ### Story PM-E1-S4: Qualify the combined account-management delivery
 

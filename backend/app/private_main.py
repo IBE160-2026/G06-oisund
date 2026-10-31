@@ -195,6 +195,22 @@ def change_password(body: PasswordChange, request: Request, response: Response):
     return {'changed': True}
 
 
+class PasswordRecovery(BaseModel):
+    model_config = ConfigDict(extra='forbid', strict=True)
+    username: str = Field(max_length=100)
+    code: str = Field(max_length=256)
+    new_password: str = Field(min_length=12, max_length=256)
+    confirmation: str = Field(min_length=12, max_length=256)
+
+
+@app.post('/auth/password/recover')
+def recover_password(body: PasswordRecovery, request: Request, response: Response):
+    from .password_recovery import redeem
+    redeem(request, body.username, body.code, body.new_password, body.confirmation)
+    response.delete_cookie(auth.SESSION, path='/', httponly=True, secure=auth.secure_cookies(), samesite='strict')
+    return {'changed': True}
+
+
 @app.get('/drafts', response_model=DraftList)
 def drafts(request: Request, cursor: UUID | None = None):
     return draft_storage.listing(request, cursor)

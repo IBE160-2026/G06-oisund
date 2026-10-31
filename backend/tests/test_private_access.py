@@ -31,6 +31,11 @@ def synthetic_only():
         auth.require_synthetic_accounts(conn)
 
 
+class SyntheticUsers(tuple):
+    def __repr__(self):
+        return '<synthetic account fixture: credentials redacted>'
+
+
 @pytest.fixture
 def users():
     password = secrets.token_urlsafe(24)
@@ -38,7 +43,7 @@ def users():
     ids = [auth.provision(name, password) for name in names]
     with database() as conn:
         conn.execute('DELETE FROM login_limits')
-    yield names, ids, password
+    yield SyntheticUsers((names, ids, password))
     with database() as conn:
         auth.require_synthetic_accounts(conn)
         conn.execute('DELETE FROM workday_deletions WHERE owner=ANY(%s)', (ids,))

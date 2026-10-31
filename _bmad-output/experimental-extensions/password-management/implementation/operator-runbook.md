@@ -1,6 +1,6 @@
-# Operatørrutine — PM-E1-S2
+# Operatørrutine — PM-E1-S2/S3
 
-**Ingen live-utstedelse før S3/full reise og eierkvalifisering.** Dette er implementert for isolerte syntetiske prøver; det er ikke deployet. Identitetskontroll, praktisk kontakt, direkte overlevering og opptaksfri operatørøkt: **utsatt – krever eier**. S2 har ingen innløsningsside eller innløsningsendepunkt.
+**Ingen live-utstedelse før S3/full reise og eierkvalifisering.** Dette er implementert for isolerte syntetiske prøver; det er ikke deployet. Identitetskontroll, praktisk kontakt, direkte overlevering og opptaksfri operatørøkt: **utsatt – krever eier**. S3 har innløsningsside og endepunkt for isolert syntetisk kvalifisering.
 
 Jonas er eneste operatør. SSH/servertilgang, ytre Access og appkontoen er tre ulike tilganger. Operatørkommandoen bruker eksisterende privilegert database-/containeradgang, ingen appcookie, apppassord eller administratorrolle i appen. Velg eget appbrukernavn eksplisitt ved glemt eget passord. Manglende SSH krever separat vertstilgangsgjenoppretting; manglende Access krever separat Access-hjelp. Ingen av delene repareres av en appkode. Når Jonas er utilgjengelig, må brukeren vente på ham; ingen lovnad om straksstøtte eller skjult reserveadministrator.
 
@@ -8,7 +8,7 @@ Jonas er eneste operatør. SSH/servertilgang, ytre Access og appkontoen er tre u
 
 1. Bekreft personen ved personlig gjenkjenning eller uavhengig etablert tilbakeanrop/kontakt. Et oppgitt brukernavn alene er ikke identitetsbevis. Avklar trygg direkte overlevering på forhånd.
 2. Bruk en personlig kontrollert interaktiv terminal. Stopp ved PowerShell-transkripsjon, `script`, terminal-/SSH-opptak, sesjonsfangst, CI, shell wrappers, skjermopptak eller delt skjerm. Kontroller eventuell fjernadministrators opptakspolicy. TTY-testen oppdager ikke dette; teksten TRYGT er en operatørbekreftelse, aldri et teknisk bevis.
-3. Ikke legg koden i e-post, chat, sak, logger, argumenter, miljøvariabler, filer eller URL. Foretrekk kontrollert direkte innføring. Ikke bruk utklippstavle med historikk/skysynk; avklar dette før eventuell kopiering. Brukeren velger selv sitt nye passord senere i S3.
+3. Ikke legg koden i e-post, chat, sak, logger, argumenter, miljøvariabler, filer eller URL. Foretrekk kontrollert direkte innføring. Ikke bruk utklippstavle med historikk/skysynk; avklar dette før eventuell kopiering. Brukeren velger selv sitt nye passord i appens «Glemt passord?».
 4. Kontroller nøyaktig normalisert brukernavn **og UUID**, og skriv hele viste brukernavnet. Store/små bokstaver normaliseres og ytre mellomrom fjernes på samme måte som eksisterende kontoer. Ingen søk, delvis treff eller automatisk valg av egen konto. Navn med kontroll-/formattegn avvises uten kontoendring. Tomt svar, feil svar eller Ctrl-C avbryter.
 
 ## Kommandoer
@@ -51,7 +51,7 @@ Ordinær cleanup tar samme kontolås, fjerner utløpte/tilbakekalte/brukte diges
 
 S4 må øve restore/rollback separat med syntetiske data: stans trafikk, gjenopprett/verifiser arbeidsdata, ugyldiggjør alle gjenopprettede appøkter og koder før åpning, og håndter eksplisitt at backup kan gjeninnføre eldre passordhash. Eldre kodekompatibilitet og gjeldende migreringskontroll må verifiseres; ingen automatisk nedgradering eller produksjonsrestore er utført.
 
-Full egenkonto-/lærerkontoreise venter på S3. Praktisk identitet/kontakt/overlevering uten opptak, egenkonto via faktisk SSH, eieraksept og målbrett: **utsatt – krever eier**. S2 skal ikke merkes ferdig på grunnlag av syntetisk PTY alene.
+Full syntetisk egenkonto-/lærerkontoreise er implementert i S3; S4 og praktisk eierkvalifisering gjenstår. Praktisk identitet/kontakt/overlevering uten opptak, egenkonto via faktisk SSH, eieraksept og målbrett: **utsatt – krever eier**. S2 skal ikke merkes ferdig på grunnlag av syntetisk PTY alene.
 
 
 
@@ -64,3 +64,16 @@ MOTTATT gir bare bekreftet overlevering når nøyaktig den utstedte kandidaten f
 Tvetydig feil under eksplisitt tilbakekalling gir USIKKER tilbakekalling: kjør samme recovery-revoke på nytt, og ikke anta at tilbakekalling skjedde. Passordendring registrerer change/revoked i samme transaksjon som hashbytte, kodeinvalidering og øktsletting; aktøren er den autentiserte appkontoens UUID, ikke vertsoperatøren. Operatørhandlinger bruker fortsatt ærlig OS-kontekst, ikke antatt SSH-person. Kontrolltegn i opprinnelig brukernavn avvises også før normalisering, inkludert innledende/avsluttende tab/newline.
 
 Disse tekniske grensene erstatter ikke praktisk identitets-, kontakt-, opptaks- eller overleveringskvalifisering: fortsatt **utsatt – krever eier**.
+
+
+## Full reise i appen (S3)
+
+Etter kontrollert kodeoverlevering åpner brukeren «Glemt passord?» ved appens innlogging og oppgir nøyaktig eksisterende brukernavn, kode og sitt eget nye passord to ganger (12–256 tegn, ingen trimming). En innlogget arbeidsflate må først forlates med uttrykkelig Logg ut og eksisterende ulagret-/pågående-arbeid-beskyttelse. API avviser en fortsatt live appøkt, også en annen konto.
+
+Bekreftet innløsning bruker koden én gang, endrer passordet og avslutter alle kontoens appøkter atomisk. Den oppretter ingen ny økt: brukeren logger inn separat. UUID, eierskap, lagrede resultater/kvitteringer og frister beholdes. Jonas velger eget appbrukernavn på samme måte og trenger verken gammel appcookie eller glemt apppassord under utstedelse/innløsning.
+
+Ved mistet/HTML/ugyldig svar, timeout eller avbrudd kan endringen allerede være gjennomført. Ikke gjenta koden automatisk: fullfør utlogging, prøv nytt passord, og gjennomfør eksplisitt tilbakekalling/ny utstedelse hvis nødvendig. At koden senere avvises kan bety at første forsøk lykkes; det er ikke bevis på at passordet er uendret. Feltene tømmes ved innsending og nettleseravbrudd.
+
+Andre enheter mister gammel tilgang ved neste kontroll; ingen garanti om umiddelbar sletting av offline skjerm eller bevart ulagret innhold. Se [brukerveiledning](../../../../docs/password-recovery.md). Ytre Access og SSH forblir separate forutsetninger. Ingen live-bruk før praktisk identitet/overlevering/eieraksept og S4; **utsatt – krever eier**.
+
+Hvis mottakeren bruker koden før operatøren skriver MOTTATT, er kandidaten allerede brukt. S2-dialogen krever fortsatt aktiv/uutløpt kandidat for leveringskvittering og kan derfor avvise MOTTATT selv om appens passordendring lyktes. Ikke tolke dette som mislykket gjenoppretting og ikke utsted ny kode automatisk. Kontroller først appens resultat og la mottakeren prøve separat innlogging med det nye passordet; tilbakekall/utsted på nytt bare hvis tilgang fortsatt må gjenopprettes. Kandidatbegrenset kompensasjon endrer ikke et allerede konsumert bevis eller passordet.

@@ -196,8 +196,13 @@ def change_password(request, current_password, new_password, confirmation):
             raise HTTPException(400, {'code': 'current_password', 'message': 'Gjeldende passord er feil.'})
         replacement = password_hash(new_password)
         session(conn, request)  # Expiry may have passed during hashing.
-        conn.execute('UPDATE accounts SET password_hash=%s WHERE id=%s', (replacement, owner))
-        from .password_recovery import invalidate, audit
-        invalidate(conn, owner)
-        audit(conn, owner, 'change', 'revoked', actor='app-account:' + str(owner))
-        conn.execute('DELETE FROM sessions WHERE owner=%s', (owner,))
+        replace_password(conn, owner, replacement, actor='app-account:' + str(owner))
+
+
+def replace_password(conn, owner, replacement, actor):
+    """Caller holds account gate and freshly verified replacement authority."""
+    conn.execute('UPDATE accounts SET password_hash=%s WHERE id=%s', (replacement, owner))
+    from .password_recovery import invalidate, audit
+    invalidate(conn, owner)
+    audit(conn, owner, 'change', 'revoked', actor=actor)
+    conn.execute('DELETE FROM sessions WHERE owner=%s', (owner,))

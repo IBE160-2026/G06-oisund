@@ -1,0 +1,38 @@
+[
+  {
+    "path": "backend/app/auth.py",
+    "sha256": "e1677c80424044d847aac5ae25822b1694d98abd301327916e2698d33d117529"
+  },
+  {
+    "path": "backend/app/password_recovery.py",
+    "sha256": "387ea6ac0a88f2d675a5bab17b902155a58d0f573d6a01a381439e47eefa491b"
+  },
+  {
+    "path": "backend/app/private_main.py",
+    "sha256": "fa1e2a7aa7fbc7b44bbfd2545dc97d946f927aa01d04fbf6e28cb7e2ba746737"
+  },
+  {
+    "path": "backend/tests/test_password_recovery.py",
+    "sha256": "b65968b1b2e4ac6a8e772794358f9db59aa954861a8fcb894145dcb18d05afcf"
+  },
+  {
+    "path": "backend/tests/test_private_access.py",
+    "sha256": "924b26bc5a6bf031f47b6ff0074b3ce923e5c0ea80a160e1c55e9aee1b1f8c45"
+  },
+  {
+    "path": "frontend/src/PasswordRecovery.tsx",
+    "sha256": "04f67ccba733092ecc6bab9443cea8af9b2cae48b7b3b1f06685de6a33ba2818"
+  },
+  {
+    "path": "frontend/src/PrivateAccess.tsx",
+    "sha256": "d543015e40158cd90f388195fff561e53445cd2d84de5352248f4777240413af"
+  },
+  {
+    "path": "frontend/tests/password-recovery.spec.ts",
+    "sha256": "7fb522c7a854636328072f0f36c5f1ae66ec32447e62c166c053face4f23f0d0"
+  },
+  {
+    "path": "frontend/tests/private-access.spec.ts",
+    "sha256": "0c1ec20a3d70a395133ee417056e4aaaa7650f530293ca99b9d35e4fdbb1e43b"
+  }
+]

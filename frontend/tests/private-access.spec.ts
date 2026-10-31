@@ -195,5 +195,6 @@ test('window switching preserves unfinished login input', async ({ page }) => {
     document.dispatchEvent(new Event('visibilitychange'));
   });
   await expect(name).toBeEnabled();
-  await expect(name).toHaveValue(username); await expect(secret).toHaveValue(password);
+  await expect(name).toHaveValue(username);
+  await expect.poll(async () => (await secret.inputValue()) === password, { message: 'Unfinished synthetic login input remains in memory' }).toBe(true);
 });

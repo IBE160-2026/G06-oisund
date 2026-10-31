@@ -1,4 +1,4 @@
-"""Privileged operator lifecycle. No public redemption interface in S2."""
+"""Operator proof lifecycle and no-session redemption."""
 import os
 import secrets
 import unicodedata
@@ -89,3 +89,69 @@ def revoke(target, proof_id=None, action='revoke', result='revoked'):
 def cleanup_account(conn, owner):
     conn.execute("DELETE FROM recovery_proofs WHERE id IN (SELECT id FROM recovery_proofs WHERE owner=%s AND (state <> 'active' OR expires_at <= clock_timestamp()) ORDER BY expires_at LIMIT 1000)", (owner,))
     conn.execute("DELETE FROM recovery_audit WHERE id IN (SELECT id FROM recovery_audit WHERE owner=%s AND occurred_at <= clock_timestamp()-interval '30 days' ORDER BY occurred_at LIMIT 1000)", (owner,))
+
+# Public redemption shares S2 proof state and S1 credential replacement.
+INVALID_CODE = 'Koden kunne ikke brukes. Kontroller opplysningene eller kontakt operatøren.'
+
+
+def admission(name, address):
+    from fastapi import HTTPException
+    allowed = True
+    with database() as conn:
+        conn.execute('SELECT pg_advisory_xact_lock(903004)')
+        conn.execute("DELETE FROM login_limits WHERE bucket LIKE 'recover:%%' AND expires_at <= clock_timestamp()")
+        deadline = None
+        for bucket, maximum in [('recover:global', 100), ('recover:ip:' + auth.digest(address), 20), ('recover:user:' + auth.digest(name.encode('utf-8', errors='backslashreplace').decode('utf-8')), 5)]:
+            row = conn.execute("INSERT INTO login_limits VALUES (%s,1,COALESCE(%s,clock_timestamp()+interval '15 minutes')) "
+                               'ON CONFLICT (bucket) DO UPDATE SET attempts=LEAST(login_limits.attempts+1,101) RETURNING attempts,expires_at',
+                               (bucket, deadline)).fetchone()
+            deadline = row['expires_at']
+            if row['attempts'] > maximum:
+                allowed = False
+                break
+    if not allowed:
+        raise HTTPException(429, 'For mange forsøk. Prøv igjen senere.', headers={'Retry-After': '900'})
+
+
+def require_no_session(request):
+    from fastapi import HTTPException
+    # Release any B gate before acquiring A. Opaque tokens cannot change owners
+    # or become live again, so no cross-account gate recheck is necessary.
+    with database() as conn:
+        try:
+            auth.session(conn, request)
+        except HTTPException as error:
+            if error.status_code == 401:
+                return
+            raise
+    raise HTTPException(409, 'Logg ut før du gjenoppretter tilgang.')
+
+
+def redeem(request, username, code, new_password, confirmation):
+    import hmac
+    import re
+    from fastapi import HTTPException
+    if not 12 <= len(new_password) <= 256 or new_password != confirmation:
+        raise HTTPException(422, 'Kontroller feltene.')
+    try:
+        new_password.encode('utf-8')
+    except UnicodeEncodeError:
+        raise HTTPException(422, 'Kontroller feltene.') from None
+    require_no_session(request)
+    name = username.strip().casefold()
+    admission(name, request.client.host)
+    with database() as conn:
+        account = conn.execute('SELECT id FROM accounts WHERE username=%s', (name,)).fetchone() if not any(unicodedata.category(c).startswith('C') for c in name) else None
+        if account:
+            auth.account_lock(conn, account['id'])
+        proof = conn.execute("SELECT id,digest,expires_at FROM recovery_proofs WHERE owner=%s AND purpose='password-recovery' AND state='active'", (account['id'],)).fetchone() if account else None
+        # Every admitted attempt performs one hash and a fixed-size digest compare,
+        # including malformed and unknown accounts. No network-time guarantee.
+        valid_shape = re.fullmatch(r'[A-Za-z0-9_-]{43}', code) is not None
+        matches = hmac.compare_digest(auth.digest(code if valid_shape else 'invalid-recovery-code'), proof['digest'] if proof else '0' * 64)
+        replacement = auth.password_hash(new_password)
+        live = conn.execute('SELECT %s > clock_timestamp() AS live', (proof['expires_at'],)).fetchone()['live'] if proof else conn.execute('SELECT false AS live').fetchone()['live']
+        if not (proof and matches and valid_shape and live):
+            raise HTTPException(400, INVALID_CODE)
+        conn.execute("UPDATE recovery_proofs SET state='consumed' WHERE id=%s", (proof['id'],))
+        auth.replace_password(conn, account['id'], replacement, actor='recovery-proof:' + str(proof['id']))

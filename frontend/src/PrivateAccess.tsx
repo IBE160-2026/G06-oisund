@@ -1,3 +1,4 @@
+import { PasswordRecovery, type RecoveryFields } from './PasswordRecovery';
 import { PasswordChange, type PasswordFields } from './PasswordChange';
 import { ThemeControl } from './theme';
 import { privateNow, observePrivateTime } from './privateClock';
@@ -43,6 +44,9 @@ export function PrivateAccess() {
   const draftDirty = useRef(false);
   const settingsBlocked = useRef(false);
   const [settings, setSettings] = useState(false);
+  const [recovery, setRecovery] = useState(false);
+  const recoveryButton = useRef<HTMLButtonElement>(null);
+  const recoveryOpen = useRef(false);
   const [passwordBusy, setPasswordBusy] = useState(false);
   // Only outcome metadata survives lifecycle invalidation; never credentials.
   const passwordOutcome = useRef<'pending' | 'unknown' | 'changed' | null>(null);
@@ -51,6 +55,7 @@ export function PrivateAccess() {
   const accessSuspended = useRef(false);
   const restoring = useRef<Promise<void> | null>(null);
 
+  function recoveryScreen(value: boolean) { recoveryOpen.current = value; setRecovery(value); }
   function suspend(value: boolean) { accessSuspended.current = value; setSuspended(value); }
   function acceptSession(value: Session) { activeSession.current = value; setSession(previous => sameSession(previous, value) ? previous : value); }
 
@@ -164,7 +169,7 @@ export function PrivateAccess() {
     return expected ? workspace(expected, send) : navigator.locks.request('private-auth-mutations', () => send());
   }
   function clear(text: string) {
-    generation.current++; setSettings(false); activeSession.current = null; setSession(null); setPassword(''); setUsername(''); setMessage(text);
+    generation.current++; recoveryScreen(false); setSettings(false); activeSession.current = null; setSession(null); setPassword(''); setUsername(''); setMessage(text);
   }
   async function logout() {
     if (!pending() && draftDirty.current && !window.confirm('Ulagrede endringer går tapt ved utlogging. Vil du logge ut?')) return;
@@ -224,10 +229,42 @@ export function PrivateAccess() {
       channel.current?.postMessage('logout-pending');
     } finally { setPasswordBusy(false); }
   }
+  async function recoverPassword(fields: RecoveryFields) {
+    if (session || passwordBusy || pending()) throw Error('Logg ut før du gjenoppretter tilgang.');
+    const current = generation.current;
+    setPasswordBusy(true);
+    try {
+      const result = await mutation('/auth/password/recover', fields, undefined, () => {
+        if (current !== generation.current || activeSession.current || accessSuspended.current) throw Error();
+        passwordOutcome.current = 'pending';
+      });
+      if (result?.changed !== true || Object.keys(result).join() !== 'changed') throw Error();
+      passwordOutcome.current = 'changed'; presentPasswordOutcome();
+      channel.current?.postMessage('session-changed'); setFocusLogin(true);
+    } catch (error: any) {
+      if (!passwordOutcome.current) {
+        if (current !== generation.current) return;
+        throw Error('Forespørselen ble ikke sendt. Feltene er tømt. Kontroller tilgang og prøv igjen.');
+      }
+      if (current === generation.current && error?.status === 400 && error.apiDetail === 'Koden kunne ikke brukes. Kontroller opplysningene eller kontakt operatøren.') {
+        passwordOutcome.current = null;
+        throw Object.assign(Error('Koden kunne ikke brukes. Kontroller opplysningene eller kontakt operatøren. Hvis et tidligere resultat var usikkert, prøv innlogging med det nye passordet først.'), { field: 'code' });
+      }
+      if (current === generation.current && [403, 409, 422, 429].includes(error?.status) && typeof error.apiDetail === 'string') {
+        passwordOutcome.current = null;
+        if (error.status === 409) { recoveryScreen(false); await restore(); return; }
+        throw Error(error.status === 429 ? error.message : 'Kontroller feltene og prøv igjen.');
+      }
+      passwordOutcome.current = 'unknown'; presentPasswordOutcome();
+      channel.current?.postMessage('logout-pending');
+    } finally { setPasswordBusy(false); }
+  }
   function presentPasswordOutcome() {
     const changed = passwordOutcome.current === 'changed';
     if (!changed) { lockKnown.current = true; markPending(true); setLocked(true); }
-    clear(changed ? 'Passordet er endret. Alle enheter er logget ut. Logg inn med det nye passordet.' : 'Resultatet av passordendringen er ukjent. Passordene er fjernet. Fullfør utlogging, og prøv deretter å logge inn med det nye passordet.');
+    const finishLogout = pending() || lockKnown.current;
+    if (finishLogout) setLocked(true);
+    clear(changed ? (finishLogout ? 'Passordet er endret. Fullfør utlogging med «Prøv utlogging igjen», og logg deretter inn med det nye passordet.' : 'Passordet er endret. Alle enheter er logget ut. Logg inn med det nye passordet.') : 'Resultatet av passordendringen er ukjent. Passordene er fjernet. Fullfør utlogging, og prøv deretter å logge inn med det nye passordet. Kontakt operatøren for ny kode ved behov; ikke send koden på nytt automatisk.');
     suspend(false); setBusy(false);
   }
   function restore() {
@@ -280,7 +317,7 @@ export function PrivateAccess() {
       } else if (event.data === 'logout-confirmed') {
         lockKnown.current = false; setLocked(false); clear('Du er logget ut.'); setBusy(false);
         setFocusLogin(true);
-      } else if (event.data === 'session-changed' && activeSession.current) {
+      } else if (event.data === 'session-changed' && (activeSession.current || recoveryOpen.current)) {
         clear('Innloggingen er endret i et annet vindu. Privat innhold er fjernet. Kontroller tilgang på nytt.');
         suspend(false); setBusy(false); setFocusLogin(true);
       }
@@ -288,7 +325,7 @@ export function PrivateAccess() {
     void restore();
     // BFCache/history must not resurrect a private view; revalidate with the server.
     function hide() {
-      generation.current++; suspend(true); setMessage('Kontrollerer tilgang …');
+      generation.current++; recoveryScreen(false); suspend(true); setMessage('Kontrollerer tilgang …');
       if (passwordOutcome.current) { clear('Kontrollerer passordendringen …'); }
     }
     function show() { void restore(); }
@@ -334,13 +371,14 @@ export function PrivateAccess() {
         <p>Økten utløper {new Intl.DateTimeFormat('nb-NO', { dateStyle: 'short', timeStyle: 'short', timeZone: 'Europe/Oslo' }).format(new Date(session.expires_at))}.</p>
         <button ref={settingsButton} hidden={settings} disabled={busy || suspended} onClick={openSettings}>Brukerinnstillinger</button>
         <button disabled={busy || passwordBusy} onClick={() => void logout()}>Logg ut</button>
-      </section> : <form onSubmit={event => void login(event)} aria-label="Innlogging">
+      </section> : recovery && !suspended ? <PasswordRecovery submit={recoverPassword} busy={passwordBusy} cancel={() => { recoveryScreen(false); requestAnimationFrame(() => recoveryButton.current?.focus()); }} /> : <form onSubmit={event => void login(event)} aria-label="Innlogging">
         <label htmlFor="private-username">Brukernavn</label>
         <input ref={usernameInput} id="private-username" name="username" autoComplete="username" required maxLength={100} value={username} onChange={event => setUsername(event.target.value)} disabled={busy} />
         <label htmlFor="private-password">Passord</label>
         <input id="private-password" name="password" type="password" autoComplete="current-password" required value={password} onChange={event => setPassword(event.target.value)} disabled={busy} />
         <button disabled={busy} type="submit">Logg inn</button>
       </form>}
+    {!session && !locked && !recovery && <button ref={recoveryButton} disabled={busy || passwordBusy || suspended} onClick={() => { passwordOutcome.current = null; setPassword(''); recoveryScreen(true); }}>Glemt passord?</button>}
     <p>Tilgang opprettes av den som drifter løsningen. Bruk arbeidsrommet mens du står stille.</p>
     <a href="/">Åpne fiktiv demo</a>
   </main>;
