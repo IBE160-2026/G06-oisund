@@ -60,7 +60,7 @@ Jonas får lenke til hele engelske utkastet og en konkret nummerert leseveiledni
 - O3–O6 gjenstår: eksterne Origin/CSRF/cookie/cache/skrive-/enhetstidskombinasjoner, WAN/IPv6, DNS før socket-eierskap og konkret bredere OS/supply-chain/penetrasjon. O1 ved edge og avgrenset O2 er dokumentert på operativ eb0eee3; L3 er ikke helt lukket. Ingen godkjent utsettelse eller generell sikkerhetsgaranti utledes.
 
 
-## 2026-10-31 kl. 00:39 — Jonas Øisund
+## 2026-10-31 kl. 03:05 — Jonas Øisund
 
 ### Oppgave
 
@@ -90,9 +90,24 @@ Dokumentcommite861625 innarbeider den godkjente teksten ordrett i etablert docs/
 
 449 lokale lenker/ankere i21 endrede/nye dokumenter bestod; diff --check bestod. Godkjent refleksjonslegeme er kontrollert eksakt mot handoff, historisk12.5-legeme er bevart og hele O1–O6-registerseksjonen er uendret. O3–O6 er fortsatt åpne/not qualified, ingen automatisk utsettelse. Ingen app-/driftskonfigurasjonsendring eller tester kjørt om igjen. Etter ny eksakt sammenligning ble bare D:/IBE160/retro-12-reflection-approved-handoff.md slettet etter Jonas sin uttrykkelige beskjed; filen ble aldri lagt til i Git og skal ikke pushes. Andre worktrees er bevart. Ny remotehenting viste origin/main005e5e1; normal push av dokumentasjonen og separat logg følger ny ancestor-kontroll. Ingen tag/release, deploy eller kursinnlevering.
 
+Fortsettelse 31.10 kl. 03:05, steg 4–5: Jonas ba om konkrete O3–O6-kontroller og kontrollert V1-tag. Han autoriserte uttrykkelig at gjenværende bevisgrenser uten påvist V1-hindring videreføres åpne etter V1, og at annotert v1.0.0 opprettes/pushes etter tilfredsstillende kontroller. Ingen ny bekreftelse kreves. Ingen deploy, GitHub-release, kursinnlevering, omstart, ruter-/tilgangsendring eller produksjonsdataendring inngår.
+
+Faktisk framgangsmåte: hentet GitHub/remote på nytt; lest AGENTS/CLAUDE/sesjonslogg, delivery-readiness/known-issues, Access-/Ubuntu-/C1-evidens og begge lokale kurs-PDF-er. Appens worktree-verktøy avviste prosjektmirror-underrepoet, så egen no-hardlinks kontrollklon v1-final-control ble laget; andre worktrees og ucommittet arbeid ble ikke endret. Faktisk nyeste origin/main var8e590735c495808ae51bf65523d7ab19c6dfb0fd, fortsatt lik ved kontroll før commit. Ingen åpne GitHub-issues/PR-er ble returnert; v1.0.0 var ledig lokalt/remote.
+
+Dokumentasjon/evidens er committet som **fb93c3fe32cb088de0c54d73bfa44b746b55be6e**. [Sluttrapport](../../docs/evidence/v1-final-control-20261031.md) og [register](../../docs/submission/delivery-readiness.md) skiller prosjekt-V1 fra senere komplett kursinnlevering. Godkjent ai-reflection er Git-identisk med e861625; separat norsk refleksjon og original-PDF-ene er urørt/utenfor Git. C1-applikasjon/oppskrift/tablet/fiksturer er uendret; Ubuntu-tillegg tilsvarer akseptert deploykilde addd27b, og Access-diagnostikk er separat kontrollert. Alle34 evidensfiler i indeksen matcher staged Git-byte;238 lokale dokumentlenker/ankere,17 PowerShell-filer og fire README-blokker bestod. diff --check bestod.
+
+Faktiske kontroller på8e59073:31/31 hosttester,6/6 oppskriftsvern og policyparitet bestått. Syntetisk DNS-før-socket-fixture:3,265s kallertid, én worker,20 raske avvisninger og gjenoppretting etter eksplisitt resolverfrigivelse; reell OS-kansellering fortsatt uverifisert. Fire uinnloggede eksterne GET-er ga Access302/no-store uten app-shell, også med fremmed Origin; refleksjon av Origin gjaldt bare loginredirect og er ikke app-/CSRF-bevis. Server lesende bekreftet fortsatt addd27b, healthy API/DB, aktiv tunnel, loopback app/metrics og SSH wildcard; ingen uavhengig WAN/IPv6-kvalifikasjon. npm/OSV ga ingen kjente advisory-treff; heuristisk historikksøk2913 tekstblobs/241 commits ga ingen mønstertreff,681 binærblobs var ikke tekstskannet. Ingen uttømmende O6-lukking.
+
+Docker var først utilgjengelig; Jonas åpnet Docker selv. Ny separat tmp/recipe på8e59073 brukte bare dokumenterte fire prosjekt-/portsubstitusjoner:ibe160-v1-final-20261031,15335/18337/18338. Uncached init/status/browserinstall exit0, fem healthy tjenester. Generert synthetic-submission-innlogging, B-import/lagring/reload/gjenåpning og tre lokale Origin/CSRF-nektprøver bestod mot faktisk API/PostgreSQL; kun loopback-ruter. Ingen restart/reset eller full suite gjentatt. API-kildefiler/alle serverte frontendfiler bundet til bygget. Første ressurskomparator feilet fordi Docker returnerer Mounts i varierende rekkefølge; rå differanser beholdt, sortering etter unik destinasjon rettet testhjelperen uten å slakke felt-/tilstandskontrollen. Etterkontroll:44 eksisterende containere og20 volum identiske i kontrollerte felt. Ny egen syntetisk instans beholdes med ignorerte lokale credentials.
+
+O3–O6: konkrete delkontroller bestått, men restgrenser **åpne med Jonas sin uttrykkelig godkjente driftsoppfølging etter V1**. Ingen konkret V1-blokkering funnet. Sensorveiledningens sju kriterier og70/30-fordeling avstemt mot repo; frist/kanal/vedlegg/proposal-/solo-godkjenning og vurderertilgang er ikke funnet på. Reboot-required for libc6 observert på server og videreført som vedlikehold; ingen omstart utført. Langtidsstabilitet er fortsatt observasjon.
+
+Denne logg-/issuesendringen committes separat og umiddelbart. Etter commit utføres siste ren-status/source/index/ancestor/navnekontroll, normal push HEAD:main og annotert v1.0.0 på den kontrollerte loggcommiten. Publisering regnes først fullført når remote peeled tag peker på eksakt full SHA. Den endelige kvitteringen ligger i Git-referansene og sluttmeldingen; ingen egen framtidig commit-hash diktes inn i sin egen logg. Dette er godkjent publiseringssekvens, ikke en påstand om at den allerede var utført da loggteksten ble skrevet.
+
 ### Åpne punkter
 
-- Repoets refleksjonsgjennomgang er løst31.10; faktiske kurskrav, frist, format og sensortilgang må fortsatt bekreftes. Den separate norske kursrapporten er urørt.
-- O3–O6 forblir åpne for faktiske resultater eller uttrykkelig disposisjon, uten automatisk utsettelse eller ny generell leveranseport.
-- Endelig leveransecommit/innhold og nødvendig oppskriftskontroll, senere særskilt autorisert tag og innlevering gjenstår.
-- Videre langtidsstabilitetsobservasjon er allerede registrert i serveroppfølgingen; ingen ny eiertest eller gjenåpning av ferdig arbeid.
+- O3: resterende autentiserte eksterne cookie/cache/error-varianter og fysisk nettverks-/skrive-/kvitteringstiming videreføres åpent etter V1.
+- O4: uavhengig WAN/IPv6-observasjon videreføres åpent etter V1; lokale lytteporter/ULA/DNS er ikke slik dokumentasjon.
+- O5: faktisk patologisk OS-DNS-kansellering før socket-eierskap videreføres åpent etter V1; syntetiske grenser er separat bestått.
+- O6: bredere OS/image/supply-chain/penetrasjonssikkerhet er fortsatt åpen; ingen full sikkerhetssertifisering. Serverens libc6-omstartsmarkør må vurderes i separat vedlikehold, og langtidsstabilitet observeres videre.
+- L1/L7: faktiske kurslogistikk-/frist-/format-/godkjennings-/tilgangspunkter og komplett kursinnlevering/kvittering gjenstår. Den separate norske rapporten er urørt.
