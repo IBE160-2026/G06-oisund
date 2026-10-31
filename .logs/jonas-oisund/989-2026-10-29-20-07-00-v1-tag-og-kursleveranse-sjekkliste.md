@@ -84,9 +84,15 @@ Kontroll:677 lokale fil-/ankerlenker i23 endrede/nye dokumenter bestod. Fire REA
 
 Issues har fått tydelig31.10-nåstatus som erstatter eldre bonusomtale uten å slette historikk; eksisterende åpne kurs-/refleksjons-/drifts-/stabilitetspunkter beholdes. Denne logg-/issuesendringen committes separat og umiddelbart etter oppskriften. Ny remote-/ancestor-kontroll og normal push følger; publisert SHA og ren lokal/fjernstatus kontrolleres før sluttsvar.
 
+Fortsettelse31.10 etter uttrykkelig bestilling: Jonas ba om å innarbeide den ferdig gjennomgåtte/godkjente engelske refleksjonen fra lokal handoff, samordne status, bruke riktig dokumentnavn og committe/pushe main. Etter innarbeiding autoriserte han også sletting av handoff-filen og presiserte at den ikke skal pushes. Kildeinstruksjonene ble lest som overleveringsgrunnlag under denne bestillingen. Teknisk kontroll mot faktisk dokumentasjon fant ingen materiell motstrid: scope-reduksjon80→20 stories, pdfplumber/driverheaderfiltrering, Android-opplastingsfeil,12.4-retting og noticehistorikk/retensjon har dokumenterte kilder.
+
+Dokumentcommite861625 innarbeider den godkjente teksten ordrett i etablert docs/submission/ai-reflection.md, som README/AC-12 allerede peker på. Handoff-navnet brukes ikke som leveransedokument. Tidligere12.5-refleksjon er bevart i ai-reflection-12-5.md med uendret opprinnelig tekstlegeme, og forslaget er tydelig historisk/superseded. Kildehenvisninger og godkjenningsregistrering ligger separat etter den urørte godkjente teksten. README/index/HANDOFF/L2/omfangsstatus og daterte nåstatusmerknader er samordnet; kun repoets refleksjonsgjennomgang lukkes. Norske reflection-report-in-progress.md er uendret, SHA256 før/etter33B1637BCA7FAE874EEC0C9FCEE339F5A91CDD5EDF31E2367CE33BD43AAE0D41. Kurskrav/format/godkjenning av den separate rapporten er ikke utledet.
+
+449 lokale lenker/ankere i21 endrede/nye dokumenter bestod; diff --check bestod. Godkjent refleksjonslegeme er kontrollert eksakt mot handoff, historisk12.5-legeme er bevart og hele O1–O6-registerseksjonen er uendret. O3–O6 er fortsatt åpne/not qualified, ingen automatisk utsettelse. Ingen app-/driftskonfigurasjonsendring eller tester kjørt om igjen. Etter ny eksakt sammenligning ble bare D:/IBE160/retro-12-reflection-approved-handoff.md slettet etter Jonas sin uttrykkelige beskjed; filen ble aldri lagt til i Git og skal ikke pushes. Andre worktrees er bevart. Ny remotehenting viste origin/main005e5e1; normal push av dokumentasjonen og separat logg følger ny ancestor-kontroll. Ingen tag/release, deploy eller kursinnlevering.
+
 ### Åpne punkter
 
-- Jonas sin gjennomgang og ferdigstilling av refleksjonen; faktiske kurskrav, frist, format og sensortilgang må bekreftes.
+- Repoets refleksjonsgjennomgang er løst31.10; faktiske kurskrav, frist, format og sensortilgang må fortsatt bekreftes. Den separate norske kursrapporten er urørt.
 - O3–O6 forblir åpne for faktiske resultater eller uttrykkelig disposisjon, uten automatisk utsettelse eller ny generell leveranseport.
 - Endelig leveransecommit/innhold og nødvendig oppskriftskontroll, senere særskilt autorisert tag og innlevering gjenstår.
 - Videre langtidsstabilitetsobservasjon er allerede registrert i serveroppfølgingen; ingen ny eiertest eller gjenåpning av ferdig arbeid.
