@@ -95,3 +95,11 @@ Manuell 12.1-sjekkliste A–F er bestått27.10.2026 på Jonas_desktop, Brave pri
 - [ ] 2026-10-31 [Kursinnlevering L7](989-2026-10-29-20-07-00-v1-tag-og-kursleveranse-sjekkliste.md) — Gjennomfør komplett kursinnlevering senere etter faktisk L1-avklaring; kontroller vurderertilgang og lagre kvittering. Prosjektets V1-tag er ikke en innlevering eller godkjenning av separat norsk refleksjonsrapport.
 
 - [x] 2026-10-31 [Ubuntu V1-release/deploy](990-2026-10-29-18-30-00-ubuntu-server.md) — Publiser eksisterende v1.0.0-release og deploy eksakt d367a0e med verifisert backup/isolert restore, etterkontroll og personlig innlogging/lagring/gjenåpning. Alle bestått; tagobjekt og mål uendret. O3–O6 forblir åpne. (løst 2026-10-31)
+
+## Passordhåndtering — eksperimentell plan 31. oktober 2026
+
+- [ ] 2026-10-31 [Passordhåndtering](987-2026-10-31-03-46-36-passordhandtering-plan.md) — Q1: brukerantall, responstid, operatør og etablert identitetskontrollkanal må avklares.
+- [ ] 2026-10-31 [Passordhåndtering](987-2026-10-31-03-46-36-passordhandtering-plan.md) — Q2: velg administrativ engangskode eller e-post fra første levering; ved e-post avklar sender/drift uten hemmeligheter i chatten.
+- [ ] 2026-10-31 [Passordhåndtering](987-2026-10-31-03-46-36-passordhandtering-plan.md) — Q3: avklar anbefalt ny innlogging på alle enheter etter begge passordflytene.
+- [ ] 2026-10-31 [Passordhåndtering](987-2026-10-31-03-46-36-passordhandtering-plan.md) — Q4: avklar separat levering eller senere felles release med uavhengige tester og samlet integrasjonskontroll; versjonsnummer er ikke valgt.
+- [ ] 2026-10-31 [Passordhåndtering](987-2026-10-31-03-46-36-passordhandtering-plan.md) — Etter beslutninger: separat implementeringsoppdrag, PM-1–PM-4, migrering/rollback, akseptansetester og eieraksept gjenstår; planen er ikke implementeringsgodkjenning.
