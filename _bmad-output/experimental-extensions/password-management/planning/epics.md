@@ -1,7 +1,7 @@
 ---
 stepsCompleted: [1, 2, 3, 4]
-status: implementation-planning
-implementationAuthorized: false
+status: in-progress
+implementationAuthorized: true
 baseline: 5cee9e03d03d2c9c165c7f8fec64aa3e146959ab
 inputDocuments:
   - ../specs/spec-password-management/SPEC.md
@@ -93,7 +93,7 @@ As a signed-in user,
 I want to replace my password after proving the current one,
 So that I can control access without changing my account or losing saved work.
 
-**Readiness:** implementation-ready specification; execution not authorized. **Depends on:** existing V1 only. **Scope/value:** complete change form + endpoint + necessary shared account serialization and revocation. No reset table, code issuance or email in this slice. This is the largest foundational slice because unsafe revocation cannot be postponed; keep it bounded to existing auth callers and the one new command. Follow the concrete lock protocol in technical-contract.md rather than redesigning every business operation.
+**Readiness:** implemented and technically reviewed; mandatory owner/device qualification remains pending (in-review). **Depends on:** existing V1 only. **Scope/value:** complete change form + endpoint + necessary shared account serialization and revocation. No reset table, code issuance or email in this slice. This is the largest foundational slice because unsafe revocation cannot be postponed; keep it bounded to existing auth callers and the one new command. Follow the concrete lock protocol in technical-contract.md rather than redesigning every business operation.
 
 **Traceability:** CAP-1/3, PM-FR1/4/5/6, PM-NFR1–5, PM-UX1/3/4.
 
@@ -111,13 +111,13 @@ So that I can control access without changing my account or losing saved work.
 
 **Tasks & Acceptance:**
 
-- [ ] `backend/app/auth.py`, `draft_storage.py`, session callers and `private_storage.py` — implement the shared locking/revalidation protocol, account-wide session deletion and login race prevention; inventory direct session SQL in private routes, imports and cleanup before changes. Preserve global admission ordering and existing transactional business receipts. Prove S1-AC3/4 with real concurrent connections.
-- [ ] `backend/app/private_main.py` and a small auth-domain module if helpful — strict own-change DTO/response, current-password verification and separate bounded admission. Keep no-store, safe validation, Origin/CSRF and existing scrypt. No client-selected target or reset infrastructure.
-- [ ] `frontend/src/PrivateAccess.tsx` and a small password form component — settings entry, form, all-device confirmation, dirty/pending guards, password-state clearing, typed errors and cross-tab invalidation. Reuse existing private session identity and generation guards; do not pass a successful self-revoking response through a later live-session check that would falsely report failure.
-- [ ] Backend focused tests + `test_private_access.py`, relevant private storage/import/cleanup regressions; frontend focused tests + `private-access.spec.ts`, `private-identity.spec.ts`, `private-recovery.spec.ts`. Include before/after commit barriers rather than timing sleeps for races; HTML/malformed/lost responses and late reply guards.
-- [ ] Update the user guide with change flow, all-device logout and unsaved-data limitations; document the lock order and chosen limiter constants. Record actual test commands/results and rendered touch/focus/contrast evidence in extension-local evidence.
+- [x] `backend/app/auth.py`, `draft_storage.py`, session callers and `private_storage.py` — implement the shared locking/revalidation protocol, account-wide session deletion and login race prevention; inventory direct session SQL in private routes, imports and cleanup before changes. Preserve global admission ordering and existing transactional business receipts. Prove S1-AC3/4 with real concurrent connections.
+- [x] `backend/app/private_main.py` and a small auth-domain module if helpful — strict own-change DTO/response, current-password verification and separate bounded admission. Keep no-store, safe validation, Origin/CSRF and existing scrypt. No client-selected target or reset infrastructure.
+- [x] `frontend/src/PrivateAccess.tsx` and a small password form component — settings entry, form, all-device confirmation, dirty/pending guards, password-state clearing, typed errors and cross-tab invalidation. Reuse existing private session identity and generation guards; do not pass a successful self-revoking response through a later live-session check that would falsely report failure.
+- [x] Backend focused tests + `test_private_access.py`, relevant private storage/import/cleanup regressions; frontend focused tests + `private-access.spec.ts`, `private-identity.spec.ts`, `private-recovery.spec.ts`. Include before/after commit barriers rather than timing sleeps for races; HTML/malformed/lost responses and late reply guards.
+- [x] Update the user guide with change flow, all-device logout and unsaved-data limitations; document the lock order and chosen limiter constants. Record actual test commands/results and rendered touch/focus/contrast evidence in extension-local evidence.
 
-**Completion evidence:** working end-to-end change against real synthetic API/PostgreSQL, focused concurrency/regression results and rendered UI. S1 does not wait for S2–S4 to make its own safety tests pass. No implementation evidence exists yet.
+**Completion evidence:** working end-to-end change against real synthetic API/PostgreSQL, focused concurrency/regression results and rendered UI. S1 does not wait for S2–S4 to make its own safety tests pass. See [S1 implementation/review evidence](../implementation/spec-pm-e1-s1.md): final parent41 backend/18 focused browser passes,77 distinct synthetic regressions and isolated proxy checks. Mandatory S1-AC8 physical-device/password-manager/owner acceptance remains **utsatt – krever eier**; checked tasks indicate independent technical work only, not story completion.
 
 ### Story PM-E1-S2: Issue and revoke recovery codes through server access
 
@@ -125,7 +125,7 @@ As Jonas, the recovery operator,
 I want to issue or revoke a code for an explicitly confirmed existing account using SSH,
 So that I can authorize recovery for myself or the teacher without knowing the app password or adding an admin panel.
 
-**Readiness:** implementation-ready specification; execution not authorized. **Depends on:** S1 shared account lock/revocation boundary. **Scope/value:** operator command, minimal recovery schema, lifecycle/cleanup and a usable safe-handoff runbook. Redemption is S3; lifecycle is demonstrable without it. Do not distribute live-user codes until the full recovery journey is qualified.
+**Readiness:** implementation-ready specification; isolated execution authorized 2026-10-31. **Depends on:** S1 shared account lock/revocation boundary. **Scope/value:** operator command, minimal recovery schema, lifecycle/cleanup and a usable safe-handoff runbook. Redemption is S3; lifecycle is demonstrable without it. Do not distribute live-user codes until the full recovery journey is qualified.
 
 **Traceability:** CAP-2, PM-FR2/5/6/7, PM-NFR1/2/3/5. No new web UI or administrator application account.
 
@@ -156,7 +156,7 @@ As a user who forgot the app password,
 I want to enter the operator's code and choose a new password,
 So that I regain my own account and saved work without needing the forgotten password.
 
-**Readiness:** implementation-ready specification; execution not authorized. **Depends on:** S1 and S2. **Scope/value:** complete no-app-session redemption endpoint and login-adjacent flow, reusing S1 replacement/revocation and S2 proof state. No email link, public recovery request or general profile.
+**Readiness:** implementation-ready specification; isolated execution authorized 2026-10-31. **Depends on:** S1 and S2. **Scope/value:** complete no-app-session redemption endpoint and login-adjacent flow, reusing S1 replacement/revocation and S2 proof state. No email link, public recovery request or general profile.
 
 **Traceability:** CAP-2/3, PM-FR3/4/5/6, PM-NFR1–5, PM-UX2/3/4.
 
@@ -189,7 +189,7 @@ As the operator and owner,
 I want reproducible evidence and a tested operating procedure for both password flows,
 So that I can decide on a separate release without risking existing accounts or being dependent on app login for recovery.
 
-**Readiness:** implementation-ready specification; execution not authorized. **Depends on:** S1–S3 completion. **Scope/value:** combined regression, migration/rollback/restore rehearsal, operator walkthrough and release-readiness report. No new product feature, automatic-notices integration, production recovery or actual release/deploy in this story.
+**Readiness:** implementation-ready specification; isolated execution authorized 2026-10-31. **Depends on:** S1–S3 completion. **Scope/value:** combined regression, migration/rollback/restore rehearsal, operator walkthrough and release-readiness report. No new product feature, automatic-notices integration, production recovery or actual release/deploy in this story.
 
 **Traceability:** all CAPs/FRs/NFRs/UX requirements, all PM-A scenarios. This is an integration gate, not a substitute for earlier story testing.
 

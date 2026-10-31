@@ -35,23 +35,34 @@ def migrate():
 
 
 def cleanup():
+    from .auth import account_lock
+    # One account per transaction; no private row lock before the account gate.
+    cursor = None
+    while True:
+        with database() as conn:
+            owners = conn.execute('SELECT id FROM accounts WHERE (%s::uuid IS NULL OR id > %s::uuid) ORDER BY id LIMIT 100', (cursor, cursor)).fetchall()
+        if not owners:
+            break
+        for account in owners:
+            with database() as conn:
+                account_lock(conn, account['id'])
+                conn.execute("DELETE FROM sessions WHERE owner=%s AND (expires_at <= clock_timestamp())", (account['id'],))
+                conn.execute("DELETE FROM workday_notices WHERE owner=%s AND (expires_at <= clock_timestamp())", (account['id'],))
+                conn.execute("DELETE FROM account_notice_operations WHERE owner=%s AND (expires_at <= clock_timestamp())", (account['id'],))
+                conn.execute("DELETE FROM notice_creation_admissions WHERE owner=%s AND (expires_at <= clock_timestamp())", (account['id'],))
+                conn.execute("DELETE FROM drafts WHERE owner=%s AND (expires_at <= clock_timestamp())", (account['id'],))
+                conn.execute("DELETE FROM workdays WHERE owner=%s AND (expires_at <= clock_timestamp())", (account['id'],))
+                conn.execute("DELETE FROM workday_operations WHERE owner=%s AND (expires_at <= clock_timestamp() OR (workday_id IS NULL AND NOT EXISTS (SELECT 1 FROM drafts WHERE drafts.id=workday_operations.draft_id)))", (account['id'],))
+                conn.execute("DELETE FROM draft_operations WHERE owner=%s AND (expires_at <= clock_timestamp())", (account['id'],))
+                conn.execute("DELETE FROM draft_deletions WHERE owner=%s AND (expires_at <= clock_timestamp())", (account['id'],))
+                conn.execute("DELETE FROM workday_deletions WHERE owner=%s AND (expires_at <= clock_timestamp())", (account['id'],))
+                conn.execute("DELETE FROM workday_bus_operations WHERE owner=%s AND (expires_at <= clock_timestamp())", (account['id'],))
+                conn.execute("DELETE FROM workday_selection_operations WHERE owner=%s AND (expires_at <= clock_timestamp())", (account['id'],))
+                conn.execute("DELETE FROM workday_start_operations WHERE owner=%s AND (expires_at <= clock_timestamp())", (account['id'],))
+                conn.execute("DELETE FROM workday_outcome_operations WHERE owner=%s AND (expires_at <= clock_timestamp())", (account['id'],))
+                conn.execute("DELETE FROM workday_close_operations WHERE owner=%s AND (expires_at <= clock_timestamp())", (account['id'],))
+                conn.execute("DELETE FROM workday_notice_operations WHERE owner=%s AND (expires_at <= clock_timestamp())", (account['id'],))
+                conn.execute("DELETE FROM workday_notice_operations o WHERE o.owner=%s AND (NOT EXISTS (SELECT 1 FROM workday_notices n WHERE n.id::text=o.result->>'id'))", (account['id'],))
+        cursor = owners[-1]['id']
     with database() as conn:
-        # Requests lock sessions before drafts; cleanup must follow that order too.
-        conn.execute('DELETE FROM sessions WHERE expires_at <= clock_timestamp()')
-        conn.execute('DELETE FROM workday_notices WHERE expires_at <= clock_timestamp()')
-        conn.execute('DELETE FROM account_notice_operations WHERE expires_at <= clock_timestamp()')
-        conn.execute('DELETE FROM notice_creation_admissions WHERE expires_at <= clock_timestamp()')
-        conn.execute('DELETE FROM drafts WHERE expires_at <= clock_timestamp()')
-        conn.execute('DELETE FROM workdays WHERE expires_at <= clock_timestamp()')
-        conn.execute('DELETE FROM workday_operations WHERE expires_at <= clock_timestamp() OR (workday_id IS NULL AND NOT EXISTS (SELECT 1 FROM drafts WHERE drafts.id=workday_operations.draft_id))')
-        conn.execute('DELETE FROM draft_operations WHERE expires_at <= clock_timestamp()')
-        conn.execute('DELETE FROM draft_deletions WHERE expires_at <= clock_timestamp()')
-        conn.execute('DELETE FROM workday_deletions WHERE expires_at <= clock_timestamp()')
-        conn.execute('DELETE FROM workday_bus_operations WHERE expires_at <= clock_timestamp()')
-        conn.execute('DELETE FROM workday_selection_operations WHERE expires_at <= clock_timestamp()')
-        conn.execute('DELETE FROM workday_start_operations WHERE expires_at <= clock_timestamp()')
-        conn.execute('DELETE FROM workday_outcome_operations WHERE expires_at <= clock_timestamp()')
-        conn.execute('DELETE FROM workday_close_operations WHERE expires_at <= clock_timestamp()')
-        conn.execute('DELETE FROM workday_notice_operations WHERE expires_at <= clock_timestamp()')
-        conn.execute("DELETE FROM workday_notice_operations o WHERE NOT EXISTS (SELECT 1 FROM workday_notices n WHERE n.id::text=o.result->>'id')")
         conn.execute('DELETE FROM login_limits WHERE expires_at <= clock_timestamp()')

@@ -14,7 +14,7 @@ type Decisions = { operation_id: string; expected_revision: number; acknowledgem
 export type Plan = { id: string; source_draft_id: string; source_revision: number; confirmed_at: string; final_end: string; expires_at: string; state: 'confirmed'; draft: Content; acknowledgements: string[]; classifications: Record<string, string>; unknowns: { id: string; label: string }[] };
 type Summary = Pick<Plan, 'id' | 'source_draft_id' | 'source_revision' | 'expires_at'> & { service_date: string | null };
 type Deletion = { id: string; expires_at: string; body: { operation_id: string; source_revision: number } };
-type Props = { saved: Saved | null; clean: boolean; request: (path: string) => Promise<any>; mutation: (path: string, body: object) => Promise<any>; expired: () => void; suspended: boolean; lock: (value: boolean) => void; screen: 'upload' | 'import' | 'editor' | 'direct' | 'approval' | 'plan'; showPlan: () => void; showPreparation: () => void; planChanged: (value: boolean) => void; consultationChanged: (value: boolean) => void; registryDirty: (value: boolean) => void; registryOpen: (value: boolean) => void; registryNavigation: number };
+type Props = { saved: Saved | null; clean: boolean; request: (path: string) => Promise<any>; mutation: (path: string, body: object) => Promise<any>; expired: () => void; suspended: boolean; lock: (value: boolean) => void; settingsBlocked: (value: boolean) => void; screen: 'upload' | 'import' | 'editor' | 'direct' | 'approval' | 'plan'; showPlan: () => void; showPreparation: () => void; planChanged: (value: boolean) => void; consultationChanged: (value: boolean) => void; registryDirty: (value: boolean) => void; registryOpen: (value: boolean) => void; registryNavigation: number };
 const uuid = (v: any): v is string => typeof v === 'string' && /^[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i.test(v);
 const canonical = (v: any): string => JSON.stringify(v, (_, value) => value && typeof value === 'object' && !Array.isArray(value) ? Object.fromEntries(Object.keys(value).sort().map(key => [key, value[key]])) : value);
 const live = (v: any) => typeof v === 'string' && Number.isFinite(Date.parse(v)) && Date.parse(v) > privateNow();
@@ -54,7 +54,7 @@ export function Facts({ content, classifications = {}, historical = false }: { c
     </>;
 }
 
-export function PrivateConfirmation({ saved, clean, request, mutation, expired, suspended, lock, screen, showPlan, showPreparation, planChanged, consultationChanged, registryDirty, registryOpen, registryNavigation }: Props) {
+export function PrivateConfirmation({ saved, clean, request, mutation, expired, suspended, lock, settingsBlocked, screen, showPlan, showPreparation, planChanged, consultationChanged, registryDirty, registryOpen, registryNavigation }: Props) {
   const [noticeReaderOpen, setNoticeReaderOpen] = useState(false);
   const [planOpen, setPlanOpen] = useState(0);
   const [activityOpen, setActivityOpen] = useState(false);
@@ -115,6 +115,7 @@ export function PrivateConfirmation({ saved, clean, request, mutation, expired, 
   useEffect(() => { if (screen === 'plan' && !activityOpen) dayTitle.current?.focus(); }, [screen, plan?.id]);
   useEffect(() => { alive.current = true; return () => { alive.current = false; }; }, []);
   useEffect(() => { lock(!!pending || !!deleting || busLocked); return () => lock(false); }, [pending, deleting, busLocked]);
+  useEffect(() => { settingsBlocked(busy || !!review && (acks.length > 0 || Object.values(classes).some(Boolean))); return () => settingsBlocked(false); }, [busy, !!review, acks, classes]);
   useEffect(() => { epoch.current++; if (!pending) { setReview(null); setAcks([]); setClasses({}); } }, [selected, clean]);
   useEffect(() => { if (screen === 'approval') { title.current?.focus(); if (clean && !review && !pending) void begin(); } }, [screen, clean]);
   useEffect(() => {

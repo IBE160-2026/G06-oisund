@@ -71,3 +71,5 @@ frontend/.story124-tests/
 frontend/.v1followup-tests/
 frontend/dist-v1followup-tablet/
 frontend/dist-story124-tablet/
+
+frontend/.password-regression-tests/

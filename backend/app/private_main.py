@@ -153,7 +153,7 @@ def login(body: Credentials, request: Request, response: Response):
     token, row = auth.authenticate(body.username.strip().casefold(), body.password, request.client.host)
     # Revoke the existing browser session when changing identity.
     with database() as conn:
-        conn.execute('DELETE FROM sessions WHERE token_hash=%s', (auth.digest(request.cookies.get(auth.SESSION, '')),))
+        auth.revoke_browser(conn, request)
     cookie(response, auth.SESSION, token, 14 * 86400)
     return presentation(row)
 
@@ -176,9 +176,23 @@ def profile(identifier: UUID, request: Request):
 @app.post('/auth/logout')
 def logout(request: Request, response: Response):
     with database() as conn:
-        conn.execute('DELETE FROM sessions WHERE token_hash=%s', (auth.digest(request.cookies.get(auth.SESSION, '')),))
+        auth.revoke_browser(conn, request)
     response.delete_cookie(auth.SESSION, path='/', httponly=True, secure=auth.secure_cookies(), samesite='strict')
     return {'revoked': True}
+
+
+class PasswordChange(BaseModel):
+    model_config = ConfigDict(extra='forbid', strict=True)
+    current_password: str = Field(min_length=1, max_length=256)
+    new_password: str = Field(min_length=12, max_length=256)
+    confirmation: str = Field(min_length=12, max_length=256)
+
+
+@app.post('/auth/password/change')
+def change_password(body: PasswordChange, request: Request, response: Response):
+    auth.change_password(request, body.current_password, body.new_password, body.confirmation)
+    response.delete_cookie(auth.SESSION, path='/', httponly=True, secure=auth.secure_cookies(), samesite='strict')
+    return {'changed': True}
 
 
 @app.get('/drafts', response_model=DraftList)

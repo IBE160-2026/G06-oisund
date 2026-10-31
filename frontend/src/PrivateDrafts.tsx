@@ -13,7 +13,7 @@ export type Saved = { id: string; created_at: string; expires_at: string; revisi
 type Summary = Pick<Saved, 'id' | 'expires_at' | 'revision'> & { service_date: string | null };
 type Pending = { path: string; body: { operation_id: string; expected_revision: number; draft: Content } };
 type PendingDelete = { id: string; body: { operation_id: string; expected_revision: number } };
-type Props = { upload: (file: File, signal: AbortSignal) => Promise<any>; request: (path: string) => Promise<any>; mutation: (path: string, body: object) => Promise<any>; dirtyChanged: (dirty: boolean) => void; expired: () => void; suspended: boolean };
+type Props = { upload: (file: File, signal: AbortSignal) => Promise<any>; request: (path: string) => Promise<any>; mutation: (path: string, body: object) => Promise<any>; dirtyChanged: (dirty: boolean) => void; settingsBlocked: (blocked: boolean) => void; expired: () => void; suspended: boolean };
 const empty = (): Content => ({ service_date: null, vehicle_duty: null, realtime_duty: null, physical_bus: null, activities: [] });
 const realtime = (duty: string | null) => duty?.match(/([0-9]{3})$/)?.[1] ?? null;
 const fields = [['type', 'Aktivitetstype'], ['raw_code', 'Opprinnelig kode'], ['start', 'Start med dato og Oslo-offset'], ['end', 'Slutt med dato og Oslo-offset'], ['source_start', 'Opprinnelig startklokke'], ['source_end', 'Opprinnelig sluttklokke'], ['from_place', 'Fra sted'], ['to_place', 'Til sted'], ['trip', 'Turnummer'], ['line', 'Linje'], ['direction', 'Retning'], ['uncertainty', 'Usikkerhet / ukjente fakta'], ['provenance', 'Kilde / manuell rettelse']] as const;
@@ -75,7 +75,7 @@ function ActivityComparison({ content, activity, index, unresolved }: { content:
   </>;
 }
 
-export function PrivateDrafts({ upload, request, mutation, dirtyChanged, expired, suspended }: Props) {
+export function PrivateDrafts({ upload, request, mutation, dirtyChanged, settingsBlocked, expired, suspended }: Props) {
   const [screen, setScreen] = useState<'upload' | 'import' | 'editor' | 'direct' | 'approval' | 'plan'>('upload');
   const [hasPlan, setHasPlan] = useState(false); const [consulting, setConsulting] = useState(false);
   const preparationTitle = useRef<HTMLHeadingElement>(null);
@@ -83,6 +83,7 @@ export function PrivateDrafts({ upload, request, mutation, dirtyChanged, expired
   const [registryOpen, setRegistryOpen] = useState(false), [registryNavigation, setRegistryNavigation] = useState(0);
   const [registryDirty, setRegistryDirty] = useState(false);
   const [confirmationLocked, setConfirmationLocked] = useState(false);
+  const [confirmationBlocked, setConfirmationBlocked] = useState(false);
   const [list, setList] = useState<Summary[]>([]);
   const [listState, setListState] = useState<'loading' | 'ready' | 'error'>('loading');
   const [nextCursor, setNextCursor] = useState<string | null>(null);
@@ -94,6 +95,7 @@ export function PrivateDrafts({ upload, request, mutation, dirtyChanged, expired
   const [comparison, setComparison] = useState<Saved | null>(null);
   const [message, setMessage] = useState('Nytt utkast. Ikke lagret.');
   const [busy, setBusy] = useState(false);
+  const [importBlocked, setImportBlocked] = useState(false);
   const [draftExpired, setDraftExpired] = useState(false);
   const [timeEpoch, setTimeEpoch] = useState(0);
   const [timeStates, setTimeStates] = useState<Record<string, { dirty: boolean; unresolved: boolean }>>({});
@@ -155,6 +157,7 @@ export function PrivateDrafts({ upload, request, mutation, dirtyChanged, expired
   useEffect(() => { alive.current = true; void refresh(); return () => { alive.current = false; }; }, []);
   useEffect(() => { if (focusLoadedCount.current) { focusLoadedCount.current = false; loadedCount.current?.focus(); } }, [list]);
   useEffect(() => { dirtyChanged(dirty || confirmationLocked || registryDirty); return () => dirtyChanged(false); }, [dirty, confirmationLocked, registryDirty]);
+  useEffect(() => { settingsBlocked(importBlocked || dirty || confirmationLocked || confirmationBlocked || registryDirty || busy || !!pending || !!pendingDelete || !!comparison); return () => settingsBlocked(false); }, [importBlocked, dirty, confirmationLocked, confirmationBlocked, registryDirty, busy, pending, pendingDelete, comparison]);
   useEffect(() => {
     const timer = window.setInterval(() => setList(current => current.some(row => Date.parse(row.expires_at) <= privateNow()) ? current.filter(row => Date.parse(row.expires_at) > privateNow()) : current), 1000);
     return () => clearInterval(timer);
@@ -383,7 +386,7 @@ export function PrivateDrafts({ upload, request, mutation, dirtyChanged, expired
     <nav className="private-screen-nav" aria-label="Plan og forberedelse"><button disabled={confirmationLocked || !!pending || !!pendingDelete || busy || suspended} aria-current={screen === 'upload' ? 'page' : undefined} onClick={() => { continueAfterSave.current = false; setScreen('upload'); setRegistryNavigation(v => v + 1); }}>Forberedelse og planlister</button><button disabled={confirmationLocked || !!pending || !!pendingDelete || busy || suspended} aria-current={screen === 'editor' ? 'page' : undefined} onClick={() => { continueAfterSave.current = false; setScreen('editor'); setRegistryNavigation(v => v + 1); }}>Kontroller og rediger utkast</button><button hidden={screen === 'plan'} disabled={!saved || dirty || entryLocked || !!comparison || confirmationLocked} aria-current={screen === 'approval' ? 'page' : undefined} onClick={showApproval}>Til godkjenning</button>{hasPlan && <button disabled={confirmationLocked || !!pending || !!pendingDelete || busy || suspended} aria-current={screen === 'plan' ? 'page' : undefined} onClick={() => { setScreen('plan'); setRegistryNavigation(v => v + 1); }}>Til den åpne planen</button>}</nav>
     <div hidden={registryOpen || screen !== 'upload'}><h2 ref={preparationTitle} tabIndex={-1}>Mine utkast</h2></div>
     <p hidden={registryOpen || screen !== 'upload'} role="status" aria-live="polite" className="status">{screen === 'upload' ? message : null}</p><fieldset hidden={registryOpen} className="confirmation-editor" disabled={confirmationLocked}>
-    <div hidden={screen !== 'upload' && screen !== 'import'}><PrivateImport stage={screen === 'import' ? 'review' : 'upload'} reviewReady={() => setScreen(current => current === 'upload' ? 'import' : current)} backToUpload={() => setScreen('upload')} upload={upload} suspended={suspended} locked={entryLocked || !!comparison} expired={expired} adopt={(value, intent) => { if (dirty && !window.confirm('Ulagrede endringer går tapt. Bruke importen som et separat nytt utkast?')) return false; resetTimes(); setSourceEpoch(current => current + 1); setSaved(null); setContent(value); setComparison(null); setSaveUnavailable(false); setMessage('Importen er et separat, ulagret utkast. Kontroller fakta og lagre uttrykkelig.'); setScreen(intent === 'approve' ? 'direct' : 'editor'); continueAfterSave.current = intent === 'approve'; if (intent === 'approve') void save(value, true); return true; }} /></div>
+    <div hidden={screen !== 'upload' && screen !== 'import'}><PrivateImport settingsBlocked={setImportBlocked} stage={screen === 'import' ? 'review' : 'upload'} reviewReady={() => setScreen(current => current === 'upload' ? 'import' : current)} backToUpload={() => setScreen('upload')} upload={upload} suspended={suspended} locked={entryLocked || !!comparison} expired={expired} adopt={(value, intent) => { if (dirty && !window.confirm('Ulagrede endringer går tapt. Bruke importen som et separat nytt utkast?')) return false; resetTimes(); setSourceEpoch(current => current + 1); setSaved(null); setContent(value); setComparison(null); setSaveUnavailable(false); setMessage('Importen er et separat, ulagret utkast. Kontroller fakta og lagre uttrykkelig.'); setScreen(intent === 'approve' ? 'direct' : 'editor'); continueAfterSave.current = intent === 'approve'; if (intent === 'approve') void save(value, true); return true; }} /></div>
     <div hidden={screen !== 'upload'}>
     <p>Utkast slettes sju dager etter opprettelse. Ulagrede endringer finnes bare mens denne siden er åpen.</p>
     <div className="controls"><button disabled={busy || !!pending || !!pendingDelete} onClick={() => { if (!dirty || window.confirm('Ulagrede endringer går tapt. Opprette nytt utkast?')) { resetTimes(); setSaveUnavailable(false); setSaved(null); setContent(empty()); setPending(null); setComparison(null); setMessage('Nytt utkast. Ikke lagret.'); setScreen('editor'); } }}>Nytt utkast</button><button disabled={busy || !!pendingDelete} onClick={() => void refresh()}>Oppdater listen</button></div>
@@ -444,6 +447,6 @@ export function PrivateDrafts({ upload, request, mutation, dirtyChanged, expired
     {comparison && <section aria-label="Sammenlign versjoner"><h3>Lagret versjon {comparison.revision}</h3><p>Lokale endringer står i skjemaet. Last inn lagret versjon for å forkaste dem.</p><dl><dt>Tjenestedato</dt><dd>{comparison.draft.service_date ?? 'Ukjent'}</dd><dt>Vognløp</dt><dd>{comparison.draft.vehicle_duty ?? 'Ukjent'}</dd><dt>Sanntidsverdi</dt><dd>{comparison.draft.realtime_duty ?? 'Ukjent'}</dd><dt>Buss/vogn</dt><dd>{comparison.draft.physical_bus ?? 'Ukjent'}</dd></dl><ol>{comparison.draft.activities.map((activity, index) => <li key={activity.id}><dl><dt>Gjeldende vognløp</dt><dd>{effectiveDuty(comparison.draft, index) ?? 'Ukjent'} · sanntidsverdi {dutySuffix(effectiveDuty(comparison.draft, index)) ?? 'Ukjent'}</dd>{fields.map(([key, label]) => <div className="fact" key={key}><dt>{label}</dt><dd>{displayFact(key, activity[key]) ?? 'Ukjent'}</dd></div>)}</dl></li>)}</ol><button onClick={() => { if (window.confirm('Forkaste lokale endringer og laste lagret versjon?')) void reopen(comparison.id, true); }}>Last inn lagret versjon</button></section>}
     </div></fieldset>
     </section>
-    <PrivateConfirmation registryOpen={setRegistryOpen} registryNavigation={registryNavigation} registryDirty={setRegistryDirty} consultationChanged={setConsulting} screen={screen} showPlan={() => setScreen('plan')} showPreparation={() => setScreen('upload')} planChanged={setHasPlan} saved={saved} clean={!dirty && !busy && !comparison && !draftExpired} request={request} mutation={mutation} expired={expired} suspended={suspended} lock={setConfirmationLocked} />
+    <PrivateConfirmation registryOpen={setRegistryOpen} registryNavigation={registryNavigation} registryDirty={setRegistryDirty} consultationChanged={setConsulting} screen={screen} showPlan={() => setScreen('plan')} showPreparation={() => setScreen('upload')} planChanged={setHasPlan} saved={saved} clean={!dirty && !busy && !comparison && !draftExpired} request={request} mutation={mutation} expired={expired} suspended={suspended} lock={setConfirmationLocked} settingsBlocked={setConfirmationBlocked} />
   </div>;
 }

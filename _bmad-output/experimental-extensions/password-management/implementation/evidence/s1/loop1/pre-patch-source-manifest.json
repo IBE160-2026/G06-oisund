@@ -1,0 +1,14 @@
+{
+  "backend/app/auth.py": "42a19d3a4e7fef7d25b8a2db8299ae14b6da61e4b1832c5a2ef713a0d156f6bc",
+  "backend/app/private_main.py": "77b4aa559a97f5528362ee30c9459056de37003cab5dbcaa77623e98ae5f59f8",
+  "backend/app/private_storage.py": "369597ffa18d3edcf234135efe9ed20a29edb38547cb0522bb2c9314c0b40196",
+  "backend/tests/test_password_change.py": "c3913a64b09cc2ec2db47b2522d76041372b3db0d949608373fef07f4a6f7e20",
+  "frontend/src/PrivateAccess.tsx": "dd45bda967a451963ff8ad4b8d1289f6b579acc9fba38499e87097e9f5c8dab2",
+  "frontend/src/PrivateDrafts.tsx": "8eb8610506c20e32b86cd97b7986f2fd627ce71220163da5d03db16f4c84d0b2",
+  "frontend/src/PrivateImport.tsx": "27d385695d0f1cc4e5931ba1fa0d54df76cfcc77eb8e81184ad7e13dc04ede2a",
+  "frontend/src/PrivateConfirmation.tsx": "b91159c1665a29fb710a0d3929895268dea64871fed15802305488d399308634",
+  "frontend/src/PasswordChange.tsx": "51ad1d0d6ac692595aaf56af106b9e9ab5d91b5d38c8984bee9b888b6cce54bc",
+  "frontend/src/style.css": "e730a63a0d84d98adbf968595154ab0fbb28fd96c185c602ffafe4d66a3bac27",
+  "frontend/tests/password-change.spec.ts": "76723f7e18eb7bee6015aff2676a5207c436aba85be7c71eb34001d7f244f9d5",
+  "frontend/tests/private-recovery.spec.ts": "ba0b0e726140cef32b80385220a013fb3bb30c54f96616926aed461391487b6a"
+}

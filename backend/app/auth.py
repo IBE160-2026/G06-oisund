@@ -108,7 +108,7 @@ def authenticate(username, password, address):
     with database() as conn:
         conn.execute('SELECT pg_advisory_xact_lock(903002)')
         conn.execute("UPDATE login_limits SET expires_at=g.expires_at FROM "
-                     "(SELECT expires_at FROM login_limits WHERE bucket='global') g WHERE bucket<>'global'")
+                     "(SELECT expires_at FROM login_limits WHERE bucket='global') g WHERE bucket LIKE 'ip:%%' OR bucket LIKE 'user:%%'")
         conn.execute('DELETE FROM login_limits WHERE expires_at <= clock_timestamp()')
         deadline = None
         for bucket, maximum in [('global', 100), ('ip:' + digest(address), 20), ('user:' + digest(username), 10)]:
@@ -124,6 +124,9 @@ def authenticate(username, password, address):
         raise HTTPException(429, INVALID, headers={'Retry-After': '900'})
     with database() as conn:
         account = conn.execute('SELECT * FROM accounts WHERE username=%s', (username,)).fetchone()
+        if account:
+            account_lock(conn, account['id'])
+            account = conn.execute('SELECT * FROM accounts WHERE id=%s', (account['id'],)).fetchone()
         stored = account['password_hash'] if account else DUMMY
         if not hmac.compare_digest(password_hash(password, stored.split(':')[0]), stored) or not account:
             raise HTTPException(401, INVALID)
@@ -137,7 +140,61 @@ def session(conn, request):
     token = request.cookies.get(SESSION, '')
     if not token or len(token) > 128:
         raise HTTPException(401, 'Logg inn på nytt.')
+    discovered = conn.execute('SELECT owner FROM sessions WHERE token_hash=%s', (digest(token),)).fetchone()
+    if not discovered:
+        raise HTTPException(401, 'Logg inn på nytt.')
+    account_lock(conn, discovered['owner'])
     row = conn.execute('SELECT *, expires_at > clock_timestamp() AS live FROM sessions WHERE token_hash=%s FOR UPDATE', (digest(token),)).fetchone()
     if not row or not conn.execute('SELECT %s > clock_timestamp() AS live', (row['expires_at'],)).fetchone()['live']:
         raise HTTPException(401, 'Logg inn på nytt.')
     return row
+
+
+def account_lock(conn, owner):
+    """First lock in every account-authorized transaction; stable across workers."""
+    key = int.from_bytes(hashlib.sha256(('private-account:' + str(owner)).encode()).digest()[:8], 'big', signed=True)
+    conn.execute('SELECT pg_advisory_xact_lock(%s)', (key,))
+
+
+def revoke_browser(conn, request):
+    token_hash = digest(request.cookies.get(SESSION, ''))
+    row = conn.execute('SELECT owner FROM sessions WHERE token_hash=%s', (token_hash,)).fetchone()
+    if row:
+        account_lock(conn, row['owner'])
+        conn.execute('DELETE FROM sessions WHERE token_hash=%s', (token_hash,))
+
+
+def change_admission(owner, address):
+    # Separate committed admission: failed credentials cannot roll back attempts.
+    allowed = True
+    with database() as conn:
+        conn.execute('SELECT pg_advisory_xact_lock(903003)')
+        conn.execute("DELETE FROM login_limits WHERE bucket LIKE 'change:%%' AND expires_at <= clock_timestamp()")
+        deadline = None
+        for bucket, maximum in [('change:global', 100), ('change:ip:' + digest(address), 20), ('change:user:' + digest(str(owner)), 5)]:
+            row = conn.execute("INSERT INTO login_limits VALUES (%s,1,COALESCE(%s,clock_timestamp()+interval '15 minutes')) "
+                               'ON CONFLICT (bucket) DO UPDATE SET attempts=LEAST(login_limits.attempts+1,101) RETURNING attempts,expires_at',
+                               (bucket, deadline)).fetchone()
+            deadline = row['expires_at']
+            if row['attempts'] > maximum:
+                allowed = False
+                break
+    if not allowed:
+        raise HTTPException(429, 'For mange forsøk. Prøv igjen senere.', headers={'Retry-After': '900'})
+
+
+def change_password(request, current_password, new_password, confirmation):
+    if not 1 <= len(current_password) <= 256 or not 12 <= len(new_password) <= 256 or new_password != confirmation:
+        raise HTTPException(422, 'Kontroller feltene.')
+    with database() as conn:
+        owner = session(conn, request)['owner']
+    change_admission(owner, request.client.host)
+    with database() as conn:
+        owner = session(conn, request)['owner']
+        stored = conn.execute('SELECT password_hash FROM accounts WHERE id=%s', (owner,)).fetchone()['password_hash']
+        if not hmac.compare_digest(password_hash(current_password, stored.split(':')[0]), stored):
+            raise HTTPException(400, {'code': 'current_password', 'message': 'Gjeldende passord er feil.'})
+        replacement = password_hash(new_password)
+        session(conn, request)  # Expiry may have passed during hashing.
+        conn.execute('UPDATE accounts SET password_hash=%s WHERE id=%s', (replacement, owner))
+        conn.execute('DELETE FROM sessions WHERE owner=%s', (owner,))

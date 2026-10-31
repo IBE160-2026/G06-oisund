@@ -49,9 +49,9 @@ def probe():
     with urllib.request.urlopen('http://private-api:8000/fixture-tokens') as response:
         tokens = json.load(response)
 
-    def request(path, method='GET', headers=None, authenticated=True):
+    def request(path, method='GET', headers=None, authenticated=True, body=None):
         admission_header = {'Cf-Access-Jwt-Assertion': tokens['valid']} if authenticated else {}
-        req = urllib.request.Request('http://gateway:8080' + path, method=method,
+        req = urllib.request.Request('http://gateway:8080' + path, method=method, data=body,
                                      headers={'Host': 'bus.owner-domain.no', **admission_header, **(headers or {})})
         try:
             return opener.open(req, timeout=3)
@@ -96,6 +96,18 @@ def probe():
         assert response.headers['Cache-Control'] == 'no-store'
         assert "connect-src 'self'" in response.headers['Content-Security-Policy']
         assert 'Secure' in response.headers['Set-Cookie']
+    # Synthetic password body: no account/database is used by this proxy probe.
+    secret_body = json.dumps({'current_password': 'synthetic-password-log-probe',
+                              'new_password': 'synthetic-password-log-probe',
+                              'confirmation': 'synthetic-password-log-probe'}).encode()
+    for admitted in [False, True]:
+        with request('/private-api/auth/password/change', 'POST',
+                     {**headers, 'Content-Type': 'application/json'}, admitted, secret_body) as response:
+            assert response.status == (200 if admitted else 403)
+            assert response.headers['Cache-Control'] == 'no-store'
+            if admitted:
+                assert json.load(response)['path'] == '/auth/password/change'
+    print('PASS: password route admission, forwarding and no-store with synthetic body')
     # Inspect actual Nginx forwarding, not a string/config approximation.
     for supplied, expected in [
         ('CF_Authorization=outer; unrelated=discard; private_session=session; private_csrf=proof', 'private_session=session; private_csrf=proof'),

@@ -74,6 +74,10 @@ test('a real request deadline before backend acceptance or forwarding retains th
 
 test('fresh save preflight failure sends no write POST and retains unconfirmed input after restoration', async ({ page, context }) => {
   await draft(page); const posts: string[] = [];
+  // Install the failure only after initial list/plan reads finish. Otherwise
+  // their own authorization check can suspend the editor before the save click.
+  await expect(page.locator('.draft-loaded-count')).toHaveText('Lastet 0 utkast.');
+  await expect(page.locator('.private-confirmation')).toHaveAttribute('aria-busy', 'false');
   page.on('request', request => { if (request.method() === 'POST') posts.push(new URL(request.url()).pathname); });
   await page.route('**:8001/auth/session', route => route.abort());
   await save(page).click();

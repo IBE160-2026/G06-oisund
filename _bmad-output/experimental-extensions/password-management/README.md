@@ -1,6 +1,6 @@
-# Password management — experimental planning
+# Password management — experimental extension
 
-2026-10-31. **Scope decisions recorded; technical plan remains draft and implementation is not authorized.** No version number is allocated. V1, including Ubuntu integration, remains the accepted baseline.
+2026-10-31. **Isolated implementation authorized and in progress; owner qualification and release remain pending.** No version number is allocated. V1, including Ubuntu integration, remains the accepted baseline.
 
 Start with [SPEC](specs/spec-password-management/SPEC.md), then its companions and the [epic/story package](planning/epics.md). [Implementation plan](specs/spec-password-management/implementation-plan.md) records the owner's Q1–Q4 decisions and remaining operational details. [Qualification](specs/spec-password-management/qualification.md) separates future tests from checks actually performed.
 
@@ -21,3 +21,9 @@ The extension-local `planning/.bmad-runner` resolves core configuration and spec
 [PM-E1 and four ordered stories](planning/epics.md) are implementation-ready specifications after document validation, with execution still unauthorized. Read the [technical contract](planning/technical-contract.md), [20-scenario coverage](planning/coverage.md), [validation](planning/validation.md) and [workflow/routing record](planning/workflow.md). Own-account recovery through independent SSH is explicit; no admin panel is needed. Updated origin/main is unchanged at the original baseline. V1 numbering/status remain untouched.
 
 The spec and companions derive from `.memlog.md` plus cited inspected sources. Future answers must be appended to memory before re-derivation. Story breakdown now lives in planning/epics.md with PM-E1-S1..S4; future architecture or dispatch remains extension-local. Do not dispatch V1 stories. Review unresolved decisions and obtain separate implementation authorization first. Planning readiness is not product acceptance, permission to build or a sprint-status change.
+
+## Implementation authorization — 2026-10-31
+
+The owner subsequently authorized sequential implementation of PM-E1-S1 through S4 on this experimental branch in this isolated checkout, including synthetic tests, BMAD review, commits and push. This supersedes the historical planning-only authorization statements above; it does not approve release, production operations or new product decisions. origin/main was fetched and remains 5cee9e03d03d2c9c165c7f8fec64aa3e146959ab. Other branches/worktrees remain untouched.
+
+Implementation evidence is tracked under [implementation](implementation/status.md). The owner is unavailable: identity/handoff qualification, actual tablet/PC acceptance and any new product decision are **utsatt – krever eier**. No physical tablet operation is authorized in this run. Technical dependencies may progress after their independent tests/review pass; mandatory owner checks still prevent marking the stories or epic complete.
