@@ -3,6 +3,8 @@ import hashlib
 import importlib.util
 import io
 import json
+import os
+import pty
 from pathlib import Path
 import subprocess
 import sys
@@ -10,6 +12,7 @@ import tarfile
 import tempfile
 import unittest
 from unittest.mock import patch
+from contextlib import ExitStack
 
 spec = importlib.util.spec_from_file_location('ops', Path(__file__).with_name('bussassistentctl.py'))
 ops = importlib.util.module_from_spec(spec)
@@ -154,6 +157,111 @@ class OperationsTests(unittest.TestCase):
         self.assertEqual(calls[0][0:2], ['systemctl', 'enable'])
         self.assertNotIn('--now', calls[0])
         self.assertIn('--no-block', calls[1])
+
+    def recovery_release(self):
+        path = self.root / 'releases' / COMMIT
+        path.mkdir()
+        (self.root / 'current').symlink_to(path)
+        return path
+
+    def terminal_mocks(self):
+        stack = ExitStack()
+        for name, value in [('isatty', True), ('ttyname', '/dev/pts/7'),
+                            ('tcgetpgrp', 123), ('getpgrp', 123), ('open', 77)]:
+            stack.enter_context(patch.object(ops.os, name, return_value=value))
+        stack.enter_context(patch.object(ops.os, 'close'))
+        return stack
+
+    def test_recovery_fixed_command_and_terminal_streams(self):
+        path = self.recovery_release()
+        for action in ('recovery-issue', 'recovery-revoke'):
+            with self.subTest(action=action), self.terminal_mocks(), patch.object(
+                    ops.subprocess, 'run') as run, patch.object(sys, 'argv', ['ctl', action, ' SYNTHETIC-Owner ']):
+                ops.main()
+                args, kw = run.call_args
+                self.assertEqual(args[0], ['docker', 'compose', '--project-name', 'bussassistent',
+                    '--env-file', str(ops.CONFIG), '-f', str(path / 'deploy/ubuntu/compose.yaml'),
+                    'exec', 'private-api', 'python', '-m', 'app.manage', action, 'synthetic-owner'])
+                self.assertEqual({key: kw[key] for key in ('stdin', 'stdout', 'stderr')},
+                                 dict(stdin=77, stdout=77, stderr=77))
+                self.assertEqual(kw['env']['RELEASE_ID'], COMMIT)
+                self.assertNotIn('shell', kw)
+                self.assertNotIn('capture_output', kw)
+
+    def test_recovery_invalid_args_fail_before_docker(self):
+        for argv in (['ctl', 'recovery-issue'], ['ctl', 'recovery-revoke', 'synthetic-a', '--flag'],
+                     *[['ctl', 'recovery-issue', value] for value in ('', '  ', '--help', 'a'*101,
+                         'synthetic-\x1b[2J', 'synthetic-\n', 'synthetic-\u202e')]):
+            with self.subTest(argv=argv), patch.object(sys, 'argv', argv), patch.object(ops, 'run') as run:
+                with self.assertRaises(ValueError):
+                    ops.main()
+                run.assert_not_called()
+
+    def test_recovery_rejects_redirect_missing_foreign_or_background_terminal(self):
+        cases = [('isatty', [False, True, True]), ('isatty', [True, False, True]),
+                 ('isatty', [True, True, False]), ('open', OSError('No controlling terminal')),
+                 ('ttyname', ['/dev/pts/1', '/dev/pts/2', '/dev/pts/1']),
+                 ('tcgetpgrp', [123, 123, 123, 456])]
+        for name, effect in cases:
+            with self.subTest(name=name, effect=effect), self.terminal_mocks(), patch.object(
+                    ops.os, name, side_effect=effect), patch.object(ops, 'run') as run:
+                with self.assertRaises((ValueError, OSError)):
+                    ops.recovery('recovery-issue', 'synthetic-owner')
+                run.assert_not_called()
+
+    def test_recovery_rejects_invalid_current_release(self):
+        (self.root / 'current').symlink_to(self.uploads)
+        with self.terminal_mocks(), patch.object(ops, 'run') as run:
+            with self.assertRaisesRegex(ValueError, 'release path'):
+                ops.recovery('recovery-revoke', 'synthetic-owner')
+            run.assert_not_called()
+
+    def test_recovery_entrypoint_keeps_root_and_lock_boundary(self):
+        from unittest.mock import mock_open
+        events = []
+        with patch.object(ops.os, 'geteuid', return_value=1), patch.object(ops, 'main') as main:
+            with self.assertRaises(SystemExit):
+                ops.entrypoint()
+            main.assert_not_called()
+        with patch.object(ops.os, 'geteuid', return_value=0), patch('builtins.open', mock_open()) as opened, patch.object(
+                ops.fcntl, 'flock', side_effect=lambda *args: events.append('locked')), patch.object(
+                ops, 'main', side_effect=lambda: events.append('main')):
+            ops.entrypoint()
+            opened.assert_called_once_with('/run/lock/bussassistent.lock', 'w')
+        self.assertEqual(events, ['locked', 'main'])
+
+    def test_recovery_actual_pty_and_outer_redirects(self):
+        self.recovery_release()
+        # Child has an actual controlling PTY; subprocess is always mocked.
+        # No Docker invocation or secret is generated by this host-boundary test.
+        for redirect in (None, 0, 1, 2):
+            pid, terminal = pty.fork()
+            if pid == 0:
+                try:
+                    if redirect is not None:
+                        null = os.open('/dev/null', os.O_RDWR)
+                        os.dup2(null, redirect)
+                        os.close(null)
+                    called = []
+                    def fake_run(args, **kwargs):
+                        called.append(True)
+                        fds = [kwargs[name] for name in ('stdin', 'stdout', 'stderr')]
+                        assert len(set(fds)) == 1 and os.isatty(fds[0])
+                        assert os.tcgetpgrp(fds[0]) == os.getpgrp()
+                    with patch.object(ops.subprocess, 'run', side_effect=fake_run):
+                        try:
+                            ops.recovery('recovery-issue', 'synthetic-owner')
+                            valid = redirect is None and called == [True]
+                        except ValueError:
+                            valid = redirect is not None and not called
+                    os._exit(0 if valid else 1)
+                except BaseException:
+                    os._exit(2)
+            try:
+                _, status = os.waitpid(pid, 0)
+                self.assertEqual(os.waitstatus_to_exitcode(status), 0)
+            finally:
+                os.close(terminal)
 
 if __name__ == '__main__':
     unittest.main()

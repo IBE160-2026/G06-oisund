@@ -125,7 +125,7 @@ As Jonas, the recovery operator,
 I want to issue or revoke a code for an explicitly confirmed existing account using SSH,
 So that I can authorize recovery for myself or the teacher without knowing the app password or adding an admin panel.
 
-**Readiness:** implementation-ready specification; isolated execution authorized 2026-10-31. **Depends on:** S1 shared account lock/revocation boundary. **Scope/value:** operator command, minimal recovery schema, lifecycle/cleanup and a usable safe-handoff runbook. Redemption is S3; lifecycle is demonstrable without it. Do not distribute live-user codes until the full recovery journey is qualified.
+**Readiness:** implemented and technically reviewed; mandatory owner/operator qualification remains pending (in-review). **Depends on:** S1 shared account lock/revocation boundary. **Scope/value:** operator command, minimal recovery schema, lifecycle/cleanup and a usable safe-handoff runbook. Redemption is S3; lifecycle is demonstrable without it. Do not distribute live-user codes until the full recovery journey is qualified.
 
 **Traceability:** CAP-2, PM-FR2/5/6/7, PM-NFR1/2/3/5. No new web UI or administrator application account.
 
@@ -142,13 +142,16 @@ So that I can authorize recovery for myself or the teacher without knowing the a
 
 **Tasks & Acceptance:**
 
-- [ ] `backend/app/manage.py` plus a bounded recovery service — exact-target resolution, explicit account confirmation, issue/revoke commands and separate operator audit. Reuse existing CLI/private DB mode and host secrets; no web admin endpoints, list-all-users export or direct manual SQL recipe.
-- [ ] Next unused `backend/migrations/private/*.sql` and `private_storage.py` — create recovery proof/admission/audit structures only as needed here; UUID FK, digest uniqueness, state/expiry constraints, one active proof and expiry index. Integrate S1 change transaction with proof invalidation in this story. Keep migration numbering unallocated until implementation baseline check.
-- [ ] Implement safe controlling-terminal output per technical-contract.md; reject non-TTY/redirected invocation, keep ordinary output secret-free, and test actual SSH/interactive container command behavior using synthetic secrets. Record residual session-recording controls; do not claim TTY detection proves no recording.
-- [ ] Add CLI/storage integration tests for exact account selection, cancel/unknown target, repeated revoke, replace/races, cleanup, limit boundaries, failures and plaintext/log scans. Rehearse additive migration twice with retained synthetic records and compatible provisioning.
-- [ ] Write `operator-runbook.md` under this extension's later evidence/docs area, with operator invocation in the existing Ubuntu layout, preflight, no-transcript rule, identity/handoff procedure and self-recovery rehearsal. Keep the command syntax documented as future until implemented; use no real secret examples.
+- [x] `backend/app/manage.py` plus a bounded recovery service — exact-target resolution, explicit account confirmation, issue/revoke commands and separate operator audit. Reuse existing CLI/private DB mode and host secrets; no web admin endpoints, list-all-users export or direct manual SQL recipe.
+- [x] Next unused `backend/migrations/private/*.sql` and `private_storage.py` — create recovery proof/admission/audit structures only as needed here; UUID FK, digest uniqueness, state/expiry constraints, one active proof and expiry index. Integrate S1 change transaction with proof invalidation in this story. Keep migration numbering unallocated until implementation baseline check.
+- [ ] Implement safe controlling-terminal output per technical-contract.md; reject non-TTY/redirected invocation, keep ordinary output secret-free, and test actual SSH/interactive container command behavior using synthetic secrets. Record residual session-recording controls; do not claim TTY detection proves no recording. Technical implementation and synthetic Linux PTY checks pass; actual SSH/owner recording qualification is **utsatt – krever eier**.
+- [x] Add CLI/storage integration tests for exact account selection, cancel/unknown target, repeated revoke, replace/races, cleanup, limit boundaries, failures and plaintext/log scans. Rehearse additive migration twice with retained synthetic records and compatible provisioning.
+- [x] Write `operator-runbook.md` under this extension's later evidence/docs area, with operator invocation in the existing Ubuntu layout, preflight, no-transcript rule, identity/handoff procedure and self-recovery rehearsal. Keep the command syntax documented as future until implemented; use no real secret examples.
 
 **Completion evidence:** testable code lifecycle and safe operator handoff on disposable environment, migration preservation and draft runbook. No app password, mailbox or app login required for operator actions. S3 owns completion of user recovery.
+
+
+Independent evidence: [S2 implementation, triage and tests](../implementation/spec-pm-e1-s2.md), [operator runbook](../implementation/operator-runbook.md). Checked tasks cover independent technical work only; practical identity/contact/handoff/no-recording and actual SSH qualification remain **utsatt – krever eier**, so this story is not complete.
 
 ### Story PM-E1-S3: Recover my existing account with the one-use code
 

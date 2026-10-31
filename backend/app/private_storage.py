@@ -46,6 +46,8 @@ def cleanup():
         for account in owners:
             with database() as conn:
                 account_lock(conn, account['id'])
+                from .password_recovery import cleanup_account
+                cleanup_account(conn, account['id'])
                 conn.execute("DELETE FROM sessions WHERE owner=%s AND (expires_at <= clock_timestamp())", (account['id'],))
                 conn.execute("DELETE FROM workday_notices WHERE owner=%s AND (expires_at <= clock_timestamp())", (account['id'],))
                 conn.execute("DELETE FROM account_notice_operations WHERE owner=%s AND (expires_at <= clock_timestamp())", (account['id'],))

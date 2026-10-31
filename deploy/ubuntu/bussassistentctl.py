@@ -11,6 +11,7 @@ import sys
 import tarfile
 import tempfile
 import time
+import unicodedata
 
 ROOT = Path('/opt/bussassistent')
 CONFIG = Path('/etc/bussassistent/server.env')
@@ -41,6 +42,33 @@ def compose(path, *args, **kw):
     return run(['docker', 'compose', '--project-name', 'bussassistent',
                 '--env-file', str(CONFIG), '-f', str(path / 'deploy/ubuntu/compose.yaml'),
                 *args], env=env, **kw)
+
+
+def recovery(action, username):
+    """Bounded operator entry point; check OUTER terminal before Docker's PTY."""
+    if (action not in ('recovery-issue', 'recovery-revoke')
+            or any(unicodedata.category(c).startswith('C') for c in username)):
+        raise ValueError('Invalid recovery command or username')
+    username = username.strip().casefold()
+    if not 1 <= len(username) <= 100 or username.startswith('-'):
+        raise ValueError('Invalid recovery username')
+    if not all(os.isatty(fd) for fd in (0, 1, 2)):
+        raise ValueError('Recovery requires an interactive terminal without redirection')
+    # /dev/tty is an alias, so comparing its st_rdev to /dev/pts/N is invalid.
+    terminal = os.open('/dev/tty', os.O_RDWR | os.O_NOCTTY)
+    try:
+        if (len({os.ttyname(fd) for fd in (0, 1, 2)}) != 1
+                or any(os.tcgetpgrp(fd) != os.getpgrp() for fd in (0, 1, 2, terminal))):
+            raise ValueError('Recovery requires the same foreground controlling terminal')
+        path = release()
+        # Never capture the Docker stream. The inner CLI also checks its TTY and
+        # performs identity/no-recording/target preflight before issuing a code.
+        # Compose exec allocates an interactive TTY by default (no -T).
+        compose(path, 'exec', 'private-api',
+                'python', '-m', 'app.manage', action, username,
+                stdin=terminal, stdout=terminal, stderr=terminal)
+    finally:
+        os.close(terminal)
 
 
 def link(name, path):
@@ -361,6 +389,11 @@ def verify_restore():
 
 def main():
     action = sys.argv[1] if len(sys.argv) > 1 else ''
+    if action in ('recovery-issue', 'recovery-revoke'):
+        if len(sys.argv) != 3:
+            raise ValueError('Use recovery-issue USERNAME | recovery-revoke USERNAME')
+        recovery(action, sys.argv[2])
+        return
     if action == 'verify-restore' and len(sys.argv) == 2:
         verify_restore()
         return
@@ -463,7 +496,7 @@ def main():
         raise ValueError('Use status|logs|start|stop|backup|check|stage SHA DIGEST|prepare-db SHA|deploy SHA|rollback SHA')
 
 
-if __name__ == '__main__':
+def entrypoint():
     if os.geteuid() != 0:
         raise SystemExit('Run through sudo')
     with open('/run/lock/bussassistent.lock', 'w') as lock:
@@ -473,3 +506,7 @@ if __name__ == '__main__':
         except (ValueError, OSError, subprocess.CalledProcessError) as error:
             # Do not dump Compose environments, credentials or database contents.
             raise SystemExit(str(error)) from None
+
+
+if __name__ == '__main__':
+    entrypoint()

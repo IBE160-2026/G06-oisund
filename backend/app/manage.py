@@ -20,6 +20,9 @@ if __name__ == '__main__':
             private_migrate()
         elif action == 'cleanup':
             private_cleanup()
+        elif action in {'recovery-issue', 'recovery-revoke'} and len(sys.argv) == 3:
+            from .recovery_terminal import run
+            run(action, sys.argv[2])
         elif action == 'provision' and len(sys.argv) == 3:
             if sys.argv[2].strip().casefold().startswith('synthetic-'):
                 raise SystemExit('Navneområdet synthetic- er reservert for engangstester.')
@@ -40,7 +43,7 @@ if __name__ == '__main__':
                 raise SystemExit('Kunne ikke opprette konto. Kontroller brukernavn og passordkrav.') from None
             print('Konto opprettet.')
         else:
-            raise SystemExit('Private mode: migrate | cleanup | provision USERNAME')
+            raise SystemExit('Private mode: migrate | cleanup | provision USERNAME | recovery-issue USERNAME | recovery-revoke USERNAME')
     elif action == 'migrate':
         migrate()
     elif action == 'cleanup':

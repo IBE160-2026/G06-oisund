@@ -197,4 +197,7 @@ def change_password(request, current_password, new_password, confirmation):
         replacement = password_hash(new_password)
         session(conn, request)  # Expiry may have passed during hashing.
         conn.execute('UPDATE accounts SET password_hash=%s WHERE id=%s', (replacement, owner))
+        from .password_recovery import invalidate, audit
+        invalidate(conn, owner)
+        audit(conn, owner, 'change', 'revoked', actor='app-account:' + str(owner))
         conn.execute('DELETE FROM sessions WHERE owner=%s', (owner,))

@@ -5,8 +5,8 @@
 | Story | Technical work | Mandatory owner qualification | Overall |
 |---|---|---|---|
 | PM-E1-S1 | Implemented; two three-layer review rounds, fixes, final41 backend +18 browser passed | Actual device/owner UX: utsatt – krever eier | In review, not complete |
-| PM-E1-S2 | S1 technical dependency satisfied; next | Identity/handoff/recording controls: utsatt – krever eier | Not complete |
-| PM-E1-S3 | Pending S2 technical review | Actual device/owner UX: utsatt – krever eier | Not complete |
+| PM-E1-S2 | Implemented; three-layer review and patches, final73 backend +18 helper passed | Identity/handoff/recording controls: utsatt – krever eier | Not complete |
+| PM-E1-S3 | Next after reviewed S2; independent work authorized | Actual device/owner UX: utsatt – krever eier | Not complete |
 | PM-E1-S4 | Independent qualification after S1–S3 | Owner operator walkthrough and acceptance: utsatt – krever eier | Not complete |
 
 ## Isolation
