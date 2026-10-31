@@ -28,3 +28,33 @@ Token/binding/testmappe er slettet og runner avsluttet, begge kontrollert. B er 
 ### Åpne punkter
 
 - Ingen gjenstående arbeid innen de to bestilte testmålene. Det eksisterende sammensatte issues-punktet og O3–O6 står fortsatt åpne for øvrige Origin/CSRF/cache/timing/WAN/IPv6/DNS/OS-bevisgrenser; de er ikke prøvd eller godkjent utsatt her. Rapporten bevarer begrensningene om lokal gate, versjonsbinding og MFA-matrise.
+
+## 2026-10-31 kl. 04:32 — Jonas Øisund
+
+### Oppgave
+
+Gjennomføre gjenværende O3–O6 så langt mulig uten tilgjengelig eier eller nettbrett. Bevare produksjon og andre arbeidsmiljøer, bruke isolerte syntetiske feiltester, dokumentere funn uten produktrettinger og publisere bare egen oppfølgingsbranch.
+
+### Plan
+
+- Lese AGENTS/CLAUDE/loggoppskrift og eksisterende leveranse-/Access-/Ubuntu-evidens; klone nyeste origin/main til egen branch.
+- Avgrense konkrete kontrollmål og versjoner, kjøre HTTP-/DNS-prøver isolert og nett-/OS-kontroller lesende.
+- Triagere pakke-/hemmelighetstreff, bevare feilforsøk, verifisere opprydding, dokumentere og publisere uten merge/tag/deploy.
+
+### Resultat
+
+Arbeidet er committet i **1407b4773ea59ec8199f45e470c70881ee6e42a4** på `followup/operations-o3-o6-20261031`, fra main5cee9e03d03d2c9c165c7f8fec64aa3e146959ab. [Full rapport](../../docs/evidence/operations-o3-o6-20261031.md) og verktøy/evidens/status er lagt til. Separat loggcommit følger; begge publiseres til oppfølgingsbranchen. Ingen merge, tag, release eller produktendring. Godkjent refleksjon uendret.
+
+O3: faktisk Nginx-/HTTPS-modusprobe bestått. Alle15 mutasjonsfamilier bestod75 negative Origin/CSRF-kombinasjoner, reelt forbindelsesbrudd før dispatch, tapt klientsvar etter faktisk200/lagring, kvitteringsoppslag og identisk replay uten ekstra effekt.24 ikke-session-tabeller sammenlignet. O4: listener/rute/DNS-observasjon, faktisk AAAA på Cloudflare; ingen origin-skanning. Nft-lesing nektet eksisterende rettighet. O5: faktisk glibc-DNS ga klientretur3,2503s, én fortsatt blokkert arbeider og naturlig frigivelse10,0281s; recovery uten fixturefrigivelse eller restart. Hard kansellering bestod ikke kriteriet.
+
+O6: Trivy0.76.1/DB31.10 mot fire lokale images og730 Ubuntu-pakker avdekket høye/kritiske advisoryoppføringer. Python-appens certifi er oppdatert, mens pip-vendored kopi er gammel. Kernelstikkprøver bekreftet mot Ubuntu; avgrensede NFS/Ceph/RDMA-forutsetninger ikke observert aktive, øvrig triage fortsatt åpen. Store normaliserte pakkeoppføringer er komprimert advisory-JSON, ikke databasebackup. Tolv hemmelighetsmønstre over245 commits/2997tekst-/681binærblobs: fire syntetiske URL-fixturetreff, ingen påvist virkelig hemmelighet.62nye/berørte filer også kontrollert, komprimert advisoryinnhold dekodet; ingen mønstertreff. Skriptsyntaks, lenker, staged evidenshasher og diff --check bestått.
+
+Feilforsøk bevart: manglende loopback-flagg i første HTTP-fixture; readiness-poll med connection-refused før Uvicorn startet; Docker-health-loggrotasjon ga for streng første sammenligning; Ubuntu-parser krevde LF og lsb-release. Disse er ikke produktfeil relabellet som bestått. Alle49opprinnelige containere/22volumer beholdt, kun roterende health-logg utelatt fra eksakt metadata-sammenligning. Samtidig passordarbeid la til4containere/2volumer og oppdaterte egen branch; disse ble også bevart urørt.
+
+Egne testprosesser, nett, credentials og tre metadataimages er ryddet; eget disposable tmp-område med skanner/cache/rårapport er fjernet etter normalisering/hashkontroll. Ingen global prune. Lesende serverkontroll04:28:49Oslo viste fortsatt **d367a0e47198aeecc52358258cb6825eecdc8c4a**, API/DB healthy, tunnelready200/4forbindelser og samme boot-ID. V1-tag/release urørt. Ingen ny brukerinnlogging, private data, produksjonsbackup eller servermutasjon inngikk.
+
+### Åpne punkter
+
+- O3/O4: autentisert ekstern matrise, uavhengig WAN/IPv6 og privilegert brannmur-/ruterevidens er **utsatt – krever eier**; konkret senere tilgang/betjening er spesifisert i rapporten. Ingen spørsmål eller venting på eier i denne økten.
+- O5: kjent pre-socket DNS-begrensning er nå reelt gjenskapt; vurder separat kansellerbar resolver-/prosessgrense og kvalifiser ubestemt heng. Ingen produktretting tillatt i denne oppgaven.
+- O6: prioriter separat triage/vedlikehold av konkrete kernel-/imagefunn. Full supply-chain/firmware-/binærhemmelighetsgaranti er ikke etablert. Vedlikeholdsvindu/libc6-markør og langtidsstabilitet beholdes åpne i eksisterende punkter.
