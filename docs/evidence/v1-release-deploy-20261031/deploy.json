@@ -1,0 +1,16 @@
+{
+  "started_utc": "2026-10-31T02:21:05.678935+00:00",
+  "command": [
+    "pwsh",
+    "-NoProfile",
+    "-File",
+    "scripts/server.ps1",
+    "-Action",
+    "Deploy",
+    "-Revision",
+    "d367a0e47198aeecc52358258cb6825eecdc8c4a"
+  ],
+  "finished_utc": "2026-10-31T02:21:34.191310+00:00",
+  "exit_code": 0,
+  "output_sha256": "6d10ab7159cf5b7ce6492b78082681b0c57fc0422585a1ef653b114572371611"
+}

@@ -1,0 +1,52 @@
+{
+  "at_utc": "2026-10-31T02:22:57.663343+00:00",
+  "release": {
+    "isDraft": false,
+    "isPrerelease": false,
+    "publishedAt": "2026-10-31T02:20:01Z",
+    "tagName": "v1.0.0",
+    "targetCommitish": "d367a0e47198aeecc52358258cb6825eecdc8c4a",
+    "url": "https://github.com/IBE160-2026/G06-oisund/releases/tag/v1.0.0"
+  },
+  "remote_refs": {
+    "refs/tags/v1.0.0": "38bfb0d2f629bc97ea39ca2187285d90f562d608",
+    "refs/tags/v1.0.0^{}": "d367a0e47198aeecc52358258cb6825eecdc8c4a"
+  },
+  "active_identity": {
+    "commit": "d367a0e47198aeecc52358258cb6825eecdc8c4a",
+    "archive_sha256": "da833afc216582e4acde127e9d429b3d356e5b145c26c0a7421f123d9f7545e8"
+  },
+  "expected_archive_sha256": "da833afc216582e4acde127e9d429b3d356e5b145c26c0a7421f123d9f7545e8",
+  "backup": {
+    "filename": "20261031T022031Z-addd27b14fe4b26ef24d488d847d1c0d59a98946.dump",
+    "bytes": 114189,
+    "sha256": "ba2ee84cba9ef95ad449e2d37d220f9d2b61e12830b081acf3edb0cbbcd4bb07",
+    "remote_copy_equal": true
+  },
+  "external_gets": [
+    {
+      "path": "/private",
+      "status": 403,
+      "redirect_host": null,
+      "redirect_path": "",
+      "cache_control": "private, max-age=0, no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
+      "body_bytes": 17,
+      "body_sha256": "2938e9f1284180959e33ab1718d0793a72ff6e4cdb8108c34dcd14e69446de5c",
+      "no_app_shell": true,
+      "server": "cloudflare"
+    },
+    {
+      "path": "/private-api/drafts",
+      "status": 403,
+      "redirect_host": null,
+      "redirect_path": "",
+      "cache_control": "private, max-age=0, no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
+      "body_bytes": 17,
+      "body_sha256": "2938e9f1284180959e33ab1718d0793a72ff6e4cdb8108c34dcd14e69446de5c",
+      "no_app_shell": true,
+      "server": "cloudflare"
+    }
+  ],
+  "identity_backup_passed": true,
+  "expected_external_302_passed": false
+}

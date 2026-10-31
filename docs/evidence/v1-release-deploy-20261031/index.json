@@ -1,0 +1,110 @@
+{
+  "docs/evidence/v1-release-deploy-20261031/after-check.json": {
+    "sha256": "71edff2445d5569f0b565e2c819c236357d3264a47b1ea90c32cd4a63d12a823",
+    "bytes": 345
+  },
+  "docs/evidence/v1-release-deploy-20261031/after-check.txt": {
+    "sha256": "34df71f7c0cc5b55f0a5b5aea0ab4aec26da952ba0a6bfa5f6c07c984fde3055",
+    "bytes": 68
+  },
+  "docs/evidence/v1-release-deploy-20261031/after-status.json": {
+    "sha256": "5d76b769880973c54d4b2a884f34caafb42d795c19f586886891cb9e548bf277",
+    "bytes": 346
+  },
+  "docs/evidence/v1-release-deploy-20261031/after-status.txt": {
+    "sha256": "b4076871531fcc077d5cf0ccf013ff88d8ab43151b15989bfb2990fffd5347ab",
+    "bytes": 1250
+  },
+  "docs/evidence/v1-release-deploy-20261031/after-tunnel.json": {
+    "sha256": "b41131e8b54195a65cadca04c29a4703489481b67f04bbd07c92169dd3226aa2",
+    "bytes": 896
+  },
+  "docs/evidence/v1-release-deploy-20261031/after-tunnel.txt": {
+    "sha256": "89979e75fd9414bf6fc716178c3ed734695ca35141a3a31ee82989aa6219c7e6",
+    "bytes": 550
+  },
+  "docs/evidence/v1-release-deploy-20261031/before-check.json": {
+    "sha256": "65f709ab0d8b9df73bdcda648b2cbad1b5a2a4be933949219409e3f1a7dd07ca",
+    "bytes": 345
+  },
+  "docs/evidence/v1-release-deploy-20261031/before-check.txt": {
+    "sha256": "34df71f7c0cc5b55f0a5b5aea0ab4aec26da952ba0a6bfa5f6c07c984fde3055",
+    "bytes": 68
+  },
+  "docs/evidence/v1-release-deploy-20261031/before-status.json": {
+    "sha256": "64edd04e646ac6624cf8cef45a8b8769d84be3b48b98fd2001be6372c8b13b34",
+    "bytes": 346
+  },
+  "docs/evidence/v1-release-deploy-20261031/before-status.txt": {
+    "sha256": "445558e0fa78c749547ac8c87b7e4a91574b2d301623eb304d43b29d55c7fab8",
+    "bytes": 1230
+  },
+  "docs/evidence/v1-release-deploy-20261031/capture.py": {
+    "sha256": "792219fabbb14e5031e44574e6b028aa2db63622b7596ce0983d02b8282d4dad",
+    "bytes": 967
+  },
+  "docs/evidence/v1-release-deploy-20261031/check_docs.py": {
+    "sha256": "97b0513498d51b9423d0e97508b15a29726844ec45f3141e7b6b2174d9bf169d",
+    "bytes": 1360
+  },
+  "docs/evidence/v1-release-deploy-20261031/deploy.json": {
+    "sha256": "067c8e9fa07163896ec2e55b19a71bbfdd632c60a6bd64345991ee526d24a45a",
+    "bytes": 413
+  },
+  "docs/evidence/v1-release-deploy-20261031/deploy.txt": {
+    "sha256": "6d10ab7159cf5b7ce6492b78082681b0c57fc0422585a1ef653b114572371611",
+    "bytes": 8574
+  },
+  "docs/evidence/v1-release-deploy-20261031/document-links.json": {
+    "sha256": "5aad18d460204f5a92c0a26f718ebe9adeec5a0688a444a23db973a3fde9cd74",
+    "bytes": 62
+  },
+  "docs/evidence/v1-release-deploy-20261031/external-browser-agent.json": {
+    "sha256": "62e67912198ffc6b0b77bcb502916f68a128f159dc353a905479350ea5770f57",
+    "bytes": 1090
+  },
+  "docs/evidence/v1-release-deploy-20261031/final-check.json": {
+    "sha256": "5a75d98b2946a7145b6bce75c13aa4082e8a06fc63340d8b0b1f56fb8cfe964f",
+    "bytes": 345
+  },
+  "docs/evidence/v1-release-deploy-20261031/final-check.txt": {
+    "sha256": "34df71f7c0cc5b55f0a5b5aea0ab4aec26da952ba0a6bfa5f6c07c984fde3055",
+    "bytes": 68
+  },
+  "docs/evidence/v1-release-deploy-20261031/final-status.json": {
+    "sha256": "d2dfc66ad0cb42f72d8b1dfbfd4fb272c1793b306e19c94c147dab68ac116e38",
+    "bytes": 346
+  },
+  "docs/evidence/v1-release-deploy-20261031/final-status.txt": {
+    "sha256": "6cb7387df08624e3f5994c8e9be07caf1f221f00c252025b7c79bf5c48a7a7d8",
+    "bytes": 1240
+  },
+  "docs/evidence/v1-release-deploy-20261031/identity.json": {
+    "sha256": "09de602797c25e109e0ec61430bc8667e413d439f4a57478bd669f5e6af648a4",
+    "bytes": 1951
+  },
+  "docs/evidence/v1-release-deploy-20261031/predeploy-backup.json": {
+    "sha256": "b7110d3a3d465a10c79e2857cb00c781af10ce05ef852eb4fd75403a5f9acf34",
+    "bytes": 346
+  },
+  "docs/evidence/v1-release-deploy-20261031/predeploy-backup.txt": {
+    "sha256": "06cbaca6c9690a26e13805a9607a1ebfbc5165766393c8dd94c21caa4c822bd6",
+    "bytes": 138
+  },
+  "docs/evidence/v1-release-deploy-20261031/predeploy-restore.json": {
+    "sha256": "312ea601b14f470ca975ae629603d3545b19ae949accc09cbf0ee106beb22d7a",
+    "bytes": 562
+  },
+  "docs/evidence/v1-release-deploy-20261031/predeploy-restore.txt": {
+    "sha256": "1c694897b9437c84019c4c86e77fdaa8ec6931eecdba2fd7f4865f73db13faac",
+    "bytes": 181
+  },
+  "docs/evidence/v1-release-deploy-20261031/release-notes.md": {
+    "sha256": "d4e1aea0e640c887082440b389f7ffd68d07cbdaa2e437f6849a2090a9c12ac4",
+    "bytes": 1398
+  },
+  "docs/evidence/v1-release-deploy-20261031/verify_identity.py": {
+    "sha256": "b2691870004257e4a313cde50f59b448d54db5d34b34cb6b474fbf186c797b7f",
+    "bytes": 3249
+  }
+}

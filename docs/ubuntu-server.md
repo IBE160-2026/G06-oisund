@@ -4,6 +4,12 @@ Gjeldende 31.10.2026: serverintegrasjonen og driftsoverleveringen er fullført o
 
 Integrasjonen tok inn main-grunnlaget 64f91a7 i 6f845fa før testing. Backend, frontend og tablet-gate ble bevart. Publisert main var 5dc6400 ved dokumentkontrollen; siste dokumenterte deploy er addd27b14fe4b26ef24d488d847d1c0d59a98946, med eierbekreftet innlogging/lagring 31.10.2026. Publisering av dokumentasjon deployer ikke ny release. Ferdig integrerte serverbrancher er ryddet etter kontroll, se driftsloggen. Opprinnelig plan godkjent 29.10.2026. Langtidsstabilitet observeres videre. Lesende sluttkontroll31.10 bekreftet fortsatt addd27b og healthy API/database/aktiv tunnel. En reboot-required-markør for libc6 er registrert som videre vedlikehold; ingen omstart/oppdatering ble utført. [Avgrensede resultater og åpne O3–O6 etter V1](evidence/v1-final-control-20261031.md).
 
+## Publisert og deployet V1 — 31.10.2026 kl.03:21
+
+Etter ny uttrykkelig bestilling er [GitHub-release v1.0.0](https://github.com/IBE160-2026/G06-oisund/releases/tag/v1.0.0) publisert, og nøyaktig **d367a0e47198aeecc52358258cb6825eecdc8c4a** er aktiv på Ubuntu. Taggen er ikke flyttet. [Faktisk backup, deploy, etterkontroll og eierteststatus](evidence/v1-release-deploy-20261031.md). Dette erstatter addd27b som aktiv release; avsnittet ovenfor er førhistorikken. `previous` beholder addd27b som dokumentert tilbakevei med identiske private migreringer. Nyere dokumentasjonscommits i main er ikke deployet automatisk.
+
+Windows-backup er SHA256-verifisert, og en separat fersk backup bestod isolert restore med alle tabellfingeravtrykk like. Eksisterende deployverktøy fullførte med exit0; API/DB healthy, tunnelready200/4 forbindelser, backup-timer active og ingen failed units. Jonas bekreftet deretter innlogging, lagring og gjenåpning på d367a0e: «Alle tre bestod uten feil». Siste lesende kontroll kl.03:30 bestod på samme release. Ingen maskinomstart eller produksjonsrestore/reset ble utført. O3–O6 og libc6-/stabilitetsoppfølging er fortsatt åpne.
+
 ## Server og drift
 
 SSH: jonas@192.168.1.139 fra Windows på samme lokalnett.

@@ -1,0 +1,1 @@
+API healthy; origin access control rejects unauthenticated requests

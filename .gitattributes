@@ -12,3 +12,4 @@
 /docs/evidence/v1-acceptance-init-completion-tail.txt -text -whitespace
 /docs/evidence/v1-main-integration-20261029/** -text -whitespace
 /docs/evidence/v1-final-control-20261031/** -text -whitespace
+/docs/evidence/v1-release-deploy-20261031/** -text -whitespace

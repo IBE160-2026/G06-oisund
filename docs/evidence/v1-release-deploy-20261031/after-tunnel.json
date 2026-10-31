@@ -1,0 +1,21 @@
+{
+  "started_utc": "2026-10-31T02:21:49.532832+00:00",
+  "command": [
+    "ssh",
+    "-i",
+    "C:\\Users\\Jonas/.ssh/ibe160_server_ed25519",
+    "-o",
+    "IdentitiesOnly=yes",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "StrictHostKeyChecking=yes",
+    "-o",
+    "ConnectTimeout=10",
+    "jonas@192.168.1.139",
+    "set -e; readlink -f /opt/bussassistent/current; readlink -f /opt/bussassistent/previous; cat /opt/bussassistent/current/release-identity.json; curl --fail --silent --show-error --max-time 10 http://127.0.0.1:18083/ready; systemctl is-active cloudflared; systemctl is-active bussassistent-backup.timer; systemctl --failed --no-legend --no-pager; df -h /; cat /proc/sys/kernel/random/boot_id"
+  ],
+  "finished_utc": "2026-10-31T02:21:49.939781+00:00",
+  "exit_code": 0,
+  "output_sha256": "89979e75fd9414bf6fc716178c3ed734695ca35141a3a31ee82989aa6219c7e6"
+}

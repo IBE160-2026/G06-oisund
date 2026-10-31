@@ -1,0 +1,2 @@
+/var/backups/bussassistent/20261031T022042Z-addd27b14fe4b26ef24d488d847d1c0d59a98946.dump
+Isolated backup restore passed; all table fingerprints match; no production volume mounted

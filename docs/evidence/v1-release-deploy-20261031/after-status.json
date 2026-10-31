@@ -1,0 +1,14 @@
+{
+  "started_utc": "2026-10-31T02:21:48.248721+00:00",
+  "command": [
+    "pwsh",
+    "-NoProfile",
+    "-File",
+    "scripts/server.ps1",
+    "-Action",
+    "Status"
+  ],
+  "finished_utc": "2026-10-31T02:21:49.392754+00:00",
+  "exit_code": 0,
+  "output_sha256": "b4076871531fcc077d5cf0ccf013ff88d8ab43151b15989bfb2990fffd5347ab"
+}

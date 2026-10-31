@@ -1,0 +1,201 @@
+ Image bussassistent-gateway:d367a0e47198aeecc52358258cb6825eecdc8c4a Building 
+ Image bussassistent-access-gate:d367a0e47198aeecc52358258cb6825eecdc8c4a Building 
+ Image bussassistent-api:d367a0e47198aeecc52358258cb6825eecdc8c4a Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 1.90kB done
+#1 DONE 0.0s
+
+#2 [private-api internal] load build definition from Dockerfile
+#2 transferring dockerfile: 270B done
+#2 DONE 0.0s
+
+#3 [gateway internal] load build definition from Dockerfile
+#3 transferring dockerfile: 842B done
+#3 DONE 0.0s
+
+#4 [gateway internal] load metadata for docker.io/library/node:24.19.0-alpine@sha256:d32cdf619f63fe0471182d08996dd516c6275bb5fd31ae06e55a570bd9e1ad43
+#4 ...
+
+#5 [access-gate internal] load build definition from Dockerfile
+#5 transferring dockerfile: 374B done
+#5 DONE 0.1s
+
+#6 [access-gate internal] load metadata for docker.io/library/python:3.13-slim@sha256:70729b46c69b4f1e97c4822c1af3df53a1476cf5ddc6c087c0c10bc3a5678c2f
+#6 DONE 0.9s
+
+#4 [gateway internal] load metadata for docker.io/library/node:24.19.0-alpine@sha256:d32cdf619f63fe0471182d08996dd516c6275bb5fd31ae06e55a570bd9e1ad43
+#4 DONE 0.9s
+
+#7 [private-api internal] load .dockerignore
+#7 transferring context: 75B done
+#7 DONE 0.0s
+
+#8 [access-gate internal] load .dockerignore
+#8 transferring context: 2B done
+#8 DONE 0.0s
+
+#9 [private-api internal] load build context
+#9 transferring context: 584.59kB 0.0s done
+#9 DONE 0.0s
+
+#10 [private-api 1/5] FROM docker.io/library/python:3.13-slim@sha256:70729b46c69b4f1e97c4822c1af3df53a1476cf5ddc6c087c0c10bc3a5678c2f
+#10 resolve docker.io/library/python:3.13-slim@sha256:70729b46c69b4f1e97c4822c1af3df53a1476cf5ddc6c087c0c10bc3a5678c2f 0.0s done
+#10 DONE 0.1s
+
+#11 [private-api 3/5] COPY requirements.lock .
+#11 CACHED
+
+#12 [private-api 2/5] WORKDIR /app
+#12 CACHED
+
+#13 [private-api 4/5] RUN pip install --no-cache-dir -r requirements.lock
+#13 CACHED
+
+#14 [private-api 5/5] COPY . .
+#14 CACHED
+
+#15 [access-gate internal] load build context
+#15 transferring context: 12.93kB done
+#15 DONE 0.0s
+
+#16 [access-gate 2/5] WORKDIR /gate
+#16 CACHED
+
+#17 [access-gate 4/5] RUN pip install --no-cache-dir -r requirements.lock
+#17 CACHED
+
+#18 [access-gate 3/5] COPY deploy/tablet/access_gate/requirements.lock ./
+#18 CACHED
+
+#19 [access-gate 5/5] COPY deploy/tablet/access_gate/gate.py ./
+#19 CACHED
+
+#20 [private-api] exporting to image
+#20 exporting layers done
+#20 exporting manifest sha256:461c2ef222067025ea9a48ad08493e22785c1660c3fc4878820e6ecf14a0feca done
+#20 exporting config sha256:7831b0d3730179da507478e8d04092db9f028c4860918b38c8e476935668343c done
+#20 exporting attestation manifest sha256:2d1ac12ede6b70fc01213fa144b7fe89884a4b57dab5572e824e3538a9bd0e06 0.0s done
+#20 exporting manifest list sha256:37b767bae51a464f0e726a784b734627e223bbb102592e09d9f8c4061cea7a45 0.0s done
+#20 naming to docker.io/library/bussassistent-api:d367a0e47198aeecc52358258cb6825eecdc8c4a
+#20 naming to docker.io/library/bussassistent-api:d367a0e47198aeecc52358258cb6825eecdc8c4a 0.0s done
+#20 unpacking to docker.io/library/bussassistent-api:d367a0e47198aeecc52358258cb6825eecdc8c4a 0.0s done
+#20 DONE 0.2s
+
+#8 [gateway internal] load .dockerignore
+#8 transferring context: 2B done
+#8 DONE 0.0s
+
+#21 [gateway internal] load metadata for docker.io/library/nginx:1.28-alpine@sha256:a8b39bd9cf0f83869a2162827a0caf6137ddf759d50a171451b335cecc87d236
+#21 DONE 1.2s
+
+#22 [gateway internal] load build context
+#22 transferring context: 387.74kB 0.0s done
+#22 DONE 0.1s
+
+#23 [access-gate] exporting to image
+#23 exporting layers done
+#23 exporting manifest sha256:e9de798aecf5cde13f4e5af29ecbf93929635721c26365b0e90bc9bf2e8a8611 done
+#23 exporting config sha256:d1fa28bf43e3d6f5169d64018c0f8914b7803e5baf8ed5894be429f532191770 done
+#23 exporting attestation manifest sha256:9f3f44b34ff1adba7dece02cfa1db112aa3979378528b51650e6d7192ea8d2b8 0.1s done
+#23 exporting manifest list sha256:6bba55ec94b9e1e994c23e37e6a62efb67d2a32cd6448a616200ffd4cb168bc9 0.0s done
+#23 naming to docker.io/library/bussassistent-access-gate:d367a0e47198aeecc52358258cb6825eecdc8c4a done
+#23 unpacking to docker.io/library/bussassistent-access-gate:d367a0e47198aeecc52358258cb6825eecdc8c4a done
+#23 DONE 0.2s
+
+#24 [gateway stage-1 1/4] FROM docker.io/library/nginx:1.28-alpine@sha256:a8b39bd9cf0f83869a2162827a0caf6137ddf759d50a171451b335cecc87d236
+#24 resolve docker.io/library/nginx:1.28-alpine@sha256:a8b39bd9cf0f83869a2162827a0caf6137ddf759d50a171451b335cecc87d236 0.1s done
+#24 DONE 0.1s
+
+#25 [gateway build 1/8] FROM docker.io/library/node:24.19.0-alpine@sha256:d32cdf619f63fe0471182d08996dd516c6275bb5fd31ae06e55a570bd9e1ad43
+#25 resolve docker.io/library/node:24.19.0-alpine@sha256:d32cdf619f63fe0471182d08996dd516c6275bb5fd31ae06e55a570bd9e1ad43 0.1s done
+#25 DONE 0.1s
+
+#26 [gateway stage-1 3/4] COPY deploy/tablet/nginx.conf.template /etc/nginx/templates/default.conf.template
+#26 CACHED
+
+#27 [gateway build 5/8] COPY frontend/tsconfig.json ./tsconfig.json
+#27 CACHED
+
+#28 [gateway build 4/8] RUN npm ci
+#28 CACHED
+
+#29 [gateway build 7/8] COPY deploy/tablet/index.html ./index.html
+#29 CACHED
+
+#30 [gateway build 3/8] COPY frontend/package*.json ./
+#30 CACHED
+
+#31 [gateway stage-1 2/4] COPY --from=build /app/dist /usr/share/nginx/html
+#31 CACHED
+
+#32 [gateway build 6/8] COPY frontend/src/ ./src/
+#32 CACHED
+
+#33 [gateway build 8/8] RUN npm run build
+#33 CACHED
+
+#34 [gateway build 2/8] WORKDIR /app
+#34 CACHED
+
+#35 [gateway stage-1 4/4] COPY deploy/tablet/nginx-main.conf /etc/nginx/nginx.conf
+#35 CACHED
+
+#36 [gateway] exporting to image
+#36 exporting layers done
+#36 exporting manifest sha256:bf15e4744780e1bb311348d6c209ec5fc2bd4532947cecb1ff4b6d872ee330da done
+#36 exporting config sha256:3d1e8d184277a39ea418c8789cfb372215e55f0553f8cda748fba2d48f5a827d 0.0s done
+#36 exporting attestation manifest sha256:6c59ed024427c1bfc31f1f24e31ffa29c2370414f90fcc76f4f66f0972e40a1a 0.0s done
+#36 exporting manifest list sha256:78e1858a3c91b5f041230b979b1a6268f5578c155f7252eea15d95b95dcfa91f 0.0s done
+#36 naming to docker.io/library/bussassistent-gateway:d367a0e47198aeecc52358258cb6825eecdc8c4a done
+#36 unpacking to docker.io/library/bussassistent-gateway:d367a0e47198aeecc52358258cb6825eecdc8c4a 0.0s done
+#36 DONE 0.2s
+
+#37 [private-api] resolving provenance for metadata file
+#37 DONE 0.0s
+
+#38 [access-gate] resolving provenance for metadata file
+#38 DONE 0.0s
+
+#39 [gateway] resolving provenance for metadata file
+#39 DONE 0.0s
+ Image bussassistent-access-gate:d367a0e47198aeecc52358258cb6825eecdc8c4a Built 
+ Image bussassistent-gateway:d367a0e47198aeecc52358258cb6825eecdc8c4a Built 
+ Image bussassistent-api:d367a0e47198aeecc52358258cb6825eecdc8c4a Built 
+Staged and built d367a0e47198aeecc52358258cb6825eecdc8c4a
+ Container bussassistent-gateway-1 Stopping 
+ Container bussassistent-gateway-1 Stopped 
+ Container bussassistent-access-gate-1 Stopping 
+ Container bussassistent-private-api-1 Stopping 
+ Container bussassistent-private-api-1 Stopped 
+ Container bussassistent-access-gate-1 Stopped 
+ Container bussassistent-access-gate-1 Recreate 
+ Container bussassistent-private-db-1 Recreate 
+ Container bussassistent-access-gate-1 Recreated 
+ Container bussassistent-private-db-1 Recreated 
+ Container bussassistent-private-api-1 Recreate 
+ Container bussassistent-private-api-1 Recreated 
+ Container bussassistent-gateway-1 Recreate 
+ Container bussassistent-gateway-1 Recreated 
+ Container bussassistent-private-db-1 Starting 
+ Container bussassistent-access-gate-1 Starting 
+ Container bussassistent-private-db-1 Started 
+ Container bussassistent-private-db-1 Waiting 
+ Container bussassistent-access-gate-1 Started 
+ Container bussassistent-private-db-1 Healthy 
+ Container bussassistent-private-api-1 Starting 
+ Container bussassistent-private-api-1 Started 
+ Container bussassistent-private-api-1 Waiting 
+ Container bussassistent-private-api-1 Healthy 
+ Container bussassistent-gateway-1 Starting 
+ Container bussassistent-gateway-1 Started 
+ Container bussassistent-private-db-1 Waiting 
+ Container bussassistent-private-api-1 Waiting 
+ Container bussassistent-gateway-1 Waiting 
+ Container bussassistent-access-gate-1 Waiting 
+ Container bussassistent-access-gate-1 Healthy 
+ Container bussassistent-gateway-1 Healthy 
+ Container bussassistent-private-db-1 Healthy 
+ Container bussassistent-private-api-1 Healthy 
+/var/backups/bussassistent/20261031T022121Z-addd27b14fe4b26ef24d488d847d1c0d59a98946.dump
+API healthy; origin access control rejects unauthenticated requests
+Active release: d367a0e47198aeecc52358258cb6825eecdc8c4a

@@ -1,0 +1,10 @@
+/opt/bussassistent/releases/d367a0e47198aeecc52358258cb6825eecdc8c4a
+/opt/bussassistent/releases/addd27b14fe4b26ef24d488d847d1c0d59a98946
+{
+  "commit": "d367a0e47198aeecc52358258cb6825eecdc8c4a",
+  "archive_sha256": "da833afc216582e4acde127e9d429b3d356e5b145c26c0a7421f123d9f7545e8"
+}{"status":200,"readyConnections":4,"connectorId":"e8d44e39-7022-4bdf-944c-88687a76283b"}active
+active
+Filesystem                         Size  Used Avail Use% Mounted on
+/dev/mapper/ubuntu--vg-ubuntu--lv   98G   11G   83G  11% /
+44c550dc-d3b9-4222-8f6c-e0dcdac1a991

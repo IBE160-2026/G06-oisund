@@ -1,0 +1,28 @@
+{
+  "at_utc": "2026-10-31T02:23:13.717475+00:00",
+  "user_agent": "Mozilla/5.0 AccessExpiryVerification/1.0",
+  "cookies": false,
+  "follow_redirects": false,
+  "results": [
+    {
+      "path": "/private",
+      "status": 302,
+      "redirect_host": "bussassistent.cloudflareaccess.com",
+      "redirect_path": "/cdn-cgi/access/login/app.bussassistent.com",
+      "cache_control": "private, max-age=0, no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
+      "bytes": 143,
+      "body_sha256": "12755429beb15d5eb57eafa45b8dba326343dd099bf0552038694c3856e8860e",
+      "no_app_shell": true
+    },
+    {
+      "path": "/private-api/drafts",
+      "status": 302,
+      "redirect_host": "bussassistent.cloudflareaccess.com",
+      "redirect_path": "/cdn-cgi/access/login/app.bussassistent.com",
+      "cache_control": "private, max-age=0, no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
+      "bytes": 143,
+      "body_sha256": "12755429beb15d5eb57eafa45b8dba326343dd099bf0552038694c3856e8860e",
+      "no_app_shell": true
+    }
+  ]
+}
