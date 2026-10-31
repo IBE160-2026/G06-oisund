@@ -1,6 +1,6 @@
 # V1 follow-up qualification ledger
 
-> Current-scope note, 31 October 2026: Jonas includes completed Ubuntu integration in final V1. [Superseding scope/status and version-specific evidence](v1-scope-and-operations.md). Earlier bonus/v1.0.1 exclusions or no-deployment statements below describe their original checkpoint. Application/D1–D3/Epic12 acceptance is unchanged; original tests are not relabelled later-code runs. O3–O6 remain open; final freeze, reflection review and course submission remain pending.
+> Current-scope note, 31 October 2026: Jonas includes completed Ubuntu integration in final V1. [Superseding scope/status and version-specific evidence](v1-scope-and-operations.md). Earlier bonus/v1.0.1 exclusions or no-deployment statements below describe their original checkpoint. Application/D1–D3/Epic12 acceptance is unchanged; original tests are not relabelled later-code runs. O3–O6 remain open; repository reflection is now owner-approved (see scope/status link), while final freeze, course confirmation and submission remain pending.
 
 ## Later bounded operations result — 29 October 2026
 

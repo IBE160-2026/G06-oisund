@@ -8,7 +8,7 @@ deferrals_approved_by_this_document: false
 
 # V1 closure assessment
 
-**Current scope, 31 October 2026:** application/D1–D3/Epic12 remain accepted and complete; completed Ubuntu integration/handover are included in V1, with integrated-release owner testing passed. [Current scope/version/evidence map](v1-scope-and-operations.md). Original decisions/results below retain their checkpoint meaning; final delivery freeze remains pending.
+**Current scope, 31 October 2026:** application/D1–D3/Epic12 remain accepted and complete; completed Ubuntu integration/handover are included in V1, with integrated-release owner testing passed. [Current scope/version/evidence map](v1-scope-and-operations.md). Original decisions/results below retain their checkpoint meaning; repository reflection is now owner-approved in [ai-reflection.md](ai-reflection.md); final delivery freeze remains pending.
 
 **Final local V1 decision:** Jonas explicitly accepted C1 and the local V1 basis after all personal controls. [final main integration/closure](../evidence/v1-main-integration-20261029.md) records fulfilled D1–D3 criteria and passing integrated checks; no local blocker or further owner decision remains. **Epic12 and step1 are complete.** C1 `3c2287e` is the corrected delivery source; c067fdb remains historical. This application closure predates included Ubuntu integration; [current scope/status](v1-scope-and-operations.md) supersede the bonus/v1.0.1 boundary. Unperformed O3–O6 are not approved deferrals or passed tests. No production deploy, release/tag, coursework or extension follows from closure. Earlier hold/no-merge wording below is historical.
 

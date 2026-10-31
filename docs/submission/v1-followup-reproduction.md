@@ -1,6 +1,6 @@
 # Historical C1 qualification recipe
 
-> Current-scope note, 31 October 2026: Jonas includes completed Ubuntu integration in final V1. [Superseding scope/status and version-specific evidence](v1-scope-and-operations.md). Earlier bonus/v1.0.1 exclusions or no-deployment statements below describe their original checkpoint. Application/D1–D3/Epic12 acceptance is unchanged; original tests are not relabelled later-code runs. O3–O6 remain open; final freeze, reflection review and course submission remain pending.
+> Current-scope note, 31 October 2026: Jonas includes completed Ubuntu integration in final V1. [Superseding scope/status and version-specific evidence](v1-scope-and-operations.md). Earlier bonus/v1.0.1 exclusions or no-deployment statements below describe their original checkpoint. Application/D1–D3/Epic12 acceptance is unchanged; original tests are not relabelled later-code runs. O3–O6 remain open; repository reflection is now owner-approved (see scope/status link), while final freeze, course confirmation and submission remain pending.
 
 For the assessor's self-contained final delivery, use [the current README](../../README.md) and remain in its exact checkout. This file preserves the separate C1 qualification commands/configuration. The named follow-up branch was subsequently integrated and deleted; C1 remains available as immutable main history. Optional historical checkouts below deliberately reproduce old inputs and are not final-delivery startup steps. [Outstanding delivery/operational work](delivery-readiness.md) is tracked separately.
 

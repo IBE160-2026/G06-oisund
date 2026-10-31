@@ -13,7 +13,7 @@ currentDeliveryStatus: all-20-stories-and-corrected-V1-accepted-closed
 
 # IBE160 — Active Course V1 Backlog
 
-> Current-scope note, 31 October 2026: Jonas includes completed Ubuntu integration in final V1. [Superseding scope/status and version-specific evidence](../../docs/submission/v1-scope-and-operations.md). Earlier bonus/v1.0.1 exclusions or no-deployment statements below describe their original checkpoint. Application/D1–D3/Epic12 acceptance is unchanged; original tests are not relabelled later-code runs. O3–O6 remain open; final freeze, reflection review and course submission remain pending.
+> Current-scope note, 31 October 2026: Jonas includes completed Ubuntu integration in final V1. [Superseding scope/status and version-specific evidence](../../docs/submission/v1-scope-and-operations.md). Earlier bonus/v1.0.1 exclusions or no-deployment statements below describe their original checkpoint. Application/D1–D3/Epic12 acceptance is unchanged; original tests are not relabelled later-code runs. O3–O6 remain open; repository reflection is now owner-approved (see scope/status link), while final freeze, course confirmation and submission remain pending.
 
 > Historical tracking checkpoint before C1 acceptance/final closure (see current V1 closeout):
 > Owner clarification,29October2026: the prior Epic12 done publication was a misunderstanding; only Story12.5 was to be marked done. All accepted story results and the completed retrospective remain unchanged. Epic12 stays open pending the closure basis and owner decisions.

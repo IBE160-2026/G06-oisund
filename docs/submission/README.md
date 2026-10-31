@@ -2,7 +2,7 @@
 
 Start with the [README](../../README.md) in **this exact delivery checkout**. Its startup recipe stays here, retaining the final documentation and evidence. The accepted product baseline is C1 `3c2287ed68d0cbb1923439fc6ee00254395072a4`; the final delivery commit must contain that application plus integrated Ubuntu setup and later documentation/evidence; the full tree is not identical to C1. No final tag/delivery SHA is assigned by this preparation.
 
-Jonas explicitly said **“Jeg godkjenner kandidaten og V1-grunnlaget”** after all personal controls. [Owner record](../evidence/v1-acceptance-2026-10-29.md) and [main integration](../evidence/v1-main-integration-20261029.md) establish completed D1–D3/local V1/Epic12. **Course-delivery preparation is still open:** actual course instructions, final reflection review, remaining operational checks O3–O6 and exact version freeze/publication remain in the [delivery-readiness register](delivery-readiness.md). Completed Ubuntu integration is included under the [superseding decision](v1-scope-and-operations.md); handover/integrated-release owner testing are complete, with stability observation continuing. No tag/release, course submission or deployment is authorized by this guide.
+Jonas explicitly said **“Jeg godkjenner kandidaten og V1-grunnlaget”** after all personal controls. [Owner record](../evidence/v1-acceptance-2026-10-29.md) and [main integration](../evidence/v1-main-integration-20261029.md) establish completed D1–D3/local V1/Epic12. **Course-delivery preparation is still open:** actual course instructions, remaining operational checks O3–O6 and exact version freeze/publication remain in the [delivery-readiness register](delivery-readiness.md). Completed Ubuntu integration is included under the [superseding decision](v1-scope-and-operations.md); handover/integrated-release owner testing are complete, with stability observation continuing. No tag/release, course submission or deployment is authorized by this guide.
 
 ## Reader entry points
 
@@ -15,7 +15,7 @@ Jonas explicitly said **“Jeg godkjenner kandidaten og V1-grunnlaget”** after
 | Course requirements actually known | [Secondary course-source record](../../_bmad-output/planning-artifacts/briefs/brief-IBE160-2026-09-21/addendum.md#course-evidence-and-delivery-constraints); original/current instructions and deadline need confirmation |
 | Requirements, selectors and actual result/version | [Traceability](traceability.md), [D1–D3 ledger](v1-followup-qualification.md) |
 | Source fixtures and supported input | [Synthetic independent expected facts](../../Eksempelfiler/Fasit-testskift.json), [supported input](supported-input.md) |
-| Reflection | [Proposed final reflection](ai-reflection-proposal.md), owner review pending; [historical12.5 text](ai-reflection.md) preserved |
+| Reflection | [Approved repository reflection](ai-reflection.md), AI-assisted and reviewed/approved by Jonas; [historical12.5 text](ai-reflection-12-5.md) and [superseded draft](ai-reflection-proposal.md) preserved; separate Norwegian course report unchanged |
 | Limitations and privacy boundaries | [Known limits](known-issues.md); operational work is tracked, not inferred passed |
 | Assessment walkthrough | [Review checklist](review-checklist.md); existing valid results can be reused |
 | Local V1 completion | [Closeout](v1-closeout.md), [completed retrospective](../../_bmad-output/implementation-artifacts/epic-12-retro-2026-10-29.md) |

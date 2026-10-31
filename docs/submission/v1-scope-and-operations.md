@@ -9,7 +9,7 @@ Jonas explicitly confirmed that the completed Ubuntu integration is included in 
 | Application, D1–D3, Epic12 | Complete and owner-accepted. [Personal acceptance](../evidence/v1-acceptance-2026-10-29.md), [main integration](../evidence/v1-main-integration-20261029.md). SCOPE-02 application scope is unchanged. |
 | Ubuntu integration and handover | Complete, included in V1. [Operations guide](../ubuntu-server.md) and [dated operations log](../../.logs/jonas-oisund/990-2026-10-29-18-30-00-ubuntu-server.md). Jonas confirmed the integrated release's login/save test passed on 31 October. |
 | Stability | Continue observation after the kernel update. Four successful boots and bounded recovery tests do not establish the earlier freeze's root cause or long-term stability. |
-| Final delivery | Reflection review, course confirmation, O3–O6 disposition, exact version freeze/recipe check and later tag/submission remain in [L1–L7](delivery-readiness.md). No tag/release or submission is performed by this decision. |
+| Final delivery | Repository reflection approved; course confirmation, O3–O6 disposition, exact version freeze/recipe check and later tag/submission remain in [L1–L7](delivery-readiness.md). No tag/release or submission is performed by this decision. |
 
 ## Two runtime setups
 
@@ -32,6 +32,6 @@ The integration log records 12 operations tests (only `os.chown` mocked in the n
 
 ## Remaining decisions versus operational observation
 
-L1 course requirements/access and L2 Jonas's unreviewed reflection are unresolved delivery-preparation items; L4/L5 final source and necessary startup verification follow before later authorized tag/submission. Existing evidence does not establish a new blocking application or server-integration defect.
+L2 repository reflection review is complete: [approved text](ai-reflection.md). L1 course requirements/access and separate course-report requirements remain unresolved; L4/L5 final source and necessary startup verification follow before later authorized tag/submission. Existing evidence does not establish a new blocking application or server-integration defect.
 
 O3–O6 remain **open / not qualified**, and L3 cannot close without actual results or explicit disposition. They track external request/timing coverage, WAN/IPv6 observation, pre-socket DNS cancellation and bounded broader OS/dependency/security assurance. Follow-up is not evidence of failure and does not by itself establish a mandatory course-delivery gate. Determine any actual delivery impediment from a concrete failed control or confirmed course requirement; otherwise record the owner's explicit disposition as continuing operational follow-up. No deferral is approved here. Long-term stability remains observation, without an invented soak-duration requirement. Neither these open points nor the scope update reopens accepted D1–D3/Epic12 or completed server handover.

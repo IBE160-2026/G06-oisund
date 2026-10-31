@@ -1,6 +1,6 @@
 # D1–D3 candidate verification and owner walkthrough
 
-> Current-scope note, 31 October 2026: Jonas includes completed Ubuntu integration in final V1. [Superseding scope/status and version-specific evidence](../submission/v1-scope-and-operations.md). Earlier bonus/v1.0.1 exclusions or no-deployment statements below describe their original checkpoint. Application/D1–D3/Epic12 acceptance is unchanged; original tests are not relabelled later-code runs. O3–O6 remain open; final freeze, reflection review and course submission remain pending.
+> Current-scope note, 31 October 2026: Jonas includes completed Ubuntu integration in final V1. [Superseding scope/status and version-specific evidence](../submission/v1-scope-and-operations.md). Earlier bonus/v1.0.1 exclusions or no-deployment statements below describe their original checkpoint. Application/D1–D3/Epic12 acceptance is unchanged; original tests are not relabelled later-code runs. O3–O6 remain open; repository reflection is now owner-approved (see scope/status link), while final freeze, course confirmation and submission remain pending.
 
 Product/test/tooling snapshot: `3c2287ed68d0cbb1923439fc6ee00254395072a4` (C1). Jonas explicitly accepted the complete candidate and local V1 basis on29October2026: **“Jeg godkjenner kandidaten og V1-grunnlaget”**. Main integration/final checks are the next authorized step, not already completed by this acceptance record. Later documentation/evidence commits do not change C1 product behavior. Historical `c067fdbb20150219c041588ed4e990e7b0ef6b94` remains unchanged.
 

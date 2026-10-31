@@ -1,8 +1,10 @@
-# Proposed final reflection — owner review pending
+# Historical reflection proposal — superseded
+
+> Superseded on 31 October 2026 by the [owner-approved repository reflection](ai-reflection.md). The draft and its pending-review statements below preserve the earlier checkpoint; they do not describe current approval status.
 
 **Editorial scope update, 31 October 2026 — still unreviewed by Jonas:** V1 now includes the integrated Ubuntu setup. Earlier bonus/v1.0.1 exclusions are superseded. Two stale scope sentences below are corrected only for this factual decision; no new personal experience or learning is supplied. Jonas should decide whether/how to discuss server work in his own words. [Decision and server test/owner record](v1-scope-and-operations.md).
 
-**AI-assisted draft for Jonas to review and adapt.** This is a proposed update based on the versioned record, not a statement that Jonas has approved this text or supplied personal reflections that were never recorded. The [historical12.5 reflection](ai-reflection.md) and its original acceptance remain unchanged. Final course-format/rubric compliance is pending confirmation of the actual instructions.
+**AI-assisted draft for Jonas to review and adapt.** This is a proposed update based on the versioned record, not a statement that Jonas has approved this text or supplied personal reflections that were never recorded. The [historical12.5 reflection](ai-reflection-12-5.md) and its original acceptance remain unchanged. Final course-format/rubric compliance is pending confirmation of the actual instructions.
 
 ## Proposed text
 
