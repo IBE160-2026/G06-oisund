@@ -1,0 +1,5 @@
+user_name: Jonas
+communication_language: Norwegian
+document_output_language: English
+planning_artifacts: "{project-root}/.."
+project_knowledge: "{project-root}/../../../../../docs"

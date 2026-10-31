@@ -2,7 +2,7 @@
 
 2026-10-31. **Scope decisions recorded; technical plan remains draft and implementation is not authorized.** No version number is allocated. V1, including Ubuntu integration, remains the accepted baseline.
 
-Start with [SPEC](specs/spec-password-management/SPEC.md), then its three companions. [Implementation plan](specs/spec-password-management/implementation-plan.md) records the owner's Q1–Q4 decisions and remaining operational details. [Qualification](specs/spec-password-management/qualification.md) separates future tests from checks actually performed.
+Start with [SPEC](specs/spec-password-management/SPEC.md), then its companions and the [epic/story package](planning/epics.md). [Implementation plan](specs/spec-password-management/implementation-plan.md) records the owner's Q1–Q4 decisions and remaining operational details. [Qualification](specs/spec-password-management/qualification.md) separates future tests from checks actually performed.
 
 Branch: `codex/plan-password-management`, based on fetched `origin/main` `5cee9e03d03d2c9c165c7f8fec64aa3e146959ab`. Independent local clone `password-management-planning`; the desktop worktree tool rejected the source repository subdirectory, so a separate clone was used. Existing checkouts, changes and branches were not switched, reset or cleaned. The automatic-notices branch was read only.
 
@@ -16,4 +16,8 @@ Read root AGENTS.md, CLAUDE.md and `.claude/skills/sesjonslogg/SKILL.md`. Follow
 
 The extension-local `planning/.bmad-runner` resolves core configuration and spec customization; its `{project-root}/../../specs` resolves inside this extension. Activation hooks, persistent facts and completion hooks are empty. Global BMAD files, V1 epics, sprint status, implementation artifacts and existing extension files are unchanged. Artifact prose follows configured English; session log, questions to the owner and proposed UI wording use Norwegian.
 
-The spec and companions derive from `.memlog.md` plus cited inspected sources. Future answers must be appended to memory before re-derivation. Future architecture or story breakdown must remain extension-local with `PM-` identifiers; do not dispatch V1 stories. Review unresolved decisions and obtain separate implementation authorization first. No ready-for-dev, accepted or done status is assigned to product work.
+## Epic and story planning — 2026-10-31
+
+[PM-E1 and four ordered stories](planning/epics.md) are implementation-ready specifications after document validation, with execution still unauthorized. Read the [technical contract](planning/technical-contract.md), [20-scenario coverage](planning/coverage.md), [validation](planning/validation.md) and [workflow/routing record](planning/workflow.md). Own-account recovery through independent SSH is explicit; no admin panel is needed. Updated origin/main is unchanged at the original baseline. V1 numbering/status remain untouched.
+
+The spec and companions derive from `.memlog.md` plus cited inspected sources. Future answers must be appended to memory before re-derivation. Story breakdown now lives in planning/epics.md with PM-E1-S1..S4; future architecture or dispatch remains extension-local. Do not dispatch V1 stories. Review unresolved decisions and obtain separate implementation authorization first. Planning readiness is not product acceptance, permission to build or a sprint-status change.

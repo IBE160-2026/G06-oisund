@@ -5,12 +5,15 @@ companions:
   - brownfield.md
   - implementation-plan.md
   - qualification.md
+  - ../../planning/epics.md
+  - ../../planning/technical-contract.md
+  - ../../planning/coverage.md
 sources: []
 ---
 
 # Password management
 
-**Experimental extension. Owner scope decisions recorded on 2026-10-31; technical design remains draft.** This kernel and companions are planning artifacts, not permission to build or publish.
+**Experimental extension. Owner scope decisions recorded on 2026-10-31; technical choices are proposed in the implementation-ready story package.** This kernel and companions are planning artifacts, not permission to build or publish.
 
 ## Why
 
@@ -22,7 +25,7 @@ Operator-created accounts currently have neither an own-password change nor a fo
   - **intent:** A signed-in user who knows the current password can change their own password.
   - **success:** Correct current credentials allow a new password; incorrect credentials change nothing; subsequent login accepts the new password and rejects the old one for that account.
 - **CAP-2**
-  - **intent:** A user who forgot their password can recover the existing account after appropriate identity verification.
+  - **intent:** A user who forgot their password can recover the existing account after appropriate identity verification, including Jonas using independent SSH access to issue a code for his own app account without app login.
   - **success:** A valid account-bound recovery proof permits one password replacement; expired, consumed, superseded or wrong-account proof does not. The operator never needs to know the new password.
 - **CAP-3**
   - **intent:** A password replacement ends old application access while preserving the user's data and truthful recovery behavior.
@@ -53,4 +56,4 @@ In an isolated synthetic environment, two existing users complete the two distin
 
 ## Open Questions
 
-Q2–Q4 and Q1 population/operator are resolved in implementation-plan.md. Before operational use, document the identity-check/contact procedure, realistic support expectations and sole-operator recovery/absence procedure. Implementation still needs a separate explicit instruction; no version number is allocated.
+Q2–Q4 and Q1 population/operator are resolved in implementation-plan.md. Own-account SSH recovery without app login is explicitly decided. No unresolved product choice blocks story implementation. Before operational use, verify the documented identity-check/contact and capture-free terminal procedure and operator absence instructions. Implementation still needs a separate explicit instruction; no version number is allocated.

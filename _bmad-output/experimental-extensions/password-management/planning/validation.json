@@ -1,0 +1,22 @@
+{
+  "story_ids": [
+    "PM-E1-S1",
+    "PM-E1-S2",
+    "PM-E1-S3",
+    "PM-E1-S4"
+  ],
+  "unique_acceptance_criteria": 33,
+  "scenarios_covered": 20,
+  "requirements_covered": {
+    "FR": 7,
+    "NFR": 5,
+    "UX": 4
+  },
+  "story_sections": "pass",
+  "relative_markdown_links": "pass",
+  "isolated_routing": "pass",
+  "template_placeholders": "none",
+  "baseline": "5cee9e03d03d2c9c165c7f8fec64aa3e146959ab",
+  "product_tests_run": false,
+  "implementation_authorized": false
+}
