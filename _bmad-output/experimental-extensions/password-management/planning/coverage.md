@@ -56,3 +56,7 @@ Conditional email/link tests remain outside selected scope. They are not missing
 ## Evidence recording during implementation
 
 For each PM-A row, record story/AC, concrete test name, build SHA, synthetic fixture, environment, result and evidence path. Use failures/not-run explicitly. Races need independent transactions and deterministic barriers; data preservation compares known identities/content and deadlines before/after. Secret-leak scans use synthetic markers with protected test failure output; avoid printing a marker that is meant to represent a secret in screenshots/log evidence. Physical device evidence and owner acceptance are separate from automated results.
+
+## Executed independent qualification
+
+The original table is the planned traceability map. Actual PM-A1–20 status, concrete tests, runtime/source fingerprints and mixed automated/owner-pending outcomes are now in [S4 scenario evidence](../implementation/s4-evidence.md). [Final readiness](../implementation/final-readiness.md) retains all mandatory owner gates and the deployment-specific restore-procedure prerequisite. Planning validation was never release approval; V1 and automatic notices remain separate.

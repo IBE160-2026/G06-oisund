@@ -7,7 +7,7 @@
 | PM-E1-S1 | Implemented; two three-layer review rounds, fixes, final41 backend +18 browser passed | Actual device/owner UX: utsatt – krever eier | In review, not complete |
 | PM-E1-S2 | Implemented; three-layer review and patches, final73 backend +18 helper passed | Identity/handoff/recording controls: utsatt – krever eier | Not complete |
 | PM-E1-S3 | Implemented; three-layer review/patches, final103 backend +35 S1/S3 browser,82 legacy regressions passed | Actual device/owner UX: utsatt – krever eier | In review, not complete |
-| PM-E1-S4 | Independent qualification after S1–S3 | Owner operator walkthrough and acceptance: utsatt – krever eier | Not complete |
+| PM-E1-S4 | Independent gateway/migration/restore qualification and three-layer review/patches passed;12 phases,20 scans,3 negative controls | Owner operator walkthrough and acceptance: utsatt – krever eier | Not complete |
 
 ## Isolation
 
@@ -45,3 +45,7 @@ After all tests, stop only this runtime with `docker compose -p ibe160-password-
 The historical import regression package includes anonymized reference PDFs. Those are not synthetic input and are excluded from future qualification: the password regression config filters `approved example` browser cases. Backend commands must select synthetic-only cases; the broad reference-file mount is removed before subsequent story runs. Earlier mixed-source run results remain recorded as such, not relabelled synthetic. Existing repository reference files are unchanged.
 
 S1 evidence: [dispatch/review/verification](spec-pm-e1-s1.md), [render/test map](evidence/s1/loop1/README.md), [proxy](evidence/s1/proxy.md). Required regression coverage comprises77 distinct synthetic cases; earlier anonymized-reference executions are separately recorded and excluded. Physical acceptance remains open. Other checkout v1-final-control was checked again and remains clean.
+
+## S4 qualification and future operational gates
+
+The final synthetic gateway/API/PostgreSQL run passed on base1c4ac7ce2621cb7ec4862231bfa10285bb31c255; exact source fingerprints, image IDs and per-table preservation evidence are in [runtime manifest](evidence/s4/runtime.json). See [scenario evidence](s4-evidence.md) and [final readiness](final-readiness.md). Parent three-layer review and postpatch verification close independent combined technical work, not owner qualification or story completion. Final runtime `ibe160-pm-s4-e57c2ff0d437` used loopback56762 and is stopped; synthetic volumes and ignored scratch are retained. Final-control runtime was not operated. The task-owned password-tests runtime is stopped after all testing.

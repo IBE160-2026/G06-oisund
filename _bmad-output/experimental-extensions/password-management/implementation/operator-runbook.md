@@ -47,7 +47,7 @@ Audit lagrer kun UUID, OS-kontekst (numerisk container-UID), handling, resultat 
 
 Ordinær cleanup tar samme kontolås, fjerner utløpte/tilbakekalte/brukte digester og audit eldre enn 30 dager i avgrensede batcher. Kjør og overvåk den etablerte cleanup-jobben slik at digester fjernes innen 24 timer; utløp må uansett kontrolleres ved S3-aksept og er aldri avhengig av cleanup. Ingen konto-/forretningsrad slettes for å tilbakekalle tilgang.
 
-## Restore/rollback og gjenstående kvalifisering
+## Historisk S2/S3-handoff før S4
 
 S4 må øve restore/rollback separat med syntetiske data: stans trafikk, gjenopprett/verifiser arbeidsdata, ugyldiggjør alle gjenopprettede appøkter og koder før åpning, og håndter eksplisitt at backup kan gjeninnføre eldre passordhash. Eldre kodekompatibilitet og gjeldende migreringskontroll må verifiseres; ingen automatisk nedgradering eller produksjonsrestore er utført.
 
@@ -77,3 +77,15 @@ Ved mistet/HTML/ugyldig svar, timeout eller avbrudd kan endringen allerede være
 Andre enheter mister gammel tilgang ved neste kontroll; ingen garanti om umiddelbar sletting av offline skjerm eller bevart ulagret innhold. Se [brukerveiledning](../../../../docs/password-recovery.md). Ytre Access og SSH forblir separate forutsetninger. Ingen live-bruk før praktisk identitet/overlevering/eieraksept og S4; **utsatt – krever eier**.
 
 Hvis mottakeren bruker koden før operatøren skriver MOTTATT, er kandidaten allerede brukt. S2-dialogen krever fortsatt aktiv/uutløpt kandidat for leveringskvittering og kan derfor avvise MOTTATT selv om appens passordendring lyktes. Ikke tolke dette som mislykket gjenoppretting og ikke utsted ny kode automatisk. Kontroller først appens resultat og la mottakeren prøve separat innlogging med det nye passordet; tilbakekall/utsted på nytt bare hvis tilgang fortsatt må gjenopprettes. Kandidatbegrenset kompensasjon endrer ikke et allerede konsumert bevis eller passordet.
+
+## S4 samlet kvalifisering og fremtidig driftskontroll
+
+Den uavhengige syntetiske gateway/API/PostgreSQL-prøven er gjennomført; se [scenariobevis](s4-evidence.md) og [sluttvurdering](final-readiness.md). Oppskrift fra repository-roten: `node scripts/verify-password-s4.mjs`. Dette er bare lokale engangsressurser, ikke en produksjonskommando. Fysisk utstyr, faktisk SSH/MFA/Access, identitet/kontakt, opptaksfri overlevering og eieraksept er fortsatt **utsatt – krever eier**.
+
+Ved fremtidig migrering/release: gjennomgå gjeldende kode og015-migreringen, fullfør eierkontrollene, bekreft backup og vedlikeholdsvindu, stans inngående trafikk/skrivearbeid og verifiser konto-IDer, eierskap, innhold, frister og kvitteringer etter migrering. Åpne først etter kontroll og uttrykkelig deploybeslutning. Det er ikke valgt en release eller utført produksjonsarbeid her.
+
+Ved rollback: eksisterende `bussassistentctl` krever identiske private migreringsfiler. V1-kandidaten mangler015 og avvises av den vanlige rollback-inngangen selv om syntetisk testing viser at eldre kode kan lese skjema/hash. Ikke omgå denne sperren. `verify-restore` tester bare en isolert kopi; `restore-initial` nekter å erstatte en allerede deployet database. En egnet, gjennomgått og autorisert produksjonsrestore-prosedyre mangler fortsatt som kvalifisert vei for dette tilfellet; det er en releaseforutsetning, ikke en ny SQL-/sudo-oppskrift i denne rutinen.
+
+Ved en senere autorisert restore må trafikken holdes stengt mens backup gjenopprettes, forretningsdata/frister kontrolleres, nødvendige utløpsregler kjøres og **alle** gjenopprettede appøkter og koder ugyldiggjøres. Kartlegg eldre passordhash for **hver berørt konto**. Gjennomfør kvalifisert gjenoppretting eller få en uttrykkelig, informert eieravklaring av den gjeninnførte passordautoriteten før åpning. Hvis kontakt/identitet/tilgang ikke kan kvalifiseres, forblir trafikken stengt. S4 kjenner bare sine syntetiske A-endret/B-uendret-tilfeller; dette er ingen garanti for vilkårlige virkelige brukere. Ingen ny tvungen reset-/kontolåsfunksjon er innført.
+
+Kontroller til slutt at gamle økter/koder og erstattede passord avvises, nytt passord gir separat innlogging til riktig beholdt konto, og kontoisolasjon består. Backup kan ha eldre passord og mangle nyere arbeidsdata; aldri lov null konsekvenser. Følg den konkrete [fremtidige sjekklisten](final-readiness.md). Manglende SSH løses i separat vertstilgangsprosess; manglende ytre Access i separat Access-prosess. Jonas forblir eneste operatør, med best-effort støtte uten SLA; brukeren må vente når han ikke er tilgjengelig.

@@ -27,3 +27,7 @@ The spec and companions derive from `.memlog.md` plus cited inspected sources. F
 The owner subsequently authorized sequential implementation of PM-E1-S1 through S4 on this experimental branch in this isolated checkout, including synthetic tests, BMAD review, commits and push. This supersedes the historical planning-only authorization statements above; it does not approve release, production operations or new product decisions. origin/main was fetched and remains 5cee9e03d03d2c9c165c7f8fec64aa3e146959ab. Other branches/worktrees remain untouched.
 
 Implementation evidence is tracked under [implementation](implementation/status.md). The owner is unavailable: identity/handoff qualification, actual tablet/PC acceptance and any new product decision are **utsatt – krever eier**. No physical tablet operation is authorized in this run. Technical dependencies may progress after their independent tests/review pass; mandatory owner checks still prevent marking the stories or epic complete.
+
+## Combined qualification
+
+[Final readiness](implementation/final-readiness.md) and [PM-A1–20 executed scenario evidence](implementation/s4-evidence.md) now collect independent synthetic S4 gateway/migration/restore results and the reviewed S1–S3 evidence. Mandatory owner/device/operational gates remain **utsatt – krever eier**; no story or epic is done and no release is approved. Older planning-only prose above is historical, superseded only by the implementation authorization already recorded.

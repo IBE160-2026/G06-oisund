@@ -195,7 +195,7 @@ As the operator and owner,
 I want reproducible evidence and a tested operating procedure for both password flows,
 So that I can decide on a separate release without risking existing accounts or being dependent on app login for recovery.
 
-**Readiness:** implementation-ready specification; isolated execution authorized 2026-10-31. **Depends on:** S1–S3 completion. **Scope/value:** combined regression, migration/rollback/restore rehearsal, operator walkthrough and release-readiness report. No new product feature, automatic-notices integration, production recovery or actual release/deploy in this story.
+**Readiness:** independent synthetic qualification, three-layer review and postpatch verification complete; mandatory owner/operational qualification pending (in-review). See [S4 evidence](../implementation/s4-evidence.md) and [final readiness](../implementation/final-readiness.md). **Depends on:** S1–S3 technical verification; mandatory owner completion remains open. **Scope/value:** combined regression, migration/rollback/restore rehearsal, operator walkthrough and release-readiness report. No new product feature, automatic-notices integration, production recovery or actual release/deploy in this story.
 
 **Traceability:** all CAPs/FRs/NFRs/UX requirements, all PM-A scenarios. This is an integration gate, not a substitute for earlier story testing.
 
@@ -210,10 +210,12 @@ So that I can decide on a separate release without risking existing accounts or 
 
 **Tasks & Acceptance:**
 
-- [ ] Create a reproducible synthetic recipe using existing private/Ubuntu-style configuration, isolated volumes and loopback ports; never reuse live volumes or reset production accounts. Record build/dependency versions, actual commands and cleanup ownership.
-- [ ] Execute [coverage](coverage.md) and selected established regression suites; link each scenario to concrete test IDs/results, include DB barriers for races and post-restart attempts. Explain any not-run or blocked case honestly.
+- [x] Create a reproducible synthetic recipe using existing private/Ubuntu-style configuration, isolated volumes and loopback ports; never reuse live volumes or reset production accounts. Record build/dependency versions, actual commands and cleanup ownership.
+- [x] Execute [coverage](coverage.md) and selected established regression suites; link each scenario to concrete test IDs/results, include DB barriers for races and post-restart attempts. Explain any not-run or blocked case honestly.
 - [ ] Rehearse additive migration and restore/rollback in isolated environments, including stale sessions/proofs and old password hashes; finish and independently walk through operator documentation with no real secrets in artifacts.
 - [ ] Record physical tablet/PC observations and owner acceptance; ensure no dashboard/email/profile or public signup additions slipped into the final diff.
-- [ ] Produce extension-local final-readiness report and release checklist. Keep automatic notices separate; if the owner later changes that decision, add the previously planned combined integration gate instead of assuming this evidence covers it.
+- [x] Produce extension-local final-readiness report and release checklist. Keep automatic notices separate; if the owner later changes that decision, add the previously planned combined integration gate instead of assuming this evidence covers it.
 
 **Completion evidence:** reproducible combined report, runbook, migration/rollback/restore and actual UX observations. All unresolved release blockers remain explicit; approval to execute a future release is distinct from the epic's technical completion.
+
+Independent S4 evidence:12 phases,20 database/log scans and three negative controls passed in final parent run;15 review findings triaged and bounded patches verified. Mixed operator-walkthrough/physical tasks remain unchecked. Production restore qualification and owner controls are still **utsatt – krever eier**; epic/story not complete.
