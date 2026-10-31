@@ -109,3 +109,7 @@ Oppdatering til siste passordpunkt31.10: separat implementeringsoppdrag er nå g
 S2-oppdatering31.10:3249cb1 implementerer operatørkode/migrasjon/helper, trelags-review og73 backend/18 helpertester bestått. S3/S4 gjenstår; faktisk SSH, identitet/overlevering uten opptak og fysisk eieraksept er fortsatt utsatt – krever eier. Ingen produksjonsendring.
 
 S3-oppdatering31.10:5db0425 implementerer kodeinnløsning, trelags-review og sluttest103 backend/35 fokuserte nettlesertester, samt82 eksisterende syntetiske regresjoner. S4 samlet gateway-/migrerings-/restorekontroll fortsetter. Historiske testinndata-/utskriftsavvik er dokumentert og korrigert; faktiske eierkontroller er fortsatt utsatt – krever eier.
+
+S4-sluttstatus31.10:6ad9d09 fullfører alt selvstendig arbeid i PM-E1-S1–S4;12 samlede faser,20 skanninger og3 negative kontroller bestått etter trelags-review. Tidligere gjennomføringspunkter over er historikk; obligatorisk fysisk/operativ eierkvalifisering gjenstår, derfor er epic/story ikke fullført.
+
+- [ ] 2026-10-31 [Passordhåndtering](987-2026-10-31-03-46-36-passordhandtering-plan.md) — Før release: kvalifiser produksjonsrestore med stengt trafikk, ugyldiggjøring av alle gjenopprettede økter/koder og avklart gammel passordautoritet for hver berørt konto. Vanlig helper-rollback til V1 avvises på migrasjon015; eksisterende verify-restore/restore-initial er ikke en godkjent gjenopprettingsvei for eksisterende deployment. **Utsatt – krever eier** sammen med allerede åpne SSH/identitet/handoff/enhets-/akseptkontroller.
