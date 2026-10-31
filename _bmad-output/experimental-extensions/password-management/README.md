@@ -1,10 +1,14 @@
 # Password management — experimental planning
 
-2026-10-31. **Draft recommendations, not approved requirements or implementation authorization.** No version number is allocated. V1, including Ubuntu integration, remains the accepted baseline.
+2026-10-31. **Scope decisions recorded; technical plan remains draft and implementation is not authorized.** No version number is allocated. V1, including Ubuntu integration, remains the accepted baseline.
 
-Start with [SPEC](specs/spec-password-management/SPEC.md), then its three companions. [Implementation plan](specs/spec-password-management/implementation-plan.md) contains the recommendation and Q1–Q4 requiring the owner's answer. [Qualification](specs/spec-password-management/qualification.md) separates future tests from checks actually performed.
+Start with [SPEC](specs/spec-password-management/SPEC.md), then its three companions. [Implementation plan](specs/spec-password-management/implementation-plan.md) records the owner's Q1–Q4 decisions and remaining operational details. [Qualification](specs/spec-password-management/qualification.md) separates future tests from checks actually performed.
 
 Branch: `codex/plan-password-management`, based on fetched `origin/main` `5cee9e03d03d2c9c165c7f8fec64aa3e146959ab`. Independent local clone `password-management-planning`; the desktop worktree tool rejected the source repository subdirectory, so a separate clone was used. Existing checkouts, changes and branches were not switched, reset or cleaned. The automatic-notices branch was read only.
+
+## Owner decisions — 2026-10-31
+
+Initial users are Jonas and the course teacher. Jonas handles resets and administration. Administrative one-use codes and a separate password-management delivery are selected; both password flows require new login on all devices. Self-service email and opening the application to the public are outside initial scope. No commitment to public operation or round-the-clock support is inferred. These decisions do not approve implementation or every technical proposal.
 
 ## Established workflow and isolation
 

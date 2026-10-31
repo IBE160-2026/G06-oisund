@@ -31,12 +31,16 @@ Conditional email tests: no send to unverified/newly typed address; old accounts
 
 Backend: `backend/tests/test_private_access.py`, `test_private_drafts.py`, `test_private_workdays.py`, `test_account_notices.py`, `test_retained_data.py`, `test_cleanup_observability.py`, `test_tablet_transport.py`. Frontend: `frontend/tests/private-access.spec.ts`, `private-identity.spec.ts`, `private-recovery.spec.ts`, `private-retention.spec.ts`, `private-notice-recovery-integration.spec.ts`, `tablet-transport.spec.ts`, and complete private-flow tests. Add focused change/reset/concurrency suites; preserve synthetic-only setup guards. Qualify through real API/PostgreSQL and deployed-style gateway in addition to component tests. Exact test selection is reassessed against the final code diff.
 
-## Planning validation performed
+## Decision-update validation — 2026-10-31
+
+Owner choices now govern the baseline: two expected users (Jonas and teacher), Jonas as operator, administrative code, all-device login after both flows, and separate delivery. Q2–Q4 are resolved; Q1 retains only operational contact/verification and response details. Extend PM-A20 runbook review to sole-operator self-recovery and unavailability. Public rollout and email are outside initial scope. No product test or implementation was started by this update. Capability IDs and existing acceptance scenarios remain unchanged.
+
+## Initial planning validation performed
 
 - Read repository instructions, session-log workflow, installed BMAD Spec workflow/template/customization and extension routing precedent.
 - Fetched origin/main; created isolated planning branch at recorded SHA; read automatic-notices planning only.
 - Inspected auth/account/session/private authorization, frontend/recovery and committed Ubuntu/gateway configuration; did not query production data.
 - Cross-checked relevant OWASP pages; recommendations remain distinct from repository facts and owner decisions.
-- Coherence pass: CAP-1..3 have intent/success, explicit non-goals/constraints, provisional policy and actionable questions.
+- Coherence pass: CAP-1..3 have intent/success, explicit non-goals/constraints, provisional policy and actionable questions at initial drafting; the owner decisions above supersede those questions where answered.
 - Preservation pass: request A maps to brownfield; B–D to implementation plan; E to work packages/migration/delivery and PM-A1..20. Existing users, day access/offline limits, email secrets, version deferral and independent integration control are covered.
 - Final document path/whitespace and changed-file checks are recorded in the session log. No product tests, runtime validation, UI rendering, migration, deploy or security certification is claimed for a documentation-only change.

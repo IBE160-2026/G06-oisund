@@ -22,6 +22,6 @@ Read remote planning branch `origin/codex/plan-automatic-notices`: `scope.md`, `
 
 Shared integration surfaces are session authorization, React private shell, PostgreSQL migrations/cleanup, owner-scoped overlays and Ubuntu packaging. The notice plan references an older product baseline; a later joint release must rebase/reassess it against then-current main. No code or planning documents from that branch were imported or modified.
 
-## What remains unknown
+## Owner context and remaining evidence limits
 
-Number of real accounts, available operator coverage, independently known contact details, recovery frequency, service expectations and email budget are not established by source. No production user records or secrets were queried. Current Cloudflare/identity-provider membership is not proof of a one-to-one application-account binding.
+Source inspection did not establish real account count, operator coverage or service expectations. The owner subsequently confirmed an initial expected population of Jonas and the course teacher, with Jonas handling resets and administration. This is owner-provided planning context, not a production account inventory. Independently established contact details, recovery frequency and response expectations remain unverified. No production user records or secrets were queried. Current Cloudflare/identity-provider membership is not proof of a one-to-one application-account binding.

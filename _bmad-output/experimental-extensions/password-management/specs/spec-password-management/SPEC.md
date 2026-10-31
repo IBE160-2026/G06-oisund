@@ -10,7 +10,7 @@ sources: []
 
 # Password management
 
-**Experimental extension. Recommendations remain unapproved.** This kernel and companions describe a proposed scope, not permission to build or publish.
+**Experimental extension. Owner scope decisions recorded on 2026-10-31; technical design remains draft.** This kernel and companions are planning artifacts, not permission to build or publish.
 
 ## Why
 
@@ -30,6 +30,7 @@ Operator-created accounts currently have neither an own-password change nor a fo
 
 ## Constraints
 
+- Initial users: Jonas and the course teacher; Jonas administers account recovery. Use administrative one-use codes and a separate delivery. Both password flows revoke all application sessions and require login on every device.
 - Preserve UUIDs, usernames, password compatibility, owner relationships, retention deadlines and private/demo isolation. Do not recreate or bulk-reset existing users.
 - No assumed registered or verified email. Outer Access identity is not application account identity.
 - Current-password verification for CAP-1; bounded attempts, one-use expiring proof for CAP-2, CSRF/Origin protection and no secret logging for both.
@@ -39,7 +40,7 @@ Operator-created accounts currently have neither an own-password change nor a fo
 ## Non-goals
 
 - General profile system, web administration console, public signup, MFA/SSO redesign, security questions, temporary passwords or offline credential storage.
-- Email enrollment/delivery in the proposed minimum; optional later scope requires a separate decision.
+- Email enrollment/delivery and public availability in the initial scope; either requires a separate future decision.
 
 ## Success signal
 
@@ -47,9 +48,9 @@ In an isolated synthetic environment, two existing users complete the two distin
 
 ## Assumptions
 
-- A small operator-provisioned population can accept assisted recovery. User count, operator coverage and identity-verification channel are not established.
-- Proposed 30-minute recovery validity and all-session logout are recommendations, not accepted policy.
+- Proposed 30-minute recovery validity and detailed attempt/audit limits remain technical recommendations.
+- No response-time or round-the-clock support commitment is inferred from Jonas taking responsibility.
 
 ## Open Questions
 
-Q1–Q4 in implementation-plan.md govern support/identity checks, recovery channel, logout policy and delivery grouping. Resolve dependent decisions before implementation; no version number is requested.
+Q2–Q4 and Q1 population/operator are resolved in implementation-plan.md. Before operational use, document the identity-check/contact procedure, realistic support expectations and sole-operator recovery/absence procedure. Implementation still needs a separate explicit instruction; no version number is allocated.
