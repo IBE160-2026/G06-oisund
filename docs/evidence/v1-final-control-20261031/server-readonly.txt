@@ -1,0 +1,23 @@
+Id=bussassistent.service
+ActiveState=active
+SubState=exited
+
+Id=cloudflared.service
+ActiveState=active
+SubState=running
+Release: addd27b14fe4b26ef24d488d847d1c0d59a98946
+NAME                          IMAGE                                                                                        COMMAND                  SERVICE       CREATED        STATUS                  PORTS
+bussassistent-access-gate-1   bussassistent-access-gate:addd27b14fe4b26ef24d488d847d1c0d59a98946                           "python gate.py"         access-gate   27 hours ago   Up 27 hours             
+bussassistent-gateway-1       bussassistent-gateway:addd27b14fe4b26ef24d488d847d1c0d59a98946                               "/bin/sh -ec 'envsub…"   gateway       27 hours ago   Up 27 hours             80/tcp, 127.0.0.1:18081->8080/tcp
+bussassistent-private-api-1   bussassistent-api:addd27b14fe4b26ef24d488d847d1c0d59a98946                                   "python -m app.run"      private-api   27 hours ago   Up 27 hours (healthy)   
+bussassistent-private-db-1    postgres:17-alpine@sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24   "docker-entrypoint.s…"   private-db    27 hours ago   Up 27 hours (healthy)   5432/tcp
+7.0.0-42-generic
+LISTEN 0      4096      127.0.0.54:53    0.0.0.0:*
+LISTEN 0      4096       127.0.0.1:18083 0.0.0.0:*
+LISTEN 0      4096       127.0.0.1:18081 0.0.0.0:*
+LISTEN 0      4096   127.0.0.53%lo:53    0.0.0.0:*
+LISTEN 0      4096         0.0.0.0:22    0.0.0.0:*
+LISTEN 0      4096            [::]:22       [::]:*
+3: wlp3s0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 state UP qlen 1000
+    inet6 fd11:a8d8:a24a:80c7:ca3d:d4ff:fe7e:afa5/64 scope global dynamic mngtmpaddr noprefixroute 
+       valid_lft 1703sec preferred_lft 1703sec

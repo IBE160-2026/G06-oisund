@@ -1,0 +1,15 @@
+{
+  "at_utc": "2026-10-31T01:55:34.427Z",
+  "browser": "156.0.8078.4",
+  "synthetic": true,
+  "generated_account_login": true,
+  "import_B": true,
+  "save": true,
+  "reload_reopen_exact_saved_draft": true,
+  "response_no_store": true,
+  "requested_origins": [
+    "http://127.0.0.1:15335",
+    "http://127.0.0.1:18338"
+  ],
+  "no_restart_or_reset": true
+}

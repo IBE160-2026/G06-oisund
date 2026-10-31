@@ -1,0 +1,61 @@
+{
+  "at_utc": "2026-10-31T01:53:15.238722+00:00",
+  "source_commit": "8e590735c495808ae51bf65523d7ab19c6dfb0fd",
+  "project": "ibe160-v1-final-20261031",
+  "translations": [
+    [
+      "ibe160-submission",
+      "ibe160-v1-final-20261031"
+    ],
+    [
+      "15325",
+      "15335"
+    ],
+    [
+      "18327",
+      "18337"
+    ],
+    [
+      "18328",
+      "18338"
+    ]
+  ],
+  "files": {
+    "scripts/submission.mjs": {
+      "original_git_sha256": "ba6f3ff3f94a266ce491151f687522ccf9ea92443779f189689065b38fcfe8ad",
+      "instance_sha256": "d067e34209b2e425ec17f9778ba1c52582bc4ae71b09c459c87efb49fdc603ee"
+    },
+    "compose.submission.yaml": {
+      "original_git_sha256": "87a693a2e2445708552de36c0fce563edb1e510ec5d5fb726d3e370290940989",
+      "instance_sha256": "c2a2bdf3dc4e2412b6034f22ced315ab77ebe4a8349f232c7d874466c71de5b4"
+    },
+    "deploy/submission/Dockerfile": {
+      "original_git_sha256": "4aec5468697077dfcc267e1264e5e995c1eed9d68d88796035d414fa12d3c36c",
+      "instance_sha256": "de2f0228568c071afe2e182d044a5504936cd9c785ca745269bae4d1f89c10a0"
+    },
+    "deploy/submission/manage.py": {
+      "original_git_sha256": "a780ca277c6fd2ae84c6e21e3a9c559730555996acf7543f614871c7ad6f6401",
+      "instance_sha256": "bc4469fff4d13342e8994cb0c85771c67914fafc216141e1cb01d7d9ae140dfa"
+    },
+    "deploy/submission/fictional.py": {
+      "original_git_sha256": "6f4d3b564ce3ba6a2b2292b03cf1e4d058bfedcff6a90ef0e4576f018b91a6b6",
+      "instance_sha256": "de9be00d5f0d952cd8ab6b3c14b299681086728abc7bf749330905bf3e17a1c2"
+    },
+    "frontend/playwright.submission.config.ts": {
+      "original_git_sha256": "96b4d9814b24b31699641c5b40652d6cd300ec61eed0a46d82d635fdc88aab86",
+      "instance_sha256": "ef8f3defb64e1d787a01dfca657f9e39ae7cc8eead3426da6b706d4b0bc5d6ac"
+    },
+    "scripts/verify-submission-runtime.mjs": {
+      "original_git_sha256": "417047af220256a9125721b8208c26ec93d124556ff2fc917a24992b14b980fa",
+      "instance_sha256": "3d96ec8148e482ad44c4b32fc99bad5ed080ccbf77ea970f06aff6720ecfd246"
+    },
+    "frontend/submission-tests/journey.spec.ts": {
+      "original_git_sha256": "0d8612bf354bb03d0f5c47be41a102434a8a10076078b74955209c294080ffd8",
+      "instance_sha256": "5d3734aeacc46037d2da101fc931edb7731ad4c33ebba3791f9009f9303877d9"
+    }
+  },
+  "application_and_ubuntu_unchanged": true,
+  "existing_container_count": 44,
+  "existing_volume_count": 20,
+  "method_sha256": "065adf61435678a17d042b837404df3b3cd794005940bc2d0a63c54af7db778c"
+}

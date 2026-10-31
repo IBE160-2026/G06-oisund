@@ -1,0 +1,94 @@
+{
+  "results": [
+    {
+      "path": "docs/evidence/access-operations-20261029/Wait-AccessExpiry.ps1",
+      "errors": 0
+    },
+    {
+      "path": "scripts/Test-AccessExpiry.ps1",
+      "errors": 0
+    },
+    {
+      "path": "scripts/initialize-private.ps1",
+      "errors": 0
+    },
+    {
+      "path": "scripts/install-server-backup.ps1",
+      "errors": 0
+    },
+    {
+      "path": "scripts/prepare-tablet-files.ps1",
+      "errors": 0
+    },
+    {
+      "path": "scripts/prepare-tablet-tunnel-client.ps1",
+      "errors": 0
+    },
+    {
+      "path": "scripts/protect-tablet-path.ps1",
+      "errors": 0
+    },
+    {
+      "path": "scripts/save-tablet-tunnel-token.ps1",
+      "errors": 0
+    },
+    {
+      "path": "scripts/server.ps1",
+      "errors": 0
+    },
+    {
+      "path": "scripts/start-tablet-production.ps1",
+      "errors": 0
+    },
+    {
+      "path": "scripts/test-prepare-tablet-parity.ps1",
+      "errors": 0
+    },
+    {
+      "path": "scripts/test-tablet-config.ps1",
+      "errors": 0
+    },
+    {
+      "path": "scripts/test-tablet-local-pilot.ps1",
+      "errors": 0
+    },
+    {
+      "path": "scripts/verify-persistence.ps1",
+      "errors": 0
+    },
+    {
+      "path": "scripts/verify-tablet-api.ps1",
+      "errors": 0
+    },
+    {
+      "path": "scripts/verify-tablet-proxy.ps1",
+      "errors": 0
+    },
+    {
+      "path": "scripts/verify-unavailable.ps1",
+      "errors": 0
+    },
+    {
+      "path": "README.md block 1",
+      "errors": 0
+    },
+    {
+      "path": "README.md block 2",
+      "errors": 0
+    },
+    {
+      "path": "README.md block 3",
+      "errors": 0
+    },
+    {
+      "path": "README.md block 4",
+      "errors": 0
+    }
+  ],
+  "scripts": 17,
+  "readme_blocks": 4,
+  "passed": true,
+  "at_utc": "2026-10-31T02:02:05.0451327+00:00",
+  "powershell_version": "7.6.5",
+  "parser_only": true
+}

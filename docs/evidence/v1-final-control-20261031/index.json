@@ -1,0 +1,138 @@
+{
+  "docs/evidence/v1-final-control-20261031/check_docs.py": {
+    "sha256": "4bb9e3b258866ef7303895fcf3818ed455dfedc1ee029ce1db2dae1f8d42778f",
+    "bytes": 1358
+  },
+  "docs/evidence/v1-final-control-20261031/checks.json": {
+    "sha256": "f657864b45ba1e597e211886a2c6f0bdc76aa56356abf020754c4968cc53ddec",
+    "bytes": 29352
+  },
+  "docs/evidence/v1-final-control-20261031/dns-fixture.txt": {
+    "sha256": "4f94f75d892fb9fc292220fbbc44dafd709eeeed7d92e5834d2aa493301289d1",
+    "bytes": 422
+  },
+  "docs/evidence/v1-final-control-20261031/dns_fixture.py": {
+    "sha256": "e70e39b01d000e43ed16faab3e13c77346a81dde50cb18a2a45dd86c19856764",
+    "bytes": 3101
+  },
+  "docs/evidence/v1-final-control-20261031/docker-observation-differences.json": {
+    "sha256": "696afeff4af31c042e320e8da65b151c9f6897c19bb32b563ef66f5ebe2ec92b",
+    "bytes": 20224
+  },
+  "docs/evidence/v1-final-control-20261031/document-links.json": {
+    "sha256": "be6ce3139a37d37885161a6f35457582c44827f4a17af7fd72c9d3bb39d7d940",
+    "bytes": 63
+  },
+  "docs/evidence/v1-final-control-20261031/environment.txt": {
+    "sha256": "5beb3340be91386e2bdc60cd43d56cfd78fe94f9e44a68c8e30f19dd0637cf91",
+    "bytes": 131
+  },
+  "docs/evidence/v1-final-control-20261031/external-get.json": {
+    "sha256": "741cac2db3c63e2bb18996644a986b73e3e8d547c127e87ee5070008a8a27e23",
+    "bytes": 2509
+  },
+  "docs/evidence/v1-final-control-20261031/external_checks.py": {
+    "sha256": "b18f3ff2bb0896cf8662551db5713485bfc82e38e5515c4bd3ab7ab1d3258384",
+    "bytes": 3671
+  },
+  "docs/evidence/v1-final-control-20261031/finish_recipe.py": {
+    "sha256": "d35980a880a45944abfa43cbba179f22b59996f876d26bc4ad2cebdf9aa01d23",
+    "bytes": 3405
+  },
+  "docs/evidence/v1-final-control-20261031/generated-login.json": {
+    "sha256": "3e4702794549affd735644c247f89e35cd719d36cb21e014bfb9e65511818fb4",
+    "bytes": 356
+  },
+  "docs/evidence/v1-final-control-20261031/generated-login.txt": {
+    "sha256": "041d65ce4432aaf2e3e5762c760351cffe9fda3d79788edc189b3dba18b9584c",
+    "bytes": 75
+  },
+  "docs/evidence/v1-final-control-20261031/generated_login.cjs": {
+    "sha256": "9625aa281019e5a58454b26dab532be55bff488d56d6c5d067489af565177c25",
+    "bytes": 2989
+  },
+  "docs/evidence/v1-final-control-20261031/host.txt": {
+    "sha256": "0de21ad2ab4aee80ccac64511e7e807f341011ff32ca17da78b70e9956bb24fa",
+    "bytes": 102
+  },
+  "docs/evidence/v1-final-control-20261031/inventory.json": {
+    "sha256": "3c2d7845da056d69464ded33014322ba2a97e44b2cd1932d64ce89af4b63b0e9",
+    "bytes": 35053
+  },
+  "docs/evidence/v1-final-control-20261031/inventory.py": {
+    "sha256": "b5d1ff200ba284f325ac2b299dbc770e714f59863b0e4f0cd7cefff3a7d6f106",
+    "bytes": 3890
+  },
+  "docs/evidence/v1-final-control-20261031/local-origin-csrf.json": {
+    "sha256": "4075ca20e3a910d878a9a29955fbe16b0d0f5f2393fabe0123366059067b01d6",
+    "bytes": 887
+  },
+  "docs/evidence/v1-final-control-20261031/local-origin-csrf.txt": {
+    "sha256": "754840c150d6bd580f28219850c3fa83514a92d2c10bcd2f3ef8150f87cf7dd8",
+    "bytes": 61
+  },
+  "docs/evidence/v1-final-control-20261031/local_origin_csrf.cjs": {
+    "sha256": "a1231429200b1842590d655976b4c30b36089256054dd09f22feb5acb1efc149",
+    "bytes": 2538
+  },
+  "docs/evidence/v1-final-control-20261031/npm-audit.json": {
+    "sha256": "1a6521eec0efe6b3616f384e45c279e942020ba2fbb978181fd1588506702241",
+    "bytes": 361
+  },
+  "docs/evidence/v1-final-control-20261031/parse_powershell.ps1": {
+    "sha256": "4b89207a416cce3fb48a214cb3356e4414a8b003e16f22576d8d7324e794d2cd",
+    "bytes": 1352
+  },
+  "docs/evidence/v1-final-control-20261031/powershell-parse.json": {
+    "sha256": "a8968c615177a1d479382fdb59c3a11c4a6e07b5aad379e151383fb2baf534a9",
+    "bytes": 1944
+  },
+  "docs/evidence/v1-final-control-20261031/preparation.txt": {
+    "sha256": "ca1a30dee8e190691621601a4dea7a8f927bcaca68f7ebc6b2f5c06694976c1c",
+    "bytes": 67
+  },
+  "docs/evidence/v1-final-control-20261031/prepare_recipe.py": {
+    "sha256": "065adf61435678a17d042b837404df3b3cd794005940bc2d0a63c54af7db778c",
+    "bytes": 2975
+  },
+  "docs/evidence/v1-final-control-20261031/python-advisories.json": {
+    "sha256": "f59c2d34d5e90169f2fcb29981eeab56c2ad438a158b59afc5a16f5950a9d9b6",
+    "bytes": 4976
+  },
+  "docs/evidence/v1-final-control-20261031/recipe-browser-install.txt": {
+    "sha256": "58416e49a5ddf503b353bfe22644b52f45ffdf185f89a0e7ffb9c81e30b0e663",
+    "bytes": 413
+  },
+  "docs/evidence/v1-final-control-20261031/recipe-init.txt": {
+    "sha256": "6814d38a32ee240f1e35ce37666dcc24b5ab09fe532a7231170e3e75486c6e9d",
+    "bytes": 20415
+  },
+  "docs/evidence/v1-final-control-20261031/recipe-instance.json": {
+    "sha256": "ba0745b39c550876db5c15dbfcdc47a8d5b9633116551239ecc3ae830deb5550",
+    "bytes": 2548
+  },
+  "docs/evidence/v1-final-control-20261031/recipe-proof.json": {
+    "sha256": "829b2acf116ab7bcb9b7d30126707dbfb996e87eaba984eb77e3cd0e4d13a019",
+    "bytes": 7585
+  },
+  "docs/evidence/v1-final-control-20261031/recipe-status.txt": {
+    "sha256": "43f9e645edc006446a891d440a700dc779194224d34df38c93685f85b51b9720",
+    "bytes": 1544
+  },
+  "docs/evidence/v1-final-control-20261031/run_checks.py": {
+    "sha256": "d0d3b26b5be09639bc884634b2c8642eab7478c3c8e77b9ef4144c0d5d856b04",
+    "bytes": 2778
+  },
+  "docs/evidence/v1-final-control-20261031/server-readonly.txt": {
+    "sha256": "129f1f325d872d59c6b1f4a4e671fe7b8202ef3626ab45fd114e093093cf379e",
+    "bytes": 1773
+  },
+  "docs/evidence/v1-final-control-20261031/server-reboot-marker.txt": {
+    "sha256": "fa7bc056f19370e10c3835f6df0b438b856db8f724ea8057e59b01ebff014d15",
+    "bytes": 35
+  },
+  "docs/evidence/v1-final-control-20261031/submission-guards.txt": {
+    "sha256": "e30dc9938e4c86074e27168bdf9705ab5a79ad005faefd7b4e5580e72a01314b",
+    "bytes": 698
+  }
+}

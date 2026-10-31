@@ -1,0 +1,2 @@
+3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]
+PyJWT 2.15.1 pytest 9.0.3 cryptography 50.0.2

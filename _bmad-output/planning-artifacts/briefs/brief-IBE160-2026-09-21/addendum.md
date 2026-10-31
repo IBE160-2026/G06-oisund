@@ -70,6 +70,8 @@ Pilot lines are 20, 24, 28 and 42. Jonas describes 20/24 as very similar, making
 
 ## Course evidence and delivery constraints
 
+Later source check31October2026: the original project-suggestion PDF and Part1 assessment guide are now available and were read locally in full for the [final course mapping](../../../../docs/evidence/v1-final-control-20261031.md#original-course-material-actually-available). They remain outside Git. The later report distinguishes confirmed criteria from still-unconfirmed deadline, proposal/solo approval and submission/access logistics. The following September record retains its original date and evidence limits.
+
 The [official autumn 2026 course description](https://www.himolde.no/studier/emner/log/2026/host/ibe160.html), accessed 2026-09-21, requires an approved proposal and allocates 70% to project code/functionality and 30% to reflection. Documentation must explain AI use and code quality assurance; reflection covers the process, challenges, solutions, AI's influence and ethical/technological implications. Full-stack and database requirements are Jonas's explicit constraints, not explicit claims from that page.
 
 Six privately stored teaching files were inspected:

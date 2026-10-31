@@ -1,0 +1,10 @@
+{
+  "fixture": "Python getaddrinfo barrier, Windows host; no system DNS change",
+  "first_caller_seconds": 3.264999999984866,
+  "twenty_refused_callers_seconds": 0.0,
+  "resolver_entries_while_stalled": 1,
+  "slot_remains_occupied_until_resolver_returns": true,
+  "transport_recovers_after_explicit_resolver_release": true,
+  "bounded_fixture_passed": true,
+  "actual_os_resolver_cancellation_verified": false
+}

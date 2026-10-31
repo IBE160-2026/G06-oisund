@@ -1,0 +1,62 @@
+{
+  "at_utc": "2026-10-31T01:54:31.268652+00:00",
+  "route": "https://app.bussassistent.com",
+  "vantage": "Windows owner LAN via public DNS/HTTPS; not an independent WAN scanner",
+  "get_cases": [
+    {
+      "path": "/private",
+      "origin": null,
+      "status": 302,
+      "cache_control": "private, max-age=0, no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
+      "redirect_host": "bussassistent.cloudflareaccess.com",
+      "redirect_path": "/cdn-cgi/access/login/app.bussassistent.com",
+      "app_shell": false,
+      "bytes": 143,
+      "body_sha256": "12755429beb15d5eb57eafa45b8dba326343dd099bf0552038694c3856e8860e",
+      "access_control_allow_origin": null
+    },
+    {
+      "path": "/private",
+      "origin": "https://untrusted.example.invalid",
+      "status": 302,
+      "cache_control": "private, max-age=0, no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
+      "redirect_host": "bussassistent.cloudflareaccess.com",
+      "redirect_path": "/cdn-cgi/access/login/app.bussassistent.com",
+      "app_shell": false,
+      "bytes": 143,
+      "body_sha256": "12755429beb15d5eb57eafa45b8dba326343dd099bf0552038694c3856e8860e",
+      "access_control_allow_origin": "https://untrusted.example.invalid"
+    },
+    {
+      "path": "/private-api/drafts",
+      "origin": null,
+      "status": 302,
+      "cache_control": "private, max-age=0, no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
+      "redirect_host": "bussassistent.cloudflareaccess.com",
+      "redirect_path": "/cdn-cgi/access/login/app.bussassistent.com",
+      "app_shell": false,
+      "bytes": 143,
+      "body_sha256": "12755429beb15d5eb57eafa45b8dba326343dd099bf0552038694c3856e8860e",
+      "access_control_allow_origin": null
+    },
+    {
+      "path": "/private-api/drafts",
+      "origin": "https://untrusted.example.invalid",
+      "status": 302,
+      "cache_control": "private, max-age=0, no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
+      "redirect_host": "bussassistent.cloudflareaccess.com",
+      "redirect_path": "/cdn-cgi/access/login/app.bussassistent.com",
+      "app_shell": false,
+      "bytes": 143,
+      "body_sha256": "12755429beb15d5eb57eafa45b8dba326343dd099bf0552038694c3856e8860e",
+      "access_control_allow_origin": "https://untrusted.example.invalid"
+    }
+  ],
+  "A": [
+    "104.21.2.190",
+    "172.67.129.146"
+  ],
+  "AAAA": {
+    "unavailable": "gaierror"
+  }
+}

@@ -1,0 +1,604 @@
+[
+  {
+    "name": "/ibe160-v1-delivery-private-api-1",
+    "differences": {
+      "Mounts": {
+        "before": [
+          {
+            "Type": "bind",
+            "Source": "D:\\IBE160\\tmp\\v1-delivery-candidate\\Eksempelfiler",
+            "Destination": "/fixtures",
+            "Mode": "ro",
+            "RW": false,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "D:\\IBE160\\tmp\\v1-delivery-candidate\\.private-runtime\\submission\\account.json",
+            "Destination": "/run/secrets/submission_account",
+            "Mode": "",
+            "RW": false,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "D:\\IBE160\\tmp\\v1-delivery-candidate\\.private-runtime\\submission\\postgres-password",
+            "Destination": "/run/secrets/submission_password",
+            "Mode": "",
+            "RW": false,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "D:\\IBE160\\tmp\\v1-delivery-candidate\\deploy\\submission\\manage.py",
+            "Destination": "/submission/manage.py",
+            "Mode": "ro",
+            "RW": false,
+            "Propagation": "rprivate"
+          }
+        ],
+        "after": [
+          {
+            "Type": "bind",
+            "Source": "D:\\IBE160\\tmp\\v1-delivery-candidate\\.private-runtime\\submission\\account.json",
+            "Destination": "/run/secrets/submission_account",
+            "Mode": "",
+            "RW": false,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "D:\\IBE160\\tmp\\v1-delivery-candidate\\.private-runtime\\submission\\postgres-password",
+            "Destination": "/run/secrets/submission_password",
+            "Mode": "",
+            "RW": false,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "D:\\IBE160\\tmp\\v1-delivery-candidate\\deploy\\submission\\manage.py",
+            "Destination": "/submission/manage.py",
+            "Mode": "ro",
+            "RW": false,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "D:\\IBE160\\tmp\\v1-delivery-candidate\\Eksempelfiler",
+            "Destination": "/fixtures",
+            "Mode": "ro",
+            "RW": false,
+            "Propagation": "rprivate"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "/ibe160-v1-delivery-api-1",
+    "differences": {
+      "Mounts": {
+        "before": [
+          {
+            "Type": "bind",
+            "Source": "D:\\IBE160\\tmp\\v1-delivery-candidate\\Eksempelfiler",
+            "Destination": "/fixtures",
+            "Mode": "ro",
+            "RW": false,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "D:\\IBE160\\tmp\\v1-delivery-candidate\\.private-runtime\\submission\\postgres-password",
+            "Destination": "/run/secrets/submission_password",
+            "Mode": "",
+            "RW": false,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "D:\\IBE160\\tmp\\v1-delivery-candidate\\deploy\\submission\\fictional.py",
+            "Destination": "/submission/fictional.py",
+            "Mode": "ro",
+            "RW": false,
+            "Propagation": "rprivate"
+          }
+        ],
+        "after": [
+          {
+            "Type": "bind",
+            "Source": "D:\\IBE160\\tmp\\v1-delivery-candidate\\.private-runtime\\submission\\postgres-password",
+            "Destination": "/run/secrets/submission_password",
+            "Mode": "",
+            "RW": false,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "D:\\IBE160\\tmp\\v1-delivery-candidate\\deploy\\submission\\fictional.py",
+            "Destination": "/submission/fictional.py",
+            "Mode": "ro",
+            "RW": false,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "D:\\IBE160\\tmp\\v1-delivery-candidate\\Eksempelfiler",
+            "Destination": "/fixtures",
+            "Mode": "ro",
+            "RW": false,
+            "Propagation": "rprivate"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "/ibe160-v1-delivery-private-db-1",
+    "differences": {
+      "Mounts": {
+        "before": [
+          {
+            "Type": "volume",
+            "Name": "ibe160-v1-delivery_submission_private",
+            "Source": "/var/lib/docker/volumes/ibe160-v1-delivery_submission_private/_data",
+            "Destination": "/var/lib/postgresql/data",
+            "Driver": "local",
+            "Mode": "rw",
+            "RW": true,
+            "Propagation": ""
+          },
+          {
+            "Type": "bind",
+            "Source": "D:\\IBE160\\tmp\\v1-delivery-candidate\\.private-runtime\\submission\\postgres-password",
+            "Destination": "/run/secrets/submission_password",
+            "Mode": "",
+            "RW": false,
+            "Propagation": "rprivate"
+          }
+        ],
+        "after": [
+          {
+            "Type": "bind",
+            "Source": "D:\\IBE160\\tmp\\v1-delivery-candidate\\.private-runtime\\submission\\postgres-password",
+            "Destination": "/run/secrets/submission_password",
+            "Mode": "",
+            "RW": false,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "volume",
+            "Name": "ibe160-v1-delivery_submission_private",
+            "Source": "/var/lib/docker/volumes/ibe160-v1-delivery_submission_private/_data",
+            "Destination": "/var/lib/postgresql/data",
+            "Driver": "local",
+            "Mode": "rw",
+            "RW": true,
+            "Propagation": ""
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "/ibe160-v1followup-tests-db-1",
+    "differences": {
+      "Mounts": {
+        "before": [
+          {
+            "Type": "bind",
+            "Source": "D:\\IBE160\\tmp\\v1-remediation\\.private-runtime\\v1followup-postgres-password",
+            "Destination": "/run/secrets/v1followup_password",
+            "Mode": "",
+            "RW": false,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "volume",
+            "Name": "ibe160-v1followup-tests_v1followup_fictional",
+            "Source": "/var/lib/docker/volumes/ibe160-v1followup-tests_v1followup_fictional/_data",
+            "Destination": "/var/lib/postgresql/data",
+            "Driver": "local",
+            "Mode": "rw",
+            "RW": true,
+            "Propagation": ""
+          }
+        ],
+        "after": [
+          {
+            "Type": "volume",
+            "Name": "ibe160-v1followup-tests_v1followup_fictional",
+            "Source": "/var/lib/docker/volumes/ibe160-v1followup-tests_v1followup_fictional/_data",
+            "Destination": "/var/lib/postgresql/data",
+            "Driver": "local",
+            "Mode": "rw",
+            "RW": true,
+            "Propagation": ""
+          },
+          {
+            "Type": "bind",
+            "Source": "D:\\IBE160\\tmp\\v1-remediation\\.private-runtime\\v1followup-postgres-password",
+            "Destination": "/run/secrets/v1followup_password",
+            "Mode": "",
+            "RW": false,
+            "Propagation": "rprivate"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "/ibe160-submission-api-1",
+    "differences": {
+      "Mounts": {
+        "before": [
+          {
+            "Type": "bind",
+            "Source": "D:\\IBE160\\tmp\\submission-clean-20261028\\.private-runtime\\submission\\postgres-password",
+            "Destination": "/run/secrets/submission_password",
+            "Mode": "",
+            "RW": false,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "D:\\IBE160\\tmp\\submission-clean-20261028\\deploy\\submission\\fictional.py",
+            "Destination": "/submission/fictional.py",
+            "Mode": "ro",
+            "RW": false,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "D:\\IBE160\\tmp\\submission-clean-20261028\\Eksempelfiler",
+            "Destination": "/fixtures",
+            "Mode": "ro",
+            "RW": false,
+            "Propagation": "rprivate"
+          }
+        ],
+        "after": [
+          {
+            "Type": "bind",
+            "Source": "D:\\IBE160\\tmp\\submission-clean-20261028\\Eksempelfiler",
+            "Destination": "/fixtures",
+            "Mode": "ro",
+            "RW": false,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "D:\\IBE160\\tmp\\submission-clean-20261028\\.private-runtime\\submission\\postgres-password",
+            "Destination": "/run/secrets/submission_password",
+            "Mode": "",
+            "RW": false,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "D:\\IBE160\\tmp\\submission-clean-20261028\\deploy\\submission\\fictional.py",
+            "Destination": "/submission/fictional.py",
+            "Mode": "ro",
+            "RW": false,
+            "Propagation": "rprivate"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "/ibe160-tablet-prep-private-db-1",
+    "differences": {
+      "Mounts": {
+        "before": [
+          {
+            "Type": "bind",
+            "Source": "/run/desktop/mnt/host/c/Users/Jonas/.codex/.chatgpt-projects/g-p-6ab6b4c1c6888191a96d3242fab912b4/operations/releases/a48f2132fd0059b21b9581bf27d337cb1561d55b/deploy/tablet/init-private-role.sql",
+            "Destination": "/docker-entrypoint-initdb.d/010-private-role.sql",
+            "Mode": "ro",
+            "RW": false,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "C:/Users/Jonas/.codex/.chatgpt-projects/g-p-6ab6b4c1c6888191a96d3242fab912b4/operations/runtime/tablet/bootstrap-password",
+            "Destination": "/run/secrets/tablet_bootstrap_password",
+            "Mode": "",
+            "RW": false,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "C:/Users/Jonas/.codex/.chatgpt-projects/g-p-6ab6b4c1c6888191a96d3242fab912b4/operations/runtime/tablet/postgres-password",
+            "Destination": "/run/secrets/tablet_postgres_password",
+            "Mode": "",
+            "RW": false,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "volume",
+            "Name": "ibe160-tablet-prep_tablet_pg",
+            "Source": "/var/lib/docker/volumes/ibe160-tablet-prep_tablet_pg/_data",
+            "Destination": "/var/lib/postgresql/data",
+            "Driver": "local",
+            "Mode": "rw",
+            "RW": true,
+            "Propagation": ""
+          }
+        ],
+        "after": [
+          {
+            "Type": "bind",
+            "Source": "C:/Users/Jonas/.codex/.chatgpt-projects/g-p-6ab6b4c1c6888191a96d3242fab912b4/operations/runtime/tablet/postgres-password",
+            "Destination": "/run/secrets/tablet_postgres_password",
+            "Mode": "",
+            "RW": false,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "volume",
+            "Name": "ibe160-tablet-prep_tablet_pg",
+            "Source": "/var/lib/docker/volumes/ibe160-tablet-prep_tablet_pg/_data",
+            "Destination": "/var/lib/postgresql/data",
+            "Driver": "local",
+            "Mode": "rw",
+            "RW": true,
+            "Propagation": ""
+          },
+          {
+            "Type": "bind",
+            "Source": "/run/desktop/mnt/host/c/Users/Jonas/.codex/.chatgpt-projects/g-p-6ab6b4c1c6888191a96d3242fab912b4/operations/releases/a48f2132fd0059b21b9581bf27d337cb1561d55b/deploy/tablet/init-private-role.sql",
+            "Destination": "/docker-entrypoint-initdb.d/010-private-role.sql",
+            "Mode": "ro",
+            "RW": false,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "C:/Users/Jonas/.codex/.chatgpt-projects/g-p-6ab6b4c1c6888191a96d3242fab912b4/operations/runtime/tablet/bootstrap-password",
+            "Destination": "/run/secrets/tablet_bootstrap_password",
+            "Mode": "",
+            "RW": false,
+            "Propagation": "rprivate"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "/ibe160-story124-tests-api-1",
+    "differences": {
+      "Mounts": {
+        "before": [
+          {
+            "Type": "bind",
+            "Source": "D:\\IBE160\\tmp\\story-12-4\\backend",
+            "Destination": "/app",
+            "Mode": "ro",
+            "RW": false,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "D:\\IBE160\\tmp\\story-12-4\\Eksempelfiler",
+            "Destination": "/fixtures",
+            "Mode": "ro",
+            "RW": false,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "D:\\IBE160\\tmp\\story-12-4\\.private-runtime\\story124-postgres-password",
+            "Destination": "/run/secrets/story124_password",
+            "Mode": "",
+            "RW": false,
+            "Propagation": "rprivate"
+          }
+        ],
+        "after": [
+          {
+            "Type": "bind",
+            "Source": "D:\\IBE160\\tmp\\story-12-4\\Eksempelfiler",
+            "Destination": "/fixtures",
+            "Mode": "ro",
+            "RW": false,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "D:\\IBE160\\tmp\\story-12-4\\.private-runtime\\story124-postgres-password",
+            "Destination": "/run/secrets/story124_password",
+            "Mode": "",
+            "RW": false,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "D:\\IBE160\\tmp\\story-12-4\\backend",
+            "Destination": "/app",
+            "Mode": "ro",
+            "RW": false,
+            "Propagation": "rprivate"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "/ibe160-story124-tests-private-api-1",
+    "differences": {
+      "Mounts": {
+        "before": [
+          {
+            "Type": "bind",
+            "Source": "D:\\IBE160\\tmp\\story-12-4\\Eksempelfiler",
+            "Destination": "/fixtures",
+            "Mode": "ro",
+            "RW": false,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "D:\\IBE160\\tmp\\story-12-4\\.private-runtime\\story124-postgres-password",
+            "Destination": "/run/secrets/story124_password",
+            "Mode": "",
+            "RW": false,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "D:\\IBE160\\tmp\\story-12-4\\backend",
+            "Destination": "/app",
+            "Mode": "ro",
+            "RW": false,
+            "Propagation": "rprivate"
+          }
+        ],
+        "after": [
+          {
+            "Type": "bind",
+            "Source": "D:\\IBE160\\tmp\\story-12-4\\backend",
+            "Destination": "/app",
+            "Mode": "ro",
+            "RW": false,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "D:\\IBE160\\tmp\\story-12-4\\Eksempelfiler",
+            "Destination": "/fixtures",
+            "Mode": "ro",
+            "RW": false,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "D:\\IBE160\\tmp\\story-12-4\\.private-runtime\\story124-postgres-password",
+            "Destination": "/run/secrets/story124_password",
+            "Mode": "",
+            "RW": false,
+            "Propagation": "rprivate"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "/ibe160-story123-tests-private-api-1",
+    "differences": {
+      "Mounts": {
+        "before": [
+          {
+            "Type": "bind",
+            "Source": "D:\\IBE160\\tmp\\story-12-3\\Eksempelfiler",
+            "Destination": "/fixtures",
+            "Mode": "ro",
+            "RW": false,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "D:\\IBE160\\tmp\\story-12-3\\.private-runtime\\story123-postgres-password",
+            "Destination": "/run/secrets/story123_password",
+            "Mode": "",
+            "RW": false,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "D:\\IBE160\\tmp\\story-12-3\\backend",
+            "Destination": "/app",
+            "Mode": "ro",
+            "RW": false,
+            "Propagation": "rprivate"
+          }
+        ],
+        "after": [
+          {
+            "Type": "bind",
+            "Source": "D:\\IBE160\\tmp\\story-12-3\\backend",
+            "Destination": "/app",
+            "Mode": "ro",
+            "RW": false,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "D:\\IBE160\\tmp\\story-12-3\\Eksempelfiler",
+            "Destination": "/fixtures",
+            "Mode": "ro",
+            "RW": false,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "D:\\IBE160\\tmp\\story-12-3\\.private-runtime\\story123-postgres-password",
+            "Destination": "/run/secrets/story123_password",
+            "Mode": "",
+            "RW": false,
+            "Propagation": "rprivate"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "/ibe160-story121-tests-private-api-1",
+    "differences": {
+      "Mounts": {
+        "before": [
+          {
+            "Type": "bind",
+            "Source": "D:\\IBE160-story-12-1\\.private-runtime\\story121-postgres-password",
+            "Destination": "/run/secrets/private_postgres_password",
+            "Mode": "",
+            "RW": false,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "D:\\IBE160-story-12-1\\backend",
+            "Destination": "/app",
+            "Mode": "ro",
+            "RW": false,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "D:\\IBE160-story-12-1\\Eksempelfiler",
+            "Destination": "/fixtures",
+            "Mode": "ro",
+            "RW": false,
+            "Propagation": "rprivate"
+          }
+        ],
+        "after": [
+          {
+            "Type": "bind",
+            "Source": "D:\\IBE160-story-12-1\\backend",
+            "Destination": "/app",
+            "Mode": "ro",
+            "RW": false,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "D:\\IBE160-story-12-1\\Eksempelfiler",
+            "Destination": "/fixtures",
+            "Mode": "ro",
+            "RW": false,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "D:\\IBE160-story-12-1\\.private-runtime\\story121-postgres-password",
+            "Destination": "/run/secrets/private_postgres_password",
+            "Mode": "",
+            "RW": false,
+            "Propagation": "rprivate"
+          }
+        ]
+      }
+    }
+  }
+]
