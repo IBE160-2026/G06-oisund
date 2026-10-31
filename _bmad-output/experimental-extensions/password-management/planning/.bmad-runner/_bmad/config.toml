@@ -1,0 +1,6 @@
+[core]
+project_name = "IBE160"
+user_name = "Jonas"
+communication_language = "Norwegian"
+document_output_language = "English"
+output_folder = "../.."
