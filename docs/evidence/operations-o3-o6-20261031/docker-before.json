@@ -1,0 +1,3522 @@
+{
+  "containers": [
+    {
+      "Id": "bffd25ba9b2e292985b92e0d7709a9aa0f2ce15ddad9060fe6e369daceb2b7b2",
+      "Name": "/ibe160-v1-final-20261031-frontend-1",
+      "Image": "sha256:96ce6134e0f3b548855c61424699e6394e9ce48b409a5070b07e60dbb54fb829",
+      "Created": "2026-10-31T01:53:53.262662879Z",
+      "State": {
+        "Status": "running",
+        "Running": true,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 1713,
+        "ExitCode": 0,
+        "Error": "",
+        "StartedAt": "2026-10-31T01:54:01.346195003Z",
+        "FinishedAt": "0001-01-01T00:00:00Z",
+        "Health": {
+          "Status": "healthy",
+          "FailingStreak": 0,
+          "Log": [
+            {
+              "Start": "2026-10-31T03:11:48.273308165Z",
+              "End": "2026-10-31T03:11:48.421418836Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-31T03:11:50.422422307Z",
+              "End": "2026-10-31T03:11:50.572896621Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-31T03:11:52.574063898Z",
+              "End": "2026-10-31T03:11:52.734384381Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-31T03:11:54.735017827Z",
+              "End": "2026-10-31T03:11:54.928631138Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-31T03:11:56.930032677Z",
+              "End": "2026-10-31T03:11:57.104874141Z",
+              "ExitCode": 0,
+              "Output": ""
+            }
+          ]
+        }
+      },
+      "RestartCount": 0,
+      "Mounts": []
+    },
+    {
+      "Id": "c0a3a032ce1510ad92184f40be4f75881aa894119a5b57889950e328c7299e45",
+      "Name": "/ibe160-v1-final-20261031-private-api-1",
+      "Image": "sha256:b543ddfa7b6fe1373ea41708a02fe7f11d03abac2d5be3e7e62e0a244ac4332c",
+      "Created": "2026-10-31T01:53:53.103539737Z",
+      "State": {
+        "Status": "running",
+        "Running": true,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 1564,
+        "ExitCode": 0,
+        "Error": "",
+        "StartedAt": "2026-10-31T01:53:58.589830512Z",
+        "FinishedAt": "0001-01-01T00:00:00Z",
+        "Health": {
+          "Status": "healthy",
+          "FailingStreak": 0,
+          "Log": [
+            {
+              "Start": "2026-10-31T03:11:47.089936382Z",
+              "End": "2026-10-31T03:11:47.21193846Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-31T03:11:49.212909571Z",
+              "End": "2026-10-31T03:11:49.336219411Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-31T03:11:51.337969222Z",
+              "End": "2026-10-31T03:11:51.465929931Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-31T03:11:53.467263218Z",
+              "End": "2026-10-31T03:11:53.61235872Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-31T03:11:55.613285083Z",
+              "End": "2026-10-31T03:11:55.780470463Z",
+              "ExitCode": 0,
+              "Output": ""
+            }
+          ]
+        }
+      },
+      "RestartCount": 0,
+      "Mounts": [
+        {
+          "Type": "bind",
+          "Source": "C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\v1-final-control\\tmp\\recipe\\Eksempelfiler",
+          "Destination": "/fixtures",
+          "Mode": "ro",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\v1-final-control\\tmp\\recipe\\deploy\\submission\\manage.py",
+          "Destination": "/submission/manage.py",
+          "Mode": "ro",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\v1-final-control\\tmp\\recipe\\.private-runtime\\submission\\postgres-password",
+          "Destination": "/run/secrets/submission_password",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\v1-final-control\\tmp\\recipe\\.private-runtime\\submission\\account.json",
+          "Destination": "/run/secrets/submission_account",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        }
+      ]
+    },
+    {
+      "Id": "5b164a451dba38c93fa0ff1eb8eea1a4b72a2fbfc4b9e98c8f8c863c17a8bdf2",
+      "Name": "/ibe160-v1-final-20261031-api-1",
+      "Image": "sha256:33fb7a54771f0696711fc3e33507fef19dc1d2d9f1ad0a0a50f68a344fdf2ab8",
+      "Created": "2026-10-31T01:53:53.085748689Z",
+      "State": {
+        "Status": "running",
+        "Running": true,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 1499,
+        "ExitCode": 0,
+        "Error": "",
+        "StartedAt": "2026-10-31T01:53:58.357481646Z",
+        "FinishedAt": "0001-01-01T00:00:00Z",
+        "Health": {
+          "Status": "healthy",
+          "FailingStreak": 0,
+          "Log": [
+            {
+              "Start": "2026-10-31T03:11:47.029814344Z",
+              "End": "2026-10-31T03:11:47.150453844Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-31T03:11:49.151775931Z",
+              "End": "2026-10-31T03:11:49.274587142Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-31T03:11:51.275221889Z",
+              "End": "2026-10-31T03:11:51.405021705Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-31T03:11:53.406420895Z",
+              "End": "2026-10-31T03:11:53.549045954Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-31T03:11:55.550243432Z",
+              "End": "2026-10-31T03:11:55.736623124Z",
+              "ExitCode": 0,
+              "Output": ""
+            }
+          ]
+        }
+      },
+      "RestartCount": 0,
+      "Mounts": [
+        {
+          "Type": "bind",
+          "Source": "C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\v1-final-control\\tmp\\recipe\\deploy\\submission\\fictional.py",
+          "Destination": "/submission/fictional.py",
+          "Mode": "ro",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\v1-final-control\\tmp\\recipe\\.private-runtime\\submission\\postgres-password",
+          "Destination": "/run/secrets/submission_password",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\v1-final-control\\tmp\\recipe\\Eksempelfiler",
+          "Destination": "/fixtures",
+          "Mode": "ro",
+          "RW": false,
+          "Propagation": "rprivate"
+        }
+      ]
+    },
+    {
+      "Id": "804e281c46602f2c10ff0e8207cf27ff7d4e72a71e1845311de837b413aa26f1",
+      "Name": "/ibe160-v1-final-20261031-db-1",
+      "Image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "Created": "2026-10-31T01:53:52.495765668Z",
+      "State": {
+        "Status": "running",
+        "Running": true,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 1202,
+        "ExitCode": 0,
+        "Error": "",
+        "StartedAt": "2026-10-31T01:53:53.465110789Z",
+        "FinishedAt": "0001-01-01T00:00:00Z",
+        "Health": {
+          "Status": "healthy",
+          "FailingStreak": 0,
+          "Log": [
+            {
+              "Start": "2026-10-31T03:11:47.343402479Z",
+              "End": "2026-10-31T03:11:47.400081621Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-31T03:11:49.401352883Z",
+              "End": "2026-10-31T03:11:49.453682213Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-31T03:11:51.454743284Z",
+              "End": "2026-10-31T03:11:51.506329971Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-31T03:11:53.506833109Z",
+              "End": "2026-10-31T03:11:53.556740199Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-31T03:11:55.558044484Z",
+              "End": "2026-10-31T03:11:55.630795797Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            }
+          ]
+        }
+      },
+      "RestartCount": 0,
+      "Mounts": [
+        {
+          "Type": "volume",
+          "Name": "ibe160-v1-final-20261031_submission_fictional",
+          "Source": "/var/lib/docker/volumes/ibe160-v1-final-20261031_submission_fictional/_data",
+          "Destination": "/var/lib/postgresql/data",
+          "Driver": "local",
+          "Mode": "rw",
+          "RW": true,
+          "Propagation": ""
+        },
+        {
+          "Type": "bind",
+          "Source": "C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\v1-final-control\\tmp\\recipe\\.private-runtime\\submission\\postgres-password",
+          "Destination": "/run/secrets/submission_password",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        }
+      ]
+    },
+    {
+      "Id": "d7bfd2eb3acd9df6625af766c91f0036dc99dc0a4bd7f8bb94c56bf91083d615",
+      "Name": "/ibe160-v1-final-20261031-private-db-1",
+      "Image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "Created": "2026-10-31T01:53:52.495738766Z",
+      "State": {
+        "Status": "running",
+        "Running": true,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 1284,
+        "ExitCode": 0,
+        "Error": "",
+        "StartedAt": "2026-10-31T01:53:53.709944086Z",
+        "FinishedAt": "0001-01-01T00:00:00Z",
+        "Health": {
+          "Status": "healthy",
+          "FailingStreak": 0,
+          "Log": [
+            {
+              "Start": "2026-10-31T03:11:47.356829147Z",
+              "End": "2026-10-31T03:11:47.411472473Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-31T03:11:49.413036859Z",
+              "End": "2026-10-31T03:11:49.464577644Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-31T03:11:51.465336797Z",
+              "End": "2026-10-31T03:11:51.516771675Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-31T03:11:53.517939552Z",
+              "End": "2026-10-31T03:11:53.569121216Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-31T03:11:55.570593311Z",
+              "End": "2026-10-31T03:11:55.641712529Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            }
+          ]
+        }
+      },
+      "RestartCount": 0,
+      "Mounts": [
+        {
+          "Type": "volume",
+          "Name": "ibe160-v1-final-20261031_submission_private",
+          "Source": "/var/lib/docker/volumes/ibe160-v1-final-20261031_submission_private/_data",
+          "Destination": "/var/lib/postgresql/data",
+          "Driver": "local",
+          "Mode": "rw",
+          "RW": true,
+          "Propagation": ""
+        },
+        {
+          "Type": "bind",
+          "Source": "C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\v1-final-control\\tmp\\recipe\\.private-runtime\\submission\\postgres-password",
+          "Destination": "/run/secrets/submission_password",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        }
+      ]
+    },
+    {
+      "Id": "bd17c7ba8115ccbb8590937f0be0ef466c891a7bfb2e48bd92e290ba1695dfb6",
+      "Name": "/ibe160-v1-delivery-frontend-1",
+      "Image": "sha256:f541508f6bde7d034564e726081fd195eb2f50b23c559f58af1949ae4e7d4538",
+      "Created": "2026-10-29T18:12:52.146159934Z",
+      "State": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 255,
+        "Error": "",
+        "StartedAt": "2026-10-29T18:20:09.623320433Z",
+        "FinishedAt": "2026-10-31T01:51:38.6920559Z",
+        "Health": {
+          "Status": "starting",
+          "FailingStreak": 0,
+          "Log": [
+            {
+              "Start": "2026-10-29T18:20:00.094110029Z",
+              "End": "2026-10-29T18:20:00.313604548Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-29T18:20:02.314382809Z",
+              "End": "2026-10-29T18:20:02.478862915Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-29T18:20:04.480227708Z",
+              "End": "2026-10-29T18:20:04.764429571Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-29T18:20:06.763772398Z",
+              "End": "2026-10-29T18:20:06.943581528Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-29T18:20:08.944804937Z",
+              "End": "2026-10-29T18:20:09.136459815Z",
+              "ExitCode": 0,
+              "Output": ""
+            }
+          ]
+        }
+      },
+      "RestartCount": 0,
+      "Mounts": []
+    },
+    {
+      "Id": "673df6cd47588b9b7c8a9e7c144d805df12a004786fc9858af47d8b016bc0d7e",
+      "Name": "/ibe160-v1-delivery-private-api-1",
+      "Image": "sha256:89b5454c581d3fe5fbb33179207ebbafc599623538c925fcdc67b2566d240b77",
+      "Created": "2026-10-29T18:12:51.971831249Z",
+      "State": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 255,
+        "Error": "",
+        "StartedAt": "2026-10-29T18:20:10.089557622Z",
+        "FinishedAt": "2026-10-31T01:51:38.6928131Z",
+        "Health": {
+          "Status": "starting",
+          "FailingStreak": 0,
+          "Log": [
+            {
+              "Start": "2026-10-29T18:19:59.693790508Z",
+              "End": "2026-10-29T18:19:59.848816897Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-29T18:20:01.850401701Z",
+              "End": "2026-10-29T18:20:01.996561705Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-29T18:20:03.99742547Z",
+              "End": "2026-10-29T18:20:04.148127023Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-29T18:20:06.147876226Z",
+              "End": "2026-10-29T18:20:06.298015135Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-29T18:20:08.299230343Z",
+              "End": "2026-10-29T18:20:08.435305983Z",
+              "ExitCode": 0,
+              "Output": ""
+            }
+          ]
+        }
+      },
+      "RestartCount": 0,
+      "Mounts": [
+        {
+          "Type": "bind",
+          "Source": "D:\\IBE160\\tmp\\v1-delivery-candidate\\Eksempelfiler",
+          "Destination": "/fixtures",
+          "Mode": "ro",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "D:\\IBE160\\tmp\\v1-delivery-candidate\\.private-runtime\\submission\\account.json",
+          "Destination": "/run/secrets/submission_account",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "D:\\IBE160\\tmp\\v1-delivery-candidate\\.private-runtime\\submission\\postgres-password",
+          "Destination": "/run/secrets/submission_password",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "D:\\IBE160\\tmp\\v1-delivery-candidate\\deploy\\submission\\manage.py",
+          "Destination": "/submission/manage.py",
+          "Mode": "ro",
+          "RW": false,
+          "Propagation": "rprivate"
+        }
+      ]
+    },
+    {
+      "Id": "04808f6e4ccf275f05a29325ac8ab2273b0c5373ffa91000bc38c1ceae987ee7",
+      "Name": "/ibe160-v1-delivery-api-1",
+      "Image": "sha256:682cb560e87db6ac33358ae02a1f43ba92d25303f90dbf5307452f9254b3b369",
+      "Created": "2026-10-29T18:12:51.951039805Z",
+      "State": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 255,
+        "Error": "",
+        "StartedAt": "2026-10-29T18:20:09.994552228Z",
+        "FinishedAt": "2026-10-31T01:51:38.6919253Z",
+        "Health": {
+          "Status": "starting",
+          "FailingStreak": 0,
+          "Log": [
+            {
+              "Start": "2026-10-29T18:19:59.61969495Z",
+              "End": "2026-10-29T18:19:59.766559092Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-29T18:20:01.767673871Z",
+              "End": "2026-10-29T18:20:01.889493942Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-29T18:20:03.891167152Z",
+              "End": "2026-10-29T18:20:04.039034649Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-29T18:20:06.039641683Z",
+              "End": "2026-10-29T18:20:06.181672674Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-29T18:20:08.182544864Z",
+              "End": "2026-10-29T18:20:08.338049565Z",
+              "ExitCode": 0,
+              "Output": ""
+            }
+          ]
+        }
+      },
+      "RestartCount": 0,
+      "Mounts": [
+        {
+          "Type": "bind",
+          "Source": "D:\\IBE160\\tmp\\v1-delivery-candidate\\Eksempelfiler",
+          "Destination": "/fixtures",
+          "Mode": "ro",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "D:\\IBE160\\tmp\\v1-delivery-candidate\\.private-runtime\\submission\\postgres-password",
+          "Destination": "/run/secrets/submission_password",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "D:\\IBE160\\tmp\\v1-delivery-candidate\\deploy\\submission\\fictional.py",
+          "Destination": "/submission/fictional.py",
+          "Mode": "ro",
+          "RW": false,
+          "Propagation": "rprivate"
+        }
+      ]
+    },
+    {
+      "Id": "ab57d49db894aa665cad1a391956ca9ed26549e611251a2240bdf664eab8f463",
+      "Name": "/ibe160-v1-delivery-db-1",
+      "Image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "Created": "2026-10-29T18:12:51.45314213Z",
+      "State": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 255,
+        "Error": "",
+        "StartedAt": "2026-10-29T18:20:09.835684643Z",
+        "FinishedAt": "2026-10-31T01:51:38.6926337Z",
+        "Health": {
+          "Status": "starting",
+          "FailingStreak": 0,
+          "Log": [
+            {
+              "Start": "2026-10-29T18:20:00.878566585Z",
+              "End": "2026-10-29T18:20:00.924775915Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-29T18:20:02.925481172Z",
+              "End": "2026-10-29T18:20:02.972709458Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-29T18:20:04.973431215Z",
+              "End": "2026-10-29T18:20:05.015107097Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-29T18:20:07.014449603Z",
+              "End": "2026-10-29T18:20:07.058985038Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-29T18:20:09.059563311Z",
+              "End": "2026-10-29T18:20:09.115738482Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            }
+          ]
+        }
+      },
+      "RestartCount": 0,
+      "Mounts": [
+        {
+          "Type": "bind",
+          "Source": "D:\\IBE160\\tmp\\v1-delivery-candidate\\.private-runtime\\submission\\postgres-password",
+          "Destination": "/run/secrets/submission_password",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "volume",
+          "Name": "ibe160-v1-delivery_submission_fictional",
+          "Source": "/var/lib/docker/volumes/ibe160-v1-delivery_submission_fictional/_data",
+          "Destination": "/var/lib/postgresql/data",
+          "Driver": "local",
+          "Mode": "rw",
+          "RW": true,
+          "Propagation": ""
+        }
+      ]
+    },
+    {
+      "Id": "9ab763525f4959a2abc392f05cd8f10e2b5bb69e90559e6ab30cda12798dd512",
+      "Name": "/ibe160-v1-delivery-private-db-1",
+      "Image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "Created": "2026-10-29T18:12:51.452723007Z",
+      "State": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 255,
+        "Error": "",
+        "StartedAt": "2026-10-29T18:20:09.710729511Z",
+        "FinishedAt": "2026-10-31T01:51:38.6918661Z",
+        "Health": {
+          "Status": "starting",
+          "FailingStreak": 0,
+          "Log": [
+            {
+              "Start": "2026-10-29T18:20:00.959223301Z",
+              "End": "2026-10-29T18:20:01.005298224Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-29T18:20:03.006103687Z",
+              "End": "2026-10-29T18:20:03.053818299Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-29T18:20:05.055216894Z",
+              "End": "2026-10-29T18:20:05.101359321Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-29T18:20:07.101088839Z",
+              "End": "2026-10-29T18:20:07.142037478Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-29T18:20:09.143597706Z",
+              "End": "2026-10-29T18:20:09.201214256Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            }
+          ]
+        }
+      },
+      "RestartCount": 0,
+      "Mounts": [
+        {
+          "Type": "bind",
+          "Source": "D:\\IBE160\\tmp\\v1-delivery-candidate\\.private-runtime\\submission\\postgres-password",
+          "Destination": "/run/secrets/submission_password",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "volume",
+          "Name": "ibe160-v1-delivery_submission_private",
+          "Source": "/var/lib/docker/volumes/ibe160-v1-delivery_submission_private/_data",
+          "Destination": "/var/lib/postgresql/data",
+          "Driver": "local",
+          "Mode": "rw",
+          "RW": true,
+          "Propagation": ""
+        }
+      ]
+    },
+    {
+      "Id": "1236b4cfdfc876d97421ccde0486edd71fce99ff6bf576c2099b66a51b96519f",
+      "Name": "/ibe160-v1followup-tests-private-api-1",
+      "Image": "sha256:6025101c9935a5dc9e59ad68083c4587d0cc7d9c1222c9b31f93542888572b64",
+      "Created": "2026-10-29T15:53:15.780361158Z",
+      "State": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 255,
+        "Error": "",
+        "StartedAt": "2026-10-29T16:24:29.275776975Z",
+        "FinishedAt": "2026-10-31T01:51:38.6919667Z",
+        "Health": {
+          "Status": "starting",
+          "FailingStreak": 0,
+          "Log": [
+            {
+              "Start": "2026-10-29T16:24:19.14529354Z",
+              "End": "2026-10-29T16:24:19.339025775Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-29T16:24:21.340099952Z",
+              "End": "2026-10-29T16:24:21.487004709Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-29T16:24:23.488236432Z",
+              "End": "2026-10-29T16:24:23.668263128Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-29T16:24:25.669023724Z",
+              "End": "2026-10-29T16:24:25.83211308Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-29T16:24:27.833673432Z",
+              "End": "2026-10-29T16:24:27.904640537Z",
+              "ExitCode": 137,
+              "Output": ""
+            }
+          ]
+        }
+      },
+      "RestartCount": 0,
+      "Mounts": [
+        {
+          "Type": "bind",
+          "Source": "D:\\IBE160\\tmp\\v1-remediation\\Eksempelfiler",
+          "Destination": "/fixtures",
+          "Mode": "ro",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "D:\\IBE160\\tmp\\v1-remediation\\.private-runtime\\v1followup-postgres-password",
+          "Destination": "/run/secrets/v1followup_password",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "D:\\IBE160\\tmp\\v1-remediation\\backend",
+          "Destination": "/app",
+          "Mode": "ro",
+          "RW": false,
+          "Propagation": "rprivate"
+        }
+      ]
+    },
+    {
+      "Id": "5b552c81245fbaf5fbdde3be573b180d32be460136e63563de501da8e3aeacba",
+      "Name": "/ibe160-v1followup-tests-api-1",
+      "Image": "sha256:8cfe9ad8657f78fd239a5d43994346823f0229f4ac7d75440ca0ad25108f9a9a",
+      "Created": "2026-10-29T15:53:15.780014838Z",
+      "State": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 255,
+        "Error": "",
+        "StartedAt": "2026-10-29T15:53:17.346668299Z",
+        "FinishedAt": "2026-10-31T01:51:38.6939954Z",
+        "Health": {
+          "Status": "starting",
+          "FailingStreak": 0,
+          "Log": []
+        }
+      },
+      "RestartCount": 0,
+      "Mounts": [
+        {
+          "Type": "bind",
+          "Source": "D:\\IBE160\\tmp\\v1-remediation\\Eksempelfiler",
+          "Destination": "/fixtures",
+          "Mode": "ro",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "D:\\IBE160\\tmp\\v1-remediation\\.private-runtime\\v1followup-postgres-password",
+          "Destination": "/run/secrets/v1followup_password",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "D:\\IBE160\\tmp\\v1-remediation\\backend",
+          "Destination": "/app",
+          "Mode": "ro",
+          "RW": false,
+          "Propagation": "rprivate"
+        }
+      ]
+    },
+    {
+      "Id": "4688d3f8f78d3fdd9b48fc560cf81aa79009c196dd9930aad183fffe51c3a542",
+      "Name": "/ibe160-v1followup-tests-db-1",
+      "Image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "Created": "2026-10-29T15:37:17.347115247Z",
+      "State": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 255,
+        "Error": "",
+        "StartedAt": "2026-10-29T15:37:17.75312537Z",
+        "FinishedAt": "2026-10-31T01:51:38.6926631Z",
+        "Health": {
+          "Status": "starting",
+          "FailingStreak": 0,
+          "Log": []
+        }
+      },
+      "RestartCount": 0,
+      "Mounts": [
+        {
+          "Type": "bind",
+          "Source": "D:\\IBE160\\tmp\\v1-remediation\\.private-runtime\\v1followup-postgres-password",
+          "Destination": "/run/secrets/v1followup_password",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "volume",
+          "Name": "ibe160-v1followup-tests_v1followup_fictional",
+          "Source": "/var/lib/docker/volumes/ibe160-v1followup-tests_v1followup_fictional/_data",
+          "Destination": "/var/lib/postgresql/data",
+          "Driver": "local",
+          "Mode": "rw",
+          "RW": true,
+          "Propagation": ""
+        }
+      ]
+    },
+    {
+      "Id": "1b2fa7236d2f8fcd95e7658774eecbf8b13f086354cc00226be9fbb383997c4e",
+      "Name": "/ibe160-v1followup-tests-private-db-1",
+      "Image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "Created": "2026-10-29T15:37:17.344315287Z",
+      "State": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 255,
+        "Error": "",
+        "StartedAt": "2026-10-29T16:17:10.740797125Z",
+        "FinishedAt": "2026-10-31T01:51:38.6745063Z",
+        "Health": {
+          "Status": "starting",
+          "FailingStreak": 0,
+          "Log": [
+            {
+              "Start": "2026-10-29T16:17:01.361924492Z",
+              "End": "2026-10-29T16:17:01.412066238Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-29T16:17:03.413390207Z",
+              "End": "2026-10-29T16:17:03.491511984Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-29T16:17:05.491693365Z",
+              "End": "2026-10-29T16:17:05.550079662Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-29T16:17:07.551545893Z",
+              "End": "2026-10-29T16:17:07.634565832Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-29T16:17:09.636194645Z",
+              "End": "2026-10-29T16:17:09.696303931Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            }
+          ]
+        }
+      },
+      "RestartCount": 0,
+      "Mounts": [
+        {
+          "Type": "bind",
+          "Source": "D:\\IBE160\\tmp\\v1-remediation\\.private-runtime\\v1followup-postgres-password",
+          "Destination": "/run/secrets/v1followup_password",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "volume",
+          "Name": "ibe160-v1followup-tests_v1followup_private",
+          "Source": "/var/lib/docker/volumes/ibe160-v1followup-tests_v1followup_private/_data",
+          "Destination": "/var/lib/postgresql/data",
+          "Driver": "local",
+          "Mode": "rw",
+          "RW": true,
+          "Propagation": ""
+        }
+      ]
+    },
+    {
+      "Id": "1dc65682b0bfaa5b06727a0b37f6b05aac0253fd0d56c27b0a91e9d3c7e84665",
+      "Name": "/ibe160-submission-frontend-1",
+      "Image": "sha256:cb34104dad2f86d64f92fc8272e9e76f834db708e92ab50f17098f7e1eeac79d",
+      "Created": "2026-10-28T17:27:57.522477774Z",
+      "State": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 255,
+        "Error": "",
+        "StartedAt": "2026-10-28T19:45:49.527491579Z",
+        "FinishedAt": "2026-10-29T15:34:06.3657218Z",
+        "Health": {
+          "Status": "starting",
+          "FailingStreak": 0,
+          "Log": [
+            {
+              "Start": "2026-10-28T19:45:30.617703678Z",
+              "End": "2026-10-28T19:45:30.80357043Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-28T19:45:32.804352361Z",
+              "End": "2026-10-28T19:45:32.963394119Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-28T19:45:34.964750957Z",
+              "End": "2026-10-28T19:45:35.208418378Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-28T19:45:37.209400267Z",
+              "End": "2026-10-28T19:45:37.431044557Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-28T19:45:39.433400229Z",
+              "End": "2026-10-28T19:45:39.607516448Z",
+              "ExitCode": 0,
+              "Output": ""
+            }
+          ]
+        }
+      },
+      "RestartCount": 0,
+      "Mounts": []
+    },
+    {
+      "Id": "6a85f6927af64e6743e3415391e43d1c65bab151e6e82e666516d636eb5ad49b",
+      "Name": "/ibe160-submission-private-api-1",
+      "Image": "sha256:7725ce0c88035360331cb8a1dcf2ec3871ad318f2504332ddf27c635e010a22c",
+      "Created": "2026-10-28T17:27:57.290961635Z",
+      "State": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 255,
+        "Error": "",
+        "StartedAt": "2026-10-28T19:45:46.442977352Z",
+        "FinishedAt": "2026-10-29T15:34:06.3648369Z",
+        "Health": {
+          "Status": "starting",
+          "FailingStreak": 0,
+          "Log": [
+            {
+              "Start": "2026-10-28T19:45:30.988808346Z",
+              "End": "2026-10-28T19:45:31.26287871Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-28T19:45:33.263900501Z",
+              "End": "2026-10-28T19:45:33.405947783Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-28T19:45:35.406898669Z",
+              "End": "2026-10-28T19:45:35.542796079Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-28T19:45:37.54447041Z",
+              "End": "2026-10-28T19:45:37.696829515Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-28T19:45:39.697989014Z",
+              "End": "2026-10-28T19:45:39.889487483Z",
+              "ExitCode": 0,
+              "Output": ""
+            }
+          ]
+        }
+      },
+      "RestartCount": 0,
+      "Mounts": [
+        {
+          "Type": "bind",
+          "Source": "D:\\IBE160\\tmp\\submission-clean-20261028\\deploy\\submission\\manage.py",
+          "Destination": "/submission/manage.py",
+          "Mode": "ro",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "D:\\IBE160\\tmp\\submission-clean-20261028\\Eksempelfiler",
+          "Destination": "/fixtures",
+          "Mode": "ro",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "D:\\IBE160\\tmp\\submission-clean-20261028\\.private-runtime\\submission\\account.json",
+          "Destination": "/run/secrets/submission_account",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "D:\\IBE160\\tmp\\submission-clean-20261028\\.private-runtime\\submission\\postgres-password",
+          "Destination": "/run/secrets/submission_password",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        }
+      ]
+    },
+    {
+      "Id": "3216efc0ec55ffb5e6ffc97493d8bc9e3b1e6b2154afbbe11ffd440fdd1821e9",
+      "Name": "/ibe160-submission-api-1",
+      "Image": "sha256:4c19a5abbbb3bc9649282c31f6c52916a5dc26cf80bdcd4145c02c3090b67883",
+      "Created": "2026-10-28T17:27:57.279890268Z",
+      "State": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 255,
+        "Error": "",
+        "StartedAt": "2026-10-28T19:45:46.733267929Z",
+        "FinishedAt": "2026-10-29T15:34:06.3542504Z",
+        "Health": {
+          "Status": "starting",
+          "FailingStreak": 0,
+          "Log": [
+            {
+              "Start": "2026-10-28T19:45:32.077580084Z",
+              "End": "2026-10-28T19:45:32.234842143Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-28T19:45:34.236919185Z",
+              "End": "2026-10-28T19:45:34.373738651Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-28T19:45:36.375062261Z",
+              "End": "2026-10-28T19:45:36.498251803Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-28T19:45:38.498852469Z",
+              "End": "2026-10-28T19:45:38.633547006Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-28T19:45:40.634791311Z",
+              "End": "2026-10-28T19:45:40.804581068Z",
+              "ExitCode": 0,
+              "Output": ""
+            }
+          ]
+        }
+      },
+      "RestartCount": 0,
+      "Mounts": [
+        {
+          "Type": "bind",
+          "Source": "D:\\IBE160\\tmp\\submission-clean-20261028\\Eksempelfiler",
+          "Destination": "/fixtures",
+          "Mode": "ro",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "D:\\IBE160\\tmp\\submission-clean-20261028\\.private-runtime\\submission\\postgres-password",
+          "Destination": "/run/secrets/submission_password",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "D:\\IBE160\\tmp\\submission-clean-20261028\\deploy\\submission\\fictional.py",
+          "Destination": "/submission/fictional.py",
+          "Mode": "ro",
+          "RW": false,
+          "Propagation": "rprivate"
+        }
+      ]
+    },
+    {
+      "Id": "386444e14bdae6de4c81eb0d25239d45575c1f7ff86f6fc1e73693d3387279a9",
+      "Name": "/ibe160-submission-private-db-1",
+      "Image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "Created": "2026-10-28T17:27:56.531960436Z",
+      "State": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 255,
+        "Error": "",
+        "StartedAt": "2026-10-28T19:45:43.632130381Z",
+        "FinishedAt": "2026-10-29T15:34:06.3366607Z",
+        "Health": {
+          "Status": "starting",
+          "FailingStreak": 0,
+          "Log": [
+            {
+              "Start": "2026-10-28T19:45:33.369021352Z",
+              "End": "2026-10-28T19:45:33.423885166Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-28T19:45:35.424898957Z",
+              "End": "2026-10-28T19:45:35.47559532Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-28T19:45:37.47627969Z",
+              "End": "2026-10-28T19:45:37.534517609Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-28T19:45:39.535960025Z",
+              "End": "2026-10-28T19:45:39.590048593Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-28T19:45:41.591471901Z",
+              "End": "2026-10-28T19:45:41.64736442Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            }
+          ]
+        }
+      },
+      "RestartCount": 0,
+      "Mounts": [
+        {
+          "Type": "bind",
+          "Source": "D:\\IBE160\\tmp\\submission-clean-20261028\\.private-runtime\\submission\\postgres-password",
+          "Destination": "/run/secrets/submission_password",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "volume",
+          "Name": "ibe160-submission_submission_private",
+          "Source": "/var/lib/docker/volumes/ibe160-submission_submission_private/_data",
+          "Destination": "/var/lib/postgresql/data",
+          "Driver": "local",
+          "Mode": "rw",
+          "RW": true,
+          "Propagation": ""
+        }
+      ]
+    },
+    {
+      "Id": "080f8b194376a351ddf410ff42cbd45003a711e540d1036b3fdd7f3734ba9b0b",
+      "Name": "/ibe160-submission-db-1",
+      "Image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "Created": "2026-10-28T17:27:56.531825028Z",
+      "State": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 255,
+        "Error": "",
+        "StartedAt": "2026-10-28T19:45:43.929685915Z",
+        "FinishedAt": "2026-10-29T15:34:06.3541868Z",
+        "Health": {
+          "Status": "starting",
+          "FailingStreak": 0,
+          "Log": [
+            {
+              "Start": "2026-10-28T19:45:33.454219199Z",
+              "End": "2026-10-28T19:45:33.509533441Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-28T19:45:35.510470427Z",
+              "End": "2026-10-28T19:45:35.559234073Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-28T19:45:37.560256164Z",
+              "End": "2026-10-28T19:45:37.609320028Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-28T19:45:39.610429824Z",
+              "End": "2026-10-28T19:45:39.679521398Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-28T19:45:41.681370261Z",
+              "End": "2026-10-28T19:45:41.728084902Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            }
+          ]
+        }
+      },
+      "RestartCount": 0,
+      "Mounts": [
+        {
+          "Type": "bind",
+          "Source": "D:\\IBE160\\tmp\\submission-clean-20261028\\.private-runtime\\submission\\postgres-password",
+          "Destination": "/run/secrets/submission_password",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "volume",
+          "Name": "ibe160-submission_submission_fictional",
+          "Source": "/var/lib/docker/volumes/ibe160-submission_submission_fictional/_data",
+          "Destination": "/var/lib/postgresql/data",
+          "Driver": "local",
+          "Mode": "rw",
+          "RW": true,
+          "Propagation": ""
+        }
+      ]
+    },
+    {
+      "Id": "6bd0e99aad57f3053e491cba1d4f811cff92d997ea6a4eb09433cb39ba77e3b4",
+      "Name": "/ibe160-tablet-prep-gateway-1",
+      "Image": "sha256:50242b65f742441d0928d00775640715ce4748b4420519fbca9ece5b54253bfe",
+      "Created": "2026-10-28T16:42:41.923408015Z",
+      "State": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 255,
+        "Error": "",
+        "StartedAt": "2026-10-28T16:42:43.067400736Z",
+        "FinishedAt": "2026-10-29T15:34:06.3655111Z"
+      },
+      "RestartCount": 0,
+      "Mounts": []
+    },
+    {
+      "Id": "4cd277b2aa4e46aa156da66ae17c73d44632e4e1dc81b8eab3f4cfd9f7f44f49",
+      "Name": "/ibe160-tablet-prep-access-gate-1",
+      "Image": "sha256:25e40c61e6a734c2b19daaeb5c3eb7230f424a917992f3f33e100a2e309484c2",
+      "Created": "2026-10-28T16:42:38.181249525Z",
+      "State": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 255,
+        "Error": "",
+        "StartedAt": "2026-10-28T16:42:42.750443414Z",
+        "FinishedAt": "2026-10-29T15:34:06.3545671Z"
+      },
+      "RestartCount": 0,
+      "Mounts": [
+        {
+          "Type": "bind",
+          "Source": "C:/Users/Jonas/.codex/.chatgpt-projects/g-p-6ab6b4c1c6888191a96d3242fab912b4/operations/runtime/tablet/access-policy.json",
+          "Destination": "/run/secrets/tablet_access_policy",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        }
+      ]
+    },
+    {
+      "Id": "3bacac07fcf1c64bb2c4db972d894bdb5cd38db1f37466a4f25a33490dd50f24",
+      "Name": "/ibe160-tablet-prep-private-api-1",
+      "Image": "sha256:26ee88cb518aefb2b2733b6f96fec909c061fe58becd42981ebaf251e134ac12",
+      "Created": "2026-10-28T16:41:59.258056588Z",
+      "State": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 255,
+        "Error": "",
+        "StartedAt": "2026-10-28T16:42:07.677236515Z",
+        "FinishedAt": "2026-10-29T15:34:06.3543362Z",
+        "Health": {
+          "Status": "starting",
+          "FailingStreak": 0,
+          "Log": []
+        }
+      },
+      "RestartCount": 0,
+      "Mounts": [
+        {
+          "Type": "bind",
+          "Source": "C:/Users/Jonas/.codex/.chatgpt-projects/g-p-6ab6b4c1c6888191a96d3242fab912b4/operations/runtime/tablet/postgres-password",
+          "Destination": "/run/secrets/tablet_postgres_password",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        }
+      ]
+    },
+    {
+      "Id": "32e9e1a2a3fa8dd2986f2b174c4d4c42405545d9ad0887f7aeb6e93a05e50522",
+      "Name": "/ibe160-tablet-prep-private-db-1",
+      "Image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "Created": "2026-10-28T16:41:57.066184148Z",
+      "State": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 0,
+        "Error": "",
+        "StartedAt": "2026-10-29T17:43:51.117463827Z",
+        "FinishedAt": "2026-10-29T17:43:53.569827639Z",
+        "Health": {
+          "Status": "unhealthy",
+          "FailingStreak": 0,
+          "Log": []
+        }
+      },
+      "RestartCount": 0,
+      "Mounts": [
+        {
+          "Type": "bind",
+          "Source": "/run/desktop/mnt/host/c/Users/Jonas/.codex/.chatgpt-projects/g-p-6ab6b4c1c6888191a96d3242fab912b4/operations/releases/a48f2132fd0059b21b9581bf27d337cb1561d55b/deploy/tablet/init-private-role.sql",
+          "Destination": "/docker-entrypoint-initdb.d/010-private-role.sql",
+          "Mode": "ro",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "C:/Users/Jonas/.codex/.chatgpt-projects/g-p-6ab6b4c1c6888191a96d3242fab912b4/operations/runtime/tablet/bootstrap-password",
+          "Destination": "/run/secrets/tablet_bootstrap_password",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "C:/Users/Jonas/.codex/.chatgpt-projects/g-p-6ab6b4c1c6888191a96d3242fab912b4/operations/runtime/tablet/postgres-password",
+          "Destination": "/run/secrets/tablet_postgres_password",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "volume",
+          "Name": "ibe160-tablet-prep_tablet_pg",
+          "Source": "/var/lib/docker/volumes/ibe160-tablet-prep_tablet_pg/_data",
+          "Destination": "/var/lib/postgresql/data",
+          "Driver": "local",
+          "Mode": "rw",
+          "RW": true,
+          "Propagation": ""
+        }
+      ]
+    },
+    {
+      "Id": "6a6df1656f03bc9180c7e7468d20bd5cc2c703a05d80304c897c6358a0ce108f",
+      "Name": "/ibe160-story124-tests-api-1",
+      "Image": "sha256:af878d335c49f418427cf4d6a48bea57967f115a27c9aaaeba570bff1c445a49",
+      "Created": "2026-10-28T06:04:30.42864591Z",
+      "State": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 255,
+        "Error": "",
+        "StartedAt": "2026-10-28T06:08:40.932099569Z",
+        "FinishedAt": "2026-10-29T15:34:06.3546764Z",
+        "Health": {
+          "Status": "starting",
+          "FailingStreak": 0,
+          "Log": [
+            {
+              "Start": "2026-10-28T06:08:27.389280397Z",
+              "End": "2026-10-28T06:08:27.589911989Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-28T06:08:29.590878394Z",
+              "End": "2026-10-28T06:08:29.807734548Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-28T06:08:31.811192401Z",
+              "End": "2026-10-28T06:08:31.994647875Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-28T06:08:33.995225148Z",
+              "End": "2026-10-28T06:08:34.190349634Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-28T06:08:36.191368497Z",
+              "End": "2026-10-28T06:08:39.249663155Z",
+              "ExitCode": -1,
+              "Output": "Health check exceeded timeout (3s)"
+            }
+          ]
+        }
+      },
+      "RestartCount": 0,
+      "Mounts": [
+        {
+          "Type": "bind",
+          "Source": "D:\\IBE160\\tmp\\story-12-4\\Eksempelfiler",
+          "Destination": "/fixtures",
+          "Mode": "ro",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "D:\\IBE160\\tmp\\story-12-4\\.private-runtime\\story124-postgres-password",
+          "Destination": "/run/secrets/story124_password",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "D:\\IBE160\\tmp\\story-12-4\\backend",
+          "Destination": "/app",
+          "Mode": "ro",
+          "RW": false,
+          "Propagation": "rprivate"
+        }
+      ]
+    },
+    {
+      "Id": "289c5d9b71d7e27bdea4da376798120978ee8832e5dc001202fe9848e9882a1a",
+      "Name": "/ibe160-story124-tests-private-api-1",
+      "Image": "sha256:5bed236d59ef8338318d3148118630c5c31111e1005587e94205a933854adc2a",
+      "Created": "2026-10-28T06:04:30.426397877Z",
+      "State": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 255,
+        "Error": "",
+        "StartedAt": "2026-10-28T15:06:10.044949604Z",
+        "FinishedAt": "2026-10-29T15:34:06.3546954Z",
+        "Health": {
+          "Status": "starting",
+          "FailingStreak": 0,
+          "Log": [
+            {
+              "Start": "2026-10-28T15:05:58.454079768Z",
+              "End": "2026-10-28T15:05:59.281092295Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-28T15:06:01.281822023Z",
+              "End": "2026-10-28T15:06:01.658672254Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-28T15:06:03.659177392Z",
+              "End": "2026-10-28T15:06:04.017890433Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-28T15:06:06.019047931Z",
+              "End": "2026-10-28T15:06:06.467438282Z",
+              "ExitCode": 1,
+              "Output": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\n    import urllib.request; urllib.request.urlopen('http://localhost:8000/health')\n                           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.13/urllib/request.py\", line 189, in urlopen\n    return opener.open(url, data, timeout)\n           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.13/urllib/request.py\", line 495, in open\n    response = meth(req, response)\n  File \"/usr/local/lib/python3.13/urllib/request.py\", line 604, in http_response\n    response = self.parent.error(\n        'http', request, response, code, msg, hdrs)\n  File \"/usr/local/lib/python3.13/urllib/request.py\", line 533, in error\n    return self._call_chain(*args)\n           ~~~~~~~~~~~~~~~~^^^^^^^\n  File \"/usr/local/lib/python3.13/urllib/request.py\", line 466, in _call_chain\n    result = func(*args)\n  File \"/usr/local/lib/python3.13/urllib/request.py\", line 613, in http_error_default\n    raise HTTPError(req.full_url, code, msg, hdrs, fp)\nurllib.error.HTTPError: HTTP Error 503: Service Unavailable\n"
+            },
+            {
+              "Start": "2026-10-28T15:06:08.468171548Z",
+              "End": "2026-10-28T15:06:08.772541001Z",
+              "ExitCode": 0,
+              "Output": ""
+            }
+          ]
+        }
+      },
+      "RestartCount": 0,
+      "Mounts": [
+        {
+          "Type": "bind",
+          "Source": "D:\\IBE160\\tmp\\story-12-4\\backend",
+          "Destination": "/app",
+          "Mode": "ro",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "D:\\IBE160\\tmp\\story-12-4\\Eksempelfiler",
+          "Destination": "/fixtures",
+          "Mode": "ro",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "D:\\IBE160\\tmp\\story-12-4\\.private-runtime\\story124-postgres-password",
+          "Destination": "/run/secrets/story124_password",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        }
+      ]
+    },
+    {
+      "Id": "c22c9bdb4adf01f33db2383190eccb0b7a42a50d0513953cd99695cac666f49d",
+      "Name": "/ibe160-story124-tests-db-1",
+      "Image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "Created": "2026-10-28T06:04:30.264228489Z",
+      "State": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 255,
+        "Error": "",
+        "StartedAt": "2026-10-28T06:08:36.515321701Z",
+        "FinishedAt": "2026-10-29T15:34:06.3657261Z",
+        "Health": {
+          "Status": "starting",
+          "FailingStreak": 0,
+          "Log": [
+            {
+              "Start": "2026-10-28T06:08:26.867971897Z",
+              "End": "2026-10-28T06:08:26.913835115Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-28T06:08:28.914882825Z",
+              "End": "2026-10-28T06:08:28.964018838Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-28T06:08:30.965392067Z",
+              "End": "2026-10-28T06:08:31.016473595Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-28T06:08:33.017215779Z",
+              "End": "2026-10-28T06:08:33.064716451Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-28T06:08:35.06635255Z",
+              "End": "2026-10-28T06:08:35.114379953Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            }
+          ]
+        }
+      },
+      "RestartCount": 0,
+      "Mounts": [
+        {
+          "Type": "bind",
+          "Source": "D:\\IBE160\\tmp\\story-12-4\\.private-runtime\\story124-postgres-password",
+          "Destination": "/run/secrets/story124_password",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "volume",
+          "Name": "ibe160-story124-tests_story124_fictional",
+          "Source": "/var/lib/docker/volumes/ibe160-story124-tests_story124_fictional/_data",
+          "Destination": "/var/lib/postgresql/data",
+          "Driver": "local",
+          "Mode": "rw",
+          "RW": true,
+          "Propagation": ""
+        }
+      ]
+    },
+    {
+      "Id": "f2ee6029103f66f2298e48e3f7729c85bf4c8f64d43774146e2ac84a2382ab7c",
+      "Name": "/ibe160-story124-tests-private-db-1",
+      "Image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "Created": "2026-10-28T06:04:30.26375276Z",
+      "State": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 255,
+        "Error": "",
+        "StartedAt": "2026-10-28T15:06:06.075991019Z",
+        "FinishedAt": "2026-10-29T15:34:06.3648833Z",
+        "Health": {
+          "Status": "starting",
+          "FailingStreak": 0,
+          "Log": [
+            {
+              "Start": "2026-10-28T15:05:55.280834446Z",
+              "End": "2026-10-28T15:05:55.344831089Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-28T15:05:57.347326073Z",
+              "End": "2026-10-28T15:05:57.45004163Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-28T15:05:59.451060083Z",
+              "End": "2026-10-28T15:05:59.586945266Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-28T15:06:01.588697084Z",
+              "End": "2026-10-28T15:06:01.667685449Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-28T15:06:03.669629798Z",
+              "End": "2026-10-28T15:06:03.765897215Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            }
+          ]
+        }
+      },
+      "RestartCount": 0,
+      "Mounts": [
+        {
+          "Type": "volume",
+          "Name": "ibe160-story124-tests_story124_private",
+          "Source": "/var/lib/docker/volumes/ibe160-story124-tests_story124_private/_data",
+          "Destination": "/var/lib/postgresql/data",
+          "Driver": "local",
+          "Mode": "rw",
+          "RW": true,
+          "Propagation": ""
+        },
+        {
+          "Type": "bind",
+          "Source": "D:\\IBE160\\tmp\\story-12-4\\.private-runtime\\story124-postgres-password",
+          "Destination": "/run/secrets/story124_password",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        }
+      ]
+    },
+    {
+      "Id": "17498da3f1bb2ec36053743cd477866e0ceb07d9dc61f18615f9a00bd0882dc7",
+      "Name": "/ibe160-story123-tests-private-api-1",
+      "Image": "sha256:d0f2639088ceeca6baec601ff6226bbe66d2917d55fc0741a6839ecb6a9b2d2f",
+      "Created": "2026-10-27T18:49:03.501656702Z",
+      "State": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 255,
+        "Error": "",
+        "StartedAt": "2026-10-27T19:20:09.085304896Z",
+        "FinishedAt": "2026-10-29T15:34:06.3413299Z",
+        "Health": {
+          "Status": "starting",
+          "FailingStreak": 0,
+          "Log": [
+            {
+              "Start": "2026-10-27T19:19:57.701911681Z",
+              "End": "2026-10-27T19:19:57.8908937Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-27T19:19:59.891771138Z",
+              "End": "2026-10-27T19:20:00.069818389Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-27T19:20:02.071020367Z",
+              "End": "2026-10-27T19:20:02.226972604Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-27T19:20:04.227377348Z",
+              "End": "2026-10-27T19:20:04.423027486Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-27T19:20:06.425731975Z",
+              "End": "2026-10-27T19:20:06.560425282Z",
+              "ExitCode": 0,
+              "Output": ""
+            }
+          ]
+        }
+      },
+      "RestartCount": 0,
+      "Mounts": [
+        {
+          "Type": "bind",
+          "Source": "D:\\IBE160\\tmp\\story-12-3\\backend",
+          "Destination": "/app",
+          "Mode": "ro",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "D:\\IBE160\\tmp\\story-12-3\\Eksempelfiler",
+          "Destination": "/fixtures",
+          "Mode": "ro",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "D:\\IBE160\\tmp\\story-12-3\\.private-runtime\\story123-postgres-password",
+          "Destination": "/run/secrets/story123_password",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        }
+      ]
+    },
+    {
+      "Id": "4c74a4e74e6be044d1c4e23d77fb7c72f6111a1568697ac9875e934837a3835e",
+      "Name": "/ibe160-story123-tests-api-1",
+      "Image": "sha256:2acc520d2b766436231d5b36049e29b87810d4e4a862a993f17861b518ff79bf",
+      "Created": "2026-10-27T18:49:03.500681252Z",
+      "State": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 255,
+        "Error": "",
+        "StartedAt": "2026-10-27T19:01:23.109913656Z",
+        "FinishedAt": "2026-10-29T15:34:06.3655861Z",
+        "Health": {
+          "Status": "starting",
+          "FailingStreak": 0,
+          "Log": [
+            {
+              "Start": "2026-10-27T19:01:12.779949813Z",
+              "End": "2026-10-27T19:01:13.165358647Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-27T19:01:15.166184899Z",
+              "End": "2026-10-27T19:01:15.422343506Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-27T19:01:17.424603047Z",
+              "End": "2026-10-27T19:01:17.68181612Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-27T19:01:19.683195055Z",
+              "End": "2026-10-27T19:01:19.992641422Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-27T19:01:21.993984554Z",
+              "End": "2026-10-27T19:01:22.20331116Z",
+              "ExitCode": 0,
+              "Output": ""
+            }
+          ]
+        }
+      },
+      "RestartCount": 0,
+      "Mounts": [
+        {
+          "Type": "bind",
+          "Source": "D:\\IBE160\\tmp\\story-12-3\\backend",
+          "Destination": "/app",
+          "Mode": "ro",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "D:\\IBE160\\tmp\\story-12-3\\Eksempelfiler",
+          "Destination": "/fixtures",
+          "Mode": "ro",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "D:\\IBE160\\tmp\\story-12-3\\.private-runtime\\story123-postgres-password",
+          "Destination": "/run/secrets/story123_password",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        }
+      ]
+    },
+    {
+      "Id": "7991577f9cf5e84519bd5e6449bb5e5e62e96214d4fcd15ec4587bf4d10e58ad",
+      "Name": "/ibe160-story12-integration-api-1",
+      "Image": "sha256:18f373092c551cd23f3b706aa618162c52aa74bb7e7e18d208e9e1f7a7dc2614",
+      "Created": "2026-10-27T15:13:04.06059577Z",
+      "State": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 255,
+        "Error": "",
+        "StartedAt": "2026-10-27T15:13:57.527635969Z",
+        "FinishedAt": "2026-10-29T15:34:06.3546938Z",
+        "Health": {
+          "Status": "starting",
+          "FailingStreak": 0,
+          "Log": [
+            {
+              "Start": "2026-10-27T15:13:47.197063149Z",
+              "End": "2026-10-27T15:13:47.364198299Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-27T15:13:49.365657678Z",
+              "End": "2026-10-27T15:13:49.565681469Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-27T15:13:51.566637722Z",
+              "End": "2026-10-27T15:13:51.730671707Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-27T15:13:53.731879073Z",
+              "End": "2026-10-27T15:13:54.238634906Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-27T15:13:56.239886501Z",
+              "End": "2026-10-27T15:13:56.400567594Z",
+              "ExitCode": 0,
+              "Output": ""
+            }
+          ]
+        }
+      },
+      "RestartCount": 0,
+      "Mounts": [
+        {
+          "Type": "bind",
+          "Source": "D:\\IBE160\\Eksempelfiler",
+          "Destination": "/fixtures",
+          "Mode": "ro",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "D:\\IBE160\\.private-runtime\\story12-integration-postgres-password",
+          "Destination": "/run/secrets/integration_password",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "D:\\IBE160\\backend",
+          "Destination": "/app",
+          "Mode": "ro",
+          "RW": false,
+          "Propagation": "rprivate"
+        }
+      ]
+    },
+    {
+      "Id": "be2e42172f8f8bd5e2dd53463434d7db4e4e925d52301979d4fa21ac9b52804b",
+      "Name": "/ibe160-story12-integration-private-api-1",
+      "Image": "sha256:b42fdb7d79c608df0d0ea5582c7702665c5bf6115012d1b110dce6d3bdb090c9",
+      "Created": "2026-10-27T15:13:04.059813836Z",
+      "State": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 255,
+        "Error": "",
+        "StartedAt": "2026-10-27T15:31:55.317079835Z",
+        "FinishedAt": "2026-10-29T15:34:06.3656271Z",
+        "Health": {
+          "Status": "starting",
+          "FailingStreak": 0,
+          "Log": [
+            {
+              "Start": "2026-10-27T15:31:43.118755562Z",
+              "End": "2026-10-27T15:31:43.363369265Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-27T15:31:45.364272356Z",
+              "End": "2026-10-27T15:31:45.85605125Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-27T15:31:47.857625492Z",
+              "End": "2026-10-27T15:31:48.043804786Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-27T15:31:50.044320406Z",
+              "End": "2026-10-27T15:31:50.219563296Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-27T15:31:52.220713864Z",
+              "End": "2026-10-27T15:31:52.458639535Z",
+              "ExitCode": 0,
+              "Output": ""
+            }
+          ]
+        }
+      },
+      "RestartCount": 0,
+      "Mounts": [
+        {
+          "Type": "bind",
+          "Source": "D:\\IBE160\\backend",
+          "Destination": "/app",
+          "Mode": "ro",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "D:\\IBE160\\Eksempelfiler",
+          "Destination": "/fixtures",
+          "Mode": "ro",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "D:\\IBE160\\.private-runtime\\story12-integration-postgres-password",
+          "Destination": "/run/secrets/integration_password",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        }
+      ]
+    },
+    {
+      "Id": "1915dbfe810426e17b23c5a93e2b8de22395b98a25620c283206b252c244e1ad",
+      "Name": "/ibe160-story123-tests-db-1",
+      "Image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "Created": "2026-10-27T08:16:47.799548636Z",
+      "State": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 255,
+        "Error": "",
+        "StartedAt": "2026-10-27T19:01:19.377613638Z",
+        "FinishedAt": "2026-10-29T15:34:06.3546547Z",
+        "Health": {
+          "Status": "starting",
+          "FailingStreak": 0,
+          "Log": [
+            {
+              "Start": "2026-10-27T19:01:08.67082167Z",
+              "End": "2026-10-27T19:01:08.713104986Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-27T19:01:10.714251533Z",
+              "End": "2026-10-27T19:01:10.770910752Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-27T19:01:12.771487988Z",
+              "End": "2026-10-27T19:01:12.875650656Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-27T19:01:14.876816729Z",
+              "End": "2026-10-27T19:01:14.934172491Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-27T19:01:16.934767728Z",
+              "End": "2026-10-27T19:01:17.011739908Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            }
+          ]
+        }
+      },
+      "RestartCount": 0,
+      "Mounts": [
+        {
+          "Type": "bind",
+          "Source": "D:\\IBE160\\tmp\\story-12-3\\.private-runtime\\story123-postgres-password",
+          "Destination": "/run/secrets/story123_password",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "volume",
+          "Name": "ibe160-story123-tests_story123_fictional",
+          "Source": "/var/lib/docker/volumes/ibe160-story123-tests_story123_fictional/_data",
+          "Destination": "/var/lib/postgresql/data",
+          "Driver": "local",
+          "Mode": "rw",
+          "RW": true,
+          "Propagation": ""
+        }
+      ]
+    },
+    {
+      "Id": "667b53445fc4570e4efb6de1903df415a6259fd2c2989febe6ac4b77de299fb2",
+      "Name": "/ibe160-story123-tests-private-db-1",
+      "Image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "Created": "2026-10-27T08:16:47.798667386Z",
+      "State": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 255,
+        "Error": "",
+        "StartedAt": "2026-10-27T19:01:19.297520771Z",
+        "FinishedAt": "2026-10-29T15:34:06.3648439Z",
+        "Health": {
+          "Status": "starting",
+          "FailingStreak": 0,
+          "Log": [
+            {
+              "Start": "2026-10-27T19:01:10.306778229Z",
+              "End": "2026-10-27T19:01:10.354086767Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-27T19:01:12.354953921Z",
+              "End": "2026-10-27T19:01:12.407465382Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-27T19:01:14.408793865Z",
+              "End": "2026-10-27T19:01:14.467037082Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-27T19:01:16.467920337Z",
+              "End": "2026-10-27T19:01:16.516171233Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-27T19:01:18.516750793Z",
+              "End": "2026-10-27T19:01:18.584695277Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            }
+          ]
+        }
+      },
+      "RestartCount": 0,
+      "Mounts": [
+        {
+          "Type": "bind",
+          "Source": "D:\\IBE160\\tmp\\story-12-3\\.private-runtime\\story123-postgres-password",
+          "Destination": "/run/secrets/story123_password",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "volume",
+          "Name": "ibe160-story123-tests_story123_private",
+          "Source": "/var/lib/docker/volumes/ibe160-story123-tests_story123_private/_data",
+          "Destination": "/var/lib/postgresql/data",
+          "Driver": "local",
+          "Mode": "rw",
+          "RW": true,
+          "Propagation": ""
+        }
+      ]
+    },
+    {
+      "Id": "aeb9125406b628eaaaaf5214c6bd33e59676381528f75147dc3f97f9e6302f6b",
+      "Name": "/ibe160-story12-integration-db-1",
+      "Image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "Created": "2026-10-27T06:47:32.478983465Z",
+      "State": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 255,
+        "Error": "",
+        "StartedAt": "2026-10-27T15:13:53.291318945Z",
+        "FinishedAt": "2026-10-29T15:34:06.3657335Z",
+        "Health": {
+          "Status": "starting",
+          "FailingStreak": 0,
+          "Log": [
+            {
+              "Start": "2026-10-27T15:13:43.956850451Z",
+              "End": "2026-10-27T15:13:44.019244511Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-27T15:13:46.020049863Z",
+              "End": "2026-10-27T15:13:46.07281122Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-27T15:13:48.073722469Z",
+              "End": "2026-10-27T15:13:48.133666343Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-27T15:13:50.135110121Z",
+              "End": "2026-10-27T15:13:50.191798323Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-27T15:13:52.192449159Z",
+              "End": "2026-10-27T15:13:52.247159956Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            }
+          ]
+        }
+      },
+      "RestartCount": 0,
+      "Mounts": [
+        {
+          "Type": "bind",
+          "Source": "D:\\IBE160\\.private-runtime\\story12-integration-postgres-password",
+          "Destination": "/run/secrets/integration_password",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "volume",
+          "Name": "ibe160-story12-integration_integration_fictional",
+          "Source": "/var/lib/docker/volumes/ibe160-story12-integration_integration_fictional/_data",
+          "Destination": "/var/lib/postgresql/data",
+          "Driver": "local",
+          "Mode": "rw",
+          "RW": true,
+          "Propagation": ""
+        }
+      ]
+    },
+    {
+      "Id": "e57a1b8fd2f53e1b81eadaab8f1346304f32dba6911ed083dbd485aeecd40435",
+      "Name": "/ibe160-story12-integration-private-db-1",
+      "Image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "Created": "2026-10-27T06:47:32.478543237Z",
+      "State": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 255,
+        "Error": "",
+        "StartedAt": "2026-10-27T15:13:53.43911017Z",
+        "FinishedAt": "2026-10-29T15:34:06.3546121Z",
+        "Health": {
+          "Status": "starting",
+          "FailingStreak": 0,
+          "Log": [
+            {
+              "Start": "2026-10-27T15:13:43.969682622Z",
+              "End": "2026-10-27T15:13:44.029538749Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-27T15:13:46.030667818Z",
+              "End": "2026-10-27T15:13:46.08486845Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-27T15:13:48.086558049Z",
+              "End": "2026-10-27T15:13:48.145460068Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-27T15:13:50.14642112Z",
+              "End": "2026-10-27T15:13:50.209854679Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-27T15:13:52.211752781Z",
+              "End": "2026-10-27T15:13:52.266428076Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            }
+          ]
+        }
+      },
+      "RestartCount": 0,
+      "Mounts": [
+        {
+          "Type": "bind",
+          "Source": "D:\\IBE160\\.private-runtime\\story12-integration-postgres-password",
+          "Destination": "/run/secrets/integration_password",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "volume",
+          "Name": "ibe160-story12-integration_integration_private",
+          "Source": "/var/lib/docker/volumes/ibe160-story12-integration_integration_private/_data",
+          "Destination": "/var/lib/postgresql/data",
+          "Driver": "local",
+          "Mode": "rw",
+          "RW": true,
+          "Propagation": ""
+        }
+      ]
+    },
+    {
+      "Id": "fd52df01d71b09aab91030bd9922904d8a9dfb651ae4e4c8401089280b566955",
+      "Name": "/ibe160-story122-tests-private-api-1",
+      "Image": "sha256:72774cad61a241605b3487def5d8cef084a6a48be0ad24e2554df1b8e5a24561",
+      "Created": "2026-10-26T21:50:56.874363309Z",
+      "State": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 255,
+        "Error": "",
+        "StartedAt": "2026-10-26T21:51:00.368172346Z",
+        "FinishedAt": "2026-10-29T15:34:06.3546771Z"
+      },
+      "RestartCount": 0,
+      "Mounts": [
+        {
+          "Type": "bind",
+          "Source": "C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\story-12-2\\.private-runtime\\story122-postgres-password",
+          "Destination": "/run/secrets/story122_password",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        }
+      ]
+    },
+    {
+      "Id": "1c7f8857a08a0a61a2439c5642bc5b35beedaa55d1fb6abf78c5084a16ec4564",
+      "Name": "/ibe160-story122-tests-api-1",
+      "Image": "sha256:06d7ce3538eba6d9c7d4f2caee7246654496079f8b34f17d1365eba7686fb9a8",
+      "Created": "2026-10-26T21:50:56.868067146Z",
+      "State": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 255,
+        "Error": "",
+        "StartedAt": "2026-10-26T21:51:11.075323136Z",
+        "FinishedAt": "2026-10-29T15:34:06.3655747Z"
+      },
+      "RestartCount": 0,
+      "Mounts": []
+    },
+    {
+      "Id": "56cc2b541bd914aaf07e3dc6f30942d78479353eefb7bac25d653ae78947f3a8",
+      "Name": "/ibe160-story122-tests-private-db-1",
+      "Image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "Created": "2026-10-26T21:50:56.667622401Z",
+      "State": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 255,
+        "Error": "",
+        "StartedAt": "2026-10-26T21:50:57.522035414Z",
+        "FinishedAt": "2026-10-29T15:34:06.3656464Z",
+        "Health": {
+          "Status": "starting",
+          "FailingStreak": 0,
+          "Log": []
+        }
+      },
+      "RestartCount": 0,
+      "Mounts": [
+        {
+          "Type": "bind",
+          "Source": "C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\story-12-2\\.private-runtime\\story122-postgres-password",
+          "Destination": "/run/secrets/story122_password",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "volume",
+          "Name": "ibe160-story122-tests_story122_private",
+          "Source": "/var/lib/docker/volumes/ibe160-story122-tests_story122_private/_data",
+          "Destination": "/var/lib/postgresql/data",
+          "Driver": "local",
+          "Mode": "rw",
+          "RW": true,
+          "Propagation": ""
+        }
+      ]
+    },
+    {
+      "Id": "5766c65fa74e96f683ef7cfa2b7307ab4a94f0ef9644dbf63a5cb89d2456ddce",
+      "Name": "/ibe160-story122-tests-db-1",
+      "Image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "Created": "2026-10-26T21:50:56.665302467Z",
+      "State": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 255,
+        "Error": "",
+        "StartedAt": "2026-10-26T21:51:10.66207864Z",
+        "FinishedAt": "2026-10-29T15:34:06.3414064Z",
+        "Health": {
+          "Status": "starting",
+          "FailingStreak": 0,
+          "Log": [
+            {
+              "Start": "2026-10-26T21:51:01.474329158Z",
+              "End": "2026-10-26T21:51:01.562666547Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-26T21:51:03.56172483Z",
+              "End": "2026-10-26T21:51:03.613234438Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-26T21:51:05.614676327Z",
+              "End": "2026-10-26T21:51:05.676325049Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-26T21:51:07.677153413Z",
+              "End": "2026-10-26T21:51:07.751446952Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-26T21:51:09.752665832Z",
+              "End": "2026-10-26T21:51:09.809838571Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            }
+          ]
+        }
+      },
+      "RestartCount": 0,
+      "Mounts": [
+        {
+          "Type": "volume",
+          "Name": "ibe160-story122-tests_story122_fictional",
+          "Source": "/var/lib/docker/volumes/ibe160-story122-tests_story122_fictional/_data",
+          "Destination": "/var/lib/postgresql/data",
+          "Driver": "local",
+          "Mode": "rw",
+          "RW": true,
+          "Propagation": ""
+        }
+      ]
+    },
+    {
+      "Id": "cd1db9210623013a6795d2c793b150212fe769785efc186f0a219f4c85447054",
+      "Name": "/ibe160-story121-tests-private-api-1",
+      "Image": "sha256:efb271265fc913ab3d0786373e73fefc8008afc791c11d06bfe9b705c84a01c0",
+      "Created": "2026-10-26T21:42:16.117557358Z",
+      "State": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 255,
+        "Error": "",
+        "StartedAt": "2026-10-26T23:08:28.21447389Z",
+        "FinishedAt": "2026-10-29T15:34:06.3678556Z",
+        "Health": {
+          "Status": "starting",
+          "FailingStreak": 0,
+          "Log": [
+            {
+              "Start": "2026-10-26T23:08:17.220168392Z",
+              "End": "2026-10-26T23:08:17.370744486Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-26T23:08:19.372449795Z",
+              "End": "2026-10-26T23:08:19.525185716Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-26T23:08:21.525993476Z",
+              "End": "2026-10-26T23:08:21.700047146Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-26T23:08:23.70145449Z",
+              "End": "2026-10-26T23:08:23.886351094Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-26T23:08:25.887475222Z",
+              "End": "2026-10-26T23:08:26.028698173Z",
+              "ExitCode": 0,
+              "Output": ""
+            }
+          ]
+        }
+      },
+      "RestartCount": 0,
+      "Mounts": [
+        {
+          "Type": "bind",
+          "Source": "D:\\IBE160-story-12-1\\.private-runtime\\story121-postgres-password",
+          "Destination": "/run/secrets/private_postgres_password",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "D:\\IBE160-story-12-1\\backend",
+          "Destination": "/app",
+          "Mode": "ro",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "D:\\IBE160-story-12-1\\Eksempelfiler",
+          "Destination": "/fixtures",
+          "Mode": "ro",
+          "RW": false,
+          "Propagation": "rprivate"
+        }
+      ]
+    },
+    {
+      "Id": "e020bd052af4452ace6c76077c090cd768d76356064e5c12b30e2a0c9c8c34ba",
+      "Name": "/ibe160-story121-tests-private-db-1",
+      "Image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "Created": "2026-10-26T21:42:15.978459341Z",
+      "State": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 255,
+        "Error": "",
+        "StartedAt": "2026-10-26T21:42:16.389701314Z",
+        "FinishedAt": "2026-10-29T15:34:06.3647874Z",
+        "Health": {
+          "Status": "starting",
+          "FailingStreak": 0,
+          "Log": []
+        }
+      },
+      "RestartCount": 0,
+      "Mounts": [
+        {
+          "Type": "bind",
+          "Source": "D:\\IBE160-story-12-1\\.private-runtime\\story121-postgres-password",
+          "Destination": "/run/secrets/private_postgres_password",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "volume",
+          "Name": "ibe160-story121-tests_story121_pg",
+          "Source": "/var/lib/docker/volumes/ibe160-story121-tests_story121_pg/_data",
+          "Destination": "/var/lib/postgresql/data",
+          "Driver": "local",
+          "Mode": "rw",
+          "RW": true,
+          "Propagation": ""
+        }
+      ]
+    },
+    {
+      "Id": "9bb6363dc3816c5c5c27889b2a0f3b9db0172f7e8e668029a61cb45a8ffe906d",
+      "Name": "/ibe160-private-work-private-api-1",
+      "Image": "sha256:5dff578b747ebf2d16a6335ddc0b432e993b401cf46be1d27a2e6bd7f0898861",
+      "Created": "2026-10-26T16:35:35.631934125Z",
+      "State": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 255,
+        "Error": "",
+        "StartedAt": "2026-10-27T21:47:16.146081756Z",
+        "FinishedAt": "2026-10-29T15:34:06.3656749Z",
+        "Health": {
+          "Status": "starting",
+          "FailingStreak": 0,
+          "Log": [
+            {
+              "Start": "2026-10-27T21:45:56.846982028Z",
+              "End": "2026-10-27T21:45:56.961100573Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-27T21:46:01.962544344Z",
+              "End": "2026-10-27T21:46:02.095664046Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-27T21:46:07.096214589Z",
+              "End": "2026-10-27T21:46:07.227677084Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-27T21:46:12.226832781Z",
+              "End": "2026-10-27T21:46:12.35398376Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-27T21:46:17.355453349Z",
+              "End": "2026-10-27T21:46:17.542161467Z",
+              "ExitCode": 1,
+              "Output": "Traceback (most recent call last):\n  File \"/usr/local/lib/python3.13/urllib/request.py\", line 1331, in do_open\n    h.request(req.get_method(), req.selector, req.data, headers,\n    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n              encode_chunked=req.has_header('Transfer-encoding'))\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.13/http/client.py\", line 1386, in request\n    self._send_request(method, url, body, headers, encode_chunked)\n    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.13/http/client.py\", line 1432, in _send_request\n    self.endheaders(body, encode_chunked=encode_chunked)\n    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.13/http/client.py\", line 1381, in endheaders\n    self._send_output(message_body, encode_chunked=encode_chunked)\n    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.13/http/client.py\", line 1141, in _send_output\n    self.send(msg)\n    ~~~~~~~~~^^^^^\n  File \"/usr/local/lib/python3.13/http/client.py\", line 1085, in send\n    self.connect()\n    ~~~~~~~~~~~~^^\n  File \"/usr/local/lib/python3.13/http/client.py\", line 1051, in connect\n    self.sock = self._create_connection(\n                ~~~~~~~~~~~~~~~~~~~~~~~^\n        (self.host,self.port), self.timeout, self.source_address)\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.13/socket.py\", line 868, in create_connection\n    raise exceptions[0]\n  File \"/usr/local/lib/python3.13/socket.py\", line 853, in create_connection\n    sock.connect(sa)\n    ~~~~~~~~~~~~^^^^\nConnectionRefusedError: [Errno 111] Connection refused\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"<string>\", line 1, in <module>\n    import urllib.request; urllib.request.urlopen('http://localhost:8000/health')\n                           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.13/urllib/request.py\", line 189, in urlopen\n    return opener.open(url, data, timeout)\n           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.13/urllib/request.py\", line 489, in open\n    response = self._open(req, data)\n  File \"/usr/local/lib/python3.13/urllib/request.py\", line 506, in _open\n    result = self._call_chain(self.handle_open, protocol, protocol +\n                              '_open', req)\n  File \"/usr/local/lib/python3.13/urllib/request.py\", line 466, in _call_chain\n    result = func(*args)\n  File \"/usr/local/lib/python3.13/urllib/request.py\", line 1360, in http_open\n    return self.do_open(http.client.HTTPConnection, req)\n           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.13/urllib/request.py\", line 1334, in do_open\n    raise URLError(err)\nurllib.error.URLError: <urlopen error [Errno 111] Connection refused>\n"
+            }
+          ]
+        }
+      },
+      "RestartCount": 0,
+      "Mounts": [
+        {
+          "Type": "bind",
+          "Source": "D:\\IBE160\\.private-runtime\\postgres-password",
+          "Destination": "/run/secrets/private_postgres_password",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        }
+      ]
+    },
+    {
+      "Id": "79693d20ba694917486416a0d0a0883572842f37d8cd7b937060fc138caef511",
+      "Name": "/ibe160-fictional-assessment-frontend-1",
+      "Image": "sha256:90ef8ce693acea80756dc614e10708f284736430afba3bfba5525b87cc56ac55",
+      "Created": "2026-10-26T15:55:56.023490932Z",
+      "State": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 255,
+        "Error": "",
+        "StartedAt": "2026-10-26T15:55:57.643134471Z",
+        "FinishedAt": "2026-10-29T15:34:06.3656638Z",
+        "Health": {
+          "Status": "starting",
+          "FailingStreak": 0,
+          "Log": []
+        }
+      },
+      "RestartCount": 0,
+      "Mounts": []
+    },
+    {
+      "Id": "b6a16b87207c2857c84d878b8615d174d81d0f407586681ad8701b2955ed6c53",
+      "Name": "/ibe160-fictional-assessment-api-1",
+      "Image": "sha256:43c9740447cdcb24855f8addb0eb0a8fe5897726fc524b732a755c78064adff4",
+      "Created": "2026-10-26T15:44:22.770032711Z",
+      "State": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 255,
+        "Error": "",
+        "StartedAt": "2026-10-26T15:44:25.147799589Z",
+        "FinishedAt": "2026-10-29T15:34:06.365425Z",
+        "Health": {
+          "Status": "starting",
+          "FailingStreak": 0,
+          "Log": []
+        }
+      },
+      "RestartCount": 0,
+      "Mounts": []
+    },
+    {
+      "Id": "75fe9c9792700c4244abbcbffed33cdf38559c783166978e4d633b03a5bb7d48",
+      "Name": "/ibe160-private-tests-private-api-1",
+      "Image": "sha256:d9cb0de47c0aebbd648e253672759449ce1d8a3fd1816d8a2caf43c9ef7452d0",
+      "Created": "2026-10-26T15:43:49.617643488Z",
+      "State": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 0,
+        "Error": "",
+        "StartedAt": "2026-10-26T18:31:55.319748138Z",
+        "FinishedAt": "2026-10-26T18:32:07.961170636Z",
+        "Health": {
+          "Status": "unhealthy",
+          "FailingStreak": 0,
+          "Log": [
+            {
+              "Start": "2026-10-26T16:34:43.091071652Z",
+              "End": "2026-10-26T16:34:43.236666444Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-26T16:34:48.237939853Z",
+              "End": "2026-10-26T16:34:48.359557727Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-26T16:34:53.360647739Z",
+              "End": "2026-10-26T16:34:53.50537595Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-26T18:32:00.495988857Z",
+              "End": "2026-10-26T18:32:00.662617883Z",
+              "ExitCode": 0,
+              "Output": ""
+            },
+            {
+              "Start": "2026-10-26T18:32:05.662623471Z",
+              "End": "2026-10-26T18:32:05.791999204Z",
+              "ExitCode": 0,
+              "Output": ""
+            }
+          ]
+        }
+      },
+      "RestartCount": 0,
+      "Mounts": [
+        {
+          "Type": "bind",
+          "Source": "D:\\IBE160\\.private-runtime\\postgres-password",
+          "Destination": "/run/secrets/private_postgres_password",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        }
+      ]
+    },
+    {
+      "Id": "59df9d68fda8addba018e1f384ea05f7e0bf196093ca9b7455dc6b275bc79502",
+      "Name": "/ibe160-private-tests-private-db-1",
+      "Image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "Created": "2026-10-20T19:42:24.210312597Z",
+      "State": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 0,
+        "Error": "",
+        "StartedAt": "2026-10-26T18:31:51.564617351Z",
+        "FinishedAt": "2026-10-26T18:32:08.384264158Z",
+        "Health": {
+          "Status": "unhealthy",
+          "FailingStreak": 0,
+          "Log": [
+            {
+              "Start": "2026-10-26T18:31:54.741058278Z",
+              "End": "2026-10-26T18:31:54.808999505Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-26T18:31:57.810845241Z",
+              "End": "2026-10-26T18:31:57.858768068Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-26T18:32:00.859444016Z",
+              "End": "2026-10-26T18:32:00.904996593Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-26T18:32:03.904803957Z",
+              "End": "2026-10-26T18:32:03.955385552Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-26T18:32:06.957010938Z",
+              "End": "2026-10-26T18:32:07.003468794Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            }
+          ]
+        }
+      },
+      "RestartCount": 0,
+      "Mounts": [
+        {
+          "Type": "bind",
+          "Source": "D:\\IBE160\\.private-runtime\\postgres-password",
+          "Destination": "/run/secrets/private_postgres_password",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "volume",
+          "Name": "ibe160-private-tests_private_pg",
+          "Source": "/var/lib/docker/volumes/ibe160-private-tests_private_pg/_data",
+          "Destination": "/var/lib/postgresql/data",
+          "Driver": "local",
+          "Mode": "rw",
+          "RW": true,
+          "Propagation": ""
+        }
+      ]
+    },
+    {
+      "Id": "677f99f9f8411bcb4dc75201640d1c9ac299adb0afb77c7516242a63957967ca",
+      "Name": "/ibe160-private-work-private-db-1",
+      "Image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "Created": "2026-10-20T18:27:01.206740835Z",
+      "State": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 255,
+        "Error": "",
+        "StartedAt": "2026-10-20T18:47:00.530707318Z",
+        "FinishedAt": "2026-10-29T15:34:06.3541342Z",
+        "Health": {
+          "Status": "starting",
+          "FailingStreak": 0,
+          "Log": [
+            {
+              "Start": "2026-10-20T18:46:47.119195799Z",
+              "End": "2026-10-20T18:46:47.181490769Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-20T18:46:50.182707745Z",
+              "End": "2026-10-20T18:46:50.226426461Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-20T18:46:53.227796138Z",
+              "End": "2026-10-20T18:46:53.270318077Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-20T18:46:56.271373547Z",
+              "End": "2026-10-20T18:46:56.317118494Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-20T18:46:59.31846993Z",
+              "End": "2026-10-20T18:46:59.371314834Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            }
+          ]
+        }
+      },
+      "RestartCount": 0,
+      "Mounts": [
+        {
+          "Type": "bind",
+          "Source": "D:\\IBE160\\.private-runtime\\postgres-password",
+          "Destination": "/run/secrets/private_postgres_password",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "volume",
+          "Name": "ibe160-private-work_private_pg",
+          "Source": "/var/lib/docker/volumes/ibe160-private-work_private_pg/_data",
+          "Destination": "/var/lib/postgresql/data",
+          "Driver": "local",
+          "Mode": "rw",
+          "RW": true,
+          "Propagation": ""
+        }
+      ]
+    },
+    {
+      "Id": "c98b143f76524078b1675d811e6112347faf044c6580ab264b55577bfa0a5f5d",
+      "Name": "/ibe160-fictional-assessment-db-1",
+      "Image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "Created": "2026-10-19T18:09:10.999736111Z",
+      "State": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 255,
+        "Error": "",
+        "StartedAt": "2026-10-19T18:20:21.013996422Z",
+        "FinishedAt": "2026-10-29T15:34:06.3540909Z",
+        "Health": {
+          "Status": "starting",
+          "FailingStreak": 0,
+          "Log": [
+            {
+              "Start": "2026-10-19T18:20:01.327634411Z",
+              "End": "2026-10-19T18:20:01.37263865Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-19T18:20:04.373859408Z",
+              "End": "2026-10-19T18:20:04.418971955Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-19T18:20:07.420000935Z",
+              "End": "2026-10-19T18:20:07.467122Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-19T18:20:10.467680452Z",
+              "End": "2026-10-19T18:20:10.515084333Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-19T18:20:14.357725716Z",
+              "End": "2026-10-19T18:20:14.40349977Z",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            }
+          ]
+        }
+      },
+      "RestartCount": 0,
+      "Mounts": [
+        {
+          "Type": "volume",
+          "Name": "ibe160-fictional-assessment_fictional_pg",
+          "Source": "/var/lib/docker/volumes/ibe160-fictional-assessment_fictional_pg/_data",
+          "Destination": "/var/lib/postgresql/data",
+          "Driver": "local",
+          "Mode": "rw",
+          "RW": true,
+          "Propagation": ""
+        }
+      ]
+    },
+    {
+      "Id": "a3a48e6d8d014c6ee3ea49e639a117fb0160844812e399c9c5fb52d82d473cfc",
+      "Name": "/friendly_shockley",
+      "Image": "sha256:5dd0d3e6e255913fc30f90b9f2b1d359cc2cbdb48090cc4b65f1676e203243cc",
+      "Created": "2026-09-07T21:16:35.488269534Z",
+      "State": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 0,
+        "Error": "",
+        "StartedAt": "2026-09-07T21:16:35.61848643Z",
+        "FinishedAt": "2026-09-07T21:16:35.759171635Z"
+      },
+      "RestartCount": 0,
+      "Mounts": []
+    }
+  ],
+  "volumes": [
+    {
+      "CreatedAt": "2026-10-28T16:38:41Z",
+      "Driver": "local",
+      "Labels": {
+        "com.docker.compose.config-hash": "413873032ffaf0520133b92680454f5f9b10aed3a75696cf93884160de8873eb",
+        "com.docker.compose.project": "ibe160-deploy-check",
+        "com.docker.compose.version": "5.5.1",
+        "com.docker.compose.volume": "check_pg"
+      },
+      "Mountpoint": "/var/lib/docker/volumes/ibe160-deploy-check_check_pg/_data",
+      "Name": "ibe160-deploy-check_check_pg",
+      "Options": null,
+      "Scope": "local"
+    },
+    {
+      "CreatedAt": "2026-10-19T18:06:41Z",
+      "Driver": "local",
+      "Labels": {
+        "com.docker.compose.config-hash": "d8bff69f3e9a9fcd4ada8358f3caa613d3420e3caa966a290c9d6d227b181a94",
+        "com.docker.compose.project": "ibe160-fictional-assessment",
+        "com.docker.compose.version": "5.5.1",
+        "com.docker.compose.volume": "fictional_pg"
+      },
+      "Mountpoint": "/var/lib/docker/volumes/ibe160-fictional-assessment_fictional_pg/_data",
+      "Name": "ibe160-fictional-assessment_fictional_pg",
+      "Options": null,
+      "Scope": "local"
+    },
+    {
+      "CreatedAt": "2026-10-20T19:42:24Z",
+      "Driver": "local",
+      "Labels": {
+        "com.docker.compose.config-hash": "4395994af3b181f51870bfd196c8da4d6b00d37684a5896c340c8a3181c87b3a",
+        "com.docker.compose.project": "ibe160-private-tests",
+        "com.docker.compose.version": "5.5.1",
+        "com.docker.compose.volume": "private_pg"
+      },
+      "Mountpoint": "/var/lib/docker/volumes/ibe160-private-tests_private_pg/_data",
+      "Name": "ibe160-private-tests_private_pg",
+      "Options": null,
+      "Scope": "local"
+    },
+    {
+      "CreatedAt": "2026-10-20T18:21:20Z",
+      "Driver": "local",
+      "Labels": {
+        "com.docker.compose.config-hash": "6b70cd57fd69483af9fe2087ccda14ee173023627f5d3db241a2c50f1f3a3801",
+        "com.docker.compose.project": "ibe160-private-work",
+        "com.docker.compose.version": "5.5.1",
+        "com.docker.compose.volume": "private_pg"
+      },
+      "Mountpoint": "/var/lib/docker/volumes/ibe160-private-work_private_pg/_data",
+      "Name": "ibe160-private-work_private_pg",
+      "Options": null,
+      "Scope": "local"
+    },
+    {
+      "CreatedAt": "2026-10-27T06:47:32Z",
+      "Driver": "local",
+      "Labels": {
+        "com.docker.compose.config-hash": "be1c524760b7226535cacf4341a75a567aa5949b15f7cd520d50b36a73092948",
+        "com.docker.compose.project": "ibe160-story12-integration",
+        "com.docker.compose.version": "5.5.1",
+        "com.docker.compose.volume": "integration_fictional"
+      },
+      "Mountpoint": "/var/lib/docker/volumes/ibe160-story12-integration_integration_fictional/_data",
+      "Name": "ibe160-story12-integration_integration_fictional",
+      "Options": null,
+      "Scope": "local"
+    },
+    {
+      "CreatedAt": "2026-10-27T06:47:32Z",
+      "Driver": "local",
+      "Labels": {
+        "com.docker.compose.config-hash": "8bb43b0932a1861649f6fd153da72e6af09555d6eb564ed456eb7d5396ddfd20",
+        "com.docker.compose.project": "ibe160-story12-integration",
+        "com.docker.compose.version": "5.5.1",
+        "com.docker.compose.volume": "integration_private"
+      },
+      "Mountpoint": "/var/lib/docker/volumes/ibe160-story12-integration_integration_private/_data",
+      "Name": "ibe160-story12-integration_integration_private",
+      "Options": null,
+      "Scope": "local"
+    },
+    {
+      "CreatedAt": "2026-10-26T21:42:15Z",
+      "Driver": "local",
+      "Labels": {
+        "com.docker.compose.config-hash": "13b10cc596fca9e4336276359f3753afb734ed21bc61ddc9bf847cf4a2c92bad",
+        "com.docker.compose.project": "ibe160-story121-tests",
+        "com.docker.compose.version": "5.5.1",
+        "com.docker.compose.volume": "story121_pg"
+      },
+      "Mountpoint": "/var/lib/docker/volumes/ibe160-story121-tests_story121_pg/_data",
+      "Name": "ibe160-story121-tests_story121_pg",
+      "Options": null,
+      "Scope": "local"
+    },
+    {
+      "CreatedAt": "2026-10-26T21:50:56Z",
+      "Driver": "local",
+      "Labels": {
+        "com.docker.compose.config-hash": "b370e1b77ba5610e63fc1c7fdba290d8b7789f97bd4fce80ffabb2a7fd4ba537",
+        "com.docker.compose.project": "ibe160-story122-tests",
+        "com.docker.compose.version": "5.5.1",
+        "com.docker.compose.volume": "story122_fictional"
+      },
+      "Mountpoint": "/var/lib/docker/volumes/ibe160-story122-tests_story122_fictional/_data",
+      "Name": "ibe160-story122-tests_story122_fictional",
+      "Options": null,
+      "Scope": "local"
+    },
+    {
+      "CreatedAt": "2026-10-26T21:50:56Z",
+      "Driver": "local",
+      "Labels": {
+        "com.docker.compose.config-hash": "ae4c78d8383e8a3ede42ff01d5c6cdfbc7cdf4a63ef4bd4853400abb35485392",
+        "com.docker.compose.project": "ibe160-story122-tests",
+        "com.docker.compose.version": "5.5.1",
+        "com.docker.compose.volume": "story122_private"
+      },
+      "Mountpoint": "/var/lib/docker/volumes/ibe160-story122-tests_story122_private/_data",
+      "Name": "ibe160-story122-tests_story122_private",
+      "Options": null,
+      "Scope": "local"
+    },
+    {
+      "CreatedAt": "2026-10-27T08:16:47Z",
+      "Driver": "local",
+      "Labels": {
+        "com.docker.compose.config-hash": "62502048d53b4ba90aa09d5cc8303f1f0914773b4c43f646ac06d4b17f176eb4",
+        "com.docker.compose.project": "ibe160-story123-tests",
+        "com.docker.compose.version": "5.5.1",
+        "com.docker.compose.volume": "story123_fictional"
+      },
+      "Mountpoint": "/var/lib/docker/volumes/ibe160-story123-tests_story123_fictional/_data",
+      "Name": "ibe160-story123-tests_story123_fictional",
+      "Options": null,
+      "Scope": "local"
+    },
+    {
+      "CreatedAt": "2026-10-27T08:16:47Z",
+      "Driver": "local",
+      "Labels": {
+        "com.docker.compose.config-hash": "d0244c9cb2a4ce666a0a2626bd5fb60f3cbe7762cf0c304c4c51dd8089fb0085",
+        "com.docker.compose.project": "ibe160-story123-tests",
+        "com.docker.compose.version": "5.5.1",
+        "com.docker.compose.volume": "story123_private"
+      },
+      "Mountpoint": "/var/lib/docker/volumes/ibe160-story123-tests_story123_private/_data",
+      "Name": "ibe160-story123-tests_story123_private",
+      "Options": null,
+      "Scope": "local"
+    },
+    {
+      "CreatedAt": "2026-10-28T06:04:30Z",
+      "Driver": "local",
+      "Labels": {
+        "com.docker.compose.config-hash": "051d2347ee461288ae74a26a605697af87d7336b56eb2c20777d052a6a9f8319",
+        "com.docker.compose.project": "ibe160-story124-tests",
+        "com.docker.compose.version": "5.5.1",
+        "com.docker.compose.volume": "story124_fictional"
+      },
+      "Mountpoint": "/var/lib/docker/volumes/ibe160-story124-tests_story124_fictional/_data",
+      "Name": "ibe160-story124-tests_story124_fictional",
+      "Options": null,
+      "Scope": "local"
+    },
+    {
+      "CreatedAt": "2026-10-28T06:04:30Z",
+      "Driver": "local",
+      "Labels": {
+        "com.docker.compose.config-hash": "82dc106d56cda4dda76036f5133a32b676f4a9f9cadc69693257048c63158b4a",
+        "com.docker.compose.project": "ibe160-story124-tests",
+        "com.docker.compose.version": "5.5.1",
+        "com.docker.compose.volume": "story124_private"
+      },
+      "Mountpoint": "/var/lib/docker/volumes/ibe160-story124-tests_story124_private/_data",
+      "Name": "ibe160-story124-tests_story124_private",
+      "Options": null,
+      "Scope": "local"
+    },
+    {
+      "CreatedAt": "2026-10-28T17:27:56Z",
+      "Driver": "local",
+      "Labels": {
+        "com.docker.compose.config-hash": "d2a8063f210f1d06ef9c7a858aa47d746e07586cc0eaca2df17c28af779a34a9",
+        "com.docker.compose.project": "ibe160-submission",
+        "com.docker.compose.version": "5.5.1",
+        "com.docker.compose.volume": "submission_fictional"
+      },
+      "Mountpoint": "/var/lib/docker/volumes/ibe160-submission_submission_fictional/_data",
+      "Name": "ibe160-submission_submission_fictional",
+      "Options": null,
+      "Scope": "local"
+    },
+    {
+      "CreatedAt": "2026-10-28T17:27:56Z",
+      "Driver": "local",
+      "Labels": {
+        "com.docker.compose.config-hash": "6e853e40ca3fff00dfbd09227a89fa8ea2c967bbc4e73b8f6bf2990883bc22c0",
+        "com.docker.compose.project": "ibe160-submission",
+        "com.docker.compose.version": "5.5.1",
+        "com.docker.compose.volume": "submission_private"
+      },
+      "Mountpoint": "/var/lib/docker/volumes/ibe160-submission_submission_private/_data",
+      "Name": "ibe160-submission_submission_private",
+      "Options": null,
+      "Scope": "local"
+    },
+    {
+      "CreatedAt": "2026-10-26T20:52:10Z",
+      "Driver": "local",
+      "Labels": {
+        "com.docker.compose.config-hash": "e2eb0f985134cf430e4c0b76f3d9a407a850778a3ee8ded35c16e2284b39db2f",
+        "com.docker.compose.project": "ibe160-tablet-prep",
+        "com.docker.compose.version": "5.5.1",
+        "com.docker.compose.volume": "tablet_pg"
+      },
+      "Mountpoint": "/var/lib/docker/volumes/ibe160-tablet-prep_tablet_pg/_data",
+      "Name": "ibe160-tablet-prep_tablet_pg",
+      "Options": null,
+      "Scope": "local"
+    },
+    {
+      "CreatedAt": "2026-10-29T18:12:51Z",
+      "Driver": "local",
+      "Labels": {
+        "com.docker.compose.config-hash": "d91ebebb1e526d47b628efad7417a43d639832791bd9ffe784884e124c7e69fb",
+        "com.docker.compose.project": "ibe160-v1-delivery",
+        "com.docker.compose.version": "5.5.1",
+        "com.docker.compose.volume": "submission_fictional"
+      },
+      "Mountpoint": "/var/lib/docker/volumes/ibe160-v1-delivery_submission_fictional/_data",
+      "Name": "ibe160-v1-delivery_submission_fictional",
+      "Options": null,
+      "Scope": "local"
+    },
+    {
+      "CreatedAt": "2026-10-29T18:12:51Z",
+      "Driver": "local",
+      "Labels": {
+        "com.docker.compose.config-hash": "8c940f32143b26c04bf78d13ee914583b078a7fc4c0e264d269e64eb221ef151",
+        "com.docker.compose.project": "ibe160-v1-delivery",
+        "com.docker.compose.version": "5.5.1",
+        "com.docker.compose.volume": "submission_private"
+      },
+      "Mountpoint": "/var/lib/docker/volumes/ibe160-v1-delivery_submission_private/_data",
+      "Name": "ibe160-v1-delivery_submission_private",
+      "Options": null,
+      "Scope": "local"
+    },
+    {
+      "CreatedAt": "2026-10-31T01:53:52Z",
+      "Driver": "local",
+      "Labels": {
+        "com.docker.compose.config-hash": "bccfa17982690ade9b6638faf1ada8ad0e9ac8deb50e3687643ce55deaa84967",
+        "com.docker.compose.project": "ibe160-v1-final-20261031",
+        "com.docker.compose.version": "5.5.1",
+        "com.docker.compose.volume": "submission_fictional"
+      },
+      "Mountpoint": "/var/lib/docker/volumes/ibe160-v1-final-20261031_submission_fictional/_data",
+      "Name": "ibe160-v1-final-20261031_submission_fictional",
+      "Options": null,
+      "Scope": "local"
+    },
+    {
+      "CreatedAt": "2026-10-31T01:53:52Z",
+      "Driver": "local",
+      "Labels": {
+        "com.docker.compose.config-hash": "c1a271367f4eb6f89103e226bb8d7ac39bea3e270c2e062e26cda60cd3a04c39",
+        "com.docker.compose.project": "ibe160-v1-final-20261031",
+        "com.docker.compose.version": "5.5.1",
+        "com.docker.compose.volume": "submission_private"
+      },
+      "Mountpoint": "/var/lib/docker/volumes/ibe160-v1-final-20261031_submission_private/_data",
+      "Name": "ibe160-v1-final-20261031_submission_private",
+      "Options": null,
+      "Scope": "local"
+    },
+    {
+      "CreatedAt": "2026-10-29T15:37:17Z",
+      "Driver": "local",
+      "Labels": {
+        "com.docker.compose.config-hash": "85b08e6d8343950a55b169561e2f412692aaa623e56483a4cb2e19b7db2fc25f",
+        "com.docker.compose.project": "ibe160-v1followup-tests",
+        "com.docker.compose.version": "5.5.1",
+        "com.docker.compose.volume": "v1followup_fictional"
+      },
+      "Mountpoint": "/var/lib/docker/volumes/ibe160-v1followup-tests_v1followup_fictional/_data",
+      "Name": "ibe160-v1followup-tests_v1followup_fictional",
+      "Options": null,
+      "Scope": "local"
+    },
+    {
+      "CreatedAt": "2026-10-29T15:37:17Z",
+      "Driver": "local",
+      "Labels": {
+        "com.docker.compose.config-hash": "b5c7a9252bda684f70067b83dfd53dd613785253ec2ca78274a1b73ee6bcd519",
+        "com.docker.compose.project": "ibe160-v1followup-tests",
+        "com.docker.compose.version": "5.5.1",
+        "com.docker.compose.volume": "v1followup_private"
+      },
+      "Mountpoint": "/var/lib/docker/volumes/ibe160-v1followup-tests_v1followup_private/_data",
+      "Name": "ibe160-v1followup-tests_v1followup_private",
+      "Options": null,
+      "Scope": "local"
+    }
+  ]
+}

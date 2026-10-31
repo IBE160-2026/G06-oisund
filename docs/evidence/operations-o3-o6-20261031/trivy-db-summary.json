@@ -1,0 +1,1366 @@
+{
+  "input_file": "trivy-db.json",
+  "raw_sha256": "024c8ad893f56ddb72ab24a07869ee60647e0cad8006c7b23e4f006de923e129",
+  "created_at": "2026-10-31T04:15:17.684294+01:00",
+  "scanner": {
+    "Version": "0.76.1"
+  },
+  "artifact": "postgres:17-alpine@sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+  "metadata": {
+    "ImageID": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+    "RepoDigests": [
+      "postgres@sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24"
+    ],
+    "OS": {
+      "Family": "alpine",
+      "Name": "3.24.2"
+    }
+  },
+  "severity_counts": {
+    "UNKNOWN": 3,
+    "MEDIUM": 32,
+    "CRITICAL": 1,
+    "HIGH": 25,
+    "LOW": 3
+  },
+  "unique_advisories": 63,
+  "groups": [
+    {
+      "target": "postgres:17-alpine@sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24 (alpine 3.24.2)",
+      "type": "alpine",
+      "package_count": 45,
+      "packages": [
+        {
+          "Name": ".postgresql-rundeps",
+          "Version": "20260917.213131",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "alpine-baselayout",
+          "Version": "3.7.2-r1",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "alpine-baselayout-data",
+          "Version": "3.7.2-r1",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "alpine-keys",
+          "Version": "2.6-r0",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "alpine-release",
+          "Version": "3.24.2-r0",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "apk-tools",
+          "Version": "3.0.8-r0",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "bash",
+          "Version": "5.3.9-r1",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "busybox",
+          "Version": "1.37.0-r31",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "busybox-binsh",
+          "Version": "1.37.0-r31",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "ca-certificates-bundle",
+          "Version": "20260909-r0",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "gdbm",
+          "Version": "1.26-r0",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "icu-data-full",
+          "Version": "78.1-r0",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "icu-libs",
+          "Version": "78.1-r0",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "keyutils-libs",
+          "Version": "1.6.3-r4",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "krb5-conf",
+          "Version": "1.0-r2",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "krb5-libs",
+          "Version": "1.22.2-r1",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "libapk",
+          "Version": "3.0.8-r0",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "libcom_err",
+          "Version": "1.47.4-r0",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "libcrypto3",
+          "Version": "3.5.8-r0",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "libedit",
+          "Version": "20260508.3.1-r1",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "libffi",
+          "Version": "3.5.2-r1",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "libgcc",
+          "Version": "15.2.0-r5",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "libldap",
+          "Version": "2.6.14-r0",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "libncursesw",
+          "Version": "6.6_p20260516-r0",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "libsasl",
+          "Version": "2.1.28-r9",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "libssl3",
+          "Version": "3.5.8-r0",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "libstdc++",
+          "Version": "15.2.0-r5",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "libuuid",
+          "Version": "2.42.3-r1",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "libverto",
+          "Version": "0.3.2-r2",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "libxml2",
+          "Version": "2.13.9-r2",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "libxslt",
+          "Version": "1.1.43-r3",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "llvm21-libs",
+          "Version": "21.1.8-r1",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "lz4-libs",
+          "Version": "1.10.0-r1",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "musl",
+          "Version": "1.2.6-r2",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "musl-utils",
+          "Version": "1.2.6-r2",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "ncurses-terminfo-base",
+          "Version": "6.6_p20260516-r0",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "nss_wrapper",
+          "Version": "1.1.12-r1",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "readline",
+          "Version": "8.3.3-r1",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "scanelf",
+          "Version": "1.3.9-r1",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "ssl_client",
+          "Version": "1.37.0-r31",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "tzdata",
+          "Version": "2026d-r0",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "xz-libs",
+          "Version": "5.8.4-r0",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "zlib",
+          "Version": "1.3.2-r0",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "zstd",
+          "Version": "1.5.7-r2",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "zstd-libs",
+          "Version": "1.5.7-r2",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        }
+      ],
+      "findings": [
+        {
+          "VulnerabilityID": "CVE-2026-107891",
+          "PkgName": "musl",
+          "InstalledVersion": "1.2.6-r2",
+          "FixedVersion": "1.2.6-r3",
+          "Status": "fixed",
+          "Severity": "UNKNOWN",
+          "Title": "Title Not Available",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-107891",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-107891",
+          "PkgName": "musl-utils",
+          "InstalledVersion": "1.2.6-r2",
+          "FixedVersion": "1.2.6-r3",
+          "Status": "fixed",
+          "Severity": "UNKNOWN",
+          "Title": "Title Not Available",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-107891",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-85091",
+          "PkgName": "zlib",
+          "InstalledVersion": "1.3.2-r0",
+          "FixedVersion": "1.3.2-r1",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "zlib versions 1.3.1.2 through 1.3.2 contain a heap buffer overflow vul ...",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-85091",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        }
+      ]
+    },
+    {
+      "target": "usr/local/bin/gosu",
+      "type": "gobinary",
+      "package_count": 4,
+      "packages": [
+        {
+          "Name": "github.com/tianon/gosu",
+          "Version": "v1.19.0",
+          "FilePath": null,
+          "AnalyzedBy": "gobinary"
+        },
+        {
+          "Name": "stdlib",
+          "Version": "v1.24.6",
+          "FilePath": null,
+          "AnalyzedBy": "gobinary"
+        },
+        {
+          "Name": "github.com/moby/sys/user",
+          "Version": "v0.1.0",
+          "FilePath": null,
+          "AnalyzedBy": "gobinary"
+        },
+        {
+          "Name": "golang.org/x/sys",
+          "Version": "v0.1.0",
+          "FilePath": null,
+          "AnalyzedBy": "gobinary"
+        }
+      ],
+      "findings": [
+        {
+          "VulnerabilityID": "CVE-2026-61801",
+          "PkgName": "github.com/moby/sys/user",
+          "InstalledVersion": "v0.1.0",
+          "FixedVersion": "0.4.1",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "github.com/moby/sys/user: moby/sys/user: Denial of Service via crafted user or group database files",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-61801",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory Go",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Ago"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-39824",
+          "PkgName": "golang.org/x/sys",
+          "InstalledVersion": "v0.1.0",
+          "FixedVersion": "0.44.0",
+          "Status": "fixed",
+          "Severity": "UNKNOWN",
+          "Title": "Invoking integer overflow in NewNTUnicodeString in golang.org/x/sys/windows",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-39824",
+          "DataSource": {
+            "ID": "govulndb",
+            "Name": "The Go Vulnerability Database",
+            "URL": "https://pkg.go.dev/vuln/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2025-68121",
+          "PkgName": "stdlib",
+          "InstalledVersion": "v1.24.6",
+          "FixedVersion": "1.24.13, 1.25.7, 1.26.0-rc.3",
+          "Status": "fixed",
+          "Severity": "CRITICAL",
+          "Title": "crypto/tls: crypto/tls: Incorrect certificate validation during TLS session resumption",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2025-68121",
+          "DataSource": {
+            "ID": "govulndb",
+            "Name": "The Go Vulnerability Database",
+            "URL": "https://pkg.go.dev/vuln/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2025-61726",
+          "PkgName": "stdlib",
+          "InstalledVersion": "v1.24.6",
+          "FixedVersion": "1.24.12, 1.25.6",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "golang: net/url: Memory exhaustion in query parameter parsing in net/url",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2025-61726",
+          "DataSource": {
+            "ID": "govulndb",
+            "Name": "The Go Vulnerability Database",
+            "URL": "https://pkg.go.dev/vuln/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2025-61729",
+          "PkgName": "stdlib",
+          "InstalledVersion": "v1.24.6",
+          "FixedVersion": "1.24.11, 1.25.5",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "crypto/x509: golang: Denial of Service due to excessive resource consumption via crafted certificate",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2025-61729",
+          "DataSource": {
+            "ID": "govulndb",
+            "Name": "The Go Vulnerability Database",
+            "URL": "https://pkg.go.dev/vuln/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-111943",
+          "PkgName": "stdlib",
+          "InstalledVersion": "v1.24.6",
+          "FixedVersion": "1.26.10, 1.27.3",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "crypto/x509: golang: crypto/x509: Man-in-the-middle attacks via untrusted intermediate certificates",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-111943",
+          "DataSource": {
+            "ID": "govulndb",
+            "Name": "The Go Vulnerability Database",
+            "URL": "https://pkg.go.dev/vuln/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-25679",
+          "PkgName": "stdlib",
+          "InstalledVersion": "v1.24.6",
+          "FixedVersion": "1.25.8, 1.26.1",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "net/url: Incorrect parsing of IPv6 host literals in net/url",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-25679",
+          "DataSource": {
+            "ID": "govulndb",
+            "Name": "The Go Vulnerability Database",
+            "URL": "https://pkg.go.dev/vuln/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-27145",
+          "PkgName": "stdlib",
+          "InstalledVersion": "v1.24.6",
+          "FixedVersion": "1.25.11, 1.26.4",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "crypto/x509: golang: golang crypto/x509: Denial of Service via excessive processing of DNS SAN entries",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-27145",
+          "DataSource": {
+            "ID": "govulndb",
+            "Name": "The Go Vulnerability Database",
+            "URL": "https://pkg.go.dev/vuln/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-32280",
+          "PkgName": "stdlib",
+          "InstalledVersion": "v1.24.6",
+          "FixedVersion": "1.25.9, 1.26.2",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "crypto/x509: crypto/tls: golang: Go: Denial of Service vulnerability in certificate chain building",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-32280",
+          "DataSource": {
+            "ID": "govulndb",
+            "Name": "The Go Vulnerability Database",
+            "URL": "https://pkg.go.dev/vuln/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-32281",
+          "PkgName": "stdlib",
+          "InstalledVersion": "v1.24.6",
+          "FixedVersion": "1.25.9, 1.26.2",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "crypto/x509: golang: Go crypto/x509: Denial of Service via inefficient certificate chain validation",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-32281",
+          "DataSource": {
+            "ID": "govulndb",
+            "Name": "The Go Vulnerability Database",
+            "URL": "https://pkg.go.dev/vuln/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-32283",
+          "PkgName": "stdlib",
+          "InstalledVersion": "v1.24.6",
+          "FixedVersion": "1.25.9, 1.26.2",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "crypto/tls: golang: Go crypto/tls: Denial of Service via multiple TLS 1.3 key update messages",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-32283",
+          "DataSource": {
+            "ID": "govulndb",
+            "Name": "The Go Vulnerability Database",
+            "URL": "https://pkg.go.dev/vuln/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-33811",
+          "PkgName": "stdlib",
+          "InstalledVersion": "v1.24.6",
+          "FixedVersion": "1.25.10, 1.26.3",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "net: golang: Go net package: Denial of Service via long CNAME response in LookupCNAME",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-33811",
+          "DataSource": {
+            "ID": "govulndb",
+            "Name": "The Go Vulnerability Database",
+            "URL": "https://pkg.go.dev/vuln/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-33814",
+          "PkgName": "stdlib",
+          "InstalledVersion": "v1.24.6",
+          "FixedVersion": "1.25.10, 1.26.3",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "net/http/internal/http2: golang: golang.org/x/net: Go HTTP/2: Denial of Service via malformed SETTINGS_MAX_FRAME_SIZE frame",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-33814",
+          "DataSource": {
+            "ID": "govulndb",
+            "Name": "The Go Vulnerability Database",
+            "URL": "https://pkg.go.dev/vuln/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-33818",
+          "PkgName": "stdlib",
+          "InstalledVersion": "v1.24.6",
+          "FixedVersion": "1.25.13, 1.26.6, 1.27.0-rc.3",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "encoding/asn1: golang: Go encoding/asn1: Denial of Service via excessive recursion in Unmarshal",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-33818",
+          "DataSource": {
+            "ID": "govulndb",
+            "Name": "The Go Vulnerability Database",
+            "URL": "https://pkg.go.dev/vuln/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-39820",
+          "PkgName": "stdlib",
+          "InstalledVersion": "v1.24.6",
+          "FixedVersion": "1.25.10, 1.26.3",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "net/mail: golang: Go net/mail: Denial of Service via crafted email inputs",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-39820",
+          "DataSource": {
+            "ID": "govulndb",
+            "Name": "The Go Vulnerability Database",
+            "URL": "https://pkg.go.dev/vuln/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-39821",
+          "PkgName": "stdlib",
+          "InstalledVersion": "v1.24.6",
+          "FixedVersion": "1.25.13, 1.26.6, 1.27.0-rc.3",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "golang.org/x/net/idna: golang: net/http: golang.org/x/net/idna: Privilege escalation via incorrect Punycode label processing",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-39821",
+          "DataSource": {
+            "ID": "govulndb",
+            "Name": "The Go Vulnerability Database",
+            "URL": "https://pkg.go.dev/vuln/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-39822",
+          "PkgName": "stdlib",
+          "InstalledVersion": "v1.24.6",
+          "FixedVersion": "1.25.12, 1.26.5, 1.27.0-rc.2",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "golang: Go os.Root: Symlink following vulnerability allows directory traversal",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-39822",
+          "DataSource": {
+            "ID": "govulndb",
+            "Name": "The Go Vulnerability Database",
+            "URL": "https://pkg.go.dev/vuln/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-39836",
+          "PkgName": "stdlib",
+          "InstalledVersion": "v1.24.6",
+          "FixedVersion": "1.25.10, 1.26.3",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "net: golang: Go net package: Denial of Service via NUL byte in Dial and LookupPort on Windows",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-39836",
+          "DataSource": {
+            "ID": "govulndb",
+            "Name": "The Go Vulnerability Database",
+            "URL": "https://pkg.go.dev/vuln/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-42499",
+          "PkgName": "stdlib",
+          "InstalledVersion": "v1.24.6",
+          "FixedVersion": "1.25.10, 1.26.3",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "net/mail: golang: net/mail: Denial of Service via pathological email address parsing",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-42499",
+          "DataSource": {
+            "ID": "govulndb",
+            "Name": "The Go Vulnerability Database",
+            "URL": "https://pkg.go.dev/vuln/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-42504",
+          "PkgName": "stdlib",
+          "InstalledVersion": "v1.24.6",
+          "FixedVersion": "1.25.11, 1.26.4",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "mime: golang: Golang MIME: Denial of Service via maliciously-crafted MIME header",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-42504",
+          "DataSource": {
+            "ID": "govulndb",
+            "Name": "The Go Vulnerability Database",
+            "URL": "https://pkg.go.dev/vuln/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-56853",
+          "PkgName": "stdlib",
+          "InstalledVersion": "v1.24.6",
+          "FixedVersion": "1.25.13, 1.26.6, 1.27.0-rc.3",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "net/http: golang: Go net/http: Unencrypted HTTP/2 connections vulnerable to Denial of Service",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-56853",
+          "DataSource": {
+            "ID": "govulndb",
+            "Name": "The Go Vulnerability Database",
+            "URL": "https://pkg.go.dev/vuln/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-56858",
+          "PkgName": "stdlib",
+          "InstalledVersion": "v1.24.6",
+          "FixedVersion": "1.25.13, 1.26.6, 1.27.0-rc.3",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "html/template: golang: Go html/template: Cross-Site Scripting via pathological input",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-56858",
+          "DataSource": {
+            "ID": "govulndb",
+            "Name": "The Go Vulnerability Database",
+            "URL": "https://pkg.go.dev/vuln/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-56859",
+          "PkgName": "stdlib",
+          "InstalledVersion": "v1.24.6",
+          "FixedVersion": "1.25.13, 1.26.6, 1.27.0-rc.3",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "encoding/xml: golang: Go: Denial of Service via XML decoding recursion depth issue",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-56859",
+          "DataSource": {
+            "ID": "govulndb",
+            "Name": "The Go Vulnerability Database",
+            "URL": "https://pkg.go.dev/vuln/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-56860",
+          "PkgName": "stdlib",
+          "InstalledVersion": "v1.24.6",
+          "FixedVersion": "1.25.13, 1.26.6, 1.27.0-rc.3",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "net/url: golang: golang net/url: Denial of Service from quadratic complexity in path resolution",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-56860",
+          "DataSource": {
+            "ID": "govulndb",
+            "Name": "The Go Vulnerability Database",
+            "URL": "https://pkg.go.dev/vuln/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-56862",
+          "PkgName": "stdlib",
+          "InstalledVersion": "v1.24.6",
+          "FixedVersion": "1.25.13, 1.26.6, 1.27.0-rc.3",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "crypto/tls: golang: Golang crypto/tls: Denial of Service via indefinite KeyUpdate messages",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-56862",
+          "DataSource": {
+            "ID": "govulndb",
+            "Name": "The Go Vulnerability Database",
+            "URL": "https://pkg.go.dev/vuln/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-78667",
+          "PkgName": "stdlib",
+          "InstalledVersion": "v1.24.6",
+          "FixedVersion": "1.26.9, 1.27.2",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "net/http: golang: golang: Denial of Service via crafted HTTP Range headers",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-78667",
+          "DataSource": {
+            "ID": "govulndb",
+            "Name": "The Go Vulnerability Database",
+            "URL": "https://pkg.go.dev/vuln/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-78669",
+          "PkgName": "stdlib",
+          "InstalledVersion": "v1.24.6",
+          "FixedVersion": "1.26.9, 1.27.2",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "net/http: net/http/internal/http2: golang.org/x/net/http2: net/http: Denial of Service via excessive HTTP/2 SETTINGS frames",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-78669",
+          "DataSource": {
+            "ID": "govulndb",
+            "Name": "The Go Vulnerability Database",
+            "URL": "https://pkg.go.dev/vuln/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-97031",
+          "PkgName": "stdlib",
+          "InstalledVersion": "v1.24.6",
+          "FixedVersion": "1.26.9, 1.27.2",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "crypto/tls: golang: crypto/tls: Denial of Service via multiple ECH outer extension references",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-97031",
+          "DataSource": {
+            "ID": "govulndb",
+            "Name": "The Go Vulnerability Database",
+            "URL": "https://pkg.go.dev/vuln/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2025-47912",
+          "PkgName": "stdlib",
+          "InstalledVersion": "v1.24.6",
+          "FixedVersion": "1.24.8, 1.25.2",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "net/url: Insufficient validation of bracketed IPv6 hostnames in net/url",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2025-47912",
+          "DataSource": {
+            "ID": "govulndb",
+            "Name": "The Go Vulnerability Database",
+            "URL": "https://pkg.go.dev/vuln/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2025-58183",
+          "PkgName": "stdlib",
+          "InstalledVersion": "v1.24.6",
+          "FixedVersion": "1.24.8, 1.25.2",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "golang: archive/tar: Unbounded allocation when parsing GNU sparse map",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2025-58183",
+          "DataSource": {
+            "ID": "govulndb",
+            "Name": "The Go Vulnerability Database",
+            "URL": "https://pkg.go.dev/vuln/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2025-58185",
+          "PkgName": "stdlib",
+          "InstalledVersion": "v1.24.6",
+          "FixedVersion": "1.24.8, 1.25.2",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "encoding/asn1: Parsing DER payload can cause memory exhaustion in encoding/asn1",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2025-58185",
+          "DataSource": {
+            "ID": "govulndb",
+            "Name": "The Go Vulnerability Database",
+            "URL": "https://pkg.go.dev/vuln/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2025-58187",
+          "PkgName": "stdlib",
+          "InstalledVersion": "v1.24.6",
+          "FixedVersion": "1.24.9, 1.25.3",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "crypto/x509: Quadratic complexity when checking name constraints in crypto/x509",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2025-58187",
+          "DataSource": {
+            "ID": "govulndb",
+            "Name": "The Go Vulnerability Database",
+            "URL": "https://pkg.go.dev/vuln/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2025-58188",
+          "PkgName": "stdlib",
+          "InstalledVersion": "v1.24.6",
+          "FixedVersion": "1.24.8, 1.25.2",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "crypto/x509: golang: Panic when validating certificates with DSA public keys in crypto/x509",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2025-58188",
+          "DataSource": {
+            "ID": "govulndb",
+            "Name": "The Go Vulnerability Database",
+            "URL": "https://pkg.go.dev/vuln/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2025-58189",
+          "PkgName": "stdlib",
+          "InstalledVersion": "v1.24.6",
+          "FixedVersion": "1.24.8, 1.25.2",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "crypto/tls: go crypto/tls ALPN negotiation error contains attacker controlled information",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2025-58189",
+          "DataSource": {
+            "ID": "govulndb",
+            "Name": "The Go Vulnerability Database",
+            "URL": "https://pkg.go.dev/vuln/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2025-61723",
+          "PkgName": "stdlib",
+          "InstalledVersion": "v1.24.6",
+          "FixedVersion": "1.24.8, 1.25.2",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "encoding/pem: Quadratic complexity when parsing some invalid inputs in encoding/pem",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2025-61723",
+          "DataSource": {
+            "ID": "govulndb",
+            "Name": "The Go Vulnerability Database",
+            "URL": "https://pkg.go.dev/vuln/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2025-61724",
+          "PkgName": "stdlib",
+          "InstalledVersion": "v1.24.6",
+          "FixedVersion": "1.24.8, 1.25.2",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "net/textproto: Excessive CPU consumption in Reader.ReadResponse in net/textproto",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2025-61724",
+          "DataSource": {
+            "ID": "govulndb",
+            "Name": "The Go Vulnerability Database",
+            "URL": "https://pkg.go.dev/vuln/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2025-61725",
+          "PkgName": "stdlib",
+          "InstalledVersion": "v1.24.6",
+          "FixedVersion": "1.24.8, 1.25.2",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "net/mail: Excessive CPU consumption in ParseAddress in net/mail",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2025-61725",
+          "DataSource": {
+            "ID": "govulndb",
+            "Name": "The Go Vulnerability Database",
+            "URL": "https://pkg.go.dev/vuln/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2025-61727",
+          "PkgName": "stdlib",
+          "InstalledVersion": "v1.24.6",
+          "FixedVersion": "1.24.11, 1.25.5",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "golang: crypto/x509: excluded subdomain constraint does not restrict wildcard SANs",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2025-61727",
+          "DataSource": {
+            "ID": "govulndb",
+            "Name": "The Go Vulnerability Database",
+            "URL": "https://pkg.go.dev/vuln/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2025-61728",
+          "PkgName": "stdlib",
+          "InstalledVersion": "v1.24.6",
+          "FixedVersion": "1.24.12, 1.25.6",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "golang: archive/zip: Excessive CPU consumption when building archive index in archive/zip",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2025-61728",
+          "DataSource": {
+            "ID": "govulndb",
+            "Name": "The Go Vulnerability Database",
+            "URL": "https://pkg.go.dev/vuln/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2025-61730",
+          "PkgName": "stdlib",
+          "InstalledVersion": "v1.24.6",
+          "FixedVersion": "1.24.12, 1.25.6",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "crypto/tls: Handshake messages may be processed at the incorrect encryption level in crypto/tls",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2025-61730",
+          "DataSource": {
+            "ID": "govulndb",
+            "Name": "The Go Vulnerability Database",
+            "URL": "https://pkg.go.dev/vuln/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-27142",
+          "PkgName": "stdlib",
+          "InstalledVersion": "v1.24.6",
+          "FixedVersion": "1.25.8, 1.26.1",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "html/template: URLs in meta content attribute actions are not escaped in html/template",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-27142",
+          "DataSource": {
+            "ID": "govulndb",
+            "Name": "The Go Vulnerability Database",
+            "URL": "https://pkg.go.dev/vuln/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-32282",
+          "PkgName": "stdlib",
+          "InstalledVersion": "v1.24.6",
+          "FixedVersion": "1.25.9, 1.26.2",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "golang: internal/syscall/unix: Root.Chmod can follow symlinks out of the root",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-32282",
+          "DataSource": {
+            "ID": "govulndb",
+            "Name": "The Go Vulnerability Database",
+            "URL": "https://pkg.go.dev/vuln/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-32288",
+          "PkgName": "stdlib",
+          "InstalledVersion": "v1.24.6",
+          "FixedVersion": "1.25.9, 1.26.2",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "archive/tar: golang: Go's archive/tar package: Denial of Service via maliciously-crafted archive",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-32288",
+          "DataSource": {
+            "ID": "govulndb",
+            "Name": "The Go Vulnerability Database",
+            "URL": "https://pkg.go.dev/vuln/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-32289",
+          "PkgName": "stdlib",
+          "InstalledVersion": "v1.24.6",
+          "FixedVersion": "1.25.9, 1.26.2",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "html/template: golang: html/template: Cross-Site Scripting (XSS) via improper context and brace depth tracking in JS template literals",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-32289",
+          "DataSource": {
+            "ID": "govulndb",
+            "Name": "The Go Vulnerability Database",
+            "URL": "https://pkg.go.dev/vuln/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-39823",
+          "PkgName": "stdlib",
+          "InstalledVersion": "v1.24.6",
+          "FixedVersion": "1.25.10, 1.26.3",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "html/template: golang: Go html/template: Cross-Site Scripting via improper URL escaping in meta tag content",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-39823",
+          "DataSource": {
+            "ID": "govulndb",
+            "Name": "The Go Vulnerability Database",
+            "URL": "https://pkg.go.dev/vuln/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-39825",
+          "PkgName": "stdlib",
+          "InstalledVersion": "v1.24.6",
+          "FixedVersion": "1.25.10, 1.26.3",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "net/http/httputil: golang: net/http/httputil: ReverseProxy forwards hidden query parameters, potentially bypassing security controls",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-39825",
+          "DataSource": {
+            "ID": "govulndb",
+            "Name": "The Go Vulnerability Database",
+            "URL": "https://pkg.go.dev/vuln/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-39826",
+          "PkgName": "stdlib",
+          "InstalledVersion": "v1.24.6",
+          "FixedVersion": "1.25.10, 1.26.3",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "html/template: golang: html/template: Cross-site scripting due to incorrect script tag escaping",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-39826",
+          "DataSource": {
+            "ID": "govulndb",
+            "Name": "The Go Vulnerability Database",
+            "URL": "https://pkg.go.dev/vuln/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-42505",
+          "PkgName": "stdlib",
+          "InstalledVersion": "v1.24.6",
+          "FixedVersion": "1.25.12, 1.26.5, 1.27.0-rc.2",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "crypto/tls: golang: Go crypto/tls: Information disclosure in Encrypted Client Hello",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-42505",
+          "DataSource": {
+            "ID": "govulndb",
+            "Name": "The Go Vulnerability Database",
+            "URL": "https://pkg.go.dev/vuln/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-42507",
+          "PkgName": "stdlib",
+          "InstalledVersion": "v1.24.6",
+          "FixedVersion": "1.25.11, 1.26.4",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "net/textproto: golang: Golang net/textproto: Misleading error messages via input injection",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-42507",
+          "DataSource": {
+            "ID": "govulndb",
+            "Name": "The Go Vulnerability Database",
+            "URL": "https://pkg.go.dev/vuln/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-56866",
+          "PkgName": "stdlib",
+          "InstalledVersion": "v1.24.6",
+          "FixedVersion": "1.26.9, 1.27.2",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "net/http: golang: golang: Cross-user response poisoning via desynchronized HTTP CONNECT connections",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-56866",
+          "DataSource": {
+            "ID": "govulndb",
+            "Name": "The Go Vulnerability Database",
+            "URL": "https://pkg.go.dev/vuln/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-78659",
+          "PkgName": "stdlib",
+          "InstalledVersion": "v1.24.6",
+          "FixedVersion": "1.26.9, 1.27.2",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "net/http: golang.org/x/net/http2: golang: net/http: Denial of Service via HTTP/2 trailer header memory exhaustion",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-78659",
+          "DataSource": {
+            "ID": "govulndb",
+            "Name": "The Go Vulnerability Database",
+            "URL": "https://pkg.go.dev/vuln/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-78660",
+          "PkgName": "stdlib",
+          "InstalledVersion": "v1.24.6",
+          "FixedVersion": "1.26.9, 1.27.2",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "net/http: golang: golang.org/x/net/http2: net/http: HTTP response smuggling via malformed HTTP/2 framing headers",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-78660",
+          "DataSource": {
+            "ID": "govulndb",
+            "Name": "The Go Vulnerability Database",
+            "URL": "https://pkg.go.dev/vuln/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-78663",
+          "PkgName": "stdlib",
+          "InstalledVersion": "v1.24.6",
+          "FixedVersion": "1.26.9, 1.27.2",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "net/http: net/http/internal/http2: golang: golang.org/x/net/http2: golang: flow control limit bypass via double refund in HTTP/2 server",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-78663",
+          "DataSource": {
+            "ID": "govulndb",
+            "Name": "The Go Vulnerability Database",
+            "URL": "https://pkg.go.dev/vuln/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-94439",
+          "PkgName": "stdlib",
+          "InstalledVersion": "v1.24.6",
+          "FixedVersion": "1.26.9, 1.27.2",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "net/http: golang: net/http: HTTP request smuggling via improper handling of HTTP/1 CONNECT responses",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-94439",
+          "DataSource": {
+            "ID": "govulndb",
+            "Name": "The Go Vulnerability Database",
+            "URL": "https://pkg.go.dev/vuln/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-94440",
+          "PkgName": "stdlib",
+          "InstalledVersion": "v1.24.6",
+          "FixedVersion": "1.26.9, 1.27.2",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "net/textproto: mime/multipart: golang: golang: Denial of Service via memory limit bypass in multipart form parsing",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-94440",
+          "DataSource": {
+            "ID": "govulndb",
+            "Name": "The Go Vulnerability Database",
+            "URL": "https://pkg.go.dev/vuln/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-94448",
+          "PkgName": "stdlib",
+          "InstalledVersion": "v1.24.6",
+          "FixedVersion": "1.26.9, 1.27.2",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "html/template: golang: golang: cross-site scripting via consecutive expressions in JavaScript template literals",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-94448",
+          "DataSource": {
+            "ID": "govulndb",
+            "Name": "The Go Vulnerability Database",
+            "URL": "https://pkg.go.dev/vuln/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-97030",
+          "PkgName": "stdlib",
+          "InstalledVersion": "v1.24.6",
+          "FixedVersion": "1.26.9, 1.27.2",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "html/template: golang: html/template: Cross-site scripting via improper escaping of yield keyword",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-97030",
+          "DataSource": {
+            "ID": "govulndb",
+            "Name": "The Go Vulnerability Database",
+            "URL": "https://pkg.go.dev/vuln/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-97032",
+          "PkgName": "stdlib",
+          "InstalledVersion": "v1.24.6",
+          "FixedVersion": "1.26.9, 1.27.2",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "net/http: net/http/internal/http2: golang: golang.org/x/net/http2: net/http: Denial of Service via concurrent HPACK encoder modification",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-97032",
+          "DataSource": {
+            "ID": "govulndb",
+            "Name": "The Go Vulnerability Database",
+            "URL": "https://pkg.go.dev/vuln/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2025-58186",
+          "PkgName": "stdlib",
+          "InstalledVersion": "v1.24.6",
+          "FixedVersion": "1.24.8, 1.25.2",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "golang.org/net/http: Lack of limit when parsing cookies can cause memory exhaustion in net/http",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2025-58186",
+          "DataSource": {
+            "ID": "govulndb",
+            "Name": "The Go Vulnerability Database",
+            "URL": "https://pkg.go.dev/vuln/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-27139",
+          "PkgName": "stdlib",
+          "InstalledVersion": "v1.24.6",
+          "FixedVersion": "1.25.8, 1.26.1",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "os: FileInfo can escape from a Root in golang os module",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-27139",
+          "DataSource": {
+            "ID": "govulndb",
+            "Name": "The Go Vulnerability Database",
+            "URL": "https://pkg.go.dev/vuln/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-56857",
+          "PkgName": "stdlib",
+          "InstalledVersion": "v1.24.6",
+          "FixedVersion": "1.26.9, 1.27.2",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "os: golang: golang: Directory traversal via Windows junction handling",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-56857",
+          "DataSource": {
+            "ID": "govulndb",
+            "Name": "The Go Vulnerability Database",
+            "URL": "https://pkg.go.dev/vuln/"
+          },
+          "PkgPath": null
+        }
+      ]
+    }
+  ],
+  "qualified_os_detection": true
+}

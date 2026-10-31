@@ -1,0 +1,51 @@
+2026-10-31T04:14:08+01:00
+Listing...
+cloud-init-base/resolute-updates 26.2-0ubuntu1~26.04.1 all [upgradable from: 26.1-0ubuntu3~26.04.1]
+cloud-init/resolute-updates 26.2-0ubuntu1~26.04.1 all [upgradable from: 26.1-0ubuntu3~26.04.1]
+cloudflared/unknown 2026.10.7 amd64 [upgradable from: 2026.10.6]
+dmidecode/resolute-updates 3.6-2ubuntu1 amd64 [upgradable from: 3.6-2build1]
+libaudit-common/resolute-updates 1:4.1.2-1ubuntu0.1 all [upgradable from: 1:4.1.2-1build1]
+libaudit1/resolute-updates 1:4.1.2-1ubuntu0.1 amd64 [upgradable from: 1:4.1.2-1build1]
+libflashrom1/resolute-updates 1.6.0-2ubuntu1.1 amd64 [upgradable from: 1.6.0-2ubuntu1]
+libnetplan1/resolute-updates 1.2-1ubuntu5.1 amd64 [upgradable from: 1.2-1ubuntu5]
+libnss-systemd/resolute-updates 259.9-0ubuntu0.1 amd64 [upgradable from: 259.5-0ubuntu3.4]
+libopeniscsiusr/resolute-updates 2.1.11-3ubuntu3.1 amd64 [upgradable from: 2.1.11-3ubuntu3]
+libpam-systemd/resolute-updates 259.9-0ubuntu0.1 amd64 [upgradable from: 259.5-0ubuntu3.4]
+libsystemd-shared/resolute-updates 259.9-0ubuntu0.1 amd64 [upgradable from: 259.5-0ubuntu3.4]
+libsystemd0/resolute-updates 259.9-0ubuntu0.1 amd64 [upgradable from: 259.5-0ubuntu3.4]
+libudev1/resolute-updates 259.9-0ubuntu0.1 amd64 [upgradable from: 259.5-0ubuntu3.4]
+mdadm/resolute-updates 4.5-5ubuntu1.1 amd64 [upgradable from: 4.5-5ubuntu1]
+netplan-generator/resolute-updates 1.2-1ubuntu5.1 amd64 [upgradable from: 1.2-1ubuntu5]
+netplan.io/resolute-updates 1.2-1ubuntu5.1 amd64 [upgradable from: 1.2-1ubuntu5]
+open-iscsi/resolute-updates 2.1.11-3ubuntu3.1 amd64 [upgradable from: 2.1.11-3ubuntu3]
+open-vm-tools/resolute-updates 2:13.0.10-1ubuntu1.1 amd64 [upgradable from: 2:13.0.10-1ubuntu1]
+python-apt-common/resolute-updates 3.1.0ubuntu1.1 all [upgradable from: 3.1.0ubuntu1]
+python3-apt/resolute-updates 3.1.0ubuntu1.1 amd64 [upgradable from: 3.1.0ubuntu1]
+python3-distupgrade/resolute-updates 1:26.04.27 all [upgradable from: 1:26.04.23]
+python3-netplan/resolute-updates 1.2-1ubuntu5.1 amd64 [upgradable from: 1.2-1ubuntu5]
+rust-coreutils/resolute-updates 0.10.0-1ubuntu2~26.04.1 amd64 [upgradable from: 0.8.0-0ubuntu3]
+snapd/resolute-updates 2.77.1+ubuntu26.04.2 amd64 [upgradable from: 2.76.3+ubuntu26.04]
+sos/resolute-updates 4.11.2-0ubuntu0.1 all [upgradable from: 4.10.2-1]
+systemd-cryptsetup/resolute-updates 259.9-0ubuntu0.1 amd64 [upgradable from: 259.5-0ubuntu3.4]
+systemd-resolved/resolute-updates 259.9-0ubuntu0.1 amd64 [upgradable from: 259.5-0ubuntu3.4]
+systemd-sysv/resolute-updates 259.9-0ubuntu0.1 amd64 [upgradable from: 259.5-0ubuntu3.4]
+systemd/resolute-updates 259.9-0ubuntu0.1 amd64 [upgradable from: 259.5-0ubuntu3.4]
+thermald/resolute-updates 2.5.11-0ubuntu1.1 amd64 [upgradable from: 2.5.11-0ubuntu1]
+tmux/resolute-updates 3.6a-2ubuntu0.2 amd64 [upgradable from: 3.6a-2ubuntu0.1]
+ubuntu-kernel-accessories/resolute-updates 1.570.4 amd64 [upgradable from: 1.570.3]
+ubuntu-minimal/resolute-updates 1.570.4 amd64 [upgradable from: 1.570.3]
+ubuntu-pro-client-l10n/resolute-updates 38ubuntu0~26.04 amd64 [upgradable from: 37.2ubuntu0.1]
+ubuntu-pro-client/resolute-updates 38ubuntu0~26.04 amd64 [upgradable from: 37.2ubuntu0.1]
+ubuntu-release-upgrader-core/resolute-updates 1:26.04.27 all [upgradable from: 1:26.04.23]
+ubuntu-server-minimal/resolute-updates 1.570.4 amd64 [upgradable from: 1.570.3]
+ubuntu-server/resolute-updates 1.570.4 amd64 [upgradable from: 1.570.3]
+ubuntu-standard/resolute-updates 1.570.4 amd64 [upgradable from: 1.570.3]
+udev/resolute-updates 259.9-0ubuntu0.1 amd64 [upgradable from: 259.5-0ubuntu3.4]
+2026-10-31 01:13:04.817785942 +0100 /var/lib/apt/periodic/update-success-stamp
+{
+  "kernel:priority=3": 24,
+  "networkd-dispatcher.service:priority=3": 49,
+  "apt-daily.service:priority=3": 3,
+  "apt-daily-upgrade.service:priority=3": 1
+}
+{"status":200,"readyConnections":4,"connectorId":"e8d44e39-7022-4bdf-944c-88687a76283b"}

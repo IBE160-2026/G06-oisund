@@ -1,0 +1,4041 @@
+{
+  "transport": "real HTTP Uvicorn/relay; TCP close before dispatch or after full upstream200",
+  "families": [
+    {
+      "family": "draft-create",
+      "negative_controls": [
+        {
+          "case": "no-origin",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        },
+        {
+          "case": "foreign-origin",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        },
+        {
+          "case": "null-origin",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        },
+        {
+          "case": "no-csrf",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        },
+        {
+          "case": "bad-csrf",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        }
+      ],
+      "before": {
+        "account_notice_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "accounts": {
+          "count": 1,
+          "sha256": "4d2e3b5e0abed172b9eff4915479fc42c77294b8ce3500fe49b7d7f95a9418e3"
+        },
+        "draft_deletions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "draft_operations": {
+          "count": 1,
+          "sha256": "5c36fabfb90b509ba9ae2ebc96fc898cda0ee3073eb531f533c732b730c17514"
+        },
+        "drafts": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "login_limits": {
+          "count": 3,
+          "sha256": "49fc39862a725e4601136bf2214d2ad305859c8c9e1c76c9caccfdb37c826804"
+        },
+        "notice_creation_admissions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "private_migrations": {
+          "count": 14,
+          "sha256": "cb5ca68c780dd5ae90c664a3fc6f22a120e9cc1057774dceb8513f6f06856576"
+        },
+        "security_settings": {
+          "count": 1,
+          "sha256": "4641705168f7eda0055280d4d118b6d56b31c78d5a56da458fc84b1b3815d9c4"
+        },
+        "workday_bus_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_buses": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_close_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_deletions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_lifecycles": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_notice_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_notices": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_outcome_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_outcome_revisions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_outcomes": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_selection_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_selections": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_start_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workdays": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "after": {
+        "account_notice_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "accounts": {
+          "count": 1,
+          "sha256": "4d2e3b5e0abed172b9eff4915479fc42c77294b8ce3500fe49b7d7f95a9418e3"
+        },
+        "draft_deletions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "draft_operations": {
+          "count": 1,
+          "sha256": "85c63e0c3a6e7811a2c88e37d7e2ea349a0171d749c5022d53d5db8a39bf7b2f"
+        },
+        "drafts": {
+          "count": 1,
+          "sha256": "3d21f59340f627a0d0eab909ff12ddd65b47e07118e1dd3b320e2edc1383cd3a"
+        },
+        "login_limits": {
+          "count": 3,
+          "sha256": "49fc39862a725e4601136bf2214d2ad305859c8c9e1c76c9caccfdb37c826804"
+        },
+        "notice_creation_admissions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "private_migrations": {
+          "count": 14,
+          "sha256": "cb5ca68c780dd5ae90c664a3fc6f22a120e9cc1057774dceb8513f6f06856576"
+        },
+        "security_settings": {
+          "count": 1,
+          "sha256": "4641705168f7eda0055280d4d118b6d56b31c78d5a56da458fc84b1b3815d9c4"
+        },
+        "workday_bus_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_buses": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_close_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_deletions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_lifecycles": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_notice_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_notices": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_outcome_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_outcome_revisions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_outcomes": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_selection_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_selections": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_start_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workdays": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "before_dispatch_loss_unchanged": true,
+      "accepted_reply_dropped": {
+        "path": "/drafts",
+        "status": 200,
+        "reply_sha256": "ab97dcf95ad53c53ae8e502245fe1d6e456e4e875281bf58ae810e85784c9cf5",
+        "no_store": true
+      },
+      "receipt_recovered": true,
+      "exact_replay_no_second_effect": true
+    },
+    {
+      "family": "draft-update",
+      "negative_controls": [
+        {
+          "case": "no-origin",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        },
+        {
+          "case": "foreign-origin",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        },
+        {
+          "case": "null-origin",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        },
+        {
+          "case": "no-csrf",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        },
+        {
+          "case": "bad-csrf",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        }
+      ],
+      "before": {
+        "account_notice_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "accounts": {
+          "count": 1,
+          "sha256": "4d2e3b5e0abed172b9eff4915479fc42c77294b8ce3500fe49b7d7f95a9418e3"
+        },
+        "draft_deletions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "draft_operations": {
+          "count": 2,
+          "sha256": "065696d2c2808e2d0da1615ca34bc48b13f724b35c56d59ee4c140207b93c41b"
+        },
+        "drafts": {
+          "count": 1,
+          "sha256": "3d21f59340f627a0d0eab909ff12ddd65b47e07118e1dd3b320e2edc1383cd3a"
+        },
+        "login_limits": {
+          "count": 3,
+          "sha256": "49fc39862a725e4601136bf2214d2ad305859c8c9e1c76c9caccfdb37c826804"
+        },
+        "notice_creation_admissions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "private_migrations": {
+          "count": 14,
+          "sha256": "cb5ca68c780dd5ae90c664a3fc6f22a120e9cc1057774dceb8513f6f06856576"
+        },
+        "security_settings": {
+          "count": 1,
+          "sha256": "4641705168f7eda0055280d4d118b6d56b31c78d5a56da458fc84b1b3815d9c4"
+        },
+        "workday_bus_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_buses": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_close_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_deletions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_lifecycles": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_notice_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_notices": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_outcome_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_outcome_revisions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_outcomes": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_selection_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_selections": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_start_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workdays": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "after": {
+        "account_notice_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "accounts": {
+          "count": 1,
+          "sha256": "4d2e3b5e0abed172b9eff4915479fc42c77294b8ce3500fe49b7d7f95a9418e3"
+        },
+        "draft_deletions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "draft_operations": {
+          "count": 2,
+          "sha256": "50d79bba557f3d901e7e765dbf9e46539d76b0925b5cd6f31d64d5f046d9dd58"
+        },
+        "drafts": {
+          "count": 1,
+          "sha256": "460da61865658574149066c9099721d2b091c3956c839d89f6f112390e883b74"
+        },
+        "login_limits": {
+          "count": 3,
+          "sha256": "49fc39862a725e4601136bf2214d2ad305859c8c9e1c76c9caccfdb37c826804"
+        },
+        "notice_creation_admissions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "private_migrations": {
+          "count": 14,
+          "sha256": "cb5ca68c780dd5ae90c664a3fc6f22a120e9cc1057774dceb8513f6f06856576"
+        },
+        "security_settings": {
+          "count": 1,
+          "sha256": "4641705168f7eda0055280d4d118b6d56b31c78d5a56da458fc84b1b3815d9c4"
+        },
+        "workday_bus_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_buses": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_close_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_deletions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_lifecycles": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_notice_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_notices": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_outcome_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_outcome_revisions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_outcomes": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_selection_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_selections": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_start_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workdays": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "before_dispatch_loss_unchanged": true,
+      "accepted_reply_dropped": {
+        "path": "/drafts/8756a625-bf1f-483b-bc68-e8e9a5c2502e",
+        "status": 200,
+        "reply_sha256": "189f4b2401818380a3f73ad2817169645006fb25df0f2930290297575403df67",
+        "no_store": true
+      },
+      "receipt_recovered": true,
+      "exact_replay_no_second_effect": true
+    },
+    {
+      "family": "draft-delete",
+      "negative_controls": [
+        {
+          "case": "no-origin",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        },
+        {
+          "case": "foreign-origin",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        },
+        {
+          "case": "null-origin",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        },
+        {
+          "case": "no-csrf",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        },
+        {
+          "case": "bad-csrf",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        }
+      ],
+      "before": {
+        "account_notice_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "accounts": {
+          "count": 1,
+          "sha256": "4d2e3b5e0abed172b9eff4915479fc42c77294b8ce3500fe49b7d7f95a9418e3"
+        },
+        "draft_deletions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "draft_operations": {
+          "count": 2,
+          "sha256": "50d79bba557f3d901e7e765dbf9e46539d76b0925b5cd6f31d64d5f046d9dd58"
+        },
+        "drafts": {
+          "count": 1,
+          "sha256": "460da61865658574149066c9099721d2b091c3956c839d89f6f112390e883b74"
+        },
+        "login_limits": {
+          "count": 3,
+          "sha256": "49fc39862a725e4601136bf2214d2ad305859c8c9e1c76c9caccfdb37c826804"
+        },
+        "notice_creation_admissions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "private_migrations": {
+          "count": 14,
+          "sha256": "cb5ca68c780dd5ae90c664a3fc6f22a120e9cc1057774dceb8513f6f06856576"
+        },
+        "security_settings": {
+          "count": 1,
+          "sha256": "4641705168f7eda0055280d4d118b6d56b31c78d5a56da458fc84b1b3815d9c4"
+        },
+        "workday_bus_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_buses": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_close_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_deletions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_lifecycles": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_notice_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_notices": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_outcome_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_outcome_revisions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_outcomes": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_selection_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_selections": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_start_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workdays": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "after": {
+        "account_notice_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "accounts": {
+          "count": 1,
+          "sha256": "4d2e3b5e0abed172b9eff4915479fc42c77294b8ce3500fe49b7d7f95a9418e3"
+        },
+        "draft_deletions": {
+          "count": 1,
+          "sha256": "4f3aae6d5fd3c2d801309be129960cf063c8fe2d0bb0408aef34ea56fa30d3b7"
+        },
+        "draft_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "drafts": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "login_limits": {
+          "count": 3,
+          "sha256": "49fc39862a725e4601136bf2214d2ad305859c8c9e1c76c9caccfdb37c826804"
+        },
+        "notice_creation_admissions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "private_migrations": {
+          "count": 14,
+          "sha256": "cb5ca68c780dd5ae90c664a3fc6f22a120e9cc1057774dceb8513f6f06856576"
+        },
+        "security_settings": {
+          "count": 1,
+          "sha256": "4641705168f7eda0055280d4d118b6d56b31c78d5a56da458fc84b1b3815d9c4"
+        },
+        "workday_bus_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_buses": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_close_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_deletions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_lifecycles": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_notice_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_notices": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_outcome_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_outcome_revisions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_outcomes": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_selection_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_selections": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_start_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workdays": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "before_dispatch_loss_unchanged": true,
+      "accepted_reply_dropped": {
+        "path": "/drafts/8756a625-bf1f-483b-bc68-e8e9a5c2502e/delete",
+        "status": 200,
+        "reply_sha256": "91efff52a306127305ff074fc7478c9bba0849da286b84c5b9fa126eb1cab7a8",
+        "no_store": true
+      },
+      "receipt_recovered": true,
+      "exact_replay_no_second_effect": true
+    },
+    {
+      "family": "notice-create",
+      "negative_controls": [
+        {
+          "case": "no-origin",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        },
+        {
+          "case": "foreign-origin",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        },
+        {
+          "case": "null-origin",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        },
+        {
+          "case": "no-csrf",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        },
+        {
+          "case": "bad-csrf",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        }
+      ],
+      "before": {
+        "account_notice_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "accounts": {
+          "count": 1,
+          "sha256": "4d2e3b5e0abed172b9eff4915479fc42c77294b8ce3500fe49b7d7f95a9418e3"
+        },
+        "draft_deletions": {
+          "count": 1,
+          "sha256": "4f3aae6d5fd3c2d801309be129960cf063c8fe2d0bb0408aef34ea56fa30d3b7"
+        },
+        "draft_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "drafts": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "login_limits": {
+          "count": 3,
+          "sha256": "49fc39862a725e4601136bf2214d2ad305859c8c9e1c76c9caccfdb37c826804"
+        },
+        "notice_creation_admissions": {
+          "count": 1,
+          "sha256": "9949233f84c3718b637075468786d11123d42f734276b6695ca4e26b7f82def1"
+        },
+        "private_migrations": {
+          "count": 14,
+          "sha256": "cb5ca68c780dd5ae90c664a3fc6f22a120e9cc1057774dceb8513f6f06856576"
+        },
+        "security_settings": {
+          "count": 1,
+          "sha256": "4641705168f7eda0055280d4d118b6d56b31c78d5a56da458fc84b1b3815d9c4"
+        },
+        "workday_bus_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_buses": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_close_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_deletions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_lifecycles": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_notice_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_notices": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_outcome_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_outcome_revisions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_outcomes": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_selection_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_selections": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_start_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workdays": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "after": {
+        "account_notice_operations": {
+          "count": 1,
+          "sha256": "dc4d7b7ed7464c91b1e8caa9014312c9e8fc96fba1b64e60430ac446652e53f8"
+        },
+        "accounts": {
+          "count": 1,
+          "sha256": "4d2e3b5e0abed172b9eff4915479fc42c77294b8ce3500fe49b7d7f95a9418e3"
+        },
+        "draft_deletions": {
+          "count": 1,
+          "sha256": "4f3aae6d5fd3c2d801309be129960cf063c8fe2d0bb0408aef34ea56fa30d3b7"
+        },
+        "draft_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "drafts": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "login_limits": {
+          "count": 3,
+          "sha256": "49fc39862a725e4601136bf2214d2ad305859c8c9e1c76c9caccfdb37c826804"
+        },
+        "notice_creation_admissions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "private_migrations": {
+          "count": 14,
+          "sha256": "cb5ca68c780dd5ae90c664a3fc6f22a120e9cc1057774dceb8513f6f06856576"
+        },
+        "security_settings": {
+          "count": 1,
+          "sha256": "4641705168f7eda0055280d4d118b6d56b31c78d5a56da458fc84b1b3815d9c4"
+        },
+        "workday_bus_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_buses": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_close_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_deletions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_lifecycles": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_notice_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_notices": {
+          "count": 1,
+          "sha256": "505ef1dd047b63e19d966673ea56512bada4c206822922e49dae32ef5688138f"
+        },
+        "workday_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_outcome_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_outcome_revisions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_outcomes": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_selection_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_selections": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_start_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workdays": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "before_dispatch_loss_unchanged": true,
+      "accepted_reply_dropped": {
+        "path": "/notices",
+        "status": 200,
+        "reply_sha256": "37d0c7ed230436dd440dbd8ed2dfcc6835745895efd537858b1be0a3d10f7b63",
+        "no_store": true
+      },
+      "receipt_recovered": true,
+      "exact_replay_no_second_effect": true
+    },
+    {
+      "family": "notice-update",
+      "negative_controls": [
+        {
+          "case": "no-origin",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        },
+        {
+          "case": "foreign-origin",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        },
+        {
+          "case": "null-origin",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        },
+        {
+          "case": "no-csrf",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        },
+        {
+          "case": "bad-csrf",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        }
+      ],
+      "before": {
+        "account_notice_operations": {
+          "count": 1,
+          "sha256": "dc4d7b7ed7464c91b1e8caa9014312c9e8fc96fba1b64e60430ac446652e53f8"
+        },
+        "accounts": {
+          "count": 1,
+          "sha256": "4d2e3b5e0abed172b9eff4915479fc42c77294b8ce3500fe49b7d7f95a9418e3"
+        },
+        "draft_deletions": {
+          "count": 1,
+          "sha256": "4f3aae6d5fd3c2d801309be129960cf063c8fe2d0bb0408aef34ea56fa30d3b7"
+        },
+        "draft_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "drafts": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "login_limits": {
+          "count": 3,
+          "sha256": "49fc39862a725e4601136bf2214d2ad305859c8c9e1c76c9caccfdb37c826804"
+        },
+        "notice_creation_admissions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "private_migrations": {
+          "count": 14,
+          "sha256": "cb5ca68c780dd5ae90c664a3fc6f22a120e9cc1057774dceb8513f6f06856576"
+        },
+        "security_settings": {
+          "count": 1,
+          "sha256": "4641705168f7eda0055280d4d118b6d56b31c78d5a56da458fc84b1b3815d9c4"
+        },
+        "workday_bus_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_buses": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_close_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_deletions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_lifecycles": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_notice_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_notices": {
+          "count": 1,
+          "sha256": "505ef1dd047b63e19d966673ea56512bada4c206822922e49dae32ef5688138f"
+        },
+        "workday_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_outcome_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_outcome_revisions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_outcomes": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_selection_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_selections": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_start_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workdays": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "after": {
+        "account_notice_operations": {
+          "count": 2,
+          "sha256": "6322c7c7a6818bbe555b7144ddfad2ec11d6498b4cc576e2018363d4406697a8"
+        },
+        "accounts": {
+          "count": 1,
+          "sha256": "4d2e3b5e0abed172b9eff4915479fc42c77294b8ce3500fe49b7d7f95a9418e3"
+        },
+        "draft_deletions": {
+          "count": 1,
+          "sha256": "4f3aae6d5fd3c2d801309be129960cf063c8fe2d0bb0408aef34ea56fa30d3b7"
+        },
+        "draft_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "drafts": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "login_limits": {
+          "count": 3,
+          "sha256": "49fc39862a725e4601136bf2214d2ad305859c8c9e1c76c9caccfdb37c826804"
+        },
+        "notice_creation_admissions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "private_migrations": {
+          "count": 14,
+          "sha256": "cb5ca68c780dd5ae90c664a3fc6f22a120e9cc1057774dceb8513f6f06856576"
+        },
+        "security_settings": {
+          "count": 1,
+          "sha256": "4641705168f7eda0055280d4d118b6d56b31c78d5a56da458fc84b1b3815d9c4"
+        },
+        "workday_bus_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_buses": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_close_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_deletions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_lifecycles": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_notice_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_notices": {
+          "count": 1,
+          "sha256": "91e9afafdd048decffcc1eba25d47987a3cd708b4c4de3abf214c0bdd2ae6bb8"
+        },
+        "workday_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_outcome_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_outcome_revisions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_outcomes": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_selection_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_selections": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_start_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workdays": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "before_dispatch_loss_unchanged": true,
+      "accepted_reply_dropped": {
+        "path": "/notices/1ead79f4-94e2-56b2-859f-26e4974885c2",
+        "status": 200,
+        "reply_sha256": "2b589de7ebbad30ecab0820390c5b2fec0f3317f4bf738a71c9fd618bf3a8d2e",
+        "no_store": true
+      },
+      "receipt_recovered": true,
+      "exact_replay_no_second_effect": true
+    },
+    {
+      "family": "notice-check",
+      "negative_controls": [
+        {
+          "case": "no-origin",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        },
+        {
+          "case": "foreign-origin",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        },
+        {
+          "case": "null-origin",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        },
+        {
+          "case": "no-csrf",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        },
+        {
+          "case": "bad-csrf",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        }
+      ],
+      "before": {
+        "account_notice_operations": {
+          "count": 2,
+          "sha256": "6322c7c7a6818bbe555b7144ddfad2ec11d6498b4cc576e2018363d4406697a8"
+        },
+        "accounts": {
+          "count": 1,
+          "sha256": "4d2e3b5e0abed172b9eff4915479fc42c77294b8ce3500fe49b7d7f95a9418e3"
+        },
+        "draft_deletions": {
+          "count": 1,
+          "sha256": "4f3aae6d5fd3c2d801309be129960cf063c8fe2d0bb0408aef34ea56fa30d3b7"
+        },
+        "draft_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "drafts": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "login_limits": {
+          "count": 3,
+          "sha256": "49fc39862a725e4601136bf2214d2ad305859c8c9e1c76c9caccfdb37c826804"
+        },
+        "notice_creation_admissions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "private_migrations": {
+          "count": 14,
+          "sha256": "cb5ca68c780dd5ae90c664a3fc6f22a120e9cc1057774dceb8513f6f06856576"
+        },
+        "security_settings": {
+          "count": 1,
+          "sha256": "4641705168f7eda0055280d4d118b6d56b31c78d5a56da458fc84b1b3815d9c4"
+        },
+        "workday_bus_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_buses": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_close_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_deletions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_lifecycles": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_notice_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_notices": {
+          "count": 1,
+          "sha256": "91e9afafdd048decffcc1eba25d47987a3cd708b4c4de3abf214c0bdd2ae6bb8"
+        },
+        "workday_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_outcome_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_outcome_revisions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_outcomes": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_selection_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_selections": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_start_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workdays": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "after": {
+        "account_notice_operations": {
+          "count": 3,
+          "sha256": "0d4b580707bb7bc3ee10f4330295244b51f86635b609c2a753b0c3ba65f3bb09"
+        },
+        "accounts": {
+          "count": 1,
+          "sha256": "4d2e3b5e0abed172b9eff4915479fc42c77294b8ce3500fe49b7d7f95a9418e3"
+        },
+        "draft_deletions": {
+          "count": 1,
+          "sha256": "4f3aae6d5fd3c2d801309be129960cf063c8fe2d0bb0408aef34ea56fa30d3b7"
+        },
+        "draft_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "drafts": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "login_limits": {
+          "count": 3,
+          "sha256": "49fc39862a725e4601136bf2214d2ad305859c8c9e1c76c9caccfdb37c826804"
+        },
+        "notice_creation_admissions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "private_migrations": {
+          "count": 14,
+          "sha256": "cb5ca68c780dd5ae90c664a3fc6f22a120e9cc1057774dceb8513f6f06856576"
+        },
+        "security_settings": {
+          "count": 1,
+          "sha256": "4641705168f7eda0055280d4d118b6d56b31c78d5a56da458fc84b1b3815d9c4"
+        },
+        "workday_bus_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_buses": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_close_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_deletions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_lifecycles": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_notice_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_notices": {
+          "count": 1,
+          "sha256": "6cb50253ee986065672c7cfb1388b5200db687190d3f17479fa84dab9f68f733"
+        },
+        "workday_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_outcome_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_outcome_revisions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_outcomes": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_selection_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_selections": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_start_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workdays": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "before_dispatch_loss_unchanged": true,
+      "accepted_reply_dropped": {
+        "path": "/notices/1ead79f4-94e2-56b2-859f-26e4974885c2/check",
+        "status": 200,
+        "reply_sha256": "47403a23f626ea190937886395ec2b3f53e53ac61e5f813baab1798151a5b737",
+        "no_store": true
+      },
+      "receipt_recovered": true,
+      "exact_replay_no_second_effect": true
+    },
+    {
+      "family": "notice-end",
+      "negative_controls": [
+        {
+          "case": "no-origin",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        },
+        {
+          "case": "foreign-origin",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        },
+        {
+          "case": "null-origin",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        },
+        {
+          "case": "no-csrf",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        },
+        {
+          "case": "bad-csrf",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        }
+      ],
+      "before": {
+        "account_notice_operations": {
+          "count": 3,
+          "sha256": "0d4b580707bb7bc3ee10f4330295244b51f86635b609c2a753b0c3ba65f3bb09"
+        },
+        "accounts": {
+          "count": 1,
+          "sha256": "4d2e3b5e0abed172b9eff4915479fc42c77294b8ce3500fe49b7d7f95a9418e3"
+        },
+        "draft_deletions": {
+          "count": 1,
+          "sha256": "4f3aae6d5fd3c2d801309be129960cf063c8fe2d0bb0408aef34ea56fa30d3b7"
+        },
+        "draft_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "drafts": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "login_limits": {
+          "count": 3,
+          "sha256": "49fc39862a725e4601136bf2214d2ad305859c8c9e1c76c9caccfdb37c826804"
+        },
+        "notice_creation_admissions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "private_migrations": {
+          "count": 14,
+          "sha256": "cb5ca68c780dd5ae90c664a3fc6f22a120e9cc1057774dceb8513f6f06856576"
+        },
+        "security_settings": {
+          "count": 1,
+          "sha256": "4641705168f7eda0055280d4d118b6d56b31c78d5a56da458fc84b1b3815d9c4"
+        },
+        "workday_bus_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_buses": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_close_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_deletions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_lifecycles": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_notice_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_notices": {
+          "count": 1,
+          "sha256": "6cb50253ee986065672c7cfb1388b5200db687190d3f17479fa84dab9f68f733"
+        },
+        "workday_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_outcome_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_outcome_revisions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_outcomes": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_selection_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_selections": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_start_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workdays": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "after": {
+        "account_notice_operations": {
+          "count": 4,
+          "sha256": "73189ef322047b63a0043f3f18a2ac55ff87df3ab14b36dc280dc5baf3861eef"
+        },
+        "accounts": {
+          "count": 1,
+          "sha256": "4d2e3b5e0abed172b9eff4915479fc42c77294b8ce3500fe49b7d7f95a9418e3"
+        },
+        "draft_deletions": {
+          "count": 1,
+          "sha256": "4f3aae6d5fd3c2d801309be129960cf063c8fe2d0bb0408aef34ea56fa30d3b7"
+        },
+        "draft_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "drafts": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "login_limits": {
+          "count": 3,
+          "sha256": "49fc39862a725e4601136bf2214d2ad305859c8c9e1c76c9caccfdb37c826804"
+        },
+        "notice_creation_admissions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "private_migrations": {
+          "count": 14,
+          "sha256": "cb5ca68c780dd5ae90c664a3fc6f22a120e9cc1057774dceb8513f6f06856576"
+        },
+        "security_settings": {
+          "count": 1,
+          "sha256": "4641705168f7eda0055280d4d118b6d56b31c78d5a56da458fc84b1b3815d9c4"
+        },
+        "workday_bus_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_buses": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_close_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_deletions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_lifecycles": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_notice_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_notices": {
+          "count": 1,
+          "sha256": "f8f0f1a51bee76b7c90791caa6120d6e090a016d421b4caeffb96442a92bf355"
+        },
+        "workday_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_outcome_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_outcome_revisions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_outcomes": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_selection_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_selections": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_start_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workdays": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "before_dispatch_loss_unchanged": true,
+      "accepted_reply_dropped": {
+        "path": "/notices/1ead79f4-94e2-56b2-859f-26e4974885c2/end",
+        "status": 200,
+        "reply_sha256": "4613823b1893a2a2b359025e72b27b7628bb0894ae4613f4b91701c4ed780cb8",
+        "no_store": true
+      },
+      "receipt_recovered": true,
+      "exact_replay_no_second_effect": true
+    },
+    {
+      "family": "confirm",
+      "negative_controls": [
+        {
+          "case": "no-origin",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        },
+        {
+          "case": "foreign-origin",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        },
+        {
+          "case": "null-origin",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        },
+        {
+          "case": "no-csrf",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        },
+        {
+          "case": "bad-csrf",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        }
+      ],
+      "before": {
+        "account_notice_operations": {
+          "count": 4,
+          "sha256": "73189ef322047b63a0043f3f18a2ac55ff87df3ab14b36dc280dc5baf3861eef"
+        },
+        "accounts": {
+          "count": 1,
+          "sha256": "4d2e3b5e0abed172b9eff4915479fc42c77294b8ce3500fe49b7d7f95a9418e3"
+        },
+        "draft_deletions": {
+          "count": 1,
+          "sha256": "4f3aae6d5fd3c2d801309be129960cf063c8fe2d0bb0408aef34ea56fa30d3b7"
+        },
+        "draft_operations": {
+          "count": 1,
+          "sha256": "1538739c46fafbe403a1da4a23bc64c3fe8012ef99dd83b1a10514fcc4436124"
+        },
+        "drafts": {
+          "count": 1,
+          "sha256": "3bac4eb6fdb3ac4d7483abaa3796934c81be287085b1c999db0455e681d3e19d"
+        },
+        "login_limits": {
+          "count": 3,
+          "sha256": "49fc39862a725e4601136bf2214d2ad305859c8c9e1c76c9caccfdb37c826804"
+        },
+        "notice_creation_admissions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "private_migrations": {
+          "count": 14,
+          "sha256": "cb5ca68c780dd5ae90c664a3fc6f22a120e9cc1057774dceb8513f6f06856576"
+        },
+        "security_settings": {
+          "count": 1,
+          "sha256": "4641705168f7eda0055280d4d118b6d56b31c78d5a56da458fc84b1b3815d9c4"
+        },
+        "workday_bus_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_buses": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_close_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_deletions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_lifecycles": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_notice_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_notices": {
+          "count": 1,
+          "sha256": "f8f0f1a51bee76b7c90791caa6120d6e090a016d421b4caeffb96442a92bf355"
+        },
+        "workday_operations": {
+          "count": 1,
+          "sha256": "58844b96e99b9b2a69de7922e4714b1c79057999d404913657ea5e751f99ff22"
+        },
+        "workday_outcome_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_outcome_revisions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_outcomes": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_selection_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_selections": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_start_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workdays": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "after": {
+        "account_notice_operations": {
+          "count": 4,
+          "sha256": "73189ef322047b63a0043f3f18a2ac55ff87df3ab14b36dc280dc5baf3861eef"
+        },
+        "accounts": {
+          "count": 1,
+          "sha256": "4d2e3b5e0abed172b9eff4915479fc42c77294b8ce3500fe49b7d7f95a9418e3"
+        },
+        "draft_deletions": {
+          "count": 1,
+          "sha256": "4f3aae6d5fd3c2d801309be129960cf063c8fe2d0bb0408aef34ea56fa30d3b7"
+        },
+        "draft_operations": {
+          "count": 1,
+          "sha256": "1538739c46fafbe403a1da4a23bc64c3fe8012ef99dd83b1a10514fcc4436124"
+        },
+        "drafts": {
+          "count": 1,
+          "sha256": "0c242ad410e95a1ecd7393e0a35da0afb76c257cd6b0871bfa5464ec7f02f856"
+        },
+        "login_limits": {
+          "count": 3,
+          "sha256": "49fc39862a725e4601136bf2214d2ad305859c8c9e1c76c9caccfdb37c826804"
+        },
+        "notice_creation_admissions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "private_migrations": {
+          "count": 14,
+          "sha256": "cb5ca68c780dd5ae90c664a3fc6f22a120e9cc1057774dceb8513f6f06856576"
+        },
+        "security_settings": {
+          "count": 1,
+          "sha256": "4641705168f7eda0055280d4d118b6d56b31c78d5a56da458fc84b1b3815d9c4"
+        },
+        "workday_bus_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_buses": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_close_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_deletions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_lifecycles": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_notice_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_notices": {
+          "count": 1,
+          "sha256": "f8f0f1a51bee76b7c90791caa6120d6e090a016d421b4caeffb96442a92bf355"
+        },
+        "workday_operations": {
+          "count": 1,
+          "sha256": "e159acacd556cfb345e1b13910d2bd68e9bad6cdf5c7e0690b273770c971b1e8"
+        },
+        "workday_outcome_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_outcome_revisions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_outcomes": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_selection_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_selections": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_start_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workdays": {
+          "count": 1,
+          "sha256": "ac7eb5bf9200e46f6e63ac8e8111816076f89a0d07e6f700644746656c574edb"
+        }
+      },
+      "before_dispatch_loss_unchanged": true,
+      "accepted_reply_dropped": {
+        "path": "/drafts/acb2fe68-c1ea-44a3-b124-ed3bb52bcccc/confirm",
+        "status": 200,
+        "reply_sha256": "ecc82acc0462274502c89f11de4a72ec6114854d6f1eb5294491330ec0223336",
+        "no_store": true
+      },
+      "receipt_recovered": true,
+      "exact_replay_no_second_effect": true
+    },
+    {
+      "family": "physical-bus",
+      "negative_controls": [
+        {
+          "case": "no-origin",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        },
+        {
+          "case": "foreign-origin",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        },
+        {
+          "case": "null-origin",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        },
+        {
+          "case": "no-csrf",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        },
+        {
+          "case": "bad-csrf",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        }
+      ],
+      "before": {
+        "account_notice_operations": {
+          "count": 4,
+          "sha256": "73189ef322047b63a0043f3f18a2ac55ff87df3ab14b36dc280dc5baf3861eef"
+        },
+        "accounts": {
+          "count": 1,
+          "sha256": "4d2e3b5e0abed172b9eff4915479fc42c77294b8ce3500fe49b7d7f95a9418e3"
+        },
+        "draft_deletions": {
+          "count": 1,
+          "sha256": "4f3aae6d5fd3c2d801309be129960cf063c8fe2d0bb0408aef34ea56fa30d3b7"
+        },
+        "draft_operations": {
+          "count": 1,
+          "sha256": "1538739c46fafbe403a1da4a23bc64c3fe8012ef99dd83b1a10514fcc4436124"
+        },
+        "drafts": {
+          "count": 1,
+          "sha256": "0c242ad410e95a1ecd7393e0a35da0afb76c257cd6b0871bfa5464ec7f02f856"
+        },
+        "login_limits": {
+          "count": 3,
+          "sha256": "49fc39862a725e4601136bf2214d2ad305859c8c9e1c76c9caccfdb37c826804"
+        },
+        "notice_creation_admissions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "private_migrations": {
+          "count": 14,
+          "sha256": "cb5ca68c780dd5ae90c664a3fc6f22a120e9cc1057774dceb8513f6f06856576"
+        },
+        "security_settings": {
+          "count": 1,
+          "sha256": "4641705168f7eda0055280d4d118b6d56b31c78d5a56da458fc84b1b3815d9c4"
+        },
+        "workday_bus_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_buses": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_close_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_deletions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_lifecycles": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_notice_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_notices": {
+          "count": 1,
+          "sha256": "f8f0f1a51bee76b7c90791caa6120d6e090a016d421b4caeffb96442a92bf355"
+        },
+        "workday_operations": {
+          "count": 1,
+          "sha256": "e159acacd556cfb345e1b13910d2bd68e9bad6cdf5c7e0690b273770c971b1e8"
+        },
+        "workday_outcome_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_outcome_revisions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_outcomes": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_selection_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_selections": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_start_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workdays": {
+          "count": 1,
+          "sha256": "ac7eb5bf9200e46f6e63ac8e8111816076f89a0d07e6f700644746656c574edb"
+        }
+      },
+      "after": {
+        "account_notice_operations": {
+          "count": 4,
+          "sha256": "73189ef322047b63a0043f3f18a2ac55ff87df3ab14b36dc280dc5baf3861eef"
+        },
+        "accounts": {
+          "count": 1,
+          "sha256": "4d2e3b5e0abed172b9eff4915479fc42c77294b8ce3500fe49b7d7f95a9418e3"
+        },
+        "draft_deletions": {
+          "count": 1,
+          "sha256": "4f3aae6d5fd3c2d801309be129960cf063c8fe2d0bb0408aef34ea56fa30d3b7"
+        },
+        "draft_operations": {
+          "count": 1,
+          "sha256": "1538739c46fafbe403a1da4a23bc64c3fe8012ef99dd83b1a10514fcc4436124"
+        },
+        "drafts": {
+          "count": 1,
+          "sha256": "0c242ad410e95a1ecd7393e0a35da0afb76c257cd6b0871bfa5464ec7f02f856"
+        },
+        "login_limits": {
+          "count": 3,
+          "sha256": "49fc39862a725e4601136bf2214d2ad305859c8c9e1c76c9caccfdb37c826804"
+        },
+        "notice_creation_admissions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "private_migrations": {
+          "count": 14,
+          "sha256": "cb5ca68c780dd5ae90c664a3fc6f22a120e9cc1057774dceb8513f6f06856576"
+        },
+        "security_settings": {
+          "count": 1,
+          "sha256": "4641705168f7eda0055280d4d118b6d56b31c78d5a56da458fc84b1b3815d9c4"
+        },
+        "workday_bus_operations": {
+          "count": 1,
+          "sha256": "61255555469172806288fa7338afa7e24344335f3a951adb981ce168b67290b4"
+        },
+        "workday_buses": {
+          "count": 1,
+          "sha256": "e9061ff5c66e8370f7c58ae680ad5c4f1137b0afb659311e7ef153263f249e7e"
+        },
+        "workday_close_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_deletions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_lifecycles": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_notice_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_notices": {
+          "count": 1,
+          "sha256": "f8f0f1a51bee76b7c90791caa6120d6e090a016d421b4caeffb96442a92bf355"
+        },
+        "workday_operations": {
+          "count": 1,
+          "sha256": "e159acacd556cfb345e1b13910d2bd68e9bad6cdf5c7e0690b273770c971b1e8"
+        },
+        "workday_outcome_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_outcome_revisions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_outcomes": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_selection_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_selections": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_start_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workdays": {
+          "count": 1,
+          "sha256": "ac7eb5bf9200e46f6e63ac8e8111816076f89a0d07e6f700644746656c574edb"
+        }
+      },
+      "before_dispatch_loss_unchanged": true,
+      "accepted_reply_dropped": {
+        "path": "/workdays/49430692-0317-4abf-9410-549cea5937db/physical-bus",
+        "status": 200,
+        "reply_sha256": "e614c2f98d861515e24f8b85e22cbfcc310dc494e527ec5fb5065cbe764869aa",
+        "no_store": true
+      },
+      "receipt_recovered": true,
+      "exact_replay_no_second_effect": true
+    },
+    {
+      "family": "selection",
+      "negative_controls": [
+        {
+          "case": "no-origin",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        },
+        {
+          "case": "foreign-origin",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        },
+        {
+          "case": "null-origin",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        },
+        {
+          "case": "no-csrf",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        },
+        {
+          "case": "bad-csrf",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        }
+      ],
+      "before": {
+        "account_notice_operations": {
+          "count": 4,
+          "sha256": "73189ef322047b63a0043f3f18a2ac55ff87df3ab14b36dc280dc5baf3861eef"
+        },
+        "accounts": {
+          "count": 1,
+          "sha256": "4d2e3b5e0abed172b9eff4915479fc42c77294b8ce3500fe49b7d7f95a9418e3"
+        },
+        "draft_deletions": {
+          "count": 1,
+          "sha256": "4f3aae6d5fd3c2d801309be129960cf063c8fe2d0bb0408aef34ea56fa30d3b7"
+        },
+        "draft_operations": {
+          "count": 1,
+          "sha256": "1538739c46fafbe403a1da4a23bc64c3fe8012ef99dd83b1a10514fcc4436124"
+        },
+        "drafts": {
+          "count": 1,
+          "sha256": "0c242ad410e95a1ecd7393e0a35da0afb76c257cd6b0871bfa5464ec7f02f856"
+        },
+        "login_limits": {
+          "count": 3,
+          "sha256": "49fc39862a725e4601136bf2214d2ad305859c8c9e1c76c9caccfdb37c826804"
+        },
+        "notice_creation_admissions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "private_migrations": {
+          "count": 14,
+          "sha256": "cb5ca68c780dd5ae90c664a3fc6f22a120e9cc1057774dceb8513f6f06856576"
+        },
+        "security_settings": {
+          "count": 1,
+          "sha256": "4641705168f7eda0055280d4d118b6d56b31c78d5a56da458fc84b1b3815d9c4"
+        },
+        "workday_bus_operations": {
+          "count": 1,
+          "sha256": "61255555469172806288fa7338afa7e24344335f3a951adb981ce168b67290b4"
+        },
+        "workday_buses": {
+          "count": 1,
+          "sha256": "e9061ff5c66e8370f7c58ae680ad5c4f1137b0afb659311e7ef153263f249e7e"
+        },
+        "workday_close_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_deletions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_lifecycles": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_notice_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_notices": {
+          "count": 1,
+          "sha256": "f8f0f1a51bee76b7c90791caa6120d6e090a016d421b4caeffb96442a92bf355"
+        },
+        "workday_operations": {
+          "count": 1,
+          "sha256": "e159acacd556cfb345e1b13910d2bd68e9bad6cdf5c7e0690b273770c971b1e8"
+        },
+        "workday_outcome_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_outcome_revisions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_outcomes": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_selection_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_selections": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_start_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workdays": {
+          "count": 1,
+          "sha256": "ac7eb5bf9200e46f6e63ac8e8111816076f89a0d07e6f700644746656c574edb"
+        }
+      },
+      "after": {
+        "account_notice_operations": {
+          "count": 4,
+          "sha256": "73189ef322047b63a0043f3f18a2ac55ff87df3ab14b36dc280dc5baf3861eef"
+        },
+        "accounts": {
+          "count": 1,
+          "sha256": "4d2e3b5e0abed172b9eff4915479fc42c77294b8ce3500fe49b7d7f95a9418e3"
+        },
+        "draft_deletions": {
+          "count": 1,
+          "sha256": "4f3aae6d5fd3c2d801309be129960cf063c8fe2d0bb0408aef34ea56fa30d3b7"
+        },
+        "draft_operations": {
+          "count": 1,
+          "sha256": "1538739c46fafbe403a1da4a23bc64c3fe8012ef99dd83b1a10514fcc4436124"
+        },
+        "drafts": {
+          "count": 1,
+          "sha256": "0c242ad410e95a1ecd7393e0a35da0afb76c257cd6b0871bfa5464ec7f02f856"
+        },
+        "login_limits": {
+          "count": 3,
+          "sha256": "49fc39862a725e4601136bf2214d2ad305859c8c9e1c76c9caccfdb37c826804"
+        },
+        "notice_creation_admissions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "private_migrations": {
+          "count": 14,
+          "sha256": "cb5ca68c780dd5ae90c664a3fc6f22a120e9cc1057774dceb8513f6f06856576"
+        },
+        "security_settings": {
+          "count": 1,
+          "sha256": "4641705168f7eda0055280d4d118b6d56b31c78d5a56da458fc84b1b3815d9c4"
+        },
+        "workday_bus_operations": {
+          "count": 1,
+          "sha256": "61255555469172806288fa7338afa7e24344335f3a951adb981ce168b67290b4"
+        },
+        "workday_buses": {
+          "count": 1,
+          "sha256": "e9061ff5c66e8370f7c58ae680ad5c4f1137b0afb659311e7ef153263f249e7e"
+        },
+        "workday_close_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_deletions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_lifecycles": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_notice_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_notices": {
+          "count": 1,
+          "sha256": "f8f0f1a51bee76b7c90791caa6120d6e090a016d421b4caeffb96442a92bf355"
+        },
+        "workday_operations": {
+          "count": 1,
+          "sha256": "e159acacd556cfb345e1b13910d2bd68e9bad6cdf5c7e0690b273770c971b1e8"
+        },
+        "workday_outcome_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_outcome_revisions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_outcomes": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_selection_operations": {
+          "count": 1,
+          "sha256": "76eead9a68172dab6fcdd44968c21c0210f855325897c2b27a6ec2540108b3e0"
+        },
+        "workday_selections": {
+          "count": 1,
+          "sha256": "9cf8024e426ae02f2d515db052a59199fa030f2f448f5750aee23ef1d575e8a2"
+        },
+        "workday_start_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workdays": {
+          "count": 1,
+          "sha256": "ac7eb5bf9200e46f6e63ac8e8111816076f89a0d07e6f700644746656c574edb"
+        }
+      },
+      "before_dispatch_loss_unchanged": true,
+      "accepted_reply_dropped": {
+        "path": "/workdays/49430692-0317-4abf-9410-549cea5937db/selection",
+        "status": 200,
+        "reply_sha256": "59a0903783097afdd5e852178dc71f6ebd9efeb76bfe4d00af2f1faac82bab4a",
+        "no_store": true
+      },
+      "receipt_recovered": true,
+      "exact_replay_no_second_effect": true
+    },
+    {
+      "family": "start",
+      "negative_controls": [
+        {
+          "case": "no-origin",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        },
+        {
+          "case": "foreign-origin",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        },
+        {
+          "case": "null-origin",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        },
+        {
+          "case": "no-csrf",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        },
+        {
+          "case": "bad-csrf",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        }
+      ],
+      "before": {
+        "account_notice_operations": {
+          "count": 4,
+          "sha256": "73189ef322047b63a0043f3f18a2ac55ff87df3ab14b36dc280dc5baf3861eef"
+        },
+        "accounts": {
+          "count": 1,
+          "sha256": "4d2e3b5e0abed172b9eff4915479fc42c77294b8ce3500fe49b7d7f95a9418e3"
+        },
+        "draft_deletions": {
+          "count": 1,
+          "sha256": "4f3aae6d5fd3c2d801309be129960cf063c8fe2d0bb0408aef34ea56fa30d3b7"
+        },
+        "draft_operations": {
+          "count": 1,
+          "sha256": "1538739c46fafbe403a1da4a23bc64c3fe8012ef99dd83b1a10514fcc4436124"
+        },
+        "drafts": {
+          "count": 1,
+          "sha256": "0c242ad410e95a1ecd7393e0a35da0afb76c257cd6b0871bfa5464ec7f02f856"
+        },
+        "login_limits": {
+          "count": 3,
+          "sha256": "49fc39862a725e4601136bf2214d2ad305859c8c9e1c76c9caccfdb37c826804"
+        },
+        "notice_creation_admissions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "private_migrations": {
+          "count": 14,
+          "sha256": "cb5ca68c780dd5ae90c664a3fc6f22a120e9cc1057774dceb8513f6f06856576"
+        },
+        "security_settings": {
+          "count": 1,
+          "sha256": "4641705168f7eda0055280d4d118b6d56b31c78d5a56da458fc84b1b3815d9c4"
+        },
+        "workday_bus_operations": {
+          "count": 1,
+          "sha256": "61255555469172806288fa7338afa7e24344335f3a951adb981ce168b67290b4"
+        },
+        "workday_buses": {
+          "count": 1,
+          "sha256": "e9061ff5c66e8370f7c58ae680ad5c4f1137b0afb659311e7ef153263f249e7e"
+        },
+        "workday_close_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_deletions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_lifecycles": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_notice_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_notices": {
+          "count": 1,
+          "sha256": "f8f0f1a51bee76b7c90791caa6120d6e090a016d421b4caeffb96442a92bf355"
+        },
+        "workday_operations": {
+          "count": 1,
+          "sha256": "e159acacd556cfb345e1b13910d2bd68e9bad6cdf5c7e0690b273770c971b1e8"
+        },
+        "workday_outcome_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_outcome_revisions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_outcomes": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_selection_operations": {
+          "count": 1,
+          "sha256": "76eead9a68172dab6fcdd44968c21c0210f855325897c2b27a6ec2540108b3e0"
+        },
+        "workday_selections": {
+          "count": 1,
+          "sha256": "9cf8024e426ae02f2d515db052a59199fa030f2f448f5750aee23ef1d575e8a2"
+        },
+        "workday_start_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workdays": {
+          "count": 1,
+          "sha256": "ac7eb5bf9200e46f6e63ac8e8111816076f89a0d07e6f700644746656c574edb"
+        }
+      },
+      "after": {
+        "account_notice_operations": {
+          "count": 4,
+          "sha256": "73189ef322047b63a0043f3f18a2ac55ff87df3ab14b36dc280dc5baf3861eef"
+        },
+        "accounts": {
+          "count": 1,
+          "sha256": "4d2e3b5e0abed172b9eff4915479fc42c77294b8ce3500fe49b7d7f95a9418e3"
+        },
+        "draft_deletions": {
+          "count": 1,
+          "sha256": "4f3aae6d5fd3c2d801309be129960cf063c8fe2d0bb0408aef34ea56fa30d3b7"
+        },
+        "draft_operations": {
+          "count": 1,
+          "sha256": "1538739c46fafbe403a1da4a23bc64c3fe8012ef99dd83b1a10514fcc4436124"
+        },
+        "drafts": {
+          "count": 1,
+          "sha256": "0c242ad410e95a1ecd7393e0a35da0afb76c257cd6b0871bfa5464ec7f02f856"
+        },
+        "login_limits": {
+          "count": 3,
+          "sha256": "49fc39862a725e4601136bf2214d2ad305859c8c9e1c76c9caccfdb37c826804"
+        },
+        "notice_creation_admissions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "private_migrations": {
+          "count": 14,
+          "sha256": "cb5ca68c780dd5ae90c664a3fc6f22a120e9cc1057774dceb8513f6f06856576"
+        },
+        "security_settings": {
+          "count": 1,
+          "sha256": "4641705168f7eda0055280d4d118b6d56b31c78d5a56da458fc84b1b3815d9c4"
+        },
+        "workday_bus_operations": {
+          "count": 1,
+          "sha256": "61255555469172806288fa7338afa7e24344335f3a951adb981ce168b67290b4"
+        },
+        "workday_buses": {
+          "count": 1,
+          "sha256": "e9061ff5c66e8370f7c58ae680ad5c4f1137b0afb659311e7ef153263f249e7e"
+        },
+        "workday_close_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_deletions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_lifecycles": {
+          "count": 1,
+          "sha256": "ea7c53f187ed5c4d816344681e6df57a824be496b380dd8c514d627ea6075dab"
+        },
+        "workday_notice_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_notices": {
+          "count": 1,
+          "sha256": "f8f0f1a51bee76b7c90791caa6120d6e090a016d421b4caeffb96442a92bf355"
+        },
+        "workday_operations": {
+          "count": 1,
+          "sha256": "e159acacd556cfb345e1b13910d2bd68e9bad6cdf5c7e0690b273770c971b1e8"
+        },
+        "workday_outcome_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_outcome_revisions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_outcomes": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_selection_operations": {
+          "count": 1,
+          "sha256": "76eead9a68172dab6fcdd44968c21c0210f855325897c2b27a6ec2540108b3e0"
+        },
+        "workday_selections": {
+          "count": 1,
+          "sha256": "9cf8024e426ae02f2d515db052a59199fa030f2f448f5750aee23ef1d575e8a2"
+        },
+        "workday_start_operations": {
+          "count": 1,
+          "sha256": "5d81e913ee7dc3fc6398ea14477d89e94c5645880a213763fef48e9451f06d15"
+        },
+        "workdays": {
+          "count": 1,
+          "sha256": "ac7eb5bf9200e46f6e63ac8e8111816076f89a0d07e6f700644746656c574edb"
+        }
+      },
+      "before_dispatch_loss_unchanged": true,
+      "accepted_reply_dropped": {
+        "path": "/workdays/49430692-0317-4abf-9410-549cea5937db/start",
+        "status": 200,
+        "reply_sha256": "ac9a934c70420ad3bf94b08cde0ed0319e8acd7fe1b37f5692895aee6d7a296b",
+        "no_store": true
+      },
+      "receipt_recovered": true,
+      "exact_replay_no_second_effect": true
+    },
+    {
+      "family": "activity-outcome",
+      "negative_controls": [
+        {
+          "case": "no-origin",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        },
+        {
+          "case": "foreign-origin",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        },
+        {
+          "case": "null-origin",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        },
+        {
+          "case": "no-csrf",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        },
+        {
+          "case": "bad-csrf",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        }
+      ],
+      "before": {
+        "account_notice_operations": {
+          "count": 4,
+          "sha256": "73189ef322047b63a0043f3f18a2ac55ff87df3ab14b36dc280dc5baf3861eef"
+        },
+        "accounts": {
+          "count": 1,
+          "sha256": "4d2e3b5e0abed172b9eff4915479fc42c77294b8ce3500fe49b7d7f95a9418e3"
+        },
+        "draft_deletions": {
+          "count": 1,
+          "sha256": "4f3aae6d5fd3c2d801309be129960cf063c8fe2d0bb0408aef34ea56fa30d3b7"
+        },
+        "draft_operations": {
+          "count": 1,
+          "sha256": "1538739c46fafbe403a1da4a23bc64c3fe8012ef99dd83b1a10514fcc4436124"
+        },
+        "drafts": {
+          "count": 1,
+          "sha256": "0c242ad410e95a1ecd7393e0a35da0afb76c257cd6b0871bfa5464ec7f02f856"
+        },
+        "login_limits": {
+          "count": 3,
+          "sha256": "49fc39862a725e4601136bf2214d2ad305859c8c9e1c76c9caccfdb37c826804"
+        },
+        "notice_creation_admissions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "private_migrations": {
+          "count": 14,
+          "sha256": "cb5ca68c780dd5ae90c664a3fc6f22a120e9cc1057774dceb8513f6f06856576"
+        },
+        "security_settings": {
+          "count": 1,
+          "sha256": "4641705168f7eda0055280d4d118b6d56b31c78d5a56da458fc84b1b3815d9c4"
+        },
+        "workday_bus_operations": {
+          "count": 1,
+          "sha256": "61255555469172806288fa7338afa7e24344335f3a951adb981ce168b67290b4"
+        },
+        "workday_buses": {
+          "count": 1,
+          "sha256": "e9061ff5c66e8370f7c58ae680ad5c4f1137b0afb659311e7ef153263f249e7e"
+        },
+        "workday_close_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_deletions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_lifecycles": {
+          "count": 1,
+          "sha256": "ea7c53f187ed5c4d816344681e6df57a824be496b380dd8c514d627ea6075dab"
+        },
+        "workday_notice_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_notices": {
+          "count": 1,
+          "sha256": "f8f0f1a51bee76b7c90791caa6120d6e090a016d421b4caeffb96442a92bf355"
+        },
+        "workday_operations": {
+          "count": 1,
+          "sha256": "e159acacd556cfb345e1b13910d2bd68e9bad6cdf5c7e0690b273770c971b1e8"
+        },
+        "workday_outcome_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_outcome_revisions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_outcomes": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_selection_operations": {
+          "count": 1,
+          "sha256": "76eead9a68172dab6fcdd44968c21c0210f855325897c2b27a6ec2540108b3e0"
+        },
+        "workday_selections": {
+          "count": 1,
+          "sha256": "9cf8024e426ae02f2d515db052a59199fa030f2f448f5750aee23ef1d575e8a2"
+        },
+        "workday_start_operations": {
+          "count": 1,
+          "sha256": "5d81e913ee7dc3fc6398ea14477d89e94c5645880a213763fef48e9451f06d15"
+        },
+        "workdays": {
+          "count": 1,
+          "sha256": "ac7eb5bf9200e46f6e63ac8e8111816076f89a0d07e6f700644746656c574edb"
+        }
+      },
+      "after": {
+        "account_notice_operations": {
+          "count": 4,
+          "sha256": "73189ef322047b63a0043f3f18a2ac55ff87df3ab14b36dc280dc5baf3861eef"
+        },
+        "accounts": {
+          "count": 1,
+          "sha256": "4d2e3b5e0abed172b9eff4915479fc42c77294b8ce3500fe49b7d7f95a9418e3"
+        },
+        "draft_deletions": {
+          "count": 1,
+          "sha256": "4f3aae6d5fd3c2d801309be129960cf063c8fe2d0bb0408aef34ea56fa30d3b7"
+        },
+        "draft_operations": {
+          "count": 1,
+          "sha256": "1538739c46fafbe403a1da4a23bc64c3fe8012ef99dd83b1a10514fcc4436124"
+        },
+        "drafts": {
+          "count": 1,
+          "sha256": "0c242ad410e95a1ecd7393e0a35da0afb76c257cd6b0871bfa5464ec7f02f856"
+        },
+        "login_limits": {
+          "count": 3,
+          "sha256": "49fc39862a725e4601136bf2214d2ad305859c8c9e1c76c9caccfdb37c826804"
+        },
+        "notice_creation_admissions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "private_migrations": {
+          "count": 14,
+          "sha256": "cb5ca68c780dd5ae90c664a3fc6f22a120e9cc1057774dceb8513f6f06856576"
+        },
+        "security_settings": {
+          "count": 1,
+          "sha256": "4641705168f7eda0055280d4d118b6d56b31c78d5a56da458fc84b1b3815d9c4"
+        },
+        "workday_bus_operations": {
+          "count": 1,
+          "sha256": "61255555469172806288fa7338afa7e24344335f3a951adb981ce168b67290b4"
+        },
+        "workday_buses": {
+          "count": 1,
+          "sha256": "e9061ff5c66e8370f7c58ae680ad5c4f1137b0afb659311e7ef153263f249e7e"
+        },
+        "workday_close_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_deletions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_lifecycles": {
+          "count": 1,
+          "sha256": "ea7c53f187ed5c4d816344681e6df57a824be496b380dd8c514d627ea6075dab"
+        },
+        "workday_notice_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_notices": {
+          "count": 1,
+          "sha256": "f8f0f1a51bee76b7c90791caa6120d6e090a016d421b4caeffb96442a92bf355"
+        },
+        "workday_operations": {
+          "count": 1,
+          "sha256": "e159acacd556cfb345e1b13910d2bd68e9bad6cdf5c7e0690b273770c971b1e8"
+        },
+        "workday_outcome_operations": {
+          "count": 1,
+          "sha256": "824ea8d0bf2ad8ef4682391762c84cda2460e8efd23687697f9ee816b7727c82"
+        },
+        "workday_outcome_revisions": {
+          "count": 1,
+          "sha256": "2ee03a144cd1174d0d5e876145eb60451c669320330747fb4ea0c47d47323e0d"
+        },
+        "workday_outcomes": {
+          "count": 1,
+          "sha256": "65dc2f83d99cf1f6045c9817bfc5957c3660889c8c7033261ff8595629daadf2"
+        },
+        "workday_selection_operations": {
+          "count": 1,
+          "sha256": "76eead9a68172dab6fcdd44968c21c0210f855325897c2b27a6ec2540108b3e0"
+        },
+        "workday_selections": {
+          "count": 1,
+          "sha256": "9cf8024e426ae02f2d515db052a59199fa030f2f448f5750aee23ef1d575e8a2"
+        },
+        "workday_start_operations": {
+          "count": 1,
+          "sha256": "5d81e913ee7dc3fc6398ea14477d89e94c5645880a213763fef48e9451f06d15"
+        },
+        "workdays": {
+          "count": 1,
+          "sha256": "ac7eb5bf9200e46f6e63ac8e8111816076f89a0d07e6f700644746656c574edb"
+        }
+      },
+      "before_dispatch_loss_unchanged": true,
+      "accepted_reply_dropped": {
+        "path": "/workdays/49430692-0317-4abf-9410-549cea5937db/outcome",
+        "status": 200,
+        "reply_sha256": "7a29ef514c14eb8ce82bc9018a4dce4239e6d1aee32ff436436fefc3c5c260c8",
+        "no_store": true
+      },
+      "receipt_recovered": true,
+      "exact_replay_no_second_effect": true
+    },
+    {
+      "family": "end",
+      "negative_controls": [
+        {
+          "case": "no-origin",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        },
+        {
+          "case": "foreign-origin",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        },
+        {
+          "case": "null-origin",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        },
+        {
+          "case": "no-csrf",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        },
+        {
+          "case": "bad-csrf",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        }
+      ],
+      "before": {
+        "account_notice_operations": {
+          "count": 4,
+          "sha256": "73189ef322047b63a0043f3f18a2ac55ff87df3ab14b36dc280dc5baf3861eef"
+        },
+        "accounts": {
+          "count": 1,
+          "sha256": "4d2e3b5e0abed172b9eff4915479fc42c77294b8ce3500fe49b7d7f95a9418e3"
+        },
+        "draft_deletions": {
+          "count": 1,
+          "sha256": "4f3aae6d5fd3c2d801309be129960cf063c8fe2d0bb0408aef34ea56fa30d3b7"
+        },
+        "draft_operations": {
+          "count": 1,
+          "sha256": "1538739c46fafbe403a1da4a23bc64c3fe8012ef99dd83b1a10514fcc4436124"
+        },
+        "drafts": {
+          "count": 1,
+          "sha256": "0c242ad410e95a1ecd7393e0a35da0afb76c257cd6b0871bfa5464ec7f02f856"
+        },
+        "login_limits": {
+          "count": 3,
+          "sha256": "49fc39862a725e4601136bf2214d2ad305859c8c9e1c76c9caccfdb37c826804"
+        },
+        "notice_creation_admissions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "private_migrations": {
+          "count": 14,
+          "sha256": "cb5ca68c780dd5ae90c664a3fc6f22a120e9cc1057774dceb8513f6f06856576"
+        },
+        "security_settings": {
+          "count": 1,
+          "sha256": "4641705168f7eda0055280d4d118b6d56b31c78d5a56da458fc84b1b3815d9c4"
+        },
+        "workday_bus_operations": {
+          "count": 1,
+          "sha256": "61255555469172806288fa7338afa7e24344335f3a951adb981ce168b67290b4"
+        },
+        "workday_buses": {
+          "count": 1,
+          "sha256": "e9061ff5c66e8370f7c58ae680ad5c4f1137b0afb659311e7ef153263f249e7e"
+        },
+        "workday_close_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_deletions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_lifecycles": {
+          "count": 1,
+          "sha256": "ea7c53f187ed5c4d816344681e6df57a824be496b380dd8c514d627ea6075dab"
+        },
+        "workday_notice_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_notices": {
+          "count": 1,
+          "sha256": "f8f0f1a51bee76b7c90791caa6120d6e090a016d421b4caeffb96442a92bf355"
+        },
+        "workday_operations": {
+          "count": 1,
+          "sha256": "e159acacd556cfb345e1b13910d2bd68e9bad6cdf5c7e0690b273770c971b1e8"
+        },
+        "workday_outcome_operations": {
+          "count": 1,
+          "sha256": "824ea8d0bf2ad8ef4682391762c84cda2460e8efd23687697f9ee816b7727c82"
+        },
+        "workday_outcome_revisions": {
+          "count": 1,
+          "sha256": "2ee03a144cd1174d0d5e876145eb60451c669320330747fb4ea0c47d47323e0d"
+        },
+        "workday_outcomes": {
+          "count": 1,
+          "sha256": "65dc2f83d99cf1f6045c9817bfc5957c3660889c8c7033261ff8595629daadf2"
+        },
+        "workday_selection_operations": {
+          "count": 1,
+          "sha256": "76eead9a68172dab6fcdd44968c21c0210f855325897c2b27a6ec2540108b3e0"
+        },
+        "workday_selections": {
+          "count": 1,
+          "sha256": "9cf8024e426ae02f2d515db052a59199fa030f2f448f5750aee23ef1d575e8a2"
+        },
+        "workday_start_operations": {
+          "count": 1,
+          "sha256": "5d81e913ee7dc3fc6398ea14477d89e94c5645880a213763fef48e9451f06d15"
+        },
+        "workdays": {
+          "count": 1,
+          "sha256": "ac7eb5bf9200e46f6e63ac8e8111816076f89a0d07e6f700644746656c574edb"
+        }
+      },
+      "after": {
+        "account_notice_operations": {
+          "count": 4,
+          "sha256": "73189ef322047b63a0043f3f18a2ac55ff87df3ab14b36dc280dc5baf3861eef"
+        },
+        "accounts": {
+          "count": 1,
+          "sha256": "4d2e3b5e0abed172b9eff4915479fc42c77294b8ce3500fe49b7d7f95a9418e3"
+        },
+        "draft_deletions": {
+          "count": 1,
+          "sha256": "4f3aae6d5fd3c2d801309be129960cf063c8fe2d0bb0408aef34ea56fa30d3b7"
+        },
+        "draft_operations": {
+          "count": 1,
+          "sha256": "1538739c46fafbe403a1da4a23bc64c3fe8012ef99dd83b1a10514fcc4436124"
+        },
+        "drafts": {
+          "count": 1,
+          "sha256": "0c242ad410e95a1ecd7393e0a35da0afb76c257cd6b0871bfa5464ec7f02f856"
+        },
+        "login_limits": {
+          "count": 3,
+          "sha256": "49fc39862a725e4601136bf2214d2ad305859c8c9e1c76c9caccfdb37c826804"
+        },
+        "notice_creation_admissions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "private_migrations": {
+          "count": 14,
+          "sha256": "cb5ca68c780dd5ae90c664a3fc6f22a120e9cc1057774dceb8513f6f06856576"
+        },
+        "security_settings": {
+          "count": 1,
+          "sha256": "4641705168f7eda0055280d4d118b6d56b31c78d5a56da458fc84b1b3815d9c4"
+        },
+        "workday_bus_operations": {
+          "count": 1,
+          "sha256": "5a08e4638164b754fd032a6a4a820cd17b9456196fddf6f6c49a526638089c03"
+        },
+        "workday_buses": {
+          "count": 1,
+          "sha256": "e9061ff5c66e8370f7c58ae680ad5c4f1137b0afb659311e7ef153263f249e7e"
+        },
+        "workday_close_operations": {
+          "count": 1,
+          "sha256": "5c2331dfbedaa900b86235ea45b8deb0327fe0e4526a45cdde7b0c4d090910c8"
+        },
+        "workday_deletions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_lifecycles": {
+          "count": 1,
+          "sha256": "9d638dea286fb68abcf13e7e6b944d8da3193630e7d25f79ba7dd73d99a62d42"
+        },
+        "workday_notice_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_notices": {
+          "count": 1,
+          "sha256": "f8f0f1a51bee76b7c90791caa6120d6e090a016d421b4caeffb96442a92bf355"
+        },
+        "workday_operations": {
+          "count": 1,
+          "sha256": "8921a73715cc30ec764495f99a046b7c79453175c20a78236bf68f99ded01d20"
+        },
+        "workday_outcome_operations": {
+          "count": 1,
+          "sha256": "2a562af59408bdf668ed6add5043cb08cb65ce81c36d16d38e919cda271c0744"
+        },
+        "workday_outcome_revisions": {
+          "count": 1,
+          "sha256": "2ee03a144cd1174d0d5e876145eb60451c669320330747fb4ea0c47d47323e0d"
+        },
+        "workday_outcomes": {
+          "count": 1,
+          "sha256": "65dc2f83d99cf1f6045c9817bfc5957c3660889c8c7033261ff8595629daadf2"
+        },
+        "workday_selection_operations": {
+          "count": 1,
+          "sha256": "acbb2e8ef7aa28920bb529bd103b8510a07bd62256d56a895587c98003cae37f"
+        },
+        "workday_selections": {
+          "count": 1,
+          "sha256": "9cf8024e426ae02f2d515db052a59199fa030f2f448f5750aee23ef1d575e8a2"
+        },
+        "workday_start_operations": {
+          "count": 1,
+          "sha256": "b13c03f20776c658ceb7f4c62b0ca1323672f8c4fd61559ab6665aebae925d76"
+        },
+        "workdays": {
+          "count": 1,
+          "sha256": "bacf88d8dd32948fa062f468ea8190c044d34f39af016ba5c4540670c0aee83a"
+        }
+      },
+      "before_dispatch_loss_unchanged": true,
+      "accepted_reply_dropped": {
+        "path": "/workdays/49430692-0317-4abf-9410-549cea5937db/close",
+        "status": 200,
+        "reply_sha256": "b3e1e7737045f9a8e91011e7d38d35578801956e242564e4c77ba1b2c8bc3a0f",
+        "no_store": true
+      },
+      "receipt_recovered": true,
+      "exact_replay_no_second_effect": true
+    },
+    {
+      "family": "abort",
+      "negative_controls": [
+        {
+          "case": "no-origin",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        },
+        {
+          "case": "foreign-origin",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        },
+        {
+          "case": "null-origin",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        },
+        {
+          "case": "no-csrf",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        },
+        {
+          "case": "bad-csrf",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        }
+      ],
+      "before": {
+        "account_notice_operations": {
+          "count": 4,
+          "sha256": "73189ef322047b63a0043f3f18a2ac55ff87df3ab14b36dc280dc5baf3861eef"
+        },
+        "accounts": {
+          "count": 1,
+          "sha256": "4d2e3b5e0abed172b9eff4915479fc42c77294b8ce3500fe49b7d7f95a9418e3"
+        },
+        "draft_deletions": {
+          "count": 1,
+          "sha256": "4f3aae6d5fd3c2d801309be129960cf063c8fe2d0bb0408aef34ea56fa30d3b7"
+        },
+        "draft_operations": {
+          "count": 2,
+          "sha256": "3fb0288c30df73bcbe010073a74e8ff4ea8fcee359e47f2297cc3268fd6d079f"
+        },
+        "drafts": {
+          "count": 2,
+          "sha256": "4d8ba297112bbfa9c1fefa97a84e21f4b9fa9de4055937b55ec4e89b3cab638e"
+        },
+        "login_limits": {
+          "count": 3,
+          "sha256": "49fc39862a725e4601136bf2214d2ad305859c8c9e1c76c9caccfdb37c826804"
+        },
+        "notice_creation_admissions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "private_migrations": {
+          "count": 14,
+          "sha256": "cb5ca68c780dd5ae90c664a3fc6f22a120e9cc1057774dceb8513f6f06856576"
+        },
+        "security_settings": {
+          "count": 1,
+          "sha256": "4641705168f7eda0055280d4d118b6d56b31c78d5a56da458fc84b1b3815d9c4"
+        },
+        "workday_bus_operations": {
+          "count": 1,
+          "sha256": "5a08e4638164b754fd032a6a4a820cd17b9456196fddf6f6c49a526638089c03"
+        },
+        "workday_buses": {
+          "count": 1,
+          "sha256": "e9061ff5c66e8370f7c58ae680ad5c4f1137b0afb659311e7ef153263f249e7e"
+        },
+        "workday_close_operations": {
+          "count": 1,
+          "sha256": "5c2331dfbedaa900b86235ea45b8deb0327fe0e4526a45cdde7b0c4d090910c8"
+        },
+        "workday_deletions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_lifecycles": {
+          "count": 2,
+          "sha256": "f44903647800c67e345ff29f66702e5aa671d91ba961fb0028011fd0c5b85bda"
+        },
+        "workday_notice_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_notices": {
+          "count": 1,
+          "sha256": "f8f0f1a51bee76b7c90791caa6120d6e090a016d421b4caeffb96442a92bf355"
+        },
+        "workday_operations": {
+          "count": 2,
+          "sha256": "55c53035663c631ce77bec7f7aaa3e65f7037a6a560bf7f2af1bb68638db31c6"
+        },
+        "workday_outcome_operations": {
+          "count": 1,
+          "sha256": "2a562af59408bdf668ed6add5043cb08cb65ce81c36d16d38e919cda271c0744"
+        },
+        "workday_outcome_revisions": {
+          "count": 1,
+          "sha256": "2ee03a144cd1174d0d5e876145eb60451c669320330747fb4ea0c47d47323e0d"
+        },
+        "workday_outcomes": {
+          "count": 1,
+          "sha256": "65dc2f83d99cf1f6045c9817bfc5957c3660889c8c7033261ff8595629daadf2"
+        },
+        "workday_selection_operations": {
+          "count": 1,
+          "sha256": "acbb2e8ef7aa28920bb529bd103b8510a07bd62256d56a895587c98003cae37f"
+        },
+        "workday_selections": {
+          "count": 1,
+          "sha256": "9cf8024e426ae02f2d515db052a59199fa030f2f448f5750aee23ef1d575e8a2"
+        },
+        "workday_start_operations": {
+          "count": 2,
+          "sha256": "debd68a7a993a9a399fd91fd92a4ec0b2eab9d1021a318100d6caa75cdec8939"
+        },
+        "workdays": {
+          "count": 2,
+          "sha256": "e213ca66d69db49fccf95c96a0f67018d0b772aadd188c23b3a4082f16f572cf"
+        }
+      },
+      "after": {
+        "account_notice_operations": {
+          "count": 4,
+          "sha256": "73189ef322047b63a0043f3f18a2ac55ff87df3ab14b36dc280dc5baf3861eef"
+        },
+        "accounts": {
+          "count": 1,
+          "sha256": "4d2e3b5e0abed172b9eff4915479fc42c77294b8ce3500fe49b7d7f95a9418e3"
+        },
+        "draft_deletions": {
+          "count": 1,
+          "sha256": "4f3aae6d5fd3c2d801309be129960cf063c8fe2d0bb0408aef34ea56fa30d3b7"
+        },
+        "draft_operations": {
+          "count": 2,
+          "sha256": "3fb0288c30df73bcbe010073a74e8ff4ea8fcee359e47f2297cc3268fd6d079f"
+        },
+        "drafts": {
+          "count": 2,
+          "sha256": "4d8ba297112bbfa9c1fefa97a84e21f4b9fa9de4055937b55ec4e89b3cab638e"
+        },
+        "login_limits": {
+          "count": 3,
+          "sha256": "49fc39862a725e4601136bf2214d2ad305859c8c9e1c76c9caccfdb37c826804"
+        },
+        "notice_creation_admissions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "private_migrations": {
+          "count": 14,
+          "sha256": "cb5ca68c780dd5ae90c664a3fc6f22a120e9cc1057774dceb8513f6f06856576"
+        },
+        "security_settings": {
+          "count": 1,
+          "sha256": "4641705168f7eda0055280d4d118b6d56b31c78d5a56da458fc84b1b3815d9c4"
+        },
+        "workday_bus_operations": {
+          "count": 1,
+          "sha256": "5a08e4638164b754fd032a6a4a820cd17b9456196fddf6f6c49a526638089c03"
+        },
+        "workday_buses": {
+          "count": 1,
+          "sha256": "e9061ff5c66e8370f7c58ae680ad5c4f1137b0afb659311e7ef153263f249e7e"
+        },
+        "workday_close_operations": {
+          "count": 2,
+          "sha256": "0399c5a659b6d4a5ed22b85b9da0a9681657320238454483030a41df20b8bbed"
+        },
+        "workday_deletions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_lifecycles": {
+          "count": 2,
+          "sha256": "e61c3302b5a1cae9426011213601a2ad644b199bb95f7979fd828efbd1f1e457"
+        },
+        "workday_notice_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_notices": {
+          "count": 1,
+          "sha256": "f8f0f1a51bee76b7c90791caa6120d6e090a016d421b4caeffb96442a92bf355"
+        },
+        "workday_operations": {
+          "count": 2,
+          "sha256": "b420b26c95c017ca55e3345a9a82155a5251975d5ec9968999864564774db657"
+        },
+        "workday_outcome_operations": {
+          "count": 1,
+          "sha256": "2a562af59408bdf668ed6add5043cb08cb65ce81c36d16d38e919cda271c0744"
+        },
+        "workday_outcome_revisions": {
+          "count": 1,
+          "sha256": "2ee03a144cd1174d0d5e876145eb60451c669320330747fb4ea0c47d47323e0d"
+        },
+        "workday_outcomes": {
+          "count": 1,
+          "sha256": "65dc2f83d99cf1f6045c9817bfc5957c3660889c8c7033261ff8595629daadf2"
+        },
+        "workday_selection_operations": {
+          "count": 1,
+          "sha256": "acbb2e8ef7aa28920bb529bd103b8510a07bd62256d56a895587c98003cae37f"
+        },
+        "workday_selections": {
+          "count": 1,
+          "sha256": "9cf8024e426ae02f2d515db052a59199fa030f2f448f5750aee23ef1d575e8a2"
+        },
+        "workday_start_operations": {
+          "count": 2,
+          "sha256": "d792090dd94f512c49e934351bbad24b95d3136ab8a99cf9b13681ab5cb0ca98"
+        },
+        "workdays": {
+          "count": 2,
+          "sha256": "d90e104a4161f94d1d4b6d675ca387f099a554afa8debf3ee3ad02d9c48823d1"
+        }
+      },
+      "before_dispatch_loss_unchanged": true,
+      "accepted_reply_dropped": {
+        "path": "/workdays/da61fe4f-fa73-4abb-b05f-e85a01607d76/close",
+        "status": 200,
+        "reply_sha256": "373edc62377f6e5ff74b94332a5ee2143443f174d78c265b8d3559b7979bb781",
+        "no_store": true
+      },
+      "receipt_recovered": true,
+      "exact_replay_no_second_effect": true
+    },
+    {
+      "family": "plan-delete",
+      "negative_controls": [
+        {
+          "case": "no-origin",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        },
+        {
+          "case": "foreign-origin",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        },
+        {
+          "case": "null-origin",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        },
+        {
+          "case": "no-csrf",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        },
+        {
+          "case": "bad-csrf",
+          "status": 403,
+          "all_non_session_tables_unchanged": true
+        }
+      ],
+      "before": {
+        "account_notice_operations": {
+          "count": 4,
+          "sha256": "73189ef322047b63a0043f3f18a2ac55ff87df3ab14b36dc280dc5baf3861eef"
+        },
+        "accounts": {
+          "count": 1,
+          "sha256": "4d2e3b5e0abed172b9eff4915479fc42c77294b8ce3500fe49b7d7f95a9418e3"
+        },
+        "draft_deletions": {
+          "count": 1,
+          "sha256": "4f3aae6d5fd3c2d801309be129960cf063c8fe2d0bb0408aef34ea56fa30d3b7"
+        },
+        "draft_operations": {
+          "count": 2,
+          "sha256": "3fb0288c30df73bcbe010073a74e8ff4ea8fcee359e47f2297cc3268fd6d079f"
+        },
+        "drafts": {
+          "count": 2,
+          "sha256": "4d8ba297112bbfa9c1fefa97a84e21f4b9fa9de4055937b55ec4e89b3cab638e"
+        },
+        "login_limits": {
+          "count": 3,
+          "sha256": "49fc39862a725e4601136bf2214d2ad305859c8c9e1c76c9caccfdb37c826804"
+        },
+        "notice_creation_admissions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "private_migrations": {
+          "count": 14,
+          "sha256": "cb5ca68c780dd5ae90c664a3fc6f22a120e9cc1057774dceb8513f6f06856576"
+        },
+        "security_settings": {
+          "count": 1,
+          "sha256": "4641705168f7eda0055280d4d118b6d56b31c78d5a56da458fc84b1b3815d9c4"
+        },
+        "workday_bus_operations": {
+          "count": 1,
+          "sha256": "5a08e4638164b754fd032a6a4a820cd17b9456196fddf6f6c49a526638089c03"
+        },
+        "workday_buses": {
+          "count": 1,
+          "sha256": "e9061ff5c66e8370f7c58ae680ad5c4f1137b0afb659311e7ef153263f249e7e"
+        },
+        "workday_close_operations": {
+          "count": 2,
+          "sha256": "0399c5a659b6d4a5ed22b85b9da0a9681657320238454483030a41df20b8bbed"
+        },
+        "workday_deletions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_lifecycles": {
+          "count": 2,
+          "sha256": "e61c3302b5a1cae9426011213601a2ad644b199bb95f7979fd828efbd1f1e457"
+        },
+        "workday_notice_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_notices": {
+          "count": 1,
+          "sha256": "f8f0f1a51bee76b7c90791caa6120d6e090a016d421b4caeffb96442a92bf355"
+        },
+        "workday_operations": {
+          "count": 2,
+          "sha256": "b420b26c95c017ca55e3345a9a82155a5251975d5ec9968999864564774db657"
+        },
+        "workday_outcome_operations": {
+          "count": 1,
+          "sha256": "2a562af59408bdf668ed6add5043cb08cb65ce81c36d16d38e919cda271c0744"
+        },
+        "workday_outcome_revisions": {
+          "count": 1,
+          "sha256": "2ee03a144cd1174d0d5e876145eb60451c669320330747fb4ea0c47d47323e0d"
+        },
+        "workday_outcomes": {
+          "count": 1,
+          "sha256": "65dc2f83d99cf1f6045c9817bfc5957c3660889c8c7033261ff8595629daadf2"
+        },
+        "workday_selection_operations": {
+          "count": 1,
+          "sha256": "acbb2e8ef7aa28920bb529bd103b8510a07bd62256d56a895587c98003cae37f"
+        },
+        "workday_selections": {
+          "count": 1,
+          "sha256": "9cf8024e426ae02f2d515db052a59199fa030f2f448f5750aee23ef1d575e8a2"
+        },
+        "workday_start_operations": {
+          "count": 2,
+          "sha256": "d792090dd94f512c49e934351bbad24b95d3136ab8a99cf9b13681ab5cb0ca98"
+        },
+        "workdays": {
+          "count": 2,
+          "sha256": "d90e104a4161f94d1d4b6d675ca387f099a554afa8debf3ee3ad02d9c48823d1"
+        }
+      },
+      "after": {
+        "account_notice_operations": {
+          "count": 4,
+          "sha256": "73189ef322047b63a0043f3f18a2ac55ff87df3ab14b36dc280dc5baf3861eef"
+        },
+        "accounts": {
+          "count": 1,
+          "sha256": "4d2e3b5e0abed172b9eff4915479fc42c77294b8ce3500fe49b7d7f95a9418e3"
+        },
+        "draft_deletions": {
+          "count": 1,
+          "sha256": "4f3aae6d5fd3c2d801309be129960cf063c8fe2d0bb0408aef34ea56fa30d3b7"
+        },
+        "draft_operations": {
+          "count": 2,
+          "sha256": "3fb0288c30df73bcbe010073a74e8ff4ea8fcee359e47f2297cc3268fd6d079f"
+        },
+        "drafts": {
+          "count": 2,
+          "sha256": "4d8ba297112bbfa9c1fefa97a84e21f4b9fa9de4055937b55ec4e89b3cab638e"
+        },
+        "login_limits": {
+          "count": 3,
+          "sha256": "49fc39862a725e4601136bf2214d2ad305859c8c9e1c76c9caccfdb37c826804"
+        },
+        "notice_creation_admissions": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "private_migrations": {
+          "count": 14,
+          "sha256": "cb5ca68c780dd5ae90c664a3fc6f22a120e9cc1057774dceb8513f6f06856576"
+        },
+        "security_settings": {
+          "count": 1,
+          "sha256": "4641705168f7eda0055280d4d118b6d56b31c78d5a56da458fc84b1b3815d9c4"
+        },
+        "workday_bus_operations": {
+          "count": 1,
+          "sha256": "5a08e4638164b754fd032a6a4a820cd17b9456196fddf6f6c49a526638089c03"
+        },
+        "workday_buses": {
+          "count": 1,
+          "sha256": "e9061ff5c66e8370f7c58ae680ad5c4f1137b0afb659311e7ef153263f249e7e"
+        },
+        "workday_close_operations": {
+          "count": 1,
+          "sha256": "5c2331dfbedaa900b86235ea45b8deb0327fe0e4526a45cdde7b0c4d090910c8"
+        },
+        "workday_deletions": {
+          "count": 1,
+          "sha256": "15408727bd2738f9b45c09ac8cc47383192b17758496504e4cef7fa7fd4e7d1e"
+        },
+        "workday_lifecycles": {
+          "count": 1,
+          "sha256": "9d638dea286fb68abcf13e7e6b944d8da3193630e7d25f79ba7dd73d99a62d42"
+        },
+        "workday_notice_operations": {
+          "count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "workday_notices": {
+          "count": 1,
+          "sha256": "f8f0f1a51bee76b7c90791caa6120d6e090a016d421b4caeffb96442a92bf355"
+        },
+        "workday_operations": {
+          "count": 1,
+          "sha256": "8921a73715cc30ec764495f99a046b7c79453175c20a78236bf68f99ded01d20"
+        },
+        "workday_outcome_operations": {
+          "count": 1,
+          "sha256": "2a562af59408bdf668ed6add5043cb08cb65ce81c36d16d38e919cda271c0744"
+        },
+        "workday_outcome_revisions": {
+          "count": 1,
+          "sha256": "2ee03a144cd1174d0d5e876145eb60451c669320330747fb4ea0c47d47323e0d"
+        },
+        "workday_outcomes": {
+          "count": 1,
+          "sha256": "65dc2f83d99cf1f6045c9817bfc5957c3660889c8c7033261ff8595629daadf2"
+        },
+        "workday_selection_operations": {
+          "count": 1,
+          "sha256": "acbb2e8ef7aa28920bb529bd103b8510a07bd62256d56a895587c98003cae37f"
+        },
+        "workday_selections": {
+          "count": 1,
+          "sha256": "9cf8024e426ae02f2d515db052a59199fa030f2f448f5750aee23ef1d575e8a2"
+        },
+        "workday_start_operations": {
+          "count": 1,
+          "sha256": "b13c03f20776c658ceb7f4c62b0ca1323672f8c4fd61559ab6665aebae925d76"
+        },
+        "workdays": {
+          "count": 1,
+          "sha256": "bacf88d8dd32948fa062f468ea8190c044d34f39af016ba5c4540670c0aee83a"
+        }
+      },
+      "before_dispatch_loss_unchanged": true,
+      "accepted_reply_dropped": {
+        "path": "/workdays/da61fe4f-fa73-4abb-b05f-e85a01607d76/delete",
+        "status": 200,
+        "reply_sha256": "e867a0ef2f7d788fa012789c39284fb10fb5ec0fac8ed661970270c44c8b9e75",
+        "no_store": true
+      },
+      "receipt_recovered": true,
+      "exact_replay_no_second_effect": true
+    }
+  ],
+  "passed": true
+}
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 36616)
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.13/socketserver.py", line 697, in process_request_thread
+    self.finish_request(request, client_address)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/socketserver.py", line 766, in __init__
+    self.handle()
+    ~~~~~~~~~~~^^
+  File "/usr/local/lib/python3.13/http/server.py", line 451, in handle
+    self.handle_one_request()
+    ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/usr/local/lib/python3.13/http/server.py", line 439, in handle_one_request
+    method()
+    ~~~~~~^^
+  File "/probe/http_loss.py", line 36, in do_GET
+    def do_GET(self): self.relay()
+                      ~~~~~~~~~~^^
+  File "/probe/http_loss.py", line 46, in relay
+    upstream.request(self.command, self.path, body, dict(self.headers))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/http/client.py", line 1386, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/http/client.py", line 1432, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/http/client.py", line 1381, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/http/client.py", line 1141, in _send_output
+    self.send(msg)
+    ~~~~~~~~~^^^^^
+  File "/usr/local/lib/python3.13/http/client.py", line 1085, in send
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "/usr/local/lib/python3.13/http/client.py", line 1051, in connect
+    self.sock = self._create_connection(
+                ~~~~~~~~~~~~~~~~~~~~~~~^
+        (self.host,self.port), self.timeout, self.source_address)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/socket.py", line 868, in create_connection
+    raise exceptions[0]
+  File "/usr/local/lib/python3.13/socket.py", line 853, in create_connection
+    sock.connect(sa)
+    ~~~~~~~~~~~~^^^^
+ConnectionRefusedError: [Errno 111] Connection refused
+----------------------------------------
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 36622)
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.13/socketserver.py", line 697, in process_request_thread
+    self.finish_request(request, client_address)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/socketserver.py", line 766, in __init__
+    self.handle()
+    ~~~~~~~~~~~^^
+  File "/usr/local/lib/python3.13/http/server.py", line 451, in handle
+    self.handle_one_request()
+    ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/usr/local/lib/python3.13/http/server.py", line 439, in handle_one_request
+    method()
+    ~~~~~~^^
+  File "/probe/http_loss.py", line 36, in do_GET
+    def do_GET(self): self.relay()
+                      ~~~~~~~~~~^^
+  File "/probe/http_loss.py", line 46, in relay
+    upstream.request(self.command, self.path, body, dict(self.headers))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/http/client.py", line 1386, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/http/client.py", line 1432, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/http/client.py", line 1381, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/http/client.py", line 1141, in _send_output
+    self.send(msg)
+    ~~~~~~~~~^^^^^
+  File "/usr/local/lib/python3.13/http/client.py", line 1085, in send
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "/usr/local/lib/python3.13/http/client.py", line 1051, in connect
+    self.sock = self._create_connection(
+                ~~~~~~~~~~~~~~~~~~~~~~~^
+        (self.host,self.port), self.timeout, self.source_address)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/socket.py", line 868, in create_connection
+    raise exceptions[0]
+  File "/usr/local/lib/python3.13/socket.py", line 853, in create_connection
+    sock.connect(sa)
+    ~~~~~~~~~~~~^^^^
+ConnectionRefusedError: [Errno 111] Connection refused
+----------------------------------------
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 36634)
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.13/socketserver.py", line 697, in process_request_thread
+    self.finish_request(request, client_address)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/socketserver.py", line 766, in __init__
+    self.handle()
+    ~~~~~~~~~~~^^
+  File "/usr/local/lib/python3.13/http/server.py", line 451, in handle
+    self.handle_one_request()
+    ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/usr/local/lib/python3.13/http/server.py", line 439, in handle_one_request
+    method()
+    ~~~~~~^^
+  File "/probe/http_loss.py", line 36, in do_GET
+    def do_GET(self): self.relay()
+                      ~~~~~~~~~~^^
+  File "/probe/http_loss.py", line 46, in relay
+    upstream.request(self.command, self.path, body, dict(self.headers))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/http/client.py", line 1386, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/http/client.py", line 1432, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/http/client.py", line 1381, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/http/client.py", line 1141, in _send_output
+    self.send(msg)
+    ~~~~~~~~~^^^^^
+  File "/usr/local/lib/python3.13/http/client.py", line 1085, in send
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "/usr/local/lib/python3.13/http/client.py", line 1051, in connect
+    self.sock = self._create_connection(
+                ~~~~~~~~~~~~~~~~~~~~~~~^
+        (self.host,self.port), self.timeout, self.source_address)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/socket.py", line 868, in create_connection
+    raise exceptions[0]
+  File "/usr/local/lib/python3.13/socket.py", line 853, in create_connection
+    sock.connect(sa)
+    ~~~~~~~~~~~~^^^^
+ConnectionRefusedError: [Errno 111] Connection refused
+----------------------------------------
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 36636)
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.13/socketserver.py", line 697, in process_request_thread
+    self.finish_request(request, client_address)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/socketserver.py", line 766, in __init__
+    self.handle()
+    ~~~~~~~~~~~^^
+  File "/usr/local/lib/python3.13/http/server.py", line 451, in handle
+    self.handle_one_request()
+    ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/usr/local/lib/python3.13/http/server.py", line 439, in handle_one_request
+    method()
+    ~~~~~~^^
+  File "/probe/http_loss.py", line 36, in do_GET
+    def do_GET(self): self.relay()
+                      ~~~~~~~~~~^^
+  File "/probe/http_loss.py", line 46, in relay
+    upstream.request(self.command, self.path, body, dict(self.headers))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/http/client.py", line 1386, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/http/client.py", line 1432, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/http/client.py", line 1381, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/http/client.py", line 1141, in _send_output
+    self.send(msg)
+    ~~~~~~~~~^^^^^
+  File "/usr/local/lib/python3.13/http/client.py", line 1085, in send
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "/usr/local/lib/python3.13/http/client.py", line 1051, in connect
+    self.sock = self._create_connection(
+                ~~~~~~~~~~~~~~~~~~~~~~~^
+        (self.host,self.port), self.timeout, self.source_address)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/socket.py", line 868, in create_connection
+    raise exceptions[0]
+  File "/usr/local/lib/python3.13/socket.py", line 853, in create_connection
+    sock.connect(sa)
+    ~~~~~~~~~~~~^^^^
+ConnectionRefusedError: [Errno 111] Connection refused
+----------------------------------------
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 36642)
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.13/socketserver.py", line 697, in process_request_thread
+    self.finish_request(request, client_address)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/socketserver.py", line 766, in __init__
+    self.handle()
+    ~~~~~~~~~~~^^
+  File "/usr/local/lib/python3.13/http/server.py", line 451, in handle
+    self.handle_one_request()
+    ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/usr/local/lib/python3.13/http/server.py", line 439, in handle_one_request
+    method()
+    ~~~~~~^^
+  File "/probe/http_loss.py", line 36, in do_GET
+    def do_GET(self): self.relay()
+                      ~~~~~~~~~~^^
+  File "/probe/http_loss.py", line 46, in relay
+    upstream.request(self.command, self.path, body, dict(self.headers))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/http/client.py", line 1386, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/http/client.py", line 1432, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/http/client.py", line 1381, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/http/client.py", line 1141, in _send_output
+    self.send(msg)
+    ~~~~~~~~~^^^^^
+  File "/usr/local/lib/python3.13/http/client.py", line 1085, in send
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "/usr/local/lib/python3.13/http/client.py", line 1051, in connect
+    self.sock = self._create_connection(
+                ~~~~~~~~~~~~~~~~~~~~~~~^
+        (self.host,self.port), self.timeout, self.source_address)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/socket.py", line 868, in create_connection
+    raise exceptions[0]
+  File "/usr/local/lib/python3.13/socket.py", line 853, in create_connection
+    sock.connect(sa)
+    ~~~~~~~~~~~~^^^^
+ConnectionRefusedError: [Errno 111] Connection refused
+----------------------------------------
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 36656)
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.13/socketserver.py", line 697, in process_request_thread
+    self.finish_request(request, client_address)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/socketserver.py", line 766, in __init__
+    self.handle()
+    ~~~~~~~~~~~^^
+  File "/usr/local/lib/python3.13/http/server.py", line 451, in handle
+    self.handle_one_request()
+    ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/usr/local/lib/python3.13/http/server.py", line 439, in handle_one_request
+    method()
+    ~~~~~~^^
+  File "/probe/http_loss.py", line 36, in do_GET
+    def do_GET(self): self.relay()
+                      ~~~~~~~~~~^^
+  File "/probe/http_loss.py", line 46, in relay
+    upstream.request(self.command, self.path, body, dict(self.headers))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/http/client.py", line 1386, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/http/client.py", line 1432, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/http/client.py", line 1381, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/http/client.py", line 1141, in _send_output
+    self.send(msg)
+    ~~~~~~~~~^^^^^
+  File "/usr/local/lib/python3.13/http/client.py", line 1085, in send
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "/usr/local/lib/python3.13/http/client.py", line 1051, in connect
+    self.sock = self._create_connection(
+                ~~~~~~~~~~~~~~~~~~~~~~~^
+        (self.host,self.port), self.timeout, self.source_address)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/socket.py", line 868, in create_connection
+    raise exceptions[0]
+  File "/usr/local/lib/python3.13/socket.py", line 853, in create_connection
+    sock.connect(sa)
+    ~~~~~~~~~~~~^^^^
+ConnectionRefusedError: [Errno 111] Connection refused
+----------------------------------------
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 36660)
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.13/socketserver.py", line 697, in process_request_thread
+    self.finish_request(request, client_address)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/socketserver.py", line 766, in __init__
+    self.handle()
+    ~~~~~~~~~~~^^
+  File "/usr/local/lib/python3.13/http/server.py", line 451, in handle
+    self.handle_one_request()
+    ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/usr/local/lib/python3.13/http/server.py", line 439, in handle_one_request
+    method()
+    ~~~~~~^^
+  File "/probe/http_loss.py", line 36, in do_GET
+    def do_GET(self): self.relay()
+                      ~~~~~~~~~~^^
+  File "/probe/http_loss.py", line 46, in relay
+    upstream.request(self.command, self.path, body, dict(self.headers))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/http/client.py", line 1386, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/http/client.py", line 1432, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/http/client.py", line 1381, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/http/client.py", line 1141, in _send_output
+    self.send(msg)
+    ~~~~~~~~~^^^^^
+  File "/usr/local/lib/python3.13/http/client.py", line 1085, in send
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "/usr/local/lib/python3.13/http/client.py", line 1051, in connect
+    self.sock = self._create_connection(
+                ~~~~~~~~~~~~~~~~~~~~~~~^
+        (self.host,self.port), self.timeout, self.source_address)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/socket.py", line 868, in create_connection
+    raise exceptions[0]
+  File "/usr/local/lib/python3.13/socket.py", line 853, in create_connection
+    sock.connect(sa)
+    ~~~~~~~~~~~~^^^^
+ConnectionRefusedError: [Errno 111] Connection refused
+----------------------------------------
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 36668)
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.13/socketserver.py", line 697, in process_request_thread
+    self.finish_request(request, client_address)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/socketserver.py", line 766, in __init__
+    self.handle()
+    ~~~~~~~~~~~^^
+  File "/usr/local/lib/python3.13/http/server.py", line 451, in handle
+    self.handle_one_request()
+    ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/usr/local/lib/python3.13/http/server.py", line 439, in handle_one_request
+    method()
+    ~~~~~~^^
+  File "/probe/http_loss.py", line 36, in do_GET
+    def do_GET(self): self.relay()
+                      ~~~~~~~~~~^^
+  File "/probe/http_loss.py", line 46, in relay
+    upstream.request(self.command, self.path, body, dict(self.headers))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/http/client.py", line 1386, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/http/client.py", line 1432, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/http/client.py", line 1381, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/http/client.py", line 1141, in _send_output
+    self.send(msg)
+    ~~~~~~~~~^^^^^
+  File "/usr/local/lib/python3.13/http/client.py", line 1085, in send
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "/usr/local/lib/python3.13/http/client.py", line 1051, in connect
+    self.sock = self._create_connection(
+                ~~~~~~~~~~~~~~~~~~~~~~~^
+        (self.host,self.port), self.timeout, self.source_address)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/socket.py", line 868, in create_connection
+    raise exceptions[0]
+  File "/usr/local/lib/python3.13/socket.py", line 853, in create_connection
+    sock.connect(sa)
+    ~~~~~~~~~~~~^^^^
+ConnectionRefusedError: [Errno 111] Connection refused
+----------------------------------------
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 36678)
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.13/socketserver.py", line 697, in process_request_thread
+    self.finish_request(request, client_address)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/socketserver.py", line 766, in __init__
+    self.handle()
+    ~~~~~~~~~~~^^
+  File "/usr/local/lib/python3.13/http/server.py", line 451, in handle
+    self.handle_one_request()
+    ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/usr/local/lib/python3.13/http/server.py", line 439, in handle_one_request
+    method()
+    ~~~~~~^^
+  File "/probe/http_loss.py", line 36, in do_GET
+    def do_GET(self): self.relay()
+                      ~~~~~~~~~~^^
+  File "/probe/http_loss.py", line 46, in relay
+    upstream.request(self.command, self.path, body, dict(self.headers))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/http/client.py", line 1386, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/http/client.py", line 1432, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/http/client.py", line 1381, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/http/client.py", line 1141, in _send_output
+    self.send(msg)
+    ~~~~~~~~~^^^^^
+  File "/usr/local/lib/python3.13/http/client.py", line 1085, in send
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "/usr/local/lib/python3.13/http/client.py", line 1051, in connect
+    self.sock = self._create_connection(
+                ~~~~~~~~~~~~~~~~~~~~~~~^
+        (self.host,self.port), self.timeout, self.source_address)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/socket.py", line 868, in create_connection
+    raise exceptions[0]
+  File "/usr/local/lib/python3.13/socket.py", line 853, in create_connection
+    sock.connect(sa)
+    ~~~~~~~~~~~~^^^^
+ConnectionRefusedError: [Errno 111] Connection refused
+----------------------------------------
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 36694)
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.13/socketserver.py", line 697, in process_request_thread
+    self.finish_request(request, client_address)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/socketserver.py", line 766, in __init__
+    self.handle()
+    ~~~~~~~~~~~^^
+  File "/usr/local/lib/python3.13/http/server.py", line 451, in handle
+    self.handle_one_request()
+    ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/usr/local/lib/python3.13/http/server.py", line 439, in handle_one_request
+    method()
+    ~~~~~~^^
+  File "/probe/http_loss.py", line 36, in do_GET
+    def do_GET(self): self.relay()
+                      ~~~~~~~~~~^^
+  File "/probe/http_loss.py", line 46, in relay
+    upstream.request(self.command, self.path, body, dict(self.headers))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/http/client.py", line 1386, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/http/client.py", line 1432, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/http/client.py", line 1381, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/http/client.py", line 1141, in _send_output
+    self.send(msg)
+    ~~~~~~~~~^^^^^
+  File "/usr/local/lib/python3.13/http/client.py", line 1085, in send
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "/usr/local/lib/python3.13/http/client.py", line 1051, in connect
+    self.sock = self._create_connection(
+                ~~~~~~~~~~~~~~~~~~~~~~~^
+        (self.host,self.port), self.timeout, self.source_address)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/socket.py", line 868, in create_connection
+    raise exceptions[0]
+  File "/usr/local/lib/python3.13/socket.py", line 853, in create_connection
+    sock.connect(sa)
+    ~~~~~~~~~~~~^^^^
+ConnectionRefusedError: [Errno 111] Connection refused
+----------------------------------------

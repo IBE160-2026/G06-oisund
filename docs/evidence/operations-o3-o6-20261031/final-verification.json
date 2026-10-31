@@ -1,0 +1,47 @@
+{
+  "at_utc": "2026-10-31T03:29:43.108159+00:00",
+  "baseline": "5cee9e03d03d2c9c165c7f8fec64aa3e146959ab",
+  "preexisting_containers": 49,
+  "preexisting_volumes": 22,
+  "lifecycle_images_mounts_volumes_preserved": true,
+  "ignored_comparison_field": "State.Health.Log only",
+  "initial_preservation_failure_explained_by_health_log_rotation_only": true,
+  "own_test_containers_networks_absent": true,
+  "product_and_approved_reflection_unchanged": true,
+  "concurrent_additions_preserved_not_created_by_this_runner": {
+    "containers": [
+      {
+        "Id": "9ee2e1231fcdd4feaacd321c3c137486e156d5503eb6132986c5de3bec16e915",
+        "Name": "/ibe160-password-tests-api-1",
+        "Created": "2026-10-31T03:24:36.482837802Z"
+      },
+      {
+        "Id": "643a023d4fec68cd7828d2c189d09bd92ed672e339a76996971c6310592e86ee",
+        "Name": "/ibe160-password-tests-private-api-1",
+        "Created": "2026-10-31T03:24:36.477264567Z"
+      },
+      {
+        "Id": "07d686cec1c4d720015e7a4890ad7b32b19232186b77a6c4bec5baa25797bf39",
+        "Name": "/ibe160-password-tests-db-1",
+        "Created": "2026-10-31T03:24:36.304388598Z"
+      },
+      {
+        "Id": "68e25bb8115ebe61b00dcc7f9a75486647618ab3b091aa49f5b4385f1461a306",
+        "Name": "/ibe160-password-tests-private-db-1",
+        "Created": "2026-10-31T03:24:36.300331855Z"
+      }
+    ],
+    "volumes": [
+      "ibe160-password-tests_password_tests_fictional",
+      "ibe160-password-tests_password_tests_private"
+    ]
+  },
+  "v1_target": "d367a0e47198aeecc52358258cb6825eecdc8c4a",
+  "methods_sha256": {
+    "scripts\\operations-followup\\audit.py": "9aa8c339a23909667831de4a0b4df4fa11359dba5d8762448f936ab8ade31837",
+    "scripts\\operations-followup\\dns_os.py": "4bfeb6916def73fbb4c4771bc109dc24ca6e9bd783723e00dab4c699ed45af23",
+    "scripts\\operations-followup\\finalize.py": "92d669e14b0ed2d78d6b35fbd3882d842704955f156aedc05af781a18ee49621",
+    "scripts\\operations-followup\\http_loss.py": "32c6f8d3dfefb310d3f705c93f565cc1943f545845739ad57c178652854bfb51",
+    "scripts\\operations-followup\\run.py": "52ffd1cc66aeabfdefc158d2dd63d897a98e769d6344888962692e2f4e2f4984"
+  }
+}

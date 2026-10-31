@@ -1,0 +1,13 @@
+2026-10-31T04:13:50+01:00	INFO	[vulndb] Need to update DB
+2026-10-31T04:13:50+01:00	INFO	[vulndb] Downloading vulnerability DB...
+2026-10-31T04:13:50+01:00	INFO	[vulndb] Downloading artifact...	repo="mirror.gcr.io/aquasec/trivy-db:2"
+2026-10-31T04:14:25+01:00	INFO	[vulndb] Artifact successfully downloaded	repo="mirror.gcr.io/aquasec/trivy-db:2"
+2026-10-31T04:14:25+01:00	INFO	[vuln] Vulnerability scanning is enabled
+2026-10-31T04:14:29+01:00	WARN	Third-party SBOM may lead to inaccurate vulnerability detection
+2026-10-31T04:14:29+01:00	WARN	Recommend using Trivy to generate SBOMs
+2026-10-31T04:14:30+01:00	INFO	[python] Licenses acquired from one or more METADATA files may be subject to additional terms. Use `--debug` flag to see all affected packages.
+2026-10-31T04:14:30+01:00	INFO	Detected OS	family="debian" version="13.7"
+2026-10-31T04:14:30+01:00	INFO	[debian] Detecting vulnerabilities...	os_version="13" pkg_num=87
+2026-10-31T04:14:30+01:00	INFO	Number of language-specific files	num=1
+2026-10-31T04:14:30+01:00	INFO	[python-pkg] Detecting vulnerabilities...
+2026-10-31T04:14:30+01:00	WARN	Using severities from other vendors for some vulnerabilities. Read https://trivy.dev/docs/v0.76/guide/scanner/vulnerability#severity-selection for details.

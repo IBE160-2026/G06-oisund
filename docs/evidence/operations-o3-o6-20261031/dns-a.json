@@ -1,0 +1,14 @@
+[
+  {
+    "Name": "app.bussassistent.com",
+    "Type": 1,
+    "IPAddress": "172.67.129.146",
+    "TTL": 300
+  },
+  {
+    "Name": "app.bussassistent.com",
+    "Type": 1,
+    "IPAddress": "104.21.2.190",
+    "TTL": 300
+  }
+]

@@ -1,0 +1,2 @@
+2026-10-31T04:15:04+01:00	INFO	[vuln] Vulnerability scanning is enabled
+2026-10-31T04:15:04+01:00	INFO	Number of language-specific files	num=0

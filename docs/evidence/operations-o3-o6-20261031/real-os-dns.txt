@@ -1,0 +1,27 @@
+{
+  "libc": [
+    "glibc",
+    "2.41"
+  ],
+  "python": "3.13.16",
+  "os_release": "PRETTY_NAME=\"Debian GNU/Linux 13 (trixie)\"\nNAME=\"Debian GNU/Linux\"\nVERSION_ID=\"13\"\nVERSION=\"13 (trixie)\"\nVERSION_CODENAME=trixie\nDEBIAN_VERSION_FULL=13.7\nID=debian\nHOME_URL=\"https://www.debian.org/\"\nSUPPORT_URL=\"https://www.debian.org/support\"\nBUG_REPORT_URL=\"https://bugs.debian.org/\"\n",
+  "resolv_conf": "nameserver 127.0.0.1\noptions timeout:5 attempts:2\n",
+  "caller_seconds": 3.250305135000417,
+  "workers_in_actual_getaddrinfo_after_caller_return": [
+    [
+      "getaddrinfo",
+      "create_connection",
+      "connect",
+      "fetch",
+      "run",
+      "_bootstrap_inner",
+      "_bootstrap"
+    ]
+  ],
+  "twenty_refusals_seconds": 2.880099964386318e-05,
+  "resolver_cancelled_by_caller_deadline": false,
+  "slot_released_seconds": 10.02811488000043,
+  "recovered_without_releasing_dns_blackhole_or_restart": true,
+  "dns_datagrams_dropped": 4,
+  "scope": "Finite real libc timeout, not indefinite OS hang or production DNS test"
+}

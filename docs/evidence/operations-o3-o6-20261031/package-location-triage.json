@@ -1,0 +1,4 @@
+{
+  "api": "2026.10.19 /usr/local/lib/python3.13/site-packages/certifi/__init__.py\n2026.06.17 /usr/local/lib/python3.13/site-packages/pip/_vendor/certifi/__init__.py\nx86_64\n",
+  "gate": "2026.06.17 /usr/local/lib/python3.13/site-packages/pip/_vendor/certifi/__init__.py\nDefaultVerifyPaths(cafile='/usr/lib/ssl/cert.pem', capath='/usr/lib/ssl/certs', openssl_cafile_env='SSL_CERT_FILE', openssl_cafile='/usr/lib/ssl/cert.pem', openssl_capath_env='SSL_CERT_DIR', openssl_capath='/usr/lib/ssl/certs')\nx86_64\n"
+}

@@ -133,3 +133,13 @@ Tester ved integrasjon:12 driftstester (chown mockes i ikke-root-testkjøringen)
 23 gate-tester,4 cleanup-tester, frontend TypeScript/Vite-bygg, Windows-parser og
 faktiske Docker-bygg. Ingen produksjonshemmeligheter inngår i Git eller testoutput.
 Originalt Windows-databasevolum og verifiserte backupkopier beholdes.
+
+## Lesende driftsoppfølging31. oktober, etter V1-deploy
+
+[O3–O6-rapporten](evidence/operations-o3-o6-20261031.md) registrerer nye isolerte
+HTTP-/DNS-prøver og lesende pakke-/driftskontroller. Aktiv release er fortsatt
+d367a0e47198aeecc52358258cb6825eecdc8c4a. Ingen deploy, reboot, pakkeoppdatering
+eller produksjonsdataendring inngikk. O3–O6 forblir åpne. Nye kernel-/imagepakke-
+funn må vurderes separat sammen med libc6-omstartsmarkøren; en avhengighetsskann
+er ikke en full driftsgodkjenning. Ekstern eierinnlogging, uavhengig WAN/IPv6 og
+privilegert brannmurlesing ble utsatt uten å be eller vente på eieren.

@@ -1,0 +1,19 @@
+2026-10-31T04:28:49+01:00
+{
+  "commit": "d367a0e47198aeecc52358258cb6825eecdc8c4a",
+  "archive_sha256": "da833afc216582e4acde127e9d429b3d356e5b145c26c0a7421f123d9f7545e8"
+}Id=bussassistent.service
+ActiveState=active
+SubState=exited
+
+Id=cloudflared.service
+ActiveState=active
+SubState=running
+Release: d367a0e47198aeecc52358258cb6825eecdc8c4a
+NAME                          IMAGE                                                                                        COMMAND                  SERVICE       CREATED             STATUS                       PORTS
+bussassistent-access-gate-1   bussassistent-access-gate:d367a0e47198aeecc52358258cb6825eecdc8c4a                           "python gate.py"         access-gate   About an hour ago   Up About an hour             
+bussassistent-gateway-1       bussassistent-gateway:d367a0e47198aeecc52358258cb6825eecdc8c4a                               "/bin/sh -ec 'envsub…"   gateway       About an hour ago   Up About an hour             80/tcp, 127.0.0.1:18081->8080/tcp
+bussassistent-private-api-1   bussassistent-api:d367a0e47198aeecc52358258cb6825eecdc8c4a                                   "python -m app.run"      private-api   About an hour ago   Up About an hour (healthy)   
+bussassistent-private-db-1    postgres:17-alpine@sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24   "docker-entrypoint.s…"   private-db    About an hour ago   Up About an hour (healthy)   5432/tcp
+API healthy; origin access control rejects unauthenticated requests
+{"status":200,"readyConnections":4,"connectorId":"e8d44e39-7022-4bdf-944c-88687a76283b"}44c550dc-d3b9-4222-8f6c-e0dcdac1a991

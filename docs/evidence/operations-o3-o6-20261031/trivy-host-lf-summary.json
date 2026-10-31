@@ -1,0 +1,23 @@
+{
+  "input_file": "trivy-host-lf.json",
+  "raw_sha256": "e65460707a7f2ce9c9d7c78df345d48f1ae1cca548a8c81909d14e3aaa629066",
+  "created_at": "2026-10-31T04:16:51.6780255+01:00",
+  "scanner": {
+    "Version": "0.76.1"
+  },
+  "artifact": "ibe160-ops-host-inventory:20261031-lf",
+  "metadata": {
+    "ImageID": "sha256:eba75136e56099aaf4898df83949d9c10123f0551cefb2efa3c06f7b79f8dd1c",
+    "RepoDigests": [
+      "ibe160-ops-host-inventory@sha256:eba75136e56099aaf4898df83949d9c10123f0551cefb2efa3c06f7b79f8dd1c"
+    ],
+    "OS": {
+      "Family": "none",
+      "Name": ""
+    }
+  },
+  "severity_counts": {},
+  "unique_advisories": 0,
+  "groups": [],
+  "qualified_os_detection": false
+}

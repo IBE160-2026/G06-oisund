@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/probe/http_loss.py", line 30, in <module>
+    origin = auth.configuration()
+  File "/app/app/auth.py", line 41, in configuration
+    raise RuntimeError('Explicit loopback development configuration required')
+RuntimeError: Explicit loopback development configuration required

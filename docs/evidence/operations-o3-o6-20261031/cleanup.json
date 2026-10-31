@@ -1,0 +1,7 @@
+{
+  "namespace": "ibe160-ops-558f0636fd87454a836e7d1901d3480c",
+  "removed_own_containers_network_credentials": true,
+  "preexisting_containers_volumes_identical": false,
+  "containers_before": 49,
+  "volumes_before": 22
+}

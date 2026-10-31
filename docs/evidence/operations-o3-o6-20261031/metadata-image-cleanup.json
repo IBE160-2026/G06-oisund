@@ -1,0 +1,24 @@
+{
+  "files": {
+    "host-rootfs\\Dockerfile": "7ebe21b7204048481999953ba8079ed9cf9c015f5484e5f44bcac563c4c70858",
+    "host-rootfs\\etc\\lsb-release": "77b958705ba7401d2ad5706c7bb0c4e9d999975ee8e5d667507529b199b5f2c3",
+    "host-rootfs\\etc\\os-release": "cf72627ff81aef345d0a9f3807eb80f1035e0f80fe2932d12d94efc02fd68104",
+    "host-rootfs\\var\\lib\\dpkg\\status": "c86c55cd16e70019092879fb55ffd7a868c98708dc67efa826d16ea2a920dd77"
+  },
+  "removed_own_images": [
+    {
+      "name": "ibe160-ops-host-inventory:20261031",
+      "id": "sha256:ed1c7e3bdd509a4bb69793ff54c64096364e7e35807d3222bc2ef585814cbf55"
+    },
+    {
+      "name": "ibe160-ops-host-inventory:20261031-lf",
+      "id": "sha256:eba75136e56099aaf4898df83949d9c10123f0551cefb2efa3c06f7b79f8dd1c"
+    },
+    {
+      "name": "ibe160-ops-host-inventory:20261031-complete",
+      "id": "sha256:cabc634bb0c71058455a878a10957521087fc3352d88703e4bd9775b0a1e8ba2"
+    }
+  ],
+  "own_tmp_operations_followup_removed": true,
+  "global_prune_used": false
+}

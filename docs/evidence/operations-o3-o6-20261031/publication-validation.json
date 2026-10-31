@@ -1,0 +1,8 @@
+{
+  "files_scanned": 62,
+  "compressed_findings_decoded_for_scan": true,
+  "pattern_hits": [],
+  "test_tools_ast_parse": true,
+  "report_relative_links_exist": true,
+  "fifteen_families_seventyfive_negatives": true
+}

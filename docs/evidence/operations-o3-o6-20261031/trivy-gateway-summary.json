@@ -1,0 +1,4695 @@
+{
+  "input_file": "trivy-gateway.json",
+  "raw_sha256": "ce0c54c4c9b0ea74649c491188aadf51d0af8ab0cb12dd9c8ddadbaafc2dee20",
+  "created_at": "2026-10-31T04:15:08.7078589+01:00",
+  "scanner": {
+    "Version": "0.76.1"
+  },
+  "artifact": "ibe160-v1followup-gateway:20261029-r1",
+  "metadata": {
+    "ImageID": "sha256:c7539e0d3aaf2d420796894cadb1d519f30940a585c5ed098f0ce981b39c0520",
+    "RepoDigests": [
+      "ibe160-v1followup-gateway@sha256:c7539e0d3aaf2d420796894cadb1d519f30940a585c5ed098f0ce981b39c0520"
+    ],
+    "OS": {
+      "Family": "alpine",
+      "Name": "3.23.3"
+    }
+  },
+  "severity_counts": {
+    "CRITICAL": 3,
+    "HIGH": 63,
+    "MEDIUM": 98,
+    "LOW": 96,
+    "UNKNOWN": 4
+  },
+  "unique_advisories": 162,
+  "groups": [
+    {
+      "target": "ibe160-v1followup-gateway:20261029-r1 (alpine 3.23.3)",
+      "type": "alpine",
+      "package_count": 72,
+      "packages": [
+        {
+          "Name": "alpine-baselayout",
+          "Version": "3.7.1-r8",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "alpine-baselayout-data",
+          "Version": "3.7.1-r8",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "alpine-keys",
+          "Version": "2.6-r0",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "alpine-release",
+          "Version": "3.23.3-r0",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "aom-libs",
+          "Version": "3.13.1-r1",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "apk-tools",
+          "Version": "3.0.3-r1",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "brotli-libs",
+          "Version": "1.2.0-r0",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "busybox",
+          "Version": "1.37.0-r30",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "busybox-binsh",
+          "Version": "1.37.0-r30",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "c-ares",
+          "Version": "1.34.6-r0",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "ca-certificates",
+          "Version": "20251003-r0",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "ca-certificates-bundle",
+          "Version": "20251003-r0",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "curl",
+          "Version": "8.17.0-r1",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "fontconfig",
+          "Version": "2.17.1-r0",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "freetype",
+          "Version": "2.14.1-r0",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "geoip",
+          "Version": "1.6.12-r6",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "gettext-envsubst",
+          "Version": "0.24.1-r1",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "libapk",
+          "Version": "3.0.3-r1",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "libavif",
+          "Version": "1.3.0-r0",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "libbsd",
+          "Version": "0.12.2-r0",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "libbz2",
+          "Version": "1.0.8-r6",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "libcrypto3",
+          "Version": "3.5.5-r0",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "libcurl",
+          "Version": "8.17.0-r1",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "libdav1d",
+          "Version": "1.5.2-r0",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "libedit",
+          "Version": "20251016.3.1-r0",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "libexpat",
+          "Version": "2.7.5-r0",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "libgcc",
+          "Version": "15.2.0-r2",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "libgd",
+          "Version": "2.3.3-r10",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "libice",
+          "Version": "1.1.2-r0",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "libidn2",
+          "Version": "2.3.8-r0",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "libintl",
+          "Version": "0.24.1-r1",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "libjpeg-turbo",
+          "Version": "3.1.2-r0",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "libmd",
+          "Version": "1.1.0-r0",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "libncursesw",
+          "Version": "6.5_p20251123-r0",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "libpng",
+          "Version": "1.6.55-r0",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "libpsl",
+          "Version": "0.21.5-r3",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "libsharpyuv",
+          "Version": "1.6.0-r0",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "libsm",
+          "Version": "1.2.6-r0",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "libssl3",
+          "Version": "3.5.5-r0",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "libstdc++",
+          "Version": "15.2.0-r2",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "libunistring",
+          "Version": "1.4.1-r0",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "libuuid",
+          "Version": "2.41.2-r0",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "libwebp",
+          "Version": "1.6.0-r0",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "libx11",
+          "Version": "1.8.12-r1",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "libxau",
+          "Version": "1.0.12-r0",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "libxcb",
+          "Version": "1.17.0-r1",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "libxdmcp",
+          "Version": "1.1.5-r1",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "libxext",
+          "Version": "1.3.6-r2",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "libxml2",
+          "Version": "2.13.9-r0",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "libxpm",
+          "Version": "3.5.17-r0",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "libxslt",
+          "Version": "1.1.43-r3",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "libxt",
+          "Version": "1.3.1-r0",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "libyuv",
+          "Version": "0.0.1887.20251502-r1",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "musl",
+          "Version": "1.2.5-r21",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "musl-utils",
+          "Version": "1.2.5-r21",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "ncurses-terminfo-base",
+          "Version": "6.5_p20251123-r0",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "nghttp2-libs",
+          "Version": "1.68.0-r0",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "nghttp3",
+          "Version": "1.13.1-r0",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "nginx",
+          "Version": "1.28.3-r1",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "nginx-module-acme",
+          "Version": "1.28.3.0.3.1-r1",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "nginx-module-geoip",
+          "Version": "1.28.3-r1",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "nginx-module-image-filter",
+          "Version": "1.28.3-r1",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "nginx-module-njs",
+          "Version": "1.28.3.0.9.6-r1",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "nginx-module-xslt",
+          "Version": "1.28.3-r1",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "pcre2",
+          "Version": "10.47-r0",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "scanelf",
+          "Version": "1.3.8-r2",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "ssl_client",
+          "Version": "1.37.0-r30",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "tiff",
+          "Version": "4.7.1-r0",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "tzdata",
+          "Version": "2026a-r0",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "xz-libs",
+          "Version": "5.8.2-r0",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "zlib",
+          "Version": "1.3.1-r2",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        },
+        {
+          "Name": "zstd-libs",
+          "Version": "1.5.7-r2",
+          "FilePath": null,
+          "AnalyzedBy": "apk"
+        }
+      ],
+      "findings": [
+        {
+          "VulnerabilityID": "CVE-2026-111497",
+          "PkgName": "brotli-libs",
+          "InstalledVersion": "1.2.0-r0",
+          "FixedVersion": "1.2.1-r0",
+          "Status": "fixed",
+          "Severity": "CRITICAL",
+          "Title": "brotli: Out-of-Bounds Write in Google Brotli Decoder",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-111497",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-33630",
+          "PkgName": "c-ares",
+          "InstalledVersion": "1.34.6-r0",
+          "FixedVersion": "1.34.8-r0",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "c-ares: c-ares: Use-after-free / double-free in query-completion handling",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-33630",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-11352",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.22.0-r0",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "curl: libcurl: curl/libcurl: Remote denial of service via QUIC UDP receive function vulnerability",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-11352",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-11586",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.22.0-r0",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "curl: curl: Denial of Service via WebSocket PING flood",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-11586",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-12064",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.22.0-r0",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "curl: curl: SSH host verification bypass when using schemeless URLs with SFTP/SCP",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-12064",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-5773",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.20.0-r0",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "curl: libcurl: Wrong file transfer due to incorrect SMB connection reuse",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-5773",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-6276",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.20.0-r0",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "curl: libcurl: Information disclosure due to cookie leak when reusing connections with custom Host headers",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-6276",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-8286",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.22.0-r0",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "curl: curl: Insecure connection establishment due to TLS configuration mismatch",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-8286",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-8458",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.22.0-r0",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "curl: libcurl: Unauthorized connection reuse due to a logical error",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-8458",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-8925",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.22.0-r0",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "curl: curl: Double-free vulnerability in SASL authentication",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-8925",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-8927",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.22.0-r0",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "curl: Information disclosure due to uncleared proxy authentication state",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-8927",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-92392",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.23.0-r0",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "curl: curl: HTTP/2 upload Use-After-Free",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-92392",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-9547",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.22.0-r0",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "curl: curl: Man-in-the-middle attack via SSH host key bypass",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-9547",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2025-14017",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.18.0-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "curl: curl: Security bypass due to global TLS option changes in multi-threaded LDAPS transfers",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2025-14017",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-10536",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.22.0-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "libcurl: libcurl: Use-after-free vulnerability leading to Denial of Service",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-10536",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-11564",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.22.0-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "libcurl: libcurl: Certificate validation bypass due to incorrect connection reuse",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-11564",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-11856",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.22.0-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "curl: curl: Information disclosure via incorrect Digest authentication header reuse",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-11856",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-1965",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.19.0-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "curl: curl: Authentication bypass due to incorrect connection reuse with Negotiate authentication",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-1965",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-19931",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.22.0-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "curl: libcurl: Information disclosure via incorrect connection reuse with Negotiate authentication",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-19931",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-3783",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.19.0-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "curl: curl: Information disclosure via OAuth2 bearer token leakage during HTTP(S) redirect",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-3783",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-3784",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.19.0-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "curl: curl: Unauthorized access due to improper HTTP proxy connection reuse",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-3784",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-3805",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.19.0-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "curl: curl: Arbitrary code execution or Denial of Service via use-after-free in SMB request handling",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-3805",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-4873",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.20.0-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "curl: curl: Information disclosure due to incorrect TLS connection reuse",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-4873",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-5545",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.20.0-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "curl: libcurl: Authentication bypass due to incorrect HTTP Negotiate connection reuse",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-5545",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-6253",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.20.0-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "curl: curl: Proxy credential disclosure via redirects to unauthenticated proxies",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-6253",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-6429",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.20.0-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "curl: libcurl: Credential leak via reused proxy connection during HTTP redirects",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-6429",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-7009",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.20.0-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "curl: Curl: Certificate validation bypass due to OCSP stapling flaw",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-7009",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-7168",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.20.0-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "curl: libcurl: Information disclosure via incorrect Proxy-Authorization header reuse",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-7168",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-82208",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.22.0-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "curl: libcurl: Improper certificate validation when using wolfSSL CA cache",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-82208",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-8924",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.22.0-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "curl: curl: Cookie injection via malicious HTTP server using super cookies",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-8924",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-8926",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.22.0-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "curl: curl: Information disclosure via incorrect .netrc password lookup",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-8926",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-8932",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.22.0-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "libcurl: libcurl: Security feature bypass due to improper mTLS connection reuse",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-8932",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-9079",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.22.0-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "libcurl: libcurl: Information disclosure due to failure to clear proxy authentication credentials",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-9079",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-9080",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.22.0-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "libcurl: libcurl: Use-after-free via curl_easy_pause() in CURLMOPT_SOCKETFUNCTION callback",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-9080",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-92388",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.23.0-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "curl: curl: FTP wildcard write callback mixup",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-92388",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-9545",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.22.0-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "libcurl: libcurl: Information disclosure via cached SSL session and early data",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-9545",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-9546",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.22.0-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "libcurl: libcurl: Information disclosure due to persistent Referer header",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-9546",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2025-14524",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.18.0-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "curl: Information disclosure via cross-protocol redirect with OAuth2 bearer token",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2025-14524",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2025-14819",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.18.0-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "curl: libcurl: Improper certificate validation due to cached TLS settings reuse",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2025-14819",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-107928",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.23.0-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "curl: curl: info leak uploading over WebSockets with GnuTLS",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-107928",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-107929",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.23.0-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "curl: curl: local interface connection reuse mixup",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-107929",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-13608",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.22.0-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "curl: curl: Authentication bypass in OpenLDAP SASL negotiation via Man-in-the-Middle (MITM) attack",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-13608",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-18924",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.22.0-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "curl: libcurl: Use-after-free in HTTP/2 Server Push with shared connections",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-18924",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-80229",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.22.0-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "curl: libcurl: Memory corruption vulnerability via OpenSSL 3 provider use-after-free",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-80229",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-80230",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.22.0-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "curl: curl: Public key pinning bypass allows unauthenticated connections",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-80230",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-80231",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.22.0-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "curl: curl: Incorrect HTTPS connection reuse with Native CA Store",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-80231",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-80255",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.22.0-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "curl: curl: Information disclosure due to secure cookie attribute bypass",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-80255",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-82209",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.22.0-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "curl: libcurl: Information disclosure via improper Public Suffix List boundary check",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-82209",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-86409",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.23.0-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "curl: curl: stale SigV4 headers sent unintended",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-86409",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-86410",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.23.0-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "curl: curl: redirect to SFTP or SCP bypasses host verification",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-86410",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-86411",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.23.0-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "curl: curl: FTP connection reuse inherits client-certificate",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-86411",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-86412",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.23.0-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "curl: curl: server-set cookie erases cookie jar",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-86412",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-86413",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.23.0-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "curl: curl: Negotiate credentials sent to redirected origin",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-86413",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-86414",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.23.0-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "curl: curl: leaking host credentials to HTTP proxy",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-86414",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-86415",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.23.0-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "curl: curl: auto client cert connection reuse mixup",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-86415",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-87861",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.23.0-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "curl: curl: cross-origin reuse of a Negotiate connection",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-87861",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-87862",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.23.0-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "curl: curl: HSTS cache import drops longer-lived child",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-87862",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-87863",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.23.0-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "curl: curl: Hsts Response Erases Persisted Entries",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-87863",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-87864",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.23.0-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "curl: IMAP APPEND plus CRLF conversion command injection",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-87864",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-87865",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.23.0-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "curl: curl: knownhost callback mismatches key as missing",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-87865",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-87866",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.23.0-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "curl: curl: wolfSSL public-key pinning bypass",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-87866",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-92386",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.23.0-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "curl: curl: server-set cookie aborts cookie jar load",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-92386",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-92387",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.23.0-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "curl: curl: never-ending loop via server response omission",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-92387",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-92389",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.23.0-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "curl: curl: TFTP direction confusion",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-92389",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-92390",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.23.0-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "curl: curl: -J no-clobber guarantee bypassed with 103 early hints",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-92390",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-92391",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.23.0-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "curl: curl: curl_mime_free stack overflow by recursion",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-92391",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-94265",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.23.0-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "curl: curl: Authorization: Negotiate sent to foreign origin",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-94265",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-94266",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.23.0-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "curl: curl: password leak in CURLINFO_EFFECTIVE_URL",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-94266",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-80256",
+          "PkgName": "curl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.22.0-r0",
+          "Status": "fixed",
+          "Severity": "UNKNOWN",
+          "Title": "Title Not Available",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-80256",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-31789",
+          "PkgName": "libcrypto3",
+          "InstalledVersion": "3.5.5-r0",
+          "FixedVersion": "3.5.6-r0",
+          "Status": "fixed",
+          "Severity": "CRITICAL",
+          "Title": "openssl: OpenSSL: Heap buffer overflow on 32-bit systems from large X.509 certificate processing",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-31789",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-14456",
+          "PkgName": "libcrypto3",
+          "InstalledVersion": "3.5.5-r0",
+          "FixedVersion": "3.5.8-r0",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "openssl: OpenSSL: Denial of Service via unbounded memory growth in QUIC server",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-14456",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-28387",
+          "PkgName": "libcrypto3",
+          "InstalledVersion": "3.5.5-r0",
+          "FixedVersion": "3.5.6-r0",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "openssl: OpenSSL: Arbitrary code execution due to use-after-free in DANE TLSA authentication",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-28387",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-28388",
+          "PkgName": "libcrypto3",
+          "InstalledVersion": "3.5.5-r0",
+          "FixedVersion": "3.5.6-r0",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "openssl: OpenSSL: Denial of Service due to NULL pointer dereference in delta CRL processing",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-28388",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-28389",
+          "PkgName": "libcrypto3",
+          "InstalledVersion": "3.5.5-r0",
+          "FixedVersion": "3.5.6-r0",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "openssl: OpenSSL: Denial of Service vulnerability in CMS processing",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-28389",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-28390",
+          "PkgName": "libcrypto3",
+          "InstalledVersion": "3.5.5-r0",
+          "FixedVersion": "3.5.6-r0",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "openssl: OpenSSL: Denial of Service due to NULL pointer dereference in CMS EnvelopedData processing",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-28390",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-45447",
+          "PkgName": "libcrypto3",
+          "InstalledVersion": "3.5.5-r0",
+          "FixedVersion": "3.5.7-r0",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "openssl: Heap Use-After-Free in OpenSSL PKCS7_verify()",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-45447",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-18798",
+          "PkgName": "libcrypto3",
+          "InstalledVersion": "3.5.5-r0",
+          "FixedVersion": "3.5.8-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "openssl: QUIC server may trigger double free when processing INITIAL packet",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-18798",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-2673",
+          "PkgName": "libcrypto3",
+          "InstalledVersion": "3.5.5-r0",
+          "FixedVersion": "3.5.6-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "openssl: OpenSSL TLS 1.3 server may choose unexpected key agreement group",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-2673",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-31790",
+          "PkgName": "libcrypto3",
+          "InstalledVersion": "3.5.5-r0",
+          "FixedVersion": "3.5.6-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "openssl: openssl: Information Disclosure from Uninitialized Memory via Invalid RSA Public Key",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-31790",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-34182",
+          "PkgName": "libcrypto3",
+          "InstalledVersion": "3.5.5-r0",
+          "FixedVersion": "3.5.7-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "openssl: CMS AuthEnvelopedData Processing May Accept Forged Messages",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-34182",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-34183",
+          "PkgName": "libcrypto3",
+          "InstalledVersion": "3.5.5-r0",
+          "FixedVersion": "3.5.7-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "openssl: Unbounded Memory Growth in the QUIC PATH_CHALLENGE Handler",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-34183",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-42764",
+          "PkgName": "libcrypto3",
+          "InstalledVersion": "3.5.5-r0",
+          "FixedVersion": "3.5.7-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "openssl: NULL pointer dereference in QUIC server initial packet handling",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-42764",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-45445",
+          "PkgName": "libcrypto3",
+          "InstalledVersion": "3.5.5-r0",
+          "FixedVersion": "3.5.7-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "openssl: AES-OCB IV Ignored on EVP_Cipher() Path",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-45445",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-63072",
+          "PkgName": "libcrypto3",
+          "InstalledVersion": "3.5.5-r0",
+          "FixedVersion": "3.5.8-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "openssl: heap buffer overflow in CMS key unwrapping",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-63072",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-63076",
+          "PkgName": "libcrypto3",
+          "InstalledVersion": "3.5.5-r0",
+          "FixedVersion": "3.5.8-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "openssl: invalid pointer dereference in CMP server via crafted protectionAlg",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-63076",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-14457",
+          "PkgName": "libcrypto3",
+          "InstalledVersion": "3.5.5-r0",
+          "FixedVersion": "3.5.8-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "openssl: RPK server signature algorithm selection can dereference a missing certificate",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-14457",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-34180",
+          "PkgName": "libcrypto3",
+          "InstalledVersion": "3.5.5-r0",
+          "FixedVersion": "3.5.7-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "openssl: OpenSSL: Heap buffer over-read in ASN.1 decoding can lead to denial of service or information disclosure.",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-34180",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-34181",
+          "PkgName": "libcrypto3",
+          "InstalledVersion": "3.5.5-r0",
+          "FixedVersion": "3.5.7-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "openssl: PKCS#12 Files with PBMAC1 Are Accepted with Short HMAC Keys",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-34181",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-42766",
+          "PkgName": "libcrypto3",
+          "InstalledVersion": "3.5.5-r0",
+          "FixedVersion": "3.5.7-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "openssl: Possible NULL Dereference in Password-Based CMS Decryption",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-42766",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-42767",
+          "PkgName": "libcrypto3",
+          "InstalledVersion": "3.5.5-r0",
+          "FixedVersion": "3.5.7-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "openssl: NULL Pointer Dereference in CRMF EncryptedValue Decryption",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-42767",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-42768",
+          "PkgName": "libcrypto3",
+          "InstalledVersion": "3.5.5-r0",
+          "FixedVersion": "3.5.7-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "openssl: Multi-RecipientInfo Bleichenbacher Oracle in CMS_decrypt() and PKCS7_decrypt()",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-42768",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-42769",
+          "PkgName": "libcrypto3",
+          "InstalledVersion": "3.5.5-r0",
+          "FixedVersion": "3.5.7-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "openssl: Trust-Anchor Substitution via cert/issuer Typo in CMP rootCaKeyUpdate",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-42769",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-42770",
+          "PkgName": "libcrypto3",
+          "InstalledVersion": "3.5.5-r0",
+          "FixedVersion": "3.5.7-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "openssl: FFC-DH Peer Validation Uses Attacker-Supplied q",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-42770",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-45446",
+          "PkgName": "libcrypto3",
+          "InstalledVersion": "3.5.5-r0",
+          "FixedVersion": "3.5.7-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "openssl: Incorrect Tag Processing for Empty Messages in AES-GCM-SIV and AES-SIV modes",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-45446",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-54874",
+          "PkgName": "libcrypto3",
+          "InstalledVersion": "3.5.5-r0",
+          "FixedVersion": "3.5.8-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "openssl: excessive memory use buffering DTLS records for a future epoch",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-54874",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-63073",
+          "PkgName": "libcrypto3",
+          "InstalledVersion": "3.5.5-r0",
+          "FixedVersion": "3.5.8-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "openssl: untrusted sender DN used as format string in CMP response validation",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-63073",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-63074",
+          "PkgName": "libcrypto3",
+          "InstalledVersion": "3.5.5-r0",
+          "FixedVersion": "3.5.8-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "openssl: CMP indefinite cache growth of ExtraCerts",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-63074",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-63075",
+          "PkgName": "libcrypto3",
+          "InstalledVersion": "3.5.5-r0",
+          "FixedVersion": "3.5.8-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "openssl: QUIC ACK-only packet retention can cause memory exhaustion",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-63075",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-7383",
+          "PkgName": "libcrypto3",
+          "InstalledVersion": "3.5.5-r0",
+          "FixedVersion": "3.5.7-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "openssl: OpenSSL: Heap buffer overflow due to signed integer overflow in Unicode output sizing",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-7383",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-75803",
+          "PkgName": "libcrypto3",
+          "InstalledVersion": "3.5.5-r0",
+          "FixedVersion": "3.5.8-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "openssl: openssl: AEAD forgeries possible with empty ciphertext in EVP_Cipher()",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-75803",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-9076",
+          "PkgName": "libcrypto3",
+          "InstalledVersion": "3.5.5-r0",
+          "FixedVersion": "3.5.7-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "openssl: OpenSSL: Denial of Service due to heap out-of-bounds read in CMS password-based decryption",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-9076",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-11352",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.22.0-r0",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "curl: libcurl: curl/libcurl: Remote denial of service via QUIC UDP receive function vulnerability",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-11352",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-11586",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.22.0-r0",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "curl: curl: Denial of Service via WebSocket PING flood",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-11586",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-12064",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.22.0-r0",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "curl: curl: SSH host verification bypass when using schemeless URLs with SFTP/SCP",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-12064",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-5773",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.20.0-r0",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "curl: libcurl: Wrong file transfer due to incorrect SMB connection reuse",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-5773",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-6276",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.20.0-r0",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "curl: libcurl: Information disclosure due to cookie leak when reusing connections with custom Host headers",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-6276",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-8286",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.22.0-r0",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "curl: curl: Insecure connection establishment due to TLS configuration mismatch",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-8286",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-8458",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.22.0-r0",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "curl: libcurl: Unauthorized connection reuse due to a logical error",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-8458",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-8925",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.22.0-r0",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "curl: curl: Double-free vulnerability in SASL authentication",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-8925",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-8927",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.22.0-r0",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "curl: Information disclosure due to uncleared proxy authentication state",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-8927",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-92392",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.23.0-r0",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "curl: curl: HTTP/2 upload Use-After-Free",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-92392",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-9547",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.22.0-r0",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "curl: curl: Man-in-the-middle attack via SSH host key bypass",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-9547",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2025-14017",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.18.0-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "curl: curl: Security bypass due to global TLS option changes in multi-threaded LDAPS transfers",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2025-14017",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-10536",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.22.0-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "libcurl: libcurl: Use-after-free vulnerability leading to Denial of Service",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-10536",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-11564",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.22.0-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "libcurl: libcurl: Certificate validation bypass due to incorrect connection reuse",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-11564",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-11856",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.22.0-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "curl: curl: Information disclosure via incorrect Digest authentication header reuse",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-11856",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-1965",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.19.0-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "curl: curl: Authentication bypass due to incorrect connection reuse with Negotiate authentication",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-1965",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-19931",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.22.0-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "curl: libcurl: Information disclosure via incorrect connection reuse with Negotiate authentication",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-19931",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-3783",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.19.0-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "curl: curl: Information disclosure via OAuth2 bearer token leakage during HTTP(S) redirect",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-3783",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-3784",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.19.0-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "curl: curl: Unauthorized access due to improper HTTP proxy connection reuse",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-3784",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-3805",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.19.0-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "curl: curl: Arbitrary code execution or Denial of Service via use-after-free in SMB request handling",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-3805",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-4873",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.20.0-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "curl: curl: Information disclosure due to incorrect TLS connection reuse",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-4873",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-5545",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.20.0-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "curl: libcurl: Authentication bypass due to incorrect HTTP Negotiate connection reuse",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-5545",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-6253",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.20.0-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "curl: curl: Proxy credential disclosure via redirects to unauthenticated proxies",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-6253",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-6429",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.20.0-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "curl: libcurl: Credential leak via reused proxy connection during HTTP redirects",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-6429",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-7009",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.20.0-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "curl: Curl: Certificate validation bypass due to OCSP stapling flaw",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-7009",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-7168",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.20.0-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "curl: libcurl: Information disclosure via incorrect Proxy-Authorization header reuse",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-7168",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-82208",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.22.0-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "curl: libcurl: Improper certificate validation when using wolfSSL CA cache",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-82208",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-8924",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.22.0-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "curl: curl: Cookie injection via malicious HTTP server using super cookies",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-8924",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-8926",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.22.0-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "curl: curl: Information disclosure via incorrect .netrc password lookup",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-8926",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-8932",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.22.0-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "libcurl: libcurl: Security feature bypass due to improper mTLS connection reuse",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-8932",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-9079",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.22.0-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "libcurl: libcurl: Information disclosure due to failure to clear proxy authentication credentials",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-9079",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-9080",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.22.0-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "libcurl: libcurl: Use-after-free via curl_easy_pause() in CURLMOPT_SOCKETFUNCTION callback",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-9080",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-92388",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.23.0-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "curl: curl: FTP wildcard write callback mixup",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-92388",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-9545",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.22.0-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "libcurl: libcurl: Information disclosure via cached SSL session and early data",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-9545",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-9546",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.22.0-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "libcurl: libcurl: Information disclosure due to persistent Referer header",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-9546",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2025-14524",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.18.0-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "curl: Information disclosure via cross-protocol redirect with OAuth2 bearer token",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2025-14524",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2025-14819",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.18.0-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "curl: libcurl: Improper certificate validation due to cached TLS settings reuse",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2025-14819",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-107928",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.23.0-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "curl: curl: info leak uploading over WebSockets with GnuTLS",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-107928",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-107929",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.23.0-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "curl: curl: local interface connection reuse mixup",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-107929",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-13608",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.22.0-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "curl: curl: Authentication bypass in OpenLDAP SASL negotiation via Man-in-the-Middle (MITM) attack",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-13608",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-18924",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.22.0-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "curl: libcurl: Use-after-free in HTTP/2 Server Push with shared connections",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-18924",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-80229",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.22.0-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "curl: libcurl: Memory corruption vulnerability via OpenSSL 3 provider use-after-free",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-80229",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-80230",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.22.0-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "curl: curl: Public key pinning bypass allows unauthenticated connections",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-80230",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-80231",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.22.0-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "curl: curl: Incorrect HTTPS connection reuse with Native CA Store",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-80231",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-80255",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.22.0-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "curl: curl: Information disclosure due to secure cookie attribute bypass",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-80255",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-82209",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.22.0-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "curl: libcurl: Information disclosure via improper Public Suffix List boundary check",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-82209",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-86409",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.23.0-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "curl: curl: stale SigV4 headers sent unintended",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-86409",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-86410",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.23.0-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "curl: curl: redirect to SFTP or SCP bypasses host verification",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-86410",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-86411",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.23.0-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "curl: curl: FTP connection reuse inherits client-certificate",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-86411",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-86412",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.23.0-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "curl: curl: server-set cookie erases cookie jar",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-86412",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-86413",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.23.0-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "curl: curl: Negotiate credentials sent to redirected origin",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-86413",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-86414",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.23.0-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "curl: curl: leaking host credentials to HTTP proxy",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-86414",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-86415",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.23.0-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "curl: curl: auto client cert connection reuse mixup",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-86415",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-87861",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.23.0-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "curl: curl: cross-origin reuse of a Negotiate connection",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-87861",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-87862",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.23.0-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "curl: curl: HSTS cache import drops longer-lived child",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-87862",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-87863",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.23.0-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "curl: curl: Hsts Response Erases Persisted Entries",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-87863",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-87864",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.23.0-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "curl: IMAP APPEND plus CRLF conversion command injection",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-87864",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-87865",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.23.0-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "curl: curl: knownhost callback mismatches key as missing",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-87865",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-87866",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.23.0-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "curl: curl: wolfSSL public-key pinning bypass",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-87866",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-92386",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.23.0-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "curl: curl: server-set cookie aborts cookie jar load",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-92386",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-92387",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.23.0-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "curl: curl: never-ending loop via server response omission",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-92387",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-92389",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.23.0-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "curl: curl: TFTP direction confusion",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-92389",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-92390",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.23.0-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "curl: curl: -J no-clobber guarantee bypassed with 103 early hints",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-92390",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-92391",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.23.0-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "curl: curl: curl_mime_free stack overflow by recursion",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-92391",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-94265",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.23.0-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "curl: curl: Authorization: Negotiate sent to foreign origin",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-94265",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-94266",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.23.0-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "curl: curl: password leak in CURLINFO_EFFECTIVE_URL",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-94266",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-80256",
+          "PkgName": "libcurl",
+          "InstalledVersion": "8.17.0-r1",
+          "FixedVersion": "8.22.0-r0",
+          "Status": "fixed",
+          "Severity": "UNKNOWN",
+          "Title": "Title Not Available",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-80256",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-45186",
+          "PkgName": "libexpat",
+          "InstalledVersion": "2.7.5-r0",
+          "FixedVersion": "2.8.1-r0",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "libexpat: denial of service via crafted XML input",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-45186",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-66046",
+          "PkgName": "libexpat",
+          "InstalledVersion": "2.7.5-r0",
+          "FixedVersion": "2.8.4-r0",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "expat: Expat: Denial of Service via quadratic complexity in attribute processing",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-66046",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-76641",
+          "PkgName": "libexpat",
+          "InstalledVersion": "2.7.5-r0",
+          "FixedVersion": "2.8.4-r0",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "expat: Expat: Denial of Service via XML external entity parsing",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-76641",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-76956",
+          "PkgName": "libexpat",
+          "InstalledVersion": "2.7.5-r0",
+          "FixedVersion": "2.8.4-r0",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "libexpat: libexpat: Denial of Service via hash flooding attack with crafted XML",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-76956",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-76957",
+          "PkgName": "libexpat",
+          "InstalledVersion": "2.7.5-r0",
+          "FixedVersion": "2.8.4-r0",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "libexpat: libexpat: Memory corruption vulnerability allows arbitrary code execution or denial of service",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-76957",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-77214",
+          "PkgName": "libexpat",
+          "InstalledVersion": "2.7.5-r0",
+          "FixedVersion": "2.9.0-r0",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "expat: expat: Information disclosure via heap buffer over-read in XML_ParseBuffer",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-77214",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-93990",
+          "PkgName": "libexpat",
+          "InstalledVersion": "2.7.5-r0",
+          "FixedVersion": "2.8.5-r0",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "expat: Expat: XML Injection via Malformed UTF-16 Input",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-93990",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-102633",
+          "PkgName": "libexpat",
+          "InstalledVersion": "2.7.5-r0",
+          "FixedVersion": "2.9.0-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "expat: expat: Denial of Service via integer overflow in expat_realloc",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-102633",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-50219",
+          "PkgName": "libexpat",
+          "InstalledVersion": "2.7.5-r0",
+          "FixedVersion": "2.8.2-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "expat: libexpat: Use-after-free vulnerability due to improper handler call depth tracking",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-50219",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-56131",
+          "PkgName": "libexpat",
+          "InstalledVersion": "2.7.5-r0",
+          "FixedVersion": "2.8.2-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "libexpat: libexpat: Use-after-free vulnerability due to insufficient handler call depth tracking",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-56131",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-56132",
+          "PkgName": "libexpat",
+          "InstalledVersion": "2.7.5-r0",
+          "FixedVersion": "2.8.2-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "expat: libexpat: Arbitrary Code Execution via Heap-based Buffer Overflow",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-56132",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-56403",
+          "PkgName": "libexpat",
+          "InstalledVersion": "2.7.5-r0",
+          "FixedVersion": "2.8.2-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "libexpat: libexpat: Arbitrary code execution due to integer overflow in storeAtts",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-56403",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-56404",
+          "PkgName": "libexpat",
+          "InstalledVersion": "2.7.5-r0",
+          "FixedVersion": "2.8.2-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "libexpat: libexpat: Arbitrary Code Execution via integer overflow in addBinding",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-56404",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-56405",
+          "PkgName": "libexpat",
+          "InstalledVersion": "2.7.5-r0",
+          "FixedVersion": "2.8.2-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "libexpat: libexpat: Information disclosure and arbitrary code execution via integer overflow",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-56405",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-56406",
+          "PkgName": "libexpat",
+          "InstalledVersion": "2.7.5-r0",
+          "FixedVersion": "2.8.2-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "libexpat: libexpat: Arbitrary code execution via integer overflow in XML_ParseBuffer",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-56406",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-56407",
+          "PkgName": "libexpat",
+          "InstalledVersion": "2.7.5-r0",
+          "FixedVersion": "2.8.2-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "libexpat: libexpat: Arbitrary code execution due to integer overflow",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-56407",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-56408",
+          "PkgName": "libexpat",
+          "InstalledVersion": "2.7.5-r0",
+          "FixedVersion": "2.8.2-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "libexpat: libexpat: Information disclosure and arbitrary code execution via integer overflow",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-56408",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-56409",
+          "PkgName": "libexpat",
+          "InstalledVersion": "2.7.5-r0",
+          "FixedVersion": "2.8.2-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "libexpat: libexpat: Integer overflow in xmlwf may lead to information disclosure or arbitrary code execution",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-56409",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-56410",
+          "PkgName": "libexpat",
+          "InstalledVersion": "2.7.5-r0",
+          "FixedVersion": "2.8.2-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "libexpat: libexpat: Integer overflow in xmlwf can lead to information disclosure and arbitrary code execution.",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-56410",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-56411",
+          "PkgName": "libexpat",
+          "InstalledVersion": "2.7.5-r0",
+          "FixedVersion": "2.8.2-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "expat: libexpat: Integer Overflow Vulnerability Leading to Information Disclosure or Code Execution",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-56411",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-56412",
+          "PkgName": "libexpat",
+          "InstalledVersion": "2.7.5-r0",
+          "FixedVersion": "2.8.2-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "libexpat: libexpat: Use-after-free vulnerability due to improper handling of XML CDATA sections",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-56412",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-41080",
+          "PkgName": "libexpat",
+          "InstalledVersion": "2.7.5-r0",
+          "FixedVersion": "2.8.1-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "libexpat: expat: libexpat: Denial of Service via hash flooding with crafted XML",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-41080",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-33416",
+          "PkgName": "libpng",
+          "InstalledVersion": "1.6.55-r0",
+          "FixedVersion": "1.6.56-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "libpng: libpng: Arbitrary code execution due to use-after-free vulnerability",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-33416",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-33636",
+          "PkgName": "libpng",
+          "InstalledVersion": "1.6.55-r0",
+          "FixedVersion": "1.6.56-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "libpng: libpng: Information disclosure and denial of service via out-of-bounds read/write in Neon palette expansion",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-33636",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-34757",
+          "PkgName": "libpng",
+          "InstalledVersion": "1.6.55-r0",
+          "FixedVersion": "1.6.57-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "libpng: libpng: Information disclosure and data corruption via use-after-free vulnerability",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-34757",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-40930",
+          "PkgName": "libpng",
+          "InstalledVersion": "1.6.55-r0",
+          "FixedVersion": "1.6.58-r1",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "libpng: libpng: Data integrity and availability impact due to improper APNG chunk handling",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-40930",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-46675",
+          "PkgName": "libpng",
+          "InstalledVersion": "1.6.55-r0",
+          "FixedVersion": "1.6.59-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "libpng: libpng: Use-after-free in sequential reader when png_read_end called without reading image rows",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-46675",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-31789",
+          "PkgName": "libssl3",
+          "InstalledVersion": "3.5.5-r0",
+          "FixedVersion": "3.5.6-r0",
+          "Status": "fixed",
+          "Severity": "CRITICAL",
+          "Title": "openssl: OpenSSL: Heap buffer overflow on 32-bit systems from large X.509 certificate processing",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-31789",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-14456",
+          "PkgName": "libssl3",
+          "InstalledVersion": "3.5.5-r0",
+          "FixedVersion": "3.5.8-r0",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "openssl: OpenSSL: Denial of Service via unbounded memory growth in QUIC server",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-14456",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-28387",
+          "PkgName": "libssl3",
+          "InstalledVersion": "3.5.5-r0",
+          "FixedVersion": "3.5.6-r0",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "openssl: OpenSSL: Arbitrary code execution due to use-after-free in DANE TLSA authentication",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-28387",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-28388",
+          "PkgName": "libssl3",
+          "InstalledVersion": "3.5.5-r0",
+          "FixedVersion": "3.5.6-r0",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "openssl: OpenSSL: Denial of Service due to NULL pointer dereference in delta CRL processing",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-28388",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-28389",
+          "PkgName": "libssl3",
+          "InstalledVersion": "3.5.5-r0",
+          "FixedVersion": "3.5.6-r0",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "openssl: OpenSSL: Denial of Service vulnerability in CMS processing",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-28389",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-28390",
+          "PkgName": "libssl3",
+          "InstalledVersion": "3.5.5-r0",
+          "FixedVersion": "3.5.6-r0",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "openssl: OpenSSL: Denial of Service due to NULL pointer dereference in CMS EnvelopedData processing",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-28390",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-45447",
+          "PkgName": "libssl3",
+          "InstalledVersion": "3.5.5-r0",
+          "FixedVersion": "3.5.7-r0",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "openssl: Heap Use-After-Free in OpenSSL PKCS7_verify()",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-45447",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-18798",
+          "PkgName": "libssl3",
+          "InstalledVersion": "3.5.5-r0",
+          "FixedVersion": "3.5.8-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "openssl: QUIC server may trigger double free when processing INITIAL packet",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-18798",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-2673",
+          "PkgName": "libssl3",
+          "InstalledVersion": "3.5.5-r0",
+          "FixedVersion": "3.5.6-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "openssl: OpenSSL TLS 1.3 server may choose unexpected key agreement group",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-2673",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-31790",
+          "PkgName": "libssl3",
+          "InstalledVersion": "3.5.5-r0",
+          "FixedVersion": "3.5.6-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "openssl: openssl: Information Disclosure from Uninitialized Memory via Invalid RSA Public Key",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-31790",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-34182",
+          "PkgName": "libssl3",
+          "InstalledVersion": "3.5.5-r0",
+          "FixedVersion": "3.5.7-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "openssl: CMS AuthEnvelopedData Processing May Accept Forged Messages",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-34182",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-34183",
+          "PkgName": "libssl3",
+          "InstalledVersion": "3.5.5-r0",
+          "FixedVersion": "3.5.7-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "openssl: Unbounded Memory Growth in the QUIC PATH_CHALLENGE Handler",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-34183",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-42764",
+          "PkgName": "libssl3",
+          "InstalledVersion": "3.5.5-r0",
+          "FixedVersion": "3.5.7-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "openssl: NULL pointer dereference in QUIC server initial packet handling",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-42764",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-45445",
+          "PkgName": "libssl3",
+          "InstalledVersion": "3.5.5-r0",
+          "FixedVersion": "3.5.7-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "openssl: AES-OCB IV Ignored on EVP_Cipher() Path",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-45445",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-63072",
+          "PkgName": "libssl3",
+          "InstalledVersion": "3.5.5-r0",
+          "FixedVersion": "3.5.8-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "openssl: heap buffer overflow in CMS key unwrapping",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-63072",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-63076",
+          "PkgName": "libssl3",
+          "InstalledVersion": "3.5.5-r0",
+          "FixedVersion": "3.5.8-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "openssl: invalid pointer dereference in CMP server via crafted protectionAlg",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-63076",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-14457",
+          "PkgName": "libssl3",
+          "InstalledVersion": "3.5.5-r0",
+          "FixedVersion": "3.5.8-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "openssl: RPK server signature algorithm selection can dereference a missing certificate",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-14457",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-34180",
+          "PkgName": "libssl3",
+          "InstalledVersion": "3.5.5-r0",
+          "FixedVersion": "3.5.7-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "openssl: OpenSSL: Heap buffer over-read in ASN.1 decoding can lead to denial of service or information disclosure.",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-34180",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-34181",
+          "PkgName": "libssl3",
+          "InstalledVersion": "3.5.5-r0",
+          "FixedVersion": "3.5.7-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "openssl: PKCS#12 Files with PBMAC1 Are Accepted with Short HMAC Keys",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-34181",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-42766",
+          "PkgName": "libssl3",
+          "InstalledVersion": "3.5.5-r0",
+          "FixedVersion": "3.5.7-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "openssl: Possible NULL Dereference in Password-Based CMS Decryption",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-42766",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-42767",
+          "PkgName": "libssl3",
+          "InstalledVersion": "3.5.5-r0",
+          "FixedVersion": "3.5.7-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "openssl: NULL Pointer Dereference in CRMF EncryptedValue Decryption",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-42767",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-42768",
+          "PkgName": "libssl3",
+          "InstalledVersion": "3.5.5-r0",
+          "FixedVersion": "3.5.7-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "openssl: Multi-RecipientInfo Bleichenbacher Oracle in CMS_decrypt() and PKCS7_decrypt()",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-42768",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-42769",
+          "PkgName": "libssl3",
+          "InstalledVersion": "3.5.5-r0",
+          "FixedVersion": "3.5.7-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "openssl: Trust-Anchor Substitution via cert/issuer Typo in CMP rootCaKeyUpdate",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-42769",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-42770",
+          "PkgName": "libssl3",
+          "InstalledVersion": "3.5.5-r0",
+          "FixedVersion": "3.5.7-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "openssl: FFC-DH Peer Validation Uses Attacker-Supplied q",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-42770",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-45446",
+          "PkgName": "libssl3",
+          "InstalledVersion": "3.5.5-r0",
+          "FixedVersion": "3.5.7-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "openssl: Incorrect Tag Processing for Empty Messages in AES-GCM-SIV and AES-SIV modes",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-45446",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-54874",
+          "PkgName": "libssl3",
+          "InstalledVersion": "3.5.5-r0",
+          "FixedVersion": "3.5.8-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "openssl: excessive memory use buffering DTLS records for a future epoch",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-54874",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-63073",
+          "PkgName": "libssl3",
+          "InstalledVersion": "3.5.5-r0",
+          "FixedVersion": "3.5.8-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "openssl: untrusted sender DN used as format string in CMP response validation",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-63073",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-63074",
+          "PkgName": "libssl3",
+          "InstalledVersion": "3.5.5-r0",
+          "FixedVersion": "3.5.8-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "openssl: CMP indefinite cache growth of ExtraCerts",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-63074",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-63075",
+          "PkgName": "libssl3",
+          "InstalledVersion": "3.5.5-r0",
+          "FixedVersion": "3.5.8-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "openssl: QUIC ACK-only packet retention can cause memory exhaustion",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-63075",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-7383",
+          "PkgName": "libssl3",
+          "InstalledVersion": "3.5.5-r0",
+          "FixedVersion": "3.5.7-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "openssl: OpenSSL: Heap buffer overflow due to signed integer overflow in Unicode output sizing",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-7383",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-75803",
+          "PkgName": "libssl3",
+          "InstalledVersion": "3.5.5-r0",
+          "FixedVersion": "3.5.8-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "openssl: openssl: AEAD forgeries possible with empty ciphertext in EVP_Cipher()",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-75803",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-9076",
+          "PkgName": "libssl3",
+          "InstalledVersion": "3.5.5-r0",
+          "FixedVersion": "3.5.7-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "openssl: OpenSSL: Denial of Service due to heap out-of-bounds read in CMS password-based decryption",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-9076",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-53612",
+          "PkgName": "libuuid",
+          "InstalledVersion": "2.41.2-r0",
+          "FixedVersion": "2.41.6-r0",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "util-linux: util-linux: TOCTOU in the mount program when applying post-mount ownership/mode changes",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-53612",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-53613",
+          "PkgName": "libuuid",
+          "InstalledVersion": "2.41.2-r0",
+          "FixedVersion": "2.41.6-r0",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "util-linux: TOCTOU in the mount program via ancestor directory swap on target path",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-53613",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-53614",
+          "PkgName": "libuuid",
+          "InstalledVersion": "2.41.2-r0",
+          "FixedVersion": "2.41.6-r0",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "util-linux: util-linux: SUID mount(8) allows nosuid/noexec bypass via LIBMOUNT_FORCE_MOUNT2",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-53614",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-76642",
+          "PkgName": "libuuid",
+          "InstalledVersion": "2.41.2-r0",
+          "FixedVersion": "2.41.6-r0",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "util-linux: util-linux: failed external mount helper still runs privileged X-mount post-hooks",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-76642",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-78408",
+          "PkgName": "libuuid",
+          "InstalledVersion": "2.41.2-r0",
+          "FixedVersion": "2.41.6-r1",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "util-linux: util-linux: nsenter --join-cgroup leaks root cgroup migration authority",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-78408",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-78410",
+          "PkgName": "libuuid",
+          "InstalledVersion": "2.41.2-r0",
+          "FixedVersion": "2.41.6-r0",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "util-linux: util-linux: restricted bind mounts do not pin the source, allowing X-mount.owner/group/mode redirection",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-78410",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2025-14104",
+          "PkgName": "libuuid",
+          "InstalledVersion": "2.41.2-r0",
+          "FixedVersion": "2.41.4-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "util-linux: util-linux: Heap buffer overread in setpwnam() when processing 256-byte usernames",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2025-14104",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-27456",
+          "PkgName": "libuuid",
+          "InstalledVersion": "2.41.2-r0",
+          "FixedVersion": "2.41.4-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "util-linux: TOCTOU in the mount program when setting up loop devices",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-27456",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-6732",
+          "PkgName": "libxml2",
+          "InstalledVersion": "2.13.9-r0",
+          "FixedVersion": "2.13.9-r1",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "libxml2: libxml2: Denial of Service via crafted XSD-validated document",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-6732",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-4367",
+          "PkgName": "libxpm",
+          "InstalledVersion": "3.5.17-r0",
+          "FixedVersion": "3.5.19-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "libXpm: libXpm: Denial of Service via out-of-bounds read in XPM file parsing",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-4367",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-40200",
+          "PkgName": "musl",
+          "InstalledVersion": "1.2.5-r21",
+          "FixedVersion": "1.2.5-r23",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "musl: musl libc: Arbitrary code execution and denial of service via stack-based memory corruption in qsort",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-40200",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-6042",
+          "PkgName": "musl",
+          "InstalledVersion": "1.2.5-r21",
+          "FixedVersion": "1.2.5-r22",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "musl libc: GB18030 4-byte Decoder: musl libc: Denial of Service via inefficient algorithmic complexity in iconv",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-6042",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-107891",
+          "PkgName": "musl",
+          "InstalledVersion": "1.2.5-r21",
+          "FixedVersion": "1.2.5-r24",
+          "Status": "fixed",
+          "Severity": "UNKNOWN",
+          "Title": "Title Not Available",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-107891",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-40200",
+          "PkgName": "musl-utils",
+          "InstalledVersion": "1.2.5-r21",
+          "FixedVersion": "1.2.5-r23",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "musl: musl libc: Arbitrary code execution and denial of service via stack-based memory corruption in qsort",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-40200",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-6042",
+          "PkgName": "musl-utils",
+          "InstalledVersion": "1.2.5-r21",
+          "FixedVersion": "1.2.5-r22",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "musl libc: GB18030 4-byte Decoder: musl libc: Denial of Service via inefficient algorithmic complexity in iconv",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-6042",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-107891",
+          "PkgName": "musl-utils",
+          "InstalledVersion": "1.2.5-r21",
+          "FixedVersion": "1.2.5-r24",
+          "Status": "fixed",
+          "Severity": "UNKNOWN",
+          "Title": "Title Not Available",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-107891",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-27135",
+          "PkgName": "nghttp2-libs",
+          "InstalledVersion": "1.68.0-r0",
+          "FixedVersion": "1.68.1",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "nghttp2: nghttp2: Denial of Service via malformed HTTP/2 frames after session termination",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-27135",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-42055",
+          "PkgName": "nginx",
+          "InstalledVersion": "1.28.3-r1",
+          "FixedVersion": "1.28.3-r4",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "nginx: NGINX: Arbitrary code execution or Denial of Service via heap-based buffer overflow with crafted HTTP/2 headers",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-42055",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-42533",
+          "PkgName": "nginx",
+          "InstalledVersion": "1.28.3-r1",
+          "FixedVersion": "1.28.3-r6",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "nginx: NGINX: Arbitrary code execution via crafted HTTP requests",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-42533",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-49975",
+          "PkgName": "nginx",
+          "InstalledVersion": "1.28.3-r1",
+          "FixedVersion": "1.28.3-r3",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "httpd: httpd: HTTP/2 Remote Denial of Service via compression bomb and Slowloris-style attack",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-49975",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-60005",
+          "PkgName": "nginx",
+          "InstalledVersion": "1.28.3-r1",
+          "FixedVersion": "1.28.3-r6",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "nginx: NGINX: Memory disclosure and denial of service in ngx_http_slice_module",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-60005",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-9256",
+          "PkgName": "nginx",
+          "InstalledVersion": "1.28.3-r1",
+          "FixedVersion": "1.28.3-r2",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "nginx: ngx_http_rewrite_module: code execution and denial of service",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-9256",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-48142",
+          "PkgName": "nginx",
+          "InstalledVersion": "1.28.3-r1",
+          "FixedVersion": "1.28.3-r4",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "nginx: NGINX: Memory disclosure or denial of service via ngx_http_charset_module heap buffer over-read",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-48142",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-56434",
+          "PkgName": "nginx",
+          "InstalledVersion": "1.28.3-r1",
+          "FixedVersion": "1.28.3-r6",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "nginx: NGINX: Heap buffer over-read allows memory modification or denial of service",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-56434",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-103111",
+          "PkgName": "pcre2",
+          "InstalledVersion": "10.47-r0",
+          "FixedVersion": "10.49-r0",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "pcre2: pcre2: Out-of-bounds write via crafted regular expression",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-103111",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-86145",
+          "PkgName": "pcre2",
+          "InstalledVersion": "10.47-r0",
+          "FixedVersion": "10.48-r0",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "pcre2: PCRE2: Out-of-bounds write allows arbitrary code execution via crafted regular expressions",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-86145",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-89157",
+          "PkgName": "pcre2",
+          "InstalledVersion": "10.47-r0",
+          "FixedVersion": "10.48-r0",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "pcre2: PCRE2: Out-of-bounds write via large pattern input",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-89157",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-89161",
+          "PkgName": "pcre2",
+          "InstalledVersion": "10.47-r0",
+          "FixedVersion": "10.48-r0",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "pcre2: PCRE2: Memory corruption vulnerability in pcre2_jit_match",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-89161",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-89156",
+          "PkgName": "pcre2",
+          "InstalledVersion": "10.47-r0",
+          "FixedVersion": "10.48-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "PCRE2: PCRE2: Out-of-bounds read via invalid UTF data during JIT fallback",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-89156",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-89158",
+          "PkgName": "pcre2",
+          "InstalledVersion": "10.47-r0",
+          "FixedVersion": "10.48-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "PCRE2: PCRE2: Out-of-bounds write via integer overflow on 32-bit platforms",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-89158",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-89160",
+          "PkgName": "pcre2",
+          "InstalledVersion": "10.47-r0",
+          "FixedVersion": "10.48-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "pcre2: PCRE2: Denial of Service via out-of-bounds read during invalid UTF matching",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-89160",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-89162",
+          "PkgName": "pcre2",
+          "InstalledVersion": "10.47-r0",
+          "FixedVersion": "10.48-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "pcre2: PCRE2: Information disclosure via pcre2_serialize_encode",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-89162",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-4775",
+          "PkgName": "tiff",
+          "InstalledVersion": "4.7.1-r0",
+          "FixedVersion": "4.7.2-r0",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "libtiff: libtiff: Arbitrary code execution or denial of service via signed integer overflow in TIFF file processing",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-4775",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-34743",
+          "PkgName": "xz-libs",
+          "InstalledVersion": "5.8.2-r0",
+          "FixedVersion": "5.8.3-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "xz: XZ Utils: Denial of Service via buffer overflow in index decoding",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-34743",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-22184",
+          "PkgName": "zlib",
+          "InstalledVersion": "1.3.1-r2",
+          "FixedVersion": "1.3.2-r0",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "zlib: zlib: Arbitrary code execution via buffer overflow in untgz utility",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-22184",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-27171",
+          "PkgName": "zlib",
+          "InstalledVersion": "1.3.1-r2",
+          "FixedVersion": "1.3.2-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "zlib: zlib: Denial of Service via infinite loop in CRC32 combine functions",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-27171",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        },
+        {
+          "VulnerabilityID": "CVE-2026-85091",
+          "PkgName": "zlib",
+          "InstalledVersion": "1.3.1-r2",
+          "FixedVersion": "1.3.2-r1",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "zlib versions 1.3.1.2 through 1.3.2 contain a heap buffer overflow vul ...",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-85091",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "PkgPath": null
+        }
+      ]
+    }
+  ],
+  "qualified_os_detection": true
+}

@@ -1,0 +1,95 @@
+2026-10-31T04:09:18+01:00
+{
+  "commit": "d367a0e47198aeecc52358258cb6825eecdc8c4a",
+  "archive_sha256": "da833afc216582e4acde127e9d429b3d356e5b145c26c0a7421f123d9f7545e8"
+}Id=bussassistent.service
+ActiveState=active
+SubState=exited
+
+Id=cloudflared.service
+ActiveState=active
+SubState=running
+Release: d367a0e47198aeecc52358258cb6825eecdc8c4a
+NAME                          IMAGE                                                                                        COMMAND                  SERVICE       CREATED          STATUS                    PORTS
+bussassistent-access-gate-1   bussassistent-access-gate:d367a0e47198aeecc52358258cb6825eecdc8c4a                           "python gate.py"         access-gate   47 minutes ago   Up 47 minutes             
+bussassistent-gateway-1       bussassistent-gateway:d367a0e47198aeecc52358258cb6825eecdc8c4a                               "/bin/sh -ec 'envsub…"   gateway       47 minutes ago   Up 47 minutes             80/tcp, 127.0.0.1:18081->8080/tcp
+bussassistent-private-api-1   bussassistent-api:d367a0e47198aeecc52358258cb6825eecdc8c4a                                   "python -m app.run"      private-api   47 minutes ago   Up 47 minutes (healthy)   
+bussassistent-private-db-1    postgres:17-alpine@sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24   "docker-entrypoint.s…"   private-db    47 minutes ago   Up 47 minutes (healthy)   5432/tcp
+API healthy; origin access control rejects unauthenticated requests
+LISTEN 0      4096      127.0.0.54:53    0.0.0.0:*
+LISTEN 0      4096       127.0.0.1:18083 0.0.0.0:*
+LISTEN 0      4096       127.0.0.1:18081 0.0.0.0:*
+LISTEN 0      4096   127.0.0.53%lo:53    0.0.0.0:*
+LISTEN 0      4096         0.0.0.0:22    0.0.0.0:*
+LISTEN 0      4096            [::]:22       [::]:*
+3: wlp3s0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 state UP qlen 1000
+    inet6 fd11:a8d8:a24a:80c7:ca3d:d4ff:fe7e:afa5/64 scope global dynamic mngtmpaddr noprefixroute 
+       valid_lft 1650sec preferred_lft 1650sec
+fd11:a8d8:a24a:80c7::/64 dev wlp3s0 proto ra metric 600 expires 1649sec pref medium
+fda5:b88d:d626:1::/64 nhid 3930586051 via fe80::4131:103d:d40:5cd1 dev wlp3s0 proto ra metric 600 expires 1629sec pref medium
+fda5:b88d:d626:1::/64 nhid 2194700255 via fe80::acfb:738d:8ee4:cc8a dev wlp3s0 proto ra metric 600 expires 1649sec pref medium
+fdcb:383f:55ca::/64 nhid 1918899680 via fe80::4a9:9b31:7cd8:c42c dev wlp3s0 proto ra metric 600 expires 1627sec pref medium
+fe80::/64 dev br-163420df2451 proto kernel metric 256 pref medium
+fe80::/64 dev br-ca90a16ef9bc proto kernel metric 256 pref medium
+fe80::/64 dev br-b0f1cb0ff3aa proto kernel metric 256 pref medium
+fe80::/64 dev br-d80036808971 proto kernel metric 256 pref medium
+fe80::/64 dev wlp3s0 proto kernel metric 256 pref medium
+fe80::/64 dev docker0 proto kernel metric 256 linkdown pref medium
+fe80::/64 dev veth63cbe37 proto kernel metric 256 pref medium
+fe80::/64 dev veth353f700 proto kernel metric 256 pref medium
+fe80::/64 dev vethee8faf7 proto kernel metric 256 pref medium
+fe80::/64 dev vethe107c39 proto kernel metric 256 pref medium
+fe80::/64 dev veth0310ed0 proto kernel metric 256 pref medium
+fe80::/64 dev veth19abcd7 proto kernel metric 256 pref medium
+fe80::/64 dev vethc567069 proto kernel metric 256 pref medium
+default via 192.168.1.1 dev wlp3s0 proto dhcp src 192.168.1.139 metric 600 
+172.17.0.0/16 dev docker0 proto kernel scope link src 172.17.0.1 linkdown 
+172.18.0.0/16 dev br-b0f1cb0ff3aa proto kernel scope link src 172.18.0.1 
+172.19.0.0/16 dev br-163420df2451 proto kernel scope link src 172.19.0.1 
+172.20.0.0/16 dev br-d80036808971 proto kernel scope link src 172.20.0.1 
+172.21.0.0/16 dev br-ca90a16ef9bc proto kernel scope link src 172.21.0.1 
+192.168.1.0/24 dev wlp3s0 proto kernel scope link src 192.168.1.139 metric 600 
+192.168.1.1 dev wlp3s0 proto dhcp scope link src 192.168.1.139 metric 600 
+44c550dc-d3b9-4222-8f6c-e0dcdac1a991
+ 04:09:18 up 1 day,  7:18,  2 users,  load average: 0.22, 0.15, 0.11
+libc6
+Id=bussassistent.service
+ActiveEnterTimestamp=Thu 2026-10-29 20:51:01 CET
+Result=success
+NRestarts=0
+
+Id=cloudflared.service
+ActiveEnterTimestamp=Sat 2026-10-31 03:21:32 CET
+Result=success
+NRestarts=0
+PRETTY_NAME="Ubuntu 26.04.1 LTS"
+NAME="Ubuntu"
+VERSION_ID="26.04"
+VERSION="26.04.1 LTS (Resolute Raccoon)"
+VERSION_CODENAME=resolute
+ID=ubuntu
+ID_LIKE=debian
+HOME_URL="https://www.ubuntu.com/"
+SUPPORT_URL="https://help.ubuntu.com/"
+BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
+PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+UBUNTU_CODENAME=resolute
+LOGO=ubuntu-logo
+libc6:amd64	2.43-2ubuntu2.4
+linux-image-7.0.0-42-generic	7.0.0-42.42
+openssl	3.5.5-1ubuntu3.7
+systemd	259.5-0ubuntu3.4
+Operation not permitted (you must be root)
+netlink: Error: cache initialization failed: Operation not permitted
+IDX BOOT ID                          FIRST ENTRY                 LAST ENTRY
+-10 b76278a0ddc446fdb464314d3e82de79 Thu 2026-10-29 17:14:37 CET Thu 2026-10-29 17:44:38 CET
+ -9 675660b94d9645cb81f2a77abad3f601 Thu 2026-10-29 17:44:52 CET Thu 2026-10-29 17:44:55 CET
+ -8 f38532dfc9f9426ab49dd0a59dd97b09 Thu 2026-10-29 17:53:36 CET Thu 2026-10-29 17:58:39 CET
+ -7 eedccace9aed48dbb83a411da873fa59 Thu 2026-10-29 17:58:53 CET Thu 2026-10-29 19:06:52 CET
+ -6 48d6f0413f3d44499cd232e15fda4176 Thu 2026-10-29 19:07:04 CET Thu 2026-10-29 19:10:50 CET
+ -5 6334b41fbfaa41098662a3270aacd06d Thu 2026-10-29 19:11:03 CET Thu 2026-10-29 19:11:06 CET
+ -4 8ac19c54da19410e8a75694e7637e12e Thu 2026-10-29 19:29:34 CET Thu 2026-10-29 20:33:50 CET
+ -3 2ede3f2418844d73a71ab1d88b38ec3e Thu 2026-10-29 20:34:50 CET Thu 2026-10-29 20:41:18 CET
+ -2 cb4fc645721c40b29fca7451919a0cc3 Thu 2026-10-29 20:41:41 CET Thu 2026-10-29 20:47:05 CET
+ -1 4de1ee713cb64cadaaec2329782c664b Thu 2026-10-29 20:47:49 CET Thu 2026-10-29 20:50:12 CET
+  0 44c550dcd3b942228f6ce0dcdac1a991 Thu 2026-10-29 20:50:36 CET Sat 2026-10-31 04:09:18 CET

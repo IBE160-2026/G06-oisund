@@ -1,0 +1,4454 @@
+{
+  "input_file": "trivy-host-complete.json",
+  "raw_sha256": "baa1aab06f2abab2859b8e143acd4f96e71016b56f012e8f3497e45bd848be38",
+  "created_at": "2026-10-31T04:18:13.92825+01:00",
+  "scanner": {
+    "Version": "0.76.1"
+  },
+  "artifact": "ibe160-ops-host-inventory:20261031-complete",
+  "metadata": {
+    "ImageID": "sha256:cabc634bb0c71058455a878a10957521087fc3352d88703e4bd9775b0a1e8ba2",
+    "RepoDigests": [
+      "ibe160-ops-host-inventory@sha256:cabc634bb0c71058455a878a10957521087fc3352d88703e4bd9775b0a1e8ba2"
+    ],
+    "OS": {
+      "Family": "ubuntu",
+      "Name": "26.04"
+    }
+  },
+  "severity_counts": {
+    "MEDIUM": 42909,
+    "LOW": 9173,
+    "CRITICAL": 213,
+    "HIGH": 4917
+  },
+  "unique_advisories": 5265,
+  "groups": [
+    {
+      "target": "ibe160-ops-host-inventory:20261031-complete (ubuntu 26.04)",
+      "type": "ubuntu",
+      "package_count": 736,
+      "packages": [
+        {
+          "Name": "3cpio",
+          "Version": "0.14.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "adduser",
+          "Version": "3.153ubuntu1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "amd64-microcode",
+          "Version": "3.20251202.1ubuntu2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "apparmor",
+          "Version": "5.0.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "apport",
+          "Version": "2.34.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "apport-core-dump-handler",
+          "Version": "2.34.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "apport-symptoms",
+          "Version": "0.25build1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "appstream",
+          "Version": "1.1.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "apt",
+          "Version": "3.2.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "base-files",
+          "Version": "14ubuntu6.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "base-passwd",
+          "Version": "3.6.8",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "bash",
+          "Version": "5.3",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "bash-completion",
+          "Version": "2.16.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "bc",
+          "Version": "1.07.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "bcache-tools",
+          "Version": "1.0.8",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "bind9-dnsutils",
+          "Version": "9.20.24",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "bind9-host",
+          "Version": "9.20.24",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "bind9-libs",
+          "Version": "9.20.24",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "binutils",
+          "Version": "2.46",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "binutils-common",
+          "Version": "2.46",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "binutils-x86-64-linux-gnu",
+          "Version": "2.46",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "bolt",
+          "Version": "0.9.10",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "bpfcc-tools",
+          "Version": "0.35.0+ds",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "bpftool",
+          "Version": "7.7.0+7.0.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "bpftrace",
+          "Version": "0.25.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "bsdextrautils",
+          "Version": "2.41.3",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "bsdutils",
+          "Version": "2.41.3",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "btrfs-progs",
+          "Version": "6.17.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "busybox-initramfs",
+          "Version": "1.37.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "busybox-static",
+          "Version": "1.37.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "ca-certificates",
+          "Version": "20260816ubuntu0.26.04.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "chrony",
+          "Version": "4.8",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "cloud-guest-utils",
+          "Version": "0.33",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "cloud-init",
+          "Version": "26.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "cloud-init-base",
+          "Version": "26.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "cloud-initramfs-copymods",
+          "Version": "0.58ubuntu",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "cloud-initramfs-dyn-netconf",
+          "Version": "0.58ubuntu",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "cloudflared",
+          "Version": "2026.10.6",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "command-not-found",
+          "Version": "23.04.0build1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "console-setup",
+          "Version": "1.237ubuntu3.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "console-setup-linux",
+          "Version": "1.237ubuntu3.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "containerd.io",
+          "Version": "2.4.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "coreutils",
+          "Version": "9.5",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "coreutils-from-uutils",
+          "Version": "0.0.0~ubuntu25",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "cpio",
+          "Version": "2.15+dfsg",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "crash",
+          "Version": "9.0.1+~16.3",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "cron",
+          "Version": "3.0pl1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "cron-daemon-common",
+          "Version": "3.0pl1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "cryptsetup",
+          "Version": "2.8.4",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "cryptsetup-bin",
+          "Version": "2.8.4",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "curl",
+          "Version": "8.18.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "dash",
+          "Version": "0.5.12",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "dbus",
+          "Version": "1.16.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "dbus-bin",
+          "Version": "1.16.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "dbus-daemon",
+          "Version": "1.16.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "dbus-session-bus-common",
+          "Version": "1.16.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "dbus-system-bus-common",
+          "Version": "1.16.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "dbus-user-session",
+          "Version": "1.16.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "debconf",
+          "Version": "1.5.92",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "debconf-i18n",
+          "Version": "1.5.92",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "debianutils",
+          "Version": "5.23.2build1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "dhcpcd-base",
+          "Version": "10.3.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "diffutils",
+          "Version": "3.12",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "dirmngr",
+          "Version": "2.4.8",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "distro-info",
+          "Version": "1.15",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "distro-info-data",
+          "Version": "2026.10.12",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "dmeventd",
+          "Version": "1.02.205",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "dmidecode",
+          "Version": "3.6",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "dmsetup",
+          "Version": "1.02.205",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "docker-buildx-plugin",
+          "Version": "0.38.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "docker-ce",
+          "Version": "29.9.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "docker-ce-cli",
+          "Version": "29.9.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "docker-ce-rootless-extras",
+          "Version": "29.9.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "docker-compose-plugin",
+          "Version": "5.6.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "dosfstools",
+          "Version": "4.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "dpkg",
+          "Version": "1.23.7ubuntu1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "dracut",
+          "Version": "110",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "dracut-core",
+          "Version": "110",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "dracut-install",
+          "Version": "110",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "dracut-network",
+          "Version": "110",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "e2fsprogs",
+          "Version": "1.47.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "eatmydata",
+          "Version": "131",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "ed",
+          "Version": "1.22.4",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "efibootmgr",
+          "Version": "18",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "eject",
+          "Version": "2.41.3",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "ethtool",
+          "Version": "6.19",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "exfatprogs",
+          "Version": "1.3.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "fdisk",
+          "Version": "2.41.3",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "file",
+          "Version": "5.46",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "finalrd",
+          "Version": "9build2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "findutils",
+          "Version": "4.10.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "firmware-sof-signed",
+          "Version": "2025.12.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "fonts-ubuntu-console",
+          "Version": "0.869+git20240321",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "friendly-recovery",
+          "Version": "0.2.42build1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "ftp",
+          "Version": "20260211",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "fuse3",
+          "Version": "3.18.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "fwupd",
+          "Version": "2.1.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "fwupd-signed",
+          "Version": "1.55+1.7",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "gawk",
+          "Version": "5.3.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "gcc-16-base",
+          "Version": "16-20260322",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "gdisk",
+          "Version": "1.0.10",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "gettext-base",
+          "Version": "0.23.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "gir1.2-girepository-3.0",
+          "Version": "2.88.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "gir1.2-glib-2.0",
+          "Version": "2.88.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "gir1.2-packagekitglib-1.0",
+          "Version": "1.3.4",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "git",
+          "Version": "2.53.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "git-man",
+          "Version": "2.53.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "gnu-coreutils",
+          "Version": "9.7",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "gnupg",
+          "Version": "2.4.8",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "gnupg-l10n",
+          "Version": "2.4.8",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "gnupg-utils",
+          "Version": "2.4.8",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "gpg",
+          "Version": "2.4.8",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "gpg-agent",
+          "Version": "2.4.8",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "gpg-wks-client",
+          "Version": "2.4.8",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "gpgconf",
+          "Version": "2.4.8",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "gpgsm",
+          "Version": "2.4.8",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "gpgv",
+          "Version": "2.4.8",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "grep",
+          "Version": "3.12",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "groff-base",
+          "Version": "1.23.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "grub-efi-amd64",
+          "Version": "2.14",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "grub-efi-amd64-bin",
+          "Version": "2.14",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "grub-efi-amd64-signed",
+          "Version": "1.215+2.14",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "grub-efi-amd64-unsigned",
+          "Version": "2.14",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "grub-pc-bin",
+          "Version": "2.14",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "grub2-common",
+          "Version": "2.14",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "gzip",
+          "Version": "1.14",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "hdparm",
+          "Version": "9.65+ds",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "hostname",
+          "Version": "3.25build1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "htop",
+          "Version": "3.4.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "hwctl",
+          "Version": "0.11.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "hwdata",
+          "Version": "0.394",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "ibverbs-providers",
+          "Version": "61.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "ieee-data",
+          "Version": "20240722build1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "inetutils-telnet",
+          "Version": "2.7",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "info",
+          "Version": "7.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "init",
+          "Version": "1.69",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "init-system-helpers",
+          "Version": "1.69",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "initramfs-tools-bin",
+          "Version": "0.151ubuntu1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "initramfs-tools-core",
+          "Version": "0.151ubuntu1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "install-info",
+          "Version": "7.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "intel-microcode",
+          "Version": "3.20260210.1ubuntu2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "iproute2",
+          "Version": "6.19.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "iptables",
+          "Version": "1.8.11",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "iputils-ping",
+          "Version": "20250605",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "iputils-tracepath",
+          "Version": "20250605",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "iso-codes",
+          "Version": "4.20.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "iucode-tool",
+          "Version": "2.3.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "jq",
+          "Version": "1.8.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "kbd",
+          "Version": "2.7.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "kdump-tools",
+          "Version": "1.10.7ubuntu3",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "kexec-tools",
+          "Version": "2.0.32",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "keyboard-configuration",
+          "Version": "1.237ubuntu3.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "klibc-utils",
+          "Version": "2.0.14",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "kmod",
+          "Version": "34.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "kpartx",
+          "Version": "0.14.3",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "krb5-locales",
+          "Version": "1.22.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "landscape-common",
+          "Version": "26.02.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "less",
+          "Version": "668",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libacl1",
+          "Version": "2.3.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libaio1t64",
+          "Version": "0.3.113",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libapparmor1",
+          "Version": "5.0.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libappstream5",
+          "Version": "1.1.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libapt-pkg7.0",
+          "Version": "3.2.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libassuan9",
+          "Version": "3.0.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libatasmart4",
+          "Version": "0.19",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libatomic1",
+          "Version": "16-20260322",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libattr1",
+          "Version": "2.5.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libaudit-common",
+          "Version": "4.1.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libaudit1",
+          "Version": "4.1.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libbinutils",
+          "Version": "2.46",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libblkid1",
+          "Version": "2.41.3",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libblockdev-crypto3",
+          "Version": "3.4.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libblockdev-fs3",
+          "Version": "3.4.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libblockdev-loop3",
+          "Version": "3.4.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libblockdev-mdraid3",
+          "Version": "3.4.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libblockdev-nvme3",
+          "Version": "3.4.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libblockdev-part3",
+          "Version": "3.4.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libblockdev-smart3",
+          "Version": "3.4.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libblockdev-swap3",
+          "Version": "3.4.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libblockdev-utils3",
+          "Version": "3.4.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libblockdev3",
+          "Version": "3.4.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libbpf1",
+          "Version": "1.6.3",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libbpfcc",
+          "Version": "0.35.0+ds",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libbrotli1",
+          "Version": "1.2.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libbsd0",
+          "Version": "0.12.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libbytesize-common",
+          "Version": "2.12",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libbytesize1",
+          "Version": "2.12",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libbz2-1.0",
+          "Version": "1.0.8",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libc-bin",
+          "Version": "2.43",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libc-dev-bin",
+          "Version": "2.43",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libc-gconv-modules-extra",
+          "Version": "2.43",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libc6",
+          "Version": "2.43",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libc6-dev",
+          "Version": "2.43",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libcap-ng0",
+          "Version": "0.8.5",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libcap2",
+          "Version": "2.75",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libcap2-bin",
+          "Version": "2.75",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libcbor0.10",
+          "Version": "0.10.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libclang-cpp21",
+          "Version": "21.1.8",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libclang1-21",
+          "Version": "21.1.8",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libcom-err2",
+          "Version": "1.47.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libcrypt1",
+          "Version": "4.5.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libcryptsetup12",
+          "Version": "2.8.4",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libctf-nobfd0",
+          "Version": "2.46",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libctf0",
+          "Version": "2.46",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libcurl3t64-gnutls",
+          "Version": "8.18.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libcurl4t64",
+          "Version": "8.18.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libdb5.3t64",
+          "Version": "5.3.28+dfsg2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libdbus-1-3",
+          "Version": "1.16.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libdebconfclient0",
+          "Version": "0.280ubuntu1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libdebuginfod-common",
+          "Version": "0.194",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libdebuginfod1t64",
+          "Version": "0.194",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libdevmapper-event1.02.1",
+          "Version": "1.02.205",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libdevmapper1.02.1",
+          "Version": "1.02.205",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libdrm-amdgpu1",
+          "Version": "2.4.131",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libdrm-common",
+          "Version": "2.4.131",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libdrm2",
+          "Version": "2.4.131",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libduktape207",
+          "Version": "2.7.0+tests",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libdw1t64",
+          "Version": "0.194",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libeatmydata1",
+          "Version": "131",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libedit2",
+          "Version": "3.1-20251016",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libefiboot1t64",
+          "Version": "39",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libefivar1t64",
+          "Version": "39",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libelf1t64",
+          "Version": "0.194",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "liberror-perl",
+          "Version": "0.17030",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libestr0",
+          "Version": "0.1.11",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libevdev2",
+          "Version": "1.13.6+dfsg",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libevent-core-2.1-7t64",
+          "Version": "2.1.12-stable",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libexpat1",
+          "Version": "2.7.4",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libext2fs2t64",
+          "Version": "1.47.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libfastjson4",
+          "Version": "1.2304.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libfdisk1",
+          "Version": "2.41.3",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libffi8",
+          "Version": "3.5.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libfido2-1",
+          "Version": "1.16.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libflashrom1",
+          "Version": "1.6.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libfreetype6",
+          "Version": "2.14.2+dfsg",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libfribidi0",
+          "Version": "1.0.16",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libftdi1-2",
+          "Version": "1.6~rc1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libfuse3-4",
+          "Version": "3.18.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libfwupd3",
+          "Version": "2.1.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libfyaml0",
+          "Version": "0.9.4",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libgcc-s1",
+          "Version": "16-20260322",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libgcrypt20",
+          "Version": "1.12.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libgdbm-compat4t64",
+          "Version": "1.26",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libgdbm6t64",
+          "Version": "1.26",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libgirepository-2.0-0",
+          "Version": "2.88.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libglib2.0-0t64",
+          "Version": "2.88.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libglib2.0-bin",
+          "Version": "2.88.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libglib2.0-data",
+          "Version": "2.88.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libgmp10",
+          "Version": "6.3.0+dfsg",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libgnutls30t64",
+          "Version": "3.8.12",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libgpg-error-l10n",
+          "Version": "1.58",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libgpg-error0",
+          "Version": "1.58",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libgpgme45",
+          "Version": "2.0.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libgpm2",
+          "Version": "1.20.7",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libgprofng0",
+          "Version": "2.46",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libgssapi-krb5-2",
+          "Version": "1.22.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libgstreamer1.0-0",
+          "Version": "1.28.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libgudev-1.0-0",
+          "Version": "238",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libhogweed6t64",
+          "Version": "3.10.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libibverbs1",
+          "Version": "61.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libicu78",
+          "Version": "78.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libidn2-0",
+          "Version": "2.3.8",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libimobiledevice-1.0-6",
+          "Version": "1.4.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libimobiledevice-glue-1.0-0",
+          "Version": "1.3.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libinih1",
+          "Version": "61",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libintl-perl",
+          "Version": "1.37",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libintl-xs-perl",
+          "Version": "1.37",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libip4tc2",
+          "Version": "1.8.11",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libip6tc2",
+          "Version": "1.8.11",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libisns0t64",
+          "Version": "0.101",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libjansson4",
+          "Version": "2.14",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libjcat1",
+          "Version": "0.2.5",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libjemalloc2",
+          "Version": "5.3.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libjq1",
+          "Version": "1.8.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libjs-sphinxdoc",
+          "Version": "8.2.3",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libjson-c5",
+          "Version": "0.18+ds",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libjson-glib-1.0-0",
+          "Version": "1.10.8+ds",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libjson-glib-1.0-common",
+          "Version": "1.10.8+ds",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libk5crypto3",
+          "Version": "1.22.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libkeyutils1",
+          "Version": "1.6.3",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libklibc",
+          "Version": "2.0.14",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libkmod2",
+          "Version": "34.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libkrb5-3",
+          "Version": "1.22.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libkrb5support0",
+          "Version": "1.22.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libksba8",
+          "Version": "1.6.7",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "liblastlog2-2",
+          "Version": "2.41.3",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libldap-common",
+          "Version": "2.6.10+dfsg",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libldap2",
+          "Version": "2.6.10+dfsg",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libllvm21",
+          "Version": "21.1.8",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "liblmdb0",
+          "Version": "0.9.31",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "liblocale-gettext-perl",
+          "Version": "1.07",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "liblsof0",
+          "Version": "4.99.4+dfsg",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "liblvm2cmd2.03",
+          "Version": "2.03.31",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "liblz4-1",
+          "Version": "1.10.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "liblzma5",
+          "Version": "5.8.3",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "liblzo2-2",
+          "Version": "2.10",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libmagic-mgc",
+          "Version": "5.46",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libmagic1t64",
+          "Version": "5.46",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libmaxminddb0",
+          "Version": "1.12.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libmbim-glib4",
+          "Version": "1.32.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libmbim-proxy",
+          "Version": "1.32.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libmbim-utils",
+          "Version": "1.32.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libmd0",
+          "Version": "1.1.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libmm-glib0",
+          "Version": "1.25.95",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libmnl0",
+          "Version": "1.0.5",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libmodule-find-perl",
+          "Version": "0.17",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libmount1",
+          "Version": "2.41.3",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libmpathcmd0",
+          "Version": "0.14.3",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libmpathpersist0",
+          "Version": "0.14.3",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libmpfr6",
+          "Version": "4.2.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libmspack0t64",
+          "Version": "0.11",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libmultipath0",
+          "Version": "0.14.3",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libncurses6",
+          "Version": "6.6+20251231",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libncursesw6",
+          "Version": "6.6+20251231",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libnetfilter-conntrack3",
+          "Version": "1.1.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libnetplan1",
+          "Version": "1.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libnettle8t64",
+          "Version": "3.10.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libnewt0.52",
+          "Version": "0.52.25",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libnfnetlink0",
+          "Version": "1.0.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libnftables1",
+          "Version": "1.1.6",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libnftnl11",
+          "Version": "1.3.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libnghttp2-14",
+          "Version": "1.68.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libnl-3-200",
+          "Version": "3.12.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libnl-genl-3-200",
+          "Version": "3.12.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libnl-route-3-200",
+          "Version": "3.12.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libnpth0t64",
+          "Version": "1.8",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libnspr4",
+          "Version": "4.38.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libnss-systemd",
+          "Version": "259.5",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libnss3",
+          "Version": "3.120",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libntfs-3g89t64",
+          "Version": "2022.10.3",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libnuma1",
+          "Version": "2.0.19",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libnvme1t64",
+          "Version": "1.16.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libonig5",
+          "Version": "6.9.10",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libopeniscsiusr",
+          "Version": "2.1.11",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libp11-kit0",
+          "Version": "0.26.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libpackagekit-glib2-18",
+          "Version": "1.3.4",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libpam-cap",
+          "Version": "2.75",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libpam-modules",
+          "Version": "1.7.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libpam-modules-bin",
+          "Version": "1.7.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libpam-runtime",
+          "Version": "1.7.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libpam-systemd",
+          "Version": "259.5",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libpam0g",
+          "Version": "1.7.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libparted2t64",
+          "Version": "3.6",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libpcap0.8t64",
+          "Version": "1.10.6",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libpci3",
+          "Version": "3.14.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libpcre2-8-0",
+          "Version": "10.46",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libpcsclite1",
+          "Version": "2.4.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libperl5.40",
+          "Version": "5.40.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libpipeline1",
+          "Version": "1.5.8",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libplist-2.0-4",
+          "Version": "2.7.0+git20250820",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libplymouth5",
+          "Version": "24.004.60+git20250831.4a3c171d",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libpng16-16t64",
+          "Version": "1.6.57",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libpolkit-agent-1-0",
+          "Version": "127",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libpolkit-gobject-1-0",
+          "Version": "127",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libpopt0",
+          "Version": "1.19+dfsg",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libproc-processtable-perl",
+          "Version": "0.637",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libproc2-0",
+          "Version": "4.0.4",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libpsl5t64",
+          "Version": "0.21.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libpython3-stdlib",
+          "Version": "3.14.3",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libpython3.14",
+          "Version": "3.14.4",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libpython3.14-minimal",
+          "Version": "3.14.4",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libpython3.14-stdlib",
+          "Version": "3.14.4",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libqmi-glib5",
+          "Version": "1.38.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libqmi-proxy",
+          "Version": "1.38.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libqmi-utils",
+          "Version": "1.38.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libqrtr-glib0",
+          "Version": "1.2.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libreadline8t64",
+          "Version": "8.3",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "librtmp1",
+          "Version": "2.4+20151223.gitfa8646d.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libsasl2-2",
+          "Version": "2.1.28+dfsg1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libsasl2-modules",
+          "Version": "2.1.28+dfsg1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libsasl2-modules-db",
+          "Version": "2.1.28+dfsg1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libseccomp2",
+          "Version": "2.6.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libselinux1",
+          "Version": "3.9",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libsemanage-common",
+          "Version": "3.9",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libsemanage2",
+          "Version": "3.9",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libsensors-config",
+          "Version": "3.6.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libsensors5",
+          "Version": "3.6.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libsepol2",
+          "Version": "3.9",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libsframe3",
+          "Version": "2.46",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libsgutils2-1.48",
+          "Version": "1.48",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libslang2",
+          "Version": "2.3.3",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libsmartcols1",
+          "Version": "2.41.3",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libsnappy1v5",
+          "Version": "1.2.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libsodium23",
+          "Version": "1.0.18",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libsort-naturally-perl",
+          "Version": "1.03",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libsqlite3-0",
+          "Version": "3.46.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libss2",
+          "Version": "1.47.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libssh2-1t64",
+          "Version": "1.11.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libssl3t64",
+          "Version": "3.5.5",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libstdc++6",
+          "Version": "16-20260322",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libstemmer0d",
+          "Version": "3.0.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libsystemd-shared",
+          "Version": "259.5",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libsystemd0",
+          "Version": "259.5",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libtasn1-6",
+          "Version": "4.21.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libtcl8.6",
+          "Version": "8.6.17+dfsg",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libterm-readkey-perl",
+          "Version": "2.38",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libtext-charwidth-perl",
+          "Version": "0.04",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libtext-iconv-perl",
+          "Version": "1.7",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libtext-wrapi18n-perl",
+          "Version": "0.06",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libtinfo6",
+          "Version": "6.6+20251231",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libtirpc-common",
+          "Version": "1.3.7",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libtirpc3t64",
+          "Version": "1.3.7",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libtraceevent1",
+          "Version": "1.8.7",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libtraceevent1-plugin",
+          "Version": "1.8.7",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libtracefs1",
+          "Version": "1.8.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libtss2-esys-3.0.2-0t64",
+          "Version": "4.1.3",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libtss2-mu-4.0.1-0t64",
+          "Version": "4.1.3",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libtss2-sys1t64",
+          "Version": "4.1.3",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libtss2-tcti-cmd0t64",
+          "Version": "4.1.3",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libtss2-tcti-device0t64",
+          "Version": "4.1.3",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libtss2-tcti-mssim0t64",
+          "Version": "4.1.3",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libtss2-tcti-swtpm0t64",
+          "Version": "4.1.3",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libuchardet0",
+          "Version": "0.0.8",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libudev1",
+          "Version": "259.5",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libudisks2-0",
+          "Version": "2.10.91",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libunistring5",
+          "Version": "1.3",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libunwind8",
+          "Version": "1.8.3",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libupower-glib3",
+          "Version": "1.91.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "liburcu8t64",
+          "Version": "0.15.6",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libusb-1.0-0",
+          "Version": "1.0.29",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libusbmuxd-2.0-7",
+          "Version": "2.1.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libuuid1",
+          "Version": "2.41.3",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libuv1t64",
+          "Version": "1.51.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libvolume-key1",
+          "Version": "0.3.12",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libwrap0",
+          "Version": "7.6.q",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libx11-6",
+          "Version": "1.8.13",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libx11-data",
+          "Version": "1.8.13",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libxau6",
+          "Version": "1.0.11",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libxcb1",
+          "Version": "1.17.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libxdmcp6",
+          "Version": "1.1.5",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libxext6",
+          "Version": "1.3.4",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libxkbcommon0",
+          "Version": "1.13.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libxml2-16",
+          "Version": "2.15.2+dfsg",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libxmlb2",
+          "Version": "0.3.24",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libxmlsec1-1",
+          "Version": "1.3.9",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libxmlsec1-openssl1",
+          "Version": "1.3.9",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libxmuu1",
+          "Version": "1.1.3",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libxslt1.1",
+          "Version": "1.1.45",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libxtables12",
+          "Version": "1.8.11",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libxxhash0",
+          "Version": "0.8.3",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libyaml-0-2",
+          "Version": "0.2.5",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "libzstd1",
+          "Version": "1.5.7+dfsg",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "linux-base",
+          "Version": "4.15ubuntu5",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "linux-firmware",
+          "Version": "20260319.git217ca6e4.1ubuntu",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "linux-firmware-amd-graphics",
+          "Version": "20260319.git217ca6e4",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "linux-firmware-amd-misc",
+          "Version": "20260319.git217ca6e4",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "linux-firmware-broadcom-wireless",
+          "Version": "20260319.git217ca6e4",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "linux-firmware-intel-graphics",
+          "Version": "20260319.git217ca6e4",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "linux-firmware-intel-misc",
+          "Version": "20260319.git217ca6e4",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "linux-firmware-intel-wireless",
+          "Version": "20260319.git217ca6e4",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "linux-firmware-marvell-prestera",
+          "Version": "20260319.git217ca6e4",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "linux-firmware-marvell-wireless",
+          "Version": "20260319.git217ca6e4",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "linux-firmware-mediatek",
+          "Version": "20260319.git217ca6e4",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "linux-firmware-mellanox-spectrum",
+          "Version": "20260319.git217ca6e4",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "linux-firmware-misc",
+          "Version": "20260319.git217ca6e4",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "linux-firmware-netronome",
+          "Version": "20260319.git217ca6e4",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "linux-firmware-nvidia-graphics",
+          "Version": "20260319.git217ca6e4",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "linux-firmware-qlogic",
+          "Version": "20260319.git217ca6e4",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "linux-firmware-qualcomm-graphics",
+          "Version": "20260319.git217ca6e4",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "linux-firmware-qualcomm-misc",
+          "Version": "20260319.git217ca6e4",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "linux-firmware-qualcomm-wireless",
+          "Version": "20260319.git217ca6e4",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "linux-firmware-realtek",
+          "Version": "20260319.git217ca6e4",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "linux-generic",
+          "Version": "7.0.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "linux-headers-7.0.0-30",
+          "Version": "7.0.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "linux-headers-7.0.0-30-generic",
+          "Version": "7.0.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "linux-headers-7.0.0-42",
+          "Version": "7.0.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "linux-headers-7.0.0-42-generic",
+          "Version": "7.0.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "linux-headers-generic",
+          "Version": "7.0.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "linux-image-7.0.0-30-generic",
+          "Version": "7.0.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "linux-image-7.0.0-42-generic",
+          "Version": "7.0.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "linux-image-generic",
+          "Version": "7.0.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "linux-libc-dev",
+          "Version": "7.0.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "linux-main-modules-v4l2loopback-7.0.0-42-generic",
+          "Version": "7.0.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "linux-main-modules-zfs-7.0.0-30-generic",
+          "Version": "7.0.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "linux-main-modules-zfs-7.0.0-42-generic",
+          "Version": "7.0.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "linux-modules-7.0.0-30-generic",
+          "Version": "7.0.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "linux-modules-7.0.0-42-generic",
+          "Version": "7.0.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "linux-perf",
+          "Version": "7.0.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "linux-sysctl-defaults",
+          "Version": "4.15ubuntu5",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "linux-tools-7.0.0-30",
+          "Version": "7.0.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "linux-tools-7.0.0-30-generic",
+          "Version": "7.0.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "linux-tools-7.0.0-42",
+          "Version": "7.0.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "linux-tools-7.0.0-42-generic",
+          "Version": "7.0.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "linux-tools-common",
+          "Version": "7.0.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "locales",
+          "Version": "2.43",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "login",
+          "Version": "4.16.0-2+really2.41.3",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "login.defs",
+          "Version": "4.17.4",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "logrotate",
+          "Version": "3.22.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "logsave",
+          "Version": "1.47.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "lsb-base",
+          "Version": "11.6build1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "lsb-release",
+          "Version": "12.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "lshw",
+          "Version": "02.19.git.2021.06.19.996aaad9c7",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "lsof",
+          "Version": "4.99.4+dfsg",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "lvm2",
+          "Version": "2.03.31",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "lxd-agent-loader",
+          "Version": "0.13ubuntu0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "lxd-installer",
+          "Version": "14ubuntu0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "makedumpfile",
+          "Version": "1.7.7",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "man-db",
+          "Version": "2.13.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "manpages",
+          "Version": "6.17",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "manpages-dev",
+          "Version": "6.17",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "mawk",
+          "Version": "1.3.4.20260129",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "mdadm",
+          "Version": "4.5",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "media-types",
+          "Version": "14.0.0build1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "modemmanager",
+          "Version": "1.25.95",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "mokutil",
+          "Version": "0.7.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "motd-news-config",
+          "Version": "14ubuntu6.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "mount",
+          "Version": "2.41.3",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "mtr-tiny",
+          "Version": "0.95",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "multipath-tools",
+          "Version": "0.14.3",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "nano",
+          "Version": "8.7.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "ncurses-base",
+          "Version": "6.6+20251231",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "ncurses-bin",
+          "Version": "6.6+20251231",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "ncurses-term",
+          "Version": "6.6+20251231",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "needrestart",
+          "Version": "3.11",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "netbase",
+          "Version": "6.5build1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "netcat-openbsd",
+          "Version": "1.234",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "netplan-generator",
+          "Version": "1.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "netplan.io",
+          "Version": "1.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "networkd-dispatcher",
+          "Version": "2.2.4",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "nftables",
+          "Version": "1.1.6",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "ntfs-3g",
+          "Version": "2022.10.3",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "numactl",
+          "Version": "2.0.19",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "open-iscsi",
+          "Version": "2.1.11",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "open-vm-tools",
+          "Version": "13.0.10",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "openssh-client",
+          "Version": "10.2p1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "openssh-server",
+          "Version": "10.2p1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "openssh-sftp-server",
+          "Version": "10.2p1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "openssl",
+          "Version": "3.5.5",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "openssl-provider-legacy",
+          "Version": "3.5.5",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "os-prober",
+          "Version": "1.84ubuntu1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "overlayroot",
+          "Version": "0.58ubuntu",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "packagekit",
+          "Version": "1.3.4",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "parted",
+          "Version": "3.6",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "passwd",
+          "Version": "4.17.4",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "patch",
+          "Version": "2.8",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "pci.ids",
+          "Version": "0.0~2026.02.12",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "pciutils",
+          "Version": "3.14.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "perl",
+          "Version": "5.40.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "perl-base",
+          "Version": "5.40.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "perl-modules-5.40",
+          "Version": "5.40.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "pigz",
+          "Version": "2.8",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "pinentry-curses",
+          "Version": "1.3.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "plymouth",
+          "Version": "24.004.60+git20250831.4a3c171d",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "plymouth-theme-ubuntu-text",
+          "Version": "24.004.60+git20250831.4a3c171d",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "pnp.ids",
+          "Version": "0.394",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "polkitd",
+          "Version": "127",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "powermgmt-base",
+          "Version": "1.38ubuntu2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "procps",
+          "Version": "4.0.4",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "psmisc",
+          "Version": "23.7",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "publicsuffix",
+          "Version": "20260129.1928",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python-apt-common",
+          "Version": "3.1.0ubuntu1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python-babel-localedata",
+          "Version": "2.17.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3",
+          "Version": "3.14.3",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-apport",
+          "Version": "2.34.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-apt",
+          "Version": "3.1.0ubuntu1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-attr",
+          "Version": "25.4.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-autocommand",
+          "Version": "2.2.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-automat",
+          "Version": "25.4.16",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-babel",
+          "Version": "2.17.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-bcrypt",
+          "Version": "5.0.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-blinker",
+          "Version": "1.9.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-boto3",
+          "Version": "1.40.72",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-botocore",
+          "Version": "1.40.72+repack",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-bpfcc",
+          "Version": "0.35.0+ds",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-certifi",
+          "Version": "2026.1.4+ds",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-cffi-backend",
+          "Version": "2.0.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-chardet",
+          "Version": "5.2.0+dfsg",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-click",
+          "Version": "8.2.0+0.really.8.1.8",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-commandnotfound",
+          "Version": "23.04.0build1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-configobj",
+          "Version": "5.0.9",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-constantly",
+          "Version": "23.10.4",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-cryptography",
+          "Version": "46.0.5",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-dateutil",
+          "Version": "2.9.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-dbus",
+          "Version": "1.4.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-debconf",
+          "Version": "1.5.92",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-debian",
+          "Version": "1.0.1ubuntu2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-distro",
+          "Version": "1.9.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-distro-info",
+          "Version": "1.15",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-distupgrade",
+          "Version": "26.04.23",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-gdbm",
+          "Version": "3.14.3",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-gi",
+          "Version": "3.56.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-hamcrest",
+          "Version": "2.1.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-httplib2",
+          "Version": "0.22.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-hyperlink",
+          "Version": "21.0.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-idna",
+          "Version": "3.11",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-incremental",
+          "Version": "24.7.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-inflect",
+          "Version": "7.5.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-jaraco.context",
+          "Version": "6.0.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-jaraco.functools",
+          "Version": "4.1.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-jaraco.text",
+          "Version": "4.0.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-jinja2",
+          "Version": "3.1.6",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-jmespath",
+          "Version": "1.0.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-json-pointer",
+          "Version": "2.4",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-jsonpatch",
+          "Version": "1.32",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-jsonschema",
+          "Version": "4.19.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-jsonschema-specifications",
+          "Version": "2023.12.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-jwt",
+          "Version": "2.10.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-launchpadlib",
+          "Version": "2.1.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-lazr.restfulclient",
+          "Version": "0.14.6",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-lazr.uri",
+          "Version": "1.0.6",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-linkify-it",
+          "Version": "2.0.3",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-magic",
+          "Version": "0.4.27",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-markdown-it",
+          "Version": "3.0.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-markupsafe",
+          "Version": "3.0.3",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-mdurl",
+          "Version": "0.1.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-minimal",
+          "Version": "3.14.3",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-more-itertools",
+          "Version": "10.8.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-netaddr",
+          "Version": "1.3.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-netifaces",
+          "Version": "0.11.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-netplan",
+          "Version": "1.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-oauthlib",
+          "Version": "3.3.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-openssl",
+          "Version": "25.3.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-packaging",
+          "Version": "26.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-passlib",
+          "Version": "1.9.3",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-pexpect",
+          "Version": "4.9",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-pkg-resources",
+          "Version": "78.1.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-problem-report",
+          "Version": "2.34.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-ptyprocess",
+          "Version": "0.7.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-pyasn1",
+          "Version": "0.6.3",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-pyasn1-modules",
+          "Version": "0.4.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-pygments",
+          "Version": "2.19.2+dfsg",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-pyparsing",
+          "Version": "3.3.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-referencing",
+          "Version": "0.36.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-requests",
+          "Version": "2.32.5+dfsg",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-rich",
+          "Version": "13.9.4",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-rpds-py",
+          "Version": "0.27.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-s3transfer",
+          "Version": "0.14.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-serial",
+          "Version": "3.5",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-service-identity",
+          "Version": "24.2.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-setuptools",
+          "Version": "78.1.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-six",
+          "Version": "1.17.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-software-properties",
+          "Version": "0.120.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-systemd",
+          "Version": "235",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-twisted",
+          "Version": "25.5.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-typeguard",
+          "Version": "4.4.4",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-typing-extensions",
+          "Version": "4.15.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-uc-micro",
+          "Version": "1.0.3",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-update-manager",
+          "Version": "26.04.5",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-urllib3",
+          "Version": "2.6.3",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-wadllib",
+          "Version": "2.0.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-xkit",
+          "Version": "0.5.0ubuntu8",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-yaml",
+          "Version": "6.0.3",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-zipp",
+          "Version": "3.23.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3-zope.interface",
+          "Version": "8.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3.14",
+          "Version": "3.14.4",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3.14-gdbm",
+          "Version": "3.14.4",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "python3.14-minimal",
+          "Version": "3.14.4",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "readline-common",
+          "Version": "8.3",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "rpcsvc-proto",
+          "Version": "1.4.3",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "rsync",
+          "Version": "3.4.1+ds1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "rsyslog",
+          "Version": "8.2512.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "rust-coreutils",
+          "Version": "0.8.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "sbsigntool",
+          "Version": "0.9.4",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "screen",
+          "Version": "4.9.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "secureboot-db",
+          "Version": "1.9build2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "sed",
+          "Version": "4.9",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "sensible-utils",
+          "Version": "0.0.26build1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "sg3-utils",
+          "Version": "1.48",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "sg3-utils-udev",
+          "Version": "1.48",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "sgml-base",
+          "Version": "1.31+nmu1build1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "shared-mime-info",
+          "Version": "2.4",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "shim-signed",
+          "Version": "1.59+15.8",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "snapd",
+          "Version": "2.76.3+ubuntu26.04",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "software-properties-common",
+          "Version": "0.120.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "sos",
+          "Version": "4.10.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "squashfs-tools",
+          "Version": "4.7.5",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "ssh-import-id",
+          "Version": "5.11",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "strace",
+          "Version": "6.19+ds",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "sudo",
+          "Version": "1.9.17p2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "sudo-common",
+          "Version": "1.2ubuntu",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "sudo-rs",
+          "Version": "0.2.13",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "sysstat",
+          "Version": "12.7.7",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "systemd",
+          "Version": "259.5",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "systemd-cryptsetup",
+          "Version": "259.5",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "systemd-hwe-hwdb",
+          "Version": "259.5.3ubuntu",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "systemd-resolved",
+          "Version": "259.5",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "systemd-sysv",
+          "Version": "259.5",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "sysvinit-utils",
+          "Version": "3.15",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "tar",
+          "Version": "1.35+dfsg",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "tcl",
+          "Version": "8.6.16build1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "tcl8.6",
+          "Version": "8.6.17+dfsg",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "tcpdump",
+          "Version": "4.99.6",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "telnet",
+          "Version": "0.17+2.7",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "thermald",
+          "Version": "2.5.11",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "thin-provisioning-tools",
+          "Version": "1.1.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "time",
+          "Version": "1.9",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "tmux",
+          "Version": "3.6a",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "tnftp",
+          "Version": "20260211",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "tpm-udev",
+          "Version": "4.1.3",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "trace-cmd",
+          "Version": "3.3.3",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "tzdata",
+          "Version": "2026e",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "ubuntu-drivers-common",
+          "Version": "0.10.9",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "ubuntu-kernel-accessories",
+          "Version": "1.570.3",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "ubuntu-keyring",
+          "Version": "2023.11.28.1build1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "ubuntu-minimal",
+          "Version": "1.570.3",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "ubuntu-pro-client",
+          "Version": "37.2ubuntu0.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "ubuntu-pro-client-l10n",
+          "Version": "37.2ubuntu0.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "ubuntu-release-upgrader-core",
+          "Version": "26.04.23",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "ubuntu-server",
+          "Version": "1.570.3",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "ubuntu-server-minimal",
+          "Version": "1.570.3",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "ubuntu-standard",
+          "Version": "1.570.3",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "ucf",
+          "Version": "3.0052ubuntu1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "udev",
+          "Version": "259.5",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "udisks2",
+          "Version": "2.10.91",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "ufw",
+          "Version": "0.36.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "unattended-upgrades",
+          "Version": "2.12ubuntu9",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "unminimize",
+          "Version": "0.5build1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "update-manager-core",
+          "Version": "26.04.5",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "update-notifier-common",
+          "Version": "3.207.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "upower",
+          "Version": "1.91.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "usb-modeswitch",
+          "Version": "2.6.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "usb-modeswitch-data",
+          "Version": "20191128",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "usb.ids",
+          "Version": "2025.12.13",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "usbmuxd",
+          "Version": "1.1.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "usbutils",
+          "Version": "019",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "util-linux",
+          "Version": "2.41.3",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "util-linux-extra",
+          "Version": "2.41.3",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "uuid-runtime",
+          "Version": "2.41.3",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "vim",
+          "Version": "9.1.2141",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "vim-common",
+          "Version": "9.1.2141",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "vim-runtime",
+          "Version": "9.1.2141",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "vim-tiny",
+          "Version": "9.1.2141",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "wget",
+          "Version": "1.25.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "whiptail",
+          "Version": "0.52.25",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "wireless-regdb",
+          "Version": "2026.05.30",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "wpasupplicant",
+          "Version": "2.11",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "xauth",
+          "Version": "1.1.2",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "xdg-user-dirs",
+          "Version": "0.19",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "xfsprogs",
+          "Version": "6.18.0",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "xkb-data",
+          "Version": "2.46",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "xml-core",
+          "Version": "0.19build1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "xxd",
+          "Version": "9.1.2141",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "xz-utils",
+          "Version": "5.8.3",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "zerofree",
+          "Version": "1.1.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "zlib1g",
+          "Version": "1.3.dfsg+really1.3.1",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        },
+        {
+          "Name": "zstd",
+          "Version": "1.5.7+dfsg",
+          "FilePath": null,
+          "AnalyzedBy": "dpkg"
+        }
+      ],
+      "finding_count": 57212
+    }
+  ],
+  "qualified_os_detection": true,
+  "full_findings_file": "trivy-host-complete-findings.json.gz"
+}
