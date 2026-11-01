@@ -240,6 +240,119 @@ def install_tools(path):
     temporary.replace('/usr/local/sbin/bussassistentctl')
     run(['systemctl', 'daemon-reload'])
 
+
+def gateway_snapshot(path):
+    """Allowlisted lifecycle identity, never Env, credentials, logs or DB rows."""
+    result = {}
+    for service in ('private-api', 'access-gate', 'private-db', 'gateway'):
+        ident = compose(path, 'ps', '-q', service, capture_output=True, text=True).stdout.strip()
+        record = json.loads(run(['docker', 'inspect', ident], capture_output=True, text=True).stdout)[0]
+        if (record['Config']['Labels'].get('com.docker.compose.project') != 'bussassistent'
+                or record['Config']['Labels'].get('com.docker.compose.service') != service
+                or not record['State']['Running']):
+            raise ValueError('Expected running production service: ' + service)
+        result[service] = {'id': record['Id'], 'image': record['Image'],
+            'pid': record['State']['Pid'], 'started': record['State']['StartedAt'],
+            'restarts': record['RestartCount']}
+    result['tunnel'] = run(['systemctl', 'show', 'cloudflared', '-p', 'MainPID', '-p', 'NRestarts',
+                            '-p', 'ActiveEnterTimestamp'], capture_output=True, text=True).stdout
+    result['boot_id'] = Path('/proc/sys/kernel/random/boot_id').read_text().strip()
+    return result
+
+
+def gateway_source_guard(before, target):
+    def files(path, relative):
+        base = path / relative
+        if not base.exists():
+            raise ValueError('Missing gateway scope input: ' + relative)
+        paths = [base] if base.is_file() else base.rglob('*')
+        return {str(p.relative_to(path)): hashlib.sha256(p.read_bytes()).hexdigest()
+                for p in paths if p.is_file()}
+    for relative in ('backend', 'frontend', 'deploy/tablet/access_gate',
+                     'deploy/tablet/nginx-main.conf', 'deploy/tablet/nginx.conf.template'):
+        if files(before, relative) != files(target, relative):
+            raise ValueError('Gateway-only scope rejects changed ' + relative)
+    # Only release directory / generated app image aliases may differ in Compose.
+    def configuration(path):
+        value = compose(path, 'config', '--format', 'json', capture_output=True, text=True).stdout
+        return json.loads(value.replace(str(path), '<release>').replace(path.name, '<sha>'))
+    if configuration(before) != configuration(target):
+        raise ValueError('Gateway-only scope rejects changed Compose/runtime configuration')
+
+
+def gateway_switch(commit, expected_image, expected_current):
+    if not re.fullmatch(r'sha256:[a-f0-9]{64}', expected_image):
+        raise ValueError('Exact gateway image ID required')
+    before = release()
+    target = release(commit)
+    if before.name != expected_current or target == before:
+        raise ValueError('Active release changed or target already active')
+    gateway_source_guard(before, target)
+    gateway_ref = 'bussassistent-gateway:' + target.name
+    image = json.loads(run(['docker', 'image', 'inspect', gateway_ref], capture_output=True, text=True).stdout)[0]['Id']
+    if image != expected_image:
+        raise ValueError('Gateway image differs from qualified artifact')
+    ready(before)
+    wait_tunnel()
+    initial = gateway_snapshot(before)
+    backup(before)
+    # Stage may build temporary app images. They must never be activated by this
+    # operation or a later start: bind new aliases to the exact running images.
+    for service, prefix in (('private-api', 'api'), ('access-gate', 'access-gate')):
+        run(['docker', 'tag', initial[service]['image'], 'bussassistent-' + prefix + ':' + target.name])
+    try:
+        compose(target, 'up', '-d', '--no-deps', '--no-build', '--pull', 'never', 'gateway')
+        for attempt in range(15):
+            try:
+                ready(target)
+                break
+            except (ValueError, subprocess.CalledProcessError):
+                if attempt == 14:
+                    raise
+                time.sleep(1)
+        compose(target, 'exec', '-T', 'gateway', 'nginx', '-t')
+        wait_tunnel()
+        final = gateway_snapshot(target)
+        for key in ('private-api', 'access-gate', 'private-db', 'tunnel', 'boot_id'):
+            if initial[key] != final[key]:
+                raise ValueError('Unrelated production lifecycle changed: ' + key)
+        if final['gateway']['image'] != expected_image:
+            raise ValueError('Running gateway differs from qualified artifact')
+    except Exception:
+        # Same application/migrations/DB, so only the gateway is returned.
+        compose(before, 'up', '-d', '--no-deps', '--no-build', '--pull', 'never', 'gateway')
+        ready(before)
+        wait_tunnel()
+        restored = gateway_snapshot(before)
+        for key in ('private-api', 'access-gate', 'private-db', 'tunnel', 'boot_id'):
+            if initial[key] != restored[key]:
+                raise ValueError('Unrelated lifecycle changed during gateway recovery: ' + key)
+        if restored['gateway']['image'] != initial['gateway']['image']:
+            raise ValueError('Previous gateway image not restored')
+        print('Gateway returned to previous release; no app/DB/tunnel restart requested', flush=True)
+        raise
+    link('previous', before)
+    link('current', target)
+    receipt = {'before_commit': before.name, 'active_commit': target.name,
+               'qualified_gateway_image': expected_image, 'before': initial, 'after': final,
+               'scope': 'gateway only; app image aliases preserve running bytes'}
+    (target / 'gateway-maintenance.json').write_text(json.dumps(receipt, indent=2) + '\n')
+    print(json.dumps(receipt, indent=2))
+
+
+def gateway_export(commit):
+    path = release(commit)
+    ref = 'bussassistent-gateway:' + path.name
+    target = UPLOADS / ('gateway-' + path.name + '.tar')
+    with target.open('xb') as stream:
+        run(['docker', 'save', ref], stdout=stream)
+    import grp
+    os.chown(target, 0, grp.getgrnam('jonas').gr_gid)
+    target.chmod(0o640)
+    with target.open('rb') as stream:
+        digest = hashlib.file_digest(stream, 'sha256').hexdigest()
+    print(json.dumps({'path': str(target), 'sha256': digest, 'bytes': target.stat().st_size}))
+
 def test_recovery():
     """Controlled crash test for this project's API, DB and tunnel only."""
     import signal
@@ -361,6 +474,19 @@ def verify_restore():
 
 def main():
     action = sys.argv[1] if len(sys.argv) > 1 else ''
+    if action == 'gateway-switch' and len(sys.argv) == 5:
+        gateway_switch(*sys.argv[2:])
+        return
+    if action == 'gateway-export' and len(sys.argv) == 3:
+        gateway_export(sys.argv[2])
+        return
+    if action == 'gateway-inspect' and len(sys.argv) == 3:
+        path = release(sys.argv[2])
+        ref = 'bussassistent-gateway:' + path.name
+        image = json.loads(run(['docker', 'image', 'inspect', ref], capture_output=True, text=True).stdout)[0]
+        print(json.dumps({'current': release().name, 'production': gateway_snapshot(release()),
+                          'staged_gateway': {k: image[k] for k in ('Id', 'Architecture', 'Os', 'RootFS')}}))
+        return
     if action == 'verify-restore' and len(sys.argv) == 2:
         verify_restore()
         return

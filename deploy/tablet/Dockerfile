@@ -8,7 +8,7 @@ COPY deploy/tablet/index.html ./index.html
 ENV VITE_PRIVATE_API_BASE=/private-api
 RUN npm run build
 
-FROM nginx:1.28-alpine@sha256:a8b39bd9cf0f83869a2162827a0caf6137ddf759d50a171451b335cecc87d236
+FROM nginx:1.30.6-alpine-slim@sha256:dede8895648b461178c3bc604f7eed4423efe5220b2c4d839f5eb3d34ac3f8f7
 COPY --from=build /app/dist /usr/share/nginx/html
 COPY deploy/tablet/nginx.conf.template /etc/nginx/templates/default.conf.template
 COPY deploy/tablet/nginx-main.conf /etc/nginx/nginx.conf

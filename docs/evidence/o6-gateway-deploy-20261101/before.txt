@@ -1,0 +1,39 @@
+2026-11-01T18:04:49+01:00
+{
+  "commit": "d367a0e47198aeecc52358258cb6825eecdc8c4a",
+  "archive_sha256": "da833afc216582e4acde127e9d429b3d356e5b145c26c0a7421f123d9f7545e8"
+}44c550dc-d3b9-4222-8f6c-e0dcdac1a991
+7.0.0-42-generic
+cloudflared	2026.10.6
+libc6:amd64	2.43-2ubuntu2.4
+systemd	259.5-0ubuntu3.4
+1d356dac769d0dbf62ebe588c4034824bbff98d5790c2f844cc99e0e2f57462d  /usr/bin/cloudflared
+746cfe1bba419ce0e3ce6ffc2dfab35b02dd0f67bf97de218186cdc87423d58e  /etc/systemd/system/bussassistent.service
+ff7e974ccc509fe1dead6bf216b0a82a827d66693dafabe083ca3514e87944a1  /etc/systemd/system/cloudflared.service
+52ec3624f51d5f434a0e31e90da09bdc0f2433f50d96dbab957e3a63622b3c9f  /etc/systemd/system/bussassistent-backup.service
+63adb6a06624043a7d1b58e6df393d5abdb69d85b6639735723a1c38a7f4e756  /etc/systemd/system/bussassistent-backup.timer
+Filesystem                         Size  Used Avail Use% Mounted on
+/dev/mapper/ubuntu--vg-ubuntu--lv   98G   11G   83G  11% /
+Filesystem                         Inodes  IUsed   IFree IUse% Mounted on
+/dev/mapper/ubuntu--vg-ubuntu--lv 6553600 191340 6362260    3% /
+  UNIT LOAD ACTIVE SUB DESCRIPTION
+
+0 loaded units listed.
+ActiveEnterTimestamp=Sat 2026-10-31 03:21:32 CET
+MainPID=1155012
+NRestarts=0
+active
+{"status":200,"readyConnections":4,"connectorId":"e8d44e39-7022-4bdf-944c-88687a76283b"}API healthy; origin access control rejects unauthenticated requests
+Id=bussassistent.service
+ActiveState=active
+SubState=exited
+
+Id=cloudflared.service
+ActiveState=active
+SubState=running
+Release: d367a0e47198aeecc52358258cb6825eecdc8c4a
+NAME                          IMAGE                                                                                        COMMAND                  SERVICE       CREATED        STATUS                  PORTS
+bussassistent-access-gate-1   bussassistent-access-gate:d367a0e47198aeecc52358258cb6825eecdc8c4a                           "python gate.py"         access-gate   39 hours ago   Up 39 hours             
+bussassistent-gateway-1       bussassistent-gateway:d367a0e47198aeecc52358258cb6825eecdc8c4a                               "/bin/sh -ec 'envsub…"   gateway       39 hours ago   Up 39 hours             80/tcp, 127.0.0.1:18081->8080/tcp
+bussassistent-private-api-1   bussassistent-api:d367a0e47198aeecc52358258cb6825eecdc8c4a                                   "python -m app.run"      private-api   39 hours ago   Up 39 hours (healthy)   
+bussassistent-private-db-1    postgres:17-alpine@sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24   "docker-entrypoint.s…"   private-db    39 hours ago   Up 39 hours (healthy)   5432/tcp

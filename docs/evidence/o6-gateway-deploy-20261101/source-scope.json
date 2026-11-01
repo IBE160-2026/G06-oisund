@@ -1,0 +1,31 @@
+{
+  "candidate": "533313873c49317a958dc9a2407fad32f916d19f",
+  "origin_main": "5cee9e03d03d2c9c165c7f8fec64aa3e146959ab",
+  "exact_candidate_inputs": [
+    {
+      "path": "deploy/tablet/Dockerfile",
+      "sha256": "009dfda2c6adaf1eedf1be0bd9aed26cbcbe70c240890ddce820aa79a3137697"
+    },
+    {
+      "path": "deploy/tablet/nginx-main.conf",
+      "sha256": "9ca85ad50b77337a42093deacc0d1483d7d1067930d82edd69077513e2883f08"
+    },
+    {
+      "path": "deploy/tablet/nginx.conf.template",
+      "sha256": "6742bc9b79c4a0dec8dfc618923affd29a17500bdb5b8a230ac48eebf7687cb5"
+    },
+    {
+      "path": "frontend/package-lock.json",
+      "sha256": "7be1471f59e2e58dbd8073e4b8137a52a95ca7d62431afeeed189b1d35a27491"
+    },
+    {
+      "path": "scripts/tablet-proxy-probe.py",
+      "sha256": "ca6154b3aa4519eecb44ecde31c14f981ba1e40b4ed13fef2742ea7ec1d8a6b3"
+    },
+    {
+      "path": "scripts/verify-tablet-proxy.ps1",
+      "sha256": "303b0e4df68d2c38652295649b80e9792e5f8ba405059515acacf0cd2cb23834"
+    }
+  ],
+  "api_gate_postgres_application_unchanged": true
+}
