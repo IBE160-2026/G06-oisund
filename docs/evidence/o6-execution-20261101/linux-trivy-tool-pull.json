@@ -1,0 +1,11 @@
+{
+  "command": [
+    "docker",
+    "pull",
+    "aquasec/trivy:0.76.1"
+  ],
+  "start_utc": "2026-11-01T22:14:16.228130+00:00",
+  "end_utc": "2026-11-01T22:14:29.678740+00:00",
+  "exit": 0,
+  "output_sha256": "d68c19e19087e554e7fca339fa849246c28b3e6bffc9d0d1fb7dbef7955bd9b8"
+}

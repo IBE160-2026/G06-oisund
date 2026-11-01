@@ -73,3 +73,7 @@ frontend/.story124-tests/
 frontend/.v1followup-tests/
 frontend/dist-v1followup-tablet/
 frontend/dist-story124-tablet/
+
+# Preserve large original OS scan reports locally; publish compact finding rows.
+/docs/evidence/o6-execution-20261101/r2-linux-os-scan-*.txt
+/docs/evidence/o6-execution-20261101/r2-linux-os-scan-*-raw.json.gz

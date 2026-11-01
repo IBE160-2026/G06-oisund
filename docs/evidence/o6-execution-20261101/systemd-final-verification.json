@@ -1,0 +1,10 @@
+{
+  "all_ten_packages": "259.9-0ubuntu0.1",
+  "running_manager": "259.9-0ubuntu0.1",
+  "new_ssh_connection_passed": true,
+  "route_dns_services_passed": true,
+  "unit_hashes_preserved": true,
+  "rollback_used": false,
+  "host_method_hash_matches": true,
+  "machine_reboot_performed": false
+}

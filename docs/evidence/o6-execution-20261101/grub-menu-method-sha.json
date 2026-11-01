@@ -1,0 +1,21 @@
+{
+  "command": [
+    "ssh",
+    "-i",
+    "C:\\Users\\Jonas\\.ssh\\ibe160_server_ed25519",
+    "-o",
+    "IdentitiesOnly=yes",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "StrictHostKeyChecking=yes",
+    "-o",
+    "ConnectTimeout=10",
+    "jonas@192.168.1.139",
+    "sha256sum /tmp/ibe160-o6-window.uNfjQHcy/grub-menu.py"
+  ],
+  "start_utc": "2026-11-01T22:20:04.525795+00:00",
+  "end_utc": "2026-11-01T22:20:04.954683+00:00",
+  "exit": 0,
+  "output_sha256": "b7b105aacff8c45e658dabfc6eeec5a6bc9030ed7381709d7a2be998d37b4bc4"
+}

@@ -1,0 +1,21 @@
+{
+  "command": [
+    "ssh",
+    "-i",
+    "C:\\Users\\Jonas\\.ssh\\ibe160_server_ed25519",
+    "-o",
+    "IdentitiesOnly=yes",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "StrictHostKeyChecking=yes",
+    "-o",
+    "ConnectTimeout=10",
+    "jonas@192.168.1.139",
+    "set -eu\nsystemctl show -p Version\ndpkg-query -W systemd libnss-systemd libpam-systemd libsystemd-shared libsystemd0 libudev1 systemd-cryptsetup systemd-resolved systemd-sysv udev\ndpkg --audit\nsystemctl is-active ssh docker systemd-resolved cloudflared bussassistent-backup.timer\nip route show default\ngetent ahostsv4 app.bussassistent.com\nsha256sum /tmp/ibe160-o6-window.uNfjQHcy/host-step-v3.py"
+  ],
+  "start_utc": "2026-11-01T22:10:15.938671+00:00",
+  "end_utc": "2026-11-01T22:10:16.448710+00:00",
+  "exit": 0,
+  "output_sha256": "6989b813202aedef0d5feff623d7bf48549549e9cf25d19a4e093e1915d4ca5a"
+}

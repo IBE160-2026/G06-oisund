@@ -1,0 +1,21 @@
+{
+  "command": [
+    "docker",
+    "run",
+    "--rm",
+    "--network",
+    "none",
+    "--read-only",
+    "--entrypoint",
+    "sh",
+    "--mount",
+    "type=bind,source=C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\operations-o3-o6\\tmp\\o6-execution-20261101,target=/methods,readonly",
+    "ibe160-o6-systemd-tests:20261101-r1",
+    "-n",
+    "/methods/o6-return-systemd.sh"
+  ],
+  "start_utc": "2026-11-01T23:01:53.406601+00:00",
+  "end_utc": "2026-11-01T23:01:54.028051+00:00",
+  "exit": 0,
+  "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

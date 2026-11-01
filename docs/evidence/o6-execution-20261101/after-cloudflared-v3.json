@@ -1,0 +1,21 @@
+{
+  "command": [
+    "ssh",
+    "-i",
+    "C:\\Users\\Jonas\\.ssh\\ibe160_server_ed25519",
+    "-o",
+    "IdentitiesOnly=yes",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "StrictHostKeyChecking=yes",
+    "-o",
+    "ConnectTimeout=10",
+    "jonas@192.168.1.139",
+    "set -eu\ndate --iso-8601=seconds\ncat /opt/bussassistent/current/release-identity.json\ncat /proc/sys/kernel/random/boot_id\nuname -r\ndpkg-query -W -f='${binary:Package}\\t${Version}\\n' libc6 systemd cloudflared\nsha256sum /usr/bin/cloudflared /etc/systemd/system/bussassistent.service /etc/systemd/system/cloudflared.service /etc/systemd/system/bussassistent-backup.service /etc/systemd/system/bussassistent-backup.timer\ndf -h /\ndf -i /\nsystemctl --failed --no-pager\nsystemctl show cloudflared -p MainPID -p NRestarts -p ActiveEnterTimestamp\nsystemctl is-active bussassistent-backup.timer\ncurl -fsS http://127.0.0.1:18083/ready\nsudo -n /usr/local/sbin/bussassistentctl check\nsudo -n /usr/local/sbin/bussassistentctl status"
+  ],
+  "start_utc": "2026-11-01T22:12:15.359167+00:00",
+  "end_utc": "2026-11-01T22:12:16.643170+00:00",
+  "exit": 0,
+  "output_sha256": "f6671cafa39ab8c6f946add9b8033ee09efd5cc6b4495880c6b6eedb075fa2cb"
+}

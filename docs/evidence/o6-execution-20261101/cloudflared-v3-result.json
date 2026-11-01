@@ -1,0 +1,21 @@
+{
+  "command": [
+    "ssh",
+    "-i",
+    "C:\\Users\\Jonas\\.ssh\\ibe160_server_ed25519",
+    "-o",
+    "IdentitiesOnly=yes",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "StrictHostKeyChecking=yes",
+    "-o",
+    "ConnectTimeout=10",
+    "jonas@192.168.1.139",
+    "cat /tmp/ibe160-o6-window.uNfjQHcy/cloudflared-result.json"
+  ],
+  "start_utc": "2026-11-01T22:12:14.692002+00:00",
+  "end_utc": "2026-11-01T22:12:15.349190+00:00",
+  "exit": 0,
+  "output_sha256": "6e712b24a52fe1dea7defef53fb4df78cd2f6f807cc764ce854db0cf017c235a"
+}

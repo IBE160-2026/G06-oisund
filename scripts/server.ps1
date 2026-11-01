@@ -3,7 +3,9 @@ param(
     [ValidateSet('Status','Logs','Check','Backup','Deploy','Rollback','GatewayStage','GatewaySwitch')]
     [string]$Action,
     [ValidatePattern('^[a-zA-Z0-9_.@-]+$')]
-    [string]$Server = 'jonas@192.168.1.139',
+    [string]$Server = 'jonas@192.168.1.138',
+    [ValidatePattern('^[a-zA-Z0-9_.-]+$')]
+    [string]$HostKeyAlias = '192.168.1.139',
     [string]$KeyFile = (Join-Path $env:USERPROFILE '.ssh/ibe160_server_ed25519'),
     [string]$Revision,
     [string]$GatewayImage,
@@ -11,7 +13,8 @@ param(
     [string]$BackupDirectory = (Join-Path $env:LOCALAPPDATA 'BussassistentServer/backups')
 )
 $ErrorActionPreference = 'Stop'
-$sshOptions = @('-i', $KeyFile, '-o', 'IdentitiesOnly=yes', '-o', 'BatchMode=yes', '-o', 'ConnectTimeout=10', '-o', 'ServerAliveInterval=15', '-o', 'ServerAliveCountMax=2', '-o', 'StrictHostKeyChecking=yes')
+# Preserve the already verified server identity when DHCP changes its address.
+$sshOptions = @('-i', $KeyFile, '-o', 'IdentitiesOnly=yes', '-o', 'BatchMode=yes', '-o', 'ConnectTimeout=10', '-o', 'ServerAliveInterval=15', '-o', 'ServerAliveCountMax=2', '-o', 'StrictHostKeyChecking=yes', '-o', ('HostKeyAlias=' + $HostKeyAlias))
 function Invoke-Server([string]$Command) {
     & ssh @sshOptions $Server $Command
     if ($LASTEXITCODE -ne 0) { throw "Server command failed ($LASTEXITCODE)." }

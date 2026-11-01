@@ -1,0 +1,27 @@
+2812a231-758d-4b5e-8241-d748b52d0991
+1805.80 7023.77
+Version=259.9-0ubuntu0.1
+active
+active
+active
+active
+active
+active
+active
+NEXT                            LEFT LAST                        PASSED UNIT                       ACTIVATES
+Mon 2026-11-02 03:16:23 CET 3h 18min Sun 2026-11-01 03:17:12 CET      - bussassistent-backup.timer bussassistent-backup.service
+
+1 timers listed.
+Pass --all to see loaded but inactive timers, too.
+linux-image-generic:
+  Installed: 7.0.0-42.42
+  Candidate: 7.0.0-42.42
+  Version table:
+ *** 7.0.0-42.42 500
+        500 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 Packages
+        100 /var/lib/dpkg/status
+     7.0.0-38.38 500
+        500 http://security.ubuntu.com/ubuntu resolute-security/main amd64 Packages
+     7.0.0-14.14 500
+        500 http://archive.ubuntu.com/ubuntu resolute/main amd64 Packages
+ForwardToWall=no

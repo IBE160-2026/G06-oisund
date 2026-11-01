@@ -1,0 +1,23 @@
+{
+  "command": [
+    "C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\operations-o3-o6\\tmp\\o6-gateway-20261101\\tools\\trivy.exe",
+    "rootfs",
+    "--cache-dir",
+    "C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\operations-o3-o6\\tmp\\o6-gateway-20261101\\cache",
+    "--skip-db-update",
+    "--offline-scan",
+    "--scanners",
+    "vuln",
+    "--pkg-types",
+    "os",
+    "--format",
+    "json",
+    "--output",
+    "C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\operations-o3-o6\\tmp\\o6-execution-20261101\\os-scan-historical-before.json",
+    "C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\operations-o3-o6\\tmp\\o6-execution-20261101\\os-metadata-historical-before"
+  ],
+  "start_utc": "2026-11-01T22:13:16.320982+00:00",
+  "end_utc": "2026-11-01T22:13:16.780814+00:00",
+  "exit": 0,
+  "output_sha256": "af8e40477aac85c283adfaf747a9ca235599179205b9af73e4c96dd8ea8f4007"
+}

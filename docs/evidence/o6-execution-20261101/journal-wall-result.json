@@ -1,0 +1,23 @@
+{
+  "command": [
+    "ssh",
+    "-i",
+    "C:\\Users\\Jonas\\.ssh\\ibe160_server_ed25519",
+    "-o",
+    "IdentitiesOnly=yes",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "StrictHostKeyChecking=yes",
+    "-o",
+    "ConnectTimeout=10",
+    "-o",
+    "HostKeyAlias=192.168.1.139",
+    "jonas@192.168.1.138",
+    "cat /tmp/ibe160-o6-final.qr9SSt4b/journal-wall-result.json"
+  ],
+  "start_utc": "2026-11-01T22:52:25.073618+00:00",
+  "end_utc": "2026-11-01T22:52:25.701116+00:00",
+  "exit": 0,
+  "output_sha256": "e14b7fc378730dd5d7b36c16fd1895d318ce61d9a59899f31cbe5b91b89ec035"
+}

@@ -1,8 +1,14 @@
 # Ubuntu-server for Bussassistent
 
-## Aktivt O6-containertrinn — 1. november kl.22:30 Oslo
+## Gjeldende etter O6-vedlikehold 1.–2. november 2026
 
-Aktiv serverrelease er **5e521cbc658594a47c4568d352a50e46309573c4** med de kontrollerte Python3.13.18/pip- og PG17.11/gosu1.20-rettelsene. [Eksakte image-ID-er, backup/restore, databasebevaring og etterkontroll](evidence/o6-execution-20261101.md). Alle fire aktive images er eksportert, innholdsbundet, skannet og prøvd isolert før aktivering. Alle tabellfingeravtrykk er bevart; API/DB/tunnel friske. Systemd/cloudflared/kernel er fortsatt gamle. Personlig innlogging/visning/lagring/gjenåpning er eierbekreftet bestått. Ny førkontroll/backup/isolert restore bestod; lokal administratorkjøring av systemd-trinnet er klargjort og avventer faktisk resultat. Midlertidig avgrenset restfare er uttrykkelig akseptert, konsollberedskap bekreftet. O6 og separat O3–O5 er fortsatt åpne. Ingen ny tag/release.
+Aktiv apprelease er **5e521cbc658594a47c4568d352a50e46309573c4** med kontrollerte Python3.13.18/pip- og PG17.11/gosu1.20-rettelser. Systemd/PID1 er259.9-0ubuntu0.1 og cloudflared2026.10.7. Kontrollert omstart aktiverte libc6 og fjernet reboot-markøren; kernel er fortsatt7.0.0-42. Ny boot-ID2812a231-758d-4b5e-8241-d748b52d0991. [Eksakte images, faktisk vedlikehold, backup/retur, skanning og siste eiertest](evidence/o6-execution-20261101.md).
+
+Siste tekniske kontroll og personlig innlogging/visning/lagring/gjenåpning bestod. Backup/isolert restore er verifisert også etter sluttprøven; timer aktiv. ForwardToWall=no kompenserer det konkrete lave journald-funnet. Kernelrestfunn og videre stabilitetsobservasjon holder O6 åpen; midlertidig avgrenset risikoaksept er uttrykkelig gitt. O3–O5 spores separat. V1-tag/release er uendret; ingen ny publisering.
+
+**SSH er nå jonas@192.168.1.138 over Wi-Fi**, etter DHCP-adresseendring ved omstart. `scripts/server.ps1` har oppdatert standard og beholder streng kontroll mot den gamle verifiserte serveridentiteten med `-HostKeyAlias 192.168.1.139`. Ved senere adresseendring kan `-Server jonas@<aktuell-IP>` brukes med samme kjente nøkkelalias. Eksisterende known_hosts/tilgangsregler/ruteroppsett er ikke endret. mDNS ble ikke tilgjengeliggjort. Sjekk aktuell adresse lokalt med `ip -4 -br addr show wlp3s0` ved behov.
+
+Ved nødvendig senere retur: verifiser bevarte pakker/konfig og bruk den [vedvarende funksjonsbaserte returoppskriften](evidence/o6-execution-20261101/persistent-recovery-procedure.json). Fra vanlig konsoll med administratorrettighet brukes `sudo sh /home/jonas/ibe160-upload/o6-return-systemd.sh` eller tilsvarende `o6-return-cloudflared.sh`, kun for det konkrete feilende trinnet. Fra faktisk root-gjenopprettingskonsoll utelates sudo; rotfilsystemet må være skrivbart før pakkereparasjon. Instruksjonene bruker root-backupens hashkontrollerte cachefunksjon, og erstatter eldre raw-APT-returtekst med private filbaner. Kontroller helse/versjoner etter retur. Bevar private backuper/returpakker mens videre stabilitet observeres; ikke skriv gamle dpkg-statusfiler eller dumper blindt over levende tilstand.
 
 Avsnittene nedenfor er historiske kontrollpunkter;93ee582 er førversjon/tilbakevei.
 
@@ -47,7 +53,7 @@ Windows-backup er SHA256-verifisert, og en separat fersk backup bestod isolert r
 
 ## Server og drift
 
-SSH: jonas@192.168.1.139 fra Windows på samme lokalnett.
+SSH-adressen i den opprinnelige serveroppskriften var jonas@192.168.1.139; gjeldende adresse og nøkkelalias står øverst.
 Lenovo Y520-15IKBN, Ubuntu26.04.1, kernel7.0.0-42-generic.
 Gammel kernel7.0.0-30 er markert manuelt installert og beholdes.
 GRUB viser meny; tilbakevei er Advanced options for Ubuntu -> 7.0.0-30-generic.

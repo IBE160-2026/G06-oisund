@@ -1,0 +1,23 @@
+{
+  "command": [
+    "ssh",
+    "-i",
+    "C:\\Users\\Jonas\\.ssh\\ibe160_server_ed25519",
+    "-o",
+    "IdentitiesOnly=yes",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "StrictHostKeyChecking=yes",
+    "-o",
+    "ConnectTimeout=10",
+    "-o",
+    "HostKeyAlias=192.168.1.139",
+    "jonas@192.168.1.138",
+    "set -eu\ncat /proc/sys/kernel/random/boot_id\ncat /proc/uptime\nsystemctl show -p Version\nsystemctl is-active systemd-journald ssh docker systemd-networkd systemd-resolved cloudflared bussassistent-backup.timer\nsystemctl list-timers bussassistent-backup.timer --no-pager\ndpkg --audit\ntest ! -e /run/reboot-required\napt-cache policy linux-image-generic\nsystemd-analyze cat-config systemd/journald.conf | grep -E \"^ForwardToWall=\""
+  ],
+  "start_utc": "2026-11-01T22:57:58.124070+00:00",
+  "end_utc": "2026-11-01T22:57:58.826433+00:00",
+  "exit": 0,
+  "output_sha256": "42c1c037184cb6885c562b53b41fc2e8dece298f817f7b994d8d1e15fc4f1425"
+}

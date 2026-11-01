@@ -1,0 +1,11 @@
+{
+  "directory": "/home/jonas/ibe160-upload",
+  "method_hashes": {
+    "o6-return-systemd.sh": "24b9267f702fd9b00679db6d097eef1e79bb7476be3f78909ba4980fe86def8c",
+    "o6-return-cloudflared.sh": "48f5a9f66bd371964de4832f38644c72e6679b05bd90034f1326ebe45d55c57d"
+  },
+  "pinned_persistent_private_helper_sha256": "7d15afdad13bb79311605c3aa114e7d8ac7188b8c9ed5aa59438631e33543972",
+  "uses_tested_hash_checked_offline_cache_install_function": true,
+  "supersedes_earlier_raw_apt_private_path_instructions": true,
+  "no_production_rollback_executed_now": true
+}

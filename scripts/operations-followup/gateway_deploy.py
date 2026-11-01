@@ -14,7 +14,7 @@ ROOT=Path(__file__).resolve().parents[2]
 OUT=ROOT/'docs/evidence/o6-gateway-deploy-20261101'
 TMP=ROOT/'tmp/o6-gateway-deploy-20261101'
 SSH=['ssh','-i',str(Path.home()/'.ssh/ibe160_server_ed25519'),'-o','IdentitiesOnly=yes','-o','BatchMode=yes',
-     '-o','StrictHostKeyChecking=yes','-o','ConnectTimeout=10','jonas@192.168.1.139']
+     '-o','StrictHostKeyChecking=yes','-o','ConnectTimeout=10','-o','HostKeyAlias=192.168.1.139','jonas@192.168.1.138']
 
 
 def capture(name,args,check=True):

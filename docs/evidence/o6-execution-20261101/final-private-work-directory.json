@@ -1,0 +1,23 @@
+{
+  "command": [
+    "ssh",
+    "-i",
+    "C:\\Users\\Jonas\\.ssh\\ibe160_server_ed25519",
+    "-o",
+    "IdentitiesOnly=yes",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "StrictHostKeyChecking=yes",
+    "-o",
+    "ConnectTimeout=10",
+    "-o",
+    "HostKeyAlias=192.168.1.139",
+    "jonas@192.168.1.138",
+    "umask 077; mktemp -d /tmp/ibe160-o6-final.XXXXXXXX"
+  ],
+  "start_utc": "2026-11-01T22:49:12.759872+00:00",
+  "end_utc": "2026-11-01T22:49:13.612224+00:00",
+  "exit": 0,
+  "output_sha256": "7523d5c6af1047d1cbf97419407b8648edb7edf7d3919fc123375fac4bad2815"
+}

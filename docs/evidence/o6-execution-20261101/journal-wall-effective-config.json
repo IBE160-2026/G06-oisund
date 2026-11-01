@@ -1,0 +1,23 @@
+{
+  "command": [
+    "ssh",
+    "-i",
+    "C:\\Users\\Jonas\\.ssh\\ibe160_server_ed25519",
+    "-o",
+    "IdentitiesOnly=yes",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "StrictHostKeyChecking=yes",
+    "-o",
+    "ConnectTimeout=10",
+    "-o",
+    "HostKeyAlias=192.168.1.139",
+    "jonas@192.168.1.138",
+    "set -eu\nsystemd-analyze cat-config systemd/journald.conf | grep -E '^# /|^[[:space:]]*ForwardToWall='\nsystemctl is-active systemd-journald\ncat /proc/sys/kernel/random/boot_id"
+  ],
+  "start_utc": "2026-11-01T22:52:25.711343+00:00",
+  "end_utc": "2026-11-01T22:52:26.080092+00:00",
+  "exit": 0,
+  "output_sha256": "bf4ed05d6895809351d7cd09a241ed867702a194c0163407bb10ab8a2716dafd"
+}

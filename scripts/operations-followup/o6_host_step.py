@@ -1,5 +1,5 @@
 """Authorized O6 host maintenance. One phase only; fixed packages and rollback."""
-import hashlib,json,os,re,shutil,subprocess,sys,time
+import hashlib,json,os,re,shlex,shutil,subprocess,sys,time
 from pathlib import Path
 WINDOW=Path('/tmp/ibe160-o6-window.uNfjQHcy')
 RECOVERY=Path('/var/backups/bussassistent/o6-pre-5e521cbc')
@@ -45,6 +45,11 @@ def packages(phase,old=False):
   return [str(RECOVERY/'packages'/(p+'_'+version+'_amd64.deb'))for p in SYSTEMD]
  return [str(RECOVERY/'packages'/('cloudflared-'+('2026.10.6'if old else'2026.10.7')+'-amd64.deb'))]
 
+def console_return_command(phase):
+ if phase not in ['systemd','cloudflared']:raise ValueError('Unknown recovery phase')
+ code="import runpy; m=runpy.run_path("+repr(str(RECOVERY/'o6_host_step.py'))+"); m['install']("+repr(phase)+",True)"
+ return '/usr/bin/python3 -c '+shlex.quote(code)+'\n'
+
 def install(phase,old=False):
  if phase=='systemd':
   # APT's fetch worker cannot traverse the private recovery directory. Cache
@@ -87,8 +92,8 @@ def main():
   if digest(target)!=expected:raise ValueError('Recovery package mismatch')
  (RECOVERY/'o6_host_step.py').write_bytes(Path(__file__).read_bytes())
  (RECOVERY/'o6_host_step.py').chmod(0o600)
- (RECOVERY/'rollback-systemd.txt').write_text('apt-get -y --no-download --allow-downgrades install '+' '.join(packages('systemd',True))+'\n')
- (RECOVERY/'rollback-cloudflared.txt').write_text('dpkg -i '+packages('cloudflared',True)[0]+'\nsystemctl restart cloudflared\n')
+ (RECOVERY/'rollback-systemd.txt').write_text(console_return_command('systemd'))
+ (RECOVERY/'rollback-cloudflared.txt').write_text(console_return_command('cloudflared'))
  units=[Path('/etc/systemd/system')/n for n in ['bussassistent.service','cloudflared.service','bussassistent-backup.service','bussassistent-backup.timer']]
  before={str(p):digest(p)for p in units};health()
  run(['/usr/local/sbin/bussassistentctl','backup'])

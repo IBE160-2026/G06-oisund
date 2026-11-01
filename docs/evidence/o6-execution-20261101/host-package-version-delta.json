@@ -1,0 +1,51 @@
+{
+  "baseline": "historical production inventory 1 November; before this maintenance",
+  "before_installed": 736,
+  "after_installed": 736,
+  "changes": {
+    "libudev1:amd64": {
+      "before": "259.5-0ubuntu3.4",
+      "after": "259.9-0ubuntu0.1"
+    },
+    "systemd-resolved:amd64": {
+      "before": "259.5-0ubuntu3.4",
+      "after": "259.9-0ubuntu0.1"
+    },
+    "udev:amd64": {
+      "before": "259.5-0ubuntu3.4",
+      "after": "259.9-0ubuntu0.1"
+    },
+    "libpam-systemd:amd64": {
+      "before": "259.5-0ubuntu3.4",
+      "after": "259.9-0ubuntu0.1"
+    },
+    "libsystemd0:amd64": {
+      "before": "259.5-0ubuntu3.4",
+      "after": "259.9-0ubuntu0.1"
+    },
+    "systemd-sysv:amd64": {
+      "before": "259.5-0ubuntu3.4",
+      "after": "259.9-0ubuntu0.1"
+    },
+    "systemd-cryptsetup:amd64": {
+      "before": "259.5-0ubuntu3.4",
+      "after": "259.9-0ubuntu0.1"
+    },
+    "libsystemd-shared:amd64": {
+      "before": "259.5-0ubuntu3.4",
+      "after": "259.9-0ubuntu0.1"
+    },
+    "libnss-systemd:amd64": {
+      "before": "259.5-0ubuntu3.4",
+      "after": "259.9-0ubuntu0.1"
+    },
+    "cloudflared:amd64": {
+      "before": "2026.10.6",
+      "after": "2026.10.7"
+    },
+    "systemd:amd64": {
+      "before": "259.5-0ubuntu3.4",
+      "after": "259.9-0ubuntu0.1"
+    }
+  }
+}

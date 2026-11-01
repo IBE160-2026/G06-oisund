@@ -1,0 +1,23 @@
+{
+  "command": [
+    "ssh",
+    "-i",
+    "C:\\Users\\Jonas\\.ssh\\ibe160_server_ed25519",
+    "-o",
+    "IdentitiesOnly=yes",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "StrictHostKeyChecking=yes",
+    "-o",
+    "ConnectTimeout=10",
+    "-o",
+    "HostKeyAlias=192.168.1.139",
+    "jonas@192.168.1.138",
+    "python3 - <<'PY'\nfrom pathlib import Path\np=Path('/tmp/ibe160-o6-final.qr9SSt4b')\nexpected={'journal-wall.py','journal-wall-result.json'}\nif p.is_symlink()or set(x.name for x in p.iterdir())!=expected:raise ValueError('Unexpected temporary directory content; preserved')\nfor name in sorted(expected):(p/name).unlink()\np.rmdir()\nprint('Only own temporary final-method/result files removed; recovery backups/packages preserved')\nPY"
+  ],
+  "start_utc": "2026-11-01T22:57:58.842936+00:00",
+  "end_utc": "2026-11-01T22:57:59.214010+00:00",
+  "exit": 0,
+  "output_sha256": "da92bd61b59e6e6d54768878af41681c504dc3f8d4f00cc69a9c17a233daf157"
+}

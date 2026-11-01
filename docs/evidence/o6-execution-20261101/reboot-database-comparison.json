@@ -1,0 +1,28 @@
+{
+  "all_25_table_fingerprints_identical": false,
+  "unchanged_tables": 23,
+  "changed_authentication_operational_tables": {
+    "sessions": {
+      "before": [
+        "6",
+        "d8ec34f4d9648f7f7f5f902d31c9c2ae"
+      ],
+      "after": [
+        "5",
+        "2916383cda57d59456e299d048601612"
+      ]
+    },
+    "login_limits": {
+      "before": [
+        "3",
+        "24ce2855cfba69bfa182e3234357a8ce"
+      ],
+      "after": [
+        "3",
+        "9917cfabcdd5575c07f040237c73f2f2"
+      ]
+    }
+  },
+  "account_drafts_workday_and_other_non_authentication_table_fingerprints_identical": true,
+  "cause_of_each_authentication_row_change_not_asserted": true
+}

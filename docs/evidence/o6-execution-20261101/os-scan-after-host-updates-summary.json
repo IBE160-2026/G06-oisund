@@ -1,0 +1,10 @@
+{
+  "scope": "dpkg package inventory only; no user files, running-kernel feature or Go binary scan",
+  "counts": {},
+  "os": {
+    "Family": "none",
+    "Name": ""
+  },
+  "valid_for_vulnerability_conclusion": false,
+  "reason": "OS family none; superseded by corrected Ubuntu-recognized scan"
+}

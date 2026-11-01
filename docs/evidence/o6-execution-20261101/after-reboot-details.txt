@@ -1,0 +1,17 @@
+Version=259.9-0ubuntu0.1
+active
+active
+active
+active
+active
+active
+Startup finished in 4.765s (firmware) + 14.191s (loader) + 814ms (kernel) + 2.764s (initrd) + 22.218s (userspace) = 44.754s 
+graphical.target reached after 22.218s in userspace.
+962.74 3738.33
+default via 192.168.1.1 dev wlp3s0 proto dhcp src 192.168.1.138 metric 600 
+104.21.2.190    STREAM app.bussassistent.com
+104.21.2.190    DGRAM  
+104.21.2.190    RAW    
+172.67.129.146  STREAM 
+172.67.129.146  DGRAM  
+172.67.129.146  RAW    

@@ -1,0 +1,12 @@
+{
+  "cve": "CVE-2026-40228",
+  "backup": "/var/backups/bussassistent/o6-pre-5e521cbc/journal-wall-before-1793573469501920460.json",
+  "backup_sha256": "51a5158e6f3c0711899d004f9d85e5321ee1dd641ac1e2c36796aee4019f0a2f",
+  "rollback_used": false,
+  "reboot_performed": false,
+  "passed": true,
+  "effective_ForwardToWall": "no",
+  "journal_active": true,
+  "tunnel_connections": 4,
+  "dropin_sha256": "3f22f222926de84807fdd585cc77e53a9e4fea1e232f30b8afcb58780256bae4"
+}

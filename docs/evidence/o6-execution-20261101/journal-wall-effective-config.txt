@@ -1,0 +1,8 @@
+# /etc/systemd/journald.conf
+# /etc/ if the original file is shipped in /usr/), or by creating "drop-ins" in
+# /etc/systemd/journald.conf.d/60-bussassistent.conf
+# /etc/systemd/journald.conf.d/70-bussassistent-wall.conf
+ForwardToWall=no
+# /usr/lib/systemd/journald.conf.d/syslog.conf
+active
+2812a231-758d-4b5e-8241-d748b52d0991

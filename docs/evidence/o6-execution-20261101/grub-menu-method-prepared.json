@@ -1,0 +1,8 @@
+{
+  "remote_path": "/tmp/ibe160-o6-window.uNfjQHcy/grub-menu.py",
+  "sha256": "6fa46a4f5565800436b60c1c2eadf5653d68d967a55f40adcd5497658464322b",
+  "preserves_other_boot_settings_and_comments": true,
+  "idempotence_and_missing_key_tests_passed": true,
+  "private_backup_and_grub_script_check_before_success": true,
+  "reboot_performed": false
+}

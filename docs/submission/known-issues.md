@@ -1,5 +1,7 @@
 # Known limits
 
+2 November update: [qualified O6 maintenance has been executed](../evidence/o6-execution-20261101.md), including actual server-image binding, Python/PG/gosu, systemd259.9, cloudflared2026.10.7, reboot/libc6 activation and a journald compensating setting. Final technical/owner tests and backup/restore passed. The named temporary residual risks were explicitly accepted. O6 remains open for kernel and longer stability/broader evidence boundaries; O3–O5 stay separate. Historical gateway-only statements below retain their original checkpoint.
+
 1 November operational follow-up: the [qualified gateway correction is integrated and deployed](../evidence/o6-gateway-deploy-20261101.md)
 at93ee582b1a71a3f7552da1894b570366b89afee1, with fresh verified backup/isolated restore
 and owner-confirmed login/display/save/reopen. API/gate/PG and host/tunnel processes

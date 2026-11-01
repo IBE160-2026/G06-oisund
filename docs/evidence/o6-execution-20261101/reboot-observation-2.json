@@ -1,0 +1,6 @@
+{
+  "time_utc": "2026-11-01T22:27:26.683851+00:00",
+  "exit": 255,
+  "boot_id": "",
+  "stderr": "ssh: connect to host 192.168.1.139 port 22: Connection timed out"
+}
