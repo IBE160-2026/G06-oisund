@@ -1,0 +1,1 @@
+{"sqlite_version": "3.46.1", "normal_fts5_prefix_query": true, "acl_calls": {"set": 0, "get_nonnull": true, "extended": 0, "delete_default": 0}, "synthetic_tmpfs_only": true, "negative_rowids_or_symlink_exploit_used": false}

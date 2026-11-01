@@ -1,0 +1,21 @@
+{
+  "command": [
+    "ssh",
+    "-i",
+    "C:\\Users\\Jonas\\.ssh\\ibe160_server_ed25519",
+    "-o",
+    "IdentitiesOnly=yes",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "StrictHostKeyChecking=yes",
+    "-o",
+    "ConnectTimeout=10",
+    "jonas@192.168.1.139",
+    "set -eu\ndate --iso-8601=seconds\ncat /opt/bussassistent/current/release-identity.json\ncat /proc/sys/kernel/random/boot_id\nsystemctl show cloudflared -p MainPID -p NRestarts -p ActiveEnterTimestamp\nsudo -n /usr/local/sbin/bussassistentctl status"
+  ],
+  "start_utc": "2026-11-01T17:55:06.831715+00:00",
+  "end_utc": "2026-11-01T17:55:07.785973+00:00",
+  "exit": 0,
+  "sha256": "332a2e1169448eefa12330f0000be24a094550efc5c3305d0a16ecc77ed4ab25"
+}

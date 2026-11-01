@@ -1,0 +1,25 @@
+{
+  "command": [
+    "docker",
+    "run",
+    "--rm",
+    "--network",
+    "none",
+    "--read-only",
+    "--cap-drop",
+    "ALL",
+    "--security-opt",
+    "no-new-privileges",
+    "--user",
+    "10001:10001",
+    "sha256:b543ddfa7b6fe1373ea41708a02fe7f11d03abac2d5be3e7e62e0a244ac4332c",
+    "python",
+    "-B",
+    "-c",
+    "\nimport hashlib,json,os\nfrom pathlib import Path\nroots=['/usr/local/lib','/usr/lib/x86_64-linux-gnu','/usr/local/bin','/usr/bin','/usr/sbin','/app/app']\nresult={};seen=set()\nfor root in roots:\n for p in Path(root).rglob('*'):\n  if not p.is_file() or p.is_symlink():continue\n  native=False\n  with p.open('rb') as f:native=f.read(4)==b'\\x7fELF'\n  python=p.suffix=='.py'\n  if not(native or python):continue\n  name=str(p)\n  if name in seen:continue\n  seen.add(name)\n  result[name]={'kind':'ELF' if native else 'python','bytes':p.stat().st_size,'sha256':hashlib.file_digest(p.open('rb'),'sha256').hexdigest()}\nfor name in ['/gate/gate.py','/usr/local/bin/python3.13']:\n p=Path(name)\n if p.is_file():\n  with p.open('rb') as f:digest=hashlib.file_digest(f,'sha256').hexdigest()\n  result[name]={'kind':'ELF' if p.read_bytes()[:4]==b'\\x7fELF' else 'python','bytes':p.stat().st_size,'sha256':digest}\nprint(json.dumps({'files':result,'uid':os.getuid(),'python_version':__import__('sys').version.split()[0]},sort_keys=True))\n"
+  ],
+  "start_utc": "2026-11-01T17:30:25.241470+00:00",
+  "end_utc": "2026-11-01T17:30:27.716377+00:00",
+  "exit": 0,
+  "sha256": "4812b8734b9fab6d710d048e73799685617a4878c052b3445e1c9285d683a8d0"
+}

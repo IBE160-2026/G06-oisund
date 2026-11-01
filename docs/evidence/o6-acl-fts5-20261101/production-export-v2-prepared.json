@@ -1,0 +1,9 @@
+{
+  "remote_directory": "/tmp/ibe160-acl-fts5.I6jtnMlg",
+  "method_sha256": "59050a240328f59890829c64a11ee403498996aa50ca202ebf1ff59e4b3731e4",
+  "syntax_checked": true,
+  "complete_export_tested_locally": true,
+  "original_failed_result_metadata": [
+    "0 /tmp/ibe160-acl-fts5.I6jtnMlg/result.json"
+  ]
+}

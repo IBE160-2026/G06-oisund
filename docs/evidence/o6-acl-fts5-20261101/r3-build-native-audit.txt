@@ -1,0 +1,62 @@
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile.native-analysis
+#1 transferring dockerfile: 432B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/python:3.13-slim@sha256:70729b46c69b4f1e97c4822c1af3df53a1476cf5ddc6c087c0c10bc3a5678c2f
+#2 DONE 0.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [1/4] FROM docker.io/library/python:3.13-slim@sha256:70729b46c69b4f1e97c4822c1af3df53a1476cf5ddc6c087c0c10bc3a5678c2f
+#4 resolve docker.io/library/python:3.13-slim@sha256:70729b46c69b4f1e97c4822c1af3df53a1476cf5ddc6c087c0c10bc3a5678c2f 0.0s done
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 1.74kB done
+#5 DONE 0.0s
+
+#6 [2/4] RUN apt-get update && apt-get install -y --no-install-recommends gcc libc6-dev
+#6 CACHED
+
+#7 [3/4] COPY native_audit.c /analysis/native_audit.c
+#7 DONE 0.0s
+
+#8 [4/4] RUN gcc -shared -fPIC -O2 -Wall -Wextra -o /analysis/native_audit.so /analysis/native_audit.c
+#8 0.280 /analysis/native_audit.c: In function 'la_version':
+#8 0.280 /analysis/native_audit.c:30:38: warning: unused parameter 'version' [-Wunused-parameter]
+#8 0.280    30 | unsigned int la_version(unsigned int version) {record("audit_ready","");return LAV_CURRENT;}
+#8 0.280       |                         ~~~~~~~~~~~~~^~~~~~~
+#8 0.280 /analysis/native_audit.c: In function 'la_objopen':
+#8 0.280 /analysis/native_audit.c:31:53: warning: unused parameter 'lmid' [-Wunused-parameter]
+#8 0.280    31 | unsigned int la_objopen(struct link_map *map,Lmid_t lmid,uintptr_t *cookie) {
+#8 0.280       |                                              ~~~~~~~^~~~
+#8 0.280 /analysis/native_audit.c: In function 'la_symbind64':
+#8 0.280 /analysis/native_audit.c:35:52: warning: unused parameter 'ndx' [-Wunused-parameter]
+#8 0.280    35 | uintptr_t la_symbind64(Elf64_Sym *sym,unsigned int ndx,uintptr_t *refcook,uintptr_t *defcook,unsigned int *flags,const char *name) {
+#8 0.280       |                                       ~~~~~~~~~~~~~^~~
+#8 0.280 /analysis/native_audit.c:35:67: warning: unused parameter 'refcook' [-Wunused-parameter]
+#8 0.280    35 | uintptr_t la_symbind64(Elf64_Sym *sym,unsigned int ndx,uintptr_t *refcook,uintptr_t *defcook,unsigned int *flags,const char *name) {
+#8 0.280       |                                                        ~~~~~~~~~~~^~~~~~~
+#8 0.280 /analysis/native_audit.c:35:86: warning: unused parameter 'defcook' [-Wunused-parameter]
+#8 0.280    35 | uintptr_t la_symbind64(Elf64_Sym *sym,unsigned int ndx,uintptr_t *refcook,uintptr_t *defcook,unsigned int *flags,const char *name) {
+#8 0.280       |                                                                           ~~~~~~~~~~~^~~~~~~
+#8 0.280 /analysis/native_audit.c:35:108: warning: unused parameter 'flags' [-Wunused-parameter]
+#8 0.280    35 | uintptr_t la_symbind64(Elf64_Sym *sym,unsigned int ndx,uintptr_t *refcook,uintptr_t *defcook,unsigned int *flags,const char *name) {
+#8 0.280       |                                                                                              ~~~~~~~~~~~~~~^~~~~
+#8 DONE 0.4s
+
+#9 exporting to image
+#9 exporting layers
+#9 exporting layers 0.2s done
+#9 exporting manifest sha256:0dbd44ea8081ae83d64465d1821ded1890f513863d1bc3ff5afaef28a3ea3667 0.0s done
+#9 exporting config sha256:fcd581ff26d2e750c33d750fba7e509081c26d5bbecbcfe407c68b4f0079d279 0.0s done
+#9 exporting attestation manifest sha256:09e67809925fde029c8bedb0525b543fd4539df66b8cc938a44185a38c5306d5 0.0s done
+#9 exporting manifest list sha256:2b77426fc32ce04306a7b61fc6fd4a46d50070ce7e5f14df175031b8b1d9559d
+#9 exporting manifest list sha256:2b77426fc32ce04306a7b61fc6fd4a46d50070ce7e5f14df175031b8b1d9559d 0.0s done
+#9 naming to docker.io/library/ibe160-o6-native-analysis:20261101-r2 done
+#9 unpacking to docker.io/library/ibe160-o6-native-analysis:20261101-r2 0.1s done
+#9 DONE 0.4s

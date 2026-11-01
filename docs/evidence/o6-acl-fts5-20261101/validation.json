@@ -1,0 +1,43 @@
+{
+  "python_syntax": true,
+  "method_hashes_match": true,
+  "json_files_parsed": 53,
+  "accepted_traces_parse": true,
+  "historical_invalid_jsonl_rows": {
+    "http-families-python.jsonl": [
+      545,
+      554,
+      556,
+      558,
+      562,
+      566,
+      579,
+      581,
+      583,
+      586,
+      588,
+      590,
+      597,
+      599,
+      601,
+      607,
+      611,
+      616
+    ],
+    "pdf-regression-python.jsonl": [
+      685,
+      698,
+      703,
+      718,
+      720
+    ],
+    "r2-pdf-regression-native.jsonl": [
+      105
+    ]
+  },
+  "local_doc_links_exist": true,
+  "high_signal_secret_scan_clear": true,
+  "http_families": 15,
+  "negative_origin_csrf_controls": 75,
+  "historical_logs_retained": true
+}

@@ -10,6 +10,12 @@ tunnelprosessen er uendret fra V1; ingen verts-/passordoppdatering. Jonas bekref
 ny privat innlogging, visning, lagring og gjenåpning: «Alle fire bestod uten feil».
 O6 og separat O3–O5 er fortsatt åpne. V1-tag/release er uendret på d367a0e.
 
+Senere [lesende produksjonsbinding og isolert ACL-/FTS5-analyse](evidence/o6-acl-fts5-20261101.md)
+viser at de berørte funksjonene ikke nås gjennom dagens kartlagte app-/gateflyter.
+Bibliotekene er fortsatt sårbare; administrativ bruk/annen kodekjøring og senere
+endringer er utenfor beviset. Ingen restfareaksept eller produksjonsendring følger
+av analysen. Aktiv release og gatewayvedlikeholdet over er uendret.
+
 For dette avgrensede løpet brukes `server.ps1 -Action GatewayStage -Revision <ny full SHA>`
 før artefaktkontroll, deretter `-Action GatewaySwitch -Revision <valgt full SHA>
 -GatewayImage <kvalifisert sha256:ID> -ExpectedCurrent <faktisk aktiv full SHA>`.

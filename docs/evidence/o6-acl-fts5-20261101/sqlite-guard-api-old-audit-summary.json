@@ -1,0 +1,1592 @@
+{
+  "native_pids": [
+    1
+  ],
+  "target_objects": [
+    {
+      "kind": "object",
+      "pid": 1,
+      "euid": 10001,
+      "name": "/usr/local/lib/python3.13/lib-dynload/_sqlite3.cpython-313-x86_64-linux-gnu.so"
+    },
+    {
+      "kind": "object",
+      "pid": 1,
+      "euid": 10001,
+      "name": "/lib/x86_64-linux-gnu/libsqlite3.so.0"
+    }
+  ],
+  "target_bindings": [
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_column_text"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_strnicmp"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_uri_parameter"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_close"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_busy_handler"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_value_blob"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_blob_write"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_column_int"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_stmt_readonly"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_result_error_nomem"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_reset"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_status64"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_result_double"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_malloc64"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_preupdate_depth"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_bind_int"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_sql"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_realloc"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_changes64"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_prepare_v3"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_value_int"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_stmt_busy"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_strlike"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_value_numeric_type"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_result_text"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_result_blob64"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_preupdate_hook"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_clear_bindings"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_result_text64"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_value_text"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_db_mutex"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_column_bytes"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_bind_null"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_msize"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_overload_function"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_vfs_register"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_result_value"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_wal_autocheckpoint"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_exec"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_table_column_metadata"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_set_auxdata"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_str_value"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_preupdate_old"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_config"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_result_int"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_sourceid"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_aggregate_context"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_value_double"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_backup_step"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_result_null"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_value_dup"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_db_config"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_os_init"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_bind_double"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_str_append"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_db_status"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_create_module_v2"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_mutex_alloc"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_blob_read"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_column_int64"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_bind_int64"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_free_table"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_realloc64"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_data_count"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_vmprintf"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_stricmp"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_value_bytes16"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_stmt_status"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_create_function"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_str_appendf"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_finalize"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_column_type"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_preupdate_blobwrite"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_errcode"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_changes"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_preupdate_count"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_value_free"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_uri_boolean"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_blob_bytes"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_vtab_on_conflict"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_user_data"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_strglob"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_str_reset"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_mprintf"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_str_finish"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_result_blob"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_bind_text"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_blob_reopen"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_result_int64"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_malloc"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_hard_heap_limit64"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_result_error_code"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_reset_auto_extension"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_value_text16"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_vfs_find"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_soft_heap_limit64"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_step"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_backup_finish"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_vtab_nochange"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_complete"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_context_db_handle"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_str_appendall"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_wal_checkpoint_v2"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_vtab_config"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_result_error"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_compileoption_get"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_stmt_isexplain"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_value_pointer"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_mutex_leave"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_str_new"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_str_errcode"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_value_bytes"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_result_error_toobig"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_mutex_try"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_value_frombind"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_str_appendchar"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_total_changes64"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_value_subtype"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_column_count"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_get_auxdata"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_declare_vtab"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_db_release_memory"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_create_function_v2"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_errstr"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_preupdate_new"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_errmsg"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_load_extension"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_result_zeroblob"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_str_vappendf"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_compileoption_used"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_column_name"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_limit"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_column_value"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_column_blob"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_value_nochange"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_value_type"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_memory_used"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_wal_hook"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_value_encoding"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_snprintf"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_next_stmt"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_result_subtype"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_create_module"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_set_last_insert_rowid"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_prepare"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_initialize"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_libversion"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_value_int64"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_prepare_v2"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_file_control"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_bind_zeroblob"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_create_collation_v2"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_libversion_number"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_vsnprintf"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_busy_timeout"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_result_pointer"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_column_double"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_os_end"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_bind_blob"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_bind_parameter_count"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_free_filename"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_filename_journal"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_randomness"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_result_zeroblob64"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_bind_value"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_blob_close"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_release_memory"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_mutex_free"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_mutex_enter"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_log"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_wal_checkpoint"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_blob_open"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_last_insert_rowid"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_limit"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_backup_remaining"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_bind_int64"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_total_changes"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_initialize"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_busy_timeout"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_libversion"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_column_blob"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_reset"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_user_data"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_column_name"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_exec"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_result_text"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_trace_v2"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_blob_open"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_get_autocommit"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_bind_parameter_name"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_libversion_number"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_create_window_function"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_stmt_readonly"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_db_handle"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_interrupt"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_stmt_busy"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_result_error"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_deserialize"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_create_collation_v2"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_malloc64"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_bind_parameter_count"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_result_null"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_value_type"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_column_double"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_errcode"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_complete"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_sleep"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_errmsg"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_column_type"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_step"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_backup_finish"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_aggregate_context"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_column_int64"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_data_count"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_enable_load_extension"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_close"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_result_error_toobig"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_blob_write"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_column_bytes"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_column_count"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_bind_double"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_column_text"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_serialize"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_bind_null"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_extended_errcode"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_blob_read"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_errstr"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_context_db_handle"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_db_config"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_blob_bytes"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_blob_close"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_stricmp"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_column_decltype"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_changes"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_result_double"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_bind_text"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_progress_handler"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_bind_blob"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_backup_step"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_value_bytes"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_threadsafe"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_set_authorizer"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_finalize"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_prepare_v2"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_last_insert_rowid"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_result_blob"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_value_double"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_free"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_value_text"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_open_v2"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_close_v2"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_value_blob"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_backup_init"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_result_error_nomem"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_value_int64"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_expanded_sql"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_create_function_v2"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_result_int64"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_load_extension"
+    },
+    {
+      "kind": "binding",
+      "pid": 1,
+      "euid": 10001,
+      "name": "sqlite3_backup_pagecount"
+    }
+  ],
+  "object_count": 10,
+  "python_pids": [
+    1
+  ],
+  "sqlite_events": [
+    {
+      "event": "sqlite3.connect",
+      "name": "",
+      "pid": 1
+    }
+  ]
+}

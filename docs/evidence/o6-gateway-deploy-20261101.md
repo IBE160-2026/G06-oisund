@@ -139,6 +139,13 @@ gjelder fortsatt. Gatewayutbedringen verken godkjenner eller lukker resten.
 | **Neste rettelser: Python/pip og gosu** | De aktive V1-images har fortsatt gamle verktøykopier. Kvalifisert Python3.13.18/pip-fjerning og gosu1.20 finnes på kvalifiseringsbranchen. Gosus brukerparserfeil har avgrenset trigger i normal ikke-root-DB-start; de26 Go-standardbibliotektreffene er konkret avklart for den kontrollerte binæren. Anbefaling: eget kontrollert imagetrinn, etter Debian-disponeringen og faktisk PG-kollasjon/extensions/backup/restore. | Separat bestilling på de rettelsene; ingen generell aksept av scannerantall. Tekniske PG-forutsetninger skal kontrolleres før bytte. |
 | **Tilgang og praktiske kontroller: systemd/cloudflared/libc6** | Isolerte pakke-/retur-/kildetester er bestått; fysisk boot/nett/SSH/PAM/NSS, autentisert tunnel og libc6-aktivering gjenstår. Oppdateringene retter ikke automatisk kernelrestene. Anbefaling: separate rolige vinduer med privat konfig-/pakke-/DB-backup og konsolltilbakevei. | Avtal når du kan være ved serveren med skjerm/tastatur og administratorinnlogging. Eventuelt sudo-passord skrives kun i din terminal. Det er ingen manglende tilgang som hindret dagens gatewaytrinn. |
 
+Etterfølgende [isolert ACL-/FTS5-analyse](o6-acl-fts5-20261101.md) supplerer den
+historiske tabellraden over: de kartlagte app-/gateflytene når ikke de berørte
+funksjonene, med direkte produksjonsbinding av Python-/native filer. Bibliotekene
+er fortsatt berørte. Administrativ bruk/annen kodekjøring og fremtidige endringer
+er utenfor beviset; ingen midlertidig restfareaksept er registrert. Øvrige valg og
+vedlikeholdsporter er uendret.
+
 **O6 er fortsatt åpen. O3–O5 spores separat** på oppfølgingsbranchen med sine
 opprinnelige eksterne/WAN/DNS-grenser. Ingen av disse lukkes av gatewaydeployen.
 Full OS-/supply-chain-/firmwaredekning er ikke oppnådd eller erstattet med blank risikoaksept.
