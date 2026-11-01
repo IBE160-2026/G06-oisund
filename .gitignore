@@ -64,6 +64,8 @@ Thumbs.db
 .private-runtime/
 .codex-attachments/
 tmp/
+/docs/evidence/o6-remaining-20261101/r2-private-regressions.txt
+/docs/evidence/o6-remaining-20261101/scan-*-raw.json
 frontend/.story123-tests/
 
 frontend/dist-story123-tablet/

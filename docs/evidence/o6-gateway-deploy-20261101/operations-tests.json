@@ -1,0 +1,26 @@
+{
+  "command": [
+    "docker",
+    "run",
+    "--rm",
+    "--network",
+    "none",
+    "--read-only",
+    "--cap-drop",
+    "ALL",
+    "--tmpfs",
+    "/tmp",
+    "--mount",
+    "type=bind,source=C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\operations-o3-o6/deploy/ubuntu,target=/probe,readonly",
+    "ibe160-o6-systemd-tests:20261101-r1",
+    "-B",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "/probe",
+    "-p",
+    "test_*.py"
+  ],
+  "exit": 0
+}

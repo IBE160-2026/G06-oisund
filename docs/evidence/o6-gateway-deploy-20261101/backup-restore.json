@@ -1,0 +1,21 @@
+{
+  "command": [
+    "ssh",
+    "-i",
+    "C:\\Users\\Jonas\\.ssh\\ibe160_server_ed25519",
+    "-o",
+    "IdentitiesOnly=yes",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "StrictHostKeyChecking=yes",
+    "-o",
+    "ConnectTimeout=10",
+    "jonas@192.168.1.139",
+    "sudo -n /usr/local/sbin/bussassistentctl verify-restore"
+  ],
+  "start_utc": "2026-11-01T17:04:53.319398+00:00",
+  "end_utc": "2026-11-01T17:04:57.441822+00:00",
+  "exit": 0,
+  "output_sha256": "073ae558bf568021f9fb6171726a41201684b076cf59cadb3756d4f412821259"
+}
