@@ -29,11 +29,11 @@ Token/binding/testmappe er slettet og runner avsluttet, begge kontrollert. B er 
 
 - Ingen gjenstående arbeid innen de to bestilte testmålene. Det eksisterende sammensatte issues-punktet og O3–O6 står fortsatt åpne for øvrige Origin/CSRF/cache/timing/WAN/IPv6/DNS/OS-bevisgrenser; de er ikke prøvd eller godkjent utsatt her. Rapporten bevarer begrensningene om lokal gate, versjonsbinding og MFA-matrise.
 
-## 2026-11-01 kl. 18:22 — Jonas Øisund
+## 2026-11-01 kl. 19:02 — Jonas Øisund
 
 ### Oppgave
 
-Gjennomføre bare teknisk klart O6-gatewaytrinn med nødvendig integrering/push/deploy, verifisert backup/tilbakevei/etterkontroll og personlig brukerprøve. Bevare passordarbeid, alle øvrige komponenter/miljøer og V1-tag; presentere konkrete resterende risikovalg, tilgang og praktiske kontroller uten å godkjenne restfare.
+Gjennomføre bare teknisk klart O6-gatewaytrinn med nødvendig integrering/push/deploy, verifisert backup/tilbakevei/etterkontroll og personlig brukerprøve. Bevare passordarbeid, alle øvrige komponenter/miljøer og V1-tag; presentere konkrete resterende risikovalg, tilgang og praktiske kontroller uten å godkjenne restfare. Deretter etter ny bestilling analysere ACL-/FTS5-kallveier isolert før eierens risikobeslutning, med nødvendig lesende administratoreksport; ingen ny produksjonsendring.
 
 ### Plan
 
@@ -42,6 +42,7 @@ Gjennomføre bare teknisk klart O6-gatewaytrinn med nødvendig integrering/push/
 - Ta fersk privat backup/Windows-hash og isolert fullrestore, stage uten aktivering, hente/hashbinde og kvalifisere faktisk serverimage.
 - Bytte bare gateway med kilde-/Compose-/forventet SHA/image- og lifecycle-porter, kontrollert gatewaytilbakevei og faktiske tekniske/eieretterprøver.
 - Dokumentere faktisk versjon/image, bevaring og resterende O6-valg; publisere dokumentasjon og egen loggcommit.
+- I oppfølgingsanalysen: binde lokale Python-/native filer til produksjon, undersøke kilde/dataflyt og transitiv ELF-avhengighet, kvalifisere audit med ufarlige positive kontroller, prøve PDF/HTTP/JWT isolert og dokumentere eksakte bevisgrenser.
 
 ### Resultat
 
@@ -61,8 +62,22 @@ Et ekstra cat-forsøk på root0600-kvittering ble korrekt nektet; ingen tilgang 
 
 Alle81eksisterende lokale containere/31volumer og de fire tidligere kvalifiserte imagealiasene er bevart. Ingen gjenværende egne probecontainere/nett; offentlig serverimage/cache beholdes. [Full rapport og beslutningstabell](../../docs/evidence/o6-gateway-deploy-20261101.md),55evidensfiler inkl.indeks, syntaks/JSON/lenker/høysignalhemmelighetssøk/diff --check kontrollert. Dokumentasjon/Windows-sperre **f8184cb2fbd8c887a49ab715c379c67132b4a2b8** er pushet og remoteverifisert. Main-dokumentasjon er nyere enn aktiv serverrelease. Gatewaybranch5333138 og øvrig kvalifiseringsbranch841fbbe er urørt. V1-tagobjekt38bfb0d… og mål d367a0e er uendret; ingen ny tag/release/kursinnlevering.
 
+Oppfølgende ACL-/FTS5-analyse er dokumentert i **38e2cdf8f9117ca5318aaa0878e2591ce384c1ab**; attributtkorreksjon for bevarte, hashbundne CRLF-metodebytes i **c1816354cbe3a89b91f6392cfde46cbc9ab97046**. Ny branch analyse/acl-fts5-o6-20261101 fra fersk maina30aaba; ingen merge/mainendring. [Full analyse og disposisjon](../../docs/evidence/o6-acl-fts5-20261101.md),104evidensfiler med indeks. Godkjent refleksjon og produkt-/deploykode er urørt.
+
+Jonas kjørte rettet lesende sudoeksport etter full isolert prøving:3 126/3 126 API- og1 892/1 892 gatefiler (Python/ELF i valgte røtter) er hashidentiske med lokale førimages, inkl.native wheels/libacl/libsqlite/PDFium. Produksjonens images37b767ba/6bba55ec og lifecycle er uendret. Eksport59050a24…/resultat9e4939fc… er hashkontrollert; alle våre fire serverfiler og tom eksportmappe er fjernet. Ingen passord, Env, private dokumenter eller database ble hentet. Full rootfs/pyc/symlink-/tamper-forensikk er uttrykkelig utenfor beviset.
+
+Korrigert konservativ kildegraf:API890/gate380 moduler; native lukning115/58ELF-er fra alle tredjepartsutvidelser/interpreter/nådde stdlibmoduler, null uoppløste native avhengigheter og ingen relevante ACL/SQLite-symboler/markører i lukningen. Dynamiske loadsteder og token/JSON/PDF-databaner er gjennomgått. PostgreSQL-lagring, fast gatepolicy og BytesIO/PDF-spawn gir ingen appvei til de nødvendige ACL-pathname-/FTS5-SQL-operasjonene.
+
+Positive kontroller i begge images demonstrerte FTS5/detail=none/positiv rowid/prefix og alle fire vanlige ACL-kall på egne tmpfs-filer, oppdaget i native/Python-audit; SQLite-connect-sperren ble også demonstrert. Ingen exploit/negative rowids/symlink/privilegert ACL-prøve. Akseptert ny instrumentert regresjon119/119,125,01s;51PDF-workerprosesser har native audit. Faktisk Uvicorn/PostgreSQL:15operasjonsfamilier/75OriginCSRF-negative, TCP-tap/oppslag/replay bestod. Ekte innlogget syntetisk HTTP-PDF200,SQLite-format422,utenøkt401,utenCSRF403 og ingen utkast for testkonto. Gate:26negative JWT-varianter/25ekte lokale HTTP-kall,syntetisk nøkkel,ingen Cloudflare-kall. Ingen ACL/SQLite-load/binding/import/connect i aksepterte appflyter.
+
+Tidlig Docker-templatefeil før prodexec, mislykket verktøybuildkontekst, opprinnelig ufullstendig statisk graf, kolliderende Windows-append/logger og feil global utkastassert i testharnessen er beholdt og avgrenset. To tidlige119-funksjonspass er ikke akseptert som samlet instrumentering; endelige separate prosess-/trådlogger er parsebare. Readiness-reléets connection-refused før Uvicornstart beholdes, mens etterfølgende asserts/exit0 er dokumentert. Korrekt cr-at-eol-attributt bevarer utførte metodebyte uten å skjule ekte etterfølgende blanktegn.
+
+Resultat for **begge CVE-er**: verifisert ikke relevant innen de kartlagte normale app-/gateflytene i nåværende versjon/konfigurasjon. Bibliotekene er fortsatt berørte/ikke rettet. Administrativ verktøybruk, separat kodekjøring og fremtidige endringer er eksplisitt utenfor; eventuell midlertidig videreføring av denne restfaren er fortsatt Jonas sin beslutning. Primærkilder bekrefter manglende støttet trixierettelse; ACL2.4.0 krever også faktisk bruk av nye *_at-kall. Ingen risikoaksept eller O6-lukking registrert.
+
+Sluttstatus18:55Oslo viser fortsatt93ee582/sammeboot/tunnelPID1155012/restart0,API/DBhealthy og aktive tjenester. Alle81eksisterende containere/31volumer og fire kvalifiserte imagealiaser er uendret; egne tmpfs-DB/nett/passord er fjernet. Maina30aaba, gatewaybranch5333138, øvrig branch841fbbe og V1-tag38bfb0d…/d367a0e er verifisert bevart. Metode-/indekshasher, Python-syntaks, JSON/aksepterte tracefiler, lenker, høysignalhemmelighetssøk og endelig diff --check bestod. Analysearbeidet og egen loggcommit publiseres bare på analysebranchen med vanlig push, ingen ny release/tag.
+
 ### Åpne punkter
 
-- O6: util-linux/ncurses/ACL/SQLiteFTS5 har konkrete midlertidige restfare-/reachabilityvalg som må tas av Jonas. Ingen aksept er registrert. Kernel har fortsatt ingen etablert støttet rettet kandidat; midlertidig driftsrisiko og videre leverandør-/kvalifikasjonsoppfølging er separate valg.
+- O6: util-linux/ncurses/kernel beholder tidligere beslutnings-/kvalifiseringsgrenser. ACL/FTS5 er nå avklart innen kartlagte normale appflyter, men bibliotekene er fortsatt berørte; eventuell videreføring av avgrenset administrativ/annen kodekjøringsrestfare og fremtidig støttet rettelse må håndteres eksplisitt. Ingen restfareaksept er registrert. Full O6 og bredere OS/supply-chain-bevis er fortsatt åpne.
 - Python/pip/gosu-kandidater og senere PG-metadata/restore før eventuell oppdatering krever eget avgrenset løp; ingen av dem ble deployet her. systemd/cloudflared/libc6-aktivering trenger senere bestilling, privat backup/pakke-/konfigtilbakevei, administratorbetjening/lokal konsoll og faktiske nett/SSH/tunnel/boot/eiertester.
 - O3–O5 beholder separat ekstern/WAN/DNS-oppfølging; libc6-markør og langtidsstabilitet beholdes i sine eksisterende punkter. Ingen O6-lukking av gatewaykvalifikasjon eller positiv eiertest.
