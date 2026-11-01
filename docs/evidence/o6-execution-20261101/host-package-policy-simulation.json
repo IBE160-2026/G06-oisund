@@ -1,0 +1,21 @@
+{
+  "command": [
+    "ssh",
+    "-i",
+    "C:\\Users\\Jonas\\.ssh\\ibe160_server_ed25519",
+    "-o",
+    "IdentitiesOnly=yes",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "StrictHostKeyChecking=yes",
+    "-o",
+    "ConnectTimeout=10",
+    "jonas@192.168.1.139",
+    "set -eu\napt-cache policy linux-image-generic libc6 systemd cloudflared\napt-get -s install systemd=259.9-0ubuntu0.1 libnss-systemd=259.9-0ubuntu0.1 libpam-systemd=259.9-0ubuntu0.1 libsystemd-shared=259.9-0ubuntu0.1 libsystemd0=259.9-0ubuntu0.1 libudev1=259.9-0ubuntu0.1 systemd-cryptsetup=259.9-0ubuntu0.1 systemd-resolved=259.9-0ubuntu0.1 systemd-sysv=259.9-0ubuntu0.1 udev=259.9-0ubuntu0.1"
+  ],
+  "start_utc": "2026-11-01T20:38:40.016990+00:00",
+  "end_utc": "2026-11-01T20:38:41.382728+00:00",
+  "exit": 0,
+  "output_sha256": "06014aa0252379fab226bd516a3545726bc29be3b7a356c9e26fd487ede276c4"
+}

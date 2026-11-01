@@ -1,5 +1,7 @@
 # Ubuntu-server for Bussassistent
 
+[Nytt O6-gjennomføringspunkt](evidence/o6-execution-20261101.md): kvalifiserte imageendringer er integrert i main5e521cb og staget, men ikke aktivert. Aktiv apprelease er fortsatt93ee582. Ny backup/isolert restore bestod; risikoavklaring og konsollberedskap er fortsatt porter. Ingen runtime-/OS-oppdatering eller O6-lukking er registrert.
+
 ## Aktivt gatewayvedlikehold — 1. november 2026
 
 Aktiv serverrelease er nå **93ee582b1a71a3f7552da1894b570366b89afee1** med kvalifisert

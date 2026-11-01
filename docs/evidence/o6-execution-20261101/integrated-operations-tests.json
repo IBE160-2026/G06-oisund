@@ -1,0 +1,29 @@
+{
+  "command": [
+    "docker",
+    "run",
+    "--rm",
+    "--network",
+    "none",
+    "--read-only",
+    "-e",
+    "PYTHONDONTWRITEBYTECODE=1",
+    "--tmpfs",
+    "/tmp:mode=1777",
+    "--mount",
+    "type=bind,source=C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\operations-o3-o6,target=/ops,readonly",
+    "sha256:efd73839185ba468dea9b8b04be5e857ff1993d8ee67348e07fb53d01712a89e",
+    "python",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "/ops/deploy/ubuntu",
+    "-p",
+    "test_*.py"
+  ],
+  "start_utc": "2026-11-01T20:36:10.546987+00:00",
+  "end_utc": "2026-11-01T20:36:11.532595+00:00",
+  "exit": 0,
+  "output_sha256": "b67737c94ad86fe0f9645184d2c134f89c5d6ad4687de0edebb270942a142d35"
+}

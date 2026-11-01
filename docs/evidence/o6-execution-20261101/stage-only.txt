@@ -1,0 +1,444 @@
+#1 [internal] load local bake definitions
+#1 reading from stdin 2.51kB done
+#1 DONE 0.0s
+
+#2 [private-api internal] load build definition from Dockerfile
+#2 transferring dockerfile: 334B done
+#2 DONE 0.0s
+
+#3 [private-db internal] load build definition from Dockerfile.postgres
+#3 transferring dockerfile: 633B done
+#3 DONE 0.1s
+
+#4 [access-gate internal] load build definition from Dockerfile
+#4 transferring dockerfile: 438B done
+#4 DONE 0.1s
+
+#5 [gateway internal] load build definition from Dockerfile
+#5 transferring dockerfile: 849B done
+#5 DONE 0.1s
+
+#6 [access-gate internal] load metadata for docker.io/library/python:3.13.18-slim-trixie@sha256:76baad6037690d6e8c4397fbcaef17bca6f19eecef822b708fe8fa3417d30bb5
+#6 ...
+
+#7 [gateway internal] load metadata for docker.io/library/node:24.19.0-alpine@sha256:d32cdf619f63fe0471182d08996dd516c6275bb5fd31ae06e55a570bd9e1ad43
+#7 DONE 0.9s
+
+#8 [gateway internal] load metadata for docker.io/library/nginx:1.30.6-alpine-slim@sha256:dede8895648b461178c3bc604f7eed4423efe5220b2c4d839f5eb3d34ac3f8f7
+#8 DONE 1.2s
+
+#9 [private-db internal] load metadata for docker.io/library/postgres:17.11-alpine@sha256:266d3c257594e195b309ae9d1805e54c788f1d7b375f56bf6c367aac6c917e7b
+#9 ...
+
+#10 [gateway internal] load .dockerignore
+#10 transferring context: 2B done
+#10 DONE 0.0s
+
+#11 [gateway stage-1 1/4] FROM docker.io/library/nginx:1.30.6-alpine-slim@sha256:dede8895648b461178c3bc604f7eed4423efe5220b2c4d839f5eb3d34ac3f8f7
+#11 resolve docker.io/library/nginx:1.30.6-alpine-slim@sha256:dede8895648b461178c3bc604f7eed4423efe5220b2c4d839f5eb3d34ac3f8f7 0.1s done
+#11 DONE 0.1s
+
+#12 [gateway build 1/8] FROM docker.io/library/node:24.19.0-alpine@sha256:d32cdf619f63fe0471182d08996dd516c6275bb5fd31ae06e55a570bd9e1ad43
+#12 resolve docker.io/library/node:24.19.0-alpine@sha256:d32cdf619f63fe0471182d08996dd516c6275bb5fd31ae06e55a570bd9e1ad43 0.1s done
+#12 DONE 0.1s
+
+#13 [gateway internal] load build context
+#13 transferring context: 387.74kB 0.0s done
+#13 DONE 0.1s
+
+#14 [gateway build 3/8] COPY frontend/package*.json ./
+#14 CACHED
+
+#15 [gateway build 5/8] COPY frontend/tsconfig.json ./tsconfig.json
+#15 CACHED
+
+#16 [gateway build 4/8] RUN npm ci
+#16 CACHED
+
+#17 [gateway build 6/8] COPY frontend/src/ ./src/
+#17 CACHED
+
+#18 [gateway build 7/8] COPY deploy/tablet/index.html ./index.html
+#18 CACHED
+
+#19 [gateway build 8/8] RUN npm run build
+#19 CACHED
+
+#20 [gateway stage-1 2/4] COPY --from=build /app/dist /usr/share/nginx/html
+#20 CACHED
+
+#21 [gateway stage-1 3/4] COPY deploy/tablet/nginx.conf.template /etc/nginx/templates/default.conf.template
+#21 CACHED
+
+#22 [gateway build 2/8] WORKDIR /app
+#22 CACHED
+
+#23 [gateway stage-1 4/4] COPY deploy/tablet/nginx-main.conf /etc/nginx/nginx.conf
+#23 CACHED
+
+#24 [gateway] exporting to image
+#24 exporting layers done
+#24 exporting manifest sha256:4fa115682719d668c99957e960a787c001471e21ab6bc1dff18f3cfbc8469b00 done
+#24 exporting config sha256:f8d617ce9c41fd444e841489146535606dceff9b5f3af18042ef24d7e0b44976 done
+#24 exporting attestation manifest sha256:b14af129b98abb34a9087481c6ea30cbe2910891fec76bd8b54c3c90c4b2e9ad 0.0s done
+#24 exporting manifest list sha256:b37608187e86507cefc1d79995fdfd631cae3e3f9490dc96d0fea89e996bcb75 0.0s done
+#24 naming to docker.io/library/bussassistent-gateway:5e521cbc658594a47c4568d352a50e46309573c4 done
+#24 unpacking to docker.io/library/bussassistent-gateway:5e521cbc658594a47c4568d352a50e46309573c4 0.0s done
+#24 DONE 0.1s
+
+#25 [gateway] resolving provenance for metadata file
+#25 DONE 0.0s
+
+#9 [private-db internal] load metadata for docker.io/library/postgres:17.11-alpine@sha256:266d3c257594e195b309ae9d1805e54c788f1d7b375f56bf6c367aac6c917e7b
+#9 DONE 1.8s
+
+#6 [access-gate internal] load metadata for docker.io/library/python:3.13.18-slim-trixie@sha256:76baad6037690d6e8c4397fbcaef17bca6f19eecef822b708fe8fa3417d30bb5
+#6 ...
+
+#10 [private-db internal] load .dockerignore
+#10 CACHED
+
+#6 [access-gate internal] load metadata for docker.io/library/python:3.13.18-slim-trixie@sha256:76baad6037690d6e8c4397fbcaef17bca6f19eecef822b708fe8fa3417d30bb5
+#6 DONE 2.0s
+
+#10 [access-gate internal] load .dockerignore
+#10 CACHED
+
+#26 [private-api internal] load .dockerignore
+#26 transferring context: 75B done
+#26 DONE 0.0s
+
+#27 [access-gate internal] load build context
+#27 transferring context: 12.93kB done
+#27 DONE 0.1s
+
+#28 [private-api 1/5] FROM docker.io/library/python:3.13.18-slim-trixie@sha256:76baad6037690d6e8c4397fbcaef17bca6f19eecef822b708fe8fa3417d30bb5
+#28 resolve docker.io/library/python:3.13.18-slim-trixie@sha256:76baad6037690d6e8c4397fbcaef17bca6f19eecef822b708fe8fa3417d30bb5 0.0s done
+#28 ...
+
+#29 [private-api internal] load build context
+#29 transferring context: 584.66kB 0.0s done
+#29 DONE 0.1s
+
+#28 [private-api 1/5] FROM docker.io/library/python:3.13.18-slim-trixie@sha256:76baad6037690d6e8c4397fbcaef17bca6f19eecef822b708fe8fa3417d30bb5
+#28 ...
+
+#30 [private-db 2/3] ADD --chmod=0755 --checksum=sha256:b1892636c281590f34bc63c1118f058cd9de66c4ea463772e3909672d8b302ac     https://github.com/tianon/gosu/releases/download/1.20/gosu-amd64 /usr/local/bin/gosu
+#30 DONE 0.8s
+
+#31 [private-db 1/3] FROM docker.io/library/postgres:17.11-alpine@sha256:266d3c257594e195b309ae9d1805e54c788f1d7b375f56bf6c367aac6c917e7b
+#31 resolve docker.io/library/postgres:17.11-alpine@sha256:266d3c257594e195b309ae9d1805e54c788f1d7b375f56bf6c367aac6c917e7b 0.0s done
+#31 sha256:d5bf1ad711f76c3f7ba71d3bc71bd9f7535692290948731b61e44b6d96b23c4e 186B / 186B 0.2s done
+#31 sha256:f5e975d661d7f5f28eed5fb0d019fad8adf14789168c029a65c9da779e518835 6.11kB / 6.11kB 0.4s done
+#31 sha256:e018eb860c5e472edb8e38c5ed9bb5ddd5b9d979da4dd2b31729d167b56d4b03 0B / 169B 0.5s
+#31 sha256:d6e09b1bfe5f8e510b39401758b39f0772bfd98fa267bc7064f99dce925d7535 129B / 129B 0.5s done
+#31 sha256:7a82a00c713d2e6c6d07e73d5d08f852985a3a3fe4a2be1a32049b122ba5c40f 0B / 10.00kB 0.3s
+#31 sha256:694a01b64034f0992326512adbafc93dd0b318fde13b91ba7b59f3af999cb169 0B / 112.42MB 0.2s
+#31 sha256:e018eb860c5e472edb8e38c5ed9bb5ddd5b9d979da4dd2b31729d167b56d4b03 169B / 169B 0.5s done
+#31 sha256:7a82a00c713d2e6c6d07e73d5d08f852985a3a3fe4a2be1a32049b122ba5c40f 10.00kB / 10.00kB 0.4s done
+#31 sha256:fa5e490e3893d7bb6a7df997363332968f49564a1611dababd7167839c3e9dc3 0B / 116B 0.2s
+#31 sha256:fa5e490e3893d7bb6a7df997363332968f49564a1611dababd7167839c3e9dc3 116B / 116B 0.2s done
+#31 sha256:dddde5442af41c3b2874cdc2863276d1f33277da66d1975001cb5fb390de9a7d 0B / 900.01kB 0.2s
+#31 sha256:9098654d337792c4c42bd3a73896b70a6c248259ccfc5f684857a3fa19fd93cb 968B / 968B 0.2s done
+#31 extracting sha256:9098654d337792c4c42bd3a73896b70a6c248259ccfc5f684857a3fa19fd93cb 0.0s done
+#31 sha256:694a01b64034f0992326512adbafc93dd0b318fde13b91ba7b59f3af999cb169 7.34MB / 112.42MB 0.8s
+#31 sha256:694a01b64034f0992326512adbafc93dd0b318fde13b91ba7b59f3af999cb169 14.68MB / 112.42MB 1.4s
+#31 sha256:dddde5442af41c3b2874cdc2863276d1f33277da66d1975001cb5fb390de9a7d 900.01kB / 900.01kB 1.6s done
+#31 extracting sha256:dddde5442af41c3b2874cdc2863276d1f33277da66d1975001cb5fb390de9a7d 0.0s done
+#31 extracting sha256:fa5e490e3893d7bb6a7df997363332968f49564a1611dababd7167839c3e9dc3 0.0s done
+#31 sha256:694a01b64034f0992326512adbafc93dd0b318fde13b91ba7b59f3af999cb169 22.02MB / 112.42MB 2.0s
+#31 sha256:694a01b64034f0992326512adbafc93dd0b318fde13b91ba7b59f3af999cb169 28.31MB / 112.42MB 2.4s
+#31 sha256:694a01b64034f0992326512adbafc93dd0b318fde13b91ba7b59f3af999cb169 34.60MB / 112.42MB 2.9s
+#31 sha256:694a01b64034f0992326512adbafc93dd0b318fde13b91ba7b59f3af999cb169 41.94MB / 112.42MB 3.3s
+#31 sha256:694a01b64034f0992326512adbafc93dd0b318fde13b91ba7b59f3af999cb169 48.23MB / 112.42MB 3.9s
+#31 sha256:694a01b64034f0992326512adbafc93dd0b318fde13b91ba7b59f3af999cb169 54.53MB / 112.42MB 4.5s
+#31 sha256:694a01b64034f0992326512adbafc93dd0b318fde13b91ba7b59f3af999cb169 61.87MB / 112.42MB 5.3s
+#31 sha256:694a01b64034f0992326512adbafc93dd0b318fde13b91ba7b59f3af999cb169 68.16MB / 112.42MB 5.9s
+#31 ...
+
+#28 [access-gate 1/5] FROM docker.io/library/python:3.13.18-slim-trixie@sha256:76baad6037690d6e8c4397fbcaef17bca6f19eecef822b708fe8fa3417d30bb5
+#28 sha256:6f058ad03f0cab30c01926ad20e38348fe53783080f5309e4bfc4d2709c5fbaf 251B / 251B 0.2s done
+#28 sha256:789960dca7c613e9d8872d4790f2ec423b8fe17f52989c6225982f28696e7315 1.29MB / 1.29MB 3.6s done
+#28 sha256:7d824d9f832184c4084576664b622717cb0eb579b504f2079d3b4ac36454761f 5.24MB / 11.92MB 5.7s
+#28 sha256:6fc242d221a673263eabd14a9ad9584d3177c96e5cb504c891497338e2f912f5 9.44MB / 29.86MB 4.4s
+#28 sha256:7d824d9f832184c4084576664b622717cb0eb579b504f2079d3b4ac36454761f 6.29MB / 11.92MB 6.0s
+#28 sha256:6fc242d221a673263eabd14a9ad9584d3177c96e5cb504c891497338e2f912f5 11.53MB / 29.86MB 4.7s
+#28 sha256:6fc242d221a673263eabd14a9ad9584d3177c96e5cb504c891497338e2f912f5 13.63MB / 29.86MB 5.0s
+#28 sha256:6fc242d221a673263eabd14a9ad9584d3177c96e5cb504c891497338e2f912f5 15.73MB / 29.86MB 5.4s
+#28 sha256:7d824d9f832184c4084576664b622717cb0eb579b504f2079d3b4ac36454761f 7.34MB / 11.92MB 6.9s
+#28 sha256:6fc242d221a673263eabd14a9ad9584d3177c96e5cb504c891497338e2f912f5 17.83MB / 29.86MB 5.7s
+#28 sha256:6fc242d221a673263eabd14a9ad9584d3177c96e5cb504c891497338e2f912f5 19.92MB / 29.86MB 6.0s
+#28 sha256:7d824d9f832184c4084576664b622717cb0eb579b504f2079d3b4ac36454761f 8.39MB / 11.92MB 7.8s
+#28 sha256:6fc242d221a673263eabd14a9ad9584d3177c96e5cb504c891497338e2f912f5 22.02MB / 29.86MB 6.5s
+#28 sha256:6fc242d221a673263eabd14a9ad9584d3177c96e5cb504c891497338e2f912f5 24.12MB / 29.86MB 7.4s
+#28 sha256:7d824d9f832184c4084576664b622717cb0eb579b504f2079d3b4ac36454761f 9.44MB / 11.92MB 9.0s
+#28 sha256:6fc242d221a673263eabd14a9ad9584d3177c96e5cb504c891497338e2f912f5 27.26MB / 29.86MB 7.7s
+#28 sha256:6fc242d221a673263eabd14a9ad9584d3177c96e5cb504c891497338e2f912f5 29.86MB / 29.86MB 8.0s done
+#28 sha256:6fc242d221a673263eabd14a9ad9584d3177c96e5cb504c891497338e2f912f5 29.86MB / 29.86MB 8.0s done
+#28 extracting sha256:6fc242d221a673263eabd14a9ad9584d3177c96e5cb504c891497338e2f912f5
+#28 sha256:7d824d9f832184c4084576664b622717cb0eb579b504f2079d3b4ac36454761f 10.49MB / 11.92MB 9.6s
+#28 extracting sha256:6fc242d221a673263eabd14a9ad9584d3177c96e5cb504c891497338e2f912f5 0.9s done
+#28 sha256:7d824d9f832184c4084576664b622717cb0eb579b504f2079d3b4ac36454761f 11.53MB / 11.92MB 10.2s
+#28 extracting sha256:6fc242d221a673263eabd14a9ad9584d3177c96e5cb504c891497338e2f912f5 0.9s done
+#28 extracting sha256:789960dca7c613e9d8872d4790f2ec423b8fe17f52989c6225982f28696e7315 0.1s done
+#28 sha256:7d824d9f832184c4084576664b622717cb0eb579b504f2079d3b4ac36454761f 11.92MB / 11.92MB 10.3s done
+#28 extracting sha256:789960dca7c613e9d8872d4790f2ec423b8fe17f52989c6225982f28696e7315 0.1s done
+#28 extracting sha256:7d824d9f832184c4084576664b622717cb0eb579b504f2079d3b4ac36454761f
+#28 extracting sha256:7d824d9f832184c4084576664b622717cb0eb579b504f2079d3b4ac36454761f 0.5s done
+#28 extracting sha256:6f058ad03f0cab30c01926ad20e38348fe53783080f5309e4bfc4d2709c5fbaf 0.0s done
+#28 DONE 12.0s
+
+#31 [private-db 1/3] FROM docker.io/library/postgres:17.11-alpine@sha256:266d3c257594e195b309ae9d1805e54c788f1d7b375f56bf6c367aac6c917e7b
+#31 sha256:694a01b64034f0992326512adbafc93dd0b318fde13b91ba7b59f3af999cb169 112.42MB / 112.42MB 11.4s done
+#31 extracting sha256:694a01b64034f0992326512adbafc93dd0b318fde13b91ba7b59f3af999cb169
+#31 ...
+
+#32 [private-api 2/5] WORKDIR /app
+#32 DONE 0.2s
+
+#33 [access-gate 2/5] WORKDIR /gate
+#33 DONE 0.2s
+
+#34 [private-api 3/5] COPY requirements.lock .
+#34 DONE 0.1s
+
+#35 [access-gate 3/5] COPY deploy/tablet/access_gate/requirements.lock ./
+#35 DONE 0.1s
+
+#36 [access-gate 4/5] RUN python -m pip install --no-cache-dir -r requirements.lock     && python -m pip uninstall --yes pip
+#36 ...
+
+#31 [private-db 1/3] FROM docker.io/library/postgres:17.11-alpine@sha256:266d3c257594e195b309ae9d1805e54c788f1d7b375f56bf6c367aac6c917e7b
+#31 extracting sha256:694a01b64034f0992326512adbafc93dd0b318fde13b91ba7b59f3af999cb169 2.3s done
+#31 DONE 14.5s
+
+#31 [private-db 1/3] FROM docker.io/library/postgres:17.11-alpine@sha256:266d3c257594e195b309ae9d1805e54c788f1d7b375f56bf6c367aac6c917e7b
+#31 extracting sha256:7a82a00c713d2e6c6d07e73d5d08f852985a3a3fe4a2be1a32049b122ba5c40f 0.0s done
+#31 extracting sha256:d6e09b1bfe5f8e510b39401758b39f0772bfd98fa267bc7064f99dce925d7535 0.0s done
+#31 extracting sha256:e018eb860c5e472edb8e38c5ed9bb5ddd5b9d979da4dd2b31729d167b56d4b03 0.0s done
+#31 extracting sha256:f5e975d661d7f5f28eed5fb0d019fad8adf14789168c029a65c9da779e518835 0.0s done
+#31 extracting sha256:d5bf1ad711f76c3f7ba71d3bc71bd9f7535692290948731b61e44b6d96b23c4e 0.0s done
+#31 DONE 14.5s
+
+#36 [access-gate 4/5] RUN python -m pip install --no-cache-dir -r requirements.lock     && python -m pip uninstall --yes pip
+#36 2.131 Collecting PyJWT==2.15.1 (from -r requirements.lock (line 1))
+#36 2.258   Downloading pyjwt-2.15.1-py3-none-any.whl.metadata (3.5 kB)
+#36 ...
+
+#37 [private-db 2/3] ADD --chmod=0755 --checksum=sha256:b1892636c281590f34bc63c1118f058cd9de66c4ea463772e3909672d8b302ac     https://github.com/tianon/gosu/releases/download/1.20/gosu-amd64 /usr/local/bin/gosu
+#37 DONE 0.3s
+
+#38 [private-db 3/3] RUN test "$(uname -m)" = x86_64 && gosu --version && gosu nobody true
+#38 0.181 1.20 (go1.24.6 on linux/amd64; gc)
+#38 DONE 0.2s
+
+#39 [private-api 4/5] RUN python -m pip install --no-cache-dir -r requirements.lock     && python -m pip uninstall --yes pip
+#39 2.096 Collecting annotated-types==0.8.0 (from -r requirements.lock (line 1))
+#39 2.248   Downloading annotated_types-0.8.0-py3-none-any.whl.metadata (15 kB)
+#39 2.323 Collecting anyio==4.15.1 (from -r requirements.lock (line 2))
+#39 2.350   Downloading anyio-4.15.1-py3-none-any.whl.metadata (4.7 kB)
+#39 2.398 Collecting certifi==2026.10.19 (from -r requirements.lock (line 3))
+#39 2.428   Downloading certifi-2026.10.19-py3-none-any.whl.metadata (2.5 kB)
+#39 2.469 Collecting click==8.5.0 (from -r requirements.lock (line 4))
+#39 2.497   Downloading click-8.5.0-py3-none-any.whl.metadata (2.6 kB)
+#39 2.595 Collecting fastapi==0.149.0 (from -r requirements.lock (line 5))
+#39 2.623   Downloading fastapi-0.149.0-py3-none-any.whl.metadata (26 kB)
+#39 2.674 Collecting h11==0.16.0 (from -r requirements.lock (line 6))
+#39 2.700   Downloading h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+#39 2.737 Collecting httpcore==1.0.9 (from -r requirements.lock (line 7))
+#39 2.766   Downloading httpcore-1.0.9-py3-none-any.whl.metadata (21 kB)
+#39 2.810 Collecting httpx==0.28.1 (from -r requirements.lock (line 8))
+#39 2.837   Downloading httpx-0.28.1-py3-none-any.whl.metadata (7.1 kB)
+#39 2.878 Collecting idna==3.20 (from -r requirements.lock (line 9))
+#39 2.905   Downloading idna-3.20-py3-none-any.whl.metadata (7.2 kB)
+#39 2.941 Collecting iniconfig==2.3.1 (from -r requirements.lock (line 10))
+#39 2.970   Downloading iniconfig-2.3.1-py3-none-any.whl.metadata (2.8 kB)
+#39 3.017 Collecting packaging==26.3 (from -r requirements.lock (line 11))
+#39 3.045   Downloading packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+#39 3.089 Collecting pluggy==1.7.0 (from -r requirements.lock (line 12))
+#39 3.131   Downloading pluggy-1.7.0-py3-none-any.whl.metadata (5.0 kB)
+#39 3.218 Collecting psycopg==3.3.6 (from -r requirements.lock (line 13))
+#39 3.253   Downloading psycopg-3.3.6-py3-none-any.whl.metadata (4.4 kB)
+#39 3.571 Collecting psycopg-binary==3.3.6 (from -r requirements.lock (line 14))
+#39 3.602   Downloading psycopg_binary-3.3.6-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (2.7 kB)
+#39 3.762 Collecting pydantic==2.14.1 (from -r requirements.lock (line 15))
+#39 3.789   Downloading pydantic-2.14.1-py3-none-any.whl.metadata (133 kB)
+#39 4.824 Collecting pydantic_core==2.50.1 (from -r requirements.lock (line 16))
+#39 4.856   Downloading pydantic_core-2.50.1-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.5 kB)
+#39 4.909 Collecting Pygments==2.21.0 (from -r requirements.lock (line 17))
+#39 4.942   Downloading pygments-2.21.0-py3-none-any.whl.metadata (2.5 kB)
+#39 ...
+
+#36 [access-gate 4/5] RUN python -m pip install --no-cache-dir -r requirements.lock     && python -m pip uninstall --yes pip
+#36 2.591 Collecting cryptography==50.0.2 (from -r requirements.lock (line 2))
+#36 2.618   Downloading cryptography-50.0.2-cp311-abi3-manylinux_2_34_x86_64.whl.metadata (4.4 kB)
+#36 2.766 Collecting cffi==2.1.1 (from -r requirements.lock (line 3))
+#36 2.792   Downloading cffi-2.1.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (2.5 kB)
+#36 2.823 Collecting pycparser==3.11 (from -r requirements.lock (line 4))
+#36 2.850   Downloading pycparser-3.11-py3-none-any.whl.metadata (8.2 kB)
+#36 2.900 Collecting typing_extensions==4.16.0 (from -r requirements.lock (line 5))
+#36 2.927   Downloading typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+#36 2.964 Downloading pyjwt-2.15.1-py3-none-any.whl (33 kB)
+#36 3.003 Downloading cryptography-50.0.2-cp311-abi3-manylinux_2_34_x86_64.whl (4.8 MB)
+#36 3.324    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.8/4.8 MB 16.7 MB/s  0:00:00
+#36 3.358 Downloading cffi-2.1.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (221 kB)
+#36 3.402 Downloading pycparser-3.11-py3-none-any.whl (51 kB)
+#36 3.429 Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+#36 3.551 Installing collected packages: typing_extensions, PyJWT, pycparser, cffi, cryptography
+#36 3.996 
+#36 3.999 Successfully installed PyJWT-2.15.1 cffi-2.1.1 cryptography-50.0.2 pycparser-3.11 typing_extensions-4.16.0
+#36 4.000 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+#36 4.437 Found existing installation: pip 26.2.2
+#36 4.484 Uninstalling pip-26.2.2:
+#36 4.664   Successfully uninstalled pip-26.2.2
+#36 4.686 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+#36 DONE 5.0s
+
+#40 [access-gate 5/5] COPY deploy/tablet/access_gate/gate.py ./
+#40 DONE 0.1s
+
+#39 [private-api 4/5] RUN python -m pip install --no-cache-dir -r requirements.lock     && python -m pip uninstall --yes pip
+#39 4.996 Collecting pytest==9.0.3 (from -r requirements.lock (line 18))
+#39 5.027   Downloading pytest-9.0.3-py3-none-any.whl.metadata (7.6 kB)
+#39 ...
+
+#41 [access-gate] exporting to image
+#41 exporting layers
+#41 ...
+
+#42 [private-db] exporting to image
+#42 exporting layers 0.2s done
+#42 exporting manifest sha256:230374f930589b47e5e2fd9e83d4658b60fecc8d8e89408f5fcd4e1f58e14530 0.0s done
+#42 exporting config sha256:d6406eb873440c29fbe63207034d4552fc9e52e405d42abdb2bf5c6b63bb22a8 0.0s done
+#42 exporting attestation manifest sha256:dbd6ac75e08e7ac0aba5d011bae99432c540a4ba4cfcc6fcda48385cd7eb95be 0.0s done
+#42 exporting manifest list sha256:c078a9092712e11deb68fa2b3ee7ce0f5c59cb0b76ffac8f9c7022580a5ef806 0.0s done
+#42 naming to docker.io/library/bussassistent-postgres:5e521cbc658594a47c4568d352a50e46309573c4 done
+#42 unpacking to docker.io/library/bussassistent-postgres:5e521cbc658594a47c4568d352a50e46309573c4 2.6s done
+#42 DONE 2.9s
+
+#43 [private-db] resolving provenance for metadata file
+#43 DONE 0.0s
+
+#39 [private-api 4/5] RUN python -m pip install --no-cache-dir -r requirements.lock     && python -m pip uninstall --yes pip
+#39 5.073 Collecting starlette==1.9.0 (from -r requirements.lock (line 19))
+#39 5.101   Downloading starlette-1.9.0-py3-none-any.whl.metadata (6.6 kB)
+#39 5.138 Collecting typing-inspection==0.4.4 (from -r requirements.lock (line 20))
+#39 5.169   Downloading typing_inspection-0.4.4-py3-none-any.whl.metadata (2.6 kB)
+#39 5.206 Collecting typing_extensions==4.16.0 (from -r requirements.lock (line 21))
+#39 5.236   Downloading typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+#39 5.281 Collecting uvicorn==0.54.0 (from -r requirements.lock (line 22))
+#39 5.307   Downloading uvicorn-0.54.0-py3-none-any.whl.metadata (6.6 kB)
+#39 5.338 Collecting annotated-doc==0.0.5 (from -r requirements.lock (line 23))
+#39 5.365   Downloading annotated_doc-0.0.5-py3-none-any.whl.metadata (6.5 kB)
+#39 5.405 Collecting opentelemetry-api==1.45.1 (from -r requirements.lock (line 24))
+#39 5.434   Downloading opentelemetry_api-1.45.1-py3-none-any.whl.metadata (1.4 kB)
+#39 5.470 Collecting pdfplumber==0.11.10 (from -r requirements.lock (line 25))
+#39 5.497   Downloading pdfplumber-0.11.10-py3-none-any.whl.metadata (43 kB)
+#39 5.539 Collecting pdfminer.six==20260107 (from -r requirements.lock (line 26))
+#39 5.565   Downloading pdfminer_six-20260107-py3-none-any.whl.metadata (4.3 kB)
+#39 5.800 Collecting pillow==13.0.0 (from -r requirements.lock (line 27))
+#39 5.830   Downloading pillow-13.0.0-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (9.1 kB)
+#39 5.983 Collecting pypdfium2==5.14.0 (from -r requirements.lock (line 28))
+#39 6.011   Downloading pypdfium2-5.14.0-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (62 kB)
+#39 6.184 Collecting charset-normalizer==3.5.2 (from -r requirements.lock (line 29))
+#39 6.211   Downloading charset_normalizer-3.5.2-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (46 kB)
+#39 6.466 Collecting cryptography==50.0.2 (from -r requirements.lock (line 30))
+#39 6.493   Downloading cryptography-50.0.2-cp311-abi3-manylinux_2_34_x86_64.whl.metadata (4.4 kB)
+#39 6.638 Collecting cffi==2.1.1 (from -r requirements.lock (line 31))
+#39 6.672   Downloading cffi-2.1.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (2.5 kB)
+#39 6.702 Collecting pycparser==3.11 (from -r requirements.lock (line 32))
+#39 6.729   Downloading pycparser-3.11-py3-none-any.whl.metadata (8.2 kB)
+#39 6.793 Downloading annotated_types-0.8.0-py3-none-any.whl (13 kB)
+#39 6.819 Downloading anyio-4.15.1-py3-none-any.whl (132 kB)
+#39 6.853 Downloading certifi-2026.10.19-py3-none-any.whl (136 kB)
+#39 6.887 Downloading click-8.5.0-py3-none-any.whl (125 kB)
+#39 6.923 Downloading fastapi-0.149.0-py3-none-any.whl (145 kB)
+#39 6.963 Downloading h11-0.16.0-py3-none-any.whl (37 kB)
+#39 6.991 Downloading httpcore-1.0.9-py3-none-any.whl (78 kB)
+#39 7.022 Downloading httpx-0.28.1-py3-none-any.whl (73 kB)
+#39 7.055 Downloading idna-3.20-py3-none-any.whl (69 kB)
+#39 7.084 Downloading iniconfig-2.3.1-py3-none-any.whl (7.6 kB)
+#39 7.110 Downloading packaging-26.3-py3-none-any.whl (129 kB)
+#39 7.141 Downloading pluggy-1.7.0-py3-none-any.whl (27 kB)
+#39 7.167 Downloading psycopg-3.3.6-py3-none-any.whl (215 kB)
+#39 7.203 Downloading psycopg_binary-3.3.6-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (5.2 MB)
+#39 7.441    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.2/5.2 MB 22.3 MB/s  0:00:00
+#39 7.468 Downloading pydantic-2.14.1-py3-none-any.whl (488 kB)
+#39 7.515 Downloading pydantic_core-2.50.1-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.2 MB)
+#39 7.625    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.2/2.2 MB 19.9 MB/s  0:00:00
+#39 7.651 Downloading pygments-2.21.0-py3-none-any.whl (1.3 MB)
+#39 7.712    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 20.3 MB/s  0:00:00
+#39 7.738 Downloading pytest-9.0.3-py3-none-any.whl (375 kB)
+#39 ...
+
+#41 [access-gate] exporting to image
+#41 exporting layers 1.1s done
+#41 exporting manifest sha256:18b4607aaafeb9c218a4f8be540f8e3317d4e7d49cdfcb240a64014e61810aff 0.0s done
+#41 exporting config sha256:dd2d9706b5a9434c8dd61327282e89f3e4c808c3ff9bf93ba5f7b01917c89b83 0.0s done
+#41 exporting attestation manifest sha256:7eb08862b0990cdb31372a515b50c65b3f421937e75da7e9c4b5c5360aa485ba 0.0s done
+#41 exporting manifest list sha256:f9c4a48c92b644c638359573dd44a8b5f55c79cb018e0c3c544748cb55cd3aa5 0.0s done
+#41 naming to docker.io/library/bussassistent-access-gate:5e521cbc658594a47c4568d352a50e46309573c4 done
+#41 unpacking to docker.io/library/bussassistent-access-gate:5e521cbc658594a47c4568d352a50e46309573c4 1.5s done
+#41 DONE 2.8s
+
+#39 [private-api 4/5] RUN python -m pip install --no-cache-dir -r requirements.lock     && python -m pip uninstall --yes pip
+#39 7.782 Downloading starlette-1.9.0-py3-none-any.whl (80 kB)
+#39 7.816 Downloading typing_inspection-0.4.4-py3-none-any.whl (14 kB)
+#39 7.844 Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+#39 ...
+
+#44 [access-gate] resolving provenance for metadata file
+#44 DONE 0.0s
+
+#39 [private-api 4/5] RUN python -m pip install --no-cache-dir -r requirements.lock     && python -m pip uninstall --yes pip
+#39 7.875 Downloading uvicorn-0.54.0-py3-none-any.whl (87 kB)
+#39 7.902 Downloading annotated_doc-0.0.5-py3-none-any.whl (5.3 kB)
+#39 7.930 Downloading opentelemetry_api-1.45.1-py3-none-any.whl (60 kB)
+#39 7.959 Downloading pdfplumber-0.11.10-py3-none-any.whl (60 kB)
+#39 8.002 Downloading pdfminer_six-20260107-py3-none-any.whl (6.6 MB)
+#39 8.420    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.6/6.6 MB 15.2 MB/s  0:00:00
+#39 8.447 Downloading pillow-13.0.0-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (7.1 MB)
+#39 8.830    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 7.1/7.1 MB 18.6 MB/s  0:00:00
+#39 8.861 Downloading pypdfium2-5.14.0-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (3.8 MB)
+#39 9.086    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.8/3.8 MB 17.0 MB/s  0:00:00
+#39 9.113 Downloading charset_normalizer-3.5.2-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (254 kB)
+#39 9.150 Downloading cryptography-50.0.2-cp311-abi3-manylinux_2_34_x86_64.whl (4.8 MB)
+#39 9.345    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.8/4.8 MB 24.3 MB/s  0:00:00
+#39 9.371 Downloading cffi-2.1.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (221 kB)
+#39 9.408 Downloading pycparser-3.11-py3-none-any.whl (51 kB)
+#39 9.717 Installing collected packages: typing_extensions, pypdfium2, Pygments, pycparser, psycopg-binary, psycopg, pluggy, pillow, packaging, iniconfig, idna, h11, click, charset-normalizer, certifi, annotated-types, annotated-doc, uvicorn, typing-inspection, pytest, pydantic_core, opentelemetry-api, httpcore, cffi, anyio, starlette, pydantic, httpx, cryptography, pdfminer.six, fastapi, pdfplumber
+#39 13.40 
+#39 13.41 Successfully installed Pygments-2.21.0 annotated-doc-0.0.5 annotated-types-0.8.0 anyio-4.15.1 certifi-2026.10.19 cffi-2.1.1 charset-normalizer-3.5.2 click-8.5.0 cryptography-50.0.2 fastapi-0.149.0 h11-0.16.0 httpcore-1.0.9 httpx-0.28.1 idna-3.20 iniconfig-2.3.1 opentelemetry-api-1.45.1 packaging-26.3 pdfminer.six-20260107 pdfplumber-0.11.10 pillow-13.0.0 pluggy-1.7.0 psycopg-3.3.6 psycopg-binary-3.3.6 pycparser-3.11 pydantic-2.14.1 pydantic_core-2.50.1 pypdfium2-5.14.0 pytest-9.0.3 starlette-1.9.0 typing-inspection-0.4.4 typing_extensions-4.16.0 uvicorn-0.54.0
+#39 13.41 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+#39 13.84 Found existing installation: pip 26.2.2
+#39 13.88 Uninstalling pip-26.2.2:
+#39 14.05   Successfully uninstalled pip-26.2.2
+#39 14.07 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+#39 DONE 14.4s
+
+#45 [private-api 5/5] COPY . .
+#45 DONE 0.1s
+
+#46 [private-api] exporting to image
+#46 exporting layers
+#46 exporting layers 4.7s done
+#46 exporting manifest sha256:00033d4aea6a4bc75fd86a11489d2ee9f778d1edf20236c3b6e526a4f2d7adfa 0.0s done
+#46 exporting config sha256:83ed35412f3e0c8fc9ba46a7c1ef0f857bf08725d8fe8f936a8ca5d53218baf4 0.0s done
+#46 exporting attestation manifest sha256:f50090d890d27baa7343868d5b42401aa8966685600ab60af273be85815edf08 0.0s done
+#46 exporting manifest list sha256:65b4f7dd8e336198175fdbc10e0a3ed2ba68118426ab54d36e751cded7173bdf 0.0s done
+#46 naming to docker.io/library/bussassistent-api:5e521cbc658594a47c4568d352a50e46309573c4 done
+#46 unpacking to docker.io/library/bussassistent-api:5e521cbc658594a47c4568d352a50e46309573c4
+#46 unpacking to docker.io/library/bussassistent-api:5e521cbc658594a47c4568d352a50e46309573c4 1.1s done
+#46 DONE 5.9s
+
+#47 [private-api] resolving provenance for metadata file
+#47 DONE 0.0s
+Staged and built 5e521cbc658594a47c4568d352a50e46309573c4
+ Image bussassistent-gateway:5e521cbc658594a47c4568d352a50e46309573c4 Building 
+ Image bussassistent-access-gate:5e521cbc658594a47c4568d352a50e46309573c4 Building 
+ Image bussassistent-postgres:5e521cbc658594a47c4568d352a50e46309573c4 Building 
+ Image bussassistent-api:5e521cbc658594a47c4568d352a50e46309573c4 Building 
+ Image bussassistent-postgres:5e521cbc658594a47c4568d352a50e46309573c4 Built 
+ Image bussassistent-access-gate:5e521cbc658594a47c4568d352a50e46309573c4 Built 
+ Image bussassistent-gateway:5e521cbc658594a47c4568d352a50e46309573c4 Built 
+ Image bussassistent-api:5e521cbc658594a47c4568d352a50e46309573c4 Built 

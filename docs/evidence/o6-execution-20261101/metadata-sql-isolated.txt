@@ -1,0 +1,11 @@
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+accounts=0
+migrations=0
+drafts=0
+workdays=0
+server_version=17.11
+database_locale={"provider" : "c", "collate" : "en_US.utf8", "ctype" : "en_US.utf8", "version" : null, "actual" : null}
+extension=plpgsql:1.0

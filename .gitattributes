@@ -19,3 +19,5 @@
 /scripts/operations-followup/native* -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 /scripts/operations-followup/native_site/** -text
 /scripts/operations-followup/Dockerfile.native-analysis -text
+
+/docs/evidence/o6-execution-20261101/** -text -whitespace

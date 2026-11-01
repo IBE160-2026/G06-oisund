@@ -1,0 +1,11 @@
+{
+  "scope": "preserved local qualified image; not staged or deployed artifact",
+  "ref": "ibe160-o6-gate:20261101-r1",
+  "artifact": "sha256:9f186d133973b8875da2801b143e3ff7a0c0978f0f6327a279776f56b2e5402f",
+  "counts": {
+    "LOW": 61,
+    "HIGH": 46,
+    "MEDIUM": 62,
+    "UNKNOWN": 8
+  }
+}

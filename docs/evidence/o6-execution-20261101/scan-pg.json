@@ -1,0 +1,20 @@
+{
+  "command": [
+    "C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\operations-o3-o6\\tmp\\o6-gateway-20261101\\tools\\trivy.exe",
+    "image",
+    "--cache-dir",
+    "C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\operations-o3-o6\\tmp\\o6-gateway-20261101\\cache",
+    "--skip-db-update",
+    "--scanners",
+    "vuln",
+    "--format",
+    "json",
+    "--output",
+    "C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\operations-o3-o6\\tmp\\o6-execution-20261101\\scan-pg.json",
+    "ibe160-o6-postgres:20261101-r2"
+  ],
+  "start_utc": "2026-11-01T20:39:44.567343+00:00",
+  "end_utc": "2026-11-01T20:39:44.889685+00:00",
+  "exit": 0,
+  "output_sha256": "487087f622a41bafe0cc0ff15b8fdc272799da80cc531d5b1b4193fc6d7ce9c4"
+}
