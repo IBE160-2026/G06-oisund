@@ -25,3 +25,11 @@ Den tidligere [vedlikeholdsplanen](https://github.com/IBE160-2026/G06-oisund/blo
 4. Ingen dokumentert støttet rettet kernel er etablert. Omstart med42 aktiverer ikke en kernel-CVE-rettelse. Påkrevd ny boot-/nett-/tunnelkontroll og videre stabilitetsobservasjon er **ikke utført eller lukket**. Ingen observasjonstid er oppfunnet som et fullført krav.
 
 **O6 er fortsatt åpen:** kvalifiserte rettelser er integrert/staget, men øvrige runtime-/vertsrettelser, eierporter, faktisk etterkontroll og stabilitetsoppfølging er ufullførte. Gatewaydelen er allerede fullført historisk. O3–O5 spores separat. v1.0.0 beholdes på d367a0e; ingen ny tag/release. Andre branches, kvalifiserte kandidater og eksisterende miljøer er bevart. [Evidensindeks](o6-execution-20261101/index.json).
+
+## Etterfølgende uttrykkelig eierbeslutning
+
+Jonas har nå akseptert midlertidig restfare for util-linux, ncurses, ACL/FTS5 og kernel med dokumenterte barrierer, og bekreftet prøvd lokal administratorinnlogging samt fysisk strøm/skjerm/tastatur/GRUB-beredskap. [Ordrett beslutning](o6-execution-20261101/owner-decision.json). D1/D2 og bekreftelsen av konsollberedskap er dermed gitt; de historiske ventepunktene over beskriver forrige kontrollpunkt. Dette er ingen påstand om rettede biblioteker/kernel eller lukket O6. Generell sudo krever fortsatt eierens interaktive terminalbetjening.
+
+Fersk lesende kontroll ved gjenopptakelse bestod på samme93ee582. Komplett fire-image eksportfunksjon er prøvd lokalt og fjernet etter testen; hashkontrollert preflightskript er klargjort for eierkjøring. Det skal eksportere faktiske serverimages og lage root-beskyttet systemkonfigbackup uten aktivering. Resultat registreres først etter innhenting og kontroll.
+
+De22 gamle/nye systemd-/cloudflared-debene er nå overført til den private arbeidsmappen på serveren; alle overføringshasher er kontrollert. Ingen installasjon utført. Flytting til root-beskyttet konsolltilbakevei og endelig hashkontroll skal gjøres før OS-trinnet. [Overføringskontroll](o6-execution-20261101/recovery-package-transfer.json).
