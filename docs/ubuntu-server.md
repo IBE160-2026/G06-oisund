@@ -2,7 +2,7 @@
 
 ## Aktivt O6-containertrinn — 1. november kl.22:30 Oslo
 
-Aktiv serverrelease er **5e521cbc658594a47c4568d352a50e46309573c4** med de kontrollerte Python3.13.18/pip- og PG17.11/gosu1.20-rettelsene. [Eksakte image-ID-er, backup/restore, databasebevaring og etterkontroll](evidence/o6-execution-20261101.md). Alle fire aktive images er eksportert, innholdsbundet, skannet og prøvd isolert før aktivering. Alle tabellfingeravtrykk er bevart; API/DB/tunnel friske. Systemd/cloudflared/kernel er fortsatt gamle. Personlig brukerprøve er etterspurt; neste vertstrinn avventer denne. Midlertidig avgrenset restfare er uttrykkelig akseptert, konsollberedskap bekreftet. O6 og separat O3–O5 er fortsatt åpne. Ingen ny tag/release.
+Aktiv serverrelease er **5e521cbc658594a47c4568d352a50e46309573c4** med de kontrollerte Python3.13.18/pip- og PG17.11/gosu1.20-rettelsene. [Eksakte image-ID-er, backup/restore, databasebevaring og etterkontroll](evidence/o6-execution-20261101.md). Alle fire aktive images er eksportert, innholdsbundet, skannet og prøvd isolert før aktivering. Alle tabellfingeravtrykk er bevart; API/DB/tunnel friske. Systemd/cloudflared/kernel er fortsatt gamle. Personlig innlogging/visning/lagring/gjenåpning er eierbekreftet bestått. Ny førkontroll/backup/isolert restore bestod; lokal administratorkjøring av systemd-trinnet er klargjort og avventer faktisk resultat. Midlertidig avgrenset restfare er uttrykkelig akseptert, konsollberedskap bekreftet. O6 og separat O3–O5 er fortsatt åpne. Ingen ny tag/release.
 
 Avsnittene nedenfor er historiske kontrollpunkter;93ee582 er førversjon/tilbakevei.
 
