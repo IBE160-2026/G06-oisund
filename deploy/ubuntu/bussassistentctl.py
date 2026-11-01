@@ -43,6 +43,19 @@ def compose(path, *args, **kw):
                 *args], env=env, **kw)
 
 
+def verify_release_images(path):
+    """Check every resolved image before downtime, including a built PG overlay.
+
+    Reading Compose also supports older releases that use a registry-pinned DB.
+    No pull or build occurs during deploy/rollback's preflight.
+    """
+    images = compose(path, 'config', '--images', capture_output=True, text=True).stdout.splitlines()
+    if not images or any(not image.strip() for image in images):
+        raise ValueError('Release has no complete image inventory')
+    for image in sorted(set(images)):
+        run(['docker', 'image', 'inspect', image], stdout=subprocess.DEVNULL)
+
+
 def link(name, path):
     temporary = ROOT / (name + '.new')
     temporary.unlink(missing_ok=True)
@@ -210,11 +223,17 @@ def restore_initial(commit, digest):
 
 
 def database_summary(path):
-    # Counts only, no identities, row contents, passwords or session values.
+    # Counts/runtime metadata only, no identities, row contents or credentials.
     sql = """SELECT 'accounts=' || count(*) FROM accounts;
 SELECT 'migrations=' || count(*) FROM private_migrations;
 SELECT 'drafts=' || count(*) FROM drafts;
-SELECT 'workdays=' || count(*) FROM workdays;"""
+SELECT 'workdays=' || count(*) FROM workdays;
+SELECT 'server_version=' || current_setting('server_version');
+SELECT 'database_locale=' || json_build_object('provider', datlocprovider,
+ 'collate', datcollate, 'ctype', datctype, 'version', datcollversion,
+ 'actual', pg_database_collation_actual_version(oid))::text
+ FROM pg_database WHERE datname=current_database();
+SELECT 'extension=' || extname || ':' || extversion FROM pg_extension ORDER BY extname;"""
     compose(path, 'exec', '-T', 'private-db', 'psql', '-U', 'tablet_bootstrap',
             '-d', 'private_work', '-Atc', sql)
 
@@ -555,9 +574,7 @@ def main():
             raise ValueError('Rollback requires identical migration files; use reviewed database restore otherwise')
         # Builds and config validation happen before downtime.
         compose(target, 'config', '--quiet')
-        for service in ('api', 'gateway', 'access-gate'):
-            run(['docker', 'image', 'inspect', 'bussassistent-' + service + ':' + target.name],
-                stdout=subprocess.DEVNULL)
+        verify_release_images(target)
         tunnel_was_active = subprocess.run(
             ['systemctl', 'is-active', '--quiet', 'cloudflared']).returncode == 0
         run(['systemctl', 'stop', 'cloudflared'])

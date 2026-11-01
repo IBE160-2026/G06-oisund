@@ -1,0 +1,7 @@
+# Qualified amd64 overlay: keep the reviewed PG17.11 base and entrypoint.
+# Gosu 1.20 fixes the user/group parser (GO-2026-6686); its Go compiler is
+# still 1.24.6. Separate symbol-level evidence disposes the stdlib matches.
+FROM postgres:17.11-alpine@sha256:266d3c257594e195b309ae9d1805e54c788f1d7b375f56bf6c367aac6c917e7b
+ADD --chmod=0755 --checksum=sha256:b1892636c281590f34bc63c1118f058cd9de66c4ea463772e3909672d8b302ac \
+    https://github.com/tianon/gosu/releases/download/1.20/gosu-amd64 /usr/local/bin/gosu
+RUN test "$(uname -m)" = x86_64 && gosu --version && gosu nobody true
