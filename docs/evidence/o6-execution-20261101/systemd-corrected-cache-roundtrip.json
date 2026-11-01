@@ -1,0 +1,21 @@
+{
+  "command": [
+    "docker",
+    "run",
+    "--rm",
+    "--network",
+    "none",
+    "--mount",
+    "type=bind,source=C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\operations-o3-o6\\scripts\\operations-followup,target=/probe,readonly",
+    "--mount",
+    "type=bind,source=C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\operations-o3-o6\\tmp\\o6-maintenance-ready-20261101\\systemd-packages,target=/input,readonly",
+    "--mount",
+    "type=bind,source=C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\operations-o3-o6\\tmp\\o6-execution-20261101\\cache_roundtrip.py,target=/test.py,readonly",
+    "ibe160-o6-systemd-tests:20261101-r1",
+    "/test.py"
+  ],
+  "start_utc": "2026-11-01T22:06:25.736890+00:00",
+  "end_utc": "2026-11-01T22:06:43.101443+00:00",
+  "exit": 0,
+  "output_sha256": "fc7c674556ba298b8accc3fd6b3556ace6d39e345639ffa6199df1787c3df998"
+}

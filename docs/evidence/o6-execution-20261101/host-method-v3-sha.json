@@ -1,0 +1,21 @@
+{
+  "command": [
+    "ssh",
+    "-i",
+    "C:\\Users\\Jonas\\.ssh\\ibe160_server_ed25519",
+    "-o",
+    "IdentitiesOnly=yes",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "StrictHostKeyChecking=yes",
+    "-o",
+    "ConnectTimeout=10",
+    "jonas@192.168.1.139",
+    "sha256sum /tmp/ibe160-o6-window.uNfjQHcy/host-step-v3.py"
+  ],
+  "start_utc": "2026-11-01T22:07:50.565009+00:00",
+  "end_utc": "2026-11-01T22:07:50.986964+00:00",
+  "exit": 0,
+  "output_sha256": "d0cda60eb449b9bba9c81aa81db52d12a9dbc9cf6614b6b8372a40be62849112"
+}

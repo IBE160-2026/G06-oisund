@@ -1,0 +1,91 @@
+Reading package lists...
+Building dependency tree...
+Reading state information...
+Solving dependencies...
+The following packages will be upgraded:
+  libnss-systemd libpam-systemd libsystemd-shared libsystemd0 libudev1 systemd
+  systemd-cryptsetup systemd-resolved systemd-sysv udev
+10 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+Need to get 8702 kB of archives.
+After this operation, 317 kB of additional disk space will be used.
+Ign:1 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 libsystemd0 amd64 259.9-0ubuntu0.1
+Ign:2 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 libpam-systemd amd64 259.9-0ubuntu0.1
+Ign:3 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 systemd-sysv amd64 259.9-0ubuntu0.1
+Ign:4 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 systemd-resolved amd64 259.9-0ubuntu0.1
+Ign:5 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 libsystemd-shared amd64 259.9-0ubuntu0.1
+Ign:6 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 systemd amd64 259.9-0ubuntu0.1
+Ign:7 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 systemd-cryptsetup amd64 259.9-0ubuntu0.1
+Ign:8 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 udev amd64 259.9-0ubuntu0.1
+Ign:9 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 libudev1 amd64 259.9-0ubuntu0.1
+Ign:10 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 libnss-systemd amd64 259.9-0ubuntu0.1
+Ign:10 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 libnss-systemd amd64 259.9-0ubuntu0.1
+Ign:9 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 libudev1 amd64 259.9-0ubuntu0.1
+Ign:8 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 udev amd64 259.9-0ubuntu0.1
+Ign:7 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 systemd-cryptsetup amd64 259.9-0ubuntu0.1
+Ign:6 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 systemd amd64 259.9-0ubuntu0.1
+Ign:5 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 libsystemd-shared amd64 259.9-0ubuntu0.1
+Ign:4 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 systemd-resolved amd64 259.9-0ubuntu0.1
+Ign:3 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 systemd-sysv amd64 259.9-0ubuntu0.1
+Ign:2 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 libpam-systemd amd64 259.9-0ubuntu0.1
+Ign:1 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 libsystemd0 amd64 259.9-0ubuntu0.1
+Ign:1 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 libsystemd0 amd64 259.9-0ubuntu0.1
+Ign:2 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 libpam-systemd amd64 259.9-0ubuntu0.1
+Ign:3 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 systemd-sysv amd64 259.9-0ubuntu0.1
+Ign:4 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 systemd-resolved amd64 259.9-0ubuntu0.1
+Ign:5 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 libsystemd-shared amd64 259.9-0ubuntu0.1
+Ign:6 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 systemd amd64 259.9-0ubuntu0.1
+Ign:7 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 systemd-cryptsetup amd64 259.9-0ubuntu0.1
+Ign:8 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 udev amd64 259.9-0ubuntu0.1
+Ign:9 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 libudev1 amd64 259.9-0ubuntu0.1
+Ign:10 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 libnss-systemd amd64 259.9-0ubuntu0.1
+Ign:10 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 libnss-systemd amd64 259.9-0ubuntu0.1
+Ign:9 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 libudev1 amd64 259.9-0ubuntu0.1
+Ign:8 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 udev amd64 259.9-0ubuntu0.1
+Ign:7 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 systemd-cryptsetup amd64 259.9-0ubuntu0.1
+Ign:6 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 systemd amd64 259.9-0ubuntu0.1
+Ign:5 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 libsystemd-shared amd64 259.9-0ubuntu0.1
+Ign:4 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 systemd-resolved amd64 259.9-0ubuntu0.1
+Ign:3 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 systemd-sysv amd64 259.9-0ubuntu0.1
+Ign:2 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 libpam-systemd amd64 259.9-0ubuntu0.1
+Ign:1 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 libsystemd0 amd64 259.9-0ubuntu0.1
+Err:10 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 libnss-systemd amd64 259.9-0ubuntu0.1
+  Temporary failure resolving 'archive.ubuntu.com'
+  File not found - /root/o6-private/packages/libnss-systemd_259.9-0ubuntu0.1_amd64.deb (13: Permission denied)
+Err:9 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 libudev1 amd64 259.9-0ubuntu0.1
+  Temporary failure resolving 'archive.ubuntu.com'
+  File not found - /root/o6-private/packages/libudev1_259.9-0ubuntu0.1_amd64.deb (13: Permission denied)
+Err:8 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 udev amd64 259.9-0ubuntu0.1
+  Temporary failure resolving 'archive.ubuntu.com'
+  File not found - /root/o6-private/packages/udev_259.9-0ubuntu0.1_amd64.deb (13: Permission denied)
+Err:7 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 systemd-cryptsetup amd64 259.9-0ubuntu0.1
+  Temporary failure resolving 'archive.ubuntu.com'
+  File not found - /root/o6-private/packages/systemd-cryptsetup_259.9-0ubuntu0.1_amd64.deb (13: Permission denied)
+Err:6 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 systemd amd64 259.9-0ubuntu0.1
+  Temporary failure resolving 'archive.ubuntu.com'
+  File not found - /root/o6-private/packages/systemd_259.9-0ubuntu0.1_amd64.deb (13: Permission denied)
+Err:5 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 libsystemd-shared amd64 259.9-0ubuntu0.1
+  Temporary failure resolving 'archive.ubuntu.com'
+  File not found - /root/o6-private/packages/libsystemd-shared_259.9-0ubuntu0.1_amd64.deb (13: Permission denied)
+Err:4 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 systemd-resolved amd64 259.9-0ubuntu0.1
+  Temporary failure resolving 'archive.ubuntu.com'
+  File not found - /root/o6-private/packages/systemd-resolved_259.9-0ubuntu0.1_amd64.deb (13: Permission denied)
+Err:3 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 systemd-sysv amd64 259.9-0ubuntu0.1
+  Temporary failure resolving 'archive.ubuntu.com'
+  File not found - /root/o6-private/packages/systemd-sysv_259.9-0ubuntu0.1_amd64.deb (13: Permission denied)
+Err:2 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 libpam-systemd amd64 259.9-0ubuntu0.1
+  Temporary failure resolving 'archive.ubuntu.com'
+  File not found - /root/o6-private/packages/libpam-systemd_259.9-0ubuntu0.1_amd64.deb (13: Permission denied)
+Err:1 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 libsystemd0 amd64 259.9-0ubuntu0.1
+  Temporary failure resolving 'archive.ubuntu.com'
+  File not found - /root/o6-private/packages/libsystemd0_259.9-0ubuntu0.1_amd64.deb (13: Permission denied)
+E: Failed to fetch file:/root/o6-private/packages/libsystemd0_259.9-0ubuntu0.1_amd64.deb  File not found - /root/o6-private/packages/libsystemd0_259.9-0ubuntu0.1_amd64.deb (13: Permission denied)
+E: Failed to fetch file:/root/o6-private/packages/libpam-systemd_259.9-0ubuntu0.1_amd64.deb  File not found - /root/o6-private/packages/libpam-systemd_259.9-0ubuntu0.1_amd64.deb (13: Permission denied)
+E: Failed to fetch file:/root/o6-private/packages/systemd-sysv_259.9-0ubuntu0.1_amd64.deb  File not found - /root/o6-private/packages/systemd-sysv_259.9-0ubuntu0.1_amd64.deb (13: Permission denied)
+E: Failed to fetch file:/root/o6-private/packages/systemd-resolved_259.9-0ubuntu0.1_amd64.deb  File not found - /root/o6-private/packages/systemd-resolved_259.9-0ubuntu0.1_amd64.deb (13: Permission denied)
+E: Failed to fetch file:/root/o6-private/packages/libsystemd-shared_259.9-0ubuntu0.1_amd64.deb  File not found - /root/o6-private/packages/libsystemd-shared_259.9-0ubuntu0.1_amd64.deb (13: Permission denied)
+E: Failed to fetch file:/root/o6-private/packages/systemd_259.9-0ubuntu0.1_amd64.deb  File not found - /root/o6-private/packages/systemd_259.9-0ubuntu0.1_amd64.deb (13: Permission denied)
+E: Failed to fetch file:/root/o6-private/packages/systemd-cryptsetup_259.9-0ubuntu0.1_amd64.deb  File not found - /root/o6-private/packages/systemd-cryptsetup_259.9-0ubuntu0.1_amd64.deb (13: Permission denied)
+E: Failed to fetch file:/root/o6-private/packages/udev_259.9-0ubuntu0.1_amd64.deb  File not found - /root/o6-private/packages/udev_259.9-0ubuntu0.1_amd64.deb (13: Permission denied)
+E: Failed to fetch file:/root/o6-private/packages/libudev1_259.9-0ubuntu0.1_amd64.deb  File not found - /root/o6-private/packages/libudev1_259.9-0ubuntu0.1_amd64.deb (13: Permission denied)
+E: Failed to fetch file:/root/o6-private/packages/libnss-systemd_259.9-0ubuntu0.1_amd64.deb  File not found - /root/o6-private/packages/libnss-systemd_259.9-0ubuntu0.1_amd64.deb (13: Permission denied)
+E: Unable to fetch some archives, maybe run apt update or try with --fix-missing?

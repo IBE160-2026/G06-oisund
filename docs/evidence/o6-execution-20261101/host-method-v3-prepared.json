@@ -1,0 +1,9 @@
+{
+  "remote_path": "/tmp/ibe160-o6-window.uNfjQHcy/host-step-v3.py",
+  "sha256": "7d15afdad13bb79311605c3aa114e7d8ac7188b8c9ed5aa59438631e33543972",
+  "actual_install_function_offline_old_new_old_test_passed": true,
+  "private_recovery_directory_not_relaxed": true,
+  "only_verified_public_debs_added_to_apt_cache": true,
+  "private_command_output_logging_added": true,
+  "executed_on_production": false
+}
