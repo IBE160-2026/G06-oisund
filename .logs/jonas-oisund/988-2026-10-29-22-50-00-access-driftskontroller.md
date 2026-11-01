@@ -156,3 +156,36 @@ Denne sluttseksjonen erstatter gjeldende status i de eldre ventende punktene ove
 - O6 er fortsatt åpen: støttet kernelrettelse/konkret triggeroppfølging, videre oppfølging av midlertidig aksepterte util-linux/ncurses/ACL/FTS5-restgrenser og bredere OS/supply-chain-bevis etter rapportens sluttkriterier. Ingen manglende eierbeslutning i nåværende løp.
 - Lengre stabilitets-/oppstartsobservasjon gjenstår i eksisterende serveroppfølging. Én ny frisk boot og kort målt observasjon er ikke bevis for at historisk periodisk frys er løst.
 - O3–O5 og komplett kursinnlevering spores separat og er ikke lukket av dette vedlikeholdet.
+
+## 2026-11-02 kl. 00:45 — Jonas Øisund
+
+### Oppgave
+
+Fullføre alt selvstendig O3–O5-arbeid mens eieren sover, uten spørsmål/ventedialog, og ta naturlige lesende O6-observasjoner. Egne syntetiske tester, nødvendig retting/review, commit/push og konkret restliste; ingen mainmerge, produksjonsdeploy, pakkeoppdatering, omstart, passordendring eller ny risikoaksept.
+
+### Plan
+
+- Lese gjeldende instruksjoner og siste evidens, hente origin/main og identifisere faktisk produksjon; gjenbruke gyldige resultater på uendret kode.
+- Bruke ren dedikert arbeidskopi på ny branch; isolere terminerbart DNS-/transportarbeid, kontrollere ressursgrenser/recovery/autentisering/cache/rotasjon og faktisk libc/HTTPS.
+- Gjøre lesende nett-/stabilitetskontroller, gjennomføre prosjektets fire reviewlag og rette selvstendige funn, bevare miljøer og dokumentere brukeravhengige kontroller.
+
+### Resultat
+
+Arbeidscommit **3df194c7990115a34b9fe5782808ce300d56e032** er pushet til **followup/o3-o5-night-20261102**, og remoteSHA er bekreftet. Baseline/fersk origin/main ved start og slutt erde959f3. Den eksisterende rene operations-o3-o6-kopien ble gjenbrukt; andre branches/worktrees og passordarbeidet er bevart. Ingen sources-filer endret. [Full rapport](../../docs/evidence/o3-o5-night-20261102.md), [sluttbinding](../../docs/evidence/o3-o5-night-20261102/qualification-summary-final.json), [review](../../docs/evidence/o3-o5-night-20261102/review.md).
+
+O3: gyldig faktisk isolert runtime-evidens for15skrivefamilier/75Origin-CSRF-avslag/tapt svar før dispatch og etter commit/kvittering/eksakt replay er hash- og invariantkontrollert. Backend/frontend/proxykilder er identiske mot aktiv produksjonscommit. Historisk økt-/cookie-/eierskapsbevis beholdt med opprinnelig scope. Fire aktuelle offentlige ruter ga302uteninnlogging. Autentisert ekstern matrise ble ikke utført: computer-use stoppet før fanetilstand fordi URL ikke kunne fastslås sikkert. UI ble stoppet; ingen MFA/legitimasjonshenting eller faktiske skift/avvik brukt.
+
+O4: faktiske loopbacklyttere18081/18083, IPv4standardrute, IPv6ULA/ingenIPv6standardrute kontrollert. Tolv begrensede TCP-prøver mot kun bekreftet egen server visteSSH22tilgjengelig overIPv4ogULA; øvrige fem app-/DB-/metricsporter ga timeout. Dette er sammeLAN, ikke WANbevis. UFW/nft/iptables/ip6tables krever interaktivsudo; registrert og hoppet over. Ingen innlogget ruter-/uavhengig ekstern målekontekst eller bekreftet direkteWANorigin etablert. Ingen brannmur/nettendring eller prøving av Cloudflares delteIPer. ManglendeHost ga forventet444; korrigert kjentHost ga403og ordinærcheckbestod.
+
+O5: daemontråden erstattet med én disponibel prosess for heleDNS/connect/TLS/HTTP/body, tresekunders absoluttfrist, kill/reap og senere avklaring ved forsinket reap. Ingen pipe-lesertråd; maks64KiBmidlertidig resultat, gate1MiBtmpfs i beggeCompose, øvrig sandbox/cache/cooldown/grenser bevart. Tre vedvarende heng tok3,004s hver,72samtidige avslag,FD12→12/nullnye tråder/allebarnreapet. Faktisk libc stod fast utover3,5s i egenDNS-svart-hull-fixture; gateavslag3,004s/nullbarn og signert autentisering gjenopprettet etter DNS-svar. HTTPS-tillit/sertifikatavslag, rotasjon uten fristforlengelse, cache-/responsgrenser, feillukking og spawn-/forsinket-reap-recovery bestod.
+
+Sluttkandidatens faktiske produksjonsruntime med LF-stabile Git-/imagebyte bestod **37/37** samlede tester; Linuxdriftsregresjon **20/20**, fokuserte helpertester **4/4** før samlet sluttkjøring. Begge faktiske Composekonfigurasjoner er parse-/sandboxkontrollert med bare syntetiskevariabler. Fire reviewlag og reinspection fullført: elleveobservasjoner/åtterotårsaksgrupper rettet, ingenbeholdte funn/ventendevalg. Windowsfcntl-/rettighets-/offlinecache-/to runnerinnsamlingsfeil er bevart som feilforsøk; de korrekte isolerte sluttkjøringene bestod. StandardfrakobletDockerfilebygg manglet installasjonscache; offlineoverlegg på faktisk eksportertproduksjonsruntime bestod uten pakkeendring. Kandidat22fe79cf…beholdt som lokal kvalifisertartefakt; testimages/containere/nett/midlertidigefiler ryddet, ingenvarigejobber.
+
+Produksjon er lesende bekreftet **5e521cbc658594a47c4568d352a50e46309573c4**, sammeboot2812a231…/kernel42,API/DBfriske,tunnelPID2276/NRestarts0/ready200/fireforbindelser,ingenfailedunits og aktivbackuptimer; sistekvittering00:39:35Oslo. Neste03:16:23timerkjøring er ikke observert. V1tag/release urørt, ingen nyproduksjonskode eller O6-/risikolukking. O5 er branchkvalifisert, ikke produksjonsverifisert. Kode/evidens er pushet; denne separate logg-/issuescommiten pushes deretter med normalpush.
+
+### Åpne punkter
+
+- O3: egnet autorisert syntetisk ekstern testkontekst, eventuell innlogging/MFA og fysisk enhet/nettbrudd for autentisert ekstern cookie/cache/error-/skrive-/kvitteringsmatrise.
+- O4: administratorbetjent lesende brannmureksport og ruterkonfigurasjon, autorisert uavhengig IPv4/IPv6-målevert og bekreftet egenorigin. Ingen regelendring forutsatt.
+- O5: senere beslutning om integrasjon/deploy av kvalifisert kandidat, deretter faktisk produksjons- og personlig innlogging/lagring/gjenåpning på nyversjonen. Ingen ny risikoaksept etterspørres.
+- O6s eksisterende kernel-/langtids-/oppstartsstabilitetsoppfølging står uendret åpen; dette nattløpet lukker ikkeO6. Punktene over er samordnet i det eksisterende sammensatte driftspunktet i issues.md.
