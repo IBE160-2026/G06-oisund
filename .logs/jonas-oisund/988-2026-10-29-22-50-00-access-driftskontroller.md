@@ -119,3 +119,40 @@ Hjelperen er rettet til barehashkontrollerteoffentligedeb i standardAPTcache med
 - O6: util-linux/ncurses/kernel beholder tidligere beslutnings-/kvalifiseringsgrenser. ACL/FTS5 er nå avklart innen kartlagte normale appflyter, men bibliotekene er fortsatt berørte; eventuell videreføring av avgrenset administrativ/annen kodekjøringsrestfare og fremtidig støttet rettelse må håndteres eksplisitt. Ingen restfareaksept er registrert. Full O6 og bredere OS/supply-chain-bevis er fortsatt åpne.
 - Python/pip/gosu-kandidater og senere PG-metadata/restore før eventuell oppdatering krever eget avgrenset løp; ingen av dem ble deployet her. systemd/cloudflared/libc6-aktivering trenger senere bestilling, privat backup/pakke-/konfigtilbakevei, administratorbetjening/lokal konsoll og faktiske nett/SSH/tunnel/boot/eiertester.
 - O3–O5 beholder separat ekstern/WAN/DNS-oppfølging; libc6-markør og langtidsstabilitet beholdes i sine eksisterende punkter. Ingen O6-lukking av gatewaykvalifikasjon eller positiv eiertest.
+
+## 2026-11-02 kl. 00:10 — Jonas Øisund
+
+### Oppgave
+
+Fullføre det autoriserte O6-vedlikeholdet så langt forsvarlig mulig, med faktisk produksjonskontroll, kvalifiserte rettelser, backup/tilbakevei, omstart, sluttprøver og sannferdig reststatus. Bevare data, andre miljøer/branches, godkjent refleksjon og v1.0.0; holde passordfunksjonalitet og O3–O5 utenfor.
+
+### Plan
+
+- Følge [gjeldende gjennomføringsrapport og vedlikeholdsplan](../../docs/evidence/o6-execution-20261101.md), uttrykkelig eierbeslutning og de allerede kvalifiserte kandidatene.
+- Kontrollere hvert systemd-/cloudflared-/boottrinn separat, privat backup og praktisk tilbakevei; ved feil stoppe og returnere før neste trinn.
+- Binde faktisk kjørende versjoner/images, skanne riktig Ubuntu-inventar og gjenbruke gyldig artefaktregresjon; gjennomføre isolert restore og personlig sluttprøve.
+- Samordne dokumentasjon, åpne punkter og evidens; publisere med normal push uten ny tag/release/deploy av dokumentcommits.
+
+### Resultat
+
+Arbeidscommit **ed54ee36c12fabb805f4252120860d8144cf4bab** ferdigstiller driftsveiledning, versjons-/evidensrapport og O6-status. Aktiv apprelease er fortsatt **5e521cbc658594a47c4568d352a50e46309573c4**, ikke denne nyere dokumentcommitten. Containertrinnets Python3.13.18/runtime-pip-fjerning og gosu1.20 er verifisert; faktisk PostgreSQL var allerede17.11 og er fortsatt17.11. De tidligere kvalifiserte imagealiasene og81eksisterende lokale containere/31volumer er bevart.
+
+Systemd-v3 bestod uten retur; alle ti pakker og faktisk PID1 er259.9-0ubuntu0.1. Cloudflared2026.10.7 bestod uten retur og kjørende binær er hashbundet. Tidligere v2-feil/retur og cache-/TTY-rettelser er bevart som historikk, ikke skjult eller omtolket som vellykket installasjon. Privat systemkonfigbackup og22gamle/nye deb-er er kontrollert og beholdt. Vedvarende manuelle tilbakeveiskript bruker den kvalifiserte frakoblede install()-funksjonen med metodehash; den eldre rå APT-oppskriften mot private filstier er erstattet. Ingen faktisk retur ble utført ved denne dokumentasjonsrettingen.
+
+Kontrollert omstart bestod: nyboot2812a231-758d-4b5e-8241-d748b52d0991, samme kernel7.0.0-42-generic og aktiv libc6 2.43-2ubuntu2.4; reboot-required er borte. GRUB-kildens meny/ti sekunder er samordnet med eksisterende generert meny, begge42/30 er beholdt. App/tunnel/timer startet automatisk før første lokale innlogging. SSH-adressen ble192.168.1.138 på Wi-Fi; streng nøkkelkontroll med kjent gammel HostKeyAlias er bevart. Ethernet er ikke tilkoblet. NumLock forklarte eierens lokale innloggingsvanske; ingen konto/PAM/passordendring eller nett-/ruterregelendring.
+
+Lave journald-CVE-2026-40228 er kompensert med ForwardToWall=no etter isolert konfigurasjonsprøve, privat backup og kontrollert journalomstart:passedtrue/rollbackfalse, effektiv innstilling og vanlig journal/app/tunnel friske. Dette er en avgrenset triggerbarriere, ingen rettet systemdpakke. Kernel-/bibliotekrestene har fortsatt dokumenterte anvendelses- og bevisgrenser; Jonas sin uttrykkelige midlertidige risikoaksept er registrert ordrett, ikke utvidet av oss.
+
+Sluttkontroll23:57Oslo1.11:frisk app/database/tunnel, origin uten gyldig assertion403, ready200/fire forbindelser, ingen failedunits/dpkg-feil og aktiv backup-timer. Neste observerte timerkjøring2.11kl03:16 er ikke påstått utført. Personlig ny Cloudflare-/appinnlogging, normal visning, lagring og refresh/gjenåpning etter alle endringer er bekreftet **«bestått»**. Kort gjentatt observasjon er dokumentert; dette lukker ikke historisk periodisk oppstartsstopp.
+
+Siste private Windows-backup20261101T225750Z er81007byte/SHA256 **ec9d3e0900385d86f842a1202b3fc75cbe814c960bf06575a409640608c6e8fc**, overføringshash verifisert. Separat fersk isolert restore bestod med alle25tabellfingeravtrykk like ved eget konsistent kontrollpunkt. Containerbyttets25fingeravtrykk var like; over omstart var23like, inkludert alle forretningstabeller, mens login_limits/sessions endret hash og sessions6→5. Ingen udokumentert påstand om alle25uendrede over omstart eller per-rad-årsak. Ingen produksjonsrestore/backupbyte i Git.
+
+Oppdatert skanning av faktiske serverimages og Ubuntu26.04-inventar er sammenlignet med førgrunnlaget uten ignoreliste. Ingen nye versjonsfjerninger utenom de ti systemdpakkene/cloudflared; kernelHIGH/CRIT gjenstår. Tidlige skanninger uten gjenkjent OS er eksplisitt ugyldige, ikke nullfunn. Store rårapporter er bevart lokalt/ignorert; normaliserte funn, grupper, hasher og begrensninger er publisert. Artefaktregresjon og tidligere identisk kode/native-kvalifisering er avgrenset korrekt. JSON/akseptert JSONL, helper-syntaks, dokumentlenker, høysignalhemmelighetssøk og diff-kontroll bestod. Private kilder/backuper/runtime-data og passordfunksjonalitet følger ikke med. Refleksjon/V1/andre branches er bevart.
+
+Denne sluttseksjonen erstatter gjeldende status i de eldre ventende punktene over: ingen nødvendig eierbeslutning eller sudo-betjening gjenstår i dette vedlikeholdsløpet. Libc6-, systemd-, cloudflared- og gjennomføringspunktene er lukket i issues.md, mens samlet O6/kernel/stabilitet beholdes åpne. Dokumentasjon og separat loggcommit publiseres med normal push; senere dokumentcommits endrer ikke aktiv apprelease.
+
+### Åpne punkter
+
+- O6 er fortsatt åpen: støttet kernelrettelse/konkret triggeroppfølging, videre oppfølging av midlertidig aksepterte util-linux/ncurses/ACL/FTS5-restgrenser og bredere OS/supply-chain-bevis etter rapportens sluttkriterier. Ingen manglende eierbeslutning i nåværende løp.
+- Lengre stabilitets-/oppstartsobservasjon gjenstår i eksisterende serveroppfølging. Én ny frisk boot og kort målt observasjon er ikke bevis for at historisk periodisk frys er løst.
+- O3–O5 og komplett kursinnlevering spores separat og er ikke lukket av dette vedlikeholdet.
