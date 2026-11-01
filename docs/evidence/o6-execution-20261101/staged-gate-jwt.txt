@@ -1,0 +1,1 @@
+{"valid_signed_token": true, "refused_variants": 26, "real_loopback_http_cases": 25, "token_urls_cannot_choose_jwks": true, "uncached_jwks_failure_closed": true, "external_requests": false}

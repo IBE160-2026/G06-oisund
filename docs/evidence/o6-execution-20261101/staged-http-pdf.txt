@@ -1,0 +1,1 @@
+{"authenticated_pdf_statuses": {"valid": 200, "sqlite-not-pdf": 422}, "unauthenticated": 401, "no_csrf": 403, "preview_has_activities": true, "no_drafts_written": true}

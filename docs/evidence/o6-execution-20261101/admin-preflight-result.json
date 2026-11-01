@@ -1,0 +1,92 @@
+{
+  "release": "5e521cbc658594a47c4568d352a50e46309573c4",
+  "active": "93ee582b1a71a3f7552da1894b570366b89afee1",
+  "images": {
+    "api": {
+      "Id": "sha256:65b4f7dd8e336198175fdbc10e0a3ed2ba68118426ab54d36e751cded7173bdf",
+      "Architecture": "amd64",
+      "Os": "linux",
+      "RootFS": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:a5d6d345f6afa08d7c31272055746d60a838b290bfcc82c0a23e8e984d61a933",
+          "sha256:b9baa14e993c683240d519adebb39657df4d2b973dc2f3fee23cd51367806e2b",
+          "sha256:1217eb836a36d0c4be6a310113a777ecb9d7e9c24197a407665c8884cc5369a4",
+          "sha256:3929d22d8aa43d69f436bbc47ef472db875440b850dbc4e80dd272a3adf673d2",
+          "sha256:5dc031599891ddb2c4828f7f27840f9e8661bdc9fcc2beaed75b4bbabee47546",
+          "sha256:4e81f7e118180f1b9d312ab647dd7ea64a2bc74cc71799e115fb8c17196ca629",
+          "sha256:7dd79f8921c8957ebded602ed2a94baea1c3c0e57377e4f23a88d0e5bf291d3a",
+          "sha256:4f05de952b2673e6111cd85165dc7b9876b393f332e6ecc4f90efad0319dfce7"
+        ]
+      }
+    },
+    "access-gate": {
+      "Id": "sha256:f9c4a48c92b644c638359573dd44a8b5f55c79cb018e0c3c544748cb55cd3aa5",
+      "Architecture": "amd64",
+      "Os": "linux",
+      "RootFS": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:a5d6d345f6afa08d7c31272055746d60a838b290bfcc82c0a23e8e984d61a933",
+          "sha256:b9baa14e993c683240d519adebb39657df4d2b973dc2f3fee23cd51367806e2b",
+          "sha256:1217eb836a36d0c4be6a310113a777ecb9d7e9c24197a407665c8884cc5369a4",
+          "sha256:3929d22d8aa43d69f436bbc47ef472db875440b850dbc4e80dd272a3adf673d2",
+          "sha256:e83f1b3c8f0f472fbca82dc92e4f3f7feb0ff531d1e8aca5f912153761b8232f",
+          "sha256:6e97cfd09cffeddd2114c2d46cf10c657fa6528e712d6da7e5cdf1102778bf82",
+          "sha256:58d4c061a188c647c1fbc9f3baa8ff0ddd6edb935e9fbf56c53b40c3ea038638",
+          "sha256:40ed089fa2a0235b616a4a55d136d4d9ee589531416e31b26f29c7cf039b763e"
+        ]
+      }
+    },
+    "postgres": {
+      "Id": "sha256:c078a9092712e11deb68fa2b3ee7ce0f5c59cb0b76ffac8f9c7022580a5ef806",
+      "Architecture": "amd64",
+      "Os": "linux",
+      "RootFS": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:75c137aedfb2760f88629236cb7b797630aed0c3d91d626d1d1bb694878fc2ba",
+          "sha256:a46a3bafcb603dc97670597201246506f98e5a6372d6dd6bff95fbe82c2daaaf",
+          "sha256:957d26e53b1ed5152079038cf0de8c6d0bd52a816ad3e20cc4cdbd7cd55bf9d8",
+          "sha256:b9f6ca12141f3136dbd518d2a9ed11e7129b12951b8984be8a9477e064048831",
+          "sha256:fa51465d1f6a9413b09529e99f73b7154a15db7457fcc0fe0a11f875d919212f",
+          "sha256:b2711a83336c81a02ba25e3c640502b1a00e597add8ac44ef3231ca00cf46f48",
+          "sha256:9087553371de5b60cd2b27440cc4d6ee9da8bb1db1e9cf4cd684f8c91ffa5ef5",
+          "sha256:65a170ef4c1b8d8abe86b5f7b0ccc2f643f2d4f347545125b4d3632c409e136b",
+          "sha256:1da1a2dfe2071240acddfd3e74e462ce03490d59416a4cb3eef8e48a8b3ca37b",
+          "sha256:3936a53132a14ee4a433e0b6c5185bc6df36fb0b2b61196cf97890bdd7fa85de",
+          "sha256:10cd97b596e1bd7ee9411b86ad44a1f523ab476956ece1096f54242472dbc5e9",
+          "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef"
+        ]
+      }
+    },
+    "gateway": {
+      "Id": "sha256:b37608187e86507cefc1d79995fdfd631cae3e3f9490dc96d0fea89e996bcb75",
+      "Architecture": "amd64",
+      "Os": "linux",
+      "RootFS": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:75c137aedfb2760f88629236cb7b797630aed0c3d91d626d1d1bb694878fc2ba",
+          "sha256:5b91dba2fc11b3e6dab4d25e913db11e6e701065af717028e060dfb5ab8532e4",
+          "sha256:a8a09d37d441c540c613402fa23c75308b04f4801e80f6d193316949f3df4b42",
+          "sha256:d87f6628aa86314e48021285bd5dce15a2cf5166c1c80246d2e03dbb674abaf2",
+          "sha256:313dac429378b98567656151706777045067624f9a6678873dd6fdc7ecf35545",
+          "sha256:2ba21653acee34632d9eab26da39a5ff0cac12021817e6a5e9efac9507628575",
+          "sha256:3212502c73d1691bd2b186efdda493ca750fc99795b6b0b85741af01b4e79aa4",
+          "sha256:95f1f7a8378d962436898df11ed8175a608f99f4981845d148d4c00fdfc769e5",
+          "sha256:1e57464790813c974185ad0423aa887f842dc7f2cee747dc18653f30555b1eb5",
+          "sha256:ca20703da7d753334740f67bdbbd356fc12856120b46e4878c4d838645f6b36f"
+        ]
+      }
+    }
+  },
+  "export": "/tmp/ibe160-o6-window.uNfjQHcy/staged-images.tar",
+  "export_sha256": "2c1fccfed19f45e88e461f2d204b4ced6c2a3e40ad923a4f82cbda2e8927aa96",
+  "export_bytes": 213673984,
+  "host_backup": "/var/backups/bussassistent/o6-pre-5e521cbc/host-config.tar",
+  "host_backup_sha256": "86e3fd3246c6ab65d1d3ba0021f1831cd7cd34c7be4b45c939105aa2a075bc87",
+  "host_backup_members": 210,
+  "host_backup_mode": "0600; directory0700",
+  "production_activation": false
+}

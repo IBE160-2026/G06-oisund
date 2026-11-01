@@ -33,3 +33,26 @@ Jonas har nå akseptert midlertidig restfare for util-linux, ncurses, ACL/FTS5 o
 Fersk lesende kontroll ved gjenopptakelse bestod på samme93ee582. Komplett fire-image eksportfunksjon er prøvd lokalt og fjernet etter testen; hashkontrollert preflightskript er klargjort for eierkjøring. Det skal eksportere faktiske serverimages og lage root-beskyttet systemkonfigbackup uten aktivering. Resultat registreres først etter innhenting og kontroll.
 
 De22 gamle/nye systemd-/cloudflared-debene er nå overført til den private arbeidsmappen på serveren; alle overføringshasher er kontrollert. Ingen installasjon utført. Flytting til root-beskyttet konsolltilbakevei og endelig hashkontroll skal gjøres før OS-trinnet. [Overføringskontroll](o6-execution-20261101/recovery-package-transfer.json).
+
+## Utført containeraktivering — 1. november kl.22:30 Oslo
+
+**Aktiv serverrelease er nå5e521cbc658594a47c4568d352a50e46309573c4**, med ny Python3.13.18/pip-fjerning og PG17.11/gosu1.20. Tidligere93ee582 er dokumentert tilbakevei; migreringene er uendret. Historiske avsnitt ovenfor beskriver før-/stagingpunktene. Senere dokumentasjonscommits er ikke deployet.
+
+Administratoreksporten er fullført: alle fire eksporterte image-ID-er/rootfs-lag stemmer mellom server og lokal Docker etter hashkontrollert overføring. Beskyttet systembackup `/var/backups/bussassistent/o6-pre-5e521cbc/host-config.tar` har SHA25686e3fd3246c6ab65d1d3ba0021f1831cd7cd34c7be4b45c939105aa2a075bc87, kontrollert arkivliste og0600/root-eierskap i0700-mappe. Ingen privat arkivbyte er hentet til Git. [Kvittering](o6-execution-20261101/admin-preflight-result.json).
+
+| Faktisk kjørende rolle | Eksakt eksportert/testet image-ID |
+|---|---|
+| api | `sha256:65b4f7dd8e336198175fdbc10e0a3ed2ba68118426ab54d36e751cded7173bdf` |
+| access-gate | `sha256:f9c4a48c92b644c638359573dd44a8b5f55c79cb018e0c3c544748cb55cd3aa5` |
+| postgres | `sha256:c078a9092712e11deb68fa2b3ee7ce0f5c59cb0b76ffac8f9c7022580a5ef806` |
+| gateway | `sha256:b37608187e86507cefc1d79995fdfd631cae3e3f9490dc96d0fea89e996bcb75` |
+
+Full lokal filesystem-sammenligning av aldri startede egne containere: PG/gateway identiske i filinnhold og valgte rettigheter/linker. API-avvik1345=1276bytekodehoder+69mode755→644; gate120=118bytekodehoder+2mode755→644. Alle kompilerte payloads etter16bytehode er identiske (1436/280pyc kontrollert). Alle øvrige filbytes, native biblioteker, eiere og linker er like; kildefiler/migreringer er fortsatt lesbare av uid10001. Docker-genererte hosts/hostname/resolv.conf og virtuelle dev/proc/sys er avgrenset bort. Ingen runtime-/produksjonsvolum er eksportert. [Forskjeller](o6-execution-20261101/staged-filesystem-comparison.json), [bytekodebinding](o6-execution-20261101/pyc-payload-binding.json).
+
+Ny faktisk-serverimage-skanning: gateway0treff, API/gate46high utencritical, PG1critical/25high/30medium. Samme sentrale restfunn som de kvalifiserte kandidatene, med eksisterende konkrete Debian/Go-disponeringer og eierens uttrykkelige midlertidige risikoaksept. Ingen ignoreliste eller generell sikkerhetsgodkjenning. Førskanningens artefakter er nå bundet til faktisk aktive ID-er; den er ikke relabellet som en uavhengig runtime-forensisk skanning.
+
+Fordi filrettigheter/byggartefakter var forskjellige, ble relevante kontroller kjørt på de faktiske serverimagene før aktivering: isolert Uvicorn/PG15familier og75Origin/CSRF-negative kontroller, svar-tap/oppslag/replay; faktisk innlogget HTTP-PDF200, ikke-PDF422, utenøkt401, utenCSRF403; gate26negative JWT-varianter/25HTTP-kall. Alle bestod, med null ACL/SQLite-events i instrumenterte flyter. Tidligere komplette327/private/PDF- og øvrige kvalifiseringer gjenbrukes på det dokumenterte identiske kode-/native grunnlaget, ikke som ny fulltestkjøring.
+
+Fersk Windows-backup20261101T212947Z-93ee582b1a71a3f7552da1894b570366b89afee1.dump SHA2562135c3479094ecd668e0ed39f10cef9248f1abd4292e33cf93b9ae55287a1743 og ny separat isolert restore bestod umiddelbart før deploy. Eksisterende deployverktøy tok også backup med skriverne stoppet. Deploy exit0; alle25tabellfingeravtrykk før/etter er identiske, alle fire kjørende image-ID-er matcher de kontrollerte artefaktene, ingen tilbakeføring nødvendig. API/database healthy, origin uten assertion403, tunnelready200/fire forbindelser, timer aktiv, ingen failed units. Ny tunnelPID2749754 etter autorisert full appdeploy; boot/kernel/vertsversjoner er uendret. [Aktivering](o6-execution-20261101/activate-container-release.txt), [samlet verifikasjon](o6-execution-20261101/container-activation-verification.json), [helse](o6-execution-20261101/after-container-activation.txt).
+
+Personlig innlogging/visning/lagring/gjenåpning er etterspurt på denne nye releasen; resultat **avventes** før neste trinn. Systemd259.9/cloudflared2026.10.7 er ennå ikke installert. Énfase-hjelperen er klargjort/hashkontrollert på serveren med innebygde22pakkehasher, beskyttet pakkekopi/tilbakevei, backuphashkontroll, strengt simulert ti-pakkesett, unit-/helsekrav og kontrollert gammelpakkeretur ved feil. Pakkeløsningens negative stoppkontroller bestod; dette er ikke en påstand om allerede utført vertsvedlikehold. Sudo-betjening gjenstår når brukerflytporten består. Kernel-/libc6-boot og faktisk stabilitetsobservasjon forblir åpne. O6 er fortsatt åpen; O3–O5 separat.

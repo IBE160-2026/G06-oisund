@@ -1,8 +1,12 @@
 # Ubuntu-server for Bussassistent
 
-[Nytt O6-gjennomføringspunkt](evidence/o6-execution-20261101.md): kvalifiserte imageendringer er integrert i main5e521cb og staget, men ikke aktivert. Aktiv apprelease er fortsatt93ee582. Ny backup/isolert restore bestod; risikoavklaring og konsollberedskap er fortsatt porter. Ingen runtime-/OS-oppdatering eller O6-lukking er registrert.
+## Aktivt O6-containertrinn — 1. november kl.22:30 Oslo
 
-## Aktivt gatewayvedlikehold — 1. november 2026
+Aktiv serverrelease er **5e521cbc658594a47c4568d352a50e46309573c4** med de kontrollerte Python3.13.18/pip- og PG17.11/gosu1.20-rettelsene. [Eksakte image-ID-er, backup/restore, databasebevaring og etterkontroll](evidence/o6-execution-20261101.md). Alle fire aktive images er eksportert, innholdsbundet, skannet og prøvd isolert før aktivering. Alle tabellfingeravtrykk er bevart; API/DB/tunnel friske. Systemd/cloudflared/kernel er fortsatt gamle. Personlig brukerprøve er etterspurt; neste vertstrinn avventer denne. Midlertidig avgrenset restfare er uttrykkelig akseptert, konsollberedskap bekreftet. O6 og separat O3–O5 er fortsatt åpne. Ingen ny tag/release.
+
+Avsnittene nedenfor er historiske kontrollpunkter;93ee582 er førversjon/tilbakevei.
+
+## Tidligere gatewayvedlikehold — 1. november 2026
 
 Aktiv serverrelease er nå **93ee582b1a71a3f7552da1894b570366b89afee1** med kvalifisert
 gatewayimage **sha256:18f942c0107fa36b2fff8e11759d64ee08244fe115195e8e89bab03f4fc984c0**.

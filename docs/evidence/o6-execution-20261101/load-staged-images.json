@@ -1,0 +1,12 @@
+{
+  "command": [
+    "docker",
+    "load",
+    "-i",
+    "C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\operations-o3-o6\\tmp\\o6-execution-20261101\\staged-images.tar"
+  ],
+  "start_utc": "2026-11-01T21:26:27.149247+00:00",
+  "end_utc": "2026-11-01T21:26:41.575423+00:00",
+  "exit": 0,
+  "output_sha256": "8acfa004e7d895046a689f16956aa606371569edf0c1bc6b57a1158ed5a99722"
+}

@@ -1,0 +1,20 @@
+{
+  "command": [
+    "C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\operations-o3-o6\\tmp\\o6-gateway-20261101\\tools\\trivy.exe",
+    "image",
+    "--cache-dir",
+    "C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\operations-o3-o6\\tmp\\o6-gateway-20261101\\cache",
+    "--skip-db-update",
+    "--scanners",
+    "vuln",
+    "--format",
+    "json",
+    "--output",
+    "C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\operations-o3-o6\\tmp\\o6-execution-20261101\\actual-scan-access-gate.json",
+    "bussassistent-access-gate:5e521cbc658594a47c4568d352a50e46309573c4"
+  ],
+  "start_utc": "2026-11-01T21:27:22.761121+00:00",
+  "end_utc": "2026-11-01T21:27:25.890040+00:00",
+  "exit": 0,
+  "output_sha256": "bea0e91cb9be854a58210556b07b5197fccf367165a5a44c45dce3fda8af32bf"
+}
