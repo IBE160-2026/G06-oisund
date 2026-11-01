@@ -1,0 +1,62 @@
+{
+  "compose.tablet.yaml": {
+    "command": [
+      "docker",
+      "compose",
+      "--env-file",
+      "deploy/tablet/.env.tablet.example",
+      "--profile",
+      "tablet",
+      "-f",
+      "compose.tablet.yaml",
+      "config",
+      "--format",
+      "json"
+    ],
+    "synthetic_environment_only": true,
+    "gate": {
+      "read_only": true,
+      "pids_limit": 32,
+      "tmpfs": [
+        "/tmp:size=1m,mode=1777"
+      ],
+      "user": "10001:10001",
+      "cap_drop": [
+        "ALL"
+      ],
+      "security_opt": [
+        "no-new-privileges:true"
+      ]
+    }
+  },
+  "deploy/ubuntu/compose.yaml": {
+    "command": [
+      "docker",
+      "compose",
+      "--env-file",
+      "deploy/tablet/.env.tablet.example",
+      "--profile",
+      "tablet",
+      "-f",
+      "deploy/ubuntu/compose.yaml",
+      "config",
+      "--format",
+      "json"
+    ],
+    "synthetic_environment_only": true,
+    "gate": {
+      "read_only": true,
+      "pids_limit": 32,
+      "tmpfs": [
+        "/tmp:size=1m,mode=1777"
+      ],
+      "user": "10001:10001",
+      "cap_drop": [
+        "ALL"
+      ],
+      "security_opt": [
+        "no-new-privileges:true"
+      ]
+    }
+  }
+}

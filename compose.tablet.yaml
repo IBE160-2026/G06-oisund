@@ -84,6 +84,7 @@ services:
     cap_drop: [ALL]
     security_opt: [no-new-privileges:true]
     pids_limit: 32
+    tmpfs: ['/tmp:size=1m,mode=1777']
     networks: [app, keys]
     secrets: [tablet_access_policy]
 volumes:

@@ -1,0 +1,6 @@
+..............................                                           [100%]
+==================================== PASSES ====================================
+______________ test_repeated_permanent_dns_hangs_reap_and_recover ______________
+----------------------------- Captured stdout call -----------------------------
+{"dns_hang_seconds": [3.004, 3.004, 3.004], "concurrent_refusals": 72, "children_reaped": 4, "new_threads": 0, "fd_count_before": 12, "fd_count_after": 12, "recovery": true}
+30 passed in 30.84s

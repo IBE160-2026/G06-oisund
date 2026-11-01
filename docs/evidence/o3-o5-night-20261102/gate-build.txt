@@ -1,0 +1,54 @@
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 438B 0.0s done
+#1 DONE 0.1s
+
+#2 [internal] load metadata for docker.io/library/python:3.13.18-slim-trixie@sha256:76baad6037690d6e8c4397fbcaef17bca6f19eecef822b708fe8fa3417d30bb5
+#2 DONE 2.9s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 470B 0.0s done
+#3 DONE 0.0s
+
+#4 [1/5] FROM docker.io/library/python:3.13.18-slim-trixie@sha256:76baad6037690d6e8c4397fbcaef17bca6f19eecef822b708fe8fa3417d30bb5
+#4 resolve docker.io/library/python:3.13.18-slim-trixie@sha256:76baad6037690d6e8c4397fbcaef17bca6f19eecef822b708fe8fa3417d30bb5 0.0s done
+#4 DONE 0.1s
+
+#5 [internal] load build context
+#5 transferring context: 12.79kB done
+#5 DONE 0.1s
+
+#6 [2/5] WORKDIR /gate
+#6 CACHED
+
+#7 [3/5] COPY deploy/tablet/access_gate/requirements.lock ./
+#7 CACHED
+
+#8 [4/5] RUN python -m pip install --no-cache-dir -r requirements.lock     && python -m pip uninstall --yes pip
+#8 1.724 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError("HTTPSConnection(host='pypi.org', port=443): Failed to resolve 'pypi.org' ([Errno -3] Temporary failure in name resolution)")': /simple/pyjwt/
+#8 2.226 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError("HTTPSConnection(host='pypi.org', port=443): Failed to resolve 'pypi.org' ([Errno -3] Temporary failure in name resolution)")': /simple/pyjwt/
+#8 3.237 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError("HTTPSConnection(host='pypi.org', port=443): Failed to resolve 'pypi.org' ([Errno -3] Temporary failure in name resolution)")': /simple/pyjwt/
+#8 5.228 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError("HTTPSConnection(host='pypi.org', port=443): Failed to resolve 'pypi.org' ([Errno -3] Temporary failure in name resolution)")': /simple/pyjwt/
+#8 9.229 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError("HTTPSConnection(host='pypi.org', port=443): Failed to resolve 'pypi.org' ([Errno -3] Temporary failure in name resolution)")': /simple/pyjwt/
+#8 9.252 ERROR: Could not find a version that satisfies the requirement PyJWT==2.15.1 (from versions: none)
+#8 9.253 ERROR: No matching distribution found for PyJWT==2.15.1
+#8 ERROR: process "/bin/sh -c python -m pip install --no-cache-dir -r requirements.lock     && python -m pip uninstall --yes pip" did not complete successfully: exit code: 1
+------
+ > [4/5] RUN python -m pip install --no-cache-dir -r requirements.lock     && python -m pip uninstall --yes pip:
+1.724 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError("HTTPSConnection(host='pypi.org', port=443): Failed to resolve 'pypi.org' ([Errno -3] Temporary failure in name resolution)")': /simple/pyjwt/
+2.226 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError("HTTPSConnection(host='pypi.org', port=443): Failed to resolve 'pypi.org' ([Errno -3] Temporary failure in name resolution)")': /simple/pyjwt/
+3.237 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError("HTTPSConnection(host='pypi.org', port=443): Failed to resolve 'pypi.org' ([Errno -3] Temporary failure in name resolution)")': /simple/pyjwt/
+5.228 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError("HTTPSConnection(host='pypi.org', port=443): Failed to resolve 'pypi.org' ([Errno -3] Temporary failure in name resolution)")': /simple/pyjwt/
+9.229 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError("HTTPSConnection(host='pypi.org', port=443): Failed to resolve 'pypi.org' ([Errno -3] Temporary failure in name resolution)")': /simple/pyjwt/
+9.252 ERROR: Could not find a version that satisfies the requirement PyJWT==2.15.1 (from versions: none)
+9.253 ERROR: No matching distribution found for PyJWT==2.15.1
+------
+Dockerfile:4
+--------------------
+   3 |     COPY deploy/tablet/access_gate/requirements.lock ./
+   4 | >>> RUN python -m pip install --no-cache-dir -r requirements.lock \
+   5 | >>>     && python -m pip uninstall --yes pip
+   6 |     COPY deploy/tablet/access_gate/gate.py ./
+--------------------
+ERROR: failed to build: failed to solve: process "/bin/sh -c python -m pip install --no-cache-dir -r requirements.lock     && python -m pip uninstall --yes pip" did not complete successfully: exit code: 1

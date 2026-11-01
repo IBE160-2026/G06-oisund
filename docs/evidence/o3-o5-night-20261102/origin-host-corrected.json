@@ -1,0 +1,23 @@
+{
+  "command": [
+    "ssh",
+    "-i",
+    "C:\\Users\\Jonas\\.ssh\\ibe160_server_ed25519",
+    "-o",
+    "IdentitiesOnly=yes",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "StrictHostKeyChecking=yes",
+    "-o",
+    "ConnectTimeout=10",
+    "-o",
+    "HostKeyAlias=192.168.1.139",
+    "jonas@192.168.1.138",
+    "curl -sS -o /dev/null -w 'origin_without_assertion=%{http_code}\\n' --max-time 5 -H 'Host: app.bussassistent.com' http://127.0.0.1:18081/private"
+  ],
+  "start_utc": "2026-11-01T23:32:31.772172+00:00",
+  "end_utc": "2026-11-01T23:32:32.428586+00:00",
+  "exit": 0,
+  "sha256": "15519bacd48614ef9b2b75a73ea436e8d33fc123e6e68e23c8cb946f23917ccb"
+}

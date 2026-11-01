@@ -1,0 +1,6 @@
+.                                                                        [100%]
+==================================== PASSES ====================================
+________ test_real_libc_dns_blackhole_is_killed_and_resolution_recovers ________
+----------------------------- Captured stdout call -----------------------------
+{"libc_control_still_blocked_after_seconds": 3.5, "gate_refusal_seconds": 3.005, "dns_datagrams": 6, "children_remaining": 0, "dns_recovery_authenticated": true}
+1 passed in 7.54s

@@ -1,0 +1,11 @@
+
+==================================== ERRORS ====================================
+________________ ERROR collecting probe/test_night_controls.py _________________
+ImportError while importing test module '/probe/test_night_controls.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/probe/test_night_controls.py:9: in <module>
+    import night_controls as controls
+E   ModuleNotFoundError: No module named 'night_controls'
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+1 error in 0.69s

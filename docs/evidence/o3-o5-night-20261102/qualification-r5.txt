@@ -1,0 +1,12 @@
+....................................                                     [100%]
+==================================== PASSES ====================================
+______________ test_repeated_permanent_dns_hangs_reap_and_recover ______________
+----------------------------- Captured stdout call -----------------------------
+{"dns_hang_seconds": [3.004, 3.004, 3.004], "concurrent_refusals": 72, "children_reaped": 4, "new_threads": 0, "fd_count_before": 12, "fd_count_after": 12, "recovery": true}
+________ test_real_libc_dns_blackhole_is_killed_and_resolution_recovers ________
+----------------------------- Captured stdout call -----------------------------
+{"libc_control_still_blocked_after_seconds": 3.5, "gate_refusal_seconds": 3.004, "dns_datagrams": 6, "children_remaining": 0, "dns_recovery_authenticated": true}
+________________ ReceiptTests.test_partial_timeout_is_preserved ________________
+----------------------------- Captured stdout call -----------------------------
+timeout exit 124
+36 passed in 39.89s

@@ -1,0 +1,18 @@
+{
+  "command": [
+    "curl.exe",
+    "-sS",
+    "--max-time",
+    "15",
+    "-o",
+    "NUL",
+    "-w",
+    "status=%{http_code}\n",
+    "https://app.bussassistent.com/private-api/auth/session"
+  ],
+  "start_utc": "2026-11-01T23:40:06.829048+00:00",
+  "end_utc": "2026-11-01T23:40:07.018553+00:00",
+  "exit": 0,
+  "timed_out": false,
+  "sha256": "8ac8a164c895ffbf0995dc6744e24f329d92a4744128e6c685720a17cefc5899"
+}

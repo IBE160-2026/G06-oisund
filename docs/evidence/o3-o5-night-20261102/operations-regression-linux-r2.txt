@@ -1,0 +1,79 @@
+Gateway returned to previous release; no app/DB/tunnel restart requested
+{
+  "before_commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "active_commit": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "qualified_gateway_image": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+  "before": {
+    "private-api": {
+      "id": "private-api",
+      "image": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "pid": 10,
+      "started": "original",
+      "restarts": 0
+    },
+    "access-gate": {
+      "id": "access-gate",
+      "image": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "pid": 10,
+      "started": "original",
+      "restarts": 0
+    },
+    "private-db": {
+      "id": "private-db",
+      "image": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "pid": 10,
+      "started": "original",
+      "restarts": 0
+    },
+    "gateway": {
+      "id": "gateway",
+      "image": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "pid": 10,
+      "started": "original",
+      "restarts": 0
+    },
+    "tunnel": "unchanged",
+    "boot_id": "original"
+  },
+  "after": {
+    "private-api": {
+      "id": "private-api",
+      "image": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "pid": 10,
+      "started": "original",
+      "restarts": 0
+    },
+    "access-gate": {
+      "id": "access-gate",
+      "image": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "pid": 10,
+      "started": "original",
+      "restarts": 0
+    },
+    "private-db": {
+      "id": "private-db",
+      "image": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "pid": 10,
+      "started": "original",
+      "restarts": 0
+    },
+    "gateway": {
+      "id": "new",
+      "image": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "pid": 20,
+      "started": "original",
+      "restarts": 0
+    },
+    "tunnel": "unchanged",
+    "boot_id": "original"
+  },
+  "scope": "gateway only; app image aliases preserve running bytes"
+}
+Gateway returned to previous release; no app/DB/tunnel restart requested
+Staged and built aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+Verified and rebuilt existing release aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+....................
+----------------------------------------------------------------------
+Ran 20 tests in 0.092s
+
+OK
