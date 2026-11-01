@@ -1,0 +1,21 @@
+{
+  "command": [
+    "ssh",
+    "-i",
+    "C:\\Users\\Jonas\\.ssh\\ibe160_server_ed25519",
+    "-o",
+    "IdentitiesOnly=yes",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "StrictHostKeyChecking=yes",
+    "-o",
+    "ConnectTimeout=10",
+    "jonas@192.168.1.139",
+    "set -eu\ndate --iso-8601=seconds\nsystemctl show -p Version\ndpkg --audit\nls -ld /tmp/ibe160-o6-window.uNfjQHcy /tmp/ibe160-o6-window.uNfjQHcy/host-step.py\nfind /tmp/ibe160-o6-window.uNfjQHcy -maxdepth 1 -type f -name \"*-result.json\" -printf \"%f %s bytes\\n\"\nps -eo comm | sort | uniq -c | tail -30"
+  ],
+  "start_utc": "2026-11-01T21:56:11.205385+00:00",
+  "end_utc": "2026-11-01T21:56:11.981695+00:00",
+  "exit": 0,
+  "output_sha256": "6f4ddc01598dfcb0d91afb02f336a2aeb0c1103b13daedc6438b45def0f36aba"
+}

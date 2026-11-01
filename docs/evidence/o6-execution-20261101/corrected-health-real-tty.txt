@@ -1,0 +1,4 @@
+API healthy; origin access control rejects unauthenticated requests
+
+TTY_EOF_CHECK_PASSED
+Connection to 192.168.1.139 closed.
