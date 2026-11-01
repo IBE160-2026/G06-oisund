@@ -1,0 +1,23 @@
+[
+  {
+    "path": "/",
+    "status": 403,
+    "location_host": null,
+    "location_path": "",
+    "cache_control": "private, max-age=0, no-store, no-cache, must-revalidate, post-check=0, pre-check=0"
+  },
+  {
+    "path": "/private",
+    "status": 403,
+    "location_host": null,
+    "location_path": "",
+    "cache_control": "private, max-age=0, no-store, no-cache, must-revalidate, post-check=0, pre-check=0"
+  },
+  {
+    "path": "/private-api/health",
+    "status": 403,
+    "location_host": null,
+    "location_path": "",
+    "cache_control": "private, max-age=0, no-store, no-cache, must-revalidate, post-check=0, pre-check=0"
+  }
+]

@@ -1,0 +1,5 @@
+Exception: C:\Users\Jonas\.codex\.chatgpt-projects\g-p-6ab6b4c1c6888191a96d3242fab912b4\operations-o3-o6\scripts\server.ps1:50
+Line |
+  50 |          throw 'GatewayStage refuses the active release; preserved app …
+     |          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | GatewayStage refuses the active release; preserved application aliases must not be rebuilt.

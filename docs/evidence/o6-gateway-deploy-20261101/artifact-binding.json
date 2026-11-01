@@ -1,0 +1,6 @@
+{
+  "server_image": "sha256:18f942c0107fa36b2fff8e11759d64ee08244fe115195e8e89bab03f4fc984c0",
+  "local_image": "sha256:18f942c0107fa36b2fff8e11759d64ee08244fe115195e8e89bab03f4fc984c0",
+  "transfer_sha256": "4c738c724d1b2054e7c8b8f9c731ce25b0417dee4ad4ff1ed7dbcf12f263b84b",
+  "rootfs_layers_equal": true
+}

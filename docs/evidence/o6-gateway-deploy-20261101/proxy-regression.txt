@@ -1,0 +1,2 @@
+PASS: 5 protected page/asset/API cases x 24 missing/invalid-token variants; zero rejected calls reached upstream; valid identity, Origin/CSRF/cookies, paths/Host and no-store/CSP verified
+PASS: pages/assets/API fail closed when admission service is stopped

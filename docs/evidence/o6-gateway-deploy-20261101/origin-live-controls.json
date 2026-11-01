@@ -1,0 +1,76 @@
+{
+  "exit": 0,
+  "results": [
+    {
+      "path": "/",
+      "malformed_assertion": false,
+      "status": 403,
+      "cache_control": "no-store",
+      "content_security_policy": "default-src 'self'; connect-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'"
+    },
+    {
+      "path": "/",
+      "malformed_assertion": true,
+      "status": 403,
+      "cache_control": "no-store",
+      "content_security_policy": "default-src 'self'; connect-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'"
+    },
+    {
+      "path": "/private",
+      "malformed_assertion": false,
+      "status": 403,
+      "cache_control": "no-store",
+      "content_security_policy": "default-src 'self'; connect-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'"
+    },
+    {
+      "path": "/private",
+      "malformed_assertion": true,
+      "status": 403,
+      "cache_control": "no-store",
+      "content_security_policy": "default-src 'self'; connect-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'"
+    },
+    {
+      "path": "/assets/index-CfRMwAoz.js",
+      "malformed_assertion": false,
+      "status": 403,
+      "cache_control": "no-store",
+      "content_security_policy": "default-src 'self'; connect-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'"
+    },
+    {
+      "path": "/assets/index-CfRMwAoz.js",
+      "malformed_assertion": true,
+      "status": 403,
+      "cache_control": "no-store",
+      "content_security_policy": "default-src 'self'; connect-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'"
+    },
+    {
+      "path": "/assets/index-B_Dppown.css",
+      "malformed_assertion": false,
+      "status": 403,
+      "cache_control": "no-store",
+      "content_security_policy": "default-src 'self'; connect-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'"
+    },
+    {
+      "path": "/assets/index-B_Dppown.css",
+      "malformed_assertion": true,
+      "status": 403,
+      "cache_control": "no-store",
+      "content_security_policy": "default-src 'self'; connect-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'"
+    },
+    {
+      "path": "/private-api/health",
+      "malformed_assertion": false,
+      "status": 403,
+      "cache_control": "no-store",
+      "content_security_policy": "default-src 'self'; connect-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'"
+    },
+    {
+      "path": "/private-api/health",
+      "malformed_assertion": true,
+      "status": 403,
+      "cache_control": "no-store",
+      "content_security_policy": "default-src 'self'; connect-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'"
+    }
+  ],
+  "error": ""
+}

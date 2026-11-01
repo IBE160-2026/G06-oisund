@@ -1,0 +1,198 @@
+#1 [internal] load local bake definitions
+#1 reading from stdin 1.90kB done
+#1 DONE 0.0s
+
+#2 [private-api internal] load build definition from Dockerfile
+#2 transferring dockerfile: 270B done
+#2 DONE 0.0s
+
+#3 [private-api internal] load metadata for docker.io/library/python:3.13-slim@sha256:70729b46c69b4f1e97c4822c1af3df53a1476cf5ddc6c087c0c10bc3a5678c2f
+#3 ...
+
+#4 [gateway internal] load build definition from Dockerfile
+#4 transferring dockerfile: 849B done
+#4 DONE 0.0s
+
+#5 [access-gate internal] load build definition from Dockerfile
+#5 transferring dockerfile: 374B done
+#5 DONE 0.0s
+
+#3 [access-gate internal] load metadata for docker.io/library/python:3.13-slim@sha256:70729b46c69b4f1e97c4822c1af3df53a1476cf5ddc6c087c0c10bc3a5678c2f
+#3 ...
+
+#6 [gateway internal] load metadata for docker.io/library/node:24.19.0-alpine@sha256:d32cdf619f63fe0471182d08996dd516c6275bb5fd31ae06e55a570bd9e1ad43
+#6 DONE 1.0s
+
+#7 [gateway internal] load metadata for docker.io/library/nginx:1.30.6-alpine-slim@sha256:dede8895648b461178c3bc604f7eed4423efe5220b2c4d839f5eb3d34ac3f8f7
+#7 ...
+
+#3 [private-api internal] load metadata for docker.io/library/python:3.13-slim@sha256:70729b46c69b4f1e97c4822c1af3df53a1476cf5ddc6c087c0c10bc3a5678c2f
+#3 DONE 1.2s
+
+#8 [private-api internal] load .dockerignore
+#8 transferring context: 75B done
+#8 DONE 0.0s
+
+#9 [access-gate internal] load .dockerignore
+#9 transferring context: 2B done
+#9 DONE 0.0s
+
+#10 [private-api internal] load build context
+#10 transferring context: 584.59kB 0.0s done
+#10 DONE 0.1s
+
+#11 [access-gate 1/5] FROM docker.io/library/python:3.13-slim@sha256:70729b46c69b4f1e97c4822c1af3df53a1476cf5ddc6c087c0c10bc3a5678c2f
+#11 resolve docker.io/library/python:3.13-slim@sha256:70729b46c69b4f1e97c4822c1af3df53a1476cf5ddc6c087c0c10bc3a5678c2f 0.1s done
+#11 DONE 0.1s
+
+#12 [access-gate internal] load build context
+#12 transferring context: 12.93kB done
+#12 DONE 0.0s
+
+#13 [private-api 2/5] WORKDIR /app
+#13 CACHED
+
+#14 [private-api 3/5] COPY requirements.lock .
+#14 CACHED
+
+#15 [private-api 4/5] RUN pip install --no-cache-dir -r requirements.lock
+#15 CACHED
+
+#16 [private-api 5/5] COPY . .
+#16 CACHED
+
+#17 [access-gate 3/5] COPY deploy/tablet/access_gate/requirements.lock ./
+#17 CACHED
+
+#18 [access-gate 2/5] WORKDIR /gate
+#18 CACHED
+
+#19 [access-gate 4/5] RUN pip install --no-cache-dir -r requirements.lock
+#19 CACHED
+
+#20 [access-gate 5/5] COPY deploy/tablet/access_gate/gate.py ./
+#20 CACHED
+
+#21 [access-gate] exporting to image
+#21 exporting layers done
+#21 exporting manifest sha256:e9de798aecf5cde13f4e5af29ecbf93929635721c26365b0e90bc9bf2e8a8611 done
+#21 exporting config sha256:d1fa28bf43e3d6f5169d64018c0f8914b7803e5baf8ed5894be429f532191770 done
+#21 exporting attestation manifest sha256:083f6699a3ea7da08b7ee71967aa929faf1c27da5d09091df9979caa67ee36c4 0.0s done
+#21 exporting manifest list sha256:08d9c9df46b459ebe4e1c9e83d68d6139dee692d3258950b3d62e26aea70d56e
+#21 exporting manifest list sha256:08d9c9df46b459ebe4e1c9e83d68d6139dee692d3258950b3d62e26aea70d56e 0.1s done
+#21 naming to docker.io/library/bussassistent-access-gate:93ee582b1a71a3f7552da1894b570366b89afee1 done
+#21 unpacking to docker.io/library/bussassistent-access-gate:93ee582b1a71a3f7552da1894b570366b89afee1 0.0s done
+#21 DONE 0.2s
+
+#22 [private-api] exporting to image
+#22 exporting layers done
+#22 exporting manifest sha256:461c2ef222067025ea9a48ad08493e22785c1660c3fc4878820e6ecf14a0feca done
+#22 exporting config sha256:7831b0d3730179da507478e8d04092db9f028c4860918b38c8e476935668343c done
+#22 exporting attestation manifest sha256:f421dcb70e71ea7c0e894f4a55438be44ae9249c1b72da8c28142b512a6500f9 0.0s done
+#22 exporting manifest list sha256:45f908e53b3935aa5ff6b611af9ff496cd92e851a0b9797ad9d6518fe8ff4d7d 0.0s done
+#22 naming to docker.io/library/bussassistent-api:93ee582b1a71a3f7552da1894b570366b89afee1 0.0s done
+#22 unpacking to docker.io/library/bussassistent-api:93ee582b1a71a3f7552da1894b570366b89afee1 0.0s done
+#22 DONE 0.2s
+
+#7 [gateway internal] load metadata for docker.io/library/nginx:1.30.6-alpine-slim@sha256:dede8895648b461178c3bc604f7eed4423efe5220b2c4d839f5eb3d34ac3f8f7
+#7 DONE 1.8s
+
+#23 [access-gate] resolving provenance for metadata file
+#23 DONE 0.0s
+
+#24 [private-api] resolving provenance for metadata file
+#24 DONE 0.0s
+
+#9 [gateway internal] load .dockerignore
+#9 CACHED
+
+#25 [gateway internal] load build context
+#25 transferring context: 387.74kB 0.0s done
+#25 DONE 0.0s
+
+#26 [gateway build 1/8] FROM docker.io/library/node:24.19.0-alpine@sha256:d32cdf619f63fe0471182d08996dd516c6275bb5fd31ae06e55a570bd9e1ad43
+#26 resolve docker.io/library/node:24.19.0-alpine@sha256:d32cdf619f63fe0471182d08996dd516c6275bb5fd31ae06e55a570bd9e1ad43 0.0s done
+#26 DONE 0.0s
+
+#27 [gateway build 3/8] COPY frontend/package*.json ./
+#27 CACHED
+
+#28 [gateway build 2/8] WORKDIR /app
+#28 CACHED
+
+#29 [gateway build 7/8] COPY deploy/tablet/index.html ./index.html
+#29 CACHED
+
+#30 [gateway build 4/8] RUN npm ci
+#30 CACHED
+
+#31 [gateway build 5/8] COPY frontend/tsconfig.json ./tsconfig.json
+#31 CACHED
+
+#32 [gateway build 6/8] COPY frontend/src/ ./src/
+#32 CACHED
+
+#33 [gateway build 8/8] RUN npm run build
+#33 CACHED
+
+#34 [gateway stage-1 1/4] FROM docker.io/library/nginx:1.30.6-alpine-slim@sha256:dede8895648b461178c3bc604f7eed4423efe5220b2c4d839f5eb3d34ac3f8f7
+#34 resolve docker.io/library/nginx:1.30.6-alpine-slim@sha256:dede8895648b461178c3bc604f7eed4423efe5220b2c4d839f5eb3d34ac3f8f7 0.0s done
+#34 sha256:bb658a2541968d2b90a8ee165ad08b7f71055c7f7832bdff98e2de2d8b90cf14 0B / 1.40kB 0.2s
+#34 sha256:bb658a2541968d2b90a8ee165ad08b7f71055c7f7832bdff98e2de2d8b90cf14 1.40kB / 1.40kB 0.2s done
+#34 sha256:81b64ae234ef95f3cfc19b7f6c45a511eccbefa6148889ee33ed43c6c3f39939 0B / 1.21kB 0.3s
+#34 sha256:885725a63a7cf1d4d5aac105944b35ece2b69a8c2cc6f7040f04727b7b8a63d2 0B / 964B 0.2s
+#34 sha256:e125989d16f03d1e00b60afdd9abe46ed1437ed63b73926d036a5537f6be770a 0B / 403B 0.2s
+#34 sha256:81b64ae234ef95f3cfc19b7f6c45a511eccbefa6148889ee33ed43c6c3f39939 1.21kB / 1.21kB 0.3s done
+#34 sha256:f19a2d3b695178ba0e57d473535f74f5d934f45e191de8334e730f83d2c62704 0B / 627B 0.2s
+#34 sha256:885725a63a7cf1d4d5aac105944b35ece2b69a8c2cc6f7040f04727b7b8a63d2 964B / 964B 0.5s done
+#34 sha256:e125989d16f03d1e00b60afdd9abe46ed1437ed63b73926d036a5537f6be770a 403B / 403B 0.5s done
+#34 sha256:f19a2d3b695178ba0e57d473535f74f5d934f45e191de8334e730f83d2c62704 627B / 627B 0.3s done
+#34 sha256:9f0afb44f10e826253b342c0265e188067c2f0a30c782a52e329928a763adc60 0B / 1.88MB 0.2s
+#34 sha256:7b229517ed222597277036d94892173207d01a731ab3a88eeb1de2e963a2c788 0B / 3.85MB 0.2s
+#34 sha256:9f0afb44f10e826253b342c0265e188067c2f0a30c782a52e329928a763adc60 1.88MB / 1.88MB 0.5s done
+#34 sha256:7b229517ed222597277036d94892173207d01a731ab3a88eeb1de2e963a2c788 2.10MB / 3.85MB 0.6s
+#34 sha256:7b229517ed222597277036d94892173207d01a731ab3a88eeb1de2e963a2c788 3.85MB / 3.85MB 0.7s done
+#34 extracting sha256:7b229517ed222597277036d94892173207d01a731ab3a88eeb1de2e963a2c788 0.1s done
+#34 DONE 1.6s
+
+#34 [gateway stage-1 1/4] FROM docker.io/library/nginx:1.30.6-alpine-slim@sha256:dede8895648b461178c3bc604f7eed4423efe5220b2c4d839f5eb3d34ac3f8f7
+#34 extracting sha256:9f0afb44f10e826253b342c0265e188067c2f0a30c782a52e329928a763adc60 0.1s done
+#34 extracting sha256:f19a2d3b695178ba0e57d473535f74f5d934f45e191de8334e730f83d2c62704 0.0s done
+#34 DONE 1.7s
+
+#34 [gateway stage-1 1/4] FROM docker.io/library/nginx:1.30.6-alpine-slim@sha256:dede8895648b461178c3bc604f7eed4423efe5220b2c4d839f5eb3d34ac3f8f7
+#34 extracting sha256:885725a63a7cf1d4d5aac105944b35ece2b69a8c2cc6f7040f04727b7b8a63d2 0.0s done
+#34 extracting sha256:e125989d16f03d1e00b60afdd9abe46ed1437ed63b73926d036a5537f6be770a 0.0s done
+#34 extracting sha256:81b64ae234ef95f3cfc19b7f6c45a511eccbefa6148889ee33ed43c6c3f39939 0.0s done
+#34 extracting sha256:bb658a2541968d2b90a8ee165ad08b7f71055c7f7832bdff98e2de2d8b90cf14 0.0s done
+#34 DONE 1.8s
+
+#35 [gateway stage-1 2/4] COPY --from=build /app/dist /usr/share/nginx/html
+#35 DONE 0.1s
+
+#36 [gateway stage-1 3/4] COPY deploy/tablet/nginx.conf.template /etc/nginx/templates/default.conf.template
+#36 DONE 0.0s
+
+#37 [gateway stage-1 4/4] COPY deploy/tablet/nginx-main.conf /etc/nginx/nginx.conf
+#37 DONE 0.0s
+
+#38 [gateway] exporting to image
+#38 exporting layers 0.2s done
+#38 exporting manifest sha256:4fa115682719d668c99957e960a787c001471e21ab6bc1dff18f3cfbc8469b00 0.0s done
+#38 exporting config sha256:f8d617ce9c41fd444e841489146535606dceff9b5f3af18042ef24d7e0b44976 0.0s done
+#38 exporting attestation manifest sha256:f6542a96201754ae7c6219185057bf9240f430afcca1df327e08ef68aabaf2de 0.0s done
+#38 exporting manifest list sha256:18f942c0107fa36b2fff8e11759d64ee08244fe115195e8e89bab03f4fc984c0 0.0s done
+#38 naming to docker.io/library/bussassistent-gateway:93ee582b1a71a3f7552da1894b570366b89afee1 done
+#38 unpacking to docker.io/library/bussassistent-gateway:93ee582b1a71a3f7552da1894b570366b89afee1
+#38 unpacking to docker.io/library/bussassistent-gateway:93ee582b1a71a3f7552da1894b570366b89afee1 0.4s done
+#38 DONE 0.7s
+
+#39 [gateway] resolving provenance for metadata file
+#39 DONE 0.0s
+Staged and built 93ee582b1a71a3f7552da1894b570366b89afee1
+ Image bussassistent-access-gate:93ee582b1a71a3f7552da1894b570366b89afee1 Building 
+ Image bussassistent-api:93ee582b1a71a3f7552da1894b570366b89afee1 Building 
+ Image bussassistent-gateway:93ee582b1a71a3f7552da1894b570366b89afee1 Building 
+ Image bussassistent-gateway:93ee582b1a71a3f7552da1894b570366b89afee1 Built 
+ Image bussassistent-api:93ee582b1a71a3f7552da1894b570366b89afee1 Built 
+ Image bussassistent-access-gate:93ee582b1a71a3f7552da1894b570366b89afee1 Built 

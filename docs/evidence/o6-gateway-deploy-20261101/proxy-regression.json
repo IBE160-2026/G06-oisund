@@ -1,0 +1,16 @@
+{
+  "command": [
+    "pwsh",
+    "-NoProfile",
+    "-File",
+    "scripts/verify-tablet-proxy.ps1",
+    "-PythonImage",
+    "sha256:1b24ba51a72d4a8223e3beb2fdb1b27ebabb300235739668795e7dfc82cb13a7",
+    "-GatewayImage",
+    "sha256:18f942c0107fa36b2fff8e11759d64ee08244fe115195e8e89bab03f4fc984c0"
+  ],
+  "start_utc": "2026-11-01T17:08:15.477215+00:00",
+  "end_utc": "2026-11-01T17:08:21.873659+00:00",
+  "exit": 0,
+  "output_sha256": "417ced0cc00c08da5dd4c4d62a04363d7cd5c110bbb7f147287a4c1bf69c0521"
+}

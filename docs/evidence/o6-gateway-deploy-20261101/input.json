@@ -1,0 +1,16 @@
+{
+  "head": "134849a12c84d39cfc613fa5f866062319e603f8",
+  "tests_image": "sha256:1b24ba51a72d4a8223e3beb2fdb1b27ebabb300235739668795e7dfc82cb13a7",
+  "baseline_image": "sha256:c7539e0d3aaf2d420796894cadb1d519f30940a585c5ed098f0ce981b39c0520",
+  "files_sha256": {
+    "deploy/tablet/Dockerfile": "87e1760694fe3d94e5c996defddbac4b1067e9fca97c6ac4605ef74748a10c24",
+    "deploy/tablet/nginx-main.conf": "d0d20d2e20ff677249ca272d8a553399536c328cd5b4e066f0d4918003e9d042",
+    "deploy/tablet/nginx.conf.template": "57ea84c34787ba6ffde80c4556166341c219315f074458dbabf921b38539c019",
+    "scripts/tablet-proxy-probe.py": "2477814effef0745168b1a1599cceaed8398978eb8339aff12c879734a5d0bfd",
+    "scripts/verify-tablet-proxy.ps1": "d576f768039b11f2981bee954b6553bd014bac20b94dce3e1a270fae985854b0",
+    "frontend/package-lock.json": "f79805cfd50c3866147a0984c0bb8585e1c40c66ca28997cfaaf5f4479534e2f"
+  },
+  "historical_fixture_reference_only": true,
+  "server_release_commit": "93ee582b1a71a3f7552da1894b570366b89afee1",
+  "actual_server_image_binding": "artifact-binding.json"
+}

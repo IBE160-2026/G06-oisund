@@ -44,6 +44,12 @@ if ($Action -eq 'Backup') {
     exit
 }
 if ($Revision -notmatch '^[a-f0-9]{40}$') { throw 'Supply a full 40-character commit SHA with -Revision.' }
+if ($Action -eq 'GatewayStage') {
+    $activeIdentity = (@(Invoke-Server 'cat /opt/bussassistent/current/release-identity.json') -join "`n") | ConvertFrom-Json
+    if ($activeIdentity.commit -eq $Revision) {
+        throw 'GatewayStage refuses the active release; preserved application aliases must not be rebuilt.'
+    }
+}
 if ($Action -eq 'GatewaySwitch') {
     if ($GatewayImage -notmatch '^sha256:[a-f0-9]{64}$' -or $ExpectedCurrent -notmatch '^[a-f0-9]{40}$') {
         throw 'Supply exact -GatewayImage and -ExpectedCurrent.'

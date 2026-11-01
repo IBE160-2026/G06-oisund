@@ -1,5 +1,28 @@
 # Ubuntu-server for Bussassistent
 
+## Aktivt gatewayvedlikehold — 1. november 2026
+
+Aktiv serverrelease er nå **93ee582b1a71a3f7552da1894b570366b89afee1** med kvalifisert
+gatewayimage **sha256:18f942c0107fa36b2fff8e11759d64ee08244fe115195e8e89bab03f4fc984c0**.
+[Backup, faktisk avgrenset deploy, etterkontroller, eiertest og gjenstående O6-valg](evidence/o6-gateway-deploy-20261101.md).
+Bare gatewaycontaineren ble byttet. API/gate/PG-image-ID-er, containere/PID-er og
+tunnelprosessen er uendret fra V1; ingen verts-/passordoppdatering. Jonas bekreftet
+ny privat innlogging, visning, lagring og gjenåpning: «Alle fire bestod uten feil».
+O6 og separat O3–O5 er fortsatt åpne. V1-tag/release er uendret på d367a0e.
+
+For dette avgrensede løpet brukes `server.ps1 -Action GatewayStage -Revision <ny full SHA>`
+før artefaktkontroll, deretter `-Action GatewaySwitch -Revision <valgt full SHA>
+-GatewayImage <kvalifisert sha256:ID> -ExpectedCurrent <faktisk aktiv full SHA>`.
+Staging av allerede aktiv SHA avvises før bygg for å bevare appimage-aliasene.
+GatewaySwitch krever uendret øvrig kilde/Compose-oppsett, tar backup, bevarer aktive
+API/gate-byte under de nye aliasene og bruker bare `up --no-deps --no-build --pull never gateway`.
+Samme modus brukes til den dokumenterte førversjonen ved gatewaytilbakeføring.
+Den generelle Deploy-/Rollback-oppskriften nedenfor gjelder full apputrulling og
+kan stoppe flere tjenester; den ble ikke brukt til dette gatewaybyttet.
+
+Avsnittene nedenfor beholder tidligere V1-/serverkontrollpunkter. Dokumentasjons-
+og lokale Windows-verktøycommits etter93ee582 er ikke nye serverdeploys.
+
 Gjeldende 31.10.2026: serverintegrasjonen og driftsoverleveringen er fullført og inngår i V1 etter Jonas sin avklaring. Tidligere bonus/v1.0.1-avgrensning er erstattet; [samlet omfang, status og versjonstilknytning](submission/v1-scope-and-operations.md). Sensor bruker den selvstendige [lokale oppskriften](../README.md) og trenger ikke server, eierkonto, private data eller Cloudflare-tilgang.
 
 Integrasjonen tok inn main-grunnlaget 64f91a7 i 6f845fa før testing. Backend, frontend og tablet-gate ble bevart. Publisert main var 5dc6400 ved dokumentkontrollen; siste dokumenterte deploy er addd27b14fe4b26ef24d488d847d1c0d59a98946, med eierbekreftet innlogging/lagring 31.10.2026. Publisering av dokumentasjon deployer ikke ny release. Ferdig integrerte serverbrancher er ryddet etter kontroll, se driftsloggen. Opprinnelig plan godkjent 29.10.2026. Langtidsstabilitet observeres videre. Lesende sluttkontroll31.10 bekreftet fortsatt addd27b og healthy API/database/aktiv tunnel. En reboot-required-markør for libc6 er registrert som videre vedlikehold; ingen omstart/oppdatering ble utført. [Avgrensede resultater og åpne O3–O6 etter V1](evidence/v1-final-control-20261031.md).

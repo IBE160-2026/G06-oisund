@@ -1,0 +1,12 @@
+{
+  "image": "sha256:18f942c0107fa36b2fff8e11759d64ee08244fe115195e8e89bab03f4fc984c0",
+  "findings": 0,
+  "package_count": 21,
+  "trivy_db": {
+    "Version": 2,
+    "NextUpdate": "2026-11-02T13:02:34.671548283Z",
+    "UpdatedAt": "2026-11-01T13:02:34.671548954Z",
+    "DownloadedAt": "2026-11-01T14:59:29.8273092Z"
+  },
+  "all_controls_passed": true
+}

@@ -1,5 +1,13 @@
 # Known limits
 
+1 November operational follow-up: the [qualified gateway correction is integrated and deployed](../evidence/o6-gateway-deploy-20261101.md)
+at93ee582b1a71a3f7552da1894b570366b89afee1, with fresh verified backup/isolated restore
+and owner-confirmed login/display/save/reopen. API/gate/PG and host/tunnel processes
+are preserved. O6 remains open for the specifically documented Debian/kernel/runtime
+findings and maintenance decisions; no residual risk has been accepted on the owner's
+behalf. O3–O5 retain their separate scope. Historical V1 and deployed-version statements
+below remain tied to their original control points. v1.0.0 is unchanged.
+
 Local SCOPE-02 V1/D1–D3 and Epic12 are complete after [actual owner acceptance](../evidence/v1-acceptance-2026-10-29.md) and [main integration](../evidence/v1-main-integration-20261029.md). The [current delivery register](delivery-readiness.md) separates controlled project V1 from later course submission. [The Access report](../evidence/access-operations-20261029.md) qualifies O1 at the Cloudflare edge and bounded O2 active-member/email-policy refusal on operational eb0eee3. O3–O6 have bounded results in the [31 October final report](../evidence/v1-final-control-20261031.md); their residual proof limits remain open as explicitly owner-approved operational follow-up after V1. No broad category is marked passed. This later instruction does not erase the earlier local product acceptance.
 
 B6–B10 source repairs are qualified in C1. Existing observations of the older deployed version retain that version and do not certify C1. O1 does not independently observe the origin gate. O2 does not qualify positive allow-B or a general MFA matrix; an initial login without observed MFA and the later fresh Authenticator flow are both retained. Remaining external Origin/CSRF/cache/write-timing combinations, WAN/IPv6, pre-socket DNS cancellation and broader OS/supply-chain proof limits stay individually open in the operational register. Completed Ubuntu integration is included in V1; its [own tests/owner acceptance](v1-scope-and-operations.md) do not close O3–O6. Stability remains observation; the earlier freeze’s cause is unproven.

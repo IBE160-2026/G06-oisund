@@ -1,0 +1,21 @@
+{
+  "command": [
+    "ssh",
+    "-i",
+    "C:\\Users\\Jonas\\.ssh\\ibe160_server_ed25519",
+    "-o",
+    "IdentitiesOnly=yes",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "StrictHostKeyChecking=yes",
+    "-o",
+    "ConnectTimeout=10",
+    "jonas@192.168.1.139",
+    "sudo -n /usr/local/sbin/bussassistentctl gateway-inspect 93ee582b1a71a3f7552da1894b570366b89afee1"
+  ],
+  "start_utc": "2026-11-01T17:07:15.377363+00:00",
+  "end_utc": "2026-11-01T17:07:16.311849+00:00",
+  "exit": 0,
+  "output_sha256": "3db6572012e8899dcb342522bf98d889a065c50eaf423047c9bf2e191ed841da"
+}

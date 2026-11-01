@@ -1,0 +1,19 @@
+{
+  "command": [
+    "docker",
+    "run",
+    "--rm",
+    "--network",
+    "none",
+    "--read-only",
+    "--entrypoint",
+    "apk",
+    "sha256:18f942c0107fa36b2fff8e11759d64ee08244fe115195e8e89bab03f4fc984c0",
+    "info",
+    "-v"
+  ],
+  "start_utc": "2026-11-01T17:08:30.532600+00:00",
+  "end_utc": "2026-11-01T17:08:41.178239+00:00",
+  "exit": 0,
+  "output_sha256": "f44b8428fe36c47f5e7ac58f9301438253769ff167b6deb40839dae0b5161a64"
+}

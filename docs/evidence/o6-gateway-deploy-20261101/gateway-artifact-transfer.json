@@ -1,0 +1,19 @@
+{
+  "command": [
+    "scp",
+    "-i",
+    "C:\\Users\\Jonas\\.ssh\\ibe160_server_ed25519",
+    "-o",
+    "IdentitiesOnly=yes",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "StrictHostKeyChecking=yes",
+    "jonas@192.168.1.139:/home/jonas/ibe160-upload/gateway-93ee582b1a71a3f7552da1894b570366b89afee1.tar",
+    "C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\operations-o3-o6\\tmp\\o6-gateway-deploy-20261101\\gateway-server.tar"
+  ],
+  "start_utc": "2026-11-01T17:07:59.933822+00:00",
+  "end_utc": "2026-11-01T17:08:13.981608+00:00",
+  "exit": 0,
+  "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}
