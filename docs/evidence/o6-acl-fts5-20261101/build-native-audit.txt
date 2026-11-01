@@ -1,0 +1,38 @@
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile.native-analysis
+#1 transferring dockerfile: 460B 0.0s done
+#1 DONE 0.1s
+
+#2 [internal] load metadata for docker.io/library/python:3.13-slim@sha256:70729b46c69b4f1e97c4822c1af3df53a1476cf5ddc6c087c0c10bc3a5678c2f
+#2 DONE 1.4s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 470B 0.0s done
+#3 DONE 0.0s
+
+#4 [1/4] FROM docker.io/library/python:3.13-slim@sha256:70729b46c69b4f1e97c4822c1af3df53a1476cf5ddc6c087c0c10bc3a5678c2f
+#4 resolve docker.io/library/python:3.13-slim@sha256:70729b46c69b4f1e97c4822c1af3df53a1476cf5ddc6c087c0c10bc3a5678c2f 0.0s done
+#4 CACHED
+
+#5 [internal] load build context
+#5 transferring context: 2B done
+#5 DONE 0.0s
+
+#6 [2/4] RUN apt-get update && apt-get install -y --no-install-recommends gcc libc6-dev
+#6 CANCELED
+
+#7 [3/4] COPY scripts/operations-followup/native_audit.c /analysis/native_audit.c
+#7 ERROR: failed to calculate checksum of ref r9oo1vuawgbq2pbftsdmcwm6g::dsj6rokdutzpuiyf116wy5hpg: "/scripts/operations-followup/native_audit.c": not found
+------
+ > [3/4] COPY scripts/operations-followup/native_audit.c /analysis/native_audit.c:
+------
+Dockerfile.native-analysis:4
+--------------------
+   2 |     FROM python:3.13-slim@sha256:70729b46c69b4f1e97c4822c1af3df53a1476cf5ddc6c087c0c10bc3a5678c2f
+   3 |     RUN apt-get update && apt-get install -y --no-install-recommends gcc libc6-dev
+   4 | >>> COPY scripts/operations-followup/native_audit.c /analysis/native_audit.c
+   5 |     RUN gcc -shared -fPIC -O2 -Wall -Wextra -o /analysis/native_audit.so /analysis/native_audit.c
+   6 |     
+--------------------
+ERROR: failed to build: failed to solve: failed to compute cache key: failed to calculate checksum of ref r9oo1vuawgbq2pbftsdmcwm6g::dsj6rokdutzpuiyf116wy5hpg: "/scripts/operations-followup/native_audit.c": not found

@@ -1,0 +1,12 @@
+{"event": "audit_ready", "name": "", "pid": 1}
+{"event": "import", "name": "usercustomize", "pid": 1}
+{"event": "import", "name": "linecache", "pid": 1}
+{"event": "import", "name": "sqlite3", "pid": 1}
+{"event": "import", "name": "sqlite3.dbapi2", "pid": 1}
+{"event": "import", "name": "datetime", "pid": 1}
+{"event": "import", "name": "_datetime", "pid": 1}
+{"event": "import", "name": "_datetime", "pid": 1}
+{"event": "import", "name": "_sqlite3", "pid": 1}
+{"event": "import", "name": "_sqlite3", "pid": 1}
+{"event": "import", "name": "warnings", "pid": 1}
+{"event": "sqlite3.connect", "name": "", "pid": 1}

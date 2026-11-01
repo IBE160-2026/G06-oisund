@@ -1,0 +1,6 @@
+{
+  "real_docker_template_test_passed": true,
+  "labels_and_lifecycle_fields_correct": true,
+  "error": "json(index ...) needed parentheses; first production export failed before docker exec",
+  "production_mutated": false
+}

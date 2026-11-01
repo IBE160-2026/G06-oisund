@@ -12,7 +12,10 @@ services:
     tmpfs: [/tmp:mode=1777, /var/run/postgresql:mode=1777]
     security_opt: [no-new-privileges:true]
     pids_limit: 128
-    image: postgres:17-alpine@sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24
+    image: bussassistent-postgres:${RELEASE_ID:?Set RELEASE_ID}
+    build:
+      context: ../..
+      dockerfile: deploy/ubuntu/Dockerfile.postgres
     environment:
       POSTGRES_DB: private_work
       POSTGRES_USER: tablet_bootstrap

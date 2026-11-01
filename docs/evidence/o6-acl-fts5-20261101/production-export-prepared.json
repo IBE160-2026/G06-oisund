@@ -1,0 +1,6 @@
+{
+  "remote_directory": "/tmp/ibe160-acl-fts5.I6jtnMlg",
+  "method_sha256": "aa2b9a466c4d0fd9fa3c623010bde60ac8a9b3d49aec8a98c12ba2c1b29cec12",
+  "syntax_checked": true,
+  "scope": "two read-only public code inventories and mapped library paths; no app imports, requests, secrets, logs or data"
+}

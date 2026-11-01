@@ -8,6 +8,13 @@ findings and maintenance decisions; no residual risk has been accepted on the ow
 behalf. O3–O5 retain their separate scope. Historical V1 and deployed-version statements
 below remain tied to their original control points. v1.0.0 is unchanged.
 
+The subsequent [production-bound ACL/SQLite FTS5 analysis](../evidence/o6-acl-fts5-20261101.md)
+excludes the affected call paths within the mapped current application/gate flows,
+using source/native dependency analysis and instrumented isolated controls.
+The installed libraries remain affected; administrative use, independent code
+execution and future changes remain outside that finding. No residual-risk
+acceptance, production update or O6 closure is implied.
+
 Local SCOPE-02 V1/D1–D3 and Epic12 are complete after [actual owner acceptance](../evidence/v1-acceptance-2026-10-29.md) and [main integration](../evidence/v1-main-integration-20261029.md). The [current delivery register](delivery-readiness.md) separates controlled project V1 from later course submission. [The Access report](../evidence/access-operations-20261029.md) qualifies O1 at the Cloudflare edge and bounded O2 active-member/email-policy refusal on operational eb0eee3. O3–O6 have bounded results in the [31 October final report](../evidence/v1-final-control-20261031.md); their residual proof limits remain open as explicitly owner-approved operational follow-up after V1. No broad category is marked passed. This later instruction does not erase the earlier local product acceptance.
 
 B6–B10 source repairs are qualified in C1. Existing observations of the older deployed version retain that version and do not certify C1. O1 does not independently observe the origin gate. O2 does not qualify positive allow-B or a general MFA matrix; an initial login without observed MFA and the later fresh Authenticator flow are both retained. Remaining external Origin/CSRF/cache/write-timing combinations, WAN/IPv6, pre-socket DNS cancellation and broader OS/supply-chain proof limits stay individually open in the operational register. Completed Ubuntu integration is included in V1; its [own tests/owner acceptance](v1-scope-and-operations.md) do not close O3–O6. Stability remains observation; the earlier freeze’s cause is unproven.

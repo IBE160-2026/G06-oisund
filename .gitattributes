@@ -14,3 +14,8 @@
 /docs/evidence/v1-final-control-20261031/** -text -whitespace
 /docs/evidence/v1-release-deploy-20261031/** -text -whitespace
 /docs/evidence/o6-gateway-deploy-20261101/** -text -whitespace
+/docs/evidence/o6-acl-fts5-20261101/** -text -whitespace
+# Keep executed CRLF method bytes while still checking real trailing whitespace.
+/scripts/operations-followup/native* -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+/scripts/operations-followup/native_site/** -text
+/scripts/operations-followup/Dockerfile.native-analysis -text
