@@ -56,6 +56,7 @@
   "container-activation-verification.json": "24d25f61fee1f103d3bc8bf0b893097f86af8fc1cc27097184a4ee3f8eadd5b5",
   "container-owner-test.json": "2a42e4cabd8a3994f05908c7d0bccf698c63f9a2d9e23a716f3981cab126c67b",
   "filesystem-comparison-method.py": "4da862b6a11ca28d1eea15cef150a1000279a1e39b0271610e7079440677f009",
+  "host-method-stdin-correction.json": "aefc9bc2006a1db188e3325e2ec59daa4135eb130ff976752183efdedc110490",
   "host-package-policy-simulation.json": "e29744b84db4a0b846978c5b590282d84afb28487585a2734e20e84e68693a06",
   "host-package-policy-simulation.txt": "06014aa0252379fab226bd516a3545726bc29be3b7a356c9e26fd487ede276c4",
   "host-phase-baseline-units.json": "7cb5fbb54a0e85c8c54ffa911e5724cd8e26d11b7d90b9536df0461ac1288ef7",
@@ -115,5 +116,13 @@
   "staged-http-pdf-native.jsonl": "b453a9e303d07f3fb60b2c8e3ed09e25e432d3b2b45739979d5325e3725fb873",
   "staged-http-pdf-python.jsonl": "74493a60533c2f7aa705dcc8b16c800bdfb7de0cc2c4f61dc1a5837ff8b75ada",
   "staged-http-pdf.json": "d2b9e2f6015f3e084a6d909a9cbd5aab67c6e4bb0575783f86a2939fb1f94df4",
-  "staged-http-pdf.txt": "93b6fd8a9c9d984fc9a93fd354e40e8b970cf674d124d34f2c168cfa5a2596a8"
+  "staged-http-pdf.txt": "93b6fd8a9c9d984fc9a93fd354e40e8b970cf674d124d34f2c168cfa5a2596a8",
+  "systemd-blocked-command-readonly.json": "8b00b67061f318d4efb398a74b4da2f76248e005dc4aa4e5583ff767a73155a4",
+  "systemd-blocked-command-readonly.txt": "f69f54a2e06e2e9ec583150692e47808a4bc3a43779cfa75b8524e40ea9bda93",
+  "systemd-missing-receipt-diagnostic.json": "2f7afeae0d5bbba2de45d8d5368625764375c491dcb172cabe6e301757deaafc",
+  "systemd-missing-receipt-diagnostic.txt": "3d855bb82d8f31defbdfebb7f3fbcde87401cb1306ee10b54ce8baad62276f56",
+  "systemd-phase-result.json": "3019dbb0be5004aa1436eee1e20d1e821747d36fcbb4e15e22216feb46396690",
+  "systemd-phase-result.txt": "b950176414611adb363c571ab95ab19fe001b43001e456b7e7af7822fba1f073",
+  "systemd-process-tree-readonly.json": "ea2f1f4f5dd06a7fe72b8b9a688f28e56ef790e8ca2c4968343ba774446a3e5b",
+  "systemd-process-tree-readonly.txt": "a7e1646d8d27e83132919fdc583a81c836cc5ff71807288d038d2211a7e6ec01"
 }

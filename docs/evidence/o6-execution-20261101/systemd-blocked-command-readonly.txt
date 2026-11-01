@@ -1,0 +1,4 @@
+    PID    PPID 
+2763350 2763349 python3 /tmp/ibe160-o6-window.uNfjQHcy/host-step.py systemd
+2763354 2763353 /usr/bin/python3 /usr/local/sbin/bussassistentctl check
+2763371 2763355 /usr/libexec/docker/cli-plugins/docker-compose compose --project-name bussassistent --env-file /etc/bussassistent/server.env -f /opt/bussassistent/releases/5e521cbc658594a47c4568d352a50e46309573c4/deploy/ubuntu/compose.yaml exec -T private-api python -c import urllib.request; urllib.request.urlopen('http://localhost:8000/health', timeout=5)

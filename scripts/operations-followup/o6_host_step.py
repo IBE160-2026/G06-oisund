@@ -10,7 +10,9 @@ SYSTEMD=['systemd','libnss-systemd','libpam-systemd','libsystemd-shared','libsys
 ENV={**os.environ,'DEBIAN_FRONTEND':'noninteractive','NEEDRESTART_MODE':'l'}
 
 def run(args):
- p=subprocess.run(args,capture_output=True,text=True,env=ENV)
+ # Administrative subcommands never need terminal input. Inheriting the local
+ # terminal can leave Compose's default interactive stdin forwarder waiting.
+ p=subprocess.run(args,stdin=subprocess.DEVNULL,capture_output=True,text=True,env=ENV)
  if p.returncode:raise RuntimeError('Command failed: '+args[0]+' rc='+str(p.returncode))
  return p.stdout
 
@@ -30,7 +32,7 @@ def ready_tunnel():
  raise ValueError('Tunnel not ready')
 
 def health():
- run(['sudo','-n','/usr/local/sbin/bussassistentctl','check'])
+ run(['/usr/local/sbin/bussassistentctl','check'])
  for unit in ['docker','ssh','systemd-resolved','cloudflared','bussassistent-backup.timer']:run(['systemctl','is-active','--quiet',unit])
  ready_tunnel()
 

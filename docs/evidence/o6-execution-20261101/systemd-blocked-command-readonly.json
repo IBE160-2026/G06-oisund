@@ -1,0 +1,21 @@
+{
+  "command": [
+    "ssh",
+    "-i",
+    "C:\\Users\\Jonas\\.ssh\\ibe160_server_ed25519",
+    "-o",
+    "IdentitiesOnly=yes",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "StrictHostKeyChecking=yes",
+    "-o",
+    "ConnectTimeout=10",
+    "jonas@192.168.1.139",
+    "ps -p 2763350,2763354,2763371 -o pid,ppid,args="
+  ],
+  "start_utc": "2026-11-01T21:53:56.355403+00:00",
+  "end_utc": "2026-11-01T21:53:57.058892+00:00",
+  "exit": 0,
+  "output_sha256": "f69f54a2e06e2e9ec583150692e47808a4bc3a43779cfa75b8524e40ea9bda93"
+}
