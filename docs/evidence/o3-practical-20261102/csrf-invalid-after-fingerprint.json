@@ -1,0 +1,28 @@
+{
+  "command": [
+    "ssh",
+    "-i",
+    "C:\\Users\\Jonas\\.ssh\\ibe160_server_ed25519",
+    "-o",
+    "IdentitiesOnly=yes",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "StrictHostKeyChecking=yes",
+    "-o",
+    "ConnectTimeout=10",
+    "-o",
+    "HostKeyAlias=192.168.1.139",
+    "-o",
+    "ServerAliveInterval=15",
+    "-o",
+    "ServerAliveCountMax=2",
+    "jonas@192.168.1.138",
+    "set -eu\ntest \"$(readlink -f /opt/bussassistent/current)\" = /opt/bussassistent/releases/7921eb54e4816aaab9368c3efd851bcf692f3823\nsudo -n /usr/local/sbin/bussassistentctl database-fingerprint 7921eb54e4816aaab9368c3efd851bcf692f3823"
+  ],
+  "start_utc": "2026-11-02T21:01:29.967939+00:00",
+  "end_utc": "2026-11-02T21:01:30.904080+00:00",
+  "exit": 0,
+  "timed_out": false,
+  "sha256": "a185b2c6a25bb56720263a8f6e12110801d3c55eae48131d42be1bee87d6c428"
+}
