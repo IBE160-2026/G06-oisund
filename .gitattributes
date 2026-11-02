@@ -40,3 +40,4 @@
 /docs/evidence/o6-readonly-20261102/** -text -whitespace
 /docs/evidence/o5-deploy-20261102/** -text -whitespace
 /scripts/operations-followup/o5_deploy.py text eol=lf
+/docs/evidence/o3-practical-20261102/** -text -whitespace
