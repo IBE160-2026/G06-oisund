@@ -256,3 +256,18 @@ Arbeidscommit **19a949720544d4133b380e813a1433001be2d24f** registrerer ordrett e
 
 ### Åpne punkter
 - O3, O4 og O6 forblir åpne innen de eksisterende dokumenterte grensene. Ingen uavklart personlig O5-prøve gjenstår.
+
+## 2026-11-02 kl. 21:17 — Jonas Øisund
+
+### Oppgave
+Fortsette O3 med trinnvis veiledning gjennom manglende praktiske eksterne tester.
+
+### Plan
+Gjenbruke gyldig isolert evidens og bestått O5-innlogging/lagring. Etablere enhets-/nettleser-/nettverkskontekst og dedikert syntetisk testutkast før praktiske cookie/cache/Origin-CSRF-/forbindelsesbrudd-/recoveryprøver. Fysisk klientnett og eventuelt kontrollert tapt-svar-vindu må dokumenteres som forskjellige observasjoner, ikke utledes av tilfeldig frakobling.
+
+### Resultat
+Gjeldende O3-bevisgrenser, tidligere proxy/API-/15familie-/kvitteringskontroller og siste O5-eierresultat er lest. Fersk lesende SSH-kontroll bekrefter fortsatt aktiv **7921eb54e4816aaab9368c3efd851bcf692f3823**, friskAPI og avslag uten assertion. Ingen kilde-/driftsendring, skriveprøve, produksjonsfeilinjeksjon eller ny testpass er registrert. Første praktiske veiledning etablerer PC-/DevTools-kontekst og bruker O5s syntetiske testutkast uten ny lagring; enhet/nettleser/nettverk og faktisk klarstatus avventes. Ingen gjentakelse av full gyldig isolert kvalifikasjon. Eksisterende issues-punkt for O3 dekker videre arbeid og er uendret.
+
+### Åpne punkter
+- O3: faktisk autentisert ekstern cookie/cache/Origin-CSRF-/feil-/skrive-/recoverymatrise og fysisk klientnettprøve gjenstår. Ingen test markeres bestått før faktisk observert resultat og versjons-/enhetsbinding foreligger.
+- O4 og O6 forblir uendret åpne; O5 er fortsatt fullført innen dokumentert omfang.
