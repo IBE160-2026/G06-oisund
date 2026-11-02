@@ -1,0 +1,16 @@
+{
+  "owner_statement": "bestått",
+  "received_utc": "2026-11-02T20:12:11.7336607+00:00",
+  "production_commit": "7921eb54e4816aaab9368c3efd851bcf692f3823",
+  "active_release_rechecked": true,
+  "scope": "Owner confirms the five requested O5 deployment steps: fresh login, synthetic test draft, save, refresh/reopen without duplicate and access after at least five minutes",
+  "device": null,
+  "browser": null,
+  "individual_action_times": null,
+  "metadata_limit": "Device/browser and individual timestamps were not provided; receipt time is not execution time",
+  "o5_bounded_followup": "complete",
+  "o3_open": true,
+  "o4_open": true,
+  "o6_open": true,
+  "no_new_risk_acceptance": true
+}

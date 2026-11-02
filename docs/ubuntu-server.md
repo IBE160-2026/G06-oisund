@@ -2,70 +2,70 @@
 
 ## Gjeldende etter O5-deploy 2. november 2026
 
-Aktiv release er **7921eb54e4816aaab9368c3efd851bcf692f3823**, med terminerbar JWKS-/DNS-prosess og1MiBgate-tmpfs. Mainintegrasjon/deploy er utført etter uttrykkelig bestilling; backup/isolert restore før/etter,25uendrede tabellfingeravtrykk og app/DB/tunnelkontroller bestod. `previous` er5e521cb med identiske migreringer; [deploy-/tilbakeveisrapport og personlige teststeg](evidence/o5-deploy-20261102.md). Personlig prøve avventes. O3/O4/O6 er åpne; passordarbeid ogv1.0.0bevart. Full apputrulling restartet containere/tunnel, ingen vertsomstart eller pakkeoppdatering.
+Aktiv release er **7921eb54e4816aaab9368c3efd851bcf692f3823**, med terminerbar JWKS-/DNS-prosess og1MiBgate-tmpfs. Mainintegrasjon/deploy er utfÃ¸rt etter uttrykkelig bestilling; backup/isolert restore fÃ¸r/etter,25uendrede tabellfingeravtrykk og app/DB/tunnelkontroller bestod. `previous` er5e521cb med identiske migreringer; [deploy-/tilbakeveisrapport og personlige teststeg](evidence/o5-deploy-20261102.md). Personlig prÃ¸ve avventes. O3/O4/O6 er Ã¥pne; passordarbeid ogv1.0.0bevart. Full apputrulling restartet containere/tunnel, ingen vertsomstart eller pakkeoppdatering.
 
-## Historisk etter O6-vedlikehold 1.–2. november 2026
+## Historisk etter O6-vedlikehold 1.â€“2. november 2026
 
-Aktiv apprelease er **5e521cbc658594a47c4568d352a50e46309573c4** med kontrollerte Python3.13.18/pip- og PG17.11/gosu1.20-rettelser. Systemd/PID1 er259.9-0ubuntu0.1 og cloudflared2026.10.7. Kontrollert omstart aktiverte libc6 og fjernet reboot-markøren; kernel er fortsatt7.0.0-42. Ny boot-ID2812a231-758d-4b5e-8241-d748b52d0991. [Eksakte images, faktisk vedlikehold, backup/retur, skanning og siste eiertest](evidence/o6-execution-20261101.md).
+Aktiv apprelease er **5e521cbc658594a47c4568d352a50e46309573c4** med kontrollerte Python3.13.18/pip- og PG17.11/gosu1.20-rettelser. Systemd/PID1 er259.9-0ubuntu0.1 og cloudflared2026.10.7. Kontrollert omstart aktiverte libc6 og fjernet reboot-markÃ¸ren; kernel er fortsatt7.0.0-42. Ny boot-ID2812a231-758d-4b5e-8241-d748b52d0991. [Eksakte images, faktisk vedlikehold, backup/retur, skanning og siste eiertest](evidence/o6-execution-20261101.md).
 
-Siste tekniske kontroll og personlig innlogging/visning/lagring/gjenåpning bestod. Backup/isolert restore er verifisert også etter sluttprøven; timer aktiv. ForwardToWall=no kompenserer det konkrete lave journald-funnet. [Lesende etterkontroll2.11](evidence/o6-readonly-20261102.md) bekreftet faktisk nattbackup/isolert restore og20t53m oppetid med frisk app/DB/tunnel. Vedlikeholdets sluttkontroller er ferdige; kernelrestgruppene og den brede bevisgrensen holder samlet O6 åpen. Videre stabilitet er løpende oppfølging uten vedtatt minste ventetid; midlertidig avgrenset risikoaksept er uttrykkelig gitt. O3–O5 spores separat. V1-tag/release er uendret; ingen ny publisering.
+Siste tekniske kontroll og personlig innlogging/visning/lagring/gjenÃ¥pning bestod. Backup/isolert restore er verifisert ogsÃ¥ etter sluttprÃ¸ven; timer aktiv. ForwardToWall=no kompenserer det konkrete lave journald-funnet. [Lesende etterkontroll2.11](evidence/o6-readonly-20261102.md) bekreftet faktisk nattbackup/isolert restore og20t53m oppetid med frisk app/DB/tunnel. Vedlikeholdets sluttkontroller er ferdige; kernelrestgruppene og den brede bevisgrensen holder samlet O6 Ã¥pen. Videre stabilitet er lÃ¸pende oppfÃ¸lging uten vedtatt minste ventetid; midlertidig avgrenset risikoaksept er uttrykkelig gitt. O3â€“O5 spores separat. V1-tag/release er uendret; ingen ny publisering.
 
-**SSH er nå jonas@192.168.1.138 over Wi-Fi**, etter DHCP-adresseendring ved omstart. `scripts/server.ps1` har oppdatert standard og beholder streng kontroll mot den gamle verifiserte serveridentiteten med `-HostKeyAlias 192.168.1.139`. Ved senere adresseendring kan `-Server jonas@<aktuell-IP>` brukes med samme kjente nøkkelalias. Eksisterende known_hosts/tilgangsregler/ruteroppsett er ikke endret. mDNS ble ikke tilgjengeliggjort. Sjekk aktuell adresse lokalt med `ip -4 -br addr show wlp3s0` ved behov.
+**SSH er nÃ¥ jonas@192.168.1.138 over Wi-Fi**, etter DHCP-adresseendring ved omstart. `scripts/server.ps1` har oppdatert standard og beholder streng kontroll mot den gamle verifiserte serveridentiteten med `-HostKeyAlias 192.168.1.139`. Ved senere adresseendring kan `-Server jonas@<aktuell-IP>` brukes med samme kjente nÃ¸kkelalias. Eksisterende known_hosts/tilgangsregler/ruteroppsett er ikke endret. mDNS ble ikke tilgjengeliggjort. Sjekk aktuell adresse lokalt med `ip -4 -br addr show wlp3s0` ved behov.
 
-Ved nødvendig senere retur: verifiser bevarte pakker/konfig og bruk den [vedvarende funksjonsbaserte returoppskriften](evidence/o6-execution-20261101/persistent-recovery-procedure.json). Fra vanlig konsoll med administratorrettighet brukes `sudo sh /home/jonas/ibe160-upload/o6-return-systemd.sh` eller tilsvarende `o6-return-cloudflared.sh`, kun for det konkrete feilende trinnet. Fra faktisk root-gjenopprettingskonsoll utelates sudo; rotfilsystemet må være skrivbart før pakkereparasjon. Instruksjonene bruker root-backupens hashkontrollerte cachefunksjon, og erstatter eldre raw-APT-returtekst med private filbaner. Kontroller helse/versjoner etter retur. Bevar private backuper/returpakker mens videre stabilitet observeres; ikke skriv gamle dpkg-statusfiler eller dumper blindt over levende tilstand.
+Ved nÃ¸dvendig senere retur: verifiser bevarte pakker/konfig og bruk den [vedvarende funksjonsbaserte returoppskriften](evidence/o6-execution-20261101/persistent-recovery-procedure.json). Fra vanlig konsoll med administratorrettighet brukes `sudo sh /home/jonas/ibe160-upload/o6-return-systemd.sh` eller tilsvarende `o6-return-cloudflared.sh`, kun for det konkrete feilende trinnet. Fra faktisk root-gjenopprettingskonsoll utelates sudo; rotfilsystemet mÃ¥ vÃ¦re skrivbart fÃ¸r pakkereparasjon. Instruksjonene bruker root-backupens hashkontrollerte cachefunksjon, og erstatter eldre raw-APT-returtekst med private filbaner. Kontroller helse/versjoner etter retur. Bevar private backuper/returpakker mens videre stabilitet observeres; ikke skriv gamle dpkg-statusfiler eller dumper blindt over levende tilstand.
 
-Avsnittene nedenfor er historiske kontrollpunkter;93ee582 er førversjon/tilbakevei.
+Avsnittene nedenfor er historiske kontrollpunkter;93ee582 er fÃ¸rversjon/tilbakevei.
 
-## Tidligere gatewayvedlikehold — 1. november 2026
+## Tidligere gatewayvedlikehold â€” 1. november 2026
 
-Aktiv serverrelease er nå **93ee582b1a71a3f7552da1894b570366b89afee1** med kvalifisert
+Aktiv serverrelease er nÃ¥ **93ee582b1a71a3f7552da1894b570366b89afee1** med kvalifisert
 gatewayimage **sha256:18f942c0107fa36b2fff8e11759d64ee08244fe115195e8e89bab03f4fc984c0**.
-[Backup, faktisk avgrenset deploy, etterkontroller, eiertest og gjenstående O6-valg](evidence/o6-gateway-deploy-20261101.md).
+[Backup, faktisk avgrenset deploy, etterkontroller, eiertest og gjenstÃ¥ende O6-valg](evidence/o6-gateway-deploy-20261101.md).
 Bare gatewaycontaineren ble byttet. API/gate/PG-image-ID-er, containere/PID-er og
 tunnelprosessen er uendret fra V1; ingen verts-/passordoppdatering. Jonas bekreftet
-ny privat innlogging, visning, lagring og gjenåpning: «Alle fire bestod uten feil».
-O6 og separat O3–O5 er fortsatt åpne. V1-tag/release er uendret på d367a0e.
+ny privat innlogging, visning, lagring og gjenÃ¥pning: Â«Alle fire bestod uten feilÂ».
+O6 og separat O3â€“O5 er fortsatt Ã¥pne. V1-tag/release er uendret pÃ¥ d367a0e.
 
 Senere [lesende produksjonsbinding og isolert ACL-/FTS5-analyse](evidence/o6-acl-fts5-20261101.md)
-viser at de berørte funksjonene ikke nås gjennom dagens kartlagte app-/gateflyter.
-Bibliotekene er fortsatt sårbare; administrativ bruk/annen kodekjøring og senere
-endringer er utenfor beviset. Ingen restfareaksept eller produksjonsendring følger
+viser at de berÃ¸rte funksjonene ikke nÃ¥s gjennom dagens kartlagte app-/gateflyter.
+Bibliotekene er fortsatt sÃ¥rbare; administrativ bruk/annen kodekjÃ¸ring og senere
+endringer er utenfor beviset. Ingen restfareaksept eller produksjonsendring fÃ¸lger
 av analysen. Aktiv release og gatewayvedlikeholdet over er uendret.
 
-For dette avgrensede løpet brukes `server.ps1 -Action GatewayStage -Revision <ny full SHA>`
-før artefaktkontroll, deretter `-Action GatewaySwitch -Revision <valgt full SHA>
+For dette avgrensede lÃ¸pet brukes `server.ps1 -Action GatewayStage -Revision <ny full SHA>`
+fÃ¸r artefaktkontroll, deretter `-Action GatewaySwitch -Revision <valgt full SHA>
 -GatewayImage <kvalifisert sha256:ID> -ExpectedCurrent <faktisk aktiv full SHA>`.
-Staging av allerede aktiv SHA avvises før bygg for å bevare appimage-aliasene.
-GatewaySwitch krever uendret øvrig kilde/Compose-oppsett, tar backup, bevarer aktive
+Staging av allerede aktiv SHA avvises fÃ¸r bygg for Ã¥ bevare appimage-aliasene.
+GatewaySwitch krever uendret Ã¸vrig kilde/Compose-oppsett, tar backup, bevarer aktive
 API/gate-byte under de nye aliasene og bruker bare `up --no-deps --no-build --pull never gateway`.
-Samme modus brukes til den dokumenterte førversjonen ved gatewaytilbakeføring.
+Samme modus brukes til den dokumenterte fÃ¸rversjonen ved gatewaytilbakefÃ¸ring.
 Den generelle Deploy-/Rollback-oppskriften nedenfor gjelder full apputrulling og
 kan stoppe flere tjenester; den ble ikke brukt til dette gatewaybyttet.
 
 Avsnittene nedenfor beholder tidligere V1-/serverkontrollpunkter. Dokumentasjons-
-og lokale Windows-verktøycommits etter93ee582 er ikke nye serverdeploys.
+og lokale Windows-verktÃ¸ycommits etter93ee582 er ikke nye serverdeploys.
 
-Gjeldende 31.10.2026: serverintegrasjonen og driftsoverleveringen er fullført og inngår i V1 etter Jonas sin avklaring. Tidligere bonus/v1.0.1-avgrensning er erstattet; [samlet omfang, status og versjonstilknytning](submission/v1-scope-and-operations.md). Sensor bruker den selvstendige [lokale oppskriften](../README.md) og trenger ikke server, eierkonto, private data eller Cloudflare-tilgang.
+Gjeldende 31.10.2026: serverintegrasjonen og driftsoverleveringen er fullfÃ¸rt og inngÃ¥r i V1 etter Jonas sin avklaring. Tidligere bonus/v1.0.1-avgrensning er erstattet; [samlet omfang, status og versjonstilknytning](submission/v1-scope-and-operations.md). Sensor bruker den selvstendige [lokale oppskriften](../README.md) og trenger ikke server, eierkonto, private data eller Cloudflare-tilgang.
 
-Integrasjonen tok inn main-grunnlaget 64f91a7 i 6f845fa før testing. Backend, frontend og tablet-gate ble bevart. Publisert main var 5dc6400 ved dokumentkontrollen; siste dokumenterte deploy er addd27b14fe4b26ef24d488d847d1c0d59a98946, med eierbekreftet innlogging/lagring 31.10.2026. Publisering av dokumentasjon deployer ikke ny release. Ferdig integrerte serverbrancher er ryddet etter kontroll, se driftsloggen. Opprinnelig plan godkjent 29.10.2026. Langtidsstabilitet observeres videre. Lesende sluttkontroll31.10 bekreftet fortsatt addd27b og healthy API/database/aktiv tunnel. En reboot-required-markør for libc6 er registrert som videre vedlikehold; ingen omstart/oppdatering ble utført. [Avgrensede resultater og åpne O3–O6 etter V1](evidence/v1-final-control-20261031.md).
+Integrasjonen tok inn main-grunnlaget 64f91a7 i 6f845fa fÃ¸r testing. Backend, frontend og tablet-gate ble bevart. Publisert main var 5dc6400 ved dokumentkontrollen; siste dokumenterte deploy er addd27b14fe4b26ef24d488d847d1c0d59a98946, med eierbekreftet innlogging/lagring 31.10.2026. Publisering av dokumentasjon deployer ikke ny release. Ferdig integrerte serverbrancher er ryddet etter kontroll, se driftsloggen. Opprinnelig plan godkjent 29.10.2026. Langtidsstabilitet observeres videre. Lesende sluttkontroll31.10 bekreftet fortsatt addd27b og healthy API/database/aktiv tunnel. En reboot-required-markÃ¸r for libc6 er registrert som videre vedlikehold; ingen omstart/oppdatering ble utfÃ¸rt. [Avgrensede resultater og Ã¥pne O3â€“O6 etter V1](evidence/v1-final-control-20261031.md).
 
-## Publisert og deployet V1 — 31.10.2026 kl.03:21
+## Publisert og deployet V1 â€” 31.10.2026 kl.03:21
 
-Etter ny uttrykkelig bestilling er [GitHub-release v1.0.0](https://github.com/IBE160-2026/G06-oisund/releases/tag/v1.0.0) publisert, og nøyaktig **d367a0e47198aeecc52358258cb6825eecdc8c4a** er aktiv på Ubuntu. Taggen er ikke flyttet. [Faktisk backup, deploy, etterkontroll og eierteststatus](evidence/v1-release-deploy-20261031.md). Dette erstatter addd27b som aktiv release; avsnittet ovenfor er førhistorikken. `previous` beholder addd27b som dokumentert tilbakevei med identiske private migreringer. Nyere dokumentasjonscommits i main er ikke deployet automatisk.
+Etter ny uttrykkelig bestilling er [GitHub-release v1.0.0](https://github.com/IBE160-2026/G06-oisund/releases/tag/v1.0.0) publisert, og nÃ¸yaktig **d367a0e47198aeecc52358258cb6825eecdc8c4a** er aktiv pÃ¥ Ubuntu. Taggen er ikke flyttet. [Faktisk backup, deploy, etterkontroll og eierteststatus](evidence/v1-release-deploy-20261031.md). Dette erstatter addd27b som aktiv release; avsnittet ovenfor er fÃ¸rhistorikken. `previous` beholder addd27b som dokumentert tilbakevei med identiske private migreringer. Nyere dokumentasjonscommits i main er ikke deployet automatisk.
 
-Windows-backup er SHA256-verifisert, og en separat fersk backup bestod isolert restore med alle tabellfingeravtrykk like. Eksisterende deployverktøy fullførte med exit0; API/DB healthy, tunnelready200/4 forbindelser, backup-timer active og ingen failed units. Jonas bekreftet deretter innlogging, lagring og gjenåpning på d367a0e: «Alle tre bestod uten feil». Siste lesende kontroll kl.03:30 bestod på samme release. Ingen maskinomstart eller produksjonsrestore/reset ble utført. O3–O6 og libc6-/stabilitetsoppfølging er fortsatt åpne.
+Windows-backup er SHA256-verifisert, og en separat fersk backup bestod isolert restore med alle tabellfingeravtrykk like. Eksisterende deployverktÃ¸y fullfÃ¸rte med exit0; API/DB healthy, tunnelready200/4 forbindelser, backup-timer active og ingen failed units. Jonas bekreftet deretter innlogging, lagring og gjenÃ¥pning pÃ¥ d367a0e: Â«Alle tre bestod uten feilÂ». Siste lesende kontroll kl.03:30 bestod pÃ¥ samme release. Ingen maskinomstart eller produksjonsrestore/reset ble utfÃ¸rt. O3â€“O6 og libc6-/stabilitetsoppfÃ¸lging er fortsatt Ã¥pne.
 
 ## Server og drift
 
-SSH-adressen i den opprinnelige serveroppskriften var jonas@192.168.1.139; gjeldende adresse og nøkkelalias står øverst.
+SSH-adressen i den opprinnelige serveroppskriften var jonas@192.168.1.139; gjeldende adresse og nÃ¸kkelalias stÃ¥r Ã¸verst.
 Lenovo Y520-15IKBN, Ubuntu26.04.1, kernel7.0.0-42-generic.
 Gammel kernel7.0.0-30 er markert manuelt installert og beholdes.
 GRUB viser meny; tilbakevei er Advanced options for Ubuntu -> 7.0.0-30-generic.
-Fire oppstarter med ny kernel bestod. Tidligere frys er ikke sikkert årsaksforklart;
+Fire oppstarter med ny kernel bestod. Tidligere frys er ikke sikkert Ã¥rsaksforklart;
 videre stabilitet observeres uten automatisk BIOS-/driverendring.
 
 App, Cloudflare Tunnel og backup-timer starter automatisk uten lokal innlogging.
-Lokk ignoreres på ekstern strøm; batteridrift er ikke kvalifisert.
+Lokk ignoreres pÃ¥ ekstern strÃ¸m; batteridrift er ikke kvalifisert.
 Wi-Fi/Ethernet-venting godtar et rutbart IPv4-grensesnitt.
 Bare SSH og loopback-app/metrics er publisert; database/API har ingen vertsporter.
 
@@ -78,16 +78,16 @@ Bare SSH og loopback-app/metrics er publisert; database/API har ingen vertsporte
 - /var/backups/bussassistent: databasebackuper, root:jonas, 0750/0640.
 
 Containerfilene i secrets-mappen er0444 for avgrensede ikke-root-containere;
-beskyttelsen på verten er den overordnede0700-mappen. Ikke åpne denne mappen.
+beskyttelsen pÃ¥ verten er den overordnede0700-mappen. Ikke Ã¥pne denne mappen.
 Avgrenset sudo til bussassistentctl er en administratorrolle som kan deploye kode.
 
 ## Oppdatering fra Windows
 
-Arbeid på egen branch, test og commit endringene. Velg en eksplisitt commit som
+Arbeid pÃ¥ egen branch, test og commit endringene. Velg en eksplisitt commit som
 inneholder deploy/ubuntu. Etter godkjent integrering kan testet main brukes.
-Skriptet deployer committede filer; det gjør ikke git pull, merge eller push.
+Skriptet deployer committede filer; det gjÃ¸r ikke git pull, merge eller push.
 
-Kjør i PowerShell fra D:\IBE160, én kommando om gangen. Stopp ved feil.
+KjÃ¸r i PowerShell fra D:\IBE160, Ã©n kommando om gangen. Stopp ved feil.
 
 ~~~powershell
 .\scripts\server.ps1 -Action Status
@@ -99,14 +99,14 @@ $revision = git rev-parse HEAD
 .\scripts\server.ps1 -Action Status
 ~~~
 
-Kontroller deretter innlogging, lagring og gjenåpning i nettleseren.
-Vanlig appdeploy krever ikke maskinomstart. Gjør dette i vedlikeholdstid:
+Kontroller deretter innlogging, lagring og gjenÃ¥pning i nettleseren.
+Vanlig appdeploy krever ikke maskinomstart. GjÃ¸r dette i vedlikeholdstid:
 tunnelen og skriverne stoppes kort under byttet.
 
 Deploy arkiverer backend/frontend/deploy, kontrollerer SHA256 og avviser
-arkivlenker/path traversal. Bygg utføres før avbruddet. Driftsverktøy installeres,
+arkivlenker/path traversal. Bygg utfÃ¸res fÃ¸r avbruddet. DriftsverktÃ¸y installeres,
 serverbackup tas, release byttes og Compose/apphelse kontrolleres.
-Windows Backup henter en separat verifisert kopi før deploy.
+Windows Backup henter en separat verifisert kopi fÃ¸r deploy.
 Ved feil etter mulig migrering forblir tunnelen stoppet; gammel kode startes
 ikke blindt mot en mulig nyere database.
 
@@ -117,64 +117,64 @@ ikke blindt mot en mulig nyere database.
 
 Rollback krever identiske private migreringsfiler og allerede bygde images.
 Ved schemaendring kreves egen vurdering av restore og data skrevet etter backup.
-Ingen down -v, volume prune eller generell Docker-opprydding inngår.
-Ta vare på aktuell og tidligere verifisert release.
+Ingen down -v, volume prune eller generell Docker-opprydding inngÃ¥r.
+Ta vare pÃ¥ aktuell og tidligere verifisert release.
 
 ## Backup og restore
 
 Ubuntu-timer: daglig03:15 Europe/Oslo, persistent.
-Windows-oppgave Bussassistent-Backup: daglig04:00 og ved innlogging, bare når
-Jonas er innlogget. StartWhenAvailable og tre nye forsøk med fem minutters
-mellomrom ved feil. PC-en behøver ikke være på for at appen skal kjøre,
-men lokale backupkopier krever at Windows-oppgaven faktisk kan kjøre.
+Windows-oppgave Bussassistent-Backup: daglig04:00 og ved innlogging, bare nÃ¥r
+Jonas er innlogget. StartWhenAvailable og tre nye forsÃ¸k med fem minutters
+mellomrom ved feil. PC-en behÃ¸ver ikke vÃ¦re pÃ¥ for at appen skal kjÃ¸re,
+men lokale backupkopier krever at Windows-oppgaven faktisk kan kjÃ¸re.
 
 Windows-kopier ligger i %LOCALAPPDATA%\BussassistentServer\backups.
-Overføringen SHA256-verifiseres og mappen beskyttes med ACL.
-Oppbevaring48t ryddes ved neste vellykkede kjøring, ikke som en absolutt frist
-mens maskinen er avslått. Backup kan inneholde rader som senere er slettet.
-Ved produksjonsrestore må opprydding/utløpsregler kjøres før ekstern åpning.
+OverfÃ¸ringen SHA256-verifiseres og mappen beskyttes med ACL.
+Oppbevaring48t ryddes ved neste vellykkede kjÃ¸ring, ikke som en absolutt frist
+mens maskinen er avslÃ¥tt. Backup kan inneholde rader som senere er slettet.
+Ved produksjonsrestore mÃ¥ opprydding/utlÃ¸psregler kjÃ¸res fÃ¸r ekstern Ã¥pning.
 
 Installer/oppdater Windows-oppgaven med scripts/install-server-backup.ps1.
-Oppgaven bruker en fast kopi av administrasjonsskriptet i brukerøkten.
-SSH-nøkkelen er separat; ingen passord eller token legges i oppgaveargumentene.
+Oppgaven bruker en fast kopi av administrasjonsskriptet i brukerÃ¸kten.
+SSH-nÃ¸kkelen er separat; ingen passord eller token legges i oppgaveargumentene.
 
-Isolert verifikasjon av fersk backup, uten å erstatte produksjonsdata:
+Isolert verifikasjon av fersk backup, uten Ã¥ erstatte produksjonsdata:
 
 ~~~powershell
 ssh -i "$env:USERPROFILE\.ssh\ibe160_server_ed25519" jonas@192.168.1.139 "sudo -n /usr/local/sbin/bussassistentctl verify-restore"
 ~~~
 
-Denne kommandoen sammenligner før-/etterfingeravtrykk, gjenoppretter dumpen i
+Denne kommandoen sammenligner fÃ¸r-/etterfingeravtrykk, gjenoppretter dumpen i
 en unik PostgreSQL-container uten nettverk eller vertsporter, kun tmpfs-data,
-og sammenligner alle tabeller. Container og midlertidig volum slettes etterpå.
-Kjør i rolig periode: samtidige skriv gjør at sammenligningen avvises.
-Dette er en restore-prøve, ikke kommando for produksjonsrestore.
-Førstegangskommandoen restore-initial avviser allerede deployet/ikke-tom database.
+og sammenligner alle tabeller. Container og midlertidig volum slettes etterpÃ¥.
+KjÃ¸r i rolig periode: samtidige skriv gjÃ¸r at sammenligningen avvises.
+Dette er en restore-prÃ¸ve, ikke kommando for produksjonsrestore.
+FÃ¸rstegangskommandoen restore-initial avviser allerede deployet/ikke-tom database.
 
 ## Vedlikehold og dokumentert testdekning
 
-Ubuntu-sikkerhetsoppdateringer er automatisert; automatisk reboot er avslått.
+Ubuntu-sikkerhetsoppdateringer er automatisert; automatisk reboot er avslÃ¥tt.
 Docker/cloudflared og appimages oppdateres kontrollert i vedlikeholdstid.
 Kontroller diskplass, backupresultat og reboot-required regelmessig.
 Gammel kernel beholdes til stabiliteten er avklart.
 
-Bestått29.10:
+BestÃ¥tt29.10:
 - Initial faktisk restore,25 tabeller sammenlignet med originalen.
 - Fire oppstarter med kernel7.0.0-42 og automatisk app/tunnel/backup-timer.
 - Kontrollerte API-/DB-/tunnelkrasj; automatisk recovery og uendrede tabeller.
-- Faktisk Windows-backup, også etter Windows-av-prøven.
-- Lokk lukket på ekstern strøm; SSH/app/tunnel fortsatte å fungere.
+- Faktisk Windows-backup, ogsÃ¥ etter Windows-av-prÃ¸ven.
+- Lokk lukket pÃ¥ ekstern strÃ¸m; SSH/app/tunnel fortsatte Ã¥ fungere.
 - Wi-Fi ned/opp; samme boot og tunnelprosess, automatisk gjenoppkobling.
 - Eierbekreftet innlogging/lagring, reload/ny innlogging og mobilnett.
-- Eierbekreftet innlogging/lagring mens Windows var avslått.
+- Eierbekreftet innlogging/lagring mens Windows var avslÃ¥tt.
 - Fersk isolert backuprestore med full tabellfingeravtrykk-sammenligning.
 
-Senere integrasjon/deploy/rollback og nøyaktige releaser registreres i
+Senere integrasjon/deploy/rollback og nÃ¸yaktige releaser registreres i
 [driftsloggen](../.logs/jonas-oisund/990-2026-10-29-18-30-00-ubuntu-server.md).
-Historiske feil og avgrensninger bevares der. Eier bekreftet31.10.2026 at innlogging/lagringstesten også bestod på integrert release addd27b. De øvrige manuelle testene ovenfor gjelder
-releasen som var aktiv da de ble gjennomført; de er ikke ny eieraksept av senere kode.
+Historiske feil og avgrensninger bevares der. Eier bekreftet31.10.2026 at innlogging/lagringstesten ogsÃ¥ bestod pÃ¥ integrert release addd27b. De Ã¸vrige manuelle testene ovenfor gjelder
+releasen som var aktiv da de ble gjennomfÃ¸rt; de er ikke ny eieraksept av senere kode.
 
-Tester ved integrasjon:12 driftstester (chown mockes i ikke-root-testkjøringen),
+Tester ved integrasjon:12 driftstester (chown mockes i ikke-root-testkjÃ¸ringen),
 23 gate-tester,4 cleanup-tester, frontend TypeScript/Vite-bygg, Windows-parser og
-faktiske Docker-bygg. Ingen produksjonshemmeligheter inngår i Git eller testoutput.
+faktiske Docker-bygg. Ingen produksjonshemmeligheter inngÃ¥r i Git eller testoutput.
 Originalt Windows-databasevolum og verifiserte backupkopier beholdes.

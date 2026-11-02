@@ -43,5 +43,6 @@
   "docs/evidence/o5-deploy-20261102/staged-source-hashes.json": "0318ce68e337a1f13688ed32607b66831074a6839eb0d511ccc6c38d446126be",
   "docs/evidence/o5-deploy-20261102/staged-source-hashes.txt": "a8e7f6874e330555fd3efef420c5e368625a0016552b5d80ba31040244782e9c",
   "scripts/operations-followup/o5_deploy.py": "1d9b9ccdb70b2a0dc3dc37f477975bb93175015ace48755a4fddaef56f072a29",
-  "docs/evidence/o5-deploy-20261102.md": "718f00a1a1f34ad6fd71bf62d8050afc3cd89fa8b8c0a58409666e3284641b8e"
+  "docs/evidence/o5-deploy-20261102.md": "c7e95de6713b6260b054f99d71a73b6841a507e2fee84cfe9b15d2a5cdfdf80b",
+  "docs/evidence/o5-deploy-20261102/owner-test.json": "f96c935a36130958aa8f1b9fb069986edb7988ac8f94df8c320984ea813d2e7a"
 }
