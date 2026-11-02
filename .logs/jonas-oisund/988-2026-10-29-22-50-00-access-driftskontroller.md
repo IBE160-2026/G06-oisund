@@ -268,6 +268,8 @@ Gjenbruke gyldig isolert evidens og bestått O5-innlogging/lagring. Etablere enh
 ### Resultat
 Gjeldende O3-bevisgrenser, tidligere proxy/API-/15familie-/kvitteringskontroller og siste O5-eierresultat er lest. Fersk lesende SSH-kontroll bekrefter fortsatt aktiv **7921eb54e4816aaab9368c3efd851bcf692f3823**, friskAPI og avslag uten assertion. Ingen kilde-/driftsendring, skriveprøve, produksjonsfeilinjeksjon eller ny testpass er registrert. Første praktiske veiledning etablerer PC-/DevTools-kontekst og bruker O5s syntetiske testutkast uten ny lagring; enhet/nettleser/nettverk og faktisk klarstatus avventes. Ingen gjentakelse av full gyldig isolert kvalifikasjon. Eksisterende issues-punkt for O3 dekker videre arbeid og er uendret.
 
+Praktisk fortsettelse: Desktop/Brave/Wi-Fi og syntetisk testutkast er eierbekreftet klart. Eier rapporterer sju `/private-api/auth/session`-forespørsler, samtlige200OK/no-store/DYNAMIC. Arbeidscommit **dc59ccba88076fff750b3a44f55a6fe604d130a3** lagrer bare disse avgrensede svarfeltene. Size-kolonnen er valgt, men ikke synlig; nettleserens memory/disk-leveringskilde forblir uavklart. Ingen cookie-/tokenverdier eller HAR samlet. Neste prøve er lesende kontroll av begge appcookies; kildekontroll bekrefter at både private_session og private_csrf skal være Secure/HttpOnly/SameSite=Strict. Ingen ny O3-lukking eller produksjonsendring. Eksisterende O3-issue er fortsatt åpent.
+
 ### Åpne punkter
 - O3: faktisk autentisert ekstern cookie/cache/Origin-CSRF-/feil-/skrive-/recoverymatrise og fysisk klientnettprøve gjenstår. Ingen test markeres bestått før faktisk observert resultat og versjons-/enhetsbinding foreligger.
 - O4 og O6 forblir uendret åpne; O5 er fortsatt fullført innen dokumentert omfang.
