@@ -211,3 +211,34 @@ Produksjon er lesende bekreftet **5e521cbc658594a47c4568d352a50e46309573c4**, sa
 - O4: administratorbetjent lesende brannmureksport og ruterkonfigurasjon, autorisert uavhengig IPv4/IPv6-målevert og bekreftet egenorigin. Ingen regelendring forutsatt.
 - O5: senere beslutning om integrasjon/deploy av kvalifisert kandidat, deretter faktisk produksjons- og personlig innlogging/lagring/gjenåpning på nyversjonen. Ingen ny risikoaksept etterspørres.
 - O6s eksisterende kernel-/langtids-/oppstartsstabilitetsoppfølging står uendret åpen; dette nattløpet lukker ikkeO6. Punktene over er samordnet i det eksisterende sammensatte driftspunktet i issues.md.
+
+## 2026-11-02 kl. 20:57 — Jonas Øisund
+
+### Oppgave
+
+Integrere kvalifisert O5-retting i main og deploye med backup, tilbakevei og tekniske etterkontroller. Bevare passordarbeid/v1.0.0, holde O3/O4/O6 åpne og gi konkrete personlige teststeg.
+
+### Plan
+
+- Kontrollere fersk main, faktisk produksjon og gyldig kvalifikasjon; bevare siste O6-dokumentasjon i integrasjonen.
+- Ta privat backup og isolert restore, stage og kontrollere faktisk arkiv-/image-/datagrunnlag før separat aktivering.
+- Etterkontrollere data/tjenester/tunnel/backup/retur, dokumentere faktisk scope og avvente personlig prøve uten å utlede øvrig driftslukking.
+
+### Resultat
+
+Mainintegrasjon **7921eb54e4816aaab9368c3efd851bcf692f3823** er pushet og **aktivert i produksjon20:48Oslo**. Fersk main før integrasjon varc146e71; nye commits var O6-dokumentasjon. O5-runtime/test/Compose er identisk med kvalifisert branch9804eea;37/37 og20/20evidens gjenbrukes. Backend/frontend/migreringer/driftsverktøy/units er identiske mot førproduksjon5e521cb. Dokumentkonflikter er løst med siste O6-status bevart. En upushet lokal dokumentkonfliktfeil ble rettet/amendet før publisering; ingen feilmarkører ble deployet.
+
+Frisk Windows-/serverbackup78057byte/SHA256461ae1db… er overføringsverifisert, og separat frisk isolert restore bestod. Ordinær staging bygget fra pinned/cached runtime, bare gatekildelaget nytt. Førproduksjon var identisk/frisk under staging. Gate/Compose/lås er hashbundet til faktisk Git-arkiv; en streng Git-blobkontroll stoppet før aktivering på Windows-CRLF i låsen og ble avklart med eksakt arkivkontroll. Gatewayens RootFS-lag er identiske; alle fire kjørende etterimages matcher staged build.
+
+Eksisterende full deploy stoppet/startet app/tunnel og gjenskapte alle fire containere. **Alle25tabellfingeravtrykk er identiske før/etter**, ingen DB-restore eller migreringsendring. Aktiv7921eb5/previous5e521cb, sammeboot2812a231…/kernel42. FriskAPI/DB/origin403utenassertion, ingenfailedunits, aktivbackuptimer. Tunnelen gikk fra én klar forbindelse umiddelbart etter oppstart til fire/ready200/NRestarts0. Frisk etterbackup er overføringsverifisert, og ny isolert restore bestod med alle fingeravtrykk like.
+
+Fire curl-GET på faktiske offentlige app-/API-ruter ga302tilAccess/no-store. Python-klienten ga403/no-store; den første for snevre302forventningen feilet og er beholdt, ikke fremstilt som bestått positiv innlogging. Ingen redirect fulgt, private body/token lest eller produksjons-DNS-/nettfeil injisert. Personlig prøve på7921eb5 er fortsatt avventet.
+
+Tilbakevei bruker eksisterende Rollback til5e521cb med identiske migreringer og bevart levendeDB; ingen blind dumpgjenoppretting. Førrelease/images/backuper er bevart, egen opplastingstar og restore-fixturer ryddet. Ingen vertsomstart, pakke-/passord-/nettendring, ny risikoaksept eller permanent jobb. Passordcheckout er fortsatt ren på8fd6da2; remotev1.0.0fortsattd367a0e. O3/O4/O6 holdes uttrykkelig åpne.
+
+Rapport/evidens/driftsveiledning er committet i **654e850238d6de32ca55b536b6ba38d623d1d404**. [Full deployrapport, tilbakevei og personlige steg](../../docs/evidence/o5-deploy-20261102.md). JSON/kvitteringshasher, helper-syntaks, lenker, hemmelighetssøk og diffkontroll bestod. Senere rapport-/loggcommits publiseres uten ny deploy; produksjonsidentiteten forblir7921eb5.
+
+### Åpne punkter
+
+- O5: personlig prøve på den nye releasen avventes. Nytt privat vindu og Cloudflare-/eventuellMFA/appinnlogging, åpne syntetisk testutkast, ufarlig lagring, refresh/gjenåpning uten ekstra kopi, deretter normal tilgang etter minst fem minutter. Rapporter faktisk resultat/enhet/nettleser/tidspunkt; ingen ny risikoaksept etterspørres.
+- O3/O4/O6 forblir åpne innen eksisterende eksterne-/WAN-/regel-/kernel-/bredere bevisgrenser. Ingen av dem lukkes av deploy eller personlig O5-prøve. Punktene er oppdatert i det eksisterende sammensatte driftspunktet i issues.md.
