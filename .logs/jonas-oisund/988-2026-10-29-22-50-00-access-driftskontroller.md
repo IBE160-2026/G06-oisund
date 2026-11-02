@@ -270,6 +270,8 @@ Gjeldende O3-bevisgrenser, tidligere proxy/API-/15familie-/kvitteringskontroller
 
 Praktisk fortsettelse: Desktop/Brave/Wi-Fi og syntetisk testutkast er eierbekreftet klart. Eier rapporterer sju `/private-api/auth/session`-forespørsler, samtlige200OK/no-store/DYNAMIC. Arbeidscommit **dc59ccba88076fff750b3a44f55a6fe604d130a3** lagrer bare disse avgrensede svarfeltene. Size-kolonnen er valgt, men ikke synlig; nettleserens memory/disk-leveringskilde forblir uavklart. Ingen cookie-/tokenverdier eller HAR samlet. Neste prøve er lesende kontroll av begge appcookies; kildekontroll bekrefter at både private_session og private_csrf skal være Secure/HttpOnly/SameSite=Strict. Ingen ny O3-lukking eller produksjonsendring. Eksisterende O3-issue er fortsatt åpent.
 
+Neste O3-observasjon: eier svarte «Begge stemmer» på Secure/HttpOnly/SameSite=Strict for private_session og private_csrf i Brave. Arbeidscommit **106d97a0c9d62dc85c07bc03fac1bedd8306da6d** registrerer bestått avgrenset cookieflaggkontroll, uten cookieverdier. Kildekontroll bekrefter samme forventning for begge cookies. Ingen browser-cachekonklusjon eller O3-lukking; neste veiledning gjelder én normal lagring i syntetisk testutkast og kun ufølsomme skriveforespørselfelt. Eksisterende åpne issues er uendret.
+
 ### Åpne punkter
 - O3: faktisk autentisert ekstern cookie/cache/Origin-CSRF-/feil-/skrive-/recoverymatrise og fysisk klientnettprøve gjenstår. Ingen test markeres bestått før faktisk observert resultat og versjons-/enhetsbinding foreligger.
 - O4 og O6 forblir uendret åpne; O5 er fortsatt fullført innen dokumentert omfang.
