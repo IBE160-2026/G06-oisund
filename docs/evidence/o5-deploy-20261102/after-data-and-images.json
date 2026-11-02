@@ -1,0 +1,12 @@
+{
+  "tables": 25,
+  "changed_tables": [],
+  "all_table_fingerprints_identical": true,
+  "boot_unchanged": true,
+  "gateway_rootfs_identical": true,
+  "actual_running_images_match_staged_build": true,
+  "personal_acceptance": "pending",
+  "o3_open": true,
+  "o4_open": true,
+  "o6_open": true
+}

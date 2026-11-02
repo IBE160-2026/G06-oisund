@@ -38,3 +38,5 @@
 /scripts/operations-followup/run_o5_tests.py text eol=lf
 /scripts/operations-followup/test_night_controls.py text eol=lf
 /docs/evidence/o6-readonly-20261102/** -text -whitespace
+/docs/evidence/o5-deploy-20261102/** -text -whitespace
+/scripts/operations-followup/o5_deploy.py text eol=lf

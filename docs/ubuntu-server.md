@@ -1,6 +1,10 @@
 # Ubuntu-server for Bussassistent
 
-## Gjeldende etter O6-vedlikehold 1.–2. november 2026
+## Gjeldende etter O5-deploy 2. november 2026
+
+Aktiv release er **7921eb54e4816aaab9368c3efd851bcf692f3823**, med terminerbar JWKS-/DNS-prosess og1MiBgate-tmpfs. Mainintegrasjon/deploy er utført etter uttrykkelig bestilling; backup/isolert restore før/etter,25uendrede tabellfingeravtrykk og app/DB/tunnelkontroller bestod. `previous` er5e521cb med identiske migreringer; [deploy-/tilbakeveisrapport og personlige teststeg](evidence/o5-deploy-20261102.md). Personlig prøve avventes. O3/O4/O6 er åpne; passordarbeid ogv1.0.0bevart. Full apputrulling restartet containere/tunnel, ingen vertsomstart eller pakkeoppdatering.
+
+## Historisk etter O6-vedlikehold 1.–2. november 2026
 
 Aktiv apprelease er **5e521cbc658594a47c4568d352a50e46309573c4** med kontrollerte Python3.13.18/pip- og PG17.11/gosu1.20-rettelser. Systemd/PID1 er259.9-0ubuntu0.1 og cloudflared2026.10.7. Kontrollert omstart aktiverte libc6 og fjernet reboot-markøren; kernel er fortsatt7.0.0-42. Ny boot-ID2812a231-758d-4b5e-8241-d748b52d0991. [Eksakte images, faktisk vedlikehold, backup/retur, skanning og siste eiertest](evidence/o6-execution-20261101.md).
 

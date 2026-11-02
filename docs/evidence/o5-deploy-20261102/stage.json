@@ -1,0 +1,17 @@
+{
+  "command": [
+    "pwsh",
+    "-NoProfile",
+    "-File",
+    "scripts/server.ps1",
+    "-Action",
+    "GatewayStage",
+    "-Revision",
+    "7921eb54e4816aaab9368c3efd851bcf692f3823"
+  ],
+  "start_utc": "2026-11-02T19:46:19.558204+00:00",
+  "end_utc": "2026-11-02T19:46:26.341418+00:00",
+  "exit": 0,
+  "timed_out": false,
+  "sha256": "60ebf6c50aa340ec2790c3251144038070640fda800c46a3fb2d7c6c52a65e59"
+}

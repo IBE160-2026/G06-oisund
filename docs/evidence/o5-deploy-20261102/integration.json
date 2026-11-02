@@ -1,0 +1,10 @@
+{
+  "main_before": "c146e71f977a0913f3de2799a25653856ffc9523",
+  "integrated": "7921eb54e4816aaab9368c3efd851bcf692f3823",
+  "qualified_branch": "9804eea8d0046d4a337297fbc5d824dc3269a9b9",
+  "runtime_identical_to_qualified": true,
+  "backend_frontend_ops_units_migrations_unchanged_from_production": true,
+  "v1_tag": "d367a0e47198aeecc52358258cb6825eecdc8c4a",
+  "fresh_tests_required": false,
+  "reason": "All new main commits were documentation only; qualified runtime/test/Compose source unchanged"
+}

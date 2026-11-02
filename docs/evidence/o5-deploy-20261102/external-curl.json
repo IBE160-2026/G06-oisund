@@ -1,0 +1,34 @@
+[
+  {
+    "path": "/private",
+    "status": 302,
+    "cache_control": "private, max-age=0, no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
+    "location_host": "bussassistent.cloudflareaccess.com",
+    "location_path": "/cdn-cgi/access/login/app.bussassistent.com",
+    "cf_mitigated": ""
+  },
+  {
+    "path": "/private-api/auth/session",
+    "status": 302,
+    "cache_control": "private, max-age=0, no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
+    "location_host": "bussassistent.cloudflareaccess.com",
+    "location_path": "/cdn-cgi/access/login/app.bussassistent.com",
+    "cf_mitigated": ""
+  },
+  {
+    "path": "/private-api/drafts",
+    "status": 302,
+    "cache_control": "private, max-age=0, no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
+    "location_host": "bussassistent.cloudflareaccess.com",
+    "location_path": "/cdn-cgi/access/login/app.bussassistent.com",
+    "cf_mitigated": ""
+  },
+  {
+    "path": "/private-api/workdays",
+    "status": 302,
+    "cache_control": "private, max-age=0, no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
+    "location_host": "bussassistent.cloudflareaccess.com",
+    "location_path": "/cdn-cgi/access/login/app.bussassistent.com",
+    "cf_mitigated": ""
+  }
+]
