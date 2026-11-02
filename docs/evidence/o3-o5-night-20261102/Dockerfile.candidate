@@ -1,0 +1,3 @@
+# Offline overlay of the already exported production runtime; no package change.
+FROM bussassistent-access-gate:5e521cbc658594a47c4568d352a50e46309573c4
+COPY deploy/tablet/access_gate/gate.py /gate/gate.py

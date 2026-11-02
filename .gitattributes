@@ -27,4 +27,14 @@
 /scripts/operations-followup/o6_grub_menu.py -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 
 /scripts/operations-followup/o6_journal_wall.py -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+
+# Keep executed O3–O5 receipts byte-for-byte and executable Python LF-stable.
+/docs/evidence/o3-o5-night-20261102/** -text -whitespace
+/deploy/tablet/access_gate/gate.py text eol=lf
+/deploy/tablet/access_gate/test_resolver_process.py text eol=lf
+/deploy/tablet/access_gate/test_libc_dns.py text eol=lf
+/deploy/tablet/access_gate/test_https_keys.py text eol=lf
+/scripts/operations-followup/night_controls.py text eol=lf
+/scripts/operations-followup/run_o5_tests.py text eol=lf
+/scripts/operations-followup/test_night_controls.py text eol=lf
 /docs/evidence/o6-readonly-20261102/** -text -whitespace

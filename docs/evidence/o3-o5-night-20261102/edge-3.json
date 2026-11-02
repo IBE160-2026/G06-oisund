@@ -1,0 +1,17 @@
+{
+  "command": [
+    "curl.exe",
+    "-sS",
+    "--max-time",
+    "15",
+    "-o",
+    "NUL",
+    "-w",
+    "status=%{http_code}\n",
+    "https://app.bussassistent.com/private/api/workdays"
+  ],
+  "start_utc": "2026-11-01T23:29:08.354178+00:00",
+  "end_utc": "2026-11-01T23:29:08.550330+00:00",
+  "exit": 0,
+  "sha256": "8ac8a164c895ffbf0995dc6744e24f329d92a4744128e6c685720a17cefc5899"
+}

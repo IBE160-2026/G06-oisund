@@ -1,0 +1,15 @@
+
+==================================== ERRORS ====================================
+________________ ERROR collecting probe/test_night_controls.py _________________
+/probe/test_night_controls.py:9: in <module>
+    import night_controls as controls
+/probe/night_controls.py:12: in <module>
+    from gateway_deploy import SSH
+/probe/gateway_deploy.py:13: in <module>
+    ROOT=Path(__file__).resolve().parents[2]
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.13/pathlib/_local.py:49: in __getitem__
+    raise IndexError(idx)
+E   IndexError: 2
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+1 error in 0.72s

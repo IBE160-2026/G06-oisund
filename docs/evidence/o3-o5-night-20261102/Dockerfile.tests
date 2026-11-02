@@ -1,0 +1,10 @@
+FROM ibe160-o6-gate-tests:20261101-r1 AS tests
+FROM ibe160-o5-gate:20261102
+# Add only existing test packages; runtime JWT/crypto/Python stay from candidate.
+COPY --from=tests /usr/local/lib/python3.13/site-packages/pytest /usr/local/lib/python3.13/site-packages/pytest
+COPY --from=tests /usr/local/lib/python3.13/site-packages/_pytest /usr/local/lib/python3.13/site-packages/_pytest
+COPY --from=tests /usr/local/lib/python3.13/site-packages/pluggy /usr/local/lib/python3.13/site-packages/pluggy
+COPY --from=tests /usr/local/lib/python3.13/site-packages/iniconfig /usr/local/lib/python3.13/site-packages/iniconfig
+COPY --from=tests /usr/local/lib/python3.13/site-packages/packaging /usr/local/lib/python3.13/site-packages/packaging
+COPY --from=tests /usr/local/lib/python3.13/site-packages/pygments /usr/local/lib/python3.13/site-packages/pygments
+COPY --from=tests /usr/local/lib/python3.13/site-packages/py.py /usr/local/lib/python3.13/site-packages/py.py

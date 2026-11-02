@@ -5,6 +5,9 @@ import socket
 import threading
 import time
 import http.client
+import subprocess
+import sys
+import tempfile
 from urllib.parse import urlsplit
 from socketserver import ThreadingMixIn
 from http.server import BaseHTTPRequestHandler, HTTPServer
@@ -21,78 +24,58 @@ class BoundedKeys(jwt.PyJWKClient):
         self.last_attempt = float('-inf')
         self.snapshot = {}
         self.remote_slot = threading.BoundedSemaphore(1)
+        self.process_lock = threading.Lock()
+        self.pending_process = None
 
     def fetch_data(self):
-        # Socket timeouts alone allow indefinite trickling. Retain ownership
-        # of the actual socket so the caller can interrupt headers/body at
-        # the absolute deadline, without closing a buffered reader cross-thread.
-        if not self.remote_slot.acquire(blocking=False):
-            raise jwt.PyJWKClientError('Remote fetch already active')
-        done, result = threading.Event(), {}
-        ownership = threading.Lock()
-        owned = {'socket': None, 'cancelled': False}
-        deadline = time.monotonic() + 3
-        def cancel():
-            with ownership:
-                owned['cancelled'] = True
-                transport = owned['socket']
-                owned['socket'] = None
-            if transport is not None:
-                try:
-                    transport.shutdown(socket.SHUT_RDWR)
-                except OSError:
-                    pass
-                transport.close()
-        def fetch():
-            connection = None
-            try:
-                url = urlsplit(self.uri)
-                connection_type = http.client.HTTPSConnection if url.scheme == 'https' else http.client.HTTPConnection
-                connection = connection_type(url.hostname, url.port, timeout=max(.001, deadline - time.monotonic()))
-                connection.connect()
-                transport = connection.sock
-                with ownership:
-                    owned['socket'] = transport
-                    cancelled = owned['cancelled']
-                if cancelled or time.monotonic() >= deadline:
-                    raise TimeoutError()
-                connection.request('GET', url.path or '/', headers={'Accept': 'application/json'})
-                with connection.getresponse() as response:
-                    if response.status != 200:
-                        raise ValueError('Key endpoint refused')
-                    payload = bytearray()
-                    while True:
-                        if response.isclosed():
-                            break
-                        remaining = deadline - time.monotonic()
-                        if remaining <= 0:
-                            raise TimeoutError()
-                        transport.settimeout(remaining)
-                        chunk = response.read1(min(4096, 65537 - len(payload)))
-                        if not chunk:
-                            break
-                        payload.extend(chunk)
-                        if len(payload) > 65536:
-                            raise ValueError('Key response too large')
-                    result['data'] = json.loads(payload)
-            except Exception:
-                result['failed'] = True
-            finally:
-                cancel()
-                if connection is not None:
-                    connection.close()
+        # OS getaddrinfo cannot be cancelled by closing a socket: DNS may
+        # hang before one exists. Own a disposable process, including DNS,
+        # connect, TLS, headers and body. No background resolver thread survives.
+        with self.process_lock:
+            if self.pending_process is not None:
+                if self.pending_process.poll() is None:
+                    raise jwt.PyJWKClientError('Remote cleanup pending')
+                self.pending_process.wait(timeout=0)
+                self.pending_process = None
                 self.remote_slot.release()
-                done.set()
+            if not self.remote_slot.acquire(blocking=False):
+                raise jwt.PyJWKClientError('Remote fetch already active')
+        deadline = time.monotonic() + 3
+        process = None
         try:
-            threading.Thread(target=fetch, daemon=True).start()
-        except Exception:
-            self.remote_slot.release()
-            raise
-        if not done.wait(max(0, deadline - time.monotonic())) or time.monotonic() >= deadline or result.get('failed'):
-            cancel()
-            done.wait(.25)
-            raise jwt.PyJWKClientError('Remote keys unavailable')
-        return result['data']
+            # A file avoids pipe-reader threads and pipe-buffer deadlocks.
+            # The child writes at most 64 KiB, never tokens or policy secrets.
+            with tempfile.TemporaryFile() as output:
+                try:
+                    process = subprocess.Popen(
+                        [sys.executable, '-I', str(Path(__file__).resolve()), '--fetch-keys', self.uri],
+                        stdin=subprocess.DEVNULL, stdout=output, stderr=subprocess.DEVNULL,
+                        close_fds=True)
+                    process.wait(timeout=max(.001, deadline - time.monotonic()))
+                    if process.returncode != 0 or time.monotonic() >= deadline:
+                        raise ValueError('Key fetch failed')
+                    output.seek(0)
+                    payload = output.read(65537)
+                    if len(payload) > 65536:
+                        raise ValueError('Key response too large')
+                    return json.loads(payload)
+                finally:
+                    if process is not None:
+                        if process.poll() is None:
+                            process.kill()
+                        # Reap before releasing capacity. A failed reap leaves
+                        # the slot closed rather than spawning unbounded work.
+                        process.wait(timeout=.25)
+        except (OSError, ValueError, subprocess.SubprocessError):
+            raise jwt.PyJWKClientError('Remote keys unavailable') from None
+        finally:
+            with self.process_lock:
+                if process is not None and process.poll() is None:
+                    # Later callers reconcile a delayed kill/reap without
+                    # spawning more work or leaving capacity closed forever.
+                    self.pending_process = process
+                else:
+                    self.remote_slot.release()
 
     def get_signing_key_from_jwt(self, token):
         kid = jwt.get_unverified_header(token)['kid']
@@ -272,7 +255,32 @@ def handler_for(admission):
     return Handler
 
 
-if __name__ == '__main__':
+def fetch_keys_worker(uri):
+    """Disposable transport; the parent owns its absolute lifetime, even in DNS."""
+    url = urlsplit(uri)
+    connection_type = http.client.HTTPSConnection if url.scheme == 'https' else http.client.HTTPConnection
+    connection = connection_type(url.hostname, url.port, timeout=3)
+    try:
+        connection.request('GET', url.path or '/', headers={'Accept': 'application/json'})
+        with connection.getresponse() as response:
+            if response.status != 200:
+                raise ValueError('Key endpoint refused')
+            payload = response.read(65537)
+            if len(payload) > 65536:
+                raise ValueError('Key response too large')
+            # Validate before emitting; no unbounded or partial output.
+            json.loads(payload)
+            sys.stdout.buffer.write(payload)
+    finally:
+        connection.close()
+
+
+if __name__ == '__main__' and len(sys.argv) == 3 and sys.argv[1] == '--fetch-keys':
+    try:
+        fetch_keys_worker(sys.argv[2])
+    except Exception:
+        sys.exit(1)
+elif __name__ == '__main__':
     # Mounted read-only. No alternate issuer, bypass flag or development mode.
     admission = Admission(json.loads(Path('/run/secrets/tablet_access_policy').read_text()))
     server = BoundedServer(('0.0.0.0', 8081), handler_for(admission))

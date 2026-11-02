@@ -1,0 +1,24 @@
+{
+  "command": [
+    "ssh",
+    "-i",
+    "C:\\Users\\Jonas\\.ssh\\ibe160_server_ed25519",
+    "-o",
+    "IdentitiesOnly=yes",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "StrictHostKeyChecking=yes",
+    "-o",
+    "ConnectTimeout=10",
+    "-o",
+    "HostKeyAlias=192.168.1.139",
+    "jonas@192.168.1.138",
+    "failed=0\nprintf '\\nCONTROL 0\\n'\nsh -c 'date --iso-8601=seconds'\nresult=$?\nprintf 'CONTROL_EXIT 0=%s\\n' \"$result\"\n[ \"$result\" -eq 0 ] || failed=1\nprintf '\\nCONTROL 1\\n'\nsh -c 'cat /opt/bussassistent/current/release-identity.json'\nresult=$?\nprintf 'CONTROL_EXIT 1=%s\\n' \"$result\"\n[ \"$result\" -eq 0 ] || failed=1\nprintf '\\nCONTROL 2\\n'\nsh -c 'cat /proc/sys/kernel/random/boot_id'\nresult=$?\nprintf 'CONTROL_EXIT 2=%s\\n' \"$result\"\n[ \"$result\" -eq 0 ] || failed=1\nprintf '\\nCONTROL 3\\n'\nsh -c uptime\nresult=$?\nprintf 'CONTROL_EXIT 3=%s\\n' \"$result\"\n[ \"$result\" -eq 0 ] || failed=1\nprintf '\\nCONTROL 4\\n'\nsh -c 'uname -r'\nresult=$?\nprintf 'CONTROL_EXIT 4=%s\\n' \"$result\"\n[ \"$result\" -eq 0 ] || failed=1\nprintf '\\nCONTROL 5\\n'\nsh -c 'systemctl --failed --no-pager'\nresult=$?\nprintf 'CONTROL_EXIT 5=%s\\n' \"$result\"\n[ \"$result\" -eq 0 ] || failed=1\nprintf '\\nCONTROL 6\\n'\nsh -c 'systemctl show cloudflared -p MainPID -p NRestarts -p ActiveEnterTimestamp'\nresult=$?\nprintf 'CONTROL_EXIT 6=%s\\n' \"$result\"\n[ \"$result\" -eq 0 ] || failed=1\nprintf '\\nCONTROL 7\\n'\nsh -c 'systemctl list-timers bussassistent-backup.timer --no-pager'\nresult=$?\nprintf 'CONTROL_EXIT 7=%s\\n' \"$result\"\n[ \"$result\" -eq 0 ] || failed=1\nprintf '\\nCONTROL 8\\n'\nsh -c 'systemctl show bussassistent-backup.service -p Result -p ExecMainStatus -p ActiveEnterTimestamp'\nresult=$?\nprintf 'CONTROL_EXIT 8=%s\\n' \"$result\"\n[ \"$result\" -eq 0 ] || failed=1\nprintf '\\nCONTROL 9\\n'\nsh -c 'curl -fsS --max-time 5 http://127.0.0.1:18083/ready'\nresult=$?\nprintf 'CONTROL_EXIT 9=%s\\n' \"$result\"\n[ \"$result\" -eq 0 ] || failed=1\nprintf '\\nCONTROL 10\\n'\nsh -c 'sudo -n /usr/local/sbin/bussassistentctl check'\nresult=$?\nprintf 'CONTROL_EXIT 10=%s\\n' \"$result\"\n[ \"$result\" -eq 0 ] || failed=1\nprintf '\\nCONTROL 11\\n'\nsh -c 'sudo -n /usr/local/sbin/bussassistentctl status'\nresult=$?\nprintf 'CONTROL_EXIT 11=%s\\n' \"$result\"\n[ \"$result\" -eq 0 ] || failed=1\nexit \"$failed\""
+  ],
+  "start_utc": "2026-11-01T23:39:35.172536+00:00",
+  "end_utc": "2026-11-01T23:39:36.391088+00:00",
+  "exit": 0,
+  "timed_out": false,
+  "sha256": "d8078e4322647c11b6a1965f5bf733cdd1a7e2c72533689b3441ded73b92491e"
+}
