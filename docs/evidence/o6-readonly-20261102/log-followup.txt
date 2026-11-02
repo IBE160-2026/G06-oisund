@@ -1,0 +1,148 @@
+{
+  "apt_services": {
+    "exit": 0,
+    "output": "Id=apt-daily.service\nResult=success\nExecMainStartTimestamp=Mon 2026-11-02 14:50:26 CET\nExecMainExitTimestamp=Mon 2026-11-02 14:50:34 CET\nExecMainStatus=0\n\nId=apt-daily-upgrade.service\nResult=success\nExecMainStartTimestamp=Mon 2026-11-02 06:11:28 CET\nExecMainExitTimestamp=Mon 2026-11-02 06:11:30 CET\nExecMainStatus=0\n"
+  },
+  "apt_journal": {
+    "exit": 0,
+    "output": "2026-11-02T06:10:58+01:00 bussassistent systemd[1]: Starting apt-daily-upgrade.service - Daily apt upgrade and clean activities...\n2026-11-02T06:11:28+01:00 bussassistent systemd-networkd-wait-online[252127]: Timeout occurred while waiting for network connectivity.\n2026-11-02T06:11:28+01:00 bussassistent apt-helper[252125]: E: Sub-process /lib/systemd/systemd-networkd-wait-online returned an error code (1)\n2026-11-02T06:11:30+01:00 bussassistent systemd[1]: apt-daily-upgrade.service: Deactivated successfully.\n2026-11-02T06:11:30+01:00 bussassistent systemd[1]: Finished apt-daily-upgrade.service - Daily apt upgrade and clean activities.\n2026-11-02T06:11:30+01:00 bussassistent systemd[1]: apt-daily-upgrade.service: Consumed 2.067s CPU time over 32.287s wall clock time, 122.5M memory peak.\n2026-11-02T14:49:56+01:00 bussassistent systemd[1]: Starting apt-daily.service - Daily apt download activities...\n2026-11-02T14:50:26+01:00 bussassistent systemd-networkd-wait-online[568871]: Timeout occurred while waiting for network connectivity.\n2026-11-02T14:50:26+01:00 bussassistent apt-helper[568869]: E: Sub-process /lib/systemd/systemd-networkd-wait-online returned an error code (1)\n2026-11-02T14:50:34+01:00 bussassistent systemd[1]: apt-daily.service: Deactivated successfully.\n2026-11-02T14:50:34+01:00 bussassistent systemd[1]: Finished apt-daily.service - Daily apt download activities.\n2026-11-02T14:50:34+01:00 bussassistent systemd[1]: apt-daily.service: Consumed 6.831s CPU time over 37.672s wall clock time, 385.1M memory peak.\n"
+  },
+  "previous_matching_warnings": {
+    "exit": 0,
+    "output": "2026-10-29T20:50:36+01:00 bussassistent kernel: KHO: Failed to reserve lowmem scratch buffer\n2026-10-29T20:50:36+01:00 bussassistent kernel: KHO: Failed to reserve scratch area, disabling kexec handover\n2026-10-29T20:50:36+01:00 bussassistent kernel: integrity: Problem loading X.509 certificate -65\n2026-10-29T20:50:36+01:00 bussassistent systemd-networkd[288]: Failed to open nftables netlink socket. IPMasquerade= and NFTSet= settings will not be applied. Ignoring: Protocol not supported\n2026-10-29T20:50:41+01:00 bussassistent kernel: lenovo_wmi_gamezone 887B54E3-DDDC-4B2C-8B88-68A26A8835D0: platform_profile probe failed\n2026-10-29T23:51:40+01:00 bussassistent systemd-networkd-wait-online[116892]: Timeout occurred while waiting for network connectivity.\n2026-10-30T06:54:08+01:00 bussassistent systemd-networkd-wait-online[380824]: Timeout occurred while waiting for network connectivity.\n2026-10-30T06:58:03+01:00 bussassistent systemd-networkd-wait-online[399416]: Timeout occurred while waiting for network connectivity.\n2026-10-31T01:13:03+01:00 bussassistent systemd-networkd-wait-online[1073421]: Timeout occurred while waiting for network connectivity.\n2026-10-31T06:36:43+01:00 bussassistent systemd-networkd-wait-online[1276269]: Timeout occurred while waiting for network connectivity.\n2026-10-31T17:58:05+01:00 bussassistent systemd-networkd-wait-online[1692122]: Timeout occurred while waiting for network connectivity.\n2026-10-31T19:34:35+01:00 bussassistent systemd-networkd-wait-online[1751101]: Timeout occurred while waiting for network connectivity.\n2026-11-01T06:55:07+01:00 bussassistent systemd-networkd-wait-online[2166716]: Timeout occurred while waiting for network connectivity.\n2026-11-01T15:50:16+01:00 bussassistent systemd-networkd-wait-online[2494899]: Timeout occurred while waiting for network connectivity.\n2026-11-01T23:09:37+01:00 bussassistent systemd-networkd-wait-online[2777457]: Timeout occurred while waiting for network connectivity.\n"
+  },
+  "project_failures": {
+    "exit": 1,
+    "output": "-- No entries --\n"
+  },
+  "tunnel_events": {
+    "exit": 0,
+    "stderr": "",
+    "events": [
+      {
+        "time_local": "2026-11-01T23:28:18.198633+01:00",
+        "message": "2026-11-01T22:28:18Z WRN No ingress rules were defined in provided config (if any) nor from the cli, cloudflared will return 503 for all incoming HTTP requests"
+      },
+      {
+        "time_local": "2026-11-01T23:28:19.209806+01:00",
+        "message": "2026-11-01T22:28:19Z INF Registered tunnel connection connIndex=0 connection=[REDACTED] event=0 ip=[REDACTED] location=arn06 protocol=quic"
+      },
+      {
+        "time_local": "2026-11-01T23:28:19.519377+01:00",
+        "message": "2026-11-01T22:28:19Z INF Registered tunnel connection connIndex=1 connection=[REDACTED] event=0 ip=[REDACTED] location=cph03 protocol=quic"
+      },
+      {
+        "time_local": "2026-11-01T23:28:20.866764+01:00",
+        "message": "2026-11-01T22:28:20Z INF Registered tunnel connection connIndex=2 connection=[REDACTED] event=0 ip=[REDACTED] location=cph03 protocol=quic"
+      },
+      {
+        "time_local": "2026-11-01T23:28:21.883763+01:00",
+        "message": "2026-11-01T22:28:21Z INF Registered tunnel connection connIndex=3 connection=[REDACTED] event=0 ip=[REDACTED] location=arn07 protocol=quic"
+      },
+      {
+        "time_local": "2026-11-02T14:58:35.500300+01:00",
+        "message": "2026-11-02T13:58:35Z WRN Serve tunnel error error=\"datagram manager error: timeout: no recent network activity\" connIndex=1 event=0 ip=[REDACTED]"
+      },
+      {
+        "time_local": "2026-11-02T14:58:35.686163+01:00",
+        "message": "2026-11-02T13:58:35Z WRN Serve tunnel error error=\"datagram manager error: timeout: no recent network activity\" connIndex=2 event=0 ip=[REDACTED]"
+      },
+      {
+        "time_local": "2026-11-02T14:58:35.779674+01:00",
+        "message": "2026-11-02T13:58:35Z WRN Connection terminated error=\"datagram manager error: timeout: no recent network activity\" connIndex=1"
+      },
+      {
+        "time_local": "2026-11-02T14:58:37.002369+01:00",
+        "message": "2026-11-02T13:58:37Z WRN Connection terminated error=\"datagram manager error: timeout: no recent network activity\" connIndex=2"
+      },
+      {
+        "time_local": "2026-11-02T14:58:43.749040+01:00",
+        "message": "2026-11-02T13:58:43Z WRN Failed to dial a quic connection error=\"failed to dial to edge with quic: timeout: no recent network activity\" connIndex=2 event=0 ip=[REDACTED]"
+      },
+      {
+        "time_local": "2026-11-02T14:58:43.749040+01:00",
+        "message": "2026-11-02T13:58:43Z WRN Failed to dial a quic connection error=\"failed to dial to edge with quic: timeout: no recent network activity\" connIndex=1 event=0 ip=[REDACTED]"
+      },
+      {
+        "time_local": "2026-11-02T14:58:44.005646+01:00",
+        "message": "2026-11-02T13:58:44Z WRN Connection terminated error=\"failed to dial to edge with quic: timeout: no recent network activity\" connIndex=1"
+      },
+      {
+        "time_local": "2026-11-02T14:58:45.757913+01:00",
+        "message": "2026-11-02T13:58:45Z WRN Connection terminated error=\"failed to dial to edge with quic: timeout: no recent network activity\" connIndex=2"
+      },
+      {
+        "time_local": "2026-11-02T14:58:55.416638+01:00",
+        "message": "2026-11-02T13:58:55Z WRN Failed to dial a quic connection error=\"failed to dial to edge with quic: timeout: no recent network activity\" connIndex=2 event=0 ip=[REDACTED]"
+      },
+      {
+        "time_local": "2026-11-02T14:58:55.416638+01:00",
+        "message": "2026-11-02T13:58:55Z WRN Failed to dial a quic connection error=\"failed to dial to edge with quic: timeout: no recent network activity\" connIndex=1 event=0 ip=[REDACTED]"
+      },
+      {
+        "time_local": "2026-11-02T14:58:58.402674+01:00",
+        "message": "2026-11-02T13:58:58Z WRN Connection terminated error=\"failed to dial to edge with quic: timeout: no recent network activity\" connIndex=1"
+      },
+      {
+        "time_local": "2026-11-02T14:58:59.822496+01:00",
+        "message": "2026-11-02T13:58:59Z WRN Connection terminated error=\"failed to dial to edge with quic: timeout: no recent network activity\" connIndex=2"
+      },
+      {
+        "time_local": "2026-11-02T14:59:53.905758+01:00",
+        "message": "2026-11-02T13:59:53Z WRN Failed to dial a quic connection error=\"failed to dial to edge with quic: timeout: no recent network activity\" connIndex=1 event=0 ip=[REDACTED]"
+      },
+      {
+        "time_local": "2026-11-02T14:59:53.905758+01:00",
+        "message": "2026-11-02T13:59:53Z WRN Failed to dial a quic connection error=\"failed to dial to edge with quic: timeout: no recent network activity\" connIndex=2 event=0 ip=[REDACTED]"
+      },
+      {
+        "time_local": "2026-11-02T14:59:56.719255+01:00",
+        "message": "2026-11-02T13:59:56Z WRN Connection terminated error=\"failed to dial to edge with quic: timeout: no recent network activity\" connIndex=2"
+      },
+      {
+        "time_local": "2026-11-02T15:00:03.524466+01:00",
+        "message": "2026-11-02T14:00:03Z WRN Connection terminated error=\"failed to dial to edge with quic: timeout: no recent network activity\" connIndex=1"
+      },
+      {
+        "time_local": "2026-11-02T15:00:11.746845+01:00",
+        "message": "2026-11-02T14:00:11Z WRN Failed to dial a quic connection error=\"failed to dial to edge with quic: timeout: no recent network activity\" connIndex=2 event=0 ip=[REDACTED]"
+      },
+      {
+        "time_local": "2026-11-02T15:00:11.746845+01:00",
+        "message": "2026-11-02T14:00:11Z WRN Failed to dial a quic connection error=\"failed to dial to edge with quic: timeout: no recent network activity\" connIndex=1 event=0 ip=[REDACTED]"
+      },
+      {
+        "time_local": "2026-11-02T15:00:12.177848+01:00",
+        "message": "2026-11-02T14:00:12Z WRN Connection terminated error=\"failed to dial to edge with quic: timeout: no recent network activity\" connIndex=1"
+      },
+      {
+        "time_local": "2026-11-02T15:00:12.871639+01:00",
+        "message": "2026-11-02T14:00:12Z WRN Connection terminated error=\"failed to dial to edge with quic: timeout: no recent network activity\" connIndex=2"
+      },
+      {
+        "time_local": "2026-11-02T15:00:58.821258+01:00",
+        "message": "2026-11-02T14:00:58Z WRN Failed to dial a quic connection error=\"failed to dial to edge with quic: timeout: no recent network activity\" connIndex=1 event=0 ip=[REDACTED]"
+      },
+      {
+        "time_local": "2026-11-02T15:00:58.821258+01:00",
+        "message": "2026-11-02T14:00:58Z WRN Failed to dial a quic connection error=\"failed to dial to edge with quic: timeout: no recent network activity\" connIndex=2 event=0 ip=[REDACTED]"
+      },
+      {
+        "time_local": "2026-11-02T15:01:09.925417+01:00",
+        "message": "2026-11-02T14:01:09Z WRN Connection terminated error=\"failed to dial to edge with quic: timeout: no recent network activity\" connIndex=2"
+      },
+      {
+        "time_local": "2026-11-02T15:01:13.669087+01:00",
+        "message": "2026-11-02T14:01:13Z WRN Connection terminated error=\"failed to dial to edge with quic: timeout: no recent network activity\" connIndex=1"
+      },
+      {
+        "time_local": "2026-11-02T15:02:14.277407+01:00",
+        "message": "2026-11-02T14:02:14Z INF Registered tunnel connection connIndex=2 connection=[REDACTED] event=0 ip=[REDACTED] location=cph01 protocol=quic"
+      },
+      {
+        "time_local": "2026-11-02T15:02:14.286913+01:00",
+        "message": "2026-11-02T14:02:14Z INF Registered tunnel connection connIndex=1 connection=[REDACTED] event=0 ip=[REDACTED] location=cph03 protocol=quic"
+      }
+    ]
+  }
+}

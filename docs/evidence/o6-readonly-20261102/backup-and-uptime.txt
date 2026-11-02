@@ -1,0 +1,75 @@
+2026-11-02T20:16:21+01:00
+2812a231-758d-4b5e-8241-d748b52d0991
+74909.73 293328.05
+2026-11-01 23:27:52
+Id=bussassistent.service
+ActiveState=active
+SubState=exited
+ActiveEnterTimestamp=Sun 2026-11-01 23:28:17 CET
+Result=success
+NRestarts=0
+ExecMainStartTimestamp=Sun 2026-11-01 23:28:07 CET
+ExecMainExitTimestamp=Sun 2026-11-01 23:28:17 CET
+ExecMainStatus=0
+
+Id=cloudflared.service
+ActiveState=active
+SubState=running
+ActiveEnterTimestamp=Sun 2026-11-01 23:28:17 CET
+Result=success
+NRestarts=0
+ExecMainStartTimestamp=Sun 2026-11-01 23:28:17 CET
+ExecMainExitTimestamp=
+ExecMainStatus=0
+
+Id=bussassistent-backup.service
+ActiveState=inactive
+SubState=dead
+ActiveEnterTimestamp=
+Result=success
+NRestarts=0
+ExecMainStartTimestamp=Mon 2026-11-02 03:16:55 CET
+ExecMainExitTimestamp=Mon 2026-11-02 03:16:55 CET
+ExecMainStatus=0
+
+Id=bussassistent-backup.timer
+ActiveState=active
+SubState=waiting
+ActiveEnterTimestamp=Sun 2026-11-01 23:27:59 CET
+Result=success
+NEXT                        LEFT LAST                         PASSED UNIT                       ACTIVATES
+Tue 2026-11-03 03:18:15 CET   7h Mon 2026-11-02 03:16:55 CET 16h ago bussassistent-backup.timer bussassistent-backup.service
+
+1 timers listed.
+Pass --all to see loaded but inactive timers, too.
+NextElapseUSecRealtime=Tue 2026-11-03 03:18:15 CET
+LastTriggerUSec=Mon 2026-11-02 03:16:55 CET
+-rw-r----- 1 root jonas 114189 2026-10-31 03:20 /var/backups/bussassistent/20261031T022003Z-addd27b14fe4b26ef24d488d847d1c0d59a98946.dump
+-rw-r----- 1 root jonas 114189 2026-10-31 03:20 /var/backups/bussassistent/20261031T022031Z-addd27b14fe4b26ef24d488d847d1c0d59a98946.dump
+-rw-r----- 1 root jonas 114189 2026-10-31 03:20 /var/backups/bussassistent/20261031T022042Z-addd27b14fe4b26ef24d488d847d1c0d59a98946.dump
+-rw-r----- 1 root jonas 114189 2026-10-31 03:21 /var/backups/bussassistent/20261031T022121Z-addd27b14fe4b26ef24d488d847d1c0d59a98946.dump
+-rw-r----- 1 root jonas  67141 2026-10-31 04:00 /var/backups/bussassistent/20261031T030002Z-d367a0e47198aeecc52358258cb6825eecdc8c4a.dump
+-rw-r----- 1 root jonas  66723 2026-11-01 03:17 /var/backups/bussassistent/20261101T021712Z-d367a0e47198aeecc52358258cb6825eecdc8c4a.dump
+-rw-r----- 1 root jonas  66723 2026-11-01 04:00 /var/backups/bussassistent/20261101T030004Z-d367a0e47198aeecc52358258cb6825eecdc8c4a.dump
+-rw-r----- 1 root jonas  66495 2026-11-01 18:04 /var/backups/bussassistent/20261101T170451Z-d367a0e47198aeecc52358258cb6825eecdc8c4a.dump
+-rw-r----- 1 root jonas  66495 2026-11-01 18:04 /var/backups/bussassistent/20261101T170453Z-d367a0e47198aeecc52358258cb6825eecdc8c4a.dump
+-rw-r----- 1 root jonas  66495 2026-11-01 18:09 /var/backups/bussassistent/20261101T170920Z-d367a0e47198aeecc52358258cb6825eecdc8c4a.dump
+-rw-r----- 1 root jonas  75755 2026-11-01 21:35 /var/backups/bussassistent/20261101T203510Z-93ee582b1a71a3f7552da1894b570366b89afee1.dump
+-rw-r----- 1 root jonas  75755 2026-11-01 21:35 /var/backups/bussassistent/20261101T203513Z-93ee582b1a71a3f7552da1894b570366b89afee1.dump
+-rw-r----- 1 root jonas  75755 2026-11-01 22:29 /var/backups/bussassistent/20261101T212947Z-93ee582b1a71a3f7552da1894b570366b89afee1.dump
+-rw-r----- 1 root jonas  75755 2026-11-01 22:29 /var/backups/bussassistent/20261101T212949Z-93ee582b1a71a3f7552da1894b570366b89afee1.dump
+-rw-r----- 1 root jonas  75755 2026-11-01 22:30 /var/backups/bussassistent/20261101T213004Z-93ee582b1a71a3f7552da1894b570366b89afee1.dump
+-rw-r----- 1 root jonas  75755 2026-11-01 22:46 /var/backups/bussassistent/20261101T214632Z-5e521cbc658594a47c4568d352a50e46309573c4.dump
+-rw-r----- 1 root jonas  75755 2026-11-01 22:46 /var/backups/bussassistent/20261101T214635Z-5e521cbc658594a47c4568d352a50e46309573c4.dump
+-rw-r----- 1 root jonas  75755 2026-11-01 22:59 /var/backups/bussassistent/20261101T215941Z-5e521cbc658594a47c4568d352a50e46309573c4.dump
+-rw-r----- 1 root jonas  75755 2026-11-01 23:09 /var/backups/bussassistent/20261101T220901Z-5e521cbc658594a47c4568d352a50e46309573c4.dump
+-rw-r----- 1 root jonas  75755 2026-11-01 23:11 /var/backups/bussassistent/20261101T221135Z-5e521cbc658594a47c4568d352a50e46309573c4.dump
+-rw-r----- 1 root jonas  78479 2026-11-01 23:24 /var/backups/bussassistent/20261101T222450Z-5e521cbc658594a47c4568d352a50e46309573c4.dump
+-rw-r----- 1 root jonas  78479 2026-11-01 23:24 /var/backups/bussassistent/20261101T222452Z-5e521cbc658594a47c4568d352a50e46309573c4.dump
+-rw-r----- 1 root jonas  81007 2026-11-01 23:57 /var/backups/bussassistent/20261101T225750Z-5e521cbc658594a47c4568d352a50e46309573c4.dump
+-rw-r----- 1 root jonas  81007 2026-11-01 23:57 /var/backups/bussassistent/20261101T225752Z-5e521cbc658594a47c4568d352a50e46309573c4.dump
+-rw-r----- 1 root jonas  80872 2026-11-02 03:16 /var/backups/bussassistent/20261102T021655Z-5e521cbc658594a47c4568d352a50e46309573c4.dump
+2026-11-02T03:16:55+01:00 bussassistent systemd[1]: Starting bussassistent-backup.service - Bussassistent daily PostgreSQL backup...
+2026-11-02T03:16:55+01:00 bussassistent bussassistentctl[145822]: /var/backups/bussassistent/20261102T021655Z-5e521cbc658594a47c4568d352a50e46309573c4.dump
+2026-11-02T03:16:55+01:00 bussassistent systemd[1]: bussassistent-backup.service: Deactivated successfully.
+2026-11-02T03:16:55+01:00 bussassistent systemd[1]: Finished bussassistent-backup.service - Bussassistent daily PostgreSQL backup.

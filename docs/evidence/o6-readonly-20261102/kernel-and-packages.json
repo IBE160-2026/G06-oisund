@@ -1,0 +1,23 @@
+{
+  "command": [
+    "ssh",
+    "-i",
+    "C:\\Users\\Jonas\\.ssh\\ibe160_server_ed25519",
+    "-o",
+    "IdentitiesOnly=yes",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "StrictHostKeyChecking=yes",
+    "-o",
+    "ConnectTimeout=10",
+    "-o",
+    "HostKeyAlias=192.168.1.139",
+    "jonas@192.168.1.138",
+    "date --iso-8601=seconds\nuname -r\napt-cache policy linux-image-generic linux-generic linux-image-7.0.0-42-generic\nstat -c '%n %y %s' /var/lib/apt/periodic/update-success-stamp /var/lib/apt/lists/*InRelease\napt list --upgradable 2>/dev/null\nsystemctl --failed --no-pager\ndpkg --audit\nif test -e /run/reboot-required; then cat /run/reboot-required /run/reboot-required.pkgs; else echo NO_REBOOT_REQUIRED; fi\nsystemd-analyze cat-config systemd/journald.conf | grep -E '^ForwardToWall='\n"
+  ],
+  "start_utc": "2026-11-02T19:16:22.402707+00:00",
+  "end_utc": "2026-11-02T19:16:23.089731+00:00",
+  "exit": 0,
+  "output_sha256": "ae314172ec35599975bcfde1498e4eccf3511b3a103bd7c0afe748e898c604bc"
+}

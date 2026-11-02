@@ -1,0 +1,7 @@
+{
+  "exact_container": "o6-night-restore-7fb1ca3ff607",
+  "absent_after_rm": true,
+  "existing_images_not_retagged": true,
+  "no_named_volume_or_network_created": true,
+  "checked_utc": "2026-11-02T19:20:56.083257+00:00"
+}

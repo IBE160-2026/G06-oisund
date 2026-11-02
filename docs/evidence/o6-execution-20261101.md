@@ -161,3 +161,10 @@ Vedvarende, syntakskontrollerte og hashbundne **manuelle returoppskrifter** er i
 | Stabilitet/bredere bevisgrenser | Én faktisk ny oppstart og kort frisk observasjon er dokumentert. Videre oppstarts-/langtidsstabilitet og bredere OS/supply-chain-grenser er fortsatt åpne. Ingen firmware-/penetrasjonssikkerhet er utledet fra skanning. |
 
 **Konklusjon: O6 lukkes ikke som hel kategori.** Alle gjennomførbare kvalifiserte vedlikeholdstrinn i dette løpet er fullført. Ingen ytterligere nødvendig eierbeslutning eller konkret funksjonsblokkering står igjen i dette vedlikeholdsløpet. Minste videre oppfølging er å følge støttet Ubuntu-kernelrettelse, kvalifisere den mot den dokumenterte CVE-/maskinvaregrensen når tilgjengelig, og registrere videre stabilitet/oppstarter og neste automatiske backup. Aksepterte midlertidige restgrenser forblir åpne med eksplisitt disponering. O3–O5 spores separat. V1-tag/release og godkjent refleksjon er uendret; ingen ny tag/release.
+
+
+## Lesende etterkontroll 2. november kl.20:16–20:21
+
+[Ny full etterkontroll](o6-readonly-20261102.md) verifiserte faktisk automatisk backup03:16:55, hash og isolert fullrestore av eksakt nattdump, samme boot/20t53m oppetid, frisk app/DB/tunnel og ingen failed units. Logghendelser omfatter tidligere kjente apt-nettventetider og to automatisk gjenoppkoblede tunnelkanaler; ingen ny vedvarende tjenestefeil er påvist. Serverpolicy og ferske offisielle pakkeindekser tilbyr fortsatt kernel42.42. Ingen produksjonsendringer.
+
+Det konkrete sluttpunktet om neste automatiske backup er dermed fullført. Ingen vedtatt minste observasjonstid finnes; én uke var et forslag og er ingen blokkering. Videre stabilitet/tilbakevendende varsler er løpende separat driftsoppfølging. Vedlikeholdsløpets tekniske porter er ferdige. O6 som hel kategori beholdes åpen for de urettede/ikke individuelt lukkede kernelrestgruppene under midlertidig aksept og den opprinnelige brede bevisgrensen; ingen ny eierbeslutning eller nødvendig sluttprøve mangler i dette løpet. Se rapportens kriterietabell for presist skille. O3–O5 er urørt.

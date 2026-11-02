@@ -1,0 +1,70 @@
+{
+  "backup-and-uptime.json": {
+    "bytes": 1207,
+    "sha256": "9a7034203513e420c2559e220b494f02da3d1aafca3bc42e060ab75db070f32f"
+  },
+  "backup-and-uptime.txt": {
+    "bytes": 5322,
+    "sha256": "3dc95a4fb86b2b66cbaac9288d99bb023b6413cebc701719b9d4649ae9b7fbbe"
+  },
+  "final-readonly-health.json": {
+    "bytes": 865,
+    "sha256": "79a2683576f2493807e741d223465fdffc2cb33b06ce0bff31f0623893b73574"
+  },
+  "final-readonly-health.txt": {
+    "bytes": 1481,
+    "sha256": "067186132d4527beb3c55fd458f842b0e0c149f824942d715cd07e9ce89608c6"
+  },
+  "journal-review.json": {
+    "bytes": 1944,
+    "sha256": "c7030335bd18eee1746d7a9428602cc3af453a793aab804fdaab928bcd39dbd3"
+  },
+  "journal-review.txt": {
+    "bytes": 33398,
+    "sha256": "3843c0220fe14553029ba28541d2221c55c458ff21f728120c02376e919acd6b"
+  },
+  "kernel-and-packages.json": {
+    "bytes": 1034,
+    "sha256": "bee20b5040b7ebb35803b3c7bb1a541989fd2bca1dd6d505b9948cffa1e8a58c"
+  },
+  "kernel-and-packages.txt": {
+    "bytes": 4610,
+    "sha256": "ae314172ec35599975bcfde1498e4eccf3511b3a103bd7c0afe748e898c604bc"
+  },
+  "live-kernel-package-index.json": {
+    "bytes": 2953,
+    "sha256": "4e8c5849955efcfc01f25399b0c53b1d33e9d05b1fce57f078a0782a557708ca"
+  },
+  "local-fixture-cleanup.json": {
+    "bytes": 230,
+    "sha256": "abfbfff7fa5fbd6ac7f37542728b3fb6820e950cb9341d174f24d9c6a9c1cb99"
+  },
+  "log-followup.json": {
+    "bytes": 2170,
+    "sha256": "1c71de0b72ec3f2b3d43f6530f4a65d1b652ce0c7956f0c6edea022db65276f9"
+  },
+  "log-followup.txt": {
+    "bytes": 11866,
+    "sha256": "9df51f3425f316494e15a00dee61f15bb020def0122641915905ad971b0354fc"
+  },
+  "night-backup-hash.json": {
+    "bytes": 803,
+    "sha256": "e22f151adac86dd5cb1089b9328f62bc2768ab4969f93840df35049ef4fbad51"
+  },
+  "night-backup-hash.txt": {
+    "bytes": 456,
+    "sha256": "53c36978e0b0170c9b394452bd38eed95afc965bd44e4c17f141adcaa6d73592"
+  },
+  "night-backup-restore.json": {
+    "bytes": 885,
+    "sha256": "624c922faeef062060849740f0638e91a7fff21415728993dc276d7eef2aecbd"
+  },
+  "production-health.json": {
+    "bytes": 1276,
+    "sha256": "b241834afaeab47bce1f49f5685afb6d3a4309e208bacc856a5f20d6d3728e24"
+  },
+  "production-health.txt": {
+    "bytes": 2502,
+    "sha256": "65ccfba013be6aeeac4ff359a8b57ed43aa14dab211982b1a5c304ad8495dd19"
+  }
+}

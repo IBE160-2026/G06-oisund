@@ -1,0 +1,23 @@
+{
+  "command": [
+    "ssh",
+    "-i",
+    "C:\\Users\\Jonas\\.ssh\\ibe160_server_ed25519",
+    "-o",
+    "IdentitiesOnly=yes",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "StrictHostKeyChecking=yes",
+    "-o",
+    "ConnectTimeout=10",
+    "-o",
+    "HostKeyAlias=192.168.1.139",
+    "jonas@192.168.1.138",
+    "sha256sum /var/backups/bussassistent/20261102T021655Z-5e521cbc658594a47c4568d352a50e46309573c4.dump; stat -c '%s %a %U %G' /var/backups/bussassistent/20261102T021655Z-5e521cbc658594a47c4568d352a50e46309573c4.dump; journalctl --list-boots --no-pager | tail -n 3"
+  ],
+  "start_utc": "2026-11-02T19:17:38.485346+00:00",
+  "end_utc": "2026-11-02T19:17:38.901042+00:00",
+  "exit": 0,
+  "output_sha256": "53c36978e0b0170c9b394452bd38eed95afc965bd44e4c17f141adcaa6d73592"
+}
