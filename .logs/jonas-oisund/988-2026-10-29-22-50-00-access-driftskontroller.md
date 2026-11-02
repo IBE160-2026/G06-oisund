@@ -242,3 +242,17 @@ Rapport/evidens/driftsveiledning er committet i **654e850238d6de32ca55b536b6ba38
 
 - O5: personlig prøve på den nye releasen avventes. Nytt privat vindu og Cloudflare-/eventuellMFA/appinnlogging, åpne syntetisk testutkast, ufarlig lagring, refresh/gjenåpning uten ekstra kopi, deretter normal tilgang etter minst fem minutter. Rapporter faktisk resultat/enhet/nettleser/tidspunkt; ingen ny risikoaksept etterspørres.
 - O3/O4/O6 forblir åpne innen eksisterende eksterne-/WAN-/regel-/kernel-/bredere bevisgrenser. Ingen av dem lukkes av deploy eller personlig O5-prøve. Punktene er oppdatert i det eksisterende sammensatte driftspunktet i issues.md.
+
+## 2026-11-02 kl. 21:12 — Jonas Øisund
+
+### Oppgave
+Registrere Jonas sitt «bestått» på de fem personlige O5-/deploykontrollene.
+
+### Plan
+Binde resultatet til fortsatt aktiv release, oppdatere kun avgrenset O5-status og bevare O3/O4/O6 åpne.
+
+### Resultat
+Arbeidscommit **19a949720544d4133b380e813a1433001be2d24f** registrerer ordrett eierresultat i [owner-test.json](../../docs/evidence/o5-deploy-20261102/owner-test.json) og oppdaterer deployrapport, register og driftsveiledning. Aktiv7921eb54e4816aaab9368c3efd851bcf692f3823 er lesende kontrollert; main var5123e83 før registreringen. Eierens svar gjelder de fem etterspurte stegene: ny privat innlogging, syntetisk testutkast, lagring, refresh/gjenåpning uten ekstra kopi og fortsatt tilgang etter minst fem minutter. Enhet/nettleser/individuelle handlingstidspunkt er ikke oppgitt og er ikke funnet på. O5s dokumenterte rettings-/deployoppfølging er fullført, inklusive personlig port; ingen ny generell sikkerhetsgodkjenning eller risikoaksept. Ingen ny testkjøring, backupjobb, deploy, omstart eller endring av passordarbeid/v1.0.0. Issues sitt sammensatte driftspunkt beholder åpen status for O3/O4/O6; O5-delen er merket løst. Dokumentasjon og separat loggcommit pushes normalt.
+
+### Åpne punkter
+- O3, O4 og O6 forblir åpne innen de eksisterende dokumenterte grensene. Ingen uavklart personlig O5-prøve gjenstår.
