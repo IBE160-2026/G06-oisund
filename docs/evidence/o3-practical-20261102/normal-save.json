@@ -1,0 +1,18 @@
+{
+  "received_utc": "2026-11-02T20:42:53.1879791+00:00",
+  "source": "Owner reported headers and explicitly confirmed the app acknowledged saving",
+  "production_basis": "7921eb54e4816aaab9368c3efd851bcf692f3823",
+  "device": "Desktop",
+  "browser": "Brave",
+  "client_network": "Wi-Fi",
+  "request_identification": "Normal POST to saved synthetic draft, as selected in guided instructions; opaque draft ID not collected",
+  "status": 200,
+  "cache_control": "no-store",
+  "request_origin": "https://app.bussassistent.com",
+  "csrf_header_present": true,
+  "csrf_value_collected": false,
+  "response_allow_origin": "https://app.bussassistent.com",
+  "app_acknowledged_saved": true,
+  "verdict": "Passed bounded normal external save/header observation; does not prove negative Origin/CSRF rejection",
+  "o3_complete": false
+}
