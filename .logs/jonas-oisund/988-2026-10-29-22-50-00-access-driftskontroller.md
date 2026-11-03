@@ -343,3 +343,5 @@ Lesende avklaring av tolv kritiske kernel-treff er dokumentert i **ce7462e**. Kj
 
 ### Åpne punkter
 O4 avventer effektive brannmurregler, ruterkonfigurasjon og uavhengig WAN-bevis mot bekreftet egen adresse. O6 følges opp separat.
+
+Eierens administratorlesing er dokumentert i c622036. UFW er inaktiv, legacy-utskriftene var tomme og nftables viste Docker-regler uten input-hook. Fire wildcard UDP-sokler tilhørte cloudflared. O4 avventer ruter og uavhengig WAN-måling.
