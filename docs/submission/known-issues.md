@@ -1,5 +1,7 @@
 # Known limits
 
+4 November maintenance status: O3 and O5 are complete within documented scope. O4 is administratively closed with recorded verification limits. O6 maintenance, closing checks and triage are complete. Named O6 residual items remain open under the existing temporary risk disposition, and firmware remains deferred. [Maintenance record](../evidence/v1.0.1-maintenance-20261104.md).
+
 3 November O6 handover: the maintenance, closing checks and scoped triage are complete. Jonas allows the named residual items to remain open during password work. Full O6 closure is no longer a general prerequisite for the password release. The temporary acceptance retains its scope. Firmware stays separately deferred. [Decision and operational handover](../evidence/o6-handover-20261103.md).
 
 2 November O5 update: [qualified resolver correction is integrated/deployed](../evidence/o5-deploy-20261102.md) on7921eb5. Technical backup/restore/data/health checks passed; Jonas confirmed the five personal login/save/reopen/cache-interval steps «bestått»; bounded O5 follow-up is complete. O3, O4 and O6 stay open. No password, tag/release or risk-acceptance change. Older active5e521cb statements retain their checkpoint meaning.

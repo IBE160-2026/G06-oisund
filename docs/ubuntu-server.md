@@ -6,7 +6,7 @@ Vedlikehold, beståtte etterkontroller og avgrenset triage er fullført. Navngit
 
 ## Gjeldende etter O5-deploy 2. november 2026
 
-Aktiv release er **7921eb54e4816aaab9368c3efd851bcf692f3823**, med terminerbar JWKS-/DNS-prosess og1MiBgate-tmpfs. Mainintegrasjon/deploy er utført etter uttrykkelig bestilling; backup/isolert restore før/etter,25uendrede tabellfingeravtrykk og app/DB/tunnelkontroller bestod. `previous` er5e521cb med identiske migreringer; [deploy-/tilbakeveisrapport og personlige teststeg](evidence/o5-deploy-20261102.md). Personlig prøve er bekreftet «bestått»; avgrenset O5-oppfølging er fullført. O3/O4/O6 er åpne; passordarbeid ogv1.0.0bevart. Full apputrulling restartet containere/tunnel, ingen vertsomstart eller pakkeoppdatering.
+Aktiv release er **7921eb54e4816aaab9368c3efd851bcf692f3823**, med terminerbar JWKS-/DNS-prosess og1MiBgate-tmpfs. Mainintegrasjon/deploy er utført etter uttrykkelig bestilling; backup/isolert restore før/etter,25uendrede tabellfingeravtrykk og app/DB/tunnelkontroller bestod. `previous` er5e521cb med identiske migreringer; [deploy-/tilbakeveisrapport og personlige teststeg](evidence/o5-deploy-20261102.md). Personlig prøve er bekreftet «bestått»; avgrenset O5-oppfølging er fullført. Gjeldende O3–O6-status og forskjellen mellom release og produksjonscommit står i [vedlikeholdsrapporten for v1.0.1](evidence/v1.0.1-maintenance-20261104.md). Full apputrulling restartet containere/tunnel, ingen vertsomstart eller pakkeoppdatering.
 
 ## Historisk etter O6-vedlikehold 1.–2. november 2026
 

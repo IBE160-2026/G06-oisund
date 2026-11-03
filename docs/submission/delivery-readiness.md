@@ -1,5 +1,7 @@
 # V1 freeze and remaining course delivery
 
+The [v1.0.1 maintenance record](../evidence/v1.0.1-maintenance-20261104.md) consolidates the completed O3–O6 work and separates the release commit from the running server version. The V1 package record below describes its original verification checkpoint.
+
 Updated 31 October 2026. Application/D1–D3/Epic12 and Ubuntu integration/handover are complete and owner-accepted. The approved repository reflection is unchanged. Steps 4 and 5 are qualified in the [final control report](../evidence/v1-final-control-20261031.md). No concrete V1-blocking defect was found. Annotated `v1.0.0` is published at `d367a0e47198aeecc52358258cb6825eecdc8c4a`. A later explicit instruction also published its [GitHub release](https://github.com/IBE160-2026/G06-oisund/releases/tag/v1.0.0) and deployed that exact commit; [actual operations record](../evidence/v1-release-deploy-20261031.md). O3 and O5 are complete within their documented scopes. O4 is administratively closed with evidence limits. O6 remains open.
 
 ## Version and package
