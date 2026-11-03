@@ -339,5 +339,7 @@ Kontroller origin/main og faktisk release. Gjenbruk LAN-beviset og les bindinger
 ### Resultat
 2a6e12f dokumenterer produksjon 7921eb5, lokale appbindinger, origin-avslag uten autentisering og Access 302 over IPv4. Fire wildcard UDP-sokler krever administratorlesing for sikker attribusjon.
 
+Lesende avklaring av tolv kritiske kernel-treff er dokumentert i **ce7462e**. Kjørende Ubuntu 42.42 og installert kumulativ changelog gir ni samsvarende rettelser fra 39.39 og 41.41. CVE-2026-90162, 98725 og 98805 står åpne på pakkenivå. KSMBD, NVMe-target og TIPC var fraværende ved avlesingen. Følg publisering av støttet rettelse og revurder ved modulaktivering. [Per-CVE-rapport](../../docs/evidence/o6-kernel-critical-20261103.md).
+
 ### Åpne punkter
 O4 avventer effektive brannmurregler, ruterkonfigurasjon og uavhengig WAN-bevis mot bekreftet egen adresse. O6 følges opp separat.
