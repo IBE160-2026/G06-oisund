@@ -1,0 +1,56 @@
+[
+  {
+    "url": "https://archive.ubuntu.com/ubuntu/dists/resolute-updates/main/binary-amd64/Packages.xz",
+    "checked_utc": "2026-11-02T19:19:59.127254+00:00",
+    "success": true,
+    "last_modified": "Mon, 02 Nov 2026 15:43:41 GMT",
+    "index_sha256": "d71912d8692c4d4f4f3955d1f9fb5cd25c7a9aefaf66e2059438ffd156e76651",
+    "index_bytes": 802548,
+    "kernel_metapackages": [
+      {
+        "Package": "linux-generic",
+        "Version": "7.0.0-42.42",
+        "Architecture": "amd64",
+        "Depends": "linux-image-generic (= 7.0.0-42.42), linux-headers-generic (= 7.0.0-42.42)",
+        "Filename": "pool/main/l/linux-meta/linux-generic_7.0.0-42.42_amd64.deb",
+        "SHA256": "c9b5c82c13f8591dbab8612eaee7f969cd6af31077881a88f6445d158a962b7e"
+      },
+      {
+        "Package": "linux-image-generic",
+        "Version": "7.0.0-42.42",
+        "Architecture": "amd64",
+        "Depends": "linux-image-7.0.0-42-generic, linux-modules-7.0.0-42-generic, linux-main-modules-zfs-7.0.0-42-generic, linux-main-modules-v4l2loopback-7.0.0-42-generic, linux-firmware, intel-microcode, amd64-microcode",
+        "Filename": "pool/main/l/linux-meta/linux-image-generic_7.0.0-42.42_amd64.deb",
+        "SHA256": "d497440edea7e4347db6f9dc76b819aa5a07f212127dbcbc4a549eb6362fbe4d"
+      }
+    ],
+    "trust_scope": "Official repository over HTTPS; isolated read of package index; no server apt update, and no independent signature revalidation"
+  },
+  {
+    "url": "https://security.ubuntu.com/ubuntu/dists/resolute-security/main/binary-amd64/Packages.xz",
+    "checked_utc": "2026-11-02T19:19:59.128257+00:00",
+    "success": true,
+    "last_modified": "Mon, 02 Nov 2026 14:20:22 GMT",
+    "index_sha256": "ea5b39c2e39736f4b74a58266b05b947d670cfe77c0efecc17ebe778a4985ca6",
+    "index_bytes": 649516,
+    "kernel_metapackages": [
+      {
+        "Package": "linux-generic",
+        "Version": "7.0.0-42.42",
+        "Architecture": "amd64",
+        "Depends": "linux-image-generic (= 7.0.0-42.42), linux-headers-generic (= 7.0.0-42.42)",
+        "Filename": "pool/main/l/linux-meta/linux-generic_7.0.0-42.42_amd64.deb",
+        "SHA256": "c9b5c82c13f8591dbab8612eaee7f969cd6af31077881a88f6445d158a962b7e"
+      },
+      {
+        "Package": "linux-image-generic",
+        "Version": "7.0.0-42.42",
+        "Architecture": "amd64",
+        "Depends": "linux-image-7.0.0-42-generic, linux-modules-7.0.0-42-generic, linux-main-modules-zfs-7.0.0-42-generic, linux-main-modules-v4l2loopback-7.0.0-42-generic, linux-firmware, intel-microcode, amd64-microcode",
+        "Filename": "pool/main/l/linux-meta/linux-image-generic_7.0.0-42.42_amd64.deb",
+        "SHA256": "d497440edea7e4347db6f9dc76b819aa5a07f212127dbcbc4a549eb6362fbe4d"
+      }
+    ],
+    "trust_scope": "Official repository over HTTPS; isolated read of package index; no server apt update, and no independent signature revalidation"
+  }
+]

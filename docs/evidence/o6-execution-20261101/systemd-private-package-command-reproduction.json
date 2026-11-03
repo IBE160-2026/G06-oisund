@@ -1,0 +1,19 @@
+{
+  "command": [
+    "docker",
+    "run",
+    "--rm",
+    "--network",
+    "none",
+    "--mount",
+    "type=bind,source=C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\operations-o3-o6\\tmp\\o6-maintenance-ready-20261101\\systemd-packages\\259.9-0ubuntu0.1,target=/input,readonly",
+    "ibe160-o6-systemd-tests:20261101-r1",
+    "sh",
+    "-c",
+    "set -eu; mkdir -p /root/o6-private/packages; chmod 700 /root/o6-private /root/o6-private/packages; cp /input/*.deb /root/o6-private/packages/; chmod 600 /root/o6-private/packages/*.deb; export DEBIAN_FRONTEND=noninteractive NEEDRESTART_MODE=l; apt-get -y --no-download --allow-downgrades install /root/o6-private/packages/*.deb"
+  ],
+  "start_utc": "2026-11-01T22:03:19.198084+00:00",
+  "end_utc": "2026-11-01T22:03:19.859374+00:00",
+  "exit": 2,
+  "output_sha256": "850120c6271a8e2d89fe61c5be0ff66c3d25c74198a3d097b5b1d522d4b95870"
+}

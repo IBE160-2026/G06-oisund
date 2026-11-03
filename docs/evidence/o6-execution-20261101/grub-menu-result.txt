@@ -1,0 +1,18 @@
+{
+  "backup": "/var/backups/bussassistent/o6-pre-5e521cbc/grub-before-1793571808903045601.tar",
+  "backup_sha256": "79fe3b3b712c985a5f118b11427117cc56a28bd80860ea33f82cd034af3e65f2",
+  "before_hashes": {
+    "/etc/default/grub": "e4695d36e7e1002d75ad3940cc790a196a0149b9403c1fc64a11c47aa6c9098c",
+    "/boot/grub/grub.cfg": "e3455cf8212d04c51f5f90cc089520f3c8b202098d9b83bff8cb8b925b88ca7a"
+  },
+  "reboot_performed": false,
+  "rollback_used": false,
+  "passed": true,
+  "timeout_style": "menu",
+  "timeout_seconds": 10,
+  "both_kernel_entries_present": true,
+  "after_hashes": {
+    "/etc/default/grub": "01114094afb7edb3a26929da87dc4d0344913149eefc75fd69e99e2d6acea083",
+    "/boot/grub/grub.cfg": "e3455cf8212d04c51f5f90cc089520f3c8b202098d9b83bff8cb8b925b88ca7a"
+  }
+}

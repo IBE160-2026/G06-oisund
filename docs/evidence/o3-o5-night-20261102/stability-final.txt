@@ -1,0 +1,71 @@
+
+CONTROL 0
+2026-11-02T00:39:35+01:00
+CONTROL_EXIT 0=0
+
+CONTROL 1
+{
+  "commit": "5e521cbc658594a47c4568d352a50e46309573c4",
+  "archive_sha256": "3822a406083b3176fc426b65090f81a6aab1f7b857d36efa0be9802a6206c310"
+}CONTROL_EXIT 1=0
+
+CONTROL 2
+2812a231-758d-4b5e-8241-d748b52d0991
+CONTROL_EXIT 2=0
+
+CONTROL 3
+ 00:39:35 up  1:11,  2 users,  load average: 0.04, 0.07, 0.08
+CONTROL_EXIT 3=0
+
+CONTROL 4
+7.0.0-42-generic
+CONTROL_EXIT 4=0
+
+CONTROL 5
+  UNIT LOAD ACTIVE SUB DESCRIPTION
+
+0 loaded units listed.
+CONTROL_EXIT 5=0
+
+CONTROL 6
+ActiveEnterTimestamp=Sun 2026-11-01 23:28:17 CET
+MainPID=2276
+NRestarts=0
+CONTROL_EXIT 6=0
+
+CONTROL 7
+NEXT                            LEFT LAST                        PASSED UNIT                       ACTIVATES
+Mon 2026-11-02 03:16:23 CET 2h 36min Sun 2026-11-01 03:17:12 CET      - bussassistent-backup.timer bussassistent-backup.service
+
+1 timers listed.
+Pass --all to see loaded but inactive timers, too.
+CONTROL_EXIT 7=0
+
+CONTROL 8
+ActiveEnterTimestamp=
+Result=success
+ExecMainStatus=0
+CONTROL_EXIT 8=0
+
+CONTROL 9
+{"status":200,"readyConnections":4,"connectorId":"f304714a-8993-4a73-b03a-205064d29f02"}CONTROL_EXIT 9=0
+
+CONTROL 10
+API healthy; origin access control rejects unauthenticated requests
+CONTROL_EXIT 10=0
+
+CONTROL 11
+Id=bussassistent.service
+ActiveState=active
+SubState=exited
+
+Id=cloudflared.service
+ActiveState=active
+SubState=running
+Release: 5e521cbc658594a47c4568d352a50e46309573c4
+NAME                          IMAGE                                                                COMMAND                  SERVICE       CREATED       STATUS                       PORTS
+bussassistent-access-gate-1   bussassistent-access-gate:5e521cbc658594a47c4568d352a50e46309573c4   "python gate.py"         access-gate   2 hours ago   Up About an hour             
+bussassistent-gateway-1       bussassistent-gateway:5e521cbc658594a47c4568d352a50e46309573c4       "/bin/sh -ec 'envsub…"   gateway       2 hours ago   Up About an hour             80/tcp, 127.0.0.1:18081->8080/tcp
+bussassistent-private-api-1   bussassistent-api:5e521cbc658594a47c4568d352a50e46309573c4           "python -m app.run"      private-api   2 hours ago   Up About an hour (healthy)   
+bussassistent-private-db-1    bussassistent-postgres:5e521cbc658594a47c4568d352a50e46309573c4      "docker-entrypoint.s…"   private-db    2 hours ago   Up About an hour (healthy)   5432/tcp
+CONTROL_EXIT 11=0

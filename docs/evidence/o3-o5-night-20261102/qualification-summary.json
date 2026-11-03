@@ -1,0 +1,76 @@
+{
+  "time_utc": "2026-11-01T23:39:38.616963+00:00",
+  "branch": "followup/o3-o5-night-20261102",
+  "origin_main": "de959f38274c44dda2b20367a207dfaf655b762b",
+  "production_release_read_only": "5e521cbc658594a47c4568d352a50e46309573c4",
+  "v1_tag": "d367a0e47198aeecc52358258cb6825eecdc8c4a",
+  "unchanged_app_and_proxy_sources": true,
+  "reused_o3": {
+    "source": "docs\\evidence\\o6-execution-20261101\\staged-http-families.txt",
+    "output_sha256": "0c55211f2835ee0fc9c2ef896fbda851ea373837aea33c33381c8c11ba0e0502",
+    "families": 15,
+    "negative_origin_csrf_controls": 75,
+    "before_dispatch_and_after_commit_loss_receipt_replay": true,
+    "scope": "isolated historical actual production runtime image"
+  },
+  "images": {
+    "bussassistent-access-gate:5e521cbc658594a47c4568d352a50e46309573c4": {
+      "id": "sha256:f9c4a48c92b644c638359573dd44a8b5f55c79cb018e0c3c544748cb55cd3aa5",
+      "layers": [
+        "sha256:a5d6d345f6afa08d7c31272055746d60a838b290bfcc82c0a23e8e984d61a933",
+        "sha256:b9baa14e993c683240d519adebb39657df4d2b973dc2f3fee23cd51367806e2b",
+        "sha256:1217eb836a36d0c4be6a310113a777ecb9d7e9c24197a407665c8884cc5369a4",
+        "sha256:3929d22d8aa43d69f436bbc47ef472db875440b850dbc4e80dd272a3adf673d2",
+        "sha256:e83f1b3c8f0f472fbca82dc92e4f3f7feb0ff531d1e8aca5f912153761b8232f",
+        "sha256:6e97cfd09cffeddd2114c2d46cf10c657fa6528e712d6da7e5cdf1102778bf82",
+        "sha256:58d4c061a188c647c1fbc9f3baa8ff0ddd6edb935e9fbf56c53b40c3ea038638",
+        "sha256:40ed089fa2a0235b616a4a55d136d4d9ee589531416e31b26f29c7cf039b763e"
+      ]
+    },
+    "ibe160-o5-gate:20261102": {
+      "id": "sha256:006b319c781666fd1537b476f0c5c2d8bd17f67c5a7a74844bab5a232ec82bc3",
+      "layers": [
+        "sha256:a5d6d345f6afa08d7c31272055746d60a838b290bfcc82c0a23e8e984d61a933",
+        "sha256:b9baa14e993c683240d519adebb39657df4d2b973dc2f3fee23cd51367806e2b",
+        "sha256:1217eb836a36d0c4be6a310113a777ecb9d7e9c24197a407665c8884cc5369a4",
+        "sha256:3929d22d8aa43d69f436bbc47ef472db875440b850dbc4e80dd272a3adf673d2",
+        "sha256:e83f1b3c8f0f472fbca82dc92e4f3f7feb0ff531d1e8aca5f912153761b8232f",
+        "sha256:6e97cfd09cffeddd2114c2d46cf10c657fa6528e712d6da7e5cdf1102778bf82",
+        "sha256:58d4c061a188c647c1fbc9f3baa8ff0ddd6edb935e9fbf56c53b40c3ea038638",
+        "sha256:40ed089fa2a0235b616a4a55d136d4d9ee589531416e31b26f29c7cf039b763e",
+        "sha256:1dbb53e109cbe2d8f910e040dd439c937ac28e1d6549ccef5737dfb4ddfa4453"
+      ]
+    },
+    "ibe160-o5-gate-tests:20261102": {
+      "id": "sha256:f9e8d52bc596ffe2bac4c5e10565380757e6a656a0a7e82ce5f369ebe3ba247d",
+      "layers": [
+        "sha256:a5d6d345f6afa08d7c31272055746d60a838b290bfcc82c0a23e8e984d61a933",
+        "sha256:b9baa14e993c683240d519adebb39657df4d2b973dc2f3fee23cd51367806e2b",
+        "sha256:1217eb836a36d0c4be6a310113a777ecb9d7e9c24197a407665c8884cc5369a4",
+        "sha256:3929d22d8aa43d69f436bbc47ef472db875440b850dbc4e80dd272a3adf673d2",
+        "sha256:e83f1b3c8f0f472fbca82dc92e4f3f7feb0ff531d1e8aca5f912153761b8232f",
+        "sha256:6e97cfd09cffeddd2114c2d46cf10c657fa6528e712d6da7e5cdf1102778bf82",
+        "sha256:58d4c061a188c647c1fbc9f3baa8ff0ddd6edb935e9fbf56c53b40c3ea038638",
+        "sha256:40ed089fa2a0235b616a4a55d136d4d9ee589531416e31b26f29c7cf039b763e",
+        "sha256:1dbb53e109cbe2d8f910e040dd439c937ac28e1d6549ccef5737dfb4ddfa4453",
+        "sha256:e73c85ce6b6e8d2b6beffb54261811fc1d48c568a297d5106c7c4e4ff3ce8098",
+        "sha256:4c6df4af4cb15c662cd2d7e79f795cadaa3b5a9275401167d67bb8d29b641556",
+        "sha256:ca8ede130695bead951b65a7efc8aec7844ed4f068f63eba3e02299d3ae61be9",
+        "sha256:6f4930e314acc7d7ac26d9502e5c28649e38cb63dbdeb01ce13ef8a5bd2661a0",
+        "sha256:c16bb7c9fde07bd1af37de4a20d8f5e047e92a049a2e997ef969ec55fdb7e0b5",
+        "sha256:2b2689668c1f9cccf1eeccec631fe0f8bad4fdcfeb0ffc8d168ba5762dd1133f",
+        "sha256:eb1fa0c0e1e9d1604cfb00fe1375420d878bf3aa967fdeed0b6f58bd0db64c44"
+      ]
+    }
+  },
+  "candidate_exact_gate_source_sha256": "d17deff72843d86a5f15a98dbeeebbf91eb12867ba993086aa3ec940208ddc8a",
+  "new_gate_qualification_passed": 36,
+  "final_receipt_tests_passed": 4,
+  "linux_operations_tests_passed": 20,
+  "own_test_containers_remaining": 0,
+  "production_deployed": false,
+  "external_authenticated_matrix": false,
+  "independent_wan_vantage": false,
+  "firewall_read_requires_interactive_sudo": true,
+  "o6_closed": false
+}

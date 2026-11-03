@@ -1,0 +1,23 @@
+{
+  "received_utc": "2026-11-02T20:31:57.9628974+00:00",
+  "source": "Owner reply: Begge stemmer",
+  "production_basis": "7921eb54e4816aaab9368c3efd851bcf692f3823",
+  "device": "Desktop",
+  "browser": "Brave",
+  "client_network": "Wi-Fi",
+  "cookie_flags": {
+    "private_session": {
+      "secure": true,
+      "http_only": true,
+      "same_site": "Strict"
+    },
+    "private_csrf": {
+      "secure": true,
+      "http_only": true,
+      "same_site": "Strict"
+    }
+  },
+  "cookie_values_collected": false,
+  "verdict": "Passed bounded browser cookie-flag observation for both application cookies",
+  "o3_complete": false
+}

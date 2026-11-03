@@ -1,0 +1,10 @@
+{
+  "owner": "Jonas",
+  "date_local": "2026-11-01",
+  "timezone": "Europe/Oslo",
+  "verbatim": "Jeg aksepterer midlertidig restfare for util-linux, ncurses, ACL/FTS5 og kernel med dokumenterte barrierer. Lokal administratorinnlogging er prøvd, og jeg er ved serveren med strøm, skjerm/tastatur og GRUB-tilgang. Fortsett.",
+  "scope": "Temporary bounded residual risk and console readiness; not a vulnerability fix or automatic O6 closure",
+  "maintenance_authorized": true,
+  "local_administrator_login_tested": true,
+  "console_grub_power_confirmed": true
+}

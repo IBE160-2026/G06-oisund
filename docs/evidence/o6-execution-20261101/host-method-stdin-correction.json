@@ -1,0 +1,8 @@
+{
+  "child_receives_eof_without_console_input": true,
+  "stdin_devnull_argument_verified": true,
+  "actual_ten_package_solution_still_accepted": true,
+  "remote_method_not_replaced_while_first_run_pending": true,
+  "root_cause_status": "terminal-input forwarding is suspected from waiting Compose exec; retry not yet performed",
+  "packages_observed_unchanged": "259.5-0ubuntu3.4"
+}

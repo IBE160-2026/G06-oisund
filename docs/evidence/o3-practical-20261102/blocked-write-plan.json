@@ -1,0 +1,17 @@
+{
+  "status": "prepared; not executed or reported",
+  "purpose": "Keep authentication and issuance online; block only the existing synthetic draft URL before dispatch, then inspect pending original operation and recovery",
+  "browser": "Brave/Chromium156",
+  "official_ui_reference": "https://developer.chrome.com/docs/devtools/request-conditions",
+  "instructions_basis": "Network request right-click Block request, exact URL only; Request conditions drawer enables blocking",
+  "target_template": "https://app.bussassistent.com/private-api/drafts/<synthetic-draft-id>",
+  "excluded_targets": [
+    "whole domain",
+    "auth/session",
+    "auth/csrf",
+    "draft-operations"
+  ],
+  "no_offline_mode": true,
+  "expected_dispatch_error": "(blocked:devtools)",
+  "warning": "Not evidence of after-commit response loss; rule must be removed after test"
+}

@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "roles": {
+    "private-api": {
+      "files": 3126,
+      "lifecycle_unchanged": true
+    },
+    "access-gate": {
+      "files": 1892,
+      "lifecycle_unchanged": true
+    }
+  },
+  "scope": "two own network-none containers, complete collect/inspect/nice/Python/maps path"
+}

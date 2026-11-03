@@ -1,0 +1,35 @@
+{
+  "time_utc": "2026-11-02T19:51:25.287288+00:00",
+  "no_authentication_or_cookies_supplied": true,
+  "redirects_followed": false,
+  "observations": [
+    {
+      "path": "/private",
+      "status": 403,
+      "cache_control": "private, max-age=0, no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
+      "location_host": null,
+      "location_path": ""
+    },
+    {
+      "path": "/private-api/auth/session",
+      "status": 403,
+      "cache_control": "private, max-age=0, no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
+      "location_host": null,
+      "location_path": ""
+    },
+    {
+      "path": "/private-api/drafts",
+      "status": 403,
+      "cache_control": "private, max-age=0, no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
+      "location_host": null,
+      "location_path": ""
+    },
+    {
+      "path": "/private-api/workdays",
+      "status": 403,
+      "cache_control": "private, max-age=0, no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
+      "location_host": null,
+      "location_path": ""
+    }
+  ]
+}

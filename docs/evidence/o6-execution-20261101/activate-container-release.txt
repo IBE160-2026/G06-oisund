@@ -1,0 +1,37 @@
+/var/backups/bussassistent/20261101T213004Z-93ee582b1a71a3f7552da1894b570366b89afee1.dump
+API healthy; origin access control rejects unauthenticated requests
+Active release: 5e521cbc658594a47c4568d352a50e46309573c4
+ Container bussassistent-gateway-1 Stopping 
+ Container bussassistent-gateway-1 Stopped 
+ Container bussassistent-access-gate-1 Stopping 
+ Container bussassistent-private-api-1 Stopping 
+ Container bussassistent-private-api-1 Stopped 
+ Container bussassistent-access-gate-1 Stopped 
+ Container bussassistent-access-gate-1 Recreate 
+ Container bussassistent-private-db-1 Recreate 
+ Container bussassistent-access-gate-1 Recreated 
+ Container bussassistent-private-db-1 Recreated 
+ Container bussassistent-private-api-1 Recreate 
+ Container bussassistent-private-api-1 Recreated 
+ Container bussassistent-gateway-1 Recreate 
+ Container bussassistent-gateway-1 Recreated 
+ Container bussassistent-private-db-1 Starting 
+ Container bussassistent-access-gate-1 Starting 
+ Container bussassistent-private-db-1 Started 
+ Container bussassistent-private-db-1 Waiting 
+ Container bussassistent-access-gate-1 Started 
+ Container bussassistent-private-db-1 Healthy 
+ Container bussassistent-private-api-1 Starting 
+ Container bussassistent-private-api-1 Started 
+ Container bussassistent-private-api-1 Waiting 
+ Container bussassistent-private-api-1 Healthy 
+ Container bussassistent-gateway-1 Starting 
+ Container bussassistent-gateway-1 Started 
+ Container bussassistent-access-gate-1 Waiting 
+ Container bussassistent-private-db-1 Waiting 
+ Container bussassistent-private-api-1 Waiting 
+ Container bussassistent-gateway-1 Waiting 
+ Container bussassistent-private-db-1 Healthy 
+ Container bussassistent-private-api-1 Healthy 
+ Container bussassistent-gateway-1 Healthy 
+ Container bussassistent-access-gate-1 Healthy 

@@ -1,0 +1,8 @@
+{
+  "systemd_debs_verified": 20,
+  "versions": [
+    "259.5-0ubuntu3.4",
+    "259.9-0ubuntu0.1"
+  ],
+  "scope": "local recovery candidates only; not transferred to console-accessible server location"
+}

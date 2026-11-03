@@ -1,0 +1,13 @@
+{
+  "release": "5e521cbc658594a47c4568d352a50e46309573c4",
+  "boot_id": "2812a231-758d-4b5e-8241-d748b52d0991",
+  "after_systemd_cloudflared_reboot_journal_compensation": true,
+  "checks": [
+    "fresh Cloudflare/app login",
+    "normal display",
+    "own harmless draft save",
+    "refresh and reopen persisted change"
+  ],
+  "owner_reply_verbatim": "best\u00e5tt",
+  "passed": true
+}

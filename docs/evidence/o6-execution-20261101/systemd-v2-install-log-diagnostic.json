@@ -1,0 +1,21 @@
+{
+  "command": [
+    "ssh",
+    "-i",
+    "C:\\Users\\Jonas\\.ssh\\ibe160_server_ed25519",
+    "-o",
+    "IdentitiesOnly=yes",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "StrictHostKeyChecking=yes",
+    "-o",
+    "ConnectTimeout=10",
+    "jonas@192.168.1.139",
+    "python3 - <<'PY'\nfrom pathlib import Path\nimport re\nfor name in ['/var/log/apt/history.log','/var/log/apt/term.log','/var/log/dpkg.log']:\n p=Path(name);print('FILE',name)\n try:lines=p.read_text(errors='replace').splitlines()[-180:]\n except PermissionError:print('READ_DENIED');continue\n for line in lines:\n  if name.endswith('history.log')and line.startswith(('Start-Date:','End-Date:','Upgrade:','Downgrade:','Error:')):print(line)\n  elif name.endswith('term.log')and re.search(r'error|Error|^E:|Unsupported|Permission|systemd|dpkg:',line):print(line)\n  elif name.endswith('dpkg.log')and '2026-11-01 23:'in line and any(n in line for n in ['systemd','udev','libpam']):print(line)\nPY"
+  ],
+  "start_utc": "2026-11-01T22:02:04.106709+00:00",
+  "end_utc": "2026-11-01T22:02:04.487597+00:00",
+  "exit": 0,
+  "output_sha256": "8daf47dfd4ad85254666d79eeb0d2938d63ca52a3bb33726e782548b0a41078e"
+}

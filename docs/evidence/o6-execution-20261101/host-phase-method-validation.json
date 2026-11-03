@@ -1,0 +1,7 @@
+{
+  "syntax_passed": true,
+  "actual_ten_package_simulation_accepted": true,
+  "removal_wrong_version_extra_package_empty_solution_refused": true,
+  "remote_method_hash_verified": true,
+  "executed_host_changes": false
+}

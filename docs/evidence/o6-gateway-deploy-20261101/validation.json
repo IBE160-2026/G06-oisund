@@ -1,0 +1,8 @@
+{
+  "json_valid": true,
+  "python_syntax_valid": true,
+  "relative_links_valid": true,
+  "high_signal_secret_hits": [],
+  "approved_reflection_and_non_gateway_product_unchanged": true,
+  "backup_data_excluded_from_git": true
+}

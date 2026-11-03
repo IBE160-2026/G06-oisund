@@ -1,0 +1,14 @@
+{
+  "date": "2026-11-03",
+  "source": "Owner screenshot of Resource Timing output in Brave",
+  "path": "/private-api/auth/session",
+  "sample_count": 5,
+  "each_sample": {
+    "response_status": 200,
+    "transfer_size": 413,
+    "encoded_body_size": 113,
+    "delivery_type": ""
+  },
+  "verdict": "Network transfer recorded for all five sampled requests",
+  "o3_complete": false
+}

@@ -1,0 +1,10 @@
+{
+  "json_and_accepted_jsonl_parse": true,
+  "helper_syntax": true,
+  "local_document_links_exist": true,
+  "high_signal_secret_scan_clear": true,
+  "unsupported_os_summaries_explicitly_invalid": true,
+  "original_large_os_reports_preserved_and_git_ignored": true,
+  "production_release": "5e521cbc658594a47c4568d352a50e46309573c4",
+  "o6_closed": false
+}

@@ -1,0 +1,6 @@
+# /etc/systemd/journald.conf
+# /etc/ if the original file is shipped in /usr/), or by creating "drop-ins" in
+#ForwardToWall=yes
+# /etc/systemd/journald.conf.d/60-bussassistent.conf
+# /usr/lib/systemd/journald.conf.d/syslog.conf
+journal kernel overrides: []

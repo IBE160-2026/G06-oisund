@@ -1,0 +1,13 @@
+{
+  "command": [
+    "C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\operations-o3-o6\\tmp\\o6-gateway-20261101\\tools\\trivy.exe",
+    "image",
+    "--cache-dir",
+    "C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\operations-o3-o6\\tmp\\o6-gateway-20261101\\cache",
+    "--download-db-only"
+  ],
+  "start_utc": "2026-11-01T20:39:42.779824+00:00",
+  "end_utc": "2026-11-01T20:39:43.706167+00:00",
+  "exit": 0,
+  "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

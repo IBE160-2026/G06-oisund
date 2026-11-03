@@ -1,0 +1,24 @@
+{
+  "received_utc": "2026-11-02T20:28:38.6159088+00:00",
+  "source": "Owner report in this chat; no HAR, token or cookie values collected",
+  "production_basis": "7921eb54e4816aaab9368c3efd851bcf692f3823",
+  "device": "Desktop",
+  "browser": "Brave",
+  "browser_version": null,
+  "operating_system": null,
+  "client_network": "Wi-Fi",
+  "test_data": "synthetic O5 test draft ready",
+  "request_path": "/private-api/auth/session",
+  "reported_request_count": 7,
+  "all_reported_requests": {
+    "status": 200,
+    "cache_control": "no-store",
+    "cf_cache_status": "DYNAMIC"
+  },
+  "browser_transfer_source": null,
+  "transfer_column_observation": "Size is selected but still not visible in the request list",
+  "verdict": "Passed bounded authenticated GET/header observation; browser memory/disk delivery source unverified",
+  "o3_complete": false,
+  "o4_open": true,
+  "o6_open": true
+}

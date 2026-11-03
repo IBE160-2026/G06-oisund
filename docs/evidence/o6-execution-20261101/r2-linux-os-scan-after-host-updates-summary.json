@@ -1,0 +1,14 @@
+{
+  "scope": "actual Ubuntu dpkg inventory and release markers only; no private filesystem, active-kernel feature or Go scan",
+  "counts": {
+    "MEDIUM": 42909,
+    "LOW": 9173,
+    "CRITICAL": 213,
+    "HIGH": 4917
+  },
+  "os": {
+    "Family": "ubuntu",
+    "Name": "26.04"
+  },
+  "valid_for_declared_metadata_scope": true
+}

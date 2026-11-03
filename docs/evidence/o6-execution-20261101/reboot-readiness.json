@@ -1,0 +1,21 @@
+{
+  "command": [
+    "ssh",
+    "-i",
+    "C:\\Users\\Jonas\\.ssh\\ibe160_server_ed25519",
+    "-o",
+    "IdentitiesOnly=yes",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "StrictHostKeyChecking=yes",
+    "-o",
+    "ConnectTimeout=10",
+    "jonas@192.168.1.139",
+    "set -eu\ndate --iso-8601=seconds\nsystemctl is-enabled bussassistent cloudflared bussassistent-backup.timer\nif test -f /run/reboot-required; then cat /run/reboot-required; cat /run/reboot-required.pkgs; fi\npython3 - <<'PY'\nfrom pathlib import Path\nimport json\nprint(json.dumps({str(p):p.read_text().strip()for p in Path('/sys/class/power_supply').glob('*/online')}))\nPY\nls -l /boot/vmlinuz-* /boot/initrd.img-*\ngrep -E '^GRUB_(TIMEOUT|TIMEOUT_STYLE|DEFAULT)=' /etc/default/grub\n"
+  ],
+  "start_utc": "2026-11-01T22:16:42.692309+00:00",
+  "end_utc": "2026-11-01T22:16:43.220072+00:00",
+  "exit": 0,
+  "output_sha256": "a31ea6cb600146186a8b48e08e705ee93935e961c0c6c01259995031551a2d7b"
+}

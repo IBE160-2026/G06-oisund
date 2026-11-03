@@ -1,0 +1,26 @@
+{
+  "command": [
+    "docker",
+    "run",
+    "--rm",
+    "--network",
+    "none",
+    "--read-only",
+    "--cap-drop",
+    "ALL",
+    "--user",
+    "10001:10001",
+    "--mount",
+    "type=bind,source=C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\operations-o3-o6/scripts/operations-followup,target=/probe,readonly",
+    "--mount",
+    "type=bind,source=C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\operations-o3-o6\\tmp\\o6-acl-fts5-20261101,target=/analysis,readonly",
+    "sha256:b543ddfa7b6fe1373ea41708a02fe7f11d03abac2d5be3e7e62e0a244ac4332c",
+    "python",
+    "-B",
+    "/probe/native_static.py"
+  ],
+  "start_utc": "2026-11-01T17:42:00.411712+00:00",
+  "end_utc": "2026-11-01T17:42:19.209869+00:00",
+  "exit": 0,
+  "sha256": "239b1931287e63615380e112d49fef963e5a71a0c68469335497069edca8b5ac"
+}

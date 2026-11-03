@@ -1,0 +1,20 @@
+{
+  "command": [
+    "docker",
+    "exec",
+    "o6-metadata-dd6844f61a",
+    "psql",
+    "-U",
+    "postgres",
+    "-d",
+    "private_work",
+    "-v",
+    "ON_ERROR_STOP=1",
+    "-Atc",
+    "CREATE TABLE accounts(id int);CREATE TABLE private_migrations(id int);CREATE TABLE drafts(id int);CREATE TABLE workdays(id int);SELECT 'accounts=' || count(*) FROM accounts;\nSELECT 'migrations=' || count(*) FROM private_migrations;\nSELECT 'drafts=' || count(*) FROM drafts;\nSELECT 'workdays=' || count(*) FROM workdays;\nSELECT 'server_version=' || current_setting('server_version');\nSELECT 'database_locale=' || json_build_object('provider', datlocprovider,\n 'collate', datcollate, 'ctype', datctype, 'version', datcollversion,\n 'actual', pg_database_collation_actual_version(oid))::text\n FROM pg_database WHERE datname=current_database();\nSELECT 'extension=' || extname || ':' || extversion FROM pg_extension ORDER BY extname;"
+  ],
+  "start_utc": "2026-11-01T20:37:18.600629+00:00",
+  "end_utc": "2026-11-01T20:37:18.835033+00:00",
+  "exit": 0,
+  "output_sha256": "a14032d697de5534b9f1e654a7c8629d09cfbe9eecb2a50c0a05b5913b40fc77"
+}

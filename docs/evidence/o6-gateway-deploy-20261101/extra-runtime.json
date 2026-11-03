@@ -1,0 +1,45 @@
+{
+  "up": {
+    "static_responses": {
+      "/": {
+        "status": 200,
+        "sha256": "f64144cc9ed2d72e6af0fbd03271ead24b3dd4c90cb743e8ac38752a94ae1019"
+      },
+      "/private": {
+        "status": 200,
+        "sha256": "f64144cc9ed2d72e6af0fbd03271ead24b3dd4c90cb743e8ac38752a94ae1019"
+      },
+      "/assets/index-CfRMwAoz.js": {
+        "status": 200,
+        "sha256": "cc2320cd1dbdd8010bae11dea1a39b598fedee77e59d93ac8814abd3a64f08e8"
+      },
+      "/assets/index-B_Dppown.css": {
+        "status": 200,
+        "sha256": "4d14e34cc179a136aaaba98938f8737146034b79ef87b631e9b4b704d02ef786"
+      }
+    },
+    "ten_upstream_error_statuses_preserved_no_store": true
+  },
+  "syntax": "nginx: the configuration file /etc/nginx/nginx.conf syntax is ok\nnginx: configuration file /etc/nginx/nginx.conf test is successful\n",
+  "upstream_only_down": {
+    "admission_and_shell_remain_available": true,
+    "api_transport_failure_status": 502,
+    "no_store": true
+  },
+  "static_files": {
+    "baseline": {
+      "/usr/share/nginx/html/50x.html": "876766b4e80133fd490603e073d3567425b88794828a9292104244c9e40875ed",
+      "/usr/share/nginx/html/index.html": "f64144cc9ed2d72e6af0fbd03271ead24b3dd4c90cb743e8ac38752a94ae1019",
+      "/usr/share/nginx/html/assets/index-CfRMwAoz.js": "cc2320cd1dbdd8010bae11dea1a39b598fedee77e59d93ac8814abd3a64f08e8",
+      "/usr/share/nginx/html/assets/index-B_Dppown.css": "4d14e34cc179a136aaaba98938f8737146034b79ef87b631e9b4b704d02ef786"
+    },
+    "candidate": {
+      "/usr/share/nginx/html/50x.html": "876766b4e80133fd490603e073d3567425b88794828a9292104244c9e40875ed",
+      "/usr/share/nginx/html/index.html": "f64144cc9ed2d72e6af0fbd03271ead24b3dd4c90cb743e8ac38752a94ae1019",
+      "/usr/share/nginx/html/assets/index-CfRMwAoz.js": "cc2320cd1dbdd8010bae11dea1a39b598fedee77e59d93ac8814abd3a64f08e8",
+      "/usr/share/nginx/html/assets/index-B_Dppown.css": "4d14e34cc179a136aaaba98938f8737146034b79ef87b631e9b4b704d02ef786"
+    }
+  },
+  "app_assets_identical_to_baseline": true,
+  "own_namespace_removed": "ibe160-o6-gw-extra-7a17cb5bb9294fbda64bb51d54bd9c82"
+}

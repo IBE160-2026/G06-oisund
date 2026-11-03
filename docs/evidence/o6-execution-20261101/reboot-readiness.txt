@@ -1,0 +1,14 @@
+2026-11-01T23:16:42+01:00
+enabled
+enabled
+enabled
+*** System restart required ***
+libc6
+{"/sys/class/power_supply/ADP0/online": "1", "/sys/class/power_supply/hidpp_battery_0/online": "0"}
+-rw------- 1 root root 65241922 Oct 29 17:11 /boot/initrd.img-7.0.0-30-generic
+-rw------- 1 root root 62886629 Nov  1 23:09 /boot/initrd.img-7.0.0-42-generic
+-rw------- 1 root root 17295752 Jul 31 18:28 /boot/vmlinuz-7.0.0-30-generic
+-rw------- 1 root root 17344904 Oct 15 08:50 /boot/vmlinuz-7.0.0-42-generic
+GRUB_DEFAULT=0
+GRUB_TIMEOUT_STYLE=hidden
+GRUB_TIMEOUT=0

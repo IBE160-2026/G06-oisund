@@ -263,5 +263,32 @@ class OperationsTests(unittest.TestCase):
             finally:
                 os.close(terminal)
 
+    def test_image_preflight_supports_old_pinned_and_new_built_database(self):
+        for db in ('postgres:17.11-alpine@sha256:' + 'b' * 64,
+                   'bussassistent-postgres:' + COMMIT):
+            with self.subTest(database=db), patch.object(ops, 'compose', return_value=
+                    subprocess.CompletedProcess([], 0, stdout='bussassistent-api:' + COMMIT + '\n' + db + '\n')), \
+                    patch.object(ops, 'run') as run:
+                ops.verify_release_images(self.root)
+                self.assertIn(['docker', 'image', 'inspect', db], [c.args[0] for c in run.call_args_list])
+
+    def test_missing_database_image_stops_before_tunnel_or_writers(self):
+        old = self.root / 'releases' / ('b' * 40)
+        new = self.root / 'releases' / COMMIT
+        for path in (old, new):
+            (path / 'backend/migrations/private').mkdir(parents=True)
+        (self.root / 'current').symlink_to(old)
+        missing = 'bussassistent-postgres:' + COMMIT
+        calls = []
+        def fake_run(args, **kwargs):
+            calls.append(args)
+            if args == ['docker', 'image', 'inspect', missing]:
+                raise subprocess.CalledProcessError(1, args)
+        with patch.object(sys, 'argv', ['ctl', 'deploy', COMMIT]), patch.object(ops, 'run', side_effect=fake_run), \
+                patch.object(ops, 'compose', return_value=subprocess.CompletedProcess([], 0, stdout=missing+'\n')):
+            with self.assertRaises(subprocess.CalledProcessError):
+                ops.main()
+        self.assertEqual(calls, [['docker', 'image', 'inspect', missing]])
+
 if __name__ == '__main__':
     unittest.main()

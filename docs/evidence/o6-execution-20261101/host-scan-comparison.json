@@ -1,0 +1,83 @@
+{
+  "metadata_projection_os_recognition": "ubuntu26.04 confirmed after including actual etc/lsb-release",
+  "unsupported_os_attempts_not_used_as_zero_findings": true,
+  "same_scanner_database": true,
+  "no_added_or_removed_package_cve_severity_status_keys": true,
+  "package_version_changes_in_finding_rows": [
+    {
+      "package": "libnss-systemd",
+      "cve": "CVE-2026-40228",
+      "severity": "LOW",
+      "before": "259.5-0ubuntu3.4",
+      "after": "259.9-0ubuntu0.1"
+    },
+    {
+      "package": "libpam-systemd",
+      "cve": "CVE-2026-40228",
+      "severity": "LOW",
+      "before": "259.5-0ubuntu3.4",
+      "after": "259.9-0ubuntu0.1"
+    },
+    {
+      "package": "libsystemd-shared",
+      "cve": "CVE-2026-40228",
+      "severity": "LOW",
+      "before": "259.5-0ubuntu3.4",
+      "after": "259.9-0ubuntu0.1"
+    },
+    {
+      "package": "libsystemd0",
+      "cve": "CVE-2026-40228",
+      "severity": "LOW",
+      "before": "259.5-0ubuntu3.4",
+      "after": "259.9-0ubuntu0.1"
+    },
+    {
+      "package": "libudev1",
+      "cve": "CVE-2026-40228",
+      "severity": "LOW",
+      "before": "259.5-0ubuntu3.4",
+      "after": "259.9-0ubuntu0.1"
+    },
+    {
+      "package": "systemd",
+      "cve": "CVE-2026-40228",
+      "severity": "LOW",
+      "before": "259.5-0ubuntu3.4",
+      "after": "259.9-0ubuntu0.1"
+    },
+    {
+      "package": "systemd-cryptsetup",
+      "cve": "CVE-2026-40228",
+      "severity": "LOW",
+      "before": "259.5-0ubuntu3.4",
+      "after": "259.9-0ubuntu0.1"
+    },
+    {
+      "package": "systemd-resolved",
+      "cve": "CVE-2026-40228",
+      "severity": "LOW",
+      "before": "259.5-0ubuntu3.4",
+      "after": "259.9-0ubuntu0.1"
+    },
+    {
+      "package": "systemd-sysv",
+      "cve": "CVE-2026-40228",
+      "severity": "LOW",
+      "before": "259.5-0ubuntu3.4",
+      "after": "259.9-0ubuntu0.1"
+    },
+    {
+      "package": "udev",
+      "cve": "CVE-2026-40228",
+      "severity": "LOW",
+      "before": "259.5-0ubuntu3.4",
+      "after": "259.9-0ubuntu0.1"
+    }
+  ],
+  "raw_row_count": 57212,
+  "installed_package_version_changes": 11,
+  "remaining_high_critical_package_rows": "kernel families and their tooling/headers; not distinct web vulnerabilities",
+  "full_original_reports_retained_locally_not_git_tracked": true,
+  "compact_findings_and_cve_groups_published": true
+}

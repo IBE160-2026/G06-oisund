@@ -1,0 +1,843 @@
+{
+  "host": "2026-11-03T22:02:42+01:00\nUbuntu 7.0.0-42.42-generic 7.0.14\n2812a231-758d-4b5e-8241-d748b52d0991\n{\n  \"commit\": \"7921eb54e4816aaab9368c3efd851bcf692f3823\",\n  \"archive_sha256\": \"d6ec0afb977ea7d3b24ec3198b499acc3f5247bb61645fd88358fe20443038c2\"\n}\nlinux-firmware\t20260319.git217ca6e4.1ubuntu\nlinux-image-generic\t7.0.0-42.42\nlinux-modules-7.0.0-42-generic\t7.0.0-42.42\nlinux-image-generic:\n  Installed: 7.0.0-42.42\n  Candidate: 7.0.0-42.42\n  Version table:\n *** 7.0.0-42.42 500\n        500 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 Packages\n        500 http://security.ubuntu.com/ubuntu resolute-security/main amd64 Packages\n        100 /var/lib/dpkg/status\n     7.0.0-14.14 500\n        500 http://archive.ubuntu.com/ubuntu resolute/main amd64 Packages\nlinux-firmware:\n  Installed: 20260319.git217ca6e4.1ubuntu\n  Candidate: 20260319.git217ca6e4.1ubuntu\n  Version table:\n *** 20260319.git217ca6e4.1ubuntu 500\n        500 http://archive.ubuntu.com/ubuntu resolute/main amd64 Packages\n        100 /var/lib/dpkg/status\n5c1ce5c46247b47a133cf80e7f852fd9d877c832c89848ab42b4db3092fae7aa  /boot/config-7.0.0-42-generic\n4b7354cde1a40f219591bb6fbe81618086d1cb54763da8fc3a4f5d266a62b68a  /usr/share/doc/linux-modules-7.0.0-42-generic/changelog.Debian.gz\nMODULES\nac97_bus\nacpi_pad\naesni_intel\nahci\nautofs4\nbinfmt_misc\nbluetooth\nbridge\nbtbcm\nbtcoexist\nbtintel\nbtmtk\nbtrtl\nbtusb\nccm\ncec\ncfg80211\ncmac\ncoretemp\ncqhci\ndm_log\ndm_mirror\ndm_multipath\ndm_region_hash\ndmi_sysfs\ndrm_buddy\ndrm_display_helper\ndrm_exec\ndrm_gpuvm\ndrm_ttm_helper\nee1004\nefi_pstore\nfirmware_attributes_class\nghash_clmulni_intel\ngpu_sched\nhid\nhid_generic\nhid_logitech_dj\nhid_logitech_hidpp\nhkdf\ni2c_algo_bit\ni2c_i801\ni2c_mux\ni2c_smbus\ni915\nideapad_laptop\ninet_diag\ninput_leds\nintel_cstate\nintel_pch_thermal\nintel_pmc_core\nintel_pmc_core_pltdrv\nintel_pmc_ssram_telemetry\nintel_powerclamp\nintel_rapl_common\nintel_rapl_msr\nintel_tcc_cooling\nintel_uncore_frequency\nintel_uncore_frequency_common\nintel_vsec\nip_set\njoydev\nlenovo_wmi_capdata\nlenovo_wmi_events\nlenovo_wmi_gamezone\nlenovo_wmi_helpers\nlenovo_wmi_other\nlibahci\nlibarc4\nllc\nmac80211\nmac_hid\nmc\nmei\nmei_hdcp\nmei_me\nmei_pxp\nmsr\nmxm_wmi\nnf_conntrack\nnf_conntrack_netlink\nnf_defrag_ipv4\nnf_defrag_ipv6\nnf_nat\nnf_tables\nnfnetlink\nnft_chain_nat\nnft_compat\nnls_iso8859_1\nnouveau\nnvme\nnvme_auth\nnvme_core\nnvme_keyring\noverlay\nphylink\npinctrl_sunrisepoint\npmt_class\npmt_discovery\npmt_telemetry\npsmouse\nqrtr\nr8169\nrapl\nrc_core\nrealtek\nrtl8821ae\nrtl_pci\nrtlwifi\nsch_fq_codel\nsdhci\nsdhci_pci\nsdhci_uhs2\nserio_raw\nsnd\nsnd_compress\nsnd_ctl_led\nsnd_hda_codec\nsnd_hda_codec_alc269\nsnd_hda_codec_generic\nsnd_hda_codec_hdmi\nsnd_hda_codec_intelhdmi\nsnd_hda_codec_realtek_lib\nsnd_hda_core\nsnd_hda_ext_core\nsnd_hda_intel\nsnd_hda_scodec_component\nsnd_hwdep\nsnd_intel_dspcfg\nsnd_intel_sdw_acpi\nsnd_pcm\nsnd_pcm_dmaengine\nsnd_soc_avs\nsnd_soc_core\nsnd_soc_hda_codec\nsnd_timer\nsoundcore\nsparse_keymap\nstp\ntcp_diag\nttm\nudp_diag\nusbhid\nuvc\nuvcvideo\nveth\nvideo\nvideobuf2_common\nvideobuf2_memops\nvideobuf2_v4l2\nvideobuf2_vmalloc\nvideodev\nwmi\nwmi_bmof\nx86_pkg_temp_thermal\nx_tables\nxfrm_algo\nxfrm_user\nxt_MASQUERADE\nxt_addrtype\nxt_conntrack\nxt_nat\nxt_set\nxt_tcpudp\nFILESYSTEMS\nautofs\nbinfmt_misc\nbpf\ncgroup2\nconfigfs\ndebugfs\ndevpts\ndevtmpfs\nefivarfs\next4\nfusectl\nhugetlbfs\nmqueue\nnsfs\noverlay\nproc\npstore\nsecurityfs\nsquashfs\nsysfs\ntmpfs\ntracefs\nvfat\nNET_DRIVERS\nr8169\nrtl8821ae\nPCI_DRIVERS\nahci\ni801_smbus\ni915\nintel_pch_thermal\nmei_me\nnouveau\nnvme\npcieport\nr8169\nrtl8821ae\nsdhci-pci\nskl_uncore\nsnd_hda_intel\nxhci_hcd\nDEVICES\n/sys/class/infiniband absent\n/sys/class/bluetooth 1\n/sys/class/sound 11\n/sys/class/video4linux 2\n/sys/bus/usb/devices 14\n/sys/class/nvme 1\n/sys/class/drm 8\nSYSCTL\nkernel.unprivileged_bpf_disabled = 2\nkernel.apparmor_restrict_unprivileged_userns = 1\nkernel.unprivileged_userns_clone = 1\nkernel.io_uring_disabled = 0\nkernel.modules_disabled = 0\nuser.max_user_namespaces = 28989\nFWUPD_PACKAGE\nfwupd\t2.1.1-1ubuntu3.1\n",
+  "supplemental_triggers": "x86_64\nUbuntu 7.0.0-42.42-generic 7.0.14\n2812a231-758d-4b5e-8241-d748b52d0991\nCONFIG_AUDIT=y\nCONFIG_AUDITSYSCALL=y\nCONFIG_BPF_SYSCALL=y\nCONFIG_FUTEX=y\nCONFIG_FUTEX_PI=y\nCONFIG_FUTEX_PRIVATE_HASH=y\nCONFIG_FUTEX_MPOL=y\nCONFIG_IO_URING=y\nCONFIG_IO_URING_MOCK_FILE=m\nCONFIG_AUDIT_ARCH=y\nCONFIG_KVM=m\nCONFIG_XFRM=y\nCONFIG_IPV6=y\nCONFIG_NETFILTER_NETLINK_QUEUE=m\nCONFIG_NF_FLOW_TABLE=m\nCONFIG_NETFILTER_XT_TARGET_AUDIT=m\nCONFIG_IP_VS=m\nCONFIG_IP_SCTP=m\nCONFIG_BT=m\nCONFIG_CFG80211=m\nCONFIG_MAC80211=m\nCONFIG_SND_SEQUENCER=m\nCONFIG_USB=y\nCONFIG_ANDROID_BINDER_IPC=m\n# CONFIG_ANDROID_BINDER_IPC_RUST is not set\nCONFIG_ANDROID_BINDERFS=m\nCONFIG_ANDROID_BINDER_DEVICES=\"\"\nCONFIG_FUNCTION_TRACER=y\nCONFIG_FPROBE=y\nCONFIG_FPROBE_EVENTS=y\nCONFIG_IO_URING_ZCRX=y\nCONFIG_IO_URING_BPF=y\nWLAN_MODE\nmode-unverified-iw-unavailable\nRFKILL\nwlan\n0\n0\nbluetooth\n1\n0\nbluetooth\n1\n0\nwlan\n0\n0\nLOCAL_DEVICES\n/dev/kvm absent\n/dev/binder absent\n/dev/binderfs absent\n/dev/snd/seq 660 audio\n/dev/net/tun 666 root\nCPU\nGenuineIntel\nFWUPD_STATE\nactive\n",
+  "firmware_cached_candidates": {
+    "exit": 0,
+    "devices": [
+      {
+        "name": "KEK CA",
+        "current": "2011",
+        "available": [
+          "2023",
+          "2023"
+        ]
+      },
+      {
+        "name": "UEFI CA",
+        "current": "2011",
+        "available": [
+          "2023"
+        ]
+      },
+      {
+        "name": "UEFI dbx",
+        "current": "20230501",
+        "available": [
+          "20260402",
+          "20250902",
+          "20250507",
+          "20241101"
+        ]
+      },
+      {
+        "name": "Unifying Receiver",
+        "current": "RQR12.03_B0025",
+        "available": [
+          "RQR12.10_B0032",
+          "RQR12.08_B0030",
+          "RQR12.07_B0029"
+        ]
+      }
+    ]
+  },
+  "installed_changelog_uncompressed_sha256": "3b2b49cc84de46f1d4eb3afb45a3b86aa5cb1b2589c466dac233a73504f2ad39",
+  "kernel_cna_sources": {
+    "CVE-2022-50240": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2022/50xxx/CVE-2022-50240.json",
+      "sha256": "a9efe408f15503529c18ce9ac53d37b390d441e220c8825c3d146411259c6bda",
+      "title": "android: binder: stop saving a pointer to the VMA",
+      "refs": [
+        "https://git.kernel.org/stable/c/27a594bc7a7c8238d239e3cdbcf2edfa3bbe9a1b",
+        "https://git.kernel.org/stable/c/015ac18be7de25d17d6e5f1643cb3b60bfbe859e",
+        "https://git.kernel.org/stable/c/622ef885a89ad04cfb76ee478fb44f051125d1f1",
+        "https://git.kernel.org/stable/c/925e6b6f82c9c80ab3c17acbde8d16f349da7d26",
+        "https://git.kernel.org/stable/c/1ec3f76a436d750fd5023caec5da0494fc2870d2",
+        "https://git.kernel.org/stable/c/a43cfc87caaf46710c8027a8c23b8a55f1078f19"
+      ]
+    },
+    "CVE-2025-40190": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2025/40xxx/CVE-2025-40190.json",
+      "sha256": "7788f374f4838ddd052b6d684da23ef5f7457b34e084c3aa33dc754560de986a",
+      "title": "ext4: guard against EA inode refcount underflow in xattr update",
+      "refs": [
+        "https://git.kernel.org/stable/c/ea39e712c2f5ae148ee5515798ae03523673e002",
+        "https://git.kernel.org/stable/c/1cfb3e4ddbdc8e02e637b8852540bd4718bf4814",
+        "https://git.kernel.org/stable/c/505e69f76ac497e788f4ea0267826ec7266b40c8",
+        "https://git.kernel.org/stable/c/3d6269028246f4484bfed403c947a114bb583631",
+        "https://git.kernel.org/stable/c/79ea7f3e11effe1bd9e753172981d9029133a278",
+        "https://git.kernel.org/stable/c/6b879c4c6bbaab03c0ad2a983953bd1410bb165e",
+        "https://git.kernel.org/stable/c/440b003f449a4ff2a00b08c8eab9ba5cd28f3943",
+        "https://git.kernel.org/stable/c/57295e835408d8d425bef58da5253465db3d6888"
+      ]
+    },
+    "CVE-2026-100074": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/100xxx/CVE-2026-100074.json",
+      "sha256": "8504fc8f65ee88b1da81b7779c2cda0f3b58fc3c44217f506f7486c72af26b6b",
+      "title": "bpf: Mark bpf_refcount field as unique",
+      "refs": [
+        "https://git.kernel.org/stable/c/015f9fbcf3382c5eb563a157ee8cabb6fbfcfe5e",
+        "https://git.kernel.org/stable/c/20b3c72c1b83054c568d2322a95e217fdc281bc3",
+        "https://git.kernel.org/stable/c/e42cede6f90177f4f92f80d3de18f628e61d2087",
+        "https://git.kernel.org/stable/c/641f814965d733936ca3618d4d5a12a8fa9be00e",
+        "https://git.kernel.org/stable/c/61e655391cb19c31f94ecd4354f624c81ce4cf75"
+      ]
+    },
+    "CVE-2026-68103": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/68xxx/CVE-2026-68103.json",
+      "sha256": "1da44bac6aa887df2721b04083977d3f50f5046fa1dc68b9ab97ee2be2d0a0e2",
+      "title": "drm/amdgpu: reject mapping a reserved doorbell to a new queue",
+      "refs": [
+        "https://git.kernel.org/stable/c/1050d258c7c56066d2dcaedf8d0ef66364062adc",
+        "https://git.kernel.org/stable/c/a609b6278bf3cde17eeee6620091465521e4b02c"
+      ]
+    },
+    "CVE-2026-72198": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/72xxx/CVE-2026-72198.json",
+      "sha256": "aabbe7c565916a6f6019e7cd84540dc3a84cac75e834a86bf45264a1f68c1cc4",
+      "title": "ntfs: reject non-resident records for resident-only attributes",
+      "refs": [
+        "https://git.kernel.org/stable/c/b06b4fc2138ded8ee0b3dc602991ff6dbb10dd0a",
+        "https://git.kernel.org/stable/c/6626fb859f4c4772f2f59751d23937716e03f98f",
+        "https://git.kernel.org/stable/c/7ffa8f3d30236e0ab897c30bdb01224ff1fe1c89",
+        "https://git.kernel.org/stable/c/b54c9beb90e570bae17a9c18442aeeaf17165ccb",
+        "https://git.kernel.org/stable/c/097cdfd0a55df5af82c9753833f39a8bfadbcfcb"
+      ]
+    },
+    "CVE-2026-72497": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/72xxx/CVE-2026-72497.json",
+      "sha256": "175d02821a6a050fccabd33ea492cbe8da6a358082511d67a645587ad69ec070",
+      "title": "RDMA/bnxt_re: Add a max slot check for SQ",
+      "refs": [
+        "https://git.kernel.org/stable/c/d4d1c78b56b6abc0dcb6015faaed2cf4d0f2797b",
+        "https://git.kernel.org/stable/c/2106c337905d7445d75818e36920b63f9211c584",
+        "https://git.kernel.org/stable/c/a59d815cbe667929b693b5fa6716a074e6a31c5b",
+        "https://git.kernel.org/stable/c/dc95931b7e1326dacae547874bf38c092e5960d8"
+      ]
+    },
+    "CVE-2026-74578": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/74xxx/CVE-2026-74578.json",
+      "sha256": "0b7f3fb861d70111737832b4fc1eda9bf01871a6e35d35458bce1c152e8d8f66",
+      "title": "crypto: algif_skcipher - force synchronous processing on trees without ctx->state",
+      "refs": [
+        "https://git.kernel.org/stable/c/bf09b0be8e851f050e98da702d247c14d81b591a",
+        "https://git.kernel.org/stable/c/73dd3bf704ca6c20639de70c08e9a10bee904a95",
+        "https://git.kernel.org/stable/c/f1a87ca0843d74482402a206ea2dfb315ee9acbd",
+        "https://git.kernel.org/stable/c/7b91e51d0eb7cbb07f7f086f9176bd93dbbc85dd",
+        "https://git.kernel.org/stable/c/60eafc7b08c6689ea3ad39eff8d97aefc8a087c7",
+        "https://git.kernel.org/stable/c/d7860b682da55433b5da0591b0e4c1982ecd2689",
+        "https://git.kernel.org/stable/c/b05defc41b27c7d0c05c45f67bf5b91c28f93669",
+        "https://git.kernel.org/stable/c/fcc77d33a34cf271702e8daafb6c593e4626776d"
+      ]
+    },
+    "CVE-2026-89788": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/89xxx/CVE-2026-89788.json",
+      "sha256": "62496a784fadfb529cb81f89e9e5c6c583e857f94236997ed7e333d5a7f3695f",
+      "title": "ksmbd: fix tree connection use-after-free in smb2_tree_connect()",
+      "refs": [
+        "https://git.kernel.org/stable/c/63f5939b50470ef4d245c16d2098376b952beb51",
+        "https://git.kernel.org/stable/c/ca3a3984bf445aaec69f6937f11e560d4b849365",
+        "https://git.kernel.org/stable/c/bd58a52738f7576ee5f5eb74243df13f902c8051",
+        "https://git.kernel.org/stable/c/4e30fbd26e84efa2e5cbec4eb11e126ac0c79313",
+        "https://git.kernel.org/stable/c/b5ec6c462aab1062cf5d1e667ba7c6442f737055"
+      ]
+    },
+    "CVE-2026-89805": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/89xxx/CVE-2026-89805.json",
+      "sha256": "0f0b5538af0e22f22d6e89f3b0ac0b15e67b3dcfc6b010401965fe455dd1aed8",
+      "title": "drm/pagemap: Fix folio allocation fallback and use-after-put",
+      "refs": [
+        "https://git.kernel.org/stable/c/10e92e18e3dab081789d868878f2ecce6166948a",
+        "https://git.kernel.org/stable/c/df72e55e754c8d449321ddddad19a8bd3cb8d032"
+      ]
+    },
+    "CVE-2026-89907": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/89xxx/CVE-2026-89907.json",
+      "sha256": "51e90db93a8c86d967b9d26d9f611aca08b584572b09ff52f34f1d8d77e0681a",
+      "title": "LoongArch: KVM: Validate MSI data before routing it to EIOINTC",
+      "refs": [
+        "https://git.kernel.org/stable/c/506f03b5f869cbae50d31b50d80d4a5735d47f94",
+        "https://git.kernel.org/stable/c/83715a40a2d30d23719e0b25380ba82ff905195b",
+        "https://git.kernel.org/stable/c/501514d6ebd2111c353a1296f25dbe22fbd64657"
+      ]
+    },
+    "CVE-2026-90048": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/90xxx/CVE-2026-90048.json",
+      "sha256": "71f4404afb41b43172370d0bfd9ecda8b3d37a7a54658559ceb8b6cc7bf9ec98",
+      "title": "fs/ntfs3: fix slab-out-of-bounds write in ni_create_attr_list()",
+      "refs": [
+        "https://git.kernel.org/stable/c/3a38f3c71bcd9bd58d86489c364bd29a4c2c860e",
+        "https://git.kernel.org/stable/c/7e9aee7e4d9767cc3e423b3beecb01c7ebb6bbcd",
+        "https://git.kernel.org/stable/c/fa2215cf451414b0512cd6f7d37a057893811f4d",
+        "https://git.kernel.org/stable/c/d07e281f2a7710502985d6f80b95ddac8f4e81d5",
+        "https://git.kernel.org/stable/c/a84f3db72561c4d9281c5ff721ce46b9ffa7f30e",
+        "https://git.kernel.org/stable/c/7c4841e2a62794a3bab7c1ff0540580f387e377f"
+      ]
+    },
+    "CVE-2026-90155": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/90xxx/CVE-2026-90155.json",
+      "sha256": "8b361b6f4983d990558856176ac760ccef79d49fba08c33c56d7592e09b25b4b",
+      "title": "ksmbd: detach blocked lock requests before freeing",
+      "refs": [
+        "https://git.kernel.org/stable/c/4e8b69c06bd6583ec11abef4fae50c2c8d5f3679",
+        "https://git.kernel.org/stable/c/d20d3f6ad8b0b6f4e1bb32cdf7eca251962e8f04",
+        "https://git.kernel.org/stable/c/d31db79cfaa9fce6649772ad279779473ba8aef9",
+        "https://git.kernel.org/stable/c/f77d2accafca529e0ea3f979eb6e6cf1dac05c90",
+        "https://git.kernel.org/stable/c/514a0b2bc949963497e66cacd433f65dc768a71d",
+        "https://git.kernel.org/stable/c/215e8816b1ac25176d911abb8704390413ccee4b"
+      ]
+    },
+    "CVE-2026-90167": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/90xxx/CVE-2026-90167.json",
+      "sha256": "d462d272329a22a2d678e41578fd25e96479b0d1645220cb21b3f4f9472b6bb3",
+      "title": "ksmbd: serialize oplock close with pending break ownership",
+      "refs": [
+        "https://git.kernel.org/stable/c/02a31a30ccd09f3ff35ab5861c04209c381aa5dd",
+        "https://git.kernel.org/stable/c/7148a6c06ddf1c263a1cf422bee541f24d3d3926",
+        "https://git.kernel.org/stable/c/7d6e682b7633120c2f93400b8c6f335d9d8e5318",
+        "https://git.kernel.org/stable/c/dc1e34f78dfab755fab9ad820ac5f82348fe1792",
+        "https://git.kernel.org/stable/c/5f97bac88bfb333f426f01c118b8235e75af8d96",
+        "https://git.kernel.org/stable/c/b0148dc5625dbfd50596ac63c7487c12e8a8ab03"
+      ]
+    },
+    "CVE-2026-90317": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/90xxx/CVE-2026-90317.json",
+      "sha256": "ac54a0db122fd277cfcee45d974f24e219ff49eab94494755d50aa406d34349a",
+      "title": "bpf: Invalidate RCU pointers after final spin unlock",
+      "refs": [
+        "https://git.kernel.org/stable/c/f81972b235f3ebfa40bdce8bcfee3f242fb24065",
+        "https://git.kernel.org/stable/c/7ae71629357d0a6d0bdadb929c7b296d5b7e61c2",
+        "https://git.kernel.org/stable/c/180c7000712db77063b3a26f4c97e7dd9038f449"
+      ]
+    },
+    "CVE-2026-93175": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/93xxx/CVE-2026-93175.json",
+      "sha256": "463ffa16e61ed47839979faf16b7659bbab72f1710cc1f6dbfe8d9a2c188a8c3",
+      "title": "drm/amd/display: Fix dangling pointer in CRTC reset function",
+      "refs": [
+        "https://git.kernel.org/stable/c/0c311d5fcfcd4e83c1aeeb4fccb04861be3357a9",
+        "https://git.kernel.org/stable/c/ef3293c87a79f734d506769ff86f99bf1bad522e",
+        "https://git.kernel.org/stable/c/9de069b724f3614ed7dd55bfbb37c434db54e128",
+        "https://git.kernel.org/stable/c/3a03827bb3cda1527aa923f18160c449f2b4cf2c",
+        "https://git.kernel.org/stable/c/32bd68edbc6cbcfac0e4033b64f0bcadbf0efef5",
+        "https://git.kernel.org/stable/c/0aeed866cb938943908c3ba46422128e49d2d080"
+      ]
+    },
+    "CVE-2026-93792": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/93xxx/CVE-2026-93792.json",
+      "sha256": "79736975ca592d87d0d7e933bd3527c9bc69f9ff2ab5fec829864fbe44090435",
+      "title": "wifi: iwlwifi: mvm: fix a possible underflow",
+      "refs": [
+        "https://git.kernel.org/stable/c/2df7c1843bdc65157bccd6110f005b93bdde39de",
+        "https://git.kernel.org/stable/c/3ea815f401652003c2eec3b8969f74526f1342f0",
+        "https://git.kernel.org/stable/c/38ad8339211bf24c19126ec7629ea52094676454",
+        "https://git.kernel.org/stable/c/83f32942a501c80f44b8a8f668bc8b56d5d0d43f",
+        "https://git.kernel.org/stable/c/0cb5260a1027a43f8cdb961e128f2ddd42e46832"
+      ]
+    },
+    "CVE-2026-98084": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/98xxx/CVE-2026-98084.json",
+      "sha256": "25977161f3033f445738142ac8b131e27a7c0c00135760de41d0e812be30d8af",
+      "title": "bpf: backtracking shouldn't clear outer frame R1-R5 for callbacks",
+      "refs": [
+        "https://git.kernel.org/stable/c/1ac58dab0a83d2c64e3b807a3a0b399f17a74110",
+        "https://git.kernel.org/stable/c/cdc93c6370f792d0649df2a145ac0cdcd430e411",
+        "https://git.kernel.org/stable/c/3a39bc9707fbd1bef4df7318a9d02222741dda5b",
+        "https://git.kernel.org/stable/c/f83890dfed9efc5e19df1dbc1ad707a142936923",
+        "https://git.kernel.org/stable/c/e3e4f66cc4b72333d0886ae2673c360248987889"
+      ]
+    },
+    "CVE-2026-98171": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/98xxx/CVE-2026-98171.json",
+      "sha256": "92589665ddbae4a71d0102a82258ffbadd92d1f411dd7bc7930f311d13847380",
+      "title": "smb: client: fix next_buffer UAF and NextCommand bounds in compound PDUs",
+      "refs": [
+        "https://git.kernel.org/stable/c/1ed29f7a03417b405f38c09cfe04124883127b53",
+        "https://git.kernel.org/stable/c/7f022867ec9f0166a0b4400385bb601b1c6b2c75",
+        "https://git.kernel.org/stable/c/72eaef1f37a3b6bec11c342736834dc3707be3e4",
+        "https://git.kernel.org/stable/c/491e33144dee872cffda207f6fcb09260728f803",
+        "https://git.kernel.org/stable/c/8749946579708ea0d339034bb7f423a67dbe89cf",
+        "https://git.kernel.org/stable/c/96c436e4b010711452b2872558938f4ef276492a",
+        "https://git.kernel.org/stable/c/858d5ac22cb889266993e7670f9f0c4f4aeedd78",
+        "https://git.kernel.org/stable/c/05762c5bc1cfdcac36747994fde2c04387a457f1"
+      ]
+    },
+    "CVE-2026-98376": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/98xxx/CVE-2026-98376.json",
+      "sha256": "4fe70b9f2755b09280edf86ade9269da2ed6ff8de4c6937cb32d7cdf49ddf104",
+      "title": "bpf: Use array_map_meta_equal for percpu array inner map replacement",
+      "refs": [
+        "https://git.kernel.org/stable/c/593980175389a05793f6060aa20e626330960395"
+      ]
+    },
+    "CVE-2026-98420": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/98xxx/CVE-2026-98420.json",
+      "sha256": "3e3ab49b4a599ec52b4d75840b2c66a2c70599be78a32235791a26a59bfbaf83",
+      "title": "ksmbd: follow SMB2 session expiration semantics",
+      "refs": [
+        "https://git.kernel.org/stable/c/c99ea7855124ca1428a1e59c2b4590aaef34eacf",
+        "https://git.kernel.org/stable/c/d7fd1f98607f2cd358e583f9548bdf0173090a86"
+      ]
+    },
+    "CVE-2026-98432": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/98xxx/CVE-2026-98432.json",
+      "sha256": "575f36082f0cd0d1e05f92e1cb478dc1cadf40ee8e34be365366034c92ae5e16",
+      "title": "ipv4: free inet_opt and ireq_opt after an RCU grace period",
+      "refs": [
+        "https://git.kernel.org/stable/c/b3b027ef0cd322bfa839b9aaf5b27551eea54cf6",
+        "https://git.kernel.org/stable/c/95a8c8fa9f27dce64c40c41c062de7728bf34ab5",
+        "https://git.kernel.org/stable/c/89b5b1eb7d633c33832b7ff2c02e19a144705036",
+        "https://git.kernel.org/stable/c/742f73df544e03744f2981c467d6542fe8172a2a",
+        "https://git.kernel.org/stable/c/11a03ce3c4a62d84c10ccdfe47f8075006498568",
+        "https://git.kernel.org/stable/c/a47406c769f72c070386985488f1c4d057df86b2",
+        "https://git.kernel.org/stable/c/26d4c36d318cffbbd160884a0e4cec0da4da4936",
+        "https://git.kernel.org/stable/c/e3f33b0a1d89d738e2b913dab519226eaf76e15b"
+      ]
+    },
+    "CVE-2026-98689": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/98xxx/CVE-2026-98689.json",
+      "sha256": "c1c28f3f016067439ea49cc88770a738cc1976e1a478e145f1178f7f3138de76",
+      "title": "thunderbolt: Don't access a DP tunnel after its DPRX read was canceled",
+      "refs": [
+        "https://git.kernel.org/stable/c/405a969c0b3356639116db89ab367be1d64b77c0",
+        "https://git.kernel.org/stable/c/2c2fd6a7fd5e1218db7e17336fc1a0393b6949e6",
+        "https://git.kernel.org/stable/c/419fa32fa5bc2d7fb9d0d15d5630b1c1090808b3"
+      ]
+    },
+    "CVE-2026-98699": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/98xxx/CVE-2026-98699.json",
+      "sha256": "013b0a2d671fe0b7129bd73180a9bcc9ddfea452a0386e9b3ac5ba9ea30693d1",
+      "title": "wifi: mac80211: fix mesh fast xmit path deletion UAF",
+      "refs": [
+        "https://git.kernel.org/stable/c/ebb7cba623d38733d33d79a8c7442f5ea04c0fb0",
+        "https://git.kernel.org/stable/c/0117f1aa189495e6f1ff608681678817995aee39",
+        "https://git.kernel.org/stable/c/128e800a41270ab197b1cc8043637a2924865608",
+        "https://git.kernel.org/stable/c/93da3ec938bfdcfb3899428f04c6d0c56fe32952",
+        "https://git.kernel.org/stable/c/ee3aadc43ea69d98f666431e787137ac0badbb85"
+      ]
+    },
+    "CVE-2026-98701": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/98xxx/CVE-2026-98701.json",
+      "sha256": "c12e4c46cb6365761e8b2e376d79cfece478e9a4d8ed3e7eef8f099f61f67352",
+      "title": "wifi: mac80211: release mesh path quota on failed additions",
+      "refs": [
+        "https://git.kernel.org/stable/c/9c715919369a6bae12f03debfcf0716f5d8db1c1",
+        "https://git.kernel.org/stable/c/019c0a91e99f0eb6c331ca63f4fa361e9bfcb089",
+        "https://git.kernel.org/stable/c/b5b08afe4d020acb1e6ea1021ce6fb63dedd1f46",
+        "https://git.kernel.org/stable/c/57bfaa8b2853425ab1b83114d823a62fe63f859f",
+        "https://git.kernel.org/stable/c/56691ed9ef792f180e008a43294a4dc059fbeca2",
+        "https://git.kernel.org/stable/c/a613c891906b558c10a4fa98ca29747b98e857cb",
+        "https://git.kernel.org/stable/c/a59eca4557c7462aad1b160011013290a92de97d",
+        "https://git.kernel.org/stable/c/7325a44474f20c1393a1c114c6811abce6ddfaf4"
+      ]
+    },
+    "CVE-2026-98702": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/98xxx/CVE-2026-98702.json",
+      "sha256": "7057e47701632f26c41c50d85b1134f67f9e378f101cbfa992550372bfbb67dd",
+      "title": "wifi: mac80211: reject invalid 320 MHz CSA bandwidth",
+      "refs": [
+        "https://git.kernel.org/stable/c/cf0ddacce173890407ed3fa50c8ea9b3c0cc0e16",
+        "https://git.kernel.org/stable/c/1892e71aa2e5ee667d87c6e49e3661f5e290303b",
+        "https://git.kernel.org/stable/c/79b3ce0d881cd6e5d4d3496b19f5cc5e7089a56c",
+        "https://git.kernel.org/stable/c/56e236759f0a8dc910c2ae7cd3c161f298ee5794"
+      ]
+    },
+    "CVE-2026-98704": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/98xxx/CVE-2026-98704.json",
+      "sha256": "4ef905236bf8ab3c10f19a905fd3cb1bd0779c0a68e3f407da194018dbf01c39",
+      "title": "wifi: mac80211: keep fallback association elements alive",
+      "refs": [
+        "https://git.kernel.org/stable/c/409da4ad76d921b173ebb801e316023f74564239",
+        "https://git.kernel.org/stable/c/fb47973eecd869ab5662bb39002f6680536caa6c",
+        "https://git.kernel.org/stable/c/64183344f6f29ed0cad33d6ec0e769aa5e31fb19",
+        "https://git.kernel.org/stable/c/de77b0f68142147e74fac1c497dbe1f93daeeed9",
+        "https://git.kernel.org/stable/c/1d9644753d46c86b4e5c05bd6d9d35339ea27331",
+        "https://git.kernel.org/stable/c/d0183cd1f6a2dba9e63be20af2f65093c9c8d121",
+        "https://git.kernel.org/stable/c/0878594c5806dd29fa5e16cc026ce19158afdad2",
+        "https://git.kernel.org/stable/c/a10a2f80476d166fd81c361ec0319493671b694e"
+      ]
+    },
+    "CVE-2026-98706": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/98xxx/CVE-2026-98706.json",
+      "sha256": "08935a5405ac6d14b5f85cc91dca87d260f46955be879958cabca03327241c35",
+      "title": "wifi: mac80211: drain PS delivery work during station teardown",
+      "refs": [
+        "https://git.kernel.org/stable/c/01292d4c491b9b78c23cde3c5eaa9fb8c8e241f8",
+        "https://git.kernel.org/stable/c/dedae75046c47d191b9ffe3771c09281a9a94fba",
+        "https://git.kernel.org/stable/c/086e7aebd3a9f91435cac348828a339e1070b188",
+        "https://git.kernel.org/stable/c/cbff71fe689f359ebd6a3eaded035ef75226afce",
+        "https://git.kernel.org/stable/c/843d3a1e6f25027ac85f88f67b95d82c67306dee",
+        "https://git.kernel.org/stable/c/772bd89304ecf057cc51ce4ce24a1a96ac9c8de3",
+        "https://git.kernel.org/stable/c/097460fcdd8ab9ef6f6018b2fdc29ba0ea499298",
+        "https://git.kernel.org/stable/c/67a9e80c3ca20c9044cd6ee72cd6278dd19b5023"
+      ]
+    },
+    "CVE-2026-98707": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/98xxx/CVE-2026-98707.json",
+      "sha256": "afadba2d8889e90da25d401d4ed128232f51f259cf6cb7caa3612733e6516158",
+      "title": "wifi: mac80211: shut down RX BA session timer on teardown",
+      "refs": [
+        "https://git.kernel.org/stable/c/225c67a0bea0bd42f568f4842e747bb7f4bafebb",
+        "https://git.kernel.org/stable/c/18cf74311f3f0bc77384549d270c489f64c6510a",
+        "https://git.kernel.org/stable/c/d0da6ab1fc53a68025929baf0947519c6c1684dc",
+        "https://git.kernel.org/stable/c/7bb2a5bd4f07192fca35644fab7d49a17bfbc861",
+        "https://git.kernel.org/stable/c/481f9230284c27052b59c587069f232c5d84779e",
+        "https://git.kernel.org/stable/c/09b7d5e4f88504e62ddf4ff31ebeebb3b87578ba",
+        "https://git.kernel.org/stable/c/e588e83e5c7a0f6d7a77dbbb58927c8c8cfd598e"
+      ]
+    },
+    "CVE-2026-98708": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/98xxx/CVE-2026-98708.json",
+      "sha256": "ff15e1e70726518fa02d7065692628e849103a41531384d82c38d21eac8de80a",
+      "title": "wifi: mac80211: keep paired old chanctx alive",
+      "refs": [
+        "https://git.kernel.org/stable/c/026ae72fa6d0f7e04951441026be473f22911b87",
+        "https://git.kernel.org/stable/c/624bf5338d8c2f55db455ce4f2543ca4a83fab03",
+        "https://git.kernel.org/stable/c/0fba8fbf5ab0bffc1866e5038aaab772d31d1584",
+        "https://git.kernel.org/stable/c/47864a9092fd6f6b3f312d1e5b233ecdc68b1bd8",
+        "https://git.kernel.org/stable/c/21a688cbeae0e682f03e91f1e7a7eedd60d9d4f2",
+        "https://git.kernel.org/stable/c/1c82d0c5d509179ba2a4edfa096f516aebf960b0",
+        "https://git.kernel.org/stable/c/afd1cdd16a25c7185b812a612ab7d5f2cbd1e086",
+        "https://git.kernel.org/stable/c/3412e9a800786d1dec4a58367db1cba275e7ef11"
+      ]
+    },
+    "CVE-2026-98709": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/98xxx/CVE-2026-98709.json",
+      "sha256": "9ba2b1259aabe4a3aa2044630fb7c32092cf5ec6ab2923ae204949167b00d894",
+      "title": "wifi: mac80211: count only matching reservations in reserved switch",
+      "refs": [
+        "https://git.kernel.org/stable/c/4c4671a706d2d85442a30850abfada5377ffbbc8",
+        "https://git.kernel.org/stable/c/183cc72ae9467717afba8b8d194a558a6666cb53",
+        "https://git.kernel.org/stable/c/b3d9f582f98e06070d5233b177b2899b693a01ec",
+        "https://git.kernel.org/stable/c/4ae6ed5b6074df5f3da05fd74c40bb24c5c9b41d",
+        "https://git.kernel.org/stable/c/d31f655e44631891788ca67018ec5e1ed1c7de86",
+        "https://git.kernel.org/stable/c/03525b632908b049f4d04cc8a71cdff2329589cf",
+        "https://git.kernel.org/stable/c/5cc54a000960bc88f8c58940164dca0e601ab39c",
+        "https://git.kernel.org/stable/c/437f3727b4fd715266c296435c116288f82666fd"
+      ]
+    },
+    "CVE-2026-98712": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/98xxx/CVE-2026-98712.json",
+      "sha256": "b87722486ecfc6b4343f6ae85e580894ebaadce8eaef600a2346d126cf509ea3",
+      "title": "KVM: arm64: vgic: Take a refcount on IRQs referenced by last_lr_irq",
+      "refs": [
+        "https://git.kernel.org/stable/c/8b25393d16a5ca8df907bd7ee1ff2e9d85678b3c",
+        "https://git.kernel.org/stable/c/19bc5d79ece613f242b5ec03921a3b465321bfed"
+      ]
+    },
+    "CVE-2026-98719": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/98xxx/CVE-2026-98719.json",
+      "sha256": "82dc3cb4731ae0261d231f0eba7cb894d3af9376f47aecc088ccac514e3ca23a",
+      "title": "KVM: SEV: Nullify \"have run CPUs\" mask pointer when freeing it",
+      "refs": [
+        "https://git.kernel.org/stable/c/b1de3ebf59507e0edacaa5cfa2225bc1869e1b63",
+        "https://git.kernel.org/stable/c/0fbc7fec2242de6c3dcea6de55573c428e820173",
+        "https://git.kernel.org/stable/c/8abbc76120a74bfba1851bd97528099d715e45c6"
+      ]
+    },
+    "CVE-2026-98730": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/98xxx/CVE-2026-98730.json",
+      "sha256": "ba0717763f4b6d33160595eaf53ec67563c595401f36e91c19a66b415e801a57",
+      "title": "Bluetooth: btintel_pcie: reject oversized TX packets in send_frame()",
+      "refs": [
+        "https://git.kernel.org/stable/c/3d6ba6be9bef13edcd4ad74f7cfdd0c34db4d2bc",
+        "https://git.kernel.org/stable/c/84df222de86eabed543361025ed54ce838c0b573",
+        "https://git.kernel.org/stable/c/9806a748f9ab223b733624367b6ddda77fb9450e",
+        "https://git.kernel.org/stable/c/f771f96557a4d953a7e4d045870547271e36e819"
+      ]
+    },
+    "CVE-2026-98733": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/98xxx/CVE-2026-98733.json",
+      "sha256": "3614c0405ebd5d53a908a1454d2aa59ed5d9212f482d88fadd5a2c28f4c9a260",
+      "title": "Bluetooth: hci_core: Serialize fragmented ISO packet queueing",
+      "refs": [
+        "https://git.kernel.org/stable/c/e328b5823fa6b0b160d0922d6d68323e910d09a4",
+        "https://git.kernel.org/stable/c/545fa70f730eb648a610a2f4b2d270865f77b619",
+        "https://git.kernel.org/stable/c/d6d709981208567868c5c01ebd1bec5e5e7fdab0",
+        "https://git.kernel.org/stable/c/708cdd203d0bbcf9255fffb2e4c308d5b28851a7",
+        "https://git.kernel.org/stable/c/a7161730a3ab3f0a3896000db7ab0284683936e6",
+        "https://git.kernel.org/stable/c/1a572db43c057566771b485598ad2e66cb390821"
+      ]
+    },
+    "CVE-2026-98734": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/98xxx/CVE-2026-98734.json",
+      "sha256": "b9ee21e1e5fc9f6dae42db21d6f7c2df2acbaac9ed73ec46eaf471c61d283816",
+      "title": "Bluetooth: hci_core: Serialize SCO and ISO scheduling with teardown",
+      "refs": [
+        "https://git.kernel.org/stable/c/f997e03e2ef58aa7114828c9d924e515a9a1db9c",
+        "https://git.kernel.org/stable/c/101825c09ad6b7daa6cf4c9e6b1720b13de15596",
+        "https://git.kernel.org/stable/c/1681f97afdf92e8557f2f3118ddc898471b5d299",
+        "https://git.kernel.org/stable/c/ecdb1c66d8e14e63731c52d6fbcfa604064913c4",
+        "https://git.kernel.org/stable/c/848a7a91c7f03675d3bd8db6f7721cbf9cb50e21"
+      ]
+    },
+    "CVE-2026-98735": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/98xxx/CVE-2026-98735.json",
+      "sha256": "64cfe4b80c244fb357c4159e986f865a0774eddbb33b71e950d777b6063d40a6",
+      "title": "Bluetooth: hci_core: Serialize ACL scheduling with channel deletion",
+      "refs": [
+        "https://git.kernel.org/stable/c/126714c495bf31a5e71411b8e0b65a685bb5e58d",
+        "https://git.kernel.org/stable/c/7fbeda3dcd5f54e7429f4b5e2cfa7344b7e9b1c9",
+        "https://git.kernel.org/stable/c/74667f6eb7c12b65c56e02e0f527e4099db4ebfd",
+        "https://git.kernel.org/stable/c/780affacd92977fd9b819bdc4f26a6832cb27fda",
+        "https://git.kernel.org/stable/c/51f95ea451f25d7e3f048c0f438f04fa74688aae",
+        "https://git.kernel.org/stable/c/86e9708f9d19a7f1bd5dc9c1652d07707f79f5bd",
+        "https://git.kernel.org/stable/c/4fda8f0abeea9929036446d89a476fb8298abcb0",
+        "https://git.kernel.org/stable/c/f4845ab191a4f686a5da481fbba90ed73bb693b0"
+      ]
+    },
+    "CVE-2026-98737": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/98xxx/CVE-2026-98737.json",
+      "sha256": "6ae5a5b05b63c9c3a2f3438fd4049a1b2cfb2ad2cc13fce10a59d0a317a97232",
+      "title": "Bluetooth: hci_sync: Fix inquiry cache use-after-free",
+      "refs": [
+        "https://git.kernel.org/stable/c/ddc9edb244cc8b5266595e8fc220e7813f2b603a",
+        "https://git.kernel.org/stable/c/52edf1c0e59dea37b8368c4a2559dca96b2fdfea",
+        "https://git.kernel.org/stable/c/333257e6e4a7bcaaea82fd357121d0f1e6b76c7b",
+        "https://git.kernel.org/stable/c/a642f498f0b08f2aa9f4a69468db92f57a72349d",
+        "https://git.kernel.org/stable/c/8ed67535fdff40ca652bcd4ac7da68d11d01bd34"
+      ]
+    },
+    "CVE-2026-98738": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/98xxx/CVE-2026-98738.json",
+      "sha256": "c39755dbd0c7dfe4e4f83965bfe405fcf0234f297b491ef8eff13f80b27d4a9a",
+      "title": "Bluetooth: Serialize SMP remote OOB data access",
+      "refs": [
+        "https://git.kernel.org/stable/c/94afa17d6bfd5c1d367c56c8b63df5f695380861",
+        "https://git.kernel.org/stable/c/1e11412a1b9854a89d044576d616675b16141d87",
+        "https://git.kernel.org/stable/c/889c61e3d0f1091a958e4b2a24b20bab23d915c4",
+        "https://git.kernel.org/stable/c/df5162eeb10e69fe0c2349503882c4a09077f001",
+        "https://git.kernel.org/stable/c/81a2345f1984f0b36d3226571bc196316a01b648"
+      ]
+    },
+    "CVE-2026-98739": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/98xxx/CVE-2026-98739.json",
+      "sha256": "abdd4aaa2d838d71843f35c6e174d87a15285f79e368a70bc73b70f36b09b4ec",
+      "title": "Bluetooth: RFCOMM: Fix initial port reference race",
+      "refs": [
+        "https://git.kernel.org/stable/c/cd247e38b14df48d6b3940c4573a9f7acb10c363",
+        "https://git.kernel.org/stable/c/d3dd18e85c140df72e0f2b5ee156ebfba04c06cb",
+        "https://git.kernel.org/stable/c/c50360a019766fafa27318928bfea96dcce8a37d",
+        "https://git.kernel.org/stable/c/55d162aa00d1ee33c3e6fa88b71f1e2d6e1441e9",
+        "https://git.kernel.org/stable/c/a03ccf1ab77380d4c4a3c56552e12de4a83efa21",
+        "https://git.kernel.org/stable/c/0a554901bd227537f79220443b2b36d585d62893",
+        "https://git.kernel.org/stable/c/e5aa7fbf7a4446bb89f0b8394b2dfc1a6b6aba5b",
+        "https://git.kernel.org/stable/c/2d696c1ed3468dcb62578a3911e687110d463520"
+      ]
+    },
+    "CVE-2026-98741": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/98xxx/CVE-2026-98741.json",
+      "sha256": "ac73d2e0b41dc766380ba04869a4966f39b30d3895f3bc6d323271196932e551",
+      "title": "ALSA: ua101: reject mismatched capture/playback packet sizes",
+      "refs": [
+        "https://git.kernel.org/stable/c/b54976c81a6b8cae311b75be1a4cda444689bca0",
+        "https://git.kernel.org/stable/c/a2d326b3f6d470ea4bfde00245794e0dc6dbbc3d",
+        "https://git.kernel.org/stable/c/0a6a5eecc92c13f936d8d90975116d6bbdf4f876",
+        "https://git.kernel.org/stable/c/ada5ded765f059a6e3036e69ca350449442af0fc",
+        "https://git.kernel.org/stable/c/fd3a7bf0d988b0878a1957df150edb35f81db87e",
+        "https://git.kernel.org/stable/c/eb0c7fda59cf650076f8ed5b949a6c8441aa3606",
+        "https://git.kernel.org/stable/c/4294fe57048594a9e158b61c967bb7f943cda477",
+        "https://git.kernel.org/stable/c/86f86e6fdedc33c5b8d38b9208b350f8accf57ee"
+      ]
+    },
+    "CVE-2026-98742": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/98xxx/CVE-2026-98742.json",
+      "sha256": "5d1d58bea9a0d56825c4f80361749eaac20c4db7891de96a8be25334ab4e7236",
+      "title": "ALSA: seq: Serialize compat port-info ioctls",
+      "refs": [
+        "https://git.kernel.org/stable/c/14e178c60ba1cea49186fcfccac93d66aa94e9e0",
+        "https://git.kernel.org/stable/c/4980768c5d092493be0deb20d1ee86aa661466f8",
+        "https://git.kernel.org/stable/c/2c0cce3a5a660270d65729b0f318d4e01470479d",
+        "https://git.kernel.org/stable/c/2db234e163f0d211b69a4eebbec8aacc5a54a80e",
+        "https://git.kernel.org/stable/c/413211dd31cb2ef2fc99fb0aa1a037a97509502c",
+        "https://git.kernel.org/stable/c/fc5c52848e405b6efb073db5035bb9ebaed11ec4",
+        "https://git.kernel.org/stable/c/702d92f361f65d9698c473c7599d471395dc4341",
+        "https://git.kernel.org/stable/c/95b2e0361c88753afa030c10698be0a1a5b67650"
+      ]
+    },
+    "CVE-2026-98752": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/98xxx/CVE-2026-98752.json",
+      "sha256": "2eb3ca9fa4173433b148710c766b3bd7f3268dbca7412999ea47e1c01b10b944",
+      "title": "tty: port: fix tty_port_tty_vhangup() race",
+      "refs": [
+        "https://git.kernel.org/stable/c/a78910f6d78cc1415cbc9b4fb621c3f4f6945be2",
+        "https://git.kernel.org/stable/c/2e16ae1464a4f435425c6f6ff1e293db850a624c",
+        "https://git.kernel.org/stable/c/a776d603d1e1bba2837295817b0a39394707b10d",
+        "https://git.kernel.org/stable/c/ce220b4cdf62f73db0c1940f968eb33b9899fdd0",
+        "https://git.kernel.org/stable/c/6d1a984afc3ca477dab3e51ec806671d443ad524",
+        "https://git.kernel.org/stable/c/6b7be3b9b857947e9c1338d4919d4ebd3b75e907",
+        "https://git.kernel.org/stable/c/017b18addbe8dcace1a569a00d40ed1ba1e03f4c",
+        "https://git.kernel.org/stable/c/b48820de8c1a596c5b99775524dfce73c6576c5d"
+      ]
+    },
+    "CVE-2026-98754": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/98xxx/CVE-2026-98754.json",
+      "sha256": "7b3dffc75a593e2dbe13b661f36d430013da6bdcdf3b41237ce66705df1f029e",
+      "title": "tty: vcc: hold port lock when clearing tty pointer in vcc_cleanup",
+      "refs": [
+        "https://git.kernel.org/stable/c/b0ad9d025c3229a628a82fbaa7578891075a950d",
+        "https://git.kernel.org/stable/c/b193617080b7036d143674089bcfb7d2ba3db588",
+        "https://git.kernel.org/stable/c/afcbb821c571f39b273127a7c7d26cb2cef27d2f",
+        "https://git.kernel.org/stable/c/57753441ef84bee3bf0e9ee1e3778d119c44aa32",
+        "https://git.kernel.org/stable/c/88f6ecb058801e9ce7b9aabc966530118d7cd53c",
+        "https://git.kernel.org/stable/c/821050631750e982007c0856c119346edba51cae",
+        "https://git.kernel.org/stable/c/1a9fb9eaeb69b1f6c00bed09289a33d9fe1e7ae4",
+        "https://git.kernel.org/stable/c/03b49c991abb8d021ca6fe51cd173447236b0552"
+      ]
+    },
+    "CVE-2026-98763": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/98xxx/CVE-2026-98763.json",
+      "sha256": "35a4576453c64df45a313563b06504e78c24f6d89b7f9ea189d2d8592acb2e96",
+      "title": "usb: core: clear both ep_in and ep_out for non-ep0 control endpoints",
+      "refs": [
+        "https://git.kernel.org/stable/c/59d2c9d70fa42e2290ff68e6430d38a1c817fcb7",
+        "https://git.kernel.org/stable/c/a7928ad4bbb330dfb0f726166384f319d66eb5d1",
+        "https://git.kernel.org/stable/c/b521fe45e06b3f7042e6d1f9566ddb6f179dcb1d",
+        "https://git.kernel.org/stable/c/198d74dcfa129523125f46a89479d3b446b17dbe",
+        "https://git.kernel.org/stable/c/7a9f61476b0e8002092a52ee8295edeeb0a28d1e",
+        "https://git.kernel.org/stable/c/1da16c46b8d7101b74bc2d72a04e23cf5c7ddea1",
+        "https://git.kernel.org/stable/c/c50413ecb662ea43c7f487632c8114721743a277",
+        "https://git.kernel.org/stable/c/0e8baa78d872f2db440d8b9ded946ab8dceb89eb"
+      ]
+    },
+    "CVE-2026-98776": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/98xxx/CVE-2026-98776.json",
+      "sha256": "ccf8f78fd6198ece82b2f9b6eb8e0c4a2047cc52920ce7576db1f9233cc29741",
+      "title": "binderfs: fix UAF write in binder_add_device",
+      "refs": [
+        "https://git.kernel.org/stable/c/885bbbe52d31856768de439e9720f1ffa474a93a",
+        "https://git.kernel.org/stable/c/30d15f44a9e513ec2f257fdf192d9d1fa5af0799"
+      ]
+    },
+    "CVE-2026-98788": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/98xxx/CVE-2026-98788.json",
+      "sha256": "8342f3844778b55594576fd01e75b6769c30f42b3fb792103cdfb134ee5a1c94",
+      "title": "futex: Fix private hash use-after-free on resize",
+      "refs": [
+        "https://git.kernel.org/stable/c/5d5dc18b3a9ac011619b7d3af4514bf9e9b6a6af",
+        "https://git.kernel.org/stable/c/f35e3b5784221654f9cdbd6222275a7fa203f6c3"
+      ]
+    },
+    "CVE-2026-98792": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/98xxx/CVE-2026-98792.json",
+      "sha256": "2de834421ce576eaeae3cc932bf90213e3dd28987fb8c50e5c2a8ea9c3bcebfa",
+      "title": "netfilter: flowtable: generalize pending status bit",
+      "refs": [
+        "https://git.kernel.org/stable/c/f7e292f3c8c853f27a1af7eaf3428a0e76fe5fcc",
+        "https://git.kernel.org/stable/c/4d52b72f3aa68ad0536444e36530bda75070194c",
+        "https://git.kernel.org/stable/c/4033e1a9262c57dfbfc594a591a50fcba63c531a",
+        "https://git.kernel.org/stable/c/a2cac45848d1cf31ed190db30f90ba8211e9a8ca",
+        "https://git.kernel.org/stable/c/7c549fb7eecd01fdba7c0d12c01da876ef8a3214"
+      ]
+    },
+    "CVE-2026-98794": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/98xxx/CVE-2026-98794.json",
+      "sha256": "33722d99de99880f2ffd1e5bc00151f4de3dbf88b465fede2126b9ffcb4b47ef",
+      "title": "ipvs: filter some flags received in the backup server",
+      "refs": [
+        "https://git.kernel.org/stable/c/ef3cd6c0b826e50dc21653b32552e258de6fd51c",
+        "https://git.kernel.org/stable/c/3a9f5459db60311643bfbadf019f6d5370f2f26a",
+        "https://git.kernel.org/stable/c/438a5335276614186d6a96b8e7bddce811ad4ad6",
+        "https://git.kernel.org/stable/c/d7d33c9efa9d1a2f244a1a64ec9b540b0f8975a0",
+        "https://git.kernel.org/stable/c/f4cd1db7d421e82945713a36084bb0c35b75b27e",
+        "https://git.kernel.org/stable/c/55d033324f67a15ff56be6d38d6e87f644e0ed62",
+        "https://git.kernel.org/stable/c/45a93111835ccfea7d969ec73588e33745fd9834",
+        "https://git.kernel.org/stable/c/f96e91748f6304668fe647e686d199d7207d36f1"
+      ]
+    },
+    "CVE-2026-98797": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/98xxx/CVE-2026-98797.json",
+      "sha256": "c49404d14a2337261217420d1e78716527870ace0ff217bf48fd3a537437c31d",
+      "title": "net: cap skb->queue_mapping when the tx queue is picked",
+      "refs": [
+        "https://git.kernel.org/stable/c/c6ec35c8267c84c2094cb485db20c06384fc2bcc",
+        "https://git.kernel.org/stable/c/2f581814e4e3ea6a5e98f49813dc4c68444a0c4a",
+        "https://git.kernel.org/stable/c/f99de42f5c6f8d088063817dad82c3334e87c570",
+        "https://git.kernel.org/stable/c/ea4d4b5dddb5121e64f56fd8e0720bd8b447b63d"
+      ]
+    },
+    "CVE-2026-98799": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/98xxx/CVE-2026-98799.json",
+      "sha256": "2e1afb6690fbf6fe0286e304e19b8ecc6d7d6b5a873a7e5c13d336ccb205c54c",
+      "title": "bpf: Skip detached progs in trampoline images that are still in use",
+      "refs": [
+        "https://git.kernel.org/stable/c/967566ad325b42150483e81acb09ea9d800c00b8",
+        "https://git.kernel.org/stable/c/17637e1a581a22466ac3620a91e099683ff9cc6f"
+      ]
+    },
+    "CVE-2026-98800": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/98xxx/CVE-2026-98800.json",
+      "sha256": "366f656b5b391e354ed889657a1028925bcfc54896df129193c471b49e57fd80",
+      "title": "bpf: Wait for an RCU tasks grace period before freeing trampoline progs",
+      "refs": [
+        "https://git.kernel.org/stable/c/40955f6512a03f0e046f5256b0706b26ba191018",
+        "https://git.kernel.org/stable/c/0fb5751a6e411b1b466c06e50021818d9391df98"
+      ]
+    },
+    "CVE-2026-98803": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/98xxx/CVE-2026-98803.json",
+      "sha256": "0a688bacb162096527612279eb8836b45d91456aee59d80621f9fce60c2fee0b",
+      "title": "net: stmmac: fix rx Scatter-Gather support",
+      "refs": [
+        "https://git.kernel.org/stable/c/358d5ac5a5d57ce21c3814c4e3e8f3fbcb7304b4",
+        "https://git.kernel.org/stable/c/a7cff44543f66f3a19151060cb549691d191d44c",
+        "https://git.kernel.org/stable/c/88095728511e0df9c89528944f5a1762ad298983"
+      ]
+    },
+    "CVE-2026-98804": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/98xxx/CVE-2026-98804.json",
+      "sha256": "905ed9f14335414958d483073377be9334ee0cf1ff8a977da98d0f056ea9b578",
+      "title": "net: page_pool: fix use-after-free in page_pool_recycle_ring_bulk()",
+      "refs": [
+        "https://git.kernel.org/stable/c/f78d45d5f1ac4141a03f033141368671da4293e4",
+        "https://git.kernel.org/stable/c/0b105f4eb78e5ee39e5a74c47c9efd69b6ac849c",
+        "https://git.kernel.org/stable/c/bdea4980182e3badac74f04df6c07492b91c569e"
+      ]
+    },
+    "CVE-2026-98813": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/98xxx/CVE-2026-98813.json",
+      "sha256": "d0fc259d27315192a7be32c93cdf8433dba9b7381f778a57abd84ee989792999",
+      "title": "bpf: Hold map BTF for the memory allocator destructor record",
+      "refs": [
+        "https://git.kernel.org/stable/c/b506f5699e145196ee29d76cf1ca1cbb2202c055",
+        "https://git.kernel.org/stable/c/ab39974240a0cff765f3bb9cce81d8001ffdb144"
+      ]
+    },
+    "CVE-2026-98823": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/98xxx/CVE-2026-98823.json",
+      "sha256": "f29882cacd043fb16f2674ad3639c68541b8d02e87875a8542fc6c33a4635d42",
+      "title": "wifi: cfg80211: preserve hidden-group beacon IE ownership",
+      "refs": [
+        "https://git.kernel.org/stable/c/00f83d39675adc12d56957a1f5e316812157e4d3",
+        "https://git.kernel.org/stable/c/3c44f780d1738e9ddf438729f5ff6ceb45f9ded3",
+        "https://git.kernel.org/stable/c/8f79f429dc87a4f21e4fcf9a4d3df9484ca9a294",
+        "https://git.kernel.org/stable/c/5617d5328839003c91007ce906b4f100b43926e9",
+        "https://git.kernel.org/stable/c/49b66110a08e4f926f6393e938f226de2750a08b",
+        "https://git.kernel.org/stable/c/dd7973a4130b0862be38d7e08cc0e874b3d99967",
+        "https://git.kernel.org/stable/c/5f27581c176f84b52ec0ab9be7b500c10667ef60",
+        "https://git.kernel.org/stable/c/cc45f313d85533d647ce619326302aad6f797c14"
+      ]
+    },
+    "CVE-2026-98824": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/98xxx/CVE-2026-98824.json",
+      "sha256": "42cebe09d42881983f68446d1ec2dfa2e77af825b7e899a854787f15102fb1d1",
+      "title": "wifi: mac80211: validate TX status rate metadata",
+      "refs": [
+        "https://git.kernel.org/stable/c/b1961a61ab6fbe11f16f7f9b64c57a9908c6c3a8",
+        "https://git.kernel.org/stable/c/6bdcdb31318c10e6369cff8e5b32c37397e98091"
+      ]
+    },
+    "CVE-2026-98827": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/98xxx/CVE-2026-98827.json",
+      "sha256": "ef0fc9b539e8bf75ea25ffb1da51a0746ca52fd59d064361f91b6b7072bd87ad",
+      "title": "wifi: ath9k_htc: bound TX aggregation to MAX_TX_BUF_SIZE",
+      "refs": [
+        "https://git.kernel.org/stable/c/c18882768a0fe253c70986c5fe66d9241570fbc4",
+        "https://git.kernel.org/stable/c/345ce265cf604e84b5b560c21beaf4c6f269ab14",
+        "https://git.kernel.org/stable/c/e73a619f91b6cfec47bc1a94aea28df6849e5be3",
+        "https://git.kernel.org/stable/c/aeaca27c1db3106967ffbb2b517d98c835f6d500"
+      ]
+    },
+    "CVE-2026-98829": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/98xxx/CVE-2026-98829.json",
+      "sha256": "f3cbc9aa6033ddd274caad1d6d9a1c0f17becd718f300acb366e985aefceb9c1",
+      "title": "wifi: mac80211: drop oversized fragments to avoid extra_len overflow",
+      "refs": [
+        "https://git.kernel.org/stable/c/9338b2dea74cb0fc80a4c958b68e687610ba2261",
+        "https://git.kernel.org/stable/c/870b8cb9baa9bd859deceb33ae158011e6ba2360",
+        "https://git.kernel.org/stable/c/5e4f3509793b4db2c0835340224743db680e861f"
+      ]
+    },
+    "CVE-2026-98836": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/98xxx/CVE-2026-98836.json",
+      "sha256": "adb4f444551168d70ae521caf6dc6c7ed218fa075522969d9fe80cbc6fd93600",
+      "title": "ALSA: line6: reject oversized playback packets",
+      "refs": [
+        "https://git.kernel.org/stable/c/48c76820dd8858ce60a6e42519141ebcf3dfeebf",
+        "https://git.kernel.org/stable/c/7f31587e26e1d4735924bc324e7fa506d85de150",
+        "https://git.kernel.org/stable/c/e3b68b1d92f279e203923dc8bf45c8860e5b5985",
+        "https://git.kernel.org/stable/c/933d8ac23388eb208ea195231d682dce0bec86ca",
+        "https://git.kernel.org/stable/c/a84371be89c39ccc46c7af8b9eb15c448df9265f",
+        "https://git.kernel.org/stable/c/3f75da1e4ee699f6650d23d6897cf443b01856c7",
+        "https://git.kernel.org/stable/c/b78748424f29f07d310484b2b36afdececa74389",
+        "https://git.kernel.org/stable/c/61b0a5a114fa4552892da5c0ff2f42e63bf08c6b"
+      ]
+    },
+    "CVE-2026-98837": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/98xxx/CVE-2026-98837.json",
+      "sha256": "87c5a0d580f0f8a77c5462a6cb1b7b72f51987b624b9bf0ee5e0b189adace584",
+      "title": "ALSA: caiaq: unregister the input device when probe fails",
+      "refs": [
+        "https://git.kernel.org/stable/c/7017c9dda1ebbab428a6fd29c841596b5c9c84d1",
+        "https://git.kernel.org/stable/c/8315ea07ebb2497531ff42dd640396f6f1d4a8f0",
+        "https://git.kernel.org/stable/c/1d5d194594ff616ad36a052bde739d1cf5855b95",
+        "https://git.kernel.org/stable/c/df2787819bd137111b56b8631dd581b0cce7144d",
+        "https://git.kernel.org/stable/c/850810c12686f80cdf7530f4f21e0157d904f739",
+        "https://git.kernel.org/stable/c/84727facd8506140cd04f2b0a8b1c4ddeac41cea",
+        "https://git.kernel.org/stable/c/2e5a413cc2a489c9427ecd3d73ad764bfb0c7103",
+        "https://git.kernel.org/stable/c/0b7bd20f6379bc5e431fd74d866390f5b5b63f3c"
+      ]
+    },
+    "CVE-2026-98846": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/98xxx/CVE-2026-98846.json",
+      "sha256": "559692d341964ff1671acad45927cc41e0bce49f083a0a8e175b59b93066ba9b",
+      "title": "sctp: check RCV_SHUTDOWN after the sendmsg connect wait",
+      "refs": [
+        "https://git.kernel.org/stable/c/7f798168c54455559da0f7a377a23ab7019fec35",
+        "https://git.kernel.org/stable/c/fe5a23c76fc48b711eb7d6f3462c994e34da36f9",
+        "https://git.kernel.org/stable/c/1e7cd89975fa3b11ebd7e1bbb4648a71c0e0e2d4",
+        "https://git.kernel.org/stable/c/1bef1944ef15a40797305bf916827b04df6307ca",
+        "https://git.kernel.org/stable/c/e8f972b1759d26bbefe4c524caae1ed7c8a593bd",
+        "https://git.kernel.org/stable/c/e701345d886e831fb593a0870d69c8c5de6fc938",
+        "https://git.kernel.org/stable/c/222c41e0f50f1d5028be9baf0e1dcfc0bfa7f669",
+        "https://git.kernel.org/stable/c/4f1da630d13de0370e2f6361f961f1c8b384af1c"
+      ]
+    },
+    "CVE-2026-98858": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/98xxx/CVE-2026-98858.json",
+      "sha256": "d1f85279b3c3c1390ca3530140ba8a7b1929289bf4f4e2245a9041007b34b10e",
+      "title": "io_uring: fix task_work add use-after-free with SQPOLL",
+      "refs": [
+        "https://git.kernel.org/stable/c/42b3332efacfd2140be4cd0dedad4fb96b8ae90e",
+        "https://git.kernel.org/stable/c/891bd8335a0de3bb15c3b797ce3026bbb0dbef6c",
+        "https://git.kernel.org/stable/c/395b25968fe854d4efaa19a8e9b7a5b6d1b3eea3",
+        "https://git.kernel.org/stable/c/a92193c91e8839fe5fc209616ea95465ae4b919d"
+      ]
+    },
+    "CVE-2026-98861": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/98xxx/CVE-2026-98861.json",
+      "sha256": "47ad31eb893955ea19bda391a1b4cbb808f4ee55b0477a7323c8ea20611bb37c",
+      "title": "fprobe: Use guard(rcu_sched_notrace) and check rcu_is_watching()",
+      "refs": [
+        "https://git.kernel.org/stable/c/a85d0f00671b4d4527317c10ba018680f7d8d673",
+        "https://git.kernel.org/stable/c/dd4a0d4993633b45470abf6da4ea0ca563402245",
+        "https://git.kernel.org/stable/c/e0a6249190402a28f1e2925a81acf573157d55ef"
+      ]
+    },
+    "CVE-2026-98862": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/98xxx/CVE-2026-98862.json",
+      "sha256": "e4a0baa2a5128ed1b140db9d5fb5c2b29a4d7794804b907ab68f2c89a682ca4f",
+      "title": "audit: fix exe mark UAF in kill_rules()",
+      "refs": [
+        "https://git.kernel.org/stable/c/8d9c97fb262067933ff4452db19e692d26622352",
+        "https://git.kernel.org/stable/c/11715656540360906235d724fde5349631425073",
+        "https://git.kernel.org/stable/c/0afb9202c1fb88387d0577524bf9785664bdd802",
+        "https://git.kernel.org/stable/c/9aee3caeff4dd4126d84f67607b95cec8719b867",
+        "https://git.kernel.org/stable/c/304960900991157e6883bdf0b39782b690545ee8",
+        "https://git.kernel.org/stable/c/88633025f20ba9c32ccdb3efc86eafdf98cb825c",
+        "https://git.kernel.org/stable/c/f2cc5462b78559c7628a9f8ac9a9592e7783183a",
+        "https://git.kernel.org/stable/c/aa650d87a498844060eecb1d336f4d46f4d1b0b3"
+      ]
+    },
+    "CVE-2026-98863": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/98xxx/CVE-2026-98863.json",
+      "sha256": "aa3d596309f4e4cf8ec88c734ec3747e6986f4e4710c94a0caaebb84aacee822",
+      "title": "KVM: x86: Re-pend GET_NESTED_STATE_PAGES if getting said pages fails",
+      "refs": [
+        "https://git.kernel.org/stable/c/525694a6021ec6c8f7ce1f38acdf2dd77698fec1",
+        "https://git.kernel.org/stable/c/942192dbcd3a06695ef6b31cf10a41a21cf014d8",
+        "https://git.kernel.org/stable/c/10180a277549339020b08000206092c07e0bff5a"
+      ]
+    }
+  },
+  "scope": "Selected read-only SSH observations. Mount types are from the SSH process namespace. Firmware results are cached candidates from the already running daemon."
+}

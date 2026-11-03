@@ -1,0 +1,17 @@
+{
+  "date": "2026-11-03",
+  "source": "Owner reports and screenshot",
+  "production_basis": "7921eb5",
+  "client": "Windows desktop with Brave",
+  "devtools": "No throttling, no blocking rules shown",
+  "private_content_hidden_after_save_click": true,
+  "offline_session_http_response_visible": false,
+  "restored_session_status": 200,
+  "proposal_visible_before_resave": true,
+  "resave_post_status": 200,
+  "followup_get_status": 200,
+  "app_confirmed_save": true,
+  "persisted_after_reload": true,
+  "scope": "Client Wi-Fi loss before a successful write and subsequent recovery",
+  "o3_complete": false
+}

@@ -1,0 +1,12 @@
+{
+  "scope": "actual staged server image; transfer and Docker identity verified",
+  "ref": "bussassistent-postgres:5e521cbc658594a47c4568d352a50e46309573c4",
+  "artifact": "sha256:8fea2591ca75009a879756ca52f6a2aabae0bf65096ce3cabdd16338f784a466",
+  "counts": {
+    "UNKNOWN": 1,
+    "CRITICAL": 1,
+    "HIGH": 25,
+    "MEDIUM": 30,
+    "LOW": 3
+  }
+}

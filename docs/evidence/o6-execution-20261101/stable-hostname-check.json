@@ -1,0 +1,7 @@
+{
+  "hostname": "bussassistent.local",
+  "host_key_alias": "192.168.1.139",
+  "exit": 255,
+  "stdout": "",
+  "stderr": "ssh: Could not resolve hostname bussassistent.local: Kjenner ingen slik vert."
+}

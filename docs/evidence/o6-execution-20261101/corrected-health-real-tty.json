@@ -1,0 +1,22 @@
+{
+  "command": [
+    "ssh",
+    "-i",
+    "C:\\Users\\Jonas\\.ssh\\ibe160_server_ed25519",
+    "-o",
+    "IdentitiesOnly=yes",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "StrictHostKeyChecking=yes",
+    "-o",
+    "ConnectTimeout=10",
+    "-tt",
+    "jonas@192.168.1.139",
+    "python3 -c 'import subprocess; subprocess.run(['\"'\"'sudo'\"'\"','\"'\"'-n'\"'\"','\"'\"'/usr/local/sbin/bussassistentctl'\"'\"','\"'\"'check'\"'\"'],stdin=subprocess.DEVNULL,check=True); print('\"'\"'TTY_EOF_CHECK_PASSED'\"'\"')'"
+  ],
+  "start_utc": "2026-11-01T21:57:51.450269+00:00",
+  "end_utc": "2026-11-01T21:57:52.450073+00:00",
+  "exit": 0,
+  "output_sha256": "88f03d8a0080d0f7e867c4d64f3859a53479ea1d1f8209998a7cdc9bdcc825c6"
+}

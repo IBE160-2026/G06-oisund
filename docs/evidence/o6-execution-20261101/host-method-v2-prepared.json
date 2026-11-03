@@ -1,0 +1,9 @@
+{
+  "remote_path": "/tmp/ibe160-o6-window.uNfjQHcy/host-step-v2.py",
+  "sha256": "258f0f91b126dd0d4a917b4185a48468f6b54e7fc93077b10149568a82c570ef",
+  "real_remote_tty_health_check_with_closed_stdin_passed": true,
+  "old_processes_absent": true,
+  "operations_lock_released": true,
+  "systemd_still": "259.5-0ubuntu3.4",
+  "package_installation_not_started": true
+}

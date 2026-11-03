@@ -1,0 +1,22 @@
+{
+  "command": [
+    "docker",
+    "run",
+    "--rm",
+    "--network",
+    "none",
+    "--read-only",
+    "--tmpfs",
+    "/tmp",
+    "--mount",
+    "type=bind,source=C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\operations-o3-o6\\scripts\\operations-followup,target=/probe,readonly",
+    "--mount",
+    "type=bind,source=C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\operations-o3-o6\\tmp\\o6-execution-20261101\\journal_wall_qualification.py,target=/test.py,readonly",
+    "ibe160-o6-systemd-tests:20261101-r1",
+    "/test.py"
+  ],
+  "start_utc": "2026-11-01T22:48:17.810798+00:00",
+  "end_utc": "2026-11-01T22:48:18.697064+00:00",
+  "exit": 0,
+  "output_sha256": "cd581098fa6e63b5314465e9d980ab2129fc8f449f94920bb58fc59b2ec43484"
+}

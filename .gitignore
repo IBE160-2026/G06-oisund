@@ -64,6 +64,8 @@ Thumbs.db
 .private-runtime/
 .codex-attachments/
 tmp/
+/docs/evidence/o6-remaining-20261101/r2-private-regressions.txt
+/docs/evidence/o6-remaining-20261101/scan-*-raw.json
 frontend/.story123-tests/
 
 frontend/dist-story123-tablet/
@@ -73,3 +75,7 @@ frontend/dist-v1followup-tablet/
 frontend/dist-story124-tablet/
 
 frontend/.password-regression-tests/
+
+# Preserve large original OS scan reports locally; publish compact finding rows.
+/docs/evidence/o6-execution-20261101/r2-linux-os-scan-*.txt
+/docs/evidence/o6-execution-20261101/r2-linux-os-scan-*-raw.json.gz

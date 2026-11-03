@@ -1,0 +1,23 @@
+{
+  "command": [
+    "ssh",
+    "-i",
+    "C:\\Users\\Jonas\\.ssh\\ibe160_server_ed25519",
+    "-o",
+    "IdentitiesOnly=yes",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "StrictHostKeyChecking=yes",
+    "-o",
+    "ConnectTimeout=10",
+    "-o",
+    "HostKeyAlias=192.168.1.139",
+    "jonas@192.168.1.138",
+    "set -eu\nsystemctl show bussassistent.service cloudflared.service bussassistent-backup.timer -p Id -p ActiveEnterTimestamp -p ExecMainStartTimestamp\nloginctl show-user jonas -p Timestamp -p State\nsystemctl show ssh.socket -p ActiveState -p Listen\nsystemctl list-timers bussassistent-backup.timer --no-pager"
+  ],
+  "start_utc": "2026-11-01T22:45:24.492948+00:00",
+  "end_utc": "2026-11-01T22:45:25.161087+00:00",
+  "exit": 0,
+  "output_sha256": "3a106b86ee598c188b8e6c60401b236ca644748da9de555f82c591fe8babb88a"
+}

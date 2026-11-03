@@ -1,0 +1,8 @@
+{
+  "time_utc": "2026-11-01T22:43:53.128029+00:00",
+  "target": "192.168.1.138",
+  "host_key_checked_against_previous_known_server": true,
+  "exit": 0,
+  "stdout": "2812a231-758d-4b5e-8241-d748b52d0991\n7.0.0-42-generic\n192.168.1.138 172.21.0.1 172.20.0.1 172.19.0.1 172.17.0.1 172.18.0.1 fd11:a8d8:a24a:80c7:ca3d:d4ff:fe7e:afa5 \n",
+  "stderr": ""
+}

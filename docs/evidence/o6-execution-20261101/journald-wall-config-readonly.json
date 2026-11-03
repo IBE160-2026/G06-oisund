@@ -1,0 +1,21 @@
+{
+  "command": [
+    "ssh",
+    "-i",
+    "C:\\Users\\Jonas\\.ssh\\ibe160_server_ed25519",
+    "-o",
+    "IdentitiesOnly=yes",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "StrictHostKeyChecking=yes",
+    "-o",
+    "ConnectTimeout=10",
+    "jonas@192.168.1.139",
+    "systemd-analyze cat-config systemd/journald.conf | grep -E '^# /|^[[:space:]]*#?ForwardToWall='\npython3 - <<'PY'\nfrom pathlib import Path\nprint('journal kernel overrides:',[x for x in Path('/proc/cmdline').read_text().split()if 'journald.forward_to_wall' in x])\nPY"
+  ],
+  "start_utc": "2026-11-01T22:22:59.799111+00:00",
+  "end_utc": "2026-11-01T22:23:00.570657+00:00",
+  "exit": 0,
+  "output_sha256": "fb9f5baf754b50ea9fbcdaca55eb07a16204059698b6b0e784a88376c5eaa348"
+}

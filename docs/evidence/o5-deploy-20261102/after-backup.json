@@ -1,0 +1,15 @@
+{
+  "command": [
+    "pwsh",
+    "-NoProfile",
+    "-File",
+    "scripts/server.ps1",
+    "-Action",
+    "Backup"
+  ],
+  "start_utc": "2026-11-02T19:49:23.414969+00:00",
+  "end_utc": "2026-11-02T19:49:26.243758+00:00",
+  "exit": 0,
+  "timed_out": false,
+  "sha256": "71df378f3ae8258317742764b80877e6c9834762ab3cfe04ba966408cd3bb7cf"
+}

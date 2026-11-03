@@ -1,0 +1,197 @@
+#1 [internal] load local bake definitions
+#1 reading from stdin 2.51kB done
+#1 DONE 0.0s
+
+#2 [private-api internal] load build definition from Dockerfile
+#2 transferring dockerfile: 334B done
+#2 DONE 0.0s
+
+#3 [private-db internal] load build definition from Dockerfile.postgres
+#3 transferring dockerfile: 633B done
+#3 DONE 0.1s
+
+#4 [gateway internal] load build definition from Dockerfile
+#4 transferring dockerfile: 849B done
+#4 DONE 0.1s
+
+#5 [access-gate internal] load build definition from Dockerfile
+#5 transferring dockerfile: 438B done
+#5 DONE 0.1s
+
+#6 [access-gate internal] load metadata for docker.io/library/python:3.13.18-slim-trixie@sha256:76baad6037690d6e8c4397fbcaef17bca6f19eecef822b708fe8fa3417d30bb5
+#6 DONE 1.3s
+
+#7 [private-db internal] load metadata for docker.io/library/postgres:17.11-alpine@sha256:266d3c257594e195b309ae9d1805e54c788f1d7b375f56bf6c367aac6c917e7b
+#7 DONE 1.3s
+
+#8 [gateway internal] load metadata for docker.io/library/node:24.19.0-alpine@sha256:d32cdf619f63fe0471182d08996dd516c6275bb5fd31ae06e55a570bd9e1ad43
+#8 DONE 1.2s
+
+#9 [private-api internal] load .dockerignore
+#9 transferring context: 75B done
+#9 DONE 0.0s
+
+#10 [gateway internal] load metadata for docker.io/library/nginx:1.30.6-alpine-slim@sha256:dede8895648b461178c3bc604f7eed4423efe5220b2c4d839f5eb3d34ac3f8f7
+#10 DONE 1.2s
+
+#11 [private-db internal] load .dockerignore
+#11 transferring context: 2B done
+#11 DONE 0.0s
+
+#12 [private-db 2/3] ADD --chmod=0755 --checksum=sha256:b1892636c281590f34bc63c1118f058cd9de66c4ea463772e3909672d8b302ac     https://github.com/tianon/gosu/releases/download/1.20/gosu-amd64 /usr/local/bin/gosu
+#12 DONE 0.0s
+
+#13 [private-api internal] load build context
+#13 transferring context: 584.66kB 0.0s done
+#13 DONE 0.1s
+
+#14 [gateway stage-1 1/4] FROM docker.io/library/nginx:1.30.6-alpine-slim@sha256:dede8895648b461178c3bc604f7eed4423efe5220b2c4d839f5eb3d34ac3f8f7
+#14 resolve docker.io/library/nginx:1.30.6-alpine-slim@sha256:dede8895648b461178c3bc604f7eed4423efe5220b2c4d839f5eb3d34ac3f8f7
+#14 resolve docker.io/library/nginx:1.30.6-alpine-slim@sha256:dede8895648b461178c3bc604f7eed4423efe5220b2c4d839f5eb3d34ac3f8f7 0.1s done
+#14 DONE 0.1s
+
+#15 [access-gate 1/5] FROM docker.io/library/python:3.13.18-slim-trixie@sha256:76baad6037690d6e8c4397fbcaef17bca6f19eecef822b708fe8fa3417d30bb5
+#15 resolve docker.io/library/python:3.13.18-slim-trixie@sha256:76baad6037690d6e8c4397fbcaef17bca6f19eecef822b708fe8fa3417d30bb5 0.1s done
+#15 DONE 0.1s
+
+#16 [private-api 4/5] RUN python -m pip install --no-cache-dir -r requirements.lock     && python -m pip uninstall --yes pip
+#16 CACHED
+
+#17 [private-api 3/5] COPY requirements.lock .
+#17 CACHED
+
+#18 [private-api 2/5] WORKDIR /app
+#18 CACHED
+
+#19 [private-api 5/5] COPY . .
+#19 CACHED
+
+#20 [access-gate internal] load build context
+#20 transferring context: 13.23kB done
+#20 DONE 0.1s
+
+#21 [access-gate 3/5] COPY deploy/tablet/access_gate/requirements.lock ./
+#21 CACHED
+
+#22 [access-gate 2/5] WORKDIR /gate
+#22 CACHED
+
+#23 [access-gate 4/5] RUN python -m pip install --no-cache-dir -r requirements.lock     && python -m pip uninstall --yes pip
+#23 CACHED
+
+#24 [gateway build 1/8] FROM docker.io/library/node:24.19.0-alpine@sha256:d32cdf619f63fe0471182d08996dd516c6275bb5fd31ae06e55a570bd9e1ad43
+#24 resolve docker.io/library/node:24.19.0-alpine@sha256:d32cdf619f63fe0471182d08996dd516c6275bb5fd31ae06e55a570bd9e1ad43 0.1s done
+#24 DONE 0.1s
+
+#25 [private-db 1/3] FROM docker.io/library/postgres:17.11-alpine@sha256:266d3c257594e195b309ae9d1805e54c788f1d7b375f56bf6c367aac6c917e7b
+#25 resolve docker.io/library/postgres:17.11-alpine@sha256:266d3c257594e195b309ae9d1805e54c788f1d7b375f56bf6c367aac6c917e7b 0.1s done
+#25 DONE 0.1s
+
+#26 [private-db 2/3] ADD --chmod=0755 --checksum=sha256:b1892636c281590f34bc63c1118f058cd9de66c4ea463772e3909672d8b302ac     https://github.com/tianon/gosu/releases/download/1.20/gosu-amd64 /usr/local/bin/gosu
+#26 CACHED
+
+#27 [gateway internal] load build context
+#27 transferring context: 387.74kB 0.0s done
+#27 DONE 0.1s
+
+#28 [private-db 3/3] RUN test "$(uname -m)" = x86_64 && gosu --version && gosu nobody true
+#28 CACHED
+
+#29 [gateway build 3/8] COPY frontend/package*.json ./
+#29 CACHED
+
+#30 [gateway stage-1 2/4] COPY --from=build /app/dist /usr/share/nginx/html
+#30 CACHED
+
+#31 [gateway build 6/8] COPY frontend/src/ ./src/
+#31 CACHED
+
+#32 [gateway build 8/8] RUN npm run build
+#32 CACHED
+
+#33 [gateway stage-1 3/4] COPY deploy/tablet/nginx.conf.template /etc/nginx/templates/default.conf.template
+#33 CACHED
+
+#34 [gateway build 5/8] COPY frontend/tsconfig.json ./tsconfig.json
+#34 CACHED
+
+#35 [gateway build 4/8] RUN npm ci
+#35 CACHED
+
+#36 [gateway build 2/8] WORKDIR /app
+#36 CACHED
+
+#37 [gateway build 7/8] COPY deploy/tablet/index.html ./index.html
+#37 CACHED
+
+#38 [gateway stage-1 4/4] COPY deploy/tablet/nginx-main.conf /etc/nginx/nginx.conf
+#38 CACHED
+
+#39 [private-db] exporting to image
+#39 exporting layers done
+#39 ...
+
+#40 [access-gate 5/5] COPY deploy/tablet/access_gate/gate.py ./
+#40 DONE 0.1s
+
+#39 [private-db] exporting to image
+#39 exporting manifest sha256:230374f930589b47e5e2fd9e83d4658b60fecc8d8e89408f5fcd4e1f58e14530 done
+#39 exporting config sha256:d6406eb873440c29fbe63207034d4552fc9e52e405d42abdb2bf5c6b63bb22a8 done
+#39 exporting attestation manifest sha256:a6a44280482eb9632448addd9912768a90a1eb6d08984e2ac5bc6bcebad8f1c9 0.0s done
+#39 exporting manifest list sha256:3747dfbc0f34f396d87d46dab54f1f8050e01db85e702cecac36edc7faa23632
+#39 exporting manifest list sha256:3747dfbc0f34f396d87d46dab54f1f8050e01db85e702cecac36edc7faa23632 0.0s done
+#39 naming to docker.io/library/bussassistent-postgres:7921eb54e4816aaab9368c3efd851bcf692f3823 0.0s done
+#39 unpacking to docker.io/library/bussassistent-postgres:7921eb54e4816aaab9368c3efd851bcf692f3823 0.0s done
+#39 DONE 0.2s
+
+#41 [private-api] exporting to image
+#41 exporting layers done
+#41 exporting manifest sha256:00033d4aea6a4bc75fd86a11489d2ee9f778d1edf20236c3b6e526a4f2d7adfa 0.0s done
+#41 exporting config sha256:83ed35412f3e0c8fc9ba46a7c1ef0f857bf08725d8fe8f936a8ca5d53218baf4 done
+#41 exporting attestation manifest sha256:92e9624148f7c124c071c05fa9a5c09f10f2e2b9f621693c9c15fd57497a0610 0.0s done
+#41 exporting manifest list sha256:c5615232c9f44115ac096368ce30d33e0dd83c572325f76a86af5007a105cb01 0.0s done
+#41 naming to docker.io/library/bussassistent-api:7921eb54e4816aaab9368c3efd851bcf692f3823 0.0s done
+#41 unpacking to docker.io/library/bussassistent-api:7921eb54e4816aaab9368c3efd851bcf692f3823 0.0s done
+#41 DONE 0.2s
+
+#42 [gateway] exporting to image
+#42 exporting layers done
+#42 exporting manifest sha256:4fa115682719d668c99957e960a787c001471e21ab6bc1dff18f3cfbc8469b00 0.0s done
+#42 exporting config sha256:f8d617ce9c41fd444e841489146535606dceff9b5f3af18042ef24d7e0b44976 0.0s done
+#42 exporting attestation manifest sha256:7f23f256572f4f6766d883c17ce84bda8edc1ef4b4727ca7621caf60fd1e21cc 0.0s done
+#42 exporting manifest list sha256:8ab3db99785f057c827a739fb926638807f3b320f210e823ebd9f108685adbf2 0.0s done
+#42 naming to docker.io/library/bussassistent-gateway:7921eb54e4816aaab9368c3efd851bcf692f3823 0.0s done
+#42 unpacking to docker.io/library/bussassistent-gateway:7921eb54e4816aaab9368c3efd851bcf692f3823 0.0s done
+#42 DONE 0.2s
+
+#43 [access-gate] exporting to image
+#43 exporting layers 0.3s done
+#43 exporting manifest sha256:aa5a65e1f5858e202eb100bde0fe033754c63eede727aade78b00a9ec53b80d6 0.0s done
+#43 exporting config sha256:3188af3ef4af02df67ffffe93d9b0d79b5f28e64b34545fdcf3d28b44f79c1a4 0.0s done
+#43 exporting attestation manifest sha256:da5c6d7ff789980d4c81ab9804ce595026ba4560470bc333338d30cc9b96e576 0.0s done
+#43 exporting manifest list sha256:3ba6d7f19f6d04e77e8f890bbd053c1ce2846ddf1056abc4f95a3dba5a1d41f6
+#43 exporting manifest list sha256:3ba6d7f19f6d04e77e8f890bbd053c1ce2846ddf1056abc4f95a3dba5a1d41f6 0.0s done
+#43 naming to docker.io/library/bussassistent-access-gate:7921eb54e4816aaab9368c3efd851bcf692f3823 done
+#43 unpacking to docker.io/library/bussassistent-access-gate:7921eb54e4816aaab9368c3efd851bcf692f3823 0.0s done
+#43 DONE 0.5s
+
+#44 [private-db] resolving provenance for metadata file
+#44 DONE 0.1s
+
+#45 [private-api] resolving provenance for metadata file
+#45 DONE 0.1s
+
+#46 [gateway] resolving provenance for metadata file
+#46 DONE 0.0s
+
+#47 [access-gate] resolving provenance for metadata file
+#47 DONE 0.0s
+Staged and built 7921eb54e4816aaab9368c3efd851bcf692f3823
+ Image bussassistent-gateway:7921eb54e4816aaab9368c3efd851bcf692f3823 Building 
+ Image bussassistent-access-gate:7921eb54e4816aaab9368c3efd851bcf692f3823 Building 
+ Image bussassistent-postgres:7921eb54e4816aaab9368c3efd851bcf692f3823 Building 
+ Image bussassistent-api:7921eb54e4816aaab9368c3efd851bcf692f3823 Building 
+ Image bussassistent-api:7921eb54e4816aaab9368c3efd851bcf692f3823 Built 
+ Image bussassistent-postgres:7921eb54e4816aaab9368c3efd851bcf692f3823 Built 
+ Image bussassistent-access-gate:7921eb54e4816aaab9368c3efd851bcf692f3823 Built 
+ Image bussassistent-gateway:7921eb54e4816aaab9368c3efd851bcf692f3823 Built 

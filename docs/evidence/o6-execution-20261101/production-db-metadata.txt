@@ -1,0 +1,7 @@
+accounts=2
+migrations=14
+drafts=2
+workdays=1
+server_version=17.11
+database_locale={"provider" : "c", "collate" : "en_US.utf8", "ctype" : "en_US.utf8", "version" : null, "actual" : null}
+extension=plpgsql:1.0

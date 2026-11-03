@@ -1,0 +1,21 @@
+{
+  "command": [
+    "ssh",
+    "-i",
+    "C:\\Users\\Jonas\\.ssh\\ibe160_server_ed25519",
+    "-o",
+    "IdentitiesOnly=yes",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "StrictHostKeyChecking=yes",
+    "-o",
+    "ConnectTimeout=10",
+    "jonas@192.168.1.139",
+    "cat /opt/bussassistent/current/gateway-maintenance.json"
+  ],
+  "start_utc": "2026-11-01T17:09:25.166228+00:00",
+  "end_utc": "2026-11-01T17:09:25.708483+00:00",
+  "exit": 1,
+  "output_sha256": "664f0d838b00c9556c67f47f382f17ddadac44a6be6b33b021638b3270ffbed4"
+}

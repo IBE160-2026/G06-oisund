@@ -1,0 +1,34 @@
+2026-11-01T22:56:11+01:00
+Version=259.5-0ubuntu3.4
+drwx------ 3 jonas jonas  140 Nov  1 22:32 /tmp/ibe160-o6-window.uNfjQHcy
+-rw-rw-r-- 1 jonas jonas 8325 Nov  1 22:32 /tmp/ibe160-o6-window.uNfjQHcy/host-step.py
+      1 ps
+      2 psimon
+      2 python
+      1 rcu_exp_gp_kthread_worker
+      1 rcu_exp_par_gp_kthread_worker/0
+      1 rcu_preempt
+      1 rcu_tasks_kthread
+      1 rcu_tasks_rude_kthread
+      1 rsyslogd
+      1 scsi_eh_0
+      1 scsi_eh_1
+      1 scsi_eh_2
+      1 snapd
+      1 sort
+      1 sshd
+      2 sshd-session
+      2 systemd
+      1 systemd-journal
+      1 systemd-logind
+      1 systemd-network
+      1 systemd-resolve
+      1 systemd-udevd
+      1 tail
+      1 thermald
+      1 udisksd
+      1 unattended-upgr
+      1 uniq
+      1 upowerd
+      1 watchdogd
+      2 wpa_supplicant

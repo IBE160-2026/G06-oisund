@@ -1,0 +1,73 @@
+2026-11-02T20:16:22+01:00
+7.0.0-42-generic
+linux-image-generic:
+  Installed: 7.0.0-42.42
+  Candidate: 7.0.0-42.42
+  Version table:
+ *** 7.0.0-42.42 500
+        500 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 Packages
+        500 http://security.ubuntu.com/ubuntu resolute-security/main amd64 Packages
+        100 /var/lib/dpkg/status
+     7.0.0-14.14 500
+        500 http://archive.ubuntu.com/ubuntu resolute/main amd64 Packages
+linux-generic:
+  Installed: 7.0.0-42.42
+  Candidate: 7.0.0-42.42
+  Version table:
+ *** 7.0.0-42.42 500
+        500 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 Packages
+        500 http://security.ubuntu.com/ubuntu resolute-security/main amd64 Packages
+        100 /var/lib/dpkg/status
+     7.0.0-14.14 500
+        500 http://archive.ubuntu.com/ubuntu resolute/main amd64 Packages
+linux-image-7.0.0-42-generic:
+  Installed: 7.0.0-42.42
+  Candidate: 7.0.0-42.42
+  Version table:
+ *** 7.0.0-42.42 500
+        500 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 Packages
+        500 http://security.ubuntu.com/ubuntu resolute-security/main amd64 Packages
+        100 /var/lib/dpkg/status
+/var/lib/apt/periodic/update-success-stamp 2026-11-02 14:50:28.353526529 +0100 0
+/var/lib/apt/lists/archive.ubuntu.com_ubuntu_dists_resolute-backports_InRelease 2026-11-02 10:54:20.000000000 +0100 136546
+/var/lib/apt/lists/archive.ubuntu.com_ubuntu_dists_resolute-updates_InRelease 2026-11-02 12:48:25.000000000 +0100 137401
+/var/lib/apt/lists/archive.ubuntu.com_ubuntu_dists_resolute_InRelease 2026-04-23 19:07:30.000000000 +0200 135549
+/var/lib/apt/lists/download.docker.com_linux_ubuntu_dists_resolute_InRelease 2026-10-30 04:50:34.000000000 +0100 32482
+/var/lib/apt/lists/pkg.cloudflare.com_cloudflared_dists_any_InRelease 2026-10-30 18:14:10.000000000 +0100 5039
+/var/lib/apt/lists/security.ubuntu.com_ubuntu_dists_resolute-security_InRelease 2026-11-02 13:58:05.000000000 +0100 137403
+Listing...
+cloud-init-base/resolute-updates 26.2-0ubuntu1~26.04.1 all [upgradable from: 26.1-0ubuntu3~26.04.1]
+cloud-init/resolute-updates 26.2-0ubuntu1~26.04.1 all [upgradable from: 26.1-0ubuntu3~26.04.1]
+dmidecode/resolute-updates 3.6-2ubuntu1 amd64 [upgradable from: 3.6-2build1]
+libaudit-common/resolute-updates 1:4.1.2-1ubuntu0.1 all [upgradable from: 1:4.1.2-1build1]
+libaudit1/resolute-updates 1:4.1.2-1ubuntu0.1 amd64 [upgradable from: 1:4.1.2-1build1]
+libflashrom1/resolute-updates 1.6.0-2ubuntu1.1 amd64 [upgradable from: 1.6.0-2ubuntu1]
+libnetplan1/resolute-updates 1.2-1ubuntu5.1 amd64 [upgradable from: 1.2-1ubuntu5]
+libopeniscsiusr/resolute-updates 2.1.11-3ubuntu3.1 amd64 [upgradable from: 2.1.11-3ubuntu3]
+mdadm/resolute-updates 4.5-5ubuntu1.1 amd64 [upgradable from: 4.5-5ubuntu1]
+netplan-generator/resolute-updates 1.2-1ubuntu5.1 amd64 [upgradable from: 1.2-1ubuntu5]
+netplan.io/resolute-updates 1.2-1ubuntu5.1 amd64 [upgradable from: 1.2-1ubuntu5]
+open-iscsi/resolute-updates 2.1.11-3ubuntu3.1 amd64 [upgradable from: 2.1.11-3ubuntu3]
+open-vm-tools/resolute-updates 2:13.0.10-1ubuntu1.1 amd64 [upgradable from: 2:13.0.10-1ubuntu1]
+python-apt-common/resolute-updates 3.1.0ubuntu1.1 all [upgradable from: 3.1.0ubuntu1]
+python3-apt/resolute-updates 3.1.0ubuntu1.1 amd64 [upgradable from: 3.1.0ubuntu1]
+python3-distupgrade/resolute-updates 1:26.04.27 all [upgradable from: 1:26.04.23]
+python3-netplan/resolute-updates 1.2-1ubuntu5.1 amd64 [upgradable from: 1.2-1ubuntu5]
+rust-coreutils/resolute-updates 0.10.0-1ubuntu2~26.04.1 amd64 [upgradable from: 0.8.0-0ubuntu3]
+snapd/resolute-updates 2.77.1+ubuntu26.04.2 amd64 [upgradable from: 2.76.3+ubuntu26.04]
+sos/resolute-updates 4.11.2-0ubuntu0.1 all [upgradable from: 4.10.2-1]
+thermald/resolute-updates 2.5.11-0ubuntu1.1 amd64 [upgradable from: 2.5.11-0ubuntu1]
+tmux/resolute-updates 3.6a-2ubuntu0.2 amd64 [upgradable from: 3.6a-2ubuntu0.1]
+ubuntu-kernel-accessories/resolute-updates 1.570.4 amd64 [upgradable from: 1.570.3]
+ubuntu-minimal/resolute-updates 1.570.4 amd64 [upgradable from: 1.570.3]
+ubuntu-pro-client-l10n/resolute-updates 38ubuntu0~26.04 amd64 [upgradable from: 37.2ubuntu0.1]
+ubuntu-pro-client/resolute-updates 38ubuntu0~26.04 amd64 [upgradable from: 37.2ubuntu0.1]
+ubuntu-release-upgrader-core/resolute-updates 1:26.04.27 all [upgradable from: 1:26.04.23]
+ubuntu-server-minimal/resolute-updates 1.570.4 amd64 [upgradable from: 1.570.3]
+ubuntu-server/resolute-updates 1.570.4 amd64 [upgradable from: 1.570.3]
+ubuntu-standard/resolute-updates 1.570.4 amd64 [upgradable from: 1.570.3]
+  UNIT LOAD ACTIVE SUB DESCRIPTION
+
+0 loaded units listed.
+NO_REBOOT_REQUIRED
+ForwardToWall=no

@@ -22,3 +22,18 @@ Ved oppfølgingen ble bare AGENTS.md committet i `8eda38128f61400f1699aa05f06e25
 
 ### Åpne punkter
 Ingen.
+
+## 2026-11-04 kl. 00:01 — Jonas Øisund
+
+### Oppgave
+Følg faglærerens presisering i Teams om rene Git-operasjoner og fjern overflødige sesjonsoppføringer.
+
+### Plan
+- Samordne loggoppskriften med prosjektets instruksjoner for Claude og Codex.
+- Gjennomgå loggene på main og fjern økter som bare gjaldt Git.
+
+### Resultat
+Commit 0a6b883 presiserer at blant annet fetch, pull, commit og push alene faller utenfor sesjonslogging. To oppføringer om ren push er fjernet fra loggene for Story 12.3 og nettbrett-tilgang. Økter med egne testresultater, eierbeslutninger eller driftsarbeid er beholdt. Diffkontrollen bestod.
+
+### Åpne punkter
+Ingen.

@@ -1,0 +1,12 @@
+{
+  "command": [
+    "docker",
+    "load",
+    "-i",
+    "C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\operations-o3-o6\\tmp\\o6-gateway-deploy-20261101\\gateway-server.tar"
+  ],
+  "start_utc": "2026-11-01T17:08:14.158633+00:00",
+  "end_utc": "2026-11-01T17:08:15.155420+00:00",
+  "exit": 0,
+  "output_sha256": "6039201876d58a561d7c68eee435a43e5c883a506386bc5134981fcfc54a5c0c"
+}

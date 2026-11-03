@@ -1,0 +1,23 @@
+{
+  "command": [
+    "ssh",
+    "-i",
+    "C:\\Users\\Jonas\\.ssh\\ibe160_server_ed25519",
+    "-o",
+    "IdentitiesOnly=yes",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "StrictHostKeyChecking=yes",
+    "-o",
+    "ConnectTimeout=10",
+    "-o",
+    "HostKeyAlias=192.168.1.139",
+    "jonas@192.168.1.138",
+    "date --iso-8601=seconds; cat /proc/sys/kernel/random/boot_id; cat /proc/uptime; systemctl --failed --no-pager; systemctl show cloudflared -p MainPID -p NRestarts -p ActiveEnterTimestamp; curl -fsS http://127.0.0.1:18083/ready; sudo -n /usr/local/sbin/bussassistentctl check; sudo -n /usr/local/sbin/bussassistentctl status"
+  ],
+  "start_utc": "2026-11-02T19:20:54.782058+00:00",
+  "end_utc": "2026-11-02T19:20:55.904663+00:00",
+  "exit": 0,
+  "output_sha256": "067186132d4527beb3c55fd458f842b0e0c149f824942d715cd07e9ce89608c6"
+}

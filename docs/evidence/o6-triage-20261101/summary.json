@@ -1,0 +1,33 @@
+{
+  "rows": 5322,
+  "host_package_advisory_rows": 5130,
+  "host_unique_advisories": 495,
+  "active_kernel_unique_high": 283,
+  "active_kernel_unique_critical": 12,
+  "assessments": {
+    "kernel_affected_feature_not_observed_active": 108,
+    "installed_kernel_trigger_unresolved": 2466,
+    "different_architecture_than_x86_64": 81,
+    "installed_fallback_not_running": 2475,
+    "local_image_package_match_production_identity_unverified": 159,
+    "32bit_trigger_not_applicable_to_local_x86_64": 2,
+    "required_directives_absent_in_deployed_source_runtime_config_unverified": 3,
+    "regex_maps_present_exact_trigger_unresolved_priority1": 1,
+    "mapping_conflict_supplier_describes_apache_not_nginx": 1,
+    "gosu_embedded_go_no_tls_path_demonstrated": 26
+  },
+  "source_matches": {
+    "deploy/tablet/nginx.conf.template": {
+      "source_sha256": "6742bc9b79c4a0dec8dfc618923affd29a17500bdb5b8a230ac48eebf7687cb5",
+      "server_sha256": "57ea84c34787ba6ffde80c4556166341c219315f074458dbabf921b38539c019",
+      "server_matches_git_with_crlf_translation": true
+    },
+    "deploy/ubuntu/compose.yaml": {
+      "source_sha256": "e7ba4ba080d98617f07be3d94ec48cac9b70f041b99975e04dc80f632784bf92",
+      "server_sha256": "e7ba4ba080d98617f07be3d94ec48cac9b70f041b99975e04dc80f632784bf92",
+      "server_matches_git_with_crlf_translation": false
+    }
+  },
+  "prior_scan_db_utc": "2026-10-31T01:14:32Z",
+  "scan_not_rerun_no_new_advisory_absence_claim": true
+}

@@ -1,0 +1,27 @@
+{
+  "command": [
+    "ssh",
+    "-i",
+    "C:\\Users\\Jonas\\.ssh\\ibe160_server_ed25519",
+    "-o",
+    "IdentitiesOnly=yes",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "StrictHostKeyChecking=yes",
+    "-o",
+    "ConnectTimeout=10",
+    "-o",
+    "HostKeyAlias=192.168.1.139",
+    "-o",
+    "ServerAliveInterval=5",
+    "-o",
+    "ServerAliveCountMax=1",
+    "jonas@192.168.1.138",
+    "set -eu\nsystemctl show -p Version\nsystemctl is-active ssh docker systemd-networkd systemd-resolved cloudflared bussassistent-backup.timer\ndpkg --audit\ntest ! -e /run/reboot-required\nsystemd-analyze time\ncat /proc/uptime\nip route show default\ngetent ahostsv4 app.bussassistent.com"
+  ],
+  "start_utc": "2026-11-01T22:43:55.072431+00:00",
+  "end_utc": "2026-11-01T22:43:55.616470+00:00",
+  "exit": 0,
+  "output_sha256": "f5792bc2a523f034b6a86d2d6e7b356b47f80d3227b68610d7d15dfb0245442a"
+}

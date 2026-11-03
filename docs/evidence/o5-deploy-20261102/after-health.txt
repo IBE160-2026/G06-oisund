@@ -1,0 +1,29 @@
+2026-11-02T20:48:43+01:00
+{
+  "commit": "7921eb54e4816aaab9368c3efd851bcf692f3823",
+  "archive_sha256": "d6ec0afb977ea7d3b24ec3198b499acc3f5247bb61645fd88358fe20443038c2"
+}/opt/bussassistent/releases/5e521cbc658594a47c4568d352a50e46309573c4
+2812a231-758d-4b5e-8241-d748b52d0991
+7.0.0-42-generic
+ 20:48:43 up 21:20,  2 users,  load average: 0.23, 0.15, 0.05
+  UNIT LOAD ACTIVE SUB DESCRIPTION
+
+0 loaded units listed.
+ActiveEnterTimestamp=Mon 2026-11-02 20:48:42 CET
+MainPID=791818
+NRestarts=0
+active
+{"status":200,"readyConnections":1,"connectorId":"94388746-502c-4a21-82bd-7ce5c187a27b"}API healthy; origin access control rejects unauthenticated requests
+Id=bussassistent.service
+ActiveState=active
+SubState=exited
+
+Id=cloudflared.service
+ActiveState=active
+SubState=running
+Release: 7921eb54e4816aaab9368c3efd851bcf692f3823
+NAME                          IMAGE                                                                COMMAND                  SERVICE       CREATED          STATUS                    PORTS
+bussassistent-access-gate-1   bussassistent-access-gate:7921eb54e4816aaab9368c3efd851bcf692f3823   "python gate.py"         access-gate   12 seconds ago   Up 11 seconds             
+bussassistent-gateway-1       bussassistent-gateway:7921eb54e4816aaab9368c3efd851bcf692f3823       "/bin/sh -ec 'envsub…"   gateway       11 seconds ago   Up 1 second               80/tcp, 127.0.0.1:18081->8080/tcp
+bussassistent-private-api-1   bussassistent-api:7921eb54e4816aaab9368c3efd851bcf692f3823           "python -m app.run"      private-api   11 seconds ago   Up 7 seconds (healthy)    
+bussassistent-private-db-1    bussassistent-postgres:7921eb54e4816aaab9368c3efd851bcf692f3823      "docker-entrypoint.s…"   private-db    11 seconds ago   Up 11 seconds (healthy)   5432/tcp

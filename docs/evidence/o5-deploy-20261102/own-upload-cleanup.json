@@ -1,0 +1,28 @@
+{
+  "command": [
+    "ssh",
+    "-i",
+    "C:\\Users\\Jonas\\.ssh\\ibe160_server_ed25519",
+    "-o",
+    "IdentitiesOnly=yes",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "StrictHostKeyChecking=yes",
+    "-o",
+    "ConnectTimeout=10",
+    "-o",
+    "HostKeyAlias=192.168.1.139",
+    "-o",
+    "ServerAliveInterval=15",
+    "-o",
+    "ServerAliveCountMax=2",
+    "jonas@192.168.1.138",
+    "set -eu\ntest -f /home/jonas/ibe160-upload/7921eb54e4816aaab9368c3efd851bcf692f3823.tar\nrm -- /home/jonas/ibe160-upload/7921eb54e4816aaab9368c3efd851bcf692f3823.tar\ntest ! -e /home/jonas/ibe160-upload/7921eb54e4816aaab9368c3efd851bcf692f3823.tar\nprintf \"Own release-upload archive removed; active and previous releases retained\\n\""
+  ],
+  "start_utc": "2026-11-02T19:52:42.928613+00:00",
+  "end_utc": "2026-11-02T19:52:43.577159+00:00",
+  "exit": 0,
+  "timed_out": false,
+  "sha256": "1dc903a157c2f48adda76966a949ead6348b41454a59650c21caf1cd58a4485e"
+}

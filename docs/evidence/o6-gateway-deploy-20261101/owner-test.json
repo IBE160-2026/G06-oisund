@@ -1,0 +1,11 @@
+{
+  "active_commit": "93ee582b1a71a3f7552da1894b570366b89afee1",
+  "answer": "Alle fire bestod uten feil",
+  "checks": [
+    "new private window/Cloudflare and app login",
+    "layout/buttons/draft display",
+    "harmless own draft edit and save",
+    "refresh and reopen persisted change"
+  ],
+  "risk_acceptance": false
+}

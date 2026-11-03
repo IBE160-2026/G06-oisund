@@ -1,0 +1,21 @@
+{
+  "command": [
+    "ssh",
+    "-i",
+    "C:\\Users\\Jonas\\.ssh\\ibe160_server_ed25519",
+    "-o",
+    "IdentitiesOnly=yes",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "StrictHostKeyChecking=yes",
+    "-o",
+    "ConnectTimeout=10",
+    "jonas@192.168.1.139",
+    "cat /tmp/ibe160-o6-window.uNfjQHcy/systemd-result.json"
+  ],
+  "start_utc": "2026-11-01T21:50:36.101714+00:00",
+  "end_utc": "2026-11-01T21:50:37.149858+00:00",
+  "exit": 1,
+  "output_sha256": "b950176414611adb363c571ab95ab19fe001b43001e456b7e7af7822fba1f073"
+}

@@ -1,0 +1,19 @@
+{
+  "real_config_resolver_last_value": "no",
+  "other_storage_and_rate_settings_preserved": true,
+  "no_exploit_or_production_logs_used": true,
+  "scope": "isolated parser/drop-in precedence, not running journald"
+}
+# /tmp/tmpkesb2md6/etc/systemd/journald.conf
+[Journal]
+Storage=auto
+ForwardToWall=yes
+
+# /tmp/tmpkesb2md6/etc/systemd/journald.conf.d/60-existing.conf
+[Journal]
+RateLimitIntervalSec=30s
+
+# /tmp/tmpkesb2md6/etc/systemd/journald.conf.d/70-bussassistent-wall.conf
+[Journal]
+ForwardToWall=no
+

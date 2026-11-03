@@ -1,5 +1,28 @@
 # Known limits
 
+4 November maintenance status: O3 and O5 are complete within documented scope. O4 is administratively closed with recorded verification limits. O6 maintenance, closing checks and triage are complete. Named O6 residual items remain open under the existing temporary risk disposition, and firmware remains deferred. [Maintenance record](../evidence/v1.0.1-maintenance-20261104.md).
+
+3 November O6 handover: the maintenance, closing checks and scoped triage are complete. Jonas allows the named residual items to remain open during password work. Full O6 closure is no longer a general prerequisite for the password release. The temporary acceptance retains its scope. Firmware stays separately deferred. [Decision and operational handover](../evidence/o6-handover-20261103.md).
+
+2 November O5 update: [qualified resolver correction is integrated/deployed](../evidence/o5-deploy-20261102.md) on7921eb5. Technical backup/restore/data/health checks passed; Jonas confirmed the five personal login/save/reopen/cache-interval steps «bestått»; bounded O5 follow-up is complete. O3, O4 and O6 stay open. No password, tag/release or risk-acceptance change. Older active5e521cb statements retain their checkpoint meaning.
+
+2 November update: [qualified O6 maintenance has been executed](../evidence/o6-execution-20261101.md), including actual server-image binding, Python/PG/gosu, systemd259.9, cloudflared2026.10.7, reboot/libc6 activation and a journald compensating setting. Final technical/owner tests and backup/restore passed. The named temporary residual risks were explicitly accepted. The [2November read-only follow-up](../evidence/o6-readonly-20261102.md) completed the scheduled-backup/restore and health closing checks. O6 remains open for unresolved kernel groups and the broad assurance boundary; continued stability is routine follow-up with no agreed minimum waiting period. O3–O5 stay separate. Historical gateway-only statements below retain their original checkpoint.
+
+1 November operational follow-up: the [qualified gateway correction is integrated and deployed](../evidence/o6-gateway-deploy-20261101.md)
+at93ee582b1a71a3f7552da1894b570366b89afee1, with fresh verified backup/isolated restore
+and owner-confirmed login/display/save/reopen. API/gate/PG and host/tunnel processes
+are preserved. O6 remains open for the specifically documented Debian/kernel/runtime
+findings and maintenance decisions; no residual risk has been accepted on the owner's
+behalf. O3–O5 retain their separate scope. Historical V1 and deployed-version statements
+below remain tied to their original control points. v1.0.0 is unchanged.
+
+The subsequent [production-bound ACL/SQLite FTS5 analysis](../evidence/o6-acl-fts5-20261101.md)
+excludes the affected call paths within the mapped current application/gate flows,
+using source/native dependency analysis and instrumented isolated controls.
+The installed libraries remain affected; administrative use, independent code
+execution and future changes remain outside that finding. No residual-risk
+acceptance, production update or O6 closure is implied.
+
 Local SCOPE-02 V1/D1–D3 and Epic12 are complete after [actual owner acceptance](../evidence/v1-acceptance-2026-10-29.md) and [main integration](../evidence/v1-main-integration-20261029.md). The [current delivery register](delivery-readiness.md) separates controlled project V1 from later course submission. [The Access report](../evidence/access-operations-20261029.md) qualifies O1 at the Cloudflare edge and bounded O2 active-member/email-policy refusal on operational eb0eee3. O3–O6 have bounded results in the [31 October final report](../evidence/v1-final-control-20261031.md); their residual proof limits remain open as explicitly owner-approved operational follow-up after V1. No broad category is marked passed. This later instruction does not erase the earlier local product acceptance.
 
 B6–B10 source repairs are qualified in C1. Existing observations of the older deployed version retain that version and do not certify C1. O1 does not independently observe the origin gate. O2 does not qualify positive allow-B or a general MFA matrix; an initial login without observed MFA and the later fresh Authenticator flow are both retained. Remaining external Origin/CSRF/cache/write-timing combinations, WAN/IPv6, pre-socket DNS cancellation and broader OS/supply-chain proof limits stay individually open in the operational register. Completed Ubuntu integration is included in V1; its [own tests/owner acceptance](v1-scope-and-operations.md) do not close O3–O6. Stability remains observation; the earlier freeze’s cause is unproven.

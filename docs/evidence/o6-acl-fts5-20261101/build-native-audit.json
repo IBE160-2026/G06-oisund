@@ -1,0 +1,16 @@
+{
+  "command": [
+    "docker",
+    "build",
+    "--pull",
+    "-t",
+    "ibe160-o6-native-analysis:20261101-r1",
+    "-f",
+    "scripts/operations-followup/Dockerfile.native-analysis",
+    "."
+  ],
+  "start_utc": "2026-11-01T17:39:02.624274+00:00",
+  "end_utc": "2026-11-01T17:39:05.887424+00:00",
+  "exit": 1,
+  "sha256": "c8cbdd793c9fae2a65a18c1aab4dcb372f3cb8000ef9330373e847ac339efe49"
+}

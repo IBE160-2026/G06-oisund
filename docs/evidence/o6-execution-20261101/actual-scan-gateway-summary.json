@@ -1,0 +1,6 @@
+{
+  "scope": "actual staged server image; transfer and Docker identity verified",
+  "ref": "bussassistent-gateway:5e521cbc658594a47c4568d352a50e46309573c4",
+  "artifact": "sha256:e50275080c14378e015fc71fea5db142de58a0b6677210d278f10c0754809fb0",
+  "counts": {}
+}

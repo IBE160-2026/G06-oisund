@@ -1,5 +1,54 @@
 # Ubuntu-server for Bussassistent
 
+## O6-overlevering 3. november 2026
+
+Vedlikehold, beståtte etterkontroller og avgrenset triage er fullført. Navngitte kernel-, bibliotek- og journalrester følges videre med dokumenterte barrierer og hendelser for ny vurdering. Firmware er separat utsatt. Jonas har avklart at full O6-lukking ikke er en generell forutsetning for passordrelease. [Gjeldende overlevering til drift og passordarbeid](evidence/o6-handover-20261103.md).
+
+## Gjeldende etter O5-deploy 2. november 2026
+
+Aktiv release er **7921eb54e4816aaab9368c3efd851bcf692f3823**, med terminerbar JWKS-/DNS-prosess og1MiBgate-tmpfs. Mainintegrasjon/deploy er utført etter uttrykkelig bestilling; backup/isolert restore før/etter,25uendrede tabellfingeravtrykk og app/DB/tunnelkontroller bestod. `previous` er5e521cb med identiske migreringer; [deploy-/tilbakeveisrapport og personlige teststeg](evidence/o5-deploy-20261102.md). Personlig prøve er bekreftet «bestått»; avgrenset O5-oppfølging er fullført. Gjeldende O3–O6-status og forskjellen mellom release og produksjonscommit står i [vedlikeholdsrapporten for v1.0.1](evidence/v1.0.1-maintenance-20261104.md). Full apputrulling restartet containere/tunnel, ingen vertsomstart eller pakkeoppdatering.
+
+## Historisk etter O6-vedlikehold 1.–2. november 2026
+
+Aktiv apprelease er **5e521cbc658594a47c4568d352a50e46309573c4** med kontrollerte Python3.13.18/pip- og PG17.11/gosu1.20-rettelser. Systemd/PID1 er259.9-0ubuntu0.1 og cloudflared2026.10.7. Kontrollert omstart aktiverte libc6 og fjernet reboot-markøren; kernel er fortsatt7.0.0-42. Ny boot-ID2812a231-758d-4b5e-8241-d748b52d0991. [Eksakte images, faktisk vedlikehold, backup/retur, skanning og siste eiertest](evidence/o6-execution-20261101.md).
+
+Siste tekniske kontroll og personlig innlogging/visning/lagring/gjenåpning bestod. Backup/isolert restore er verifisert også etter sluttprøven; timer aktiv. ForwardToWall=no kompenserer det konkrete lave journald-funnet. [Lesende etterkontroll2.11](evidence/o6-readonly-20261102.md) bekreftet faktisk nattbackup/isolert restore og20t53m oppetid med frisk app/DB/tunnel. Vedlikeholdets sluttkontroller er ferdige; kernelrestgruppene og den brede bevisgrensen holder samlet O6 åpen. Videre stabilitet er løpende oppfølging uten vedtatt minste ventetid; midlertidig avgrenset risikoaksept er uttrykkelig gitt. O3–O5 spores separat. V1-tag/release er uendret; ingen ny publisering.
+
+**SSH er nå jonas@192.168.1.138 over Wi-Fi**, etter DHCP-adresseendring ved omstart. `scripts/server.ps1` har oppdatert standard og beholder streng kontroll mot den gamle verifiserte serveridentiteten med `-HostKeyAlias 192.168.1.139`. Ved senere adresseendring kan `-Server jonas@<aktuell-IP>` brukes med samme kjente nøkkelalias. Eksisterende known_hosts/tilgangsregler/ruteroppsett er ikke endret. mDNS ble ikke tilgjengeliggjort. Sjekk aktuell adresse lokalt med `ip -4 -br addr show wlp3s0` ved behov.
+
+Ved nødvendig senere retur: verifiser bevarte pakker/konfig og bruk den [vedvarende funksjonsbaserte returoppskriften](evidence/o6-execution-20261101/persistent-recovery-procedure.json). Fra vanlig konsoll med administratorrettighet brukes `sudo sh /home/jonas/ibe160-upload/o6-return-systemd.sh` eller tilsvarende `o6-return-cloudflared.sh`, kun for det konkrete feilende trinnet. Fra faktisk root-gjenopprettingskonsoll utelates sudo; rotfilsystemet må være skrivbart før pakkereparasjon. Instruksjonene bruker root-backupens hashkontrollerte cachefunksjon, og erstatter eldre raw-APT-returtekst med private filbaner. Kontroller helse/versjoner etter retur. Bevar private backuper/returpakker mens videre stabilitet observeres; ikke skriv gamle dpkg-statusfiler eller dumper blindt over levende tilstand.
+
+Avsnittene nedenfor er historiske kontrollpunkter;93ee582 er førversjon/tilbakevei.
+
+## Tidligere gatewayvedlikehold — 1. november 2026
+
+Aktiv serverrelease er nå **93ee582b1a71a3f7552da1894b570366b89afee1** med kvalifisert
+gatewayimage **sha256:18f942c0107fa36b2fff8e11759d64ee08244fe115195e8e89bab03f4fc984c0**.
+[Backup, faktisk avgrenset deploy, etterkontroller, eiertest og gjenstående O6-valg](evidence/o6-gateway-deploy-20261101.md).
+Bare gatewaycontaineren ble byttet. API/gate/PG-image-ID-er, containere/PID-er og
+tunnelprosessen er uendret fra V1; ingen verts-/passordoppdatering. Jonas bekreftet
+ny privat innlogging, visning, lagring og gjenåpning: «Alle fire bestod uten feil».
+O6 og separat O3–O5 er fortsatt åpne. V1-tag/release er uendret på d367a0e.
+
+Senere [lesende produksjonsbinding og isolert ACL-/FTS5-analyse](evidence/o6-acl-fts5-20261101.md)
+viser at de berørte funksjonene ikke nås gjennom dagens kartlagte app-/gateflyter.
+Bibliotekene er fortsatt sårbare; administrativ bruk/annen kodekjøring og senere
+endringer er utenfor beviset. Ingen restfareaksept eller produksjonsendring følger
+av analysen. Aktiv release og gatewayvedlikeholdet over er uendret.
+
+For dette avgrensede løpet brukes `server.ps1 -Action GatewayStage -Revision <ny full SHA>`
+før artefaktkontroll, deretter `-Action GatewaySwitch -Revision <valgt full SHA>
+-GatewayImage <kvalifisert sha256:ID> -ExpectedCurrent <faktisk aktiv full SHA>`.
+Staging av allerede aktiv SHA avvises før bygg for å bevare appimage-aliasene.
+GatewaySwitch krever uendret øvrig kilde/Compose-oppsett, tar backup, bevarer aktive
+API/gate-byte under de nye aliasene og bruker bare `up --no-deps --no-build --pull never gateway`.
+Samme modus brukes til den dokumenterte førversjonen ved gatewaytilbakeføring.
+Den generelle Deploy-/Rollback-oppskriften nedenfor gjelder full apputrulling og
+kan stoppe flere tjenester; den ble ikke brukt til dette gatewaybyttet.
+
+Avsnittene nedenfor beholder tidligere V1-/serverkontrollpunkter. Dokumentasjons-
+og lokale Windows-verktøycommits etter93ee582 er ikke nye serverdeploys.
+
 Gjeldende 31.10.2026: serverintegrasjonen og driftsoverleveringen er fullført og inngår i V1 etter Jonas sin avklaring. Tidligere bonus/v1.0.1-avgrensning er erstattet; [samlet omfang, status og versjonstilknytning](submission/v1-scope-and-operations.md). Sensor bruker den selvstendige [lokale oppskriften](../README.md) og trenger ikke server, eierkonto, private data eller Cloudflare-tilgang.
 
 Integrasjonen tok inn main-grunnlaget 64f91a7 i 6f845fa før testing. Backend, frontend og tablet-gate ble bevart. Publisert main var 5dc6400 ved dokumentkontrollen; siste dokumenterte deploy er addd27b14fe4b26ef24d488d847d1c0d59a98946, med eierbekreftet innlogging/lagring 31.10.2026. Publisering av dokumentasjon deployer ikke ny release. Ferdig integrerte serverbrancher er ryddet etter kontroll, se driftsloggen. Opprinnelig plan godkjent 29.10.2026. Langtidsstabilitet observeres videre. Lesende sluttkontroll31.10 bekreftet fortsatt addd27b og healthy API/database/aktiv tunnel. En reboot-required-markør for libc6 er registrert som videre vedlikehold; ingen omstart/oppdatering ble utført. [Avgrensede resultater og åpne O3–O6 etter V1](evidence/v1-final-control-20261031.md).
@@ -12,7 +61,7 @@ Windows-backup er SHA256-verifisert, og en separat fersk backup bestod isolert r
 
 ## Server og drift
 
-SSH: jonas@192.168.1.139 fra Windows på samme lokalnett.
+SSH-adressen i den opprinnelige serveroppskriften var jonas@192.168.1.139; gjeldende adresse og nøkkelalias står øverst.
 Lenovo Y520-15IKBN, Ubuntu26.04.1, kernel7.0.0-42-generic.
 Gammel kernel7.0.0-30 er markert manuelt installert og beholdes.
 GRUB viser meny; tilbakevei er Advanced options for Ubuntu -> 7.0.0-30-generic.

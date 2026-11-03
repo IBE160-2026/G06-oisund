@@ -1,0 +1,18 @@
+{
+  "received_utc": "2026-11-02T20:58:11.8153129+00:00",
+  "source": "Owner reports four console results from the supplied missing-header probe",
+  "production_commit": "7921eb54e4816aaab9368c3efd851bcf692f3823",
+  "request_path": "/private-api/draft-operations",
+  "method": "POST",
+  "body": "{}",
+  "csrf_header_present": false,
+  "status": 403,
+  "cache_control": "no-store",
+  "content_type": "application/json",
+  "detail": "Forespørselen ble avvist.",
+  "data_tables_compared": 25,
+  "changed_tables": [],
+  "all_table_fingerprints_identical": true,
+  "scope": "Missing CSRF header only; wrong-header and Origin variants not yet tested",
+  "o3_complete": false
+}

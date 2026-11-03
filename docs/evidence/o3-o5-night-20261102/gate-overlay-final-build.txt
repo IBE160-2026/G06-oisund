@@ -1,0 +1,34 @@
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile.candidate
+#1 transferring dockerfile: 255B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/bussassistent-access-gate:5e521cbc658594a47c4568d352a50e46309573c4
+#2 DONE 0.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 470B done
+#3 DONE 0.0s
+
+#4 [internal] load build context
+#4 transferring context: 13.06kB 0.0s done
+#4 DONE 0.0s
+
+#5 [1/2] FROM docker.io/library/bussassistent-access-gate:5e521cbc658594a47c4568d352a50e46309573c4@sha256:f9c4a48c92b644c638359573dd44a8b5f55c79cb018e0c3c544748cb55cd3aa5
+#5 resolve docker.io/library/bussassistent-access-gate:5e521cbc658594a47c4568d352a50e46309573c4@sha256:f9c4a48c92b644c638359573dd44a8b5f55c79cb018e0c3c544748cb55cd3aa5 0.0s done
+#5 CACHED
+
+#6 [2/2] COPY deploy/tablet/access_gate/gate.py /gate/gate.py
+#6 DONE 0.1s
+
+#7 exporting to image
+#7 exporting layers 0.1s done
+#7 exporting manifest sha256:1d57b5cdcfbe017b04942a4c5210baf4d180cd9954ca2f89f3b90d937970d989 0.0s done
+#7 exporting config sha256:02d820dbe5c755bb9c726ad5ac88f86434ab22f48b875cabac3350f7cdec7489 0.0s done
+#7 exporting attestation manifest sha256:79f256bb25556928a20dc15d13a566642a52066a0e8eb24637793f68eaefb874 0.0s done
+#7 exporting manifest list sha256:22fe79cf1e8e4dd1ec9d36aa4598b50a410d1a59bb7f1ba02e45284965cfafd9
+#7 exporting manifest list sha256:22fe79cf1e8e4dd1ec9d36aa4598b50a410d1a59bb7f1ba02e45284965cfafd9 0.0s done
+#7 naming to docker.io/library/ibe160-o5-gate:20261102 done
+#7 unpacking to docker.io/library/ibe160-o5-gate:20261102 0.1s done
+#7 DONE 0.4s

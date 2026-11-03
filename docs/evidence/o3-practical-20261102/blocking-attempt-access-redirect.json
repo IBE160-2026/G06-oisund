@@ -1,0 +1,18 @@
+{
+  "received_utc": "2026-11-02T21:08:42.2174534+00:00",
+  "source": "Owner reports only session requests with302Found during planned exact-draft-URL blocking test; screenshot shows private content hidden",
+  "production_basis": "7921eb54e4816aaab9368c3efd851bcf692f3823",
+  "rule_setup_owner_confirmed": "exact URL includes draft ID, active; tab Online",
+  "reported_request_name": "session",
+  "reported_status": 302,
+  "redirect_location_host": null,
+  "redirect_location_query_collected": false,
+  "ui_private_content_hidden": true,
+  "target_write_request_observed": false,
+  "verdict": "Planned post-access write blocking not reached; access redirect needs classification and recovery",
+  "possible_cause": "Cloudflare Access session renewal; not established without owner-context redirect destination",
+  "app_session_display_not_proof_of_edge_session_validity": true,
+  "new_save_attempts_requested": false,
+  "original_tab_reload_requested": false,
+  "o3_complete": false
+}

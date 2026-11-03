@@ -1,0 +1,21 @@
+{
+  "command": [
+    "ssh",
+    "-i",
+    "C:\\Users\\Jonas\\.ssh\\ibe160_server_ed25519",
+    "-o",
+    "IdentitiesOnly=yes",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "StrictHostKeyChecking=yes",
+    "-o",
+    "ConnectTimeout=10",
+    "jonas@192.168.1.139",
+    "ps -eo pid,ppid,comm,wchan:30 | awk '$3 ~ /buss|python|sudo|docker|apt|dpkg/ {print}'\nlslocks -o PID,COMMAND,TYPE,MODE,PATH | tail -15"
+  ],
+  "start_utc": "2026-11-01T21:52:44.989274+00:00",
+  "end_utc": "2026-11-01T21:52:45.409828+00:00",
+  "exit": 0,
+  "output_sha256": "a7e1646d8d27e83132919fdc583a81c836cc5ff71807288d038d2211a7e6ec01"
+}

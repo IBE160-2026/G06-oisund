@@ -1,0 +1,20 @@
+Id=bussassistent.service
+ActiveEnterTimestamp=Sun 2026-11-01 23:28:17 CET
+ExecMainStartTimestamp=Sun 2026-11-01 23:28:07 CET
+
+Id=cloudflared.service
+ActiveEnterTimestamp=Sun 2026-11-01 23:28:17 CET
+ExecMainStartTimestamp=Sun 2026-11-01 23:28:17 CET
+
+Id=bussassistent-backup.timer
+ActiveEnterTimestamp=Sun 2026-11-01 23:27:59 CET
+Timestamp=Sun 2026-11-01 23:36:11 CET
+State=active
+ActiveState=active
+Listen=0.0.0.0:22 (Stream)
+Listen=[::]:22 (Stream)
+NEXT                            LEFT LAST                        PASSED UNIT                       ACTIVATES
+Mon 2026-11-02 03:16:23 CET 3h 30min Sun 2026-11-01 03:17:12 CET      - bussassistent-backup.timer bussassistent-backup.service
+
+1 timers listed.
+Pass --all to see loaded but inactive timers, too.

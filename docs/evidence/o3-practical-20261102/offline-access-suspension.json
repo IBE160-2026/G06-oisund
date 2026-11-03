@@ -1,0 +1,28 @@
+{
+  "received_utc": "2026-11-02T20:46:36.5080433+00:00",
+  "source": "Four owner-supplied screenshots; originals retained outside Git",
+  "production_basis": "7921eb54e4816aaab9368c3efd851bcf692f3823",
+  "device": "Desktop",
+  "browser": "Brave",
+  "platform_hint": "Windows",
+  "browser_brand_major_hints": [
+    "Chromium 156",
+    "Brave 156"
+  ],
+  "full_browser_version": null,
+  "client_fault": "DevTools Offline in application tab; physical Wi-Fi interruption not established",
+  "failed_request_path": "/private-api/auth/session",
+  "error": "net::ERR_INTERNET_DISCONNECTED",
+  "http_response_status": null,
+  "headers": "Provisional headers; no response status/headers shown",
+  "ui_message": "Tilgangen kan ikke bekreftes. Privat innhold er skjult. Prøv igjen når tjenesten er tilgjengelig.",
+  "ui_recovery_button": "Kontroller tilgang igjen",
+  "private_content_hidden": true,
+  "failed_write_request_visible_in_crops": false,
+  "write_attempt_or_dispatch_established": false,
+  "local_proposal_retention": null,
+  "recovery_result": null,
+  "verdict": "Passed bounded access-unverified UI hiding observation; save/receipt/retention/recovery remain unverified",
+  "raw_images_committed": false,
+  "o3_complete": false
+}

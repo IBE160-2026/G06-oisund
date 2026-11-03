@@ -1,0 +1,12 @@
+{
+  "scope": "preserved local qualified image; not staged or deployed artifact",
+  "ref": "ibe160-o6-postgres:20261101-r2",
+  "artifact": "sha256:cd2831bda6afa19bc7948bb38b9b090f988c88bafbf68e75512e6ebdcd78e9fd",
+  "counts": {
+    "UNKNOWN": 1,
+    "CRITICAL": 1,
+    "HIGH": 25,
+    "MEDIUM": 30,
+    "LOW": 3
+  }
+}

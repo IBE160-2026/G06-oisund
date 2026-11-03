@@ -1,0 +1,21 @@
+{
+  "command": [
+    "ssh",
+    "-i",
+    "C:\\Users\\Jonas\\.ssh\\ibe160_server_ed25519",
+    "-o",
+    "IdentitiesOnly=yes",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "StrictHostKeyChecking=yes",
+    "-o",
+    "ConnectTimeout=10",
+    "jonas@192.168.1.139",
+    "systemctl is-active docker ssh systemd-resolved cloudflared bussassistent-backup.timer; systemctl show -p Version"
+  ],
+  "start_utc": "2026-11-01T21:32:09.907626+00:00",
+  "end_utc": "2026-11-01T21:32:10.609084+00:00",
+  "exit": 0,
+  "output_sha256": "66fb7b32948a842d317ea070855180de5e0d72216d44beb70dfc227091989990"
+}

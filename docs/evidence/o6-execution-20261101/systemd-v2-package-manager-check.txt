@@ -1,0 +1,24 @@
+2026-11-01T23:01:31+01:00
+Version=259.5-0ubuntu3.4
+libnss-systemd:amd64	259.5-0ubuntu3.4
+libpam-systemd:amd64	259.5-0ubuntu3.4
+libsystemd-shared:amd64	259.5-0ubuntu3.4
+libsystemd0:amd64	259.5-0ubuntu3.4
+libudev1:amd64	259.5-0ubuntu3.4
+systemd	259.5-0ubuntu3.4
+systemd-cryptsetup	259.5-0ubuntu3.4
+systemd-resolved	259.5-0ubuntu3.4
+systemd-sysv	259.5-0ubuntu3.4
+udev	259.5-0ubuntu3.4
+active
+active
+active
+active
+active
+default via 192.168.1.1 dev wlp3s0 proto dhcp src 192.168.1.139 metric 600 
+104.21.2.190    STREAM app.bussassistent.com
+104.21.2.190    DGRAM  
+104.21.2.190    RAW    
+172.67.129.146  STREAM 
+172.67.129.146  DGRAM  
+172.67.129.146  RAW    

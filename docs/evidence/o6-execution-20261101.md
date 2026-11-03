@@ -1,0 +1,170 @@
+# O6 gjennomføring — 1.–2. november 2026
+
+## Sluttstatus — dokumentert 2. november 2026
+
+**Gjennomførbare kvalifiserte vedlikeholdstrinn er utført og etterkontrollert. O6 beholdes åpen for konkret kernel-/langtidsoppfølging og dokumenterte bredere bevisgrenser.** Aktiv apprelease er **5e521cbc658594a47c4568d352a50e46309573c4**, systemd/PID1 **259.9-0ubuntu0.1**, cloudflared **2026.10.7** (kjørende binær hashkontrollert), kernel fortsatt **7.0.0-42-generic** og libc6 **2.43-2ubuntu2.4** etter faktisk omstart. Ny boot-ID **2812a231-758d-4b5e-8241-d748b52d0991**. Sluttkontrollen23:57Oslo1.11 viste frisk app/database/tunnel, ingen failed units/dpkg-feil, aktiv backup-timer og ingen reboot-required-markør. Siste personlige innlogging/visning/lagring/gjenåpning er bekreftet **«bestått»**.
+
+SSH-adressen er nå **192.168.1.138** på Wi-Fi. Klientverktøyene er oppdatert og bruker fortsatt den eksisterende verifiserte servernøkkelen gjennom `HostKeyAlias=192.168.1.139` og streng host-key-kontroll. Ingen nøkkeltillit er utvidet eller konto/passord endret. IPv4-adresseendring, ikke et dokumentert serverstopp, forklarte de første mislykkede fjernkontrollene. Lokal innloggingsvanske ble avklart av eieren som NumLock. Disse hendelsene er ikke registrert som PAM-/systemd-regresjon.
+
+Historiske avsnitt nedenfor bevarer førstatus, feilforsøk og kontrollporter; sluttdelen beskriver faktisk resultat. Senere main-dokumentasjon er ikke en ny serverdeploy. V1-taggen og godkjent refleksjon er bevart. Ingen ny tag/release eller passordfunksjonalitet.
+
+## Faktisk status ved kontrollpunktet
+
+Ny uttrykkelig vedlikeholdsautorisasjon er mottatt. Produksjonen er kontrollert før arbeid: aktiv release **93ee582b1a71a3f7552da1894b570366b89afee1**, gatewayrettelsen fra tidligere kjøring er aktiv. API/gate/PG, systemd259.5-0ubuntu3.4, cloudflared2026.10.6, kernel7.0.0-42 og boot44c550dc er uendret. API/database healthy, tunnelready200/fire forbindelser, origin uten assertion403, backup-timer aktiv og ingen failed units. [Førkontroll](o6-execution-20261101/before.txt), [etter staging](o6-execution-20261101/after-staging.txt).
+
+## Gjennomført
+
+- Ny Windows-backup med verifisert overføringshash: `20261101T203510Z-93ee582b1a71a3f7552da1894b570366b89afee1.dump`, SHA256 **04ff0a8e8b6741c377996ef276b859dccb5c744697fc20de4aebaa0c25f65195**. Backupbyte ligger privat utenfor Git. Separat fersk serverdump20:35:13UTC ble gjenopprettet isolert uten produksjonsvolum; alle tabellfingeravtrykk like. [Backup](o6-execution-20261101/backup-windows.txt), [restore](o6-execution-20261101/backup-restore.txt).
+- Selektiv integrering av kvalifiserte Python3.13.18/pip-fjerning, PG17.11/gosu1.20 og all-image-forkontroll fra bevart kvalifiseringsbranch. Nyere gatewayguard/tilbakevei er bevart. Arbeidscommit **e0ad930**, integrert og pushet i main som **5e521cbc658594a47c4568d352a50e46309573c4**. ACL-/FTS5-analysen er også integrert. Ingen passordfunksjonalitet, låse-/migrerings-/appkode-/refleksjonsendring.
+- Samlet integrasjonskontroll: **20 Linux-driftstester bestod**. Fast lesende database-summary er utvidet med PG-versjon/kollasjon/extensions; SQL prøvd i egen disponibel PG/tmpfs og deretter faktisk produksjon. Ingen privat rad-/konto-/sesjonsverdi leses ut.
+- Releasen5e521cb er **bygget/staget, ikke aktivert**, med eksisterende GatewayStage som bare bygger og installerer driftsverktøy. Denne actionens navn innebærer ingen gatewayaktivering. Driftsverktøy/unitfiler er installert med daemon-reload; ingen container/tjeneste eller maskin er restartet. [Full kvittering](o6-execution-20261101/stage-only.txt).
+- Faktisk database: **PG17.11**, provider c, en_US.utf8, både lagret/aktuell kollasjonsversjon null; bare plpgsql1.0. 14 migreringer. Dette erstatter tidligere manglende produksjonsmetadata, men er ikke full kvalifikasjon av alle mulige kollasjons-/extensionscenarioer. [Lesende metadata](o6-execution-20261101/production-db-metadata.txt).
+- Vertens nåværende apt-lister tilbyr de kvalifiserte ti systemdpakkene259.9-0ubuntu0.1. Lesende apt-simulering: **10 oppgraderinger, ingen nye/fjernede pakker**. Ingen apt-update/install utført.20 lokalt bevarte gamle/nye deb-er er hashkontrollert mot kvalifiseringen. De er ennå ikke overført til konsolltilgjengelig gjenopprettingssted, og privat OS-konfigbackup gjenstår før OS-endring.
+- Trivy-databaseoppfriskning og ny skanning av **bevarte lokale kvalifiserte kandidater**, ikke de nye serverbyggene: API/gate46high, ingencritical; PG1critical/25high/30medium. Samme sentrale resttall som før, med tidligere konkrete Debian-/Go-disponeringer; ingen ignoreliste. Skannerens ArtifactID er ikke automatisk samme identifikator som Docker-inspect/OCI-index-ID. Dette er ikke etter-deploy-skanning. Rårapporter er komprimert og sammendrag merket med riktig miljø.
+- [Produksjonsidentiteter etter staging](o6-execution-20261101/staged-and-active-identities.txt) viser samme fire aktive container-ID/image/PID/start/restart og tunnel som før. Det nye staged gatewayimaget er et annet artefakt; det er ikke erklært lik den kvalifiserte aktive gatewayen.
+
+## Stoppporter og minste neste handling
+
+Den tidligere [vedlikeholdsplanen](https://github.com/IBE160-2026/G06-oisund/blob/841fbbe337860d06456abf21c6cd0e5501ad5ffc/docs/evidence/o6-maintenance-ready-20261101.md) krever D1 før Python/imageaktivering og fysisk konsoll/tilbakevei før systemd/nett/tunnel/omstart. Ny generell vedlikeholdsautorisasjon er **ikke risikoaksept**. Én samlet eierforespørsel er sendt om midlertidig avgrenset restfare og faktisk konsoll-/administratorberedskap; svar er ikke mottatt ved dette kontrollpunktet.
+
+1. **Eierbeslutning D1/D2:** velg midlertidig videreføring med dokumenterte barrierer for util-linux/ncurses/installerte ACL-/FTS5-biblioteker og fortsatt kerneloppfølging, eller fortsatt utsett berørte trinn. ACL/FTS5 er verifisert utenfor kartlagte normale appflyter, ikke rettet i imagene. Risikoaksept registreres først ved uttrykkelig beslutning.
+2. **Praktisk gjenopprettingstilgang:** eieren må bekrefte prøvd lokal administratorinnlogging, skjerm/tastatur/strøm og GRUB-tilgang før OS-/tunnel-/boottrinn. Generell sudo krever fortsatt interaktiv administratoreksport/betjening; passord skal ikke sendes i chat. Privat OS-konfigbackup og tilgjengelige gamle pakker må verifiseres før endring.
+3. **Tekniske aktiveringsporter består:** bind faktisk staged imageinnhold til kvalifisering før aktivering; nye artefaktavvik må vurderes/skannes/testes etter behov. Ny frisk backup/restore ved senere vindu hvis dagens resultat er blitt utdatert. Aktiver i planens rekkefølge med helse, tilgang/tunnel, personlig lagring/gjenåpning og relevant faktisk etter-skanning før neste trinn. Ved feil: dokumentert retur; ingen blind databaseoverskriving.
+4. Ingen dokumentert støttet rettet kernel er etablert. Omstart med42 aktiverer ikke en kernel-CVE-rettelse. Påkrevd ny boot-/nett-/tunnelkontroll og videre stabilitetsobservasjon er **ikke utført eller lukket**. Ingen observasjonstid er oppfunnet som et fullført krav.
+
+**O6 er fortsatt åpen:** kvalifiserte rettelser er integrert/staget, men øvrige runtime-/vertsrettelser, eierporter, faktisk etterkontroll og stabilitetsoppfølging er ufullførte. Gatewaydelen er allerede fullført historisk. O3–O5 spores separat. v1.0.0 beholdes på d367a0e; ingen ny tag/release. Andre branches, kvalifiserte kandidater og eksisterende miljøer er bevart. [Evidensindeks](o6-execution-20261101/index.json).
+
+## Etterfølgende uttrykkelig eierbeslutning
+
+Jonas har nå akseptert midlertidig restfare for util-linux, ncurses, ACL/FTS5 og kernel med dokumenterte barrierer, og bekreftet prøvd lokal administratorinnlogging samt fysisk strøm/skjerm/tastatur/GRUB-beredskap. [Ordrett beslutning](o6-execution-20261101/owner-decision.json). D1/D2 og bekreftelsen av konsollberedskap er dermed gitt; de historiske ventepunktene over beskriver forrige kontrollpunkt. Dette er ingen påstand om rettede biblioteker/kernel eller lukket O6. Generell sudo krever fortsatt eierens interaktive terminalbetjening.
+
+Fersk lesende kontroll ved gjenopptakelse bestod på samme93ee582. Komplett fire-image eksportfunksjon er prøvd lokalt og fjernet etter testen; hashkontrollert preflightskript er klargjort for eierkjøring. Det skal eksportere faktiske serverimages og lage root-beskyttet systemkonfigbackup uten aktivering. Resultat registreres først etter innhenting og kontroll.
+
+De22 gamle/nye systemd-/cloudflared-debene er nå overført til den private arbeidsmappen på serveren; alle overføringshasher er kontrollert. Ingen installasjon utført. Flytting til root-beskyttet konsolltilbakevei og endelig hashkontroll skal gjøres før OS-trinnet. [Overføringskontroll](o6-execution-20261101/recovery-package-transfer.json).
+
+## Utført containeraktivering — 1. november kl.22:30 Oslo
+
+**Aktiv serverrelease er nå5e521cbc658594a47c4568d352a50e46309573c4**, med ny Python3.13.18/pip-fjerning og PG17.11/gosu1.20. Tidligere93ee582 er dokumentert tilbakevei; migreringene er uendret. Historiske avsnitt ovenfor beskriver før-/stagingpunktene. Senere dokumentasjonscommits er ikke deployet.
+
+Administratoreksporten er fullført: alle fire eksporterte image-ID-er/rootfs-lag stemmer mellom server og lokal Docker etter hashkontrollert overføring. Beskyttet systembackup `/var/backups/bussassistent/o6-pre-5e521cbc/host-config.tar` har SHA25686e3fd3246c6ab65d1d3ba0021f1831cd7cd34c7be4b45c939105aa2a075bc87, kontrollert arkivliste og0600/root-eierskap i0700-mappe. Ingen privat arkivbyte er hentet til Git. [Kvittering](o6-execution-20261101/admin-preflight-result.json).
+
+| Faktisk kjørende rolle | Eksakt eksportert/testet image-ID |
+|---|---|
+| api | `sha256:65b4f7dd8e336198175fdbc10e0a3ed2ba68118426ab54d36e751cded7173bdf` |
+| access-gate | `sha256:f9c4a48c92b644c638359573dd44a8b5f55c79cb018e0c3c544748cb55cd3aa5` |
+| postgres | `sha256:c078a9092712e11deb68fa2b3ee7ce0f5c59cb0b76ffac8f9c7022580a5ef806` |
+| gateway | `sha256:b37608187e86507cefc1d79995fdfd631cae3e3f9490dc96d0fea89e996bcb75` |
+
+Full lokal filesystem-sammenligning av aldri startede egne containere: PG/gateway identiske i filinnhold og valgte rettigheter/linker. API-avvik1345=1276bytekodehoder+69mode755→644; gate120=118bytekodehoder+2mode755→644. Alle kompilerte payloads etter16bytehode er identiske (1436/280pyc kontrollert). Alle øvrige filbytes, native biblioteker, eiere og linker er like; kildefiler/migreringer er fortsatt lesbare av uid10001. Docker-genererte hosts/hostname/resolv.conf og virtuelle dev/proc/sys er avgrenset bort. Ingen runtime-/produksjonsvolum er eksportert. [Forskjeller](o6-execution-20261101/staged-filesystem-comparison.json), [bytekodebinding](o6-execution-20261101/pyc-payload-binding.json).
+
+Ny faktisk-serverimage-skanning: gateway0treff, API/gate46high utencritical, PG1critical/25high/30medium. Samme sentrale restfunn som de kvalifiserte kandidatene, med eksisterende konkrete Debian/Go-disponeringer og eierens uttrykkelige midlertidige risikoaksept. Ingen ignoreliste eller generell sikkerhetsgodkjenning. Førskanningens artefakter er nå bundet til faktisk aktive ID-er; den er ikke relabellet som en uavhengig runtime-forensisk skanning.
+
+Fordi filrettigheter/byggartefakter var forskjellige, ble relevante kontroller kjørt på de faktiske serverimagene før aktivering: isolert Uvicorn/PG15familier og75Origin/CSRF-negative kontroller, svar-tap/oppslag/replay; faktisk innlogget HTTP-PDF200, ikke-PDF422, utenøkt401, utenCSRF403; gate26negative JWT-varianter/25HTTP-kall. Alle bestod, med null ACL/SQLite-events i instrumenterte flyter. Tidligere komplette327/private/PDF- og øvrige kvalifiseringer gjenbrukes på det dokumenterte identiske kode-/native grunnlaget, ikke som ny fulltestkjøring.
+
+Fersk Windows-backup20261101T212947Z-93ee582b1a71a3f7552da1894b570366b89afee1.dump SHA2562135c3479094ecd668e0ed39f10cef9248f1abd4292e33cf93b9ae55287a1743 og ny separat isolert restore bestod umiddelbart før deploy. Eksisterende deployverktøy tok også backup med skriverne stoppet. Deploy exit0; alle25tabellfingeravtrykk før/etter er identiske, alle fire kjørende image-ID-er matcher de kontrollerte artefaktene, ingen tilbakeføring nødvendig. API/database healthy, origin uten assertion403, tunnelready200/fire forbindelser, timer aktiv, ingen failed units. Ny tunnelPID2749754 etter autorisert full appdeploy; boot/kernel/vertsversjoner er uendret. [Aktivering](o6-execution-20261101/activate-container-release.txt), [samlet verifikasjon](o6-execution-20261101/container-activation-verification.json), [helse](o6-execution-20261101/after-container-activation.txt).
+
+Personlig innlogging/visning/lagring/gjenåpning er etterspurt på denne nye releasen; resultat **avventes** før neste trinn. Systemd259.9/cloudflared2026.10.7 er ennå ikke installert. Énfase-hjelperen er klargjort/hashkontrollert på serveren med innebygde22pakkehasher, beskyttet pakkekopi/tilbakevei, backuphashkontroll, strengt simulert ti-pakkesett, unit-/helsekrav og kontrollert gammelpakkeretur ved feil. Pakkeløsningens negative stoppkontroller bestod; dette er ikke en påstand om allerede utført vertsvedlikehold. Sudo-betjening gjenstår når brukerflytporten består. Kernel-/libc6-boot og faktisk stabilitetsobservasjon forblir åpne. O6 er fortsatt åpen; O3–O5 separat.
+
+## Container-eiertest bestått; systemd-kjøring klargjort
+
+Jonas bekreftet **«bestått»** på den etterspurte nye private Cloudflare-/appinnloggingen, normal visning, ufarlig egen utkastlagring og refresh/gjenåpning på5e521cb. [Eierresultat](o6-execution-20261101/container-owner-test.json). Dette lukker den personlige kontrollporten for containertrinnet, ikke heleO6.
+
+Ny faktisk førkontroll bestod på samme aktive5e521cb med uendret boot/vertsversjoner, friske tjenester, tunnelready200/fire forbindelser og tilgangsnekt uten assertion. Fersk Windows-backup og separat fersk isolert restore bestod også etter eiertestens lagring. Hashen til den klargjorte systemdhjelperen er fortsatt identisk lokalt/server: e53c6401a243ea21bc7e4eb6aa4f0159467e9e0189b3c4b5c537c66dba2fb05e.
+
+Fordi generell sudo fortsatt krever interaktiv administratorbetjening, har Jonas fått den konkrete kommandoen `sudo python3 /tmp/ibe160-o6-window.uNfjQHcy/host-step.py systemd` for **lokal terminal på Ubuntu**, slik at SSH-brudd ikke avbryter kjøringen. Denne er den allerede autoriserte ti-pakkeoppdateringen med backup-/tilbakevei-/helseporter; ingen ny vedlikeholds- eller risikoaksept etterspørres. Resultatkvitteringen må hentes og kontrolleres før systemd erklæres utført og før cloudflared-trinnet. Ved dette dokumentasjonspunktet er kjøringen **forespurt, ikke verifisert fullført**. Ingen maskinomstart eller kerneloppdatering er utført.
+
+## Systemd-forsøk: ventende lesende førkontroll, ikke oppdatert
+
+Etter eierens «kjørt ferdig» manglet `systemd-result.json`; første innhenting feilet derfor og er beholdt som feilkvittering. Ny separat SSH-forbindelse viser fortsatt installert og kjørende **259.5-0ubuntu3.4**, cloudflared2026.10.6, aktive ssh/docker/resolved/tunnel/timer og tunnelready200/fire forbindelser. Ingen apt-/dpkg-prosess var observert i avgrenset prosesslesing.
+
+Den faktiske prosesskjeden er host-step.py → root driftsverktøy `check` → Docker Compose `exec -T private-api python ... /health`. Hjelperen står altså i første lesende `health()` **før pakkesimulering/installasjon** og holder driftslåsen mens den venter. En ytterligere lesende kontroll venter på samme lås; ingen ny installasjon er startet. Dette er ikke en påstått mislykket pakkeoppdatering med utført rollback: pakkeendring er ikke observert.
+
+En svakhet er rettet lokalt: administrative underkommandoer skal bruke `stdin=DEVNULL`, og root-hjelperen trenger ikke nestet sudo for root-driftsverktøyet. Arvet terminalinngang/Compose sin interaktive stdin-forwarder er en **mistenkt**, ikke endelig bevist årsak. Kontroll med ekte barneprosess bekrefter umiddelbar EOF uten terminalinput, og mock bekrefter DEVNULL-argument; den faktiske ti-pakkesimuleringen godtas fortsatt. [Kontroll](o6-execution-20261101/host-method-stdin-correction.json).
+
+Jonas er bedt om å trykke Ctrl+C én gang i den lokale terminalen dersom kontrollen fortsatt venter uten JSON, og melde siste linjer/tilbakevendt prompt. Ingen ny kjøring før den første er avklart. Den rettede lokale metoden er foreløpig ikke overført over den ventende kjøringen. Etter stopp må driftslås/ingen gjenværende egen prosess/frisk app kontrolleres, rettet metode overføres/hashverifiseres og nødvendige førkontroller revalideres før ett kontrollert nytt forsøk. Cloudflared og reboot er sperret av dette trinnet. Aktiv app5e521cb og bestått container-eiertest beholdes; O6 fortsatt åpen.
+
+## Avbrudd bekreftet; v2-prøve klargjort
+
+Eierens skjermbilde viser tilbakevendt kommandoprompt etter Ctrl+C og `RuntimeError: Command failed: sudo rc=-2` fra `health()` før installasjonsdelen. Bildets øvrige historiske nettkommandoer behandles ikke som instruksjoner og er ikke utført av agenten. Skjermbildet er ikke kopiert til Git.
+
+Lesende etterkontroll22:57Oslo: ingen tidligere egne sudo-/hoststep-/kontrollprosesser igjen i den kontrollerte prosesslisten; den ventende diagnostiske driftskontrollen fullførte etter frigjort lås. Fersk faktisk full driftskontroll bestod med samme aktive5e521cb, boot/kernel/systemd259.5/cloudflared2026.10.6, friske app-/DB-tjenester og tunnelready200/fire forbindelser. Dette bekrefter avsluttet førkontroll uten observert pakkeendring. [Prosesser](o6-execution-20261101/after-cancel-process-check.txt), [helse](o6-execution-20261101/after-cancel-health.txt).
+
+Den rettede EOF-håndteringen ble deretter prøvd **på serveren med ekte TTY**: samme lesende root-driftskontroll med lukket stdin fullførte exit0 og `TTY_EOF_CHECK_PASSED`. Dette støtter rettingen, men er ikke en fullført pakkeinstallasjon eller uttømmende årsaksanalyse. [Faktisk TTY-prøve](o6-execution-20261101/corrected-health-real-tty.txt).
+
+Metoden er overført som separat `/tmp/ibe160-o6-window.uNfjQHcy/host-step-v2.py`, lokal/server SHA256 kontrollert lik. Den gamle filen er beholdt som historisk metode. Jonas har fått én konkret lokal sudo-kommando for v2/systemd, med beskjed om å vente på JSON og prompt og holde nettforbindelsen uendret. [Binding og metodehash](o6-execution-20261101/host-method-v2-prepared.json). Resultat av det nye forsøket avventes; ingen systemd-/cloudflared-/boot-endring erklæres fullført her. O6 er fortsatt åpen.
+
+## Systemd v2: forsøk feilet, frisk gammel tilstand kontrollert
+
+Eierens rapport er avstemt med faktisk [v2-resultat](o6-execution-20261101/systemd-v2-result.txt):passed=false,rollback_used=true,rollback_health_passed=true,unit_hashes_preserved=true. Alle22returpakker og systembackuphash ble verifisert. RuntimeError mangler opprinnelig kommandoutskrift i v2, så kvitteringen identifiserer ikke alene den konkrete feilen. Returflagget betyr at gammelpakke-/helsekommandoene bestod; det beviser ikke at nye pakker faktisk rakk å bli installert.
+
+Separat etterkontroll23:01Oslo bekrefter **alle ti pakker og kjørende PID1 på259.5-0ubuntu3.4**, ingen dpkg-auditfeil, ny SSH fungerer, fem nødvendige tjenester aktive, standardrute og faktisk navneoppslag fungerer. App5e521cb/API/database er friske, tunnelready200/fire forbindelser og prosjektets fire unit-hasher er uendret. Kernel/boot/cloudflared er uendret. [Pakker/PID1/nett](o6-execution-20261101/systemd-v2-package-manager-check.txt), [full helse](o6-execution-20261101/after-systemd-v2-return.txt). Ingen neste fase startet på grunnlag av dette feilresultatet.
+
+### Isolert reproduksjon og cache-retting
+
+Samme APT-installasjonsform ble prøvd i disponibel Ubuntu-testcontainer med network=none, identiske deb-er og privat0700-katalog/0600-filer. Første test traff testimagets Python-entrypoint i stedet for shell; korrigert prøve er bevart separat. Korrigert opprinnelig `--no-download`-form feilet med exit100/«Unable to fetch some archives». En avklaringsprøve uten denne flaggen viste Permission denied for filene i privat katalog og forsøkt fallback til Ubuntu-arkivet, som var utilgjengelig i det frakoblede miljøet. Prøven forklarer en konkret feil i den nye installeringshjelperen; opprinnelig vertsstderr er ikke bevart, så identisk vertsårsak kan ikke påstås direkte observert.
+
+Når kun de verifiserte **offentlige deb-ene** legges i standard APT-arkivcache, består samme frakoblede installasjon. Hjelperen er derfor rettet til å hashkontrollere og kopiere kun de valgte offentlige pakkene til `/var/cache/apt/archives`, med hash-/symlinkkontroll og uten overskriving av andre cachefiler. Private konfigbackuper/returkataloger åpnes ikke. APT beholder `--no-download`; ekstra uventede pakker avvises fortsatt i forkant.
+
+Den faktiske rettede `install()`-funksjonen er prøvd **gammel→ny→gammel**, alle ti pakker kontrollert etter hver fase, med network=none. Alle tre faser bestod, privat backupkatalog beholdt0700. Dette er pakke-/returkvalifisering, ikke en ekte PID1-/SSH-/Lenovo-oppstartstest. [Full prøve](o6-execution-20261101/systemd-corrected-cache-roundtrip.txt), [metode](o6-execution-20261101/cache-roundtrip-method.py). Hjelperen lagrer nå full kommandoutskrift i root-beskyttet forsøkslogg og returnerer sikker failure_message/loggsti i feilkvitteringen; private logger lastes ikke automatisk til Git.
+
+Ny separat `host-step-v3.py` er overført og hashkontrollert, frisk faktisk gammel tilstand bekreftet igjen. [Metodebinding](o6-execution-20261101/host-method-v3-prepared.json). Jonas er guidet til én lokal v3/systemd-kjøring, ikke bedt om ny risiko-/vedlikeholdsaksept. Resultatet avventes. Ingen systemd-retting, cloudflared-oppdatering eller omstart erklæres fullført i dette kontrollpunktet; O6 forblir åpen og O3–O5 separat.
+
+## Utførte vertstrinn og samlet etterkontroll
+
+### Systemd og cloudflared
+
+V3-systemdforsøket bestod uten retur: alle ti installerte pakker og faktisk kjørende PID1 er259.9-0ubuntu0.1. Ny SSH-innlogging, rute/DNS, app/database/tunnel og backup-timer bestod. Prosjektets fire unit-hasher er uendret. Den tidligere generelle feil-/returkvitteringen og den rettede offline installasjonsmetoden er beholdt; vellykket v3 erstatter ikke historikken. [Resultat](o6-execution-20261101/systemd-v3-result.txt), [uavhengig pakke-/PID1-kontroll](o6-execution-20261101/systemd-v3-extra-checks.txt).
+
+Cloudflared2026.10.7 bestod med faktisk kjørende binærSHA256 **1f99fb518b83dec2ba8d870a7cc991d82a77e6196295a3d2754ba17ab9f91872**, bevart prosjektunit, fire HA-forbindelser og eierbekreftet innlogging/visning/lagring/gjenåpning. Ingen retur nødvendig. [Resultat](o6-execution-20261101/cloudflared-v3-result.txt), [eierprøve](o6-execution-20261101/cloudflared-owner-test.json).
+
+### GRUB, omstart og adresseendring
+
+Før omstart viste `/etc/default/grub` skjult meny/0sekunder. Den kontrollerte menymetoden tok privat backup, rettet kilden til menu/10sekunder, genererte og syntakskontrollerte menyen og verifiserte42/30-oppføringene. **Generert grub.cfg fikk samme hash før/etter**; dette var dermed også en samordning av kilden med det allerede genererte oppsettet, ikke bevis for at den effektive menyen tidligere var skjult. Ingen kernel ble installert eller fjernet. [Kvittering](o6-execution-20261101/grub-menu-result.txt).
+
+Ny Windows-backup/isolert restore og førfingeravtrykk bestod før den autoriserte rebooten, planlagt23:26:21Oslo1.11. Faktisk ny boot-ID og samme kernel42 er etterpå verifisert. Oppstartsmåling44,754s inkluderer firmware/loader/kernel/initrd/userspace; hele nedetiden utledes ikke fra dette ene tallet. libc6-markøren er borte. Ingen påstand om kernel-CVE-retting følger av rebooten.
+
+De første SSH-prøvene mot gammel139 feilet. Eier rapporterte lokal innloggingsskjerm, deretter innlogging med korrigert NumLock; ingen konto/PAM-endring var nødvendig. En innledende lokal diagnose hadde skrivefeil i hostname-kommandoen; nytt vedlegg ble funnet i prosjektets vedleggsmappe og lest. Wi-Fi var oppe; Ethernet var ikke tilkoblet. Oppgitt adresse ble kontrollert på kjent lokalnett som **192.168.1.138**, med samme allerede betrodde SSH-nøkkel. Dette ga vellykket SSH, ny boot-ID og frisk full driftskontroll. Ingen nettverks-/ruter-/tilgangsregel ble endret for å få forbindelsen tilbake. mDNS-navnet ble prøvd, men løste ikke; ingen ny navnetjeneste er installert.
+
+App/tunnel var aktive **23:28:17**, backup-timer **23:27:59**, mens første registrerte lokale jonas-brukersesjon var **23:36:11**. Dette er konkret autostartevidens før personlig lokal innlogging. SSH bruker socketaktivering og kunne derfor vises inaktiv som service før en forbindelse uten å være defekt. [Tidsbinding/socket/timer](o6-execution-20261101/postboot-autostart-timing.txt), [faktisk etterboot](o6-execution-20261101/after-reboot-details.txt).
+
+Alle fire image-ID-er er fortsatt de faktisk eksporterte/kvalifiserte artefaktene. Av25tabeller er23fingeravtrykk uendret over rebootkontrollpunktet, inkludert kontoer/utkast/arbeidsdager/øvrige forretningsdata. `sessions` og `login_limits` endret seg som løpende autentiseringsdata; hver enkelt radendring er ikke kausalt attestert. **Alle25 uendret påstås derfor ikke etter reboot.** Den senere friske backup/isolerte restore sammenlignet alle tabeller i sitt eget konsistente kontrollpunkt og bestod. Ingen produksjonsrestore eller overskriving av nye skriv ble gjort. [Nøyaktig sammenligning](o6-execution-20261101/reboot-database-comparison.json).
+
+### Ny pakkeinventarskanning og kompenserende journalinnstilling
+
+Før-/etterinventaret viser nøyaktig **elleve pakkeversjonsendringer**: de ti systemdpakkene og cloudflared. Andre installerte pakkenavn/-versjoner er uendret i sammenligningen. Metadataskanning med samme Trivy0.76.1/DB brukte bare faktisk dpkg-status og OS-markører. Første forsøk uten Ubuntus lsb-release-markør ga family=none og er **ikke brukt som nulltreff**. Korrigert Linux-kjøring bekreftet Ubuntu26.04 og faktiske pakkeresultater. Det er ikke full rootfs-, runtime-, firmware- eller Go-binærskanning.
+
+Ingen CVE/pakke/severity/status-nøkler kom til eller forsvant i denne pakkeprojeksjonen; ti lave rader fikk nye systemd-versjonsfelt. Mange kernel-header-/verktøy-/modulrader gjentar samme CVE. Familien for42 har fortsatt12critical/283high; tidligere dokumenterte arkitektur-/triggergrenser gjelder fortsatt. Den beholdte30-familien har egne høyere tall og er en gjenopprettingsmulighet, ikke en sikker målversjon. Rå summer er ikke antall uavhengige angrepsveier. Kernel er ikke oppdatert og ingen kvalifisert støttet rettet kernel er etablert i dette løpet; sluttpolicyen tilbyr fortsatt42. [Versjonsdelta](o6-execution-20261101/host-package-version-delta.json), [sammenligning](o6-execution-20261101/host-scan-comparison.json), [kompakte etterfunn](o6-execution-20261101/os-package-findings-after-host-updates.json.gz). Store opprinnelige rapporter er bevart lokalt og hashindeksert, mens kompakte rader/grupper publiseres; de store originalene er ikke slettet eller lagt i Git.
+
+Det uendrede lave systemdfunnet **CVE-2026-40228** gjelder terminalkringkasting via journald når ForwardToWall er aktivert. [Ubuntu oppgir fortsatt berørt/deferred pakke](https://ubuntu.com/security/CVE-2026-40228). Et isolert faktisk konfigurasjonsoppslag prøvde drop-in-presedens og bevaring av øvrige innstillinger. Etter privat backup er bare `/etc/systemd/journald.conf.d/70-bussassistent-wall.conf` lagt til med **ForwardToWall=no**. Journal-tjenesten ble restartet kontrollert, effektiv nøkkel og aktiv journal/app/tunnel verifisert; ingen retur nødvendig. Dette er et konkret kompenserende tiltak for standardjournalens beskrevne trigger, **ikke en bibliotekrettelse eller risikoaksept**. Ingen ondsinnet ANSI-/logger-prøve ble utført. [Isolert kontroll](o6-execution-20261101/journal-wall-isolated-config.txt), [faktisk resultat](o6-execution-20261101/journal-wall-result.txt), [effektiv konfigurasjon](o6-execution-20261101/journal-wall-effective-config.txt).
+
+### Sluttprøve, backup og bevaring
+
+Eieren bekreftet **«bestått»** på samlet ny privat Cloudflare-/appinnlogging, normal visning, egen ufarlig utkastlagring og oppdatering/gjenåpning **etter omstart og journaltiltaket**. [Siste eierprøve](o6-execution-20261101/final-owner-test.json).
+
+Siste Windows-backup **20261101T225750Z-5e521cbc658594a47c4568d352a50e46309573c4.dump**,81007byte, SHA256 **ec9d3e0900385d86f842a1202b3fc75cbe814c960bf06575a409640608c6e8fc**, er overføringsverifisert og ligger privat utenfor Git. Ny separat frisk dump bestod isolert restore med alle tabellfingeravtrykk like. Backup-timer er aktiv med neste observerte trigger2.11kl.03:16:23Oslo; den neste automatiske kjøringen er fremtidig driftsobservasjon, ikke rapportert utført. [Hash](o6-execution-20261101/final-backup-hash.json), [restore](o6-execution-20261101/final-isolated-restore.txt), [sluttkontroll](o6-execution-20261101/final-production-health.txt).
+
+SSH-bekreftede friske kontrollpunkter fra23:43 til23:57 og siste uptime1805,80s gir begrenset etterbootobservasjon av samme boot. Det er ikke kontinuerlig langtidsmåling eller bevis for at tidligere periodisk oppstartsfrys er varig løst. Ingen avtalt observasjonsperiode er funnet på eller erklært bestått.
+
+Alle81eksisterende lokale containere og31volumer er bevart i sammenlignede felter; de fire kvalifiserte imagealiasene er uendret. Egne disponibleregresjoner er ryddet. Gamle `/tmp`-arbeidsfiler forsvant ved reboot; et nytt privat område for journaltiltaket ble opprettet og senere ryddet ved eksakt filnavnkontroll. **Private vedvarende OS-/GRUB-/journalbackuper og22returpakker i /var/backups er bevart.** Ingen generell prune, ingen andre branches/worktrees/endringer eller private dokumenter berørt. [Bevaring](o6-execution-20261101/final-local-preservation.json), [egen opprydding](o6-execution-20261101/final-own-temp-cleanup.txt).
+
+Vedvarende, syntakskontrollerte og hashbundne **manuelle returoppskrifter** er i `/home/jonas/ibe160-upload/o6-return-systemd.sh` og `o6-return-cloudflared.sh`. De pinner den eksisterende root-beskyttede hjelperen og bruker den faktisk kvalifiserte cache-/hashkontrollerte `install(...,True)`-funksjonen. Dette **erstatter de tidlige raw-APT-instruksjonene med private filbaner** i eldre rollback-tekst. Ingen retur ble utført ved klargjøringen. Fremtidig regenerering i repoets helper skriver også korrekt funksjonsbasert oppskrift. [Binding](o6-execution-20261101/persistent-recovery-procedure.json). Databasebackuper skal fortsatt ikke gjenopprettes blindt over nyere skriv; appretur93ee582 krever eksisterende identitets-/migreringsporter.
+
+## O6 vurdert mot dokumenterte sluttporter
+
+| Port | Faktisk disponering |
+|---|---|
+| Identitet/app-/imagefunn | Faktisk produksjonsbinding, kvalifiserte rettelser/aktive images og nye relevante kontroller fullført. Gosu-standardbibliotektreff er disponert med eksisterende symbol-/plattformanalyse; brukerparserrettelsen er aktiv. |
+| Debian-restgrupper | Util-linux/ncurses og latent ACL/FTS5-risiko videreføres med Jonas sin uttrykkelige midlertidige aksept og dokumenterte barrierer. ACL/FTS5 er avklart utenfor kartlagte normale appflyter, ikke erklært patchet. |
+| Vertspakker/tunnel/libc6 | Systemd259.9 og cloudflared2026.10.7 aktivert/etterprøvd, nødvendig reboot gjennomført, libc6-markør borte, autostart og personlig sluttflyt bestått. Lav journald-trigger kompensert med verifisert konfigurasjon. |
+| Backup/retur/data | Private kopier/hashkontroller/friske isolerte restoreprøver bestått; returpakker/konfigbevaring/manuelle oppskrifter tilgjengelige. Ingen produksjonsrestore. |
+| Kernel | Fortsatt42 og dokumenterte restfunn. Midlertidig risikoaksept foreligger; ingen støttet rettet kernel er kvalifisert/aktivert. Leverandør-/individuell triggeroppfølging består. Dette er ikke utsatt på grunn av manglende eieraksept. |
+| Stabilitet/bredere bevisgrenser | Én faktisk ny oppstart og kort frisk observasjon er dokumentert. Videre oppstarts-/langtidsstabilitet og bredere OS/supply-chain-grenser er fortsatt åpne. Ingen firmware-/penetrasjonssikkerhet er utledet fra skanning. |
+
+**Konklusjon: O6 lukkes ikke som hel kategori.** Alle gjennomførbare kvalifiserte vedlikeholdstrinn i dette løpet er fullført. Ingen ytterligere nødvendig eierbeslutning eller konkret funksjonsblokkering står igjen i dette vedlikeholdsløpet. Minste videre oppfølging er å følge støttet Ubuntu-kernelrettelse, kvalifisere den mot den dokumenterte CVE-/maskinvaregrensen når tilgjengelig, og registrere videre stabilitet/oppstarter og neste automatiske backup. Aksepterte midlertidige restgrenser forblir åpne med eksplisitt disponering. O3–O5 spores separat. V1-tag/release og godkjent refleksjon er uendret; ingen ny tag/release.
+
+
+## Lesende etterkontroll 2. november kl.20:16–20:21
+
+[Ny full etterkontroll](o6-readonly-20261102.md) verifiserte faktisk automatisk backup03:16:55, hash og isolert fullrestore av eksakt nattdump, samme boot/20t53m oppetid, frisk app/DB/tunnel og ingen failed units. Logghendelser omfatter tidligere kjente apt-nettventetider og to automatisk gjenoppkoblede tunnelkanaler; ingen ny vedvarende tjenestefeil er påvist. Serverpolicy og ferske offisielle pakkeindekser tilbyr fortsatt kernel42.42. Ingen produksjonsendringer.
+
+Det konkrete sluttpunktet om neste automatiske backup er dermed fullført. Ingen vedtatt minste observasjonstid finnes; én uke var et forslag og er ingen blokkering. Videre stabilitet/tilbakevendende varsler er løpende separat driftsoppfølging. Vedlikeholdsløpets tekniske porter er ferdige. O6 som hel kategori beholdes åpen for de urettede/ikke individuelt lukkede kernelrestgruppene under midlertidig aksept og den opprinnelige brede bevisgrensen; ingen ny eierbeslutning eller nødvendig sluttprøve mangler i dette løpet. Se rapportens kriterietabell for presist skille. O3–O5 er urørt.

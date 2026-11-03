@@ -1,0 +1,676 @@
+{
+  "warnings_current_boot": {
+    "exit": 0,
+    "stderr": "",
+    "rows": 18,
+    "groups": {
+      "kernel | p3 | KHO: Failed to reserve lowmem scratch buffer": {
+        "count": 1,
+        "first_us": "1793572073206433",
+        "last_us": "1793572073206433"
+      },
+      "kernel | p4 | KHO: Failed to reserve scratch area, disabling kexec handover": {
+        "count": 1,
+        "first_us": "1793572073206442",
+        "last_us": "1793572073206442"
+      },
+      "kernel | p3 | x86/cpu: VMX (outside TXT) disabled by BIOS": {
+        "count": 1,
+        "first_us": "1793572073206771",
+        "last_us": "1793572073206771"
+      },
+      "kernel | p3 | x86/cpu: SGX disabled or unsupported by BIOS.": {
+        "count": 1,
+        "first_us": "1793572073206779",
+        "last_us": "1793572073206779"
+      },
+      "kernel | p3 | integrity: Problem loading X.509 certificate -65": {
+        "count": 1,
+        "first_us": "1793572073262529",
+        "last_us": "1793572073262529"
+      },
+      "systemd-networkd.service | p4 | Failed to open nftables netlink socket. IPMasquerade= and NFTSet= settings will not be applied. Ignoring: Protocol not supported": {
+        "count": 1,
+        "first_us": "1793572073497733",
+        "last_us": "1793572073497733"
+      },
+      "kernel | p4 | r8169 0000:04:00.0: can't disable ASPM; OS doesn't have ASPM control": {
+        "count": 1,
+        "first_us": "1793572074052145",
+        "last_us": "1793572074052145"
+      },
+      "systemd-udevd.service | p4 | PV /dev/nvme0n1p3 online, VG ubuntu-vg is complete.": {
+        "count": 1,
+        "first_us": "1793572076817870",
+        "last_us": "1793572076817870"
+      },
+      "kernel | p3 | lenovo_wmi_gamezone [UUID]: platform_profile probe failed": {
+        "count": 1,
+        "first_us": "1793572078748006",
+        "last_us": "1793572078748006"
+      },
+      "kernel | p4 | resource: resource sanity check: requesting [mem 0x00000000fdffe800-0x00000000fe0007ff], which spans more than PNP0C02:00 [mem 0xfdb00000-0xfdffffff]": {
+        "count": 1,
+        "first_us": "1793572078801151",
+        "last_us": "1793572078801151"
+      },
+      "kernel | p4 | caller get_primary_reg_base+0x4c/0xb0 [intel_pmc_core] mapping multiple BARs": {
+        "count": 1,
+        "first_us": "1793572078801201",
+        "last_us": "1793572078801201"
+      },
+      "kernel | p4 | nouveau 0000:01:00.0: [drm] No compatible format found": {
+        "count": 1,
+        "first_us": "1793572079076707",
+        "last_us": "1793572079076707"
+      },
+      "kernel | p4 | nvme nvme0: using unchecked data buffer": {
+        "count": 1,
+        "first_us": "1793572079661196",
+        "last_us": "1793572079661196"
+      },
+      "cron.service | p4 | cron.service: Referenced but unset environment variable evaluates to an empty string: EXTRA_OPTS": {
+        "count": 1,
+        "first_us": "1793572084320100",
+        "last_us": "1793572084320100"
+      },
+      "kernel | p4 | kauditd_printk_skb: 181 callbacks suppressed": {
+        "count": 1,
+        "first_us": "1793572084706183",
+        "last_us": "1793572084706183"
+      },
+      "ssh.service | p3 | error: kex_exchange_identification: read: Connection reset by peer": {
+        "count": 1,
+        "first_us": "1793575951940259",
+        "last_us": "1793575951940259"
+      },
+      "apt-daily-upgrade.service | p3 | Timeout occurred while waiting for network connectivity.": {
+        "count": 1,
+        "first_us": "1793596288182667",
+        "last_us": "1793596288182667"
+      },
+      "apt-daily.service | p3 | Timeout occurred while waiting for network connectivity.": {
+        "count": 1,
+        "first_us": "1793627426932579",
+        "last_us": "1793627426932579"
+      }
+    }
+  },
+  "project_units_current_boot": {
+    "exit": 0,
+    "stderr": "",
+    "rows": 122,
+    "groups": {
+      "init.scope | p6 | Starting bussassistent.service - Bussassistent private application...": {
+        "count": 1,
+        "first_us": "1793572087032954",
+        "last_us": "1793572087032954"
+      },
+      "bussassistent.service | p6 |  Container bussassistent-access-gate-1 Running": {
+        "count": 1,
+        "first_us": "1793572087537217",
+        "last_us": "1793572087537217"
+      },
+      "bussassistent.service | p6 |  Container bussassistent-private-db-1 Starting": {
+        "count": 1,
+        "first_us": "1793572087550239",
+        "last_us": "1793572087550239"
+      },
+      "bussassistent.service | p6 |  Container bussassistent-private-db-1 Started": {
+        "count": 1,
+        "first_us": "1793572087688197",
+        "last_us": "1793572087688197"
+      },
+      "bussassistent.service | p6 |  Container bussassistent-private-db-1 Waiting": {
+        "count": 2,
+        "first_us": "1793572087688197",
+        "last_us": "1793572097090487"
+      },
+      "bussassistent.service | p6 |  Container bussassistent-private-db-1 Healthy": {
+        "count": 2,
+        "first_us": "1793572091191019",
+        "last_us": "1793572097593555"
+      },
+      "bussassistent.service | p6 |  Container bussassistent-private-api-1 Starting": {
+        "count": 1,
+        "first_us": "1793572091192028",
+        "last_us": "1793572091192028"
+      },
+      "bussassistent.service | p6 |  Container bussassistent-private-api-1 Started": {
+        "count": 1,
+        "first_us": "1793572091348477",
+        "last_us": "1793572091348477"
+      },
+      "bussassistent.service | p6 |  Container bussassistent-private-api-1 Waiting": {
+        "count": 2,
+        "first_us": "1793572091348624",
+        "last_us": "1793572097090487"
+      },
+      "bussassistent.service | p6 |  Container bussassistent-private-api-1 Healthy": {
+        "count": 2,
+        "first_us": "1793572096850054",
+        "last_us": "1793572097593555"
+      },
+      "bussassistent.service | p6 |  Container bussassistent-gateway-1 Starting": {
+        "count": 1,
+        "first_us": "1793572096850054",
+        "last_us": "1793572096850054"
+      },
+      "bussassistent.service | p6 |  Container bussassistent-gateway-1 Started": {
+        "count": 1,
+        "first_us": "1793572097090487",
+        "last_us": "1793572097090487"
+      },
+      "bussassistent.service | p6 |  Container bussassistent-gateway-1 Waiting": {
+        "count": 1,
+        "first_us": "1793572097090487",
+        "last_us": "1793572097090487"
+      },
+      "bussassistent.service | p6 |  Container bussassistent-access-gate-1 Waiting": {
+        "count": 1,
+        "first_us": "1793572097090487",
+        "last_us": "1793572097090487"
+      },
+      "bussassistent.service | p6 |  Container bussassistent-access-gate-1 Healthy": {
+        "count": 1,
+        "first_us": "1793572097593555",
+        "last_us": "1793572097593555"
+      },
+      "bussassistent.service | p6 |  Container bussassistent-gateway-1 Healthy": {
+        "count": 1,
+        "first_us": "1793572097593870",
+        "last_us": "1793572097593870"
+      },
+      "bussassistent.service | p6 | API healthy; origin access control rejects unauthenticated requests": {
+        "count": 1,
+        "first_us": "1793572097832686",
+        "last_us": "1793572097832686"
+      },
+      "init.scope | p6 | Finished bussassistent.service - Bussassistent private application.": {
+        "count": 1,
+        "first_us": "1793572097843296",
+        "last_us": "1793572097843296"
+      },
+      "init.scope | p6 | Started cloudflared.service - Bussassistent Cloudflare Tunnel.": {
+        "count": 1,
+        "first_us": "1793572097846797",
+        "last_us": "1793572097846797"
+      },
+      "cloudflared.service | p6 | 2026-11-01T22:28:18Z INF Starting tunnel tunnelID=[UUID]": {
+        "count": 1,
+        "first_us": "1793572098183994",
+        "last_us": "1793572098183994"
+      },
+      "cloudflared.service | p6 | 2026-11-01T22:28:18Z INF Cannot determine default configuration path. No file [config.yml config.yaml] in [~/.cloudflared ~/.cloudflare-warp ~/cloudflare-warp /etc/cloudflared /usr/local/etc/cloudflared]": {
+        "count": 1,
+        "first_us": "1793572098184462",
+        "last_us": "1793572098184462"
+      },
+      "cloudflared.service | p6 | 2026-11-01T22:28:18Z INF Version 2026.10.7 (Checksum 1f99fb518b83dec2ba8d870a7cc991d82a77e6196295a3d2754ba17ab9f91872)": {
+        "count": 1,
+        "first_us": "1793572098184462",
+        "last_us": "1793572098184462"
+      },
+      "cloudflared.service | p6 | 2026-11-01T22:28:18Z INF GOOS: linux, GOVersion: go1.27.3, GoArch: amd64": {
+        "count": 1,
+        "first_us": "1793572098184462",
+        "last_us": "1793572098184462"
+      },
+      "cloudflared.service | p6 | 2026-11-01T22:28:18Z INF Settings: map[metrics:[IP]:18083 no-autoupdate:true token-file:/run/credentials/cloudflared.service/tunnel-token]": {
+        "count": 1,
+        "first_us": "1793572098184462",
+        "last_us": "1793572098184462"
+      },
+      "cloudflared.service | p6 | 2026-11-01T22:28:18Z INF cloudflared will not automatically update if installed by a package manager.": {
+        "count": 1,
+        "first_us": "1793572098184733",
+        "last_us": "1793572098184733"
+      },
+      "cloudflared.service | p6 | 2026-11-01T22:28:18Z INF Generated Connector ID: [UUID]": {
+        "count": 1,
+        "first_us": "1793572098197822",
+        "last_us": "1793572098197822"
+      },
+      "cloudflared.service | p6 | 2026-11-01T22:28:18Z WRN No ingress rules were defined in provided config (if any) nor from the cli, cloudflared will return 503 for all incoming HTTP requests": {
+        "count": 1,
+        "first_us": "1793572098198633",
+        "last_us": "1793572098198633"
+      },
+      "cloudflared.service | p6 | 2026-11-01T22:28:18Z INF Initial protocol quic": {
+        "count": 1,
+        "first_us": "1793572098201034",
+        "last_us": "1793572098201034"
+      },
+      "cloudflared.service | p6 | 2026-11-01T22:28:18Z INF ICMP proxy will use [IP] as source for IPv4": {
+        "count": 2,
+        "first_us": "1793572098212752",
+        "last_us": "1793572098477240"
+      },
+      "cloudflared.service | p6 | 2026-11-01T22:28:18Z INF ICMP proxy will use :: as source for IPv6": {
+        "count": 2,
+        "first_us": "1793572098212752",
+        "last_us": "1793572098477240"
+      },
+      "cloudflared.service | p6 | 2026-11-01T22:28:18Z INF Starting metrics server on [IP]:18083/metrics": {
+        "count": 1,
+        "first_us": "1793572098477670",
+        "last_us": "1793572098477670"
+      },
+      "cloudflared.service | p6 | 2026-11-01T22:28:18Z INF Tunnel connection curve preferences: [X25519MLKEM768 CurveID(65074) CurveP256] connIndex=0 event=0 ip=[IP]": {
+        "count": 1,
+        "first_us": "1793572098482248",
+        "last_us": "1793572098482248"
+      },
+      "cloudflared.service | p6 | 2026-11-01T22:28:19Z INF Registered tunnel connection connIndex=0 connection=[UUID] event=0 ip=[IP] location=arn06 protocol=quic": {
+        "count": 1,
+        "first_us": "1793572099209806",
+        "last_us": "1793572099209806"
+      },
+      "cloudflared.service | p6 | 2026-11-01T22:28:19Z INF Tunnel connection curve preferences: [X25519MLKEM768 CurveID(65074) CurveP256] connIndex=1 event=0 ip=[IP]": {
+        "count": 1,
+        "first_us": "1793572099210899",
+        "last_us": "1793572099210899"
+      },
+      "cloudflared.service | p6 | 2026-11-01T22:28:19Z INF Updated to new configuration config=\"{\\\"ingress\\\":[{\\\"hostname\\\":\\\"app.bussassistent.com\\\", \\\"originRequest\\\":{\\\"access\\\":{\\\"audTag\\\":[\\\"11605406740b9e66f584e9bfc11d3db52f18585de0708c6d5b2741d0268fbbfa\\\"], \\\"required\\\":true, \\\"teamName\\\":\\\"bussassistent\\\"}, \\\"httpHostHeader\\\":\\\"app.bussassistent.com\\\"}, \\\"service\\\":\\\"[URL] {\\\"service\\\":\\\"http_status:404\\\"}], \\\"warp-routing\\\":{\\\"enabled\\\":false}}\" version=1": {
+        "count": 1,
+        "first_us": "1793572099217699",
+        "last_us": "1793572099217699"
+      },
+      "cloudflared.service | p6 | 2026-11-01T22:28:19Z INF Registered tunnel connection connIndex=1 connection=[UUID] event=0 ip=[IP] location=cph03 protocol=quic": {
+        "count": 1,
+        "first_us": "1793572099519377",
+        "last_us": "1793572099519377"
+      },
+      "cloudflared.service | p6 | 2026-11-01T22:28:20Z INF Tunnel connection curve preferences: [X25519MLKEM768 CurveID(65074) CurveP256] connIndex=2 event=0 ip=[IP]": {
+        "count": 1,
+        "first_us": "1793572100210376",
+        "last_us": "1793572100210376"
+      },
+      "cloudflared.service | p6 | 2026-11-01T22:28:20Z INF Registered tunnel connection connIndex=2 connection=[UUID] event=0 ip=[IP] location=cph03 protocol=quic": {
+        "count": 1,
+        "first_us": "1793572100866764",
+        "last_us": "1793572100866764"
+      },
+      "cloudflared.service | p6 | 2026-11-01T22:28:21Z INF Tunnel connection curve preferences: [X25519MLKEM768 CurveID(65074) CurveP256] connIndex=3 event=0 ip=[IP]": {
+        "count": 1,
+        "first_us": "1793572101211478",
+        "last_us": "1793572101211478"
+      },
+      "cloudflared.service | p6 | 2026-11-01T22:28:21Z INF Registered tunnel connection connIndex=3 connection=[UUID] event=0 ip=[IP] location=arn07 protocol=quic": {
+        "count": 1,
+        "first_us": "1793572101883763",
+        "last_us": "1793572101883763"
+      },
+      "cloudflared.service | p6 | 2026-11-01T22:28:24Z INF +-------------------------------------------------------------------------------------+": {
+        "count": 3,
+        "first_us": "1793572104641038",
+        "last_us": "1793572104642360"
+      },
+      "cloudflared.service | p6 | 2026-11-01T22:28:24Z INF |                               CONNECTIVITY PRE-CHECKS                               |": {
+        "count": 1,
+        "first_us": "1793572104641038",
+        "last_us": "1793572104641038"
+      },
+      "cloudflared.service | p6 | 2026-11-01T22:28:24Z INF |  COMPONENT         TARGET                     STATUS  DETAILS                       |": {
+        "count": 1,
+        "first_us": "1793572104641038",
+        "last_us": "1793572104641038"
+      },
+      "cloudflared.service | p6 | 2026-11-01T22:28:24Z INF |  DNS Resolution    region1.v2.argotunnel.com  PASS    DNS Resolved successfully     |": {
+        "count": 1,
+        "first_us": "1793572104641038",
+        "last_us": "1793572104641038"
+      },
+      "cloudflared.service | p6 | 2026-11-01T22:28:24Z INF |  DNS Resolution    region2.v2.argotunnel.com  PASS    DNS Resolved successfully     |": {
+        "count": 1,
+        "first_us": "1793572104642360",
+        "last_us": "1793572104642360"
+      },
+      "cloudflared.service | p6 | 2026-11-01T22:28:24Z INF |  UDP Connectivity  region1.v2.argotunnel.com  PASS    QUIC connection successful    |": {
+        "count": 1,
+        "first_us": "1793572104642360",
+        "last_us": "1793572104642360"
+      },
+      "cloudflared.service | p6 | 2026-11-01T22:28:24Z INF |  UDP Connectivity  region2.v2.argotunnel.com  PASS    QUIC connection successful    |": {
+        "count": 1,
+        "first_us": "1793572104642360",
+        "last_us": "1793572104642360"
+      },
+      "cloudflared.service | p6 | 2026-11-01T22:28:24Z INF |  TCP Connectivity  region1.v2.argotunnel.com  PASS    HTTP/2 connection successful  |": {
+        "count": 1,
+        "first_us": "1793572104642360",
+        "last_us": "1793572104642360"
+      },
+      "cloudflared.service | p6 | 2026-11-01T22:28:24Z INF |  TCP Connectivity  region2.v2.argotunnel.com  PASS    HTTP/2 connection successful  |": {
+        "count": 1,
+        "first_us": "1793572104642360",
+        "last_us": "1793572104642360"
+      },
+      "cloudflared.service | p6 | 2026-11-01T22:28:24Z INF |  Cloudflare API    api.cloudflare.com:443     PASS    API is reachable              |": {
+        "count": 1,
+        "first_us": "1793572104642360",
+        "last_us": "1793572104642360"
+      },
+      "cloudflared.service | p6 | 2026-11-01T22:28:24Z INF |                                                                                     |": {
+        "count": 1,
+        "first_us": "1793572104642360",
+        "last_us": "1793572104642360"
+      },
+      "cloudflared.service | p6 | 2026-11-01T22:28:24Z INF |  SUMMARY: Environment is healthy. cloudflared will use 'quic' as primary protocol.  |": {
+        "count": 1,
+        "first_us": "1793572104642360",
+        "last_us": "1793572104642360"
+      },
+      "cloudflared.service | p6 | 2026-11-01T22:28:24Z INF precheck component=\"DNS Resolution\" details=\"DNS Resolved successfully\" run_id=[UUID] status=pass target=region1.v2.argotunnel.com": {
+        "count": 1,
+        "first_us": "1793572104642360",
+        "last_us": "1793572104642360"
+      },
+      "cloudflared.service | p6 | 2026-11-01T22:28:24Z INF precheck component=\"DNS Resolution\" details=\"DNS Resolved successfully\" run_id=[UUID] status=pass target=region2.v2.argotunnel.com": {
+        "count": 1,
+        "first_us": "1793572104642360",
+        "last_us": "1793572104642360"
+      },
+      "cloudflared.service | p6 | 2026-11-01T22:28:24Z INF precheck component=\"UDP Connectivity\" details=\"QUIC connection successful\" run_id=[UUID] status=pass target=region1.v2.argotunnel.com": {
+        "count": 1,
+        "first_us": "1793572104642360",
+        "last_us": "1793572104642360"
+      },
+      "cloudflared.service | p6 | 2026-11-01T22:28:24Z INF precheck component=\"UDP Connectivity\" details=\"QUIC connection successful\" run_id=[UUID] status=pass target=region2.v2.argotunnel.com": {
+        "count": 1,
+        "first_us": "1793572104642360",
+        "last_us": "1793572104642360"
+      },
+      "cloudflared.service | p6 | 2026-11-01T22:28:24Z INF precheck component=\"TCP Connectivity\" details=\"HTTP/2 connection successful\" run_id=[UUID] status=pass target=region1.v2.argotunnel.com": {
+        "count": 1,
+        "first_us": "1793572104642360",
+        "last_us": "1793572104642360"
+      },
+      "cloudflared.service | p6 | 2026-11-01T22:28:24Z INF precheck component=\"TCP Connectivity\" details=\"HTTP/2 connection successful\" run_id=[UUID] status=pass target=region2.v2.argotunnel.com": {
+        "count": 1,
+        "first_us": "1793572104643105",
+        "last_us": "1793572104643105"
+      },
+      "cloudflared.service | p6 | 2026-11-01T22:28:24Z INF precheck component=\"Cloudflare API\" details=\"API is reachable\" run_id=[UUID] status=pass target=api.cloudflare.com:443": {
+        "count": 1,
+        "first_us": "1793572104643105",
+        "last_us": "1793572104643105"
+      },
+      "cloudflared.service | p6 | 2026-11-01T22:28:24Z INF precheck complete hard_fail=false run_id=[UUID] suggested_protocol=quic": {
+        "count": 1,
+        "first_us": "1793572104643105",
+        "last_us": "1793572104643105"
+      },
+      "init.scope | p6 | Starting bussassistent-backup.service - Bussassistent daily PostgreSQL backup...": {
+        "count": 1,
+        "first_us": "1793585815264861",
+        "last_us": "1793585815264861"
+      },
+      "bussassistent-backup.service | p6 | /var/backups/bussassistent/20261102T021655Z-5e521cbc658594a47c4568d352a50e46309573c4.dump": {
+        "count": 1,
+        "first_us": "1793585815659003",
+        "last_us": "1793585815659003"
+      },
+      "init.scope | p6 | bussassistent-backup.service: Deactivated successfully.": {
+        "count": 1,
+        "first_us": "1793585815667104",
+        "last_us": "1793585815667104"
+      },
+      "init.scope | p6 | Finished bussassistent-backup.service - Bussassistent daily PostgreSQL backup.": {
+        "count": 1,
+        "first_us": "1793585815667406",
+        "last_us": "1793585815667406"
+      },
+      "cloudflared.service | p6 | 2026-11-02T13:58:35Z WRN Serve tunnel error error=\"datagram manager error: timeout: no recent network activity\" connIndex=1 event=0 ip=[IP]": {
+        "count": 1,
+        "first_us": "1793627915500300",
+        "last_us": "1793627915500300"
+      },
+      "cloudflared.service | p6 | 2026-11-02T13:58:35Z INF Retrying connection in up to 2s connIndex=1 event=0 ip=[IP]": {
+        "count": 1,
+        "first_us": "1793627915501611",
+        "last_us": "1793627915501611"
+      },
+      "cloudflared.service | p6 | 2026-11-02T13:58:35Z WRN Serve tunnel error error=\"datagram manager error: timeout: no recent network activity\" connIndex=2 event=0 ip=[IP]": {
+        "count": 1,
+        "first_us": "1793627915686163",
+        "last_us": "1793627915686163"
+      },
+      "cloudflared.service | p6 | 2026-11-02T13:58:35Z INF Retrying connection in up to 2s connIndex=2 event=0 ip=[IP]": {
+        "count": 1,
+        "first_us": "1793627915686399",
+        "last_us": "1793627915686399"
+      },
+      "cloudflared.service | p6 | 2026-11-02T13:58:35Z WRN Connection terminated error=\"datagram manager error: timeout: no recent network activity\" connIndex=1": {
+        "count": 1,
+        "first_us": "1793627915779674",
+        "last_us": "1793627915779674"
+      },
+      "cloudflared.service | p6 | 2026-11-02T13:58:37Z WRN Connection terminated error=\"datagram manager error: timeout: no recent network activity\" connIndex=2": {
+        "count": 1,
+        "first_us": "1793627917002369",
+        "last_us": "1793627917002369"
+      },
+      "cloudflared.service | p6 | 2026-11-02T13:58:38Z INF Tunnel connection curve preferences: [X25519MLKEM768 CurveID(65074) CurveP256] connIndex=2 event=0 ip=[IP]": {
+        "count": 1,
+        "first_us": "1793627918748017",
+        "last_us": "1793627918748017"
+      },
+      "cloudflared.service | p6 | 2026-11-02T13:58:38Z INF Tunnel connection curve preferences: [X25519MLKEM768 CurveID(65074) CurveP256] connIndex=1 event=0 ip=[IP]": {
+        "count": 1,
+        "first_us": "1793627918748017",
+        "last_us": "1793627918748017"
+      },
+      "cloudflared.service | p6 | 2026-11-02T13:58:43Z WRN Failed to dial a quic connection error=\"failed to dial to edge with quic: timeout: no recent network activity\" connIndex=2 event=0 ip=[IP]": {
+        "count": 1,
+        "first_us": "1793627923749040",
+        "last_us": "1793627923749040"
+      },
+      "cloudflared.service | p6 | 2026-11-02T13:58:43Z WRN Failed to dial a quic connection error=\"failed to dial to edge with quic: timeout: no recent network activity\" connIndex=1 event=0 ip=[IP]": {
+        "count": 1,
+        "first_us": "1793627923749040",
+        "last_us": "1793627923749040"
+      },
+      "cloudflared.service | p6 | 2026-11-02T13:58:43Z INF Retrying connection in up to 4s connIndex=2 event=0 ip=[IP]": {
+        "count": 1,
+        "first_us": "1793627923749040",
+        "last_us": "1793627923749040"
+      },
+      "cloudflared.service | p6 | 2026-11-02T13:58:43Z INF Retrying connection in up to 4s connIndex=1 event=0 ip=[IP]": {
+        "count": 1,
+        "first_us": "1793627923749040",
+        "last_us": "1793627923749040"
+      },
+      "cloudflared.service | p6 | 2026-11-02T13:58:44Z WRN Connection terminated error=\"failed to dial to edge with quic: timeout: no recent network activity\" connIndex=1": {
+        "count": 1,
+        "first_us": "1793627924005646",
+        "last_us": "1793627924005646"
+      },
+      "cloudflared.service | p6 | 2026-11-02T13:58:45Z WRN Connection terminated error=\"failed to dial to edge with quic: timeout: no recent network activity\" connIndex=2": {
+        "count": 1,
+        "first_us": "1793627925757913",
+        "last_us": "1793627925757913"
+      },
+      "cloudflared.service | p6 | 2026-11-02T13:58:50Z INF Tunnel connection curve preferences: [X25519MLKEM768 CurveID(65074) CurveP256] connIndex=2 event=0 ip=[IP]": {
+        "count": 1,
+        "first_us": "1793627930414626",
+        "last_us": "1793627930414626"
+      },
+      "cloudflared.service | p6 | 2026-11-02T13:58:50Z INF Tunnel connection curve preferences: [X25519MLKEM768 CurveID(65074) CurveP256] connIndex=1 event=0 ip=[IP]": {
+        "count": 1,
+        "first_us": "1793627930415884",
+        "last_us": "1793627930415884"
+      },
+      "cloudflared.service | p6 | 2026-11-02T13:58:55Z WRN Failed to dial a quic connection error=\"failed to dial to edge with quic: timeout: no recent network activity\" connIndex=2 event=0 ip=[IP]": {
+        "count": 1,
+        "first_us": "1793627935416638",
+        "last_us": "1793627935416638"
+      },
+      "cloudflared.service | p6 | 2026-11-02T13:58:55Z WRN Failed to dial a quic connection error=\"failed to dial to edge with quic: timeout: no recent network activity\" connIndex=1 event=0 ip=[IP]": {
+        "count": 1,
+        "first_us": "1793627935416638",
+        "last_us": "1793627935416638"
+      },
+      "cloudflared.service | p6 | 2026-11-02T13:58:55Z INF Retrying connection in up to 8s connIndex=2 event=0 ip=[IP]": {
+        "count": 1,
+        "first_us": "1793627935417922",
+        "last_us": "1793627935417922"
+      },
+      "cloudflared.service | p6 | 2026-11-02T13:58:55Z INF Retrying connection in up to 8s connIndex=1 event=0 ip=[IP]": {
+        "count": 1,
+        "first_us": "1793627935417922",
+        "last_us": "1793627935417922"
+      },
+      "cloudflared.service | p6 | 2026-11-02T13:58:58Z WRN Connection terminated error=\"failed to dial to edge with quic: timeout: no recent network activity\" connIndex=1": {
+        "count": 1,
+        "first_us": "1793627938402674",
+        "last_us": "1793627938402674"
+      },
+      "cloudflared.service | p6 | 2026-11-02T13:58:59Z WRN Connection terminated error=\"failed to dial to edge with quic: timeout: no recent network activity\" connIndex=2": {
+        "count": 1,
+        "first_us": "1793627939822496",
+        "last_us": "1793627939822496"
+      },
+      "cloudflared.service | p6 | 2026-11-02T13:59:48Z INF Tunnel connection curve preferences: [X25519MLKEM768 CurveID(65074) CurveP256] connIndex=2 event=0 ip=[IP]": {
+        "count": 1,
+        "first_us": "1793627988903929",
+        "last_us": "1793627988903929"
+      },
+      "cloudflared.service | p6 | 2026-11-02T13:59:48Z INF Tunnel connection curve preferences: [X25519MLKEM768 CurveID(65074) CurveP256] connIndex=1 event=0 ip=[IP]": {
+        "count": 1,
+        "first_us": "1793627988905316",
+        "last_us": "1793627988905316"
+      },
+      "cloudflared.service | p6 | 2026-11-02T13:59:53Z WRN Failed to dial a quic connection error=\"failed to dial to edge with quic: timeout: no recent network activity\" connIndex=1 event=0 ip=[IP]": {
+        "count": 1,
+        "first_us": "1793627993905758",
+        "last_us": "1793627993905758"
+      },
+      "cloudflared.service | p6 | 2026-11-02T13:59:53Z WRN Failed to dial a quic connection error=\"failed to dial to edge with quic: timeout: no recent network activity\" connIndex=2 event=0 ip=[IP]": {
+        "count": 1,
+        "first_us": "1793627993905758",
+        "last_us": "1793627993905758"
+      },
+      "cloudflared.service | p6 | 2026-11-02T13:59:53Z INF Retrying connection in up to 16s connIndex=1 event=0 ip=[IP]": {
+        "count": 1,
+        "first_us": "1793627993905758",
+        "last_us": "1793627993905758"
+      },
+      "cloudflared.service | p6 | 2026-11-02T13:59:53Z INF Retrying connection in up to 16s connIndex=2 event=0 ip=[IP]": {
+        "count": 1,
+        "first_us": "1793627993907013",
+        "last_us": "1793627993907013"
+      },
+      "cloudflared.service | p6 | 2026-11-02T13:59:56Z WRN Connection terminated error=\"failed to dial to edge with quic: timeout: no recent network activity\" connIndex=2": {
+        "count": 1,
+        "first_us": "1793627996719255",
+        "last_us": "1793627996719255"
+      },
+      "cloudflared.service | p6 | 2026-11-02T14:00:03Z WRN Connection terminated error=\"failed to dial to edge with quic: timeout: no recent network activity\" connIndex=1": {
+        "count": 1,
+        "first_us": "1793628003524466",
+        "last_us": "1793628003524466"
+      },
+      "cloudflared.service | p6 | 2026-11-02T14:00:06Z INF Tunnel connection curve preferences: [X25519MLKEM768 CurveID(65074) CurveP256] connIndex=2 event=0 ip=[IP]": {
+        "count": 1,
+        "first_us": "1793628006744953",
+        "last_us": "1793628006744953"
+      },
+      "cloudflared.service | p6 | 2026-11-02T14:00:06Z INF Tunnel connection curve preferences: [X25519MLKEM768 CurveID(65074) CurveP256] connIndex=1 event=0 ip=[IP]": {
+        "count": 1,
+        "first_us": "1793628006746161",
+        "last_us": "1793628006746161"
+      },
+      "cloudflared.service | p6 | 2026-11-02T14:00:11Z WRN Failed to dial a quic connection error=\"failed to dial to edge with quic: timeout: no recent network activity\" connIndex=2 event=0 ip=[IP]": {
+        "count": 1,
+        "first_us": "1793628011746845",
+        "last_us": "1793628011746845"
+      },
+      "cloudflared.service | p6 | 2026-11-02T14:00:11Z WRN Failed to dial a quic connection error=\"failed to dial to edge with quic: timeout: no recent network activity\" connIndex=1 event=0 ip=[IP]": {
+        "count": 1,
+        "first_us": "1793628011746845",
+        "last_us": "1793628011746845"
+      },
+      "cloudflared.service | p6 | 2026-11-02T14:00:11Z INF Retrying connection in up to 32s connIndex=2 event=0 ip=[IP]": {
+        "count": 1,
+        "first_us": "1793628011746845",
+        "last_us": "1793628011746845"
+      },
+      "cloudflared.service | p6 | 2026-11-02T14:00:11Z INF Retrying connection in up to 32s connIndex=1 event=0 ip=[IP]": {
+        "count": 1,
+        "first_us": "1793628011746845",
+        "last_us": "1793628011746845"
+      },
+      "cloudflared.service | p6 | 2026-11-02T14:00:12Z WRN Connection terminated error=\"failed to dial to edge with quic: timeout: no recent network activity\" connIndex=1": {
+        "count": 1,
+        "first_us": "1793628012177848",
+        "last_us": "1793628012177848"
+      },
+      "cloudflared.service | p6 | 2026-11-02T14:00:12Z WRN Connection terminated error=\"failed to dial to edge with quic: timeout: no recent network activity\" connIndex=2": {
+        "count": 1,
+        "first_us": "1793628012871639",
+        "last_us": "1793628012871639"
+      },
+      "cloudflared.service | p6 | 2026-11-02T14:00:53Z INF Tunnel connection curve preferences: [X25519MLKEM768 CurveID(65074) CurveP256] connIndex=2 event=0 ip=[IP]": {
+        "count": 1,
+        "first_us": "1793628053818732",
+        "last_us": "1793628053818732"
+      },
+      "cloudflared.service | p6 | 2026-11-02T14:00:53Z INF Tunnel connection curve preferences: [X25519MLKEM768 CurveID(65074) CurveP256] connIndex=1 event=0 ip=[IP]": {
+        "count": 1,
+        "first_us": "1793628053818732",
+        "last_us": "1793628053818732"
+      },
+      "cloudflared.service | p6 | 2026-11-02T14:00:58Z WRN Failed to dial a quic connection error=\"failed to dial to edge with quic: timeout: no recent network activity\" connIndex=1 event=0 ip=[IP]": {
+        "count": 1,
+        "first_us": "1793628058821258",
+        "last_us": "1793628058821258"
+      },
+      "cloudflared.service | p6 | 2026-11-02T14:00:58Z WRN Failed to dial a quic connection error=\"failed to dial to edge with quic: timeout: no recent network activity\" connIndex=2 event=0 ip=[IP]": {
+        "count": 1,
+        "first_us": "1793628058821258",
+        "last_us": "1793628058821258"
+      },
+      "cloudflared.service | p6 | 2026-11-02T14:00:58Z INF Retrying connection in up to 32s connIndex=1 event=0 ip=[IP]": {
+        "count": 1,
+        "first_us": "1793628058821258",
+        "last_us": "1793628058821258"
+      },
+      "cloudflared.service | p6 | 2026-11-02T14:00:58Z INF Retrying connection in up to 32s connIndex=2 event=0 ip=[IP]": {
+        "count": 1,
+        "first_us": "1793628058821258",
+        "last_us": "1793628058821258"
+      },
+      "cloudflared.service | p6 | 2026-11-02T14:01:09Z WRN Connection terminated error=\"failed to dial to edge with quic: timeout: no recent network activity\" connIndex=2": {
+        "count": 1,
+        "first_us": "1793628069925417",
+        "last_us": "1793628069925417"
+      },
+      "cloudflared.service | p6 | 2026-11-02T14:01:13Z WRN Connection terminated error=\"failed to dial to edge with quic: timeout: no recent network activity\" connIndex=1": {
+        "count": 1,
+        "first_us": "1793628073669087",
+        "last_us": "1793628073669087"
+      },
+      "cloudflared.service | p6 | 2026-11-02T14:02:13Z INF Tunnel connection curve preferences: [X25519MLKEM768 CurveID(65074) CurveP256] connIndex=1 event=0 ip=[IP]": {
+        "count": 1,
+        "first_us": "1793628133848965",
+        "last_us": "1793628133848965"
+      },
+      "cloudflared.service | p6 | 2026-11-02T14:02:13Z INF Tunnel connection curve preferences: [X25519MLKEM768 CurveID(65074) CurveP256] connIndex=2 event=0 ip=[IP]": {
+        "count": 1,
+        "first_us": "1793628133850423",
+        "last_us": "1793628133850423"
+      },
+      "cloudflared.service | p6 | 2026-11-02T14:02:14Z INF Registered tunnel connection connIndex=2 connection=[UUID] event=0 ip=[IP] location=cph01 protocol=quic": {
+        "count": 1,
+        "first_us": "1793628134277407",
+        "last_us": "1793628134277407"
+      },
+      "cloudflared.service | p6 | 2026-11-02T14:02:14Z INF Registered tunnel connection connIndex=1 connection=[UUID] event=0 ip=[IP] location=cph03 protocol=quic": {
+        "count": 1,
+        "first_us": "1793628134286913",
+        "last_us": "1793628134286913"
+      }
+    }
+  }
+}

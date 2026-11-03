@@ -1,0 +1,18 @@
+{
+  "received_utc": "2026-11-02T21:01:29.7428462+00:00",
+  "source": "Owner reports four console results from invalid-header probe",
+  "production_commit": "7921eb54e4816aaab9368c3efd851bcf692f3823",
+  "request_path": "/private-api/draft-operations",
+  "method": "POST",
+  "body": "{}",
+  "csrf_header_value": "o3-invalid-proof (fixed synthetic value)",
+  "status": 403,
+  "cache_control": "no-store",
+  "content_type": "application/json",
+  "detail": "Forespørselen ble avvist.",
+  "data_tables_compared": 25,
+  "changed_tables": [],
+  "all_table_fingerprints_identical": true,
+  "scope": "Invalid CSRF header only; actual Origin variants remain open",
+  "o3_complete": false
+}

@@ -1,0 +1,23 @@
+{
+  "command": [
+    "ssh",
+    "-i",
+    "C:\\Users\\Jonas\\.ssh\\ibe160_server_ed25519",
+    "-o",
+    "IdentitiesOnly=yes",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "StrictHostKeyChecking=yes",
+    "-o",
+    "ConnectTimeout=10",
+    "-o",
+    "HostKeyAlias=192.168.1.139",
+    "jonas@192.168.1.138",
+    "python3 - <<'PY'\n\nimport subprocess,json,re,collections,datetime\nout={}\nfor label,args in {\n 'apt_services':['systemctl','show','apt-daily.service','apt-daily-upgrade.service','-p','Id','-p','Result','-p','ExecMainStatus','-p','ExecMainStartTimestamp','-p','ExecMainExitTimestamp'],\n 'apt_journal':['journalctl','-b','-u','apt-daily.service','-u','apt-daily-upgrade.service','--no-pager','-o','short-iso'],\n 'previous_matching_warnings':['journalctl','-b','-1','--grep','nftables netlink|KHO:|platform_profile probe failed|Problem loading X.509|Timeout occurred while waiting for network','--no-pager','-o','short-iso'],\n 'project_failures':['journalctl','-b','-u','bussassistent.service','-u','bussassistent-backup.service','--grep','fail|error|panic|fatal','--no-pager','-o','short-iso'],\n}.items():\n p=subprocess.run(args,capture_output=True,text=True);out[label]={'exit':p.returncode,'output':p.stdout+p.stderr}\np=subprocess.run(['journalctl','-b','-u','cloudflared.service','--no-pager','-o','json'],capture_output=True,text=True)\nevents=[]\nfor line in p.stdout.splitlines():\n r=json.loads(line);msg=r.get('MESSAGE','')\n if any(x in msg for x in ['ERR','WRN','Registered tunnel connection']):\n  msg=re.sub(r'ip=\\S+','ip=[REDACTED]',msg);msg=re.sub(r'connection=\\S+','connection=[REDACTED]',msg)\n  events.append({'time_local':datetime.datetime.fromtimestamp(int(r['__REALTIME_TIMESTAMP'])/1e6,datetime.timezone(datetime.timedelta(hours=1))).isoformat(),'message':msg})\nout['tunnel_events']={'exit':p.returncode,'stderr':p.stderr,'events':events}\nprint(json.dumps(out,ensure_ascii=False,indent=2))\n\nPY"
+  ],
+  "start_utc": "2026-11-02T19:18:40.821799+00:00",
+  "end_utc": "2026-11-02T19:18:41.632628+00:00",
+  "exit": 0,
+  "output_sha256": "9df51f3425f316494e15a00dee61f15bb020def0122641915905ad971b0354fc"
+}

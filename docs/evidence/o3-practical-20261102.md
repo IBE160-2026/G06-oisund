@@ -1,0 +1,53 @@
+# O3 praktiske eksterne kontroller — fullført innen dokumentert omfang
+
+O3 er lukket etter de eierutførte produksjonsprøvene nedenfor og den tidligere isolerte kvalifikasjonen. [Gjeldende driftsstatus](../submission/delivery-readiness.md#unperformed-operational-checks--separate-chat).
+
+Grunnlag: aktiv produksjon7921eb5, senest lesende bekreftet ved start av denne økten. Eieren bruker Desktop/Brave/Wi-Fi og det syntetiske testutkastet fra O5. Bildenes klienthint viser Windows og Chromium/Brave-brandmajor156; full nettleserversjon, Windows-versjon og individuelle handlingstidspunkt er ikke oppgitt. Tidligere gyldig isolert evidens og bestått O5-flyt gjenbrukes.
+
+| Kontroll | Observasjon | Avgrenset status |
+|---|---|---|
+| Autentisert GET `/private-api/auth/session` | Eier rapporterer sju forespørsler, alle200OK/Cache-Control:no-store/CF-Cache-Status:DYNAMIC | Bestått for akkurat disse rapporterte svarfeltene. Ingen full cache-/feilmatrise utledes. |
+| Nettleserens memory/disk-cachekilde | Size er valgt, men kolonnen er ikke synlig | Uavklart; DYNAMIC ogno-store alene brukes ikke som bevis for denne separate visningen. |
+| Appcookieflagg | Eier bekrefter Secure/HttpOnly/SameSite=Strict for både private_session/private_csrf | Bestått for de to appcookienes rapporterte flagg. [Resultat](o3-practical-20261102/app-cookie-flags.json). Ingen verdier samlet. |
+| Normal ekstern lagring | Eier bekrefter lagring i appen,200/no-store, korrekt Request-Origin og CSRF-header til stede | Bestått for én normal syntetisk lagring. [Resultat](o3-practical-20261102/normal-save.json). Dette beviser ikke avslag ved feil Origin/CSRF. |
+| DevTools Offline: tilgang og tilbakekomst | Eier presiserer at Lagre utkast ble trykket mens Offline var aktivt; innholdet ble skjult umiddelbart etter klikket. Etter Online/tilgangskontroll kom privat innhold og testendringen tilbake; ny session200 | Bestått avgrenset tilgangsreaksjon, gjenoppretting og synlig bevaring. [Frakobling](o3-practical-20261102/offline-access-suspension.json), [avklaring/recovery](o3-practical-20261102/offline-access-recovery.json). Eier bekrefter deretter appens lagringsbekreftelse, POST200og bevart endring etter refresh/gjenåpning uten ekstra kopi. [Varig retry/reopen](o3-practical-20261102/offline-retry-reopen.json). Ingen etter-commit/tapt-kvittering-konklusjon. |
+| Manglende CSRF-header | Innlogget same-origin POST/draft-operations med kun{}og uten X-CSRF-Token ga403/no-store/application-json/Forespørselen ble avvist | Bestått for dette negative eksterne kallet; alle25tabellfingeravtrykk uendret. [Resultat](o3-practical-20261102/missing-csrf-result.json). Origin-varianter er egne uutførte kontroller. |
+| Ugyldig CSRF-header | Innlogget same-origin POST/draft-operations med kun{}og fast ugyldig X-CSRF-Token ga403/no-store/application-json/Forespørselen ble avvist | Bestått for dette negative eksterne kallet; alle25tabellfingeravtrykk uendret. [Resultat](o3-practical-20261102/invalid-csrf-result.json). |
+| Presis klientblokkering av utkast-URL | Eier bekrefter aktiv regel med utkast-ID og Online, men rapporterer bare session302og skjult privat innhold | Skriveblokkering er ikke nådd/verifisert. [Observasjon](o3-practical-20261102/blocking-attempt-access-redirect.json). Eier bekrefter at Cloudflare Access krever ny innlogging. Den anslåtte timen er ikke målt utløpsevidens. Prøven er pauset før skriving. [Lesende produksjonshelse](o3-practical-20261102/redirect-diagnostic-health.txt). |
+| Videre ekstern Origin/CSRF, cache/error, skriveresultat/kvittering/replay og fysisk klientnett | Ingen nye observasjoner i denne delen av økten | Fortsatt åpne; reelle skift/avvik skal ikke brukes. |
+
+[Ordrett avgrensede baselinefelt og mottakstid](o3-practical-20261102/session-baseline.json). Ingen cookie-/tokenverdier, private svarbodyer eller HAR er samlet. Kun DevTools Offline i klientfanen er brukt; ingen server-/DNS-/tunnel-/produksjonskodeendring eller fysisk Wi-Fi-prøve er dokumentert. O3, O4 og O6 forblir åpne; O5-status er uendret.
+
+## Eierpause
+
+Eieren bekrefter Cloudflare Access-innlogging som aktuell hindring og stopper økten for å sove. [Stoppunkt](o3-practical-20261102/owner-pause.json). Ingen ny innlogging eller skriveprøve skal kjøres nå. Siste endring fra det planlagte blokkeringstilfellet er ikke bekreftet lagret. Testregelen var sist rapportert aktiv; eieren er bedt om å slå av kun denne regelen, men utført opprydding er ikke bekreftet. Ingen agentstyrt UI-endring eller produksjonsendring er utført. Ved gjenopptakelse avklares regel/fane først, deretter Access-fornyelse med bevaring av originalfanens lokale forslag, session200og til slutt ny kontrollert skriveprøve. O3 er fortsatt åpen; tidligere beståtte delprøver beholdes. O4/O6 og fullført avgrenset O5 er uendret.
+
+## Gjenopptatt skriveprøve 3. november
+
+Utstedelsen fikk 200, og appen viste uavklart lagring etter forespørselen uten synlig HTTP-svar. Oppslaget ga 200 med `state: pending` og appen beholdt Test-06. Etter nytt forsøk bekreftet appen lagringen. Eieren rapporterte 200 på raden med utkast-ID og bekreftet Test-06 etter oppdatering. Nøyaktig blokkeringsstatus, HTTP-metode på 200-raden, sammenligning av operasjons-ID-er og antall kopier er uavklart. [Resultat](o3-practical-20261102/blocked-save-recovery.json). O3 står åpen.
+
+## Origin-prøve i Brave
+
+Eieren bekrefter at DevTools-testregelen er fjernet. Konsollprøven med same-origin og no-referrer sendte ifølge Network Origin https://app.bussassistent.com og ga 422 med Cache-Control no-store. Forsøket fremkalte ikke Origin: null. Resultatet dokumenterer cacheheaderen på dette valideringssvaret. Negativ Origin-prøve står åpen.
+
+## Fysisk Wi-Fi-prøve 3. november
+
+Brukeren slo av Wi-Fi på PC-en. Etter lagringsklikk skjulte appen privat innhold, og session-forespørselen viste intet HTTP-svar. Da Wi-Fi kom tilbake, ga session 200, privat innhold kom tilbake og endringen var synlig som ulagret. Etter én lagring fikk både POST og GET 200. Appen bekreftet lagringen, og endringen var bevart etter ny innlasting. [Resultat](o3-practical-20261102/physical-wifi-recovery.json). O3 står åpen for blant annet tapt svar etter serverlagring og negativ Origin.
+
+## Simulert tapt svar etter serverlagring
+
+Nettleserens engangshjelper mottok 200 på utkastlagringen og kastet en feil før appen fikk svaret. Eieren så uavklart lagring. Ved Kontroller lagringsforsøket ga oppslaget 200 og state accepted. Appen viste «Lagret. Versjon 10.». Eieren observerte to GET-kall og null POST etter oppslagsklikket. [Resultat](o3-practical-20261102/lost-response-after-save.json). Eieren presiserte at state accepted gjaldt første GET, og bekreftet at endringen var bevart etter gjenåpning. O3 står åpen.
+
+## Cachekilde i Brave
+
+Fem eksisterende session-forespørsler viste hver status 200, transferSize 413, encodedBodySize 113 og tom deliveryType. [Resource Timing](https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-transfersize) gir her registrert nettverksoverføring for disse fem målingene. Dette avklarer den tidligere usynlige Size-kolonnen for dette utvalget. [Resultat](o3-practical-20261102/session-resource-timing.json). Negativ Origin-prøve står åpen.
+
+## Avsluttende produksjonsprøver
+
+| Kontroll | Eierens observasjon |
+|---|---|
+| Feil Origin med gyldig CSRF | Etter ny innlogging ble samme autentiserte `POST /private-api/drafts` med tomt JSON-objekt sendt fra lokal cURL, kopiert fra Brave. Vanlig Origin ga 422. Endring av bare Origin til `https://o3-origin.invalid` ga 403 med «Forespørselen ble avvist.» |
+| Fysisk nettbrudd på mobil før vellykket lagring | Etter at nettet kom tilbake og eieren kontrollerte tilkoblingen, sto inndataene fortsatt i utkastet. Versjonen økte først da eieren lagret. |
+| Fysisk Wi-Fi-brudd på PC rundt lagringskvitteringen | Brave hadde redusert nedlastingshastighet i testfanen. Lagringskallet viste POST 200 og appen skjulte privat innhold ved bruddet. Etter gjenopprettet tilgang viste appen «Lagring uavklart». Kvitteringsoppslaget på raden med operasjons-ID ga GET 200 med `state: "accepted"`. Utkastet kom tilbake intakt, endringen var bevart og versjonen økte med én. |
+
+PC-prøven dokumenterer kvitteringsoppslag etter fysisk brudd og én ny utkastversjon. Den tidligere simulerte prøven dokumenterer dessuten null nye POST etter kvitteringsoppslaget. Den eldre blokkeringsprøvens detaljer om operasjons-ID og kopiantall forblir uavklart for akkurat den kjøringen. Den isolerte kvalifikasjonen dekker 15 skrivefamilier og 75 Origin-/CSRF-avslag innen sitt dokumenterte omfang. Produksjonsbeviset gjelder de konkrete rutene og klientforløpene som er observert. O4 og O6 står åpne. [Isolert kvalifikasjon og kildegrunnlag](o3-o5-night-20261102.md#o3--autentisering-skriverettigheter-og-recovery).

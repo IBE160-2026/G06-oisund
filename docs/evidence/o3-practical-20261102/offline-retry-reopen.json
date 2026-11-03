@@ -1,0 +1,14 @@
+{
+  "received_utc": "2026-11-02T20:55:04.4209580+00:00",
+  "source": "Owner confirms successful retry, HTTP200, persisted edit after refresh/reopen and no extra draft copy",
+  "production_basis": "7921eb54e4816aaab9368c3efd851bcf692f3823",
+  "device": "Desktop",
+  "browser": "Brave",
+  "client_network": "Wi-Fi",
+  "app_acknowledged_saved": true,
+  "retry_post_status": 200,
+  "edit_preserved_after_refresh_and_reopen": true,
+  "extra_copy_observed": false,
+  "verdict": "Passed bounded retry and durable reopen after client access-preflight interruption; not a lost-response-after-commit test",
+  "o3_complete": false
+}

@@ -1,0 +1,31 @@
+{
+  "command": [
+    "docker",
+    "run",
+    "--rm",
+    "--network",
+    "none",
+    "--read-only",
+    "--tmpfs",
+    "/tmp",
+    "--mount",
+    "type=bind,source=C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\operations-o3-o6\\tmp\\o6-execution-20261101\\linux-trivy-cache,target=/root/.cache/trivy",
+    "--mount",
+    "type=bind,source=C:\\Users\\Jonas\\.codex\\.chatgpt-projects\\g-p-6ab6b4c1c6888191a96d3242fab912b4\\operations-o3-o6\\tmp\\o6-execution-20261101\\os-metadata-after-host-updates,target=/os,readonly",
+    "aquasec/trivy:0.76.1",
+    "rootfs",
+    "--skip-db-update",
+    "--offline-scan",
+    "--scanners",
+    "vuln",
+    "--pkg-types",
+    "os",
+    "--format",
+    "json",
+    "/os"
+  ],
+  "start_utc": "2026-11-01T22:16:12.362639+00:00",
+  "end_utc": "2026-11-01T22:16:31.366479+00:00",
+  "exit": 0,
+  "output_sha256": "c3dbefad80993efee20d7d583aff4113c55d5bd5fdca5f74ab94e023d7ebea08"
+}

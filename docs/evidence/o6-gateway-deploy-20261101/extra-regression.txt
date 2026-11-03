@@ -1,0 +1,1 @@
+PASS syntax, static byte equality, actual static serving, ten error statuses and independent API-down handling

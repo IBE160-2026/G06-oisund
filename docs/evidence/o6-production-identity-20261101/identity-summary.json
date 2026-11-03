@@ -1,0 +1,29 @@
+{
+  "release": {
+    "commit": "d367a0e47198aeecc52358258cb6825eecdc8c4a",
+    "archive_sha256": "da833afc216582e4acde127e9d429b3d356e5b145c26c0a7421f123d9f7545e8"
+  },
+  "lifecycle_unchanged": true,
+  "roles": {
+    "private-api": {
+      "image_id": "sha256:37b767bae51a464f0e726a784b734627e223bbb102592e09d9f8c4061cea7a45",
+      "architecture": "amd64",
+      "os": "linux"
+    },
+    "access-gate": {
+      "image_id": "sha256:6bba55ec94b9e1e994c23e37e6a62efb67d2a32cd6448a616200ffd4cb168bc9",
+      "architecture": "amd64",
+      "os": "linux"
+    },
+    "gateway": {
+      "image_id": "sha256:78e1858a3c91b5f041230b979b1a6268f5578c155f7252eea15d95b95dcfa91f",
+      "architecture": "amd64",
+      "os": "linux"
+    },
+    "private-db": {
+      "image_id": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "architecture": "amd64",
+      "os": "linux"
+    }
+  }
+}

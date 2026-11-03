@@ -1,15 +1,20 @@
 param(
     [Parameter(Mandatory=$true)]
-    [ValidateSet('Status','Logs','Check','Backup','Deploy','Rollback')]
+    [ValidateSet('Status','Logs','Check','Backup','Deploy','Rollback','GatewayStage','GatewaySwitch')]
     [string]$Action,
     [ValidatePattern('^[a-zA-Z0-9_.@-]+$')]
-    [string]$Server = 'jonas@192.168.1.139',
+    [string]$Server = 'jonas@192.168.1.138',
+    [ValidatePattern('^[a-zA-Z0-9_.-]+$')]
+    [string]$HostKeyAlias = '192.168.1.139',
     [string]$KeyFile = (Join-Path $env:USERPROFILE '.ssh/ibe160_server_ed25519'),
     [string]$Revision,
+    [string]$GatewayImage,
+    [string]$ExpectedCurrent,
     [string]$BackupDirectory = (Join-Path $env:LOCALAPPDATA 'BussassistentServer/backups')
 )
 $ErrorActionPreference = 'Stop'
-$sshOptions = @('-i', $KeyFile, '-o', 'IdentitiesOnly=yes', '-o', 'BatchMode=yes', '-o', 'ConnectTimeout=10', '-o', 'ServerAliveInterval=15', '-o', 'ServerAliveCountMax=2', '-o', 'StrictHostKeyChecking=yes')
+# Preserve the already verified server identity when DHCP changes its address.
+$sshOptions = @('-i', $KeyFile, '-o', 'IdentitiesOnly=yes', '-o', 'BatchMode=yes', '-o', 'ConnectTimeout=10', '-o', 'ServerAliveInterval=15', '-o', 'ServerAliveCountMax=2', '-o', 'StrictHostKeyChecking=yes', '-o', ('HostKeyAlias=' + $HostKeyAlias))
 function Invoke-Server([string]$Command) {
     & ssh @sshOptions $Server $Command
     if ($LASTEXITCODE -ne 0) { throw "Server command failed ($LASTEXITCODE)." }
@@ -42,6 +47,19 @@ if ($Action -eq 'Backup') {
     exit
 }
 if ($Revision -notmatch '^[a-f0-9]{40}$') { throw 'Supply a full 40-character commit SHA with -Revision.' }
+if ($Action -eq 'GatewayStage') {
+    $activeIdentity = (@(Invoke-Server 'cat /opt/bussassistent/current/release-identity.json') -join "`n") | ConvertFrom-Json
+    if ($activeIdentity.commit -eq $Revision) {
+        throw 'GatewayStage refuses the active release; preserved application aliases must not be rebuilt.'
+    }
+}
+if ($Action -eq 'GatewaySwitch') {
+    if ($GatewayImage -notmatch '^sha256:[a-f0-9]{64}$' -or $ExpectedCurrent -notmatch '^[a-f0-9]{40}$') {
+        throw 'Supply exact -GatewayImage and -ExpectedCurrent.'
+    }
+    Invoke-Server ('sudo -n /usr/local/sbin/bussassistentctl gateway-switch ' + $Revision + ' ' + $GatewayImage + ' ' + $ExpectedCurrent)
+    exit
+}
 if ($Action -eq 'Rollback') {
     Invoke-Server ('sudo -n /usr/local/sbin/bussassistentctl rollback ' + $Revision)
     exit
@@ -62,7 +80,9 @@ try {
     if ($LASTEXITCODE -ne 0) { throw 'Release transfer failed.' }
     Invoke-Server ('sudo -n /usr/local/sbin/bussassistentctl stage ' + $Revision + ' ' + $digest)
     Invoke-Server ('sudo -n /usr/local/sbin/bussassistentctl install-tools ' + $Revision)
-    Invoke-Server ('sudo -n /usr/local/sbin/bussassistentctl deploy ' + $Revision)
+    if ($Action -ne 'GatewayStage') {
+        Invoke-Server ('sudo -n /usr/local/sbin/bussassistentctl deploy ' + $Revision)
+    }
 } finally {
     if (Test-Path -LiteralPath $archive) { Remove-Item -LiteralPath $archive }
 }

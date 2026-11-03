@@ -1,0 +1,75 @@
+linux-image-generic:
+  Installed: 7.0.0-42.42
+  Candidate: 7.0.0-42.42
+  Version table:
+ *** 7.0.0-42.42 500
+        500 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 Packages
+        100 /var/lib/dpkg/status
+     7.0.0-38.38 500
+        500 http://security.ubuntu.com/ubuntu resolute-security/main amd64 Packages
+     7.0.0-14.14 500
+        500 http://archive.ubuntu.com/ubuntu resolute/main amd64 Packages
+libc6:
+  Installed: 2.43-2ubuntu2.4
+  Candidate: 2.43-2ubuntu2.4
+  Version table:
+ *** 2.43-2ubuntu2.4 500
+        500 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 Packages
+        500 http://security.ubuntu.com/ubuntu resolute-security/main amd64 Packages
+        100 /var/lib/dpkg/status
+     2.43-2ubuntu2 500
+        500 http://archive.ubuntu.com/ubuntu resolute/main amd64 Packages
+systemd:
+  Installed: 259.5-0ubuntu3.4
+  Candidate: 259.9-0ubuntu0.1
+  Version table:
+     259.9-0ubuntu0.1 500
+        500 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 Packages
+ *** 259.5-0ubuntu3.4 500
+        500 http://security.ubuntu.com/ubuntu resolute-security/main amd64 Packages
+        100 /var/lib/dpkg/status
+     259.5-0ubuntu3 500
+        500 http://archive.ubuntu.com/ubuntu resolute/main amd64 Packages
+cloudflared:
+  Installed: 2026.10.6
+  Candidate: 2026.10.7
+  Version table:
+     2026.10.7 500
+        500 https://pkg.cloudflare.com/cloudflared any/main amd64 Packages
+ *** 2026.10.6 100
+        100 /var/lib/dpkg/status
+NOTE: This is only a simulation!
+      apt-get needs root privileges for real execution.
+      Keep also in mind that locking is deactivated,
+      so don't depend on the relevance to the real current situation!
+Reading package lists...
+Building dependency tree...
+Reading state information...
+Solving dependencies...
+The following package was automatically installed and is no longer required:
+  grub-pc-bin
+Use 'apt autoremove' to remove it.
+The following packages will be upgraded:
+  libnss-systemd libpam-systemd libsystemd-shared libsystemd0 libudev1 systemd
+  systemd-cryptsetup systemd-resolved systemd-sysv udev
+10 upgraded, 0 newly installed, 0 to remove and 31 not upgraded.
+Inst libsystemd0 [259.5-0ubuntu3.4] (259.9-0ubuntu0.1 Ubuntu:26.04/resolute-updates [amd64]) [systemd:amd64 ]
+Conf libsystemd0 (259.9-0ubuntu0.1 Ubuntu:26.04/resolute-updates [amd64]) [systemd:amd64 ]
+Inst libpam-systemd [259.5-0ubuntu3.4] (259.9-0ubuntu0.1 Ubuntu:26.04/resolute-updates [amd64]) [systemd:amd64 ]
+Inst systemd-sysv [259.5-0ubuntu3.4] (259.9-0ubuntu0.1 Ubuntu:26.04/resolute-updates [amd64]) [systemd:amd64 ]
+Inst systemd-resolved [259.5-0ubuntu3.4] (259.9-0ubuntu0.1 Ubuntu:26.04/resolute-updates [amd64]) [systemd:amd64 ]
+Inst libsystemd-shared [259.5-0ubuntu3.4] (259.9-0ubuntu0.1 Ubuntu:26.04/resolute-updates [amd64]) [systemd:amd64 on libsystemd-shared:amd64] [udev:amd64 systemd:amd64 systemd-cryptsetup:amd64 ]
+Conf libsystemd-shared (259.9-0ubuntu0.1 Ubuntu:26.04/resolute-updates [amd64]) [udev:amd64 systemd:amd64 systemd-cryptsetup:amd64 ]
+Inst systemd [259.5-0ubuntu3.4] (259.9-0ubuntu0.1 Ubuntu:26.04/resolute-updates [amd64]) [udev:amd64 systemd-cryptsetup:amd64 ]
+Inst systemd-cryptsetup [259.5-0ubuntu3.4] (259.9-0ubuntu0.1 Ubuntu:26.04/resolute-updates [amd64]) [udev:amd64 ]
+Inst udev [259.5-0ubuntu3.4] (259.9-0ubuntu0.1 Ubuntu:26.04/resolute-updates [amd64]) []
+Inst libudev1 [259.5-0ubuntu3.4] (259.9-0ubuntu0.1 Ubuntu:26.04/resolute-updates [amd64])
+Conf libudev1 (259.9-0ubuntu0.1 Ubuntu:26.04/resolute-updates [amd64])
+Inst libnss-systemd [259.5-0ubuntu3.4] (259.9-0ubuntu0.1 Ubuntu:26.04/resolute-updates [amd64])
+Conf libpam-systemd (259.9-0ubuntu0.1 Ubuntu:26.04/resolute-updates [amd64])
+Conf systemd-sysv (259.9-0ubuntu0.1 Ubuntu:26.04/resolute-updates [amd64])
+Conf systemd-resolved (259.9-0ubuntu0.1 Ubuntu:26.04/resolute-updates [amd64])
+Conf systemd (259.9-0ubuntu0.1 Ubuntu:26.04/resolute-updates [amd64])
+Conf systemd-cryptsetup (259.9-0ubuntu0.1 Ubuntu:26.04/resolute-updates [amd64])
+Conf udev (259.9-0ubuntu0.1 Ubuntu:26.04/resolute-updates [amd64])
+Conf libnss-systemd (259.9-0ubuntu0.1 Ubuntu:26.04/resolute-updates [amd64])

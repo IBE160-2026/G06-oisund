@@ -1,0 +1,21 @@
+{
+  "command": [
+    "ssh",
+    "-i",
+    "C:\\Users\\Jonas\\.ssh\\ibe160_server_ed25519",
+    "-o",
+    "IdentitiesOnly=yes",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "StrictHostKeyChecking=yes",
+    "-o",
+    "ConnectTimeout=10",
+    "jonas@192.168.1.139",
+    "sha256sum /tmp/ibe160-o6-window.uNfjQHcy/preflight.py"
+  ],
+  "start_utc": "2026-11-01T21:19:09.625679+00:00",
+  "end_utc": "2026-11-01T21:19:10.054894+00:00",
+  "exit": 0,
+  "output_sha256": "8a8cdb455e1214fe7ed433d1d4ddb6ea21cb69ed7507630af7c5ed8bbb3cf0ce"
+}

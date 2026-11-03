@@ -1,0 +1,79 @@
+API healthy; origin access control rejects unauthenticated requests
+/var/backups/bussassistent/20261101T170920Z-d367a0e47198aeecc52358258cb6825eecdc8c4a.dump
+API healthy; origin access control rejects unauthenticated requests
+{
+  "before_commit": "d367a0e47198aeecc52358258cb6825eecdc8c4a",
+  "active_commit": "93ee582b1a71a3f7552da1894b570366b89afee1",
+  "qualified_gateway_image": "sha256:18f942c0107fa36b2fff8e11759d64ee08244fe115195e8e89bab03f4fc984c0",
+  "before": {
+    "private-api": {
+      "id": "b4eaf0a7c9171cefd1df48d5672c8800e4ee7290d49db55657ee1adcd6662bef",
+      "image": "sha256:37b767bae51a464f0e726a784b734627e223bbb102592e09d9f8c4061cea7a45",
+      "pid": 1154760,
+      "started": "2026-10-31T02:21:26.197228563Z",
+      "restarts": 0
+    },
+    "access-gate": {
+      "id": "2dd7409f2d08de4965d7a2f31869141ebe476064067e45607674f0f0b92076a1",
+      "image": "sha256:6bba55ec94b9e1e994c23e37e6a62efb67d2a32cd6448a616200ffd4cb168bc9",
+      "pid": 1154662,
+      "started": "2026-10-31T02:21:22.691840342Z",
+      "restarts": 0
+    },
+    "private-db": {
+      "id": "18203c236592db5bd7b62b5ff987eaf7a21e43d3a4d105be4d43e132471460d7",
+      "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "pid": 1154582,
+      "started": "2026-10-31T02:21:22.481155217Z",
+      "restarts": 0
+    },
+    "gateway": {
+      "id": "c92cd3b3fc9315f745c4e49746950cfe698f8b9cefb28bd9535cfe0ec412cae0",
+      "image": "sha256:78e1858a3c91b5f041230b979b1a6268f5578c155f7252eea15d95b95dcfa91f",
+      "pid": 1154898,
+      "started": "2026-10-31T02:21:31.930086983Z",
+      "restarts": 0
+    },
+    "tunnel": "ActiveEnterTimestamp=Sat 2026-10-31 03:21:32 CET\nMainPID=1155012\nNRestarts=0\n",
+    "boot_id": "44c550dc-d3b9-4222-8f6c-e0dcdac1a991"
+  },
+  "after": {
+    "private-api": {
+      "id": "b4eaf0a7c9171cefd1df48d5672c8800e4ee7290d49db55657ee1adcd6662bef",
+      "image": "sha256:37b767bae51a464f0e726a784b734627e223bbb102592e09d9f8c4061cea7a45",
+      "pid": 1154760,
+      "started": "2026-10-31T02:21:26.197228563Z",
+      "restarts": 0
+    },
+    "access-gate": {
+      "id": "2dd7409f2d08de4965d7a2f31869141ebe476064067e45607674f0f0b92076a1",
+      "image": "sha256:6bba55ec94b9e1e994c23e37e6a62efb67d2a32cd6448a616200ffd4cb168bc9",
+      "pid": 1154662,
+      "started": "2026-10-31T02:21:22.691840342Z",
+      "restarts": 0
+    },
+    "private-db": {
+      "id": "18203c236592db5bd7b62b5ff987eaf7a21e43d3a4d105be4d43e132471460d7",
+      "image": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "pid": 1154582,
+      "started": "2026-10-31T02:21:22.481155217Z",
+      "restarts": 0
+    },
+    "gateway": {
+      "id": "d4c197048bb79a6a6fa181094faeeb182be8c996a162b67e8cb766662f48377a",
+      "image": "sha256:18f942c0107fa36b2fff8e11759d64ee08244fe115195e8e89bab03f4fc984c0",
+      "pid": 2583662,
+      "started": "2026-11-01T17:09:21.169506756Z",
+      "restarts": 0
+    },
+    "tunnel": "ActiveEnterTimestamp=Sat 2026-10-31 03:21:32 CET\nMainPID=1155012\nNRestarts=0\n",
+    "boot_id": "44c550dc-d3b9-4222-8f6c-e0dcdac1a991"
+  },
+  "scope": "gateway only; app image aliases preserve running bytes"
+}
+ Container bussassistent-gateway-1 Recreate 
+ Container bussassistent-gateway-1 Recreated 
+ Container bussassistent-gateway-1 Starting 
+ Container bussassistent-gateway-1 Started 
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful

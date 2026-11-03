@@ -1,0 +1,19 @@
+{
+  "SchemaVersion": 2,
+  "Trivy": {
+    "Version": "0.76.1"
+  },
+  "ReportID": "01a1992d-b136-783a-86a9-111729c83aa4",
+  "CreatedAt": "2026-11-01T22:14:30.966541673Z",
+  "ArtifactName": "/os",
+  "ArtifactType": "filesystem",
+  "Metadata": {
+    "OS": {
+      "Family": "none",
+      "Name": ""
+    }
+  }
+}
+2026-11-01T22:14:30Z	INFO	[vuln] Vulnerability scanning is enabled
+2026-11-01T22:14:30Z	INFO	Detected OS	family="none" version=""
+2026-11-01T22:14:30Z	WARN	Unsupported os	family="none"

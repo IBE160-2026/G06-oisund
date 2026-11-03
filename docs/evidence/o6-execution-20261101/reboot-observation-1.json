@@ -1,0 +1,6 @@
+{
+  "time_utc": "2026-11-01T22:26:35.720097+00:00",
+  "exit": 255,
+  "boot_id": "",
+  "stderr": "kex_exchange_identification: read: Connection reset\nConnection reset by 192.168.1.139 port 22"
+}

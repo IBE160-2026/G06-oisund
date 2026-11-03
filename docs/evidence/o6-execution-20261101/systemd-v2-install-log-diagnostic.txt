@@ -1,0 +1,3 @@
+FILE /var/log/apt/history.log
+FILE /var/log/apt/term.log
+FILE /var/log/dpkg.log

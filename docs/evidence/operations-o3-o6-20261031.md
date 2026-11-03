@@ -1,0 +1,7 @@
+# Historisk O3–O6-grunnlag fra 31. oktober og 1. november
+
+Den felles arbeidsbranchen `followup/operations-o3-o6-20261031` endte på `134849a12c84d39cfc613fa5f866062319e603f8`. Den inneholdt avgrenset HTTP-, DNS- og driftsmåling, prioritert kernel- og image-triage og en lesende binding til produksjonsimages. Ved den historiske målingen kjørte V1 `d367a0e`. Syntetiske forsøk omfattet 15 mutasjonsfamilier og avslag for ugyldig Origin og CSRF. Resolverarbeiderens levetid ved OS-heng ble avgrenset og senere håndtert i O5. Målingene gjelder sine versjoner og tidspunkter.
+
+Metodene er bevart sammen med det normaliserte høy/kritisk-registeret, sammendraget og avgrenset imageidentitet. [Historiske metoder](../../scripts/operations-followup/README.md), [register](o6-triage-20261101/high-critical.csv), [triagesammendrag](o6-triage-20261101/summary.json), [imageidentitet](o6-production-identity-20261101/identity-summary.json).
+
+Originalrapportene, de seks opprinnelige Git-committene og full evidens er bevart i det lokale arkivet `o6-archives-20261102/completed-o6-and-original-shared-history.bundle`. Arkivets `manifest.json` gir ref og blob-ID per unik fil. Gjenopprett i et separat repo med `git clone -b followup/operations-o3-o6-20261031 <bundle> <egen-mappe>`. Arkivet er verifisert mot SHA-256 og med et separat gjenopprettet repo. Originale rålogger og full containerinventering ligger i det lokale arkivet. Gjeldende status finnes i [vedlikeholdsrapporten for v1.0.1](v1.0.1-maintenance-20261104.md).
