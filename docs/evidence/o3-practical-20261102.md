@@ -35,3 +35,7 @@ Brukeren slo av Wi-Fi på PC-en. Etter lagringsklikk skjulte appen privat innhol
 ## Simulert tapt svar etter serverlagring
 
 Nettleserens engangshjelper mottok 200 på utkastlagringen og kastet en feil før appen fikk svaret. Eieren så uavklart lagring. Ved Kontroller lagringsforsøket ga oppslaget 200 og state accepted. Appen viste «Lagret. Versjon 10.». Eieren observerte to GET-kall og null POST etter oppslagsklikket. [Resultat](o3-practical-20261102/lost-response-after-save.json). Eieren presiserte at state accepted gjaldt første GET, og bekreftet at endringen var bevart etter gjenåpning. O3 står åpen.
+
+## Cachekilde i Brave
+
+Fem eksisterende session-forespørsler viste hver status 200, transferSize 413, encodedBodySize 113 og tom deliveryType. [Resource Timing](https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-transfersize) gir her registrert nettverksoverføring for disse fem målingene. Dette avklarer den tidligere usynlige Size-kolonnen for dette utvalget. [Resultat](o3-practical-20261102/session-resource-timing.json). Negativ Origin-prøve står åpen.
