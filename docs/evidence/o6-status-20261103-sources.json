@@ -1,0 +1,249 @@
+{
+  "utc": "2026-11-03T20:44:39.436402+00:00",
+  "sources": {
+    "2026-76642": {
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-76642",
+      "last_modified": null,
+      "sha256": "fd40eb589f4edd1f5b2df060db1d418501f7138459069481c60471abe1efde24",
+      "rows": [
+        [
+          "",
+          "trixie (security), trixie",
+          "2.41.5-0+deb13u1",
+          "vulnerable"
+        ],
+        [
+          "util-linux",
+          "source",
+          "(unstable)",
+          "2.42.3-1",
+          "",
+          "",
+          ""
+        ]
+      ]
+    },
+    "2026-78408": {
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-78408",
+      "last_modified": null,
+      "sha256": "c2ce37b05cca7f05768d22c20645c174592a837fb20423fa7f106dc4e6e0d104",
+      "rows": [
+        [
+          "",
+          "trixie (security), trixie",
+          "2.41.5-0+deb13u1",
+          "vulnerable"
+        ],
+        [
+          "util-linux",
+          "source",
+          "(unstable)",
+          "2.42.4-1",
+          "",
+          "",
+          ""
+        ]
+      ]
+    },
+    "2026-78409": {
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-78409",
+      "last_modified": null,
+      "sha256": "7762ce7d10558ca03e3fcc3995b97e7a24d13ab4b1d6cdd3e4bf9ff7d357ba48",
+      "rows": [
+        [
+          "",
+          "trixie (security), trixie",
+          "2.41.5-0+deb13u1",
+          "vulnerable"
+        ],
+        [
+          "util-linux",
+          "source",
+          "(unstable)",
+          "2.42.3-1",
+          "",
+          "",
+          ""
+        ]
+      ]
+    },
+    "2026-78410": {
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-78410",
+      "last_modified": null,
+      "sha256": "370b52136365d440004d915421bd2b2529393511c802bdc04f3e3a873241621b",
+      "rows": [
+        [
+          "",
+          "trixie (security), trixie",
+          "2.41.5-0+deb13u1",
+          "vulnerable"
+        ],
+        [
+          "util-linux",
+          "source",
+          "(unstable)",
+          "2.42.3-1",
+          "",
+          "",
+          ""
+        ]
+      ]
+    },
+    "2025-69720": {
+      "url": "https://security-tracker.debian.org/tracker/CVE-2025-69720",
+      "last_modified": null,
+      "sha256": "3542be519daaef8f60a0fd662f4a6129a238f59ef9b86155869d49cfd2b3af78",
+      "rows": [
+        [
+          "",
+          "trixie",
+          "6.5+20250216-2",
+          "vulnerable"
+        ],
+        [
+          "ncurses",
+          "source",
+          "(unstable)",
+          "6.6+20251231-1",
+          "",
+          "",
+          ""
+        ]
+      ]
+    },
+    "2026-54369": {
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-54369",
+      "last_modified": null,
+      "sha256": "4677cdb2b848eca7bc76f57dd54e5d01e309f438bba58d892550db432fbde5ca",
+      "rows": [
+        [
+          "",
+          "trixie",
+          "2.3.2-2",
+          "vulnerable"
+        ],
+        [
+          "acl",
+          "source",
+          "(unstable)",
+          "2.4.0-1",
+          "",
+          "",
+          "1141110"
+        ]
+      ]
+    },
+    "2026-119373": {
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-119373",
+      "last_modified": null,
+      "sha256": "f56d5f58bb7d282c94ffd9ff818b435ed9884114b11c1efbd7eb74f63e6e195f",
+      "rows": [
+        [
+          "",
+          "trixie",
+          "3.46.1-7+deb13u2",
+          "vulnerable"
+        ],
+        [
+          "sqlite3",
+          "source",
+          "(unstable)",
+          "3.54.1-1",
+          "",
+          "",
+          "1152790"
+        ]
+      ]
+    },
+    "CVE-2026-89530": {
+      "url": "https://ubuntu.com/security/CVE-CVE-2026-89530",
+      "error": "HTTP Error 404: Not Found"
+    },
+    "CVE-2026-89652": {
+      "url": "https://ubuntu.com/security/CVE-CVE-2026-89652",
+      "error": "HTTP Error 404: Not Found"
+    },
+    "CVE-2026-89659": {
+      "url": "https://ubuntu.com/security/CVE-CVE-2026-89659",
+      "error": "HTTP Error 404: Not Found"
+    },
+    "CVE-2026-89708": {
+      "url": "https://ubuntu.com/security/CVE-CVE-2026-89708",
+      "error": "HTTP Error 404: Not Found"
+    },
+    "CVE-2026-90037": {
+      "url": "https://ubuntu.com/security/CVE-CVE-2026-90037",
+      "error": "HTTP Error 404: Not Found"
+    },
+    "CVE-2026-90162": {
+      "url": "https://ubuntu.com/security/CVE-CVE-2026-90162",
+      "error": "HTTP Error 404: Not Found"
+    },
+    "CVE-2026-93221": {
+      "url": "https://ubuntu.com/security/CVE-CVE-2026-93221",
+      "error": "HTTP Error 404: Not Found"
+    },
+    "CVE-2026-98365": {
+      "url": "https://ubuntu.com/security/CVE-CVE-2026-98365",
+      "error": "HTTP Error 404: Not Found"
+    },
+    "CVE-2026-98571": {
+      "url": "https://ubuntu.com/security/CVE-CVE-2026-98571",
+      "error": "HTTP Error 404: Not Found"
+    },
+    "CVE-2026-98621": {
+      "url": "https://ubuntu.com/security/CVE-CVE-2026-98621",
+      "error": "HTTP Error 404: Not Found"
+    },
+    "CVE-2026-98725": {
+      "url": "https://ubuntu.com/security/CVE-CVE-2026-98725",
+      "error": "HTTP Error 404: Not Found"
+    },
+    "CVE-2026-98805": {
+      "url": "https://ubuntu.com/security/CVE-CVE-2026-98805",
+      "error": "HTTP Error 404: Not Found"
+    },
+    "2026-40228": {
+      "url": "https://ubuntu.com/security/CVE-2026-40228",
+      "error": "The read operation timed out"
+    },
+    "updates": {
+      "url": "https://archive.ubuntu.com/ubuntu/dists/resolute-updates/main/binary-amd64/Packages.xz",
+      "last_modified": "Tue, 03 Nov 2026 18:27:47 GMT",
+      "sha256": "afdbc72a4a19b281a9cac465dc1d0eb2649917f3a82631baed9bdb38904db328",
+      "versions": {
+        "libc6": "2.43-2ubuntu2.4",
+        "libsqlite3-0": "3.46.1-9ubuntu0.3",
+        "linux-generic": "7.0.0-42.42",
+        "linux-image-7.0.0-42-generic": "7.0.0-42.42",
+        "linux-image-generic": "7.0.0-42.42",
+        "systemd": "259.9-0ubuntu0.1",
+        "util-linux": "2.41.3-3ubuntu2.2"
+      }
+    },
+    "security": {
+      "url": "https://security.ubuntu.com/ubuntu/dists/resolute-security/main/binary-amd64/Packages.xz",
+      "last_modified": "Tue, 03 Nov 2026 17:27:23 GMT",
+      "sha256": "4c9823d52772f3be5db785354d0fa4a1755e688cbb8492b9286b5501ab5e1634",
+      "versions": {
+        "libc6": "2.43-2ubuntu2.4",
+        "libsqlite3-0": "3.46.1-9ubuntu0.3",
+        "linux-generic": "7.0.0-42.42",
+        "linux-image-7.0.0-42-generic": "7.0.0-42.42",
+        "linux-image-generic": "7.0.0-42.42",
+        "systemd": "259.5-0ubuntu3.4",
+        "util-linux": "2.41.3-3ubuntu2.2"
+      }
+    }
+  },
+  "host_observation": {
+    "status": "2026-11-03T21:43:48+01:00\n{\n  \"commit\": \"7921eb54e4816aaab9368c3efd851bcf692f3823\",\n  \"archive_sha256\": \"d6ec0afb977ea7d3b24ec3198b499acc3f5247bb61645fd88358fe20443038c2\"\n}\n7.0.0-42-generic\n2812a231-758d-4b5e-8241-d748b52d0991\ncloudflared\t2026.10.7\nlibc6:amd64\t2.43-2ubuntu2.4\nlinux-generic\t7.0.0-42.42\nlinux-image-generic\t7.0.0-42.42\nsystemd\t259.9-0ubuntu0.1\nlinux-generic:\n  Installed: 7.0.0-42.42\n  Candidate: 7.0.0-42.42\n  Version table:\n *** 7.0.0-42.42 500\n        500 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 Packages\n        500 http://security.ubuntu.com/ubuntu resolute-security/main amd64 Packages\n        100 /var/lib/dpkg/status\n     7.0.0-14.14 500\n        500 http://archive.ubuntu.com/ubuntu resolute/main amd64 Packages\nlinux-image-generic:\n  Installed: 7.0.0-42.42\n  Candidate: 7.0.0-42.42\n  Version table:\n *** 7.0.0-42.42 500\n        500 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 Packages\n        500 http://security.ubuntu.com/ubuntu resolute-security/main amd64 Packages\n        100 /var/lib/dpkg/status\n     7.0.0-14.14 500\n        500 http://archive.ubuntu.com/ubuntu resolute/main amd64 Packages\nsystemd:\n  Installed: 259.9-0ubuntu0.1\n  Candidate: 259.9-0ubuntu0.1\n  Version table:\n *** 259.9-0ubuntu0.1 500\n        500 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 Packages\n        100 /var/lib/dpkg/status\n     259.5-0ubuntu3.4 500\n        500 http://security.ubuntu.com/ubuntu resolute-security/main amd64 Packages\n     259.5-0ubuntu3 500\n        500 http://archive.ubuntu.com/ubuntu resolute/main amd64 Packages\ncloudflared:\n  Installed: 2026.10.7\n  Candidate: 2026.10.7\n  Version table:\n *** 2026.10.7 500\n        500 https://pkg.cloudflare.com/cloudflared any/main amd64 Packages\n        100 /var/lib/dpkg/status\nlibc6:\n  Installed: 2.43-2ubuntu2.4\n  Candidate: 2.43-2ubuntu2.4\n  Version table:\n *** 2.43-2ubuntu2.4 500\n        500 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 Packages\n        500 http://security.ubuntu.com/ubuntu resolute-security/main amd64 Packages\n        100 /var/lib/dpkg/status\n     2.43-2ubuntu2 500\n        500 http://archive.ubuntu.com/ubuntu resolute/main amd64 Packages\n2026-11-03 02:29:58.907791622 +0100\nId=bussassistent.service\nActiveState=active\nSubState=exited\n\nId=cloudflared.service\nActiveState=active\nSubState=running\nRelease: 7921eb54e4816aaab9368c3efd851bcf692f3823\nNAME                          IMAGE                                                                COMMAND                  SERVICE       CREATED        STATUS                  PORTS\nbussassistent-access-gate-1   bussassistent-access-gate:7921eb54e4816aaab9368c3efd851bcf692f3823   \"python gate.py\"         access-gate   25 hours ago   Up 25 hours             \nbussassistent-gateway-1       bussassistent-gateway:7921eb54e4816aaab9368c3efd851bcf692f3823       \"/bin/sh -ec 'envsub\u2026\"   gateway       25 hours ago   Up 25 hours             80/tcp, 127.0.0.1:18081->8080/tcp\nbussassistent-private-api-1   bussassistent-api:7921eb54e4816aaab9368c3efd851bcf692f3823           \"python -m app.run\"      private-api   25 hours ago   Up 25 hours (healthy)   \nbussassistent-private-db-1    bussassistent-postgres:7921eb54e4816aaab9368c3efd851bcf692f3823      \"docker-entrypoint.s\u2026\"   private-db    25 hours ago   Up 25 hours (healthy)   5432/tcp\n",
+    "host-extras": "libacl1:amd64\t2.3.2-2\nlibsqlite3-0:amd64\t3.46.1-9ubuntu0.3\nncurses-bin\t6.6+20251231-1\nutil-linux\t2.41.3-3ubuntu2.2\nForwardToWall=no\n    PID                  STARTED\n 791470 Mon Nov  2 20:48:32 2026\n 791566 Mon Nov  2 20:48:36 2026\n",
+    "tipc": "CONFIG_TIPC=m\nCONFIG_TIPC_CRYPTO=y\nTIPC_MODULE_NOT_LISTED\nTIPC_CLI_PRESENT\nNO_REBOOT_REQUIRED\n"
+  },
+  "additional_web_sources": {
+    "https://ubuntu.com/security/CVE-2026-98805": "linux/resolute vulnerable, work in progress in 7.0.0-43.43",
+    "https://ubuntu.com/security/CVE-2026-40228": "systemd/resolute vulnerable, fix deferred",
+    "https://github.com/cloudflare/cloudflared/releases/latest": "redirected to 2026.10.7"
+  }
+}
