@@ -309,3 +309,5 @@ O3 er åpen. Eksakt blokkeringsstatus, POST-metode på 200-raden, ID-samsvar og 
 Fortsettelse 3. november. Testregelen er fjernet. Konsollprøven sendte vanlig Origin og ga 422/no-store. Metoden fremkalte ikke null-Origin i Brave. Negativ Origin-prøve står åpen. Neste praktiske prøve gjelder fysisk frakobling av klienten med syntetisk utkast.
 
 Fortsettelse 3. november. eb7320f registrerer bestått fysisk Wi-Fi-prøve før lagring, session 200 etter gjenoppretting, bevart forslag, POST og GET 200 og varig endring etter ny innlasting. O3 står åpen for tapt svar etter serverlagring og øvrige dokumenterte grenser.
+
+Fortsettelse 3. november. 82d322f registrerer simulert tapt svar etter serverstatus 200, appens uavklarte status, kvitteringsoppslag 200/accepted og «Lagret. Versjon 10.». Eier så to GET og null POST etter oppslagsklikket. Gjenåpning etter dette oppslaget avventes. Negativ Origin og nettleserens cachekilde står fortsatt åpne.
