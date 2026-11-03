@@ -27,3 +27,7 @@ Utstedelsen fikk 200, og appen viste uavklart lagring etter forespørselen uten 
 ## Origin-prøve i Brave
 
 Eieren bekrefter at DevTools-testregelen er fjernet. Konsollprøven med same-origin og no-referrer sendte ifølge Network Origin https://app.bussassistent.com og ga 422 med Cache-Control no-store. Forsøket fremkalte ikke Origin: null. Resultatet dokumenterer cacheheaderen på dette valideringssvaret. Negativ Origin-prøve står åpen.
+
+## Fysisk Wi-Fi-prøve 3. november
+
+Brukeren slo av Wi-Fi på PC-en. Etter lagringsklikk skjulte appen privat innhold, og session-forespørselen viste intet HTTP-svar. Da Wi-Fi kom tilbake, ga session 200, privat innhold kom tilbake og endringen var synlig som ulagret. Etter én lagring fikk både POST og GET 200. Appen bekreftet lagringen, og endringen var bevart etter ny innlasting. [Resultat](o3-practical-20261102/physical-wifi-recovery.json). O3 står åpen for blant annet tapt svar etter serverlagring og negativ Origin.
