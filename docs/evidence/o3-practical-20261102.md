@@ -1,4 +1,6 @@
-# O3 praktiske eksterne kontroller — pågår
+# O3 praktiske eksterne kontroller — fullført innen dokumentert omfang
+
+O3 er lukket etter de eierutførte produksjonsprøvene nedenfor og den tidligere isolerte kvalifikasjonen. [Gjeldende driftsstatus](../submission/delivery-readiness.md#unperformed-operational-checks--separate-chat).
 
 Grunnlag: aktiv produksjon7921eb5, senest lesende bekreftet ved start av denne økten. Eieren bruker Desktop/Brave/Wi-Fi og det syntetiske testutkastet fra O5. Bildenes klienthint viser Windows og Chromium/Brave-brandmajor156; full nettleserversjon, Windows-versjon og individuelle handlingstidspunkt er ikke oppgitt. Tidligere gyldig isolert evidens og bestått O5-flyt gjenbrukes.
 
@@ -39,3 +41,13 @@ Nettleserens engangshjelper mottok 200 på utkastlagringen og kastet en feil fø
 ## Cachekilde i Brave
 
 Fem eksisterende session-forespørsler viste hver status 200, transferSize 413, encodedBodySize 113 og tom deliveryType. [Resource Timing](https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-transfersize) gir her registrert nettverksoverføring for disse fem målingene. Dette avklarer den tidligere usynlige Size-kolonnen for dette utvalget. [Resultat](o3-practical-20261102/session-resource-timing.json). Negativ Origin-prøve står åpen.
+
+## Avsluttende produksjonsprøver
+
+| Kontroll | Eierens observasjon |
+|---|---|
+| Feil Origin med gyldig CSRF | Etter ny innlogging ble samme autentiserte `POST /private-api/drafts` med tomt JSON-objekt sendt fra lokal cURL, kopiert fra Brave. Vanlig Origin ga 422. Endring av bare Origin til `https://o3-origin.invalid` ga 403 med «Forespørselen ble avvist.» |
+| Fysisk nettbrudd på mobil før vellykket lagring | Etter at nettet kom tilbake og eieren kontrollerte tilkoblingen, sto inndataene fortsatt i utkastet. Versjonen økte først da eieren lagret. |
+| Fysisk Wi-Fi-brudd på PC rundt lagringskvitteringen | Brave hadde redusert nedlastingshastighet i testfanen. Lagringskallet viste POST 200 og appen skjulte privat innhold ved bruddet. Etter gjenopprettet tilgang viste appen «Lagring uavklart». Kvitteringsoppslaget på raden med operasjons-ID ga GET 200 med `state: "accepted"`. Utkastet kom tilbake intakt, endringen var bevart og versjonen økte med én. |
+
+PC-prøven dokumenterer kvitteringsoppslag etter fysisk brudd og én ny utkastversjon. Den tidligere simulerte prøven dokumenterer dessuten null nye POST etter kvitteringsoppslaget. Den eldre blokkeringsprøvens detaljer om operasjons-ID og kopiantall forblir uavklart for akkurat den kjøringen. Den isolerte kvalifikasjonen dekker 15 skrivefamilier og 75 Origin-/CSRF-avslag innen sitt dokumenterte omfang. Produksjonsbeviset gjelder de konkrete rutene og klientforløpene som er observert. O4 og O6 står åpne. [Isolert kvalifikasjon og kildegrunnlag](o3-o5-night-20261102.md#o3--autentisering-skriverettigheter-og-recovery).
