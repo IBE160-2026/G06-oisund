@@ -19,3 +19,7 @@ Grunnlag: aktiv produksjon7921eb5, senest lesende bekreftet ved start av denne �
 ## Eierpause
 
 Eieren bekrefter Cloudflare Access-innlogging som aktuell hindring og stopper økten for å sove. [Stoppunkt](o3-practical-20261102/owner-pause.json). Ingen ny innlogging eller skriveprøve skal kjøres nå. Siste endring fra det planlagte blokkeringstilfellet er ikke bekreftet lagret. Testregelen var sist rapportert aktiv; eieren er bedt om å slå av kun denne regelen, men utført opprydding er ikke bekreftet. Ingen agentstyrt UI-endring eller produksjonsendring er utført. Ved gjenopptakelse avklares regel/fane først, deretter Access-fornyelse med bevaring av originalfanens lokale forslag, session200og til slutt ny kontrollert skriveprøve. O3 er fortsatt åpen; tidligere beståtte delprøver beholdes. O4/O6 og fullført avgrenset O5 er uendret.
+
+## Gjenopptatt skriveprøve 3. november
+
+Utstedelsen fikk 200, og appen viste uavklart lagring etter forespørselen uten synlig HTTP-svar. Oppslaget ga 200 med `state: pending` og appen beholdt Test-06. Etter nytt forsøk bekreftet appen lagringen. Eieren rapporterte 200 på raden med utkast-ID og bekreftet Test-06 etter oppdatering. Nøyaktig blokkeringsstatus, HTTP-metode på 200-raden, sammenligning av operasjons-ID-er og antall kopier er uavklart. [Resultat](o3-practical-20261102/blocked-save-recovery.json). O3 står åpen.

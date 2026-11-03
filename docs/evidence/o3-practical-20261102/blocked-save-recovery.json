@@ -1,0 +1,18 @@
+{
+  "date": "2026-11-03",
+  "source": "Owner reports and screenshots, summarized without raw headers or identifiers",
+  "issuance_post_status": 200,
+  "initial_draft_request_http_response_visible": false,
+  "exact_block_status_verified": false,
+  "initial_app_status": "Lagring er uavklart",
+  "lookup_get_status": 200,
+  "lookup_state": "pending",
+  "proposal_retained": "Test-06",
+  "retry_app_confirmed": true,
+  "retry_draft_id_row_status": 200,
+  "retry_http_method_independently_verified": false,
+  "operation_id_match": null,
+  "persisted_after_refresh": true,
+  "duplicate_check": null,
+  "o3_complete": false
+}
