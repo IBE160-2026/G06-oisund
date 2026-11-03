@@ -1,0 +1,195 @@
+2026-11-03T21:47:04+01:00
+{
+  "commit": "7921eb54e4816aaab9368c3efd851bcf692f3823",
+  "archive_sha256": "d6ec0afb977ea7d3b24ec3198b499acc3f5247bb61645fd88358fe20443038c2"
+}
+7.0.0-42-generic
+2812a231-758d-4b5e-8241-d748b52d0991
+linux-image-7.0.0-42-generic	7.0.0-42.42
+linux-image-generic	7.0.0-42.42
+linux-modules-7.0.0-42-generic	7.0.0-42.42
+5c1ce5c46247b47a133cf80e7f852fd9d877c832c89848ab42b4db3092fae7aa  /boot/config-7.0.0-42-generic
+CONFIG_NET_UDP_TUNNEL=m
+CONFIG_NET_FOU=m
+CONFIG_NET_FOU_IP_TUNNELS=y
+CONFIG_TIPC=m
+CONFIG_TIPC_MEDIA_IB=y
+CONFIG_TIPC_MEDIA_UDP=y
+CONFIG_TIPC_CRYPTO=y
+CONFIG_TIPC_DIAG=m
+CONFIG_NVME_TARGET=m
+# CONFIG_NVME_TARGET_DEBUGFS is not set
+CONFIG_NVME_TARGET_PASSTHRU=y
+CONFIG_NVME_TARGET_LOOP=m
+CONFIG_NVME_TARGET_RDMA=m
+CONFIG_NVME_TARGET_FC=m
+# CONFIG_NVME_TARGET_FCLOOP is not set
+CONFIG_NVME_TARGET_TCP=m
+CONFIG_NVME_TARGET_TCP_TLS=y
+CONFIG_NVME_TARGET_AUTH=y
+CONFIG_NVME_TARGET_PCI_EPF=m
+CONFIG_STMMAC_ETH=m
+# CONFIG_STMMAC_SELFTESTS is not set
+CONFIG_STMMAC_PLATFORM=m
+CONFIG_STMMAC_LIBPCI=m
+CONFIG_STMMAC_PCI=m
+CONFIG_INFINIBAND=m
+CONFIG_INFINIBAND_USER_MAD=m
+CONFIG_INFINIBAND_USER_ACCESS=m
+CONFIG_INFINIBAND_USER_MEM=y
+CONFIG_INFINIBAND_ON_DEMAND_PAGING=y
+CONFIG_INFINIBAND_ADDR_TRANS=y
+CONFIG_INFINIBAND_ADDR_TRANS_CONFIGFS=y
+CONFIG_INFINIBAND_VIRT_DMA=y
+CONFIG_INFINIBAND_BNXT_RE=m
+CONFIG_INFINIBAND_BNG_RE=m
+CONFIG_INFINIBAND_CXGB4=m
+CONFIG_INFINIBAND_EFA=m
+CONFIG_INFINIBAND_ERDMA=m
+CONFIG_INFINIBAND_HFI1=m
+CONFIG_INFINIBAND_IONIC=m
+CONFIG_INFINIBAND_IRDMA=m
+CONFIG_INFINIBAND_MTHCA=m
+# CONFIG_INFINIBAND_MTHCA_DEBUG is not set
+CONFIG_INFINIBAND_OCRDMA=m
+CONFIG_INFINIBAND_QEDR=m
+CONFIG_INFINIBAND_USNIC=m
+CONFIG_INFINIBAND_VMWARE_PVRDMA=m
+CONFIG_INFINIBAND_RDMAVT=m
+CONFIG_RDMA_RXE=m
+CONFIG_INFINIBAND_IPOIB=m
+CONFIG_INFINIBAND_IPOIB_CM=y
+# CONFIG_INFINIBAND_IPOIB_DEBUG is not set
+CONFIG_INFINIBAND_SRP=m
+CONFIG_INFINIBAND_SRPT=m
+CONFIG_INFINIBAND_ISER=m
+CONFIG_INFINIBAND_ISERT=m
+CONFIG_INFINIBAND_RTRS=m
+CONFIG_INFINIBAND_RTRS_CLIENT=m
+CONFIG_INFINIBAND_RTRS_SERVER=m
+CONFIG_INFINIBAND_OPA_VNIC=m
+CONFIG_NFS_FS=m
+CONFIG_NFS_FSCACHE=y
+CONFIG_NFSD=m
+# CONFIG_NFSD_V2 is not set
+CONFIG_NFSD_V3_ACL=y
+CONFIG_NFSD_V4=y
+CONFIG_NFSD_PNFS=y
+CONFIG_NFSD_BLOCKLAYOUT=y
+CONFIG_NFSD_SCSILAYOUT=y
+CONFIG_NFSD_FLEXFILELAYOUT=y
+CONFIG_NFSD_V4_2_INTER_SSC=y
+CONFIG_NFSD_V4_SECURITY_LABEL=y
+# CONFIG_NFSD_LEGACY_CLIENT_TRACKING is not set
+CONFIG_NFSD_V4_DELEG_TIMESTAMPS=y
+# CONFIG_NFSD_V4_POSIX_ACLS is not set
+CONFIG_SUNRPC_XPRT_RDMA=m
+CONFIG_CEPH_FS=m
+CONFIG_CEPH_FSCACHE=y
+CONFIG_CEPH_FS_POSIX_ACL=y
+CONFIG_CEPH_FS_SECURITY_LABEL=y
+CONFIG_SMB_SERVER=m
+CONFIG_SMB_SERVER_SMBDIRECT=y
+CONFIG_SMB_SERVER_CHECK_CAP_NET_ADMIN=y
+CONFIG_SMB_SERVER_KERBEROS5=y
+SELECTED_LOADED_MODULES
+nvme
+nvme_core
+nvme_keyring
+nvme_auth
+NET_DRIVER_BINDINGS
+enp4s0 r8169
+wlp3s0 rtl8821ae
+SELECTED_FS_TYPES
+nodev	configfs
+configfs
+RDMA_DEVICES
+no-class
+SELECTED_SERVICE_STATES
+Id=nfs-server.service
+LoadState=not-found
+ActiveState=inactive
+
+Id=ksmbd.service
+LoadState=not-found
+ActiveState=inactive
+LOCAL_APT_POLICY
+linux-image-generic:
+  Installed: 7.0.0-42.42
+  Candidate: 7.0.0-42.42
+  Version table:
+ *** 7.0.0-42.42 500
+        500 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 Packages
+        500 http://security.ubuntu.com/ubuntu resolute-security/main amd64 Packages
+        100 /var/lib/dpkg/status
+     7.0.0-14.14 500
+        500 http://archive.ubuntu.com/ubuntu resolute/main amd64 Packages
+INSTALLED_CHANGELOG_MATCHES
+/usr/share/doc/linux-image-7.0.0-42-generic/changelog.Debian.gz
+/usr/share/doc/linux-modules-7.0.0-42-generic/changelog.Debian.gz
+    - net: gue: reject invalid REMCSUM offsets
+    - net: stmmac: clear stale buf->page after recycling on skb build failure
+    - RDMA/rxe: Fix integer overflow in mr_check_range() leading to OOB access
+    CVE-2026-90037
+    - NFSD: Prevent client use-after-free during close_lru reaping
+    - nvmet-auth: Synchronize timeout work during SQ teardown
+    - nfsd: RCU-protect cl_cb_session to fix use-after-free on session
+    - nfsd: convert nfsd_net boolean flags to unsigned long flags word
+    - NFSD: Prevent client use-after-free during delegation revoke
+    - ceph: bound copied dentry name length in NFS export get_name
+    - svcrdma: Reject inline replies that overflow the pull-up buffer
+    - nvmet-auth: zero the AUTH_RECEIVE response buffer
+    - nvmet-auth: reject short AUTH_RECEIVE buffers
+    - nvmet-auth: validate reply message payload bounds against transfer
+2026-11-03T21:47:18+01:00
+Ubuntu 7.0.0-42.42-generic 7.0.14
+2812a231-758d-4b5e-8241-d748b52d0991
+MODULE_PRESENCE
+nfsd absent
+svcrdma absent
+rpcrdma absent
+ceph absent
+ksmbd absent
+rdma_rxe absent
+stmmac absent
+stmmac_pci absent
+stmmac_platform absent
+fou absent
+fou6 absent
+nvmet absent
+nvmet_tcp absent
+nvmet_rdma absent
+nvmet_fc absent
+nvmet_loop absent
+tipc absent
+PACKAGE_CHANGELOG
+linux (7.0.0-42.42) resolute; urgency=medium
+4b7354cde1a40f219591bb6fbe81618086d1cb54763da8fc3a4f5d266a62b68a  /usr/share/doc/linux-modules-7.0.0-42-generic/changelog.Debian.gz
+linux (7.0.0-41.41) resolute; urgency=medium
+    - net: gue: reject invalid REMCSUM offsets
+linux (7.0.0-41.41) resolute; urgency=medium
+    - net: stmmac: clear stale buf->page after recycling on skb build failure
+linux (7.0.0-41.41) resolute; urgency=medium
+    - RDMA/rxe: Fix integer overflow in mr_check_range() leading to OOB access
+linux (7.0.0-39.39) resolute; urgency=medium
+    CVE-2026-90037
+linux (7.0.0-39.39) resolute; urgency=medium
+    - NFSD: Prevent client use-after-free during close_lru reaping
+linux (7.0.0-39.39) resolute; urgency=medium
+    - nvmet-auth: Synchronize timeout work during SQ teardown
+linux (7.0.0-39.39) resolute; urgency=medium
+    - nfsd: RCU-protect cl_cb_session to fix use-after-free on session
+linux (7.0.0-39.39) resolute; urgency=medium
+    - nfsd: convert nfsd_net boolean flags to unsigned long flags word
+linux (7.0.0-39.39) resolute; urgency=medium
+    - NFSD: Prevent client use-after-free during delegation revoke
+linux (7.0.0-39.39) resolute; urgency=medium
+    - ceph: bound copied dentry name length in NFS export get_name
+linux (7.0.0-39.39) resolute; urgency=medium
+    - svcrdma: Reject inline replies that overflow the pull-up buffer
+linux (7.0.0-39.39) resolute; urgency=medium
+    - nvmet-auth: zero the AUTH_RECEIVE response buffer
+linux (7.0.0-38.38) resolute; urgency=medium
+    - nvmet-auth: reject short AUTH_RECEIVE buffers
+linux (7.0.0-31.31) resolute; urgency=medium
+    - nvmet-auth: validate reply message payload bounds against transfer
