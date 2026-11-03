@@ -31,3 +31,7 @@ Eieren bekrefter at DevTools-testregelen er fjernet. Konsollprøven med same-ori
 ## Fysisk Wi-Fi-prøve 3. november
 
 Brukeren slo av Wi-Fi på PC-en. Etter lagringsklikk skjulte appen privat innhold, og session-forespørselen viste intet HTTP-svar. Da Wi-Fi kom tilbake, ga session 200, privat innhold kom tilbake og endringen var synlig som ulagret. Etter én lagring fikk både POST og GET 200. Appen bekreftet lagringen, og endringen var bevart etter ny innlasting. [Resultat](o3-practical-20261102/physical-wifi-recovery.json). O3 står åpen for blant annet tapt svar etter serverlagring og negativ Origin.
+
+## Simulert tapt svar etter serverlagring
+
+Nettleserens engangshjelper mottok 200 på utkastlagringen og kastet en feil før appen fikk svaret. Eieren så uavklart lagring. Ved Kontroller lagringsforsøket ga oppslaget 200 og state accepted. Appen viste «Lagret. Versjon 10.». Eieren observerte to GET-kall og null POST etter oppslagsklikket. [Resultat](o3-practical-20261102/lost-response-after-save.json). Gjenåpning etter oppslaget avventes. O3 står åpen.

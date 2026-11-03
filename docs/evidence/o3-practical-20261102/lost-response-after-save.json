@@ -1,0 +1,14 @@
+{
+  "date": "2026-11-03",
+  "source": "Owner observations in Brave DevTools and app",
+  "simulation": "One-shot fetch wrapper received the server HTTP response and threw before exposing it to the app",
+  "server_post_status": 200,
+  "initial_app_message": "Lagring uavklart",
+  "receipt_get_status": 200,
+  "receipt_state": "accepted",
+  "final_app_message": "Lagret. Versjon 10.",
+  "observed_get_count_after_lookup": 2,
+  "observed_post_count_after_lookup": 0,
+  "reopen_after_lookup": null,
+  "o3_complete": false
+}
