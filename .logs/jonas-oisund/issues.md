@@ -1,6 +1,6 @@
 # Åpne punkter
 
-- [ ] 2026-11-03 [O4 nettverkskontroll](../../docs/evidence/o4-readonly-20261103.md) — Vertsregler og UDP-prosesseiere er dokumentert. Kontroller ruterens NAT, portvideresending og IPv6-policy, og mål fra autorisert eksternt nett mot bekreftet egen adresse.
+- [ ] 2026-11-03 [O4 nettverkskontroll](../../docs/evidence/o4-readonly-20261103.md) — Vertsregler og UDP-prosesseiere er dokumentert. Ruteradministratoren rapporterer ingen synlig portvideresending, aktiv UPnP-regel eller DMZ til serveren. WAN-adressetype, ruterens IPv6-policy og autorisert ekstern måling mot bekreftet egen adresse gjenstår.
 
 - [x] 2026-11-02 [O3 ekstern oppfølging](../../docs/evidence/o3-practical-20261102.md) — Origin, mobil og fysisk Wi-Fi-brudd på PC med kvitteringsoppslag bestod innen dokumentert omfang. O4 og O6 står åpne. (løst 2026-11-03)
 
