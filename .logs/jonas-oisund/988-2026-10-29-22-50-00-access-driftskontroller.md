@@ -291,3 +291,17 @@ Eierens stoppmelding 2026-11-02 kl. 22:10: Cloudflare Access ber faktisk om ny i
 ### Åpne punkter
 - O3: faktisk autentisert ekstern cookie/cache/Origin-CSRF-/feil-/skrive-/recoverymatrise og fysisk klientnettprøve gjenstår. Ingen test markeres bestått før faktisk observert resultat og versjons-/enhetsbinding foreligger.
 - O4 og O6 forblir uendret åpne; O5 er fortsatt fullført innen dokumentert omfang.
+
+## 2026-11-03 kl. 20:14 — Jonas Øisund
+
+### Oppgave
+Gjenoppta praktisk O3-skriveprøve etter Access-pausen.
+
+### Plan
+Kontrollere utstedelse, oppslag og varig gjenlagring i syntetisk utkast.
+
+### Resultat
+9bfa809 registrerer 200 ved utstedelse, uavklart lagring, oppslag 200/pending, bevart forslag og bekreftet Test-06 etter gjenlagring og oppdatering. DevTools-veiledningen var upresis om Name og Payload.
+
+### Åpne punkter
+O3 er åpen. Eksakt blokkeringsstatus, POST-metode på 200-raden, ID-samsvar og kopiantall er uavklart.
