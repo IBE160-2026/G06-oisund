@@ -401,3 +401,21 @@ Leveranseregisteret viser O3 fullført innen dokumentert omfang, O4 administrati
 
 ### Åpne punkter
 Ingen nye O3–O5-punkter. Gjeldende bevisgrenser står i leveranseregisteret.
+
+## 2026-11-04 kl. 00:21 — Jonas Øisund · vedlikeholdsrelease v1.0.1
+
+### Oppgave
+
+Samle ferdig O3–O6-arbeid på main, sikre historikken, rydde ferdige referanser og publisere v1.0.1.
+
+### Plan
+
+Verifiser produksjonsversjon og lokale arkiver. Integrer relevant historisk evidens og de to loggcommittene. Kontroller releasegrunnlaget mot deployet kode før push og publisering.
+
+### Resultat
+
+**7fad9ae** integrerer begge loggcommittene med historikk. **1f0a74a** samler de historiske metodene, utvalgt normalisert evidens og status. Full historikk fra 134849a ligger i den verifiserte bundlen. Alle 144 råfiler i separat ZIP er kontrollert ved gjenlesing. Syv metoder bestod syntakskontroll. Rapportlenker, JSON, advisory-ID-er og høysignalhemmelighetssøk er kontrollert. Produksjon 7921eb5 ble verifisert lesende. App-, container- og deploygrunnlaget i releasekandidaten er Git-identisk med produksjonscommiten, så den eksisterende runtimeevidensen beholdes. [Vedlikeholdsrapport](../../docs/evidence/v1.0.1-maintenance-20261104.md).
+
+### Åpne punkter
+
+Navngitte O6-rester følges videre med dokumenterte barrierer, midlertidig aksept, eier og nyvurderingshendelse. Firmware er utsatt. Passordarbeidet har eget releaseomfang.
