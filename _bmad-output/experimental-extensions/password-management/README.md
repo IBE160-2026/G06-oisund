@@ -1,6 +1,10 @@
 # Password management — experimental extension
 
-2026-10-31. **Isolated implementation authorized and in progress; owner qualification and release remain pending.** No version number is allocated. V1, including Ubuntu integration, remains the accepted baseline.
+**2026-11-04: v1.1.0 candidate prepared on the existing password branch with v1.0.1 maintenance integrated.** Independent checks/review are complete; owner qualification and restored-credential policy/production recovery tooling remain open. Start with the [current candidate report](implementation/v110-candidate.md). No release or deployment performed.
+
+## Historical planning baseline — 2026-10-31
+
+At this baseline, isolated implementation was authorized, no version had been allocated, and V1 including Ubuntu integration was accepted. The current candidate report supersedes historical status where stated.
 
 Start with [SPEC](specs/spec-password-management/SPEC.md), then its companions and the [epic/story package](planning/epics.md). [Implementation plan](specs/spec-password-management/implementation-plan.md) records the owner's Q1–Q4 decisions and remaining operational details. [Qualification](specs/spec-password-management/qualification.md) separates future tests from checks actually performed.
 
@@ -31,3 +35,7 @@ Implementation evidence is tracked under [implementation](implementation/status.
 ## Combined qualification
 
 [Final readiness](implementation/final-readiness.md) and [PM-A1–20 executed scenario evidence](implementation/s4-evidence.md) now collect independent synthetic S4 gateway/migration/restore results and the reviewed S1–S3 evidence. Mandatory owner/device/operational gates remain **utsatt – krever eier**; no story or epic is done and no release is approved. Older planning-only prose above is historical, superseded only by the implementation authorization already recorded.
+
+## v1.1.0 integration update — 2026-11-04
+
+Maintenance main1501104 is integrated at merge b7af6b5. See the [current candidate qualification and concrete restore gap](implementation/v110-candidate.md). Historical baseline/test statements above retain their original scope. Owner-dependent stories remain open; technical existing-deployment restore/invalidation tooling also remains a distinct release prerequisite. Full O6 closure is not a blanket gate. No release or production action is authorized by this update.

@@ -2,6 +2,9 @@
 stepsCompleted: [1, 2, 3, 4]
 status: in-progress
 implementationAuthorized: true
+candidateTarget: v1.1.0
+integrationMain: 15011042b1fe093becbe68177e6396e456b1f35f
+integrationMerge: b7af6b5ebbd1118e3c85fa164879ad68c4f86b4f
 baseline: 5cee9e03d03d2c9c165c7f8fec64aa3e146959ab
 inputDocuments:
   - ../specs/spec-password-management/SPEC.md
@@ -219,3 +222,7 @@ So that I can decide on a separate release without risking existing accounts or 
 **Completion evidence:** reproducible combined report, runbook, migration/rollback/restore and actual UX observations. All unresolved release blockers remain explicit; approval to execute a future release is distinct from the epic's technical completion.
 
 Independent S4 evidence:12 phases,20 database/log scans and three negative controls passed in final parent run;15 review findings triaged and bounded patches verified. Mixed operator-walkthrough/physical tasks remain unchecked. Production restore qualification and owner controls are still **utsatt – krever eier**; epic/story not complete.
+
+## v1.1.0 integration update — 2026-11-04
+
+Maintenance main1501104 is integrated at merge b7af6b5. See the [current candidate qualification and concrete restore gap](../implementation/v110-candidate.md). Historical baseline/test statements above retain their original scope. Owner-dependent stories remain open; technical existing-deployment restore/invalidation tooling also remains a distinct release prerequisite. Full O6 closure is not a blanket gate. No release or production action is authorized by this update.

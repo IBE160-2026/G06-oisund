@@ -1,5 +1,11 @@
 # PM-E1 final readiness
 
+**Current — 2026-11-04:** v1.1.0 candidate incorporates maintenance main1501104 through merge b7af6b5. See [candidate qualification](v110-candidate.md): final103 backend,35 focused browser,33 gate,27 helper tests and13 combined phases passed after three-layer review; exact evidence and limits are linked there. No release/deployment is approved. Remaining gates are the explicit restored-credential policy and scoped production restore/invalidation authorization, plus actual device, SSH/full helper chain, identity/handoff and owner acceptance.
+
+## Historical pre-integration assessment
+
+The following baseline/version/merge and test statements describe the earlier S1–S4 work; current candidate results and prerequisites supersede them only where explicitly recorded.
+
 **Not ready for live use or release. PM-E1 and S1–S4 remain in review / owner pending, not complete.** Independent synthetic qualification is recorded in [S4 evidence](s4-evidence.md) and its exact runtime manifest. No version, release/tag, merge, deployment or production account operation was performed. Parent three-layer final review and postpatch verification are complete;15 findings were individually triaged.
 
 The implemented scope is own-password change and operator-issued, one-use recovery for existing accounts, including the operator's own app account without app login. Both require a new login on every device. Retained account IDs, ownership, content, deadlines and receipts survive. No email/public signup/admin dashboard/profile expansion or automatic-notices integration is included. Accepted V1 remains separate.
@@ -26,3 +32,7 @@ Synthetic evidence covers real gateway/API/PostgreSQL journeys, canonical cookie
 7. Recheck that stale sessions/proofs and superseded passwords fail, same-account new login sees the expected retained data, B remains isolated and fresh proofs obey normal limits. Reopen only after verified state and explicit authorization; report any lost post-backup business records truthfully.
 
 The isolated S4 maintenance process proves feasibility with synthetic data only. It is not a deployed administrative interface or an approved production restore command. Real unsupported recovery tooling, external TLS/IdP/SSH controls and personal acceptance remain material blockers even when every independent synthetic check passes.
+
+## v1.1.0 integration update — 2026-11-04
+
+Maintenance main1501104 is integrated at merge b7af6b5. See the [current candidate qualification and concrete restore gap](v110-candidate.md). Historical baseline/test statements above retain their original scope. Owner-dependent stories remain open; technical existing-deployment restore/invalidation tooling also remains a distinct release prerequisite. Full O6 closure is not a blanket gate. No release or production action is authorized by this update.

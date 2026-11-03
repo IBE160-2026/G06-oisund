@@ -1,5 +1,11 @@
 # PM-E1 implementation status
 
+**Current — 2026-11-04:** v1.1.0 candidate incorporates maintenance main1501104 through merge b7af6b5. See [candidate qualification](v110-candidate.md): final103 backend,35 focused browser,33 gate,27 helper tests and13 combined phases passed after three-layer review; exact evidence and limits are linked there. No release/deployment is approved. Remaining gates are the explicit restored-credential policy and scoped production restore/invalidation authorization, plus actual device, SSH/full helper chain, identity/handoff and owner acceptance.
+
+## Historical pre-integration assessment
+
+The following baseline/version/merge and test statements describe the earlier S1–S4 work; current candidate results and prerequisites supersede them only where explicitly recorded.
+
 2026-10-31. Isolated implementation authorized; no release authorization. BMAD Build rendered once using extension-local configuration. Main baseline unchanged at `5cee9e03d03d2c9c165c7f8fec64aa3e146959ab`; implementation starts from `b352640c3cfb80b962db6056116e1c747cfb760a`.
 
 | Story | Technical work | Mandatory owner qualification | Overall |
@@ -49,3 +55,7 @@ S1 evidence: [dispatch/review/verification](spec-pm-e1-s1.md), [render/test map]
 ## S4 qualification and future operational gates
 
 The final synthetic gateway/API/PostgreSQL run passed on base1c4ac7ce2621cb7ec4862231bfa10285bb31c255; exact source fingerprints, image IDs and per-table preservation evidence are in [runtime manifest](evidence/s4/runtime.json). See [scenario evidence](s4-evidence.md) and [final readiness](final-readiness.md). Parent three-layer review and postpatch verification close independent combined technical work, not owner qualification or story completion. Final runtime `ibe160-pm-s4-e57c2ff0d437` used loopback56762 and is stopped; synthetic volumes and ignored scratch are retained. Final-control runtime was not operated. The task-owned password-tests runtime is stopped after all testing.
+
+## v1.1.0 integration update — 2026-11-04
+
+Maintenance main1501104 is integrated at merge b7af6b5. See the [current candidate qualification and concrete restore gap](v110-candidate.md). Historical baseline/test statements above retain their original scope. Owner-dependent stories remain open; technical existing-deployment restore/invalidation tooling also remains a distinct release prerequisite. Full O6 closure is not a blanket gate. No release or production action is authorized by this update.

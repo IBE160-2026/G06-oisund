@@ -188,9 +188,21 @@ class OperationsTests(unittest.TestCase):
                 self.assertNotIn('shell', kw)
                 self.assertNotIn('capture_output', kw)
 
+    def test_recovery_hyphen_username_is_positional(self):
+        path = self.recovery_release()
+        for action in ('recovery-issue', 'recovery-revoke'):
+            for username in ('-synthetic-owner', '--help'):
+                with self.subTest(action=action, username=username), self.terminal_mocks(), patch.object(
+                        ops.subprocess, 'run') as run, patch.object(sys, 'argv', ['ctl', action, username]):
+                    ops.main()
+                    self.assertEqual(run.call_args.args[0], ['docker', 'compose', '--project-name', 'bussassistent',
+                        '--env-file', str(ops.CONFIG), '-f', str(path / 'deploy/ubuntu/compose.yaml'),
+                        'exec', 'private-api', 'python', '-m', 'app.manage', action, username])
+                    self.assertNotIn('shell', run.call_args.kwargs)
+
     def test_recovery_invalid_args_fail_before_docker(self):
         for argv in (['ctl', 'recovery-issue'], ['ctl', 'recovery-revoke', 'synthetic-a', '--flag'],
-                     *[['ctl', 'recovery-issue', value] for value in ('', '  ', '--help', 'a'*101,
+                     *[['ctl', 'recovery-issue', value] for value in ('', '  ', 'a'*101,
                          'synthetic-\x1b[2J', 'synthetic-\n', 'synthetic-\u202e')]):
             with self.subTest(argv=argv), patch.object(sys, 'argv', argv), patch.object(ops, 'run') as run:
                 with self.assertRaises(ValueError):

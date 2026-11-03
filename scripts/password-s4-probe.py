@@ -247,7 +247,14 @@ def scan_db(logs=b''):
 if __name__=='__main__':
     try:
         guard();phase=sys.argv[1]
-        if phase=='seed':seed()
+        if phase=='role':
+            with database() as conn:
+                role=conn.execute("SELECT current_user AS name,rolsuper,rolcreatedb,rolcreaterole,rolreplication,rolbypassrls FROM pg_roles WHERE rolname=current_user").fetchone()
+                check(role['name']=='private_work' and not any(role[k] for k in ('rolsuper','rolcreatedb','rolcreaterole','rolreplication','rolbypassrls')),'least privileged application role')
+                check(not conn.execute("SELECT 1 FROM pg_auth_members WHERE member=(SELECT oid FROM pg_roles WHERE rolname=current_user)").fetchone(),'application role has no memberships')
+            check(os.getuid()==10001,'nonroot probe and CLI')
+            record('Runtime private_work NOSUPERUSER NOCREATEDB NOCREATEROLE NOREPLICATION NOBYPASSRLS no memberships and UID10001')
+        elif phase=='seed':seed()
         elif phase=='pre-schema':pre_schema()
         elif phase=='upgrade':upgrade()
         elif phase=='journeys':journeys()

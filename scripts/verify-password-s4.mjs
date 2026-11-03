@@ -1,11 +1,14 @@
-// Isolated synthetic qualification. Run from repository root with Node 24.
+// Isolated synthetic qualification. Qualified on Windows Docker Desktop with Node 24.
+// Native Linux needs a separately reviewed UID10001-writable task state mount;
+// never make the secret-bearing scratch directory world-writable.
 import {spawnSync} from 'node:child_process';
 import {randomBytes, createHash} from 'node:crypto';
 import {mkdirSync, writeFileSync, readFileSync, readdirSync} from 'node:fs';
 import {resolve} from 'node:path';
 import net from 'node:net';
+if(process.platform!=='win32') throw new Error('S4 runner qualified only on Windows Docker Desktop; native state mount ownership is not qualified');
 const root=process.cwd(), id='ibe160-pm-s4-'+randomBytes(6).toString('hex');
-const temp=resolve(root,'tmp',id), prior='5cee9e03d03d2c9c165c7f8fec64aa3e146959ab';
+const temp=resolve(root,'tmp',id), prior='15011042b1fe093becbe68177e6396e456b1f35f';
 mkdirSync(temp,{recursive:true}); mkdirSync(resolve(temp,'prior'));
 function run(cmd,args,options={}) {
   const r=spawnSync(cmd,args,{cwd:root,encoding:null,maxBuffer:32*1024*1024,...options});
@@ -16,6 +19,7 @@ function run(cmd,args,options={}) {
   }
   return r.stdout;
 }
+writeFileSync(resolve(temp,'bootstrap-password'),randomBytes(32).toString('hex'),{flag:'wx'});
 writeFileSync(resolve(temp,'password'),randomBytes(32).toString('hex'),{flag:'wx'});
 const server=net.createServer();
 await new Promise((ok,bad)=>{server.once('error',bad);server.listen(0,'127.0.0.1',ok)});
@@ -23,19 +27,26 @@ const port=server.address().port; await new Promise(ok=>server.close(ok));
 writeFileSync(resolve(temp,'prior.tar'),run('git',['archive',prior,'backend']));
 run('tar',['-xf',resolve(temp,'prior.tar'),'-C',resolve(temp,'prior')]);
 const slash=p=>p.replaceAll('\\','/');
-// Compose the existing pinned runtime and test dependency recipes, without
-// depending on the historical locally prepared base tag in Dockerfile.test.
-const gateDockerfile=readFileSync(resolve(root,'deploy/tablet/access_gate/Dockerfile'),'utf8')+'\n'+
-  readFileSync(resolve(root,'deploy/tablet/access_gate/Dockerfile.test'),'utf8').split(/\r?\n/).filter(line=>!line.startsWith('FROM ')).join('\n');
 const compose=`services:
   private-db:
-    image: postgres:17-alpine@sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24
+    image: ${id}-postgres
+    build:
+      context: ${slash(root)}
+      dockerfile: deploy/ubuntu/Dockerfile.postgres
+    user: postgres
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    pids_limit: 128
+    tmpfs: [/tmp:mode=1777, /var/run/postgresql:mode=1777]
     environment:
       POSTGRES_DB: private_work
-      POSTGRES_USER: private_work
-      POSTGRES_PASSWORD_FILE: /run/secrets/db_password
-    secrets: [db_password]
-    volumes: [data:/var/lib/postgresql/data]
+      POSTGRES_USER: tablet_bootstrap
+      POSTGRES_PASSWORD_FILE: /run/secrets/bootstrap_password
+    secrets: [bootstrap_password, tablet_postgres_password]
+    volumes:
+      - data:/var/lib/postgresql/data
+      - ${slash(resolve(root,"deploy/tablet/init-private-role.sql"))}:/docker-entrypoint-initdb.d/010-private-role.sql:ro
     healthcheck:
       test: [CMD, pg_isready, -U, private_work, -d, private_work]
       interval: 2s
@@ -43,6 +54,12 @@ const compose=`services:
   private-api:
     image: ${id}-api
     build: ${slash(resolve(root,'backend'))}
+    user: '10001:10001'
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    pids_limit: 128
+    tmpfs: ['/tmp:size=128m,mode=1777']
     environment: &environment
       APP_MODE: private-local
       PRIVATE_DATABASE_URL: postgresql://private_work@private-db/private_work
@@ -64,10 +81,12 @@ const compose=`services:
       private-db: {condition: service_healthy}
   access-gate:
     image: ${id}-gate
-    build:
-      context: ${slash(root)}
-      dockerfile_inline: |
-${gateDockerfile.split(/\r?\n/).map(line=>'        '+line).join('\n')}
+    user: '10001:10001'
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    pids_limit: 32
+    tmpfs: ['/tmp:size=1m,mode=1777']
     command: [python, /probe/password-s4-gate.py]
     environment: {PYTHONPATH: /gate-test}
     volumes:
@@ -80,14 +99,24 @@ ${gateDockerfile.split(/\r?\n/).map(line=>'        '+line).join('\n')}
       dockerfile: deploy/tablet/Dockerfile
     environment: {TABLET_HOST: bus.owner-domain.no}
     ports: ['127.0.0.1:${port}:8080']
+    user: '101:101'
     read_only: true
-    tmpfs: ['/tmp:mode=1777']
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    pids_limit: 64
+    tmpfs: ['/tmp:size=32m,mode=1777']
     depends_on:
       private-api: {condition: service_healthy}
       access-gate: {condition: service_started}
   prior:
     image: ${id}-api
     profiles: [compatibility]
+    user: '10001:10001'
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    pids_limit: 128
+    tmpfs: ['/tmp:size=128m,mode=1777']
     environment: *environment
     secrets: [db_password]
     volumes:
@@ -100,6 +129,10 @@ networks:
 volumes:
   data:
 secrets:
+  bootstrap_password:
+    file: ${slash(resolve(temp,'bootstrap-password'))}
+  tablet_postgres_password:
+    file: ${slash(resolve(temp,'password'))}
   db_password:
     file: ${slash(resolve(temp,'password'))}
 `;
@@ -113,7 +146,7 @@ function fingerprint(path) {
     else fingerprints[name]=createHash('sha256').update(readFileSync(resolve(root,name))).digest('hex');
   }
 }
-for(const path of ['backend','frontend/src','deploy/tablet'])fingerprint(path);
+for(const path of ['backend','frontend/src','deploy/tablet','deploy/ubuntu'])fingerprint(path);
 for(const name of ['scripts/verify-password-s4.mjs','scripts/password-s4-probe.py','scripts/password-s4-gate.py','frontend/package-lock.json','frontend/package.json','frontend/tsconfig.json','.dockerignore'])fingerprints[name]=createHash('sha256').update(readFileSync(resolve(root,name))).digest('hex');
 const dc=(...args)=>run('docker',['compose','-p',id,'-f',file,...args]);
 const probe=phase=>{const out=dc('exec','-T','private-api','python','/probe/password-s4-probe.py',phase);process.stdout.write(out)};
@@ -121,7 +154,19 @@ const dump=name=>writeFileSync(resolve(temp,name+'.dump'),dc('exec','-T','privat
 const restore=name=>run('docker',['compose','-p',id,'-f',file,'exec','-T','private-db','pg_restore','-U','private_work','-d','private_work','--clean','--if-exists','--exit-on-error'],{input:readFileSync(resolve(temp,name+'.dump'))});
 console.log(`S4 project ${id}; loopback ${port}; ignored artifacts ${temp}`);
 try {
+  run('docker',['build','-t',id+'-gate-runtime','-f','deploy/tablet/access_gate/Dockerfile','.']);
+  run('docker',['build','-t',id+'-gate','--build-arg','GATE_IMAGE='+id+'-gate-runtime','-f','deploy/tablet/access_gate/Dockerfile.test','.']);
+  const gateBuild={runtimeImage:run('docker',['image','inspect','--format','{{.Id}}',id+'-gate-runtime']).toString().trim(),runtimeTag:id+'-gate-runtime',testedOverlayImage:run('docker',['image','inspect','--format','{{.Id}}',id+'-gate']).toString().trim(),testDockerfile:'deploy/tablet/access_gate/Dockerfile.test',buildArg:'GATE_IMAGE='+id+'-gate-runtime'};
   dc('up','-d','--build','--wait','--wait-timeout','120');
+  const runtime={};
+  for(const [service,user] of Object.entries({'private-db':'postgres','private-api':'10001:10001','gateway':'101:101','access-gate':'10001:10001'})) {
+    const info=JSON.parse(run('docker',['inspect',dc('ps','-q',service).toString().trim()]).toString())[0];
+    const h=info.HostConfig;
+    const expectedPids={'private-db':128,'private-api':128,'gateway':64,'access-gate':32}[service];
+    if(h.PidsLimit!==expectedPids || info.Config.User!==user || !h.ReadonlyRootfs || !h.CapDrop.includes('ALL') || !h.SecurityOpt.includes('no-new-privileges:true') || h.Privileged) throw new Error('Runtime restriction assertion failed');
+    runtime[service]={user:info.Config.User,readOnly:h.ReadonlyRootfs,capDrop:h.CapDrop,securityOpt:h.SecurityOpt,pidsLimit:h.PidsLimit,privileged:h.Privileged,image:info.Image};
+  }
+  probe('role');
   probe('seed');
   dc('stop','gateway','private-api');
   process.stdout.write(dc('run','--rm','--no-deps','private-api','python','/probe/password-s4-probe.py','pre-schema'));
@@ -146,7 +191,7 @@ try {
   }
   const evidence={project:id,port,source:run('git',['rev-parse','HEAD']).toString().trim(),prior,
     docker:run('docker',['version','--format','{{.Server.Version}}']).toString().trim(),node:process.version,
-    fingerprints,images:JSON.parse(dc('images','--format','json').toString()),
+    fingerprints,runtime,gateBuild,images:JSON.parse(dc('images','--format','json').toString()),
     results:JSON.parse(readFileSync(resolve(temp,'results.json')))};
   writeFileSync(resolve(temp,'evidence.json'),JSON.stringify(evidence,null,2));
   console.log('PASS S4 combined qualification; sanitized evidence.json saved; synthetic volumes retained.');

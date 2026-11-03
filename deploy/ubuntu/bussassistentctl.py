@@ -50,7 +50,7 @@ def recovery(action, username):
             or any(unicodedata.category(c).startswith('C') for c in username)):
         raise ValueError('Invalid recovery command or username')
     username = username.strip().casefold()
-    if not 1 <= len(username) <= 100 or username.startswith('-'):
+    if not 1 <= len(username) <= 100:
         raise ValueError('Invalid recovery username')
     if not all(os.isatty(fd) for fd in (0, 1, 2)):
         raise ValueError('Recovery requires an interactive terminal without redirection')
