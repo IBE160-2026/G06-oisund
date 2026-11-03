@@ -303,6 +303,8 @@ Kontrollere utstedelse, oppslag og varig gjenlagring i syntetisk utkast.
 ### Resultat
 9bfa809 registrerer 200 ved utstedelse, uavklart lagring, oppslag 200/pending, bevart forslag og bekreftet Test-06 etter gjenlagring og oppdatering. DevTools-veiledningen var upresis om Name og Payload.
 
+Lesende O6-status 3. november er dokumentert i **babab61**. Produksjon 7921eb5 og vertspakkene ble avlest på eksisterende SSH. Debian-versjoner bygger på pakkelagene fra dokumentert utrulling. Ubuntu tilbyr fortsatt kernel 42.42 og angir rettelse under arbeid i 43.43 for CVE-2026-98805. TIPC-modulen var ikke lastet. De sju Debian-restfunnene står fortsatt åpne. Direkte Ubuntu-oppslag for de kritiske kernel-CVE-ene ga 404, og TIPC-statusen ble verifisert separat via nettlesekilden. Vedlikeholdet og sluttkontrollene er ferdige. Separate vedlikeholdspunkter bevarer sporbarhet og midlertidig aksept, mens samlet O6 står åpen etter gjeldende kriterier. [Rapport](../../docs/evidence/o6-status-20261103.md).
+
 ### Åpne punkter
 O3 er åpen. Eksakt blokkeringsstatus, POST-metode på 200-raden, ID-samsvar og kopiantall er uavklart.
 
