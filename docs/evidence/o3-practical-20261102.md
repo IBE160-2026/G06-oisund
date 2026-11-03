@@ -23,3 +23,7 @@ Eieren bekrefter Cloudflare Access-innlogging som aktuell hindring og stopper ø
 ## Gjenopptatt skriveprøve 3. november
 
 Utstedelsen fikk 200, og appen viste uavklart lagring etter forespørselen uten synlig HTTP-svar. Oppslaget ga 200 med `state: pending` og appen beholdt Test-06. Etter nytt forsøk bekreftet appen lagringen. Eieren rapporterte 200 på raden med utkast-ID og bekreftet Test-06 etter oppdatering. Nøyaktig blokkeringsstatus, HTTP-metode på 200-raden, sammenligning av operasjons-ID-er og antall kopier er uavklart. [Resultat](o3-practical-20261102/blocked-save-recovery.json). O3 står åpen.
+
+## Origin-prøve i Brave
+
+Eieren bekrefter at DevTools-testregelen er fjernet. Konsollprøven med same-origin og no-referrer sendte ifølge Network Origin https://app.bussassistent.com og ga 422 med Cache-Control no-store. Forsøket fremkalte ikke Origin: null. Resultatet dokumenterer cacheheaderen på dette valideringssvaret. Negativ Origin-prøve står åpen.
