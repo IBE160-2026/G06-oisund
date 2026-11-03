@@ -315,3 +315,13 @@ Fortsettelse 3. november. 82d322f registrerer simulert tapt svar etter serversta
 Eier presiserer at bare første GET viste accepted og bekrefter bevart endring etter gjenåpning. Neste lesende cachekontroll bruker Resource Timing for appens eksisterende session-forespørsler.
 
 Resource Timing i Brave avklarte cachekilden for fem session-kall. Samtlige viste 200, transferSize 413, encodedBodySize 113 og tom deliveryType. Skjermbildet er oppsummert uten råbilde i Git. Negativ Origin-prøve står åpen.
+
+### Formell lukking av O3
+
+**Oppgave.** Før inn de avsluttende prøvene, lukk O3 og push oppdateringen.
+
+**Plan.** Samle eierens produksjonsobservasjoner, koble dem til isolert kvalifikasjon og oppdatere driftsstatus og åpne punkter.
+
+**Resultat.** e13cbb3 dokumenterer feil Origin med gyldig CSRF, fysisk nettbrudd på mobil og fysisk Wi-Fi-brudd på PC med GET 200/accepted og én ny utkastversjon. O3 er lukket innen dokumentert omfang, og O3-stoppunktet er markert løst i issues.md.
+
+**Åpne punkter.** O4 og O6 står åpne og følges opp under eksisterende punkter i issues.md.
