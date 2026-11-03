@@ -325,3 +325,17 @@ Resource Timing i Brave avklarte cachekilden for fem session-kall. Samtlige vist
 **Resultat.** e13cbb3 dokumenterer feil Origin med gyldig CSRF, fysisk nettbrudd på mobil og fysisk Wi-Fi-brudd på PC med GET 200/accepted og én ny utkastversjon. O3 er lukket innen dokumentert omfang, og O3-stoppunktet er markert løst i issues.md.
 
 **Åpne punkter.** O4 og O6 står åpne og følges opp under eksisterende punkter i issues.md.
+
+## 2026-11-03 kl. 21:43 — Jonas Øisund
+
+### Oppgave
+Utfør gjenværende lesende O4-kontroller og oppdater evidens og status.
+
+### Plan
+Kontroller origin/main og faktisk release. Gjenbruk LAN-beviset og les bindinger, ruter og brannmurstatus. Skill offentlig Cloudflare-rute fra direkte origin.
+
+### Resultat
+2a6e12f dokumenterer produksjon 7921eb5, lokale appbindinger, origin-avslag uten autentisering og Access 302 over IPv4. Fire wildcard UDP-sokler krever administratorlesing for sikker attribusjon.
+
+### Åpne punkter
+O4 avventer effektive brannmurregler, ruterkonfigurasjon og uavhengig WAN-bevis mot bekreftet egen adresse. O6 følges opp separat.

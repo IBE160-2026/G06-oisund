@@ -1,5 +1,7 @@
 # Åpne punkter
 
+- [ ] 2026-11-03 [O4 nettverkskontroll](../../docs/evidence/o4-readonly-20261103.md) — Les effektive brannmurregler og UDP-prosesseiere. Kontroller ruterens NAT, portvideresending og IPv6-policy, og mål fra autorisert eksternt nett mot bekreftet egen adresse.
+
 - [x] 2026-11-02 [O3 ekstern oppfølging](../../docs/evidence/o3-practical-20261102.md) — Origin, mobil og fysisk Wi-Fi-brudd på PC med kvitteringsoppslag bestod innen dokumentert omfang. O4 og O6 står åpne. (løst 2026-11-03)
 
 Gjeldende2.11.2026 etter autorisert O5-integrasjon/deploy: [7921eb5 er aktiv med beståtte tekniske kontroller](../../docs/evidence/o5-deploy-20261102.md). Backup/isolert restore før og etter, alle25tabellfingeravtrykk like og fire tunnelforbindelser verifisert. Tilbakevei5e521cb og backuper bevart; passordarbeid/v1.0.0urørt. O5s personlige innlogging/testutkast/lagring/gjenåpning/tilgang etter fem minutter er bekreftet «bestått»; avgrenset O5-oppfølging er fullført. O3/O4/O6 forblir åpne. Statusnotatene nedenfor gjelder tidligere kontrollpunkter.
