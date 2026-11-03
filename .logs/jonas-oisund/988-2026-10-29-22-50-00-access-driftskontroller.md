@@ -367,3 +367,5 @@ Gjenbruk CVE-register og pakkehistorikk. Sammenhold Linux-patcher med Canonicals
 Sluttkontrollene og denne triagen er ferdige. O6 står åpen med navngitte kernel-, Debian- og journalrester. O6-FIRMWARE gjenopptas ved uttrykkelig bestilling.
 
 O4-fortsettelse. 41c6aeb fører inn ruteradministratorens observasjon og ny lesende SSH-kontroll. O4 avventer WAN-adressetype, ruterens IPv6-policy og et autorisert uavhengig målepunkt med bekreftet eget mål.
+
+Eieren ba om å avslutte O4 med foreliggende evidens. d8f4ce6 registrerer administrativ lukking. WAN-adressetype, IPv6-policy og uavhengig direkte WAN-måling er dokumentert som bevisbegrensninger.
