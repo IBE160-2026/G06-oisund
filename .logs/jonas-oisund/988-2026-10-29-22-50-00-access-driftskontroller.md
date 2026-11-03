@@ -369,3 +369,21 @@ Sluttkontrollene og denne triagen er ferdige. O6 står åpen med navngitte kerne
 O4-fortsettelse. 41c6aeb fører inn ruteradministratorens observasjon og ny lesende SSH-kontroll. O4 avventer WAN-adressetype, ruterens IPv6-policy og et autorisert uavhengig målepunkt med bekreftet eget mål.
 
 Eieren ba om å avslutte O4 med foreliggende evidens. d8f4ce6 registrerer administrativ lukking. WAN-adressetype, IPv6-policy og uavhengig direkte WAN-måling er dokumentert som bevisbegrensninger.
+
+## 2026-11-03 kl. 22:53 — Jonas Øisund · O6-overlevering
+
+### Oppgave
+
+Avslutte ferdig O6-arbeid og overføre restpunktene til drift. Dokumentere Jonas sin beslutning om at full O6-lukking ikke lenger er en generell forutsetning for passordrelease.
+
+### Plan
+
+Gjenbruk eksisterende vedlikeholds-, etterkontroll- og triageevidens. Samordne status, ansvar og nyvurderingsvilkår. Overlever sikkerhetsforutsetninger til passordarbeidet.
+
+### Resultat
+
+**9865d55** markerer vedlikehold, etterkontroller og avgrenset triage ferdig. Overleveringen skiller leverandørrettelser, konkrete avklaringer og ordinær drift. Passordarbeidet har en kort liste over barrierer og forhold som må vurderes på den faktiske kandidaten. Ingen allerede dokumentert konkret O6-blokkering for passordrelease er identifisert under gjeldende forutsetninger. Selve releasevurderingen er separat. [Beslutning og overlevering](../../docs/evidence/o6-handover-20261103.md).
+
+### Åpne punkter
+
+Samlet O6 beholdes åpen med de navngitte restpunktene. Midlertidig risikoaksept beholder sitt omfang. O6-FIRMWARE er separat utsatt til uttrykkelig ny bestilling.
