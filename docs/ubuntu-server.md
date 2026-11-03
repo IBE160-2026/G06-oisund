@@ -1,5 +1,9 @@
 # Ubuntu-server for Bussassistent
 
+## O6-overlevering 3. november 2026
+
+Vedlikehold, beståtte etterkontroller og avgrenset triage er fullført. Navngitte kernel-, bibliotek- og journalrester følges videre med dokumenterte barrierer og hendelser for ny vurdering. Firmware er separat utsatt. Jonas har avklart at full O6-lukking ikke er en generell forutsetning for passordrelease. [Gjeldende overlevering til drift og passordarbeid](evidence/o6-handover-20261103.md).
+
 ## Gjeldende etter O5-deploy 2. november 2026
 
 Aktiv release er **7921eb54e4816aaab9368c3efd851bcf692f3823**, med terminerbar JWKS-/DNS-prosess og1MiBgate-tmpfs. Mainintegrasjon/deploy er utført etter uttrykkelig bestilling; backup/isolert restore før/etter,25uendrede tabellfingeravtrykk og app/DB/tunnelkontroller bestod. `previous` er5e521cb med identiske migreringer; [deploy-/tilbakeveisrapport og personlige teststeg](evidence/o5-deploy-20261102.md). Personlig prøve er bekreftet «bestått»; avgrenset O5-oppfølging er fullført. O3/O4/O6 er åpne; passordarbeid ogv1.0.0bevart. Full apputrulling restartet containere/tunnel, ingen vertsomstart eller pakkeoppdatering.
