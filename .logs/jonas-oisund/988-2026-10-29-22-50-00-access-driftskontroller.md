@@ -305,3 +305,5 @@ Kontrollere utstedelse, oppslag og varig gjenlagring i syntetisk utkast.
 
 ### Åpne punkter
 O3 er åpen. Eksakt blokkeringsstatus, POST-metode på 200-raden, ID-samsvar og kopiantall er uavklart.
+
+Fortsettelse 3. november. Testregelen er fjernet. Konsollprøven sendte vanlig Origin og ga 422/no-store. Metoden fremkalte ikke null-Origin i Brave. Negativ Origin-prøve står åpen. Neste praktiske prøve gjelder fysisk frakobling av klienten med syntetisk utkast.
