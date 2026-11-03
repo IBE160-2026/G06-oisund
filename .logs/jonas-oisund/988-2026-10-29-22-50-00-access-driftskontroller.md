@@ -387,3 +387,17 @@ Gjenbruk eksisterende vedlikeholds-, etterkontroll- og triageevidens. Samordne s
 ### Åpne punkter
 
 Samlet O6 beholdes åpen med de navngitte restpunktene. Midlertidig risikoaksept beholder sitt omfang. O6-FIRMWARE er separat utsatt til uttrykkelig ny bestilling.
+
+## 2026-11-04 kl. 00:12 — Jonas Øisund
+
+### Oppgave
+Avslutt O3–O5 og fjern ferdige branchreferanser der innholdet er bevart.
+
+### Plan
+Kontroller oppdatert origin/main, worktree-listen, commit-historikken og innholdet i kvalifisert O5 mot deploy-commiten.
+
+### Resultat
+Leveranseregisteret viser O3 fullført innen dokumentert omfang, O4 administrativt lukket med uverifisert WAN-adressetype og IPv6-policy og uutført uavhengig WAN-måling, og O5 integrert, deployet og personlig bestått. Lokal og publisert followup/o3-o5-night-20261102 ble slettet. Tippen 9804eea er tilgjengelig i historikken til main. O5-kode, Compose-filer, tester og evidens samsvarer med 7921eb5 på de kontrollerte stiene. Kun main-worktree var registrert. Fellesbranchen followup/operations-o3-o6-20261031 er beholdt lokalt og publisert fordi den har egen historikk og evidens som mangler på main.
+
+### Åpne punkter
+Ingen nye O3–O5-punkter. Gjeldende bevisgrenser står i leveranseregisteret.
