@@ -1,6 +1,6 @@
 ---
 name: sesjonslogg
-description: Dokumenterer arbeidssesjonen i `.logs/` i prosjektroten (Oppgave + Plan + Resultat + åpne punkter) og vedlikeholder åpne punkter i `issues.md`, slik at sluttoppsummeringer og «husk at»-punkter ikke forsvinner i chat-scrollback. Bruk denne ved slutten av ENHVER arbeidsøkt eller fullført oppgave som endret tilstand — også små mekaniske økter som en commit, push, publisering eller konfig-endring — alltid før du skriver sluttoppsummeringen til brukeren, og særlig når oppsummeringen inneholder «åpne punkter», «gjenstår», «husk at», «legg merke til», «neste steg», «ikke gjort» eller lignende. Bruk den også når brukeren sier «logg sesjonen», «logg dette», «oppdater loggen», «skriv sesjonslogg», og når du trenger å vite hva som ble gjort i en tidligere sesjon (les da `.logs/` og `issues.md` i stedet for å gjette).
+description: Dokumenterer prosjektarbeid og reelle åpne punkter i `.logs/` og `issues.md` før sluttoppsummeringen. Hopp over økter som bare består av Git-operasjoner, også commit og push. Bruk oppskriften når brukeren uttrykkelig ber om logging, og les eksisterende logger når du trenger å vite hva som ble gjort i en tidligere økt.
 ---
 
 # Sesjonslogg
@@ -11,10 +11,9 @@ Formål: brukeren leser ikke alltid sluttoppsummeringen i terminalen, og den for
 
 - Finn prosjektroten med `git rev-parse --show-toplevel` (i et git-worktree: worktreets egen rot). Loggmappen er `<rot>/.logs/<bruker-slug>/` — én mappe per bruker, slik at hver bruker ser sine egne økter adskilt. Slugen er kebab-case av `git config user.name` (f.eks. `bard-pettersen`; mangler navnet, bruk local-part av `user.email`). Opprett mappen hvis den mangler.
 - Skriv loggen når en oppgave/økt avsluttes, **før** du skriver sluttoppsummeringen til brukeren — da er alt ferskt, og oppsummeringen kan gjenbruke teksten. I lange økter: oppdater gjerne loggen underveis ved milepæler.
-- Rene småspørsmål-økter (ett faktasvar, ingenting endret, ingenting å huske) trenger ikke logg. Alt annet logges.
-- Testen for «trenger ikke logg» er **om økten endret tilstand** — ikke hvor liten oppgaven føltes. En commit, push, publisering, migrasjon, seeding eller konfig-endring er tilstandsendring og skal logges selv om den bare tok to kommandoer: det er nettopp de små mekaniske øktene som glemmes først, og loggen er eneste sted et fremtidig «når ble dette pushet, og hva lå i det?» kan besvares. To følgeregler:
-  - En økt som *starter* som et spørsmål («er X à jour?») men *ender* i en handling («commit og push det») er ikke lenger en spørsmålsøkt.
-  - Inneholder sluttoppsummeringen din et «merk at …»/«husk …»/«gjenstår …»-punkt, har du allerede bevist at økten har noe å miste i scrollback — da logges den, uansett størrelse.
+- **Hopp over rene Git-økter.** Operasjoner som `status`, `fetch`, `pull`, `commit`, `push`, konfliktfri fletting og ordinær branch-opprydding utløser ingen sesjonslogg i seg selv. Det gjelder også commit og push av en eksisterende sesjonslogg.
+- Logg prosjektarbeid som endrer tilstand eller gir nye resultater som må bevares, for eksempel kode- og konfigurasjonsendringer, testresultater, eierbeslutninger, migrasjoner, deploy og reelle åpne prosjektpunkter. Hvis økten også omfatter Git-operasjoner, kan en relevant commit-hash nevnes kort under «Resultat» for sporbarhet.
+- Hopp over rene småspørsmål der ingenting endres eller må huskes. Følg en uttrykkelig beskjed fra brukeren om å logge en bestemt økt.
 
 ## Ny fil eller fortsettelse?
 
@@ -53,7 +52,7 @@ bygge videre uten å gjette.
 
 Dato-overskriften bærer klokkeslettet for når loggen skrives **og hvem som kjørte oppgaven**: `## yyyy-mm-dd kl. hh:mm — <utfører>` (24-timers; `date "+%F kl. %H:%M"` / `Get-Date -Format "yyyy-MM-dd 'kl.' HH:mm"`). Utføreren er git-brukeren: `git config user.name` (fall tilbake på `user.email`, eller utelat hvis begge mangler). Fortsettelser: legg `## <ny dato> kl. <tid> — <utfører>` **nederst** i den eksisterende fila, med de samme fire underseksjonene — slik ser man også hvem som kjørte hver økt.
 
-## Commit loggfila (alltid)
+## Commit loggfila når den skrives eller oppdateres
 
 Etter at loggfila er skrevet (ny fil, ny dato-seksjon eller oppdatert dagens seksjon), **skal** den committes umiddelbart, før sluttoppsummeringen. Ellers blir loggene glemt som ukommitterte filer og kommer ut av sync mellom brukere og maskiner. Dette er et krav, ikke et valg — ikke spør om lov, og hopp det ikke over fordi økten var liten.
 
