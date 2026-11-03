@@ -307,3 +307,5 @@ Kontrollere utstedelse, oppslag og varig gjenlagring i syntetisk utkast.
 O3 er åpen. Eksakt blokkeringsstatus, POST-metode på 200-raden, ID-samsvar og kopiantall er uavklart.
 
 Fortsettelse 3. november. Testregelen er fjernet. Konsollprøven sendte vanlig Origin og ga 422/no-store. Metoden fremkalte ikke null-Origin i Brave. Negativ Origin-prøve står åpen. Neste praktiske prøve gjelder fysisk frakobling av klienten med syntetisk utkast.
+
+Fortsettelse 3. november. eb7320f registrerer bestått fysisk Wi-Fi-prøve før lagring, session 200 etter gjenoppretting, bevart forslag, POST og GET 200 og varig endring etter ny innlasting. O3 står åpen for tapt svar etter serverlagring og øvrige dokumenterte grenser.
