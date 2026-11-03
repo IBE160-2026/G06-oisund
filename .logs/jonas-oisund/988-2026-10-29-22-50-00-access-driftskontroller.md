@@ -347,3 +347,21 @@ Lesende gjennomgang av 283 høye kernel-CVE-er er dokumentert i **03dec46**. Ins
 O4 avventer effektive brannmurregler, ruterkonfigurasjon og uavhengig WAN-bevis mot bekreftet egen adresse. O6 følges opp separat.
 
 Eierens administratorlesing er dokumentert i c622036. UFW er inaktiv, legacy-utskriftene var tomme og nftables viste Docker-regler uten input-hook. Fire wildcard UDP-sokler tilhørte cloudflared. O4 avventer ruter og uavhengig WAN-måling.
+
+## 2026-11-03 kl. 22:23 — Jonas Øisund · O6 målrettet
+
+### Oppgave
+
+Avklare 29 høye kernel-treff lesende og samle O6-restene med eier og vilkår for ny vurdering. Firmware er utsatt.
+
+### Plan
+
+Gjenbruk CVE-register og pakkehistorikk. Sammenhold Linux-patcher med Canonicals 42.42-tag og les målrettede bruksforutsetninger.
+
+### Resultat
+
+**2354950** dokumenterer to rettelser, 13 barrierer og 14 uavklarte triggere. CVE-2026-74578 er bundet til synkron skcipher-kode og reversmatch, CVE-2025-40190 til ext4-vakter og ±1-kallere. Første patchkontroll hoppet over filer. Isolert kontroll med eksplisitt kontrollutskrift erstattet den. Futex-rekkefølgen står åpen. [Rapport og register](../../docs/evidence/o6-kernel-targeted-20261103.md).
+
+### Åpne punkter
+
+Sluttkontrollene og denne triagen er ferdige. O6 står åpen med navngitte kernel-, Debian- og journalrester. O6-FIRMWARE gjenopptas ved uttrykkelig bestilling.
