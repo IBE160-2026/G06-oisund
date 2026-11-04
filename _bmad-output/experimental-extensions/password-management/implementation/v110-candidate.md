@@ -1,5 +1,7 @@
 # PM-E1 v1.1.0 integration candidate
 
+**Oppdatert beslutningsstatus 2026-11-04:** [Fast rutine for nye passord etter restore er vedtatt](restore-policy.md). Tidligere formuleringer nedenfor om uavklart valg av passordautoritet er historiske. Implementasjon og kvalifisering av mekanismen gjenstår; ingen produksjonshandling er godkjent.
+
 **Candidate preparation; not release or live-use approval.** PM-E1/S1–S4 remain in review with personal qualification and a technical production-restore gap open. Full O6 closure is not a blanket prerequisite.
 
 ## Source and evidence boundary

@@ -1,5 +1,7 @@
 # Operatørrutine — PM-E1-S2/S3
 
+**Oppdatert beslutningsstatus 2026-11-04:** [Fast rutine for nye passord etter restore er vedtatt](restore-policy.md). Tidligere formuleringer nedenfor om uavklart valg av passordautoritet er historiske. Implementasjon og kvalifisering av mekanismen gjenstår; ingen produksjonshandling er godkjent.
+
 **Ingen live-utstedelse før S3/full reise og eierkvalifisering.** Dette er implementert for isolerte syntetiske prøver; det er ikke deployet. Identitetskontroll, praktisk kontakt, direkte overlevering og opptaksfri operatørøkt: **utsatt – krever eier**. S3 har innløsningsside og endepunkt for isolert syntetisk kvalifisering.
 
 Jonas er eneste operatør. SSH/servertilgang, ytre Access og appkontoen er tre ulike tilganger. Operatørkommandoen bruker eksisterende privilegert database-/containeradgang, ingen appcookie, apppassord eller administratorrolle i appen. Velg eget appbrukernavn eksplisitt ved glemt eget passord. Manglende SSH krever separat vertstilgangsgjenoppretting; manglende Access krever separat Access-hjelp. Ingen av delene repareres av en appkode. Når Jonas er utilgjengelig, må brukeren vente på ham; ingen lovnad om straksstøtte eller skjult reserveadministrator.
