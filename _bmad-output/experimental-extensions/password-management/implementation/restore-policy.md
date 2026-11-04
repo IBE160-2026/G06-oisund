@@ -11,3 +11,7 @@ Jonas har godtatt anbefalingen («Den høre grei ut.»): Ved faktisk databasegje
 
 **Beslutningen er avklart; mekanismen er ikke implementert eller kvalifisert.** Avgrenset erstatningsrestore, kontosperring og sikker gjenåpning må fortsatt implementeres, testes isolert og gjennomgås. Tidligere syntetisk hashoppgjør beviser ikke den nye policyen. Praktisk identitetskontroll/kodeoverlevering og øvrige eiertester står åpne. Dette godkjenner ikke produksjonsrestore, deploy eller release.
 
+
+## Implementation follow-up — 2026-11-04
+
+Owner explicitly authorized implementation/testing/push after approving the policy. The new mechanism has passed isolated qualification and three-layer review; see [evidence](restore-evidence.md). The earlier unimplemented statement records the decision-time status. No production execution or release is authorized.

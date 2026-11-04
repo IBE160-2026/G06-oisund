@@ -1,5 +1,7 @@
 # PM-E1 v1.1.0 integration candidate
 
+**Restore follow-up — 2026-11-04:** The owner-approved policy is now implemented on the experimental branch with isolated qualification and three-layer review completed. See [restore evidence](restore-evidence.md) and [operator restore routine](restore-runbook.md). The policy decision is closed; actual production installation/execution and owner qualification remain separate. Earlier statements about missing policy/tooling below are historical, not the current decision state.
+
 **Oppdatert beslutningsstatus 2026-11-04:** [Fast rutine for nye passord etter restore er vedtatt](restore-policy.md). Tidligere formuleringer nedenfor om uavklart valg av passordautoritet er historiske. Implementasjon og kvalifisering av mekanismen gjenstår; ingen produksjonshandling er godkjent.
 
 **Candidate preparation; not release or live-use approval.** PM-E1/S1–S4 remain in review with personal qualification and a technical production-restore gap open. Full O6 closure is not a blanket prerequisite.

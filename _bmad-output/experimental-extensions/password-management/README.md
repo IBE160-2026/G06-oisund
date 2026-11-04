@@ -1,5 +1,7 @@
 # Password management — experimental extension
 
+**Restore implementation follow-up:** Approved policy is implemented and technically qualified; see [restore evidence](implementation/restore-evidence.md). Older policy/tooling-open wording below describes the previous candidate.
+
 **2026-11-04: v1.1.0 candidate prepared on the existing password branch with v1.0.1 maintenance integrated.** Independent checks/review are complete; owner qualification and restored-credential policy/production recovery tooling remain open. Start with the [current candidate report](implementation/v110-candidate.md). No release or deployment performed.
 
 ## Historical planning baseline — 2026-10-31

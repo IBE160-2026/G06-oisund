@@ -1,5 +1,7 @@
 # Operatørrutine — PM-E1-S2/S3
 
+**Restore follow-up — 2026-11-04:** The owner-approved policy is now implemented on the experimental branch with isolated qualification and three-layer review completed. See [restore evidence](restore-evidence.md) and [operator restore routine](restore-runbook.md). The policy decision is closed; actual production installation/execution and owner qualification remain separate. Earlier statements about missing policy/tooling below are historical, not the current decision state.
+
 **Oppdatert beslutningsstatus 2026-11-04:** [Fast rutine for nye passord etter restore er vedtatt](restore-policy.md). Tidligere formuleringer nedenfor om uavklart valg av passordautoritet er historiske. Implementasjon og kvalifisering av mekanismen gjenstår; ingen produksjonshandling er godkjent.
 
 **Ingen live-utstedelse før S3/full reise og eierkvalifisering.** Dette er implementert for isolerte syntetiske prøver; det er ikke deployet. Identitetskontroll, praktisk kontakt, direkte overlevering og opptaksfri operatørøkt: **utsatt – krever eier**. S3 har innløsningsside og endepunkt for isolert syntetisk kvalifisering.

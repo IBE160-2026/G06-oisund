@@ -60,3 +60,7 @@ For each PM-A row, record story/AC, concrete test name, build SHA, synthetic fix
 ## Executed independent qualification
 
 The original table is the planned traceability map. Actual PM-A1–20 status, concrete tests, runtime/source fingerprints and mixed automated/owner-pending outcomes are now in [S4 scenario evidence](../implementation/s4-evidence.md). [Final readiness](../implementation/final-readiness.md) retains all mandatory owner gates and the deployment-specific restore-procedure prerequisite. Planning validation was never release approval; V1 and automatic notices remain separate.
+
+## Restore follow-up — 2026-11-04
+
+Approved all-account fresh-code policy now has [implemented and verified recovery tooling](../implementation/restore-evidence.md). This extends S4-AC3 / PM-A17 for pre015/current restore, PM-A10 for rejected restored sessions and retained account data, PM-A16 for DB/diagnostic secret scans, and PM-A19 for independent operator access. Physical PM-A18/19/20 owner checks remain open. Ordinary own-password/reset flows preserve their original scope; restore deliberately invalidates every restored account.

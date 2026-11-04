@@ -1,6 +1,8 @@
 # PM-E1 final readiness
 
-**Current — 2026-11-04:** v1.1.0 candidate incorporates maintenance main1501104 through merge b7af6b5. See [candidate qualification](v110-candidate.md): final103 backend,35 focused browser,33 gate,27 helper tests and13 combined phases passed after three-layer review; exact evidence and limits are linked there. No release/deployment is approved. Remaining gates are the explicit restored-credential policy and scoped production restore/invalidation authorization, plus actual device, SSH/full helper chain, identity/handoff and owner acceptance.
+**Restore follow-up — 2026-11-04:** The owner-approved policy is now implemented on the experimental branch with isolated qualification and three-layer review completed. See [restore evidence](restore-evidence.md) and [operator restore routine](restore-runbook.md). The policy decision is closed; actual production installation/execution and owner qualification remain separate. Earlier statements about missing policy/tooling below are historical, not the current decision state.
+
+**Previous integration checkpoint — 2026-11-04:** v1.1.0 candidate incorporates maintenance main1501104 through merge b7af6b5. See [candidate qualification](v110-candidate.md): final103 backend,35 focused browser,33 gate,27 helper tests and13 combined phases passed after three-layer review; exact evidence and limits are linked there. No release/deployment is approved. Remaining gates are the explicit restored-credential policy and scoped production restore/invalidation authorization, plus actual device, SSH/full helper chain, identity/handoff and owner acceptance.
 
 ## Historical pre-integration assessment
 

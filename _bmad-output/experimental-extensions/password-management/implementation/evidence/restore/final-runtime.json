@@ -1,0 +1,78 @@
+{
+  "project": "ibe160-pm-restore-697a4cd98626",
+  "source": "e3874cce4894ecc0d092d2cbc010c2b733da71aa",
+  "images": [
+    {
+      "ID": "sha256:40c542e5e3c39808060356cd27007d46dbc53183f646bffe6b755acb1b8e3d50",
+      "ContainerName": "ibe160-pm-restore-697a4cd98626-private-api-1",
+      "Repository": "ibe160-pm-restore-697a4cd98626-api",
+      "Tag": "latest",
+      "Platform": "linux/amd64",
+      "Size": 86061941,
+      "Created": "2026-11-04T18:29:22.964614729Z",
+      "LastTagTime": "2026-11-04T18:43:01.046320062Z"
+    },
+    {
+      "ID": "sha256:35a54b8aa974a808ade313f75305f0d3971a3f4359e47605cd6e8bd9b47d6e4a",
+      "ContainerName": "ibe160-pm-restore-697a4cd98626-private-db-1",
+      "Repository": "ibe160-pm-restore-697a4cd98626-postgres",
+      "Tag": "latest",
+      "Platform": "linux/amd64",
+      "Size": 117990525,
+      "Created": "2026-11-01T16:20:21.560075764Z",
+      "LastTagTime": "2026-11-04T18:43:01.042356767Z"
+    }
+  ],
+  "archives": {
+    "pre015": {
+      "sha256": "c01a5b3d8093d8ce20a6e87a7d47a6f1ba19826fe733caf495b3b447a8c6f680",
+      "bytes": 57512
+    },
+    "current": {
+      "sha256": "137629dda1649fe7d32c8951e3a368a6f38ae2d7bc52def3777671ea11342431",
+      "bytes": 64276
+    }
+  },
+  "checks": [
+    "pre015: atomic failed replacement rollback, no leftover table, migration business equality, all old passwords/sessions/proofs rejected, independent A/B recovery, ordinary migration preserves credentials",
+    "current: atomic failed replacement rollback, no leftover table, migration business equality, all old passwords/sessions/proofs rejected, independent A/B recovery, ordinary migration preserves credentials"
+  ],
+  "fingerprints": {
+    "backend/app/restore.py": "00d2f264f63b689f0bc7b5facb540cd129adea2dea8131872b263c0dba2f4962",
+    "backend/app/manage.py": "be11c70d3376bcb9d87a0ed9a68db8131c3b470c2667b67f7b08b73ad5e55272",
+    "deploy/ubuntu/bussassistentctl.py": "3b887c21d976a95ec2a67e6bf6720df86c2da361171f696aee58ab9a5e13372f",
+    "deploy/ubuntu/compose.yaml": "b93ee5a2f2803d1c0e2a72670cbdd34517ec164cf276c3223f2dc47ec640381d",
+    "scripts/verify-password-restore.mjs": "ffbb52bbde356586cede2659a86be54c8bc4b855cc4ff157dd92ae7c7fa8041a",
+    "scripts/password-restore-probe.py": "1ffcdf58041efaaa73c2e55ede4701cf7ae0a7de9e08fee849a7e4ad149a4788"
+  },
+  "parentSourceFingerprints": {
+    "backend/app/restore.py": "00d2f264f63b689f0bc7b5facb540cd129adea2dea8131872b263c0dba2f4962",
+    "backend/app/manage.py": "be11c70d3376bcb9d87a0ed9a68db8131c3b470c2667b67f7b08b73ad5e55272",
+    "backend/tests/test_password_restore.py": "1c4ebfccbbfc247e844ab10874df76a469b6f4046a6143781ce5818a645be5f6",
+    "deploy/ubuntu/bussassistentctl.py": "3b887c21d976a95ec2a67e6bf6720df86c2da361171f696aee58ab9a5e13372f",
+    "deploy/ubuntu/compose.yaml": "b93ee5a2f2803d1c0e2a72670cbdd34517ec164cf276c3223f2dc47ec640381d",
+    "deploy/ubuntu/bussassistent.service": "bf3bcf88e7b1f922ed0315ac70c4fadfbafe8d24691d803c3867201094cc5ee9",
+    "deploy/ubuntu/cloudflared.service": "a41ff28a0d8dfd16f19bc30c322de284bfc9dfac3e1ded49ab9c479a17c36a03",
+    "deploy/ubuntu/test_restore_operations.py": "f55d5b1a9722206585cfbe6536d1dee2c91bf88abff78ebb22af26305d8e9a11",
+    "scripts/verify-password-restore.mjs": "ffbb52bbde356586cede2659a86be54c8bc4b855cc4ff157dd92ae7c7fa8041a",
+    "scripts/password-restore-helper.py": "c66970804ff83ee14c46dd5463add9fd95275e928943844d878313020a019ab0",
+    "scripts/password-restore-probe.py": "1ffcdf58041efaaa73c2e55ede4701cf7ae0a7de9e08fee849a7e4ad149a4788",
+    "scripts/verify-password-restore-preflight.py": "d55d36c5cf9bad93240ac62a4d0f18a500ed85027532095462130bd68ce68005"
+  },
+  "parentChecks": {
+    "legacyBackend": {
+      "passed": 103,
+      "seconds": 155.8
+    },
+    "restoreBackend": {
+      "passed": 3,
+      "seconds": 6.92
+    },
+    "hostSuites": {
+      "passed": 54,
+      "seconds": 0.184
+    },
+    "actualRuntimeBarriers": true,
+    "namedReplacementClientTransaction": true
+  }
+}

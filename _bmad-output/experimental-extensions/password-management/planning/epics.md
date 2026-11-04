@@ -226,3 +226,7 @@ Independent S4 evidence:12 phases,20 database/log scans and three negative contr
 ## v1.1.0 integration update — 2026-11-04
 
 Maintenance main1501104 is integrated at merge b7af6b5. See the [current candidate qualification and concrete restore gap](../implementation/v110-candidate.md). Historical baseline/test statements above retain their original scope. Owner-dependent stories remain open; technical existing-deployment restore/invalidation tooling also remains a distinct release prerequisite. Full O6 closure is not a blanket gate. No release or production action is authorized by this update.
+
+## Restore-policy implementation follow-up — 2026-11-04
+
+The owner-approved all-account fresh-code routine is implemented and independently qualified; see [restore evidence](../implementation/restore-evidence.md) and [operator procedure](../implementation/restore-runbook.md). The S4 technical restore-tooling gap is closed for the documented supported archives and isolated scope. Practical installed-host/SSH/identity/handoff/device checks and owner acceptance remain; epic/story status is unchanged. No release/deployment approval is inferred.

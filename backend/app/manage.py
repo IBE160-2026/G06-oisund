@@ -20,6 +20,9 @@ if __name__ == '__main__':
             private_migrate()
         elif action == 'cleanup':
             private_cleanup()
+        elif action in {'restore-inspect', 'restore-quarantine', 'restore-verify'} and len(sys.argv) == 2:
+            from .restore import command
+            command(action)
         elif action in {'recovery-issue', 'recovery-revoke'} and len(sys.argv) == 3:
             from .recovery_terminal import run
             run(action, sys.argv[2])
