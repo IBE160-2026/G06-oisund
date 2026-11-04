@@ -150,3 +150,5 @@ Oppdatering til passordpunktene over: main/v1.0.1 integrert i b7af6b5; kandidat 
 Presisering til eksisterende restorepunkt31.10 (oppdatert 2026-11-04): Eier har valgt fast sperring av gjenopprettede passord og ny administrativ kode/passord for alle kontoer. Beslutningsdelen og den selvstendige tekniske implementasjonen/kvalifiseringen er løst i dafc19d. Faktisk installert vert/SSH/handoff/enhetsaksept står fortsatt åpent; produksjonsutførelse er ikke godkjent.
 
 - [x] 2026-11-04 [Passordrestore](987-2026-10-31-03-46-36-passordhandtering-plan.md) — Vedtatt all-konto-policy implementert og isolert kvalifisert:106 backendtester,54 helpertester, to komplette restoreforløp, faktisk preflight med negativt skjema og trelags review. Teknisk restoregap lukket; praktiske eier-/installasjonsporter over beholdes åpne. (løst2026-11-04)
+
+Praktisk oppstart04.11 kl.21:11: isolert lokal app klar, eierkontooppretting er neste steg. Separat SSH-testvert og nettbrettkobling gjenstår; ingen eierport lukket. Se implementation/owner-tests-20261104.md. Egne testtjenester beholdes for guidet prøve og stoppes etter avslutning.

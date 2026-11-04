@@ -65,7 +65,7 @@ Alt selvstendig arbeid i S1–S4 er nå ferdig. Storyene og epic er likevel **ik
 - Før reell bruk skal Jonas kontrollere praktisk kontakt-/identitetskontroll og sikker engangsvisning/handoff uten opptak. Rutine for egen appkonto via SSH, fravær og separat tap av SSH/outer Access er beskrevet som S2/S4-oppgaver. Ingen uavklart produktbeslutning hindrer oppstart av S1 etter autorisasjon.
 - S1–S4 selvstendig implementering, tester, review og isolert migrering/restore er gjennomført. Fysisk nettbrett/PC/passordbehandler, faktisk SSH/overlevering og personlig eieraksept er utsatt – krever eier. Kvalifisert produksjonsrestore-prosedyre gjenstår før release; eksisterende helper tillater ikke vanlig V1-rollback over migrasjon015. Ingen versjon eller releasebeslutning er fastsatt.
 
-## 2026-11-04 kl. 19:50 — Jonas Øisund
+## 2026-11-04 kl. 21:11 — Jonas Øisund
 
 ### Oppgave
 Gjenoppta eksisterende passordarbeid mot v1.1.0, integrere publisert v1.0.1/main, fullføre selvstendig nattarbeid med isolerte tester/review og push, uten produksjonsinngrep. Registrere eierens rapport om to ordinære bussdager uten å gjøre dette til passordaksept. Ingen spørsmål eller venting på eier.
@@ -105,6 +105,8 @@ Feil og rettinger er bevart i evidensen:2 første nye backendtester feilet på S
 
 Alle oppgavens testtjenester er stoppet; bare de eksisterende ibe160-v1-final-20261031-tjenestene står igjen urørt. Andre branches/arbeidskopier beholdt. Ingen nettbrett, SSH/MFA, reell konto/økt/data, produksjonsserver, main-merge, tag eller release berørt. Dokumentasjon/evidens og sesjonslogg pushes til eksisterende passordbranch etter egen loggcommit. Storyer/epic holdes åpne for obligatoriske eierkontroller; teknisk restoregap er lukket innen dokumentert isolert omfang.
 
+**Praktisk klargjøring kl.21:11:** Eier ba om guidede eierprøver én om gangen. Kandidat4b1260f og main1501104 bekreftet mot remote. Eget lokalt Compose-prosjekt ibe160-pm-owner-20261104 med ny tom database og frontend på loopback15440 er startet; private-api18441 health=ok, 15 migreringer og 0 kontoer verifisert. TypeScript/Vite bestod. Dokumentert i [praktisk testjournal](../../_bmad-output/experimental-extensions/password-management/implementation/owner-tests-20261104.md), commit df2e9cc. Skjult lokal passordinntasting for synthetic-eier-pm er forberedt; ingen passord valgt eller eierprøve bestått på eierens vegne. Bestått eksisterende evidens gjenbrukes. Bare Docker Desktop WSL tilgjengelig: separat isolert SSH-vert og nettbrettkobling er ikke klargjort; direkte containerprøve godskrives ikke som SSH/helperkjede. Første nødvendige eiersteg er lokal testkontooppretting uten opptak/passorddeling. To nye testcontainere og egen preview beholdes for pågående prøve; øvrige miljøer/produksjon urørt. Journal/logg pushes på passordbranchen. Ingen main-merge/release/tag.
 ### Åpne punkter
 - **Utsatt – krever eier:** faktisk tablet/PC/passordbehandler, to enheters øktinvalidering og nettbrudd/ulagret arbeid; full SSH→helper→Compose-PTY→indre CLI med egen syntetisk appkonto; praktisk identitet/kodeoverlevering uten opptak og personlig passordaksept. Kort liste og forventede utfall er i kandidatrapporten. PM-E1/storyene er ikke fullført.
 - **Utsatt – krever eier/egen deploybestilling:** faktisk installasjon av helper/systemd-/Compose-sperrer, vertsomstart/SSH-/terminalkjede og praktisk identitet/kodeoverlevering/enhetsaksept. Restorepolicy og selvstendig teknisk mekanisme er ferdig implementert/testet; dette er ikke produksjonsaksept eller autorisasjon til restore/deploy.
+
