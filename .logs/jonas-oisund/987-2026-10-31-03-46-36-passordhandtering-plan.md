@@ -132,8 +132,11 @@ Sluttresultat ulagret prøve: eier rapporterte avvist lagringsforsøk/utlogging 
 
 Praktisk kodefunn: eier så utstedt kode, men vurderte manuell overføring som urealistisk pga. lengde og tvetydige tegn. Innløsning feilet og dialog var avbrutt ifølge eier; eksakt feil/tilbakekalling ukjent. Eier foreslår20 tegn, grupper på4 og uten0, med entydig bokstavvalg. Ingen kodeverdi gjengitt. Journal oppdatert; handoff/innløsning ikke bestått, kodeformat ikke endret. Neste steg er eksplisitt tilbakekalling i isolert testmiljø.
 
+Eier bekreftet eksplisitt recovery-revoke med meldingen om alle utestående koder tilbakekalt og uendrede passord/økter. Tilbakekallingsusikkerheten for prøvekontoen er dermed lukket som eierutført lokal CLI-prøve; innløsning/handoff og formatretting står fortsatt åpne. Ingen ny produktkode eller produksjonshandling.
+
 ### Åpne punkter
 USB-godkjenning og testportkobling er bekreftet; fysisk to-enhetsendring er eierbekreftet; nettbruddprøven med ulagret arbeid er eierbekreftet innen dokumentert omfang. SSH/helper, administrativ kode/handoff og øvrige eierporter står fortsatt åpne. To PC-vinduer er ikke to fysiske enheter. Testtjenester beholdt for pågående veiledning.
+
 
 
 
