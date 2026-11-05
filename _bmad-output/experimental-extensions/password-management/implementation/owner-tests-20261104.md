@@ -24,3 +24,15 @@ Remote og lokal passordbranch er kontrollert mot `4b1260fc3f64716e2d3fba0d042f13
 4. Resterende eierporter beholdes: trygg identitet/kodeoverlevering, issue/revoke/egen kontogjenoppretting, begge passordflyter, to enheter/nettbrudd/ulagret arbeid og personlig aksept. Resultat registreres som eieropplyst eller direkte observert, med faktisk kandidat/enhet. Ingen hemmeligheter/skjermbilder av kode/passord.
 
 Ingen produksjon, main-merge, deploy, tag eller release. Dette lokale loopback-oppsettet dokumenterer ikke produksjons-HTTPS, Access, SSH, systemd eller fysisk nettbrettaksept. Epic/storyer forblir i review. Praktiske resultater føres her fortløpende og pushes på passordbranchen.
+
+## Eierprøver 2026-11-05 — PC og klargjøring av nettbrett
+
+Eierutført og rapportert i chat, samme lokale testmiljø/kandidat:
+- Testkonto synthetic-eier-pm opprettet og innlogging til Privat arbeidsrom bekreftet.
+- Feil gjeldende passord avvist. Vedlagt skjermbilde viste «Gjeldende passord er feil.», tømte felt og innlogget visning i nattmodus. Avbryt returnerte til arbeidsrommet uten ny innlogging. «Privat arbeidsrom» er en markør, ikke en knapp; veiledningen ble korrigert.
+- To separate PC-økter (vanlig og privat nettleservindu) innlogget samtidig. Eier endret passord med riktig gjeldende passord. Bekreftelsen fortalte at passordet var endret og alle enheter logget ut; eier rapporterte innloggingsskjerm i begge vinduer.
+- Ett innloggingsforsøk med gammelt passord ble avvist; nytt passord ga tilgang til arbeidsrommet. Dette kvalifiserer de beskrevne PC-prøvene, ikke to fysiske enheter eller databevaring/nettbrudd.
+
+Oppsettsavvik: PowerShell blokkerte .ps1 etter lokal execution policy; kommandoen ble kjørt direkte uten policyendring. Første Python-forsøk fant ikke app-modulen; eksplisitt PYTHONPATH=/app rettet testkjøringen. Et tiltenkt testpassord ble før konto-oppretting feilaktig skrevet som shellkommando og kom med i eierens feilmelding. Verdien er ikke gjengitt i evidens. Eier ble instruert om å velge et annet testpassord. Ingen garanti om sletting fra lokal shellhistorikk eller chat; ingen reell credential kjent berørt.
+
+Nettbrett: eier oppgir USB tilkoblet og feilsøking aktiv. ADB-inventar viser én enhet, men status unauthorized. Ingen reverse-regler er opprettet, ingen nettleser/produksjonsfane betjent. Neste steg krever eierens godkjenning av USB-feilsøking på enheten. Lokal frontend HTTP200 og privat API health=ok bekreftet på nytt. Første begrensede ADB-kall kunne ikke starte daemon; autorisert kall startet daemon og viste autentiseringsbehovet. Ingen omgåelse forsøkt. SSH, kodeoverlevering, fysisk to-enhetsprøve, nettbrudd og øvrig aksept står fortsatt åpne.
