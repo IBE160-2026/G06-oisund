@@ -122,5 +122,8 @@ Gjenbruke isolert kandidat; føre eierresultater i [testjournal](../../_bmad-out
 ### Resultat
 Eier bekreftet konto/innlogging, avvisning av feil gjeldende passord med bevart økt, korrekt passordendring med utlogging i to separate PC-vinduer, avvist gammelt passord og vellykket nytt passord. Oppsettsfeil og eksponert tiltenkt testpassord er dokumentert uten hemmelighetsverdi; nytt testpassord ble foreskrevet før konto-oppretting. Frontend200/APIhealthok kontrollert. ADB finner én enhet som unauthorized; ingen portkobling eller appbetjening utført. Produksjon og andre miljøer urørt. Journal og logg pushes til passordbranchen.
 
+USB-oppfølging: eier bekreftet godkjenning; ADB viser nå device/TB361FU. To egne reverse-regler15440/18441 opprettet uten å overskrive eksisterende regler; lokal frontend/API frisk. Nettbrettfane og innlogging overlates til eier som neste prøve. Ingen produksjonsbetjening.
+
 ### Åpne punkter
-USB-godkjenning på nettbrett og deretter fysisk enhets-/nettbruddprøve gjenstår. SSH/helper, administrativ kode/handoff og øvrige eierporter står fortsatt åpne. To PC-vinduer er ikke to fysiske enheter. Testtjenester beholdt for pågående veiledning.
+USB-godkjenning og testportkobling er bekreftet; fysisk enhets-/nettbruddprøve gjenstår. SSH/helper, administrativ kode/handoff og øvrige eierporter står fortsatt åpne. To PC-vinduer er ikke to fysiske enheter. Testtjenester beholdt for pågående veiledning.
+

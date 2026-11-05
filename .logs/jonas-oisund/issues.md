@@ -154,3 +154,4 @@ Presisering til eksisterende restorepunkt31.10 (oppdatert 2026-11-04): Eier har 
 Praktisk oppstart04.11 kl.21:11: isolert lokal app klar, eierkontooppretting er neste steg. Separat SSH-testvert og nettbrettkobling gjenstår; ingen eierport lukket. Se implementation/owner-tests-20261104.md. Egne testtjenester beholdes for guidet prøve og stoppes etter avslutning.
 
 05.11: PC-passordendring med to separate nettleserøkter, gammelt/nytt passord og feil gjeldende passord er eierbekreftet i testjournalen. Fysiske to-enhets-/nettbruddprøver gjenstår; ADB krever USB-godkjenning på nettbrettet. Øvrige eksisterende eierporter beholdes.
+05.11 oppfølging: USB-godkjenning og isolerte reverse-porter15440/18441 nå bekreftet. Nettbrettinnlogging og faktisk to-enhets-/nettbruddprøve gjenstår; USB-delblokkeringen er løst.
