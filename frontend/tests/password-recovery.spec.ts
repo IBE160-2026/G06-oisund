@@ -43,11 +43,11 @@ async function visibility(page:Page) {
 }
 test('operator terminal to app, separate login and other device revocation',async({page,browser})=>{
   // Synthetic PTY capture stays in process memory; no trace or report disclosure.
-  code=python(`import sys,re\nsys.path.insert(0,'tests')\nfrom test_password_recovery_operator import cli\nname=${JSON.stringify(username)}\nstatus,captured=cli(name,[(b'bekrefte',name),(b'TRYGT:','TRYGT'),(b'MOTTATT','MOTTATT')])\nif status != 0: raise RuntimeError('Synthetic terminal issuance failed')\nmatch=re.search(rb'Engangskode: ([A-HJKM-Z2-9]{4}(?:-[A-HJKM-Z2-9]{4}){4})',captured)\nif not match: raise RuntimeError('Synthetic terminal code missing')\nprint(match.group(1).decode())\n`).trim();
+  code=python(`import sys,re\nsys.path.insert(0,'tests')\nfrom test_password_recovery_operator import cli\nname=${JSON.stringify(username)}\nstatus,captured=cli(name,[(b'bekrefte',name),(b'TRYGT:','TRYGT'),(b'SENDT','SENDT')])\nif status != 0: raise RuntimeError('Synthetic terminal issuance failed')\nmatch=re.search(rb'Engangskode: ([A-HJKM-Z2-9]{4}(?:-[A-HJKM-Z2-9]{4}){4})',captured)\nif not match: raise RuntimeError('Synthetic terminal code missing')\nprint(match.group(1).decode())\n`).trim();
   const other=await browser.newContext();const remote=await other.newPage();
   try {
     await remote.goto('/private');await login(remote);
-    await open(page);await expect(page.getByText('Nye engangskoder har 20 tegn', {exact:false})).toBeVisible();await expect(page.locator('#recovery-code-help')).toContainText('MOTTATT');await expect(page.getByLabel('Engangskode',{exact:true})).toHaveAttribute('aria-describedby',/\brecovery-code-help\b/);await fill(page,code.toLowerCase().replaceAll('-', ' '));await submit(page);
+    await open(page);await expect(page.getByText('Nye engangskoder har 20 tegn', {exact:false})).toBeVisible();await expect(page.locator('#recovery-code-help')).not.toContainText(/MOTTATT|SENDT|vent til operatøren/);await expect(page.getByLabel('Engangskode',{exact:true})).toHaveAttribute('aria-describedby',/\brecovery-code-help\b/);await fill(page,code.toLowerCase().replaceAll('-', ' '));await submit(page);
     await expect(page.getByLabel('Tilgangsstatus')).toContainText('Passordet er endret.');
     await expect(page.getByRole('heading',{name:'Privat arbeidsrom',exact:true})).toHaveCount(0);
     await visibility(remote);

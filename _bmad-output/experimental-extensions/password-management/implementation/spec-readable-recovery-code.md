@@ -35,3 +35,8 @@ The owner could not reliably transfer the existing 43-character case-sensitive r
 
 
 Final independent qualification: 116 backend tests passed in 196.33s, 35 focused browser tests passed in 3.5m; TypeScript/Vite, Python AST and diff checks passed. See [evidence](readable-code-evidence.md) and [source manifest](evidence/readable-code/verification.json). All five review findings were patched; follow-up found no additional functional issue. The owner test UI/API were rebuilt on their original loopback ports with the existing volume; no credential command was run against the owner account. The automated project was stopped/removed (volume retained). Existing unrelated services were not operated. This spec remains in-review under the owner's instruction not to close mandatory practical qualification prematurely; the technical correction is finished, but fresh physical handoff is pending.
+
+
+## Subsequent owner clarification — asynchronous sending
+
+The owner clarified that manual email/Teams sending must not require simultaneous contact or recipient knowledge of the operator acknowledgement. The later [SENDT correction](spec-sent-recovery-handoff.md) supersedes earlier MOTTATT/order guidance in this historical format qualification. Code format, generation, TTL and ordinary redemption authority are unchanged. Preserve earlier evidence as executed; use the current operator/user routine for the next trial.

@@ -66,7 +66,7 @@ def login(c,s,password=None,index=0):
 def issue(s,index=0):
     from test_password_recovery_operator import cli
     name=s['names'][index]
-    status,output=cli(name,[(b'bekrefte',name),(b'TRYGT:','TRYGT'),(b'MOTTATT','MOTTATT')])
+    status,output=cli(name,[(b'bekrefte',name),(b'TRYGT:','TRYGT'),(b'SENDT','SENDT')])
     check(status==0,'PTY issuance')
     match=re.search(rb'Engangskode: ([A-Za-z0-9_-]+)',output)
     check(bool(match),'PTY one-time display')

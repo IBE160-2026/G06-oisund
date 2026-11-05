@@ -65,3 +65,8 @@ Maintenance main1501104 is integrated at merge b7af6b5. See the [current candida
 ## Readable-code candidate — 2026-11-05
 
 The [practical journal](owner-tests-20261104.md) records passed PC/tablet password-change and stale-session/offline checks, but manual recovery-code handoff failed due to length/ambiguity. The owner requested a20-character grouped replacement. See [bounded format specification](spec-readable-recovery-code.md) for implementation, review and final qualification. Older S1–S4 source evidence is historical for the changed recovery files; unchanged business/host/access controls retain their earlier evidence. A new physical handoff/redemption attempt remains mandatory before release acceptance. No production install, merge, tag or release is authorized by this correction.
+
+
+## Asynchronous operator sending — 2026-11-05
+
+The owner chose manual Teams/email to a known recipient and operator-only SENDT. No simultaneous recipient contact or waiting for acknowledgement is required in the app. The [bounded follow-up](spec-sent-recovery-handoff.md) removes recipient-facing operational text and handles redemption before SENDT truthfully. Expiry remains 30 minutes; a two-hour suggestion was not approved. Actual message/handoff and full SSH qualification remain pending; no real message was sent by the agent.

@@ -36,7 +36,7 @@ export function PasswordRecovery({ submit, cancel, busy }: { submit: (fields: Re
     <h2 ref={heading} tabIndex={-1}>Glemt passord?</h2>
     <p>Kontakt Jonas, som drifter løsningen, for identitetskontroll og en engangskode til den eksisterende kontoen. Ingen kode sendes automatisk på e-post. Hvis Jonas er utilgjengelig, må du vente.</p>
     <p>Alle enheter blir logget ut. Lagret arbeid beholdes. Etterpå må du logge inn med det nye passordet. Bruk 12–256 tegn; mellomrom beholdes.</p>
-    <p id="recovery-code-help">Nye engangskoder har 20 tegn i fem grupper på fire. Tallet 0 brukes ikke; O er en bokstav. I, L og 1 brukes heller ikke. Små og store bokstaver er like. Mellomrom og bindestreker kan utelates. En eldre, lengre kode må skrives nøyaktig som vist. Skriv inn koden først, og vent til operatøren har bekreftet overleveringen med MOTTATT før du trykker «Lagre nytt passord».</p>
+    <p id="recovery-code-help">Nye engangskoder har 20 tegn i fem grupper på fire. Tallet 0 brukes ikke; O er en bokstav. I, L og 1 brukes heller ikke. Små og store bokstaver er like. Mellomrom og bindestreker kan utelates. En eldre, lengre kode må skrives nøyaktig som vist. Bruk koden før utløpstidspunktet som følger med meldingen.</p>
     <form aria-label="Gjenopprett tilgang" onSubmit={event => void save(event)}>
       {([['username', 'Brukernavn'], ['code', 'Engangskode'], ['new_password', 'Nytt passord'], ['confirmation', 'Gjenta nytt passord']] as const).map(([key, label]) => <div key={key}>
         <label htmlFor={'recover-' + key}>{label}</label>

@@ -66,3 +66,11 @@ Tilbakekalling bekreftet av eier05.11: recovery-revoke for synthetic-eier-pm sva
 ### Readable code ready for a fresh owner trial — 2026-11-05
 
 The owner requested implementation of the format correction. New codes have20 characters displayed as5 groups of4; 0/I/L/1 excluded, O permitted and explained, ASCII case/space/hyphen normalization. Existing long codes keep exact semantics until expiry. [Independent qualification](readable-code-evidence.md):116 backend and35 browser tests passed, blind review findings patched. Owner test UI/API updated on the same loopback ports with the existing data volume, without issuing/changing any owner credential. New physical handoff and redemption are still pending. Refresh the test page; enter code, acknowledge MOTTATT in the terminal, then submit the recovery form. Prior long-code handoff failure is retained, not relabeled passed.
+
+
+### Superseding asynchronous sending instruction
+
+The earlier MOTTATT-before-submit instructions above are historical and must not be followed for the next trial. The owner now chose operator-only SENDT after manual sending to a known direct Teams/email recipient. Recipient redemption is independent of the terminal acknowledgement; no waiting or simultaneous contact is required. Follow the current [operator routine](operator-runbook.md) and [SENDT correction](spec-sent-recovery-handoff.md). The code still expires 30 minutes from issue; no two-hour decision was made.
+
+
+SENDT correction independently qualified and installed only in the local owner test app: [evidence](sent-handoff-evidence.md).85 distinct targeted backend cases verified and17 browser tests passed. Recipient UI has no acknowledgement instruction; operator confirms sending, not receipt. Real PTY/HTTP early redemption and cleanup are tested, but actual email/Teams/SSH are not. Refresh the test page before the next manual attempt.30-minute expiry remains; no owner code/password was changed by qualification.

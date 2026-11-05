@@ -32,3 +32,8 @@ The shorter code still requires a new capture-free physical handoff and redempti
 ## Local handoff preparation
 
 After final tests, stopped/removed only the automated test project's containers/network; synthetic volume remains ignored. Rebuilt the owner test frontend for15440/API18441 and recreated its API against the existing private volume. Frontend200 and APIhealthok verified. Unrelated ibe160-v1-final services were untouched. The owner test service remains running for the ongoing guided trial; no production deployment occurred. Refresh the tablet test page before issuing a new code. Original test-account passwords/data were not reset by this work.
+
+
+## Subsequent owner clarification — asynchronous sending
+
+The owner clarified that manual email/Teams sending must not require simultaneous contact or recipient knowledge of the operator acknowledgement. The later [SENDT correction](spec-sent-recovery-handoff.md) supersedes earlier MOTTATT/order guidance in this historical format qualification. Code format, generation, TTL and ordinary redemption authority are unchanged. Preserve earlier evidence as executed; use the current operator/user routine for the next trial.

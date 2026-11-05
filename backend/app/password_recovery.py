@@ -3,6 +3,7 @@ import os
 import re
 import secrets
 import unicodedata
+from typing import NamedTuple
 from uuid import uuid4
 
 from . import auth
@@ -56,16 +57,28 @@ def audit(conn, owner, action, result, actor=None):
                  (owner, actor or host_actor(), action, result))
 
 
+class DeliveryStatus(NamedTuple):
+    remaining: float
+    consumed: bool
+
+
 def delivery(target, proof_id, acknowledge=False):
-    """Check exactly this candidate at display/ACK; never acknowledge stale proof."""
+    """Check this candidate; ACK of a consumed proof reports sending, not receipt.
+
+    Display requires a live proof. A consumed ACK result reports prior use;
+    acknowledging does not restore its authority or touch a newer proof.
+    """
     with database() as conn:
         confirmed(conn, target)
-        row = conn.execute("SELECT EXTRACT(EPOCH FROM expires_at-clock_timestamp()) AS remaining FROM recovery_proofs WHERE owner=%s AND id=%s AND state='active' AND expires_at > clock_timestamp()", (target['id'], proof_id)).fetchone()
-        if not row or row['remaining'] <= 0:
+        row = conn.execute("SELECT state,EXTRACT(EPOCH FROM expires_at-clock_timestamp()) AS remaining FROM recovery_proofs WHERE owner=%s AND id=%s", (target['id'], proof_id)).fetchone()
+        if acknowledge and row and row['state'] == 'consumed':
+            audit(conn, target['id'], 'delivery', 'acknowledged')
+            return DeliveryStatus(0.0, True)
+        if not row or row['state'] != 'active' or row['remaining'] <= 0:
             raise RecoveryError('Koden er utløpt eller tilbakekalt/erstattet. Kontroller kontoen og utsted ny kode ved behov.')
         if acknowledge:
             audit(conn, target['id'], 'delivery', 'acknowledged')
-        return float(row['remaining'])
+        return DeliveryStatus(float(row['remaining']), False)
 
 
 def confirmed(conn, target):
@@ -110,7 +123,10 @@ def revoke(target, proof_id=None, action='revoke', result='revoked'):
 
 
 def cleanup_account(conn, owner):
-    conn.execute("DELETE FROM recovery_proofs WHERE id IN (SELECT id FROM recovery_proofs WHERE owner=%s AND (state <> 'active' OR expires_at <= clock_timestamp()) ORDER BY expires_at LIMIT 1000)", (owner,))
+    # Retain consumed metadata until original expiry so SENDT can report use
+    # even if cleanup runs between recipient redemption and sender confirmation.
+    # This preserves no redemption authority and never extends the code lifetime.
+    conn.execute("DELETE FROM recovery_proofs WHERE id IN (SELECT id FROM recovery_proofs WHERE owner=%s AND (state = 'revoked' OR expires_at <= clock_timestamp()) ORDER BY expires_at LIMIT 1000)", (owner,))
     conn.execute("DELETE FROM recovery_audit WHERE id IN (SELECT id FROM recovery_audit WHERE owner=%s AND occurred_at <= clock_timestamp()-interval '30 days' ORDER BY occurred_at LIMIT 1000)", (owner,))
 
 # Public redemption shares S2 proof state and S1 credential replacement.

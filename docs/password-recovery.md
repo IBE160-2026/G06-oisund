@@ -1,6 +1,6 @@
 # Glemt apppassord — operatørkode
 
-Kontakt Jonas, som drifter løsningen. Han bekrefter identiteten din og den nøyaktige eksisterende kontoen før han utsteder en engangskode. Koden sendes ikke automatisk på e-post. Hvis Jonas er utilgjengelig, må du vente; det finnes ingen annen appadministrator eller lovnad om straksstøtte.
+Kontakt Jonas, som drifter løsningen. Han bekrefter identiteten din og den nøyaktige eksisterende kontoen før han utsteder en engangskode. Jonas kan sende koden manuelt til din allerede kjente institusjonsadresse eller direkte Teams-konto. Dere trenger ikke være tilgjengelige samtidig. Koden sendes ikke automatisk fra appen. Hvis Jonas er utilgjengelig, må du vente; det finnes ingen annen appadministrator eller lovnad om straksstøtte.
 
 1. Hvis du allerede er innlogget, lagre eller forkast ulagret arbeid og avklar pågående/usikre lagringsforsøk. Velg **Logg ut** og fullfør utloggingen før gjenoppretting. En annen innlogget konto blir aldri automatisk byttet ut.
 2. Velg **Glemt passord?** ved innlogging. Oppgi eksisterende brukernavn, engangskoden, nytt passord og samme nye passord igjen. Passordet skal ha 12–256 tegn; mellomrom beholdes. Du kan lime inn i feltene.
@@ -12,13 +12,15 @@ Ved mistet svar, nettutfall, ugyldig serversvar eller avbrutt nettleser kan pass
 
 Andre enheter mister gammel tilgang ved neste serverkontroll. En skjerm som allerede er uten nett kan ikke fjernslettes umiddelbart. Ulagret nettleserinnhold er ikke garantert bevart etter økttap; serverlagrede resultater følger den samme kontoen etter ny innlogging.
 
-Jonas kan gjenopprette sin egen appkonto uten det glemte apppassordet ved å bruke sin uavhengige server-/SSH-tilgang og velge eget appbrukernavn uttrykkelig. Appkoden reparerer ikke SSH og gir ikke adgang forbi ytre Access. Manglende SSH krever separat vertstilgangsgjenoppretting; manglende Access krever separat Access-hjelp. Ikke legg kode eller passord i URL, logger, sak, chat eller e-post, og avklar eventuell utklippstavlehistorikk/skysynk før overlevering.
+Jonas kan gjenopprette sin egen appkonto uten det glemte apppassordet ved å bruke sin uavhengige server-/SSH-tilgang og velge eget appbrukernavn uttrykkelig. Appkoden reparerer ikke SSH og gir ikke adgang forbi ytre Access. Manglende SSH krever separat vertstilgangsgjenoppretting; manglende Access krever separat Access-hjelp. Ikke del koden videre eller legg den i URL, logger, saker, felleskanaler eller denne AI-chatten. Det nye passordet skal bare skrives i appen og aldri sendes til Jonas.
 
 Dette er eksperimentell funksjonalitet validert med isolerte syntetiske kontoer. Praktisk identitet/kontakt/overlevering, faktisk SSH, fysisk nettbrett/passordbehandler og eieraksept er **utsatt – krever eier**. Ingen live-bruk før disse kontrollene og S4 er kvalifisert; ingen deploy eller produksjonsendring er utført.
 
 
 ## Enklere manuell innskriving (ny testkandidat)
 
-Nye engangskoder har 20 tegn i fem grupper på fire. Tallet 0 brukes ikke; O er en bokstav. I, L og 1 brukes heller ikke. Du kan skrive små eller store bokstaver og utelate mellomrom og bindestreker. Systemet gjetter ikke mellom tegn som ligner. Eldre, lange koder må fortsatt skrives nøyaktig som vist til de utløper. Koden skjules i appen og skal ikke sendes i chat eller skjermbilder.
+Nye engangskoder har 20 tegn i fem grupper på fire. Tallet 0 brukes ikke; O er en bokstav. I, L og 1 brukes heller ikke. Du kan skrive små eller store bokstaver og utelate mellomrom og bindestreker. Systemet gjetter ikke mellom tegn som ligner. Eldre, lange koder må fortsatt skrives nøyaktig som vist til de utløper. Koden skjules i appen. Ikke del den videre eller send skjermbilder av den.
 
-Skriv koden inn i skjemaet først. Operatøren skriver deretter MOTTATT i terminalen for å bekrefte overleveringen og tømme kodevisningen. Send først da inn skjemaet med nytt passord. Identitetskontroll, engangsbruk og 30 minutters utløp beholdes. Det kortere formatet må prøves praktisk på nytt før releaseaksept.
+Når du har fått koden, kan du velge nytt passord i appen før utløpstidspunktet i meldingen. Du trenger ikke vente på en ny bekreftelse fra Jonas. Koden gjelder én gang i 30 minutter fra utstedelse. Meldingen kan bli liggende i Teams eller e-post, men koden gir ikke tilgang etter bruk, tilbakekalling eller utløp. Det nye forløpet må prøves praktisk før releaseaksept.
+
+Ved kopiering av koden: bruk ikke utklippstavlehistorikk eller skysynkronisering av utklippstavlen. Du kan også skrive koden direkte inn i appen.

@@ -275,7 +275,7 @@ def test_controlled_failure_processing(users,monkeypatch):
 def test_operator_terminal_to_app_own_account_without_app_password(client,users):
     from test_password_recovery_operator import cli
     name=users[0][0]
-    status,captured=cli(name,[(b'bekrefte',name),(b'TRYGT:','TRYGT'),(b'MOTTATT','MOTTATT')])
+    status,captured=cli(name,[(b'bekrefte',name),(b'TRYGT:','TRYGT'),(b'SENDT','SENDT')])
     verified = status==0
     assert verified, 'Synthetic recovery invariant failed'
     match=re.search(rb'Engangskode: ([A-HJKM-Z2-9]{4}(?:-[A-HJKM-Z2-9]{4}){4})',captured)

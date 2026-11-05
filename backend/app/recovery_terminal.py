@@ -96,7 +96,7 @@ def run(action, username):
                 recovery.revoke(target)
                 terminal.write('Alle utestående koder er tilbakekalt. Passord og økter er uendret.\n')
                 return
-            if terminal.read('Bekreft identitet, trygg direkte overlevering og INGEN opptak/transkripsjon/delt skjerm/CI/utklippstavlehistorikk. TTY beviser ikke dette. Skriv TRYGT: ') != 'TRYGT':
+            if terminal.read('Bekreft identitet og riktig kjent mottaker for direkte Teams-melding, e-post eller egen overføring. INGEN terminal-/skjermopptak, transkripsjon, delt skjerm, CI eller utklippstavlehistorikk. TTY beviser ikke dette. Skriv TRYGT: ') != 'TRYGT':
                 raise recovery.RecoveryError('Forhåndskontroll ikke bekreftet. Avbrutt.')
             proof_id = uuid4()  # Known even if commit acknowledgement is lost.
             attempted = True
@@ -107,7 +107,7 @@ def run(action, username):
                 raise
             proof_id = proof['id']
             checked_at = time.monotonic()
-            remaining = recovery.delivery(target, proof_id)
+            remaining = recovery.delivery(target, proof_id).remaining
             display_budget = min(deadline, checked_at + remaining) - time.monotonic()
             if display_budget <= 0:
                 timeout()
@@ -115,12 +115,14 @@ def run(action, username):
             terminal.begin_secret()
             terminal.write('20 tegn i fem grupper. Tallet 0 brukes ikke; O er en bokstav. I, L og 1 brukes heller ikke.\nSmå/store bokstaver er like; mellomrom og bindestreker kan utelates.\n')
             terminal.write(f"Engangskode: {recovery.display_code(code)}\nUtløper: {proof['expires_at'].astimezone(timezone.utc).isoformat()} (UTC)\n")
+            terminal.write('Ta med oppgitt utløpstid og tidssone samt vanlig appadresse i meldingen. Ikke legg koden i URL.\n')
             code = None
-            if terminal.read('Når koden er skrevet i appen: skriv MOTTATT før brukeren sender inn skjemaet, for å tømme skjermen: ') != 'MOTTATT':
-                raise recovery.RecoveryError('Overlevering ikke bekreftet.')
+            if terminal.read('Skriv SENDT når koden er sendt til riktig mottaker eller overført til eget skjema. Ikke vent på svar; kodevisningen tømmes: ') != 'SENDT':
+                raise recovery.RecoveryError('Sending ikke bekreftet.')
             terminal.clear()
-            recovery.delivery(target, proof_id, acknowledge=True)
-            terminal.write('Overlevering bekreftet; kodevisningen er tømt. Passord og økter er uendret.\n')
+            sent = recovery.delivery(target, proof_id, acknowledge=True)
+            terminal.write('Sending registrert; kodevisningen er tømt. Dette er ikke en mottakskvittering.\n')
+            terminal.write('Koden er allerede brukt. Ingen ny kode er utstedt.\n' if sent.consumed else 'Brukeren kan bruke koden frem til oppgitt utløp. Bekreftelsen endrer ikke passord eller økter.\n')
         attempted = False  # Includes successful terminal clear/restore/close.
     except BaseException as exc:
         signal.setitimer(signal.ITIMER_REAL, 0)
@@ -129,7 +131,7 @@ def run(action, username):
         elif attempted and target:
             try:
                 recovery.revoke(target, proof_id, 'delivery', 'failed')
-                message = 'Utstedelse/overlevering avbrutt eller kode ikke lenger gyldig; denne utstedelsen er tilbakekalt. Bekreft kontoen og utsted ny kode ved behov.'
+                message = 'Utstedelse/sending avbrutt eller kode ikke lenger gyldig. Eventuell aktiv kode fra denne utstedelsen er tilbakekalt. En allerede brukt kode kan ha endret passordet; kontroller innlogging og utsted ny kode bare ved behov.'
             except BaseException:
                 message = 'USIKKER utstedelse. Kjør recovery-revoke for nøyaktig konto før nytt forsøk; kode utløper senest etter 30 minutter.'
         else:

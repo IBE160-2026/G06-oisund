@@ -15,7 +15,7 @@ import pytest
 
 from app import auth, password_recovery as recovery
 from app.private_storage import database, migrate, cleanup
-from test_private_access import synthetic_only, users, client, login, pytestmark
+from test_private_access import synthetic_only, users, client, login, headers, pytestmark
 
 
 def target(users):
@@ -131,7 +131,7 @@ def test_cleanup_and_repeat_migration(users):
 
 
 def cli(name, replies, action='recovery-issue', redirect=None, interrupt=False,
-        no_controlling=False, timeout_seconds=None):
+        no_controlling=False, timeout_seconds=None, before_sent=None):
     pid, terminal = pty.fork()
     if pid == 0:
         if no_controlling:
@@ -175,10 +175,12 @@ def cli(name, replies, action='recovery-issue', redirect=None, interrupt=False,
                 except OSError:
                     pytest.fail('CLI exited before expected prompt', pytrace=False)
             captured += received
-            if prompt == b'MOTTATT':
+            if prompt == b'SENDT':
                 # Delivery is after committed DB insert, independently observable.
                 with database() as conn:
                     assert conn.execute("SELECT 1 FROM recovery_proofs p JOIN accounts a ON a.id=p.owner WHERE a.username=%s AND p.state='active'", (name,)).fetchone()
+            if prompt == b'SENDT' and before_sent:
+                before_sent(captured)
             if response is not None:
                 os.write(terminal, response.encode() + b'\n')
         if interrupt:
@@ -235,7 +237,7 @@ def test_cli_cancel_mismatch(users, confirmation):
 
 def test_cli_own_account_display_clear_revoke(users):
     name = users[0][0]
-    status, captured = cli(name, [(b'bekrefte', name), (b'TRYGT:', 'TRYGT'), (b'MOTTATT', 'MOTTATT')])
+    status, captured = cli(name, [(b'bekrefte', name), (b'TRYGT:', 'TRYGT'), (b'SENDT', 'SENDT')])
     assert status == 0
     displayed_once = captured.count(b'Engangskode:') == 1
     cleared_with_timezone = b'\x1b[2J' in captured and b'+00:00' in captured
@@ -255,7 +257,7 @@ def test_cli_own_account_display_clear_revoke(users):
 
 def test_cli_failed_handoff(users):
     name = users[0][0]
-    status, captured = cli(name, [(b'bekrefte', name), (b'TRYGT:', 'TRYGT'), (b'MOTTATT', '')])
+    status, captured = cli(name, [(b'bekrefte', name), (b'TRYGT:', 'TRYGT'), (b'SENDT', '')])
     assert status != 0
     with database() as conn:
         assert not conn.execute("SELECT 1 FROM recovery_proofs WHERE owner=%s AND state='active'", (users[1][0],)).fetchone()
@@ -266,7 +268,7 @@ def test_cli_interrupt_and_missing_controlling_terminal(users):
     status, captured = cli(name, [], no_controlling=True)
     undisclosed = b'Engangskode:' not in captured
     assert status != 0 and undisclosed, 'Missing-terminal path disclosed code'
-    status, captured = cli(name, [(b'bekrefte', name), (b'TRYGT:', 'TRYGT'), (b'MOTTATT', None)], interrupt=True)
+    status, captured = cli(name, [(b'bekrefte', name), (b'TRYGT:', 'TRYGT'), (b'SENDT', None)], interrupt=True)
     assert status != 0
     with database() as conn:
         assert not conn.execute("SELECT 1 FROM recovery_proofs WHERE owner=%s AND state='active'", (users[1][0],)).fetchone()
@@ -342,7 +344,7 @@ def test_terminal_restore_failure_after_ack_revokes_truthfully(users, monkeypatc
         def read(self, prompt):
             if 'brukernavnet' in prompt:
                 return users[0][0]
-            return 'MOTTATT' if 'MOTTATT' in prompt else 'TRYGT'
+            return 'SENDT' if 'SENDT' in prompt else 'TRYGT'
         def begin_secret(self):
             pass
         def clear(self):
@@ -444,7 +446,7 @@ def test_rolling_hour_issuance_recovers(users):
 @pytest.mark.parametrize('mode', ['before-confirmation', 'after-display', 'suspend'])
 def test_cli_bounded_timeout_and_suspend(users, mode):
     name = users[0][0]
-    replies = [(b'bekrefte', None)] if mode == 'before-confirmation' else [(b'bekrefte', name), (b'TRYGT:', 'TRYGT'), (b'MOTTATT', None)]
+    replies = [(b'bekrefte', None)] if mode == 'before-confirmation' else [(b'bekrefte', name), (b'TRYGT:', 'TRYGT'), (b'SENDT', None)]
     started = time.monotonic()
     status, captured = cli(name, replies, timeout_seconds=2,
                            interrupt=signal.SIGTSTP if mode == 'suspend' else False)
@@ -466,10 +468,10 @@ class QuietDialogue:
     def read(self, prompt):
         if 'brukernavnet' in prompt:
             return self.name
-        if 'MOTTATT' in prompt:
+        if 'SENDT' in prompt:
             if self.on_ack:
                 self.on_ack()
-            return 'MOTTATT'
+            return 'SENDT'
         return 'TRYGT'
     def write(self, message):
         pass
@@ -532,3 +534,107 @@ def test_secret_display_deadline_never_exceeds_proof_expiry(users, monkeypatch):
     assert terminal.cleared and time.monotonic() - started < 2
     with database() as conn:
         assert not conn.execute("SELECT 1 FROM recovery_proofs WHERE owner=%s AND state='active'", (users[1][0],)).fetchone()
+
+
+@pytest.mark.parametrize('newer', [False, True])
+@pytest.mark.parametrize('restore_fails', [False, True])
+def test_sent_after_recipient_redemption_is_truthful_and_keeps_newer_proof(users, monkeypatch, newer, restore_fails):
+    from app import recovery_terminal
+    account = target(users)
+    original = recovery.issue
+    issued = []
+    messages = []
+    state_after_redemption = []
+    def issue(*args, **kwargs):
+        result = original(*args, **kwargs)
+        issued.append(result)
+        return result
+    def consume():
+        code, _ = issued[0]
+        request = SimpleNamespace(cookies={}, client=SimpleNamespace(host='synthetic-async-sent'))
+        recovery.redeem(request, users[0][0], code, 'synthetic-async-password', 'synthetic-async-password')
+        if newer:
+            original(account)
+        cleanup()
+        state_after_redemption.append(snapshot(account['id']))
+    class Dialogue(QuietDialogue):
+        def __exit__(self, *args):
+            super().__exit__(*args)
+            if restore_fails:
+                raise OSError('synthetic terminal restoration failure')
+    terminal = Dialogue(users[0][0], consume)
+    terminal.write = messages.append
+    monkeypatch.setattr(recovery, 'issue', issue)
+    monkeypatch.setattr(recovery_terminal, 'Terminal', lambda: terminal)
+    if restore_fails:
+        with pytest.raises(SystemExit) as failure:
+            recovery_terminal.run('recovery-issue', users[0][0])
+        truthful_error = 'En allerede brukt kode kan ha endret passordet' in str(failure.value)
+        assert truthful_error, 'Restoration failure must not claim credential rollback'
+    else:
+        recovery_terminal.run('recovery-issue', users[0][0])
+    text = ''.join(messages)
+    truthful = 'allerede brukt' in text and 'Sending registrert' in text and 'ikke en mottakskvittering' in text and 'Passord og økter er uendret' not in text
+    assert truthful, 'SENDT must report consumed proof truthfully'
+    unchanged = snapshot(account['id']) == state_after_redemption[0]
+    assert unchanged, 'Sending acknowledgement mutated credentials or sessions'
+    assert terminal.cleared
+    with database() as conn:
+        consumed = conn.execute('SELECT state FROM recovery_proofs WHERE id=%s', (issued[0][1]['id'],)).fetchone()['state'] == 'consumed'
+        active = conn.execute("SELECT count(*) AS n FROM recovery_proofs WHERE owner=%s AND state='active'", (account['id'],)).fetchone()['n']
+        acknowledged = conn.execute("SELECT count(*) AS n FROM recovery_audit WHERE owner=%s AND action='delivery' AND result='acknowledged'", (account['id'],)).fetchone()['n']
+    assert consumed and active == int(newer) and acknowledged == 1, 'Exact proof or newer authority changed'
+    with pytest.raises(recovery.RecoveryError):
+        recovery.delivery(account, issued[0][1]['id'])
+
+
+def test_interrupted_sending_after_redemption_never_claims_revocation_of_used_code(users, monkeypatch):
+    from app import recovery_terminal
+    account = target(users)
+    original = recovery.issue
+    issued = []
+    def issue(*args, **kwargs):
+        result = original(*args, **kwargs)
+        issued.append(result)
+        return result
+    def consume_then_interrupt():
+        request = SimpleNamespace(cookies={}, client=SimpleNamespace(host='synthetic-async-abort'))
+        recovery.redeem(request, users[0][0], issued[0][0], 'synthetic-async-password', 'synthetic-async-password')
+        raise KeyboardInterrupt()
+    terminal = QuietDialogue(users[0][0], consume_then_interrupt)
+    monkeypatch.setattr(recovery, 'issue', issue)
+    monkeypatch.setattr(recovery_terminal, 'Terminal', lambda: terminal)
+    with pytest.raises(SystemExit) as result:
+        recovery_terminal.run('recovery-issue', users[0][0])
+    truthful = 'En allerede brukt kode kan ha endret passordet' in str(result.value)
+    assert truthful and terminal.cleared, 'Interrupted sender must not misstate used-code outcome'
+    with database() as conn:
+        consumed = conn.execute('SELECT state FROM recovery_proofs WHERE id=%s', (issued[0][1]['id'],)).fetchone()['state'] == 'consumed'
+        ack = conn.execute("SELECT 1 FROM recovery_audit WHERE owner=%s AND result='acknowledged'", (account['id'],)).fetchone()
+    assert consumed and not ack, 'Interrupt must not revive a used code or record sent'
+
+
+
+def test_real_pty_recipient_http_redemption_and_cleanup_before_sent(client, users):
+    name = users[0][0]
+    def redeem_before_sent(captured):
+        match = re.search(rb'Engangskode: ([A-HJKM-Z2-9]{4}(?:-[A-HJKM-Z2-9]{4}){4})', captured)
+        found = match is not None
+        assert found, 'Synthetic PTY code missing'
+        result = client.post('/auth/password/recover', headers=headers(client), json={
+            'username': name, 'code': match[1].decode(),
+            'new_password': 'synthetic-async-http-password', 'confirmation': 'synthetic-async-http-password'})
+        success = result.status_code == 200
+        assert success, 'Recipient HTTP redemption failed before SENDT'
+        cleanup()
+    status, captured = cli(name, [(b'bekrefte', name), (b'TRYGT:', 'TRYGT'), (b'SENDT', 'SENDT')], before_sent=redeem_before_sent)
+    truthful = status == 0 and b'allerede brukt' in captured and b'ikke en mottakskvittering' in captured
+    assert truthful, 'Real PTY must acknowledge early recipient redemption'
+    with database() as conn:
+        present = conn.execute("SELECT id FROM recovery_proofs WHERE owner=%s AND state='consumed'", (users[1][0],)).fetchone()
+        assert present is not None, 'Consumed metadata must survive cleanup before original expiry'
+        conn.execute("UPDATE recovery_proofs SET created_at=statement_timestamp()-interval '31 minutes',expires_at=statement_timestamp()-interval '1 minute' WHERE id=%s", (present['id'],))
+    cleanup()
+    with database() as conn:
+        removed = not conn.execute('SELECT 1 FROM recovery_proofs WHERE id=%s', (present['id'],)).fetchone()
+    assert removed, 'Consumed metadata must be cleaned after original expiry'
