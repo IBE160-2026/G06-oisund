@@ -1,6 +1,6 @@
 # Praktiske passordprøver — oppstart 2026-11-04
 
-Status: klargjøring kontrollert; ingen praktisk eierprøve bestått ennå.
+Status 2026-11-05: PC-/nettbrett-passordendring, utlogging på to enheter og avgrenset USB-nettbrudd med ulagret arbeid er eierbekreftet. Administrativ kode/SSH/handoff og øvrige eierporter gjenstår. Historiske delstatuser nedenfor viser prøvenes rekkefølge.
 
 ## Kandidat og gjenbruk
 
@@ -46,3 +46,10 @@ Eier bekreftet innlogging på nettbrettet, passordendring fra nettbrettet og at 
 Eier koblet så fra USB med nettbrettets testside stående åpen, endret passord på PC og rapporterte bekreftet endring/innloggingsskjerm. Etter eiers gjeninnkobling viser ADB autorisert enhet, men reverse-listen var tom. Bare oppgavens15440/18441-regler ble gjenopprettet med --no-rebind og listen kontrollert; lokal frontend200/APIhealthok. Neste prøve er avvisning av den gamle nettbrettøkten ved fornyet serverkontakt. Resultatet er ennå ikke rapportert. Ingen eksplisitt ulagret redigering ble opprettet; denne prøven kvalifiserer derfor ikke håndtering av ulagrede data eller usikkert skriveresultat. USB-loopbackbrudd er ikke full mobilnett-/produksjonsnettprøve. Ingen nettbrettfane eller produksjon ble betjent av agenten.
 
 Nettbruddoppfølging05.11: eier rapporterte innloggingsside etter oppdatering av nettbrettets gamle økt, deretter vellykket innlogging med nyeste passord. Første nettbruddprøve er eierbekreftet innen dette omfanget. Ny prøve med ulagret arbeid: begge innlogget, eier skrev TEST-ULAGRET i Vognløp uten å lagre, trakk USB, endret passord på PC og koblet USB til igjen. ADB autorisert, reverse-regler borte; kun15440/18441 gjenopprettet og verifisert, APIhealthok. Nettbrettsiden er ikke betjent av agenten. Neste steg er ett eksplisitt lagringsforsøk fra gammel økt dersom skjemaet fremdeles vises; forventet avvisning og ingen lagringsbekreftelse. Resultatet og eventuell etterkontroll av lagrede data gjenstår.
+
+
+### Sluttresultat for ulagret arbeid — eierutført 2026-11-05
+
+Eier rapporterte at lagringsforsøket fra den gamle nettbrettøkten ble avvist og førte til utlogging. Etter ny innlogging med nyeste passord var Vognløp tomt. Eier kontrollerte deretter Forberedelse og planlister og rapporterte tom liste. Prøven er bestått innen dette konkrete omfanget: lokal ulagret tekst ble ikke bevart etter øktavvisning, og ingen lagret kopi var synlig etter ny innlogging. Resultatene bygger på eiers handlinger/rapporter; ingen egen databaseinspeksjon eller nettverkssporing er utført som del av denne manuelle prøven. Ingen påstand om bevart ulagret arbeid, full mobilnettaksept eller prøvd tvetydig skriveresultat (akseptert lagring med tapt svar).
+
+Neste praktiske område er administrativ engangskode og innløsning. Direkte lokal container-CLI kan kvalifisere app-/terminalreisen, men erstatter fortsatt ikke faktisk SSH → installert vertshelper → Compose-PTY. Den separate SSH-testverten er fortsatt ikke klargjort. Ingen story/epic eller release er sluttgodkjent.
