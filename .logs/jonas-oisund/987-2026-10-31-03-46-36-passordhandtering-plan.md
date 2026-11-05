@@ -111,7 +111,7 @@ Alle oppgavens testtjenester er stoppet; bare de eksisterende ibe160-v1-final-20
 - **Utsatt – krever eier/egen deploybestilling:** faktisk installasjon av helper/systemd-/Compose-sperrer, vertsomstart/SSH-/terminalkjede og praktisk identitet/kodeoverlevering/enhetsaksept. Restorepolicy og selvstendig teknisk mekanisme er ferdig implementert/testet; dette er ikke produksjonsaksept eller autorisasjon til restore/deploy.
 
 
-## 2026-11-05 — Jonas Øisund
+## 2026-11-05 kl. 20:35 — Jonas Øisund
 
 ### Oppgave
 Fortsette guidede eierprøver og koble til nettbrett uten produksjonsinngrep.
@@ -134,8 +134,14 @@ Praktisk kodefunn: eier så utstedt kode, men vurderte manuell overføring som u
 
 Eier bekreftet eksplisitt recovery-revoke med meldingen om alle utestående koder tilbakekalt og uendrede passord/økter. Tilbakekallingsusikkerheten for prøvekontoen er dermed lukket som eierutført lokal CLI-prøve; innløsning/handoff og formatretting står fortsatt åpne. Ingen ny produktkode eller produksjonshandling.
 
+Kodeformatretting implementert i7019eb0d247088d8651e878e01e31f41fb8b1a60 etter eierens uttrykkelige bestilling. BMAD Build rendret én gang, read-only undersøkelsesagent og separat blind reviewer; fem funn individuelt rettet, oppfølgingsreview uten ny funksjonsfeil.20 uavhengige valg fra32 tegn gir100 bits, vises5×4.0/I/L/1 utelatt, O tydelig forklart. Nye koder normaliserer ASCII-bokstavstørrelse/mellomrom/bindestrek; gamle43-tegnskoder beholdes eksakt til utløp. Tvetydig43-tegnsinnskriving støttes med to faste digest-sammenligninger. MOTTATT-rekkefølgen forklares nå i terminal og app. Ingen migrering eller endrede sperre-/økt-/passordregler.
+
+Sluttkontroll:116 backendtester196,33s (inkludert10 nye format-/genererings-/legacy-/grensetester og eksisterende restoretester),35 fokuserte nettlesertester3,5min, TypeScript/Vite, AST og diffkontroll bestått. Første backend113/191,07s er før-review-evidens. Første nettleserforsøk stoppet etter at lukket testnett undertrykte API-porten; kun eget nett rettet til bridge med loopback, frisk helse og full vellykket gjentakelse. Uttømt Docker-adressepool løst med eget undersøkt ledig subnett, ingen sletting av andres nett. Windows-encodingfeil under testredigering rettet med opprinnelig HEAD-kilde og eksplisittUTF-8 før kvalifisering. Se [evidens](../../_bmad-output/experimental-extensions/password-management/implementation/readable-code-evidence.md) og kildefingeravtrykk.
+
+Automatisk testprosjekt ibe160-pm-code-format-20261105 stoppet/fjernet uten volumesletting. Eiertestappens UI/API oppdatert på15440/18441 mot eksisterende volume; frontend200/APIhealthok, format20/32 og bevart synthetic-eier-pm-konto verifisert uten passordlesing/endring. Eiertjenestene beholdt for ny guidet prøve; øvrige eksisterende tjenester urørt. Ingen produksjon, main-merge, deploy, tag eller release. Spesifikasjon/epic holdes i review for ny fysisk kodeoverlevering/innløsning og resterende eierporter. Arbeid og separat loggcommit pushes til passordbranchen.
 ### Åpne punkter
 USB-godkjenning og testportkobling er bekreftet; fysisk to-enhetsendring er eierbekreftet; nettbruddprøven med ulagret arbeid er eierbekreftet innen dokumentert omfang. SSH/helper, administrativ kode/handoff og øvrige eierporter står fortsatt åpne. To PC-vinduer er ikke to fysiske enheter. Testtjenester beholdt for pågående veiledning.
+
 
 
 
