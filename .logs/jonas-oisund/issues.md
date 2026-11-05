@@ -156,3 +156,4 @@ Praktisk oppstart04.11 kl.21:11: isolert lokal app klar, eierkontooppretting er 
 05.11: PC-passordendring med to separate nettleserøkter, gammelt/nytt passord og feil gjeldende passord er eierbekreftet i testjournalen. Fysiske to-enhets-/nettbruddprøver gjenstår; ADB krever USB-godkjenning på nettbrettet. Øvrige eksisterende eierporter beholdes.
 05.11 oppfølging: USB-godkjenning og isolerte reverse-porter15440/18441 nå bekreftet. Nettbrettinnlogging og faktisk to-enhets-/nettbruddprøve gjenstår; USB-delblokkeringen er løst.
 05.11 videre: passordendring fra nettbrett, utlogging og ny innlogging på begge fysiske enheter eierbekreftet. Nettbruddprøve pågår etter gjenopprettede USB-porter; ulagret arbeid/usikkert skriveresultat fortsatt uprøvd. SSH/kodehåndtering og øvrig aksept fortsatt åpent.
+05.11: enkel nettbrudd-/gjeninnloggingsprøve eierbekreftet. Prøve med konkret ulagret Vognløp pågår; resultat av gammel økts lagringsforsøk og datakontroll gjenstår.

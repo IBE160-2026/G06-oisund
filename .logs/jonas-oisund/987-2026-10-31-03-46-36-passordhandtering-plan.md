@@ -126,7 +126,10 @@ USB-oppfølging: eier bekreftet godkjenning; ADB viser nå device/TB361FU. To eg
 
 Eier bekreftet nettbrettinnlogging, passordendring fra nettbrett med utlogging på begge fysiske enheter og ny innlogging på begge. Under USB-frakobling ble passordet deretter endret på PC. Ved gjeninnkobling var reverse-reglene borte; kun testportene15440/18441 gjenopprettet og helse kontrollert. Avvisning av gammel nettbrettøkt etter retur venter på eierresultat. Ulagret arbeid var ikke etablert og er ikke kvalifisert av denne prøven.
 
+Oppfølging: første nettbruddprøve eierbekreftet med innloggingsside etter oppdatering og vellykket nytt passord. Ny prøve har eksplisitt ulagret TEST-ULAGRET i Vognløp på nettbrettet, USB-brudd og PC-passordendring. Testportene gjenopprettet etter ny tilkobling; gammel økts lagringsforsøk og resultat venter. Ingen produksjon berørt.
+
 ### Åpne punkter
 USB-godkjenning og testportkobling er bekreftet; fysisk to-enhetsendring er eierbekreftet; nettbruddprøven pågår. SSH/helper, administrativ kode/handoff og øvrige eierporter står fortsatt åpne. To PC-vinduer er ikke to fysiske enheter. Testtjenester beholdt for pågående veiledning.
+
 
 
