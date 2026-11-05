@@ -43,11 +43,11 @@ async function visibility(page:Page) {
 }
 test('operator terminal to app, separate login and other device revocation',async({page,browser})=>{
   // Synthetic PTY capture stays in process memory; no trace or report disclosure.
-  code=python(`import sys,re\nsys.path.insert(0,'tests')\nfrom test_password_recovery_operator import cli\nname=${JSON.stringify(username)}\nstatus,captured=cli(name,[(b'bekrefte',name),(b'TRYGT:','TRYGT'),(b'MOTTATT','MOTTATT')])\nif status != 0: raise RuntimeError('Synthetic terminal issuance failed')\nmatch=re.search(rb'Engangskode: ([A-Za-z0-9_-]{43})',captured)\nif not match: raise RuntimeError('Synthetic terminal code missing')\nprint(match.group(1).decode())\n`).trim();
+  code=python(`import sys,re\nsys.path.insert(0,'tests')\nfrom test_password_recovery_operator import cli\nname=${JSON.stringify(username)}\nstatus,captured=cli(name,[(b'bekrefte',name),(b'TRYGT:','TRYGT'),(b'MOTTATT','MOTTATT')])\nif status != 0: raise RuntimeError('Synthetic terminal issuance failed')\nmatch=re.search(rb'Engangskode: ([A-HJKM-Z2-9]{4}(?:-[A-HJKM-Z2-9]{4}){4})',captured)\nif not match: raise RuntimeError('Synthetic terminal code missing')\nprint(match.group(1).decode())\n`).trim();
   const other=await browser.newContext();const remote=await other.newPage();
   try {
     await remote.goto('/private');await login(remote);
-    await open(page);await fill(page);await submit(page);
+    await open(page);await expect(page.getByText('Nye engangskoder har 20 tegn', {exact:false})).toBeVisible();await expect(page.locator('#recovery-code-help')).toContainText('MOTTATT');await expect(page.getByLabel('Engangskode',{exact:true})).toHaveAttribute('aria-describedby',/\brecovery-code-help\b/);await fill(page,code.toLowerCase().replaceAll('-', ' '));await submit(page);
     await expect(page.getByLabel('Tilgangsstatus')).toContainText('Passordet er endret.');
     await expect(page.getByRole('heading',{name:'Privat arbeidsrom',exact:true})).toHaveCount(0);
     await visibility(remote);
@@ -55,20 +55,20 @@ test('operator terminal to app, separate login and other device revocation',asyn
     await login(page,newPassword);
     expect(await page.evaluate(()=>[localStorage.length,sessionStorage.length])).toEqual([0,0]);
     const logs=execFileSync('docker',['compose','-f','compose.password-tests.yaml','-p','ibe160-password-tests','logs','--no-color','private-api'],{cwd:'..',encoding:'utf8',maxBuffer:8*1024*1024});
-    const safeLogs=![code,oldPassword,newPassword].some(secret=>logs.includes(secret));
+    const safeLogs=![code,code.replaceAll('-', ''),code.toLowerCase().replaceAll('-', ' '),oldPassword,newPassword].some(secret=>logs.includes(secret));
     expect(safeLogs,'No synthetic recovery secrets in service logs').toBe(true);
   } finally {await other.close();}
 });
 test('invalid code associated error, clear secrets, cancel focus',async({page})=>{
   await open(page);await fill(page,'invalid');await submit(page);
-  await expect(page.getByLabel('Engangskode',{exact:true})).toHaveAttribute('aria-describedby','recovery-feedback');
+  await expect(page.getByLabel('Engangskode',{exact:true})).toHaveAttribute('aria-describedby',/\brecovery-feedback\b/);
   await expect.poll(async()=> (await page.getByLabel('Engangskode',{exact:true}).inputValue()) === '', {message:'Recovery secret field is empty'}).toBe(true);
   await expect.poll(async()=> (await page.getByLabel('Nytt passord',{exact:true}).inputValue()) === '', {message:'Recovery secret field is empty'}).toBe(true);
   await expect(page.getByLabel('Brukernavn',{exact:true})).toBeFocused();
   await expect(page.getByRole('status').filter({hasText:'Alle feltene er tømt'})).toBeVisible();
   await page.getByLabel('Engangskode',{exact:true}).fill('corrected-invalid-code');
   await expect(page.locator('input[aria-invalid="true"]')).toHaveCount(0);
-  await expect(page.getByLabel('Engangskode',{exact:true})).not.toHaveAttribute('aria-describedby','recovery-feedback');
+  await expect(page.getByLabel('Engangskode',{exact:true})).not.toHaveAttribute('aria-describedby',/\brecovery-feedback\b/);
   await page.getByRole('button',{name:'Avbryt',exact:true}).click();
   await expect(page.getByRole('button',{name:'Glemt passord?',exact:true})).toBeFocused();
 });

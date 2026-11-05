@@ -61,3 +61,8 @@ Eier kjørte recovery-issue direkte i isolert Compose-terminal og rapporterte at
 Eier foreslår20 tegn i grupper på4. Liten l/stor I bør ikke brukes samtidig; bokstav o/O er akseptabelt dersom tallet0 utelates helt og dette forklares uttrykkelig. Dette er grunnlag for en avgrenset retting, ikke bevis på implementert eller sikkerhetskvalifisert format. Konkret alfabet, normalisering, kompatibilitet og sikkerhetsvurdering må inngå i endringen og testene. Neste praktiske handling er eksplisitt recovery-revoke for synthetic-eier-pm; feil ved innløsning beviser ikke tilbakekalling. SSH-prøven gjenstår separat.
 
 Tilbakekalling bekreftet av eier05.11: recovery-revoke for synthetic-eier-pm svarte «Alle utestående koder er tilbakekalt. Passord og økter er uendret.» Dette er bestått eksplisitt tilbakekalling via lokal Compose-terminal, ikke SSH/helper eller fullført innløsning. Formatfunnet og ny praktisk overleveringsprøve står fortsatt åpne.
+
+
+### Readable code ready for a fresh owner trial — 2026-11-05
+
+The owner requested implementation of the format correction. New codes have20 characters displayed as5 groups of4; 0/I/L/1 excluded, O permitted and explained, ASCII case/space/hyphen normalization. Existing long codes keep exact semantics until expiry. [Independent qualification](readable-code-evidence.md):116 backend and35 browser tests passed, blind review findings patched. Owner test UI/API updated on the same loopback ports with the existing data volume, without issuing/changing any owner credential. New physical handoff and redemption are still pending. Refresh the test page; enter code, acknowledge MOTTATT in the terminal, then submit the recovery form. Prior long-code handoff failure is retained, not relabeled passed.

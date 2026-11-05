@@ -93,7 +93,7 @@ def test_generic_invalid_states_no_mutation(client, users, state):
     code, proof = issued(users)
     name = users[0][0]
     if state == 'malformed': code = 'invalid'
-    if state == 'wrong': code = 'x' * 43
+    if state == 'wrong': code = ('A' if code[0] != 'A' else 'B') + code[1:]
     if state == 'unknown': name = 'synthetic-unknown'
     if state == 'control-name': name = 'synthetic-\x00unknown'
     if state == 'wrong-account': name = users[0][1]
@@ -278,7 +278,7 @@ def test_operator_terminal_to_app_own_account_without_app_password(client,users)
     status,captured=cli(name,[(b'bekrefte',name),(b'TRYGT:','TRYGT'),(b'MOTTATT','MOTTATT')])
     verified = status==0
     assert verified, 'Synthetic recovery invariant failed'
-    match=re.search(rb'Engangskode: ([A-Za-z0-9_-]{43})',captured)
+    match=re.search(rb'Engangskode: ([A-HJKM-Z2-9]{4}(?:-[A-HJKM-Z2-9]{4}){4})',captured)
     verified = match is not None
     assert verified, 'Synthetic terminal code missing'
     code=match.group(1).decode()
@@ -366,3 +366,65 @@ def test_escaped_surrogate_is_bounded_safe_api_rejection(client,users,field):
         assert bounded, 'Invalid Unicode is rejected before recovery admission'
         verified = not conn.execute('SELECT 1 FROM sessions WHERE owner=ANY(%s)',(users[1],)).fetchone()
         assert verified, 'Synthetic recovery invariant failed'
+
+
+@pytest.mark.parametrize('style', ['compact', 'lower', 'hyphens', 'spaces', 'legacy-length'])
+def test_readable_code_variants(client, users, style):
+    code, _ = issued(users)
+    shaped = len(code) == 20 and all(c in recovery.CODE_ALPHABET for c in code)
+    assert shaped, 'Invalid generated recovery shape'
+    candidate = {'compact': code, 'lower': code.lower(),
+                 'hyphens': recovery.display_code(code),
+                 'spaces': recovery.display_code(code).lower().replace('-', ' '),
+                 'legacy-length': code + '-' * 23}[style]
+    result = post(client, users, candidate)
+    assert result.status_code == 200, 'Readable code redemption failed'
+    assert post(client, users, candidate).status_code == 400, 'Code replay accepted'
+
+
+def test_readable_code_ascii_normalization_and_entropy():
+    assert len(recovery.CODE_ALPHABET) == len(set(recovery.CODE_ALPHABET)) == 32
+    assert not set('01IL') & set(recovery.CODE_ALPHABET)
+    assert 'O' in recovery.CODE_ALPHABET
+    example = 'ABCD' * 5
+    assert recovery.canonical_code('abcd-abcd abcd-abcd-abcd') == example
+    for malformed in ['0' + example[1:], 'I' + example[1:], 'l' + example[1:],
+                      'ß' + example[2:], 'Ａ' + example[1:], example + '\n',
+                      example + '\t', example + '\u00a0', example[:-1], example + 'A',
+                      ' ' * 257 + example]:
+        assert recovery.canonical_code(malformed) is None, 'Malformed code accepted'
+
+
+@pytest.mark.parametrize('ambiguous', [False, True])
+def test_legacy_code_exact_and_case_sensitive(client, users, ambiguous):
+    import secrets
+    code, proof = issued(users)
+    legacy = ('ABCD' * 5 + '-' * 23) if ambiguous else secrets.token_urlsafe(32)
+    with database() as conn:
+        conn.execute('UPDATE recovery_proofs SET digest=%s WHERE id=%s', (auth.digest(legacy), proof['id']))
+    changed = legacy.swapcase()
+    assert changed != legacy, 'Legacy test needs an alphabetic character'
+    assert post(client, users, changed).status_code == 400, 'Legacy case altered'
+    assert post(client, users, ' ' + legacy).status_code == 400, 'Legacy spacing altered'
+    assert post(client, users, legacy).status_code == 200, 'Legacy proof lost compatibility'
+
+
+def test_malformed_readable_codes_consume_admission(client, users):
+    code, _ = issued(users)
+    for _ in range(5):
+        assert post(client, users, '0' + code[1:]).status_code == 400
+    assert post(client, users, code).status_code == 429, 'Malformed attempts bypassed admission'
+
+
+
+def test_generation_uses_twenty_independent_choices(users, monkeypatch):
+    calls = []
+    def choose(alphabet):
+        calls.append(alphabet)
+        return alphabet[(len(calls) - 1) % len(alphabet)]
+    monkeypatch.setattr(recovery.secrets, 'choice', choose)
+    code, _ = issued(users)
+    valid = len(calls) == 20 and all(a == recovery.CODE_ALPHABET for a in calls)
+    assert valid, 'Generator must make twenty independent CSPRNG selections'
+    matches = code == recovery.CODE_ALPHABET[:20]
+    assert matches, 'Generator must preserve each independent selection'

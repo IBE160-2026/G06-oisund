@@ -241,12 +241,12 @@ def test_cli_own_account_display_clear_revoke(users):
     cleared_with_timezone = b'\x1b[2J' in captured and b'+00:00' in captured
     assert displayed_once, 'Expected exactly one code display'
     assert cleared_with_timezone, 'Expected clear and UTC expiry'
-    match = re.search(rb'Engangskode: ([A-Za-z0-9_-]{43})', captured)
+    match = re.search(rb'Engangskode: ([A-HJKM-Z2-9]{4}(?:-[A-HJKM-Z2-9]{4}){4})', captured)
     matched = bool(match)
     assert matched, 'Expected one synthetic code'
     with database() as conn:
         digest = conn.execute("SELECT digest FROM recovery_proofs WHERE owner=%s AND state='active'", (users[1][0],)).fetchone()['digest']
-        matches = auth.digest(match.group(1).decode()) == digest
+        matches = auth.digest(recovery.canonical_code(match.group(1).decode())) == digest
         assert matches, 'Recovery digest mismatch'
     for _ in range(2):
         status, _ = cli(name, [(b'bekrefte', name)], action='recovery-revoke')

@@ -113,9 +113,10 @@ def run(action, username):
                 timeout()
             signal.setitimer(signal.ITIMER_REAL, display_budget)
             terminal.begin_secret()
-            terminal.write(f"Engangskode: {code}\nUtløper: {proof['expires_at'].astimezone(timezone.utc).isoformat()} (UTC)\n")
+            terminal.write('20 tegn i fem grupper. Tallet 0 brukes ikke; O er en bokstav. I, L og 1 brukes heller ikke.\nSmå/store bokstaver er like; mellomrom og bindestreker kan utelates.\n')
+            terminal.write(f"Engangskode: {recovery.display_code(code)}\nUtløper: {proof['expires_at'].astimezone(timezone.utc).isoformat()} (UTC)\n")
             code = None
-            if terminal.read('Skriv MOTTATT etter trygg overlevering for å tømme skjermen: ') != 'MOTTATT':
+            if terminal.read('Når koden er skrevet i appen: skriv MOTTATT før brukeren sender inn skjemaet, for å tømme skjermen: ') != 'MOTTATT':
                 raise recovery.RecoveryError('Overlevering ikke bekreftet.')
             terminal.clear()
             recovery.delivery(target, proof_id, acknowledge=True)

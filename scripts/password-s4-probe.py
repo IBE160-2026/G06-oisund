@@ -9,7 +9,7 @@ import sys
 import time
 from uuid import uuid4
 import httpx
-from app import auth
+from app import auth, password_recovery as recovery
 from app.private_storage import database, migrate
 
 ROOT = Path('/state')
@@ -70,7 +70,7 @@ def issue(s,index=0):
     check(status==0,'PTY issuance')
     match=re.search(rb'Engangskode: ([A-Za-z0-9_-]+)',output)
     check(bool(match),'PTY one-time display')
-    code=match[1].decode();s['markers'].append(code);save(s);scan_db()
+    code=match[1].decode();s['markers'].extend([code,recovery.canonical_code(code)]);save(s);scan_db()
     return code
 def retained(s):check(snapshot()==s['business'],'all business content/ownership/deadlines')
 def seed():

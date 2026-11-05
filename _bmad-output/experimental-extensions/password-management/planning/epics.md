@@ -1,4 +1,6 @@
 ---
+
+**Current code format (2026-11-05):** the readable-code correction at the end of this document supersedes the earlier 256-bit generation default. New codes use 20 characters / 100 bits; all lifecycle controls remain.
 stepsCompleted: [1, 2, 3, 4]
 status: in-progress
 implementationAuthorized: true
@@ -230,3 +232,13 @@ Maintenance main1501104 is integrated at merge b7af6b5. See the [current candida
 ## Restore-policy implementation follow-up — 2026-11-04
 
 The owner-approved all-account fresh-code routine is implemented and independently qualified; see [restore evidence](../implementation/restore-evidence.md) and [operator procedure](../implementation/restore-runbook.md). The S4 technical restore-tooling gap is closed for the documented supported archives and isolated scope. Practical installed-host/SSH/identity/handoff/device checks and owner acceptance remain; epic/story status is unchanged. No release/deployment approval is inferred.
+
+
+
+## Readable-code correction — 2026-11-05
+
+The owner requested 20 characters after the practical 43-character handoff failed. New codes use 20 independent CSPRNG selections from 32 symbols (100 bits), displayed as five groups of four. Alphabet: `ABCDEFGHJKMNOPQRSTUVWXYZ23456789`. Digit 0 is never used; O is a letter. I, L and 1 are excluded too. ASCII letter case, spaces and hyphens do not matter for new codes; Unicode lookalikes/control characters and digit 0 are rejected without substitution. Previously issued 43-character codes remain exact and case-sensitive until their original expiry. No migration or credential reset is introduced.
+
+This supersedes the earlier 256-bit generation default, not the purpose/account binding, digest-only storage, 30-minute DB-clock TTL, one-use account transaction, 3 issues/hour or 5 admitted account attempts/15 minutes. The 100-bit uniform space remains infeasible for practical exhaustive guessing; online attempts are additionally bounded. At most 5 guesses in a bucket have probability at most 5/2^100 against a fixed live code. This is a reduction from 256 bits and must not be documented as retaining 256-bit entropy. SHA 256 stores only the canonical secret digest. Password policy and hashing are unchanged.
+
+Direct manual transfer is still subject to identity and capture-free terminal/channel qualification. Acknowledge MOTTATT after entering the code in the user's form but before submitting it; this clears the terminal while the proof is still active. Never place codes in chat, logs, URLs, command arguments or persistent clipboard history. Physical handoff with the corrected format remains pending; existing automated evidence is not that acceptance.

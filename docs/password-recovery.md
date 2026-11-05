@@ -15,3 +15,10 @@ Andre enheter mister gammel tilgang ved neste serverkontroll. En skjerm som alle
 Jonas kan gjenopprette sin egen appkonto uten det glemte apppassordet ved å bruke sin uavhengige server-/SSH-tilgang og velge eget appbrukernavn uttrykkelig. Appkoden reparerer ikke SSH og gir ikke adgang forbi ytre Access. Manglende SSH krever separat vertstilgangsgjenoppretting; manglende Access krever separat Access-hjelp. Ikke legg kode eller passord i URL, logger, sak, chat eller e-post, og avklar eventuell utklippstavlehistorikk/skysynk før overlevering.
 
 Dette er eksperimentell funksjonalitet validert med isolerte syntetiske kontoer. Praktisk identitet/kontakt/overlevering, faktisk SSH, fysisk nettbrett/passordbehandler og eieraksept er **utsatt – krever eier**. Ingen live-bruk før disse kontrollene og S4 er kvalifisert; ingen deploy eller produksjonsendring er utført.
+
+
+## Enklere manuell innskriving (ny testkandidat)
+
+Nye engangskoder har 20 tegn i fem grupper på fire. Tallet 0 brukes ikke; O er en bokstav. I, L og 1 brukes heller ikke. Du kan skrive små eller store bokstaver og utelate mellomrom og bindestreker. Systemet gjetter ikke mellom tegn som ligner. Eldre, lange koder må fortsatt skrives nøyaktig som vist til de utløper. Koden skjules i appen og skal ikke sendes i chat eller skjermbilder.
+
+Skriv koden inn i skjemaet først. Operatøren skriver deretter MOTTATT i terminalen for å bekrefte overleveringen og tømme kodevisningen. Send først da inn skjemaet med nytt passord. Identitetskontroll, engangsbruk og 30 minutters utløp beholdes. Det kortere formatet må prøves praktisk på nytt før releaseaksept.

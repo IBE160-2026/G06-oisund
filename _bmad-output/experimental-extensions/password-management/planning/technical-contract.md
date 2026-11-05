@@ -1,5 +1,7 @@
 # Implementation contract and bounded defaults
 
+**Current code format (2026-11-05):** the readable-code correction at the end of this document supersedes the earlier 256-bit generation default. New codes use 20 characters / 100 bits; all lifecycle controls remain.
+
 Read with the SPEC and epic. The owner decided scope, administrative SSH recovery, all-device logout and separate delivery. The concrete mechanisms/defaults below are engineering proposals for implementation and review, **not new owner-approved product decisions**. No unresolved choice prevents starting S1 after separate authorization. Operational handoff qualifications block real issuance/release if they fail, not creation of synthetic tests.
 
 ## Baseline, code map and stable interfaces
@@ -53,3 +55,13 @@ Before voluntary change, dirty edits must be saved/cancelled and uncertain busin
 Add recovery schema in S2 only. Keep account UUIDs and every business FK/data row. No account recreation, forced reset or email enrollment. If any account-column change is actually needed, fix positional `INSERT INTO accounts VALUES` before the migration and test old/new provisioning. S1's proposed lock-based design avoids an unnecessary credential-generation migration. Enforce proof purpose, owner and expiry in DB-backed service; cleanup failure cannot authorize expiry.
 
 Rollback/restore can resurrect credential state from a backup. The future runbook must quiesce traffic, restore/verify business data, invalidate all restored app sessions and proofs before reopening, and explicitly handle old password hashes restored from older snapshots. Compatibility with older code is verified, not assumed; no new field may be the only revocation barrier ignored by rollback code. Host/outer Access control remains independent. Release/restore operations themselves are outside this planning task.
+
+
+
+## Readable-code correction — 2026-11-05
+
+The owner requested 20 characters after the practical 43-character handoff failed. New codes use 20 independent CSPRNG selections from 32 symbols (100 bits), displayed as five groups of four. Alphabet: `ABCDEFGHJKMNOPQRSTUVWXYZ23456789`. Digit 0 is never used; O is a letter. I, L and 1 are excluded too. ASCII letter case, spaces and hyphens do not matter for new codes; Unicode lookalikes/control characters and digit 0 are rejected without substitution. Previously issued 43-character codes remain exact and case-sensitive until their original expiry. No migration or credential reset is introduced.
+
+This supersedes the earlier 256-bit generation default, not the purpose/account binding, digest-only storage, 30-minute DB-clock TTL, one-use account transaction, 3 issues/hour or 5 admitted account attempts/15 minutes. The 100-bit uniform space remains infeasible for practical exhaustive guessing; online attempts are additionally bounded. At most 5 guesses in a bucket have probability at most 5/2^100 against a fixed live code. This is a reduction from 256 bits and must not be documented as retaining 256-bit entropy. SHA 256 stores only the canonical secret digest. Password policy and hashing are unchanged.
+
+Direct manual transfer is still subject to identity and capture-free terminal/channel qualification. Acknowledge MOTTATT after entering the code in the user's form but before submitting it; this clears the terminal while the proof is still active. Never place codes in chat, logs, URLs, command arguments or persistent clipboard history. Physical handoff with the corrected format remains pending; existing automated evidence is not that acceptance.

@@ -61,3 +61,7 @@ The final synthetic gateway/API/PostgreSQL run passed on base1c4ac7ce2621cb7ec48
 ## v1.1.0 integration update — 2026-11-04
 
 Maintenance main1501104 is integrated at merge b7af6b5. See the [current candidate qualification and concrete restore gap](v110-candidate.md). Historical baseline/test statements above retain their original scope. Owner-dependent stories remain open; technical existing-deployment restore/invalidation tooling also remains a distinct release prerequisite. Full O6 closure is not a blanket gate. No release or production action is authorized by this update.
+
+## Readable-code candidate — 2026-11-05
+
+The [practical journal](owner-tests-20261104.md) records passed PC/tablet password-change and stale-session/offline checks, but manual recovery-code handoff failed due to length/ambiguity. The owner requested a20-character grouped replacement. See [bounded format specification](spec-readable-recovery-code.md) for implementation, review and final qualification. Older S1–S4 source evidence is historical for the changed recovery files; unchanged business/host/access controls retain their earlier evidence. A new physical handoff/redemption attempt remains mandatory before release acceptance. No production install, merge, tag or release is authorized by this correction.

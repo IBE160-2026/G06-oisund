@@ -136,3 +136,13 @@ No broader suite, host-helper change, production action, commit or push was perf
 ### Parent final verification
 
 After all review patches and isolated API restart: combined operator/change/access/cleanup command above **73 passed in125.52s**. Mocked Ubuntu helper suite independently **18 passed in0.082s**. Parent read implementation and tests, checked all14 findings, and git diff --check passed. Updated review diff includes corrections. No verified product finding remains; practical owner/SSH/handoff/device controls remain deferred and status remains in-review, not done. Technical task checks do not waive those mandatory controls. New fetch still shows main5cee9e03d03d2c9c165c7f8fec64aa3e146959ab; other V1 checkout remains clean.
+
+
+
+## Readable-code correction — 2026-11-05
+
+The owner requested 20 characters after the practical 43-character handoff failed. New codes use 20 independent CSPRNG selections from 32 symbols (100 bits), displayed as five groups of four. Alphabet: `ABCDEFGHJKMNOPQRSTUVWXYZ23456789`. Digit 0 is never used; O is a letter. I, L and 1 are excluded too. ASCII letter case, spaces and hyphens do not matter for new codes; Unicode lookalikes/control characters and digit 0 are rejected without substitution. Previously issued 43-character codes remain exact and case-sensitive until their original expiry. No migration or credential reset is introduced.
+
+This supersedes the earlier 256-bit generation default, not the purpose/account binding, digest-only storage, 30-minute DB-clock TTL, one-use account transaction, 3 issues/hour or 5 admitted account attempts/15 minutes. The 100-bit uniform space remains infeasible for practical exhaustive guessing; online attempts are additionally bounded. At most 5 guesses in a bucket have probability at most 5/2^100 against a fixed live code. This is a reduction from 256 bits and must not be documented as retaining 256-bit entropy. SHA 256 stores only the canonical secret digest. Password policy and hashing are unchanged.
+
+Direct manual transfer is still subject to identity and capture-free terminal/channel qualification. Acknowledge MOTTATT after entering the code in the user's form but before submitting it; this clears the terminal while the proof is still active. Never place codes in chat, logs, URLs, command arguments or persistent clipboard history. Physical handoff with the corrected format remains pending; existing automated evidence is not that acceptance.

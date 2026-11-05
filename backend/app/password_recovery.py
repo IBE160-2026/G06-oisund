@@ -1,11 +1,34 @@
 """Operator proof lifecycle and no-session redemption."""
 import os
+import re
 import secrets
 import unicodedata
 from uuid import uuid4
 
 from . import auth
 from .private_storage import database
+
+
+# 32 equally likely symbols: 20 selections provide 100 bits of entropy.
+# O is a letter; digit 0 and the ambiguous I/L/1 are never issued.
+CODE_ALPHABET = 'ABCDEFGHJKMNOPQRSTUVWXYZ23456789'
+CODE_LENGTH = 20
+
+
+def canonical_code(value):
+    if len(value) > 256 or not value.isascii():
+        return None
+    compact = value.replace(' ', '').replace('-', '').upper()
+    if len(compact) == CODE_LENGTH and all(c in CODE_ALPHABET for c in compact):
+        return compact
+    # Preserve already-issued legacy proofs exactly until their original expiry.
+    if re.fullmatch(r'[A-Za-z0-9_-]{43}', value):
+        return value
+    return None
+
+
+def display_code(code):
+    return '-'.join(code[i:i + 4] for i in range(0, len(code), 4))
 
 
 class RecoveryError(Exception):
@@ -66,7 +89,7 @@ def issue(target, proof_id=None):
             audit(conn, target['id'], 'issue', 'limited')
             limited = True
         else:
-            code = secrets.token_urlsafe(32)
+            code = ''.join(secrets.choice(CODE_ALPHABET) for _ in range(CODE_LENGTH))
             invalidate(conn, target['id'])
             row = conn.execute("INSERT INTO recovery_proofs(id,owner,digest,created_at,expires_at) SELECT %s,%s,%s,t,t+interval '30 minutes' FROM (SELECT clock_timestamp() AS t) stamp RETURNING id,expires_at", (proof_id or uuid4(), target['id'], auth.digest(code))).fetchone()
             audit(conn, target['id'], 'issue', 'issued')
@@ -129,7 +152,6 @@ def require_no_session(request):
 
 def redeem(request, username, code, new_password, confirmation):
     import hmac
-    import re
     from fastapi import HTTPException
     if not 12 <= len(new_password) <= 256 or new_password != confirmation:
         raise HTTPException(422, 'Kontroller feltene.')
@@ -145,10 +167,17 @@ def redeem(request, username, code, new_password, confirmation):
         if account:
             auth.account_lock(conn, account['id'])
         proof = conn.execute("SELECT id,digest,expires_at FROM recovery_proofs WHERE owner=%s AND purpose='password-recovery' AND state='active'", (account['id'],)).fetchone() if account else None
-        # Every admitted attempt performs one hash and a fixed-size digest compare,
+        # Every admitted attempt performs two hashes and fixed-size digest compares,
         # including malformed and unknown accounts. No network-time guarantee.
-        valid_shape = re.fullmatch(r'[A-Za-z0-9_-]{43}', code) is not None
-        matches = hmac.compare_digest(auth.digest(code if valid_shape else 'invalid-recovery-code'), proof['digest'] if proof else '0' * 64)
+        canonical = canonical_code(code)
+        valid_shape = canonical is not None
+        legacy_shape = re.fullmatch(r'[A-Za-z0-9_-]{43}', code) is not None
+        expected = proof['digest'] if proof else '0' * 64
+        normalized_match = hmac.compare_digest(auth.digest(canonical if valid_shape else 'invalid-recovery-code'), expected)
+        legacy_match = hmac.compare_digest(auth.digest(code if legacy_shape else 'invalid-legacy-code'), expected)
+        # A heavily separated new code may also have the legacy length. Try both
+        # fixed-size digests without changing exact legacy proof semantics.
+        matches = normalized_match | (legacy_shape and legacy_match)
         replacement = auth.password_hash(new_password)
         live = conn.execute('SELECT %s > clock_timestamp() AS live', (proof['expires_at'],)).fetchone()['live'] if proof else conn.execute('SELECT false AS live').fetchone()['live']
         if not (proof and matches and valid_shape and live):
