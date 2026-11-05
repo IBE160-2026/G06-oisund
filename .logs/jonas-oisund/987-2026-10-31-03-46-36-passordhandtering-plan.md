@@ -111,7 +111,7 @@ Alle oppgavens testtjenester er stoppet; bare de eksisterende ibe160-v1-final-20
 - **Utsatt – krever eier/egen deploybestilling:** faktisk installasjon av helper/systemd-/Compose-sperrer, vertsomstart/SSH-/terminalkjede og praktisk identitet/kodeoverlevering/enhetsaksept. Restorepolicy og selvstendig teknisk mekanisme er ferdig implementert/testet; dette er ikke produksjonsaksept eller autorisasjon til restore/deploy.
 
 
-## 2026-11-05 kl. 20:35 — Jonas Øisund
+## 2026-11-05 kl. 21:02 — Jonas Øisund
 
 ### Oppgave
 Fortsette guidede eierprøver og koble til nettbrett uten produksjonsinngrep.
@@ -139,6 +139,15 @@ Kodeformatretting implementert i7019eb0d247088d8651e878e01e31f41fb8b1a60 etter e
 Sluttkontroll:116 backendtester196,33s (inkludert10 nye format-/genererings-/legacy-/grensetester og eksisterende restoretester),35 fokuserte nettlesertester3,5min, TypeScript/Vite, AST og diffkontroll bestått. Første backend113/191,07s er før-review-evidens. Første nettleserforsøk stoppet etter at lukket testnett undertrykte API-porten; kun eget nett rettet til bridge med loopback, frisk helse og full vellykket gjentakelse. Uttømt Docker-adressepool løst med eget undersøkt ledig subnett, ingen sletting av andres nett. Windows-encodingfeil under testredigering rettet med opprinnelig HEAD-kilde og eksplisittUTF-8 før kvalifisering. Se [evidens](../../_bmad-output/experimental-extensions/password-management/implementation/readable-code-evidence.md) og kildefingeravtrykk.
 
 Automatisk testprosjekt ibe160-pm-code-format-20261105 stoppet/fjernet uten volumesletting. Eiertestappens UI/API oppdatert på15440/18441 mot eksisterende volume; frontend200/APIhealthok, format20/32 og bevart synthetic-eier-pm-konto verifisert uten passordlesing/endring. Eiertjenestene beholdt for ny guidet prøve; øvrige eksisterende tjenester urørt. Ingen produksjon, main-merge, deploy, tag eller release. Spesifikasjon/epic holdes i review for ny fysisk kodeoverlevering/innløsning og resterende eierporter. Arbeid og separat loggcommit pushes til passordbranchen.
+
+Asynkron kodeoverlevering implementert i **a14f515246a5d419277f1c2909fc85432c3ae79c** etter eierens valg av manuell e-post/Teams og SENDT. Terminalen bekrefter sending, ikke mottak; mottakerens skjema omtaler ingen operatørbekreftelse. Identitetskontroll/etablert mottakerkanal, utløp og appadresse beskrives i rutinen. Ingen automatisk e-posttjeneste eller faktisk melding sendt. Utløp er fortsatt 30 minutter; foreslåtte 2 timer er ikke godkjent eller implementert. Tidligere MOTTATT-instruksjoner over er historiske og erstattet.
+
+BMAD Build, separat undersøkelse og blind review gjennomført. Alle 7 konkrete reviewfunn rettet; oppfølgingsreview uten nye konkrete funn. ACK etter allerede brukt kode er sannferdig og endrer ikke passord/økter eller nyere kode. Brukt kodemetadata beholdes frem til opprinnelig utløp for å tåle samtidig cleanup, uten forlenget autoritet. Tester dekker faktisk PTY/HTTP/cleanup/SENDT, avbrudd og terminalgjenopprettingsfeil med/uten nyere kode.
+
+85 ulike backendtester bestått: 84 i samlet kjøring, deretter 1 ny test bestått etter retting av bare testfixturens mikrosekundavvik i SQL-tid. 17 nettlesertester, TypeScript/Vite, Python-syntaks og diffkontroll bestått. Ingen påstand om én samlet 85-passkjøring. Se implementation/sent-handoff-evidence.md og manifest. Uendret tidligere evidens gjenbrukt. Main15011042b1fe093becbe68177e6396e456b1f35f fortsatt integrert.
+
+Lokalt eiertestmiljø oppdatert med bevart volume; frontend200/APIhealthok. Ingen eierpassord, kode eller økt endret av agenten. Automatisk testprosjekt stoppet; eiertjenestene beholdt for guidet prøve og andre tjenester urørt. Ingen produksjon, main-merge, deploy, tag eller release. Ny praktisk sending/innløsning og faktisk SSH-kjede gjenstår; story/epic holdes åpne. Arbeid og separat logg pushes bare til passordbranchen.
+
 ### Åpne punkter
 USB-godkjenning og testportkobling er bekreftet; fysisk to-enhetsendring er eierbekreftet; nettbruddprøven med ulagret arbeid er eierbekreftet innen dokumentert omfang. SSH/helper, administrativ kode/handoff og øvrige eierporter står fortsatt åpne. To PC-vinduer er ikke to fysiske enheter. Testtjenester beholdt for pågående veiledning.
 

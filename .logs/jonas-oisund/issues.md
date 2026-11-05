@@ -161,3 +161,5 @@ Praktisk oppstart04.11 kl.21:11: isolert lokal app klar, eierkontooppretting er 
 - [ ] 2026-11-05 [Praktisk kodeoverlevering](987-2026-10-31-03-46-36-passordhandtering-plan.md) — Manuell kodeoverføring feilet praktisk; eier foreslår20 tegn/grupper4 uten0 og entydige bokstaver. Formatretting og isolert sikkerhets-/kompatibilitetskvalifisering fullført05.11 i7019eb0 (116 backend/35 browser, review rettet). Ny fysisk eierprøve kreves. Eksplisitt tilbakekalling er eierbekreftet05.11; denne delusikkerheten er løst. Ny overleverings-/innløsningsprøve gjenstår; formatrettingen er implementert og testet.
 
 
+
+Oppfølging 5.11 asynkron kodeoverlevering: SENDT og mottakertekst er implementert/testet i a14f515246a5d419277f1c2909fc85432c3ae79c. Manuell kjent mottaker via e-post/Teams krever ikke samtidig kontakt; 30min utløp beholdt. De eksisterende åpne SSH-/handoff-/eierakseptpunktene omfatter fortsatt ny praktisk sending og innløsning med 20-tegnskode. Tidligere MOTTATT-rekkefølge er erstattet; ingen ny releaseaksept.
