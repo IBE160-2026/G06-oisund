@@ -124,6 +124,9 @@ Eier bekreftet konto/innlogging, avvisning av feil gjeldende passord med bevart 
 
 USB-oppfølging: eier bekreftet godkjenning; ADB viser nå device/TB361FU. To egne reverse-regler15440/18441 opprettet uten å overskrive eksisterende regler; lokal frontend/API frisk. Nettbrettfane og innlogging overlates til eier som neste prøve. Ingen produksjonsbetjening.
 
+Eier bekreftet nettbrettinnlogging, passordendring fra nettbrett med utlogging på begge fysiske enheter og ny innlogging på begge. Under USB-frakobling ble passordet deretter endret på PC. Ved gjeninnkobling var reverse-reglene borte; kun testportene15440/18441 gjenopprettet og helse kontrollert. Avvisning av gammel nettbrettøkt etter retur venter på eierresultat. Ulagret arbeid var ikke etablert og er ikke kvalifisert av denne prøven.
+
 ### Åpne punkter
-USB-godkjenning og testportkobling er bekreftet; fysisk enhets-/nettbruddprøve gjenstår. SSH/helper, administrativ kode/handoff og øvrige eierporter står fortsatt åpne. To PC-vinduer er ikke to fysiske enheter. Testtjenester beholdt for pågående veiledning.
+USB-godkjenning og testportkobling er bekreftet; fysisk to-enhetsendring er eierbekreftet; nettbruddprøven pågår. SSH/helper, administrativ kode/handoff og øvrige eierporter står fortsatt åpne. To PC-vinduer er ikke to fysiske enheter. Testtjenester beholdt for pågående veiledning.
+
 
