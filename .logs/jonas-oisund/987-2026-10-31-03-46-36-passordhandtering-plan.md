@@ -110,3 +110,17 @@ Alle oppgavens testtjenester er stoppet; bare de eksisterende ibe160-v1-final-20
 - **Utsatt – krever eier:** faktisk tablet/PC/passordbehandler, to enheters øktinvalidering og nettbrudd/ulagret arbeid; full SSH→helper→Compose-PTY→indre CLI med egen syntetisk appkonto; praktisk identitet/kodeoverlevering uten opptak og personlig passordaksept. Kort liste og forventede utfall er i kandidatrapporten. PM-E1/storyene er ikke fullført.
 - **Utsatt – krever eier/egen deploybestilling:** faktisk installasjon av helper/systemd-/Compose-sperrer, vertsomstart/SSH-/terminalkjede og praktisk identitet/kodeoverlevering/enhetsaksept. Restorepolicy og selvstendig teknisk mekanisme er ferdig implementert/testet; dette er ikke produksjonsaksept eller autorisasjon til restore/deploy.
 
+
+## 2026-11-05 — Jonas Øisund
+
+### Oppgave
+Fortsette guidede eierprøver og koble til nettbrett uten produksjonsinngrep.
+
+### Plan
+Gjenbruke isolert kandidat; føre eierresultater i [testjournal](../../_bmad-output/experimental-extensions/password-management/implementation/owner-tests-20261104.md), kontrollere lokal helse og USB-autorisasjon før portkobling.
+
+### Resultat
+Eier bekreftet konto/innlogging, avvisning av feil gjeldende passord med bevart økt, korrekt passordendring med utlogging i to separate PC-vinduer, avvist gammelt passord og vellykket nytt passord. Oppsettsfeil og eksponert tiltenkt testpassord er dokumentert uten hemmelighetsverdi; nytt testpassord ble foreskrevet før konto-oppretting. Frontend200/APIhealthok kontrollert. ADB finner én enhet som unauthorized; ingen portkobling eller appbetjening utført. Produksjon og andre miljøer urørt. Journal og logg pushes til passordbranchen.
+
+### Åpne punkter
+USB-godkjenning på nettbrett og deretter fysisk enhets-/nettbruddprøve gjenstår. SSH/helper, administrativ kode/handoff og øvrige eierporter står fortsatt åpne. To PC-vinduer er ikke to fysiske enheter. Testtjenester beholdt for pågående veiledning.
