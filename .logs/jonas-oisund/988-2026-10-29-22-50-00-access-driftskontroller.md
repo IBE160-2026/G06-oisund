@@ -419,3 +419,30 @@ Verifiser produksjonsversjon og lokale arkiver. Integrer relevant historisk evid
 ### Åpne punkter
 
 Navngitte O6-rester følges videre med dokumenterte barrierer, midlertidig aksept, eier og nyvurderingshendelse. Firmware er utsatt. Passordarbeidet har eget releaseomfang.
+
+
+## 2026-11-15 kl. 19:08 - Jonas Øisund
+
+### Oppgave
+
+Gjennomfør fersk O6-kontroll lokalt og på GitHub, kontroller server/oppetid først og avklar konkret restarbeid gjennom offisielle leverandørkilder. Bare lesende kontroll og dokumentasjon; ingen samlet O6-lukking eller utvidet risikoaksept.
+
+### Plan
+
+- Les prosjektinstruksjoner, bestilte O6-rapporter og relevante kilde-/eierregistre.
+- Forsøk etablert SSH før videre analyse; kontroller lokale/GitHub-referanser og eksakte distribusjons-/arkitekturbundne leverandørstatuser.
+- Vurder faktiske endringer i passordkandidaten, oppdater nåtidsoversikter og bevar historiske resultater.
+
+### Resultat
+
+Etablert SSH ble avvist før innlogging med Permission denied. Serverens helse, oppetid og aktive/installert tilstand er derfor uverifisert; ingen omvei eller tilgangsendring ble forsøkt. Lokal base1501104 ble sammenholdt med GitHub main4d97c76; de to nye lærerfilene erstatter ingen O6-beslutning. Passordkandidatens lokale og eksterne hode29a77ff samsvarer.
+
+[Datert rapport](../../docs/evidence/o6-status-20261115.md) og [individuelt kilderegister](../../docs/evidence/o6-status-20261115-sources.json) dokumenterer 56 kernelrester: 47 individuelt rettet i publisert Resolute amd64/generic7.0.0-43.43, seks fortsatt sårbare, to tracker/USN-motstrider og én utilgjengelig individuell side. Publisering er ikke aktivt rettelsesbevis. Debian-restene er fortsatt åpne; journald-originstatus og nåværende barrierer er uverifisert. Cloudflared2026.11.0 er en separat vedlikeholdskandidat uten dokumentert lukking av navngitte O6-rester.
+
+README, HANDOFF, Ubuntu-serverguiden og fire submission-oversikter er oppdatert. O3/O5 er fullført innen omfang, O4 administrativt lukket med bevisbegrensninger, og gjennomført O6-arbeid er skilt fra restene. Historiske evidensfiler og eieraksept er uendret. Passordkandidatens nye faste read-only maintenance-mounts og privilegerte restore-helper er vurdert på kildenivå; ingen konkret ny O6-blokkering er påvist. Implementert restore-policy/verktøy og beståtte eierprøver er bevart som gyldig evidens innen eget omfang.
+
+JSON-parse, 56 unike CVE-er, gruppetall, 47 individuelle rettelser, kontroll-/distribusjons-/arkitektur-/kildefelter, rapportens relative filhenvisninger og UTF-8/kontrolltegnkontroll bestod. Registeret er avstemt mot tidligere høyt register: to tidligere rettede og fire plattformutelukkede står utenfor; tre kritiske er lagt til. Git diff --check bestod. Endringer er bare dokumentasjon/logg; ingen pakkeinstallasjon, restart, deploy, tilgangs-/brannmurendring, firmware- eller WAN-prøve. Dokumentasjonen ligger på codex/o6-status-20261115; bare logg/issues committes etter prosjektinstruksjonen, ingen push.
+
+### Åpne punkter
+
+Den eksisterende O6-raden i issues.md er oppdatert, ikke duplisert: lesende serveravstemming; kernelkvalifisering og tre kildeavklaringer; seks kernelrester og Debian-restene som avventer støttet rettelse; journald/barriereverifikasjon; endringsutløste avklaringer; løpende backup og stabilitet. Kandidatens installerte operatør-/restorekjede, fysisk kodeoverlevering og eier-/releaseporter gjenstår i eget omfang. Firmware forblir separat utsatt. Samlet O6 er ikke lukket.
