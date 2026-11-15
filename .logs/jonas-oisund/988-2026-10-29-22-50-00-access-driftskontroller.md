@@ -479,6 +479,16 @@ Siste automatiske backup15.november03:17:19CET har samsvarende timer/start/slutt
 
 Validering: begge fulltekstlesinger uten rest, identisk tekst, normalisert teksthash, JSON-parse,56CVE-er/47individuelle rettelser, dpkg-/APT-binding, timer-/jobb-/dump-samsvar, lenker/tegn og staget diffkontroll bestod. Ingen brede tester, ny agent-SSH, installasjon, restart, deploy, firmware, WAN, merge eller push. Samlet O6 og risikoaksepten er uendret.
 
+### Eierutført omstart og aktivt rettelsesbevis ført kl. 20:07
+
+Jonas ba om kommando for kvalifisert omstart og returnerte faktisk gjennomføring. Den eksisterende bussassistentctl-handlingen planla omstart19:58:55CET etter bestått API-/origin-kontroll, tre enkeltvise active-kontroller og backup Result=success/ExecMainStatus=0. Kommandoens &&-kjede nådde reboot-handlingen. Agenten har ikke koblet til serveren eller startet omstarten.
+
+Etterkontroll2026-11-15T20:02:17+01:00 viser1min oppetid, uname7.0.0-43-generic, version_signature Ubuntu7.0.0-43.43-generic7.0.14, uendret current-releasepeker7921eb54e4816aaab9368c3efd851bcf692f3823 og active for app, tunnel og backup-timer. API-helse og avvisning av uautentisert origin-forespørsel bestod igjen. Planlagt omstartstid er ikke utgitt som faktisk boot-tid. Personlig appinnlogging/visning er ikke bekreftet. Ingen nye image-/bibliotek-/barriereavlesinger, ny backup/restore eller sjekk av reboot-required etterpå er påstått.
+
+**d249eae** bevarer eierkvitteringen og oppdaterer rapport, register og sju nåtidsoversikter.47 av opprinnelige56kernelrester er individuelt lukket som rettet: offisiell CVE/build-mapping + konkret installert Resolute/amd64/generic-pakke fra19:34 + aktiv43.43-signatur fra20:02. Dette inkluderer alle tre kritiske restene. Ni står åpne (seks sårbare, tre kildeavklaringer); bibliotek-/journaldpunkter og øvrige bevisgrenser består. Samlet O6 er ikke administrativt lukket, og ingen risikoaksept er utvidet. Historisk førkontroll og tidligere rapportresultater er bevart.
+
+Validering bestått:56unikeCVE-er,47fixed_active/9open, bare entydig43.43-rettede leverandørrader lukket,3kritiske rettet, kvitteringshash, tre active-linjer, eksakt aktiv signatur, lenker, tegn og staget diffkontroll. Ingen ny pakkeinstallasjon, deploy, firmware, WAN, merge eller push. Ingen bred regresjon eller obligatorisk ukesventetid innført.
+
 ### Åpne punkter
 
-Den eksisterende O6-raden i issues.md er oppdatert, ikke duplisert: lesende serveravstemming; kernelkvalifisering og tre kildeavklaringer; seks kernelrester og Debian-restene som avventer støttet rettelse; journald/barriereverifikasjon; endringsutløste avklaringer; løpende backup og stabilitet. Kandidatens installerte operatør-/restorekjede, fysisk kodeoverlevering og eier-/releaseporter gjenstår i eget omfang. Firmware forblir separat utsatt. Samlet O6 er ikke lukket.
+Personlig innlogging/visning etter omstart er ikke bekreftet. Ni kernelpunkter (seks uten dokumentert rettelse og tre kildeavklaringer), bibliotek-/journaldrester og øvrige versjonsbundne bevisgrenser står åpne. Runtimebarrierer og images er ikke avlest på nytt. Backup/stabilitet følges i vanlig drift; firmware er separat utsatt. Kandidatens egne operatør-/restore-/eierporter består. Alt er speilet i eksisterende O6-rad; samlet O6 er fortsatt åpen.
