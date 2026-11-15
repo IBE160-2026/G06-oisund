@@ -9,6 +9,8 @@ updated: 2026-10-19
 
 # Bus Driver Assistant — Course V1
 
+> **HISTORISK PRD – erstattet som samlet nåbeskrivelse 15. november 2026.** Kravteksten nedenfor er den tidligere PRD-en som faglæreren vurderte. En [uendret historisk kopi](prd-historical-before-feedback-2026-11-12.md) bevarer også originalens metadata og innhold uten dette lesernotatet. Les [revidert PRD](prd-revised-v1.0.1.md) for dokumentasjonsrevisjonen etter [faglærerens tilbakemelding 12. november](tilbakemelding-prd.md), skrevet etter ferdigstilt V1 og publisert V1.0.1. Status- og godkjenningsfeltene over samt notatene nedenfor beskriver den historiske versjonen.
+
 > Current-scope note, 31 October 2026: Jonas includes completed Ubuntu integration in final V1. [Superseding scope/status and version-specific evidence](../../../../docs/submission/v1-scope-and-operations.md). Earlier bonus/v1.0.1 exclusions or no-deployment statements below describe their original checkpoint. Application/D1–D3/Epic12 acceptance is unchanged; original tests are not relabelled later-code runs. O3–O6 remain open; repository reflection is now owner-approved (see scope/status link), while final freeze, course confirmation and submission remain pending.
 
 ## 1. Authority and delivery boundary
