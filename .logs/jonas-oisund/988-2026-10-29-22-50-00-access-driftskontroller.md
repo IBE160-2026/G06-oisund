@@ -443,6 +443,16 @@ README, HANDOFF, Ubuntu-serverguiden og fire submission-oversikter er oppdatert.
 
 JSON-parse, 56 unike CVE-er, gruppetall, 47 individuelle rettelser, kontroll-/distribusjons-/arkitektur-/kildefelter, rapportens relative filhenvisninger og UTF-8/kontrolltegnkontroll bestod. Registeret er avstemt mot tidligere høyt register: to tidligere rettede og fire plattformutelukkede står utenfor; tre kritiske er lagt til. Git diff --check bestod. Endringer er bare dokumentasjon/logg; ingen pakkeinstallasjon, restart, deploy, tilgangs-/brannmurendring, firmware- eller WAN-prøve. Dokumentasjonen ligger på codex/o6-status-20261115; bare logg/issues committes etter prosjektinstruksjonen, ingen push.
 
+### Oppfølging samme dag kl. 19:16
+
+Jonas ba om konkret SSH-diagnose, lesende serverkontroll hvis mulig og commit av egne ferdige dokumentasjonsendringer uten merge/push. Samme branch og de ni egne ukommitterte filene ble kontrollert. Full ssh -vvv viser Windows WSAEACCES10013 under TCP-connect, native SSH-exit255, før serverbanner/nøkkelutveksling/autentisering. Den tidligere rapporterte prosess-/wrapperkoden1 er skilt fra den nye native målingen. Dette er lokal socket-/transporttilgangsfeil, ikke påvist autentiseringsavslag. Agentens nettverksbegrensning er kjent; eksakt filterregel er ikke identifisert.
+
+Effektiv ssh -G bruker jonas@192.168.1.138:22, nøkkelen ibe160_server_ed25519, IdentitiesOnly/BatchMode/StrictHostKeyChecking og HostKeyAlias192.168.1.139; ingen proxy. Nøkkelfilen er lesbar med avgrenset ACL, privatfilens offentlige del og .pub har samme ED25519-fingeravtrykk, og kjent vertsalias finnes. Bruker-/system-SSH-config finnes ikke; opsjonene gis eksplisitt. Ingen tilgjengelig SSH-agent ble observert, men autentisering ble aldri nådd. Ingen nøkkelinnhold eller passord er skrevet ut. Ingen regelendring, eskalering eller alternativ transport er forsøkt.
+
+Rapporten og kilderegisteret inneholder hele verbose-feilen, bevisgrenser og én lesende kommando Jonas kan kjøre i vanlig PowerShell. Nåtidstekstene presiserer lokal connect-feil. Oppetid, boot, release/helse, aktiv/installert kernel og APT-kandidat, pakker/images/barrierer, backup og driftsfeil forblir uverifisert. Publiserte rettelser er ikke omklassifisert til installerte/aktive.
+
+Dokumentasjonen er committet som **55a2797** (nøyaktig ni egne dokumentasjonsfiler). UTF-8-/kontrolltegnkontroll, enkel hemmelighetsmarkørkontroll, rapportlenker, JSON og 56 unike CVE-er/47 rettelser bestod. Den manuelle PowerShell-kommandoen bestod syntakskontroll uten utføring. Staget diffkontroll fant én ekstra tom sluttlinje i den nye rapporten; den ble rettet, og kontrollen bestod før commit. Ingen produktkode eller historiske evidensfiler er endret. Bare lokal commit, ingen merge/push. Samlet O6, midlertidig aksept, O4 og utsatt firmware er uendret.
+
 ### Åpne punkter
 
 Den eksisterende O6-raden i issues.md er oppdatert, ikke duplisert: lesende serveravstemming; kernelkvalifisering og tre kildeavklaringer; seks kernelrester og Debian-restene som avventer støttet rettelse; journald/barriereverifikasjon; endringsutløste avklaringer; løpende backup og stabilitet. Kandidatens installerte operatør-/restorekjede, fysisk kodeoverlevering og eier-/releaseporter gjenstår i eget omfang. Firmware forblir separat utsatt. Samlet O6 er ikke lukket.
