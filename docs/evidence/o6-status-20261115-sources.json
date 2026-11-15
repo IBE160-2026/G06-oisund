@@ -74,7 +74,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2022-50240",
       "assessment": "Ingen støttet rettelse dokumentert i kontrollert tracker",
       "owner": "Jonas",
-      "production_status": "Uverifisert 2026-11-15; SSH avvist før innlogging"
+      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
     },
     {
       "cve": "CVE-2026-68103",
@@ -90,7 +90,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-68103",
       "assessment": "Ingen støttet rettelse dokumentert i kontrollert tracker",
       "owner": "Jonas",
-      "production_status": "Uverifisert 2026-11-15; SSH avvist før innlogging"
+      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
     },
     {
       "cve": "CVE-2026-72198",
@@ -106,7 +106,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-72198",
       "assessment": "Ingen støttet rettelse dokumentert i kontrollert tracker",
       "owner": "Jonas",
-      "production_status": "Uverifisert 2026-11-15; SSH avvist før innlogging"
+      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
     },
     {
       "cve": "CVE-2026-72497",
@@ -122,7 +122,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-72497",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Uverifisert 2026-11-15; SSH avvist før innlogging"
+      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
     },
     {
       "cve": "CVE-2026-89805",
@@ -138,7 +138,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-89805",
       "assessment": "Ingen støttet rettelse dokumentert i kontrollert tracker",
       "owner": "Jonas",
-      "production_status": "Uverifisert 2026-11-15; SSH avvist før innlogging"
+      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
     },
     {
       "cve": "CVE-2026-90155",
@@ -154,7 +154,7 @@
       "vendor_url": "https://ubuntu.com/security/notices/USN-9018-1",
       "assessment": "USN-kandidat; individuell generic-pakkebinding uverifisert",
       "owner": "Jonas",
-      "production_status": "Uverifisert 2026-11-15; SSH avvist før innlogging"
+      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
     },
     {
       "cve": "CVE-2026-90167",
@@ -170,7 +170,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-90167",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Uverifisert 2026-11-15; SSH avvist før innlogging"
+      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
     },
     {
       "cve": "CVE-2026-90317",
@@ -186,7 +186,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-90317",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Uverifisert 2026-11-15; SSH avvist før innlogging"
+      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
     },
     {
       "cve": "CVE-2026-93175",
@@ -202,7 +202,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-93175",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Uverifisert 2026-11-15; SSH avvist før innlogging"
+      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
     },
     {
       "cve": "CVE-2026-98376",
@@ -218,7 +218,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98376",
       "assessment": "Ingen støttet rettelse dokumentert i kontrollert tracker",
       "owner": "Jonas",
-      "production_status": "Uverifisert 2026-11-15; SSH avvist før innlogging"
+      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
     },
     {
       "cve": "CVE-2026-98420",
@@ -234,7 +234,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98420",
       "assessment": "Ingen støttet rettelse dokumentert i kontrollert tracker",
       "owner": "Jonas",
-      "production_status": "Uverifisert 2026-11-15; SSH avvist før innlogging"
+      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
     },
     {
       "cve": "CVE-2026-98432",
@@ -250,7 +250,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98432",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Uverifisert 2026-11-15; SSH avvist før innlogging"
+      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
     },
     {
       "cve": "CVE-2026-98689",
@@ -266,7 +266,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98689",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Uverifisert 2026-11-15; SSH avvist før innlogging"
+      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
     },
     {
       "cve": "CVE-2026-98699",
@@ -282,7 +282,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98699",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Uverifisert 2026-11-15; SSH avvist før innlogging"
+      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
     },
     {
       "cve": "CVE-2026-98701",
@@ -298,7 +298,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98701",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Uverifisert 2026-11-15; SSH avvist før innlogging"
+      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
     },
     {
       "cve": "CVE-2026-98702",
@@ -314,7 +314,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98702",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Uverifisert 2026-11-15; SSH avvist før innlogging"
+      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
     },
     {
       "cve": "CVE-2026-98704",
@@ -330,7 +330,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98704",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Uverifisert 2026-11-15; SSH avvist før innlogging"
+      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
     },
     {
       "cve": "CVE-2026-98706",
@@ -346,7 +346,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98706",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Uverifisert 2026-11-15; SSH avvist før innlogging"
+      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
     },
     {
       "cve": "CVE-2026-98707",
@@ -362,7 +362,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98707",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Uverifisert 2026-11-15; SSH avvist før innlogging"
+      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
     },
     {
       "cve": "CVE-2026-98708",
@@ -378,7 +378,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98708",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Uverifisert 2026-11-15; SSH avvist før innlogging"
+      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
     },
     {
       "cve": "CVE-2026-98709",
@@ -394,7 +394,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98709",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Uverifisert 2026-11-15; SSH avvist før innlogging"
+      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
     },
     {
       "cve": "CVE-2026-98730",
@@ -410,7 +410,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98730",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Uverifisert 2026-11-15; SSH avvist før innlogging"
+      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
     },
     {
       "cve": "CVE-2026-98733",
@@ -426,7 +426,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98733",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Uverifisert 2026-11-15; SSH avvist før innlogging"
+      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
     },
     {
       "cve": "CVE-2026-98734",
@@ -442,7 +442,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98734",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Uverifisert 2026-11-15; SSH avvist før innlogging"
+      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
     },
     {
       "cve": "CVE-2026-98735",
@@ -458,7 +458,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98735",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Uverifisert 2026-11-15; SSH avvist før innlogging"
+      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
     },
     {
       "cve": "CVE-2026-98737",
@@ -474,7 +474,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98737",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Uverifisert 2026-11-15; SSH avvist før innlogging"
+      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
     },
     {
       "cve": "CVE-2026-98738",
@@ -490,7 +490,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98738",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Uverifisert 2026-11-15; SSH avvist før innlogging"
+      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
     },
     {
       "cve": "CVE-2026-98739",
@@ -506,7 +506,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98739",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Uverifisert 2026-11-15; SSH avvist før innlogging"
+      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
     },
     {
       "cve": "CVE-2026-98741",
@@ -522,7 +522,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98741",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Uverifisert 2026-11-15; SSH avvist før innlogging"
+      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
     },
     {
       "cve": "CVE-2026-98742",
@@ -538,7 +538,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98742",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Uverifisert 2026-11-15; SSH avvist før innlogging"
+      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
     },
     {
       "cve": "CVE-2026-98752",
@@ -554,7 +554,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98752",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Uverifisert 2026-11-15; SSH avvist før innlogging"
+      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
     },
     {
       "cve": "CVE-2026-98763",
@@ -570,7 +570,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98763",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Uverifisert 2026-11-15; SSH avvist før innlogging"
+      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
     },
     {
       "cve": "CVE-2026-98776",
@@ -586,7 +586,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98776",
       "assessment": "Motstrid mellom CVE-tracker og USN; konkret 43.43-kildebevis gjenstår",
       "owner": "Jonas",
-      "production_status": "Uverifisert 2026-11-15; SSH avvist før innlogging"
+      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
     },
     {
       "cve": "CVE-2026-98788",
@@ -602,7 +602,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98788",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Uverifisert 2026-11-15; SSH avvist før innlogging"
+      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
     },
     {
       "cve": "CVE-2026-98792",
@@ -618,7 +618,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98792",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Uverifisert 2026-11-15; SSH avvist før innlogging"
+      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
     },
     {
       "cve": "CVE-2026-98794",
@@ -634,7 +634,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98794",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Uverifisert 2026-11-15; SSH avvist før innlogging"
+      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
     },
     {
       "cve": "CVE-2026-98797",
@@ -650,7 +650,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98797",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Uverifisert 2026-11-15; SSH avvist før innlogging"
+      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
     },
     {
       "cve": "CVE-2026-98799",
@@ -666,7 +666,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98799",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Uverifisert 2026-11-15; SSH avvist før innlogging"
+      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
     },
     {
       "cve": "CVE-2026-98800",
@@ -682,7 +682,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98800",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Uverifisert 2026-11-15; SSH avvist før innlogging"
+      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
     },
     {
       "cve": "CVE-2026-98803",
@@ -698,7 +698,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98803",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Uverifisert 2026-11-15; SSH avvist før innlogging"
+      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
     },
     {
       "cve": "CVE-2026-98804",
@@ -714,7 +714,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98804",
       "assessment": "Motstrid mellom CVE-tracker og USN; konkret 43.43-kildebevis gjenstår",
       "owner": "Jonas",
-      "production_status": "Uverifisert 2026-11-15; SSH avvist før innlogging"
+      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
     },
     {
       "cve": "CVE-2026-98813",
@@ -730,7 +730,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98813",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Uverifisert 2026-11-15; SSH avvist før innlogging"
+      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
     },
     {
       "cve": "CVE-2026-98823",
@@ -746,7 +746,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98823",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Uverifisert 2026-11-15; SSH avvist før innlogging"
+      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
     },
     {
       "cve": "CVE-2026-98824",
@@ -762,7 +762,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98824",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Uverifisert 2026-11-15; SSH avvist før innlogging"
+      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
     },
     {
       "cve": "CVE-2026-98827",
@@ -778,7 +778,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98827",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Uverifisert 2026-11-15; SSH avvist før innlogging"
+      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
     },
     {
       "cve": "CVE-2026-98829",
@@ -794,7 +794,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98829",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Uverifisert 2026-11-15; SSH avvist før innlogging"
+      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
     },
     {
       "cve": "CVE-2026-98836",
@@ -810,7 +810,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98836",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Uverifisert 2026-11-15; SSH avvist før innlogging"
+      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
     },
     {
       "cve": "CVE-2026-98837",
@@ -826,7 +826,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98837",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Uverifisert 2026-11-15; SSH avvist før innlogging"
+      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
     },
     {
       "cve": "CVE-2026-98846",
@@ -842,7 +842,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98846",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Uverifisert 2026-11-15; SSH avvist før innlogging"
+      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
     },
     {
       "cve": "CVE-2026-98858",
@@ -858,7 +858,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98858",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Uverifisert 2026-11-15; SSH avvist før innlogging"
+      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
     },
     {
       "cve": "CVE-2026-98861",
@@ -874,7 +874,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98861",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Uverifisert 2026-11-15; SSH avvist før innlogging"
+      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
     },
     {
       "cve": "CVE-2026-98862",
@@ -890,7 +890,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98862",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Uverifisert 2026-11-15; SSH avvist før innlogging"
+      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
     },
     {
       "cve": "CVE-2026-98863",
@@ -906,7 +906,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98863",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Uverifisert 2026-11-15; SSH avvist før innlogging"
+      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
     },
     {
       "cve": "CVE-2026-90162",
@@ -922,7 +922,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-90162",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Uverifisert 2026-11-15; SSH avvist før innlogging"
+      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
     },
     {
       "cve": "CVE-2026-98725",
@@ -938,7 +938,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98725",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Uverifisert 2026-11-15; SSH avvist før innlogging"
+      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
     },
     {
       "cve": "CVE-2026-98805",
@@ -954,7 +954,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98805",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Uverifisert 2026-11-15; SSH avvist før innlogging"
+      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
     }
   ],
   "debian": {
@@ -1069,5 +1069,34 @@
     "minimum_owner_step": "Run the report's read-only SSH command in ordinary Windows PowerShell; share output/error only. No credentials, server SSH changes or firewall changes requested.",
     "runtime_verified": false,
     "checked_date": "2026-11-15"
+  },
+  "owner_server_observation": {
+    "observed_at": "2026-11-15T19:17:55+01:00",
+    "provenance": "User-pasted result of the supplied read-only SSH command; owner executed, not independently agent measured",
+    "raw_output": "2026-11-15T19:17:55+01:00\n 19:17:55 up 13 days, 19:50,  2 users,  load average: 0.08, 0.09, 0.09\n2026-11-01 23:27:52\n7.0.0-42-generic\n/opt/bussassistent/releases/7921eb54e4816aaab9368c3efd851bcf692f3823\nactive\nactive\nactive",
+    "uptime": "13 days, 19:50",
+    "boot_local": "2026-11-01 23:27:52",
+    "active_kernel": "7.0.0-42-generic",
+    "current_release_link": "/opt/bussassistent/releases/7921eb54e4816aaab9368c3efd851bcf692f3823",
+    "systemd_states": {
+      "bussassistent.service": "active",
+      "cloudflared.service": "active",
+      "bussassistent-backup.timer": "active"
+    },
+    "load_average": [
+      0.08,
+      0.09,
+      0.09
+    ],
+    "candidate_kernel_active": false,
+    "installed_candidate_unknown": true,
+    "limitations": [
+      "No current dpkg package build or APT policy",
+      "No container image identity or application-level health check",
+      "No actual backup outcome, retention or restore result",
+      "No barrier or journal verification",
+      "No boot ID or causal conclusion about earlier freezes"
+    ],
+    "ssh_conclusion": "Owner SSH works; observed 10013 is confined to agent execution context; exact local filter rule unidentified"
   }
 }

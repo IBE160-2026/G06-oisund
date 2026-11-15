@@ -2,7 +2,7 @@
 
 ## Current operational handover — 15 November 2026
 
-O3/O5 are complete within documented scope; O4 is administratively closed with its evidence limits. O6 maintenance, closing checks and triage are complete; named residuals remain open, with unchanged temporary risk acceptance and separately deferred firmware. Full O6 closure is not a general password-release prerequisite. [Dated O6 status and next work](docs/evidence/o6-status-20261115.md): supported kernel fixes are published, but current server uptime/health and installed/active versions are unverified after Windows denied the local TCP connection (WSAEACCES 10013), before SSH handshake/authentication. Last verified production release: 7921eb5 on 4 November. No production operation, new WAN test or risk acceptance change was performed.
+O3/O5 are complete within documented scope; O4 is administratively closed with its evidence limits. O6 maintenance, closing checks and triage are complete; named residuals remain open, with unchanged temporary risk acceptance and separately deferred firmware. Full O6 closure is not a general password-release prerequisite. [Dated O6 status and next work](docs/evidence/o6-status-20261115.md): Owner-provided SSH output at 19:17:55 +01:00 confirms uptime 13 days 19h50m, boot 1 November 23:27:52, active kernel 7.0.0-42-generic, current release link 7921eb5, and active app/tunnel services and backup timer. Installed packages/images, local APT candidate, runtime barriers, successful backup and application-level health remain unverified. The agent connection is still locally blocked. No installation, restart, deploy or risk acceptance change was performed.
 
 ## Historical handover checkpoints
 
