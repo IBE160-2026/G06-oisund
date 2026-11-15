@@ -489,6 +489,10 @@ Etterkontroll2026-11-15T20:02:17+01:00 viser1min oppetid, uname7.0.0-43-generic,
 
 Validering bestått:56unikeCVE-er,47fixed_active/9open, bare entydig43.43-rettede leverandørrader lukket,3kritiske rettet, kvitteringshash, tre active-linjer, eksakt aktiv signatur, lenker, tegn og staget diffkontroll. Ingen ny pakkeinstallasjon, deploy, firmware, WAN, merge eller push. Ingen bred regresjon eller obligatorisk ukesventetid innført.
 
+### Personlig etterkontroll bekreftet samme dag
+
+Jonas bekreftet etter omstart: «Vanlig innlogging fungerer. Visning er som normalt». Commit **ef6babf** oppdaterer rapport, kilderegister og sju gjeldende oversikter. Personlig etterkontroll er bestått for vanlig innlogging og visning; eksakt prøvetid/enhet/nettleser er ikke oppgitt, og lagring/gjenåpning eller bred regresjon er ikke utledet prøvd. JSON og diffkontroll er gjennomgått. Ingen serveroperasjoner, nye CVE-lukkinger, utvidet risikoaksept, merge eller push.
+
 ### Åpne punkter
 
-Personlig innlogging/visning etter omstart er ikke bekreftet. Ni kernelpunkter (seks uten dokumentert rettelse og tre kildeavklaringer), bibliotek-/journaldrester og øvrige versjonsbundne bevisgrenser står åpne. Runtimebarrierer og images er ikke avlest på nytt. Backup/stabilitet følges i vanlig drift; firmware er separat utsatt. Kandidatens egne operatør-/restore-/eierporter består. Alt er speilet i eksisterende O6-rad; samlet O6 er fortsatt åpen.
+Ni kernelpunkter (seks uten dokumentert rettelse og tre kildeavklaringer), bibliotek-/journaldrester og øvrige versjonsbundne bevisgrenser står åpne. Runtimebarrierer og images er ikke avlest på nytt. Backup/stabilitet følges i vanlig drift; firmware er separat utsatt. Kandidatens egne operatør-/restore-/eierporter består. Alt er speilet i eksisterende O6-rad; samlet O6 er fortsatt åpen.
