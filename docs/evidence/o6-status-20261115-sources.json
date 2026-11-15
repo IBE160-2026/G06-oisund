@@ -53,13 +53,14 @@
     "limits": "Vendor package metadata/CVE mapping; no downloaded binary, InRelease signature verification, server apt-policy or hardware qualification"
   },
   "counts": {
-    "individual_tracker_fixed": 47,
+    "individual_tracker_fixed": 49,
+    "canonical_osv_fixed": 1,
     "vulnerable": 6,
-    "tracker_usn_conflict": 2,
-    "usn_only": 1,
+    "tracker_usn_conflict": 0,
+    "usn_only": 0,
     "baseline_kernel_residual_cves": 56,
-    "fixed_on_active_kernel": 47,
-    "current_open_kernel_cves": 9
+    "fixed_on_active_kernel": 50,
+    "current_open_kernel_cves": 6
   },
   "kernel": [
     {
@@ -82,7 +83,8 @@
         "checked_at": "2026-11-15T20:02:17+01:00",
         "basis": "Existing individual vendor status retained; active kernel alone does not resolve this finding",
         "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
-      }
+      },
+      "next_action": "Exact Ubuntu43.43 source/build comparison to Linux CNA fix, then supported backport if vulnerable; detailed per-CVE alternatives in o6-kernel-followup-20261115.md"
     },
     {
       "cve": "CVE-2026-68103",
@@ -104,7 +106,8 @@
         "checked_at": "2026-11-15T20:02:17+01:00",
         "basis": "Existing individual vendor status retained; active kernel alone does not resolve this finding",
         "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
-      }
+      },
+      "next_action": "Exact Ubuntu43.43 source/build comparison to Linux CNA fix, then supported backport if vulnerable; detailed per-CVE alternatives in o6-kernel-followup-20261115.md"
     },
     {
       "cve": "CVE-2026-72198",
@@ -126,7 +129,8 @@
         "checked_at": "2026-11-15T20:02:17+01:00",
         "basis": "Existing individual vendor status retained; active kernel alone does not resolve this finding",
         "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
-      }
+      },
+      "next_action": "Exact Ubuntu43.43 source/build comparison to Linux CNA fix, then supported backport if vulnerable; detailed per-CVE alternatives in o6-kernel-followup-20261115.md"
     },
     {
       "cve": "CVE-2026-72497",
@@ -170,7 +174,8 @@
         "checked_at": "2026-11-15T20:02:17+01:00",
         "basis": "Existing individual vendor status retained; active kernel alone does not resolve this finding",
         "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
-      }
+      },
+      "next_action": "Exact Ubuntu43.43 source/build comparison to Linux CNA fix, then supported backport if vulnerable; detailed per-CVE alternatives in o6-kernel-followup-20261115.md"
     },
     {
       "cve": "CVE-2026-90155",
@@ -182,17 +187,29 @@
       "vendor_source_package": "linux",
       "vendor_distribution": "Ubuntu 26.04 LTS (resolute)",
       "target_architecture": "amd64",
-      "vendor_status": "Listed in USN-9018-1; individual Ubuntu CVE page unavailable",
-      "vendor_url": "https://ubuntu.com/security/notices/USN-9018-1",
-      "assessment": "USN-kandidat; individuell generic-pakkebinding uverifisert",
+      "vendor_status": "Fixed in 7.0.0-43.43",
+      "vendor_url": "https://github.com/canonical/ubuntu-security-notices/blob/main/osv/cve/2026/UBUNTU-CVE-2026-90155.json",
+      "assessment": "Kildegap avklart ved nytt offisielt oppslag 15. november etter eierbekreftet omstart; se o6-kernel-followup-20261115.md",
       "owner": "Jonas",
-      "production_status": "Fortsatt åpen: aktiv 43.43 er bekreftet, men individuell leverandørrettelse er fortsatt uavklart eller ikke publisert; runtimebarriere ikke avlest på nytt.",
+      "production_status": "Individuelt rettet på aktiv Resolute/amd64/generic 7.0.0-43.43; ingen ny installasjon nødvendig.",
       "production_disposition": {
-        "status": "open",
-        "checked_at": "2026-11-15T20:02:17+01:00",
-        "basis": "Existing individual vendor status retained; active kernel alone does not resolve this finding",
-        "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
-      }
+        "status": "fixed_active",
+        "checked_at": "2026-11-15",
+        "basis": "Fresh individual Ubuntu CVE page or Canonical OSV mapping to exact source/build + installed amd64/generic package at19:34 + active signature at20:02",
+        "evidence": "docs/evidence/o6-kernel-followup-20261115.md"
+      },
+      "previous_assessments": [
+        {
+          "vendor_status": "Listed in USN-9018-1; individual Ubuntu CVE page unavailable",
+          "assessment": "USN-kandidat; individuell generic-pakkebinding uverifisert",
+          "production_disposition": {
+            "status": "open",
+            "checked_at": "2026-11-15T20:02:17+01:00",
+            "basis": "Existing individual vendor status retained; active kernel alone does not resolve this finding",
+            "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
+          }
+        }
+      ]
     },
     {
       "cve": "CVE-2026-90167",
@@ -280,7 +297,8 @@
         "checked_at": "2026-11-15T20:02:17+01:00",
         "basis": "Existing individual vendor status retained; active kernel alone does not resolve this finding",
         "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
-      }
+      },
+      "next_action": "Exact Ubuntu43.43 source/build comparison to Linux CNA fix, then supported backport if vulnerable; detailed per-CVE alternatives in o6-kernel-followup-20261115.md"
     },
     {
       "cve": "CVE-2026-98420",
@@ -302,7 +320,8 @@
         "checked_at": "2026-11-15T20:02:17+01:00",
         "basis": "Existing individual vendor status retained; active kernel alone does not resolve this finding",
         "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
-      }
+      },
+      "next_action": "Exact Ubuntu43.43 source/build comparison to Linux CNA fix, then supported backport if vulnerable; detailed per-CVE alternatives in o6-kernel-followup-20261115.md"
     },
     {
       "cve": "CVE-2026-98432",
@@ -776,17 +795,29 @@
       "vendor_source_package": "linux",
       "vendor_distribution": "Ubuntu 26.04 LTS (resolute)",
       "target_architecture": "amd64",
-      "vendor_status": "Vulnerable work in progress in 7.0.0-43.43",
+      "vendor_status": "Fixed in 7.0.0-43.43",
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98776",
-      "assessment": "Motstrid mellom CVE-tracker og USN; konkret 43.43-kildebevis gjenstår",
+      "assessment": "Kildegap avklart ved nytt offisielt oppslag 15. november etter eierbekreftet omstart; se o6-kernel-followup-20261115.md",
       "owner": "Jonas",
-      "production_status": "Fortsatt åpen: aktiv 43.43 er bekreftet, men individuell leverandørrettelse er fortsatt uavklart eller ikke publisert; runtimebarriere ikke avlest på nytt.",
+      "production_status": "Individuelt rettet på aktiv Resolute/amd64/generic 7.0.0-43.43; ingen ny installasjon nødvendig.",
       "production_disposition": {
-        "status": "open",
-        "checked_at": "2026-11-15T20:02:17+01:00",
-        "basis": "Existing individual vendor status retained; active kernel alone does not resolve this finding",
-        "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
-      }
+        "status": "fixed_active",
+        "checked_at": "2026-11-15",
+        "basis": "Fresh individual Ubuntu CVE page or Canonical OSV mapping to exact source/build + installed amd64/generic package at19:34 + active signature at20:02",
+        "evidence": "docs/evidence/o6-kernel-followup-20261115.md"
+      },
+      "previous_assessments": [
+        {
+          "vendor_status": "Vulnerable work in progress in 7.0.0-43.43",
+          "assessment": "Motstrid mellom CVE-tracker og USN; konkret 43.43-kildebevis gjenstår",
+          "production_disposition": {
+            "status": "open",
+            "checked_at": "2026-11-15T20:02:17+01:00",
+            "basis": "Existing individual vendor status retained; active kernel alone does not resolve this finding",
+            "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
+          }
+        }
+      ]
     },
     {
       "cve": "CVE-2026-98788",
@@ -952,17 +983,29 @@
       "vendor_source_package": "linux",
       "vendor_distribution": "Ubuntu 26.04 LTS (resolute)",
       "target_architecture": "amd64",
-      "vendor_status": "Vulnerable work in progress in 7.0.0-43.43",
+      "vendor_status": "Fixed in 7.0.0-43.43",
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98804",
-      "assessment": "Motstrid mellom CVE-tracker og USN; konkret 43.43-kildebevis gjenstår",
+      "assessment": "Kildegap avklart ved nytt offisielt oppslag 15. november etter eierbekreftet omstart; se o6-kernel-followup-20261115.md",
       "owner": "Jonas",
-      "production_status": "Fortsatt åpen: aktiv 43.43 er bekreftet, men individuell leverandørrettelse er fortsatt uavklart eller ikke publisert; runtimebarriere ikke avlest på nytt.",
+      "production_status": "Individuelt rettet på aktiv Resolute/amd64/generic 7.0.0-43.43; ingen ny installasjon nødvendig.",
       "production_disposition": {
-        "status": "open",
-        "checked_at": "2026-11-15T20:02:17+01:00",
-        "basis": "Existing individual vendor status retained; active kernel alone does not resolve this finding",
-        "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
-      }
+        "status": "fixed_active",
+        "checked_at": "2026-11-15",
+        "basis": "Fresh individual Ubuntu CVE page or Canonical OSV mapping to exact source/build + installed amd64/generic package at19:34 + active signature at20:02",
+        "evidence": "docs/evidence/o6-kernel-followup-20261115.md"
+      },
+      "previous_assessments": [
+        {
+          "vendor_status": "Vulnerable work in progress in 7.0.0-43.43",
+          "assessment": "Motstrid mellom CVE-tracker og USN; konkret 43.43-kildebevis gjenstår",
+          "production_disposition": {
+            "status": "open",
+            "checked_at": "2026-11-15T20:02:17+01:00",
+            "basis": "Existing individual vendor status retained; active kernel alone does not resolve this finding",
+            "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
+          }
+        }
+      ]
     },
     {
       "cve": "CVE-2026-98813",
@@ -1841,13 +1884,14 @@
     }
   },
   "production_disposition_summary": {
-    "checked_at": "2026-11-15T20:02:17+01:00",
-    "fixed": 47,
-    "open": 9,
+    "checked_at": "2026-11-15",
+    "stage": "Focused public-source follow-up after owner reboot and personal check",
+    "fixed": 50,
+    "open": 6,
     "groups": {
       "K12": {
-        "fixed": 20,
-        "open": 6
+        "fixed": 22,
+        "open": 4
       },
       "K5": {
         "fixed": 0,
@@ -1858,8 +1902,8 @@
         "open": 1
       },
       "K11": {
-        "fixed": 1,
-        "open": 1
+        "fixed": 2,
+        "open": 0
       },
       "K2": {
         "fixed": 3,
@@ -1895,6 +1939,93 @@
       }
     },
     "aggregate_o6": "open",
-    "limits": "CVE fixes closed individually within verified supported-build scope; owner browser test and other O6 residuals tracked separately"
+    "limits": "Six vendor-affected findings remain open; upstream/source discrepancies for binder and NTFS require exact Ubuntu source/build evidence. No new server tests or risk acceptance."
+  },
+  "status_history": [
+    {
+      "stage": "After owner reboot, before focused source follow-up",
+      "counts": {
+        "individual_tracker_fixed": 47,
+        "vulnerable": 6,
+        "tracker_usn_conflict": 2,
+        "usn_only": 1,
+        "baseline_kernel_residual_cves": 56,
+        "fixed_on_active_kernel": 47,
+        "current_open_kernel_cves": 9
+      },
+      "production_disposition_summary": {
+        "checked_at": "2026-11-15T20:02:17+01:00",
+        "fixed": 47,
+        "open": 9,
+        "groups": {
+          "K12": {
+            "fixed": 20,
+            "open": 6
+          },
+          "K5": {
+            "fixed": 0,
+            "open": 1
+          },
+          "K4": {
+            "fixed": 5,
+            "open": 1
+          },
+          "K11": {
+            "fixed": 1,
+            "open": 1
+          },
+          "K2": {
+            "fixed": 3,
+            "open": 0
+          },
+          "K3": {
+            "fixed": 8,
+            "open": 0
+          },
+          "K8": {
+            "fixed": 1,
+            "open": 0
+          },
+          "K7": {
+            "fixed": 2,
+            "open": 0
+          },
+          "K9": {
+            "fixed": 2,
+            "open": 0
+          },
+          "K6": {
+            "fixed": 1,
+            "open": 0
+          },
+          "K10": {
+            "fixed": 1,
+            "open": 0
+          },
+          "K13": {
+            "fixed": 3,
+            "open": 0
+          }
+        },
+        "aggregate_o6": "open",
+        "limits": "CVE fixes closed individually within verified supported-build scope; owner browser test and other O6 residuals tracked separately"
+      }
+    }
+  ],
+  "kernel_followup": {
+    "report": "docs/evidence/o6-kernel-followup-20261115.md",
+    "source_extract": "docs/evidence/o6-status-20261115/kernel-followup-sources.json",
+    "additional_fixed": [
+      "CVE-2026-98776",
+      "CVE-2026-98804",
+      "CVE-2026-90155"
+    ],
+    "source_review_priority": [
+      "CVE-2022-50240",
+      "CVE-2026-72198",
+      "CVE-2026-98376"
+    ],
+    "blocked": "Exact Ubuntu43.43 source retrieval from git.launchpad.net unavailable; no missing-file inference",
+    "server_tests_performed": false
   }
 }
