@@ -493,6 +493,14 @@ Validering bestått:56unikeCVE-er,47fixed_active/9open, bare entydig43.43-retted
 
 Jonas bekreftet etter omstart: «Vanlig innlogging fungerer. Visning er som normalt». Commit **ef6babf** oppdaterer rapport, kilderegister og sju gjeldende oversikter. Personlig etterkontroll er bestått for vanlig innlogging og visning; eksakt prøvetid/enhet/nettleser er ikke oppgitt, og lagring/gjenåpning eller bred regresjon er ikke utledet prøvd. JSON og diffkontroll er gjennomgått. Ingen serveroperasjoner, nye CVE-lukkinger, utvidet risikoaksept, merge eller push.
 
+### Målrettet kerneloppfølging samme kveld
+
+Jonas ba om å prioritere konkrete tiltak for kernelrestene fremfor flere tester. **21b49a7** dokumenterer tre nye individuelle lukkinger og handlingsvurdering for de seks resterende. Nytt Ubuntu-oppslag viser98776/98804 fixed43.43; Canonicals OSV-data for90155 binder Resolute/linux og generic-binarier til samme rettelse. Tidligere47/9 er bevart historisk, gjeldende status er50/6.
+
+De seks står fortsatt som berørt i Ubuntu-nettsider og Canonical OSV, sistnevnte lister43.43. Linux CNA viser konkrete upstream-rettelser og særskilte avklaringsspor for binder (rettet fra upstream6.0) og NTFS (upstream6.9–før7.1 uberørt, bestemt fs/ntfs-driver). Dette er ikke utledet til Ubuntu-rettelse eller manglende berørthet. Eksakt43.43-kilde for binder/BPF/NTFS kunne ikke hentes gjennom nettverktøyet; ett offentlig HTTPS-forsøk feilet med DNS-feil for git.launchpad.net. Ingen ny server-SSH eller andre serverprøver.44.44 er funnet i proposed, uten dokumentert produksjonsrettelse for disse seks; ingen oppgradering anbefalt på det grunnlaget.
+
+Validering:56unikeCVE-er/50fixed_active/6open, tre nye offisielle kildebindinger, seks bevarte åpne OSV-rader, JSON, lokale lenker, UTF-8 og diffkontroll bestod. Historiske rapporter, driftsaksept, O4 og firmware uendret. SamletO6 åpen; ingen installasjon/deploy/omstart/merge/push.
+
 ### Åpne punkter
 
-Ni kernelpunkter (seks uten dokumentert rettelse og tre kildeavklaringer), bibliotek-/journaldrester og øvrige versjonsbundne bevisgrenser står åpne. Runtimebarrierer og images er ikke avlest på nytt. Backup/stabilitet følges i vanlig drift; firmware er separat utsatt. Kandidatens egne operatør-/restore-/eierporter består. Alt er speilet i eksisterende O6-rad; samlet O6 er fortsatt åpen.
+Seks kernelpunkter står åpne. Prioriter eksakt Ubuntu43.43-kilde-/byggavstemming mot rettelsene, særlig binder/NTFS og deretter BPF; tilgang til den offentlige kilden er nå den konkrete barrieren for videre skrivebordskontroll. Ved faktisk berørt kode gjenstår støttet backport eller separat kvalifisert tiltak. Bibliotek-/journaldrester og øvrige versjonsbundne bevisgrenser består. Backup/stabilitet følges i drift; firmware separat utsatt og kandidatens egne porter består. Personlig innlogging/visning er bestått. Alt er speilet i eksisterende O6-rad; samletO6 er fortsatt åpen.
