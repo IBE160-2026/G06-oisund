@@ -53,11 +53,13 @@
     "limits": "Vendor package metadata/CVE mapping; no downloaded binary, InRelease signature verification, server apt-policy or hardware qualification"
   },
   "counts": {
-    "kernel_residual_cves": 56,
     "individual_tracker_fixed": 47,
     "vulnerable": 6,
     "tracker_usn_conflict": 2,
-    "usn_only": 1
+    "usn_only": 1,
+    "baseline_kernel_residual_cves": 56,
+    "fixed_on_active_kernel": 47,
+    "current_open_kernel_cves": 9
   },
   "kernel": [
     {
@@ -74,7 +76,13 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2022-50240",
       "assessment": "Ingen støttet rettelse dokumentert i kontrollert tracker",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
+      "production_status": "Fortsatt åpen: aktiv 43.43 er bekreftet, men individuell leverandørrettelse er fortsatt uavklart eller ikke publisert; runtimebarriere ikke avlest på nytt.",
+      "production_disposition": {
+        "status": "open",
+        "checked_at": "2026-11-15T20:02:17+01:00",
+        "basis": "Existing individual vendor status retained; active kernel alone does not resolve this finding",
+        "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
+      }
     },
     {
       "cve": "CVE-2026-68103",
@@ -90,7 +98,13 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-68103",
       "assessment": "Ingen støttet rettelse dokumentert i kontrollert tracker",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
+      "production_status": "Fortsatt åpen: aktiv 43.43 er bekreftet, men individuell leverandørrettelse er fortsatt uavklart eller ikke publisert; runtimebarriere ikke avlest på nytt.",
+      "production_disposition": {
+        "status": "open",
+        "checked_at": "2026-11-15T20:02:17+01:00",
+        "basis": "Existing individual vendor status retained; active kernel alone does not resolve this finding",
+        "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
+      }
     },
     {
       "cve": "CVE-2026-72198",
@@ -106,7 +120,13 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-72198",
       "assessment": "Ingen støttet rettelse dokumentert i kontrollert tracker",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
+      "production_status": "Fortsatt åpen: aktiv 43.43 er bekreftet, men individuell leverandørrettelse er fortsatt uavklart eller ikke publisert; runtimebarriere ikke avlest på nytt.",
+      "production_disposition": {
+        "status": "open",
+        "checked_at": "2026-11-15T20:02:17+01:00",
+        "basis": "Existing individual vendor status retained; active kernel alone does not resolve this finding",
+        "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
+      }
     },
     {
       "cve": "CVE-2026-72497",
@@ -122,7 +142,13 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-72497",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
+      "production_status": "Rettet innen versjonsbundet omfang: Ubuntu Resolute amd64/generic 7.0.0-43.43 er aktiv, eiermålt 2026-11-15T20:02:17+01:00.",
+      "production_disposition": {
+        "status": "fixed_active",
+        "checked_at": "2026-11-15T20:02:17+01:00",
+        "basis": "Individual Ubuntu CVE fixed-build record + exact installed amd64 package at19:34 + active version_signature at20:02",
+        "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
+      }
     },
     {
       "cve": "CVE-2026-89805",
@@ -138,7 +164,13 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-89805",
       "assessment": "Ingen støttet rettelse dokumentert i kontrollert tracker",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
+      "production_status": "Fortsatt åpen: aktiv 43.43 er bekreftet, men individuell leverandørrettelse er fortsatt uavklart eller ikke publisert; runtimebarriere ikke avlest på nytt.",
+      "production_disposition": {
+        "status": "open",
+        "checked_at": "2026-11-15T20:02:17+01:00",
+        "basis": "Existing individual vendor status retained; active kernel alone does not resolve this finding",
+        "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
+      }
     },
     {
       "cve": "CVE-2026-90155",
@@ -154,7 +186,13 @@
       "vendor_url": "https://ubuntu.com/security/notices/USN-9018-1",
       "assessment": "USN-kandidat; individuell generic-pakkebinding uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
+      "production_status": "Fortsatt åpen: aktiv 43.43 er bekreftet, men individuell leverandørrettelse er fortsatt uavklart eller ikke publisert; runtimebarriere ikke avlest på nytt.",
+      "production_disposition": {
+        "status": "open",
+        "checked_at": "2026-11-15T20:02:17+01:00",
+        "basis": "Existing individual vendor status retained; active kernel alone does not resolve this finding",
+        "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
+      }
     },
     {
       "cve": "CVE-2026-90167",
@@ -170,7 +208,13 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-90167",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
+      "production_status": "Rettet innen versjonsbundet omfang: Ubuntu Resolute amd64/generic 7.0.0-43.43 er aktiv, eiermålt 2026-11-15T20:02:17+01:00.",
+      "production_disposition": {
+        "status": "fixed_active",
+        "checked_at": "2026-11-15T20:02:17+01:00",
+        "basis": "Individual Ubuntu CVE fixed-build record + exact installed amd64 package at19:34 + active version_signature at20:02",
+        "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
+      }
     },
     {
       "cve": "CVE-2026-90317",
@@ -186,7 +230,13 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-90317",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
+      "production_status": "Rettet innen versjonsbundet omfang: Ubuntu Resolute amd64/generic 7.0.0-43.43 er aktiv, eiermålt 2026-11-15T20:02:17+01:00.",
+      "production_disposition": {
+        "status": "fixed_active",
+        "checked_at": "2026-11-15T20:02:17+01:00",
+        "basis": "Individual Ubuntu CVE fixed-build record + exact installed amd64 package at19:34 + active version_signature at20:02",
+        "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
+      }
     },
     {
       "cve": "CVE-2026-93175",
@@ -202,7 +252,13 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-93175",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
+      "production_status": "Rettet innen versjonsbundet omfang: Ubuntu Resolute amd64/generic 7.0.0-43.43 er aktiv, eiermålt 2026-11-15T20:02:17+01:00.",
+      "production_disposition": {
+        "status": "fixed_active",
+        "checked_at": "2026-11-15T20:02:17+01:00",
+        "basis": "Individual Ubuntu CVE fixed-build record + exact installed amd64 package at19:34 + active version_signature at20:02",
+        "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
+      }
     },
     {
       "cve": "CVE-2026-98376",
@@ -218,7 +274,13 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98376",
       "assessment": "Ingen støttet rettelse dokumentert i kontrollert tracker",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
+      "production_status": "Fortsatt åpen: aktiv 43.43 er bekreftet, men individuell leverandørrettelse er fortsatt uavklart eller ikke publisert; runtimebarriere ikke avlest på nytt.",
+      "production_disposition": {
+        "status": "open",
+        "checked_at": "2026-11-15T20:02:17+01:00",
+        "basis": "Existing individual vendor status retained; active kernel alone does not resolve this finding",
+        "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
+      }
     },
     {
       "cve": "CVE-2026-98420",
@@ -234,7 +296,13 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98420",
       "assessment": "Ingen støttet rettelse dokumentert i kontrollert tracker",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
+      "production_status": "Fortsatt åpen: aktiv 43.43 er bekreftet, men individuell leverandørrettelse er fortsatt uavklart eller ikke publisert; runtimebarriere ikke avlest på nytt.",
+      "production_disposition": {
+        "status": "open",
+        "checked_at": "2026-11-15T20:02:17+01:00",
+        "basis": "Existing individual vendor status retained; active kernel alone does not resolve this finding",
+        "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
+      }
     },
     {
       "cve": "CVE-2026-98432",
@@ -250,7 +318,13 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98432",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
+      "production_status": "Rettet innen versjonsbundet omfang: Ubuntu Resolute amd64/generic 7.0.0-43.43 er aktiv, eiermålt 2026-11-15T20:02:17+01:00.",
+      "production_disposition": {
+        "status": "fixed_active",
+        "checked_at": "2026-11-15T20:02:17+01:00",
+        "basis": "Individual Ubuntu CVE fixed-build record + exact installed amd64 package at19:34 + active version_signature at20:02",
+        "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
+      }
     },
     {
       "cve": "CVE-2026-98689",
@@ -266,7 +340,13 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98689",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
+      "production_status": "Rettet innen versjonsbundet omfang: Ubuntu Resolute amd64/generic 7.0.0-43.43 er aktiv, eiermålt 2026-11-15T20:02:17+01:00.",
+      "production_disposition": {
+        "status": "fixed_active",
+        "checked_at": "2026-11-15T20:02:17+01:00",
+        "basis": "Individual Ubuntu CVE fixed-build record + exact installed amd64 package at19:34 + active version_signature at20:02",
+        "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
+      }
     },
     {
       "cve": "CVE-2026-98699",
@@ -282,7 +362,13 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98699",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
+      "production_status": "Rettet innen versjonsbundet omfang: Ubuntu Resolute amd64/generic 7.0.0-43.43 er aktiv, eiermålt 2026-11-15T20:02:17+01:00.",
+      "production_disposition": {
+        "status": "fixed_active",
+        "checked_at": "2026-11-15T20:02:17+01:00",
+        "basis": "Individual Ubuntu CVE fixed-build record + exact installed amd64 package at19:34 + active version_signature at20:02",
+        "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
+      }
     },
     {
       "cve": "CVE-2026-98701",
@@ -298,7 +384,13 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98701",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
+      "production_status": "Rettet innen versjonsbundet omfang: Ubuntu Resolute amd64/generic 7.0.0-43.43 er aktiv, eiermålt 2026-11-15T20:02:17+01:00.",
+      "production_disposition": {
+        "status": "fixed_active",
+        "checked_at": "2026-11-15T20:02:17+01:00",
+        "basis": "Individual Ubuntu CVE fixed-build record + exact installed amd64 package at19:34 + active version_signature at20:02",
+        "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
+      }
     },
     {
       "cve": "CVE-2026-98702",
@@ -314,7 +406,13 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98702",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
+      "production_status": "Rettet innen versjonsbundet omfang: Ubuntu Resolute amd64/generic 7.0.0-43.43 er aktiv, eiermålt 2026-11-15T20:02:17+01:00.",
+      "production_disposition": {
+        "status": "fixed_active",
+        "checked_at": "2026-11-15T20:02:17+01:00",
+        "basis": "Individual Ubuntu CVE fixed-build record + exact installed amd64 package at19:34 + active version_signature at20:02",
+        "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
+      }
     },
     {
       "cve": "CVE-2026-98704",
@@ -330,7 +428,13 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98704",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
+      "production_status": "Rettet innen versjonsbundet omfang: Ubuntu Resolute amd64/generic 7.0.0-43.43 er aktiv, eiermålt 2026-11-15T20:02:17+01:00.",
+      "production_disposition": {
+        "status": "fixed_active",
+        "checked_at": "2026-11-15T20:02:17+01:00",
+        "basis": "Individual Ubuntu CVE fixed-build record + exact installed amd64 package at19:34 + active version_signature at20:02",
+        "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
+      }
     },
     {
       "cve": "CVE-2026-98706",
@@ -346,7 +450,13 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98706",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
+      "production_status": "Rettet innen versjonsbundet omfang: Ubuntu Resolute amd64/generic 7.0.0-43.43 er aktiv, eiermålt 2026-11-15T20:02:17+01:00.",
+      "production_disposition": {
+        "status": "fixed_active",
+        "checked_at": "2026-11-15T20:02:17+01:00",
+        "basis": "Individual Ubuntu CVE fixed-build record + exact installed amd64 package at19:34 + active version_signature at20:02",
+        "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
+      }
     },
     {
       "cve": "CVE-2026-98707",
@@ -362,7 +472,13 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98707",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
+      "production_status": "Rettet innen versjonsbundet omfang: Ubuntu Resolute amd64/generic 7.0.0-43.43 er aktiv, eiermålt 2026-11-15T20:02:17+01:00.",
+      "production_disposition": {
+        "status": "fixed_active",
+        "checked_at": "2026-11-15T20:02:17+01:00",
+        "basis": "Individual Ubuntu CVE fixed-build record + exact installed amd64 package at19:34 + active version_signature at20:02",
+        "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
+      }
     },
     {
       "cve": "CVE-2026-98708",
@@ -378,7 +494,13 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98708",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
+      "production_status": "Rettet innen versjonsbundet omfang: Ubuntu Resolute amd64/generic 7.0.0-43.43 er aktiv, eiermålt 2026-11-15T20:02:17+01:00.",
+      "production_disposition": {
+        "status": "fixed_active",
+        "checked_at": "2026-11-15T20:02:17+01:00",
+        "basis": "Individual Ubuntu CVE fixed-build record + exact installed amd64 package at19:34 + active version_signature at20:02",
+        "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
+      }
     },
     {
       "cve": "CVE-2026-98709",
@@ -394,7 +516,13 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98709",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
+      "production_status": "Rettet innen versjonsbundet omfang: Ubuntu Resolute amd64/generic 7.0.0-43.43 er aktiv, eiermålt 2026-11-15T20:02:17+01:00.",
+      "production_disposition": {
+        "status": "fixed_active",
+        "checked_at": "2026-11-15T20:02:17+01:00",
+        "basis": "Individual Ubuntu CVE fixed-build record + exact installed amd64 package at19:34 + active version_signature at20:02",
+        "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
+      }
     },
     {
       "cve": "CVE-2026-98730",
@@ -410,7 +538,13 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98730",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
+      "production_status": "Rettet innen versjonsbundet omfang: Ubuntu Resolute amd64/generic 7.0.0-43.43 er aktiv, eiermålt 2026-11-15T20:02:17+01:00.",
+      "production_disposition": {
+        "status": "fixed_active",
+        "checked_at": "2026-11-15T20:02:17+01:00",
+        "basis": "Individual Ubuntu CVE fixed-build record + exact installed amd64 package at19:34 + active version_signature at20:02",
+        "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
+      }
     },
     {
       "cve": "CVE-2026-98733",
@@ -426,7 +560,13 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98733",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
+      "production_status": "Rettet innen versjonsbundet omfang: Ubuntu Resolute amd64/generic 7.0.0-43.43 er aktiv, eiermålt 2026-11-15T20:02:17+01:00.",
+      "production_disposition": {
+        "status": "fixed_active",
+        "checked_at": "2026-11-15T20:02:17+01:00",
+        "basis": "Individual Ubuntu CVE fixed-build record + exact installed amd64 package at19:34 + active version_signature at20:02",
+        "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
+      }
     },
     {
       "cve": "CVE-2026-98734",
@@ -442,7 +582,13 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98734",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
+      "production_status": "Rettet innen versjonsbundet omfang: Ubuntu Resolute amd64/generic 7.0.0-43.43 er aktiv, eiermålt 2026-11-15T20:02:17+01:00.",
+      "production_disposition": {
+        "status": "fixed_active",
+        "checked_at": "2026-11-15T20:02:17+01:00",
+        "basis": "Individual Ubuntu CVE fixed-build record + exact installed amd64 package at19:34 + active version_signature at20:02",
+        "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
+      }
     },
     {
       "cve": "CVE-2026-98735",
@@ -458,7 +604,13 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98735",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
+      "production_status": "Rettet innen versjonsbundet omfang: Ubuntu Resolute amd64/generic 7.0.0-43.43 er aktiv, eiermålt 2026-11-15T20:02:17+01:00.",
+      "production_disposition": {
+        "status": "fixed_active",
+        "checked_at": "2026-11-15T20:02:17+01:00",
+        "basis": "Individual Ubuntu CVE fixed-build record + exact installed amd64 package at19:34 + active version_signature at20:02",
+        "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
+      }
     },
     {
       "cve": "CVE-2026-98737",
@@ -474,7 +626,13 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98737",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
+      "production_status": "Rettet innen versjonsbundet omfang: Ubuntu Resolute amd64/generic 7.0.0-43.43 er aktiv, eiermålt 2026-11-15T20:02:17+01:00.",
+      "production_disposition": {
+        "status": "fixed_active",
+        "checked_at": "2026-11-15T20:02:17+01:00",
+        "basis": "Individual Ubuntu CVE fixed-build record + exact installed amd64 package at19:34 + active version_signature at20:02",
+        "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
+      }
     },
     {
       "cve": "CVE-2026-98738",
@@ -490,7 +648,13 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98738",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
+      "production_status": "Rettet innen versjonsbundet omfang: Ubuntu Resolute amd64/generic 7.0.0-43.43 er aktiv, eiermålt 2026-11-15T20:02:17+01:00.",
+      "production_disposition": {
+        "status": "fixed_active",
+        "checked_at": "2026-11-15T20:02:17+01:00",
+        "basis": "Individual Ubuntu CVE fixed-build record + exact installed amd64 package at19:34 + active version_signature at20:02",
+        "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
+      }
     },
     {
       "cve": "CVE-2026-98739",
@@ -506,7 +670,13 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98739",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
+      "production_status": "Rettet innen versjonsbundet omfang: Ubuntu Resolute amd64/generic 7.0.0-43.43 er aktiv, eiermålt 2026-11-15T20:02:17+01:00.",
+      "production_disposition": {
+        "status": "fixed_active",
+        "checked_at": "2026-11-15T20:02:17+01:00",
+        "basis": "Individual Ubuntu CVE fixed-build record + exact installed amd64 package at19:34 + active version_signature at20:02",
+        "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
+      }
     },
     {
       "cve": "CVE-2026-98741",
@@ -522,7 +692,13 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98741",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
+      "production_status": "Rettet innen versjonsbundet omfang: Ubuntu Resolute amd64/generic 7.0.0-43.43 er aktiv, eiermålt 2026-11-15T20:02:17+01:00.",
+      "production_disposition": {
+        "status": "fixed_active",
+        "checked_at": "2026-11-15T20:02:17+01:00",
+        "basis": "Individual Ubuntu CVE fixed-build record + exact installed amd64 package at19:34 + active version_signature at20:02",
+        "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
+      }
     },
     {
       "cve": "CVE-2026-98742",
@@ -538,7 +714,13 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98742",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
+      "production_status": "Rettet innen versjonsbundet omfang: Ubuntu Resolute amd64/generic 7.0.0-43.43 er aktiv, eiermålt 2026-11-15T20:02:17+01:00.",
+      "production_disposition": {
+        "status": "fixed_active",
+        "checked_at": "2026-11-15T20:02:17+01:00",
+        "basis": "Individual Ubuntu CVE fixed-build record + exact installed amd64 package at19:34 + active version_signature at20:02",
+        "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
+      }
     },
     {
       "cve": "CVE-2026-98752",
@@ -554,7 +736,13 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98752",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
+      "production_status": "Rettet innen versjonsbundet omfang: Ubuntu Resolute amd64/generic 7.0.0-43.43 er aktiv, eiermålt 2026-11-15T20:02:17+01:00.",
+      "production_disposition": {
+        "status": "fixed_active",
+        "checked_at": "2026-11-15T20:02:17+01:00",
+        "basis": "Individual Ubuntu CVE fixed-build record + exact installed amd64 package at19:34 + active version_signature at20:02",
+        "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
+      }
     },
     {
       "cve": "CVE-2026-98763",
@@ -570,7 +758,13 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98763",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
+      "production_status": "Rettet innen versjonsbundet omfang: Ubuntu Resolute amd64/generic 7.0.0-43.43 er aktiv, eiermålt 2026-11-15T20:02:17+01:00.",
+      "production_disposition": {
+        "status": "fixed_active",
+        "checked_at": "2026-11-15T20:02:17+01:00",
+        "basis": "Individual Ubuntu CVE fixed-build record + exact installed amd64 package at19:34 + active version_signature at20:02",
+        "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
+      }
     },
     {
       "cve": "CVE-2026-98776",
@@ -586,7 +780,13 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98776",
       "assessment": "Motstrid mellom CVE-tracker og USN; konkret 43.43-kildebevis gjenstår",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
+      "production_status": "Fortsatt åpen: aktiv 43.43 er bekreftet, men individuell leverandørrettelse er fortsatt uavklart eller ikke publisert; runtimebarriere ikke avlest på nytt.",
+      "production_disposition": {
+        "status": "open",
+        "checked_at": "2026-11-15T20:02:17+01:00",
+        "basis": "Existing individual vendor status retained; active kernel alone does not resolve this finding",
+        "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
+      }
     },
     {
       "cve": "CVE-2026-98788",
@@ -602,7 +802,13 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98788",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
+      "production_status": "Rettet innen versjonsbundet omfang: Ubuntu Resolute amd64/generic 7.0.0-43.43 er aktiv, eiermålt 2026-11-15T20:02:17+01:00.",
+      "production_disposition": {
+        "status": "fixed_active",
+        "checked_at": "2026-11-15T20:02:17+01:00",
+        "basis": "Individual Ubuntu CVE fixed-build record + exact installed amd64 package at19:34 + active version_signature at20:02",
+        "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
+      }
     },
     {
       "cve": "CVE-2026-98792",
@@ -618,7 +824,13 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98792",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
+      "production_status": "Rettet innen versjonsbundet omfang: Ubuntu Resolute amd64/generic 7.0.0-43.43 er aktiv, eiermålt 2026-11-15T20:02:17+01:00.",
+      "production_disposition": {
+        "status": "fixed_active",
+        "checked_at": "2026-11-15T20:02:17+01:00",
+        "basis": "Individual Ubuntu CVE fixed-build record + exact installed amd64 package at19:34 + active version_signature at20:02",
+        "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
+      }
     },
     {
       "cve": "CVE-2026-98794",
@@ -634,7 +846,13 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98794",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
+      "production_status": "Rettet innen versjonsbundet omfang: Ubuntu Resolute amd64/generic 7.0.0-43.43 er aktiv, eiermålt 2026-11-15T20:02:17+01:00.",
+      "production_disposition": {
+        "status": "fixed_active",
+        "checked_at": "2026-11-15T20:02:17+01:00",
+        "basis": "Individual Ubuntu CVE fixed-build record + exact installed amd64 package at19:34 + active version_signature at20:02",
+        "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
+      }
     },
     {
       "cve": "CVE-2026-98797",
@@ -650,7 +868,13 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98797",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
+      "production_status": "Rettet innen versjonsbundet omfang: Ubuntu Resolute amd64/generic 7.0.0-43.43 er aktiv, eiermålt 2026-11-15T20:02:17+01:00.",
+      "production_disposition": {
+        "status": "fixed_active",
+        "checked_at": "2026-11-15T20:02:17+01:00",
+        "basis": "Individual Ubuntu CVE fixed-build record + exact installed amd64 package at19:34 + active version_signature at20:02",
+        "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
+      }
     },
     {
       "cve": "CVE-2026-98799",
@@ -666,7 +890,13 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98799",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
+      "production_status": "Rettet innen versjonsbundet omfang: Ubuntu Resolute amd64/generic 7.0.0-43.43 er aktiv, eiermålt 2026-11-15T20:02:17+01:00.",
+      "production_disposition": {
+        "status": "fixed_active",
+        "checked_at": "2026-11-15T20:02:17+01:00",
+        "basis": "Individual Ubuntu CVE fixed-build record + exact installed amd64 package at19:34 + active version_signature at20:02",
+        "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
+      }
     },
     {
       "cve": "CVE-2026-98800",
@@ -682,7 +912,13 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98800",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
+      "production_status": "Rettet innen versjonsbundet omfang: Ubuntu Resolute amd64/generic 7.0.0-43.43 er aktiv, eiermålt 2026-11-15T20:02:17+01:00.",
+      "production_disposition": {
+        "status": "fixed_active",
+        "checked_at": "2026-11-15T20:02:17+01:00",
+        "basis": "Individual Ubuntu CVE fixed-build record + exact installed amd64 package at19:34 + active version_signature at20:02",
+        "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
+      }
     },
     {
       "cve": "CVE-2026-98803",
@@ -698,7 +934,13 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98803",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
+      "production_status": "Rettet innen versjonsbundet omfang: Ubuntu Resolute amd64/generic 7.0.0-43.43 er aktiv, eiermålt 2026-11-15T20:02:17+01:00.",
+      "production_disposition": {
+        "status": "fixed_active",
+        "checked_at": "2026-11-15T20:02:17+01:00",
+        "basis": "Individual Ubuntu CVE fixed-build record + exact installed amd64 package at19:34 + active version_signature at20:02",
+        "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
+      }
     },
     {
       "cve": "CVE-2026-98804",
@@ -714,7 +956,13 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98804",
       "assessment": "Motstrid mellom CVE-tracker og USN; konkret 43.43-kildebevis gjenstår",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
+      "production_status": "Fortsatt åpen: aktiv 43.43 er bekreftet, men individuell leverandørrettelse er fortsatt uavklart eller ikke publisert; runtimebarriere ikke avlest på nytt.",
+      "production_disposition": {
+        "status": "open",
+        "checked_at": "2026-11-15T20:02:17+01:00",
+        "basis": "Existing individual vendor status retained; active kernel alone does not resolve this finding",
+        "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
+      }
     },
     {
       "cve": "CVE-2026-98813",
@@ -730,7 +978,13 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98813",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
+      "production_status": "Rettet innen versjonsbundet omfang: Ubuntu Resolute amd64/generic 7.0.0-43.43 er aktiv, eiermålt 2026-11-15T20:02:17+01:00.",
+      "production_disposition": {
+        "status": "fixed_active",
+        "checked_at": "2026-11-15T20:02:17+01:00",
+        "basis": "Individual Ubuntu CVE fixed-build record + exact installed amd64 package at19:34 + active version_signature at20:02",
+        "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
+      }
     },
     {
       "cve": "CVE-2026-98823",
@@ -746,7 +1000,13 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98823",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
+      "production_status": "Rettet innen versjonsbundet omfang: Ubuntu Resolute amd64/generic 7.0.0-43.43 er aktiv, eiermålt 2026-11-15T20:02:17+01:00.",
+      "production_disposition": {
+        "status": "fixed_active",
+        "checked_at": "2026-11-15T20:02:17+01:00",
+        "basis": "Individual Ubuntu CVE fixed-build record + exact installed amd64 package at19:34 + active version_signature at20:02",
+        "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
+      }
     },
     {
       "cve": "CVE-2026-98824",
@@ -762,7 +1022,13 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98824",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
+      "production_status": "Rettet innen versjonsbundet omfang: Ubuntu Resolute amd64/generic 7.0.0-43.43 er aktiv, eiermålt 2026-11-15T20:02:17+01:00.",
+      "production_disposition": {
+        "status": "fixed_active",
+        "checked_at": "2026-11-15T20:02:17+01:00",
+        "basis": "Individual Ubuntu CVE fixed-build record + exact installed amd64 package at19:34 + active version_signature at20:02",
+        "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
+      }
     },
     {
       "cve": "CVE-2026-98827",
@@ -778,7 +1044,13 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98827",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
+      "production_status": "Rettet innen versjonsbundet omfang: Ubuntu Resolute amd64/generic 7.0.0-43.43 er aktiv, eiermålt 2026-11-15T20:02:17+01:00.",
+      "production_disposition": {
+        "status": "fixed_active",
+        "checked_at": "2026-11-15T20:02:17+01:00",
+        "basis": "Individual Ubuntu CVE fixed-build record + exact installed amd64 package at19:34 + active version_signature at20:02",
+        "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
+      }
     },
     {
       "cve": "CVE-2026-98829",
@@ -794,7 +1066,13 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98829",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
+      "production_status": "Rettet innen versjonsbundet omfang: Ubuntu Resolute amd64/generic 7.0.0-43.43 er aktiv, eiermålt 2026-11-15T20:02:17+01:00.",
+      "production_disposition": {
+        "status": "fixed_active",
+        "checked_at": "2026-11-15T20:02:17+01:00",
+        "basis": "Individual Ubuntu CVE fixed-build record + exact installed amd64 package at19:34 + active version_signature at20:02",
+        "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
+      }
     },
     {
       "cve": "CVE-2026-98836",
@@ -810,7 +1088,13 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98836",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
+      "production_status": "Rettet innen versjonsbundet omfang: Ubuntu Resolute amd64/generic 7.0.0-43.43 er aktiv, eiermålt 2026-11-15T20:02:17+01:00.",
+      "production_disposition": {
+        "status": "fixed_active",
+        "checked_at": "2026-11-15T20:02:17+01:00",
+        "basis": "Individual Ubuntu CVE fixed-build record + exact installed amd64 package at19:34 + active version_signature at20:02",
+        "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
+      }
     },
     {
       "cve": "CVE-2026-98837",
@@ -826,7 +1110,13 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98837",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
+      "production_status": "Rettet innen versjonsbundet omfang: Ubuntu Resolute amd64/generic 7.0.0-43.43 er aktiv, eiermålt 2026-11-15T20:02:17+01:00.",
+      "production_disposition": {
+        "status": "fixed_active",
+        "checked_at": "2026-11-15T20:02:17+01:00",
+        "basis": "Individual Ubuntu CVE fixed-build record + exact installed amd64 package at19:34 + active version_signature at20:02",
+        "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
+      }
     },
     {
       "cve": "CVE-2026-98846",
@@ -842,7 +1132,13 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98846",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
+      "production_status": "Rettet innen versjonsbundet omfang: Ubuntu Resolute amd64/generic 7.0.0-43.43 er aktiv, eiermålt 2026-11-15T20:02:17+01:00.",
+      "production_disposition": {
+        "status": "fixed_active",
+        "checked_at": "2026-11-15T20:02:17+01:00",
+        "basis": "Individual Ubuntu CVE fixed-build record + exact installed amd64 package at19:34 + active version_signature at20:02",
+        "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
+      }
     },
     {
       "cve": "CVE-2026-98858",
@@ -858,7 +1154,13 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98858",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
+      "production_status": "Rettet innen versjonsbundet omfang: Ubuntu Resolute amd64/generic 7.0.0-43.43 er aktiv, eiermålt 2026-11-15T20:02:17+01:00.",
+      "production_disposition": {
+        "status": "fixed_active",
+        "checked_at": "2026-11-15T20:02:17+01:00",
+        "basis": "Individual Ubuntu CVE fixed-build record + exact installed amd64 package at19:34 + active version_signature at20:02",
+        "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
+      }
     },
     {
       "cve": "CVE-2026-98861",
@@ -874,7 +1176,13 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98861",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
+      "production_status": "Rettet innen versjonsbundet omfang: Ubuntu Resolute amd64/generic 7.0.0-43.43 er aktiv, eiermålt 2026-11-15T20:02:17+01:00.",
+      "production_disposition": {
+        "status": "fixed_active",
+        "checked_at": "2026-11-15T20:02:17+01:00",
+        "basis": "Individual Ubuntu CVE fixed-build record + exact installed amd64 package at19:34 + active version_signature at20:02",
+        "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
+      }
     },
     {
       "cve": "CVE-2026-98862",
@@ -890,7 +1198,13 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98862",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
+      "production_status": "Rettet innen versjonsbundet omfang: Ubuntu Resolute amd64/generic 7.0.0-43.43 er aktiv, eiermålt 2026-11-15T20:02:17+01:00.",
+      "production_disposition": {
+        "status": "fixed_active",
+        "checked_at": "2026-11-15T20:02:17+01:00",
+        "basis": "Individual Ubuntu CVE fixed-build record + exact installed amd64 package at19:34 + active version_signature at20:02",
+        "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
+      }
     },
     {
       "cve": "CVE-2026-98863",
@@ -906,7 +1220,13 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98863",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
+      "production_status": "Rettet innen versjonsbundet omfang: Ubuntu Resolute amd64/generic 7.0.0-43.43 er aktiv, eiermålt 2026-11-15T20:02:17+01:00.",
+      "production_disposition": {
+        "status": "fixed_active",
+        "checked_at": "2026-11-15T20:02:17+01:00",
+        "basis": "Individual Ubuntu CVE fixed-build record + exact installed amd64 package at19:34 + active version_signature at20:02",
+        "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
+      }
     },
     {
       "cve": "CVE-2026-90162",
@@ -922,7 +1242,13 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-90162",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
+      "production_status": "Rettet innen versjonsbundet omfang: Ubuntu Resolute amd64/generic 7.0.0-43.43 er aktiv, eiermålt 2026-11-15T20:02:17+01:00.",
+      "production_disposition": {
+        "status": "fixed_active",
+        "checked_at": "2026-11-15T20:02:17+01:00",
+        "basis": "Individual Ubuntu CVE fixed-build record + exact installed amd64 package at19:34 + active version_signature at20:02",
+        "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
+      }
     },
     {
       "cve": "CVE-2026-98725",
@@ -938,7 +1264,13 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98725",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
+      "production_status": "Rettet innen versjonsbundet omfang: Ubuntu Resolute amd64/generic 7.0.0-43.43 er aktiv, eiermålt 2026-11-15T20:02:17+01:00.",
+      "production_disposition": {
+        "status": "fixed_active",
+        "checked_at": "2026-11-15T20:02:17+01:00",
+        "basis": "Individual Ubuntu CVE fixed-build record + exact installed amd64 package at19:34 + active version_signature at20:02",
+        "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
+      }
     },
     {
       "cve": "CVE-2026-98805",
@@ -954,7 +1286,13 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98805",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
+      "production_status": "Rettet innen versjonsbundet omfang: Ubuntu Resolute amd64/generic 7.0.0-43.43 er aktiv, eiermålt 2026-11-15T20:02:17+01:00.",
+      "production_disposition": {
+        "status": "fixed_active",
+        "checked_at": "2026-11-15T20:02:17+01:00",
+        "basis": "Individual Ubuntu CVE fixed-build record + exact installed amd64 package at19:34 + active version_signature at20:02",
+        "evidence": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt"
+      }
     }
   ],
   "debian": {
@@ -1446,5 +1784,102 @@
       "no_server_mutation_by_review": true,
       "aggregate_o6_closed": false
     }
+  },
+  "owner_reboot_postcheck": {
+    "source": "Owner-pasted command and pre/post output in this conversation; not an independent agent connection",
+    "authorization": "User requested the qualified-reboot command and then supplied its execution result",
+    "reboot_scheduled_for": "2026-11-15T19:58:55+01:00",
+    "actual_boot_timestamp": null,
+    "observed_at": "2026-11-15T20:02:17+01:00",
+    "reported_uptime": "1 min",
+    "active_kernel": "7.0.0-43-generic",
+    "version_signature": "Ubuntu 7.0.0-43.43-generic 7.0.14",
+    "current_release_link": "/opt/bussassistent/releases/7921eb54e4816aaab9368c3efd851bcf692f3823",
+    "systemd_states": {
+      "bussassistent.service": "active",
+      "cloudflared.service": "active",
+      "bussassistent-backup.timer": "active"
+    },
+    "precheck": "API healthy; origin access control rejects unauthenticated requests",
+    "precheck_chain": "All && gates reached the reboot action: helper check, three individual active checks, backup Result=success and ExecMainStatus=0",
+    "postcheck": "API healthy; origin access control rejects unauthenticated requests",
+    "load_average": [
+      0.51,
+      0.39,
+      0.16
+    ],
+    "receipt": "docs/evidence/o6-status-20261115/owner-reboot-postcheck-200217.txt",
+    "receipt_sha256": "bedcd1e193590c82f5b57f312a449e60f28f2a27521749f95a1773317b7bd279",
+    "hash_scope": "UTF-8 text normalized to LF",
+    "technical_reboot_check": "Passed within supplied SSH/systemd/API/origin-check scope",
+    "owner_browser_login_and_view": "Not yet confirmed",
+    "backup_after_boot": "Timer active; no new backup execution or restore proven; last verified job remains 2026-11-15T03:17:19+01:00",
+    "reboot_required_marker_after_boot": "Not read",
+    "remaining_limits": [
+      "No postboot image identity or full library inventory",
+      "No fresh module/sysctl/journald barrier inventory",
+      "No exact boot timestamp or boot ID",
+      "No claim of long-term stability",
+      "Three source ambiguities and six still-vulnerable kernel CVEs unchanged"
+    ],
+    "aggregate_o6_closed": false,
+    "risk_acceptance_changed": false
+  },
+  "production_disposition_summary": {
+    "checked_at": "2026-11-15T20:02:17+01:00",
+    "fixed": 47,
+    "open": 9,
+    "groups": {
+      "K12": {
+        "fixed": 20,
+        "open": 6
+      },
+      "K5": {
+        "fixed": 0,
+        "open": 1
+      },
+      "K4": {
+        "fixed": 5,
+        "open": 1
+      },
+      "K11": {
+        "fixed": 1,
+        "open": 1
+      },
+      "K2": {
+        "fixed": 3,
+        "open": 0
+      },
+      "K3": {
+        "fixed": 8,
+        "open": 0
+      },
+      "K8": {
+        "fixed": 1,
+        "open": 0
+      },
+      "K7": {
+        "fixed": 2,
+        "open": 0
+      },
+      "K9": {
+        "fixed": 2,
+        "open": 0
+      },
+      "K6": {
+        "fixed": 1,
+        "open": 0
+      },
+      "K10": {
+        "fixed": 1,
+        "open": 0
+      },
+      "K13": {
+        "fixed": 3,
+        "open": 0
+      }
+    },
+    "aggregate_o6": "open",
+    "limits": "CVE fixes closed individually within verified supported-build scope; owner browser test and other O6 residuals tracked separately"
   }
 }
