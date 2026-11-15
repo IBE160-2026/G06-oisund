@@ -453,6 +453,12 @@ Rapporten og kilderegisteret inneholder hele verbose-feilen, bevisgrenser og én
 
 Dokumentasjonen er committet som **55a2797** (nøyaktig ni egne dokumentasjonsfiler). UTF-8-/kontrolltegnkontroll, enkel hemmelighetsmarkørkontroll, rapportlenker, JSON og 56 unike CVE-er/47 rettelser bestod. Den manuelle PowerShell-kommandoen bestod syntakskontroll uten utføring. Staget diffkontroll fant én ekstra tom sluttlinje i den nye rapporten; den ble rettet, og kontrollen bestod før commit. Ingen produktkode eller historiske evidensfiler er endret. Bare lokal commit, ingen merge/push. Samlet O6, midlertidig aksept, O4 og utsatt firmware er uendret.
 
+### Eierkvittering ført samme dag kl. 19:21
+
+Jonas returnerte lesende SSH-utdata med måletid 2026-11-15T19:17:55+01:00: oppetid13d19t50m, oppstart2026-11-01 23:27:52, kernel7.0.0-42-generic, current-releasepeker7921eb54e4816aaab9368c3efd851bcf692f3823 og active for appservice, cloudflaredservice og backup-timer. Dette dokumenterer fungerende eiertilgang og avgrenser den tidligere10013-feilen til agentens kjørekontekst; filterregelen er fortsatt ikke identifisert.
+
+Rapport/kilderegister og de sju nåtidsoversiktene er korrigert og committet som **d2d9d53**. Råutdata og eierproveniens er bevart. Aktiv42-generic er skilt fra publisert43.43 og ukjent installert versjon. Current-peker/systemd-active gir ikke imageattestasjon, funksjonstest eller bevis for gjennomført backup; lang oppetid alene beviser ikke feilfri drift eller årsaken til tidligere frys. JSON-parse, mapping av de tre active-linjene, diffkontroll og gjennomgang av nåtidsformuleringer er utført. Ingen produkt-/serverendringer, merge/push, risikoendring eller O6-lukking.
+
 ### Åpne punkter
 
 Den eksisterende O6-raden i issues.md er oppdatert, ikke duplisert: lesende serveravstemming; kernelkvalifisering og tre kildeavklaringer; seks kernelrester og Debian-restene som avventer støttet rettelse; journald/barriereverifikasjon; endringsutløste avklaringer; løpende backup og stabilitet. Kandidatens installerte operatør-/restorekjede, fysisk kodeoverlevering og eier-/releaseporter gjenstår i eget omfang. Firmware forblir separat utsatt. Samlet O6 er ikke lukket.
