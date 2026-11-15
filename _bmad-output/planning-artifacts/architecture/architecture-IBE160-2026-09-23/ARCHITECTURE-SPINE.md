@@ -8,6 +8,8 @@ updated: 2026-10-19
 
 # Architecture Spine — Course V1
 
+> **Reader clarification, 15 November 2026 — after completed V1:** The adjacent `technology.md` describes Pytagoras Forlag and is an external instructor reference, not this project's approved stack or requirements. Read the [architecture document index](../README.md) and [separate retrospective assessment](../technology-reference-assessment-2026-11-15.md). This spine preserves its SCOPE-02 planning context: the early PDF-candidate, deferred-hosting and no-historical-backup wording must be read with the later implemented parser, included Ubuntu deployment and documented backup boundary. The assessment records those later facts without rewriting the original decisions or adopting Pytagoras services.
+
 ## Authority and structure
 
 The owner approved [SCOPE-02](../../sprint-change-proposal-2026-10-19.md). The [current PRD](../../prds/prd-IBE160-2026-09-21/prd.md) and current UX govern. Earlier AD-1–14 are superseded as mapped below; the original is preserved in the [historical index](../../archive/pre-scope-02-2026-10-19/README.md). This is a smaller implementation contract, not completed code.
