@@ -1,7 +1,7 @@
 {
   "checked_date": "2026-11-15",
   "timezone": "Europe/Oslo",
-  "scope": "Read-only repository/vendor review; no successful production connection; documentation changes only",
+  "scope": "Read-only repository/vendor review and owner-executed server evidence; agent TCP access locally denied; documentation changes only",
   "server_attempt": {
     "transport": "Established SSH; BatchMode=yes; StrictHostKeyChecking=yes; existing host-key alias; ConnectTimeout=10",
     "result": "ssh: connect to host 192.168.1.138 port 22: Permission denied",
@@ -74,7 +74,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2022-50240",
       "assessment": "Ingen støttet rettelse dokumentert i kontrollert tracker",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
+      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
     },
     {
       "cve": "CVE-2026-68103",
@@ -90,7 +90,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-68103",
       "assessment": "Ingen støttet rettelse dokumentert i kontrollert tracker",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
+      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
     },
     {
       "cve": "CVE-2026-72198",
@@ -106,7 +106,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-72198",
       "assessment": "Ingen støttet rettelse dokumentert i kontrollert tracker",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
+      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
     },
     {
       "cve": "CVE-2026-72497",
@@ -122,7 +122,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-72497",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
+      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
     },
     {
       "cve": "CVE-2026-89805",
@@ -138,7 +138,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-89805",
       "assessment": "Ingen støttet rettelse dokumentert i kontrollert tracker",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
+      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
     },
     {
       "cve": "CVE-2026-90155",
@@ -154,7 +154,7 @@
       "vendor_url": "https://ubuntu.com/security/notices/USN-9018-1",
       "assessment": "USN-kandidat; individuell generic-pakkebinding uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
+      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
     },
     {
       "cve": "CVE-2026-90167",
@@ -170,7 +170,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-90167",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
+      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
     },
     {
       "cve": "CVE-2026-90317",
@@ -186,7 +186,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-90317",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
+      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
     },
     {
       "cve": "CVE-2026-93175",
@@ -202,7 +202,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-93175",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
+      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
     },
     {
       "cve": "CVE-2026-98376",
@@ -218,7 +218,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98376",
       "assessment": "Ingen støttet rettelse dokumentert i kontrollert tracker",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
+      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
     },
     {
       "cve": "CVE-2026-98420",
@@ -234,7 +234,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98420",
       "assessment": "Ingen støttet rettelse dokumentert i kontrollert tracker",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
+      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
     },
     {
       "cve": "CVE-2026-98432",
@@ -250,7 +250,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98432",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
+      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
     },
     {
       "cve": "CVE-2026-98689",
@@ -266,7 +266,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98689",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
+      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
     },
     {
       "cve": "CVE-2026-98699",
@@ -282,7 +282,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98699",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
+      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
     },
     {
       "cve": "CVE-2026-98701",
@@ -298,7 +298,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98701",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
+      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
     },
     {
       "cve": "CVE-2026-98702",
@@ -314,7 +314,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98702",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
+      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
     },
     {
       "cve": "CVE-2026-98704",
@@ -330,7 +330,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98704",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
+      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
     },
     {
       "cve": "CVE-2026-98706",
@@ -346,7 +346,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98706",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
+      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
     },
     {
       "cve": "CVE-2026-98707",
@@ -362,7 +362,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98707",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
+      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
     },
     {
       "cve": "CVE-2026-98708",
@@ -378,7 +378,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98708",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
+      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
     },
     {
       "cve": "CVE-2026-98709",
@@ -394,7 +394,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98709",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
+      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
     },
     {
       "cve": "CVE-2026-98730",
@@ -410,7 +410,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98730",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
+      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
     },
     {
       "cve": "CVE-2026-98733",
@@ -426,7 +426,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98733",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
+      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
     },
     {
       "cve": "CVE-2026-98734",
@@ -442,7 +442,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98734",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
+      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
     },
     {
       "cve": "CVE-2026-98735",
@@ -458,7 +458,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98735",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
+      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
     },
     {
       "cve": "CVE-2026-98737",
@@ -474,7 +474,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98737",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
+      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
     },
     {
       "cve": "CVE-2026-98738",
@@ -490,7 +490,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98738",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
+      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
     },
     {
       "cve": "CVE-2026-98739",
@@ -506,7 +506,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98739",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
+      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
     },
     {
       "cve": "CVE-2026-98741",
@@ -522,7 +522,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98741",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
+      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
     },
     {
       "cve": "CVE-2026-98742",
@@ -538,7 +538,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98742",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
+      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
     },
     {
       "cve": "CVE-2026-98752",
@@ -554,7 +554,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98752",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
+      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
     },
     {
       "cve": "CVE-2026-98763",
@@ -570,7 +570,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98763",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
+      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
     },
     {
       "cve": "CVE-2026-98776",
@@ -586,7 +586,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98776",
       "assessment": "Motstrid mellom CVE-tracker og USN; konkret 43.43-kildebevis gjenstår",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
+      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
     },
     {
       "cve": "CVE-2026-98788",
@@ -602,7 +602,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98788",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
+      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
     },
     {
       "cve": "CVE-2026-98792",
@@ -618,7 +618,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98792",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
+      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
     },
     {
       "cve": "CVE-2026-98794",
@@ -634,7 +634,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98794",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
+      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
     },
     {
       "cve": "CVE-2026-98797",
@@ -650,7 +650,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98797",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
+      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
     },
     {
       "cve": "CVE-2026-98799",
@@ -666,7 +666,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98799",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
+      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
     },
     {
       "cve": "CVE-2026-98800",
@@ -682,7 +682,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98800",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
+      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
     },
     {
       "cve": "CVE-2026-98803",
@@ -698,7 +698,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98803",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
+      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
     },
     {
       "cve": "CVE-2026-98804",
@@ -714,7 +714,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98804",
       "assessment": "Motstrid mellom CVE-tracker og USN; konkret 43.43-kildebevis gjenstår",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
+      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
     },
     {
       "cve": "CVE-2026-98813",
@@ -730,7 +730,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98813",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
+      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
     },
     {
       "cve": "CVE-2026-98823",
@@ -746,7 +746,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98823",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
+      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
     },
     {
       "cve": "CVE-2026-98824",
@@ -762,7 +762,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98824",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
+      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
     },
     {
       "cve": "CVE-2026-98827",
@@ -778,7 +778,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98827",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
+      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
     },
     {
       "cve": "CVE-2026-98829",
@@ -794,7 +794,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98829",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
+      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
     },
     {
       "cve": "CVE-2026-98836",
@@ -810,7 +810,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98836",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
+      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
     },
     {
       "cve": "CVE-2026-98837",
@@ -826,7 +826,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98837",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
+      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
     },
     {
       "cve": "CVE-2026-98846",
@@ -842,7 +842,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98846",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
+      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
     },
     {
       "cve": "CVE-2026-98858",
@@ -858,7 +858,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98858",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
+      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
     },
     {
       "cve": "CVE-2026-98861",
@@ -874,7 +874,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98861",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
+      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
     },
     {
       "cve": "CVE-2026-98862",
@@ -890,7 +890,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98862",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
+      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
     },
     {
       "cve": "CVE-2026-98863",
@@ -906,7 +906,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98863",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
+      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
     },
     {
       "cve": "CVE-2026-90162",
@@ -922,7 +922,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-90162",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
+      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
     },
     {
       "cve": "CVE-2026-98725",
@@ -938,7 +938,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98725",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
+      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
     },
     {
       "cve": "CVE-2026-98805",
@@ -954,7 +954,7 @@
       "vendor_url": "https://ubuntu.com/security/CVE-2026-98805",
       "assessment": "Støttet rettelse publisert; installasjon og aktiv versjon uverifisert",
       "owner": "Jonas",
-      "production_status": "Owner output 2026-11-15T19:17:55+01:00 confirms 7.0.0-42-generic active; current dpkg build/images/barriers unverified; no production closure"
+      "production_status": "Owner output 2026-11-15T19:34:14+01:00: active Ubuntu 7.0.0-42.42-generic; 7.0.0-43.43 installed amd64 and expected next normal boot. Not yet active; no production CVE closure; runtime barriers not remeasured."
     }
   ],
   "debian": {
@@ -1098,5 +1098,353 @@
       "No boot ID or causal conclusion about earlier freezes"
     ],
     "ssh_conclusion": "Owner SSH works; observed 10013 is confined to agent execution context; exact local filter rule unidentified"
+  },
+  "owner_detailed_check": {
+    "observed_at": "2026-11-15T19:34:14.461366+01:00",
+    "provenance": "Two complete user-uploaded text files read independently; extracted text identical; one measurement, not two independent runs",
+    "sources": [
+      {
+        "name": "Innlimt tekst(2).txt",
+        "library_file_id": "libfile_fde3_f-9cc61b8f63908191a96ca8afe175a084_e8a0d76d507881919410dbb89cfb91b4",
+        "version_id": "0",
+        "source_size_bytes": 10708,
+        "created_at": "2026-11-15T18:35:11.376697Z",
+        "total_lines": 109,
+        "content_complete": true
+      },
+      {
+        "name": "Innlimt tekst(1).txt",
+        "library_file_id": "libfile_fde3_f-f010e9635ee48191a15481a7feb6b313_e8a0d76d507881919410dbb89cfb91b4",
+        "version_id": "0",
+        "source_size_bytes": 10708,
+        "created_at": "2026-11-15T18:34:36.697948Z",
+        "total_lines": 109,
+        "content_complete": true
+      }
+    ],
+    "normalized_text_file": "docs/evidence/o6-status-20261115/owner-server-check-193414.txt",
+    "normalized_text_sha256": "b0b9dcda303fb3fdfd2166a9a6642dc9261d5c3566bfea888e4bdf741bcbdefc",
+    "hash_scope": "UTF-8 text exported from Library read output; not asserted to be the original uploaded byte encoding",
+    "active_kernel": "7.0.0-42-generic",
+    "active_version_signature": "Ubuntu 7.0.0-42.42-generic 7.0.14",
+    "architecture": "amd64",
+    "installed_kernel_packages": [
+      {
+        "name": "linux-generic",
+        "version": "7.0.0-43.43",
+        "architecture": "amd64"
+      },
+      {
+        "name": "linux-headers-7.0.0-30",
+        "version": "7.0.0-30.30",
+        "architecture": "all"
+      },
+      {
+        "name": "linux-headers-7.0.0-30-generic",
+        "version": "7.0.0-30.30",
+        "architecture": "amd64"
+      },
+      {
+        "name": "linux-headers-7.0.0-42",
+        "version": "7.0.0-42.42",
+        "architecture": "all"
+      },
+      {
+        "name": "linux-headers-7.0.0-42-generic",
+        "version": "7.0.0-42.42",
+        "architecture": "amd64"
+      },
+      {
+        "name": "linux-headers-7.0.0-43",
+        "version": "7.0.0-43.43",
+        "architecture": "all"
+      },
+      {
+        "name": "linux-headers-7.0.0-43-generic",
+        "version": "7.0.0-43.43",
+        "architecture": "amd64"
+      },
+      {
+        "name": "linux-headers-generic",
+        "version": "7.0.0-43.43",
+        "architecture": "amd64"
+      },
+      {
+        "name": "linux-image-7.0.0-30-generic",
+        "version": "7.0.0-30.30",
+        "architecture": "amd64"
+      },
+      {
+        "name": "linux-image-7.0.0-42-generic",
+        "version": "7.0.0-42.42",
+        "architecture": "amd64"
+      },
+      {
+        "name": "linux-image-7.0.0-43-generic",
+        "version": "7.0.0-43.43",
+        "architecture": "amd64"
+      },
+      {
+        "name": "linux-image-generic",
+        "version": "7.0.0-43.43",
+        "architecture": "amd64"
+      },
+      {
+        "name": "linux-modules-7.0.0-30-generic",
+        "version": "7.0.0-30.30",
+        "architecture": "amd64"
+      },
+      {
+        "name": "linux-modules-7.0.0-42-generic",
+        "version": "7.0.0-42.42",
+        "architecture": "amd64"
+      },
+      {
+        "name": "linux-modules-7.0.0-43-generic",
+        "version": "7.0.0-43.43",
+        "architecture": "amd64"
+      }
+    ],
+    "apt_policy": {
+      "linux-generic": {
+        "installed": "7.0.0-43.43",
+        "candidate": "7.0.0-43.43"
+      },
+      "linux-image-generic": {
+        "installed": "7.0.0-43.43",
+        "candidate": "7.0.0-43.43"
+      },
+      "linux-headers-generic": {
+        "installed": "7.0.0-43.43",
+        "candidate": "7.0.0-43.43"
+      },
+      "linux-image-7.0.0-42-generic": {
+        "installed": "7.0.0-42.42",
+        "candidate": "7.0.0-42.42"
+      },
+      "linux-image-7.0.0-43-generic": {
+        "installed": "7.0.0-43.43",
+        "candidate": "7.0.0-43.43"
+      },
+      "linux-modules-7.0.0-43-generic": {
+        "installed": "7.0.0-43.43",
+        "candidate": "7.0.0-43.43"
+      },
+      "linux-headers-7.0.0-43-generic": {
+        "installed": "7.0.0-43.43",
+        "candidate": "7.0.0-43.43"
+      }
+    },
+    "apt_update_stamp": {
+      "name": "update-success-stamp",
+      "mtime_utc": "2026-11-15T11:37:01.620625+00:00",
+      "bytes": 0,
+      "mode": "0o644",
+      "symlink": false
+    },
+    "ubuntu_indices": [
+      {
+        "Origin": "Ubuntu",
+        "Suite": "resolute-backports",
+        "Codename": "resolute",
+        "Date": "Sat, 14 Nov 2026 19:23:56 UTC",
+        "mtime_utc": "2026-11-14T19:23:58+00:00"
+      },
+      {
+        "Origin": "Ubuntu",
+        "Suite": "resolute-updates",
+        "Codename": "resolute",
+        "Date": "Sat, 14 Nov 2026 19:23:05 UTC",
+        "mtime_utc": "2026-11-14T19:23:24+00:00"
+      },
+      {
+        "Origin": "Ubuntu",
+        "Suite": "resolute",
+        "Codename": "resolute",
+        "Date": "Thu, 23 Apr 2026 17:07:15 UTC",
+        "mtime_utc": "2026-04-23T17:07:30+00:00"
+      },
+      {
+        "Origin": "Ubuntu",
+        "Suite": "resolute-security",
+        "Codename": "resolute",
+        "Date": "Sat, 14 Nov 2026 19:22:44 UTC",
+        "mtime_utc": "2026-11-14T19:23:00+00:00"
+      }
+    ],
+    "apt_package_indices": [
+      {
+        "suite": "resolute",
+        "count": 1,
+        "mtimes_utc": [
+          "2026-04-23T14:34:38+00:00"
+        ]
+      },
+      {
+        "suite": "resolute-updates",
+        "count": 1,
+        "mtimes_utc": [
+          "2026-11-13T06:17:56+00:00"
+        ]
+      },
+      {
+        "suite": "resolute-security",
+        "count": 1,
+        "mtimes_utc": [
+          "2026-11-12T21:24:08+00:00"
+        ]
+      }
+    ],
+    "dpkg_audit": "no reported incomplete packages",
+    "kernel_holds": [],
+    "expected_next_kernel": "7.0.0-43-generic",
+    "boot_reason": "GRUB_DEFAULT=0 and generated default 0; first Ubuntu entry loads 43; no filtered GRUB_ENV override or command error reported; EFI current/first BootOrder 0004 ubuntu; no BootNext reported. Conditional on unchanged config and normal boot without manual override.",
+    "grub_inputs": [
+      {
+        "file": "/etc/default/grub",
+        "setting": "GRUB_DEFAULT=0"
+      },
+      {
+        "file": "/etc/default/grub",
+        "setting": "GRUB_TIMEOUT_STYLE=menu"
+      },
+      {
+        "file": "/etc/default/grub",
+        "setting": "GRUB_TIMEOUT=10"
+      },
+      {
+        "file": "/etc/default/grub.d/99-bussassistent-recovery.cfg",
+        "setting": "GRUB_TIMEOUT_STYLE=menu"
+      },
+      {
+        "file": "/etc/default/grub.d/99-bussassistent-recovery.cfg",
+        "setting": "GRUB_TIMEOUT=10"
+      }
+    ],
+    "grub_generated_default": [
+      "set default=\"${next_entry}\"",
+      "set default=\"0\""
+    ],
+    "grub_environment_entries": [],
+    "efi_selection": [
+      "BootCurrent: 0004",
+      "BootOrder: 0004,2003,2001,2002",
+      "Boot0004* ubuntu\tHD(1,GPT,a65ede25-97cf-426d-83fa-345275209d82,0x800,0x219800)/\\EFI\\ubuntu\\shimx64.efiRC"
+    ],
+    "boot_artifacts": [
+      {
+        "name": "vmlinuz-7.0.0-30-generic",
+        "mtime_utc": "2026-07-31T16:28:15+00:00",
+        "bytes": 17295752,
+        "mode": "0o600",
+        "symlink": false
+      },
+      {
+        "name": "vmlinuz-7.0.0-42-generic",
+        "mtime_utc": "2026-10-15T06:50:14+00:00",
+        "bytes": 17344904,
+        "mode": "0o600",
+        "symlink": false
+      },
+      {
+        "name": "vmlinuz-7.0.0-43-generic",
+        "mtime_utc": "2026-10-23T12:03:02+00:00",
+        "bytes": 17349000,
+        "mode": "0o600",
+        "symlink": false
+      },
+      {
+        "name": "initrd.img-7.0.0-30-generic",
+        "mtime_utc": "2026-10-29T16:11:39.721771+00:00",
+        "bytes": 65241922,
+        "mode": "0o600",
+        "symlink": false
+      },
+      {
+        "name": "initrd.img-7.0.0-42-generic",
+        "mtime_utc": "2026-11-01T22:09:33.824116+00:00",
+        "bytes": 62886629,
+        "mode": "0o600",
+        "symlink": false
+      },
+      {
+        "name": "initrd.img-7.0.0-43-generic",
+        "mtime_utc": "2026-11-11T05:22:04.762676+00:00",
+        "bytes": 62895558,
+        "mode": "0o600",
+        "symlink": false
+      }
+    ],
+    "reboot_required": true,
+    "reboot_required_packages": [
+      "linux-image-7.0.0-43-generic",
+      "linux-base",
+      "libc6"
+    ],
+    "backup_timer": {
+      "LoadState": "loaded",
+      "ActiveState": "active",
+      "SubState": "waiting",
+      "Unit": "bussassistent-backup.service",
+      "TimersCalendar": "{ OnCalendar=*-*-* 03:15:00 Europe/Oslo ; next_elapse=Mon 2026-11-16 03:15:00 CET }",
+      "NextElapseUSecRealtime": "Mon 2026-11-16 03:16:30 CET",
+      "LastTriggerUSec": "Sun 2026-11-15 03:17:19 CET",
+      "RandomizedDelayUSec": "5min",
+      "Persistent": "yes"
+    },
+    "backup_service": {
+      "LoadState": "loaded",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": "be762015b3cd47feabd08fd1be93d2d7",
+      "Result": "success",
+      "ExecMainStartTimestamp": "Sun 2026-11-15 03:17:19 CET",
+      "ExecMainExitTimestamp": "Sun 2026-11-15 03:17:19 CET",
+      "ExecMainCode": "1",
+      "ExecMainStatus": "0"
+    },
+    "backup_command_matches_expected": true,
+    "last_successful_backup_job": {
+      "time_utc": "2026-11-15T02:17:19.488871+00:00",
+      "result": "done",
+      "job_type": "start",
+      "systemd_finished": true
+    },
+    "recent_dump_metadata": [
+      {
+        "name": "20261115T021719Z-7921eb54e4816aaab9368c3efd851bcf692f3823.dump",
+        "mtime_utc": "2026-11-15T02:17:19.360769+00:00",
+        "bytes": 56350,
+        "mode": "0o640",
+        "symlink": false
+      },
+      {
+        "name": "20261114T021719Z-7921eb54e4816aaab9368c3efd851bcf692f3823.dump",
+        "mtime_utc": "2026-11-14T02:17:19.902617+00:00",
+        "bytes": 56350,
+        "mode": "0o640",
+        "symlink": false
+      }
+    ],
+    "recent_dump_count": 2,
+    "assessment": {
+      "decision": "Installed fix requires qualified reboot",
+      "kernel_installation_needed": false,
+      "active_fix": false,
+      "backup_failure_detected": false,
+      "backup_success_local": "2026-11-15T03:17:19+01:00",
+      "next_backup_local": "2026-11-16T03:16:30+01:00",
+      "new_restore_test": false,
+      "retention_note": "Missing 13 November dump is older than 48h and consistent with configured retention; deletion cause not independently proven.",
+      "remaining": [
+        "Separate owner authorization for restart",
+        "Console/known-good kernel fallback and current pre-maintenance health checks",
+        "Post-boot kernel/version_signature, network/SSH, services and application checks",
+        "Container images, library inventory and runtime barriers not measured by this bounded command",
+        "Three vendor source ambiguities, six still-vulnerable kernel CVEs and library residuals remain open"
+      ],
+      "no_server_mutation_by_review": true,
+      "aggregate_o6_closed": false
+    }
   }
 }
