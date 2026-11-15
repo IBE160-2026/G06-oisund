@@ -459,6 +459,14 @@ Jonas returnerte lesende SSH-utdata med måletid 2026-11-15T19:17:55+01:00: oppe
 
 Rapport/kilderegister og de sju nåtidsoversiktene er korrigert og committet som **d2d9d53**. Råutdata og eierproveniens er bevart. Aktiv42-generic er skilt fra publisert43.43 og ukjent installert versjon. Current-peker/systemd-active gir ikke imageattestasjon, funksjonstest eller bevis for gjennomført backup; lang oppetid alene beviser ikke feilfri drift eller årsaken til tidligere frys. JSON-parse, mapping av de tre active-linjene, diffkontroll og gjennomgang av nåtidsformuleringer er utført. Ingen produkt-/serverendringer, merge/push, risikoendring eller O6-lukking.
 
+### Avgrenset eierkommando klargjort samme dag kl. 19:29
+
+Jonas bestilte én samlet lesende PowerShell/SSH-kommando for kernelinstallasjon/neste oppstartsvalg, lokal APT-kandidat og indeksalder uten refresh, omstartsbehov og faktisk backupjobb. Agentens nettverksbegrensning ble lagt til grunn; ingen ny servertilkobling eller tilkoblingsfeilsøking. Backupunit/timer, backupfunksjonen og tidligere kontroller ble lest.
+
+Commit **54daa36** legger til metoden read-only-server-check.ps1 under datert evidens og lenker den fra rapporten. Metoden bruker én etablert SSH-forbindelse med streng vertsnøkkelkontroll, eierens TTY/sudo for beskyttede lesinger, avgrensede statusfelter og journalmetadata. Den skriver ikke ut backupinnhold eller vilkårlige applikasjonsjournalmeldinger. Base64 transporterer den synlige Python-kilden uten shell-siteringsskader. Ingen installasjon, apt-refresh, backupkjøring, restore, restart, deploy eller risikobeslutning.
+
+PowerShell-parser og lokal SSH-stubb kontrollerte opsjoner og identisk kilde etter base64-rundtur; ingen nettverkstrafikk ble utført. To innledende lokale kontrollforsøk hadde feil i selve inspeksjonen (AST-uttrekk og variabelscope); korrigert kontroll bestod uten endring av innsamlingsmetoden. Python-kilden er manuelt gjennomgått, men ikke kjørt/syntakskontrollert med Python: runtimeoppslag gav ingen brukbar lokal Python. Staget diffkontroll bestod. Resultat fra serveren avventes før vurdering av de fire vedlikeholdsalternativene. O6-status og aksept er uendret; ingen merge/push.
+
 ### Åpne punkter
 
 Den eksisterende O6-raden i issues.md er oppdatert, ikke duplisert: lesende serveravstemming; kernelkvalifisering og tre kildeavklaringer; seks kernelrester og Debian-restene som avventer støttet rettelse; journald/barriereverifikasjon; endringsutløste avklaringer; løpende backup og stabilitet. Kandidatens installerte operatør-/restorekjede, fysisk kodeoverlevering og eier-/releaseporter gjenstår i eget omfang. Firmware forblir separat utsatt. Samlet O6 er ikke lukket.
