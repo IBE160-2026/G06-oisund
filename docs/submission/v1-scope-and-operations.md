@@ -1,4 +1,8 @@
-# Current V1 scope and operations — 31 October 2026
+# V1 scope and operations
+
+**Current operations status — 15 November 2026:** O3/O5 are complete within documented scope; O4 is administratively closed with its evidence limits. O6 maintenance, closing checks and triage are complete; named residuals remain open, with unchanged temporary risk acceptance and separately deferred firmware. [Fresh O6 report](../evidence/o6-status-20261115.md). Last verified production release: 7921eb5 on 4 November; current release, uptime and health are unverified.
+
+The 31 October version map and qualification below are historical checkpoints; their dates and original results are retained.
 
 ## Owner decision and status
 
@@ -9,7 +13,7 @@ Jonas explicitly confirmed that the completed Ubuntu integration is included in 
 | Application, D1–D3, Epic12 | Complete and owner-accepted. [Personal acceptance](../evidence/v1-acceptance-2026-10-29.md), [main integration](../evidence/v1-main-integration-20261029.md). SCOPE-02 application scope is unchanged. |
 | Ubuntu integration and handover | Complete, included in V1. [Operations guide](../ubuntu-server.md) and [dated operations log](../../.logs/jonas-oisund/990-2026-10-29-18-30-00-ubuntu-server.md). Jonas confirmed the integrated release's login/save test passed on 31 October. |
 | Stability | Continue observation after the kernel update. Four successful boots and bounded recovery tests do not establish the earlier freeze's root cause or long-term stability. |
-| Final delivery | Repository reflection preserved; [final control](../evidence/v1-final-control-20261031.md) qualifies the source/package/local recipe. Annotated `v1.0.0` and its GitHub release are published at `d367a0e47198aeecc52358258cb6825eecdc8c4a`; that exact commit was separately deployed. [Operations record](../evidence/v1-release-deploy-20261031.md). Open O3–O6 have explicit owner-approved follow-up after V1. Complete course submission remains separate; O3–O6 are not closed by publication/deploy. |
+| Final delivery | Repository reflection preserved; [final control](../evidence/v1-final-control-20261031.md) qualifies the source/package/local recipe. Annotated `v1.0.0` and its GitHub release are published at `d367a0e47198aeecc52358258cb6825eecdc8c4a`; that exact commit was separately deployed. [Operations record](../evidence/v1-release-deploy-20261031.md). The 31 October open O3–O6 points had explicit owner-approved follow-up after V1; subsequent dispositions appear above. Complete course submission remains separate; O3–O6 are not closed by publication/deploy. |
 
 ## Two runtime setups
 
@@ -26,7 +30,7 @@ Jonas explicitly confirmed that the completed Ubuntu integration is included in 
 | `64f91a70f51b87188de9a3b68ca8ab7fa94c9dfb` | Application/main basis incorporated into Ubuntu integration in `6f845fa`; backend, frontend and tablet gate preserved, per the operations log. Ubuntu files/administrative scripts are additions, so the full tree is not identical to C1. |
 | Operational `eb0eee3496d8999fb28615b49d4bf60124b6158f` | Earlier deployed release: [O1 and bounded O2](../evidence/access-operations-20261029.md), earlier reboot/crash/lid/network/Windows-off observations. Not rerun on later source by this document. |
 | Operational `addd27b14fe4b26ef24d488d847d1c0d59a98946` | Previous deployed integrated release: successful deploy → rollback to eb0eee3 → deploy, fresh isolated restore and health/backup checks. Jonas's integrated login/save acceptance was recorded on 31 October. |
-| Tag/release/active Ubuntu `d367a0e47198aeecc52358258cb6825eecdc8c4a` | Existing v1.0.0 tag unchanged; GitHub release published31October03:20 Oslo and exact commit deployed03:21. Verified Windows backup, isolated fresh restore, health/tunnel/identity checks in [operations report](../evidence/v1-release-deploy-20261031.md). New documentation-only main commits are not the deployed version. |
+| v1.0.0 tag/release and 31 October Ubuntu deployment `d367a0e47198aeecc52358258cb6825eecdc8c4a` | Existing v1.0.0 tag unchanged; GitHub release published31October03:20 Oslo and exact commit deployed03:21. Verified Windows backup, isolated fresh restore, health/tunnel/identity checks in [operations report](../evidence/v1-release-deploy-20261031.md). New documentation-only main commits are not the deployed version. |
 | Published main `5dc64000e1f42a550875146e28ac43b363332606` | Historical remote main fetched at the earlier scope reconciliation. Includes handover/owner-test records and documented integrated-server-branch cleanup. Publishing this or later documentation does not deploy it. Use actual Git refs for subsequent publication; no final delivery SHA is assigned here. |
 
 The integration log records 12 operations tests (only `os.chown` mocked in the non-root test), 23 gate tests, 4 cleanup tests, TypeScript/Vite, PowerShell parsing and actual Docker builds. Isolated restore initially failed, was corrected for ownership/readiness, then passed on old and new releases. Results retain their original environments/dates; no full application regression or renewed manual matrix is inferred. Earlier restore/recovery/reboot observations and their limits remain in the log.
