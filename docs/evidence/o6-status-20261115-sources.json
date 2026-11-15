@@ -1812,7 +1812,7 @@
     "receipt_sha256": "bedcd1e193590c82f5b57f312a449e60f28f2a27521749f95a1773317b7bd279",
     "hash_scope": "UTF-8 text normalized to LF",
     "technical_reboot_check": "Passed within supplied SSH/systemd/API/origin-check scope",
-    "owner_browser_login_and_view": "Not yet confirmed",
+    "owner_browser_login_and_view": "Passed: Jonas confirmed normal login and normal app display after the reboot on 2026-11-15",
     "backup_after_boot": "Timer active; no new backup execution or restore proven; last verified job remains 2026-11-15T03:17:19+01:00",
     "reboot_required_marker_after_boot": "Not read",
     "remaining_limits": [
@@ -1823,7 +1823,22 @@
       "Three source ambiguities and six still-vulnerable kernel CVEs unchanged"
     ],
     "aggregate_o6_closed": false,
-    "risk_acceptance_changed": false
+    "risk_acceptance_changed": false,
+    "owner_browser_confirmation": {
+      "source": "Owner statement in this conversation",
+      "date": "2026-11-15",
+      "exact_test_timestamp": null,
+      "quote": "Vanlig innlogging fungerer. Visning er som normalt",
+      "scope": [
+        "Normal login",
+        "Normal app display"
+      ],
+      "limits": [
+        "Device/browser not supplied",
+        "No save/reopen or broader regression inferred",
+        "No new backup or restore evidence"
+      ]
+    }
   },
   "production_disposition_summary": {
     "checked_at": "2026-11-15T20:02:17+01:00",
