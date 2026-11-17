@@ -504,3 +504,35 @@ Validering:56unikeCVE-er/50fixed_active/6open, tre nye offisielle kildebindinger
 ### Åpne punkter
 
 Seks kernelpunkter står åpne. Prioriter eksakt Ubuntu43.43-kilde-/byggavstemming mot rettelsene, særlig binder/NTFS og deretter BPF; tilgang til den offentlige kilden er nå den konkrete barrieren for videre skrivebordskontroll. Ved faktisk berørt kode gjenstår støttet backport eller separat kvalifisert tiltak. Bibliotek-/journaldrester og øvrige versjonsbundne bevisgrenser består. Backup/stabilitet følges i drift; firmware separat utsatt og kandidatens egne porter består. Personlig innlogging/visning er bestått. Alt er speilet i eksisterende O6-rad; samletO6 er fortsatt åpen.
+
+## 2026-11-17 kl. 21:15 - Jonas Øisund
+
+### Oppgave
+
+Fortsette eksakt kilde-/byggavstemming av de seks kernelrestene, prioritere binder/NTFS og avklare konkrete vilkår for BPF, AMDGPU, DRM-pagemap og ksmbd. Bare kildearbeid/dokumentasjon; ingen nye generelle serverprøver eller serverendringer. Commit egne endringer på codex/o6-status-20261115, uten merge/push.
+
+### Plan
+
+- Følge [15. november-oppfølgingen](../../docs/evidence/o6-kernel-followup-20261115.md); hente offisielle Ubuntu-kildearkiver dersom Launchpad er utilgjengelig.
+- Binde source linux og linux-signed43.43, amd64/generic-buildinfo og tidligere eierbevis; sammenligne faktisk kode med CVE-vilkårene.
+- Dokumentere individuell disponering, gjenværende bibliotek/journalarbeid og bevisgrenser; bevare historiske rapporter.
+
+### Resultat
+
+**99f8d72** legger til [kilde-/byggrapport17.november](../../docs/evidence/o6-kernel-source-20261117.md), seks-punktsregister, kildemanifest, pakke-/byggmetadata og kodeutdrag; oppdaterer README, HANDOFF, ubuntu-server og fire submission-oversikter. Ingen produktkode eller historisk rapport er endret.
+
+Offisielt archive.ubuntu.com var tilgjengelig. Linux7.0.0-43.43 original/diff og linux-signed-arkivet samsvarer SHA256 med sine DSC-filer; amd64-buildinfo samsvarer med resolute-updates/main Packages. Signed image har Built-Using linux=43.43 og eksakte unsigned/buildinfo-avhengigheter. Utvalgte komplette kildefiler rekonstruert med native git apply etter mislykket MSYS-patchstart; check/apply/reverse-check0. PGP/InRelease er ikke selvstendig signaturvalidert, og ingen binærreproduksjon eller ny serverattest er påstått.
+
+Binder50240 har ikke lagret VMA-peker; beskyttet adresseoppslag og mapped-tilstand dokumentert. Lukkes individuelt som rettet innen43.43. NTFS72198 gjelder manglende gammel fs/ntfs-driver; original/diff/buildregler/modullister bekrefter fravær selv om configteksten inneholder NTFS_FS=m. Lukkes individuelt som ikke berørt; ntfs3 får ingen generell friskmelding. Ubuntu-trackeren viser fortsatt berørt for begge; lokal kildevurdering og leverandørstatus er skilt tydelig. Ingen melding til Canonical er sendt.
+
+BPF98376 har fortsatt feil meta-callback uten max_entries, og konkret amd64-JIT-bane er bygget. AMDGPU68103 bruker xa_store_irq. DRM89805 mangler fallback, har put_page før folio_order og mangler ny kildearrayhjelper. Ksmbd98420 fjerner fortsatt gyldige idle-økter etter10sekunder. Alle fire kodeavvik består; historiske barrierer er ikke målt på nytt. Totalt51rettet/1ikkeberørt/4åpne av56, mot50/6 tidligere. SamletO6 og risikoaksept uendret.
+
+Ferske Debian-kilder bekrefter util-linux/ncurses/ACL/FTS5 som berørt i trixie. 78409-versjonsmotstriden er fortsatt et konkret kildearbeid. Ubuntu-journald-siden er nå hentet direkte og bekrefter utsatt rettelse; tidligere kildeinnhentingsgap er løst, CVE-punktet er ikke lukket. Siste serverbevis er fortsatt15.november20:02:17, siste dokumenterte automatiske backup15.november03:17:19, eldre restore separat.
+
+Validering: SHA256/kildestørrelser, eksakt source/signed/buildinfo-binding, kildefilhash,56total/6vurderte/4åpne, lokale rapportlenker, JSON og staget diffkontroll bestod. Ingen app-/belastnings-/stabilitetstest, ny SSH-feilsøking, pakkeinstallasjon, omstart, deploy, tilgangsendring, WAN-prøve, firmware, merge eller push. Ingen fersk V1.1.0-kandidatavstemming påstått.
+
+### Åpne punkter
+
+- Fire kernelavvik trenger støttet Ubuntu-rettelse for å lukkes som rettet kode; prioriter BPF. Eksisterende/delegerte BPF-objekter er fortsatt uattestert, og AMDGPU/DRM/ksmbd-barrierer er historiske/endringsutløste.
+- Neste konkrete kildeoppgave er util-linux/78409 i eksakt trixie-kilde/backporter; bibliotek- og journaldrester står åpne. Kvalifisert installasjon/aktivisering blir en senere vedlikeholdsoppgave når støttet rettelse foreligger.
+- Løpende backup/stabilitet og kandidatens egne kvalifiseringsporter videreføres; firmware separat utsatt. SamletO6 krever fortsatt uttrykkelig eierbeslutning for administrativ lukking. Alt er speilet i eksisterende O6-punkt i issues.md.
