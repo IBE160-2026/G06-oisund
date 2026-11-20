@@ -32,9 +32,17 @@ $environment = @{
     VITE_PRIVATE_API_BASE = $null
 }
 $previous = @{}
+function Set-LaunchEnvironment([string]$Name, $Value) {
+    if ($null -eq $Value) {
+        Remove-Item -LiteralPath "Env:$Name" -ErrorAction SilentlyContinue
+    }
+    else {
+        Set-Item -LiteralPath "Env:$Name" -Value $Value
+    }
+}
 foreach ($name in $environment.Keys) {
     $previous[$name] = [Environment]::GetEnvironmentVariable($name)
-    [Environment]::SetEnvironmentVariable($name, $environment[$name])
+    Set-LaunchEnvironment $name $environment[$name]
 }
 
 Push-Location $root
@@ -77,5 +85,5 @@ try {
 }
 finally {
     Pop-Location
-    foreach ($name in $previous.Keys) { [Environment]::SetEnvironmentVariable($name, $previous[$name]) }
+    foreach ($name in $previous.Keys) { Set-LaunchEnvironment $name $previous[$name] }
 }
