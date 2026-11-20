@@ -14,7 +14,7 @@ export type Saved = { id: string; created_at: string; expires_at: string; revisi
 type Summary = Pick<Saved, 'id' | 'expires_at' | 'revision'> & { service_date: string | null };
 type Pending = { path: string; body: { operation_id: string; expected_revision: number; draft: Content } };
 type PendingDelete = { id: string; body: { operation_id: string; expected_revision: number } };
-type Props = { upload: (file: File, signal: AbortSignal) => Promise<any>; request: (path: string) => Promise<any>; mutation: (path: string, body: object) => Promise<any>; dirtyChanged: (dirty: boolean) => void; settingsBlocked: (blocked: boolean) => void; expired: () => void; suspended: boolean };
+type Props = { upload: (file: File, signal: AbortSignal) => Promise<any>; request: (path: string) => Promise<any>; mutation: (path: string, body: object) => Promise<any>; dirtyChanged: (dirty: boolean) => void; settingsBlocked: (blocked: boolean) => void; expired: () => void; suspended: boolean; workspaceVisible: boolean };
 const empty = (): Content => ({ service_date: null, vehicle_duty: null, realtime_duty: null, physical_bus: null, activities: [] });
 const realtime = (duty: string | null) => duty?.match(/([0-9]{3})$/)?.[1] ?? null;
 const fields = [['type', 'Aktivitetstype'], ['raw_code', 'Opprinnelig kode'], ['start', 'Start med dato og Oslo-offset'], ['end', 'Slutt med dato og Oslo-offset'], ['source_start', 'Opprinnelig startklokke'], ['source_end', 'Opprinnelig sluttklokke'], ['from_place', 'Fra sted'], ['to_place', 'Til sted'], ['trip', 'Turnummer'], ['line', 'Linje'], ['direction', 'Retning'], ['uncertainty', 'Usikkerhet / ukjente fakta'], ['provenance', 'Kilde / manuell rettelse']] as const;
@@ -76,7 +76,7 @@ function ActivityComparison({ content, activity, index, unresolved }: { content:
   </>;
 }
 
-export function PrivateDrafts({ upload, request, mutation, dirtyChanged, settingsBlocked, expired, suspended }: Props) {
+export function PrivateDrafts({ upload, request, mutation, dirtyChanged, settingsBlocked, expired, suspended, workspaceVisible }: Props) {
   const [screen, setScreen] = useState<'upload' | 'import' | 'editor' | 'direct' | 'approval' | 'plan'>('upload');
   const [hasPlan, setHasPlan] = useState(false); const [consulting, setConsulting] = useState(false);
   const preparationTitle = useRef<HTMLHeadingElement>(null);
@@ -451,6 +451,6 @@ export function PrivateDrafts({ upload, request, mutation, dirtyChanged, setting
     {comparison && <section aria-label="Sammenlign versjoner"><h3>Lagret versjon {comparison.revision}</h3><p>Lokale endringer står i skjemaet. Last inn lagret versjon for å forkaste dem.</p><dl><dt>Tjenestedato</dt><dd>{comparison.draft.service_date ?? 'Ukjent'}</dd><dt>Vognløp</dt><dd>{comparison.draft.vehicle_duty ?? 'Ukjent'}</dd><dt>Sanntidsverdi</dt><dd>{comparison.draft.realtime_duty ?? 'Ukjent'}</dd><dt>Buss/vogn</dt><dd>{comparison.draft.physical_bus ?? 'Ukjent'}</dd></dl><ol>{comparison.draft.activities.map((activity, index) => <li key={activity.id}><dl><dt>Gjeldende vognløp</dt><dd>{effectiveDuty(comparison.draft, index) ?? 'Ukjent'} · sanntidsverdi {dutySuffix(effectiveDuty(comparison.draft, index)) ?? 'Ukjent'}</dd>{fields.map(([key, label]) => <div className="fact" key={key}><dt>{label}</dt><dd>{displayFact(key, activity[key]) ?? 'Ukjent'}</dd></div>)}</dl></li>)}</ol><button onClick={() => { if (window.confirm('Forkaste lokale endringer og laste lagret versjon?')) void reopen(comparison.id, true); }}>Last inn lagret versjon</button></section>}
     </div></fieldset>
     </section>
-    <PrivateConfirmation registryOpen={setRegistryOpen} registryNavigation={registryNavigation} registryDirty={setRegistryDirty} consultationChanged={setConsulting} screen={screen} showPlan={() => setScreen('plan')} showPreparation={() => setScreen('upload')} planChanged={setHasPlan} saved={saved} clean={!dirty && !busy && !comparison && !draftExpired} request={request} mutation={mutation} expired={expired} suspended={suspended || routeLocked} lock={setConfirmationLocked} settingsBlocked={setConfirmationBlocked} />
+    <PrivateConfirmation registryOpen={setRegistryOpen} registryNavigation={registryNavigation} registryDirty={setRegistryDirty} consultationChanged={setConsulting} screen={screen} showPlan={() => setScreen('plan')} showPreparation={() => setScreen('upload')} planChanged={setHasPlan} saved={saved} clean={!dirty && !busy && !comparison && !draftExpired} request={request} mutation={mutation} expired={expired} suspended={suspended || routeLocked} lock={setConfirmationLocked} settingsBlocked={setConfirmationBlocked} workspaceVisible={workspaceVisible} />
   </div>;
 }
