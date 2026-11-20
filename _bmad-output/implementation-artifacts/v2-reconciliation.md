@@ -20,6 +20,8 @@ Use feature detection and one foreground location watch. Purge samples and revok
 
 ## Implemented revisions and evidence gates
 
+- AN-E1-S3 distinguishes the exact Giæverbukta StopPlace in manual review when the verified stop-only SIRI shape overlaps planned line 24 time on a qualified pilot date. Scheduled membership evidence is sufficient for this review context. Exact trip, platform and coordinate authority remain separate. [Dated stop evidence](../../docs/v2-automatic-notices.md#dated-giæverbukta-stop-review).
+
 - A later source or private-revision change invalidates an unsubmitted review choice. A sent operation retains its original basis and identity for outcome checks. Public notice identity visibility and publication of a specific revision are separate observations.
 - The November line 20 window replaces the elapsed pilot dates for the V2 runtime only. All historical research and the prior casebook remain on their original branches. The independent actual-shift pair ledger and a sufficiently recent pinned source are needed for field qualification.
 - Dated route identity and junction/road identity are separate authorities. The current NSR export provides matching Quays and coordinate values but no applicable direct validity intervals. The historic NVDB corridor sample provides actual road-limit evidence at R4 but does not qualify complete directed coverage or a calibrated uncertainty interval. The corresponding real automatic displays stay unavailable until those conditions are met.

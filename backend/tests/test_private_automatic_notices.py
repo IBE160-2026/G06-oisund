@@ -106,7 +106,7 @@ def save(client, plan, op):
     return client.post(path(plan) + '/review', headers=headers(client), json=op)
 
 
-def test_weekend_binding_preserves_unknown_beyond_the_pilot(client, users, fixture_feed):
+def workday_with_dated_fixture(client, users, service_date, start, end):
     assert login(client, users).status_code == 200
     oslo = ZoneInfo('Europe/Oslo')
     tomorrow = datetime.now(oslo).date() + timedelta(days=1)
@@ -121,11 +121,16 @@ def test_weekend_binding_preserves_unknown_beyond_the_pilot(client, users, fixtu
     # Exercise the historical calendar binding independently of when the test runs.
     # The fixture keeps its real authorization lifetime and changes only planned facts.
     content = plan['draft']
-    content['service_date'] = '2026-11-29'
-    content['activities'][0].update(start='2026-11-29T23:55+01:00', end='2026-11-30T00:15+01:00')
+    content['service_date'] = service_date
+    content['activities'][0].update(start=start, end=end)
     with database() as conn:
         auth.require_synthetic_accounts(conn)
         conn.execute('UPDATE workdays SET content=%s WHERE id=%s', (Jsonb(content), plan['id']))
+    return plan
+
+
+def test_weekend_binding_preserves_unknown_beyond_the_pilot(client, users, fixture_feed):
+    plan = workday_with_dated_fixture(client, users, '2026-11-29', '2026-11-29T23:55+01:00', '2026-11-30T00:15+01:00')
     qualified = situation('weekend', LINE24, windows=(('2026-11-29T23:56+01:00', None),))
     next_day = situation('outside', LINE24, windows=(('2026-11-30T00:00+01:00', None),))
     collect((qualified + next_day, 'false'))
@@ -191,6 +196,43 @@ def test_complete_partial_unknown_recovery_and_lifecycle(client, users, fixture_
     with database() as conn:
         conn.execute("UPDATE automatic_notice_feed SET synchronized_at=clock_timestamp()-interval '16 minutes'")
     assert get(client, plan)['health']['old']
+
+
+def test_dated_stop_review_preserves_scope_and_explicit_choice(client, users, fixture_feed):
+    plan = workday_with_dated_fixture(client, users, '2026-11-23', '2026-11-23T16:10+01:00', '2026-11-23T16:20+01:00')
+    window = (('2026-11-23T16:00+01:00', None),)
+    stop_message = situation('pilot-stop', STOP, windows=window, version='1')
+    quay_message = situation('pilot-quay', STOP.replace('StopPlace:55902', 'Quay:95713'), windows=window)
+    collect((stop_message.replace('<StopPoints>', '<StopPoints xmlns="">') + quay_message, 'false'))
+    previous = get(client, plan)
+    unresolved = entry(previous, 'pilot-stop')
+    assert unresolved['classification'] == 'review' and unresolved['decision'] is None
+    assert save(client, plan, operation(previous, unresolved)).status_code == 200
+
+    collect((stop_message + quay_message, 'false'))
+    snapshot = get(client, plan)
+    assert snapshot['total'] == 2
+    assert snapshot['page_counts'] == {'review': 2}
+    assert snapshot['binding']['stop_review']['stop_place_ref'] == 'NSR:StopPlace:55902'
+    stop = entry(snapshot, 'pilot-stop')
+    quay = entry(snapshot, 'pilot-quay')
+    assert stop['classification'] == quay['classification'] == 'review'
+    assert stop['pilot_stop_review'] is True and 'pilot_stop_review' not in quay
+    assert stop['matches'] == quay['matches'] == []
+    assert stop['source']['revision'] == unresolved['source']['revision']
+    assert stop['source']['basis'] != unresolved['source']['basis']
+    assert stop['source']['conflict_count'] == 0
+    assert quay['decision'] is None and stop['needs_reassessment']
+    assert stop['decision']['activity_id'] is None
+    assert stop['decision']['evidence']['verified_siri_scope'] is False
+    stale = operation(snapshot, stop, expected_source_basis=unresolved['source']['basis'])
+    assert save(client, plan, stale).status_code == 409
+    response = save(client, plan, operation(snapshot, stop))
+    assert response.status_code == 200, response.text
+    current = entry(get(client, plan), 'pilot-stop')
+    assert current['pilot_stop_review'] is True
+    assert not current['needs_reassessment']
+    assert current['decision']['action'] == 'day-context' and current['decision']['activity_id'] is None
 
 
 def test_private_replay_revision_isolation_manual_and_expiry(client, users, fixture_feed):

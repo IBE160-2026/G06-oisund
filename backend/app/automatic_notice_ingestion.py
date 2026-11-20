@@ -12,7 +12,7 @@ import httpx
 import psycopg
 from psycopg.types.json import Jsonb
 
-from .automatic_notice_source import MAX_XML_BYTES, PAGE_SIZE, SourceError, instant, parse_page, revision
+from .automatic_notice_source import MAX_XML_BYTES, PAGE_SIZE, SourceError, instant, parse_page, source_revision
 from .private_storage import database
 
 
@@ -116,7 +116,7 @@ def ordering(incoming, current):
 
 def keep_observation(conn, data, fetched_at, response_at, generation):
     key = (data['participant'], data['situation'])
-    digest = revision(data)
+    digest = source_revision(data)
     current = conn.execute('SELECT revision,content FROM automatic_notice_sources '
                            'WHERE participant=%s AND situation=%s AND current_revision', key).fetchone()
     same = current is not None and current['revision'] == digest
@@ -136,6 +136,7 @@ def keep_observation(conn, data, fetched_at, response_at, generation):
     conn.execute('INSERT INTO automatic_notice_sources(participant,situation,revision,content,first_seen,last_seen,'
                  'fetched_at,response_at,last_complete_generation,current_revision,conflicting,superseded_at) '
                  'VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT(participant,situation,revision) DO UPDATE SET '
+                 "content=automatic_notice_sources.content || jsonb_build_object('verified_siri_scope',EXCLUDED.content->'verified_siri_scope'),"
                  'last_seen=EXCLUDED.last_seen,fetched_at=EXCLUDED.fetched_at,response_at=EXCLUDED.response_at,'
                  'last_complete_generation=COALESCE(EXCLUDED.last_complete_generation,automatic_notice_sources.last_complete_generation),'
                  'current_revision=EXCLUDED.current_revision,conflicting=EXCLUDED.conflicting,'

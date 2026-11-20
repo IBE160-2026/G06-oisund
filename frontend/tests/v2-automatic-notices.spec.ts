@@ -2,11 +2,12 @@ import { test, expect, openedPlan, API, python, setup, activityScreen, dayScreen
 
 setup();
 
-function controlledSource(mode: 'seed' | 'update' | 'clear') {
+function controlledSource(mode: 'seed' | 'update' | 'clear', pilot = false) {
   return python(`import os
 from uuid import uuid4
 from app.automatic_notice_source import MAX_ID,SITUATION_PREFIX
 mode=${JSON.stringify(mode)}
+pilot=${pilot ? 'True' : 'False'}
 name='ø'+chr(10)+'🚌'*(MAX_ID-len(SITUATION_PREFIX)-2)
 if os.getenv('PRIVATE_TEST_ORIGIN') != 'http://127.0.0.1:19651' or os.getenv('V2_NOTICE_REFRESH') != 'off':
  raise RuntimeError('Only the isolated V2 test sandbox may run this controlled example')
@@ -23,10 +24,11 @@ with database() as conn:
    assert not conn.execute("SELECT 1 FROM automatic_notice_feed WHERE status!='never-qualified'").fetchone()
   import sys
   sys.path.insert(0,'tests')
-  from test_automatic_notice_rules import STOP,page,situation
+  from test_automatic_notice_rules import EVENING,STOP,page,situation
   from app.automatic_notice_ingestion import finish
   version,title=('1','Syntetisk stoppmelding &lt;script&gt;') if mode=='seed' else ('2','Oppdatert stoppmelding')
-  observed=page(situation(name,STOP,version=version,text='<Summary>'+title+'</Summary>'))
+  window=('2026-11-23T16:00+01:00',None) if pilot else EVENING
+  observed=page(situation(name,STOP,windows=(window,),version=version,text='<Summary>'+title+'</Summary>'))
   fetched=conn.execute("UPDATE automatic_notice_feed SET attempt_at=clock_timestamp(),status='collecting' RETURNING attempt_at").fetchone()['attempt_at']
   conn.commit()
   finish(conn,uuid4(),[observed.response_at],[(observed.items[0],fetched,observed.response_at)],None)
@@ -73,6 +75,38 @@ test('normal private view preserves activity and manual input and recovers a los
     await entry.click();
     await area.getByRole('button', { name: 'Tilbake til planen', exact: true }).click();
     await expect(entry).toBeFocused();
+  } finally {
+    controlledSource('clear');
+  }
+});
+
+test('a dated pilot stop has its own review group without a suggested activity', async ({ page, context }) => {
+  controlledSource('seed', true);
+  try {
+    const { plan } = await openedPlan(page, context, true, 24 * 60 * 60, undefined, false, content => {
+      content.activities[0].line = '24';
+    });
+    // Keep the authorized workday current while testing the historical pilot dates.
+    python(`from psycopg.types.json import Jsonb
+with database() as conn:
+ require_synthetic_accounts(conn)
+ key=${JSON.stringify(plan.id)}
+ facts=conn.execute('SELECT content FROM workdays WHERE id=%s',(key,)).fetchone()['content']
+ facts['service_date']='2026-11-23'
+ facts['activities'][0].update(start='2026-11-23T16:10+01:00',end='2026-11-23T16:20+01:00')
+ conn.execute('UPDATE workdays SET content=%s WHERE id=%s',(Jsonb(facts),key))`);
+    await page.getByRole('button', { name: 'Automatiske avvik', exact: true }).click();
+    const group = page.getByRole('region', { name: 'Pilotstopp til gjennomgang', exact: true });
+    await expect(group.getByRole('heading')).toHaveText('Pilotstopp til gjennomgang · 1 på denne siden');
+    await expect(group).toContainText('Vurder om meldingen gjelder avgangen din.');
+    await group.getByRole('button', { name: 'Syntetisk stoppmelding <script>', exact: true }).click();
+    await expect(page.getByRole('list', { name: 'Mulig relevante planaktiviteter' })).toHaveCount(0);
+    await expect(page.getByLabel('Valg', { exact: true })).toHaveValue('unresolved');
+    await page.getByLabel('Valg', { exact: true }).selectOption('day-context');
+    await page.getByRole('button', { name: 'Lagre gjennomgang', exact: true }).click();
+    await expect(group).toContainText('Privat valg · Beholdt som dagskontekst');
+    const selection = await (await context.request.get(`${API}/workdays/${plan.id}/selection`)).json();
+    expect(selection.activity_id).toBeNull();
   } finally {
     controlledSource('clear');
   }

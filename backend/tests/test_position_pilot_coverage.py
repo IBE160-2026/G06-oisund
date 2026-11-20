@@ -9,7 +9,7 @@ from zipfile import ZipFile
 
 import pytest
 
-from app import draft_storage, position_coordinates as positions, route_source
+from app import automatic_notice_relevance as notices, draft_storage, position_coordinates as positions, route_source
 
 
 TIMETABLE = 'troms-netex-1795129398375617.zip'
@@ -95,6 +95,52 @@ def test_manual_pilot_coverage_matches_both_frozen_archives(pilot_timetable):
             assert record['quality'] == 'unverified'
     assert found == set(records)
     assert sum(quay.get('id') in records for quay in root.findall('.//Quay', ns)) == len(found)
+
+
+def test_notice_pilot_stop_evidence_matches_dated_public_service(pilot_timetable):
+    binding = notices.BINDING
+    stop = binding['stop_review']
+    assert binding['archive_sha256'] == pilot_timetable['provenance']['sha256']
+    assert sha256(archive_path(NSR_ARCHIVE).read_bytes()).hexdigest() == stop['nsr_sha256']
+    with ZipFile(archive_path(NSR_ARCHIVE)) as archive, archive.open(NSR_MEMBER) as xml:
+        places = route_source.index(XML.parse(xml).getroot(), 'StopPlace')
+    parent = places[stop['stop_place_ref']]
+    assert parent.get('version') == '8'
+    quays = set(route_source.index(parent, 'Quay'))
+    assert all(call['quay_id'] not in quays for day in pilot_timetable['days'].values()
+               for journey in day['journeys'].values() for call in journey['calls'])
+
+    with ZipFile(archive_path(TIMETABLE)) as archive:
+        shared = route_source.xml_member(archive, '_TRO_shared_data.xml')
+        name, = [name for name in archive.namelist() if name.startswith('TRO_TRO-Line-1_24_')]
+        line = route_source.xml_member(archive, name)
+    assert list(route_source.index(line, 'Line')) == [stop['line_ref']]
+    refs = {'TRO:ScheduledStopPoint:19021442_2': 'NSR:Quay:95718',
+            'TRO:ScheduledStopPoint:19021442_4': 'NSR:Quay:95713'}
+    assert set(refs.values()) <= quays
+    for scheduled, quay in refs.items():
+        assignment, = [item for item in route_source.nodes(shared, 'PassengerStopAssignment')
+                       if route_source.ref(item, 'ScheduledStopPointRef') == scheduled]
+        assert route_source.ref(assignment, 'QuayRef') == quay
+    pattern_calls = {
+        pattern: {call.get('id'): refs[scheduled]
+                  for call in route_source.children(record, 'pointsInSequence/StopPointInJourneyPattern')
+                  if (scheduled := route_source.ref(call, 'ScheduledStopPointRef')) in refs}
+        for pattern, record in route_source.index(line, 'JourneyPattern').items()
+    }
+    dated_calls = defaultdict(set)
+    journeys = [(journey, [ref.get('ref') for ref in route_source.children(journey, 'dayTypes/DayTypeRef')])
+                for journey in route_source.nodes(line, 'ServiceJourney')]
+    calendars = route_source.assigned_dates(shared, {key for _, day_types in journeys for key in day_types})
+    for journey, day_types in journeys:
+        calls = pattern_calls[route_source.ref(journey, 'JourneyPatternRef')]
+        for call in route_source.children(journey, 'passingTimes/TimetabledPassingTime'):
+            quay = calls.get(route_source.ref(call, 'StopPointInJourneyPatternRef'))
+            clock = route_source.field(call, 'DepartureTime') or ''
+            if quay and '06:00:00' <= clock < '22:00:00' and route_source.field(call, 'DepartureDayOffset') in (None, '0'):
+                for day in {day for key in day_types for day in calendars[key]}:
+                    dated_calls[day.isoformat()].add(quay)
+    assert dated_calls == {date: set(refs.values()) for date in binding['dates']}
 
 
 def reference_for(quay_id):

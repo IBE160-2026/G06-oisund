@@ -6,7 +6,7 @@ from uuid import UUID
 import pytest
 
 from app.automatic_notice_relevance import classify
-from app.automatic_notice_source import SourceError, parse_page
+from app.automatic_notice_source import SourceError, parse_page, source_revision
 
 
 REQUESTOR = UUID('d55c9441-4cc0-43f8-b6a3-e195675c9a09')
@@ -77,6 +77,16 @@ def activity(line='20', start='2026-11-23T22:10:00+01:00', end='2026-11-23T22:20
     ('nested-quay', activity(), LINE20.replace('</AffectedLine>', f'<AffectedRoute>{STOP.replace("StopPlace", "Quay")}</AffectedRoute></AffectedLine>'), (EVENING,), 'open', 'possible-relevance', 'unresolved-qualifiers'),
     ('stop-only', activity(), STOP, (EVENING,), 'open', 'review', 'stop-scope-unverified'),
     ('quay-only', activity(), STOP.replace('StopPlace', 'Quay'), (EVENING,), 'open', 'review', 'stop-scope-unverified'),
+    ('pilot-stop', activity('24'), STOP, (EVENING,), 'open', 'pilot-stop-review', 'stop-scope-unverified'),
+    ('real-quay-at-pilot-stop', activity('24'), STOP.replace('StopPlace:55902', 'Quay:95713'), (EVENING,), 'open', 'review', 'stop-scope-unverified'),
+    ('pilot-stop-with-other-scope', activity('24'), STOP + '<Networks><AffectedNetwork><NetworkRef>TRO:Network:9</NetworkRef></AffectedNetwork></Networks>', (EVENING,), 'open', 'review', 'stop-scope-unverified'),
+    ('pilot-stop-with-line', activity('24'), LINE24 + STOP, (EVENING,), 'open', 'possible-relevance', 'unresolved-qualifiers'),
+    ('pilot-stop-invalid-window', activity('24'), STOP, (EVENING, (None, None)), 'open', 'review', 'stop-scope-unverified'),
+    ('pilot-stop-unknown-status', activity('24'), STOP, (EVENING,), None, 'review', 'stop-scope-unverified'),
+    ('pilot-stop-touching-end', activity('24', EVENING[1], '2026-11-23T23:10+01:00'), STOP, (EVENING,), 'open', 'review', 'stop-scope-unverified'),
+    ('pilot-stop-midnight', activity('24', '2026-11-23T23:55+01:00', '2026-11-24T00:10+01:00'), STOP, (MORNING,), 'open', 'pilot-stop-review', 'stop-scope-unverified'),
+    ('pilot-stop-beyond-midnight', activity('24', '2026-11-29T23:55+01:00', '2026-11-30T00:10+01:00'), STOP, (('2026-11-30T00:01+01:00', '2026-11-30T00:09+01:00'),), 'open', 'review', 'stop-scope-unverified'),
+    ('pilot-stop-expired-426-shape', activity('24'), STOP, (('2026-10-26T04:45:22.805+01:00', '2026-10-30T03:00:00+01:00'),), 'open', 'outside-scope', 'validity-expired'),
     ('broad', activity(), BROAD, (EVENING,), 'open', 'broad-context', 'explicit-broad-scope'),
     ('broad-foreign-network', activity(), BROAD.replace('TRO:Network:1', 'TRO:Network:9'), (EVENING,), 'open', 'review', 'scope-unresolved'),
     ('empty-lines', activity(), '<Networks/>', (EVENING,), 'open', 'review', 'scope-unresolved'),
@@ -89,7 +99,9 @@ def activity(line='20', start='2026-11-23T22:10:00+01:00', end='2026-11-23T22:20
 def test_relevance(identifier, plan, scope, windows, status, expected, reason):
     facts = page(situation(affects=scope, windows=windows, status=status)).items[0]
     result = classify(facts, [plan], NOW)
-    assert result['classification'] == expected, identifier
+    pilot_stop_review = expected == 'pilot-stop-review'
+    assert result['classification'] == ('review' if pilot_stop_review else expected), identifier
+    assert result.get('pilot_stop_review', False) == pilot_stop_review
     assert reason in result['reasons']
     assert bool(result['matches']) == (expected == 'possible-relevance')
 
@@ -105,6 +117,20 @@ def test_each_pilot_date_reports_exact_oslo_calendar_date(line, scope, day):
         'id': plan['id'], 'line': line, 'line_ref': f'TRO:Line:1_{line}',
         'authority_ref': 'TRO:Authority:1', 'dates': [date],
     }]
+
+
+def test_pilot_stop_requires_verified_siri_namespace_observation():
+    qualified = page(situation(affects=STOP)).items[0]
+    unqualified = page(situation(affects=STOP.replace('<StopPoints>', '<StopPoints xmlns="">'))).items[0]
+    nil = STOP.replace('<StopPointRef>', '<StopPointRef xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true">')
+    invalid = page(situation(affects=nil)).items[0]
+    legacy = {key: value for key, value in qualified.items() if key != 'verified_siri_scope'}
+    assert classify(qualified, [activity('24')], NOW)['pilot_stop_review'] is True
+    for source in (legacy, unqualified, invalid):
+        assert source['affects'] == qualified['affects']
+        assert source_revision(source) == source_revision(qualified)
+        result = classify(source, [activity('24')], NOW)
+        assert result['classification'] == 'review' and result['matches'] == [] and 'pilot_stop_review' not in result
 
 
 def test_fields_preserve_source_text_qualifiers_and_missing_clocks():

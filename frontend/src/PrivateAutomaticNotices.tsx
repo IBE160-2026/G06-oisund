@@ -8,6 +8,8 @@ const groups = {
   'broad-context': 'Overordnet informasjon',
   'outside-scope': 'Utenfor omfanget',
 };
+const displayGroups = { ...groups, 'pilot-stop-review': 'Pilotstopp til gjennomgang' };
+const pilotStopReason = 'Giæverbukta inngår i rutegrunnlaget for linje 24. Meldingens gyldighet overlapper planlagt tid. Vurder om meldingen gjelder avgangen din.';
 const reasons: Record<string, string> = {
   'exact-line-planned-overlap': 'Kvalifisert linje og overlapp med planlagt tid.',
   'uncertain-validity': 'Gyldighetstiden er ukjent eller ufullstendig.',
@@ -67,7 +69,7 @@ type Decision = Choice & { plan_revision: number; source_basis: string; source_r
 type Manual = { id: string; title: string; summary: string | null; description: string | null; source_note: string | null;
   source_url: string | null; status: string; source_updated_at: string | null; checked_at: string | null; ended_at: string | null };
 type Entry = { situation: string; classification: Group; reasons: string[]; review_revision: number; decision: Decision | null; validity_expired: boolean;
-  needs_reassessment: boolean; source: Source | null; manual: Manual | null;
+  needs_reassessment: boolean; source: Source | null; manual: Manual | null; pilot_stop_review?: true;
   matches: { id: string; line: string; line_ref: string; authority_ref: string; dates: string[] }[] };
 type Page = { workday_id: string; expires_at: string; plan_revision: number; server_now: string; total: number;
   entries: Entry[]; page_counts: Partial<Record<Group, number>>; next_cursor: string | null;
@@ -131,10 +133,12 @@ function validPage(value: any, plan: Plan): value is Page {
     Object.entries(value.page_counts).every(([key, n]) => own(groups, key) && count(n)) && Array.isArray(value.entries) && value.entries.length <= 10 &&
     value.entries.every((row: any) => {
       if (!row || !itemKey(row.situation) || !own(groups, row.classification) || !Array.isArray(row.reasons) || !row.reasons.every(isString) ||
+        (row.pilot_stop_review !== undefined && (row.pilot_stop_review !== true || row.classification !== 'review')) ||
         !count(row.review_revision) || typeof row.needs_reassessment !== 'boolean' || typeof row.validity_expired !== 'boolean' ||
         !(row.decision === null || decision(row.decision, row.situation)) ||
         !Array.isArray(row.matches) || !row.matches.every((match: any) => match && uuid(match.id) && isString(match.line) && isString(match.line_ref) && isString(match.authority_ref) && Array.isArray(match.dates) && match.dates.every(isString))) return false;
       const s = row.source, m = row.manual;
+      if (row.pilot_stop_review && (!s || row.matches.length !== 0)) return false;
       return (s === null || s && own(observations, s.observation) && digest(s.revision) && digest(s.basis) && evidence(s.content, row.situation) &&
         [s.first_seen, s.last_seen, s.identity_last_seen, s.fetched_at, s.response_at].every(timestamp) && count(s.conflict_count) && Array.isArray(s.conflicts) &&
         s.conflicts.every((item: any) => item && digest(item.revision) && timestamp(item.last_seen) && evidence(item.content, row.situation))) &&
@@ -150,7 +154,7 @@ function reviewBasis(page: Page, item: Entry): ReviewBasis | null {
   const expected = { situation: item.situation, expected_revision: item.review_revision, expected_plan_revision: page.plan_revision,
     expected_lifecycle_revision: page.lifecycle.revision, expected_source_basis: source };
   const key = JSON.stringify([page.workday_id, expected, page.lifecycle.state, Date.parse(page.expires_at),
-    item.source?.observation ?? null, item.classification, item.validity_expired, page.health.old]);
+    item.source?.observation ?? null, item.classification, item.pilot_stop_review ?? false, item.validity_expired, page.health.old]);
   return { expected, key, evidence: item.source?.content ?? item.decision?.evidence ?? null };
 }
 
@@ -353,12 +357,17 @@ export function PrivateAutomaticNotices(props: Props) {
       <p>{clock.evidence_kind === 'synthetic' ? 'Kontrollerte testdata i Entur SIRI-SX-format for TRO.' : 'Passasjerinformasjon fra Entur AS, SIRI-SX for TRO under NLOD.'} Linje og plantid er vurdert lokalt.</p>
       <p><a href="https://developer.entur.no/open-data/realtime" target="_blank" rel="noopener noreferrer">Enturs kildebeskrivelse</a>{' · '}<a href="https://data.norge.no/nlod/no/2.0" target="_blank" rel="noopener noreferrer">NLOD</a>{' · '}<a href="https://svipper.no/" target="_blank" rel="noopener noreferrer">Åpne Svipper for manuell kontroll</a></p>
       <p>{page.total} oppføringer tilgjengelige for gjennomgang, inkludert tidligere observasjoner.</p>
-      {(Object.keys(groups) as Group[]).map(group => page.page_counts[group] ? <section key={group} aria-label={groups[group]}><h3>{groups[group]} · {page.page_counts[group]} på denne siden</h3>
-        <ul>{page.entries.filter(entry => entry.classification === group).map(entry => <li key={entry.situation}>
-          <button type="button" disabled={!!pending || writing} onClick={() => inspect(entry)} aria-pressed={entry.situation === selected}>{entry.source?.content.summary.find(item => item.text)?.text || entry.decision?.evidence.summary.find(item => item.text)?.text || entry.situation}</button>
-          <p>{entry.reasons.map(reason => reasons[reason] ?? reason).join(' ')}{entry.needs_reassessment && ' Tidligere valg må vurderes på nytt.'}</p>
-          {entry.decision && !entry.needs_reassessment && <p>Privat valg · {decisions[entry.decision.action]}</p>}
-        </li>)}</ul></section> : null)}
+      {Object.entries(displayGroups).map(([group, label]) => {
+        const entries = page.entries.filter(entry => (entry.pilot_stop_review ? 'pilot-stop-review' : entry.classification) === group);
+        return entries.length > 0 && <section key={group} aria-label={label}>
+          <h3>{label} · {entries.length} på denne siden</h3>
+          <ul>{entries.map(entry => <li key={entry.situation}>
+            <button type="button" disabled={!!pending || writing} onClick={() => inspect(entry)} aria-pressed={entry.situation === selected}>{entry.source?.content.summary.find(item => item.text)?.text || entry.decision?.evidence.summary.find(item => item.text)?.text || entry.situation}</button>
+            <p>{entry.reasons.map(reason => reason === 'stop-scope-unverified' && entry.pilot_stop_review ? pilotStopReason : reasons[reason] ?? reason).join(' ')}{entry.needs_reassessment && ' Tidligere valg må vurderes på nytt.'}</p>
+            {entry.decision && !entry.needs_reassessment && <p>Privat valg · {decisions[entry.decision.action]}</p>}
+          </li>)}</ul>
+        </section>;
+      })}
       <div className="controls">{cursors.length > 1 && <button disabled={loading || !!pending} onClick={() => { const previous = cursors.slice(0, -1); setCursors(previous); setSelected(null); setProposal(null); void load(previous.at(-1) ?? null); }}>Forrige side</button>}
         {page.next_cursor && <button disabled={loading || !!pending} onClick={() => { setCursors([...cursors, page.next_cursor]); setSelected(null); setProposal(null); void load(page.next_cursor); }}>Neste side</button>}</div>
       {row && <section><h3>Gjennomgang av melding</h3>

@@ -12,7 +12,7 @@ from psycopg.types.json import Jsonb
 
 from . import auth, draft_storage, workday_storage
 from .automatic_notice_ingestion import CYCLE_SECONDS
-from .automatic_notice_relevance import BINDING, classify
+from .automatic_notice_relevance import BINDING, classify, verified_pilot_stop_scope
 from .automatic_notice_source import MAX_ID, revision, valid_situation
 from .draft_domain import StrictModel
 from .private_storage import database
@@ -109,8 +109,11 @@ def public_item(conn, situation, feed, now):
     else:
         observation = ('seen' if generation == feed['generation'] else
                        'other-revision-seen' if identity['last_complete_generation'] == feed['generation'] else 'not-seen')
+    basis_items = [source['revision'], *[item['revision'] for item in basis]]
+    if verified_pilot_stop_scope(source['content']):
+        basis_items.append('verified-pilot-stop-scope')
     return source | {
-        'basis': revision([source['revision'], *[item['revision'] for item in basis]]),
+        'basis': revision(basis_items),
         'observation': observation, 'complete_generation': generation, 'conflict_count': len(basis),
         'identity_last_seen': identity['last_seen'],
         'conflicts': [{key: row[key] for key in ('revision', 'content', 'response_at', 'last_seen')} for row in conflicts],

@@ -166,11 +166,20 @@ def normalize(node):
         'windows': [{'start': scalar(period, 'StartTime'), 'end': scalar(period, 'EndTime')}
                     for period in node.findall(SIRI + 'ValidityPeriod')],
         'affects': [] if affects is None else [selector(child) for child in affects],
+        'verified_siri_scope': affects is not None and all(
+            element.tag.startswith(SIRI) and not element.attrib for element in affects.iter()
+        ),
     }
 
 
 def revision(content):
     return hashlib.sha256(canonical(content)).hexdigest()
+
+
+def source_revision(content):
+    # Namespace verification belongs to the local observation. Keep the revision
+    # of the publisher's normalized facts stable when that proof is refreshed.
+    return revision({key: value for key, value in content.items() if key != 'verified_siri_scope'})
 
 
 def canonical(content):
