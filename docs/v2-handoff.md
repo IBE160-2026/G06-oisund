@@ -8,7 +8,7 @@ The V2 worktree is `D:/IBE160/tmp/bussassistent-v2` on branch `codex/integrate-b
 
 ## Current checkpoint
 
-The product candidate adds the explicit Owner route recheck `33a29b1` and full line 20 manual stop coverage `19e8fa2` on top of integration baseline `6dea92d`. Its integration commits are password `755b6f9`, password review `86a56eb`, automatic notices `fe42645`, frozen line 20 route references `b73b095`, restore and password follow-up `0b5d6f8`, shared geolocation and GPS speed `9240eac`, stop progression `4cf4475`, road limits `f7ac3ab` and regression fixes `6dea92d`. The final test-only credential navigation change is `e396e45` and the local Windows launcher correction is `89f8d72`. The local implementation and scoped verification are complete. Owner trials and positive qualification of still-missing operational datasets remain open.
+The product candidate adds pilot-week notice binding `ad6d93d`, explicit Owner route recheck `33a29b1` and full line 20 manual stop coverage `19e8fa2` on top of integration baseline `6dea92d`. Its integration commits are password `755b6f9`, password review `86a56eb`, automatic notices `fe42645`, frozen line 20 route references `b73b095`, restore and password follow-up `0b5d6f8`, shared geolocation and GPS speed `9240eac`, stop progression `4cf4475`, road limits `f7ac3ab` and regression fixes `6dea92d`. The final test-only credential navigation change is `e396e45` and the local Windows launcher correction is `89f8d72`. The local implementation and scoped verification are complete. Owner trials and positive qualification of still-missing operational datasets remain open.
 
 ## Local start
 
