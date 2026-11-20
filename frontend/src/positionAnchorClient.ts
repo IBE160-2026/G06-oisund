@@ -43,6 +43,10 @@ const text = (value: unknown): value is string => typeof value === 'string' && v
 const time = (value: unknown) => text(value) && Number.isFinite(Date.parse(value));
 const revision = (value: unknown): value is number => typeof value === 'number' && Number.isSafeInteger(value) && value >= 0;
 const digest = (value: unknown) => text(value) && /^[a-f0-9]{64}$/.test(value);
+const stopSourceUrls = new Set([
+  'https://developer.entur.org/stop-places-v1-read/',
+  'https://developer.entur.no/open-data/stops',
+]);
 const boundedPoint = (value: any) => value === null || (value && Number.isFinite(value.latitude)
   && Math.abs(value.latitude) <= 90 && Number.isFinite(value.longitude) && Math.abs(value.longitude) <= 180
   && ['revision', 'mapping_revision', 'quay_version', 'stop_place_version'].every(key => text(value[key])));
@@ -80,7 +84,7 @@ export function readStopProjection(value: any, auth: StopAuthority): StopProject
   }
   if (value.source !== null && (!value.source || value.source.contract !== 'nsr-quay-coordinate-v1'
     || !['revision', 'source_url', 'license_url', 'provider'].every(key => text(value.source[key]))
-    || value.source.source_url !== 'https://developer.entur.org/stop-places-v1-read/'
+    || !stopSourceUrls.has(value.source.source_url)
     || value.source.license_url !== 'https://data.norge.no/nlod/en/2.0')) throw Error();
   return value;
 }

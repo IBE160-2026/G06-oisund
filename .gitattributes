@@ -1,6 +1,9 @@
 # Preserve exact bytes of the historical owner-approved source and its SHA-256.
 /backend/tests/fixtures/import-source-2026-10-20.md -text
 
+# The frozen pilot mapping is verified against the SHA-256 of its exact bytes.
+/backend/app/nsr_position_sidecar_v2.json text eol=lf
+
 # Executed console transcripts retain pytest/Compose trailing spaces verbatim.
 /docs/evidence/12-5-*.txt -whitespace
 

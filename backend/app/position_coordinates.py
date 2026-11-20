@@ -1,9 +1,10 @@
-"""Eligibility for dated Quay positions on a frozen route."""
+"""Exact Quay mappings and dated coordinate eligibility on a frozen route."""
 import json
 import math
 import re
 from datetime import date, datetime
 from functools import lru_cache
+from hashlib import sha256
 from pathlib import Path
 
 from .draft_storage import fingerprint
@@ -14,6 +15,9 @@ MAX_CALLS = 250
 MAX_STOPS = 32
 PILOT_ROUTE_SHA = '03662d51c1438514d1695e632c598a7ea589d5384a19804658212fc4af0af8b9'
 PILOT_REVISION = 'nsr-line20-2026-11-20-v1'
+PILOT_MANUAL_REVISION = 'nsr-line20-2026-11-20-v2'
+PILOT_MANUAL_STOPS = 120
+PILOT_MANUAL_SIDECAR_SHA = '0bc1af486c3074861076b030c53a81215b22c5fd7c23d877f6fb582aa554abf9'
 LICENSE_URL = 'https://data.norge.no/nlod/en/2.0'
 ID_PATTERNS = {
     'quay': re.compile(r'NSR:Quay:[0-9]{1,24}\Z'),
@@ -46,22 +50,40 @@ def source_version(reference):
     return provenance.get('sha256') or provenance.get('snapshot')
 
 
-def pin_coordinate_revision(reference):
-    # This association is immutable. A later sidecar must receive a new
-    # revision and be selected in a freshly reviewed route preparation.
-    return PILOT_REVISION if source_version(reference) == PILOT_ROUTE_SHA else None
+def is_pilot_timetable(reference):
+    provenance = reference.get('provenance')
+    return isinstance(provenance, dict) and provenance.get('sha256') == PILOT_ROUTE_SHA
 
 
-@lru_cache(maxsize=1)
+def current_pilot_revision():
+    # Select an available artifact for a new decision. Historical reads use
+    # the frozen pin and its original timetable binding.
+    return next((revision for revision in (PILOT_MANUAL_REVISION, PILOT_REVISION)
+                 if sidecar(revision) is not None), None)
+
+
+@lru_cache(maxsize=2)
 def sidecar(revision):
-    if revision != PILOT_REVISION:
+    if revision == PILOT_REVISION:
+        filename, max_bytes = 'nsr_position_sidecar.json', 64_000
+    elif revision == PILOT_MANUAL_REVISION:
+        filename, max_bytes = 'nsr_position_sidecar_v2.json', 100_000
+    else:
         return None
-    path = Path(__file__).with_name('nsr_position_sidecar.json')
     try:
-        if path.stat().st_size > 64_000:
+        with Path(__file__).with_name(filename).open('rb') as file:
+            raw = file.read(max_bytes + 1)
+        if len(raw) > max_bytes:
             return None
-        data = json.loads(path.read_bytes())
-        if data['contract'] == CONTRACT and data['revision'] == revision and len(data['stops']) <= MAX_STOPS:
+        if revision == PILOT_MANUAL_REVISION and sha256(raw).hexdigest() != PILOT_MANUAL_SIDECAR_SHA:
+            return None
+        data = json.loads(raw)
+        stops = data['stops']
+        if data['contract'] != CONTRACT or data['revision'] != revision or not isinstance(stops, list):
+            return None
+        if revision == PILOT_MANUAL_REVISION and len(stops) == PILOT_MANUAL_STOPS:
+            return data
+        if revision == PILOT_REVISION and len(stops) <= MAX_STOPS:
             return data
     except (OSError, ValueError, TypeError, KeyError):
         pass
@@ -77,23 +99,24 @@ def valid_during(record, call_times):
     return None
 
 
-def point_for(call, data, binding):
+def point_for(call, data, binding, manual_mapping):
     quay_id, scheduled_parent = call['quay_id'], call['stop_place_id']
+    fallback_parent = None if manual_mapping else scheduled_parent
     if not public_id(quay_id, 'quay') or not bounded_text(call['scheduled_stop_point_id']):
         return None, None, 'mapping-unverified'
     if data is None:
-        return None, scheduled_parent, 'coordinate-version-missing'
-    records = [item for item in data['stops'] if item['quay_id'] == quay_id]
+        return None, fallback_parent, 'coordinate-version-missing'
+    records = [item for item in data['stops'] if isinstance(item, dict) and item.get('quay_id') == quay_id]
     if len(records) != 1:
-        return None, scheduled_parent, 'coordinate-ambiguous' if records else 'coordinate-missing'
+        return None, fallback_parent, 'coordinate-ambiguous' if records else 'coordinate-missing'
     record = records[0]
     parent = record.get('stop_place_id')
     if not public_id(parent, 'stop_place') or scheduled_parent not in (None, parent):
-        return None, scheduled_parent, 'mapping-unverified'
+        return None, fallback_parent, 'mapping-unverified'
     versions = ('stop_place_version', 'quay_version', 'mapping_revision')
     if (any(not bounded_text(record.get(key), 100) for key in versions)
             or record.get('coordinate_kind') != 'Quay' or record.get('crs') != 'WGS84'):
-        return None, parent, 'mapping-unverified'
+        return None, None if manual_mapping else parent, 'mapping-unverified'
     try:
         lat, lon = record['latitude'], record['longitude']
         valid_coordinates = (type(lat) in (float, int) and type(lon) in (float, int)
@@ -101,7 +124,7 @@ def point_for(call, data, binding):
     except KeyError:
         valid_coordinates = False
     if not valid_coordinates:
-        return None, parent, 'coordinate-invalid'
+        return None, None if manual_mapping else parent, 'coordinate-invalid'
     if not binding:
         return None, parent, 'route-incompatible'
     instants = [instant(value['utc']) for value in (call['arrival'], call['departure']) if value is not None]
@@ -163,8 +186,12 @@ def view(reference, activity_id):
               'route-incompatible' if status != 'compatible' else None)
     # Legacy reference rows can only resolve the published sidecar pinned to
     # their exact archive digest. An explicit null pin remains manual-only.
-    coordinate_revision = reference.get('position_coordinate_revision', pin_coordinate_revision(reference))
-    data = sidecar(coordinate_revision) if bounded_text(coordinate_revision, 100) else None
+    legacy_revision = PILOT_REVISION if version == PILOT_ROUTE_SHA else None
+    coordinate_revision = reference.get('position_coordinate_revision', legacy_revision)
+    manual_mapping = coordinate_revision == PILOT_MANUAL_REVISION
+    data = None
+    if bounded_text(coordinate_revision, 100) and (not manual_mapping or is_pilot_timetable(reference)):
+        data = sidecar(coordinate_revision)
     route = {key: reference.get(key) if bounded_text(reference.get(key)) else None for key in (
         'activity_id', 'service_date', 'journey_id', 'line_id', 'pattern_id', 'direction', 'headsign')}
     route.update(start_position=start, end_position=end, status=status,
@@ -176,7 +203,7 @@ def view(reference, activity_id):
         call = {key: raw.get(key) if bounded_text(raw.get(key)) else None for key in (
             'occurrence_id', 'scheduled_stop_point_id', 'stop_place_id', 'quay_id', 'name', 'headsign')}
         call.update(position=raw['position'], arrival=call_time(raw.get('arrival')), departure=call_time(raw.get('departure')))
-        coordinates, parent, issue = point_for(call, data, compatible)
+        coordinates, parent, issue = point_for(call, data, compatible, manual_mapping)
         result.append(call | {'stop_place_id': parent, 'coordinates': coordinates, 'coordinate_issue': issue})
     source = None if data is None else {key: data[key] for key in ('contract', 'revision', 'provider', 'source_url',
                                                                    'fetched_at', 'license_url')}

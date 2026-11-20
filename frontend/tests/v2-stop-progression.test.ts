@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { proposeStop, type SavedStopAnchor, type StopRoute } from '../src/positionAnchorClient.ts';
+import { proposeStop, readStopProjection, type SavedStopAnchor, type StopRoute } from '../src/positionAnchorClient.ts';
 import { StopProgression, type StopCall } from '../src/stopProgression.ts';
 import type { PositionFix } from '../src/positionSource.ts';
 
@@ -121,4 +121,33 @@ test('A-o8 maps by exact proven Quay to B-o3 after midnight, preserving original
   assert.equal(proposeStop(anchor, 'W1', route, [...tripB, call('B', 6, 'G')])?.kind, 'ambiguous');
   assert.equal(proposeStop(anchor, 'W1', route, [{ ...tripB[0], quay_id: 'FIX:Q:G-other' }, ...tripB.slice(1)])?.kind, 'no-match');
   assert.equal(proposeStop(anchor, 'W1', route, [{ ...tripB[0], coordinates: null }, ...tripB.slice(1)])?.kind, 'unverified');
+});
+
+test('the official NSR archive projection supplies a manual stop without GPS or a handoff proposal', () => {
+  const expiresAt = new Date(Date.now() + 60_000).toISOString();
+  const auth = { workdayId: 'W1', activityId: 'B', expiresAt, request: async () => null, mutation: async () => null };
+  const route = { activity_id: 'B', service_date: '2026-11-23', journey_id: 'TRO:ServiceJourney:20_260918101387157_1133',
+    pattern_id: 'TRO:JourneyPattern:pilot', decision_revision: 1, start_position: 80, end_position: 80,
+    basis: 'b'.repeat(64), compatible: true, status: 'compatible', source_version: 'a'.repeat(64) };
+  const pilotCall = { position: 80, occurrence_id: 'pilot-80', name: 'Steinnes snuplass', stop_place_id: 'NSR:StopPlace:54202',
+    quay_id: 'NSR:Quay:92496', coordinates: null, coordinate_issue: 'validity-unknown', arrival: null, departure: null };
+  const source = { contract: 'nsr-quay-coordinate-v1', revision: 'nsr-line20-2026-11-20-v2', provider: 'Entur NSR',
+    source_url: 'https://developer.entur.no/open-data/stops', license_url: 'https://data.norge.no/nlod/en/2.0' };
+  const value = { workday_id: 'W1', activity_id: 'B', expires_at: expiresAt, terminal: false, route,
+    calls: [pilotCall], reason: null, source };
+  const projection = readStopProjection(value, auth);
+  assert.deepEqual(projection.calls, [pilotCall]);
+  const engine = new StopProgression(projection.calls);
+  assert.equal(engine.choose(pilotCall.occurrence_id, base, 0), true);
+  assert.equal(engine.canFollow(pilotCall.occurrence_id), false);
+  const previous: SavedStopAnchor = { workday_id: 'W1', activity_id: 'A', service_date: '2026-11-23',
+    journey_id: 'previous', pattern_id: 'previous-pattern', occurrence_id: 'previous-stop', revision: 1,
+    route_basis: 'c'.repeat(64), origin: 'manual', evidence_at: expiresAt, saved_at: expiresAt, asserted_at: expiresAt,
+    carried_from: null, quay_id: pilotCall.quay_id, stop_place_id: pilotCall.stop_place_id,
+    coordinate_revision: null, mapping_revision: null, quay_version: null, stop_place_version: null };
+  assert.equal(proposeStop(previous, 'W1', projection.route, projection.calls)?.kind, 'unverified');
+  assert.doesNotThrow(() => readStopProjection({ ...value, source: { ...source, revision: 'nsr-line20-2026-11-20-v1',
+    source_url: 'https://developer.entur.org/stop-places-v1-read/' } }, auth));
+  assert.throws(() => readStopProjection({ ...value,
+    source: { ...source, source_url: 'https://developer.entur.no/open-data/stops?unapproved=1' } }, auth));
 });

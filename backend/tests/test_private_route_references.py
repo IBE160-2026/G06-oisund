@@ -1,7 +1,8 @@
 """Synthetic route controls against the private HTTP boundary and PostgreSQL."""
 
+from contextlib import closing
 from copy import deepcopy
-from datetime import UTC, date, datetime
+from datetime import UTC, date, datetime, timedelta
 import json
 from pathlib import Path
 from uuid import uuid4
@@ -9,8 +10,9 @@ from uuid import uuid4
 from fastapi.testclient import TestClient
 import pytest
 
-from app import draft_storage, road_reference_api, route_source
+from app import draft_storage, position_coordinates, road_reference_api, route_reference_storage, route_source
 from app.private_storage import cleanup, database
+from test_position_pilot_coverage import OBSERVED_AT, pilot_timetable
 from test_private_access import headers, login, synthetic_only, users
 from test_private_drafts import content, save
 from test_private_workdays import confirm
@@ -166,6 +168,7 @@ def test_route_command_review_race_and_frozen_expiry(fake, users):
     assert saved.status_code == 200
     reference = saved.json()['reference']
     assert reference['status'] == 'compatible'
+    assert 'position_coordinate_revision' not in reference
     assert (reference['start_position'], reference['end_position']) == (3, 4)
     assert reference['calls'][0]['quay_id'] == reference['calls'][2]['quay_id'] == 'NSR:Quay:1001'
     assert reference['calls'][0]['occurrence_id'] != reference['calls'][2]['occurrence_id']
@@ -231,6 +234,176 @@ def test_route_command_review_race_and_frozen_expiry(fake, users):
     cleanup()
     with database() as conn:
         assert conn.execute('SELECT 1 FROM workday_route_references WHERE workday_id=%s', (workday['id'],)).fetchone() is None
+
+
+def test_pinned_pilot_route_save_replay_confirmation_and_manual_anchor(pilot_timetable, users, monkeypatch):
+    from app.private_main import app
+
+    monkeypatch.setattr(route_source, 'catalogue', pilot_timetable)
+    # Use the original observation instant for route freshness, leaving all
+    # private database session, receipt and evidence clocks real.
+    observed = datetime.fromisoformat(OBSERVED_AT)
+    monkeypatch.setattr(route_reference_storage, 'now_for', lambda _: observed)
+    pilot_day = route_source.DATES[0]
+    key = 'TRO:ServiceJourney:20_260918101387157_1133'
+    journey = pilot_timetable['days'][pilot_day]['journeys'][key]
+    first, last = journey['calls'][0], journey['calls'][-1]
+    assert last['quay_id'] == 'NSR:Quay:92496' and last['stop_place_id'] is None
+    facts = content()
+    facts.update(service_date=pilot_day.isoformat(), physical_bus='1234')
+    facts['activities'][0].update(type='trip', raw_code='Trip', line='20', trip='0007', direction=journey['direction'],
+                                  start=first['departure']['calendar_time'], end=last['arrival']['calendar_time'],
+                                  from_place=first['name'], to_place=last['name'], uncertainty=None)
+    # Keep the disposable plan eligible for confirmation after the fixed pilot
+    # dates have expired, without changing any real route times.
+    after = max(datetime.fromisoformat(last['arrival']['utc']), datetime.now(UTC)) + timedelta(hours=1)
+    signoff = after.astimezone(route_source.OSLO).isoformat(timespec='seconds')
+    facts['activities'].append({'id': str(uuid4()), 'type': 'Sign-off',
+                                'start': signoff, 'end': signoff})
+    # As in the existing route controls, use TestClient without lifespan. The
+    # fixture supplies the real archive without production launch configuration.
+    with closing(TestClient(app)) as client:
+        assert login(client, users).status_code == 200
+        draft_response, _ = save(client, facts)
+        assert draft_response.status_code == 200, draft_response.text
+        draft = draft_response.json()
+        query, _, activity = paths(draft)
+        listed = client.get(query).json()
+        assert listed['source_state'] == 'available'
+        assert listed['provenance']['observed_at'] == pilot_timetable['provenance']['observed_at']
+        assert [1, last['position']] in next(item['matching_ranges'] for item in listed['journeys'] if item['journey_id'] == key)
+        route_body = {'operation_id': str(uuid4()), 'expected_draft_revision': draft['revision'],
+                      'expected_route_revision': 0, 'activity_id': activity,
+                      'selection': {'journey_id': key, 'source_sha256': route_source.DIGEST, 'start_position': 1,
+                                    'end_position': last['position'], 'field_decisions': CHOICES}}
+        saved = write_choice(client, draft, 0, body=route_body)[0]
+        assert saved.status_code == 200, saved.text
+        reference = saved.json()['reference']
+        assert reference['status'] == 'compatible'
+        assert reference['position_coordinate_revision'] == position_coordinates.PILOT_MANUAL_REVISION
+        assert write_choice(client, draft, 0, body=route_body)[0].json() == saved.json()
+        assert client.get(f"/drafts/{draft['id']}/route-reference-operations/{route_body['operation_id']}").json()['result'] == saved.json()
+        with database() as conn:
+            stored = route_reference_storage.receipt(conn, draft['id'], route_body['operation_id'])
+            canonical = deepcopy(route_body)
+            for choice in canonical['selection']['field_decisions'].values():
+                choice.setdefault('manual', None)
+            assert stored['payload_hash'] == draft_storage.fingerprint(draft['id'], canonical)
+
+        reviewed, decisions = review(client, draft, 1)
+        assert reviewed.status_code == 200 and reviewed.json()['blockers'] == []
+        monkeypatch.setattr(route_source, 'catalogue', route_source.EMPTY)
+        confirmed = confirm(client, draft, {**decisions, 'expected_route_revision': 1})
+        assert confirmed.status_code == 200, confirmed.text
+        plan = confirmed.json()
+        path = '/workdays/' + plan['id']
+        assert client.get(path + '/route-references').json()['references'] == [reference]
+        assert write_choice(client, draft, 0, body=route_body)[0].json() == saved.json()
+        projection = client.get(path + '/position-coordinates/' + activity)
+        assert projection.status_code == 200
+        view = projection.json()
+        assert view['route']['basis'] == draft_storage.fingerprint(activity, reference)
+        assert view['source']['revision'] == position_coordinates.PILOT_MANUAL_REVISION
+        assert view['source']['source_url'] == 'https://developer.entur.no/open-data/stops'
+        assert all(call['stop_place_id'] and call['coordinate_issue'] == 'validity-unknown'
+                   and call['coordinates'] is None for call in view['calls'])
+        call = view['calls'][-1]
+        assert call['stop_place_id'] == 'NSR:StopPlace:54202'
+        assert client.post(path + '/selection', headers=headers(client), json={
+            'operation_id': str(uuid4()), 'expected_revision': 0, 'activity_id': activity,
+        }).status_code == 200
+        command = {'operation_id': str(uuid4()), 'expected_revision': 0, 'activity_id': activity,
+                   'route_basis': view['route']['basis'], 'occurrence_id': call['occurrence_id'],
+                   'coordinate_revision': None, 'origin': 'manual', 'evidence_at': plan['confirmed_at']}
+        recorded = client.post(path + '/position-anchor', headers=headers(client), json=command)
+        assert recorded.status_code == 200, recorded.text
+        assert client.post(path + '/position-anchor', headers=headers(client), json=command).json() == recorded.json()
+        gps = {**command, 'operation_id': str(uuid4()), 'expected_revision': 1, 'origin': 'gps'}
+        rejected = client.post(path + '/position-anchor', headers=headers(client), json=gps)
+        assert rejected.status_code == 422
+        assert rejected.json()['detail'] == 'Holdeplassen har ingen bekreftet plattformkobling for dette lagringsforsøket.'
+        anchor = client.get(path + '/position-anchor').json()['anchor']
+        assert anchor['revision'] == 1 and anchor['origin'] == 'manual' and anchor['coordinate_revision'] is None
+        assert anchor['quay_id'] == 'NSR:Quay:92496' and anchor['stop_place_id'] == 'NSR:StopPlace:54202'
+
+
+def test_packaged_pilot_manual_pin_survives_freeze_and_requires_fresh_manual_choice(fake, users):
+    client, evidence = fake
+    evidence['provenance']['sha256'] = route_source.DIGEST
+    calls = evidence['days'][DATE]['journeys'][JOURNEY]['calls']
+    calls[2].update(quay_id='NSR:Quay:90847', stop_place_id=None)
+    calls[3].update(quay_id='NSR:Quay:92496', stop_place_id=None)
+    assert login(client, users).status_code == 200
+    facts = content()
+    facts.update(service_date=DATE.isoformat(), physical_bus='1234')
+    first = facts['activities'][0]
+    first.update(type='trip', line='20', trip='synthetic-first', direction='outbound', uncertainty=None,
+                 start=instant(10)['calendar_time'], end=instant(11)['calendar_time'], from_place='Start', to_place='End')
+    second = {**first, 'id': str(uuid4()), 'trip': 'synthetic-second'}
+    facts['activities'].append(second)
+    reply, _ = save(client, facts)
+    assert reply.status_code == 200
+    draft = reply.json()
+    saved, body = write_choice(client, draft, 0, digest=route_source.DIGEST)
+    assert saved.status_code == 200
+    assert saved.json()['reference']['position_coordinate_revision'] == position_coordinates.PILOT_MANUAL_REVISION
+    assert write_choice(client, draft, 0, body=body)[0].json() == saved.json()
+    other_body = {**body, 'operation_id': str(uuid4()), 'expected_route_revision': 1, 'activity_id': second['id']}
+    other = write_choice(client, draft, 1, body=other_body)[0]
+    assert other.status_code == 200
+    reviewed, decisions = review(client, draft, 2)
+    assert reviewed.status_code == 200 and reviewed.json()['blockers'] == []
+    accepted = confirm(client, draft, {**decisions, 'expected_route_revision': 2})
+    assert accepted.status_code == 200
+    plan = accepted.json()
+    path = '/workdays/' + plan['id']
+    frozen = client.get(path + '/route-references').json()['references']
+    assert {item['activity_id']: item for item in frozen} == {
+        first['id']: saved.json()['reference'], second['id']: other.json()['reference'],
+    }
+    for revision, activity in enumerate((first['id'], second['id'])):
+        selected = client.post(path + '/selection', headers=headers(client), json={
+            'operation_id': str(uuid4()), 'expected_revision': revision, 'activity_id': activity,
+        })
+        assert selected.status_code == 200
+        projection = client.get(path + '/position-coordinates/' + activity).json()
+        assert projection['source']['revision'] == position_coordinates.PILOT_MANUAL_REVISION
+        call = projection['calls'][-1]
+        assert call['stop_place_id'] == 'NSR:StopPlace:54202' and call['coordinates'] is None
+        command = {'operation_id': str(uuid4()), 'expected_revision': revision, 'activity_id': activity,
+                   'route_basis': projection['route']['basis'], 'occurrence_id': call['occurrence_id'],
+                   'coordinate_revision': None, 'origin': 'manual', 'evidence_at': plan['confirmed_at']}
+        if revision == 1:
+            carried = client.post(path + '/position-anchor', headers=headers(client),
+                                  json={**command, 'carried_from_revision': 1})
+            assert carried.status_code == 409
+            assert client.get(path + '/position-anchor').json()['anchor']['activity_id'] == first['id']
+        recorded = client.post(path + '/position-anchor', headers=headers(client), json=command)
+        assert recorded.status_code == 200
+    anchor = client.get(path + '/position-anchor').json()['anchor']
+    assert anchor['revision'] == 2 and anchor['activity_id'] == second['id']
+    assert anchor['origin'] == 'manual' and anchor['coordinate_revision'] is None and anchor['carried_from'] is None
+
+
+def test_new_pilot_pins_loadable_v1_or_explicit_null(fake, users, monkeypatch):
+    client, evidence = fake
+    evidence['provenance']['sha256'] = route_source.DIGEST
+    assert login(client, users).status_code == 200
+    draft = draft_for(client)
+    load = position_coordinates.sidecar
+    monkeypatch.setattr(position_coordinates, 'sidecar',
+                        lambda revision: load(revision) if revision == position_coordinates.PILOT_REVISION else None)
+    saved, body = write_choice(client, draft, 0, digest=route_source.DIGEST)
+    assert saved.status_code == 200
+    assert saved.json()['reference']['position_coordinate_revision'] == position_coordinates.PILOT_REVISION
+
+    monkeypatch.setattr(position_coordinates, 'sidecar', lambda _: None)
+    new, _ = write_choice(client, draft, 1, digest=route_source.DIGEST)
+    assert new.status_code == 200
+    assert new.json()['reference']['position_coordinate_revision'] is None
+    replay = write_choice(client, draft, 0, body=body)[0].json()
+    assert replay['reference'] == saved.json()['reference']
+    assert replay['current_route_revision'] == 2
 
 
 def test_edit_invalidation_and_stale_or_incompatible_selection(fake, users):

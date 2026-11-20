@@ -9,7 +9,7 @@ from fastapi import HTTPException
 from psycopg.types.json import Jsonb
 from pydantic import Field, model_validator
 
-from . import auth, draft_storage, route_source
+from . import auth, draft_storage, position_coordinates, route_source
 from .draft_domain import DraftContent, StrictModel
 from .private_storage import database
 
@@ -291,6 +291,8 @@ def save(request, identifier, body):
                 'status': selection_status(journey, selection, activity, day),
                 'selection_mode': 'explicit', 'selected_at': observed.isoformat(),
             }
+            if position_coordinates.is_pilot_timetable(reference):
+                reference['position_coordinate_revision'] = position_coordinates.current_pilot_revision()
         elif not any(row['activity_id'] == body.activity_id and row['reference'] is not None
                      for row in saved_decisions(conn, identifier)):
             raise HTTPException(422, 'Det finnes ikke et rutevalg å fjerne for denne aktiviteten.')

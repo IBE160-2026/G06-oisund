@@ -154,3 +154,73 @@ test('stop anchors require current authority, survive authorized navigation, and
   expect(released.some(value => value.includes('69.012345') || value.includes('"latitude"'))).toBe(false);
   expect(await page.evaluate(() => JSON.stringify({ ...sessionStorage, ...localStorage }))).not.toContain('69.012345');
 });
+
+test('the official v2 mapping saves an explicit manual stop without starting geolocation', async ({ page, context }) => {
+  await page.addInitScript(() => {
+    let watches = 0;
+    Object.defineProperty(navigator, 'geolocation', { value: {
+      watchPosition: () => ++watches,
+      clearWatch: () => undefined,
+    } });
+    Object.assign(window, { stopWatches: () => watches });
+  });
+  const { plan, activities } = await openedPlan(page, context, true);
+  const activityId = activities[0].id;
+  const scope = { workday_id: plan.id, expires_at: plan.expires_at, terminal: false };
+  const board = {
+    activity_id: activityId, service_date: '2031-01-02', journey_id: 'synthetic-pilot', pattern_id: 'synthetic-pattern',
+    decision_revision: 1, start_position: 80, end_position: 80, compatible: true, status: 'compatible',
+    source_version: '03662d51c1438514d1695e632c598a7ea589d5384a19804658212fc4af0af8b9', basis: 'b'.repeat(64),
+  };
+  const call = {
+    position: 80, occurrence_id: 'pilot-o80', name: 'Steinnes snuplass',
+    stop_place_id: 'NSR:StopPlace:54202', quay_id: 'NSR:Quay:92496',
+    arrival: null, departure: null, coordinates: null, coordinate_issue: 'validity-unknown',
+  };
+  const source = {
+    contract: 'nsr-quay-coordinate-v1', revision: 'nsr-line20-2026-11-20-v2', provider: 'Entur NSR',
+    source_url: 'https://developer.entur.no/open-data/stops', license_url: 'https://data.norge.no/nlod/en/2.0',
+  };
+  const cors = { 'Access-Control-Allow-Origin': new URL(page.url()).origin, 'Access-Control-Allow-Credentials': 'true' };
+  await page.route('**/position-coordinates/**', route => route.fulfill({
+    headers: cors, json: { ...scope, activity_id: activityId, route: board, calls: [call], reason: null, source },
+  }));
+  const writes: Record<string, any>[] = [];
+  let anchor: Record<string, unknown> | null = null;
+  await page.route('**/position-anchor', async route => {
+    if (route.request().method() !== 'POST') {
+      return route.fulfill({ headers: cors, json: { ...scope, revision: anchor ? 1 : 0, anchor } });
+    }
+    const command = route.request().postDataJSON();
+    writes.push(command);
+    const acceptedAt = new Date().toISOString();
+    anchor = {
+      ...scope, activity_id: activityId, service_date: board.service_date, journey_id: board.journey_id,
+      pattern_id: board.pattern_id, occurrence_id: call.occurrence_id, route_basis: board.basis, revision: 1,
+      quay_id: call.quay_id, stop_place_id: call.stop_place_id, coordinate_revision: null, mapping_revision: null,
+      quay_version: null, stop_place_version: null, origin: 'manual', evidence_at: command.evidence_at,
+      asserted_at: command.evidence_at, saved_at: acceptedAt, carried_from: null,
+    };
+    return route.fulfill({ headers: cors, json: {
+      workday_id: plan.id, operation_id: command.operation_id, accepted_revision: 1, accepted_at: acceptedAt,
+    } });
+  });
+  await page.getByRole('button', { name: 'Velg aktivitet 1', exact: true }).click();
+  const panel = page.getByRole('region', { name: 'Holdeplassassistanse', exact: true });
+  const manual = panel.getByRole('button', { name: 'Sett manuelt holdepunkt' });
+  const start = panel.getByRole('button', { name: 'Start holdeplassassistanse' });
+  await expect(panel).toContainText('Følg holdeplassene manuelt.');
+  await expect(panel.getByRole('link', { name: 'Entur NSR' })).toHaveAttribute('href', source.source_url);
+  expect(writes).toHaveLength(0);
+  await panel.getByLabel('Holdeplassforekomst').selectOption(call.occurrence_id);
+  await expect(start).toBeDisabled();
+  expect(writes).toHaveLength(0);
+  await manual.click();
+  await expect(panel).toContainText('Holdepunktet er lagret.');
+  expect(writes).toHaveLength(1);
+  expect(writes[0]).toMatchObject({
+    activity_id: activityId, occurrence_id: call.occurrence_id, coordinate_revision: null, origin: 'manual',
+  });
+  await expect(start).toBeDisabled();
+  expect(await page.evaluate(() => (window as any).stopWatches())).toBe(0);
+});
