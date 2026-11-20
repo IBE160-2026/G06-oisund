@@ -104,6 +104,8 @@ The final run passed three native outcome probes and 12 callback-injection cases
 
 The local NVDB collection command replayed retained pages and reproduced the same scoped road facts in a live 16-request run. It creates a research archive for later qualification. [Bounded collection and independent verification](evidence/v2-road-source-20261120.md#repeatable-bounded-nvdb-collection).
 
+The offline corridor audit reconstructed all 15 declared spans from the research archive. It records direct general speed coverage for 132 of 145 segment occurrences and identifies all 13 intervals requiring separate parent or lane evidence. [Offline corridor verification](evidence/v2-road-source-20261120.md#offline-corridor-reconstruction).
+
 ## Owner trial order
 
 1. On the PC, use the disposable account to change its password, verify the other signed-in tab loses access, and try recovery with one hand-delivered local proof. A second terminal can issue the proof with `docker compose -p ibe160-v2-owner -f compose.v2.yaml exec private-api python -m app.manage recovery-issue v2-owner-trial`. Complete `SENDT` only after handover and use the normal login form after redemption. Keep production credentials and proofs out of the sandbox.

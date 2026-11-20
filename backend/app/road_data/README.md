@@ -16,6 +16,17 @@ python -m app.road_evidence --municipality 5501 --sequence 1109517 1109722 11259
 
 The ZIP contains the raw response pages and `receipt.json` with the selected effective date, the observation and server times, page lengths and SHA-256 hashes, declared counts and any missing network sequences. A scoped road object may include extra placements in its raw page. The command fetches the segmented road network and object types 105, 573, 607, 616, 721, 856, 913, 977 and 979. It stops on incomplete pagination, inconsistent results or exhausted budgets. It allows at most 20 requests including at most two retries before the response body, 3 MB per body, 10 MB overall, 500 segments and 100 speed-limit objects. The tested Linux command has a 240-second acquisition deadline. The Python socket uses a 12-second timeout. A completed archive replaces the output atomically. The archive has research status and a separate file format from the runtime package. [Verified NVDB replay and source result](../../../docs/evidence/v2-road-source-20261120.md#repeatable-bounded-nvdb-collection).
 
+## Offline corridor audit
+
+From `backend`, pair the research ZIP with the ordered `source-bound-route.json` in the retained road plan. The example uses the retained dated archive and the default local plan worktree. Supply a different ZIP path after a new collection.
+
+```powershell
+$scope = 'D:/IBE160-plan-speed-limits/_bmad-output/experimental-extensions/speed-limits/qualification/2026-10-27/source-bound-route.json'
+python -m app.road_corridor_audit --archive ../tmp/nvdb-collector-verification/road-live-20261120.zip --scope $scope
+```
+
+The command validates page hashes, scope and complete cursor chains before reconstructing the ordered network. It emits JSON with both input digests and the archive observation window, exact relative boundaries and source chainage, original geometries and direct type 105 records. `direct_gap` and `direct_conflict` identify segments with missing or inconsistent direct coverage. `direct_intervals` shows the exact ranges, where an empty value list marks a gap and multiple values mark a conflict. Each record retains its original placement bounds, its intersection with the segment and any field codes. `scope_intermediate_nodes` compares historical and archived node identities inside the matched spans. A null archive node means the refreshed segmentation has no boundary at that exact fraction. The output has research status. Parent-link translation, authorised turns, physical signing and route and GPS qualification have their own evidence. [Offline results](../../../docs/evidence/v2-road-source-20261120.md#offline-corridor-reconstruction).
+
 - Source pilot specification and evidence are pinned on `codex/plan-speed-limits` at `5adc6fb2c0137a3a6519d4f7ba42dd57f0e02f1c`.
 - [NVDB Les](https://nvdbapiles.atlas.vegvesen.no/) supplies public road topology and type 105 records under NLOD.
 - Original sign evidence and licensing are stored in [the asset manifest](../../../frontend/public/assets/road-signs/source.json).

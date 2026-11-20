@@ -53,6 +53,16 @@ def reject_json_constant(_):
     raise IncompleteEvidence('NVDB returned a non-JSON numeric constant')
 
 
+def page_cursor(metadata, name):
+    if 'neste' not in metadata:
+        return None
+    next_page = metadata['neste']
+    cursor = next_page.get('start') if isinstance(next_page, dict) else None
+    if not isinstance(cursor, str) or not cursor.strip() or len(cursor) > 2048:
+        raise IncompleteEvidence(f'{name}: invalid NVDB cursor')
+    return cursor
+
+
 def collection_expired(_signum, _frame):
     raise IncompleteEvidence('NVDB collection deadline exceeded')
 
@@ -157,12 +167,7 @@ class Collector:
                 if identity in seen:
                     raise IncompleteEvidence(f'{name}: duplicate row')
                 seen.add(identity)
-            cursor = None
-            if 'neste' in metadata:
-                next_page = metadata['neste']
-                cursor = next_page.get('start') if isinstance(next_page, dict) else None
-                if not isinstance(cursor, str) or not cursor.strip() or len(cursor) > 2048:
-                    raise IncompleteEvidence(f'{name}: invalid NVDB cursor')
+            cursor = page_cursor(metadata, name)
             if not rows or cursor is None:
                 if len(seen) != declared:
                     raise IncompleteEvidence(f'{name}: incomplete NVDB page series')
