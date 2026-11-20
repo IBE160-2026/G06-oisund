@@ -14,6 +14,7 @@ Klargjøre hjemmemaskinens isolerte IBE160 V2- og TIDE-piloter for to Android-en
 - To fiktive kontoer ble innlogget i installert Edge fra separat profil per konto. Nettleseren ba om privat API på `127.0.0.1:19663`. Import av generert syntetisk PDF, lagringskvittering og gjenåpnet utkast bestod for begge. Prøvepassord ligger i prosjektets ignorerte runtime-mappe.
 - TIDE `d8254e4` kjører på loopback 4173 med en egen SQLite-fil. Innlogging med lokal engangskode, 22 førkriterier for kandidat og egen instruktørvisning er verifisert. Rollen og prøveløpet er klart for laptop.
 - Brukeren installerte en signaturverifisert Tailscale-klient og logget inn på hjemmemaskinen. Serve konfigurerte privat TCP for 4173, 19661 og 19663. Alle tre ga HTTP 200 gjennom hjemmemaskinens tailnet-adresse med opprinnelig loopback-Host. Ingen produksjonskobling ble brukt.
+- Laptop-økten rapporterte fire beståtte fysiske lagringsprøver på Lenovo og Pixel. IBE160 lagret norsk prøveinnhold i Buss/vogn og gjenåpnet versjon 2 i hver konto. TIDE lagret instruktørkommentarer sekvensielt fra begge enheter, og begge gjenåpnet de to kommentarene i revisjon 2. Hjemmekontroll av prøvelagrene ga revisjon 2 for begge IBE160-kontoene og TIDEs instruktørutkast. TIDE-løpet står under kjøring. Skjermbilder og DOM-bevis ligger på laptopen.
 
 ### Åpne punkter
-- Gjenstående fysisk V2-prøve med laptopens relay og ADB på Android. Se eksisterende «V2 fysisk nettbrett/GPS». Før faktisk enhetsresultat og avslutt midlertidige Serve-porter når prøven er ferdig.
+- Fysisk lagring og gjenåpning er verifisert. GPS, tillatelser og feltprøvene står fortsatt under «V2 fysisk nettbrett/GPS». Det verifiserte hjemmemiljøet står på til videre Codex-testing.
