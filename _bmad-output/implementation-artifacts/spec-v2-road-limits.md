@@ -49,6 +49,7 @@ Product GPS display relies on qualified road data and calibrated conservative in
 
 - Bind a road package to exact archived SHA, route direction, planned journey/pattern versions and ordered occurrence range.
 - Record the dated public overlay and the confirmed mismatch between the line 20 pilot and the R4 corridor. The field gate now names a separate compatible dated journey explicitly. [20 November source recheck](../../docs/evidence/v2-road-source-20261120.md).
+- The seven-date shape audit gives a negative line 42 control for the nearby filter arm. A positive frozen journey on the selected arc or an independently agreed test context is still required for the real pilot. [Dated R4 comparison](../../docs/evidence/v2-road-source-20261120.md#dated-comparison-of-the-two-r4-arms).
 
 ## Review Triage Log
 
