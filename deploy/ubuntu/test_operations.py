@@ -211,7 +211,7 @@ class OperationsTests(unittest.TestCase):
     def test_recovery_invalid_args_fail_before_docker(self):
         for argv in (['ctl', 'recovery-issue'], ['ctl', 'recovery-revoke', 'synthetic-a', '--flag'],
                      *[['ctl', 'recovery-issue', value] for value in ('', '  ', 'a'*101,
-                         'synthetic-\x00', 'synthetic-\ud800')]):
+                         'synthetic-\x00', 'synthetic-\ud800', 'synthetic-owner\n', '\tsynthetic-owner')]):
             with self.subTest(argv=argv), patch.object(sys, 'argv', argv), patch.object(ops, 'run') as run:
                 with self.assertRaises(ValueError):
                     ops.main()

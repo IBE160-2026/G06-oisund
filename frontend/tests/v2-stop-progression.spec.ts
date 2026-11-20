@@ -126,7 +126,9 @@ test('stop anchors require current authority, survive authorized navigation, and
   await expect.poll(controls).toEqual([1, 1]);
   await expect.poll(() => writes.length).toBe(2);
   await expect(panel).toContainText('Holdepunktet er lagret.');
-  await page.getByRole('button', { name: 'Start fartsmåling', exact: true }).click();
+  const beginSpeed = page.getByRole('button', { name: 'Start fartsmåling', exact: true });
+  await beginSpeed.click();
+  await expect(beginSpeed).toHaveCount(0);
   await expect.poll(controls).toEqual([1, 1]);
   for (const longitude of [18, 18.0015, 18.0030, 18.0051, 18.0072, 18.008]) {
     await page.clock.fastForward(4_100);

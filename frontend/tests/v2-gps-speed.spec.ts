@@ -169,7 +169,9 @@ test('road signs and own speed have independent availability and share one GPS w
   await expect(road.getByRole('img', { name: '30 km/t' })).toBeVisible();
   await expect(road).toContainText('ca. 250 m');
   await expect(speed).toHaveText('— km/t');
-  await page.getByRole('region', { name: 'Egen fart (GPS)' }).getByRole('button', { name: /fartsmåling/ }).click();
+  const beginSpeed = page.getByRole('region', { name: 'Egen fart (GPS)' }).getByRole('button', { name: /fartsmåling/ });
+  await beginSpeed.click();
+  await expect(beginSpeed).toHaveCount(0);
   for (const offset of [190, 205]) {
     await page.clock.fastForward(1_000);
     await page.evaluate(east => window.v2SyntheticPosition.fix(10, 0, east), offset);

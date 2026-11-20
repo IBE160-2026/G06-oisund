@@ -161,9 +161,11 @@ test('a delayed acknowledgement after leaving and reopening keeps the original r
     await expect.poll(() => committed).toBe(true);
     await view.getByRole('button', { name: 'Tilbake til planen', exact: true }).click();
     await entry.click();
-    await expect(view).toContainText('Privat valg · Beholdt som dagskontekst');
-    release();
     const retry = view.getByRole('button', { name: 'Send opprinnelig forslag på nytt', exact: true });
+    await expect(retry).toBeDisabled();
+    // The reopened session read waits for the already submitted writer's Web Lock.
+    release();
+    await expect(view).toContainText('Privat valg · Beholdt som dagskontekst');
     await expect(retry).toBeEnabled();
     await expect(view.getByRole('status')).not.toContainText('Gjennomgangen er lagret.');
     await page.unroute(savePath);

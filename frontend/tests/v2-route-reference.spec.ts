@@ -43,7 +43,8 @@ test('saved draft requires explicit route occurrence choice and recovers an acce
     if (method === 'OPTIONS') return route.fulfill({ status: 204, headers: responseHeaders });
     if (url.pathname === '/auth/session') return reply({ account_id: sessionId, created_at: draft.created_at, expires_at: '2026-12-04T02:00:00Z' });
     if (url.pathname === '/auth/csrf') return reply({ csrf_token: 'synthetic' });
-    if (url.pathname === '/drafts') return reply({ drafts: [{ id: draftId, revision: 1, service_date: date, expires_at: draft.expires_at }], next_cursor: null });
+    if (url.pathname === '/drafts') return reply({ drafts: [{ id: draftId, revision: 1, service_date: date,
+      created_at: draft.created_at, expires_at: draft.expires_at }], next_cursor: null });
     if (url.pathname === '/drafts/' + draftId) return reply(draft);
     if (url.pathname === '/workdays') return reply({ workdays: [], next_cursor: null });
     if (url.pathname.endsWith('/route-departures')) {
@@ -87,7 +88,8 @@ test('saved draft requires explicit route occurrence choice and recovers an acce
   await page.getByRole('button', { name: 'Velg mulig strekning 1–2' }).click();
   await page.getByRole('button', { name: 'Lagre valgt avgang og strekning' }).click();
   await expect(page.getByText('Lagringen er uavklart.', { exact: false })).toBeVisible();
-  await expect(page.getByRole('button', { name: 'Til godkjenning' })).toBeDisabled();
+  await expect(page.getByRole('button', { name: 'Til godkjenning', exact: true })).toBeDisabled();
+  await expect(page.getByRole('button', { name: 'Fortsett til godkjenning', exact: true })).toBeDisabled();
   await page.getByRole('button', { name: 'Kontroller lagringsforsøket' }).click();
   await expect(page.getByRole('heading', { name: 'Lagret rutevalg · versjon 1' })).toBeVisible();
   expect(writes).toBe(1);

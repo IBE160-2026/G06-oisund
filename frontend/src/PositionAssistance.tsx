@@ -43,6 +43,7 @@ function SpeedPanel({ source, start, stop }: SourceAccess) {
   });
   const [speed, setSpeed] = useState<SpeedReading>({ kind: 'unknown', reason: 'waiting' });
   const [starting, setStarting] = useState(false);
+  const [attempted, setAttempted] = useState(false);
   useLayoutEffect(() => {
     const estimate = new GpsSpeed();
     let expiry: ReturnType<typeof setTimeout> | undefined;
@@ -73,6 +74,7 @@ function SpeedPanel({ source, start, stop }: SourceAccess) {
   const status = view.active && view.state.reason !== 'invalid' && speed.kind === 'unknown'
     ? speedMessage[speed.reason] : usable ? '' : sourceMessage[view.state.reason === 'off' && view.state.running ? 'acquiring' : view.state.reason];
   async function begin() {
+    setAttempted(true);
     setStarting(true);
     try { await start('speed'); }
     finally { setStarting(false); }
@@ -82,7 +84,7 @@ function SpeedPanel({ source, start, stop }: SourceAccess) {
     <p role="status">{status}</p>
     <div className="controls">
       {!view.active && <button disabled={starting} onClick={() => void begin()}>
-        {view.state.reason === 'off' ? 'Start fartsmåling' : 'Gjenoppta fartsmåling'}
+        {!attempted || view.state.reason === 'off' ? 'Start fartsmåling' : 'Gjenoppta fartsmåling'}
       </button>}
       {view.state.running && <button onClick={() => stop('paused')}>Pause posisjon</button>}
       {view.state.reason !== 'off' && <button onClick={() => stop('off')}>Slå av posisjon</button>}

@@ -1,4 +1,4 @@
-import { test, expect, openedPlan, API, post, randomUUID, selected, shiftStatus, beforeUnload, python, setup, dayScreen, activityScreen, account } from './private-activity-helpers';
+import { test, expect, openedPlan, API, post, randomUUID, selected, shiftStatus, beforeUnload, python, setup, dayScreen, activityScreen, account, futureOsloClockFallback } from './private-activity-helpers';
 import { writeFileSync } from 'node:fs';
 setup();
 const progressStatus = (page: any) => page.getByRole('status', { name: 'Aktivitetsstatus og avslutningsstatus' });
@@ -452,10 +452,13 @@ test('actual synthetic upload edit confirm start outcome close recap journey', a
 });
 
 test('all unknown recap preserves literal Oslo offset transition dates and exact count', async ({ page, context }) => {
-  const { plan } = await openedPlan(page, context, true, undefined, undefined, false, content => { content.service_date = '2026-10-25'; Object.assign(content.activities[0], { start: '2026-10-25T02:55+02:00', end: '2026-10-25T02:05+01:00' }); });
+  const fallback = futureOsloClockFallback();
+  const { plan } = await openedPlan(page, context, true, undefined, undefined, false, content => {
+    content.service_date = fallback.day; Object.assign(content.activities[0], { start: fallback.start, end: fallback.end });
+  });
   await start(page); await page.getByRole('button', { name: 'Avbryt skift', exact: true }).click(); await page.getByRole('button', { name: 'Bekreft avbrudd', exact: true }).click();
   const summary = page.getByRole('region', { name: 'Oppsummering av skift', exact: true });
-  await expect(summary).toContainText('Planlagt start: 25.10.2026, 02:55. Planlagt siste slutt: 25.10.2026, 02:05.');
+  await expect(summary).toContainText(`Planlagt start: ${fallback.displayDay}, 02:55. Planlagt siste slutt: ${fallback.displayDay}, 02:05.`);
   await expect(summary.locator('dl > div').filter({ has: page.getByText('Ikke registrert', { exact: true }) }).locator('dd')).toHaveText('1');
   expect((await recap(context, plan)).outcomes.outcomes[0].outcome).toBe('unregistered');
 });

@@ -21,9 +21,12 @@ def test_inspect_accepts_only_known_migration_prefixes(users, tmp_path, monkeypa
     monkeypatch.setattr(restore, 'Path', lambda _: tmp_path / 'app/restore.py')
     with database() as conn:
         with conn.transaction(force_rollback=True):
+            notices_identity = ', automatic_notice_identities' if '020_automatic_notice_identity.sql' in {path.name for path in original} else ''
+            if notices_identity:
+                conn.execute("INSERT INTO automatic_notice_identities(participant,situation,last_seen) "
+                             "VALUES('synthetic-restore','synthetic-source-observation',clock_timestamp())")
             current = restore.inspect(conn)
             assert current['schema'] == len(original)
-            notices_identity = ', automatic_notice_identities' if '020_automatic_notice_identity.sql' in {path.name for path in original} else ''
             if len(original) >= 18:
                 conn.execute('DROP TABLE workday_position_anchor_operations, workday_position_anchors, '
                              'workday_route_references, draft_route_decisions, automatic_notice_review_operations, '

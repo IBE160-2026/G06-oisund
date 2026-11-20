@@ -12,6 +12,7 @@ import tarfile
 import tempfile
 import time
 import stat
+import unicodedata
 import uuid
 
 ROOT = Path('/opt/bussassistent')
@@ -63,7 +64,10 @@ def recovery(action, username):
     if (action not in ('recovery-issue', 'recovery-revoke')
             or any(c == '\x00' or '\ud800' <= c <= '\udfff' for c in username)):
         raise ValueError('Invalid recovery command or username')
-    if len(username) > 400 or not 1 <= len(username.strip().casefold()) <= 100:
+    normalized = username.strip().casefold()
+    removed = username[:len(username) - len(username.lstrip())] + username[len(username.rstrip()):]
+    if (len(username) > 400 or not 1 <= len(normalized) <= 100
+            or any(unicodedata.category(char).startswith('C') for char in removed)):
         raise ValueError('Invalid recovery username')
     if not all(os.isatty(fd) for fd in (0, 1, 2)):
         raise ValueError('Recovery requires an interactive terminal without redirection')
@@ -78,7 +82,7 @@ def recovery(action, username):
         # performs identity/no-recording/target preflight before issuing a code.
         # Compose exec allocates an interactive TTY by default (no -T).
         compose(path, 'exec', 'private-api',
-                'python', '-m', 'app.manage', action, username,
+                'python', '-m', 'app.manage', action, normalized,
                 stdin=terminal, stdout=terminal, stderr=terminal)
     finally:
         os.close(terminal)
