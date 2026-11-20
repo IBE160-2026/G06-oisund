@@ -114,6 +114,8 @@ A separate offline check corroborated 11 general and one explicit field-1 parent
 
 Tromsø's closeout for work at Strandvegen 5–18 reports reinstatement on 6 November. The Owner confirmed that the Polaria work-zone restriction had been lifted and that the pictured Strandvegen junction by the Sentrumstangenten tunnel entrance has a 40 km/h limit. The 40 plate appears in the municipal after-photo. Check any temporary changes for the actual trial date. [Polaria closeout and 40 plate](evidence/v2-road-source-20261120.md#polaria-surface-works-closeout).
 
+At R4, the airport roundabout, NVDB places the registered 70-to-50 transition where the selected exit onto Flyplassvegen begins, at EV8 S1D1 m98.200. The photographed plate stands about 25 m farther along that exit. The specific decision and current signing remain the field qualification evidence. [Map of the exit](https://www.google.com/maps/search/?api=1&query=69.67866247%2C18.90202425) · [Registered transition and decision](evidence/v2-road-source-20261120.md#exact-decision-record-and-field-reference).
+
 ## Owner trial order
 
 1. On the PC, use the disposable account to change its password, verify the other signed-in tab loses access, and try recovery with one hand-delivered local proof. A second terminal can issue the proof with `docker compose -p ibe160-v2-owner -f compose.v2.yaml exec private-api python -m app.manage recovery-issue v2-owner-trial`. Complete `SENDT` only after handover and use the normal login form after redemption. Keep production credentials and proofs out of the sandbox.
