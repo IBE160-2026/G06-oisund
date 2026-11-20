@@ -6,7 +6,7 @@
 - [ ] 2026-11-20 [V2-passord og personlig aksept](985-2026-11-20-03-37-32-bussassistent-v2.md) — Prøv lokal passordendring, SENDT, innløsning og sesjonsopphør på flere enheter. Installert SSH/helper/systemd/mount følger eksisterende O6-rad.
 - [ ] 2026-11-20 [V2 automatiske avvik](985-2026-11-20-03-37-32-bussassistent-v2.md) — Sammenlign automatisk forslag og manuell registrering på en representativ arbeidsdag.
 - [ ] 2026-11-20 [V2 linje 20-pilot](985-2026-11-20-03-37-32-bussassistent-v2.md) — Kvalifiser fersk, versjonert kilde for feltperioden og fullfør uavhengig merkede reelle skift- og avgangspar.
-- [ ] 2026-11-20 [V2 holdeplassprogresjon](985-2026-11-20-03-37-32-bussassistent-v2.md) — Kvalifiser gyldighetsintervaller for eksakte NSR Quays på driftsdatoen før reell automatisk progresjon.
+- [ ] 2026-11-20 [V2 holdeplassprogresjon](985-2026-11-20-03-37-32-bussassistent-v2.md) — Kvalifiser gyldighetsintervaller for eksakte NSR Quays på driftsdatoen før reell automatisk progresjon. Manuelt holdepunkt er verifisert med katalog for alle 120 pilotplattformer. Eksporten og tre versjonshistorikker ga ingen direkte plattformgyldighet.
 - [ ] 2026-11-20 [V2 fartsgrense og forvarsel](985-2026-11-20-03-37-32-bussassistent-v2.md) — Kvalifiser datert retning, kjørefelt, svinger, busstilgang og kalibrert usikkerhet før reell prøve.
 - [ ] 2026-11-20 [V2 fysisk nettbrett/GPS](985-2026-11-20-03-37-32-bussassistent-v2.md) — Prøv egen opprinnelse og egne tillatelser på Lenovo med Brave og Chrome. Feltprøve av automatisk stopp og vegvisning følger datakvalifiseringen.
 
