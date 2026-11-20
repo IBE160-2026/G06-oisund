@@ -8,7 +8,7 @@ The V2 worktree is `D:/IBE160/tmp/bussassistent-v2` on branch `codex/integrate-b
 
 ## Current checkpoint
 
-The product candidate includes route focus fixes `c937e36` and `37913b1`, pilot-week notice binding `ad6d93d`, explicit Owner route recheck `33a29b1` and full line 20 manual stop coverage `19e8fa2` on top of integration baseline `6dea92d`. Its integration commits are password `755b6f9`, password review `86a56eb`, automatic notices `fe42645`, frozen line 20 route references `b73b095`, restore and password follow-up `0b5d6f8`, shared geolocation and GPS speed `9240eac`, stop progression `4cf4475`, road limits `f7ac3ab` and regression fixes `6dea92d`. The test-only credential navigation change is `e396e45` and the local Windows launcher correction is `89f8d72`. The verified scope is ready for the Owner trial. Real automatic stop progression and road guidance remain gated by the evidence listed below.
+The product candidate includes the Giæverbukta stop review `8af7bae`, route focus fixes `c937e36` and `37913b1`, pilot-week notice binding `ad6d93d`, explicit Owner route recheck `33a29b1` and full line 20 manual stop coverage `19e8fa2` on top of integration baseline `6dea92d`. Its integration commits are password `755b6f9`, password review `86a56eb`, automatic notices `fe42645`, frozen line 20 route references `b73b095`, restore and password follow-up `0b5d6f8`, shared geolocation and GPS speed `9240eac`, stop progression `4cf4475`, road limits `f7ac3ab` and regression fixes `6dea92d`. The test-only credential navigation change is `e396e45` and the local Windows launcher correction is `89f8d72`. The verified scope is ready for the Owner trial. Real automatic stop progression and road guidance remain gated by the evidence listed below.
 
 The integrated regression checkpoint is complete. The next actions are the Owner trials and the source qualification in the matrix. Test commit `db4f016` supplies the reviewed lifecycle recovery assertions for the same product build.
 
@@ -28,7 +28,7 @@ docker compose -p ibe160-v2-owner -f compose.v2.yaml exec private-api python -m 
 
 The exact Owner command above was verified on Windows, including package installation, build, private API origin, secure Edge login page and a local sign image. The V2 environments were stopped after the tests and their volumes retained. The test and owner modes have distinct databases, volumes, bridge networks, credentials and build directories. `-Mode Test -ApisOnly` prepares the synthetic stack. `npm run test:v2-motion` from `frontend` runs the deterministic motion, stop and road controls on Node 24. End the foreground preview with Ctrl+C before running `-Mode Owner -Stop`.
 
-The Owner preview reads the scoped Troms NeTEx source offline. The original observation expires on 21 November at 01:13:54 UTC. The verified 20 November recheck expires on 21 November at 03:14:38 UTC. For a fresh assessment of the 23–29 November operating dates, run an explicit check when starting the Owner trial.
+The Owner preview reads the scoped Troms NeTEx source offline. The original observation expires on 21 November at 01:13:54 UTC. The verified 20 November recheck expires on 21 November at 03:14:38 UTC. For a fresh assessment of the 23–29 November operating dates, use the following command as the Owner startup. If the preview is already open, stop its foreground process with Ctrl+C first to free port `19661`.
 
 ```powershell
 pwsh -NoProfile -File scripts/v2-local.ps1 -Mode Owner -RecheckRouteSource
@@ -36,7 +36,29 @@ pwsh -NoProfile -File scripts/v2-local.ps1 -Mode Owner -RecheckRouteSource
 
 The one-off check verifies the current public archive against the original seven-day corpus. Changed or incomplete facts require a separately reviewed pin. If the check fails, it reports the reason and preserves the last qualified receipt. Start Owner mode with the ordinary command to use retained evidence and view its age. Test mode rejects the switch. [Route qualification and verification](v2-route-p1.md).
 
-Playwright supplied synthetic fixes on Windows loopback in Edge, Firefox and WebKit. The original API check verified secure context and method availability. The follow-up also exercised the browser's own `watchPosition` with engine-level emulation and disposable context permission. The Owner smoke check loaded the local sign asset and private login in Edge. The interactive browser integration could not attach in this session. An Android tablet needs its own secure origin plus its own Android and browser-profile permissions. For an already authorized USB debugging connection, reverse the local UI and private API ports with `adb reverse tcp:19661 tcp:19661` and `adb reverse tcp:19663 tcp:19663` and open the same loopback URL on the tablet. Verify a secure context and allow location on that origin in each chosen browser. A different mobile origin needs trusted HTTPS and its own configuration. No physical location was collected.
+Playwright supplied synthetic fixes on Windows loopback in Edge, Firefox and WebKit. The original API check verified secure context and method availability. The follow-up also exercised the browser's own `watchPosition` with engine-level emulation and disposable context permission. The Owner smoke check loaded the local sign asset and private login in Edge.
+
+### Local USB connection for the Lenovo trial
+
+Keep the Owner preview running on the PC. Use the existing Android Debug Bridge (ADB) and an already authorized USB debugging connection. Installed ADB 37.0.1 listed no connected device during the 20 November V2 preflight. The same form of USB transport worked during V1 testing. The V2 ports still need verification on the device. [V1 Lenovo trial](evidence/12-3-device-testing-2026-10-27.md).
+
+In PowerShell, set `$adb` to `adb` if Platform Tools is on `PATH`, or use the workstation path recorded in the Lenovo session. Run `& $adb devices -l` and select the Lenovo row with state `device`. If the row is missing or reports `unauthorized`, check the cable and the tablet's debugging prompt before continuing. [Existing ADB path](../.logs/jonas-oisund/996-2026-10-27-11-07-12-story-12-3-nettbrett-og-pc.md).
+
+```powershell
+$tabletSerial = Read-Host 'ADB serial for the Lenovo'
+& $adb -s $tabletSerial reverse --list
+& $adb -s $tabletSerial reverse --no-rebind tcp:19661 tcp:19661
+& $adb -s $tabletSerial reverse --no-rebind tcp:19663 tcp:19663
+```
+
+Leave existing mappings in place. If either port is already mapped, check its target before using it. On the tablet, open `http://127.0.0.1:19663/health` and check for `private-local`, then open `http://127.0.0.1:19661/private` and sign in with the disposable trial account. This checks both USB paths before you try location.
+
+Check Android's location service and the selected browser's Android permission. Check the site's location permission for the exact loopback address separately in Brave and Chrome. Choose permissions independently on each device and browser profile. Start a location consumer explicitly after the permission check. A different tablet origin needs trusted HTTPS and its own configuration. Remove the V2 mappings you added when finished. No physical location was collected in the V2 preflight.
+
+```powershell
+& $adb -s $tabletSerial reverse --remove tcp:19661
+& $adb -s $tabletSerial reverse --remove tcp:19663
+```
 
 ## Verification status
 
