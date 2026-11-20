@@ -2,7 +2,7 @@
 title: 'Make qualified automatic notices available to private workdays'
 type: 'feature'
 created: '2026-11-20'
-status: 'in-progress'
+status: 'in-review'
 route: 'dispatch'
 baseline_commit: '755b6f9c43c13bcad1eef5555d9672c8f9f50456'
 review_loop_iteration: 0
@@ -37,9 +37,10 @@ Use the bounded AN-E1 scope in `D:/IBE160-plan-automatic-notices` at `da867072a8
 
 ## Tasks & Acceptance
 
-- [ ] Add migration `016_automatic_notices.sql` with separate public source state and private review records/receipts, keyed to the owning workday and constrained by its fixed expiry.
-- [ ] Add a bounded, atomic, coordinated ingestion with documented XML limits, explicit timestamps and stable lifecycle state. Keep these paths opt-in, with production networks outside this change.
-- [ ] Implement an authenticated projection/review UI through normal workday entry points. Observe G1–G5; keep live and synthetic evidence distinct. Test failure, provenance, date/scope confusion, manual preservation and two-account isolation.
+- [x] Add migration `016_automatic_notices.sql` with separate public source state and private review records/receipts, keyed to the owning workday and constrained by its fixed expiry.
+- [x] Add bounded, atomic, coordinated ingestion with documented XML limits, explicit timestamps and stable lifecycle state. Keep refresh opt-in.
+- [x] Implement the authenticated projection and review through normal workday entry points.
+- [ ] Conduct personal trial on a representative workday and record the real overlap, handoffs and usability.
 
 ## Implementation Notes
 
@@ -47,7 +48,11 @@ Coordinate edits to `PrivateWorkdayView.tsx` and `private_main.py` with the pare
 
 ## Spec Change Log
 
+- Migration 020 separates current identity membership from exact revision evidence. The live parser accepts Entur's direct `ServiceDelivery` envelope with exact response ID and explicit page continuation.
+
 ## Review Triage Log
+
+- Patched silent basis changes, late replies across navigation, fabricated revision stamps and Unicode identifier shape. Added real PostgreSQL request spacing and migration checks. Existing manual registry remains reachable while a review is open or an activity changes.
 
 ## Verification
 

@@ -2,7 +2,7 @@
 title: 'Review and preserve dated line 20 route evidence'
 type: 'feature'
 created: '2026-11-20'
-status: 'in-progress'
+status: 'in-review'
 route: 'dispatch'
 baseline_commit: '755b6f9c43c13bcad1eef5555d9672c8f9f50456'
 review_loop_iteration: 0
@@ -37,9 +37,10 @@ Use CRN-E1-S1–S4, QC01–12 and the source contracts under `D:/IBE160-plan-com
 
 ## Tasks & Acceptance
 
-- [ ] Implement bounded source preparation and normalize the P1 service calendar and ordered call facts. Use synthetic, independent expected cases and report any live qualification gaps.
-- [ ] Implement separate private draft-reference interfaces and explicit UI. Freeze in the same confirmation transaction, preserve legacy operation/expiry and record changes as reviewable revisions.
-- [ ] Test migrated and fresh data with valid and invalid calendar/date, alternative and repeated patterns, review race, operation replays, authorization, source outage and expired/terminal handling.
+- [x] Implement bounded source preparation and normalize the P1 service calendar and ordered call facts.
+- [x] Implement private draft references and explicit review. Freeze in the confirmation transaction and preserve legacy operations and deadlines.
+- [x] Exercise additive migration, calendar and repeated stop controls, review races, operation replay, authorization and source loss.
+- [ ] Complete the independently labelled actual shift/departure ledger using a qualified current version, followed by personal acceptance.
 
 ## Implementation Notes
 
@@ -47,4 +48,8 @@ Keep a separate launch-time qualified public reference rather than fetching for 
 
 ## Spec Change Log
 
+- Fixed an actual acquisition clock to the archived digest and added a path through configured startup for closed dated evidence.
+
 ## Review Triage Log
+
+- Verified the public pin, repeated Quay controls and transactional freeze against independent synthetic inputs. The missing real-shift oracle and refresh timing remain named qualification gates. [Pilot source and scope](../../docs/v2-route-p1.md).

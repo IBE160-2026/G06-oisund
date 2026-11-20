@@ -50,8 +50,12 @@ The coordinator owns the Compose/Playwright environment and execution. Set the s
 
 ## Spec Change Log
 
+- V2 imported the exact password source first. Integration then added the separate reviewed session, operator, restore and data migration fixes recorded in the handoff.
+
 ## Review Triage Log
+
+- Patched identical-current password changes, late/reloaded credential replies, dispatch and login guards, legacy account-name handling, and restore interruption with identical business rows and changed sequence state. Incompatible restore schemas and mount paths fail closed.
 
 ## Verification
 
-- Apply and compare the scoped Git diff, then run the isolated real PostgreSQL and Playwright suites and local gateway/restore checks.
+- Real PostgreSQL, the isolated browser suite, networkless Ubuntu tests and the registered physical-PG marker verifier cover the technical changes. Personal proof delivery and redemption, production-like Ubuntu operations and owner acceptance stay open. [Integrated verification](../../docs/v2-handoff.md).

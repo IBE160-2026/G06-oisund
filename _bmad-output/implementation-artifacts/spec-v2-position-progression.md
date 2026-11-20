@@ -2,7 +2,7 @@
 title: 'Progress advisory stop estimates on a qualified frozen route'
 type: 'feature'
 created: '2026-11-20'
-status: 'in-progress'
+status: 'in-review'
 route: 'dispatch'
 baseline_commit: '755b6f9c43c13bcad1eef5555d9672c8f9f50456'
 review_loop_iteration: 0
@@ -36,9 +36,10 @@ Load PP-E1-S1–S4, behavior, route-interface and fictional example from `D:/IBE
 
 ## Tasks & Acceptance
 
-- [ ] Build a bounded exact NSR coordinate sidecar and versioned eligibility contract. Give a control path for missing validity and demonstrate it, with current source rights and provenance. Do not mark the real coordinate data qualified without dated evidence.
-- [ ] Build advisory one-step behavior, standalone frontend client and private anchor API, with deterministic synthetic controls for start/correction, contradictory fixes, repeated stops, expiry, interruptions, cross-midnight reuse and access.
-- [ ] Verify using deterministic source/event tests and real PostgreSQL where runner available. Preserve evidence for remaining actual device/layout qualification.
+- [x] Build the exact NSR coordinate sidecar and dated eligibility contract. Preserve unknown validity as an unavailable automatic basis.
+- [x] Build advisory progression, explicit corrections and a private anchored receipt. Cover interruption, ordinary progression, scope, expiry and same-workday handoff.
+- [x] Verify the eligibility and storage contract with deterministic tests and real PostgreSQL.
+- [ ] Qualify the actual service-date coordinates, positive field examples and physical device behavior.
 
 ## Implementation Notes
 
@@ -46,4 +47,8 @@ The parent owns test runtime rebuilds and shared integration. Send the exact com
 
 ## Spec Change Log
 
+- Additive migration 019 records the carried-from decision. The earlier 018 migration remains immutable.
+
 ## Review Triage Log
+
+- Patched the manual re-anchor latch, durable controls before the initial read and preservation of the dispatched stop command across activity navigation and temporary hiding. Closing the whole workday view clears local operation memory. Reopening obtains authorized server state. [Dated NSR evidence](../../docs/evidence/v2-position-progression.md).

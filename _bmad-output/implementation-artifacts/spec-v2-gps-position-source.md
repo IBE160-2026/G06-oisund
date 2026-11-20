@@ -2,7 +2,7 @@
 title: 'Display qualified GPS speed from one shared foreground position source'
 type: 'feature'
 created: '2026-11-20'
-status: 'in-progress'
+status: 'in-review'
 route: 'dispatch'
 baseline_commit: '755b6f9c43c13bcad1eef5555d9672c8f9f50456'
 review_loop_iteration: 0
@@ -35,9 +35,9 @@ Use `D:/IBE160-plan-gps-speed` at `e2468abb8bf492007d9f9437698c80d88e9ca280`, in
 
 ## Tasks & Acceptance
 
-- [ ] Add a reusable TypeScript foreground controller, speed evaluator and small Norwegian UI with explicit actions, explanatory unknown states and accessible Day/Night semantics.
-- [ ] Add deterministic tests and synthetic Playwright coverage at the normal private entry. Verify one live subscription, boundary times, stale/late/null samples, permissions, hidden/pagehide, context changes and clean disposal.
-- [ ] Document technical coverage and pending Lenovo/Brave and Lenovo/Chrome physical performance.
+- [x] Add the shared TypeScript foreground controller, speed evaluator and explicit Norwegian UI.
+- [x] Add deterministic and synthetic Edge coverage at the usual private entry.
+- [ ] Record physical Lenovo Brave and Chrome performance, permission behavior and owner acceptance.
 
 ## Implementation Notes
 
@@ -45,4 +45,8 @@ Keep public interfaces typed and iterate with parent on planned progression/road
 
 ## Spec Change Log
 
+- Validate live workday selection and lifecycle in addition to browser session. The same coordinator supplies independent stop and road consumers.
+
 ## Review Triage Log
+
+- Patched position acquisition while the account settings hide the plan and missing scope revalidation. Registered the Node controls under `test:v2-motion`. No browser allowlist or raw-position persistence was introduced.
