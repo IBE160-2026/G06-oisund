@@ -43,7 +43,8 @@ def inspect(conn):
     # Canonical per-row SHA256, streamed in stable order. Passwords, sessions,
     # proofs, rate history and audit are intentionally outside business equality.
     excluded = {'private_migrations', 'sessions', 'security_settings', 'login_limits',
-                'recovery_proofs', 'recovery_audit', 'automatic_notice_feed', 'automatic_notice_sources'}
+                'recovery_proofs', 'recovery_audit', 'automatic_notice_feed', 'automatic_notice_sources',
+                'automatic_notice_identities'}
     result = {}
     for table in sorted(actual - excluded):
         expression = sql.SQL("to_jsonb(t) - 'password_hash'") if table == 'accounts' else sql.SQL('to_jsonb(t)')

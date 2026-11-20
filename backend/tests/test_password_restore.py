@@ -23,10 +23,11 @@ def test_inspect_accepts_only_known_migration_prefixes(users, tmp_path, monkeypa
         with conn.transaction(force_rollback=True):
             current = restore.inspect(conn)
             assert current['schema'] == len(original)
+            notices_identity = ', automatic_notice_identities' if '020_automatic_notice_identity.sql' in {path.name for path in original} else ''
             if len(original) >= 18:
                 conn.execute('DROP TABLE workday_position_anchor_operations, workday_position_anchors, '
                              'workday_route_references, draft_route_decisions, automatic_notice_review_operations, '
-                             'automatic_notice_reviews, automatic_notice_sources, automatic_notice_feed')
+                             'automatic_notice_reviews, automatic_notice_sources, automatic_notice_feed' + notices_identity)
                 conn.execute('ALTER TABLE workdays DROP CONSTRAINT automatic_notice_workday_parent')
                 conn.execute('ALTER TABLE workday_operations DROP COLUMN route_revision')
                 conn.execute("DELETE FROM private_migrations WHERE name >= '016'")
@@ -38,7 +39,7 @@ def test_inspect_accepts_only_known_migration_prefixes(users, tmp_path, monkeypa
                 assert restore.inspect(conn) == current
                 conn.execute('DROP TABLE workday_position_anchor_operations, workday_position_anchors, '
                              'workday_route_references, draft_route_decisions, automatic_notice_review_operations, '
-                             'automatic_notice_reviews, automatic_notice_sources, automatic_notice_feed')
+                             'automatic_notice_reviews, automatic_notice_sources, automatic_notice_feed' + notices_identity)
                 conn.execute('ALTER TABLE workdays DROP CONSTRAINT automatic_notice_workday_parent')
                 conn.execute('ALTER TABLE workday_operations DROP COLUMN route_revision')
                 conn.execute("DELETE FROM private_migrations WHERE name >= '016'")

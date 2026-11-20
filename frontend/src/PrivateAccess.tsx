@@ -62,7 +62,7 @@ export function PrivateAccess() {
   const recoveryOpen = useRef(false);
   const [passwordBusy, setPasswordBusy] = useState(false);
   // Only outcome metadata survives lifecycle invalidation; never credentials.
-  const passwordOutcome = useRef<'pending' | 'unknown' | 'changed' | null>(null);
+  const passwordOutcome = useRef<'pending-change' | 'pending-recovery' | 'unknown' | 'changed' | null>(null);
   const settingsButton = useRef<HTMLButtonElement>(null);
   const activeSession = useRef<Session | null>(null);
   const accessSuspended = useRef(false);
@@ -199,6 +199,7 @@ export function PrivateAccess() {
       if (current !== generation.current) return;
       if (result.revoked !== true) throw new Error();
       markPending(false); lockKnown.current = false; setLocked(false);
+      clearPasswordDispatch();
       setMessage(passwordOutcome.current === 'changed' ? 'Passordet er endret. Du er logget ut. Logg inn med det nye passordet.' : passwordOutcome.current ? 'Du er logget ut. Prøv å logge inn med det nye passordet. Resultatet av passordendringen var ikke bekreftet.' : 'Du er logget ut.');
       passwordOutcome.current = null;
       channel.current?.postMessage('logout-confirmed');
@@ -215,9 +216,9 @@ export function PrivateAccess() {
     setSettings(false); setMessage('Du er logget inn.');
     requestAnimationFrame(() => settingsButton.current?.focus());
   }
-  function beginPasswordDispatch() {
+  function beginPasswordDispatch(kind: 'pending-change' | 'pending-recovery') {
     sessionStorage.setItem(PASSWORD_DISPATCH, String(Date.now() + 60_000));
-    passwordOutcome.current = 'pending';
+    passwordOutcome.current = kind;
   }
   async function rejectPasswordDispatch(current: number) {
     passwordOutcome.current = null;
@@ -232,7 +233,7 @@ export function PrivateAccess() {
     const current = generation.current;
     setPasswordBusy(true);
     try {
-      const result = await mutation('/auth/password/change', fields, session, beginPasswordDispatch);
+      const result = await mutation('/auth/password/change', fields, session, () => beginPasswordDispatch('pending-change'));
       if (result?.changed !== true || Object.keys(result).join() !== 'changed') throw Error();
       clearPasswordDispatch();
       passwordOutcome.current = 'changed'; presentPasswordOutcome();
@@ -267,7 +268,7 @@ export function PrivateAccess() {
     try {
       const result = await mutation('/auth/password/recover', fields, undefined, () => {
         if (current !== generation.current || activeSession.current || accessSuspended.current) throw Error();
-        beginPasswordDispatch();
+        beginPasswordDispatch('pending-recovery');
       });
       if (result?.changed !== true || Object.keys(result).join() !== 'changed') throw Error();
       clearPasswordDispatch();
@@ -296,7 +297,8 @@ export function PrivateAccess() {
     if (passwordOutcome.current === 'unknown') {
       lockKnown.current = true;
       markPending(true);
-      clearPasswordDispatch();
+      // An unloading request can fail before the new document restores. Keep
+      // the tab's dispatch marker through that transition to require explicit logout.
     }
     const finishLogout = pending() || lockKnown.current;
     setLocked(!changed || finishLogout);
@@ -310,6 +312,9 @@ export function PrivateAccess() {
     return attempt;
   }
   async function restoreSession() {
+    // Recovery starts signed out. An intervening browser lifecycle can leave
+    // concurrent session state to resolve even when the delayed proof succeeds.
+    if (passwordOutcome.current === 'pending-recovery') passwordOutcome.current = 'unknown';
     if (passwordOutcome.current) { presentPasswordOutcome(); return; }
     if (hasPasswordDispatch()) {
       passwordOutcome.current = 'unknown';
