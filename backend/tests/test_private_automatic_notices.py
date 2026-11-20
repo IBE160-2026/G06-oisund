@@ -1,5 +1,6 @@
 """Controlled Entur page sequence against the isolated V2 API and PostgreSQL."""
 
+from collections import Counter
 from concurrent.futures import ThreadPoolExecutor
 from datetime import UTC, datetime, time, timedelta
 import os
@@ -17,7 +18,7 @@ from app import auth, automatic_notice_ingestion as ingest
 from app.automatic_notice_source import MAX_ID, SITUATION_PREFIX, SourceError
 from app.private_storage import cleanup, database, migrate
 from test_account_notices import send as manual_send
-from test_automatic_notice_rules import BROAD, LINE24, STOP, EVENING, MORNING, page, situation
+from test_automatic_notice_rules import BROAD, LINE20, LINE24, STOP, EVENING, MORNING, page, situation
 from test_private_access import URL, client, headers, login, synthetic_only, users
 from test_private_workdays import confirm, facts, prepare
 
@@ -82,8 +83,8 @@ def planned(client, users, when=23, account=0):
     return accepted.json()
 
 
-def get(client, plan):
-    response = client.get(path(plan))
+def get(client, plan, cursor=None):
+    response = client.get(path(plan), params={'cursor': cursor} if cursor else None)
     assert response.status_code == 200 and response.headers['cache-control'] == 'no-store', response.text
     return response.json()
 
@@ -106,13 +107,13 @@ def save(client, plan, op):
     return client.post(path(plan) + '/review', headers=headers(client), json=op)
 
 
-def workday_with_dated_fixture(client, users, service_date, start, end):
+def workday_with_dated_fixture(client, users, service_date, start, end, line='24'):
     assert login(client, users).status_code == 200
     oslo = ZoneInfo('Europe/Oslo')
     tomorrow = datetime.now(oslo).date() + timedelta(days=1)
     value = facts()
     value['service_date'] = tomorrow.isoformat()
-    value['activities'][0].update(line='24', start=datetime.combine(tomorrow, time(10), oslo).isoformat(),
+    value['activities'][0].update(line=line, start=datetime.combine(tomorrow, time(10), oslo).isoformat(),
                                   end=datetime.combine(tomorrow, time(11), oslo).isoformat())
     draft, _, body = prepare(client, value)
     confirmed = confirm(client, draft, body)
@@ -127,6 +128,150 @@ def workday_with_dated_fixture(client, users, service_date, start, end):
         auth.require_synthetic_accounts(conn)
         conn.execute('UPDATE workdays SET content=%s WHERE id=%s', (Jsonb(content), plan['id']))
     return plan
+
+
+def test_two_workday_notice_qualification(client, users, fixture_feed):
+    night = ('2026-11-24T23:55:00+01:00', '2026-11-25T00:10:00+01:00')
+    after_midnight = '2026-11-25T00:05:00+01:00'
+    # The later open period preserves the earlier finite period after the
+    # historical workday. Neither workday overlaps the later period.
+    later = ('2026-12-01T00:00:00+01:00', None)
+    open_from_evening = ((EVENING[0], None),)
+    both_lines = LINE20.replace('</AffectedNetwork>',
+                               '<AffectedLine><LineRef>TRO:Line:1_24</LineRef></AffectedLine></AffectedNetwork>')
+    # Independent labels in workday order. A verified other line is an
+    # adjudicated negative even though a driver can still review the message.
+    cases = [
+        ('line20', LINE20, open_from_evening, 'open', 'nomination', 'different-line'),
+        ('line24-after-midnight', LINE24, ((after_midnight, None),), 'open', 'different-line', 'nomination'),
+        ('both-lines', both_lines, open_from_evening, 'open', 'nomination', 'nomination'),
+        ('ends-at-evening-start', LINE20, (('2026-11-23T21:50:00+01:00', EVENING[0]), later),
+         'open', 'different-time', 'different-line'),
+        ('starts-at-night-end', LINE24, ((night[1], None),), 'open', 'different-line', 'different-time'),
+        ('disjoint-windows', both_lines, (('2026-11-23T20:00:00+01:00', '2026-11-23T21:00:00+01:00'),
+                                         (after_midnight, None)), 'open', 'different-time', 'nomination'),
+        ('other-codespace', LINE20.replace('TRO:Line', 'ATB:Line'),
+         open_from_evening, 'open', 'unknown', 'unknown'),
+        ('other-authority', LINE20.replace('<LineRef>', '<AuthorityRef>TRO:Authority:2</AuthorityRef><LineRef>'),
+         open_from_evening, 'open', 'unknown', 'unknown'),
+        ('other-operator', LINE20.replace('<LineRef>', '<OperatorRef>TRO:Operator:2</OperatorRef><LineRef>'),
+         open_from_evening, 'open', 'unknown', 'unknown'),
+        ('stop-place', STOP, open_from_evening, 'open', 'unknown', 'pilot-stop'),
+        ('quay-only', STOP.replace('StopPlace:55902', 'Quay:95713'),
+         open_from_evening, 'open', 'unknown', 'unknown'),
+        ('explicit-broad', BROAD, open_from_evening, 'open', 'broad', 'broad'),
+        ('empty-scope', '<Networks/>', open_from_evening, 'open', 'unknown', 'unknown'),
+        ('invalid-window', both_lines, ((EVENING[0][:-6], None),), 'open', 'unknown', 'unknown'),
+        ('ferry', LINE20.replace('</AffectedLine>', '<VehicleMode>ferry</VehicleMode></AffectedLine>'),
+         open_from_evening, 'open', 'excluded', 'excluded'),
+        ('source-closed', both_lines, open_from_evening, 'closed', 'excluded', 'excluded'),
+        ('expired', both_lines, (('2026-10-26T05:00:00+01:00', '2026-10-30T03:00:00+01:00'),),
+         'open', 'excluded', 'excluded'),
+        ('direction-qualified', LINE20.replace('</AffectedLine>', '<DirectionRef>unresolved</DirectionRef></AffectedLine>'),
+         open_from_evening, 'open', 'nomination', 'different-line'),
+    ]
+    messages = [situation(name, scope, windows, status) for name, scope, windows, status, *_ in cases]
+    generation = collect(*((''.join(messages[index:index + 5]), 'true' if index + 5 < len(messages) else 'false')
+                           for index in range(0, len(messages), 5)))
+    plans = [
+        workday_with_dated_fixture(client, users, '2026-11-23', *EVENING, line='20'),
+        workday_with_dated_fixture(client, users, '2026-11-24', *night),
+    ]
+    assert len({plan['id'] for plan in plans}) == 2
+    categories = {
+        'nomination': 'possible-relevance', 'different-line': 'review', 'different-time': 'outside-scope',
+        'unknown': 'review', 'pilot-stop': 'pilot-stop-review', 'broad': 'broad-context', 'excluded': 'outside-scope',
+    }
+    required_reasons = {
+        'different-line': 'no-matching-printed-line',
+        'different-time': 'no-planned-overlap',
+        'nomination': 'exact-line-planned-overlap',
+    }
+    case_reasons = {
+        'other-codespace': 'line-binding-unavailable',
+        'other-authority': 'authority-unverified',
+        'other-operator': 'authority-unverified',
+        'stop-place': 'stop-scope-unverified',
+        'quay-only': 'stop-scope-unverified',
+        'explicit-broad': 'explicit-broad-scope',
+        'empty-scope': 'scope-unresolved',
+        'invalid-window': 'uncertain-validity',
+        'ferry': 'other-mode',
+        'source-closed': 'source-closed',
+        'expired': 'validity-expired',
+        'direction-qualified': 'unresolved-qualifiers',
+    }
+    overnight_dates = {
+        'line24-after-midnight': ['2026-11-25'],
+        'both-lines': ['2026-11-24', '2026-11-25'],
+        'disjoint-windows': ['2026-11-25'],
+    }
+    totals = Counter()
+    mismatches = []
+    for index, plan in enumerate(plans):
+        activity = plan['draft']['activities'][0]
+        rows = {}
+        cursor = None
+        for _ in range(2):
+            snapshot = get(client, plan, cursor)
+            health = snapshot['health']
+            assert health['status'] == 'complete' and health['generation'] == str(generation)
+            assert health['evidence_kind'] == 'synthetic' and health['baseline_count'] == len(cases)
+            assert health['attempt_pages'] == 4 and snapshot['total'] == len(cases)
+            assert snapshot['page_counts'] == Counter(row['classification'] for row in snapshot['entries'])
+            for row in snapshot['entries']:
+                assert row['situation'] not in rows
+                assert row['source']['observation'] == 'seen'
+                rows[row['situation']] = row
+            cursor = snapshot['next_cursor']
+        assert cursor is None and len(rows) == len(cases)
+
+        counts = Counter()
+        workload = Counter()
+        for name, *_, day_one, day_two in cases:
+            label = (day_one, day_two)[index]
+            row = rows['TRO:SituationNumber:' + name]
+            if 'pilot_stop_review' in row:
+                assert row['pilot_stop_review'] is True and row['classification'] == 'review', name
+            group = 'pilot-stop-review' if 'pilot_stop_review' in row else row['classification']
+            workload[group] += 1
+            nominated = row['classification'] == 'possible-relevance'
+            if label in {'nomination', 'different-line', 'different-time'}:
+                counts['expected'] += label == 'nomination'
+                counts['nominated'] += nominated
+                counts['correct'] += nominated and label == 'nomination'
+            elif label in {'unknown', 'pilot-stop'}:
+                counts['unknown'] += 1
+                counts['nominated_unknown'] += nominated
+            else:
+                counts['excluded_or_broad'] += 1
+                counts['nominated_outside_subset'] += nominated
+            if group != categories[label]:
+                mismatches.append((index, name, label, group))
+            for reason in (required_reasons.get(label), case_reasons.get(name)):
+                if reason and reason not in row['reasons']:
+                    mismatches.append((index, name, reason, row['reasons']))
+            expected_matches = []
+            if label == 'nomination':
+                expected_matches = [{
+                    'id': activity['id'], 'line': activity['line'],
+                    'line_ref': f"TRO:Line:1_{activity['line']}", 'authority_ref': 'TRO:Authority:1',
+                    'dates': overnight_dates[name] if index == 1 else ['2026-11-23'],
+                }]
+            if row['matches'] != expected_matches:
+                mismatches.append((index, name, expected_matches, row['matches']))
+            assert row['validity_expired'] is (name == 'expired'), name
+            assert row['decision'] is None and row['manual'] is None, name
+        totals.update(counts)
+        print(f'Workday {index + 1}: {dict(sorted(workload.items()))}')
+
+    recall = f"{totals['correct']}/{totals['expected']}" if totals['expected'] else 'not evaluable (0/0)'
+    precision = f"{totals['correct']}/{totals['nominated']}" if totals['nominated'] else 'not evaluable (0/0)'
+    print(f"Line/time recall {recall}, precision {precision}; "
+          f"false {totals['nominated'] - totals['correct']}, missed {totals['expected'] - totals['correct']}; "
+          f"unknown {totals['unknown']} (nominated {totals['nominated_unknown']}), "
+          f"excluded or broad {totals['excluded_or_broad']} (nominated {totals['nominated_outside_subset']})")
+    assert not mismatches
 
 
 def test_weekend_binding_preserves_unknown_beyond_the_pilot(client, users, fixture_feed):

@@ -29,6 +29,31 @@ Source text is normalized for presentation. Line and time relevance are local in
 - The controlled test inputs cover parser failures, timeout, throttling, partial/restart behavior, rare close/version cases, and two dated workday examples. The tests use PostgreSQL timestamps to check persisted reservations and page spacing under controlled transport. Browser cases use the real private API and stored synthetic source data to check reply recovery, proposal comparison and preservation of the manual editor and selected activity.
 - Ongoing provider behavior, a licensed-retention acceptance decision, paired manual Svipper checks where counterparts exist, and the owner's review-workload walkthrough remain pilot acceptance items. The Giæverbukta review group has the dated scope below. Other stop bindings remain available in general review.
 
+### Controlled two-workday measurement
+
+On 20 November 2026, 18 independently labelled synthetic SIRI-SX situations passed through four source pages and the isolated private API. The API returned each situation once across two result pages for each confirmed synthetic workday. The planned facts used line 20 on 23 November from 22:00 to 23:00 and line 24 from 23:55 on 24 November to 00:10 the next day, Oslo time. The test uses the pinned historical pilot dates and disposable workdays and accounts. [Test and case labels](../backend/tests/test_private_automatic_notices.py).
+
+| Workday | Possible relevance | General review | Pilot-stop review | Broad context | Outside scope |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| 23 November, line 20 | 3 | 9 | 0 | 1 | 5 |
+| 24–25 November, line 24 | 3 | 9 | 1 | 1 | 4 |
+
+The adjudicated line/time subset contained six expected nominations and eight clear line or time mismatches. Recall was **6/6**, precision was **6/6**, with **0 false** and **0 missed** nominations. There were **14 unknown** pairs due to identity, validity or scope and **8** broad or independently excluded pairs. No pair in either group was nominated. General review includes known other-line items. These counts measure what the API presented. The remaining pilot uses two representative owner workdays for triage timing and decisions, paired with manual Svipper checks where counterparts exist. [Owner trial order](v2-handoff.md#owner-trial-order).
+
+The original gate definitions are in `specs/spec-automatic-notices/qualification.md` under the automatic notices extension on `codex/plan-automatic-notices`.
+
+- **G-1, complete collection.** Four controlled source pages and both private result pages are verified here. The earlier Owner run observed a complete live TRO cycle. [Live observation](v2-handoff.md#readiness-matrix).
+- **G-2, failed refresh and recovery.** The separate collection lifecycle and reservation tests cover partial and unavailable feeds, resynchronization and persisted request spacing. [API regressions](../backend/tests/test_private_automatic_notices.py).
+- **G-3, identity, timing and source lifecycle.** The controlled catalogue checks exact line IDs, half-open intervals, expiry, direction uncertainty and explicit closure. The pinned timetable supports the dated bindings. Rare publisher transitions were exercised in controlled data. [Rules and source cases](../backend/tests/test_automatic_notice_rules.py) · [Pilot-week line provenance](#pilot-week-line-provenance).
+- **G-4, privacy and manual preservation.** Separate API regressions verify private ownership, revision/replay, manual notice independence and expiry. [API regressions](../backend/tests/test_private_automatic_notices.py).
+- **G-5, reachable review groups.** The table records the API group workload. Browser cases cover navigation, the manual editor and explicit review choices. [Browser regressions](../frontend/tests/v2-automatic-notices.spec.ts).
+
+Run the measurement from this worktree with the isolated test APIs started via `pwsh -NoProfile -File scripts/v2-local.ps1 -Mode Test -ApisOnly`.
+
+```powershell
+docker compose -p ibe160-v2-tests -f compose.v2.yaml exec -T private-api python -m pytest -q -s -p no:cacheprovider tests/test_private_automatic_notices.py::test_two_workday_notice_qualification
+```
+
 ## Pilot-week line provenance
 
 The retained public Troms NeTEx archive has generation `1795129398375617` and SHA-256 `03662d51c1438514d1695e632c598a7ea589d5384a19804658212fc4af0af8b9`. Both exact `Line` objects have version `1947`, `TransportMode=bus`, their literal `PublicCode` and an explicit reference to `TRO:GroupOfLines:bus_1`. The shared data places that group in `TRO:Network:1` version `1947`, whose versioned `AuthorityRef` resolves to `TRO:Authority:1` version `1947` (Svipper). Each line and the shared member explicitly cover every pilot date. The bounded local calendar check resolves service-day assignments and counted the following scheduled journeys. [Entur timetable data](https://developer.entur.no/open-data/timetable).
