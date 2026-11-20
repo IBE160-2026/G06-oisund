@@ -258,6 +258,8 @@ for (const mode of ['lost','html','malformed']) test(`uncertain ${mode} response
   await expect(page.getByLabel('Tilgangsstatus')).toContainText('Resultatet av passordendringen er ukjent.');
   await expect(page.getByLabel('Gjeldende passord', {exact:true})).toHaveCount(0);
   await page.getByRole('button',{name:'Prøv utlogging igjen',exact:true}).click();
+  await expect(page.getByLabel('Tilgangsstatus')).toContainText('Du er logget ut.');
+  expect(await page.evaluate(() => sessionStorage.getItem('private_password_dispatch'))).toBeNull();
   await login(page,newPassword); expect(count).toBe(1);
 });
 for (const width of [768,1440]) for(const night of [false,true]) test(`settings keyboard and 200 percent ${width} ${night?'night':'day'}`,async ({page})=>{
