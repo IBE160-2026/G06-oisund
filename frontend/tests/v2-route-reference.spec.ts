@@ -32,6 +32,7 @@ test(`saved draft requires explicit choice and recovers a lost reply (${rechecke
   let writes = 0;
   let receipt: any = null;
   let reviewCommand: any = null;
+  let pendingDeparture: Promise<void> | undefined;
   const supported = ['trip', 'deadhead', 'deadhead_car', 'Tomkjøring med CAR', 'CAR', 'Sign-on', 'Sign-off', 'MealBreak', 'Coffee',
     'Split break', 'Paid meal before', 'Paid meal after', 'Travel to', 'Travel from', 'Fadder', 'Instruktør', 'manual'];
 
@@ -52,7 +53,11 @@ test(`saved draft requires explicit choice and recovers a lost reply (${rechecke
     if (url.pathname.endsWith('/route-departures')) {
       const state = { draft_id: draftId, draft_revision: 1, activity_id: activityId, coverage: 'complete', source_state: 'available',
         service_date: date, expected_count: 1, reasons: [], provenance: source, outcome: 'possible' };
-      return reply(url.searchParams.has('journey_id') ? { ...state, journey } : { ...state, journeys: [summary] });
+      if (url.searchParams.has('journey_id')) {
+        await pendingDeparture;
+        return reply({ ...state, journey });
+      }
+      return reply({ ...state, journeys: [summary] });
     }
     if (url.pathname.endsWith('/route-references') && method === 'GET')
       return reply({ draft_id: draftId, draft_revision: 1, route_revision: receipt ? 1 : 0, references: receipt ? [receipt.reference] : [], outdated: [] });
@@ -87,8 +92,45 @@ test(`saved draft requires explicit choice and recovers a lost reply (${rechecke
   const sourceClock = page.getByText('Kildearkiv kontrollert', { exact: false });
   if (rechecked) await expect(sourceClock).toHaveText(/kontrollert .*03:05.*Ferskhet beregnes fra .*03:00/);
   else await expect(sourceClock).toHaveText(/kontrollert .*03:00.*Publikasjonstid/);
-  await page.getByLabel('Planlagt avgang').selectOption(journeyId);
-  await expect(page.getByRole('heading', { name: 'Planlagt avgang til Kildeskilt' })).toBeFocused();
+  const departure = page.getByLabel('Planlagt avgang');
+  const heading = page.getByRole('heading', { name: 'Planlagt avgang til Kildeskilt' });
+  const ordinary = Promise.withResolvers<void>();
+  pendingDeparture = ordinary.promise;
+  try {
+    await departure.focus();
+    await departure.selectOption(journeyId);
+    await expect(departure).toBeDisabled();
+    expect(await departure.evaluate(select => {
+      const { activeElement, body, documentElement } = select.ownerDocument;
+      return activeElement === select || activeElement === body || activeElement === documentElement;
+    })).toBe(true);
+    await expect(heading).toHaveCount(0);
+  } finally {
+    ordinary.resolve();
+  }
+  await expect(heading).toBeFocused();
+  await page.getByRole('button', { name: 'Avbryt rutevalg' }).click();
+  await expect(heading).toHaveCount(0);
+
+  const delayed = Promise.withResolvers<void>();
+  pendingDeparture = delayed.promise;
+  const bus = page.getByRole('textbox', { name: 'Buss/vogn', exact: true });
+  let chosenControl;
+  try {
+    await departure.focus();
+    await departure.selectOption(journeyId);
+    await expect(departure).toBeDisabled();
+    if (rechecked) await page.keyboard.press('Tab');
+    else await bus.click();
+    chosenControl = await page.evaluateHandle(() => document.activeElement);
+    expect(await chosenControl.evaluate(element => element instanceof HTMLElement
+      && element !== document.body && element !== document.documentElement && !element.matches(':disabled'))).toBe(true);
+    if (!rechecked) await expect(bus).toBeFocused();
+  } finally {
+    delayed.resolve();
+  }
+  await expect(heading).toBeVisible();
+  expect(await chosenControl.evaluate(element => element === document.activeElement)).toBe(true);
   await expect(page.getByRole('button', { name: 'Lagre valgt avgang og strekning' })).toBeDisabled();
   expect(writes).toBe(0);
   await page.getByRole('button', { name: 'Velg mulig strekning 1–2' }).click();

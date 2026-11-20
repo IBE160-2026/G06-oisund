@@ -199,6 +199,7 @@ export function DraftRouteReview({ draft, request, mutation, suspended, lock, ex
   const [sending, setSending] = useState(false);
   const active = useRef(true);
   const epoch = useRef(0);
+  const departureFocus = useRef<{ generation: number; select: HTMLSelectElement } | null>(null);
   const details = useRef<HTMLHeadingElement>(null);
   const trigger = useRef<HTMLButtonElement>(null);
   const act = draft.draft.activities.find(a => a.id === activityId);
@@ -207,9 +208,27 @@ export function DraftRouteReview({ draft, request, mutation, suspended, lock, ex
   const departurePath = scope(draft) + '/route-departures?revision=' + draft.revision
     + '&activity_id=' + encodeURIComponent(activityId);
   useLayoutEffect(() => {
-    if (journey) details.current?.focus();
+    if (!journey || departureFocus.current?.generation !== epoch.current) return;
+    departureFocus.current = null;
+    if (document.hasFocus()) details.current?.focus();
   }, [journey]);
-  useEffect(() => { active.current = true; return () => { active.current = false; epoch.current++; }; }, []);
+  useEffect(() => {
+    active.current = true;
+    function preserveNewFocus(event: FocusEvent) {
+      const pending = departureFocus.current;
+      // Disabling the select can make the browser fall back to the document.
+      if (pending && event.target !== pending.select && event.target !== document.body && event.target !== document.documentElement) {
+        departureFocus.current = null;
+      }
+    }
+    document.addEventListener('focus', preserveNewFocus, true);
+    return () => {
+      active.current = false;
+      epoch.current++;
+      departureFocus.current = null;
+      document.removeEventListener('focus', preserveNewFocus, true);
+    };
+  }, []);
   useEffect(() => { lock(!!pending || sending); return () => lock(false); }, [pending, sending, lock]);
 
   function failure(error: any) {
@@ -243,8 +262,9 @@ export function DraftRouteReview({ draft, request, mutation, suspended, lock, ex
     finally { if (active.current && generation === epoch.current) setBusy(false); }
   }
 
-  async function inspect(id: string) {
+  async function inspect(id: string, select: HTMLSelectElement) {
     const generation = ++epoch.current;
+    departureFocus.current = { generation, select };
     setBusy(true);
     setJourney(null);
     setRange({ start: 0, end: 0 });
@@ -257,8 +277,12 @@ export function DraftRouteReview({ draft, request, mutation, suspended, lock, ex
         || value.provenance?.sha256 !== overview?.provenance?.sha256) throw new Error('Invalid route detail');
       setJourney(value.journey);
       setMessage('');
-    } catch (error) { if (active.current && generation === epoch.current) failure(error); }
-    finally { if (active.current && generation === epoch.current) setBusy(false); }
+    } catch (error) {
+      if (active.current && generation === epoch.current) {
+        departureFocus.current = null;
+        failure(error);
+      }
+    } finally { if (active.current && generation === epoch.current) setBusy(false); }
   }
 
   async function persist(op: Operation, retry: boolean, lookupOnly = false) {
@@ -358,7 +382,7 @@ export function DraftRouteReview({ draft, request, mutation, suspended, lock, ex
       <p>{outcomeText[overview.outcome]}</p>
       {overview.provenance && <SourceFacts source={overview.provenance} />}
       {!!overview.journeys.length && <label>Planlagt avgang <select disabled={blocked} value={journey?.journey_id ?? ''}
-        onChange={event => { if (event.target.value) void inspect(event.target.value); else setJourney(null); }}>
+        onChange={event => { if (event.currentTarget.value) void inspect(event.currentTarget.value, event.currentTarget); else setJourney(null); }}>
         <option value="">Velg avgang</option>{overview.journeys.map(item => <option key={item.journey_id} value={item.journey_id}>
           {shownTime(item.start)} · {direction(item.direction)} · {item.from_name} → {item.to_name} · {item.headsign}
           {item.matching_ranges.length ? ' · mulig strekning' : ''}
