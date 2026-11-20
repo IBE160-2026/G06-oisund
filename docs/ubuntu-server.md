@@ -188,3 +188,9 @@ Tester ved integrasjon:12 driftstester (chown mockes i ikke-root-testkjøringen)
 23 gate-tester,4 cleanup-tester, frontend TypeScript/Vite-bygg, Windows-parser og
 faktiske Docker-bygg. Ingen produksjonshemmeligheter inngår i Git eller testoutput.
 Originalt Windows-databasevolum og verifiserte backupkopier beholdes.
+
+## Passordkandidat: kontrollert databasegjenoppretting
+
+V2-kandidaten inkluderer passordbranchens avgrensede rutine for gjenoppretting av en eksisterende database. Se [operatørrutinen](../_bmad-output/experimental-extensions/password-management/implementation/restore-runbook.md) og [isolert testevidens](../_bmad-output/experimental-extensions/password-management/implementation/restore-evidence.md).
+
+Rutinen krever kandidatens vedlikeholdssperrer i helper, systemd-enheter og Compose før bruk. Gamle passord, økter og engangskoder ugyldiggjøres før gjenåpning. Brukerne får hver sin administrative kode. Vanlig omstart eller oppdatering utløser ingen slik gjenoppretting. Produksjonsinstallasjon og praktisk eierprøve behandles separat.

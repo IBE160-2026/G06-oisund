@@ -76,13 +76,14 @@ export function SourceFacts({ metadata: m, historical = false }: { metadata: Imp
   </section>;
 }
 
-export function PrivateImport({ upload, adopt, expired, suspended, locked, stage, reviewReady, backToUpload }: { upload: (file: File, signal: AbortSignal) => Promise<any>; adopt: (content: Content, intent: 'edit' | 'approve') => boolean; expired: () => void; suspended: boolean; locked: boolean; stage: 'upload' | 'review'; reviewReady: () => void; backToUpload: () => void }) {
+export function PrivateImport({ upload, adopt, expired, suspended, locked, stage, reviewReady, backToUpload, settingsBlocked }: { upload: (file: File, signal: AbortSignal) => Promise<any>; adopt: (content: Content, intent: 'edit' | 'approve') => boolean; expired: () => void; suspended: boolean; locked: boolean; stage: 'upload' | 'review'; reviewReady: () => void; backToUpload: () => void; settingsBlocked: (value: boolean) => void }) {
   const [review, setReview] = useState<Content | null>(null);
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState('Velg en tekst-PDF for en midlertidig gjennomgang. Originalen og filnavnet lagres ikke.');
   const controller = useRef<AbortController | null>(null);
   const epoch = useRef(0);
   const heading = useRef<HTMLHeadingElement>(null);
+  useEffect(() => { settingsBlocked(busy || !!review); return () => settingsBlocked(false); }, [busy, review, settingsBlocked]);
   useEffect(() => { if (stage === 'review') heading.current?.focus(); }, [stage]);
   function cancel(text = 'Importen er avbrutt. Tidligere arbeid er beholdt.') { epoch.current++; controller.current?.abort(); controller.current = null; setBusy(false); setReview(null); setMessage(text); }
   useEffect(() => () => { epoch.current++; controller.current?.abort(); }, []);

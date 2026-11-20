@@ -1,0 +1,3 @@
+[workflow]
+spec_output_path = "{project-root}/../../specs"
+run_folder_pattern = "spec-{slug}"

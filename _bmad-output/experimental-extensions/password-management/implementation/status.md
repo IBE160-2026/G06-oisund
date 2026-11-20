@@ -1,0 +1,72 @@
+# PM-E1 implementation status
+
+**Restore follow-up — 2026-11-04:** The owner-approved policy is now implemented on the experimental branch with isolated qualification and three-layer review completed. See [restore evidence](restore-evidence.md) and [operator restore routine](restore-runbook.md). The policy decision is closed; actual production installation/execution and owner qualification remain separate. Earlier statements about missing policy/tooling below are historical, not the current decision state.
+
+**Previous integration checkpoint — 2026-11-04:** v1.1.0 candidate incorporates maintenance main1501104 through merge b7af6b5. See [candidate qualification](v110-candidate.md): final103 backend,35 focused browser,33 gate,27 helper tests and13 combined phases passed after three-layer review; exact evidence and limits are linked there. No release/deployment is approved. Remaining gates are the explicit restored-credential policy and scoped production restore/invalidation authorization, plus actual device, SSH/full helper chain, identity/handoff and owner acceptance.
+
+## Historical pre-integration assessment
+
+The following baseline/version/merge and test statements describe the earlier S1–S4 work; current candidate results and prerequisites supersede them only where explicitly recorded.
+
+2026-10-31. Isolated implementation authorized; no release authorization. BMAD Build rendered once using extension-local configuration. Main baseline unchanged at `5cee9e03d03d2c9c165c7f8fec64aa3e146959ab`; implementation starts from `b352640c3cfb80b962db6056116e1c747cfb760a`.
+
+| Story | Technical work | Mandatory owner qualification | Overall |
+|---|---|---|---|
+| PM-E1-S1 | Implemented; two three-layer review rounds, fixes, final41 backend +18 browser passed | Actual device/owner UX: utsatt – krever eier | In review, not complete |
+| PM-E1-S2 | Implemented; three-layer review and patches, final73 backend +18 helper passed | Identity/handoff/recording controls: utsatt – krever eier | Not complete |
+| PM-E1-S3 | Implemented; three-layer review/patches, final103 backend +35 S1/S3 browser,82 legacy regressions passed | Actual device/owner UX: utsatt – krever eier | In review, not complete |
+| PM-E1-S4 | Independent gateway/migration/restore qualification and three-layer review/patches passed;12 phases,20 scans,3 negative controls | Owner operator walkthrough and acceptance: utsatt – krever eier | Not complete |
+
+## Isolation
+
+`compose.password-tests.yaml` owns only project `ibe160-password-tests`, loopback ports 18440/18441 and separate PostgreSQL volumes. UI preview uses 15440. `.private-runtime/password_tests-postgres-password` is ignored, randomly generated locally and never included in evidence. Existing final-control runtime and production are not operated. Test marker `PRIVATE_TEST_PROJECT=ibe160-private-tests` is the existing backend synthetic-data safety marker, not a volume/project selection.
+
+Browser evidence uses synthetic data only, no traces/videos and no credential/code screenshots. Operator tests must capture synthetic terminal traffic internally only to assert behavior, never emit codes to test reports.
+
+## Reproducing browser verification
+
+Build-time Vite settings are required because `npm run start` serves the built output. In PowerShell, set `VITE_PRIVATE_API=http://127.0.0.1:18441` and `VITE_FICTIONAL_API=http://127.0.0.1:18440`, then run `npm run build` in frontend. Set `COMPOSE_PROJECT_NAME=ibe160-password-tests` before Playwright. Run focused cases with `npx playwright test --config playwright.password.config.ts`. The config matches only password test basenames, not the containing checkout name.
+
+For established browser regressions, run `node scripts/prepare-password-tests.mjs` from the repository root, then select the required specs explicitly with `playwright.password-regression.config.ts`. Generated sources live in ignored frontend/.password-regression-tests; historical fixtures are unchanged and screenshots/metrics are redirected to ignored tmp/password-regression-evidence. Do not run DB-mutating suites concurrently against these synthetic fixtures.
+
+## Clean-checkout startup — PowerShell 7 (review B10/R1-B10)
+
+Run from this isolated checkout in PowerShell 7 (`pwsh`), not Windows PowerShell 5.1. The local random secret is disposable test infrastructure, never a production credential; do not print or commit it. Refuse to replace an existing file. Explicit project selection prevents a surrounding Compose environment from choosing another runtime.
+
+```powershell
+$env:COMPOSE_PROJECT_NAME = 'ibe160-password-tests'
+New-Item -ItemType Directory -Force .private-runtime | Out-Null
+$pmSecretPath = Join-Path (Get-Location) '.private-runtime/password_tests-postgres-password'
+if (-not (Test-Path -LiteralPath $pmSecretPath)) {
+    $pmBytes = [Security.Cryptography.RandomNumberGenerator]::GetBytes(32)
+    [IO.File]::WriteAllText($pmSecretPath, [Convert]::ToHexString($pmBytes))
+}
+docker compose -p ibe160-password-tests -f compose.password-tests.yaml up -d --build --wait
+```
+
+Check all four services healthy with the same explicit project/file. This creates only the two password-tests volumes and ports listed above. Never substitute existing production/final-control volumes or passwords. Install pinned frontend dependencies with `npm ci --no-audit --no-fund` in frontend, then use the build-time variables and commands above. The regression adapter requires Node and Git; Docker Desktop and local headless Edge are used on Windows. Containers start the versioned private migrations automatically against their isolated database.
+
+After all tests, stop only this runtime with `docker compose -p ibe160-password-tests -f compose.password-tests.yaml stop`. Retain its synthetic volumes for reproducibility unless a separate explicit cleanup task removes them. Do not use global container/volume pruning.
+
+## Input-source restriction
+
+The historical import regression package includes anonymized reference PDFs. Those are not synthetic input and are excluded from future qualification: the password regression config filters `approved example` browser cases. Backend commands must select synthetic-only cases; the broad reference-file mount is removed before subsequent story runs. Earlier mixed-source run results remain recorded as such, not relabelled synthetic. Existing repository reference files are unchanged.
+
+S1 evidence: [dispatch/review/verification](spec-pm-e1-s1.md), [render/test map](evidence/s1/loop1/README.md), [proxy](evidence/s1/proxy.md). Required regression coverage comprises77 distinct synthetic cases; earlier anonymized-reference executions are separately recorded and excluded. Physical acceptance remains open. Other checkout v1-final-control was checked again and remains clean.
+
+## S4 qualification and future operational gates
+
+The final synthetic gateway/API/PostgreSQL run passed on base1c4ac7ce2621cb7ec4862231bfa10285bb31c255; exact source fingerprints, image IDs and per-table preservation evidence are in [runtime manifest](evidence/s4/runtime.json). See [scenario evidence](s4-evidence.md) and [final readiness](final-readiness.md). Parent three-layer review and postpatch verification close independent combined technical work, not owner qualification or story completion. Final runtime `ibe160-pm-s4-e57c2ff0d437` used loopback56762 and is stopped; synthetic volumes and ignored scratch are retained. Final-control runtime was not operated. The task-owned password-tests runtime is stopped after all testing.
+
+## v1.1.0 integration update — 2026-11-04
+
+Maintenance main1501104 is integrated at merge b7af6b5. See the [current candidate qualification and concrete restore gap](v110-candidate.md). Historical baseline/test statements above retain their original scope. Owner-dependent stories remain open; technical existing-deployment restore/invalidation tooling also remains a distinct release prerequisite. Full O6 closure is not a blanket gate. No release or production action is authorized by this update.
+
+## Readable-code candidate — 2026-11-05
+
+The [practical journal](owner-tests-20261104.md) records passed PC/tablet password-change and stale-session/offline checks, but manual recovery-code handoff failed due to length/ambiguity. The owner requested a20-character grouped replacement. See [bounded format specification](spec-readable-recovery-code.md) for implementation, review and final qualification. Older S1–S4 source evidence is historical for the changed recovery files; unchanged business/host/access controls retain their earlier evidence. A new physical handoff/redemption attempt remains mandatory before release acceptance. No production install, merge, tag or release is authorized by this correction.
+
+
+## Asynchronous operator sending — 2026-11-05
+
+The owner chose manual Teams/email to a known recipient and operator-only SENDT. No simultaneous recipient contact or waiting for acknowledgement is required in the app. The [bounded follow-up](spec-sent-recovery-handoff.md) removes recipient-facing operational text and handles redemption before SENDT truthfully. Expiry remains 30 minutes; a two-hour suggestion was not approved. Actual message/handoff and full SSH qualification remain pending; no real message was sent by the agent.

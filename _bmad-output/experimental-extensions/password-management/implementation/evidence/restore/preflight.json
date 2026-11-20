@@ -1,0 +1,19 @@
+{
+  "project": "ibe160-pm-restore-697a4cd98626",
+  "checks": [
+    {
+      "archive": "pre015",
+      "schema": 14,
+      "passed": true
+    },
+    {
+      "archive": "current",
+      "schema": 15,
+      "passed": true
+    },
+    {
+      "archive": "malformed",
+      "rejected": true
+    }
+  ]
+}

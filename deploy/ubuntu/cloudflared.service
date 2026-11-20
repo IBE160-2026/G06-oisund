@@ -1,4 +1,5 @@
 [Unit]
+ConditionPathExists=!/etc/bussassistent/maintenance/pending.json
 Description=Bussassistent Cloudflare Tunnel
 After=network-online.target bussassistent.service
 Wants=network-online.target bussassistent.service

@@ -1,4 +1,5 @@
 [Unit]
+ConditionPathExists=!/etc/bussassistent/maintenance/pending.json
 Description=Bussassistent private application
 Requires=docker.service
 After=docker.service network-online.target

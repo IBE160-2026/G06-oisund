@@ -186,3 +186,8 @@ input:is([type=checkbox],[type=radio]) { box-shadow: inset 0 0 0 3px #173e60; bo
 .private-confirmation button { margin-block: .5rem; }
 /* Do not delegate disabled contrast to translucent native UA styling. */
 input:disabled, select:disabled, textarea:disabled { opacity: 1; color: #465763; background: #e4e9ed; border-color: #637581; }
+
+/* Password settings use the established touch target and focus geometry. */
+section[aria-label="Brukerinnstillinger"] input,
+section[aria-label="Brukerinnstillinger"] button { min-height: 58px; border-radius: 8px; }
+section[aria-label="Brukerinnstillinger"] h2:focus-visible { outline: 3px solid currentColor; outline-offset: 4px; }

@@ -31,6 +31,9 @@ services:
       timeout: 3s
       retries: 20
   private-api:
+    command: [/bin/sh, -ec, 'test -d /maintenance; test -r /maintenance; test -x /maintenance; test ! -e /maintenance/pending.json || test -f /maintenance/local-start; exec python -m app.run']
+    volumes:
+      - /etc/bussassistent/maintenance:/maintenance:ro
     restart: on-failure
     logging:
       driver: local
@@ -60,6 +63,13 @@ services:
       timeout: 3s
       retries: 20
   gateway:
+    command:
+      - >-
+        test -d /maintenance; test -r /maintenance; test -x /maintenance; test ! -e /maintenance/pending.json || test -f /maintenance/local-start;
+        envsubst '$${TABLET_HOST}' < /etc/nginx/templates/default.conf.template > /tmp/tablet.conf;
+        exec nginx -g 'daemon off;'
+    volumes:
+      - /etc/bussassistent/maintenance:/maintenance:ro
     restart: on-failure
     logging:
       driver: local
@@ -86,6 +96,9 @@ services:
       private-api:
         condition: service_healthy
   access-gate:
+    command: [/bin/sh, -ec, 'test -d /maintenance; test -r /maintenance; test -x /maintenance; test ! -e /maintenance/pending.json || test -f /maintenance/local-start; exec python gate.py']
+    volumes:
+      - /etc/bussassistent/maintenance:/maintenance:ro
     restart: on-failure
     logging:
       driver: local

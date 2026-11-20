@@ -1,0 +1,16 @@
+{
+  "core": {
+    "project_name": "IBE160",
+    "user_name": "Jonas",
+    "communication_language": "Norwegian",
+    "document_output_language": "English",
+    "output_folder": "../.."
+  },
+  "modules": {
+    "bmm": {
+      "planning_artifacts": "{project-root}/..",
+      "implementation_artifacts": "{project-root}/../stories",
+      "project_knowledge": "{project-root}/../../../../../docs"
+    }
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "project": "ibe160-pm-restore-e4773c16e701",
+  "source": "e3874cce4894ecc0d092d2cbc010c2b733da71aa",
+  "images": [
+    {
+      "ID": "sha256:4b8a7b0f1e27a76e354f8e4ce9bed89c9584768b0c42b0ea45439a0e718fe799",
+      "ContainerName": "ibe160-pm-restore-e4773c16e701-private-api-1",
+      "Repository": "ibe160-pm-restore-e4773c16e701-api",
+      "Tag": "latest",
+      "Platform": "linux/amd64",
+      "Size": 86061941,
+      "Created": "2026-11-04T18:29:22.964614729Z",
+      "LastTagTime": "2026-11-04T18:29:23.457471413Z"
+    },
+    {
+      "ID": "sha256:07b7d60c21b4d987b26d88bd5d009ee21efff0d2633e2ed02bf6c62bd499a8b6",
+      "ContainerName": "ibe160-pm-restore-e4773c16e701-private-db-1",
+      "Repository": "ibe160-pm-restore-e4773c16e701-postgres",
+      "Tag": "latest",
+      "Platform": "linux/amd64",
+      "Size": 117990525,
+      "Created": "2026-11-01T16:20:21.560075764Z",
+      "LastTagTime": "2026-11-04T18:29:23.187747134Z"
+    }
+  ],
+  "archives": {
+    "pre015": {
+      "sha256": "60ca87cc70cd89a0496ed445d6646361c974ae24a6092b0d713c84dab1b9c7a9",
+      "bytes": 57511
+    },
+    "current": {
+      "sha256": "57c23ca4468ddad8056d2713b26d5c3fcb7b10bcc5546b889144b3e085df6483",
+      "bytes": 64276
+    }
+  },
+  "checks": [
+    "pre015: atomic failed replacement rollback, no leftover table, migration business equality, all old passwords/sessions/proofs rejected, independent A/B recovery, ordinary migration preserves credentials",
+    "current: atomic failed replacement rollback, no leftover table, migration business equality, all old passwords/sessions/proofs rejected, independent A/B recovery, ordinary migration preserves credentials"
+  ],
+  "fingerprints": {
+    "backend/app/restore.py": "00d2f264f63b689f0bc7b5facb540cd129adea2dea8131872b263c0dba2f4962",
+    "backend/app/manage.py": "be11c70d3376bcb9d87a0ed9a68db8131c3b470c2667b67f7b08b73ad5e55272",
+    "deploy/ubuntu/bussassistentctl.py": "646a5d3e06eda5e84d1150653667e2bac7579d649cea0d8a4d8301d1bb571882",
+    "deploy/ubuntu/compose.yaml": "b36c40acc7a328d320ebc3c5f967ca5613a68a7bf664b76f55add6504c6d2083",
+    "scripts/verify-password-restore.mjs": "7fb1c49d9fc2723a5a7614d7b2f167d71ae61efc6a281f20a3ab95deca136b8c",
+    "scripts/password-restore-probe.py": "609d30d97ffa916af282348bd1749f2dc85e4128bf68e8192dbf0d41f43e743f"
+  }
+}

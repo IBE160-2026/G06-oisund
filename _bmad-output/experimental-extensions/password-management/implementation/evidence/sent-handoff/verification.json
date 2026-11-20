@@ -1,0 +1,31 @@
+{
+  "date": "2026-11-05",
+  "baseline": "adac1ce99df48aa00bb818d8bd47c27feba0c44a",
+  "project": "ibe160-pm-code-format-20261105",
+  "backend": {
+    "final_run_passed": 84,
+    "fixture_failure": 1,
+    "seconds": 121.79,
+    "fixed_fixture_rerun_passed": 1,
+    "rerun_seconds": 3.53,
+    "distinct_passed": 85
+  },
+  "browser": {
+    "passed": 17,
+    "reported_duration": "1.9m"
+  },
+  "source_sha256": {
+    "backend/app/password_recovery.py": "6694dd821b880bca7a2bf52067cac5152799730c2500b0311094482a5737b93f",
+    "backend/app/recovery_terminal.py": "8c3484596b84388ebdb546f29280b90be992163990fde866bbcb67c5cc1735c7",
+    "frontend/src/PasswordRecovery.tsx": "d1b5b0d3d91383a7939dcb1c4f5be1c2cc084f57f2d6bcb6e89fac5d83be02ec",
+    "backend/tests/test_password_recovery_operator.py": "c1027ac3a34d31c819e28a9c42ce8edb93db61b41ae3ad003c74857cf930646f",
+    "backend/tests/test_password_recovery.py": "27a42c605b3758eaf1b9ce33540fe88c678306208c61effa04b4ddaea640e80a",
+    "frontend/tests/password-recovery.spec.ts": "698582b475bebb06b8ff4d23faee75e3ad0abb1dd0ee75537f48ca9feedef4aa",
+    "scripts/password-s4-probe.py": "bab310b08646d75222f8ad422de07c5e9a924f5573b59c83af31b755bddc9750"
+  },
+  "manual_handoff": "pending",
+  "production_touched": false,
+  "main": "15011042b1fe093becbe68177e6396e456b1f35f",
+  "automated_services_stopped": true,
+  "local_owner_test_updated": true
+}

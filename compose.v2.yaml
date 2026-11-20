@@ -1,0 +1,81 @@
+# Private local V2 test and owner sandboxes. Always select the project explicitly.
+services:
+  db:
+    image: postgres:17-alpine@sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24
+    environment:
+      POSTGRES_DB: fictional_assessment
+      POSTGRES_USER: fictional
+      POSTGRES_PASSWORD_FILE: /run/secrets/v2_password
+    secrets: [v2_password]
+    volumes: [fictional:/var/lib/postgresql/data]
+    healthcheck:
+      test: [CMD-SHELL, pg_isready -h 127.0.0.1 -U fictional -d fictional_assessment]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+  api:
+    build: ./backend
+    command: [python, -c, "import os,runpy; from pathlib import Path; from urllib.parse import quote; os.environ['DATABASE_URL']='postgresql://fictional:'+quote(Path('/run/secrets/v2_password').read_text().strip(),safe='')+'@db/fictional_assessment'; runpy.run_module('app.run',run_name='__main__')"]
+    environment:
+      APP_MODE: fictional-assessment
+      FICTIONAL_ORIGIN: http://127.0.0.1:${V2_UI_PORT:-19651}
+    secrets: [v2_password]
+    volumes:
+      - ./Eksempelfiler:/fixtures:ro
+    ports: ['127.0.0.1:${V2_FICTIONAL_PORT:-19652}:8000']
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health')"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+  private-db:
+    image: postgres:17-alpine@sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24
+    environment:
+      POSTGRES_DB: private_work
+      POSTGRES_USER: private_work
+      POSTGRES_PASSWORD_FILE: /run/secrets/v2_password
+    secrets: [v2_password]
+    volumes: [private:/var/lib/postgresql/data]
+    healthcheck:
+      test: [CMD-SHELL, pg_isready -h 127.0.0.1 -U private_work -d private_work]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+  private-api:
+    build: ./backend
+    environment:
+      APP_MODE: private-local
+      PRIVATE_DATABASE_URL: postgresql://private_work@private-db/private_work
+      PRIVATE_DATABASE_PASSWORD_FILE: /run/secrets/v2_password
+      PRIVATE_ORIGIN: http://127.0.0.1:${V2_UI_PORT:-19651}
+      PRIVATE_LOOPBACK_DEVELOPMENT: '1'
+      PRIVATE_TEST_PROJECT: ${V2_TEST_MARKER:-disabled}
+      PRIVATE_TEST_API: http://private-api:8000
+      PRIVATE_TEST_ORIGIN: http://127.0.0.1:${V2_UI_PORT:-19651}
+      V2_NOTICE_REFRESH: ${V2_NOTICE_REFRESH:-off}
+    secrets: [v2_password]
+    volumes:
+      - ./Eksempelfiler:/fixtures:ro
+    ports: ['127.0.0.1:${V2_PRIVATE_PORT:-19653}:8000']
+    depends_on:
+      private-db:
+        condition: service_healthy
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health')"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+volumes:
+  fictional:
+  private:
+networks:
+  default:
+    ipam:
+      config:
+        - subnet: ${V2_SUBNET:-10.247.206.0/28}
+secrets:
+  v2_password:
+    file: ${V2_DB_SECRET_FILE:-./.private-runtime/ibe160-v2-tests-password}

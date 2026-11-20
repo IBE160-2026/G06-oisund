@@ -73,6 +73,10 @@ frontend/.story124-tests/
 frontend/.v1followup-tests/
 frontend/dist-v1followup-tablet/
 frontend/dist-story124-tablet/
+frontend/dist-ibe160-v2-*/
+frontend/.v2-tests/
+
+frontend/.password-regression-tests/
 
 # Preserve large original OS scan reports locally; publish compact finding rows.
 /docs/evidence/o6-execution-20261101/r2-linux-os-scan-*.txt
