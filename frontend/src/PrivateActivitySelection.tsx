@@ -3,6 +3,7 @@ import type { Content } from './PrivateDrafts';
 import { activityChoiceLabel } from './activityChoiceLabel';
 import { PrivateDayOverview } from './PrivateDayOverview';
 import { SelectedActivityDetails } from './SelectedActivityDetails';
+import { FrozenRouteReference } from './PrivateRouteReference';
 import { useWorkdayResource, type ResourceProps } from './useWorkdayResource';
 import { OutcomeEditor, type Progress } from './PrivateWorkdayProgress';
 
@@ -48,7 +49,10 @@ export function PrivateActivitySelection(props: Props) {
       {!props.activityOpen && <h4>Manuelt aktivitetsvalg</h4>}<p ref={status} tabIndex={-1} role="status" aria-label="Aktivitetsvalgstatus">{message}</p>
 
       <div className="controls">{props.activityOpen && <button onClick={back}>Tilbake til dagen</button>}<button disabled={disabled || index <= 0} onClick={() => choose(content.activities[index - 1].id)}>{index < 0 ? 'Velg en aktivitet først' : index === 0 ? 'Ingen forrige aktivitet' : 'Forrige aktivitet'}</button><button disabled={disabled || index < 0 || index === content.activities.length - 1} onClick={() => choose(content.activities[index + 1].id)}>{index < 0 ? 'Velg en aktivitet først' : index === content.activities.length - 1 ? 'Ingen neste aktivitet' : 'Neste aktivitet'}</button></div>
-      {visible && saved ? selected ? props.activityOpen ? <><SelectedActivityDetails readOnly={props.progress.terminal} content={content} classifications={classifications} activityId={selected} /><OutcomeEditor progress={props.progress} activityId={selected} suspended={props.suspended || props.navigationLocked || busy || !!pending || !!comparison || rejected} /></> : <><p>{props.progress.terminal ? 'Lesevisning' : 'Manuelt valgt'} · Aktivitet {index + 1} av {content.activities.length}</p><button disabled={disabled} onClick={props.openActivity}>Åpne valgt aktivitet</button></> : <p><strong>Ingen aktivitet valgt</strong></p> : <p>Lagret aktivitetsvalg kan ikke bekreftes.</p>}
+      {visible && saved ? selected ? props.activityOpen ? <><SelectedActivityDetails readOnly={props.progress.terminal} content={content} classifications={classifications} activityId={selected} />
+        <FrozenRouteReference key={selected} workdayId={props.id} activityId={selected} expiresAt={props.expiresAt} serviceDate={content.service_date}
+          request={props.request} expired={props.expired} available={!props.suspended && !busy && !pending && !comparison && !rejected} />
+        <OutcomeEditor progress={props.progress} activityId={selected} suspended={props.suspended || props.navigationLocked || busy || !!pending || !!comparison || rejected} /></> : <><p>{props.progress.terminal ? 'Lesevisning' : 'Manuelt valgt'} · Aktivitet {index + 1} av {content.activities.length}</p><button disabled={disabled} onClick={props.openActivity}>Åpne valgt aktivitet</button></> : <p><strong>Ingen aktivitet valgt</strong></p> : <p>Lagret aktivitetsvalg kan ikke bekreftes.</p>}
       {proposal?.activity_id && <p>Lokalt forslag (ikke gjeldende lagret valg): {label(proposal.activity_id)}</p>}
       {comparison && <div className="import-warning">{visible && <p>Gjeldende lagret valg: {comparison.activity_id ? label(comparison.activity_id) : 'Ingen aktivitet valgt'}</p>}<button disabled={busy || props.suspended} onClick={async () => { await adoptCurrent('Lagret aktivitetsvalg er lastet inn. Det lokale forslaget er fjernet.'); status.current?.focus(); }}>Last inn lagret aktivitetsvalg</button></div>}
       {pending && <div className="controls"><button disabled={busy || props.suspended} onClick={() => void send()}>Prøv samme aktivitetsvalg igjen</button><button disabled={busy || props.suspended} onClick={() => void send(undefined, true)}>Kontroller aktivitetsvalget</button></div>}

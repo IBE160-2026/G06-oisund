@@ -4,7 +4,7 @@ from uuid import uuid4
 from fastapi import HTTPException
 from psycopg.types.json import Jsonb
 
-from . import auth, draft_storage
+from . import auth, draft_storage, route_reference_storage
 from .private_storage import database
 from .draft_domain import DraftContent
 from .workday_domain import SUPPORTED_TYPES, assessment
@@ -44,6 +44,12 @@ def review(request, body):
             raise HTTPException(409, 'Utkastet er endret. Last inn og gjennomgå den lagrede versjonen.')
         if source['confirmed']:
             raise HTTPException(409, 'Utkastet har allerede en bekreftet plan. Åpne planen.')
+        route_revision = route_reference_storage.route_revision(conn, source['id'])
+        if body.expected_route_revision is not None:
+            if body.expected_route_revision != route_revision:
+                raise HTTPException(409, route_reference_storage.ROUTE_CHANGED)
+        elif route_revision and route_reference_storage.current_references(conn, source):
+            raise HTTPException(409, route_reference_storage.ROUTE_CHANGED)
         count = conn.execute('SELECT count(*) AS n FROM workday_operations WHERE owner=%s AND workday_id IS NULL AND expires_at > clock_timestamp()', (owner,)).fetchone()['n']
         if count >= 200:
             raise HTTPException(429, 'For mange uavklarte bekreftelser.')
@@ -51,8 +57,9 @@ def review(request, body):
         facts = assessment(content, policy_version=3)
         if facts['expires_at'] and not conn.execute('SELECT %s > clock_timestamp() AS live', (facts['expires_at'],)).fetchone()['live']:
             facts['blockers'].append('Planens slutt + sju dager er allerede utløpt. Rett og lagre tidspunktet.')
-        row = conn.execute('INSERT INTO workday_operations(id,owner,draft_id,expected_revision,expires_at,assessment_policy_version) SELECT %s,%s,id,revision,expires_at,3 FROM drafts WHERE id=%s AND expires_at > clock_timestamp() RETURNING id,expires_at',
-                           (uuid4(), owner, body.draft_id)).fetchone()
+        row = conn.execute('INSERT INTO workday_operations(id,owner,draft_id,expected_revision,expires_at,assessment_policy_version,route_revision) '
+                           'SELECT %s,%s,id,revision,expires_at,3,%s FROM drafts WHERE id=%s AND expires_at > clock_timestamp() RETURNING id,expires_at',
+                           (uuid4(), owner, route_revision, body.draft_id)).fetchone()
         if not row:
             raise HTTPException(410, 'Utkastet er utløpt.')
         auth.session(conn, request)
@@ -84,6 +91,8 @@ def operation(conn, owner, identifier, request):
 
 def confirm(request, identifier, body):
     payload = body.model_dump(mode='json')
+    if body.expected_route_revision is None:
+        del payload['expected_route_revision']
     payload['acknowledgements'] = sorted(payload['acknowledgements'])
     digest = draft_storage.fingerprint(identifier, payload)
     with database() as conn:
@@ -97,6 +106,12 @@ def confirm(request, identifier, body):
             return presentation(plan)
         if source['revision'] != body.expected_revision:
             raise HTTPException(409, 'Utkastet er endret. Gjennomgå den lagrede versjonen på nytt.')
+        if route_reference_storage.route_revision(conn, identifier) != (op['route_revision'] or 0):
+            raise HTTPException(409, route_reference_storage.ROUTE_CHANGED)
+        route_references = route_reference_storage.current_references(conn, source) if op['route_revision'] else []
+        if ((body.expected_route_revision is not None and body.expected_route_revision != op['route_revision'])
+                or (route_references and body.expected_route_revision is None)):
+            raise HTTPException(409, route_reference_storage.ROUTE_CHANGED)
         content = DraftContent.model_validate(source['content'])
         decisions = {str(key): value for key, value in body.classifications.items()}
         facts = assessment(content, decisions, op['assessment_policy_version'])
@@ -116,6 +131,7 @@ def confirm(request, identifier, body):
                             facts['expires_at'], body.operation_id)).fetchone()
         if not row:
             raise HTTPException(410, 'Utkastet, forsøket eller planens frist er utløpt.')
+        route_reference_storage.freeze(conn, row['id'], route_references)
         conn.execute('UPDATE drafts SET confirmed=true WHERE id=%s', (identifier,))
         accepted = conn.execute('UPDATE workday_operations SET workday_id=%s,payload_hash=%s,expires_at=%s WHERE id=%s '
                                 'AND expires_at > clock_timestamp() AND %s > clock_timestamp() '

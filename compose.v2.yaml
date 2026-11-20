@@ -56,9 +56,12 @@ services:
       PRIVATE_TEST_API: http://private-api:8000
       PRIVATE_TEST_ORIGIN: http://127.0.0.1:${V2_UI_PORT:-19651}
       V2_NOTICE_REFRESH: ${V2_NOTICE_REFRESH:-off}
+      V2_ROUTE_ARCHIVE: ${V2_ROUTE_ARCHIVE:-}
+      V2_ROUTE_OBSERVED_AT: ${V2_ROUTE_OBSERVED_AT:-}
     secrets: [v2_password]
     volumes:
       - ./Eksempelfiler:/fixtures:ro
+      - ./.private-runtime/route:/reference:ro
     ports: ['127.0.0.1:${V2_PRIVATE_PORT:-19653}:8000']
     depends_on:
       private-db:

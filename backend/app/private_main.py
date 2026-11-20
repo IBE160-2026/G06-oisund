@@ -24,6 +24,7 @@ from .workday_outcome_domain import SaveOutcome, OutcomeRecord, OutcomeReceipt, 
 from . import workday_outcome_storage
 from . import workday_notice_storage
 from . import automatic_notice_api, automatic_notice_ingestion
+from . import route_reference_api, route_source
 from .workday_notice_domain import SaveNotice, NoticeCommand, NoticeRecord, NoticeList, NoticeReceipt, AccountNoticeCommand, SaveAccountNotice, AccountNoticeList
 from .notice_reader_domain import NoticeReader
 from .workday_bus_domain import SaveBus, BusRecord, BusReceipt
@@ -70,6 +71,7 @@ async def lifespan(app):
     if not run_cleanup():
         # Startup still refuses to serve when initial cleanup cannot run.
         raise RuntimeError('Private startup cleanup unavailable') from None
+    await asyncio.to_thread(route_source.at_launch)
     task = asyncio.create_task(maintenance())
     stop_notices = Event()
     notice_task = asyncio.create_task(automatic_notice_ingestion.periodic(stop_notices)) if automatic_notice_ingestion.enabled() else None
@@ -87,6 +89,7 @@ async def lifespan(app):
 
 app = FastAPI(title='Privat arbeidsrom', lifespan=lifespan, docs_url=None, redoc_url=None, openapi_url=None)
 app.include_router(automatic_notice_api.router)
+app.include_router(route_reference_api.router)
 app.add_middleware(CORSMiddleware, allow_origins=[auth.configuration()], allow_credentials=True,
                    allow_methods=['GET', 'POST'], allow_headers=['Content-Type', 'X-CSRF-Token'], expose_headers=['Date'])
 

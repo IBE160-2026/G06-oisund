@@ -15,6 +15,8 @@ $project = if ($testMode) { 'ibe160-v2-tests' } else { 'ibe160-v2-owner' }
 $firstPort = if ($testMode) { 19651 } else { 19661 }
 $config = Join-Path $PSScriptRoot '../compose.v2.yaml'
 $root = Split-Path $PSScriptRoot
+$routeDirectory = Join-Path $root '.private-runtime/route'
+$routeArchive = Get-Item -LiteralPath (Join-Path $routeDirectory 'troms-netex-1795129398375617.zip') -ErrorAction SilentlyContinue
 $environment = @{
     V2_UI_PORT = "$firstPort"
     V2_FICTIONAL_PORT = "$($firstPort + 1)"
@@ -23,6 +25,8 @@ $environment = @{
     V2_DB_SECRET_FILE = "./.private-runtime/$project-password"
     V2_TEST_MARKER = $(if ($testMode) { 'ibe160-private-tests' } else { 'disabled' })
     V2_NOTICE_REFRESH = $(if ($testMode) { 'off' } else { 'on' })
+    V2_ROUTE_ARCHIVE = $(if (!$testMode -and $routeArchive) { "/reference/$($routeArchive.Name)" })
+    V2_ROUTE_OBSERVED_AT = $(if (!$testMode -and $routeArchive) { '2026-11-20T01:13:54.5323574Z' })
     VITE_FICTIONAL_API = "http://127.0.0.1:$($firstPort + 1)"
     VITE_PRIVATE_API = "http://127.0.0.1:$($firstPort + 2)"
     VITE_PRIVATE_API_BASE = $null
@@ -41,6 +45,7 @@ try {
     }
     $runtime = Join-Path $root '.private-runtime'
     $null = New-Item -ItemType Directory -Path $runtime -Force
+    $null = New-Item -ItemType Directory -Path $routeDirectory -Force
     $source = Join-Path $root $environment.V2_DB_SECRET_FILE
     if (-not (Test-Path -LiteralPath $source)) {
         $stream = [IO.File]::Open($source, 'CreateNew')

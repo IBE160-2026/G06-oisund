@@ -18,6 +18,7 @@ SUPPORTED_TYPES = get_args(SupportedType)
 class ReviewRequest(StrictModel):
     draft_id: UUID
     expected_revision: int = Field(ge=1, strict=True)
+    expected_route_revision: int | None = Field(default=None, ge=0, strict=True)
 
 
 class DeleteWorkdayRequest(StrictModel):
@@ -34,6 +35,7 @@ class DeletedWorkday(StrictModel):
 class ConfirmRequest(StrictModel):
     operation_id: UUID
     expected_revision: int = Field(ge=1, strict=True)
+    expected_route_revision: int | None = Field(default=None, ge=0, strict=True)
     acknowledgements: list[Annotated[str, Field(max_length=200)]] = Field(default_factory=list, max_length=3000)
     classifications: dict[UUID, SupportedType] = Field(default_factory=dict, max_length=200)
 
