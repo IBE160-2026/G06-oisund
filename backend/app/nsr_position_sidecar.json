@@ -1,0 +1,61 @@
+{
+  "contract": "nsr-quay-coordinate-v1",
+  "revision": "nsr-line20-2026-11-20-v1",
+  "provider": "Entur NSR",
+  "source_url": "https://developer.entur.org/stop-places-v1-read/",
+  "license_url": "https://data.norge.no/nlod/en/2.0",
+  "fetched_at": "2026-11-20T01:19:58.357651+00:00",
+  "stops": [
+    {
+      "quay_id": "NSR:Quay:90847",
+      "stop_place_id": "NSR:StopPlace:53331",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v1",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.698705,
+      "longitude": 19.009818,
+      "source_url": "https://api.entur.io/stop-places/v1/read/quays/NSR:Quay:90847",
+      "source_updated_at": "2020-01-30T14:55:31.649+01:00",
+      "stop_place_updated_at": "2024-01-01T03:00:14.225+01:00",
+      "quay_validity": {"valid_from": null, "valid_until": null},
+      "stop_place_validity": {"valid_from": "2020-01-30T14:55:28+01:00", "valid_until": null},
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:89699",
+      "stop_place_id": "NSR:StopPlace:52717",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v1",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.698302,
+      "longitude": 19.001812,
+      "source_url": "https://api.entur.io/stop-places/v1/read/quays/NSR:Quay:89699",
+      "source_updated_at": "2020-02-05T16:40:05.744+01:00",
+      "stop_place_updated_at": "2024-01-01T02:59:45.551+01:00",
+      "quay_validity": {"valid_from": null, "valid_until": null},
+      "stop_place_validity": {"valid_from": "2020-02-05T16:39:57+01:00", "valid_until": null},
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:95924",
+      "stop_place_id": "NSR:StopPlace:56013",
+      "quay_version": "2",
+      "stop_place_version": "2",
+      "mapping_revision": "nsr-line20-2026-11-20-v1",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.696149,
+      "longitude": 18.995777,
+      "source_url": "https://api.entur.io/stop-places/v1/read/quays/NSR:Quay:95924",
+      "source_updated_at": null,
+      "stop_place_updated_at": "2024-01-01T03:02:11.4+01:00",
+      "quay_validity": {"valid_from": null, "valid_until": null},
+      "stop_place_validity": {"valid_from": "2017-06-19T22:40:14.817+02:00", "valid_until": null},
+      "quality": "unverified"
+    }
+  ]
+}

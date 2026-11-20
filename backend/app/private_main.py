@@ -24,7 +24,7 @@ from .workday_outcome_domain import SaveOutcome, OutcomeRecord, OutcomeReceipt, 
 from . import workday_outcome_storage
 from . import workday_notice_storage
 from . import automatic_notice_api, automatic_notice_ingestion
-from . import route_reference_api, route_source
+from . import position_anchor_api, route_reference_api, route_source
 from .workday_notice_domain import SaveNotice, NoticeCommand, NoticeRecord, NoticeList, NoticeReceipt, AccountNoticeCommand, SaveAccountNotice, AccountNoticeList
 from .notice_reader_domain import NoticeReader
 from .workday_bus_domain import SaveBus, BusRecord, BusReceipt
@@ -90,6 +90,7 @@ async def lifespan(app):
 app = FastAPI(title='Privat arbeidsrom', lifespan=lifespan, docs_url=None, redoc_url=None, openapi_url=None)
 app.include_router(automatic_notice_api.router)
 app.include_router(route_reference_api.router)
+app.include_router(position_anchor_api.router)
 app.add_middleware(CORSMiddleware, allow_origins=[auth.configuration()], allow_credentials=True,
                    allow_methods=['GET', 'POST'], allow_headers=['Content-Type', 'X-CSRF-Token'], expose_headers=['Date'])
 

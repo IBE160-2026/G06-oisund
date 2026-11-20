@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import type { Plan } from './PrivateConfirmation';
 import { PrivateBus } from './PrivateBus';
 import { PrivateShiftStart } from './PrivateShiftStart';
@@ -8,6 +8,7 @@ import { osloDateTime } from './dayOverview';
 import type { NoticeController } from './PrivateNotices';
 import { PrivateNoticeReader } from './PrivateNoticeReader';
 import { PrivateAutomaticNotices } from './PrivateAutomaticNotices';
+import { createPositionAnchorContinuity } from './positionAnchorClient';
 
 type Props = {
   plan: Plan; hidden: boolean; activityOpen: boolean; setActivityOpen: (value: boolean) => void;
@@ -21,6 +22,7 @@ type Props = {
 };
 export function PrivateWorkdayView(props: Props) {
   const { plan } = props;
+  const anchorContinuity = useMemo(createPositionAnchorContinuity, [plan.id]);
   const [readerOpen, setReaderOpen] = useState(false);
   const [automaticOpen, setAutomaticOpen] = useState(false);
   useEffect(() => { props.readerChanged(readerOpen || automaticOpen); return () => props.readerChanged(false); }, [readerOpen, automaticOpen]);
@@ -57,7 +59,7 @@ export function PrivateWorkdayView(props: Props) {
         <div hidden={progress.terminal && !props.busLocked}><PrivateBus id={plan.id} expiresAt={plan.expires_at} request={request} mutation={mutation} readOnly={progress.terminal} suspended={props.suspended} expired={props.expired} lock={props.guardBus} availability={props.busAvailability} factsAvailable={visible} shorten={props.shorten} /></div>
         {progress.terminal && visible && <><p>Skiftet er {progress.snapshot!.lifecycle.state === 'ended' ? 'avsluttet' : 'avbrutt'}. Dagen er skrivebeskyttet.</p><p>Fysisk buss: {progress.snapshot!.bus.physical_bus ?? 'Ukjent'}</p><button onClick={() => progress.setScreen('recap')}>Åpne oppsummering</button></>}
       </div>
-      <PrivateActivitySelection id={plan.id} expiresAt={plan.expires_at} content={plan.draft} classifications={plan.classifications} finalEnd={plan.final_end} activityOpen={props.activityOpen} positionVisible={!special && !props.hidden} navigationLocked={props.dayNavigationLocked} openActivity={openActivity} backToDay={() => props.setActivityOpen(false)} request={request} mutation={mutation} suspended={props.suspended} expired={props.expired} lock={props.guardSelection} availability={props.selectionAvailability} factsAvailable={visible} shorten={props.shorten} progress={progress} />
+      <PrivateActivitySelection id={plan.id} expiresAt={plan.expires_at} content={plan.draft} classifications={plan.classifications} finalEnd={plan.final_end} activityOpen={props.activityOpen} positionVisible={!special && !props.hidden} anchorContinuity={anchorContinuity} navigationLocked={props.dayNavigationLocked} openActivity={openActivity} backToDay={() => props.setActivityOpen(false)} request={request} mutation={mutation} suspended={props.suspended} expired={props.expired} lock={props.guardSelection} availability={props.selectionAvailability} factsAvailable={visible} shorten={props.shorten} progress={progress} />
       {props.activityOpen && noticeEntry}
     </div>
     <div hidden={readerOpen || automaticOpen || notices.screen !== 'day' || progress.screen !== 'day' || progress.terminal && !props.busLocked}><PrivateShiftStart id={plan.id} expiresAt={plan.expires_at} blocked={props.busy || props.busLocked || progressLocked || progress.busy} reviewing={startReview} review={setStartReview} plannedStart={plan.draft.activities[0].start!} request={request} mutation={mutation} readOnly={progress.terminal} suspended={props.suspended} expired={props.expired} lock={props.guardStart} availability={props.startAvailability} factsAvailable={visible} changed={startChanged} shorten={props.shorten} /></div>

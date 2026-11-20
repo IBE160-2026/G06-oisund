@@ -7,10 +7,12 @@ import { FrozenRouteReference } from './PrivateRouteReference';
 import { useWorkdayResource, type ResourceProps } from './useWorkdayResource';
 import { OutcomeEditor, validLifecycle, type Progress } from './PrivateWorkdayProgress';
 import { privateNow } from './privateClock';
+import type { PositionAnchorContinuity } from './positionAnchorClient';
 import { PositionAssistance } from './PositionAssistance';
+import { PrivateStopProgression } from './PrivateStopProgression';
 
 type Selection = { workday_id: string; activity_id: string | null; revision: number; expires_at: string };
-type Props = ResourceProps & { content: Content; classifications: Record<string, string>; finalEnd: string; factsAvailable: boolean; positionVisible: boolean; activityOpen: boolean; openActivity: () => void; backToDay: () => void; navigationLocked: boolean; progress: Progress };
+type Props = ResourceProps & { content: Content; classifications: Record<string, string>; finalEnd: string; factsAvailable: boolean; positionVisible: boolean; anchorContinuity: PositionAnchorContinuity; activityOpen: boolean; openActivity: () => void; backToDay: () => void; navigationLocked: boolean; progress: Progress };
 export function PrivateActivitySelection(props: Props) {
   const { content, classifications } = props;
   const [consulted, setConsulted] = useState<string | null>(null);
@@ -66,7 +68,9 @@ export function PrivateActivitySelection(props: Props) {
         <FrozenRouteReference key={selected} workdayId={props.id} activityId={selected} expiresAt={props.expiresAt} serviceDate={content.service_date}
           request={props.request} expired={props.expired} available={!props.suspended && !busy && !pending && !comparison && !rejected} />
         <OutcomeEditor progress={props.progress} activityId={selected} suspended={props.suspended || props.navigationLocked || busy || !!pending || !!comparison || rejected} />
-        {!props.progress.terminal && <PositionAssistance key={selected} authorized={positionVisible} expiresAt={props.expiresAt} verifyAccess={verifyPositionAccess} />}
+        {!props.progress.terminal && <PositionAssistance key={selected} authorized={positionVisible} expiresAt={props.expiresAt} verifyAccess={verifyPositionAccess}>
+          <PrivateStopProgression workdayId={props.id} activityId={selected} expiresAt={props.expiresAt} request={props.request} mutation={props.mutation} visible={positionVisible} anchorContinuity={props.anchorContinuity} />
+        </PositionAssistance>}
       </> : <><p>{props.progress.terminal ? 'Lesevisning' : 'Manuelt valgt'} · Aktivitet {index + 1} av {content.activities.length}</p><button disabled={disabled} onClick={props.openActivity}>Åpne valgt aktivitet</button></> : <p><strong>Ingen aktivitet valgt</strong></p> : <p>Lagret aktivitetsvalg kan ikke bekreftes.</p>}
       {proposal?.activity_id && <p>Lokalt forslag (ikke gjeldende lagret valg): {label(proposal.activity_id)}</p>}
       {comparison && <div className="import-warning">{visible && <p>Gjeldende lagret valg: {comparison.activity_id ? label(comparison.activity_id) : 'Ingen aktivitet valgt'}</p>}<button disabled={busy || props.suspended} onClick={async () => { await adoptCurrent('Lagret aktivitetsvalg er lastet inn. Det lokale forslaget er fjernet.'); status.current?.focus(); }}>Last inn lagret aktivitetsvalg</button></div>}
