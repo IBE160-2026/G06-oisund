@@ -1,8 +1,19 @@
+import type { RoadManifest } from '../src/roadLimits';
 import { expect, openedPlan, setup, test } from './private-activity-helpers';
+
+declare global {
+  interface Window {
+    progressionControl: {
+      active: () => number;
+      watches: () => number;
+      fix: (longitude: number, watch?: number, speed?: number | null) => void;
+    };
+  }
+}
 
 setup();
 
-test('stop anchors require current authority, survive authorized navigation, and resume from an explicit occurrence', async ({ page, context }) => {
+test('stop anchors recover and progress beside road matching and speed on one watch', async ({ page, context }) => {
   await page.clock.install();
   await page.addInitScript(() => {
     const callbacks: PositionCallback[] = [];
@@ -18,9 +29,9 @@ test('stop anchors require current authority, survive authorized navigation, and
     Object.assign(window, { progressionControl: {
       active: () => active.size,
       watches: () => callbacks.length,
-      fix(longitude: number, watch = callbacks.length - 1) {
+      fix(longitude: number, watch = callbacks.length - 1, speed: number | null = null) {
         callbacks[watch]({
-          timestamp: Date.now(), coords: { latitude: 69.012345, longitude, accuracy: 8, speed: null, heading: null },
+          timestamp: Date.now(), coords: { latitude: 69.012345, longitude, accuracy: 8, speed, heading: null },
         } as GeolocationPosition);
       },
     } });
@@ -51,6 +62,21 @@ test('stop anchors require current authority, survive authorized navigation, and
   let answerFirstRead!: () => void;
   const delayedFirstRead = new Promise<void>(resolve => { answerFirstRead = resolve; });
   const cors = { 'Access-Control-Allow-Origin': new URL(page.url()).origin, 'Access-Control-Allow-Credentials': 'true' };
+  const baseTime = await page.evaluate(() => Date.now());
+  const iso = (offset: number) => new Date(baseTime + offset).toISOString();
+  const eastScale = 111_195.08 * Math.cos(69.012345 * Math.PI / 180);
+  const point = (longitude: number) => [longitude, 69.012345] as const;
+  const roadManifest: RoadManifest = {
+    id: 'synthetic-shared-road', revision: '1', profile: 'SL-LAB-1', uncertaintyM: 8,
+    retrievedAt: iso(-4_000), checkedAt: iso(-4_000), validUntil: iso(120_000), path: ['approach', 'beyond'],
+    packages: [{ id: 'synthetic-road-package', revision: '1', edges: [
+      { id: 'approach', from: 'west', to: 'change', shape: [point(18), point(18.0115)],
+        length: (18.0115 - 18) * eastScale, kmh: 50, successors: ['beyond'] },
+      { id: 'beyond', from: 'change', to: 'east', shape: [point(18.0115), point(18.04)],
+        length: (18.04 - 18.0115) * eastScale, kmh: 30, successors: [] },
+    ] }],
+  };
+  await page.route('**/road-reference/' + activityId, route => route.fulfill({ headers: cors, json: { status: 'qualified', manifest: roadManifest } }));
   page.on('request', request => released.push(request.url() + (request.postData() ?? '')));
   await page.route('**/position-coordinates/**', route => route.fulfill({
     headers: cors, json: { ...scope, activity_id: activityId, route: board, calls, reason: null, source: null },
@@ -59,6 +85,9 @@ test('stop anchors require current authority, survive authorized navigation, and
     if (route.request().method() === 'POST') {
       const proposed = route.request().postDataJSON();
       writes.push(proposed);
+      if (proposed.expected_revision !== (current?.revision ?? 0)) {
+        return route.fulfill({ headers: cors, status: 409, json: { detail: 'Holdepunktet er endret.' } });
+      }
       const call = calls.find(value => value.occurrence_id === proposed.occurrence_id)!;
       const savedAt = new Date().toISOString();
       current = {
@@ -76,7 +105,11 @@ test('stop anchors require current authority, survive authorized navigation, and
       return route.fulfill({ headers: cors, json: lastReceipt });
     }
     if (route.request().url().includes('/operations/')) {
-      lookups.push(route.request().url().split('/').at(-1)!);
+      const operationId = route.request().url().split('/').at(-1)!;
+      lookups.push(operationId);
+      if (lastReceipt?.operation_id !== operationId) {
+        return route.fulfill({ headers: cors, status: 404, json: { detail: 'Lagringsforsøket finnes ikke.' } });
+      }
       return route.fulfill({ headers: cors, json: lastReceipt });
     }
     if (firstRead) {
@@ -91,8 +124,15 @@ test('stop anchors require current authority, survive authorized navigation, and
   const options = panel.getByLabel('Holdeplassforekomst');
   const manual = panel.getByRole('button', { name: 'Sett manuelt holdepunkt' });
   const start = panel.getByRole('button', { name: 'Start holdeplassassistanse' });
+  const road = page.getByRole('region', { name: 'Fartsgrense', exact: true });
+  const roadStart = road.getByRole('button', { name: 'Start vegmatching' });
+  const roadStop = road.getByRole('button', { name: 'Stopp vegmatching' });
+  const currentLimit = road.locator('dt:text-is("Registrert vegfartsgrense") + dd');
+  const nextLimit = road.locator('dt:text-is("Neste fartsgrense") + dd');
+  const signs = road.getByRole('img');
+  const speed = page.getByLabel('Målt egen fart');
   const controls = () => page.evaluate(() => {
-    const injected = (window as any).progressionControl;
+    const injected = window.progressionControl;
     return [injected.active(), injected.watches()];
   });
   await expect(panel).toContainText('forekomster 2–7');
@@ -126,33 +166,89 @@ test('stop anchors require current authority, survive authorized navigation, and
   await expect.poll(controls).toEqual([1, 1]);
   await expect.poll(() => writes.length).toBe(2);
   await expect(panel).toContainText('Holdepunktet er lagret.');
+  await page.clock.pauseAt(new Date(await page.evaluate(() => Date.now() + 1_000)));
+  async function emitFix(longitude: number, nativeSpeed: number, elapsed = 2_050, watch?: number) {
+    await page.clock.fastForward(elapsed);
+    await page.evaluate(({ longitude, nativeSpeed, watch }) => window.progressionControl.fix(longitude, watch, nativeSpeed),
+      { longitude, nativeSpeed, watch });
+  }
+  // Keep the original stop approach points and cadence, with intermediate fixes
+  // to meet the shorter speed and road evidence windows.
+  const [firstPoint, secondPoint, ...approach] = [18, 18.0015, 18.0030, 18.0051, 18.0072, 18.008];
+  await emitFix(firstPoint, 15, 4_100);
+  await emitFix((firstPoint + secondPoint) / 2, 15);
+  await emitFix(secondPoint, 15);
   const beginSpeed = page.getByRole('button', { name: 'Start fartsmåling', exact: true });
+  await expect(beginSpeed).toBeEnabled();
+  await expect(roadStart).toBeEnabled();
+  await expect(signs).toHaveCount(0);
+  await expect(speed).toHaveText('— km/t');
+  expect(await controls()).toEqual([1, 1]);
   await beginSpeed.click();
   await expect(beginSpeed).toHaveCount(0);
+  await roadStart.click();
+  await expect(roadStop).toBeEnabled();
   await expect.poll(controls).toEqual([1, 1]);
-  for (const longitude of [18, 18.0015, 18.0030, 18.0051, 18.0072, 18.008]) {
-    await page.clock.fastForward(4_100);
-    await page.evaluate(value => (window as any).progressionControl.fix(value), longitude);
+  let previous = secondPoint;
+  for (const longitude of approach) {
+    await emitFix((previous + longitude) / 2, 15);
+    await emitFix(longitude, 15);
+    previous = longitude;
   }
   await expect(panel.getByText('Veiledende holdepunkt')).toBeVisible();
   await expect(panel).toContainText('3. Synthetic 3');
   await expect.poll(() => writes.length).toBe(3);
   expect(writes[2]).toMatchObject({ occurrence_id: 'A-o3', origin: 'gps' });
   await expect(panel).toContainText('Holdepunktet er lagret.');
+  await expect(speed).toHaveText('54 km/t');
+  await expect(currentLimit.getByRole('img', { name: '50 km/t' })).toBeVisible();
+  await expect(nextLimit.getByRole('img', { name: '30 km/t' })).toBeVisible();
+  await expect(nextLimit).toContainText('ca. 140 m');
+  expect(await controls()).toEqual([1, 1]);
+
+  await roadStop.click();
+  await expect(signs).toHaveCount(0);
+  for (const longitude of [18.009, 18.010, 18.011, 18.0125, 18.014, 18.0152, 18.016]) {
+    await emitFix(longitude, 12.5);
+  }
+  await expect.poll(() => writes.length).toBe(4);
+  expect(writes[3]).toMatchObject({ occurrence_id: 'A-o4', origin: 'gps' });
+  await expect(panel).toContainText('4. Synthetic 4');
+  await expect(panel).toContainText('Holdepunktet er lagret.');
+  await expect(speed).toHaveText('45 km/t');
+  await expect(signs).toHaveCount(0);
+  expect(await controls()).toEqual([1, 1]);
+
   await page.clock.fastForward(10_020);
   await expect.poll(controls).toEqual([0, 1]);
+  await expect(speed).toHaveText('— km/t');
   await expect(panel.getByText('Tidligere holdepunkt', { exact: true })).toBeVisible();
-  await page.evaluate(() => (window as any).progressionControl.fix(18.030, 0));
+  await page.evaluate(() => window.progressionControl.fix(18.030, 0));
   await expect(panel.getByRole('button', { name: 'Gjenoppta holdeplassassistanse' })).toBeDisabled();
   await options.selectOption('A-o6');
   await panel.getByRole('button', { name: 'Gjenoppta holdeplassassistanse' }).click();
   await expect.poll(controls).toEqual([1, 2]);
-  await expect.poll(() => writes.map(value => value.occurrence_id)).toEqual(['A-o2', 'A-o2', 'A-o3', 'A-o6']);
+  await expect.poll(() => writes.map(value => value.occurrence_id)).toEqual(['A-o2', 'A-o2', 'A-o3', 'A-o4', 'A-o6']);
+  await expect(roadStart).toBeEnabled();
+  await expect(speed).toHaveText('— km/t');
+  const resumeSpeed = page.getByRole('button', { name: 'Gjenoppta fartsmåling', exact: true });
+  await resumeSpeed.click();
+  await expect(resumeSpeed).toHaveCount(0);
+  await emitFix(18.030, 15, 2_050, 0);
+  await emitFix(18.0304, 15, 2_050, 0);
+  await expect(speed).toHaveText('— km/t');
+  expect(writes).toHaveLength(5);
+  await emitFix(18.030, 10);
+  await emitFix(18.0304, 10);
+  await expect(speed).toHaveText('36 km/t');
   await panel.getByRole('button', { name: 'Slå av holdeplassassistanse' }).click();
   await expect.poll(controls).toEqual([0, 2]);
   await expect(panel.getByText('Veiledende holdepunkt')).toHaveCount(0);
-  expect(released.some(value => value.includes('69.012345') || value.includes('"latitude"'))).toBe(false);
-  expect(await page.evaluate(() => JSON.stringify({ ...sessionStorage, ...localStorage }))).not.toContain('69.012345');
+  await expect(speed).toHaveText('— km/t');
+  const rawCoordinates = ['69.012345', '18.0152'];
+  expect(released.some(value => rawCoordinates.some(coordinate => value.includes(coordinate)) || /"(?:latitude|longitude)"/.test(value))).toBe(false);
+  const browserStorage = await page.evaluate(() => JSON.stringify({ ...sessionStorage, ...localStorage }));
+  for (const coordinate of rawCoordinates) expect(browserStorage).not.toContain(coordinate);
 });
 
 test('the official v2 mapping saves an explicit manual stop without starting geolocation', async ({ page, context }) => {
