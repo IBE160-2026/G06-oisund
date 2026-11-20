@@ -23,16 +23,16 @@ Resultatet er rapportert av laptopøkten, med JSON- og skjermbildebevis i hver e
 
 ## Køtest fra prosjektchatten
 
-Fra IBE160-prosjektchatten på hjemmemaskinen kan den faste lesetesten bestilles via `http://127.0.0.1:4185/jobs`. Den avgrensede arbeideren på laptopen kjører uavhengig av laptopchatten, henter køjobber på den private arbeiderporten 4186 og bruker de to godkjente USB-enhetene. Innsending på 4185 er lokal på hjemmemaskinen. Køen godtar bare den faste `read-only-smoke`-testen for IBE160 og TIDE. Jobbene behandles sekvensielt.
+Fra IBE160-prosjektchatten på hjemmemaskinen kan `read-only-smoke` og `pdf-source-facts` bestilles via `http://127.0.0.1:4185/jobs`. Den avgrensede arbeideren på laptopen kjører uavhengig av laptopchatten, henter køjobber på den private arbeiderporten 4186 og bruker de to godkjente USB-enhetene. Innsending på 4185 er lokal på hjemmemaskinen. Jobbene behandles sekvensielt.
 
-Kontroller aktivt bygg før innsending. Testen leser synlig IBE160-test-UI i Brave på begge enhetene. Den logger ikke inn og lagrer ingen appdata. Godkjenningen gjelder de to godkjente enhetene og isolerte testmiljøer. Ved behov for andre testtyper må de holdes utenfor den faste køen. Bruk syntetiske data og hold legitimasjon utenfor meldinger og bevis.
+Kontroller aktivt bygg før innsending. `read-only-smoke` leser synlig IBE160-UI i Brave på begge enhetene uten innlogging. `pdf-source-facts` bruker eksisterende godkjente syntetiske kontoer og de lagrede PDF-utkastene i versjon 2. Den kontrollerer kildefaktapanelet, lukker det og gjenåpner utkastet med uendret versjon og Buss/vogn. Ingen av prøvene endrer appdata. Godkjenningen gjelder de to godkjente enhetene og isolerte testmiljøer. Bruk syntetiske data og hold legitimasjon utenfor bestillinger og bevis.
 
 Kjør én gang på hjemmemaskinen. Responsen skal ha HTTP 202 og en jobb-ID.
 
 ```powershell
 $queue = 'http://127.0.0.1:4185/jobs'
 $receipt = Invoke-WebRequest -Method Post -Uri $queue -ContentType 'application/json' `
-  -Body '{"project":"IBE160","test":"read-only-smoke"}'
+  -Body '{"project":"IBE160","test":"pdf-source-facts"}'
 if ($receipt.StatusCode -ne 202) { throw "Uventet svar $($receipt.StatusCode)" }
 $id = ($receipt.Content | ConvertFrom-Json).id
 $id
@@ -48,6 +48,12 @@ $job | ConvertTo-Json -Depth 5
 Sjekk at ID-en stemmer, at `state` er `completed` og at både `Lenovo` og `Pixel` har `passed: true`. Status `queued` eller `running` er fortsatt pågående. Status `expired` eller `passed: false` betyr at prøven ikke er bestått.
 
 Den 20. november 2026 ga IBE160-innsendingen HTTP 202 for jobb `6b0948b9-bef2-4832-8174-04ce03b5e2c0`. Køen gikk fra `queued` via `running` til `completed`, med `passed: true` for begge enheter. Laptopens lokale bevis for samme ID bekreftet HTML-sidetittelen **Fiktiv arbeidsdag** på begge enhetene. Arbeideren krevde også riktig URL med unik jobb-ID og synlig «Privat tilgang» eller «Privat arbeidsrom». Køkvitteringen inneholder bare beståttstatus per enhet.
+
+Den 20. november 2026 ga første `pdf-source-facts`-bestilling HTTP 202 for jobb `5460fcfe-e702-4681-9824-53f2d078c3b9`. Jobben gikk fra `queued` via `running` til `completed`, med `passed: false` på både Lenovo og Pixel. IBE160s UI og private helseendepunkt svarte HTTP 200 etter prøven. En lesende kontroll i den isolerte testdatabasen fant begge forventede utkastene med samme Buss/vogn-markører, gyldig utløpstid, PDF-kildefakta og revisjon 2.
+
+Laptopøkten fant at arbeideren fortsatte etter at overskriften var synlig, mens utkastknappene fortsatt ble lastet. Arbeideren ble endret til å vente på den aktive **Åpne 2030-01-01 · versjon 2**-knappen før den fortsetter. Første jobb står som **ikke bestått** i køhistorikken.
+
+Den ene koordinerte erstatningsjobben `f306874a-b3e2-40ee-8e17-7b31b0d0932c` fikk HTTP 202 og endte som `completed` med **`passed: true` på både Lenovo og Pixel**. Begge sluttkvitteringene ble lest tilbake fra køhistorikken. En ny lesende databasekontroll fant begge utkastene med uendrede Buss/vogn-markører, gyldig utløpstid, PDF-kildefakta og revisjon 2.
 
 ## Kommandoer på laptopen
 

@@ -14,7 +14,7 @@ The integrated regression checkpoint is complete. The road panel explains positi
 
 ## Local start
 
-The isolated physical Android test stack uses the same loopback ports as Owner mode. Check which stack owns the ports before starting Owner mode. Submit the fixed Android smoke test through the local queue. [Android test handoff for Lenovo and Pixel](v2-android-test-handoff.md#køtest-fra-prosjektchatten).
+The isolated physical Android test stack uses the same loopback ports as Owner mode. Check which stack owns the ports before starting Owner mode. The local queue accepts the fixed Android smoke and PDF source-facts tests. [Android test handoff for Lenovo and Pixel](v2-android-test-handoff.md#køtest-fra-prosjektchatten).
 
 From this worktree in PowerShell 7, with Docker Desktop running.
 
