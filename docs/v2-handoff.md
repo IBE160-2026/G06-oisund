@@ -106,6 +106,8 @@ The local NVDB collection command replayed retained pages and reproduced the sam
 
 The offline corridor audit reconstructed all 15 declared spans from the research archive. It records direct general speed coverage for 132 of 145 segment occurrences and identifies all 13 intervals requiring separate parent or lane evidence. [Offline corridor verification](evidence/v2-road-source-20261120.md#offline-corridor-reconstruction).
 
+A separate offline check corroborated 11 general and one explicit field-1 parent placement across those 13 intervals. The last interval is a 5.058 m R1 connector. Its empty field codes match the NVDB connector convention. Confirm the applicable limit through that entrance using signing or the relevant decision. R4 remains a separate field gate. [Parent links and R1 connector](evidence/v2-road-source-20261120.md#parent-links-and-the-r1-connector).
+
 ## Owner trial order
 
 1. On the PC, use the disposable account to change its password, verify the other signed-in tab loses access, and try recovery with one hand-delivered local proof. A second terminal can issue the proof with `docker compose -p ibe160-v2-owner -f compose.v2.yaml exec private-api python -m app.manage recovery-issue v2-owner-trial`. Complete `SENDT` only after handover and use the normal login form after redemption. Keep production credentials and proofs out of the sandbox.
