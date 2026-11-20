@@ -110,6 +110,20 @@ test('typed rejection clears secrets and cancel returns focus', async ({page}) =
   await expect(page.getByRole('button',{name:'Brukerinnstillinger',exact:true})).toBeFocused();
 });
 
+test('unchanged password is rejected on the new password field without logout', async ({page}) => {
+  await login(page); await open(page); await fill(page);
+  const next = page.getByLabel('Nytt passord', {exact:true});
+  await next.fill(oldPassword);
+  await page.getByLabel('Gjenta nytt passord', {exact:true}).fill(oldPassword);
+  await submit(page);
+  await expect(page.getByText('Nytt passord må være forskjellig fra gjeldende passord.', {exact:true})).toBeVisible();
+  await expect(next).toBeFocused();
+  await expect(next).toHaveAttribute('aria-invalid', 'true');
+  await expect(next).toHaveValue('');
+  await expect(page.getByRole('heading', {name:'Privat arbeidsrom', exact:true})).toBeVisible();
+  expect(await page.evaluate(() => sessionStorage.length)).toBe(0);
+});
+
 test('code-point limits preserve non-BMP credentials and whitespace through login and verification', async ({page}) => {
   await login(page); await open(page); await fill(page);
   const next = ' ' + '😀'.repeat(254) + ' ';
@@ -159,11 +173,54 @@ for (const lost of [false, true]) test(`hide/show retains dispatched outcome aft
   });
   await expect(page.getByLabel('Tilgangsstatus')).toContainText('Resultatet av passordendringen er ukjent.');
   release();
-  await expect(page.getByRole('button', {name:'Prøv utlogging igjen'})).toBeEnabled();
-  await page.getByRole('button', {name:'Prøv utlogging igjen'}).click();
+  if (lost) {
+    await expect(page.getByRole('button', {name:'Prøv utlogging igjen'})).toBeEnabled();
+    await page.getByRole('button', {name:'Prøv utlogging igjen'}).click();
+    await expect(page.getByLabel('Tilgangsstatus')).toContainText('Resultatet av passordendringen var ikke bekreftet.');
+  } else {
+    await expect(page.getByLabel('Tilgangsstatus')).toContainText('Passordet er endret.');
+    await expect(page.getByRole('button', {name:'Prøv utlogging igjen'})).toHaveCount(0);
+  }
   await expect(page.getByLabel('Brukernavn', {exact:true})).toBeEnabled();
   await login(page, newPassword);
   expect(count).toBe(1);
+});
+
+test('reload before a committed password reply requires explicit logout without replay', async ({page}) => {
+  await login(page);
+  await page.evaluate(() => sessionStorage.setItem('private_password_dispatch', String(Date.now() - 1000)));
+  await page.reload();
+  await open(page);
+  expect(await page.evaluate(() => sessionStorage.length)).toBe(0);
+  let release!: () => void, committed!: () => void, count = 0;
+  const gate = new Promise<void>(r => { release = r; });
+  const entered = new Promise<void>(r => { committed = r; });
+  await page.route('**/auth/password/change', async route => {
+    count++;
+    const response = await route.fetch();
+    expect(await response.json()).toEqual({changed:true});
+    committed();
+    await gate;
+    await route.fulfill({response}).catch(() => {}); // Reload destroys the requesting document.
+  });
+  try {
+    await fill(page); await submit(page); await entered;
+    const dispatch = await page.evaluate(() => ({
+      lifetime: Number(sessionStorage.getItem('private_password_dispatch')) - Date.now(),
+      logoutPending: document.cookie.includes('private_logout_pending=1'),
+    }));
+    expect(dispatch.lifetime).toBeGreaterThan(0);
+    expect(dispatch.lifetime).toBeLessThanOrEqual(60_000);
+    expect(dispatch.logoutPending).toBe(false);
+    await page.reload();
+    await expect(page.getByLabel('Tilgangsstatus')).toContainText('Resultatet av passordendringen er ukjent.');
+    await expect(page.getByLabel('Brukernavn', {exact:true})).toHaveCount(0);
+    release();
+    await page.getByRole('button', {name:'Prøv utlogging igjen'}).click();
+    await loginRendered(page, newPassword);
+    expect(count).toBe(1);
+    expect(await page.evaluate(() => sessionStorage.length)).toBe(0);
+  } finally { release(); }
 });
 
 test('PDF processing and unsaved review block settings until explicit cancellation or adoption', async ({page}) => {

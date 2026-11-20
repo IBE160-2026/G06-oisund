@@ -42,7 +42,7 @@ class Terminal:
     def read(self, prompt):
         self.write(prompt)
         result = bytearray()
-        while len(result) <= 400:
+        while len(result) <= 1000:
             char = os.read(self.fd, 1)
             if char in (b'', b'\x04'):
                 raise recovery.RecoveryError('Avbrutt.')
@@ -71,6 +71,15 @@ class Terminal:
                 os.close(self.fd)
 
 
+def confirmation_name(username):
+    # Keep the display and its exact confirmation safe and unambiguous.
+    return ''.join(r'\\' if c == '\\' else c if c.isprintable() else ascii(c)[1:-1] for c in username)
+
+
+class DialogueTimeout(recovery.RecoveryError):
+    pass
+
+
 def run(action, username):
     target = None
     attempted = False
@@ -80,7 +89,7 @@ def run(action, username):
         signal.setitimer(signal.ITIMER_REAL, 0)
         raise KeyboardInterrupt()
     def timeout(*_):
-        raise recovery.RecoveryError('Tidsfristen er utløpt. Start på nytt og bekreft kontoen igjen.')
+        raise DialogueTimeout('Tidsfristen er utløpt. Start på nytt og bekreft kontoen igjen.')
     previous = {sig: signal.signal(sig, interrupted) for sig in (signal.SIGINT, signal.SIGTERM, signal.SIGHUP, signal.SIGTSTP)}
     previous[signal.SIGALRM] = signal.signal(signal.SIGALRM, timeout)
     deadline = time.monotonic() + DIALOGUE_SECONDS
@@ -88,8 +97,9 @@ def run(action, username):
     try:
         with Terminal() as terminal:
             target = recovery.resolve(username)
-            terminal.write(f"Konto: {target['username']}\nUUID: {target['id']}\nVertskontekst: {recovery.host_actor()} (ikke bekreftet SSH-person)\n")
-            if terminal.read('Skriv hele brukernavnet for å bekrefte (tomt avbryter): ') != target['username']:
+            name = confirmation_name(target['username'])
+            terminal.write(f"Konto: {name}\nUUID: {target['id']}\nVertskontekst: {recovery.host_actor()} (ikke bekreftet SSH-person)\n")
+            if terminal.read('Skriv hele brukernavnet slik det vises for å bekrefte (tomt avbryter): ') != name:
                 raise recovery.RecoveryError('Bekreftelsen stemmer ikke. Avbrutt.')
             if action == 'recovery-revoke':
                 revoke_attempted = True
@@ -102,6 +112,8 @@ def run(action, username):
             attempted = True
             try:
                 code, proof = recovery.issue(target, proof_id)
+            except DialogueTimeout:
+                raise  # Issue may have committed before the timer interrupted its result.
             except recovery.RecoveryError:
                 attempted = False  # Known rejection; prior valid proof stays unchanged.
                 raise

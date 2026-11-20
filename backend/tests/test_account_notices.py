@@ -192,6 +192,11 @@ def test_populated_additive_migration_unknown_grace_provenance_and_immutable_rec
             token='synthetic-migration-'+uuid4().hex
             conn.execute('INSERT INTO sessions(token_hash,owner) VALUES(%s,%s)',(auth.digest(token),owner))
             conn.execute('DELETE FROM workdays WHERE id=%s',(plan,))
+            # The historical assertions above exercise 013/014 alone. Run
+            # today's cleanup and HTTP code against today's migrated schema.
+            for path in sorted(migrations.glob('*.sql')):
+                if path.name >= '015':
+                    conn.execute(path.read_text())
         @contextmanager
         def isolated():
             with real_database() as conn:

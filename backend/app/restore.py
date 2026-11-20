@@ -15,6 +15,12 @@ from .auth import account_lock
 from .private_storage import database
 
 
+EMPTY_V2_BUSINESS = {
+    'automatic_notice_reviews', 'automatic_notice_review_operations', 'draft_route_decisions',
+    'workday_route_references', 'workday_position_anchors', 'workday_position_anchor_operations',
+}
+
+
 def bounded(conn):
     conn.execute("SET LOCAL lock_timeout = '5s'")
     conn.execute("SET LOCAL statement_timeout = '120s'")
@@ -25,21 +31,27 @@ def inspect(conn):
     paths = sorted((Path(__file__).resolve().parent.parent / 'migrations/private').glob('*.sql'))
     names = [p.name for p in paths]
     installed = [r['name'] for r in conn.execute('SELECT name FROM private_migrations ORDER BY name')]
-    if installed not in (names, names[:-1]) or names[-1] != '015_password_recovery.sql':
+    if (names[13:15] != ['014_notice_creation_admissions.sql', '015_password_recovery.sql']
+            or len(installed) < 14 or installed != names[:len(installed)]):
         raise ValueError('Unsupported restore schema')
     expected = {'private_migrations'}
     for path in paths[:len(installed)]:
-        expected.update(re.findall(r'CREATE TABLE\s+(\w+)', path.read_text(), re.I))
+        expected.update(re.findall(r'CREATE TABLE\s+(\w+)', path.read_text(encoding='utf-8'), re.I))
     actual = {r['tablename'] for r in conn.execute("SELECT tablename FROM pg_tables WHERE schemaname='public'")}
     if actual != expected:
         raise ValueError('Unsupported restore tables')
     # Canonical per-row SHA256, streamed in stable order. Passwords, sessions,
     # proofs, rate history and audit are intentionally outside business equality.
     excluded = {'private_migrations', 'sessions', 'security_settings', 'login_limits',
-                'recovery_proofs', 'recovery_audit'}
+                'recovery_proofs', 'recovery_audit', 'automatic_notice_feed', 'automatic_notice_sources'}
     result = {}
     for table in sorted(actual - excluded):
         expression = sql.SQL("to_jsonb(t) - 'password_hash'") if table == 'accounts' else sql.SQL('to_jsonb(t)')
+        if table == 'workday_operations' and '017_route_reference.sql' in installed:
+            # Legacy operations and their migrated NULL route revision represent the same operation.
+            expression = sql.SQL("CASE WHEN t.route_revision IS NULL THEN to_jsonb(t) - 'route_revision' ELSE to_jsonb(t) END")
+        if table == 'workday_position_anchors' and '019_position_anchor_carried_from.sql' in installed:
+            expression = sql.SQL("CASE WHEN t.carried_from IS NULL THEN to_jsonb(t) - 'carried_from' ELSE to_jsonb(t) END")
         query = sql.SQL('SELECT ({expr})::text AS row FROM {table} t ORDER BY ({expr})::text').format(
             expr=expression, table=sql.Identifier(table))
         digest, count = hashlib.sha256(), 0
@@ -50,7 +62,8 @@ def inspect(conn):
                 digest.update(len(data).to_bytes(8, 'big'))
                 digest.update(data)
                 count += 1
-        result[table] = {'rows': count, 'sha256': digest.hexdigest()}
+        if count or table not in EMPTY_V2_BUSINESS:
+            result[table] = {'rows': count, 'sha256': digest.hexdigest()}
     return {'schema': len(installed), 'business': result}
 
 

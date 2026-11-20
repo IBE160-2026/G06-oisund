@@ -8,7 +8,7 @@ import httpx
 import pytest
 from fastapi import HTTPException
 
-from app import auth
+from app import auth, password_recovery as recovery
 from app.private_storage import database, cleanup
 from test_private_access import users, client, synthetic_only, headers, login, URL, pytestmark
 
@@ -96,6 +96,21 @@ def test_change_revokes_all_sessions_keeps_identity_and_data(client, users):
                 assert old['password_hash'] != new['password_hash'] and NEW not in new['password_hash']
             else:
                 assert old == new
+
+
+def test_unchanged_password_is_rejected_after_current_verification(client, users):
+    assert login(client, users).status_code == 200
+    session = client.get('/auth/session').json()
+    _, proof = recovery.issue(recovery.resolve(users[0][0]))
+    wrong = 'synthetic-wrong-password'
+    assert change(client, users, current_password=wrong, new_password=wrong,
+                  confirmation=wrong).json()['detail']['code'] == 'current_password'
+    result = change(client, users, new_password=users[2], confirmation=users[2])
+    assert result.status_code == 400 and result.json()['detail']['code'] == 'new_password'
+    assert client.get('/auth/session').json() == session
+    with database() as conn:
+        assert conn.execute('SELECT state FROM recovery_proofs WHERE id=%s', (proof['id'],)).fetchone() == {'state': 'active'}
+    assert login(client, users).status_code == 200
 
 
 def test_validation_boundaries_do_not_mutate(client, users):

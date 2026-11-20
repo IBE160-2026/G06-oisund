@@ -13,6 +13,19 @@ const API = configuredApi ?? apiEnvironment.VITE_PRIVATE_API ?? 'http://127.0.0.
 // Only a logout lock, never an account, credential or private presentation. A cookie
 // survives reload and is shared across tabs, unlike private browser data stores.
 const PENDING = 'private_logout_pending';
+// A tab-local deadline closes the reload gap between sending a password POST and receiving its reply.
+const PASSWORD_DISPATCH = 'private_password_dispatch';
+function clearPasswordDispatch() {
+  try { sessionStorage.removeItem(PASSWORD_DISPATCH); } catch { /* The marker expires on its own. */ }
+}
+function hasPasswordDispatch() {
+  try {
+    const deadline = Number(sessionStorage.getItem(PASSWORD_DISPATCH));
+    if (deadline > Date.now()) return true;
+    clearPasswordDispatch();
+  } catch { /* Dispatch requires storage, but ordinary access does not. */ }
+  return false;
+}
 const pending = () => document.cookie.split(';').some(c => c.trim() === PENDING + '=1');
 function markPending(value: boolean) {
   document.cookie = `${PENDING}=${value ? '1' : ''}; Path=/; SameSite=Strict; Max-Age=${value ? 14 * 86400 : 0}${location.protocol === 'https:' ? '; Secure' : ''}`;
@@ -59,7 +72,7 @@ export function PrivateAccess() {
   function suspend(value: boolean) { accessSuspended.current = value; setSuspended(value); }
   function acceptSession(value: Session) { activeSession.current = value; setSession(previous => sameSession(previous, value) ? previous : value); }
 
-  async function workspace(expected: Session, action: (check: () => void) => Promise<any>, signal?: AbortSignal, readOnly = false) {
+  async function workspace(expected: Session, action: (check: () => void) => Promise<any>, signal?: AbortSignal, readOnly = false, credentialDispatched?: () => boolean) {
     const epoch = generation.current;
     const check = () => {
       if (epoch !== generation.current || !sameSession(activeSession.current, expected) || pending() || accessSuspended.current || signal?.aborted) throw Error('Tilgangen må kontrolleres på nytt.');
@@ -105,10 +118,12 @@ export function PrivateAccess() {
       return await locked(async () => {
         await validate();
         const value = await action(check);
-        check();
+        // A submitted credential mutation can outlive the presentation that initiated it.
+        if (!credentialDispatched?.()) check();
         return value;
       });
     } catch (error: any) {
+      if (credentialDispatched?.()) throw error;
       // A late 401 must not reach an older child's expiry callback after a
       // hide/show cycle has already restored this same session successfully.
       if (epoch !== generation.current || !sameSession(activeSession.current, expected)) throw Error('Forespørselen er ikke lenger aktuell.');
@@ -155,6 +170,7 @@ export function PrivateAccess() {
   }
   async function mutation(path: string, body?: object, expected?: Session, dispatched?: () => void) {
     if (!navigator.locks) throw new Error('Nettleseren støtter ikke sikker innlogging.');
+    let sent = false;
     const send = async (check: () => void = () => {}) => {
       if (path !== '/auth/logout' && pending()) throw new Error('Fullfør utlogging først.');
       const proof = await request('/auth/csrf');
@@ -162,11 +178,12 @@ export function PrivateAccess() {
       if (typeof proof.csrf_token !== 'string') throw new Error('Tilgangen kunne ikke bekreftes.');
       if (path !== '/auth/logout' && pending()) throw new Error('Fullfør utlogging først.');
       dispatched?.();
+      sent = true;
       const result = await request(path, { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-CSRF-Token': proof.csrf_token }, body: JSON.stringify(body ?? {}) });
       if (path === '/auth/login' && validSession(result)) channel.current?.postMessage('session-changed');
       return result;
     };
-    return expected ? workspace(expected, send) : navigator.locks.request('private-auth-mutations', () => send());
+    return expected ? workspace(expected, send, undefined, false, dispatched && (() => sent)) : navigator.locks.request('private-auth-mutations', () => send());
   }
   function clear(text: string) {
     generation.current++; recoveryScreen(false); setSettings(false); activeSession.current = null; setSession(null); setPassword(''); setUsername(''); setMessage(text);
@@ -198,13 +215,26 @@ export function PrivateAccess() {
     setSettings(false); setMessage('Du er logget inn.');
     requestAnimationFrame(() => settingsButton.current?.focus());
   }
+  function beginPasswordDispatch() {
+    sessionStorage.setItem(PASSWORD_DISPATCH, String(Date.now() + 60_000));
+    passwordOutcome.current = 'pending';
+  }
+  async function rejectPasswordDispatch(current: number) {
+    passwordOutcome.current = null;
+    clearPasswordDispatch();
+    if (current !== generation.current && !pending() && !lockKnown.current) {
+      setLocked(false);
+      if (document.visibilityState === 'visible') await restore();
+    }
+  }
   async function changePassword(fields: PasswordFields) {
     if (!session || settingsBlocked.current || passwordBusy) throw Error('Avklar pågående arbeid først.');
     const current = generation.current;
     setPasswordBusy(true);
     try {
-      const result = await mutation('/auth/password/change', fields, session, () => { passwordOutcome.current = 'pending'; });
+      const result = await mutation('/auth/password/change', fields, session, beginPasswordDispatch);
       if (result?.changed !== true || Object.keys(result).join() !== 'changed') throw Error();
+      clearPasswordDispatch();
       passwordOutcome.current = 'changed'; presentPasswordOutcome();
       channel.current?.postMessage('session-changed'); setFocusLogin(true);
     } catch (error: any) {
@@ -216,12 +246,13 @@ export function PrivateAccess() {
         setMessage(text);
         throw Error(text);
       }
-      if (current === generation.current && error?.status === 400 && error.apiDetail?.code === 'current_password') {
-        passwordOutcome.current = null;
-        throw Object.assign(Error('Gjeldende passord er feil.'), { field: 'current_password' });
+      const field = error?.apiDetail?.code;
+      if (error?.status === 400 && (field === 'current_password' || field === 'new_password')) {
+        await rejectPasswordDispatch(current);
+        throw Object.assign(Error(field === 'current_password' ? 'Gjeldende passord er feil.' : 'Nytt passord må være forskjellig fra gjeldende passord.'), { field });
       }
-      if (current === generation.current && [403, 422, 429].includes(error?.status) && error.apiDetail) {
-        passwordOutcome.current = null;
+      if ([403, 422, 429].includes(error?.status) && error.apiDetail) {
+        await rejectPasswordDispatch(current);
         throw Error(error.status === 429 ? error.message : 'Kontroller feltene og prøv igjen.');
       }
       // A lost/malformed reply may follow a commit. Never retry credentials.
@@ -236,9 +267,10 @@ export function PrivateAccess() {
     try {
       const result = await mutation('/auth/password/recover', fields, undefined, () => {
         if (current !== generation.current || activeSession.current || accessSuspended.current) throw Error();
-        passwordOutcome.current = 'pending';
+        beginPasswordDispatch();
       });
       if (result?.changed !== true || Object.keys(result).join() !== 'changed') throw Error();
+      clearPasswordDispatch();
       passwordOutcome.current = 'changed'; presentPasswordOutcome();
       channel.current?.postMessage('session-changed'); setFocusLogin(true);
     } catch (error: any) {
@@ -246,12 +278,12 @@ export function PrivateAccess() {
         if (current !== generation.current) return;
         throw Error('Forespørselen ble ikke sendt. Feltene er tømt. Kontroller tilgang og prøv igjen.');
       }
-      if (current === generation.current && error?.status === 400 && error.apiDetail === 'Koden kunne ikke brukes. Kontroller opplysningene eller kontakt operatøren.') {
-        passwordOutcome.current = null;
+      if (error?.status === 400 && error.apiDetail === 'Koden kunne ikke brukes. Kontroller opplysningene eller kontakt operatøren.') {
+        await rejectPasswordDispatch(current);
         throw Object.assign(Error('Koden kunne ikke brukes. Kontroller opplysningene eller kontakt operatøren. Hvis et tidligere resultat var usikkert, prøv innlogging med det nye passordet først.'), { field: 'code' });
       }
-      if (current === generation.current && [403, 409, 422, 429].includes(error?.status) && typeof error.apiDetail === 'string') {
-        passwordOutcome.current = null;
+      if ([403, 409, 422, 429].includes(error?.status) && typeof error.apiDetail === 'string') {
+        await rejectPasswordDispatch(current);
         if (error.status === 409) { recoveryScreen(false); await restore(); return; }
         throw Error(error.status === 429 ? error.message : 'Kontroller feltene og prøv igjen.');
       }
@@ -261,9 +293,13 @@ export function PrivateAccess() {
   }
   function presentPasswordOutcome() {
     const changed = passwordOutcome.current === 'changed';
-    if (!changed) { lockKnown.current = true; markPending(true); setLocked(true); }
+    if (passwordOutcome.current === 'unknown') {
+      lockKnown.current = true;
+      markPending(true);
+      clearPasswordDispatch();
+    }
     const finishLogout = pending() || lockKnown.current;
-    if (finishLogout) setLocked(true);
+    setLocked(!changed || finishLogout);
     clear(changed ? (finishLogout ? 'Passordet er endret. Fullfør utlogging med «Prøv utlogging igjen», og logg deretter inn med det nye passordet.' : 'Passordet er endret. Alle enheter er logget ut. Logg inn med det nye passordet.') : 'Resultatet av passordendringen er ukjent. Passordene er fjernet. Fullfør utlogging, og prøv deretter å logge inn med det nye passordet. Kontakt operatøren for ny kode ved behov; ikke send koden på nytt automatisk.');
     suspend(false); setBusy(false);
   }
@@ -275,6 +311,12 @@ export function PrivateAccess() {
   }
   async function restoreSession() {
     if (passwordOutcome.current) { presentPasswordOutcome(); return; }
+    if (hasPasswordDispatch()) {
+      passwordOutcome.current = 'unknown';
+      presentPasswordOutcome();
+      channel.current?.postMessage('logout-pending');
+      return;
+    }
     if (pending()) { await logout(); return; }
     const current = ++generation.current;
     setBusy(true);

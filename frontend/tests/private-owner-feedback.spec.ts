@@ -64,6 +64,9 @@ test('activity pending Start and failed lookup keep one original operation and r
   await page.route('**:8001' + path, async route => { original = route.request().postDataJSON(); posts++; await route.fetch(); await route.fulfill({ status: 200, contentType: 'text/html', body: '<html>lost</html>' }); });
   await button(page, 'Start skift').click(); await button(page, 'Bekreft skiftstart').click();
   const check = button(page, 'Kontroller skiftstarten'); await expect(check).toBeEnabled();
+  await button(page, 'Brukerinnstillinger').click();
+  await expect(page.getByLabel('Tilgangsstatus')).toContainText('avklar pågående handlinger');
+  await expect(page.getByRole('heading', { name: 'Endre passord', exact: true })).toHaveCount(0);
   await expect(button(page, 'Avslutt skift')).toBeDisabled(); await expect(button(page, 'Lagre aktivitetsstatus')).toBeDisabled();
   await expect(button(page, 'Neste aktivitet')).toBeDisabled(); await expect.poll(() => beforeUnload(page)).toBe(true);
   await page.route('**:8001/workday-start-operations/*', route => route.fulfill({ status: 503, json: { detail: 'Synthetic unavailable lookup' } }));
@@ -78,6 +81,8 @@ test('activity pending Start and failed lookup keep one original operation and r
   expect((await (await context.request.get(API + '/workday-start-operations/' + original.operation_id)).json()).operation_id).toBe(original.operation_id);
   await activityScreen(page); await expect(selected(page)).toHaveAttribute('data-selected-activity-id', activities[0].id);
   const saved = await current(context, plan.id); expect(saved.outcomes.revision).toBe(0); expect(saved.lifecycle.revision).toBe(1);
+  await button(page, 'Brukerinnstillinger').click();
+  await expect(page.getByRole('heading', { name: 'Endre passord', exact: true })).toBeFocused();
 });
 
 test('day bus proposal and unavailable authority cannot be bypassed by activity shift actions', async ({ page, context }) => {

@@ -41,9 +41,15 @@ def host_actor():
     return 'os-context:uid=' + str(os.getuid())
 
 
+def valid_name(name):
+    # Provisioning allowed format characters. Reject only names PostgreSQL cannot store.
+    return 1 <= len(name) <= 100 and not any(c == '\0' or '\ud800' <= c <= '\udfff' for c in name)
+
+
 def resolve(username):
     name = username.strip().casefold()
-    if not 1 <= len(name) <= 100 or any(unicodedata.category(c).startswith('C') for c in username):
+    trimmed = username[:len(username) - len(username.lstrip())] + username[len(username.rstrip()):]
+    if not valid_name(name) or any(unicodedata.category(char).startswith('C') for char in trimmed):
         raise RecoveryError('Brukernavnet kan ikke bekreftes trygt.')
     with database() as conn:
         row = conn.execute('SELECT id,username FROM accounts WHERE username=%s', (name,)).fetchone()
@@ -179,7 +185,7 @@ def redeem(request, username, code, new_password, confirmation):
     name = username.strip().casefold()
     admission(name, request.client.host)
     with database() as conn:
-        account = conn.execute('SELECT id FROM accounts WHERE username=%s', (name,)).fetchone() if not any(unicodedata.category(c).startswith('C') for c in name) else None
+        account = conn.execute('SELECT id FROM accounts WHERE username=%s', (name,)).fetchone() if valid_name(name) else None
         if account:
             auth.account_lock(conn, account['id'])
         proof = conn.execute("SELECT id,digest,expires_at FROM recovery_proofs WHERE owner=%s AND purpose='password-recovery' AND state='active'", (account['id'],)).fetchone() if account else None

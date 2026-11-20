@@ -11,7 +11,6 @@ import sys
 import tarfile
 import tempfile
 import time
-import unicodedata
 import stat
 import uuid
 
@@ -22,6 +21,18 @@ UPLOADS = Path('/home/jonas/ibe160-upload')
 BACKUPS = Path('/var/backups/bussassistent')
 MAINTENANCE = Path('/etc/bussassistent/maintenance')
 SHA = re.compile(r'[a-f0-9]{40}')
+RESTORE_OPERATION = re.compile(r'[a-f0-9]{32}')
+RESTORE_SETTING = 'bussassistent.restore_operation'
+INITIAL_EMPTY_CHECK = """NOT EXISTS (
+    SELECT 1 FROM pg_depend
+    WHERE refclassid = 'pg_namespace'::regclass AND refobjid = 'public'::regnamespace
+) AND NOT EXISTS (
+    SELECT 1 FROM pg_namespace
+    WHERE nspname NOT IN ('public', 'pg_catalog', 'information_schema', 'pg_toast')
+      AND nspname !~ '^pg_(toast_)?temp_[0-9]+$'
+)"""
+TUNNEL_UNIT = Path('/etc/systemd/system/cloudflared.service')
+TUNNEL_CONDITION = 'ConditionPathExists=!/etc/bussassistent/maintenance/pending.json'
 os.environ['PATH'] = '/usr/sbin:/usr/bin:/sbin:/bin'
 os.umask(0o077)
 
@@ -50,10 +61,9 @@ def compose(path, *args, **kw):
 def recovery(action, username):
     """Bounded operator entry point; check OUTER terminal before Docker's PTY."""
     if (action not in ('recovery-issue', 'recovery-revoke')
-            or any(unicodedata.category(c).startswith('C') for c in username)):
+            or any(c == '\x00' or '\ud800' <= c <= '\udfff' for c in username)):
         raise ValueError('Invalid recovery command or username')
-    username = username.strip().casefold()
-    if not 1 <= len(username) <= 100:
+    if len(username) > 400 or not 1 <= len(username.strip().casefold()) <= 100:
         raise ValueError('Invalid recovery username')
     if not all(os.isatty(fd) for fd in (0, 1, 2)):
         raise ValueError('Recovery requires an interactive terminal without redirection')
@@ -238,31 +248,52 @@ def install_secrets():
 def restore_initial(commit, digest):
     if (ROOT / 'current').exists() or DATA_READY.exists():
         raise ValueError('Initial restore refused after deployment')
-    path = release(commit)
-    count = compose(path, 'exec', '-T', 'private-db', 'psql', '-U', 'tablet_bootstrap',
-                    '-d', 'private_work', '-Atc',
-                    "SELECT count(*) FROM pg_tables WHERE schemaname='public'",
-                    capture_output=True, text=True).stdout.strip()
-    if count != '0':
-        raise ValueError('Restore requires an empty database; existing data will not be overwritten')
     if not re.fullmatch(r'[a-f0-9]{64}', digest):
         raise ValueError('Invalid dump digest')
-    with (UPLOADS / 'initial.dump').open('rb') as dump:
-        if hashlib.file_digest(dump, 'sha256').hexdigest() != digest:
-            raise ValueError('Dump digest mismatch')
-        dump.seek(0)
-        compose(path, 'exec', '-T', 'private-db', 'pg_restore', '-U', 'tablet_bootstrap',
-                '-d', 'private_work', '--role=private_work', '--no-owner', '--no-privileges',
-                '--exit-on-error', '--single-transaction', stdin=dump)
-    before = offline(path, 'restore-inspect')
+    path = release(commit)
+    journal = CONFIG.parent / 'initial-restore.json'
+    receipt = CONFIG.parent / 'initial-quarantined.json'
+    state = None
+    if journal.exists() or journal.is_symlink():
+        state = read_restore_metadata(journal)
+        if (state['release'] != path.name or state['sha256'] != digest
+                or not RESTORE_OPERATION.fullmatch(state['operation'])):
+            raise ValueError('Initial restore does not match the prepared release and archive')
+    if receipt.exists() or receipt.is_symlink():
+        if state is None:
+            raise ValueError('An earlier initial restore is already recorded')
+        verify_initial_quarantine(path)
+        print('Initial restore already quarantined; app and tunnel remain stopped')
+        return
+    operation = state['operation'] if state else uuid.uuid4().hex
+    client = 'bussassistent-restore-replacement-' + operation
+    if state:
+        remove_restore_client(client)
+    current_marker = database_restore_marker(path)
+    if state is None or current_marker != operation:
+        if current_marker or restore_query(path, 'SELECT (' + INITIAL_EMPTY_CHECK + ')') != 't':
+            raise ValueError('Restore requires an empty database; existing data will not be overwritten')
+        with tempfile.TemporaryDirectory(prefix='initial-restore-', dir=ROOT) as temporary:
+            directory = Path(temporary)
+            snapshot_restore_source(UPLOADS / 'initial.dump', directory, digest, require_root=False)
+            expected = preflight_restore(path, directory / 'source.dump', directory, operation, require_empty=True)
+            if state and state['business'] != expected['business']:
+                raise ValueError('Initial restore preflight differs from the prepared archive')
+            state = {'operation': operation, 'release': path.name, 'sha256': digest, 'business': expected['business']}
+            durable_json(journal, state)
+            replace_restore_database(path, directory, client)
+        if database_restore_marker(path) != operation:
+            raise ValueError('Initial restore transaction is unrecognized')
+    if offline(path, 'restore-inspect')['business'] != state['business']:
+        raise ValueError('Initial restore business equivalence failed')
     offline(path, 'migrate')
-    if offline(path, 'restore-inspect')['business'] != before['business']:
+    if offline(path, 'restore-inspect')['business'] != state['business']:
         raise ValueError('Initial restore business equivalence failed')
     quarantined = offline(path, 'restore-quarantine')
     checked = offline(path, 'restore-verify')
-    if checked['business'] != before['business'] or checked['authority_fingerprint'] != quarantined['authority_fingerprint']:
+    if checked['business'] != state['business'] or checked['authority_fingerprint'] != quarantined['authority_fingerprint']:
         raise ValueError('Initial restore quarantine failed')
-    durable_json(CONFIG.parent / 'initial-quarantined.json', {'release':path.name, 'authority_fingerprint':checked['authority_fingerprint']})
+    durable_json(receipt, {'release': path.name, 'authority_fingerprint': checked['authority_fingerprint']})
     print('Initial restore quarantined; app and tunnel remain stopped')
 
 
@@ -563,13 +594,16 @@ def sync_directory(path):
         os.close(fd)
 
 
-def restore_state():
-    path = MAINTENANCE / 'pending.json'
+def read_restore_metadata(path):
     info = path.lstat()
     if not stat.S_ISREG(info.st_mode) or info.st_uid != 0 or info.st_mode & 0o022:
         raise ValueError('Unsafe restore state')
-    state = json.loads(path.read_text())
-    if (not SHA.fullmatch(state['release']) or not re.fullmatch(r'[a-f0-9]{32}', state['operation'])
+    return json.loads(path.read_text())
+
+
+def restore_state():
+    state = read_restore_metadata(MAINTENANCE / 'pending.json')
+    if (not SHA.fullmatch(state['release']) or not RESTORE_OPERATION.fullmatch(state['operation'])
             or state['stage'] not in {'prepared', 'closed', 'replacing', 'replaced', 'quarantined', 'retaining', 'verified', 'opening', 'ingress-committed'}):
         raise ValueError('Invalid restore state')
     if release().name != state['release']:
@@ -598,6 +632,27 @@ def offline(path, action):
         subprocess.run(['docker', 'rm', '-f', name], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=30)
 
 
+def has_tunnel_condition(source):
+    """Recognize the configured condition only as an active Unit directive."""
+    section = ''
+    conditions = set()
+    for line in source.splitlines():
+        line = line.strip()
+        if line.startswith(('#', ';')):
+            continue
+        if line.startswith('[') and line.endswith(']'):
+            section = line
+        elif section == '[Unit]':
+            key, separator, value = line.partition('=')
+            key, value = key.strip(), value.strip()
+            if separator and key.startswith('Condition'):
+                if not value:
+                    conditions.clear()
+                else:
+                    conditions.add(key + '=' + value)
+    return TUNNEL_CONDITION in conditions
+
+
 def restore_guards(path):
     """Old installed containers without a persistent startup guard are ineligible."""
     for service in ('private-api', 'gateway', 'access-gate'):
@@ -606,11 +661,14 @@ def restore_guards(path):
         if (record['Config']['Labels'].get('com.docker.compose.project') != 'bussassistent'
                 or record['Config']['Labels'].get('com.docker.compose.service') != service
                 or not any(m['Destination'] == '/maintenance' and m['Source'] == str(MAINTENANCE)
-                           and not m['RW'] for m in record['Mounts'])
+                           and m['Type'] == 'bind' and not m['RW'] for m in record['Mounts'])
                 or '/maintenance/pending.json' not in ' '.join(record['Config']['Cmd'] or [])):
             raise ValueError('Installed restore guards required')
-    if 'ConditionPathExists=!/etc/bussassistent/maintenance/pending.json' not in Path(
-            '/etc/systemd/system/cloudflared.service').read_text():
+    result = run(['systemctl', 'show', 'cloudflared.service', '-p', 'FragmentPath', '-p',
+                  'DropInPaths', '-p', 'NeedDaemonReload'], capture_output=True, text=True, timeout=30)
+    properties = dict(line.split('=', 1) for line in result.stdout.splitlines() if '=' in line)
+    if (properties.get('FragmentPath') != str(TUNNEL_UNIT) or properties.get('DropInPaths') != ''
+            or properties.get('NeedDaemonReload') != 'no' or not has_tunnel_condition(TUNNEL_UNIT.read_text())):
         raise ValueError('Installed tunnel restore guard required')
 
 
@@ -637,7 +695,38 @@ def close_restore(path):
         raise ValueError('Restore database clients remain')
 
 
-def restore_sql(path, archive, destination):
+def restore_query(path, sql):
+    return compose(path, 'exec', '-T', 'private-db', 'psql', '-X', '-U', 'tablet_bootstrap',
+                   '-d', 'private_work', '-v', 'ON_ERROR_STOP=1', '-qAtc', sql,
+                   capture_output=True, text=True, timeout=30).stdout.strip()
+
+
+def database_restore_marker(path):
+    return restore_query(path, """
+        SELECT split_part(setting, '=', 2)
+        FROM pg_db_role_setting, unnest(setconfig) AS setting
+        WHERE setrole = 0
+          AND setdatabase = (SELECT oid FROM pg_database WHERE datname = current_database())
+          AND split_part(setting, '=', 1) = '""" + RESTORE_SETTING + "'")
+
+
+def remove_restore_client(name):
+    subprocess.run(['docker', 'rm', '-f', name], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=30)
+
+
+def replace_restore_database(path, directory, name):
+    try:
+        with (directory / 'replacement.sql').open('rb') as stream:
+            compose(path, 'run', '--rm', '--no-deps', '-T', '--name', name,
+                    'private-db', '/bin/sh', '-ec',
+                    'export PGPASSWORD="$(cat /run/secrets/tablet_bootstrap_password)"; '
+                    'exec psql -X -h private-db -U tablet_bootstrap -d private_work -v ON_ERROR_STOP=1',
+                    stdin=stream, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE, timeout=180)
+    finally:
+        remove_restore_client(name)
+
+
+def restore_sql(path, archive, destination, operation=None, *, require_empty=False):
     """Single SQL transaction replaces the entire public schema, including newer tables."""
     with archive.open('rb') as stream:
         contents = compose(path, 'exec', '-T', 'private-db', 'pg_restore', '--list',
@@ -648,33 +737,44 @@ def restore_sql(path, archive, destination):
             compose(path, 'exec', '-T', 'private-db', 'pg_restore', '--no-owner', '--no-privileges',
                     '--file=-', stdin=stream, stdout=output, stderr=subprocess.PIPE, timeout=180)
         with destination.open('xb') as output:
-            write_restore_sql(output, body, contents)
+            write_restore_sql(output, body, contents, operation, require_empty=require_empty)
     finally:
         body.unlink(missing_ok=True)
 
 
-def write_restore_sql(output, body, contents):
-        limits = b"SET LOCAL lock_timeout='5s';\nSET LOCAL statement_timeout='120s';\nSET LOCAL transaction_timeout='120s';\n"
-        output.write(b'BEGIN;\n' + limits + b'DROP SCHEMA public CASCADE;\n')
-        if not re.search(r' SCHEMA - public ', contents):
-            output.write(b'CREATE SCHEMA public AUTHORIZATION private_work;\n')
-        output.write(b'SET LOCAL ROLE private_work;\n')
-        # pg_restore emits timeout=0 header settings. Never let those cancel
-        # the bounded transaction; leave object definitions and COPY data intact.
-        header = True
-        with body.open('rb') as stream:
-            for line in stream:
-                if line.startswith(b'-- Name:'):
-                    header = False
-                if header and re.match(rb'SET (lock_timeout|statement_timeout|transaction_timeout) = ', line):
-                    continue
-                output.write(line)
-        output.write(b'\nCOMMIT;\n')
-        output.flush()
-        os.fsync(output.fileno())
+def write_restore_sql(output, body, contents, operation=None, *, require_empty=False):
+    limits = b"SET LOCAL lock_timeout='5s';\nSET LOCAL statement_timeout='120s';\nSET LOCAL transaction_timeout='120s';\n"
+    output.write(b'BEGIN;\n' + limits)
+    if require_empty:
+        output.write(("DO $guard$ BEGIN IF NOT (" + INITIAL_EMPTY_CHECK + ") THEN "
+                      "RAISE EXCEPTION 'Initial restore requires an empty database'; END IF; END $guard$;\n").encode())
+    output.write(b'DROP SCHEMA public CASCADE;\n')
+    if not re.search(r' SCHEMA - public ', contents):
+        output.write(b'CREATE SCHEMA public AUTHORIZATION private_work;\n')
+    output.write(b'SET LOCAL ROLE private_work;\n')
+    # pg_restore emits timeout=0 header settings. Never let those cancel
+    # the bounded transaction; leave object definitions and COPY data intact.
+    header = True
+    with body.open('rb') as stream:
+        for line in stream:
+            if line.startswith(b'-- Name:'):
+                header = False
+            if header and re.match(rb'SET (lock_timeout|statement_timeout|transaction_timeout) = ', line):
+                continue
+            output.write(line)
+    if operation is not None:
+        if not RESTORE_OPERATION.fullmatch(operation):
+            raise ValueError('Invalid restore transaction marker')
+        # Database settings are transactional, outside the restored public schema,
+        # and excluded from ordinary pg_dump archives made without --create.
+        output.write(("\nRESET ROLE;\nALTER DATABASE private_work SET " + RESTORE_SETTING
+                      + " = '" + operation + "';\n").encode())
+    output.write(b'\nCOMMIT;\n')
+    output.flush()
+    os.fsync(output.fileno())
 
 
-def preflight_restore(path, archive, directory):
+def preflight_restore(path, archive, directory, operation=None, *, require_empty=False):
     """Execute source and migration checks in a networkless disposable DB, no production volume."""
     config = json.loads(compose(path, 'config', '--format', 'json', capture_output=True, text=True).stdout)
     db_image = config['services']['private-db']['image']
@@ -688,7 +788,8 @@ def preflight_restore(path, archive, directory):
              '-e', 'POSTGRES_DB=private_work', db_image], stdout=subprocess.DEVNULL, stderr=subprocess.PIPE)
         created = True
         for attempt in range(45):
-            if subprocess.run(['docker', 'exec', name, 'pg_isready', '-U', 'tablet_bootstrap'],
+            if subprocess.run(['docker', 'exec', name, 'pg_isready', '-h', '127.0.0.1',
+                               '-U', 'tablet_bootstrap', '-d', 'private_work'],
                               stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL).returncode == 0:
                 break
             time.sleep(1)
@@ -697,7 +798,7 @@ def preflight_restore(path, archive, directory):
         run(['docker', 'exec', name, 'psql', '-U', 'tablet_bootstrap', '-d', 'private_work',
              '-v', 'ON_ERROR_STOP=1', '-c', 'CREATE ROLE private_work LOGIN',
              '-c', 'ALTER DATABASE private_work OWNER TO private_work'], capture_output=True)
-        restore_sql(path, archive, directory / 'replacement.sql')
+        restore_sql(path, archive, directory / 'replacement.sql', operation, require_empty=require_empty)
         with (directory / 'replacement.sql').open('rb') as stream:
             run(['docker', 'exec', '-i', name, 'psql', '-X', '-U', 'tablet_bootstrap', '-d', 'private_work',
                  '-v', 'ON_ERROR_STOP=1'], stdin=stream, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE, timeout=180)
@@ -773,12 +874,13 @@ def prune_restore_copies():
             remove_restore_copies(directory)
 
 
-def snapshot_restore_source(source, directory, digest):
+def snapshot_restore_source(source, directory, digest, *, require_root=True):
     import shutil
     fd = os.open(source, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK)
     with os.fdopen(fd, 'rb') as stream:
         info = os.fstat(stream.fileno())
-        if not stat.S_ISREG(info.st_mode) or info.st_uid != 0 or info.st_mode & 0o022 or info.st_nlink != 1:
+        if (not stat.S_ISREG(info.st_mode) or info.st_nlink != 1
+                or (require_root and (info.st_uid != 0 or info.st_mode & 0o022))):
             raise ValueError('Unsafe restore source')
         with (directory / 'source.dump').open('xb') as output:
             shutil.copyfileobj(stream, output)
@@ -803,7 +905,7 @@ def begin_restore(basename, digest, expected_release):
     directory.mkdir(parents=True, mode=0o700)
     try:
         snapshot_restore_source(BACKUPS / basename, directory, digest)
-        expected = preflight_restore(path, directory / 'source.dump', directory)
+        expected = preflight_restore(path, directory / 'source.dump', directory, operation)
     except BaseException:
         remove_restore_copies(directory)
         directory.rmdir()
@@ -814,7 +916,8 @@ def begin_restore(basename, digest, expected_release):
     sync_directory(ROOT)
     source_fingerprint = expected.pop('database_fingerprint')
     state = {'operation': operation, 'release': path.name, 'source': basename, 'sha256': digest,
-             'expected': expected, 'source_fingerprint': source_fingerprint, 'attempts': 0, 'stage': 'prepared'}
+             'expected': expected, 'source_fingerprint': source_fingerprint, 'attempts': 0,
+             'stage': 'prepared', 'transaction_marker': True}
     save_restore(state, 'prepared')
     resume_restore()
 
@@ -826,12 +929,14 @@ def resume_restore():
         raise ValueError('Restore already verified; use restore-reopen')
     replacement_name = 'bussassistent-restore-replacement-' + state['operation']
     # Handles a previous helper crash before querying transaction outcome.
-    subprocess.run(['docker', 'rm', '-f', replacement_name], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=30)
+    remove_restore_client(replacement_name)
     close_restore(path)
     if state['stage'] == 'prepared':
         # Never prune the selected source while capturing the pre-replacement copy.
         prior = backup(path, prune=False)
         state['prior_fingerprint'] = database_fingerprint(path, capture=True).stdout
+        if state.get('transaction_marker'):
+            state['prior_marker'] = database_restore_marker(path)
         import shutil
         shutil.copyfile(prior, directory / 'prior.dump')
         with (directory / 'prior.dump').open('rb') as stream:
@@ -839,27 +944,30 @@ def resume_restore():
         sync_directory(directory)
         save_restore(state, 'closed')
     if state['stage'] == 'replacing':
-        # A matching full-table fingerprint distinguishes commit from rollback;
-        # no hash/password values leave the database, only aggregate digests.
         current = database_fingerprint(path, capture=True).stdout
-        if current == state['source_fingerprint']:
+        if state.get('transaction_marker'):
+            # The marker commits with schema, rows and sequence state. Equal
+            # table digests alone cannot distinguish commit from rollback.
+            marker = database_restore_marker(path)
+            committed = marker == state['operation'] and current == state['source_fingerprint']
+            rolled_back = marker == state['prior_marker'] and current == state['prior_fingerprint']
+        else:
+            # Older prepared operations have no marker. Only disjoint row
+            # outcomes are recognizable; equal digests require investigation.
+            committed = current == state['source_fingerprint'] and current != state['prior_fingerprint']
+            rolled_back = current == state['prior_fingerprint'] and current != state['source_fingerprint']
+        if committed:
             save_restore(state, 'replaced')
-        elif current == state['prior_fingerprint'] and state['attempts'] < 3:
+        elif rolled_back and state['attempts'] < 3:
             save_restore(state, 'closed')
         else:
             raise ValueError('Restore replacement needs offline investigation')
     if state['stage'] == 'closed':
         state['attempts'] += 1
         save_restore(state, 'replacing')
-        try:
-            with (directory / 'replacement.sql').open('rb') as stream:
-                compose(path, 'run', '--rm', '--no-deps', '-T', '--name', replacement_name,
-                    'private-db', '/bin/sh', '-ec',
-                    'export PGPASSWORD="$(cat /run/secrets/tablet_bootstrap_password)"; '
-                    'exec psql -X -h private-db -U tablet_bootstrap -d private_work -v ON_ERROR_STOP=1',
-                    stdin=stream, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE, timeout=180)
-        finally:
-            subprocess.run(['docker', 'rm', '-f', replacement_name], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=30)
+        replace_restore_database(path, directory, replacement_name)
+        if state.get('transaction_marker') and database_restore_marker(path) != state['operation']:
+            raise ValueError('Restore replacement needs offline investigation')
         save_restore(state, 'replaced')
     if state['stage'] == 'replaced':
         offline(path, 'migrate')
@@ -888,12 +996,16 @@ def resume_restore():
 
 def reopen_restore():
     pending = MAINTENANCE / 'pending.json'
-    state = restore_state() if pending.exists() else json.loads((MAINTENANCE / 'last-restore.json').read_text())
-    if state['stage'] not in {'verified', 'opening', 'ingress-committed'}:
+    receipt = MAINTENANCE / 'last-restore.json'
+    state = restore_state() if pending.exists() else read_restore_metadata(receipt)
+    if state['stage'] not in {'verified', 'opening', 'ingress-committed', 'completed'}:
         raise ValueError('Restore is not ready for reopening')
     path = release()
     if state['release'] != path.name:
         raise ValueError('Restore release changed')
+    if state['stage'] == 'completed':
+        print('Restore reopening was already completed')
+        return
     if state['stage'] != 'ingress-committed':
         close_restore(path)
         checked = offline(path, 'restore-verify')
@@ -921,7 +1033,7 @@ def reopen_restore():
         save_restore(state, 'ingress-committed')
     if pending.exists():
         durable_json(ROOT / 'restore' / state['operation'] / 'completed.json', state)
-        durable_json(MAINTENANCE / 'last-restore.json', {
+        durable_json(receipt, {
             key: state[key] for key in ('operation', 'release', 'stage', 'attempts')})
         pending.unlink()
         (MAINTENANCE / 'local-start').unlink(missing_ok=True)
@@ -929,6 +1041,7 @@ def reopen_restore():
     start(path)
     run(['systemctl', 'start', '--no-block', 'cloudflared'])
     wait_tunnel()
+    durable_json(receipt, {**{key: state[key] for key in ('operation', 'release', 'attempts')}, 'stage': 'completed'})
     print('Restore reopened; each account requires a fresh independent recovery code')
 
 
@@ -937,15 +1050,17 @@ def restore_status():
     receipt = MAINTENANCE / 'last-restore.json'
     if not pending and not receipt.exists():
         return
-    state = restore_state() if pending else json.loads(receipt.read_text())
+    state = restore_state() if pending else read_restore_metadata(receipt)
     stage = state['stage']
+    next_action = None
+    if pending or (stage == 'ingress-committed' and (ROOT / 'current').exists() and release().name == state['release']):
+        next_action = 'restore-reopen' if stage in {'verified', 'opening', 'ingress-committed'} else 'restore-resume'
     print(json.dumps({'restore': {key: state[key] for key in ('operation', 'stage', 'attempts')},
-        'ingress_committed': stage == 'ingress-committed',
-        'next_action': 'restore-reopen' if stage in {'verified', 'opening', 'ingress-committed'} else 'restore-resume'}))
+        'ingress_committed': stage in {'ingress-committed', 'completed'}, 'next_action': next_action}))
 
 
 def verify_initial_quarantine(path):
-    receipt = json.loads((CONFIG.parent / 'initial-quarantined.json').read_text())
+    receipt = read_restore_metadata(CONFIG.parent / 'initial-quarantined.json')
     if receipt['release'] != path.name or receipt['authority_fingerprint'] != offline(path,'restore-verify')['authority_fingerprint']:
         raise ValueError('Initial restore quarantine confirmation required')
 

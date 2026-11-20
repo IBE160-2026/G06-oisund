@@ -255,6 +255,34 @@ def test_cli_own_account_display_clear_revoke(users):
         assert status == 0
 
 
+def test_legacy_format_username_recovers_after_quarantine(users, client):
+    from app import restore
+    base = users[0][0]
+    name = base + '\u200d\\'
+    displayed = base + r'\u200d\\'
+    with database() as conn:
+        conn.execute('UPDATE accounts SET username=%s WHERE id=%s', (name, users[1][0]))
+    restore.quarantine()
+    with pytest.raises(recovery.RecoveryError):
+        recovery.resolve(base + '\\')
+    status, captured = cli(name, [(b'bekrefte', name)])
+    assert status != 0
+    assert 'Konto: '.encode() + displayed.encode() in captured
+    assert '\u200d'.encode() not in captured and b'Engangskode:' not in captured
+
+    status, captured = cli(name, [(b'bekrefte', displayed), (b'TRYGT:', 'TRYGT'), (b'SENDT', 'SENDT')])
+    assert status == 0
+    match = re.search(rb'Engangskode: ([A-HJKM-Z2-9]{4}(?:-[A-HJKM-Z2-9]{4}){4})', captured)
+    assert bool(match), 'Expected one synthetic code'
+    replacement = 'synthetic-format-replacement'
+    result = client.post('/auth/password/recover', headers=headers(client), json={
+        'username': name, 'code': match[1].decode(), 'new_password': replacement, 'confirmation': replacement,
+    })
+    assert result.status_code == 200
+    _, session = auth.authenticate(name, replacement, 'synthetic-legacy-restore')
+    assert session['owner'] == users[1][0]
+
+
 def test_cli_failed_handoff(users):
     name = users[0][0]
     status, captured = cli(name, [(b'bekrefte', name), (b'TRYGT:', 'TRYGT'), (b'SENDT', '')])
@@ -441,6 +469,22 @@ def test_rolling_hour_issuance_recovers(users):
     recovery.issue(account)
     with pytest.raises(recovery.RecoveryError):
         recovery.issue(account)
+
+
+def test_timeout_after_issue_commit_revokes_the_undelivered_candidate(users, monkeypatch):
+    from app import recovery_terminal
+    account = target(users)
+    original = recovery.issue
+    terminal = QuietDialogue(users[0][0])
+    def commit_then_timeout(target, proof_id):
+        original(target, proof_id)
+        signal.raise_signal(signal.SIGALRM)
+    monkeypatch.setattr(recovery_terminal, 'Terminal', lambda: terminal)
+    monkeypatch.setattr(recovery, 'issue', commit_then_timeout)
+    with pytest.raises(SystemExit, match='aktiv kode fra denne utstedelsen er tilbakekalt'):
+        recovery_terminal.run('recovery-issue', users[0][0])
+    with database() as conn:
+        assert conn.execute('SELECT state FROM recovery_proofs WHERE owner=%s', (account['id'],)).fetchall() == [{'state': 'revoked'}]
 
 
 @pytest.mark.parametrize('mode', ['before-confirmation', 'after-display', 'suspend'])

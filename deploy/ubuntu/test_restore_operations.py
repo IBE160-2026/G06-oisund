@@ -115,12 +115,13 @@ class RestoreOperations(unittest.TestCase):
                 ops.reopen_restore()
             start.assert_not_called()
 
-    def run_resume(self, stage, fingerprint='source', fail=False):
+    def run_resume(self, stage, fingerprint='source', fail=False, marker=''):
         self.state['stage']=stage
         def offline(path,action):
             return {'business':{},'schema':15,'authority_fingerprint':'quarantined'}
         with patch.object(ops,'restore_state',return_value=self.state), patch.object(ops,'release',return_value=self.path), \
              patch.object(ops,'close_restore'), patch.object(ops,'database_fingerprint',return_value=Mock(stdout=fingerprint)), \
+             patch.object(ops,'database_restore_marker',return_value=marker), \
              patch.object(ops,'offline',side_effect=offline), patch.object(ops.subprocess,'run'), patch.object(ops,'compose') as compose:
             if fail:
                 compose.side_effect=subprocess.CalledProcessError(1,'synthetic')
@@ -140,6 +141,21 @@ class RestoreOperations(unittest.TestCase):
         self.assertEqual(self.state['attempts'],1)
         self.assertEqual(sum(any('exec psql' in str(arg) for arg in call.args) for call in calls),1)
         self.assertTrue((self.maintenance/'pending.json').exists())
+
+    def test_equal_rows_require_transaction_marker_to_recognize_commit(self):
+        self.state['prior_fingerprint'] = self.state['source_fingerprint']
+        with self.assertRaisesRegex(ValueError, 'investigation'):
+            self.run_resume('replacing')
+        self.state.update(transaction_marker=True, prior_marker='previous')
+        calls = self.run_resume('replacing', marker=self.operation)
+        self.assertFalse(any('exec psql' in str(arg) for call in calls for arg in call.args))
+        self.assertEqual(self.state['stage'], 'verified')
+
+    def test_equal_rows_and_prior_marker_identify_replacement_rollback(self):
+        self.state.update(prior_fingerprint='source', transaction_marker=True, prior_marker='previous')
+        calls = self.run_resume('replacing', fail=True, marker='previous')
+        self.assertEqual(self.state['stage'], 'replacing')
+        self.assertEqual(sum(any('exec psql' in str(arg) for arg in call.args) for call in calls), 1)
 
     def test_unknown_or_exhausted_replacement_stays_closed(self):
         for fingerprint, attempts in [('unknown',0),('prior',3)]:
@@ -216,12 +232,45 @@ class RestoreOperations(unittest.TestCase):
     def test_guard_definitions_fail_closed_and_keep_restrictions(self):
         root=Path(__file__).parent
         for unit in ['bussassistent.service','cloudflared.service']:
-            self.assertIn('ConditionPathExists=!/etc/bussassistent/maintenance/pending.json',(root/unit).read_text())
+            self.assertTrue(ops.has_tunnel_condition((root/unit).read_text()))
         compose=(root/'compose.yaml').read_text()
         self.assertEqual(compose.count('test -r /maintenance; test -x /maintenance'),3)
-        self.assertEqual(compose.count('/etc/bussassistent/maintenance:/maintenance:ro'),3)
+        self.assertEqual(compose.count('source: /etc/bussassistent/maintenance'),3)
+        self.assertEqual(compose.count('target: /maintenance\n        read_only: true\n        bind:\n          create_host_path: false'),3)
         self.assertEqual(compose.count('cap_drop: [ALL]'),4)
-        self.assertEqual(compose.count('read_only: true'),4)
+        self.assertEqual(compose.count('\n    read_only: true'),4)
+
+    def test_guard_rejects_commented_reset_or_overridden_conditions(self):
+        unit = self.root / 'cloudflared.service'
+        heading = '[Unit]\n'
+        properties = {'FragmentPath': str(unit), 'DropInPaths': '', 'NeedDaemonReload': 'no'}
+        with patch.object(ops, 'TUNNEL_UNIT', unit):
+            def compose(path, *args, **kwargs):
+                return Mock(stdout=args[-1])
+
+            def run(args, **kwargs):
+                if args[:2] == ['docker', 'inspect']:
+                    return Mock(stdout=json.dumps([{
+                        'Config': {'Labels': {'com.docker.compose.project': 'bussassistent',
+                                              'com.docker.compose.service': args[-1]},
+                                   'Cmd': ['test ! -e /maintenance/pending.json']},
+                        'Mounts': [{'Destination': '/maintenance', 'Source': str(self.maintenance),
+                                    'Type': 'bind', 'RW': False}],
+                    }]))
+                return Mock(stdout='\n'.join(k + '=' + v for k, v in properties.items()))
+
+            with patch.object(ops, 'compose', side_effect=compose), patch.object(ops, 'run', side_effect=run):
+                for content in (heading + '# ' + ops.TUNNEL_CONDITION,
+                                '[Service]\n' + ops.TUNNEL_CONDITION,
+                                heading + ops.TUNNEL_CONDITION + '\nConditionPathExists='):
+                    unit.write_text(content)
+                    with self.assertRaisesRegex(ValueError, 'tunnel restore guard'):
+                        ops.restore_guards(self.path)
+                unit.write_text(heading + ops.TUNNEL_CONDITION)
+                for key, value in [('DropInPaths', '/synthetic/override.conf'), ('NeedDaemonReload', 'yes')]:
+                    with patch.dict(properties, {key: value}), self.assertRaisesRegex(ValueError, 'tunnel restore guard'):
+                        ops.restore_guards(self.path)
+                ops.restore_guards(self.path)
 
     def test_offline_timeout_removes_only_its_named_container(self):
         with patch.object(ops,'compose',side_effect=subprocess.TimeoutExpired('synthetic',180)) as compose, \
@@ -240,10 +289,15 @@ class RestoreOperations(unittest.TestCase):
             if '--list' in args:return Mock(stdout=b'; synthetic TOC\n')
             return subprocess.run([sys.executable,'-c',"import sys;sys.stdout.write('SET statement_timeout = 0;\\nSET lock_timeout = 0;\\nSET transaction_timeout = 0;\\n-- Name: restored\\nCREATE TABLE restored(id integer);\\n')"],
                                   stdout=kwargs['stdout'],check=True)
-        with patch.object(ops,'compose',side_effect=transport):ops.restore_sql(self.path,archive,target)
+        with patch.object(ops,'compose',side_effect=transport):
+            ops.restore_sql(self.path, archive, target, self.operation, require_empty=True)
         content=target.read_text()
         self.assertTrue(content.startswith('BEGIN;\n'))
+        self.assertLess(content.index('Initial restore requires an empty database'), content.index('DROP SCHEMA'))
         self.assertLess(content.index('DROP SCHEMA'),content.index('CREATE TABLE restored'))
+        marker = "ALTER DATABASE private_work SET " + ops.RESTORE_SETTING + " = '" + self.operation + "';"
+        self.assertLess(content.index('CREATE TABLE restored'), content.index(marker))
+        self.assertLess(content.index(marker), content.index('COMMIT;'))
         self.assertTrue(content.endswith('COMMIT;\n'))
         self.assertNotIn('timeout = 0',content)
         for name,value in [('lock_timeout','5s'),('statement_timeout','120s'),('transaction_timeout','120s')]:
@@ -279,6 +333,28 @@ class RestoreOperations(unittest.TestCase):
         self.assertEqual(result['next_action'],'restore-reopen')
         self.assertNotIn('authority_fingerprint',output.getvalue())
 
+    def test_status_preserves_connectivity_retry_until_tunnel_confirms(self):
+        import contextlib, io
+        (self.root / 'current').symlink_to(self.path)
+        ops.save_restore(self.state, 'verified')
+        self.opening_mocks({'business': {}, 'authority_fingerprint': 'quarantined'}, True)
+        receipt = self.maintenance / 'last-restore.json'
+        self.assertEqual(json.loads(receipt.read_text())['stage'], 'ingress-committed')
+        with patch.object(ops, 'release', return_value=self.path), contextlib.redirect_stdout(io.StringIO()) as output:
+            ops.restore_status()
+        self.assertEqual(json.loads(output.getvalue())['next_action'], 'restore-reopen')
+        with patch.object(ops, 'release', return_value=self.root / 'different'), contextlib.redirect_stdout(io.StringIO()) as output:
+            ops.restore_status()
+        self.assertIsNone(json.loads(output.getvalue())['next_action'])
+        self.opening_mocks({'business': {}, 'authority_fingerprint': 'quarantined'})
+        self.assertEqual(json.loads(receipt.read_text())['stage'], 'completed')
+        with contextlib.redirect_stdout(io.StringIO()) as output:
+            ops.restore_status()
+        self.assertIsNone(json.loads(output.getvalue())['next_action'])
+        with patch.object(ops, 'release', return_value=self.path), patch.object(ops, 'start') as start:
+            ops.reopen_restore()
+            start.assert_not_called()
+
     def test_preflight_timeout_removes_named_check_and_database(self):
         calls=[]
         def run(args,**kwargs):
@@ -293,6 +369,9 @@ class RestoreOperations(unittest.TestCase):
         checks=[c for c in calls if 'app.manage' in c]
         name=checks[0][checks[0].index('--name')+1]
         self.assertTrue(name.startswith('bussassistent-restore-check-'))
+        self.assertTrue(any(c.args[0][3:] == [
+            'pg_isready', '-h', '127.0.0.1', '-U', 'tablet_bootstrap', '-d', 'private_work']
+            for c in direct.call_args_list))
         self.assertIn(['docker','rm','-f',name],[c.args[0] for c in direct.call_args_list])
         self.assertTrue(any(c[:4]==['docker','rm','-f','-v'] for c in calls))
 
@@ -310,51 +389,85 @@ class RestoreOperations(unittest.TestCase):
             with self.assertRaises(FileNotFoundError):ops.main()
             images.assert_not_called()
 
-    def initial_import(self, fail_quarantine=False):
+    def initial_import(self, interruption=None):
         uploads=self.root/'uploads';uploads.mkdir()
         archive=uploads/'initial.dump';archive.write_bytes(b'synthetic initial archive')
         digest=hashlib.sha256(archive.read_bytes()).hexdigest()
         marker=self.root/'data-ready'
         events=[]
         checked={'business':{'accounts':{'rows':2}},'authority_fingerprint':'quarantined'}
-        def compose(path,*args,**kwargs):
-            if 'pg_restore' in args:
-                self.assertIn('--single-transaction',args)
-                self.assertEqual(kwargs['stdin'].read(),archive.read_bytes())
-                events.append('import')
-            return Mock(stdout='0\n')
+        imported = ''
+        failed = False
+
+        def preflight(path, source, directory, operation, *, require_empty):
+            events.append('preflight')
+            self.assertTrue(require_empty)
+            self.assertEqual(source.read_bytes(), archive.read_bytes())
+            return checked
+
+        def replace(path, directory, client):
+            nonlocal imported
+            events.append('import')
+            prepared = json.loads((self.root / 'initial-restore.json').read_text())
+            self.assertEqual(prepared['sha256'], digest)
+            imported = client.rsplit('-', 1)[-1]
+            self.assertEqual(prepared['operation'], imported)
+            if interruption == 'import':
+                raise ValueError('synthetic interruption')
+
         def offline(path,action):
+            nonlocal failed
             events.append(action)
-            if action=='restore-quarantine' and fail_quarantine:
-                raise ValueError('synthetic quarantine transaction failure')
+            if action == 'restore-quarantine' and interruption == 'quarantine' and not failed:
+                failed = True
+                raise ValueError('synthetic interruption')
             return checked
         with patch.object(ops,'UPLOADS',uploads),patch.object(ops,'DATA_READY',marker), \
              patch.object(ops,'CONFIG',self.root/'server.env'),patch.object(ops,'release',return_value=self.path), \
-             patch.object(ops,'compose',side_effect=compose),patch.object(ops,'offline',side_effect=offline), \
+             patch.object(ops,'preflight_restore',side_effect=preflight), \
+             patch.object(ops,'restore_query',return_value='t'),patch.object(ops,'database_restore_marker',side_effect=lambda path: imported), \
+             patch.object(ops,'replace_restore_database',side_effect=replace),patch.object(ops,'remove_restore_client'), \
+             patch.object(ops,'offline',side_effect=offline), \
              patch.object(ops,'database_summary') as summary,patch.object(ops,'start') as start:
-            if fail_quarantine:
-                with self.assertRaisesRegex(ValueError,'quarantine transaction failure'):ops.restore_initial(SHA,digest)
+            if interruption:
+                with self.assertRaisesRegex(ValueError,'synthetic interruption'):ops.restore_initial(SHA,digest)
                 self.assertFalse((self.root/'initial-quarantined.json').exists())
                 with patch.object(sys,'argv',['ctl','confirm-data',SHA]),self.assertRaises(FileNotFoundError):ops.main()
                 self.assertFalse(marker.exists())
                 summary.assert_not_called()
-            else:
-                ops.restore_initial(SHA,digest)
-                self.assertEqual(events,['import','restore-inspect','migrate','restore-inspect','restore-quarantine','restore-verify'])
-                self.assertEqual(json.loads((self.root/'initial-quarantined.json').read_text()),
-                                 {'release':SHA,'authority_fingerprint':'quarantined'})
-                self.assertFalse(marker.exists())
-                with patch.object(sys,'argv',['ctl','confirm-data',SHA]):ops.main()
-                self.assertEqual(events[-1],'restore-verify')
-                self.assertEqual(marker.read_text(),SHA+'\n')
-                summary.assert_called_once_with(self.path)
+                with self.assertRaisesRegex(ValueError, 'does not match'):
+                    ops.restore_initial(SHA, '0' * 64)
+            ops.restore_initial(SHA,digest)
+            self.assertEqual(events.count('preflight'), 1)
+            self.assertEqual(events.count('import'), 1)
+            self.assertEqual(events[-4:], ['migrate','restore-inspect','restore-quarantine','restore-verify'])
+            self.assertEqual(json.loads((self.root/'initial-quarantined.json').read_text()),
+                             {'release':SHA,'authority_fingerprint':'quarantined'})
+            self.assertFalse(marker.exists())
+            with patch.object(sys,'argv',['ctl','confirm-data',SHA]):ops.main()
+            self.assertEqual(events[-1],'restore-verify')
+            self.assertEqual(marker.read_text(),SHA+'\n')
+            summary.assert_called_once_with(self.path)
             start.assert_not_called()
 
     def test_initial_import_quarantine_receipt_and_confirmation(self):
         self.initial_import()
 
-    def test_initial_quarantine_failure_blocks_confirmation(self):
-        self.initial_import(fail_quarantine=True)
+    def test_initial_quarantine_failure_blocks_confirmation_until_same_archive_resumes(self):
+        self.initial_import(interruption='quarantine')
+
+    def test_initial_import_commit_with_lost_ack_resumes_without_overwriting(self):
+        self.initial_import(interruption='import')
+
+    def test_initial_restore_refuses_unrecognized_nonempty_database(self):
+        with patch.object(ops, 'DATA_READY', self.root / 'data-ready'), \
+             patch.object(ops, 'CONFIG', self.root / 'server.env'), patch.object(ops, 'release', return_value=self.path), \
+             patch.object(ops, 'database_restore_marker', return_value=''), patch.object(ops, 'restore_query', return_value='f'), \
+             patch.object(ops, 'preflight_restore') as prepare, patch.object(ops, 'replace_restore_database') as replace:
+            with self.assertRaisesRegex(ValueError, 'empty database'):
+                ops.restore_initial(SHA, '0' * 64)
+            prepare.assert_not_called()
+            replace.assert_not_called()
 
 
 if __name__=='__main__':unittest.main()

@@ -26,7 +26,7 @@ export function PasswordChange({ submit, cancel, busy }: { submit: (fields: Pass
     setFields(empty()); setInvalid(null); setMessage('Endrer passord …');
     try { await submit(submitted); }
     catch (error: any) {
-      if (error?.field === 'current_password') feedback('current_password', error.message);
+      if (error?.field === 'current_password' || error?.field === 'new_password') feedback(error.field, error.message);
       else setMessage(error instanceof Error ? error.message : 'Endringen kunne ikke bekreftes.');
     }
   }

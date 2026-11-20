@@ -110,19 +110,26 @@ class OperationsTests(unittest.TestCase):
         path = self.root / 'releases' / COMMIT
         path.mkdir()
         with patch.object(ops, 'DATA_READY', self.root / 'data-ready'), patch.object(
-                ops, 'compose', return_value=subprocess.CompletedProcess([], 0, stdout='3\n')) as compose:
+                ops, 'compose', side_effect=[subprocess.CompletedProcess([], 0, stdout=value)
+                                            for value in ('\n', 'f\n')]) as compose, \
+                patch.object(ops, 'replace_restore_database') as replace:
             with self.assertRaisesRegex(ValueError, 'empty database'):
                 ops.restore_initial(COMMIT, '0' * 64)
-            self.assertEqual(compose.call_count, 1)
+            self.assertEqual(compose.call_count, 2)
+            replace.assert_not_called()
 
     def test_restore_refuses_corrupt_dump_before_pg_restore(self):
         (self.root / 'releases' / COMMIT).mkdir()
         (self.uploads / 'initial.dump').write_bytes(b'dump bytes')
         with patch.object(ops, 'DATA_READY', self.root / 'data-ready'), patch.object(
-                ops, 'compose', return_value=subprocess.CompletedProcess([], 0, stdout='0\n')) as compose:
+                ops, 'compose', side_effect=[subprocess.CompletedProcess([], 0, stdout=value)
+                                            for value in ('\n', 't\n')]) as compose, \
+                patch.object(ops, 'preflight_restore') as prepare, patch.object(ops, 'replace_restore_database') as replace:
             with self.assertRaisesRegex(ValueError, 'digest mismatch'):
                 ops.restore_initial(COMMIT, '0' * 64)
-            self.assertEqual(compose.call_count, 1)
+            self.assertEqual(compose.call_count, 2)
+            prepare.assert_not_called()
+            replace.assert_not_called()
 
     def test_first_deploy_requires_verified_data_marker(self):
         (self.root / 'releases' / COMMIT).mkdir()
@@ -188,10 +195,11 @@ class OperationsTests(unittest.TestCase):
                 self.assertNotIn('shell', kw)
                 self.assertNotIn('capture_output', kw)
 
-    def test_recovery_hyphen_username_is_positional(self):
+    def test_recovery_legacy_and_hyphen_usernames_are_positional(self):
         path = self.recovery_release()
         for action in ('recovery-issue', 'recovery-revoke'):
-            for username in ('-synthetic-owner', '--help'):
+            for username in ('-synthetic-owner', '--help', 'synthetic-\x1b[2j',
+                             'synthetic-a\nb', 'synthetic-\u202e'):
                 with self.subTest(action=action, username=username), self.terminal_mocks(), patch.object(
                         ops.subprocess, 'run') as run, patch.object(sys, 'argv', ['ctl', action, username]):
                     ops.main()
@@ -203,7 +211,7 @@ class OperationsTests(unittest.TestCase):
     def test_recovery_invalid_args_fail_before_docker(self):
         for argv in (['ctl', 'recovery-issue'], ['ctl', 'recovery-revoke', 'synthetic-a', '--flag'],
                      *[['ctl', 'recovery-issue', value] for value in ('', '  ', 'a'*101,
-                         'synthetic-\x1b[2J', 'synthetic-\n', 'synthetic-\u202e')]):
+                         'synthetic-\x00', 'synthetic-\ud800')]):
             with self.subTest(argv=argv), patch.object(sys, 'argv', argv), patch.object(ops, 'run') as run:
                 with self.assertRaises(ValueError):
                     ops.main()

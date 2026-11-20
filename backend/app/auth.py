@@ -194,6 +194,8 @@ def change_password(request, current_password, new_password, confirmation):
         stored = conn.execute('SELECT password_hash FROM accounts WHERE id=%s', (owner,)).fetchone()['password_hash']
         if not hmac.compare_digest(password_hash(current_password, stored.split(':')[0]), stored):
             raise HTTPException(400, {'code': 'current_password', 'message': 'Gjeldende passord er feil.'})
+        if current_password == new_password:
+            raise HTTPException(400, {'code': 'new_password', 'message': 'Nytt passord må være forskjellig fra gjeldende passord.'})
         replacement = password_hash(new_password)
         session(conn, request)  # Expiry may have passed during hashing.
         replace_password(conn, owner, replacement, actor='app-account:' + str(owner))
