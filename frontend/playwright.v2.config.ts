@@ -4,7 +4,7 @@ const origin = 'http://127.0.0.1:19651';
 
 export default defineConfig({
   testDir: './.v2-tests',
-  testIgnore: 'tablet-transport.spec.ts',
+  testIgnore: ['tablet-transport.spec.ts', 'v2-*.test.ts'],
   workers: 1,
   timeout: 120_000,
   reporter: [['line'], ['json', { outputFile: '../tmp/v2-browser-report.json' }]],

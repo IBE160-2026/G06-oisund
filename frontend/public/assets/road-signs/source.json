@@ -1,0 +1,41 @@
+{
+  "provider": "Statens vegvesen",
+  "license": "NLOD",
+  "license_url": "https://data.norge.no/nlod/no",
+  "dataset": "https://dataut.vegvesen.no/dataset/trafikkskilt",
+  "archive": "https://www.vegvesen.no/globalassets/fag/veg-og-gate/trafikkskilt-og-vegoppmerking/forbudsskilt-jpg-png.zip?v=4a9199",
+  "archive_sha256": "d44a84ba39d6d8844dd301d970b63c12be7d5d5dee2df649bde4154c56e0241c",
+  "retrieved": "2026-11-20",
+  "assets": [
+    {
+      "file": "362_30.jpg",
+      "sign_code": "362_30",
+      "speed_kmh": 30,
+      "sha256": "3c3595328c42fc86e514693e1410956156d560205eefb44ba2e553f0c6feea45"
+    },
+    {
+      "file": "362_40.jpg",
+      "sign_code": "362_40",
+      "speed_kmh": 40,
+      "sha256": "35357d0c502e68d5176b7bca4b8ddc1a108760d7f5ddf03a2539ef78d223ef7e"
+    },
+    {
+      "file": "362_50.jpg",
+      "sign_code": "362_50",
+      "speed_kmh": 50,
+      "sha256": "80eefe211af19a89910abfe4d576ec30c671ccf995b5531430bc132f6f652707"
+    },
+    {
+      "file": "362_60.jpg",
+      "sign_code": "362_60",
+      "speed_kmh": 60,
+      "sha256": "39fd9174bc8fe7b18cda53d08314f572638368cf7af167f560987a62aff535b5"
+    },
+    {
+      "file": "362_70.jpg",
+      "sign_code": "362_70",
+      "speed_kmh": 70,
+      "sha256": "335f8814d4c6590cbd6f77eb01a76f44dbecf244fa6febf1ef5853722ebf2bb6"
+    }
+  ]
+}

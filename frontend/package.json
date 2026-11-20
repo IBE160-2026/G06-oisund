@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "build": "tsc --noEmit && vite build",
-    "start": "vite preview --host 0.0.0.0 --port 5173 --strictPort"
+    "start": "vite preview --host 0.0.0.0 --port 5173 --strictPort",
+    "test:v2-motion": "node --experimental-transform-types --test tests/v2-position-source.test.ts tests/v2-stop-progression.test.ts tests/v2-road-limits.test.ts"
   },
   "dependencies": {
     "react": "19.3.1",

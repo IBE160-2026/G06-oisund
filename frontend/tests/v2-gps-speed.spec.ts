@@ -131,3 +131,54 @@ test('account settings stop the watch and a changed server selection blocks loca
   await expect(speed.getByRole('status')).toContainText('Tilgangen');
   expect(await page.evaluate(() => window.v2SyntheticPosition.watches())).toBe(2);
 });
+
+test('road signs and own speed have independent availability and share one GPS watch', async ({ page, context }) => {
+  await page.clock.install();
+  await syntheticPosition(page);
+  const date = Date.now();
+  const iso = (offset: number) => new Date(date + offset).toISOString();
+  const point = (east: number) => [18.654321 + east / (111_195.08 * Math.cos(68.123456 * Math.PI / 180)), 68.123456];
+  await page.route('**/road-reference/**', route => route.fulfill({
+    json: {
+      status: 'qualified',
+      manifest: {
+        id: 'synthetic-road', revision: '1', profile: 'SL-LAB-1', uncertaintyM: 8,
+        retrievedAt: iso(-4_000), checkedAt: iso(-4_000), validUntil: iso(60_000),
+        path: ['before', 'after'],
+        packages: [{ id: 'synthetic-one', revision: '1', edges: [
+          { id: 'before', from: 'a', to: 'b', shape: [point(0), point(420)], length: 420, kmh: 50, successors: ['after'] },
+          { id: 'after', from: 'b', to: 'c', shape: [point(420), point(800)], length: 380, kmh: 30, successors: [] },
+        ] }],
+      },
+    },
+    headers: { 'Access-Control-Allow-Origin': 'http://127.0.0.1:5173', 'Access-Control-Allow-Credentials': 'true' },
+  }));
+  await openedPlan(page, context, true);
+  await page.getByRole('button', { name: 'Velg aktivitet 1', exact: true }).click();
+  const road = page.getByRole('region', { name: 'Fartsgrense', exact: true });
+  const speed = page.getByLabel('Målt egen fart');
+  await expect(road.getByRole('img')).toHaveCount(0);
+  await expect(speed).toHaveText('— km/t');
+  await road.getByRole('button', { name: 'Start vegmatching' }).click();
+  await expect.poll(() => page.evaluate(() => window.v2SyntheticPosition.count())).toBe(1);
+  for (const offset of [145, 160, 175]) {
+    await page.clock.fastForward(1_000);
+    await page.evaluate(east => window.v2SyntheticPosition.fix(null, 0, east), offset);
+  }
+  await expect(road.getByRole('img', { name: '50 km/t' })).toBeVisible();
+  await expect(road.getByRole('img', { name: '30 km/t' })).toBeVisible();
+  await expect(road).toContainText('ca. 250 m');
+  await expect(speed).toHaveText('— km/t');
+  await page.getByRole('region', { name: 'Egen fart (GPS)' }).getByRole('button', { name: /fartsmåling/ }).click();
+  for (const offset of [190, 205]) {
+    await page.clock.fastForward(1_000);
+    await page.evaluate(east => window.v2SyntheticPosition.fix(10, 0, east), offset);
+  }
+  await expect(speed).toHaveText('36 km/t');
+  await expect(road.getByRole('img', { name: '50 km/t' })).toBeVisible();
+  expect(await page.evaluate(() => window.v2SyntheticPosition.watches())).toBe(1);
+  await road.getByRole('button', { name: 'Stopp vegmatching' }).click();
+  await expect(road.getByRole('img')).toHaveCount(0);
+  await expect(speed).toHaveText('36 km/t');
+  expect(await page.evaluate(() => window.v2SyntheticPosition.count())).toBe(1);
+});

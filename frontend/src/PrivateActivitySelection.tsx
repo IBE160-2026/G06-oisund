@@ -9,6 +9,7 @@ import { OutcomeEditor, validLifecycle, type Progress } from './PrivateWorkdayPr
 import { privateNow } from './privateClock';
 import type { PositionAnchorContinuity } from './positionAnchorClient';
 import { PositionAssistance } from './PositionAssistance';
+import { PrivateRoadLimits } from './PrivateRoadLimits';
 import { PrivateStopProgression } from './PrivateStopProgression';
 
 type Selection = { workday_id: string; activity_id: string | null; revision: number; expires_at: string };
@@ -70,6 +71,7 @@ export function PrivateActivitySelection(props: Props) {
         <OutcomeEditor progress={props.progress} activityId={selected} suspended={props.suspended || props.navigationLocked || busy || !!pending || !!comparison || rejected} />
         {!props.progress.terminal && <PositionAssistance key={selected} authorized={positionVisible} expiresAt={props.expiresAt} verifyAccess={verifyPositionAccess}>
           <PrivateStopProgression workdayId={props.id} activityId={selected} expiresAt={props.expiresAt} request={props.request} mutation={props.mutation} visible={positionVisible} anchorContinuity={props.anchorContinuity} />
+          <PrivateRoadLimits workdayId={props.id} activityId={selected} request={props.request} />
         </PositionAssistance>}
       </> : <><p>{props.progress.terminal ? 'Lesevisning' : 'Manuelt valgt'} · Aktivitet {index + 1} av {content.activities.length}</p><button disabled={disabled} onClick={props.openActivity}>Åpne valgt aktivitet</button></> : <p><strong>Ingen aktivitet valgt</strong></p> : <p>Lagret aktivitetsvalg kan ikke bekreftes.</p>}
       {proposal?.activity_id && <p>Lokalt forslag (ikke gjeldende lagret valg): {label(proposal.activity_id)}</p>}

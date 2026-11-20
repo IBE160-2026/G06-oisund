@@ -2,13 +2,14 @@
 
 from copy import deepcopy
 from datetime import UTC, date, datetime
+import json
 from pathlib import Path
 from uuid import uuid4
 
 from fastapi.testclient import TestClient
 import pytest
 
-from app import draft_storage, route_source
+from app import draft_storage, road_reference_api, route_source
 from app.private_storage import cleanup, database
 from test_private_access import headers, login, synthetic_only, users
 from test_private_drafts import content, save
@@ -298,3 +299,35 @@ def test_pre017_pending_and_accepted_operation_hashes_are_compatible(fake, users
                         {'payload_hash': expected_hash, 'route_revision': None}]
         conn.rollback()
     assert confirm(client, draft, body).json() == response.json()
+
+
+def test_road_snapshot_follows_owner_and_exact_frozen_route(fake, users, monkeypatch, tmp_path):
+    client, _ = fake
+    assert login(client, users).status_code == 200
+    draft = draft_for(client)
+    assert write_choice(client, draft, 0)[0].status_code == 200
+    reviewed, body = review(client, draft, 1)
+    assert reviewed.status_code == 200
+    confirmed = confirm(client, draft, {**body, 'expected_route_revision': 1})
+    assert confirmed.status_code == 200
+    workday = confirmed.json()['id']
+    path = f'/workdays/{workday}/road-reference/{paths(draft)[2]}'
+    snapshot = tmp_path / 'fixture.json'
+    monkeypatch.setattr(road_reference_api, 'PUBLIC_SNAPSHOT', snapshot)
+    assert client.get(path).json() == {'status': 'road-unqualified'}
+    assert client.get(f'/workdays/{workday}/road-reference/{uuid4()}').json() == {'status': 'route-unqualified'}
+    binding = {'service_date': DATE.isoformat(), 'line_id': route_source.LINE_ID, 'journey_id': JOURNEY,
+               'journey_version': '1', 'pattern_id': 'TRO:JourneyPattern:synthetic-outbound', 'pattern_version': '1',
+               'direction': 'outbound', 'start_position': 3,
+               'end_position': 4, 'route_source_sha256': DIGEST,
+               'occurrence_ids': ['TRO:StopPointInJourneyPattern:synthetic-3', 'TRO:StopPointInJourneyPattern:synthetic-4']}
+    package = {'version': 1, 'binding': binding, 'manifest': {'control': 'synthetic only'},
+               'qualification': dict.fromkeys(('direction', 'coverage', 'topology', 'source', 'error_model'), 'fixture')}
+    for field, wrong in [('end_position', 3), ('direction', 'inbound'), ('route_source_sha256', 'b' * 64),
+                         ('occurrence_ids', list(reversed(binding['occurrence_ids'])))]:
+        snapshot.write_text(json.dumps({**package, 'binding': {**binding, field: wrong}}), encoding='utf-8')
+        assert client.get(path).json() == {'status': 'road-unqualified'}
+    snapshot.write_text(json.dumps(package), encoding='utf-8')
+    assert client.get(path).json() == {'status': 'qualified', 'manifest': package['manifest']}
+    with TestClient(client.app) as anonymous:
+        assert anonymous.get(path).status_code == 401
