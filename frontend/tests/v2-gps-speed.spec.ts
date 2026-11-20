@@ -1,4 +1,5 @@
 import { type Page } from '@playwright/test';
+import type { RoadManifest } from '../src/roadLimits';
 import { expect, openedPlan, setup, test } from './private-activity-helpers';
 
 setup();
@@ -10,9 +11,9 @@ async function syntheticPosition(page: Page) {
     const state = {
       count: () => active.size,
       watches: () => callbacks.length,
-      fix(speed: number | null, index = callbacks.length - 1, east = 0, accuracy = 8) {
+      fix(speed: number | null, index = callbacks.length - 1, east = 0, accuracy = 8, acquiredAt = Date.now()) {
         callbacks[index].success({
-          timestamp: Date.now(),
+          timestamp: acquiredAt,
           coords: {
             latitude: 68.123456, longitude: 18.654321 + east / (111_195.08 * Math.cos(68.123456 * Math.PI / 180)),
             accuracy, speed, heading: null,
@@ -38,10 +39,39 @@ declare global {
     v2SyntheticPosition: {
       count: () => number;
       watches: () => number;
-      fix: (speed: number | null, index?: number, east?: number, accuracy?: number) => void;
+      fix: (speed: number | null, index?: number, east?: number, accuracy?: number, acquiredAt?: number) => void;
       fail: (code: number) => void;
     };
   }
+}
+
+function roadManifest(epoch: number, revision = '1', current = 50, next = 30, boundary = 420): RoadManifest {
+  const iso = (offset: number) => new Date(epoch + offset).toISOString();
+  const point = (east: number) => [18.654321 + east / (111_195.08 * Math.cos(68.123456 * Math.PI / 180)), 68.123456] as const;
+  const before = 'before-' + revision;
+  const after = 'after-' + revision;
+  return {
+    id: 'synthetic-road', revision, profile: 'SL-LAB-1', uncertaintyM: 8,
+    retrievedAt: iso(-4_000), checkedAt: iso(-4_000), validUntil: iso(60_000),
+    path: [before, after],
+    packages: [{ id: 'synthetic-one', revision, edges: [
+      { id: before, from: 'a', to: 'b', shape: [point(0), point(boundary)], length: boundary, kmh: current, successors: [after] },
+      { id: after, from: 'b', to: 'c', shape: [point(boundary), point(800)], length: 800 - boundary, kmh: next, successors: [] },
+    ] }],
+  };
+}
+
+type RoadReply = { status: 'qualified'; manifest: RoadManifest } | { status: 'road-unqualified' };
+
+async function stubRoad(page: Page, reply: () => RoadReply | Promise<RoadReply>, serverTime?: number) {
+  await page.route('**/road-reference/**', async route => route.fulfill({
+    json: await reply(),
+    headers: {
+      'Access-Control-Allow-Origin': new URL(page.url()).origin,
+      'Access-Control-Allow-Credentials': 'true',
+      ...(serverTime === undefined ? {} : { Date: new Date(serverTime).toUTCString(), 'Access-Control-Expose-Headers': 'Date' }),
+    },
+  }));
 }
 
 test('private activity uses explicit GPS opt-in, freshness and one watch across changed context', async ({ page, context }) => {
@@ -135,24 +165,8 @@ test('account settings stop the watch and a changed server selection blocks loca
 test('road signs and own speed have independent availability and share one GPS watch', async ({ page, context }) => {
   await page.clock.install();
   await syntheticPosition(page);
-  const date = Date.now();
-  const iso = (offset: number) => new Date(date + offset).toISOString();
-  const point = (east: number) => [18.654321 + east / (111_195.08 * Math.cos(68.123456 * Math.PI / 180)), 68.123456];
-  await page.route('**/road-reference/**', route => route.fulfill({
-    json: {
-      status: 'qualified',
-      manifest: {
-        id: 'synthetic-road', revision: '1', profile: 'SL-LAB-1', uncertaintyM: 8,
-        retrievedAt: iso(-4_000), checkedAt: iso(-4_000), validUntil: iso(60_000),
-        path: ['before', 'after'],
-        packages: [{ id: 'synthetic-one', revision: '1', edges: [
-          { id: 'before', from: 'a', to: 'b', shape: [point(0), point(420)], length: 420, kmh: 50, successors: ['after'] },
-          { id: 'after', from: 'b', to: 'c', shape: [point(420), point(800)], length: 380, kmh: 30, successors: [] },
-        ] }],
-      },
-    },
-    headers: { 'Access-Control-Allow-Origin': 'http://127.0.0.1:5173', 'Access-Control-Allow-Credentials': 'true' },
-  }));
+  const manifest = roadManifest(Date.now());
+  await stubRoad(page, () => ({ status: 'qualified', manifest }));
   await openedPlan(page, context, true);
   await page.getByRole('button', { name: 'Velg aktivitet 1', exact: true }).click();
   const road = page.getByRole('region', { name: 'Fartsgrense', exact: true });
@@ -233,4 +247,150 @@ test('road signs and own speed have independent availability and share one GPS w
   await speedPanel.getByRole('button', { name: 'Slå av posisjon' }).click();
   await expect(roadStatus).toBeEmpty();
   expect(await activeCount()).toBe(0);
+});
+
+test('explicit road restart requalifies the entire snapshot before counting new fixes', async ({ page, context }) => {
+  await page.clock.install();
+  await syntheticPosition(page);
+  const epoch = Date.now();
+  const original: RoadReply = { status: 'qualified', manifest: roadManifest(epoch) };
+  const replacement: RoadReply = { status: 'qualified', manifest: roadManifest(epoch, '2', 60, 40, 450) };
+  let response: RoadReply | Promise<RoadReply> = original;
+  let requests = 0;
+  await stubRoad(page, () => { requests++; return response; });
+  await openedPlan(page, context, true);
+  await page.getByRole('button', { name: 'Velg aktivitet 1', exact: true }).click();
+
+  const road = page.getByRole('region', { name: 'Fartsgrense', exact: true });
+  const status = road.getByRole('status');
+  const signs = road.getByRole('img');
+  const start = road.getByRole('button', { name: 'Start vegmatching' });
+  const stop = road.getByRole('button', { name: 'Stopp vegmatching' });
+  const speed = page.getByRole('region', { name: 'Egen fart (GPS)' });
+  const ownSpeed = page.getByLabel('Målt egen fart');
+  const watches = () => page.evaluate(() => window.v2SyntheticPosition.watches());
+  const active = () => page.evaluate(() => window.v2SyntheticPosition.count());
+  async function fixes(eastings: number[]) {
+    for (const east of eastings) {
+      await page.clock.fastForward(1_000);
+      await page.evaluate(value => window.v2SyntheticPosition.fix(10, undefined, value), east);
+    }
+  }
+  function holdReply() {
+    let release!: (reply: RoadReply) => void;
+    response = new Promise(resolve => { release = resolve; });
+    return release;
+  }
+
+  await speed.getByRole('button', { name: 'Start fartsmåling' }).click();
+  await expect.poll(active).toBe(1);
+  await start.click();
+  await expect(stop).toBeVisible();
+  await fixes([145, 160, 175]);
+  await expect(road.getByRole('img', { name: '50 km/t' })).toBeVisible();
+  await expect(road.getByRole('img', { name: '30 km/t' })).toBeVisible();
+  await expect(ownSpeed).toHaveText('36 km/t');
+  await stop.click();
+
+  response = { status: 'qualified', manifest: { ...original.manifest, validUntil: new Date(epoch).toISOString() } };
+  await start.click();
+  await expect(status).toContainText('Vegdata er utløpt');
+  await expect(signs).toHaveCount(0);
+  const beforeWithdraw = requests;
+  const withdraw = holdReply();
+  await start.click();
+  await expect.poll(() => requests).toBe(beforeWithdraw + 1);
+  await page.clock.fastForward(1_000);
+  await page.evaluate(() => window.v2SyntheticPosition.fix(10, undefined, 180, -1));
+  withdraw({ status: 'road-unqualified' });
+  await expect(status).toContainText('Kvalifisert veggrunnlag mangler');
+  await expect(signs).toHaveCount(0);
+
+  const beforeReplace = requests;
+  const replace = holdReply();
+  await start.click();
+  await expect.poll(() => requests).toBe(beforeReplace + 1);
+  await fixes([190, 205]);
+  await expect(signs).toHaveCount(0);
+  await expect(ownSpeed).toHaveText('36 km/t');
+  await page.clock.fastForward(100);
+  const acquiredBeforeRestart = await page.evaluate(() => Date.now());
+  await page.clock.fastForward(100);
+  replace(replacement);
+  await expect(stop).toBeVisible();
+  await page.evaluate(time => window.v2SyntheticPosition.fix(10, undefined, 210, 8, time), acquiredBeforeRestart);
+  await fixes([220, 235]);
+  await expect(signs).toHaveCount(0);
+  await fixes([250]);
+  await expect(road.getByRole('img', { name: '60 km/t' })).toBeVisible();
+  await expect(road.getByRole('img', { name: '40 km/t' })).toBeVisible();
+  await expect(signs).toHaveCount(2);
+  expect(await watches()).toBe(1);
+  await stop.click();
+
+  const beforePause = requests;
+  const late = holdReply();
+  await start.click();
+  await expect.poll(() => requests).toBe(beforePause + 1);
+  await speed.getByRole('button', { name: 'Pause posisjon' }).click();
+  await expect(status).toContainText('Posisjon er satt på pause');
+  await expect(start).toBeEnabled();
+  const current = holdReply();
+  await start.click();
+  await expect.poll(() => requests).toBe(beforePause + 2);
+  const completed = page.waitForResponse('**/road-reference/**');
+  late(original);
+  await (await completed).finished();
+  await expect(status).toContainText('Kontrollerer veggrunnlaget');
+  await expect(signs).toHaveCount(0);
+  expect(await active()).toBe(0);
+  current(replacement);
+  await expect(stop).toBeVisible();
+  await fixes([265, 280, 295]);
+  await expect(road.getByRole('img', { name: '60 km/t' })).toBeVisible();
+  await expect(road.getByRole('img', { name: '40 km/t' })).toBeVisible();
+  expect(await watches()).toBe(2);
+});
+
+test('road source retry checks qualification and cancellation before sensing', async ({ page, context }) => {
+  await page.clock.install();
+  await syntheticPosition(page);
+  const epoch = Date.now();
+  let reply: RoadReply | Promise<RoadReply> = { status: 'road-unqualified' };
+  let requests = 0;
+  await stubRoad(page, () => { requests++; return reply; }, epoch);
+  await openedPlan(page, context, true);
+  await page.getByRole('button', { name: 'Velg aktivitet 1', exact: true }).click();
+
+  const road = page.getByRole('region', { name: 'Fartsgrense', exact: true });
+  const status = road.getByRole('status');
+  const start = road.getByRole('button', { name: 'Start vegmatching' });
+  const watches = () => page.evaluate(() => window.v2SyntheticPosition.watches());
+  const candidate = roadManifest(epoch - 60_000);
+  const expired: RoadReply = { status: 'qualified', manifest: { ...candidate, validUntil: new Date(epoch - 10_000).toISOString() } };
+  await expect(status).toContainText('Kvalifisert veggrunnlag mangler');
+  reply = expired;
+  await road.getByRole('button', { name: 'Kontroller veggrunnlaget på nytt' }).click();
+  await expect(start).toBeEnabled();
+  expect(await watches()).toBe(0);
+
+  await page.clock.setSystemTime(new Date(epoch - 30_000));
+  const beforeExpiry = requests;
+  await start.click();
+  await expect(status).toContainText('Vegdata er utløpt');
+  expect(await watches()).toBe(0);
+  expect(requests).toBe(beforeExpiry + 1);
+
+  let late!: (answer: RoadReply) => void;
+  reply = new Promise(resolve => { late = resolve; });
+  await start.click();
+  await expect.poll(() => requests).toBe(beforeExpiry + 2);
+  await expect(status).toContainText('Kontrollerer veggrunnlaget');
+  await road.getByRole('button', { name: 'Avbryt vegoppstart' }).click();
+  await expect(start).toBeEnabled();
+  const completed = page.waitForResponse('**/road-reference/**');
+  late({ status: 'qualified', manifest: roadManifest(epoch) });
+  await (await completed).finished();
+  await expect(status).toBeEmpty();
+  expect(await watches()).toBe(0);
 });

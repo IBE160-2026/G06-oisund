@@ -131,7 +131,7 @@ export class RoadLimits {
     return (this.reading = unknown(reason));
   }
 
-  private fresh(wall: number) {
+  isFresh(wall: number) {
     const checked = timestamp(this.manifest.checkedAt), retrieved = timestamp(this.manifest.retrievedAt);
     return !!this.edges && wall >= checked && wall - checked <= 86_400_000
       && wall >= retrieved && wall - retrieved <= 604_800_000 && wall < timestamp(this.manifest.validUntil);
@@ -143,7 +143,7 @@ export class RoadLimits {
   }
 
   read(mono: number, wall: number): RoadReading {
-    if (!this.fresh(wall)) return this.reset('source');
+    if (!this.isFresh(wall)) return this.reset('source');
     if (this.previous && fixAge(this.previous, mono) > FIX_AGE_MS) return this.reset('stale');
     return this.reading;
   }
@@ -167,9 +167,9 @@ export class RoadLimits {
     return false;
   }
 
-  receive(fix: PositionFix): RoadReading {
-    const now = fix.receivedWallMs, mono = fix.receivedMonoMs;
-    if (!this.fresh(now)) return this.reset('source');
+  receive(fix: PositionFix, wall = fix.receivedWallMs): RoadReading {
+    const mono = fix.receivedMonoMs;
+    if (!this.isFresh(wall)) return this.reset('source');
     if (fixAge(fix, mono) < 0 || fixAge(fix, mono) > FIX_AGE_MS) return this.reset('stale');
     if (!finite(fix.accuracyM, 0, 25)) return this.reset('uncertain');
     if (this.previous?.generation !== fix.generation || this.previous && fix.acquiredAt - this.previous.acquiredAt > FIX_AGE_MS) this.reset();
