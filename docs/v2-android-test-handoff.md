@@ -13,6 +13,14 @@ Fire fysiske lagringsprøver bestod 20. november 2026. IBE160 lagret ulik tekst 
 
 GPS, Androids stedstillatelser, Chrome på enhetene, feltkjøring og full vurderings- og PDF-regresjon står åpne. Bruk syntetiske posisjoner til automasjon. Reell posisjon krever egen avklaring. PC-ene, testtjenestene, tailnettet, relayet og arbeideren må være oppe, og enhetene må være USB-tilkoblet, godkjent og opplåst. Ny USB-godkjenning og fysisk opplåsing kan kreve Jonas.
 
+### Fysisk visning av PDF-kildefakta
+
+På byggegrunnlag `5ddcb67` bestod funksjonsprøven i Brave på både Lenovo og Pixel. Begge åpnet sitt syntetiske utkast i versjon 2 med riktig Buss/vogn-verdi, åpnet **Vis kildefakta fra PDF** og så **Kildefakta fra PDF · ikke bekreftet** og **Vognløp i kildeorden**. Etter at panelet var lukket, gjenåpnet begge utkastet med samme versjon og Buss/vogn-verdi. Prøven gjorde ingen lagring eller endring i appen.
+
+Første åpning av utkastet måtte gjentas på begge enhetene. Lenovo viste **«Tjenesten er utilgjengelig. Inndata er beholdt.»** før det nye forsøket. Utkast- og sesjonsoppslagene ga deretter HTTP 200 på Lenovo. Den senere gjenåpningen i prøven fungerte på første forsøk på begge enhetene. Årsaken til de første forsøkene er uavklart.
+
+Resultatet er rapportert av laptopøkten, med JSON- og skjermbildebevis i hver enhetsmappe på laptopen. Bruk `outputs/evidence/<USB-serie>/ibe-pdf-source-facts.json` og `outputs/evidence/<USB-serie>/ibe-pdf-source-facts.png`.
+
 ## Køtest fra prosjektchatten
 
 Fra IBE160-prosjektchatten på hjemmemaskinen kan den faste lesetesten bestilles via `http://127.0.0.1:4185/jobs`. Den avgrensede arbeideren på laptopen kjører uavhengig av laptopchatten, henter køjobber på den private arbeiderporten 4186 og bruker de to godkjente USB-enhetene. Innsending på 4185 er lokal på hjemmemaskinen. Køen godtar bare den faste `read-only-smoke`-testen for IBE160 og TIDE. Jobbene behandles sekvensielt.
