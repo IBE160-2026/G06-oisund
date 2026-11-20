@@ -14,7 +14,7 @@ The integrated regression checkpoint is complete. The road panel explains positi
 
 ## Local start
 
-The isolated physical Android test stack uses the same loopback ports as Owner mode. Coordinate with the laptop test chat before starting Owner mode on those ports. [Android test handoff for Lenovo and Pixel](v2-android-test-handoff.md).
+The isolated physical Android test stack uses the same loopback ports as Owner mode. Check which stack owns the ports before starting Owner mode. Submit the fixed Android smoke test through the local queue. [Android test handoff for Lenovo and Pixel](v2-android-test-handoff.md#køtest-fra-prosjektchatten).
 
 From this worktree in PowerShell 7, with Docker Desktop running.
 
@@ -42,7 +42,7 @@ Playwright supplied synthetic fixes on Windows loopback in Edge, Firefox and Web
 
 ### Local USB connection for the Lenovo trial
 
-The later isolated Android run verified physical Brave login, draft saving and reopening on Lenovo and Pixel over the laptop USB chain. It also verified the V2 loopback ports on both devices. The laptop coordinates shared devices for the two projects. The steps below are for a separate direct Owner connection. Use the existing Android Debug Bridge (ADB) and an already authorized USB debugging connection. [Android test handoff](v2-android-test-handoff.md) · [V1 Lenovo trial](evidence/12-3-device-testing-2026-10-27.md).
+The later isolated Android run verified physical Brave login, draft saving and reopening on Lenovo and Pixel over the laptop USB chain. A subsequent queue job verified read-only UI on both devices through the laptop worker. The steps below are for a separate direct Owner connection. Use the existing Android Debug Bridge (ADB) and an already authorized USB debugging connection. [Android test handoff](v2-android-test-handoff.md) · [V1 Lenovo trial](evidence/12-3-device-testing-2026-10-27.md).
 
 In PowerShell, set `$adb` to `adb` if Platform Tools is on `PATH`, or use the workstation path recorded in the Lenovo session. Run `& $adb devices -l` and select the Lenovo row with state `device`. If the row is missing or reports `unauthorized`, check the cable and the tablet's debugging prompt before continuing. [Existing ADB path](../.logs/jonas-oisund/996-2026-10-27-11-07-12-story-12-3-nettbrett-og-pc.md).
 

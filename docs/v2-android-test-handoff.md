@@ -11,22 +11,35 @@ Hjemme-PC-en kjører de isolerte testappene. Det private tailnettet fører TCP-p
 
 Fire fysiske lagringsprøver bestod 20. november 2026. IBE160 lagret ulik tekst med æ, ø og å i Buss/vogn fra hver enhet og gjenåpnet samme tekst i versjon 2 etter omlasting. TIDE lagret Lenovo-kommentaren i revisjon 1 og Pixel-kommentaren i revisjon 2. Begge viste de to kommentarene etter omlasting. Vurderingen ble stående som et utkast under kjøring. Laptopens prøver dekket UI, innskriving, aktivering, skjermbilder og kontroll av lagret resultat i Brave. Hjemmemaskinen verifiserte de lagrede revisjonene. Alle tre lokale HTTP-adressene svarte 200 da dette notatet ble skrevet. [Lokal prøvelogg](../.logs/jonas-oisund/984-2026-11-20-21-10-49-privat-android-prove.md).
 
-GPS, Androids stedstillatelser, Chrome på enhetene, feltkjøring og full vurderings- og PDF-regresjon står åpne. Bruk syntetiske posisjoner til automasjon. Reell posisjon krever egen avklaring. Automatisk gjenoppstart etter omstart er uavklart. PC-ene, testtjenestene, tailnettet og relayet må være oppe, og enhetene må være USB-tilkoblet, godkjent og opplåst. Ny USB-godkjenning og fysisk opplåsing kan kreve Jonas.
+GPS, Androids stedstillatelser, Chrome på enhetene, feltkjøring og full vurderings- og PDF-regresjon står åpne. Bruk syntetiske posisjoner til automasjon. Reell posisjon krever egen avklaring. PC-ene, testtjenestene, tailnettet, relayet og arbeideren må være oppe, og enhetene må være USB-tilkoblet, godkjent og opplåst. Ny USB-godkjenning og fysisk opplåsing kan kreve Jonas.
 
-## Bestill en avgrenset prøve
+## Køtest fra prosjektchatten
 
-Laptopoverleveringen oppgir at Jonas har gitt stående godkjenning til at akkurat IBE160-, TIDE- og laptopchatten kan bestille og returnere prøver på de to godkjente USB-enhetene i isolerte miljøer. Godkjenningen omfatter bruk av de allerede godkjente prøveidentitetene. Bruk syntetiske data og hold legitimasjon utenfor meldinger og bevis. Bruk bare disse tre chattene til samordningen. Produksjonsendringer, publisering, utrulling, merge og push ligger utenfor denne godkjenningen.
+Fra IBE160-prosjektchatten på hjemmemaskinen kan den faste lesetesten bestilles via `http://127.0.0.1:4185/jobs`. Den avgrensede arbeideren på laptopen kjører uavhengig av laptopchatten, henter køjobber på den private arbeiderporten 4186 og bruker de to godkjente USB-enhetene. Innsending på 4185 er lokal på hjemmemaskinen. Køen godtar bare den faste `read-only-smoke`-testen for IBE160 og TIDE. Jobbene behandles sekvensielt.
 
-1. Kontroller aktivt bygg, testadresse og hvilke testdata oppdraget kan endre. Ta med branch og commit i bestillingen. Et nytt bygg trenger eget resultat.
-2. Finn laptopchat `01a1fa77-9521-7fc1-b451-a63ab3b3e304` med `list_threads` og bruk den returnerte `hostId`. Les autorisasjonen i kildetråden med `read_thread`. Ved overleveringen viste verktøyet herfra bare hjemmemaskinens lokale vert. Laptopchatten kunne derfor ikke leses direkte eller nås gjennom verifisert ruting fra denne verten.
-3. Når målverten er tilgjengelig, send ett oppdrag med `send_message_to_thread` til laptopchatten. Oppgi prosjekt, byggegrunnlag, avsenderens chat-ID, enhet, testadresse, syntetiske forutsetninger, trinn, forventet UI og tillatte dataendringer. Laptopchatten eier køen. Den kjører bare ett oppdrag av gangen på hver enhet. For TIDE skal hver skriver laste gjeldende revisjon før neste lagring.
-4. Bruk `wait_threads` og kontroller den faktiske kvitteringen. Før bygg, enhet og nettleser, trinn, observert resultat, vedvarende revisjon og plassering av bevis. Registrer prøven som utført først når resultatet er kontrollert.
+Kontroller aktivt bygg før innsending. Testen leser synlig IBE160-test-UI i Brave på begge enhetene. Den logger ikke inn og lagrer ingen appdata. Godkjenningen gjelder de to godkjente enhetene og isolerte testmiljøer. Ved behov for andre testtyper må de holdes utenfor den faste køen. Bruk syntetiske data og hold legitimasjon utenfor meldinger og bevis.
 
-**Reserveflyt ved manglende laptopvert.** Legg den samme fullstendige testbestillingen i IBE160-prosjektchatten. En aktiv laptopøkt kan hente den med `read_thread` fra prosjektchat `01a1f658-903b-7231-840f-51298b17a555` og returnere resultatet til samme prosjektchat med `send_message_to_thread`. Laptop → prosjekt er bekreftet av de mottatte overleveringsmeldingene. En bestilling i prosjektchatten blir liggende til en aktiv laptopøkt henter den. Hentingen krever ingen manuell kopiering av kommandoer eller testdata.
+Kjør én gang på hjemmemaskinen. Responsen skal ha HTTP 202 og en jobb-ID.
 
-Eksempel på bestilling til laptopchatten
+```powershell
+$queue = 'http://127.0.0.1:4185/jobs'
+$receipt = Invoke-WebRequest -Method Post -Uri $queue -ContentType 'application/json' `
+  -Body '{"project":"IBE160","test":"read-only-smoke"}'
+if ($receipt.StatusCode -ne 202) { throw "Uventet svar $($receipt.StatusCode)" }
+$id = ($receipt.Content | ConvertFrom-Json).id
+$id
+```
 
-> IBE160 V2, branch og commit [bygg], svar til [avsenderens chat-ID]. Bruk [Lenovo eller Pixel] i Brave på `http://127.0.0.1:19661/private` med en godkjent syntetisk prøvekonto. Bruk bare et nytt syntetisk PDF-utkast. Endre Buss/vogn til [prøvetekst], lagre og vent på kvittering. Last på nytt, gjenåpne utkastet og kontroller forventet versjon og tekst. Returner observert resultat og lokal bevissti.
+Les deretter den samme jobben til den er ferdig. Ta vare på ID-en ved tidsavbrudd og fortsett med GET.
+
+```powershell
+$job = Invoke-RestMethod -Method Get -Uri "$queue/$id"
+$job | ConvertTo-Json -Depth 5
+```
+
+Sjekk at ID-en stemmer, at `state` er `completed` og at både `Lenovo` og `Pixel` har `passed: true`. Status `queued` eller `running` er fortsatt pågående. Status `expired` eller `passed: false` betyr at prøven ikke er bestått.
+
+Den 20. november 2026 ga IBE160-innsendingen HTTP 202 for jobb `6b0948b9-bef2-4832-8174-04ce03b5e2c0`. Køen gikk fra `queued` via `running` til `completed`, med `passed: true` for begge enheter. Laptopens lokale bevis for samme ID bekreftet HTML-sidetittelen **Fiktiv arbeidsdag** på begge enhetene. Arbeideren krevde også riktig URL med unik jobb-ID og synlig «Privat tilgang» eller «Privat arbeidsrom». Køkvitteringen inneholder bare beståttstatus per enhet.
 
 ## Kommandoer på laptopen
 
@@ -43,6 +56,6 @@ node outputs/mobile-browser.mjs capture SERIAL http://127.0.0.1:19661/private be
 node outputs/usb-control.mjs capture SERIAL
 ```
 
-`activate` kan velge en HTML-kontroll med en presis selektor. `read` maskerer passord. Bruk `wait` eller `read` etter handlinger, og bekreft lagringen etter gjenåpning. Hold IBE160 i forgrunnen mens forespørselen pågår. Bruk `Start-app-tests.cmd` ved behov når det etablerte relayet er stoppet.
+`activate` kan velge en HTML-kontroll med en presis selektor. `read` maskerer passord. Bruk `wait` eller `read` etter handlinger, og bekreft lagringen etter gjenåpning. Hold IBE160 i forgrunnen mens forespørselen pågår. Bruk `Start-app-tests.cmd` ved behov når det etablerte relayet er stoppet. Etter omstart kan arbeideren startes med `Start-Android-test-worker.cmd` i vanlig Windows-økt på laptopen. Det er ingen registrert automatisk oppstart av arbeideren.
 
 På laptopen ligger sammendraget i `outputs/App-testresultater.json` og `outputs/USB-oppsett-og-testresultater.txt`. Bevisene per enhet ligger i `outputs/evidence/<USB-serie>/`, blant annet `ibe-persisted.json`, `ibe-verified.png`, `tide-persisted.json` og `tide-native-verified.png`. Oppstart og stans på hjemmemaskinen er dokumentert i `D:\TIDE vurderingsskjema\.cache\private-android-transport\overlevering.md`. Samordne stans med begge prosjektchattene slik at testdata og andre tjenester bevares. Tailscale Serve er privat. Relayet på laptopen lytter på loopback.
