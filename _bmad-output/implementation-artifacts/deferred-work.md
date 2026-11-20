@@ -25,3 +25,6 @@ Current V1 closure classification is in [the closeout assessment](../../docs/sub
 - source_spec: `_bmad-output/implementation-artifacts/spec-12-3-current-main-sync.md`
   summary: Minimize outer Access cookies forwarded to private API (B10).
   historical_evidence: Accepted nginx configuration forwards original Cookie while removing assertion header; filter outer Access credentials while preserving app session/CSRF cookies and test proxy behavior. No actual disclosure observed.
+- source_spec: `_bmad-output/implementation-artifacts/spec-v2-route-heading-focus.md`
+  summary: Preserve a newer focus choice if a departure lookup finishes after the user moves to another control.
+  evidence: The original animation callback and the layout effect both move focus on an accepted asynchronous response. The draft editor can still receive focus during the request. A delayed-response test should hold the response, focus another control, and check whether the newer selection is preserved.

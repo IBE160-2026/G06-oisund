@@ -28,7 +28,7 @@ const draft = { id: draftId, revision: 1, created_at: '2026-11-20T02:00:00Z', ex
 for (const rechecked of [false, true]) {
 test(`saved draft requires explicit choice and recovers a lost reply (${rechecked ? 'rechecked' : 'original'} source)`, async ({ page }) => {
   const source = rechecked ? { ...original, checked_at: '2026-11-20T02:05:00Z' } : original;
-  await page.clock.install({ time: new Date('2026-11-20T03:00:00Z') });
+  await page.clock.setFixedTime(new Date('2026-11-20T03:00:00Z'));
   let writes = 0;
   let receipt: any = null;
   let reviewCommand: any = null;

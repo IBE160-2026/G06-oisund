@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { privateNow } from './privateClock';
 import type { Saved } from './PrivateDrafts';
 
@@ -206,6 +206,9 @@ export function DraftRouteReview({ draft, request, mutation, suspended, lock, ex
   const target = scope(draft) + '/route-references';
   const departurePath = scope(draft) + '/route-departures?revision=' + draft.revision
     + '&activity_id=' + encodeURIComponent(activityId);
+  useLayoutEffect(() => {
+    if (journey) details.current?.focus();
+  }, [journey]);
   useEffect(() => { active.current = true; return () => { active.current = false; epoch.current++; }; }, []);
   useEffect(() => { lock(!!pending || sending); return () => lock(false); }, [pending, sending, lock]);
 
@@ -254,7 +257,6 @@ export function DraftRouteReview({ draft, request, mutation, suspended, lock, ex
         || value.provenance?.sha256 !== overview?.provenance?.sha256) throw new Error('Invalid route detail');
       setJourney(value.journey);
       setMessage('');
-      requestAnimationFrame(() => details.current?.focus());
     } catch (error) { if (active.current && generation === epoch.current) failure(error); }
     finally { if (active.current && generation === epoch.current) setBusy(false); }
   }
