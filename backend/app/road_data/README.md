@@ -6,6 +6,16 @@ The dated 20 November recheck found 145 contiguous segments with the same span e
 
 The private route projection only returns a matching packaged `v2-approved.json` with the exact dated, frozen journey, occurrence range, versioned road packages and supporting direction, coverage, topology, source and error-model evidence. No such operational package is bundled. The technical controls use two explicitly synthetic manifests and the same runtime matcher. A simulated browser or a reachable NVDB endpoint cannot close the physical pilot gates.
 
+## Local source refresh
+
+From `backend`, run the explicit operator command with Python 3.13. This example reproduces the public 20 November scope in municipality `5501`.
+
+```powershell
+python -m app.road_evidence --municipality 5501 --sequence 1109517 1109722 1125918 1125938 1125949 1125950 1126027 1126028 1126029 1126030 1126487 1126506 1126527 1126588 1126914 3316796 3316797 3316798 --date 2026-11-20 --output ../tmp/nvdb-road-20261120.zip
+```
+
+The ZIP contains the raw response pages and `receipt.json` with the selected effective date, the observation and server times, page lengths and SHA-256 hashes, declared counts and any missing network sequences. A scoped road object may include extra placements in its raw page. The command fetches the segmented road network and object types 105, 573, 607, 616, 721, 856, 913, 977 and 979. It stops on incomplete pagination, inconsistent results or exhausted budgets. It allows at most 20 requests including at most two retries before the response body, 3 MB per body, 10 MB overall, 500 segments and 100 speed-limit objects. The tested Linux command has a 240-second acquisition deadline. The Python socket uses a 12-second timeout. A completed archive replaces the output atomically. The archive has research status and a separate file format from the runtime package. [Verified NVDB replay and source result](../../../docs/evidence/v2-road-source-20261120.md#repeatable-bounded-nvdb-collection).
+
 - Source pilot specification and evidence are pinned on `codex/plan-speed-limits` at `5adc6fb2c0137a3a6519d4f7ba42dd57f0e02f1c`.
 - [NVDB Les](https://nvdbapiles.atlas.vegvesen.no/) supplies public road topology and type 105 records under NLOD.
 - Original sign evidence and licensing are stored in [the asset manifest](../../../frontend/public/assets/road-signs/source.json).
