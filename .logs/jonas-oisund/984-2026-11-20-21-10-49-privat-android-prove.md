@@ -20,5 +20,7 @@ Bevare den verifiserte overleveringen og bestillingsflyten i IBE160.
 
 - Lagret overleveringen og lenket den fra V2 i `1618a83`. Tre lesende HTTP-oppslag på hjemmemaskinen ga 200. Åpnet ingen ny nettleserprøve. Appverktøyet fant bare lokal vert herfra og kildetråden kunne ikke leses. Den mottatte laptopoverleveringen dokumenterer den avgrensede godkjenningen og reserveflyten med henting fra hjemmets prosjektchat. [Android-testoverlevering](../../docs/v2-android-test-handoff.md).
 
+- La inn nøyaktig én IBE160-lesetest via hjemmets lokale kø. HTTP 202 ga jobb-ID `6b0948b9-bef2-4832-8174-04ce03b5e2c0`. GET fulgte jobben fra kø til bestått på Lenovo og Pixel. Arbeiderbeviset knyttet tittelen «Fiktiv arbeidsdag» på begge til samme jobb-ID. Oppdaterte bestillingskommando, statuskontroll og vilkår i `ac00088`. PowerShell-eksemplene ble syntakskontrollert. [Køtesten og kvitteringen](../../docs/v2-android-test-handoff.md#køtest-fra-prosjektchatten).
+
 ### Åpne punkter
-- Fysisk lagring og gjenåpning er verifisert. GPS, tillatelser og feltprøvene står fortsatt under «V2 fysisk nettbrett/GPS». Det verifiserte hjemmemiljøet står på til videre Codex-testing. Direkte bestilling til laptopverten fra hjemmechatten er uverifisert. En aktiv laptopøkt kan hente bestillinger som ligger i prosjektchatten.
+- Fysisk lagring, gjenåpning og købasert lesetest er verifisert. GPS, tillatelser og feltprøvene står fortsatt under «V2 fysisk nettbrett/GPS». Arbeideren kan startes på nytt på laptopen fra `Start-Android-test-worker.cmd`. Automatisk oppstart er ikke registrert.
