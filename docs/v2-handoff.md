@@ -110,7 +110,7 @@ The offline corridor audit reconstructed all 15 declared spans from the research
 
 A separate offline check corroborated 11 general and one explicit field-1 parent placement across those 13 intervals. The last interval is a 5.058 m R1 connector. Its empty field codes match the NVDB connector convention. Confirm the applicable limit through that entrance using signing or the relevant decision. R4 remains a separate field gate. [Parent links and R1 connector](evidence/v2-road-source-20261120.md#parent-links-and-the-r1-connector).
 
-Tromsø's closeout for work at Strandvegen 5–18 reports reinstatement on 6 November, and the accompanying photos show traffic on surface Strandvegen. Check later temporary changes for the actual trial date. Dated R1 photos cover the county-road ring. The municipal detour plan concerns wayfinding farther south. The exact signing decision for the R1 entrance remains open. [Polaria closeout](evidence/v2-road-source-20261120.md#polaria-surface-works-closeout) · [R1 imagery and municipal records](evidence/v2-road-source-20261120.md#r1-imagery-and-municipal-signing-records).
+Tromsø's closeout for work at Strandvegen 5–18 reports reinstatement on 6 November. The Owner confirmed on 20 November that the Polaria work-zone restriction had been lifted. Check any new temporary changes for the actual trial date. Dated R1 photos cover the county-road ring. The exact R1 speed-limit evidence remains open, and the Owner declined the proposed municipal email. [Polaria closeout](evidence/v2-road-source-20261120.md#polaria-surface-works-closeout) · [R1 imagery and municipal records](evidence/v2-road-source-20261120.md#r1-imagery-and-municipal-signing-records).
 
 ## Owner trial order
 
