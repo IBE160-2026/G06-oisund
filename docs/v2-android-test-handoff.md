@@ -55,6 +55,14 @@ Laptopøkten fant at arbeideren fortsatte etter at overskriften var synlig, mens
 
 Den ene koordinerte erstatningsjobben `f306874a-b3e2-40ee-8e17-7b31b0d0932c` fikk HTTP 202 og endte som `completed` med **`passed: true` på både Lenovo og Pixel**. Begge sluttkvitteringene ble lest tilbake fra køhistorikken. En ny lesende databasekontroll fant begge utkastene med uendrede Buss/vogn-markører, gyldig utløpstid, PDF-kildefakta og revisjon 2.
 
+## Nye bestillinger og retur av resultat
+
+Bruk den aktive IBE160-testchatten på hjemmemaskinen som kilde til nye IBE160-prøver. Bestill faste jobber direkte fra hjemmekøen. Bruk eksisterende kvitteringer når prøven allerede er verifisert.
+
+For en fysisk prøve uten fast køjobb skriver hjemmetestchatten en synlig **Android-bestilling til laptop** i samme chat. Ta med byggegrunnlag, isolert opprinnelse, enheter og nettlesere, forutsetninger, trinn og forventet resultat. Laptopchatten leser den aktive testchatten med `read_thread` og leverer resultat per enhet og nettleser tilbake i samme chat med referanse til bevisene i `outputs/evidence`. Denne flyten krever ingen melding fra hjemmemaskinen til en annen chat. Den gamle prosjektchatten brukes som historikk.
+
+Før en bestilt prøve som åpen til resultatet foreligger. Bruk syntetiske data, og hold legitimasjon og engangskoder utenfor bestillinger og bevis. Faktisk posisjon krever egen avklaring.
+
 ## Kommandoer på laptopen
 
 Kjør fra den etablerte arbeidsmappen `C:\Users\joisu\Documents\Codex\2026-11-20\klargj-r-denne-laptopen-for-at`. Erstatt `SERIAL` med USB-serien for den valgte godkjente enheten. Relayet bruker 19221 for Lenovo og 19222 for Pixel til Braves nettleserstyring.
