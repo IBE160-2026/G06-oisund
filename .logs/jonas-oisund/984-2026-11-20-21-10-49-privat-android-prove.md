@@ -24,6 +24,8 @@ Bevare den verifiserte overleveringen og bestillingsflyten i IBE160.
 
 - Laptopøkten rapporterte bestått fysisk visning og lukking av PDF-kildefakta i Brave på Lenovo og Pixel. Begge gjenåpnet syntetisk utkast med uendret versjon 2 og Buss/vogn. Første åpning måtte gjentas på begge. Lenovo viste «Tjenesten er utilgjengelig. Inndata er beholdt.» før neste forsøk. Utkast og sesjon svarte deretter HTTP 200 på Lenovo, og senere gjenåpning fungerte straks på begge. Førte resultat, avgrensning og bevisstier i `636f8ed`. [PDF-prøven](../../docs/v2-android-test-handoff.md#fysisk-visning-av-pdf-kildefakta).
 
+- Bestilte PDF-kildefaktaprøven via hjemmekøen. Jobb `5460fcfe-e702-4681-9824-53f2d078c3b9` feilet på begge enhetene fordi arbeideren gikk videre før utkastknappen var ferdig lastet. Laptopøkten endret ventingen til den aktive versjon 2-knappen. Én koordinert erstatningsjobb `f306874a-b3e2-40ee-8e17-7b31b0d0932c` bestod på begge. Leste begge sluttkvitteringene tilbake og kontrollerte at de syntetiske utkastene fortsatt var i revisjon 2 med samme Buss/vogn-markører og PDF-kildefakta. Førte kommando og begge resultater i `41f4187`. [Android-køprotokollen](../../docs/v2-android-test-handoff.md#køtest-fra-prosjektchatten).
+
 ### Åpne punkter
 - Fysisk lagring, gjenåpning og købasert lesetest er verifisert. GPS, tillatelser og feltprøvene står fortsatt under «V2 fysisk nettbrett/GPS». Arbeideren kan startes på nytt på laptopen fra `Start-Android-test-worker.cmd`. Automatisk oppstart er ikke registrert.
 - Første åpning av det lagrede PDF-utkastet måtte gjentas på begge. Årsaken er uavklart.
