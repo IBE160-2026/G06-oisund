@@ -159,6 +159,28 @@ def test_historical_v2_read_does_not_consult_current_pilot_selection(monkeypatch
     assert view['calls'][0]['stop_place_id'] == 'NSR:StopPlace:54202'
 
 
+@pytest.mark.parametrize('actual_digest', [positions.PILOT_ROUTE_SHA, 'b' * 64])
+def test_rechecked_timetable_can_only_use_a_frozen_explicit_v2_pin(actual_digest):
+    original = reference_for('NSR:Quay:92496')
+    rechecked = original | {'selection_mode': 'explicit', 'provenance': {
+        'sha256': actual_digest, route_source.RECHECK_BASIS: positions.PILOT_ROUTE_SHA,
+    }}
+    saved = rechecked | {'position_coordinate_revision': positions.PILOT_MANUAL_REVISION}
+    projection = positions.view(saved, 'control')
+    assert projection['source']['revision'] == positions.PILOT_MANUAL_REVISION
+    assert projection['route']['source_version'] == actual_digest
+    assert projection['route']['basis'] == draft_storage.fingerprint('control', saved)
+    assert projection['calls'][0]['stop_place_id'] == 'NSR:StopPlace:54202'
+    assert projection['calls'][0]['coordinates'] is None
+    assert projection['calls'][0]['coordinate_issue'] == 'validity-unknown'
+    for missing_authority in (rechecked, rechecked | {'position_coordinate_revision': None},
+                              saved | {'selection_mode': 'implicit'},
+                              saved | {'position_coordinate_revision': positions.PILOT_REVISION}):
+        view = positions.view(missing_authority, 'control')
+        assert view['source'] is None and view['calls'][0]['stop_place_id'] is None
+    assert positions.view(original, 'control')['source']['revision'] == positions.PILOT_REVISION
+
+
 def test_mismatched_pilot_authority_cannot_supply_a_parent():
     reference = reference_for('NSR:Quay:92496')
     reference['position_coordinate_revision'] = positions.PILOT_MANUAL_REVISION

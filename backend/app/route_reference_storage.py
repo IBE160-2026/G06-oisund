@@ -154,7 +154,9 @@ def source_comparison(reference, day):
         return 'changed'
     if day['source_state'] == 'stale':
         return 'stale'
-    return 'same_version' if reference['provenance'] == day['provenance'] else 'same_facts'
+    current_digest = day['provenance'].get('sha256')
+    same_version = current_digest and current_digest == reference['provenance'].get('sha256')
+    return 'same_version' if same_version or reference['provenance'] == day['provenance'] else 'same_facts'
 
 
 def state(conn, draft, now):
@@ -291,7 +293,10 @@ def save(request, identifier, body):
                 'status': selection_status(journey, selection, activity, day),
                 'selection_mode': 'explicit', 'selected_at': observed.isoformat(),
             }
-            if position_coordinates.is_pilot_timetable(reference):
+            if position_coordinates.is_rechecked_timetable(reference):
+                manual = position_coordinates.PILOT_MANUAL_REVISION
+                reference['position_coordinate_revision'] = manual if position_coordinates.sidecar(manual) else None
+            elif position_coordinates.is_pilot_timetable(reference):
                 reference['position_coordinate_revision'] = position_coordinates.current_pilot_revision()
         elif not any(row['activity_id'] == body.activity_id and row['reference'] is not None
                      for row in saved_decisions(conn, identifier)):

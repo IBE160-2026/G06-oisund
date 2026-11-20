@@ -5,12 +5,16 @@ param(
     [ValidateSet('Test', 'Owner')]
     [string]$Mode,
     [switch]$ApisOnly,
+    [switch]$RecheckRouteSource,
     [switch]$Stop
 )
 
 $ErrorActionPreference = 'Stop'
 $PSNativeCommandUseErrorActionPreference = $true
 $testMode = $Mode -eq 'Test'
+if ($RecheckRouteSource -and ($testMode -or $Stop)) {
+    throw '-RecheckRouteSource requires an Owner startup.'
+}
 $project = if ($testMode) { 'ibe160-v2-tests' } else { 'ibe160-v2-owner' }
 $firstPort = if ($testMode) { 19651 } else { 19661 }
 $config = Join-Path $PSScriptRoot '../compose.v2.yaml'
@@ -27,6 +31,9 @@ $environment = @{
     V2_NOTICE_REFRESH = $(if ($testMode) { 'off' } else { 'on' })
     V2_ROUTE_ARCHIVE = $(if (!$testMode -and $routeArchive) { "/reference/$($routeArchive.Name)" })
     V2_ROUTE_OBSERVED_AT = $(if (!$testMode -and $routeArchive) { '2026-11-20T01:13:54.5323574Z' })
+    V2_ROUTE_RECHECK_BUNDLE = $(if (!$testMode) { '/reference/recheck/current-line20.bundle' })
+    V2_ROUTE_RECHECK_REVISION = $null
+    V2_ROUTE_SOURCE_REFRESH = $(if ($RecheckRouteSource) { 'owner' })
     VITE_FICTIONAL_API = "http://127.0.0.1:$($firstPort + 1)"
     VITE_PRIVATE_API = "http://127.0.0.1:$($firstPort + 2)"
     VITE_PRIVATE_API_BASE = $null
@@ -68,6 +75,20 @@ try {
     }
     if (-not $ApisOnly -and (Get-NetTCPConnection -LocalPort $firstPort -State Listen -ErrorAction SilentlyContinue)) {
         throw "UI port $firstPort is already in use."
+    }
+    if ($RecheckRouteSource) {
+        if (!$routeArchive) {
+            throw 'Route source recheck requires the original pinned archive in .private-runtime/route.'
+        }
+        $null = New-Item -ItemType Directory -Path (Join-Path $routeDirectory 'recheck') -Force
+        docker compose -p $project -f $config run --rm --no-deps --build route-recheck
+        if ($LASTEXITCODE -ne 0) { throw 'Route source recheck failed. Start without the switch to use retained evidence.' }
+    }
+    if (!$testMode) {
+        # A running API reloads at startup. A changed bundle must change its Compose configuration.
+        $bundle = Join-Path $routeDirectory 'recheck/current-line20.bundle'
+        $revision = Get-FileHash -LiteralPath $bundle -ErrorAction SilentlyContinue
+        Set-LaunchEnvironment 'V2_ROUTE_RECHECK_REVISION' $revision.Hash
     }
     docker compose -p $project -f $config up -d --build --wait
     foreach ($port in ($firstPort + 1), ($firstPort + 2)) { "Health http://127.0.0.1:$port/health" }

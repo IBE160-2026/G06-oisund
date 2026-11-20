@@ -8,7 +8,7 @@ const operationId = '00000000-0000-4000-8000-000000000023';
 const journeyId = 'TRO:ServiceJourney:synthetic-v2';
 const patternId = 'TRO:JourneyPattern:synthetic-v2';
 const lineId = 'TRO:Line:1_20';
-const source = { sha256: 'a'.repeat(64), provider: 'Syntetisk test', observed_at: '2026-11-20T02:00:00Z', generation: 'test' };
+const original = { sha256: 'a'.repeat(64), provider: 'Syntetisk test', observed_at: '2026-11-20T02:00:00Z', generation: 'test' };
 const start = { raw_time: '10:00:00', raw_day_offset: null, day_offset: 0, calendar_time: date + 'T10:00:00+01:00', utc: date + 'T09:00:00Z' };
 const end = { raw_time: '11:00:00', raw_day_offset: null, day_offset: 0, calendar_time: date + 'T11:00:00+01:00', utc: date + 'T10:00:00Z' };
 const calls = [
@@ -25,7 +25,9 @@ const draft = { id: draftId, revision: 1, created_at: '2026-11-20T02:00:00Z', ex
     trip: '0007', line: '20', direction: 'Manuell retning', uncertainty: null, provenance: null,
   }] } };
 
-test('saved draft requires explicit route occurrence choice and recovers an accepted lost reply', async ({ page }) => {
+for (const rechecked of [false, true]) {
+test(`saved draft requires explicit choice and recovers a lost reply (${rechecked ? 'rechecked' : 'original'} source)`, async ({ page }) => {
+  const source = rechecked ? { ...original, checked_at: '2026-11-20T02:05:00Z' } : original;
   await page.clock.install({ time: new Date('2026-11-20T03:00:00Z') });
   let writes = 0;
   let receipt: any = null;
@@ -81,6 +83,10 @@ test('saved draft requires explicit route occurrence choice and recovers an acce
   await page.getByLabel('Lagret passasjertur').selectOption(activityId);
   await page.getByRole('button', { name: 'Søk på driftsdatoen' }).click();
   await expect(page.getByText('Én mulig avgang og stoppstrekning', { exact: false })).toBeVisible();
+  await page.getByText('Kildegrunnlag', { exact: true }).first().click();
+  const sourceClock = page.getByText('Kildearkiv kontrollert', { exact: false });
+  if (rechecked) await expect(sourceClock).toHaveText(/kontrollert .*03:05.*Ferskhet beregnes fra .*03:00/);
+  else await expect(sourceClock).toHaveText(/kontrollert .*03:00.*Publikasjonstid/);
   await page.getByLabel('Planlagt avgang').selectOption(journeyId);
   await expect(page.getByRole('heading', { name: 'Planlagt avgang til Kildeskilt' })).toBeFocused();
   await expect(page.getByRole('button', { name: 'Lagre valgt avgang og strekning' })).toBeDisabled();
@@ -101,3 +107,4 @@ test('saved draft requires explicit route occurrence choice and recovers an acce
   await page.getByRole('checkbox', { name: 'Jeg har gjennomgått rutevalgene og vil bevare dem i planen.' }).check();
   await expect(page.getByRole('button', { name: 'Bekreft gjennomgått plan' })).toBeEnabled();
 });
+}

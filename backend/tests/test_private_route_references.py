@@ -406,6 +406,45 @@ def test_new_pilot_pins_loadable_v1_or_explicit_null(fake, users, monkeypatch):
     assert replay['current_route_revision'] == 2
 
 
+@pytest.mark.parametrize('digest', [route_source.DIGEST, 'b' * 64])
+def test_recheck_preserves_receipts_and_requires_the_current_digest(fake, users, monkeypatch, digest):
+    client, evidence = fake
+    evidence['provenance']['sha256'] = route_source.DIGEST
+    assert login(client, users).status_code == 200
+    draft = draft_for(client)
+    saved, operation = write_choice(client, draft, 0, digest=route_source.DIGEST)
+    assert saved.status_code == 200
+    original = saved.json()['reference']
+    now = datetime.now(UTC)
+    evidence['provenance'] = {
+        **evidence['provenance'], 'sha256': digest, route_source.RECHECK_BASIS: route_source.DIGEST,
+        'checked_at': now.isoformat(), 'observed_at': now.isoformat(), 'generation': 'rechecked-fixture',
+    }
+    listed = client.get(paths(draft)[0]).json()
+    assert listed['provenance']['sha256'] == digest and listed['source_state'] == 'available'
+    [reference] = inspect_state(client, draft)['references']
+    comparison = 'same_version' if digest == route_source.DIGEST else 'same_facts'
+    assert reference == {**original, 'comparison': comparison}
+    assert write_choice(client, draft, 0, body=operation)[0].json() == saved.json()
+    if digest != route_source.DIGEST:
+        assert write_choice(client, draft, 1, digest=route_source.DIGEST)[0].status_code == 409
+        assert inspect_state(client, draft)['route_revision'] == 1
+    fresh, current_operation = write_choice(client, draft, 1, digest=digest)
+    assert fresh.status_code == 200, fresh.text
+    current = fresh.json()['reference']
+    assert current['position_coordinate_revision'] == position_coordinates.PILOT_MANUAL_REVISION
+    assert current['provenance'] == evidence['provenance']
+    assert original['provenance'] != current['provenance']
+    load = position_coordinates.sidecar
+    monkeypatch.setattr(position_coordinates, 'sidecar',
+                        lambda revision: load(revision) if revision == position_coordinates.PILOT_REVISION else None)
+    without_v2, _ = write_choice(client, draft, 2, digest=digest)
+    assert without_v2.status_code == 200
+    assert without_v2.json()['reference']['position_coordinate_revision'] is None
+    assert write_choice(client, draft, 1, body=current_operation)[0].json()['reference'] == current
+    assert write_choice(client, draft, 0, body=operation)[0].json()['reference'] == original
+
+
 def test_edit_invalidation_and_stale_or_incompatible_selection(fake, users):
     client, evidence = fake
     assert login(client, users).status_code == 200

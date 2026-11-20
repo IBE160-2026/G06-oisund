@@ -58,6 +58,8 @@ services:
       V2_NOTICE_REFRESH: ${V2_NOTICE_REFRESH:-off}
       V2_ROUTE_ARCHIVE: ${V2_ROUTE_ARCHIVE:-}
       V2_ROUTE_OBSERVED_AT: ${V2_ROUTE_OBSERVED_AT:-}
+      V2_ROUTE_RECHECK_BUNDLE: ${V2_ROUTE_RECHECK_BUNDLE:-}
+      V2_ROUTE_RECHECK_REVISION: ${V2_ROUTE_RECHECK_REVISION:-}
     secrets: [v2_password]
     volumes:
       - ./Eksempelfiler:/fixtures:ro
@@ -71,6 +73,20 @@ services:
       interval: 2s
       timeout: 3s
       retries: 30
+  route-recheck:
+    profiles: [route-recheck]
+    build: ./backend
+    network_mode: bridge
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    command: [python, -m, app.route_source, "${V2_ROUTE_ARCHIVE:-}", --observed-at, "${V2_ROUTE_OBSERVED_AT:-}", --recheck-bundle, /route-recheck/current-line20.bundle]
+    environment:
+      APP_MODE: private-local
+      V2_ROUTE_SOURCE_REFRESH: ${V2_ROUTE_SOURCE_REFRESH:-}
+    volumes:
+      - ./.private-runtime/route:/reference:ro
+      - ./.private-runtime/route/recheck:/route-recheck
 volumes:
   fictional:
   private:

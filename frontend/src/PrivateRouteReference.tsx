@@ -15,7 +15,7 @@ type Journey = {
 };
 type Provenance = {
   provider: string; generation: string; sha256: string; observed_at: string;
-  line_publication: string | null; timezone: string;
+  checked_at?: string; line_publication: string | null; timezone: string;
 };
 type Mode = 'keep' | 'source' | 'manual' | 'unknown';
 type Choice = { mode: Mode; manual?: string };
@@ -57,7 +57,8 @@ const validJourney = (value: any): value is Journey => value && typeof value.jou
     && (call.quay_id === null || /^NSR:Quay:/.test(call.quay_id)) && validTime(call.arrival) && validTime(call.departure));
 const validProvenance = (value: any): value is Provenance => value && typeof value.provider === 'string'
   && typeof value.generation === 'string' && typeof value.sha256 === 'string' && /^[a-f0-9]{64}$/.test(value.sha256)
-  && Number.isFinite(Date.parse(value.observed_at));
+  && Number.isFinite(Date.parse(value.observed_at))
+  && (value.checked_at === undefined || typeof value.checked_at === 'string' && Number.isFinite(Date.parse(value.checked_at)));
 function validReference(value: any): value is Reference {
   return typeof value?.activity_id === 'string' && Number.isInteger(value.decision_revision) && value.decision_revision > 0
     && Number.isInteger(value.start_position) && Number.isInteger(value.end_position)
@@ -128,8 +129,9 @@ function Calls({ journey, start = 1, end = journey.calls.length }: { journey: Jo
 
 function SourceFacts({ source }: { source: Provenance }) {
   const observed = new Date(source.observed_at).toLocaleString('nb-NO', { timeZone: 'Europe/Oslo' });
+  const checked = source.checked_at && new Date(source.checked_at).toLocaleString('nb-NO', { timeZone: 'Europe/Oslo' });
   return <details><summary>Kildegrunnlag</summary><p>{source.provider} · generasjon {source.generation} · {source.timezone}</p>
-    <p>Kildearkiv kontrollert {observed}. Publikasjonstid fra kildefilen {source.line_publication ?? 'Ukjent'}.</p>
+    <p>Kildearkiv kontrollert {checked || observed}.{checked && ` Ferskhet beregnes fra ${observed}.`} Publikasjonstid fra kildefilen {source.line_publication ?? 'Ukjent'}.</p>
     <p>SHA-256 <span style={{ overflowWrap: 'anywhere' }}>{source.sha256}</span></p></details>;
 }
 

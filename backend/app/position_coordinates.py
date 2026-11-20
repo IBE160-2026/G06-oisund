@@ -7,6 +7,7 @@ from functools import lru_cache
 from hashlib import sha256
 from pathlib import Path
 
+from . import route_source
 from .draft_storage import fingerprint
 
 
@@ -53,6 +54,14 @@ def source_version(reference):
 def is_pilot_timetable(reference):
     provenance = reference.get('provenance')
     return isinstance(provenance, dict) and provenance.get('sha256') == PILOT_ROUTE_SHA
+
+
+def is_rechecked_timetable(reference):
+    provenance = reference.get('provenance')
+    if not isinstance(provenance, dict) or provenance.get(route_source.RECHECK_BASIS) != PILOT_ROUTE_SHA:
+        return False
+    digest = provenance.get('sha256')
+    return isinstance(digest, str) and re.fullmatch(r'[0-9a-f]{64}', digest) is not None
 
 
 def current_pilot_revision():
@@ -186,11 +195,18 @@ def view(reference, activity_id):
               'route-incompatible' if status != 'compatible' else None)
     # Legacy reference rows can only resolve the published sidecar pinned to
     # their exact archive digest. An explicit null pin remains manual-only.
-    legacy_revision = PILOT_REVISION if version == PILOT_ROUTE_SHA else None
+    rechecked = is_rechecked_timetable(reference)
+    legacy_revision = PILOT_REVISION if version == PILOT_ROUTE_SHA and not rechecked else None
     coordinate_revision = reference.get('position_coordinate_revision', legacy_revision)
     manual_mapping = coordinate_revision == PILOT_MANUAL_REVISION
     data = None
-    if bounded_text(coordinate_revision, 100) and (not manual_mapping or is_pilot_timetable(reference)):
+    if rechecked:
+        bound = manual_mapping and reference.get('selection_mode') == 'explicit'
+    elif manual_mapping:
+        bound = is_pilot_timetable(reference)
+    else:
+        bound = coordinate_revision != PILOT_REVISION or version == PILOT_ROUTE_SHA
+    if bounded_text(coordinate_revision, 100) and bound:
         data = sidecar(coordinate_revision)
     route = {key: reference.get(key) if bounded_text(reference.get(key)) else None for key in (
         'activity_id', 'service_date', 'journey_id', 'line_id', 'pattern_id', 'direction', 'headsign')}
