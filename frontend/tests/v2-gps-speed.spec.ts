@@ -10,16 +10,16 @@ async function syntheticPosition(page: Page) {
     const state = {
       count: () => active.size,
       watches: () => callbacks.length,
-      fix(speed: number | null, index = callbacks.length - 1, east = 0) {
+      fix(speed: number | null, index = callbacks.length - 1, east = 0, accuracy = 8) {
         callbacks[index].success({
           timestamp: Date.now(),
           coords: {
             latitude: 68.123456, longitude: 18.654321 + east / (111_195.08 * Math.cos(68.123456 * Math.PI / 180)),
-            accuracy: 8, speed, heading: null,
+            accuracy, speed, heading: null,
           },
         } as GeolocationPosition);
       },
-      deny() { callbacks.at(-1)?.error({ code: 1 } as GeolocationPositionError); },
+      fail(code: number) { callbacks.at(-1)?.error({ code } as GeolocationPositionError); },
     };
     Object.defineProperty(window, 'v2SyntheticPosition', { value: state });
     Object.defineProperty(navigator, 'geolocation', { value: {
@@ -38,8 +38,8 @@ declare global {
     v2SyntheticPosition: {
       count: () => number;
       watches: () => number;
-      fix: (speed: number | null, index?: number, east?: number) => void;
-      deny: () => void;
+      fix: (speed: number | null, index?: number, east?: number, accuracy?: number) => void;
+      fail: (code: number) => void;
     };
   }
 }
@@ -82,7 +82,7 @@ test('denied and hidden location requires explicit resume and clears current dat
   await page.getByRole('button', { name: 'Velg aktivitet 1', exact: true }).click();
   await page.getByRole('button', { name: 'Start fartsmåling', exact: true }).click();
   await expect.poll(() => page.evaluate(() => window.v2SyntheticPosition.count())).toBe(1);
-  await page.evaluate(() => window.v2SyntheticPosition.deny());
+  await page.evaluate(() => window.v2SyntheticPosition.fail(1));
   const panel = page.getByRole('region', { name: 'Egen fart (GPS)' });
   await expect(panel.getByRole('status')).toContainText('Posisjonstilgangen er avvist');
   await expect.poll(() => page.evaluate(() => window.v2SyntheticPosition.count())).toBe(0);
@@ -156,31 +156,81 @@ test('road signs and own speed have independent availability and share one GPS w
   await openedPlan(page, context, true);
   await page.getByRole('button', { name: 'Velg aktivitet 1', exact: true }).click();
   const road = page.getByRole('region', { name: 'Fartsgrense', exact: true });
+  const roadStatus = road.getByRole('status');
+  const startRoad = road.getByRole('button', { name: 'Start vegmatching' });
   const speed = page.getByLabel('Målt egen fart');
+  const speedPanel = page.getByRole('region', { name: 'Egen fart (GPS)' });
+  const watchCount = () => page.evaluate(() => window.v2SyntheticPosition.watches());
+  const activeCount = () => page.evaluate(() => window.v2SyntheticPosition.count());
+  async function fixes(eastings: number[], kmh: number | null = null) {
+    for (const east of eastings) {
+      await page.clock.fastForward(1_000);
+      await page.evaluate(({ east, speed }) => window.v2SyntheticPosition.fix(speed, undefined, east), {
+        east, speed: kmh === null ? null : kmh / 3.6,
+      });
+    }
+  }
   await expect(road.getByRole('img')).toHaveCount(0);
   await expect(speed).toHaveText('— km/t');
-  await road.getByRole('button', { name: 'Start vegmatching' }).click();
-  await expect.poll(() => page.evaluate(() => window.v2SyntheticPosition.count())).toBe(1);
-  for (const offset of [145, 160, 175]) {
-    await page.clock.fastForward(1_000);
-    await page.evaluate(east => window.v2SyntheticPosition.fix(null, 0, east), offset);
+  for (const [index, message] of ['Posisjonstilgangen er avvist', 'Posisjon er utilgjengelig'].entries()) {
+    await startRoad.click();
+    await expect.poll(watchCount).toBe(index + 1);
+    await page.evaluate(code => window.v2SyntheticPosition.fail(code), index + 1);
+    await expect(roadStatus).toContainText(message);
+    await expect(startRoad).toBeEnabled();
+    await expect(road.getByRole('img')).toHaveCount(0);
+    expect(await activeCount()).toBe(0);
   }
+  await startRoad.click();
+  await expect.poll(activeCount).toBe(1);
+  await fixes([145, 160, 175]);
+  await expect(roadStatus).toBeEmpty();
   await expect(road.getByRole('img', { name: '50 km/t' })).toBeVisible();
   await expect(road.getByRole('img', { name: '30 km/t' })).toBeVisible();
   await expect(road).toContainText('ca. 250 m');
   await expect(speed).toHaveText('— km/t');
-  const beginSpeed = page.getByRole('region', { name: 'Egen fart (GPS)' }).getByRole('button', { name: /fartsmåling/ });
+  await page.clock.fastForward(1_000);
+  await page.evaluate(() => window.v2SyntheticPosition.fix(null, undefined, 190, -1));
+  await expect(roadStatus).toHaveText('Posisjonsmålingen kunne ikke brukes.');
+  await expect(road.getByRole('img')).toHaveCount(0);
+  await fixes([205, 220, 235]);
+  await expect(roadStatus).toBeEmpty();
+  await expect(road.getByRole('img', { name: '50 km/t' })).toBeVisible();
+  expect(await watchCount()).toBe(3);
+
+  await page.evaluate(() => window.v2SyntheticPosition.fail(3));
+  await expect(roadStatus).toContainText('Posisjonsmålingen tok for lang tid');
+  await expect(road.getByRole('img')).toHaveCount(0);
+  await page.clock.fastForward(1_000);
+  await page.evaluate(() => window.v2SyntheticPosition.fix(null, 2, 250));
+  await expect(roadStatus).toContainText('Posisjonsmålingen tok for lang tid');
+  expect(await activeCount()).toBe(0);
+  await startRoad.click();
+  await expect.poll(activeCount).toBe(1);
+  await fixes([265, 280]);
+  await expect(road.getByRole('img')).toHaveCount(0);
+  await fixes([295]);
+  await expect(road.getByRole('img', { name: '50 km/t' })).toBeVisible();
+
+  const beginSpeed = speedPanel.getByRole('button', { name: /fartsmåling/ });
   await beginSpeed.click();
   await expect(beginSpeed).toHaveCount(0);
-  for (const offset of [190, 205]) {
-    await page.clock.fastForward(1_000);
-    await page.evaluate(east => window.v2SyntheticPosition.fix(10, 0, east), offset);
-  }
+  await fixes([310, 325], 36);
   await expect(speed).toHaveText('36 km/t');
   await expect(road.getByRole('img', { name: '50 km/t' })).toBeVisible();
-  expect(await page.evaluate(() => window.v2SyntheticPosition.watches())).toBe(1);
+  expect(await watchCount()).toBe(4);
   await road.getByRole('button', { name: 'Stopp vegmatching' }).click();
   await expect(road.getByRole('img')).toHaveCount(0);
   await expect(speed).toHaveText('36 km/t');
-  expect(await page.evaluate(() => window.v2SyntheticPosition.count())).toBe(1);
+  expect(await activeCount()).toBe(1);
+  await page.evaluate(() => window.v2SyntheticPosition.fail(1));
+  await expect(speed).toHaveText('— km/t');
+  await expect(roadStatus).toBeEmpty();
+  await startRoad.click();
+  await expect.poll(activeCount).toBe(1);
+  await speedPanel.getByRole('button', { name: 'Pause posisjon' }).click();
+  await expect(roadStatus).toContainText('Posisjon er satt på pause');
+  await speedPanel.getByRole('button', { name: 'Slå av posisjon' }).click();
+  await expect(roadStatus).toBeEmpty();
+  expect(await activeCount()).toBe(0);
 });

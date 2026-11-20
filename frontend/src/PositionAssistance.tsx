@@ -14,7 +14,7 @@ export function usePositionAssistance() {
   return useContext(PositionContext);
 }
 
-const sourceMessage: Record<PositionReason, string> = {
+export const positionSourceMessage: Record<PositionReason, string> = {
   off: 'Posisjon er av.',
   paused: 'Posisjon er satt på pause.',
   hidden: 'Posisjon ble stoppet da siden ble skjult.',
@@ -72,7 +72,7 @@ function SpeedPanel({ source, start, stop }: SourceAccess) {
 
   const usable = view.active && speed.kind === 'qualified' && speed.validUntilMono > performance.now();
   const status = view.active && view.state.reason !== 'invalid' && speed.kind === 'unknown'
-    ? speedMessage[speed.reason] : usable ? '' : sourceMessage[view.state.reason === 'off' && view.state.running ? 'acquiring' : view.state.reason];
+    ? speedMessage[speed.reason] : usable ? '' : positionSourceMessage[view.state.reason === 'off' && view.state.running ? 'acquiring' : view.state.reason];
   async function begin() {
     setAttempted(true);
     setStarting(true);
