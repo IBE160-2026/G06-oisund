@@ -22,5 +22,8 @@ Bevare den verifiserte overleveringen og bestillingsflyten i IBE160.
 
 - La inn nøyaktig én IBE160-lesetest via hjemmets lokale kø. HTTP 202 ga jobb-ID `6b0948b9-bef2-4832-8174-04ce03b5e2c0`. GET fulgte jobben fra kø til bestått på Lenovo og Pixel. Arbeiderbeviset knyttet tittelen «Fiktiv arbeidsdag» på begge til samme jobb-ID. Oppdaterte bestillingskommando, statuskontroll og vilkår i `ac00088`. PowerShell-eksemplene ble syntakskontrollert. [Køtesten og kvitteringen](../../docs/v2-android-test-handoff.md#køtest-fra-prosjektchatten).
 
+- Laptopøkten rapporterte bestått fysisk visning og lukking av PDF-kildefakta i Brave på Lenovo og Pixel. Begge gjenåpnet syntetisk utkast med uendret versjon 2 og Buss/vogn. Første åpning måtte gjentas på begge. Lenovo viste «Tjenesten er utilgjengelig. Inndata er beholdt.» før neste forsøk. Utkast og sesjon svarte deretter HTTP 200 på Lenovo, og senere gjenåpning fungerte straks på begge. Førte resultat, avgrensning og bevisstier i `636f8ed`. [PDF-prøven](../../docs/v2-android-test-handoff.md#fysisk-visning-av-pdf-kildefakta).
+
 ### Åpne punkter
 - Fysisk lagring, gjenåpning og købasert lesetest er verifisert. GPS, tillatelser og feltprøvene står fortsatt under «V2 fysisk nettbrett/GPS». Arbeideren kan startes på nytt på laptopen fra `Start-Android-test-worker.cmd`. Automatisk oppstart er ikke registrert.
+- Første åpning av det lagrede PDF-utkastet måtte gjentas på begge. Årsaken er uavklart.
