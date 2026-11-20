@@ -419,3 +419,120 @@ Verifiser produksjonsversjon og lokale arkiver. Integrer relevant historisk evid
 ### Åpne punkter
 
 Navngitte O6-rester følges videre med dokumenterte barrierer, midlertidig aksept, eier og nyvurderingshendelse. Firmware er utsatt. Passordarbeidet har eget releaseomfang.
+
+
+## 2026-11-15 kl. 19:08 - Jonas Øisund
+
+### Oppgave
+
+Gjennomfør fersk O6-kontroll lokalt og på GitHub, kontroller server/oppetid først og avklar konkret restarbeid gjennom offisielle leverandørkilder. Bare lesende kontroll og dokumentasjon; ingen samlet O6-lukking eller utvidet risikoaksept.
+
+### Plan
+
+- Les prosjektinstruksjoner, bestilte O6-rapporter og relevante kilde-/eierregistre.
+- Forsøk etablert SSH før videre analyse; kontroller lokale/GitHub-referanser og eksakte distribusjons-/arkitekturbundne leverandørstatuser.
+- Vurder faktiske endringer i passordkandidaten, oppdater nåtidsoversikter og bevar historiske resultater.
+
+### Resultat
+
+Etablert SSH ble avvist før innlogging med Permission denied. Serverens helse, oppetid og aktive/installert tilstand er derfor uverifisert; ingen omvei eller tilgangsendring ble forsøkt. Lokal base1501104 ble sammenholdt med GitHub main4d97c76; de to nye lærerfilene erstatter ingen O6-beslutning. Passordkandidatens lokale og eksterne hode29a77ff samsvarer.
+
+[Datert rapport](../../docs/evidence/o6-status-20261115.md) og [individuelt kilderegister](../../docs/evidence/o6-status-20261115-sources.json) dokumenterer 56 kernelrester: 47 individuelt rettet i publisert Resolute amd64/generic7.0.0-43.43, seks fortsatt sårbare, to tracker/USN-motstrider og én utilgjengelig individuell side. Publisering er ikke aktivt rettelsesbevis. Debian-restene er fortsatt åpne; journald-originstatus og nåværende barrierer er uverifisert. Cloudflared2026.11.0 er en separat vedlikeholdskandidat uten dokumentert lukking av navngitte O6-rester.
+
+README, HANDOFF, Ubuntu-serverguiden og fire submission-oversikter er oppdatert. O3/O5 er fullført innen omfang, O4 administrativt lukket med bevisbegrensninger, og gjennomført O6-arbeid er skilt fra restene. Historiske evidensfiler og eieraksept er uendret. Passordkandidatens nye faste read-only maintenance-mounts og privilegerte restore-helper er vurdert på kildenivå; ingen konkret ny O6-blokkering er påvist. Implementert restore-policy/verktøy og beståtte eierprøver er bevart som gyldig evidens innen eget omfang.
+
+JSON-parse, 56 unike CVE-er, gruppetall, 47 individuelle rettelser, kontroll-/distribusjons-/arkitektur-/kildefelter, rapportens relative filhenvisninger og UTF-8/kontrolltegnkontroll bestod. Registeret er avstemt mot tidligere høyt register: to tidligere rettede og fire plattformutelukkede står utenfor; tre kritiske er lagt til. Git diff --check bestod. Endringer er bare dokumentasjon/logg; ingen pakkeinstallasjon, restart, deploy, tilgangs-/brannmurendring, firmware- eller WAN-prøve. Dokumentasjonen ligger på codex/o6-status-20261115; bare logg/issues committes etter prosjektinstruksjonen, ingen push.
+
+### Oppfølging samme dag kl. 19:16
+
+Jonas ba om konkret SSH-diagnose, lesende serverkontroll hvis mulig og commit av egne ferdige dokumentasjonsendringer uten merge/push. Samme branch og de ni egne ukommitterte filene ble kontrollert. Full ssh -vvv viser Windows WSAEACCES10013 under TCP-connect, native SSH-exit255, før serverbanner/nøkkelutveksling/autentisering. Den tidligere rapporterte prosess-/wrapperkoden1 er skilt fra den nye native målingen. Dette er lokal socket-/transporttilgangsfeil, ikke påvist autentiseringsavslag. Agentens nettverksbegrensning er kjent; eksakt filterregel er ikke identifisert.
+
+Effektiv ssh -G bruker jonas@192.168.1.138:22, nøkkelen ibe160_server_ed25519, IdentitiesOnly/BatchMode/StrictHostKeyChecking og HostKeyAlias192.168.1.139; ingen proxy. Nøkkelfilen er lesbar med avgrenset ACL, privatfilens offentlige del og .pub har samme ED25519-fingeravtrykk, og kjent vertsalias finnes. Bruker-/system-SSH-config finnes ikke; opsjonene gis eksplisitt. Ingen tilgjengelig SSH-agent ble observert, men autentisering ble aldri nådd. Ingen nøkkelinnhold eller passord er skrevet ut. Ingen regelendring, eskalering eller alternativ transport er forsøkt.
+
+Rapporten og kilderegisteret inneholder hele verbose-feilen, bevisgrenser og én lesende kommando Jonas kan kjøre i vanlig PowerShell. Nåtidstekstene presiserer lokal connect-feil. Oppetid, boot, release/helse, aktiv/installert kernel og APT-kandidat, pakker/images/barrierer, backup og driftsfeil forblir uverifisert. Publiserte rettelser er ikke omklassifisert til installerte/aktive.
+
+Dokumentasjonen er committet som **55a2797** (nøyaktig ni egne dokumentasjonsfiler). UTF-8-/kontrolltegnkontroll, enkel hemmelighetsmarkørkontroll, rapportlenker, JSON og 56 unike CVE-er/47 rettelser bestod. Den manuelle PowerShell-kommandoen bestod syntakskontroll uten utføring. Staget diffkontroll fant én ekstra tom sluttlinje i den nye rapporten; den ble rettet, og kontrollen bestod før commit. Ingen produktkode eller historiske evidensfiler er endret. Bare lokal commit, ingen merge/push. Samlet O6, midlertidig aksept, O4 og utsatt firmware er uendret.
+
+### Eierkvittering ført samme dag kl. 19:21
+
+Jonas returnerte lesende SSH-utdata med måletid 2026-11-15T19:17:55+01:00: oppetid13d19t50m, oppstart2026-11-01 23:27:52, kernel7.0.0-42-generic, current-releasepeker7921eb54e4816aaab9368c3efd851bcf692f3823 og active for appservice, cloudflaredservice og backup-timer. Dette dokumenterer fungerende eiertilgang og avgrenser den tidligere10013-feilen til agentens kjørekontekst; filterregelen er fortsatt ikke identifisert.
+
+Rapport/kilderegister og de sju nåtidsoversiktene er korrigert og committet som **d2d9d53**. Råutdata og eierproveniens er bevart. Aktiv42-generic er skilt fra publisert43.43 og ukjent installert versjon. Current-peker/systemd-active gir ikke imageattestasjon, funksjonstest eller bevis for gjennomført backup; lang oppetid alene beviser ikke feilfri drift eller årsaken til tidligere frys. JSON-parse, mapping av de tre active-linjene, diffkontroll og gjennomgang av nåtidsformuleringer er utført. Ingen produkt-/serverendringer, merge/push, risikoendring eller O6-lukking.
+
+### Avgrenset eierkommando klargjort samme dag kl. 19:29
+
+Jonas bestilte én samlet lesende PowerShell/SSH-kommando for kernelinstallasjon/neste oppstartsvalg, lokal APT-kandidat og indeksalder uten refresh, omstartsbehov og faktisk backupjobb. Agentens nettverksbegrensning ble lagt til grunn; ingen ny servertilkobling eller tilkoblingsfeilsøking. Backupunit/timer, backupfunksjonen og tidligere kontroller ble lest.
+
+Commit **54daa36** legger til metoden read-only-server-check.ps1 under datert evidens og lenker den fra rapporten. Metoden bruker én etablert SSH-forbindelse med streng vertsnøkkelkontroll, eierens TTY/sudo for beskyttede lesinger, avgrensede statusfelter og journalmetadata. Den skriver ikke ut backupinnhold eller vilkårlige applikasjonsjournalmeldinger. Base64 transporterer den synlige Python-kilden uten shell-siteringsskader. Ingen installasjon, apt-refresh, backupkjøring, restore, restart, deploy eller risikobeslutning.
+
+PowerShell-parser og lokal SSH-stubb kontrollerte opsjoner og identisk kilde etter base64-rundtur; ingen nettverkstrafikk ble utført. To innledende lokale kontrollforsøk hadde feil i selve inspeksjonen (AST-uttrekk og variabelscope); korrigert kontroll bestod uten endring av innsamlingsmetoden. Python-kilden er manuelt gjennomgått, men ikke kjørt/syntakskontrollert med Python: runtimeoppslag gav ingen brukbar lokal Python. Staget diffkontroll bestod. Resultat fra serveren avventes før vurdering av de fire vedlikeholdsalternativene. O6-status og aksept er uendret; ingen merge/push.
+
+### Eierens tekstvedlegg vurdert samme dag kl. 19:41
+
+Den første skriptkjøringen ble lokalt blokkert av PowerShell execution policy. Jonas viste Undefined for alle scope og godkjente deretter uttrykkelig RemoteSigned kun for Process i sitt PowerShell-vindu. Ingen serverregel ble endret. To påfølgende vedlegg ble først feiltolket som tomme meldinger; etter korrigeringen ble begge tekstfilene funnet og lest fullstendig. Innlimt tekst(1).txt og Innlimt tekst(2).txt har109linjer og identisk innhold, måletid2026-11-15T19:34:14.461366+01:00. Dette telles som én eiermåling.
+
+**a3574e6** bevarer normalisert utskrift, kildeidentiteter, teksthash og vurdering, og oppdaterer rapport/register og de sju statusoversiktene. Aktiv build er Ubuntu7.0.0-42.42-generic7.0.14. Kernelimage/moduler/headers/metapakker43.43 er installert, samme lokale APT-kandidat, ingen kernel-holds eller rapporterte ufullstendige dpkg-pakker. APT-success-stempel er15.november12:37CET, updates/security InRelease14.november20:23CET; ingen APT-refresh utført. GRUB-default0/førsteUbuntu43, ingen rapportert next_entry/saved_entry eller EFI BootNext, og ubuntu først i EFI-rekkefølge gir forventet43 ved neste normale oppstart. 42/30 og initrd/menu er bevart. Reboot-required nevner43-kernel, linux-base og libc6. Installasjonsdato/-aktør er ikke utledet fra filtidene.
+
+Siste automatiske backup15.november03:17:19CET har samsvarende timer/start/slutt, Result=success, ExecMainStatus=0, journalført ferdig jobb og dump56350byte/0640/ikke-symlink. Neste trigger16.november03:16:30CET. Service inactive/dead er forenlig med fullført oneshot. Eldre13.novemberdump mangler, i samsvar med alder over48timer og dokumentert retensjon, uten påvist ny backupfeil. Dette er jobb-/filmetadata, ikke ny restore; tidligere restorebevis beholder sitt omfang.
+
+**Anbefaling: installert rettelse krever kvalifisert omstart.** Ingen ny kernelinstallasjon er nødvendig for43.43. Ingen omstart er utført eller autorisert her. Lokal konsoll/retur, fersk helse/backup og etterkontroll av aktivkernel/nett/SSH/app/tunnel/backup-timer må inngå ved separat bestilling. De47 individuelle leverandørrettelsene er installasjonsbundet, men ingen er lukket aktivt; tre kildeavklaringer, seks øvrige kernelrester og bibliotekpunktene består. Images, øvrige bibliotekpakker, runtimebarrierer og full apphelse var utenfor denne avgrensede målingen.
+
+Validering: begge fulltekstlesinger uten rest, identisk tekst, normalisert teksthash, JSON-parse,56CVE-er/47individuelle rettelser, dpkg-/APT-binding, timer-/jobb-/dump-samsvar, lenker/tegn og staget diffkontroll bestod. Ingen brede tester, ny agent-SSH, installasjon, restart, deploy, firmware, WAN, merge eller push. Samlet O6 og risikoaksepten er uendret.
+
+### Eierutført omstart og aktivt rettelsesbevis ført kl. 20:07
+
+Jonas ba om kommando for kvalifisert omstart og returnerte faktisk gjennomføring. Den eksisterende bussassistentctl-handlingen planla omstart19:58:55CET etter bestått API-/origin-kontroll, tre enkeltvise active-kontroller og backup Result=success/ExecMainStatus=0. Kommandoens &&-kjede nådde reboot-handlingen. Agenten har ikke koblet til serveren eller startet omstarten.
+
+Etterkontroll2026-11-15T20:02:17+01:00 viser1min oppetid, uname7.0.0-43-generic, version_signature Ubuntu7.0.0-43.43-generic7.0.14, uendret current-releasepeker7921eb54e4816aaab9368c3efd851bcf692f3823 og active for app, tunnel og backup-timer. API-helse og avvisning av uautentisert origin-forespørsel bestod igjen. Planlagt omstartstid er ikke utgitt som faktisk boot-tid. Personlig appinnlogging/visning er ikke bekreftet. Ingen nye image-/bibliotek-/barriereavlesinger, ny backup/restore eller sjekk av reboot-required etterpå er påstått.
+
+**d249eae** bevarer eierkvitteringen og oppdaterer rapport, register og sju nåtidsoversikter.47 av opprinnelige56kernelrester er individuelt lukket som rettet: offisiell CVE/build-mapping + konkret installert Resolute/amd64/generic-pakke fra19:34 + aktiv43.43-signatur fra20:02. Dette inkluderer alle tre kritiske restene. Ni står åpne (seks sårbare, tre kildeavklaringer); bibliotek-/journaldpunkter og øvrige bevisgrenser består. Samlet O6 er ikke administrativt lukket, og ingen risikoaksept er utvidet. Historisk førkontroll og tidligere rapportresultater er bevart.
+
+Validering bestått:56unikeCVE-er,47fixed_active/9open, bare entydig43.43-rettede leverandørrader lukket,3kritiske rettet, kvitteringshash, tre active-linjer, eksakt aktiv signatur, lenker, tegn og staget diffkontroll. Ingen ny pakkeinstallasjon, deploy, firmware, WAN, merge eller push. Ingen bred regresjon eller obligatorisk ukesventetid innført.
+
+### Personlig etterkontroll bekreftet samme dag
+
+Jonas bekreftet etter omstart: «Vanlig innlogging fungerer. Visning er som normalt». Commit **ef6babf** oppdaterer rapport, kilderegister og sju gjeldende oversikter. Personlig etterkontroll er bestått for vanlig innlogging og visning; eksakt prøvetid/enhet/nettleser er ikke oppgitt, og lagring/gjenåpning eller bred regresjon er ikke utledet prøvd. JSON og diffkontroll er gjennomgått. Ingen serveroperasjoner, nye CVE-lukkinger, utvidet risikoaksept, merge eller push.
+
+### Målrettet kerneloppfølging samme kveld
+
+Jonas ba om å prioritere konkrete tiltak for kernelrestene fremfor flere tester. **21b49a7** dokumenterer tre nye individuelle lukkinger og handlingsvurdering for de seks resterende. Nytt Ubuntu-oppslag viser98776/98804 fixed43.43; Canonicals OSV-data for90155 binder Resolute/linux og generic-binarier til samme rettelse. Tidligere47/9 er bevart historisk, gjeldende status er50/6.
+
+De seks står fortsatt som berørt i Ubuntu-nettsider og Canonical OSV, sistnevnte lister43.43. Linux CNA viser konkrete upstream-rettelser og særskilte avklaringsspor for binder (rettet fra upstream6.0) og NTFS (upstream6.9–før7.1 uberørt, bestemt fs/ntfs-driver). Dette er ikke utledet til Ubuntu-rettelse eller manglende berørthet. Eksakt43.43-kilde for binder/BPF/NTFS kunne ikke hentes gjennom nettverktøyet; ett offentlig HTTPS-forsøk feilet med DNS-feil for git.launchpad.net. Ingen ny server-SSH eller andre serverprøver.44.44 er funnet i proposed, uten dokumentert produksjonsrettelse for disse seks; ingen oppgradering anbefalt på det grunnlaget.
+
+Validering:56unikeCVE-er/50fixed_active/6open, tre nye offisielle kildebindinger, seks bevarte åpne OSV-rader, JSON, lokale lenker, UTF-8 og diffkontroll bestod. Historiske rapporter, driftsaksept, O4 og firmware uendret. SamletO6 åpen; ingen installasjon/deploy/omstart/merge/push.
+
+### Åpne punkter
+
+Seks kernelpunkter står åpne. Prioriter eksakt Ubuntu43.43-kilde-/byggavstemming mot rettelsene, særlig binder/NTFS og deretter BPF; tilgang til den offentlige kilden er nå den konkrete barrieren for videre skrivebordskontroll. Ved faktisk berørt kode gjenstår støttet backport eller separat kvalifisert tiltak. Bibliotek-/journaldrester og øvrige versjonsbundne bevisgrenser består. Backup/stabilitet følges i drift; firmware separat utsatt og kandidatens egne porter består. Personlig innlogging/visning er bestått. Alt er speilet i eksisterende O6-rad; samletO6 er fortsatt åpen.
+
+## 2026-11-17 kl. 21:15 - Jonas Øisund
+
+### Oppgave
+
+Fortsette eksakt kilde-/byggavstemming av de seks kernelrestene, prioritere binder/NTFS og avklare konkrete vilkår for BPF, AMDGPU, DRM-pagemap og ksmbd. Bare kildearbeid/dokumentasjon; ingen nye generelle serverprøver eller serverendringer. Commit egne endringer på codex/o6-status-20261115, uten merge/push.
+
+### Plan
+
+- Følge [15. november-oppfølgingen](../../docs/evidence/o6-kernel-followup-20261115.md); hente offisielle Ubuntu-kildearkiver dersom Launchpad er utilgjengelig.
+- Binde source linux og linux-signed43.43, amd64/generic-buildinfo og tidligere eierbevis; sammenligne faktisk kode med CVE-vilkårene.
+- Dokumentere individuell disponering, gjenværende bibliotek/journalarbeid og bevisgrenser; bevare historiske rapporter.
+
+### Resultat
+
+**99f8d72** legger til [kilde-/byggrapport17.november](../../docs/evidence/o6-kernel-source-20261117.md), seks-punktsregister, kildemanifest, pakke-/byggmetadata og kodeutdrag; oppdaterer README, HANDOFF, ubuntu-server og fire submission-oversikter. Ingen produktkode eller historisk rapport er endret.
+
+Offisielt archive.ubuntu.com var tilgjengelig. Linux7.0.0-43.43 original/diff og linux-signed-arkivet samsvarer SHA256 med sine DSC-filer; amd64-buildinfo samsvarer med resolute-updates/main Packages. Signed image har Built-Using linux=43.43 og eksakte unsigned/buildinfo-avhengigheter. Utvalgte komplette kildefiler rekonstruert med native git apply etter mislykket MSYS-patchstart; check/apply/reverse-check0. PGP/InRelease er ikke selvstendig signaturvalidert, og ingen binærreproduksjon eller ny serverattest er påstått.
+
+Binder50240 har ikke lagret VMA-peker; beskyttet adresseoppslag og mapped-tilstand dokumentert. Lukkes individuelt som rettet innen43.43. NTFS72198 gjelder manglende gammel fs/ntfs-driver; original/diff/buildregler/modullister bekrefter fravær selv om configteksten inneholder NTFS_FS=m. Lukkes individuelt som ikke berørt; ntfs3 får ingen generell friskmelding. Ubuntu-trackeren viser fortsatt berørt for begge; lokal kildevurdering og leverandørstatus er skilt tydelig. Ingen melding til Canonical er sendt.
+
+BPF98376 har fortsatt feil meta-callback uten max_entries, og konkret amd64-JIT-bane er bygget. AMDGPU68103 bruker xa_store_irq. DRM89805 mangler fallback, har put_page før folio_order og mangler ny kildearrayhjelper. Ksmbd98420 fjerner fortsatt gyldige idle-økter etter10sekunder. Alle fire kodeavvik består; historiske barrierer er ikke målt på nytt. Totalt51rettet/1ikkeberørt/4åpne av56, mot50/6 tidligere. SamletO6 og risikoaksept uendret.
+
+Ferske Debian-kilder bekrefter util-linux/ncurses/ACL/FTS5 som berørt i trixie. 78409-versjonsmotstriden er fortsatt et konkret kildearbeid. Ubuntu-journald-siden er nå hentet direkte og bekrefter utsatt rettelse; tidligere kildeinnhentingsgap er løst, CVE-punktet er ikke lukket. Siste serverbevis er fortsatt15.november20:02:17, siste dokumenterte automatiske backup15.november03:17:19, eldre restore separat.
+
+Validering: SHA256/kildestørrelser, eksakt source/signed/buildinfo-binding, kildefilhash,56total/6vurderte/4åpne, lokale rapportlenker, JSON og staget diffkontroll bestod. Ingen app-/belastnings-/stabilitetstest, ny SSH-feilsøking, pakkeinstallasjon, omstart, deploy, tilgangsendring, WAN-prøve, firmware, merge eller push. Ingen fersk V1.1.0-kandidatavstemming påstått.
+
+### Åpne punkter
+
+- Fire kernelavvik trenger støttet Ubuntu-rettelse for å lukkes som rettet kode; prioriter BPF. Eksisterende/delegerte BPF-objekter er fortsatt uattestert, og AMDGPU/DRM/ksmbd-barrierer er historiske/endringsutløste.
+- Neste konkrete kildeoppgave er util-linux/78409 i eksakt trixie-kilde/backporter; bibliotek- og journaldrester står åpne. Kvalifisert installasjon/aktivisering blir en senere vedlikeholdsoppgave når støttet rettelse foreligger.
+- Løpende backup/stabilitet og kandidatens egne kvalifiseringsporter videreføres; firmware separat utsatt. SamletO6 krever fortsatt uttrykkelig eierbeslutning for administrativ lukking. Alt er speilet i eksisterende O6-punkt i issues.md.

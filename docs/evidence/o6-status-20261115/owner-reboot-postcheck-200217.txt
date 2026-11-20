@@ -1,0 +1,14 @@
+OWNER-PROVIDED PRECHECK / REBOOT SCHEDULING
+API healthy; origin access control rejects unauthenticated requests
+Reboot scheduled for Sun 2026-11-15 19:58:55 CET, use 'shutdown -c' to cancel.
+
+OWNER-PROVIDED POSTCHECK
+2026-11-15T20:02:17+01:00
+ 20:02:17 up 1 min,  1 user,  load average: 0.51, 0.39, 0.16
+7.0.0-43-generic
+Ubuntu 7.0.0-43.43-generic 7.0.14
+/opt/bussassistent/releases/7921eb54e4816aaab9368c3efd851bcf692f3823
+active
+active
+active
+API healthy; origin access control rejects unauthenticated requests

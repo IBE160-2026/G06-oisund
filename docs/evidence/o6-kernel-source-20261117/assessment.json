@@ -1,0 +1,265 @@
+{
+  "checked_date": "2026-11-17",
+  "timezone": "Europe/Oslo",
+  "scope": "Exact Ubuntu linux 7.0.0-43.43 source/build reconciliation for six residuals; no new server tests or changes",
+  "baseline": "../o6-status-20261115-sources.json",
+  "baseline_date": "2026-11-15",
+  "counts": {
+    "baseline_kernel_residual_cves": 56,
+    "previously_fixed_retained": 50,
+    "new_source_fixed": 1,
+    "new_not_affected": 1,
+    "fixed_in_matching_active_build": 51,
+    "not_affected_in_matching_build": 1,
+    "open": 4
+  },
+  "source": "source-manifest.json",
+  "last_server_observation": "2026-11-15T20:02:17+01:00",
+  "kernel": [
+    {
+      "cve": "CVE-2022-50240",
+      "component": "binder",
+      "group": "K12",
+      "distribution": "Ubuntu 26.04 LTS resolute",
+      "source_package": "linux",
+      "version": "7.0.0-43.43",
+      "architecture": "amd64",
+      "flavour": "generic",
+      "classification": "fixed_in_matching_installed_code",
+      "disposition": "closed_fixed",
+      "source_finding": "No persistent VMA pointer; vm_start/address lookup under mmap/per-VMA locking; binder built as module.",
+      "vendor": {
+        "url": "https://ubuntu.com/security/CVE-2022-50240",
+        "checked_date": "2026-11-17",
+        "page_last_updated": "2026-11-12",
+        "status": "Vulnerable",
+        "local_source_assessment_differs": true
+      },
+      "historical_barrier": {
+        "date": "2026-11-03",
+        "evidence": "Binder er modulbasert. Ingen binder-modul, enhet eller binderfs-mount observert.",
+        "refreshed": false
+      },
+      "owner": "Jonas",
+      "next_action": "No kernel action; optional Canonical tracker correction. Reassess for changed source/build or corrected CVE scope."
+    },
+    {
+      "cve": "CVE-2026-72198",
+      "component": "legacy NTFS",
+      "group": "K12",
+      "distribution": "Ubuntu 26.04 LTS resolute",
+      "source_package": "linux",
+      "version": "7.0.0-43.43",
+      "architecture": "amd64",
+      "flavour": "generic",
+      "classification": "affected_code_not_built",
+      "disposition": "closed_not_affected",
+      "source_finding": "No fs/ntfs source or Ubuntu patch addition, no legacy build rule/module/builtin; ntfs3 distinct. CONFIG_NTFS_FS=m text does not establish a built driver.",
+      "vendor": {
+        "url": "https://ubuntu.com/security/CVE-2026-72198",
+        "checked_date": "2026-11-17",
+        "page_last_updated": "2026-11-17",
+        "status": "Vulnerable",
+        "local_source_assessment_differs": true
+      },
+      "historical_barrier": {
+        "date": "2026-11-03",
+        "evidence": "Ingen NTFS-mount i SSH-namespace. Ny mount av ubetrodd volum endrer vurderingen.",
+        "refreshed": false
+      },
+      "owner": "Jonas",
+      "next_action": "No kernel action; reassess on driver reintroduction or changed source/build/CVE scope."
+    },
+    {
+      "cve": "CVE-2026-98376",
+      "component": "BPF",
+      "group": "K4",
+      "distribution": "Ubuntu 26.04 LTS resolute",
+      "source_package": "linux",
+      "version": "7.0.0-43.43",
+      "architecture": "amd64",
+      "flavour": "generic",
+      "classification": "affected_code_with_historical_barriers",
+      "disposition": "open",
+      "source_finding": "Wrong percpu map_meta_equal callback lacks max_entries comparison; x86 per-CPU JIT supported, BPF/JIT built in.",
+      "vendor": {
+        "url": "https://ubuntu.com/security/CVE-2026-98376",
+        "checked_date": "2026-11-17",
+        "page_last_updated": "2026-11-14",
+        "status": "Vulnerable",
+        "local_source_assessment_differs": false
+      },
+      "historical_barrier": {
+        "date": "2026-11-03",
+        "evidence": "Nye uprivilegerte BPF-kall er sperret av sysctl=2. API/gate har ingen capabilities. Tracefs er root 0700 og perf_event_paranoid=4. Krever tillatt BPF/tracing-bruk med de konkrete verifier-, map-, trampoline-, destructor- eller fprobe-forutsetningene. Eksisterende privilegerte programmer og delegerte objekter ble ikke attestert.",
+        "refreshed": false
+      },
+      "owner": "Jonas",
+      "next_action": "Await supported Ubuntu backport; if runtime exposure must be resolved first, inventory existing/delegated map-in-map objects and access, not general stress testing."
+    },
+    {
+      "cve": "CVE-2026-68103",
+      "component": "AMDGPU",
+      "group": "K12",
+      "distribution": "Ubuntu 26.04 LTS resolute",
+      "source_package": "linux",
+      "version": "7.0.0-43.43",
+      "architecture": "amd64",
+      "flavour": "generic",
+      "classification": "affected_code_with_historical_barriers",
+      "disposition": "open",
+      "source_finding": "amdgpu_userq uses xa_store_irq rather than rejecting duplicate doorbell with xa_insert_irq; userq compiled in amdgpu module.",
+      "vendor": {
+        "url": "https://ubuntu.com/security/CVE-2026-68103",
+        "checked_date": "2026-11-17",
+        "page_last_updated": "2026-11-13",
+        "status": "Vulnerable",
+        "local_source_assessment_differs": false
+      },
+      "historical_barrier": {
+        "date": "2026-11-03",
+        "evidence": "AMDGPU var ikke lastet eller bundet. Vertens GPU-drivere er i915 og nouveau.",
+        "refreshed": false
+      },
+      "owner": "Jonas",
+      "next_action": "Await supported Ubuntu backport; complete hardware/driver evidence could separately narrow host exposure. Reassess before AMD GPU/driver access."
+    },
+    {
+      "cve": "CVE-2026-89805",
+      "component": "DRM-pagemap",
+      "group": "K5",
+      "distribution": "Ubuntu 26.04 LTS resolute",
+      "source_package": "linux",
+      "version": "7.0.0-43.43",
+      "architecture": "amd64",
+      "flavour": "generic",
+      "classification": "affected_code_with_historical_barriers",
+      "disposition": "open",
+      "source_finding": "No higher-order fallback; put_page precedes folio_order; source-page population helper absent; DRM_GPUSVM=m and ZONE_DEVICE=y.",
+      "vendor": {
+        "url": "https://ubuntu.com/security/CVE-2026-89805",
+        "checked_date": "2026-11-17",
+        "page_last_updated": "2026-11-14",
+        "status": "Vulnerable",
+        "local_source_assessment_differs": false
+      },
+      "historical_barrier": {
+        "date": "2026-11-03",
+        "evidence": "Kbuild legger drm_pagemap i drm_gpusvm_helper med CONFIG_DRM_GPUSVM=m. Hjelperen og xe var fraværende, og i915/nouveau har ikke den avhengigheten. Nouveau SVM er avslått. GPU-bruk alene oppfyller ikke pagemap-migreringstriggeren.",
+        "refreshed": false
+      },
+      "owner": "Jonas",
+      "next_action": "Await full supported backport including fallback, lifetime order and source-page population. Reassess before GPU/SVM changes."
+    },
+    {
+      "cve": "CVE-2026-98420",
+      "component": "ksmbd",
+      "group": "K12",
+      "distribution": "Ubuntu 26.04 LTS resolute",
+      "source_package": "linux",
+      "version": "7.0.0-43.43",
+      "architecture": "amd64",
+      "flavour": "generic",
+      "classification": "affected_code_with_historical_barriers",
+      "disposition": "open",
+      "source_finding": "Session register still removes idle valid sessions after 10*HZ; missing credential-expiration/45-second setup semantics; SMB_SERVER=m.",
+      "vendor": {
+        "url": "https://ubuntu.com/security/CVE-2026-98420",
+        "checked_date": "2026-11-17",
+        "page_last_updated": "2026-11-17",
+        "status": "Vulnerable",
+        "local_source_assessment_differs": false
+      },
+      "historical_barrier": {
+        "date": "2026-11-03",
+        "evidence": "KSMBD var ikke lastet. Krever SMB-serverens konkrete låse-, oplock- eller sesjonsbane.",
+        "refreshed": false
+      },
+      "owner": "Jonas",
+      "next_action": "Await supported full session/connection fix; reassess before ksmbd/SMB server or module-policy changes."
+    }
+  ],
+  "other_open": {
+    "debian": {
+      "checked_date": "2026-11-17",
+      "distribution": "trixie",
+      "architecture": "amd64",
+      "installed_inventory_date": "Historical image inventory; not re-read on server",
+      "entries": [
+        {
+          "package": "util-linux",
+          "version": "2.41.5-0+deb13u1",
+          "cves": [
+            "CVE-2026-76642",
+            "CVE-2026-78408",
+            "CVE-2026-78409",
+            "CVE-2026-78410"
+          ],
+          "status": "vulnerable in Debian tracker; no-dsa for trixie",
+          "urls": [
+            "https://security-tracker.debian.org/tracker/CVE-2026-76642",
+            "https://security-tracker.debian.org/tracker/CVE-2026-78408",
+            "https://security-tracker.debian.org/tracker/CVE-2026-78409",
+            "https://security-tracker.debian.org/tracker/CVE-2026-78410"
+          ]
+        },
+        {
+          "package": "ncurses-bin",
+          "version": "6.5+20250216-2",
+          "cves": [
+            "CVE-2025-69720"
+          ],
+          "status": "vulnerable in Debian tracker; no-dsa for trixie",
+          "urls": [
+            "https://security-tracker.debian.org/tracker/CVE-2025-69720"
+          ]
+        },
+        {
+          "package": "libacl1",
+          "historical_binary_version": "2.3.2-2+b1",
+          "tracker_source_version": "2.3.2-2",
+          "cves": [
+            "CVE-2026-54369"
+          ],
+          "status": "vulnerable in Debian tracker; no-dsa for trixie",
+          "urls": [
+            "https://security-tracker.debian.org/tracker/CVE-2026-54369"
+          ]
+        },
+        {
+          "package": "libsqlite3-0",
+          "version": "3.46.1-7+deb13u2",
+          "cves": [
+            "CVE-2026-119373"
+          ],
+          "status": "vulnerable in Debian tracker; no-dsa for trixie",
+          "urls": [
+            "https://security-tracker.debian.org/tracker/CVE-2026-119373"
+          ]
+        }
+      ],
+      "classification_gap": "CVE-2026-78409: vulnerable trixie2.41.5 row conflicts with introduction-in-v2.42 note; exact source/backports next."
+    },
+    "journald": {
+      "cve": "CVE-2026-40228",
+      "url": "https://ubuntu.com/security/CVE-2026-40228",
+      "checked_date": "2026-11-17",
+      "page_last_updated": "2026-11-13",
+      "source_package": "systemd",
+      "distribution": "resolute",
+      "status": "Vulnerable, fix deferred",
+      "historical_version": "259.9-0ubuntu0.1",
+      "historical_barrier": "ForwardToWall=no, last rechecked 2026-11-03",
+      "source_gap_resolved": true,
+      "code_fixed": false
+    }
+  },
+  "aggregate_o6": "open",
+  "risk_acceptance": "unchanged; temporary and scoped",
+  "firmware": "separately deferred",
+  "limitations": [
+    "No new runtime barrier, package/image, uptime or backup measurement on 2026-11-17.",
+    "Two local closures are source-based and conflict with Ubuntu tracker; not vendor-announced fixes.",
+    "No new V1.1.0 candidate/GitHub review. No merge or push."
+  ]
+}
