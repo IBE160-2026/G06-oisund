@@ -191,3 +191,8 @@ input:disabled, select:disabled, textarea:disabled { opacity: 1; color: #465763;
 section[aria-label="Brukerinnstillinger"] input,
 section[aria-label="Brukerinnstillinger"] button { min-height: 58px; border-radius: 8px; }
 section[aria-label="Brukerinnstillinger"] h2:focus-visible { outline: 3px solid currentColor; outline-offset: 4px; }
+
+[aria-label="Automatiske avvik"] { overflow-wrap: anywhere; }
+.automatic-notice-comparison { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); gap: 1rem; }
+.automatic-notice-facts { min-width: 0; padding: .75rem; border: 1px solid currentColor; border-radius: .5rem; }
+.automatic-notice-facts p { white-space: pre-wrap; }

@@ -68,3 +68,14 @@ def cleanup():
         cursor = owners[-1]['id']
     with database() as conn:
         conn.execute('DELETE FROM login_limits WHERE expires_at <= clock_timestamp()')
+        # Private reviews own their selected evidence copies. Source retention
+        # never consults or extends a private deadline.
+        generation = conn.execute('SELECT generation FROM automatic_notice_feed FOR UPDATE').fetchone()['generation']
+        conn.execute("DELETE FROM automatic_notice_sources AS source WHERE (last_complete_generation IS NULL OR "
+                     "last_complete_generation IS DISTINCT FROM %s) AND "
+                     "COALESCE(superseded_at,last_seen)<=clock_timestamp()-interval '7 days' AND (NOT current_revision OR "
+                     "NOT EXISTS (SELECT 1 FROM automatic_notice_identities AS item WHERE item.participant=source.participant "
+                     "AND item.situation=source.situation AND (item.last_complete_generation=%s OR "
+                     "item.last_seen>clock_timestamp()-interval '7 days')))", (generation, generation))
+        conn.execute("DELETE FROM automatic_notice_identities WHERE (last_complete_generation IS NULL OR "
+                     "last_complete_generation IS DISTINCT FROM %s) AND last_seen<=clock_timestamp()-interval '7 days'", (generation,))
