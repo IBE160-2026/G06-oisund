@@ -1,15 +1,17 @@
 """Controlled Entur page sequence against the isolated V2 API and PostgreSQL."""
 
 from concurrent.futures import ThreadPoolExecutor
-from datetime import datetime, UTC
+from datetime import UTC, datetime, time, timedelta
 import os
 from pathlib import Path
 from threading import Event
 from uuid import uuid4
+from zoneinfo import ZoneInfo
 
 import httpx
 import pytest
 from psycopg import sql
+from psycopg.types.json import Jsonb
 
 from app import auth, automatic_notice_ingestion as ingest
 from app.automatic_notice_source import MAX_ID, SITUATION_PREFIX, SourceError
@@ -102,6 +104,40 @@ def operation(snapshot, item, **overrides):
 
 def save(client, plan, op):
     return client.post(path(plan) + '/review', headers=headers(client), json=op)
+
+
+def test_weekend_binding_preserves_unknown_beyond_the_pilot(client, users, fixture_feed):
+    assert login(client, users).status_code == 200
+    oslo = ZoneInfo('Europe/Oslo')
+    tomorrow = datetime.now(oslo).date() + timedelta(days=1)
+    value = facts()
+    value['service_date'] = tomorrow.isoformat()
+    value['activities'][0].update(line='24', start=datetime.combine(tomorrow, time(10), oslo).isoformat(),
+                                  end=datetime.combine(tomorrow, time(11), oslo).isoformat())
+    draft, _, body = prepare(client, value)
+    confirmed = confirm(client, draft, body)
+    assert confirmed.status_code == 200, confirmed.text
+    plan = confirmed.json()
+    # Exercise the historical calendar binding independently of when the test runs.
+    # The fixture keeps its real authorization lifetime and changes only planned facts.
+    content = plan['draft']
+    content['service_date'] = '2026-11-29'
+    content['activities'][0].update(start='2026-11-29T23:55+01:00', end='2026-11-30T00:15+01:00')
+    with database() as conn:
+        auth.require_synthetic_accounts(conn)
+        conn.execute('UPDATE workdays SET content=%s WHERE id=%s', (Jsonb(content), plan['id']))
+    qualified = situation('weekend', LINE24, windows=(('2026-11-29T23:56+01:00', None),))
+    next_day = situation('outside', LINE24, windows=(('2026-11-30T00:00+01:00', None),))
+    collect((qualified + next_day, 'false'))
+    result = get(client, plan)
+    assert result['binding']['dates'] == [f'2026-11-{day}' for day in range(23, 30)]
+    assert result['binding']['archive_generation'] == '1795129398375617'
+    weekend = entry(result, 'weekend')
+    assert weekend['classification'] == 'possible-relevance'
+    assert [match['dates'] for match in weekend['matches']] == [['2026-11-29']]
+    outside = entry(result, 'outside')
+    assert outside['classification'] == 'review' and outside['matches'] == []
+    assert set(outside['reasons']) == {'open-ended-validity', 'no-dated-binding'}
 
 
 def test_complete_partial_unknown_recovery_and_lifecycle(client, users, fixture_feed):

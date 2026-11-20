@@ -7,12 +7,14 @@ from .automatic_notice_source import instant
 
 
 OSLO = ZoneInfo('Europe/Oslo')
-QUALIFIED_DATES = (date(2026, 11, 23), date(2026, 11, 24))
+QUALIFIED_DATES = tuple(date(2026, 11, day) for day in range(23, 30))
 CROSSWALK = {
     '20': ('TRO:Line:1_20', 'TRO:Authority:1'),
     '24': ('TRO:Line:1_24', 'TRO:Authority:1'),
 }
-BINDING = {'version': 'entur-tro-2026-11-20', 'basis': 'Checked Entur static line/authority records',
+BINDING = {'version': 'entur-tro-2026-11-20-pilot-week', 'basis': 'Checked Entur NeTEx line, group and authority records',
+           'archive_generation': '1795129398375617',
+           'archive_sha256': '03662d51c1438514d1695e632c598a7ea589d5384a19804658212fc4af0af8b9',
            'dates': [value.isoformat() for value in QUALIFIED_DATES]}
 REVIEW_QUALIFIERS = {'DirectionRef', 'AffectedDirection', 'AffectedRoute', 'AffectedStopPoint', 'AffectedStopPlace',
                      'StopPointRef', 'StopPlaceRef', 'QuayRef', 'AffectedVehicleJourney', 'VehicleJourneyRef',

@@ -1,4 +1,4 @@
-"""Independently labelled controlled XML and two dated plan examples."""
+"""Independently labelled controlled XML and dated plan examples."""
 
 from datetime import datetime, UTC
 from uuid import UUID
@@ -55,9 +55,11 @@ def activity(line='20', start='2026-11-23T22:10:00+01:00', end='2026-11-23T22:20
     ('codespace-mismatch', activity(), LINE20.replace('TRO:Line', 'ATB:Line'), (EVENING,), 'open', 'review', 'line-binding-unavailable'),
     ('other-authority', activity(), LINE20.replace('<LineRef>', '<AuthorityRef>TRO:Authority:2</AuthorityRef><LineRef>'), (EVENING,), 'open', 'review', 'authority-unverified'),
     ('other-operator', activity(), LINE20.replace('<LineRef>', '<OperatorRef>TRO:Operator:2</OperatorRef><LineRef>'), (EVENING,), 'open', 'review', 'authority-unverified'),
-    ('out-of-date', activity('20', '2026-11-25T09:00+01:00', '2026-11-25T10:00+01:00'), LINE20, ((EVENING[0], None),), 'open', 'review', 'no-dated-binding'),
+    ('before-pilot', activity('20', '2026-11-22T09:00+01:00', '2026-11-22T10:00+01:00'), LINE20, (('2026-11-22T00:00+01:00', None),), 'open', 'review', 'no-dated-binding'),
+    ('after-pilot', activity('20', '2026-11-30T09:00+01:00', '2026-11-30T10:00+01:00'), LINE20, ((EVENING[0], None),), 'open', 'review', 'no-dated-binding'),
     ('overnight', activity('24', '2026-11-23T23:55+01:00', '2026-11-24T00:10+01:00'), LINE24, (MORNING,), 'open', 'possible-relevance', 'exact-line-planned-overlap'),
-    ('outside-pilot-overnight', activity('24', '2026-11-24T23:55+01:00', '2026-11-25T00:10+01:00'), LINE24, (('2026-11-25T00:01+01:00', '2026-11-25T00:09+01:00'),), 'open', 'review', 'no-dated-binding'),
+    ('inside-pilot-overnight', activity('24', '2026-11-24T23:55+01:00', '2026-11-25T00:10+01:00'), LINE24, (('2026-11-25T00:01+01:00', '2026-11-25T00:09+01:00'),), 'open', 'possible-relevance', 'exact-line-planned-overlap'),
+    ('outside-pilot-overnight', activity('24', '2026-11-29T23:55+01:00', '2026-11-30T00:10+01:00'), LINE24, (('2026-11-30T00:01+01:00', '2026-11-30T00:09+01:00'),), 'open', 'review', 'no-dated-binding'),
     ('touches-inactive-end', activity('20', EVENING[1], '2026-11-23T23:10+01:00'), LINE20, (EVENING,), 'open', 'outside-scope', 'no-planned-overlap'),
     ('touches-inactive-start', activity('20', '2026-11-23T21:30+01:00', EVENING[0]), LINE20, (EVENING,), 'open', 'outside-scope', 'no-planned-overlap'),
     ('point-at-start', activity('20', EVENING[0], EVENING[0]), LINE20, (EVENING,), 'open', 'possible-relevance', 'exact-line-planned-overlap'),
@@ -90,6 +92,19 @@ def test_relevance(identifier, plan, scope, windows, status, expected, reason):
     assert result['classification'] == expected, identifier
     assert reason in result['reasons']
     assert bool(result['matches']) == (expected == 'possible-relevance')
+
+
+@pytest.mark.parametrize('line,scope', [('20', LINE20), ('24', LINE24)])
+@pytest.mark.parametrize('day', ['23', '24', '25', '26', '27', '28', '29'])
+def test_each_pilot_date_reports_exact_oslo_calendar_date(line, scope, day):
+    date = f'2026-11-{day}'
+    window = (f'{date}T07:30+01:00', f'{date}T08:00+01:00')
+    plan = activity(line, f'{date}T07:45+01:00', f'{date}T08:15+01:00')
+    facts = page(situation(affects=scope, windows=(window,))).items[0]
+    assert classify(facts, [plan], NOW)['matches'] == [{
+        'id': plan['id'], 'line': line, 'line_ref': f'TRO:Line:1_{line}',
+        'authority_ref': 'TRO:Authority:1', 'dates': [date],
+    }]
 
 
 def test_fields_preserve_source_text_qualifiers_and_missing_clocks():
