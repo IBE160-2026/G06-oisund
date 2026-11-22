@@ -38,6 +38,7 @@ for (const width of [768, 1440]) {
     await page.keyboard.type(password);
     await page.keyboard.press('Tab');
     await expect(page.getByRole('button', { name: 'Logg inn', exact: true })).toBeFocused();
+    const loginResponse = page.waitForResponse(response => response.request().method() === 'POST' && new URL(response.url()).pathname === '/auth/login');
     await page.keyboard.press('Enter');
     await expect(page.getByRole('heading', { name: 'Privat arbeidsrom' })).toBeFocused();
     await expect(page.getByRole('heading', { name: 'Mine utkast' })).toBeVisible();
@@ -46,7 +47,10 @@ for (const width of [768, 1440]) {
     const cookies = await context.cookies();
     const session = cookies.find(cookie => cookie.name === 'private_session');
     expect(session?.httpOnly).toBe(true);
-    expect(session?.sameSite).toBe('Strict');
+    // Read the policy on the wire. WebKit's cookie inspector can misreport SameSite.
+    const sessionAttributes = (await (await loginResponse).headerValues('set-cookie'))
+      .find(header => header.startsWith('private_session='))?.split(';').slice(1).map(attribute => attribute.trim().toLowerCase());
+    expect(sessionAttributes).toEqual(expect.arrayContaining(['httponly', 'samesite=strict']));
     await page.screenshot({ path: `../docs/evidence/11-2-regression-9-3-${width}.png`, fullPage: true });
     await page.reload();
     await expect(page.getByRole('heading', { name: 'Privat arbeidsrom' })).toBeVisible();
