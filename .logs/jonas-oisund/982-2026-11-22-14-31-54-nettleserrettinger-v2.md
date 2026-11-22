@@ -68,3 +68,25 @@ Alle radene gjelder prosjektet `[firefox]`. Filnavn og testtittel identifiserer 
 - Samordningschatten omprøver tabellens 34 Firefox-noder på `069e15302679a50c0c4eaaa0dff7f5fb47f0ea62`, med tidsvalg, begge passordavslag og tastaturlagring først. Bruk en egen kopi av denne commiten som byggegrunnlag og eget syntetisk miljø.
 - Omprøv `PDF invalid-json is distinct from parser rejection` i WebKit med faktisk HTTP 200 og ugyldig JSON. Kjør kontrollene for transportbrudd og tidsavbrudd samt `keyboard login, ownership presentation and logout` ved 768 og 1440 px.
 - De to navngitte laptopfilene var utilgjengelige i de lokale kildene. Testchattens 34 nodeobservasjoner og resultatrapportene på D: ga nodegrunnlaget. Ny samlet status for de opprinnelige 121 nettlesernodene og 64 nettbrettnodene følger separat samordnet kjøring.
+
+## 2026-11-22 kl. 15:02 — Jonas Øisund
+
+### Oppgave
+
+Klassifiser det sporadiske bussavviket i den uavhengige Firefox-omprøvingen av `069e15302679a50c0c4eaaa0dff7f5fb47f0ea62`. Rett det ved påvist produktfeil og bevar første akseptkjøring.
+
+### Plan
+
+- Les det opprinnelige Playwright-sporet og sammenhold DOM-verdien før og etter utfylling med forespørsel og svar på revisjon 3.
+- Gjenskap fokusrekkefølgen i eget syntetisk miljø. Sammenlign samme regresjon på tidligere og rettet kode.
+
+### Resultat
+
+- Det opprinnelige sporet beholdt SHA-256 `D18D57B45E68D6D87EEE75A647EFE445C14493C274939BE1214BF9ED67D66F16`. Aktivitetsbildene ved handling `roum@688` viser bussfeltet deaktivert før utfylling og aktivt med uendret U+FEFF etterpå. Lagringsstatusen viste fortsatt versjon 2. Tredje POST sendte U+FEFF, og HTTP 200 med versjon 3 bekreftet samme verdi.
+- Klassifisering er en produktfeil i fokusrekkefølgen ved opplåsing. To uavhengige Firefox-prober på tidligere kode registrerte rekkefølgen lagreknapp → opplåsing → bussfelt → lagreknapp. Den sene fokusreturen kunne avbryte neste utfylling. Det tidligere NUL-funnet gjaldt testdriverens innsetting.
+- I `b97f63421b059442a373ec0b8331216d4ddd2d1b` flytter `PrivateDrafts.tsx` fokusreturen til samme DOM-oppdatering som låser opp redigeringen. Et felt som allerede har fått nytt fokus beholder det. `private-drafts.spec.ts` kontrollerer før hver lagring at den nye bussverdien står i feltet, krever eksakt revisjon og prøver neste tastaturinndata rett etter opplåsing.
+- Den nye regresjonen feilet på tidligere kode ved forventet fokus. Etter rettingen bestod TypeScript/Vite, 12 av 12 kjøringer i Firefox 157.0 og WebKit 27.2 samt 6 av 6 ekstra kjøringer av buss- og fokusnodene i Firefox. Min teststakk og syntetiske database ble fjernet etterpå. De ti eksisterende containerne beholdt ID og oppstartstid.
+
+### Åpne punkter
+
+- Samordningschatten omprøver `b97f63421b059442a373ec0b8331216d4ddd2d1b` i eget miljø. I `tests/private-drafts.spec.ts` gjelder det :55 (Unicode-bussverdi), :91 (fokus ved opplåsing), :237 (tastaturlagring ved begge bredder), :271 (tapt kvittering med oppslag) og :347 (ugyldig kvittering med oppslag). Gjenta :55 og :91 i Firefox.
