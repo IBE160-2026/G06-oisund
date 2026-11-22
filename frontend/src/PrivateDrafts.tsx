@@ -97,6 +97,7 @@ export function PrivateDrafts({ upload, request, mutation, dirtyChanged, setting
   const [comparison, setComparison] = useState<Saved | null>(null);
   const [message, setMessage] = useState('Nytt utkast. Ikke lagret.');
   const [busy, setBusy] = useState(false);
+  const [saveFocus, setSaveFocus] = useState<{ previous: HTMLElement | null; timeIdentity?: string | null; controlIndex: number; position: number } | null>(null);
   const [importBlocked, setImportBlocked] = useState(false);
   const [draftExpired, setDraftExpired] = useState(false);
   const [timeEpoch, setTimeEpoch] = useState(0);
@@ -158,6 +159,17 @@ export function PrivateDrafts({ upload, request, mutation, dirtyChanged, setting
   }
   useEffect(() => { alive.current = true; void refresh(); return () => { alive.current = false; }; }, []);
   useEffect(() => { if (focusLoadedCount.current) { focusLoadedCount.current = false; loadedCount.current?.focus(); } }, [list]);
+  useEffect(() => {
+    if (busy || !saveFocus) return;
+    setSaveFocus(null);
+    if (screen !== 'editor' || suspended || !workspaceVisible) return;
+    const { previous, timeIdentity, controlIndex, position } = saveFocus;
+    const container = timeIdentity ? Array.from(document.querySelectorAll('[data-draft-time]')).find(element => element.getAttribute('data-draft-time') === timeIdentity) : null;
+    const replacement = container?.querySelectorAll<HTMLElement>('input,select,button')[controlIndex] ?? container?.querySelector<HTMLInputElement>('input');
+    const target = previous?.isConnected ? previous : replacement;
+    if (target?.getClientRects().length) target.focus({ preventScroll: true });
+    window.scrollTo({ top: position });
+  }, [busy, saveFocus, screen, suspended, workspaceVisible]);
   useEffect(() => { dirtyChanged(dirty || confirmationLocked || registryDirty || routeLocked); return () => dirtyChanged(false); }, [dirty, confirmationLocked, registryDirty, routeLocked]);
   useEffect(() => { settingsBlocked(importBlocked || dirty || confirmationLocked || confirmationBlocked || registryDirty || busy || !!pending || !!pendingDelete || !!comparison || routeLocked); return () => settingsBlocked(false); }, [importBlocked, dirty, confirmationLocked, confirmationBlocked, registryDirty, busy, pending, pendingDelete, comparison, routeLocked]);
   useEffect(() => {
@@ -277,13 +289,12 @@ export function PrivateDrafts({ upload, request, mutation, dirtyChanged, setting
       }
       await send(operation);
     } catch (error: any) { if (alive.current && epoch === deletionEpoch.current) { if (terminalDraftError(error)) terminalSave(error.status, fresh ? null : saved?.id ?? null); else failed(error); } }
-    finally { if (alive.current) { setBusy(false); if (restoreEditor) requestAnimationFrame(() => {
-      const replacementContainer = timeIdentity ? Array.from(document.querySelectorAll('[data-draft-time]')).find(element => element.getAttribute('data-draft-time') === timeIdentity) : null;
-      const replacement = replacementContainer?.querySelectorAll<HTMLElement>('input,select,button')[controlIndex] ?? replacementContainer?.querySelector<HTMLInputElement>('input');
-      const target = returnTo?.isConnected ? returnTo : replacement;
-      if (target?.getClientRects().length) target.focus({ preventScroll: true });
-      window.scrollTo({ top: position });
-    }); } }
+    finally {
+      if (alive.current) {
+        if (restoreEditor) setSaveFocus({ previous: returnTo, timeIdentity, controlIndex, position });
+        setBusy(false);
+      }
+    }
   }
   function terminalDraftError(error: any) {
     return error?.status === 404 && error.apiDetail === 'Tilgangen ble avvist.'
