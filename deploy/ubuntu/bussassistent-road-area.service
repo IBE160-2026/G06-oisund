@@ -1,0 +1,16 @@
+[Unit]
+Description=Bussassistent current Oslo day NVDB area
+Wants=network-online.target
+After=network-online.target bussassistent.service
+ConditionPathExists=!/etc/bussassistent/maintenance/pending.json
+ConditionPathExists=/opt/bussassistent/current/backend/app/road_area_refresh.py
+StartLimitIntervalSec=30min
+StartLimitBurst=3
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/bussassistentctl ensure-road-area
+Restart=on-failure
+RestartSec=5min
+TimeoutStartSec=310
+UMask=0077

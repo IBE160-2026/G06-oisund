@@ -1,5 +1,5 @@
 import { test, expect, openedPlan, API, post, randomUUID, setup, beforeUnload } from './private-activity-helpers';
-import type { Page, BrowserContext } from '@playwright/test';
+import type { Page, BrowserContext, Locator } from '@playwright/test';
 
 setup();
 test.use({ actionTimeout: 15000 });
@@ -21,10 +21,20 @@ async function conflicted(page: Page, context: BrowserContext, resource: Resourc
   page.on('request', request => { if (request.url() === API + path) { if (request.method() === 'GET') reads++; if (request.method() === 'POST') writes++; } });
   return { plan, activities, path, scope, load, c: c.result, reads: () => reads, writes: () => writes };
 }
-async function proposalRetained(page: Page, resource: Resource, scope: any) {
+const preparation = (page: Page) => page.getByRole('button', { name: 'Forberedelse og planlister', exact: true });
+
+async function proposalRetained(page: Page, resource: Resource, scope: Locator) {
   if (resource === 'bus') await expect(scope.getByLabel('Fysisk buss', { exact: true })).toHaveValue('Synthetic local proposal A');
   else await expect(scope.getByText(/^Lokalt forslag/)).toContainText('24');
+  await expect(preparation(page)).toBeDisabled();
   expect(await beforeUnload(page)).toBe(true);
+}
+
+async function expectNavigationReleased(page: Page) {
+  // The resource renders first. The parent propagates the guard change and
+  // updates its window listener through passive effects.
+  await expect(preparation(page)).toBeEnabled();
+  await expect.poll(() => beforeUnload(page)).toBe(false);
 }
 
 for (const resource of ['bus', 'selection'] as const) {
@@ -38,7 +48,7 @@ for (const resource of ['bus', 'selection'] as const) {
       await expect(state.scope.getByText(/^Lokalt forslag/)).toHaveCount(0);
     }
     expect(state.writes()).toBe(0);
-    expect(await beforeUnload(page)).toBe(false);
+    await expectNavigationReleased(page);
     expect(await (await context.request.get(API + state.path)).json()).toEqual(state.c);
   });
 
@@ -59,7 +69,7 @@ for (const resource of ['bus', 'selection'] as const) {
       await expect(state.scope.getByText(/^Manuelt valgt/)).toContainText('Aktivitet 1');
       await expect(state.scope.getByText(/^Lokalt forslag/)).toHaveCount(0);
     }
-    expect(await beforeUnload(page)).toBe(false);
+    await expectNavigationReleased(page);
     expect(state.writes()).toBe(0);
     expect(await (await context.request.get(API + state.path)).json()).toEqual(expected);
   });
@@ -87,17 +97,49 @@ for (const resource of ['bus', 'selection'] as const) {
       if (failure === 'unauthorized') {
         await expect(page.getByRole('heading', { name: 'Logg inn', exact: true })).toBeVisible();
         await expect(state.scope).toHaveCount(0);
+        await expect.poll(() => beforeUnload(page)).toBe(false);
+        expect(state.reads()).toBe(1);
+        expect(state.writes()).toBe(0);
       } else {
+        const bus = resource === 'bus';
+        await expect(state.scope.getByRole('status', { name: bus ? 'Bussstatus' : 'Aktivitetsvalgstatus' }))
+          .toContainText(`Gjeldende ${bus ? 'bussregistrering' : 'aktivitetsvalg'} kunne ikke bekreftes. Forslaget er beholdt.`);
         await proposalRetained(page, resource, state.scope);
         // Retry remains reachable even when current authority has been denied.
         await expect(state.load).toBeEnabled();
         await page.unroute('**:8001' + state.path);
-        await state.load.click();
-        await expect.poll(state.reads).toBe(2);
+        let releaseRetry!: () => void;
+        let retryIntercepted = false;
+        const retryHeld = new Promise<void>(resolve => { releaseRetry = resolve; });
+        await page.route('**:8001' + state.path, async route => {
+          if (route.request().method() === 'GET') {
+            retryIntercepted = true;
+            await retryHeld;
+          }
+          await route.continue();
+        });
+        try {
+          await state.load.click();
+          await expect.poll(state.reads).toBe(2);
+          await expect.poll(() => retryIntercepted).toBe(true);
+          await expect(state.load).toBeDisabled();
+          await proposalRetained(page, resource, state.scope);
+          expect(state.writes()).toBe(0);
+        } finally {
+          releaseRetry();
+        }
         if (resource === 'bus') await expect(state.scope.getByLabel('Fysisk buss', { exact: true })).toHaveValue('Synthetic current C');
-        else await expect(state.scope.getByText(/^Manuelt valgt/)).toContainText('Aktivitet 3');
-        expect(await beforeUnload(page)).toBe(false);
+        else {
+          await expect(state.scope.getByText(/^Manuelt valgt/)).toContainText('Aktivitet 3');
+          await expect(state.scope.getByText(/^Lokalt forslag/)).toHaveCount(0);
+        }
+        await expect(state.load).toHaveCount(0);
+        await expectNavigationReleased(page);
         expect(state.writes()).toBe(0);
+        expect(state.reads()).toBe(2);
+        expect(await (await context.request.get(API + state.path)).json()).toEqual(state.c);
+        await preparation(page).click();
+        await expect(page.getByRole('heading', { name: 'Mine utkast' })).toBeVisible();
       }
     });
   }

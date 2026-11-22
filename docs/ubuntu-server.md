@@ -1,10 +1,16 @@
 # Ubuntu-server for Bussassistent
 
+## Kildekontroll 17. november; siste servermåling 15. november 2026
+
+O3/O5 er fullført innen dokumentert omfang; O4 er administrativt lukket med bevisbegrensninger. O6-vedlikehold, etterkontroller og triage er ferdige. Samlet O6 forblir åpen med uendret midlertidig risikoaksept; firmware er separat utsatt. Full O6-lukking er ikke et generelt vilkår for passordrelease. [Eksakt kilde-/byggavstemming 17. november](evidence/o6-kernel-source-20261117.md) gir 51 rettede, én ikke berørt og fire åpne av 56 kernelrester. Binder er rettet i kilden, og gammel NTFS-driver er ikke bygget i 43.43 amd64/generic; disse to lokale konklusjonene avviker fra Ubuntu-trackeren. BPF, AMDGPU, DRM-pagemap og ksmbd har fortsatt berørt kode og avventer støttede rettelser. Bibliotek-/journalrester består. Siste serverbevis er eierens etterkontroll 15. november kl.20:02:17: ett minutt oppetid, aktiv43.43, releasepeker7921eb5, aktive app/tunnel/backup-timer og bestått API-helse/origin-avvisning. Jonas bekreftet deretter normal innlogging/visning. Siste verifiserte automatiske backup er15.november kl.03:17:19; ingen ny jobb/restore etter boot er dokumentert. Pakker/images, runtimebarrierer og omstartsmarkør er ikke avlest på nytt. Agentens etablerte TCP-begrensning er ikke feilsøkt igjen; ingen serverendring er utført.
+
+De følgende daterte avsnittene er historiske kontrollpunkter. De gir ikke dagens driftsstatus. Kommandooppskriftene krever fortsatt sine egne avgrensninger og eventuell separat autorisasjon.
+
 ## O6-overlevering 3. november 2026
 
 Vedlikehold, beståtte etterkontroller og avgrenset triage er fullført. Navngitte kernel-, bibliotek- og journalrester følges videre med dokumenterte barrierer og hendelser for ny vurdering. Firmware er separat utsatt. Jonas har avklart at full O6-lukking ikke er en generell forutsetning for passordrelease. [Gjeldende overlevering til drift og passordarbeid](evidence/o6-handover-20261103.md).
 
-## Gjeldende etter O5-deploy 2. november 2026
+## Historisk kontrollpunkt etter O5-deploy 2. november 2026
 
 Aktiv release er **7921eb54e4816aaab9368c3efd851bcf692f3823**, med terminerbar JWKS-/DNS-prosess og1MiBgate-tmpfs. Mainintegrasjon/deploy er utført etter uttrykkelig bestilling; backup/isolert restore før/etter,25uendrede tabellfingeravtrykk og app/DB/tunnelkontroller bestod. `previous` er5e521cb med identiske migreringer; [deploy-/tilbakeveisrapport og personlige teststeg](evidence/o5-deploy-20261102.md). Personlig prøve er bekreftet «bestått»; avgrenset O5-oppfølging er fullført. Gjeldende O3–O6-status og forskjellen mellom release og produksjonscommit står i [vedlikeholdsrapporten for v1.0.1](evidence/v1.0.1-maintenance-20261104.md). Full apputrulling restartet containere/tunnel, ingen vertsomstart eller pakkeoppdatering.
 
@@ -14,7 +20,7 @@ Aktiv apprelease er **5e521cbc658594a47c4568d352a50e46309573c4** med kontrollert
 
 Siste tekniske kontroll og personlig innlogging/visning/lagring/gjenåpning bestod. Backup/isolert restore er verifisert også etter sluttprøven; timer aktiv. ForwardToWall=no kompenserer det konkrete lave journald-funnet. [Lesende etterkontroll2.11](evidence/o6-readonly-20261102.md) bekreftet faktisk nattbackup/isolert restore og20t53m oppetid med frisk app/DB/tunnel. Vedlikeholdets sluttkontroller er ferdige; kernelrestgruppene og den brede bevisgrensen holder samlet O6 åpen. Videre stabilitet er løpende oppfølging uten vedtatt minste ventetid; midlertidig avgrenset risikoaksept er uttrykkelig gitt. O3–O5 spores separat. V1-tag/release er uendret; ingen ny publisering.
 
-**SSH er nå jonas@192.168.1.138 over Wi-Fi**, etter DHCP-adresseendring ved omstart. `scripts/server.ps1` har oppdatert standard og beholder streng kontroll mot den gamle verifiserte serveridentiteten med `-HostKeyAlias 192.168.1.139`. Ved senere adresseendring kan `-Server jonas@<aktuell-IP>` brukes med samme kjente nøkkelalias. Eksisterende known_hosts/tilgangsregler/ruteroppsett er ikke endret. mDNS ble ikke tilgjengeliggjort. Sjekk aktuell adresse lokalt med `ip -4 -br addr show wlp3s0` ved behov.
+**Sist dokumenterte SSH-adresse er jonas@192.168.1.138 over Wi-Fi**, etter DHCP-adresseendring ved omstart. `scripts/server.ps1` har oppdatert standard og beholder streng kontroll mot den gamle verifiserte serveridentiteten med `-HostKeyAlias 192.168.1.139`. Ved senere adresseendring kan `-Server jonas@<aktuell-IP>` brukes med samme kjente nøkkelalias. Eksisterende known_hosts/tilgangsregler/ruteroppsett er ikke endret. mDNS ble ikke tilgjengeliggjort. Sjekk aktuell adresse lokalt med `ip -4 -br addr show wlp3s0` ved behov.
 
 Ved nødvendig senere retur: verifiser bevarte pakker/konfig og bruk den [vedvarende funksjonsbaserte returoppskriften](evidence/o6-execution-20261101/persistent-recovery-procedure.json). Fra vanlig konsoll med administratorrettighet brukes `sudo sh /home/jonas/ibe160-upload/o6-return-systemd.sh` eller tilsvarende `o6-return-cloudflared.sh`, kun for det konkrete feilende trinnet. Fra faktisk root-gjenopprettingskonsoll utelates sudo; rotfilsystemet må være skrivbart før pakkereparasjon. Instruksjonene bruker root-backupens hashkontrollerte cachefunksjon, og erstatter eldre raw-APT-returtekst med private filbaner. Kontroller helse/versjoner etter retur. Bevar private backuper/returpakker mens videre stabilitet observeres; ikke skriv gamle dpkg-statusfiler eller dumper blindt over levende tilstand.
 
@@ -62,8 +68,8 @@ Windows-backup er SHA256-verifisert, og en separat fersk backup bestod isolert r
 ## Server og drift
 
 SSH-adressen i den opprinnelige serveroppskriften var jonas@192.168.1.139; gjeldende adresse og nøkkelalias står øverst.
-Lenovo Y520-15IKBN, Ubuntu26.04.1, kernel7.0.0-42-generic.
-Gammel kernel7.0.0-30 er markert manuelt installert og beholdes.
+Lenovo Y520-15IKBN, Ubuntu26.04.1, kernel 7.0.0-42-generic.
+Gammel kernel 7.0.0-30 er markert manuelt installert og beholdes.
 GRUB viser meny; tilbakevei er Advanced options for Ubuntu -> 7.0.0-30-generic.
 Fire oppstarter med ny kernel bestod. Tidligere frys er ikke sikkert årsaksforklart;
 videre stabilitet observeres uten automatisk BIOS-/driverendring.
@@ -164,7 +170,7 @@ Gammel kernel beholdes til stabiliteten er avklart.
 
 Bestått29.10:
 - Initial faktisk restore,25 tabeller sammenlignet med originalen.
-- Fire oppstarter med kernel7.0.0-42 og automatisk app/tunnel/backup-timer.
+- Fire oppstarter med kernel 7.0.0-42 og automatisk app/tunnel/backup-timer.
 - Kontrollerte API-/DB-/tunnelkrasj; automatisk recovery og uendrede tabeller.
 - Faktisk Windows-backup, også etter Windows-av-prøven.
 - Lokk lukket på ekstern strøm; SSH/app/tunnel fortsatte å fungere.
@@ -182,3 +188,9 @@ Tester ved integrasjon:12 driftstester (chown mockes i ikke-root-testkjøringen)
 23 gate-tester,4 cleanup-tester, frontend TypeScript/Vite-bygg, Windows-parser og
 faktiske Docker-bygg. Ingen produksjonshemmeligheter inngår i Git eller testoutput.
 Originalt Windows-databasevolum og verifiserte backupkopier beholdes.
+
+## Passordkandidat: kontrollert databasegjenoppretting
+
+V2-kandidaten inkluderer passordbranchens avgrensede rutine for gjenoppretting av en eksisterende database. Se [operatørrutinen](../_bmad-output/experimental-extensions/password-management/implementation/restore-runbook.md) og [isolert testevidens](../_bmad-output/experimental-extensions/password-management/implementation/restore-evidence.md).
+
+Rutinen krever kandidatens vedlikeholdssperrer i helper, systemd-enheter og Compose før bruk. Gamle passord, økter og engangskoder ugyldiggjøres før gjenåpning. Brukerne får hver sin administrative kode. Vanlig omstart eller oppdatering utløser ingen slik gjenoppretting. Produksjonsinstallasjon og praktisk eierprøve behandles separat.

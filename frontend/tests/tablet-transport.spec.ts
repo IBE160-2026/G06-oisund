@@ -212,6 +212,11 @@ for (const outcome of ['restored', 'cancel', 'logout', 'expired', 'different-acc
 
 for (const failure of ['invalid-json', 'network', 'body-timeout'] as const) test(`PDF ${failure} is distinct from parser rejection`, async ({ page, baseURL }) => {
   const state = await fixture(page, baseURL);
+  const editor = page.getByRole('button', { name: 'Kontroller og rediger utkast', exact: true });
+  const bus = page.getByLabel('Buss/vogn', { exact: true });
+  await editor.click();
+  await bus.fill('Ulagret buss');
+  await page.getByRole('button', { name: 'Forberedelse og planlister', exact: true }).click();
   if (failure === 'body-timeout') {
     await page.evaluate(() => {
       const originalFetch = window.fetch;
@@ -223,9 +228,15 @@ for (const failure of ['invalid-json', 'network', 'body-timeout'] as const) test
     });
   }
   await page.route('**/imports/pdf', route => failure === 'network' ? route.abort() : route.fulfill({ status: 200, contentType: 'application/json', body: '{' }));
-  await page.getByLabel('Velg tekst-PDF', { exact: true }).setInputFiles(syntheticPdf);
+  const picker = page.getByLabel('Velg tekst-PDF', { exact: true });
+  await picker.setInputFiles(syntheticPdf);
   await expect(page.getByText(failure === 'network' ? 'Opplastingen kunne ikke fullføres.' : failure === 'body-timeout' ? 'Opplastingen eller tolkingen tok for lang tid.' : 'Serveren returnerte et svar som ikke kunne brukes.', { exact: false })).toBeVisible();
+  await expect(picker).toHaveValue('');
+  await expect(page.getByRole('heading', { name: 'Importsammendrag' })).toHaveCount(0);
+  await editor.click();
+  await expect(bus).toHaveValue('Ulagret buss');
   expect(state.apiCalls).not.toContain('POST /drafts');
+  expect(state.unexpected).toEqual([]);
 });
 
 test('session suspension hides private input and restores the same unsaved proposal', async ({ page, baseURL }) => {

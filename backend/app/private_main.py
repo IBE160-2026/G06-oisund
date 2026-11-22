@@ -1,6 +1,6 @@
 import asyncio
 import logging
-from threading import Lock
+from threading import Event, Lock
 from contextlib import asynccontextmanager, suppress
 from uuid import UUID
 from datetime import date
@@ -23,6 +23,8 @@ from .workday_lifecycle_domain import CloseWorkday
 from .workday_outcome_domain import SaveOutcome, OutcomeRecord, OutcomeReceipt, WorkdayRecap
 from . import workday_outcome_storage
 from . import workday_notice_storage
+from . import automatic_notice_api, automatic_notice_ingestion
+from . import position_anchor_api, road_area_api, road_reference_api, route_reference_api, route_source
 from .workday_notice_domain import SaveNotice, NoticeCommand, NoticeRecord, NoticeList, NoticeReceipt, AccountNoticeCommand, SaveAccountNotice, AccountNoticeList
 from .notice_reader_domain import NoticeReader
 from .workday_bus_domain import SaveBus, BusRecord, BusReceipt
@@ -69,17 +71,28 @@ async def lifespan(app):
     if not run_cleanup():
         # Startup still refuses to serve when initial cleanup cannot run.
         raise RuntimeError('Private startup cleanup unavailable') from None
+    await asyncio.to_thread(route_source.at_launch)
     task = asyncio.create_task(maintenance())
+    stop_notices = Event()
+    notice_task = asyncio.create_task(automatic_notice_ingestion.periodic(stop_notices)) if automatic_notice_ingestion.enabled() else None
     try:
         yield
     finally:
+        stop_notices.set()
         await private_import.shutdown()
         task.cancel()
         with suppress(asyncio.CancelledError):
             await task
+        if notice_task:
+            await notice_task
 
 
 app = FastAPI(title='Privat arbeidsrom', lifespan=lifespan, docs_url=None, redoc_url=None, openapi_url=None)
+app.include_router(automatic_notice_api.router)
+app.include_router(route_reference_api.router)
+app.include_router(position_anchor_api.router)
+app.include_router(road_reference_api.router)
+app.include_router(road_area_api.router)
 app.add_middleware(CORSMiddleware, allow_origins=[auth.configuration()], allow_credentials=True,
                    allow_methods=['GET', 'POST'], allow_headers=['Content-Type', 'X-CSRF-Token'], expose_headers=['Date'])
 
@@ -153,7 +166,7 @@ def login(body: Credentials, request: Request, response: Response):
     token, row = auth.authenticate(body.username.strip().casefold(), body.password, request.client.host)
     # Revoke the existing browser session when changing identity.
     with database() as conn:
-        conn.execute('DELETE FROM sessions WHERE token_hash=%s', (auth.digest(request.cookies.get(auth.SESSION, '')),))
+        auth.revoke_browser(conn, request)
     cookie(response, auth.SESSION, token, 14 * 86400)
     return presentation(row)
 
@@ -176,9 +189,39 @@ def profile(identifier: UUID, request: Request):
 @app.post('/auth/logout')
 def logout(request: Request, response: Response):
     with database() as conn:
-        conn.execute('DELETE FROM sessions WHERE token_hash=%s', (auth.digest(request.cookies.get(auth.SESSION, '')),))
+        auth.revoke_browser(conn, request)
     response.delete_cookie(auth.SESSION, path='/', httponly=True, secure=auth.secure_cookies(), samesite='strict')
     return {'revoked': True}
+
+
+class PasswordChange(BaseModel):
+    model_config = ConfigDict(extra='forbid', strict=True)
+    current_password: str = Field(min_length=1, max_length=256)
+    new_password: str = Field(min_length=12, max_length=256)
+    confirmation: str = Field(min_length=12, max_length=256)
+
+
+@app.post('/auth/password/change')
+def change_password(body: PasswordChange, request: Request, response: Response):
+    auth.change_password(request, body.current_password, body.new_password, body.confirmation)
+    response.delete_cookie(auth.SESSION, path='/', httponly=True, secure=auth.secure_cookies(), samesite='strict')
+    return {'changed': True}
+
+
+class PasswordRecovery(BaseModel):
+    model_config = ConfigDict(extra='forbid', strict=True)
+    username: str = Field(max_length=100)
+    code: str = Field(max_length=256)
+    new_password: str = Field(min_length=12, max_length=256)
+    confirmation: str = Field(min_length=12, max_length=256)
+
+
+@app.post('/auth/password/recover')
+def recover_password(body: PasswordRecovery, request: Request, response: Response):
+    from .password_recovery import redeem
+    redeem(request, body.username, body.code, body.new_password, body.confirmation)
+    response.delete_cookie(auth.SESSION, path='/', httponly=True, secure=auth.secure_cookies(), samesite='strict')
+    return {'changed': True}
 
 
 @app.get('/drafts', response_model=DraftList)

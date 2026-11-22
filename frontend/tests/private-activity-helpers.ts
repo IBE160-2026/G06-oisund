@@ -36,6 +36,14 @@ export function relativeInstants(seconds: number, anchor?: string): [string, str
   const now = anchor ? `datetime.fromisoformat(${JSON.stringify(anchor)}).astimezone(timezone.utc)` : 'datetime.now(timezone.utc)';
   return JSON.parse(python(`from datetime import datetime,timedelta,timezone\nfrom zoneinfo import ZoneInfo\nimport json\nstart=${now}.replace(microsecond=0)+timedelta(seconds=${seconds})\nend=start+timedelta(minutes=1)\nprint(json.dumps([instant.astimezone(ZoneInfo('Europe/Oslo')).isoformat() for instant in [start,end]]))\n`));
 }
+export function futureOsloClockFallback() {
+  // Keep live workday retention enabled while crossing Oslo's repeated hour.
+  const transition = new Date(Date.UTC(new Date().getUTCFullYear() + 1, 9, 31));
+  transition.setUTCDate(31 - transition.getUTCDay());
+  const day = transition.toISOString().slice(0, 10);
+  return { day, displayDay: `${transition.getUTCDate()}.10.${transition.getUTCFullYear()}`,
+    start: `${day}T02:55+02:00`, end: `${day}T02:05+01:00` };
+}
 export async function openedPlan(page: Page, context: BrowserContext, single = false, relativeStart?: number, firstType?: string, identicalMembers = false, customize?: (content: Content) => void, classifications: Record<string, string> = {}) {
   await page.goto('/private');
   await page.getByLabel('Brukernavn', { exact: true }).fill(account.username);

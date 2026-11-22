@@ -1,16 +1,17 @@
-import { test, expect, API, setup, openedPlan, selected, activityStatus, dayScreen, activityScreen, account, python, post, randomUUID, beforeUnload } from './private-activity-helpers';
+import { test, expect, API, setup, openedPlan, selected, activityStatus, dayScreen, activityScreen, account, python, post, randomUUID, beforeUnload, futureOsloClockFallback } from './private-activity-helpers';
 import { writeFileSync } from 'node:fs';
 
 setup();
 const fact = (page: Parameters<typeof selected>[0], name: string) => selected(page).locator('.selected-facts > div').filter({ has: page.getByText(name + ':', { exact: true }) }).locator('dd');
 
 test('literal Oslo offset transition and passenger unknown rows remain independent', async ({ page, context }) => {
+  const { day, displayDay, start, end } = futureOsloClockFallback();
   await openedPlan(page, context, true, undefined, undefined, false, content => {
-    content.service_date = '2026-10-25'; Object.assign(content.activities[0], { start: '2026-10-25T02:55+02:00', end: '2026-10-25T02:05+01:00', line: null, trip: null, direction: ' ' });
+    content.service_date = day; Object.assign(content.activities[0], { start, end, line: null, trip: null, direction: ' ' });
   });
   await page.getByRole('button', { name: 'Velg aktivitet 1', exact: true }).click();
-  await expect(fact(page, 'Planlagt start')).toHaveText('25.10.2026, 02:55');
-  await expect(fact(page, 'Planlagt slutt')).toHaveText('25.10.2026, 02:05');
+  await expect(fact(page, 'Planlagt start')).toHaveText(`${displayDay}, 02:55`);
+  await expect(fact(page, 'Planlagt slutt')).toHaveText(`${displayDay}, 02:05`);
   for (const field of ['Linje', 'Turnummer', 'Retning']) await expect(fact(page, field)).toHaveText('Ukjent');
 });
 

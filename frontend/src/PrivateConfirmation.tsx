@@ -7,14 +7,15 @@ import { recoverOperation } from './recoverOperation';
 
 import { NoticeScreens, usePrivateNotices } from './PrivateNotices';
 import { PrivateWorkdayView } from './PrivateWorkdayView';
+import { ApprovalRouteReferences, routeDate, readDraftRoutes, type Reference } from './PrivateRouteReference';
 import { effectiveDuty, activityFactMissing, displayFact, currentUncertainty } from './draftInterpretation';
 
 type Review = { operation_id: string; operation_expires_at: string; draft_id: string; revision: number; draft: Content; blockers: string[]; unknowns: { id: string; label: string }[]; classifications_required: string[]; supported_types: string[]; final_end: string | null; expires_at: string | null };
-type Decisions = { operation_id: string; expected_revision: number; acknowledgements: string[]; classifications: Record<string, string> };
+type Decisions = { operation_id: string; expected_revision: number; expected_route_revision?: number; acknowledgements: string[]; classifications: Record<string, string> };
 export type Plan = { id: string; source_draft_id: string; source_revision: number; confirmed_at: string; final_end: string; expires_at: string; state: 'confirmed'; draft: Content; acknowledgements: string[]; classifications: Record<string, string>; unknowns: { id: string; label: string }[] };
 type Summary = Pick<Plan, 'id' | 'source_draft_id' | 'source_revision' | 'expires_at'> & { service_date: string | null };
 type Deletion = { id: string; expires_at: string; body: { operation_id: string; source_revision: number } };
-type Props = { saved: Saved | null; clean: boolean; request: (path: string) => Promise<any>; mutation: (path: string, body: object) => Promise<any>; expired: () => void; suspended: boolean; lock: (value: boolean) => void; screen: 'upload' | 'import' | 'editor' | 'direct' | 'approval' | 'plan'; showPlan: () => void; showPreparation: () => void; planChanged: (value: boolean) => void; consultationChanged: (value: boolean) => void; registryDirty: (value: boolean) => void; registryOpen: (value: boolean) => void; registryNavigation: number };
+type Props = { saved: Saved | null; clean: boolean; request: (path: string) => Promise<any>; mutation: (path: string, body: object) => Promise<any>; expired: () => void; suspended: boolean; lock: (value: boolean) => void; settingsBlocked: (value: boolean) => void; screen: 'upload' | 'import' | 'editor' | 'direct' | 'approval' | 'plan'; showPlan: () => void; showPreparation: () => void; planChanged: (value: boolean) => void; consultationChanged: (value: boolean) => void; registryDirty: (value: boolean) => void; registryOpen: (value: boolean) => void; registryNavigation: number; workspaceVisible: boolean };
 const uuid = (v: any): v is string => typeof v === 'string' && /^[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i.test(v);
 const canonical = (v: any): string => JSON.stringify(v, (_, value) => value && typeof value === 'object' && !Array.isArray(value) ? Object.fromEntries(Object.keys(value).sort().map(key => [key, value[key]])) : value);
 const live = (v: any) => typeof v === 'string' && Number.isFinite(Date.parse(v)) && Date.parse(v) > privateNow();
@@ -54,7 +55,7 @@ export function Facts({ content, classifications = {}, historical = false }: { c
     </>;
 }
 
-export function PrivateConfirmation({ saved, clean, request, mutation, expired, suspended, lock, screen, showPlan, showPreparation, planChanged, consultationChanged, registryDirty, registryOpen, registryNavigation }: Props) {
+export function PrivateConfirmation({ saved, clean, request, mutation, expired, suspended, lock, settingsBlocked, screen, showPlan, showPreparation, planChanged, consultationChanged, registryDirty, registryOpen, registryNavigation, workspaceVisible }: Props) {
   const [noticeReaderOpen, setNoticeReaderOpen] = useState(false);
   const [planOpen, setPlanOpen] = useState(0);
   const [activityOpen, setActivityOpen] = useState(false);
@@ -89,6 +90,8 @@ export function PrivateConfirmation({ saved, clean, request, mutation, expired, 
   useEffect(() => { registryOpen(notices.screen !== 'day' || screen === 'plan' && noticeReaderOpen); }, [notices.screen, noticeReaderOpen, screen]);
   useEffect(() => { notices.navigate('day'); }, [registryNavigation]);
   const [review, setReview] = useState<Review | null>(null);
+  const [routeReview, setRouteReview] = useState<{ revision: number; references: Reference[] } | null>(null);
+  const [routeAcknowledged, setRouteAcknowledged] = useState(false);
   const [acks, setAcks] = useState<string[]>([]);
   const [classes, setClasses] = useState<Record<string, string>>({});
   const [pending, setPending] = useState<Decisions | null>(null);
@@ -115,6 +118,7 @@ export function PrivateConfirmation({ saved, clean, request, mutation, expired, 
   useEffect(() => { if (screen === 'plan' && !activityOpen) dayTitle.current?.focus(); }, [screen, plan?.id]);
   useEffect(() => { alive.current = true; return () => { alive.current = false; }; }, []);
   useEffect(() => { lock(!!pending || !!deleting || busLocked); return () => lock(false); }, [pending, deleting, busLocked]);
+  useEffect(() => { settingsBlocked(busy || !!review && (acks.length > 0 || Object.values(classes).some(Boolean) || routeAcknowledged)); return () => settingsBlocked(false); }, [busy, !!review, acks, classes, routeAcknowledged]);
   useEffect(() => { epoch.current++; if (!pending) { setReview(null); setAcks([]); setClasses({}); } }, [selected, clean]);
   useEffect(() => { if (screen === 'approval') { title.current?.focus(); if (clean && !review && !pending) void begin(); } }, [screen, clean]);
   useEffect(() => {
@@ -184,7 +188,10 @@ export function PrivateConfirmation({ saved, clean, request, mutation, expired, 
     const attempt = { selected, generation }; reviewRead.current = attempt;
     setBusy(true);
     try {
-      const value = await mutation('/workday-reviews', { draft_id: saved.id, expected_revision: saved.revision });
+      const route = routeDate(saved.draft.service_date) ? await readDraftRoutes(request, saved) : null;
+      if (!alive.current || generation !== epoch.current) return;
+      const value = await mutation('/workday-reviews', { draft_id: saved.id, expected_revision: saved.revision,
+        ...(route ? { expected_route_revision: route.route_revision } : {}) });
       if (!alive.current || generation !== epoch.current) return;
       if (!value || Object.keys(value).sort().join() !== 'blockers,classifications_required,draft,draft_id,expires_at,final_end,operation_expires_at,operation_id,revision,supported_types,unknowns' || !uuid(value.operation_id) || value.draft_id !== saved.id || value.revision !== saved.revision || canonical(value.draft) !== canonical(saved.draft)
         || Date.parse(value.operation_expires_at) !== Date.parse(saved.expires_at) || !live(value.operation_expires_at)
@@ -195,6 +202,8 @@ export function PrivateConfirmation({ saved, clean, request, mutation, expired, 
         || !Array.isArray(value.supported_types) || canonical([...value.supported_types].sort()) !== canonical([...supportedTypes].sort())
         || !validCandidates(value)
         || (value.blockers.length === 0 && (Date.parse(value.final_end) !== finalEnd(saved.draft) || Date.parse(value.expires_at) - Date.parse(value.final_end) !== 7 * 86400000 || !live(value.expires_at)))) throw Error();
+      setRouteReview(route ? { revision: route.route_revision, references: route.references } : null);
+      setRouteAcknowledged(false);
       setReview(value); setAcks([]); setClasses({}); setMessage('Gjennomgå den lagrede versjonen og beslutningene som er oppført.'); title.current?.focus();
     } catch (error) { if (alive.current && generation === epoch.current) failure(error); }
     finally { if (reviewRead.current === attempt) { reviewRead.current = null; if (alive.current) setBusy(false); } }
@@ -213,9 +222,10 @@ export function PrivateConfirmation({ saved, clean, request, mutation, expired, 
     return true;
   }
   async function send(lookup = false) {
-    if (!review || busLockedRef.current) return;
+    if (!review || busLockedRef.current || !pending && !!routeReview?.references.length && !routeAcknowledged) return;
     const generation = reading.current, authorityEpoch = epoch.current;
-    const decisions = pending ?? { operation_id: review.operation_id, expected_revision: review.revision, acknowledgements: [...acks].sort(), classifications: { ...classes } };
+    const decisions = pending ?? { operation_id: review.operation_id, expected_revision: review.revision, acknowledgements: [...acks].sort(), classifications: { ...classes },
+      ...(routeReview?.references.length ? { expected_route_revision: routeReview.revision } : {}) };
     let checking = false;
     setPending(decisions); setBusy(true); setMessage('Bekreftelse er uavklart til svaret er kontrollert.');
     try {
@@ -249,7 +259,7 @@ export function PrivateConfirmation({ saved, clean, request, mutation, expired, 
         'Bekreftelsesforsøket gjelder en annen versjon.', 'Bekreftelsesforsøket har andre beslutninger.',
         'Utkastet er endret. Gjennomgå den lagrede versjonen på nytt.', 'Utkastet har allerede en bekreftet plan. Åpne planen.',
         'Rett blokkeringene og klassifiser alle ukjente aktivitetstyper.', 'Alle oppførte ukjente opplysninger må gjennomgås og godtas for denne versjonen.',
-        'Kontroller feltene.', 'Forespørselen er for stor.',
+        'Kontroller feltene.', 'Forespørselen er for stor.', 'Rutevalget er endret. Last inn og gjennomgå den lagrede versjonen.',
       ].includes(error.apiDetail)) { setPending(null); setReview(null); failure(error); }
       else setMessage('Bekreftelsen er uavklart. Behold siden åpen og kontroller eller prøv samme bekreftelse igjen.');
     } finally { if (alive.current && generation === reading.current) setBusy(false); }
@@ -346,18 +356,21 @@ export function PrivateConfirmation({ saved, clean, request, mutation, expired, 
     {review && <section aria-label="Gjennomgått versjon"><h3>Lagret versjon {review.revision}</h3><p>Siste aktivitetsslutt: {review.final_end ? date(review.final_end) : 'Uavklart'}. Planen utløper: {review.expires_at ? date(review.expires_at) : 'Uavklart'}.</p>
       {review.blockers.length > 0 && <div className="import-warning"><h4>Rett før bekreftelse</h4><ul>{review.blockers.map((v, i) => <li key={i}>{v}</li>)}</ul></div>}
       <p>Tjenestedato {review.draft.service_date ?? 'ukjent'} · vognløp {review.draft.vehicle_duty ?? 'ukjent'} · buss/vogn {review.draft.physical_bus ?? 'ukjent'} · {review.draft.activities.length} aktiviteter.</p><details><summary>Vis alle opplysninger i lagret versjon</summary><Facts content={review.draft} classifications={classes} /></details>
+      {!!routeReview?.references.length && <><ApprovalRouteReferences references={routeReview.references} />
+        <label className="confirmation-ack"><input type="checkbox" disabled={busy || !!pending || suspended} checked={routeAcknowledged}
+          onChange={event => setRouteAcknowledged(event.target.checked)} />Jeg har gjennomgått rutevalgene og vil bevare dem i planen.</label></>}
       <p>Godta manglende turinformasjon og gjeldende usikkerhet for passasjerturer der de er oppført nedenfor. Ukjent aktivitetstype må klassifiseres.</p>
       <fieldset disabled={busy || !!pending || suspended}><legend>Beslutninger for versjon {review.revision}</legend>
         {review.classifications_required.map(id => { const index = review.draft.activities.findIndex(a => a.id === id), activity = review.draft.activities[index]; return <div key={id} className="classification-decision"><p id={'classification-context-' + id}>Opprinnelig kode: {displayFact('raw_code', activity.raw_code) ?? 'Ukjent'}. Oppgitt type: {displayFact('type', activity.type) ?? 'Ukjent'}. Start: {activity.start ? date(activity.start) : 'Ukjent dato og tid'} · slutt: {activity.end ? date(activity.end) : 'Ukjent dato og tid'}. Fra: {displayFact('from_place', activity.from_place) ?? 'Ukjent'} · til: {displayFact('to_place', activity.to_place) ?? 'Ukjent'}.</p><label>Klassifisering aktivitet {index + 1}<select aria-describedby={'classification-context-' + id} value={classes[id] ?? ''} onChange={e => { const next = { ...classes, [id]: e.target.value }; setClasses(next); const allowed = new Set(relevantUnknowns(review, next).map(item => item.id)); setAcks(current => current.filter(id => allowed.has(id))); }}><option value="">Velg eksplisitt type</option>{review.supported_types.map(kind => <option key={kind} value={kind}>{typeLabels[kind]}</option>)}</select></label></div>; })}
         {visibleUnknowns.map(item => <label className="confirmation-ack" key={item.id}><input type="checkbox" checked={acks.includes(item.id)} onChange={e => setAcks(current => e.target.checked ? [...current, item.id] : current.filter(id => id !== item.id))} />Jeg har gjennomgått og godtar: {item.label}</label>)}
       </fieldset>
-      {!pending && <div className="controls"><button disabled={busy || busLocked || suspended || review.blockers.length > 0 || acks.length !== visibleUnknowns.length || review.classifications_required.some(id => !classes[id])} onClick={() => void send()}>Bekreft gjennomgått plan</button><button disabled={busy} onClick={() => { setReview(null); setAcks([]); setClasses({}); setMessage('Gjennomgangen er avbrutt. Utkastet er uendret.'); }}>Avbryt gjennomgang</button></div>}
+      {!pending && <div className="controls"><button disabled={busy || busLocked || suspended || !!routeReview?.references.length && !routeAcknowledged || review.blockers.length > 0 || acks.length !== visibleUnknowns.length || review.classifications_required.some(id => !classes[id])} onClick={() => void send()}>Bekreft gjennomgått plan</button><button disabled={busy} onClick={() => { setReview(null); setRouteReview(null); setRouteAcknowledged(false); setAcks([]); setClasses({}); setMessage('Gjennomgangen er avbrutt. Utkastet er uendret.'); }}>Avbryt gjennomgang</button></div>}
     </section>}
     {pending && <div className="controls"><button disabled={busy || busLocked || suspended} onClick={() => void send()}>Prøv samme bekreftelse igjen</button><button disabled={busy || busLocked || suspended} onClick={() => void send(true)}>Kontroller bekreftelsen</button></div>}
     </div>
     <div hidden={screen === 'plan' && noticeReaderOpen}><NoticeScreens visible={screen !== 'plan' || !noticeReaderOpen} notices={notices} serviceDate={plan?.draft.service_date ?? null} back={() => notices.navigate('day')} /></div>
     {(!plan || screen !== 'plan') && notices.screen === 'day' && <button id="notice-entry-preparation" disabled={suspended} onClick={notices.open}>Manuelt vedlikeholdte avvik</button>}
-    {plan && <PrivateWorkdayView validPlan={validPlan} historicalDetails={<Facts historical content={plan.draft} classifications={plan.classifications} />} busy={busy} key={plan.id + ':' + planOpen} plan={plan} hidden={screen !== 'plan'} activityOpen={activityOpen} setActivityOpen={setActivityOpen} request={request} mutation={mutation} suspended={suspended || !!deleting || !!pending} expired={expired} planAvailable={planAvailable} dayNavigationLocked={dayNavigationLocked} busLocked={busLocked} guardBus={guardBus} guardSelection={guardSelection} guardStart={guardStart} guardOutcome={guardOutcome} notices={notices} readerChanged={setNoticeReaderOpen} busAvailability={busAvailability} selectionAvailability={selectionAvailability} startAvailability={startAvailability} remove={() => void remove()} closeView={() => { setPlan(null); showPreparation(); }} showPreparation={showPreparation} shorten={value => setPlan(current => current?.id === plan.id && Date.parse(value) < Date.parse(current.expires_at) ? { ...current, expires_at: value } : current)} />}
+    {plan && <PrivateWorkdayView validPlan={validPlan} historicalDetails={<Facts historical content={plan.draft} classifications={plan.classifications} />} busy={busy} key={plan.id + ':' + planOpen} plan={plan} hidden={screen !== 'plan' || !workspaceVisible} activityOpen={activityOpen} setActivityOpen={setActivityOpen} request={request} mutation={mutation} suspended={suspended || !!deleting || !!pending} expired={expired} planAvailable={planAvailable} dayNavigationLocked={dayNavigationLocked} busLocked={busLocked} guardBus={guardBus} guardSelection={guardSelection} guardStart={guardStart} guardOutcome={guardOutcome} notices={notices} readerChanged={setNoticeReaderOpen} busAvailability={busAvailability} selectionAvailability={selectionAvailability} startAvailability={startAvailability} remove={() => void remove()} closeView={() => { setPlan(null); showPreparation(); }} showPreparation={showPreparation} shorten={value => setPlan(current => current?.id === plan.id && Date.parse(value) < Date.parse(current.expires_at) ? { ...current, expires_at: value } : current)} />}
     {plan && screen === 'plan' && busLocked && <button disabled={busy || suspended || !!deleting || !!pending} onClick={() => void abandonMissingPlan()}>Oppgi uavklart forsøk og lukk planen</button>}
     <div hidden={screen !== 'plan'}>{deleting && <div className="controls"><button disabled={busy || suspended} onClick={() => void remove()}>Prøv samme sletting igjen</button><button disabled={busy || suspended} onClick={() => void remove(true)}>Kontroller slettingen</button></div>}</div>
     <div hidden={screen !== 'upload' || notices.screen !== 'day'}><h3>Mine bekreftede planer</h3><button disabled={busy || !!pending || !!deleting || busLocked || suspended} onClick={() => void list()}>Oppdater planlisten</button>

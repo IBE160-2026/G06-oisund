@@ -1,0 +1,11 @@
+[Unit]
+Description=Bussassistent public road situation refresh
+Wants=network-online.target
+After=network-online.target bussassistent.service
+ConditionPathExists=!/etc/bussassistent/maintenance/pending.json
+ConditionPathExists=/opt/bussassistent/current/backend/app/road_situation_source.py
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/bussassistentctl refresh-road-situations
+UMask=0077

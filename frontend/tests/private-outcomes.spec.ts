@@ -1,4 +1,4 @@
-import { test, expect, openedPlan, API, post, randomUUID, selected, shiftStatus, beforeUnload, python, setup, dayScreen, activityScreen, account } from './private-activity-helpers';
+import { test, expect, openedPlan, API, post, randomUUID, selected, shiftStatus, beforeUnload, python, setup, dayScreen, activityScreen, account, futureOsloClockFallback } from './private-activity-helpers';
 import { writeFileSync } from 'node:fs';
 setup();
 const progressStatus = (page: any) => page.getByRole('status', { name: 'Aktivitetsstatus og avslutningsstatus' });
@@ -64,16 +64,29 @@ for (const invalid of ['wrong-workday', 'invalid-shape']) test(`malformed lifecy
   const deadline = await page.getByText(/^Siste aktivitetsslutt:/).innerText();
   const path = '/workdays/' + plan.id + '/lifecycle';
   const original = await (await context.request.get(API + path)).json();
+  const pauseAt = new Date(await page.evaluate(() => Date.now()) + 10000);
+  await page.clock.pauseAt(pauseAt);
   const earlier = new Date(await page.evaluate(() => Date.now()) + 5000).toISOString();
+  const earlierMs = Date.parse(earlier);
+  expect(earlierMs).toBeGreaterThan(Date.parse(original.started_at));
+  expect(earlierMs).toBeLessThan(Date.parse(original.expires_at));
   await page.route('**:8001' + path, route => route.fulfill({ status: 200, json: { ...original, ...(invalid === 'wrong-workday' ? { workday_id: randomUUID() } : { state: 'malformed' }), expires_at: earlier } }));
   const reload = page.getByRole('button', { name: 'Hent skiftstatus igjen', exact: true });
   await reload.click();
   await expect(shiftStatus(page)).toContainText('kan ikke bekreftes');
+  const expiry = page.getByText(/^Siste aktivitetsslutt:/);
+  await expect(expiry).toHaveCount(0);
+  expect(await page.evaluate(() => Date.now())).toBeLessThan(earlierMs);
   await page.clock.fastForward(6000);
-  await expect(page.getByText(/^Siste aktivitetsslutt:/)).toHaveText(deadline);
+  expect(await page.evaluate(() => Date.now())).toBeGreaterThan(earlierMs);
+  await expect(expiry).toHaveCount(0);
+  await expect(page.getByRole('region', { name: 'Ulagrede forslag til aktivitetsstatus' })
+    .getByText('Aktivitet 1: Fullført manuelt', { exact: true })).toBeVisible();
   await expect.poll(() => beforeUnload(page)).toBe(true);
   await page.unroute('**:8001' + path); await reload.click();
   await expect(shiftStatus(page)).toContainText('Lagret status er hentet.');
+  await expect(expiry).toBeVisible();
+  await expect(expiry).toHaveText(deadline);
   await activityScreen(page);
   await expect(selected(page)).toHaveAttribute('data-selected-activity-id', activities[0].id);
   await expect(page.getByLabel('Manuell aktivitetsstatus', { exact: true })).toHaveValue('completed');
@@ -452,10 +465,13 @@ test('actual synthetic upload edit confirm start outcome close recap journey', a
 });
 
 test('all unknown recap preserves literal Oslo offset transition dates and exact count', async ({ page, context }) => {
-  const { plan } = await openedPlan(page, context, true, undefined, undefined, false, content => { content.service_date = '2026-10-25'; Object.assign(content.activities[0], { start: '2026-10-25T02:55+02:00', end: '2026-10-25T02:05+01:00' }); });
+  const fallback = futureOsloClockFallback();
+  const { plan } = await openedPlan(page, context, true, undefined, undefined, false, content => {
+    content.service_date = fallback.day; Object.assign(content.activities[0], { start: fallback.start, end: fallback.end });
+  });
   await start(page); await page.getByRole('button', { name: 'Avbryt skift', exact: true }).click(); await page.getByRole('button', { name: 'Bekreft avbrudd', exact: true }).click();
   const summary = page.getByRole('region', { name: 'Oppsummering av skift', exact: true });
-  await expect(summary).toContainText('Planlagt start: 25.10.2026, 02:55. Planlagt siste slutt: 25.10.2026, 02:05.');
+  await expect(summary).toContainText(`Planlagt start: ${fallback.displayDay}, 02:55. Planlagt siste slutt: ${fallback.displayDay}, 02:05.`);
   await expect(summary.locator('dl > div').filter({ has: page.getByText('Ikke registrert', { exact: true }) }).locator('dd')).toHaveText('1');
   expect((await recap(context, plan)).outcomes.outcomes[0].outcome).toBe('unregistered');
 });

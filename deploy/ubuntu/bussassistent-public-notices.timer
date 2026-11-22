@@ -1,0 +1,10 @@
+[Unit]
+Description=Bussassistent public Entur SIRI-SX refresh schedule
+
+[Timer]
+OnActiveSec=5min
+OnUnitInactiveSec=5min
+AccuracySec=20s
+
+[Install]
+WantedBy=timers.target

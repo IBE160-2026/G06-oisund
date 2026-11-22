@@ -1,0 +1,450 @@
+{
+  "project": "ibe160-pm-s4-e57c2ff0d437",
+  "port": 56762,
+  "source": "1c4ac7ce2621cb7ec4862231bfa10285bb31c255",
+  "prior": "5cee9e03d03d2c9c165c7f8fec64aa3e146959ab",
+  "docker": "29.7.2",
+  "node": "v24.19.0",
+  "fingerprints": {
+    "backend/.dockerignore": "b48d4c45e9ad73ebe416bded118bb8bfbe0adafb4e51db8902e8870205dcdb25",
+    "backend/app/auth.py": "e1677c80424044d847aac5ae25822b1694d98abd301327916e2698d33d117529",
+    "backend/app/bus_value.py": "5be4861d3d57d0e7f4ddc908fcd6fbc5ccd52d4940d25283969a6574c783b49b",
+    "backend/app/domain.py": "00caf3939819d84128958d86cea4fc25f5f8ab52d78df894443520ed2c5949ca",
+    "backend/app/draft_domain.py": "2af54e480868792b89ed1822d30a12d10af2d5e39f240e19960044b69f836589",
+    "backend/app/draft_storage.py": "865c849b96ba2af6ebcf6089aebe7812cb93752d5f076dc7f7e55948b4cf648b",
+    "backend/app/draft_time.py": "b6c958f2059a2852aa033ed7cf7c26141cfe231581dc24c427d175d337895abf",
+    "backend/app/import_issues.py": "b9b573cd43f172078dc1e5701689f26c3ba19ce71d8aca45d41612e072f27207",
+    "backend/app/main.py": "29e1b9f48c8807ccb891521131cb104cbebb7e80f164f8e63698da0847d68aea",
+    "backend/app/manage.py": "738c859aef67a1271dff5b0a87f37ae40078404f60fde1e26d7bb513a685bc29",
+    "backend/app/notice_reader_domain.py": "11dc65c6d65e02fe0170fe408a09f0470c10a54bb6e2b0f9735d6d63aa4390fc",
+    "backend/app/password_recovery.py": "387ea6ac0a88f2d675a5bab17b902155a58d0f573d6a01a381439e47eefa491b",
+    "backend/app/pdf_import.py": "06ae62d41f073124af7602cc0e963dd5424b0d5956b3af2083149d91309fc263",
+    "backend/app/private_import.py": "bef1a0ce951826cd59810196f97454c0e05ff0a23f99e8b6c3fb98a7948b2d59",
+    "backend/app/private_main.py": "fa1e2a7aa7fbc7b44bbfd2545dc97d946f927aa01d04fbf6e28cb7e2ba746737",
+    "backend/app/private_storage.py": "77165147294a2ea462c3bf8d9a84b0dafcf30e737fef9414dd260d530d350151",
+    "backend/app/qualify_imports.py": "4e29620264ed463d6a12406d712424ad040a6354eb5fcb9bbbc35141a3a7658d",
+    "backend/app/recovery_terminal.py": "37772087d994d9e0aee3ea1833f7be7af7ee5bc5e854b637cc6ca1e8692eaf3e",
+    "backend/app/run.py": "2f0de523ef255ed144194d6e0b25f7aef920ef503f9b3e3342d7004520f3d0f1",
+    "backend/app/storage.py": "07be14df4c897d9859112e28e68e9e186383064653a83d1e9727ae11489f1b57",
+    "backend/app/workday_bus_domain.py": "8eaad1875aa29e748387928076812ff72593b327e937adcbeaea5272050ab89f",
+    "backend/app/workday_bus_storage.py": "eb5e99d0d47ef795358f1e58411731446174f83e68467d5f778b32ec31fcc7d9",
+    "backend/app/workday_domain.py": "d7ce2bdeef3b1db4b7cd4ca0f8916108cc11d44eb69d4a4f578f3b40cea9a4c6",
+    "backend/app/workday_lifecycle_domain.py": "f0d9332df28a98fb4325b24c6b7f4f523b13f898ee0721832d128164d6d4cfa4",
+    "backend/app/workday_lifecycle_storage.py": "302ad49cd38bfd74b043bccfb8d846552f28ecaae0e545e7ad8e195cda846048",
+    "backend/app/workday_notice_domain.py": "ce7ded29b9402bdc3848038197ba7d077ef1c54fa601978e3ebb6ebdb802a194",
+    "backend/app/workday_notice_storage.py": "1c9453b65dd16aa0447b02827af8371c585792ce698835a8542b6c302101db0f",
+    "backend/app/workday_outcome_domain.py": "020d606d32e8766986b7410c52f4aa7e02a9ffad5a02bd5bf0e40116d4de98f8",
+    "backend/app/workday_outcome_storage.py": "e425963d6182fbf9a0488a091b7f48b7e2e70c7a0683c8fffbebfbdb2562d4cd",
+    "backend/app/workday_selection_domain.py": "7b26d2fe1b687dc71e7199e722eb0f2342b54204a55a5d36066ec5075327532b",
+    "backend/app/workday_selection_storage.py": "172ece4223332e3367bd402c1d9dcb269c414ad38b820f1073918602514eaabb",
+    "backend/app/workday_storage.py": "466e6eeabe43b1e77f2aaa2d111986c25dc200b7c71598341eeddee3d7bdd3d9",
+    "backend/app/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "backend/Dockerfile": "c91d60082825b71add45278fee6666de7069d0584b191c0d1ecc379df83e241d",
+    "backend/migrations/001_initial.sql": "91ddb841c46c2eb2bc052acdb90c2462d32ae25107d08b3ea361779533e0eb60",
+    "backend/migrations/private/001_access.sql": "503e33d0d0713cf219b51c15f1b1a0183f654f2bb71b32a31bb331070a96df93",
+    "backend/migrations/private/002_drafts.sql": "2e83389f35f31e5ab33de0709cdce6bed3ec4bd14fbe643c88f53792363043f0",
+    "backend/migrations/private/003_draft_deletions.sql": "13802f0a09e26ccab4f8380f1af2de642777d8f5b67e1f25a27f349b4ff9f482",
+    "backend/migrations/private/004_workdays.sql": "7366bf68090b0e67a4df6717bb29490f0aa37e763d2b4e5482fff5540e0f9e24",
+    "backend/migrations/private/005_workday_deletions.sql": "8dc45a272ff0bc3e168cc32b20683e7df45f7cac31dc49e70f9936c8aa90fccd",
+    "backend/migrations/private/006_workday_bus.sql": "e4b6f96a0ce2d3622c3e83b90adbe1c7f7e843cb88611f35041943cb6d56b84d",
+    "backend/migrations/private/007_draft_contracts.sql": "269440bb8682396a829f6c3cbad3fb5a30dc3775002838f81e5c9fb8d19631c3",
+    "backend/migrations/private/008_review_feedback.sql": "631cc9302e14099f96d0d76b9860b5559e0a8490225576d4ff8c24934636c126",
+    "backend/migrations/private/009_workday_selection.sql": "e090e74b4345b1659975d583a95889940e9e67035c359c35e8c40c6f73c28d44",
+    "backend/migrations/private/010_outcomes_and_closure.sql": "0d3de44e334e9c064b597f1ea7605cf447986dd8736a0750680f72d8795f48a6",
+    "backend/migrations/private/011_manual_notices.sql": "43a7fed3daede659fbfed30cf952c6b3c7fb1aadfcca98f8034461a1ed94bc57",
+    "backend/migrations/private/012_real_notice_sources.sql": "0f48d00335ad7c29c096d984b8a5bd5ba03ebbbdc2562549a45cfab1b35c68fc",
+    "backend/migrations/private/013_account_notice_registry.sql": "50b8a90bf1e9ae446a5d8f8d2a028bfac82ffba3bb057c648e8e7b35eb492c36",
+    "backend/migrations/private/014_notice_creation_admissions.sql": "21c2a76f50030cd5709c3b75b7092850cee7663170300cfd5de20118ad647b2b",
+    "backend/migrations/private/015_password_recovery.sql": "2c0d4682c1084e89251e84b5c3b1369fdb63bc7561e29131faade584c8482f87",
+    "backend/requirements.in": "69ff61da71e65a508cbf1c8adf6c7d75363da0eac1d61b04e73e87974ae28b26",
+    "backend/requirements.lock": "3bdc62f8eb049cbc5b25ec3c3eae78afc460f7b10ab55bf7a9b0ee55025f2c57",
+    "backend/tests/fixtures/import-source-2026-10-20.md": "c221000e9d6b1314749efb918af05de3e8a3f4e133147c80384123d2a033d1c3",
+    "backend/tests/fixtures/import_additional_expected.json": "9046a9ee64823475ed743590f91b52964cf9f8a42c6d96cda2b294f14a8aef22",
+    "backend/tests/fixtures/import_expected.json": "184082d7c9dca5a45c5e6d23d95a9f63c8fbc0fcdf43fab3e607dbadef1259bc",
+    "backend/tests/test_account_notices.py": "4f13c365c0170f75d854c238040a992a7d05a449b98c72f09bdc099aa7183a27",
+    "backend/tests/test_assessment.py": "8e18cabdc2e6a900390d94148b50af2c792e5fd9f8c1219a4b369b665ae2dd59",
+    "backend/tests/test_cleanup_observability.py": "7763fa8e6bb5aaba21afc04fe8a94738e9721ffcf4e5179b0f725a7bf00a10ae",
+    "backend/tests/test_notice_reader.py": "17608a11f24cf622c8694620c7e60a152062985e3d2dcff189ed24549c1a5c7c",
+    "backend/tests/test_password_change.py": "deb5cb3b1950669610ca5ea36ff6bb6de0be89e1a235f98c288beecdc07a93ff",
+    "backend/tests/test_password_recovery.py": "b65968b1b2e4ac6a8e772794358f9db59aa954861a8fcb894145dcb18d05afcf",
+    "backend/tests/test_password_recovery_operator.py": "f2d439af2ff402ef5de6a29063ca00d85452ed8bedb999adacbc23ab48c0bb16",
+    "backend/tests/test_pdf_import.py": "38cf9ee68891de7474a89536b087484a1238c2ab0bee1d49beba24bd0a714e4f",
+    "backend/tests/test_private_access.py": "924b26bc5a6bf031f47b6ff0074b3ce923e5c0ea80a160e1c55e9aee1b1f8c45",
+    "backend/tests/test_private_bus.py": "a7ff2ef36b3644a4914f5eb7f5a0cdf2e8b5d6c371ca0a9b2bac97431ecc10ec",
+    "backend/tests/test_private_drafts.py": "af028cb572b1c7716e0193e0badb2ad8e51c021b4e7ee78a170f16d3da1b8813",
+    "backend/tests/test_private_import.py": "dadb4f44276375b3ef809e1148d58cd8675b3b1e93956bd151f6c7082e717972",
+    "backend/tests/test_private_notices.py": "53fdbc03da5630339abb75dedb22741795e35301f836ede367d31fd49927cfc5",
+    "backend/tests/test_private_outcomes.py": "6960f7b8d6ab98816a64d58e0556b0fd06a516627a2b44b8d957956e714cb03b",
+    "backend/tests/test_private_selection.py": "88149f5012bed2a27a209ebd012e435463aee77d8e5f200b2a6d83cce19419de",
+    "backend/tests/test_private_start.py": "29e986cb04d2e64cc3b20d64697c67e26e3b8b0797304bfd0037f39ff0ff9225",
+    "backend/tests/test_private_workdays.py": "58541c375468058649ed263c423b233a6fd9f5c4575d11efff78bbb0dd05e9b2",
+    "backend/tests/test_retained_data.py": "60730f54c306b106bc62865956e5977889dd1e6fd421d5925185ad99b137b8fc",
+    "backend/tests/test_submission_safety.py": "6126b46b254e89ada201aef47dc2902cc599d99564e704ac69aad084d53d423c",
+    "backend/tests/test_tablet_transport.py": "07764f072c78f9e2582758dcc2a1d7d5cc642e4b6ccdbeee7e84ea08659e55d5",
+    "frontend/src/activityChoiceLabel.ts": "9119abac5644752c520bfb857d711651a08f5695e3c32573d0b011b8991ef559",
+    "frontend/src/busValue.ts": "124ab831a1bd1cf5d003db5d92ca8afc91387638120dc67d67be6261abff8a2d",
+    "frontend/src/dayOverview.ts": "b699bc425b36b6e1625d0d6a1b7b3bcc9c9e0b3b4fcd9beb815b1d606f43d642",
+    "frontend/src/demo.tsx": "2ea374f95ab0637f4f086f347d3933bf74fa250c5c1e4f5a49c7318a92536e1c",
+    "frontend/src/draftInterpretation.ts": "1417161dd95d32086f6dd6c27e0b339673363415a49a47c3548f5a086a1949f1",
+    "frontend/src/fictional-assessment.css": "84658fb27ad5a3c984f9cbc14bc52cf6c082ae22fc126c5446bf62822f940f7c",
+    "frontend/src/FictionalAssessment.tsx": "a16d8d02c51c8fbe7184f13c8fd9ded9013775e59c804282f78b437199af78c9",
+    "frontend/src/fictionalAssessmentModel.ts": "a1ca9004a046652b9af725cf887c390ce6961949412968ec0b3acb011bf974c1",
+    "frontend/src/main.tsx": "e9300c44c4f5c164431ce81bbf40cbc351e09d550f4cd9a81868c74fbe04d6fd",
+    "frontend/src/PasswordChange.tsx": "51ad1d0d6ac692595aaf56af106b9e9ab5d91b5d38c8984bee9b888b6cce54bc",
+    "frontend/src/PasswordRecovery.tsx": "04f67ccba733092ecc6bab9443cea8af9b2cae48b7b3b1f06685de6a33ba2818",
+    "frontend/src/pdfUpload.ts": "3feee43873a837fe5c358692135e2922b3338e49cba973a69278fbc88fda8bb6",
+    "frontend/src/PrivateAccess.tsx": "d543015e40158cd90f388195fff561e53445cd2d84de5352248f4777240413af",
+    "frontend/src/PrivateActivitySelection.tsx": "e0b8575812ee26a59588e6f0c5b23513a24929910e039ef65b08fe065c512212",
+    "frontend/src/PrivateBus.tsx": "dafea32a757d68cd8e9c61b83942f0a3f595d6aa54a29278d5e33463843ccf97",
+    "frontend/src/privateClock.ts": "dbcc746459d8f6b79ea458afb94454d1b7aa654c272ccdf8456ceec66a2ad4b5",
+    "frontend/src/PrivateConfirmation.tsx": "b91159c1665a29fb710a0d3929895268dea64871fed15802305488d399308634",
+    "frontend/src/PrivateDayOverview.tsx": "d001a712f6cdf3f43c1626493a584106aa4023fb305bc6c12b11555b4d405c4d",
+    "frontend/src/PrivateDrafts.tsx": "8eb8610506c20e32b86cd97b7986f2fd627ce71220163da5d03db16f4c84d0b2",
+    "frontend/src/PrivateImport.tsx": "27d385695d0f1cc4e5931ba1fa0d54df76cfcc77eb8e81184ad7e13dc04ede2a",
+    "frontend/src/PrivateNoticeReader.tsx": "c67efe75e409afe78dad5b5dddd86032d0e47b6ef03ff8a0f87bd60f9ea522f8",
+    "frontend/src/PrivateNotices.tsx": "f07477bb522ba7c97a4b3e288f50aea810f55826f920e933b47756abf01161e2",
+    "frontend/src/PrivateShiftStart.tsx": "3a8813d84a7863a28346be2558b92264ae64d68c514e03145fee473418f56f04",
+    "frontend/src/PrivateTimeInput.tsx": "5d41813cf5ee1c25bbd9b939ada5be6281073145ad8883821787195d243ab2aa",
+    "frontend/src/PrivateWorkdayProgress.tsx": "5737a69a9e6d5d603ae7060adfb80b015c8f2eb7a6656bfdeb68169c78957918",
+    "frontend/src/PrivateWorkdayView.tsx": "50ae5c1a246692bcea2e37a59d7bc19d38c0dacc2d5b0d86595de1a5478ca966",
+    "frontend/src/recoverOperation.ts": "155e99d62a16aa731f8ac761e6b9802cd1f882aa414e7fca1e1429148eb170a4",
+    "frontend/src/SelectedActivityDetails.tsx": "e0704da99335bbf0666d50aaee94129049965371f0ca1568a31dbc290c836749",
+    "frontend/src/style.css": "e730a63a0d84d98adbf968595154ab0fbb28fd96c185c602ffafe4d66a3bac27",
+    "frontend/src/tablet.tsx": "fac0c8558914c8837614d8646462b5607b303fbd7255b0e0f2d69d9fc2aad753",
+    "frontend/src/theme.tsx": "a07f570968856781dc80434fa8132d7b099fa5ce318a4ba1df79002243f72b1b",
+    "frontend/src/useWorkdayResource.ts": "7d41ff9337e05afa0ea57fe9581ea51902e5602a082f8f1e381a457616a21bca",
+    "frontend/src/vite-env.d.ts": "424faf9241dd699dda995b367ed36665732da1e6ec1f33b2fd40394488ecac92",
+    "deploy/tablet/.env.tablet.example": "63d68a77def2348000a10787651a1e9a7d74e8c30d77305790753677f21257cd",
+    "deploy/tablet/access-plan.example.json": "7994d5b08957dfd44c8650ee212c7d8d57bda9c28a6a442cb7b0752907d18203",
+    "deploy/tablet/access-policy.example.json": "8c917f42a097474488559a6b4322a1b16688897693df3f2467f155976f979821",
+    "deploy/tablet/access_gate/Dockerfile": "f7df6b1c9cf4020c318df29b4822687cc91a78e3cf33a2c10454a8f47ac71ea7",
+    "deploy/tablet/access_gate/Dockerfile.test": "354caa0386ac72da027eb5f28b30c0bd7c786236bf9dbf6f9b6934ab5274993d",
+    "deploy/tablet/access_gate/gate.py": "b8f7c706a30ff73f155f19c85883aaee9803341f6ef331c4607b0d0a29d3f260",
+    "deploy/tablet/access_gate/requirements.lock": "a1c39ca7f82178d2b9ab7d354f058098d03e97e8b8deda6ae459e4a9d2286720",
+    "deploy/tablet/access_gate/test_bounded_gate.py": "95019fbc94635077d0233cb48185ca2e87637a172bbc2cd569a4c00abedb41e0",
+    "deploy/tablet/access_gate/test_gate.py": "e8fa8e1b60481f01aab99ad0a19eaaad53cc00540e936237a4e007db1514aae4",
+    "deploy/tablet/access_gate/test_gate_http.py": "d6760c69fb10cc45621616a8146766d15c977a0ae98400240a9348e38ef72d70",
+    "deploy/tablet/cloudflared.example.yml": "d690eec96f794050303d3c6186c1cb7822aba8b3f5400f8fa27087a8b9aed530",
+    "deploy/tablet/Dockerfile": "7152f852374709274a40e599583d1a0388bca34546f7bcc12dcb8ad6a4103f02",
+    "deploy/tablet/index.html": "c04eb02e1f1d6d6d555593415ec272f4d8d7002533d7d597bd277593261a3f31",
+    "deploy/tablet/init-private-role.sql": "8a76eac4482d6d2ad8b965bbca632aa4d285172a30bc25b36877b2eed3f8ea27",
+    "deploy/tablet/nginx-main.conf": "d0d20d2e20ff677249ca272d8a553399536c328cd5b4e066f0d4918003e9d042",
+    "deploy/tablet/nginx.conf.template": "57ea84c34787ba6ffde80c4556166341c219315f074458dbabf921b38539c019",
+    "deploy/tablet/tunnel-dashboard-review.example.json": "e6968032677e638900b7c54df8cf2e385fa6bf4cad0cdddbf349dc389920aaeb",
+    "deploy/tablet/tunnel-pilot-review.json": "2ec854740b719ebe1fefdabb67d8d6037ef3235fd8d927b737e2cf12f569c255",
+    "scripts/verify-password-s4.mjs": "3298b05b5d66dbf7d9ecb8cac3cb4bfca686dedc3ccdee5a6f13f63ea43bdcac",
+    "scripts/password-s4-probe.py": "db4d959dcd45845feca27f9ea1628f23dc3d5bf886d1466f4eee8f62a0acdb4d",
+    "scripts/password-s4-gate.py": "08721558710a4266af3a3c8c541adefaacece09974f5cad231112be29d7a41c4",
+    "frontend/package-lock.json": "f79805cfd50c3866147a0984c0bb8585e1c40c66ca28997cfaaf5f4479534e2f",
+    "frontend/package.json": "f970fee83af9ca2f67a7ce8a34545ae21f7a303152d0e3202745fe8e8e9911b0",
+    "frontend/tsconfig.json": "33d46914a31f3bea00112957323a794e74ac90297f4d14eb3bd9b9282e7c9ebe",
+    ".dockerignore": "37bcec2587054baff6850cfdca0a4fb5331940bd2f8115b7cb19a4a4a33a226a"
+  },
+  "images": [
+    {
+      "ID": "sha256:4907b322509b9bad8de28a66e57a086c4b0c440801be54a74340e12583c56372",
+      "ContainerName": "ibe160-pm-s4-e57c2ff0d437-private-api-1",
+      "Repository": "ibe160-pm-s4-e57c2ff0d437-api",
+      "Tag": "latest",
+      "Platform": "linux/amd64",
+      "Size": 87710539,
+      "Created": "2026-10-31T05:45:49.177594405Z",
+      "LastTagTime": "2026-10-31T05:59:24.156371082Z"
+    },
+    {
+      "ID": "sha256:b15169d4838c20793a03319629f9bd5373df7570f15825028494fc17bf4d2bc4",
+      "ContainerName": "ibe160-pm-s4-e57c2ff0d437-access-gate-1",
+      "Repository": "ibe160-pm-s4-e57c2ff0d437-gate",
+      "Tag": "latest",
+      "Platform": "linux/amd64",
+      "Size": 56453002,
+      "Created": "2026-10-31T05:59:27.662912555Z",
+      "LastTagTime": "2026-10-31T05:59:28.509593364Z"
+    },
+    {
+      "ID": "sha256:26f884ab8aaef3ba12947f567250eb6d7b648533b14a7bc86be6ed31eaeb25d2",
+      "ContainerName": "ibe160-pm-s4-e57c2ff0d437-gateway-1",
+      "Repository": "ibe160-pm-s4-e57c2ff0d437-gateway",
+      "Tag": "latest",
+      "Platform": "linux/amd64",
+      "Size": 26092354,
+      "Created": "2026-10-31T05:45:51.080248224Z",
+      "LastTagTime": "2026-10-31T05:59:24.16911253Z"
+    },
+    {
+      "ID": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "ContainerName": "ibe160-pm-s4-e57c2ff0d437-private-db-1",
+      "Repository": "postgres",
+      "Tag": "",
+      "Platform": "linux/amd64",
+      "Size": 117212703,
+      "Created": "2026-09-17T21:31:32.987011508Z",
+      "LastTagTime": "2026-10-19T18:08:08.024638343Z"
+    }
+  ],
+  "results": {
+    "G1 seed drafts active terminal days notices receipts generated PDF": {
+      "account_notice_operations": {
+        "rows": 1,
+        "sha256": "0ab8f9176ce25b9aafce781e613341d1fed407973ab8640e326f08325f583dd2"
+      },
+      "draft_deletions": {
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "draft_operations": {
+        "rows": 4,
+        "sha256": "c632dfc84bdab626a6ff24c29765004678d9ecc73451549bfe9f7bfca49d4432"
+      },
+      "drafts": {
+        "rows": 4,
+        "sha256": "59a462dd0420fff4863c0aecca6dfafe459fa93df3dee23f6c74036e77798c79"
+      },
+      "notice_creation_admissions": {
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "workday_bus_operations": {
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "workday_buses": {
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "workday_close_operations": {
+        "rows": 1,
+        "sha256": "d4a995d8347bc0c1496e1b2d096eaa5b77b9ebdb91ba11d8a35b01e9f4bd147e"
+      },
+      "workday_deletions": {
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "workday_lifecycles": {
+        "rows": 2,
+        "sha256": "c5f088f56defd1726b8872f96467810fb5ac32147d742fa9e502adb96dbff286"
+      },
+      "workday_notice_operations": {
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "workday_notices": {
+        "rows": 1,
+        "sha256": "b084fc855b62d39ed1de428db8dedff9dfecc825a486e1c9dadea99f250b3750"
+      },
+      "workday_operations": {
+        "rows": 2,
+        "sha256": "141d1c0ae36ad3837ef65a4a9970b538e31ce5f018bf42da4f0390661e2baf00"
+      },
+      "workday_outcome_operations": {
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "workday_outcome_revisions": {
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "workday_outcomes": {
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "workday_selection_operations": {
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "workday_selections": {
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "workday_start_operations": {
+        "rows": 2,
+        "sha256": "210b3555c5983f1c59fd72235065cbb1ca8c6da68393104931a02c482205a32f"
+      },
+      "workdays": {
+        "rows": 2,
+        "sha256": "c83716165b5707e0e23019ec9f177478d8c30beb4b436ba6a5087071e31ae33b"
+      }
+    },
+    "M1 populated pre015 fixture reconstructed while quiesced": true,
+    "M2 additive startup migration and repeated migration preserve populated rows": true,
+    "G2 gateway change PTY recovery invalid input all-session isolation preservation": true,
+    "R3 restart migrate reapply login preserved": true,
+    "R1 pre restore quiesced authority invalidation": {
+      "restored_sessions_removed": 3,
+      "old_hash_restored": true,
+      "business": {
+        "account_notice_operations": {
+          "rows": 1,
+          "sha256": "0ab8f9176ce25b9aafce781e613341d1fed407973ab8640e326f08325f583dd2"
+        },
+        "draft_deletions": {
+          "rows": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "draft_operations": {
+          "rows": 4,
+          "sha256": "c632dfc84bdab626a6ff24c29765004678d9ecc73451549bfe9f7bfca49d4432"
+        },
+        "drafts": {
+          "rows": 4,
+          "sha256": "59a462dd0420fff4863c0aecca6dfafe459fa93df3dee23f6c74036e77798c79"
+        },
+        "notice_creation_admissions": {
+          "rows": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "workday_bus_operations": {
+          "rows": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "workday_buses": {
+          "rows": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "workday_close_operations": {
+          "rows": 1,
+          "sha256": "d4a995d8347bc0c1496e1b2d096eaa5b77b9ebdb91ba11d8a35b01e9f4bd147e"
+        },
+        "workday_deletions": {
+          "rows": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "workday_lifecycles": {
+          "rows": 2,
+          "sha256": "c5f088f56defd1726b8872f96467810fb5ac32147d742fa9e502adb96dbff286"
+        },
+        "workday_notice_operations": {
+          "rows": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "workday_notices": {
+          "rows": 1,
+          "sha256": "b084fc855b62d39ed1de428db8dedff9dfecc825a486e1c9dadea99f250b3750"
+        },
+        "workday_operations": {
+          "rows": 2,
+          "sha256": "141d1c0ae36ad3837ef65a4a9970b538e31ce5f018bf42da4f0390661e2baf00"
+        },
+        "workday_outcome_operations": {
+          "rows": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "workday_outcome_revisions": {
+          "rows": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "workday_outcomes": {
+          "rows": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "workday_selection_operations": {
+          "rows": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "workday_selections": {
+          "rows": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "workday_start_operations": {
+          "rows": 2,
+          "sha256": "210b3555c5983f1c59fd72235065cbb1ca8c6da68393104931a02c482205a32f"
+        },
+        "workdays": {
+          "rows": 2,
+          "sha256": "c83716165b5707e0e23019ec9f177478d8c30beb4b436ba6a5087071e31ae33b"
+        }
+      }
+    },
+    "R2 prior-code compatibility old hash": true,
+    "R4 old hash settled by trusted synthetic recovery before reopening": true,
+    "R3 restored migrate reapply login preserved": true,
+    "R1 post restore quiesced authority invalidation": {
+      "restored_sessions_removed": 3,
+      "old_hash_restored": false,
+      "business": {
+        "account_notice_operations": {
+          "rows": 1,
+          "sha256": "0ab8f9176ce25b9aafce781e613341d1fed407973ab8640e326f08325f583dd2"
+        },
+        "draft_deletions": {
+          "rows": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "draft_operations": {
+          "rows": 4,
+          "sha256": "c632dfc84bdab626a6ff24c29765004678d9ecc73451549bfe9f7bfca49d4432"
+        },
+        "drafts": {
+          "rows": 4,
+          "sha256": "59a462dd0420fff4863c0aecca6dfafe459fa93df3dee23f6c74036e77798c79"
+        },
+        "notice_creation_admissions": {
+          "rows": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "workday_bus_operations": {
+          "rows": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "workday_buses": {
+          "rows": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "workday_close_operations": {
+          "rows": 1,
+          "sha256": "d4a995d8347bc0c1496e1b2d096eaa5b77b9ebdb91ba11d8a35b01e9f4bd147e"
+        },
+        "workday_deletions": {
+          "rows": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "workday_lifecycles": {
+          "rows": 2,
+          "sha256": "c5f088f56defd1726b8872f96467810fb5ac32147d742fa9e502adb96dbff286"
+        },
+        "workday_notice_operations": {
+          "rows": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "workday_notices": {
+          "rows": 1,
+          "sha256": "b084fc855b62d39ed1de428db8dedff9dfecc825a486e1c9dadea99f250b3750"
+        },
+        "workday_operations": {
+          "rows": 2,
+          "sha256": "141d1c0ae36ad3837ef65a4a9970b538e31ce5f018bf42da4f0390661e2baf00"
+        },
+        "workday_outcome_operations": {
+          "rows": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "workday_outcome_revisions": {
+          "rows": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "workday_outcomes": {
+          "rows": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "workday_selection_operations": {
+          "rows": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "workday_selections": {
+          "rows": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "workday_start_operations": {
+          "rows": 2,
+          "sha256": "210b3555c5983f1c59fd72235065cbb1ca8c6da68393104931a02c482205a32f"
+        },
+        "workdays": {
+          "rows": 2,
+          "sha256": "c83716165b5707e0e23019ec9f177478d8c30beb4b436ba6a5087071e31ae33b"
+        }
+      }
+    },
+    "R2 prior-code compatibility current hash": true,
+    "R3 post-restored migrate reapply login preserved": true
+  }
+}

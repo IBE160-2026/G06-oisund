@@ -27,7 +27,7 @@ legend { font-weight: 700; }
 pre { white-space: pre-wrap; overflow-wrap: anywhere; background: #edf3f7; padding: 1rem; }
 .fact { display: contents; }
 select { font: inherit; width: 100%; min-width: 0; color: #162c3c; background: white; border: 2px solid #536775; padding: .65rem; border-radius: .3rem; }
-select:focus-visible, h2:focus-visible, .draft-loaded-count:focus-visible { outline: 3px solid #000; outline-offset: 4px; }
+select:focus-visible, h2:focus-visible, .draft-loaded-count:focus { outline: 3px solid #000; outline-offset: 4px; }
 @media (max-width: 700px) { .draft-grid { grid-template-columns: 1fr; } }
 .import-facts { margin: 1.5rem 0; padding: 1rem; border: 2px solid currentColor; overflow-wrap: anywhere; }
 .import-columns, .source-header { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
@@ -56,7 +56,7 @@ summary:focus-visible, fieldset:focus-visible { outline: 3px solid #000; outline
 .night button { color: #162c3c; background: #d6eafa; border-color: #b6c8d5; }
 .night button:disabled { color: #465763; background: #e4e9ed; }
 .night fieldset, .night li { border-color: #b6c8d5; }
-.night :focus-visible { outline: 3px solid #ffe39b; outline-offset: 4px; }
+.night :focus-visible, .night .draft-loaded-count:focus { outline: 3px solid #ffe39b; outline-offset: 4px; }
 .night .import-warning :focus-visible, .night .current-unknown :focus-visible { outline-color: #000; }
 /* Saved-revision confirmation remains readable in both inherited palettes. */
 .confirmation-editor { border: 0; padding: 0; margin: 0; min-width: 0; }
@@ -186,3 +186,13 @@ input:is([type=checkbox],[type=radio]) { box-shadow: inset 0 0 0 3px #173e60; bo
 .private-confirmation button { margin-block: .5rem; }
 /* Do not delegate disabled contrast to translucent native UA styling. */
 input:disabled, select:disabled, textarea:disabled { opacity: 1; color: #465763; background: #e4e9ed; border-color: #637581; }
+
+/* Password settings use the established touch target and focus geometry. */
+section[aria-label="Brukerinnstillinger"] input,
+section[aria-label="Brukerinnstillinger"] button { min-height: 58px; border-radius: 8px; }
+section[aria-label="Brukerinnstillinger"] h2:focus-visible { outline: 3px solid currentColor; outline-offset: 4px; }
+
+[aria-label="Automatiske avvik"] { overflow-wrap: anywhere; }
+.automatic-notice-comparison { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); gap: 1rem; }
+.automatic-notice-facts { min-width: 0; padding: .75rem; border: 1px solid currentColor; border-radius: .5rem; }
+.automatic-notice-facts p { white-space: pre-wrap; }

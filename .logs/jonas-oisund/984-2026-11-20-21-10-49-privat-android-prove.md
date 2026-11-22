@@ -1,0 +1,31 @@
+# Privat Android-prøve
+
+## 2026-11-20 kl. 21:10 — Jonas Øisund
+
+### Oppgave
+Klargjøre hjemmemaskinens isolerte IBE160 V2- og TIDE-piloter for to Android-enheter tilkoblet laptopen via USB. Laptop-økten gjennomfører de fysiske prøvene.
+Bevare den verifiserte overleveringen og bestillingsflyten i IBE160.
+
+### Plan
+- Kontroller gjeldende arbeidskopier, eksisterende lagre og lokale lyttere. Bruk hver app sin faste loopback-opprinnelse.
+- Start nye isolerte databaser og klargjør fiktive arbeidsflyter. Koble deretter de tre nødvendige app-portene via et privat tailnet.
+- Kontroller testbygget, lokal tilgjengelighet og hvilke chatteverter hjemmemaskinen kan nå. Dokumenter prøvebestilling, resultatkontroll og reserveflyt.
+
+### Resultat
+- IBE160 V2 bygget fra `5ddcb67` på `codex/integrate-bussassistent-v2`. Compose-prosjekt `ibe160-v2-android-20261120` har egne volumer og fiktive data. UI og privat API svarer på loopback 19661 og 19663. Separat fiktiv API på 19662 svarer lokalt.
+- To fiktive kontoer ble innlogget i installert Edge fra separat profil per konto. Nettleseren ba om privat API på `127.0.0.1:19663`. Import av generert syntetisk PDF, lagringskvittering og gjenåpnet utkast bestod for begge. Prøvepassord ligger i prosjektets ignorerte runtime-mappe.
+- TIDE `d8254e4` kjører på loopback 4173 med en egen SQLite-fil. Innlogging med lokal engangskode, 22 førkriterier for kandidat og egen instruktørvisning er verifisert. Rollen og prøveløpet er klart for laptop.
+- Brukeren installerte en signaturverifisert Tailscale-klient og logget inn på hjemmemaskinen. Serve konfigurerte privat TCP for 4173, 19661 og 19663. Alle tre ga HTTP 200 gjennom hjemmemaskinens tailnet-adresse med opprinnelig loopback-Host. Ingen produksjonskobling ble brukt.
+- Laptop-økten rapporterte fire beståtte fysiske lagringsprøver på Lenovo og Pixel. IBE160 lagret norsk prøveinnhold i Buss/vogn og gjenåpnet versjon 2 i hver konto. TIDE lagret instruktørkommentarer sekvensielt fra begge enheter, og begge gjenåpnet de to kommentarene i revisjon 2. Hjemmekontroll av prøvelagrene ga revisjon 2 for begge IBE160-kontoene og TIDEs instruktørutkast. TIDE-løpet står under kjøring. Skjermbilder og DOM-bevis ligger på laptopen.
+
+- Lagret overleveringen og lenket den fra V2 i `1618a83`. Tre lesende HTTP-oppslag på hjemmemaskinen ga 200. Åpnet ingen ny nettleserprøve. Appverktøyet fant bare lokal vert herfra og kildetråden kunne ikke leses. Den mottatte laptopoverleveringen dokumenterer den avgrensede godkjenningen og reserveflyten med henting fra hjemmets prosjektchat. [Android-testoverlevering](../../docs/v2-android-test-handoff.md).
+
+- La inn nøyaktig én IBE160-lesetest via hjemmets lokale kø. HTTP 202 ga jobb-ID `6b0948b9-bef2-4832-8174-04ce03b5e2c0`. GET fulgte jobben fra kø til bestått på Lenovo og Pixel. Arbeiderbeviset knyttet tittelen «Fiktiv arbeidsdag» på begge til samme jobb-ID. Oppdaterte bestillingskommando, statuskontroll og vilkår i `ac00088`. PowerShell-eksemplene ble syntakskontrollert. [Køtesten og kvitteringen](../../docs/v2-android-test-handoff.md#køtest-fra-prosjektchatten).
+
+- Laptopøkten rapporterte bestått fysisk visning og lukking av PDF-kildefakta i Brave på Lenovo og Pixel. Begge gjenåpnet syntetisk utkast med uendret versjon 2 og Buss/vogn. Første åpning måtte gjentas på begge. Lenovo viste «Tjenesten er utilgjengelig. Inndata er beholdt.» før neste forsøk. Utkast og sesjon svarte deretter HTTP 200 på Lenovo, og senere gjenåpning fungerte straks på begge. Førte resultat, avgrensning og bevisstier i `636f8ed`. [PDF-prøven](../../docs/v2-android-test-handoff.md#fysisk-visning-av-pdf-kildefakta).
+
+- Bestilte PDF-kildefaktaprøven via hjemmekøen. Jobb `5460fcfe-e702-4681-9824-53f2d078c3b9` feilet på begge enhetene fordi arbeideren gikk videre før utkastknappen var ferdig lastet. Laptopøkten endret ventingen til den aktive versjon 2-knappen. Én koordinert erstatningsjobb `f306874a-b3e2-40ee-8e17-7b31b0d0932c` bestod på begge. Leste begge sluttkvitteringene tilbake og kontrollerte at de syntetiske utkastene fortsatt var i revisjon 2 med samme Buss/vogn-markører og PDF-kildefakta. Førte kommando og begge resultater i `41f4187`. [Android-køprotokollen](../../docs/v2-android-test-handoff.md#køtest-fra-prosjektchatten).
+
+### Åpne punkter
+- Fysisk lagring, gjenåpning og købasert lesetest er verifisert. GPS, tillatelser og feltprøvene står fortsatt under «V2 fysisk nettbrett/GPS». Arbeideren kan startes på nytt på laptopen fra `Start-Android-test-worker.cmd`. Automatisk oppstart er ikke registrert.
+- Første åpning av det lagrede PDF-utkastet måtte gjentas på begge. Årsaken er uavklart.

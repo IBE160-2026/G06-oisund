@@ -1,0 +1,2665 @@
+{
+  "contract": "nsr-quay-coordinate-v1",
+  "revision": "nsr-line20-2026-11-20-v2",
+  "provider": "Entur NSR",
+  "source_url": "https://developer.entur.no/open-data/stops",
+  "license_url": "https://data.norge.no/nlod/en/2.0",
+  "fetched_at": "2026-11-20T01:14:33Z",
+  "archive": {
+    "url": "https://storage.googleapis.com/marduk-production/tiamat/55_Troms_latest.zip?generation=1795125615869698",
+    "generation": "1795125615869698",
+    "sha256": "2c224106067c28de88b6e67e04d3a33c527ae629ee6b3103dcb309e430d8427a",
+    "bytes": 1980625,
+    "member": "tiamat-export-55_Troms-202611192300011691.xml",
+    "member_bytes": 31423981,
+    "publication_timestamp": "2026-11-19T23:00:07.527"
+  },
+  "timetable": {
+    "generation": "1795129398375617",
+    "sha256": "03662d51c1438514d1695e632c598a7ea589d5384a19804658212fc4af0af8b9",
+    "observed_at": "2026-11-20T01:13:54.5323574Z",
+    "manifest_revision": "line20-2026-11-23--29"
+  },
+  "stops": [
+    {
+      "quay_id": "NSR:Quay:100583",
+      "stop_place_id": "NSR:StopPlace:54782",
+      "quay_version": "6",
+      "stop_place_version": "8",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.678928,
+      "longitude": 19.081369,
+      "source_updated_at": "2025-11-07T15:21:41.086",
+      "stop_place_updated_at": "2025-11-07T15:21:41.107",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2025-11-07T15:21:41.092",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:104870",
+      "stop_place_id": "NSR:StopPlace:52527",
+      "quay_version": "3",
+      "stop_place_version": "6",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.664706,
+      "longitude": 19.022106,
+      "source_updated_at": "2021-01-07T12:07:51.47",
+      "stop_place_updated_at": "2024-01-01T02:59:37.893",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2021-01-07T12:07:43",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:88470",
+      "stop_place_id": "NSR:StopPlace:52069",
+      "quay_version": "5",
+      "stop_place_version": "5",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.666565,
+      "longitude": 19.025212,
+      "source_updated_at": "2024-07-04T20:50:00.638",
+      "stop_place_updated_at": "2024-07-04T20:50:00.642",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2024-07-04T20:50:00.638",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:88471",
+      "stop_place_id": "NSR:StopPlace:52069",
+      "quay_version": "5",
+      "stop_place_version": "5",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.666623,
+      "longitude": 19.024981,
+      "source_updated_at": "2024-07-04T20:50:00.637",
+      "stop_place_updated_at": "2024-07-04T20:50:00.642",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2024-07-04T20:50:00.638",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:88527",
+      "stop_place_id": "NSR:StopPlace:52099",
+      "quay_version": "7",
+      "stop_place_version": "7",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.650754,
+      "longitude": 18.958492,
+      "source_updated_at": "2022-01-13T10:32:45.836",
+      "stop_place_updated_at": "2024-01-01T02:59:19.542",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2022-01-13T10:32:44",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:88761",
+      "stop_place_id": "NSR:StopPlace:52222",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.691623,
+      "longitude": 18.99166,
+      "source_updated_at": "2020-02-11T16:47:32.559",
+      "stop_place_updated_at": "2024-01-01T02:59:25.204",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2020-02-11T16:47:27",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:88762",
+      "stop_place_id": "NSR:StopPlace:52222",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.692006,
+      "longitude": 18.990759,
+      "source_updated_at": "2020-02-11T16:47:32.559",
+      "stop_place_updated_at": "2024-01-01T02:59:25.204",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2020-02-11T16:47:27",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:88813",
+      "stop_place_id": "NSR:StopPlace:52250",
+      "quay_version": "8",
+      "stop_place_version": "8",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.651862,
+      "longitude": 18.960045,
+      "source_updated_at": "2021-12-17T15:59:14.976",
+      "stop_place_updated_at": "2024-01-01T02:59:26.535",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2021-12-17T15:59:53.074",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:88834",
+      "stop_place_id": "NSR:StopPlace:52262",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.64854,
+      "longitude": 18.986861,
+      "source_updated_at": "2020-10-15T23:41:51.691",
+      "stop_place_updated_at": "2024-01-01T02:59:27.011",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2020-10-15T23:41:47",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:89010",
+      "stop_place_id": "NSR:StopPlace:52357",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.701054,
+      "longitude": 19.005331,
+      "source_updated_at": "2020-01-30T14:58:03.506",
+      "stop_place_updated_at": "2024-01-01T02:59:31.269",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2020-01-30T14:57:45",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:89188",
+      "stop_place_id": "NSR:StopPlace:52450",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.735057,
+      "longitude": 19.108111,
+      "source_updated_at": "2022-04-06T20:11:23.553",
+      "stop_place_updated_at": "2024-01-01T02:59:34.773",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2022-04-06T20:11:22",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:89192",
+      "stop_place_id": "NSR:StopPlace:52453",
+      "quay_version": "2",
+      "stop_place_version": "2",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.738034,
+      "longitude": 19.121903,
+      "source_updated_at": null,
+      "stop_place_updated_at": "2024-01-01T02:59:34.864",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2017-06-19T22:49:51.862",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:89198",
+      "stop_place_id": "NSR:StopPlace:52456",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.736799,
+      "longitude": 19.114518,
+      "source_updated_at": "2022-04-06T20:11:40.46",
+      "stop_place_updated_at": "2024-01-01T02:59:34.96",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2022-04-06T20:11:39",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:89203",
+      "stop_place_id": "NSR:StopPlace:52459",
+      "quay_version": "2",
+      "stop_place_version": "2",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.749018,
+      "longitude": 19.1795,
+      "source_updated_at": "2022-04-06T20:15:30.804",
+      "stop_place_updated_at": "2024-01-01T02:59:35.073",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2022-04-06T20:15:29",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:89208",
+      "stop_place_id": "NSR:StopPlace:52461",
+      "quay_version": "2",
+      "stop_place_version": "2",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.747166,
+      "longitude": 19.175405,
+      "source_updated_at": "2022-04-06T20:15:11.984",
+      "stop_place_updated_at": "2024-01-01T02:59:35.181",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2022-04-06T20:15:11",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:89213",
+      "stop_place_id": "NSR:StopPlace:52464",
+      "quay_version": "2",
+      "stop_place_version": "2",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.744251,
+      "longitude": 19.172492,
+      "source_updated_at": "2022-04-06T20:14:42.37",
+      "stop_place_updated_at": "2024-01-01T02:59:35.302",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2022-04-06T20:14:41",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:89218",
+      "stop_place_id": "NSR:StopPlace:52467",
+      "quay_version": "2",
+      "stop_place_version": "2",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.741582,
+      "longitude": 19.17059,
+      "source_updated_at": "2022-04-06T20:14:23.236",
+      "stop_place_updated_at": "2024-01-01T02:59:35.396",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2022-04-06T20:14:22",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:89222",
+      "stop_place_id": "NSR:StopPlace:52469",
+      "quay_version": "2",
+      "stop_place_version": "2",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.757165,
+      "longitude": 19.194869,
+      "source_updated_at": "2022-04-06T20:16:17.946",
+      "stop_place_updated_at": "2024-01-01T02:59:35.461",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2022-04-06T20:16:17",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:89251",
+      "stop_place_id": "NSR:StopPlace:52482",
+      "quay_version": "4",
+      "stop_place_version": "4",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.683803,
+      "longitude": 18.981315,
+      "source_updated_at": "2020-02-04T17:00:08.853",
+      "stop_place_updated_at": "2024-01-01T02:59:35.991",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2020-02-04T16:59:38",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:89253",
+      "stop_place_id": "NSR:StopPlace:52482",
+      "quay_version": "4",
+      "stop_place_version": "4",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.683617,
+      "longitude": 18.980419,
+      "source_updated_at": "2020-02-04T17:00:08.853",
+      "stop_place_updated_at": "2024-01-01T02:59:35.991",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2020-02-04T16:59:38",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:89263",
+      "stop_place_id": "NSR:StopPlace:52488",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.680884,
+      "longitude": 18.975819,
+      "source_updated_at": "2020-02-04T16:10:45.42",
+      "stop_place_updated_at": "2024-01-01T02:59:36.18",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2020-02-04T16:10:39",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:89264",
+      "stop_place_id": "NSR:StopPlace:52488",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.680975,
+      "longitude": 18.976487,
+      "source_updated_at": "2020-02-04T16:10:45.42",
+      "stop_place_updated_at": "2024-01-01T02:59:36.18",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2020-02-04T16:10:39",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:89268",
+      "stop_place_id": "NSR:StopPlace:52491",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.679178,
+      "longitude": 18.970259,
+      "source_updated_at": "2020-02-04T14:37:46.183",
+      "stop_place_updated_at": "2024-01-01T02:59:36.308",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2020-02-04T14:37:38",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:89269",
+      "stop_place_id": "NSR:StopPlace:52491",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.679129,
+      "longitude": 18.970717,
+      "source_updated_at": "2020-02-04T14:37:46.183",
+      "stop_place_updated_at": "2024-01-01T02:59:36.308",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2020-02-04T14:37:38",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:89337",
+      "stop_place_id": "NSR:StopPlace:52527",
+      "quay_version": "6",
+      "stop_place_version": "6",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.664295,
+      "longitude": 19.021263,
+      "source_updated_at": "2021-01-07T12:07:51.47",
+      "stop_place_updated_at": "2024-01-01T02:59:37.893",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2021-01-07T12:07:43",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:89395",
+      "stop_place_id": "NSR:StopPlace:52558",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.692746,
+      "longitude": 19.002241,
+      "source_updated_at": "2020-02-04T17:18:29.011",
+      "stop_place_updated_at": "2024-01-01T02:59:39.169",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2020-02-04T17:18:23",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:89397",
+      "stop_place_id": "NSR:StopPlace:52558",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.69319,
+      "longitude": 19.001812,
+      "source_updated_at": "2020-02-04T17:18:29.011",
+      "stop_place_updated_at": "2024-01-01T02:59:39.169",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2020-02-04T17:18:23",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:89507",
+      "stop_place_id": "NSR:StopPlace:52616",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.687778,
+      "longitude": 18.993326,
+      "source_updated_at": "2020-02-04T17:03:29.966",
+      "stop_place_updated_at": "2024-01-01T02:59:41.538",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2020-02-04T17:03:26",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:89508",
+      "stop_place_id": "NSR:StopPlace:52616",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.687262,
+      "longitude": 18.99118,
+      "source_updated_at": "2020-02-04T17:03:29.966",
+      "stop_place_updated_at": "2024-01-01T02:59:41.538",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2020-02-04T17:03:26",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:89697",
+      "stop_place_id": "NSR:StopPlace:52717",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.698499,
+      "longitude": 19.002418,
+      "source_updated_at": "2020-02-05T16:40:05.744",
+      "stop_place_updated_at": "2024-01-01T02:59:45.551",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2020-02-05T16:39:57",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:89699",
+      "stop_place_id": "NSR:StopPlace:52717",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.698302,
+      "longitude": 19.001812,
+      "source_updated_at": "2020-02-05T16:40:05.744",
+      "stop_place_updated_at": "2024-01-01T02:59:45.551",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2020-02-05T16:39:57",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:89702",
+      "stop_place_id": "NSR:StopPlace:52720",
+      "quay_version": "5",
+      "stop_place_version": "5",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.699863,
+      "longitude": 19.003724,
+      "source_updated_at": "2024-12-10T12:24:19.918",
+      "stop_place_updated_at": "2024-12-10T12:24:19.922",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2024-12-10T12:24:19.918",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:89849",
+      "stop_place_id": "NSR:StopPlace:52798",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.662181,
+      "longitude": 19.019163,
+      "source_updated_at": "2020-02-20T16:18:15.755",
+      "stop_place_updated_at": "2024-01-01T02:59:49.007",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2020-02-20T16:18:12",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:89850",
+      "stop_place_id": "NSR:StopPlace:52798",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.66208,
+      "longitude": 19.018828,
+      "source_updated_at": "2020-02-20T16:18:15.755",
+      "stop_place_updated_at": "2024-01-01T02:59:49.007",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2020-02-20T16:18:12",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:89980",
+      "stop_place_id": "NSR:StopPlace:52868",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.701377,
+      "longitude": 19.085615,
+      "source_updated_at": "2022-04-06T20:06:03.888",
+      "stop_place_updated_at": "2024-01-01T02:59:51.83",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2022-04-06T20:06:03",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:89983",
+      "stop_place_id": "NSR:StopPlace:52870",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.676057,
+      "longitude": 18.966133,
+      "source_updated_at": "2020-02-04T16:01:08.664",
+      "stop_place_updated_at": "2024-01-01T02:59:51.95",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2020-02-04T16:01:03",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:89984",
+      "stop_place_id": "NSR:StopPlace:52870",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.676643,
+      "longitude": 18.966903,
+      "source_updated_at": "2020-02-04T16:01:08.664",
+      "stop_place_updated_at": "2024-01-01T02:59:51.95",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2020-02-04T16:01:03",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:89995",
+      "stop_place_id": "NSR:StopPlace:52876",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.705003,
+      "longitude": 19.088716,
+      "source_updated_at": "2022-04-06T20:07:01.352",
+      "stop_place_updated_at": "2024-01-01T02:59:52.194",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2022-04-06T20:07:00",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:90153",
+      "stop_place_id": "NSR:StopPlace:52959",
+      "quay_version": "2",
+      "stop_place_version": "2",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.739931,
+      "longitude": 19.163429,
+      "source_updated_at": "2022-04-06T20:13:55.066",
+      "stop_place_updated_at": "2024-01-01T02:59:55.659",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2022-04-06T20:13:54",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:90421",
+      "stop_place_id": "NSR:StopPlace:53103",
+      "quay_version": "6",
+      "stop_place_version": "6",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.649528,
+      "longitude": 18.956357,
+      "source_updated_at": "2026-09-08T12:09:50.597",
+      "stop_place_updated_at": "2026-09-08T12:09:50.603",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2026-09-08T12:09:50.597",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:90641",
+      "stop_place_id": "NSR:StopPlace:53223",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.655259,
+      "longitude": 18.953937,
+      "source_updated_at": "2020-01-29T15:57:00.182",
+      "stop_place_updated_at": "2024-01-01T03:00:08.807",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2020-01-29T15:56:56",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:90643",
+      "stop_place_id": "NSR:StopPlace:53223",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.655085,
+      "longitude": 18.953243,
+      "source_updated_at": "2020-01-29T15:57:00.182",
+      "stop_place_updated_at": "2024-01-01T03:00:08.807",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2020-01-29T15:56:56",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:90847",
+      "stop_place_id": "NSR:StopPlace:53331",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.698705,
+      "longitude": 19.009818,
+      "source_updated_at": "2020-01-30T14:55:31.649",
+      "stop_place_updated_at": "2024-01-01T03:00:14.225",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2020-01-30T14:55:28",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:90848",
+      "stop_place_id": "NSR:StopPlace:53331",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.699293,
+      "longitude": 19.009427,
+      "source_updated_at": "2020-01-30T14:55:31.649",
+      "stop_place_updated_at": "2024-01-01T03:00:14.225",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2020-01-30T14:55:28",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:90904",
+      "stop_place_id": "NSR:StopPlace:53360",
+      "quay_version": "1",
+      "stop_place_version": "1",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.739367,
+      "longitude": 19.139352,
+      "source_updated_at": null,
+      "stop_place_updated_at": "2024-01-01T03:00:15.442",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2017-06-19T22:05:09.493",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:90942",
+      "stop_place_id": "NSR:StopPlace:53380",
+      "quay_version": "2",
+      "stop_place_version": "2",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.760223,
+      "longitude": 19.197021,
+      "source_updated_at": "2022-04-06T20:16:34.963",
+      "stop_place_updated_at": "2024-01-01T03:00:16.272",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2022-04-06T20:16:34",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:90948",
+      "stop_place_id": "NSR:StopPlace:53383",
+      "quay_version": "1",
+      "stop_place_version": "1",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.76212,
+      "longitude": 19.200708,
+      "source_updated_at": null,
+      "stop_place_updated_at": "2024-01-01T03:00:16.373",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2017-06-19T22:05:10.614",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:91057",
+      "stop_place_id": "NSR:StopPlace:53442",
+      "quay_version": "10",
+      "stop_place_version": "10",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.653723,
+      "longitude": 18.963129,
+      "source_updated_at": "2026-02-11T14:47:07.489",
+      "stop_place_updated_at": "2026-02-11T14:47:07.496",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2026-02-11T14:47:07.489",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:91058",
+      "stop_place_id": "NSR:StopPlace:53442",
+      "quay_version": "10",
+      "stop_place_version": "10",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.653371,
+      "longitude": 18.962161,
+      "source_updated_at": "2026-02-11T14:47:07.488",
+      "stop_place_updated_at": "2026-02-11T14:47:07.496",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2026-02-11T14:47:07.489",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:91108",
+      "stop_place_id": "NSR:StopPlace:53468",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.691394,
+      "longitude": 18.997201,
+      "source_updated_at": "2020-02-05T16:46:07.888",
+      "stop_place_updated_at": "2024-01-01T03:00:19.845",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2020-02-05T16:46:01",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:91109",
+      "stop_place_id": "NSR:StopPlace:53468",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.691402,
+      "longitude": 18.998054,
+      "source_updated_at": "2020-02-05T16:46:07.888",
+      "stop_place_updated_at": "2024-01-01T03:00:19.845",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2020-02-05T16:46:01",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:91229",
+      "stop_place_id": "NSR:StopPlace:53533",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.65035,
+      "longitude": 18.951861,
+      "source_updated_at": "2020-01-29T11:03:22.629",
+      "stop_place_updated_at": "2024-01-01T03:00:22.639",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2020-01-29T11:03:15",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:91298",
+      "stop_place_id": "NSR:StopPlace:53570",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.694734,
+      "longitude": 19.079722,
+      "source_updated_at": "2020-02-20T14:18:14.58",
+      "stop_place_updated_at": "2024-01-01T03:00:24.434",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2020-02-20T14:18:10",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:91304",
+      "stop_place_id": "NSR:StopPlace:53573",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.654551,
+      "longitude": 19.011873,
+      "source_updated_at": "2020-10-15T23:45:43.65",
+      "stop_place_updated_at": "2024-01-01T03:00:24.579",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2020-10-15T23:45:39",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:91305",
+      "stop_place_id": "NSR:StopPlace:53573",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.654669,
+      "longitude": 19.012299,
+      "source_updated_at": "2020-10-15T23:45:43.65",
+      "stop_place_updated_at": "2024-01-01T03:00:24.579",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2020-10-15T23:45:39",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:91306",
+      "stop_place_id": "NSR:StopPlace:53574",
+      "quay_version": "6",
+      "stop_place_version": "6",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.691285,
+      "longitude": 19.077464,
+      "source_updated_at": "2026-08-14T13:54:59.245",
+      "stop_place_updated_at": "2026-08-14T13:54:59.25",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2026-08-14T13:54:59.245",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:91316",
+      "stop_place_id": "NSR:StopPlace:53579",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.697338,
+      "longitude": 19.082155,
+      "source_updated_at": "2020-02-20T14:17:07.347",
+      "stop_place_updated_at": "2024-01-01T03:00:24.843",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2020-02-20T14:16:56",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:91413",
+      "stop_place_id": "NSR:StopPlace:53632",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.6814,
+      "longitude": 19.063286,
+      "source_updated_at": "2020-02-20T15:58:31.014",
+      "stop_place_updated_at": "2024-01-01T03:00:27.704",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2020-02-20T15:58:26",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:91414",
+      "stop_place_id": "NSR:StopPlace:53632",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.681412,
+      "longitude": 19.062814,
+      "source_updated_at": "2020-02-20T15:58:31.014",
+      "stop_place_updated_at": "2024-01-01T03:00:27.704",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2020-02-20T15:58:26",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:91441",
+      "stop_place_id": "NSR:StopPlace:53646",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.684178,
+      "longitude": 19.069645,
+      "source_updated_at": "2020-02-20T14:24:12.436",
+      "stop_place_updated_at": "2024-01-01T03:00:28.346",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2020-02-20T14:24:08",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:91454",
+      "stop_place_id": "NSR:StopPlace:53653",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.684093,
+      "longitude": 19.070345,
+      "source_updated_at": "2020-02-20T14:24:29.405",
+      "stop_place_updated_at": "2024-01-01T03:00:28.691",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2020-02-20T14:24:25",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:91455",
+      "stop_place_id": "NSR:StopPlace:53653",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.683933,
+      "longitude": 19.069991,
+      "source_updated_at": "2020-02-20T14:24:29.405",
+      "stop_place_updated_at": "2024-01-01T03:00:28.691",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2020-02-20T14:24:25",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:91460",
+      "stop_place_id": "NSR:StopPlace:53655",
+      "quay_version": "4",
+      "stop_place_version": "4",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.68726,
+      "longitude": 19.073521,
+      "source_updated_at": "2020-02-20T14:23:31.373",
+      "stop_place_updated_at": "2024-01-01T03:00:28.76",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2020-02-20T14:23:28",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:91642",
+      "stop_place_id": "NSR:StopPlace:53751",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.65758,
+      "longitude": 18.958333,
+      "source_updated_at": "2020-02-11T16:29:20.724",
+      "stop_place_updated_at": "2024-01-01T03:00:32.531",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2020-02-11T16:29:12",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:91643",
+      "stop_place_id": "NSR:StopPlace:53751",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.657626,
+      "longitude": 18.958696,
+      "source_updated_at": "2020-02-11T16:29:20.724",
+      "stop_place_updated_at": "2024-01-01T03:00:32.531",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2020-02-11T16:29:12",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:91660",
+      "stop_place_id": "NSR:StopPlace:53760",
+      "quay_version": "4",
+      "stop_place_version": "4",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.685348,
+      "longitude": 19.080076,
+      "source_updated_at": "2025-04-04T11:41:25.891",
+      "stop_place_updated_at": "2025-04-04T11:41:25.895",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2025-04-04T11:41:25.891",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:91661",
+      "stop_place_id": "NSR:StopPlace:53760",
+      "quay_version": "4",
+      "stop_place_version": "4",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.685518,
+      "longitude": 19.0802,
+      "source_updated_at": "2025-04-04T11:41:25.89",
+      "stop_place_updated_at": "2025-04-04T11:41:25.895",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2025-04-04T11:41:25.891",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:92294",
+      "stop_place_id": "NSR:StopPlace:54093",
+      "quay_version": "4",
+      "stop_place_version": "4",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.694264,
+      "longitude": 18.992121,
+      "source_updated_at": "2026-06-02T11:04:40.685",
+      "stop_place_updated_at": "2026-06-02T11:04:40.694",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2026-06-02T11:04:40.686",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:92296",
+      "stop_place_id": "NSR:StopPlace:54093",
+      "quay_version": "4",
+      "stop_place_version": "4",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.694005,
+      "longitude": 18.991676,
+      "source_updated_at": "2026-06-02T11:04:40.685",
+      "stop_place_updated_at": "2026-06-02T11:04:40.694",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2026-06-02T11:04:40.686",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:92418",
+      "stop_place_id": "NSR:StopPlace:54161",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.739576,
+      "longitude": 19.149012,
+      "source_updated_at": "2022-05-30T14:34:28.685",
+      "stop_place_updated_at": "2024-01-01T03:00:50.146",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2022-05-30T14:34:27",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:92496",
+      "stop_place_id": "NSR:StopPlace:54202",
+      "quay_version": "2",
+      "stop_place_version": "2",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.765039,
+      "longitude": 19.210386,
+      "source_updated_at": "2020-11-26T15:40:59.758",
+      "stop_place_updated_at": "2024-01-01T03:00:52.042",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2020-11-26T15:40:56",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:92617",
+      "stop_place_id": "NSR:StopPlace:54264",
+      "quay_version": "2",
+      "stop_place_version": "2",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.751901,
+      "longitude": 19.184444,
+      "source_updated_at": "2022-04-06T20:15:51.009",
+      "stop_place_updated_at": "2024-01-01T03:00:54.576",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2022-04-06T20:15:50",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:92984",
+      "stop_place_id": "NSR:StopPlace:54457",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.724208,
+      "longitude": 19.096448,
+      "source_updated_at": "2022-04-06T20:09:32.465",
+      "stop_place_updated_at": "2024-01-01T03:01:02.966",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2022-04-06T20:09:31",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:92996",
+      "stop_place_id": "NSR:StopPlace:54464",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.662127,
+      "longitude": 18.960007,
+      "source_updated_at": "2020-02-06T16:33:51.473",
+      "stop_place_updated_at": "2024-01-01T03:01:03.251",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2020-02-06T16:33:46",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:92999",
+      "stop_place_id": "NSR:StopPlace:54464",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.662277,
+      "longitude": 18.959771,
+      "source_updated_at": "2020-02-06T16:33:51.473",
+      "stop_place_updated_at": "2024-01-01T03:01:03.251",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2020-02-06T16:33:46",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:93032",
+      "stop_place_id": "NSR:StopPlace:54483",
+      "quay_version": "2",
+      "stop_place_version": "2",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.718402,
+      "longitude": 19.093032,
+      "source_updated_at": "2017-06-19T22:49:40.029",
+      "stop_place_updated_at": "2024-01-01T03:01:04.03",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2017-06-19T22:49:39.984",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:93202",
+      "stop_place_id": "NSR:StopPlace:54573",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.727445,
+      "longitude": 19.098093,
+      "source_updated_at": "2022-04-06T20:10:10.599",
+      "stop_place_updated_at": "2024-01-01T03:01:08.083",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2022-04-06T20:10:09",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:93292",
+      "stop_place_id": "NSR:StopPlace:54620",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.673912,
+      "longitude": 19.041619,
+      "source_updated_at": "2020-02-20T16:00:05.931",
+      "stop_place_updated_at": "2024-01-01T03:01:10.11",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2020-02-20T16:00:03",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:93293",
+      "stop_place_id": "NSR:StopPlace:54620",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.673847,
+      "longitude": 19.040975,
+      "source_updated_at": "2020-02-20T16:00:05.931",
+      "stop_place_updated_at": "2024-01-01T03:01:10.11",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2020-02-20T16:00:03",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:93407",
+      "stop_place_id": "NSR:StopPlace:54679",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.730245,
+      "longitude": 19.099592,
+      "source_updated_at": "2022-04-06T20:10:44.084",
+      "stop_place_updated_at": "2024-01-01T03:01:12.526",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2022-04-06T20:10:43",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:93417",
+      "stop_place_id": "NSR:StopPlace:54684",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.733799,
+      "longitude": 19.104052,
+      "source_updated_at": "2022-04-06T20:11:05.161",
+      "stop_place_updated_at": "2024-01-01T03:01:12.766",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2022-04-06T20:11:04",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:93604",
+      "stop_place_id": "NSR:StopPlace:54782",
+      "quay_version": "8",
+      "stop_place_version": "8",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.678721,
+      "longitude": 19.081433,
+      "source_updated_at": "2025-11-07T15:21:41.085",
+      "stop_place_updated_at": "2025-11-07T15:21:41.107",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2025-11-07T15:21:41.092",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:93631",
+      "stop_place_id": "NSR:StopPlace:54797",
+      "quay_version": "2",
+      "stop_place_version": "2",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.658229,
+      "longitude": 19.015339,
+      "source_updated_at": "2017-06-19T22:47:00.423",
+      "stop_place_updated_at": "2024-01-01T03:01:17.809",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2017-06-19T22:47:00.342",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:93632",
+      "stop_place_id": "NSR:StopPlace:54797",
+      "quay_version": "2",
+      "stop_place_version": "2",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.658613,
+      "longitude": 19.01585,
+      "source_updated_at": null,
+      "stop_place_updated_at": "2024-01-01T03:01:17.809",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2017-06-19T22:47:00.342",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:93790",
+      "stop_place_id": "NSR:StopPlace:54878",
+      "quay_version": "2",
+      "stop_place_version": "2",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.707061,
+      "longitude": 19.090399,
+      "source_updated_at": null,
+      "stop_place_updated_at": "2024-01-01T03:01:21.966",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2017-06-19T22:49:32.751",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:93800",
+      "stop_place_id": "NSR:StopPlace:54883",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.716084,
+      "longitude": 19.092881,
+      "source_updated_at": "2022-04-06T20:08:45.191",
+      "stop_place_updated_at": "2024-01-01T03:01:22.204",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2022-04-06T20:08:44",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:93812",
+      "stop_place_id": "NSR:StopPlace:54890",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.713671,
+      "longitude": 19.092768,
+      "source_updated_at": "2022-04-06T20:08:22.382",
+      "stop_place_updated_at": "2024-01-01T03:01:22.552",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2022-04-06T20:08:21",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:93821",
+      "stop_place_id": "NSR:StopPlace:54896",
+      "quay_version": "2",
+      "stop_place_version": "2",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.710465,
+      "longitude": 19.092766,
+      "source_updated_at": null,
+      "stop_place_updated_at": "2024-01-01T03:01:22.789",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2017-06-19T22:49:34.153",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:93833",
+      "stop_place_id": "NSR:StopPlace:54902",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.7216,
+      "longitude": 19.095075,
+      "source_updated_at": "2022-04-06T20:09:12.758",
+      "stop_place_updated_at": "2024-01-01T03:01:23.251",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2022-04-06T20:09:11",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:93847",
+      "stop_place_id": "NSR:StopPlace:54909",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.711733,
+      "longitude": 19.092814,
+      "source_updated_at": "2022-04-06T20:07:49.102",
+      "stop_place_updated_at": "2024-01-01T03:01:23.497",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2022-04-06T20:07:48",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:94215",
+      "stop_place_id": "NSR:StopPlace:55106",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.677448,
+      "longitude": 19.051377,
+      "source_updated_at": "2020-02-20T15:59:22.595",
+      "stop_place_updated_at": "2024-01-01T03:01:32.268",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2020-02-20T15:59:17",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:94216",
+      "stop_place_id": "NSR:StopPlace:55106",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.677175,
+      "longitude": 19.050135,
+      "source_updated_at": "2020-02-20T15:59:22.595",
+      "stop_place_updated_at": "2024-01-01T03:01:32.268",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2020-02-20T15:59:17",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:94667",
+      "stop_place_id": "NSR:StopPlace:55347",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.670667,
+      "longitude": 19.034503,
+      "source_updated_at": "2020-02-20T16:11:18.004",
+      "stop_place_updated_at": "2024-01-01T03:01:42.832",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2020-02-20T16:11:15",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:94668",
+      "stop_place_id": "NSR:StopPlace:55347",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.670173,
+      "longitude": 19.033223,
+      "source_updated_at": "2020-02-20T16:11:18.004",
+      "stop_place_updated_at": "2024-01-01T03:01:42.832",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2020-02-20T16:11:15",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:94741",
+      "stop_place_id": "NSR:StopPlace:55385",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.688655,
+      "longitude": 18.996922,
+      "source_updated_at": "2020-02-04T17:04:21.588",
+      "stop_place_updated_at": "2024-01-01T03:01:44.3",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2020-02-04T17:04:17",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:94742",
+      "stop_place_id": "NSR:StopPlace:55385",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.688704,
+      "longitude": 18.99685,
+      "source_updated_at": "2020-02-04T17:04:21.588",
+      "stop_place_updated_at": "2024-01-01T03:01:44.3",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2020-02-04T17:04:17",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:95300",
+      "stop_place_id": "NSR:StopPlace:55683",
+      "quay_version": "30",
+      "stop_place_version": "30",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.649604,
+      "longitude": 18.956287,
+      "source_updated_at": "2026-09-08T11:31:02.399",
+      "stop_place_updated_at": "2026-09-08T11:31:02.41",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2026-09-08T11:31:02.403",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:95703",
+      "stop_place_id": "NSR:StopPlace:55898",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.685943,
+      "longitude": 18.987972,
+      "source_updated_at": "2020-02-04T17:02:29.408",
+      "stop_place_updated_at": "2024-01-01T03:02:06.283",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2020-02-04T17:02:20",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:95704",
+      "stop_place_id": "NSR:StopPlace:55898",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.685875,
+      "longitude": 18.987486,
+      "source_updated_at": "2020-02-04T17:02:29.408",
+      "stop_place_updated_at": "2024-01-01T03:02:06.283",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2020-02-04T17:02:20",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:95766",
+      "stop_place_id": "NSR:StopPlace:55926",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.685812,
+      "longitude": 19.075887,
+      "source_updated_at": "2020-02-20T14:25:52.008",
+      "stop_place_updated_at": "2024-01-01T03:02:07.56",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2020-02-20T14:25:47",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:95831",
+      "stop_place_id": "NSR:StopPlace:55963",
+      "quay_version": "7",
+      "stop_place_version": "7",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.682234,
+      "longitude": 19.081739,
+      "source_updated_at": "2025-12-01T14:51:33.916",
+      "stop_place_updated_at": "2025-12-01T14:51:33.922",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2025-12-01T14:51:33.916",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:95832",
+      "stop_place_id": "NSR:StopPlace:55963",
+      "quay_version": "7",
+      "stop_place_version": "7",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.682068,
+      "longitude": 19.081568,
+      "source_updated_at": "2025-12-01T14:51:33.915",
+      "stop_place_updated_at": "2025-12-01T14:51:33.922",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2025-12-01T14:51:33.916",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:95924",
+      "stop_place_id": "NSR:StopPlace:56013",
+      "quay_version": "2",
+      "stop_place_version": "2",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.696149,
+      "longitude": 18.995777,
+      "source_updated_at": null,
+      "stop_place_updated_at": "2024-01-01T03:02:11.4",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2017-06-19T22:40:14.817",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:95925",
+      "stop_place_id": "NSR:StopPlace:56013",
+      "quay_version": "2",
+      "stop_place_version": "2",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.696158,
+      "longitude": 18.996141,
+      "source_updated_at": "2017-06-19T22:40:14.835",
+      "stop_place_updated_at": "2024-01-01T03:02:11.4",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2017-06-19T22:40:14.817",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:96029",
+      "stop_place_id": "NSR:StopPlace:56068",
+      "quay_version": "4",
+      "stop_place_version": "4",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.675012,
+      "longitude": 18.964049,
+      "source_updated_at": "2020-02-06T16:14:49.918",
+      "stop_place_updated_at": "2024-01-01T03:02:13.663",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2020-02-06T16:14:40",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:96030",
+      "stop_place_id": "NSR:StopPlace:56068",
+      "quay_version": "4",
+      "stop_place_version": "4",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.67547,
+      "longitude": 18.964315,
+      "source_updated_at": "2020-02-06T16:14:49.918",
+      "stop_place_updated_at": "2024-01-01T03:02:13.663",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2020-02-06T16:14:40",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:96096",
+      "stop_place_id": "NSR:StopPlace:56101",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.67114,
+      "longitude": 18.964763,
+      "source_updated_at": "2020-02-11T16:44:44.883",
+      "stop_place_updated_at": "2024-01-01T03:02:15.369",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2020-02-11T16:44:41",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:96097",
+      "stop_place_id": "NSR:StopPlace:56101",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.671192,
+      "longitude": 18.96502,
+      "source_updated_at": "2020-02-11T16:44:44.883",
+      "stop_place_updated_at": "2024-01-01T03:02:15.369",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2020-02-11T16:44:41",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:96182",
+      "stop_place_id": "NSR:StopPlace:56148",
+      "quay_version": "2",
+      "stop_place_version": "2",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.739152,
+      "longitude": 19.131964,
+      "source_updated_at": "2022-04-06T20:12:49.311",
+      "stop_place_updated_at": "2024-01-01T03:02:17.484",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2022-04-06T20:12:48",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:96235",
+      "stop_place_id": "NSR:StopPlace:56177",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.648076,
+      "longitude": 18.984882,
+      "source_updated_at": "2020-10-15T23:42:08.524",
+      "stop_place_updated_at": "2024-01-01T03:02:18.971",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2020-10-15T23:42:04",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:96430",
+      "stop_place_id": "NSR:StopPlace:56279",
+      "quay_version": "4",
+      "stop_place_version": "4",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.650735,
+      "longitude": 18.999825,
+      "source_updated_at": "2025-08-18T14:16:01.743",
+      "stop_place_updated_at": "2025-08-18T14:16:01.752",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2025-08-18T14:16:01.744",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:96431",
+      "stop_place_id": "NSR:StopPlace:56279",
+      "quay_version": "4",
+      "stop_place_version": "4",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.651425,
+      "longitude": 19.00329,
+      "source_updated_at": "2025-08-18T14:16:01.742",
+      "stop_place_updated_at": "2025-08-18T14:16:01.752",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2025-08-18T14:16:01.744",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:96579",
+      "stop_place_id": "NSR:StopPlace:56360",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.668062,
+      "longitude": 18.962756,
+      "source_updated_at": "2020-02-06T16:13:26.798",
+      "stop_place_updated_at": "2024-01-01T03:02:27.245",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2020-02-06T16:13:18",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:96580",
+      "stop_place_id": "NSR:StopPlace:56360",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.667883,
+      "longitude": 18.962499,
+      "source_updated_at": "2020-02-06T16:13:26.798",
+      "stop_place_updated_at": "2024-01-01T03:02:27.245",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2020-02-06T16:13:18",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:96823",
+      "stop_place_id": "NSR:StopPlace:56488",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.664679,
+      "longitude": 18.961067,
+      "source_updated_at": "2020-02-06T16:32:59.036",
+      "stop_place_updated_at": "2024-01-01T03:02:33.032",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2020-02-06T16:32:54",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:96824",
+      "stop_place_id": "NSR:StopPlace:56488",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.664981,
+      "longitude": 18.961684,
+      "source_updated_at": "2020-02-06T16:32:59.036",
+      "stop_place_updated_at": "2024-01-01T03:02:33.032",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2020-02-06T16:32:54",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:96986",
+      "stop_place_id": "NSR:StopPlace:56572",
+      "quay_version": "6",
+      "stop_place_version": "6",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.64923,
+      "longitude": 18.99037,
+      "source_updated_at": "2021-06-07T14:26:26.889",
+      "stop_place_updated_at": "2024-01-01T03:02:36.644",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2021-06-07T14:26:14",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:96987",
+      "stop_place_id": "NSR:StopPlace:56572",
+      "quay_version": "6",
+      "stop_place_version": "6",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.650003,
+      "longitude": 18.992188,
+      "source_updated_at": "2021-06-07T14:26:26.89",
+      "stop_place_updated_at": "2024-01-01T03:02:36.644",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2021-06-07T14:26:14",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:97022",
+      "stop_place_id": "NSR:StopPlace:56592",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.652953,
+      "longitude": 18.950791,
+      "source_updated_at": "2020-02-12T15:46:08.779",
+      "stop_place_updated_at": "2024-01-01T03:02:37.432",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2020-02-12T15:46:05",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    },
+    {
+      "quay_id": "NSR:Quay:97024",
+      "stop_place_id": "NSR:StopPlace:56592",
+      "quay_version": "3",
+      "stop_place_version": "3",
+      "mapping_revision": "nsr-line20-2026-11-20-v2",
+      "coordinate_kind": "Quay",
+      "crs": "WGS84",
+      "latitude": 69.652586,
+      "longitude": 18.95018,
+      "source_updated_at": "2020-02-12T15:46:08.779",
+      "stop_place_updated_at": "2024-01-01T03:02:37.432",
+      "quay_validity": {
+        "valid_from": null,
+        "valid_until": null
+      },
+      "stop_place_validity": {
+        "valid_from": "2020-02-12T15:46:05",
+        "valid_until": null
+      },
+      "quality": "unverified"
+    }
+  ]
+}

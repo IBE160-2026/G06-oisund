@@ -1,0 +1,109 @@
+CHECK_TIME="2026-11-15T19:34:14.461366+01:00"
+ACTIVE_KERNEL="7.0.0-42-generic"
+VERSION_SIGNATURE="Ubuntu 7.0.0-42.42-generic 7.0.14"
+ARCHITECTURE="amd64"
+KERNEL_PACKAGE="ii \tlinux-generic\t7.0.0-43.43\tamd64"
+KERNEL_PACKAGE="un \tlinux-headers\t\t"
+KERNEL_PACKAGE="un \tlinux-headers-3.0\t\t"
+KERNEL_PACKAGE="ii \tlinux-headers-7.0.0-30\t7.0.0-30.30\tall"
+KERNEL_PACKAGE="ii \tlinux-headers-7.0.0-30-generic\t7.0.0-30.30\tamd64"
+KERNEL_PACKAGE="ii \tlinux-headers-7.0.0-42\t7.0.0-42.42\tall"
+KERNEL_PACKAGE="ii \tlinux-headers-7.0.0-42-generic\t7.0.0-42.42\tamd64"
+KERNEL_PACKAGE="ii \tlinux-headers-7.0.0-43\t7.0.0-43.43\tall"
+KERNEL_PACKAGE="ii \tlinux-headers-7.0.0-43-generic\t7.0.0-43.43\tamd64"
+KERNEL_PACKAGE="ii \tlinux-headers-generic\t7.0.0-43.43\tamd64"
+KERNEL_PACKAGE="un \tlinux-image\t\t"
+KERNEL_PACKAGE="ii \tlinux-image-7.0.0-30-generic\t7.0.0-30.30\tamd64"
+KERNEL_PACKAGE="ii \tlinux-image-7.0.0-42-generic\t7.0.0-42.42\tamd64"
+KERNEL_PACKAGE="ii \tlinux-image-7.0.0-43-generic\t7.0.0-43.43\tamd64"
+KERNEL_PACKAGE="un \tlinux-image-fb-generic\t\t"
+KERNEL_PACKAGE="ii \tlinux-image-generic\t7.0.0-43.43\tamd64"
+KERNEL_PACKAGE="un \tlinux-image-unsigned-7.0.0-30-generic\t\t"
+KERNEL_PACKAGE="un \tlinux-image-unsigned-7.0.0-42-generic\t\t"
+KERNEL_PACKAGE="un \tlinux-image-unsigned-7.0.0-43-generic\t\t"
+KERNEL_PACKAGE="ii \tlinux-modules-7.0.0-30-generic\t7.0.0-30.30\tamd64"
+KERNEL_PACKAGE="ii \tlinux-modules-7.0.0-42-generic\t7.0.0-42.42\tamd64"
+KERNEL_PACKAGE="ii \tlinux-modules-7.0.0-43-generic\t7.0.0-43.43\tamd64"
+DPKG_AUDIT="no reported incomplete packages"
+KERNEL_HOLDS=[]
+APT_POLICY linux-generic:
+APT_POLICY Installed: 7.0.0-43.43
+APT_POLICY Candidate: 7.0.0-43.43
+APT_POLICY linux-image-generic:
+APT_POLICY Installed: 7.0.0-43.43
+APT_POLICY Candidate: 7.0.0-43.43
+APT_POLICY linux-headers-generic:
+APT_POLICY Installed: 7.0.0-43.43
+APT_POLICY Candidate: 7.0.0-43.43
+APT_POLICY linux-image-7.0.0-42-generic:
+APT_POLICY Installed: 7.0.0-42.42
+APT_POLICY Candidate: 7.0.0-42.42
+APT_POLICY linux-image-7.0.0-43-generic:
+APT_POLICY Installed: 7.0.0-43.43
+APT_POLICY Candidate: 7.0.0-43.43
+APT_POLICY linux-modules-7.0.0-43-generic:
+APT_POLICY Installed: 7.0.0-43.43
+APT_POLICY Candidate: 7.0.0-43.43
+APT_POLICY linux-headers-7.0.0-43-generic:
+APT_POLICY Installed: 7.0.0-43.43
+APT_POLICY Candidate: 7.0.0-43.43
+APT_UPDATE_STAMP={"name": "update-success-stamp", "mtime_utc": "2026-11-15T11:37:01.620625+00:00", "bytes": 0, "mode": "0o644", "symlink": false}
+UBUNTU_INDEX={"Origin": "Ubuntu", "Suite": "resolute-backports", "Codename": "resolute", "Date": "Sat, 14 Nov 2026 19:23:56 UTC", "mtime_utc": "2026-11-14T19:23:58+00:00"}
+UBUNTU_INDEX={"Origin": "Ubuntu", "Suite": "resolute-updates", "Codename": "resolute", "Date": "Sat, 14 Nov 2026 19:23:05 UTC", "mtime_utc": "2026-11-14T19:23:24+00:00"}
+UBUNTU_INDEX={"Origin": "Ubuntu", "Suite": "resolute", "Codename": "resolute", "Date": "Thu, 23 Apr 2026 17:07:15 UTC", "mtime_utc": "2026-04-23T17:07:30+00:00"}
+UBUNTU_INDEX={"Origin": "Ubuntu", "Suite": "resolute-security", "Codename": "resolute", "Date": "Sat, 14 Nov 2026 19:22:44 UTC", "mtime_utc": "2026-11-14T19:23:00+00:00"}
+APT_PACKAGE_INDEX={"suite": "resolute", "count": 1, "mtimes_utc": ["2026-04-23T14:34:38+00:00"]}
+APT_PACKAGE_INDEX={"suite": "resolute-updates", "count": 1, "mtimes_utc": ["2026-11-13T06:17:56+00:00"]}
+APT_PACKAGE_INDEX={"suite": "resolute-security", "count": 1, "mtimes_utc": ["2026-11-12T21:24:08+00:00"]}
+APT_NOTE="Local cached metadata only; no apt update performed. Index mtime is not proof of last successful refresh."
+GRUB_INPUT={"file": "/etc/default/grub", "setting": "GRUB_DEFAULT=0"}
+GRUB_INPUT={"file": "/etc/default/grub", "setting": "GRUB_TIMEOUT_STYLE=menu"}
+GRUB_INPUT={"file": "/etc/default/grub", "setting": "GRUB_TIMEOUT=10"}
+GRUB_INPUT={"file": "/etc/default/grub.d/99-bussassistent-recovery.cfg", "setting": "GRUB_TIMEOUT_STYLE=menu"}
+GRUB_INPUT={"file": "/etc/default/grub.d/99-bussassistent-recovery.cfg", "setting": "GRUB_TIMEOUT=10"}
+GRUB_CFG_META={"name": "grub.cfg", "mtime_utc": "2026-11-11T05:22:18.837823+00:00", "bytes": 9753, "mode": "0o600", "symlink": false}
+GRUB_GENERATED_DEFAULT="set default=\"${next_entry}\""
+GRUB_GENERATED_DEFAULT="set default=\"0\""
+GRUB_ENTRY="menuentry 'Ubuntu' --class ubuntu --class gnu-linux --class gnu --class os $menuentry_id_option 'gnulinux-simple-b95815f6-0457-4006-b230-378789a957f0' {"
+GRUB_KERNEL_PATH="/vmlinuz-7.0.0-43-generic"
+GRUB_ENTRY="submenu 'Advanced options for Ubuntu' $menuentry_id_option 'gnulinux-advanced-b95815f6-0457-4006-b230-378789a957f0' {"
+GRUB_ENTRY="menuentry 'Ubuntu, with Linux 7.0.0-43-generic' --class ubuntu --class gnu-linux --class gnu --class os $menuentry_id_option 'gnulinux-7.0.0-43-generic-advanced-b95815f6-0457-4006-b230-378789a957f0' {"
+GRUB_KERNEL_PATH="/vmlinuz-7.0.0-43-generic"
+GRUB_ENTRY="menuentry 'Ubuntu, with Linux 7.0.0-43-generic (recovery mode)' --class ubuntu --class gnu-linux --class gnu --class os $menuentry_id_option 'gnulinux-7.0.0-43-generic-recovery-b95815f6-0457-4006-b230-378789a957f0' {"
+GRUB_KERNEL_PATH="/vmlinuz-7.0.0-43-generic"
+GRUB_ENTRY="menuentry 'Ubuntu, with Linux 7.0.0-42-generic' --class ubuntu --class gnu-linux --class gnu --class os $menuentry_id_option 'gnulinux-7.0.0-42-generic-advanced-b95815f6-0457-4006-b230-378789a957f0' {"
+GRUB_KERNEL_PATH="/vmlinuz-7.0.0-42-generic"
+GRUB_ENTRY="menuentry 'Ubuntu, with Linux 7.0.0-42-generic (recovery mode)' --class ubuntu --class gnu-linux --class gnu --class os $menuentry_id_option 'gnulinux-7.0.0-42-generic-recovery-b95815f6-0457-4006-b230-378789a957f0' {"
+GRUB_KERNEL_PATH="/vmlinuz-7.0.0-42-generic"
+GRUB_ENTRY="menuentry 'Ubuntu, with Linux 7.0.0-30-generic' --class ubuntu --class gnu-linux --class gnu --class os $menuentry_id_option 'gnulinux-7.0.0-30-generic-advanced-b95815f6-0457-4006-b230-378789a957f0' {"
+GRUB_KERNEL_PATH="/vmlinuz-7.0.0-30-generic"
+GRUB_ENTRY="menuentry 'Ubuntu, with Linux 7.0.0-30-generic (recovery mode)' --class ubuntu --class gnu-linux --class gnu --class os $menuentry_id_option 'gnulinux-7.0.0-30-generic-recovery-b95815f6-0457-4006-b230-378789a957f0' {"
+GRUB_KERNEL_PATH="/vmlinuz-7.0.0-30-generic"
+GRUB_ENTRY="menuentry 'UEFI Firmware Settings' $menuentry_id_option 'uefi-firmware' {"
+BOOT_ARTIFACT={"name": "vmlinuz-7.0.0-30-generic", "mtime_utc": "2026-07-31T16:28:15+00:00", "bytes": 17295752, "mode": "0o600", "symlink": false}
+BOOT_ARTIFACT={"name": "vmlinuz-7.0.0-42-generic", "mtime_utc": "2026-10-15T06:50:14+00:00", "bytes": 17344904, "mode": "0o600", "symlink": false}
+BOOT_ARTIFACT={"name": "vmlinuz-7.0.0-43-generic", "mtime_utc": "2026-10-23T12:03:02+00:00", "bytes": 17349000, "mode": "0o600", "symlink": false}
+BOOT_ARTIFACT={"name": "initrd.img-7.0.0-30-generic", "mtime_utc": "2026-10-29T16:11:39.721771+00:00", "bytes": 65241922, "mode": "0o600", "symlink": false}
+BOOT_ARTIFACT={"name": "initrd.img-7.0.0-42-generic", "mtime_utc": "2026-11-01T22:09:33.824116+00:00", "bytes": 62886629, "mode": "0o600", "symlink": false}
+BOOT_ARTIFACT={"name": "initrd.img-7.0.0-43-generic", "mtime_utc": "2026-11-11T05:22:04.762676+00:00", "bytes": 62895558, "mode": "0o600", "symlink": false}
+EFI_SELECTION="BootCurrent: 0004"
+EFI_SELECTION="BootOrder: 0004,2003,2001,2002"
+EFI_SELECTION="Boot0004* ubuntu\tHD(1,GPT,a65ede25-97cf-426d-83fa-345275209d82,0x800,0x219800)/\\EFI\\ubuntu\\shimx64.efiRC"
+BOOT_NOTE="Expected next kernel must be resolved from generated default + next_entry/saved_entry + menu order + EFI override; not inferred from newest package or symlink. Manual boot selection remains possible."
+REBOOT_REQUIRED=true
+REBOOT_REQUIRED_PACKAGES=["linux-image-7.0.0-43-generic", "linux-base", "libc6"]
+BACKUP_TIMER={"LoadState": "loaded", "ActiveState": "active", "SubState": "waiting", "Unit": "bussassistent-backup.service", "TimersCalendar": "{ OnCalendar=*-*-* 03:15:00 Europe/Oslo ; next_elapse=Mon 2026-11-16 03:15:00 CET }", "NextElapseUSecRealtime": "Mon 2026-11-16 03:16:30 CET", "LastTriggerUSec": "Sun 2026-11-15 03:17:19 CET", "RandomizedDelayUSec": "5min", "Persistent": "yes"}
+BACKUP_SERVICE={"LoadState": "loaded", "ActiveState": "inactive", "SubState": "dead", "InvocationID": "be762015b3cd47feabd08fd1be93d2d7", "Result": "success", "ExecMainStartTimestamp": "Sun 2026-11-15 03:17:19 CET", "ExecMainExitTimestamp": "Sun 2026-11-15 03:17:19 CET", "ExecMainCode": "1", "ExecMainStatus": "0"}
+BACKUP_COMMAND_MATCHES_EXPECTED=true
+BACKUP_EVENT={"time_utc": "2026-11-13T02:16:48.298229+00:00", "completed_dump": "20261113T021647Z-7921eb54e4816aaab9368c3efd851bcf692f3823.dump", "file": {"name": "20261113T021647Z-7921eb54e4816aaab9368c3efd851bcf692f3823.dump", "errno": 2}}
+BACKUP_EVENT={"time_utc": "2026-11-13T02:16:48.306721+00:00", "result": "done", "job_type": "start", "systemd_finished": true}
+BACKUP_EVENT={"time_utc": "2026-11-14T02:17:20.026245+00:00", "completed_dump": "20261114T021719Z-7921eb54e4816aaab9368c3efd851bcf692f3823.dump", "file": {"name": "20261114T021719Z-7921eb54e4816aaab9368c3efd851bcf692f3823.dump", "mtime_utc": "2026-11-14T02:17:19.902617+00:00", "bytes": 56350, "mode": "0o640", "symlink": false}}
+BACKUP_EVENT={"time_utc": "2026-11-14T02:17:20.036489+00:00", "result": "done", "job_type": "start", "systemd_finished": true}
+BACKUP_EVENT={"time_utc": "2026-11-15T02:17:19.480625+00:00", "completed_dump": "20261115T021719Z-7921eb54e4816aaab9368c3efd851bcf692f3823.dump", "file": {"name": "20261115T021719Z-7921eb54e4816aaab9368c3efd851bcf692f3823.dump", "mtime_utc": "2026-11-15T02:17:19.360769+00:00", "bytes": 56350, "mode": "0o640", "symlink": false}}
+BACKUP_EVENT={"time_utc": "2026-11-15T02:17:19.488871+00:00", "result": "done", "job_type": "start", "systemd_finished": true}
+LAST_SUCCESSFUL_BACKUP_JOB={"time_utc": "2026-11-15T02:17:19.488871+00:00", "result": "done", "job_type": "start", "systemd_finished": true}
+RECENT_DUMP_METADATA={"name": "20261115T021719Z-7921eb54e4816aaab9368c3efd851bcf692f3823.dump", "mtime_utc": "2026-11-15T02:17:19.360769+00:00", "bytes": 56350, "mode": "0o640", "symlink": false}
+RECENT_DUMP_METADATA={"name": "20261114T021719Z-7921eb54e4816aaab9368c3efd851bcf692f3823.dump", "mtime_utc": "2026-11-14T02:17:19.902617+00:00", "bytes": 56350, "mode": "0o640", "symlink": false}
+RECENT_DUMP_COUNT=2
+BACKUP_NOTE="Correlate timer trigger, service start/exit/result, journal completion and dump metadata. A manual run is not automatically a timer run. File presence or active timer alone is not success. No backup or restore was run; older restore evidence remains historical."
+Connection to 192.168.1.138 closed.

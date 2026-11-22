@@ -26,11 +26,19 @@ services:
       - ../../deploy/tablet/init-private-role.sql:/docker-entrypoint-initdb.d/010-private-role.sql:ro
     networks: [storage]
     healthcheck:
-      test: [CMD-SHELL, pg_isready -U private_work -d private_work]
+      test: [CMD-SHELL, pg_isready -h 127.0.0.1 -U private_work -d private_work]
       interval: 3s
       timeout: 3s
       retries: 20
   private-api:
+    command: [/bin/sh, -ec, 'test -d /maintenance; test -r /maintenance; test -x /maintenance; test ! -e /maintenance/pending.json || test -f /maintenance/local-start; exec python -m app.run']
+    volumes:
+      - type: bind
+        source: /etc/bussassistent/maintenance
+        target: /maintenance
+        read_only: true
+        bind:
+          create_host_path: false
     restart: on-failure
     logging:
       driver: local
@@ -60,6 +68,18 @@ services:
       timeout: 3s
       retries: 20
   gateway:
+    command:
+      - >-
+        test -d /maintenance; test -r /maintenance; test -x /maintenance; test ! -e /maintenance/pending.json || test -f /maintenance/local-start;
+        envsubst '$${TABLET_HOST}' < /etc/nginx/templates/default.conf.template > /tmp/tablet.conf;
+        exec nginx -g 'daemon off;'
+    volumes:
+      - type: bind
+        source: /etc/bussassistent/maintenance
+        target: /maintenance
+        read_only: true
+        bind:
+          create_host_path: false
     restart: on-failure
     logging:
       driver: local
@@ -86,6 +106,14 @@ services:
       private-api:
         condition: service_healthy
   access-gate:
+    command: [/bin/sh, -ec, 'test -d /maintenance; test -r /maintenance; test -x /maintenance; test ! -e /maintenance/pending.json || test -f /maintenance/local-start; exec python gate.py']
+    volumes:
+      - type: bind
+        source: /etc/bussassistent/maintenance
+        target: /maintenance
+        read_only: true
+        bind:
+          create_host_path: false
     restart: on-failure
     logging:
       driver: local

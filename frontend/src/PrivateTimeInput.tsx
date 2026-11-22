@@ -5,6 +5,7 @@ type Props = { label: string; value: string | null; defaultDate: string | null; 
   resolve: (body: object) => Promise<unknown>; onValue: (value: string | null) => void;
   onState: (dirty: boolean, unresolved: boolean) => void; expired: () => void };
 const parts = (value: string | null, day: string | null) => ({ date: value?.slice(0, 10) ?? day ?? '', clock: value?.match(/T(\d{2}:\d{2}(?::\d{2})?)/)?.[1] ?? '' });
+const clockWithSeconds = (clock: string) => clock.length === 5 ? clock + ':00' : clock;
 
 export function PrivateTimeInput(props: Props) {
   const original = useRef({ value: props.value, ...parts(props.value, props.defaultDate) }).current;
@@ -51,6 +52,8 @@ export function PrivateTimeInput(props: Props) {
     return () => { active = false; clearTimeout(timer); };
   }, [date, clock, touched, retry, props.disabled]);
   function change(day: string, time: string) {
+    // Native time inputs can add zero seconds when focus moves. Keep the resolved Oslo occurrence.
+    if (day === date && clockWithSeconds(time) === clockWithSeconds(clock)) return;
     generation.current++;
     setDate(day); setClock(time); setTouched(true); setSelected(null); setOptions([]);
     setState(!day && !time ? 'empty' : 'incomplete'); callbacks.current.onState(true, !!(day || time)); callbacks.current.onValue(null);

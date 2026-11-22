@@ -59,19 +59,71 @@ test('draft bus fresh writes share Unicode rules and invalid input remains edita
   let writes = 0;
   page.on('request', req => { if (req.method() === 'POST' && /\/drafts(?:\/[^/]+)?$/.test(new URL(req.url()).pathname)) writes++; });
   for (const value of ['🚍'.repeat(101), 'A\0B']) {
-    await input.fill(value); await expect(save).toBeDisabled();
-    await expect(input).toHaveValue(value); await expect(status(page)).toContainText('Inndata er beholdt');
+    if (value.includes('\0')) {
+      // Firefox's Playwright text insertion drops NUL before the application sees it.
+      await input.evaluate((element, raw) => {
+        const setValue = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value')?.set;
+        if (!setValue) throw Error('Missing native input value setter');
+        setValue.call(element, raw);
+        element.dispatchEvent(new Event('input', { bubbles: true }));
+      }, value);
+    } else await input.fill(value);
+    await expect(input).toHaveValue(value); await expect(save).toBeDisabled();
+    await expect(status(page)).toContainText('Inndata er beholdt');
     await expect(input).toHaveAttribute('aria-invalid', 'true');
     await expect(input).toHaveAttribute('aria-describedby', 'draft-bus-error');
     await expect(input).toHaveAccessibleDescription(/Inndata er beholdt/);
     expect(writes).toBe(0);
   }
-  for (const [value, expected] of [['\u0085\u2003', ''], ['\ufeff', '\ufeff'], [' 0006 / 090 ', ' 0006 / 090 '], ['🚍'.repeat(100), '🚍'.repeat(100)]] as const) {
-    await input.fill(value); await save.focus(); await page.keyboard.press('Enter');
-    await expect(status(page)).toContainText('Lagret. Versjon'); await expect(input).toHaveValue(expected);
+  const validValues = [['\u0085\u2003', ''], ['\ufeff', '\ufeff'], [' 0006 / 090 ', ' 0006 / 090 '], ['🚍'.repeat(100), '🚍'.repeat(100)]] as const;
+  for (const [index, [value, expected]] of validValues.entries()) {
+    await expect(input).toBeEnabled();
+    await input.fill(value);
+    await expect(input).toHaveValue(value);
+    await save.press('Enter');
+    await expect(status(page)).toHaveText(`Lagret. Versjon ${index + 1}.`);
+    await expect(input).toHaveValue(expected);
     await expect(input).toHaveAttribute('aria-invalid', 'false');
     await expect(page.locator('#draft-bus-error')).toHaveCount(0);
   }
+});
+
+test('a draft save restores keyboard focus before editing resumes', async ({ page }) => {
+  await login(page);
+  await expect(page.locator('.draft-loaded-count')).toContainText('Lastet ');
+  const bus = page.getByLabel('Buss/vogn', { exact: true });
+  const save = page.getByRole('button', { name: 'Lagre utkast', exact: true });
+  await bus.fill('Første buss');
+
+  let refreshReady!: () => void;
+  const refreshGate = new Promise<void>(resolve => { refreshReady = resolve; });
+  await page.route('**:8001/drafts', async route => {
+    if (route.request().method() === 'GET') await refreshGate;
+    await route.continue();
+  });
+  await bus.evaluate(element => {
+    const input = element as HTMLInputElement;
+    let wasDisabled = false;
+    const observer = new MutationObserver(() => {
+      if (input.matches(':disabled')) { wasDisabled = true; return; }
+      if (!wasDisabled) return;
+      observer.disconnect();
+      input.focus();
+    });
+    observer.observe(input.closest('fieldset')!, { attributes: true, attributeFilter: ['disabled'] });
+  });
+  try {
+    await save.press('Enter');
+    await expect(status(page)).toHaveText('Lagret. Versjon 1.');
+    await expect(bus).toBeDisabled();
+  } finally { refreshReady(); }
+  await expect(bus).toBeEnabled();
+  await page.evaluate(() => new Promise(requestAnimationFrame));
+  await expect(bus).toBeFocused();
+  await page.keyboard.press('End');
+  await page.keyboard.insertText(' A');
+  await expect(bus).toHaveValue('Første buss A');
+  await expect(status(page)).toHaveText('Ulagrede endringer.');
 });
 
 test('all 201 saved drafts remain reachable and the final page reopens', async ({ page }) => {
@@ -185,10 +237,14 @@ test('manual unknowns and unresolved time input follow activity identity through
 for (const width of [768, 1440]) test(`keyboard save and reopen midnight facts at ${width}px`, async ({ page }) => {
   await page.setViewportSize({ width, height: 1100 });
   await login(page); await fill(page);
-  await editor(page); await page.getByRole('button', { name: 'Lagre utkast', exact: true }).focus();
+  await editor(page);
+  const save = page.getByRole('button', { name: 'Lagre utkast', exact: true });
+  await expect(save).toBeEnabled();
+  await save.focus();
+  await expect(save).toBeFocused();
   await page.keyboard.press('Enter');
   await expect(status(page)).toHaveText('Lagret. Versjon 1.');
-  await expect(page.getByRole('button', { name: 'Lagre utkast', exact: true })).toBeFocused();
+  await expect(save).toBeFocused();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   expect(await page.evaluate(async () => [localStorage.length, sessionStorage.length, (await indexedDB.databases()).length])).toEqual([0, 0, 0]);
   await page.screenshot({ path: `../docs/evidence/11-2-regression-9-4-${width}.png`, fullPage: true });
@@ -197,7 +253,7 @@ for (const width of [768, 1440]) test(`keyboard save and reopen midnight facts a
   await expect(page.getByLabel('Vognløp', { exact: true })).toHaveValue('0007');
   await expect(page.getByLabel('Opprinnelig sluttklokke')).toHaveValue('26:30');
   await expect(page.getByLabel('Sluttdato', { exact: true })).toHaveValue('2026-10-25');
-  await expect(page.getByLabel('Sluttid', { exact: true })).toHaveValue('02:30');
+  await expect(page.getByLabel('Sluttid', { exact: true })).toHaveValue(/^02:30(?::00)?$/);
   await page.getByLabel('Vognløp', { exact: true }).fill('local-unsaved');
   await page.evaluate(() => {
     Object.defineProperty(document, 'visibilityState', { configurable: true, get: () => 'hidden' }); document.dispatchEvent(new Event('visibilitychange'));
@@ -371,7 +427,7 @@ test('supported historical Oslo offset saves and reopens unchanged', async ({ pa
   await page.reload();
   await preparation(page); await page.getByRole('button', { name: /Åpne 2026-10-24/ }).first().click();
   await expect(page.getByLabel('Startdato', { exact: true })).toHaveValue('1894-01-01');
-  await expect(page.getByLabel('Starttid', { exact: true })).toHaveValue('12:00');
+  await expect(page.getByLabel('Starttid', { exact: true })).toHaveValue(/^12:00(?::00)?$/);
 });
 
 test('reorder and remove preserve ordered identities with their facts after reopen', async ({ page }) => {
@@ -616,12 +672,13 @@ test.describe('friendly Oslo time entry', () => {
     const result = page.waitForResponse(response => response.request().method() === 'POST' && new URL(response.url()).pathname === '/drafts');
     await editor(page); await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
     const saved = await (await result).json();
-    expect(saved.draft.activities[0].start).toBe('2026-07-15T23:50+02:00');
-    expect(saved.draft.activities[0].end).toBe('2026-07-16T00:10+02:00');
+    // The resolver can return minute or second precision. Verify the Oslo date, clock and offset.
+    expect(saved.draft.activities[0].start).toMatch(/^2026-07-15T23:50(?::00)?\+02:00$/);
+    expect(saved.draft.activities[0].end).toMatch(/^2026-07-16T00:10(?::00)?\+02:00$/);
     await expect(status(page)).toHaveText('Lagret. Versjon 1.');
     await page.reload();
     await preparation(page); await page.getByRole('button', { name: 'Åpne 2026-07-20 · versjon 1', exact: true }).click();
-    await expect(page.getByLabel('Starttid', { exact: true })).toHaveValue('23:50');
+    await expect(page.getByLabel('Starttid', { exact: true })).toHaveValue(/^23:50(?::00)?$/);
     await expect(page.getByLabel('Sluttdato', { exact: true })).toHaveValue('2026-07-16');
   });
 
@@ -633,13 +690,13 @@ test.describe('friendly Oslo time entry', () => {
     await expect(page.getByText('Dette klokkeslettet finnes ikke i Oslo', { exact: false })).toBeVisible();
     await expect(page.getByRole('button', { name: 'Lagre utkast', exact: true })).toBeDisabled();
     await page.getByLabel('Startdato', { exact: true }).fill('');
-    await expect(page.getByLabel('Starttid', { exact: true })).toHaveValue('02:30');
+    await expect(page.getByLabel('Starttid', { exact: true })).toHaveValue(/^02:30(?::00)?$/);
     await page.evaluate(() => {
       Object.defineProperty(document, 'visibilityState', { configurable: true, get: () => 'hidden' }); document.dispatchEvent(new Event('visibilitychange'));
       Object.defineProperty(document, 'visibilityState', { configurable: true, get: () => 'visible' }); document.dispatchEvent(new Event('visibilitychange'));
     });
     await expect(page.getByLabel('Startdato', { exact: true })).toHaveValue('');
-    await expect(page.getByLabel('Starttid', { exact: true })).toHaveValue('02:30');
+    await expect(page.getByLabel('Starttid', { exact: true })).toHaveValue(/^02:30(?::00)?$/);
     await page.getByLabel('Startdato', { exact: true }).fill('2026-10-25');
     await expect(page.getByLabel('Start: forekomst', { exact: true })).toBeVisible();
     await expect(page.getByRole('button', { name: 'Lagre utkast', exact: true })).toBeDisabled();
@@ -651,14 +708,14 @@ test.describe('friendly Oslo time entry', () => {
       Object.defineProperty(document, 'visibilityState', { configurable: true, get: () => 'hidden' }); document.dispatchEvent(new Event('visibilitychange'));
       Object.defineProperty(document, 'visibilityState', { configurable: true, get: () => 'visible' }); document.dispatchEvent(new Event('visibilitychange'));
     });
-    await expect(page.getByLabel('Start: forekomst', { exact: true })).toHaveValue('2026-10-25T02:30+02:00');
-    await expect(page.getByLabel('Slutt: forekomst', { exact: true })).toHaveValue('2026-10-25T02:30+01:00');
+    await expect(page.getByLabel('Start: forekomst', { exact: true })).toHaveValue(/^2026-10-25T02:30(?::00)?\+02:00$/);
+    await expect(page.getByLabel('Slutt: forekomst', { exact: true })).toHaveValue(/^2026-10-25T02:30(?::00)?\+01:00$/);
     await expect(page.getByRole('button', { name: 'Lagre utkast', exact: true })).toBeEnabled();
     const result = page.waitForResponse(response => response.request().method() === 'POST' && new URL(response.url()).pathname === '/drafts');
     await editor(page); await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
     const saved = await (await result).json();
-    expect(saved.draft.activities[0].start).toBe('2026-10-25T02:30+02:00');
-    expect(saved.draft.activities[0].end).toBe('2026-10-25T02:30+01:00');
+    expect(saved.draft.activities[0].start).toMatch(/^2026-10-25T02:30(?::00)?\+02:00$/);
+    expect(saved.draft.activities[0].end).toMatch(/^2026-10-25T02:30(?::00)?\+01:00$/);
     await expect(status(page)).toHaveText('Lagret. Versjon 1.');
   });
 
@@ -669,7 +726,7 @@ test.describe('friendly Oslo time entry', () => {
     await page.route('**:8001/draft-times/resolve', route => route.abort());
     await page.getByLabel('Starttid', { exact: true }).fill('10:00');
     await expect(page.getByText('Tidspunktet kunne ikke kontrolleres.', { exact: false })).toBeVisible();
-    await expect(page.getByLabel('Starttid', { exact: true })).toHaveValue('10:00');
+    await expect(page.getByLabel('Starttid', { exact: true })).toHaveValue(/^10:00(?::00)?$/);
     await expect(page.getByRole('button', { name: 'Lagre utkast', exact: true })).toBeDisabled();
     await page.unroute('**:8001/draft-times/resolve');
     let release!: () => void, entered!: () => void;
@@ -686,7 +743,7 @@ test.describe('friendly Oslo time entry', () => {
       release();
       const result = page.waitForResponse(response => response.request().method() === 'POST' && new URL(response.url()).pathname === '/drafts');
       await editor(page); await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
-      expect((await (await result).json()).draft.activities[0].start).toBe('2026-01-15T11:00+01:00');
+      expect((await (await result).json()).draft.activities[0].start).toMatch(/^2026-01-15T11:00(?::00)?\+01:00$/);
       await expect(status(page)).toHaveText('Lagret. Versjon 1.');
     } finally { release(); }
   });
@@ -709,6 +766,37 @@ test.describe('friendly Oslo time entry', () => {
     expect(updated.expires_at).toBe(original.expires_at);
   });
 
+  test('equivalent clock formatting retains the occurrence and real time edits re-resolve', async ({ page }) => {
+    await login(page);
+    await page.getByLabel('Tjenestedato', { exact: true }).fill('2026-10-25');
+    await page.getByRole('button', { name: 'Legg til aktivitet' }).click();
+    const clock = page.getByLabel('Starttid', { exact: true });
+    const occurrence = page.getByLabel('Start: forekomst', { exact: true });
+    const save = page.getByRole('button', { name: 'Lagre utkast', exact: true });
+    await clock.fill('02:30');
+    await occurrence.selectOption({ label: 'Andre forekomst' });
+    await page.getByLabel('Usikkerhet / ukjente fakta', { exact: true }).focus();
+    await expect(occurrence).toHaveValue(/^2026-10-25T02:30(?::00)?\+01:00$/);
+    await expect(save).toBeEnabled();
+
+    await clock.fill('02:30:15');
+    await expect(occurrence).toHaveValue('');
+    await expect(save).toBeDisabled();
+    await occurrence.selectOption({ label: 'Andre forekomst' });
+    await expect(occurrence).toHaveValue('2026-10-25T02:30:15+01:00');
+
+    await page.getByLabel('Startdato', { exact: true }).fill('2026-10-26');
+    await expect(occurrence).toHaveCount(0);
+    await expect(save).toBeEnabled();
+    const response = page.waitForResponse(result => result.request().method() === 'POST' && new URL(result.url()).pathname === '/drafts');
+    await save.click();
+    expect((await (await response).json()).draft.activities[0].start).toBe('2026-10-26T02:30:15+01:00');
+    await expect(status(page)).toHaveText('Lagret. Versjon 1.');
+    await preparation(page);
+    await page.getByRole('button', { name: 'Åpne 2026-10-25 · versjon 1', exact: true }).click();
+    await expect(clock).toHaveValue('02:30:15');
+  });
+
   test('clearing saved, incomplete and gap times saves null without changing other facts', async ({ page }) => {
     await login(page); await fill(page);
     const initialResponse = page.waitForResponse(response => response.request().method() === 'POST' && new URL(response.url()).pathname === '/drafts');
@@ -724,7 +812,7 @@ test.describe('friendly Oslo time entry', () => {
     await page.reload();
     await preparation(page); await page.getByRole('button', { name: /Åpne 2026-10-24 · versjon 2/ }).first().click();
     await expect(page.getByLabel('Starttid', { exact: true })).toHaveValue('');
-    await expect(page.getByLabel('Sluttid', { exact: true })).toHaveValue('02:30');
+    await expect(page.getByLabel('Sluttid', { exact: true })).toHaveValue(/^02:30(?::00)?$/);
     await expect(page.getByLabel('Opprinnelig startklokke')).toHaveValue('24:00');
     await page.getByLabel('Startdato', { exact: true }).fill('2026-03-29');
     await page.getByLabel('Starttid', { exact: true }).fill('02:30');
@@ -756,7 +844,7 @@ for (const purged of [false, true]) test(`terminal lost-save lookup releases onl
   await expect(status(page)).toContainText('Lagring er ikke bekreftet.');
   await expect(status(page)).toContainText('kan ikke sendes på nytt');
   await expect(page.getByLabel('Buss/vogn', { exact: true })).toHaveValue('Bus-0012');
-  await expect(page.getByLabel('Starttid', { exact: true })).toHaveValue('00:00');
+  await expect(page.getByLabel('Starttid', { exact: true })).toHaveValue(/^00:00(?::00)?$/);
   await expect(page.getByRole('button', { name: 'Lagre utkast', exact: true })).toBeDisabled();
   await expect(page.getByRole('button', { name: 'Prøv samme lagringsforsøk igjen' })).toHaveCount(0);
   page.once('dialog', dialog => dialog.accept());
@@ -826,8 +914,8 @@ test('activity removal cancellation preserves unresolved raw input and canonical
   page.once('dialog', dialog => dialog.dismiss());
   await page.getByRole('button', { name: 'Fjern aktivitet 1', exact: true }).click();
   await expect(page.getByLabel('Sluttdato', { exact: true })).toHaveValue('');
-  await expect(page.getByLabel('Sluttid', { exact: true })).toHaveValue('02:30');
-  await expect(page.getByLabel('Starttid', { exact: true })).toHaveValue('00:00');
+  await expect(page.getByLabel('Sluttid', { exact: true })).toHaveValue(/^02:30(?::00)?$/);
+  await expect(page.getByLabel('Starttid', { exact: true })).toHaveValue(/^00:00(?::00)?$/);
   await expect(page.getByLabel('Kilde / manuell rettelse')).toHaveValue('unsaved provenance');
   await page.getByLabel('Sluttdato', { exact: true }).fill('2026-10-25');
   await page.getByLabel('Slutt: forekomst', { exact: true }).selectOption({ label: 'Andre forekomst' });

@@ -1,0 +1,12 @@
+Package: linux-buildinfo-7.0.0-43-generic
+Source: linux
+Version: 7.0.0-43.43
+Architecture: amd64
+Maintainer: Ubuntu Kernel Team <kernel-team@lists.ubuntu.com>
+Installed-Size: 3358
+Section: kernel
+Priority: optional
+Description: Linux kernel buildinfo for version 7.0.0
+ This package contains the Linux kernel buildinfo for version 7.0.0.
+ .
+ You likely do not want to install this package.

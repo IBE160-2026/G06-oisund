@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import type { Plan } from './PrivateConfirmation';
 import { PrivateBus } from './PrivateBus';
 import { PrivateShiftStart } from './PrivateShiftStart';
@@ -7,6 +7,8 @@ import { ProgressScreens, useWorkdayProgress } from './PrivateWorkdayProgress';
 import { osloDateTime } from './dayOverview';
 import type { NoticeController } from './PrivateNotices';
 import { PrivateNoticeReader } from './PrivateNoticeReader';
+import { PrivateAutomaticNotices } from './PrivateAutomaticNotices';
+import { createPositionAnchorContinuity } from './positionAnchorClient';
 
 type Props = {
   plan: Plan; hidden: boolean; activityOpen: boolean; setActivityOpen: (value: boolean) => void;
@@ -20,9 +22,12 @@ type Props = {
 };
 export function PrivateWorkdayView(props: Props) {
   const { plan } = props;
+  const anchorContinuity = useMemo(createPositionAnchorContinuity, [plan.id]);
   const [readerOpen, setReaderOpen] = useState(false);
-  useEffect(() => { props.readerChanged(readerOpen); return () => props.readerChanged(false); }, [readerOpen]);
+  const [automaticOpen, setAutomaticOpen] = useState(false);
+  useEffect(() => { props.readerChanged(readerOpen || automaticOpen); return () => props.readerChanged(false); }, [readerOpen, automaticOpen]);
   const readerEntry = useRef<HTMLButtonElement>(null);
+  const automaticEntry = useRef<HTMLButtonElement>(null);
   const [progressLocked, setProgressLocked] = useState(false);
   const [startReview, setStartReview] = useState(false);
 
@@ -38,25 +43,27 @@ export function PrivateWorkdayView(props: Props) {
   };
   const visible = props.planAvailable && !!progress.snapshot;
   const notices = props.notices;
-  const special = readerOpen || progress.screen !== 'day' || startReview || notices.screen !== 'day';
+  const special = readerOpen || automaticOpen || progress.screen !== 'day' || startReview || notices.screen !== 'day';
+  const noticeEntryAboveActivity = !props.activityOpen || notices.screen !== 'day';
   const startChanged = useCallback(() => { void progress.load(); }, [plan.id]);
   const dayTitle = useRef<HTMLHeadingElement>(null);
   useEffect(() => { if (!props.hidden && !props.activityOpen && progress.screen === 'day') dayTitle.current?.focus(); }, [props.hidden, progress.screen]);
   function openActivity() { props.setActivityOpen(true); }
-  const noticeEntry = <div hidden={readerOpen || startReview || progress.screen !== 'day'}><button ref={readerEntry} disabled={props.suspended || !visible} onClick={() => setReaderOpen(true)}>Les avvik for linjer og datoer</button></div>;
+  const noticeEntry = <div className="controls" hidden={readerOpen || automaticOpen || startReview || progress.screen !== 'day'}><button ref={readerEntry} disabled={props.suspended || !visible} onClick={() => setReaderOpen(true)}>Les avvik for linjer og datoer</button><button ref={automaticEntry} disabled={props.suspended || !visible} onClick={() => setAutomaticOpen(true)}>Automatiske avvik</button></div>;
   return <section hidden={props.hidden} aria-label="Bekreftet plan">
     <PrivateNoticeReader id={plan.id} expiresAt={plan.expires_at} open={readerOpen && !props.hidden} available={visible} suspended={props.suspended} request={props.request} expired={props.expired} shorten={props.shorten} back={() => { setReaderOpen(false); notices.navigate('day'); props.setActivityOpen(false); progress.setScreen('day'); window.setTimeout(() => readerEntry.current?.focus(), 0); }} maintenance={() => { setReaderOpen(false); if (notices.screen === 'day') notices.open(); else window.setTimeout(() => notices.title.current?.focus(), 0); }} />
-    <div hidden={readerOpen || startReview || notices.screen !== 'day'}><ProgressScreens progress={progress} content={plan.draft} classifications={plan.classifications} suspended={props.suspended} showPreparation={props.showPreparation} showDay={() => { props.setActivityOpen(false); progress.setScreen('day'); }} leaveLocked={props.busy || props.busLocked || progressLocked} factsAvailable={visible} compact={props.activityOpen && progress.screen === 'day'} /></div>
-    {!props.activityOpen && noticeEntry}
+    <PrivateAutomaticNotices plan={plan} open={automaticOpen && !props.hidden} available={visible} suspended={props.suspended} request={props.request} mutation={props.mutation} expired={props.expired} shorten={props.shorten} back={() => { setAutomaticOpen(false); if (notices.screen === 'day') window.setTimeout(() => automaticEntry.current?.focus(), 0); }} />
+    <div hidden={readerOpen || automaticOpen || startReview || notices.screen !== 'day'}><ProgressScreens progress={progress} content={plan.draft} classifications={plan.classifications} suspended={props.suspended} showPreparation={props.showPreparation} showDay={() => { props.setActivityOpen(false); progress.setScreen('day'); }} leaveLocked={props.busy || props.busLocked || progressLocked} factsAvailable={visible} compact={props.activityOpen && progress.screen === 'day'} /></div>
+    {noticeEntryAboveActivity && noticeEntry}
     <div hidden={special}>
       <div hidden={props.activityOpen}><h2 ref={dayTitle} tabIndex={-1}>Dagen din</h2>{visible ? <><h3>Bekreftet plan · versjon {plan.source_revision}</h3><p>Historisk bekreftelse: {osloDateTime(plan.confirmed_at)}.</p><p>Siste aktivitetsslutt: {osloDateTime(plan.final_end)}. Utløper {osloDateTime(plan.expires_at)}. Fristen forlenges ikke.</p></> : <p>Planfakta er skjult til plantilgangen er kontrollert.</p>}
         <div hidden={progress.terminal && !props.busLocked}><PrivateBus id={plan.id} expiresAt={plan.expires_at} request={request} mutation={mutation} readOnly={progress.terminal} suspended={props.suspended} expired={props.expired} lock={props.guardBus} availability={props.busAvailability} factsAvailable={visible} shorten={props.shorten} /></div>
         {progress.terminal && visible && <><p>Skiftet er {progress.snapshot!.lifecycle.state === 'ended' ? 'avsluttet' : 'avbrutt'}. Dagen er skrivebeskyttet.</p><p>Fysisk buss: {progress.snapshot!.bus.physical_bus ?? 'Ukjent'}</p><button onClick={() => progress.setScreen('recap')}>Åpne oppsummering</button></>}
       </div>
-      <PrivateActivitySelection id={plan.id} expiresAt={plan.expires_at} content={plan.draft} classifications={plan.classifications} finalEnd={plan.final_end} activityOpen={props.activityOpen} navigationLocked={props.dayNavigationLocked} openActivity={openActivity} backToDay={() => props.setActivityOpen(false)} request={request} mutation={mutation} suspended={props.suspended} expired={props.expired} lock={props.guardSelection} availability={props.selectionAvailability} factsAvailable={visible} shorten={props.shorten} progress={progress} />
-      {props.activityOpen && noticeEntry}
+      <PrivateActivitySelection id={plan.id} expiresAt={plan.expires_at} content={plan.draft} classifications={plan.classifications} finalEnd={plan.final_end} activityOpen={props.activityOpen} positionVisible={!special && !props.hidden} anchorContinuity={anchorContinuity} navigationLocked={props.dayNavigationLocked} openActivity={openActivity} backToDay={() => props.setActivityOpen(false)} request={request} mutation={mutation} suspended={props.suspended} expired={props.expired} lock={props.guardSelection} availability={props.selectionAvailability} factsAvailable={visible} shorten={props.shorten} progress={progress} />
+      {!noticeEntryAboveActivity && noticeEntry}
     </div>
-    <div hidden={readerOpen || notices.screen !== 'day' || progress.screen !== 'day' || progress.terminal && !props.busLocked}><PrivateShiftStart id={plan.id} expiresAt={plan.expires_at} blocked={props.busy || props.busLocked || progressLocked || progress.busy} reviewing={startReview} review={setStartReview} plannedStart={plan.draft.activities[0].start!} request={request} mutation={mutation} readOnly={progress.terminal} suspended={props.suspended} expired={props.expired} lock={props.guardStart} availability={props.startAvailability} factsAvailable={visible} changed={startChanged} shorten={props.shorten} /></div>
+    <div hidden={readerOpen || automaticOpen || notices.screen !== 'day' || progress.screen !== 'day' || progress.terminal && !props.busLocked}><PrivateShiftStart id={plan.id} expiresAt={plan.expires_at} blocked={props.busy || props.busLocked || progressLocked || progress.busy} reviewing={startReview} review={setStartReview} plannedStart={plan.draft.activities[0].start!} request={request} mutation={mutation} readOnly={progress.terminal} suspended={props.suspended} expired={props.expired} lock={props.guardStart} availability={props.startAvailability} factsAvailable={visible} changed={startChanged} shorten={props.shorten} /></div>
     <div hidden={special}>
       <div hidden={props.activityOpen}>{visible && <><p>Historiske fakta og godtatte ukjente opplysninger gjelder tidspunktet for bekreftelsen. Bussregistreringen gjelder nå.</p><details className="day-confirmed-details"><summary>Bekreftede detaljer og historisk kilde</summary>{props.historicalDetails}</details><details><summary>Godtatte ukjente fakta</summary><ul>{plan.unknowns.map(item => <li key={item.id}>{item.label}</li>)}</ul></details></>}
       </div>

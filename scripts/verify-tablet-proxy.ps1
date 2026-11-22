@@ -21,6 +21,12 @@ try {
     Invoke-TabletDocker run -d --pull never --name ($tabletId + '-gateway') --network $tabletId --network-alias gateway --user 101:101 --cap-drop ALL --security-opt no-new-privileges:true --read-only --tmpfs /tmp:mode=1777 -e TABLET_HOST=bus.owner-domain.no $GatewayImage | Out-Null
     $tabletGatewayCreated = $true
     Invoke-TabletDocker run --rm --pull never --name ($tabletId + '-client') --network $tabletId --read-only --mount "type=bind,source=$PSScriptRoot,target=/probe,readonly" $PythonImage python /probe/tablet-proxy-probe.py client
+    foreach ($probeContainer in @(($tabletId + '-gateway'), ($tabletId + '-api'))) {
+        $probeLogs = (& docker logs $probeContainer 2>&1 | Out-String)
+        if ($LASTEXITCODE -ne 0) { throw 'Cannot inspect synthetic proxy logs' }
+        if ($probeLogs.Contains('synthetic-password-log-probe')) { throw 'Synthetic password body appeared in proxy test logs' }
+    }
+    Write-Output 'PASS: synthetic password body absent from gateway and probe upstream logs'
     Invoke-TabletDocker stop -t 1 ($tabletId + '-api') | Out-Null
     Invoke-TabletDocker run --rm --pull never --name ($tabletId + '-client') --network $tabletId --read-only --mount "type=bind,source=$PSScriptRoot,target=/probe,readonly" $PythonImage python /probe/tablet-proxy-probe.py down
 } finally {

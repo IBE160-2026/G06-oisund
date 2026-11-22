@@ -51,13 +51,21 @@ def test_modes_are_explicit_and_exclusive(monkeypatch):
 def test_https_http_boundary_cookies_and_csrf(monkeypatch):
     # No TestClient context manager: intentionally do not run DB startup/cleanup.
     from app import private_main
+    owner = uuid4()
 
     class FakeConnection:
-        def execute(self, *args):
+        def execute(self, sql, *args):
+            if sql.startswith('SELECT owner FROM sessions'):
+                token_hash, = args[0]
+                self.row = {'owner': owner} if token_hash == auth.digest('synthetic-session') else None
+            elif 'csrf_key' in sql:
+                self.row = {'csrf_key': 'synthetic-test-key'}
+            else:
+                self.row = None
             return self
 
         def fetchone(self):
-            return {'csrf_key': 'synthetic-test-key'}
+            return self.row
 
     @contextmanager
     def fake_database():
@@ -67,7 +75,7 @@ def test_https_http_boundary_cookies_and_csrf(monkeypatch):
     monkeypatch.setattr(private_main, 'database', fake_database)
     now = datetime.now(timezone.utc)
     monkeypatch.setattr(auth, 'authenticate', lambda *args: (
-        'synthetic-session', {'owner': uuid4(), 'created_at': now, 'expires_at': now + timedelta(days=14)}))
+        'synthetic-session', {'owner': owner, 'created_at': now, 'expires_at': now + timedelta(days=14)}))
     client = TestClient(private_main.app, base_url='https://bus.owner-domain.no')
     csrf = client.get('/auth/csrf')
     assert csrf.status_code == 200

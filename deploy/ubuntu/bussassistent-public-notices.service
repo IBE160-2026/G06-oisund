@@ -1,0 +1,12 @@
+[Unit]
+Description=Bussassistent public Entur SIRI-SX refresh
+Wants=network-online.target
+After=network-online.target bussassistent.service
+ConditionPathExists=!/etc/bussassistent/maintenance/pending.json
+ConditionPathExists=/opt/bussassistent/current/backend/app/public_notice_bundle.py
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/bussassistentctl refresh-public-notices
+TimeoutStartSec=310
+UMask=0077
