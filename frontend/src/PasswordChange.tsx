@@ -7,11 +7,17 @@ export function PasswordChange({ submit, cancel, busy }: { submit: (fields: Pass
   const [fields, setFields] = useState(empty);
   const [message, setMessage] = useState('');
   const [invalid, setInvalid] = useState<keyof PasswordFields | null>(null);
+  const [focusField, setFocusField] = useState<keyof PasswordFields | null>(null);
   const heading = useRef<HTMLHeadingElement>(null);
   useEffect(() => { heading.current?.focus(); }, []);
+  useEffect(() => {
+    if (busy || !focusField) return;
+    document.getElementById('change-' + focusField)?.focus();
+    setFocusField(null);
+  }, [busy, focusField]);
   function feedback(field: keyof PasswordFields, text: string) {
     setInvalid(field); setMessage(text);
-    requestAnimationFrame(() => document.getElementById('change-' + field)?.focus());
+    setFocusField(field);
   }
   async function save(event: React.FormEvent) {
     event.preventDefault();
