@@ -148,7 +148,10 @@ export function PrivateAccess() {
     }
     try { return await response.json(); }
     catch (error) {
-      if (error instanceof SyntaxError) throw Object.assign(Error('Serveren returnerte et ugyldig svar.'), { importFailure: 'response' });
+      // WebKit can report invalid JSON as a DOMException named SyntaxError.
+      if (typeof error === 'object' && error !== null && 'name' in error && error.name === 'SyntaxError') {
+        throw Object.assign(Error('Serveren returnerte et ugyldig svar.'), { importFailure: 'response' });
+      }
       throw error;
     }
   }
