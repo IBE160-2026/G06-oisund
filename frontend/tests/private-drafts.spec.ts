@@ -75,12 +75,55 @@ test('draft bus fresh writes share Unicode rules and invalid input remains edita
     await expect(input).toHaveAccessibleDescription(/Inndata er beholdt/);
     expect(writes).toBe(0);
   }
-  for (const [value, expected] of [['\u0085\u2003', ''], ['\ufeff', '\ufeff'], [' 0006 / 090 ', ' 0006 / 090 '], ['🚍'.repeat(100), '🚍'.repeat(100)]] as const) {
-    await input.fill(value); await save.focus(); await page.keyboard.press('Enter');
-    await expect(status(page)).toContainText('Lagret. Versjon'); await expect(input).toHaveValue(expected);
+  const validValues = [['\u0085\u2003', ''], ['\ufeff', '\ufeff'], [' 0006 / 090 ', ' 0006 / 090 '], ['🚍'.repeat(100), '🚍'.repeat(100)]] as const;
+  for (const [index, [value, expected]] of validValues.entries()) {
+    await expect(input).toBeEnabled();
+    await input.fill(value);
+    await expect(input).toHaveValue(value);
+    await save.press('Enter');
+    await expect(status(page)).toHaveText(`Lagret. Versjon ${index + 1}.`);
+    await expect(input).toHaveValue(expected);
     await expect(input).toHaveAttribute('aria-invalid', 'false');
     await expect(page.locator('#draft-bus-error')).toHaveCount(0);
   }
+});
+
+test('a draft save restores keyboard focus before editing resumes', async ({ page }) => {
+  await login(page);
+  await expect(page.locator('.draft-loaded-count')).toContainText('Lastet ');
+  const bus = page.getByLabel('Buss/vogn', { exact: true });
+  const save = page.getByRole('button', { name: 'Lagre utkast', exact: true });
+  await bus.fill('Første buss');
+
+  let refreshReady!: () => void;
+  const refreshGate = new Promise<void>(resolve => { refreshReady = resolve; });
+  await page.route('**:8001/drafts', async route => {
+    if (route.request().method() === 'GET') await refreshGate;
+    await route.continue();
+  });
+  await bus.evaluate(element => {
+    const input = element as HTMLInputElement;
+    let wasDisabled = false;
+    const observer = new MutationObserver(() => {
+      if (input.matches(':disabled')) { wasDisabled = true; return; }
+      if (!wasDisabled) return;
+      observer.disconnect();
+      input.focus();
+    });
+    observer.observe(input.closest('fieldset')!, { attributes: true, attributeFilter: ['disabled'] });
+  });
+  try {
+    await save.press('Enter');
+    await expect(status(page)).toHaveText('Lagret. Versjon 1.');
+    await expect(bus).toBeDisabled();
+  } finally { refreshReady(); }
+  await expect(bus).toBeEnabled();
+  await page.evaluate(() => new Promise(requestAnimationFrame));
+  await expect(bus).toBeFocused();
+  await page.keyboard.press('End');
+  await page.keyboard.insertText(' A');
+  await expect(bus).toHaveValue('Første buss A');
+  await expect(status(page)).toHaveText('Ulagrede endringer.');
 });
 
 test('all 201 saved drafts remain reachable and the final page reopens', async ({ page }) => {

@@ -1,5 +1,5 @@
 import { privateNow } from './privateClock';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { recoverOperation } from './recoverOperation';
 import { PrivateTimeInput } from './PrivateTimeInput';
 import { PrivateConfirmation } from './PrivateConfirmation';
@@ -159,11 +159,13 @@ export function PrivateDrafts({ upload, request, mutation, dirtyChanged, setting
   }
   useEffect(() => { alive.current = true; void refresh(); return () => { alive.current = false; }; }, []);
   useEffect(() => { if (focusLoadedCount.current) { focusLoadedCount.current = false; loadedCount.current?.focus(); } }, [list]);
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (busy || !saveFocus) return;
     setSaveFocus(null);
     if (screen !== 'editor' || suspended || !workspaceVisible) return;
     const { previous, timeIdentity, controlIndex, position } = saveFocus;
+    const active = document.activeElement;
+    if (active && active !== document.body && active !== previous) return;
     const container = timeIdentity ? Array.from(document.querySelectorAll('[data-draft-time]')).find(element => element.getAttribute('data-draft-time') === timeIdentity) : null;
     const replacement = container?.querySelectorAll<HTMLElement>('input,select,button')[controlIndex] ?? container?.querySelector<HTMLInputElement>('input');
     const target = previous?.isConnected ? previous : replacement;
