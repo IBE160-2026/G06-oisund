@@ -158,6 +158,10 @@ Denne kommandoen sammenligner før-/etterfingeravtrykk, gjenoppretter dumpen i
 en unik PostgreSQL-container uten nettverk eller vertsporter, kun tmpfs-data,
 og sammenligner alle tabeller. Container og midlertidig volum slettes etterpå.
 Kjør i rolig periode: samtidige skriv gjør at sammenligningen avvises.
+V2-verktøyet sorterer fingeravtrykk per rad før det beregner tabellverdien.
+Ved manuell sammenligning med `database-fingerprint` må begge uttak bruke
+samme verktøyversjon. Gjenoppretting som allerede er startet bruker algoritmen
+som ble brukt før gjenopprettingen.
 Dette er en restore-prøve, ikke kommando for produksjonsrestore.
 Førstegangskommandoen restore-initial avviser allerede deployet/ikke-tom database.
 

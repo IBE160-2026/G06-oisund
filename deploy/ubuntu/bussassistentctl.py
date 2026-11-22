@@ -25,6 +25,7 @@ MAINTENANCE = Path('/etc/bussassistent/maintenance')
 SHA = re.compile(r'[a-f0-9]{40}')
 RESTORE_OPERATION = re.compile(r'[a-f0-9]{32}')
 RESTORE_SETTING = 'bussassistent.restore_operation'
+FINGERPRINT_VERSION = 2
 INITIAL_EMPTY_CHECK = """NOT EXISTS (
     SELECT 1 FROM pg_depend
     WHERE refclassid = 'pg_namespace'::regclass AND refobjid = 'public'::regnamespace
@@ -383,11 +384,33 @@ SELECT 'extension=' || extname || ':' || extversion FROM pg_extension ORDER BY e
             '-d', 'private_work', '-Atc', sql)
 
 
-def fingerprint_sql():
-    return "CREATE TEMP TABLE fingerprints(table_name text, row_count bigint, digest text);\nDO $body$\nDECLARE r record;\nBEGIN\nFOR r IN SELECT tablename FROM pg_tables WHERE schemaname='public' ORDER BY tablename LOOP\nEXECUTE format($fmt$INSERT INTO fingerprints SELECT %L, count(*),\nmd5(coalesce(string_agg(row_to_json(t)::text, chr(10) ORDER BY row_to_json(t)::text), ''))\nFROM public.%I t$fmt$, r.tablename, r.tablename);\nEND LOOP;\nEND $body$;\nSELECT * FROM fingerprints ORDER BY table_name;"
-def database_fingerprint(path, capture=False):
+def fingerprint_sql(version=FINGERPRINT_VERSION):
+    if version == 1:
+        # A restore begun by the preceding helper can leave a durable receipt.
+        rows = 'FROM public.%I t'
+        digest = "md5(coalesce(string_agg(row_to_json(t)::text, chr(10) ORDER BY row_to_json(t)::text), ''))"
+    else:
+        # Sort fixed-size hashes instead of concatenating the full catalogue JSON.
+        rows = """FROM (SELECT sha256(convert_to(row_to_json(t)::text, 'UTF8')) AS row_digest
+                           FROM public.%I t) AS rows"""
+        digest = "md5(coalesce(string_agg(row_digest, ''::bytea ORDER BY row_digest), ''::bytea))"
+    return f"""CREATE TEMP TABLE fingerprints(table_name text, row_count bigint, digest text);
+DO $body$
+DECLARE r record;
+BEGIN
+  FOR r IN SELECT tablename FROM pg_tables WHERE schemaname='public' ORDER BY tablename LOOP
+    EXECUTE format($fmt$
+      INSERT INTO fingerprints SELECT %L, count(*), {digest}
+      {rows}
+    $fmt$, r.tablename, r.tablename);
+  END LOOP;
+END $body$;
+SELECT * FROM fingerprints ORDER BY table_name;"""
+
+
+def database_fingerprint(path, capture=False, *, version=FINGERPRINT_VERSION):
     return compose(path, 'exec', '-T', 'private-db', 'psql', '-U', 'tablet_bootstrap',
-                   '-d', 'private_work', '-qAtc', fingerprint_sql(), capture_output=capture, text=capture)
+                   '-d', 'private_work', '-qAtc', fingerprint_sql(version), capture_output=capture, text=capture)
 
 def install_tools(path):
     import shutil
@@ -677,6 +700,7 @@ def read_restore_metadata(path):
 def restore_state():
     state = read_restore_metadata(MAINTENANCE / 'pending.json')
     if (not SHA.fullmatch(state['release']) or not RESTORE_OPERATION.fullmatch(state['operation'])
+            or state.get('fingerprint_version', 1) not in (1, FINGERPRINT_VERSION)
             or state['stage'] not in {'prepared', 'closed', 'replacing', 'replaced', 'quarantined', 'retaining', 'verified', 'opening', 'ingress-committed'}):
         raise ValueError('Invalid restore state')
     if release().name != state['release']:
@@ -990,13 +1014,14 @@ def begin_restore(basename, digest, expected_release):
     source_fingerprint = expected.pop('database_fingerprint')
     state = {'operation': operation, 'release': path.name, 'source': basename, 'sha256': digest,
              'expected': expected, 'source_fingerprint': source_fingerprint, 'attempts': 0,
-             'stage': 'prepared', 'transaction_marker': True}
+             'stage': 'prepared', 'transaction_marker': True, 'fingerprint_version': FINGERPRINT_VERSION}
     save_restore(state, 'prepared')
     resume_restore()
 
 
 def resume_restore():
     state = restore_state()
+    fingerprint_version = state.get('fingerprint_version', 1)
     path, directory = release(), ROOT / 'restore' / state['operation']
     if state['stage'] in {'verified', 'opening', 'ingress-committed'}:
         raise ValueError('Restore already verified; use restore-reopen')
@@ -1007,7 +1032,7 @@ def resume_restore():
     if state['stage'] == 'prepared':
         # Never prune the selected source while capturing the pre-replacement copy.
         prior = backup(path, prune=False)
-        state['prior_fingerprint'] = database_fingerprint(path, capture=True).stdout
+        state['prior_fingerprint'] = database_fingerprint(path, capture=True, version=fingerprint_version).stdout
         if state.get('transaction_marker'):
             state['prior_marker'] = database_restore_marker(path)
         import shutil
@@ -1017,7 +1042,7 @@ def resume_restore():
         sync_directory(directory)
         save_restore(state, 'closed')
     if state['stage'] == 'replacing':
-        current = database_fingerprint(path, capture=True).stdout
+        current = database_fingerprint(path, capture=True, version=fingerprint_version).stdout
         if state.get('transaction_marker'):
             # The marker commits with schema, rows and sequence state. Equal
             # table digests alone cannot distinguish commit from rollback.

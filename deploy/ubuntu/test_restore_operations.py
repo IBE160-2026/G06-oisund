@@ -83,6 +83,7 @@ class RestoreOperations(unittest.TestCase):
         self.assertEqual(snapshot.read_bytes(),path.read_bytes())
         self.assertEqual(state['sha256'],digest)
         self.assertEqual(state['stage'],'prepared')
+        self.assertEqual(state['fingerprint_version'],ops.FINGERPRINT_VERSION)
 
     def test_tamper_symlink_and_writable_source_fail_before_pending(self):
         name,path,digest=self.source()
@@ -115,12 +116,12 @@ class RestoreOperations(unittest.TestCase):
                 ops.reopen_restore()
             start.assert_not_called()
 
-    def run_resume(self, stage, fingerprint='source', fail=False, marker=''):
+    def run_resume(self, stage, fingerprint='source', fail=False, marker='', expected_version=1):
         self.state['stage']=stage
         def offline(path,action):
             return {'business':{},'schema':15,'authority_fingerprint':'quarantined'}
         with patch.object(ops,'restore_state',return_value=self.state), patch.object(ops,'release',return_value=self.path), \
-             patch.object(ops,'close_restore'), patch.object(ops,'database_fingerprint',return_value=Mock(stdout=fingerprint)), \
+             patch.object(ops,'close_restore'), patch.object(ops,'database_fingerprint',return_value=Mock(stdout=fingerprint)) as compare, \
              patch.object(ops,'database_restore_marker',return_value=marker), \
              patch.object(ops,'offline',side_effect=offline), patch.object(ops.subprocess,'run'), patch.object(ops,'compose') as compose:
             if fail:
@@ -128,6 +129,8 @@ class RestoreOperations(unittest.TestCase):
             if fail:
                 with self.assertRaises(subprocess.CalledProcessError):ops.resume_restore()
             else:ops.resume_restore()
+            if stage == 'replacing':
+                compare.assert_called_once_with(self.path, capture=True, version=expected_version)
             return compose.call_args_list
 
     def test_ambiguous_success_never_repeats_replacement(self):
@@ -156,6 +159,11 @@ class RestoreOperations(unittest.TestCase):
         calls = self.run_resume('replacing', fail=True, marker='previous')
         self.assertEqual(self.state['stage'], 'replacing')
         self.assertEqual(sum(any('exec psql' in str(arg) for arg in call.args) for call in calls), 1)
+
+    def test_resume_uses_fingerprint_version_recorded_at_preflight(self):
+        self.state.update(fingerprint_version=ops.FINGERPRINT_VERSION, transaction_marker=True, prior_marker='previous')
+        self.run_resume('replacing', marker=self.operation, expected_version=ops.FINGERPRINT_VERSION)
+        self.assertEqual(self.state['stage'], 'verified')
 
     def test_unknown_or_exhausted_replacement_stays_closed(self):
         for fingerprint, attempts in [('unknown',0),('prior',3)]:
