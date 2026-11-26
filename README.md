@@ -1,10 +1,24 @@
-# G06 — Individuell: reproducible V1
+# Bussassistent V2 for Tromsø
 
-IBE160 Programmering med KI, Høgskolen i Molde, autumn 2026. Author: Jonas Øisund.
+IBE160 Programmering med KI, Høgskolen i Molde, høsten 2026. Jonas Øisund.
+
+Bussassistenten lar sjåføren importere en skiftplan fra PDF, kontrollere aktivitetene og finne den daterte avgangen med stopp i kjørerekkefølge. V2 bygger videre på V1 med passordbytte og gjenoppretting, automatiske avviksmeldinger, ruteoppslag, holdeplassprogresjon, GPS-fart og fartsgrense med 300 m-forvarsel der veggrunnlaget er kvalifisert.
+
+## Prøv V2 lokalt
+
+Kjør fra prosjektroten med PowerShell 7.2 eller nyere og Docker Desktop med Linux-containere. Start det lokale prøvemiljøet med `pwsh -File scripts/v2-local.ps1 -Mode Owner`. Åpne `http://127.0.0.1:19661/private`. Følg oppskriften for lokal prøvekonto og stopp miljøet med `pwsh -File scripts/v2-local.ps1 -Mode Owner -Stop`. Det lokale oppsettet og rutekatalogen på feltserveren har ulik datadekning. [Lokalt prøveoppsett og prøvekonto](docs/v2-handoff.md#local-start) · [Feltoppsett og import](docs/v2-field-trial.md)
+
+## Feltgrunnlag for 30. november–10. desember 2026
+
+Ubuntu kjørte produktcommit `d415383` ved etterkontrollen 22. november. Katalogen for feltperioden inneholder 11 150 planlagte avganger på 21 linjer og 457 plattformer. Innlogging og oppslag over mobilnett ble prøvd med linje 26 fra Pyramiden. Sju plattformer trenger manuelt holdepunkt. Ved uavklart vegregulering viser appen **Ukjent** og holder tilbake forvarselet. Reell GPS-fart, automatisk progresjon og vegvarsling gjenstår å verifisere i felt. [Feltoppskrift, linjer og begrensninger](docs/v2-field-trial.md)
+
+## V1 som innleveringsgrunnlag
+
+Den opprinnelige V1-milepælen har egen oppstartsoppskrift, syntetiske eksempeldata og dokumenterte akseptanseprøver. Resten av denne README-en beskriver V1 ved de angitte datoene. [Innleveringsoversikt for V1](docs/submission/README.md)
 
 This V1 imports a supported text-PDF shift, permits correction and explicit saving, confirms a saved plan, and supports manual activity selection, shift status and source-linked notices. React/TypeScript talks to actual FastAPI and PostgreSQL. Planned times never establish real progress or road clearance. Stories 12.1–12.5 are accepted; [12.5 owner decision](docs/evidence/12-5-owner-acceptance-2026-10-28.md) records the completed final assessment. Epic12 and consolidated local V1 are complete after [accepted D1–D3 main integration](docs/evidence/v1-main-integration-20261029.md). [Submission index](docs/submission/README.md).
 
-## Current operations status — 17 November 2026
+## V1 operations status — 17 November 2026
 
 **Current source review — 17 November 2026; last server observation — 15 November:** O3 and O5 are complete within their documented scopes; O4 is administratively closed with its recorded evidence limits. O6 maintenance, closing checks and scoped triage are complete; aggregate O6 remains open under the unchanged temporary, bounded risk disposition. Firmware is separately deferred. Full O6 closure is not a general password-release prerequisite. [Exact source/build reconciliation, 17 November](docs/evidence/o6-kernel-source-20261117.md): of the original 56 kernel residuals, 51 are fixed in the package matching the active build, one (legacy NTFS) is not affected, and four remain open (BPF, AMDGPU, DRM-pagemap, ksmbd). Binder is source-verified fixed; legacy NTFS code is absent despite a misleading config entry. Both local conclusions differ from the Ubuntu tracker. The four remaining code defects await supported Ubuntu fixes; historical runtime barriers are not new measurements. Library residuals remain open, and Ubuntu again confirms the deferred journald fix. Last server evidence is 15 November at 20:02:17 CET: active 7.0.0-43.43, release link 7921eb5, active app/tunnel/backup timer and passed health/origin checks; Jonas confirmed normal login/display. Last verified automatic backup is 15 November at 03:17:19; no postboot backup, new restore, package/image inventory or runtime-barrier measurement is claimed. No server change or expanded risk acceptance.
 
@@ -17,7 +31,7 @@ This V1 imports a supported text-PDF shift, permits correction and explicit savi
 - **Independent local assessment:** follow the exact-checkout recipe below, with synthetic data and a generated local account. The assessor needs no Jonas server, account, private data or Cloudflare access.
 - **Integrated Ubuntu operations:** [server guide](docs/ubuntu-server.md), with its own deployment/backup/recovery tests and owner acceptance. The last verified Ubuntu release was `7921eb54e4816aaab9368c3efd851bcf692f3823` on 4 November, with application/container/deployment sources matching v1.0.1. Owner output on 15 November confirms the same current release link; actual container image identity remains unverified. The earlier deployment below belongs to the v1.0.0 checkpoint. [GitHub release](https://github.com/IBE160-2026/G06-oisund/releases/tag/v1.0.0) and [actual backup/deploy/check record](docs/evidence/v1-release-deploy-20261031.md). The earlier final-control source was `8e59073`. A Git push does not update the server. Handover is complete; long-term stability observation continues. [Version and evidence map](docs/submission/v1-scope-and-operations.md).
 
-## Exact delivery checkout and startup
+## V1 delivery checkout and startup
 
 Use the **full delivery commit SHA provided with the course delivery**. Run directly from that checkout so this README and the final evidence stay alongside the product. Do not switch back to C1 or c067fdb as part of startup. The controlled project version is the annotated `v1.0.0` tag. Resolve its full SHA with `git rev-parse 'v1.0.0^{commit}'`; the publication receipt supplies the exact target. [Final checks](docs/evidence/v1-final-control-20261031.md) qualify the package and fresh local recipe. O3/O5 are complete within scope, O4 is administratively closed with evidence limits, and named O6 residuals remain open; later course logistics/submission remain separate. The [repository reflection](docs/submission/ai-reflection.md) is reviewed and approved by Jonas; the separate Norwegian course report is unaffected. [The separate Access report](docs/evidence/access-operations-20261029.md) now documents O1 and bounded O2 passed on operational release eb0eee3, not C1/main. The tag and GitHub release are published; the exact tagged commit was separately deployed with backup/after-checks. The tag is unchanged. Complete coursework submission remains separate. V1 includes the completed Ubuntu integration; [current scope and version/evidence boundaries](docs/submission/v1-scope-and-operations.md) supersede the earlier bonus/v1.0.1 boundary.
 
