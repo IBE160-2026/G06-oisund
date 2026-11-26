@@ -1,0 +1,9 @@
+[core]
+project_name = "Automatic notices experimental epic"
+communication_language = "Norwegian"
+document_output_language = "English"
+output_folder = "D:/IBE160-plan-automatic-notices/_bmad-output/experimental-extensions/automatic-notices/planning"
+[modules.bmm]
+planning_artifacts = "D:/IBE160-plan-automatic-notices/_bmad-output/experimental-extensions/automatic-notices/planning"
+implementation_artifacts = "D:/IBE160-plan-automatic-notices/_bmad-output/experimental-extensions/automatic-notices/planning/not-started"
+project_knowledge = "D:/IBE160-plan-automatic-notices/_bmad-output/experimental-extensions/automatic-notices/specs/spec-automatic-notices"

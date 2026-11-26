@@ -1,0 +1,37 @@
+{
+  "resolver_root": "D:\\IBE160-plan-automatic-notices\\_bmad-output\\experimental-extensions\\automatic-notices\\specs\\spec-automatic-notices\\.bmad-runner",
+  "installed_skill": "D:\\IBE160-plan-automatic-notices\\.agents\\skills\\bmad-spec",
+  "slug": "automatic-notices",
+  "spec_folder": "D:\\IBE160-plan-automatic-notices\\_bmad-output\\experimental-extensions\\automatic-notices\\specs\\spec-automatic-notices",
+  "resolved": [
+    {
+      "workflow": {
+        "activation_steps_prepend": [],
+        "activation_steps_append": [],
+        "persistent_facts": [],
+        "on_complete": "",
+        "spec_template": "assets/spec-template.md",
+        "spec_filename": "SPEC.md",
+        "spec_output_path": "D:/IBE160-plan-automatic-notices/_bmad-output/experimental-extensions/automatic-notices/specs",
+        "run_folder_pattern": "spec-{slug}"
+      }
+    },
+    {
+      "core": {
+        "project_name": "IBE160 automatic notices experimental spec",
+        "communication_language": "Norwegian",
+        "document_output_language": "English",
+        "output_folder": "D:/IBE160-plan-automatic-notices/_bmad-output/experimental-extensions/automatic-notices/specs/spec-automatic-notices"
+      },
+      "modules": {
+        "bmm": {
+          "planning_artifacts": "D:/IBE160-plan-automatic-notices/_bmad-output/experimental-extensions/automatic-notices/specs/spec-automatic-notices",
+          "implementation_artifacts": "D:/IBE160-plan-automatic-notices/_bmad-output/experimental-extensions/automatic-notices/specs/spec-automatic-notices",
+          "project_knowledge": "D:/IBE160-plan-automatic-notices/_bmad-output/experimental-extensions/automatic-notices/specs/spec-automatic-notices"
+        }
+      }
+    }
+  ],
+  "hooks_executed": [],
+  "mode": "artifact-first express; user requested Norwegian final, not headless JSON"
+}

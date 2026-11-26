@@ -1,0 +1,14 @@
+{
+  "checked_at": "2026-10-27T20:33:19",
+  "root": "D:\\IBE160-plan-speed-limits",
+  "branch": "codex/plan-speed-limits",
+  "head": "74849ff21bee108fe9cff93d740a96a6c6d2d7c5",
+  "relative_links_missing": [],
+  "capabilities": 5,
+  "acceptance_cases": 12,
+  "new_files_outside_area": false,
+  "whitespace_check": "pass including untracked Markdown",
+  "product_tests_run": false,
+  "baseline": "untracked extension: additive document inspection, not historical diff",
+  "sample_sha256": "3a34bb1adb5f212eaa6716e38d33d1a2b2230ab7b7dfe0e480c9cdae0648c051"
+}

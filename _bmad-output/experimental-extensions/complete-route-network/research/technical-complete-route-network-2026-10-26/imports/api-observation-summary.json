@@ -1,0 +1,248 @@
+{
+  "access_date": "2026-10-26",
+  "line": "TRO:Line:1_20",
+  "templates": 799,
+  "active_on_2026_10_26": 136,
+  "observed_date_min": "2026-10-19",
+  "observed_date_max": "2027-02-28",
+  "variants": [
+    {
+      "direction": "outbound",
+      "from": "Skattøra Borettslag",
+      "to": "Malmvegen snuplass",
+      "count": 67
+    },
+    {
+      "direction": "inbound",
+      "from": "Malmvegen snuplass",
+      "to": "Skattøra Borettslag",
+      "count": 68
+    },
+    {
+      "direction": "outbound",
+      "from": "Skattøra Borettslag",
+      "to": "Steinnes snuplass",
+      "count": 1
+    }
+  ],
+  "samples": [
+    {
+      "name": "sample0",
+      "id": "TRO:ServiceJourney:20_260918104872543_1009",
+      "privateCode": "1009",
+      "direction": "outbound",
+      "pattern": {
+        "id": "TRO:JourneyPattern:20_Outbound_260918104825105_260819122860815",
+        "name": "20_1_07_Lav"
+      },
+      "count": 42,
+      "first": {
+        "date": "2026-10-26",
+        "stopPositionInPattern": 0,
+        "aimedArrivalTime": "2026-10-26T06:35:00+01:00",
+        "aimedDepartureTime": "2026-10-26T06:35:00+01:00",
+        "realtime": false,
+        "cancellation": false,
+        "destinationDisplay": {
+          "frontText": "Kroken via sentrum"
+        },
+        "scheduledQuay": {
+          "id": "NSR:Quay:90847",
+          "name": "Skattøra Borettslag",
+          "stopPlace": {
+            "id": "NSR:StopPlace:53331",
+            "name": "Skattøra Borettslag"
+          }
+        }
+      },
+      "last": {
+        "date": "2026-10-26",
+        "stopPositionInPattern": 41,
+        "aimedArrivalTime": "2026-10-26T07:25:00+01:00",
+        "aimedDepartureTime": "2026-10-26T07:25:00+01:00",
+        "realtime": false,
+        "cancellation": false,
+        "destinationDisplay": {
+          "frontText": "Kroken"
+        },
+        "scheduledQuay": {
+          "id": "NSR:Quay:100583",
+          "name": "Malmvegen snuplass",
+          "stopPlace": {
+            "id": "NSR:StopPlace:54782",
+            "name": "Malmvegen snuplass"
+          }
+        }
+      },
+      "destinations": [
+        "Kroken via sentrum",
+        "Kroken"
+      ],
+      "repeated_quays": {}
+    },
+    {
+      "name": "sample1",
+      "id": "TRO:ServiceJourney:20_260918105148184_1000",
+      "privateCode": "1000",
+      "direction": "inbound",
+      "pattern": {
+        "id": "TRO:JourneyPattern:20_Inbound_260918105029327_260819122860815",
+        "name": "20_2_04_BRS_Stand"
+      },
+      "count": 43,
+      "first": {
+        "date": "2026-10-26",
+        "stopPositionInPattern": 0,
+        "aimedArrivalTime": "2026-10-26T05:16:00+01:00",
+        "aimedDepartureTime": "2026-10-26T05:16:00+01:00",
+        "realtime": false,
+        "cancellation": false,
+        "destinationDisplay": {
+          "frontText": "Stakkevollan via sentrum"
+        },
+        "scheduledQuay": {
+          "id": "NSR:Quay:93604",
+          "name": "Malmvegen snuplass",
+          "stopPlace": {
+            "id": "NSR:StopPlace:54782",
+            "name": "Malmvegen snuplass"
+          }
+        }
+      },
+      "last": {
+        "date": "2026-10-26",
+        "stopPositionInPattern": 42,
+        "aimedArrivalTime": "2026-10-26T06:09:00+01:00",
+        "aimedDepartureTime": "2026-10-26T06:09:00+01:00",
+        "realtime": false,
+        "cancellation": false,
+        "destinationDisplay": {
+          "frontText": "Stakkevollan"
+        },
+        "scheduledQuay": {
+          "id": "NSR:Quay:90848",
+          "name": "Skattøra Borettslag",
+          "stopPlace": {
+            "id": "NSR:StopPlace:53331",
+            "name": "Skattøra Borettslag"
+          }
+        }
+      },
+      "destinations": [
+        "Stakkevollan via sentrum",
+        "Stakkevollan via UNN",
+        "Stakkevollan"
+      ],
+      "repeated_quays": {}
+    },
+    {
+      "name": "sample2",
+      "id": "TRO:ServiceJourney:20_260918104886042_1133",
+      "privateCode": "1133",
+      "direction": "outbound",
+      "pattern": {
+        "id": "TRO:JourneyPattern:20_Outbound_260918104880982_260819122860815",
+        "name": "20_1_05_BRS_Stein"
+      },
+      "count": 79,
+      "first": {
+        "date": "2026-10-26",
+        "stopPositionInPattern": 0,
+        "aimedArrivalTime": "2026-10-26T23:03:00+01:00",
+        "aimedDepartureTime": "2026-10-26T23:03:00+01:00",
+        "realtime": true,
+        "cancellation": false,
+        "destinationDisplay": {
+          "frontText": "Steinnes via sentrum"
+        },
+        "scheduledQuay": {
+          "id": "NSR:Quay:90847",
+          "name": "Skattøra Borettslag",
+          "stopPlace": {
+            "id": "NSR:StopPlace:53331",
+            "name": "Skattøra Borettslag"
+          }
+        }
+      },
+      "last": {
+        "date": "2026-10-26",
+        "stopPositionInPattern": 78,
+        "aimedArrivalTime": "2026-10-27T00:21:00+01:00",
+        "aimedDepartureTime": "2026-10-27T00:21:00+01:00",
+        "realtime": true,
+        "cancellation": false,
+        "destinationDisplay": {
+          "frontText": "Steinnes"
+        },
+        "scheduledQuay": {
+          "id": "NSR:Quay:92496",
+          "name": "Steinnes snuplass",
+          "stopPlace": {
+            "id": "NSR:StopPlace:54202",
+            "name": "Steinnes snuplass"
+          }
+        }
+      },
+      "destinations": [
+        "Steinnes via sentrum",
+        "Steinnes via Kroken",
+        "Steinnes"
+      ],
+      "repeated_quays": {}
+    },
+    {
+      "name": "sample3",
+      "id": "TRO:ServiceJourney:20_260918105162575_6600",
+      "privateCode": "6600",
+      "direction": "inbound",
+      "pattern": {
+        "id": "TRO:JourneyPattern:20_Inbound_260918105162482_260819122860815",
+        "name": "20_2_02_FrLangn- Skatt"
+      },
+      "count": 25,
+      "first": {
+        "date": "2026-10-31",
+        "stopPositionInPattern": 0,
+        "aimedArrivalTime": "2026-11-01T01:30:00+01:00",
+        "aimedDepartureTime": "2026-11-01T01:30:00+01:00",
+        "realtime": false,
+        "cancellation": false,
+        "destinationDisplay": {
+          "frontText": "Stakkevollan via UNN"
+        },
+        "scheduledQuay": {
+          "id": "NSR:Quay:95300",
+          "name": "Fr. Langes gate",
+          "stopPlace": {
+            "id": "NSR:StopPlace:55683",
+            "name": "Fr. Langes gate"
+          }
+        }
+      },
+      "last": {
+        "date": "2026-10-31",
+        "stopPositionInPattern": 24,
+        "aimedArrivalTime": "2026-11-01T01:50:00+01:00",
+        "aimedDepartureTime": "2026-11-01T01:50:00+01:00",
+        "realtime": false,
+        "cancellation": false,
+        "destinationDisplay": {
+          "frontText": "Stakkevollan"
+        },
+        "scheduledQuay": {
+          "id": "NSR:Quay:90848",
+          "name": "Skattøra Borettslag",
+          "stopPlace": {
+            "id": "NSR:StopPlace:53331",
+            "name": "Skattøra Borettslag"
+          }
+        }
+      },
+      "destinations": [
+        "Stakkevollan via UNN",
+        "Stakkevollan"
+      ],
+      "repeated_quays": {}
+    }
+  ]
+}

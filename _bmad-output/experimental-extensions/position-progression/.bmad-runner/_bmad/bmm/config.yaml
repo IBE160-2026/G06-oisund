@@ -1,0 +1,8 @@
+# Extension-local compatibility view for installed epic workflow.
+project_name: IBE160 position-progression
+user_name: Jonas
+communication_language: Norwegian
+document_output_language: English
+output_folder: "D:/IBE160-plan-position-progression/_bmad-output/experimental-extensions/position-progression"
+planning_artifacts: "D:/IBE160-plan-position-progression/_bmad-output/experimental-extensions/position-progression"
+project_knowledge: "D:/IBE160-plan-position-progression/docs"

@@ -1,0 +1,274 @@
+{
+  "accessed_utc": "2026-10-26T08:46:11.966804+00:00",
+  "url": "https://api.entur.io/journey-planner/v3/graphql",
+  "method": "POST",
+  "query": "{ __type(name:\"Line\") { fields { name description args { name } type { kind name ofType { name } } } } }\n",
+  "client": "ibe160-complete-route-network-research",
+  "status": 200,
+  "headers": {
+    "access-control-allow-credentials": "false",
+    "Content-Length": "2868",
+    "content-type": "application/json",
+    "date": "Mon, 26 Oct 2026 08:46:10 GMT",
+    "vary": "Accept, Accept-Encoding, Accept-Language",
+    "x-correlation-id": "935df2b2-100b-438f-a7b8-c0a8eca7d4a4",
+    "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+    "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+    "pragma": "no-cache",
+    "expires": "0",
+    "x-content-type-options": "nosniff",
+    "strict-transport-security": "max-age=31536000; includeSubDomains",
+    "x-frame-options": "DENY",
+    "x-xss-protection": "1; mode=block",
+    "x-robots-tag": "none",
+    "rate-limit-allowed": "2000",
+    "rate-limit-used": "6",
+    "rate-limit-available": "1994",
+    "rate-limit-range": "PT2M",
+    "rate-limit-expiry-time": "Mon Oct 26 2026 08:46:32 GMT-0000 (GMT)",
+    "access-control-allow-origin": "*",
+    "access-control-allow-headers": "origin, x-requested-with, accept, ET-Client-Name, ET-Client-Id, Content-Type, X-Correlation-Id, entur-pos",
+    "access-control-max-age": "3628800",
+    "access-control-allow-methods": "GET, PUT, POST, DELETE",
+    "x-request-id": "e5369641-19b9-4b0e-a858-8453df97869b",
+    "via": "1.1 google",
+    "Alt-Svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+    "Connection": "close"
+  },
+  "body": {
+    "data": {
+      "__type": {
+        "fields": [
+          {
+            "name": "id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "name": "ID"
+              }
+            }
+          },
+          {
+            "name": "authority",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Authority",
+              "ofType": null
+            }
+          },
+          {
+            "name": "operator",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Operator",
+              "ofType": null
+            }
+          },
+          {
+            "name": "branding",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Branding",
+              "ofType": null
+            }
+          },
+          {
+            "name": "publicCode",
+            "description": "Publicly announced code for line, differentiating it from other lines for the same operator.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            }
+          },
+          {
+            "name": "name",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            }
+          },
+          {
+            "name": "transportMode",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "ENUM",
+              "name": "TransportMode",
+              "ofType": null
+            }
+          },
+          {
+            "name": "transportSubmode",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "ENUM",
+              "name": "TransportSubmode",
+              "ofType": null
+            }
+          },
+          {
+            "name": "description",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            }
+          },
+          {
+            "name": "url",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            }
+          },
+          {
+            "name": "presentation",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Presentation",
+              "ofType": null
+            }
+          },
+          {
+            "name": "bikesAllowed",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "ENUM",
+              "name": "BikesAllowed",
+              "ofType": null
+            }
+          },
+          {
+            "name": "journeyPatterns",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "name": "JourneyPattern"
+              }
+            }
+          },
+          {
+            "name": "quays",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "name": null
+              }
+            }
+          },
+          {
+            "name": "serviceJourneys",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "name": null
+              }
+            }
+          },
+          {
+            "name": "notices",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "name": null
+              }
+            }
+          },
+          {
+            "name": "situations",
+            "description": "Get all situations active for the line.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "name": null
+              }
+            }
+          },
+          {
+            "name": "flexibleLineType",
+            "description": "Type of flexible line, or null if line is not flexible.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            }
+          },
+          {
+            "name": "groupOfLines",
+            "description": "Groups of lines that line is a part of.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "name": null
+              }
+            }
+          },
+          {
+            "name": "isReplacement",
+            "description": "Is this a replacement Line? In NeTEx/SIRI-sourced data this can be set by either\na replacement submode, or a replacement link in a DatedServiceJourney. Only true\nfor GTFS-sourced data if set by the extended GTFS type.\n",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "name": "Boolean"
+              }
+            }
+          },
+          {
+            "name": "replacementsExist",
+            "description": "Are there replacement DatedServiceJourneys for this Line?",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "name": "Boolean"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

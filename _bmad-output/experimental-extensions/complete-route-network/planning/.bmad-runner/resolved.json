@@ -1,0 +1,55 @@
+{
+  "worktree": "D:\\IBE160-plan-complete-route-network",
+  "head": "d4411765ecc99c3e86dac40dd14e8f5dcc78eb09",
+  "config": {
+    "core": {
+      "project_name": "Complete route network P1 planning",
+      "communication_language": "Norwegian",
+      "document_output_language": "English",
+      "output_folder": "D:/IBE160-plan-complete-route-network/_bmad-output/experimental-extensions/complete-route-network"
+    },
+    "modules": {
+      "bmm": {
+        "planning_artifacts": "D:/IBE160-plan-complete-route-network/_bmad-output/experimental-extensions/complete-route-network/planning",
+        "implementation_artifacts": "D:/IBE160-plan-complete-route-network/_bmad-output/experimental-extensions/complete-route-network/planning/not-dispatched",
+        "project_knowledge": "D:/IBE160-plan-complete-route-network/_bmad-output/experimental-extensions/complete-route-network/specs/spec-complete-route-network"
+      }
+    }
+  },
+  "workflows": {
+    "bmad-spec": {
+      "workflow": {
+        "activation_steps_prepend": [],
+        "activation_steps_append": [],
+        "persistent_facts": [],
+        "on_complete": "",
+        "spec_template": "assets/spec-template.md",
+        "spec_filename": "SPEC.md",
+        "spec_output_path": "D:/IBE160-plan-complete-route-network/_bmad-output/experimental-extensions/complete-route-network/specs",
+        "run_folder_pattern": "spec-{slug}"
+      }
+    },
+    "bmad-create-epics-and-stories": {
+      "workflow": {
+        "activation_steps_prepend": [],
+        "activation_steps_append": [],
+        "persistent_facts": [],
+        "on_complete": ""
+      }
+    }
+  },
+  "legacy_config": "user_name: Jonas\nproject_name: Complete route network P1 planning\ncommunication_language: Norwegian\ndocument_output_language: English\nplanning_artifacts: \"D:/IBE160-plan-complete-route-network/_bmad-output/experimental-extensions/complete-route-network/planning\"\nimplementation_artifacts: \"D:/IBE160-plan-complete-route-network/_bmad-output/experimental-extensions/complete-route-network/planning/not-dispatched\"\nproject_knowledge: \"D:/IBE160-plan-complete-route-network/_bmad-output/experimental-extensions/complete-route-network/specs/spec-complete-route-network\"\noutput_folder: \"D:/IBE160-plan-complete-route-network/_bmad-output/experimental-extensions/complete-route-network\"\n",
+  "write_targets": [
+    "D:\\IBE160-plan-complete-route-network\\_bmad-output\\experimental-extensions\\complete-route-network\\planning\\epics.md",
+    "D:\\IBE160-plan-complete-route-network\\_bmad-output\\experimental-extensions\\complete-route-network\\planning\\.memlog.md",
+    "D:\\IBE160-plan-complete-route-network\\_bmad-output\\experimental-extensions\\complete-route-network\\planning\\validation.md",
+    "D:\\IBE160-plan-complete-route-network\\_bmad-output\\experimental-extensions\\complete-route-network\\planning\\validation.json",
+    "D:\\IBE160-plan-complete-route-network\\_bmad-output\\experimental-extensions\\complete-route-network\\planning\\isolation.md",
+    "D:\\IBE160-plan-complete-route-network\\_bmad-output\\experimental-extensions\\complete-route-network\\specs\\spec-complete-route-network\\.memlog.md",
+    "D:\\IBE160-plan-complete-route-network\\_bmad-output\\experimental-extensions\\complete-route-network\\specs\\spec-complete-route-network\\SPEC.md",
+    "D:\\IBE160-plan-complete-route-network\\_bmad-output\\experimental-extensions\\complete-route-network\\specs\\spec-complete-route-network\\technical-addendum.md"
+  ],
+  "all_targets_inside_extension": true,
+  "global_config_changed": false,
+  "adaptation": "Explicit user short brownfield draft: existing spec substitutes PRD; inherited architecture/UX plus short technical supplement; sequential extraction/grouping/stories/document checks without routine approval menus. Completion never means owner acceptance or ready-for-dev. Implementation deferred until V1 complete and tested for a while; only documents/publication authorized."
+}

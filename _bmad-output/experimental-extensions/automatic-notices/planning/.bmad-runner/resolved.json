@@ -1,0 +1,31 @@
+{
+  "customization": {
+    "workflow": {
+      "activation_steps_prepend": [],
+      "activation_steps_append": [],
+      "persistent_facts": [],
+      "on_complete": ""
+    }
+  },
+  "config": {
+    "core": {
+      "project_name": "Automatic notices experimental epic",
+      "communication_language": "Norwegian",
+      "document_output_language": "English",
+      "output_folder": "D:/IBE160-plan-automatic-notices/_bmad-output/experimental-extensions/automatic-notices/planning"
+    },
+    "modules": {
+      "bmm": {
+        "planning_artifacts": "D:/IBE160-plan-automatic-notices/_bmad-output/experimental-extensions/automatic-notices/planning",
+        "implementation_artifacts": "D:/IBE160-plan-automatic-notices/_bmad-output/experimental-extensions/automatic-notices/planning/not-started",
+        "project_knowledge": "D:/IBE160-plan-automatic-notices/_bmad-output/experimental-extensions/automatic-notices/specs/spec-automatic-notices"
+      }
+    }
+  },
+  "actual_epic_output": "D:\\IBE160-plan-automatic-notices\\_bmad-output\\experimental-extensions\\automatic-notices\\planning\\epics.md",
+  "only_extension_paths": true,
+  "installed_skill": "D:\\IBE160-plan-automatic-notices\\.agents\\skills\\bmad-create-epics-and-stories",
+  "adaptation": "User requests short brownfield plan: existing spec substitutes for new PRD; inherited architecture/UX and short technical companion substitute for new workflows. Menu confirmations omitted per explicit one-round-only material-questions direction; all defaults remain provisional, no owner approval inferred. Steps performed as extraction, epic grouping, story drafting and final validation.",
+  "legacy_config_text": "project_name: Automatic notices experimental epic\nuser_name: Jonas\nuser_skill_level: intermediate\ncommunication_language: Norwegian\ndocument_output_language: English\nplanning_artifacts: \"D:/IBE160-plan-automatic-notices/_bmad-output/experimental-extensions/automatic-notices/planning\"\nimplementation_artifacts: \"D:/IBE160-plan-automatic-notices/_bmad-output/experimental-extensions/automatic-notices/planning/not-started\"\nproject_knowledge: \"D:/IBE160-plan-automatic-notices/_bmad-output/experimental-extensions/automatic-notices/specs/spec-automatic-notices\"\noutput_folder: \"D:/IBE160-plan-automatic-notices/_bmad-output/experimental-extensions/automatic-notices/planning\"\n",
+  "rechecked_actual_config": true
+}

@@ -1,0 +1,79 @@
+{
+  "checked_at": "2026-10-27T20:29:15.534619+00:00",
+  "root": "D:\\IBE160-plan-speed-limits",
+  "branch": "codex/plan-speed-limits",
+  "head": "74849ff21bee108fe9cff93d740a96a6c6d2d7c5",
+  "markdown_files_checked": 29,
+  "owned_markdown_diff_checks": 18,
+  "relative_links_missing": [],
+  "whitespace_files": [],
+  "no_index_errors": [],
+  "capabilities": 5,
+  "epics": 1,
+  "stories": 7,
+  "story_bdd_blocks": 35,
+  "acceptance_matrix_cases": 12,
+  "requirements_coverage": "FR1-6 NFR1-4 UX-DR1-4; manual semantic check complete",
+  "changed_paths_outside_area": [],
+  "raw_response_hash_errors": [],
+  "source_requests": 45,
+  "candidate_route": {
+    "scope": "source-document audit; not product test or physical validation",
+    "at": "2026-10-27T20:17:00.561410+00:00",
+    "source_requests": 45,
+    "downloaded_bytes": 1597560,
+    "hash_errors": [],
+    "candidate_segments": 139,
+    "node_gaps": [],
+    "candidate_length_m": 8656.655,
+    "start_node": "1139933",
+    "end_node": "1138796",
+    "roundabout_lengths_m": {
+      "1126029": 26.221,
+      "1126030": 80.824,
+      "1125949": 82.336,
+      "1125950": 18.448
+    },
+    "r2_to_r3_corrected_m": 323.808,
+    "r4_change_node": "3251245",
+    "r4_to_end_m": 37.57,
+    "not_qualified": [
+      "all turn restrictions and vehicle access",
+      "physical signs and temporary/variable regulation",
+      "GPS confidence and geometric error model",
+      "operational source freshness",
+      "final icon bytes/license manifest"
+    ]
+  },
+  "reference_worktree_status_read_only": {
+    "D:\\IBE160": "",
+    "D:\\IBE160-plan-complete-route-network": "",
+    "D:\\IBE160-plan-position-progression": ""
+  },
+  "product_tests_run": false,
+  "implementation_authorized": false,
+  "plan_status": "complete",
+  "diff_basis": "saved before-documents.json for existing docs; additive for new docs, not a commit",
+  "diff_existing_documents": [
+    "README.md",
+    "plan.md",
+    "interfaces.md",
+    "process/validation.md",
+    "specs/spec-speed-limits/.memlog.md",
+    "specs/spec-speed-limits/pilot-manifest.md",
+    "specs/spec-speed-limits/signs-and-rights.md",
+    "specs/spec-speed-limits/SPEC.md",
+    "specs/spec-speed-limits/validation.md",
+    "specs/spec-speed-limits/verification.md",
+    "process/jonas-oisund/999-2026-10-27-20-11-16-fartsgrenseplanlegging.md",
+    "process/jonas-oisund/issues.md"
+  ],
+  "diff_added_documents": [
+    "planning/epics.md",
+    "planning/validation.md",
+    "planning/evidence/routing.md",
+    "specs/spec-speed-limits/technical-addendum.md",
+    "qualification/2026-10-27/qualification.md"
+  ],
+  "diff_path_normalization": "Windows separators normalized before matching saved baseline"
+}

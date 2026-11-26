@@ -1,0 +1,21 @@
+# Editorial review: structure and prose
+
+This document exists to help the developer and owner choose the next bounded route-matching experiment and understand the evidence still needed before adopting an architecture.
+
+Reviewed `research.md` with the explicitly requested structure and prose lenses only. Model: Strategic/Context (Pyramid). Reader: humans. Baseline: Microsoft Writing Style Guide. Resolved customization contains no extra review directives. Preserve the technical voice, exact source identifiers, narrow evidence labels, and explicit qualification limits.
+
+Exact `word_metrics.py` result before edits: **3,432 words**. Sections relevant below: Decision summary 206; Evidence and scope 214; A measurable definition of complete 116; Time, dates and exceptions 178; Actual Tromsø samples 317; Recommendations and next BMAD step 187; Open qualification gates 161; Source appendix 506. Metrics completed with the required explicit workdir. Content is preserved; this review does not challenge the evidence or introduce research claims.
+
+| Pass | Original Text | Revised Text | Changes |
+|---|---|---|---|
+| structure | §A measurable definition of complete (116 words), currently after the access comparison and freshness details | MOVE immediately before the access-comparison table, retaining it as a subsection of §1. | Defines the coverage criterion before readers compare acquisition options. Word impact: 0; the 116 words move intact. |
+| structure | §Decision summary (206 words), especially the recommendation followed by bounded feasibility and unresolved crosswalk | PRESERVE. | Already follows the Pyramid model and makes the decision legible before details. Word impact: 0; no compression recommended. |
+| structure | §Recommendations and next BMAD step (187 words) and §Open qualification gates (161 words) | PRESERVE as separate sections. | The former sequences decisions; the latter is an acceptance checklist. Apparent repetition serves different reading tasks. Word impact: 0. |
+| prose | Across summary, tables and body: “line20”; “at01:30”; “on2026-10-31 becomes2026-11-01”; “performed11”; “HTTP200;7,718,133”; “privateCode1000,1009,1133 and6600”; “Skattøra06:35→Malmvegen07:25+01” | “line 20”; “at 01:30”; “on 2026-10-31 becomes 2026-11-01”; “performed 11”; “HTTP 200; 7,718,133”; “privateCode values 1000, 1009, 1133 and 6600”; “Skattøra 06:35 → Malmvegen 07:25+01” | Restore missing boundaries between prose, values and punctuation throughout. This affects readability of the evidence. Apply to prose and table display text only; preserve IDs, URLs, paths and literal payloads. Also separate citations from the preceding sentence where desired. |
+| prose | §Time: “The invalid service date2026-10-26 produced zero calls.” | “The query for 2026-10-26, when this service did not operate, returned zero calls.” | A valid calendar date is being described as invalid. Clarifies the existing intended operational meaning without changing the result. |
+| prose | §Decision summary: “qualify matching with small Entur Journey Planner lookups first” | “first test matching with small Entur Journey Planner lookups” | Makes the immediate action concrete. Preserve the later caveats about what those tests establish. |
+| prose | First uses: “National Stop Registry references”; “DST is more subtle”; “NLOD reuse” | “National Stop Registry (NSR) references”; “Daylight saving time (DST) is more subtle”; “Reuse under the Norwegian Licence for Open Government Data (NLOD)” | Introduce abbreviations before subsequent use, for an owner who may not know the data standards. Keep later technical names unchanged. |
+
+Seven recommendations: three structure rows and four prose rows. Structural reduction: **0 words (0%)** of 3,432; no length target was supplied. Prose corrections add a few words and spaces, so rerun metrics after editing instead of treating the initial count as final. No comprehension trade-off is proposed: preserve examples, evidence distinctions and qualification gates.
+
+The whitespace finding is one repeated issue, not a separate finding for every occurrence. No changes were made to `research.md` or other research artifacts.

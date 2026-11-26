@@ -1,0 +1,17 @@
+# Access source evidence register
+Retrieved via web tools 2026-10-26. Unique source evidence for access-r1.md and access-r2.md. This register records paraphrased observations, not copied full pages. Source dates are modification/revision dates where available, never assumed publication dates.
+- A1 https://developer.entur.no/open-data/timetable ; modified 2026-05-21. Direct rendering showed Loading; indexed retrieval exposed Troms/Finnmark regional rows, NeTEx+GTFS; no city row. Original-import timestamp in cached Troms row 2026-09-24 14:53:55 is not verified live freshness. Permanent exports update per upload and nightly; max 48h expired retention; most users expected <=1 download/day; GTFS loses content versus NeTEx.
+- A2 https://developer.entur.no/open-data/stops ; modified 2026-05-21. Daily current, current+future, all-version national dumps; current regional NeTEx; unique stop IDs across datasets. Troms link target https://storage.googleapis.com/marduk-production/tiamat/55_Troms_latest.zip obtained by following official link; failed fetch did not download archive.
+- A3 https://developer.entur.no/docs/authentication ; modified 2026-09-01. API client header mandatory; partner OAuth2 separately.
+- A4 https://developer.entur.no/docs/open-services/journey-planner ; modified 2026-06-08. Open NLOD GraphQL POST, client header, realtime + schedules; trip algorithm yields Pareto-optimal and filtered alternatives; TariffZone deprecation.
+- A5 https://developer.entur.no/docs/open-services/journey-planner/rate-limiting ; modified 2026-03-30. Identified trips 500/min,150/sec; other1000/min,200/sec;429 and quota headers; wait quota expiry.
+- A6 https://developer.entur.no/terms-of-service ; modified 2026-09-28. NLOD attribution, modified-data notice, no endorsement/warranty; stable API parallel versions >=12 months and beta exception.
+- A7 https://developer.entur.no/docs/open-services/journey-planner/examples ; modified 2026-03-30. Stop, departure, authority and local-bus examples exist.
+- A8 https://github.com/entur ; no relevant publication date. Official organization links import/conversion/profile repositories; no source code inspected.
+- B1 https://developer.entur.no/apis/timetable-import-info ; https://developer.entur.no/apis/timetable-import-info/timetable-import-info ; dates unspecified. Import dates track provider upload rather than nightly regeneration; open ET-Client-Name API supports all/individual codespaces.
+- B2 https://developer.entur.no/apis/raw-timetable-data ; https://developer.entur.no/apis/raw-timetable-data/raw-timetable-data ; dates unspecified. Partner catalog; original dataset versions/import keys; bearer examples; Accept octet-stream; 1.15/1.16 dsjcompatibility; no retention guarantee.
+- B3 https://developer.entur.no/apis/timetable-management/datasets ; dates unspecified. Private filtered datasets add operations/restricted publication; expire/filter; 1.16 transition.
+- B4 https://gtfs.org/documentation/schedule/reference/ ; revised 2026-04-27. Persistence and future coverage recommendations, not guarantees; service day >24h; shapes conditionally required.
+- B5 https://entur.atlassian.net/wiki/spaces/PUBLIC/pages/728891481/Nordic%2BNeTEx%2BProfile ; updated 2021-04-29. Focused Nordic profile with framework/stops/network/timetable documents.
+- B6 https://developer.entur.no/open-data/realtime ; modified 2026-08-31. TRO mapped Troms; SIRI ET/VM/SX and GTFS-RT updates/positions listed; no GTFS-RT alerts tick for TRO. Realtime alone is not basic journey-planner data.
+

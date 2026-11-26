@@ -1,0 +1,150 @@
+{
+  "accessed_utc": "2026-10-26T08:47:04.224913+00:00",
+  "url": "https://api.entur.io/journey-planner/v3/graphql",
+  "method": "POST",
+  "query": "{ __type(name:\"JourneyPattern\") { fields { name type { kind name ofType { name } } } } }\n",
+  "client": "ibe160-complete-route-network-research",
+  "status": 200,
+  "headers": {
+    "access-control-allow-credentials": "false",
+    "Content-Length": "964",
+    "content-type": "application/json",
+    "date": "Mon, 26 Oct 2026 08:47:03 GMT",
+    "vary": "Accept, Accept-Encoding, Accept-Language",
+    "x-correlation-id": "43fe5c4d-e541-4092-b1a3-864f24ca04d7",
+    "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+    "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+    "pragma": "no-cache",
+    "expires": "0",
+    "x-content-type-options": "nosniff",
+    "strict-transport-security": "max-age=31536000; includeSubDomains",
+    "x-frame-options": "DENY",
+    "x-xss-protection": "1; mode=block",
+    "x-robots-tag": "none",
+    "rate-limit-allowed": "2000",
+    "rate-limit-used": "3",
+    "rate-limit-available": "1997",
+    "rate-limit-range": "PT2M",
+    "rate-limit-expiry-time": "Mon Oct 26 2026 08:48:32 GMT-0000 (GMT)",
+    "access-control-allow-origin": "*",
+    "access-control-allow-headers": "origin, x-requested-with, accept, ET-Client-Name, ET-Client-Id, Content-Type, X-Correlation-Id, entur-pos",
+    "access-control-max-age": "3628800",
+    "access-control-allow-methods": "GET, PUT, POST, DELETE",
+    "x-request-id": "b1495c2e-971f-4f55-ae6b-1ded0b4bb19a",
+    "via": "1.1 google",
+    "Alt-Svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+    "Connection": "close"
+  },
+  "body": {
+    "data": {
+      "__type": {
+        "fields": [
+          {
+            "name": "id",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "name": "ID"
+              }
+            }
+          },
+          {
+            "name": "line",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "name": "Line"
+              }
+            }
+          },
+          {
+            "name": "directionType",
+            "type": {
+              "kind": "ENUM",
+              "name": "DirectionType",
+              "ofType": null
+            }
+          },
+          {
+            "name": "name",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            }
+          },
+          {
+            "name": "serviceJourneys",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "name": null
+              }
+            }
+          },
+          {
+            "name": "serviceJourneysForDate",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "name": null
+              }
+            }
+          },
+          {
+            "name": "quays",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "name": null
+              }
+            }
+          },
+          {
+            "name": "pointsOnLink",
+            "type": {
+              "kind": "OBJECT",
+              "name": "PointsOnLink",
+              "ofType": null
+            }
+          },
+          {
+            "name": "stopToStopGeometries",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "name": "StopToStopGeometry"
+              }
+            }
+          },
+          {
+            "name": "situations",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "name": null
+              }
+            }
+          },
+          {
+            "name": "notices",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "name": null
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

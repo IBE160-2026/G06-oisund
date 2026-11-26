@@ -1,0 +1,1 @@
+{ __schema { queryType { name } } __type(name: "QueryType") { fields { name args { name type { kind name ofType { kind name ofType { name } } } } type { kind name ofType { name } } } } }

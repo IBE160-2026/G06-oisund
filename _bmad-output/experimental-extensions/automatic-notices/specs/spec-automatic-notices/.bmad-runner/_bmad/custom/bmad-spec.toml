@@ -1,0 +1,3 @@
+[workflow]
+spec_output_path = "D:/IBE160-plan-automatic-notices/_bmad-output/experimental-extensions/automatic-notices/specs"
+run_folder_pattern = "spec-{slug}"

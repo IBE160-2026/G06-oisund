@@ -1,0 +1,335 @@
+{
+  "accessed_utc": "2026-10-26T08:45:57.485687+00:00",
+  "url": "https://api.entur.io/journey-planner/v3/graphql",
+  "method": "POST",
+  "query": "{ datedServiceJourneys(lines:[\"TRO:Line:1_20\",\"TRO:Line:1_42\"],operatingDays:[\"2026-10-26\"]) { id operatingDay serviceJourney { id publicCode privateCode directionType line { id publicCode } quays(first:1) { id name } lastQuay:quays(last:1) { id name } } } __type(name:\"EstimatedCall\") { fields { name type { kind name ofType { name } } } } }\n",
+  "client": "ibe160-complete-route-network-research",
+  "status": 200,
+  "headers": {
+    "access-control-allow-credentials": "false",
+    "Content-Length": "2859",
+    "content-type": "application/json",
+    "date": "Mon, 26 Oct 2026 08:45:56 GMT",
+    "vary": "Accept, Accept-Encoding, Accept-Language",
+    "x-correlation-id": "3b30af09-2656-4efb-ade3-08437c026a79",
+    "alt-svc": "h3=\":443\"; ma=2592000",
+    "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+    "pragma": "no-cache",
+    "expires": "0",
+    "x-content-type-options": "nosniff",
+    "strict-transport-security": "max-age=31536000; includeSubDomains",
+    "x-frame-options": "DENY",
+    "x-xss-protection": "1; mode=block",
+    "x-robots-tag": "none",
+    "rate-limit-allowed": "2000",
+    "rate-limit-used": "5",
+    "rate-limit-available": "1995",
+    "rate-limit-range": "PT2M",
+    "rate-limit-expiry-time": "Mon Oct 26 2026 08:46:32 GMT-0000 (GMT)",
+    "access-control-allow-origin": "*",
+    "access-control-allow-headers": "origin, x-requested-with, accept, ET-Client-Name, ET-Client-Id, Content-Type, X-Correlation-Id, entur-pos",
+    "access-control-max-age": "3628800",
+    "access-control-allow-methods": "GET, PUT, POST, DELETE",
+    "x-request-id": "2c0a8633-60f8-413e-b856-8422c507daf2",
+    "via": "1.1 google",
+    "Alt-Svc": "h3=\":443\"; ma=2592000",
+    "Connection": "close"
+  },
+  "body": {
+    "data": {
+      "datedServiceJourneys": [],
+      "__type": {
+        "fields": [
+          {
+            "name": "quay",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "name": "Quay"
+              }
+            }
+          },
+          {
+            "name": "scheduledQuay",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "name": "Quay"
+              }
+            }
+          },
+          {
+            "name": "aimedArrivalTime",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "name": "DateTime"
+              }
+            }
+          },
+          {
+            "name": "expectedArrivalTime",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "name": "DateTime"
+              }
+            }
+          },
+          {
+            "name": "actualArrivalTime",
+            "type": {
+              "kind": "SCALAR",
+              "name": "DateTime",
+              "ofType": null
+            }
+          },
+          {
+            "name": "aimedDepartureTime",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "name": "DateTime"
+              }
+            }
+          },
+          {
+            "name": "expectedDepartureTime",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "name": "DateTime"
+              }
+            }
+          },
+          {
+            "name": "actualDepartureTime",
+            "type": {
+              "kind": "SCALAR",
+              "name": "DateTime",
+              "ofType": null
+            }
+          },
+          {
+            "name": "empiricalDelay",
+            "type": {
+              "kind": "OBJECT",
+              "name": "EmpiricalDelay",
+              "ofType": null
+            }
+          },
+          {
+            "name": "timingPoint",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "name": "Boolean"
+              }
+            }
+          },
+          {
+            "name": "realtime",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "name": "Boolean"
+              }
+            }
+          },
+          {
+            "name": "realTimeJourneyState",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "name": "RealTimeJourneyState"
+              }
+            }
+          },
+          {
+            "name": "predictionInaccurate",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "name": "Boolean"
+              }
+            }
+          },
+          {
+            "name": "occupancyStatus",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "name": "OccupancyStatus"
+              }
+            }
+          },
+          {
+            "name": "stopPositionInPattern",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "name": "Int"
+              }
+            }
+          },
+          {
+            "name": "forBoarding",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "name": "Boolean"
+              }
+            }
+          },
+          {
+            "name": "forAlighting",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "name": "Boolean"
+              }
+            }
+          },
+          {
+            "name": "requestStop",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "name": "Boolean"
+              }
+            }
+          },
+          {
+            "name": "cancellation",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "name": "Boolean"
+              }
+            }
+          },
+          {
+            "name": "extraCall",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "name": "Boolean"
+              }
+            }
+          },
+          {
+            "name": "date",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "name": "Date"
+              }
+            }
+          },
+          {
+            "name": "serviceJourneyEstimatedCalls",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "name": "SJEstimatedCalls"
+              }
+            }
+          },
+          {
+            "name": "serviceJourney",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "name": "ServiceJourney"
+              }
+            }
+          },
+          {
+            "name": "datedServiceJourney",
+            "type": {
+              "kind": "OBJECT",
+              "name": "DatedServiceJourney",
+              "ofType": null
+            }
+          },
+          {
+            "name": "destinationDisplay",
+            "type": {
+              "kind": "OBJECT",
+              "name": "DestinationDisplay",
+              "ofType": null
+            }
+          },
+          {
+            "name": "notices",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "name": null
+              }
+            }
+          },
+          {
+            "name": "situations",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "name": null
+              }
+            }
+          },
+          {
+            "name": "bookingArrangements",
+            "type": {
+              "kind": "OBJECT",
+              "name": "BookingArrangement",
+              "ofType": null
+            }
+          },
+          {
+            "name": "arrivalReplacedBy",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "name": null
+              }
+            }
+          },
+          {
+            "name": "departureReplacedBy",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "name": null
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

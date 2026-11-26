@@ -1,0 +1,2 @@
+EXPERIMENTAL EXTENSION — OUTSIDE APPROVED V1 SCOPE
+Run technical source feasibility research. Svipper first; Entur structured alternatives; Vegvesen pilot supplements. Evidence must distinguish documented capability, observed examples and unverified coverage. No product mutations or external writes. Baseline aa0fcfb48904c7e0bdd6c68280e5db2d21f478ed; worktree codex/plan-automatic-notices. Existing four planning files preserved. Project documents frame questions only. All new artifacts confined to this run. Report in English per resolved config.

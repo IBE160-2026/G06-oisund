@@ -1,0 +1,9 @@
+project_name: Automatic notices experimental epic
+user_name: Jonas
+user_skill_level: intermediate
+communication_language: Norwegian
+document_output_language: English
+planning_artifacts: "D:/IBE160-plan-automatic-notices/_bmad-output/experimental-extensions/automatic-notices/planning"
+implementation_artifacts: "D:/IBE160-plan-automatic-notices/_bmad-output/experimental-extensions/automatic-notices/planning/not-started"
+project_knowledge: "D:/IBE160-plan-automatic-notices/_bmad-output/experimental-extensions/automatic-notices/specs/spec-automatic-notices"
+output_folder: "D:/IBE160-plan-automatic-notices/_bmad-output/experimental-extensions/automatic-notices/planning"

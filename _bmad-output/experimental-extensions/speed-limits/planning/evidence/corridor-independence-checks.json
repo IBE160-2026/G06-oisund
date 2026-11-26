@@ -1,0 +1,20 @@
+{
+  "checked_at": "2026-10-27T20:46:35.583308+00:00",
+  "baseline_commit": "2b27cb8eb213713104d30ffd9870a88e4f0f5d44",
+  "decision": "SL-D12",
+  "relative_links_missing": [],
+  "capabilities": 5,
+  "stories": 7,
+  "acceptance_cases": 14,
+  "new_requirement": "NFR5",
+  "whitespace": "pass",
+  "scope": "documentation only",
+  "product_tests_run": false,
+  "semantic_checks": [
+    "new corridor without core changes",
+    "pilot IDs confined to data and fixtures",
+    "bounded package-set composition",
+    "overlap/identity/conflict/coverage/version and aggregate limits",
+    "original 300m and uncertainty semantics retained"
+  ]
+}

@@ -1,0 +1,2926 @@
+{
+  "status": "planning candidate; all increasing positions; not driving authorization",
+  "summary": {
+    "scope": "source-document audit; not product test or physical validation",
+    "at": "2026-10-27T20:17:00.561410+00:00",
+    "source_requests": 45,
+    "downloaded_bytes": 1597560,
+    "hash_errors": [],
+    "candidate_segments": 139,
+    "node_gaps": [],
+    "candidate_length_m": 8656.655,
+    "start_node": "1139933",
+    "end_node": "1138796",
+    "roundabout_lengths_m": {
+      "1126029": 26.221,
+      "1126030": 80.824,
+      "1125949": 82.336,
+      "1125950": 18.448
+    },
+    "r2_to_r3_corrected_m": 323.808,
+    "r4_change_node": "3251245",
+    "r4_to_end_m": 37.57,
+    "not_qualified": [
+      "all turn restrictions and vehicle access",
+      "physical signs and temporary/variable regulation",
+      "GPS confidence and geometric error model",
+      "operational source freshness",
+      "final icon bytes/license manifest"
+    ]
+  },
+  "segments": [
+    {
+      "occurrence": 1,
+      "source": "pilot-named-roads.json",
+      "reference": "1109722-1-3",
+      "link": 1109722,
+      "start": 0.0,
+      "end": 0.03809427,
+      "from_node": "1139933",
+      "to_node": "3932269",
+      "source_length_m": 100.826,
+      "chainage_m": 0,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (653229.5 7731284.8 5.279,653222.1 7731275.09 5.179,653208.3 7731258.3 5.479,653195.1 7731241.2 5.479,653176.7 7731217.2 5.879,653167.286 7731205.481 5.535)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 2,
+      "source": "pilot-named-roads.json",
+      "reference": "1109722-51-3",
+      "link": 1109722,
+      "start": 0.03809427,
+      "end": 0.04182433,
+      "from_node": "3932269",
+      "to_node": "1139849",
+      "source_length_m": 9.873,
+      "chainage_m": 100.826,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (653167.286 7731205.481 5.535,653161.1 7731197.8 5.979)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 3,
+      "source": "pilot-named-roads.json",
+      "reference": "1109722-2-3",
+      "link": 1109722,
+      "start": 0.04182433,
+      "end": 0.04644019,
+      "from_node": "1139849",
+      "to_node": "3931672",
+      "source_length_m": 12.216,
+      "chainage_m": 110.699,
+      "fields": [
+        "1",
+        "2",
+        "2V1"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (653161.1 7731197.8 5.979,653153.612 7731188.149 5.909)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 4,
+      "source": "pilot-named-roads.json",
+      "reference": "1109722-47-3",
+      "link": 1109722,
+      "start": 0.04644019,
+      "end": 0.10663091,
+      "from_node": "3931672",
+      "to_node": "1139754",
+      "source_length_m": 159.293,
+      "chainage_m": 122.915,
+      "fields": [
+        "1",
+        "2",
+        "2V1"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (653153.612 7731188.149 5.909,653150.5 7731184.41 5.979,653124.9 7731151.7 6.279,653107.7 7731130.41 6.379,653087.9 7731105.59 6.579,653071.4 7731084.09 6.679,653054.7 7731063.3 6.879)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 5,
+      "source": "pilot-named-roads.json",
+      "reference": "1109722-3-3",
+      "link": 1109722,
+      "start": 0.10663091,
+      "end": 0.14606547,
+      "from_node": "1139754",
+      "to_node": "1139696",
+      "source_length_m": 105.0,
+      "chainage_m": 282.208,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (653054.7 7731063.3 6.879,653051.7 7731059.41 6.879,653036.6 7731040.3 6.779,653015.4 7731013.2 6.678,652995.3 7730988.2 6.378,652989.9 7730981.5 6.378)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 6,
+      "source": "pilot-named-roads.json",
+      "reference": "1109722-4-3",
+      "link": 1109722,
+      "start": 0.14606547,
+      "end": 0.16615998,
+      "from_node": "1139696",
+      "to_node": "1139665",
+      "source_length_m": 51.947,
+      "chainage_m": 387.208,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (652989.9 7730981.5 6.378,652980.8 7730970 6.378,652972.4 7730959.09 6.278,652964.888 7730949.018 6.178,652960.621 7730942.514 6.04)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 7,
+      "source": "pilot-named-roads.json",
+      "reference": "1109722-5-3",
+      "link": 1109722,
+      "start": 0.16615998,
+      "end": 0.16713924,
+      "from_node": "1139665",
+      "to_node": "3931699",
+      "source_length_m": 2.961,
+      "chainage_m": 439.155,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (652960.621 7730942.514 6.04,652959.722 7730939.693 6.091)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 8,
+      "source": "pilot-named-roads.json",
+      "reference": "1109722-48-3",
+      "link": 1109722,
+      "start": 0.16713924,
+      "end": 0.17550258,
+      "from_node": "3931699",
+      "to_node": "2385434",
+      "source_length_m": 25.291,
+      "chainage_m": 442.116,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (652959.722 7730939.693 6.091,652957.7 7730934.3 5.978,652956.3 7730924.7 5.678,652954.27 7730915.12 4.888)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 9,
+      "source": "pilot-named-roads.json",
+      "reference": "1109722-40-3",
+      "link": 1109722,
+      "start": 0.17550258,
+      "end": 0.18918514,
+      "from_node": "2385434",
+      "to_node": "3931695",
+      "source_length_m": 33.017,
+      "chainage_m": 467.407,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (652954.27 7730915.12 4.888,652949.9 7730894.5 4.178,652946.617 7730883.034 4.178)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 10,
+      "source": "pilot-named-roads.json",
+      "reference": "1109722-49-3",
+      "link": 1109722,
+      "start": 0.18918514,
+      "end": 0.19357691,
+      "from_node": "3931695",
+      "to_node": "1139654",
+      "source_length_m": 10.598,
+      "chainage_m": 500.424,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (652946.617 7730883.034 4.178,652945.7 7730880 4.178,652943.279 7730872.978 4.098)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 11,
+      "source": "pilot-named-roads.json",
+      "reference": "1109722-6-3",
+      "link": 1109722,
+      "start": 0.19357691,
+      "end": 0.2288911,
+      "from_node": "1139654",
+      "to_node": "1139641",
+      "source_length_m": 97.668,
+      "chainage_m": 511.022,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (652943.279 7730872.978 4.098,652938.8 7730862.7 4.278,652934.4 7730852 4.578,652932.5 7730847.8 4.878,652924 7730831 5.578,652915.5 7730815.3 5.978,652905.7 7730797.8 6.378,652898.8 7730786.2 6.778)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 12,
+      "source": "pilot-named-roads.json",
+      "reference": "1109722-7-3",
+      "link": 1109722,
+      "start": 0.2288911,
+      "end": 0.26443102,
+      "from_node": "1139641",
+      "to_node": "2378398",
+      "source_length_m": 94.055,
+      "chainage_m": 608.69,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (652898.8 7730786.2 6.778,652888.8 7730768.59 7.478,652881.4 7730755.09 7.878,652870.1 7730734 8.478,652864.6 7730723.59 8.978,652855.4 7730705.2 9.178,652854.55 7730703.27 9.208)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 13,
+      "source": "pilot-named-roads.json",
+      "reference": "1109722-35-3",
+      "link": 1109722,
+      "start": 0.26443102,
+      "end": 0.26561182,
+      "from_node": "2378398",
+      "to_node": "1139614",
+      "source_length_m": 3.127,
+      "chainage_m": 702.745,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (652854.55 7730703.27 9.208,652853.1 7730700.5 9.178)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 14,
+      "source": "pilot-named-roads.json",
+      "reference": "1109722-8-3",
+      "link": 1109722,
+      "start": 0.26561182,
+      "end": 0.29843823,
+      "from_node": "1139614",
+      "to_node": "1139593",
+      "source_length_m": 86.687,
+      "chainage_m": 705.872,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (652853.1 7730700.5 9.178,652850.9 7730695.8 9.178,652846.2 7730685.8 8.778,652830 7730655.3 8.778,652815.8 7730631.41 8.778,652811.7 7730624.2 8.478)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 15,
+      "source": "pilot-named-roads.json",
+      "reference": "1109722-9-3",
+      "link": 1109722,
+      "start": 0.29843823,
+      "end": 0.30325912,
+      "from_node": "1139593",
+      "to_node": "3931647",
+      "source_length_m": 12.875,
+      "chainage_m": 792.559,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (652811.7 7730624.2 8.478,652805.251 7730613.061 8.141)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 16,
+      "source": "pilot-named-roads.json",
+      "reference": "1109722-50-3",
+      "link": 1109722,
+      "start": 0.30325912,
+      "end": 0.32412014,
+      "from_node": "3931647",
+      "to_node": "1957686",
+      "source_length_m": 54.867,
+      "chainage_m": 805.434,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (652805.251 7730613.061 8.141,652802.2 7730607.91 7.978,652788.7 7730584 6.978,652779.02 7730564.93 6.16)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 17,
+      "source": "pilot-named-roads.json",
+      "reference": "1109722-34-3",
+      "link": 1109722,
+      "start": 0.32412014,
+      "end": 0.34948203,
+      "from_node": "1957686",
+      "to_node": "1139549",
+      "source_length_m": 67.343,
+      "chainage_m": 860.301,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (652779.02 7730564.93 6.16,652768.2 7730544.59 5.278,652758.5 7730525.7 4.678,652747.8 7730505.3 4.078)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 18,
+      "source": "pilot-named-roads.json",
+      "reference": "1109722-10-3",
+      "link": 1109722,
+      "start": 0.34948203,
+      "end": 0.35423323,
+      "from_node": "1139549",
+      "to_node": "1139548",
+      "source_length_m": 12.547,
+      "chainage_m": 927.644,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (652747.8 7730505.3 4.078,652745.2 7730499.59 3.978,652743.04 7730495 3.898)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 19,
+      "source": "pilot-named-roads.json",
+      "reference": "1109722-11-3",
+      "link": 1109722,
+      "start": 0.35423323,
+      "end": 0.37315786,
+      "from_node": "1139548",
+      "to_node": "3334580",
+      "source_length_m": 51.187,
+      "chainage_m": 940.191,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (652743.04 7730495 3.898,652735.8 7730481 3.578,652726.2 7730461.41 3.578,652720.45 7730449.02 3.41)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 20,
+      "source": "pilot-named-roads.json",
+      "reference": "1109722-41-3",
+      "link": 1109722,
+      "start": 0.37315786,
+      "end": 0.37458286,
+      "from_node": "3334580",
+      "to_node": "1139534",
+      "source_length_m": 3.854,
+      "chainage_m": 991.378,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (652720.45 7730449.02 3.41,652718.7 7730445.59 3.578)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 21,
+      "source": "pilot-named-roads.json",
+      "reference": "1109722-12-3",
+      "link": 1109722,
+      "start": 0.37458286,
+      "end": 0.37683168,
+      "from_node": "1139534",
+      "to_node": "1139531",
+      "source_length_m": 5.957,
+      "chainage_m": 995.232,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (652718.7 7730445.59 3.578,652717.4 7730442.91 3.578,652716.2 7730440.2 3.578)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 22,
+      "source": "pilot-named-roads.json",
+      "reference": "1109722-13-3",
+      "link": 1109722,
+      "start": 0.37683168,
+      "end": 0.39409225,
+      "from_node": "1139531",
+      "to_node": "1139523",
+      "source_length_m": 45.722,
+      "chainage_m": 1001.189,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (652716.2 7730440.2 3.578,652710.7 7730428.5 3.578,652702.2 7730410.7 4.078,652697.4 7730398.59 4.278)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 23,
+      "source": "pilot-named-roads.json",
+      "reference": "1109722-14-3",
+      "link": 1109722,
+      "start": 0.39409225,
+      "end": 0.42126077,
+      "from_node": "1139523",
+      "to_node": "1139511",
+      "source_length_m": 71.968,
+      "chainage_m": 1046.911,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (652697.4 7730398.59 4.278,652697.1 7730398 4.378,652688.1 7730376.2 4.478,652680.9 7730356 4.678,652672.2 7730331.3 5.078)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 24,
+      "source": "pilot-named-roads.json",
+      "reference": "1109722-15-3",
+      "link": 1109722,
+      "start": 0.42126077,
+      "end": 0.43056898,
+      "from_node": "1139511",
+      "to_node": "1202190",
+      "source_length_m": 22.966,
+      "chainage_m": 1118.879,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (652672.2 7730331.3 5.078,652671.4 7730329.2 5.078,652667.388 7730315.788 5.178,652665.345 7730309.41 5.04)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 25,
+      "source": "pilot-named-roads.json",
+      "reference": "1109722-16-3",
+      "link": 1109722,
+      "start": 0.43056898,
+      "end": 0.45766135,
+      "from_node": "1202190",
+      "to_node": "1139490",
+      "source_length_m": 73.714,
+      "chainage_m": 1141.845,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (652665.345 7730309.41 5.04,652660.744 7730295.865 5.278,652657.7 7730289.3 5.278,652654.9 7730282.5 5.278,652650.9 7730274.3 5.178,652645.7 7730266.8 5.178,652638.6 7730258.59 4.978,652623.727 7730245.642 4.678)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 26,
+      "source": "pilot-named-roads.json",
+      "reference": "1109722-17-3",
+      "link": 1109722,
+      "start": 0.45766135,
+      "end": 0.481818,
+      "from_node": "1139490",
+      "to_node": "2378407",
+      "source_length_m": 59.149,
+      "chainage_m": 1215.559,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (652623.727 7730245.642 4.678,652618 7730241.8 4.478,652606.9 7730234.09 4.378,652590.048 7730221.682 4.078,652580.328 7730215.014 3.978,652575.433 7730211.515 3.98)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 27,
+      "source": "pilot-named-roads.json",
+      "reference": "1109722-36-3",
+      "link": 1109722,
+      "start": 0.481818,
+      "end": 0.48728236,
+      "from_node": "2378407",
+      "to_node": "1139461",
+      "source_length_m": 15.514,
+      "chainage_m": 1274.708,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (652575.433 7730211.515 3.98,652569.184 7730207.204 3.778,652562.72 7730202.63 3.67)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 28,
+      "source": "pilot-named-roads.json",
+      "reference": "1109722-18-3",
+      "link": 1109722,
+      "start": 0.48728236,
+      "end": 0.51695498,
+      "from_node": "1139461",
+      "to_node": "1139427",
+      "source_length_m": 74.859,
+      "chainage_m": 1290.222,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (652562.72 7730202.63 3.67,652556.65 7730197.45 3.67,652554.39 7730195.48 3.67,652550.82 7730192.3 3.57,652546.72 7730188.48 3.57,652539.71 7730181.74 3.35,652534.78 7730176.55 3.25,652528.02 7730168.88 3.09,652521.7 7730161.22 3.03,652514.98 7730152.31 2.87,652511.887 7730148.016 2.846)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 29,
+      "source": "pilot-named-roads.json",
+      "reference": "1109722-19-3",
+      "link": 1109722,
+      "start": 0.51695498,
+      "end": 0.56489798,
+      "from_node": "1139427",
+      "to_node": "3433793",
+      "source_length_m": 123.406,
+      "chainage_m": 1365.081,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (652511.887 7730148.016 2.846,652511.17 7730147.02 2.84,652509.54 7730144.32 2.84,652505.27 7730136.62 2.84,652498.79 7730124.86 2.93,652495.48 7730118.35 2.93,652492.06 7730110.79 3.12,652488.51 7730102.64 3.12,652486.24 7730096.29 3.32,652483.35 7730086.81 3.06,652480.69 7730078.66 3.14,652478.06 7730070.26 3.32,652474.45 7730060.37 3.32,652470.65 7730050.24 3.4,652466.53 7730040.44 3.57,652465.87 7730039.17 3.49,652463.473 7730035.217 3.49)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 30,
+      "source": "pilot-named-roads.json",
+      "reference": "1109722-42-3",
+      "link": 1109722,
+      "start": 0.56489798,
+      "end": 0.57292253,
+      "from_node": "3433793",
+      "to_node": "3925146",
+      "source_length_m": 23.64,
+      "chainage_m": 1488.487,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (652463.473 7730035.217 3.49,652462.18 7730032.68 3.49,652457.35 7730025.39 3.23,652451.63 7730016.27 3.49,652450.923 7730015.224 3.31)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 31,
+      "source": "pilot-named-roads.json",
+      "reference": "1109722-46-3",
+      "link": 1109722,
+      "start": 0.57292253,
+      "end": 0.57617192,
+      "from_node": "3925146",
+      "to_node": "1139392",
+      "source_length_m": 9.573,
+      "chainage_m": 1512.127,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (652450.923 7730015.224 3.31,652445.407 7730007.401 3.4)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 32,
+      "source": "pilot-named-roads.json",
+      "reference": "1109722-20-3",
+      "link": 1109722,
+      "start": 0.57617192,
+      "end": 0.60789693,
+      "from_node": "1139392",
+      "to_node": "1139365",
+      "source_length_m": 83.294,
+      "chainage_m": 1521.7,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (652445.407 7730007.401 3.4,652432.7 7729990.4 3.678,652421.3 7729974.4 4.078,652416.3 7729966.5 4.278,652410.5 7729956.5 4.478,652407.6 7729950.6 4.678,652405.5 7729944.8 4.778,652403.9 7729938 4.778,652403.4 7729936.3 4.778)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 33,
+      "source": "pilot-named-roads.json",
+      "reference": "1109722-21-3",
+      "link": 1109722,
+      "start": 0.60789693,
+      "end": 0.61271455,
+      "from_node": "1139365",
+      "to_node": "3925153",
+      "source_length_m": 13.552,
+      "chainage_m": 1604.994,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (652403.4 7729936.3 4.778,652402 7729930 4.778,652401.4 7729922.936 4.434)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 34,
+      "source": "pilot-named-roads.json",
+      "reference": "1109722-45-3",
+      "link": 1109722,
+      "start": 0.61271455,
+      "end": 0.62217144,
+      "from_node": "3925153",
+      "to_node": "3925141",
+      "source_length_m": 26.602,
+      "chainage_m": 1618.546,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (652401.4 7729922.936 4.434,652401.2 7729919.6 4.578,652401.3 7729911.5 4.478,652401.3 7729905.4 4.378,652400.6 7729898.6 4.178,652400.294 7729896.409 4.048)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 35,
+      "source": "pilot-named-roads.json",
+      "reference": "1109722-37-3",
+      "link": 1109722,
+      "start": 0.62217144,
+      "end": 0.63429707,
+      "from_node": "3925141",
+      "to_node": "1139357",
+      "source_length_m": 34.0,
+      "chainage_m": 1645.148,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (652400.294 7729896.409 4.048,652399.2 7729891 3.978,652397.7 7729885.2 3.978,652392.7 7729873.6 3.478,652387.23 7729865.59 3.478)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 36,
+      "source": "pilot-named-roads.json",
+      "reference": "1109722-22-3",
+      "link": 1109722,
+      "start": 0.63429707,
+      "end": 0.65245005,
+      "from_node": "1139357",
+      "to_node": "1139337",
+      "source_length_m": 43.911,
+      "chainage_m": 1679.148,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (652387.23 7729865.59 3.478,652381.5 7729858 3.478,652377.8 7729852.7 3.478,652372.9 7729845 3.478,652362.1 7729829.6 3.378)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 37,
+      "source": "pilot-named-roads.json",
+      "reference": "1109722-23-3",
+      "link": 1109722,
+      "start": 0.65245005,
+      "end": 0.65506668,
+      "from_node": "1139337",
+      "to_node": "2378389",
+      "source_length_m": 6.565,
+      "chainage_m": 1723.059,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (652362.1 7729829.6 3.378,652358.9 7729825.2 3.278,652358.314 7729824.243 3.227)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 38,
+      "source": "pilot-named-roads.json",
+      "reference": "1109722-38-3",
+      "link": 1109722,
+      "start": 0.65506668,
+      "end": 0.68125271,
+      "from_node": "2378389",
+      "to_node": "1139299",
+      "source_length_m": 67.15,
+      "chainage_m": 1729.624,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (652358.314 7729824.243 3.227,652342 7729802.5 3.278,652326.8 7729782.1 3.078,652318.713 7729771.461 3.078,652318.071 7729770.516 3.088)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 39,
+      "source": "pilot-named-roads.json",
+      "reference": "1109722-24-3",
+      "link": 1109722,
+      "start": 0.68125271,
+      "end": 0.70278489,
+      "from_node": "1139299",
+      "to_node": "1139276",
+      "source_length_m": 59.053,
+      "chainage_m": 1796.774,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (652318.071 7729770.516 3.088,652301 7729747.4 3.178,652285.5 7729726.8 3.178,652282.78 7729723.17 3.178)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 40,
+      "source": "pilot-named-roads.json",
+      "reference": "1109722-25-3",
+      "link": 1109722,
+      "start": 0.70278489,
+      "end": 0.71548364,
+      "from_node": "1139276",
+      "to_node": "1139260",
+      "source_length_m": 33.957,
+      "chainage_m": 1855.827,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (652282.78 7729723.17 3.178,652276.7 7729714.9 3.278,652262.1 7729696.1 3.578)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 41,
+      "source": "pilot-named-roads.json",
+      "reference": "1109722-26-3",
+      "link": 1109722,
+      "start": 0.71548364,
+      "end": 0.73176429,
+      "from_node": "1139260",
+      "to_node": "1139237",
+      "source_length_m": 41.978,
+      "chainage_m": 1889.784,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (652262.1 7729696.1 3.578,652248.6 7729678.1 3.978,652240.4 7729667.2 4.178,652236.965 7729662.488 4.03)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 42,
+      "source": "pilot-named-roads.json",
+      "reference": "1109722-27-3",
+      "link": 1109722,
+      "start": 0.73176429,
+      "end": 0.7533242,
+      "from_node": "1139237",
+      "to_node": "1139210",
+      "source_length_m": 58.167,
+      "chainage_m": 1931.762,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (652236.965 7729662.488 4.03,652231.5 7729654.7 4.178,652216.9 7729634.4 4.578,652206.1 7729620.3 4.578,652202.7 7729615.5 4.578)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 43,
+      "source": "pilot-named-roads.json",
+      "reference": "1109722-28-3",
+      "link": 1109722,
+      "start": 0.7533242,
+      "end": 0.75889501,
+      "from_node": "1139210",
+      "to_node": "3925184",
+      "source_length_m": 15.118,
+      "chainage_m": 1989.929,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (652202.7 7729615.5 4.578,652199.5 7729610.8 4.678,652193.931 7729603.189 4.635)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 44,
+      "source": "pilot-named-roads.json",
+      "reference": "1109722-44-3",
+      "link": 1109722,
+      "start": 0.75889501,
+      "end": 0.76888941,
+      "from_node": "3925184",
+      "to_node": "1139200",
+      "source_length_m": 27.122,
+      "chainage_m": 2005.047,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (652193.931 7729603.189 4.635,652191 7729599.1 4.778,652177.47 7729581.64 4.93)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 45,
+      "source": "pilot-named-roads.json",
+      "reference": "1109722-29-3",
+      "link": 1109722,
+      "start": 0.76888941,
+      "end": 0.82267091,
+      "from_node": "1139200",
+      "to_node": "1139148",
+      "source_length_m": 141.282,
+      "chainage_m": 2032.169,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (652177.47 7729581.64 4.93,652164.2 7729564.5 5.278,652154.9 7729552.1 5.678,652144.2 7729538 6.078,652134.6 7729524.9 6.478,652124.1 7729510.4 7.178,652111.1 7729492.5 7.878,652103.6 7729483 8.378,652095.8 7729475 8.778,652089.8 7729471.8 8.978)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 46,
+      "source": "pilot-named-roads.json",
+      "reference": "1109722-30-3",
+      "link": 1109722,
+      "start": 0.82267091,
+      "end": 0.8495006,
+      "from_node": "1139148",
+      "to_node": "2378386",
+      "source_length_m": 71.004,
+      "chainage_m": 2173.451,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (652089.8 7729471.8 8.978,652089.2 7729471.5 8.978,652083.6 7729470.2 9.078,652077.6 7729470.3 9.178,652069.9 7729472.8 9.178,652061.8 7729476.3 9.278,652054.7 7729480.1 9.179,652041.2 7729487.7 8.779,652028.7 7729495 8.479,652025.545 7729496.793 8.329)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 47,
+      "source": "pilot-named-roads.json",
+      "reference": "1109722-39-3",
+      "link": 1109722,
+      "start": 0.8495006,
+      "end": 0.87983038,
+      "from_node": "2378386",
+      "to_node": "1139077",
+      "source_length_m": 81.102,
+      "chainage_m": 2244.455,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (652025.545 7729496.793 8.329,652011.1 7729505.2 8.379,651993.8 7729517 8.379,651979.1 7729526.4 8.379,651967.8 7729533.1 8.579,651955.16 7729541.16 9.349)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 48,
+      "source": "pilot-named-roads.json",
+      "reference": "1109722-31-3",
+      "link": 1109722,
+      "start": 0.87983038,
+      "end": 0.94998974,
+      "from_node": "1139077",
+      "to_node": "1139012",
+      "source_length_m": 182.0,
+      "chainage_m": 2325.557,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651955.16 7729541.16 9.349,651944 7729548 10.079,651935.6 7729553.5 10.479,651929.1 7729557.9 10.679,651921.7 7729563.6 10.779,651913.6 7729570.4 10.779,651908.2 7729575.9 10.779,651902 7729583.2 10.779,651896.6 7729589.3 10.679,651891.6 7729595.6 10.579,651887.9 7729601.3 10.679,651884.9 7729606.4 10.679,651881.9 7729613.1 10.579,651878.4 7729621 10.379,651875.6 7729628.6 10.379,651873.5 7729635 10.379,651871.5 7729641.4 10.279,651867.9 7729656.3 9.879,651863.7 7729671.6 9.279,651858.15 7729686.72 9.04)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 49,
+      "source": "pilot-named-roads.json",
+      "reference": "1109722-32-3",
+      "link": 1109722,
+      "start": 0.94998974,
+      "end": 0.95629607,
+      "from_node": "1139012",
+      "to_node": "1139007",
+      "source_length_m": 16.771,
+      "chainage_m": 2507.557,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651858.15 7729686.72 9.04,651855.9 7729691.9 9.08,651850.4 7729702.3 9.08)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 50,
+      "source": "pilot-named-roads.json",
+      "reference": "1109722-33-3",
+      "link": 1109722,
+      "start": 0.95629607,
+      "end": 0.98268546,
+      "from_node": "1139007",
+      "to_node": "3922674",
+      "source_length_m": 68.769,
+      "chainage_m": 2524.328,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651850.4 7729702.3 9.08,651844.4 7729711.5 9.18,651836.4 7729723.7 9.48,651828.6 7729734.3 9.88,651822.8 7729743.4 10.08,651818.3 7729751.9 10.28,651813.946 7729760.471 10.25)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 51,
+      "source": "pilot-named-roads.json",
+      "reference": "1109722-43-3",
+      "link": 1109722,
+      "start": 0.98268546,
+      "end": 1.0,
+      "from_node": "3922674",
+      "to_node": "1138973",
+      "source_length_m": 44.408,
+      "chainage_m": 2593.097,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651813.946 7729760.471 10.25,651812.9 7729762.4 10.38,651808.1 7729772 10.48,651801.35 7729786.519 10.68,651795.8 7729797.965 11.08,651794.428 7729800.333 11.089)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 52,
+      "source": "pilot-named-roads.json",
+      "reference": "1109517-1-4",
+      "link": 1109517,
+      "start": 0.0,
+      "end": 0.00216787,
+      "from_node": "1138973",
+      "to_node": "1138968",
+      "source_length_m": 11.383,
+      "chainage_m": 2637.505,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651794.428 7729800.333 11.089,651790.7 7729806.2 11.28,651788.3 7729809.899 11.7)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 53,
+      "source": "pilot-named-roads.json",
+      "reference": "1109517-2-4",
+      "link": 1109517,
+      "start": 0.00216787,
+      "end": 0.00308868,
+      "from_node": "1138968",
+      "to_node": "1957672",
+      "source_length_m": 3.768,
+      "chainage_m": 2648.888,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651788.3 7729809.899 11.7,651786.28 7729813.08 11.7)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 54,
+      "source": "pilot-named-roads.json",
+      "reference": "1109517-23-3",
+      "link": 1109517,
+      "start": 0.00308868,
+      "end": 0.06300347,
+      "from_node": "1957672",
+      "to_node": "1138896",
+      "source_length_m": 243.087,
+      "chainage_m": 2652.656,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651786.28 7729813.08 11.7,651777.1 7729824.6 12.48,651770.3 7729832 12.98,651764.3 7729837.3 13.48,651756.4 7729843.6 13.88,651749.6 7729848.9 14.18,651740.9 7729855.1 14.38,651730.5 7729862.9 14.28,651722.9 7729868.9 14.08,651712.2 7729877.3 14.08,651702 7729885.4 13.78,651691.9 7729893.4 13.48,651681.7 7729902.2 13.18,651675.9 7729907.4 12.88,651666.6 7729916.5 12.581,651661.2 7729922.3 12.281,651654.3 7729929.7 12.081,651648 7729937.7 11.881,651640.7 7729948.1 11.681,651638.7 7729951 11.681,651630.4 7729964.8 11.581,651625 7729974.3 11.381,651618.67 7729985.46 10.9)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 55,
+      "source": "pilot-named-roads.json",
+      "reference": "1109517-3-3",
+      "link": 1109517,
+      "start": 0.06300347,
+      "end": 0.06563864,
+      "from_node": "1138896",
+      "to_node": "3922640",
+      "source_length_m": 10.923,
+      "chainage_m": 2895.743,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651618.67 7729985.46 10.9,651614.8 7729992.6 10.881,651613.487 7729995.075 10.916)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 56,
+      "source": "pilot-named-roads.json",
+      "reference": "1109517-31-3",
+      "link": 1109517,
+      "start": 0.06563864,
+      "end": 0.11598177,
+      "from_node": "3922640",
+      "to_node": "1138877",
+      "source_length_m": 208.679,
+      "chainage_m": 2906.666,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651613.487 7729995.075 10.916,651610.2 7730000.6 10.781,651605.5 7730009.1 10.481,651598.7 7730020.9 10.181,651592.5 7730031.7 9.881,651585.5 7730044.5 9.381,651579.4 7730055.5 8.881,651572.4 7730067.9 8.281,651565.4 7730080.59 7.781,651553.8 7730102.3 6.481,651550.2 7730109.09 5.981,651541.1 7730126.09 4.881,651530.1 7730146.5 3.681,651518.7 7730167.3 3.181,651512.9 7730177.7 3.181)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 57,
+      "source": "pilot-named-roads.json",
+      "reference": "1109517-4-3",
+      "link": 1109517,
+      "start": 0.11598177,
+      "end": 0.18526117,
+      "from_node": "1138877",
+      "to_node": "3922623",
+      "source_length_m": 283.931,
+      "chainage_m": 3115.345,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651512.9 7730177.7 3.181,651509.8 7730183.5 3.181,651503.5 7730195.09 3.182,651494.4 7730212.2 3.682,651488.7 7730221.8 3.982,651480.6 7730237.09 4.482,651475.2 7730248.09 4.782,651468 7730264.59 5.082,651463.4 7730277 5.282,651458.3 7730293.2 5.182,651454.2 7730310.41 4.982,651451.5 7730323.91 4.682,651448.5 7730341.91 4.182,651446 7730358.41 3.582,651443.8 7730371.5 3.282,651441.9 7730382.8 2.982,651438.1 7730400.7 2.982,651435.1 7730412.3 3.082,651431.6 7730424.2 3.182,651426.6 7730441.2 3.182,651425.248 7730445.231 3.193)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 58,
+      "source": "pilot-named-roads.json",
+      "reference": "1109517-33-3",
+      "link": 1109517,
+      "start": 0.18526117,
+      "end": 0.18776999,
+      "from_node": "3922623",
+      "to_node": "3922639",
+      "source_length_m": 10.282,
+      "chainage_m": 3399.276,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651425.248 7730445.231 3.193,651423.207 7730451.457 3.209,651421.943 7730454.967 3.218)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 59,
+      "source": "pilot-named-roads.json",
+      "reference": "1109517-32-3",
+      "link": 1109517,
+      "start": 0.18776999,
+      "end": 0.19658629,
+      "from_node": "3922639",
+      "to_node": "1138860",
+      "source_length_m": 36.132,
+      "chainage_m": 3409.558,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651421.943 7730454.967 3.218,651420.6 7730459 3.182,651416.7 7730471.09 3.082,651410.8 7730488.8 3.082,651410.7 7730489.3 3.082)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 60,
+      "source": "pilot-named-roads.json",
+      "reference": "1109517-5-3",
+      "link": 1109517,
+      "start": 0.19658629,
+      "end": 0.21281824,
+      "from_node": "1138860",
+      "to_node": "1138857",
+      "source_length_m": 71.574,
+      "chainage_m": 3445.69,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651410.7 7730489.3 3.082,651407 7730500.8 3.282,651401.8 7730517.5 3.482,651397.4 7730531.7 3.682,651389.748 7730557.728 4.08)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 61,
+      "source": "pilot-named-roads.json",
+      "reference": "1109517-6-3",
+      "link": 1109517,
+      "start": 0.21281824,
+      "end": 0.23453245,
+      "from_node": "1138857",
+      "to_node": "1138848",
+      "source_length_m": 83.968,
+      "chainage_m": 3517.264,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651389.748 7730557.728 4.08,651385.4 7730568.8 4.283,651378.7 7730590.7 4.683,651374.4 7730604.59 5.083,651370.5 7730617.7 5.383,651367.9 7730627.3 5.683,651365.4 7730638 5.783)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 62,
+      "source": "pilot-named-roads.json",
+      "reference": "1109517-7-3",
+      "link": 1109517,
+      "start": 0.23453245,
+      "end": 0.24093731,
+      "from_node": "1138848",
+      "to_node": "1138845",
+      "source_length_m": 29.077,
+      "chainage_m": 3601.232,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651365.4 7730638 5.783,651364 7730644.59 5.783,651360.67 7730666.68 5.68)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 63,
+      "source": "pilot-named-roads.json",
+      "reference": "1109517-8-3",
+      "link": 1109517,
+      "start": 0.24093731,
+      "end": 0.26535564,
+      "from_node": "1138845",
+      "to_node": "1138844",
+      "source_length_m": 97.256,
+      "chainage_m": 3630.309,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651360.67 7730666.68 5.68,651360 7730674.7 5.683,651358.8 7730691.41 5.583,651358 7730710.59 5.183,651357.8 7730721.5 5.083,651357 7730737.8 4.583,651356.5 7730752.2 4.283,651356.3 7730763.8 4.183)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 64,
+      "source": "pilot-named-roads.json",
+      "reference": "1109517-9-3",
+      "link": 1109517,
+      "start": 0.26535564,
+      "end": 0.33619883,
+      "from_node": "1138844",
+      "to_node": "1957660",
+      "source_length_m": 290.338,
+      "chainage_m": 3727.565,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651356.3 7730763.8 4.183,651356.2 7730768.41 4.083,651356.2 7730779.91 3.983,651355.6 7730800.59 4.183,651355.1 7730813.09 4.183,651354.3 7730835.3 4.383,651353.9 7730847.3 4.283,651353.1 7730863.41 4.283,651352.6 7730878.09 4.383,651352 7730893.41 4.683,651351.3 7730916.3 5.183,651350.7 7730929.5 5.683,651349.8 7730953.7 6.483,651349.1 7730966.41 6.983,651348.1 7730984.5 7.583,651346.8 7731000.8 8.283,651344.7 7731018.2 9.183,651342.8 7731029 9.683,651340.4 7731042.5 10.184,651338.45 7731053.12 10.424)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 65,
+      "source": "pilot-named-roads.json",
+      "reference": "1109517-24-3",
+      "link": 1109517,
+      "start": 0.33619883,
+      "end": 0.34924993,
+      "from_node": "1957660",
+      "to_node": "1138836",
+      "source_length_m": 53.281,
+      "chainage_m": 4017.903,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651338.45 7731053.12 10.424,651337.8 7731055.91 10.484,651334.2 7731070.8 10.584,651330.9 7731085.5 10.584,651328.1 7731096.3 10.384,651326.18 7731104.96 10.26)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 66,
+      "source": "pilot-named-roads.json",
+      "reference": "1109517-10-3",
+      "link": 1109517,
+      "start": 0.34924993,
+      "end": 0.39103344,
+      "from_node": "1138836",
+      "to_node": "3922752",
+      "source_length_m": 171.815,
+      "chainage_m": 4071.184,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651326.18 7731104.96 10.26,651325.7 7731107.91 10.284,651323.7 7731114.41 10.384,651318.8 7731134.7 10.384,651317.5 7731142.2 10.384,651313.9 7731158.5 10.184,651310.1 7731174.5 10.084,651307.1 7731186.5 10.084,651302.4 7731207.09 9.984,651299.1 7731221.8 10.184,651294.3 7731242.2 10.584,651289.2 7731264.7 10.884,651287.396 7731272.289 10.951)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 67,
+      "source": "pilot-named-roads.json",
+      "reference": "1109517-35-3",
+      "link": 1109517,
+      "start": 0.39103344,
+      "end": 0.39829852,
+      "from_node": "3922752",
+      "to_node": "1138823",
+      "source_length_m": 29.874,
+      "chainage_m": 4242.999,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651287.396 7731272.289 10.951,651284.1 7731287.09 11.084,651280.66 7731301.39 10.86)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 68,
+      "source": "pilot-named-roads.json",
+      "reference": "1109517-11-3",
+      "link": 1109517,
+      "start": 0.39829852,
+      "end": 0.41663766,
+      "from_node": "1138823",
+      "to_node": "1138819",
+      "source_length_m": 74.971,
+      "chainage_m": 4272.873,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651280.66 7731301.39 10.86,651275.8 7731323.41 10.984,651271.1 7731343.59 10.484,651267.1 7731361.09 10.184,651263.37 7731374.31 9.81)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 69,
+      "source": "pilot-named-roads.json",
+      "reference": "1109517-12-3",
+      "link": 1109517,
+      "start": 0.41663766,
+      "end": 0.42261331,
+      "from_node": "1138819",
+      "to_node": "3922779",
+      "source_length_m": 24.37,
+      "chainage_m": 4347.844,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651263.37 7731374.31 9.81,651260.6 7731387 9.884,651258.356 7731398.157 9.719)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 70,
+      "source": "pilot-named-roads.json",
+      "reference": "1109517-34-3",
+      "link": 1109517,
+      "start": 0.42261331,
+      "end": 0.42929292,
+      "from_node": "3922779",
+      "to_node": "1138816",
+      "source_length_m": 27.241,
+      "chainage_m": 4372.214,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651258.356 7731398.157 9.719,651256.9 7731404.7 9.484,651252.7 7731422.59 8.884,651252.3 7731424.7 8.884)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 71,
+      "source": "pilot-named-roads.json",
+      "reference": "1109517-13-3",
+      "link": 1109517,
+      "start": 0.42929292,
+      "end": 0.45187009,
+      "from_node": "1138816",
+      "to_node": "1138811",
+      "source_length_m": 92.518,
+      "chainage_m": 4399.455,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651252.3 7731424.7 8.884,651249.7 7731435.91 8.384,651245.5 7731455.3 7.485,651241.6 7731472 6.585,651238.7 7731485.7 5.985,651235 7731502.41 5.085,651233.8 7731511.5 4.885,651233.2 7731515.09 4.785)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 72,
+      "source": "pilot-named-roads.json",
+      "reference": "1109517-14-3",
+      "link": 1109517,
+      "start": 0.45187009,
+      "end": 0.47840131,
+      "from_node": "1138811",
+      "to_node": "1138815",
+      "source_length_m": 108.734,
+      "chainage_m": 4491.973,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651233.2 7731515.09 4.785,651232.3 7731521.59 4.585,651230.8 7731535.09 4.185,651230.4 7731545.3 3.985,651230.2 7731555.91 3.885,651231.1 7731567.5 3.685,651233.8 7731583.59 3.385,651237 7731594.91 3.285,651241.3 7731607.09 3.085,651247 7731621.09 3.485)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 73,
+      "source": "pilot-named-roads.json",
+      "reference": "1109517-15-3",
+      "link": 1109517,
+      "start": 0.47840131,
+      "end": 0.49701289,
+      "from_node": "1138815",
+      "to_node": "3664380",
+      "source_length_m": 77.142,
+      "chainage_m": 4600.707,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651247 7731621.09 3.485,651254.3 7731636.8 3.385,651265.6 7731660 3.485,651275.8 7731681.41 3.685,651280.3 7731690.67 3.55)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 74,
+      "source": "pilot-named-roads.json",
+      "reference": "1109517-30-3",
+      "link": 1109517,
+      "start": 0.49701289,
+      "end": 0.5518232,
+      "from_node": "3664380",
+      "to_node": "1138850",
+      "source_length_m": 223.779,
+      "chainage_m": 4677.849,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651280.3 7731690.67 3.55,651285.1 7731701.41 3.785,651289.4 7731710.41 3.785,651296.5 7731724.59 3.885,651305.8 7731744.09 3.885,651317.6 7731768.3 3.785,651327.5 7731789.8 3.485,651335.6 7731807 3.485,651344.2 7731825.7 3.385,651350.4 7731841.09 3.385,651356.3 7731856.41 3.385,651360.6 7731869 3.385,651363.8 7731880.2 3.385,651366.9 7731892.7 3.385,651367.4 7731896.2 3.485)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 75,
+      "source": "pilot-named-roads.json",
+      "reference": "1109517-16-3",
+      "link": 1109517,
+      "start": 0.5518232,
+      "end": 0.57406089,
+      "from_node": "1138850",
+      "to_node": "1138852",
+      "source_length_m": 91.137,
+      "chainage_m": 4901.628,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651367.4 7731896.2 3.485,651368.5 7731901 3.485,651370.6 7731921.2 3.285,651372.2 7731939.7 3.285,651373 7731957 3.185,651373.8 7731979.5 3.385,651373.8 7731987 3.385)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 76,
+      "source": "pilot-named-roads.json",
+      "reference": "1109517-17-3",
+      "link": 1109517,
+      "start": 0.57406089,
+      "end": 0.67908884,
+      "from_node": "1138852",
+      "to_node": "1138862",
+      "source_length_m": 430.439,
+      "chainage_m": 4992.765,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651373.8 7731987 3.385,651373.8 7731994.5 3.385,651374.7 7732016.2 3.385,651375.3 7732034.91 3.385,651375.9 7732056.7 3.385,651376.2 7732076.5 3.285,651376.9 7732098 3.285,651377.5 7732119.3 3.185,651378.1 7732142.41 3.086,651378.6 7732161.3 2.986,651379.1 7732179.59 2.886,651379.6 7732201.41 2.786,651380.2 7732219.3 2.786,651381.2 7732236 2.986,651382.2 7732250.09 2.986,651383.8 7732264.5 3.286,651385.3 7732273.8 3.386,651387.7 7732284.8 3.486,651392.6 7732300.2 3.586,651397.6 7732314.91 3.586,651405 7732332.5 3.386,651411.3 7732347.41 3.386,651419.9 7732366.41 3.386,651427.8 7732384.09 3.286,651437.8 7732406.8 3.186)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 77,
+      "source": "pilot-named-roads.json",
+      "reference": "1109517-18-3",
+      "link": 1109517,
+      "start": 0.67908884,
+      "end": 0.68889344,
+      "from_node": "1138862",
+      "to_node": "1138868",
+      "source_length_m": 40.182,
+      "chainage_m": 5423.204,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651437.8 7732406.8 3.186,651440.9 7732413.3 3.186,651446.5 7732425.7 3.186,651451.8 7732437.09 3.086,651454.6 7732443.3 3.086)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 78,
+      "source": "pilot-named-roads.json",
+      "reference": "1109517-19-3",
+      "link": 1109517,
+      "start": 0.68889344,
+      "end": 0.71434067,
+      "from_node": "1138868",
+      "to_node": "2568697",
+      "source_length_m": 103.56,
+      "chainage_m": 5463.386,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651454.6 7732443.3 3.086,651456.8 7732448.09 3.086,651458.2 7732450.91 3.086,651463.1 7732461.7 3.086,651468.1 7732472.91 3.286,651473.3 7732484 3.486,651479.7 7732498.41 3.786,651486.7 7732513.7 4.186,651492.8 7732527.91 4.487,651497.22 7732537.66 4.59)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 79,
+      "source": "pilot-named-roads.json",
+      "reference": "1109517-27-3",
+      "link": 1109517,
+      "start": 0.71434067,
+      "end": 0.8107185,
+      "from_node": "2568697",
+      "to_node": "3121770",
+      "source_length_m": 395.729,
+      "chainage_m": 5566.946,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651497.22 7732537.66 4.59,651502.6 7732551 4.987,651507.1 7732562.41 5.187,651511.2 7732573.8 5.187,651514.6 7732585.7 5.187,651517.4 7732597.59 4.987,651519.6 7732609.7 4.787,651521.1 7732621.91 4.487,651521.7 7732634 4.287,651521.8 7732646.41 4.087,651521.3 7732658.59 3.887,651520.5 7732670.91 3.887,651519.3 7732683.09 3.587,651517.9 7732695.41 3.587,651516.5 7732708.09 3.487,651514.6 7732725.59 3.487,651512.8 7732740.59 3.487,651510.9 7732756.3 3.587,651508.5 7732777 3.787,651506.7 7732792.7 3.787,651505.2 7732805.59 3.887,651503.3 7732821.2 3.887,651501.4 7732837.5 3.788,651499.5 7732853.7 3.788,651497.3 7732871.41 3.788,651495.5 7732886.09 3.788,651494.2 7732899.3 3.888,651492.4 7732914.5 3.988,651491 7732927.91 4.188)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 80,
+      "source": "pilot-named-roads.json",
+      "reference": "1109517-28-3",
+      "link": 1109517,
+      "start": 0.8107185,
+      "end": 0.88134235,
+      "from_node": "3121770",
+      "to_node": "1138878",
+      "source_length_m": 290.36,
+      "chainage_m": 5962.675,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651491 7732927.91 4.188,651489.9 7732941.91 4.188,651488.7 7732957.2 4.288,651488 7732969.09 4.388,651487.9 7732981.59 4.488,651488.4 7732994 4.588,651489.3 7733005.3 4.488,651491.1 7733019.91 4.688,651492.5 7733031.8 4.988,651494.2 7733043.8 5.188,651496.1 7733059.2 5.388,651497.7 7733072 5.588,651499.7 7733087.41 5.888,651501.5 7733101.7 6.088,651503.4 7733117.2 6.388,651505.8 7733136 6.688,651507.2 7733146.5 6.889,651508.9 7733158.7 7.089,651510.7 7733172.91 7.289,651512.4 7733185.41 7.389,651514 7733197.7 7.489,651515.5 7733207.8 7.489,651516.417 7733216.343 7.489)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 81,
+      "source": "pilot-named-roads.json",
+      "reference": "1109517-20-3",
+      "link": 1109517,
+      "start": 0.88134235,
+      "end": 0.92407828,
+      "from_node": "1138878",
+      "to_node": "1957508",
+      "source_length_m": 174.227,
+      "chainage_m": 6253.035,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651516.417 7733216.343 7.489,651517.9 7733225.3 7.289,651520.2 7733240 7.189,651522.3 7733255.5 6.789,651524.3 7733268.3 6.589,651526.7 7733284.2 6.289,651528.8 7733298.8 6.089,651531 7733314 5.889,651533.6 7733330.41 5.589,651535.5 7733343.7 5.589,651537.5 7733357 5.489,651539.3 7733369.2 5.389,651541.5 7733380.91 5.389,651543.2 7733388.45 5.389)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 82,
+      "source": "pilot-named-roads.json",
+      "reference": "1109517-25-3",
+      "link": 1109517,
+      "start": 0.92407828,
+      "end": 0.9290097,
+      "from_node": "1957508",
+      "to_node": "1138885",
+      "source_length_m": 20.679,
+      "chainage_m": 6427.262,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651543.2 7733388.45 5.389,651543.7 7733390.7 5.389,651546.3 7733401.09 5.389,651548.716 7733408.355 5.07)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 83,
+      "source": "pilot-named-roads.json",
+      "reference": "1109517-21-3",
+      "link": 1109517,
+      "start": 0.9290097,
+      "end": 0.98054369,
+      "from_node": "1138885",
+      "to_node": "1957934",
+      "source_length_m": 210.732,
+      "chainage_m": 6447.941,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651548.716 7733408.355 5.07,651552 7733418.2 5.289,651556.4 7733429.3 5.389,651561 7733439.09 5.289,651565.4 7733447.7 5.289,651571.4 7733458.5 5.489,651576.5 7733468 5.689,651582.8 7733478.7 6.089,651591.1 7733492.8 6.589,651597.3 7733503.41 6.989,651603.6 7733513.91 7.39,651611.7 7733527.2 7.89,651618.1 7733537.8 8.29,651624.3 7733548.3 8.69,651631.3 7733559.91 9.09,651637.6 7733570.59 9.49,651643.8 7733581.09 9.99,651650.364 7733592.412 9.2)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 84,
+      "source": "pilot-named-roads.json",
+      "reference": "1109517-26-3",
+      "link": 1109517,
+      "start": 0.98054369,
+      "end": 0.9902808,
+      "from_node": "1957934",
+      "to_node": "1138911",
+      "source_length_m": 40.268,
+      "chainage_m": 6658.673,
+      "fields": [
+        "1",
+        "2"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651650.364 7733592.412 9.2,651651.4 7733594 10.39,651657.7 7733604.5 10.79,651663.9 7733615.2 11.29,651670.6 7733626.8 11.69)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 85,
+      "source": "surface-r1-r2.json",
+      "reference": "1126588-1-3",
+      "link": 1126588,
+      "start": 0.0,
+      "end": 0.87973105,
+      "from_node": "1138911",
+      "to_node": "3252125",
+      "source_length_m": 37.0,
+      "chainage_m": 6698.941,
+      "fields": [],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651670.6 7733626.8 11.69,651673.9 7733630.91 11.89,651680.3 7733638.3 12.09,651685.1 7733644.41 12.19,651690.4 7733650.41 12.39,651693.782 7733654.715 12.49,651694.169 7733655.289 12.518)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 86,
+      "source": "surface-r1-r2.json",
+      "reference": "1126588-2-3",
+      "link": 1126588,
+      "start": 0.87973105,
+      "end": 1.0,
+      "from_node": "3252125",
+      "to_node": "3249937",
+      "source_length_m": 5.058,
+      "chainage_m": 6735.941,
+      "fields": [],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651694.169 7733655.289 12.518,651696.996 7733659.478 12.72)",
+      "metadata": {
+        "startdato": "2019-11-07"
+      }
+    },
+    {
+      "occurrence": 87,
+      "source": "surface-r1-r2.json",
+      "reference": "1126029-1-9",
+      "link": 1126029,
+      "start": 0.0,
+      "end": 0.0517226,
+      "from_node": "3249937",
+      "to_node": "3249938",
+      "source_length_m": 4.374,
+      "chainage_m": 6740.999,
+      "fields": [
+        "1",
+        "3"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651696.996 7733659.478 12.72,651699.93 7733659.74 12.73,651701.31 7733660.11 12.75)",
+      "metadata": {
+        "startdato": "2026-09-10"
+      }
+    },
+    {
+      "occurrence": 88,
+      "source": "surface-r1-r2.json",
+      "reference": "1126029-10-9",
+      "link": 1126029,
+      "start": 0.0517226,
+      "end": 0.12394538,
+      "from_node": "3249938",
+      "to_node": "1138934",
+      "source_length_m": 6.108,
+      "chainage_m": 6745.373,
+      "fields": [
+        "1",
+        "3"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651701.31 7733660.11 12.75,651702.64 7733660.66 12.78,651703.89 7733661.38 12.8,651704.89 7733662.14 12.82,651705.79 7733662.91 12.83,651706.34 7733663.47 12.83)",
+      "metadata": {
+        "startdato": "2026-09-10"
+      }
+    },
+    {
+      "occurrence": 89,
+      "source": "surface-r1-r2.json",
+      "reference": "1126029-2-9",
+      "link": 1126029,
+      "start": 0.12394538,
+      "end": 0.24780024,
+      "from_node": "1138934",
+      "to_node": "3249936",
+      "source_length_m": 9.624,
+      "chainage_m": 6751.481,
+      "fields": [
+        "1",
+        "3"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651706.34 7733663.47 12.83,651707.5 7733664.9 12.81,651708.22 7733666.03 12.78,651708.79 7733667.21 12.76,651709.2 7733668.35 12.75,651709.559 7733669.898 12.75)",
+      "metadata": {
+        "startdato": "2026-09-10"
+      }
+    },
+    {
+      "occurrence": 90,
+      "source": "surface-r1-r2.json",
+      "reference": "1126029-3-9",
+      "link": 1126029,
+      "start": 0.24780024,
+      "end": 0.31012056,
+      "from_node": "3249936",
+      "to_node": "3249939",
+      "source_length_m": 6.115,
+      "chainage_m": 6761.105,
+      "fields": [
+        "1",
+        "3"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651709.559 7733669.898 12.75,651709.69 7733673.62 12.74,651709.47 7733674.8 12.74,651709.16 7733675.95 12.73)",
+      "metadata": {
+        "startdato": "2026-09-10"
+      }
+    },
+    {
+      "occurrence": 91,
+      "source": "surface-r1-r2.json",
+      "reference": "1126527-1-9",
+      "link": 1126527,
+      "start": 0.0,
+      "end": 0.03680821,
+      "from_node": "3249939",
+      "to_node": "2835000",
+      "source_length_m": 7.202,
+      "chainage_m": 6767.22,
+      "fields": [],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651709.16 7733675.95 12.73,651711.498 7733682.757 12.49)",
+      "metadata": {
+        "startdato": "2026-09-10"
+      }
+    },
+    {
+      "occurrence": 92,
+      "source": "surface-r1-r2.json",
+      "reference": "1126527-2-9",
+      "link": 1126527,
+      "start": 0.03680821,
+      "end": 0.18882128,
+      "from_node": "2835000",
+      "to_node": "2835001",
+      "source_length_m": 41.39,
+      "chainage_m": 6774.422,
+      "fields": [],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651711.498 7733682.757 12.49,651715.3 7733693.8 12.39,651718.2 7733700.91 12.39,651723.6 7733711.3 12.19,651728.72 7733720.26 12.03)",
+      "metadata": {
+        "startdato": "2026-09-10"
+      }
+    },
+    {
+      "occurrence": 93,
+      "source": "surface-r1-r2.json",
+      "reference": "1126527-3-10",
+      "link": 1126527,
+      "start": 0.18882128,
+      "end": 0.41615085,
+      "from_node": "2835001",
+      "to_node": "3940357",
+      "source_length_m": 61.994,
+      "chainage_m": 6815.812,
+      "fields": [],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651728.72 7733720.26 12.03,651730 7733722.5 11.99,651737.2 7733734.41 11.89,651746 7733749.09 11.49,651755.7 7733765.8 11.09,651760.259 7733773.618 11.032)",
+      "metadata": {
+        "startdato": "2026-09-10"
+      }
+    },
+    {
+      "occurrence": 94,
+      "source": "surface-r1-r2.json",
+      "reference": "1126527-8-10",
+      "link": 1126527,
+      "start": 0.41615085,
+      "end": 0.4856087,
+      "from_node": "3940357",
+      "to_node": "1138958",
+      "source_length_m": 18.941,
+      "chainage_m": 6877.806,
+      "fields": [],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651760.259 7733773.618 11.032,651765.8 7733782.91 10.79,651767.8 7733786.3 10.79,651769.96 7733789.88 10.64)",
+      "metadata": {
+        "startdato": "2026-09-10"
+      }
+    },
+    {
+      "occurrence": 95,
+      "source": "surface-r1-r2.json",
+      "reference": "1126527-4-10",
+      "link": 1126527,
+      "start": 0.4856087,
+      "end": 0.53109275,
+      "from_node": "1138958",
+      "to_node": "1138961",
+      "source_length_m": 12.273,
+      "chainage_m": 6896.747,
+      "fields": [],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651769.96 7733789.88 10.64,651772 7733793.41 10.59,651773.9 7733796.5 10.49,651776.24 7733800.42 10.39)",
+      "metadata": {
+        "startdato": "2026-09-10"
+      }
+    },
+    {
+      "occurrence": 96,
+      "source": "surface-r1-r2.json",
+      "reference": "1126527-5-10",
+      "link": 1126527,
+      "start": 0.53109275,
+      "end": 0.71991516,
+      "from_node": "1138961",
+      "to_node": "2835002",
+      "source_length_m": 51.436,
+      "chainage_m": 6909.02,
+      "fields": [],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651776.24 7733800.42 10.39,651778.8 7733804.5 10.29,651786.2 7733817.2 9.99,651792.8 7733827.2 9.79,651800.2 7733837.09 9.59,651804.97 7733842.98 9.54)",
+      "metadata": {
+        "startdato": "2026-09-10"
+      }
+    },
+    {
+      "occurrence": 97,
+      "source": "surface-r1-r2.json",
+      "reference": "1126527-6-10",
+      "link": 1126527,
+      "start": 0.71991516,
+      "end": 0.96320558,
+      "from_node": "2835002",
+      "to_node": "2835003",
+      "source_length_m": 66.258,
+      "chainage_m": 6960.456,
+      "fields": [],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651804.97 7733842.98 9.54,651809.2 7733848.2 9.49,651817.8 7733857.09 9.29,651827.3 7733865.3 9.19,651836.5 7733871.8 9.09,651846.1 7733878 8.99,651854.6 7733883.7 8.89,651855.94 7733884.72 8.88)",
+      "metadata": {
+        "startdato": "2026-09-10"
+      }
+    },
+    {
+      "occurrence": 98,
+      "source": "surface-r1-r2.json",
+      "reference": "1126527-7-10",
+      "link": 1126527,
+      "start": 0.96320558,
+      "end": 1.0,
+      "from_node": "2835003",
+      "to_node": "1139019",
+      "source_length_m": 10.24,
+      "chainage_m": 7026.714,
+      "fields": [],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651855.94 7733884.72 8.88,651863.95 7733891.1 8.86)",
+      "metadata": {
+        "startdato": "2026-09-10"
+      }
+    },
+    {
+      "occurrence": 99,
+      "source": "surface-r1-r2.json",
+      "reference": "1126027-7-10",
+      "link": 1126027,
+      "start": 0.78574639,
+      "end": 0.89194841,
+      "from_node": "1139019",
+      "to_node": "1139044",
+      "source_length_m": 36.187,
+      "chainage_m": 7036.954,
+      "fields": [
+        "1",
+        "2",
+        "3"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651863.95 7733891.1 8.86,651868.4 7733893.09 8.69,651878 7733897.91 8.59,651889.9 7733904 8.39,651896.4 7733907.09 8.29)",
+      "metadata": {
+        "startdato": "2026-09-10"
+      }
+    },
+    {
+      "occurrence": 100,
+      "source": "surface-r1-r2.json",
+      "reference": "1126027-8-10",
+      "link": 1126027,
+      "start": 0.89194841,
+      "end": 0.98549231,
+      "from_node": "1139044",
+      "to_node": "2833256",
+      "source_length_m": 31.917,
+      "chainage_m": 7073.141,
+      "fields": [
+        "1",
+        "2",
+        "3"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651896.4 7733907.09 8.29,651904.2 7733911 8.09,651912.7 7733915.41 7.89,651920.136 7733919.48 7.79,651924.382 7733921.917 7.88)",
+      "metadata": {
+        "startdato": "2026-09-10"
+      }
+    },
+    {
+      "occurrence": 101,
+      "source": "surface-r1-r2.json",
+      "reference": "1126027-12-10",
+      "link": 1126027,
+      "start": 0.98549231,
+      "end": 1.0,
+      "from_node": "2833256",
+      "to_node": "1139057",
+      "source_length_m": 6.0,
+      "chainage_m": 7105.058,
+      "fields": [],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651924.382 7733921.917 7.88,651929.43 7733925.14 8.12)",
+      "metadata": {
+        "startdato": "2026-09-10"
+      }
+    },
+    {
+      "occurrence": 102,
+      "source": "pilot-north-roads.json",
+      "reference": "1126030-8-10",
+      "link": 1126030,
+      "start": 0.88033387,
+      "end": 1.0,
+      "from_node": "1139057",
+      "to_node": "3249914",
+      "source_length_m": 11.774,
+      "chainage_m": 7111.058,
+      "fields": [
+        "1",
+        "3"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651929.43 7733925.14 8.12,651929.79 7733924.55 8.13,651930.53 7733923.48 8.18,651931.4 7733922.42 8.22,651932.4 7733921.37 8.26,651933.52 7733920.4 8.3,651934.71 7733919.54 8.34,651935.82 7733918.91 8.38,651937.24 7733918.17 8.42,651938.308 7733917.809 8.48)",
+      "metadata": {
+        "startdato": "2026-09-10"
+      }
+    },
+    {
+      "occurrence": 103,
+      "source": "pilot-north-roads.json",
+      "reference": "1126030-1-10",
+      "link": 1126030,
+      "start": 0.0,
+      "end": 0.062753,
+      "from_node": "3249914",
+      "to_node": "3249916",
+      "source_length_m": 7.431,
+      "chainage_m": 7122.832,
+      "fields": [
+        "1",
+        "3"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651938.308 7733917.809 8.48,651941.11 7733916.93 8.5,651943.17 7733916.76 8.53,651945.593 7733916.895 8.57)",
+      "metadata": {
+        "startdato": "2026-09-10"
+      }
+    },
+    {
+      "occurrence": 104,
+      "source": "pilot-north-roads.json",
+      "reference": "1126030-12-10",
+      "link": 1126030,
+      "start": 0.062753,
+      "end": 0.14014609,
+      "from_node": "3249916",
+      "to_node": "1139072",
+      "source_length_m": 8.902,
+      "chainage_m": 7130.263,
+      "fields": [
+        "1",
+        "3"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651945.593 7733916.895 8.57,651948.34 7733917.65 8.6,651950.08 7733918.24 8.62,651951.84 7733919.14 8.63,651953.67 7733920.43 8.62)",
+      "metadata": {
+        "startdato": "2026-09-10"
+      }
+    },
+    {
+      "occurrence": 105,
+      "source": "pilot-north-roads.json",
+      "reference": "1126030-2-10",
+      "link": 1126030,
+      "start": 0.14014609,
+      "end": 0.26198747,
+      "from_node": "1139072",
+      "to_node": "3249915",
+      "source_length_m": 9.927,
+      "chainage_m": 7139.165,
+      "fields": [
+        "1",
+        "3"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651953.67 7733920.43 8.62,651954.7 7733921.24 8.61,651955.64 7733922.13 8.59,651956.84 7733923.49 8.56,651957.71 7733924.86 8.54,651958.45 7733926.19 8.51,651958.92 7733927.34 8.51,651959.237 7733928.414 8.51)",
+      "metadata": {
+        "startdato": "2026-09-10"
+      }
+    },
+    {
+      "occurrence": 106,
+      "source": "pilot-north-roads.json",
+      "reference": "1126030-3-10",
+      "link": 1126030,
+      "start": 0.26198747,
+      "end": 0.29837576,
+      "from_node": "3249915",
+      "to_node": "3249918",
+      "source_length_m": 4.998,
+      "chainage_m": 7149.092,
+      "fields": [
+        "1",
+        "3"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651959.237 7733928.414 8.51,651960.08 7733933.34 8.46)",
+      "metadata": {
+        "startdato": "2026-09-10"
+      }
+    },
+    {
+      "occurrence": 107,
+      "source": "pilot-north-roads.json",
+      "reference": "1126030-9-10",
+      "link": 1126030,
+      "start": 0.29837576,
+      "end": 0.38033725,
+      "from_node": "3249918",
+      "to_node": "1139076",
+      "source_length_m": 11.257,
+      "chainage_m": 7154.09,
+      "fields": [
+        "1",
+        "3"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651960.08 7733933.34 8.46,651959.96 7733934.95 8.43,651959.63 7733936.72 8.4,651959.1 7733938.78 8.37,651958.41 7733940.54 8.34,651958.08 7733941.24 8.34,651957.01 7733943.12 8.14,651956.51 7733943.84 8.17)",
+      "metadata": {
+        "startdato": "2026-09-10"
+      }
+    },
+    {
+      "occurrence": 108,
+      "source": "pilot-north-roads.json",
+      "reference": "1126030-4-10",
+      "link": 1126030,
+      "start": 0.38033725,
+      "end": 0.47411368,
+      "from_node": "1139076",
+      "to_node": "3249917",
+      "source_length_m": 11.195,
+      "chainage_m": 7165.347,
+      "fields": [
+        "1",
+        "3"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651956.51 7733943.84 8.17,651954.76 7733945.52 8.26,651953.16 7733946.84 8.27,651951.81 7733947.71 8.28,651950.59 7733948.33 8.28,651949.41 7733948.81 8.28,651948.498 7733949.13 8.27,651947.064 7733949.486 8.25)",
+      "metadata": {
+        "startdato": "2026-09-10"
+      }
+    },
+    {
+      "occurrence": 109,
+      "source": "pilot-north-roads.json",
+      "reference": "1126030-10-10",
+      "link": 1126030,
+      "start": 0.47411368,
+      "end": 0.51455011,
+      "from_node": "3249917",
+      "to_node": "3249913",
+      "source_length_m": 4.864,
+      "chainage_m": 7176.542,
+      "fields": [
+        "1",
+        "3"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651947.064 7733949.486 8.25,651944.945 7733949.75 8.22,651942.217 7733949.798 8.19)",
+      "metadata": {
+        "startdato": "2026-09-10"
+      }
+    },
+    {
+      "occurrence": 110,
+      "source": "pilot-north-roads.json",
+      "reference": "1126030-5-10",
+      "link": 1126030,
+      "start": 0.51455011,
+      "end": 0.62975708,
+      "from_node": "3249913",
+      "to_node": "1139060",
+      "source_length_m": 10.476,
+      "chainage_m": 7181.406,
+      "fields": [
+        "1",
+        "3"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651942.217 7733949.798 8.19,651941.47 7733949.68 8.15,651940.15 7733949.44 8.14,651938.82 7733949.07 8.12,651937.38 7733948.55 8.09,651935.87 7733947.8 8.05,651934.4 7733946.91 8.02,651932.819 7733945.59 8.01)",
+      "metadata": {
+        "startdato": "2026-09-10"
+      }
+    },
+    {
+      "occurrence": 111,
+      "source": "surface-r2-r3.json",
+      "reference": "1126028-2-10",
+      "link": 1126028,
+      "start": 0.0,
+      "end": 0.02321287,
+      "from_node": "1139060",
+      "to_node": "2833260",
+      "source_length_m": 5.97,
+      "chainage_m": 7191.882,
+      "fields": [],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651932.819 7733945.59 8.01,651930.681 7733948.128 7.68,651928.96 7733950.107 7.42)",
+      "metadata": {
+        "startdato": "2026-09-10"
+      }
+    },
+    {
+      "occurrence": 112,
+      "source": "surface-r2-r3.json",
+      "reference": "1126028-7-11",
+      "link": 1126028,
+      "start": 0.02321287,
+      "end": 0.73318986,
+      "from_node": "2833260",
+      "to_node": "1139001",
+      "source_length_m": 172.291,
+      "chainage_m": 7197.852,
+      "fields": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "4H1"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651928.96 7733950.107 7.42,651924.1 7733956 7.19,651918.2 7733963.91 6.99,651910.8 7733974.59 6.69,651902.2 7733987.3 6.29,651894.1 7733998.7 5.79,651887.1 7734008.8 5.39,651880.8 7734017.8 5.191,651871.1 7734032.09 4.791,651863 7734043.8 4.691,651854.9 7734055.8 4.591,651846.9 7734067.3 4.591,651839.1 7734078.7 4.591,651831.3 7734089.8 4.691,651830.31 7734091.27 4.691)",
+      "metadata": {
+        "startdato": "2026-09-10"
+      }
+    },
+    {
+      "occurrence": 113,
+      "source": "surface-r2-r3.json",
+      "reference": "1126028-3-10",
+      "link": 1126028,
+      "start": 0.73318986,
+      "end": 0.8340701,
+      "from_node": "1139001",
+      "to_node": "2833259",
+      "source_length_m": 24.459,
+      "chainage_m": 7370.143,
+      "fields": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "4H1"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651830.31 7734091.27 4.691,651822.2 7734103.41 4.691,651816.7 7734111.59 4.891)",
+      "metadata": {
+        "startdato": "2026-09-10"
+      }
+    },
+    {
+      "occurrence": 114,
+      "source": "surface-r2-r3.json",
+      "reference": "1126028-4-10",
+      "link": 1126028,
+      "start": 0.8340701,
+      "end": 0.84936053,
+      "from_node": "2833259",
+      "to_node": "1138989",
+      "source_length_m": 3.72,
+      "chainage_m": 7394.602,
+      "fields": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651816.7 7734111.59 4.891,651814.91 7734114.85 4.961)",
+      "metadata": {
+        "startdato": "2026-09-10"
+      }
+    },
+    {
+      "occurrence": 115,
+      "source": "surface-r2-r3.json",
+      "reference": "1126028-5-10",
+      "link": 1126028,
+      "start": 0.84936053,
+      "end": 0.88649542,
+      "from_node": "1138989",
+      "to_node": "2833261",
+      "source_length_m": 9.011,
+      "chainage_m": 7398.322,
+      "fields": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651814.91 7734114.85 4.961,651814 7734116.5 4.991,651810.3 7734122.59 5.091)",
+      "metadata": {
+        "startdato": "2026-09-10"
+      }
+    },
+    {
+      "occurrence": 116,
+      "source": "surface-r2-r3.json",
+      "reference": "1126028-8-10",
+      "link": 1126028,
+      "start": 0.88649542,
+      "end": 0.98510369,
+      "from_node": "2833261",
+      "to_node": "2833258",
+      "source_length_m": 23.928,
+      "chainage_m": 7407.333,
+      "fields": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651810.3 7734122.59 5.091,651806.2 7734131 5.191,651800.5 7734144.41 5.291)",
+      "metadata": {
+        "startdato": "2026-09-10"
+      }
+    },
+    {
+      "occurrence": 117,
+      "source": "surface-r2-r3.json",
+      "reference": "1126028-6-10",
+      "link": 1126028,
+      "start": 0.98510369,
+      "end": 1.0,
+      "from_node": "2833258",
+      "to_node": "1138977",
+      "source_length_m": 3.605,
+      "chainage_m": 7431.261,
+      "fields": [],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651800.5 7734144.41 5.291,651799.7 7734146 5.491,651799.1 7734147.7 5.691)",
+      "metadata": {
+        "startdato": "2026-09-10"
+      }
+    },
+    {
+      "occurrence": 118,
+      "source": "pilot-north-roads.json",
+      "reference": "1125949-6-8",
+      "link": 1125949,
+      "start": 0.65287709,
+      "end": 0.77265718,
+      "from_node": "1138977",
+      "to_node": "3249302",
+      "source_length_m": 13.0,
+      "chainage_m": 7434.866,
+      "fields": [
+        "1",
+        "3"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651799.1 7734147.7 5.691,651802.114 7734148.935 5.691,651805.204 7734150.88 5.891,651806.881 7734152.264 5.991)",
+      "metadata": {
+        "startdato": "2026-09-03"
+      }
+    },
+    {
+      "occurrence": 119,
+      "source": "pilot-north-roads.json",
+      "reference": "1125949-7-8",
+      "link": 1125949,
+      "start": 0.77265718,
+      "end": 0.80771539,
+      "from_node": "3249302",
+      "to_node": "3249304",
+      "source_length_m": 5.23,
+      "chainage_m": 7447.866,
+      "fields": [
+        "1",
+        "3"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651806.881 7734152.264 5.991,651808.639 7734154.574 6.198,651809.635 7734156.677 6.22)",
+      "metadata": {
+        "startdato": "2026-09-03"
+      }
+    },
+    {
+      "occurrence": 120,
+      "source": "pilot-north-roads.json",
+      "reference": "1125949-9-8",
+      "link": 1125949,
+      "start": 0.80771539,
+      "end": 0.86281891,
+      "from_node": "3249304",
+      "to_node": "1138988",
+      "source_length_m": 8.238,
+      "chainage_m": 7453.096,
+      "fields": [
+        "1",
+        "3"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651809.635 7734156.677 6.22,651810.526 7734158.753 6.242,651810.9 7734161.2 6.291,651810.8 7734164.7 6.391)",
+      "metadata": {
+        "startdato": "2026-09-03"
+      }
+    },
+    {
+      "occurrence": 121,
+      "source": "pilot-north-roads.json",
+      "reference": "1125949-8-8",
+      "link": 1125949,
+      "start": 0.86281891,
+      "end": 0.92475844,
+      "from_node": "1138988",
+      "to_node": "3249306",
+      "source_length_m": 8.633,
+      "chainage_m": 7461.334,
+      "fields": [
+        "1",
+        "3"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651810.8 7734164.7 6.391,651810.669 7734167.245 6.391,651810.091 7734169.687 6.391,651808.2 7734172.8 6.391)",
+      "metadata": {
+        "startdato": "2026-09-03"
+      }
+    },
+    {
+      "occurrence": 122,
+      "source": "pilot-north-roads.json",
+      "reference": "1125949-11-8",
+      "link": 1125949,
+      "start": 0.92475844,
+      "end": 1.0,
+      "from_node": "3249306",
+      "to_node": "3251155",
+      "source_length_m": 9.045,
+      "chainage_m": 7469.967,
+      "fields": [
+        "1",
+        "3"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651808.2 7734172.8 6.391,651805.541 7734175.684 6.391,651804.093 7734176.925 6.391,651801.381 7734178.651 6.391)",
+      "metadata": {
+        "startdato": "2026-09-03"
+      }
+    },
+    {
+      "occurrence": 123,
+      "source": "pilot-north-roads.json",
+      "reference": "1125949-1-8",
+      "link": 1125949,
+      "start": 0.0,
+      "end": 0.1180675,
+      "from_node": "3251155",
+      "to_node": "1138972",
+      "source_length_m": 9.888,
+      "chainage_m": 7479.012,
+      "fields": [
+        "1",
+        "3"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651801.381 7734178.651 6.391,651797.9 7734180.09 6.391,651791.8 7734180.59 6.291)",
+      "metadata": {
+        "startdato": "2026-09-03"
+      }
+    },
+    {
+      "occurrence": 124,
+      "source": "pilot-north-roads.json",
+      "reference": "1125949-2-8",
+      "link": 1125949,
+      "start": 0.1180675,
+      "end": 0.21949925,
+      "from_node": "1138972",
+      "to_node": "3249303",
+      "source_length_m": 11.0,
+      "chainage_m": 7488.9,
+      "fields": [
+        "1",
+        "3"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651791.8 7734180.59 6.291,651786.9 7734179.41 6.191,651783.623 7734177.579 5.891)",
+      "metadata": {
+        "startdato": "2026-09-03"
+      }
+    },
+    {
+      "occurrence": 125,
+      "source": "pilot-north-roads.json",
+      "reference": "1125949-3-8",
+      "link": 1125949,
+      "start": 0.21949925,
+      "end": 0.27270771,
+      "from_node": "3249303",
+      "to_node": "3249305",
+      "source_length_m": 6.998,
+      "chainage_m": 7499.9,
+      "fields": [
+        "1",
+        "3"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651783.623 7734177.579 5.891,651780.243 7734174.306 5.852,651779.448 7734173.019 5.828)",
+      "metadata": {
+        "startdato": "2026-09-03"
+      }
+    },
+    {
+      "occurrence": 126,
+      "source": "pilot-north-roads.json",
+      "reference": "1125949-12-8",
+      "link": 1125949,
+      "start": 0.27270771,
+      "end": 0.35105026,
+      "from_node": "3249305",
+      "to_node": "1138963",
+      "source_length_m": 10.304,
+      "chainage_m": 7506.898,
+      "fields": [
+        "1",
+        "3"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651779.448 7734173.019 5.828,651778.2 7734171 5.791,651777.003 7734167.619 5.654,651776.6 7734163.3 5.491)",
+      "metadata": {
+        "startdato": "2026-09-03"
+      }
+    },
+    {
+      "occurrence": 127,
+      "source": "surface-r3-circle.json",
+      "reference": "1125918-1-8",
+      "link": 1125918,
+      "start": 0.0,
+      "end": 0.00367502,
+      "from_node": "1138963",
+      "to_node": "3227313",
+      "source_length_m": 3.977,
+      "chainage_m": 7517.202,
+      "fields": [],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651776.6 7734163.3 5.491,651772.69 7734162.589 5.343)",
+      "metadata": {
+        "startdato": "2026-09-03"
+      }
+    },
+    {
+      "occurrence": 128,
+      "source": "surface-r3-circle.json",
+      "reference": "1125918-6-8",
+      "link": 1125918,
+      "start": 0.00367502,
+      "end": 0.09113068,
+      "from_node": "3227313",
+      "to_node": "1138914",
+      "source_length_m": 94.642,
+      "chainage_m": 7521.179,
+      "fields": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651772.69 7734162.589 5.343,651760.7 7734160.41 4.891,651751.9 7734159.3 4.791,651741.7 7734158.09 4.591,651730.3 7734156.5 4.491,651717.8 7734154.7 4.291,651708.4 7734153.09 4.091,651697.2 7734151.5 3.991,651683.7 7734149.59 3.691,651679.08 7734148.92 3.491)",
+      "metadata": {
+        "startdato": "2026-09-03"
+      }
+    },
+    {
+      "occurrence": 129,
+      "source": "surface-r3-circle.json",
+      "reference": "1125918-2-8",
+      "link": 1125918,
+      "start": 0.09113068,
+      "end": 0.13524139,
+      "from_node": "1138914",
+      "to_node": "1138898",
+      "source_length_m": 50.103,
+      "chainage_m": 7615.821,
+      "fields": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651679.08 7734148.92 3.491,651676.8 7734148.59 3.391,651666.4 7734147.09 3.391,651651.1 7734144.91 3.292,651640.6 7734143.41 3.092,651631.81 7734142.3 2.752)",
+      "metadata": {
+        "startdato": "2026-09-03"
+      }
+    },
+    {
+      "occurrence": 130,
+      "source": "surface-r3-circle.json",
+      "reference": "1125918-3-8",
+      "link": 1125918,
+      "start": 0.13524139,
+      "end": 0.15230862,
+      "from_node": "1138898",
+      "to_node": "2832843",
+      "source_length_m": 19.386,
+      "chainage_m": 7665.924,
+      "fields": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651631.81 7734142.3 2.752,651630.2 7734142.09 2.692,651624 7734141.5 2.592,651613.4 7734140.91 2.492)",
+      "metadata": {
+        "startdato": "2026-09-03"
+      }
+    },
+    {
+      "occurrence": 131,
+      "source": "surface-r3-circle.json",
+      "reference": "1125918-4-8",
+      "link": 1125918,
+      "start": 0.15230862,
+      "end": 0.25826503,
+      "from_node": "2832843",
+      "to_node": "2832844",
+      "source_length_m": 113.0,
+      "chainage_m": 7685.31,
+      "fields": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651613.4 7734140.91 2.492,651556.5 7734152.41 2.392,651501 7734163.59 2.292)",
+      "metadata": {
+        "startdato": "2026-09-03"
+      }
+    },
+    {
+      "occurrence": 132,
+      "source": "surface-r3-circle.json",
+      "reference": "1125918-5-8",
+      "link": 1125918,
+      "start": 0.25826503,
+      "end": 0.97083937,
+      "from_node": "2832844",
+      "to_node": "3316794",
+      "source_length_m": 770.785,
+      "chainage_m": 7798.31,
+      "fields": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651501 7734163.59 2.292,651492.1 7734167.3 2.392,651481.8 7734172.7 2.592,651471.7 7734178.8 2.692,651461.6 7734185.3 2.892,651451.2 7734193.09 2.992,651441.3 7734201.41 3.092,651431.8 7734210.59 3.192,651421 7734222.5 3.192,651411.4 7734235.41 3.292,651402.7 7734248.59 3.292,651396.7 7734259.09 3.193,651391.2 7734270.8 3.293,651386.7 7734282 3.193,651382 7734296.3 3.293,651378.7 7734309.8 3.293,651375.9 7734326.41 3.293,651374.4 7734339.5 3.393,651373.1 7734354.3 3.393,651371.8 7734370.91 3.493,651370.5 7734386 3.593,651369.1 7734399 3.593,651367.6 7734412.2 3.593,651365.4 7734426.5 3.593,651362.6 7734440.09 3.593,651360 7734450.59 3.593,651356.4 7734463 3.593,651352.3 7734475.5 3.593,651347.2 7734489 3.593,651341.8 7734501.2 3.593,651336.7 7734511.7 3.693,651333.2 7734518.5 3.694,651327.7 7734527.91 3.594,651321.1 7734538.7 3.594,651314 7734550.09 3.594,651306.4 7734561.41 3.594,651299.7 7734571.2 3.494,651291.7 7734583.09 3.494,651284.2 7734594.09 3.494,651276.8 7734605 3.394,651268 7734617.59 3.394,651261 7734628.2 3.394,651252.9 7734640.2 3.494,651245.8 7734650.8 3.494,651238.8 7734661.3 3.394,651231.5 7734673 3.394,651224.9 7734684 3.394,651218.9 7734694 3.394,651212.1 7734705.41 3.394,651205.5 7734717.2 3.394,651199.6 7734727.7 3.395,651194.1 7734737.7 3.395,651188.2 7734749.09 3.395,651182.6 7734760.09 3.295,651177.9 7734769.5 3.295,651171.4 7734782.7 3.295,651164.6 7734796.7 3.295,651158.2 7734810.09 3.295,651151.4 7734823.91 3.195,651150.884 7734825.001 3.205)",
+      "metadata": {
+        "startdato": "2026-09-03"
+      }
+    },
+    {
+      "occurrence": 133,
+      "source": "surface-r3-circle.json",
+      "reference": "1125918-8-8",
+      "link": 1125918,
+      "start": 0.97083937,
+      "end": 0.99627963,
+      "from_node": "3316794",
+      "to_node": "3227310",
+      "source_length_m": 27.518,
+      "chainage_m": 8569.095,
+      "fields": [
+        "1",
+        "1H1",
+        "2",
+        "4"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651150.884 7734825.001 3.205,651146.2 7734834.91 3.295,651141.7 7734843.2 3.195,651138.863 7734849.731 3.438)",
+      "metadata": {
+        "startdato": "2026-09-03"
+      }
+    },
+    {
+      "occurrence": 134,
+      "source": "surface-r3-circle.json",
+      "reference": "1125918-7-8",
+      "link": 1125918,
+      "start": 0.99627963,
+      "end": 1.0,
+      "from_node": "3227310",
+      "to_node": "1138787",
+      "source_length_m": 4.024,
+      "chainage_m": 8596.613,
+      "fields": [],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651138.863 7734849.731 3.438,651137.26 7734853.42 3.575)",
+      "metadata": {
+        "startdato": "2026-09-03"
+      }
+    },
+    {
+      "occurrence": 135,
+      "source": "airport-circle.json",
+      "reference": "1125950-10-10",
+      "link": 1125950,
+      "start": 0.87462251,
+      "end": 1.0,
+      "from_node": "1138787",
+      "to_node": "3251244",
+      "source_length_m": 12.193,
+      "chainage_m": 8600.637,
+      "fields": [
+        "1",
+        "3"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651137.26 7734853.42 3.575,651139.13 7734854.37 3.565,651141.58 7734856.26 3.495,651144.07 7734858.98 3.435,651145.74 7734861.84 3.39)",
+      "metadata": {
+        "startdato": "2026-09-03"
+      }
+    },
+    {
+      "occurrence": 136,
+      "source": "airport-circle.json",
+      "reference": "1125950-1-10",
+      "link": 1125950,
+      "start": 0.0,
+      "end": 0.05053167,
+      "from_node": "3251244",
+      "to_node": "3251245",
+      "source_length_m": 6.255,
+      "chainage_m": 8612.83,
+      "fields": [
+        "1",
+        "3"
+      ],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651145.74 7734861.84 3.39,651146.9 7734865 3.355,651147.37 7734867.85 3.365)",
+      "metadata": {
+        "startdato": "2026-09-03"
+      }
+    },
+    {
+      "occurrence": 137,
+      "source": "surface-circle-exit.json",
+      "reference": "1126506-1-8",
+      "link": 1126506,
+      "start": 0.0,
+      "end": 0.12084115,
+      "from_node": "3251245",
+      "to_node": "2834984",
+      "source_length_m": 4.042,
+      "chainage_m": 8619.085,
+      "fields": [],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651147.37 7734867.85 3.365,651150.94 7734869.709 2.995)",
+      "metadata": {
+        "startdato": "2026-09-03"
+      }
+    },
+    {
+      "occurrence": 138,
+      "source": "surface-circle-exit.json",
+      "reference": "1126506-2-8",
+      "link": 1126506,
+      "start": 0.12084115,
+      "end": 0.530578,
+      "from_node": "2834984",
+      "to_node": "1818232",
+      "source_length_m": 14.697,
+      "chainage_m": 8623.127,
+      "fields": [],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651150.94 7734869.709 2.995,651156.8 7734875.2 2.895,651162.309 7734878.953 2.941)",
+      "metadata": {
+        "startdato": "2026-09-03"
+      }
+    },
+    {
+      "occurrence": 139,
+      "source": "surface-circle-exit.json",
+      "reference": "1126506-3-8",
+      "link": 1126506,
+      "start": 0.530578,
+      "end": 1.0,
+      "from_node": "1818232",
+      "to_node": "1138796",
+      "source_length_m": 18.831,
+      "chainage_m": 8637.824,
+      "fields": [],
+      "geometry_srid": 5973,
+      "geometry": "LINESTRING Z (651162.309 7734878.953 2.941,651168.4 7734883 3.095,651172.1 7734886.2 3.295,651177.2 7734890.41 3.595)",
+      "metadata": {
+        "startdato": "2026-09-03"
+      }
+    }
+  ]
+}

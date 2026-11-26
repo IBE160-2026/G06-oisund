@@ -1,0 +1,79 @@
+{
+  "claims": [
+    {
+      "id": 1,
+      "claim": "Secure context required; localhost exception does not qualify tablet LAN HTTP",
+      "class": "patterns",
+      "pub_date": "2026-03-26",
+      "status": "verified",
+      "sources": [
+        1,
+        6
+      ]
+    },
+    {
+      "id": 2,
+      "claim": "Visible-document delivery and lifecycle suspension preclude a background continuity promise",
+      "class": "compatibility",
+      "pub_date": "2026-10-16",
+      "status": "verified",
+      "sources": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": 3,
+      "claim": "Measurement timestamp/accuracy/cache/high-accuracy semantics documented, not tablet performance",
+      "class": "patterns",
+      "pub_date": "2026-03-26",
+      "status": "unverified",
+      "sources": [
+        1
+      ]
+    },
+    {
+      "id": 4,
+      "claim": "OS power and permission controls matter; exact browser behavior not qualified",
+      "class": "compatibility",
+      "pub_date": "2026-10-22",
+      "status": "unverified",
+      "sources": [
+        3,
+        4
+      ]
+    },
+    {
+      "id": 5,
+      "claim": "Brave help documents site prompts on desktop; Android parity remains unqualified",
+      "class": "compatibility",
+      "pub_date": "2024-11-11",
+      "status": "unverified",
+      "sources": [
+        5
+      ]
+    },
+    {
+      "id": 6,
+      "claim": "Entur documents vehicle positions; user-bus and dated-trip linkage is unqualified",
+      "class": "compatibility",
+      "pub_date": "2026-07-15",
+      "status": "unverified",
+      "sources": [
+        7,
+        9
+      ]
+    },
+    {
+      "id": 7,
+      "claim": "NSR offers location/mapping/version data; selected route coordinate coverage unqualified",
+      "class": "compatibility",
+      "pub_date": null,
+      "status": "unverified",
+      "sources": [
+        8
+      ]
+    }
+  ],
+  "note": "Null publication dates omitted from date arithmetic and require pre-use recheck; verification is independent-publisher corroboration, not product testing."
+}

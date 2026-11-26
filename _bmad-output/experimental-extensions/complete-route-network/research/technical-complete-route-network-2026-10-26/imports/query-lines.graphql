@@ -1,0 +1,1 @@
+{ lines(authorities:["TRO:Authority:1"], publicCodes:["20","24","42"], transportModes:[bus]) { id publicCode name } __type(name:"ServiceJourney") { fields { name args { name type { kind name ofType { name } } } type { kind name ofType { name } } } } }

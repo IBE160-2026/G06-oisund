@@ -1,0 +1,1 @@
+{ line(id:"TRO:Line:1_20") { id serviceJourneys { id privateCode publicCode directionType activeDates quays(first:1) { id name } lastQuay:quays(last:1) { id name } } } }

@@ -18,12 +18,27 @@ Public provider traffic receives only fixed, scoped public identifiers and dates
 
 Use feature detection and one foreground location watch. Purge samples and revoke the generation on visibility or context loss, error, Pause/Off and session expiry. Require deliberate resume after interruption. Progression requires a manually selected occurrence even when speed can start by itself. Keep static road limit, upcoming change and own speed independent and advisory. Exact physical qualification remains pending.
 
+## Historical planning and evidence
+
+The original packages preserve the October research, acceptance criteria, pilot assumptions and evidence. The [V2 handoff](../../docs/v2-handoff.md) and [Tromsø field trial](../../docs/v2-field-trial.md) describe the integrated behavior, current data coverage and remaining acceptance work.
+
+| Area | Historical material | Integrated V2 specification |
+| --- | --- | --- |
+| Password management | [Planning and implementation evidence](../experimental-extensions/password-management/README.md) · [Session log and owner trials](../../.logs/jonas-oisund/987-2026-10-31-03-46-36-passordhandtering-plan.md) | [Password integration](spec-v2-password-integration.md) |
+| Automatic notices | [Source research and proposed acceptance criteria](../experimental-extensions/automatic-notices/README.md) | [Automatic notices](spec-v2-automatic-notices.md) · [Source and pilot qualification](../../docs/v2-automatic-notices.md) |
+| Complete route network | [Line 20 casebook, source snapshots and pilot plan](../experimental-extensions/complete-route-network/README.md) | [Route P1](spec-v2-route-p1.md) · [Tromsø field trial](../../docs/v2-field-trial.md#daterte-avganger) |
+| Position progression | [Anchor behavior, proposed tests and overnight example](../experimental-extensions/position-progression/README.md) | [Position progression](spec-v2-position-progression.md) · [Test evidence](../../docs/evidence/v2-position-progression.md) |
+| Road limits | [NVDB samples, corridor qualification and acceptance matrix](../experimental-extensions/speed-limits/README.md) | [Road limits](spec-v2-road-limits.md) · [Source qualification](../../docs/evidence/v2-road-source-20261120.md) |
+| GPS speed | [Measurement decisions and Lenovo verification plan](../experimental-extensions/gps-speed/README.md) | [GPS and shared position source](spec-v2-gps-position-source.md) |
+
+The October route manifest records the original line endings. Its SHA-256 entries can be reproduced from the archived Git blobs as stored, with CRLF throughout, or with CRLF at the final newline only. The NVDB qualification capture `swagger-initializer.json` contains the JavaScript response returned by that endpoint.
+
 ## Implemented revisions and evidence gates
 
 - AN-E1-S3 distinguishes the exact Giæverbukta StopPlace in manual review when the verified stop-only SIRI shape overlaps planned line 24 time on a qualified pilot date. Scheduled membership evidence is sufficient for this review context. Exact trip, platform and coordinate authority remain separate. [Dated stop evidence](../../docs/v2-automatic-notices.md#dated-giæverbukta-stop-review).
 
 - A later source or private-revision change invalidates an unsubmitted review choice. A sent operation retains its original basis and identity for outcome checks. Public notice identity visibility and publication of a specific revision are separate observations.
-- The November line 20 window replaces the elapsed pilot dates for the V2 runtime only. All historical research and the prior casebook remain on their original branches. The independent actual-shift pair ledger and a sufficiently recent pinned source are needed for field qualification.
+- The November line 20 window replaces the elapsed pilot dates for the V2 runtime only. The [original research and casebook](../experimental-extensions/complete-route-network/README.md) document the October pilot. The independent actual-shift pair ledger and a sufficiently recent pinned source are needed for field qualification.
 - Dated route identity and junction/road identity are separate authorities. The current NSR export provides matching Quays and coordinate values but no applicable direct validity intervals. The historic NVDB corridor sample provides actual road-limit evidence at R4 but does not qualify complete directed coverage or a calibrated uncertainty interval. The corresponding real automatic displays stay unavailable until those conditions are met.
 - The 20 November recheck found 145 dated segments on the same public road corridor. The published shapes of all nine active line 20 patterns miss the R4 exit by at least 2.4 km. Retain line 20 for its timetable pilot and qualify a separate dated binding for the road trial. [Road evidence and dependency check](../../docs/evidence/v2-road-source-20261120.md).
 - SL-E1-S6 rechecks the full road package on each deliberate start. A changed package takes effect after qualification and fresh fixes. Road-source expiry uses the server-anchored clock, and a delayed response cannot restart a cancelled attempt. [Source requalification and review](spec-v2-road-source-requalification.md).

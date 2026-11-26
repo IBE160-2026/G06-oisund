@@ -1,0 +1,14 @@
+{
+  "entries": 22,
+  "by_type": {
+    "claim": 16,
+    "decision": 2,
+    "event": 3,
+    "source": 1
+  },
+  "claims": {
+    "unverified": 10,
+    "verified": 2
+  },
+  "claims_total": 12
+}

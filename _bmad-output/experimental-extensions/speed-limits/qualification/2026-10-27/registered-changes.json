@@ -1,0 +1,100 @@
+[
+  {
+    "link_id": 1109722,
+    "position": 0.57617192,
+    "from": [
+      40
+    ],
+    "to": [
+      30
+    ],
+    "object_ids": [
+      91472646
+    ],
+    "utm33_point_from_segment": "652445.407 7730007.401 3.4"
+  },
+  {
+    "link_id": 1109517,
+    "position": 0.00216787,
+    "from": [
+      30
+    ],
+    "to": [
+      50
+    ],
+    "object_ids": [
+      91472898
+    ],
+    "utm33_point_from_segment": "651788.3 7729809.899 11.7"
+  },
+  {
+    "link_id": 1109517,
+    "position": 0.26535564,
+    "from": [
+      50
+    ],
+    "to": [
+      30
+    ],
+    "object_ids": [
+      932902367
+    ],
+    "utm33_point_from_segment": "651356.3 7730763.8 4.183"
+  },
+  {
+    "link_id": 1109517,
+    "position": 0.39829852,
+    "from": [
+      30
+    ],
+    "to": [
+      50
+    ],
+    "object_ids": [
+      91472898
+    ],
+    "utm33_point_from_segment": "651280.66 7731301.39 10.86"
+  },
+  {
+    "link_id": 1109517,
+    "position": 0.47840131,
+    "from": [
+      50
+    ],
+    "to": [
+      60
+    ],
+    "object_ids": [
+      91472897
+    ],
+    "utm33_point_from_segment": "651247 7731621.09 3.485"
+  },
+  {
+    "link_id": 1109517,
+    "position": 0.88134235,
+    "from": [
+      60
+    ],
+    "to": [
+      50
+    ],
+    "object_ids": [
+      91472896
+    ],
+    "utm33_point_from_segment": "651516.417 7733216.343 7.489"
+  },
+  {
+    "link_id": 1125918,
+    "position": 0.36159129,
+    "from": [
+      60
+    ],
+    "to": [
+      70
+    ],
+    "object_ids": [
+      1019488950
+    ],
+    "utm33_point_from_segment": null
+  }
+]

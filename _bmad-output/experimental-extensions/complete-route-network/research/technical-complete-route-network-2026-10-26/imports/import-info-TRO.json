@@ -1,0 +1,66 @@
+{
+  "status": 200,
+  "body": "2026-10-23T12:01:39",
+  "accessed": "2026-10-26T08:48:44.9177134Z",
+  "url": "https://api.entur.io/timetable-public/v1/timetable-import-info/import_date/TRO",
+  "headers": {
+    "Date": [
+      "Mon, 26 Oct 2026 08:48:43 GMT"
+    ],
+    "Alt-Svc": [
+      "h3=\":443\"; ma=2592000",
+      "h3=\":443\"; ma=2592000"
+    ],
+    "Cache-Control": [
+      "no-store, must-revalidate, no-cache, max-age=0"
+    ],
+    "Pragma": [
+      "no-cache"
+    ],
+    "X-Content-Type-Options": [
+      "nosniff"
+    ],
+    "Strict-Transport-Security": [
+      "max-age=31536000; includeSubDomains"
+    ],
+    "X-Frame-Options": [
+      "DENY"
+    ],
+    "X-XSS-Protection": [
+      "1; mode=block"
+    ],
+    "x-robots-tag": [
+      "none"
+    ],
+    "Access-Control-Allow-Origin": [
+      "*"
+    ],
+    "Access-Control-Allow-Headers": [
+      "origin, x-requested-with, accept, ET-Client-Name, ET-Client-Id, Content-Type, X-Correlation-Id, authorization"
+    ],
+    "Access-Control-Max-Age": [
+      "3628800"
+    ],
+    "Access-Control-Allow-Methods": [
+      "GET, PUT, POST, DELETE"
+    ],
+    "X-Request-ID": [
+      "27d7f706-5120-471b-843a-286d96a31c20"
+    ],
+    "x-accel-buffering": [
+      "no"
+    ],
+    "Via": [
+      "1.1 google"
+    ],
+    "Content-Length": [
+      "19"
+    ],
+    "Content-Type": [
+      "text/plain"
+    ],
+    "Expires": [
+      "0"
+    ]
+  }
+}

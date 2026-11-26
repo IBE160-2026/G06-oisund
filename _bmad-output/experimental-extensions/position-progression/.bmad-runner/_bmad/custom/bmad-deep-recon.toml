@@ -1,0 +1,11 @@
+[workflow]
+research_output_path = "D:/IBE160-plan-position-progression/_bmad-output/experimental-extensions/position-progression/research"
+preset = "quick"
+subagents = "none"
+max_sources_per_round = 5
+max_depth = 1
+validation = "normal"
+red_team = "off"
+use_workflows = "off"
+output_format = "md"
+preferred_sources = ["w3.org", "developer.chrome.com", "chromium.googlesource.com", "developer.android.com", "support.brave.com", "developer.entur.org"]
