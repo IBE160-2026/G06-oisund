@@ -1,5 +1,6 @@
 """Origin admission only. No database, login, cookies or token logging."""
 import json
+from ipaddress import ip_address
 import re
 import socket
 import threading
@@ -242,6 +243,15 @@ def handler_for(admission):
             tokens = self.headers.get_all('Cf-Access-Jwt-Assertion', [])
             allowed = self.path == '/verify' and len(tokens) == 1 and admission.allows(tokens[0])
             self.send_response(204 if allowed else 403)
+            source = self.headers.get_all('Cf-Connecting-IP', [])
+            # Only the tunnel's direct edge request supplies a source address.
+            if allowed and not self.headers.get('Cf-Worker') and len(source) == 1 and '%' not in source[0]:
+                try:
+                    address = ip_address(source[0])
+                except ValueError:
+                    pass
+                else:
+                    self.send_header('X-Verified-Client', str(address))
             self.send_header('Cache-Control', 'no-store')
             self.send_header('Content-Length', '0')
             self.end_headers()

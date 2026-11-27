@@ -54,6 +54,7 @@ services:
     environment:
       APP_MODE: private-local
       PRIVATE_HTTPS_DEPLOYMENT: '1'
+      PRIVATE_TRUST_GATEWAY_SOURCE: '1'
       PRIVATE_ORIGIN: https://${TABLET_HOST:?Set TABLET_HOST in ignored .env.tablet}
       PRIVATE_DATABASE_URL: postgresql://private_work@private-db/private_work
       PRIVATE_DATABASE_PASSWORD_FILE: /run/secrets/tablet_postgres_password

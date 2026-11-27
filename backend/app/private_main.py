@@ -163,7 +163,7 @@ class Credentials(BaseModel):
 
 @app.post('/auth/login')
 def login(body: Credentials, request: Request, response: Response):
-    token, row = auth.authenticate(body.username.strip().casefold(), body.password, request.client.host)
+    token, row = auth.authenticate(body.username.strip().casefold(), body.password, auth.admission_source(request))
     # Revoke the existing browser session when changing identity.
     with database() as conn:
         auth.revoke_browser(conn, request)

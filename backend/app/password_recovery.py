@@ -141,20 +141,8 @@ INVALID_CODE = 'Koden kunne ikke brukes. Kontroller opplysningene eller kontakt 
 
 def admission(name, address):
     from fastapi import HTTPException
-    allowed = True
-    with database() as conn:
-        conn.execute('SELECT pg_advisory_xact_lock(903004)')
-        conn.execute("DELETE FROM login_limits WHERE bucket LIKE 'recover:%%' AND expires_at <= clock_timestamp()")
-        deadline = None
-        for bucket, maximum in [('recover:global', 100), ('recover:ip:' + auth.digest(address), 20), ('recover:user:' + auth.digest(name.encode('utf-8', errors='backslashreplace').decode('utf-8')), 5)]:
-            row = conn.execute("INSERT INTO login_limits VALUES (%s,1,COALESCE(%s,clock_timestamp()+interval '15 minutes')) "
-                               'ON CONFLICT (bucket) DO UPDATE SET attempts=LEAST(login_limits.attempts+1,101) RETURNING attempts,expires_at',
-                               (bucket, deadline)).fetchone()
-            deadline = row['expires_at']
-            if row['attempts'] > maximum:
-                allowed = False
-                break
-    if not allowed:
+    bounded_name = name.encode('utf-8', errors='backslashreplace').decode('utf-8')
+    if not auth.admit_credentials('recover:', 903004, bounded_name, address, 5):
         raise HTTPException(429, 'For mange forsøk. Prøv igjen senere.', headers={'Retry-After': '900'})
 
 
@@ -183,7 +171,7 @@ def redeem(request, username, code, new_password, confirmation):
         raise HTTPException(422, 'Kontroller feltene.') from None
     require_no_session(request)
     name = username.strip().casefold()
-    admission(name, request.client.host)
+    admission(name, auth.admission_source(request))
     with database() as conn:
         account = conn.execute('SELECT id FROM accounts WHERE username=%s', (name,)).fetchone() if valid_name(name) else None
         if account:

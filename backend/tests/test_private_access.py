@@ -170,12 +170,12 @@ def test_storage_and_public_config_fail_closed(monkeypatch):
 
 def test_random_names_cannot_grow_unbounded_metadata(client, users):
     proof = headers(client)
-    for _ in range(110):
+    for _ in range(22):
         response = client.post('/auth/login', headers=proof, json={'username': 'absent-' + uuid4().hex, 'password': 'incorrect-synthetic'})
         assert response.status_code in {401, 429}
     with database() as conn:
-        assert conn.execute('SELECT count(*) AS n FROM login_limits').fetchone()['n'] <= 201
-        assert conn.execute("SELECT attempts FROM login_limits WHERE bucket='global'").fetchone()['attempts'] == 101
+        assert conn.execute('SELECT count(*) AS n FROM login_limits').fetchone()['n'] <= 22
+        assert conn.execute("SELECT attempts FROM login_limits WHERE bucket='global'").fetchone()['attempts'] == 20
 
 
 def test_cli_hidden_password_and_no_echo():
@@ -215,7 +215,7 @@ def test_cli_hidden_password_and_no_echo():
 def test_staggered_window_metadata_expires_together(client, users):
     assert login(client, users).status_code == 200
     with database() as conn:
-        conn.execute("UPDATE login_limits SET expires_at=clock_timestamp()+interval '3 minutes'")
+        conn.execute("UPDATE login_limits SET expires_at=statement_timestamp()+interval '3 minutes'")
         deadline = conn.execute("SELECT expires_at FROM login_limits WHERE bucket='global'").fetchone()['expires_at']
     assert client.post('/auth/login', headers=headers(client), json={'username': 'synthetic-absent-new-window', 'password': 'wrong'}).status_code == 401
     with database() as conn:
@@ -232,7 +232,7 @@ def test_ip_limit_twenty_below_global(client, users):
         response = client.post('/auth/login', headers=proof, json={'username': 'synthetic-distinct-' + uuid4().hex, 'password': 'wrong'})
         assert response.status_code == (401 if attempt <= 20 else 429)
     with database() as conn:
-        assert conn.execute("SELECT attempts FROM login_limits WHERE bucket='global'").fetchone()['attempts'] == 21
+        assert conn.execute("SELECT attempts FROM login_limits WHERE bucket='global'").fetchone()['attempts'] == 20
 
 
 def test_invalid_csrf_encoding_signature_and_age(client, users):

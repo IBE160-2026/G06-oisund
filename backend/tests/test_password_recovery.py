@@ -115,7 +115,7 @@ def test_generic_invalid_states_no_mutation(client, users, state):
         after = conn.execute('SELECT * FROM accounts ORDER BY id').fetchall(), conn.execute('SELECT * FROM sessions ORDER BY token_hash').fetchall(), conn.execute('SELECT * FROM recovery_proofs ORDER BY id').fetchall(), conn.execute('SELECT * FROM recovery_audit ORDER BY id').fetchall()
         verified = after == before
         assert verified, 'Synthetic recovery invariant failed'
-        verified = conn.execute("SELECT attempts FROM login_limits WHERE bucket=%s", ('recover:user:'+auth.digest(name),)).fetchone()['attempts'] >= 1
+        verified = conn.execute("SELECT count(*) AS n FROM login_limits WHERE bucket LIKE 'recover:user:%%'").fetchone()['n'] >= 1
         assert verified, 'Synthetic recovery invariant failed'
 
 def test_boundaries_and_live_other_session(client, users):
@@ -229,7 +229,7 @@ def test_persistent_parallel_budget_and_expiry(users):
     verified = outcome(lambda:auth.authenticate(users[0][0],users[2],'synthetic-login'))==200
     assert verified, 'Synthetic recovery invariant failed'
     with database() as conn:
-        verified = conn.execute("SELECT attempts FROM login_limits WHERE bucket LIKE 'recover:user:%%'").fetchone()['attempts']==8
+        verified = conn.execute("SELECT attempts FROM login_limits WHERE bucket LIKE 'recover:user:%%'").fetchone()['attempts']==5
         assert verified, 'Synthetic recovery invariant failed'
         conn.execute("UPDATE login_limits SET expires_at=clock_timestamp()-interval '1 second' WHERE bucket LIKE 'recover:%%'")
     verified = outcome(lambda:redeem(users,'invalid'))==400
@@ -238,18 +238,20 @@ def test_persistent_parallel_budget_and_expiry(users):
         verified = conn.execute("SELECT attempts FROM login_limits WHERE bucket LIKE 'recover:user:%%'").fetchone()['attempts']==1
         assert verified, 'Synthetic recovery invariant failed'
 
-def test_global_and_proxy_precede_bounded_unknown_buckets(users):
+def test_rejected_source_does_not_spend_global_or_allocate_unknown_buckets(users):
     for i in range(20): recovery.admission('unknown'+str(i),'same-proxy')
     verified = outcome(lambda:recovery.admission('new-name','same-proxy'))==429
     assert verified, 'Synthetic recovery invariant failed'
     with database() as conn:
         verified = conn.execute("SELECT count(*) AS n FROM login_limits WHERE bucket LIKE 'recover:user:%%'").fetchone()['n']==20
         assert verified, 'Synthetic recovery invariant failed'
-    for i in range(79): recovery.admission('distributed'+str(i),'proxy'+str(i))
+        assert conn.execute("SELECT attempts FROM login_limits WHERE bucket='recover:global'").fetchone()['attempts'] == 20
+        conn.execute("UPDATE login_limits SET attempts=99 WHERE bucket='recover:global'")
+    recovery.admission('allowed-at-global-boundary', 'synthetic-other-source')
     verified = outcome(lambda:recovery.admission('beyond-global','new-proxy'))==429
     assert verified, 'Synthetic recovery invariant failed'
     with database() as conn:
-        verified = conn.execute("SELECT count(*) AS n FROM login_limits WHERE bucket LIKE 'recover:user:%%'").fetchone()['n']==99
+        verified = conn.execute("SELECT count(*) AS n FROM login_limits WHERE bucket LIKE 'recover:user:%%'").fetchone()['n']==21
         assert verified, 'Synthetic recovery invariant failed'
 
 def test_controlled_failure_processing(users,monkeypatch):

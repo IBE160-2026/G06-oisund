@@ -1,6 +1,7 @@
 """Bounded persistent authentication, opaque sessions and signed double-submit CSRF."""
 import hashlib
 import hmac
+from ipaddress import IPv6Address, ip_address, ip_network
 import os
 import re
 import secrets
@@ -101,26 +102,49 @@ def check_mutation(request):
         raise HTTPException(403, 'Forespørselen ble avvist.') from None
 
 
-def authenticate(username, password, address):
-    # One global cap bounds storage and CPU even under distributed/random-name attempts.
-    # The advisory lock serializes admission across workers, without rolling back failed attempts.
-    allowed = True
+def admission_source(request):
+    if os.environ.get('PRIVATE_TRUST_GATEWAY_SOURCE') != '1':
+        return request.client.host
+    values = request.headers.getlist('x-verified-client')
+    try:
+        if len(values) != 1 or '%' in values[0]:
+            raise ValueError
+        address = ip_address(values[0])
+    except ValueError:
+        raise HTTPException(403, 'Forespørselen ble avvist.') from None
+    if isinstance(address, IPv6Address):
+        mapped = address.ipv4_mapped
+        if mapped is None:
+            return str(ip_network((address, 64), strict=False))
+        address = mapped
+    return str(address)
+
+
+def admit_credentials(namespace, lock, name, address, account_limit):
+    # Admit only if every bucket has capacity. A rejected source cannot spend
+    # the shared budget, and only admitted attempts can allocate rate rows.
+    source = digest(address)
+    shared = namespace + 'global'
+    buckets = {namespace + 'ip:' + source: 20,
+               namespace + 'user:' + digest(source + ':' + name): account_limit,
+               shared: 100}
     with database() as conn:
-        conn.execute('SELECT pg_advisory_xact_lock(903002)')
-        conn.execute("UPDATE login_limits SET expires_at=g.expires_at FROM "
-                     "(SELECT expires_at FROM login_limits WHERE bucket='global') g WHERE bucket LIKE 'ip:%%' OR bucket LIKE 'user:%%'")
+        conn.execute('SELECT pg_advisory_xact_lock(%s)', (lock,))
         conn.execute('DELETE FROM login_limits WHERE expires_at <= clock_timestamp()')
-        deadline = None
-        for bucket, maximum in [('global', 100), ('ip:' + digest(address), 20), ('user:' + digest(username), 10)]:
-            row = conn.execute("INSERT INTO login_limits VALUES (%s,1,COALESCE(%s,clock_timestamp()+interval '15 minutes')) "
-                               'ON CONFLICT (bucket) DO UPDATE SET attempts=LEAST(login_limits.attempts+1,101), '
-                               "expires_at=CASE WHEN login_limits.bucket='global' THEN login_limits.expires_at ELSE EXCLUDED.expires_at END RETURNING attempts,expires_at",
-                               (bucket, deadline)).fetchone()
-            deadline = row['expires_at']
-            allowed = allowed and row['attempts'] <= maximum
-            if bucket == 'global' and not allowed:
-                break
-    if not allowed:
+        keys = list(buckets)
+        rows = conn.execute('SELECT bucket,attempts,expires_at FROM login_limits WHERE bucket=ANY(%s)',
+                            (keys,)).fetchall()
+        if any(row['attempts'] >= buckets[row['bucket']] for row in rows):
+            return False
+        deadline = next((row['expires_at'] for row in rows if row['bucket'] == shared), None)
+        conn.execute("INSERT INTO login_limits SELECT key,1,COALESCE(%s,statement_timestamp()+interval '15 minutes') "
+                     'FROM unnest(%s::text[]) AS key ON CONFLICT (bucket) DO UPDATE SET '
+                     'attempts=login_limits.attempts+1,expires_at=EXCLUDED.expires_at', (deadline, keys))
+    return True
+
+
+def authenticate(username, password, address):
+    if not admit_credentials('', 903002, username, address, 10):
         raise HTTPException(429, INVALID, headers={'Retry-After': '900'})
     with database() as conn:
         account = conn.execute('SELECT * FROM accounts WHERE username=%s', (username,)).fetchone()
