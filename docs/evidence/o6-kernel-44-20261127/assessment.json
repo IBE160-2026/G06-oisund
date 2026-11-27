@@ -1,0 +1,203 @@
+{
+  "checked_date": "2026-11-27",
+  "scope": "Four open O6 kernel CVEs, exact published 44.44 source/build, owner-provided active/meta-package observation; no server operations",
+  "owner_observation": {
+    "received_date": "2026-11-27",
+    "measurement_time": null,
+    "evidence": "owner-kernel-observation.txt",
+    "normalization": "Chat Markdown escapes and HTML whitespace decoded; command prompt omitted; no exact byte-for-byte terminal capture claimed",
+    "active_version_signature": "Ubuntu 7.0.0-43.43-generic 7.0.14",
+    "installed_meta_package": {
+      "name": "linux-image-generic",
+      "version": "7.0.0-44.44"
+    },
+    "local_apt_candidate": "7.0.0-44.44",
+    "local_apt_index_age": null,
+    "image_files": [
+      "7.0.0-30-generic",
+      "7.0.0-43-generic",
+      "7.0.0-44-generic"
+    ],
+    "restart_marker": true,
+    "marker_package_causes": null,
+    "image_and_modules_dpkg_status": null,
+    "next_boot_selection": null,
+    "uptime": null,
+    "last_boot": null,
+    "active_release": null,
+    "service_health": null,
+    "last_successful_backup": null
+  },
+  "counts": {
+    "baseline": 56,
+    "fixed_in_active_43_43": 51,
+    "not_affected_in_active_43_43": 1,
+    "open": 4,
+    "new_fixes_for_four_in_44_44": 0
+  },
+  "kernel": [
+    {
+      "cve": "CVE-2026-98376",
+      "component": "BPF",
+      "active_version": "7.0.0-43.43",
+      "examined_version": "7.0.0-44.44",
+      "classification": "Affected code present and built; historical barriers not remeasured",
+      "disposition": "open",
+      "vendor": {
+        "id": "UBUNTU-CVE-2026-98376",
+        "modified": "2026-11-24T18:54:09Z",
+        "rows": [
+          {
+            "package": {
+              "ecosystem": "Ubuntu:26.04:LTS",
+              "name": "linux",
+              "purl": "pkg:deb/ubuntu/linux@7.0.0-44.44?arch=source&distro=resolute"
+            },
+            "ranges": [
+              {
+                "type": "ECOSYSTEM",
+                "events": [
+                  {
+                    "introduced": "0"
+                  }
+                ]
+              }
+            ],
+            "versions": [
+              "7.0.0-43.43",
+              "7.0.0-44.44"
+            ]
+          }
+        ]
+      },
+      "source_finding": "Wrong percpu map_meta_equal callback lacks max_entries comparison; x86 per-CPU JIT supported, BPF/JIT built in.",
+      "source_evidence": "source-excerpts.md",
+      "next_action": "Await a supported fix for this exact CVE; reboot to44.44 will not close it."
+    },
+    {
+      "cve": "CVE-2026-68103",
+      "component": "AMDGPU",
+      "active_version": "7.0.0-43.43",
+      "examined_version": "7.0.0-44.44",
+      "classification": "Affected code present and built; historical barriers not remeasured",
+      "disposition": "open",
+      "vendor": {
+        "id": "UBUNTU-CVE-2026-68103",
+        "modified": "2026-11-24T18:42:04Z",
+        "rows": [
+          {
+            "package": {
+              "ecosystem": "Ubuntu:26.04:LTS",
+              "name": "linux",
+              "purl": "pkg:deb/ubuntu/linux@7.0.0-44.44?arch=source&distro=resolute"
+            },
+            "ranges": [
+              {
+                "type": "ECOSYSTEM",
+                "events": [
+                  {
+                    "introduced": "0"
+                  }
+                ]
+              }
+            ],
+            "versions": [
+              "7.0.0-43.43",
+              "7.0.0-44.44"
+            ]
+          }
+        ]
+      },
+      "source_finding": "amdgpu_userq uses xa_store_irq rather than rejecting duplicate doorbell with xa_insert_irq; userq compiled in amdgpu module.",
+      "source_evidence": "source-excerpts.md",
+      "next_action": "Await a supported fix for this exact CVE; reboot to44.44 will not close it."
+    },
+    {
+      "cve": "CVE-2026-89805",
+      "component": "DRM-pagemap",
+      "active_version": "7.0.0-43.43",
+      "examined_version": "7.0.0-44.44",
+      "classification": "Affected code present and built; historical barriers not remeasured",
+      "disposition": "open",
+      "vendor": {
+        "id": "UBUNTU-CVE-2026-89805",
+        "modified": "2026-11-24T18:49:01Z",
+        "rows": [
+          {
+            "package": {
+              "ecosystem": "Ubuntu:26.04:LTS",
+              "name": "linux",
+              "purl": "pkg:deb/ubuntu/linux@7.0.0-44.44?arch=source&distro=resolute"
+            },
+            "ranges": [
+              {
+                "type": "ECOSYSTEM",
+                "events": [
+                  {
+                    "introduced": "0"
+                  }
+                ]
+              }
+            ],
+            "versions": [
+              "7.0.0-43.43",
+              "7.0.0-44.44"
+            ]
+          }
+        ]
+      },
+      "source_finding": "No higher-order fallback; put_page precedes folio_order; source-page population helper absent; DRM_GPUSVM=m and ZONE_DEVICE=y.",
+      "source_evidence": "source-excerpts.md",
+      "next_action": "Await a supported fix for this exact CVE; reboot to44.44 will not close it."
+    },
+    {
+      "cve": "CVE-2026-98420",
+      "component": "ksmbd",
+      "active_version": "7.0.0-43.43",
+      "examined_version": "7.0.0-44.44",
+      "classification": "Affected code present and built; historical barriers not remeasured",
+      "disposition": "open",
+      "vendor": {
+        "id": "UBUNTU-CVE-2026-98420",
+        "modified": "2026-11-24T18:54:17Z",
+        "rows": [
+          {
+            "package": {
+              "ecosystem": "Ubuntu:26.04:LTS",
+              "name": "linux",
+              "purl": "pkg:deb/ubuntu/linux@7.0.0-44.44?arch=source&distro=resolute"
+            },
+            "ranges": [
+              {
+                "type": "ECOSYSTEM",
+                "events": [
+                  {
+                    "introduced": "0"
+                  }
+                ]
+              }
+            ],
+            "versions": [
+              "7.0.0-43.43",
+              "7.0.0-44.44"
+            ]
+          }
+        ]
+      },
+      "source_finding": "Session register still removes idle valid sessions after 10*HZ; missing credential-expiration/45-second setup semantics; SMB_SERVER=m.",
+      "source_evidence": "source-excerpts.md",
+      "next_action": "Await a supported fix for this exact CVE; reboot to44.44 will not close it."
+    }
+  ],
+  "newer_repository_context": {
+    "main": "fccb0d78f95f7ea40e6d29c77751a25d34599cbd",
+    "report": "docs/evidence/o6-v2-source-reconciliation-20261120.md",
+    "report_blob": "fae7324f8264a6e3c1ccb17061716145045fe5b3",
+    "meaning": "20 November exact trixie util-linux source review already performed; do not repeat it as untouched work. Its existing O6 disposition and V2 qualification boundaries retained."
+  },
+  "aggregate_o6": "open",
+  "risk_acceptance": "unchanged",
+  "firmware": "separately deferred",
+  "library_journal_review": "Existing disposition retained; not rechecked with vendors in this narrow kernel review.",
+  "recommendation": "Plan qualified activation of the available 44 kernel as ordinary maintenance after fresh read-only package/boot/health/backup checks; no new installation inferred necessary and no reboot authorized or performed. The four O6 findings remain open."
+}

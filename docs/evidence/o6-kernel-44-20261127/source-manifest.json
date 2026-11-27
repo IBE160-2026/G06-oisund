@@ -1,0 +1,80 @@
+{
+  "checked_date": "2026-11-27",
+  "timezone": "Europe/Oslo",
+  "source": "linux",
+  "version": "7.0.0-44.44",
+  "distribution": "Ubuntu 26.04 LTS resolute",
+  "architecture": "amd64",
+  "flavour": "generic",
+  "downloads": [
+    {
+      "file": "linux_7.0.0.orig.tar.gz",
+      "url": "https://archive.ubuntu.com/ubuntu/pool/main/l/linux/linux_7.0.0.orig.tar.gz",
+      "bytes": 254937830,
+      "sha256": "c6343795c8c7e4feff55f5b309365c8e0eaf49cd6abcb412e32315313f149536"
+    },
+    {
+      "file": "linux_7.0.0-44.44.dsc",
+      "url": "https://archive.ubuntu.com/ubuntu/pool/main/l/linux/linux_7.0.0-44.44.dsc",
+      "bytes": 7845,
+      "sha256": "5e117ef9142bb272825dc10f0abab822d1d0cfb744de91d062ddbab725851986"
+    },
+    {
+      "file": "linux_7.0.0-44.44.diff.gz",
+      "url": "https://archive.ubuntu.com/ubuntu/pool/main/l/linux/linux_7.0.0-44.44.diff.gz",
+      "bytes": 6286278,
+      "sha256": "fbfcc40c9367170fb6a83e5b0528cb94a992352785ac87fc7d8cdcd9426837c3"
+    },
+    {
+      "file": "linux-buildinfo-7.0.0-44-generic_7.0.0-44.44_amd64.deb",
+      "url": "https://archive.ubuntu.com/ubuntu/pool/main/l/linux/linux-buildinfo-7.0.0-44-generic_7.0.0-44.44_amd64.deb",
+      "bytes": 846026,
+      "sha256": "b5596cdbe436286c29923b6a19a5dbdd6174c64bc2e371ae84dd19a5005858a4"
+    },
+    {
+      "file": "resolute-security-Packages.gz",
+      "url": "https://archive.ubuntu.com/ubuntu/dists/resolute-security/main/binary-amd64/Packages.gz",
+      "bytes": 938119,
+      "sha256": "b561677b4e197c78eee5e63ebad420ee1f2814d041b523231cb8997bd1f74d04"
+    },
+    {
+      "file": "resolute-updates-Packages.gz",
+      "url": "https://archive.ubuntu.com/ubuntu/dists/resolute-updates/main/binary-amd64/Packages.gz",
+      "bytes": 1143057,
+      "sha256": "ee8c3c925cc1a2fefce87c8a8476aba407f26cb9cdce7541a46053c6fe0a3c52"
+    }
+  ],
+  "verification": [
+    "Original archive and 44.44 Ubuntu diff SHA256 matched source DSC. Original archive reused from 17 November after new hash check.",
+    "44.44 amd64 buildinfo SHA256 matched BOTH current security and updates Packages indexes.",
+    "Signed image Source=linux-signed, Built-Using=linux (= 7.0.0-44.44); unsigned image and buildinfo Source=linux, Version=7.0.0-44.44.",
+    "Selected source files reconstructed using full per-file Ubuntu patch blocks: git apply --check, apply, reverse --check all exit0; one upstream whitespace warning, no repair."
+  ],
+  "build_files": [
+    {
+      "path": "usr/lib/linux/7.0.0-44-generic/config",
+      "sha256": "6f3683550e44ad9fcda908f3ad5e2ab57e05906ef4a6de516a41d069cc8ba603"
+    },
+    {
+      "path": "usr/lib/linux/7.0.0-44-generic/modules",
+      "sha256": "b833032422d1197d0f9b3e5587c95383a1bb716c0cfd48f0a12078388f5db843"
+    },
+    {
+      "path": "usr/lib/linux/7.0.0-44-generic/modules.builtin",
+      "sha256": "158ca671760e360fc324d085867053cb1e4e246132c78ab01830891966790252"
+    }
+  ],
+  "module_matches": [
+    "amdgpu",
+    "binder_linux",
+    "drm_gpusvm_helper",
+    "ksmbd",
+    "ntfs3"
+  ],
+  "source_comparison": "source-comparison.json",
+  "limits": [
+    "PGP/InRelease signatures not independently validated; official HTTPS + matching archive/index hashes.",
+    "Selected source reconstruction, not a full kernel build or installed-file integrity attestation.",
+    "Kernel 44 presence and meta-package status from owner; actual image/modules dpkg status and boot configuration not supplied."
+  ]
+}
