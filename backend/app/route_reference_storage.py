@@ -3,13 +3,13 @@
 from datetime import datetime
 from typing import Annotated, Literal
 import unicodedata
-from uuid import UUID
+from uuid import UUID, uuid4
 
 from fastapi import HTTPException
 from psycopg.types.json import Jsonb
 from pydantic import Field, model_validator
 
-from . import route_catalogue, auth, draft_storage, position_coordinates, route_source
+from . import route_catalogue, auth, draft_storage, import_route_matching, position_coordinates, route_source
 from .draft_domain import DraftContent, StrictModel
 from .private_storage import database
 
@@ -80,6 +80,73 @@ def saved_decisions(conn, draft_id):
 def current_references(conn, draft):
     return [row['reference'] for row in saved_decisions(conn, draft['id'])
             if row['draft_revision'] == draft['revision'] and row['reference'] is not None]
+
+
+def resolve_imported(conn, draft, previous=None):
+    content = DraftContent.model_validate(draft['content'])
+    if content.import_metadata is None or draft['confirmed']:
+        return
+    saved = {row['activity_id']: row for row in saved_decisions(conn, draft['id'])}
+    previous_activities = (
+        {activity.id: activity for activity in DraftContent.model_validate(previous['content']).activities}
+        if previous is not None else {}
+    )
+    now, days = now_for(conn), {}
+    revision = route_revision(conn, draft['id'])
+    for activity in import_route_matching.imported_trips(content):
+        existing = saved.get(activity.id)
+        old_reference = existing['reference'] if existing else None
+        if existing and (not old_reference or old_reference.get('selection_mode') != 'automatic'
+                         or existing['draft_revision'] == draft['revision']):
+            continue
+        previous_activity = previous_activities.get(activity.id)
+        if (old_reference and previous_activity and previous['content']['service_date'] == draft['content']['service_date']
+                and all(getattr(previous_activity, field) == getattr(activity, field) for field in
+                        ('line', 'trip', 'start', 'end', 'from_place', 'to_place', 'direction'))):
+            reference = {**old_reference, 'decision_revision': revision + 1}
+        else:
+            _, match = import_route_matching.activity_match(conn, content, activity, now, days)
+            if not match:
+                continue
+            day, journey, first, last = match
+            reference = {
+                **journey, 'activity_id': str(activity.id), 'decision_revision': revision + 1,
+                'start_position': first, 'end_position': last,
+                'field_decisions': {'direction': {'mode': 'source', 'manual': None},
+                                    'destination': {'mode': 'source', 'manual': None},
+                                    'stops': {'mode': 'source', 'manual': None}},
+                'provenance': day['provenance'], 'source_state': day['source_state'],
+                'status': 'compatible', 'selection_mode': 'automatic', 'selected_at': now.isoformat(),
+                'position_coordinate_revision': day['provenance'].get('nsr_revision'),
+            }
+        if revision >= MAX_DECISIONS:
+            break
+        revision += 1
+        conn.execute(
+            'INSERT INTO draft_route_decisions(draft_id,revision,draft_revision,activity_id,operation_id,payload_hash,reference) '
+            'VALUES(%s,%s,%s,%s,%s,%s,%s)',
+            (draft['id'], revision, draft['revision'], activity.id, uuid4(),
+             draft_storage.fingerprint(draft['id'], reference), Jsonb(reference)),
+        )
+
+
+def effective_content(content, references):
+    directions = {}
+    for reference in references:
+        if reference['status'] == 'incompatible':
+            continue
+        choice = reference['field_decisions']['direction']
+        if choice['mode'] == 'manual':
+            directions[reference['activity_id']] = choice['manual'][:100]
+        elif choice['mode'] == 'source':
+            directions[reference['activity_id']] = import_route_matching.direction_label(reference, reference['start_position'])[0]
+    if not directions:
+        return content
+    return content.model_copy(update={'activities': [
+        activity.model_copy(update={'direction': directions[str(activity.id)]})
+        if not (activity.direction or '').strip() and str(activity.id) in directions else activity
+        for activity in content.activities
+    ]})
 
 
 def freeze(conn, workday_id, references):
@@ -173,6 +240,11 @@ def state(conn, draft, now):
         origin = datetime.fromisoformat(reference['service_date']).date()
         status = source_comparison(reference, route_catalogue.lookup(conn, origin, now, route_catalogue.code_for(reference['line_id'])))
         result[key].append({**reference, 'comparison': status})
+    content = DraftContent.model_validate(draft['content'])
+    decided = {UUID(reference['activity_id']) for reference in result['references']}
+    decided.update(row['activity_id'] for row in data
+                   if not row['reference'] or row['reference'].get('selection_mode') != 'automatic')
+    result['import_matches'] = import_route_matching.summaries(conn, content, now, decided)
     return result
 
 
@@ -185,6 +257,17 @@ def read_draft(request, identifier, revision):
         owner = draft_storage.authorized(conn, request)
         draft = draft_storage.owned(conn, owner, identifier, request)
         require_current(draft, revision, mutable=True)
+        result = state(conn, draft, now_for(conn))
+        draft_storage.owned(conn, owner, identifier, request)
+        return result
+
+
+def resolve_draft(request, identifier, revision):
+    with database() as conn:
+        owner = draft_storage.authorized(conn, request)
+        draft = draft_storage.owned(conn, owner, identifier, request)
+        require_current(draft, revision, mutable=True)
+        resolve_imported(conn, draft)
         result = state(conn, draft, now_for(conn))
         draft_storage.owned(conn, owner, identifier, request)
         return result

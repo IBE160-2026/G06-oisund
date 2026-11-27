@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { osloDateTime } from './dayOverview';
 import type { Plan } from './PrivateConfirmation';
+import { automaticNoticeStatus, statusLabel, useOperationalNow } from './operationalNotices';
+import { observePrivateTime } from './privateClock';
 
 const groups = {
   'possible-relevance': 'Mulig relevans',
@@ -51,7 +53,7 @@ type Action = keyof typeof actions;
 type Group = keyof typeof groups;
 type Selector = { kind: string; value: string | null; children: Selector[] };
 type Localized = { text: string; language: string | null };
-type Evidence = {
+export type Evidence = {
   participant: string; situation: string; version: string | null; publisher_updated_at: string | null;
   source_created_at: string | null; progress: string | null; source_type: string | null;
   report_type: string | null; severity: string | null;
@@ -174,14 +176,25 @@ function Selectors({ nodes }: { nodes: Selector[] }) {
   return <ul>{nodes.map((node, index) => <li key={index}>{node.kind}{node.value && <> · {node.value}</>}{node.children.length > 0 && <Selectors nodes={node.children} />}</li>)}</ul>;
 }
 
-function SourceFacts({ value }: { value: Evidence }) {
+function affectedText(nodes: Selector[]): string[] {
+  return nodes.flatMap(node => {
+    const line = node.kind === 'LineRef' && /^TRO:Line:1_\d{2}$/.test(node.value ?? '') ? node.value!.slice(-2) : null;
+    const text = line ? 'Linje ' + (line === '25' ? '26B' : ['23', '27', '29', '31', '32', '35', '36', '43', '44'].includes(line) ? 'X' + line : line)
+      : node.kind === 'StopPointRef' || node.kind === 'StopPlaceRef' || node.kind === 'QuayRef'
+        ? (node.value === 'NSR:StopPlace:55902' ? 'Giæverbukta' : node.value && 'Stopp ' + node.value)
+        : (node.kind === 'AllLines' || node.kind === 'All') && node.value === 'true' ? 'Alle berørte bybusslinjer' : null;
+    return [...(text ? [text] : []), ...affectedText(node.children)];
+  });
+}
+
+export function SourceFacts({ value }: { value: Evidence }) {
   return <div className="automatic-notice-facts">
-    <p>{value.participant} · {value.situation}</p>
+    <p>{[...new Set(affectedText(value.affects))].join(' · ') || 'Omfang oppgitt av Entur'}</p>
     <dl><dt>Kildens status</dt><dd>{value.progress === 'open' ? 'Åpen' : value.progress === 'closed' ? 'Avsluttet av kilden' : value.progress ?? 'Ukjent'}</dd>
       <dt>Kildens versjon</dt><dd>{value.version ?? 'Ukjent'}</dd><dt>Opprettet hos kilden</dt><dd>{value.source_created_at ?? 'Ukjent'}</dd>
       <dt>Oppdatert hos kilden</dt><dd>{value.publisher_updated_at ?? 'Ukjent'}</dd></dl>
     {(['summary', 'description', 'advice'] as const).flatMap(field => value[field].map((item, index) => <p key={field + index}>{item.text}</p>))}
-    {value.windows.length ? <ul aria-label="Gyldighetsperioder">{value.windows.map((window, index) => <li key={index}>{window.start ?? 'Ukjent start'} – {window.end ?? 'Ingen oppgitt slutt'}</li>)}</ul> : <p>Gyldighetsperiode er ukjent.</p>}
+    {value.windows.length ? <ul aria-label="Gyldighetsperioder">{value.windows.map((window, index) => <li key={index}>{window.start ? showTime(window.start) : 'Ukjent start'} – {window.end ? showTime(window.end) : 'Ingen oppgitt slutt'}</li>)}</ul> : <p>Gyldighetsperiode er ukjent.</p>}
     {value.links.length ? <ul>{value.links.map((link, index) => <li key={index}><a href={safeUrl(link)} target="_blank" rel="noopener noreferrer">Åpne kildelenke {value.links.length > 1 ? index + 1 : ''}</a></li>)}</ul> : <p>Ingen lenke til selve meldingen er oppgitt.</p>}
     {!!value.affects.length && <details><summary>Berørte linjer, steder og vilkår</summary><Selectors nodes={value.affects} /></details>}
   </div>;
@@ -218,21 +231,28 @@ export function PrivateAutomaticNotices(props: Props) {
   screen.current = { open, suspended, available, id: plan.id };
   const shown = open && available && !suspended;
   const live = () => screen.current.id === plan.id && screen.current.open && !screen.current.suspended && screen.current.available;
-  const row = page?.entries.find(item => item.situation === selected);
+  const now = useOperationalNow(shown);
+  const entries = page?.entries.filter(item => item.source && automaticNoticeStatus(item.source.content, now)) ?? [];
+  const row = entries.find(item => item.situation === selected);
+  const polling = useRef(false);
+  const backgroundLoad = useRef<() => void>(() => {});
   const displayedBasis = page && row ? reviewBasis(page, row) : null;
   const choice = proposal?.choice ?? empty;
   const changed = !!proposal && (proposal.conflict || proposal.basis.key !== displayedBasis?.key);
   const activityLabels = new Map(plan.draft.activities.map((item, index) => [item.id, formatActivity(item, index)]));
 
-  async function load(cursor = cursors.at(-1) ?? null) {
-    if (!live()) return;
+  async function load(cursor = cursors.at(-1) ?? null, silent = false) {
+    if (!live() || silent && (polling.current || loading || writing)) return;
     const generation = ++sequence.current;
-    setLoading(true);
+    polling.current = true;
+    const requestedAt = performance.now();
+    if (!silent) setLoading(true);
     try {
       const value = await request(path + (cursor ? `?cursor=${encodeURIComponent(cursor)}` : ''));
       if (generation !== sequence.current || !live()) return;
       if (!validPage(value, plan)) throw Error();
       props.shorten(value.expires_at);
+      observePrivateTime(value.server_now, requestedAt);
       setPage(value);
       setProposal(current => {
         if (!current || current.conflict) return current;
@@ -244,17 +264,26 @@ export function PrivateAutomaticNotices(props: Props) {
       setPage(null);
       if (error?.status === 410) props.expired();
       setMessage([401, 403, 404, 410].includes(error?.status) ? 'Tilgangen til planen må kontrolleres.' : 'Automatiske avvik kunne ikke hentes.');
-    } finally { if (generation === sequence.current) setLoading(false); }
+    } finally { if (generation === sequence.current) { polling.current = false; setLoading(false); } }
   }
 
+  backgroundLoad.current = () => { void load(undefined, true); };
+
   useEffect(() => {
-    if (shown) { title.current?.focus(); void load(); }
-    else { sequence.current++; setPage(null); setManuals([]); }
-    return () => { sequence.current++; };
+    if (!shown) { setPage(null); setManuals([]); return; }
+    title.current?.focus();
+    void load();
+    const timer = window.setInterval(() => backgroundLoad.current(), 3000);
+    return () => { sequence.current++; polling.current = false; window.clearInterval(timer); };
   }, [shown, plan.id]);
 
   function inspect(item: Entry) {
     setSelected(item.situation);
+    setProposal(null);
+    setMessage('');
+  }
+
+  function beginReview(item: Entry) {
     const basis = page ? reviewBasis(page, item) : null;
     const saved = item.source ? item.decision : null;
     setProposal(basis ? { basis, conflict: false, choice: saved ? { action: saved.action, activity_id: saved.activity_id,
@@ -356,13 +385,14 @@ export function PrivateAutomaticNotices(props: Props) {
       {clock.baseline_count !== null && <p>Siste komplette grunnlag inneholdt {clock.baseline_count} meldinger i det undersøkte TRO-omfanget.</p>}
       <p>{clock.evidence_kind === 'synthetic' ? 'Kontrollerte testdata i Entur SIRI-SX-format for TRO.' : 'Passasjerinformasjon fra Entur AS, SIRI-SX for TRO under NLOD.'} Linje og plantid er vurdert lokalt.</p>
       <p><a href="https://developer.entur.no/open-data/realtime" target="_blank" rel="noopener noreferrer">Enturs kildebeskrivelse</a>{' · '}<a href="https://data.norge.no/nlod/no/2.0" target="_blank" rel="noopener noreferrer">NLOD</a>{' · '}<a href="https://svipper.no/" target="_blank" rel="noopener noreferrer">Åpne Svipper for manuell kontroll</a></p>
-      <p>{page.total} oppføringer tilgjengelige for gjennomgang, inkludert tidligere observasjoner.</p>
+      {entries.length === 0 && <p>{clock.status === 'complete' ? 'Ingen aktuelle Entur-avvik for Tromsø bybuss på denne siden.' : 'Ingen meldinger tilgjengelig fra det siste grunnlaget.'}</p>}
       {Object.entries(displayGroups).map(([group, label]) => {
-        const entries = page.entries.filter(entry => (entry.pilot_stop_review ? 'pilot-stop-review' : entry.classification) === group);
-        return entries.length > 0 && <section key={group} aria-label={label}>
-          <h3>{label} · {entries.length} på denne siden</h3>
-          <ul>{entries.map(entry => <li key={entry.situation}>
+        const groupEntries = entries.filter(entry => (entry.pilot_stop_review ? 'pilot-stop-review' : entry.classification) === group);
+        return groupEntries.length > 0 && <section key={group} aria-label={label}>
+          <h3>{label}</h3>
+          <ul>{groupEntries.map(entry => <li key={entry.situation}>
             <button type="button" disabled={!!pending || writing} onClick={() => inspect(entry)} aria-pressed={entry.situation === selected}>{entry.source?.content.summary.find(item => item.text)?.text || entry.decision?.evidence.summary.find(item => item.text)?.text || entry.situation}</button>
+            {entry.source && <p>{statusLabel[automaticNoticeStatus(entry.source.content, now)!]} · {affectedText(entry.source.content.affects).join(' · ')}</p>}
             <p>{entry.reasons.map(reason => reason === 'stop-scope-unverified' && entry.pilot_stop_review ? pilotStopReason : reasons[reason] ?? reason).join(' ')}{entry.needs_reassessment && ' Tidligere valg må vurderes på nytt.'}</p>
             {entry.decision && !entry.needs_reassessment && <p>Privat valg · {decisions[entry.decision.action]}</p>}
           </li>)}</ul>
@@ -370,7 +400,8 @@ export function PrivateAutomaticNotices(props: Props) {
       })}
       <div className="controls">{cursors.length > 1 && <button disabled={loading || !!pending} onClick={() => { const previous = cursors.slice(0, -1); setCursors(previous); setSelected(null); setProposal(null); void load(previous.at(-1) ?? null); }}>Forrige side</button>}
         {page.next_cursor && <button disabled={loading || !!pending} onClick={() => { setCursors([...cursors, page.next_cursor]); setSelected(null); setProposal(null); void load(page.next_cursor); }}>Neste side</button>}</div>
-      {row && <section><h3>Gjennomgang av melding</h3>
+      {row && <section aria-label="Åpen Entur-melding"><h3>Avvik fra Entur</h3>
+        <p>{row.manual?.checked_at ? 'Lenket kilde kontrollert manuelt ' + showTime(row.manual.checked_at) : 'Ingen manuell kildekontroll registrert.'}</p>
         {row.source && <><p>{observations[row.source.observation]}</p><div className="automatic-notice-comparison"><SourceFacts value={row.source.content} />{row.manual && <ManualFacts manual={row.manual} />}</div>
           <dl><dt>Svar fra kilden</dt><dd>{showTime(row.source.response_at)}</dd><dt>Hentet</dt><dd>{showTime(row.source.fetched_at)}</dd><dt>Først observert</dt><dd>{showTime(row.source.first_seen)}</dd><dt>Revisjonen sist observert</dt><dd>{showTime(row.source.last_seen)}</dd><dt>Meldingen sist observert</dt><dd>{showTime(row.source.identity_last_seen)}</dd></dl>
           {row.source.conflict_count > 0 && <details><summary>Motstridende kildeopplysninger · {row.source.conflict_count} observert</summary>{row.source.conflict_count > row.source.conflicts.length && <p>Viser de {row.source.conflicts.length} sist observerte.</p>}
@@ -383,7 +414,7 @@ export function PrivateAutomaticNotices(props: Props) {
             <dl><dt>Kildesvar ved gjennomgangen</dt><dd>{showTime(row.decision.source_response_at)}</dd><dt>Observert før gjennomgangen</dt><dd>{showTime(row.decision.source_observed_at)}</dd></dl></details>}
         </div>}
         {!mutable && <p>Planen er skrivebeskyttet.</p>}
-        {mutable && !proposal && !pending && <button type="button" disabled={loading || !displayedBasis} onClick={() => inspect(row)}>Start ny gjennomgang</button>}
+        {mutable && !proposal && !pending && <button type="button" disabled={loading || !displayedBasis} onClick={() => beginReview(row)}>Gjennomgå kildegrunnlaget (valgfritt)</button>}
         {mutable && proposal && <fieldset disabled={writing || !!pending}><legend>Privat gjennomgang</legend>
           <label>Valg <select aria-label="Valg" value={choice.action} onChange={event => setChoice({ ...choice, action: event.target.value as Action, reason: null, activity_id: null })}>{(Object.keys(actions) as Action[]).filter(action => row.source || action === 'unresolved').map(action => <option key={action} value={action}>{actions[action]}</option>)}</select></label>
           {choice.action === 'associate' && <label>Planaktivitet <select aria-label="Planaktivitet" value={choice.activity_id ?? ''} onChange={event => setChoice({ ...choice, activity_id: event.target.value || null })}><option value="">Velg aktivitet</option>{plan.draft.activities.map((activity, index) => <option key={activity.id} value={activity.id}>{formatActivity(activity, index)}</option>)}</select></label>}

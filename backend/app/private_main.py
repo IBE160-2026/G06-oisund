@@ -229,9 +229,12 @@ def drafts(request: Request, cursor: UUID | None = None):
     return draft_storage.listing(request, cursor)
 
 
-@app.post('/imports/pdf', response_model=DraftContent)
+@app.post('/imports/pdf', response_model=DraftContent | dict)
 async def import_pdf(request: Request):
-    return await private_import.preview(request)
+    content = await private_import.preview(request)
+    if request.headers.get('accept') == 'application/vnd.bussassistent.pdf-preview+json':
+        return content.model_dump(mode='json') | {'entur_matches': await asyncio.to_thread(private_import.route_matches, request, content)}
+    return content
 
 
 @app.get('/drafts/{identifier}', response_model=DraftRecord)

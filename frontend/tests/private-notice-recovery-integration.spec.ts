@@ -71,7 +71,7 @@ test('lost accepted source check resolves after automatic ending without reopeni
   await page.getByRole('button', { name: 'Kontrollerte kilden nå', exact: true }).click(); await expect(retry(page)).toBeEnabled();
   await expect.poll(() => Date.now() > Date.parse(ending), { timeout: 12000 }).toBe(true);
   await retry(page).click(); await expect(feedback(page)).toHaveText('Kildekontrollen er lagret.');
-  expect(writes).toBe(1); await expect(page.locator('.notice-list summary')).toContainText('Utløpt');
+  expect(writes).toBe(1); await expect(page.locator('.notice-list summary')).toHaveCount(0);
   await expect(page.getByRole('button', { name: 'Kontrollerte kilden nå', exact: true })).toHaveCount(0);
   await expect(page.getByRole('button', { name: 'Rediger ' + notice.title, exact: true })).toHaveCount(0);
   const saved = await (await context.request.get(API + '/notices/' + notice.id)).json();
@@ -95,8 +95,7 @@ for (const surface of ['reader', 'maintenance']) test(`held ${surface} response 
       await expect(reader.locator('summary')).toHaveCount(0, { timeout: 500 });
     } else {
       await expect(feedback(page)).toHaveText('Lagrede avvik er hentet.');
-      await expect(page.locator('.notice-list summary')).toContainText('Utløpt', { timeout: 500 });
-      await page.locator('.notice-list summary').click();
+      await expect(page.locator('.notice-list summary')).toHaveCount(0, { timeout: 500 });
       await expect(page.getByRole('button', { name: 'Rediger Integration incident', exact: true })).toHaveCount(0);
     }
   } finally { release(); }

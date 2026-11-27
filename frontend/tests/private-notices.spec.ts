@@ -175,7 +175,7 @@ test('source-linked prestart journey saves exact stable metadata, checks explici
   await page.getByRole('button', { name: 'Velg aktivitet 2', exact: true }).click(); await activityScreen(page); await dayScreen(page);
   const initial = await (await context.request.get(API + '/workdays/' + plan.id + '/recap')).json(); let selections = 0, starts = 0, checks = 0, ends = 0;
   page.on('request', req => { if (req.method() === 'POST') { if (req.url().endsWith('/selection')) selections++; if (req.url().endsWith('/start')) starts++; if (req.url().endsWith('/check')) checks++; if (req.url().endsWith('/end')) ends++; } });
-  await open(page); await expect(page.getByText('Ingen avvik er registrert her. Kontroller originalkilden.', { exact: true })).toBeVisible();
+  await open(page); await expect(page.getByText('Ingen aktuelle avvik i registeret. Kontroller originalkilden.', { exact: true })).toBeVisible();
   await newNotice(page); await save(page); const first = (await list(context, plan)).notices[0];
   expect(first.line_tags).toEqual(['020', '24']); expect(first.checked_at).toBeNull(); expect(first.status).toBe('registered'); expect(first.valid_from).toBeNull();
   await expect(page.getByText('Ikke kontrollert', { exact: true })).toBeVisible(); await expect(page.getByText(/^Delvis kjent gyldighet:/)).toBeVisible();
@@ -190,8 +190,8 @@ test('source-linked prestart journey saves exact stable metadata, checks explici
   const ended = (await list(context, plan)).notices[0]; expect(ended.status).toBe('ended_manually'); expect(ended.checked_at).toBe(checked.checked_at);
   await page.getByRole('button', { name: 'Tilbake til dagen', exact: true }).click(); await page.getByRole('button', { name: 'Åpne valgt aktivitet', exact: true }).click(); await expect(selected(page)).toHaveAttribute('data-selected-activity-id', activities[1].id);
   expect(selections).toBe(0); expect(starts).toBe(0); expect(checks).toBe(1); expect((await (await context.request.get(API + '/workdays/' + plan.id + '/recap')).json())).toEqual(initial);
-  await dayScreen(page); await page.getByRole('button', { name: 'Lukk planen', exact: true }).click(); await page.getByRole('button', { name: 'Åpne plan 2031-01-02 · versjon 1', exact: true }).click(); await open(page); if (!await page.getByText('Status: Avsluttet manuelt', { exact: true }).isVisible()) await page.locator('.notice-list summary').click();
-  await expect(page.getByText('Status: Avsluttet manuelt', { exact: true })).toBeVisible(); expect((await list(context, plan)).notices).toEqual([ended]);
+  await dayScreen(page); await page.getByRole('button', { name: 'Lukk planen', exact: true }).click(); await page.getByRole('button', { name: 'Åpne plan 2031-01-02 · versjon 1', exact: true }).click(); await open(page);
+  await expect(page.locator('.notice-list summary')).toHaveCount(0); expect((await list(context, plan)).notices).toEqual([ended]);
 });
 
 test('actual synthetic PDF upload correction confirmation notice and terminal recap journey', async ({ page, context }) => {
@@ -277,7 +277,7 @@ test('original day deletion preserves account notice facts and explicit check', 
 test('transient unavailable retains qualified known source links and disables fresh commands', async ({ page, context }) => {
   const { plan } = await openedPlan(page, context); const n = await seed(context, plan); await open(page); await page.locator('.notice-list summary').click();
   await page.route('**:8001/notices', route => route.fulfill({ status: 503, json: { detail: 'synthetic unavailable' } })); await page.getByRole('button', { name: 'Hent lagrede avvik', exact: true }).click(); await expect(status(page)).toContainText('Avvikslisten er utilgjengelig.');
-  await expect(page.getByText('Eventuelle tidligere viste opplysninger er ikke oppdatert.', { exact: true })).toBeVisible(); await expect(page.getByRole('link', { name: n.source_url, exact: true })).toBeVisible(); await expect(page.getByRole('button', { name: 'Kontrollerte kilden nå', exact: true })).toBeDisabled(); await expect(page.getByText('Ingen avvik er registrert her. Kontroller originalkilden.', { exact: true })).toHaveCount(0);
+  await expect(page.getByText('Eventuelle tidligere viste opplysninger er ikke oppdatert.', { exact: true })).toBeVisible(); await expect(page.getByRole('link', { name: n.source_url, exact: true })).toBeVisible(); await expect(page.getByRole('button', { name: 'Kontrollerte kilden nå', exact: true })).toBeDisabled(); await expect(page.getByText('Ingen aktuelle avvik i registeret. Kontroller originalkilden.', { exact: true })).toHaveCount(0);
   const stores = await page.evaluate(() => JSON.stringify({ local: { ...localStorage }, session: { ...sessionStorage } })); expect(stores).not.toContain(n.title); expect(stores).not.toContain(n.source_url);
 });
 

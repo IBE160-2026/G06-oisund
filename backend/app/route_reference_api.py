@@ -27,6 +27,11 @@ def draft_references(identifier: UUID, revision: Revision, request: Request):
     return routes.read_draft(request, identifier, revision)
 
 
+@router.post('/drafts/{identifier}/route-references/resolve')
+def resolve_references(identifier: UUID, revision: Revision, request: Request):
+    return routes.resolve_draft(request, identifier, revision)
+
+
 @router.get('/drafts/{identifier}/route-departures')
 def departures(identifier: UUID, revision: Revision, activity_id: UUID, request: Request,
                journey_id: JourneyId | None = None, line_code: LineCode | None = None):

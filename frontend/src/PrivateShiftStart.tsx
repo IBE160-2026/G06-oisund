@@ -3,6 +3,8 @@ import { osloDateTime } from './dayOverview';
 import { useWorkdayResource, type ResourceProps } from './useWorkdayResource';
 import { validLifecycle, type Lifecycle } from './PrivateWorkdayProgress';
 
+import { PrivateTrafficNotices } from './PrivateTrafficNotices';
+
 export function PrivateShiftStart(props: ResourceProps & { plannedStart: string; factsAvailable: boolean; readOnly?: boolean; changed?: () => void; blocked: boolean; reviewing: boolean; review: (value: boolean) => void }) {
   const resource = useWorkdayResource<Lifecycle>(props, 'start', validLifecycle,
     v => v.state === 'active' && v.revision === 1);
@@ -26,6 +28,6 @@ export function PrivateShiftStart(props: ResourceProps & { plannedStart: string;
     {rejected && saved && <div className="controls"><button hidden={props.readOnly} disabled={!available || busy || props.suspended} onClick={() => void send()}>Prøv avvist skiftstart igjen</button><button disabled={busy || props.suspended} onClick={() => { resolve(saved, 'Avvist skiftstart er avbrutt. Lagret skiftstatus er uendret.'); status.current?.focus(); }}>Avbryt avvist skiftstart</button></div>}
     <button disabled={busy || props.suspended} onClick={() => void load()}>Hent skiftstatus igjen</button>
     </div>
-    {props.reviewing && <section aria-label="Bekreft skiftstart"><h2 ref={title} tabIndex={-1}>Start skiftet?</h2><p>Start lagrer faktisk første start hos serveren. Valgt aktivitet og aktivitetsstatus endres ikke.</p>{available && <p>Planlagt start: {osloDateTime(props.plannedStart)}.</p>}<div className="controls"><button disabled={!available || props.readOnly || busy || props.blocked || props.suspended || saved?.state !== 'confirmed'} onClick={() => { props.review(false); void send(); }}>Bekreft skiftstart</button><button onClick={cancel}>Tilbake uten å starte</button></div></section>}
+    {props.reviewing && <section aria-label="Bekreft skiftstart"><h2 ref={title} tabIndex={-1}>Start skiftet?</h2><p>Start lagrer faktisk første start hos serveren. Valgt aktivitet og aktivitetsstatus endres ikke.</p><PrivateTrafficNotices available={available && !props.suspended} request={props.request} />{available && <p>Planlagt start: {osloDateTime(props.plannedStart)}.</p>}<div className="controls"><button disabled={!available || props.readOnly || busy || props.blocked || props.suspended || saved?.state !== 'confirmed'} onClick={() => { props.review(false); void send(); }}>Bekreft skiftstart</button><button onClick={cancel}>Tilbake uten å starte</button></div></section>}
   </section>;
 }

@@ -171,7 +171,7 @@ export function PrivateAccess() {
       const proof = await request('/auth/csrf', { signal: AbortSignal.any([signal, AbortSignal.timeout(10000)]) });
       check();
       if (typeof proof.csrf_token !== 'string') throw Error();
-      return request('/imports/pdf', { method: 'POST', headers: { 'Content-Type': 'application/pdf', 'X-CSRF-Token': proof.csrf_token }, body: bytes, signal: AbortSignal.any([signal, AbortSignal.timeout(45000)]) });
+      return request('/imports/pdf', { method: 'POST', headers: { Accept: 'application/vnd.bussassistent.pdf-preview+json', 'Content-Type': 'application/pdf', 'X-CSRF-Token': proof.csrf_token }, body: bytes, signal: AbortSignal.any([signal, AbortSignal.timeout(45000)]) });
     }, signal);
   }
   async function mutation(path: string, body?: object, expected?: Session, dispatched?: () => void) {

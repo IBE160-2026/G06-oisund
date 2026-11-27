@@ -1,3 +1,4 @@
+import { ImportRouteMatches } from './PrivateRouteReference';
 import { useEffect, useRef, useState } from 'react';
 import { validContent, type Content } from './PrivateDrafts';
 import { pdfUploadError } from './pdfUpload';
@@ -78,6 +79,7 @@ export function SourceFacts({ metadata: m, historical = false }: { metadata: Imp
 
 export function PrivateImport({ upload, adopt, expired, suspended, locked, stage, reviewReady, backToUpload, settingsBlocked }: { upload: (file: File, signal: AbortSignal) => Promise<any>; adopt: (content: Content, intent: 'edit' | 'approve') => boolean; expired: () => void; suspended: boolean; locked: boolean; stage: 'upload' | 'review'; reviewReady: () => void; backToUpload: () => void; settingsBlocked: (value: boolean) => void }) {
   const [review, setReview] = useState<Content | null>(null);
+  const [routes, setRoutes] = useState<Parameters<typeof ImportRouteMatches>[0]['matches']>();
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState('Velg en tekst-PDF for en midlertidig gjennomgang. Originalen og filnavnet lagres ikke.');
   const controller = useRef<AbortController | null>(null);
@@ -98,8 +100,9 @@ export function PrivateImport({ upload, adopt, expired, suspended, locked, stage
     try {
       const value = await upload(file, abort.signal);
       if (current !== epoch.current) return;
-      if (!validContent(value) || !value.import_metadata || value.physical_bus !== null) throw Object.assign(Error(), { importFailure: 'response' });
-      setReview(value); reviewReady(); setMessage('Gjennomgangen er klar. Kontroller kildefakta før du bruker dem i et separat utkast.'); heading.current?.focus();
+      const { entur_matches, ...content } = value ?? {};
+      if (!validContent(content) || !content.import_metadata || content.physical_bus !== null) throw Object.assign(Error(), { importFailure: 'response' });
+      setReview(content); setRoutes(Array.isArray(entur_matches) ? entur_matches : undefined); reviewReady(); setMessage('Gjennomgangen er klar. Kontroller kildefakta før du bruker dem i et separat utkast.'); heading.current?.focus();
     } catch (error: any) {
       if (current !== epoch.current) return;
       if (error?.status === 401) { expired(); return; }
@@ -113,6 +116,6 @@ export function PrivateImport({ upload, adopt, expired, suspended, locked, stage
     }} /></label>
     {stage === 'upload' && review && <button onClick={reviewReady}>Fortsett importgjennomgang</button>}
     {(busy || review) && <button onClick={() => { cancel(); backToUpload(); }}>{busy ? 'Avbryt import' : 'Forkast gjennomgang'}</button>}
-    {stage === 'review' && review?.import_metadata && <><h3>Importsammendrag</h3><p>Skift {show(review.import_metadata.header.shift_id)} · {show(review.service_date)} · {review.activities.length} aktiviteter · vognløp {show(review.vehicle_duty)}.</p><p className="import-summary-interval">Oppgitt skift: {show(review.import_metadata.header.start)} · {show(review.import_metadata.header.origin)} → {show(review.import_metadata.header.end)} · {show(review.import_metadata.header.destination)}. Avledede kalenderdatoer: {sourceDay(review.import_metadata.header.start_instant)} – {sourceDay(review.import_metadata.header.end_instant)}.</p><p>Buss/vogn er ukjent. {review.import_metadata.unresolved.length} kildevarsler. Ukjente fakta og aktivitetstyper avgjøres ved godkjenning. Ingenting er lagret ennå.</p><details><summary>Vis alle kildefakta fra PDF</summary><SourceFacts metadata={review.import_metadata} /></details><div className="controls"><button disabled={suspended || locked} onClick={() => { if (adopt(review, 'edit')) cancel('Tolkningen er overført til et separat, ulagret utkast.'); }}>Rett eller legg til opplysninger</button><button disabled={suspended || locked} onClick={() => { if (adopt(review, 'approve')) cancel('Lagring er startet uttrykkelig.'); }}>Alt stemmer – lagre og fortsett</button></div></>}
+    {stage === 'review' && review?.import_metadata && <><h3>Importsammendrag</h3><p>Skift {show(review.import_metadata.header.shift_id)} · {show(review.service_date)} · {review.activities.length} aktiviteter · vognløp {show(review.vehicle_duty)}.</p><p className="import-summary-interval">Oppgitt skift: {show(review.import_metadata.header.start)} · {show(review.import_metadata.header.origin)} → {show(review.import_metadata.header.end)} · {show(review.import_metadata.header.destination)}. Avledede kalenderdatoer: {sourceDay(review.import_metadata.header.start_instant)} – {sourceDay(review.import_metadata.header.end_instant)}.</p><p>Buss/vogn er ukjent. {review.import_metadata.unresolved.length} kildevarsler. Ukjente fakta og aktivitetstyper avgjøres ved godkjenning. Ingenting er lagret ennå.</p><ImportRouteMatches content={review} matches={routes} /><details><summary>Vis alle kildefakta fra PDF</summary><SourceFacts metadata={review.import_metadata} /></details><div className="controls"><button disabled={suspended || locked} onClick={() => { if (adopt(review, 'edit')) cancel('Tolkningen er overført til et separat, ulagret utkast.'); }}>Rett eller legg til opplysninger</button><button disabled={suspended || locked} onClick={() => { if (adopt(review, 'approve')) cancel('Lagring er startet uttrykkelig.'); }}>Alt stemmer – lagre og fortsett</button></div></>}
   </section>;
 }

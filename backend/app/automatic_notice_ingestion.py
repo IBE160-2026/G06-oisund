@@ -132,7 +132,9 @@ def keep_observation(conn, data, fetched_at, response_at, generation):
                            'WHERE participant=%s AND situation=%s AND current_revision', key).fetchone()
     same = current is not None and current['revision'] == digest
     order = ordering(data, current['content']) if current and not same else 0
-    replace = not current or same or (order > 0 and (generation is not None or data['progress'] == 'closed'))
+    closes_current = (current and current['content']['progress'] != 'closed'
+                      and data['progress'] == 'closed' and order >= 0)
+    replace = not current or same or closes_current or (order > 0 and generation is not None)
     if replace and not same:
         conn.execute('UPDATE automatic_notice_sources SET current_revision=false,superseded_at=%s '
                      'WHERE participant=%s AND situation=%s AND current_revision', (fetched_at, *key))

@@ -5,7 +5,7 @@ from uuid import uuid4
 
 from fastapi import HTTPException, Request
 
-from . import auth
+from . import auth, import_route_matching
 from .draft_domain import DraftContent, SourceHeader
 from .pdf_import import MAX_BYTES, ImportFailure, extract_pdf
 from .private_storage import database
@@ -20,6 +20,15 @@ def authorize(request):
     # Short read-only transaction; extraction never holds an account/session lock.
     with database() as conn:
         return auth.session(conn, request)['owner']
+
+
+def route_matches(request, content):
+    with database() as conn:
+        auth.session(conn, request)
+        now = conn.execute('SELECT clock_timestamp() AS now').fetchone()['now']
+        matches = import_route_matching.summaries(conn, content, now)
+        auth.session(conn, request)
+        return matches
 
 
 def interpret(source):

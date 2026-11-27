@@ -53,7 +53,8 @@ def review(request, body):
         count = conn.execute('SELECT count(*) AS n FROM workday_operations WHERE owner=%s AND workday_id IS NULL AND expires_at > clock_timestamp()', (owner,)).fetchone()['n']
         if count >= 200:
             raise HTTPException(429, 'For mange uavklarte bekreftelser.')
-        content = DraftContent.model_validate(source['content'])
+        content = route_reference_storage.effective_content(
+            DraftContent.model_validate(source['content']), route_reference_storage.current_references(conn, source))
         facts = assessment(content, policy_version=3)
         if facts['expires_at'] and not conn.execute('SELECT %s > clock_timestamp() AS live', (facts['expires_at'],)).fetchone()['live']:
             facts['blockers'].append('Planens slutt + sju dager er allerede utløpt. Rett og lagre tidspunktet.')
@@ -112,7 +113,7 @@ def confirm(request, identifier, body):
         if ((body.expected_route_revision is not None and body.expected_route_revision != op['route_revision'])
                 or (route_references and body.expected_route_revision is None)):
             raise HTTPException(409, route_reference_storage.ROUTE_CHANGED)
-        content = DraftContent.model_validate(source['content'])
+        content = route_reference_storage.effective_content(DraftContent.model_validate(source['content']), route_references)
         decisions = {str(key): value for key, value in body.classifications.items()}
         facts = assessment(content, decisions, op['assessment_policy_version'])
         if facts['blockers'] or set(decisions) != set(facts['classifications_required']):

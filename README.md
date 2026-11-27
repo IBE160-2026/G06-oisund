@@ -41,6 +41,8 @@ docker compose -p ibe160-v2-owner -f compose.v2.yaml exec private-api python -m 
 3. Velg **Alt stemmer – lagre og fortsett**. Vent til skjermen for gjennomgang av det lagrede utkastet vises.
 4. Velg **Forberedelse og planlister**. Under **Mine utkast** åpner du raden **Åpne … · versjon 1** og kontrollerer at det samme skiftet vises.
 
+Når en passasjertur har ett entydig treff i den daterte Entur-katalogen, viser gjennomgangen retning, destinasjon og delstrekning. Den samme rutereferansen følger med til den bekreftede planen. Ved uavklart treff kan du rette utkastet eller velge avgang selv. De fiktive turene i Testskift A har ingen avgang i Tromsø-katalogen.
+
 Konto, PDF og lagring fungerer på din egen PC. Du bruker ditt eget lokale passord og filen som følger med repoet. Ubuntu-serveren og Cloudflare Access brukes i feltoppsettet.
 
 ### Stopp og åpne skiftet igjen
@@ -74,7 +76,7 @@ pwsh -NoProfile -File scripts/v2-local.ps1 @prove
 | Ruteoppslag og holdeplassassistanse | Importer offentlige Entur-rutetider og NSR-plattformer for driftsdatoen. Automatisk progresjon krever valgt tur, et eksplisitt startpunkt og god nok GPS. |
 | GPS-fart | Krever posisjonstillatelse og en fersk fartsmåling fra enheten. På en stasjonær PC kan fart mangle. |
 | Vegmatching og fartsgrense | Importer en NVDB-pakke for aktuell Oslo-dato. Tallfestet grense og forvarsel krever ytterligere kvalifisert kildegrunnlag. Den løpende vegdatainnhentingen og WFS-oppdateringen er prøvd i Ubuntu-feltoppsettet. |
-| Automatiske avvik | Oppdatering fra Entur krever internett. Koblingen til turen avhenger av hva Entur har publisert og hvilken rute som er bekreftet. |
+| Automatiske avvik | Entur-innhenting krever internett. **Les trafikkavvik** ved godkjenning og skiftstart, eller **Automatiske avvik** i planen. Utløpte meldinger forsvinner fra visningen. Lesing og skiftstart krever ingen manuell kildekontroll. |
 
 **Datagrunnlag mangler for denne linjen og driftsdatoen** betyr at det lokale ruteoppslaget svarte, men at det ikke har en katalog for valget. **Ingen planlagt avgang denne dagen** betyr at en katalog er tilgjengelig og viser null avganger.
 

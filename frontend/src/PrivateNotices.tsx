@@ -309,9 +309,10 @@ export function NoticeScreens({ notices: n, back, visible = true }: { notices: N
   useEffect(() => { if (visible && n.screen !== 'day') n.title.current?.focus(); }, [visible, n.screen]);
   const p = n.props;
   const disabled = !n.mutable || n.busy || !!n.pending;
+  const active = n.denied ? [] : n.records.filter(value => operationalManualNotice(value, n.now));
   return <section className="private-notices" hidden={n.screen === 'day'} aria-label="Avviksvedlikehold">
     <h2 ref={n.title} tabIndex={-1}>{n.screen === 'editor' ? 'Rediger avvik' : 'Manuelt vedlikeholdte avvik'}</h2>
-    <p>Forlengelse må lagres før gjeldende sluttid. Utløpte og manuelt avsluttede avvik er skrivebeskyttet historikk. Ingen av delene bekrefter at veien er klar eller at kilden er kontrollert.</p><p>Felles avviksregister for kontoen. Avvik brukes automatisk på alle relevante bekreftede dager frem til sluttdatoen.</p>
+    <p>Avviket vises frem til gyldig-til eller til du avslutter det manuelt. Forlengelse må lagres før sluttiden.</p>
     {n.screen !== 'editor' && <p role="status" aria-label="Avviksstatus">{n.message}</p>}
     {n.terminal && <p>Avviket er utløpt eller avsluttet manuelt og er skrivebeskyttet.</p>}
     {!n.available && <p>Eventuelle tidligere viste opplysninger er ikke oppdatert.</p>}
@@ -319,8 +320,8 @@ export function NoticeScreens({ notices: n, back, visible = true }: { notices: N
     {n.pending && <div className="controls"><button disabled={n.busy || p.suspended} onClick={() => void n.send(undefined, true)}>Kontroller avvikslagringen</button><button disabled={n.busy || p.suspended} onClick={() => void n.send()}>Prøv samme avvikslagring igjen</button></div>}
     <div hidden={n.screen !== 'list'}>
       {n.draft ? <button onClick={() => n.navigate('editor')}>Tilbake til ulagret avvik</button> : <button disabled={!n.available || n.busy || !!n.pending || p.suspended} onClick={() => n.edit(null)}>Registrer avvik</button>}
-      {n.available && n.records.length === 0 && <p>Ingen avvik er registrert her. Kontroller originalkilden.</p>}
-      <ul className="notice-list">{(!n.denied ? n.records.filter(v => Date.parse(v.expires_at) > n.now) : []).map(value => <li key={value.id}><details open={n.expanded === value.id} onToggle={e => { if (e.currentTarget.open) n.setExpanded(value.id); }}><summary>{value.title} · {noticeStatus(value, n.now)}</summary><NoticeFacts value={value} now={n.now} />
+      {n.available && active.length === 0 && <p>Ingen aktuelle avvik i registeret. Kontroller originalkilden.</p>}
+      <ul className="notice-list">{active.map(value => <li key={value.id}><details open={n.expanded === value.id} onToggle={e => { if (e.currentTarget.open) n.setExpanded(value.id); }}><summary>{value.title} · {noticeStatus(value, n.now)}</summary><NoticeFacts value={value} now={n.now} />
         {editable(value, n.now) && <div className="controls"><button disabled={disabled || !!n.draft} onClick={() => n.edit(value)}>Rediger {value.title}</button><button disabled={disabled || n.dirty} onClick={() => n.action(value, 'check')}>Kontrollerte kilden nå</button>{value.status === 'registered' && <button disabled={disabled || n.dirty} onClick={() => n.action(value, 'end')}>Avslutt avvik manuelt</button>}</div>}
         <p>Kildekontroll registrerer ditt uttrykkelige kontrolltidspunkt. Det er ingen automatisk kontroll eller garanti for dekning.</p>
       </details></li>)}</ul>
@@ -328,7 +329,7 @@ export function NoticeScreens({ notices: n, back, visible = true }: { notices: N
     <div hidden={n.screen !== 'editor'}>
       <button onClick={() => n.navigate('list')}>Tilbake til avvik</button>
       <p>Gi trafikkmeldingen en tittel. Bruk kort forklaring til et sammendrag og detaljert forklaring til hele meldingen, instruksjoner og separate tidsvinduer. Velg bestemte linjer og oppgi dem fra kilden, eller velg Alle linjer uttrykkelig.</p>
-      <p>Tittel og et uttrykkelig linjevalg er påkrevd. Sluttdato er påkrevd. Forklaringer, kildebeskrivelse, lenke og øvrige tidspunkt er valgfrie. La kildens oppdateringstid og start stå tomme når de ikke er oppgitt.</p>
+      <p>Fyll inn tittel, linjevalg og gyldig-til. Meldingstekst, starttid og kildeopplysninger er valgfrie. Kildekontroll og manuell avslutning er egne, valgfrie handlinger.</p>
       {n.draft && <div key={n.editorKey}><fieldset disabled={disabled}><legend>Kildeopplysninger</legend>
         <label>Tittel<input value={n.draft.title} aria-invalid={!!n.errors.title} aria-describedby={n.errors.title ? 'notice-title-error' : undefined} onChange={e => n.setDraft(v => v && ({ ...v, title: e.target.value }))} /></label>
         {n.errors.title && <p id="notice-title-error">{n.errors.title}</p>}
@@ -369,7 +370,8 @@ export function NoticeScreens({ notices: n, back, visible = true }: { notices: N
 }
 
 export const editable = (v: Notice, now = privateNow()) => v.status === 'registered' && (!v.valid_until || Date.parse(v.valid_until) > now) && Date.parse(v.expires_at) > now;
-export const noticeStatus = (v: Notice, now = privateNow()) => v.status === 'ended_manually' ? 'Avsluttet manuelt' : !v.valid_until ? 'Mangler sluttdato' : Date.parse(v.valid_until) <= now ? 'Utløpt' : 'Registrert';
+export const operationalManualNotice = (v: Notice, now = privateNow()) => v.status === 'registered' && !!v.valid_until && Date.parse(v.valid_until) > now && Date.parse(v.expires_at) > now;
+export const noticeStatus = (v: Notice, now = privateNow()) => v.status === 'ended_manually' ? 'Avsluttet manuelt' : !v.valid_until ? 'Mangler sluttdato' : Date.parse(v.valid_until) <= now ? 'Utløpt' : v.valid_from && Date.parse(v.valid_from) > now ? 'Kommende' : 'Aktiv';
 
 export function NoticeFacts({ value: v, now }: { value: Notice; now: number }) {
   return <div className="notice-facts"><p>Tittel: {v.title}</p><p>Linjer fra kilden: {v.line_scope === 'all' ? 'Alle linjer' : tagText(v.line_tags)}</p><p>Status: {noticeStatus(v, now)}</p>

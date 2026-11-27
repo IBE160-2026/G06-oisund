@@ -188,6 +188,9 @@ def save(request, identifier, body):
                                'WHERE EXISTS (SELECT 1 FROM draft_operations WHERE id=%s AND expires_at > clock_timestamp()) RETURNING *', (uuid4(), owner, Jsonb(content), body.operation_id)).fetchone()
             if not row:
                 raise HTTPException(410, 'Lagringsforsøket er utløpt.')
+        if content.get('import_metadata') and not row['confirmed']:
+            from .route_reference_storage import resolve_imported
+            resolve_imported(conn, row, existing)
         result = presentation(row)
         accepted = conn.execute('UPDATE draft_operations SET draft_id=%s,expires_at=%s,payload_hash=%s,result=%s WHERE id=%s '
                                 'AND expires_at > clock_timestamp() AND %s > clock_timestamp() RETURNING id',

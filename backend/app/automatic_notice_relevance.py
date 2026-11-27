@@ -29,6 +29,7 @@ BINDING = {'version': 'entur-tro-2026-11-20-pilot-week', 'basis': 'Checked Entur
            'stop_review': {'stop_place_ref': PILOT_STOP_PLACE, 'line_ref': CROSSWALK[PILOT_STOP_LINE][0],
                            'nsr_generation': '1795125615869698',
                            'nsr_sha256': '2c224106067c28de88b6e67e04d3a33c527ae629ee6b3103dcb309e430d8427a'}}
+CITY_LINE_IDS = frozenset(LINE_IDS.values())
 REVIEW_QUALIFIERS = {'DirectionRef', 'AffectedDirection', 'AffectedRoute', 'AffectedStopPoint', 'AffectedStopPlace',
                      'StopPointRef', 'StopPlaceRef', 'QuayRef', 'AffectedVehicleJourney', 'VehicleJourneyRef',
                      'FramedVehicleJourneyRef', 'DatedVehicleJourneyRef', 'AffectedOnly', 'AffectedSection'}
@@ -50,6 +51,45 @@ def valid_windows(source):
         else:
             windows.append((start, end))
     return windows, uncertain
+
+
+def operational_status(source, now):
+    if source['progress'] == 'closed':
+        return None
+    windows = [(instant(window['start']), instant(window['end'])) for window in source['windows']]
+    remaining = [(start, end) for start, end in windows if end is None or end > now]
+    if windows and not remaining:
+        return None
+    if source['progress'] != 'open' or not remaining:
+        return 'uncertain'
+    if any(start is not None and end is not None and start <= now < end for start, end in remaining):
+        return 'active'
+    if all(start is not None and end is not None and now < start < end for start, end in remaining):
+        return 'upcoming'
+    return 'uncertain'
+
+
+def city_scope(source, stops):
+    fields = list(walk(source['affects']))
+    values = {}
+    for node, _ in fields:
+        if node['value']:
+            values.setdefault(node['kind'], set()).add(node['value'])
+    modes = values.get('VehicleMode', set()) | values.get('TransportMode', set())
+    if modes and modes <= {'ferry', 'water', 'rail', 'tram', 'metro', 'air'}:
+        return False
+    lines = values.get('LineRef', set())
+    if lines & CITY_LINE_IDS:
+        return True
+    stop_refs = set().union(*(values.get(kind, set()) for kind in ('StopPointRef', 'StopPlaceRef', 'QuayRef')))
+    if not lines and stop_refs & stops:
+        return True
+    if values.get('AuthorityRef', set()) - {'TRO:Authority:1'} or values.get('OperatorRef'):
+        return False
+    networks = values.get('NetworkRef', set())
+    return not (networks - {'TRO:Network:1'}) and (
+        'true' in values.get('AllLines', set()) or 'true' in values.get('All', set())
+    ) and not any(node['kind'] in REVIEW_QUALIFIERS for node, _ in fields)
 
 
 def planned_interval(value):

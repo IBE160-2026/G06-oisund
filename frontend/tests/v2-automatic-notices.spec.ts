@@ -52,7 +52,9 @@ test('normal private view preserves activity and manual input and recovers a los
     await expect(area).toContainText('Kontrollerte testdata');
     await expect(area).toContainText('Komplett innsamling for TRO');
     await area.getByRole('button', { name: 'Syntetisk stoppmelding <script>', exact: true }).click();
-    await expect(area.getByRole('heading', { name: 'Gjennomgang av melding' })).toBeVisible();
+    await expect(area.getByRole('heading', { name: 'Avvik fra Entur', exact: true })).toBeVisible();
+    await expect(area.getByLabel('Valg', { exact: true })).toHaveCount(0);
+    await area.getByRole('button', { name: 'Gjennomgå kildegrunnlaget (valgfritt)', exact: true }).click();
     await expect(area).toContainText('Koblingen til planens stopp er uavklart.');
     await expect(area.locator('script')).toHaveCount(0);
     await area.getByLabel('Valg', { exact: true }).selectOption('day-context');
@@ -97,9 +99,10 @@ with database() as conn:
  conn.execute('UPDATE workdays SET content=%s WHERE id=%s',(Jsonb(facts),key))`);
     await page.getByRole('button', { name: 'Automatiske avvik', exact: true }).click();
     const group = page.getByRole('region', { name: 'Pilotstopp til gjennomgang', exact: true });
-    await expect(group.getByRole('heading')).toHaveText('Pilotstopp til gjennomgang · 1 på denne siden');
+    await expect(group.getByRole('heading')).toHaveText('Pilotstopp til gjennomgang');
     await expect(group).toContainText('Vurder om meldingen gjelder avgangen din.');
     await group.getByRole('button', { name: 'Syntetisk stoppmelding <script>', exact: true }).click();
+    await page.getByRole('button', { name: 'Gjennomgå kildegrunnlaget (valgfritt)', exact: true }).click();
     await expect(page.getByRole('list', { name: 'Mulig relevante planaktiviteter' })).toHaveCount(0);
     await expect(page.getByLabel('Valg', { exact: true })).toHaveValue('unresolved');
     await page.getByLabel('Valg', { exact: true }).selectOption('day-context');
@@ -121,6 +124,7 @@ test('source, concurrent review and workday boundary changes require explicit co
     await page.getByRole('button', { name: 'Automatiske avvik', exact: true }).click();
     const view = page.getByRole('region', { name: 'Automatiske avvik', exact: true });
     await view.getByRole('button', { name: 'Syntetisk stoppmelding <script>', exact: true }).click();
+    await view.getByRole('button', { name: 'Gjennomgå kildegrunnlaget (valgfritt)', exact: true }).click();
     const save = view.getByRole('button', { name: 'Lagre gjennomgang', exact: true });
     const compare = view.getByRole('button', { name: 'Sammenlignet. Behold forslaget', exact: true });
     const refresh = view.getByRole('button', { name: 'Hent status', exact: true });
@@ -143,7 +147,7 @@ test('source, concurrent review and workday boundary changes require explicit co
     let active = await projection();
     expect(active.entries[0].decision).toMatchObject({ action: 'dismiss', reason: 'Mitt valg på vist grunnlag', source_basis: active.entries[0].source.basis });
 
-    await view.getByRole('button', { name: 'Start ny gjennomgang', exact: true }).click();
+    await view.getByRole('button', { name: 'Gjennomgå kildegrunnlaget (valgfritt)', exact: true }).click();
     await choices.selectOption('day-context');
     const entry = active.entries[0];
     await post(context, path + '/review', { operation_id: randomUUID(), situation: entry.situation, expected_revision: entry.review_revision,
@@ -179,6 +183,7 @@ test('a delayed acknowledgement after leaving and reopening keeps the original r
     await entry.click();
     const view = page.getByRole('region', { name: 'Automatiske avvik', exact: true });
     await view.getByRole('button', { name: 'Syntetisk stoppmelding <script>', exact: true }).click();
+    await view.getByRole('button', { name: 'Gjennomgå kildegrunnlaget (valgfritt)', exact: true }).click();
     await view.getByLabel('Valg', { exact: true }).selectOption('day-context');
     const gate = new Promise<void>(resolve => { release = resolve; });
     const savePath = '**/automatic-notices/review';

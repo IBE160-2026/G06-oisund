@@ -12,13 +12,14 @@ from psycopg.types.json import Jsonb
 
 from . import auth, draft_storage, workday_storage
 from .automatic_notice_ingestion import CYCLE_SECONDS
-from .automatic_notice_relevance import BINDING, classify, verified_pilot_stop_scope
+from .automatic_notice_relevance import BINDING, PILOT_STOP_PLACE, city_scope, classify, operational_status, verified_pilot_stop_scope
 from .automatic_notice_source import MAX_ID, revision, valid_situation
 from .draft_domain import StrictModel
 from .private_storage import database
 
 
-router = APIRouter(prefix='/workdays/{identifier}/automatic-notices')
+router = APIRouter()
+PLAN_PATH = '/workdays/{identifier}/automatic-notices'
 PAGE_LIMIT = 10
 MAX_DECISIONS = 200
 MAX_OPERATIONS = 1000
@@ -120,16 +121,74 @@ def public_item(conn, situation, feed, now):
     }
 
 
+def city_stops(conn):
+    rows = conn.execute(
+        "SELECT DISTINCT q.quay_id, item->>'stop_place_id' AS stop_place_id "
+        "FROM public_quay_versions q "
+        "CROSS JOIN LATERAL jsonb_array_elements(COALESCE(q.record->'versions',jsonb_build_array(q.record))) item "
+        "WHERE q.revision IN (SELECT DISTINCT provenance->>'nsr_revision' FROM public_route_days)"
+    ).fetchall()
+    return {PILOT_STOP_PLACE, *(row['quay_id'] for row in rows), *(row['stop_place_id'] for row in rows if row['stop_place_id'])}
+
+
+def operational_sources(conn, feed, now):
+    stops = city_stops(conn)
+    rows = conn.execute(
+        "SELECT i.situation,jsonb_build_object('progress',s.content->'progress','windows',s.content->'windows',"
+        "'affects',s.content->'affects') AS content FROM automatic_notice_identities i "
+        "JOIN automatic_notice_sources s USING(participant,situation) "
+        "WHERE i.participant='TRO' AND s.current_revision "
+        "AND (i.last_complete_generation=%s OR (%s <> 'complete' "
+        "AND i.last_seen > GREATEST(COALESCE(%s,'-infinity'::timestamptz), %s))) "
+        "ORDER BY i.situation",
+        (feed['generation'], feed['status'], feed['synchronized_at'], now - RETENTION),
+    ).fetchall()
+    return [(row['situation'], state) for row in rows
+            if (state := operational_status(row['content'], now)) and city_scope(row['content'], stops)]
+
+
+def page_sources(conn, feed, now, cursor):
+    matches = operational_sources(conn, feed, now)
+    remaining = [(key, status) for key, status in matches if cursor is None or key > cursor]
+    return remaining[:PAGE_LIMIT], len(matches), remaining[PAGE_LIMIT - 1][0] if len(remaining) > PAGE_LIMIT else None
+
+
+@router.get('/operational-notices')
+def operational_notices(request: Request, cursor: Annotated[str | None, Query(max_length=MAX_ID)] = None):
+    if cursor is not None and not valid_situation(cursor):
+        raise HTTPException(422, 'Kontroller sidegrunnlaget.')
+    with database() as conn:
+        owner = draft_storage.authorized(conn, request)
+        now = clock(conn)
+        feed = health(conn, now)
+        page, total, next_cursor = page_sources(conn, feed, now, cursor)
+        rows = conn.execute(
+            "SELECT id,title,summary,description,line_tags,line_scope,valid_from,valid_until,checked_at,source_note "
+            "FROM workday_notices WHERE owner=%s AND status='registered' "
+            "AND valid_until>%s AND expires_at>%s ORDER BY valid_until,id",
+            (owner, now, now),
+        ).fetchall() if cursor is None else []
+        entries = []
+        for key, state in page:
+            source = public_item(conn, key, feed, now)
+            entries.append({'id': key, 'status': state, 'content': source['content'], 'observation': source['observation']})
+        auth.session(conn, request)
+        return {'server_now': now, 'manual': rows, 'automatic': entries, 'feed': feed['status'],
+                'old': feed['old'], 'total': total, 'next_cursor': next_cursor}
+
+
 def manual(conn, owner, identifier):
     if identifier is None:
         return None
     return conn.execute('SELECT id,title,summary,description,source_note,source_url,source_updated_at,valid_from,valid_until,'
                         'status,checked_at,ended_at,revision FROM workday_notices '
-                        'WHERE id=%s AND owner=%s AND expires_at>clock_timestamp()', (identifier, owner)).fetchone()
+                        "WHERE id=%s AND owner=%s AND status='registered' AND valid_until>clock_timestamp() "
+                        'AND expires_at>clock_timestamp()', (identifier, owner)).fetchone()
 
 
-@router.get('')
-def projection(identifier: UUID, request: Request, cursor: Annotated[str | None, Query(max_length=MAX_ID)] = None):
+@router.get(PLAN_PATH)
+def projection(identifier: UUID, request: Request, cursor: Annotated[str | None, Query(max_length=MAX_ID)] = None,
+               history: bool = False):
     if cursor is not None and not valid_situation(cursor):
         raise HTTPException(422, 'Kontroller sidegrunnlaget.')
     with database() as conn:
@@ -139,13 +198,10 @@ def projection(identifier: UUID, request: Request, cursor: Annotated[str | None,
         stage = lifecycle(conn, identifier)
         reviews = {item['situation']: item for item in conn.execute('SELECT situation,revision,decision '
                    'FROM automatic_notice_reviews WHERE workday_id=%s AND owner=%s', (identifier, owner)).fetchall()}
-        key_filters = ('TRO', feed['generation'], now - RETENTION, list(reviews))
-        entries = conn.execute(f'WITH keys AS ({VISIBLE_IDENTITIES} UNION SELECT unnest(%s::text[])) '
-                               'SELECT situation,(SELECT count(*) FROM keys) AS total FROM keys '
-                               'WHERE (%s::text IS NULL OR situation>%s) ORDER BY situation LIMIT %s',
-                               (*key_filters, cursor, cursor, PAGE_LIMIT + 1)).fetchall()
-        total = entries[0]['total'] if entries else conn.execute(
-            f'SELECT count(*) AS n FROM ({VISIBLE_IDENTITIES} UNION SELECT unnest(%s::text[])) keys', key_filters).fetchone()['n']
+        if history:
+            entries, total, next_cursor = history_page(conn, feed, now, cursor, list(reviews))
+        else:
+            entries, total, next_cursor = page_sources(conn, feed, now, cursor)
         activities = draft_storage.normalize_content(plan['content'])['activities']
         dated_routes = {str(row['activity_id']): row['reference'] for row in conn.execute(
             "SELECT activity_id, reference FROM workday_route_references WHERE workday_id=%s "
@@ -153,8 +209,7 @@ def projection(identifier: UUID, request: Request, cursor: Annotated[str | None,
             (identifier,),
         ).fetchall()}
         results = []
-        for entry in entries[:PAGE_LIMIT]:
-            situation = entry['situation']
+        for situation, _ in entries:
             source = public_item(conn, situation, feed, now)
             saved = reviews.get(situation)
             decision = saved['decision'] if saved else None
@@ -170,7 +225,19 @@ def projection(identifier: UUID, request: Request, cursor: Annotated[str | None,
         return {'workday_id': identifier, 'plan_revision': plan['source_revision'], 'expires_at': plan['expires_at'],
                 'server_now': now, 'lifecycle': stage, 'health': feed, 'binding': BINDING,
                 'entries': results, 'total': total, 'page_counts': Counter(item['classification'] for item in results),
-                'next_cursor': entries[PAGE_LIMIT - 1]['situation'] if len(entries) > PAGE_LIMIT else None}
+                'next_cursor': next_cursor}
+
+
+def history_page(conn, feed, now, cursor, reviews):
+    args = ('TRO', feed['generation'], now - RETENTION, reviews)
+    entries = conn.execute(f'WITH keys AS ({VISIBLE_IDENTITIES} UNION SELECT unnest(%s::text[])) '
+                           'SELECT situation,(SELECT count(*) FROM keys) AS total FROM keys '
+                           'WHERE (%s::text IS NULL OR situation>%s) ORDER BY situation LIMIT %s',
+                           (*args, cursor, cursor, PAGE_LIMIT + 1)).fetchall()
+    total = entries[0]['total'] if entries else conn.execute(
+        f'SELECT count(*) AS n FROM ({VISIBLE_IDENTITIES} UNION SELECT unnest(%s::text[])) keys', args).fetchone()['n']
+    return ([(row['situation'], None) for row in entries[:PAGE_LIMIT]], total,
+            entries[PAGE_LIMIT - 1]['situation'] if len(entries) > PAGE_LIMIT else None)
 
 
 def receipt(conn, identifier, owner, operation_id):
@@ -179,7 +246,7 @@ def receipt(conn, identifier, owner, operation_id):
                         (identifier, operation_id, owner)).fetchone()
 
 
-@router.get('/operations/{operation_id}')
+@router.get(PLAN_PATH + '/operations/{operation_id}')
 def lookup(identifier: UUID, operation_id: UUID, request: Request):
     with database() as conn:
         owner, _ = access(conn, identifier, request)
@@ -194,7 +261,7 @@ def conflict(detail='Gjennomgangen har endret seg. Hent dagens opplysninger og s
     raise HTTPException(409, detail)
 
 
-@router.post('/review')
+@router.post(PLAN_PATH + '/review')
 def save(identifier: UUID, command: ReviewCommand, request: Request):
     with database() as conn:
         owner, plan = access(conn, identifier, request)

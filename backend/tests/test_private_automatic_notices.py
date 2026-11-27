@@ -84,7 +84,7 @@ def planned(client, users, when=23, account=0):
 
 
 def get(client, plan, cursor=None):
-    response = client.get(path(plan), params={'cursor': cursor} if cursor else None)
+    response = client.get(path(plan), params={'history': 'true', **({'cursor': cursor} if cursor else {})})
     assert response.status_code == 200 and response.headers['cache-control'] == 'no-store', response.text
     return response.json()
 

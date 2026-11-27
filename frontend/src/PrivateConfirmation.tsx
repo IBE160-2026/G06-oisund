@@ -6,8 +6,9 @@ import { recoverOperation } from './recoverOperation';
 
 
 import { NoticeScreens, usePrivateNotices } from './PrivateNotices';
+import { PrivateTrafficNotices } from './PrivateTrafficNotices';
 import { PrivateWorkdayView } from './PrivateWorkdayView';
-import { ApprovalRouteReferences, routeDate, readDraftRoutes, type Reference } from './PrivateRouteReference';
+import { ApprovalRouteReferences, ImportRouteMatches, routeDate, readDraftRoutes, withRouteDirections } from './PrivateRouteReference';
 import { effectiveDuty, activityFactMissing, displayFact, currentUncertainty } from './draftInterpretation';
 
 type Review = { operation_id: string; operation_expires_at: string; draft_id: string; revision: number; draft: Content; blockers: string[]; unknowns: { id: string; label: string }[]; classifications_required: string[]; supported_types: string[]; final_end: string | null; expires_at: string | null };
@@ -90,8 +91,9 @@ export function PrivateConfirmation({ saved, clean, request, mutation, expired, 
   useEffect(() => { registryOpen(notices.screen !== 'day' || screen === 'plan' && noticeReaderOpen); }, [notices.screen, noticeReaderOpen, screen]);
   useEffect(() => { notices.navigate('day'); }, [registryNavigation]);
   const [review, setReview] = useState<Review | null>(null);
-  const [routeReview, setRouteReview] = useState<{ revision: number; references: Reference[] } | null>(null);
+  const [routeReview, setRouteReview] = useState<Awaited<ReturnType<typeof readDraftRoutes>> | null>(null);
   const [routeAcknowledged, setRouteAcknowledged] = useState(false);
+  const needsRouteAcknowledgement = routeReview?.references.some(reference => reference.selection_mode !== 'automatic') ?? false;
   const [acks, setAcks] = useState<string[]>([]);
   const [classes, setClasses] = useState<Record<string, string>>({});
   const [pending, setPending] = useState<Decisions | null>(null);
@@ -188,12 +190,13 @@ export function PrivateConfirmation({ saved, clean, request, mutation, expired, 
     const attempt = { selected, generation }; reviewRead.current = attempt;
     setBusy(true);
     try {
-      const route = routeDate(saved.draft.service_date) ? await readDraftRoutes(request, saved) : null;
+      const route = routeDate(saved.draft.service_date) || saved.draft.import_metadata
+        ? await readDraftRoutes(request, saved, saved.draft.import_metadata ? mutation : undefined) : null;
       if (!alive.current || generation !== epoch.current) return;
       const value = await mutation('/workday-reviews', { draft_id: saved.id, expected_revision: saved.revision,
         ...(route ? { expected_route_revision: route.route_revision } : {}) });
       if (!alive.current || generation !== epoch.current) return;
-      if (!value || Object.keys(value).sort().join() !== 'blockers,classifications_required,draft,draft_id,expires_at,final_end,operation_expires_at,operation_id,revision,supported_types,unknowns' || !uuid(value.operation_id) || value.draft_id !== saved.id || value.revision !== saved.revision || canonical(value.draft) !== canonical(saved.draft)
+      if (!value || Object.keys(value).sort().join() !== 'blockers,classifications_required,draft,draft_id,expires_at,final_end,operation_expires_at,operation_id,revision,supported_types,unknowns' || !uuid(value.operation_id) || value.draft_id !== saved.id || value.revision !== saved.revision || canonical(value.draft) !== canonical(withRouteDirections(saved.draft, route?.references ?? []))
         || Date.parse(value.operation_expires_at) !== Date.parse(saved.expires_at) || !live(value.operation_expires_at)
         || !Array.isArray(value.blockers) || !value.blockers.every((v: any) => typeof v === 'string') || !Array.isArray(value.unknowns) || value.unknowns.length > 3000
         || !value.unknowns.every((v: any) => v && typeof v.id === 'string' && v.id.length <= 200 && typeof v.label === 'string') || new Set(value.unknowns.map((v: any) => v.id)).size !== value.unknowns.length
@@ -202,7 +205,7 @@ export function PrivateConfirmation({ saved, clean, request, mutation, expired, 
         || !Array.isArray(value.supported_types) || canonical([...value.supported_types].sort()) !== canonical([...supportedTypes].sort())
         || !validCandidates(value)
         || (value.blockers.length === 0 && (Date.parse(value.final_end) !== finalEnd(saved.draft) || Date.parse(value.expires_at) - Date.parse(value.final_end) !== 7 * 86400000 || !live(value.expires_at)))) throw Error();
-      setRouteReview(route ? { revision: route.route_revision, references: route.references } : null);
+      setRouteReview(route);
       setRouteAcknowledged(false);
       setReview(value); setAcks([]); setClasses({}); setMessage('Gjennomgå den lagrede versjonen og beslutningene som er oppført.'); title.current?.focus();
     } catch (error) { if (alive.current && generation === epoch.current) failure(error); }
@@ -222,10 +225,10 @@ export function PrivateConfirmation({ saved, clean, request, mutation, expired, 
     return true;
   }
   async function send(lookup = false) {
-    if (!review || busLockedRef.current || !pending && !!routeReview?.references.length && !routeAcknowledged) return;
+    if (!review || busLockedRef.current || !pending && needsRouteAcknowledgement && !routeAcknowledged) return;
     const generation = reading.current, authorityEpoch = epoch.current;
     const decisions = pending ?? { operation_id: review.operation_id, expected_revision: review.revision, acknowledgements: [...acks].sort(), classifications: { ...classes },
-      ...(routeReview?.references.length ? { expected_route_revision: routeReview.revision } : {}) };
+      ...(routeReview?.references.length ? { expected_route_revision: routeReview.route_revision } : {}) };
     let checking = false;
     setPending(decisions); setBusy(true); setMessage('Bekreftelse er uavklart til svaret er kontrollert.');
     try {
@@ -356,15 +359,17 @@ export function PrivateConfirmation({ saved, clean, request, mutation, expired, 
     {review && <section aria-label="Gjennomgått versjon"><h3>Lagret versjon {review.revision}</h3><p>Siste aktivitetsslutt: {review.final_end ? date(review.final_end) : 'Uavklart'}. Planen utløper: {review.expires_at ? date(review.expires_at) : 'Uavklart'}.</p>
       {review.blockers.length > 0 && <div className="import-warning"><h4>Rett før bekreftelse</h4><ul>{review.blockers.map((v, i) => <li key={i}>{v}</li>)}</ul></div>}
       <p>Tjenestedato {review.draft.service_date ?? 'ukjent'} · vognløp {review.draft.vehicle_duty ?? 'ukjent'} · buss/vogn {review.draft.physical_bus ?? 'ukjent'} · {review.draft.activities.length} aktiviteter.</p><details><summary>Vis alle opplysninger i lagret versjon</summary><Facts content={review.draft} classifications={classes} /></details>
-      {!!routeReview?.references.length && <><ApprovalRouteReferences references={routeReview.references} />
-        <label className="confirmation-ack"><input type="checkbox" disabled={busy || !!pending || suspended} checked={routeAcknowledged}
-          onChange={event => setRouteAcknowledged(event.target.checked)} />Jeg har gjennomgått rutevalgene og vil bevare dem i planen.</label></>}
+      <ImportRouteMatches content={review.draft} matches={routeReview?.import_matches} />
+      {!!routeReview?.references.length && <ApprovalRouteReferences references={routeReview.references} />}
+      {needsRouteAcknowledgement && <label className="confirmation-ack"><input type="checkbox" disabled={busy || !!pending || suspended} checked={routeAcknowledged}
+          onChange={event => setRouteAcknowledged(event.target.checked)} />Jeg har gjennomgått rutevalgene og vil bevare dem i planen.</label>}
+      <PrivateTrafficNotices available={screen === 'approval' && workspaceVisible && !suspended} request={request} />
       <p>Godta manglende turinformasjon og gjeldende usikkerhet for passasjerturer der de er oppført nedenfor. Ukjent aktivitetstype må klassifiseres.</p>
       <fieldset disabled={busy || !!pending || suspended}><legend>Beslutninger for versjon {review.revision}</legend>
         {review.classifications_required.map(id => { const index = review.draft.activities.findIndex(a => a.id === id), activity = review.draft.activities[index]; return <div key={id} className="classification-decision"><p id={'classification-context-' + id}>Opprinnelig kode: {displayFact('raw_code', activity.raw_code) ?? 'Ukjent'}. Oppgitt type: {displayFact('type', activity.type) ?? 'Ukjent'}. Start: {activity.start ? date(activity.start) : 'Ukjent dato og tid'} · slutt: {activity.end ? date(activity.end) : 'Ukjent dato og tid'}. Fra: {displayFact('from_place', activity.from_place) ?? 'Ukjent'} · til: {displayFact('to_place', activity.to_place) ?? 'Ukjent'}.</p><label>Klassifisering aktivitet {index + 1}<select aria-describedby={'classification-context-' + id} value={classes[id] ?? ''} onChange={e => { const next = { ...classes, [id]: e.target.value }; setClasses(next); const allowed = new Set(relevantUnknowns(review, next).map(item => item.id)); setAcks(current => current.filter(id => allowed.has(id))); }}><option value="">Velg eksplisitt type</option>{review.supported_types.map(kind => <option key={kind} value={kind}>{typeLabels[kind]}</option>)}</select></label></div>; })}
         {visibleUnknowns.map(item => <label className="confirmation-ack" key={item.id}><input type="checkbox" checked={acks.includes(item.id)} onChange={e => setAcks(current => e.target.checked ? [...current, item.id] : current.filter(id => id !== item.id))} />Jeg har gjennomgått og godtar: {item.label}</label>)}
       </fieldset>
-      {!pending && <div className="controls"><button disabled={busy || busLocked || suspended || !!routeReview?.references.length && !routeAcknowledged || review.blockers.length > 0 || acks.length !== visibleUnknowns.length || review.classifications_required.some(id => !classes[id])} onClick={() => void send()}>Bekreft gjennomgått plan</button><button disabled={busy} onClick={() => { setReview(null); setRouteReview(null); setRouteAcknowledged(false); setAcks([]); setClasses({}); setMessage('Gjennomgangen er avbrutt. Utkastet er uendret.'); }}>Avbryt gjennomgang</button></div>}
+      {!pending && <div className="controls"><button disabled={busy || busLocked || suspended || needsRouteAcknowledgement && !routeAcknowledged || review.blockers.length > 0 || acks.length !== visibleUnknowns.length || review.classifications_required.some(id => !classes[id])} onClick={() => void send()}>Bekreft gjennomgått plan</button><button disabled={busy} onClick={() => { setReview(null); setRouteReview(null); setRouteAcknowledged(false); setAcks([]); setClasses({}); setMessage('Gjennomgangen er avbrutt. Utkastet er uendret.'); }}>Avbryt gjennomgang</button></div>}
     </section>}
     {pending && <div className="controls"><button disabled={busy || busLocked || suspended} onClick={() => void send()}>Prøv samme bekreftelse igjen</button><button disabled={busy || busLocked || suspended} onClick={() => void send(true)}>Kontroller bekreftelsen</button></div>}
     </div>

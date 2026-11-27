@@ -24,9 +24,42 @@ type Comparison = 'same_version' | 'same_facts' | 'changed' | 'missing' | 'stale
 export type Reference = Journey & {
   activity_id: string; decision_revision: number; start_position: number; end_position: number;
   provenance: Provenance; status: 'compatible' | 'incompatible' | 'unverified'; field_decisions: FieldChoices;
-  selected_at: string; comparison?: Comparison;
+  selected_at: string; comparison?: Comparison; selection_mode?: 'explicit' | 'automatic';
 };
-type DraftRoutes = { draft_id: string; draft_revision: number; route_revision: number; references: Reference[]; outdated: Reference[] };
+const importOutcomes = {
+  'missing-facts': 'Linje, turnummer, tid eller endestopp mangler. Fyll inn opplysningene eller velg avgang.',
+  'catalogue-missing': 'Datert Entur-katalog mangler eller er for gammel. Kontroller eller fyll inn retning.',
+  'conflicting-facts': 'Turnummeret finnes, men tiden, stoppene eller retningen stemmer ikke. Kontroller før du velger.',
+  'trip-not-found': 'Turnummeret finnes ikke i den daterte katalogen. Kontroller turnummeret eller velg avgang.',
+  ambiguous: 'Flere Entur-avganger eller delstrekninger passer. Velg den riktige avgangen.',
+} as const;
+type Match = { activity_id: string } & (
+  { outcome: keyof typeof importOutcomes } |
+  { outcome: 'matched'; direction: string; destination: string; journey_id: string; start_position: number; end_position: number }
+);
+type DraftRoutes = { draft_id: string; draft_revision: number; route_revision: number; references: Reference[]; outdated: Reference[]; import_matches?: Match[] };
+
+export function ImportRouteMatches({ content, matches }: { content: Saved['draft']; matches?: Match[] }) {
+  if (!matches?.length) return null;
+  return <ul aria-label="Entur-treff for passasjerturer">{matches.map(match => {
+    const activity = content.activities.find(row => row.id === match.activity_id);
+    if (!activity) return null;
+    return <li key={match.activity_id}>Linje {activity.line ?? 'ukjent'} · tur {activity.trip ?? 'ukjent'} · {match.outcome === 'matched'
+      ? `${match.direction} · ${match.destination} · stopp ${match.start_position}–${match.end_position}`
+      : importOutcomes[match.outcome]}</li>;
+  })}</ul>;
+}
+
+export function withRouteDirections(content: Saved['draft'], references: Reference[]): Saved['draft'] {
+  const byActivity = new Map(references.map(reference => [reference.activity_id, reference]));
+  return { ...content, activities: content.activities.map(activity => {
+    const reference = byActivity.get(activity.id);
+    if (!reference || reference.status === 'incompatible' || activity.direction?.trim()) return activity;
+    const choice = reference.field_decisions.direction;
+    const value = choice.mode === 'source' ? direction(reference.direction) : choice.mode === 'manual' ? choice.manual?.slice(0, 100) : null;
+    return value ? { ...activity, direction: value } : activity;
+  }) };
+}
 type Summary = Pick<Journey, 'journey_id' | 'pattern_id' | 'direction' | 'headsign'> & {
   start: Time; end: Time; from_name: string; to_name: string; matching_ranges: number[][]; ranges_truncated: boolean;
 };
@@ -88,12 +121,12 @@ function CityLine({ value, select, disabled }: { value: string; select: (value: 
   </select></label>;
 }
 
-export async function readDraftRoutes(request: Request, draft: Saved): Promise<DraftRoutes> {
-  const result = await request(draftPath(draft));
+export async function readDraftRoutes(request: Request, draft: Saved, resolve?: Mutation): Promise<DraftRoutes> {
+  const result = resolve ? await resolve(scope(draft) + '/route-references/resolve?revision=' + draft.revision, {}) : await request(draftPath(draft));
   if (!result || result.draft_id !== draft.id || result.draft_revision !== draft.revision
     || !Number.isSafeInteger(result.route_revision) || result.route_revision < 0
     || !Array.isArray(result.references) || result.references.length > 200 || !result.references.every((value: any) =>
-      validReference(value) && value.service_date === draft.draft.service_date
+      validReference(value) && (value.selection_mode === 'automatic' || value.service_date === draft.draft.service_date)
       && draft.draft.activities.some(a => a.id === value.activity_id))
     || !Array.isArray(result.outdated) || result.outdated.length > 200 || !result.outdated.every(validReference)) {
     throw new Error('Invalid draft route response');
@@ -147,7 +180,8 @@ function SourceFacts({ source }: { source: Provenance }) {
 function ReferenceDetails({ reference }: { reference: Reference }) {
   const first = reference.calls[reference.start_position - 1], last = reference.calls[reference.end_position - 1];
   return <div style={{ overflowWrap: 'anywhere' }}>
-    <p>Driftsdato {reference.service_date} · {direction(reference.direction)} · {first.name} → {last.name}</p>
+    <p>{direction(reference.direction)} · {first.headsign}</p>
+    <p>Driftsdato {reference.service_date} · {first.name} → {last.name}</p>
     <p>Planlagt destinasjonsvisning fra forekomst {first.position}: {first.headsign}</p>
     <p>{reviewStatus[reference.status]}.</p>
     {reference.comparison && reference.comparison !== 'same_version' && <p>{comparisonText[reference.comparison]}</p>}
@@ -453,7 +487,7 @@ export function FrozenRouteReference({ workdayId, activityId, expiresAt, service
       if (!current || deadline <= privateNow()) return;
       if (!value || value.workday_id !== workdayId || !Array.isArray(value.references) || !value.references.every(validReference))
         throw new Error('Invalid frozen routes');
-      setReference(value.references.find((entry: Reference) => entry.activity_id === activityId && entry.service_date === serviceDate) ?? null);
+      setReference(value.references.find((entry: Reference) => entry.activity_id === activityId && (entry.selection_mode === 'automatic' || entry.service_date === serviceDate)) ?? null);
     }).catch(error => {
       if (!current) return;
       if (error?.status === 401) expired();

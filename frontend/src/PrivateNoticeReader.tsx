@@ -32,8 +32,8 @@ export function PrivateNoticeReader(p: { id: string; expiresAt: string; open: bo
   const [now, setNow] = useState(privateNow());
   useEffect(() => { const timer = window.setInterval(() => setNow(privateNow()), 1000); return () => clearInterval(timer); }, []);
   useEffect(() => {
-    setResult(current => current && current.candidates.some(candidate => Date.parse(candidate.notice.expires_at) <= now)
-      ? { ...current, candidates: current.candidates.filter(candidate => Date.parse(candidate.notice.expires_at) > now) } : current);
+    setResult(current => current && current.candidates.some(candidate => Date.parse(candidate.notice.expires_at) <= now || Date.parse(candidate.notice.valid_until!) <= now)
+      ? { ...current, candidates: current.candidates.filter(candidate => Date.parse(candidate.notice.expires_at) > now && Date.parse(candidate.notice.valid_until!) > now) } : current);
   }, [now]);
   const generation = useRef(0), title = useRef<HTMLHeadingElement>(null);
   useEffect(() => { if (p.open) title.current?.focus(); }, [p.open]);
@@ -43,8 +43,12 @@ export function PrivateNoticeReader(p: { id: string; expiresAt: string; open: bo
     setState('loading'); let active = true;
     const timer = window.setTimeout(() => { if (active && generation.current === version) { active = false; setResult(null); setState('unavailable'); } }, 15000);
     const query = new URLSearchParams(); if (line) query.set('line', line); if (date) query.set('calendar_date', date);
-    const requestedAt = performance.now();
-    void p.request('/workdays/' + p.id + '/notice-reader' + (query.size ? '?' + query : '')).then(value => {
+    let loading = false;
+    function load() {
+      if (loading || !active) return;
+      loading = true;
+      const requestedAt = performance.now();
+      void p.request('/workdays/' + p.id + '/notice-reader' + (query.size ? '?' + query : '')).then(value => {
       if (!active || generation.current !== version) return;
       if (!valid(value, p.id, p.expiresAt, line, date)) throw Error('Malformed reader result');
       observePrivateTime(value.server_now, requestedAt); setNow(privateNow()); setResult(value); setChoices({ available_lines: value.available_lines, available_dates: value.available_dates }); setState('ready'); p.shorten(value.expires_at);
@@ -57,8 +61,11 @@ export function PrivateNoticeReader(p: { id: string; expiresAt: string; open: bo
         try { await p.request('/auth/session'); } catch (session: any) { if (active && session?.status === 401) p.expired(); }
         if (active && error?.status === 410 && error.apiDetail === 'Planen er utløpt.') p.shorten(new Date().toISOString());
       }
-    }).finally(() => window.clearTimeout(timer));
-    return () => { active = false; window.clearTimeout(timer); };
+      }).finally(() => { loading = false; window.clearTimeout(timer); });
+    }
+    load();
+    const refresh = window.setInterval(load, 3000);
+    return () => { active = false; window.clearTimeout(timer); window.clearInterval(refresh); };
   }, [p.id, p.open, p.available, p.suspended, p.expiresAt, line, date, retry]);
   const trusted = p.open && p.available && !p.suspended && state === 'ready' && result && result.workday_id === p.id && result.selected_line === (line || null) && result.selected_date === (date || null) && Date.parse(result.expires_at) > privateNow() ? result : null;
   return <section className="private-notices" hidden={!p.open} aria-label="Avvik for linjer og datoer">

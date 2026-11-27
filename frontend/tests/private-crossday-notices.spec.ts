@@ -82,7 +82,7 @@ test('open reader automatically hides expiry and maintenance exposes distinct re
   await page.evaluate(() => { const original = Date.now; Date.now = () => original() - 86400000; });
   await expect(reader.locator('summary')).toHaveCount(0, { timeout: 10000 });
   await reader.getByRole('button', { name: 'Til avviksvedlikehold', exact: true }).click();
-  await expect(management(page).locator('summary')).toContainText('Utløpt'); await management(page).locator('summary').click();
+  await expect(management(page).locator('.notice-list summary')).toHaveCount(0);
   await expect(management(page).getByRole('button', { name: 'Rediger Short active incident', exact: true })).toHaveCount(0);
   const saved = (await (await context.request.get(API + '/notices/' + receipt.result.id)).json()); expect(saved.status).toBe('registered'); expect(saved.checked_at).toBeNull();
 });
