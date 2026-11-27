@@ -32,7 +32,7 @@ docker compose -p ibe160-v2-owner -f compose.v2.yaml exec private-api python -m 
 ```
 
 1. Logg inn som `v2-owner-trial` på [det lokale arbeidsrommet](http://127.0.0.1:19661/private). Du skal se **Mine utkast**.
-2. Under **Velg tekst-PDF** åpner du [Eksempelfiler/Testskift-A.pdf](Eksempelfiler/Testskift-A.pdf) fra prosjektmappen. **Importsammendrag** viser fem aktiviteter i det syntetiske skiftet.
+2. Under **Velg tekst-PDF** åpner du [Eksempelfiler/Testskift-A.pdf](Eksempelfiler/Testskift-A.pdf) fra prosjektmappen. **Importsammendrag** viser fem aktiviteter i det syntetiske skiftet. Åpne **Vis alle kildefakta fra PDF** og sammenlign aktivitetene med skift A i [fasiten](Eksempelfiler/Fasit-testskift.json).
 3. Velg **Alt stemmer – lagre og fortsett**. Vent til skjermen for gjennomgang av det lagrede utkastet vises.
 4. Velg **Forberedelse og planlister**. Under **Mine utkast** åpner du raden **Åpne … · versjon 1** og kontrollerer at det samme skiftet vises.
 
@@ -81,7 +81,7 @@ Kjør fra prosjektmappen i den andre terminalen mens appen er startet. Velg en d
 $dag = '2026-11-30'
 $lokal = @('-p', 'ibe160-v2-owner', '-f', 'compose.v2.yaml')
 docker compose @lokal cp deploy/ubuntu/public_route_download.py private-api:/tmp/ibe160-public-route-download.py
-docker compose @lokal exec -T private-api sh -ec 'arkiv=$(mktemp); trap "rm -f $arkiv" EXIT; python /tmp/ibe160-public-route-download.py > "$arkiv"; python -m app.route_catalogue --bundle-stdin --publish --from-date "$1" --through-date "$1"' sh $dag
+docker compose @lokal exec -T private-api sh -ec 'arkiv=$(mktemp); trap "rm -f $arkiv" EXIT; python /tmp/ibe160-public-route-download.py > "$arkiv"; python -m app.route_catalogue --bundle-stdin --publish --from-date "$1" --through-date "$1" < "$arkiv"' sh $dag
 ```
 
 Et vellykket resultat viser avgangstall for de 21 linjene. Åpne **Finn avgang i Tromsø** i arbeidsrommet, velg driftsdato og linje, og trykk **Hent avganger**. I det frosne feltgrunnlaget for 30.11.2026 hadde linje 28 125 avganger, blant dem **10.05 Solligården → Hamna skole øst** med 38 stopp. Ved senere prøving bytter du til en aktuell driftsdato. Entur fjerner eldre avganger fra det løpende uttrekket. [Datakilder og feltoppskrift](docs/v2-field-trial.md).
@@ -96,7 +96,7 @@ $lokal = @('-p', 'ibe160-v2-owner', '-f', 'compose.v2.yaml')
 docker compose @lokal exec -T private-api sh -ec 'mappe=$(mktemp -d); trap "rm -f $mappe/veg.zip; rmdir $mappe" EXIT; python -m app.road_area_evidence --date "$1" --output "$mappe/veg.zip"; python -m app.road_area_catalogue "$mappe/veg.zip" --publish' sh $vegdag
 ```
 
-Bruk **Vegområde og GPS-fart** i arbeidsrommet. En pakke fra NVDB alene kan gi vegmatching med **Ukjent** fartsgrense. [Krav til skilt, reguleringer og forvarsel](docs/v2-field-trial.md#oppdatering-og-tilbakeføring).
+Under **Vegområde og GPS-fart** velger du område og trykker **Start vegmatching**. Nettleseren kan be om posisjonstillatelse. En pakke fra NVDB alene gir veggrunnlag for Tromsøya, Kvaløya og fastlandet, med **Ukjent** fartsgrense der bekreftelse mangler. [Krav til skilt, reguleringer og forvarsel](docs/v2-field-trial.md#oppdatering-og-tilbakeføring).
 
 ## Versjoner og feltprøver
 
