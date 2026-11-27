@@ -58,7 +58,7 @@ function StopPicker({ title, selected, select, plural, request, date, line }: Se
     {!!selected.length && <ul>{selected.map(item => <li key={item.ref}>{item.name}{item.ref.startsWith('NSR:Quay:') ? ' · ' + item.ref.split(':').at(-1) : ''}
       <button type="button" onClick={() => select(selected.filter(other => other.ref !== item.ref))}>Fjern {item.name}</button></li>)}</ul>}
     <div className="controls">
-      <label>Oppslag<select value={mode} onChange={event => { setMode(event.target.value); edit(); }}><option value="stop">Holdeplass</option><option value="platform">Plattform</option></select></label>
+      <label>Oppslag<select aria-label="Oppslag" value={mode} onChange={event => { setMode(event.target.value); edit(); }}><option value="stop">Holdeplass</option><option value="platform">Plattform</option></select></label>
       <label>Søk etter navn<input value={query} maxLength={80} onChange={event => { setQuery(event.target.value); edit(); }}
         onKeyDown={event => { if (event.key === 'Enter') { event.preventDefault(); void search(); } }} /></label>
       <button type="button" disabled={query.trim().length < 2} onClick={() => void search()}>Søk</button>
@@ -97,7 +97,7 @@ function RoutePicker({date, line, value, set, request}: Search & {value: Geograp
     <p>Velg en trasé bare hvis avvikskilden avgrenser omkjøringen til akkurat denne varianten.</p>
     <button type="button" disabled={!date || !line || !value.start || !value.end} onClick={() => void load()}>Hent rutevarianter</button>
     <p role="status">{status}</p>
-    {(options.length > 0 || value.route_ref) && <label>Rutevariant<select value={value.route_ref ?? ''} onChange={event => set({...value, route_ref: event.target.value || null})}>
+    {(options.length > 0 || value.route_ref) && <label>Rutevariant<select aria-label="Rutevariant" value={value.route_ref ?? ''} onChange={event => set({...value, route_ref: event.target.value || null})}>
       <option value="">Ingen bestemt variant</option>
       {value.route_ref && !options.some(item => item.ref === value.route_ref) && <option value={value.route_ref}>{value.route_ref}</option>}
       {options.map(item => <option key={item.ref} value={item.ref}>{item.direction === 'outbound' ? 'Utgående' : 'Inngående'} · {item.name}{item.via ? ' · via ' + item.via : ''} · {item.ref}</option>)}
@@ -114,12 +114,12 @@ export function NoticeGeographyEditor({ value, set, ...search }: Search & {
   }
   const typed = value && value.kind !== 'area';
   return <fieldset className="notice-geography"><legend>Hvor gjelder avviket?</legend>
-    <label>Avgrensning<select value={value?.kind ?? 'line'} onChange={event => kind(event.target.value)}>
+    <label>Avgrensning<select aria-label="Avgrensning" value={value?.kind ?? 'line'} onChange={event => kind(event.target.value)}>
       <option value="line">Linje eller hele bybussnettet</option><option value="stops">Holdeplasser eller plattformer</option>
       <option value="section">Fra–til-strekning</option><option value="area">Navngitt område</option>
     </select></label>
     {value?.kind === 'area' && <label>Område<input placeholder="Tromsø sentrum" maxLength={120} value={value.area ?? ''} onChange={event => set({...value, area: event.target.value})} /></label>}
-    {typed && <label>Retning<select value={value.direction ?? ''} onChange={event => set({...value, direction: (event.target.value || null) as Geography['direction'], route_ref: null})}>
+    {typed && <label>Retning<select aria-label="Retning" value={value.direction ?? ''} onChange={event => set({...value, direction: (event.target.value || null) as Geography['direction'], route_ref: null})}>
       <option value="">Begge retninger</option><option value="outbound">Utgående</option><option value="inbound">Inngående</option>
     </select></label>}
     {value?.kind === 'stops' && <>

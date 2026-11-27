@@ -9,7 +9,10 @@ from .workday_notice_domain import NoticeRecord
 
 
 def record(row, plan=None):
-    return {key: row[key] for key in NoticeRecord.model_fields}
+    result = {key: row[key] for key in NoticeRecord.model_fields if key != 'geography'}
+    if row.get('geography') is not None:
+        result['geography'] = row['geography']
+    return result
 
 
 def member(conn, owner, notice_id):
