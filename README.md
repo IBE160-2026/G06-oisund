@@ -6,7 +6,35 @@ Bussassistenten lar sjåføren importere en skiftplan fra PDF, kontrollere aktiv
 
 ## Prøv V2 lokalt
 
-Kjør fra prosjektroten med PowerShell 7.2 eller nyere og Docker Desktop med Linux-containere. Start det lokale prøvemiljøet med `pwsh -File scripts/v2-local.ps1 -Mode Owner`. Åpne `http://127.0.0.1:19661/private`. Følg oppskriften for lokal prøvekonto og stopp miljøet med `pwsh -File scripts/v2-local.ps1 -Mode Owner -Stop`. Det lokale oppsettet og rutekatalogen på feltserveren har ulik datadekning. [Lokalt prøveoppsett og prøvekonto](docs/v2-handoff.md#local-start) · [Feltoppsett og import](docs/v2-field-trial.md)
+Den lokale utgaven kjører på din egen PC og bruker en prøvekonto du lager selv. Du trenger lesetilgang til GitHub-repositoriet. Ubuntu-serveren og Cloudflare Access inngår bare i feltoppsettet.
+
+**Før du begynner:** Installer Git, PowerShell 7.2 eller nyere, Node.js 24 med npm og Docker Desktop med Compose v2. Start Docker Desktop med Linux-containere. Første oppstart trenger internett for å hente containerbilder og avhengigheter. Portene 19661–19663 må være ledige.
+
+**1. Hent den publiserte versjonen og start appen.** Åpne PowerShell 7 i mappen der du vil ha prosjektet. Har du allerede pakket ut kildekoden til `v2.0.0`, åpner du mappen som inneholder `compose.v2.yaml` og kjører bare siste linje.
+
+```powershell
+git clone --branch v2.0.0 --depth 1 https://github.com/IBE160-2026/G06-oisund.git bussassistent-v2
+Set-Location bussassistent-v2
+pwsh -NoProfile -File scripts/v2-local.ps1 -Mode Owner
+```
+
+La terminalen stå åpen. Når du ser `Open http://127.0.0.1:19661/private` og forhåndsvisningen har startet, er appen klar.
+
+**2. Lag en lokal prøvekonto.** Åpne en ny PowerShell-terminal i samme prosjektmappe. Kjør kommandoen én gang og velg et lokalt testpassord når du blir spurt.
+
+```powershell
+docker compose -p ibe160-v2-owner -f compose.v2.yaml exec private-api python -m app.manage provision v2-owner-trial
+```
+
+**3. Prøv et skift.** Åpne [den lokale appen](http://127.0.0.1:19661/private) i nettleseren på samme PC. Logg inn som `v2-owner-trial`. Under **Velg tekst-PDF** velger du [Eksempelfiler/Testskift-A.pdf](Eksempelfiler/Testskift-A.pdf). Kontroller aktivitetene, lagre og åpne planen igjen. Eksempelskiftet er syntetisk. Den forhåndslastede Tromsø-katalogen med alle feltavgangene ligger på feltserveren. En fersk lokal installasjon kan derfor gi tomme rutesøk. [Rutekatalog og import](docs/v2-field-trial.md)
+
+**4. Stopp og start igjen.** Avslutt forhåndsvisningen med Ctrl+C i den første terminalen og kjør kommandoen under fra prosjektmappen. Prøvekonto og lagrede skift beholdes i lokale Docker-volumer. Neste gang kjører du startkommandoen fra trinn 1 og logger inn med samme konto.
+
+```powershell
+pwsh -NoProfile -File scripts/v2-local.ps1 -Mode Owner -Stop
+```
+
+Hvis nettleseren ikke får kontakt, kontroller at Docker Desktop kjører og at den første terminalen fortsatt er åpen. Fra prosjektmappen kan du se tjenestestatus med `docker compose -p ibe160-v2-owner -f compose.v2.yaml ps`. [Flere detaljer om lokal kjøring](docs/v2-handoff.md#local-start)
 
 ## Feltgrunnlag for 30. november–10. desember 2026
 
