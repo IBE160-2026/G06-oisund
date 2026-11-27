@@ -1,6 +1,7 @@
 """The public road situation feed contributes restrictions, never numeric limits."""
 
 from datetime import UTC, datetime, timedelta
+from copy import deepcopy
 from email.utils import format_datetime
 import json
 
@@ -59,3 +60,40 @@ def test_reported_line_excludes_distant_roads_inside_its_box():
     event, = parse(snapshot())['events']
     assert situations.affects_edge(event, 'FV862', [[18.926, 69.666], [18.927, 69.666]])
     assert not situations.affects_edge(event, 'FV862', [[18.926, 69.646], [18.927, 69.646]])
+
+
+def test_geometry_budgets_mark_unknown_and_preserve_ordinary_matching(monkeypatch):
+    monkeypatch.setattr(situations, 'MAX_EVENT_POINTS', 2)
+    monkeypatch.setattr(situations, 'MAX_SNAPSHOT_POINTS', 4)
+    feature = snapshot()['features'][0]
+    normal, = parse(snapshot())['events']
+    near = [[18.926, 69.666], [18.927, 69.666]]
+    far = [[18.926, 69.646], [18.927, 69.646]]
+    assert situations.affects_edge(normal, 'FV862', near, budget=situations.GeometryBudget(5))
+    assert not situations.affects_edge(normal, 'FV862', far, budget=situations.GeometryBudget(5))
+    assert situations.affects_edge(normal, 'FV862', far, budget=situations.GeometryBudget(4))
+
+    value = snapshot() | {'numberMatched': 3, 'numberReturned': 3, 'totalFeatures': 3}
+    extra = deepcopy(feature)
+    extra['properties']['recordId'] = 'report-2'
+    extra['geometry']['coordinates'].append([18.95, 69.65])
+    final = deepcopy(feature)
+    final['properties']['recordId'] = 'report-3'
+    value['features'] = [feature, extra, final]
+    original, oversized, beyond_total = parse(value)['events']
+    assert original == normal
+    for event in (oversized, beyond_total):
+        assert event['geometry_unqualified']
+        assert event['bounds'] == situations.FIELD
+        assert event['linework'] is None
+        assert situations.affects_edge(event, 'FV862', far)
+
+
+def test_legacy_geometry_uses_saved_bounds_when_over_budget(monkeypatch):
+    normal, = parse(snapshot())['events']
+    monkeypatch.setattr(situations, 'MAX_EVENT_POINTS', 1)
+    event, = situations.bounded_events([normal])
+    assert event['geometry_unqualified'] and event['linework'] is None
+    assert event['bounds'] == normal['bounds']
+    assert situations.affects_edge(event, 'FV862', [[18.926, 69.646], [18.927, 69.646]])
+    assert not situations.affects_edge(event, 'FV862', [[18.73, 69.63], [18.75, 69.64]])

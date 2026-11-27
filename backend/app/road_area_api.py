@@ -32,8 +32,9 @@ def effective_revision(base, current_situations, boundaries, now, registered_rea
     crossed = sum(datetime.fromisoformat(value) <= now for value in boundaries or ())
     if not current_situations and not crossed and not registered_ready and upcoming is None and not legacy_review:
         return base
+    geometry_policy = 'bounded-datex' if current_situations else None
     material = json.dumps([base, current_situations, crossed, registered_ready,
-                           upcoming.isoformat() if upcoming else None, legacy_review],
+                           upcoming.isoformat() if upcoming else None, legacy_review, geometry_policy],
                           sort_keys=True, separators=(',', ':'))
     return sha256(material.encode()).hexdigest()
 
@@ -65,6 +66,7 @@ def road_area(area: Area, request: Request):
                                               upcoming, legacy_review)
     review = row['review'] or {}
     edges = manifest['packages'][0]['edges']
+    budget = road_situation_source.GeometryBudget(road_situation_source.MAX_LOOKUP_WORK)
     for edge in edges:
         road = edge.pop('roadReference', None)
         registered = edge.pop('registeredKmh', None)
@@ -76,10 +78,13 @@ def road_area(area: Area, request: Request):
         reviewed = restriction['records'] if restriction else {}
         unavailable = (not restriction and review.get(edge.get('id'), {}).get('basis') == 'temporary'
                        or restriction and not datetime.fromisoformat(restriction['start']) <= now < datetime.fromisoformat(restriction['end']))
+        edge_bounds = road_situation_source.bounds(edge['shape']) if current_situations and not unavailable else None
         if unavailable or current_situations and any(
-            not (event['speed_management'] and reviewed.get(event['record']) == event['revision'])
+            not (event['speed_management'] and not event.get('geometry_unqualified')
+                 and reviewed.get(event['record']) == event['revision'])
             and (event['bounds'] is None and road is None
-                 or road_situation_source.affects_edge(event, road, edge['shape'])) for event in current_situations
+                 or road_situation_source.affects_edge(event, road, edge['shape'], edge_bounds=edge_bounds, budget=budget))
+            for event in current_situations
         ):
             edge['kmh'] = None
             edge.pop('confirmedTransitions', None)

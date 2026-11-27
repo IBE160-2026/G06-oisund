@@ -132,7 +132,7 @@ def test_only_exact_direction_and_reviewed_limit_is_published():
         approved_limits(review, digest, day, elapsed, end, now, graph)
 
 
-def test_situation_keeps_only_unresolved_stretch_unknown(clocked_area, users):
+def test_situation_keeps_only_unresolved_stretch_unknown(clocked_area, users, monkeypatch):
     client, now = clocked_area
     retention_clock = datetime.now(UTC)
     day = now.astimezone(OSLO).date()
@@ -176,6 +176,21 @@ def test_situation_keeps_only_unresolved_stretch_unknown(clocked_area, users):
         amended = client.get('/road-areas/tromsoya').json()['manifest']
         assert [edge['kmh'] for edge in amended['packages'][0]['edges']] == [None, None, 50]
         assert amended['revision'] != derived
+        # Simulate a pre-upgrade snapshot with valid stored bounds and linework
+        # outside today's geometry budget, even for a previously reviewed record.
+        monkeypatch.setattr(road_situation_source, 'MAX_EVENT_POINTS', 1)
+        legacy_hash = uuid4().hex * 2
+        try:
+            road_situation_source.publish({
+                'observed_at': (now - timedelta(seconds=5)).isoformat(), 'sha256': legacy_hash,
+                'url': road_situation_source.url(), 'events': [event | {'linework': [near]}],
+            }, retention_clock)
+            masked = client.get('/road-areas/tromsoya').json()['manifest']
+            assert [edge['kmh'] for edge in masked['packages'][0]['edges']] == [None, None, 50]
+            assert client.get('/road-areas/tromsoya/revision').json()['revision'] == masked['revision']
+        finally:
+            with database() as conn:
+                conn.execute('DELETE FROM public_road_situation_snapshots WHERE sha256=%s', (legacy_hash,))
     finally:
         with database() as conn:
             conn.execute('DELETE FROM public_road_area_versions WHERE revision=%s', (revision,))

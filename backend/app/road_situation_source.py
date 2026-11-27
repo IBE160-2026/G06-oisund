@@ -17,6 +17,11 @@ from .road_evidence import NoRedirect, reject_json_constant, unique_json_members
 BASE = 'https://ogckart-sn1.atlas.vegvesen.no/datex_3_1/ows'
 MAX_BYTES = 4_194_304
 MAX_FEATURES = 300
+# The documented Tromsø sample was 12 features / 31,923 bytes. These limits
+# leave room for long detours while bounding geometry independently of JSON size.
+MAX_EVENT_POINTS = 2_048
+MAX_SNAPSHOT_POINTS = 16_384
+MAX_LOOKUP_WORK = 1_000_000
 LEASE = timedelta(minutes=5)
 GEOMETRIES = {
     'Point': (), 'LineString': (2,), 'MultiPoint': (1,), 'MultiLineString': (1, 2),
@@ -24,6 +29,21 @@ GEOMETRIES = {
 }
 ROAD = re.compile(r'^([ERFKSP])V?([1-9][0-9]{0,6})(?=\s|$)')
 FIELD = (18.70, 69.59, 19.14, 69.77)
+
+
+class GeometryBudget:
+    def __init__(self, remaining):
+        self.remaining = remaining
+
+    def take(self, amount):
+        if amount > self.remaining:
+            return False
+        self.remaining -= amount
+        return True
+
+
+class GeometryLimit(ValueError):
+    pass
 
 
 def url():
@@ -79,6 +99,39 @@ def bounds(points):
     return west, south, east, north
 
 
+def bounded_points(points, snapshot_budget):
+    event_budget = GeometryBudget(MAX_EVENT_POINTS)
+    for point in points:
+        if not snapshot_budget.take(1) or not event_budget.take(1):
+            raise GeometryLimit
+        yield point
+
+
+def linework_size(linework, limit):
+    size = 0
+    for line in linework or ():
+        size += max(1, len(line))
+        if size > limit:
+            return None
+    return size
+
+
+def bounded_events(events):
+    """Apply the current bounds to snapshots recorded by older API images."""
+    remaining = MAX_SNAPSHOT_POINTS
+    result = []
+    for event in events:
+        limit = min(remaining, MAX_EVENT_POINTS)
+        size = linework_size(event.get('linework'), limit)
+        if size is None:
+            remaining -= limit
+            result.append(dict(event, linework=None, geometry_unqualified=True))
+        else:
+            remaining -= size
+            result.append(dict(event, geometry_points=size) if size else event)
+    return result
+
+
 def parse(raw, header_date, now):
     if not 0 < len(raw) <= MAX_BYTES:
         raise ValueError('DATEX response exceeds its byte limit')
@@ -101,6 +154,8 @@ def parse(raw, header_date, now):
         raise ValueError('DATEX snapshot is incomplete or has the wrong spatial reference')
     IDs = set()
     events = []
+    snapshot_budget = GeometryBudget(MAX_SNAPSHOT_POINTS)
+    payload_digest = sha256(raw).hexdigest()
     for feature in features:
         properties = feature['properties']
         record, situation = properties['recordId'], properties['situationId']
@@ -112,22 +167,29 @@ def parse(raw, header_date, now):
         geometry = feature.get('geometry')
         bbox = None
         linework = None
+        geometry_unqualified = False
         if geometry is not None:
             if geometry.get('type') not in GEOMETRIES:
                 raise ValueError('Unsupported DATEX geometry')
-            bbox = bounds(geometry_points(geometry['coordinates'], GEOMETRIES[geometry['type']]))
+            coordinates = geometry['coordinates']
+            points = geometry_points(coordinates, GEOMETRIES[geometry['type']])
+            try:
+                bbox = bounds(bounded_points(points, snapshot_budget))
+            except GeometryLimit:
+                # A prefix cannot establish where the rest of the line goes.
+                bbox, geometry_unqualified = FIELD, True
             if bbox[2] < FIELD[0] or bbox[0] > FIELD[2] or bbox[3] < FIELD[1] or bbox[1] > FIELD[3]:
                 raise ValueError('DATEX geometry lies outside the requested field area')
-            coordinates = geometry['coordinates']
-            match geometry['type']:
-                case 'Point':
-                    linework = [[coordinates]]
-                case 'MultiPoint':
-                    linework = [[point] for point in coordinates]
-                case 'LineString':
-                    linework = [coordinates]
-                case 'MultiLineString':
-                    linework = coordinates
+            if not geometry_unqualified:
+                match geometry['type']:
+                    case 'Point':
+                        linework = [[coordinates]]
+                    case 'MultiPoint':
+                        linework = [[point] for point in coordinates]
+                    case 'LineString':
+                        linework = [coordinates]
+                    case 'MultiLineString':
+                        linework = coordinates
         start, end = instant(properties.get('startTime')), instant(properties.get('endTime'))
         if start is not None and end is not None and start >= end:
             start = end = None
@@ -139,10 +201,13 @@ def parse(raw, header_date, now):
         # Tie approval to the exact publisher record as well as its normalized location.
         properties_basis = {key: item for key, item in properties.items()
                             if key not in ('_id', 'pubId', 'startJsonTime', 'endJsonTime')}
+        if geometry_unqualified:
+            event['geometry_unqualified'] = True
+            geometry = {'unqualified_snapshot': payload_digest}
         event['revision'] = sha256(json.dumps([properties_basis, geometry], sort_keys=True, ensure_ascii=False,
                                                separators=(',', ':')).encode()).hexdigest()
         events.append(event)
-    return {'url': url(), 'sha256': sha256(raw).hexdigest(), 'observed_at': observed.isoformat(),
+    return {'url': url(), 'sha256': payload_digest, 'observed_at': observed.isoformat(),
             'events': sorted(events, key=lambda event: event['record'])}
 
 
@@ -190,12 +255,20 @@ def metric(points):
     return [(lon * 38_600, lat * 111_200) for lon, lat, *_ in points]
 
 
-def affects_edge(event, road_reference, shape):
-    if not affects(event, road_reference, bounds(shape)):
+def affects_edge(event, road_reference, shape, *, edge_bounds=None, budget=None):
+    if budget is not None and not budget.take(1):
+        return True
+    if not affects(event, road_reference, edge_bounds if edge_bounds is not None else bounds(shape)):
         return False
     linework = event.get('linework')
     if not linework:
         return True
+    if budget is not None:
+        points = event.get('geometry_points')
+        if points is None:
+            points = linework_size(linework, MAX_EVENT_POINTS)
+        if points is None or not budget.take(len(shape) * points):
+            return True
     segments = metric(shape)
     radius = 280 if event['point'] else 80
     for line in linework:
@@ -230,7 +303,7 @@ def latest(conn, now):
     if row is None:
         return [], None
     expires = row['observed_at'] + LEASE
-    return row['events'], expires if now < expires else None
+    return bounded_events(row['events']), expires if now < expires else None
 
 
 def status(now):
