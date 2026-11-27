@@ -4,7 +4,7 @@
 
 - `C:\workspace\ibe160-readme-desktop` hadde først samme commit som arbeidsgrenen, `57d5df2`. Git-statusen var ren, og `git clean -ndx` listet ingen ekstra filer. Kandidaten med isolert oppstart, `a00740a`, ble hentet lokalt og verifisert ren før første oppstart. Den rettede README-en i `87374b5` ble brukt ved omstart og ny Entur-import.
 - `docker info --format '{{.OSType}}'` ga `linux` fra Codex. Den begrensede økten fikk også avslag på `npipe:////./pipe/docker_engine` og utgående HTTPS. Etter godkjenning fungerte Docker, npm og de åpne datakildene. Loopback ble bekreftet med en lokal lytter og med begge API-helseadressene og arbeidsrommet.
-- PowerShell 7.7.0 ble kjørt portabelt med verifisert SHA-256. Prøven brukte Node.js 24.19.0, npm 11.17.0, Docker Compose 5.5.1 og Microsoft Edge 158.0.4370.33 i desktopstørrelse 1440 × 1000, automatisert med Playwright fra prosjektets låsefil.
+- PowerShell 7.7.0 ble kjørt portabelt med verifisert SHA-256. Prøven brukte Node.js 24.19.0, npm 11.17.0, Docker Compose 5.5.1 og Microsoft Edge 158.0.4370.33 i headless-modus med skrivebordsvisning på 1440 × 1000. Playwright fra prosjektets låsefil styrte nettleseren.
 - Compose-prosjektet `ibe160-v2-readme-trial` startet med to ferske volumer, eget nettverk på `10.247.233.0/28` og portene 19711–19713 på `127.0.0.1`. Begge volumene for `ibe160-v2-owner` ble beholdt.
 
 ## Lokal konto og Testskift A
