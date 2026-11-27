@@ -6,6 +6,7 @@ from datetime import UTC, datetime, time, timedelta
 import os
 from pathlib import Path
 from threading import Event
+from urllib.parse import urlsplit
 from uuid import uuid4
 from zoneinfo import ZoneInfo
 
@@ -35,7 +36,7 @@ def reset():
 @pytest.fixture
 def isolated_feed():
     if (os.getenv('PRIVATE_TEST_PROJECT') != 'ibe160-private-tests'
-            or os.getenv('PRIVATE_TEST_ORIGIN') != 'http://127.0.0.1:19651'
+            or urlsplit(os.getenv('PRIVATE_TEST_ORIGIN', '')).hostname != '127.0.0.1'
             or os.getenv('V2_NOTICE_REFRESH') != 'off'):
         pytest.skip('Only the disposable local V2 test stack may run this fixture')
     reset()

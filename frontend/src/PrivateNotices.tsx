@@ -4,6 +4,7 @@ import { recoverOperation } from './recoverOperation';
 import { PrivateTimeInput } from './PrivateTimeInput';
 
 import { osloDateTime } from './dayOverview';
+import { observeOperationalTime, useOperationalNow } from './operationalNotices';
 
 type Content = { title: string; line_tags: string[]; line_scope: 'selected' | 'all'; summary: string | null; description: string | null; source_note: string | null; source_url: string | null; source_updated_at: string | null; valid_from: string | null; valid_until: string | null };
 export type Notice = Content & { id: string; workday_id: string | null; revision: number; status: 'registered' | 'ended_manually'; entered_at: string; edited_at: string; checked_at: string | null; checked_revision: number | null; expires_at: string };
@@ -154,7 +155,7 @@ export function usePrivateNotices(props: Props) {
         || !value.notices.every((v: any) => validNotice(v) && Date.parse(v.expires_at) > Date.parse(value.server_now))) throw Error();
       // Count the whole request interval conservatively: a delayed response
       // must not grant a fresh validity interval from its arrival time.
-      observePrivateTime(value.server_now, requestedAt); setNow(privateNow());
+      observePrivateTime(value.server_now, requestedAt); observeOperationalTime(value.server_now); setNow(privateNow());
       all.push(...value.notices); cursor = value.next_cursor;
       if (new Set(all.map(v => v.id)).size !== all.length) throw Error();
     } while (cursor);
@@ -309,7 +310,8 @@ export function NoticeScreens({ notices: n, back, visible = true }: { notices: N
   useEffect(() => { if (visible && n.screen !== 'day') n.title.current?.focus(); }, [visible, n.screen]);
   const p = n.props;
   const disabled = !n.mutable || n.busy || !!n.pending;
-  const active = n.denied ? [] : n.records.filter(value => operationalManualNotice(value, n.now));
+  const noticeNow = useOperationalNow(visible && n.screen === 'list');
+  const active = n.denied ? [] : n.records.filter(value => operationalManualNotice(value, noticeNow));
   return <section className="private-notices" hidden={n.screen === 'day'} aria-label="Avviksvedlikehold">
     <h2 ref={n.title} tabIndex={-1}>{n.screen === 'editor' ? 'Rediger avvik' : 'Manuelt vedlikeholdte avvik'}</h2>
     <p>Avviket vises frem til gyldig-til eller til du avslutter det manuelt. Forlengelse må lagres før sluttiden.</p>
@@ -321,7 +323,7 @@ export function NoticeScreens({ notices: n, back, visible = true }: { notices: N
     <div hidden={n.screen !== 'list'}>
       {n.draft ? <button onClick={() => n.navigate('editor')}>Tilbake til ulagret avvik</button> : <button disabled={!n.available || n.busy || !!n.pending || p.suspended} onClick={() => n.edit(null)}>Registrer avvik</button>}
       {n.available && active.length === 0 && <p>Ingen aktuelle avvik i registeret. Kontroller originalkilden.</p>}
-      <ul className="notice-list">{active.map(value => <li key={value.id}><details open={n.expanded === value.id} onToggle={e => { if (e.currentTarget.open) n.setExpanded(value.id); }}><summary>{value.title} · {noticeStatus(value, n.now)}</summary><NoticeFacts value={value} now={n.now} />
+      <ul className="notice-list">{active.map(value => <li key={value.id}><details open={n.expanded === value.id} onToggle={e => { if (e.currentTarget.open) n.setExpanded(value.id); }}><summary>{value.title} · {noticeStatus(value, noticeNow)}</summary><NoticeFacts value={value} now={noticeNow} />
         {editable(value, n.now) && <div className="controls"><button disabled={disabled || !!n.draft} onClick={() => n.edit(value)}>Rediger {value.title}</button><button disabled={disabled || n.dirty} onClick={() => n.action(value, 'check')}>Kontrollerte kilden nå</button>{value.status === 'registered' && <button disabled={disabled || n.dirty} onClick={() => n.action(value, 'end')}>Avslutt avvik manuelt</button>}</div>}
         <p>Kildekontroll registrerer ditt uttrykkelige kontrolltidspunkt. Det er ingen automatisk kontroll eller garanti for dekning.</p>
       </details></li>)}</ul>

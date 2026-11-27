@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { type Evidence, SourceFacts } from './PrivateAutomaticNotices';
 import { osloDateTime } from './dayOverview';
-import { automaticNoticeStatus, statusLabel, useOperationalNow } from './operationalNotices';
+import { automaticNoticeStatus, observeOperationalTime, statusLabel, useOperationalNow } from './operationalNotices';
 import { observePrivateTime } from './privateClock';
 
 type Manual = { id: string; title: string; summary: string | null; description: string | null;
@@ -43,6 +43,7 @@ function TrafficNotices({ request }: { request: (path: string) => Promise<Page> 
         if (!active) return;
         if (!data || !Array.isArray(data.manual) || !Array.isArray(data.automatic)) throw Error();
         observePrivateTime(data.server_now, requestedAt);
+        observeOperationalTime(data.server_now);
         setPage(data);
         setFailed(false);
       } catch {

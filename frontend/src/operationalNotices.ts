@@ -1,9 +1,22 @@
 import { useEffect, useState } from 'react';
-import { privateNow } from './privateClock';
+
 
 type Window = { start: string | null; end: string | null };
 export type OperationalStatus = 'active' | 'upcoming' | 'uncertain';
 const stamp = (value: string | null) => value ? Date.parse(value) : NaN;
+let noticeClock: { instant: number; receivedAt: number } | null = null;
+function operationalTime() {
+  return noticeClock ? noticeClock.instant + performance.now() - noticeClock.receivedAt : Date.now();
+}
+
+export function observeOperationalTime(serverNow: string) {
+  const instant = Date.parse(serverNow);
+  // The server timestamp precedes receipt. A conservative lower bound keeps
+  // the notice visible through its validity, independently of session clocks.
+  if (Number.isFinite(instant) && (!noticeClock || instant > operationalTime())) {
+    noticeClock = { instant, receivedAt: performance.now() };
+  }
+}
 
 export function automaticNoticeStatus(source: { progress: string | null; windows: Window[] }, now: number): OperationalStatus | null {
   if (source.progress === 'closed') return null;
@@ -21,11 +34,11 @@ export const statusLabel: Record<OperationalStatus, string> = {
 };
 
 export function useOperationalNow(open: boolean) {
-  const [now, setNow] = useState(privateNow);
+  const [now, setNow] = useState(operationalTime);
   useEffect(() => {
     if (!open) return;
-    setNow(privateNow());
-    const timer = window.setInterval(() => setNow(privateNow()), 1000);
+    setNow(operationalTime());
+    const timer = window.setInterval(() => setNow(operationalTime()), 1000);
     return () => window.clearInterval(timer);
   }, [open]);
   return now;

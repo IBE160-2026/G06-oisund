@@ -177,13 +177,14 @@ def operational_notices(request: Request, cursor: Annotated[str | None, Query(ma
                 'old': feed['old'], 'total': total, 'next_cursor': next_cursor}
 
 
-def manual(conn, owner, identifier):
+def manual(conn, owner, identifier, *, active_only=False):
     if identifier is None:
         return None
     return conn.execute('SELECT id,title,summary,description,source_note,source_url,source_updated_at,valid_from,valid_until,'
                         'status,checked_at,ended_at,revision FROM workday_notices '
-                        "WHERE id=%s AND owner=%s AND status='registered' AND valid_until>clock_timestamp() "
-                        'AND expires_at>clock_timestamp()', (identifier, owner)).fetchone()
+                        "WHERE id=%s AND owner=%s AND expires_at>clock_timestamp() "
+                        "AND (NOT %s OR (status='registered' AND valid_until>clock_timestamp()))",
+                        (identifier, owner, active_only)).fetchone()
 
 
 @router.get(PLAN_PATH)
@@ -219,7 +220,7 @@ def projection(identifier: UUID, request: Request, cursor: Annotated[str | None,
                                              or decision['plan_revision'] != plan['source_revision']))
             results.append({'situation': situation, 'source': source, 'review_revision': saved['revision'] if saved else 0,
                             'decision': decision, 'needs_reassessment': reassessment,
-                            'manual': manual(conn, owner, decision['manual_notice_id']) if decision else None, **assessment})
+                            'manual': manual(conn, owner, decision['manual_notice_id'], active_only=not history) if decision else None, **assessment})
         # Recheck after assembling the projection. The parent lock excludes expiry changes and deletion.
         workday_storage.owned(conn, owner, identifier, request)
         return {'workday_id': identifier, 'plan_revision': plan['source_revision'], 'expires_at': plan['expires_at'],

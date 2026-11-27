@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { osloDateTime } from './dayOverview';
 import type { Plan } from './PrivateConfirmation';
-import { automaticNoticeStatus, statusLabel, useOperationalNow } from './operationalNotices';
+import { automaticNoticeStatus, observeOperationalTime, statusLabel, useOperationalNow } from './operationalNotices';
 import { observePrivateTime } from './privateClock';
 
 const groups = {
@@ -253,6 +253,7 @@ export function PrivateAutomaticNotices(props: Props) {
       if (!validPage(value, plan)) throw Error();
       props.shorten(value.expires_at);
       observePrivateTime(value.server_now, requestedAt);
+      observeOperationalTime(value.server_now);
       setPage(value);
       setProposal(current => {
         if (!current || current.conflict) return current;
@@ -312,7 +313,8 @@ export function PrivateAutomaticNotices(props: Props) {
         if (!value || !Array.isArray(value.notices) || value.notices.length > 50 ||
           !value.notices.every((item: any) => item && uuid(item.id) && isString(item.title)) ||
           !(value.next_cursor === null || uuid(value.next_cursor) && value.next_cursor !== cursor)) throw Error();
-        records.push(...value.notices.map((item: Manual) => ({ id: item.id, title: item.title })));
+        records.push(...value.notices.filter((item: any) => item.status === 'registered' && Date.parse(item.valid_until) > now)
+          .map((item: Manual) => ({ id: item.id, title: item.title })));
         cursor = value.next_cursor;
         if (!cursor) { setManuals(records); return; }
       }

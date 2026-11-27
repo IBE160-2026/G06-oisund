@@ -1,6 +1,7 @@
 import { privateNow, observePrivateTime } from './privateClock';
 import { useEffect, useRef, useState } from 'react';
 import { NoticeFacts, validNotice, type Notice } from './PrivateNotices';
+import { observeOperationalTime, useOperationalNow } from './operationalNotices';
 
 type Candidate = { notice: Notice; matching_lines: string[]; unmatched_tags: string[]; line_uncertain: boolean; validity: 'known' | 'partial' | 'unknown' };
 type Result = { workday_id: string; expires_at: string; server_now: string; available_lines: string[]; available_dates: string[]; unknown_line_count: number; unmatched_notice_count: number; selected_line: string | null; selected_date: string | null; stored_count: number; candidates: Candidate[] };
@@ -29,8 +30,7 @@ export function PrivateNoticeReader(p: { id: string; expiresAt: string; open: bo
   const [line, setLine] = useState(''), [date, setDate] = useState(''), [retry, setRetry] = useState(0);
   const [result, setResult] = useState<Result | null>(null), [choices, setChoices] = useState<Pick<Result, 'available_lines' | 'available_dates'> | null>(null);
   const [state, setState] = useState<'loading' | 'ready' | 'unavailable'>('loading');
-  const [now, setNow] = useState(privateNow());
-  useEffect(() => { const timer = window.setInterval(() => setNow(privateNow()), 1000); return () => clearInterval(timer); }, []);
+  const now = useOperationalNow(p.open);
   useEffect(() => {
     setResult(current => current && current.candidates.some(candidate => Date.parse(candidate.notice.expires_at) <= now || Date.parse(candidate.notice.valid_until!) <= now)
       ? { ...current, candidates: current.candidates.filter(candidate => Date.parse(candidate.notice.expires_at) > now && Date.parse(candidate.notice.valid_until!) > now) } : current);
@@ -51,7 +51,7 @@ export function PrivateNoticeReader(p: { id: string; expiresAt: string; open: bo
       void p.request('/workdays/' + p.id + '/notice-reader' + (query.size ? '?' + query : '')).then(value => {
       if (!active || generation.current !== version) return;
       if (!valid(value, p.id, p.expiresAt, line, date)) throw Error('Malformed reader result');
-      observePrivateTime(value.server_now, requestedAt); setNow(privateNow()); setResult(value); setChoices({ available_lines: value.available_lines, available_dates: value.available_dates }); setState('ready'); p.shorten(value.expires_at);
+      observePrivateTime(value.server_now, requestedAt); observeOperationalTime(value.server_now); setResult(value); setChoices({ available_lines: value.available_lines, available_dates: value.available_dates }); setState('ready'); p.shorten(value.expires_at);
     }).catch(async error => {
       if (!active || generation.current !== version) return;
       setResult(null); setState('unavailable');
