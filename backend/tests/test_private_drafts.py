@@ -1,6 +1,6 @@
 """Real PostgreSQL/API draft matrix, exclusively in the disposable project."""
 import concurrent.futures
-from contextlib import contextmanager
+from contextlib import closing, contextmanager
 import os
 import threading
 import time
@@ -10,8 +10,9 @@ from uuid import UUID, uuid4
 import httpx
 import pytest
 from fastapi import HTTPException
+from fastapi.testclient import TestClient
 
-from app import auth
+from app import auth, draft_storage
 from app.private_storage import cleanup, database, migrate
 from test_private_access import client, headers, login, synthetic_only, users, URL
 
@@ -52,6 +53,50 @@ def issue(client, identifier=None):
 def save(client, facts=None, identifier=None, revision=0, operation=None):
     body = {'operation_id': operation or issue(client, identifier), 'expected_revision': revision, 'draft': facts or content()}
     return client.post('/drafts' + ('/' + identifier if identifier else ''), headers=headers(client), json=body), body
+
+
+def test_concurrent_owner_quota_preserves_original_receipt_and_other_owner(users, monkeypatch):
+    from app.private_main import app
+
+    monkeypatch.setattr(draft_storage, 'MAX_OWNER_DRAFTS', 1)
+    monkeypatch.setattr(draft_storage, 'MAX_OWNER_OPERATIONS', 2)
+    with (
+        closing(TestClient(app)) as first, closing(TestClient(app)) as second,
+        closing(TestClient(app)) as other, concurrent.futures.ThreadPoolExecutor(max_workers=2) as pool,
+    ):
+        assert login(first, users).status_code == login(second, users).status_code == 200
+        assert login(other, users, 1).status_code == 200
+        pending = [(client, issue(client)) for client in (first, second)]
+        futures = [pool.submit(save, client, operation=operation) for client, operation in pending]
+        results = [future.result() for future in futures]
+        assert sorted(response.status_code for response, _ in results) == [200, 429]
+        accepted, original = next((response.json(), body) for response, body in results if response.status_code == 200)
+        op_id = original['operation_id']
+        blocked = first.post('/draft-operations', headers=headers(first), json={'draft_id': None})
+        assert blocked.status_code == 429
+        assert first.get('/draft-operations/' + op_id).json() == {'state': 'accepted', 'result': accepted}
+        assert first.post('/drafts', headers=headers(first), json=original).json() == accepted
+        assert first.get('/drafts').json()['drafts'][0]['expires_at'] == accepted['expires_at']
+        assert save(other)[0].status_code == 200
+        with database() as conn:
+            assert conn.execute('SELECT count(*) AS n FROM drafts WHERE owner=%s', (users[1][0],)).fetchone()['n'] == 1
+            assert conn.execute('SELECT count(*) AS n FROM draft_operations WHERE owner=%s AND result IS NOT NULL',
+                                (users[1][0],)).fetchone()['n'] == 1
+
+
+def test_live_payload_quota_allows_replay_without_reserving_more_space(users, monkeypatch):
+    from app.private_main import app
+
+    with closing(TestClient(app)) as client:
+        assert login(client, users).status_code == 200
+        response, original = save(client)
+        assert response.status_code == 200
+        expected = response.json()
+        monkeypatch.setattr(draft_storage, 'MAX_OWNER_PAYLOAD_BYTES', 512)
+        denied, _ = save(client, expected['draft'], expected['id'], expected['revision'])
+        assert denied.status_code == 429
+        assert client.get('/drafts/' + expected['id']).json() == expected
+        assert client.post('/drafts', headers=headers(client), json=original).json() == expected
 
 
 @pytest.mark.parametrize('mutation', ['alter', 'source_row', 'remove', 'add'])

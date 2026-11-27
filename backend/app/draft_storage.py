@@ -12,6 +12,13 @@ from .bus_value import normalize_bus, validate_bus
 from .private_storage import database
 
 
+# Keep more than the 201 drafts supported by the existing paging contract and
+# several revisions per normal work week, while bounding one owner's retained JSON.
+MAX_OWNER_DRAFTS = 256
+MAX_OWNER_OPERATIONS = 512
+MAX_OWNER_PAYLOAD_BYTES = 64 * 1024 * 1024
+
+
 def authorized(conn, request):
     owner = auth.session(conn, request)['owner']
     conn.execute('SELECT id FROM accounts WHERE id=%s FOR UPDATE', (owner,))
@@ -77,14 +84,36 @@ def issue(request, identifier):
         owner = authorized(conn, request)
         draft = owned(conn, owner, identifier, request) if identifier else None
         auth.session(conn, request)
-        # Bound unused operation admission per owner; expired work cannot be resurrected.
-        count = conn.execute('SELECT count(*) AS n FROM draft_operations WHERE owner=%s AND expires_at > clock_timestamp() AND result IS NULL', (owner,)).fetchone()['n']
-        if count >= 200:
+        usage = conn.execute(
+            'SELECT count(*) AS total, count(*) FILTER (WHERE result IS NULL) AS pending '
+            'FROM draft_operations WHERE owner=%s AND expires_at > clock_timestamp()', (owner,),
+        ).fetchone()
+        if usage['pending'] >= 200:
             raise HTTPException(429, 'For mange uavklarte lagringer.')
+        if usage['total'] >= MAX_OWNER_OPERATIONS:
+            raise HTTPException(429, 'For mange aktive lagringsforsøk. Eksisterende kvitteringer kan fortsatt åpnes.')
         row = conn.execute("INSERT INTO draft_operations(id,owner,draft_id,expires_at,normalize_physical_bus) VALUES (%s,%s,%s,COALESCE(%s,statement_timestamp()+interval '7 days'),true) RETURNING id,expires_at",
                            (uuid4(), owner, identifier, draft['expires_at'] if draft else None)).fetchone()
         auth.session(conn, request)
         return {'operation_id': row['id'], 'expires_at': row['expires_at']}
+
+
+def require_save_capacity(conn, owner, identifier, content):
+    # The account lock held by save serializes this calculation with other
+    # operations for the same owner. An update replaces the current draft
+    # while its new receipt adds a second copy of the submitted content.
+    usage = conn.execute(
+        '''SELECT count(*) AS other_drafts, COALESCE(sum(pg_column_size(content)),0) AS draft_bytes,
+                  (SELECT COALESCE(sum(pg_column_size(result)),0) FROM draft_operations
+                   WHERE owner=%s AND expires_at > statement_timestamp()) AS receipt_bytes,
+                  pg_column_size(%s::jsonb) AS incoming
+           FROM drafts WHERE owner=%s AND expires_at > statement_timestamp() AND id IS DISTINCT FROM %s::uuid''',
+        (owner, Jsonb(content), owner, identifier),
+    ).fetchone()
+    # The wrapper adds a UUID, revision and two timestamps to the receipt.
+    planned = usage['draft_bytes'] + usage['receipt_bytes'] + 2 * usage['incoming'] + 512
+    if usage['other_drafts'] >= MAX_OWNER_DRAFTS or planned > MAX_OWNER_PAYLOAD_BYTES:
+        raise HTTPException(429, 'Lagringsgrensen for utkast er nådd. Du kan fortsatt sjekke tidligere lagringer.')
 
 
 def operation(conn, owner, identifier, request):
@@ -145,6 +174,7 @@ def save(request, identifier, body):
             raise HTTPException(422, str(error)) from None
         if op['normalize_physical_bus']:
             content['physical_bus'] = normalize_bus(content['physical_bus'])
+        require_save_capacity(conn, owner, identifier, content)
         if existing:
             row = conn.execute('UPDATE drafts SET content=%s,revision=revision+1 WHERE id=%s AND expires_at > clock_timestamp() '
                                'AND EXISTS (SELECT 1 FROM draft_operations WHERE id=%s AND expires_at > clock_timestamp()) RETURNING *', (Jsonb(content), identifier, body.operation_id)).fetchone()
