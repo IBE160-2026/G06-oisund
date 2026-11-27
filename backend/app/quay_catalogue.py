@@ -20,6 +20,9 @@ MAX_STOP_BYTES = 4 * 1024 * 1024
 MAX_STOP_NODES = 50_000
 MAX_XML_DEPTH = 96
 MAX_XML_GAP_BYTES = 1024 * 1024
+# The pinned field archive has a GML position list of about 1.47 MB outside
+# StopPlace. The largest StopPlace is under 57 KB.
+MAX_XML_OUTSIDE_STOP_BYTES = 2 * 1024 * 1024
 XML_CHUNK_BYTES = 16 * 1024
 OSLO = ZoneInfo('Europe/Oslo')
 STOP_PLACE = f'{{{netex.NS[""]}}}StopPlace'
@@ -87,7 +90,8 @@ class SourceXML:
         self.bytes_read += len(data)
         if self.stop_start is not None and self.bytes_read - self.stop_start > MAX_STOP_BYTES:
             raise ValueError('NSR StopPlace exceeds its XML byte budget')
-        if self.bytes_read - self.last_event > MAX_XML_GAP_BYTES:
+        gap_limit = MAX_XML_GAP_BYTES if self.stop_start is not None else MAX_XML_OUTSIDE_STOP_BYTES
+        if self.bytes_read - self.last_event > gap_limit:
             raise ValueError('NSR XML exceeds its byte budget between element events')
         content = (self.tail + data).upper()
         if b'\x00' in data or b'<!DOCTYPE' in content or b'<!ENTITY' in content:
@@ -100,6 +104,7 @@ def stop_places(stream):
     source = SourceXML(stream)
     stack = []
     stop_nodes = 0
+    open_stops = 0
     for event, node in XML.iterparse(source, events=('start', 'end')):
         source.last_event = source.bytes_read
         if event == 'start':
@@ -109,11 +114,11 @@ def stop_places(stream):
             if len(stack) > MAX_XML_DEPTH:
                 raise ValueError('NSR XML exceeds its depth budget')
             if node.tag == STOP_PLACE:
-                if source.stop_start is not None:
-                    raise ValueError('Nested NSR StopPlace')
-                source.stop_start = source.chunk_start
-                stop_nodes = 0
-            if source.stop_start is not None:
+                if not open_stops:
+                    source.stop_start = source.chunk_start
+                    stop_nodes = 0
+                open_stops += 1
+            if open_stops:
                 stop_nodes += 1
                 if stop_nodes > MAX_STOP_NODES:
                     raise ValueError('NSR StopPlace exceeds its XML node budget')
@@ -121,8 +126,10 @@ def stop_places(stream):
         if node.tag == STOP_PLACE or len(stack) == 2 and node.tag == PUBLICATION:
             yield node
         if node.tag == STOP_PLACE:
-            source.stop_start = None
-        if len(stack) > 1 and source.stop_start is None:
+            open_stops -= 1
+            if not open_stops:
+                source.stop_start = None
+        if len(stack) > 1 and (not open_stops or node.tag == STOP_PLACE):
             stack[-2].remove(node)
             node.clear()
         stack.pop()

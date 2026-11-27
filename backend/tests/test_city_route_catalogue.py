@@ -38,6 +38,9 @@ def test_line_26_early_trip_survives_confirmation_and_anchoring(users, monkeypat
     first, last = journey['calls'][0], journey['calls'][-1]
     assert first['name'] == 'Pyramiden' and first['departure']['raw_time'] == '05:10:00'
     assert last['name'] == 'Skognesvegen' and last['position'] == 36
+    late = catalogue['journeys']['TRO:ServiceJourney:26_260918101386603_1100']['calls']
+    assert late[0]['name'] == 'Pyramiden' and late[0]['departure']['raw_time'] == '23:33:00'
+    assert late[-1]['name'] == 'Skognesvegen' and late[-1]['arrival']['calendar_time'] == '2026-12-01T00:20:00+01:00'
     facts = content()
     facts.update(service_date=day.isoformat(), physical_bus='1234')
     facts['activities'][0].update(type='trip', raw_code='Trip', trip='0007', line='26', direction=journey['direction'],

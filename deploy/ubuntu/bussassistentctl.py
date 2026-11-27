@@ -78,7 +78,7 @@ def import_routes(path, first, last):
             compose(path, 'run', '--rm', '-T', '--no-deps', '--pull', 'never', '--name', name, 'route-import',
                     '--bundle-stdin', '--from-date', first, '--through-date', last, '--publish',
                     stdin=bundle, timeout=240)
-        except subprocess.TimeoutExpired:
+        except (subprocess.TimeoutExpired, KeyboardInterrupt):
             subprocess.run(['docker', 'rm', '-f', name], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=20)
             raise
 

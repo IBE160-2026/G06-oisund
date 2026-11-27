@@ -27,11 +27,11 @@ def entry(version, start, end='', override=''):
     '''
 
 
-def source(tmp_path, *entries):
+def source(tmp_path, *entries, outside=''):
     xml = f'''
         <PublicationDelivery xmlns="http://www.netex.org.uk/netex">
             <PublicationTimestamp>2026-11-22T12:00:00</PublicationTimestamp>
-            <dataObjects><SiteFrame><stopPlaces>{''.join(entries)}</stopPlaces></SiteFrame></dataObjects>
+            <dataObjects><SiteFrame>{outside}<stopPlaces>{''.join(entries)}</stopPlaces></SiteFrame></dataObjects>
         </PublicationDelivery>
     '''
     archive = tmp_path / 'future.zip'
@@ -117,3 +117,12 @@ def test_stop_budget_rejects_during_xml_read(tmp_path, monkeypatch, limit):
     monkeypatch.setattr(quay_catalogue, 'quay_record', must_not_extract)
     with pytest.raises(ValueError, match=f'StopPlace exceeds its XML {label} budget'):
         source(tmp_path, entry('5', '2026-12-01T00:00:00', override=extra))
+
+
+def test_unrelated_gml_text_uses_a_separate_bound(tmp_path, monkeypatch):
+    monkeypatch.setattr(quay_catalogue, 'XML_CHUNK_BYTES', 64)
+    monkeypatch.setattr(quay_catalogue, 'MAX_XML_GAP_BYTES', 256)
+    monkeypatch.setattr(quay_catalogue, 'MAX_XML_OUTSIDE_STOP_BYTES', 1024)
+    geometry = '<gml:posList xmlns:gml="http://www.opengis.net/gml/3.2">' + '18.90 69.65 ' * 50 + '</gml:posList>'
+    data = source(tmp_path, entry('5', '2026-12-01T00:00:00'), outside=geometry)
+    assert point(data, '2026-11-30T23:01:00Z')[0]['quay_version'] == '5'
