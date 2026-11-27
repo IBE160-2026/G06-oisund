@@ -1,0 +1,69 @@
+{
+  "project": "ibe160-v2-rollback-25f6b1bd65",
+  "network": "shared loopback namespace, no external network or published ports",
+  "database": "private_work",
+  "postgres": "postgres (PostgreSQL) 17.11",
+  "postgres_image": "sha256:c078a9092712e11deb68fa2b3ee7ce0f5c59cb0b76ffac8f9c7022580a5ef806",
+  "baseline": "d4153832fae7d8ad69cd0fda7307ccaece650e21",
+  "tested_integration": "621c82f69649b9dd348cb8358d53ffcff8ef3ffb",
+  "baseline_schema": {
+    "count": 24,
+    "indexes": [],
+    "last": "024_public_road_situation_snapshots.sql"
+  },
+  "upgraded_schema": {
+    "count": 26,
+    "indexes": [
+      "draft_deletions_owner_expiry",
+      "draft_operations_owner_expiry"
+    ],
+    "last": "026_draft_deletion_owner_expiry.sql"
+  },
+  "drafts": {
+    "after": "8366abe6-ccc6-45cd-adb7-a08d9bf3eca6",
+    "before": "4f12627b-ed0b-4858-a604-84de061b5b99"
+  },
+  "dump_sha256": {
+    "after": "0d9da2755a3e75c8011101a7cc7dafc4450196f68989dc053c2d7216e5145cd1",
+    "before": "04c7480111bd555e9e64145d506d49c5b6666e82130f835a40e1e42eeba5b825"
+  },
+  "guard": {
+    "reason": "Rollback requires identical migration files; use reviewed database restore otherwise",
+    "refused_before_switch": true
+  },
+  "restore_pre_marker": "13b8019f87f54330865dd14706e472cb",
+  "restore_upgraded_marker": "b7a1f9878b8b47b8aac34faa6a3c50be",
+  "quarantine": {
+    "business_matches_before": true,
+    "old_proof_revoked": true,
+    "schema": {
+      "count": 24,
+      "indexes": [],
+      "last": "024_public_road_situation_snapshots.sql"
+    },
+    "sessions_empty": true
+  },
+  "rolled_back": {
+    "after_draft_http": 404,
+    "after_receipt_http": 404,
+    "before_draft_http": 200,
+    "fresh_recovery_http": 200,
+    "schema": {
+      "count": 24,
+      "indexes": [],
+      "last": "024_public_road_situation_snapshots.sql"
+    }
+  },
+  "recovered_upgraded": {
+    "after_draft_http": 200,
+    "before_draft_http": 200,
+    "schema": {
+      "count": 26,
+      "indexes": [
+        "draft_deletions_owner_expiry",
+        "draft_operations_owner_expiry"
+      ],
+      "last": "026_draft_deletion_owner_expiry.sql"
+    }
+  }
+}
