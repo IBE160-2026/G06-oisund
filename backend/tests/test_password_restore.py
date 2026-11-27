@@ -34,25 +34,31 @@ def test_inspect_accepts_only_known_migration_prefixes(users, tmp_path, monkeypa
                 ('024_public_road_situation_snapshots.sql', 'public_road_situation_snapshots'),
             ) if any(path.name == version for path in original)]
             v2_public_tables = notices_identity + ''.join(', ' + table for table in catalogue_tables)
-            if len(original) >= 18:
+
+            def restore_before_v2():
                 conn.execute('DROP TABLE workday_position_anchor_operations, workday_position_anchors, '
                              'workday_route_references, draft_route_decisions, automatic_notice_review_operations, '
                              'automatic_notice_reviews, automatic_notice_sources, automatic_notice_feed' + v2_public_tables)
+                conn.execute('DROP INDEX IF EXISTS draft_operations_owner_expiry, draft_deletions_owner_expiry')
                 conn.execute('ALTER TABLE workdays DROP CONSTRAINT automatic_notice_workday_parent')
                 conn.execute('ALTER TABLE workday_operations DROP COLUMN route_revision')
                 conn.execute("DELETE FROM private_migrations WHERE name >= '016'")
+
+            if len(original) >= 18:
+                restore_before_v2()
                 older = restore.inspect(conn)
                 assert older['schema'] == 15 and older['business'] == current['business']
                 for path in original[15:]:
                     conn.execute(path.read_text(encoding='utf-8'))
                     conn.execute('INSERT INTO private_migrations VALUES (%s)', (path.name,))
                 assert restore.inspect(conn) == current
-                conn.execute('DROP TABLE workday_position_anchor_operations, workday_position_anchors, '
-                             'workday_route_references, draft_route_decisions, automatic_notice_review_operations, '
-                             'automatic_notice_reviews, automatic_notice_sources, automatic_notice_feed' + v2_public_tables)
-                conn.execute('ALTER TABLE workdays DROP CONSTRAINT automatic_notice_workday_parent')
-                conn.execute('ALTER TABLE workday_operations DROP COLUMN route_revision')
-                conn.execute("DELETE FROM private_migrations WHERE name >= '016'")
+                for migration, index in (
+                    ('025_draft_operation_owner_expiry.sql', 'draft_operations_owner_expiry'),
+                    ('026_draft_deletion_owner_expiry.sql', 'draft_deletions_owner_expiry'),
+                ):
+                    if any(path.name == migration for path in original):
+                        assert conn.execute('SELECT to_regclass(%s)::text AS name', (index,)).fetchone()['name'] == index
+                restore_before_v2()
             conn.execute('DROP TABLE recovery_proofs, recovery_audit')
             conn.execute("DELETE FROM private_migrations WHERE name='015_password_recovery.sql'")
             assert restore.inspect(conn)['schema'] == 14
