@@ -573,3 +573,24 @@ Oppgave/plan: utføre bare lesende førkontroll av oppstartsgrunnlag, siste vell
 Resultat: **94d5f25** oppdaterer gjeldende27.november-rapport med uverifisert førkontroll og legger til samlet eierkjørbar read-only-reboot-preflight.ps1. Scriptet leser boot/pakker/GRUB/EFI/initramfs/APT, avstemmer timer/jobb/journal/dumpmetadata og utfører eksisterende lokale helseprøver for app/origin/database/tunnel. Ingen backupinnhold, miljøhemmeligheter eller ufiltrert journal skrives ut. PowerShell-parser og diffkontroll bestått; Python er ikke lokalt tilgjengelig for syntaks-/kjøreprøve. Ingen serverprøve er fremstilt som bestått.
 
 Åpne punkter: eier kjører kommandoen fra vanlig PowerShell og deler statusutskriften. Serveren kan ikke erklæres omstartsklar før resultatene er vurdert. Deretter kreves uttrykkelig klarsignal før omstart. Agentens egen omstart/etterkontroll er fortsatt hindret av lokal TCP-begrensning. Fysisk tilgang er ikke nødvendig nå; etablert konsollberedskap beholdes. SamletO6, de fire kernelrestene og risikoaksepten er uendret; ingen merge/push.
+
+## 2026-11-27 kl. 04:33 — Jonas Øisund
+
+### Oppgave
+
+Vurdere den gjennomførte førkontrollen for omstart til 44.44, prøve én lesende SSH-kommando fra Codex og avvente uttrykkelig klarsignal.
+
+### Plan
+
+- Finn eierens PowerShell-utskrift og vurder den mot den eksisterende [O6-rapporten](../../docs/evidence/o6-kernel-44-20261127.md).
+- Bekreft aktiv kjerne med `uname -r` og avstem eventuelle hull mot byggkonfigurasjonen for 44.44.
+
+### Resultat
+
+Fant `Innlimt tekst(3).txt` som vedlegg i «O6 statuskontroll». Eierens måling kl. 04:25 bekrefter installert 44.44-image og moduler uten rapporterte pakkeavvik, lesbart initramfs, forventet GRUB/EFI-oppstart til 44 og 43 som reserve. Timerslaget kl. 03:19:58 samsvarer med backup-tjenestens kjøring og ferdig dump kl. 03:20:09. Release `d4153832fae7d8ad69cd0fda7307ccaece650e21`, lokal API/origin, database, Docker og tunnelberedskap er bekreftet. Ingen omstart ble utført. Status er 51 rettet, én ikke berørt og fire åpne.
+
+Codex fikk `Permission denied` før innlogging med standardtilgang. Samme `uname -r` lyktes med engangstilgang og streng vertsnøkkelkontroll. Den returnerte `7.0.0-43-generic`. Rapporten samler kontroller og konklusjon med hash av vedlegget.
+
+### Åpne punkter
+
+- Bekreft rotens lagringskjede, LVM-aktivering og nødvendige lagringsmoduler i 44-initramfs. Avvent uttrykkelig klarsignal før omstart.
