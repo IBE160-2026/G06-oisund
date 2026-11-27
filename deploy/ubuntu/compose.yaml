@@ -67,6 +67,26 @@ services:
       interval: 5s
       timeout: 3s
       retries: 20
+  route-import:
+    profiles: [route-import]
+    image: bussassistent-api:${RELEASE_ID:?Set RELEASE_ID}
+    entrypoint: [python, -m, app.route_catalogue]
+    user: '10001:10001'
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    pids_limit: 32
+    # Two bounded ZIPs plus their staging copy can total 152 MB.
+    tmpfs: ['/tmp:size=176m,mode=1777']
+    mem_limit: 640m
+    memswap_limit: 640m
+    cpus: 1.0
+    environment:
+      APP_MODE: private-local
+      PRIVATE_DATABASE_URL: postgresql://private_work@private-db/private_work
+      PRIVATE_DATABASE_PASSWORD_FILE: /run/secrets/tablet_postgres_password
+    secrets: [tablet_postgres_password]
+    networks: [storage]
   gateway:
     command:
       - >-

@@ -99,3 +99,21 @@ def test_future_archive_rejects_entity_declarations_even_at_read_boundaries():
     payload.read(23)
     with pytest.raises(ValueError, match='XML declaration'):
         payload.read(20)
+
+
+@pytest.mark.parametrize('limit', ['bytes', 'nodes'])
+def test_stop_budget_rejects_during_xml_read(tmp_path, monkeypatch, limit):
+    monkeypatch.setattr(quay_catalogue, 'XML_CHUNK_BYTES', 64)
+    label = 'byte' if limit == 'bytes' else 'node'
+    if limit == 'bytes':
+        monkeypatch.setattr(quay_catalogue, 'MAX_STOP_BYTES', 512)
+        extra = '<Name>' + 'x' * 600 + '</Name>'
+    else:
+        monkeypatch.setattr(quay_catalogue, 'MAX_STOP_NODES', 15)
+        extra = '<Name>x</Name>' * 16
+    # Fail while the stop is open, before trying to extract any Quay from it.
+    def must_not_extract(*args):
+        pytest.fail('The over-budget stop reached Quay extraction')
+    monkeypatch.setattr(quay_catalogue, 'quay_record', must_not_extract)
+    with pytest.raises(ValueError, match=f'StopPlace exceeds its XML {label} budget'):
+        source(tmp_path, entry('5', '2026-12-01T00:00:00', override=extra))

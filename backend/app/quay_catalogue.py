@@ -1,9 +1,9 @@
 """Extract public Quay versions without inferring dates from publication time."""
 
 from datetime import datetime
-from hashlib import sha256
-from io import BytesIO
+from hashlib import file_digest
 from math import isfinite
+from os import fstat
 from pathlib import Path
 import re
 from xml.etree import ElementTree as XML
@@ -16,6 +16,11 @@ SOURCE_URL = 'https://storage.googleapis.com/marduk-production/tiamat/55_Troms_l
 FUTURE_SOURCE_URL = 'https://storage.googleapis.com/marduk-production/tiamat/CurrentAndFuture_latest.zip'
 FUTURE_SCOPE = 'current-and-future'
 MAX_ARCHIVE_BYTES = 60_000_000
+MAX_STOP_BYTES = 4 * 1024 * 1024
+MAX_STOP_NODES = 50_000
+MAX_XML_DEPTH = 96
+MAX_XML_GAP_BYTES = 1024 * 1024
+XML_CHUNK_BYTES = 16 * 1024
 OSLO = ZoneInfo('Europe/Oslo')
 STOP_PLACE = f'{{{netex.NS[""]}}}StopPlace'
 PUBLICATION = f'{{{netex.NS[""]}}}PublicationTimestamp'
@@ -71,9 +76,19 @@ class SourceXML:
     def __init__(self, stream):
         self.stream = stream
         self.tail = b''
+        self.bytes_read = 0
+        self.last_event = 0
+        self.chunk_start = 0
+        self.stop_start = None
 
     def read(self, size):
-        data = self.stream.read(size)
+        data = self.stream.read(min(size, XML_CHUNK_BYTES))
+        self.chunk_start = self.bytes_read
+        self.bytes_read += len(data)
+        if self.stop_start is not None and self.bytes_read - self.stop_start > MAX_STOP_BYTES:
+            raise ValueError('NSR StopPlace exceeds its XML byte budget')
+        if self.bytes_read - self.last_event > MAX_XML_GAP_BYTES:
+            raise ValueError('NSR XML exceeds its byte budget between element events')
         content = (self.tail + data).upper()
         if b'\x00' in data or b'<!DOCTYPE' in content or b'<!ENTITY' in content:
             raise ValueError('Unexpected NSR XML declaration')
@@ -81,47 +96,77 @@ class SourceXML:
         return data
 
 
-def future_records(stream, wanted, revision):
-    records = {}
-    publication = None
+def stop_places(stream):
+    source = SourceXML(stream)
     stack = []
-    open_stops = 0
-    for event, node in XML.iterparse(SourceXML(stream), events=('start', 'end')):
+    stop_nodes = 0
+    for event, node in XML.iterparse(source, events=('start', 'end')):
+        source.last_event = source.bytes_read
         if event == 'start':
             if not stack and node.tag != DELIVERY:
                 raise ValueError('Unexpected NSR XML document')
             stack.append(node)
-            open_stops += node.tag == STOP_PLACE
+            if len(stack) > MAX_XML_DEPTH:
+                raise ValueError('NSR XML exceeds its depth budget')
+            if node.tag == STOP_PLACE:
+                if source.stop_start is not None:
+                    raise ValueError('Nested NSR StopPlace')
+                source.stop_start = source.chunk_start
+                stop_nodes = 0
+            if source.stop_start is not None:
+                stop_nodes += 1
+                if stop_nodes > MAX_STOP_NODES:
+                    raise ValueError('NSR StopPlace exceeds its XML node budget')
             continue
-        if len(stack) == 2 and node.tag == PUBLICATION:
-            if publication is not None:
-                raise ValueError('Repeated NSR publication timestamp')
-            publication = node.text
+        if node.tag == STOP_PLACE or len(stack) == 2 and node.tag == PUBLICATION:
+            yield node
         if node.tag == STOP_PLACE:
-            quays = [quay for quay in netex.children(node, 'quays/Quay') if quay.get('id') in wanted]
-            parent_interval = dated_interval(node) if quays else None
-            for quay in quays:
-                identifier = quay.get('id')
-                record = quay_record(node, quay, revision)
-                if record is None:
-                    # A competing version with no usable coordinates is still
-                    # evidence of ambiguity during its own validity.
-                    record = {'quay_id': identifier, 'stop_place_id': node.get('id'),
-                              'quay_version': quay.get('version'), 'stop_place_version': node.get('version'),
-                              'mapping_revision': revision, 'coordinate_kind': 'Quay', 'crs': 'WGS84'}
-                has_conditions = any(netex.children(quay, name) for name in CONDITION_TAGS)
-                record.update(stop_place_validity=parent_interval,
-                              quay_validity=dated_interval(quay) if has_conditions else parent_interval,
-                              validity_basis='quay' if has_conditions else 'containing-stop-place')
-                versions = records.setdefault(identifier, {'versions': []})['versions']
-                versions.append(record)
-                if len(versions) > 32:
-                    raise ValueError(f'Too many NSR versions of {identifier}')
-            open_stops -= 1
-        if len(stack) > 1 and (open_stops == 0 or node.tag == STOP_PLACE):
+            source.stop_start = None
+        if len(stack) > 1 and source.stop_start is None:
             stack[-2].remove(node)
             node.clear()
         stack.pop()
+
+
+def read_records(stream, wanted, revision, *, future):
+    records = {}
+    ambiguous = set()
+    publication = None
+    for node in stop_places(stream):
+        if node.tag == PUBLICATION:
+            if publication is not None and future:
+                raise ValueError('Repeated NSR publication timestamp')
+            if publication is None:
+                publication = node.text
+            continue
+        quays = [quay for quay in netex.children(node, 'quays/Quay') if quay.get('id') in wanted]
+        parent_interval = dated_interval(node) if future and quays else None
+        for quay in quays:
+            identifier = quay.get('id')
+            if not future and identifier in records:
+                ambiguous.add(identifier)
+                continue
+            record = quay_record(node, quay, revision)
+            if not future:
+                if record is not None:
+                    record.update(stop_place_validity=validity(node), quay_validity=validity(quay))
+                    records[identifier] = record
+                continue
+            if record is None:
+                # A version with no coordinates can still make placement ambiguous.
+                record = {'quay_id': identifier, 'stop_place_id': node.get('id'),
+                          'quay_version': quay.get('version'), 'stop_place_version': node.get('version'),
+                          'mapping_revision': revision, 'coordinate_kind': 'Quay', 'crs': 'WGS84'}
+            has_conditions = any(netex.children(quay, name) for name in CONDITION_TAGS)
+            record.update(stop_place_validity=parent_interval,
+                          quay_validity=dated_interval(quay) if has_conditions else parent_interval,
+                          validity_basis='quay' if has_conditions else 'containing-stop-place')
+            versions = records.setdefault(identifier, {'versions': []})['versions']
+            versions.append(record)
+            if len(versions) > 32:
+                raise ValueError(f'Too many NSR versions of {identifier}')
+    for identifier in ambiguous:
+        records.pop(identifier, None)
     return publication, records
 
 
@@ -150,54 +195,30 @@ def read(path, generation, wanted, fetched_at):
     if not netex.GENERATION_ID.fullmatch(generation):
         raise ValueError('Missing NSR archive generation')
     with Path(path).open('rb') as stream:
-        raw = stream.read(MAX_ARCHIVE_BYTES + 1)
-    if len(raw) > MAX_ARCHIVE_BYTES:
-        raise ValueError('NSR archive too large')
-    digest = sha256(raw).hexdigest()
-    with ZipFile(BytesIO(raw)) as archive:
-        members = archive.infolist()
-        if len(members) != 1 or members[0].flag_bits & 1 or members[0].compress_type not in (ZIP_DEFLATED, ZIP_STORED):
-            raise ValueError('Unexpected NSR archive')
-        future = re.fullmatch(r'tiamat-export-CurrentAndFuture-[0-9]+\.xml', members[0].filename)
-        if future:
-            if not 0 < members[0].file_size <= 450_000_000:
-                raise ValueError('Current-and-future NSR XML exceeds its byte limit')
-            revision = f'nsr-future-{generation}-{digest}'
-            with archive.open(members[0]) as stream:
-                publication, records = future_records(stream, wanted, revision)
-            if zoned(publication) is None:
-                raise ValueError('Current-and-future NSR archive lacks its publication timestamp')
-            return source_metadata(revision, generation, digest, fetched_at, publication, FUTURE_SOURCE_URL) | {
-                'scope': FUTURE_SCOPE,
-            }, records
-        if (len(raw) > 5_000_000 or not re.fullmatch(r'tiamat-export-55_Troms-[0-9]+\.xml', members[0].filename)):
-            raise ValueError('Unexpected Troms NSR archive')
-        with archive.open(members[0]) as stream:
-            payload = stream.read(45_000_001)
-    if len(payload) > 45_000_000 or b'\x00' in payload or re.search(rb'<!\s*(?:DOCTYPE|ENTITY)', payload, re.I):
-        raise ValueError('Invalid NSR XML')
-    root = XML.fromstring(payload)
-    if root.tag != DELIVERY:
-        raise ValueError('Unexpected NSR XML document')
-
-    revision = f'nsr-troms-{generation}-{digest}'
-    records = {}
-    ambiguous = set()
-    for parent in root.iter(STOP_PLACE):
-        for quay in netex.children(parent, 'quays/Quay'):
-            identifier = quay.get('id')
-            if identifier not in wanted:
-                continue
-            if identifier in records:
-                ambiguous.add(identifier)
-                continue
-            record = quay_record(parent, quay, revision)
-            if record is not None:
-                record.update(stop_place_validity=validity(parent), quay_validity=validity(quay))
-                records[identifier] = record
-    for identifier in ambiguous:
-        records.pop(identifier, None)
-    return source_metadata(revision, generation, digest, fetched_at, netex.field(root, 'PublicationTimestamp'), SOURCE_URL), records
+        size = fstat(stream.fileno()).st_size
+        if size > MAX_ARCHIVE_BYTES:
+            raise ValueError('NSR archive too large')
+        digest = file_digest(stream, 'sha256').hexdigest()
+        stream.seek(0)
+        with ZipFile(stream) as archive:
+            members = archive.infolist()
+            if len(members) != 1 or members[0].flag_bits & 1 or members[0].compress_type not in (ZIP_DEFLATED, ZIP_STORED):
+                raise ValueError('Unexpected NSR archive')
+            member = members[0]
+            future = bool(re.fullmatch(r'tiamat-export-CurrentAndFuture-[0-9]+\.xml', member.filename))
+            if not future and (size > 5_000_000 or not re.fullmatch(r'tiamat-export-55_Troms-[0-9]+\.xml', member.filename)):
+                raise ValueError('Unexpected Troms NSR archive')
+            if not 0 < member.file_size <= (450_000_000 if future else 45_000_000):
+                raise ValueError('NSR XML exceeds its archive byte limit')
+            scope = 'future' if future else 'troms'
+            revision = f'nsr-{scope}-{generation}-{digest}'
+            with archive.open(member) as xml:
+                publication, records = read_records(xml, wanted, revision, future=future)
+    if future and zoned(publication) is None:
+        raise ValueError('Current-and-future NSR archive lacks its publication timestamp')
+    source = source_metadata(revision, generation, digest, fetched_at, publication,
+                             FUTURE_SOURCE_URL if future else SOURCE_URL)
+    return (source | {'scope': FUTURE_SCOPE} if future else source), records
 
 
 def source_metadata(revision, generation, digest, fetched_at, publication, url):

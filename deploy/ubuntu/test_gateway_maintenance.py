@@ -30,6 +30,18 @@ class GatewayMaintenanceTests(unittest.TestCase):
         return subprocess.CompletedProcess([],0,stdout=json.dumps(dict(source=str(root),
              services={'private-api':{'image':'api:'+root.name},'private-db':{'image':db}})))
 
+    def test_route_import_timeout_removes_only_its_worker(self):
+        with patch.object(ops, 'MAINTENANCE', Path(self.tmp.name)), patch.object(ops, 'run') as download, \
+             patch.object(ops, 'compose', side_effect=subprocess.TimeoutExpired('route-import', 240)) as compose, \
+             patch.object(ops.subprocess, 'run') as remove:
+            with self.assertRaises(subprocess.TimeoutExpired):
+                ops.import_routes(self.new, '2026-11-30', '2026-12-10')
+        command = compose.call_args.args
+        self.assertEqual(command[1:6], ('run', '--rm', '-T', '--no-deps', '--pull'))
+        self.assertIn('route-import', command)
+        self.assertEqual(remove.call_args.args[0], ['docker', 'rm', '-f', command[command.index('--name')+1]])
+        self.assertIs(compose.call_args.kwargs['stdin'], download.call_args.kwargs['stdout'])
+
     def test_scope_allows_only_release_alias_difference(self):
         with patch.object(ops,'compose',side_effect=lambda root,*a,**kw:self.config(root)):
             ops.gateway_source_guard(self.old,self.new)

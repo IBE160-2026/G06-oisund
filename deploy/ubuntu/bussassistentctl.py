@@ -70,10 +70,17 @@ def import_routes(path, first, last):
     if (MAINTENANCE / 'pending.json').exists():
         raise ValueError('Route import blocked during database restoration')
     helper = path / 'deploy/ubuntu/public_route_download.py'
-    result = run([sys.executable, str(helper)], stdout=subprocess.PIPE, timeout=105)
-    compose(path, 'exec', '-T', 'private-api', 'python', '-m', 'app.route_catalogue',
-            '--bundle-stdin', '--from-date', first, '--through-date', last, '--publish',
-            input=result.stdout, timeout=240)
+    name = 'bussassistent-route-import-' + uuid.uuid4().hex
+    with tempfile.TemporaryFile() as bundle:
+        run([sys.executable, str(helper)], stdout=bundle, timeout=105)
+        bundle.seek(0)
+        try:
+            compose(path, 'run', '--rm', '-T', '--no-deps', '--pull', 'never', '--name', name, 'route-import',
+                    '--bundle-stdin', '--from-date', first, '--through-date', last, '--publish',
+                    stdin=bundle, timeout=240)
+        except subprocess.TimeoutExpired:
+            subprocess.run(['docker', 'rm', '-f', name], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=20)
+            raise
 
 
 def import_road_area(path):

@@ -8,8 +8,9 @@ from io import BytesIO
 import json
 from pathlib import Path
 import re
+from shutil import copyfileobj
 import sys
-from tempfile import TemporaryDirectory
+from tempfile import TemporaryDirectory, TemporaryFile
 from zipfile import ZIP_DEFLATED, ZIP_STORED, ZipFile
 
 from . import quay_catalogue, route_source as netex
@@ -153,20 +154,24 @@ def import_dates(archive, dates, observed, generation, codes, nsr_path, nsr_gene
 
 def import_bundle(dates, codes, write):
     cap = MAX_ARCHIVE_BYTES + quay_catalogue.MAX_ARCHIVE_BYTES + 4096
-    data = sys.stdin.buffer.read(cap + 1)
-    if len(data) > cap:
-        raise ValueError('Public route bundle too large')
-    with ZipFile(BytesIO(data)) as bundle, TemporaryDirectory(prefix='public-routes-') as tmp:
-        limits = {'routes.zip': MAX_ARCHIVE_BYTES, 'quays.zip': quay_catalogue.MAX_ARCHIVE_BYTES, 'source.json': 2_048}
-        entries = bundle.infolist()
-        if (len(entries) != 3 or {entry.filename for entry in entries} != limits.keys()
-                or any(entry.compress_type != ZIP_STORED or not 0 < entry.file_size <= limits[entry.filename]
-                       or entry.flag_bits & 1 for entry in entries)):
-            raise ValueError('Unexpected public route bundle')
-        paths = {name: Path(tmp) / name for name in ('routes.zip', 'quays.zip')}
-        for name, path in paths.items():
-            path.write_bytes(bundle.read(name))
-        source = json.loads(bundle.read('source.json'))
+    with TemporaryFile() as staged, TemporaryDirectory(prefix='public-routes-') as tmp:
+        for chunk in iter(lambda: sys.stdin.buffer.read(64 * 1024), b''):
+            if staged.tell() + len(chunk) > cap:
+                raise ValueError('Public route bundle too large')
+            staged.write(chunk)
+        with ZipFile(staged) as bundle:
+            limits = {'routes.zip': MAX_ARCHIVE_BYTES, 'quays.zip': quay_catalogue.MAX_ARCHIVE_BYTES, 'source.json': 2_048}
+            entries = bundle.infolist()
+            if (len(entries) != 3 or {entry.filename for entry in entries} != limits.keys()
+                    or any(entry.compress_type != ZIP_STORED or not 0 < entry.file_size <= limits[entry.filename]
+                           or entry.flag_bits & 1 for entry in entries)):
+                raise ValueError('Unexpected public route bundle')
+            paths = {name: Path(tmp) / name for name in ('routes.zip', 'quays.zip')}
+            for name, path in paths.items():
+                with bundle.open(name) as member, path.open('wb') as archive:
+                    copyfileobj(member, archive, length=64 * 1024)
+            source = json.loads(bundle.read('source.json'))
+        staged.truncate(0)
         routes, quays = source['routes'], source['quays']
         import_dates(
             paths['routes.zip'], dates, datetime.fromisoformat(routes['observed_at']), routes['generation'],
