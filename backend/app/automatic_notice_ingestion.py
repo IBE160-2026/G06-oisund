@@ -23,6 +23,11 @@ CYCLE_SECONDS = 210
 REQUEST_SECONDS = 10
 CYCLE_INTERVAL = 300
 RECEIVE_TIMEOUT = 20
+# Hold many complete pilot inventories (at most 60 records per cycle) while
+# bounding both accumulated row overhead and the JSON payload stored by PostgreSQL.
+MAX_SOURCE_IDENTITIES = 8_000
+MAX_SOURCE_REVISIONS = 16_000
+MAX_SOURCE_BYTES = 64 * 1024 * 1024
 LOG = logging.getLogger('private.automatic_notices')
 
 
@@ -155,13 +160,56 @@ def keep_observation(conn, data, fetched_at, response_at, generation):
                  'automatic_notice_identities.last_complete_generation)', (*key, fetched_at, generation))
 
 
+def source_usage(conn):
+    return conn.execute(
+        '''SELECT count(*) AS revisions, COALESCE(sum(pg_column_size(content)),0) AS bytes,
+                  (SELECT count(*) FROM automatic_notice_identities) AS identities
+           FROM automatic_notice_sources'''
+    ).fetchone()
+
+
+def prune_source_history(conn, generation):
+    usage = source_usage(conn)
+    if usage['revisions'] > MAX_SOURCE_REVISIONS or usage['bytes'] > MAX_SOURCE_BYTES:
+        conn.execute(
+            '''WITH accounted AS (
+                 SELECT participant,situation,revision,last_seen,pg_column_size(content) AS bytes,
+                        current_revision OR conflicting OR COALESCE(last_complete_generation=%s,false) AS protected
+                 FROM automatic_notice_sources
+               ), preserved AS (
+                 SELECT count(*) AS revisions,COALESCE(sum(bytes),0) AS bytes FROM accounted WHERE protected
+               ), history AS (
+                 SELECT participant,situation,revision,row_number() OVER recent AS cutoff,
+                        sum(bytes) OVER recent AS used
+                 FROM accounted WHERE NOT protected
+                 WINDOW recent AS (ORDER BY last_seen DESC,participant,situation,revision ROWS UNBOUNDED PRECEDING)
+               )
+               DELETE FROM automatic_notice_sources AS source USING history,preserved
+               WHERE (source.participant,source.situation,source.revision) =
+                     (history.participant,history.situation,history.revision)
+                 AND (history.cutoff + preserved.revisions > %s OR history.used + preserved.bytes > %s)''',
+            (generation, MAX_SOURCE_REVISIONS, MAX_SOURCE_BYTES),
+        )
+        usage = source_usage(conn)
+    return (usage['identities'] <= MAX_SOURCE_IDENTITIES and usage['revisions'] <= MAX_SOURCE_REVISIONS
+            and usage['bytes'] <= MAX_SOURCE_BYTES)
+
+
 def finish(conn, requestor, pages, observations, failure):
     generation = requestor if failure is None else None
-    status = 'complete' if failure is None else 'partial' if pages else 'unavailable'
     with conn.transaction():
-        conn.execute('SELECT id FROM automatic_notice_feed FOR UPDATE')
-        for data, fetched_at, response_at in observations:
-            keep_observation(conn, data, fetched_at, response_at, generation)
+        baseline = conn.execute('SELECT generation FROM automatic_notice_feed FOR UPDATE').fetchone()['generation']
+        try:
+            with conn.transaction():
+                for data, fetched_at, response_at in observations:
+                    keep_observation(conn, data, fetched_at, response_at, generation)
+                if not prune_source_history(conn, generation or baseline):
+                    raise SourceError('storage-budget')
+        except SourceError as storage_failure:
+            # The savepoint preserves the already-published baseline and conflicts.
+            prune_source_history(conn, baseline)
+            generation, failure = None, storage_failure
+        status = 'complete' if failure is None else 'partial' if pages else 'unavailable'
         conn.execute('UPDATE automatic_notice_feed SET status=%s,result_at=clock_timestamp(),attempt_pages=%s,'
                      'attempt_count=%s,failure=%s,response_at=%s,next_request_at=CASE WHEN %s>0 THEN '
                      "greatest(next_request_at,clock_timestamp()+%s*interval '1 second') ELSE next_request_at END",
@@ -171,6 +219,7 @@ def finish(conn, requestor, pages, observations, failure):
         if generation:
             conn.execute('UPDATE automatic_notice_feed SET generation=%s,baseline_at=attempt_at,'
                          'synchronized_at=result_at,baseline_count=%s', (generation, len(observations)))
+    return status == 'complete'
 
 
 def run_cycle(stop, fetch=get_page):

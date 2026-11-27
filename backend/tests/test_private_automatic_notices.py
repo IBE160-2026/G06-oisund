@@ -130,6 +130,54 @@ def workday_with_dated_fixture(client, users, service_date, start, end, line='24
     return plan
 
 
+def test_source_budget_prunes_only_history_and_marks_unpublished_cycles(client, users, fixture_feed, monkeypatch):
+    monkeypatch.setattr(ingest, 'MAX_SOURCE_REVISIONS', 2)
+    monkeypatch.setattr(ingest, 'MAX_SOURCE_IDENTITIES', 2)
+    plan = workday_with_dated_fixture(client, users, '2026-11-23', *EVENING, line='20')
+    open_window = ((EVENING[0], None),)
+    old = situation('budget-notice', version='1', windows=open_window)
+    current = situation('budget-notice', version='2', windows=open_window)
+    conflict = situation('budget-notice', version='2', windows=open_window,
+                         text='<Summary xml:lang="NO">Syntetisk motstridende opplysning</Summary>')
+    collect((old, 'false'))
+    baseline = collect((current, 'false'))
+    snapshot = get(client, plan)
+    candidate = entry(snapshot, 'budget-notice')
+    response = save(client, plan, operation(snapshot, candidate))
+    assert response.status_code == 200
+    saved = entry(get(client, plan), 'budget-notice')['decision']
+
+    collect((conflict, 'true'), SourceError('rate-limited'))
+    snapshot = get(client, plan)
+    candidate = entry(snapshot, 'budget-notice')
+    assert candidate['source']['conflict_count'] == 1
+    assert candidate['decision'] == saved and candidate['needs_reassessment']
+    with database() as conn:
+        assert ingest.source_usage(conn)['revisions'] == 2
+        protected_bytes = ingest.source_usage(conn)['bytes']
+        contents = conn.execute("SELECT DISTINCT content->>'version' AS version FROM automatic_notice_sources").fetchall()
+        assert contents == [{'version': '2'}]
+
+    for provider_partial in (False, True):
+        novel = situation('budget-new', version='1')
+        if provider_partial:
+            monkeypatch.setattr(ingest, 'MAX_SOURCE_REVISIONS', 10)
+            monkeypatch.setattr(ingest, 'MAX_SOURCE_BYTES', protected_bytes)
+            collect((novel, 'true'), SourceError('rate-limited'))
+        else:
+            collect((current + novel, 'false'))
+        with database() as conn:
+            assert conn.execute('SELECT status,failure,generation FROM automatic_notice_feed').fetchone() == {
+                'status': 'partial', 'failure': 'storage-budget', 'generation': baseline,
+            }
+            assert ingest.source_usage(conn)['revisions'] == 2
+            assert ingest.source_usage(conn)['identities'] == 1
+        snapshot = get(client, plan)
+        assert snapshot['health']['status'] == 'partial'
+        candidate = entry(snapshot, 'budget-notice')
+        assert candidate['source']['conflict_count'] == 1 and candidate['decision'] == saved
+
+
 def test_two_workday_notice_qualification(client, users, fixture_feed):
     night = ('2026-11-24T23:55:00+01:00', '2026-11-25T00:10:00+01:00')
     after_midnight = '2026-11-25T00:05:00+01:00'
@@ -295,8 +343,10 @@ def test_complete_partial_unknown_recovery_and_lifecycle(client, users, fixture_
     never = get(client, plan)
     assert never['health']['status'] == 'never-qualified' and never['health']['baseline_count'] is None
     assert never['health']['evidence_kind'] == 'synthetic'
-    line = situation('line20', version='1')
-    generation = collect((line, 'true'), (situation('stop', STOP) + situation('broad', BROAD), 'false'))
+    open_window = ((EVENING[0], None),)
+    line = situation('line20', version='1', windows=open_window)
+    other = situation('stop', STOP, windows=open_window) + situation('broad', BROAD, windows=open_window)
+    generation = collect((line, 'true'), (other, 'false'))
     complete = get(client, plan)
     h = complete['health']
     assert h['generation'] == str(generation) and h['status'] == 'complete' and h['baseline_count'] == 3

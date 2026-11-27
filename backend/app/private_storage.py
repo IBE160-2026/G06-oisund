@@ -37,6 +37,7 @@ def migrate():
 
 def cleanup():
     from .auth import account_lock
+    from .automatic_notice_ingestion import prune_source_history
     from .road_area_catalogue import prune_versions
     # One account per transaction; no private row lock before the account gate.
     cursor = None
@@ -81,5 +82,8 @@ def cleanup():
                      "item.last_seen>clock_timestamp()-interval '7 days')))", (generation, generation))
         conn.execute("DELETE FROM automatic_notice_identities WHERE (last_complete_generation IS NULL OR "
                      "last_complete_generation IS DISTINCT FROM %s) AND last_seen<=clock_timestamp()-interval '7 days'", (generation,))
+        if not prune_source_history(conn, generation):
+            conn.execute("UPDATE automatic_notice_feed SET status=CASE WHEN generation IS NULL THEN 'unavailable' ELSE 'partial' END,"
+                         "failure='storage-budget' WHERE status<>'collecting'")
     with database() as conn:
         prune_versions(conn, datetime.now(UTC))

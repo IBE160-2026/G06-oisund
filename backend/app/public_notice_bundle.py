@@ -156,8 +156,8 @@ def publish(prepared):
                                     WHERE status='collecting' AND attempt_at=%s FOR UPDATE""", (started,)).fetchone()
         if admitted is None:
             raise ValueError('SIRI receipt is a replay or within the cycle cooldown')
-        finish(conn, requestor, responses, records, failure)
-    return {'dataset': 'TRO', 'records': len(records), 'pages': len(responses), 'complete': failure is None}
+        complete = finish(conn, requestor, responses, records, failure)
+    return {'dataset': 'TRO', 'records': len(records), 'pages': len(responses), 'complete': complete}
 
 
 def main():
