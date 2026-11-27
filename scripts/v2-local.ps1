@@ -6,7 +6,12 @@ param(
     [string]$Mode,
     [switch]$ApisOnly,
     [switch]$RecheckRouteSource,
-    [switch]$Stop
+    [switch]$Stop,
+    [ValidatePattern('^[a-z0-9][a-z0-9_-]*$')]
+    [string]$ProjectName,
+    [ValidateRange(1, 65533)]
+    [int]$UiPort,
+    [string]$Subnet
 )
 
 $ErrorActionPreference = 'Stop'
@@ -15,8 +20,9 @@ $testMode = $Mode -eq 'Test'
 if ($RecheckRouteSource -and ($testMode -or $Stop)) {
     throw '-RecheckRouteSource requires an Owner startup.'
 }
-$project = if ($testMode) { 'ibe160-v2-tests' } else { 'ibe160-v2-owner' }
-$firstPort = if ($testMode) { 19651 } else { 19661 }
+$project = if ($ProjectName) { $ProjectName } elseif ($testMode) { 'ibe160-v2-tests' } else { 'ibe160-v2-owner' }
+$firstPort = if ($UiPort) { $UiPort } elseif ($testMode) { 19651 } else { 19661 }
+$networkSubnet = if ($Subnet) { $Subnet } elseif ($testMode) { '10.247.206.0/28' } else { '10.247.207.0/28' }
 $config = Join-Path $PSScriptRoot '../compose.v2.yaml'
 $root = Split-Path $PSScriptRoot
 $routeDirectory = Join-Path $root '.private-runtime/route'
@@ -25,7 +31,7 @@ $environment = @{
     V2_UI_PORT = "$firstPort"
     V2_FICTIONAL_PORT = "$($firstPort + 1)"
     V2_PRIVATE_PORT = "$($firstPort + 2)"
-    V2_SUBNET = $(if ($testMode) { '10.247.206.0/28' } else { '10.247.207.0/28' })
+    V2_SUBNET = $networkSubnet
     V2_DB_SECRET_FILE = "./.private-runtime/$project-password"
     V2_TEST_MARKER = $(if ($testMode) { 'ibe160-private-tests' } else { 'disabled' })
     V2_NOTICE_REFRESH = $(if ($testMode) { 'off' } else { 'on' })

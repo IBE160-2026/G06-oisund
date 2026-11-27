@@ -50,6 +50,17 @@ Start igjen med `pwsh -NoProfile -File scripts/v2-local.ps1 -Mode Owner`. Logg i
 
 Hvis siden ikke åpner, sjekk at Vite fortsatt kjører og at [privat API](http://127.0.0.1:19663/health) svarer. Bruk `docker compose -p ibe160-v2-owner -f compose.v2.yaml ps` fra prosjektmappen for å se tjenestestatus.
 
+### Kjør prøven ved siden av et eksisterende miljø
+
+Bruk en ren, separat utsjekk for å starte med en tom database og uten tidligere nedlastede data. Velg et ubrukt Compose-prosjektnavn, tre sammenhengende ledige loopback-porter og et subnett som ikke overlapper eksisterende Docker-nettverk. Eksempel:
+
+```powershell
+$prove = @('-Mode', 'Owner', '-ProjectName', 'ibe160-v2-readme-trial', '-UiPort', '19711', '-Subnet', '10.247.233.0/28')
+pwsh -NoProfile -File scripts/v2-local.ps1 @prove
+```
+
+Åpne `http://127.0.0.1:19711/private`. Bruk `ibe160-v2-readme-trial` som prosjektnavn i kontokommandoen, tjenestestatus og begge importene nedenfor. Helseadressene bruker port 19712 og 19713. Bruk samme utsjekk og de samme argumentene for å starte igjen, og legg til `-Stop` for å stoppe. Det nye prosjektnavnet gir egne Docker-volumer, eget nettverk og egen databasenøkkelfil.
+
 ## Datagrunnlag lokalt
 
 | Funksjon | Tilgjengelig lokalt |
