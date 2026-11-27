@@ -245,8 +245,14 @@ class RestoreOperations(unittest.TestCase):
         self.assertEqual(compose.count('test -r /maintenance; test -x /maintenance'),3)
         self.assertEqual(compose.count('source: /etc/bussassistent/maintenance'),3)
         self.assertEqual(compose.count('target: /maintenance\n        read_only: true\n        bind:\n          create_host_path: false'),3)
-        self.assertEqual(compose.count('cap_drop: [ALL]'),4)
-        self.assertEqual(compose.count('\n    read_only: true'),4)
+        self.assertEqual(compose.count('cap_drop: [ALL]'),5)
+        self.assertEqual(compose.count('\n    read_only: true'),5)
+        worker = compose.split('  route-import:\n', 1)[1].split('\n  gateway:', 1)[0]
+        for setting in ('profiles: [route-import]', 'cap_drop: [ALL]', 'read_only: true',
+                        'networks: [storage]', 'mem_limit: 640m', 'memswap_limit: 640m',
+                        'cpus: 1.0'):
+            self.assertIn(setting, worker)
+        self.assertNotIn('ports:', worker)
 
     def test_guard_rejects_commented_reset_or_overridden_conditions(self):
         unit = self.root / 'cloudflared.service'
