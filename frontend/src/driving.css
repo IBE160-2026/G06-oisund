@@ -1,0 +1,271 @@
+/* Driving composition from the approved vertical sketch. The frame is the
+   usable viewport, with the same placement in Day A and Night C. */
+.driving-view {
+  --drive-bg: #fff;
+  --drive-text: #171717;
+  --drive-secondary: #525252;
+  --drive-info: #1755a1;
+  --drive-attention: #805000;
+  --drive-control: #171717;
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr) auto;
+  gap: 0;
+  max-width: none;
+  width: 100%;
+  height: 100dvh;
+  min-height: 0;
+  margin: 0;
+  padding: 22px 30px;
+  border: 0;
+  border-radius: 0;
+  overflow: auto;
+  color: var(--drive-text);
+  background: var(--drive-bg);
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+.night .driving-view {
+  --drive-bg: #101010;
+  --drive-text: #eaeaea;
+  --drive-secondary: #bbb;
+  --drive-info: #95bdec;
+  --drive-attention: #efc66c;
+  --drive-control: #bbb;
+  color: var(--drive-text);
+  background: var(--drive-bg);
+}
+.driving-view[hidden] { display: none; }
+body:has(> .driving-view:not([hidden])) { overflow: hidden; }
+body:has(> .driving-view:not([hidden])) > #root { display: none; }
+.driving-topline, .driving-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.driving-topline {
+  border-bottom: 1px solid var(--drive-secondary);
+  padding-block-end: 10px;
+  color: var(--drive-info);
+  font-size: 18px;
+  font-weight: 750;
+}
+.driving-topline time {
+  color: var(--drive-text);
+  font-size: 24px;
+  font-variant-numeric: tabular-nums;
+}
+.driving-orientation {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto 142px;
+  grid-template-rows: minmax(103px, auto);
+  align-items: center;
+  gap: 22px;
+  padding: 5px 0 1px;
+}
+.driving-route {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  min-width: 0;
+}
+.driving-line {
+  flex: 0 0 auto;
+  padding: 0 14px;
+  border: 2px solid var(--drive-text);
+  font-size: 42px;
+  font-weight: 750;
+  line-height: 1.3;
+}
+.driving-route h1 {
+  margin: 0;
+  color: var(--drive-text);
+  font-size: clamp(21px, 3vw, 32px);
+  font-weight: 700;
+  line-height: 1.17;
+}
+.driving-route p, .driving-trip-meta {
+  margin: 3px 0 0;
+  color: var(--drive-secondary);
+  font-size: 18px;
+  line-height: 1.3;
+}
+.driving-trip-meta { display: grid; justify-items: end; white-space: nowrap; }
+.driving-speed {
+  min-height: 90px;
+  align-self: start;
+  display: grid;
+  justify-items: center;
+  align-content: start;
+  gap: 3px;
+  text-align: center;
+}
+.driving-sign {
+  width: 68px;
+  height: 68px;
+  display: grid;
+  place-items: center;
+  padding-bottom: 2px;
+  border-radius: 50%;
+  border: 7px solid #bc111a;
+  background: #f7f6ef;
+  color: #111;
+  font-size: 37px;
+  font-weight: 850;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+.driving-sign.three-digits { font-size: 26px; }
+.driving-sign.unknown {
+  border-color: var(--drive-control);
+  background: var(--drive-bg);
+  color: var(--drive-secondary);
+}
+.driving-speed p { margin: 0; font-size: 15px; font-weight: 650; color: var(--drive-text); white-space: nowrap; }
+.driving-content {
+  min-height: 0;
+  display: grid;
+  align-items: center;
+  gap: 30px;
+}
+.driving-content.with-alerts { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); }
+.driving-sequence { min-width: 0; margin: 0 0 0 10px; padding: 0; list-style: none; }
+.driving-sequence .driving-stop {
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  border-left: 3px solid var(--drive-secondary);
+  padding: 10px 0 10px 25px;
+}
+.driving-role { color: var(--drive-secondary); font-size: 18px; font-weight: 650; line-height: 1.25; text-transform: uppercase; letter-spacing: .04em; }
+.driving-stop-name { font-size: clamp(20px, 3.05vw, 32px); font-weight: 550; line-height: 1.15; overflow-wrap: anywhere; }
+.driving-sequence .driving-stop.focus-stop {
+  border-left: 7px solid var(--drive-info);
+  padding: 14px 0 18px 21px;
+}
+.focus-stop .driving-role { color: var(--drive-info); }
+.focus-stop .driving-stop-name { font-size: clamp(30px, 5.7vw, 64px); font-weight: 750; letter-spacing: -.025em; }
+.with-alerts .driving-stop-name { font-size: clamp(18px, 2.55vw, 27px); }
+.with-alerts .focus-stop .driving-stop-name { font-size: clamp(23px, 3.5vw, 43px); }
+.driving-warning-mark { display: inline-block; vertical-align: -.05em; margin-left: .23em; }
+.driving-cancelled { color: var(--drive-attention); font-size: clamp(16px, 2.1vw, 23px); }
+.driving-task { min-width: 0; border-left: 7px solid var(--drive-info); padding: 13px 26px; }
+.driving-task strong, .driving-alert strong { display: block; font-size: clamp(26px, 4.75vw, 54px); line-height: 1.12; letter-spacing: -.02em; }
+.driving-task p { color: var(--drive-secondary); font-size: 22px; margin: .65rem 0 0; }
+.driving-alerts { display: grid; gap: 0.75rem; }
+.driving-alert {
+  border-left: 7px solid var(--drive-attention);
+  min-width: 0;
+  padding: 10px 0 10px 26px;
+}
+.driving-alert strong {
+  display: -webkit-box;
+  margin-top: 7px;
+  font-size: clamp(20px, 4vw, 45px);
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+}
+.driving-alert .driving-role { display: block; color: var(--drive-attention); }
+.driving-alert > span:last-child:not(.driving-role) { margin-top: .35rem; display: block; color: var(--drive-secondary); }
+.driving-footer {
+  border-top: 1px solid var(--drive-secondary);
+  padding-top: 13px;
+  font-size: 18px;
+}
+.driving-footer div { display: grid; gap: 2px; }
+.driving-footer span { color: var(--drive-secondary); }
+.driving-view .driving-footer button {
+  flex: 0 0 auto;
+  width: auto;
+  min-width: 152px;
+  min-height: 62px;
+  padding: 10px 12px;
+  border: 2px solid var(--drive-control);
+  border-radius: 8px;
+  background: var(--drive-bg);
+  color: var(--drive-text);
+  font: 650 20px system-ui, sans-serif;
+}
+.driving-view :focus-visible { outline: 3px solid var(--drive-info); outline-offset: 4px; }
+.driving-view h1:focus { outline: none; }
+.private-view .private-shift-start { position: relative; margin-block: .5rem 1rem; }
+.private-view .notice-stop-picker, .private-view .notice-geography { max-width: 100%; }
+.private-view .notice-stop-picker .controls { align-items: end; }
+.private-view .notice-stop-picker ul { padding-inline-start: 1.2rem; }
+.private-view .notice-stop-picker li button { margin-inline-start: .4rem; }
+
+:root.night:has(.private-view) { color: #eaeaea; background: #101010; }
+.night .private-view, .night .private-view .day-overview {
+  color: #eaeaea; background: #101010; border-color: #828282;
+}
+.night .private-view .day-reporting, .night .private-view .status, .night .private-view .import-facts,
+.night .private-view .badge, .night .private-view pre {
+  color: #eaeaea; background: #1e1e1e; border-color: #a0a0a0;
+}
+.night .private-view :is(input, select, textarea, button) {
+  color: #eaeaea; background: #191919; border-color: #a0a0a0;
+}
+.night .private-view button:disabled { color: #bbb; background: #222; border-color: #828282; }
+.night .private-view :is(.import-warning, .current-unknown, .day-uncertainty) {
+  color: #f3d78d; background: #24201a; border-color: #efc66c;
+}
+.night .private-view :is(.import-warning, .current-unknown, .day-uncertainty) :focus-visible,
+.night .private-view :focus-visible { outline-color: #95bdec; }
+.night .private-view :is(a, .import-warning a, .private-notices .import-warning a) { color: #95bdec; }
+.night .private-view :is(.day-source-information,.day-time,.private-access-header .badge) { color: #bbb; }
+
+@media (max-width: 700px) {
+  .driving-view { padding: 12px 14px max(12px, env(safe-area-inset-bottom)); }
+  .driving-topline { font-size: 15px; padding-bottom: 5px; }
+  .driving-topline time { font-size: 19px; }
+  .driving-orientation { grid-template-columns: minmax(0,1fr) 104px; grid-template-rows: auto; gap: 4px 8px; min-height: 85px; align-items: start; }
+  .driving-trip-meta { grid-column: 1; grid-row: 2; grid-auto-flow: column; justify-content: start; gap: 9px; margin: 0; }
+  .driving-speed { grid-column: 2; grid-row: 1 / span 2; min-height: 75px; }
+  .driving-line { font-size: 27px; padding-inline: 7px; }
+  .driving-route { gap: 8px; }
+  .driving-route p, .driving-trip-meta { font-size: 14px; }
+  .driving-sign { width: 53px; height: 53px; border-width: 5px; font-size: 29px; }
+  .driving-sign.three-digits { font-size: 22px; }
+  .driving-speed p { font-size: 12px; }
+  .driving-content.with-alerts { grid-template-columns: minmax(0,1fr); align-content: center; }
+  .driving-content { gap: 9px; }
+  .driving-role { font-size: 13px; }
+  .driving-footer { font-size: 13px; padding-top: 7px; }
+  .driving-view .driving-footer button { min-height: 44px; min-width: 116px; font-size: 15px; padding: 4px 7px; }
+}
+
+@media (orientation: landscape) and (max-height: 470px) {
+  .driving-view { padding: 6px 14px; }
+  .driving-topline { font-size: 12px; padding-bottom: 4px; }
+  .driving-topline time { font-size: 16px; }
+  .driving-orientation { grid-template-columns: minmax(0,1fr) auto 110px; grid-template-rows: auto; min-height: 62px; padding-top: 3px; gap: 9px; }
+  .driving-speed { grid-column: 3; grid-row: 1; min-height: 62px; }
+  .driving-trip-meta { grid-column: 2; grid-row: 1; font-size: 12px; }
+  .driving-route { gap: 9px; }
+  .driving-route h1 { font-size: 20px; }
+  .driving-route p { font-size: 13px; }
+  .driving-line { font-size: 26px; padding-inline: 7px; }
+  .driving-sign { width: 46px; height: 46px; border-width: 5px; font-size: 25px; }
+  .driving-sign.three-digits { font-size: 18px; }
+  .driving-speed p { font-size: 12px; }
+  .driving-content.with-alerts { grid-template-columns: minmax(0,1fr) minmax(0,1.2fr); gap: 14px; }
+  .driving-sequence .driving-stop { padding: 3px 0 4px 13px; }
+  .driving-sequence .driving-stop.focus-stop { padding: 5px 0 5px 9px; }
+  .driving-stop-name, .with-alerts .driving-stop-name { font-size: 17px; }
+  .focus-stop .driving-stop-name, .with-alerts .focus-stop .driving-stop-name { font-size: 25px; }
+  .driving-role { font-size: 11px; }
+  .driving-alert strong { font-size: 20px; }
+  .driving-alert > span:last-child:not(.driving-role) { font-size: 12px; }
+  .driving-warning-mark { width: 17px; height: 17px; }
+  .driving-task strong { font-size: 28px; }
+  .driving-task p { font-size: 15px; margin-top: .3rem; }
+  .driving-footer { padding-top: 5px; font-size: 12px; }
+  .driving-view .driving-footer button { min-height: 42px; min-width: 120px; font-size: 15px; padding: 4px 7px; }
+}

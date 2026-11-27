@@ -21,7 +21,8 @@ export type StopProgress = {
 // supported carriageway/stop layout and device before real GPS use.
 export const MANUAL_PROTECTION_MS = 20_000;
 const WINDOW_MS = 30_000;
-const MAX_SAMPLES = 6;
+// Keep the full qualification span even with one fix per second.
+const MAX_SAMPLES = 64;
 const MIN_SPAN_MS = 6_000;
 const ACCURACY_LIMIT_M = 30;
 const ENTER_RADIUS_M = 45;
@@ -56,6 +57,15 @@ export class StopProgression {
     this.needsAnchor = false;
     this.state = { assertion, estimate: assertion, reason: 'protecting', stale: false };
     return true;
+  }
+
+  restore(assertion: StopAssertion, mono: number) {
+    if (!this.calls.some(call => call.occurrence_id === assertion.occurrenceId)) return;
+    this.assertionMono = assertion.basis === 'manual' ? mono : -Infinity;
+    this.samples = [];
+    this.lastAcquisition = assertion.evidenceAt;
+    this.needsAnchor = false;
+    this.state = { assertion, estimate: assertion, reason: 'waiting', stale: false };
   }
 
   bind(generation: number) {

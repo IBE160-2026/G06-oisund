@@ -5,6 +5,7 @@ from zoneinfo import ZoneInfo
 
 from .automatic_notice_source import instant
 from .route_catalogue import LINE_IDS, code_for
+from .notice_geography import END_REFS, JOURNEY_REFS, START_REFS, STOP_REFS, recognized_area, route_call_refs
 
 
 OSLO = ZoneInfo('Europe/Oslo')
@@ -69,7 +70,7 @@ def operational_status(source, now):
     return 'uncertain'
 
 
-def city_scope(source, stops):
+def city_scope(source, stops, route=None):
     fields = list(walk(source['affects']))
     values = {}
     for node, _ in fields:
@@ -79,13 +80,19 @@ def city_scope(source, stops):
     if modes and modes <= {'ferry', 'water', 'rail', 'tram', 'metro', 'air'}:
         return False
     lines = values.get('LineRef', set())
-    if lines & CITY_LINE_IDS:
+    if lines:
+        return bool(lines & CITY_LINE_IDS)
+    if route and route['journey_id'] in set().union(*(values.get(key, set()) for key in JOURNEY_REFS)):
         return True
-    stop_refs = set().union(*(values.get(kind, set()) for kind in ('StopPointRef', 'StopPlaceRef', 'QuayRef')))
-    if not lines and stop_refs & stops:
+    stop_refs = set().union(*(values.get(kind, set()) for kind in STOP_REFS | START_REFS | END_REFS))
+    if stop_refs and route and any(stop_refs & route_call_refs(call) for call in route['calls']):
+        return True
+    if stop_refs & stops:
         return True
     if values.get('AuthorityRef', set()) - {'TRO:Authority:1'} or values.get('OperatorRef'):
         return False
+    if recognized_area(source):
+        return True
     networks = values.get('NetworkRef', set())
     return not (networks - {'TRO:Network:1'}) and (
         'true' in values.get('AllLines', set()) or 'true' in values.get('All', set())

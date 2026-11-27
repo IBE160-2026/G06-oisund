@@ -153,6 +153,7 @@ def normalize(node):
         raise SourceError('source-scope')
     affects = field(node, 'Affects')
     links = field(node, 'InfoLinks')
+    consequences = field(node, 'Consequences')
     return {
         'participant': participant, 'situation': situation,
         'version': scalar(node, 'Version'), 'publisher_updated_at': scalar(node, 'VersionedAtTime'),
@@ -166,6 +167,7 @@ def normalize(node):
         'windows': [{'start': scalar(period, 'StartTime'), 'end': scalar(period, 'EndTime')}
                     for period in node.findall(SIRI + 'ValidityPeriod')],
         'affects': [] if affects is None else [selector(child) for child in affects],
+        **({'consequences': [selector(child) for child in consequences]} if consequences is not None and len(consequences) else {}),
         'verified_siri_scope': affects is not None and all(
             element.tag.startswith(SIRI) and not element.attrib for element in affects.iter()
         ),

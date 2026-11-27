@@ -46,6 +46,19 @@ test('start uses the selected occurrence and only coherent departure/approach ad
   assert.equal(tripA.filter(item => item.quay_id === 'FIX:Q:B').length, 2);
 });
 
+test('a steady one-fix-per-second approach retains enough evidence to advance', () => {
+  const engine = new StopProgression(tripA);
+  engine.restore({occurrenceId: 'A-o2', basis: 'gps', evidenceAt: base}, 0);
+  engine.bind(1);
+  for (let i = 0; i <= 12; i++) {
+    const f = i/12;
+    publish(engine, fix((i+1)*1000,
+      points.B.latitude + f * (points.C.latitude - points.B.latitude),
+      points.B.longitude + f * (points.C.longitude - points.B.longitude)));
+  }
+  assert.equal(engine.read().estimate?.occurrenceId, 'A-o3');
+});
+
 test('a late callback cannot resume 3→6 and correction resists a contradictory early fix', () => {
   const engine = new StopProgression(tripA);
   engine.choose('A-o3', base, 0);

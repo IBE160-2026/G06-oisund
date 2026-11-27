@@ -1,11 +1,11 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, type RefObject } from 'react';
 import { osloDateTime } from './dayOverview';
 import { useWorkdayResource, type ResourceProps } from './useWorkdayResource';
 import { validLifecycle, type Lifecycle } from './PrivateWorkdayProgress';
 
 import { PrivateTrafficNotices } from './PrivateTrafficNotices';
 
-export function PrivateShiftStart(props: ResourceProps & { plannedStart: string; factsAvailable: boolean; readOnly?: boolean; changed?: () => void; blocked: boolean; reviewing: boolean; review: (value: boolean) => void }) {
+export function PrivateShiftStart(props: ResourceProps & { plannedStart: string; startEntry?: RefObject<HTMLButtonElement | null>; factsAvailable: boolean; readOnly?: boolean; changed?: () => void; started?: () => void; blocked: boolean; reviewing: boolean; review: (value: boolean) => void }) {
   const resource = useWorkdayResource<Lifecycle>(props, 'start', validLifecycle,
     v => v.state === 'active' && v.revision === 1);
   const { saved, pending, rejected, busy, message, load, send, resolve } = resource;
@@ -15,16 +15,15 @@ export function PrivateShiftStart(props: ResourceProps & { plannedStart: string;
   useEffect(() => { if (props.reviewing) title.current?.focus(); }, [props.reviewing]);
   function cancel() { props.review(false); window.setTimeout(() => returnTo.current?.focus(), 0); }
   useEffect(() => { if (saved) props.changed?.(); }, [saved?.revision]);
-  useEffect(() => { if (message === 'Skiftstart er lagret.') status.current?.focus(); }, [message]);
+  useEffect(() => { if (message === 'Skiftstart er lagret.') { status.current?.focus(); props.started?.(); } }, [message]);
   return <section className="private-shift-start" aria-label="Skiftstart">
     <div hidden={props.reviewing}>
-    <h4>Skiftstart</h4>{available && <p>Planlagt start: {osloDateTime(props.plannedStart)}. Dette er første bekreftede aktivitetsstart.</p>}
+    <h4>Skiftstart</h4>
     <p ref={status} tabIndex={-1} role="status" aria-label="Skiftstatus">{message}</p>
     <p><strong>{pending ? 'Skiftstart er uavklart' : saved && available ? saved.state === 'active' ? 'Startet manuelt' : ['ended', 'aborted'].includes(saved.state) ? 'Skiftet er avsluttet' : 'Ikke startet' : 'Skiftstatus er ukjent / utilgjengelig'}</strong></p>
     {saved && available && saved.started_at && <p>Faktisk start (lagret av serveren): {osloDateTime(saved.started_at)}</p>}
-    <p>Skiftstart registreres bare ved en uttrykkelig manuell handling. Registreringen er ikke bevis på fysisk kjøring og velger eller fullfører ingen aktivitet.</p>
     {pending ? <div className="controls"><button disabled={busy || props.suspended} onClick={() => void send()}>Prøv samme skiftstart igjen</button><button disabled={busy || props.suspended} onClick={() => void send(undefined, true)}>Kontroller skiftstarten</button></div>
-      : !props.readOnly && !rejected && saved && available && saved.state === 'confirmed' && <button disabled={busy || props.suspended || props.blocked} onClick={event => { returnTo.current = event.currentTarget; props.review(true); }}>Start skift</button>}
+      : !props.readOnly && !rejected && saved && available && saved.state === 'confirmed' && <button ref={props.startEntry} disabled={busy || props.suspended || props.blocked} onClick={event => { returnTo.current = event.currentTarget; props.review(true); }}>Start skift</button>}
     {rejected && saved && <div className="controls"><button hidden={props.readOnly} disabled={!available || busy || props.suspended} onClick={() => void send()}>Prøv avvist skiftstart igjen</button><button disabled={busy || props.suspended} onClick={() => { resolve(saved, 'Avvist skiftstart er avbrutt. Lagret skiftstatus er uendret.'); status.current?.focus(); }}>Avbryt avvist skiftstart</button></div>}
     <button disabled={busy || props.suspended} onClick={() => void load()}>Hent skiftstatus igjen</button>
     </div>

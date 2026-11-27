@@ -2,11 +2,12 @@ import { privateNow, observePrivateTime } from './privateClock';
 import { useEffect, useRef, useState } from 'react';
 import { recoverOperation } from './recoverOperation';
 import { PrivateTimeInput } from './PrivateTimeInput';
+import { geographyLabel, NoticeGeographyEditor, validGeography, type Geography } from './NoticeGeography';
 
 import { osloDateTime } from './dayOverview';
 import { observeOperationalTime, useOperationalNow } from './operationalNotices';
 
-type Content = { title: string; line_tags: string[]; line_scope: 'selected' | 'all'; summary: string | null; description: string | null; source_note: string | null; source_url: string | null; source_updated_at: string | null; valid_from: string | null; valid_until: string | null };
+type Content = { geography?: Geography | null; title: string; line_tags: string[]; line_scope: 'selected' | 'all'; summary: string | null; description: string | null; source_note: string | null; source_url: string | null; source_updated_at: string | null; valid_from: string | null; valid_until: string | null };
 export type Notice = Content & { id: string; workday_id: string | null; revision: number; status: 'registered' | 'ended_manually'; entered_at: string; edited_at: string; checked_at: string | null; checked_revision: number | null; expires_at: string };
 type Command = { path: string; kind: 'save' | 'check' | 'end'; target: string | null; before: Notice | null; body: { operation_id: string; expected_revision: number; content?: Content } };
 type Props = { suspended: boolean; request: (path: string) => Promise<any>; mutation: (path: string, body: object) => Promise<any>; expired: () => void; lock: (value: boolean) => void; changed: () => void };
@@ -25,7 +26,7 @@ const timeFields = new Set(['source_updated_at', 'valid_from', 'valid_until', 'e
 const canonical = (v: any): string => JSON.stringify(v, (key, value) => timeFields.has(key) && stamp(value) ? instantKey(value) : value && typeof value === 'object' && !Array.isArray(value) ? Object.fromEntries(Object.keys(value).sort().map(key => [key, value[key]])) : value);
 const empty = (): Content => ({ title: '', line_tags: [], line_scope: 'selected', summary: null, description: null, source_note: null, source_url: null, source_updated_at: null, valid_from: null, valid_until: null });
 // The API supplies authoritative Oslo calendar fields; preserve them verbatim.
-const content = (v: Content): Content => ({ title: v.title, line_tags: v.line_tags, line_scope: v.line_scope ?? 'selected', summary: v.summary ?? null, description: v.description ?? null, source_note: v.source_note ?? null, source_url: v.source_url, source_updated_at: v.source_updated_at, valid_from: v.valid_from, valid_until: v.valid_until });
+const content = (v: Content): Content => ({ ...(v.geography ? { geography: { ...v.geography, route_ref: v.geography.route_ref ?? null } } : {}), title: v.title, line_tags: v.line_tags, line_scope: v.line_scope ?? 'selected', summary: v.summary ?? null, description: v.description ?? null, source_note: v.source_note ?? null, source_url: v.source_url, source_updated_at: v.source_updated_at, valid_from: v.valid_from, valid_until: v.valid_until });
 const sourceDateTime = (v: string) => `${v.slice(8, 10)}.${v.slice(5, 7)}.${v.slice(0, 4)}, ${v.slice(11).replace(/(?:Z|[+-]\d{2}:\d{2})$/, '')} (UTC${v.endsWith('Z') ? '+00:00' : v.slice(-6)})`;
 const tagText = (tags: string[]) => tags.map(v => /[",]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v).join(', ');
 function parseTags(value: string): string[] | string {
@@ -59,9 +60,10 @@ const plain = (v: any, max: number) => typeof v === 'string' && v.trim() === v &
 const multiline = (v: any, max: number) => typeof v === 'string' && v.trim() === v && v.length > 0 && Array.from(v).length <= max && !/[\x00-\x08\x0b\x0c\x0e-\x1f\x7f-\x9f\uD800-\uDFFF]/u.test(v);
 const nullable = (v: any) => v === null || stamp(v);
 const sameInstant = (a: string | null, b: string | null) => a === null ? b === null : b !== null && stamp(a) && stamp(b) && instantKey(a) === instantKey(b);
-function sameContent(a: Content, b: Content) { return ['summary', 'description', 'source_note'].every(k => (a[k as keyof Content] ?? null) === (b[k as keyof Content] ?? null)) && (a.line_scope ?? 'selected') === (b.line_scope ?? 'selected') && a.title === b.title && canonical(a.line_tags) === canonical(b.line_tags) && a.source_url === b.source_url && ['source_updated_at', 'valid_from', 'valid_until'].every(k => sameInstant(a[k as keyof Content] as string | null, b[k as keyof Content] as string | null)); }
+function sameContent(a: Content, b: Content) { return canonical(a.geography ?? null) === canonical(b.geography ?? null) && ['summary', 'description', 'source_note'].every(k => (a[k as keyof Content] ?? null) === (b[k as keyof Content] ?? null)) && (a.line_scope ?? 'selected') === (b.line_scope ?? 'selected') && a.title === b.title && canonical(a.line_tags) === canonical(b.line_tags) && a.source_url === b.source_url && ['source_updated_at', 'valid_from', 'valid_until'].every(k => sameInstant(a[k as keyof Content] as string | null, b[k as keyof Content] as string | null)); }
 export function validNotice(v: any, _id?: string): v is Notice {
-  return v && Object.keys(v).filter(k => !['summary', 'description', 'source_note', 'line_scope'].includes(k)).sort().join() === 'checked_at,checked_revision,edited_at,entered_at,expires_at,id,line_tags,revision,source_updated_at,source_url,status,title,valid_from,valid_until,workday_id'
+  return v && Object.keys(v).filter(k => !['summary', 'description', 'source_note', 'line_scope', 'geography'].includes(k)).sort().join() === 'checked_at,checked_revision,edited_at,entered_at,expires_at,id,line_tags,revision,source_updated_at,source_url,status,title,valid_from,valid_until,workday_id'
+    && (v.geography == null || validGeography(v.geography))
     && uuid(v.id) && (v.workday_id === null || uuid(v.workday_id)) && Number.isSafeInteger(v.revision) && v.revision > 0 && plain(v.title, 300) && (v.source_url === null || http(v.source_url))
     && ['selected', 'all'].includes(v.line_scope ?? 'selected') && (v.summary == null || plain(v.summary, 1000)) && (v.source_note == null || plain(v.source_note, 500)) && (v.description == null || multiline(v.description, 5000))
     && Array.isArray(v.line_tags) && ((v.line_scope ?? 'selected') === 'all' ? v.line_tags.length === 0 : v.line_tags.length > 0) && v.line_tags.length <= 50 && v.line_tags.every((t: any) => plain(t, 300)) && new Set(v.line_tags).size === v.line_tags.length
@@ -111,6 +113,7 @@ export function usePrivateNotices(props: Props) {
   const unresolvedTime = Object.values(timeStates).some(v => v.unresolved);
   const intervalError = !!draft?.valid_from && !!draft?.valid_until && Date.parse(draft.valid_from) > Date.parse(draft.valid_until);
   const errors = normalized ? {
+    geography: normalized.geography && !validGeography(normalized.geography) ? 'Fullfør stedene eller området avviket gjelder.' : null,
     title: !plain(normalized.title, 300) ? 'Tittel er påkrevd: skriv 1–300 tegn uten kontrolltegn.' : null,
     line_tags: normalized.line_scope === 'all' ? null : !tags.trim() ? 'Linjer er påkrevd: oppgi minst en linje fra kilden eller velg Alle linjer.' : tagError ?? (!normalized.line_tags.length ? 'Oppgi minst en linje fra kilden eller velg Alle linjer.' : normalized.line_tags.some(v => !plain(v, 300)) ? 'Hver linje må ha 1–300 tegn uten kontrolltegn.' : null),
     summary: normalized.summary !== null && !plain(normalized.summary, 1000) ? 'Kort forklaring: maks 1000 tegn uten kontrolltegn.' : null,
@@ -305,12 +308,13 @@ export function usePrivateNotices(props: Props) {
 }
 
 export type NoticeController = ReturnType<typeof usePrivateNotices>;
-export function NoticeScreens({ notices: n, back, visible = true }: { notices: NoticeController; serviceDate: string | null; back: () => void; visible?: boolean }) {
+export function NoticeScreens({ notices: n, back, serviceDate, visible = true }: { notices: NoticeController; serviceDate: string | null; back: () => void; visible?: boolean }) {
   // Reader-to-maintenance also reveals an ancestor after the screen switch.
   useEffect(() => { if (visible && n.screen !== 'day') n.title.current?.focus(); }, [visible, n.screen]);
   const p = n.props;
   const disabled = !n.mutable || n.busy || !!n.pending;
   const noticeNow = useOperationalNow(visible && n.screen === 'list');
+  const unresolved = n.denied ? [] : n.records.filter(value => value.status === 'registered' && !value.valid_until && Date.parse(value.expires_at) > noticeNow);
   const active = n.denied ? [] : n.records.filter(value => operationalManualNotice(value, noticeNow));
   return <section className="private-notices" hidden={n.screen === 'day'} aria-label="Avviksvedlikehold">
     <h2 ref={n.title} tabIndex={-1}>{n.screen === 'editor' ? 'Rediger avvik' : 'Manuelt vedlikeholdte avvik'}</h2>
@@ -327,11 +331,15 @@ export function NoticeScreens({ notices: n, back, visible = true }: { notices: N
         {editable(value, n.now) && <div className="controls"><button disabled={disabled || !!n.draft} onClick={() => n.edit(value)}>Rediger {value.title}</button><button disabled={disabled || n.dirty} onClick={() => n.action(value, 'check')}>Kontrollerte kilden nå</button>{value.status === 'registered' && <button disabled={disabled || n.dirty} onClick={() => n.action(value, 'end')}>Avslutt avvik manuelt</button>}</div>}
         <p>Kildekontroll registrerer ditt uttrykkelige kontrolltidspunkt. Det er ingen automatisk kontroll eller garanti for dekning.</p>
       </details></li>)}</ul>
+      {unresolved.length > 0 && <section aria-label="Avvik som må avklares"><h3>Mangler bekreftet sluttid</h3>
+        <p>Oppgi sluttid fra kilden for å vise avviket i skiftet.</p>
+        {unresolved.map(value => <details key={value.id}><summary>{value.title}</summary><NoticeFacts value={value} now={noticeNow} />
+          <button disabled={disabled || !!n.draft} onClick={() => n.edit(value)}>Rediger {value.title}</button></details>)}</section>}
     </div>
     <div hidden={n.screen !== 'editor'}>
       <button onClick={() => n.navigate('list')}>Tilbake til avvik</button>
       <p>Gi trafikkmeldingen en tittel. Bruk kort forklaring til et sammendrag og detaljert forklaring til hele meldingen, instruksjoner og separate tidsvinduer. Velg bestemte linjer og oppgi dem fra kilden, eller velg Alle linjer uttrykkelig.</p>
-      <p>Fyll inn tittel, linjevalg og gyldig-til. Meldingstekst, starttid og kildeopplysninger er valgfrie. Kildekontroll og manuell avslutning er egne, valgfrie handlinger.</p>
+      <p>Fyll inn tittel, linjevalg og en fremtidig sluttdato. Avviket forsvinner fra operative visninger ved gyldig til. Meldingstekst, starttid og kildeopplysninger er valgfrie. Kildekontroll og manuell avslutning er egne handlinger.</p>
       {n.draft && <div key={n.editorKey}><fieldset disabled={disabled}><legend>Kildeopplysninger</legend>
         <label>Tittel<input value={n.draft.title} aria-invalid={!!n.errors.title} aria-describedby={n.errors.title ? 'notice-title-error' : undefined} onChange={e => n.setDraft(v => v && ({ ...v, title: e.target.value }))} /></label>
         {n.errors.title && <p id="notice-title-error">{n.errors.title}</p>}
@@ -345,6 +353,8 @@ export function NoticeScreens({ notices: n, back, visible = true }: { notices: N
         <p>Linjer med komma eller anførselstegn omsluttes av doble anførselstegn. Et anførselstegn i en slik linje skrives to ganger.</p>
         {n.draft.line_scope === 'selected' && n.tagError && <p role="alert">{n.tagError}</p>}</div>
         {n.errors.line_tags && <p id="notice-line_tags-error">{n.errors.line_tags}</p>}
+        <NoticeGeographyEditor value={n.draft.geography} set={geography => n.setDraft(current => current && ({ ...current, geography }))}
+          date={n.draft.valid_from?.slice(0, 10) ?? serviceDate} line={n.parsedTags?.length === 1 ? n.parsedTags[0] : undefined} request={p.request} />
         <label>Kildebeskrivelse<input value={n.draft.source_note ?? ''} aria-invalid={!!n.errors.source_note} aria-describedby={n.errors.source_note ? 'notice-source_note-error' : undefined} onChange={e => n.setDraft(v => v && ({ ...v, source_note: e.target.value }))} /></label>
         {n.errors.source_note && <p id="notice-source_note-error">{n.errors.source_note}</p>}
         <label>Originalkilde (HTTP eller HTTPS)<input type="url" aria-invalid={!!n.errors.source_url} aria-describedby={n.errors.source_url ? 'notice-source_url-error' : undefined} value={n.draft.source_url ?? ''} onChange={e => n.setDraft(v => v && ({ ...v, source_url: e.target.value }))} /></label>
@@ -353,6 +363,8 @@ export function NoticeScreens({ notices: n, back, visible = true }: { notices: N
         <p>Tomme valgfrie tidspunkt betyr ukjent. Oppgi dato og tid i Oslo, og velg forekomst når klokken stilles tilbake.</p>
         {(['source_updated_at', 'valid_from', 'valid_until'] as const).map((field, i) => <PrivateTimeInput dateOnlyEnd={field === 'valid_until'} key={field} label={['Kilden oppdatert', 'Gyldig fra', 'Gyldig til'][i]} value={n.draft![field]} defaultDate={null} disabled={disabled} resolve={body => p.mutation('/draft-times/resolve', body)} expired={p.expired} onValue={value => n.setDraft(v => v && ({ ...v, [field]: value }))} onState={(dirty, unresolved) => n.setTimeStates(values => { const old = values[field]; return old?.dirty === dirty && old?.unresolved === unresolved ? values : { ...values, [field]: { dirty, unresolved } }; })} />)}
       </fieldset>
+      {n.draft.valid_until && <p>Avviket vises fram til <strong>{sourceDateTime(n.draft.valid_until)}</strong>.
+        {Date.parse(n.draft.valid_until) - noticeNow > 366 * 86_400_000 && ' Sluttiden er mer enn ett år fram. Kontroller årstallet mot kilden.'}</p>}
       {n.intervalError && <p role="alert">Gyldig til må være samtidig med eller etter Gyldig fra. Rett gyldighetsintervallet før lagring.</p>}
       {n.conflict && <div className="import-warning"><p>Det lagrede avviket er endret. Ditt forslag er beholdt.</p>
                 {n.comparison && !n.denied && <><h3>Nyere lagret avvik</h3><NoticeFacts value={n.comparison} now={n.now} /><button disabled={!n.available || n.busy || !!n.pending || p.suspended || !editable(n.comparison, n.now)} onClick={n.reviewComparison}>Jeg har sammenlignet; behold mitt forslag</button></>}
@@ -377,6 +389,8 @@ export const noticeStatus = (v: Notice, now = privateNow()) => v.status === 'end
 
 export function NoticeFacts({ value: v, now }: { value: Notice; now: number }) {
   return <div className="notice-facts"><p>Tittel: {v.title}</p><p>Linjer fra kilden: {v.line_scope === 'all' ? 'Alle linjer' : tagText(v.line_tags)}</p><p>Status: {noticeStatus(v, now)}</p>
+    {v.geography && <><p>Sted {geographyLabel(v.geography)}</p>
+      {!!v.geography.cancelled.length && <p>Betjenes ikke · {v.geography.cancelled.map(item => item.name).join(', ')}</p>}</>}
     {v.summary && <p>Kort forklaring: {v.summary}</p>}
     {v.description && <p style={{ whiteSpace: 'pre-wrap' }}>Detaljert forklaring: {v.description}</p>}
     {v.source_note && <p>Kildebeskrivelse: {v.source_note}</p>}

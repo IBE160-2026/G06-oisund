@@ -186,6 +186,58 @@ def migrations(path):
             for p in (path / 'backend/migrations/private').glob('*.sql')}
 
 
+def app_rollback_compatible(current, target):
+    newer, older = migrations(current), migrations(target)
+    if newer == older:
+        return True
+    # 027 only adds one nullable column. The older reader projects its own
+    # field list and older writes leave the column untouched.
+    return (set(newer) - set(older) == {'027_notice_geography.sql'} and
+            all(newer.get(name) == digest for name, digest in older.items()) and
+            newer['027_notice_geography.sql'] == '30526cfd91b79a829a7b9b4f6a0b4e0af9b447f611d2e8abfc19f44fca1c65ad')
+
+
+def repair_notice_validity(path, identifier, expected, replacement):
+    from datetime import UTC, datetime
+    from uuid import UUID
+
+    notice = str(UUID(identifier))
+    old = datetime.fromisoformat(expected)
+    corrected = None if replacement == 'unknown' else datetime.fromisoformat(replacement)
+    if old.tzinfo is None or old <= datetime.now(UTC) or corrected is not None and (
+            corrected.tzinfo is None or corrected >= datetime.now(UTC)):
+        raise ValueError('Supply the exact future end and a verified past end, or unknown')
+    # Values interpolated below are canonical UUID/ISO timestamps and cannot
+    # introduce SQL metacharacters. Do not pass arbitrary text to psql.
+    until = 'NULL' if corrected is None else f"'{corrected.isoformat()}'::timestamptz"
+    sql = f"""
+    BEGIN;
+    SELECT a.id IS NOT NULL FROM accounts a JOIN workday_notices n ON n.owner=a.id
+        WHERE n.id='{notice}' FOR UPDATE OF a;
+    WITH repaired AS (
+        UPDATE workday_notices SET valid_until={until}, revision=revision+1,
+            edited_at=clock_timestamp(), expires_at=LEAST(expires_at,clock_timestamp()+interval '7 days')
+        WHERE id='{notice}' AND status='registered' AND valid_until='{old.isoformat()}'::timestamptz
+            AND ({until} IS NULL OR valid_from IS NULL OR valid_from <= {until})
+        RETURNING id, expires_at
+    ), shortened AS (
+        UPDATE account_notice_operations o SET expires_at=LEAST(o.expires_at,r.expires_at)
+        FROM repaired r WHERE o.notice_id=r.id
+    ), legacy AS (
+        UPDATE workday_notice_operations o SET expires_at=LEAST(o.expires_at,r.expires_at)
+        FROM repaired r WHERE o.result->>'id'=r.id::text
+    )
+    SELECT count(*) FROM repaired;
+    COMMIT;
+    """
+    result = compose(path, 'exec', '-T', 'private-db', 'psql', '-X', '-qAt',
+                     '-U', 'tablet_bootstrap', '-d', 'private_work', '-v', 'ON_ERROR_STOP=1',
+                     input=sql, capture_output=True, text=True)
+    if result.stdout.splitlines()[-1:] != ['1']:
+        raise ValueError('No notice matching the explicit old validity was repaired')
+    print('Verified notice validity repair: 1 row')
+
+
 def backup(path, prune=True):
     if prune:
         prune_restore_copies()
@@ -1235,6 +1287,9 @@ def main():
         refresh_public_notices(path)
         run(['systemctl', 'enable', '--now', 'bussassistent-public-notices.timer'])
         return
+    if action == 'repair-notice-validity' and len(sys.argv) == 5:
+        repair_notice_validity(release(), *sys.argv[2:])
+        return
     if action == 'verify-restore' and len(sys.argv) == 2:
         verify_restore()
         return
@@ -1304,8 +1359,8 @@ def main():
             raise ValueError('First deploy requires verified restore and root-owned data-ready marker')
         if previous is None:
             verify_initial_quarantine(target)
-        if action == 'rollback' and (previous is None or migrations(previous) != migrations(target)):
-            raise ValueError('Rollback requires identical migration files; use reviewed database restore otherwise')
+        if action == 'rollback' and (previous is None or not app_rollback_compatible(previous, target)):
+            raise ValueError('Rollback needs identical or explicitly compatible migrations; use reviewed database restore otherwise')
         # Builds and config validation happen before downtime.
         compose(target, 'config', '--quiet')
         verify_release_images(target)

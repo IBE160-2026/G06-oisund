@@ -27,6 +27,7 @@ class SaveAnchor(StrictModel):
     occurrence_id: str = Field(min_length=1, max_length=200)
     coordinate_revision: str | None = Field(max_length=100)
     origin: Literal['manual', 'gps']
+    driving: bool = Field(default=False, strict=True)
     evidence_at: str = Field(min_length=20, max_length=48)
     carried_from_revision: int | None = Field(default=None, gt=0, le=MAX_RECEIPTS, strict=True)
 
@@ -106,7 +107,10 @@ def remap(previous, route_view):
 
 @router.post('/position-anchor')
 def save(identifier: UUID, body: SaveAnchor, request: Request):
-    digest = draft_storage.fingerprint(identifier, body.model_dump(mode='json'))
+    payload = body.model_dump(mode='json')
+    if not body.driving:
+        payload.pop('driving')
+    digest = draft_storage.fingerprint(identifier, payload)
     with database() as conn:
         owner, plan = access(conn, identifier, request)
         prior = operation(conn, body.operation_id)
@@ -136,7 +140,10 @@ def save(identifier: UUID, body: SaveAnchor, request: Request):
         # that another tab has already replaced.
         selection = conn.execute('SELECT activity_id FROM workday_selections WHERE workday_id=%s',
                                  (identifier,)).fetchone()
-        if not selection or selection['activity_id'] != body.activity_id:
+        if body.driving:
+            if body.origin != 'gps' or workday_lifecycle_storage.current(conn, plan)['state'] != 'active':
+                raise HTTPException(409, 'Skiftet må være startet og aktivt.')
+        elif not selection or selection['activity_id'] != body.activity_id:
             raise HTTPException(409, 'Valgt aktivitet er endret. Åpne den valgte aktiviteten igjen.')
         now = conn.execute('SELECT clock_timestamp() AS now').fetchone()['now']
         evidence = position_coordinates.instant(body.evidence_at)
@@ -154,7 +161,13 @@ def save(identifier: UUID, body: SaveAnchor, request: Request):
                     or previous['quay_version'] != point['quay_version']
                     or previous['stop_place_version'] != point['stop_place_version']):
                 raise HTTPException(409, 'Det lagrede holdepunktet må velges manuelt i denne kjøringen.')
-        if previous and body.origin == 'gps':
+        new_driving_leg = body.driving and (not previous or previous['activity_id'] != body.activity_id)
+        if new_driving_leg:
+            order = {activity['id']: i for i, activity in enumerate(plan['content']['activities'])}
+            if call['position'] != route['start_position'] or (previous and
+                    order.get(str(previous['activity_id']), -1) >= order.get(str(body.activity_id), -1)):
+                raise HTTPException(409, 'Velg en ny forekomst manuelt før GPS-anslaget kan lagres.')
+        if previous and body.origin == 'gps' and not new_driving_leg:
             before = next((value['position'] for value in route_view['calls']
                            if value['occurrence_id'] == previous['occurrence_id']), None)
             if (previous['activity_id'] != body.activity_id or previous['route_basis'] != body.route_basis
@@ -164,7 +177,7 @@ def save(identifier: UUID, body: SaveAnchor, request: Request):
                 raise HTTPException(409, 'Velg en ny forekomst manuelt før GPS-anslaget kan lagres.')
             if previous['origin'] == 'gps' and evidence - previous['evidence_at'] < MIN_GPS_SAVE_GAP:
                 raise HTTPException(429, 'Det er for kort tid siden forrige GPS-holdepunkt ble lagret.')
-        if not previous and body.origin == 'gps':
+        if not previous and body.origin == 'gps' and not new_driving_leg:
             raise HTTPException(409, 'Velg en forekomst manuelt før GPS-anslaget kan lagres.')
         if body.expected_revision >= MAX_RECEIPTS:
             raise HTTPException(429, 'Grensen for holdepunkt i denne arbeidsdagen er nådd.')

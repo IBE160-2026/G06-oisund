@@ -1,6 +1,6 @@
 # Bussassistent V2 for Tromsø
 
-Bussassistenten importerer skiftplaner fra tekst-PDF og lar sjåføren kontrollere, lagre og åpne dem igjen. Sjåføren kan slå opp daterte avganger, velge tur og starte holdeplassassistanse. Appen kan også vise avvik, GPS-fart og fartsgrense med 300 m-forvarsel der datagrunnlaget støtter det.
+Bussassistenten importerer skiftplaner fra tekst-PDF og lar sjåføren kontrollere, lagre og åpne dem igjen. Etter bekreftet skiftstart viser kjørevisningen pågående aktivitet, holdeplassprogresjon, trafikkavvik for turen og gjeldende fartsgrense med forvarsel der datagrunnlaget støtter det.
 
 ## Kjør lokalt
 
@@ -13,7 +13,7 @@ git clone --branch main https://github.com/IBE160-2026/G06-oisund.git bussassist
 Set-Location bussassistent
 ```
 
-**Eksisterende utsjekk.** Åpne PowerShell 7 i prosjektmappen og oppdater `main`. README-prøven for v2.0.1 bruker kildekoden og oppstartsskriptet på denne grenen.
+**Eksisterende utsjekk.** Åpne PowerShell 7 i prosjektmappen og oppdater `main`. README-prøven bruker kildekoden og oppstartsskriptet på denne grenen.
 
 ```powershell
 git switch main
@@ -42,6 +42,8 @@ docker compose -p ibe160-v2-owner -f compose.v2.yaml exec private-api python -m 
 4. Velg **Forberedelse og planlister**. Under **Mine utkast** åpner du raden **Åpne … · versjon 1** og kontrollerer at det samme skiftet vises.
 
 Når en passasjertur har ett entydig treff i den daterte Entur-katalogen, viser gjennomgangen retning, destinasjon og delstrekning. Den samme rutereferansen følger med til den bekreftede planen. Ved uavklart treff kan du rette utkastet eller velge avgang selv. De fiktive turene i Testskift A har ingen avgang i Tromsø-katalogen.
+
+Etter godkjenning kan du lagre fysisk buss og bruke **Skiftstart** øverst i den åpne planen. **Til Dagen din** åpner dagsplanen mens skiftet fortsetter, og **Gjenoppta kjøring** åpner kjørevisningen igjen. Tillat posisjon i nettleseren for å bruke holdeplassprogresjon og vegmatching under kjøring.
 
 Konto, PDF og lagring fungerer på din egen PC. Du bruker ditt eget lokale passord og filen som følger med repoet. Ubuntu-serveren og Cloudflare Access brukes i feltoppsettet.
 

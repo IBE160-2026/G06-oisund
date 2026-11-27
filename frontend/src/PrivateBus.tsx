@@ -6,8 +6,8 @@ import { validLifecycle } from './PrivateWorkdayProgress';
 
 type Bus = { workday_id: string; physical_bus: string | null; revision: number; expires_at: string };
 type Operation = { operation_id: string; expected_revision: number; physical_bus: string | null };
-type Props = { readOnly?: boolean; shorten?: (value: string) => void; factsAvailable?: boolean; id: string; expiresAt: string; request: (path: string) => Promise<any>; mutation: (path: string, body: object) => Promise<any>; suspended: boolean; expired: () => void; lock: (value: boolean) => void; availability: (value: boolean) => void };
-export function PrivateBus({ id, expiresAt, request, mutation, suspended, expired, lock, availability, shorten, readOnly = false, factsAvailable = true }: Props) {
+type Props = { readOnly?: boolean; shorten?: (value: string) => void; factsAvailable?: boolean; afterSave?: () => boolean; id: string; expiresAt: string; request: (path: string) => Promise<any>; mutation: (path: string, body: object) => Promise<any>; suspended: boolean; expired: () => void; lock: (value: boolean) => void; availability: (value: boolean) => void };
+export function PrivateBus({ id, expiresAt, request, mutation, suspended, expired, lock, availability, shorten, readOnly = false, factsAvailable = true, afterSave }: Props) {
   const [saved, setSaved] = useState<Bus | null>(null), [text, setText] = useState('');
   const [pending, setPending] = useState<Operation | null>(null), [comparison, setComparison] = useState<Bus | null>(null);
   const [busy, setBusy] = useState(true), [message, setMessage] = useState('Henter gjeldende registrering …');
@@ -110,7 +110,7 @@ export function PrivateBus({ id, expiresAt, request, mutation, suspended, expire
       if (!alive.current) return;
       if (latest.revision < receipt.result.revision || latest.revision === receipt.result.revision && latest.physical_bus !== receipt.result.physical_bus) throw Error();
       if (latest.revision > receipt.result.revision) { setPending(null); setComparison(latest); setMessage('Forsøket ble lagret, men en nyere registrering finnes. Sammenlign og last inn lagret verdi.'); }
-      else { adopt(latest); setFocusInput(true); setMessage('Fysisk buss er lagret.'); }
+      else { adopt(latest); setFocusInput(!afterSave?.()); setMessage('Fysisk buss er lagret.'); }
     } catch (error: any) {
       if (!alive.current) return;
       if (error?.status === 401) { expired(); return; }

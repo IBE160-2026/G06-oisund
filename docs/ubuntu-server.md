@@ -127,8 +127,14 @@ ikke blindt mot en mulig nyere database.
 .\scripts\server.ps1 -Action Rollback -Revision <full-SHA-til-tidligere-installert-release>
 ~~~
 
-Rollback krever identiske private migreringsfiler og allerede bygde images.
+Rollback krever allerede bygde images og identiske eller uttrykkelig kompatible private migreringsfiler. Migrering 027 legger bare til et valgfritt geografifelt og er godkjent for app-rollback til samme migreringssett uten 027. Ved slik rollback blir allerede lagret geografi i databasen.
 Ved schemaendring kreves egen vurdering av restore og data skrevet etter backup.
+Ved en verifisert feil i sluttdato på et registrert avvik kan operatøren bruke
+`bussassistentctl repair-notice-validity <id> <gammel-sluttid> <korrigert-sluttid|unknown>`
+etter en verifisert backup. Kommandoen krever nøyaktig lagret sluttid, treffer én rad og
+beholder teksten. Bekreftet historisk sluttid tas ut av operativ visning. En post uten
+bekreftet sluttid vises under «Mangler bekreftet sluttid» i registeret i inntil sju dager.
+
 Ingen down -v, volume prune eller generell Docker-opprydding inngår.
 Ta vare på aktuell og tidligere verifisert release.
 

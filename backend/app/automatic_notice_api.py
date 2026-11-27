@@ -131,11 +131,11 @@ def city_stops(conn):
     return {PILOT_STOP_PLACE, *(row['quay_id'] for row in rows), *(row['stop_place_id'] for row in rows if row['stop_place_id'])}
 
 
-def operational_sources(conn, feed, now):
+def operational_sources(conn, feed, now, route=None):
     stops = city_stops(conn)
     rows = conn.execute(
         "SELECT i.situation,jsonb_build_object('progress',s.content->'progress','windows',s.content->'windows',"
-        "'affects',s.content->'affects') AS content FROM automatic_notice_identities i "
+        "'affects',s.content->'affects','summary',s.content->'summary','consequences',s.content->'consequences') AS content FROM automatic_notice_identities i "
         "JOIN automatic_notice_sources s USING(participant,situation) "
         "WHERE i.participant='TRO' AND s.current_revision "
         "AND (i.last_complete_generation=%s OR (%s <> 'complete' "
@@ -144,7 +144,7 @@ def operational_sources(conn, feed, now):
         (feed['generation'], feed['status'], feed['synchronized_at'], now - RETENTION),
     ).fetchall()
     return [(row['situation'], state) for row in rows
-            if (state := operational_status(row['content'], now)) and city_scope(row['content'], stops)]
+            if (state := operational_status(row['content'], now)) and city_scope(row['content'], stops, route)]
 
 
 def page_sources(conn, feed, now, cursor):
@@ -163,11 +163,14 @@ def operational_notices(request: Request, cursor: Annotated[str | None, Query(ma
         feed = health(conn, now)
         page, total, next_cursor = page_sources(conn, feed, now, cursor)
         rows = conn.execute(
-            "SELECT id,title,summary,description,line_tags,line_scope,valid_from,valid_until,checked_at,source_note "
+            "SELECT id,title,summary,description,line_tags,line_scope,valid_from,valid_until,checked_at,source_note,geography "
             "FROM workday_notices WHERE owner=%s AND status='registered' "
             "AND valid_until>%s AND expires_at>%s ORDER BY valid_until,id",
             (owner, now, now),
         ).fetchall() if cursor is None else []
+        for row in rows:
+            if row['geography'] is None:
+                del row['geography']
         entries = []
         for key, state in page:
             source = public_item(conn, key, feed, now)

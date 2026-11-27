@@ -66,7 +66,7 @@ export function PrivateTimeInput(props: Props) {
   }
   const messages: Record<string, string> = { empty: 'Klokkeslett er ukjent.', saved: 'Lagret tidspunkt i Oslo-tid.', resolved: 'Tidspunktet er klart i Oslo-tid.', incomplete: 'Fyll ut både dato og klokkeslett, eller tøm tidspunktet.', resolving: 'Kontrollerer Oslo-tid …', gap: 'Dette klokkeslettet finnes ikke i Oslo når klokken stilles frem. Velg et annet tidspunkt.', ambiguous: 'Dette klokkeslettet forekommer to ganger. Velg første eller andre forekomst.', invalid: 'Kontroller dato og klokkeslett.', unavailable: 'Tidspunktet kunne ikke kontrolleres. Inndata er beholdt. Prøv igjen.' };
   return <fieldset disabled={props.disabled}><legend>{props.label} (Oslo-tid)</legend>
-    {props.dateOnlyEnd && <p>Sluttdato er påkrevd. Uten klokkeslett gjelder avviket til 23:59:59 på denne Oslo-datoen. Et oppgitt klokkeslett brukes nøyaktig.</p>}
+    {props.dateOnlyEnd && <p>Oppgi en fremtidig sluttdato. Uten klokkeslett gjelder det til 23:59:59 på denne datoen i Oslo.</p>}
     <label>{props.label}dato<input type="date" value={date} onChange={e => change(e.target.value, clock)} /></label>
     <label>{props.label === 'Start' ? 'Starttid' : props.label === 'Slutt' ? 'Sluttid' : props.label + ': klokkeslett'}<input type="time" step="1" value={clock} onChange={e => change(date, e.target.value)} /></label>
     <div className="controls"><button type="button" disabled={!date && !props.defaultDate} onClick={nextDay}>{props.label}: neste dag</button>

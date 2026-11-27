@@ -412,7 +412,7 @@ export function PrivateAccess() {
     if (focusLogin && !session && !locked && !busy) { usernameInput.current?.focus(); setFocusLogin(false); }
   }, [focusLogin, session, locked, busy]);
 
-  return <main className={session && !locked ? 'private-workspace' : undefined}>
+  return <main className={session && !locked ? 'private-view private-workspace' : 'private-view'}>
     <ThemeControl /><header className="private-access-header"><p className="badge">Privat tilgang</p>
     <h1 ref={heading} tabIndex={-1}>{session && !locked ? 'Privat arbeidsrom' : 'Logg inn'}</h1>
     <p role="status" aria-label="Tilgangsstatus" aria-live="polite" className="status">{message}</p></header>
@@ -445,6 +445,5 @@ export function PrivateAccess() {
       </form>}
     {!session && !locked && !recovery && <button ref={recoveryButton} disabled={busy || passwordBusy || suspended} onClick={() => { passwordOutcome.current = null; setPassword(''); recoveryScreen(true); }}>Glemt passord?</button>}
     <p>Tilgang opprettes av den som drifter løsningen. Bruk arbeidsrommet mens du står stille.</p>
-    <a href="/">Åpne fiktiv demo</a>
   </main>;
 }

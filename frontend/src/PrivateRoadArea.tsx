@@ -8,7 +8,7 @@ type Props = {
   request: (path: string) => Promise<unknown>;
 };
 
-export function PrivateRoadArea({ expiresAt, verifyAccess, request }: Props) {
+export function usePilotRoad(request: Props['request']) {
   const areaRequest = useRef(request);
   useLayoutEffect(() => { areaRequest.current = request; }, [request]);
   const checkRevision = useCallback(async () => {
@@ -28,6 +28,11 @@ export function PrivateRoadArea({ expiresAt, verifyAccess, request }: Props) {
     return { status: 'unavailable' };
   }, []);
 
+  return {loadRoad, checkRevision};
+}
+
+export function PrivateRoadArea({expiresAt, verifyAccess, request}: Props) {
+  const {loadRoad, checkRevision} = usePilotRoad(request);
   return <section aria-label="Vegområde og GPS-fart">
     <PositionAssistance authorized expiresAt={expiresAt} verifyAccess={verifyAccess}>
       <p>Vegmatching følger posisjonen på Tromsøya, Kvaløya og fastlandet.</p>

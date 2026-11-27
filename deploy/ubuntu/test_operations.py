@@ -151,7 +151,7 @@ class OperationsTests(unittest.TestCase):
         (new / 'backend/migrations/private/001.sql').write_text('new schema')
         (self.root / 'current').symlink_to(new)
         with patch.object(sys, 'argv', ['ctl', 'rollback', old.name]), patch.object(ops, 'run') as run:
-            with self.assertRaisesRegex(ValueError, 'identical migration'):
+            with self.assertRaisesRegex(ValueError, 'identical or explicitly compatible migrations'):
                 ops.main()
             run.assert_not_called()
 

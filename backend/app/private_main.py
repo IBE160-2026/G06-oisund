@@ -88,7 +88,10 @@ async def lifespan(app):
 
 
 app = FastAPI(title='Privat arbeidsrom', lifespan=lifespan, docs_url=None, redoc_url=None, openapi_url=None)
+from . import driving_notice_api
+
 app.include_router(automatic_notice_api.router)
+app.include_router(driving_notice_api.router)
 app.include_router(route_reference_api.router)
 app.include_router(position_anchor_api.router)
 app.include_router(road_reference_api.router)

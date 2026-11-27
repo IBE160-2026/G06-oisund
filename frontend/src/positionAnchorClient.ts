@@ -23,7 +23,7 @@ export type SavedStopAnchor = Provenance & {
 };
 export type AnchorCommand = {
   activity_id: string; route_basis: string; occurrence_id: string; coordinate_revision: string | null;
-  origin: 'manual' | 'gps'; evidence_at: string; carried_from_revision?: number;
+  origin: 'manual' | 'gps'; evidence_at: string; carried_from_revision?: number; driving?: true;
 };
 type Operation = AnchorCommand & { operation_id: string; expected_revision: number };
 type Latest = { workday_id: string; expires_at: string; revision: number; terminal: boolean; anchor: SavedStopAnchor | null };

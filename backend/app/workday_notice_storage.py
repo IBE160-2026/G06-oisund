@@ -145,14 +145,14 @@ def save(request, identifier, body, notice_id=None, action='save'):
                 deadline = datetime.fromisoformat(values.valid_until) + timedelta(days=7)
             except OverflowError:
                 raise HTTPException(422, 'Sluttdatoen gir lagringstid utenfor støttet kalender.') from None
-            fields = (values.title, Jsonb(values.line_tags), values.summary, values.description, values.source_note, values.line_scope, values.source_url, values.source_updated_at, values.valid_from, values.valid_until)
+            fields = (values.title, Jsonb(values.line_tags), values.summary, values.description, values.source_note, values.line_scope, values.source_url, values.source_updated_at, values.valid_from, values.valid_until, Jsonb(values.geography.model_dump(mode='json')) if values.geography else None)
             if row is None:
                 if conn.execute('SELECT count(*) AS n FROM workday_notices WHERE owner=%s AND expires_at>clock_timestamp()', (owner,)).fetchone()['n']>=200:
                     raise HTTPException(429, {'code': 'notice_capacity', 'message': 'Registeret har allerede 200 avvik.'})
                 notice_id = uuid5(NAMESPACE_URL, 'ibe160:account-notice:'+str(owner)+':'+str(body.operation_id))
-                conn.execute("INSERT INTO workday_notices(id,owner,revision,title,line_tags,summary,description,source_note,line_scope,source_url,source_updated_at,valid_from,valid_until,status,entered_at,edited_at,expires_at) VALUES(%s,%s,1,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,'registered',%s,%s,%s)", (notice_id, owner, *fields, now, now, deadline))
+                conn.execute("INSERT INTO workday_notices(id,owner,revision,title,line_tags,summary,description,source_note,line_scope,source_url,source_updated_at,valid_from,valid_until,geography,status,entered_at,edited_at,expires_at) VALUES(%s,%s,1,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,'registered',%s,%s,%s)", (notice_id, owner, *fields, now, now, deadline))
             else:
-                conn.execute('UPDATE workday_notices SET title=%s,line_tags=%s,summary=%s,description=%s,source_note=%s,line_scope=%s,source_url=%s,source_updated_at=%s,valid_from=%s,valid_until=%s,revision=revision+1,edited_at=%s,expires_at=%s WHERE id=%s', (*fields, now, deadline, notice_id))
+                conn.execute('UPDATE workday_notices SET title=%s,line_tags=%s,summary=%s,description=%s,source_note=%s,line_scope=%s,source_url=%s,source_updated_at=%s,valid_from=%s,valid_until=%s,geography=%s,revision=revision+1,edited_at=%s,expires_at=%s WHERE id=%s', (*fields, now, deadline, notice_id))
         elif action == 'check':
             conn.execute('UPDATE workday_notices SET checked_at=%s,checked_revision=revision+1,revision=revision+1 WHERE id=%s', (now, notice_id))
         elif action == 'end':

@@ -38,9 +38,10 @@ function Sign({ value, size }: { value: number; size: number }) {
 type ActiveProps = {
   loadRoad: () => Promise<RoadResponse>;
   checkRevision?: () => Promise<RoadRevision | null>;
+  driving?: boolean;
 };
 
-export function ActiveRoadLimits({ loadRoad, checkRevision }: ActiveProps) {
+export function ActiveRoadLimits({ loadRoad, checkRevision, driving = false }: ActiveProps) {
   const access = usePositionAssistance();
   const source = access?.source;
   const pending = useRef<symbol | null>(null);
@@ -180,6 +181,30 @@ export function ActiveRoadLimits({ loadRoad, checkRevision }: ActiveProps) {
     setInterruption(null);
     setStarting(false);
   }
+  useEffect(() => {
+    if (!driving || !source) return;
+    const resume = () => { if (!roadOn.current && document.visibilityState === 'visible') void start(); };
+    resume();
+    document.addEventListener('visibilitychange', resume);
+    return () => document.removeEventListener('visibilitychange', resume);
+  }, [driving, source, loadRoad]);
+  useEffect(() => {
+    if (!driving || active || starting || (!problem && !['gap', 'clock', 'timeout', 'unavailable'].includes(interruption ?? ''))) return;
+    const timer = setTimeout(() => { if (document.visibilityState === 'visible') void start(); }, problem ? 15_000 : 3000);
+    return () => clearTimeout(timer);
+  }, [driving, active, starting, problem, interruption]);
+
+  if (driving) {
+    const current = 'kmh' in reading.current ? reading.current.kmh : null;
+    const next = 'kmh' in reading.next ? reading.next : null;
+    return <section className="driving-speed" aria-label="Fartsgrense">
+      {current === null
+        ? <div className="driving-sign unknown" aria-label="Fartsgrense ukjent">–</div>
+        : <div className={'driving-sign' + (current >= 100 ? ' three-digits' : '')} aria-label={current + ' km/t'}>{current}</div>}
+      {current !== null && next ? <p>Om {next.metres} m: {next.kmh} km/t</p> : current === null && <p>Ukjent</p>}
+    </section>;
+  }
+
   const showDetails = active && !interruption;
   const problemMessage = checkRevision && problem === 'road-unqualified'
     ? 'Veggrunnlag mangler for Tromsø bybuss på dagens dato.'

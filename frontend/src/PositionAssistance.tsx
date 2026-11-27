@@ -92,8 +92,8 @@ function SpeedPanel({ source, start, stop }: SourceAccess) {
   </section>;
 }
 
-type Props = { authorized: boolean; expiresAt: string; verifyAccess: () => Promise<unknown>; children?: ReactNode };
-export function PositionAssistance({ authorized, expiresAt, verifyAccess, children }: Props) {
+type Props = { authorized: boolean; expiresAt: string; verifyAccess: () => Promise<unknown>; showSpeed?: boolean; children?: ReactNode };
+export function PositionAssistance({ authorized, expiresAt, verifyAccess, showSpeed = true, children }: Props) {
   const access = useRef({ authorized, expiresAt, verifyAccess });
   const attempt = useRef(0);
   const allowed = () => access.current.authorized && document.visibilityState === 'visible'
@@ -160,7 +160,7 @@ export function PositionAssistance({ authorized, expiresAt, verifyAccess, childr
   };
   if (!authorized) return null;
   return <PositionContext.Provider value={value}>
-    <SpeedPanel {...value} />
+    {showSpeed && <SpeedPanel {...value} />}
     {children}
   </PositionContext.Provider>;
 }

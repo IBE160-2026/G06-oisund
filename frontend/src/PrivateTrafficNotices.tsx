@@ -2,9 +2,10 @@ import { useEffect, useRef, useState } from 'react';
 import { type Evidence, SourceFacts } from './PrivateAutomaticNotices';
 import { osloDateTime } from './dayOverview';
 import { automaticNoticeStatus, observeOperationalTime, statusLabel, useOperationalNow } from './operationalNotices';
+import { geographyLabel, type Geography } from './NoticeGeography';
 import { observePrivateTime } from './privateClock';
 
-type Manual = { id: string; title: string; summary: string | null; description: string | null;
+type Manual = { geography?: Geography; id: string; title: string; summary: string | null; description: string | null;
   line_scope: string; line_tags: string[]; valid_from: string | null; valid_until: string;
   checked_at: string | null; source_note: string | null };
 type Page = {
@@ -75,6 +76,7 @@ function TrafficNotices({ request }: { request: (path: string) => Promise<Page> 
         {manual.map(item => <li key={item.id}><details>
           <summary>{item.title} · {item.valid_from && Date.parse(item.valid_from) > now ? 'Kommende' : 'Aktiv'}</summary>
           <p>{item.line_scope === 'all' ? 'Alle linjer' : 'Linjer ' + item.line_tags.join(', ')} · Gyldig til {osloDateTime(item.valid_until)}</p>
+          {item.geography && <p>{geographyLabel(item.geography)}</p>}
           {item.summary && <p>{item.summary}</p>}{item.description && <p>{item.description}</p>}
           <p>{item.source_note ?? 'Manuelt registrert'} · {item.checked_at ? 'Kilde kontrollert ' + osloDateTime(item.checked_at) : 'Kilde ikke kontrollert manuelt'}</p>
         </details></li>)}

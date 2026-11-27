@@ -5,8 +5,9 @@ from typing import Annotated, Literal
 from urllib.parse import urlsplit
 from uuid import UUID
 from zoneinfo import ZoneInfo
-from pydantic import Field, TypeAdapter, AnyHttpUrl, field_serializer, field_validator, model_validator
+from pydantic import Field, TypeAdapter, AnyHttpUrl, field_serializer, field_validator, model_serializer, model_validator
 from .draft_domain import StrictModel, Activity
+from .notice_geography import NoticeGeography
 
 HTTP_SOURCE = TypeAdapter(AnyHttpUrl)
 
@@ -20,7 +21,18 @@ def text(value):
     return value
 
 
-class NoticeContent(StrictModel):
+class OptionalGeography(StrictModel):
+    geography: NoticeGeography | None = None
+
+    @model_serializer(mode='wrap')
+    def omit_legacy_geography(self, handler):
+        value = handler(self)
+        if value.get('geography') is None:
+            value.pop('geography', None)
+        return value
+
+
+class NoticeContent(OptionalGeography):
     title: str = Field(min_length=1, max_length=300, strict=True)
     line_tags: list[Annotated[str, Field(min_length=1, max_length=300, strict=True)]] = Field(max_length=50)
     summary: str | None = Field(default=None, max_length=1000, strict=True)
@@ -97,7 +109,7 @@ class SaveNotice(NoticeCommand):
     content: NoticeContent
 
 
-class NoticeRecord(StrictModel):
+class NoticeRecord(OptionalGeography):
     id: UUID
     workday_id: UUID | None
     revision: int = Field(ge=1)
