@@ -1,4 +1,5 @@
 """Private storage cannot connect to the fictional cluster or accept URL overrides."""
+from datetime import UTC, datetime
 import os
 import secrets
 from pathlib import Path
@@ -36,6 +37,7 @@ def migrate():
 
 def cleanup():
     from .auth import account_lock
+    from .road_area_catalogue import prune_versions
     # One account per transaction; no private row lock before the account gate.
     cursor = None
     while True:
@@ -79,3 +81,5 @@ def cleanup():
                      "item.last_seen>clock_timestamp()-interval '7 days')))", (generation, generation))
         conn.execute("DELETE FROM automatic_notice_identities WHERE (last_complete_generation IS NULL OR "
                      "last_complete_generation IS DISTINCT FROM %s) AND last_seen<=clock_timestamp()-interval '7 days'", (generation,))
+    with database() as conn:
+        prune_versions(conn, datetime.now(UTC))

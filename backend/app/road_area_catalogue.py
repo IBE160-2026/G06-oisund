@@ -25,6 +25,8 @@ OSLO = ZoneInfo('Europe/Oslo')
 MAX_ARCHIVE = 20_000_000
 MAX_UNCOMPRESSED = 160_000_000
 MAX_REVIEW = 5_000_000
+ROAD_AREA_KEEP_VERSIONS = 2
+ROAD_AREA_PRUNE_BATCH = 128
 
 
 def read_bounded(path, limit):
@@ -308,6 +310,30 @@ def current_day_ready(now):
                                WHERE effective_date=%s AND observed_at >= %s AND observed_at <= %s
                                  AND manifest ? 'registeredInteriors'""", (day, midnight, now)).fetchone()
     return row['areas'] == len(AREAS)
+
+
+def prune_versions(conn, now, *, batch=ROAD_AREA_PRUNE_BATCH):
+    """Keep the active and previous publication per current or future area/day."""
+    day = now.astimezone(OSLO).date()
+    return conn.execute(
+        '''WITH stale AS (
+             SELECT effective_date, area_id, observed_at, checked_at
+             FROM public_road_area_versions AS candidate
+             WHERE effective_date < %s OR EXISTS (
+                 SELECT 1 FROM public_road_area_versions AS newer
+                 WHERE newer.effective_date = candidate.effective_date
+                   AND newer.area_id = candidate.area_id
+                   AND (newer.observed_at, newer.checked_at) > (candidate.observed_at, candidate.checked_at)
+                 OFFSET %s LIMIT 1
+             )
+             ORDER BY effective_date, area_id, observed_at, checked_at
+             LIMIT %s FOR UPDATE SKIP LOCKED
+           )
+           DELETE FROM public_road_area_versions AS entry USING stale
+           WHERE (entry.effective_date, entry.area_id, entry.observed_at, entry.checked_at) =
+                 (stale.effective_date, stale.area_id, stale.observed_at, stale.checked_at)''',
+        (day, ROAD_AREA_KEEP_VERSIONS - 1, batch),
+    ).rowcount
 
 
 def main():

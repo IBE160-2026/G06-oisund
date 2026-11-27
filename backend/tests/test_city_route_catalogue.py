@@ -7,7 +7,7 @@ from uuid import uuid4
 from fastapi.testclient import TestClient
 import pytest
 
-from app import route_catalogue, route_reference_storage, route_source
+from app import road_area_catalogue, route_catalogue, route_reference_storage, route_source
 from app.private_storage import database
 from test_private_access import headers, login, synthetic_only, users
 from test_private_drafts import content, save
@@ -74,6 +74,12 @@ def test_line_26_early_trip_survives_confirmation_and_anchoring(users, monkeypat
         assert response.status_code == 200, response.text
         plan = response.json()
         path = '/workdays/' + plan['id']
+        assert client.get(path + '/route-references').json()['references'] == [reference]
+        with database() as conn:
+            conn.execute('CREATE TEMP TABLE public_road_area_versions (LIKE public.public_road_area_versions INCLUDING ALL)')
+            conn.execute("INSERT INTO public_road_area_versions VALUES (%s,'tromsoya',%s,%s,%s,%s,'{}','{}')",
+                         (day - timedelta(days=1), stamp['observed_at'], stamp['observed_at'], 'a' * 64, 'b' * 64))
+            assert road_area_catalogue.prune_versions(conn, datetime(2026, 11, 29, 23, tzinfo=UTC)) == 1
         assert client.get(path + '/route-references').json()['references'] == [reference]
         view = client.get(path + '/position-coordinates/' + activity).json()
         assert len(view['calls']) == 36
