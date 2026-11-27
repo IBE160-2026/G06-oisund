@@ -1,5 +1,7 @@
 # Åpne punkter
 
+- [ ] 2026-11-27 [V2-kandidat og tilbakeføring](981-2026-11-27-12-33-18-v2-kandidat-og-tilbakeforing.md) — Verifiser fersk backup, vertsressurser og Cloudflare-klientadresse før utrulling. Avtal hvordan skriving på skjema 026 sikres og avstemmes dersom førdumpen må gjenopprettes.
+
 **Gjeldende O6-status 27. november 2026.** Serveren kjører 44.44. Omstart, pakkeoppgradering og ruteoppslag fra mobil er dokumentert. Kernelstatus er 51 rettet, én ikke berørt og fire åpne. Samlet O6 og den midlertidige risikoaksepten består. [O6-etterkontroll](../../docs/evidence/o6-kernel-44-20261127.md) · [V2-overlevering](../../docs/v2-handoff.md).
 
 - [x] 2026-11-27 [O6-omstart til 44.44](../../docs/evidence/o6-kernel-44-20261127.md) — Én omstart og etterkontroll bestod. (løst 2026-11-27)
