@@ -10,7 +10,7 @@ Den lokale utgaven kjører på din egen PC og bruker en prøvekonto du lager sel
 
 **Før du begynner:** Installer Git, PowerShell 7.2 eller nyere, Node.js 24 med npm og Docker Desktop med Compose v2. Start Docker Desktop med Linux-containere. Første oppstart trenger internett for å hente containerbilder og avhengigheter. Portene 19661–19663 må være ledige.
 
-**1. Hent den publiserte versjonen og start appen.** Åpne PowerShell 7 i mappen der du vil ha prosjektet. Har du allerede pakket ut kildekoden til `v2.0.0`, åpner du mappen som inneholder `compose.v2.yaml` og kjører bare siste linje.
+**1. Hent den publiserte versjonen og start appen.** Åpne PowerShell 7 i mappen der du vil ha prosjektet. Har du allerede klonet repoet, oppdatert det med `git pull` på `main` eller pakket ut kildekoden til `v2.0.0`? Åpne PowerShell 7 i prosjektmappen som inneholder `compose.v2.yaml`, og kjør bare startkommandoen på siste linje i blokken under.
 
 ```powershell
 git clone --branch v2.0.0 --depth 1 https://github.com/IBE160-2026/G06-oisund.git bussassistent-v2
