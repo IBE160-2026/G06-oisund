@@ -103,7 +103,7 @@ $lokal = @('-p', 'ibe160-v2-owner', '-f', 'compose.v2.yaml')
 docker compose @lokal exec -T private-api sh -ec 'mappe=$(mktemp -d); trap "rm -f $mappe/veg.zip; rmdir $mappe" EXIT; python -m app.road_area_evidence --date "$1" --output "$mappe/veg.zip"; python -m app.road_area_catalogue "$mappe/veg.zip" --publish' sh $vegdag
 ```
 
-Trykk **Åpne vegområde og GPS-fart**, velg område og trykk **Start vegmatching**. Nettleseren kan be om posisjonstillatelse. En pakke fra NVDB alene gir veggrunnlag for Tromsøya, Kvaløya og fastlandet, med **Ukjent** fartsgrense der bekreftelse mangler. [Krav til skilt, reguleringer og forvarsel](docs/v2-field-trial.md#oppdatering-og-tilbakeføring).
+Trykk **Åpne vegområde og GPS-fart**, og trykk **Start vegmatching**. Vegmatching dekker Tromsøya, Kvaløya og fastlandet og følger posisjonen over bruene. Nettleseren kan be om posisjonstillatelse. En pakke fra NVDB alene gir veggrunnlag for Tromsøya, Kvaløya og fastlandet, med **Ukjent** fartsgrense der bekreftelse mangler. [Krav til skilt, reguleringer og forvarsel](docs/v2-field-trial.md#oppdatering-og-tilbakeføring).
 
 [Resultater fra README-prøven på Windows 27.11.2026](docs/evidence/v2-readme-windows-20261127.md).
 

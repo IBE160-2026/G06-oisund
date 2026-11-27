@@ -513,6 +513,46 @@ def test_pre017_pending_and_accepted_operation_hashes_are_compatible(fake, users
     assert confirm(client, draft, body).json() == response.json()
 
 
+@pytest.mark.parametrize('resolve_import', [False, True])
+def test_import_review_keeps_the_client_projection_and_retries_same_plan(fake, users, monkeypatch, resolve_import):
+    from app import import_route_matching
+    from app.pdf_import import parse_document
+    from app.private_import import interpret
+    from test_pdf_import import synthetic_text_pdf
+
+    client, evidence = fake
+    assert login(client, users).status_code == 200
+    facts = interpret(parse_document(synthetic_text_pdf())).model_dump(mode='json')
+    first = facts['activities'][0]
+    first.update(type='trip', start=f'{DATE}T10:00+01:00', end=f'{DATE}T11:00+01:00', line='20',
+                 trip='0007', from_place='Centre', to_place='End', direction=None, uncertainty=None)
+    facts.update(service_date=DATE.isoformat(), activities=[first], vehicle_duty_changes=[])
+    catalogue_day = {**evidence['days'][DATE], 'source_state': 'available', 'provenance': evidence['provenance']}
+    monkeypatch.setattr(import_route_matching.route_catalogue, 'lookup', lambda *_: catalogue_day)
+    response, _ = save(client, facts)
+    assert response.status_code == 200
+    draft = response.json()
+    assert draft['draft']['activities'][0]['direction'] is None
+    routes = inspect_state(client, draft)
+    assert routes['route_revision'] == 1
+    if resolve_import:
+        _, path, _ = paths(draft)
+        resolved = client.post(path + '/resolve', params={'revision': draft['revision']}, headers=headers(client), json={})
+        assert resolved.status_code == 200
+        routes = resolved.json()
+    receipt, command = review(client, draft, routes['route_revision'])
+    assert receipt.status_code == 200
+    assert receipt.json()['draft']['activities'][0]['direction'] == ('Utgående' if resolve_import else None)
+    assert len(receipt.json()['unknowns']) == (0 if resolve_import else 1)
+    command['expected_route_revision'] = routes['route_revision']
+    first = confirm(client, draft, command)
+    assert first.status_code == 200
+    assert confirm(client, draft, command).json() == first.json()
+    assert len(client.get('/workdays').json()['workdays']) == 1
+    refs = client.get(f"/workdays/{first.json()['id']}/route-references").json()['references']
+    assert [(r['journey_id'], r['start_position'], r['end_position']) for r in refs] == [(JOURNEY, 2, 4)]
+
+
 def test_road_snapshot_follows_owner_and_exact_frozen_route(fake, users, monkeypatch, tmp_path):
     client, _ = fake
     assert login(client, users).status_code == 200

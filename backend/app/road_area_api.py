@@ -1,4 +1,4 @@
-"""An authenticated lookup for a manually selected road area."""
+"""Authenticated, dated lookups for the Tromsø road network."""
 
 from datetime import datetime, time, timedelta
 import gzip
@@ -11,11 +11,71 @@ from fastapi.responses import JSONResponse, Response
 
 from . import draft_storage, road_situation_source
 from .private_storage import database
-from .road_area_catalogue import OSLO
+from .road_area_catalogue import AREAS, OSLO
 
 
 router = APIRouter(prefix='/road-areas')
-Area = Literal['kvaloya', 'tromsoya', 'fastlandet']
+Area = Literal['kvaloya', 'tromsoya', 'fastlandet', 'pilot']
+
+
+def area_rows(conn, area, day, columns):
+    if area != 'pilot':
+        return conn.execute(
+            f'''SELECT {columns} FROM public_road_area_versions WHERE effective_date=%s AND area_id=%s
+                ORDER BY observed_at DESC, checked_at DESC LIMIT 1''', (day, area),
+        ).fetchall()
+    return conn.execute(
+        f'''WITH publication AS (
+                SELECT observed_at, checked_at, revision FROM public_road_area_versions
+                WHERE effective_date=%s AND area_id=ANY(%s)
+                GROUP BY observed_at, checked_at, revision HAVING count(*)=%s
+                ORDER BY observed_at DESC, checked_at DESC LIMIT 1
+            )
+            SELECT {columns} FROM public_road_area_versions
+            JOIN publication USING (observed_at, checked_at, revision)
+            WHERE effective_date=%s AND area_id=ANY(%s) ORDER BY area_id''',
+        (day, list(AREAS), len(AREAS), day, list(AREAS)),
+    ).fetchall()
+
+
+def joint_values(items, name):
+    return sorted({value for item in items for value in (item.get(name) or ())})
+
+
+def joint_bounds(bounds):
+    if not all(bounds):
+        return None
+    return [min(box[0] for box in bounds), min(box[1] for box in bounds),
+            max(box[2] for box in bounds), max(box[3] for box in bounds)]
+
+
+def pilot_row(rows):
+    if len(rows) != len(AREAS):
+        return None
+    manifests = [row['manifest'] for row in rows]
+    first = manifests[0]
+    for name in ('retrievedAt', 'checkedAt', 'validFrom', 'validUntil', 'profile', 'uncertaintyM'):
+        if any(item.get(name) != first.get(name) for item in manifests):
+            return None
+    edges = {}
+    for manifest in manifests:
+        for edge in manifest['packages'][0]['edges']:
+            if edges.setdefault(edge['id'], edge) != edge:
+                return None
+    if not edges or len(edges) > 20_000 or sum(len(edge['shape']) for edge in edges.values()) > 350_000:
+        return None
+    revision = rows[0]['revision']
+    combined = {
+        **first, 'id': 'pilot',
+        'roadNumbers': joint_values(manifests, 'roadNumbers') if all(item.get('roadNumbers') is not None for item in manifests) else None,
+        'situationBounds': joint_bounds([item.get('situationBounds') for item in manifests]),
+        'registeredInteriors': any(item.get('registeredInteriors') for item in manifests),
+        'packages': [{'id': 'pilot', 'revision': revision, 'edges': list(edges.values())}],
+    }
+    if any('temporaryBoundaries' in manifest for manifest in manifests):
+        combined['temporaryBoundaries'] = joint_values(manifests, 'temporaryBoundaries')
+    return {**rows[0], 'manifest': combined}
+
 
 
 def relevant_situations(conn, area_bounds, roads, now):
@@ -45,12 +105,8 @@ def road_area(area: Area, request: Request):
     day = now.date()
     with database() as conn:
         draft_storage.authorized(conn, request)
-        row = conn.execute(
-            '''SELECT revision, manifest, source->'review'->'limits' AS review FROM public_road_area_versions
-               WHERE area_id = %s AND effective_date = %s
-               ORDER BY observed_at DESC, checked_at DESC LIMIT 1''',
-            (area, day),
-        ).fetchone()
+        rows = area_rows(conn, area, day, "revision, manifest, source->'review'->'limits' AS review")
+        row = pilot_row(rows) if area == 'pilot' else next(iter(rows), None)
         if row is None:
             return {'status': 'road-unqualified'}
         current_situations, lease, upcoming = relevant_situations(
@@ -118,15 +174,16 @@ def road_area_revision(area: Area, request: Request):
     now = datetime.now(OSLO)
     with database() as conn:
         draft_storage.authorized(conn, request)
-        row = conn.execute(
-            '''SELECT revision, manifest->'roadNumbers' AS roads, manifest->'temporaryBoundaries' AS boundaries,
-                      manifest->'registeredInteriors' AS registered, manifest->'situationBounds' AS extent,
-                      jsonb_typeof(source->'review'->'limits') = 'object' AS reviewed
-               FROM public_road_area_versions
-               WHERE area_id = %s AND effective_date = %s
-               ORDER BY observed_at DESC, checked_at DESC LIMIT 1''',
-            (area, now.date()),
-        ).fetchone()
+        rows = area_rows(conn, area, now.date(),
+                         """revision, manifest->'roadNumbers' AS roads, manifest->'temporaryBoundaries' AS boundaries,
+                            manifest->'registeredInteriors' AS registered, manifest->'situationBounds' AS extent,
+                            jsonb_typeof(source->'review'->'limits') = 'object' AS reviewed""")
+        row = next(iter(rows), None)
+        if area == 'pilot' and len(rows) == len(AREAS):
+            row = {**rows[0], 'roads': joint_values(rows, 'roads') if all(item['roads'] is not None for item in rows) else None,
+                   'boundaries': joint_values(rows, 'boundaries') if any(item['boundaries'] is not None for item in rows) else None,
+                   'extent': joint_bounds([item['extent'] for item in rows]),
+                   'registered': any(item['registered'] for item in rows)}
         if row is None:
             return {'revision': None}
         events, lease, upcoming = relevant_situations(conn, row['extent'], row['roads'], now)

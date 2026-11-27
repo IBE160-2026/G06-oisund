@@ -190,14 +190,14 @@ test('current uncertainty and located neutral markers stay separate from histori
   });
   await page.getByRole('button', { name: 'Velg aktivitet 1', exact: true }).click();
   await expect(selected(page)).toContainText('Gjeldende usikkerhet: Gjeldende notat.');
-  await expect(selected(page)).toContainText('Kildemerke: A (side 1).');
+  await expect(selected(page)).not.toContainText('Kildemerke: A (side 1).');
   await expect(selected(page)).not.toContainText('Kildemerke: U');
   await expect(selected(page)).not.toContainText('Endested mangler');
   await expect(fact(page, 'Til')).toHaveText('Rettet bekreftet sted');
   await dayScreen(page);
   await expect(page.getByRole('region', { name: 'Dagsoversikt', exact: true })).toContainText('Opprinnelig kildeusikkerhet');
   await expect(page.getByRole('region', { name: 'Dagsoversikt', exact: true })).toContainText('Endested mangler');
-  await expect(page.getByRole('region', { name: 'Dagsoversikt', exact: true })).toContainText('Kildemerke: U (side 1).');
+  await expect(page.getByRole('region', { name: 'Dagsoversikt', exact: true })).not.toContainText('Kildemerke: U (side 1).');
 });
 
 test('uploaded synthetic document passes separate interpretation editor confirmation day and activity screens', async ({ page, context }) => {

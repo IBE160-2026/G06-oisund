@@ -88,6 +88,45 @@ def test_area_uses_only_current_oslo_date_and_latest_observation(clocked_area, u
             conn.execute('DELETE FROM public_road_area_versions WHERE revision=ANY(%s)', (revisions,))
 
 
+def test_pilot_chooses_a_coherent_publication_and_connects_area_edges(clocked_area, users, monkeypatch):
+    from app import road_area_api
+    from app.road_area_catalogue import AREAS
+
+    monkeypatch.setattr(road_area_api, 'relevant_situations', lambda *_: ([], None, None))
+    client, now = clocked_area
+    day = now.date()
+    def edge(number):
+        return {'id': str(number), 'kmh': None, 'shape': [[18.9, 69.6], [19, 69.6]],
+                'successors': [str(number + 1)] if number < 4 else []}
+
+    assert client.get('/road-areas/pilot').status_code == 401
+    assert login(client, users).status_code == 200
+    assert client.get('/road-areas/pilot').json() == {'status': 'road-unqualified'}
+    revisions = [uuid4().hex * 2 for _ in range(2)]
+    try:
+        for index, revision in enumerate(revisions):
+            observed = now - timedelta(minutes=2 - index)
+            source = {'sha256': revision, 'revision': revision}
+            batch = {area: {'id': area, 'profile': 'NVDB-AREA-1', 'revision': revision, 'path': [],
+                            'packages': [{'edges': [edge(number), edge(number + 1)]}]}
+                     for number, area in enumerate(AREAS, 1)}
+            if index == 1:
+                batch.pop('kvaloya')
+            publish(day, observed, observed, source, batch)
+        result = client.get('/road-areas/pilot').json()
+        assert result['status'] == 'qualified'
+        manifest = result['manifest']
+        assert manifest['revision'] == revisions[0]
+        assert len(manifest['packages']) == 1
+        actual = {e['id']: e for e in manifest['packages'][0]['edges']}
+        assert actual == {str(number): edge(number) for number in range(1, 5)}
+        assert client.get('/road-areas/pilot/revision').json() == {'revision': revisions[0]}
+        assert client.get('/road-areas/fastlandet/revision').json() == {'revision': revisions[1]}
+    finally:
+        with database() as conn:
+            conn.execute('DELETE FROM public_road_area_versions WHERE revision=ANY(%s)', (revisions,))
+
+
 def test_only_exact_direction_and_reviewed_limit_is_published():
     now = datetime(2026, 11, 30, 10, tzinfo=UTC)
     day = now.date()

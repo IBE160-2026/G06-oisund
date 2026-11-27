@@ -15,6 +15,10 @@ from .private_storage import database
 
 MAX_DECISIONS = 2000
 MAX_RANGES = 20
+# Actual decision revisions are capped at MAX_DECISIONS. This disjoint range
+# lets clients that resolve imports request the projected review without
+# changing the response expected by an already open, pre-Entur client.
+REVIEW_PROJECTION = 10_000
 ROUTE_CHANGED = 'Rutevalget er endret. Last inn og gjennomgå den lagrede versjonen.'
 Position = Annotated[int, Field(ge=1, le=120, strict=True)]
 JourneyID = Annotated[str, Field(pattern=r'^TRO:ServiceJourney:[A-Za-z0-9_./-]{1,200}$')]
@@ -269,6 +273,8 @@ def resolve_draft(request, identifier, revision):
         require_current(draft, revision, mutable=True)
         resolve_imported(conn, draft)
         result = state(conn, draft, now_for(conn))
+        if draft['content'].get('import_metadata'):
+            result['route_revision'] += REVIEW_PROJECTION
         draft_storage.owned(conn, owner, identifier, request)
         return result
 

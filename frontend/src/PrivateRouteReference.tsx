@@ -1,6 +1,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { privateNow } from './privateClock';
 import type { Saved } from './PrivateDrafts';
+import { activityFactMissing } from './draftInterpretation';
 
 type Request = (path: string) => Promise<any>;
 type Mutation = (path: string, body: object) => Promise<any>;
@@ -33,20 +34,36 @@ const importOutcomes = {
   'trip-not-found': 'Turnummeret finnes ikke i den daterte katalogen. Kontroller turnummeret eller velg avgang.',
   ambiguous: 'Flere Entur-avganger eller delstrekninger passer. Velg den riktige avgangen.',
 } as const;
-type Match = { activity_id: string } & (
+export type ImportRouteMatch = { activity_id: string } & (
   { outcome: keyof typeof importOutcomes } |
   { outcome: 'matched'; direction: string; destination: string; journey_id: string; start_position: number; end_position: number }
 );
-type DraftRoutes = { draft_id: string; draft_revision: number; route_revision: number; references: Reference[]; outdated: Reference[]; import_matches?: Match[] };
+export type DraftRoutes = { draft_id: string; draft_revision: number; route_revision: number; references: Reference[]; outdated: Reference[]; import_matches?: ImportRouteMatch[] };
 
-export function ImportRouteMatches({ content, matches }: { content: Saved['draft']; matches?: Match[] }) {
+export function routeMatchDescription(match: ImportRouteMatch, directionOverride?: string | null) {
+  if (match.outcome !== 'matched') return importOutcomes[match.outcome];
+  return [activityFactMissing(directionOverride) ? match.direction : directionOverride, match.destination,
+    `stopp ${match.start_position}–${match.end_position}`].filter(Boolean).join(' · ');
+}
+
+export function validImportMatches(value: unknown, content: Saved['draft']): value is ImportRouteMatch[] {
+  return Array.isArray(value) && value.length <= content.activities.length
+    && new Set(value.map(match => match?.activity_id)).size === value.length
+    && value.every(match => content.activities.some(row => row.id === match?.activity_id && row.type === 'trip')
+      && (Object.hasOwn(importOutcomes, match.outcome)
+        || match.outcome === 'matched' && typeof match.direction === 'string' && typeof match.destination === 'string'
+        && typeof match.journey_id === 'string' && /^TRO:ServiceJourney:[A-Za-z0-9_./-]{1,200}$/.test(match.journey_id)
+        && Number.isSafeInteger(match.start_position) && match.start_position >= 1
+        && Number.isSafeInteger(match.end_position) && match.end_position > match.start_position && match.end_position <= 120));
+}
+
+export function ImportRouteMatches({ content, matches }: { content: Saved['draft']; matches?: ImportRouteMatch[] }) {
   if (!matches?.length) return null;
   return <ul aria-label="Entur-treff for passasjerturer">{matches.map(match => {
-    const activity = content.activities.find(row => row.id === match.activity_id);
-    if (!activity) return null;
-    return <li key={match.activity_id}>Linje {activity.line ?? 'ukjent'} · tur {activity.trip ?? 'ukjent'} · {match.outcome === 'matched'
-      ? `${match.direction} · ${match.destination} · stopp ${match.start_position}–${match.end_position}`
-      : importOutcomes[match.outcome]}</li>;
+    const index = content.activities.findIndex(row => row.id === match.activity_id);
+    if (index < 0) return null;
+    const activity = content.activities[index];
+    return <li key={match.activity_id}>Aktivitet {index + 1} · linje {activity.line ?? 'ukjent'} · tur {activity.trip ?? 'ukjent'} · {routeMatchDescription(match, activity.direction)}</li>;
   })}</ul>;
 }
 
@@ -54,12 +71,25 @@ export function withRouteDirections(content: Saved['draft'], references: Referen
   const byActivity = new Map(references.map(reference => [reference.activity_id, reference]));
   return { ...content, activities: content.activities.map(activity => {
     const reference = byActivity.get(activity.id);
-    if (!reference || reference.status === 'incompatible' || activity.direction?.trim()) return activity;
+    if (!reference || reference.status === 'incompatible' || !activityFactMissing(activity.direction)) return activity;
     const choice = reference.field_decisions.direction;
-    const value = choice.mode === 'source' ? direction(reference.direction) : choice.mode === 'manual' ? choice.manual?.slice(0, 100) : null;
+    const value = choice.mode === 'source' ? direction(reference.direction) : choice.mode === 'manual' ? Array.from(choice.manual ?? '').slice(0, 100).join('') : null;
     return value ? { ...activity, direction: value } : activity;
   }) };
 }
+export function savedImportMatches(content: Saved['draft'], routes: DraftRoutes): ImportRouteMatch[] {
+  const activities = withRouteDirections(content, routes.references).activities;
+  const matches = [...(routes.import_matches ?? [])];
+  for (const ref of routes.references) {
+    const activity = activities.find(row => row.id === ref.activity_id && row.type === 'trip');
+    if (!activity?.direction || ref.status === 'incompatible') continue;
+    const destination = referenceDestination(ref) ?? '';
+    matches.push({ activity_id: ref.activity_id, outcome: 'matched', direction: activity.direction, destination,
+      journey_id: ref.journey_id, start_position: ref.start_position, end_position: ref.end_position });
+  }
+  return matches;
+}
+
 type Summary = Pick<Journey, 'journey_id' | 'pattern_id' | 'direction' | 'headsign'> & {
   start: Time; end: Time; from_name: string; to_name: string; matching_ranges: number[][]; ranges_truncated: boolean;
 };
@@ -128,6 +158,8 @@ export async function readDraftRoutes(request: Request, draft: Saved, resolve?: 
     || !Array.isArray(result.references) || result.references.length > 200 || !result.references.every((value: any) =>
       validReference(value) && (value.selection_mode === 'automatic' || value.service_date === draft.draft.service_date)
       && draft.draft.activities.some(a => a.id === value.activity_id))
+    || (result.import_matches !== undefined && (!validImportMatches(result.import_matches, draft.draft)
+      || result.import_matches.some((match: ImportRouteMatch) => result.references.some((ref: Reference) => ref.activity_id === match.activity_id))))
     || !Array.isArray(result.outdated) || result.outdated.length > 200 || !result.outdated.every(validReference)) {
     throw new Error('Invalid draft route response');
   }
@@ -229,8 +261,9 @@ function validateReceipt(value: any, draft: Saved, op: Operation) {
   }
 }
 
-export function DraftRouteReview({ draft, request, mutation, suspended, lock, expired }: {
+export function DraftRouteReview({ draft, request, mutation, suspended, lock, expired, routesChanged }: {
   draft: Saved; request: Request; mutation: Mutation; suspended: boolean; lock: (value: boolean) => void; expired: () => void;
+  routesChanged?: (routes: DraftRoutes) => void;
 }) {
   const [activityId, setActivityId] = useState('');
   const [lineCode, setLineCode] = useState('26');
@@ -302,7 +335,7 @@ export function DraftRouteReview({ draft, request, mutation, suspended, lock, ex
           || !(snapshot.provenance === null || validProvenance(snapshot.provenance))) throw new Error('Invalid route snapshot');
       }
       if (!active.current || generation !== epoch.current) return;
-      setRoutes(state);
+      setRoutes(state); routesChanged?.(state);
       if (search) { setOverview(snapshot); setJourney(null); setRange({ start: 0, end: 0 }); }
       setMessage(search ? 'Ruteoppslaget er oppdatert.' : 'Gjeldende lagrede rutevalg er hentet.');
     } catch (error) { if (active.current && generation === epoch.current) failure(error); }
@@ -348,7 +381,7 @@ export function DraftRouteReview({ draft, request, mutation, suspended, lock, ex
           if (lookupOnly) { setMessage('Forsøket er uavklart. Prøv samme lagring igjen.'); return; }
           const current = await readDraftRoutes(request, draft);
           if (current.route_revision !== op.expected_route_revision) {
-            setRoutes(current); setPending(null);
+            setRoutes(current); routesChanged?.(current); setPending(null);
             setMessage('Et annet rutevalg ble lagret. Sammenlign med gjeldende valg før du lagrer på nytt.');
             return;
           }
@@ -368,7 +401,7 @@ export function DraftRouteReview({ draft, request, mutation, suspended, lock, ex
       const current = await readDraftRoutes(request, draft);
       if (!active.current || generation !== epoch.current) return;
       if (current.route_revision < receipt.result.route_revision) throw new Error('Invalid current revision');
-      setRoutes(current); setPending(null);
+      setRoutes(current); routesChanged?.(current); setPending(null);
       setMessage(current.route_revision > receipt.result.route_revision ? 'Lagringen er bekreftet. En nyere ruteversjon er hentet.' :
         op.selection ? 'Rutevalget er lagret.' : 'Rutevalget er fjernet.');
     } catch (error: any) {
@@ -470,33 +503,46 @@ export function DraftRouteReview({ draft, request, mutation, suspended, lock, ex
   </details>;
 }
 
-export function FrozenRouteReference({ workdayId, activityId, expiresAt, serviceDate, request, expired, available }: {
-  workdayId: string; activityId: string; expiresAt: string; serviceDate: string | null;
+export function referenceDestination(reference: Reference): string | null {
+  if (reference.status === 'incompatible') return null;
+  const choice = reference.field_decisions.destination;
+  if (choice.mode === 'source') return reference.calls[reference.start_position - 1].headsign || reference.headsign || null;
+  return choice.mode === 'manual' ? choice.manual ?? null : null;
+}
+
+export function useFrozenRouteReferences({ workdayId, expiresAt, serviceDate, request, expired, available }: {
+  workdayId: string; expiresAt: string; serviceDate: string | null;
   request: Request; expired: () => void; available: boolean;
 }) {
-  const [reference, setReference] = useState<Reference | null>(null);
+  const [references, setReferences] = useState<Reference[]>([]);
   const [failed, setFailed] = useState(false);
-  const [retry, setRetry] = useState(0);
+  const [attempt, setAttempt] = useState(0);
   useEffect(() => {
-    setReference(null); setFailed(false);
+    setReferences([]); setFailed(false);
     if (!available || !routeDate(serviceDate)) return;
     let current = true;
     const deadline = Date.parse(expiresAt);
-    const timer = window.setTimeout(() => { if (current) setReference(null); }, Math.max(0, deadline - privateNow()));
+    const timer = window.setTimeout(() => { if (current) setReferences([]); }, Math.max(0, deadline - privateNow()));
     void request('/workdays/' + workdayId + '/route-references').then(value => {
       if (!current || deadline <= privateNow()) return;
-      if (!value || value.workday_id !== workdayId || !Array.isArray(value.references) || !value.references.every(validReference))
+      if (!value || value.workday_id !== workdayId || !Array.isArray(value.references) || value.references.length > 200
+          || !value.references.every(validReference)
+          || new Set(value.references.map((entry: Reference) => entry.activity_id)).size !== value.references.length)
         throw new Error('Invalid frozen routes');
-      setReference(value.references.find((entry: Reference) => entry.activity_id === activityId && (entry.selection_mode === 'automatic' || entry.service_date === serviceDate)) ?? null);
+      setReferences(value.references.filter((entry: Reference) => entry.selection_mode === 'automatic' || entry.service_date === serviceDate));
     }).catch(error => {
       if (!current) return;
       if (error?.status === 401) expired();
       else setFailed(true);
     });
     return () => { current = false; clearTimeout(timer); };
-  }, [workdayId, activityId, serviceDate, expiresAt, available, retry]);
-  if (!available || Date.parse(expiresAt) <= privateNow()) return null;
-  if (failed) return <p>Kunne ikke hente rutereferansen. <button onClick={() => setRetry(value => value + 1)}>Prøv igjen</button></p>;
+  }, [workdayId, serviceDate, expiresAt, available, attempt]);
+  return { references: available && Date.parse(expiresAt) > privateNow() ? references : [], failed,
+    retry: () => setAttempt(value => value + 1) };
+}
+
+export function FrozenRouteReference({ reference, failed, retry }: { reference?: Reference; failed: boolean; retry: () => void }) {
+  if (failed) return <p>Kunne ikke hente rutereferansen. <button onClick={retry}>Prøv igjen</button></p>;
   return reference && <section aria-label="Rutereferanse fra bekreftelsen">
     <h4>Planlagt rutereferanse fra bekreftelsen</h4><ReferenceDetails reference={reference} />
   </section>;

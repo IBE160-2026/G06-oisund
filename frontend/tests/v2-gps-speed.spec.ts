@@ -74,13 +74,14 @@ async function stubRoad(page: Page, reply: () => RoadReply | Promise<RoadReply>,
   }));
 }
 
-test('standalone GPS shares one watch with the explicit area and clears on exit or access loss', async ({ page }) => {
+test('standalone GPS shares one watch across the pilot network and clears on exit or access loss', async ({ page }) => {
   await page.clock.install();
   await syntheticPosition(page);
   const requests: string[] = [];
   page.on('request', request => requests.push(request.url() + (request.postData() ?? '')));
   let sessionUnavailable = false;
   let revision = '1';
+  let roadAvailable = false;
   await page.route('**/auth/session', route => sessionUnavailable ? route.abort() : route.continue());
   await page.route('**/road-areas/*', async route => {
     const id = new URL(route.request().url()).pathname.split('/').at(-1);
@@ -90,7 +91,7 @@ test('standalone GPS shares one watch with the explicit area and clears on exit 
       packages: base.packages.map(pack => ({ ...pack, edges: pack.edges.map(edge => ({ ...edge, kmh: null })) })),
     };
     await route.fulfill({
-      json: id === 'kvaloya' ? { status: 'road-unqualified' } : { status: 'qualified', manifest, confirmed: 0 },
+      json: !roadAvailable ? { status: 'road-unqualified' } : { status: 'qualified', manifest, confirmed: 0 },
       headers: { 'Access-Control-Allow-Origin': new URL(page.url()).origin, 'Access-Control-Allow-Credentials': 'true' },
     });
   });
@@ -111,17 +112,17 @@ test('standalone GPS shares one watch with the explicit area and clears on exit 
   const active = () => page.evaluate(() => window.v2SyntheticPosition.count());
   const watched = () => page.evaluate(() => window.v2SyntheticPosition.watches());
   await open.click();
-  await expect(panel.getByLabel('Vegområde')).toBeVisible();
+  await expect(panel.getByLabel('Vegområde', { exact: true })).toHaveCount(0);
+  await expect(panel.getByText('Vegmatching følger posisjonen', { exact: false })).toBeVisible();
   expect(await watched()).toBe(0);
   expect(requests.filter(url => url.includes('/road-areas/'))).toHaveLength(0);
   await panel.getByRole('button', { name: 'Start fartsmåling' }).click();
   await expect.poll(active).toBe(1);
-  await panel.getByLabel('Vegområde').selectOption('kvaloya');
   await panel.getByRole('button', { name: 'Start vegmatching' }).click();
-  await expect(panel.getByText('Veggrunnlag mangler for valgt område og dato.')).toBeVisible();
-  await panel.getByLabel('Vegområde').selectOption('tromsoya');
+  await expect(panel.getByText('Veggrunnlag mangler for Tromsø bybuss på dagens dato.')).toBeVisible();
+  roadAvailable = true;
   await panel.getByRole('button', { name: 'Start vegmatching' }).click();
-  await expect(panel.getByText('Ingen fartsgrenser er bekreftet for området i dette uttaket.')).toBeVisible();
+  await expect(panel.getByText('Ingen fartsgrenser er bekreftet i dette uttaket.')).toBeVisible();
   expect(await watched()).toBe(1);
   await page.evaluate(() => window.v2SyntheticPosition.fix(10));
   await page.clock.fastForward(1_000);
@@ -131,11 +132,9 @@ test('standalone GPS shares one watch with the explicit area and clears on exit 
     await page.clock.runFor(7_000);
     await page.evaluate(() => window.v2SyntheticPosition.fix(10));
   }
-  await expect.poll(() => requests.filter(url => url.endsWith('/road-areas/tromsoya')).length).toBe(2);
+  await expect.poll(() => requests.filter(url => url.endsWith('/road-areas/pilot')).length).toBe(3);
   await expect(panel.getByRole('button', { name: 'Stopp vegmatching' })).toBeVisible();
   expect(await active()).toBe(1);
-  await panel.getByLabel('Vegområde').selectOption('fastlandet');
-  await expect(panel.getByRole('button', { name: 'Start vegmatching' })).toBeVisible();
   expect(await active()).toBe(1);
   await back.click();
   await expect.poll(active).toBe(0);
@@ -157,7 +156,7 @@ test('standalone GPS shares one watch with the explicit area and clears on exit 
   await expect(panel.getByRole('button', { name: 'Start fartsmåling' })).toBeVisible();
   expect(await active()).toBe(0);
   expect(requests.filter(url => url.includes('/road-areas/')).map(url => new URL(url).pathname))
-    .toEqual(['/road-areas/kvaloya', '/road-areas/tromsoya', '/road-areas/tromsoya/revision', '/road-areas/tromsoya']);
+    .toEqual(['/road-areas/pilot', '/road-areas/pilot', '/road-areas/pilot/revision', '/road-areas/pilot']);
   expect(requests.some(value => value.includes('68.123456') || value.includes('18.654321'))).toBe(false);
 });
 

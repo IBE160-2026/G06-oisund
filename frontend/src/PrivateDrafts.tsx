@@ -3,9 +3,9 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { recoverOperation } from './recoverOperation';
 import { PrivateTimeInput } from './PrivateTimeInput';
 import { PrivateConfirmation } from './PrivateConfirmation';
-import { DraftRouteReview } from './PrivateRouteReference';
+import { DraftRouteReview, readDraftRoutes, routeMatchDescription, savedImportMatches, type ImportRouteMatch } from './PrivateRouteReference';
 import { PrivateImport, SourceFacts, validMetadata, type ImportMetadata } from './PrivateImport';
-import { dutyChanges, effectiveDuty, dutySuffix, importIssues, originalActivity, sameFact, currentUnknowns, currentUncertainty, displayFact, sourceMarkers, type DutyChange } from './draftInterpretation';
+import { dutyChanges, effectiveDuty, dutySuffix, importIssues, originalActivity, sameFact, currentUnknowns, currentUncertainty, displayFact, type DutyChange } from './draftInterpretation';
 import { normalizeBus, busError } from './busValue';
 
 type Activity = { id: string } & Record<string, string | null>;
@@ -61,16 +61,19 @@ function validSummary(value: any): value is Summary {
     && Date.parse(value.expires_at) - Date.parse(value.created_at) === 7 * 86400000;
 }
 
-function ActivityComparison({ content, activity, index, unresolved }: { content: Content; activity: Activity; index: number; unresolved: { start: boolean; end: boolean } }) {
+function ActivityComparison({ content, activity, index, match, unresolved }: { content: Content; activity: Activity; index: number; match?: ImportRouteMatch; unresolved: { start: boolean; end: boolean } }) {
   const original = originalActivity(content, activity.id);
   const pending = (field: string) => field === 'start' ? unresolved.start : field === 'end' ? unresolved.end : false;
-  const unknowns = currentUnknowns(activity).filter(label => !(label === 'start' && unresolved.start) && !(label === 'slutt' && unresolved.end));
+  const unknowns = currentUnknowns(match?.outcome === 'matched' ? { ...activity, direction: match.direction } : activity).filter(label => !(label === 'start' && unresolved.start) && !(label === 'slutt' && unresolved.end));
   const compared = fields.filter(([key]) => original && key in original);
   const changed = compared.some(([key]) => !pending(key) && !sameFact(key, activity[key], original![key]));
   return <>
     <p className="activity-origin">{original ? 'Fra PDF · opprinnelig tolkning bevart' : 'Manuell aktivitet · ingen opprinnelig tolkning'}</p>
     {(unresolved.start || unresolved.end) && <p className="pending-time">Inntastet {unresolved.start && unresolved.end ? 'start og slutt' : unresolved.start ? 'start' : 'slutt'} er uavklart. Kontroller dato og klokkeslett. Inndata er beholdt.</p>}
     {unknowns.length > 0 && <p className="current-unknown">Gjeldende ukjente fakta: {unknowns.join(', ')}. Tomme steder betyr ukjent. Utkastet er ikke bekreftet.</p>}
+    {match && <p className={match.outcome === 'matched' ? 'draft-entur-match' : 'current-unknown'}>
+      {match.outcome === 'matched' ? 'Entur · ' : 'Kontroller tur ' + (activity.trip || 'uten turnummer') + ' · '}{routeMatchDescription(match, activity.direction)}
+    </p>}
     {changed && <p className="correction-marker">Manuelt rettet fra opprinnelig tolkning. Åpne sammenligningen for feltverdier.</p>}
     {original && <details className="activity-comparison"><summary>Opprinnelig og gjeldende · aktivitet {index + 1}</summary><dl>{compared.map(([key, label]) => <div className="comparison-fact" key={key}><dt>{label}{!pending(key) && !sameFact(key, activity[key], original[key]) && <span className="correction-marker"> · Manuelt rettet</span>}</dt><dd>Opprinnelig: {displayFact(key, original[key]) ?? 'Ukjent'}</dd><dd>Gjeldende: {pending(key) ? 'Inntastet tidspunkt er uavklart; inndata er beholdt.' : displayFact(key, activity[key]) ?? 'Ukjent'}</dd></div>)}</dl><p>Retning, usikkerhetsnotat og kilde / manuell rettelse har ikke eget sammenligningsgrunnlag. Notater kan komme fra importen eller være manuelt skrevet.</p></details>}
   </>;
@@ -91,6 +94,30 @@ export function PrivateDrafts({ upload, request, mutation, dirtyChanged, setting
   const [nextCursor, setNextCursor] = useState<string | null>(null);
   const [saved, setSaved] = useState<Saved | null>(null);
   const [content, setContent] = useState<Content>(empty);
+  const [routePreview, setRoutePreview] = useState<{ source: Content; matches: ImportRouteMatch[] }>();
+  const [routePreviewError, setRoutePreviewError] = useState(false);
+  const [routePreviewRetry, setRoutePreviewRetry] = useState(0);
+  const routeAccess = useRef({ request, mutation });
+  useLayoutEffect(() => { routeAccess.current = { request, mutation }; }, [request, mutation]);
+  useEffect(() => {
+    if (!saved?.draft.import_metadata || screen !== 'editor' || suspended || !workspaceVisible) return;
+    let current = true;
+    setRoutePreviewError(false);
+    const { request, mutation } = routeAccess.current;
+    void readDraftRoutes(request, saved, mutation).then(routes => {
+      if (current) setRoutePreview({ source: saved.draft, matches: savedImportMatches(saved.draft, routes) });
+    }).catch(error => { if (current && error?.status !== 409) setRoutePreviewError(true); });
+    return () => { current = false; };
+  }, [saved, screen, suspended, workspaceVisible, routePreviewRetry]);
+
+  function previewMatch(activity: Activity): ImportRouteMatch | undefined {
+    if (content.service_date !== routePreview?.source.service_date) return;
+    const original = routePreview?.source.activities.find(row => row.id === activity.id);
+    const keys = ['type', 'line', 'trip', 'from_place', 'to_place', 'start', 'end', 'direction'];
+    if (original && keys.every(key => sameFact(key, activity[key], original[key]))) {
+      return routePreview?.matches.find(match => match.activity_id === activity.id);
+    }
+  }
   const [pending, setPending] = useState<Pending | null>(null);
   const [saveUnavailable, setSaveUnavailable] = useState(false);
   const [pendingDelete, setPendingDelete] = useState<PendingDelete | null>(null);
@@ -401,7 +428,7 @@ export function PrivateDrafts({ upload, request, mutation, dirtyChanged, setting
     <nav className="private-screen-nav" aria-label="Plan og forberedelse"><button disabled={confirmationLocked || routeLocked || !!pending || !!pendingDelete || busy || suspended} aria-current={screen === 'upload' ? 'page' : undefined} onClick={() => { continueAfterSave.current = false; setScreen('upload'); setRegistryNavigation(v => v + 1); }}>Forberedelse og planlister</button><button disabled={confirmationLocked || routeLocked || !!pending || !!pendingDelete || busy || suspended} aria-current={screen === 'editor' ? 'page' : undefined} onClick={() => { continueAfterSave.current = false; setScreen('editor'); setRegistryNavigation(v => v + 1); }}>Kontroller og rediger utkast</button><button hidden={screen === 'plan'} disabled={!saved || dirty || entryLocked || !!comparison || confirmationLocked} aria-current={screen === 'approval' ? 'page' : undefined} onClick={showApproval}>Til godkjenning</button>{hasPlan && <button disabled={confirmationLocked || routeLocked || !!pending || !!pendingDelete || busy || suspended} aria-current={screen === 'plan' ? 'page' : undefined} onClick={() => { setScreen('plan'); setRegistryNavigation(v => v + 1); }}>Til den åpne planen</button>}</nav>
     <div hidden={registryOpen || screen !== 'upload'}><h2 ref={preparationTitle} tabIndex={-1}>Mine utkast</h2></div>
     <p hidden={registryOpen || screen !== 'upload'} role="status" aria-live="polite" className="status">{screen === 'upload' ? message : null}</p><fieldset hidden={registryOpen} className="confirmation-editor" disabled={confirmationLocked}>
-    <div hidden={screen !== 'upload' && screen !== 'import'}><PrivateImport settingsBlocked={setImportBlocked} stage={screen === 'import' ? 'review' : 'upload'} reviewReady={() => setScreen(current => current === 'upload' ? 'import' : current)} backToUpload={() => setScreen('upload')} upload={upload} suspended={suspended} locked={entryLocked || !!comparison} expired={expired} adopt={(value, intent) => { if (dirty && !window.confirm('Ulagrede endringer går tapt. Bruke importen som et separat nytt utkast?')) return false; resetTimes(); setSourceEpoch(current => current + 1); setSaved(null); setContent(value); setComparison(null); setSaveUnavailable(false); setMessage('Importen er et separat, ulagret utkast. Kontroller fakta og lagre uttrykkelig.'); setScreen(intent === 'approve' ? 'direct' : 'editor'); continueAfterSave.current = intent === 'approve'; if (intent === 'approve') void save(value, true); return true; }} /></div>
+    <div hidden={screen !== 'upload' && screen !== 'import'}><PrivateImport settingsBlocked={setImportBlocked} stage={screen === 'import' ? 'review' : 'upload'} reviewReady={() => setScreen(current => current === 'upload' ? 'import' : current)} backToUpload={() => setScreen('upload')} upload={upload} suspended={suspended} locked={entryLocked || !!comparison} expired={expired} adopt={(value, intent, matches) => { if (dirty && !window.confirm('Ulagrede endringer går tapt. Bruke importen som et separat nytt utkast?')) return false; resetTimes(); setSourceEpoch(current => current + 1); setSaved(null); setContent(value); setRoutePreview({ source: value, matches }); setRoutePreviewError(false); setComparison(null); setSaveUnavailable(false); setMessage('Importen er et separat, ulagret utkast. Kontroller fakta og lagre uttrykkelig.'); setScreen(intent === 'approve' ? 'direct' : 'editor'); continueAfterSave.current = intent === 'approve'; if (intent === 'approve') void save(value, true); return true; }} /></div>
     <div hidden={screen !== 'upload'}>
     <p>Utkast slettes sju dager etter opprettelse. Ulagrede endringer finnes bare mens denne siden er åpen.</p>
     <div className="controls"><button disabled={busy || !!pending || !!pendingDelete} onClick={() => { if (!dirty || window.confirm('Ulagrede endringer går tapt. Opprette nytt utkast?')) { resetTimes(); setSaveUnavailable(false); setSaved(null); setContent(empty()); setPending(null); setComparison(null); setMessage('Nytt utkast. Ikke lagret.'); setScreen('editor'); } }}>Nytt utkast</button><button disabled={busy || !!pendingDelete} onClick={() => void refresh()}>Oppdater listen</button></div>
@@ -419,7 +446,8 @@ export function PrivateDrafts({ upload, request, mutation, dirtyChanged, setting
     <div hidden={screen !== 'editor'}><h2 ref={title} tabIndex={-1}>{saved ? 'Rediger utkast' : 'Nytt manuelt utkast'}</h2>
 
     {saved && <p>Utløper {new Date(saved.expires_at).toLocaleString('nb-NO', { timeZone: 'Europe/Oslo' })}. Fristen forlenges ikke.</p>}
-    {content.import_metadata && <details key={'source:' + sourceEpoch} className="source-disclosure"><summary>Vis kildefakta fra PDF</summary><SourceFacts metadata={content.import_metadata} /></details>}
+    {content.import_metadata && <details key={'source:' + sourceEpoch} className="source-disclosure"><summary>Bevarte kildefakta</summary><SourceFacts metadata={content.import_metadata} /></details>}
+    {routePreviewError && <p>Entur-retning kunne ikke hentes. <button type="button" onClick={() => setRoutePreviewRetry(value => value + 1)}>Prøv Entur-oppslaget igjen</button></p>}
     {issues.length > 0 && <section className="import-warning" aria-label="Usikkerheter fra importen"><h3>Kontroller usikkerheter fra importen</h3>
       <p>Historiske varsler fra den opprinnelige tolkningen beholdes også etter manuelle rettelser. Se gjeldende ukjente fakta ved hver aktivitet. Du kan lagre et uferdig utkast; det er ikke bekreftet.</p>
       <ul>{issues.map((issue, index) => {
@@ -440,14 +468,14 @@ export function PrivateDrafts({ upload, request, mutation, dirtyChanged, setting
         {!content.service_date && <p className="current-unknown">Gjeldende ukjent opplysning: tjenestedato.</p>}
         {content.activities.length === 0 && <p className="current-unknown">Ingen aktiviteter. Utkastet er uferdig og ikke bekreftet.</p>}
         {content.activities.map((activity, index) => <fieldset key={activity.id} id={'activity-' + activity.id} tabIndex={-1}><legend>Aktivitet {index + 1}</legend>
-          <ActivityComparison content={content} activity={activity} index={index} unresolved={{ start: !!timeStates[activity.id + ':start']?.unresolved, end: !!timeStates[activity.id + ':end']?.unresolved }} />
+          <ActivityComparison content={content} activity={activity} index={index} match={previewMatch(activity)} unresolved={{ start: !!timeStates[activity.id + ':start']?.unresolved, end: !!timeStates[activity.id + ':end']?.unresolved }} />
           <p>Gjeldende vognløp: {effectiveDuty(content, index) ?? 'ukjent'} · sanntidsverdi {dutySuffix(effectiveDuty(content, index)) ?? 'ukjent'}.</p>
           {changes.some(change => change.from_activity_id === activity.id) ? <div className="duty-change">
             <label>Vognløp fra aktivitet {index + 1}<input maxLength={200} value={changes.find(change => change.from_activity_id === activity.id)?.vehicle_duty ?? ''} onChange={event => setDutyChange(activity.id, boundedText(event.target.value, 100) || null)} /></label>
             <button type="button" onClick={() => setDutyChange(activity.id, undefined)}>Fjern vognløpsbytte fra aktivitet {index + 1}</button>
           </div> : <button type="button" onClick={() => setDutyChange(activity.id, effectiveDuty(content, index))}>Bytt vognløp fra aktivitet {index + 1}</button>}
           <div className="draft-grid">{(['start', 'end'] as const).map(field => <div key={timeEpoch + ':' + field} data-draft-time={activity.id + ':' + field}><PrivateTimeInput label={field === 'start' ? 'Start' : 'Slutt'} value={activity[field]} defaultDate={content.service_date} disabled={entryLocked} resolve={body => mutation('/draft-times/resolve', body)} onValue={value => changeTime(activity.id, field, value)} onState={(dirty, unresolved) => timeState(activity.id, field, dirty, unresolved)} expired={expired} /></div>)}</div>
-          {sourceMarkers(content).filter(marker => marker.activityId === activity.id).map((marker, i) => <p key={'marker-' + i}>{marker.text}</p>)}<div className="draft-grid">{fields.filter(([key]) => key !== 'start' && key !== 'end').map(([key, label]) => <label key={key} className={key === 'uncertainty' && issues.some(issue => issue.activityId === activity.id) ? 'import-warning' : undefined}>{label}<input aria-label={label} aria-describedby={key === 'uncertainty' && issues.some(issue => issue.activityId === activity.id) ? 'uncertainty-source-' + activity.id : undefined} maxLength={2 * textLimit(key)} value={(key === 'uncertainty' ? currentUncertainty(content, activity, false) : displayFact(key, activity[key])) ?? ''} onChange={e => edit({ ...content, activities: content.activities.map(a => a.id === activity.id ? { ...a, [key]: (e.target.value === 'tur' && displayFact(key, a[key]) === 'tur' ? a[key] : key === 'type' && e.target.value === 'tur' ? 'trip' : boundedText(e.target.value, textLimit(key))) || null } : a) })} />{key === 'uncertainty' && issues.some(issue => issue.activityId === activity.id) && <small id={'uncertainty-source-' + activity.id}>Fra importen: {issues.filter(issue => issue.activityId === activity.id).map(issue => issue.text).join(' ')}</small>}</label>)}</div>
+          <div className="draft-grid">{fields.filter(([key]) => key !== 'start' && key !== 'end').map(([key, label]) => <label key={key} className={key === 'uncertainty' && issues.some(issue => issue.activityId === activity.id) ? 'import-warning' : undefined}>{label}<input aria-label={label} aria-describedby={key === 'uncertainty' && issues.some(issue => issue.activityId === activity.id) ? 'uncertainty-source-' + activity.id : undefined} maxLength={2 * textLimit(key)} value={(key === 'uncertainty' ? currentUncertainty(content, activity, false) : displayFact(key, activity[key])) ?? ''} onChange={e => edit({ ...content, activities: content.activities.map(a => a.id === activity.id ? { ...a, [key]: (e.target.value === 'tur' && displayFact(key, a[key]) === 'tur' ? a[key] : key === 'type' && e.target.value === 'tur' ? 'trip' : boundedText(e.target.value, textLimit(key))) || null } : a) })} />{key === 'uncertainty' && issues.some(issue => issue.activityId === activity.id) && <small id={'uncertainty-source-' + activity.id}>Fra importen: {issues.filter(issue => issue.activityId === activity.id).map(issue => issue.text).join(' ')}</small>}</label>)}</div>
           <div className="controls"><button type="button" disabled={index === 0} onClick={() => { const rows = [...content.activities]; [rows[index - 1], rows[index]] = [rows[index], rows[index - 1]]; edit({ ...content, activities: rows }); }}>Flytt opp</button><button type="button" onClick={() => removeActivity(activity)}>Fjern aktivitet {index + 1}</button></div>
         </fieldset>)}
         <button type="button" disabled={content.activities.length >= 200} onClick={() => edit({ ...content, activities: [...content.activities, { id: crypto.randomUUID(), ...Object.fromEntries(fields.map(([key]) => [key, null])) }] })}>Legg til aktivitet</button>
@@ -457,7 +485,8 @@ export function PrivateDrafts({ upload, request, mutation, dirtyChanged, setting
       <p role="status" aria-label="Lagringsstatus">{screen === 'editor' ? message : null}</p><button type="button" disabled={!saved || dirty || entryLocked || !!comparison} onClick={showApproval}>Fortsett til godkjenning</button>
     </form>
     {saved && !dirty && !comparison && !draftExpired && <DraftRouteReview key={saved.id + ':' + saved.revision} draft={saved}
-      request={request} mutation={mutation} suspended={suspended || busy} lock={setRouteLocked} expired={expired} />}
+      request={request} mutation={mutation} suspended={suspended || busy} lock={setRouteLocked} expired={expired}
+      routesChanged={routes => setRoutePreview({ source: saved.draft, matches: savedImportMatches(saved.draft, routes) })} />}
     <div className="controls"><button disabled={busy || !!pending || !!pendingDelete || suspended || routeLocked} onClick={reset}>{saved && !saveUnavailable ? 'Forkast endringer' : 'Tilbakestill utkast'}</button>{saved && <button disabled={entryLocked || !!comparison} onClick={() => void removeDraft()}>Slett utkast</button>}</div>
     {pendingDelete && <div className="controls"><button disabled={busy} onClick={() => void removeDraft()}>Prøv samme slettingsforsøk igjen</button><button disabled={busy} onClick={() => void removeDraft(true)}>Kontroller slettingen</button></div>}
     {pending && <button disabled={busy} onClick={() => void settle()}>Kontroller lagringsforsøket</button>}

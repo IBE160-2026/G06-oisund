@@ -3,7 +3,7 @@ import type { Content } from './PrivateDrafts';
 import { activityChoiceLabel } from './activityChoiceLabel';
 import { PrivateDayOverview } from './PrivateDayOverview';
 import { SelectedActivityDetails } from './SelectedActivityDetails';
-import { FrozenRouteReference } from './PrivateRouteReference';
+import { FrozenRouteReference, referenceDestination, useFrozenRouteReferences } from './PrivateRouteReference';
 import { useWorkdayResource, type ResourceProps } from './useWorkdayResource';
 import { OutcomeEditor, validLifecycle, type Progress } from './PrivateWorkdayProgress';
 import { privateNow } from './privateClock';
@@ -46,6 +46,10 @@ export function PrivateActivitySelection(props: Props) {
   const back = () => { requestedOpen.current = false; returnFocus.current = true; props.backToDay(); };
   const visible = available && props.factsAvailable;
   const selected = (props.progress.terminal ? consulted : null) ?? saved?.activity_id ?? null, index = content.activities.findIndex(a => a.id === selected);
+  const routes = useFrozenRouteReferences({ workdayId: props.id, expiresAt: props.expiresAt, serviceDate: content.service_date,
+    request: props.request, expired: props.expired, available: visible && !props.suspended });
+  const route = routes.references.find(reference => reference.activity_id === selected);
+  const destinations = new Map(routes.references.map(reference => [reference.activity_id, referenceDestination(reference)]));
   const positionVisible = props.positionVisible && !props.suspended && !busy && !pending && !comparison && !rejected;
   async function verifyPositionAccess() {
     const base = '/workdays/' + props.id;
@@ -65,9 +69,9 @@ export function PrivateActivitySelection(props: Props) {
 
       <div className="controls">{props.activityOpen && <button onClick={back}>Tilbake til dagen</button>}<button disabled={disabled || index <= 0} onClick={() => choose(content.activities[index - 1].id)}>{index < 0 ? 'Velg en aktivitet først' : index === 0 ? 'Ingen forrige aktivitet' : 'Forrige aktivitet'}</button><button disabled={disabled || index < 0 || index === content.activities.length - 1} onClick={() => choose(content.activities[index + 1].id)}>{index < 0 ? 'Velg en aktivitet først' : index === content.activities.length - 1 ? 'Ingen neste aktivitet' : 'Neste aktivitet'}</button></div>
       {visible && saved ? selected ? props.activityOpen ? <>
-        <SelectedActivityDetails readOnly={props.progress.terminal} content={content} classifications={classifications} activityId={selected} />
-        <FrozenRouteReference key={selected} workdayId={props.id} activityId={selected} expiresAt={props.expiresAt} serviceDate={content.service_date}
-          request={props.request} expired={props.expired} available={!props.suspended && !busy && !pending && !comparison && !rejected} />
+        <SelectedActivityDetails readOnly={props.progress.terminal} content={content} classifications={classifications} activityId={selected} destination={destinations.get(selected)} />
+        {!props.suspended && !busy && !pending && !comparison && !rejected && <FrozenRouteReference
+          reference={route} failed={routes.failed} retry={routes.retry} />}
         <OutcomeEditor progress={props.progress} activityId={selected} suspended={props.suspended || props.navigationLocked || busy || !!pending || !!comparison || rejected} />
         {!props.progress.terminal && <PositionAssistance key={selected} authorized={positionVisible} expiresAt={props.expiresAt} verifyAccess={verifyPositionAccess}>
           <PrivateStopProgression workdayId={props.id} activityId={selected} expiresAt={props.expiresAt} request={props.request} mutation={props.mutation} visible={positionVisible} anchorContinuity={props.anchorContinuity} />
@@ -80,6 +84,6 @@ export function PrivateActivitySelection(props: Props) {
       {rejected && saved && <div className="controls"><button disabled={!visible || busy || props.suspended} onClick={() => void send(proposal?.activity_id)}>Prøv avvist aktivitetsvalg igjen</button><button disabled={busy || props.suspended} onClick={() => { resolve(saved, 'Avvist aktivitetsvalg er avbrutt. Lagret valg er uendret.'); status.current?.focus(); }}>Avbryt avvist aktivitetsvalg</button></div>}
       <button disabled={busy || props.suspended || !!comparison} onClick={() => void load()}>Kontroller plantilgang og aktivitetsvalg</button>
     </section>
-    {visible && <div ref={day} hidden={props.activityOpen}><PrivateDayOverview content={content} classifications={classifications} finalEnd={props.finalEnd} expiresAt={props.expiresAt} selectedId={selected} openSelected={props.openActivity} openDisabled={props.navigationLocked || props.suspended} choose={choose} selectionDisabled={disabled} outcomes={props.progress.snapshot?.outcomes.outcomes} readOnly={props.progress.terminal} /></div>}
+    {visible && <div ref={day} hidden={props.activityOpen}><PrivateDayOverview destinations={destinations} content={content} classifications={classifications} finalEnd={props.finalEnd} expiresAt={props.expiresAt} selectedId={selected} openSelected={props.openActivity} openDisabled={props.navigationLocked || props.suspended} choose={choose} selectionDisabled={disabled} outcomes={props.progress.snapshot?.outcomes.outcomes} readOnly={props.progress.terminal} /></div>}
   </>;
 }

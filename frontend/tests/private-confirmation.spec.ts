@@ -100,7 +100,9 @@ for (const policy of [1, 2]) test(`review fixes real legacy policy ${policy} reo
     await expect(current.locator('.day-uncertainty')).toHaveText('Usikkerhet: Concrete manual note.');
     await confirmed.getByText('Bekreftede detaljer og historisk kilde', { exact: true }).click();
     const rawNote = confirmed.locator('.day-confirmed-details .fact').filter({ has: page.locator('dt', { hasText: 'Usikkerhet / ukjente fakta' }) }).locator('dd').first();
-    expect(await rawNote.textContent()).toBe(imported.activities[0].uncertainty);
+    await expect(rawNote).toHaveText('Concrete manual note.');
+    await confirmed.getByText('Bevarte kildefakta', { exact: true }).click();
+    await expect(confirmed.getByText(/^Kildemerker:/)).toContainText('t (');
     await expect(rawNote).toBeVisible();
     await expect(rawNote.locator('.day-uncertainty')).toHaveCount(0);
     expect(await (await context.request.get(API + '/workdays/' + plan.id)).json()).toEqual(plan);

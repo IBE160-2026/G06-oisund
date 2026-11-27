@@ -1,6 +1,6 @@
 import { activityChoiceLabel } from './activityChoiceLabel';
 import type { Content } from './PrivateDrafts';
-import { activityFactMissing, currentUncertainty, displayFact, sourceMarkers, currentUnknowns, importIssues, originalActivity, sameFact } from './draftInterpretation';
+import { activityFactMissing, currentUncertainty, displayFact, currentUnknowns, importIssues, originalActivity, sameFact } from './draftInterpretation';
 import { dayTypeLabels, osloDateTime, projectDay, type DayMember } from './dayOverview';
 import { outcomeLabels, type Outcome } from './PrivateWorkdayProgress';
 
@@ -10,8 +10,8 @@ const interval = (start: string, end: string) => `${osloDateTime(start)} – ${o
 function Duty({ member }: { member: DayMember }) {
   return <p>Vognløp: {known(member.duty)} · Sanntidsverdi: {member.suffix ?? (member.duty?.startsWith('CAR') ? 'Ikke utledet for CAR' : 'Ukjent')}</p>;
 }
-type SelectionProps = { selectedId?: string | null; choose?: (id: string) => void; selectionDisabled?: boolean; openSelected?: () => void; openDisabled?: boolean; outcomes?: { activity_id: string; outcome: Outcome }[]; readOnly?: boolean };
-function Member({ member, content, grouped = false, selectedId, choose, selectionDisabled, openSelected, openDisabled, outcomes, readOnly }: { member: DayMember; content: Content; grouped?: boolean } & SelectionProps) {
+type SelectionProps = { destinations?: ReadonlyMap<string, string | null>; selectedId?: string | null; choose?: (id: string) => void; selectionDisabled?: boolean; openSelected?: () => void; openDisabled?: boolean; outcomes?: { activity_id: string; outcome: Outcome }[]; readOnly?: boolean };
+function Member({ member, content, grouped = false, selectedId, choose, selectionDisabled, openSelected, openDisabled, outcomes, readOnly, destinations }: { member: DayMember; content: Content; grouped?: boolean } & SelectionProps) {
   const a = member.activity;
   const original = originalActivity(content, a.id);
   const corrected = original && Object.entries(original).filter(([field, value]) => !sameFact(field, a[field], value)).map(([field]) => field);
@@ -24,8 +24,8 @@ function Member({ member, content, grouped = false, selectedId, choose, selectio
     {a.raw_code && <p>Kode: {displayFact('raw_code', a.raw_code)}</p>}
     {a.type !== member.kind && <p>Oppgitt type: {known(displayFact('type', a.type))} · Bekreftet klassifisering: {dayTypeLabels[member.kind] ?? member.kind}</p>}
     <p>Fra: {known(a.from_place)} → Til: {known(a.to_place)}</p>
-    {identifiers.length > 0 && <p>{identifiers.map(([field, label]) => `${label}: ${known(a[field])}`).join(' · ')}</p>}
-    <Duty member={member} />{sourceMarkers(content).filter(marker => marker.activityId === a.id).map((marker, i) => <p key={i}>{marker.text}</p>)}
+    {identifiers.length > 0 && <p>{identifiers.map(([field, label]) => `${label}: ${known(a[field])}${field === 'direction' && destinations?.get(a.id) ? ' · ' + destinations.get(a.id) : ''}`).join(' · ')}</p>}
+    <Duty member={member} />
     {unknowns.length > 0 && <p>Ukjent: {unknowns.join(', ')}.</p>}
     {currentUncertainty(content, a) && <p className="day-uncertainty">Usikkerhet: {currentUncertainty(content, a)}</p>}
     <details><summary>Kilde og rettelser · aktivitet {member.index + 1}</summary>
@@ -57,7 +57,6 @@ export function PrivateDayOverview({ content, classifications, finalEnd, expires
     <p>Fast utløpsfrist: {osloDateTime(expiresAt)}. Visning og bussendringer forlenger ikke fristen.</p>
     <p>Opplysningene er planlagte. Vognløp og CAR fastslår ikke faktisk buss eller bussbytte.</p>
     {unmatched.map((issue, index) => sourceWarning(issue.text, index))}
-    {sourceMarkers(content).filter(marker => !content.activities.some(activity => activity.id === marker.activityId)).map((marker, index) => <p key={'marker-' + index}>{marker.text}</p>)}
     <ol className="day-list" role="list" aria-label="Planlagte aktiviteter og tidsrom">{day.rows.map(row => row.type === 'gap'
       ? <li className="day-gap" key={row.id}><strong>Uklassifisert tidsrom</strong><p>{interval(row.start, row.end)}</p><p>Ingen aktivitet er oppgitt for tidsrommet.</p></li>
       : <li className="day-activity" key={row.id} data-day-row={row.id}>

@@ -92,7 +92,7 @@ for (const name of ['A', 'B', 'C', 'D', 'E']) test(`generated ${name} real uploa
   await page.reload(); await page.getByRole('button', { name: `Åpne ${imported.service_date} · versjon 1`, exact: true }).click();
   await expect(page.getByLabel('Aktivitetstype', { exact: true })).toHaveCount(events.length);
   await assertAdoptedUI(saved.draft);
-  await page.getByText('Vis kildefakta fra PDF', { exact: true }).click(); await expect(facts.locator(':scope > ol > li')).toHaveCount(events.length);
+  await page.getByText('Bevarte kildefakta', { exact: true }).click(); await expect(facts.locator(':scope > ol > li')).toHaveCount(events.length);
   const reopened = await (await context.request.get(API + '/drafts/' + saved.id)).json(); expect(reopened).toEqual(saved); assertIndependentImport(reopened.draft);
   await page.screenshot({ path: `../docs/evidence/11-3-feedback-import-${name}.png`, fullPage: true });
   writeFileSync(`../docs/evidence/11-3-feedback-import-${name}.json`, JSON.stringify({ case: name, activities: events.length, movements: events.filter((event: any) => event.kind === 'movement').length, savedAndReopened: true, qualification: imported.import_metadata.qualification, unknowns: imported.import_metadata.unresolved.map((item: any) => item.code) }, null, 2));

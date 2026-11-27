@@ -92,7 +92,7 @@ for (const [name, action] of [['A', 'ended'], ['C', 'aborted']] as const) {
     await page.reload();
     await button(page, `Åpne ${chosen.saved.draft.service_date} · versjon 1`).click();
     const reopened = await json(context, '/drafts/' + chosen.saved.id); expect(reopened).toEqual(chosen.saved);
-    await page.getByText('Vis kildefakta fra PDF', { exact: true }).click();
+    await page.getByText('Bevarte kildefakta', { exact: true }).click();
     await expect(page.getByRole('region', { name: 'Kildefakta fra PDF', exact: true })).toContainText(chosen.expected.shift_id);
     await button(page, 'Gjennomgå lagret utkast').click();
     const review = page.getByRole('region', { name: 'Gjennomgått versjon', exact: true });

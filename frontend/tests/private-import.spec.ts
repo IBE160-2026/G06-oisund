@@ -257,7 +257,7 @@ for (const width of [768, 1440]) test(`keyboard review separate adoption save re
   await preparation(page); await page.getByRole('button', { name: /Åpne 2030-01-01/ }).first().click();
   expect(await (await page.request.get('http://127.0.0.1:8001/drafts/' + accepted.id)).json()).toEqual(accepted);
   await expect(page.locator('details.source-disclosure')).not.toHaveAttribute('open');
-  await page.getByText('Vis kildefakta fra PDF', { exact: true }).click();
+  await page.getByText('Bevarte kildefakta', { exact: true }).click();
   await expect(page.getByRole('region', { name: 'Kildefakta fra PDF' })).toContainText('Kildestart');
   expect(await page.evaluate(async () => [localStorage.length, sessionStorage.length, (await indexedDB.databases()).length])).toEqual([0, 0, 0]);
 });
@@ -386,7 +386,7 @@ test('partial fictional Travel to preserves known end and unresolved facts throu
   await page.reload();
   await preparation(page); await page.getByRole('button', { name: /Åpne 2030-01-01/ }).first().click();
   await expect(page.locator('details.source-disclosure')).not.toHaveAttribute('open');
-  await page.getByText('Vis kildefakta fra PDF', { exact: true }).click();
+  await page.getByText('Bevarte kildefakta', { exact: true }).click();
   await assertPartial();
   expect(await (await page.request.get('http://127.0.0.1:8001/drafts/' + saved.id)).json()).toEqual(saved);
 });

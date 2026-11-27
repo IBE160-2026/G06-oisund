@@ -7,7 +7,14 @@ from psycopg.types.json import Jsonb
 from . import auth, draft_storage, route_reference_storage
 from .private_storage import database
 from .draft_domain import DraftContent
+from .route_reference_storage import REVIEW_PROJECTION
 from .workday_domain import SUPPORTED_TYPES, assessment
+
+
+def split_review_revision(value):
+    if value is not None and value >= REVIEW_PROJECTION:
+        return value - REVIEW_PROJECTION, True
+    return value, False
 
 
 def presentation(row):
@@ -45,22 +52,28 @@ def review(request, body):
         if source['confirmed']:
             raise HTTPException(409, 'Utkastet har allerede en bekreftet plan. Åpne planen.')
         route_revision = route_reference_storage.route_revision(conn, source['id'])
-        if body.expected_route_revision is not None:
-            if body.expected_route_revision != route_revision:
+        expected, projected_import = split_review_revision(body.expected_route_revision)
+        if expected is not None:
+            if expected != route_revision:
                 raise HTTPException(409, route_reference_storage.ROUTE_CHANGED)
         elif route_revision and route_reference_storage.current_references(conn, source):
             raise HTTPException(409, route_reference_storage.ROUTE_CHANGED)
         count = conn.execute('SELECT count(*) AS n FROM workday_operations WHERE owner=%s AND workday_id IS NULL AND expires_at > clock_timestamp()', (owner,)).fetchone()['n']
         if count >= 200:
             raise HTTPException(429, 'For mange uavklarte bekreftelser.')
-        content = route_reference_storage.effective_content(
-            DraftContent.model_validate(source['content']), route_reference_storage.current_references(conn, source))
+        content = DraftContent.model_validate(source['content'])
+        legacy_import = content.import_metadata is not None and not projected_import
+        if not legacy_import:
+            content = route_reference_storage.effective_content(content, route_reference_storage.current_references(conn, source))
         facts = assessment(content, policy_version=3)
         if facts['expires_at'] and not conn.execute('SELECT %s > clock_timestamp() AS live', (facts['expires_at'],)).fetchone()['live']:
             facts['blockers'].append('Planens slutt + sju dager er allerede utløpt. Rett og lagre tidspunktet.')
+        # Bind the view the driver reviewed to this operation. Ordinary stored
+        # revisions continue to mean the projected view for pre-existing retries.
+        stored_revision = route_revision + (REVIEW_PROJECTION if legacy_import else 0)
         row = conn.execute('INSERT INTO workday_operations(id,owner,draft_id,expected_revision,expires_at,assessment_policy_version,route_revision) '
                            'SELECT %s,%s,id,revision,expires_at,3,%s FROM drafts WHERE id=%s AND expires_at > clock_timestamp() RETURNING id,expires_at',
-                           (uuid4(), owner, route_revision, body.draft_id)).fetchone()
+                           (uuid4(), owner, stored_revision, body.draft_id)).fetchone()
         if not row:
             raise HTTPException(410, 'Utkastet er utløpt.')
         auth.session(conn, request)
@@ -107,13 +120,16 @@ def confirm(request, identifier, body):
             return presentation(plan)
         if source['revision'] != body.expected_revision:
             raise HTTPException(409, 'Utkastet er endret. Gjennomgå den lagrede versjonen på nytt.')
-        if route_reference_storage.route_revision(conn, identifier) != (op['route_revision'] or 0):
+        route_revision, legacy_import = split_review_revision(op['route_revision'])
+        if route_reference_storage.route_revision(conn, identifier) != (route_revision or 0):
             raise HTTPException(409, route_reference_storage.ROUTE_CHANGED)
-        route_references = route_reference_storage.current_references(conn, source) if op['route_revision'] else []
-        if ((body.expected_route_revision is not None and body.expected_route_revision != op['route_revision'])
-                or (route_references and body.expected_route_revision is None)):
+        route_references = route_reference_storage.current_references(conn, source) if route_revision else []
+        expected, _ = split_review_revision(body.expected_route_revision)
+        if (expected is not None and expected != route_revision) or (route_references and expected is None):
             raise HTTPException(409, route_reference_storage.ROUTE_CHANGED)
-        content = route_reference_storage.effective_content(DraftContent.model_validate(source['content']), route_references)
+        content = DraftContent.model_validate(source['content'])
+        if not legacy_import:
+            content = route_reference_storage.effective_content(content, route_references)
         decisions = {str(key): value for key, value in body.classifications.items()}
         facts = assessment(content, decisions, op['assessment_policy_version'])
         if facts['blockers'] or set(decisions) != set(facts['classifications_required']):

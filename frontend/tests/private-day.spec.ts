@@ -242,7 +242,7 @@ test.describe('synthetic day browser', () => {
     });
     const target = saved.draft.activities.find((activity: any) => activity.type === 'trip');
     const member = page.getByRole('region', { name: 'Dagsoversikt', exact: true }).locator(`[data-activity-id="${target.id}"]`);
-    await expect(member).toContainText('Kildemerke: t');
+    await expect(member).not.toContainText('Kildemerke: t');
     await expect(member).toContainText('Kode: tur');
     await expect(member.locator('.day-uncertainty')).toHaveCount(note ? 1 : 0);
     if (note) await expect(member.locator('.day-uncertainty')).toHaveText('Usikkerhet: ' + note);
@@ -258,7 +258,7 @@ test.describe('synthetic day browser', () => {
       input.activities.find(activity => activity.type === 'trip')!.uncertainty = 'Kildemerket t har ukjent betydning (side 1). ' + remainder;
     });
     const day = page.getByRole('region', { name: 'Dagsoversikt', exact: true });
-    await expect(day.getByText('Kildemerke: t (side 1).', { exact: true })).toBeVisible();
+    await expect(day.getByText('Kildemerke: t (side 1).', { exact: true })).toHaveCount(0);
     await expect(day.locator('[data-activity-id]').filter({ hasText: 'Kildemerke: t' })).toHaveCount(0);
     const target = saved.draft.activities.find((activity: any) => activity.type === 'trip');
     const member = day.locator(`[data-activity-id="${target.id}"]`);
@@ -279,7 +279,7 @@ test.describe('synthetic day browser', () => {
     const day = page.getByRole('region', { name: 'Dagsoversikt', exact: true });
     const pause = day.locator(`[data-day-row="${saved.draft.activities[1].id}"]`);
     await expect(pause).toContainText('Opprinnelig kildeusikkerhet (før rettelser og bekreftelse): Endested mangler');
-    await expect(pause).toContainText('Kildemerke: synthetic-marker');
+    await expect(pause).not.toContainText('Kildemerke: synthetic-marker');
     await expect(pause).toContainText('Bekreftede fakta i oversikten gjelder.');
     await expect(pause.getByRole('heading', { name: 'Matpause', exact: true })).toBeVisible();
     await expect(day.getByText(/Opprinnelig kildeusikkerhet.*En kilderad kunne ikke tolkes/)).toBeVisible();

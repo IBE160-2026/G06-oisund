@@ -108,7 +108,7 @@ for (const night of [false, true]) test(`enlarged ${night ? 'Night' : 'Day'} acc
   if (night) await page.getByRole('button', { name: 'Nattmodus', exact: true }).click();
   await open(page); await fill(page, 'Langt kildevarsel ved et svært langt norsk stedsnavn');
   await page.getByLabel('Detaljert forklaring', { exact: true }).fill('Første tidsvindu\nAndre tidsvindu\nBehold hele kildeinstruksjonen.');
-  await expect(management(page)).toContainText('23:59:59'); await expect(management(page)).toContainText('Felles avviksregister');
+  await expect(management(page)).toContainText('23:59:59'); await expect(management(page)).toContainText('Avviket vises frem til gyldig-til');
   const control = page.getByRole('button', { name: 'Lagre avvik', exact: true }); await control.focus(); await page.keyboard.press('Tab'); await page.keyboard.press('Shift+Tab'); await expect(control).toBeFocused(); await control.scrollIntoViewIfNeeded();
   const metrics = await control.evaluate((node: HTMLElement) => ({ overflow: document.documentElement.scrollWidth > innerWidth, height: node.getBoundingClientRect().height, focusWidth: parseFloat(getComputedStyle(node).outlineWidth), focusVisible: node.matches(':focus-visible') }));
   expect(metrics.overflow).toBe(false); expect(metrics.height).toBeGreaterThanOrEqual(58); expect(metrics.focusWidth).toBeGreaterThanOrEqual(2); expect(metrics.focusVisible).toBe(true);

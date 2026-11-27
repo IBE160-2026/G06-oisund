@@ -27,7 +27,9 @@ export function currentUncertainty(content: Content, activity: Content['activiti
   let value = activity.uncertainty ?? '';
   // Exact retained document fragments are neutral even with unknown positions;
   // this does not attach an unlocated annotation to the displayed activity.
-  for (const marker of sourceMarkers(content)) value = value.split(marker.fragment).join('');
+  for (const marker of content.import_metadata?.annotations ?? []) {
+    value = value.split(`Kildemerket ${marker.value} har ukjent betydning (side ${marker.provenance.page}).`).join('');
+  }
   return trim ? value.replace(/^[\u0009-\u000d\u001c-\u0020\u0085\u00a0\u1680\u2000-\u200a\u2028\u2029\u202f\u205f\u3000]+|[\u0009-\u000d\u001c-\u0020\u0085\u00a0\u1680\u2000-\u200a\u2028\u2029\u202f\u205f\u3000]+$/gu, '') : value;
 }
 export function currentUnknowns(activity: Content['activities'][number]): string[] {
@@ -90,25 +92,4 @@ export function importIssues(content: Content): { activityId?: string; text: str
     seen.add(key);
     return true;
   });
-}
-type Marker = { activityId?: string; text: string; fragment: string };
-const markerCache = new WeakMap<Content, Marker[]>();
-export function sourceMarkers(content: Content): Marker[] {
-  const cached = markerCache.get(content);
-  if (cached) return cached;
-  const metadata = content.import_metadata;
-  if (!metadata) return [];
-  const result: { activityId?: string; text: string; fragment: string }[] = [];
-  for (const marker of metadata.annotations) {
-    const candidates: { line: number; id: string; order: number }[] = [];
-    for (const source of metadata.activities) for (const points of Object.values(source.provenance)) {
-      if (Array.isArray(points)) for (const point of points) {
-        if (marker.provenance.line != null && marker.provenance.column != null && point.line != null && point.page === marker.provenance.page && point.column === marker.provenance.column && point.line <= marker.provenance.line) candidates.push({ line: point.line, id: source.activity_id, order: source.source_order });
-      }
-    }
-    candidates.sort((a, b) => b.line - a.line || b.order - a.order);
-    result.push({ activityId: candidates[0]?.id, text: `Kildemerke: ${marker.value} (side ${marker.provenance.page}).`, fragment: `Kildemerket ${marker.value} har ukjent betydning (side ${marker.provenance.page}).` });
-  }
-  markerCache.set(content, result);
-  return result;
 }

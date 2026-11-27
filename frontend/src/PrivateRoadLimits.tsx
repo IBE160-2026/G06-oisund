@@ -182,7 +182,7 @@ export function ActiveRoadLimits({ loadRoad, checkRevision }: ActiveProps) {
   }
   const showDetails = active && !interruption;
   const problemMessage = checkRevision && problem === 'road-unqualified'
-    ? 'Veggrunnlag mangler for valgt område og dato.'
+    ? 'Veggrunnlag mangler for Tromsø bybuss på dagens dato.'
     : problem ? roadMessage[problem] : null;
   return <>
     <dl>
@@ -193,7 +193,7 @@ export function ActiveRoadLimits({ loadRoad, checkRevision }: ActiveProps) {
     </dl>
     <div role="status">{interruption ? positionSourceMessage[interruption]
       : problemMessage ?? (starting && !active ? 'Kontrollerer veggrunnlaget og tilgangen …'
-        : active && confirmed === 0 ? 'Ingen fartsgrenser er bekreftet for området i dette uttaket.' : '')}</div>
+        : active && confirmed === 0 ? 'Ingen fartsgrenser er bekreftet i dette uttaket.' : '')}</div>
     <button disabled={!source || starting} onClick={() => active ? stop() : void start()}>
       {active ? 'Stopp vegmatching' : 'Start vegmatching'}
     </button>
