@@ -72,6 +72,10 @@ def test_geometry_budgets_mark_unknown_and_preserve_ordinary_matching(monkeypatc
     assert situations.affects_edge(normal, 'FV862', near, budget=situations.GeometryBudget(5))
     assert not situations.affects_edge(normal, 'FV862', far, budget=situations.GeometryBudget(5))
     assert situations.affects_edge(normal, 'FV862', far, budget=situations.GeometryBudget(4))
+    reviewed = normal | {'speed_management': True}
+    evidence = {reviewed['record']: reviewed['revision']}
+    assert not situations.affects_edge(reviewed, 'FV862', near, budget=situations.GeometryBudget(1), reviewed=evidence)
+    assert situations.affects_edge(reviewed, 'FV862', near, budget=situations.GeometryBudget(0), reviewed=evidence)
 
     value = snapshot() | {'numberMatched': 3, 'numberReturned': 3, 'totalFeatures': 3}
     extra = deepcopy(feature)

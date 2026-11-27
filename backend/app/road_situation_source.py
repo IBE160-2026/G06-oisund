@@ -255,8 +255,13 @@ def metric(points):
     return [(lon * 38_600, lat * 111_200) for lon, lat, *_ in points]
 
 
-def affects_edge(event, road_reference, shape, *, edge_bounds=None, budget=None):
+def affects_edge(event, road_reference, shape, *, edge_bounds=None, budget=None, reviewed=None):
     if budget is not None and not budget.take(1):
+        return True
+    if reviewed and event['speed_management'] and not event.get('geometry_unqualified') \
+            and reviewed.get(event['record']) == event['revision']:
+        return False
+    if event['bounds'] is None and road_reference is None:
         return True
     if not affects(event, road_reference, edge_bounds if edge_bounds is not None else bounds(shape)):
         return False

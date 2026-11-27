@@ -78,12 +78,10 @@ def road_area(area: Area, request: Request):
         reviewed = restriction['records'] if restriction else {}
         unavailable = (not restriction and review.get(edge.get('id'), {}).get('basis') == 'temporary'
                        or restriction and not datetime.fromisoformat(restriction['start']) <= now < datetime.fromisoformat(restriction['end']))
-        edge_bounds = road_situation_source.bounds(edge['shape']) if current_situations and not unavailable else None
+        edge_bounds = road_situation_source.bounds(edge['shape']) if current_situations and not unavailable and budget.remaining else None
         if unavailable or current_situations and any(
-            not (event['speed_management'] and not event.get('geometry_unqualified')
-                 and reviewed.get(event['record']) == event['revision'])
-            and (event['bounds'] is None and road is None
-                 or road_situation_source.affects_edge(event, road, edge['shape'], edge_bounds=edge_bounds, budget=budget))
+            road_situation_source.affects_edge(event, road, edge['shape'], edge_bounds=edge_bounds,
+                                              budget=budget, reviewed=reviewed)
             for event in current_situations
         ):
             edge['kmh'] = None
