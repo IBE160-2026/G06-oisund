@@ -612,3 +612,21 @@ SSH kl. 11:15 viste aktiv 43-kjerne, ext4 på LVM med fysisk volum `/dev/nvme0n1
 ### Åpne punkter
 
 - Etter interaktiv sudo må 44-initramfs sjekkes for LVM-aktivering og alle nødvendige NVMe-moduler før omstartsklarhet kan bekreftes. Avvent uttrykkelig klarsignal før omstart.
+
+## 2026-11-27 kl. 11:54 — Jonas Øisund
+
+### Oppgave
+
+Vurdere den fullførte lesekontrollen av 44-initramfs fra eierens PowerShell-utskrift og gi en omstartsvurdering.
+
+### Plan
+
+- Sammenlign lagret arkivlisting med lagringskjeden, LVM-aktiveringen og 44-kjernens modulavhengigheter.
+
+### Resultat
+
+Eierens direkte PowerShell-kommando fullførte med SSH-status 0 etter interaktiv sudo. Rotvolumet er lineært LVM på `/dev/nvme0n1p3`. 44-initramfs inneholder LVM-verktøy, oppstartsskript, udev-regler og alle fem NVMe-modulavhengigheter, inkludert `hkdf` som skjermfilteret ikke viste i arkivlisten. Aktiv kjerne er fortsatt 43. [O6-rapporten](../../docs/evidence/o6-kernel-44-20261127.md) dokumenterer bestått førkontroll og hash av full utskrift. Ingen omstart er utført.
+
+### Åpne punkter
+
+- Avvent uttrykkelig klarsignal. Før gjennomføring må førgrunnlaget fortsatt gjelde, og etter omstart må ny oppstart og tjenestestatus verifiseres.
