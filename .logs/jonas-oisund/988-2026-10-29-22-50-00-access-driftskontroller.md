@@ -651,3 +651,21 @@ APT-simulering viste 57 planlagte oppgraderinger, inkludert sikkerhetsoppdaterin
 ### Åpne punkter
 
 - Den fulle APT-køen anbefales håndtert i eget vedlikeholdsvindu. De fire åpne O6-kernelpunktene avventer fortsatt støttede rettelser.
+
+## 2026-11-27 kl. 12:16 — Jonas Øisund
+
+### Oppgave
+
+Følge opp eierens pakkeoppgradering på konsollen og avklare om det trengs en ny omstart.
+
+### Plan
+
+- Avstem konsollbildet mot APT-status, omstartsmarkør, aktiv kjerne og tjenestehelse over lesende SSH.
+
+### Resultat
+
+APT-simulering viser null ventende oppgraderinger og `dpkg --audit` var tom. Ingen omstartsmarkør. Samme oppstarts-ID og kjerne 44.44. Release `d4153832`, API/origin, PostgreSQL, Docker, tunnel og backup-timer bestod kontrollen. Backup-timeren venter på neste kjøring 28. november kl. 03:19:10. Dracut bygde nytt initramfs for 44, bekreftet med metadata. Ingen ny omstart. Den åpne APT-raden er lukket. [O6-rapporten](../../docs/evidence/o6-kernel-44-20261127.md) har pakkeversjoner og kontrollresultater.
+
+### Åpne punkter
+
+Ingen nye. De fire eksisterende O6-kernelpunktene gjenstår.
