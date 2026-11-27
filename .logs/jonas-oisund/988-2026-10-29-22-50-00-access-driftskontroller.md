@@ -565,3 +565,11 @@ Validering: kilde-/pakkebinding og SHA256,15kildehash, fire OSV-rader,56total/4�
 
 - Fullført44 image-/modulpakkeoppsett, initramfs/oppstartsvalg, fersk helse og siste vellykkede backup må kontrolleres før separat autorisert vedlikeholdsaktivering. Ingen ny backupfeil er påvist.
 - BPF/AMDGPU/DRM-pagemap/ksmbd forblir åpne; følg støttede rettelser og dokumenterte endringstriggere. Øvrige bibliotek-/journaldisponeringer, kandidatporter, løpende drift og separat utsatt firmware består. SamletO6 er fortsatt åpen. Speilet i eksisterende O6-rad i issues.md.
+
+### Bestilt førkontroll for omstart til44.44, kl. 04:24
+
+Oppgave/plan: utføre bare lesende førkontroll av oppstartsgrunnlag, siste vellykkede backup og app/database/tunnel, deretter vente på Jonas sitt uttrykkelige klarsignal. Ett ordinært etablert SSH-forsøk stoppet under TCP-connect før innlogging med Permission denied, exit255, i tråd med kjent lokal WSAEACCES. Ingen videre tilgangsfeilsøking eller serverendring.
+
+Resultat: **94d5f25** oppdaterer gjeldende27.november-rapport med uverifisert førkontroll og legger til samlet eierkjørbar read-only-reboot-preflight.ps1. Scriptet leser boot/pakker/GRUB/EFI/initramfs/APT, avstemmer timer/jobb/journal/dumpmetadata og utfører eksisterende lokale helseprøver for app/origin/database/tunnel. Ingen backupinnhold, miljøhemmeligheter eller ufiltrert journal skrives ut. PowerShell-parser og diffkontroll bestått; Python er ikke lokalt tilgjengelig for syntaks-/kjøreprøve. Ingen serverprøve er fremstilt som bestått.
+
+Åpne punkter: eier kjører kommandoen fra vanlig PowerShell og deler statusutskriften. Serveren kan ikke erklæres omstartsklar før resultatene er vurdert. Deretter kreves uttrykkelig klarsignal før omstart. Agentens egen omstart/etterkontroll er fortsatt hindret av lokal TCP-begrensning. Fysisk tilgang er ikke nødvendig nå; etablert konsollberedskap beholdes. SamletO6, de fire kernelrestene og risikoaksepten er uendret; ingen merge/push.
