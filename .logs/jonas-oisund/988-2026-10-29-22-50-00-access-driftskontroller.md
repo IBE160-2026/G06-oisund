@@ -536,3 +536,32 @@ Validering: SHA256/kildestørrelser, eksakt source/signed/buildinfo-binding, kil
 - Fire kernelavvik trenger støttet Ubuntu-rettelse for å lukkes som rettet kode; prioriter BPF. Eksisterende/delegerte BPF-objekter er fortsatt uattestert, og AMDGPU/DRM/ksmbd-barrierer er historiske/endringsutløste.
 - Neste konkrete kildeoppgave er util-linux/78409 i eksakt trixie-kilde/backporter; bibliotek- og journaldrester står åpne. Kvalifisert installasjon/aktivisering blir en senere vedlikeholdsoppgave når støttet rettelse foreligger.
 - Løpende backup/stabilitet og kandidatens egne kvalifiseringsporter videreføres; firmware separat utsatt. SamletO6 krever fortsatt uttrykkelig eierbeslutning for administrativ lukking. Alt er speilet i eksisterende O6-punkt i issues.md.
+
+## 2026-11-27 kl. 04:12 - Jonas Øisund
+
+### Oppgave
+
+Avstemme ny eierutskrift med publisert Ubuntu44.44 og kontrollere om oppdateringen retter de fire åpne O6-kernelpunktene før eventuell installasjons-/omstartsbeslutning. Fortsette dokumentasjonsarbeidet på eksisterende arbeidsbranch, uten serverendringer eller merge/push.
+
+### Plan
+
+- Gjenbruke17.november-kildebevisene og lese nyere GitHub-bevis.
+- Hente44.44 DSC/diff/buildinfo og offisielle amd64 security-/updates-indekser; rekonstruere de relevante filene og avstemme Canonical OSV.
+- Dokumentere publisert/installert/aktivt, konkrete kodevilkår og manglende førkontroll uten å lukke O6 eller utvide risikoaksept.
+
+### Resultat
+
+**f4e71fc** oppretter [rapport27.november og evidenspakke](../../docs/evidence/o6-kernel-44-20261127.md) og oppdaterer sju gjeldende statusoversikter. Eierutskriften er normalisert fra chat: aktiv43.43, installert linux-image-generic44.44,44-bilde i /boot, lokal kandidat44.44 og restart-required. Måletid/oppetid/sisteboot/helse/release/backup og komplett image-/modulpakkestatus er ikke oppgitt. Metapakken og filnavn er ikke overtolket til full pakke-/oppstartskvalifisering.
+
+Offisielle security-/updates-indekser bekrefter publisert44.44 amd64/generic og signed-image Built-Using linux=44.44. Original/diff hashkontrollert mot44 DSC, buildinfo mot begge indekser. Relevant kilde rekonstruert; git apply check/apply/reverse-check0. BPF/DRM-pagemap/ksmbd-filer er identiske med43.43 og beholder feilvilkårene. AMDGPU har andre BO-endringer, men beholder den feilende doorbell-innsettingen. Canonicals OSV-data oppdatert24.november lister44.44 berørt for alle fire. Ingen av de fire er rettet eller kan lukkes ved bare omstart til44.44. Aktivt omfang forblir51rettet/1ikkeberørt/4åpne av56. PGP/InRelease-signatur eller serverbinærintegritet er ikke attestert.
+
+GitHub main fccb0d78f95f7ea40e6d29c77751a25d34599cbd har nyere20.november-rapport som allerede avklarer util-linux78409-kilden og beskriver V2-portene. Den oppgaven bestilles ikke på nytt. O6-disponering/bibliotek/journal/firmware og risikoaksept videreføres uten ny bred leverandør-/kandidatreview. Historiske rapporter er bevart.
+
+Anbefaling: ordinær kvalifisert aktivering av44.44 etter fersk lesende pakke-/boot-/helse-/backupkontroll og etablert returberedskap. Ingen ny installasjon fremstår nødvendig; ingen omstart er gitt som ordre eller utført. De fire restene vil fortsatt kreve støttet rettelse. Ingen generell app-/belastnings-/stabilitetstest, SSH-feilsøking, serverendring eller nye WAN-prøver er gjort.
+
+Validering: kilde-/pakkebinding og SHA256,15kildehash, fire OSV-rader,56total/4åpne/0nye rettelser, lokale lenker og JSON kontrollert. Staget diffkontroll bestod etter at rå diff ble lagret tapsfritt som JSON og changelog-lesekopien fikk normaliserte linjeskift. Ingen produktkode endret. Kun egne dokumentasjonsendringer committet, ingen merge/push.
+
+### Åpne punkter
+
+- Fullført44 image-/modulpakkeoppsett, initramfs/oppstartsvalg, fersk helse og siste vellykkede backup må kontrolleres før separat autorisert vedlikeholdsaktivering. Ingen ny backupfeil er påvist.
+- BPF/AMDGPU/DRM-pagemap/ksmbd forblir åpne; følg støttede rettelser og dokumenterte endringstriggere. Øvrige bibliotek-/journaldisponeringer, kandidatporter, løpende drift og separat utsatt firmware består. SamletO6 er fortsatt åpen. Speilet i eksisterende O6-rad i issues.md.
