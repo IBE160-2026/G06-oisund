@@ -84,9 +84,12 @@ def issue(request, identifier):
         owner = authorized(conn, request)
         draft = owned(conn, owner, identifier, request) if identifier else None
         auth.session(conn, request)
+        # A deletion replaces the current draft with a smaller receipt. Count
+        # those receipts too so a later create cannot reuse the retained slot.
         usage = conn.execute(
-            'SELECT count(*) AS total, count(*) FILTER (WHERE result IS NULL) AS pending '
-            'FROM draft_operations WHERE owner=%s AND expires_at > clock_timestamp()', (owner,),
+            'SELECT count(*) + (SELECT count(*) FROM draft_deletions WHERE owner=%s '
+            'AND expires_at > statement_timestamp()) AS total, count(*) FILTER (WHERE result IS NULL) AS pending '
+            'FROM draft_operations WHERE owner=%s AND expires_at > statement_timestamp()', (owner, owner),
         ).fetchone()
         if usage['pending'] >= 200:
             raise HTTPException(429, 'For mange uavklarte lagringer.')

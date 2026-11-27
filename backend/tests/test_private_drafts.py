@@ -82,6 +82,11 @@ def test_concurrent_owner_quota_preserves_original_receipt_and_other_owner(users
             assert conn.execute('SELECT count(*) AS n FROM drafts WHERE owner=%s', (users[1][0],)).fetchone()['n'] == 1
             assert conn.execute('SELECT count(*) AS n FROM draft_operations WHERE owner=%s AND result IS NOT NULL',
                                 (users[1][0],)).fetchone()['n'] == 1
+        deletion = {'operation_id': str(uuid4()), 'expected_revision': accepted['revision']}
+        path = '/drafts/' + accepted['id'] + '/delete'
+        assert first.post(path, headers=headers(first), json=deletion).json() == {'deleted_id': accepted['id']}
+        assert first.post('/draft-operations', headers=headers(first), json={'draft_id': None}).status_code == 429
+        assert first.post(path, headers=headers(first), json=deletion).json() == {'deleted_id': accepted['id']}
 
 
 def test_live_payload_quota_allows_replay_without_reserving_more_space(users, monkeypatch):
