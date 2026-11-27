@@ -1,0 +1,90 @@
+{
+  "date": "2026-11-27",
+  "version": "7.0.0-44.44",
+  "original_sha256": "c6343795c8c7e4feff55f5b309365c8e0eaf49cd6abcb412e32315313f149536",
+  "diff_sha256": "fbfcc40c9367170fb6a83e5b0528cb94a992352785ac87fc7d8cdcd9426837c3",
+  "selected_patch_sha256": "de981c9ab24c84c17481421ace3fea39a0bba085ff1db01fed167f2343adbcad",
+  "check_apply_reverse_exit": [
+    0,
+    0,
+    0
+  ],
+  "files": [
+    {
+      "path": "drivers/android/binder_alloc.h",
+      "sha256": "975b170cfa2a2971e141152a0fc61a9a904f14099d4da119e2fecb1d7fbcf83f",
+      "same_as_43": true
+    },
+    {
+      "path": "drivers/android/binder_alloc.c",
+      "sha256": "972fb1b2cb746ab5910b082d82a0d9d7635923a39b3c454a37ad94e9a265826e",
+      "same_as_43": true
+    },
+    {
+      "path": "fs/Kconfig",
+      "sha256": "31764376890aaedf917cebe5db312fe9be2c7aa1db19c0e5798bfbc08c67fdc9",
+      "same_as_43": true
+    },
+    {
+      "path": "fs/Makefile",
+      "sha256": "47695c9d0c39851f57667790010da68a59ca9c5d1ed376aeeb6365e8ba499151",
+      "same_as_43": true
+    },
+    {
+      "path": "fs/ntfs3/Kconfig",
+      "sha256": "285d4cd3837652c5cb06f5aa29eace41b38f47823fe2eebcf260d42441b228b8",
+      "same_as_43": true
+    },
+    {
+      "path": "kernel/bpf/arraymap.c",
+      "sha256": "d431901bc21c36a7357c9d13c4c139936055b36f05ad5b1c15af997e5a76cf7e",
+      "same_as_43": true
+    },
+    {
+      "path": "kernel/bpf/map_in_map.c",
+      "sha256": "7767baaaaff0ee5b1d75d1dfec7a0e7cff7669c9d97aaba8cd29aa8b0162fa59",
+      "same_as_43": true
+    },
+    {
+      "path": "arch/x86/net/bpf_jit_comp.c",
+      "sha256": "e986bd25f56ed10dd075804af09fc7c43ba92cdfdc53464365dbac8ec1145df1",
+      "same_as_43": true
+    },
+    {
+      "path": "drivers/gpu/drm/amd/amdgpu/Makefile",
+      "sha256": "01659951608915a4f77bec5a76ac7ed28f679422b4dc602a7eddf6bf96db5238",
+      "same_as_43": true
+    },
+    {
+      "path": "drivers/gpu/drm/amd/amdgpu/amdgpu_userq.c",
+      "sha256": "287f802f9877057fa1bc7dbad71169aaf2994c9035a99d3a5ab3d44bbf2ea7ed",
+      "same_as_43": false
+    },
+    {
+      "path": "drivers/gpu/drm/drm_pagemap.c",
+      "sha256": "ca23ed164f9ba2c32be905661c53f03f161823a75c9dd833dc72175a4985a2bf",
+      "same_as_43": true
+    },
+    {
+      "path": "drivers/gpu/drm/Makefile",
+      "sha256": "17ab022f026939c3d8042412a4beec2ceb2a14f352aa6ac0d029962a71fdd7a7",
+      "same_as_43": true
+    },
+    {
+      "path": "fs/smb/server/mgmt/user_session.c",
+      "sha256": "6a3d093c335f976c1bd7ddafe47aa3c90cbf832c64b868a6dcaaa024f9ae5769",
+      "same_as_43": true
+    },
+    {
+      "path": "fs/smb/server/smb2pdu.h",
+      "sha256": "65d2bfaa002a4d0cacc2a53ea3ae5d736489aef366d9b18578534b7ab046b355",
+      "same_as_43": true
+    },
+    {
+      "path": "debian.master/changelog",
+      "sha256": "86d59a9d7d77bacb320c4836e70cfb3d6ce7a60750d62dfe3c20111565822fb1",
+      "same_as_43": false
+    }
+  ],
+  "ntfs_patch_headers": []
+}

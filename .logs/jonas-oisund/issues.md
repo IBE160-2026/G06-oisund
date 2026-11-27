@@ -1,6 +1,10 @@
 # Åpne punkter
 
-**Gjeldende 20. november 2026:** O6 er flettet lokalt. Eksakt util-linux-kilde er avstemt. Fire kernelrester, åpne bibliotek- og journald-punkter og midlertidig risikoaksept følger den gjeldende O6-raden. Den lokale V2-kandidaten er klar innen dokumentert omfang. [V2-overlevering](../../docs/v2-handoff.md).
+**Gjeldende O6-status 27. november 2026.** Serveren kjører 44.44. Omstart, pakkeoppgradering og ruteoppslag fra mobil er dokumentert. Kernelstatus er 51 rettet, én ikke berørt og fire åpne. Samlet O6 og den midlertidige risikoaksepten består. [O6-etterkontroll](../../docs/evidence/o6-kernel-44-20261127.md) · [V2-overlevering](../../docs/v2-handoff.md).
+
+- [x] 2026-11-27 [O6-omstart til 44.44](../../docs/evidence/o6-kernel-44-20261127.md) — Én omstart og etterkontroll bestod. (løst 2026-11-27)
+
+- [x] 2026-11-27 [Serverens APT-kø](988-2026-10-29-22-50-00-access-driftskontroller.md) — Jonas oppgraderte fra konsollen. Etterkontroll viste tom APT-kø, frisk tjenestehelse og ingen omstartsmarkør. Eierens ruteoppslag fra mobil bestod etter oppgraderingen. (løst 2026-11-27)
 
 - [x] 2026-11-20 [O6 util-linux-kildeavstemming](../../docs/evidence/o6-v2-source-reconciliation-20261120.md) — Sammenlignet eksakt trixie-pakke og patchserie. Avklarte den særskilte kodeveien og dokumenterte motstrid med Debian-trackeren. Samlet O6 står åpen. (løst 2026-11-20)
 - [ ] 2026-11-20 [V2-passord og personlig aksept](985-2026-11-20-03-37-32-bussassistent-v2.md) — Prøv lokal passordendring, SENDT, innløsning og sesjonsopphør på flere enheter. Installert SSH/helper/systemd/mount følger eksisterende O6-rad.

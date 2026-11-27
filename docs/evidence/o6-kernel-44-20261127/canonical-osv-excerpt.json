@@ -1,0 +1,116 @@
+{
+  "checked_date": "2026-11-27",
+  "publisher": "Canonical",
+  "source_pattern": "https://raw.githubusercontent.com/canonical/ubuntu-security-notices/main/osv/cve/2026/{id}.json",
+  "entries": [
+    {
+      "id": "UBUNTU-CVE-2026-98376",
+      "modified": "2026-11-24T18:54:09Z",
+      "rows": [
+        {
+          "package": {
+            "ecosystem": "Ubuntu:26.04:LTS",
+            "name": "linux",
+            "purl": "pkg:deb/ubuntu/linux@7.0.0-44.44?arch=source&distro=resolute"
+          },
+          "ranges": [
+            {
+              "type": "ECOSYSTEM",
+              "events": [
+                {
+                  "introduced": "0"
+                }
+              ]
+            }
+          ],
+          "versions": [
+            "7.0.0-43.43",
+            "7.0.0-44.44"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "UBUNTU-CVE-2026-68103",
+      "modified": "2026-11-24T18:42:04Z",
+      "rows": [
+        {
+          "package": {
+            "ecosystem": "Ubuntu:26.04:LTS",
+            "name": "linux",
+            "purl": "pkg:deb/ubuntu/linux@7.0.0-44.44?arch=source&distro=resolute"
+          },
+          "ranges": [
+            {
+              "type": "ECOSYSTEM",
+              "events": [
+                {
+                  "introduced": "0"
+                }
+              ]
+            }
+          ],
+          "versions": [
+            "7.0.0-43.43",
+            "7.0.0-44.44"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "UBUNTU-CVE-2026-89805",
+      "modified": "2026-11-24T18:49:01Z",
+      "rows": [
+        {
+          "package": {
+            "ecosystem": "Ubuntu:26.04:LTS",
+            "name": "linux",
+            "purl": "pkg:deb/ubuntu/linux@7.0.0-44.44?arch=source&distro=resolute"
+          },
+          "ranges": [
+            {
+              "type": "ECOSYSTEM",
+              "events": [
+                {
+                  "introduced": "0"
+                }
+              ]
+            }
+          ],
+          "versions": [
+            "7.0.0-43.43",
+            "7.0.0-44.44"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "UBUNTU-CVE-2026-98420",
+      "modified": "2026-11-24T18:54:17Z",
+      "rows": [
+        {
+          "package": {
+            "ecosystem": "Ubuntu:26.04:LTS",
+            "name": "linux",
+            "purl": "pkg:deb/ubuntu/linux@7.0.0-44.44?arch=source&distro=resolute"
+          },
+          "ranges": [
+            {
+              "type": "ECOSYSTEM",
+              "events": [
+                {
+                  "introduced": "0"
+                }
+              ]
+            }
+          ],
+          "versions": [
+            "7.0.0-43.43",
+            "7.0.0-44.44"
+          ]
+        }
+      ]
+    }
+  ],
+  "limits": "Selected Resolute/linux records; no vendor fixed event for 44.44. Downloaded via GitHub connector; original full records not reproduced."
+}

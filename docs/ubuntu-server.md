@@ -1,8 +1,10 @@
 # Ubuntu-server for Bussassistent
 
-## Kildekontroll 17. november; siste servermåling 15. november 2026
+## O6-status etter omstart og pakkeoppgradering 27. november 2026
 
-O3/O5 er fullført innen dokumentert omfang; O4 er administrativt lukket med bevisbegrensninger. O6-vedlikehold, etterkontroller og triage er ferdige. Samlet O6 forblir åpen med uendret midlertidig risikoaksept; firmware er separat utsatt. Full O6-lukking er ikke et generelt vilkår for passordrelease. [Eksakt kilde-/byggavstemming 17. november](evidence/o6-kernel-source-20261117.md) gir 51 rettede, én ikke berørt og fire åpne av 56 kernelrester. Binder er rettet i kilden, og gammel NTFS-driver er ikke bygget i 43.43 amd64/generic; disse to lokale konklusjonene avviker fra Ubuntu-trackeren. BPF, AMDGPU, DRM-pagemap og ksmbd har fortsatt berørt kode og avventer støttede rettelser. Bibliotek-/journalrester består. Siste serverbevis er eierens etterkontroll 15. november kl.20:02:17: ett minutt oppetid, aktiv43.43, releasepeker7921eb5, aktive app/tunnel/backup-timer og bestått API-helse/origin-avvisning. Jonas bekreftet deretter normal innlogging/visning. Siste verifiserte automatiske backup er15.november kl.03:17:19; ingen ny jobb/restore etter boot er dokumentert. Pakker/images, runtimebarrierer og omstartsmarkør er ikke avlest på nytt. Agentens etablerte TCP-begrensning er ikke feilsøkt igjen; ingen serverendring er utført.
+Serveren startet på Ubuntu 7.0.0-44.44 kl. 12:04. Etter eierens pakkeoppgradering kl. 12:15 var APT-køen tom, API og PostgreSQL friske og tunnelens lokale helsesjekk bestått. Jonas bekreftet ruteoppslag fra mobil. Aktiv produktversjon var `d4153832fae7d8ad69cd0fda7307ccaece650e21`. Siste verifiserte automatiske backup fullførte kl. 03:20 før omstarten. Det nye initramfs-arkivet fra pakkeoppgraderingen ble kontrollert via metadata. [Driftsbevis og kildeavstemming](evidence/o6-kernel-44-20261127.md).
+
+Kernelstatus er 51 rettet, én ikke berørt og fire åpne. O3/O5 er fullført innen omfang. O4 er administrativt lukket med bevisbegrensninger. Samlet O6, midlertidig risikoaksept og utsatt firmware følger gjeldende disposisjon. Kildeavstemmingen av util-linux 78409 er gjennomført. [V2 og privilegievurdering fra 20. november](evidence/o6-v2-source-reconciliation-20261120.md).
 
 De følgende daterte avsnittene er historiske kontrollpunkter. De gir ikke dagens driftsstatus. Kommandooppskriftene krever fortsatt sine egne avgrensninger og eventuell separat autorisasjon.
 

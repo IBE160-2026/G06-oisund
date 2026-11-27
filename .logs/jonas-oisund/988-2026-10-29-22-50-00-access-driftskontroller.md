@@ -536,3 +536,138 @@ Validering: SHA256/kildestørrelser, eksakt source/signed/buildinfo-binding, kil
 - Fire kernelavvik trenger støttet Ubuntu-rettelse for å lukkes som rettet kode; prioriter BPF. Eksisterende/delegerte BPF-objekter er fortsatt uattestert, og AMDGPU/DRM/ksmbd-barrierer er historiske/endringsutløste.
 - Neste konkrete kildeoppgave er util-linux/78409 i eksakt trixie-kilde/backporter; bibliotek- og journaldrester står åpne. Kvalifisert installasjon/aktivisering blir en senere vedlikeholdsoppgave når støttet rettelse foreligger.
 - Løpende backup/stabilitet og kandidatens egne kvalifiseringsporter videreføres; firmware separat utsatt. SamletO6 krever fortsatt uttrykkelig eierbeslutning for administrativ lukking. Alt er speilet i eksisterende O6-punkt i issues.md.
+
+## 2026-11-27 kl. 04:12 - Jonas Øisund
+
+### Oppgave
+
+Avstemme ny eierutskrift med publisert Ubuntu44.44 og kontrollere om oppdateringen retter de fire åpne O6-kernelpunktene før eventuell installasjons-/omstartsbeslutning. Fortsette dokumentasjonsarbeidet på eksisterende arbeidsbranch, uten serverendringer eller merge/push.
+
+### Plan
+
+- Gjenbruke17.november-kildebevisene og lese nyere GitHub-bevis.
+- Hente44.44 DSC/diff/buildinfo og offisielle amd64 security-/updates-indekser; rekonstruere de relevante filene og avstemme Canonical OSV.
+- Dokumentere publisert/installert/aktivt, konkrete kodevilkår og manglende førkontroll uten å lukke O6 eller utvide risikoaksept.
+
+### Resultat
+
+**f4e71fc** oppretter [rapport27.november og evidenspakke](../../docs/evidence/o6-kernel-44-20261127.md) og oppdaterer sju gjeldende statusoversikter. Eierutskriften er normalisert fra chat: aktiv43.43, installert linux-image-generic44.44,44-bilde i /boot, lokal kandidat44.44 og restart-required. Måletid/oppetid/sisteboot/helse/release/backup og komplett image-/modulpakkestatus er ikke oppgitt. Metapakken og filnavn er ikke overtolket til full pakke-/oppstartskvalifisering.
+
+Offisielle security-/updates-indekser bekrefter publisert44.44 amd64/generic og signed-image Built-Using linux=44.44. Original/diff hashkontrollert mot44 DSC, buildinfo mot begge indekser. Relevant kilde rekonstruert; git apply check/apply/reverse-check0. BPF/DRM-pagemap/ksmbd-filer er identiske med43.43 og beholder feilvilkårene. AMDGPU har andre BO-endringer, men beholder den feilende doorbell-innsettingen. Canonicals OSV-data oppdatert24.november lister44.44 berørt for alle fire. Ingen av de fire er rettet eller kan lukkes ved bare omstart til44.44. Aktivt omfang forblir51rettet/1ikkeberørt/4åpne av56. PGP/InRelease-signatur eller serverbinærintegritet er ikke attestert.
+
+GitHub main fccb0d78f95f7ea40e6d29c77751a25d34599cbd har nyere20.november-rapport som allerede avklarer util-linux78409-kilden og beskriver V2-portene. Den oppgaven bestilles ikke på nytt. O6-disponering/bibliotek/journal/firmware og risikoaksept videreføres uten ny bred leverandør-/kandidatreview. Historiske rapporter er bevart.
+
+Anbefaling: ordinær kvalifisert aktivering av44.44 etter fersk lesende pakke-/boot-/helse-/backupkontroll og etablert returberedskap. Ingen ny installasjon fremstår nødvendig; ingen omstart er gitt som ordre eller utført. De fire restene vil fortsatt kreve støttet rettelse. Ingen generell app-/belastnings-/stabilitetstest, SSH-feilsøking, serverendring eller nye WAN-prøver er gjort.
+
+Validering: kilde-/pakkebinding og SHA256,15kildehash, fire OSV-rader,56total/4åpne/0nye rettelser, lokale lenker og JSON kontrollert. Staget diffkontroll bestod etter at rå diff ble lagret tapsfritt som JSON og changelog-lesekopien fikk normaliserte linjeskift. Ingen produktkode endret. Kun egne dokumentasjonsendringer committet, ingen merge/push.
+
+### Åpne punkter
+
+- Fullført44 image-/modulpakkeoppsett, initramfs/oppstartsvalg, fersk helse og siste vellykkede backup må kontrolleres før separat autorisert vedlikeholdsaktivering. Ingen ny backupfeil er påvist.
+- BPF/AMDGPU/DRM-pagemap/ksmbd forblir åpne; følg støttede rettelser og dokumenterte endringstriggere. Øvrige bibliotek-/journaldisponeringer, kandidatporter, løpende drift og separat utsatt firmware består. SamletO6 er fortsatt åpen. Speilet i eksisterende O6-rad i issues.md.
+
+### Bestilt førkontroll for omstart til44.44, kl. 04:24
+
+Oppgave/plan: utføre bare lesende førkontroll av oppstartsgrunnlag, siste vellykkede backup og app/database/tunnel, deretter vente på Jonas sitt uttrykkelige klarsignal. Ett ordinært etablert SSH-forsøk stoppet under TCP-connect før innlogging med Permission denied, exit255, i tråd med kjent lokal WSAEACCES. Ingen videre tilgangsfeilsøking eller serverendring.
+
+Resultat: **94d5f25** oppdaterer gjeldende27.november-rapport med uverifisert førkontroll og legger til samlet eierkjørbar read-only-reboot-preflight.ps1. Scriptet leser boot/pakker/GRUB/EFI/initramfs/APT, avstemmer timer/jobb/journal/dumpmetadata og utfører eksisterende lokale helseprøver for app/origin/database/tunnel. Ingen backupinnhold, miljøhemmeligheter eller ufiltrert journal skrives ut. PowerShell-parser og diffkontroll bestått; Python er ikke lokalt tilgjengelig for syntaks-/kjøreprøve. Ingen serverprøve er fremstilt som bestått.
+
+Åpne punkter: eier kjører kommandoen fra vanlig PowerShell og deler statusutskriften. Serveren kan ikke erklæres omstartsklar før resultatene er vurdert. Deretter kreves uttrykkelig klarsignal før omstart. Agentens egen omstart/etterkontroll er fortsatt hindret av lokal TCP-begrensning. Fysisk tilgang er ikke nødvendig nå; etablert konsollberedskap beholdes. SamletO6, de fire kernelrestene og risikoaksepten er uendret; ingen merge/push.
+
+## 2026-11-27 kl. 04:33 — Jonas Øisund
+
+### Oppgave
+
+Vurdere den gjennomførte førkontrollen for omstart til 44.44, prøve én lesende SSH-kommando fra Codex og avvente uttrykkelig klarsignal.
+
+### Plan
+
+- Finn eierens PowerShell-utskrift og vurder den mot den eksisterende [O6-rapporten](../../docs/evidence/o6-kernel-44-20261127.md).
+- Bekreft aktiv kjerne med `uname -r` og avstem eventuelle hull mot byggkonfigurasjonen for 44.44.
+
+### Resultat
+
+Fant `Innlimt tekst(3).txt` som vedlegg i «O6 statuskontroll». Eierens måling kl. 04:25 bekrefter installert 44.44-image og moduler uten rapporterte pakkeavvik, lesbart initramfs, forventet GRUB/EFI-oppstart til 44 og 43 som reserve. Timerslaget kl. 03:19:58 samsvarer med backup-tjenestens kjøring og ferdig dump kl. 03:20:09. Release `d4153832fae7d8ad69cd0fda7307ccaece650e21`, lokal API/origin, database, Docker og tunnelberedskap er bekreftet. Ingen omstart ble utført. Status er 51 rettet, én ikke berørt og fire åpne.
+
+Codex fikk `Permission denied` før innlogging med standardtilgang. Samme `uname -r` lyktes med engangstilgang og streng vertsnøkkelkontroll. Den returnerte `7.0.0-43-generic`. Rapporten samler kontroller og konklusjon med hash av vedlegget.
+
+### Åpne punkter
+
+- Bekreft rotens lagringskjede, LVM-aktivering og nødvendige lagringsmoduler i 44-initramfs. Avvent uttrykkelig klarsignal før omstart.
+
+## 2026-11-27 kl. 11:21 — Jonas Øisund
+
+### Oppgave
+
+Fullføre den avgrensede lesekontrollen av LVM og lagringsdrivere i 44-initramfs, og deretter avvente klarsignal til omstart.
+
+### Plan
+
+- Avstem aktiv rotkjede og kontrollerdriver mot 44-kjernens konfigurasjon og innholdet i initramfs.
+
+### Resultat
+
+SSH kl. 11:15 viste aktiv 43-kjerne, ext4 på LVM med fysisk volum `/dev/nvme0n1p3` og driver `nvme`. 44-kjernen har ext4 og device mapper innebygd og NVMe-driverne som moduler. Serveren krever interaktiv sudo for selve initramfs-filen. Lesekommandoen er klargjort for vanlig PowerShell med SSH-nøkkel og streng vertsnøkkelkontroll. [O6-rapporten](../../docs/evidence/o6-kernel-44-20261127.md) dokumenterer funnene. Ingen omstart er utført.
+
+### Åpne punkter
+
+- Etter interaktiv sudo må 44-initramfs sjekkes for LVM-aktivering og alle nødvendige NVMe-moduler før omstartsklarhet kan bekreftes. Avvent uttrykkelig klarsignal før omstart.
+
+## 2026-11-27 kl. 11:54 — Jonas Øisund
+
+### Oppgave
+
+Vurdere den fullførte lesekontrollen av 44-initramfs fra eierens PowerShell-utskrift og gi en omstartsvurdering.
+
+### Plan
+
+- Sammenlign lagret arkivlisting med lagringskjeden, LVM-aktiveringen og 44-kjernens modulavhengigheter.
+
+### Resultat
+
+Eierens direkte PowerShell-kommando fullførte med SSH-status 0 etter interaktiv sudo. Rotvolumet er lineært LVM på `/dev/nvme0n1p3`. 44-initramfs inneholder LVM-verktøy, oppstartsskript, udev-regler og alle fem NVMe-modulavhengigheter, inkludert `hkdf` som skjermfilteret ikke viste i arkivlisten. Aktiv kjerne er fortsatt 43. [O6-rapporten](../../docs/evidence/o6-kernel-44-20261127.md) dokumenterer bestått førkontroll og hash av full utskrift. Ingen omstart er utført.
+
+### Åpne punkter
+
+- Avvent uttrykkelig klarsignal. Før gjennomføring må førgrunnlaget fortsatt gjelde, og etter omstart må ny oppstart og tjenestestatus verifiseres.
+
+## 2026-11-27 kl. 12:06 — Jonas Øisund
+
+### Oppgave
+
+Gjennomføre én uttrykkelig godkjent omstart til 44.44 etter fersk førkontroll og verifisere app, database, Docker, tunnel og backup-timer. Gi Jonas beskjed når ruteoppslaget kan prøves fra mobilen.
+
+### Plan
+
+- Gjenta førkontrollen, gjennomfør én omstart dersom alle sjekkene består, og følg SSH og tjenesteoppstarten.
+- Vurder konsollens oppdateringsvarsel med en lesende APT-simulering etter at tjenestene er tilbake.
+
+### Resultat
+
+Første SSH-kjøring sluttet etter API-kontrollen. Lesende SSH bekreftet samme oppstarts-ID og ingen ventende omstart. Korrigert kjøring verifiserte hele førgrunnlaget og sendte én omstart kl. 12:02:42. Ny oppstart kl. 12:04:15, aktiv `7.0.0-44.44-generic`, riktig release `d4153832fae7d8ad69cd0fda7307ccaece650e21` og vellykket API/originkontroll. Docker kjørte alle fire containere, PostgreSQL var `healthy` med `pg_isready`, tunnelens `/ready` ga HTTP 200 og backup-timer ventet på neste kjøring kl. 03:18:47. Eier bekreftet konsolloppstart og fikk beskjed om at mobiltest kunne begynne. [Oppdatert O6-rapport](../../docs/evidence/o6-kernel-44-20261127.md).
+
+APT-simulering viste 57 planlagte oppgraderinger, inkludert sikkerhetsoppdateringer og driftskomponenter. Ingen pakker ble installert. O6-status er 51 rettet, én ikke berørt og fire åpne.
+
+### Åpne punkter
+
+- Den fulle APT-køen anbefales håndtert i eget vedlikeholdsvindu. De fire åpne O6-kernelpunktene avventer fortsatt støttede rettelser.
+
+## 2026-11-27 kl. 12:16 — Jonas Øisund
+
+### Oppgave
+
+Følge opp eierens pakkeoppgradering på konsollen og avklare om det trengs en ny omstart.
+
+### Plan
+
+- Avstem konsollbildet mot APT-status, omstartsmarkør, aktiv kjerne og tjenestehelse over lesende SSH.
+
+### Resultat
+
+APT-simulering viser null ventende oppgraderinger og `dpkg --audit` var tom. Ingen omstartsmarkør. Samme oppstarts-ID og kjerne 44.44. Release `d4153832`, API/origin, PostgreSQL, Docker, tunnel og backup-timer bestod kontrollen. Backup-timeren venter på neste kjøring 28. november kl. 03:19:10. Dracut bygde nytt initramfs for 44, bekreftet med metadata. Ingen ny omstart. Den åpne APT-raden er lukket. [O6-rapporten](../../docs/evidence/o6-kernel-44-20261127.md) har pakkeversjoner og kontrollresultater.
+
+Jonas bekreftet at ruteoppslaget fungerte fra mobilen etter pakkeoppgraderingen. Mobiltesten bestod.
+
+### Åpne punkter
+
+Ingen nye. De fire eksisterende O6-kernelpunktene gjenstår.

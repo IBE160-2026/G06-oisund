@@ -2,9 +2,11 @@
 
 The isolated local V2 candidate has its own [startup, verification and owner trial record](docs/v2-handoff.md).
 
-## Current operational handover — 17 November 2026
+## Current operational handover — 27 November 2026
 
-**Current source review — 17 November 2026; last server observation — 15 November:** O3 and O5 are complete within their documented scopes; O4 is administratively closed with its recorded evidence limits. O6 maintenance, closing checks and scoped triage are complete; aggregate O6 remains open under the unchanged temporary, bounded risk disposition. Firmware is separately deferred. Full O6 closure is not a general password-release prerequisite. [Exact source/build reconciliation, 17 November](docs/evidence/o6-kernel-source-20261117.md): of the original 56 kernel residuals, 51 are fixed in the package matching the active build, one (legacy NTFS) is not affected, and four remain open (BPF, AMDGPU, DRM-pagemap, ksmbd). Binder is source-verified fixed; legacy NTFS code is absent despite a misleading config entry. Both local conclusions differ from the Ubuntu tracker. The four remaining code defects await supported Ubuntu fixes; historical runtime barriers are not new measurements. Library residuals remain open, and Ubuntu again confirms the deferred journald fix. Last server evidence is 15 November at 20:02:17 CET: active 7.0.0-43.43, release link 7921eb5, active app/tunnel/backup timer and passed health/origin checks; Jonas confirmed normal login/display. Last verified automatic backup is 15 November at 03:17:19; no postboot backup, new restore, package/image inventory or runtime-barrier measurement is claimed. No server change or expanded risk acceptance.
+On 27 November, the server booted Ubuntu 7.0.0-44.44. After Jonas upgraded the pending APT packages, the 12:16 CET check found the queue empty, app and PostgreSQL healthy, and the local tunnel readiness check passing. Jonas verified route lookup on mobile. Release `d4153832fae7d8ad69cd0fda7307ccaece650e21` was active. The last verified automatic backup finished at 03:20 CET before the reboot.
+
+The [44.44 source review and server checks](docs/evidence/o6-kernel-44-20261127.md) retain 51 fixed, one unaffected, and four open kernel findings. O3/O5 are complete within scope and O4 remains administratively closed. Aggregate O6, the temporary bounded risk disposition, and the deferred firmware work retain their documented status. The 20 November util-linux source review is complete. The newer initramfs generated during package maintenance was checked by metadata.
 
 ## Historical handover checkpoints
 

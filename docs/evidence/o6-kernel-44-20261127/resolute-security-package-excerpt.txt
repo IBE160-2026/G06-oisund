@@ -1,0 +1,110 @@
+Package: linux-buildinfo-7.0.0-44-generic
+Source: linux
+Priority: optional
+Section: kernel
+Installed-Size: 3367
+Maintainer: Ubuntu Kernel Team <kernel-team@lists.ubuntu.com>
+Architecture: amd64
+Version: 7.0.0-44.44
+Filename: pool/main/l/linux/linux-buildinfo-7.0.0-44-generic_7.0.0-44.44_amd64.deb
+Size: 846026
+MD5sum: 5b273e3025b8fa9b4506439264a02ede
+SHA1: b2c4889d81af979866209dc343a33128e1f32808
+SHA256: b5596cdbe436286c29923b6a19a5dbdd6174c64bc2e371ae84dd19a5005858a4
+SHA512: 6e9a74bbfd320599a5d3d4afe2a00c9cbcad2089917a66d8e3259c61a4da5101ddd7a0b507c5a084d822fc5f16bb174dc3aaa868ba23eece32b6b299c9bf9b90
+Description: Linux kernel buildinfo for version 7.0.0
+Description-md5: 0222e553748a3d594e0b1f3ef6a02ad4
+Origin: Ubuntu
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+
+Package: linux-image-7.0.0-44-generic
+Source: linux-signed
+Priority: optional
+Section: kernel
+Installed-Size: 16972
+Maintainer: Canonical Kernel Team <kernel-team@lists.ubuntu.com>
+Architecture: amd64
+Version: 7.0.0-44.44
+Recommends: grub-pc | grub-efi-amd64 | grub-efi-ia32 | grub | lilo, dracut | linux-initramfs-tool
+Suggests: bpftool, linux-perf, linux-tools, linux-headers-7.0.0-44-generic
+Provides: fuse-module, ivtv-modules, kvm-api-4, linux-image, redhat-cluster-modules, virtualbox-guest-modules
+Depends: kmod, linux-base (>= 4.5ubuntu1~16.04.1), linux-modules-7.0.0-44-generic
+Conflicts: linux-image-unsigned-7.0.0-44-generic
+Filename: pool/main/l/linux-signed/linux-image-7.0.0-44-generic_7.0.0-44.44_amd64.deb
+Size: 17086104
+MD5sum: ba59ef8ec23e1d9d119e79266212bc22
+SHA1: 9492c15fcde0fde476c0a6f2e48e9313fd5b248c
+SHA256: b4f0f6cc3c75e77cb26666a37dff17133b9f299ae089342587a63dfe4d7320c0
+SHA512: e02f3b05164fbc1ab7d66dd84ecb7c5d8ed8385dcfa7a34717b3cc06119898c02b29d2cc2553d4aa976bc385298c8edbffecf3b02e8ee4d2aa24a30655677e5a
+Description: Signed kernel image generic
+Description-md5: b0fd0df88b1cd31408007b00d2458952
+Built-Using: linux (= 7.0.0-44.44)
+Origin: Ubuntu
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+
+Package: linux-image-generic
+Source: linux-meta
+Priority: optional
+Section: kernel
+Installed-Size: 13
+Maintainer: Ubuntu Kernel Team <kernel-team@lists.ubuntu.com>
+Architecture: amd64
+Version: 7.0.0-44.44
+Recommends: thermald
+Provides: ivsc-modules (= 0~git202311021215.73a044d9), virtualbox-guest-modules (= 7.0.0-44), wireguard-modules (= 1.0.0)
+Depends: linux-image-7.0.0-44-generic, linux-modules-7.0.0-44-generic, linux-main-modules-zfs-7.0.0-44-generic, linux-main-modules-v4l2loopback-7.0.0-44-generic, linux-firmware, intel-microcode, amd64-microcode
+Conflicts: linux-image-fb-generic
+Filename: pool/main/l/linux-meta/linux-image-generic_7.0.0-44.44_amd64.deb
+Size: 2482
+MD5sum: 658c91230e31b89fbf065c166a8b45cf
+SHA1: f76ba9992c6983217128c796b21eb38dee9369da
+SHA256: 7a668d9a4cf764dc58c275b8633ba3e73b188d86634f0c39ebeb79e4c0abd108
+SHA512: ff549ba9c89da444f0321558f455d122856af267c62f372cf5b48fb095dfc81ba68211c947eb6c8528049432bb50d839061bc023f638b334d0fd89a8632ad379
+Description: Generic Linux kernel image
+Description-md5: 6d632579c673704f44b290b16e7dbfd1
+Origin: Ubuntu
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+
+Package: linux-image-unsigned-7.0.0-44-generic
+Source: linux
+Priority: optional
+Section: kernel
+Installed-Size: 17437
+Maintainer: Ubuntu Kernel Team <kernel-team@lists.ubuntu.com>
+Architecture: amd64
+Version: 7.0.0-44.44
+Recommends: grub-pc | grub-efi-amd64 | grub-efi-ia32 | grub | lilo, dracut | linux-initramfs-tool
+Suggests: bpftool, linux-perf, linux-tools, linux-headers-7.0.0-44-generic
+Provides: fuse-module, ivtv-modules, kvm-api-4, linux-image, redhat-cluster-modules, virtualbox-guest-modules
+Depends: kmod, linux-base (>= 4.5ubuntu1~16.04.1), linux-modules-7.0.0-44-generic
+Conflicts: linux-image-7.0.0-44-generic
+Filename: pool/main/l/linux/linux-image-unsigned-7.0.0-44-generic_7.0.0-44.44_amd64.deb
+Size: 17735872
+MD5sum: 9ccacf1fde38afff69b49b614ffabcd6
+SHA1: b9e7896142f63936aa8ab938d0ff685280e6b60e
+SHA256: 14f76a15ade308c767be79bf2833f0a4a9460b5e4fc077cee18ac99902ee06d5
+SHA512: b1704955abd7331c2afd78ebfc4785f8c2df0d77c5a925b4b69bf0306a34cb2c609daa017f5396a868520050a360344de8f4dbaecfb874fcf63aa7a7147ed5ac
+Description: Linux kernel image for version 7.0.0
+Description-md5: 40e4e0c15c805ba0256fdc17664c5808
+Origin: Ubuntu
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+
+Package: linux-modules-7.0.0-44-generic
+Source: linux
+Priority: optional
+Section: kernel
+Installed-Size: 163836
+Maintainer: Ubuntu Kernel Team <kernel-team@lists.ubuntu.com>
+Architecture: amd64
+Version: 7.0.0-44.44
+Depends: linux-main-modules-zfs-7.0.0-44-generic, linux-main-modules-v4l2loopback-7.0.0-44-generic, wireless-regdb
+Filename: pool/main/l/linux/linux-modules-7.0.0-44-generic_7.0.0-44.44_amd64.deb
+Size: 169687232
+MD5sum: 8fce5ab979ce5ad032f9fa1c4c239baf
+SHA1: 76f01f245098505942262276b2a8245937e50571
+SHA256: f337c0089e5cf7dcb9bc8bd5fd42bafac09a24cfdf24b6b3edebe0fd82714df2
+SHA512: 2996515ad871360ffed739fc0ba595607ac320c0fa843a14883b7de74bff9cfb8fdbc8e164aa6386f6c49c771990b5c7e2cfef57a3dd77741017b3f6f3277a41
+Description: Linux kernel modules for version 7.0.0
+Description-md5: a02d3ab9bae753cdbf933c595a9b3909
+Origin: Ubuntu
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
