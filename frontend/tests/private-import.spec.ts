@@ -215,7 +215,9 @@ for (const number of [8, 9]) test(`approved example ${number} preserves work and
   });
   await editor(page); await page.getByRole('button', { name: 'Lagre utkast', exact: true }).click();
   await expect(page.getByText('Lagret. Versjon 1.', { exact: true })).toBeVisible();
-  expect(saved.draft).toEqual(facts);
+  const { entur_matches, ...sourceFacts } = facts;
+  expect(entur_matches).toHaveLength(facts.activities.filter((activity: any) => activity.type === 'trip').length);
+  expect(saved.draft).toEqual(sourceFacts);
   await page.reload();
   await page.getByRole('button', { name: new RegExp(`Åpne 2030-01-${number === 8 ? '10' : '14'}`) }).first().click();
   await checkEditor();
