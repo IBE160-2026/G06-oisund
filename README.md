@@ -1,156 +1,101 @@
 # Bussassistent V2 for Tromsø
 
-IBE160 Programmering med KI, Høgskolen i Molde, høsten 2026. Jonas Øisund.
+Bussassistenten importerer skiftplaner fra tekst-PDF og lar sjåføren kontrollere, lagre og åpne dem igjen. Sjåføren kan slå opp daterte avganger, velge tur og starte holdeplassassistanse. Appen kan også vise avvik, GPS-fart og fartsgrense med 300 m-forvarsel der datagrunnlaget støtter det.
 
-Bussassistenten lar sjåføren importere en skiftplan fra PDF, kontrollere aktivitetene og finne den daterte avgangen med stopp i kjørerekkefølge. V2 bygger videre på V1 med passordbytte og gjenoppretting, automatiske avviksmeldinger, ruteoppslag, holdeplassprogresjon, GPS-fart og fartsgrense med 300 m-forvarsel der veggrunnlaget er kvalifisert.
+## Kjør lokalt
 
-## Prøv V2 lokalt
+Oppskriften er for Windows med Git, PowerShell 7.2 eller nyere, Node.js 24 med npm og Docker Desktop med Compose v2 og Linux-containere. Start Docker Desktop og sjekk at `docker info` viser en Linux-server. Portene 19661–19663 må være ledige ved første oppstart. GitHub-kloning, første bygg av containerne og npm-installasjonen trenger internett.
 
-Den lokale utgaven kjører på din egen PC og bruker en prøvekonto du lager selv. Du trenger lesetilgang til GitHub-repositoriet. Ubuntu-serveren og Cloudflare Access inngår bare i feltoppsettet.
-
-**Før du begynner:** Installer Git, PowerShell 7.2 eller nyere, Node.js 24 med npm og Docker Desktop med Compose v2. Start Docker Desktop med Linux-containere. Første oppstart trenger internett for å hente containerbilder og avhengigheter. Portene 19661–19663 må være ledige.
-
-**1. Hent den publiserte versjonen og start appen.** Åpne PowerShell 7 i mappen der du vil ha prosjektet. Har du allerede klonet repoet, oppdatert det med `git pull` på `main` eller pakket ut kildekoden til `v2.0.0`? Åpne PowerShell 7 i prosjektmappen som inneholder `compose.v2.yaml`, og kjør bare startkommandoen på siste linje i blokken under.
+**Ny klone.** Åpne PowerShell 7 i mappen du vil legge prosjektet i.
 
 ```powershell
-git clone --branch v2.0.0 --depth 1 https://github.com/IBE160-2026/G06-oisund.git bussassistent-v2
-Set-Location bussassistent-v2
+git clone https://github.com/IBE160-2026/G06-oisund.git bussassistent
+Set-Location bussassistent
+```
+
+**Allerede oppdatert med `git pull` på `main`.** Åpne PowerShell 7 i den eksisterende prosjektmappen. Her ligger `compose.v2.yaml`, `scripts` og `Eksempelfiler`.
+
+Kjør fra prosjektmappen i begge tilfeller.
+
+```powershell
 pwsh -NoProfile -File scripts/v2-local.ps1 -Mode Owner
 ```
 
-La terminalen stå åpen. Når du ser `Open http://127.0.0.1:19661/private` og forhåndsvisningen har startet, er appen klar.
+Terminalen viser helseadressene etter at containerne er klare. Vent på `Open http://127.0.0.1:19661/private` og at Vite viser adressen som klar. La terminalen stå åpen. [Åpne det lokale arbeidsrommet](http://127.0.0.1:19661/private).
 
-**2. Lag en lokal prøvekonto.** Åpne en ny PowerShell-terminal i samme prosjektmappe. Kjør kommandoen én gang og velg et lokalt testpassord når du blir spurt.
+### Opprett prøvekonto og lagre et skift
+
+Åpne en **andre PowerShell 7-terminal** i samme prosjektmappe mens appen kjører. Opprett prøvekontoen én gang. Skriv et lokalt passord på minst 12 tegn når terminalen ber om det.
 
 ```powershell
 docker compose -p ibe160-v2-owner -f compose.v2.yaml exec private-api python -m app.manage provision v2-owner-trial
 ```
 
-**3. Prøv et skift.** Åpne [den lokale appen](http://127.0.0.1:19661/private) i nettleseren på samme PC. Logg inn som `v2-owner-trial`. Under **Velg tekst-PDF** velger du [Eksempelfiler/Testskift-A.pdf](Eksempelfiler/Testskift-A.pdf). Kontroller aktivitetene, lagre og åpne planen igjen. Eksempelskiftet er syntetisk. Den forhåndslastede Tromsø-katalogen med alle feltavgangene ligger på feltserveren. En fersk lokal installasjon kan derfor gi tomme rutesøk. [Rutekatalog og import](docs/v2-field-trial.md)
+1. Logg inn som `v2-owner-trial` på [det lokale arbeidsrommet](http://127.0.0.1:19661/private). Du skal se **Mine utkast**.
+2. Under **Velg tekst-PDF** åpner du [Eksempelfiler/Testskift-A.pdf](Eksempelfiler/Testskift-A.pdf) fra prosjektmappen. **Importsammendrag** viser fem aktiviteter i det syntetiske skiftet.
+3. Velg **Alt stemmer – lagre og fortsett**. Vent til skjermen for gjennomgang av det lagrede utkastet vises.
+4. Velg **Forberedelse og planlister**. Under **Mine utkast** åpner du raden **Åpne … · versjon 1** og kontrollerer at det samme skiftet vises.
 
-**4. Stopp og start igjen.** Avslutt forhåndsvisningen med Ctrl+C i den første terminalen og kjør kommandoen under fra prosjektmappen. Prøvekonto og lagrede skift beholdes i lokale Docker-volumer. Neste gang kjører du startkommandoen fra trinn 1 og logger inn med samme konto.
+Konto, PDF og lagring fungerer på din egen PC. Du bruker ditt eget lokale passord og filen som følger med repoet. Ubuntu-serveren og Cloudflare Access brukes i feltoppsettet.
+
+### Stopp og åpne skiftet igjen
+
+Trykk Ctrl+C i den første terminalen for å stoppe nettvisningen. Kjør deretter stoppkommandoen fra prosjektmappen.
 
 ```powershell
 pwsh -NoProfile -File scripts/v2-local.ps1 -Mode Owner -Stop
 ```
 
-Hvis nettleseren ikke får kontakt, kontroller at Docker Desktop kjører og at den første terminalen fortsatt er åpen. Fra prosjektmappen kan du se tjenestestatus med `docker compose -p ibe160-v2-owner -f compose.v2.yaml ps`. [Flere detaljer om lokal kjøring](docs/v2-handoff.md#local-start)
+Start igjen med `pwsh -NoProfile -File scripts/v2-local.ps1 -Mode Owner`. Logg inn med samme konto og åpne det samme utkastet under **Mine utkast**. Stopp bevarer Docker-volumene og den lokalt opprettede databasenøkkelen i `.private-runtime`. Bruk samme prosjektmappe ved ny oppstart. Utkast utløper sju dager etter opprettelse. Oppstartsskriptet kjører npm-installasjon ved hver oppstart. Et nytt bygg kan hente avhengigheter eller containerbilder.
 
-## Feltgrunnlag for 30. november–10. desember 2026
+Hvis siden ikke åpner, sjekk at Vite fortsatt kjører og at [privat API](http://127.0.0.1:19663/health) svarer. Bruk `docker compose -p ibe160-v2-owner -f compose.v2.yaml ps` fra prosjektmappen for å se tjenestestatus.
 
-Ubuntu kjørte produktcommit `d415383` ved etterkontrollen 22. november. Katalogen for feltperioden inneholder 11 150 planlagte avganger på 21 linjer og 457 plattformer. Innlogging og oppslag over mobilnett ble prøvd med linje 26 fra Pyramiden. Sju plattformer trenger manuelt holdepunkt. Ved uavklart vegregulering viser appen **Ukjent** og holder tilbake forvarselet. Reell GPS-fart, automatisk progresjon og vegvarsling gjenstår å verifisere i felt. [Feltoppskrift, linjer og begrensninger](docs/v2-field-trial.md)
+## Datagrunnlag lokalt
 
-## V1 som innleveringsgrunnlag
+| Funksjon | Tilgjengelig lokalt |
+| --- | --- |
+| PDF, utkast og godkjenning | Virker med lokal konto og eksempelfil etter oppstart. |
+| Ruteoppslag og holdeplassassistanse | Importer offentlige Entur-rutetider og NSR-plattformer for driftsdatoen. Automatisk progresjon krever valgt tur, et eksplisitt startpunkt og god nok GPS. |
+| GPS-fart | Krever posisjonstillatelse og en fersk fartsmåling fra enheten. På en stasjonær PC kan fart mangle. |
+| Vegmatching og fartsgrense | Importer en NVDB-pakke for aktuell Oslo-dato. Tallfestet grense og forvarsel krever ytterligere kvalifisert kildegrunnlag. Den løpende vegdatainnhentingen og WFS-oppdateringen er prøvd i Ubuntu-feltoppsettet. |
+| Automatiske avvik | Oppdatering fra Entur krever internett. Koblingen til turen avhenger av hva Entur har publisert og hvilken rute som er bekreftet. |
 
-Den opprinnelige V1-milepælen har egen oppstartsoppskrift, syntetiske eksempeldata og dokumenterte akseptanseprøver. Resten av denne README-en beskriver V1 ved de angitte datoene. [Innleveringsoversikt for V1](docs/submission/README.md)
+**Datagrunnlag mangler for denne linjen og driftsdatoen** betyr at det lokale ruteoppslaget svarte, men at det ikke har en katalog for valget. **Ingen planlagt avgang denne dagen** betyr at en katalog er tilgjengelig og viser null avganger.
 
-This V1 imports a supported text-PDF shift, permits correction and explicit saving, confirms a saved plan, and supports manual activity selection, shift status and source-linked notices. React/TypeScript talks to actual FastAPI and PostgreSQL. Planned times never establish real progress or road clearance. Stories 12.1–12.5 are accepted; [12.5 owner decision](docs/evidence/12-5-owner-acceptance-2026-10-28.md) records the completed final assessment. Epic12 and consolidated local V1 are complete after [accepted D1–D3 main integration](docs/evidence/v1-main-integration-20261029.md). [Submission index](docs/submission/README.md).
+### Valgfritt — importer Entur-data
 
-## V1 operations status — 17 November 2026
-
-**Current source review — 17 November 2026; last server observation — 15 November:** O3 and O5 are complete within their documented scopes; O4 is administratively closed with its recorded evidence limits. O6 maintenance, closing checks and scoped triage are complete; aggregate O6 remains open under the unchanged temporary, bounded risk disposition. Firmware is separately deferred. Full O6 closure is not a general password-release prerequisite. [Exact source/build reconciliation, 17 November](docs/evidence/o6-kernel-source-20261117.md): of the original 56 kernel residuals, 51 are fixed in the package matching the active build, one (legacy NTFS) is not affected, and four remain open (BPF, AMDGPU, DRM-pagemap, ksmbd). Binder is source-verified fixed; legacy NTFS code is absent despite a misleading config entry. Both local conclusions differ from the Ubuntu tracker. The four remaining code defects await supported Ubuntu fixes; historical runtime barriers are not new measurements. Library residuals remain open, and Ubuntu again confirms the deferred journald fix. Last server evidence is 15 November at 20:02:17 CET: active 7.0.0-43.43, release link 7921eb5, active app/tunnel/backup timer and passed health/origin checks; Jonas confirmed normal login/display. Last verified automatic backup is 15 November at 03:17:19; no postboot backup, new restore, package/image inventory or runtime-barrier measurement is claimed. No server change or expanded risk acceptance.
-
-## Two runtime setups included in V1
-
-**Separate architecture reference review, 15 November 2026:** [Architecture document index](_bmad-output/planning-artifacts/architecture/README.md) distinguishes the bus assistant's architecture from the instructor's unchanged Pytagoras Forlag example, `technology.md` (commit `4d97c76`). Its required-service lists are not requirements for this project. The linked assessment was written after completed V1 and examines relevant principles against delivered v1.0.1 and the separate v1.1.0 candidate. It is independent of the PRD feedback/revision below and introduces no stack or service changes.
-
-> **PRD revision after completed V1 — 15 November 2026:** The [revised PRD](_bmad-output/planning-artifacts/prds/prd-IBE160-2026-09-21/prd-revised-v1.0.1.md) responds to [the instructor's 12 November feedback](_bmad-output/planning-artifacts/prds/prd-IBE160-2026-09-21/tilbakemelding-prd.md). It was written after V1 was completed and v1.0.1 published; it documents the delivered scope retrospectively, rather than representing the original pre-implementation plan. The [original PRD is preserved unchanged as a historical file](_bmad-output/planning-artifacts/prds/prd-IBE160-2026-09-21/prd-historical-before-feedback-2026-11-12.md). See the [review and response matrix](_bmad-output/planning-artifacts/prds/prd-IBE160-2026-09-21/prd-revision-review-2026-11-15.md). This documentation revision does not change product code or publish a new application release.
-
-- **Independent local assessment:** follow the exact-checkout recipe below, with synthetic data and a generated local account. The assessor needs no Jonas server, account, private data or Cloudflare access.
-- **Integrated Ubuntu operations:** [server guide](docs/ubuntu-server.md), with its own deployment/backup/recovery tests and owner acceptance. The last verified Ubuntu release was `7921eb54e4816aaab9368c3efd851bcf692f3823` on 4 November, with application/container/deployment sources matching v1.0.1. Owner output on 15 November confirms the same current release link; actual container image identity remains unverified. The earlier deployment below belongs to the v1.0.0 checkpoint. [GitHub release](https://github.com/IBE160-2026/G06-oisund/releases/tag/v1.0.0) and [actual backup/deploy/check record](docs/evidence/v1-release-deploy-20261031.md). The earlier final-control source was `8e59073`. A Git push does not update the server. Handover is complete; long-term stability observation continues. [Version and evidence map](docs/submission/v1-scope-and-operations.md).
-
-## V1 delivery checkout and startup
-
-Use the **full delivery commit SHA provided with the course delivery**. Run directly from that checkout so this README and the final evidence stay alongside the product. Do not switch back to C1 or c067fdb as part of startup. The controlled project version is the annotated `v1.0.0` tag. Resolve its full SHA with `git rev-parse 'v1.0.0^{commit}'`; the publication receipt supplies the exact target. [Final checks](docs/evidence/v1-final-control-20261031.md) qualify the package and fresh local recipe. O3/O5 are complete within scope, O4 is administratively closed with evidence limits, and named O6 residuals remain open; later course logistics/submission remain separate. The [repository reflection](docs/submission/ai-reflection.md) is reviewed and approved by Jonas; the separate Norwegian course report is unaffected. [The separate Access report](docs/evidence/access-operations-20261029.md) now documents O1 and bounded O2 passed on operational release eb0eee3, not C1/main. The tag and GitHub release are published; the exact tagged commit was separately deployed with backup/after-checks. The tag is unchanged. Complete coursework submission remains separate. V1 includes the completed Ubuntu integration; [current scope and version/evidence boundaries](docs/submission/v1-scope-and-operations.md) supersede the earlier bonus/v1.0.1 boundary.
-
-The accepted product/test/tooling reference is C1 **`3c2287ed68d0cbb1923439fc6ee00254395072a4`**. The eventual delivery includes the accepted application, integrated Ubuntu tooling and later documentation/evidence; the whole tree is not identical to C1. C1 alone has an older README and does not contain the complete final documentation. The accepted historical12.5 snapshot `c067fdbb20150219c041588ed4e990e7b0ef6b94` remains unchanged.
-
-Install Git, Node.js24 with npm, Docker Desktop with Linux containers and Compose v2. Use a desktop Chromium browser. Commands below are PowerShell. [Actually observed versions/configuration and evidence](docs/evidence/v1-acceptance-2026-10-29.md#fresh-delivery-reproduction) identify the tested Windows setup; this local recipe does not itself qualify the Ubuntu operational setup, whose own evidence is linked below.
-
-For a new checkout, obtain the **published full V1 commit SHA** from the delivery receipt (or resolve the published annotated `v1.0.0` tag), then run:
+Kjør fra prosjektmappen i den andre terminalen mens appen er startet. Velg en dato i Enturs publiserte rutetabell. Dette henter åpne NeTEx-rutetider for Troms og NSR-plattformer, og krever internett fra Docker.
 
 ```powershell
-$v1DeliveryCommit = (Read-Host 'Full 40-character delivery commit SHA').Trim().ToLowerInvariant()
-if ($v1DeliveryCommit -notmatch '^[0-9a-f]{40}$') { throw 'Use the full delivery commit SHA.' }
-git clone --no-checkout https://github.com/IBE160-2026/G06-oisund.git ibe160-v1
-if ($LASTEXITCODE -ne 0) { throw 'Clone failed; do not reuse another checkout.' }
-Set-Location -LiteralPath ibe160-v1
-git checkout --detach $v1DeliveryCommit
-if ($LASTEXITCODE -ne 0) { throw 'Delivery commit is unavailable; stop here.' }
-$actualV1Commit = git rev-parse HEAD
-if ($LASTEXITCODE -ne 0 -or $actualV1Commit -ne $v1DeliveryCommit) { throw 'Wrong delivery checkout.' }
-if (-not (Test-Path -LiteralPath docs/submission/delivery-readiness.md)) { throw 'Final delivery documentation is missing.' }
-node scripts/submission.mjs init
-if ($LASTEXITCODE -ne 0) { throw 'Initialization failed; inspect the error before continuing.' }
-node scripts/submission.mjs status
+$dag = '2026-11-30'
+$lokal = @('-p', 'ibe160-v2-owner', '-f', 'compose.v2.yaml')
+docker compose @lokal cp deploy/ubuntu/public_route_download.py private-api:/tmp/ibe160-public-route-download.py
+docker compose @lokal exec -T private-api sh -ec 'arkiv=$(mktemp); trap "rm -f $arkiv" EXIT; python /tmp/ibe160-public-route-download.py > "$arkiv"; python -m app.route_catalogue --bundle-stdin --publish --from-date "$1" --through-date "$1"' sh $dag
 ```
 
-If you already opened this README in the supplied exact checkout, stay there: record `git rev-parse HEAD`, then run `node scripts/submission.mjs init` and `node scripts/submission.mjs status` in its root. Do not run initialization from an unrelated worktree. Verify the supplied full SHA against `git rev-parse 'v1.0.0^{commit}'`. Do not substitute moving main. This project V1 is separate from the course guide’s requirement to assess the repository at the actual submission deadline.
+Et vellykket resultat viser avgangstall for de 21 linjene. Åpne **Finn avgang i Tromsø** i arbeidsrommet, velg driftsdato og linje, og trykk **Hent avganger**. I det frosne feltgrunnlaget for 30.11.2026 hadde linje 28 125 avganger, blant dem **10.05 Solligården → Hamna skole øst** med 38 stopp. Ved senere prøving bytter du til en aktuell driftsdato. Entur fjerner eldre avganger fra det løpende uttrekket. [Datakilder og feltoppskrift](docs/v2-field-trial.md).
 
-`init` generates ignored local database/account secrets, pulls pinned base images, installs locked npm/Python dependencies with an uncached build, builds the frontend, starts five services, applies versioned migrations and idempotently seeds the fictional day and synthetic account. Expect five healthy containers, a fictional day UUID and synthetic-account confirmation. A failed subprocess exits nonzero; resolve the failure before continuing. Installation needs access to Git, Docker registries, npm and PyPI; browser-test installation downloads Chromium. Runtime then needs only local loopback services, with no owner account, private PDF, tunnel, live feed or access to Jonas’s server.
+### Valgfritt — importer veggrunnlag
 
-`start` and `restart` use installed images with `--no-build --pull never`. After changing source version, use `init` to build that version. The fixed project is `ibe160-submission`; volumes are `ibe160-submission_submission_fictional` and `ibe160-submission_submission_private`. PostgreSQL publishes no host port. The scripts refuse a project owned by another checkout. If a required port/project is occupied, stop and use an unused machine/Docker context; do not reclaim existing services, copy secrets between checkouts or apply production overlays. [The earlier same-host C1 qualification](docs/submission/v1-followup-reproduction.md) used an explicitly recorded namespace/port translation, not the default recipe below.
-
-| Entry | Address | Evidence type |
-|---|---|---|
-| Private workspace | http://127.0.0.1:15325/private | Actual authenticated API/PostgreSQL; generated synthetic login |
-| Fictional assessment | http://127.0.0.1:15325/ | Actual fictional save/reopen; separate database |
-| No-login simulation | http://127.0.0.1:15325/demo.html | Labelled in-memory scenarios; no persistence claim |
-| Private / fictional health | http://127.0.0.1:18328/health / http://127.0.0.1:18327/health | Database-backed health; private cleanup status is separate |
-
-## Actual application journey
-
-Read `.private-runtime/submission/account.json` locally for the generated `synthetic-submission` login. This ignored file is never part of the submission. Preserve both secret files while retaining the volumes. Ordinary `app.manage provision` still refuses the reserved `synthetic-` namespace; only the bounded demonstration initializer provisions this account.
-
-1. Open `/private`, sign in and choose `Eksempelfiler/Testskift-A.pdf` under **Velg tekst-PDF**. A–E and the independent [expected facts](Eksempelfiler/Fasit-testskift.json) are fully synthetic. Import is transient: inspect the summary before saving.
-2. For correct input choose **Alt stemmer – lagre og fortsett**. To exercise correction choose **Rett eller legg til opplysninger**, edit **Til sted** and **Kilde / manuell rettelse**, then **Lagre utkast** and inspect the acknowledgement. PDF facts remain separately available; missing facts stay unknown. A first draft's bus is saved with the whole draft; a clean saved draft offers **Lagre buss/vogn**.
-3. A correct import already reaches the distinct saved-version approval. After editing/saving, choose **Fortsett til godkjenning** (the editor also offers **Gjennomgå lagret utkast**). Inspect the saved version, explicitly classify activities when required and acknowledge listed unknowns. Select **Bekreft gjennomgått plan**. Confirmation does not start work: the day shows no selected activity and **Ikke startet**.
-4. **Velg aktivitet …**, inspect details, return to the day and explicitly **Start skift** / **Bekreft skiftstart**. Manually select and save an **aktivitetsstatus**. The confirmed plan's bus has its own **Lagre fysisk buss** action.
-5. Optionally open **Manuelt vedlikeholdte avvik**, register a synthetic notice with **Kildebeskrivelse**, an optional fictional link such as `https://example.invalid/submission`, a future ending date and explicitly save. No source download is needed. Source checking, validity, manual ending and automatic expiry are distinct. **Les avvik for linjer og datoer** filters by exact line and planned Oslo calendar date; treat an empty list as a stored-data filter result, with source coverage still unknown.
-6. Reload and reopen the saved plan; check acknowledged activity/status/bus. End or abort with explicit confirmation; inspect the recap and reopen. Import C separately for midnight/date rollover; E exercises sparse/unknown facts. [Review checklist](docs/submission/review-checklist.md).
-
-Unsupported/scanned/malformed PDFs offer manual entry. This is a bounded two-column text-layout parser; [supported input and limits](docs/submission/supported-input.md).
-
-## Stop, restart, retention and reset
+Kjør fra prosjektmappen mens appen er startet. Angi dagens dato i Oslo. Kommandoen henter et arkiv fra NVDB, validerer det og importerer det i lokal database. Hentingen krever internett fra Docker.
 
 ```powershell
-node scripts/submission.mjs stop
-node scripts/submission.mjs start
-node scripts/submission.mjs restart
-node scripts/submission.mjs status
+$vegdag = '2026-11-30' # Bytt til dagens Oslo-dato
+$lokal = @('-p', 'ibe160-v2-owner', '-f', 'compose.v2.yaml')
+docker compose @lokal exec -T private-api sh -ec 'mappe=$(mktemp -d); trap "rm -f $mappe/veg.zip; rmdir $mappe" EXIT; python -m app.road_area_evidence --date "$1" --output "$mappe/veg.zip"; python -m app.road_area_catalogue "$mappe/veg.zip" --publish' sh $vegdag
 ```
 
-Stop/start/restart preserve volumes, sessions and saved records. Repeated initialization neither changes an existing password nor reseeds an unexpired fictional day. Reads/retries/restarts never renew server deadlines. Sessions last 14 days. Drafts expire seven days after their server creation. Confirmed plans expire seven days after the planned final end; an earlier server-recorded closure shortens the deadline to seven days after that closure. The earlier applicable bound is retained without renewal, and dependent records follow the parent deadline. Qualified notices have separate storage retention seven days after effective ending; validity is not road clearance. Expired access is immediately refused; startup/hourly cleanup removes expired records. The [evidence](docs/evidence/12-5-reproduction.md) separates restart checks from accelerated expiry tests.
+Bruk **Vegområde og GPS-fart** i arbeidsrommet. En pakke fra NVDB alene kan gi vegmatching med **Ukjent** fartsgrense. [Krav til skilt, reguleringer og forvarsel](docs/v2-field-trial.md#oppdatering-og-tilbakeføring).
 
-Unsaved private work lives in page memory; refresh/closing/logout/expiry can lose it. Keep the page open during an unresolved save and use its explicit check/retry controls. Reconnecting alone never saves.
+## Versjoner og feltprøver
 
-Erase **only** disposable submission data and seed a new fictional day plus the same generated login:
+[Publisert v2.0.0](https://github.com/IBE160-2026/G06-oisund/releases/tag/v2.0.0) er sammenligningsgrunnlaget. På arbeidsgrenen er 7 280 tidligere uavklarte stoppforekomster på sju plattformer kvalifisert i den automatiserte katalogkontrollen. Tidligere kvalifiserte forekomster beholdt riktig plattform og koordinater. Fysisk GPS og faktisk progresjon på bussen gjenstår. [Testrapport og feltoppskrift](docs/v2-field-trial.md#holdeplassprogresjon-i-feltkatalogen).
 
-```powershell
-node scripts/submission.mjs reset
-```
+## Innlevering og dokumentasjon
 
-Reset checks project/config ownership, running network/volume identities, exact database identity and synthetic-only accounts before mutation. A non-synthetic account refuses the entire reset before either database changes. It preserves generated passwords and migration history; saved synthetic plans/notices/sessions are removed, so sign in again. Never substitute operational databases or delete secrets while retaining volumes. `stop` is sufficient to leave the demo; no global cleanup is required.
+- [V1-milepæl, leveranse og prøveoppskrift](docs/submission/README.md)
+- [Revidert PRD etter faglærerens tilbakemelding](_bmad-output/planning-artifacts/prds/prd-IBE160-2026-09-21/prd-revised-v1.0.1.md) og [arkitektur](_bmad-output/planning-artifacts/architecture/README.md)
+- [V1-akseptansebevis](docs/evidence/v1-acceptance-2026-10-29.md), [V2-testbevis](docs/v2-handoff.md) og [Android-prøver](docs/v2-android-test-handoff.md)
+- [Ubuntu-drift, backup og gjenoppretting](docs/ubuntu-server.md) og [O6-etterkontroll](docs/evidence/o6-kernel-44-20261127.md)
 
-To automate the stop/start, exact row/deadline persistence and positive reset checks, run `node scripts/verify-submission-runtime.mjs`. This intentionally resets demonstration data and records results under `tmp/submission-runtime-check.json`; run it after inspecting any manual demo work you want to keep.
-
-## Optional verification commands
-
-```powershell
-node --test scripts/test-submission.mjs
-node scripts/submission.mjs test-backend
-node scripts/submission.mjs install-browser
-node scripts/submission.mjs test-browser
-```
-
-Backend verification runs private HTTP/PostgreSQL tests with explicit exclusions `--ignore=tests/test_assessment.py --ignore=tests/test_pdf_import.py`, then runs only `tests/test_assessment.py tests/test_pdf_import.py` in the fictional container. Test selection is explicit for each mode; actual counts/source belong to the [versioned evidence map](docs/submission/README.md#evidence-and-source-map). The12.5 report retains its own historical source; none of these commands is a claim that it was rerun for a documentation-only delivery commit. The existing `PRIVATE_TEST_PROJECT=ibe160-private-tests` marker and non-synthetic refusal remain unchanged despite the separate Compose name. Browser tests use freshly installed Playwright Chromium and the actual APIs. Linux may additionally need system libraries: from `frontend`, run `npx playwright install --with-deps chromium`, then return to the root. Generated browser output is ignored under `tmp/`; selected evidence is versioned separately.
-
-[Traceability](docs/submission/traceability.md), [AI/human reflection](docs/submission/ai-reflection.md) and [known limits](docs/submission/known-issues.md) distinguish extraction, integration, UI, historical physical observations and unperformed field benefit. No real-world time savings or complete accessibility conformance is claimed.
-
-## Preserved history
-
-[Completed Epic12 retrospective](_bmad-output/implementation-artifacts/epic-12-retro-2026-10-29.md) retains its original accepted-with-open-items verdict. Subsequent D1–D3 work, explicit acceptance and [main integration](docs/evidence/v1-main-integration-20261029.md) completed local V1 and Epic12. The [delivery register](docs/submission/delivery-readiness.md) now records the controlled V1 freeze, the current O3–O6 dispositions and the still-open complete course submission. No unperformed control is marked passed.
-
-Current delivery scope: [owner decision including Ubuntu](docs/submission/v1-scope-and-operations.md), with application scope [SCOPE-02](_bmad-output/planning-artifacts/sprint-change-proposal-2026-10-19.md), [requirements](_bmad-output/planning-artifacts/prds/prd-IBE160-2026-09-21/prd.md), [stories](_bmad-output/planning-artifacts/epics.md), [sprint](_bmad-output/implementation-artifacts/sprint-status.yaml). The earlier accumulated README remains in Git at `99c272b09abaa5ffecf3286b406fbf065a445c7c`.
-
-Preserved reports: [12.1/12.2 integration](docs/evidence/12-integrated-handoff.md), [12.3 physical acceptance](docs/evidence/12-3-device-acceptance-2026-10-27.md), [12.4 handoff](docs/evidence/12-4-handoff.md), [12.4 corrected import](docs/evidence/12-4-import-experience.md), [12.4 main integration](docs/evidence/12-4-main-integration.md), [development log](docs/development-log.md). Their original revisions, failures and pending statements remain historical. [Tablet operations](docs/tablet-production.md) retains protected-environment history; the Ubuntu guide above governs integrated operations. Neither is a local assessment prerequisite.
+Jonas Øisund · IBE160 Programmering med KI · Høgskolen i Molde · høsten 2026
