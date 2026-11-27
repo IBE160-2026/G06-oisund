@@ -6,7 +6,7 @@ from zoneinfo import ZoneInfo
 from fastapi import HTTPException
 from pydantic import Field
 from .draft_domain import StrictModel
-from .workday_notice_domain import NoticeRecord
+from .workday_notice_domain import NoticeRecord, notice_fields
 
 OSLO = ZoneInfo('Europe/Oslo')
 Line = Annotated[str, Field(min_length=1, max_length=300)]
@@ -88,7 +88,7 @@ def project(plan, rows, line=None, calendar_date=None, *, projected_at=None):
             start, end = instant(start) if start is not None else datetime.min.replace(tzinfo=timezone.utc), instant(end)
             if not any(start <= b and end >= a and (upper is None or start < upper) for a, b in intervals):
                 continue
-        candidates.append({'notice': {key: row[key] for key in NoticeRecord.model_fields}, 'matching_lines': matched,
+        candidates.append({'notice': notice_fields(row), 'matching_lines': matched,
                            'unmatched_tags': unmatched, 'line_uncertain': uncertain, 'validity': validity})
     return {'workday_id': plan['id'], 'expires_at': plan['expires_at'], 'server_now': projected_at, 'available_lines': lines,
             'available_dates': dates, 'unknown_line_count': unknown, 'unmatched_notice_count': unmatched_count, 'selected_line': line,

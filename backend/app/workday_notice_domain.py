@@ -162,3 +162,11 @@ class AccountNoticeList(StrictModel):
     server_now: datetime
     notices: list[NoticeRecord] = Field(max_length=50)
     next_cursor: UUID | None
+
+
+
+def notice_fields(row):
+    result = {key: row[key] for key in NoticeRecord.model_fields if key != 'geography'}
+    if row.get('geography') is not None:
+        result['geography'] = row['geography']
+    return result

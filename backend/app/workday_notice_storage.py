@@ -5,14 +5,11 @@ from fastapi import HTTPException
 from psycopg.types.json import Jsonb
 from . import auth, draft_storage, workday_storage
 from .private_storage import database
-from .workday_notice_domain import NoticeRecord
+from .workday_notice_domain import NoticeRecord, notice_fields
 
 
 def record(row, plan=None):
-    result = {key: row[key] for key in NoticeRecord.model_fields if key != 'geography'}
-    if row.get('geography') is not None:
-        result['geography'] = row['geography']
-    return result
+    return notice_fields(row)
 
 
 def member(conn, owner, notice_id):
