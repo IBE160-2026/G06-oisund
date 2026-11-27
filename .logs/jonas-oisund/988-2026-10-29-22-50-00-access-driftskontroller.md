@@ -630,3 +630,24 @@ Eierens direkte PowerShell-kommando fullførte med SSH-status 0 etter interaktiv
 ### Åpne punkter
 
 - Avvent uttrykkelig klarsignal. Før gjennomføring må førgrunnlaget fortsatt gjelde, og etter omstart må ny oppstart og tjenestestatus verifiseres.
+
+## 2026-11-27 kl. 12:06 — Jonas Øisund
+
+### Oppgave
+
+Gjennomføre én uttrykkelig godkjent omstart til 44.44 etter fersk førkontroll og verifisere app, database, Docker, tunnel og backup-timer. Gi Jonas beskjed når ruteoppslaget kan prøves fra mobilen.
+
+### Plan
+
+- Gjenta førkontrollen, gjennomfør én omstart dersom alle sjekkene består, og følg SSH og tjenesteoppstarten.
+- Vurder konsollens oppdateringsvarsel med en lesende APT-simulering etter at tjenestene er tilbake.
+
+### Resultat
+
+Første SSH-kjøring sluttet etter API-kontrollen. Lesende SSH bekreftet samme oppstarts-ID og ingen ventende omstart. Korrigert kjøring verifiserte hele førgrunnlaget og sendte én omstart kl. 12:02:42. Ny oppstart kl. 12:04:15, aktiv `7.0.0-44.44-generic`, riktig release `d4153832fae7d8ad69cd0fda7307ccaece650e21` og vellykket API/originkontroll. Docker kjørte alle fire containere, PostgreSQL var `healthy` med `pg_isready`, tunnelens `/ready` ga HTTP 200 og backup-timer ventet på neste kjøring kl. 03:18:47. Eier bekreftet konsolloppstart og fikk beskjed om at mobiltest kunne begynne. [Oppdatert O6-rapport](../../docs/evidence/o6-kernel-44-20261127.md).
+
+APT-simulering viste 57 planlagte oppgraderinger, inkludert sikkerhetsoppdateringer og driftskomponenter. Ingen pakker ble installert. O6-status er 51 rettet, én ikke berørt og fire åpne.
+
+### Åpne punkter
+
+- Den fulle APT-køen anbefales håndtert i eget vedlikeholdsvindu. De fire åpne O6-kernelpunktene avventer fortsatt støttede rettelser.
