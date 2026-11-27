@@ -30,6 +30,14 @@ PUBLICATION = f'{{{netex.NS[""]}}}PublicationTimestamp'
 DELIVERY = f'{{{netex.NS[""]}}}PublicationDelivery'
 VALID_BETWEEN = f'{{{netex.NS[""]}}}ValidBetween'
 CONDITION_TAGS = ('ValidBetween', 'ValidityCondition', 'AvailabilityCondition', 'validityConditions')
+CONDITION_ELEMENTS = {f'{{{netex.NS[""]}}}{name}' for name in CONDITION_TAGS}
+SITE_FRAME = f'{{{netex.NS[""]}}}SiteFrame'
+STOP_PLACES = f'{{{netex.NS[""]}}}stopPlaces'
+COMPOSITE_FRAME = f'{{{netex.NS[""]}}}CompositeFrame'
+
+
+def has_conditions(node):
+    return any(child.tag in CONDITION_ELEMENTS for child in node)
 
 
 def validity(node):
@@ -41,7 +49,7 @@ def validity(node):
 
 
 def zoned(value):
-    if value is None or 'T' not in value:
+    if not isinstance(value, str) or 'T' not in value:
         return None
     try:
         stamp = datetime.fromisoformat(value)
@@ -62,13 +70,13 @@ def dated_interval(node):
     if len(intervals) != 1 or intervals[0].tag != VALID_BETWEEN:
         return {}
     starts, ends = (netex.children(intervals[0], name) for name in ('FromDate', 'ToDate'))
-    if len(starts) != 1 or len(ends) > 1:
+    if not (starts or ends) or len(starts) > 1 or len(ends) > 1:
         return {}
-    start = zoned((starts[0].text or '').strip())
+    start = zoned((starts[0].text or '').strip()) if starts else None
     end = zoned((ends[0].text or '').strip()) if ends else None
-    if start is None or ends and end is None:
+    if (starts and start is None) or (ends and end is None):
         return {}
-    if end is not None and datetime.fromisoformat(start) >= datetime.fromisoformat(end):
+    if start is not None and end is not None and datetime.fromisoformat(start) >= datetime.fromisoformat(end):
         return {}
     return {'valid_from': start, 'valid_until': end}
 
@@ -105,11 +113,17 @@ def stop_places(stream):
     stack = []
     stop_nodes = 0
     open_stops = 0
+    site_number = 0
+    conditioned_frames = set()
     for event, node in XML.iterparse(source, events=('start', 'end')):
         source.last_event = source.bytes_read
         if event == 'start':
             if not stack and node.tag != DELIVERY:
                 raise ValueError('Unexpected NSR XML document')
+            if node.tag == SITE_FRAME:
+                site_number += 1
+            if stack and stack[-1].tag in (SITE_FRAME, COMPOSITE_FRAME) and node.tag in CONDITION_ELEMENTS:
+                conditioned_frames.add(stack[-1])
             stack.append(node)
             if len(stack) > MAX_XML_DEPTH:
                 raise ValueError('NSR XML exceeds its depth budget')
@@ -123,8 +137,14 @@ def stop_places(stream):
                 if stop_nodes > MAX_STOP_NODES:
                     raise ValueError('NSR StopPlace exceeds its XML node budget')
             continue
-        if node.tag == STOP_PLACE or len(stack) == 2 and node.tag == PUBLICATION:
-            yield node
+        if node.tag == STOP_PLACE:
+            in_unconditioned_site = (len(stack) >= 3 and stack[-2].tag == STOP_PLACES
+                                     and stack[-3].tag == SITE_FRAME and not conditioned_frames)
+            site = site_number if in_unconditioned_site else None
+            yield node, site
+        elif len(stack) == 2 and node.tag == PUBLICATION:
+            yield node, None
+        conditioned_frames.discard(node)
         if node.tag == STOP_PLACE:
             open_stops -= 1
             if not open_stops:
@@ -139,7 +159,8 @@ def read_records(stream, wanted, revision, *, future):
     records = {}
     ambiguous = set()
     publication = None
-    for node in stop_places(stream):
+    parent_sites = {}
+    for node, site in stop_places(stream):
         if node.tag == PUBLICATION:
             if publication is not None and future:
                 raise ValueError('Repeated NSR publication timestamp')
@@ -148,6 +169,7 @@ def read_records(stream, wanted, revision, *, future):
             continue
         quays = [quay for quay in netex.children(node, 'quays/Quay') if quay.get('id') in wanted]
         parent_interval = dated_interval(node) if future and quays else None
+        parent_key = parent_site_key(node, site) if future and quays and not has_conditions(node) else None
         for quay in quays:
             identifier = quay.get('id')
             if not future and identifier in records:
@@ -164,17 +186,47 @@ def read_records(stream, wanted, revision, *, future):
                 record = {'quay_id': identifier, 'stop_place_id': node.get('id'),
                           'quay_version': quay.get('version'), 'stop_place_version': node.get('version'),
                           'mapping_revision': revision, 'coordinate_kind': 'Quay', 'crs': 'WGS84'}
-            has_conditions = any(netex.children(quay, name) for name in CONDITION_TAGS)
+            quay_has_conditions = has_conditions(quay)
             record.update(stop_place_validity=parent_interval,
-                          quay_validity=dated_interval(quay) if has_conditions else parent_interval,
-                          validity_basis='quay' if has_conditions else 'containing-stop-place')
+                          quay_validity=dated_interval(quay) if quay_has_conditions else parent_interval,
+                          validity_basis='quay' if quay_has_conditions else 'containing-stop-place')
+            if parent_key and not quay_has_conditions and quay.get('modification') != 'delete':
+                parent_sites.setdefault(parent_key, []).append(record)
             versions = records.setdefault(identifier, {'versions': []})['versions']
             versions.append(record)
             if len(versions) > 32:
                 raise ValueError(f'Too many NSR versions of {identifier}')
     for identifier in ambiguous:
         records.pop(identifier, None)
-    return publication, records
+    return publication, records, parent_sites
+
+
+def parent_site_key(node, site):
+    refs = netex.children(node, 'ParentSiteRef')
+    if site is None or len(refs) != 1 or node.get('modification') == 'delete':
+        return None
+    parent = netex.known_id(refs[0].get('ref'), 'NSR', 'StopPlace')
+    version = refs[0].get('version', '')
+    if parent and parent != node.get('id') and re.fullmatch(r'[0-9]{1,20}', version):
+        return site, parent, version
+    return None
+
+
+def apply_parent_site_intervals(stream, candidates):
+    # Resolve the exact version in the same SiteFrame. A second streaming pass
+    # retains only the referenced parents and detects repeated definitions.
+    intervals = {}
+    for node, site in stop_places(stream):
+        key = site, node.get('id'), node.get('version')
+        if key in candidates:
+            usable = (key not in intervals and node.get('modification') != 'delete'
+                      and not netex.children(node, 'ParentSiteRef'))
+            interval = dated_interval(node) if usable else None
+            intervals[key] = interval
+    for key, interval in intervals.items():
+        if interval:
+            for record in candidates[key]:
+                record.update(stop_place_validity=interval, quay_validity=interval, validity_basis='parent-site')
 
 
 def quay_record(parent, quay, revision):
@@ -218,9 +270,13 @@ def read(path, generation, wanted, fetched_at):
             if not 0 < member.file_size <= (450_000_000 if future else 45_000_000):
                 raise ValueError('NSR XML exceeds its archive byte limit')
             scope = 'future' if future else 'troms'
-            revision = f'nsr-{scope}-{generation}-{digest}'
+            # The same archive can now yield new coordinate evidence. Keep old pins readable.
+            revision = f'nsr-{scope}-{generation}-{digest}' + ('-v2' if future else '')
             with archive.open(member) as xml:
-                publication, records = read_records(xml, wanted, revision, future=future)
+                publication, records, parent_sites = read_records(xml, wanted, revision, future=future)
+            if parent_sites:
+                with archive.open(member) as xml:
+                    apply_parent_site_intervals(xml, parent_sites)
     if future and zoned(publication) is None:
         raise ValueError('Current-and-future NSR archive lacks its publication timestamp')
     source = source_metadata(revision, generation, digest, fetched_at, publication,
@@ -236,7 +292,7 @@ def source_metadata(revision, generation, digest, fetched_at, publication, url):
 
 def load_for_reference(conn, reference):
     key = reference.get('position_coordinate_revision')
-    if not isinstance(key, str) or not re.fullmatch(r'nsr-(?:troms|future)-[0-9]{1,20}-[a-f0-9]{64}', key):
+    if not isinstance(key, str) or not re.fullmatch(r'nsr-(?:troms|future)-[0-9]{1,20}-[a-f0-9]{64}(?:-v2)?', key):
         return None
     provenance = reference.get('provenance') or {}
     if provenance.get('nsr_revision') != key:

@@ -42,8 +42,6 @@ Kontrollerte eksempler 30. november omfatter linje 26 fra Pyramiden 05:10 med 36
 4. Åpne **Vegområde og GPS-fart** for en instruktørtur med eller uten avgang. Start fartsmåling, velg eventuelt et vegområde og start vegmatching. Begge funksjonene kan bruke samme GPS-vakt. Ved avvist eller tapt tilgang opphører målingen. Etter at forbindelsen er oppe og tilgangen er bekreftet, start funksjonen på nytt.
 5. Ved brudd kan en allerede åpnet offentlig stoppliste leses i samme fane. Nytt oppslag og lagring krever forbindelse og gyldig økt. Oppdater eller kontroller tilgangen ved retur. Omlasting uten nett krever at forbindelsen kommer tilbake før et nytt oppslag.
 
-Enturs arkiv med nåværende og framtidige stopp inneholder alle 457 plattformene. Det ga entydig datert plattformversjon for 411 148 av 418 428 planlagte stoppforekomster. Ved sju plattformer mangler også gyldighet for det versjonerte stoppestedet. Følg disse manuelt og velg forekomsten på nytt ved GPS-gjenopptak. Plattformene ligger ved Tromsø Prostneset (to), Hamna skole nord, Hamna skole øst, Sandvik kryss og Tromsø lufthavn (to). Plattformversjon velges på faktisk ankomst- og avgangstid, inkludert passering av midnatt. Entur NSR-generasjon `1795345333303902`, SHA-256 `44ad13ccead173a9a6f0ce444ab855025308c016df3860ac5e3a31dd1cdb7066`. [Enturs framtidsarkiv](https://developer.entur.no/open-data/stops) · [Nordisk NeTEx-profil om gyldighet](https://entur.atlassian.net/wiki/spaces/PUBLIC/pages/728563782)
-
 Automatisk avviksvurdering gjenkjenner bekreftet linje og planlagt tidsvindu når Enturs SIRI-SX for TRO har publisert relevante opplysninger. Et avvik med ufullstendig linje-, retnings- eller stoppomfang kan kreve manuell gjennomgang.
 
 De elleve daterte NVDB-uttakene for 30. november–10. desember ga samme graf med 18 615 rettede geometrier, inkludert begge armer ved R4 og bekreftet envegsretning mot Flyplassvegen. Den isolerte databasen har 33 pakker. Pakkene overlapper og rommer 6 556 rettede segmenter for Kvaløya, 14 387 for Tromsøya og 13 335 for fastlandet per dato. Flere grener, uavklart retning, kilder uten oppdatert bekreftelse og variable grenser kan gi **Ukjent**. Tettbygd standard på 50 km/t brukes der en etterprøvbar kontroll har avklart skilting og vedtak for strekningen. GPS-målinger og matching behandles på enheten. [NVDB vegnett](https://nvdb.atlas.vegvesen.no/docs/produkter/nvdbapil/v4/Vegnett/) · [Vegtrafikkloven § 6](https://lovdata.no/dokument/NL/lov/1965-06-18-4)
@@ -52,9 +50,48 @@ Vegvesenets åpne SituationSimple svarte fra Ubuntu 22. november med fire saker 
 
 I den isolerte prøven 22. november ga dagens NVDB- og WFS-data 459, 1 199 og 1 084 segmenter med registrert fartsgrense i de tre overlappende pakkene. Simulert kjøring langs faktisk veggeometri ga henholdsvis 60, 30 og 30 km/t på Kvaløya, Tromsøya og fastlandet. Det virkelige uttaket for 30. november viste den registrerte 50-platen ved R4 omtrent 25–26 m inn på Flyplassvegen. Appen mangler bekreftet overgang på grafnoden der, og forvarsler ved R4 holdes tilbake. [R4-skilt og grensegrunnlag](evidence/v2-road-source-20261120.md#r4-sign-and-lane-cross-check)
 
+## Holdeplassprogresjon i feltkatalogen
+
+### Kilder og kontroll
+
+Kontrollen brukte de samme frosne filene for v2.0.0 og arbeidsgrenen. Den kjørte den ordinære NeTEx- og NSR-importleseren og koordinatvalget for alle 418 428 stoppforekomstene på 11 150 avganger, 21 linjer og 457 plattformer. Den sammenlignet plattform-ID, stoppested-ID, begge versjonsnumre og koordinatene per tidligere kvalifisert forekomst.
+
+| Resultat | v2.0.0 | Arbeidsgrenen |
+| --- | ---: | ---: |
+| Kvalifisert for GPS når målingene støtter det | 411 148 | 418 428 |
+| Manuell på grunn av manglende gyldighetsgrunnlag | 7 280 | 0 |
+| Endret plattform-ID, versjon eller koordinat blant de tidligere kvalifiserte | | 0 |
+
+| Plattform | NSR Quay | Fra manuell til GPS-kvalifisert |
+| --- | --- | ---: |
+| Hamna skole øst | 88357 | 1 385 |
+| Hamna skole nord | 88352 | 655 |
+| Sandvik kryss | 89665 | 13 |
+| Tromsø lufthavn, plattform 01 | 95088 | 2 551 |
+| Tromsø lufthavn, plattform 02 | 95087 | 2 505 |
+| Tromsø Prostneset 4 | 101984 | 72 |
+| Tromsø Prostneset 8 | 101988 | 99 |
+
+NeTEx knytter linje 28 fra Solligården 30.11 kl. 10.05 til reisen `TRO:ServiceJourney:28_260918108012843_1036`. Siste passeringspunkt er stopp 38 kl. 10.49, med `TRO:ScheduledStopPoint:19021466_1`. `TRO:PassengerStopAssignment:19021466_1` i fellesfila knytter punktet til `NSR:Quay:88357`. NSR har Quay versjon 6 på `NSR:StopPlace:52008`, også versjon 6. `Centroid/Location` gir 69,703196° N og 18,980655° Ø. Enturs daterte GTFS-eksport bekrefter oppslaget på tur-ID, stoppsekvens, Quay-ID og klokkeslett. GTFS har samme stoppested og koordinater for samtlige sju plattformer. [Enturs rutetabell- og stoppestedsdata](https://developer.entur.org/stops-and-timetable-data/) · [NeTEx-kobling fra stoppunkt til Quay](https://entur.atlassian.net/wiki/spaces/PUBLIC/pages/728563886)
+
+I NSR-uttrekket mangler både Quay og det inneholdende stoppestedet `ValidBetween` for de sju plattformene. `NSR:SiteFrame:1787679079` har heller ingen gyldighetsbetingelse. Hvert berørt stoppested har derimot en eksplisitt versjonert `ParentSiteRef`. For Hamna skole øst peker den på `NSR:StopPlace:60748` versjon 3 med `FromDate` 30.01.2020 kl. 14.36.26 og åpen slutt. Hamna nord har samme foreldreversjon. Flyplassen, Sandvik kryss og Prostneset har tilsvarende entydige daterte foreldreversjoner. Profilen beskriver rammegyldighet og gruppering av stoppesteder. Regelen for dette NSR-uttrekket bruker intervallet til den refererte foreldreversjonen som grunnlag for den allerede daterte stoppforekomsten. Importen krever entydig foreldreversjon i samme SiteFrame, uten et overordnet rammevilkår som må tolkes. Den ser bort fra datert underlag som ligger før NSR-publikasjonen når foreldreintervallet er eneste gyldighetsgrunnlag. Vilkår på stoppested eller plattform har forrang. Uavklart gyldighet og konkurrerende plattformversjoner kan fortsatt kreve manuell oppfølging. [Nordisk NeTEx-profil om gyldighet](https://entur.atlassian.net/wiki/spaces/PUBLIC/pages/728563782) · [Enturs beskrivelse av stoppestedshierarkiet](https://entur.atlassian.net/wiki/spaces/PUBLIC/pages/1243381914/To%2Bstructure%2Ba%2Bstop)
+
+NSR `CurrentAndFuture` generasjon `1795345333303902`, SHA-256 `44ad13ccead173a9a6f0ce444ab855025308c016df3860ac5e3a31dd1cdb7066`, publisert 22.11.2026 kl. 12.00.33 Oslo-tid. [Frosset NSR-arkiv](https://storage.googleapis.com/marduk-production/tiamat/CurrentAndFuture_latest.zip?generation=1795345333303902)
+
+### Automatiserte prøver
+
+- **Hamna, linje 28 den 30.11.** Ankomst kl. 10.49 på stopp 38 og avgang kl. 10.49 fra stopp 1 er ulike forekomster på samme plattform. Simulerte målinger ved Hamna skole nord før de mellomliggende stoppene ga ingen framdrift. Etter eksplisitt start fra øst gikk motoren i rekkefølge via Grevlingvegen, Bjørnebekkvegen øvre, Gaupevegen, Otervegen, Bjørnebekkvegen nedre og Mårvegen til nord som stopp 8 kl. 10.53.
+- **Begge flyplassretninger.** Linje 42 fra Eidkjosen kl. 08.25 bruker Quay 95087 som stopp 19. Turen fra Skattøra Borettslag kl. 15.05 bruker Quay 95088 som stopp 26. Begge avanserte til riktig plattform med syntetiske målinger.
+- **Sandvik kryss og Prostneset.** Linje 28 fra Hamna skole øst kl. 23.08 avanserte til Sandvik kryss som stopp 65. På linje 21 ble Prostneset 4 prøvd på avgangen kl. 10.16 og Prostneset 8 på turen fra UNN kl. 16.37. Ved begge Prostneset-plattformene avviste motoren unøyaktige og for gamle målinger. Bortfall etterlot siste holdepunkt og stanset videre progresjon.
+- **Gyldighet og midnatt.** Testene dekker utløpt og framtidig versjon, konflikt mellom Quay-versjoner, manglende eller tvetydig foreldreversjon og ugyldige vilkår. Linje 26 fra Pyramiden kl. 23.33 beholdt driftsdato 30.11 og kvalifiserte siste stopp Skognesvegen kl. 00.20 den 01.12.
+
+### På bussen
+
+Velg den faktiske turen og bruk **Start holdeplassassistanse** med riktig stoppforekomst. Ved vending på Hamna skole øst skal avsluttet tur fortsatt ha øst som siste stopp. Velg og start returen eksplisitt, og kontroller at de seks stoppene bekreftes før nord. Kontroller kjøreretning og plattform ved flyplassen og observert framdrift ved Sandvik kryss. Kontroller svak GPS, bortfall og manuelt gjenopptak ved Prostneset. En kvalifisert plattform kan kreve manuell oppfølging når målingene er svake, gamle, mangler eller passer flere forekomster.
+
 ## Oppdatering og tilbakeføring
 
-Etter installasjon av kandidatens kode henter serveroperatøren rutetabeller og plattformer med `sudo -n /usr/local/sbin/bussassistentctl import-routes YYYY-MM-DD YYYY-MM-DD`. Oppslaget tar inntil 14 sammenhengende driftsdatoer og inkluderer begge ender. For feltperioden brukes `2026-11-30 2026-12-10`. Kontroller resultatet mot siste Svipper-data før feltstart og oppdater ved kildeendring. Oppslag viser kildealder etter 24 timer. Importen skriver én transaksjon og sparer NSR-versjonen som brukes av frosne valg. En ufullstendig import bevarer aktiv katalog.
+Etter installasjon av kandidatens kode henter serveroperatøren rutetabeller og plattformer med `sudo -n /usr/local/sbin/bussassistentctl import-routes YYYY-MM-DD YYYY-MM-DD`. Oppslaget tar inntil 14 sammenhengende driftsdatoer og inkluderer begge ender. For feltperioden brukes `2026-11-30 2026-12-10`. Kontroller resultatet mot siste Svipper-data før feltstart og oppdater ved kildeendring. Oppslag viser kildealder etter 24 timer. Importen skriver én transaksjon og sparer NSR-versjonen som brukes av frosne valg. En ufullstendig import bevarer aktiv katalog. Holdeplassrettingen krever ny import etter kodeoppdatering for å lagre foreldreintervallet under den nye NSR-revisjonen. Tidligere fryste rutevalg bruker fortsatt sin opprinnelige referanse. Velg og lagre turen på nytt i et utkast som skal bruke den nye katalogen.
 
 I et miljø med tilgang til NVDB bygger `python -m app.road_area_evidence --date YYYY-MM-DD --output nvdb.zip` et datert uttak. Kjør `python -m app.road_area_catalogue nvdb.zip` for å kontrollere det. Pakk `nvdb.zip` og eventuelt `review.json` i roten av `road-bundle.zip`. På Ubuntu importerer `sudo -n /usr/local/sbin/bussassistentctl import-road-area < road-bundle.zip` alle tre områdene atomisk. Hent et uttak for hver aktuell Oslo-dato. Et forhåndsinnhentet, datert uttak uten gjennomgåtte grenser kan brukes til vegmatching med ukjent fart på datoen det gjelder. For tallfestede grenser krever appen et uttak som er høyst sju døgn gammelt.
 

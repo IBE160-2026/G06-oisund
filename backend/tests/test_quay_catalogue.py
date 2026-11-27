@@ -126,3 +126,59 @@ def test_unrelated_gml_text_uses_a_separate_bound(tmp_path, monkeypatch):
     geometry = '<gml:posList xmlns:gml="http://www.opengis.net/gml/3.2">' + '18.90 69.65 ' * 50 + '</gml:posList>'
     data = source(tmp_path, entry('5', '2026-12-01T00:00:00'), outside=geometry)
     assert point(data, '2026-11-30T23:01:00Z')[0]['quay_version'] == '5'
+
+def grouped_child(version='5', reference_version='9', override=''):
+    return entry(version, BOUNDARY, override=override).replace(
+        f'<ValidBetween><FromDate>{BOUNDARY}</FromDate></ValidBetween>',
+        f'<ParentSiteRef ref="NSR:StopPlace:789" version="{reference_version}"/>',
+    )
+
+
+def group(start='2026-11-29T00:00:00', end=BOUNDARY):
+    return f'''
+        <StopPlace id="NSR:StopPlace:789" version="9">
+            <ValidBetween><FromDate>{start}</FromDate><ToDate>{end}</ToDate></ValidBetween>
+        </StopPlace>
+    '''
+
+
+def test_exact_parent_site_interval_for_an_undated_child(tmp_path):
+    data = source(tmp_path, grouped_child(), group())
+    assert data['revision'].endswith('-v2')
+    assert data['stops'][0]['stop_place_id'] == PARENT
+    assert data['stops'][0]['stop_place_validity'] == data['stops'][0]['quay_validity']
+    assert point(data, '2026-11-30T22:59:00Z')[0]['validity_basis'] == 'parent-site'
+    assert point(data, '2026-11-30T23:00:00Z') == (None, PARENT, 'validity-mismatch')
+    assert point(data, '2026-11-28T22:59:00Z') == (None, PARENT, 'validity-mismatch')
+    assert point(data, '2026-11-30T22:59:00Z', '2026-11-30T23:00:01Z') == (None, PARENT, 'validity-mismatch')
+    early = source(tmp_path, group('2020-01-01T00:00:00Z'), grouped_child())
+    assert point(early, '2026-11-21T12:00:00Z') == (None, PARENT, 'validity-mismatch')
+
+
+def test_missing_or_ambiguous_parent_site_does_not_qualify(tmp_path):
+    for entries in ((grouped_child(),), (grouped_child(reference_version='8'), group()),
+                    (group(), grouped_child(), group()),
+                    (grouped_child(), '</stopPlaces></SiteFrame><SiteFrame><stopPlaces>', group())):
+        data = source(tmp_path, *entries)
+        assert point(data, '2026-11-30T22:59:00Z') == (None, PARENT, 'validity-unknown')
+    data = source(tmp_path, group(), grouped_child(), outside='<validityConditions><AvailabilityCondition/></validityConditions>')
+    assert point(data, '2026-11-30T22:59:00Z') == (None, PARENT, 'validity-unknown')
+
+
+def test_parent_site_never_masks_child_conditions_or_conflicting_quays(tmp_path):
+    unknown = source(tmp_path, group(), grouped_child(override='<ValidBetween/>'))
+    assert point(unknown, '2026-11-30T22:59:00Z') == (None, PARENT, 'validity-unknown')
+    child_condition = '<ValidBetween><FromDate>invalid</FromDate></ValidBetween>'
+    undated = grouped_child().replace('<ParentSiteRef', child_condition + '<ParentSiteRef')
+    unknown = source(tmp_path, group(), undated)
+    assert point(unknown, '2026-11-30T22:59:00Z') == (None, PARENT, 'validity-unknown')
+    conflict = grouped_child('6').replace('18.9', '18.91')
+    ambiguous = source(tmp_path, group(), grouped_child(), conflict)
+    assert point(ambiguous, '2026-11-30T22:59:00Z') == (None, PARENT, 'coordinate-ambiguous')
+
+
+def test_explicit_end_only_still_expires(tmp_path):
+    end_only = group().replace('<FromDate>2026-11-29T00:00:00</FromDate>', '')
+    data = source(tmp_path, end_only, grouped_child())
+    assert point(data, '2026-11-30T22:59:00Z')[0]['quay_validity'] == {'valid_from': None, 'valid_until': BOUNDARY}
+    assert point(data, '2026-11-30T23:00:00Z') == (None, PARENT, 'validity-mismatch')

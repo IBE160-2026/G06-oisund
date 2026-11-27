@@ -101,7 +101,8 @@ def sidecar(revision):
 
 def validity_bounds(record, open_end):
     start, end = instant(record.get('valid_from')), instant(record.get('valid_until'))
-    if start is None or end is None and not (open_end and record.get('valid_until') is None):
+    if (not (start or end) or (start is None and not (open_end and record.get('valid_from') is None))
+            or (end is None and not (open_end and record.get('valid_until') is None))):
         return None
     return start, end
 
@@ -111,7 +112,8 @@ def valid_during(record, call_times, open_end=False):
     if bounds is None:
         return 'validity-unknown'
     start, end = bounds
-    if end is not None and start >= end or any(t < start or end is not None and t >= end for t in call_times):
+    if ((start is not None and end is not None and start >= end)
+            or any((start is not None and t < start) or (end is not None and t >= end) for t in call_times)):
         return 'validity-mismatch'
     return None
 
@@ -126,7 +128,7 @@ def call_validity(record, instants, open_end):
 
 def may_overlap_call(record, instants):
     bounds = [validity_bounds(record.get(name, {}), True) for name in ('stop_place_validity', 'quay_validity')]
-    start = max((interval[0] for interval in bounds if interval), default=None)
+    start = max((interval[0] for interval in bounds if interval and interval[0] is not None), default=None)
     end = min((interval[1] for interval in bounds if interval and interval[1] is not None), default=None)
     return (not (start and end and start >= end)
             and (start is None or start <= max(instants))
@@ -176,6 +178,14 @@ def point_for(call, data, binding, manual_mapping):
         return None, parent, 'route-incompatible'
     if not verified_times:
         return None, parent, 'call-time-unverified'
+    if current_and_future and record.get('validity_basis') == 'parent-site':
+        # The NSR snapshot confirms the child's membership and placement as of
+        # publication. It cannot establish that placement before publication.
+        publication = instant(quay_catalogue.zoned(data.get('publication')))
+        if publication is None:
+            return None, parent, 'validity-unknown'
+        if min(instants) < publication:
+            return None, parent, 'validity-mismatch'
     reason = call_validity(record, instants, current_and_future)
     if reason:
         return None, parent, reason

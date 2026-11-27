@@ -47,6 +47,7 @@ const stopSourceUrls = new Set([
   'https://developer.entur.org/stop-places-v1-read/',
   'https://developer.entur.no/open-data/stops',
 ]);
+const pinnedNsrArchive = /^https:\/\/storage\.googleapis\.com\/marduk-production\/tiamat\/(?:CurrentAndFuture|55_Troms)_latest\.zip\?generation=[0-9]{1,20}$/;
 const boundedPoint = (value: any) => value === null || (value && Number.isFinite(value.latitude)
   && Math.abs(value.latitude) <= 90 && Number.isFinite(value.longitude) && Math.abs(value.longitude) <= 180
   && ['revision', 'mapping_revision', 'quay_version', 'stop_place_version'].every(key => text(value[key])));
@@ -84,7 +85,7 @@ export function readStopProjection(value: any, auth: StopAuthority): StopProject
   }
   if (value.source !== null && (!value.source || value.source.contract !== 'nsr-quay-coordinate-v1'
     || !['revision', 'source_url', 'license_url', 'provider'].every(key => text(value.source[key]))
-    || !stopSourceUrls.has(value.source.source_url)
+    || !(stopSourceUrls.has(value.source.source_url) || pinnedNsrArchive.test(value.source.source_url))
     || value.source.license_url !== 'https://data.norge.no/nlod/en/2.0')) throw Error();
   return value;
 }

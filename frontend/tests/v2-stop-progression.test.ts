@@ -151,3 +151,21 @@ test('the official NSR archive projection supplies a manual stop without GPS or 
   assert.throws(() => readStopProjection({ ...value,
     source: { ...source, source_url: 'https://developer.entur.no/open-data/stops?unapproved=1' } }, auth));
 });
+
+test('dated city stop projections allow only the published, pinned NSR archives', () => {
+  const expiresAt = new Date(Date.now() + 60_000).toISOString();
+  const auth = { workdayId: 'W1', activityId: 'A', expiresAt, request: async () => null, mutation: async () => null };
+  const value = { workday_id: 'W1', activity_id: 'A', expires_at: expiresAt, terminal: false,
+    route: null, calls: [], reason: null, source: { contract: 'nsr-quay-coordinate-v1',
+      provider: 'Entur NSR', revision: 'pinned', license_url: 'https://data.norge.no/nlod/en/2.0', source_url: '' } };
+  const prefix = 'https://storage.googleapis.com/marduk-production/tiamat/';
+  for (const file of ['55_Troms', 'CurrentAndFuture']) {
+    value.source.source_url = prefix + file + '_latest.zip?generation=1795345333303902';
+    assert.deepEqual(readStopProjection(value, auth), value);
+  }
+  for (const url of [prefix + 'CurrentAndFuture_latest.zip', value.source.source_url + '&other=1',
+    value.source.source_url.replace('marduk-production', 'other-bucket')]) {
+    value.source.source_url = url;
+    assert.throws(() => readStopProjection(value, auth));
+  }
+});
