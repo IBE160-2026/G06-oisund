@@ -594,3 +594,21 @@ Codex fikk `Permission denied` før innlogging med standardtilgang. Samme `uname
 ### Åpne punkter
 
 - Bekreft rotens lagringskjede, LVM-aktivering og nødvendige lagringsmoduler i 44-initramfs. Avvent uttrykkelig klarsignal før omstart.
+
+## 2026-11-27 kl. 11:21 — Jonas Øisund
+
+### Oppgave
+
+Fullføre den avgrensede lesekontrollen av LVM og lagringsdrivere i 44-initramfs, og deretter avvente klarsignal til omstart.
+
+### Plan
+
+- Avstem aktiv rotkjede og kontrollerdriver mot 44-kjernens konfigurasjon og innholdet i initramfs.
+
+### Resultat
+
+SSH kl. 11:15 viste aktiv 43-kjerne, ext4 på LVM med fysisk volum `/dev/nvme0n1p3` og driver `nvme`. 44-kjernen har ext4 og device mapper innebygd og NVMe-driverne som moduler. Serveren krever interaktiv sudo for selve initramfs-filen. Lesekommandoen er klargjort for vanlig PowerShell med SSH-nøkkel og streng vertsnøkkelkontroll. [O6-rapporten](../../docs/evidence/o6-kernel-44-20261127.md) dokumenterer funnene. Ingen omstart er utført.
+
+### Åpne punkter
+
+- Etter interaktiv sudo må 44-initramfs sjekkes for LVM-aktivering og alle nødvendige NVMe-moduler før omstartsklarhet kan bekreftes. Avvent uttrykkelig klarsignal før omstart.
