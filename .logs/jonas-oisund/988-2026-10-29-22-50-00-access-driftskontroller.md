@@ -666,6 +666,8 @@ Følge opp eierens pakkeoppgradering på konsollen og avklare om det trengs en n
 
 APT-simulering viser null ventende oppgraderinger og `dpkg --audit` var tom. Ingen omstartsmarkør. Samme oppstarts-ID og kjerne 44.44. Release `d4153832`, API/origin, PostgreSQL, Docker, tunnel og backup-timer bestod kontrollen. Backup-timeren venter på neste kjøring 28. november kl. 03:19:10. Dracut bygde nytt initramfs for 44, bekreftet med metadata. Ingen ny omstart. Den åpne APT-raden er lukket. [O6-rapporten](../../docs/evidence/o6-kernel-44-20261127.md) har pakkeversjoner og kontrollresultater.
 
+Jonas bekreftet at ruteoppslaget fungerte fra mobilen etter pakkeoppgraderingen. Mobiltesten bestod.
+
 ### Åpne punkter
 
 Ingen nye. De fire eksisterende O6-kernelpunktene gjenstår.

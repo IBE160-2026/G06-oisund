@@ -4,7 +4,7 @@
 
 - [x] 2026-11-27 [O6-omstart til 44.44](../../docs/evidence/o6-kernel-44-20261127.md) — Én omstart og etterkontroll bestod. (løst 2026-11-27)
 
-- [x] 2026-11-27 [Serverens APT-kø](988-2026-10-29-22-50-00-access-driftskontroller.md) — Jonas oppgraderte fra konsollen. Etterkontroll viste tom APT-kø, frisk tjenestehelse og ingen omstartsmarkør. (løst 2026-11-27)
+- [x] 2026-11-27 [Serverens APT-kø](988-2026-10-29-22-50-00-access-driftskontroller.md) — Jonas oppgraderte fra konsollen. Etterkontroll viste tom APT-kø, frisk tjenestehelse og ingen omstartsmarkør. Eierens ruteoppslag fra mobil bestod etter oppgraderingen. (løst 2026-11-27)
 
 - [x] 2026-11-15 [O6 kernelrettelser, 47 av 56 rester](../../docs/evidence/o6-status-20261115.md) - Individuelle Ubuntu-rettelser bundet til installert Resolute/amd64/generic43.43 og aktiv version_signature etter eieromstart. Ni andre kernelpunkter og samlet O6 er fortsatt åpne. (rettet innen versjonsomfang 2026-11-15 kl.20:02)
 
