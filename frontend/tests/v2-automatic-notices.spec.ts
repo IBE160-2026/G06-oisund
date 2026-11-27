@@ -24,10 +24,10 @@ with database() as conn:
    assert not conn.execute("SELECT 1 FROM automatic_notice_feed WHERE status!='never-qualified'").fetchone()
   import sys
   sys.path.insert(0,'tests')
-  from test_automatic_notice_rules import EVENING,STOP,page,situation
+  from test_automatic_notice_rules import STOP,page,situation
   from app.automatic_notice_ingestion import finish
   version,title=('1','Syntetisk stoppmelding &lt;script&gt;') if mode=='seed' else ('2','Oppdatert stoppmelding')
-  window=('2026-11-23T16:00+01:00',None) if pilot else EVENING
+  window=('2026-11-23T16:00+01:00' if pilot else '2026-11-23T22:00+01:00',None)
   observed=page(situation(name,STOP,windows=(window,),version=version,text='<Summary>'+title+'</Summary>'))
   fetched=conn.execute("UPDATE automatic_notice_feed SET attempt_at=clock_timestamp(),status='collecting' RETURNING attempt_at").fetchone()['attempt_at']
   conn.commit()
