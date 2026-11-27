@@ -9,11 +9,16 @@ Oppskriften er for Windows med Git, PowerShell 7.2 eller nyere, Node.js 24 med n
 **Ny klone.** Åpne PowerShell 7 i mappen du vil legge prosjektet i.
 
 ```powershell
-git clone https://github.com/IBE160-2026/G06-oisund.git bussassistent
+git clone --branch main https://github.com/IBE160-2026/G06-oisund.git bussassistent
 Set-Location bussassistent
 ```
 
-**Allerede oppdatert med `git pull` på `main`.** Åpne PowerShell 7 i den eksisterende prosjektmappen. Her ligger `compose.v2.yaml`, `scripts` og `Eksempelfiler`.
+**Eksisterende utsjekk.** Åpne PowerShell 7 i prosjektmappen og oppdater `main`. README-prøven for v2.0.1 bruker kildekoden og oppstartsskriptet på denne grenen.
+
+```powershell
+git switch main
+git pull --ff-only origin main
+```
 
 Kjør fra prosjektmappen i begge tilfeller.
 
@@ -102,7 +107,7 @@ Trykk **Åpne vegområde og GPS-fart**, velg område og trykk **Start vegmatchin
 
 ## Versjoner og feltprøver
 
-[Publisert v2.0.0](https://github.com/IBE160-2026/G06-oisund/releases/tag/v2.0.0) er sammenligningsgrunnlaget. På arbeidsgrenen er 7 280 tidligere uavklarte stoppforekomster på sju plattformer kvalifisert i den automatiserte katalogkontrollen. Tidligere kvalifiserte forekomster beholdt riktig plattform og koordinater. Fysisk GPS og faktisk progresjon på bussen gjenstår. [Testrapport og feltoppskrift](docs/v2-field-trial.md#holdeplassprogresjon-i-feltkatalogen).
+Versjon 2.0.1 kvalifiserte 7 280 tidligere uavklarte stoppforekomster på sju plattformer i den automatiserte katalogkontrollen. Tidligere kvalifiserte forekomster beholdt riktig plattform og koordinater. Velg og lagre en allerede lagret avgang på nytt for å bruke den nye plattformkoblingen. Fysisk GPS og faktisk progresjon på bussen gjenstår. [Testrapport og feltoppskrift](docs/v2-field-trial.md#holdeplassprogresjon-i-feltkatalogen).
 
 ## Innlevering og dokumentasjon
 
