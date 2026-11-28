@@ -57,7 +57,8 @@ const validProvenance = (value: any) => value && revision(value.revision) && val
   && ['activity_id', 'service_date', 'journey_id', 'pattern_id', 'occurrence_id', 'quay_id', 'stop_place_id'].every(key => text(value[key]))
   && ['coordinate_revision', 'mapping_revision', 'quay_version', 'stop_place_version'].every(key => value[key] === null || text(value[key]))
   && (value.origin === 'gps' || value.origin === 'manual') && time(value.evidence_at);
-const validScope = (value: any, auth: StopAuthority) => value && value.workday_id === auth.workdayId
+type WorkdayAuthority = Pick<StopAuthority, 'workdayId' | 'expiresAt' | 'request'>;
+const validScope = (value: any, auth: WorkdayAuthority) => value && value.workday_id === auth.workdayId
   && typeof value.terminal === 'boolean' && time(value.expires_at) && Date.parse(value.expires_at) > privateNow()
   && Date.parse(value.expires_at) <= Date.parse(auth.expiresAt);
 
@@ -102,12 +103,18 @@ export function proposeStop(anchor: SavedStopAnchor, workdayId: string, route: S
   return { kind: 'unique' as const, call };
 }
 
-function validLatest(value: any, auth: StopAuthority): value is Latest {
+function validLatest(value: any, auth: WorkdayAuthority): value is Latest {
   return validScope(value, auth) && revision(value.revision)
     && (value.revision === 0 ? value.anchor === null : validProvenance(value.anchor)
       && value.anchor.workday_id === auth.workdayId && value.anchor.revision === value.revision
       && time(value.anchor.saved_at) && (value.anchor.asserted_at === null || time(value.anchor.asserted_at))
       && (value.anchor.carried_from === null || validProvenance(value.anchor.carried_from)));
+}
+
+export async function readWorkdayAnchor(authority: WorkdayAuthority) {
+  const response = await authority.request('/workdays/' + authority.workdayId + '/position-anchor');
+  if (!validLatest(response, authority)) throw Error('Holdepunktet kunne ikke bekreftes.');
+  return response.anchor;
 }
 
 export function usePositionAnchor(auth: StopAuthority, continuity: PositionAnchorContinuity, deny: () => void) {
@@ -257,6 +264,7 @@ export function usePositionAnchor(auth: StopAuthority, continuity: PositionAncho
         discardQueue();
         setMessage('Forsøket ble lagret. Et nyere holdepunkt finnes.');
       } else setMessage('Holdepunktet er lagret.');
+      return value;
     } catch (error: any) {
       if (!alive(version)) return;
       discardQueue();

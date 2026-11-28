@@ -1,3 +1,5 @@
+import { PrivateDayTools } from './PrivateDayTools';
+import { PrivateWeather } from './PrivateWeather';
 import { privateNow } from './privateClock';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { validContent, type Content, type Saved } from './PrivateDrafts';
@@ -16,7 +18,7 @@ type Decisions = { operation_id: string; expected_revision: number; expected_rou
 export type Plan = { id: string; source_draft_id: string; source_revision: number; confirmed_at: string; final_end: string; expires_at: string; state: 'confirmed'; draft: Content; acknowledgements: string[]; classifications: Record<string, string>; unknowns: { id: string; label: string }[] };
 type Summary = Pick<Plan, 'id' | 'source_draft_id' | 'source_revision' | 'expires_at'> & { service_date: string | null };
 type Deletion = { id: string; expires_at: string; body: { operation_id: string; source_revision: number } };
-type Props = { saved: Saved | null; clean: boolean; request: (path: string) => Promise<any>; mutation: (path: string, body: object) => Promise<any>; expired: () => void; suspended: boolean; lock: (value: boolean) => void; settingsBlocked: (value: boolean) => void; screen: 'upload' | 'import' | 'editor' | 'direct' | 'approval' | 'plan'; showPlan: () => void; showPreparation: () => void; planChanged: (value: boolean) => void; consultationChanged: (value: boolean) => void; registryDirty: (value: boolean) => void; registryOpen: (value: boolean) => void; registryNavigation: number; workspaceVisible: boolean };
+type Props = { saved: Saved | null; clean: boolean; request: (path: string) => Promise<any>; mutation: (path: string, body: object) => Promise<any>; expired: () => void; suspended: boolean; lock: (value: boolean) => void; settingsBlocked: (value: boolean) => void; screen: 'upload' | 'import' | 'editor' | 'direct' | 'approval' | 'plan'; showPlan: () => void; showPreparation: () => void; registryDirty: (value: boolean) => void; registryOpen: (value: boolean) => void; registryNavigation: number; workspaceVisible: boolean; sessionExpiresAt: string };
 const uuid = (v: any): v is string => typeof v === 'string' && /^[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i.test(v);
 const canonical = (v: any): string => JSON.stringify(v, (_, value) => value && typeof value === 'object' && !Array.isArray(value) ? Object.fromEntries(Object.keys(value).sort().map(key => [key, value[key]])) : value);
 const live = (v: any) => typeof v === 'string' && Number.isFinite(Date.parse(v)) && Date.parse(v) > privateNow();
@@ -56,31 +58,28 @@ export function Facts({ content, classifications = {}, historical = false }: { c
     </>;
 }
 
-export function PrivateConfirmation({ saved, clean, request, mutation, expired, suspended, lock, settingsBlocked, screen, showPlan, showPreparation, planChanged, consultationChanged, registryDirty, registryOpen, registryNavigation, workspaceVisible }: Props) {
+export function PrivateConfirmation({ saved, clean, request, mutation, expired, suspended, lock, settingsBlocked, screen, showPlan, showPreparation, registryDirty, registryOpen, registryNavigation, workspaceVisible, sessionExpiresAt }: Props) {
   const [noticeReaderOpen, setNoticeReaderOpen] = useState(false);
   const [planOpen, setPlanOpen] = useState(0);
-  const [activityOpen, setActivityOpen] = useState(false);
-  const dayTitle = useRef<HTMLHeadingElement>(null);
+  const [openLists, setOpenLists] = useState<Set<string>>(() => new Set());
   const presentation = useRef({ screen, version: 0 });
   if (presentation.current.screen !== screen) presentation.current = { screen, version: presentation.current.version + 1 };
-  const availabilityRef = useRef({ bus: true, selection: true, start: true });
+  const availabilityRef = useRef({ bus: true, start: true });
   const [planAvailable, setPlanAvailable] = useState(true);
-  const guardAvailability = useCallback((key: 'bus' | 'selection' | 'start', value: boolean) => {
+  const guardAvailability = useCallback((key: 'bus' | 'start', value: boolean) => {
     availabilityRef.current[key] = value; setPlanAvailable(Object.values(availabilityRef.current).every(Boolean));
   }, []);
   const busAvailability = useCallback((value: boolean) => guardAvailability('bus', value), [guardAvailability]);
-  const selectionAvailability = useCallback((value: boolean) => guardAvailability('selection', value), [guardAvailability]);
   const startAvailability = useCallback((value: boolean) => guardAvailability('start', value), [guardAvailability]);
   const lockRef = useRef({ bus: false, selection: false, start: false, outcome: false, notice: false });
   const [busLocked, setBusLocked] = useState(false);
-  const [dayNavigationLocked, setDayNavigationLocked] = useState(false);
   const busLockedRef = useRef(false);
   const guardChild = useCallback((key: 'bus' | 'selection' | 'start' | 'outcome' | 'notice', value: boolean) => {
     lockRef.current[key] = value;
     const locked = Object.values(lockRef.current).some(Boolean);
     busLockedRef.current = locked;
     if (value) { reading.current++; epoch.current++; setBusy(false); }
-    setBusLocked(locked); setDayNavigationLocked(lockRef.current.bus || lockRef.current.start);
+    setBusLocked(locked);
   }, []);
   const guardBus = useCallback((value: boolean) => guardChild('bus', value), [guardChild]);
   const guardSelection = useCallback((value: boolean) => guardChild('selection', value), [guardChild]);
@@ -114,18 +113,12 @@ export function PrivateConfirmation({ saved, clean, request, mutation, expired, 
   const planRead = useRef<{ id: string; generation: number } | null>(null);
   const title = useRef<HTMLHeadingElement>(null);
   const selected = saved ? saved.id + ':' + saved.revision : '';
-  useEffect(() => { availabilityRef.current = { bus: true, selection: true, start: true }; setPlanAvailable(true); }, [plan?.id, planOpen]);
-  useEffect(() => { planChanged(!!plan); }, [!!plan]);
-  useEffect(() => { consultationChanged(!!plan && screen === 'plan' && activityOpen); }, [screen, activityOpen, !!plan]);
-  useEffect(() => { if (screen === 'plan' && !activityOpen) dayTitle.current?.focus(); }, [screen, plan?.id]);
+  useEffect(() => { availabilityRef.current = { bus: true, start: true }; setPlanAvailable(true); }, [plan?.id, planOpen]);
   useEffect(() => { alive.current = true; return () => { alive.current = false; }; }, []);
   useEffect(() => { lock(!!pending || !!deleting || busLocked); return () => lock(false); }, [pending, deleting, busLocked]);
   useEffect(() => { settingsBlocked(busy || !!review && (acks.length > 0 || Object.values(classes).some(Boolean) || routeAcknowledged)); return () => settingsBlocked(false); }, [busy, !!review, acks, classes, routeAcknowledged]);
   useEffect(() => { epoch.current++; if (!pending) { setReview(null); setAcks([]); setClasses({}); } }, [selected, clean]);
   useEffect(() => { if (screen === 'approval') { title.current?.focus(); if (clean && !review && !pending) void begin(); } }, [screen, clean]);
-  useEffect(() => {
-    if (!plan) { setActivityOpen(false); if (screen === 'plan') showPreparation(); }
-  }, [!!plan, screen]);
   useEffect(() => {
     const deadline = deleting?.expires_at ?? plan?.expires_at;
     if (!deadline) return;
@@ -135,7 +128,7 @@ export function PrivateConfirmation({ saved, clean, request, mutation, expired, 
       if (remaining <= 0) {
         if (plan && planRead.current?.id === plan.id && planRead.current.generation === reading.current) { reading.current++; planRead.current = null; setBusy(false); }
         if (deleting) { reading.current++; deletionRef.current = null; setDeleting(null); setBusy(false); }
-        setPlan(null); setActivityOpen(false);
+        setPlan(null);
         if (!pending && !review) setMessage('Planen eller gjennomgangen er utløpt. Kontroller listen på nytt.');
         if (screen === 'plan') showPreparation();
       } else timer = window.setTimeout(check, Math.min(remaining, 1000));
@@ -221,7 +214,7 @@ export function PrivateConfirmation({ saved, clean, request, mutation, expired, 
       || canonical(latest.draft) !== canonical(value.draft) || canonical(latest.classifications) !== canonical(value.classifications)
       || canonical(latest.acknowledgements) !== canonical(value.acknowledgements) || Date.parse(latest.expires_at) > Date.parse(value.expires_at)) throw Error();
     if (!alive.current || generation !== reading.current || authorityEpoch !== epoch.current || deletionRef.current || busLockedRef.current) return false;
-    setPlan(latest); setActivityOpen(false); showPlan(); setPending(null); setReview(null); setMessage('Planen er bekreftet. Lagret plan er hentet.'); title.current?.focus();
+    setPlan(latest); showPlan(); setPending(null); setReview(null); setMessage('Planen er bekreftet. Lagret plan er hentet.'); title.current?.focus();
     return true;
   }
   async function send(lookup = false) {
@@ -273,7 +266,7 @@ export function PrivateConfirmation({ saved, clean, request, mutation, expired, 
     const generation = ++reading.current;
     const read = { id, generation }; planRead.current = read;
     setBusy(true);
-    try { const value = await request('/workdays/' + id); if (!alive.current || generation !== reading.current || openingScreen !== presentation.current.version || deletionRef.current || busLockedRef.current) return; const summary = items.find(item => item.id === id); if (!validPlan(value) || value.id !== id || !summary || value.source_draft_id !== summary.source_draft_id || value.source_revision !== summary.source_revision || value.draft.service_date !== summary.service_date || Date.parse(value.expires_at) > Date.parse(summary.expires_at)) throw Error(); setPlanOpen(current => current + 1); setPlan(value); setActivityOpen(false); showPlan(); setMessage('Bekreftet plan åpnet. Fristen er uendret.'); title.current?.focus(); }
+    try { const value = await request('/workdays/' + id); if (!alive.current || generation !== reading.current || openingScreen !== presentation.current.version || deletionRef.current || busLockedRef.current) return; const summary = items.find(item => item.id === id); if (!validPlan(value) || value.id !== id || !summary || value.source_draft_id !== summary.source_draft_id || value.source_revision !== summary.source_revision || value.draft.service_date !== summary.service_date || Date.parse(value.expires_at) > Date.parse(summary.expires_at)) throw Error(); setPlanOpen(current => current + 1); setPlan(value); showPlan(); setMessage('Bekreftet plan åpnet. Fristen er uendret.'); title.current?.focus(); }
     catch (error: any) { if (alive.current && generation === reading.current && !deletionRef.current) { if ([404, 410].includes(error?.status)) setPlan(current => current?.id === id ? null : current); failure(error); } }
     finally { if (planRead.current === read) planRead.current = null; if (alive.current && generation === reading.current) setBusy(false); }
   }
@@ -337,7 +330,7 @@ export function PrivateConfirmation({ saved, clean, request, mutation, expired, 
       if (!window.confirm('Planen finnes ikke lenger eller er utløpt. Oppgi uavklarte forsøk og forkast lokale endringer for denne planen? Lagring blir ikke bekreftet. Avviksregisteret beholdes.')) return;
       await absent();
       reading.current++; epoch.current++;
-      setPlan(null); setActivityOpen(false); setNoticeReaderOpen(false);
+      setPlan(null); setNoticeReaderOpen(false);
       // Child unmounts release their locks; keep independent account notices.
       setItems(current => current.filter(item => item.id !== original.id));
       showPreparation(); setMessage('Den bortfalte planen er lukket. Lokale planforsøk er oppgitt uten bekreftet lagring. Avviksregisteret er beholdt.');
@@ -349,7 +342,7 @@ export function PrivateConfirmation({ saved, clean, request, mutation, expired, 
     } finally { if (alive.current) setBusy(false); }
   }
   return <section className="private-confirmation" aria-label="Bekreft plan" aria-busy={busy}>
-    <p hidden={screen === 'plan' && activityOpen && /^(Bekreftet plan åpnet|Planen er bekreftet|Planlisten er oppdatert)/.test(message)} role="status" aria-label="Bekreftelsesstatus">{message}</p>
+    <p role="status" aria-label="Bekreftelsesstatus">{message}</p>
     <div hidden={screen !== 'approval' || notices.screen !== 'day'}>
     <h2 ref={title} tabIndex={-1}>Gjennomgå og bekreft</h2>
     <p>Bekreftelse lagrer en egen plan. Planen utløper sju dager etter siste aktivitetsslutt. Gjennomgang gjelder bare den lagrede versjonen.</p>
@@ -374,11 +367,17 @@ export function PrivateConfirmation({ saved, clean, request, mutation, expired, 
     {pending && <div className="controls"><button disabled={busy || busLocked || suspended} onClick={() => void send()}>Prøv samme bekreftelse igjen</button><button disabled={busy || busLocked || suspended} onClick={() => void send(true)}>Kontroller bekreftelsen</button></div>}
     </div>
     <div hidden={screen === 'plan' && noticeReaderOpen}><NoticeScreens visible={screen !== 'plan' || !noticeReaderOpen} notices={notices} serviceDate={plan?.draft.service_date ?? null} back={() => notices.navigate('day')} /></div>
-    {(!plan || screen !== 'plan') && notices.screen === 'day' && <button id="notice-entry-preparation" disabled={suspended} onClick={notices.open}>Manuelt vedlikeholdte avvik</button>}
-    {plan && <PrivateWorkdayView validPlan={validPlan} historicalDetails={<Facts historical content={plan.draft} classifications={plan.classifications} />} busy={busy} key={plan.id + ':' + planOpen} plan={plan} hidden={screen !== 'plan' || !workspaceVisible} activityOpen={activityOpen} setActivityOpen={setActivityOpen} request={request} mutation={mutation} suspended={suspended || !!deleting || !!pending} expired={expired} planAvailable={planAvailable} dayNavigationLocked={dayNavigationLocked} busLocked={busLocked} guardBus={guardBus} guardSelection={guardSelection} guardStart={guardStart} guardOutcome={guardOutcome} notices={notices} readerChanged={setNoticeReaderOpen} busAvailability={busAvailability} selectionAvailability={selectionAvailability} startAvailability={startAvailability} remove={() => void remove()} closeView={() => { setPlan(null); showPreparation(); }} showPreparation={showPreparation} shorten={value => setPlan(current => current?.id === plan.id && Date.parse(value) < Date.parse(current.expires_at) ? { ...current, expires_at: value } : current)} />}
+
+    {plan && <PrivateWorkdayView validPlan={validPlan} historicalDetails={<Facts historical content={plan.draft} classifications={plan.classifications} />} busy={busy} key={plan.id + ':' + planOpen} plan={plan} activitiesOpen={openLists.has(plan.id)} toggleActivities={() => setOpenLists(current => { const next = new Set(current); if (next.has(plan.id)) next.delete(plan.id); else next.add(plan.id); return next; })} hidden={screen !== 'plan' || !workspaceVisible} request={request} mutation={mutation} suspended={suspended || !!deleting || !!pending} expired={expired} planAvailable={planAvailable} busLocked={busLocked} guardBus={guardBus} guardSelection={guardSelection} guardStart={guardStart} guardOutcome={guardOutcome} notices={notices} readerChanged={setNoticeReaderOpen} busAvailability={busAvailability} startAvailability={startAvailability} remove={() => void remove()} closeView={() => { setPlan(null); showPreparation(); }} showPreparation={showPreparation} shorten={value => setPlan(current => current?.id === plan.id && Date.parse(value) < Date.parse(current.expires_at) ? { ...current, expires_at: value } : current)} />}
     {plan && screen === 'plan' && busLocked && <button disabled={busy || suspended || !!deleting || !!pending} onClick={() => void abandonMissingPlan()}>Oppgi uavklart forsøk og lukk planen</button>}
     <div hidden={screen !== 'plan'}>{deleting && <div className="controls"><button disabled={busy || suspended} onClick={() => void remove()}>Prøv samme sletting igjen</button><button disabled={busy || suspended} onClick={() => void remove(true)}>Kontroller slettingen</button></div>}</div>
-    <div hidden={screen !== 'upload' || notices.screen !== 'day'}><h3>Mine bekreftede planer</h3><button disabled={busy || !!pending || !!deleting || busLocked || suspended} onClick={() => void list()}>Oppdater planlisten</button>
+    <div hidden={screen !== 'upload' && (screen !== 'plan' || !!plan) || notices.screen !== 'day'}>
+      {screen === 'plan' && !plan && <>
+        <header className="workday-heading"><h2>Dagen din</h2><PrivateWeather request={request} open={workspaceVisible && !suspended}/></header>
+        <p>Velg en bekreftet plan for å åpne skiftet.</p>
+        <button id="notice-entry-day" ref={notices.entry} disabled={suspended} onClick={notices.open}>Manuelt vedlikeholdte avvik</button>
+        <PrivateDayTools request={request} expiresAt={sessionExpiresAt} available={!suspended && workspaceVisible}/>
+      </>}<h3>Mine bekreftede planer</h3><button disabled={busy || !!pending || !!deleting || busLocked || suspended} onClick={() => void list()}>Oppdater planlisten</button>
     {items.length === 0 && <p>Ingen planer er lastet.</p>}<ul>{items.map(item => <li key={item.id}><button disabled={busy || !!pending || !!deleting || busLocked || suspended} onClick={() => void reopen(item.id)}>Åpne plan {item.service_date ?? 'ukjent dato'} · versjon {item.source_revision}</button> Utløper {date(item.expires_at)}</li>)}</ul>
     {cursor && <button disabled={busy || !!pending || !!deleting || busLocked || suspended} onClick={() => void list(true)}>Last flere planer</button>}
     </div>

@@ -138,6 +138,16 @@ bekreftet sluttid vises under «Mangler bekreftet sluttid» i registeret i innti
 Ingen down -v, volume prune eller generell Docker-opprydding inngår.
 Ta vare på aktuell og tidligere verifisert release.
 
+## Tromsø-vær
+
+Aktiver den offentlige værhentingen på Ubuntu med
+`sudo -n /usr/local/sbin/bussassistentctl enable-weather`. Timeren bruker
+MET Locationforecast for faste Tromsø-koordinater. Den følger kildens
+Cache-TTL, venter minst 30 minutter mellom vellykkede oppslag og bruker
+If-Modified-Since når kilden sender Last-Modified. Den private appen leser
+det offentlige uttrekket fra en lokal fil uten ny nettverkstilgang.
+Tilgjengeligheten av skift og planer er uavhengig av værkilden.
+
 ## Backup og restore
 
 Ubuntu-timer: daglig03:15 Europe/Oslo, persistent.

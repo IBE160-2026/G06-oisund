@@ -3,14 +3,15 @@ import { createPortal } from 'react-dom';
 import type { Plan } from './PrivateConfirmation';
 import type { Content } from './PrivateDrafts';
 import type { Lifecycle } from './PrivateWorkdayProgress';
-import { dayTypeLabels } from './dayOverview';
+import { DrivingPeriodRows, passengerPeriod, drivingClock, drivingTime, endPlace } from './drivingPeriods';
 import { privateNow } from './privateClock';
 import { observeOperationalTime, useOperationalNow } from './operationalNotices';
 import { ActiveRoadLimits } from './PrivateRoadLimits';
-import { PositionAssistance } from './PositionAssistance';
+import { DrivingSpeed, PositionAssistance } from './PositionAssistance';
 import { usePilotRoad } from './PrivateRoadArea';
 import { referenceDestination, useFrozenRouteReferences } from './PrivateRouteReference';
-import type { PositionAnchorContinuity } from './positionAnchorClient';
+import { readWorkdayAnchor, type PositionAnchorContinuity, type SavedStopAnchor } from './positionAnchorClient';
+import { PrivateDrivingAnchor } from './PrivateDrivingAnchor';
 import { useDrivingStops, type DrivingStopState } from './drivingStops';
 import type { StopCall } from './stopProgression';
 import './driving.css';
@@ -19,11 +20,10 @@ type Activity = Content['activities'][number];
 type Request = (path: string) => Promise<any>;
 type Mutation = (path: string, body: object) => Promise<any>;
 type Props = { visible: boolean; plan: Plan; lifecycle: Lifecycle; request: Request; mutation: Mutation; expired: () => void;
-  back: () => void; anchorContinuity: PositionAnchorContinuity; };
+  back: () => void; anchorContinuity: PositionAnchorContinuity; correction?: SavedStopAnchor; };
 type Notice = {id: string; title: string; scope: 'stops' | 'section' | 'area' | 'line' | 'network' | 'uncertain';
   positions: number[]; cancelled: number[]; valid_until: string; urgent: boolean; from?: string; to?: string; area?: string};
 
-const clock = new Intl.DateTimeFormat('nb-NO', {timeZone: 'Europe/Oslo', hour: '2-digit', minute: '2-digit'});
 const emptyStops: DrivingStopState = {calls: [], position: null, phase: 'unknown'};
 const timestamp = (value: string | null) => value ? Date.parse(value) : NaN;
 
@@ -101,7 +101,7 @@ function stopRows({calls, position, phase}: DrivingStopState) {
   if (phase === 'moving') return [{role:'Deretter', call:calls[index+2]}, {role:'Neste stopp', call:calls[index+1], focus:true},
     {role:'Passert', call:calls[index]}];
   return [{role:'Deretter', call:calls[index+2]}, {role:'Neste stopp', call:calls[index+1]},
-    {role:phase === 'here' ? 'Her nå' : 'Sist registrert', call:calls[index], focus:true}];
+    {role:phase === 'here' ? 'Her nå' : phase === 'manual' ? 'Valgt stopp' : 'Sist registrert', call:calls[index], focus:true}];
 }
 
 function Stops({state, notices}: {state: DrivingStopState; notices: Notice[]}) {
@@ -132,9 +132,9 @@ function StopRow({role, call, focus, notices}: {role: string; call: StopCall | u
   </li>;
 }
 
-function DrivingTrip({plan, activity, request, mutation, anchorContinuity, notices, changed}: Props & {activity: Activity; notices: Notice[];
- changed: (value: DrivingStopState) => void}) {
-  const view = useDrivingStops({workdayId: plan.id, activityId: activity.id, expiresAt: plan.expires_at, request, mutation}, anchorContinuity);
+function DrivingTrip({plan, activity, request, mutation, anchorContinuity, notices, changed, handoff}: Props & {activity: Activity; notices: Notice[];
+ changed: (value: DrivingStopState) => void; handoff?: string}) {
+  const view = useDrivingStops({workdayId: plan.id, activityId: activity.id, expiresAt: plan.expires_at, request, mutation}, anchorContinuity, handoff);
   useEffect(() => { changed(view); }, [view, changed]);
   if (!view.calls.length) return <div className={'driving-content' + (notices.length ? ' with-alerts' : '')}>
     <NoticeStrip items={notices.filter(item => !item.positions.length)}/>
@@ -146,6 +146,14 @@ function DrivingTrip({plan, activity, request, mutation, anchorContinuity, notic
 export function PrivateDriving(props: Props) {
   const {plan,lifecycle,request,expired,back,visible} = props;
   const [now, setNow] = useState(privateNow);
+  const [manual, setManual] = useState<SavedStopAnchor | null>(props.correction ?? null);
+  useEffect(() => {
+    let current = true;
+    void readWorkdayAnchor({workdayId:plan.id, expiresAt:plan.expires_at, request}).then(anchor => {
+      if (current) setManual(anchor);
+    }).catch(() => {});
+    return () => { current = false; };
+  }, [plan.id]);
   const [last, setLast] = useState<{activity: string; view: DrivingStopState}>();
   const title = useRef<HTMLHeadingElement>(null);
   useEffect(() => { if (visible) title.current?.focus(); }, [visible]);
@@ -161,50 +169,66 @@ export function PrivateDriving(props: Props) {
   const runningLate = lastActivity && last?.view.position && finishing && last.view.position < finishing
     && ['here', 'moving'].includes(last.view.phase) && now >= timestamp(lastActivity.end)
     && now < timestamp(lastActivity.end) + 20 * 60_000;
-  const activity = runningLate ? lastActivity : scheduled;
+  const manuallySelected = plan.draft.activities.find(item => item.id === manual?.activity_id);
+  const manualLimit = manuallySelected && manual
+    ? manual.origin === 'manual' ? Math.max(timestamp(manuallySelected.end), Date.parse(manual.saved_at) + 20*60_000)
+      : timestamp(manuallySelected.end) : 0;
+  const activity = manuallySelected && now < manualLimit ? manuallySelected : runningLate ? lastActivity : scheduled;
   const activeId = activity?.id;
   const kind = activity ? plan.classifications[activity.id] ?? activity.type : null;
-  const passenger = kind === 'trip';
+  const passenger = kind === 'trip' && (activity === manuallySelected || timestamp(activity!.start) <= now);
+  const period = passengerPeriod(plan, now);
   const routes = useFrozenRouteReferences({workdayId: plan.id, serviceDate: plan.draft.service_date,
     expiresAt: plan.expires_at, available: true, request, expired});
   const reference = routes.references.find(ref => ref.activity_id === activeId);
   const destinations = reference && referenceDestination(reference);
+  const upcoming = routes.references.find(ref => ref.activity_id === period.next?.id);
   const road = usePilotRoad(request);
-  const {entries, offline} = useDriverNotices(plan.id, activeId, request);
-  const next = plan.draft.activities.find(item => timestamp(item.start) > now && item.id !== activeId);
+  const noticeActivity = activeId ?? period.rows[0]?.id ?? period.next?.id;
+  const {entries, offline} = useDriverNotices(plan.id, noticeActivity, request);
   const view = (last?.activity === activeId ? last?.view : null) ?? emptyStops;
   const changed = useMemo(() => (view: DrivingStopState) => { if (activeId) setLast({activity:activeId,view}); }, [activeId]);
-  const region = passenger ? view.phase === 'here' ? 'På holdeplass' : view.phase === 'moving' ? 'Mellom stopp' : 'Posisjonen er uavklart'
-    : kind ? 'Pågående aktivitet' : next ? 'Mellom aktiviteter' : 'Planlagte aktiviteter er ferdige';
-  const kindLabel = kind ? dayTypeLabels[kind] ?? kind : region;
+  const region = passenger ? view.phase === 'here' ? 'På holdeplass' : view.phase === 'manual' ? 'Manuelt holdepunkt' : view.phase === 'moving' ? 'Mellom stopp' : 'Posisjonen er uavklart'
+    : null;
+  const previousCall = last?.view.calls.at(-1);
+  const handoff = last?.activity !== activeId && last?.view.phase === 'here' && last.view.position === previousCall?.position
+    ? previousCall?.quay_id ?? undefined : undefined;
   const verify = async () => {
     const live = await request('/workdays/' + plan.id + '/lifecycle');
     if (live?.workday_id !== plan.id || live?.state !== 'active' || live?.started_at !== lifecycle.started_at
         || Date.parse(live.expires_at) <= privateNow()) throw Error();
   };
   return createPortal(<main className="driving-view" aria-label="Kjørevisning" hidden={!visible} data-workday-id={plan.id}
-      data-activity-id={activeId} data-journey-id={reference?.journey_id} data-started-at={lifecycle.started_at ?? undefined}>
+      data-period={passenger ? undefined : period.title} data-activity-id={activeId} data-journey-id={reference?.journey_id} data-started-at={lifecycle.started_at ?? undefined}>
     <PositionAssistance authorized expiresAt={plan.expires_at} verifyAccess={verify} showSpeed={false}>
-      <div className="driving-topline"><span>Kjøring</span><time dateTime={new Date(now).toISOString()}>{clock.format(now)}</time></div>
+      <div className="driving-topline"><span>Kjøring</span><time dateTime={new Date(now).toISOString()}>{drivingClock.format(now)}</time></div>
       <div className="driving-orientation">
         <div className="driving-route">
           {passenger && <span className="driving-line" aria-label={'Linje ' + (activity?.line ?? 'ukjent')}>{activity?.line ?? '—'}</span>}
-          <div><h1 ref={title} tabIndex={-1}>{passenger ? destinations || activity?.to_place || 'Destinasjon uavklart' : kindLabel}</h1>
-            {passenger && <p>{activity?.direction ?? 'Retning uavklart'}</p>}</div>
+          <div><h1 ref={title} tabIndex={-1}>{passenger ? destinations || activity?.to_place || 'Destinasjon uavklart' : period.title}</h1>
+            {passenger && <p>{activity?.direction ?? 'Retning uavklart'}</p>}
+            {passenger && (view.phase === 'here' || view.phase === 'manual') && view.position === reference?.start_position && now < timestamp(activity?.start ?? null)
+              && <p className="driving-ready-status">Klar ved stoppet · planlagt avgang {drivingTime(activity?.start ?? null)}</p>}</div>
         </div>
-        <div className="driving-trip-meta">{passenger ? <><span>Tur {activity?.trip ?? 'ukjent'}</span><span>Passasjertur</span></> : activity?.start && <span>{clock.format(new Date(activity.start))}{activity.end ? '–' + clock.format(new Date(activity.end)) : ''}</span>}</div>
-        <ActiveRoadLimits {...road} driving/>
+        <div className="driving-trip-meta">{passenger ? <><span>Tur {activity?.trip ?? 'ukjent'}</span><span>Passasjertur</span></> : null}</div>
+        <div className="driver-speed-area"><ActiveRoadLimits {...road} driving/><DrivingSpeed/></div>
       </div>
-      {passenger && activity ? <DrivingTrip key={activity.id} {...props} activity={activity} notices={entries} changed={changed}/>
-        : <div className={'driving-content' + (entries.length ? ' with-alerts' : '')}>
-            <NoticeStrip items={entries}/>
-            <div className="driving-task"><span className="driving-role">{activity ? 'Nå' : 'Neste oppgave'}</span>
-              <strong>{activity ? kindLabel : next ? dayTypeLabels[next.type ?? ''] ?? next.type ?? 'Aktivitet' : 'Siste aktivitet er planlagt ferdig'}</strong>
-              {activity?.from_place && <p>{activity.from_place}{activity.to_place && activity.to_place !== activity.from_place ? ' → ' + activity.to_place : ''}</p>}
-              {next && <p>Neste · {clock.format(new Date(next.start!))} · {dayTypeLabels[next.type ?? ''] ?? next.type}</p>}
+      {passenger && activity ? <DrivingTrip key={activity.id} {...props} activity={activity} notices={entries} changed={changed} handoff={handoff}/>
+        : <div className="driving-period">
+            <DrivingPeriodRows plan={plan} period={period} now={now}/>
+            <div className="driving-departure">
+              <span className="driving-role">{period.final ? 'Planlagt skiftslutt' : period.title === 'Før første tur' ? 'Første avgang' : 'Neste avgang'}</span>
+              {period.next ? <>
+                <strong>{drivingTime(period.next.start)} · {upcoming?.calls[upcoming.start_position - 1]?.name || period.next.from_place || 'Ukjent første stopp'}</strong>
+                <p>Linje {period.next.line ?? 'ukjent'} · {upcoming && referenceDestination(upcoming) || period.next.to_place || 'Ukjent destinasjon'}</p>
+                {period.nextDuty && <p>Vognløp {period.nextDuty}</p>}
+                <PrivateDrivingAnchor key={period.next.id} authority={{workdayId:plan.id, activityId:period.next.id, expiresAt:plan.expires_at, request, mutation:props.mutation}}
+                  continuity={props.anchorContinuity} firstOnly saved={setManual}/>
+              </> : <strong>{drivingTime(plan.final_end)}{endPlace(plan) && ' · ' + endPlace(plan)}</strong>}
+              <NoticeStrip items={entries.filter(item => !item.positions.length)}/>
             </div>
           </div>}
-      <footer className="driving-footer"><div><strong>{region}</strong>{offline && <span>Trafikkavvik kan være utdaterte</span>}</div>
+      <footer className="driving-footer"><div>{region && <strong>{region}</strong>}{offline && <span>Trafikkavvik kan være utdaterte</span>}</div>
         <button type="button" onClick={back}>Til Dagen din</button>
       </footer>
     </PositionAssistance>

@@ -1,11 +1,9 @@
-import { CityDepartures } from './PrivateRouteReference';
 import { PasswordRecovery, type RecoveryFields } from './PasswordRecovery';
 import { PasswordChange, type PasswordFields } from './PasswordChange';
 import { ThemeControl } from './theme';
 import { privateNow, observePrivateTime } from './privateClock';
 import { useEffect, useRef, useState } from 'react';
 import { PrivateDrafts } from './PrivateDrafts';
-import { PrivateRoadArea } from './PrivateRoadArea';
 import { readPdfBytes, waitForPdfAccess } from './pdfUpload';
 
 const apiEnvironment = (import.meta as ImportMeta & { env: Record<string, string | undefined> }).env;
@@ -59,7 +57,6 @@ export function PrivateAccess() {
   const draftDirty = useRef(false);
   const settingsBlocked = useRef(false);
   const [settings, setSettings] = useState(false);
-  const [roadAreaOpen, setRoadAreaOpen] = useState(false);
   const [recovery, setRecovery] = useState(false);
   const recoveryButton = useRef<HTMLButtonElement>(null);
   const recoveryOpen = useRef(false);
@@ -192,7 +189,7 @@ export function PrivateAccess() {
     return expected ? workspace(expected, send, undefined, false, dispatched && (() => sent)) : navigator.locks.request('private-auth-mutations', () => send());
   }
   function clear(text: string) {
-    generation.current++; recoveryScreen(false); setSettings(false); setRoadAreaOpen(false); activeSession.current = null; setSession(null); setPassword(''); setUsername(''); setMessage(text);
+    generation.current++; recoveryScreen(false); setSettings(false); activeSession.current = null; setSession(null); setPassword(''); setUsername(''); setMessage(text);
   }
   async function logout() {
     if (!pending() && draftDirty.current && !window.confirm('Ulagrede endringer går tapt ved utlogging. Vil du logge ut?')) return;
@@ -419,19 +416,7 @@ export function PrivateAccess() {
     {suspended && session && !locked && <button disabled={busy} onClick={() => void restore()}>Kontroller tilgang igjen</button>}
     {locked ? <button disabled={busy || passwordBusy} onClick={() => void logout()}>Prøv utlogging igjen</button>
       : session ? <section aria-label="Privat arbeidsrom">
-        {!settings && (!suspended || roadAreaOpen) && <button onClick={() => setRoadAreaOpen(value => !value)}>
-          {roadAreaOpen ? 'Tilbake til arbeidsområdet' : 'Åpne vegområde og GPS-fart'}
-        </button>}
-        {!settings && !suspended && roadAreaOpen && <PrivateRoadArea
-          key={session.account_id + session.created_at}
-          expiresAt={session.expires_at}
-          verifyAccess={() => workspace(session, async () => undefined, undefined, true)}
-          request={path => workspace(session, () => request(path), undefined, true)}
-        />}
-        {!settings && <div hidden={roadAreaOpen && !suspended}>
-          <CityDepartures request={path => workspace(session, () => request(path), undefined, true)} suspended={suspended} />
-        </div>}
-        <div hidden={settings || roadAreaOpen}><PrivateDrafts key={session.account_id + session.created_at} upload={upload} request={path => workspace(session, () => request(path), undefined, true)} mutation={(path, body) => mutation(path, body, session)} dirtyChanged={value => { draftDirty.current = value; }} settingsBlocked={value => { settingsBlocked.current = value; }} expired={() => { if (sameSession(activeSession.current, session)) { clear('Økten er utløpt. Logg inn på nytt.'); setBusy(false); setFocusLogin(true); } }} suspended={suspended} workspaceVisible={!settings && !roadAreaOpen} /></div>
+        <div hidden={settings}><PrivateDrafts sessionExpiresAt={session.expires_at} key={session.account_id + session.created_at} upload={upload} request={path => workspace(session, () => request(path), undefined, true)} mutation={(path, body) => mutation(path, body, session)} dirtyChanged={value => { draftDirty.current = value; }} settingsBlocked={value => { settingsBlocked.current = value; }} expired={() => { if (sameSession(activeSession.current, session)) { clear('Økten er utløpt. Logg inn på nytt.'); setBusy(false); setFocusLogin(true); } }} suspended={suspended} workspaceVisible={!settings} /></div>
         {settings && !suspended && <PasswordChange submit={changePassword} cancel={cancelSettings} busy={passwordBusy} />}
         <p>Økten utløper {new Intl.DateTimeFormat('nb-NO', { dateStyle: 'short', timeStyle: 'short', timeZone: 'Europe/Oslo' }).format(new Date(session.expires_at))}.</p>
         <button ref={settingsButton} hidden={settings} disabled={busy || suspended} onClick={openSettings}>Brukerinnstillinger</button>

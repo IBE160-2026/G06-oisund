@@ -1,0 +1,8 @@
+[Unit]
+Description=Update Bussassistent's public Tromso weather forecast
+After=docker.service network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/bussassistentctl refresh-weather

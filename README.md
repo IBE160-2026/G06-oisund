@@ -43,7 +43,7 @@ docker compose -p ibe160-v2-owner -f compose.v2.yaml exec private-api python -m 
 
 Når en passasjertur har ett entydig treff i den daterte Entur-katalogen, viser gjennomgangen retning, destinasjon og delstrekning. Den samme rutereferansen følger med til den bekreftede planen. Ved uavklart treff kan du rette utkastet eller velge avgang selv. De fiktive turene i Testskift A har ingen avgang i Tromsø-katalogen.
 
-Etter godkjenning kan du lagre fysisk buss og bruke **Skiftstart** øverst i den åpne planen. **Til Dagen din** åpner dagsplanen mens skiftet fortsetter, og **Gjenoppta kjøring** åpner kjørevisningen igjen. Tillat posisjon i nettleseren for å bruke holdeplassprogresjon og vegmatching under kjøring.
+Velg **Dagen din** for å åpne en bekreftet plan, se Tromsø-været, lese avvik eller bruke førerverktøyene. Etter godkjenning kan du lagre fysisk buss og bruke **Skiftstart** øverst i den åpne planen. **Til Dagen din** åpner dagsplanen mens skiftet fortsetter, og **Gjenoppta kjøring** åpner kjørevisningen igjen. Tillat posisjon i nettleseren for å bruke holdeplassprogresjon og vegmatching under kjøring.
 
 Konto, PDF og lagring fungerer på din egen PC. Du bruker ditt eget lokale passord og filen som følger med repoet. Ubuntu-serveren og Cloudflare Access brukes i feltoppsettet.
 
@@ -93,7 +93,7 @@ docker compose @lokal cp deploy/ubuntu/public_route_download.py private-api:/tmp
 docker compose @lokal exec -T private-api sh -ec 'arkiv=$(mktemp); trap "rm -f $arkiv" EXIT; python /tmp/ibe160-public-route-download.py > "$arkiv"; python -m app.route_catalogue --bundle-stdin --publish --from-date "$1" --through-date "$1" < "$arkiv"' sh $dag
 ```
 
-Et vellykket resultat viser avgangstall for de 21 linjene. Åpne **Finn avgang i Tromsø** i arbeidsrommet, velg driftsdato og linje, og trykk **Hent avganger**. I det frosne feltgrunnlaget for 30.11.2026 hadde linje 28 125 avganger, blant dem **10.05 Solligården → Hamna skole øst** med 38 stopp. Ved senere prøving bytter du til en aktuell driftsdato. Entur fjerner eldre avganger fra det løpende uttrekket. [Datakilder og feltoppskrift](docs/v2-field-trial.md).
+Et vellykket resultat viser avgangstall for de 21 linjene. Åpne **Dagen din** og velg **Finn avgang i Tromsø**, velg driftsdato og linje, og trykk **Hent avganger**. I det frosne feltgrunnlaget for 30.11.2026 hadde linje 28 125 avganger, blant dem **10.05 Solligården → Hamna skole øst** med 38 stopp. Ved senere prøving bytter du til en aktuell driftsdato. Entur fjerner eldre avganger fra det løpende uttrekket. [Datakilder og feltoppskrift](docs/v2-field-trial.md).
 
 ### Valgfritt — importer veggrunnlag
 
@@ -105,7 +105,7 @@ $lokal = @('-p', 'ibe160-v2-owner', '-f', 'compose.v2.yaml')
 docker compose @lokal exec -T private-api sh -ec 'mappe=$(mktemp -d); trap "rm -f $mappe/veg.zip; rmdir $mappe" EXIT; python -m app.road_area_evidence --date "$1" --output "$mappe/veg.zip"; python -m app.road_area_catalogue "$mappe/veg.zip" --publish' sh $vegdag
 ```
 
-Trykk **Åpne vegområde og GPS-fart**, og trykk **Start vegmatching**. Vegmatching dekker Tromsøya, Kvaløya og fastlandet og følger posisjonen over bruene. Nettleseren kan be om posisjonstillatelse. En pakke fra NVDB alene gir veggrunnlag for Tromsøya, Kvaløya og fastlandet, med **Ukjent** fartsgrense der bekreftelse mangler. [Krav til skilt, reguleringer og forvarsel](docs/v2-field-trial.md#oppdatering-og-tilbakeføring).
+Gå til **Dagen din**. Trykk **Åpne vegområde og GPS-fart**, og trykk **Start vegmatching**. Vegmatching dekker Tromsøya, Kvaløya og fastlandet og følger posisjonen over bruene. Nettleseren kan be om posisjonstillatelse. En pakke fra NVDB alene gir veggrunnlag for Tromsøya, Kvaløya og fastlandet, med **Ukjent** fartsgrense der bekreftelse mangler. [Krav til skilt, reguleringer og forvarsel](docs/v2-field-trial.md#oppdatering-og-tilbakeføring).
 
 [Resultater fra README-prøven på Windows 27.11.2026](docs/evidence/v2-readme-windows-20261127.md).
 

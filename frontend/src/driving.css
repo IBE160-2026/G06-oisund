@@ -195,7 +195,11 @@ body:has(> .driving-view:not([hidden])) > #root { display: none; }
 }
 .driving-view :focus-visible { outline: 3px solid var(--drive-info); outline-offset: 4px; }
 .driving-view h1:focus { outline: none; }
-.private-view .private-shift-start { position: relative; margin-block: .5rem 1rem; }
+.private-view .private-shift-start { position: relative; margin-block: .5rem .65rem; padding: .7rem .85rem; }
+.private-shift-start > div:not([hidden]) { display: flex; flex-wrap: wrap; align-items: center; gap: .45rem .8rem; }
+.private-shift-start > div > :is(h4,p,button) { margin: 0; }
+.private-shift-start > div > p[aria-label="Skiftstatus"] { flex-basis: 100%; }
+.private-shift-start > div > button { width: auto; }
 .private-view .notice-stop-picker, .private-view .notice-geography { max-width: 100%; }
 .private-view .notice-stop-picker .controls { align-items: end; }
 .private-view .notice-stop-picker ul { padding-inline-start: 1.2rem; }
@@ -268,4 +272,75 @@ body:has(> .driving-view:not([hidden])) > #root { display: none; }
   .driving-task p { font-size: 15px; margin-top: .3rem; }
   .driving-footer { padding-top: 5px; font-size: 12px; }
   .driving-view .driving-footer button { min-height: 42px; min-width: 120px; font-size: 15px; padding: 4px 7px; }
+}
+
+.driver-speed-area { align-self: start; }
+.driving-own-speed { text-align: center; color: var(--drive-secondary); font-size: 14px; white-space: nowrap; }
+.driving-ready-status { font-weight: 700; }
+.driving-period {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) minmax(0,1fr);
+  gap: 30px;
+  align-items: center;
+  min-height: 0;
+}
+.driving-period .driving-period-list {
+  max-height: 100%;
+  overflow: auto;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-left: 3px solid var(--drive-secondary);
+}
+.driving-period-list li {
+  display: grid;
+  grid-template-columns: minmax(7.5rem,auto) 1fr;
+  gap: .65rem;
+  padding: .55rem .75rem;
+  margin: 0;
+  border: 0;
+  border-bottom: 1px solid var(--drive-secondary);
+  border-radius: 0;
+}
+.driving-period-list li:last-child { border-bottom: 0; }
+.driving-period-list time, .driving-period-list li span { color: var(--drive-secondary); font-size: clamp(.9rem,1.9vw,1.2rem); }
+.driving-period-list li span { display: block; }
+.driving-period-list li strong { font-size: clamp(1.05rem,2.2vw,1.5rem); }
+.driving-departure { max-height: 100%; overflow: auto; border-left: 7px solid var(--drive-info); padding: .4rem 1.2rem; }
+.driving-departure > strong { display: block; font-size: clamp(1.4rem,3.6vw,2.7rem); line-height: 1.15; margin-block: .3rem; }
+.driving-departure > p { font-size: clamp(1rem,2vw,1.35rem); margin: .4rem 0; }
+.driving-departure .driving-alerts { margin-block-start: 1rem; }
+.driving-departure .driving-alert strong { font-size: clamp(1rem,2vw,1.4rem); }
+.driving-view .ready-button {
+  display: block;
+  width: auto;
+  margin-block: .65rem .2rem;
+  min-height: 48px;
+  padding: .5rem .9rem;
+  border: 1px solid #2f7052;
+  border-radius: .4rem;
+  background: #196447;
+  color: white;
+  font-size: clamp(1rem,2vw,1.25rem);
+  font-weight: 700;
+}
+.night .driving-view .ready-button { background: #23513d; border-color: #769e8c; color: #edf0ed; }
+.driving-view .ready-button:disabled { opacity: .65; }
+.ready-at-stop > p { margin: .35rem 0 0; color: var(--drive-secondary); }
+@media (max-width: 700px) {
+  .driver-speed-area { grid-column: 2; grid-row: 1 / span 2; }
+  .driving-period { grid-template-columns: minmax(0,1fr); gap: .5rem; align-content: start; overflow: auto; }
+  .driving-departure, .driving-period .driving-period-list { max-height: none; overflow: visible; }
+  .driving-departure { grid-row: 1; }
+}
+@media (orientation: landscape) and (max-height: 470px) {
+  .driving-view { padding-bottom: 9px; }
+  .driver-speed-area { grid-column: 3; grid-row: 1; }
+  .driving-own-speed { font-size: 11px; }
+  .driving-period { gap: .75rem; }
+  .driving-period-list li { padding-block: .25rem; }
+  .driving-period-list li strong, .driving-period-list li span, .driving-period-list time { font-size: .92rem; }
+  .driving-departure > strong { font-size: 1.3rem; }
+  .driving-departure > p { font-size: .93rem; }
+  .driving-view .ready-button { min-height: 40px; font-size: 1rem; }
 }

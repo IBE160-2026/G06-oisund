@@ -24,7 +24,7 @@ from .workday_outcome_domain import SaveOutcome, OutcomeRecord, OutcomeReceipt, 
 from . import workday_outcome_storage
 from . import workday_notice_storage
 from . import automatic_notice_api, automatic_notice_ingestion
-from . import position_anchor_api, road_area_api, road_reference_api, route_reference_api, route_source
+from . import position_anchor_api, road_area_api, road_reference_api, route_reference_api, route_source, weather
 from .workday_notice_domain import SaveNotice, NoticeCommand, NoticeRecord, NoticeList, NoticeReceipt, AccountNoticeCommand, SaveAccountNotice, AccountNoticeList
 from .notice_reader_domain import NoticeReader
 from .workday_bus_domain import SaveBus, BusRecord, BusReceipt
@@ -96,6 +96,7 @@ app.include_router(route_reference_api.router)
 app.include_router(position_anchor_api.router)
 app.include_router(road_reference_api.router)
 app.include_router(road_area_api.router)
+app.include_router(weather.router)
 app.add_middleware(CORSMiddleware, allow_origins=[auth.configuration()], allow_credentials=True,
                    allow_methods=['GET', 'POST'], allow_headers=['Content-Type', 'X-CSRF-Token'], expose_headers=['Date'])
 

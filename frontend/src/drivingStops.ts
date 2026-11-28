@@ -4,15 +4,16 @@ import { distanceMetres, type PositionFix } from './positionSource';
 import { StopProgression, type StopCall, type StopAssertion } from './stopProgression';
 import { readStopProjection, usePositionAnchor, type PositionAnchorContinuity, type StopAuthority, type StopProjection } from './positionAnchorClient';
 
-export type DrivingStopState = { calls: StopCall[]; position: number | null; phase: 'unknown' | 'remembered' | 'here' | 'moving' };
+export type DrivingStopState = { calls: StopCall[]; position: number | null; phase: 'unknown' | 'remembered' | 'manual' | 'here' | 'moving' };
 
-export function useDrivingStops(authority: StopAuthority, continuity: PositionAnchorContinuity) {
+export function useDrivingStops(authority: StopAuthority, continuity: PositionAnchorContinuity, handoff?: string) {
   const access = usePositionAssistance();
   const source = access?.source;
   const current = useRef(authority);
   current.current = authority;
   const engine = useRef<StopProgression | null>(null);
   const firstFix = useRef<PositionFix | null>(null);
+  const platform = useRef(handoff);
   const generation = useRef<number | undefined>(undefined);
   const [projection, setProjection] = useState<StopProjection | null>(null);
   const [view, setView] = useState<DrivingStopState>({calls: [], position: null, phase: 'unknown'});
@@ -43,7 +44,8 @@ export function useDrivingStops(authority: StopAuthority, continuity: PositionAn
       if (route.terminal) return;
       engine.current = new StopProgression(route.calls);
       setProjection(route);
-      setView({calls: route.calls, position: null, phase: 'unknown'});
+      const samePlatform = platform.current && route.calls[0]?.quay_id === platform.current;
+      setView({calls: route.calls, position: samePlatform ? route.calls[0].position : null, phase: samePlatform ? 'here' : 'unknown'});
     }).catch(() => {});
     return () => { active = false; engine.current = null; };
   }, [authority.workdayId, authority.activityId]);
@@ -54,8 +56,8 @@ export function useDrivingStops(authority: StopAuthority, continuity: PositionAn
         || prior.route_basis !== projection.route.basis || engine.current?.read().estimate) return;
     const located = projection.calls.find(call => call.occurrence_id === prior.occurrence_id);
     if (!located) return;
-    engine.current?.restore({occurrenceId: located.occurrence_id, basis: prior.origin, evidenceAt: Date.parse(prior.evidence_at)}, performance.now());
-    setView({calls: projection.calls, position: located.position, phase: 'remembered'});
+    engine.current?.restore({occurrenceId: located.occurrence_id, basis: prior.origin, evidenceAt: Date.parse(prior.evidence_at)}, performance.now(), Date.now());
+    setView({calls: projection.calls, position: located.position, phase: prior.origin === 'manual' ? 'manual' : 'remembered'});
   }, [projection, authority.activityId, anchor.view]);
 
   useEffect(() => {
@@ -77,7 +79,7 @@ export function useDrivingStops(authority: StopAuthority, continuity: PositionAn
       state(live, subscribed) {
         if (!subscribed || ['invalid', 'timeout', 'gap', 'clock'].includes(live.reason)) {
           firstFix.current = null;
-          setView(previous => previous.position === null ? previous : {...previous, phase: 'remembered'});
+          setView(previous => previous.position === null || previous.phase === 'manual' ? previous : {...previous, phase: 'remembered'});
         }
         clearTimeout(retry);
         if (!subscribed) {

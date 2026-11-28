@@ -59,9 +59,9 @@ export class StopProgression {
     return true;
   }
 
-  restore(assertion: StopAssertion, mono: number) {
+  restore(assertion: StopAssertion, mono: number, wall = assertion.evidenceAt) {
     if (!this.calls.some(call => call.occurrence_id === assertion.occurrenceId)) return;
-    this.assertionMono = assertion.basis === 'manual' ? mono : -Infinity;
+    this.assertionMono = assertion.basis === 'manual' ? mono - Math.max(0, wall - assertion.evidenceAt) : -Infinity;
     this.samples = [];
     this.lastAcquisition = assertion.evidenceAt;
     this.needsAnchor = false;

@@ -199,3 +199,33 @@ def test_anchor_handoff_replay_competition_closure_and_expiry(users, monkeypatch
     with database() as conn:
         for table in ('workday_position_anchors', 'workday_position_anchor_operations'):
             assert not conn.execute(f'SELECT 1 FROM {table} WHERE workday_id=%s', (workday,)).fetchone()
+
+
+def test_driver_can_correct_saved_route_before_start_without_legacy_selection(users, monkeypatch):
+    from app.private_main import app
+
+    monkeypatch.setattr(position_coordinates, 'sidecar', lambda _: synthetic_sidecar())
+    client = TestClient(app, base_url=ORIGIN)
+    _, plan = opened(client, users)
+    base = '/workdays/' + plan['id']
+    activity = plan['draft']['activities'][0]['id']
+    reference = frozen(activity, 'partial', DAY_A, [6, 7, 8], [0, 1, 2])
+    with database() as conn:
+        conn.execute('INSERT INTO workday_route_references(workday_id,activity_id,reference) VALUES(%s,%s,%s)',
+                     (plan['id'], activity, Jsonb(reference)))
+    planned = client.get(base + '/position-coordinates/' + activity).json()
+    before = client.get(base + '/lifecycle').json()
+    assert before['state'] == 'confirmed'
+    command = {'operation_id': str(uuid4()), 'expected_revision': 0, 'activity_id': activity,
+               'route_basis': planned['route']['basis'], 'occurrence_id': 'partial-o6',
+               'coordinate_revision': COORD_REV, 'origin': 'manual', 'driving': True,
+               'evidence_at': datetime.now(timezone.utc).isoformat()}
+    fallback = client.post(base + '/position-anchor', headers=headers(client), json=command | {'driving': False})
+    assert fallback.status_code == 409
+    assert client.post(base + '/position-anchor', headers=headers(client), json=command | {'origin': 'gps'}).status_code == 409
+    saved = client.post(base + '/position-anchor', headers=headers(client), json=command)
+    assert saved.status_code == 200, saved.text
+    assert client.post(base + '/position-anchor', headers=headers(client), json=command).json() == saved.json()
+    current = client.get(base + '/position-anchor').json()
+    assert current['revision'] == 1 and current['anchor']['occurrence_id'] == 'partial-o6'
+    assert client.get(base + '/lifecycle').json() == before

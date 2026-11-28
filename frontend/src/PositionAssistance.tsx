@@ -1,4 +1,4 @@
-import { createContext, useContext, useLayoutEffect, useRef, useState, type ReactNode } from 'react';
+import { createContext, useContext, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from 'react';
 import { GpsSpeed, type SpeedReading } from './gpsSpeed';
 import { PositionSource, type PositionConsumer, type PositionReason, type PositionState } from './positionSource';
 import { privateNow } from './privateClock';
@@ -37,7 +37,7 @@ const speedMessage: Record<Extract<SpeedReading, { kind: 'unknown' }>['reason'],
   jump: 'Målingene var ikke sammenhengende.',
 };
 
-function SpeedPanel({ source, start, stop }: SourceAccess) {
+function SpeedPanel({ source, start, stop, compact = false }: SourceAccess & {compact?:boolean}) {
   const [view, setView] = useState<{ state: PositionState; active: boolean }>({
     state: { generation: 0, running: false, reason: 'off' }, active: false,
   });
@@ -70,6 +70,22 @@ function SpeedPanel({ source, start, stop }: SourceAccess) {
     return () => { clearTimeout(expiry); unsubscribe(); source.deactivate('speed'); };
   }, [source]);
 
+  const beginAccess = useRef(start);
+  beginAccess.current = start;
+  useEffect(() => {
+    if (!compact) return;
+    let current = true;
+    const resume = () => { if (document.visibilityState === 'visible') void beginAccess.current('speed', () => current); };
+    resume();
+    document.addEventListener('visibilitychange', resume);
+    return () => { current = false; document.removeEventListener('visibilitychange', resume); };
+  }, [source, compact]);
+  useEffect(() => {
+    if (!compact || view.active || !['gap','clock','timeout','unavailable'].includes(view.state.reason)) return;
+    let alive = true;
+    const timer = setTimeout(() => void beginAccess.current('speed', () => alive), 3000);
+    return () => { alive = false; clearTimeout(timer); };
+  }, [compact, view.state.reason, view.active]);
   const usable = view.active && speed.kind === 'qualified' && speed.validUntilMono > performance.now();
   const status = view.active && view.state.reason !== 'invalid' && speed.kind === 'unknown'
     ? speedMessage[speed.reason] : usable ? '' : positionSourceMessage[view.state.reason === 'off' && view.state.running ? 'acquiring' : view.state.reason];
@@ -79,6 +95,7 @@ function SpeedPanel({ source, start, stop }: SourceAccess) {
     try { await start('speed'); }
     finally { setStarting(false); }
   }
+  if (compact) return usable ? <div className="driving-own-speed" aria-label="Egen GPS-fart">GPS-fart <strong>{speed.displayKmh} km/t</strong></div> : null;
   return <section className="private-position-assistance" aria-label="Egen fart (GPS)">
     <p>Egen fart (GPS) <strong aria-label="Målt egen fart">{usable ? speed.displayKmh : '—'} km/t</strong></p>
     <p role="status">{status}</p>
@@ -90,6 +107,11 @@ function SpeedPanel({ source, start, stop }: SourceAccess) {
       {view.state.reason !== 'off' && <button onClick={() => stop('off')}>Slå av posisjon</button>}
     </div>
   </section>;
+}
+
+export function DrivingSpeed() {
+  const context = usePositionAssistance();
+  return context && <SpeedPanel {...context} compact/>;
 }
 
 type Props = { authorized: boolean; expiresAt: string; verifyAccess: () => Promise<unknown>; showSpeed?: boolean; children?: ReactNode };

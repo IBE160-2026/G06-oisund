@@ -133,6 +133,24 @@ def refresh_public_notices(path):
     compose(path, 'exec', '-T', 'private-api', 'python', '-m', module, '--publish-stdin', input=payload, timeout=40)
 
 
+def refresh_weather(path):
+    from datetime import UTC, datetime
+    from email.utils import parsedate_to_datetime
+
+    normal_operation()
+    cache_file = MAINTENANCE / 'tromso-weather.json'
+    old = json.loads(cache_file.read_text()) if cache_file.is_file() else {}
+    if not old or datetime.now(UTC) >= datetime.fromisoformat(old['valid_until']):
+        modified = old.get('last_modified')
+        if modified:
+            parsedate_to_datetime(modified)
+        bundle = fetch_public(path, 'app.weather', *(['--last-modified', modified] if modified else []), timeout=20)
+        old.update(json.loads(bundle))
+        durable_json(cache_file, old, mode=0o644)
+    print(json.dumps({'place': 'Tromso', 'updated': old['updated'], 'valid_until': old['valid_until'],
+                      'hours': len(old['hours'])}))
+
+
 def recovery(action, username):
     """Bounded operator entry point; check OUTER terminal before Docker's PTY."""
     if (action not in ('recovery-issue', 'recovery-revoke')
@@ -481,11 +499,15 @@ def install_tools(path):
                  'bussassistent-backup.service', 'bussassistent-backup.timer',
                  'bussassistent-road-situations.service', 'bussassistent-road-situations.timer',
                  'bussassistent-road-area.service', 'bussassistent-road-area.timer',
-                 'bussassistent-public-notices.service', 'bussassistent-public-notices.timer'):
+                 'bussassistent-public-notices.service', 'bussassistent-public-notices.timer',
+                 'bussassistent-weather.service', 'bussassistent-weather.timer'):
+        source = path / 'deploy/ubuntu' / name
+        if name.startswith('bussassistent-weather.') and not source.exists():
+            continue
         target = Path('/etc/systemd/system') / name
         if target.is_symlink():
             raise ValueError('Unexpected service symlink')
-        target.write_text((path / 'deploy/ubuntu' / name).read_text(), newline='\n')
+        target.write_text(source.read_text(), newline='\n')
         target.chmod(0o644)
     temporary = Path('/usr/local/sbin/bussassistentctl.new')
     temporary.write_text((path / 'deploy/ubuntu/bussassistentctl.py').read_text(), newline='\n')
@@ -730,13 +752,13 @@ def normal_operation():
         raise ValueError('Restore pending; normal operation is inhibited')
 
 
-def durable_json(path, value):
+def durable_json(path, value, *, mode=0o600):
     temporary = path.with_suffix('.new')
     with temporary.open('w') as stream:
         json.dump(value, stream, sort_keys=True)
         stream.flush()
         os.fsync(stream.fileno())
-    temporary.chmod(0o600)
+    temporary.chmod(mode)
     temporary.replace(path)
     sync_directory(path.parent)
 
@@ -1278,6 +1300,14 @@ def main():
         path = release()
         refresh_road_area(path, if_needed=True)
         run(['systemctl', 'enable', '--now', 'bussassistent-road-area.timer'])
+        return
+    if action == 'refresh-weather' and len(sys.argv) == 2:
+        refresh_weather(release())
+        return
+    if action == 'enable-weather' and len(sys.argv) == 2:
+        install_tools(release())
+        run(['systemctl', 'enable', '--now', 'bussassistent-weather.timer'])
+        refresh_weather(release())
         return
     if action == 'refresh-public-notices' and len(sys.argv) == 2:
         refresh_public_notices(release())

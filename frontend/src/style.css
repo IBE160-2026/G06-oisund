@@ -109,13 +109,6 @@ summary:focus-visible, fieldset:focus-visible { outline: 3px solid #000; outline
 .private-workspace .private-access-header h1 { font-size: 1rem; margin: 0; }
 .private-workspace .private-access-header .badge { margin: 0; padding: .1rem .4rem; }
 .private-workspace .private-access-header .status { min-height: 0; padding: .2rem .6rem; margin: 0; }
-.consulting .private-screen-nav { display: none; }
-.consulting .private-confirmation { border: 0; margin: 0; padding: 0; }
-.consulting .private-activity-selection { margin-block: .5rem; padding: .75rem; }
-.consulting .private-activity-selection > [role="status"] { margin-block: .25rem; }
-.consulting .private-activity-selection > .controls { margin-block: .5rem; }
-.consulting .selected-activity h3 { margin-block: .5rem; }
-.consulting .selected-activity p { margin-block: .5rem; }
 .private-activity-selection [role="status"]:focus-visible, .private-shift-start [role="status"]:focus-visible { outline: 3px solid #000; outline-offset: 4px; }
 .night .private-activity-selection [role="status"]:focus-visible, .night .private-shift-start [role="status"]:focus-visible { outline-color: #ffe39b; }
 .private-confirmation [aria-label="Registrert aktivitetsstatus"], .private-confirmation [aria-label="Bekreft skiftstart"], .private-confirmation [aria-label="Bekreft avslutning"], .private-confirmation [aria-label="Oppsummering av skift"] { border: 2px solid currentColor; border-radius: 8px; padding: 1rem; margin-block: 1rem; overflow-wrap: anywhere; }
@@ -196,3 +189,43 @@ section[aria-label="Brukerinnstillinger"] h2:focus-visible { outline: 3px solid 
 .automatic-notice-comparison { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); gap: 1rem; }
 .automatic-notice-facts { min-width: 0; padding: .75rem; border: 1px solid currentColor; border-radius: .5rem; }
 .automatic-notice-facts p { white-space: pre-wrap; }
+
+.workspace-tabs { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: .55rem; width: 100%; }
+.workspace-tabs button { margin: 0; padding-inline: .6rem; }
+.workspace-menu { display: none; }
+.workday-heading { display: flex; justify-content: space-between; align-items: start; gap: 1rem; }
+.workday-heading h2 { margin-block: .4rem .15rem; }
+.workday-heading p { margin-block: .25rem; }
+.workday-tools .controls, .day-road-tools { gap: .45rem; }
+.day-road-tools { margin-block: .45rem; }
+.day-road-tools > details { margin-block: .5rem; }
+.day-tour-correction { margin-block: .6rem; }
+.day-stop-choice label, .day-tour-correction label { display: block; }
+.day-list-toggle { margin-block: .6rem; }
+.day-weather { flex: 0 1 24rem; min-width: 0; margin: 0; padding: .55rem .7rem; border: 1px solid #89919b; border-radius: .4rem; }
+.day-weather summary { cursor: pointer; }
+.day-weather summary::marker { color: #546c7c; }
+.weather-location { font-weight: 700; }
+.weather-location time { white-space: nowrap; font-weight: 500; }
+.weather-values { display: flex; align-items: center; flex-wrap: wrap; gap: .15rem .55rem; margin-block: .4rem; }
+.weather-condition, .weather-wind { display: inline-flex; gap: .28rem; align-items: center; }
+.weather-icon, .weather-wind svg { width: 1.35rem; height: 1.35rem; flex: none; color: #395971; }
+.weather-icon.sun { color: #75520e; }
+.weather-temperature, .weather-wind { white-space: nowrap; }
+.weather-wind small { display: block; }
+.strong-wind { font-weight: 750; color: #805000; }
+.weather-detail { display: grid; gap: .4rem; padding-block-start: .4rem; }
+.weather-detail ul { margin: 0; padding: 0; max-height: 15rem; overflow: auto; }
+.weather-detail li { display: flex; align-items: center; flex-wrap: wrap; gap: .35rem .7rem; margin: 0; padding: .3rem; border: 0; }
+.night .day-weather { color: #eaeaea; background: #101010; border-color: #777; }
+.night .weather-icon, .night .weather-wind svg { color: #aab9c6; }
+.night .weather-icon.sun, .night .strong-wind { color: #e4be73; }
+@media (max-width: 700px), (orientation: landscape) and (max-height: 500px) and (max-width: 950px) {
+  .workspace-tabs { display: none; }
+  .workspace-menu { display: block; width: 100%; }
+  .workspace-menu select { display: block; margin-top: .25rem; max-width: 100%; }
+}
+@media (max-width: 700px) {
+  .workday-heading { flex-wrap: wrap; gap: .4rem; }
+  .day-weather { flex-basis: 100%; }
+}

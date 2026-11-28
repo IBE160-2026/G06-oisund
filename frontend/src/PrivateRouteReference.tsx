@@ -514,11 +514,12 @@ export function useFrozenRouteReferences({ workdayId, expiresAt, serviceDate, re
   workdayId: string; expiresAt: string; serviceDate: string | null;
   request: Request; expired: () => void; available: boolean;
 }) {
+  const [loaded, setLoaded] = useState(false);
   const [references, setReferences] = useState<Reference[]>([]);
   const [failed, setFailed] = useState(false);
   const [attempt, setAttempt] = useState(0);
   useEffect(() => {
-    setReferences([]); setFailed(false);
+    setReferences([]); setFailed(false); setLoaded(false);
     if (!available || !routeDate(serviceDate)) return;
     let current = true;
     const deadline = Date.parse(expiresAt);
@@ -529,6 +530,7 @@ export function useFrozenRouteReferences({ workdayId, expiresAt, serviceDate, re
           || !value.references.every(validReference)
           || new Set(value.references.map((entry: Reference) => entry.activity_id)).size !== value.references.length)
         throw new Error('Invalid frozen routes');
+      setLoaded(true);
       setReferences(value.references.filter((entry: Reference) => entry.selection_mode === 'automatic' || entry.service_date === serviceDate));
     }).catch(error => {
       if (!current) return;
@@ -537,7 +539,7 @@ export function useFrozenRouteReferences({ workdayId, expiresAt, serviceDate, re
     });
     return () => { current = false; clearTimeout(timer); };
   }, [workdayId, serviceDate, expiresAt, available, attempt]);
-  return { references: available && Date.parse(expiresAt) > privateNow() ? references : [], failed,
+  return { references: available && Date.parse(expiresAt) > privateNow() ? references : [], failed, loaded,
     retry: () => setAttempt(value => value + 1) };
 }
 

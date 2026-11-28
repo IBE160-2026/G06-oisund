@@ -1,0 +1,9 @@
+[Unit]
+Description=Schedule refresh of the public Tromso weather forecast
+
+[Timer]
+OnCalendar=*:0/10
+Persistent=true
+
+[Install]
+WantedBy=timers.target

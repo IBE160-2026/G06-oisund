@@ -138,13 +138,15 @@ def save(identifier: UUID, body: SaveAnchor, request: Request):
             raise HTTPException(422, 'Holdeplassen har ingen bekreftet plattformkobling for dette lagringsforsøket.')
         # Selection is read-only here. A stale tab cannot save on an activity
         # that another tab has already replaced.
-        selection = conn.execute('SELECT activity_id FROM workday_selections WHERE workday_id=%s',
-                                 (identifier,)).fetchone()
         if body.driving:
-            if body.origin != 'gps' or workday_lifecycle_storage.current(conn, plan)['state'] != 'active':
+            state = workday_lifecycle_storage.current(conn, plan)['state']
+            if state != 'active' and not (state == 'confirmed' and body.origin == 'manual'):
                 raise HTTPException(409, 'Skiftet må være startet og aktivt.')
-        elif not selection or selection['activity_id'] != body.activity_id:
-            raise HTTPException(409, 'Valgt aktivitet er endret. Åpne den valgte aktiviteten igjen.')
+        else:
+            selection = conn.execute('SELECT activity_id FROM workday_selections WHERE workday_id=%s',
+                                     (identifier,)).fetchone()
+            if not selection or selection['activity_id'] != body.activity_id:
+                raise HTTPException(409, 'Valgt aktivitet er endret. Åpne den valgte aktiviteten igjen.')
         now = conn.execute('SELECT clock_timestamp() AS now').fetchone()['now']
         evidence = position_coordinates.instant(body.evidence_at)
         if not plan['confirmed_at'] - timedelta(seconds=5) <= evidence <= now + timedelta(seconds=5):
@@ -161,7 +163,7 @@ def save(identifier: UUID, body: SaveAnchor, request: Request):
                     or previous['quay_version'] != point['quay_version']
                     or previous['stop_place_version'] != point['stop_place_version']):
                 raise HTTPException(409, 'Det lagrede holdepunktet må velges manuelt i denne kjøringen.')
-        new_driving_leg = body.driving and (not previous or previous['activity_id'] != body.activity_id)
+        new_driving_leg = body.driving and body.origin == 'gps' and (not previous or previous['activity_id'] != body.activity_id)
         if new_driving_leg:
             order = {activity['id']: i for i, activity in enumerate(plan['content']['activities'])}
             if call['position'] != route['start_position'] or (previous and
