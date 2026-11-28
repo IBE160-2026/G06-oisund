@@ -2,6 +2,7 @@
 Description=Update Bussassistent's public Tromso weather forecast
 After=docker.service network-online.target
 Wants=network-online.target
+ConditionPathExists=/opt/bussassistent/current/backend/app/weather.py
 
 [Service]
 Type=oneshot
